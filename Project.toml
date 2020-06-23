@@ -1,5 +1,4 @@
 [deps]
-DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 DifferentialEquations = "0c46a032-eb83-5123-abaf-570d42b7fbaa"
 FundamentalsNumericalComputation = "e48b7b93-d2a8-4750-aba7-f743ccd5256c"
 Interpolations = "a98d9a8b-a2ab-59e6-89dd-64a1c18fca59"
@@ -8,6 +7,7 @@ LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 NLsolve = "2774e3e8-f4cf-5e23-947b-6d7e65073b56"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 Polynomials = "f27b6e38-b328-58d1-80ce-0feddd5e7a45"
+PrettyTables = "08abe8d2-0d0c-5749-adfa-8a2ac140af0d"
 QuadGK = "1fd47b50-473d-5c70-9696-f719f8f3bcdc"
 SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
