@@ -1,0 +1,21 @@
+# Chapter 2 (Linear systems)
+
+- {doc}`../linsys/demos/interp-vander`
+- {doc}`../linsys/demos/matrices-julia`
+- {doc}`../linsys/demos/systems-backslash`
+- {doc}`../linsys/demos/systems-triangular`
+- {doc}`../linsys/demos/lu-gauss`
+- {doc}`../linsys/demos/lu-factors`
+- {doc}`../linsys/demos/lu-function`
+- {doc}`../linsys/demos/flops-mvmult`
+- {doc}`../linsys/demos/flops-loglog`
+- {doc}`../linsys/demos/flops-lufact`
+- {doc}`../linsys/demos/pivot-fail`
+- {doc}`../linsys/demos/pivot-fixed`
+- {doc}`../linsys/demos/norms-vector`
+- {doc}`../linsys/demos/norms-matrix`
+- {doc}`../linsys/demos/condition-bound`
+- {doc}`../linsys/demos/structure-banded`
+- {doc}`../linsys/demos/structure-timing`
+- {doc}`../linsys/demos/structure-symm`
+- {doc}`../linsys/demos/structure-cholesky`

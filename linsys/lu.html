@@ -1,0 +1,503 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>LU factorization &#8212; Fundamentals of Numerical Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/mystnb.js"></script>
+    <script src="../_static/proof.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Efficiency of matrix computations" href="efficiency.html" />
+    <link rel="prev" title="Linear systems" href="linear-systems.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fundamentals of Numerical Computation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../frontmatter.html">Home</a>
+  </li>
+  <li class="">
+    <a href="../intro/overview.html">Introduction</a>
+  </li>
+  <li class="active">
+    <a href="overview.html">Square linear systems</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="polyinterp.html">Polynomial interpolation</a>
+    </li>
+    <li class="">
+      <a href="matrices.html">Computing with matrices</a>
+    </li>
+    <li class="">
+      <a href="linear-systems.html">Linear systems</a>
+    </li>
+    <li class="active">
+      <a href="">LU factorization</a>
+    </li>
+    <li class="">
+      <a href="efficiency.html">Efficiency of matrix computations</a>
+    </li>
+    <li class="">
+      <a href="pivoting.html">Row pivoting</a>
+    </li>
+    <li class="">
+      <a href="norms.html">Vector and matrix norms</a>
+    </li>
+    <li class="">
+      <a href="condition-number.html">Conditioning of linear systems</a>
+    </li>
+    <li class="">
+      <a href="structure.html">Exploiting matrix structure</a>
+    </li>
+    <li class="">
+      <a href="next.html">Next steps</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../leastsq/overview.html">Overdetermined linear systems</a>
+  </li>
+  <li class="">
+    <a href="../nonlineqn/overview.html">Roots of nonlinear equations</a>
+  </li>
+  <li class="">
+    <a href="../localapprox/overview.html">Piecewise interpolation</a>
+  </li>
+  <li class="">
+    <a href="../ivp/overview.html">Initial-value problems for ODEs</a>
+  </li>
+  <li class="">
+    <a href="../appendix/linear-algebra.html">Review: Linear algebra</a>
+  </li>
+  <li class="">
+    <a href="../appendix/demos.html">All demo notebooks</a>
+  </li>
+  <li class="">
+    <a href="../refs.html">References</a>
+  </li>
+  <li class="">
+    <a href="../genindex.html">Index</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../_sources/linsys/lu.md"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#review-example" class="nav-link">Review example</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#the-algebra-of-gaussian-elimination" class="nav-link">The algebra of Gaussian elimination</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#an-algorithm-for-now" class="nav-link">An algorithm—for now</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#exercises" class="nav-link">Exercises</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="lu-factorization">
+<h1>LU factorization<a class="headerlink" href="#lu-factorization" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="index-0"></span><p id="index-1">Every first linear algebra course introduces <a class="reference internal" href="overview.html#term-gaussian-elimination"><span class="xref std std-term">Gaussian elimination</span></a> for a general square system <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span>. In Gaussian elimination one uses row operations on an augmented matrix <span class="math notranslate nohighlight">\([\mathbf{A}\; \mathbf{b}]\)</span> to reduce it to an equivalent triangular system (usually upper triangular).</p>
+<div class="section" id="review-example">
+<h2>Review example<a class="headerlink" href="#review-example" title="Permalink to this headline">¶</a></h2>
+<p>Rather than writing out the process in full generality, we use an example to refresh your memory while getting arithmetic support from Julia.</p>
+<div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/lu-gauss.html"><span class="doc">Gaussian elimination</span></a></p>
+</div>
+</div>
+<div class="section" id="the-algebra-of-gaussian-elimination">
+<h2>The algebra of Gaussian elimination<a class="headerlink" href="#the-algebra-of-gaussian-elimination" title="Permalink to this headline">¶</a></h2>
+<p>In <a class="reference internal" href="matrices.html"><span class="doc">an earlier section</span></a> we observed that row and column operations can be expressed as linear algebra using columns from the identity matrix. This connection allows us to express Gaussian elimination using matrices. We will ignore the augmentation step, set aside <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> for now, and consider only the square system matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>.</p>
+<p>As the first step in the demo <a class="reference internal" href="demos/lu-gauss.html"><span class="doc">Gaussian elimination</span></a>,  we get the multiplier <span class="math notranslate nohighlight">\(A_{21}/A_{11}=-2\)</span>. The first row of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is extracted by <span class="math notranslate nohighlight">\(\mathbf{e}_1^T\mathbf{A}\)</span>. After <span class="math notranslate nohighlight">\(-2\)</span> times this row is subtracted from row 2, with the other rows being left alone, we arrive at the matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}  \begin{bmatrix}
+    \mathbf{e}_1^T \\[2mm] \mathbf{e}_2^T + 2 \mathbf{e}_1^T \\[2mm] \mathbf{e}_3^T \\[2mm] \mathbf{e}_4^T
+  \end{bmatrix}\mathbf{A}.\end{split}\]</div>
+<p>This expression can be manipulated into</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{A} =
+  \left(\mathbf{I} +
+  \begin{bmatrix}
+    0 \mathbf{e}_1^T \\[2mm] 2 \mathbf{e}_1^T \\[2mm] 0 \mathbf{e}_1^T \\[2mm] 0 \mathbf{e}_1^T
+  \end{bmatrix}
+  \right) \mathbf{A}
+  =\left(\mathbf{I} +2
+  \begin{bmatrix}
+    0 \\ 1 \\ 0 \\ 0
+  \end{bmatrix}
+  \mathbf{e}_1^T \right) \mathbf{A} = (\mathbf{I} + 2 \mathbf{e}_2\mathbf{e}_1^T) \mathbf{A}.\end{split}\]</div>
+<p>In general, adding <span class="math notranslate nohighlight">\(\alpha\)</span> times row <span class="math notranslate nohighlight">\(j\)</span> of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> to row <span class="math notranslate nohighlight">\(i\)</span> in place is done via the expression</p>
+<div class="math notranslate nohighlight" id="equation-rowoperation">
+<span class="eqno">(28)<a class="headerlink" href="#equation-rowoperation" title="Permalink to this equation">¶</a></span>\[  (\mathbf{I} + \alpha \, \mathbf{e}_i \mathbf{e}_j^T ) \mathbf{A}.\]</div>
+<p>Following many introductory texts on linear algebra, we refer to the matrix in parentheses above as an <strong>elementary matrix</strong>.</p>
+<div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/lu-factors.html"><span class="doc">Row operations</span></a></p>
+</div>
+<p id="index-2">The elementary matrix factors found in <a class="reference internal" href="demos/lu-factors.html"><span class="doc">Row operations</span></a>, each in the form <a class="reference internal" href="#equation-rowoperation">(28)</a>, have some important properties. First, in addition to being triangular, each has all ones on the diagonal, so we call each a <a class="reference internal" href="overview.html#term-unit-triangular-matrix"><span class="xref std std-term">unit triangular matrix</span></a>. <a class="reference internal" href="linear-systems.html#theorem-triangleinvert"><span class="std std-ref">Triangular singularity</span></a> implies that all unit triangular matrices are invertible, which is about to become important.</p>
+<p>Let’s review. The Gaussian elimination procedure in <a class="reference internal" href="demos/lu-gauss.html"><span class="doc">Gaussian elimination</span></a> did six row operations in order to introduce six zeros into the lower triangle of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. Each row operation can be expressed using multiplication by an elementary matrix <span class="math notranslate nohighlight">\(\mathbf{L}_{ij}\)</span>. At the end we get an upper triangular matrix, <span class="math notranslate nohighlight">\(\mathbf{U}\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-lufact0">
+<span class="eqno">(29)<a class="headerlink" href="#equation-lufact0" title="Permalink to this equation">¶</a></span>\[\mathbf{U} = \mathbf{L}_{43}\mathbf{L}_{42}\mathbf{L}_{32}\mathbf{L}_{41}\mathbf{L}_{31}\mathbf{L}_{21} \mathbf{A}.\]</div>
+<p>Now we multiply both sides on the left by <span class="math notranslate nohighlight">\(\mathbf{L}_{43}^{-1}\)</span>. On the right-hand side, it can be grouped together with <span class="math notranslate nohighlight">\(\mathbf{L}_{43}\)</span> to form an identity matrix. Then we multiply both sides on the left by <span class="math notranslate nohighlight">\(\mathbf{L}_{42}^{-1}\)</span>, which knocks out the next term on the right side, etc. Eventually we get</p>
+<div class="math notranslate nohighlight" id="equation-lufact1">
+<span class="eqno">(30)<a class="headerlink" href="#equation-lufact1" title="Permalink to this equation">¶</a></span>\[    \mathbf{L}_{21}^{-1}\mathbf{L}_{31}^{-1}\mathbf{L}_{41}^{-1}\mathbf{L}_{32}^{-1}\mathbf{L}_{42}^{-1}\mathbf{L}_{43}^{-1} \mathbf{U} = \mathbf{A}.\]</div>
+<p>We come next to an interesting property of these elementary matrices. If <span class="math notranslate nohighlight">\(i\ne j\)</span>, then for any scalar <span class="math notranslate nohighlight">\(\alpha\)</span> we can calculate that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+  \bigl(\mathbf{I} + \alpha\, \mathbf{e}_i \mathbf{e}_j^T\bigr) \bigl(\mathbf{I} - \alpha \,\mathbf{e}_i \mathbf{e}_j^T\bigr)
+  &amp; = \mathbf{I}  + \alpha \mathbf{e}_i \mathbf{e}_j^T - \alpha\, \mathbf{e}_i \mathbf{e}_j^T - \alpha^2\, \mathbf{e}_i \mathbf{e}_j^T \mathbf{e}_i \mathbf{e}_j^T \\
+  &amp;=  \mathbf{I}   - \alpha^2\, \mathbf{e}_i \bigl(\mathbf{e}_j^T \mathbf{e}_i\bigr)  \mathbf{e}_j^T = \mathbf{I},
+\end{split}\end{split}\]</div>
+<p>since the inner product between any two different columns of <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> is zero. We have shown that</p>
+<div class="math notranslate nohighlight">
+\[   \bigl(\mathbf{I} + \alpha \, \mathbf{e}_i \mathbf{e}_j^T\bigr)^{-1} =  \mathbf{I} - \alpha\, \mathbf{e}_i \mathbf{e}_j^T.\]</div>
+<p>All that is needed to invert <span class="math notranslate nohighlight">\(\mathbf{I} + \alpha\, \mathbf{e}_i \mathbf{e}_j^T\)</span> is to flip the sign of <span class="math notranslate nohighlight">\(\alpha\)</span>, the lone element in the lower triangle.</p>
+<p>We need one more remarkably convenient property of the elementary matrices. Looking, for example, at the first two matrices on the left in <a class="reference internal" href="#equation-lufact1">(30)</a>, we calculate that</p>
+<div class="math notranslate nohighlight">
+\[  (\mathbf{I} + \alpha \, \mathbf{e}_2\mathbf{e}_1^T) (\mathbf{I} + \beta\, \mathbf{e}_3\mathbf{e}_1^T) =  \mathbf{I} + \alpha\, \mathbf{e}_2\mathbf{e}_1^T + \beta \,\mathbf{e}_3\mathbf{e}_1^T + \alpha\beta \,\mathbf{e}_2\mathbf{e}_1^T\mathbf{e}_3\mathbf{e}_1^T.\]</div>
+<p>We can use associativity in the last term to group together <span class="math notranslate nohighlight">\(\mathbf{e}_{1}^T\mathbf{e}_{3}\)</span>, which is another inner product that equals zero thanks to the structure of the identity matrix. In summary: the product of these elementary factors just combines the nonzero terms that each one has below the diagonal.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Gaussian elimination factors a square matrix into the product of a lower triangular matrix and an upper triangular matrix.</p>
+</div>
+<p>That reasoning carries across each of the new terms in the product on the left side of <a class="reference internal" href="#equation-lufact1">(30)</a>. The conclusion is that Gaussian elimination finds a unit lower triangular matrix <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> and an upper triangular matrix <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> such that</p>
+<div class="math notranslate nohighlight" id="equation-lufact">
+<span class="eqno">(31)<a class="headerlink" href="#equation-lufact" title="Permalink to this equation">¶</a></span>\[\mathbf{L} \mathbf{U} = \mathbf{A}.\]</div>
+<p>Furthermore, the lower triangular entries of <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> are the row multipliers we found as in <a class="reference internal" href="demos/lu-gauss.html"><span class="doc">Gaussian elimination</span></a>, and the entries of <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> are those found at the end of the elimination process. Equation <a class="reference internal" href="#equation-lufact">(31)</a> is called an <a class="reference internal" href="overview.html#term-lu-factorization"><span class="xref std std-term">LU factorization</span></a> of the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>.</p>
+</div>
+<div class="section" id="an-algorithm-for-now">
+<h2>An algorithm—for now<a class="headerlink" href="#an-algorithm-for-now" title="Permalink to this headline">¶</a></h2>
+<p>LU factorization reduces any linear system to two triangular ones. From this, solving <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span> follows immediately:</p>
+<ol class="simple">
+<li><p>Factor <span class="math notranslate nohighlight">\(\mathbf{L}\mathbf{U}=\mathbf{A}\)</span> using Gaussian elimination.</p></li>
+<li><p>Solve <span class="math notranslate nohighlight">\(\mathbf{L}\mathbf{z}=\mathbf{b}\)</span> for <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> using forward substitution.</p></li>
+<li><p>Solve <span class="math notranslate nohighlight">\(\mathbf{U}\mathbf{x}=\mathbf{z}\)</span> for <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> using backward substitution.</p></li>
+</ol>
+<p>One of the important aspects of this algorithm is that the factorization step depends only on the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>; the right-hand side <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> is not involved. Thus if one has to solve multiple systems with a single matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>, the factorization needs to be performed only once for all systems. As we show in \secref{opcount}, the factorization is by far the most computationally expensive step, so this note is of more than academic interest.</p>
+<p>Based on the examples and discussion above, a code for LU factorization is given in <a class="reference internal" href="#function-lufact"><span class="std std-ref">lufact</span></a>.</p>
+<div class="proof proof-type-function" id="id1">
+<span id="function-lufact"></span>
+    <div class="proof-title">
+        <span class="proof-type">Function 14</span>
+        
+            <span class="proof-title-name">(lufact)</span>
+        
+    </div><div class="proof-content">
+<p><strong>LU factorization (not stable)</strong></p>
+<div class="highlight-julia notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">lufact(A)</span>
+
+<span class="s">Compute the LU factorization of square matrix `A`, returning the</span>
+<span class="s">factors.</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">function</span> <span class="n">lufact</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">L</span> <span class="o">=</span> <span class="kt">Matrix</span><span class="p">(</span><span class="kt">Diagonal</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
+<span class="n">U</span> <span class="o">=</span> <span class="n">float</span><span class="p">(</span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+
+<span class="c"># Gaussian elimination</span>
+<span class="k">for</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+    <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">/</span> <span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>   <span class="c"># row multiplier</span>
+    <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">:</span><span class="n">n</span><span class="p">]</span> <span class="o">-=</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">U</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="o">:</span><span class="n">n</span><span class="p">]</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">return</span> <span class="n">L</span><span class="p">,</span><span class="n">triu</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table></div>
+</div></div><div class="alert alert-primary">
+<p class="admonition-title">Tip</p>
+<div class="toggle docutils container">
+<p>Line 10 of <a class="reference internal" href="#function-lufact"><span class="std std-ref">lufact</span></a> points out two subtle Julia issues. First, arrays, including vectors and matrices, are really just references to blocks of memory. This data is much more efficient to pass around than the complete contents of the array. However, it means that a statement such as <code class="docutils literal notranslate"><span class="pre">U=A</span></code> just clones the array reference into the variable <code class="docutils literal notranslate"><span class="pre">U</span></code>. Any changes made to entries of <code class="docutils literal notranslate"><span class="pre">U</span></code> would then also be made to entries of <code class="docutils literal notranslate"><span class="pre">A</span></code>, because they refer to the same contents. In the context of <code class="docutils literal notranslate"><span class="pre">lufact</span></code> we don’t want to change the original matrix, so we use <a class="reference internal" href="overview.html#term-copy"><span class="xref std std-term">copy</span></a> here to create an independent clone of the array contents and a new reference to them.</p>
+<p>The second issue is that even when <code class="docutils literal notranslate"><span class="pre">A</span></code> has all integer entries, the LU factors may not. So if by copying <code class="docutils literal notranslate"><span class="pre">A</span></code> we create <code class="docutils literal notranslate"><span class="pre">U</span></code> as a matrix of integers, the function will fail with an <a class="reference internal" href="overview.html#term-inexacterror"><span class="xref std std-term">InexactError</span></a> if we attempt to insert a noninteger result into <code class="docutils literal notranslate"><span class="pre">U</span></code> in line 16. To avoid this eventuality we convert <code class="docutils literal notranslate"><span class="pre">U</span></code> into a floating-point matrix with <a class="reference internal" href="overview.html#term-float"><span class="xref std std-term">float</span></a>.</p>
+</div>
+</div>
+<p>The multipliers are stored in the lower triangle of <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> as they are found. When operations are done to put zeros in column <span class="math notranslate nohighlight">\(j\)</span>, they are carried out only in lower rows to create an upper triangular matrix.  (Only columns <span class="math notranslate nohighlight">\(j\)</span> through <span class="math notranslate nohighlight">\(n\)</span> are accessed, since the other entries should already be zero.) At the end of the process the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> should be upper triangular, but since roundoff errors could create some small nonzeros the <code class="docutils literal notranslate"><span class="pre">triu</span></code> command is used to make them exactly zero.</p>
+<div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/lu-function.html"><span class="doc">Using LU factorization</span></a></p>
+</div>
+<p>Observe from <a class="reference internal" href="#function-lufact"><span class="std std-ref">lufact</span></a> that the factorization can fail if <span class="math notranslate nohighlight">\(A_{jj}=0\)</span> when it is put in the denominator in line~14. This does <em>not</em> necessarily mean there is a zero in the diagonal of the original <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>, because <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is changed during the computation. Moreover, there are perfectly good nonsingular matrices for which this type of failure occurs, such as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}  \begin{bmatrix}
+    0 &amp; 1\\1 &amp; 0
+  \end{bmatrix}.\end{split}\]</div>
+<p>Fortunately, this defect can be repaired for all nonsingular matrices at minor cost, as we will see in <a class="reference internal" href="pivoting.html"><span class="doc">the section on pivoting</span></a>.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol>
+<li><p>✍ For each matrix, perform Gaussian elimination by hand to produce an LU factorization. Write out the <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> matrix using outer products of standard basis vectors.</p>
+<p><strong>(a)</strong> <span class="math notranslate nohighlight">\(\displaystyle
+ \begin{bmatrix}
+ 2 &amp; 3 &amp; 4 \\
+ 4 &amp; 5 &amp; 10 \\
+ 4 &amp; 8 &amp; 2
+ \end{bmatrix}\qquad\)</span>
+<strong>(b)</strong> <span class="math notranslate nohighlight">\(\displaystyle
+ \begin{bmatrix}
+ 6 &amp; -2 &amp; -4 &amp; 4\\
+ 3 &amp; -3 &amp; -6 &amp; 1 \\
+ -12 &amp; 8 &amp; 21 &amp; -8 \\
+ -6 &amp; 0 &amp; -10 &amp; 7
+ \end{bmatrix}\)</span></p>
+</li>
+<li><p>⌨ The matrices</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{T}(x,y) =
+\begin{bmatrix}
+  1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ x &amp; y &amp; 1
+\end{bmatrix},\qquad
+\mathbf{R}(\theta) =
+\begin{bmatrix}
+  \cos\theta &amp; \sin \theta &amp; 0 \\ -\sin\theta &amp; \cos \theta &amp; 0 \\ 0 &amp; 0 &amp; 1
+\end{bmatrix}\end{split}\]</div>
+<p>are used to represent translations and rotations of plane points in computer graphics. For the following, let</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{A} = \mathbf{T}(3,-1)\mathbf{R}(\pi/5)\mathbf{T}(-3,1), \qquad \mathbf{z} =
+\begin{bmatrix}
+  2 \\ 2 \\ 1
+\end{bmatrix}.\end{split}\]</div>
+<p><strong>(a)</strong> Find <span class="math notranslate nohighlight">\(\mathbf{b} = \mathbf{A}\mathbf{z}\)</span>.</p>
+<p><strong>(b)</strong> Find the LU factorization of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>.</p>
+<p><strong>(c)</strong> Use the factors with triangular substitutions in order to solve <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span>, and find <span class="math notranslate nohighlight">\(\mathbf{x}-\mathbf{z}\)</span>.</p>
+</li>
+<li id="problem-bigcorner"><p>⌨ In Julia, define</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{A}=
+\begin{bmatrix}
+  1 &amp; 0 &amp; 0 &amp; 0 &amp; 10^{12} \\
+  1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+  0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+  0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 \\
+  0 &amp; 0 &amp; 0 &amp; 1 &amp; 0
+\end{bmatrix},
+\quad \hat{\mathbf{x}} =
+\begin{bmatrix}
+  0 \\ 1/3 \\ 2/3 \\ 1 \\ 4/3
+\end{bmatrix},
+\quad \mathbf{b} = \mathbf{A}\hat{\mathbf{x}}.\end{split}\]</div>
+<p><strong>(a)</strong> Using <a class="reference internal" href="#function-lufact"><span class="std std-ref">lufact</span></a> and triangular substitutions, solve the linear system <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span>, showing the result. About how many (to the nearest integer) accurate digits are in the result? (The answer is much less than the default 16 of double precision).</p>
+<p><strong>(b)</strong> Repeat part (a) with <span class="math notranslate nohighlight">\(10^{20}\)</span> as the corner element. (The result is even less accurate. We will study the causes of such low accuracy later in the chapter.)</p>
+</li>
+<li><p>not available</p>
+</li>
+<li><p>⌨ <a class="reference internal" href="#function-lufact"><span class="std std-ref">lufact</span></a> factors <span class="math notranslate nohighlight">\(\mathbf{A}=\mathbf{L}\mathbf{U}\)</span> in such a way that <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> is a unit lower triangular matrix—that is, has all ones on the diagonal. It is also possible to define the factorization so that <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> is a unit upper triangular matrix instead. Write a function <code class="docutils literal notranslate"><span class="pre">lufact2</span></code> that uses <a class="reference internal" href="#function-lufact"><span class="std std-ref">lufact</span></a> <em>without modification</em> to produce this version of the factorization. (Hint: Begin with the standard LU factorization of <span class="math notranslate nohighlight">\(\mathbf{A}^T\)</span>.) Demonstrate on a nontrivial <span class="math notranslate nohighlight">\(4\times 4\)</span> example.</p>
+</li>
+<li><p>When computing the determinant of a matrix by hand, it’s common to use cofactor expansion and apply the definition recursively. But this is terribly inefficient as a function of the matrix size.</p>
+<p><strong>(a)</strong> ✍ Explain why, if <span class="math notranslate nohighlight">\(\mathbf{A}=\mathbf{L}\mathbf{U}\)</span> is an LU factorization,</p>
+<div class="math notranslate nohighlight">
+\[  \det(\mathbf{A}) = U_{11}U_{22}\cdots U_{nn}=\prod_{i=1}^n U_{ii}.\]</div>
+<p><strong>(b)</strong> ⌨ Using the result of part (a), write a function <code class="docutils literal notranslate"><span class="pre">determinant(A)</span></code> that computes the determinant using <a class="reference internal" href="#function-lufact"><span class="std std-ref">lufact</span></a>. Test your function on at least two nontriangular <span class="math notranslate nohighlight">\(5\times 5\)</span> matrices, comparing your result to the result of <code class="docutils literal notranslate"><span class="pre">det</span></code> from the standard <code class="docutils literal notranslate"><span class="pre">LinearAlgebra</span></code> package.</p>
+ <!-- Use your function and the built-in "det" on the matrices "magic(n)" for $n=3,4,\ldots,7$, and make a table showing $n$, the value from your function, and the relative error when compared to "det". -->
+ <!-- **(c)** ⌨ Show that "determinant" fails for "magic(8)" but is fine for "magic(9)". Speculate on what property of these two matrices makes the results so different. -->
+</li>
+<li><p>not available</p>
+ <!-- ⌨ \label{pro:LUoneloop} Consider the portion of {ref}`function-lufact` in the innermost
+   loop. Because the different iterations in $i$ are all independent,
+   it is possible to rewrite this group of operations without a
+   loop. In fact, the necessary changes are to delete the keyword
+   "for" in the inner loop, and delete the following
+   "end" line. (You should also put a semicolon at the end of
+   "i = j+1:n" to suppress extra output.)
+   
+   1. 
+   \item Make the changes as directed and verify that the function
+     works properly on the matrix from {doc}`demos/lufactfun`.
+   \item Write out symbolically (i.e., using ordinary elementwise
+     vector and matrix notation) what the new version of the function
+     does in the case $n=5$ for the iteration with $j=3$.
+    -->
+</li>
+</ol>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="linear-systems.html" title="previous page">Linear systems</a>
+    <a class='right-next' id="next-link" href="efficiency.html" title="next page">Efficiency of matrix computations</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tobin A. Driscoll and Richard J. Braun<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

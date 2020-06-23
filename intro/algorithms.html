@@ -1,0 +1,391 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Algorithms &#8212; Fundamentals of Numerical Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/mystnb.js"></script>
+    <script src="../_static/proof.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Stability" href="stability.html" />
+    <link rel="prev" title="Problems and conditioning" href="conditioning.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fundamentals of Numerical Computation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../frontmatter.html">Home</a>
+  </li>
+  <li class="active">
+    <a href="overview.html">Introduction</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="floating-point.html">Floating-point numbers</a>
+    </li>
+    <li class="">
+      <a href="conditioning.html">Problems and conditioning</a>
+    </li>
+    <li class="active">
+      <a href="">Algorithms</a>
+    </li>
+    <li class="">
+      <a href="stability.html">Stability</a>
+    </li>
+    <li class="">
+      <a href="next.html">Next steps</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../linsys/overview.html">Square linear systems</a>
+  </li>
+  <li class="">
+    <a href="../leastsq/overview.html">Overdetermined linear systems</a>
+  </li>
+  <li class="">
+    <a href="../nonlineqn/overview.html">Roots of nonlinear equations</a>
+  </li>
+  <li class="">
+    <a href="../localapprox/overview.html">Piecewise interpolation</a>
+  </li>
+  <li class="">
+    <a href="../ivp/overview.html">Initial-value problems for ODEs</a>
+  </li>
+  <li class="">
+    <a href="../appendix/linear-algebra.html">Review: Linear algebra</a>
+  </li>
+  <li class="">
+    <a href="../appendix/demos.html">All demo notebooks</a>
+  </li>
+  <li class="">
+    <a href="../refs.html">References</a>
+  </li>
+  <li class="">
+    <a href="../genindex.html">Index</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../_sources/intro/algorithms.md"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#algorithms-as-code" class="nav-link">Algorithms as code</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#writing-your-own-functions" class="nav-link">Writing your own functions</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#exercises" class="nav-link">Exercises</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="algorithms">
+<h1>Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this headline">¶</a></h1>
+<p>When we idealize a problem as the mathematical function <span class="math notranslate nohighlight">\(f(x)\)</span>, we are explicitly stating that each input (data) has exactly one correct output. When it comes to implementing a computational version of <span class="math notranslate nohighlight">\(f\)</span>, though, we usually have some choices to make. A complete set of instructions for mapping data to a result is called an <a class="reference internal" href="overview.html#term-algorithm"><span class="xref std std-term">algorithm</span></a>. In most cases it is reasonable to represent each algorithm by another function, which for this section we denote <span class="math notranslate nohighlight">\(\tilde{f}(x)\)</span>.</p>
+<p>Even simple problems can be associated with algorithms that have surprisingly different characteristics.</p>
+<div class="proof proof-type-example" id="id1">
+
+    <div class="proof-title">
+        <span class="proof-type">Example 6</span>
+        
+    </div><div class="proof-content">
+<p>Suppose we want to find an algorithm that maps a given <span class="math notranslate nohighlight">\(x\)</span> to the
+value of the polynomial <span class="math notranslate nohighlight">\(f(x)= 5x^3 + 4x^2 + 3x + 2\)</span>.  Representing <span class="math notranslate nohighlight">\(x^2\)</span> as <span class="math notranslate nohighlight">\((x)(x)\)</span>, we can find it with one multiplication. We can then find <span class="math notranslate nohighlight">\(x^3=(x)(x^2)\)</span> with one more multiplication. We can then apply all the coefficients (three more multiplications) and add all the terms (three
+additions), for a total of 8 arithmetic operations.</p>
+<p>There is a more efficient algorithm, however: organize the polynomial according to
+<strong>Horner’s rule</strong>,</p>
+<div class="math notranslate nohighlight">
+\[    f(x) = 2 + x \bigl( 3 + x( 4 + 5x) \bigr).\]</div>
+<p>In this form you can see that evaluation takes only 3 additions
+and 3 multiplications. The savings represent 25% of the original computational effort, which could be significant if repeated billions of times.</p>
+</div></div><div class="section" id="algorithms-as-code">
+<h2>Algorithms as code<a class="headerlink" href="#algorithms-as-code" title="Permalink to this headline">¶</a></h2>
+<p>Descriptions of algorithms vary widely. Sometimes they are presented as a mixture of mathematics, words, and computer-style instructions called pseudocode, which varies in syntax, precision, and formality. In this book we present nontrivial algorithms as code.  As a result, we sometimes sacrifice a little readability and brevity, and in some cases we have to address aspects of the algorithm that are peripheral to our mathematical interests. We think these drawbacks are more than outweighed by the lack of ambiguity and the ability to execute the algorithms yourself—not to mention the opportunity to address some issues that are important even if not very mathematical.</p>
+<p>Of all the desirable traits of code, we emphasize clarity the most. We do not represent our programs as being the shortest, fastest, or most elegant. Our primary goal is to illustrate and complement the mathematical underpinnings. Hopefully the language and codes are clear enough that if you would rather use a different computing environment to implement them, you will experience few difficulties. We do recommend an <em>interactive</em> environment, however, because being able to tweak inputs and pick apart the results is crucial to understanding.</p>
+<p>As our first example, <a class="reference internal" href="#function-horner"><span class="std std-ref">horner</span></a> implements an algorithm that applies Horner’s rule on a general polynomial, through the identity</p>
+<div class="math notranslate nohighlight" id="equation-horner">
+<span class="eqno">(18)<a class="headerlink" href="#equation-horner" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+  p(x) &amp;= c_1 x^{n-1} + c_2 x^{n-2} + \cdots + c_n \\
+  &amp;= \Bigl( \bigl( (c_1 x  + c_2) x + c_3 \bigr) x + \cdots +
+  c_{n-1} \Bigr)x + c_{n}.
+\end{split}\end{split}\]</div>
+<div class="proof proof-type-function" id="id2">
+<span id="function-horner"></span>
+    <div class="proof-title">
+        <span class="proof-type">Function 7</span>
+        
+            <span class="proof-title-name">(horner)</span>
+        
+    </div><div class="proof-content">
+<p><strong>Horner’s rule for evaluating a polynomial</strong></p>
+<div class="highlight-julia notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">horner(c,x)</span>
+
+<span class="s">Evaluate a polynomial whose coefficients are given in ascending</span>
+<span class="s">order in `c`, at the point `x`, using Horner&#39;s rule.</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">function</span> <span class="n">horner</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="kp">in</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">:-</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">c</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+<span class="k">end</span>
+
+<span class="k">return</span> <span class="n">y</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table></div>
+</div></div><div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/algorithms-horner.html"><span class="doc">Horner’s rule</span></a></p>
+</div>
+<p>The quoted lines at the beginning of <a class="reference internal" href="#function-horner"><span class="std std-ref">horner</span></a> are an optional documentation string. The function itself starts off with the keyword <code class="docutils literal notranslate"><span class="pre">function</span></code>, followed by a list of its input arguments. The first of these is presumed to be a vector, whose length can be obtained and whose individual components are accessed through square bracket notation. After the computation is finished, the <code class="docutils literal notranslate"><span class="pre">return</span></code> keyword indicates which value or values are to be returned to the caller.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Polynomials</span></code> package for Julia provides its own fast methods for polynomial evaluation that supersede our simple <a class="reference internal" href="#function-horner"><span class="std std-ref">horner</span></a> function. This will often be the case for codes in this book, because the problems we study are classic and important. In a more practical setting you would take implementations of well-known methods for granted and build on top of them.</p>
+</div>
+<div class="section" id="writing-your-own-functions">
+<h2>Writing your own functions<a class="headerlink" href="#writing-your-own-functions" title="Permalink to this headline">¶</a></h2>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Julia code files are named with the extension <code class="docutils literal notranslate"><span class="pre">.jl</span></code>.</p>
+</div>
+<p>Functions are a primary way of working in Julia. Any collection of statements organized around solving a type of problem should probably be wrapped in a function. Functions can be defined in their own files or at the command line (i.e., REPL prompt). Typically multiple related functions are grouped into a single file with extension <code class="docutils literal notranslate"><span class="pre">.jl</span></code>.</p>
+<p>As seen in <a class="reference internal" href="#function-horner"><span class="std std-ref">horner</span></a>, one way to start a function definition is with the <code class="docutils literal notranslate"><span class="pre">function</span></code> keyword, followed by the function name and the input arguments in parenthesis. For example, to represent the mathematical function <span class="math notranslate nohighlight">\(e^{\sin x}\)</span>, we could use</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">myfun</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">exp</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">return</span></code> keyword stops execution of a function and declares value(s) to be returned.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">return</span></code> statement is used to end execution of the function and return one or more (comma-separated) values to the caller of the function. A function may have more than one <code class="docutils literal notranslate"><span class="pre">return</span></code> statement. If an executing function reaches its <code class="docutils literal notranslate"><span class="pre">end</span></code> statement without encountering a <code class="docutils literal notranslate"><span class="pre">return</span></code> statement, then it returns the result of the most recent statement.</p>
+<p>For a function with a short definition like the one above, there is a more compact syntax to do the same thing:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">myfun</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Anonymous functions can be defined using arrow notation.</p>
+</div>
+<p>You can also define <strong>anonymous functions</strong>, which are usually functions so short-lived that they do not need a name. This is done with an arrow notation. For example, to plot the function above (in the <code class="docutils literal notranslate"><span class="pre">Plots</span></code> package) without permanently creating it, you could enter</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Plots</span><span class="p">;</span> <span class="n">plot</span><span class="p">(</span> <span class="n">x</span><span class="o">-&gt;</span><span class="n">exp</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>As in most languages, input arguments and variables defined within a function have scope limited to the function itself. However, they can access values defined within an enclosing scope. For instance:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">mycfun</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>  <span class="n">mycfun</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>   <span class="c"># returns exp(sin(3))</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>  <span class="n">mycfun</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>   <span class="c"># returns exp(2*sin(3))</span>
+</pre></div>
+</div>
+<p>There’s a lot more to be said about functions in Julia, but this is enough to get started.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol>
+<li><p>⌨ Write a Julia function</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">polyadd</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>that returns the coefficient vector <span class="math notranslate nohighlight">\(r\)</span> for the sum of two polynomials <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span>, specified as vectors of coefficients in increasing degree. You should <em>not</em> assume that <code class="docutils literal notranslate"><span class="pre">p</span></code> and <code class="docutils literal notranslate"><span class="pre">q</span></code> are vectors of the same length.</p>
+</li>
+<li id="problem-samplevar"><p>⌨  In statistics, one defines the variance of sample values <span class="math notranslate nohighlight">\(x_1,\ldots,x_n\)</span> by</p>
+<div class="math notranslate nohighlight" id="equation-samplevar">
+<span class="eqno">(19)<a class="headerlink" href="#equation-samplevar" title="Permalink to this equation">¶</a></span>\[    s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \overline{x})^2,
+  \qquad \overline{x} = \frac{1}{n} \sum_{i=1}^n x_i.\]</div>
+<p>Write a Julia function</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">samplevar</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>that takes as input a vector <code class="docutils literal notranslate"><span class="pre">x</span></code> of any length and returns <span class="math notranslate nohighlight">\(s^2\)</span> as calculated by the formula. You should test your function on some artificial data. If you enter <code class="docutils literal notranslate"><span class="pre">using</span> <span class="pre">Statistics</span></code> in Julia, then you can compare to results of the <code class="docutils literal notranslate"><span class="pre">var</span></code> function.</p>
+</li>
+<li id="problem-polyarea"><p>⌨  Let <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> be vectors whose entries give the coordinates of the vertices of a polygon, given in counterclockwise order. Write a function</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">polyarea</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>that computes the area of the polygon, using this formula based on Green’s theorem:</p>
+<div class="math notranslate nohighlight">
+\[A = \frac{1}{2} \left| \sum_{k=1}^n x_k y_{k+1} - x_{k+1}y_k \right|.\]</div>
+<p>Here <span class="math notranslate nohighlight">\(n\)</span> is the number of polygon vertices, and by definition, <span class="math notranslate nohighlight">\(x_{n+1}=x_1\)</span> and <span class="math notranslate nohighlight">\(y_{n+1}=y_1\)</span>.  Test your functions on a square and an equilateral triangle.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="conditioning.html" title="previous page">Problems and conditioning</a>
+    <a class='right-next' id="next-link" href="stability.html" title="next page">Stability</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tobin A. Driscoll and Richard J. Braun<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

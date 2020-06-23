@@ -1,0 +1,582 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Quasi-Newton methods &#8212; Fundamentals of Numerical Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/mystnb.js"></script>
+    <script src="../_static/proof.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Nonlinear least squares" href="nlsq.html" />
+    <link rel="prev" title="Newton for nonlinear systems" href="newtonsys.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fundamentals of Numerical Computation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../frontmatter.html">Home</a>
+  </li>
+  <li class="">
+    <a href="../intro/overview.html">Introduction</a>
+  </li>
+  <li class="">
+    <a href="../linsys/overview.html">Square linear systems</a>
+  </li>
+  <li class="">
+    <a href="../leastsq/overview.html">Overdetermined linear systems</a>
+  </li>
+  <li class="active">
+    <a href="overview.html">Roots of nonlinear equations</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="rootproblem.html">The rootfinding problem</a>
+    </li>
+    <li class="">
+      <a href="fixed-point.html">Fixed point iteration</a>
+    </li>
+    <li class="">
+      <a href="newton.html">Newton’s method in one variable</a>
+    </li>
+    <li class="">
+      <a href="secant.html">Interpolation-based methods</a>
+    </li>
+    <li class="">
+      <a href="newtonsys.html">Newton for nonlinear systems</a>
+    </li>
+    <li class="active">
+      <a href="">Quasi-Newton methods</a>
+    </li>
+    <li class="">
+      <a href="nlsq.html">Nonlinear least squares</a>
+    </li>
+    <li class="">
+      <a href="next.html">Next steps</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../localapprox/overview.html">Piecewise interpolation</a>
+  </li>
+  <li class="">
+    <a href="../ivp/overview.html">Initial-value problems for ODEs</a>
+  </li>
+  <li class="">
+    <a href="../appendix/linear-algebra.html">Review: Linear algebra</a>
+  </li>
+  <li class="">
+    <a href="../appendix/demos.html">All demo notebooks</a>
+  </li>
+  <li class="">
+    <a href="../refs.html">References</a>
+  </li>
+  <li class="">
+    <a href="../genindex.html">Index</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../_sources/nonlineqn/quasinewton.md"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#jacobian-by-finite-differences" class="nav-link">Jacobian by finite differences</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#broyden-s-update" class="nav-link">Broyden’s update</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#levenberg-s-method" class="nav-link">Levenberg’s method</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#implementation" class="nav-link">Implementation</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#exercises" class="nav-link">Exercises</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="quasi-newton-methods">
+<h1>Quasi-Newton methods<a class="headerlink" href="#quasi-newton-methods" title="Permalink to this headline">¶</a></h1>
+<p>Newton’s method is a foundation for algorithms to solve equations and minimize quantities. But it is not ideal in its plain or “pure” form. Instead there are different <a class="reference internal" href="overview.html#term-quasi-newton-methods"><span class="xref std std-term">quasi-Newton methods</span></a> that attempt to overcome two serious issues: the programming nuisance and computational expense of evaluating the Jacobian matrix, and the tendency of the iteration to diverge for many starting points.</p>
+<div class="section" id="jacobian-by-finite-differences">
+<h2>Jacobian by finite differences<a class="headerlink" href="#jacobian-by-finite-differences" title="Permalink to this headline">¶</a></h2>
+<p>In the scalar case, we found an easy alternative to a direct evaluation of the derivative. Specifically, we may interpret the secant formula <a class="reference internal" href="secant.html#equation-secant">(87)</a> as the Newton formula <a class="reference internal" href="newton.html#equation-newton">(82)</a> with <span class="math notranslate nohighlight">\(f'(x_k)\)</span> replaced by the quotient</p>
+<div class="math notranslate nohighlight" id="equation-secantfd">
+<span class="eqno">(94)<a class="headerlink" href="#equation-secantfd" title="Permalink to this equation">¶</a></span>\[  \frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}.\]</div>
+<p>If the sequence of <span class="math notranslate nohighlight">\(x_k\)</span> values converges to a root <span class="math notranslate nohighlight">\(r\)</span>, then this quotient converges to <span class="math notranslate nohighlight">\(f'(r)\)</span>.</p>
+<p>In the system case, replacing the Jacobian evaluation is more complicated: derivatives are needed with respect to <span class="math notranslate nohighlight">\(n\)</span> variables, not just one. From <a class="reference internal" href="newtonsys.html#equation-jacobian">(91)</a>, we note that the <span class="math notranslate nohighlight">\(j\)</span>th column of the Jacobian is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}  \mathbf{J}(\mathbf{x}) \mathbf{e}_j =
+  \begin{bmatrix}
+    \frac{\partial{f_1}}{\partial x_j} \\[2mm] \frac{\partial{f_2}}{\partial x_j}
+    \\ \vdots \\ \frac{\partial{f_n}}{\partial x_j}
+  \end{bmatrix}.\end{split}\]</div>
+<p>(As always, <span class="math notranslate nohighlight">\(\mathbf{e}_j\)</span> represents the <span class="math notranslate nohighlight">\(j\)</span>th column of the identity matrix, here in <span class="math notranslate nohighlight">\(n\)</span> dimensions.) Inspired by <a class="reference internal" href="#equation-secantfd">(94)</a>, we can replace the differentiation with a quotient involving a change in only <span class="math notranslate nohighlight">\(x_j\)</span> while the other variables remain fixed:</p>
+<div class="math notranslate nohighlight" id="equation-jacobianfd">
+<span class="eqno">(95)<a class="headerlink" href="#equation-jacobianfd" title="Permalink to this equation">¶</a></span>\[  \mathbf{J}(\mathbf{x}) \mathbf{e}_j \approx
+  \frac{\mathbf{f}(\mathbf{x}+\delta \mathbf{e}_j) - \mathbf{f}(\mathbf{x})}{\delta}, \qquad j=1,\ldots,n.\]</div>
+<p>For reasons explained in \secref{fdconverge}, <span class="math notranslate nohighlight">\(\delta\)</span> is usually chosen close to <span class="math notranslate nohighlight">\(\sqrt{\epsilon}\)</span>, where <span class="math notranslate nohighlight">\(\epsilon\)</span> represents the expected noise level in evaluation of <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>. If the only source of noise is floating-point roundoff, then <span class="math notranslate nohighlight">\(\delta=\sqrt{\epsilon_\text{mach}}\)</span>.</p>
+<p>The finite-difference formula <a class="reference internal" href="#equation-jacobianfd">(95)</a> is implemented by the short code <a class="reference internal" href="#function-fdjac"><span class="std std-ref">fdjac</span></a>. (The code is written to accept the case where <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> maps <span class="math notranslate nohighlight">\(n\)</span> variables to <span class="math notranslate nohighlight">\(m\)</span> values with <span class="math notranslate nohighlight">\(m\neq n\)</span>, in anticipation of \secref{nl-least-sq}.)</p>
+<div class="proof proof-type-function" id="id1">
+<span id="function-fdjac"></span>
+    <div class="proof-title">
+        <span class="proof-type">Function 39</span>
+        
+            <span class="proof-title-name">(fdjac)</span>
+        
+    </div><div class="proof-content">
+<p><strong>Finite-difference approximation of a Jacobian.</strong></p>
+<div class="highlight-julia notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">fdjac(f,x0,y0)</span>
+
+<span class="s">Compute a finite-difference approximation of the Jacobian matrix for</span>
+<span class="s">`f` at `x0`, where `y0`=`f(x0)` is given.</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">function</span> <span class="n">fdjac</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">)</span>
+
+<span class="n">delta</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">eps</span><span class="p">())</span>   <span class="c"># FD step size</span>
+<span class="n">m</span><span class="p">,</span><span class="n">n</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">y0</span><span class="p">),</span><span class="n">length</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">n</span><span class="o">==</span><span class="mi">1</span>
+    <span class="n">J</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="o">+</span><span class="n">delta</span><span class="p">)</span> <span class="o">-</span> <span class="n">y0</span><span class="p">)</span> <span class="o">/</span> <span class="n">delta</span>
+<span class="k">else</span>
+    <span class="n">J</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">In</span> <span class="o">=</span> <span class="nb">I</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+        <span class="n">J</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x0</span> <span class="o">+</span> <span class="n">delta</span><span class="o">*</span><span class="n">In</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">j</span><span class="p">])</span> <span class="o">-</span> <span class="n">y0</span><span class="p">)</span> <span class="o">/</span> <span class="n">delta</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">return</span> <span class="n">J</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table></div>
+</div></div></div>
+<div class="section" id="broyden-s-update">
+<h2>Broyden’s update<a class="headerlink" href="#broyden-s-update" title="Permalink to this headline">¶</a></h2>
+<p>The finite-difference Jacobian is easy to conceive and use. But, as you can see from <a class="reference internal" href="#equation-jacobianfd">(95)</a>, it requires <span class="math notranslate nohighlight">\(n\)</span> additional evaluations of the system function at each iteration, which can be unacceptably slow in some applications. Conceptually these function evaluations seem especially wasteful given that the root estimates, and thus presumably the Jacobian matrix, are supposed to change little as the iteration converges. This is a good time to step in with the principle of approximate approximation, which suggests looking for a shortcut in the form of a cheap-but-good-enough way to update the Jacobian from one iteration to the next.</p>
+<p>Recall that the Newton iteration is derived by solving the linear model implied by <a class="reference internal" href="newtonsys.html#equation-multitaylor">(90)</a>:</p>
+<div class="math notranslate nohighlight">
+\[  \boldsymbol{0} \approx \mathbf{f}(\mathbf{x}_{k+1}) \approx \mathbf{f}(\mathbf{x}_k) + \mathbf{J}(\mathbf{x}_k)\,(\mathbf{x}_{k+1}-\mathbf{x}_k).\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{s}_k=\mathbf{x}_{k+1}-\mathbf{x}_k\)</span>  be the Newton step. We will make the notation simpler via <span class="math notranslate nohighlight">\(\mathbf{f}_k=\mathbf{f}(\mathbf{x}_k)\)</span>, and now we replace <span class="math notranslate nohighlight">\(\mathbf{J}(\mathbf{x}_k)\)</span> by a matrix <span class="math notranslate nohighlight">\(\mathbf{A}_{k}\)</span> that is meant to approximate the Jacobian. Hence the Newton step is considered to be defined by</p>
+<div class="math notranslate nohighlight" id="equation-quasinewton-step">
+<span class="eqno">(96)<a class="headerlink" href="#equation-quasinewton-step" title="Permalink to this equation">¶</a></span>\[  \mathbf{A}_k \mathbf{s}_k = -\mathbf{f}_k.\]</div>
+<p>This equation gets us from <span class="math notranslate nohighlight">\(\mathbf{x}_k\)</span> to <span class="math notranslate nohighlight">\(\mathbf{x}_{k+1}\)</span>. To continue the iteration, we want to update the approximate Jacobian to <span class="math notranslate nohighlight">\(\mathbf{A}_{k+1}\)</span>. If we think one-dimensionally for a moment, the secant method would assume that <span class="math notranslate nohighlight">\(A_{k+1}=(f_{k+1}-f_k)/(x_{k+1}-x_k)\)</span>. It’s not easy to generalize a fraction to vectors, but we can do it if we instead write it as</p>
+<div class="math notranslate nohighlight">
+\[  f_{k+1}-f_k = A_{k+1} (x_{k+1}-x_k) = A_{k+1} s_k.\]</div>
+<p>This is used to justify the following requirement:</p>
+<div class="math notranslate nohighlight" id="equation-secantsys">
+<span class="eqno">(97)<a class="headerlink" href="#equation-secantsys" title="Permalink to this equation">¶</a></span>\[  \mathbf{A}_{k+1} \mathbf{s}_k = \mathbf{f}_{k+1}-\mathbf{f}_k.\]</div>
+<p>This isn’t enough to uniquely determine <span class="math notranslate nohighlight">\(\mathbf{A}_{k+1}\)</span>. However, if we also require that <span class="math notranslate nohighlight">\(\mathbf{A}_{k+1}-\mathbf{A}_k\)</span> is a matrix of rank one, then one arrives at the <strong>Broyden update formula</strong> \index{Broyden update} \index{quasi-Newton methods!Broyden update}</p>
+<div class="math notranslate nohighlight" id="equation-broyden">
+<span class="eqno">(98)<a class="headerlink" href="#equation-broyden" title="Permalink to this equation">¶</a></span>\[  \mathbf{A}_{k+1} = \mathbf{A}_k + \frac{1}{\mathbf{s}_k^T \mathbf{s}_k}(\mathbf{f}_{k+1} - \mathbf{f}_k -\mathbf{A}_k \mathbf{s}_k)\, \mathbf{s}_k^T.\]</div>
+<p>Observe that <span class="math notranslate nohighlight">\(\mathbf{A}_{k+1}-\mathbf{A}_k\)</span>, being proportional to the outer product of two vectors, is indeed a rank-one matrix, and that computing it requires no extra evaluations of <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>. Remarkably, under reasonable assumptions the sequence of <span class="math notranslate nohighlight">\(\mathbf{x}_k\)</span> so defined converges superlinearly, even though the matrices <span class="math notranslate nohighlight">\(\mathbf{A}_k\)</span> do not necessarily converge to the Jacobian of <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>. In practice one typically uses finite differences to initialize the Jacobian at iteration <span class="math notranslate nohighlight">\(k=1\)</span>. If the step computed by the update formula improves the solution, it is accepted and the iteration continues, but if the update formula fails to give a good result, the matrix <span class="math notranslate nohighlight">\(\mathbf{A}_k\)</span> is reinitialized by finite differences and the step is recalculated.</p>
+</div>
+<div class="section" id="levenberg-s-method">
+<h2>Levenberg’s method<a class="headerlink" href="#levenberg-s-method" title="Permalink to this headline">¶</a></h2>
+<p>The most difficult part of many rootfinding problems is finding a starting point that will lead to convergence. The linear model implicitly constructed during a Newton iteration—whether we use an exact, finite-difference, or iteratively updated Jacobian matrix—becomes increasingly inaccurate as one ventures farther from the most recent root estimate, eventually failing to resemble the exact function much at all. Although one could imagine trying to do a detailed accuracy analysis of each linear model as we go, in practice simple strategies are valuable here. Suppose, after computing the step suggested by the linear model, we ask a binary question: Would taking that step improve our situation? Since we are trying to find a root of <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>, we have a quantitative way to pose this question: Does the backward error <span class="math notranslate nohighlight">\(\|\mathbf{f}\|\)</span> decrease? If not, we should reject the step and find an alternative.</p>
+<p>There are several ways to find alternatives to the standard step, but we will consider just one of them. Let <span class="math notranslate nohighlight">\(\mathbf{A}_k\)</span> be the (exact or approximate) Jacobian matrix for iteration number <span class="math notranslate nohighlight">\(k\)</span>. <strong>Levenberg’s method</strong> introduces a positive parameter <span class="math notranslate nohighlight">\(\lambda\)</span> into the calculation of the next step: define</p>
+<div class="math notranslate nohighlight" id="equation-levenberg">
+<span class="eqno">(99)<a class="headerlink" href="#equation-levenberg" title="Permalink to this equation">¶</a></span>\[  (\mathbf{A}_k^T \mathbf{A}_k + \lambda \mathbf{I})\,\mathbf{s}_k = -\mathbf{A}_k^T \mathbf{f}_k,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{x}_{k+1}=\mathbf{x}_k+\mathbf{s}_k\)</span>. Some justification of <a class="reference internal" href="#equation-levenberg">(99)</a> comes from considering extreme cases for <span class="math notranslate nohighlight">\(\lambda\)</span>. If <span class="math notranslate nohighlight">\(\lambda=0\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[  \mathbf{A}_k^T \mathbf{A}_k \mathbf{s}_k = -\mathbf{A}_k^T \mathbf{f}_k,\]</div>
+<p>which is equivalent to the definition of the usual linear model (i.e., Newton or quasi-Newton) step <a class="reference internal" href="#equation-quasinewton-step">(96)</a>. On the other hand, as <span class="math notranslate nohighlight">\(\lambda\to\infty\)</span>, equation <a class="reference internal" href="#equation-levenberg">(99)</a> is increasingly close to</p>
+<div class="math notranslate nohighlight" id="equation-steepest">
+<span class="eqno">(100)<a class="headerlink" href="#equation-steepest" title="Permalink to this equation">¶</a></span>\[  \lambda \mathbf{s}_k = - \mathbf{A}_k^T \mathbf{f}_k.\]</div>
+<p>To interpret this equation, define the scalar residual function <span class="math notranslate nohighlight">\(\phi(\mathbf{x})=\mathbf{f}(\mathbf{x})^T\mathbf{f}(\mathbf{x}) = \|\mathbf{f}(\mathbf{x})\|^2\)</span>. Finding a root of <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> is equivalent to minimizing <span class="math notranslate nohighlight">\(\phi\)</span>. A calculation shows that the gradient of <span class="math notranslate nohighlight">\(\phi\)</span> is</p>
+<div class="math notranslate nohighlight" id="equation-nlsgradient">
+<span class="eqno">(101)<a class="headerlink" href="#equation-nlsgradient" title="Permalink to this equation">¶</a></span>\[   \nabla \phi(\mathbf{x}) = 2 \mathbf{J}(\mathbf{x})^T \mathbf{f}(\mathbf{x}).\]</div>
+<p>Hence if <span class="math notranslate nohighlight">\(\mathbf{A}_k=\mathbf{J}(\mathbf{x}_k)\)</span>, then <span class="math notranslate nohighlight">\(\mathbf{s}_k\)</span> from <a class="reference internal" href="#equation-steepest">(100)</a> is in the opposite direction from the gradient vector. In vector calculus you learn that this direction is the one of most rapid decrease; for this reason <a class="reference internal" href="#equation-steepest">(100)</a> is called the <strong>steepest descent direction.</strong> \index{steepest descent} A small enough step in this direction is guaranteed (in all but pathological cases) to decrease <span class="math notranslate nohighlight">\(\phi\)</span>, which is exactly what we want from a backup plan.</p>
+<p>In summary, the <span class="math notranslate nohighlight">\(\lambda\)</span> parameter in <a class="reference internal" href="#equation-levenberg">(99)</a> allows a smooth transition between the pure Newton step, for which convergence is very rapid (i.e., near a root), and a small step in the descent direction, which guarantees some progress for the iteration when we are far from a root. To make the Levenberg step computation into an algorithm, we will combine it with an accept/reject strategy as described above.</p>
+</div>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/quasi-levenberg.html"><span class="doc">Using levenberg</span></a></p>
+</div>
+<p>To a large extent the incorporation of finite differences, Jacobian updates, and Levenberg step are independent. <a class="reference internal" href="#function-levenberg"><span class="std std-ref">levenberg</span></a> shows how they might be combined. This function is one of the most logically complex we have encountered so far.</p>
+<p>First observe that we have introduced a MATLAB convenience feature: <em>optional input parameters</em>. The keyword “nargin” inside a function evaluates to the number of input arguments that were provided by the caller. In this case we supply a default value for the third argument, “tol”, if none was specified by the caller. Most modern computing languages have  analogous mechanisms for accepting a variable number of input parameters. A common use case is what we have done here, allowing the optional override of a default setting.</p>
+<p>Each pass through the loop starts by using <a class="reference internal" href="#equation-levenberg">(99)</a> to propose a step <span class="math notranslate nohighlight">\(\mathbf{s}_k\)</span>. The algorithm then asks whether using this step would decrease the value of <span class="math notranslate nohighlight">\(\|\mathbf{f}\|\)</span> from its present value. If so, <span class="math notranslate nohighlight">\(\mathbf{x}_k+\mathbf{s}_k\)</span> is the new root estimate; since the iteration is going well, we decrease <span class="math notranslate nohighlight">\(\lambda\)</span> (i.e., get more Newton-like) and apply the Broyden formula to get a fast update of the Jacobian. If the proposed step is not successful, we increase <span class="math notranslate nohighlight">\(\lambda\)</span> (more descent-like) and, if the current Jacobian was the result of a cheap update, use finite differences to reevaluate it. Whether or not the step was accepted, everything is set up for the next loop iteration. Note that the loop iterations no longer correspond to the (quasi-)Newton iteration counter <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>Finally, we draw attention to lines 50–52. Rather than issuing a warning if the number of iterations is too large, we do it when the final residual is fairly large. This is done to avoid silently returning a value that is easily seen to be incorrect.</p>
+<div class="proof proof-type-function" id="id2">
+<span id="function-levenberg"></span>
+    <div class="proof-title">
+        <span class="proof-type">Function 40</span>
+        
+            <span class="proof-title-name">(levenberg)</span>
+        
+    </div><div class="proof-content">
+<p><strong>Quasi-Newton method for nonlinear systems.</strong></p>
+<div class="highlight-julia notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">levenberg(f,x1,tol)</span>
+
+<span class="s">Use Levenberg&#39;s quasi-Newton iteration to find a root of the system</span>
+<span class="s">`f`, starting from `x1`, with `tol` as the stopping tolerance in</span>
+<span class="s">both step size and residual norm. Returns root estimates as a</span>
+<span class="s">matrix, one estimate per column.</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">function</span> <span class="n">levenberg</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span>
+
+<span class="c"># Operating parameters.</span>
+<span class="n">ftol</span> <span class="o">=</span> <span class="n">tol</span><span class="p">;</span>  <span class="n">xtol</span> <span class="o">=</span> <span class="n">tol</span><span class="p">;</span>  <span class="n">maxiter</span> <span class="o">=</span> <span class="mi">40</span><span class="p">;</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span><span class="n">maxiter</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">float</span><span class="p">(</span><span class="n">x1</span><span class="p">)]</span>
+<span class="n">fk</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>  <span class="n">s</span> <span class="o">=</span> <span class="nb">Inf</span><span class="p">;</span>
+<span class="n">Ak</span> <span class="o">=</span> <span class="n">fdjac</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">fk</span><span class="p">)</span>   <span class="c"># start with FD Jacobian</span>
+<span class="n">jac_is_new</span> <span class="o">=</span> <span class="kc">true</span>
+
+<span class="n">lambda</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">xtol</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">fk</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">ftol</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">k</span> <span class="o">&lt;</span> <span class="n">maxiter</span><span class="p">)</span>
+    <span class="c"># Compute the proposed step.</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">Ak</span><span class="o">&#39;*</span><span class="n">Ak</span> <span class="o">+</span> <span class="n">lambda</span><span class="o">*</span><span class="nb">I</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">Ak</span><span class="o">&#39;*</span><span class="n">fk</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">B</span><span class="o">\</span><span class="n">z</span><span class="p">)</span>
+
+    <span class="n">xnew</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">s</span>
+    <span class="n">fnew</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">xnew</span><span class="p">)</span>
+
+    <span class="c"># Do we accept the result?</span>
+    <span class="k">if</span> <span class="n">norm</span><span class="p">(</span><span class="n">fnew</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">norm</span><span class="p">(</span><span class="n">fk</span><span class="p">)</span>    <span class="c"># accept</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">fnew</span> <span class="o">-</span> <span class="n">fk</span>
+        <span class="n">push!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">xnew</span><span class="p">)</span>
+        <span class="n">fk</span> <span class="o">=</span> <span class="n">fnew</span>
+        <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">lambda</span> <span class="o">=</span> <span class="n">lambda</span><span class="o">/</span><span class="mi">10</span>   <span class="c"># get closer to Newton</span>
+        <span class="c"># Broyden update of the Jacobian.</span>
+        <span class="n">Ak</span> <span class="o">=</span> <span class="n">Ak</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">Ak</span><span class="o">*</span><span class="n">s</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">&#39;/</span><span class="p">(</span><span class="n">s</span><span class="o">&#39;*</span><span class="n">s</span><span class="p">))</span>
+        <span class="n">jac_is_new</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="k">else</span>                       <span class="c"># don&#39;t accept</span>
+        <span class="c"># Get closer to steepest descent.</span>
+        <span class="n">lambda</span> <span class="o">=</span> <span class="mi">4</span><span class="n">lambda</span>
+        <span class="c"># Re-initialize the Jacobian if it&#39;s out of date.</span>
+        <span class="k">if</span> <span class="o">!</span><span class="n">jac_is_new</span>
+            <span class="n">Ak</span> <span class="o">=</span> <span class="n">fdjac</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">fk</span><span class="p">)</span>
+            <span class="n">jac_is_new</span> <span class="o">=</span> <span class="kc">true</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">fk</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-3</span><span class="p">)</span>
+    <span class="nd">@warn</span> <span class="s">&quot;Iteration did not find a root.&quot;</span>
+<span class="k">end</span>
+
+<span class="k">return</span> <span class="n">x</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table></div>
+</div></div><!-- ````{sidebar} Demo
+:class: demo
+{doc}`demos/quasi-MM`
+```` 
+-->
+<p>In some cases our simple logic in <a class="reference internal" href="#function-levenberg"><span class="std std-ref">levenberg</span></a> can make <span class="math notranslate nohighlight">\(\lambda\)</span> oscillate between small and large values; several better but more complicated strategies for controlling <span class="math notranslate nohighlight">\(\lambda\)</span> are known. In addition, the linear system <a class="reference internal" href="#equation-levenberg">(99)</a> is usually modified to get the well-known <strong>Levenberg–Marquardt</strong> algorithm, which does a superior job in some problems as <span class="math notranslate nohighlight">\(\lambda\to \infty\)</span>.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol>
+<li><p>⌨ (variation of <a class="reference internal" href="newtonsys.html#problem-spherepotential"><span class="std std-ref">earlier problem</span></a>) Two curves in the <span class="math notranslate nohighlight">\((u,v)\)</span> plane are defined implicitly by the equations <span class="math notranslate nohighlight">\(u\log u + v \log v = -0.3\)</span> and <span class="math notranslate nohighlight">\(u^4 + v^2 = 1\)</span>.</p>
+<p><strong>(a)</strong> ✍ Write the intersection of these curves in the form <span class="math notranslate nohighlight">\(\mathbf{f}(\mathbf{x}) = \boldsymbol{0}\)</span> for two-dimensional <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.</p>
+<p><strong>(b)</strong> ⌨ Use <a class="reference internal" href="#function-levenberg"><span class="std std-ref">levenberg</span></a> to find an intersection point near <span class="math notranslate nohighlight">\(u=1\)</span>, <span class="math notranslate nohighlight">\(v=0.1\)</span>.</p>
+<p><strong>(d)</strong> ⌨ Use <a class="reference internal" href="#function-levenberg"><span class="std std-ref">levenberg</span></a> to find an intersection point near <span class="math notranslate nohighlight">\(u=0.1\)</span>, <span class="math notranslate nohighlight">\(v=1\)</span>.</p>
+</li>
+<li><p>⌨ (variation of <a class="reference internal" href="newtonsys.html#problem-orbitintersect"><span class="std std-ref">earlier problem</span></a>) Two elliptical orbits <span class="math notranslate nohighlight">\((x_1(s),y_1(s))\)</span> and <span class="math notranslate nohighlight">\((x_2(t),y_2(t))\)</span> are described by the equations</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{bmatrix}
+  x_1(t) \\ y_1(t)
+\end{bmatrix}
+=
+\begin{bmatrix}
+  -5+10\cos(t) \\ 6\sin(t)
+\end{bmatrix}, \qquad
+\begin{bmatrix}
+  x_2(t)\\y_2(t)
+\end{bmatrix} =
+\begin{bmatrix}
+  8\cos(t) \\ 1+12\sin(t)
+\end{bmatrix},\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(t\)</span> represents time.</p>
+<p><strong>(a)</strong> ✍ Write out a <span class="math notranslate nohighlight">\(2\times 2\)</span> nonlinear system of equations that describes an intersection of these orbits. (Note: An intersection is not the same as a collision—they don’t have to occupy the same point at the same time.)</p>
+<p><strong>(b)</strong> ⌨ Use <a class="reference internal" href="#function-levenberg"><span class="std std-ref">levenberg</span></a> to find all of the unique intersections.</p>
+</li>
+<li><p>⌨  (variation of <a class="reference internal" href="newtonsys.html#problem-ellipsemin"><span class="std std-ref">earlier problem</span></a>) Suppose one wants to find the points on the ellipsoid <span class="math notranslate nohighlight">\(x^2/25 + y^2/16 + z^2/9 = 1\)</span> that are closest to and farthest from the point <span class="math notranslate nohighlight">\((5,4,3)\)</span>. The method of Lagrange multipliers implies that any such point satisfies</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+    x-5 &amp;= \frac{\lambda x}{25} \\
+    y-4 &amp;= \frac{\lambda y}{16} \\
+    z-3 &amp;= \frac{\lambda z}{9} \\
+    1 &amp;=  \frac{1}{25}x^2 + \frac{1}{16}y^2 + \frac{1}{9}z^2
+\end{split}\end{split}\]</div>
+<p>for an unknown value of <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<p><strong>(a)</strong> Write out this system in the form <span class="math notranslate nohighlight">\(\mathbf{f}(\mathbf{u}) = \boldsymbol{0}\)</span>. (Note that the system has four variables to go with the four equations.)</p>
+<p><strong>(b)</strong> Use <a class="reference internal" href="#function-levenberg"><span class="std std-ref">levenberg</span></a> with different initial guesses to find the two roots of this system. Which is the closest point to <span class="math notranslate nohighlight">\((5,4,3)\)</span> and which is the farthest?</p>
+</li>
+<li><p>✍ The Broyden update formula <a class="reference internal" href="#equation-broyden">(98)</a> is just one instance of so-called rank-one updating. Verify the  <em>Sherman–Morrison formula</em>,</p>
+<div class="math notranslate nohighlight">
+\[(\mathbf{A}+\mathbf{u}\mathbf{v}^T)^{-1} = \mathbf{A}^{-1} - \mathbf{A}^{-1}\frac{\mathbf{u}\mathbf{v}^T}{1+\mathbf{v}^T\mathbf{A}^{-1}\mathbf{u}}\mathbf{A}^{-1},\]</div>
+<p>valid whenever <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is invertible and the denominator above is nonzero. (Hint: Show that <span class="math notranslate nohighlight">\(\mathbf{A}+\mathbf{u}\mathbf{v}^T\)</span> times the matrix above simplifies to the identity matrix.)</p>
+</li>
+<li><p>✍ Derive equation <a class="reference internal" href="#equation-nlsgradient">(101)</a>.</p></li>
+<li><p>⌨ (see also an <a class="reference internal" href="newtonsys.html#problem-newtonsysbyhand"><span class="std std-ref">earlier problem</span></a>) Suppose that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{f}(\mathbf{x}) =
+\begin{bmatrix}
+  x_1x_2+x_2^2-1 \\[1mm] x_1x_2^3 + x_1^2x_2^2 + 1
+\end{bmatrix}.\end{split}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{x}_1=[-2,1]^T\)</span> and let <span class="math notranslate nohighlight">\(\mathbf{A}_1=\mathbf{J}(\mathbf{x}_1)\)</span> be the exact Jacobian.</p>
+<p><strong>(a)</strong> Solve <a class="reference internal" href="#equation-levenberg">(99)</a> for <span class="math notranslate nohighlight">\(\mathbf{s}_1\)</span> with <span class="math notranslate nohighlight">\(\lambda=0\)</span>; this is the “pure” Newton step. Show numerically that <span class="math notranslate nohighlight">\(\|\mathbf{f}(\mathbf{x}_1+\mathbf{s}_1)\| &gt; \|\mathbf{f}(\mathbf{x}_1)\|\)</span>. (Thus, the Newton step made us go to a point seemingly farther from a root than where we started.)</p>
+<p><strong>(b)</strong> Now repeat part (a) with <span class="math notranslate nohighlight">\(\lambda=0.01j\)</span> for <span class="math notranslate nohighlight">\(j=1,2,3,\ldots\)</span>. What is the smallest value of <span class="math notranslate nohighlight">\(j\)</span> such that <span class="math notranslate nohighlight">\(\|\mathbf{f}(\mathbf{x}_1+\mathbf{s}_1)\| &lt; \|\mathbf{f}(\mathbf{x}_1)\|\)</span>?</p>
+</li>
+<li><p>✍ Show that the Levenberg equation <a class="reference internal" href="#equation-levenberg">(99)</a> is equivalent to the linear least squares problem</p>
+<div class="math notranslate nohighlight">
+\[\min_{\mathbf{v}} \Bigl(  \bigl\|\mathbf{A}_k\mathbf{v} + \mathbf{f}_k\bigr\|_2^2 +
+\lambda^2 \bigl\| \mathbf{v} \bigr\|_2^2 \Bigr).\]</div>
+<p>(Hint: Express the minimized quantity using block matrix notation.)</p>
+<p>Thus another interpretation of Levenberg’s method is that it is the Newton step plus a penalty, weighted by <span class="math notranslate nohighlight">\(\lambda\)</span>, for taking large steps.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="newtonsys.html" title="previous page">Newton for nonlinear systems</a>
+    <a class='right-next' id="next-link" href="nlsq.html" title="next page">Nonlinear least squares</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tobin A. Driscoll and Richard J. Braun<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

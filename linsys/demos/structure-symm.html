@@ -1,0 +1,395 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Symmetric LU &#8212; Fundamentals of Numerical Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/sphinx-book-theme.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/mystnb.js"></script>
+    <script src="../../_static/proof.js"></script>
+    <script src="../../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Cholesky factorization" href="structure-cholesky.html" />
+    <link rel="prev" title="Timing for banded matrices" href="structure-timing.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fundamentals of Numerical Computation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../../frontmatter.html">Home</a>
+  </li>
+  <li class="">
+    <a href="../../intro/overview.html">Introduction</a>
+  </li>
+  <li class="">
+    <a href="../overview.html">Square linear systems</a>
+  </li>
+  <li class="">
+    <a href="../../leastsq/overview.html">Overdetermined linear systems</a>
+  </li>
+  <li class="">
+    <a href="../../nonlineqn/overview.html">Roots of nonlinear equations</a>
+  </li>
+  <li class="">
+    <a href="../../localapprox/overview.html">Piecewise interpolation</a>
+  </li>
+  <li class="">
+    <a href="../../ivp/overview.html">Initial-value problems for ODEs</a>
+  </li>
+  <li class="">
+    <a href="../../appendix/linear-algebra.html">Review: Linear algebra</a>
+  </li>
+  <li class="active">
+    <a href="../../appendix/demos.html">All demo notebooks</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="../../appendix/demos-01.html">Chapter 1 (Introduction)</a>
+    </li>
+    <li class="active">
+      <a href="../../appendix/demos-02.html">Chapter 2 (Linear systems)</a>
+      <ul class="nav sidenav_l3">
+      <li class="">
+        <a href="interp-vander.html">Interpolating the population of China</a>
+      </li>
+      <li class="">
+        <a href="matrices-julia.html">Vectors and matrices in Julia</a>
+      </li>
+      <li class="">
+        <a href="systems-backslash.html">Backslash for solving linear systems</a>
+      </li>
+      <li class="">
+        <a href="systems-triangular.html">Solving triangular systems</a>
+      </li>
+      <li class="">
+        <a href="lu-gauss.html">Gaussian elimination</a>
+      </li>
+      <li class="">
+        <a href="lu-factors.html">Row operations</a>
+      </li>
+      <li class="">
+        <a href="lu-function.html">Using LU factorization</a>
+      </li>
+      <li class="">
+        <a href="flops-mvmult.html">Timing and flop counts</a>
+      </li>
+      <li class="">
+        <a href="flops-loglog.html">Timing matrix-vector multiplication</a>
+      </li>
+      <li class="">
+        <a href="flops-lufact.html">Timing of LU factorization</a>
+      </li>
+      <li class="">
+        <a href="pivot-fail.html">Failure of plain LU factorization</a>
+      </li>
+      <li class="">
+        <a href="pivot-fixed.html">Row pivoting</a>
+      </li>
+      <li class="">
+        <a href="norms-vector.html">Vector norms</a>
+      </li>
+      <li class="">
+        <a href="norms-matrix.html">Matrix norms</a>
+      </li>
+      <li class="">
+        <a href="condition-bound.html">Condition number bounds on error</a>
+      </li>
+      <li class="">
+        <a href="structure-banded.html">Banded matrices</a>
+      </li>
+      <li class="">
+        <a href="structure-timing.html">Timing for banded matrices</a>
+      </li>
+      <li class="active">
+        <a href="">Symmetric LU</a>
+      </li>
+      <li class="">
+        <a href="structure-cholesky.html">Cholesky factorization</a>
+      </li>
+    </ul>
+    </li>
+    <li class="">
+      <a href="../../appendix/demos-03.html">Chapter 3 (Least squares)</a>
+    </li>
+    <li class="">
+      <a href="../../appendix/demos-04.html">Chapter 4 (Rootfinding)</a>
+    </li>
+    <li class="">
+      <a href="../../appendix/demos-05.html">Chapter 5 (Piecewise)</a>
+    </li>
+    <li class="">
+      <a href="../../appendix/demos-06.html">Chapter 6 (IVPs)</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../../refs.html">References</a>
+  </li>
+  <li class="">
+    <a href="../../genindex.html">Index</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../../_sources/linsys/demos/structure-symm.ipynb"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.ipynb</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="symmetric-lu">
+<h1>Symmetric LU<a class="headerlink" href="#symmetric-lu" title="Permalink to this headline">¶</a></h1>
+<p>We begin with a symmetric <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span>  <span class="mi">2</span>     <span class="mi">4</span>     <span class="mi">4</span>     <span class="mi">2</span>
+       <span class="mi">4</span>     <span class="mi">5</span>     <span class="mi">8</span>    <span class="o">-</span><span class="mi">5</span>
+       <span class="mi">4</span>     <span class="mi">8</span>     <span class="mi">6</span>     <span class="mi">2</span>
+       <span class="mi">2</span>    <span class="o">-</span><span class="mi">5</span>     <span class="mi">2</span>   <span class="o">-</span><span class="mi">26</span> <span class="p">];</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Carrying out our usual elimination in the first column leads us to</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">LinearAlgebra</span>
+<span class="n">L1</span> <span class="o">=</span> <span class="n">diagm</span><span class="p">(</span><span class="mi">0</span><span class="o">=&gt;</span><span class="n">ones</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">L1</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">A1</span> <span class="o">=</span> <span class="n">L1</span><span class="o">*</span><span class="n">A</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>4×4 Array{Float64,2}:
+ 2.0   4.0   4.0    2.0
+ 0.0  -3.0   0.0   -9.0
+ 0.0   0.0  -2.0   -2.0
+ 0.0  -9.0  -2.0  -28.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>But now let’s note that if we transpose this result, we have the same first column as before! So we could apply  again and then transpose back.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A2</span> <span class="o">=</span> <span class="p">(</span><span class="n">L1</span><span class="o">*</span><span class="n">A1</span><span class="s1">&#39;)&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>4×4 Adjoint{Float64,Array{Float64,2}}:
+ 2.0   0.0   0.0    0.0
+ 0.0  -3.0   0.0   -9.0
+ 0.0   0.0  -2.0   -2.0
+ 0.0  -9.0  -2.0  -28.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using transpose identities, this is just</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A2</span> <span class="o">=</span> <span class="n">A1</span><span class="o">*</span><span class="n">L1</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>4×4 Array{Float64,2}:
+ 2.0   0.0   0.0    0.0
+ 0.0  -3.0   0.0   -9.0
+ 0.0   0.0  -2.0   -2.0
+ 0.0  -9.0  -2.0  -28.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now you can see how we proceed down and to the right, eliminating in a column and then symmetrically in the corresponding row.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L2</span> <span class="o">=</span> <span class="n">diagm</span><span class="p">(</span><span class="mi">0</span><span class="o">=&gt;</span><span class="n">ones</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">L2</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">A3</span> <span class="o">=</span> <span class="n">L2</span><span class="o">*</span><span class="n">A2</span><span class="o">*</span><span class="n">L2</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>4×4 Array{Float64,2}:
+ 2.0   0.0   0.0   0.0
+ 0.0  -3.0   0.0   0.0
+ 0.0   0.0  -2.0  -2.0
+ 0.0   0.0  -2.0  -1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we arrive at a diagonal matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L3</span> <span class="o">=</span> <span class="n">diagm</span><span class="p">(</span><span class="mi">0</span><span class="o">=&gt;</span><span class="n">ones</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">L3</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">L3</span><span class="o">*</span><span class="n">A3</span><span class="o">*</span><span class="n">L3</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>4×4 Array{Float64,2}:
+ 2.0   0.0   0.0  0.0
+ 0.0  -3.0   0.0  0.0
+ 0.0   0.0  -2.0  0.0
+ 0.0   0.0   0.0  1.0
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="structure-timing.html" title="previous page">Timing for banded matrices</a>
+    <a class='right-next' id="next-link" href="structure-cholesky.html" title="next page">Cholesky factorization</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tobin A. Driscoll and Richard J. Braun<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../../_static/js/index.js"></script>
+    
+  </body>
+</html>

@@ -1,0 +1,491 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Piecewise linear interpolation &#8212; Fundamentals of Numerical Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/mystnb.js"></script>
+    <script src="../_static/proof.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Cubic splines" href="splines.html" />
+    <link rel="prev" title="The interpolation problem" href="interpolation.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fundamentals of Numerical Computation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../frontmatter.html">Home</a>
+  </li>
+  <li class="">
+    <a href="../intro/overview.html">Introduction</a>
+  </li>
+  <li class="">
+    <a href="../linsys/overview.html">Square linear systems</a>
+  </li>
+  <li class="">
+    <a href="../leastsq/overview.html">Overdetermined linear systems</a>
+  </li>
+  <li class="">
+    <a href="../nonlineqn/overview.html">Roots of nonlinear equations</a>
+  </li>
+  <li class="active">
+    <a href="overview.html">Piecewise interpolation</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="interpolation.html">The interpolation problem</a>
+    </li>
+    <li class="active">
+      <a href="">Piecewise linear interpolation</a>
+    </li>
+    <li class="">
+      <a href="splines.html">Cubic splines</a>
+    </li>
+    <li class="">
+      <a href="finitediffs.html">Finite differences</a>
+    </li>
+    <li class="">
+      <a href="fd-converge.html">Convergence of finite differences</a>
+    </li>
+    <li class="">
+      <a href="integration.html">Numerical integration</a>
+    </li>
+    <li class="">
+      <a href="adaptive.html">Adaptive integration</a>
+    </li>
+    <li class="">
+      <a href="next.html">Next steps</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../ivp/overview.html">Initial-value problems for ODEs</a>
+  </li>
+  <li class="">
+    <a href="../appendix/linear-algebra.html">Review: Linear algebra</a>
+  </li>
+  <li class="">
+    <a href="../appendix/demos.html">All demo notebooks</a>
+  </li>
+  <li class="">
+    <a href="../refs.html">References</a>
+  </li>
+  <li class="">
+    <a href="../genindex.html">Index</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../_sources/localapprox/pwlin.md"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#hat-functions" class="nav-link">Hat functions</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#cardinality-conditions" class="nav-link">Cardinality conditions</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#conditioning-and-convergence" class="nav-link">Conditioning and convergence</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#exercises" class="nav-link">Exercises</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="piecewise-linear-interpolation">
+<h1>Piecewise linear interpolation<a class="headerlink" href="#piecewise-linear-interpolation" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">Piecewise linear interpolation is simply a game of connect-the-dots. Let us assume the nodes are given in order, so that <span class="math notranslate nohighlight">\(t_0 &lt; t_1 &lt; \cdots &lt; t_n\)</span>. Between each pair of adjacent nodes, we use a straight line segment. The resulting interpolant <span class="math notranslate nohighlight">\(p(x)\)</span> is given by</p>
+<div class="math notranslate nohighlight" id="equation-pwlinear">
+<span class="eqno">(107)<a class="headerlink" href="#equation-pwlinear" title="Permalink to this equation">¶</a></span>\[p(x) = y_k + \frac{y_{k+1}-y_k}{t_{k+1}-t_k}(x-t_k), \quad \text{ for } x\in[t_k,t_{k+1}].\]</div>
+<p>It should be clear that on each interval <span class="math notranslate nohighlight">\([t_k,t_{k+1}]\)</span>, <span class="math notranslate nohighlight">\(p(x)\)</span> is a linear function, and you can easily verify from the formula that it passes through both <span class="math notranslate nohighlight">\((t_k,y_k)\)</span> and <span class="math notranslate nohighlight">\((t_{k+1},y_{k+1})\)</span>.</p>
+<div class="section" id="hat-functions">
+<h2>Hat functions<a class="headerlink" href="#hat-functions" title="Permalink to this headline">¶</a></h2>
+<p>Rather than basing an implementation on <a class="reference internal" href="#equation-pwlinear">(107)</a>, we return to the idea used in <a class="reference internal" href="../linsys/demos/interp-vander.html"><span class="doc">Interpolating the population of China</span></a> of choosing the interpolant from among the linear combinations of a preselected finite set of functions. In the present context we use</p>
+<div class="math notranslate nohighlight" id="equation-hatfun">
+<span class="eqno">(108)<a class="headerlink" href="#equation-hatfun" title="Permalink to this equation">¶</a></span>\[\begin{split}  H_k(x) =
+  \begin{cases}
+    \dfrac{x-t_{k-1}}{t_k-t_{k-1}}, &amp; \text{if $x\in[t_{k-1},t_k]$},\\[2.5ex]
+    \dfrac{t_{k+1}-x}{t_{k+1}-t_{k}}, &amp; \text{if
+      $x\in[t_{k},t_{k+1}]$},\\[2.5ex]
+    0, &amp; \text{otherwise},
+  \end{cases} \qquad  k=0,\ldots,n.\end{split}\]</div>
+<p id="index-1">The functions <span class="math notranslate nohighlight">\(H_0,\ldots,H_n\)</span> are called <a class="reference internal" href="overview.html#term-hat-functions"><span class="xref std std-term">hat functions</span></a>. They depend on the node vector <span class="math notranslate nohighlight">\(\mathbf{t}\)</span>, but this dependence is not usually indicated explicitly.</p>
+<p>Each hat function is globally continuous and is linear inside every interval <span class="math notranslate nohighlight">\([t_k,t_{k+1}]\)</span>.  Consequently, any linear combination of them will have the same property. Furthermore, <em>any</em> such function is expressible as a unique linear combination of hat functions, i.e,</p>
+<div class="math notranslate nohighlight" id="equation-plbasis">
+<span class="eqno">(109)<a class="headerlink" href="#equation-plbasis" title="Permalink to this equation">¶</a></span>\[  \sum_{k=0}^n c_k H_k(x),\]</div>
+<p>for some choice of the coefficients <span class="math notranslate nohighlight">\(c_0,\ldots,c_n\)</span>. No smaller set of functions can have the same properties. We summarize these facts by calling the hat functions a <strong>basis</strong> of the set of functions that are continuous and piecewise linear relative to <span class="math notranslate nohighlight">\(\mathbf{t}\)</span>.  Another point of view, familiar from abstract linear algebra, is that a basis sets up a one-to-one correspondence between the spanned function space and the more familiar space <span class="math notranslate nohighlight">\(\mathbb{R}^{n+1}\)</span>, with each function being represented by its coefficients <span class="math notranslate nohighlight">\(c_0,\ldots,c_n\)</span>.</p>
+<p>Note that the definitions of <span class="math notranslate nohighlight">\(H_0\)</span> for <span class="math notranslate nohighlight">\(x&lt;t_0\)</span> and <span class="math notranslate nohighlight">\(H_n\)</span> for <span class="math notranslate nohighlight">\(x&gt;t_n\)</span> are irrelevant—a fact exploited by the implementation given in <a class="reference internal" href="#function-hatfun"><span class="std std-ref">hatfun</span></a> through the introduction of two fictitious nodes lying on either side of the interval <span class="math notranslate nohighlight">\([t_0,t_n]\)</span>. This trick allows the use of an identical formula for all of the hat functions. Otherwise, we would need to take special action for the two edge cases <span class="math notranslate nohighlight">\(H_0\)</span> and <span class="math notranslate nohighlight">\(H_n\)</span>.</p>
+<div class="proof proof-type-function" id="id1">
+<span id="function-hatfun"></span>
+    <div class="proof-title">
+        <span class="proof-type">Function 45</span>
+        
+            <span class="proof-title-name">(hatfun)</span>
+        
+    </div><div class="proof-content">
+<p><strong>Hat function/piecewise linear basis function.</strong></p>
+<div class="highlight-julia notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">hatfun(x,t,k)</span>
+
+<span class="s">Evaluate a piecewise linear &quot;hat&quot; function at `x`, where `t` is a</span>
+<span class="s">vector of n+1 interpolation nodes and `k` is an integer in 0:n</span>
+<span class="s">giving the index of the node where the hat function equals one.</span>
+<span class="s">&quot;&quot;&quot;</span>
+
+<span class="k">function</span> <span class="n">hatfun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+    <span class="c"># Return correct node given mathematical index k, including</span>
+    <span class="c"># fictitious choices.   </span>
+    <span class="k">function</span> <span class="n">node</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">0</span>
+            <span class="mi">2</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">elseif</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="n">n</span> 
+            <span class="mi">2</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> 
+        <span class="k">else</span>
+            <span class="n">t</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="n">H1</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">node</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">node</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">-</span><span class="n">node</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>   <span class="c"># upward slope</span>
+    <span class="n">H2</span> <span class="o">=</span> <span class="p">(</span><span class="n">node</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">node</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">node</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>   <span class="c"># downward slope</span>
+
+    <span class="n">H</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">H1</span><span class="p">,</span><span class="n">H2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">H</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table></div>
+</div></div><div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/pwlin-hat.html"><span class="doc">Hat functions</span></a></p>
+</div>
+<p>Another trick in <a class="reference internal" href="#function-hatfun"><span class="std std-ref">hatfun</span></a> is to exploit the observation that at each <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(H_k(x)\)</span> is the larger of two options: zero, or the smaller of two linear functions (those appearing in <a class="reference internal" href="#equation-hatfun">(108)</a>). This code is not the most efficient one possible, but it is more concise than detecting which particular subinterval each <span class="math notranslate nohighlight">\(x\)</span> lies within.</p>
+</div>
+<div class="section" id="cardinality-conditions">
+<h2>Cardinality conditions<a class="headerlink" href="#cardinality-conditions" title="Permalink to this headline">¶</a></h2>
+<p id="index-2">For the purposes of interpolation, the most salient property of the hat functions is that they are cardinal functions for piecewise linear interpolation; that is, they satisfy the <strong>cardinality conditions</strong></p>
+<div class="math notranslate nohighlight" id="equation-cardinalcond">
+<span class="eqno">(110)<a class="headerlink" href="#equation-cardinalcond" title="Permalink to this equation">¶</a></span>\[\begin{split}H_k(t_i) =
+\begin{cases}
+  1, &amp;\text{if $i=k$,}\\
+  0, &amp; \text{otherwise.}
+\end{cases}\end{split}\]</div>
+<p>The appeal of a cardinal basis is that it makes the expression of the interpolant trivial. All candidate piecewise linear (PL) functions can be expressed as a linear combination such as <a class="reference internal" href="#equation-plbasis">(109)</a> for some coefficients <span class="math notranslate nohighlight">\(c_0,\ldots,c_n\)</span>. But because of the cardinality conditions and the necessity for <span class="math notranslate nohighlight">\(p(x)\)</span> to interpolate the data values in <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>, \texthighlight{cardinalexpress}{expressing the interpolant using the hat functions is trivial:}</p>
+<div class="math notranslate nohighlight" id="equation-plbasissol">
+<span class="eqno">(111)<a class="headerlink" href="#equation-plbasissol" title="Permalink to this equation">¶</a></span>\[  p(x) = \sum_{k=0}^n y_k H_k(x).\]</div>
+<div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/pwlin-usage.html"><span class="doc">Piecewise linear interpolation</span></a></p>
+</div>
+<p>The resulting algorithmic simplicity is reflected in <a class="reference internal" href="#function-plinterp"><span class="std std-ref">plinterp</span></a>. Take note that the output of <a class="reference internal" href="#function-plinterp"><span class="std std-ref">plinterp</span></a> is itself a function, meant to be called with a single argument representing values of <span class="math notranslate nohighlight">\(x\)</span>. Our mathematical viewpoint is that the result of an interpolation process is a function, and our codes reflect this.</p>
+<p>A final appealing characteristic of the hat function basis is that it depends only on the node locations, while the expansion coefficients in <a class="reference internal" href="#equation-plbasis">(109)</a> depend only on the data values. This clean separation would be useful if we wanted to construct many interpolants on the same node set, and it has deeper theoretical uses as well.</p>
+<div class="proof proof-type-function" id="id2">
+<span id="function-plinterp"></span>
+    <div class="proof-title">
+        <span class="proof-type">Function 46</span>
+        
+            <span class="proof-title-name">(plinterp)</span>
+        
+    </div><div class="proof-content">
+<p><strong>Piecewise linear interpolation.</strong></p>
+<div class="highlight-julia notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">plinterp(t,y)</span>
+
+<span class="s">Create a piecewise linear interpolating function for data values in</span>
+<span class="s">`y` given at nodes in `t`.</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">function</span> <span class="n">plinterp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+<span class="k">return</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">sum</span><span class="p">(</span> <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">hatfun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="kp">in</span> <span class="mi">0</span><span class="o">:</span><span class="n">n</span> <span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table></div>
+</div></div></div>
+<div class="section" id="conditioning-and-convergence">
+<h2>Conditioning and convergence<a class="headerlink" href="#conditioning-and-convergence" title="Permalink to this headline">¶</a></h2>
+<p>The condition number bounds from \thmref{interp-conditioning} are very simple for piecewise linear interpolation, because the interpolant of the data <span class="math notranslate nohighlight">\(\mathbf{e}_k\)</span> is just the hat function <span class="math notranslate nohighlight">\(H_k\)</span>. Hence <span class="math notranslate nohighlight">\(1\le \kappa \le n+1\)</span>. However, there is an even simpler result.</p>
+<div class="proof proof-type-theorem" id="id3">
+<span id="index-3"></span>
+    <div class="proof-title">
+        <span class="proof-type">Theorem 47</span>
+        
+            <span class="proof-title-name">(Conditioning of PL interpolation)</span>
+        
+    </div><div class="proof-content">
+<p>The absolute condition number of piecewise linear interpolation in the infinity norm equals one. More specifically, if <span class="math notranslate nohighlight">\(\mathcal{I}\)</span> is the piecewise linear interpolation operator, then</p>
+<div class="math notranslate nohighlight" id="equation-plcondition">
+<span class="eqno">(112)<a class="headerlink" href="#equation-plcondition" title="Permalink to this equation">¶</a></span>\[\| \mathcal{I}(\mathbf{y}+\mathbf{z}) - \mathcal{I}(\mathbf{y}) \|_\infty = \|\mathbf{z}\|_\infty.\]</div>
+<p>(The norm on the left side is on functions, while the norm on the right side is on vectors.)</p>
+</div></div><div class="proof proof-type-proof">
+
+    <div class="proof-title">
+        <span class="proof-type">Proof </span>
+        
+    </div><div class="proof-content">
+<p>By linearity,</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{I}(\mathbf{y}+\mathbf{z}) - \mathcal{I}(\mathbf{y}) = \mathcal{I}(\mathbf{z}) = \sum_{k=0}^n z_k H_k(x).\]</div>
+<p>Call this piecewise linear function <span class="math notranslate nohighlight">\(p(x)\)</span>. Consider a maximum element of <span class="math notranslate nohighlight">\(\mathbf{z}\)</span>, i.e. choose <span class="math notranslate nohighlight">\(i\)</span> such that <span class="math notranslate nohighlight">\(|z_i|=\|\mathbf{z}\|_\infty\)</span>. Then <span class="math notranslate nohighlight">\(|p(t_i)|=\|\mathbf{z}\|_\infty\)</span>. Hence <span class="math notranslate nohighlight">\(\|p\|_\infty\ge \|\mathbf{z}\|_\infty\)</span>. Now consider</p>
+<div class="math notranslate nohighlight">
+\[|p(x)| = \left|\sum_{k=0}^n z_k H_k(x)\right| \le \sum_{k=0}^n |z_k| H_k(x) \le \|\mathbf{z}\|_\infty \sum_{k=0}^n H_k(x) = \|\mathbf{z}\|_\infty.\]</div>
+<p>You are asked to prove the final step above in <a class="reference internal" href="#problem-plpartunity"><span class="std std-ref">an exercise</span></a>. We conclude that  <span class="math notranslate nohighlight">\(\|p\|_\infty\le \|\mathbf{z}\|_\infty\)</span>, so that <span class="math notranslate nohighlight">\(\|p\|_\infty = \|\mathbf{z}\|_\infty\)</span>, which completes the proof.</p>
+</div></div><p>Now suppose that <span class="math notranslate nohighlight">\(f\)</span> is a “nice” function on an interval <span class="math notranslate nohighlight">\([a,b]\)</span> containing all of the nodes. We can play a game of sampling values of <span class="math notranslate nohighlight">\(f\)</span> to get data, i.e. <span class="math notranslate nohighlight">\(y_k=f(t_k)\)</span> for all <span class="math notranslate nohighlight">\(k\)</span>, then perform piecewise linear interpolation of the data to get a different function, the interpolant <span class="math notranslate nohighlight">\(p\)</span>. How close is <span class="math notranslate nohighlight">\(p\)</span> to the original <span class="math notranslate nohighlight">\(f\)</span>? To make a simple statement, we will consider only the case of equally spaced nodes covering the interval.</p>
+<div class="proof proof-type-theorem" id="id4">
+<span id="theorem-placcuracy"></span>
+    <div class="proof-title">
+        <span class="proof-type">Theorem 48</span>
+        
+            <span class="proof-title-name">(Convergence of PL interpolation)</span>
+        
+    </div><div class="proof-content">
+<p>Suppose that <span class="math notranslate nohighlight">\(f(x)\)</span> has a continuous second derivative in <span class="math notranslate nohighlight">\([a,b]\)</span> (often expressed as <span class="math notranslate nohighlight">\(f\in C^2[a,b]\)</span>). Let <span class="math notranslate nohighlight">\(p_n(x)\)</span> be the piecewise linear interpolant of <span class="math notranslate nohighlight">\(\bigl(t_i,f(t_i)\bigr)\)</span> for <span class="math notranslate nohighlight">\(i=0,\ldots,n\)</span>, where <span class="math notranslate nohighlight">\(t_i=a+i h\)</span> and <span class="math notranslate nohighlight">\(h=(b-a)/n\)</span>. Then</p>
+<div class="math notranslate nohighlight" id="equation-placcuracy">
+<span class="eqno">(113)<a class="headerlink" href="#equation-placcuracy" title="Permalink to this equation">¶</a></span>\[\bigl\| f - p_n \bigr\|_\infty = \max_{x \in [a,b]}
+|f(x)-p(x)| \le M h^2,\]</div>
+<p>where <span class="math notranslate nohighlight">\(M = \bigl\| f'' \bigr\|_\infty\)</span>.</p>
+</div></div><p>For an outline of a proof, see <a class="reference internal" href="#problem-placcuracy"><span class="std std-ref">this exercise</span></a>.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Piecewise linear interpolation is second-order accurate.</p>
+</div>
+<div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/pwlin-converge.html"><span class="doc">Convergence of PL interpolation</span></a></p>
+</div>
+<p>We normally don’t have access to <span class="math notranslate nohighlight">\(f''\)</span>, so the importance of the <a class="reference internal" href="#theorem-placcuracy"><span class="std std-ref">convergence theorem</span></a> is that the error in the interpolant is <span class="math notranslate nohighlight">\(O(h^2)\)</span> as <span class="math notranslate nohighlight">\(h\to 0\)</span>. The leading exponent of 2 is described by saying that piecewise linear interpolation is second-order accurate. For instance, if we double the number of equally spaced nodes used to sample a function, the piecewise linear interpolant becomes about four times more accurate.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol>
+<li><p>⌨ For each of the functions and intervals given, perform piecewise linear interpolation using <a class="reference internal" href="#function-plinterp"><span class="std std-ref">plinterp</span></a> for equispaced nodes with <span class="math notranslate nohighlight">\(n=10,20,40,80,160\)</span>. For each <span class="math notranslate nohighlight">\(n\)</span>, estimate the error</p>
+<div class="math notranslate nohighlight">
+\[E(n) = \| f-p \|_\infty = \max_x | f(x) - p(x) |\]</div>
+<p>by evaluating the function and interpolant at 1600 points in the interval. Make a log–log plot of <span class="math notranslate nohighlight">\(E\)</span> as a function of <span class="math notranslate nohighlight">\(n\)</span> and add the line <span class="math notranslate nohighlight">\(E=Cn^{-2}\)</span> for a constant <span class="math notranslate nohighlight">\(C\)</span> of your choosing.</p>
+<p><strong>(a)</strong> <span class="math notranslate nohighlight">\(\cos(\pi^2 x^2)\)</span> on <span class="math notranslate nohighlight">\([0,1]\)</span></p>
+<p><strong>(b)</strong> <span class="math notranslate nohighlight">\(\log(x)\)</span> on <span class="math notranslate nohighlight">\([1,3]\)</span></p>
+<p><strong>(c)</strong> <span class="math notranslate nohighlight">\(\sin(x^2)\)</span> on <span class="math notranslate nohighlight">\([0,2.5]\)</span></p>
+</li>
+<li><p>✍ For this problem, let <span class="math notranslate nohighlight">\(H(x)\)</span> be the hat  function that passes through the three points <span class="math notranslate nohighlight">\((-1,0)\)</span>, <span class="math notranslate nohighlight">\((0,1)\)</span>, and <span class="math notranslate nohighlight">\((1,0)\)</span>.</p>
+<p><strong>(a)</strong> Write out a piecewise definition of <span class="math notranslate nohighlight">\(H\)</span> in the style of <a class="reference internal" href="#equation-hatfun">(108)</a>.</p>
+<p><strong>(b)</strong> Define the function <span class="math notranslate nohighlight">\(Q\)</span> by <span class="math notranslate nohighlight">\(Q(x) = \int_{x-1}^x H(t)\, dt\)</span>. Find a piecewise formula for <span class="math notranslate nohighlight">\(Q(x)\)</span>. (Hint: Perform the integration separately for the cases <span class="math notranslate nohighlight">\(-1\le x \le 0\)</span>, <span class="math notranslate nohighlight">\(0\le x \le 1\)</span>, etc.)</p>
+<p><strong>(c)</strong> Make a sketch of <span class="math notranslate nohighlight">\(Q(x)\)</span> for <span class="math notranslate nohighlight">\(-2\le x \le 2\)</span>.</p>
+<p><strong>(d)</strong> Show that <span class="math notranslate nohighlight">\(Q\)</span> is continuous. Are <span class="math notranslate nohighlight">\(Q'\)</span> and <span class="math notranslate nohighlight">\(Q''\)</span>?</p>
+</li>
+<li><p>✍ Before electronic calculators, the function <span class="math notranslate nohighlight">\(\ln(x)\)</span> was often computed using piecewise linear interpolation with a table of values. If you were using such a table at the nodes <span class="math notranslate nohighlight">\(1.01,1.02,\ldots,1.99,2\)</span>, what is an upper bound on the error in the result?</p>
+</li>
+<li id="problem-plpartunity"><p>✍ Show that for any node distribution and any <span class="math notranslate nohighlight">\(x\in[t_0,t_n]\)</span>,</p>
+<div class="math notranslate nohighlight" id="equation-plpu">
+<span class="eqno">(114)<a class="headerlink" href="#equation-plpu" title="Permalink to this equation">¶</a></span>\[\sum_{k=0}^n H_k(x) = 1.\]</div>
+<p>(Hint: The simplest way is to apply <a class="reference internal" href="#equation-plbasissol">(111)</a>.) This is called the <strong>partition of unity</strong> property.</p>
+</li>
+<li id="problem-placcuracy"><p>✍ Here we consider a proof of the <a class="reference internal" href="#theorem-placcuracy"><span class="std std-ref">PL convergence theorem</span></a> using the mean value theorems from elementary calculus: If <span class="math notranslate nohighlight">\(f\)</span> is continuously differentiable in <span class="math notranslate nohighlight">\((a,b)\)</span>, then there exist points <span class="math notranslate nohighlight">\(s\)</span> and <span class="math notranslate nohighlight">\(t\)</span> in <span class="math notranslate nohighlight">\((a,b)\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\int_a^b f(z) \, dz = (b-a)f(s) \qquad \text{and} \qquad f'(t) = \frac{f(b)-f(a)}{b-a}.\]</div>
+<p>For the following, suppose <span class="math notranslate nohighlight">\(x \in (t_k,t_{k+1})\)</span>.</p>
+<p><strong>(a)</strong> Show that for some <span class="math notranslate nohighlight">\(s \in (t_k,t_{k+1})\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[f(x) = y_k + (x-t_k)f'(s).\]</div>
+<p><strong>(b)</strong> Show that for some other values <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(v\)</span> in <span class="math notranslate nohighlight">\((t_k,t_{k+1})\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[f'(s) -  \frac{y_{k+1}-y_k}{t_{k+1}-t_k} = (s-u) f''(v).\]</div>
+<p><strong>(c)</strong> Use <a class="reference internal" href="#equation-pwlinear">(107)</a> to finish the proof of the theorem.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="interpolation.html" title="previous page">The interpolation problem</a>
+    <a class='right-next' id="next-link" href="splines.html" title="next page">Cubic splines</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tobin A. Driscoll and Richard J. Braun<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

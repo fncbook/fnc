@@ -1,0 +1,494 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Implementation of multistep methods &#8212; Fundamentals of Numerical Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/mystnb.js"></script>
+    <script src="../_static/proof.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Zero-stability of multistep methods" href="zerostability.html" />
+    <link rel="prev" title="Multistep methods" href="multistep.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fundamentals of Numerical Computation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../frontmatter.html">Home</a>
+  </li>
+  <li class="">
+    <a href="../intro/overview.html">Introduction</a>
+  </li>
+  <li class="">
+    <a href="../linsys/overview.html">Square linear systems</a>
+  </li>
+  <li class="">
+    <a href="../leastsq/overview.html">Overdetermined linear systems</a>
+  </li>
+  <li class="">
+    <a href="../nonlineqn/overview.html">Roots of nonlinear equations</a>
+  </li>
+  <li class="">
+    <a href="../localapprox/overview.html">Piecewise interpolation</a>
+  </li>
+  <li class="active">
+    <a href="overview.html">Initial-value problems for ODEs</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="basics.html">Basics of IVPs</a>
+    </li>
+    <li class="">
+      <a href="euler.html">Euler’s method</a>
+    </li>
+    <li class="">
+      <a href="systems.html">Systems of differential equations</a>
+    </li>
+    <li class="">
+      <a href="rk.html">Runge–Kutta methods</a>
+    </li>
+    <li class="">
+      <a href="adaptive.html">Adaptive Runge–Kutta</a>
+    </li>
+    <li class="">
+      <a href="multistep.html">Multistep methods</a>
+    </li>
+    <li class="active">
+      <a href="">Implementation of multistep methods</a>
+    </li>
+    <li class="">
+      <a href="zerostability.html">Zero-stability of multistep methods</a>
+    </li>
+    <li class="">
+      <a href="next.html">Next steps</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../appendix/linear-algebra.html">Review: Linear algebra</a>
+  </li>
+  <li class="">
+    <a href="../appendix/demos.html">All demo notebooks</a>
+  </li>
+  <li class="">
+    <a href="../refs.html">References</a>
+  </li>
+  <li class="">
+    <a href="../genindex.html">Index</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../_sources/ivp/implicit.md"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#implicit-methods" class="nav-link">Implicit methods</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#stiff-problems" class="nav-link">Stiff problems</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#adaptivity" class="nav-link">Adaptivity</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#exercises" class="nav-link">Exercises</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="implementation-of-multistep-methods">
+<h1>Implementation of multistep methods<a class="headerlink" href="#implementation-of-multistep-methods" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">We now consider some of the practical issues that arise when multistep formulas are used to solve IVPs. Implementation of the explicit case is relatively straightforward. In what follows we use boldface for the vector form of the problem, <span class="math notranslate nohighlight">\(\mathbf{u}'=\mathbf{f}(t,\mathbf{u})\)</span>. For instance, the explicit AB4 method is defined by the formula</p>
+<div class="math notranslate nohighlight" id="equation-ab4">
+<span class="eqno">(194)<a class="headerlink" href="#equation-ab4" title="Permalink to this equation">¶</a></span>\[\mathbf{u}_{i+1} = \mathbf{u}_i + \frac{h}{24} ( 55\mathbf{f}_i - 59 \mathbf{f}_{i-1} +37\mathbf{f}_{i-2} -9\mathbf{f}_{i-3}), \quad i=3,\ldots,n-1.\]</div>
+<div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/implicit-ab4.html"><span class="doc">Convergence of AB4</span></a></p>
+</div>
+<p><a class="reference internal" href="#function-ab4"><span class="std std-ref">ab4</span></a> shows a basic implementation of this formula. Observe that <a class="reference internal" href="rk.html#function-rk4"><span class="std std-ref">rk4</span></a> is used to find the starting values <span class="math notranslate nohighlight">\(\mathbf{u}_1,\mathbf{u}_2,\mathbf{u}_3\)</span> that are needed before the iteration formula takes over. As far as RK4 is concerned, it needs to solve the IVP over the time interval <span class="math notranslate nohighlight">\(a \le t \le a+3h\)</span>, using a step size <span class="math notranslate nohighlight">\(h\)</span> (the same step size as in the AB4 iteration). These values are then used by <a class="reference internal" href="#function-ab4"><span class="std std-ref">ab4</span></a> to find
+<span class="math notranslate nohighlight">\(\mathbf{f}_0,\ldots,\mathbf{f}_3\)</span> and get the main iteration started.</p>
+<p>For each value of <span class="math notranslate nohighlight">\(i\)</span> the formula uses the four most recently known values of the solution’s derivative in order to advance by one step. In <a class="reference internal" href="#function-ab4"><span class="std std-ref">ab4</span></a> only these values of <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> are stored, and a matrix-vector product is used for the linear combination implied in <a class="reference internal" href="#equation-ab4">(194)</a>:</p>
+<div class="math notranslate nohighlight" id="equation-ab4mv">
+<span class="eqno">(195)<a class="headerlink" href="#equation-ab4mv" title="Permalink to this equation">¶</a></span>\[\begin{split}  \mathbf{u}_{i+1} = \mathbf{u}_i + h
+  \begin{bmatrix}
+    \mathbf{f}_i &amp; \mathbf{f}_{i-1} &amp; \mathbf{f}_{i-2} &amp; \mathbf{f}_{i-3}
+  \end{bmatrix}
+  \begin{bmatrix}
+    55/24 \\[1mm] -59/24 \\[1mm] 37/24 \\[1mm]-9/24
+  \end{bmatrix}.\end{split}\]</div>
+<p id="index-1">We have distributed the factor of <span class="math notranslate nohighlight">\(1/24\)</span> in order to point out that the <span class="math notranslate nohighlight">\(4\times 1\)</span> constant vector is just the vector of coefficients of the generating polynomial <span class="math notranslate nohighlight">\(\sigma(z)\)</span> from <a class="reference internal" href="multistep.html#equation-sigma">(189)</a>. At the start of an iteration, the value of <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> at the most recent solution step is unknown, so a call is made to evaluate it, and the other columns are shifted to the right (i.e., into the past).</p>
+<div class="proof proof-type-function" id="id1">
+<span id="function-ab4"></span>
+    <div class="proof-title">
+        <span class="proof-type">Function 72</span>
+        
+            <span class="proof-title-name">(ab4)</span>
+        
+    </div><div class="proof-content">
+<p><strong>4th-order Adams–Bashforth formula for an IVP.</strong></p>
+<div class="highlight-julia notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">ab4(ivp,n)</span>
+
+<span class="s">Apply the Adams-Bashforth 4th order method to solve the given IVP</span>
+<span class="s">using `n` time steps.</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">function</span> <span class="n">ab4</span><span class="p">(</span><span class="n">ivp</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="c"># Time discretization.</span>
+    <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">ivp</span><span class="o">.</span><span class="n">tspan</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="p">[</span> <span class="n">a</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="n">h</span> <span class="k">for</span> <span class="n">i</span> <span class="kp">in</span> <span class="mi">0</span><span class="o">:</span><span class="n">n</span> <span class="p">]</span>
+
+    <span class="c"># Constants in the AB4 method.</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>    <span class="n">sigma</span> <span class="o">=</span> <span class="p">[</span><span class="mi">55</span><span class="p">,</span> <span class="o">-</span><span class="mi">59</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="o">-</span><span class="mi">9</span><span class="p">]</span><span class="o">/</span><span class="mi">24</span><span class="p">;</span>
+
+    <span class="c"># Find starting values by RK4.</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">fill</span><span class="p">(</span><span class="n">float</span><span class="p">(</span><span class="n">ivp</span><span class="o">.</span><span class="n">u0</span><span class="p">),</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">rkivp</span> <span class="o">=</span> <span class="n">ODEProblem</span><span class="p">(</span><span class="n">ivp</span><span class="o">.</span><span class="n">f</span><span class="p">,</span><span class="n">ivp</span><span class="o">.</span><span class="n">u0</span><span class="p">,(</span><span class="n">a</span><span class="p">,</span><span class="n">a</span><span class="o">+</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">h</span><span class="p">),</span><span class="n">ivp</span><span class="o">.</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">ts</span><span class="p">,</span><span class="n">us</span> <span class="o">=</span> <span class="n">rk4</span><span class="p">(</span><span class="n">rkivp</span><span class="p">,</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">us</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="n">k</span><span class="p">]</span>
+
+    <span class="c"># Compute history of u&#39; values, from newest to oldest.</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="p">[</span> <span class="n">ivp</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="n">i</span><span class="p">],</span><span class="n">ivp</span><span class="o">.</span><span class="n">p</span><span class="p">,</span><span class="n">t</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="kp">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span>  <span class="p">]</span>
+
+    <span class="c"># Time stepping.</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="kp">in</span> <span class="n">k</span><span class="o">:</span><span class="n">n</span>
+      <span class="n">f</span> <span class="o">=</span> <span class="p">[</span> <span class="n">ivp</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">ivp</span><span class="o">.</span><span class="n">p</span><span class="p">,</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">...</span> <span class="p">]</span>   <span class="c"># new value of du/dt</span>
+      <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">sigma</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="kp">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">k</span><span class="p">)</span>  <span class="c"># advance a step</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span><span class="n">u</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table></div>
+</div></div><div class="section" id="implicit-methods">
+<h2>Implicit methods<a class="headerlink" href="#implicit-methods" title="Permalink to this headline">¶</a></h2>
+<div class="proof proof-type-function" id="id2">
+<span id="function-am2"></span>
+    <div class="proof-title">
+        <span class="proof-type">Function 73</span>
+        
+            <span class="proof-title-name">(am2)</span>
+        
+    </div><div class="proof-content">
+<p><strong>2nd-order Adams–Moulton (trapezoid) formula for an IVP.</strong></p>
+<div class="highlight-julia notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">am2(ivp,n)</span>
+
+<span class="s">Apply the Adams-Moulton 2nd order method to solve given IVP using</span>
+<span class="s">`n` time steps.</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">function</span> <span class="n">am2</span><span class="p">(</span><span class="n">ivp</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="c"># Time discretization.</span>
+    <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">ivp</span><span class="o">.</span><span class="n">tspan</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="p">[</span> <span class="n">a</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="n">h</span> <span class="k">for</span> <span class="n">i</span> <span class="kp">in</span> <span class="mi">0</span><span class="o">:</span><span class="n">n</span> <span class="p">]</span>
+
+     <span class="c"># Initialize output.</span>
+     <span class="n">u</span> <span class="o">=</span> <span class="n">fill</span><span class="p">(</span><span class="n">float</span><span class="p">(</span><span class="n">ivp</span><span class="o">.</span><span class="n">u0</span><span class="p">),</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c"># Time stepping.</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="kp">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+        <span class="c"># Data that does not depend on the new value.</span>
+        <span class="n">known</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">ivp</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">ivp</span><span class="o">.</span><span class="n">p</span><span class="p">,</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="c"># Find a root for the new value.</span>
+        <span class="n">F</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-&gt;</span> <span class="n">z</span> <span class="o">.-</span> <span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">ivp</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">ivp</span><span class="o">.</span><span class="n">p</span><span class="p">,</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="o">.-</span> <span class="n">known</span>
+        <span class="n">unew</span> <span class="o">=</span> <span class="n">levenberg</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">known</span><span class="p">)</span>
+        <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">unew</span><span class="p">[</span><span class="k">end</span><span class="p">]</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span><span class="n">u</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table></div>
+</div></div><p>The implementation of an implicit multistep method is a bit more involved. Consider the second-order implicit formula AM2, also known as the trapezoid method. To advance from step <span class="math notranslate nohighlight">\(i\)</span> to <span class="math notranslate nohighlight">\(i+1\)</span>, we need to solve</p>
+<div class="math notranslate nohighlight" id="equation-am2solve">
+<span class="eqno">(196)<a class="headerlink" href="#equation-am2solve" title="Permalink to this equation">¶</a></span>\[  \mathbf{z} - \mathbf{u}_i - \tfrac{1}{2} h \bigl[ \mathbf{f}(t_i,\mathbf{u}_i) + f(t_{i+1},\mathbf{z}) \bigr] = 0\]</div>
+<p>for <span class="math notranslate nohighlight">\(\mathbf{z}\)</span>, and then set <span class="math notranslate nohighlight">\(\mathbf{u}_{i+1}=\mathbf{z}\)</span>. This equation takes the form <span class="math notranslate nohighlight">\(\mathbf{g}(\mathbf{z})=\boldsymbol{0}\)</span>, so we have a rootfinding problem as in <a class="reference internal" href="../nonlineqn/overview.html"><span class="doc">Roots of nonlinear equations</span></a>. An implementation of AM2 using <a class="reference internal" href="../nonlineqn/quasinewton.html#function-levenberg"><span class="std std-ref">levenberg</span></a> from <a class="reference internal" href="../nonlineqn/quasinewton.html"><span class="doc">Quasi-Newton methods</span></a> is shown in <a class="reference internal" href="#function-am2"><span class="std std-ref">am2</span></a>.</p>
+<p>It defines a nested function called <code class="docutils literal notranslate"><span class="pre">trapzero</span></code> that evaluates the left-hand side of <a class="reference internal" href="#equation-am2solve">(196)</a>, given any value of <span class="math notranslate nohighlight">\(\mathbf{z}\)</span>. The time stepping iteration calls <a class="reference internal" href="../nonlineqn/quasinewton.html#function-levenberg"><span class="std std-ref">levenberg</span></a> at each step, starting from the value <span class="math notranslate nohighlight">\(\mathbf{u}_i+\tfrac{1}{2}h\mathbf{f}_i\)</span> that is halfway between <span class="math notranslate nohighlight">\(\mathbf{u}_i\)</span> and the Euler step <span class="math notranslate nohighlight">\(\mathbf{u}_i+h\mathbf{f}_i\)</span>. A robust code would have to intercept the case where <a class="reference internal" href="../nonlineqn/quasinewton.html#function-levenberg"><span class="std std-ref">levenberg</span></a> fails to converge, but we have ignored this issue for the sake of simplicity.</p>
+</div>
+<div class="section" id="stiff-problems">
+<h2>Stiff problems<a class="headerlink" href="#stiff-problems" title="Permalink to this headline">¶</a></h2>
+<div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/implicit-stiff.html"><span class="doc">Accuracy isn’t everything</span></a></p>
+</div>
+<p>At each time step in <a class="reference internal" href="#function-am2"><span class="std std-ref">am2</span></a> (or any implicit IVP solver), a rootfinding iteration of unknown length is needed. This fact makes the cost of an implicit method much greater on a per-step basis than for an explicit one. Given this drawback, you are justified to wonder whether implicit methods are ever competitive! The answer is emphatically yes, as <a class="reference internal" href="demos/implicit-stiff.html"><span class="doc">Accuracy isn’t everything</span></a> demonstrates.</p>
+<p id="index-2">Although the result of <a class="reference internal" href="demos/implicit-stiff.html"><span class="doc">Accuracy isn’t everything</span></a> may seem strange, there is no contradiction: a fourth-order explicit formula is indeed more accurate than a second-order implicit one, in the limit <span class="math notranslate nohighlight">\(h\to 0\)</span>. But there is another limit to consider, <span class="math notranslate nohighlight">\(t\to \infty\)</span> with <span class="math notranslate nohighlight">\(h\)</span> fixed, and in this one the implicit method wins. Such problems are called <a class="reference internal" href="overview.html#term-stiff"><span class="xref std std-term">stiff</span></a>. A complete mathematical description will wait for a later chapter, but a sure sign of stiffness is the presence of phenomena on widely different time scales. In the example, there is “slow time,” where the solution changes very little, and “fast time,” when it suddenly jumps from zero to one. For stiff problems, implicit methods are usually preferred, because they can take far fewer steps than an explicit method, more than offsetting the extra work required per step.</p>
+</div>
+<div class="section" id="adaptivity">
+<h2>Adaptivity<a class="headerlink" href="#adaptivity" title="Permalink to this headline">¶</a></h2>
+<p>As with RK methods, we can run two time stepping methods simultaneously in order to estimate the error and adjust the step size accordingly. For example, we could pair AB3 with AB4 as practically no cost, because the methods differ only in how they include known information from the recent past. The more accurate AB4 value should allow an accurate estimate of the local error in the AB3 value, and so on.</p>
+<p>Because multistep methods rely on the solution history, though, changing the step size is more complicated than for RK methods. If <span class="math notranslate nohighlight">\(h\)</span> is changed, then the historical values <span class="math notranslate nohighlight">\(\mathbf{u}_{i-1},\mathbf{u}_{i-2}\ldots\)</span> and <span class="math notranslate nohighlight">\(\mathbf{f}_{i-1},\mathbf{f}_{i-2}\ldots\)</span> are no longer given at the right moments in time to apply the iteration formula. A typical remedy is to use interpolation to re-evaluate the historical values at the appropriate times. The details are important but not especially illuminating, and we do not give them here.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol id="problem-ab4tests">
+<li><p>⌨ For each IVP, use <a class="reference internal" href="#function-ab4"><span class="std std-ref">ab4</span></a> to find the solution over the indicated time interval for <span class="math notranslate nohighlight">\(n=250\)</span>. Plot the computed solution <span class="math notranslate nohighlight">\((t_i,u_i)\)</span> for <span class="math notranslate nohighlight">\(i=0,\ldots,n\)</span>, and separately plot the error <span class="math notranslate nohighlight">\(\bigl(t_i,u_i-\hat{u}(t_i)\bigr)\)</span>.</p>
+<p><strong>(a)</strong> <span class="math notranslate nohighlight">\(u' = -2t u, \ 0 \le t \le 2, \ u(0) = 2;\  \hat{u}(t) = 2e^{-t^2}\)</span></p>
+<p><strong>(b)</strong> <span class="math notranslate nohighlight">\(u' = u + t, \ 0 \le t \le 1, \ u(0) = 2;\  \hat{u}(t) = 1-t+e^t\)</span></p>
+<p><strong>(c)</strong> <span class="math notranslate nohighlight">\(u' = x^2/[u(1+x^3)],\ 0 \le x \le 3, \ u(0) =1;\ \hat{u}(x) =[1+(2/3)\ln (1+x^3)]^{1/2}\)</span></p>
+<p><strong>(d)</strong> <span class="math notranslate nohighlight">\(u''+ 9u = 9t, \: 0&lt; t&lt; 2\pi, \: u(0) =1,\: u'(0) = 1; \: \hat{u}(t) = t+\cos (3t)\)</span></p>
+<p><strong>(e)</strong> <span class="math notranslate nohighlight">\(u''+ 9u = \sin(2t), \: 0&lt; t&lt; 2\pi, \: u(0) =2,\: u'(0) = 1\)</span>;
+<span class="math notranslate nohighlight">\(\quad \hat{u}(t) = (1/5) \sin(3t) + 2 \cos (3t)+ (1/5) \sin (2t)\)</span></p>
+<p><strong>(f)</strong> <span class="math notranslate nohighlight">\(u''- 9u = 9t \: 0&lt; t&lt; 1, \: u(0) =2,\: u'(0) = -1; \: \hat{u}(t) = e^{3t} + e^{-3t}-t\)</span></p>
+<p><strong>(g)</strong> <span class="math notranslate nohighlight">\(u''+ 4u'+ 4u = t, \: 0&lt; t&lt; 4, \: u(0) =1,\: u'(0) = 3/4; \: \hat{u}(t) = (3t+5/4)e^{-2t} + (t-1)/4\)</span></p>
+<p><strong>(h)</strong> <span class="math notranslate nohighlight">\(x^2 u'' +5xu' + 4u = 0,\: 1&lt;x&lt;e^2, \: u(1) =1, \: u'(1) = -1; \: \hat{u}(x) = x^{-2}( 1 + \ln x)\)</span></p>
+<p><strong>(i)</strong> <span class="math notranslate nohighlight">\(2 x^2 u'' +3xu' - u = 0,\: 1&lt;x&lt;16, \: u(1) =4, \: u'(1) = -1\)</span>;
+<span class="math notranslate nohighlight">\(\quad \hat{u}(x) = 2(x^{1/2} + x^{-1})\)</span></p>
+<p><strong>(j)</strong> <span class="math notranslate nohighlight">\(x^2 u'' -xu' + 2u = 0,\: 1&lt;x&lt;e^{\pi}, \: u(1) =3, \: u'(1) = 4\)</span>;
+<span class="math notranslate nohighlight">\(\quad \hat{u}(x) = x \left[ 3 \cos \left( \ln x \right)+\sin \left( \ln x \right) \right]\)</span></p>
+</li>
+<li id="problem-ab4converge"><p>⌨ For each IVP in the preceding problem, use <a class="reference internal" href="#function-ab4"><span class="std std-ref">ab4</span></a> for <span class="math notranslate nohighlight">\(n=10\cdot2^d\)</span> and <span class="math notranslate nohighlight">\(d=1,\ldots,10\)</span>. Make a log-log convergence plot for the final time error <span class="math notranslate nohighlight">\(|u_n-\hat{u}(t_n)|\)</span> versus <span class="math notranslate nohighlight">\(n\)</span>, and add a straight line indicating fourth-order convergence.</p>
+</li>
+<li><p>⌨  Line 35 of <a class="reference internal" href="#function-ab4"><span class="std std-ref">ab4</span></a> reads</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">u</span><span class="p">(</span><span class="o">:</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">u</span><span class="p">(</span><span class="o">:</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">f</span><span class="o">*</span><span class="n">sigma</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Explain carefully why this is preferable to</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">u</span><span class="p">(</span><span class="o">:</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">u</span><span class="p">(</span><span class="o">:</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="n">f</span><span class="o">*</span><span class="n">sigma</span><span class="p">;</span>
+</pre></div>
+</div>
+</li>
+<li><p>⌨ Repeat <a class="reference internal" href="#problem-ab4tests"><span class="std std-ref">exercise 1</span></a> above  using <a class="reference internal" href="#function-am2"><span class="std std-ref">am2</span></a>.</p>
+</li>
+<li><p>⌨  Repeat <a class="reference internal" href="#problem-ab4converge"><span class="std std-ref">exercise 2 above</span></a>  using <a class="reference internal" href="#function-am2"><span class="std std-ref">am2</span></a> and comparing to second-order rather than fourth-order convergence.</p>
+</li>
+<li><p>⌨ Using <a class="reference internal" href="#function-am2"><span class="std std-ref">am2</span></a> as a model, write a function <code class="docutils literal notranslate"><span class="pre">bd2</span></code> that applies the BD2 method to solve an IVP. Test the convergence of your function on one of the IVPs in <a class="reference internal" href="#problem-ab4tests"><span class="std std-ref">exercise 1</span></a> above.</p>
+</li>
+<li><p>⌨ For numerical purposes, the exact solution of the IVP in <a class="reference internal" href="demos/implicit-stiff.html"><span class="doc">Accuracy isn’t everything</span></a> satisfies <span class="math notranslate nohighlight">\(\hat{u}(400)=1\)</span>.</p>
+<p><strong>(a)</strong> Use <a class="reference internal" href="#function-ab4"><span class="std std-ref">ab4</span></a> with <span class="math notranslate nohighlight">\(n=200,400,600,\ldots,2000\)</span> and make a log-log convergence plot of the error <span class="math notranslate nohighlight">\(|u_n-1|\)</span> as a function of <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p><strong>(b)</strong> Repeat part~(a) using <a class="reference internal" href="#function-am2"><span class="std std-ref">am2</span></a>.</p>
+</li>
+<li id="problem-ivpimag"><p>Consider the IVP</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{u}'(t) = \mathbf{A} \mathbf{u}(t), \quad \mathbf{A}=
+\begin{bmatrix}
+  0&amp;-4\\4&amp;0
+\end{bmatrix}, \quad \mathbf{u}(0) =
+\begin{bmatrix}
+  1\\0
+\end{bmatrix}.\end{split}\]</div>
+<p><strong>(a)</strong> ✍ Define <span class="math notranslate nohighlight">\(E(t) = \bigl\|\mathbf{u}(t)\bigr\|_2^2\)</span>. Show that <span class="math notranslate nohighlight">\(E(t)\)</span> is constant. (Differentiate <span class="math notranslate nohighlight">\(u^Tu\)</span> with respect to time and show that it simplifies to zero.)</p>
+<p><strong>(b)</strong> ⌨ Use <a class="reference internal" href="#function-ab4"><span class="std std-ref">ab4</span></a> to solve the IVP for <span class="math notranslate nohighlight">\(t\in[0,20]\)</span> with <span class="math notranslate nohighlight">\(n=100\)</span> and <span class="math notranslate nohighlight">\(n=150\)</span>. On a single graph using a log scale on the <span class="math notranslate nohighlight">\(y\)</span>-axis, plot <span class="math notranslate nohighlight">\(|E(t)-E(0)|\)</span> versus time for both solutions. You should see exponential growth in time.</p>
+<p><strong>(c)</strong> ⌨ Repeat part~(b) with <span class="math notranslate nohighlight">\(n=400\)</span> and <span class="math notranslate nohighlight">\(n=600\)</span>, but use a linear scale on the <span class="math notranslate nohighlight">\(y\)</span>-axis. Now you should see only linear growth of <span class="math notranslate nohighlight">\(|E(t)-E(0)|\)</span>.</p>
+</li>
+<li><p>⌨ <strong>(a)</strong> Modify <a class="reference internal" href="#function-ab4"><span class="std std-ref">ab4</span></a> to implement the AB2 method.</p>
+<p><strong>(b)</strong> Repeat part (b) of the preceding exercise, using AB2 in place of AB4.</p>
+<p><strong>(c)</strong> Repeat part (c) of the preceding exercise, using AB2 in place of AB4.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="multistep.html" title="previous page">Multistep methods</a>
+    <a class='right-next' id="next-link" href="zerostability.html" title="next page">Zero-stability of multistep methods</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tobin A. Driscoll and Richard J. Braun<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

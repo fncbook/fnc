@@ -1,0 +1,828 @@
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Index &#8212; Fundamentals of Numerical Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/mystnb.js"></script>
+    <script src="_static/proof.js"></script>
+    <script src="_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}})</script>
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fundamentals of Numerical Computation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="frontmatter.html">Home</a>
+  </li>
+  <li class="">
+    <a href="intro/overview.html">Introduction</a>
+  </li>
+  <li class="">
+    <a href="linsys/overview.html">Square linear systems</a>
+  </li>
+  <li class="">
+    <a href="leastsq/overview.html">Overdetermined linear systems</a>
+  </li>
+  <li class="">
+    <a href="nonlineqn/overview.html">Roots of nonlinear equations</a>
+  </li>
+  <li class="">
+    <a href="localapprox/overview.html">Piecewise interpolation</a>
+  </li>
+  <li class="">
+    <a href="ivp/overview.html">Initial-value problems for ODEs</a>
+  </li>
+  <li class="">
+    <a href="appendix/linear-algebra.html">Review: Linear algebra</a>
+  </li>
+  <li class="">
+    <a href="appendix/demos.html">All demo notebooks</a>
+  </li>
+  <li class="">
+    <a href="refs.html">References</a>
+  </li>
+  <li class="active">
+    <a href="">Index</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#Symbols"><strong>Symbols</strong></a>
+ | <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#J"><strong>J</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#Q"><strong>Q</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#Z"><strong>Z</strong></a>
+ 
+</div>
+<h2 id="Symbols">Symbols</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    \
+
+      <ul>
+        <li>
+    see backslash
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="intro/overview.html#term-algorithm"><strong>algorithm</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="linsys/overview.html#term-asymptotic"><strong>asymptotic</strong></a>
+</li>
+      <li><a href="linsys/efficiency.html#index-0">asymptotic notation</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="linsys/linear-systems.html#index-2">backslash</a>, <a href="nonlineqn/newtonsys.html#index-2">[1]</a>, <a href="linsys/overview.html#term-backslash"><strong>[2]</strong></a>
+</li>
+      <li><a href="nonlineqn/newton.html#index-4">backward error</a>, <a href="nonlineqn/rootproblem.html#index-3">[1]</a>, <a href="intro/overview.html#term-backward-error"><strong>[2]</strong></a>
+
+      <ul>
+        <li><a href="linsys/condition-number.html#index-3">in linear system</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="linsys/linear-systems.html#index-5">backward substitution</a>, <a href="linsys/overview.html#term-backward-substitution"><strong>[1]</strong></a>
+</li>
+      <li><a href="linsys/structure.html#index-0">bandwidth</a>, <a href="linsys/overview.html#term-bandwidth"><strong>[1]</strong></a>
+</li>
+      <li><a href="linsys/overview.html#term-big-o"><strong>big-O</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="localapprox/interpolation.html#index-4">cardinal functions</a>, <a href="localapprox/pwlin.html#index-2">[1]</a>, <a href="localapprox/overview.html#term-cardinal-functions"><strong>[2]</strong></a>
+</li>
+      <li><a href="linsys/overview.html#term-cholesky-factorization"><strong>Cholesky factorization</strong></a>
+</li>
+      <li><a href="linsys/polyinterp.html#index-2">comprehension</a>, <a href="linsys/overview.html#term-comprehension"><strong>[1]</strong></a>
+</li>
+      <li><a href="intro/overview.html#term-condition-number"><strong>condition number</strong></a>
+
+      <ul>
+        <li><a href="leastsq/normaleqns.html#index-5">of a matrix</a>, <a href="linsys/condition-number.html#index-1">[1]</a>
+</li>
+        <li><a href="intro/conditioning.html#index-1">of elementary functions</a>
+</li>
+        <li><a href="ivp/basics.html#index-2">of initial-value problems</a>
+</li>
+        <li><a href="localapprox/interpolation.html#index-3">of interpolation</a>, <a href="localapprox/pwlin.html#index-3">[1]</a>
+</li>
+        <li><a href="leastsq/normaleqns.html#index-4">of linear least squares</a>
+</li>
+        <li><a href="linsys/condition-number.html#index-0">of linear system</a>
+</li>
+        <li><a href="leastsq/normaleqns.html#index-6">of normal equations</a>
+</li>
+        <li><a href="nonlineqn/rootproblem.html#index-1">of rootfinding</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="nonlineqn/fixed-point.html#index-5">contraction mapping</a>
+</li>
+      <li>
+    convergence rate
+
+      <ul>
+        <li><a href="nonlineqn/fixed-point.html#index-3">linear</a>
+</li>
+        <li><a href="nonlineqn/newton.html#index-2">quadratic</a>
+</li>
+        <li><a href="nonlineqn/secant.html#index-2">superlinear</a>
+</li>
+      </ul></li>
+      <li><a href="linsys/overview.html#term-copy"><strong>copy</strong></a>
+</li>
+      <li><a href="localapprox/overview.html#term-cubic-spline"><strong>cubic spline</strong></a>
+</li>
+      <li><a href="localapprox/overview.html#term-cubicsplineinterpolation"><strong>CubicSplineInterpolation</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="leastsq/fitting.html#index-1">data fitting</a>
+
+      <ul>
+        <li><a href="leastsq/fitting.html#index-5">by straight line</a>
+</li>
+        <li><a href="nonlineqn/nlsq.html#index-2">nonlinear</a>
+</li>
+        <li><a href="leastsq/fitting.html#index-6">power law</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="ivp/overview.html#term-differentialequations"><strong>DifferentialEquations</strong></a>
+</li>
+      <li><a href="localapprox/overview.html#term-discretization"><strong>discretization</strong></a>
+</li>
+      <li><a href="intro/overview.html#term-double-precision"><strong>double precision</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="linsys/overview.html#term-end"><strong>end</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="ivp/euler.html#index-0">Euler&#39;s method</a>, <a href="ivp/systems.html#index-1">[1]</a>, <a href="ivp/overview.html#term-euler-s-method"><strong>[2]</strong></a>
+</li>
+      <li><a href="localapprox/integration.html#index-4">extrapolation</a>, <a href="localapprox/overview.html#term-extrapolation"><strong>[1]</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="localapprox/overview.html#term-finite-difference"><strong>finite difference</strong></a>
+</li>
+      <li><a href="localapprox/fd-converge.html#index-0">finite differences</a>, <a href="localapprox/finitediffs.html#index-0">[1]</a>
+</li>
+      <li><a href="localapprox/overview.html#term-fit"><strong>fit</strong></a>
+</li>
+      <li><a href="nonlineqn/fixed-point.html#index-1">fixed point iteration</a>, <a href="nonlineqn/overview.html#term-fixed-point-iteration"><strong>[1]</strong></a>
+</li>
+      <li><a href="nonlineqn/fixed-point.html#index-0">fixed point problem</a>, <a href="nonlineqn/overview.html#term-fixed-point-problem"><strong>[1]</strong></a>
+</li>
+      <li><a href="linsys/overview.html#term-float"><strong>float</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="intro/floating-point.html#index-0">floating point numbers</a>, <a href="intro/overview.html#term-floating-point-numbers"><strong>[1]</strong></a>
+</li>
+      <li><a href="intro/floating-point.html#index-9">floating-point numbers</a>
+</li>
+      <li><a href="linsys/efficiency.html#index-1">flops</a>, <a href="linsys/overview.html#term-flops"><strong>[1]</strong></a>
+</li>
+      <li><a href="linsys/linear-systems.html#index-4">forward substitution</a>, <a href="linsys/overview.html#term-forward-substitution"><strong>[1]</strong></a>
+</li>
+      <li><a href="linsys/overview.html#term-frobenius-norm"><strong>Frobenius norm</strong></a>
+</li>
+      <li><a href="intro/overview.html#term-function"><strong>function</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="nonlineqn/nlsq.html#index-1">Gauss--Newton method</a>, <a href="nonlineqn/overview.html#term-gauss-newton-method"><strong>[1]</strong></a>
+</li>
+      <li><a href="linsys/lu.html#index-1">Gaussian elimination</a>, <a href="linsys/overview.html#term-gaussian-elimination"><strong>[1]</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="ivp/implicit.html#index-1">generating polynomials</a>, <a href="ivp/multistep.html#index-2">[1]</a>, <a href="ivp/overview.html#term-generating-polynomials"><strong>[2]</strong></a>
+</li>
+      <li><a href="ivp/overview.html#term-global-error"><strong>global error</strong></a>
+</li>
+      <li><a href="localapprox/integration.html#index-6">Gregory integration formula</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="localapprox/pwlin.html#index-1">hat functions</a>, <a href="localapprox/overview.html#term-hat-functions"><strong>[1]</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="linsys/matrices.html#index-1">hermitian</a>, <a href="linsys/overview.html#term-hermitian"><strong>[1]</strong></a>
+</li>
+      <li><a href="leastsq/house.html#index-1">Householder reflector</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="linsys/matrices.html#index-2">identity matrix</a>, <a href="linsys/overview.html#term-identity-matrix"><strong>[1]</strong></a>
+</li>
+      <li><a href="intro/floating-point.html#index-10">IEEE 754</a>, <a href="intro/floating-point.html#index-6">[1]</a>
+</li>
+      <li><a href="intro/overview.html#term-ill-conditioned"><strong>ill-conditioned</strong></a>
+</li>
+      <li><a href="ivp/overview.html#term-implicit"><strong>implicit</strong></a>
+</li>
+      <li><a href="linsys/overview.html#term-induced-matrix-norm"><strong>induced matrix norm</strong></a>
+</li>
+      <li><a href="linsys/overview.html#term-inexacterror"><strong>InexactError</strong></a>
+</li>
+      <li><a href="ivp/basics.html#index-0">initial-value problem</a>, <a href="ivp/overview.html#term-initial-value-problem"><strong>[1]</strong></a>
+
+      <ul>
+        <li><a href="ivp/euler.html#index-1">one-step method for solving</a>
+</li>
+      </ul></li>
+      <li><a href="leastsq/qr.html#index-2">inner product</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    instability
+
+      <ul>
+        <li><a href="ivp/zerostability.html#index-1">of a mutistep formula</a>
+</li>
+      </ul></li>
+      <li><a href="linsys/polyinterp.html#index-0">interpolation</a>, <a href="localapprox/interpolation.html#index-0">[1]</a>, <a href="linsys/overview.html#term-interpolation"><strong>[2]</strong></a>, <a href="localapprox/overview.html#term-interpolation"><strong>[3]</strong></a>
+
+      <ul>
+        <li><a href="localapprox/interpolation.html#index-2">by piecewise polnyomials</a>
+</li>
+        <li><a href="localapprox/integration.html#index-1">by piecewise polynomials</a>, <a href="localapprox/pwlin.html#index-0">[1]</a>, <a href="localapprox/splines.html#index-0">[2]</a>
+</li>
+        <li><a href="leastsq/fitting.html#index-0">by polynomials</a>, <a href="localapprox/finitediffs.html#index-1">[1]</a>, <a href="localapprox/finitediffs.html#index-2">[2]</a>, <a href="localapprox/interpolation.html#index-1">[3]</a>, <a href="nonlineqn/secant.html#index-3">[4]</a>
+</li>
+      </ul></li>
+      <li><a href="linsys/overview.html#term-inv"><strong>inv</strong></a>
+</li>
+      <li><a href="appendix/linear-algebra.html#term-inverse"><strong>inverse</strong></a>
+</li>
+      <li><a href="appendix/linear-algebra.html#term-invertible"><strong>invertible</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="J">J</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="nonlineqn/newtonsys.html#index-0">Jacobian matrix</a>, <a href="nonlineqn/overview.html#term-jacobian-matrix"><strong>[1]</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="leastsq/fitting.html#index-3">least squares</a>, <a href="leastsq/normaleqns.html#index-0">[1]</a>
+</li>
+      <li><a href="nonlineqn/fixed-point.html#index-2">linear convergence</a>, <a href="nonlineqn/overview.html#term-linear-convergence"><strong>[1]</strong></a>
+</li>
+      <li><a href="leastsq/qr.html#index-7">linear least squares problem</a>, <a href="leastsq/overview.html#term-linear-least-squares-problem"><strong>[1]</strong></a>
+</li>
+      <li><a href="localapprox/overview.html#term-linearinterpolation"><strong>LinearInterpolation</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="nonlineqn/fixed-point.html#index-4">Lipschitz condition</a>
+</li>
+      <li><a href="localapprox/adaptive.html#index-2">local extrapolation</a>
+</li>
+      <li><a href="ivp/overview.html#term-local-truncation-error"><strong>local truncation error</strong></a>
+</li>
+      <li><a href="ivp/basics.html#index-1">logistic equation</a>, <a href="ivp/basics.html#index-3">[1]</a>
+</li>
+      <li><a href="linsys/overview.html#term-lu-factorization"><strong>LU factorization</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="intro/overview.html#term-machine-epsilon"><strong>machine epsilon</strong></a>
+
+      <ul>
+        <li><a href="intro/floating-point.html#index-5">in double precision</a>
+</li>
+      </ul></li>
+      <li><a href="intro/floating-point.html#index-2"><strong>mantissa</strong></a>
+</li>
+      <li><a href="linsys/overview.html#term-matrix-condition-number"><strong>matrix condition number</strong></a>
+</li>
+      <li>
+    matrix factorization
+
+      <ul>
+        <li><a href="linsys/structure.html#index-7">Cholesky</a>
+</li>
+        <li><a href="linsys/lu.html#index-0">LU</a>, <a href="linsys/pivoting.html#index-0">[1]</a>
+</li>
+        <li><a href="linsys/pivoting.html#index-2">PLU</a>
+</li>
+        <li><a href="leastsq/house.html#index-5">QR</a>, <a href="leastsq/qr.html#index-6">[1]</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="linsys/linear-systems.html#index-0">matrix inverse</a>
+</li>
+      <li><a href="ivp/overview.html#term-multistep"><strong>multistep</strong></a>
+</li>
+      <li><a href="ivp/multistep.html#index-0">multistep method</a>, <a href="ivp/zerostability.html#index-0">[1]</a>
+
+      <ul>
+        <li><a href="ivp/implicit.html#index-0">implementation of</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="intro/overview.html#term-nan"><strong>NaN</strong></a>
+</li>
+      <li><a href="nonlineqn/newton.html#index-0">Newton&#39;s method</a>, <a href="nonlineqn/newtonsys.html#index-1">[1]</a>, <a href="nonlineqn/overview.html#term-newton-s-method"><strong>[2]</strong></a>
+</li>
+      <li><a href="localapprox/integration.html#index-2">Newton--Cotes formula</a>, <a href="localapprox/overview.html#term-newton-cotes-formula"><strong>[1]</strong></a>
+</li>
+      <li><a href="nonlineqn/overview.html#term-nlsolve"><strong>nlsolve</strong></a>
+</li>
+      <li><a href="localapprox/overview.html#term-nodes"><strong>Nodes</strong></a>
+</li>
+      <li><a href="nonlineqn/nlsq.html#index-0">nonlinear least squares</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="nonlineqn/overview.html#term-nonlinear-least-squares-problem"><strong>nonlinear least squares problem</strong></a>
+</li>
+      <li><a href="linsys/overview.html#term-0"><strong>norm</strong></a>, <a href="linsys/overview.html#term-norm"><strong>[1]</strong></a>
+
+      <ul>
+        <li><a href="linsys/norms.html#index-3">Frobenius</a>
+</li>
+        <li><a href="linsys/norms.html#index-2">matrix</a>
+</li>
+        <li><a href="leastsq/fitting.html#index-4">vector</a>, <a href="linsys/norms.html#index-0">[1]</a>
+</li>
+      </ul></li>
+      <li><a href="leastsq/normaleqns.html#index-1">normal equations</a>, <a href="leastsq/normaleqns.html#index-3">[1]</a>, <a href="leastsq/qr.html#index-8">[2]</a>, <a href="leastsq/overview.html#term-normal-equations"><strong>[3]</strong></a>
+</li>
+      <li><a href="localapprox/adaptive.html#index-0">numerical integration</a>, <a href="localapprox/integration.html#index-0">[1]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="ivp/overview.html#term-odeproblem"><strong>ODEProblem</strong></a>
+</li>
+      <li><a href="leastsq/qr.html#index-4">ONC matrix</a>, <a href="leastsq/overview.html#term-onc-matrix"><strong>[1]</strong></a>
+</li>
+      <li><a href="linsys/overview.html#term-ones"><strong>ones</strong></a>
+</li>
+      <li><a href="linsys/overview.html#term-opnorm"><strong>opnorm</strong></a>
+</li>
+      <li><a href="ivp/overview.html#term-order-of-accuracy"><strong>order of accuracy</strong></a>, <a href="localapprox/overview.html#term-order-of-accuracy"><strong>[1]</strong></a>
+
+      <ul>
+        <li><a href="localapprox/fd-converge.html#index-2">of a finite difference formula</a>
+</li>
+        <li><a href="ivp/multistep.html#index-4">of a multistep IVP formula</a>
+</li>
+        <li><a href="ivp/euler.html#index-3">of a one-step IVP solver</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="leastsq/house.html#index-4">orthogonal</a>, <a href="leastsq/overview.html#term-orthogonal"><strong>[1]</strong></a>
+
+      <ul>
+        <li><a href="leastsq/house.html#index-0">matrix</a>, <a href="leastsq/house.html#index-2">[1]</a>, <a href="leastsq/qr.html#index-5">[2]</a>
+</li>
+        <li><a href="leastsq/qr.html#index-0">vectors</a>
+</li>
+      </ul></li>
+      <li><a href="leastsq/overview.html#term-orthogonal-matrix"><strong>orthogonal matrix</strong></a>
+</li>
+      <li><a href="leastsq/qr.html#index-1">orthonormal</a>, <a href="leastsq/overview.html#term-orthonormal"><strong>[1]</strong></a>
+</li>
+      <li><a href="leastsq/overview.html#term-overdetermined"><strong>overdetermined</strong></a>
+</li>
+      <li><a href="intro/floating-point.html#index-7">overflow</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="linsys/overview.html#term-permutation-matrix"><strong>permutation matrix</strong></a>
+</li>
+      <li><a href="leastsq/overview.html#term-pinv"><strong>pinv</strong></a>
+</li>
+      <li><a href="linsys/pivoting.html#index-1">pivoting</a>, <a href="linsys/structure.html#index-2">[1]</a>, <a href="linsys/structure.html#index-8">[2]</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="linsys/overview.html#term-plu-factorization"><strong>PLU factorization</strong></a>
+</li>
+      <li><a href="ivp/systems.html#index-0">predator--prey model</a>
+</li>
+      <li><a href="leastsq/normaleqns.html#index-2">pseudoinverse</a>, <a href="leastsq/overview.html#term-pseudoinverse"><strong>[1]</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Q">Q</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="leastsq/overview.html#term-qr"><strong>qr</strong></a>
+</li>
+      <li><a href="leastsq/overview.html#term-qr-factorization"><strong>QR factorization</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="nonlineqn/newton.html#index-1">quadratic convergence</a>, <a href="nonlineqn/overview.html#term-quadratic-convergence"><strong>[1]</strong></a>
+</li>
+      <li><a href="nonlineqn/overview.html#term-quasi-newton-methods"><strong>Quasi-Newton methods</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="linsys/condition-number.html#index-2">residual</a>, <a href="nonlineqn/newton.html#index-5">[1]</a>, <a href="nonlineqn/rootproblem.html#index-2">[2]</a>, <a href="linsys/overview.html#term-residual"><strong>[3]</strong></a>
+</li>
+      <li><a href="nonlineqn/overview.html#term-rootfinding-problem"><strong>rootfinding problem</strong></a>
+</li>
+      <li><a href="nonlineqn/rootproblem.html#index-0">roots</a>
+
+      <ul>
+        <li><a href="nonlineqn/newton.html#index-3">nonsimple</a>, <a href="nonlineqn/rootproblem.html#index-4">[1]</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="linsys/overview.html#term-row-pivoting"><strong>row pivoting</strong></a>
+</li>
+      <li><a href="ivp/overview.html#term-runge-kutta"><strong>Runge--Kutta</strong></a>
+</li>
+      <li><a href="ivp/adaptive.html#index-0">Runge--Kutta method</a>, <a href="ivp/multistep.html#index-1">[1]</a>, <a href="ivp/rk.html#index-0">[2]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="nonlineqn/secant.html#index-0">secant method</a>, <a href="nonlineqn/overview.html#term-secant-method"><strong>[1]</strong></a>
+</li>
+      <li>
+    significand
+
+      <ul>
+        <li>
+    see mantissa
+</li>
+      </ul></li>
+      <li><a href="intro/floating-point.html#index-4">significant digits</a>
+</li>
+      <li><a href="nonlineqn/overview.html#term-simple-root"><strong>simple root</strong></a>
+</li>
+      <li><a href="localapprox/adaptive.html#index-1">Simpson formula</a>
+</li>
+      <li><a href="localapprox/integration.html#index-5">Simpson&#39;s formula</a>
+</li>
+      <li><a href="linsys/overview.html#term-size"><strong>size</strong></a>
+</li>
+      <li><a href="ivp/overview.html#term-solve"><strong>solve</strong></a>
+</li>
+      <li><a href="linsys/overview.html#term-sparse"><strong>sparse</strong></a>
+</li>
+      <li><a href="linsys/structure.html#index-3">sparse matrix</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    SPD matrix
+
+      <ul>
+        <li>
+    see symmetric positive definite matrix
+</li>
+      </ul></li>
+      <li><a href="linsys/overview.html#term-spy"><strong>spy</strong></a>
+</li>
+      <li><a href="linsys/pivoting.html#index-3">stability</a>
+</li>
+      <li><a href="ivp/overview.html#term-step-size"><strong>step size</strong></a>
+</li>
+      <li><a href="ivp/overview.html#term-stiff"><strong>stiff</strong></a>
+</li>
+      <li><a href="ivp/implicit.html#index-2">stiff differential equation</a>
+</li>
+      <li><a href="intro/conditioning.html#index-0">subtractive cancellation</a>, <a href="intro/stability.html#index-0">[1]</a>, <a href="leastsq/qr.html#index-3">[2]</a>, <a href="linsys/pivoting.html#index-4">[3]</a>, <a href="localapprox/fd-converge.html#index-3">[4]</a>, <a href="intro/overview.html#term-subtractive-cancellation"><strong>[5]</strong></a>
+</li>
+      <li><a href="nonlineqn/secant.html#index-1">superlinear convergence</a>, <a href="nonlineqn/overview.html#term-superlinear-convergence"><strong>[1]</strong></a>
+</li>
+      <li><a href="leastsq/house.html#index-3">symmetric matrix</a>, <a href="linsys/matrices.html#index-0">[1]</a>, <a href="linsys/structure.html#index-4">[2]</a>, <a href="linsys/overview.html#term-symmetric-matrix"><strong>[3]</strong></a>
+</li>
+      <li><a href="linsys/structure.html#index-5">symmetric positive definite matrix</a>, <a href="linsys/overview.html#term-symmetric-positive-definite-matrix"><strong>[1]</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="localapprox/overview.html#term-trapezoid-formula"><strong>trapezoid formula</strong></a>
+
+      <ul>
+        <li><a href="localapprox/integration.html#index-3">for integration</a>
+</li>
+      </ul></li>
+      <li><a href="linsys/linear-systems.html#index-3">triangular matrix</a>, <a href="linsys/overview.html#term-triangular-matrix"><strong>[1]</strong></a>
+</li>
+      <li><a href="linsys/structure.html#index-1">tridiagonal matrix</a>, <a href="linsys/overview.html#term-tridiagonal-matrix"><strong>[1]</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="localapprox/overview.html#term-truncation-error"><strong>truncation error</strong></a>
+
+      <ul>
+        <li><a href="localapprox/fd-converge.html#index-1">of a finite difference formula</a>
+</li>
+        <li><a href="ivp/multistep.html#index-3">of a multistep IVP formula</a>
+</li>
+        <li><a href="ivp/euler.html#index-2">of a one-step IVP solver</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="intro/floating-point.html#index-8">underflow</a>
+</li>
+      <li>
+    unit roundoff
+
+      <ul>
+        <li>
+    see machine epsilon
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="linsys/lu.html#index-2">unit triangular matrix</a>, <a href="linsys/overview.html#term-unit-triangular-matrix"><strong>[1]</strong></a>
+</li>
+      <li><a href="linsys/norms.html#index-1">unit vector</a>, <a href="linsys/overview.html#term-unit-vector"><strong>[1]</strong></a>
+</li>
+      <li><a href="intro/overview.html#term-unstable"><strong>unstable</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="leastsq/fitting.html#index-2">Vandermonde matrix</a>, <a href="linsys/polyinterp.html#index-1">[1]</a>, <a href="linsys/overview.html#term-vandermonde-matrix"><strong>[2]</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Z">Z</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="ivp/zerostability.html#index-2">zero-stability</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="linsys/overview.html#term-zeros"><strong>zeros</strong></a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tobin A. Driscoll and Richard J. Braun<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="_static/js/index.js"></script>
+    
+  </body>
+</html>

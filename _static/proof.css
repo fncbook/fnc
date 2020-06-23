@@ -1,0 +1,92 @@
+:root {
+  --ud-blue: rgb(0,83,159);
+  --ud-yellow: rgb(255,210,0);
+  --ud-darkblue: rgb(0,60,113);
+  --ud-gray: rgb(189,189,189);
+  --ud-black: rgb(0,0,0);
+  --ud-tan: rgb(238,232,197);
+  --ud-lightblue: rgb(0,160,223);
+  --ud-white: rgb(255,255,255);
+
+  --light: #e2e3f0;
+  --neutral: #7377a5;
+  --dark: #1d1f3d;
+  --highlight: #29648a;
+}
+
+.proof {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+/* Titles */
+.proof .proof-title {
+  padding-left: 1em;
+  padding-top: 1ex;
+  padding-bottom: 1ex;
+  background-color: var(--light);
+  border: 1px solid var(--neutral);
+  color: var(--highlight);
+  font-size: 100%;
+  font-weight: bold;
+  }
+
+/* Content */
+.proof-content {
+  border: 1px solid var(--neutral);
+  background-color: #FFFFFF;
+  padding: 1ex 1em 0em 1em;
+}
+
+/* Demo exceptions */
+.proof-type-demo > .proof-title {
+  border-bottom: 0px ;
+  }
+
+.proof-type-demo > .proof-content {
+  border-top: 0px;
+  background-color: var(--light);
+  padding: 1em 1em 1ex 1em;
+}
+
+/* Toggle proof */
+/* .proof-type-proof > .proof-title {
+    display: block;
+    clear: both;
+}
+
+.proof-type-proof > .proof-title:after {
+    content: " ▼";
+}
+
+.proof-type-proof > .proof-title.open:after {
+    content: " ▲";
+} */
+
+/* Toggle example */
+/* .proof-type-example > .proof-title {
+  display: block;
+  clear: both;
+}
+
+.proof-type-example > .proof-title:after {
+  content: " ▼";
+}
+
+.proof-type-example > .proof-title.open:after {
+  content: " ▲";
+} */
+
+/* Toggle function */
+/* .proof-type-function > .proof-title {
+  display: block;
+  clear: both;
+}
+
+.proof-type-function > .proof-title:after {
+  content: " ▼";
+}
+
+.proof-type-function > .proof-title.open:after {
+  content: " ▲";
+} */

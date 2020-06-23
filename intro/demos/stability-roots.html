@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Polynomial roots &#8212; Fundamentals of Numerical Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/sphinx-book-theme.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/mystnb.js"></script>
+    <script src="../../_static/proof.js"></script>
+    <script src="../../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Chapter 2 (Linear systems)" href="../../appendix/demos-02.html" />
+    <link rel="prev" title="Stable alternative to the quadratic formula" href="stability-quadgood.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <img src="../../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fundamentals of Numerical Computation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../../frontmatter.html">Home</a>
+  </li>
+  <li class="">
+    <a href="../overview.html">Introduction</a>
+  </li>
+  <li class="">
+    <a href="../../linsys/overview.html">Square linear systems</a>
+  </li>
+  <li class="">
+    <a href="../../leastsq/overview.html">Overdetermined linear systems</a>
+  </li>
+  <li class="">
+    <a href="../../nonlineqn/overview.html">Roots of nonlinear equations</a>
+  </li>
+  <li class="">
+    <a href="../../localapprox/overview.html">Piecewise interpolation</a>
+  </li>
+  <li class="">
+    <a href="../../ivp/overview.html">Initial-value problems for ODEs</a>
+  </li>
+  <li class="">
+    <a href="../../appendix/linear-algebra.html">Review: Linear algebra</a>
+  </li>
+  <li class="active">
+    <a href="../../appendix/demos.html">All demo notebooks</a>
+  <ul class="nav sidenav_l2">
+    <li class="active">
+      <a href="../../appendix/demos-01.html">Chapter 1 (Introduction)</a>
+      <ul class="nav sidenav_l3">
+      <li class="">
+        <a href="float-julia.html">Floating point in Julia</a>
+      </li>
+      <li class="">
+        <a href="float-accuracy.html">Absolute and relative accuracy</a>
+      </li>
+      <li class="">
+        <a href="float-arithmetic.html">Surprising arithmetic</a>
+      </li>
+      <li class="">
+        <a href="algorithms-horner.html">Horner’s rule</a>
+      </li>
+      <li class="">
+        <a href="stability-quadbad.html">Instability of the quadratic formula</a>
+      </li>
+      <li class="">
+        <a href="stability-quadgood.html">Stable alternative to the quadratic formula</a>
+      </li>
+      <li class="active">
+        <a href="">Polynomial roots</a>
+      </li>
+    </ul>
+    </li>
+    <li class="">
+      <a href="../../appendix/demos-02.html">Chapter 2 (Linear systems)</a>
+    </li>
+    <li class="">
+      <a href="../../appendix/demos-03.html">Chapter 3 (Least squares)</a>
+    </li>
+    <li class="">
+      <a href="../../appendix/demos-04.html">Chapter 4 (Rootfinding)</a>
+    </li>
+    <li class="">
+      <a href="../../appendix/demos-05.html">Chapter 5 (Piecewise)</a>
+    </li>
+    <li class="">
+      <a href="../../appendix/demos-06.html">Chapter 6 (IVPs)</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../../refs.html">References</a>
+  </li>
+  <li class="">
+    <a href="../../genindex.html">Index</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../../_sources/intro/demos/stability-roots.md"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="polynomial-roots">
+<h1>Polynomial roots<a class="headerlink" href="#polynomial-roots" title="Permalink to this headline">¶</a></h1>
+<p>For this example we will use a publicly available package for working with polynomials. It should be available using the following line, if you have followed installation instructions for these scripts.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">Polynomials</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Our first step is to construct a polynomial with six known roots.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="nd">@show</span> <span class="n">p</span> <span class="o">=</span> <span class="n">fromroots</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>p = fromroots(r) = Polynomial(36.0 - 36.0*x - 43.0*x^2 + 44.0*x^3 + 6.0*x^4 - 8.0*x^5 + 1.0*x^6)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we use a standard numerical method for finding those roots, pretending that we don’t know them already.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span> <span class="n">r_computed</span> <span class="o">=</span> <span class="n">sort</span><span class="p">(</span><span class="n">roots</span><span class="p">(</span><span class="n">p</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>r_computed = sort(roots(p)) = [-2.0000000000000013, -0.999999999999999, 0.9999999902778504, 1.0000000097221495, 2.9999999999999996, 5.999999999999992]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here are the relative errors in each of the computed roots. The <code class="docutils literal notranslate"><span class="pre">&#64;.</span></code> notation at the start means essentially to do the given operations on each element of the given vectors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">@.</span> <span class="nb">abs</span><span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">r_computed</span><span class="p">)</span> <span class="o">/</span> <span class="n">r</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>6-element Array{Float64,1}:
+ -6.661338147750939e-16
+ -9.992007221626409e-16
+  9.722149640900568e-9
+  9.722149529878266e-9
+  1.4802973661668753e-16
+  1.3322676295501878e-15
+</pre></div>
+</div>
+</div>
+</div>
+<p>It seems that the forward error is acceptably close to machine epsilon for double precision in all cases except the double root at <span class="math notranslate nohighlight">\(x=1\)</span>. This is not a surprise, though, given the poor conditioning at such roots.</p>
+<p>Let’s consider the backward error. The data in the rootfinding problem are the polynomial coefficients. We can apply <code class="docutils literal notranslate"><span class="pre">fromroots</span></code> to find the coefficients of the polynomial (that is, the data) whose roots were actually computed by the numerical algorithm.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span> <span class="n">p_computed</span> <span class="o">=</span> <span class="n">fromroots</span><span class="p">(</span><span class="n">r_computed</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>p_computed = fromroots(r_computed) = Polynomial(35.99999999999993 - 35.999999999999915*x - 42.99999999999997*x^2 + 43.99999999999998*x^3 + 5.999999999999973*x^4 - 7.999999999999991*x^5 + 1.0*x^6)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We find that in a relative sense, these coefficients are very close to those of the original, exact polynomial:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">=</span> <span class="n">coeffs</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="n">cpc</span> <span class="o">=</span> <span class="n">coeffs</span><span class="p">(</span><span class="n">p_computed</span><span class="p">)</span>
+<span class="o">@.</span> <span class="nb">abs</span><span class="p">(</span><span class="n">cp</span><span class="o">-</span><span class="n">cpc</span><span class="p">)</span><span class="o">/</span><span class="n">cp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>7-element Array{Float64,1}:
+  1.973729821555834e-15
+ -2.3684757858670005e-15
+ -6.609699867535816e-16
+  4.844609562000683e-16
+  4.440892098500626e-15
+ -1.1102230246251565e-15
+  0.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>In summary, even though there are some computed roots relatively far from their correct values, they are nevertheless the roots of a polynomial that is very close to the original.</p>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="stability-quadgood.html" title="previous page">Stable alternative to the quadratic formula</a>
+    <a class='right-next' id="next-link" href="../../appendix/demos-02.html" title="next page">Chapter 2 (Linear systems)</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tobin A. Driscoll and Richard J. Braun<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../../_static/js/index.js"></script>
+    
+  </body>
+</html>

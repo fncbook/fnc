@@ -1,0 +1,387 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Nonlinear least squares &#8212; Fundamentals of Numerical Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/mystnb.js"></script>
+    <script src="../_static/proof.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Next steps" href="next.html" />
+    <link rel="prev" title="Quasi-Newton methods" href="quasinewton.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fundamentals of Numerical Computation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../frontmatter.html">Home</a>
+  </li>
+  <li class="">
+    <a href="../intro/overview.html">Introduction</a>
+  </li>
+  <li class="">
+    <a href="../linsys/overview.html">Square linear systems</a>
+  </li>
+  <li class="">
+    <a href="../leastsq/overview.html">Overdetermined linear systems</a>
+  </li>
+  <li class="active">
+    <a href="overview.html">Roots of nonlinear equations</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="rootproblem.html">The rootfinding problem</a>
+    </li>
+    <li class="">
+      <a href="fixed-point.html">Fixed point iteration</a>
+    </li>
+    <li class="">
+      <a href="newton.html">Newton’s method in one variable</a>
+    </li>
+    <li class="">
+      <a href="secant.html">Interpolation-based methods</a>
+    </li>
+    <li class="">
+      <a href="newtonsys.html">Newton for nonlinear systems</a>
+    </li>
+    <li class="">
+      <a href="quasinewton.html">Quasi-Newton methods</a>
+    </li>
+    <li class="active">
+      <a href="">Nonlinear least squares</a>
+    </li>
+    <li class="">
+      <a href="next.html">Next steps</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../localapprox/overview.html">Piecewise interpolation</a>
+  </li>
+  <li class="">
+    <a href="../ivp/overview.html">Initial-value problems for ODEs</a>
+  </li>
+  <li class="">
+    <a href="../appendix/linear-algebra.html">Review: Linear algebra</a>
+  </li>
+  <li class="">
+    <a href="../appendix/demos.html">All demo notebooks</a>
+  </li>
+  <li class="">
+    <a href="../refs.html">References</a>
+  </li>
+  <li class="">
+    <a href="../genindex.html">Index</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../_sources/nonlineqn/nlsq.md"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#convergence" class="nav-link">Convergence</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#nonlinear-data-fitting" class="nav-link">Nonlinear data fitting</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#exercises" class="nav-link">Exercises</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="nonlinear-least-squares">
+<h1>Nonlinear least squares<a class="headerlink" href="#nonlinear-least-squares" title="Permalink to this headline">¶</a></h1>
+<p>After the solution of square linear systems, we generalized to the case of having more constraints to satisfy than available variables. Our next step is to do the same for nonlinear equations, thus filling out this table:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p></p></th>
+<th class="text-align:center head"><p><strong>linear</strong></p></th>
+<th class="text-align:center head"><p><strong>nonlinear</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><strong>square</strong></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\mathbf{f}(\mathbf{x})=\boldsymbol{0}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><strong>overdetermined</strong></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\min\, \bigl\|\mathbf{A}\mathbf{x} - \mathbf{b}\bigr\|_2\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\min\, \bigl\|\mathbf{f}(\mathbf{x}) \bigr\|_2\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p id="index-0">We now define the <a class="reference internal" href="overview.html#term-nonlinear-least-squares-problem"><span class="xref std std-term">nonlinear least squares problem</span></a>.</p>
+<div class="proof proof-type-definition" id="id6">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 41</span>
+        
+            <span class="proof-title-name">(Nonlinear least squares problem)</span>
+        
+    </div><div class="proof-content">
+<p>Given a function <span class="math notranslate nohighlight">\(\mathbf{f}(\mathbf{x})\)</span> mapping from <span class="math notranslate nohighlight">\(\real^n\)</span> to <span class="math notranslate nohighlight">\(\real^m\)</span>, find <span class="math notranslate nohighlight">\(\mathbf{x}\in\real^n\)</span> such that <span class="math notranslate nohighlight">\(\bigl\|\mathbf{f}(\mathbf{x})\bigr\|_2\)</span> is minimized.</p>
+</div></div><p>As in the linear case, we consider only overdetermined problems, where <span class="math notranslate nohighlight">\(m&gt;n\)</span>. Minimizing a positive quantity is equivalent to minimizing its square, so we could also define the result as minimizing <span class="math notranslate nohighlight">\(\phi(\mathbf{x})=\mathbf{f}(\mathbf{x})^T\mathbf{f}(\mathbf{x})\)</span>.</p>
+<p id="index-1">You should not be surprised to learn that we can formulate an algorithm by substituting a linear model function for <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>. At a current estimate <span class="math notranslate nohighlight">\(\mathbf{x}_k\)</span> we define</p>
+<div class="math notranslate nohighlight">
+\[  \mathbf{q}(\mathbf{x})  = \mathbf{f}(\mathbf{x}_k) + \mathbf{A}_k(\mathbf{x}-\mathbf{x}_k),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{A}_k\)</span> might be the exact <span class="math notranslate nohighlight">\(m\times n\)</span> Jacobian matrix, <span class="math notranslate nohighlight">\(\mathbf{J}(\mathbf{x}_k)\)</span>, or a finite-difference or Broyden approximation of it as described in <a class="reference internal" href="quasinewton.html"><span class="doc">Quasi-Newton methods</span></a>.</p>
+<p>In the square case we solved <span class="math notranslate nohighlight">\(\mathbf{q}=\boldsymbol{0}\)</span> to define the new value for <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, leading to the condition <span class="math notranslate nohighlight">\(\mathbf{A}_k\mathbf{s}_k=-\mathbf{f}_k\)</span>, where  <span class="math notranslate nohighlight">\(\mathbf{s}_k=\mathbf{x}_{k+1}-\mathbf{x}_k\)</span>. Now, with <span class="math notranslate nohighlight">\(m&gt;n\)</span>, we cannot expect to solve <span class="math notranslate nohighlight">\(\mathbf{q}=\boldsymbol{0}\)</span>, so instead we define <span class="math notranslate nohighlight">\(\mathbf{x}_{k+1}\)</span> as the value that minimizes <span class="math notranslate nohighlight">\(\| \mathbf{q} \|_2\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-nlsmin">
+<span class="eqno">(102)<a class="headerlink" href="#equation-nlsmin" title="Permalink to this equation">¶</a></span>\[  \mathbf{x}_{k+1} = \mathbf{x}_k + \mathbf{s}_k, \text{ where } \| \mathbf{A}_k \mathbf{s}_k + \mathbf{f}(\mathbf{x}_k)\|_2 \text{ is minimized.}\]</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Gauss–Newton solves a series of linear least-squares problems in order to solve a nonlinear least squares problem.</p>
+</div>
+<p>We have just described the <a class="reference internal" href="overview.html#term-gauss-newton-method"><span class="xref std std-term">Gauss–Newton method</span></a>. Gauss–Newton solves a series of linear least-squares problems in order to solve a nonlinear least squares problem.</p>
+<p>Here we reap an amazing benefit from Julia: The functions <a class="reference internal" href="newtonsys.html#function-newtonsys"><span class="std std-ref">newtonsys</span></a> and <a class="reference internal" href="quasinewton.html#function-levenberg"><span class="std std-ref">levenberg</span></a>, which were introduced for the case of <span class="math notranslate nohighlight">\(m=n\)</span> nonlinear equations, work <em>without modification</em> as the Gauss–Newton method for the overdetermined case! The reason is that the backslash operator applies equally well to the linear system and linear least squares problems, and nothing else in the function was written with explicit reference to <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<div class="section" id="convergence">
+<h2>Convergence<a class="headerlink" href="#convergence" title="Permalink to this headline">¶</a></h2>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Gauss–Newton converges less rapidly than Newton’s method if the optimal residual is not small.</p>
+</div>
+<p>In the multidimensional Newton method for a nonlinear system, we expect quadratic convergence to a solution in the typical case. For the Gauss–Newton method, the picture is more complicated. As always in least squares problems, the residual <span class="math notranslate nohighlight">\(\mathbf{f}(\mathbf{x})\)</span> will not necessarily be zero when <span class="math notranslate nohighlight">\(\|\mathbf{f}\|\)</span> is minimized. Suppose that the minimum value of <span class="math notranslate nohighlight">\(\|\mathbf{f}\|\)</span> is <span class="math notranslate nohighlight">\(R&gt;0\)</span>. In general, we might observe quadratic-like convergence until the iterate <span class="math notranslate nohighlight">\(\|\mathbf{x}_k\|\)</span> is within distance <span class="math notranslate nohighlight">\(R\)</span> of a true minimizer, and linear convergence thereafter. When <span class="math notranslate nohighlight">\(R\)</span> is not sufficiently small, the convergence can be quite slow.</p>
+</div>
+<div class="section" id="nonlinear-data-fitting">
+<h2>Nonlinear data fitting<a class="headerlink" href="#nonlinear-data-fitting" title="Permalink to this headline">¶</a></h2>
+<p id="index-2">In <a class="reference internal" href="../leastsq/fitting.html"><span class="doc">Fitting functions to data</span></a> we saw how to fit functions to data values, provided that the set of candidate fitting functions depends linearly on the undetermined coefficients. We now have the tools to generalize that process to fitting functions that depend nonlinearly on unknown parameters. Suppose that <span class="math notranslate nohighlight">\((t_i,y_i)\)</span> for <span class="math notranslate nohighlight">\(i=1,\ldots,m\)</span> are given points. We wish to model the data by a function <span class="math notranslate nohighlight">\(g(t;\mathbf{c})\)</span> that depends on unknown parameters <span class="math notranslate nohighlight">\(c_1,\ldots,c_n\)</span> in an arbitrary way. A standard approach is to minimize the discrepancy between the model and the observations, in a least squares sense:</p>
+<div class="math notranslate nohighlight">
+\[  \min_{\mathbf{c}\in\mathbb{R}^n} \sum_{i=1}^m \bigl[ g(t_i;\mathbf{c})-y_i \bigr]^2 = \min_{\mathbf{c}\in\mathbb{R}^n} \bigl\| \mathbf{f}(\mathbf{c}) \bigr\|^2,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{f}(\mathbf{c})\)</span> is the vector of values <span class="math notranslate nohighlight">\(g(t_i;\mathbf{c})-y_i\)</span>. We call <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> a <strong>misfit</strong> function: the smaller the norm of the misfit, the better the fit.</p>
+<div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/nlsq-MM.html"><span class="doc">Michaelis–Menten fitting</span></a></p>
+</div>
+<p>The form of <span class="math notranslate nohighlight">\(g\)</span> is up to the modeler. There may be compelling theoretical choices, or you may just be looking for enough algebraic power to express the data well. Naturally, in the special case where the dependence on <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> is linear, i.e.,</p>
+<div class="math notranslate nohighlight">
+\[  g(t;\mathbf{c}) = c_1 g_1(t) + c_2 g_2(t) + \cdots + c_m g_m(t),\]</div>
+<p>then the misfit function is also linear in <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> and the fitting problem reduces to linear least squares.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol id="problem-nlsonevar">
+<li><p>✍ Define <span class="math notranslate nohighlight">\(\mathbf{f}(x)=[ x-8, \; x^2-4 ]^T\)</span>.</p>
+<p><strong>(a)</strong> Write out the linear model of <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> at <span class="math notranslate nohighlight">\(x=2\)</span>.</p>
+<p><strong>(b)</strong> Find the estimate produced by one step of the Gauss–Newton method, starting at <span class="math notranslate nohighlight">\(x=2\)</span>.</p>
+</li>
+<li><p>✍ (continuation of preceding problem) The Gauss–Newton method replaces <span class="math notranslate nohighlight">\(\mathbf{f}(\mathbf{x})\)</span> by a linear model and minimizes the residual norm of it. An alternative is to replace <span class="math notranslate nohighlight">\(\| \mathbf{f}(\mathbf{x}) \|_2^2\)</span> by a scalar <em>quadratic</em> model <span class="math notranslate nohighlight">\(q(\mathbf{x})\)</span>, and minimize that.</p>
+<p><strong>(a)</strong> Using <span class="math notranslate nohighlight">\(\mathbf{f}(x) = [ x-8, \; x^2-4 ]^T\)</span>, let <span class="math notranslate nohighlight">\(q(x)\)</span> be defined by the first three terms in the Taylor series for <span class="math notranslate nohighlight">\(\| \mathbf{f}(x) \|_2^2\)</span> at <span class="math notranslate nohighlight">\(x=2\)</span>.</p>
+<p><strong>(b)</strong> Find the unique <span class="math notranslate nohighlight">\(x\)</span> that minimizes <span class="math notranslate nohighlight">\(q(x)\)</span>. Is the result the same as the estimate produced by Gauss–Newton?</p>
+</li>
+<li><p>⌨  A famous result by Kermack and McKendrick in 1927 <a class="bibtex reference internal" href="../refs.html#kermackcontributionmathematical1927" id="id1">[KMW27]</a> suggests that in epidemics that kill only a small fraction of a susceptible population, the death rate as a function of time is well modeled by</p>
+<div class="math notranslate nohighlight">
+\[w'(t) = A \operatorname{sech}^2[B(t-C)],\]</div>
+<p>for constant values of the parameters <span class="math notranslate nohighlight">\(A,B,C\)</span>. Since the maximum of sech is <span class="math notranslate nohighlight">\(\operatorname{sech}(0)=1\)</span>, <span class="math notranslate nohighlight">\(A\)</span> is the maximum death rate and <span class="math notranslate nohighlight">\(C\)</span> is the time of peak deaths. You will use this model to fit the deaths per week from plague recorded in Mumbai in a period during 1906:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">292</span><span class="p">,</span> <span class="mi">395</span><span class="p">,</span> <span class="mi">445</span><span class="p">,</span> <span class="mi">775</span><span class="p">,</span> <span class="mi">780</span><span class="p">,</span>
+<span class="mi">700</span><span class="p">,</span> <span class="mi">698</span><span class="p">,</span> <span class="mi">880</span><span class="p">,</span> <span class="mi">925</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">578</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="mi">202</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span>
+</pre></div>
+</div>
+<p><strong>(a)</strong> Use <a class="reference internal" href="quasinewton.html#function-levenberg"><span class="std std-ref">levenberg</span></a> to find the best least-squares fit to the data using the <span class="math notranslate nohighlight">\(\operatorname{sech}^2\)</span> model. Make a plot of the model fit superimposed on the data. What are <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span>?</p>
+<p><strong>(b)</strong> In practice, one would like a model to predict the full course of the epidemic before it has reached its peak and subsided. Redo the fitting from part~(a) using only the first 12 data values. Add this model to your plot and report <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(C\)</span>. Is this model a useful predictor of the value and timing of the maximum death rate?</p>
+<p><strong>(c)</strong> Repeat part (b) using the first 13 data values.</p>
+</li>
+<li><p>⌨  The <em>Rosenbrock banana function</em> is defined as <span class="math notranslate nohighlight">\(\| \mathbf{f}(\mathbf{x}) \|_2^2\)</span>, where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{f}(\mathbf{x}) =
+\begin{bmatrix}
+  10(x_2-x_1^2) \\ 1-x_1
+\end{bmatrix}.\end{split}\]</div>
+<p>Use <a class="reference internal" href="newtonsys.html#function-newtonsys"><span class="std std-ref">newtonsys</span></a> to find a minimizer of the banana function starting from <span class="math notranslate nohighlight">\((-1.4,5.1)\)</span>. (If you’re curious about its name, make a contour plot of the residual over <span class="math notranslate nohighlight">\(-2\le x_1 \le 3\)</span>, <span class="math notranslate nohighlight">\(-1\le x_2 \le 4\)</span>.) Show all the digits of the final result.</p>
+</li>
+<li><p>⌨  In this problem you are to fit a function of the form</p>
+<div class="math notranslate nohighlight">
+\[P(t) = c_1 + c_2 e^{c_3 t}\]</div>
+<p>to US census data for the twentieth century. Starting in 1900, the population in millions every ten years was:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="mf">76.0</span><span class="p">,</span> <span class="mf">92.0</span><span class="p">,</span> <span class="mf">105.7</span><span class="p">,</span> <span class="mf">122.8</span><span class="p">,</span> <span class="mf">131.7</span><span class="p">,</span> <span class="mf">150.7</span><span class="p">,</span> <span class="mf">179.0</span><span class="p">,</span> <span class="mf">205.0</span><span class="p">,</span> <span class="mf">226.5</span><span class="p">,</span> <span class="mf">248.7</span>
+</pre></div>
+</div>
+<p>Use nonlinear least squares to determine the unknown parameters <span class="math notranslate nohighlight">\(c_1\)</span>, <span class="math notranslate nohighlight">\(c_2\)</span>, <span class="math notranslate nohighlight">\(c_3\)</span> in <span class="math notranslate nohighlight">\(P\)</span>. To aid convergence, rescale the data using the time variable <span class="math notranslate nohighlight">\(t = (\text{year}-1900)/100\)</span> and divide the population numbers above by <span class="math notranslate nohighlight">\(100\)</span>. Using your model <span class="math notranslate nohighlight">\(P(t)\)</span>, predict the result of the 2000 census, and compare it to the exact figure (which can be found easily on the internet).</p>
+</li>
+<li><p>⌨ The position of the upper lid during an eye blink can be measured from high speed video <a class="bibtex reference internal" href="../refs.html#wueffectsmild2014" id="id2">[WBS+14]</a>, and it may be possible to classify blinks based in part on fits to the lid position <a class="bibtex reference internal" href="../refs.html#broschblinkcharacterization2017" id="id3">[BWB+17]</a>. The lid position functions proposed to fit blinks is a product of a monomial or polynomial multiplying a decaying exponential <a class="bibtex reference internal" href="../refs.html#berkekineticslid1998" id="id4">[BM98]</a>.  In this problem, you will generate representative data, add a small amount of noise to it, and then perform nonlinear least squares fits to the data.</p>
+<p><strong>(a)</strong> Consider the function <span class="math notranslate nohighlight">\(y(\mathbf{a}) = a_1 \exp \left( -a_2 t^{a_3} \right)\)</span>, using the vector of coefficients <span class="math notranslate nohighlight">\(\mathbf{a} = [a_1 \ a_2\ a_3]\)</span>, and create eyelid position data as follows:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="p">=</span> <span class="mi">20</span><span class="p">;</span>                            <span class="c">% number of time values</span>
+<span class="n">t</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">)</span><span class="o">&#39;/</span><span class="n">N</span><span class="p">;</span>            <span class="c">% equally spaced to t=1</span>
+<span class="n">a</span> <span class="p">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">&#39;</span><span class="p">;</span>                  <span class="c">% baseline values</span>
+<span class="n">y</span> <span class="p">=</span> <span class="n">a</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="o">.^</span><span class="mf">2.</span><span class="o">*</span><span class="nb">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="o">.^</span><span class="n">a</span><span class="p">(</span><span class="mi">3</span><span class="p">));</span> <span class="c">% ideal data</span>
+<span class="n">ym</span> <span class="p">=</span> <span class="n">y</span><span class="p">;</span>                            <span class="c">% vector for data</span>
+<span class="n">ir</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>                        <span class="c">% range to add noise</span>
+<span class="n">rng</span><span class="p">(</span><span class="mi">13</span><span class="p">);</span>                           <span class="c">% set seed for rand</span>
+<span class="n">noise</span> <span class="p">=</span> <span class="mf">0.03</span><span class="p">;</span>                      <span class="c">% amplitude of noise</span>
+<span class="n">ym</span><span class="p">(</span><span class="n">ir</span><span class="p">)</span> <span class="p">=</span> <span class="n">y</span><span class="p">(</span><span class="n">ir</span><span class="p">)</span> <span class="o">+</span> <span class="n">noise</span><span class="o">*</span><span class="nb">rand</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">y</span><span class="p">(</span><span class="n">ir</span><span class="p">)));</span>  <span class="c">% add noise</span>
+</pre></div>
+</div>
+<p><strong>(b)</strong> Using the data <code class="docutils literal notranslate"><span class="pre">(t,ym)</span></code>, find the nonlinear least squares fit using <a class="reference internal" href="quasinewton.html#function-levenberg"><span class="std std-ref">levenberg</span></a>.</p>
+<p><strong>(c)</strong> Plot the fits using <code class="docutils literal notranslate"><span class="pre">np</span> <span class="pre">=</span> <span class="pre">100</span></code> points over <code class="docutils literal notranslate"><span class="pre">t=(1:np)/np</span></code> together with symbols for the <code class="docutils literal notranslate"><span class="pre">N</span></code> measured data points <code class="docutils literal notranslate"><span class="pre">ym</span></code>.</p>
+<p><strong>(d)</strong> Increase the noise to 5% and 10%. You may have to increase the number of measured points <code class="docutils literal notranslate"><span class="pre">N</span></code> and/or the maximum number of iterations.  How close are the coefficients?  Plot the data and the resulting fit for each case.</p>
+</li>
+<li><p>⌨ Repeat the previous problem using the fitting function <span class="math notranslate nohighlight">\(y(\mathbf{a}) = (a_1+a_2 t + a_3 t^2) t^2 \exp \left( -a_4 t^{a_5} \right)\)</span>, using the vector of coefficients <span class="math notranslate nohighlight">\(\mathbf{a} = [a_1 \ a_2\ a_3\ a_4\ a_5]\)</span>. (This was the choice used in Brosch et al <a class="bibtex reference internal" href="../refs.html#broschblinkcharacterization2017" id="id5">[BWB+17]</a>.)  Use <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">[20,</span> <span class="pre">-10,</span> <span class="pre">-8,</span> <span class="pre">7,</span> <span class="pre">2]</span></code> to create the data and as an initial guess for the coefficients for the fit to the noisy data.</p>
+ <!-- \item ⌨ The following problems ask you to generate nonlinear fits using the specified functions with the same levels of noise and numbers of points as in the previous two problems; however, use "randn" rather than "rand". For these functions, estimate to two digits the amplitude of the noise where the SSE becomes larger than unity.  For all computations, use initial guess $\mathbf{a} = [ 2,\ 2\pi, \  2.5]$.
+<ol class="simple">
+<li></li>
+</ol>
+<p>\item <span class="math notranslate nohighlight">\(y(\mathbf{a}) = a_1 t \sin \left( a_2 t^{a_3} \right)\)</span>.
+\item $y(\mathbf{a}) = a_1 (1-t) \cos \left( a_2 t^{a_3} –&gt;</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="quasinewton.html" title="previous page">Quasi-Newton methods</a>
+    <a class='right-next' id="next-link" href="next.html" title="next page">Next steps</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tobin A. Driscoll and Richard J. Braun<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

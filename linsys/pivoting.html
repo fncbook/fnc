@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Row pivoting &#8212; Fundamentals of Numerical Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/mystnb.js"></script>
+    <script src="../_static/proof.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Vector and matrix norms" href="norms.html" />
+    <link rel="prev" title="Efficiency of matrix computations" href="efficiency.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fundamentals of Numerical Computation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../frontmatter.html">Home</a>
+  </li>
+  <li class="">
+    <a href="../intro/overview.html">Introduction</a>
+  </li>
+  <li class="active">
+    <a href="overview.html">Square linear systems</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="polyinterp.html">Polynomial interpolation</a>
+    </li>
+    <li class="">
+      <a href="matrices.html">Computing with matrices</a>
+    </li>
+    <li class="">
+      <a href="linear-systems.html">Linear systems</a>
+    </li>
+    <li class="">
+      <a href="lu.html">LU factorization</a>
+    </li>
+    <li class="">
+      <a href="efficiency.html">Efficiency of matrix computations</a>
+    </li>
+    <li class="active">
+      <a href="">Row pivoting</a>
+    </li>
+    <li class="">
+      <a href="norms.html">Vector and matrix norms</a>
+    </li>
+    <li class="">
+      <a href="condition-number.html">Conditioning of linear systems</a>
+    </li>
+    <li class="">
+      <a href="structure.html">Exploiting matrix structure</a>
+    </li>
+    <li class="">
+      <a href="next.html">Next steps</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../leastsq/overview.html">Overdetermined linear systems</a>
+  </li>
+  <li class="">
+    <a href="../nonlineqn/overview.html">Roots of nonlinear equations</a>
+  </li>
+  <li class="">
+    <a href="../localapprox/overview.html">Piecewise interpolation</a>
+  </li>
+  <li class="">
+    <a href="../ivp/overview.html">Initial-value problems for ODEs</a>
+  </li>
+  <li class="">
+    <a href="../appendix/linear-algebra.html">Review: Linear algebra</a>
+  </li>
+  <li class="">
+    <a href="../appendix/demos.html">All demo notebooks</a>
+  </li>
+  <li class="">
+    <a href="../refs.html">References</a>
+  </li>
+  <li class="">
+    <a href="../genindex.html">Index</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../_sources/linsys/pivoting.md"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#the-algebra-of-row-pivoting" class="nav-link">The algebra of row pivoting</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#stability-and-pivoting" class="nav-link">Stability and pivoting</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#exercises" class="nav-link">Exercises</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="row-pivoting">
+<h1>Row pivoting<a class="headerlink" href="#row-pivoting" title="Permalink to this headline">¶</a></h1>
+<div class="demo sidebar" id="index-0">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/pivot-fail.html"><span class="doc">Failure of plain LU factorization</span></a></p>
+</div>
+<p>As mentioned in <a class="reference internal" href="lu.html"><span class="doc">the section on LU factorization</span></a>, the <span class="math notranslate nohighlight">\(\mathbf{A}=\mathbf{L}\mathbf{U}\)</span> factorization
+does not work for every nonsingular <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. A simple rearrangement of the system found in <a class="reference internal" href="demos/lu-gauss.html"><span class="doc">Gaussian elimination</span></a> demonstrates this fact.</p>
+<p>The breakdown in <a class="reference internal" href="demos/pivot-fail.html"><span class="doc">Failure of plain LU factorization</span></a> is easily explained. After elimination is performed successfully in the first column, we have the matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}  \begin{bmatrix}
+    2 &amp; 0 &amp; 4 &amp; 3 \\
+    0 &amp; 0 &amp; 6 &amp; -10 \\
+    0 &amp; 15 &amp; 0 &amp; -6 \\
+    0 &amp; 5 &amp; 1 &amp; -4 \\
+  \end{bmatrix}.\end{split}\]</div>
+<p>At this point there is no way to proceed, because trying to find the next row multiplier means division by the zero now sitting in the (2,2) position. In this particular case, we know that we can remove the problem by swapping two of the rows. Fortunately, that capability is all that is needed for <em>any</em> invertible matrix.</p>
+<p id="index-1">A row swap is necessary when the algorithm would otherwise require a division by zero. The only context in which this can occur is if the <span class="math notranslate nohighlight">\((j,j)\)</span> element is zero just before the eliminations for column <span class="math notranslate nohighlight">\(j\)</span>. This number is called the <strong>pivot element</strong>. If it is zero, we need to swap row <span class="math notranslate nohighlight">\(j\)</span> with another row in order to create a nonzero pivot. But we don’t want to swap with a row <em>above</em> row <span class="math notranslate nohighlight">\(j\)</span>, because that could destroy the upper triangular structure we have partially built. So we search only in rows <span class="math notranslate nohighlight">\(j+1\)</span> through <span class="math notranslate nohighlight">\(n\)</span> of column <span class="math notranslate nohighlight">\(j\)</span> to find a nonzero element to serve as pivot. This process is called <a class="reference internal" href="overview.html#term-row-pivoting"><span class="xref std std-term">row pivoting</span></a> or <em>partial pivoting</em>.</p>
+<p>What if no nonzero pivot can be found? The following theorem ties up this loose end.</p>
+<div class="proof proof-type-theorem" id="id1">
+<span id="theorem-pivot"></span>
+    <div class="proof-title">
+        <span class="proof-type">Theorem 17</span>
+        
+            <span class="proof-title-name">(Row pivoting)</span>
+        
+    </div><div class="proof-content">
+<p>If a pivot element and all the elements below it are zero, then the original matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is singular. In other words, if <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is nonsingular, then Gaussian elimination with row pivoting will run to completion.</p>
+</div></div><div class="proof proof-type-proof">
+
+    <div class="proof-title">
+        <span class="proof-type">Proof </span>
+        
+    </div><div class="proof-content">
+<p>The proof of the first statement is considered in <a class="reference internal" href="#problem-zerocolumn"><span class="std std-ref">an exercise</span></a>. The second statement follows from it, because the only way that the Gaussian elimination algorithm can have an undefined step is when all of the choices for a  pivot element are zero.</p>
+</div></div><p>It’s important to keep in mind that <a class="reference internal" href="#theorem-pivot"><span class="std std-ref">the pivoting theorem</span></a> does not refer to elements of the <em>original</em> matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. Only the numbers that appear during the elimination process are relevant.</p>
+<div class="section" id="the-algebra-of-row-pivoting">
+<h2>The algebra of row pivoting<a class="headerlink" href="#the-algebra-of-row-pivoting" title="Permalink to this headline">¶</a></h2>
+<p>Recall that the algebraic expression of LU factorization culminated in equations <a class="reference internal" href="lu.html#equation-lufact0">(29)</a> and <a class="reference internal" href="lu.html#equation-lufact1">(30)</a>. Pivoting introduces a new type of elementary matrix called a <a class="reference internal" href="overview.html#term-permutation-matrix"><span class="xref std std-term">permutation matrix</span></a>, which is an identity matrix with its rows (or depending on your point of view, its columns) reordered. The structure of the elimination process implies</p>
+<div class="math notranslate nohighlight" id="equation-pivot0">
+<span class="eqno">(36)<a class="headerlink" href="#equation-pivot0" title="Permalink to this equation">¶</a></span>\[\mathbf{U} = \mathbf{L}_{43}\mathbf{P}_3(\mathbf{L}_{42}\mathbf{L}_{32})\mathbf{P}_2 (\mathbf{L}_{41}\mathbf{L}_{31}\mathbf{L}_{21})\mathbf{P}_1 \mathbf{A},\]</div>
+<p>for permutation matrices <span class="math notranslate nohighlight">\(\mathbf{P}_j\)</span> each featuring a single row swap. With a little more algebra that we won’t give here, this equation can be rearranged to</p>
+<div class="math notranslate nohighlight" id="equation-palu">
+<span class="eqno">(37)<a class="headerlink" href="#equation-palu" title="Permalink to this equation">¶</a></span>\[\mathbf{P}\mathbf{A} = \mathbf{L}\mathbf{U},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> is the permutation matrix resulting from all of the row swaps in the factorization, and <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> is unit lower triangular. (The construction of <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> also has to account for the row swaps; we do not give the details.) We emphasize that <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> cannot be computed all at once from inspection of the original elements of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. Rather, the elimination process has to be run in full in order to deduce the row swaps.</p>
+<div class="demo sidebar" id="index-2">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/pivot-fixed.html"><span class="doc">Row pivoting</span></a></p>
+</div>
+<p>Permutation matrices have the property <span class="math notranslate nohighlight">\(\mathbf{P}^T = \mathbf{P}^{-1}\)</span> (see <a class="reference internal" href="#problem-perminverse"><span class="std std-ref">this exercise</span></a>). As a result, we can rewrite equation <a class="reference internal" href="#equation-palu">(37)</a> as <span class="math notranslate nohighlight">\(\mathbf{A}=\mathbf{P}^T\mathbf{L}\mathbf{U}\)</span>, and we have a modified factorization of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> (which we call a <a class="reference internal" href="overview.html#term-plu-factorization"><span class="xref std std-term">PLU factorization</span></a>). Either way, we could rewrite the linear system <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span> as <span class="math notranslate nohighlight">\(\mathbf{L}\mathbf{U}\mathbf{x}=\mathbf{P}\mathbf{b}\)</span>, which implies that we can use backward and forward substitution following a permutation of the elements of <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>. However, Julia offers an alternative shortcut for this situation.</p>
+<p>Row pivoting does not add any flops to the factorization process. It does introduce <span class="math notranslate nohighlight">\(O(n^2)\)</span> numerical comparisons, which should be inconsequential compared to the <span class="math notranslate nohighlight">\(O(n^3)\)</span> flop requirement.</p>
+</div>
+<div class="section" id="stability-and-pivoting">
+<h2>Stability and pivoting<a class="headerlink" href="#stability-and-pivoting" title="Permalink to this headline">¶</a></h2>
+<p id="index-3">If you’re very attentive, you may have noticed something curious in the demo <a class="reference internal" href="demos/pivot-fixed.html"><span class="doc">Row pivoting</span></a>. The matrix we introduced had a single swap between rows 2 and 4, and therefore the elimination process could have been fixed by making just that swap again. But this is not what is shown by the <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> computed by Julia. The reason is that there is an additional rule about row pivoting that is essential to the success of the algorithm in the presence of rounding errors.</p>
+<p>A simple example illustrates the key issue. Let</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}  \mathbf{A} =
+  \begin{bmatrix}
+    -\epsilon &amp; 1 \\ 1 &amp; -1
+  \end{bmatrix}, \qquad
+  \mathbf{b} =
+  \begin{bmatrix}
+    1-\epsilon \\ 0
+  \end{bmatrix},\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is a small positive number.  Elimination can be performed  without any pivoting:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}  \begin{bmatrix}
+    -\epsilon &amp; 1 &amp; 1-\epsilon\\
+    0 &amp; -1+\epsilon^{-1} &amp; \epsilon^{-1} - 1
+  \end{bmatrix} \quad \Rightarrow \quad
+  \begin{split}
+    x_2 &amp;= 1\\
+    x_1 &amp;= \frac{(1-\epsilon) - 1}{-\epsilon}.
+  \end{split}\end{split}\]</div>
+<p id="index-4">In exact arithmetic, this produces the correct solution <span class="math notranslate nohighlight">\(x_1=x_2=1\)</span>.  But look at how <span class="math notranslate nohighlight">\(x_1\)</span> is computed. It involves the subtraction of nearby numbers, which is sure to lead to subtractive cancellation in floating-point arithmetic. As a result, the solution will lose an arbitrary amount of accuracy, depending on the value of <span class="math notranslate nohighlight">\(\epsilon\)</span>. In the language of <a class="reference internal" href="../intro/stability.html"><span class="doc">the section on stability</span></a>, the computation has a poorly conditioned step, introducing instability into the complete algorithm.</p>
+<p>Now suppose we swapped the rows of the matrix before elimination, even though it isn’t actually required.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}  \begin{bmatrix}
+    1 &amp; -1 &amp; 0\\
+    0 &amp; 1-\epsilon &amp; 1-\epsilon
+  \end{bmatrix} \quad \Rightarrow \quad
+  \begin{aligned}
+    x_2 &amp;= 1\\
+    x_1 &amp;= \frac{0 - (-1)}{1}.
+  \end{aligned}\end{split}\]</div>
+<p>Each of the arithmetic steps is well-conditioned now, and the solution is computed stably.</p>
+<p>In general, a small (in absolute value) pivot element means weak dependence on the variable that is about to be eliminated. Even though only a zero pivot makes elimination technically impossible, in floating point using a pivot close to zero can cause instability. As a result, the pivoting rule chosen in practice is the following:</p>
+<div class="proof proof-type-myrule" id="id2">
+
+    <div class="proof-title">
+        <span class="proof-type">Rule 18</span>
+        
+            <span class="proof-title-name">(Pivoting)</span>
+        
+    </div><div class="proof-content">
+<p>When performing elimination in column <span class="math notranslate nohighlight">\(j\)</span>, swap row <span class="math notranslate nohighlight">\(j\)</span> with the row below it whose entry in column <span class="math notranslate nohighlight">\(j\)</span> is the largest (in absolute value).</p>
+</div></div><p>One consequence of this rule is that all the below-diagonal elements in the unit lower triangular matrix <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> are bounded above by 1 in absolute value.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol>
+<li><p>✍ Let <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> be a square matrix and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> be a column vector of compatible length. Here is correct Julia code to solve <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span>:</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">LinearAlgebra</span>
+<span class="n">L</span><span class="p">,</span><span class="n">U</span> <span class="o">=</span> <span class="n">lu</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">U</span> <span class="o">\</span> <span class="p">(</span><span class="n">L</span><span class="o">\</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Suppose instead you replace the last line above with</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">U</span> <span class="o">\</span> <span class="n">L</span> <span class="o">\</span> <span class="n">b</span>
+</pre></div>
+</div>
+<p>Mathematically, what vector is found?</p>
+</li>
+<li><p>⌨ Rework <a class="reference internal" href="demos/lu-gauss.html"><span class="doc">Gaussian elimination</span></a> with row pivoting, using Julia to do the elimination step by step and visual inspection of the values as you go to determine the correct pivot element for each column. Start with <span class="math notranslate nohighlight">\(\mathbf{P}=\mathbf{I}\)</span> and perform all the same row swaps in <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> as you do in the process of creating <span class="math notranslate nohighlight">\(\mathbf{U}\)</span>. (There is no need to compute <span class="math notranslate nohighlight">\(\mathbf{L}\)</span>.)</p>
+</li>
+<li id="problem-lumpstring"><p>Suppose a string is stretched with tension <span class="math notranslate nohighlight">\(\tau\)</span> horizontally between two anchors at <span class="math notranslate nohighlight">\(x=0\)</span> and <span class="math notranslate nohighlight">\(x=1\)</span>. At each of the <span class="math notranslate nohighlight">\(n-1\)</span> equally spaced positions <span class="math notranslate nohighlight">\(x_k=k/n\)</span>, <span class="math notranslate nohighlight">\(k=1,\ldots,n-1\)</span>, we attach a little mass <span class="math notranslate nohighlight">\(m_i\)</span> and allow the string to come to equilibrium. This causes vertical displacement of the string. Let <span class="math notranslate nohighlight">\(q_k\)</span> be the amount of displacement at <span class="math notranslate nohighlight">\(x_k\)</span>. If the displacements are not too large, then an approximate force balance equation is</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}n \tau (q_k - q_{k-1}) + n\tau (q_k - q_{k+1}) =\\m_k g, \qquad k=1,\ldots,n-1,\end{aligned}\end{align} \]</div>
+<p>where <span class="math notranslate nohighlight">\(g=-9.8\)</span> m/s<span class="math notranslate nohighlight">\(^2\)</span> is the acceleration due to gravity, and we define <span class="math notranslate nohighlight">\(q_0=0\)</span> and <span class="math notranslate nohighlight">\(q_n=0\)</span> due to the anchors.</p>
+<p><strong>(a)</strong> ✍ Show that the force balance equations can be written as a linear system <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{q}=\mathbf{f}\)</span>, where <span class="math notranslate nohighlight">\(\mathbf{q}\)</span> is a vector of displacements and <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is a tridiagonal matrix, i.e., <span class="math notranslate nohighlight">\(A_{ij}=0\)</span> if <span class="math notranslate nohighlight">\(|i-j|&gt;1\)</span>) of size <span class="math notranslate nohighlight">\((n-1)\times(n-1)\)</span>.</p>
+<p><strong>(b)</strong> ⌨  Let <span class="math notranslate nohighlight">\(\tau=10\)</span> N, and <span class="math notranslate nohighlight">\(m_k=(1/10n)\)</span> kg for every <span class="math notranslate nohighlight">\(k\)</span>. Find the displacements when <span class="math notranslate nohighlight">\(n=4\)</span> and <span class="math notranslate nohighlight">\(n=40\)</span>, and superimpose plots of <span class="math notranslate nohighlight">\(\mathbf{q}\)</span> over <span class="math notranslate nohighlight">\(0\le x \le 1\)</span> for the two cases. (Be sure to include the zero values at <span class="math notranslate nohighlight">\(x=0\)</span> and <span class="math notranslate nohighlight">\(x=1\)</span> in your plots of the string.)</p>
+<p><strong>(c)</strong> ⌨  Repeat (b) for the case <span class="math notranslate nohighlight">\(m_k = (k/5n^2)\)</span> kg.</p>
+ <!-- tau = 10;
+ for n = [4,40]
+ m = 1/(10*n)*ones(n-1,1);
+ f = -9.8*m;
+ A = toeplitz([2*n*tau,-n*tau,zeros(1,n-3)]);
+ q = A\f;
+ x = (0:n)'/n;
+ subplot(1,2,1+floor(n/40)), plot(x,[0;q;0],'-o')
+ end -->
+ <!-- tau = 10;
+ for n = [4,40]
+ m = (1:n-1)' ./ (5*n.^2);
+ f = -9.8*m;
+ A = toeplitz([2*n*tau,-n*tau,zeros(1,n-3)]);
+ q = A\f;
+ x = (0:n)'/n;
+ subplot(1,2,1+floor(n/40)), plot(x,[0;q;0],'-o')
+ end -->
+</li>
+<li><p>not available</p>
+</li>
+<li id="problem-zerocolumn"><p>✍ Suppose that <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is an <span class="math notranslate nohighlight">\(n\times n\)</span> matrix such that its first <span class="math notranslate nohighlight">\(k\)</span> columns are upper triangular and <span class="math notranslate nohighlight">\(A_{kk}=0\)</span>. Show that <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is singular. (This can be used to complete the proof of <a class="reference internal" href="#theorem-pivot"><span class="std std-ref">the pivoting theorem</span></a>, because such a matrix occurs when there is no possible choice of a nonzero pivot.)</p></li>
+<li><p>✍ How many unique <span class="math notranslate nohighlight">\(6\times 6\)</span> permutation matrices are there?</p></li>
+<li><p>✍ Suppose that <code class="docutils literal notranslate"><span class="pre">A</span></code> is a <span class="math notranslate nohighlight">\(4\times 6\)</span> matrix in Julia and you define</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="k">end</span><span class="o">:-</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="k">end</span><span class="o">:-</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Show that <span class="math notranslate nohighlight">\(\mathbf{B} = \mathbf{P} \mathbf{A} \mathbf{Q}\)</span> for certain matrices <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{Q}\)</span>.</p>
+</li>
+<li id="problem-perminverse"><p>✍ Suppose an <span class="math notranslate nohighlight">\(n\times n\)</span> permutation matrix <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> has the effect of moving rows <span class="math notranslate nohighlight">\(1,2,\ldots,n\)</span> to new positions <span class="math notranslate nohighlight">\(i_1,i_2,\ldots,i_n\)</span>. Then <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> can be expressed as</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{P} = \mathbf{e}_{i_1}\mathbf{e}_1^T + \mathbf{e}_{i_2}\mathbf{e}_2^T + \cdots + \mathbf{e}_{i_n}\mathbf{e}_n^T.\]</div>
+<p><strong>(a)</strong> For the case <span class="math notranslate nohighlight">\(n=4\)</span> and <span class="math notranslate nohighlight">\(i_1=3\)</span>, <span class="math notranslate nohighlight">\(i_2=2\)</span>, <span class="math notranslate nohighlight">\(i_3=4\)</span>, <span class="math notranslate nohighlight">\(i_4=1\)</span>, write out separately, as matrices, all four of the terms in the sum. Then add them together to find <span class="math notranslate nohighlight">\(\mathbf{P}\)</span>.</p>
+<p><strong>(b)</strong> Use the formula in the general case to show that <span class="math notranslate nohighlight">\(\mathbf{P}^{-1}=\mathbf{P}^T\)</span>.</p>
+ <!-- I = eye(4);
+ P1 = I(:,3)*I(:,1)'
+ P2 = I(:,2)*I(:,2)'
+ P3 = I(:,4)*I(:,3)'
+ P4 = I(:,1)*I(:,4)'
+ P = P1 + P2 + P3 + P4 -->
+</li>
+</ol>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="efficiency.html" title="previous page">Efficiency of matrix computations</a>
+    <a class='right-next' id="next-link" href="norms.html" title="next page">Vector and matrix norms</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tobin A. Driscoll and Richard J. Braun<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

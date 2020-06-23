@@ -1,0 +1,358 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>The rootfinding problem &#8212; Fundamentals of Numerical Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/mystnb.js"></script>
+    <script src="../_static/proof.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Fixed point iteration" href="fixed-point.html" />
+    <link rel="prev" title="Roots of nonlinear equations" href="overview.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fundamentals of Numerical Computation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../frontmatter.html">Home</a>
+  </li>
+  <li class="">
+    <a href="../intro/overview.html">Introduction</a>
+  </li>
+  <li class="">
+    <a href="../linsys/overview.html">Square linear systems</a>
+  </li>
+  <li class="">
+    <a href="../leastsq/overview.html">Overdetermined linear systems</a>
+  </li>
+  <li class="active">
+    <a href="overview.html">Roots of nonlinear equations</a>
+  <ul class="nav sidenav_l2">
+    <li class="active">
+      <a href="">The rootfinding problem</a>
+    </li>
+    <li class="">
+      <a href="fixed-point.html">Fixed point iteration</a>
+    </li>
+    <li class="">
+      <a href="newton.html">Newton’s method in one variable</a>
+    </li>
+    <li class="">
+      <a href="secant.html">Interpolation-based methods</a>
+    </li>
+    <li class="">
+      <a href="newtonsys.html">Newton for nonlinear systems</a>
+    </li>
+    <li class="">
+      <a href="quasinewton.html">Quasi-Newton methods</a>
+    </li>
+    <li class="">
+      <a href="nlsq.html">Nonlinear least squares</a>
+    </li>
+    <li class="">
+      <a href="next.html">Next steps</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../localapprox/overview.html">Piecewise interpolation</a>
+  </li>
+  <li class="">
+    <a href="../ivp/overview.html">Initial-value problems for ODEs</a>
+  </li>
+  <li class="">
+    <a href="../appendix/linear-algebra.html">Review: Linear algebra</a>
+  </li>
+  <li class="">
+    <a href="../appendix/demos.html">All demo notebooks</a>
+  </li>
+  <li class="">
+    <a href="../refs.html">References</a>
+  </li>
+  <li class="">
+    <a href="../genindex.html">Index</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../_sources/nonlineqn/rootproblem.md"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#conditioning-error-and-residual" class="nav-link">Conditioning, error, and residual</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#multiple-roots" class="nav-link">Multiple roots</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#exercises" class="nav-link">Exercises</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="the-rootfinding-problem">
+<h1>The rootfinding problem<a class="headerlink" href="#the-rootfinding-problem" title="Permalink to this headline">¶</a></h1>
+<p>For the time being we will focus on single equations in one variable.</p>
+<div class="proof proof-type-definition" id="id2">
+
+    <div class="proof-title">
+        <span class="proof-type">Definition 31</span>
+        
+            <span class="proof-title-name">(Rootfinding problem)</span>
+        
+    </div><div class="proof-content">
+<p>Given a continuous scalar function <span class="math notranslate nohighlight">\(f\)</span> of a scalar variable, find a real number <span class="math notranslate nohighlight">\(r\)</span> such that <span class="math notranslate nohighlight">\(f(r)=0\)</span>.</p>
+</div></div><p id="index-0">We call <span class="math notranslate nohighlight">\(r\)</span> a <strong>root</strong> of the function <span class="math notranslate nohighlight">\(f\)</span>. The formulation <span class="math notranslate nohighlight">\(f(x)=0\)</span> is general enough to solve any equation, for if we are given an equation <span class="math notranslate nohighlight">\(g(x)=h(x)\)</span>, we can define <span class="math notranslate nohighlight">\(f=g-h\)</span> and find a root of <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/roots-bessel.html"><span class="doc">Roots of Bessel functions</span></a></p>
+</div>
+<p>Unlike the linear problems of the earlier chapters, the usual situation here is that the root cannot be produced in a finite number of operations, even in exact arithmetic. Instead, we seek a sequence of approximations that formally converge to the root, stopping when some member of the sequence seems to be “good enough” (more on that later). The <code class="docutils literal notranslate"><span class="pre">NLsolve</span></code> package for Julia has a function <code class="docutils literal notranslate"><span class="pre">nlsolve</span></code> for general-purpose rootfinding.</p>
+<div class="section" id="conditioning-error-and-residual">
+<h2>Conditioning, error, and residual<a class="headerlink" href="#conditioning-error-and-residual" title="Permalink to this headline">¶</a></h2>
+<p>In the rootfinding problem the data is a continuous function <span class="math notranslate nohighlight">\(f\)</span> whose root we seek. Let’s assume <span class="math notranslate nohighlight">\(f\)</span> has at least one continuous derivative near a particular root <span class="math notranslate nohighlight">\(r\)</span>. Say that <span class="math notranslate nohighlight">\(f\)</span> is perturbed to <span class="math notranslate nohighlight">\(\tilde{f}(x) = f(x) + \epsilon\)</span>. As a result, the root will be perturbed to <span class="math notranslate nohighlight">\(\tilde{r} = r + \delta\)</span> satisfying, by definition, <span class="math notranslate nohighlight">\(\tilde{f}(\tilde{r})=0\)</span>. We now compute an absolute condition number <span class="math notranslate nohighlight">\(\kappa_r\)</span>, which is the ratio <span class="math notranslate nohighlight">\(\left | \frac{\delta}{\epsilon} \right|\)</span> as <span class="math notranslate nohighlight">\(\epsilon\to 0\)</span>.</p>
+<p>Using Taylor series expansions,</p>
+<div class="math notranslate nohighlight">
+\[  0 = f(r+\delta) + \epsilon = f(r) + f'(r) \delta + \epsilon + O(\delta^2).\]</div>
+<p>Given that <span class="math notranslate nohighlight">\(f(r)=0\)</span>, this implies</p>
+<div class="math notranslate nohighlight" id="equation-rootcondnum">
+<span class="eqno">(75)<a class="headerlink" href="#equation-rootcondnum" title="Permalink to this equation">¶</a></span>\[  \kappa_r = \bigl| f'(r) \bigr|^{-1}.\]</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The condition number of the rootfinding problem is equivalent to that for evaluating the inverse function.</p>
+</div>
+<div class="demo sidebar" id="index-1">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/roots-cond.html"><span class="doc">Conditioning of roots</span></a></p>
+</div>
+<p>Recall that the absolute condition number for the evaluation of <span class="math notranslate nohighlight">\(f\)</span> at <span class="math notranslate nohighlight">\(x\)</span> is simply <span class="math notranslate nohighlight">\(|f'(x)|\)</span>. The condition number of the rootfinding problem is equivalent to that of evaluating the inverse function. The influence of <span class="math notranslate nohighlight">\(|f'(r)|\)</span> on rootfinding is easily illustrated.</p>
+<p id="index-2">We must accept that when <span class="math notranslate nohighlight">\(|f'|\)</span> is small at the root, it may not be possible to get a small error in a computed root estimate. As always, the error is not a quantity we can compute without knowing the exact answer. But we can compute the <a class="reference internal" href="../linsys/overview.html#term-residual"><span class="xref std std-term">residual</span></a> of a root estimate, which is the value of <span class="math notranslate nohighlight">\(f\)</span> there. Since <span class="math notranslate nohighlight">\(f(r)=0\)</span>, it stands to reason that a small residual might be associated with a small error.</p>
+<p>Suppose that we find an approximation <span class="math notranslate nohighlight">\(\tilde{r}\)</span> to the actual root <span class="math notranslate nohighlight">\(r\)</span>. Define the new function <span class="math notranslate nohighlight">\(g(x)=f(x)-f(\tilde{r})\)</span>. Trivially, <span class="math notranslate nohighlight">\(g(\tilde{r})=0\)</span>, meaning that the root estimate is a true root of <span class="math notranslate nohighlight">\(g\)</span>. Since the difference between <span class="math notranslate nohighlight">\(g\)</span> and the original <span class="math notranslate nohighlight">\(f\)</span> is the residual value <span class="math notranslate nohighlight">\(f(\tilde{r})\)</span>, the residual is the distance to a rootfinding problem that our root estimate solves exactly. That is, the residual is the backward error of the estimate.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>It is not always possible to get a small error in a root approximation. But the residual equals the backward error.</p>
+</div>
+<p id="index-3">To summarize: In general, it is not always realistic to expect a small error in a root approximation. However, the backward error is the same as the residual of the estimate.</p>
+</div>
+<div class="section" id="multiple-roots">
+<h2>Multiple roots<a class="headerlink" href="#multiple-roots" title="Permalink to this headline">¶</a></h2>
+<p id="index-4">The condition number <a class="reference internal" href="#equation-rootcondnum">(75)</a> naturally leads to the question of what happens if <span class="math notranslate nohighlight">\(f'(r)=0\)</span> at a root <span class="math notranslate nohighlight">\(r\)</span>. Suppose first that <span class="math notranslate nohighlight">\(f\)</span> is a polynomial of degree <span class="math notranslate nohighlight">\(n&gt;0\)</span>, so that</p>
+<div class="math notranslate nohighlight">
+\[  f(x) = (x-r)q(x),\]</div>
+<p>for a polynomial <span class="math notranslate nohighlight">\(q\)</span> of degree <span class="math notranslate nohighlight">\(n-1\)</span>. If <span class="math notranslate nohighlight">\(r\)</span> is a simple root of <span class="math notranslate nohighlight">\(f\)</span>—that is, it appears just once in the list of the <span class="math notranslate nohighlight">\(n\)</span> roots—then it follows that <span class="math notranslate nohighlight">\(q(r)\neq 0\)</span>. Conversely, if <span class="math notranslate nohighlight">\(q(r)=0\)</span>, then <span class="math notranslate nohighlight">\(r\)</span> appears among the roots of <span class="math notranslate nohighlight">\(q\)</span> and is a multiple root of <span class="math notranslate nohighlight">\(f\)</span>. However, we don’t need to know the quotient polynomial <span class="math notranslate nohighlight">\(q\)</span> explicitly in order to make the determination. Consider that</p>
+<div class="math notranslate nohighlight">
+\[  f'(x) = (x-r)q'(x) + q(x),\]</div>
+<p>so that <span class="math notranslate nohighlight">\(f'(r) = q(r)\)</span>. Hence <span class="math notranslate nohighlight">\(r\)</span> is simple if and only if <span class="math notranslate nohighlight">\(f'(r)\neq 0\)</span>.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><span class="math notranslate nohighlight">\(r\)</span> is a simple root of <span class="math notranslate nohighlight">\(f\)</span> if and only if <span class="math notranslate nohighlight">\(f'(r)\neq 0\)</span>.</p>
+</div>
+<p>This conclusion extends to non-polynomial differentiable functions <span class="math notranslate nohighlight">\(f\)</span>. If <span class="math notranslate nohighlight">\(r\)</span> is a root of <span class="math notranslate nohighlight">\(f\)</span>, define <span class="math notranslate nohighlight">\(q(x)=f(x)/(x-r)\)</span>. By L’Hôpital’s rule, <span class="math notranslate nohighlight">\(g\)</span> is well defined at <span class="math notranslate nohighlight">\(x=r\)</span> as long as <span class="math notranslate nohighlight">\(f'\)</span> is. Now we can again write <span class="math notranslate nohighlight">\(f(x)=(x-r)q(x)\)</span> for <span class="math notranslate nohighlight">\(x\neq r\)</span>, and by continuity it works at <span class="math notranslate nohighlight">\(x=r\)</span> as well. So  the reasoning we applied to polynomials can be repeated: <span class="math notranslate nohighlight">\(r\)</span> is a simple root of <span class="math notranslate nohighlight">\(f\)</span> if and only if <span class="math notranslate nohighlight">\(f'(r)\neq 0\)</span>.</p>
+<p>Now suppose that <span class="math notranslate nohighlight">\(f'(r)=q(r)=0\)</span>, so that <span class="math notranslate nohighlight">\(r\)</span> is not simple. If <span class="math notranslate nohighlight">\(q\)</span> is differentiable, we may apply the same logic to it that we did to <span class="math notranslate nohighlight">\(f\)</span>. Hence <span class="math notranslate nohighlight">\(r\)</span> is not simple for <span class="math notranslate nohighlight">\(q\)</span> if and only if <span class="math notranslate nohighlight">\(q'(r)=0\)</span>. Now observe that</p>
+<div class="math notranslate nohighlight">
+\[  f''(x) = (x-r)q''(x) + 2q'(x),\]</div>
+<p>and thus <span class="math notranslate nohighlight">\(f''(r)=2q'(r)\)</span>, so <span class="math notranslate nohighlight">\(f''(r)=0\)</span> if and only if <span class="math notranslate nohighlight">\(r\)</span> is a multiple root of <span class="math notranslate nohighlight">\(q\)</span>. In general we define <span class="math notranslate nohighlight">\(r\)</span> as a <strong>root of multiplicity <span class="math notranslate nohighlight">\(m\)</span></strong> if <span class="math notranslate nohighlight">\(f(r)=f'(r)=\cdots=f^{(m-1)}(r)=0\)</span>, but <span class="math notranslate nohighlight">\(f^{(m)}(r)\neq 0\)</span>. If <span class="math notranslate nohighlight">\(m=1\)</span>, we say <span class="math notranslate nohighlight">\(r\)</span> is a <a class="reference internal" href="overview.html#term-simple-root"><span class="xref std std-term">simple root</span></a>.</p>
+<p>It’s useful to think through the consequences of these definitions for the Taylor series at the point <span class="math notranslate nohighlight">\(r\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[  f(x) = a_0 + a_1(x-r) + a_2(x-r)^2 + \cdots,\]</div>
+<p>where <span class="math notranslate nohighlight">\(a_n=f^{(n)}(r)/n!\)</span>. The fact that <span class="math notranslate nohighlight">\(r\)</span> is a root implies <span class="math notranslate nohighlight">\(f(r)=a_0=0\)</span>. If <span class="math notranslate nohighlight">\(r\)</span> is a simple root, then <span class="math notranslate nohighlight">\(a_1\neq 0\)</span>, and conversely. If <span class="math notranslate nohighlight">\(r\)</span> is a double root, then <span class="math notranslate nohighlight">\(a_2\neq 0\)</span>, and so on. Simply put, if <span class="math notranslate nohighlight">\(r\)</span> is a root of order <span class="math notranslate nohighlight">\(m\)</span>, then the series expansion begins with <span class="math notranslate nohighlight">\((x-r)^m\)</span>.</p>
+<p>When <span class="math notranslate nohighlight">\(r\)</span> is a multiple root, the condition number <a class="reference internal" href="#equation-rootcondnum">(75)</a> is apparently infinite.<a class="footnote-reference brackets" href="#infcond" id="id1">1</a> However, even if <span class="math notranslate nohighlight">\(r\)</span> is technically simple, we should expect difficulty if the condition number is very large. This occurs when <span class="math notranslate nohighlight">\(|f'(r)|\)</span> is very small, which means that quotient <span class="math notranslate nohighlight">\(q\)</span> satisfies <span class="math notranslate nohighlight">\(q(r)\approx 0\)</span> and another root of <span class="math notranslate nohighlight">\(f\)</span> is very close to <span class="math notranslate nohighlight">\(r\)</span>. The situation is reminiscent of the linear system problem: the degenerate case (singular matrix/multiple root) is mathematically isolated when considered exactly, but the effect on fixed precision computation is just as drastic in a neighborhood of the singularity.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol>
+<li><p>✍ For each function, find the multiplicity of the given root. If it is a simple root, find its absolute condition number.</p>
+<p><strong>(a)</strong> <span class="math notranslate nohighlight">\(f(x) = x^3-2x^2+x-2\)</span>, root <span class="math notranslate nohighlight">\(r=2\)</span></p>
+<p><strong>(b)</strong> <span class="math notranslate nohighlight">\(f(x) = (\cos x  + 1)^2\)</span>, root <span class="math notranslate nohighlight">\(r=\pi\)</span></p>
+<p><strong>(c)</strong> <span class="math notranslate nohighlight">\(f(x) = \frac{\sin^2 x}{x}\)</span>, root <span class="math notranslate nohighlight">\(r=0\)</span> (define <span class="math notranslate nohighlight">\(f(0) =0\)</span>)</p>
+<p><strong>(d)</strong> <span class="math notranslate nohighlight">\(f(x) =(x-1)\log(x)\)</span>, root <span class="math notranslate nohighlight">\(r=1\)</span></p>
+</li>
+<li id="problem-conddoubleroot"><p>For any <span class="math notranslate nohighlight">\(\epsilon&gt;0\)</span>, let <span class="math notranslate nohighlight">\(f_\epsilon(x) = \sin[(x-1+\epsilon)(x-1)]\)</span>. This function has roots at <span class="math notranslate nohighlight">\(1-\epsilon\)</span> and <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<p><strong>(a)</strong> ✍ Find <span class="math notranslate nohighlight">\(|f_\epsilon'(1)|\)</span>. According to  <a class="reference internal" href="#equation-rootcondnum">(75)</a>, the condition number of the root <span class="math notranslate nohighlight">\(r=1\)</span> is inversely proportional to this quantity.</p>
+<p><strong>(b)</strong> ⌨ Define a perturbation function by <span class="math notranslate nohighlight">\(g(x) = \cos[10x+\sin(20x)]\)</span>. Verify that <span class="math notranslate nohighlight">\(f_\epsilon(x)+10^{-10}g(x)\)</span> has a root in the interval <span class="math notranslate nohighlight">\([1-\epsilon,1+10\epsilon]\)</span> for  <span class="math notranslate nohighlight">\(\epsilon=10^{-3}\)</span>.</p>
+<p><strong>(c)</strong> ⌨ For <span class="math notranslate nohighlight">\(\epsilon=10^{-3},10^{-4},10^{-5},10^{-6}\)</span>, use <code class="docutils literal notranslate"><span class="pre">nlsolve</span></code> to find the root in the interval given in part (b). Make a table of <span class="math notranslate nohighlight">\(\epsilon\)</span>, <span class="math notranslate nohighlight">\(1/|f_\epsilon'(1)|\)</span>, <span class="math notranslate nohighlight">\(|r-1|\)</span>, and <span class="math notranslate nohighlight">\(|(r-1)f_\epsilon'(1)|\)</span>. The last value should be approximately constant.</p>
+ <!-- ep = 1e-6;
+ f = @(x) sin( (x-1+ep).*(x-1) );
+ g = @(x) cos(10*x+sin(20*x));
+ r = fzero( @(x) f(x)+1e-10*g(x), [1-ep,1+10*ep] );
+ [ep, abs(r-1), ep*abs(r-1) ]
+  -->
+</li>
+<li><p>(continuation) The condition number theory <a class="reference internal" href="#equation-rootcondnum">(75)</a> suggests that if <span class="math notranslate nohighlight">\(f\)</span> has simple roots at <span class="math notranslate nohighlight">\(r_1\)</span> and <span class="math notranslate nohighlight">\(r_2\)</span> that are close to each other, then the condition number is large. But then the function <span class="math notranslate nohighlight">\(\tilde{f}(x) = f(x)/(x-r_2)\)</span> no longer has a root at <span class="math notranslate nohighlight">\(r_2\)</span> and should have a much better condition number if there are no other nearby roots. This trick (called <em>deflation</em>) can work even if the division factor does not use the exact root <span class="math notranslate nohighlight">\(r_2\)</span>. For the steps below, use the same definitions as in the preceding problem.</p>
+<p><strong>(a)</strong> ✍ Define <span class="math notranslate nohighlight">\(\tilde{f}_\epsilon(x) = f_\epsilon(x)/(x+1.01)\)</span>. Find <span class="math notranslate nohighlight">\(|\tilde{f}_\epsilon'(1)|\)</span>. (You may want to use computer algebra for this.)</p>
+<p><strong>(b)</strong> ⌨ Repeat part (c) of the preceding problem, but using the interval <span class="math notranslate nohighlight">\([1-\epsilon/200,1+\epsilon/100]\)</span> each time. By what factor are
+the errors improved over using <span class="math notranslate nohighlight">\(f_\epsilon\)</span>? Do you still find that <span class="math notranslate nohighlight">\(|(x-1)\tilde{f}_\epsilon'(1)|\)</span> is roughly constant?</p>
+ <!-- ep = 1e-6;
+ ft = @(x) f(x)/(x-.99);
+ r = fzero(@(x) ft(x)+1e-10*g(x),[1-ep/200,1+ep/100]);
+ err = 1 - r
+ ep*err -->
+</li>
+</ol>
+<hr class="docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="infcond"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Based on our definitions, this means that the relative change to the root when <span class="math notranslate nohighlight">\(f\)</span> is changed by a perturbation of size <span class="math notranslate nohighlight">\(\epsilon\)</span> is not <span class="math notranslate nohighlight">\(O(\epsilon)\)</span> as <span class="math notranslate nohighlight">\(\epsilon\to 0\)</span>.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="overview.html" title="previous page">Roots of nonlinear equations</a>
+    <a class='right-next' id="next-link" href="fixed-point.html" title="next page">Fixed point iteration</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tobin A. Driscoll and Richard J. Braun<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

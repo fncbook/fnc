@@ -1,0 +1,563 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cubic splines &#8212; Fundamentals of Numerical Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/mystnb.js"></script>
+    <script src="../_static/proof.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Finite differences" href="finitediffs.html" />
+    <link rel="prev" title="Piecewise linear interpolation" href="pwlin.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fundamentals of Numerical Computation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../frontmatter.html">Home</a>
+  </li>
+  <li class="">
+    <a href="../intro/overview.html">Introduction</a>
+  </li>
+  <li class="">
+    <a href="../linsys/overview.html">Square linear systems</a>
+  </li>
+  <li class="">
+    <a href="../leastsq/overview.html">Overdetermined linear systems</a>
+  </li>
+  <li class="">
+    <a href="../nonlineqn/overview.html">Roots of nonlinear equations</a>
+  </li>
+  <li class="active">
+    <a href="overview.html">Piecewise interpolation</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="interpolation.html">The interpolation problem</a>
+    </li>
+    <li class="">
+      <a href="pwlin.html">Piecewise linear interpolation</a>
+    </li>
+    <li class="active">
+      <a href="">Cubic splines</a>
+    </li>
+    <li class="">
+      <a href="finitediffs.html">Finite differences</a>
+    </li>
+    <li class="">
+      <a href="fd-converge.html">Convergence of finite differences</a>
+    </li>
+    <li class="">
+      <a href="integration.html">Numerical integration</a>
+    </li>
+    <li class="">
+      <a href="adaptive.html">Adaptive integration</a>
+    </li>
+    <li class="">
+      <a href="next.html">Next steps</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../ivp/overview.html">Initial-value problems for ODEs</a>
+  </li>
+  <li class="">
+    <a href="../appendix/linear-algebra.html">Review: Linear algebra</a>
+  </li>
+  <li class="">
+    <a href="../appendix/demos.html">All demo notebooks</a>
+  </li>
+  <li class="">
+    <a href="../refs.html">References</a>
+  </li>
+  <li class="">
+    <a href="../genindex.html">Index</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../_sources/localapprox/splines.md"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#smoothness-conditions" class="nav-link">Smoothness conditions</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#end-constraints" class="nav-link">End constraints</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#implementation" class="nav-link">Implementation</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#conditioning-and-convergence" class="nav-link">Conditioning and convergence</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#exercises" class="nav-link">Exercises</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="cubic-splines">
+<h1>Cubic splines<a class="headerlink" href="#cubic-splines" title="Permalink to this headline">¶</a></h1>
+<div class="margin sidebar" id="index-0">
+<p class="sidebar-title"></p>
+<p>A cubic spline is a piecewise cubic function that has two continuous derivatives everywhere.</p>
+</div>
+<p>A piecewise linear interpolant is continuous but has discontinuities in its derivative. We often desire a smoother interpolant, i.e., one that has one or more continuous derivatives.  A <a class="reference internal" href="overview.html#term-cubic-spline"><span class="xref std std-term">cubic spline</span></a> is a piecewise cubic function that has two continuous derivatives everywhere. To respect the terminology we use <span class="math notranslate nohighlight">\(S(x)\)</span> to denote the spline interpolant.</p>
+<p>As before, suppose that distinct nodes <span class="math notranslate nohighlight">\(t_0 &lt; t_1 &lt; \cdots &lt; t_n\)</span> (not necessarily equally spaced) and data <span class="math notranslate nohighlight">\(y_0,\ldots,y_n\)</span> are given. For any <span class="math notranslate nohighlight">\(k=1,\ldots,n\)</span>, the spline <span class="math notranslate nohighlight">\(S(x)\)</span> on the interval <span class="math notranslate nohighlight">\([t_{k-1},t_k]\)</span> is by definition a cubic polynomial <span class="math notranslate nohighlight">\(S_k(x)\)</span>, which we express as</p>
+<div class="math notranslate nohighlight" id="equation-splinepw">
+<span class="eqno">(115)<a class="headerlink" href="#equation-splinepw" title="Permalink to this equation">¶</a></span>\[ S_k(x) = a_k + b_k(x-t_{k-1}) + c_k(x-t_{k-1})^2 + d_k(x-t_{k-1})^3, \qquad k=1,\ldots,n,\]</div>
+<p>where <span class="math notranslate nohighlight">\(a_k,b_k,c_k,d_k\)</span> are values to be determined. Overall there are <span class="math notranslate nohighlight">\(4n\)</span> such undetermined coefficients.</p>
+<div class="section" id="smoothness-conditions">
+<h2>Smoothness conditions<a class="headerlink" href="#smoothness-conditions" title="Permalink to this headline">¶</a></h2>
+<p>We are able to ensure that <span class="math notranslate nohighlight">\(S\)</span> has at least two continuous derivatives everywhere by means of the following constraints.</p>
+<ul class="simple">
+<li><p><em>Interpolation by <span class="math notranslate nohighlight">\(S_k\)</span> at both of its endpoints.</em></p></li>
+</ul>
+<p>Algebraically we require <span class="math notranslate nohighlight">\(S_k(t_{k-1})=y_{k-1}\)</span> and <span class="math notranslate nohighlight">\(S_k(t_k)=y_k\)</span> for every <span class="math notranslate nohighlight">\(k=1,\dots,n\)</span>. In terms of <a class="reference internal" href="#equation-splinepw">(115)</a>, these conditions are</p>
+<div class="math notranslate nohighlight" id="equation-spline0a">
+<span class="eqno">(116)<a class="headerlink" href="#equation-spline0a" title="Permalink to this equation">¶</a></span>\[a_k = y_{k-1}\]</div>
+<div class="math notranslate nohighlight" id="equation-spline0b">
+<span class="eqno">(117)<a class="headerlink" href="#equation-spline0b" title="Permalink to this equation">¶</a></span>\[    a_k + b_k  h_k + c_k h_k^2 + d_k h_k^3 = y_{k} \qquad k=1,\ldots,n,\]</div>
+<p>where we have used the definition</p>
+<div class="math notranslate nohighlight" id="equation-splineh">
+<span class="eqno">(118)<a class="headerlink" href="#equation-splineh" title="Permalink to this equation">¶</a></span>\[h_k = t_{k}-t_{k-1}, \qquad k=1,\ldots,n.\]</div>
+<p>The values of <span class="math notranslate nohighlight">\(h_k\)</span> are derived from the nodes. Crucially, the unknown coefficients appear only <em>linearly</em> in the constraint equations. So we will express the constraints using linear algebra. The left endpoint interpolation constraints <a class="reference internal" href="#equation-spline0a">(116)</a> are, in matrix form,</p>
+<div class="math notranslate nohighlight" id="equation-spline0asys">
+<span class="eqno">(119)<a class="headerlink" href="#equation-spline0asys" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{bmatrix}
+  \mathbf{I} &amp; \boldsymbol{0} &amp; \boldsymbol{0} &amp; \boldsymbol{0}
+\end{bmatrix}
+\begin{bmatrix}
+    \mathbf{a} \\ \mathbf{b} \\ \mathbf{c} \\ \mathbf{d}
+\end{bmatrix}
+=
+  \begin{bmatrix}
+  y_0 &amp; &amp; \\ &amp; \ddots &amp; \\ &amp; &amp; y_{n-1}
+\end{bmatrix},\end{split}\]</div>
+<p>with <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> being an <span class="math notranslate nohighlight">\(n\times n\)</span> identity. The right endpoint interpolation constraints, given by <a class="reference internal" href="#equation-spline0b">(117)</a>, become</p>
+<div class="math notranslate nohighlight" id="equation-spline0bsys">
+<span class="eqno">(120)<a class="headerlink" href="#equation-spline0bsys" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{bmatrix}
+  \mathbf{I} &amp; \mathbf{H} &amp; \mathbf{H}^2 &amp; \mathbf{H}^3
+\end{bmatrix}
+\begin{bmatrix}
+  \mathbf{a} \\ \mathbf{b} \\ \mathbf{c} \\ \mathbf{d}
+\end{bmatrix}
+  =
+\begin{bmatrix}
+  y_1 &amp; &amp; \\ &amp; \ddots &amp; \\ &amp; &amp; y_{n}
+\end{bmatrix},\end{split}\]</div>
+<p>where we have defined the diagonal matrix</p>
+<div class="math notranslate nohighlight" id="equation-splinehsys">
+<span class="eqno">(121)<a class="headerlink" href="#equation-splinehsys" title="Permalink to this equation">¶</a></span>\[\begin{split}\mathbf{H}  =
+\begin{bmatrix}
+  h_1 &amp; &amp; &amp; \\ &amp; h_2 &amp; &amp; \\ &amp; &amp; \ddots &amp; \\ &amp; &amp; &amp; h_n
+\end{bmatrix}.\end{split}\]</div>
+<p>Collectively, <a class="reference internal" href="#equation-spline0asys">(119)</a> and <a class="reference internal" href="#equation-spline0bsys">(120)</a> express <span class="math notranslate nohighlight">\(2n\)</span> scalar constraints on the unknowns.</p>
+<ul class="simple">
+<li><p><em>Continuity of <span class="math notranslate nohighlight">\(S'(x)\)</span> at interior nodes.</em></p></li>
+</ul>
+<p>We do not know what the slope of the interpolant should be at the nodes, but we do want the same slope whether a node is approached from the left or the right. Thus we obtain constraints at the nodes that sit between two neighboring piecewise definitions, so that <span class="math notranslate nohighlight">\(S_1'(t_1)=S_2'(t_1)\)</span>, and so on. Altogether these are</p>
+<div class="math notranslate nohighlight" id="equation-spline1">
+<span class="eqno">(122)<a class="headerlink" href="#equation-spline1" title="Permalink to this equation">¶</a></span>\[b_k + 2 c_k h_k + 3 d_k h_k^2 = b_{k+1}, \qquad k=1,\dots,n-1.\]</div>
+<p>Moving the unknowns to the left side, as a system these become</p>
+<div class="math notranslate nohighlight" id="equation-spline1sys">
+<span class="eqno">(123)<a class="headerlink" href="#equation-spline1sys" title="Permalink to this equation">¶</a></span>\[\begin{split}\mathbf{E}
+\begin{bmatrix}
+  \boldsymbol{0} &amp; \mathbf{J} &amp; 2\mathbf{H} &amp; 3\mathbf{H}^2
+\end{bmatrix}
+\begin{bmatrix}
+  \mathbf{a} \\ \mathbf{b} \\ \mathbf{c} \\ \mathbf{d}
+  \end{bmatrix}
+= \boldsymbol{0},\end{split}\]</div>
+<p>where now we have defined</p>
+<div class="math notranslate nohighlight" id="equation-splinej">
+<span class="eqno">(124)<a class="headerlink" href="#equation-splinej" title="Permalink to this equation">¶</a></span>\[\begin{split}\mathbf{J} =
+\begin{bmatrix}
+  1  &amp; -1 &amp; &amp; &amp; \\ &amp; 1 &amp; -1 &amp; &amp; \\ &amp; &amp; \ddots &amp; \ddots &amp; \\ &amp; &amp; &amp;1 &amp; -1 \\ &amp; &amp; &amp; &amp; 1
+\end{bmatrix},\end{split}\]</div>
+<p>and <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> is the <span class="math notranslate nohighlight">\((n-1)\times n\)</span> matrix resulting from deleting the last row of the identity:</p>
+<div class="math notranslate nohighlight" id="equation-splinee">
+<span class="eqno">(125)<a class="headerlink" href="#equation-splinee" title="Permalink to this equation">¶</a></span>\[\begin{split}\mathbf{E} =
+\begin{bmatrix}
+  1  &amp; 0 &amp; &amp; &amp; \\ &amp; 1 &amp; 0 &amp; &amp; \\ &amp; &amp; \ddots &amp; \ddots &amp; \\ &amp; &amp; &amp; 1&amp;  0
+\end{bmatrix}.\end{split}\]</div>
+<p>Left-multiplying by <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> deletes the last row of any matrix or vector. Hence <a class="reference internal" href="#equation-spline1sys">(123)</a> represents <span class="math notranslate nohighlight">\(n-1\)</span> constraints on the unknowns. (Remember, there are only <span class="math notranslate nohighlight">\(n-1\)</span> interior nodes.)</p>
+<ul class="simple">
+<li><p><em>Continuity of <span class="math notranslate nohighlight">\(S''(x)\)</span> at interior nodes.</em></p></li>
+</ul>
+<p>These again apply only at the interior nodes <span class="math notranslate nohighlight">\(t_1,\dots,t_{n-1}\)</span>, in the form <span class="math notranslate nohighlight">\(S_1''(t_1)=S_2''(t_1)\)</span> and so on. Using <a class="reference internal" href="#equation-splinepw">(115)</a> once more, we obtain</p>
+<div class="math notranslate nohighlight" id="equation-spline2">
+<span class="eqno">(126)<a class="headerlink" href="#equation-spline2" title="Permalink to this equation">¶</a></span>\[  2 c_k + 6 d_k h_k = 2c_{k+1}, \qquad k=1,\dots,n-1.\]</div>
+<p>In system form (after cancelling a factor of 2 from each side) we get</p>
+<div class="math notranslate nohighlight" id="equation-spline2sys">
+<span class="eqno">(127)<a class="headerlink" href="#equation-spline2sys" title="Permalink to this equation">¶</a></span>\[\begin{split}\mathbf{E}
+\begin{bmatrix}
+\boldsymbol{0} &amp; \boldsymbol{0} &amp; \mathbf{J} &amp; 3\mathbf{H}
+\end{bmatrix}
+\begin{bmatrix}
+\mathbf{a} \\ \mathbf{b} \\ \mathbf{c} \\ \mathbf{d}
+\end{bmatrix}
+= \boldsymbol{0}.\end{split}\]</div>
+</div>
+<div class="section" id="end-constraints">
+<h2>End constraints<a class="headerlink" href="#end-constraints" title="Permalink to this headline">¶</a></h2>
+<p>So far the equations <a class="reference internal" href="#equation-spline0asys">(119)</a>,  <a class="reference internal" href="#equation-spline0bsys">(120)</a>,  <a class="reference internal" href="#equation-spline1sys">(123)</a>, and <a class="reference internal" href="#equation-spline2sys">(127)</a> form <span class="math notranslate nohighlight">\(2n+(n-1)+(n-1)=4n-2\)</span> linear conditions on the <span class="math notranslate nohighlight">\(4n\)</span> unknowns in the piecewise definition <a class="reference internal" href="#equation-splinepw">(115)</a>. In order to obtain a square system, we must add two more constraints. If the application prescribes values for <span class="math notranslate nohighlight">\(S'\)</span> or <span class="math notranslate nohighlight">\(S''\)</span> at the endpoints, those may be applied. Otherwise there are two major alternatives:</p>
+<ul class="simple">
+<li><p><strong>natural spline:</strong> <span class="math notranslate nohighlight">\(\quad S_1''(t_0)=S_n''(t_n)=0\)</span></p></li>
+<li><p><strong>not-a-knot spline:</strong> <span class="math notranslate nohighlight">\(\quad S_1'''(t_1)=S_2'''(t_1), \;  S_{n-1}'''(t_{n-1})=S_n'''(t_{n-1})\)</span></p></li>
+</ul>
+<p>While natural splines are popular and have important theoretical properties, not-a-knot splines give better pointwise approximations, and they are the only type we consider further.</p>
+<p>In the not-a-knot spline, the values and first three derivatives of the cubic polynomials <span class="math notranslate nohighlight">\(S_1\)</span> and <span class="math notranslate nohighlight">\(S_2\)</span> agree at the node <span class="math notranslate nohighlight">\(t_1\)</span>. Hence they must be the same cubic polynomial! The same is true of <span class="math notranslate nohighlight">\(S_{n-1}\)</span> and <span class="math notranslate nohighlight">\(S_n\)</span>.<a class="footnote-reference brackets" href="#nak" id="id1">1</a> We could use these facts to eliminate some of the undetermined coefficients from our linear system of constraints. However, rather than rework the algebra we just append two more rows to the system, expressing the conditions</p>
+<div class="math notranslate nohighlight" id="equation-splinenak">
+<span class="eqno">(128)<a class="headerlink" href="#equation-splinenak" title="Permalink to this equation">¶</a></span>\[d_1=d_2, \quad  d_{n-1}=d_n.\]</div>
+<p>Collectively, <a class="reference internal" href="#equation-spline0asys">(119)</a>,  <a class="reference internal" href="#equation-spline0bsys">(120)</a>,  <a class="reference internal" href="#equation-spline1sys">(123)</a>,  <a class="reference internal" href="#equation-spline2sys">(127)</a>, and <a class="reference internal" href="#equation-splinenak">(128)</a> comprise a square linear system of size <span class="math notranslate nohighlight">\(4n\)</span> which can be solved for the coefficients defining the piecewise cubics in <a class="reference internal" href="#equation-splinepw">(115)</a>. This is a major difference from the piecewise linear interpolant, for which there is no linear system to solve. Indeed, while it is possible to find a basis for the cubic spline interpolant analogous to the hat functions, it is not possible in closed form to construct a <em>cardinal</em> basis, so the solution of a linear system cannot be avoided.</p>
+</div>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<div class="proof proof-type-function" id="id2">
+<span id="function-spinterp"></span>
+    <div class="proof-title">
+        <span class="proof-type">Function 49</span>
+        
+            <span class="proof-title-name">(spinterp)</span>
+        
+    </div><div class="proof-content">
+<p><strong>Cubic not-a-knot spline interpolation.</strong></p>
+<div class="highlight-julia notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59</pre></div></td><td class="code"><div class="highlight"><pre><span></span>&quot;&quot;&quot;
+spinterp(t,y)
+
+Create a cubic not-a-knot spline interpolating function for data
+values in `y` given at nodes in `t`.
+&quot;&quot;&quot;
+function spinterp(t,y)
+
+    n = length(t)-1
+    h = diff(t)         # differences of all adjacent pairs
+
+    # Preliminary definitions.
+    Z = zeros(n,n);
+    In = I(n);  E = In[1:n-1,:];
+    J = diagm(0=&gt;ones(n),1=&gt;-ones(n-1))
+    H = diagm(0=&gt;h)
+
+    # Left endpoint interpolation:
+    AL = [ In Z Z Z ]
+    vL = y[1:n]
+
+    # Right endpoint interpolation:
+    AR = [ In H H^2 H^3 ];
+    vR = y[2:n+1]
+
+    # Continuity of first derivative:
+    A1 = E*[ Z J 2*H 3*H^2 ]
+    v1 = zeros(n-1)
+
+    # Continuity of second derivative:
+    A2 = E*[ Z Z J 3*H ]
+    v2 = zeros(n-1)
+
+    # Not-a-knot conditions:
+    nakL = [ zeros(1,3*n) [1 -1 zeros(1,n-2)] ]
+    nakR = [ zeros(1,3*n) [zeros(1,n-2) 1 -1] ]
+
+    # Assemble and solve the full system.
+    A = [ AL; AR; A1; A2; nakL; nakR ]
+    v = [ vL; vR; v1; v2; 0; 0 ]
+    z = A\v
+
+    # Break the coefficients into separate vectors.
+    rows = 1:n
+    a = z[rows]
+    b = z[n.+rows];  c = z[2*n.+rows];  d = z[3*n.+rows]
+    S = [ Polynomial([a[k],b[k],c[k],d[k]]) for k = 1:n ]
+    # This function evaluates the spline when called with a value
+    # for x.
+    function evaluate(x)
+        k = findfirst(@. x&lt;t)   # one greater than interval x belongs to
+        k==1 &amp;&amp; return NaN
+        if isnothing(k)
+            return x==t[end] ? y[end] : NaN
+        end
+        return S[k-1](x-t[k-1])
+    end
+    return evaluate
+end
+</pre></div>
+</td></tr></table></div>
+</div></div><p><a class="reference internal" href="#function-spinterp"><span class="std std-ref">spinterp</span></a> gives an implementation of cubic not-a-knot spline interpolation. For clarity it stays very close to the description given above. There are some possible shortcuts—for example, one could avoid using <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> and instead directly delete the last row of any matrix it left-multiplies. Observe that the linear system is assembled and solved just once, and the returned evaluation function simply uses the resulting coefficients. This allows us to make multiple calls to evaluate <span class="math notranslate nohighlight">\(S\)</span> without unnecessarily repeating the linear algebra.</p>
+</div>
+<div class="section" id="conditioning-and-convergence">
+<h2>Conditioning and convergence<a class="headerlink" href="#conditioning-and-convergence" title="Permalink to this headline">¶</a></h2>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The not-a-knot cubic spline has order of accuracy equal to four.</p>
+</div>
+<div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/splines.html"><span class="doc">Cubic splines</span></a></p>
+</div>
+<p>Besides having more smoothness than a piecewise linear interpolant, the not-a-knot cubic spline improves the order of accuracy to four.</p>
+<div class="proof proof-type-theorem" id="id3">
+
+    <div class="proof-title">
+        <span class="proof-type">Theorem 50</span>
+        
+    </div><div class="proof-content">
+<p>Suppose that <span class="math notranslate nohighlight">\(f(x)\)</span> has four continuous derivatives in <span class="math notranslate nohighlight">\([a,b]\)</span> (i.e., <span class="math notranslate nohighlight">\(f\in C^4[a,b]\)</span>). Let <span class="math notranslate nohighlight">\(S_n(x)\)</span> be the not-a-knot cubic spline interpolant of <span class="math notranslate nohighlight">\(\bigl(t_i,f(t_i)\bigr)\)</span> for <span class="math notranslate nohighlight">\(i=0,\ldots,n\)</span>, where <span class="math notranslate nohighlight">\(t_i=a+i h\)</span> and <span class="math notranslate nohighlight">\(h=(b-a)/n\)</span>. Then for all sufficiently small <span class="math notranslate nohighlight">\(h\)</span>, there is a constant <span class="math notranslate nohighlight">\(C&gt;0\)</span> such that</p>
+<div class="math notranslate nohighlight" id="equation-nakaccuracy">
+<span class="eqno">(129)<a class="headerlink" href="#equation-nakaccuracy" title="Permalink to this equation">¶</a></span>\[\bigl\| f - S_n \bigr\|_\infty \le Ch^4.\]</div>
+</div></div><p>The conditioning of spline interpolation is much more complicated than for the piecewise linear case. First, the fact that the coefficients of all the cubics must be solved for simultaneously implies that each data value in <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> has an influence on <span class="math notranslate nohighlight">\(S\)</span> over the entire interval. Second, <span class="math notranslate nohighlight">\(S\)</span> can take on values larger in magnitude than all of the values in <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> (see <a class="reference internal" href="#problem-splineovershoot"><span class="std std-ref">this exercise</span></a>). The details may be found in more advanced texts.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol id="problem-splinesystems">
+<li><p>✍ In each case, write out the entries of the matrix and right-hand side of the linear system that determines the coefficients for the cubic not-a-knot spline interpolant of the given function and node vector.</p>
+<p><strong>(a)</strong> <span class="math notranslate nohighlight">\(\cos  (\pi^2 x^2 ), \: \mathbf{t} = [-1,1,4]\)</span></p>
+<p><strong>(b)</strong> <span class="math notranslate nohighlight">\(\cos (\pi^2 x^2), \: \mathbf{t} = [0,1/2,3/4,1]\)</span></p>
+<p><strong>(c)</strong> <span class="math notranslate nohighlight">\(\ln(x), \:  \mathbf{t} = [1,2,3]\)</span></p>
+<p><strong>(d)</strong> <span class="math notranslate nohighlight">\(\sin(x^2),\:  \mathbf{t} = [-1,0,1]\)</span></p>
+</li>
+<li><p>⌨ (continuation) For each case in the preceding problem, use Julia to set up and solve the linear system you wrote down. Then plot the resulting cubic spline over the interval between the second and third nodes.</p>
+</li>
+<li id="problem-spinterp"><p>⌨ For each given function, interval, and value of <span class="math notranslate nohighlight">\(n\)</span>, define <span class="math notranslate nohighlight">\(n+1\)</span> evenly spaced nodes. Then use <a class="reference internal" href="#function-spinterp"><span class="std std-ref">spinterp</span></a> to plot the cubic spline interpolant at those nodes together with the original function over the given interval.</p>
+<p><strong>(a)</strong> <span class="math notranslate nohighlight">\(\cos (\pi^2 x^2 ),\quad x\in[0,1],\quad n = 7\)</span></p>
+<p><strong>(b)</strong> <span class="math notranslate nohighlight">\(\ln(x), \quad x\in[1,3], \quad n = 5\)</span></p>
+<p><strong>(c)</strong> <span class="math notranslate nohighlight">\(\sin(x^2),\quad x\in[0,2.5],\quad n = 6\)</span></p>
+</li>
+<li><p>⌨ For each of the functions and intervals in the preceding problem, use <a class="reference internal" href="#function-spinterp"><span class="std std-ref">spinterp</span></a> to perform cubic spline interpolation for equispaced nodes with <span class="math notranslate nohighlight">\(n=10,20,40,80,160\)</span>. In each case compute the interpolant at 1600 equally spaced points in the interval and use it to estimate the error</p>
+<div class="math notranslate nohighlight">
+\[ E(n) = \| f-S \|_\infty = \max_x | f(x) - S(x) |.\]</div>
+<p>Make a log–log plot of <span class="math notranslate nohighlight">\(E\)</span> as a function of <span class="math notranslate nohighlight">\(n\)</span> and compare it graphically to fourth-order convergence.</p>
+</li>
+<li id="problem-splineovershoot"><p>⌨  Although the cardinal cubic splines are intractable in closed form, they can be found numerically. Each cardinal spline interpolates the data from one column of an identity matrix. Define the nodes <span class="math notranslate nohighlight">\(\mathbf{t} = \bigl[0,\, 0.075,\, 0.25,\, 0.55,\, 1]\)</span>. Plot over <span class="math notranslate nohighlight">\([0,1]\)</span> the five cardinal functions for this node set over the interval <span class="math notranslate nohighlight">\([0,1]\)</span>.</p></li>
+<li><p>✍ Suppose you were to define a piecewise quadratic spline that interpolates <span class="math notranslate nohighlight">\(n+1\)</span> given values and has a continuous first derivative. Follow the derivation of this section to express all of the interpolation and continuity conditions. How many additional conditions are required to make a square system for the coefficients?</p></li>
+<li><p><strong>(a)</strong> ✍ If <span class="math notranslate nohighlight">\(y_0=y_n\)</span>, another possibility for cubic spline end conditions is to make <span class="math notranslate nohighlight">\(S(x)\)</span> a periodic function. This implies that <span class="math notranslate nohighlight">\(S'\)</span> and <span class="math notranslate nohighlight">\(S''\)</span> are also periodic. Write out the two new algebraic equations for these constraints in terms of the piecewise coefficients.</p>
+<p><strong>(b)</strong> ⌨ Modify <a class="reference internal" href="#function-spinterp"><span class="std std-ref">spinterp</span></a> to compute a periodic spline interpolant. Test by making a plot of the interpolant for <span class="math notranslate nohighlight">\(f(x) =\exp(\sin(3x))\)</span> over the interval <span class="math notranslate nohighlight">\([0,2\pi/3]\)</span> with equally spaced nodes and <span class="math notranslate nohighlight">\(n=8\)</span>.</p>
+</li>
+</ol>
+<hr class="docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="nak"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>This explains the name of the not-a-knot spline—for splines, “knots” are the points at which  different piecewise definitions meet.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="pwlin.html" title="previous page">Piecewise linear interpolation</a>
+    <a class='right-next' id="next-link" href="finitediffs.html" title="next page">Finite differences</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tobin A. Driscoll and Richard J. Braun<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

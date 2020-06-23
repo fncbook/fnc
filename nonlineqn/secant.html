@@ -1,0 +1,417 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Interpolation-based methods &#8212; Fundamentals of Numerical Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/mystnb.js"></script>
+    <script src="../_static/proof.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Newton for nonlinear systems" href="newtonsys.html" />
+    <link rel="prev" title="Newton’s method in one variable" href="newton.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fundamentals of Numerical Computation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../frontmatter.html">Home</a>
+  </li>
+  <li class="">
+    <a href="../intro/overview.html">Introduction</a>
+  </li>
+  <li class="">
+    <a href="../linsys/overview.html">Square linear systems</a>
+  </li>
+  <li class="">
+    <a href="../leastsq/overview.html">Overdetermined linear systems</a>
+  </li>
+  <li class="active">
+    <a href="overview.html">Roots of nonlinear equations</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="rootproblem.html">The rootfinding problem</a>
+    </li>
+    <li class="">
+      <a href="fixed-point.html">Fixed point iteration</a>
+    </li>
+    <li class="">
+      <a href="newton.html">Newton’s method in one variable</a>
+    </li>
+    <li class="active">
+      <a href="">Interpolation-based methods</a>
+    </li>
+    <li class="">
+      <a href="newtonsys.html">Newton for nonlinear systems</a>
+    </li>
+    <li class="">
+      <a href="quasinewton.html">Quasi-Newton methods</a>
+    </li>
+    <li class="">
+      <a href="nlsq.html">Nonlinear least squares</a>
+    </li>
+    <li class="">
+      <a href="next.html">Next steps</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../localapprox/overview.html">Piecewise interpolation</a>
+  </li>
+  <li class="">
+    <a href="../ivp/overview.html">Initial-value problems for ODEs</a>
+  </li>
+  <li class="">
+    <a href="../appendix/linear-algebra.html">Review: Linear algebra</a>
+  </li>
+  <li class="">
+    <a href="../appendix/demos.html">All demo notebooks</a>
+  </li>
+  <li class="">
+    <a href="../refs.html">References</a>
+  </li>
+  <li class="">
+    <a href="../genindex.html">Index</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../_sources/nonlineqn/secant.md"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#convergence" class="nav-link">Convergence</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#inverse-interpolation" class="nav-link">Inverse interpolation</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#bracketing" class="nav-link">Bracketing</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#exercises" class="nav-link">Exercises</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="interpolation-based-methods">
+<h1>Interpolation-based methods<a class="headerlink" href="#interpolation-based-methods" title="Permalink to this headline">¶</a></h1>
+<p>From a practical standpoint, one of the biggest drawbacks of Newton’s method is the requirement to supply <span class="math notranslate nohighlight">\(f'\)</span> in <a class="reference internal" href="newton.html#function-newton"><span class="std std-ref">newton</span></a>. It is both a programming inconvenience and a step that requires computational time. We can avoid using <span class="math notranslate nohighlight">\(f'\)</span> however, by making a simple but easily overlooked observation:</p>
+<div class="proof proof-type-observation">
+
+    <div class="proof-title">
+        <span class="proof-type">Observation </span>
+        
+    </div><div class="proof-content">
+<p>When a step produces an approximate result, you are free to carry it out approximately.</p>
+</div></div><p>Let’s call this the “principle of approximate approximation.”</p>
+<p>In the Newton context, the principle of approximate approximation begins with the observation that the use of <span class="math notranslate nohighlight">\(f'\)</span> is linked to the construction of a linear approximation <span class="math notranslate nohighlight">\(q(x)\)</span> equivalent to a tangent line. The root of <span class="math notranslate nohighlight">\(q(x)\)</span> is used to define the next iterate in the sequence. We can avoid calculating the value of <span class="math notranslate nohighlight">\(f'\)</span> by choosing a different linear approximation.</p>
+<div class="demo sidebar" id="index-0">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/secant-line.html"><span class="doc">Using the secant line</span></a></p>
+</div>
+<p>The example in <a class="reference internal" href="demos/secant-line.html"><span class="doc">Using the secant line</span></a> demonstrates the <a class="reference internal" href="overview.html#term-secant-method"><span class="xref std std-term">secant method</span></a>. In the secant method, one finds the root of the linear approximation through the two most recent root estimates. That is, given previous approximations <span class="math notranslate nohighlight">\(x_1,\ldots,x_k\)</span>, define the linear model function as the line through <span class="math notranslate nohighlight">\(\bigl(x_{k-1},f(x_{k-1})\bigr)\)</span> and <span class="math notranslate nohighlight">\(\bigl(x_k,f(x_k)\bigr)\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-secantmodel">
+<span class="eqno">(86)<a class="headerlink" href="#equation-secantmodel" title="Permalink to this equation">¶</a></span>\[q(x) = f(x_k) + \frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}(x-x_k).\]</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>In the secant method, one finds the root of the line through the two most recent root estimates.</p>
+</div>
+<p>Solving <span class="math notranslate nohighlight">\(q(x_{k+1})=0\)</span> for <span class="math notranslate nohighlight">\(x_{k+1}\)</span> gives the formula</p>
+<div class="math notranslate nohighlight" id="equation-secant">
+<span class="eqno">(87)<a class="headerlink" href="#equation-secant" title="Permalink to this equation">¶</a></span>\[x_{k+1} = x_k - \frac{f(x_k)(x_k-x_{k-1})}{f(x_k)-f(x_{k-1})}, \quad n=1,2,\ldots.\]</div>
+<p>Our implementation of the method based on this formula is given in <a class="reference internal" href="#function-secant"><span class="std std-ref">secant</span></a>.</p>
+<div class="proof proof-type-function" id="id1">
+<span id="function-secant"></span>
+    <div class="proof-title">
+        <span class="proof-type">Function 36</span>
+        
+            <span class="proof-title-name">(secant)</span>
+        
+    </div><div class="proof-content">
+<p><strong>Secant method for scalar rootfinding.</strong></p>
+<div class="highlight-julia notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">secant(f,x1,x2)</span>
+
+<span class="s">Use the secant method to find a root of `f` starting from `x1` and</span>
+<span class="s">`x2`. Returns a vector of root estimates.</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">function</span> <span class="n">secant</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">)</span>
+    <span class="c"># Operating parameters.</span>
+    <span class="n">funtol</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="n">eps</span><span class="p">();</span>  <span class="n">xtol</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="n">eps</span><span class="p">();</span>  <span class="n">maxiter</span> <span class="o">=</span> <span class="mi">40</span><span class="p">;</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">]</span>
+    <span class="n">y1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">);</span> <span class="n">y2</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="nb">Inf</span>   <span class="c"># for initial pass below</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">dx</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">xtol</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">y2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">funtol</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">k</span> <span class="o">&lt;</span> <span class="n">maxiter</span><span class="p">)</span>
+        <span class="n">y2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="n">dx</span> <span class="o">=</span> <span class="o">-</span><span class="n">y2</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">y2</span><span class="o">-</span><span class="n">y1</span><span class="p">)</span>   <span class="c"># secant step</span>
+        <span class="n">push!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">+</span><span class="n">dx</span><span class="p">)</span>        <span class="c"># append new estimate</span>
+
+        <span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span>
+        <span class="n">y1</span> <span class="o">=</span> <span class="n">y2</span>    <span class="c"># current f-value becomes the old one next time</span>
+    <span class="k">end</span>
+
+    <span class="k">if</span> <span class="n">k</span><span class="o">==</span><span class="n">maxiter</span>
+        <span class="nd">@warn</span> <span class="s">&quot;Maximum number of iterations reached.&quot;</span>
+    <span class="k">end</span>
+
+    <span class="k">return</span> <span class="n">x</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table></div>
+</div></div><div class="section" id="convergence">
+<h2>Convergence<a class="headerlink" href="#convergence" title="Permalink to this headline">¶</a></h2>
+<p>The secant method uses a different linear model in each iteration than the one Newton’s method would use. Is it as good? As before, let <span class="math notranslate nohighlight">\(\epsilon_k = r-x_k\)</span> be the errors in the successive root approximations. If the initial errors are small, then a tedious but straightforward Taylor expansion shows that, to lowest order,</p>
+<div class="math notranslate nohighlight" id="equation-secanterr">
+<span class="eqno">(88)<a class="headerlink" href="#equation-secanterr" title="Permalink to this equation">¶</a></span>\[\epsilon_{k+1} \approx -\frac{1}{2}\frac{f''(r)}{f'(r)} \epsilon_k \epsilon_{k-1}.\]</div>
+<p>If we make an educated guess that</p>
+<div class="math notranslate nohighlight">
+\[\epsilon_{k+1} = c (\epsilon_k)^\alpha, \qquad \epsilon_k = c (\epsilon_{k-1})^\alpha, \qquad \alpha&gt;0,\]</div>
+<p>then <a class="reference internal" href="#equation-secanterr">(88)</a> becomes</p>
+<div class="math notranslate nohighlight" id="equation-secantexponents">
+<span class="eqno">(89)<a class="headerlink" href="#equation-secantexponents" title="Permalink to this equation">¶</a></span>\[\left[ \epsilon_{k-1}^{\alpha} \right]^{\alpha} \approx C \epsilon_{k-1}^{\alpha+1},\]</div>
+<p>for an unknown constant <span class="math notranslate nohighlight">\(C\)</span>. Treating the implied approximation as an equality, this becomes solvable if and only if the exponents match, i.e., <span class="math notranslate nohighlight">\(\alpha^2 = \alpha+1\)</span>. The only positive root of this equation is the golden ratio,</p>
+<div class="math notranslate nohighlight">
+\[  \alpha = \frac{1+\sqrt{5}}{2} \approx 1.618.\]</div>
+<span class="target" id="index-1"></span><p id="index-2">Hence the errors in the secant method converge like <span class="math notranslate nohighlight">\(\epsilon_{k+1} = c (\epsilon_k)^\alpha\)</span>  for <span class="math notranslate nohighlight">\(1&lt;\alpha&lt;2\)</span>, a situation called <a class="reference internal" href="overview.html#term-superlinear-convergence"><span class="xref std std-term">superlinear convergence</span></a>.</p>
+<div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/secant-converge.html"><span class="doc">Convergence of the secant method</span></a></p>
+</div>
+<p>In terms of error as a function of the iteration number <span class="math notranslate nohighlight">\(k\)</span>, the secant method converges at a rate between linear and quadratic, which is slower than Newton’s method. In that sense we must conclude that the secant line is inferior to the tangent line for approximating <span class="math notranslate nohighlight">\(f\)</span> near a root. But error versus iteration count may not be the best means of comparison.</p>
+<p>Often we analyze rootfinding methods by assuming that the bulk of computing time is spent evaluating the user-defined functions <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(f'\)</span>. (Our simple examples and exercises mostly don’t support this assumption, but many practical applications do.) In this light we see that Newton’s method requires two evaluations, <span class="math notranslate nohighlight">\(f(x_k)\)</span> and <span class="math notranslate nohighlight">\(f'(x_k)\)</span>, for each iteration. The secant method, on the other hand, while it <em>uses</em> the two function values <span class="math notranslate nohighlight">\(f(x_k)\)</span> and <span class="math notranslate nohighlight">\(f(x_{k-1})\)</span> at each iteration, only needs to <em>compute</em> a single new one. Note that <a class="reference internal" href="#function-secant"><span class="std std-ref">secant</span></a> keeps track of one previous function value rather than recomputing it.</p>
+<p>Now suppose that <span class="math notranslate nohighlight">\(|\epsilon_k|=\epsilon\)</span>. Roughly speaking, two units of work (i.e., function evaluations) in Newton’s method brings us to an error of <span class="math notranslate nohighlight">\(\epsilon^2\)</span>. If one spreads out the improvement in the error evenly across the two geometric steps, using</p>
+<div class="math notranslate nohighlight">
+\[\epsilon^2 = \bigl( \epsilon^{\sqrt{2}} \bigr)^{\!\sqrt{2}},\]</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The secant method is both easier to apply and faster than Newton’s method, on an equal-work basis.</p>
+</div>
+<p>it seems reasonable to say that the rate of convergence <em>per function evaluation</em> is <span class="math notranslate nohighlight">\(\sqrt{2}\approx 1.41\)</span>. This is actually less than the comparable rate of about <span class="math notranslate nohighlight">\(1.62\)</span> for the secant method. Not only is the secant method easier to apply than Newton’s method in practice, it’s also more efficient when counting function evaluations—a rare double victory!</p>
+</div>
+<div class="section" id="inverse-interpolation">
+<h2>Inverse interpolation<a class="headerlink" href="#inverse-interpolation" title="Permalink to this headline">¶</a></h2>
+<p id="index-3">At each iteration, the secant method constructs a linear model function that interpolates the two most recently found points on the graph of <span class="math notranslate nohighlight">\(f\)</span>. Two points determine a straight line, so this seems like a sensible choice. But as the iteration progresses, why use only the <em>two</em> most recent points? What would it mean to use more of them?</p>
+<p>If we interpolate through three points by a polynomial, we get a unique quadratic function. Unfortunately, a parabola may have zero, one, or two crossings of the <span class="math notranslate nohighlight">\(x\)</span>-axis, leaving some doubt as to how to define the next root estimate. On the other hand, if we turn a parabola on its side, we get a graph that intersects the <span class="math notranslate nohighlight">\(x\)</span>-axis exactly once, which is ideal for defining the next root estimate.</p>
+<p>This leads to the idea of defining <span class="math notranslate nohighlight">\(q(y)\)</span> as the quadratic interpolant to the points <span class="math notranslate nohighlight">\((y_{k-2},x_{k-2})\)</span>, <span class="math notranslate nohighlight">\((y_{k-1},x_{k-1})\)</span>, and <span class="math notranslate nohighlight">\((y_k,x_k)\)</span>, where <span class="math notranslate nohighlight">\(y_i=f(x_i)\)</span> for all <span class="math notranslate nohighlight">\(i\)</span>, and setting <span class="math notranslate nohighlight">\(x_{k+1}=q(0)\)</span>. The process defined in this way (given three initial estimates) is called <strong>inverse quadratic interpolation</strong>. Rather than deriving lengthy formulas for it here, we demonstrate how to perform inverse quadratic interpolation using <code class="docutils literal notranslate"><span class="pre">Polynomials.fit</span></code> to perform the interpolation step.</p>
+<div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/secant-iqi.html"><span class="doc">Inverse quadratic interpolation</span></a></p>
+</div>
+</div>
+<div class="section" id="bracketing">
+<h2>Bracketing<a class="headerlink" href="#bracketing" title="Permalink to this headline">¶</a></h2>
+<p>Like Newton’s method, the secant and inverse quadratic interpolation methods cannot guarantee convergence. One final new idea is needed to make a foolproof algorithm.</p>
+<p>If <span class="math notranslate nohighlight">\(f\)</span> is continuous on the interval <span class="math notranslate nohighlight">\([a,b]\)</span> and <span class="math notranslate nohighlight">\(f(a)f(b)&lt;0\)</span>—that is, <span class="math notranslate nohighlight">\(f\)</span> changes sign on the interval—then <span class="math notranslate nohighlight">\(f\)</span> must have (at least) one root in the interval, due to the Intermediate Value Theorem from calculus. If we come up with a new root estimate <span class="math notranslate nohighlight">\(c\in(a,b)\)</span>, then whatever sign <span class="math notranslate nohighlight">\(f(c)\)</span> is, it is different from the sign at one of the endpoints. (Of course, if <span class="math notranslate nohighlight">\(f(c)\)</span> is zero, we are done!) So either <span class="math notranslate nohighlight">\([a,c]\)</span> or <span class="math notranslate nohighlight">\([c,b]\)</span> is guaranteed to have a root too, and in this way we can maintain not just individual estimates but an interval that always contains a root.</p>
+<p>The best algorithms blend the use of fast-converging methods with the guarantee provided by a bracket. For example, say that an iteration begins with a bracketing interval. Make a list of the inverse quadratic estimate, the secant estimate, and the midpoint of the current interval and pick the first member of the list that lies within the current interval. Replace the interval with the bracketing subinterval, and start a new iteration. This is the idea behind <strong>Brent’s method</strong>, which is a very successful rootfinding algorithm.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<p>For each of problems 1–3, do the following steps.</p>
+<p><strong>(a)</strong> ✍ Rewrite the equation into the standard form for rootfinding, <span class="math notranslate nohighlight">\(f(x) = 0\)</span>. <strong>(b)</strong> ⌨ Make a plot of <span class="math notranslate nohighlight">\(f\)</span> over the given interval and determine how many roots lie in the interval. <strong>(c)</strong> ⌨ Use <code class="docutils literal notranslate"><span class="pre">nlsolve</span></code> to find an “exact” value for each root. <strong>(d)</strong> ⌨ Determine a bracketing interval for each root. Then use <a class="reference internal" href="#function-secant"><span class="std std-ref">secant</span></a>, starting with the endpoints of the interval, to find each root. <strong>(e)</strong> ⌨ For one of the roots, define <code class="docutils literal notranslate"><span class="pre">e</span></code> as a vector of the errors in the secant sequence. Determine numerically whether the convergence is superlinear.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(x^2=e^{-x}\)</span>, over <span class="math notranslate nohighlight">\([-2,2]\)</span></p>
+</li>
+<li><p><span class="math notranslate nohighlight">\(2x = \tan x\)</span>, over <span class="math notranslate nohighlight">\([-0.2,1.4]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(e^{x+1}=2+x\)</span>, over <span class="math notranslate nohighlight">\([-2,2]\)</span></p></li>
+<li><p>⌨ Use a plot to approximately locate all the roots of <span class="math notranslate nohighlight">\(f(x)=x^{-2}-\sin(x)\)</span> in the interval <span class="math notranslate nohighlight">\([0.5,4\pi]\)</span>. Then find a pair of initial points for each root such that <a class="reference internal" href="#function-secant"><span class="std std-ref">secant</span></a> converges to that root.</p></li>
+<li><p>✍ Show analytically that the secant method converges in one step for a linear function, regardless of the initialization.</p></li>
+<li><p>✍ In general, the secant method formula <a class="reference internal" href="#equation-secant">(87)</a> cannot be applied if <span class="math notranslate nohighlight">\(x_{k}=x_{k-1}\)</span>. However, suppose that <span class="math notranslate nohighlight">\(f(x)=ax^2+bx+c\)</span> for constants <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, and <span class="math notranslate nohighlight">\(c\)</span>. Show that in this case the formula can be simplified to one that is well defined when <span class="math notranslate nohighlight">\(x_{k}=x_{k-1}\)</span>. Then show that the resulting <span class="math notranslate nohighlight">\(x_{k+1}\)</span> is the same as the result of one step of Newton’s method applied to <span class="math notranslate nohighlight">\(f\)</span> at <span class="math notranslate nohighlight">\(x_k\)</span>.</p></li>
+<li><p>✍ Let <span class="math notranslate nohighlight">\(f(x)=x^2\)</span>. Show that if <span class="math notranslate nohighlight">\((1/x_1)\)</span> and <span class="math notranslate nohighlight">\((1/x_2)\)</span> are positive integers, and the secant iteration is applied, then the sequence <span class="math notranslate nohighlight">\(1/x_1,1/x_2,1/x_3,\ldots\)</span> is a Fibonacci sequence.</p></li>
+<li><p>✍ Provide the details that show how to derive <a class="reference internal" href="#equation-secanterr">(88)</a> from <a class="reference internal" href="#equation-secant">(87)</a>.</p></li>
+<li><p>⌨ Write a function <code class="docutils literal notranslate"><span class="pre">iqi(f,x1,x2,x3)</span></code> that performs inverse quadratic interpolation for finding a root of <span class="math notranslate nohighlight">\(f\)</span>, given three initial estimates. To find the quadratic polynomial <span class="math notranslate nohighlight">\(q(y)\)</span> passing through the three most recent points, use <code class="docutils literal notranslate"><span class="pre">fit</span></code> from the <code class="docutils literal notranslate"><span class="pre">Polynomials</span></code> package. Test your function on the first problem
+from this section.</p></li>
+</ol>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="newton.html" title="previous page">Newton’s method in one variable</a>
+    <a class='right-next' id="next-link" href="newtonsys.html" title="next page">Newton for nonlinear systems</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tobin A. Driscoll and Richard J. Braun<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

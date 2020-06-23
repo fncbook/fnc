@@ -1,0 +1,469 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Review: Linear algebra &#8212; Fundamentals of Numerical Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/mystnb.js"></script>
+    <script src="../_static/proof.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="All demo notebooks" href="demos.html" />
+    <link rel="prev" title="Next steps" href="../ivp/next.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fundamentals of Numerical Computation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../frontmatter.html">Home</a>
+  </li>
+  <li class="">
+    <a href="../intro/overview.html">Introduction</a>
+  </li>
+  <li class="">
+    <a href="../linsys/overview.html">Square linear systems</a>
+  </li>
+  <li class="">
+    <a href="../leastsq/overview.html">Overdetermined linear systems</a>
+  </li>
+  <li class="">
+    <a href="../nonlineqn/overview.html">Roots of nonlinear equations</a>
+  </li>
+  <li class="">
+    <a href="../localapprox/overview.html">Piecewise interpolation</a>
+  </li>
+  <li class="">
+    <a href="../ivp/overview.html">Initial-value problems for ODEs</a>
+  </li>
+  <li class="active">
+    <a href="">Review: Linear algebra</a>
+  </li>
+  <li class="">
+    <a href="demos.html">All demo notebooks</a>
+  </li>
+  <li class="">
+    <a href="../refs.html">References</a>
+  </li>
+  <li class="">
+    <a href="../genindex.html">Index</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../_sources/appendix/linear-algebra.md"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#algebra" class="nav-link">Algebra</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#linear-systems-and-inverses" class="nav-link">Linear systems and inverses</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#exercises" class="nav-link">Exercises</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="review-linear-algebra">
+<h1>Review: Linear algebra<a class="headerlink" href="#review-linear-algebra" title="Permalink to this headline">¶</a></h1>
+<dl class="glossary simple">
+<dt id="term-inverse">inverse</dt><dd><p>Multiplicative inverse of a matrix.</p>
+</dd>
+<dt id="term-invertible">invertible</dt><dd><p>Describing a matrix (necessarily square) that has an inverse.</p>
+</dd>
+</dl>
+<p>An <span class="math notranslate nohighlight">\(m\times n\)</span> matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is a rectangular <span class="math notranslate nohighlight">\(m\)</span>-by-<span class="math notranslate nohighlight">\(n\)</span> array of numbers called <strong>elements</strong> or <strong>entries</strong>.  The numbers <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(n\)</span> are called the <strong>row dimension</strong> and the <strong>column dimension</strong>, respectively; collectively they describe the <strong>size</strong> of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. We say <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> belongs to <span class="math notranslate nohighlight">\(\mathbb{R}^{m\times n}\)</span> if its entries are real or <span class="math notranslate nohighlight">\(\mathbb{C}^{m\times n}\)</span> if they are complex-valued.  A <strong>square</strong> matrix has equal row and column dimensions. A <strong>row vector</strong> has dimension <span class="math notranslate nohighlight">\(1\times n\)</span>, while a <strong>column vector</strong> has dimension <span class="math notranslate nohighlight">\(m \times 1\)</span>. By default, a vector is understood to be a column vector, and we use <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> or <span class="math notranslate nohighlight">\(\mathbb{C}^n\)</span> to denote spaces of vectors.  An ordinary number in <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> or <span class="math notranslate nohighlight">\(\mathbb{C}\)</span> may be called a <strong>scalar</strong>.</p>
+<p>We use capital letters in bold to refer to matrices, and lowercase bold letters for vectors. In this book, all vectors are column vectors—in other words, matrices with multiple rows and one column. The bold symbol <span class="math notranslate nohighlight">\(\boldsymbol{0}\)</span> may refer to a vector of all zeros or to a zero matrix, depending on context; we use <span class="math notranslate nohighlight">\(0\)</span> as the scalar zero only.</p>
+<p>To refer to a specific element of a matrix, we use the uppercase name of the matrix <em>without</em> boldface, as in <span class="math notranslate nohighlight">\(A_{24}\)</span> to mean the <span class="math notranslate nohighlight">\((2,4)\)</span> element of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. To refer to an element of a vector, we use just one subscript, as in <span class="math notranslate nohighlight">\(x_3\)</span>. If you see a boldface character with one or more subscripts, then you know that it is a matrix or vector that belongs to a numbered collection.</p>
+<p>We will have frequent need to refer to the individual columns of a matrix as vectors. Our convention, is to use a lowercase bold version of the matrix name, with a subscript to represent the column number. Thus, <span class="math notranslate nohighlight">\(\mathbf{a}_1,\mathbf{a}_2,\ldots,\mathbf{a}_n\)</span> are the columns of the <span class="math notranslate nohighlight">\(m\times n\)</span> matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. Conversely, whenever we define a sequence of vectors <span class="math notranslate nohighlight">\(\mathbf{v}_1,\ldots,\mathbf{v}_p\)</span>, we can implicitly consider them to be columns of a matrix <span class="math notranslate nohighlight">\(\mathbf{V}\)</span>. Sometimes we might write <span class="math notranslate nohighlight">\(\mathbf{V}=\bigl[ \mathbf{v}_j \bigr]\)</span> to emphasize the connection.</p>
+<p>The <strong>diagonal</strong> (main diagonal) of an <span class="math notranslate nohighlight">\(n\times n\)</span> matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> refers to the entries <span class="math notranslate nohighlight">\(A_{ii}\)</span>, <span class="math notranslate nohighlight">\(i=1,\ldots,n\)</span>. The entries <span class="math notranslate nohighlight">\(A_{ij}\)</span> where <span class="math notranslate nohighlight">\(j-i=k\)</span> are on a <strong>superdiagonal</strong> if <span class="math notranslate nohighlight">\(k&gt;0\)</span> and a <strong>subdiagonal</strong> if <span class="math notranslate nohighlight">\(k&lt;0\)</span>. The diagonals are numbered as suggested here:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}  \begin{bmatrix}
+    0 &amp; 1 &amp; 2 &amp; \cdots &amp; n-1 \\
+    -1 &amp; 0 &amp; 1 &amp; \cdots &amp; n-2 \\
+    \vdots &amp; \ddots &amp; \ddots &amp; \ddots &amp; \vdots \\
+    -n+2 &amp; \cdots &amp; -1 &amp; 0 &amp; 1\\
+    -n+1 &amp; \cdots &amp; -2 &amp; -1 &amp; 0
+  \end{bmatrix}.\end{split}\]</div>
+<p>A <strong>diagonal</strong> matrix is one whose entries are all zero off the main diagonal.  An <strong>upper triangular</strong> matrix <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> has entries <span class="math notranslate nohighlight">\(U_{ij}\)</span> with <span class="math notranslate nohighlight">\(U_{ij}=0\)</span> if <span class="math notranslate nohighlight">\(i&gt;j\)</span>, and a <strong>lower triangular</strong> matrix <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> has <span class="math notranslate nohighlight">\(L_{ij}=0\)</span> if <span class="math notranslate nohighlight">\(i&lt;j\)</span>.</p>
+<p>The <strong>transpose</strong> of <span class="math notranslate nohighlight">\(\mathbf{A}\in\mathbb{C}^{m\times n}\)</span> is the matrix <span class="math notranslate nohighlight">\(\mathbf{A}^T\in\mathbb{C}^{n\times m}\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}  \mathbf{A}^T =
+  \begin{bmatrix}
+    A_{11} &amp; A_{21} &amp; \cdots &amp; A_{m1}\\
+    \vdots &amp; \vdots &amp; &amp; \vdots\\
+    A_{1n} &amp; A_{2n} &amp; \cdots &amp; A_{mn}
+  \end{bmatrix}.\end{split}\]</div>
+<p>The <strong>conjugate transpose</strong> or <strong>hermitian</strong> is given by <span class="math notranslate nohighlight">\(\mathbf{A}^*=\overline{\mathbf{A}^T}\)</span>, where the bar denotes taking a complex conjugate.<a class="footnote-reference brackets" href="#conj" id="id1">1</a> If <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is real, then <span class="math notranslate nohighlight">\(\mathbf{A}^*=\mathbf{A}^T\)</span>. A square matrix is <strong>symmetric</strong> if <span class="math notranslate nohighlight">\(\mathbf{A}^T=\mathbf{A}\)</span> and <strong>hermitian</strong> if <span class="math notranslate nohighlight">\(\mathbf{A}^*=\mathbf{A}\)</span>.</p>
+<div class="section" id="algebra">
+<h2>Algebra<a class="headerlink" href="#algebra" title="Permalink to this headline">¶</a></h2>
+<p>Matrices of the same size may be added componentwise.  Multiplication by a scalar is also defined elementwise. These operations obey the familiar laws of commutativity, associativity, and distributivity. The multiplication of two matrices, on the other hand, is much less straightforward.</p>
+<p>In order for matrices <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> to be multiplied, it is necessary that their “inner” dimensions match—i.~e., <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is <span class="math notranslate nohighlight">\(m\times p\)</span> and <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> is <span class="math notranslate nohighlight">\(p \times n\)</span>. Note that even if <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{B}\)</span> is defined, <span class="math notranslate nohighlight">\(\mathbf{B}\mathbf{A}\)</span> may not be, unless <span class="math notranslate nohighlight">\(m=n\)</span>. In terms of scalar components, the <span class="math notranslate nohighlight">\((i,j)\)</span> entry of <span class="math notranslate nohighlight">\(\mathbf{C}=\mathbf{A}\mathbf{B}\)</span> is given by</p>
+<div class="math notranslate nohighlight" id="equation-scalarmatrixmult">
+<span class="eqno">(201)<a class="headerlink" href="#equation-scalarmatrixmult" title="Permalink to this equation">¶</a></span>\[  C_{ij} = \sum_{k=1}^p A_{ik} B_{kj}.\]</div>
+<p>An important identity is that when <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{B}\)</span> is defined,</p>
+<div class="math notranslate nohighlight" id="equation-transposeidentity">
+<span class="eqno">(202)<a class="headerlink" href="#equation-transposeidentity" title="Permalink to this equation">¶</a></span>\[  (\mathbf{A}\mathbf{B})^T=\mathbf{B}^T\mathbf{A}^T\]</div>
+<p>The latter product is always defined in this situation.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Matrix multiplication is not commutative.</p>
+</div>
+<p>However, <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{B}= \mathbf{B}\mathbf{A}\)</span> is <em>not</em> true in general, even when both products are defined. That is, matrix multiplication is not commutative. It is, however, associative: <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{B}\mathbf{C}=(\mathbf{A}\mathbf{B})\mathbf{C}=\mathbf{A}(\mathbf{B}\mathbf{C})\)</span>. Changing the ordering of operations by associativity is a trick we will use repeatedly.</p>
+<p>It is worth reinterpreting <a class="reference internal" href="#equation-scalarmatrixmult">(201)</a> at a vector level. If <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> has dimensions <span class="math notranslate nohighlight">\(m\times n\)</span>, it can be multiplied on the right by an <span class="math notranslate nohighlight">\(n \times 1\)</span> column vector <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> to produce an <span class="math notranslate nohighlight">\(m \times 1\)</span> column vector <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{v}\)</span>, which satisfies</p>
+<div class="math notranslate nohighlight" id="equation-mvcol">
+<span class="eqno">(203)<a class="headerlink" href="#equation-mvcol" title="Permalink to this equation">¶</a></span>\[\begin{split}  \mathbf{A}\mathbf{v} =
+  \begin{bmatrix}
+    \displaystyle \sum_k A_{1k}v_k \\[2mm]
+    \displaystyle \sum_k A_{2k}v_k \\
+    \vdots\\
+    \displaystyle \sum_k A_{mk}v_k
+  \end{bmatrix}
+  = v_1
+  \begin{bmatrix}
+    A_{11}\\A_{21}\\\vdots\\A_{m1}
+  \end{bmatrix} +
+  v_2
+  \begin{bmatrix}
+    A_{12}\\A_{22}\\\vdots\\A_{m2}
+  \end{bmatrix} +
+  \cdots + v_n
+  \begin{bmatrix}
+    A_{1n}\\A_{2n}\\\vdots\\A_{mn}
+  \end{bmatrix} = v_1 \mathbf{a}_1 + \cdots + v_n \mathbf{a}_n.\end{split}\]</div>
+<p>In words, we say that <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{v}\)</span> is a  <strong>linear combination</strong> of the columns of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. Equation <a class="reference internal" href="#equation-mvcol">(203)</a> is very important: \emph{Multiplying a matrix on the right by a column vector produces a linear combination of the columns of the matrix}. There is a similar interpretation of multiplying <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> on the left by a row vector. Keeping to our convention that boldface letters represent <em>column</em> vectors, we write, for <span class="math notranslate nohighlight">\(\mathbf{v}\in\mathbb{R}^m\)</span>,</p>
+<div class="math notranslate nohighlight" id="equation-mvrow">
+<span class="eqno">(204)<a class="headerlink" href="#equation-mvrow" title="Permalink to this equation">¶</a></span>\[  \mathbf{v}^T \mathbf{A} =
+  \begin{bmatrix}
+    \displaystyle \sum_k v_k A_{k1} &amp; \displaystyle \sum_k v_k A_{k2} &amp; \cdots &amp; \displaystyle \sum_k v_k A_{kn}
+  \end{bmatrix}
+   = v_1
+  \begin{bmatrix}
+    A_{11} &amp;  \cdots &amp; A_{1n}
+  \end{bmatrix} +
+  v_2
+  \begin{bmatrix}
+    A_{21} &amp; \cdots &amp; A_{2n}
+  \end{bmatrix} +
+  \cdots + v_m
+  \begin{bmatrix}
+    A_{m1} &amp; \cdots &amp; A_{mn}
+  \end{bmatrix}.\]</div>
+<p>Thus multiplying a matrix on the left by a row vector produces a linear combination of the rows of the matrix.</p>
+<p>These two observations extend to more general matrix-matrix multiplications. One can show that (here again <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is <span class="math notranslate nohighlight">\(m\times p\)</span> and <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> is <span class="math notranslate nohighlight">\(p\times n\)</span>)</p>
+<div class="math notranslate nohighlight" id="equation-mmhoriz">
+<span class="eqno">(205)<a class="headerlink" href="#equation-mmhoriz" title="Permalink to this equation">¶</a></span>\[  \mathbf{A}\mathbf{B} =
+  \mathbf{A} \begin{bmatrix}
+    \mathbf{b}_1 &amp; \mathbf{b}_2 &amp; \cdots &amp; \mathbf{b}_n
+  \end{bmatrix}
+  = \begin{bmatrix}
+    \mathbf{A}\mathbf{b}_1 &amp; \mathbf{A}\mathbf{b}_2 &amp; \cdots &amp; A\mathbf{b}_n
+  \end{bmatrix}\]</div>
+<p>In words, a matrix-matrix product is a horizontal concatenation of matrix-vector products involving the columns of the right-hand matrix. Equivalently, if we write <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> in terms of rows, then</p>
+<div class="math notranslate nohighlight" id="equation-mmvert">
+<span class="eqno">(206)<a class="headerlink" href="#equation-mmvert" title="Permalink to this equation">¶</a></span>\[\begin{split}  \mathbf{A} =
+  \begin{bmatrix}
+    \mathbf{w}_1^T \\[2mm] \mathbf{w}_2^T \\ \vdots \\ \mathbf{w}_m^T
+  \end{bmatrix}
+  \qquad\text{ implies }\qquad
+    \mathbf{A}\mathbf{B} =
+  \begin{bmatrix}
+    \mathbf{w}_1^T \mathbf{B} \\[2mm] \mathbf{w}_2^T \mathbf{B} \\ \vdots \\ \mathbf{w}_m^T \mathbf{B}
+  \end{bmatrix}.\end{split}\]</div>
+<p>Thus, a matrix-matrix product is also a vertical concatenation of vector-matrix products involving the rows of the left-hand matrix. All of our representations of matrix multiplication are equivalent, so whichever one is most convenient at any moment can be used.</p>
+<div class="proof proof-type-example" id="id2">
+<span id="example-mmmult1"></span>
+    <div class="proof-title">
+        <span class="proof-type">Example 78</span>
+        
+    </div><div class="proof-content">
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}  \mathbf{A} = \begin{bmatrix}
+        1 &amp; -1 \\ 0 &amp; 2 \\ -3 &amp; 1
+      \end{bmatrix}, \qquad
+  \mathbf{B} = \begin{bmatrix}
+        2 &amp; -1 &amp; 0 &amp; 4 \\ 1 &amp; 1 &amp; 3 &amp; 2
+      \end{bmatrix}.\end{split}\]</div>
+<p>Then, going by <a class="reference internal" href="#equation-scalarmatrixmult">(201)</a>, we get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+  \mathbf{A}\mathbf{B} &amp;= \begin{bmatrix}
+          (1)(2) + (-1)(1) &amp; (1)(-1) + (-1)(1) &amp; (1)(0) + (-1)(3) &amp; (1)(4) + (-1)(2) \\
+          (0)(2) + (2)(1) &amp; (0)(-1) + (2)(1) &amp; (0)(0) + (2)(3) &amp; (0)(4) + (2)(2) \\
+          (-3)(2) + (1)(1) &amp; (-3)(-1) + (1)(1) &amp; (-3)(0) + (1)(3) &amp; (-3)(4) + (1)(2)
+        \end{bmatrix} \\
+  &amp;= \begin{bmatrix}
+      1 &amp; -2 &amp; -3 &amp; 2 \\ 2 &amp; 2 &amp; 6 &amp; 4 \\ -5 &amp; 4 &amp; 3 &amp; -10
+    \end{bmatrix}.
+\end{split}\end{split}\]</div>
+<p>But note also, for instance, that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}  \mathbf{A} \begin{bmatrix} 2 \\ 1 \end{bmatrix} = 2 \begin{bmatrix} 1 \\ 0 \\ -3
+    \end{bmatrix} + 1 \begin{bmatrix} -1 \\ 2 \\ 1 \end{bmatrix} = \begin{bmatrix} 1 \\ 2 \\ -5 \end{bmatrix},\end{split}\]</div>
+<p>and so on, as according to <a class="reference internal" href="#equation-mmhoriz">(205)</a>.</p>
+</div></div><p>The <a class="reference internal" href="../linsys/overview.html#term-identity-matrix"><span class="xref std std-term">identity matrix</span></a> of size <span class="math notranslate nohighlight">\(n\)</span>, called <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> (or sometimes <span class="math notranslate nohighlight">\(\mathbf{I}_n\)</span>), is a diagonal <span class="math notranslate nohighlight">\(n\times n\)</span> matrix with every diagonal entry equal to one. As can be seen from <a class="reference internal" href="#equation-mmhoriz">(205)</a> and <a class="reference internal" href="#equation-mmvert">(206)</a>, it satisfies <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{I}=\mathbf{A}\)</span> for <span class="math notranslate nohighlight">\(\mathbf{A}\in\mathbb{C}^{m\times n}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{I}\mathbf{B}=\mathbf{B}\)</span> for <span class="math notranslate nohighlight">\(\mathbf{B}\in\mathbb{C}^{n\times p}\)</span>. It is therefore the matrix analog of the number <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<div class="proof proof-type-example" id="id3">
+
+    <div class="proof-title">
+        <span class="proof-type">Example 79</span>
+        
+    </div><div class="proof-content">
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}  \mathbf{B} =
+  \begin{bmatrix}
+    2 &amp; 1 &amp; 7 &amp; 4\\
+    6 &amp; 0 &amp; -1 &amp; 0\\
+    -4 &amp; -4 &amp; 0 &amp; 1
+  \end{bmatrix}.\end{split}\]</div>
+<p>Suppose we want to create a zero in the (2,1) entry by adding <span class="math notranslate nohighlight">\(-3\)</span> times the first row to the second row, leaving the other rows unchanged. We can express this operation as a product <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{B}\)</span> as follows. From dimensional considerations alone, <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> will need to be <span class="math notranslate nohighlight">\(3\times 3\)</span>. According to <a class="reference internal" href="#equation-mvrow">(204)</a>, we get “<span class="math notranslate nohighlight">\(-3\)</span> times row one plus row two” from left-multiplying <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> by the vector <span class="math notranslate nohighlight">\(\begin{bmatrix} -3 &amp; 1 &amp; 0 \end{bmatrix}\)</span>. Equation <a class="reference internal" href="#equation-mmvert">(206)</a> tells us that this must be the second row of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. Since the first and third rows of <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{B}\)</span> are the same as those of <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>, similar logic tells us that the first and third rows of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> are the same as the identity matrix:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}  \begin{bmatrix}
+    1 &amp; 0 &amp; 0\\
+    -3 &amp; 1 &amp; 0\\
+    0 &amp; 0 &amp; 1
+  \end{bmatrix} \mathbf{B}  =
+  \begin{bmatrix}
+    2 &amp; 1 &amp; 7 &amp; 4\\
+    0 &amp; -3 &amp; -22 &amp; -12\\
+    -4 &amp; -4 &amp; 0 &amp; 1
+  \end{bmatrix}.\end{split}\]</div>
+<p>This can be verified directly using <a class="reference internal" href="#equation-scalarmatrixmult">(201)</a>.</p>
+</div></div><p>Note that a square matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> can always be multiplied by itself to get a matrix of the same size. Hence we can define the integer powers <span class="math notranslate nohighlight">\(\mathbf{A}^2=(\mathbf{A})(\mathbf{A})\)</span>, <span class="math notranslate nohighlight">\(\mathbf{A}^3=(\mathbf{A}^2) \mathbf{A} = (\mathbf{A}) \mathbf{A}^2\)</span> (by associativity), and so on. By definition, <span class="math notranslate nohighlight">\(\mathbf{A}^0=\mathbf{I}\)</span>.</p>
+<p>According to the rules for multiplying matrices, there are two ways for vectors to be multiplied together. If <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> are in <span class="math notranslate nohighlight">\(\mathbb{C}^n\)</span>, their <strong>inner product</strong> is</p>
+<div class="math notranslate nohighlight">
+\[  \mathbf{v}^* \mathbf{w} = \sum_{k=1}^n \overline{v_k}\, w_k.\]</div>
+<p>Trivially, one finds that <span class="math notranslate nohighlight">\(\mathbf{w}^* \mathbf{v} = \overline{(\mathbf{v}^*\mathbf{w})}\)</span>. Additionally, <em>any</em> two vectors <span class="math notranslate nohighlight">\(\mathbf{v}\in\mathbb{C}^m\)</span> and <span class="math notranslate nohighlight">\(\mathbf{w}\in\mathbb{C}^n\)</span> have an <strong>outer product</strong>, which is an <span class="math notranslate nohighlight">\(m\times n\)</span> matrix:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}  \mathbf{v} \mathbf{w}^*
+  =
+  \begin{bmatrix}
+    v_1\,\overline{w_1} &amp; v_1\,\overline{w_2} &amp; \cdots &amp; v_1\,\overline{w_n}\\
+    v_2\,\overline{w_1} &amp; v_2\,\overline{w_2} &amp; \cdots &amp; v_2\,\overline{w_n}\\
+    \vdots &amp; \vdots &amp; &amp; \vdots\\
+    v_m\,\overline{w_1} &amp; v_m\,\overline{w_2} &amp; \cdots &amp; v_m\,\overline{w_n}
+  \end{bmatrix}.\end{split}\]</div>
+</div>
+<div class="section" id="linear-systems-and-inverses">
+<h2>Linear systems and inverses<a class="headerlink" href="#linear-systems-and-inverses" title="Permalink to this headline">¶</a></h2>
+<p>Given a square, <span class="math notranslate nohighlight">\(n\times n\)</span> matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and  <span class="math notranslate nohighlight">\(n\)</span>-vectors <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>, the equation <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span> is equivalent to</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+  a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n &amp;= b_1 \\
+  a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n &amp;= b_2 \\
+  \vdots  \\
+  a_{n1}x_1 + a_{n2}x_2 + \cdots + a_{nn}x_n &amp;= b_n.
+\end{split}\end{split}\]</div>
+<p>We say that <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is <a class="reference internal" href="#term-invertible"><span class="xref std std-term">invertible</span></a> or <strong>nonsingular</strong> if there exists another <span class="math notranslate nohighlight">\(n\times n\)</span> matrix <span class="math notranslate nohighlight">\(\mathbf{A}^{-1}\)</span>, the <a class="reference internal" href="#term-inverse"><span class="xref std std-term">inverse</span></a> of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>, such that <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{A}^{-1}=\mathbf{A}^{-1}\mathbf{A}=\mathbf{I}\)</span>, the identity matrix. Otherwise, <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is <strong>singular</strong>. If a matrix is invertible, its inverse is unique. This and the following facts are usually proved in an elementary text on linear algebra.</p>
+<div class="proof proof-type-theorem" id="id4">
+<span id="theorem-singularity"></span>
+    <div class="proof-title">
+        <span class="proof-type">Theorem 80</span>
+        
+            <span class="proof-title-name">((Linear algebra equivalence))</span>
+        
+    </div><div class="proof-content">
+<p>The following statements are equivalent:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is nonsingular.</p></li>
+<li><p><span class="math notranslate nohighlight">\((\mathbf{A}^{-1})^{-1} = \mathbf{A}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x}=\boldsymbol{0}\)</span> implies that <span class="math notranslate nohighlight">\(\mathbf{x}=\boldsymbol{0}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span> has a unique solution, <span class="math notranslate nohighlight">\(\mathbf{x}=\mathbf{A}^{-1}\mathbf{b}\)</span>, for any <span class="math notranslate nohighlight">\(n\)</span>-vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>.</p></li>
+</ol>
+</div></div></div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol>
+<li><p>✍ In racquetball, the winner of a rally serves the next rally. Generally, the server has an advantage. Suppose that when Ashley and Barbara are playing racquetball, Ashley wins 60% of the rallies she   serves and Barbara wins 70% of the rallies she serves. If <span class="math notranslate nohighlight">\(\mathbf{x}\in\mathbb{R}^2\)</span> is such that <span class="math notranslate nohighlight">\(x_1\)</span> is the probability that Ashley serves first and <span class="math notranslate nohighlight">\(x_2=1-x_1\)</span> is the probability that Barbara serves first, define a matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> such that <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x}\)</span> is a vector of the probabilities that Ashley and Barbara each serve the second rally. What is the meaning of <span class="math notranslate nohighlight">\(A^{10}\mathbf{x}\)</span>?</p></li>
+<li><p>✍ Suppose we have lists of <span class="math notranslate nohighlight">\(n\)</span> terms and <span class="math notranslate nohighlight">\(m\)</span> documents. We can   define an <span class="math notranslate nohighlight">\(m\times n\)</span> matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> such that <span class="math notranslate nohighlight">\(A_{ij}=1\)</span> if term <span class="math notranslate nohighlight">\(j\)</span>   appears in document <span class="math notranslate nohighlight">\(i\)</span>, and <span class="math notranslate nohighlight">\(A_{ij}=0\)</span> otherwise. Now suppose that the term list is</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;numerical&quot;</span><span class="p">,</span> <span class="s">&quot;analysis&quot;</span><span class="p">,</span> <span class="s">&quot;more&quot;</span><span class="p">,</span> <span class="s">&quot;cool&quot;</span><span class="p">,</span> <span class="s">&quot;accounting&quot;</span>
+</pre></div>
+</div>
+<p>and that <span class="math notranslate nohighlight">\(\mathbf{x} = \begin{bmatrix} 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0  \end{bmatrix}^T\)</span>. Give an interpretation of the product <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x}\)</span>.</p>
+</li>
+<li><p>✍ Let</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{A} =
+\begin{bmatrix}
+  0 &amp; 1 &amp; 0 &amp; 0 \\
+  0 &amp; 0 &amp; 0 &amp; 1 \\
+  0 &amp; 0 &amp; 0 &amp; 0 \\
+  0 &amp; 0 &amp; 1 &amp; 0
+\end{bmatrix}.\end{split}\]</div>
+<p>Show that <span class="math notranslate nohighlight">\(\mathbf{A}^n=0\)</span> when <span class="math notranslate nohighlight">\(n\ge 4\)</span>.</p>
+</li>
+<li><p>✍  Find two matrices <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>, neither of which is the zero matrix, such that <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{B}=\boldsymbol{0}\)</span>.</p>
+</li>
+<li id="prob-linalg-transposeidentity"><p>✍ Prove that when <span class="math notranslate nohighlight">\(\mathbf{A} \mathbf{B}\)</span> is   defined, <span class="math notranslate nohighlight">\(\mathbf{B}^T\mathbf{A}^T\)</span> is defined too, and use   equation <a class="reference internal" href="#equation-scalarmatrixmult">(201)</a> to show that   <span class="math notranslate nohighlight">\((\mathbf{A}\mathbf{B})^T=\mathbf{B}^T\mathbf{A}^T\)</span>.</p>
+</li>
+<li id="prob-linalg-inversetranspose"><p>✍ Show that if <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is invertible, then  <span class="math notranslate nohighlight">\((\mathbf{A}^T)^{-1}=(\mathbf{A}^{-1})^T\)</span>. (This matrix is often just written as <span class="math notranslate nohighlight">\(\mathbf{A}^{-T}\)</span>.)</p></li>
+<li><p>✍ Prove true, or give a counterexample: The product of upper triangular square matrices is upper triangular.</p></li>
+</ol>
+<hr class="docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="conj"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>The conjugate of a complex number is found by   replacing all references to the imaginary unit <span class="math notranslate nohighlight">\(i\)</span> by <span class="math notranslate nohighlight">\(-i\)</span>. We will not see much of complex numbers until the second half of the book.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../ivp/next.html" title="previous page">Next steps</a>
+    <a class='right-next' id="next-link" href="demos.html" title="next page">All demo notebooks</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tobin A. Driscoll and Richard J. Braun<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

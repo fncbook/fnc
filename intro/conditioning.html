@@ -1,0 +1,431 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Problems and conditioning &#8212; Fundamentals of Numerical Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/mystnb.js"></script>
+    <script src="../_static/proof.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Algorithms" href="algorithms.html" />
+    <link rel="prev" title="Floating-point numbers" href="floating-point.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fundamentals of Numerical Computation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../frontmatter.html">Home</a>
+  </li>
+  <li class="active">
+    <a href="overview.html">Introduction</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="floating-point.html">Floating-point numbers</a>
+    </li>
+    <li class="active">
+      <a href="">Problems and conditioning</a>
+    </li>
+    <li class="">
+      <a href="algorithms.html">Algorithms</a>
+    </li>
+    <li class="">
+      <a href="stability.html">Stability</a>
+    </li>
+    <li class="">
+      <a href="next.html">Next steps</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../linsys/overview.html">Square linear systems</a>
+  </li>
+  <li class="">
+    <a href="../leastsq/overview.html">Overdetermined linear systems</a>
+  </li>
+  <li class="">
+    <a href="../nonlineqn/overview.html">Roots of nonlinear equations</a>
+  </li>
+  <li class="">
+    <a href="../localapprox/overview.html">Piecewise interpolation</a>
+  </li>
+  <li class="">
+    <a href="../ivp/overview.html">Initial-value problems for ODEs</a>
+  </li>
+  <li class="">
+    <a href="../appendix/linear-algebra.html">Review: Linear algebra</a>
+  </li>
+  <li class="">
+    <a href="../appendix/demos.html">All demo notebooks</a>
+  </li>
+  <li class="">
+    <a href="../refs.html">References</a>
+  </li>
+  <li class="">
+    <a href="../genindex.html">Index</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../_sources/intro/conditioning.md"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#condition-numbers" class="nav-link">Condition numbers</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#multidimensional-problems" class="nav-link">Multidimensional problems</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#exercises" class="nav-link">Exercises</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="problems-and-conditioning">
+<h1>Problems and conditioning<a class="headerlink" href="#problems-and-conditioning" title="Permalink to this headline">¶</a></h1>
+<p>Let’s think a bit about what must be the easiest math problem you’ve dealt with in quite some time: adding one to a number. Formally, we describe this problem as a function <span class="math notranslate nohighlight">\(f(x)=x+1\)</span>, where <span class="math notranslate nohighlight">\(x\)</span> is any real number. On a computer, <span class="math notranslate nohighlight">\(x\)</span> will be represented by its floating point counterpart, <span class="math notranslate nohighlight">\(\fl(x)\)</span>. Given the property <a class="reference internal" href="floating-point.html#equation-fpbound">(3)</a>, we have <span class="math notranslate nohighlight">\(\fl(x)=x(1+\epsilon)\)</span>, for some <span class="math notranslate nohighlight">\(\epsilon\)</span> satisfying <span class="math notranslate nohighlight">\(|\epsilon| &lt; \macheps/2\)</span>.  There is no error in representing the value 1. Let’s suppose that we are fortunate and that the addition proceeds exactly, with no additional errors. Then the machine result is just</p>
+<div class="math notranslate nohighlight" id="equation-plus1fp">
+<span class="eqno">(7)<a class="headerlink" href="#equation-plus1fp" title="Permalink to this equation">¶</a></span>\[  {y} = x(1+\epsilon)+1.\]</div>
+<p>We can compute (in exact arithmetic) the relative error in this result:</p>
+<div class="math notranslate nohighlight" id="equation-plus1relerr">
+<span class="eqno">(8)<a class="headerlink" href="#equation-plus1relerr" title="Permalink to this equation">¶</a></span>\[  \frac{|{y}-f(x)|}{|f(x)|} = \frac{| (x+\epsilon x+1) - (x+1) |}{|x+1|}
+  = \frac{|\epsilon x|}{|x+1|} .\]</div>
+<p>This error could be quite large if the denominator is small. In fact, we can make the relative error as large as we please by taking <span class="math notranslate nohighlight">\(x\)</span> very close to <span class="math notranslate nohighlight">\(-1\)</span>. This is essentially what happened in <a class="reference internal" href="demos/float-arithmetic.html"><span class="doc">Surprising arithmetic</span></a>.</p>
+<p>You may have encountered this situation before when using significant digits for scientific calculations. Suppose we round all results to five decimal digits, and we add <span class="math notranslate nohighlight">\(-1.0012\)</span> to <span class="math notranslate nohighlight">\(1.0000\)</span>. The result is <span class="math notranslate nohighlight">\(-0.0012\)</span>, or <span class="math notranslate nohighlight">\(-1.2\times 10^{-3}\)</span> in scientific notation. Notice that even though both operands are specified to five digits, it makes no sense to write more than two digits in the answer, because there is no information in the problem beyond their decimal places. This phenomenon is known as <a class="reference internal" href="overview.html#term-subtractive-cancellation"><span class="xref std std-term">subtractive cancellation</span></a>, or loss of significance. We may say that three digits were “lost” in the mapping from <span class="math notranslate nohighlight">\(-1.0012\)</span> to <span class="math notranslate nohighlight">\(-0.0012\)</span>. There’s no way the loss could be avoided, <em>regardless of the algorithm</em>, once we decided to round off everything to a fixed number of digits.</p>
+<div class="proof proof-type-observation">
+
+    <div class="proof-title">
+        <span class="proof-type">Observation </span>
+        
+    </div><div class="proof-content">
+<p>Subtractive cancellation is one of the most common mechanisms introducing dramatic growth of errors in floating point computation.</p>
+</div></div><p>In double precision, all of the values are represented to about 16 significant decimal digits, but it’s understood that subtractive cancellation may render some of those digits essentially meaningless.</p>
+<div class="section" id="condition-numbers">
+<h2>Condition numbers<a class="headerlink" href="#condition-numbers" title="Permalink to this headline">¶</a></h2>
+<p>Now we consider problems more generally. As above, we represent a problem as a function <span class="math notranslate nohighlight">\(f\)</span> that maps a real data value <span class="math notranslate nohighlight">\(x\)</span> to a real result <span class="math notranslate nohighlight">\(f(x)\)</span>. We abbreviate this situation by the notation <span class="math notranslate nohighlight">\(f:\real \mapsto \real\)</span>, where <span class="math notranslate nohighlight">\(\real\)</span> represents the real number set.</p>
+<p>When the problem <span class="math notranslate nohighlight">\(f\)</span> is approximated in floating point on a computer, the data <span class="math notranslate nohighlight">\(x\)</span> is represented as a floating point value <span class="math notranslate nohighlight">\(\tilde{x}=\fl(x)\)</span>. Ignoring all other sources of error, we define the quantitative measure</p>
+<div class="math notranslate nohighlight" id="equation-condition1">
+<span class="eqno">(9)<a class="headerlink" href="#equation-condition1" title="Permalink to this equation">¶</a></span>\[   \frac{ \vphantom{\dfrac{\bigl|}{\bigl|}}\dfrac{|f(x)-f(\tilde{x})|}{|f(x)|} }{%
+     \vphantom{\dfrac{\bigl|}{\bigl|}}\dfrac{|x-\tilde{x}|}{|x|} },\]</div>
+<p>which is the ratio of the relative changes in result and data. We make this expression more convenient if we recall that floating-point arithmetic gives <span class="math notranslate nohighlight">\(\tilde{x}=x(1+\epsilon)\)</span>, for some value <span class="math notranslate nohighlight">\(|\epsilon|\le \macheps/2\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-condition2">
+<span class="eqno">(10)<a class="headerlink" href="#equation-condition2" title="Permalink to this equation">¶</a></span>\[   \dfrac{\left|f(x)-f\bigl(x(1+\epsilon)\bigr)\right|} {|\epsilon f(x)|}.\]</div>
+<p>Finally, we imagine what happens in the ideal case of a perfect computer by taking a limit as <span class="math notranslate nohighlight">\(\macheps\to 0\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-condition">
+<span class="eqno">(11)<a class="headerlink" href="#equation-condition" title="Permalink to this equation">¶</a></span>\[   \kappa_f(x) = \lim_{\epsilon\to 0} \dfrac{|f(x)-f(x(1+\epsilon))|}{|\epsilon f(x)|}.\]</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The relative condition number is the ratio of the relative error of the output to the relative error of the input.</p>
+</div>
+<p>This quantity, which we call the relative <a class="reference internal" href="overview.html#term-condition-number"><span class="xref std std-term">condition number</span></a> of the problem <span class="math notranslate nohighlight">\(f(x)\)</span>, is an idealized ratio of the relative error of the output to the relative error of the input. It depends only on the problem and the data, not the computer or the algorithm.</p>
+<p>Assuming that <span class="math notranslate nohighlight">\(f\)</span> has at least one continuous derivative, we can simplify the expression <a class="reference internal" href="#equation-condition">(11)</a> through some straightforward manipulations:</p>
+<div class="math notranslate nohighlight" id="equation-conditionderiv">
+<span class="eqno">(12)<a class="headerlink" href="#equation-conditionderiv" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+   \kappa_f(x) &amp;= \lim_{\epsilon\to 0} \left| \dfrac{ f(x+\epsilon x) - f(x) }{ \epsilon f(x)}
+   \right| \\
+  &amp;= \lim_{\epsilon\to 0}  \left| \dfrac{ f(x+\epsilon x) - f(x) }{ \epsilon x} \cdot  \frac{x}{f(x)}  \right| \\
+   &amp;= \left| \dfrac{ x f'(x)} {f(x)}  \right|.
+\end{split}\end{split}\]</div>
+<p>In retrospect it should come as no surprise that the change in values of <span class="math notranslate nohighlight">\(f(x)\)</span> due to small changes in <span class="math notranslate nohighlight">\(x\)</span> involves the derivative of <span class="math notranslate nohighlight">\(f\)</span>. In fact, if we were making measurements of changes in absolute rather than relative terms, the condition number would simply be <span class="math notranslate nohighlight">\(|f'(x)|\)</span>.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Subtractive cancellation error occurs whenever the result of addition or subtraction is much smaller in magnitude than the operands.</p>
+</div>
+<div class="proof proof-type-example" id="id1">
+
+    <div class="proof-title">
+        <span class="proof-type">Example 2</span>
+        
+    </div><div class="proof-content">
+<p>Let’s return to our “add one” problem and generalize it slightly to <span class="math notranslate nohighlight">\(f(x)=x-c\)</span> for constant <span class="math notranslate nohighlight">\(c\)</span> (previously, we had <span class="math notranslate nohighlight">\(c=-1\)</span>). We easily compute, using <a class="reference internal" href="#equation-conditionderiv">(12)</a>,</p>
+<div class="math notranslate nohighlight" id="equation-condadd">
+<span class="eqno">(13)<a class="headerlink" href="#equation-condadd" title="Permalink to this equation">¶</a></span>\[\kappa_f(x)=\left| \frac{(x)(1)}{x-c} \right| = \left| \frac{x}{x-c}\right|.\]</div>
+<p id="index-0">The result is simply the relative change <a class="reference internal" href="#equation-plus1relerr">(8)</a> normalized by the size of the perturbation <span class="math notranslate nohighlight">\(\epsilon\)</span>. The condition number is large when <span class="math notranslate nohighlight">\(|x|\gg |x-c|\)</span>. There is of course no meaningful difference between addition and subtraction over real numbers. Furthermore, the situation is symmetric in <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(c\)</span>; that is, if we perturbed <span class="math notranslate nohighlight">\(c\)</span> and not <span class="math notranslate nohighlight">\(x\)</span>, the result would be <span class="math notranslate nohighlight">\(|c|/|x-c|\)</span>.</p>
+</div></div><div class="proof proof-type-example" id="id2">
+
+    <div class="proof-title">
+        <span class="proof-type">Example 3</span>
+        
+    </div><div class="proof-content">
+<p>Another elementary operation is to multiply by a constant: <span class="math notranslate nohighlight">\(f(x)=cx\)</span> for nonzero <span class="math notranslate nohighlight">\(c\)</span>. We compute</p>
+<div class="math notranslate nohighlight" id="equation-condmult">
+<span class="eqno">(14)<a class="headerlink" href="#equation-condmult" title="Permalink to this equation">¶</a></span>\[\kappa_f(x) = \left| \dfrac{ x f'(x)} {f(x)}  \right| = \left| \frac{(x)(c)}{cx} \right| = 1.\]</div>
+<p>We conclude that multiplication by a real number leads to the same  relative error in the result as in the data. In other words,  multiplication does not have the potential for cancellation error that addition does.</p>
+</div></div><p>Condition numbers of the major elementary functions are given in the following table.</p>
+<span id="index-1"></span><table class="colwidths-auto table" id="table-condition-functions">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>Function</p></th>
+<th class="text-align:left head"><p>Condition number</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p><span class="math notranslate nohighlight">\(f(x) = x + c\)</span></p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\(\kappa_f(x) = \dfrac{\lvert x \rvert}{\lvert x+c\rvert}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><span class="math notranslate nohighlight">\(f(x) = cx\)</span></p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\(\kappa_f(x) = 1\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><span class="math notranslate nohighlight">\(f(x) = x^p\)</span></p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\(\kappa_f(x) = \lvert p \rvert\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><span class="math notranslate nohighlight">\(f(x) = e^x\)</span></p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\(\kappa_f(x) = \lvert x \rvert\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><span class="math notranslate nohighlight">\(f(x) = \sin(x)\)</span></p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\(\kappa_f(x) = \lvert x\cot(x) \rvert\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><span class="math notranslate nohighlight">\(f(x) = \cos(x)\)</span></p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\(\kappa_f(x) = \lvert x\tan(x) \rvert\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><span class="math notranslate nohighlight">\(f(x) = \log(x)\)</span></p></td>
+<td class="text-align:left"><p><span class="math notranslate nohighlight">\(\kappa_f(x) = \dfrac{1}{\lvert \log(x) \rvert}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>As you are asked to show in <a class="reference internal" href="#problem-condchain"><span class="std std-ref">an exercise</span></a>, when two functions <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> are combined in a chain <span class="math notranslate nohighlight">\(h(x)=f\bigl(g(x)\bigr)\)</span>, the composite condition number is</p>
+<div class="math notranslate nohighlight" id="equation-condition-chain">
+<span class="eqno">(15)<a class="headerlink" href="#equation-condition-chain" title="Permalink to this equation">¶</a></span>\[\kappa_h(x) = \kappa_f(g(x)) \cdot \kappa_g(x).\]</div>
+<p>Roughly speaking, if <span class="math notranslate nohighlight">\(|\epsilon|\)</span> is small, we expect (refer to <a class="reference internal" href="#equation-condition">(11)</a>)</p>
+<div class="math notranslate nohighlight">
+\[\left| \dfrac{ f(x+\epsilon x) - f(x) }{ f(x)}  \right| \approx \kappa_f(x)\, |\epsilon|.\]</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Large condition numbers signal when errors cannot be expected to remain comparable in size to roundoff error.</p>
+</div>
+<p>That is, whenever the data <span class="math notranslate nohighlight">\(x\)</span> is perturbed by a small amount, we expect the relative change to be magnified by a factor of <span class="math notranslate nohighlight">\(\kappa_f(x)\)</span> in the result. Large condition numbers signal when errors cannot be expected to remain comparable in size to roundoff error. We call a problem poorly conditioned or <a class="reference internal" href="overview.html#term-ill-conditioned"><span class="xref std std-term">ill-conditioned</span></a> when <span class="math notranslate nohighlight">\(\kappa_f(x)\)</span> is large. If <span class="math notranslate nohighlight">\(\kappa_f \approx 10^d\)</span>, then we expect to “lose” up to <span class="math notranslate nohighlight">\(d\)</span> decimal digits of accuracy in computing <span class="math notranslate nohighlight">\(f(x)\)</span> from <span class="math notranslate nohighlight">\(x\)</span>. If <span class="math notranslate nohighlight">\(\kappa_f \approx 1/\macheps\)</span>, then we can expect the result to be changed by as much as 100% simply by expressing <span class="math notranslate nohighlight">\(x\)</span> in finite precision.</p>
+<div class="proof proof-type-example" id="id3">
+
+    <div class="proof-title">
+        <span class="proof-type">Example 4</span>
+        
+    </div><div class="proof-content">
+<p>Consider the problem <span class="math notranslate nohighlight">\(f(x)= \cos(x)\)</span>. By the table above, <span class="math notranslate nohighlight">\(\kappa_f(x) = |x \tan x|\)</span>. There are two different ways in which <span class="math notranslate nohighlight">\(\kappa\)</span> might become large:</p>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(|x|\)</span> is very large, then perturbations that are small relative to <span class="math notranslate nohighlight">\(x\)</span> may still be large compared to <span class="math notranslate nohighlight">\(1\)</span>. Because <span class="math notranslate nohighlight">\(|f(x)|\le 1\)</span> for all <span class="math notranslate nohighlight">\(x\)</span>, this implies that the perturbation will be large relative to the result, too.</p></li>
+<li><p>The condition number grows without bound as <span class="math notranslate nohighlight">\(x\)</span> approaches an odd integer multiple of <span class="math notranslate nohighlight">\(\pi/2\)</span>, where <span class="math notranslate nohighlight">\(f(x)=0\)</span>. A perturbation which is small relative to a nonzero <span class="math notranslate nohighlight">\(x\)</span> may not be small relative to <span class="math notranslate nohighlight">\(f(x)\)</span> in such a case.</p></li>
+</ul>
+</div></div><p>You may have noticed that for some functions, such as the square root, the condition number can be less than one. This means that relative changes get <em>smaller</em> in the passage from input to output. However, every result in floating point arithmetic is still subject to rounding error at the relative level of <span class="math notranslate nohighlight">\(\macheps\)</span>, so <span class="math notranslate nohighlight">\(\kappa&lt;1\)</span> is no better than <span class="math notranslate nohighlight">\(\kappa=1\)</span> in context.</p>
+</div>
+<div class="section" id="multidimensional-problems">
+<span id="sec-conditioning-multidim"></span><h2>Multidimensional problems<a class="headerlink" href="#multidimensional-problems" title="Permalink to this headline">¶</a></h2>
+<p>Most problems have multiple input and output values. These introduce some complications into the formal definition of the condition number. Rather than worry over those details here, we can still look at variations in only one output and one input value at a time.</p>
+<div class="proof proof-type-example" id="id4">
+<span id="example-quadrootcond"></span>
+    <div class="proof-title">
+        <span class="proof-type">Example 5</span>
+        
+    </div><div class="proof-content">
+<p>Consider the problem of finding the roots of a quadratic polynomial; that is, the values of <span class="math notranslate nohighlight">\(t\)</span> for which <span class="math notranslate nohighlight">\(at^2+bt+c=0\)</span>. Here the data are the coefficients <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, and <span class="math notranslate nohighlight">\(c\)</span> that define the polynomial, and the solution to the problem are the two (maybe complex-valued) roots <span class="math notranslate nohighlight">\(t_1\)</span> and <span class="math notranslate nohighlight">\(t_2\)</span>. Formally, we might write <span class="math notranslate nohighlight">\(f([a,b,c])=[t_1,t_2]\)</span> using vector notation.</p>
+<p>In order to simplify matters, we will pick one root called <span class="math notranslate nohighlight">\(r\)</span>, and first consider what happens as we vary just the leading coefficient <span class="math notranslate nohighlight">\(a\)</span>. This suggests a scalar function <span class="math notranslate nohighlight">\(f(a)=r\)</span>. We could use the quadratic formula to express <span class="math notranslate nohighlight">\(f\)</span> explicitly, but it’s a bit easier to start from $ ar^2 + br + c = 0$ and use the technique of implicit differentiation to find <span class="math notranslate nohighlight">\(dr/da\)</span>, while <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(c\)</span> are held fixed. Taking <span class="math notranslate nohighlight">\(d/da\)</span> of both sides and applying the chain rule, we get</p>
+<div class="math notranslate nohighlight">
+\[r^2 + 2a r \left(\frac{dr}{da}\right) + b \,\frac{dr}{da} = 0.\]</div>
+<p>Solving for the derivative, we obtain</p>
+<div class="math notranslate nohighlight" id="equation-rootderiv1">
+<span class="eqno">(16)<a class="headerlink" href="#equation-rootderiv1" title="Permalink to this equation">¶</a></span>\[\frac{dr}{da} = \frac{-r^2}{2a r + b} = \frac{-r^2}{\pm \sqrt{b^2-4ac}},\]</div>
+<p>where in the last step we have applied the quadratic formula for the root <span class="math notranslate nohighlight">\(r\)</span>. Finally, the condition number for the problem <span class="math notranslate nohighlight">\(f(a)=r\)</span> is</p>
+<div class="math notranslate nohighlight" id="equation-rootcond1">
+<span class="eqno">(17)<a class="headerlink" href="#equation-rootcond1" title="Permalink to this equation">¶</a></span>\[\kappa(a)  = \left|\frac{a}{r} \cdot \frac{dr}{da} \right| = \left| \frac{a r}{ \sqrt{b^2-4ac}} \right|
+= \left| \frac{r}{ t_1-t_2} \right|,\]</div>
+<p>where we used the fact that the two roots of the original polynomial satisfy <span class="math notranslate nohighlight">\(|t_1-t_2|=|\sqrt{b^2-4ac}/a|\)</span>. Thus, we can expect poor conditioning in the rootfinding problem if and only if <span class="math notranslate nohighlight">\(|r| \gg |t_1-t_2|\)</span>; i.e., if the two roots of the quadratic are much closer to each other than to the origin. Similar conclusions apply for variations with respect to the coefficients <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(c\)</span> while the others are held fixed.</p>
+</div></div><div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Polynomial roots that are close to one another are ill-conditioned.</p>
+</div>
+<p>Note that the condition number of a root of a quadratic polynomial, as a function of its leading coefficient, can be arbitrarily large. In the extreme case of a double root, the condition number is formally infinite, which implies that the ratio of changes in the root to change in the coefficient <span class="math notranslate nohighlight">\(a\)</span> cannot be bounded. While we usually think about these sensitivities in terms of numerical roundoff error, they apply to all sources of error, including measurement error or model uncertainty.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol>
+<li><p>✍ Use <a class="reference internal" href="#equation-conditionderiv">(12)</a> to derive the relative condition numbers of the following functions appearing in <a class="reference internal" href="#table-condition-functions"><span class="std std-ref">the table in this section</span></a>.</p>
+<p><strong>(a)</strong> <span class="math notranslate nohighlight">\(f(x) = x^p,\quad\)</span>
+<strong>(b)</strong> <span class="math notranslate nohighlight">\(f(x) = \log(x),\quad\)</span>
+<strong>(c)</strong> <span class="math notranslate nohighlight">\(f(x) = \cos(x),\quad\)</span>
+<strong>(d)</strong> <span class="math notranslate nohighlight">\(f(x) = e^x\)</span>.</p>
+</li>
+<li><p>✍ Use the chain rule <a class="reference internal" href="#equation-condition-chain">(15)</a> to find the condition number of the given function. Then check your result by applying <a class="reference internal" href="#equation-conditionderiv">(12)</a> directly.</p>
+<p><strong>(a)</strong> <span class="math notranslate nohighlight">\(f(x) = \sqrt{x+5},\quad\)</span>
+<strong>(b)</strong> <span class="math notranslate nohighlight">\(f(x) = \cos(2\pi x),\quad\)</span>
+<strong>(c)</strong> <span class="math notranslate nohighlight">\(f(x) = e^{-x^2}.\)</span></p>
+</li>
+<li><p>✍ Calculate the condition number of each function, and identify all values of <span class="math notranslate nohighlight">\(x\)</span> at which <span class="math notranslate nohighlight">\(\kappa_{f}(x)\to\infty\)</span> (including limits as <span class="math notranslate nohighlight">\(x\to\pm\infty\)</span>).</p>
+<p><strong>(a)</strong> <span class="math notranslate nohighlight">\(f(x) = \tanh(x),\quad\)</span>
+<strong>(b)</strong> <span class="math notranslate nohighlight">\(f(x) = \dfrac{e^x-1}{x},\quad\)</span>
+<strong>(c)</strong> <span class="math notranslate nohighlight">\(f(x) = \dfrac{1-\cos(x)}{x}.\)</span></p>
+</li>
+<li id="problem-condchain"><p>✍ Suppose that <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> are real-valued functions that have condition numbers <span class="math notranslate nohighlight">\(\kappa_f\)</span> and <span class="math notranslate nohighlight">\(\kappa_g\)</span>, respectively. Define a new function <span class="math notranslate nohighlight">\(h(x)=f\bigl(g(x)\bigr)\)</span>. Show that for <span class="math notranslate nohighlight">\(x\)</span> in the domain of <span class="math notranslate nohighlight">\(h\)</span>, the condition number of <span class="math notranslate nohighlight">\(h\)</span> satisfies <a class="reference internal" href="#equation-condition-chain">(15)</a>.</p></li>
+<li><p>✍ Suppose that <span class="math notranslate nohighlight">\(f\)</span> is a function with condition number <span class="math notranslate nohighlight">\(\kappa_f\)</span>, and that <span class="math notranslate nohighlight">\(f^{-1}\)</span> is its inverse function. Show that the condition number of <span class="math notranslate nohighlight">\(f^{-1}\)</span> satisfies</p>
+<div class="math notranslate nohighlight">
+\[\kappa_{f^{-1}}(x) = \frac{1}{\kappa_f\Bigl( f^{-1}(x) \Bigr)},\]</div>
+<p>provided the denominator is nonzero.</p>
+</li>
+<li id="problem-quadrootcond"><p>✍  Referring to the derivation of <a class="reference internal" href="#equation-rootcond1">(17)</a>, derive an expression for the relative condition number of a root of <span class="math notranslate nohighlight">\(ax^2+bx+c=0\)</span> due to perturbations in <span class="math notranslate nohighlight">\(b\)</span> only.</p></li>
+<li><p>The polynomial <span class="math notranslate nohighlight">\(x^2-2x+1\)</span> has a double root <span class="math notranslate nohighlight">\(r=1\)</span>.</p>
+<p><strong>(a)</strong> ✍ Using a computer or calculator, make a table of the roots of <span class="math notranslate nohighlight">\(x^2+(2+\epsilon)x+1\)</span> for <span class="math notranslate nohighlight">\(\epsilon = 10^{-4}\)</span>, <span class="math notranslate nohighlight">\(10^{-6}\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span>, <span class="math notranslate nohighlight">\(10^{-12}\)</span>.</p>
+<p><strong>(b)</strong> ✍ What do the results of part (a) seem to imply about the condition number of the root?</p>
+</li>
+<li><p>✍ Generalize <a class="reference internal" href="#equation-rootcond1">(17)</a> to finding a root of the <span class="math notranslate nohighlight">\(n\)</span>th degree polynomial <span class="math notranslate nohighlight">\(p(x) = a_nx^n + \cdots + a_1 x + a_0\)</span>, and show that the relative condition number of a root <span class="math notranslate nohighlight">\(r\)</span> with respect to perturbations only in <span class="math notranslate nohighlight">\(a_k\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\kappa_r(a_k) = \left| \frac{a_k r^{k-1}}{p'(r)} \right|.\]</div>
+</li>
+</ol>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="floating-point.html" title="previous page">Floating-point numbers</a>
+    <a class='right-next' id="next-link" href="algorithms.html" title="next page">Algorithms</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tobin A. Driscoll and Richard J. Braun<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

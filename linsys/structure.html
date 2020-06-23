@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Exploiting matrix structure &#8212; Fundamentals of Numerical Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/mystnb.js"></script>
+    <script src="../_static/proof.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Next steps" href="next.html" />
+    <link rel="prev" title="Conditioning of linear systems" href="condition-number.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fundamentals of Numerical Computation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../frontmatter.html">Home</a>
+  </li>
+  <li class="">
+    <a href="../intro/overview.html">Introduction</a>
+  </li>
+  <li class="active">
+    <a href="overview.html">Square linear systems</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="polyinterp.html">Polynomial interpolation</a>
+    </li>
+    <li class="">
+      <a href="matrices.html">Computing with matrices</a>
+    </li>
+    <li class="">
+      <a href="linear-systems.html">Linear systems</a>
+    </li>
+    <li class="">
+      <a href="lu.html">LU factorization</a>
+    </li>
+    <li class="">
+      <a href="efficiency.html">Efficiency of matrix computations</a>
+    </li>
+    <li class="">
+      <a href="pivoting.html">Row pivoting</a>
+    </li>
+    <li class="">
+      <a href="norms.html">Vector and matrix norms</a>
+    </li>
+    <li class="">
+      <a href="condition-number.html">Conditioning of linear systems</a>
+    </li>
+    <li class="active">
+      <a href="">Exploiting matrix structure</a>
+    </li>
+    <li class="">
+      <a href="next.html">Next steps</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../leastsq/overview.html">Overdetermined linear systems</a>
+  </li>
+  <li class="">
+    <a href="../nonlineqn/overview.html">Roots of nonlinear equations</a>
+  </li>
+  <li class="">
+    <a href="../localapprox/overview.html">Piecewise interpolation</a>
+  </li>
+  <li class="">
+    <a href="../ivp/overview.html">Initial-value problems for ODEs</a>
+  </li>
+  <li class="">
+    <a href="../appendix/linear-algebra.html">Review: Linear algebra</a>
+  </li>
+  <li class="">
+    <a href="../appendix/demos.html">All demo notebooks</a>
+  </li>
+  <li class="">
+    <a href="../refs.html">References</a>
+  </li>
+  <li class="">
+    <a href="../genindex.html">Index</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../_sources/linsys/structure.md"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#banded-matrices" class="nav-link">Banded matrices</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#symmetric-matrices" class="nav-link">Symmetric matrices</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#symmetric-positive-definite-matrices" class="nav-link">Symmetric positive definite matrices</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#exercises" class="nav-link">Exercises</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="exploiting-matrix-structure">
+<h1>Exploiting matrix structure<a class="headerlink" href="#exploiting-matrix-structure" title="Permalink to this headline">¶</a></h1>
+<p>A common situation in computation is that a problem has certain properties or structure that can be used to get a faster or more accurate solution. There are many properties of a matrix that can affect LU factorization. For example, an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span> is <strong>diagonally dominant</strong> if</p>
+<div class="math notranslate nohighlight" id="equation-diag-dominant">
+<span class="eqno">(53)<a class="headerlink" href="#equation-diag-dominant" title="Permalink to this equation">¶</a></span>\[\begin{split}  |A_{ii}| &gt; \sum_{\substack{j=1\\ j \neq i}}^{n} |A_{ij}|, \hskip 0.25in \text{for each } i=1,\ldots,n.\end{split}\]</div>
+<p>It turns out that a diagonally dominant matrix is guaranteed to be nonsingular and row pivoting is not required for stability; i.e., <span class="math notranslate nohighlight">\(\mathbf{A}=\mathbf{L}\mathbf{U}\)</span> is just as good as <span class="math notranslate nohighlight">\(\mathbf{P}\mathbf{A}=\mathbf{L}\mathbf{U}\)</span>.</p>
+<p>We next consider three important types of matrices that cause the LU factorization to be specialized in some important way.</p>
+<div class="section" id="banded-matrices">
+<h2>Banded matrices<a class="headerlink" href="#banded-matrices" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="index-0"></span><div class="demo sidebar" id="index-1">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/structure-banded.html"><span class="doc">Banded matrices</span></a></p>
+</div>
+<p>A matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> has <strong>upper bandwidth</strong> <span class="math notranslate nohighlight">\(b_u\)</span> if <span class="math notranslate nohighlight">\(j-i &gt; b_u\)</span> implies <span class="math notranslate nohighlight">\(A_{ij}=0\)</span>, and <strong>lower bandwidth</strong> <span class="math notranslate nohighlight">\(b_\ell\)</span> if <span class="math notranslate nohighlight">\(i-j &gt; b_\ell\)</span> implies <span class="math notranslate nohighlight">\(A_{ij}=0\)</span>. We say the total <a class="reference internal" href="overview.html#term-bandwidth"><span class="xref std std-term">bandwidth</span></a> is <span class="math notranslate nohighlight">\(b_u+b_\ell+1\)</span>. When <span class="math notranslate nohighlight">\(b_u=b_\ell=1\)</span>, we have the important case of a <a class="reference internal" href="overview.html#term-tridiagonal-matrix"><span class="xref std std-term">tridiagonal matrix</span></a>.  The <a class="reference internal" href="overview.html#term-spy"><span class="xref std std-term">spy</span></a> function in <code class="docutils literal notranslate"><span class="pre">Plots</span></code> is handy for visualizing the location of nonzero elements.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The number of flops needed by LU factorization is <span class="math notranslate nohighlight">\(O(b_ub_\ell n)\)</span> when the upper and lower bandwidths are <span class="math notranslate nohighlight">\(b_u\)</span> and <span class="math notranslate nohighlight">\(b_\ell\)</span>.</p>
+</div>
+<p id="index-2">If no row pivoting is used, the <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> factors preserve the lower and upper bandwidths of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. This is a consequence of the row elimination process—fewer zeros need to be introduced into each column (equivalently, most of the row multipliers are zero), and adding rows downward cannot introduce new nonzeros into the upper triangle. This observation implies computational savings in both the factorization and the triangular substitutions, because the zeros appear predictably and we can skip multiplication and addition with them. To be precise, the number of flops needed by LU factorization is <span class="math notranslate nohighlight">\(O(b_ub_\ell n)\)</span> when the upper and lower bandwidths are <span class="math notranslate nohighlight">\(b_u\)</span> and <span class="math notranslate nohighlight">\(b_\ell\)</span>.</p>
+<div class="demo sidebar" id="index-3">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/structure-timing.html"><span class="doc">Timing for banded matrices</span></a></p>
+</div>
+<p>In order to take advantage of the savings, we would need minor modifications to <a class="reference internal" href="lu.html#function-lufact"><span class="std std-ref">lufact</span></a> and the triangular substitution routines. Alternatively, we can get Julia to take advantage of the structure automatically by converting the matrix into a special type called <a class="reference internal" href="overview.html#term-sparse"><span class="xref std std-term">sparse</span></a>, defined in the <code class="docutils literal notranslate"><span class="pre">SparseArrays</span></code> package. Sparse matrices are covered in more detail in later chapters.</p>
+</div>
+<div class="section" id="symmetric-matrices">
+<h2>Symmetric matrices<a class="headerlink" href="#symmetric-matrices" title="Permalink to this headline">¶</a></h2>
+<p id="index-4">If <span class="math notranslate nohighlight">\(\mathbf{A}^T=\mathbf{A}\)</span>, then <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is symmetric. Symmetric matrices arise frequently because so many types of interactions are symmetric: gravitation, social-network befriending, etc. Symmetry in linear algebra simplifies many properties and algorithms. As a rule of thumb, if your matrix has symmetry, you want to exploit and preserve it.</p>
+<div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/structure-symm.html"><span class="doc">Symmetric LU</span></a></p>
+</div>
+<p>Now, if we create an LU factorization <span class="math notranslate nohighlight">\(\mathbf{A}=\mathbf{L}\mathbf{U}\)</span> of a symmetric <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>, at first glance it seems that because <span class="math notranslate nohighlight">\(\mathbf{A}^T=\mathbf{U}^T \mathbf{L}^T\)</span>, it might be that <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> are transposes of one another. But that’s not possible in general, because we required only <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> to have ones on the diagonal, and that broke the symmetry. However, it’s straightforward to restore the symmetry, as is demonstrated in <a class="reference internal" href="demos/structure-symm.html"><span class="doc">Symmetric LU</span></a>.</p>
+<p>If no pivoting is done, then the symmetric Gaussian elimination process yields <span class="math notranslate nohighlight">\(\mathbf{A}=\mathbf{L}\mathbf{D}\mathbf{L}^T\)</span>, where <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> is unit lower triangular and <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> is diagonal. In practice we don’t actually have to carry out any arithmetic in the upper triangle as we work, since the operations are the mirror image of those in the lower triangle. As a result, it can be shown that LDL<span class="math notranslate nohighlight">\(^T\)</span> factorization takes about half as much work as the standard LU, or <span class="math notranslate nohighlight">\(\sim \frac{1}{3}n^3\)</span> flops.</p>
+<p>In the general case we know that row pivoting is necessary to stabilize LU factorization. Pivoting is also needed to keep LDL<span class="math notranslate nohighlight">\(^T\)</span> stable, but it has to be done symmetrically. We won’t go into the details, as the resulting factorization isn’t used very often. Instead, we’ll explore the case when the matrix also possesses another important property.</p>
+</div>
+<div class="section" id="symmetric-positive-definite-matrices">
+<span id="sec-spd"></span><h2>Symmetric positive definite matrices<a class="headerlink" href="#symmetric-positive-definite-matrices" title="Permalink to this headline">¶</a></h2>
+<p>Suppose that <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is <span class="math notranslate nohighlight">\(n\times n\)</span> and <span class="math notranslate nohighlight">\(\mathbf{x}\in\mathbb{R}^n\)</span>. Observe that <span class="math notranslate nohighlight">\(\mathbf{x}^T\mathbf{A}\mathbf{x}\)</span> is the product of <span class="math notranslate nohighlight">\(1\times n\)</span>, <span class="math notranslate nohighlight">\(n\times n\)</span>, and <span class="math notranslate nohighlight">\(n\times 1\)</span> matrices, so it is a scalar, sometimes referred to as a <strong>quadratic form</strong>.
+In componentwise terms it becomes</p>
+<div class="math notranslate nohighlight" id="equation-quadratic-form">
+<span class="eqno">(54)<a class="headerlink" href="#equation-quadratic-form" title="Permalink to this equation">¶</a></span>\[  \mathbf{x}^T\mathbf{A}\mathbf{x} = \sum_{i=1}^n \sum_{j=1}^n A_{ij}x_ix_j.\]</div>
+<span class="target" id="index-5"></span><p id="index-6">A real matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is called a <a class="reference internal" href="overview.html#term-symmetric-positive-definite-matrix"><span class="xref std std-term">symmetric positive definite matrix</span></a> (or SPD matrix) if it is symmetric and</p>
+<div class="math notranslate nohighlight" id="equation-spd-def">
+<span class="eqno">(55)<a class="headerlink" href="#equation-spd-def" title="Permalink to this equation">¶</a></span>\[  \mathbf{x}^T \mathbf{A} \mathbf{x} &gt; 0 \; \text{for all nonzero $\mathbf{x}\in\mathbb{R}^n$.}\]</div>
+<p>The definiteness property is usually difficult to check directly from the definition. There are equivalent conditions, though; for instance, a symmetric matrix is positive definite if and only if its eigenvalues are all real positive numbers. SPD matrices have important properties and appear in applications in which the definiteness is known for theoretical reasons.</p>
+<p>Let us consider what definiteness means to the LDL<span class="math notranslate nohighlight">\(^T\)</span> factorization (itself the adaptation of LU factorization to symmetric matrices). We compute</p>
+<div class="math notranslate nohighlight">
+\[  0 &lt; \mathbf{x}^T\mathbf{A}\mathbf{x} = \mathbf{x}^T \mathbf{L} \mathbf{D} \mathbf{L}^T \mathbf{x} = \mathbf{z}^T \mathbf{D} \mathbf{z},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{z}=\mathbf{L}^T \mathbf{x}\)</span>. Note that since <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> is unit lower triangular, it is nonsingular, so <span class="math notranslate nohighlight">\(\mathbf{x}=\mathbf{L}^{-T}\mathbf{z}\)</span>. By taking <span class="math notranslate nohighlight">\(\mathbf{z}=\mathbf{e}_k\)</span> for <span class="math notranslate nohighlight">\(k=1,\ldots,n\)</span>, we can read the equalities from right to left and conclude that <span class="math notranslate nohighlight">\(D_{kk}&gt;0\)</span> for all <span class="math notranslate nohighlight">\(k\)</span>. That permits us to write a kind of square root formula:<a class="footnote-reference brackets" href="#sqrt" id="id1">1</a></p>
+<div class="math notranslate nohighlight" id="equation-diag-sqrt">
+<span class="eqno">(56)<a class="headerlink" href="#equation-diag-sqrt" title="Permalink to this equation">¶</a></span>\[\begin{split}  \mathbf{D} =
+  \begin{bmatrix}
+    D_{11} &amp;        &amp;        &amp; \\
+           &amp; D_{22} &amp;        &amp; \\
+           &amp;        &amp; \ddots &amp; \\
+           &amp;        &amp;        &amp; D_{nn}
+  \end{bmatrix}
+=   \begin{bmatrix}
+    \sqrt{D_{11}} &amp;        &amp;        &amp; \\
+           &amp; \sqrt{D_{22}} &amp;        &amp; \\
+           &amp;        &amp; \ddots &amp; \\
+           &amp;        &amp;        &amp; \sqrt{D_{nn}}
+  \end{bmatrix}^{\,2}
+= \bigl( \mathbf{D}^{1/2} \bigr)^2.\end{split}\]</div>
+<p>Now we have <span class="math notranslate nohighlight">\(\mathbf{A}=\mathbf{L}\mathbf{D}^{1/2}\mathbf{D}^{1/2}\mathbf{L}^T= \mathbf{R}^T \mathbf{R}\)</span>, where <span class="math notranslate nohighlight">\(\mathbf{R} =\mathbf{D}^{1/2}\mathbf{L}^T\)</span> is an upper triangular matrix whose diagonal entries are positive.</p>
+<span class="target" id="index-7"></span><p id="index-8">Recall that the unpivoted LDL<span class="math notranslate nohighlight">\(^T\)</span> (like unpivoted LU) factorization is not stable and not even always possible. However, in the SPD case one can prove that pivoting is not necessary for the existence nor the stability of the factorization <span class="math notranslate nohighlight">\(\mathbf{A}=\mathbf{R}^T\mathbf{R}\)</span>, which is known as the <a class="reference internal" href="overview.html#term-cholesky-factorization"><span class="xref std std-term">Cholesky factorization</span></a>. The elimination process is readily adapted into an algorithm for Cholesky factorization. Like LDL<span class="math notranslate nohighlight">\(^T\)</span>, the Cholesky factorization requires <span class="math notranslate nohighlight">\({\sim\frac{1}{3}} n^3\)</span> flops asymptotically in the <span class="math notranslate nohighlight">\(n\times n\)</span> case, half as many as standard LU factorization.</p>
+<div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/structure-cholesky.html"><span class="doc">Cholesky factorization</span></a></p>
+</div>
+<p>The speed and stability of the Cholesky factorization make it the top choice for solving linear systems with SPD matrices. As a side benefit, the Cholesky algorithm fails, in the form of trying to take a negative square root or divide by zero, if and only if the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is indefinite (i.e., not positive definite). In practice this is the best way to test the definiteness of a symmetric matrix about which nothing else is known.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol>
+<li><p>✍  For each matrix, use <a class="reference internal" href="#equation-diag-dominant">(53)</a> to determine whether it is diagonally dominant.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{A} =
+\begin{bmatrix}
+3  &amp; 1  &amp; 0 &amp; 1  \\
+0  &amp; -2 &amp; 0 &amp; 1  \\
+-1 &amp; 0  &amp; 4 &amp; -1 \\
+0  &amp; 0  &amp; 0 &amp; 6
+\end{bmatrix},
+\quad
+\mathbf{B} =
+\begin{bmatrix}
+1  &amp; 0  &amp; 0  &amp; 0 &amp; 0  \\
+0  &amp; 1  &amp; 0  &amp; 0 &amp; 0  \\
+0  &amp; 0  &amp; 1  &amp; 0 &amp; 0  \\
+0  &amp; 0  &amp; 0  &amp; 1 &amp; 0  \\
+0  &amp; 0  &amp; 0  &amp; 0 &amp; 0
+\end{bmatrix}
+\quad \mathbf{C} =
+\begin{bmatrix}
+2  &amp; -1 &amp; 0  &amp; 0      \\
+-1 &amp; 2  &amp; -1 &amp; 0      \\
+0  &amp; -1 &amp; 2  &amp; -1     \\
+0  &amp; 0  &amp; -1 &amp; 2
+\end{bmatrix}.\end{split}\]</div>
+</li>
+<li><p>⌨ For each matrix, use inspection or <code class="docutils literal notranslate"><span class="pre">cholesky</span></code> in Julia to determine whether it is SPD.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{A} =
+\begin{bmatrix}
+1 &amp; 0 &amp; -1 \\ 0 &amp; 4 &amp; 5 \\ -1 &amp; 5 &amp; 10
+\end{bmatrix},
+\qquad
+\mathbf{B} =
+\begin{bmatrix}
+1 &amp; 0 &amp; 1 \\ 0 &amp; 4 &amp; 5 \\ -1 &amp; 5 &amp; 10
+\end{bmatrix},
+\qquad
+\mathbf{C} =
+\begin{bmatrix}
+1 &amp; 0 &amp; 1 \\ 0 &amp; 4 &amp; 5 \\ 1 &amp; 5 &amp; 1
+\end{bmatrix}.\end{split}\]</div>
+</li>
+<li><p>✍ Show that the diagonal entries of a positive definite matrix are positive numbers. (Hint: Use special cases of <a class="reference internal" href="#equation-spd-def">(55)</a>.)</p></li>
+<li><p>⌨ Using <a class="reference internal" href="lu.html#function-lufact"><span class="std std-ref">lufact</span></a> as a guide, write a function</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">luband</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">upper</span><span class="p">,</span><span class="n">lower</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>that accepts upper and lower bandwidth values and returns LU factors (without pivoting) in a way that avoids doing arithmetic using the locations that are known to stay zero.</p>
+</li>
+<li><p>⌨ In this problem you will explore backslash and how it handles banded matrices. To do this you will generate tridiagonal matrices using the following code (supposing that <code class="docutils literal notranslate"><span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">a</span></code> are defined):</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">triu</span><span class="p">(</span> <span class="n">tril</span><span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="mi">1</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="p">]</span> <span class="o">.=</span> <span class="n">a</span>
+</pre></div>
+</div>
+<p>The result is <span class="math notranslate nohighlight">\(n\times n\)</span>, with each entry on the sub- and superdiagonals chosen randomly from <span class="math notranslate nohighlight">\((0,1)\)</span> and each diagonal entry equalling <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
+<p><strong>(a)</strong> Write a script that solves 200 linear systems whose matrices are generated as above, with <span class="math notranslate nohighlight">\(n=1000\)</span> and <span class="math notranslate nohighlight">\(\mbox{&quot;a&quot;}=2\)</span>. (Use randomly generated right-hand side vectors.) Record the total time used by the solution process <code class="docutils literal notranslate"><span class="pre">A\b</span></code> only, using the built-in <code class="docutils literal notranslate"><span class="pre">&#64;elapsed</span></code> timer.</p>
+<p><strong>(b)</strong> Repeat the experiment of part (a), but add the command <code class="docutils literal notranslate"><span class="pre">A=sparse(A)</span></code> right after the two lines above. How does the timing change?</p>
+<p><strong>(c)</strong> Repeat parts (a) and (b) with <span class="math notranslate nohighlight">\(a=1\)</span>. In which case is there a major change?</p>
+<p><strong>(d)</strong> Based on these observations, state a hypothesis on how backslash solves tridiagonal linear systems given in standard dense form and in sparse form. (Hint: What is the mathematical
+significance of <span class="math notranslate nohighlight">\(a=2\)</span> versus <span class="math notranslate nohighlight">\(a=1\)</span>?)</p>
+</li>
+<li><p>✍ A matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is called <em>skew-symmetric</em> if <span class="math notranslate nohighlight">\(\mathbf{A}^T=-\mathbf{A}\)</span>. Explain why unpivoted LU factorization of a skew-symmetric matrix is impossible.</p>
+</li>
+<li id="problem-ataisspd"><p>✍ Prove that if <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is any real nonsingular square matrix, then <span class="math notranslate nohighlight">\(\mathbf{A}^T\mathbf{A}\)</span> is SPD.</p>
+</li>
+</ol>
+<hr class="docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="sqrt"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Except for this diagonal, positive definite case, it’s not trivial to define the square root of a matrix, so don’t generalize the notation used here.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="condition-number.html" title="previous page">Conditioning of linear systems</a>
+    <a class='right-next' id="next-link" href="next.html" title="next page">Next steps</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tobin A. Driscoll and Richard J. Braun<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

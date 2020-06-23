@@ -1,0 +1,437 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>The normal equations &#8212; Fundamentals of Numerical Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/mystnb.js"></script>
+    <script src="../_static/proof.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The QR factorization" href="qr.html" />
+    <link rel="prev" title="Fitting functions to data" href="fitting.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fundamentals of Numerical Computation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../frontmatter.html">Home</a>
+  </li>
+  <li class="">
+    <a href="../intro/overview.html">Introduction</a>
+  </li>
+  <li class="">
+    <a href="../linsys/overview.html">Square linear systems</a>
+  </li>
+  <li class="active">
+    <a href="overview.html">Overdetermined linear systems</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="fitting.html">Fitting functions to data</a>
+    </li>
+    <li class="active">
+      <a href="">The normal equations</a>
+    </li>
+    <li class="">
+      <a href="qr.html">The QR factorization</a>
+    </li>
+    <li class="">
+      <a href="house.html">Computing QR factorizations</a>
+    </li>
+    <li class="">
+      <a href="next.html">Next steps</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../nonlineqn/overview.html">Roots of nonlinear equations</a>
+  </li>
+  <li class="">
+    <a href="../localapprox/overview.html">Piecewise interpolation</a>
+  </li>
+  <li class="">
+    <a href="../ivp/overview.html">Initial-value problems for ODEs</a>
+  </li>
+  <li class="">
+    <a href="../appendix/linear-algebra.html">Review: Linear algebra</a>
+  </li>
+  <li class="">
+    <a href="../appendix/demos.html">All demo notebooks</a>
+  </li>
+  <li class="">
+    <a href="../refs.html">References</a>
+  </li>
+  <li class="">
+    <a href="../genindex.html">Index</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../_sources/leastsq/normaleqns.md"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#pseudoinverse-and-definiteness" class="nav-link">Pseudoinverse and definiteness</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#conditioning-and-stability" class="nav-link">Conditioning and stability</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#exercises" class="nav-link">Exercises</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="the-normal-equations">
+<h1>The normal equations<a class="headerlink" href="#the-normal-equations" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">We seek to solve the general linear least squares problem: Given <span class="math notranslate nohighlight">\(\mathbf{A}\in\mathbb{R}^{m \times n}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\in\mathbb{R}^m\)</span>, with <span class="math notranslate nohighlight">\(m&gt;n\)</span>, find <span class="math notranslate nohighlight">\(\mathbf{x}\in\mathbb{R}^n\)</span> such that <span class="math notranslate nohighlight">\(\| \mathbf{b} - \mathbf{A}\mathbf{x} \|_2\)</span> is minimized. There is a concise explicit solution to the problem.</p>
+<p>In the following proof we make use of the elementary algebraic fact that for two vectors <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{v}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[  (\mathbf{u}+\mathbf{v})^T(\mathbf{u}+\mathbf{v}) = \mathbf{u}^T\mathbf{u} + \mathbf{u}^T\mathbf{v} + \mathbf{v}^T\mathbf{u}
+  + \mathbf{v}^T\mathbf{v} = \mathbf{u}^T\mathbf{u} + 2\mathbf{v}^T\mathbf{u} + \mathbf{v}^T\mathbf{v}.\]</div>
+<div class="proof proof-type-theorem" id="id1">
+<span id="theorem-normaleqns"></span><span id="index-1"></span>
+    <div class="proof-title">
+        <span class="proof-type">Theorem 22</span>
+        
+    </div><div class="proof-content">
+<p>If <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> satisfies <span class="math notranslate nohighlight">\(\mathbf{A}^T(\mathbf{A}\mathbf{x}-\mathbf{b})=\boldsymbol{0}\)</span>, then <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> solves the linear least squares problem, i.e., <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> minimizes <span class="math notranslate nohighlight">\(\| \mathbf{b}-\mathbf{A}\mathbf{x} \|_2\)</span>.</p>
+</div></div><div class="proof proof-type-proof">
+
+    <div class="proof-title">
+        <span class="proof-type">Proof </span>
+        
+    </div><div class="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{y}\in \mathbb{R}^n\)</span> be any vector. Then
+<span class="math notranslate nohighlight">\(\mathbf{A}(\mathbf{x}+\mathbf{y})-\mathbf{b}=\mathbf{A}\mathbf{x}-\mathbf{b}+\mathbf{A}\mathbf{y}\)</span>, and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+    \| \mathbf{A}(\mathbf{x}+\mathbf{y})-\mathbf{b} \|_2^2 &amp;=
+    [(\mathbf{A}\mathbf{x}-\mathbf{b})+(\mathbf{A}\mathbf{y})]^T[(\mathbf{A}\mathbf{x}-\mathbf{b})+(\mathbf{A}\mathbf{y})]\\
+    &amp;= (\mathbf{A}\mathbf{x}-\mathbf{b})^T(\mathbf{A}\mathbf{x}-\mathbf{b}) + 2(\mathbf{A}\mathbf{y})^T(\mathbf{A}\mathbf{x}-\mathbf{b}) + (\mathbf{A}\mathbf{y})^T(\mathbf{A}\mathbf{y})\\
+    &amp;= \| \mathbf{A}\mathbf{x}-\mathbf{b} \|_2^2 + 2\mathbf{y}^T \mathbf{A}^T(\mathbf{A}\mathbf{x}-\mathbf{b}) + \| \mathbf{A}\mathbf{y} \|_2^2 \\
+    &amp;= \| \mathbf{A}\mathbf{x}-\mathbf{b} \|_2^2 + \| \mathbf{A}\mathbf{y} \|_2^2 \\
+    &amp; \ge \| \mathbf{A}\mathbf{x}-\mathbf{b} \|_2^2.
+  \end{split}\end{split}\]</div>
+</div></div><p>The condition <span class="math notranslate nohighlight">\(\mathbf{A}^T(\mathbf{A}\mathbf{x}-\mathbf{b})=\boldsymbol{0}\)</span> is often written as</p>
+<div class="math notranslate nohighlight" id="equation-normaleqns">
+<span class="eqno">(63)<a class="headerlink" href="#equation-normaleqns" title="Permalink to this equation">¶</a></span>\[\mathbf{A}^T\mathbf{A}\mathbf{x}=\mathbf{A}^T\mathbf{b},\]</div>
+<p>called the <a class="reference internal" href="overview.html#term-normal-equations"><span class="xref std std-term">normal equations</span></a>. They have a straightforward geometric interpretation, as shown in <a class="reference internal" href="#fig-normaleqns2d"><span class="std std-numref">Fig. 2</span></a>. The vector in the range (column space) of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> that lies closest to <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> makes the vector difference <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x}-\mathbf{b}\)</span> perpendicular to the range. Thus for any <span class="math notranslate nohighlight">\(\mathbf{z}\)</span>, we must have <span class="math notranslate nohighlight">\((\mathbf{A} \mathbf{z})^T(\mathbf{A}\mathbf{x}-\mathbf{b})=0\)</span>, which is satisfied if <span class="math notranslate nohighlight">\(\mathbf{A}^T(\mathbf{A}\mathbf{x}-\mathbf{b})=\boldsymbol{0}\)</span>.</p>
+<div class="figure align-default" id="fig-normaleqns2d">
+<img alt="../_images/normaleqns2d.svg" src="../_images/normaleqns2d.svg" /><p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Geometry of the normal equations.</span><a class="headerlink" href="#fig-normaleqns2d" title="Permalink to this image">¶</a></p>
+</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The normal equations express an <span class="math notranslate nohighlight">\(m\times n\)</span> linear least squares problem as an <span class="math notranslate nohighlight">\(n\times n\)</span> linear system of equations.</p>
+</div>
+<p>If we group the left-hand side of the normal equations as <span class="math notranslate nohighlight">\((\mathbf{A}^T\mathbf{A})\,\mathbf{x}\)</span>, we recognize <a class="reference internal" href="#equation-normaleqns">(63)</a> as a <em>square</em> <span class="math notranslate nohighlight">\(n\times n\)</span> linear system to solve for <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.</p>
+<div class="section" id="pseudoinverse-and-definiteness">
+<h2>Pseudoinverse and definiteness<a class="headerlink" href="#pseudoinverse-and-definiteness" title="Permalink to this headline">¶</a></h2>
+<p>The <span class="math notranslate nohighlight">\(n\times m\)</span> matrix</p>
+<div class="math notranslate nohighlight" id="equation-pinv">
+<span class="eqno">(64)<a class="headerlink" href="#equation-pinv" title="Permalink to this equation">¶</a></span>\[\mathbf{A}^+ = (\mathbf{A}^T\mathbf{A})^{-1}\mathbf{A}^T\]</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>In Julia, backslash is equivalent mathematically to left-multiplication by the inverse (square case) or pseudoinverse (rectangular case) of a matrix.</p>
+</div>
+<p id="index-2">is called the <a class="reference internal" href="overview.html#term-pseudoinverse"><span class="xref std std-term">pseudoinverse</span></a> of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. Mathematically, the overdetermined least squares problem <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x}\approx \mathbf{b}\)</span> has the solution <span class="math notranslate nohighlight">\(\mathbf{x}=\mathbf{A}^+\mathbf{b}\)</span>. Hence we can generalize our earlier observation: backslash is equivalent mathematically to left-multiplication by the inverse (square case) or pseudoinverse (rectangular case) of a matrix. One may also compute the pseudoinverse directly using <a class="reference internal" href="overview.html#term-pinv"><span class="xref std std-term">pinv</span></a>, but as with matrix inverses, this is rarely necessary in practice.</p>
+<p>The matrix <span class="math notranslate nohighlight">\(\mathbf{A}^T\mathbf{A}\)</span> appearing in the pseudoinverse has some important properties.</p>
+<div class="proof proof-type-theorem" id="id2">
+<span id="theorem-ata"></span>
+    <div class="proof-title">
+        <span class="proof-type">Theorem 23</span>
+        
+            <span class="proof-title-name">((AtA))</span>
+        
+    </div><div class="proof-content">
+<p>For any real <span class="math notranslate nohighlight">\(m\times n\)</span> matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> with <span class="math notranslate nohighlight">\(m\ge n\)</span>, the following are true:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{A}^T\mathbf{A}\)</span> is symmetric.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{A}^T \mathbf{A}\)</span> is singular if and only if the columns of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> are linearly dependent. (Equivalently, the rank of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is less than <span class="math notranslate nohighlight">\(n\)</span>.)</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\mathbf{A}^T\mathbf{A}\)</span> is nonsingular, then it is positive definite.</p></li>
+</ol>
+</div></div><div class="proof proof-type-proof">
+
+    <div class="proof-title">
+        <span class="proof-type">Proof </span>
+        
+    </div><div class="proof-content">
+<p>The first part is left as an <a class="reference internal" href="#problem-normalsymmetry"><span class="std std-ref">exercise</span></a>. For the second part, suppose that <span class="math notranslate nohighlight">\(\mathbf{A}^T\mathbf{A}\mathbf{z}=\boldsymbol{0}\)</span>. Note that <span class="math notranslate nohighlight">\(\mathbf{A}^T\mathbf{A}\)</span> is singular if and only if <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> may be nonzero. Left-multiplying by <span class="math notranslate nohighlight">\(\mathbf{z}^T\)</span>, we find that</p>
+<div class="math notranslate nohighlight">
+\[0 = \mathbf{z}^T\mathbf{A}^T\mathbf{A}\mathbf{z}=(\mathbf{A}\mathbf{z})^T(\mathbf{A}\mathbf{z}) = \| \mathbf{A}\mathbf{z} \|_2^2,\]</div>
+<p>which is equivalent to <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{z}=\boldsymbol{0}\)</span>. Then <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> may be nonzero if and only if the columns of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> are linearly dependent.</p>
+<p>Finally, we can repeat the manipulations above to show that for any nonzero <span class="math notranslate nohighlight">\(n\)</span>-vector <span class="math notranslate nohighlight">\(\mathbf{v}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{v}^T(\mathbf{A}^T\mathbf{A})\mathbf{v}=\| \mathbf{A}\mathbf{v} \|_2^2\ge 0\)</span>, and equality is not possible thanks to the second part of the theorem.</p>
+</div></div><p>The definition of the pseudoinverse involves taking the inverse of a matrix and is therefore not advisable to use computationally. Instead, we simply use the definition of the normal equations to set up a linear system, which we already know how to solve. In summary, the steps for solving the linear least squares problem <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x}\approx\mathbf{b}\)</span> are:</p>
+<ol class="simple">
+<li><p>Compute <span class="math notranslate nohighlight">\(\mathbf{N}=\mathbf{A}^T\mathbf{A}\)</span>.</p></li>
+<li><p>Compute <span class="math notranslate nohighlight">\(\mathbf{z} = \mathbf{A}^T\mathbf{b}\)</span>.</p></li>
+<li><p>Solve the <span class="math notranslate nohighlight">\(n\times n\)</span> linear system <span class="math notranslate nohighlight">\(\mathbf{N}\mathbf{x} = \mathbf{z}\)</span> for <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.</p></li>
+</ol>
+<p>In the last step we can exploit the fact, proved in <a class="reference internal" href="#theorem-ata"><span class="std std-ref">the AtA theorem</span></a>, that <span class="math notranslate nohighlight">\(\mathbf{N}\)</span> is symmetric and positive definite, and use Cholesky factorization as in <a class="reference internal" href="../linsys/structure.html#sec-spd"><span class="std std-ref">Symmetric positive definite matrices</span></a>. (The backslash command does this automatically.)</p>
+<div class="proof proof-type-function" id="id3">
+<span id="function-lsnormal"></span><span id="index-3"></span>
+    <div class="proof-title">
+        <span class="proof-type">Function 24</span>
+        
+            <span class="proof-title-name">(lsnormal)</span>
+        
+    </div><div class="proof-content">
+<div class="highlight-julia notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">lsnormal(A,b)</span>
+
+<span class="s">Solve a linear least squares problem by the normal equations.</span>
+<span class="s">Returns the minimizer of ||b-Ax||.</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">function</span> <span class="n">lsnormal</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="n">A</span><span class="o">&#39;*</span><span class="n">A</span><span class="p">;</span>  <span class="n">z</span> <span class="o">=</span> <span class="n">A</span><span class="o">&#39;*</span><span class="n">b</span><span class="p">;</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">cholesky</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">.</span><span class="n">U</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">forwardsub</span><span class="p">(</span><span class="n">R</span><span class="o">&#39;</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>                   <span class="c"># solve R&#39;z=c</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">backsub</span><span class="p">(</span><span class="n">R</span><span class="p">,</span><span class="n">w</span><span class="p">)</span>                       <span class="c"># solve Rx=z</span>
+
+<span class="k">return</span> <span class="n">x</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table></div>
+</div></div></div>
+<div class="section" id="conditioning-and-stability">
+<h2>Conditioning and stability<a class="headerlink" href="#conditioning-and-stability" title="Permalink to this headline">¶</a></h2>
+<p>We have already used <code class="docutils literal notranslate"><span class="pre">A\b</span></code> as the native way to solve the linear least squares problem <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x}\approx\mathbf{b}\)</span> in Julia. The algorithm employed by the backslash does <em>not</em> proceed through the normal equations, because of instability.</p>
+<p>The conditioning of the linear least-squares problem relates changes in the solution <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> to those in the data, <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>. A full accounting of the condition number is too messy to present here, but we can generalize from the linear system problem <span class="math notranslate nohighlight">\(\mathbf{A} \mathbf{x} =\mathbf{b}\)</span>, where <span class="math notranslate nohighlight">\(m=n\)</span>. Recall that the condition number of solving <span class="math notranslate nohighlight">\(\mathbf{A} \mathbf{x}=\mathbf{b}\)</span> is <span class="math notranslate nohighlight">\(\kappa(\mathbf{A})=\|\mathbf{A}\| \cdot \|\mathbf{A}^{-1}\|\)</span>.</p>
+<p>Provided that the residual norm <span class="math notranslate nohighlight">\(\|\mathbf{b}-\mathbf{A}\mathbf{x}\|\)</span> at the least-squares solution is relatively small, the conditioning of the linear least squares problem is similar. The condition number of the problem generalizes via the pseudoinverse:</p>
+<div class="math notranslate nohighlight" id="equation-rectcond">
+<span id="index-4"></span><span class="eqno">(65)<a class="headerlink" href="#equation-rectcond" title="Permalink to this equation">¶</a></span>\[\kappa(\mathbf{A}) = \|\mathbf{A}\| \cdot \|\mathbf{A}^{+}\|.\]</div>
+<p>These are rectangular matrices, but the induced matrix norm is defined by <a class="reference internal" href="../linsys/norms.html#equation-matrixnorm">(42)</a> just as in the square case. If <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> has rank less than <span class="math notranslate nohighlight">\(n\)</span>, then <span class="math notranslate nohighlight">\(\kappa(\mathbf{A})=\infty\)</span>. The Julia function <code class="docutils literal notranslate"><span class="pre">cond</span></code> computes condition numbers of rectangular matrices in the 2-norm.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>When the normal equations are solved, perturbations to the data can be amplified by a factor <span class="math notranslate nohighlight">\(\kappa(\mathbf{A}^T\mathbf{A})\)</span>.</p>
+</div>
+<p>As an algorithm, the normal equations begin by computing the <span class="math notranslate nohighlight">\(n\times n\)</span> system
+<span class="math notranslate nohighlight">\((\mathbf{A}^T\mathbf{A})\mathbf{x} = \mathbf{A}^T \mathbf{b}\)</span>. When these equations are solved, perturbations to the data can be amplified by a factor <span class="math notranslate nohighlight">\(\kappa(\mathbf{A}^T\mathbf{A})\)</span>. It turns out that</p>
+<span class="target" id="index-5"></span><div class="math notranslate nohighlight" id="equation-condata">
+<span id="index-6"></span><span class="eqno">(66)<a class="headerlink" href="#equation-condata" title="Permalink to this equation">¶</a></span>\[\kappa(\mathbf{A}^T\mathbf{A}) = \kappa(\mathbf{A})^2\]</div>
+<div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/normaleqns-instab.html"><span class="doc">Instability in the normal equations</span></a></p>
+</div>
+<p>in the 2-norm. If <span class="math notranslate nohighlight">\(\kappa(\mathbf{A})\)</span> is large, the squaring of it can destabilize the normal equations: while the solution of the least squares problem is sensitive, finding it via the normal equations makes it doubly so.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol>
+<li><p>✍ Work out the least squares solution when</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{A} = \begin{bmatrix}
+  2 &amp; -1 \\
+  0 &amp; 1 \\
+  -2 &amp; 2
+\end{bmatrix}, \qquad \mathbf{b} =
+\begin{bmatrix}
+  1\\-5\\6
+\end{bmatrix}.\end{split}\]</div>
+</li>
+<li id="problem-pinvcompute"><p>✍ Find the pseudoinverse <span class="math notranslate nohighlight">\(\mathbf{A}^+\)</span> of the matrix <span class="math notranslate nohighlight">\(\mathbf{A}=\begin{bmatrix}1&amp;-2&amp;3\end{bmatrix}^T\)</span>.</p>
+   <!-- A = [1 -2 3]';
+   ATA = A'*A
+   ATAinv = inv(ATA)
+   ATAinvAT = ATA\A' -->
+</li>
+<li id="problem-normalsymmetry"><p>✍ Prove the first statement of <a class="reference internal" href="#theorem-ata"><span class="std std-ref">the AtA theorem</span></a>: <span class="math notranslate nohighlight">\(\mathbf{A}^T\mathbf{A}\)</span> is symmetric for any <span class="math notranslate nohighlight">\(m\times n\)</span> matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> with <span class="math notranslate nohighlight">\(m \ge n\)</span>.</p>
+</li>
+<li id="problem-pinveqinv"><p>✍ Prove that if <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is a nonsingular square matrix, then <span class="math notranslate nohighlight">\(\mathbf{A}^+=\mathbf{A}^{-1}\)</span>.</p></li>
+<li><p><strong>(a)</strong> ✍ Show that for any <span class="math notranslate nohighlight">\(m\times n\)</span> <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> (<span class="math notranslate nohighlight">\(m&gt;n\)</span>) for which <span class="math notranslate nohighlight">\(\mathbf{A}^T\mathbf{A}\)</span> is nonsingular, <span class="math notranslate nohighlight">\(\mathbf{A}^+\mathbf{A}\)</span> is the <span class="math notranslate nohighlight">\(n\times n\)</span> identity.</p>
+<p><strong>(b)</strong> ⌨ Show using an example in Julia that <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{A}^+\)</span> is not an identity matrix. (This matrix has rank no greater than <span class="math notranslate nohighlight">\(n\)</span>, so it can’t be an <span class="math notranslate nohighlight">\(m\times m\)</span> identity.)</p>
+</li>
+<li><p>✍ Prove that the vector <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{A}^+\mathbf{b}\)</span> is the vector in the column space (i.e., range) of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> that is closest to <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>, in the sense of the 2-norm.</p></li>
+<li><p>✍ Show that the flop count for <a class="reference internal" href="#function-lsnormal"><span class="std std-ref">lsnormal</span></a> is asymptotically <span class="math notranslate nohighlight">\(\sim 2m n^2 + \tfrac{1}{3}n^3\)</span>. (In finding the asymptotic count you can ignore terms like <span class="math notranslate nohighlight">\(mn\)</span> whose total degree is less than three.)</p></li>
+<li><p>⌨ Let <span class="math notranslate nohighlight">\(t_1,\ldots,t_m\)</span> be <span class="math notranslate nohighlight">\(m+1\)</span> equally spaced points in <span class="math notranslate nohighlight">\([0,2\pi]\)</span>.</p>
+<p><strong>(a)</strong> Let <span class="math notranslate nohighlight">\(\mathbf{A}_\beta\)</span> be the matrix in <a class="reference internal" href="fitting.html#equation-vandersystemrect">(58)</a> that corresponds to fitting data with the function <span class="math notranslate nohighlight">\(c_1 + c_2 \sin(t) + c_3 \cos(\beta t)\)</span>. Using the identity <a class="reference internal" href="#equation-condata">(66)</a>, make a table of the condition numbers of <span class="math notranslate nohighlight">\(\mathbf{A}_\beta\)</span> for <span class="math notranslate nohighlight">\(\beta = 2,1.1,1.01,\ldots,1+10^{-8}\)</span>.</p>
+<p><strong>(b)</strong> Repeat part (a) using the fitting function <span class="math notranslate nohighlight">\(c_1 + c_2 \sin^2(t) + c_3 \cos^2(\beta t).\)</span></p>
+<p><strong>(c)</strong> Why does it make sense that <span class="math notranslate nohighlight">\(\kappa\bigl(\mathbf{A}_\beta\bigr)\to \infty\)</span> as <span class="math notranslate nohighlight">\(\beta\to 1\)</span> in part (b) but not in part (a)?</p>
+ <!-- t = linspace(0,2*pi,401)';
+ A = [ t.^0 sin(t).^2 cos((1+1e-16)*t).^2 ];
+ kappa = sqrt(cond(A'*A)) -->
+</li>
+<li><p>✍ ⌨  When <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is <span class="math notranslate nohighlight">\(m\times n\)</span> with rank less than <span class="math notranslate nohighlight">\(n\)</span>, the pseudoinverse is still defined and can be computed using <code class="docutils literal notranslate"><span class="pre">pinv</span></code> from <code class="docutils literal notranslate"><span class="pre">LinearAlgebra</span></code>. However, the behavior in this case is not always intuitive. Let</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{A}_s =
+\begin{bmatrix}
+  1 &amp; 1 \\ 0 &amp; 0 \\ 0 &amp; s
+\end{bmatrix}.\end{split}\]</div>
+<p>Then <span class="math notranslate nohighlight">\(\mathbf{A}_0\)</span> has rank equal to one. Demonstrate experimentally that <span class="math notranslate nohighlight">\(\mathbf{A}_0^+\neq \lim_{s\to 0} \mathbf{A}_s^+\)</span>.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="fitting.html" title="previous page">Fitting functions to data</a>
+    <a class='right-next' id="next-link" href="qr.html" title="next page">The QR factorization</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tobin A. Driscoll and Richard J. Braun<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

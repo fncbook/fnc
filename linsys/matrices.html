@@ -1,0 +1,441 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Computing with matrices &#8212; Fundamentals of Numerical Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/mystnb.js"></script>
+    <script src="../_static/proof.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Linear systems" href="linear-systems.html" />
+    <link rel="prev" title="Polynomial interpolation" href="polyinterp.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fundamentals of Numerical Computation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../frontmatter.html">Home</a>
+  </li>
+  <li class="">
+    <a href="../intro/overview.html">Introduction</a>
+  </li>
+  <li class="active">
+    <a href="overview.html">Square linear systems</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="polyinterp.html">Polynomial interpolation</a>
+    </li>
+    <li class="active">
+      <a href="">Computing with matrices</a>
+    </li>
+    <li class="">
+      <a href="linear-systems.html">Linear systems</a>
+    </li>
+    <li class="">
+      <a href="lu.html">LU factorization</a>
+    </li>
+    <li class="">
+      <a href="efficiency.html">Efficiency of matrix computations</a>
+    </li>
+    <li class="">
+      <a href="pivoting.html">Row pivoting</a>
+    </li>
+    <li class="">
+      <a href="norms.html">Vector and matrix norms</a>
+    </li>
+    <li class="">
+      <a href="condition-number.html">Conditioning of linear systems</a>
+    </li>
+    <li class="">
+      <a href="structure.html">Exploiting matrix structure</a>
+    </li>
+    <li class="">
+      <a href="next.html">Next steps</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../leastsq/overview.html">Overdetermined linear systems</a>
+  </li>
+  <li class="">
+    <a href="../nonlineqn/overview.html">Roots of nonlinear equations</a>
+  </li>
+  <li class="">
+    <a href="../localapprox/overview.html">Piecewise interpolation</a>
+  </li>
+  <li class="">
+    <a href="../ivp/overview.html">Initial-value problems for ODEs</a>
+  </li>
+  <li class="">
+    <a href="../appendix/linear-algebra.html">Review: Linear algebra</a>
+  </li>
+  <li class="">
+    <a href="../appendix/demos.html">All demo notebooks</a>
+  </li>
+  <li class="">
+    <a href="../refs.html">References</a>
+  </li>
+  <li class="">
+    <a href="../genindex.html">Index</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../_sources/linsys/matrices.md"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#notation" class="nav-link">Notation</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#block-matrix-expressions" class="nav-link">Block matrix expressions</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#vectors-and-matrices-in-julia" class="nav-link">Vectors and matrices in Julia</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#row-and-column-operations" class="nav-link">Row and column operations</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#exercises" class="nav-link">Exercises</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="computing-with-matrices">
+<h1>Computing with matrices<a class="headerlink" href="#computing-with-matrices" title="Permalink to this headline">¶</a></h1>
+<div class="alert alert-primary">
+<p class="admonition-title">Attention</p>
+<p>We recommend that you review the linear algebra material in <a class="reference internal" href="../appendix/linear-algebra.html"><span class="doc">Review: Linear algebra</span></a> before reading this section.</p>
+</div>
+<div class="section" id="notation">
+<h2>Notation<a class="headerlink" href="#notation" title="Permalink to this headline">¶</a></h2>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>All vectors in this book are column vectors.</p>
+</div>
+<p>We use capital letters in bold to refer to matrices, and lowercase bold letters for vectors. <em>All vectors in this book are column vectors</em>. The bold symbol <span class="math notranslate nohighlight">\(\boldsymbol{0}\)</span> may refer to a vector of all zeros or to a zero matrix, depending on context; we use <span class="math notranslate nohighlight">\(0\)</span> as the scalar zero only.</p>
+<p>To refer to a specific element of a matrix, we use the uppercase name of the matrix <em>without</em> boldface, as in <span class="math notranslate nohighlight">\(A_{24}\)</span> to mean the <span class="math notranslate nohighlight">\((2,4)\)</span> element of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>.<a class="footnote-reference brackets" href="#subscript" id="id1">1</a> To refer to an element of a vector, we use just one subscript, as in <span class="math notranslate nohighlight">\(x_3\)</span>. If you see a boldface character with one or more subscripts, then you know that it is a matrix or vector that belongs to a sequence or indexed collection.</p>
+<p>We will have frequent need to refer to the individual columns of a matrix as vectors. Our convention is to use a lowercase bold version of the matrix name with a subscript to represent the column number. Thus, <span class="math notranslate nohighlight">\(\mathbf{a}_1,\mathbf{a}_2,\ldots,\mathbf{a}_n\)</span> are the columns of the <span class="math notranslate nohighlight">\(m\times n\)</span> matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. Conversely, whenever we define a sequence of vectors <span class="math notranslate nohighlight">\(\mathbf{v}_1,\ldots,\mathbf{v}_p\)</span>, we can implicitly consider them to be columns of a matrix <span class="math notranslate nohighlight">\(\mathbf{V}\)</span>. Sometimes we might write <span class="math notranslate nohighlight">\(\mathbf{V}=\bigl[ \mathbf{v}_j \bigr]\)</span> to emphasize the connection.</p>
+<span class="target" id="index-0"></span><p id="index-1">The notation <span class="math notranslate nohighlight">\(\mathbf{A}^T\)</span> is used for the transpose of a matrix, whether it is real or complex. But in the case of complex matrices, it’s almost always more desirable to use the <a class="reference internal" href="overview.html#term-hermitian"><span class="xref std std-term">hermitian</span></a> <span class="math notranslate nohighlight">\(\mathbf{A}^*\)</span>, which is the transpose with the complex conjugate of each element.<a class="footnote-reference brackets" href="#conjugate" id="id2">2</a>  If <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is real, then <span class="math notranslate nohighlight">\(\mathbf{A}^*=\mathbf{A}^T\)</span>. A <a class="reference internal" href="overview.html#term-symmetric-matrix"><span class="xref std std-term">symmetric matrix</span></a> is a square matrix such that <span class="math notranslate nohighlight">\(\mathbf{A}^T=\mathbf{A}\)</span>.</p>
+<!-- We will not see much of complex numbers until \charef{matrixanaly}. -->
+<p id="index-2">The <a class="reference internal" href="overview.html#term-identity-matrix"><span class="xref std std-term">identity matrix</span></a> of size <span class="math notranslate nohighlight">\(n\)</span> is denoted <span class="math notranslate nohighlight">\(\mathbf{I}\)</span>, or sometimes <span class="math notranslate nohighlight">\(\mathbf{I}_n\)</span> if emphasizing the size is important in context. For columns of the identity we break with our usual naming convention and denote them by <span class="math notranslate nohighlight">\(\mathbf{e}_j\)</span>.</p>
+</div>
+<div class="section" id="block-matrix-expressions">
+<h2>Block matrix expressions<a class="headerlink" href="#block-matrix-expressions" title="Permalink to this headline">¶</a></h2>
+<p>We will often find it useful to break a matrix into separately named pieces. For example, we might write</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}  \mathbf{A} =
+  \begin{bmatrix}
+    \mathbf{A}_{11} &amp; \mathbf{A}_{12} &amp; \mathbf{A}_{13} \\
+    \mathbf{A}_{21} &amp; \mathbf{A}_{22} &amp; \mathbf{A}_{23}
+  \end{bmatrix}, \qquad
+  \mathbf{B} =
+  \begin{bmatrix}
+    \mathbf{B}_1 \\ \mathbf{B}_2 \\ \mathbf{B}_3
+  \end{bmatrix}.\end{split}\]</div>
+<p>It’s understood that blocks that are on top of one another have the same number of columns, and blocks that are side by side have the same number of rows. Typically, if the blocks all have compatible dimensions, then they can be multiplied as though the blocks were scalars. For instance, continuing with the definitions above, we say that <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is block-<span class="math notranslate nohighlight">\(2\times 3\)</span> and <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> is block-<span class="math notranslate nohighlight">\(3\times 1\)</span>, so we can write</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}  \mathbf{A} \mathbf{B} =
+  \begin{bmatrix}
+    \mathbf{A}_{11}\mathbf{B}_1 + \mathbf{A}_{12}\mathbf{B}_2 + \mathbf{A}_{13}\mathbf{B}_3 \\
+    \mathbf{A}_{21}\mathbf{B}_1 + \mathbf{A}_{22}\mathbf{B}_2 + \mathbf{A}_{23}\mathbf{B}_3
+  \end{bmatrix},\end{split}\]</div>
+<p>provided that the individual block products are well-defined. For transposes we have, for example,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}  \mathbf{A}^T =
+  \begin{bmatrix}
+    \mathbf{A}_{11}^T &amp; \mathbf{A}_{21}^T \\[2mm]
+    \mathbf{A}_{12}^T &amp; \mathbf{A}_{22}^T \\[2mm]
+    \mathbf{A}_{13}^T &amp; \mathbf{A}_{23}^T
+  \end{bmatrix}.\end{split}\]</div>
+</div>
+<div class="section" id="vectors-and-matrices-in-julia">
+<h2>Vectors and matrices in Julia<a class="headerlink" href="#vectors-and-matrices-in-julia" title="Permalink to this headline">¶</a></h2>
+<p>In Julia, vectors and matrices are one-dimensional and two-dimensional arrays, respectively. A lot of how Julia deals with them is easy to remember once learned. There’s a lot to learn, though, so we give just some of the basics here, and we will pick up more as we go from the code used in our examples and functions.  We begin with some handy functions for working with matrices (<a class="reference internal" href="overview.html#term-ones"><span class="xref std std-term">ones</span></a>, <a class="reference internal" href="overview.html#term-zeros"><span class="xref std std-term">zeros</span></a>, <a class="reference internal" href="overview.html#term-size"><span class="xref std std-term">size</span></a>, <a class="reference internal" href="overview.html#term-end"><span class="xref std std-term">end</span></a>) and see how these work with familiar functions from algebra and calculus.</p>
+<div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/matrices-julia.html"><span class="doc">Vectors and matrices in Julia</span></a></p>
+</div>
+</div>
+<div class="section" id="row-and-column-operations">
+<h2>Row and column operations<a class="headerlink" href="#row-and-column-operations" title="Permalink to this headline">¶</a></h2>
+<p>A critical identity in matrix multiplication is</p>
+<div class="math notranslate nohighlight">
+\[  \mathbf{A} \mathbf{e}_j = \mathbf{a}_j.\]</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Multiplication on the right by column <span class="math notranslate nohighlight">\(j\)</span> of the identity extracts the <span class="math notranslate nohighlight">\(j\)</span>th column.</p>
+</div>
+<p>In words, <em>multiplication on the right by column <span class="math notranslate nohighlight">\(j\)</span> of the identity extracts the <span class="math notranslate nohighlight">\(j\)</span>th column of a matrix</em>. Furthermore, the expression</p>
+<div class="math notranslate nohighlight">
+\[  \mathbf{A}
+  \begin{bmatrix}
+    \mathbf{e}_1 &amp; \mathbf{e}_3 &amp; \mathbf{e}_5
+  \end{bmatrix}\]</div>
+<p>extracts three columns. An equivalent expression in Julia would be <code class="docutils literal notranslate"><span class="pre">A[:,1:2:5]</span></code>. We can extend the same idea to rows by using the general identity <span class="math notranslate nohighlight">\((\mathbf{R}\mathbf{S})^T=\mathbf{S}^T\mathbf{R}^T\)</span>. Let <span class="math notranslate nohighlight">\(\mathbf{B}=\mathbf{A}^T\)</span> have columns <span class="math notranslate nohighlight">\(\bigl[ \mathbf{b}_j \bigr]\)</span>, and note</p>
+<div class="math notranslate nohighlight">
+\[  (\mathbf{b}_j)^T = (\mathbf{B} \mathbf{e}_j)^T = \mathbf{e}_j^T \mathbf{B}^T = \mathbf{e}_j^T \mathbf{A}.\]</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Multiplication on the left by row <span class="math notranslate nohighlight">\(j\)</span> of the identity extracts the <span class="math notranslate nohighlight">\(j\)</span>th row.</p>
+</div>
+<p>But <span class="math notranslate nohighlight">\(\mathbf{e}_j^T\)</span> is the <span class="math notranslate nohighlight">\(j\)</span>th <em>row</em> of <span class="math notranslate nohighlight">\(\mathbf{I}\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{b}_j^T\)</span> is the transpose of the <span class="math notranslate nohighlight">\(j\)</span>th column of <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>, which is the <span class="math notranslate nohighlight">\(j\)</span>th <em>row</em> of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> by <span class="math notranslate nohighlight">\(\mathbf{B}=\mathbf{A}^T\)</span>. Thus, <em>multiplication on the left by row <span class="math notranslate nohighlight">\(j\)</span> of the identity extracts the <span class="math notranslate nohighlight">\(j\)</span>th row</em>. Extracting the single element <span class="math notranslate nohighlight">\((i,j)\)</span> from the matrix is, therefore, <span class="math notranslate nohighlight">\(\mathbf{e}_i^T \mathbf{A} \mathbf{e}_j\)</span>.</p>
+<p>Being able to extract specific rows and columns of a matrix makes it straightforward to do row- and column-oriented operations, such as linear combinations.</p>
+<div class="proof proof-type-example" id="id3">
+
+    <div class="proof-title">
+        <span class="proof-type">Example 9</span>
+        
+    </div><div class="proof-content">
+<p>Say that <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> has five columns. Adding twice the third column of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> to its first column is done by</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}(\mathbf{e}_1+2\mathbf{e}_3).\]</div>
+<p>Suppose we want to do this operation “in place,” meaning replacing the first column of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> with this value and leaving the other four columns of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> alone, we can replace <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> with</p>
+<div class="math notranslate nohighlight">
+\[  \mathbf{A}
+  \begin{bmatrix}
+    \mathbf{e}_1+2\mathbf{e}_3 &amp; \mathbf{e}_2 &amp; \mathbf{e}_3 &amp; \mathbf{e}_4 &amp; \mathbf{e}_5
+  \end{bmatrix}.\]</div>
+<p>The Julia equivalent is</p>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">2</span><span class="n">A</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">+=</span></code> operator means to increment the item on the left-hand side.</p>
+</div></div></div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol>
+<li><p>✍ Suppose <span class="math notranslate nohighlight">\(\displaystyle \mathbf{C} =
+ \begin{bmatrix}
+   \mathbf{I} &amp; \mathbf{A} \\ -\mathbf{I} &amp; \mathbf{B}
+ \end{bmatrix}.\)</span> Using block notation, find <span class="math notranslate nohighlight">\(\mathbf{C}^2\)</span> and <span class="math notranslate nohighlight">\(\mathbf{C}^3\)</span>.</p>
+</li>
+<li><p>⌨  Let</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{A} =
+\begin{bmatrix}
+  2 &amp; 1 &amp; 1 &amp; 0 \\ 0 &amp; -1 &amp; 4 &amp; 1 \\ 2 &amp; 2 &amp; 0 &amp; -2 \\ 1 &amp; 3 &amp; -1
+  &amp; 5
+\end{bmatrix},
+\quad
+\mathbf{B} =
+\begin{bmatrix}
+  3 &amp; -1 &amp; 0 &amp; 0 &amp; 2 \\ 7 &amp; 1 &amp; 0 &amp; 0 &amp; 2
+\end{bmatrix},\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{u} =
+\begin{bmatrix}
+  2 \\ -1 \\ 3 \\ 1
+\end{bmatrix},
+\quad
+\mathbf{v} =
+\begin{bmatrix}
+  \pi \\ e
+\end{bmatrix}.\end{split}\]</div>
+<p>(Do not round off the values in <span class="math notranslate nohighlight">\(\mathbf{v}\)</span>—find them using native Julia commands.) For each expression below, use Julia to find the result, or explain why the result does not exist.</p>
+<p><strong>(a)</strong> <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{B},\quad\)</span>
+<strong>(b)</strong> <span class="math notranslate nohighlight">\(\mathbf{B}^T \mathbf{A},\quad\)</span>
+<strong>(c)</strong> <span class="math notranslate nohighlight">\(\mathbf{v}^T \mathbf{B},\quad\)</span>
+<strong>(d)</strong> <span class="math notranslate nohighlight">\(\mathbf{B} \mathbf{u},\quad\)</span>
+<strong>(e)</strong> <span class="math notranslate nohighlight">\(\bigl[ \, \mathbf{u}\; \mathbf{A}\mathbf{u} \; \mathbf{A}^2 \mathbf{u} \; \mathbf{A}^3 \mathbf{u} \bigr]\)</span>.</p>
+</li>
+<li><p>⌨  Let</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{u} =
+\begin{bmatrix}
+  1\\3\\5\\7\\9\\11
+\end{bmatrix}, \qquad
+\mathbf{v} =
+\begin{bmatrix}
+  -60 \\ -50 \\ -40 \\ -30 \\ -20 \\ -10
+\end{bmatrix}.\end{split}\]</div>
+<p>Find the inner products <span class="math notranslate nohighlight">\(\mathbf{u}^T\mathbf{v}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{v}^T\mathbf{u}\)</span>, and the outer products <span class="math notranslate nohighlight">\(\mathbf{u}\mathbf{v}^T\)</span> and <span class="math notranslate nohighlight">\(\mathbf{v}\mathbf{u}^T\)</span>.</p>
+</li>
+<li><p>⌨ In Julia, give a demonstration of the identity <span class="math notranslate nohighlight">\((\mathbf{A}\mathbf{B})^T=\mathbf{B}^T\mathbf{A}^T\)</span> for some arbitrarily chosen <span class="math notranslate nohighlight">\(3\times 4\)</span> matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and <span class="math notranslate nohighlight">\(4\times 2\)</span> matrix <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>.</p>
+</li>
+<li id="problem-inverseprod"><p>✍ Prove that if <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> are invertible, then <span class="math notranslate nohighlight">\((\mathbf{A}\mathbf{B})^{-1}=\mathbf{B}^{-1}\mathbf{A}^{-1}\)</span>. (By producing the inverse, it follows that <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{B}\)</span> is invertible as well.)</p></li>
+<li><p>✍ Suppose <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> is an arbitrary <span class="math notranslate nohighlight">\(4\times 3\)</span> matrix. In each part below a matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is described in terms of <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>. Express <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> as a product of <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> with one or more other matrices.</p>
+<p><strong>(a)</strong> <span class="math notranslate nohighlight">\(\mathbf{A}\in\mathbb{R}^{4 \times 1}\)</span> is the result of adding the first column of <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> to <span class="math notranslate nohighlight">\(-2\)</span> times the last column of <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>.</p>
+<p><strong>(b)</strong> The rows of <span class="math notranslate nohighlight">\(\mathbf{A}\in\mathbb{R}^{4 \times 3}\)</span> are the rows of <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> in reverse order.</p>
+<p><strong>(c)</strong> The first column of <span class="math notranslate nohighlight">\(\mathbf{A}\in\mathbb{R}^{4 \times 3}\)</span> is <span class="math notranslate nohighlight">\(1\)</span> times the first column of <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>, the second column of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is <span class="math notranslate nohighlight">\(2\)</span> times the second column of <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>,
+and the third column of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is <span class="math notranslate nohighlight">\(3\)</span> times the third column of <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>.</p>
+<p><strong>(d)</strong> <span class="math notranslate nohighlight">\(A\in\mathbb{R}\)</span> is the sum of all elements of <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>.</p>
+</li>
+<li><p>✍ Prove true, or give a counterexample: The product of symmetric matrices is symmetric.</p></li>
+<li><p><strong>(a)</strong> ✍ Prove that for real vectors <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> of the same length, the inner products <span class="math notranslate nohighlight">\(\mathbf{v}^T\mathbf{w}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{w}^T\mathbf{v}\)</span> are equal.</p>
+<p><strong>(b)</strong> ✍ Prove true, or give a counterexample for, the equivalent statement about outer products, <span class="math notranslate nohighlight">\(\mathbf{v}\mathbf{w}^T\)</span> and <span class="math notranslate nohighlight">\(\mathbf{w}\mathbf{v}^T\)</span>.</p>
+</li>
+</ol>
+<hr class="docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="subscript"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>This aspect of our notation is slightly unusual. More frequently one would see the lowercase <span class="math notranslate nohighlight">\(a_{24}\)</span> in this context. We feel that our notation lends more consistency and clarity to expressions with mixed symbols, and it is more like how computer code is written.</p>
+</dd>
+<dt class="label" id="conjugate"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>The conjugate of a complex number is found by replacing all references to the imaginary unit <span class="math notranslate nohighlight">\(i\)</span> by <span class="math notranslate nohighlight">\(-i\)</span>.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="polyinterp.html" title="previous page">Polynomial interpolation</a>
+    <a class='right-next' id="next-link" href="linear-systems.html" title="next page">Linear systems</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tobin A. Driscoll and Richard J. Braun<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

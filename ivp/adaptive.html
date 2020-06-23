@@ -1,0 +1,431 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Adaptive Runge–Kutta &#8212; Fundamentals of Numerical Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/mystnb.js"></script>
+    <script src="../_static/proof.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Multistep methods" href="multistep.html" />
+    <link rel="prev" title="Runge–Kutta methods" href="rk.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fundamentals of Numerical Computation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../frontmatter.html">Home</a>
+  </li>
+  <li class="">
+    <a href="../intro/overview.html">Introduction</a>
+  </li>
+  <li class="">
+    <a href="../linsys/overview.html">Square linear systems</a>
+  </li>
+  <li class="">
+    <a href="../leastsq/overview.html">Overdetermined linear systems</a>
+  </li>
+  <li class="">
+    <a href="../nonlineqn/overview.html">Roots of nonlinear equations</a>
+  </li>
+  <li class="">
+    <a href="../localapprox/overview.html">Piecewise interpolation</a>
+  </li>
+  <li class="active">
+    <a href="overview.html">Initial-value problems for ODEs</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="basics.html">Basics of IVPs</a>
+    </li>
+    <li class="">
+      <a href="euler.html">Euler’s method</a>
+    </li>
+    <li class="">
+      <a href="systems.html">Systems of differential equations</a>
+    </li>
+    <li class="">
+      <a href="rk.html">Runge–Kutta methods</a>
+    </li>
+    <li class="active">
+      <a href="">Adaptive Runge–Kutta</a>
+    </li>
+    <li class="">
+      <a href="multistep.html">Multistep methods</a>
+    </li>
+    <li class="">
+      <a href="implicit.html">Implementation of multistep methods</a>
+    </li>
+    <li class="">
+      <a href="zerostability.html">Zero-stability of multistep methods</a>
+    </li>
+    <li class="">
+      <a href="next.html">Next steps</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../appendix/linear-algebra.html">Review: Linear algebra</a>
+  </li>
+  <li class="">
+    <a href="../appendix/demos.html">All demo notebooks</a>
+  </li>
+  <li class="">
+    <a href="../refs.html">References</a>
+  </li>
+  <li class="">
+    <a href="../genindex.html">Index</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../_sources/ivp/adaptive.md"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#error-estimation" class="nav-link">Error estimation</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#embedded-formulas" class="nav-link">Embedded formulas</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#implementation" class="nav-link">Implementation</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#exercises" class="nav-link">Exercises</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="adaptive-runge-kutta">
+<h1>Adaptive Runge–Kutta<a class="headerlink" href="#adaptive-runge-kutta" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">The derivation and analysis of methods for initial-value problems usually assumes a fixed step size <span class="math notranslate nohighlight">\(h\)</span>. While the error behavior <span class="math notranslate nohighlight">\(O(h^p)\)</span> is guaranteed by the <a class="reference internal" href="euler.html#theorem-onestepgte"><span class="std std-ref">convergence theorem</span></a> as <span class="math notranslate nohighlight">\(h\rightarrow 0\)</span>, this bound comes with an unknowable constant, and it is not very useful as a guide to the numerical value of the error at any particular value of <span class="math notranslate nohighlight">\(h\)</span>. Furthermore, as we saw in <a class="reference internal" href="../localapprox/adaptive.html"><span class="doc">Adaptive integration</span></a> with numerical integration, in many problems a fixed value of <span class="math notranslate nohighlight">\(h\)</span> throughout <span class="math notranslate nohighlight">\(a\le t \le b\)</span> is far from the most efficient strategy.</p>
+<p>In response we will employ the basic strategy of <a class="reference internal" href="../localapprox/adaptive.html"><span class="doc">Adaptive integration</span></a>: adapt the time step size in order to reach an accuracy goal, as measured by an error estimate formed from computing multiple approximations. The details are quite different, however.</p>
+<div class="section" id="error-estimation">
+<h2>Error estimation<a class="headerlink" href="#error-estimation" title="Permalink to this headline">¶</a></h2>
+<p>Suppose that, starting from a given value <span class="math notranslate nohighlight">\(u_i\)</span> and using a step size <span class="math notranslate nohighlight">\(h\)</span>, we run one step of <em>two</em> RK methods simultaneously: one method with order <span class="math notranslate nohighlight">\(p\)</span>, producing <span class="math notranslate nohighlight">\(u_{i+1}\)</span>, and the other method with order <span class="math notranslate nohighlight">\(p+1\)</span>, producing <span class="math notranslate nohighlight">\(\tilde{u}_{i+1}\)</span>. In most circumstances, we can expect that <span class="math notranslate nohighlight">\(\tilde{\mathbf{u}}_{i+1}\)</span> is a much better approximation to the solution than <span class="math notranslate nohighlight">\(\mathbf{u}_{i+1}\)</span> is. So it seems reasonable to use <span class="math notranslate nohighlight">\(E_i(h)=|\tilde{\mathbf{u}}_{i+1}-\mathbf{u}_{i+1}|\)</span> (in the vector case, a norm) as an estimate of the actual local error made by the <span class="math notranslate nohighlight">\(p\)</span>th order method.</p>
+<p>If our goal is to keep error less than some predetermined value <span class="math notranslate nohighlight">\(\epsilon\)</span>, we could decide to accept the new solution value if <span class="math notranslate nohighlight">\(E_i&lt;\epsilon\)</span> and otherwise reject it. (Even though the estimate <span class="math notranslate nohighlight">\(E_i\)</span> is meant to go with the <em>less</em> accurate proposed value <span class="math notranslate nohighlight">\(\mathbf{u}_{i+1}\)</span>, it’s hard to resist the temptation to keep the more accurate value <span class="math notranslate nohighlight">\(\tilde{\mathbf{u}}_{i+1}\)</span> instead, and this is common in practice.)</p>
+<p>Regardless of whether <span class="math notranslate nohighlight">\(E_i&lt;\epsilon\)</span> and we accept the step, we now ask a question: looking back, what step size <em>should</em> we have taken to just meet our error target <span class="math notranslate nohighlight">\(\epsilon\)</span>? Let’s speculate that <span class="math notranslate nohighlight">\(E_i(h)\approx C h^{p+1}\)</span> for an unknown constant <span class="math notranslate nohighlight">\(C\)</span>, given the behavior of local truncation error as <span class="math notranslate nohighlight">\(h\rightarrow 0\)</span>. If we had used a step size <span class="math notranslate nohighlight">\(qh\)</span> for some <span class="math notranslate nohighlight">\(q&gt;0\)</span>, then trivially, <span class="math notranslate nohighlight">\(E_i(qh)\approx C q^{p+1}h^{p+1}\)</span> is what we would expect to get. Our best guess for <span class="math notranslate nohighlight">\(q\)</span> would be to set <span class="math notranslate nohighlight">\(E_i(qh)\approx \epsilon\)</span>, or</p>
+<div class="math notranslate nohighlight" id="equation-adaptrklocal">
+<span class="eqno">(185)<a class="headerlink" href="#equation-adaptrklocal" title="Permalink to this equation">¶</a></span>\[  q \approx \left(\frac{\epsilon}{E_i}\right)^{1/(p+1)}.\]</div>
+<p>Whether or not we accepted the value proposed for <span class="math notranslate nohighlight">\(t=t_{i+1}\)</span>, we will adjust the step size to <span class="math notranslate nohighlight">\(q h\)</span> for the next attempted step.</p>
+<p>Given what we know about the connection between local and global errors, we might instead decide that controlling the normalized contribution to <em>global</em> error, which is closer to <span class="math notranslate nohighlight">\(E_i(qh)/(q h)\)</span>, is more reasonable. Then we end up with</p>
+<div class="math notranslate nohighlight" id="equation-adaptrkglobal">
+<span class="eqno">(186)<a class="headerlink" href="#equation-adaptrkglobal" title="Permalink to this equation">¶</a></span>\[  q \le \left(\frac{\epsilon}{E_i}\right)^{1/p}.\]</div>
+<p>Experts have different recommendations about whether to use <a class="reference internal" href="#equation-adaptrklocal">(185)</a> or <a class="reference internal" href="#equation-adaptrkglobal">(186)</a>. Even though <a class="reference internal" href="#equation-adaptrkglobal">(186)</a> appears to be more in keeping with our assumptions about global errors, modern practice seems to favor <a class="reference internal" href="#equation-adaptrklocal">(185)</a>.</p>
+</div>
+<div class="section" id="embedded-formulas">
+<h2>Embedded formulas<a class="headerlink" href="#embedded-formulas" title="Permalink to this headline">¶</a></h2>
+<p>We have derived two useful pieces of information: a reasonable estimate of the actual value of the local (or global) error, and a prediction how the step size will affect that error. Together they can be used to adapt step size and keep errors near some target level. But there remains one more important twist to the story.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Embedded RK formulas are a pair of RK methods whose stages share the same internal <span class="math notranslate nohighlight">\(f\)</span> evaluations.</p>
+</div>
+<p>At first glance, it would seem that to use (for example) any pair of second- and third-order RK methods to get the <span class="math notranslate nohighlight">\(\mathbf{u}_{i+1}\)</span> and <span class="math notranslate nohighlight">\(\tilde{\mathbf{u}}_{i+1}\)</span> needed for adaptive error control, we need at least <span class="math notranslate nohighlight">\(2+3=5\)</span> evaluations of <span class="math notranslate nohighlight">\(f(t,y)\)</span> for each attempted time step.  This is more than double the computational work needed by the second-order method without adaptivity. Fortunately, the marginal cost of adaptation can be substantially reduced by using <strong>embedded Runge–Kutta</strong> Embedded RK formulas are a pair of RK methods whose stages share the same internal <span class="math notranslate nohighlight">\(f\)</span> evaluations, combining them differently in order to get estimates of two different orders of accuracy.</p>
+<p>A good example of an embedded method is the <strong>Bogacki–Shampine</strong> (BS23) formula, given by the table</p>
+<div class="math notranslate nohighlight" id="equation-bs23">
+<span class="eqno">(187)<a class="headerlink" href="#equation-bs23" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{array}{r|cccc}
+0                  &amp; \rule{0pt}{2.75ex} &amp;                    &amp;                    &amp;                    \\
+\frac{1}{2}        &amp; \frac{1}{2}        &amp; \rule{0pt}{2.75ex} &amp;                    &amp;                    \\
+\frac{3}{4}        &amp; 0                  &amp; \frac{3}{4}        &amp; \rule{0pt}{2.75ex} &amp;                    \\
+1                 &amp; \frac{2}{9}        &amp; \frac{1}{3}        &amp; \frac{4}{9}        &amp; \rule{0pt}{2.75ex} \\[2pt] \hline
+\rule{0pt}{2.75ex} &amp; \frac{2}{9}        &amp; \frac{1}{3}        &amp; \frac{4}{9}        &amp; 0                  \\[2pt] \hline
+\rule{0pt}{2.75ex} &amp; \frac{7}{24}       &amp; \frac{1}{4}        &amp; \frac{1}{3}        &amp; \frac{1}{8}
+\end{array}\end{split}\]</div>
+<p>The top part of the table describes four stages in the usual RK fashion. The last two rows describe how to construct a second-order estimate <span class="math notranslate nohighlight">\(\mathbf{u}_{i+1}\)</span> and a third-order estimate <span class="math notranslate nohighlight">\(\tilde{\mathbf{u}}_{i+1}\)</span> by taking different combinations of those stages.</p>
+</div>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<div class="proof proof-type-function" id="id1">
+<span id="function-rk23"></span>
+    <div class="proof-title">
+        <span class="proof-type">Function 68</span>
+        
+            <span class="proof-title-name">(rk23)</span>
+        
+    </div><div class="proof-content">
+<p><strong>Adaptive IVP solver based on embedded RK formulas.</strong></p>
+<div class="highlight-julia notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">rk23(ivp,tol)</span>
+
+<span class="s">Apply an adaptive embedded RK formula pair to solve given IVP with</span>
+<span class="s">estimated error `tol`. Returns a vector of times and a vector of</span>
+<span class="s">solution values.</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">function</span> <span class="n">rk23</span><span class="p">(</span><span class="n">ivp</span><span class="p">,</span><span class="n">tol</span><span class="p">)</span>
+    <span class="c"># Initialize for the first time step.</span>
+    <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">ivp</span><span class="o">.</span><span class="n">tspan</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="p">[</span><span class="n">float</span><span class="p">(</span><span class="n">ivp</span><span class="o">.</span><span class="n">u0</span><span class="p">)];</span>   <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">tol</span><span class="o">^</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">s1</span> <span class="o">=</span> <span class="n">ivp</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">ivp</span><span class="o">.</span><span class="n">u0</span><span class="p">,</span><span class="n">ivp</span><span class="o">.</span><span class="n">p</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
+
+    <span class="c"># Time stepping.</span>
+    <span class="k">while</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">b</span>
+        <span class="c"># Detect underflow of the step size.</span>
+        <span class="k">if</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">h</span> <span class="o">==</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="nd">@warn</span> <span class="s">&quot;Stepsize too small near t=</span><span class="si">$</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="s">&quot;</span>
+            <span class="k">break</span>  <span class="c"># quit time stepping loop</span>
+        <span class="k">end</span>
+
+        <span class="c"># New RK stages.</span>
+        <span class="n">s2</span> <span class="o">=</span> <span class="n">ivp</span><span class="o">.</span><span class="n">f</span><span class="p">(</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">s1</span><span class="p">,</span>   <span class="n">ivp</span><span class="o">.</span><span class="n">p</span><span class="p">,</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span>   <span class="p">)</span>
+        <span class="n">s3</span> <span class="o">=</span> <span class="n">ivp</span><span class="o">.</span><span class="n">f</span><span class="p">(</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="n">s2</span><span class="p">,</span> <span class="n">ivp</span><span class="o">.</span><span class="n">p</span><span class="p">,</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="mi">4</span> <span class="p">)</span>
+        <span class="n">unew2</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">s1</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">s2</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">s3</span><span class="p">)</span><span class="o">/</span><span class="mi">9</span>   <span class="c"># 2rd order solution</span>
+        <span class="n">s4</span> <span class="o">=</span> <span class="n">ivp</span><span class="o">.</span><span class="n">f</span><span class="p">(</span> <span class="n">unew2</span><span class="p">,</span> <span class="n">ivp</span><span class="o">.</span><span class="n">p</span><span class="p">,</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">h</span> <span class="p">)</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="o">*</span><span class="n">s1</span><span class="o">/</span><span class="mi">72</span> <span class="o">+</span> <span class="n">s2</span><span class="o">/</span><span class="mi">12</span> <span class="o">+</span> <span class="n">s3</span><span class="o">/</span><span class="mi">9</span> <span class="o">-</span> <span class="n">s4</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span>  <span class="c"># 2nd/3rd difference</span>
+        <span class="n">E</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">err</span><span class="p">,</span><span class="nb">Inf</span><span class="p">)</span>                         <span class="c"># error estimate</span>
+        <span class="n">maxerr</span> <span class="o">=</span> <span class="n">tol</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">norm</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="nb">Inf</span><span class="p">))</span>     <span class="c"># relative/absolute blend</span>
+
+        <span class="c"># Accept the proposed step?</span>
+        <span class="k">if</span> <span class="n">E</span> <span class="o">&lt;</span> <span class="n">maxerr</span>     <span class="c"># yes</span>
+            <span class="n">push!</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">h</span><span class="p">)</span>
+            <span class="n">push!</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">unew2</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">s1</span> <span class="o">=</span> <span class="n">s4</span>       <span class="c"># use FSAL property</span>
+        <span class="k">end</span>
+
+        <span class="c"># Adjust step size.</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="mf">0.8</span><span class="o">*</span><span class="p">(</span><span class="n">maxerr</span><span class="o">/</span><span class="n">E</span><span class="p">)</span><span class="o">^</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>   <span class="c"># conservative optimal step factor</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>               <span class="c"># limit stepsize growth</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">q</span><span class="o">*</span><span class="n">h</span><span class="p">,</span><span class="n">b</span><span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>        <span class="c"># don&#39;t step past the end</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span><span class="n">u</span>
+<span class="k">end</span>
+</pre></div>
+</td></tr></table></div>
+</div></div><p>Our implementation of an embedded second/third order (RK23) code is given in <a class="reference internal" href="#function-rk23"><span class="std std-ref">rk23</span></a>. It has a few details that are worth explaining.</p>
+<p>First, as in <a class="reference internal" href="../localapprox/adaptive.html#equation-absreltolerance">(164)</a>, we use a combination of absolute and relative tolerances to judge the acceptability of a solution value. Second, we have a check whether <span class="math notranslate nohighlight">\(t_i+h\)</span> equals <span class="math notranslate nohighlight">\(t_i\)</span>, which looks odd. This check is purely about roundoff error, because <span class="math notranslate nohighlight">\(h\)</span> can become so small that it no longer changes the floating point value of <span class="math notranslate nohighlight">\(t_i\)</span>. When this happens, it’s often a sign that the underlying exact solution has a singularity near <span class="math notranslate nohighlight">\(t=t_i\)</span>. Third, some adjustments are made to the step size prediction factor <span class="math notranslate nohighlight">\(q\)</span>. We use a smaller value than <a class="reference internal" href="#equation-adaptrklocal">(185)</a>, to be conservative about the many assumptions that were made to derive it. We also prevent a huge jump in the step size for the same reason. And, we make sure that our final step doesn’t take us past the requested end of the domain.</p>
+<div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/adapt-basic.html"><span class="doc">Adaptive RK</span></a></p>
+<p><a class="reference internal" href="demos/adapt-sing.html"><span class="doc">Adaptivity at a singularity</span></a></p>
+</div>
+<p>Finally, there is some careful programming done to avoid redundant evaluations of <span class="math notranslate nohighlight">\(f\)</span>. As written in <a class="reference internal" href="#equation-bs23">(187)</a>, there seem to be four stages needed to find the paired second- and third-order estimates. This is unfortunate, since there are three-stage formulas of order three. But BS23 has a special property called “first same as last” (FSAL). If the proposed step is accepted, the final stage computed in stepping from <span class="math notranslate nohighlight">\(t_i\)</span> to <span class="math notranslate nohighlight">\(t_{i+1}\)</span> is identical to the <em>first</em> stage needed to step from <span class="math notranslate nohighlight">\(t_{i+1}\)</span> to <span class="math notranslate nohighlight">\(t_{i+2}\)</span>, so in that sense one of the stage evaluations comes at no cost. This detail is addressed in our code.</p>
+<p>Often the steps chosen adaptively clearly correspond to identifiable features of the solution. However, there are so-called <strong>stiff problems</strong> in which the time steps seem unreasonably small in relation to the observable behavior of the solution. These problems benefit from a particular type of solver and will be taken up in <a class="reference internal" href="implicit.html"><span class="doc">Implementation of multistep methods</span></a>.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol>
+<li><p>⌨ Using <a class="reference internal" href="#function-rk23"><span class="std std-ref">rk23</span></a>, solve <span class="math notranslate nohighlight">\(y'' +(1+y')^3 y = 0\)</span> over $ 0 \le t \le 4 \pi$ with the indicated initial conditions. Plot <span class="math notranslate nohighlight">\(y(t)\)</span> and <span class="math notranslate nohighlight">\(y'(t)\)</span> as a function of <span class="math notranslate nohighlight">\(t\)</span> and separately plot the solution curve parametrically in the phase plane—that is, the <span class="math notranslate nohighlight">\(\bigl(y(t),y'(t)\bigr)\)</span>-plane.</p>
+<p><strong>(a)</strong> <span class="math notranslate nohighlight">\(y(0) = 0.1, \quad y'(0) = 0\)</span></p>
+<p><strong>(b)</strong> <span class="math notranslate nohighlight">\(y(0) = 0.5, \quad y'(0) = 0\)</span></p>
+<p><strong>(c)</strong> <span class="math notranslate nohighlight">\(y(0) = 0.75, \quad y'(0) = 0\)</span></p>
+<p><strong>(d)</strong> <span class="math notranslate nohighlight">\(y(0) = 0.95, \quad y'(0) = 0\)</span></p>
+</li>
+<li><p>⌨ Solve the <a class="reference internal" href="basics.html#problem-caffeine"><span class="std std-ref">caffeine exercise</span></a> using <a class="reference internal" href="#function-rk23"><span class="std std-ref">rk23</span></a> with an error tolerance of <span class="math notranslate nohighlight">\(10^{-5}\)</span>. Plot the solution so that you can see the individual points. What is the smallest time step taken, and at what time does it occur?</p>
+</li>
+<li><p>⌨ Solve the <a class="reference internal" href="systems.html#problem-fitznag"><span class="std std-ref">FitzHugh--Nagumo exercise</span></a> using <a class="reference internal" href="#function-rk23"><span class="std std-ref">rk23</span></a>. Let the error tolerance be <span class="math notranslate nohighlight">\(10^{-k}\)</span>, increasing the integer <span class="math notranslate nohighlight">\(k\)</span> until the graph of the solutions no longer changes. (This illustrates that the error tolerance is a request, not a guarantee!)</p>
+</li>
+<li><p>✍ Derive equation <a class="reference internal" href="#equation-adaptrkglobal">(186)</a> using the stated assumption about controlling global rather than local error.</p>
+</li>
+<li><p>⌨ Solve the problem <span class="math notranslate nohighlight">\(u'=u^2-u^3\)</span>, <span class="math notranslate nohighlight">\(u(0)=0.001\)</span>, <span class="math notranslate nohighlight">\(0\le t \le 2000\)</span> and make plots as in <a class="reference internal" href="demos/adapt-basic.html"><span class="doc">Adaptive RK</span></a> that show both the solution and the time steps taken. Does the step size selection seem to be entirely explained by the local variability of the solution?</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="rk.html" title="previous page">Runge–Kutta methods</a>
+    <a class='right-next' id="next-link" href="multistep.html" title="next page">Multistep methods</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tobin A. Driscoll and Richard J. Braun<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

@@ -1,0 +1,381 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Convergence of finite differences &#8212; Fundamentals of Numerical Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/mystnb.js"></script>
+    <script src="../_static/proof.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Numerical integration" href="integration.html" />
+    <link rel="prev" title="Finite differences" href="finitediffs.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Fundamentals of Numerical Computation</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  
+  <ul class="nav sidenav_l1">
+  <li class="">
+    <a href="../frontmatter.html">Home</a>
+  </li>
+  <li class="">
+    <a href="../intro/overview.html">Introduction</a>
+  </li>
+  <li class="">
+    <a href="../linsys/overview.html">Square linear systems</a>
+  </li>
+  <li class="">
+    <a href="../leastsq/overview.html">Overdetermined linear systems</a>
+  </li>
+  <li class="">
+    <a href="../nonlineqn/overview.html">Roots of nonlinear equations</a>
+  </li>
+  <li class="active">
+    <a href="overview.html">Piecewise interpolation</a>
+  <ul class="nav sidenav_l2">
+    <li class="">
+      <a href="interpolation.html">The interpolation problem</a>
+    </li>
+    <li class="">
+      <a href="pwlin.html">Piecewise linear interpolation</a>
+    </li>
+    <li class="">
+      <a href="splines.html">Cubic splines</a>
+    </li>
+    <li class="">
+      <a href="finitediffs.html">Finite differences</a>
+    </li>
+    <li class="active">
+      <a href="">Convergence of finite differences</a>
+    </li>
+    <li class="">
+      <a href="integration.html">Numerical integration</a>
+    </li>
+    <li class="">
+      <a href="adaptive.html">Adaptive integration</a>
+    </li>
+    <li class="">
+      <a href="next.html">Next steps</a>
+    </li>
+  </ul>
+  </li>
+  <li class="">
+    <a href="../ivp/overview.html">Initial-value problems for ODEs</a>
+  </li>
+  <li class="">
+    <a href="../appendix/linear-algebra.html">Review: Linear algebra</a>
+  </li>
+  <li class="">
+    <a href="../appendix/demos.html">All demo notebooks</a>
+  </li>
+  <li class="">
+    <a href="../refs.html">References</a>
+  </li>
+  <li class="">
+    <a href="../genindex.html">Index</a>
+  </li>
+</ul>
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse" data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu" aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation" title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+            <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i class="fas fa-download"></i></button>
+
+            
+            <div class="dropdown-buttons">
+                <!-- ipynb file if we had a myst markdown file -->
+                
+                <!-- Download raw file -->
+                <a class="dropdown-buttons" href="../_sources/localapprox/fd-converge.md"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <!-- Download PDF via print -->
+                <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+            </div>
+            
+        </div>
+
+        <!-- Edit this page -->
+        
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+        
+    </div>
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#higher-order-accuracy" class="nav-link">Higher-order accuracy</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#stability" class="nav-link">Stability</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#exercises" class="nav-link">Exercises</a>
+        </li>
+    
+    </ul>
+</nav>
+
+
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="convergence-of-finite-differences">
+<h1>Convergence of finite differences<a class="headerlink" href="#convergence-of-finite-differences" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">All of the finite difference formulas in the previous section based on equally spaced nodes converge as the node spacing <span class="math notranslate nohighlight">\(h\)</span> decreases to zero. However, note that to discretize a function over an interval <span class="math notranslate nohighlight">\([a,b]\)</span>, we use <span class="math notranslate nohighlight">\(h=(b-a)/n\)</span>, which implies <span class="math notranslate nohighlight">\(n=(b-a)/h=O(h^{-1})\)</span>. As <span class="math notranslate nohighlight">\(h\to 0\)</span>, the total number of nodes needed grows without bound. So we would like to make <span class="math notranslate nohighlight">\(h\)</span> as large as possible while still achieving some acceptable accuracy.</p>
+<p id="index-1">To measure this kind of performance, we introduce the <a class="reference internal" href="overview.html#term-truncation-error"><span class="xref std std-term">truncation error</span></a> of a finite difference formula, defined as the difference between the two sides of <a class="reference internal" href="finitediffs.html#equation-fdxformula">(131)</a>:</p>
+<div class="math notranslate nohighlight" id="equation-truncfd">
+<span class="eqno">(141)<a class="headerlink" href="#equation-truncfd" title="Permalink to this equation">¶</a></span>\[\tau_f(h) = f'(0) - \frac{1}{h} \sum_{k=-p}^{q} a_k f(kh),\]</div>
+<p>where we have used translation invariance to set <span class="math notranslate nohighlight">\(x=0\)</span> for simplicity. In order to make this expression useful, we expand it in a Taylor series about <span class="math notranslate nohighlight">\(h=0\)</span> and ignore all but the leading terms.<a class="footnote-reference brackets" href="#trunc" id="id1">1</a></p>
+<div class="proof proof-type-example" id="id2">
+
+    <div class="proof-title">
+        <span class="proof-type">Example 53</span>
+        
+    </div><div class="proof-content">
+<p>The finite difference formula <a class="reference internal" href="finitediffs.html#equation-forwardfd11">(132)</a> implies</p>
+<div class="math notranslate nohighlight" id="equation-fd1trunc">
+<span class="eqno">(142)<a class="headerlink" href="#equation-fd1trunc" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+  \tau_f(h) &amp;= f'(0) - \frac{ f(h)-f(0)}{h} \\
+  &amp;=f'(0) - h^{-1} \left[ \bigl( f(0) + h f'(0) + \tfrac{1}{2}h^2f''(0)+ \cdots \bigr) - f(0) \right] \\
+  &amp; = -\frac{1}{2}h f''(0) + O(h^2).
+  \end{split}\end{split}\]</div>
+</div></div><div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/fdconverge-1.html"><span class="doc">Convergence of finite differences</span></a></p>
+</div>
+<p>The most important conclusion of <a class="reference internal" href="#equation-fd1trunc">(142)</a> is that <span class="math notranslate nohighlight">\(\tau_f(h)=O(h)\)</span>. The dependence on <span class="math notranslate nohighlight">\(h\)</span> raised to the first power leads us to call this a <strong>first-order accurate</strong> formula. In a first-order formula, cutting <span class="math notranslate nohighlight">\(h\)</span> in half should reduce the error in the <span class="math notranslate nohighlight">\(f'\)</span> estimate by about half as well, when <span class="math notranslate nohighlight">\(h\)</span> is small enough.</p>
+<div class="section" id="higher-order-accuracy">
+<h2>Higher-order accuracy<a class="headerlink" href="#higher-order-accuracy" title="Permalink to this headline">¶</a></h2>
+<p id="index-2">As a rule, including more function values in a finite difference formula (i.e., increasing <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> in <a class="reference internal" href="finitediffs.html#equation-fdxformula">(131)</a>) gives a truncation error that depends on a higher power of <span class="math notranslate nohighlight">\(h\)</span> and thus vanishes more quickly as <span class="math notranslate nohighlight">\(h\to 0\)</span>. The power of <span class="math notranslate nohighlight">\(h\)</span> in the leading term of the truncation error is known as the <a class="reference internal" href="overview.html#term-order-of-accuracy"><span class="xref std std-term">order of accuracy</span></a>.</p>
+<div class="proof proof-type-example" id="id3">
+
+    <div class="proof-title">
+        <span class="proof-type">Example 54</span>
+        
+    </div><div class="proof-content">
+<p>We compute the truncation error of <a class="reference internal" href="finitediffs.html#equation-centerfd12">(135)</a>:</p>
+<div class="math notranslate nohighlight" id="equation-fd2trunc">
+<span class="eqno">(143)<a class="headerlink" href="#equation-fd2trunc" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
+  \tau_f(h) &amp;= f'(0) - \frac{ f(h)-f(-h)}{2h}\\
+  &amp;= f'(0) - (2h)^{-1} \left[ \bigl( f(0) + h f'(0) + \tfrac{1}{2}h^2f''(0)+ \tfrac{1}{6}h^3f'''(0)+ O(h^4) \bigr) \right.\\
+  &amp;\qquad - \left.  \bigl( f(0) - h f'(0) + \tfrac{1}{2}h^2f''(0) - \tfrac{1}{6}h^3f'''(0)+O(h^4) \bigr) \right] \\
+  &amp;= (2h)^{-1} \left[ \tfrac{1}{3}h^3f'''(0) + O(h^4) \right] = O(h^2).
+\end{split}\end{split}\]</div>
+<p>Because the lowest-order term is proportional to <span class="math notranslate nohighlight">\(h^2\)</span>, we say that the method has order of accuracy equal to 2.</p>
+</div></div><div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/fdconverge-2.html"><span class="doc">Comparison of 1st and 2nd order</span></a></p>
+</div>
+<p>Equation <a class="reference internal" href="#equation-fd2trunc">(143)</a> implies that <a class="reference internal" href="finitediffs.html#equation-centerfd12">(135)</a> is second-order accurate. Reducing <span class="math notranslate nohighlight">\(h\)</span> by a factor of two should cut the error in the <span class="math notranslate nohighlight">\(f'\)</span> estimate by a factor of roughly four. This convergence is much more rapid than for the first-order formula <a class="reference internal" href="finitediffs.html#equation-forwardfd11">(132)</a>.</p>
+</div>
+<div class="section" id="stability">
+<h2>Stability<a class="headerlink" href="#stability" title="Permalink to this headline">¶</a></h2>
+<p>The truncation error <span class="math notranslate nohighlight">\(\tau_f(h)\)</span> of a finite difference formula is dominated by a leading term <span class="math notranslate nohighlight">\(O(h^m)\)</span> for an integer <span class="math notranslate nohighlight">\(m\)</span>. This error decreases as <span class="math notranslate nohighlight">\(h\to 0\)</span>. However, we have not yet accounted for the effects of roundoff error. To keep matters as simple as possible, let’s consider the forward difference</p>
+<div class="math notranslate nohighlight">
+\[\delta(h) = \frac{f(x+h)-f(x)}{h}.\]</div>
+<p>As <span class="math notranslate nohighlight">\(h\to 0\)</span>, the numerator approaches zero even though the values <span class="math notranslate nohighlight">\(f(x+h)\)</span> and <span class="math notranslate nohighlight">\(f(x)\)</span> are not necessarily near zero. This is the recipe for subtractive cancellation error! In fact, finite difference formulas are inherently ill-conditioned as <span class="math notranslate nohighlight">\(h\to 0\)</span> when evaluated in floating point arithmetic.</p>
+<p>To be precise, recall that the condition number for the problem of computing <span class="math notranslate nohighlight">\(f(x+h)-f(x)\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\kappa(h) = \frac{ \max\{|f(x+h)|,|f(x)|\} }{ |f(x+h)-f(x) | },\]</div>
+<p>implying a relative error of size <span class="math notranslate nohighlight">\(\kappa(h) \epsilon_\text{mach}\)</span> in its computation. Hence the numerical value we actually compute for <span class="math notranslate nohighlight">\(\delta\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+\tilde{\delta}(h) &amp;= \frac{f(x+h)-f(x)}{h}\, (1+\kappa(h)\epsilon_\text{mach}) \\
+&amp;= \delta(h) + \frac{ \max\{|f(x+h)|,|f(x)|\} }{ |f(x+h)-f(x) | }\cdot \frac{f(x+h)-f(x)}{h} \cdot \epsilon_\text{mach}\\
+&amp;= \delta(h) \pm  \frac{ \max\{|f(x+h)|,|f(x)|\} }{ h}\,\epsilon_\text{mach}.
+\end{split}\end{split}\]</div>
+<p>As <span class="math notranslate nohighlight">\(h\to 0\)</span>, <span class="math notranslate nohighlight">\(f(x+h)=f(x)+O(h)\)</span>, so we can simplify the maximization in the expression to get</p>
+<div class="math notranslate nohighlight">
+\[\bigl| \tilde{\delta}(h) - \delta(h) \bigr| = |f(x)| \epsilon_\text{mach} h^{-1} + \epsilon_\text{mach} \cdot O(1).\]</div>
+<p>Hence as <span class="math notranslate nohighlight">\(h \to 0\)</span>, the roundoff error is <span class="math notranslate nohighlight">\(O(h^{-1})\)</span>, which grows without bound. Combining truncation error with roundoff error leads to</p>
+<div class="math notranslate nohighlight" id="equation-fdround">
+<span class="eqno">(144)<a class="headerlink" href="#equation-fdround" title="Permalink to this equation">¶</a></span>\[\bigl|  f'(x) - \tilde{\delta}(h) \bigr| \le \bigl| \tau_f(h) \bigr| + \bigl|f(x) \bigr|\, \epsilon_\text{mach} h^{-1}.\]</div>
+<p id="index-3">Equation <a class="reference internal" href="#equation-fdround">(144)</a> quantifies the contributions of both truncation and roundoff errors. While the truncation error <span class="math notranslate nohighlight">\(\tau\)</span> vanishes as <span class="math notranslate nohighlight">\(h\)</span> decreases, the roundoff error actually <em>increases</em> thanks to the subtractive cancellation. At some value of <span class="math notranslate nohighlight">\(h\)</span> the two error contributions will be of roughly equal size. This occurs roughly when</p>
+<div class="math notranslate nohighlight">
+\[\bigl|f(x)\bigr|\, \epsilon_\text{mach} h^{-1} \approx C h, \quad \text{or} \quad h \approx K \sqrt{\epsilon_\text{mach}}\]</div>
+<p>for a constant <span class="math notranslate nohighlight">\(K\)</span> that depends on <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(f\)</span>, but not <span class="math notranslate nohighlight">\(h\)</span>. For a method of truncation order <span class="math notranslate nohighlight">\(m\)</span>, the details of the subtractive cancellation are a bit different, but the conclusion generalizes to</p>
+<div class="math notranslate nohighlight" id="equation-fdtruncbalance">
+<span class="eqno">(145)<a class="headerlink" href="#equation-fdtruncbalance" title="Permalink to this equation">¶</a></span>\[\epsilon_\text{mach} h^{-1} \approx C h^m, \quad \text{or} \quad h \approx K \epsilon_\text{mach}^{1/(m+1)}.\]</div>
+<p>Finally, at the optimal <span class="math notranslate nohighlight">\(h\)</span> from <a class="reference internal" href="#equation-fdtruncbalance">(145)</a>, both the truncation and roundoff errors are</p>
+<div class="math notranslate nohighlight" id="equation-fdoptimal">
+<span class="eqno">(146)<a class="headerlink" href="#equation-fdoptimal" title="Permalink to this equation">¶</a></span>\[O(h^m) = O\left( \epsilon_\text{mach}^{ m/(m+1) } \right).\]</div>
+<div class="demo sidebar">
+<p class="sidebar-title">Demo</p>
+<p><a class="reference internal" href="demos/fdconverge-round.html"><span class="doc">Roundoff in finite differences</span></a></p>
+</div>
+<p>Hence for a first order formula (<span class="math notranslate nohighlight">\(m=1\)</span>), we can expect only <span class="math notranslate nohighlight">\(O\left(\sqrt{\epsilon_\text{mach}}\right)\)</span> error, or about half of the number of accurate machine digits. As <span class="math notranslate nohighlight">\(m\)</span> increases, we get ever closer to using the full accuracy available.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Higher-order finite difference methods are both more efficient and less vulnerable to roundoff than low-order methods.</p>
+</div>
+<p>The observations in <a class="reference internal" href="demos/fdconverge-round.html"><span class="doc">Roundoff in finite differences</span></a> match the analysis above quite well, with the optimal <span class="math notranslate nohighlight">\(h\)</span> becoming larger and the optimal error getting smaller as the order increases. Thus, higher-order finite difference methods are both more efficient and less vulnerable to roundoff than low-order methods.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol>
+<li><p>⌨ Write a code to evaluate the centered 2nd-order finite difference approximation to <span class="math notranslate nohighlight">\(f'(\pi/7)\)</span> for <span class="math notranslate nohighlight">\(f(x)=\cos(x)\)</span> and <span class="math notranslate nohighlight">\(h=2^{-1},2^{-2},\ldots,2^{-7}\)</span>. On a log–log graph, plot the error as a function of  <span class="math notranslate nohighlight">\(h\)</span> and compare it graphically to second-order convergence.</p>
+</li>
+<li><p>✍ Derive the first two nonzero terms of the Taylor series at <span class="math notranslate nohighlight">\(h=0\)</span> of the truncation error <span class="math notranslate nohighlight">\(\tau_{f}(h)\)</span> for the formula <a class="reference internal" href="finitediffs.html#equation-backwardfd11">(133)</a>.</p>
+</li>
+<li><p>✍ Calculate the first nonzero term in the Taylor series of the truncation error <span class="math notranslate nohighlight">\(\tau_{f}(h)\)</span> for the finite difference formula defined by the second row of~<a class="reference internal" href="finitediffs.html#table-fdforward"><span class="std std-ref">Weights for forward finite difference formulas.</span></a>.</p>
+</li>
+<li><p>✍ Calculate the first nonzero term in the Taylor series of the truncation error <span class="math notranslate nohighlight">\(\tau_{f}(h)\)</span> for the finite difference formula defined by the third row of~<a class="reference internal" href="finitediffs.html#table-fdforward"><span class="std std-ref">Weights for forward finite difference formulas.</span></a>.</p>
+</li>
+<li><p>✍ Using natural extensions of our definitions, show that the formula <a class="reference internal" href="finitediffs.html#equation-centerfd22">(137)</a> is second-order accurate.</p>
+</li>
+<li id="problem-fd-muc"><p>✍  A different way to derive finite difference formulas is the <strong>method of undetermined coefficients</strong>. Starting from <a class="reference internal" href="finitediffs.html#equation-fdxformula">(131)</a>,</p>
+<div class="math notranslate nohighlight">
+\[f'(x) \approx \frac{1}{h}\sum_{k=-p}^q a_k f(x+kh),\]</div>
+<p>let each <span class="math notranslate nohighlight">\(f(x+k h)\)</span> be expanded in a series around <span class="math notranslate nohighlight">\(h=0\)</span>. When the coefficients of powers of <span class="math notranslate nohighlight">\(h\)</span> are collected, one obtains</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{h} \sum_{k=-p}^q a_k f(x+kh) = \frac{b_0}{h} + b_1 f'(x) + b_2 f''(x)h + \cdots,\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[b_i = \sum_{k=-p}^q k^i a_k.\]</div>
+<p>In order to make the result as close as possible to <span class="math notranslate nohighlight">\(f'(x)\)</span>, we impose the conditions</p>
+<div class="math notranslate nohighlight">
+\[b_0 = 0,\, b_1=1,\, b_2=0,\, b_3=0,\,\ldots,\,b_{p+q}=0.\]</div>
+<p>This provides a system of linear equations for the weights.</p>
+<p><strong>(a)</strong> For <span class="math notranslate nohighlight">\(p=q=2\)</span>, write out the system of equations for <span class="math notranslate nohighlight">\(a_{-2}\)</span>, <span class="math notranslate nohighlight">\(a_{-1}\)</span>, <span class="math notranslate nohighlight">\(a_0\)</span>, <span class="math notranslate nohighlight">\(a_1\)</span>, <span class="math notranslate nohighlight">\(a_2\)</span>.</p>
+<p><strong>(b)</strong> Verify that the coefficients from the appropriate row of <a class="reference internal" href="finitediffs.html#table-fdcenter"><span class="std std-numref">Table 2</span></a> satisfy the equations you wrote down in part (a).</p>
+<p><strong>(c)</strong> Derive the finite difference formula for <span class="math notranslate nohighlight">\(p=1\)</span>, <span class="math notranslate nohighlight">\(q=2\)</span> using the method of undetermined coefficients.</p>
+</li>
+</ol>
+<hr class="docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="trunc"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>The term <em>truncation error</em> is derived from the idea that the finite difference formula, being finite, has to truncate the series representation and thus cannot be exactly correct for all functions.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="finitediffs.html" title="previous page">Finite differences</a>
+    <a class='right-next' id="next-link" href="integration.html" title="next page">Numerical integration</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tobin A. Driscoll and Richard J. Braun<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>
