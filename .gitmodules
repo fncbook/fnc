@@ -1,0 +1,3 @@
+[submodule "FundamentalsNumericalComputation.jl"]
+	path = FundamentalsNumericalComputation.jl
+	url = https://github.com/tobydriscoll/FundamentalsNumericalComputation.jl.git
