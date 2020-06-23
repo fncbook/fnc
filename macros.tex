@@ -1,0 +1,67 @@
+% \usepackage{listings}
+% \usepackage{matlab-prettifier}
+% \usepackage{amsmath,amsthm,amssymb}
+% %\usepackage{algorithmic}
+% \usepackage{matlab-prettifier}
+\usepackage{marvosym}  % WritingHand and Keyboard symbols
+%\usepackage{bm} % better bold math
+
+\DeclareUnicodeCharacter{2328}{\Keyboard}
+\DeclareUnicodeCharacter{270D}{\WritingHand}
+\DeclareUnicodeCharacter{22C5}{\cdot}
+
+\newcommand{\nat}{\mathbb{N}}          % Natural numbers
+\newcommand{\integer}{\mathbb{Z}}      % Integers
+\newcommand{\real}{ {\mathbb{R}} }     % Reals
+\newcommand{\float}{ {\mathbb{F}} }     % Reals
+\newcommand{\rmn}[2]{ \mathbb{R}^{#1\times#2} }     % Reals
+\newcommand{\complex}{ {\mathbb{C}} }  % Complex
+\newcommand{\macheps}{\ensuremath \varepsilon_{\text{mach}}}
+
+\newcommand{\goesto}{\rightarrow}
+\newcommand{\pp}[2]{\frac{\partial{#1}}{\partial{#2}}} % partial derivs
+\newcommand{\ppp}[2]{\frac{{\partial}^2{#1}}{\partial{{#2}^2}}}
+\newcommand{\ppdd}[3]{\frac{\partial^2#1}{\partial#2\partial#3}}
+\newcommand{\dd}[2]{\frac{d{#1}}{d{#2}}}      % total deriv $\dd{f}{x}$
+\newcommand{\ddd}[2]{\frac{d^2{#1}}{d{#2}^2}}
+\newcommand{\DD}[2]{\frac{D{#1}}{D{#2}}}              % convected deriv
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\lnorm}{\|}
+\newcommand{\rnorm}{\|}
+\newcommand{\twonorm}[1]{\lnorm #1 \rnorm_2}
+\newcommand{\onenorm}[1]{\lnorm #1 \rnorm_1}
+\newcommand{\infnorm}[1]{\lnorm #1 \rnorm_\infty}
+\newcommand{\anynorm}[2]{\lnorm #1 \rnorm_{#2}}
+\newcommand{\norm}[1]{\lnorm #1 \rnorm}
+\newcommand{\lgnorm}[1]{\left\| #1 \right\|}
+\newcommand{\bignorm}[1]{\bigl\| #1 \bigr\|}
+\newcommand{\Bignorm}[1]{\Bigl\| #1 \Bigr\|}
+\newcommand{\biggnorm}[1]{\biggl\| #1 \biggr\|}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\innerprod}[2]{\langle #1,#2 \rangle}
+\newcommand{\lone}{$1$-norm}
+\newcommand{\ltwo}{$2$-norm}
+\newcommand{\linf}{$\infty$-norm}
+\newcommand{\ee}[1]{\times 10^{#1}}
+
+\newcommand{\eye}[1]{\mathbf{e}_{#1}}
+\newcommand{\meye}{\m{I}}
+
+\newcommand{\Qhat}{\widehat{\mQ}}
+\newcommand{\Rhat}{\widehat{\mR}}
+\newcommand{\cw}[1]{\bigl[\!\!\bigl[ {#1} \bigr]\!\!\bigr]}
+\newcommand{\jac}[2]{\frac{\bfd \bm{#1}}{\bfd \bm{#2}}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\fl}{\operatorname{fl}}
+\newcommand{\Span}[1]{\langle#1\rangle}
+\newcommand{\spr}[1]{^{(#1)}}%\newcommand{\refeq}[1]{\ref{eq:#1}}
+\newcommand{\circop}[1]{\makebox[0pt][l]{$\bigcirc$}\hspace{1pt}#1}
+\newcommand{\la}{\leftarrow}
+\newcommand{\lufact}{{LU} factorization\xspace}
+\newcommand{\qrfact}{{QR} factorization\xspace}
+\newcommand{\myvec}{\operatorname{vec}}
+\newcommand{\unvec}{\operatorname{unvec}}
+\newcommand{\kron}[2]{#1 \otimes #2}
+\newcommand{\mtx}{\operatorname{mtx}}
+\newcommand{\fun}{\operatorname{fun}}

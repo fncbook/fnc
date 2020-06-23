@@ -1,0 +1,150 @@
+- file: frontmatter
+- file: intro/overview
+  sections:
+    - file: intro/floating-point
+    - file: intro/conditioning
+    - file: intro/algorithms
+    - file: intro/stability
+    - file: intro/next
+- file: linsys/overview
+  sections:
+    - file: linsys/polyinterp
+    - file: linsys/matrices
+    - file: linsys/linear-systems
+    - file: linsys/lu
+    - file: linsys/efficiency
+    - file: linsys/pivoting
+    - file: linsys/norms
+    - file: linsys/condition-number
+    - file: linsys/structure
+    - file: linsys/next
+- file: leastsq/overview
+  sections:
+    - file: leastsq/fitting
+    - file: leastsq/normaleqns
+    - file: leastsq/qr
+    - file: leastsq/house
+    - file: leastsq/next
+- file:  nonlineqn/overview
+  sections:
+    - file: nonlineqn/rootproblem
+    - file: nonlineqn/fixed-point
+    - file: nonlineqn/newton
+    - file: nonlineqn/secant
+    - file: nonlineqn/newtonsys
+    - file: nonlineqn/quasinewton
+    - file: nonlineqn/nlsq
+    - file: nonlineqn/next
+- file:  localapprox/overview
+  sections:
+    - file: localapprox/interpolation
+    - file: localapprox/pwlin
+    - file: localapprox/splines
+    - file: localapprox/finitediffs
+    - file: localapprox/fd-converge
+    - file: localapprox/integration
+    - file: localapprox/adaptive
+    - file: localapprox/next
+- file:  ivp/overview
+  sections:
+    - file: ivp/basics
+    - file: ivp/euler
+    - file: ivp/systems
+    - file: ivp/rk
+    - file: ivp/adaptive
+    - file: ivp/multistep
+    - file: ivp/implicit
+    - file: ivp/zerostability
+    - file: ivp/next
+- file: appendix/linear-algebra
+- file: appendix/demos
+  sections:
+    - file: appendix/demos-01
+      sections: 
+        - file: intro/demos/float-julia
+        - file: intro/demos/float-accuracy
+        - file: intro/demos/float-arithmetic
+        - file: intro/demos/algorithms-horner
+        - file: intro/demos/stability-quadbad
+        - file: intro/demos/stability-quadgood
+        - file: intro/demos/stability-roots
+    - file: appendix/demos-02
+      sections:
+        - file: linsys/demos/interp-vander
+        - file: linsys/demos/matrices-julia
+        - file: linsys/demos/systems-backslash
+        - file: linsys/demos/systems-triangular
+        - file: linsys/demos/lu-gauss
+        - file: linsys/demos/lu-factors
+        - file: linsys/demos/lu-function
+        - file: linsys/demos/flops-mvmult
+        - file: linsys/demos/flops-loglog
+        - file: linsys/demos/flops-lufact
+        - file: linsys/demos/pivot-fail
+        - file: linsys/demos/pivot-fixed
+        - file: linsys/demos/norms-vector
+        - file: linsys/demos/norms-matrix
+        - file: linsys/demos/condition-bound
+        - file: linsys/demos/structure-banded
+        - file: linsys/demos/structure-timing
+        - file: linsys/demos/structure-symm
+        - file: linsys/demos/structure-cholesky
+    - file: appendix/demos-03
+      sections:
+        - file: leastsq/demos/fitting-tempinterp
+        - file: leastsq/demos/fitting-tempfit
+        - file: leastsq/demos/fitting-pirate
+        - file: leastsq/demos/normaleqns-instab
+        - file: leastsq/demos/qr-qrfact
+        - file: leastsq/demos/house-qr
+    - file: appendix/demos-04
+      sections:
+        - file: nonlineqn/demos/roots-bessel
+        - file: nonlineqn/demos/roots-cond
+        - file: nonlineqn/demos/fp-spiral
+        - file: nonlineqn/demos/fp-converge
+        - file: nonlineqn/demos/newton-line
+        - file: nonlineqn/demos/newton-converge
+        - file: nonlineqn/demos/newton-usage
+        - file: nonlineqn/demos/secant-line
+        - file: nonlineqn/demos/secant-converge
+        - file: nonlineqn/demos/secant-iqi
+        - file: nonlineqn/demos/system-iter
+        - file: nonlineqn/demos/system-usage
+        - file: nonlineqn/demos/quasi-levenberg
+        - file: nonlineqn/demos/nlsq-MM
+    - file: appendix/demos-05
+      sections:
+        - file: localapprox/demos/interp-global
+        - file: localapprox/demos/interp-pwise
+        - file: localapprox/demos/interp-cond
+        - file: localapprox/demos/pwlin-hat
+        - file: localapprox/demos/pwlin-usage
+        - file: localapprox/demos/pwlin-converge
+        - file: localapprox/demos/splines
+        - file: localapprox/demos/fd-weights
+        - file: localapprox/demos/fdconverge-1
+        - file: localapprox/demos/fdconverge-2
+        - file: localapprox/demos/fdconverge-round
+        - file: localapprox/demos/int-antideriv
+        - file: localapprox/demos/int-trap
+        - file: localapprox/demos/int-extrap
+        - file: localapprox/demos/adapt-motive
+        - file: localapprox/demos/adapt-usage
+    - file: appendix/demos-06
+      sections:
+        - file: ivp/demos/basics-first
+        - file: ivp/demos/basics-usage
+        - file: ivp/demos/basics-sing
+        - file: ivp/demos/basics-cond
+        - file: ivp/demos/euler-converge
+        - file: ivp/demos/systems-exp
+        - file: ivp/demos/systems-predator
+        - file: ivp/demos/rk-converge
+        - file: ivp/demos/adapt-basic
+        - file: ivp/demos/adapt-sing
+        - file: ivp/demos/implicit-ab4
+        - file: ivp/demos/implicit-stiff
+        - file: ivp/demos/zs-LIAF
+- file: refs
+- file: genindex
