@@ -1,4 +1,4 @@
-*** Content of the site, including text, figures, and other explanatory or educational material, are covered by the following license:
+*** Content of the site, including text, figures, and other explanatory or educational material (generally all material found in book/_build) are covered by the following license:
 
 Copyright (c) 2020 by Tobin A. Driscoll and Richard J. Braun
 
@@ -432,7 +432,7 @@ Creative Commons may be contacted at creativecommons.org.
 
 
 
-*** The software files used to generate the content are subject to the following license:
+*** The software files in src/ and /test/ and those in book/ used to generate the content, are subject to the following license:
 
 MIT License
 
