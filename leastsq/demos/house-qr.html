@@ -219,6 +219,13 @@
 <p>We will use Householder reflections to produce a QR factorization of the matrix</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">LinearAlgebra</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mf">1.</span><span class="p">:</span><span class="mf">9.</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">m</span><span class="p">,</span><span class="n">n</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
@@ -241,20 +248,19 @@
 <p>Applying the Householder definitions gives us</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">LinearAlgebra</span>
-<span class="n">v</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="n">norm</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="p">;</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="n">norm</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="p">;</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
 <span class="n">P</span> <span class="o">=</span> <span class="n">I</span> <span class="o">-</span> <span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">v</span><span class="s1">&#39;*v)*(v*v&#39;</span><span class="p">)</span>   <span class="c1"># reflector</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>6×6 Array{Float64,2}:
- 0.549972   0.31427    0.235702   0.471405   0.31427    0.471405
- 0.31427    0.780535  -0.164599  -0.329198  -0.219465  -0.329198
- 0.235702  -0.164599   0.876551  -0.246898  -0.164599  -0.246898
- 0.471405  -0.329198  -0.246898   0.506204  -0.329198  -0.493796
- 0.31427   -0.219465  -0.164599  -0.329198   0.780535  -0.329198
- 0.471405  -0.329198  -0.246898  -0.493796  -0.329198   0.506204
+ 0.0636285   0.572656    0.381771    0.509028    0.509028    0.0636285
+ 0.572656    0.649781   -0.233479   -0.311306   -0.311306   -0.0389132
+ 0.381771   -0.233479    0.844347   -0.207537   -0.207537   -0.0259422
+ 0.509028   -0.311306   -0.207537    0.723284   -0.276716   -0.0345895
+ 0.509028   -0.311306   -0.207537   -0.276716    0.723284   -0.0345895
+ 0.0636285  -0.0389132  -0.0259422  -0.0345895  -0.0345895   0.995676
 </pre></div>
 </div>
 </div>
@@ -268,12 +274,12 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>6-element Array{Float64,1}:
- 12.727922061357855
- -4.440892098500626e-16
+ 15.71623364550171
+  8.881784197001252e-16
   0.0
- -8.881784197001252e-16
- -4.440892098500626e-16
- -8.881784197001252e-16
+  4.440892098500626e-16
+  6.38378239159465e-16
+  1.1102230246251565e-16
 </pre></div>
 </div>
 </div>
@@ -287,12 +293,12 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>6×4 Array{Float64,2}:
- 12.7279       13.3565    5.18545   12.6494
-  4.44089e-16   0.56107   0.775494  -0.945134
- -4.44089e-16   5.6708    4.33162    1.04115
- -8.88178e-16   1.3416   -2.33676   -2.9177
- -4.44089e-16  -2.43893  -1.22451    0.0548663
- -8.88178e-16  -3.6584   -1.33676    3.0823
+ 15.7162       11.644     13.4256     11.3259
+  2.77556e-16  -0.451705   0.0124461  -3.31499
+  4.78784e-16   4.69886    2.34163     1.79001
+  6.38378e-16   2.93182   -1.21116     1.38668
+  6.38378e-16   3.93182    0.788841    1.38668
+  1.11022e-16   3.61648    7.22361     1.29833
 </pre></div>
 </div>
 </div>
@@ -306,11 +312,11 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>5×3 Array{Float64,2}:
-  0.56107   0.775494  -0.945134
-  5.6708    4.33162    1.04115
-  1.3416   -2.33676   -2.9177
- -2.43893  -1.22451    0.0548663
- -3.6584   -1.33676    3.0823
+ -0.451705   0.0124461  -3.31499
+  4.69886    2.34163     1.79001
+  2.93182   -1.21116     1.38668
+  3.93182    0.788841    1.38668
+  3.61648    7.22361     1.29833
 </pre></div>
 </div>
 </div>
@@ -334,12 +340,12 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>6×4 Array{Float64,2}:
- 12.7279       13.3565        5.18545    12.6494
-  4.44089e-16   7.32154       4.06209    -1.35909
- -4.44089e-16  -4.71773e-16   1.57477     1.38838
- -8.88178e-16  -1.45119e-16  -2.98898    -2.83555
- -4.44089e-16   1.01243e-16  -0.0388231  -0.0944733
- -8.88178e-16   2.43925e-16   0.441765    2.85829
+ 15.7162       11.644        13.4256    11.3259
+  2.77556e-16   7.70824       4.75751    3.12931
+  4.78784e-16  -4.33524e-16  -0.390791  -1.9209
+  6.38378e-16  -3.45909e-17  -2.91603   -0.928715
+  6.38378e-16   1.07917e-16  -1.49754   -1.71846
+  1.11022e-16  -1.92671e-16   5.1206    -1.55777
 </pre></div>
 </div>
 </div>
@@ -366,12 +372,12 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>6×4 Array{Float64,2}:
- 12.7279       13.3565        5.18545      12.6494
-  4.44089e-16   7.32154       4.06209      -1.35909
- -4.44089e-16  -4.71773e-16   3.40743       3.50063
- -8.88178e-16  -1.45119e-16  -3.54491e-16   2.4274
- -4.44089e-16   1.01243e-16   1.40122e-18  -2.76797e-18
- -8.88178e-16   2.43925e-16   1.15945e-16  -5.98796e-17
+ 15.7162       11.644        13.4256       11.3259
+  2.77556e-16   7.70824       4.75751       3.12931
+  4.78784e-16  -4.33524e-16   6.09255      -0.319144
+  6.38378e-16  -3.45909e-17  -4.75953e-17   3.13533
+  6.38378e-16   1.07917e-16  -7.63977e-17  -6.65035e-17
+  1.11022e-16  -1.92671e-16   7.9774e-18   -1.46305e-16
 </pre></div>
 </div>
 </div>

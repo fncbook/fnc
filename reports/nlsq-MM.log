@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "/Users/driscoll/anaconda3/lib/python3.7/site-packages/jupyter_cache/executors/basic.py", line 157, in execute
+    executenb(nb_bundle.nb, cwd=tmpdirname)
+  File "/Users/driscoll/anaconda3/lib/python3.7/site-packages/nbconvert/preprocessors/execute.py", line 737, in executenb
+    return ep.preprocess(nb, resources, km=km)[0]
+  File "/Users/driscoll/anaconda3/lib/python3.7/site-packages/nbconvert/preprocessors/execute.py", line 405, in preprocess
+    nb, resources = super(ExecutePreprocessor, self).preprocess(nb, resources)
+  File "/Users/driscoll/anaconda3/lib/python3.7/site-packages/nbconvert/preprocessors/base.py", line 69, in preprocess
+    nb.cells[index], resources = self.preprocess_cell(cell, resources, index)
+  File "/Users/driscoll/anaconda3/lib/python3.7/site-packages/nbconvert/preprocessors/execute.py", line 448, in preprocess_cell
+    raise CellExecutionError.from_cell_and_msg(cell, out)
+nbconvert.preprocessors.execute.CellExecutionError: An error occurred while executing the following cell:
+------------------
+m = 25;
+x = LinRange(0.05,6,m)
+yf = @. 2*x/(0.5+x)                   # exactly on the curve
+@. y = yf + 0.15*cos(2*exp(x/16)*x);     # noise added
+------------------
+
+UndefVarError: y not defined
+
+Stacktrace:
+ [1] top-level scope at In[2]:4
+UndefVarError: UndefVarError: y not defined
+

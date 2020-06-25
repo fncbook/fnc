@@ -220,7 +220,13 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">LinearAlgebra</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mf">1.</span><span class="p">:</span><span class="mf">9.</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mf">1.</span><span class="p">:</span><span class="mf">9.</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
 <span class="nd">@show</span> <span class="n">m</span><span class="p">,</span><span class="n">n</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -241,12 +247,12 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>6×6 LinearAlgebra.QRCompactWYQ{Float64,Array{Float64,2}}:
- -0.0808452  -0.379913   0.676372   0.615021   -0.0338282  -0.110706
- -0.16169    -0.625273  -0.479752   0.0197562  -0.405314   -0.433657
- -0.727607    0.213701  -0.30612    0.43689    -0.0526172   0.370904
- -0.565916    0.300764   0.367015  -0.39483    -0.121875   -0.532761
- -0.242536   -0.332424  -0.111188  -0.0916315   0.888674   -0.14202
- -0.242536   -0.466976   0.267556  -0.515945   -0.164961    0.598425
+ -0.469776   0.330386   -0.489297    0.429103  -0.495049   -0.0392539
+ -0.469776  -0.420099    0.0121287   0.203625   0.381081   -0.644976
+ -0.058722   0.0569334  -0.66692    -0.711284   0.147783   -0.144096
+ -0.469776   0.330386    0.561253   -0.483729  -0.292812   -0.188197
+ -0.234888   0.602976    0.0231465   0.143916   0.70795     0.242501
+ -0.528498  -0.488247   -0.0109272  -0.117375   0.0305177   0.683723
 </pre></div>
 </div>
 </div>
@@ -259,10 +265,10 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>4×4 Array{Float64,2}:
- -12.3693  -14.5521   -8.4079   -5.49747
-   0.0      -7.43205  -8.42932  -5.11299
-   0.0       0.0       7.56663   4.58312
-   0.0       0.0       0.0       5.71228
+ -17.0294  -9.27808  -14.5631    -10.8636
+   0.0      7.99483   -0.514988   -0.849687
+   0.0      0.0       -4.75941    -0.494919
+   0.0      0.0        0.0        -7.14254
 </pre></div>
 </div>
 </div>
@@ -276,12 +282,12 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>6×4 Array{Float64,2}:
- -0.0808452  -0.379913   0.676372   0.615021
- -0.16169    -0.625273  -0.479752   0.0197562
- -0.727607    0.213701  -0.30612    0.43689
- -0.565916    0.300764   0.367015  -0.39483
- -0.242536   -0.332424  -0.111188  -0.0916315
- -0.242536   -0.466976   0.267556  -0.515945
+ -0.469776   0.330386   -0.489297    0.429103
+ -0.469776  -0.420099    0.0121287   0.203625
+ -0.058722   0.0569334  -0.66692    -0.711284
+ -0.469776   0.330386    0.561253   -0.483729
+ -0.234888   0.602976    0.0231465   0.143916
+ -0.528498  -0.488247   -0.0109272  -0.117375
 </pre></div>
 </div>
 </div>
@@ -295,7 +301,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>8.661118365077505e-16
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>7.771754323738992e-16
 </pre></div>
 </div>
 </div>
@@ -309,10 +315,10 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>4×4 Array{Float64,2}:
-  2.22045e-16   6.32911e-17   2.74753e-17  -1.26943e-16
-  6.32911e-17   0.0           6.92806e-17  -1.09241e-16
-  2.74753e-17   6.92806e-17   2.22045e-16  -6.70553e-17
- -1.26943e-16  -1.09241e-16  -6.70553e-17  -6.66134e-16
+ -3.33067e-16   3.21048e-17  -1.02427e-16   2.87912e-16
+  3.21048e-17   0.0          -4.4437e-17   -6.45164e-17
+ -1.02427e-16  -4.4437e-17    2.22045e-16   1.68667e-16
+  2.87912e-16  -6.45164e-17   1.68667e-16   0.0
 </pre></div>
 </div>
 </div>

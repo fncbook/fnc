@@ -258,6 +258,13 @@
 <p>Here is a matrix with both lower and upper bandwidth equal to one. Such a matrix is called tridiagonal.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">FundamentalsNumericalComputation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">2</span> <span class="o">-</span><span class="mi">1</span>  <span class="mi">0</span>  <span class="mi">0</span>  <span class="mi">0</span>  <span class="mi">0</span>
       <span class="mi">4</span>  <span class="mi">2</span> <span class="o">-</span><span class="mi">1</span>  <span class="mi">0</span>  <span class="mi">0</span>  <span class="mi">0</span>
       <span class="mi">0</span>  <span class="mi">3</span>  <span class="mi">0</span> <span class="o">-</span><span class="mi">1</span>  <span class="mi">0</span>  <span class="mi">0</span>
@@ -282,58 +289,41 @@
 <p>We can extract the elements on any diagonal using the <code class="docutils literal notranslate"><span class="pre">diag</span></code> command. The “main” or central diagonal is numbered zero, above and to the right of that is positive, and below and to the left is negative.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">LinearAlgebra</span>
-<span class="n">diag_main</span> <span class="o">=</span> <span class="n">diag</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span> <span class="n">diag_main</span> <span class="o">=</span> <span class="n">diag</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>6-element Array{Int64,1}:
- 2
- 2
- 0
- 2
- 1
- 2
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>diag_main = diag(A, 0) = [2, 2, 0, 2, 1, 2]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">diag_plusone</span> <span class="o">=</span> <span class="n">diag</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span> <span class="n">diag_plusone</span> <span class="o">=</span> <span class="n">diag</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>5-element Array{Int64,1}:
- -1
- -1
- -1
- -1
- -1
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>diag_plusone = diag(A, 1) = [-1, -1, -1, -1, -1]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">diag_minusone</span> <span class="o">=</span> <span class="n">diag</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span> <span class="n">diag_minusone</span> <span class="o">=</span> <span class="n">diag</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>5-element Array{Int64,1}:
- 4
- 3
- 2
- 1
- 0
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>diag_minusone = diag(A, -1) = [4, 3, 2, 1, 0]
 </pre></div>
 </div>
 </div>
 </div>
-<p>We can also put whatever numbers we like onto any diagonal with the <code class="docutils literal notranslate"><span class="pre">diagm</span></code> command.</p>
+<p>We can also put whatever numbers we like onto any diagonal with the <code class="docutils literal notranslate"><span class="pre">diagm</span></code> function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">A</span> <span class="o">+</span> <span class="n">diagm</span><span class="p">(</span><span class="mi">2</span><span class="o">=&gt;</span><span class="p">[</span><span class="n">pi</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>
@@ -354,8 +344,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">FundamentalsNumericalComputation</span>
-<span class="n">L</span><span class="p">,</span><span class="n">U</span> <span class="o">=</span> <span class="n">FNC</span><span class="o">.</span><span class="n">lufact</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="p">,</span><span class="n">U</span> <span class="o">=</span> <span class="n">FNC</span><span class="o">.</span><span class="n">lufact</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 <span class="n">L</span>
 </pre></div>
 </div>

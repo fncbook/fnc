@@ -19,10 +19,10 @@ Here we show how to use the function `horner` to evaluate a polynomial. It's not
 
 ```{code-cell}
 import Pkg
-#Pkg.add(Pkg.PackageSpec(url="https://github.com/tobydriscoll/FundamentalsNumericalComputation.jl.git"));
+#Pkg.add(Pkg.PackageSpec(url="https://github.com/fncbook/fnc.git"));
 ```
 
-Once installed (including a standard library that comes with Julia), any package can be loaded with the `using` command, as follows:[^compile]
+Once installed, any package (including a standard library that comes with Julia) can be loaded with the `using` command, as follows:[^compile]
 
 [^compile]: Sometimes a `using` or `import` statement can take a few seconds or even minutes to execute. This book depends on a large package that must be compiled on first use and after every update.
 

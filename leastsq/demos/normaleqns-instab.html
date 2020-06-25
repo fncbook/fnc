@@ -220,7 +220,13 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">LinearAlgebra</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">400</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">400</span><span class="p">)</span>
 <span class="n">A</span> <span class="o">=</span> <span class="p">[</span> <span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span> <span class="n">cos</span><span class="o">.</span><span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="mf">1e-7</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span> <span class="n">t</span><span class="o">.^</span><span class="mi">0</span> <span class="p">]</span>
 <span class="n">kappa</span> <span class="o">=</span> <span class="n">cond</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
@@ -269,7 +275,10 @@ max_err = kappa * eps() = 4.053030231047602e-9
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>observed_err = norm(x_NE - x) / norm(x) = 0.007289760380260753
-digits = -(log(10, observed_err)) = 2.137286747023705
+digits = -(log(10, observed_err)) = 
+</pre></div>
+</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2.137286747023705
 </pre></div>
 </div>
 </div>

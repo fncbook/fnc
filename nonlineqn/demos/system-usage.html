@@ -243,6 +243,13 @@
 <p>As before, a system of nonlinear equations is defined by its residual and Jacobian.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">FundamentalsNumericalComputation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">nlfun</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">f</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  
     <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mi">2</span><span class="p">;</span>
@@ -272,7 +279,6 @@
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="n">using</span> <span class="n">FundamentalsNumericalComputation</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">FNC</span><span class="o">.</span><span class="n">newtonsys</span><span class="p">(</span><span class="n">nlfun</span><span class="p">,</span><span class="n">nljac</span><span class="p">,</span><span class="n">x1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -294,24 +300,20 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">end</span><span class="p">]</span>
-<span class="n">nlfun</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="nd">@show</span> <span class="n">residual</span> <span class="o">=</span> <span class="n">nlfun</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>3-element Array{Float64,1}:
- 0.0
- 1.3877787807814457e-17
- 0.0
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>residual = nlfun(r) = [0.0, 1.3877787807814457e-17, 0.0]
 </pre></div>
 </div>
 </div>
 </div>
-<p>Let’s use the convergence to the first component of the root as a proxy for the convergence of the vectors.</p>
+<p>We take the sequence of norms of errors, applying the log so that we can look at the exponents.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">LinearAlgebra</span>
-<span class="p">[</span> <span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">-</span><span class="n">r</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="mi">1</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span> <span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">-</span><span class="n">r</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="mi">1</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span> <span class="p">]</span>
 </pre></div>
 </div>
 </div>

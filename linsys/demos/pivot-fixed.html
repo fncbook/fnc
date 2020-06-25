@@ -258,6 +258,13 @@
 <p>Here is the system that “broke” LU factorization for us.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">FundamentalsNumericalComputation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="mi">0</span> <span class="mi">4</span> <span class="mi">3</span> <span class="p">;</span> <span class="o">-</span><span class="mi">4</span> <span class="mi">5</span> <span class="o">-</span><span class="mi">7</span> <span class="o">-</span><span class="mi">10</span> <span class="p">;</span> <span class="mi">1</span> <span class="mi">15</span> <span class="mi">2</span> <span class="o">-</span><span class="mf">4.5</span> <span class="p">;</span> <span class="o">-</span><span class="mi">2</span> <span class="mi">0</span> <span class="mi">2</span> <span class="o">-</span><span class="mi">13</span><span class="p">];</span>
 <span class="n">b</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">40</span> <span class="p">];</span>
 </pre></div>
@@ -267,8 +274,7 @@
 <p>When we use the <code class="docutils literal notranslate"><span class="pre">lu</span></code> function (from <code class="docutils literal notranslate"><span class="pre">LinearAlgebra</span></code>) with three outputs, we get the elements of the PLU factorization.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">LinearAlgebra</span>
-<span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">p</span> <span class="o">=</span> <span class="n">lu</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">p</span> <span class="o">=</span> <span class="n">lu</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
 <span class="n">L</span>
 </pre></div>
 </div>
@@ -323,7 +329,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>4×4 SparseArrays.SparseMatrixCSC{Bool,Int64} with 4 stored entries:
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>4×4 SparseMatrixCSC{Bool,Int64} with 4 stored entries:
   [4, 1]  =  1
   [1, 2]  =  1
   [2, 3]  =  1
@@ -335,8 +341,7 @@
 <p>However, this is rarely necessary in practice (and the vector requires a lot less storage). We can the linear system, for example, using only <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">FundamentalsNumericalComputation</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">FNC</span><span class="o">.</span><span class="n">backsub</span><span class="p">(</span> <span class="n">U</span><span class="p">,</span> <span class="n">FNC</span><span class="o">.</span><span class="n">forwardsub</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">b</span><span class="p">[</span><span class="n">p</span><span class="p">,:])</span> <span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">FNC</span><span class="o">.</span><span class="n">backsub</span><span class="p">(</span> <span class="n">U</span><span class="p">,</span> <span class="n">FNC</span><span class="o">.</span><span class="n">forwardsub</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">b</span><span class="p">[</span><span class="n">p</span><span class="p">,:])</span> <span class="p">)</span>
 </pre></div>
 </div>
 </div>

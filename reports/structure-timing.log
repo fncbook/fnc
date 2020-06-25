@@ -1,0 +1,27 @@
+Traceback (most recent call last):
+  File "/Users/driscoll/anaconda3/lib/python3.7/site-packages/jupyter_cache/executors/basic.py", line 157, in execute
+    executenb(nb_bundle.nb, cwd=tmpdirname)
+  File "/Users/driscoll/anaconda3/lib/python3.7/site-packages/nbconvert/preprocessors/execute.py", line 737, in executenb
+    return ep.preprocess(nb, resources, km=km)[0]
+  File "/Users/driscoll/anaconda3/lib/python3.7/site-packages/nbconvert/preprocessors/execute.py", line 405, in preprocess
+    nb, resources = super(ExecutePreprocessor, self).preprocess(nb, resources)
+  File "/Users/driscoll/anaconda3/lib/python3.7/site-packages/nbconvert/preprocessors/base.py", line 69, in preprocess
+    nb.cells[index], resources = self.preprocess_cell(cell, resources, index)
+  File "/Users/driscoll/anaconda3/lib/python3.7/site-packages/nbconvert/preprocessors/execute.py", line 448, in preprocess_cell
+    raise CellExecutionError.from_cell_and_msg(cell, out)
+nbconvert.preprocessors.execute.CellExecutionError: An error occurred while executing the following cell:
+------------------
+using FundamentalsNumericalComputationumericalComputation
+------------------
+
+ArgumentError: Package FundamentalsNumericalComputationumericalComputation not found in current path:
+- Run `import Pkg; Pkg.add("FundamentalsNumericalComputationumericalComputation")` to install the FundamentalsNumericalComputationumericalComputation package.
+
+
+Stacktrace:
+ [1] require(::Module, ::Symbol) at ./loading.jl:892
+ [2] top-level scope at In[1]:1
+ArgumentError: ArgumentError: Package FundamentalsNumericalComputationumericalComputation not found in current path:
+- Run `import Pkg; Pkg.add("FundamentalsNumericalComputationumericalComputation")` to install the FundamentalsNumericalComputationumericalComputation package.
+
+

@@ -249,6 +249,13 @@
 <p>We try to estimate the derivative of <span class="math notranslate nohighlight">\(\cos(x^2)\)</span> at <span class="math notranslate nohighlight">\(x=0.5\)</span> using five nodes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">FundamentalsNumericalComputation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">[</span> <span class="mf">0.35</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.57</span><span class="p">,</span><span class="mf">0.6</span><span class="p">,</span><span class="mf">0.75</span> <span class="p">]</span>   <span class="c1"># nodes</span>
 <span class="n">f</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">dfdx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
@@ -265,8 +272,7 @@
 <p>We have to shift the nodes so that the point of estimation for the derivative is at <span class="math notranslate nohighlight">\(x=0\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">FundamentalsNumericalComputation</span>
-<span class="n">w</span> <span class="o">=</span> <span class="n">FNC</span><span class="o">.</span><span class="n">fdweights</span><span class="p">(</span><span class="n">t</span><span class="o">.-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">FNC</span><span class="o">.</span><span class="n">fdweights</span><span class="p">(</span><span class="n">t</span><span class="o">.-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -283,8 +289,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">LinearAlgebra</span>
-<span class="n">fd_value</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">f</span><span class="o">.</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fd_value</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">f</span><span class="o">.</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>

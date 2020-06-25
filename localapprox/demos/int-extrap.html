@@ -249,10 +249,16 @@
 <p>We estimate <span class="math notranslate nohighlight">\(\displaystyle\int_0^2 x^2 e^{-2x}\, dx\)</span> using extrapolation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">FundamentalsNumericalComputation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">);</span>
 <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> 
-<span class="n">using</span> <span class="n">QuadGK</span>
-<span class="n">I</span><span class="p">,</span><span class="n">errest</span> <span class="o">=</span> <span class="n">quadgk</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">atol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span><span class="n">rtol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">)</span>
+<span class="n">Q</span><span class="p">,</span><span class="n">errest</span> <span class="o">=</span> <span class="n">quadgk</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">atol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span><span class="n">rtol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -275,8 +281,8 @@
 <p>We can now apply weights to get the estimate <span class="math notranslate nohighlight">\(T_f(N)\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="p">[</span><span class="n">h</span><span class="o">*</span><span class="p">(</span> <span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="n">n</span><span class="p">])</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span> <span class="p">)]</span>
-<span class="n">err_2nd</span> <span class="o">=</span> <span class="n">I</span> <span class="o">.-</span> <span class="n">T</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="p">[</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="n">n</span><span class="p">])</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="p">]</span>
+<span class="n">err_2nd</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">.-</span> <span class="n">T</span>
 </pre></div>
 </div>
 </div>
@@ -290,9 +296,9 @@
 <p>Now we double to <span class="math notranslate nohighlight">\(n=2N\)</span>, but we only need to evaluate <span class="math notranslate nohighlight">\(f\)</span> at every other interior node.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">;</span>  <span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>  <span class="n">t</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">);</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">2</span><span class="n">n</span><span class="p">;</span>  <span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>  <span class="n">t</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">);</span>
 <span class="n">T</span> <span class="o">=</span> <span class="p">[</span> <span class="n">T</span><span class="p">;</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="nb">sum</span><span class="p">(</span> <span class="n">f</span><span class="o">.</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">n</span><span class="p">])</span> <span class="p">)</span> <span class="p">]</span>
-<span class="n">err_2nd</span> <span class="o">=</span> <span class="n">I</span> <span class="o">.-</span> <span class="n">T</span>
+<span class="n">err_2nd</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">.-</span> <span class="n">T</span>
 </pre></div>
 </div>
 </div>
@@ -307,9 +313,9 @@
 <p>As expected for a second-order estimate, the error went down by a factor of about 4. We can repeat the same code to double <span class="math notranslate nohighlight">\(n\)</span> again.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">;</span>  <span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>  <span class="n">t</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">);</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">2</span><span class="n">n</span><span class="p">;</span>  <span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>  <span class="n">t</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">);</span>
 <span class="n">T</span> <span class="o">=</span> <span class="p">[</span> <span class="n">T</span><span class="p">;</span> <span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="nb">sum</span><span class="p">(</span> <span class="n">f</span><span class="o">.</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">n</span><span class="p">])</span> <span class="p">)</span> <span class="p">]</span>
-<span class="n">err_2nd</span> <span class="o">=</span> <span class="n">I</span> <span class="o">.-</span> <span class="n">T</span>
+<span class="n">err_2nd</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">.-</span> <span class="n">T</span>
 </pre></div>
 </div>
 </div>
@@ -325,8 +331,8 @@
 <p>Let us now do the first level of extrapolation to get results from Simpson’s formula. We combine the elements <code class="docutils literal notranslate"><span class="pre">T[i]</span></code> and <code class="docutils literal notranslate"><span class="pre">T[i+1]</span></code> the same way for <span class="math notranslate nohighlight">\(i=1\)</span> and <span class="math notranslate nohighlight">\(i=2\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="mi">3</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span> <span class="p">]</span>
-<span class="n">err_4th</span> <span class="o">=</span> <span class="n">I</span> <span class="o">.-</span> <span class="n">S</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="mi">3</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span> <span class="p">]</span>
+<span class="n">err_4th</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">.-</span> <span class="n">S</span>
 </pre></div>
 </div>
 </div>
@@ -342,7 +348,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="p">(</span><span class="mi">16</span><span class="o">*</span><span class="n">S</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">15</span>
-<span class="n">err_6th</span> <span class="o">=</span> <span class="n">I</span> <span class="o">.-</span> <span class="n">R</span>
+<span class="n">err_6th</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">.-</span> <span class="n">R</span>
 </pre></div>
 </div>
 </div>
@@ -353,6 +359,169 @@
 </div>
 </div>
 <p>If we consider the computational time to be dominated by evaluations of <span class="math notranslate nohighlight">\(f\)</span>, then we have obtained a result with twice as many accurate digits as the best trapezoid result, at virtually no extra cost.</p>
+<p>Here are tables of the values and errors. Each time we add a column we have to skip one more estimated value, so we get a triangular structure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="p">[</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="n">N</span><span class="p">,</span><span class="mi">4</span><span class="n">N</span><span class="p">],</span><span class="n">trap</span><span class="o">=</span><span class="n">T</span><span class="p">,</span><span class="n">simp</span><span class="o">=</span><span class="p">[</span><span class="n">missing</span><span class="p">,</span><span class="n">S</span><span class="o">...</span><span class="p">],</span><span class="n">sixth</span><span class="o">=</span><span class="p">[</span><span class="n">missing</span><span class="p">,</span><span class="n">missing</span><span class="p">,</span><span class="n">R</span><span class="p">])</span>
+<span class="n">pretty_table</span><span class="p">(</span><span class="n">table</span><span class="p">,[</span><span class="s2">&quot;n&quot;</span><span class="p">,</span><span class="s2">&quot;Trapezoid&quot;</span><span class="p">,</span><span class="s2">&quot;Simpson&quot;</span><span class="p">,</span><span class="s2">&quot;6th order&quot;</span><span class="p">],</span><span class="n">backend</span><span class="o">=</span><span class="p">:</span><span class="n">html</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<style>
+table, td, th {
+    border-collapse: collapse;
+    font-family: sans-serif;
+}
+
+td, th {
+    border-bottom: 0;
+    padding: 4px
+}
+
+tr:nth-child(odd) {
+    background: #eee;
+}
+
+tr:nth-child(even) {
+    background: #fff;
+}
+
+tr.header {
+    background: navy !important;
+    color: white;
+    font-weight: bold;
+}
+
+tr.subheader {
+    background: lightgray !important;
+    color: black;
+}
+
+tr.headerLastRow {
+    border-bottom: 2px solid black;
+}
+
+th.rowNumber, td.rowNumber {
+    text-align: right;
+}
+
+</style>
+<body>
+<table>
+<tr class = "header headerLastRow">
+<th style = "text-align: right; ">n</th>
+<th style = "text-align: right; ">Trapezoid</th>
+<th style = "text-align: right; ">Simpson</th>
+<th style = "text-align: right; ">6th order</th>
+</tr>
+<tr>
+<td style = "text-align: right; ">20</td>
+<td style = "text-align: right; ">0.19041144993926784</td>
+<td style = "text-align: right; ">missing</td>
+<td style = "text-align: right; ">missing</td>
+</tr>
+<tr>
+<td style = "text-align: right; ">40</td>
+<td style = "text-align: right; ">0.19045880585951175</td>
+<td style = "text-align: right; ">0.19047459116625973</td>
+<td style = "text-align: right; ">missing</td>
+</tr>
+<tr>
+<td style = "text-align: right; ">80</td>
+<td style = "text-align: right; ">0.1904703513046443</td>
+<td style = "text-align: right; ">0.19047419978635513</td>
+<td style = "text-align: right; ">0.1904741736943615</td>
+</tr>
+</table>
+</body>
+</html>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="p">[</span><span class="n">N</span><span class="p">,</span><span class="mi">2</span><span class="n">N</span><span class="p">,</span><span class="mi">4</span><span class="n">N</span><span class="p">],</span><span class="n">trap</span><span class="o">=</span><span class="n">Q</span><span class="o">.-</span><span class="n">T</span><span class="p">,</span><span class="n">simp</span><span class="o">=</span><span class="p">[</span><span class="n">missing</span><span class="p">,</span><span class="n">Q</span><span class="o">.-</span><span class="n">S</span><span class="o">...</span><span class="p">],</span><span class="n">sixth</span><span class="o">=</span><span class="p">[</span><span class="n">missing</span><span class="p">,</span><span class="n">missing</span><span class="p">,</span><span class="n">Q</span><span class="o">-</span><span class="n">R</span><span class="p">])</span>
+<span class="n">pretty_table</span><span class="p">(</span><span class="n">table</span><span class="p">,[</span><span class="s2">&quot;n&quot;</span><span class="p">,</span><span class="s2">&quot;2nd order&quot;</span><span class="p">,</span><span class="s2">&quot;4th order&quot;</span><span class="p">,</span><span class="s2">&quot;6th order&quot;</span><span class="p">],</span><span class="n">backend</span><span class="o">=</span><span class="p">:</span><span class="n">html</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<style>
+table, td, th {
+    border-collapse: collapse;
+    font-family: sans-serif;
+}
+
+td, th {
+    border-bottom: 0;
+    padding: 4px
+}
+
+tr:nth-child(odd) {
+    background: #eee;
+}
+
+tr:nth-child(even) {
+    background: #fff;
+}
+
+tr.header {
+    background: navy !important;
+    color: white;
+    font-weight: bold;
+}
+
+tr.subheader {
+    background: lightgray !important;
+    color: black;
+}
+
+tr.headerLastRow {
+    border-bottom: 2px solid black;
+}
+
+th.rowNumber, td.rowNumber {
+    text-align: right;
+}
+
+</style>
+<body>
+<table>
+<tr class = "header headerLastRow">
+<th style = "text-align: right; ">n</th>
+<th style = "text-align: right; ">2nd order</th>
+<th style = "text-align: right; ">4th order</th>
+<th style = "text-align: right; ">6th order</th>
+</tr>
+<tr>
+<td style = "text-align: right; ">20</td>
+<td style = "text-align: right; ">6.272367234605447e-5</td>
+<td style = "text-align: right; ">missing</td>
+<td style = "text-align: right; ">missing</td>
+</tr>
+<tr>
+<td style = "text-align: right; ">40</td>
+<td style = "text-align: right; ">1.5367752102146692e-5</td>
+<td style = "text-align: right; ">-4.175546458318191e-7</td>
+<td style = "text-align: right; ">missing</td>
+</tr>
+<tr>
+<td style = "text-align: right; ">80</td>
+<td style = "text-align: right; ">3.822306969603062e-6</td>
+<td style = "text-align: right; ">-2.617474123556285e-8</td>
+<td style = "text-align: right; ">-8.274761431614763e-11</td>
+</tr>
+</table>
+</body>
+</html>
+</div></div>
+</div>
 </div>
 
 

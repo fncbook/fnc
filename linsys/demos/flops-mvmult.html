@@ -257,7 +257,7 @@
 <h1>Timing and flop counts<a class="headerlink" href="#timing-and-flop-counts" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">DataFrames</span>  <span class="c1"># for tabular results</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">FundamentalsNumericalComputation</span>
 </pre></div>
 </div>
 </div>
@@ -297,12 +297,107 @@ Since the matrix <span class="math notranslate nohighlight">\(A\)</span> has <sp
 <p>The reason for doing multiple repetitions at each value of <span class="math notranslate nohighlight">\(n\)</span> is to avoid having times so short that the resolution of the timer is a factor.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DataFrame</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">,</span><span class="n">time</span><span class="o">=</span><span class="n">t</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pretty_table</span><span class="p">((</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">),[</span><span class="s2">&quot;size&quot;</span> <span class="s2">&quot;time&quot;</span><span class="p">;</span><span class="s2">&quot;&quot;</span> <span class="s2">&quot;(sec)&quot;</span><span class="p">],</span><span class="n">backend</span><span class="o">=</span><span class="p">:</span><span class="n">html</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="data-frame"><thead><tr><th></th><th>size</th><th>time</th></tr><tr><th></th><th>Int64</th><th>Float64</th></tr></thead><tbody><p>10 rows × 2 columns</p><tr><th>1</th><td>400</td><td>0.00360569</td></tr><tr><th>2</th><td>800</td><td>0.000474431</td></tr><tr><th>3</th><td>1200</td><td>0.00490127</td></tr><tr><th>4</th><td>1600</td><td>0.0101723</td></tr><tr><th>5</th><td>2000</td><td>0.0157718</td></tr><tr><th>6</th><td>2400</td><td>0.0223508</td></tr><tr><th>7</th><td>2800</td><td>0.0303734</td></tr><tr><th>8</th><td>3200</td><td>0.0451221</td></tr><tr><th>9</th><td>3600</td><td>0.0511408</td></tr><tr><th>10</th><td>4000</td><td>0.0638512</td></tr></tbody></table></div></div>
+<div class="output text_html"><!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<style>
+table, td, th {
+    border-collapse: collapse;
+    font-family: sans-serif;
+}
+
+td, th {
+    border-bottom: 0;
+    padding: 4px
+}
+
+tr:nth-child(odd) {
+    background: #eee;
+}
+
+tr:nth-child(even) {
+    background: #fff;
+}
+
+tr.header {
+    background: navy !important;
+    color: white;
+    font-weight: bold;
+}
+
+tr.subheader {
+    background: lightgray !important;
+    color: black;
+}
+
+tr.headerLastRow {
+    border-bottom: 2px solid black;
+}
+
+th.rowNumber, td.rowNumber {
+    text-align: right;
+}
+
+</style>
+<body>
+<table>
+<tr class = header>
+<th style = "text-align: right; ">size</th>
+<th style = "text-align: right; ">time</th>
+</tr>
+<tr class = "subheader headerLastRow">
+<th style = "text-align: right; "></th>
+<th style = "text-align: right; ">(sec)</th>
+</tr>
+<tr>
+<td style = "text-align: right; ">400</td>
+<td style = "text-align: right; ">0.006563624</td>
+</tr>
+<tr>
+<td style = "text-align: right; ">800</td>
+<td style = "text-align: right; ">0.001052841</td>
+</tr>
+<tr>
+<td style = "text-align: right; ">1200</td>
+<td style = "text-align: right; ">0.009282646</td>
+</tr>
+<tr>
+<td style = "text-align: right; ">1600</td>
+<td style = "text-align: right; ">0.01177342</td>
+</tr>
+<tr>
+<td style = "text-align: right; ">2000</td>
+<td style = "text-align: right; ">0.01966482</td>
+</tr>
+<tr>
+<td style = "text-align: right; ">2400</td>
+<td style = "text-align: right; ">0.027744935</td>
+</tr>
+<tr>
+<td style = "text-align: right; ">2800</td>
+<td style = "text-align: right; ">0.036985266</td>
+</tr>
+<tr>
+<td style = "text-align: right; ">3200</td>
+<td style = "text-align: right; ">0.04741513</td>
+</tr>
+<tr>
+<td style = "text-align: right; ">3600</td>
+<td style = "text-align: right; ">0.063876134</td>
+</tr>
+<tr>
+<td style = "text-align: right; ">4000</td>
+<td style = "text-align: right; ">0.070681383</td>
+</tr>
+</table>
+</body>
+</html>
+</div></div>
 </div>
 </div>
 

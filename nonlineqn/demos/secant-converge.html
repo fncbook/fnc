@@ -243,9 +243,15 @@
 <p>We check the convergence of the secant method from the previous example.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">FundamentalsNumericalComputation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">x</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">;</span>
 
-<span class="n">using</span> <span class="n">FundamentalsNumericalComputation</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">FNC</span><span class="o">.</span><span class="n">secant</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -268,8 +274,7 @@
 <p>We don’t know the exact root, so we use <code class="docutils literal notranslate"><span class="pre">nlsolve</span></code> to get a substitute.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">NLsolve</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">nlsolve</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]),[</span><span class="mf">1.</span><span class="p">])</span><span class="o">.</span><span class="n">zero</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">nlsolve</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]),[</span><span class="mf">1.</span><span class="p">])</span><span class="o">.</span><span class="n">zero</span>
 </pre></div>
 </div>
 </div>

@@ -249,10 +249,15 @@
 <p>Let’s observe the convergence of the forward-difference formula applied to the function <span class="math notranslate nohighlight">\(\sin(e^{x+1})\)</span> at <span class="math notranslate nohighlight">\(x=0\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">FundamentalsNumericalComputation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">sin</span><span class="p">(</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">);</span>
-<span class="n">FD1</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span><span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>   <span class="o">/</span><span class="mf">0.1</span><span class="p">,</span>
-        <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span><span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>  <span class="o">/</span><span class="mf">0.05</span><span class="p">,</span>
-        <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mf">0.025</span><span class="p">)</span><span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="o">/</span><span class="mf">0.025</span> <span class="p">]</span>
+<span class="n">FD1</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="n">h</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">0.025</span><span class="p">]</span> <span class="p">]</span>  
 </pre></div>
 </div>
 </div>
@@ -270,17 +275,75 @@
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">exact_value</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">err</span> <span class="o">=</span> <span class="o">@.</span> <span class="n">exact_value</span> <span class="o">-</span> <span class="n">FD1</span>
+<span class="n">pretty_table</span><span class="p">(</span> <span class="p">[</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">0.025</span><span class="p">]</span> <span class="n">err</span><span class="p">],[</span><span class="s2">&quot;h&quot;</span><span class="p">,</span><span class="s2">&quot;error in FD1&quot;</span><span class="p">],</span><span class="n">backend</span><span class="o">=</span><span class="p">:</span><span class="n">html</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>3-element Array{Float64,1}:
- 0.25951854285412823
- 0.1344455526584598
- 0.06814724228142577
-</pre></div>
-</div>
-</div>
+<div class="output text_html"><!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<style>
+table, td, th {
+    border-collapse: collapse;
+    font-family: sans-serif;
+}
+
+td, th {
+    border-bottom: 0;
+    padding: 4px
+}
+
+tr:nth-child(odd) {
+    background: #eee;
+}
+
+tr:nth-child(even) {
+    background: #fff;
+}
+
+tr.header {
+    background: navy !important;
+    color: white;
+    font-weight: bold;
+}
+
+tr.subheader {
+    background: lightgray !important;
+    color: black;
+}
+
+tr.headerLastRow {
+    border-bottom: 2px solid black;
+}
+
+th.rowNumber, td.rowNumber {
+    text-align: right;
+}
+
+</style>
+<body>
+<table>
+<tr class = "header headerLastRow">
+<th style = "text-align: right; ">h</th>
+<th style = "text-align: right; ">error in FD1</th>
+</tr>
+<tr>
+<td style = "text-align: right; ">0.1</td>
+<td style = "text-align: right; ">0.25951854285412823</td>
+</tr>
+<tr>
+<td style = "text-align: right; ">0.05</td>
+<td style = "text-align: right; ">0.1344455526584598</td>
+</tr>
+<tr>
+<td style = "text-align: right; ">0.025</td>
+<td style = "text-align: right; ">0.06814724228142577</td>
+</tr>
+</table>
+</body>
+</html>
+</div></div>
 </div>
 <p>Asymptotically as <span class="math notranslate nohighlight">\(h\to0\)</span>, the error is proportional to <span class="math notranslate nohighlight">\(h\)</span>.</p>
 </div>
