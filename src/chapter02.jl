@@ -50,11 +50,67 @@ U = float(copy(A))
 
 # Gaussian elimination
 for j = 1:n-1
-  for i = j+1:n
-    L[i,j] = U[i,j] / U[j,j]   # row multiplier
-    U[i,j:n] -= L[i,j]*U[j,j:n]
-  end
+    for i = j+1:n
+        L[i,j] = U[i,j] / U[j,j]   # row multiplier
+        U[i,j:n] -= L[i,j]*U[j,j:n]
+    end
 end
 
 return L,triu(U)
 end
+
+
+function outerlu(A)
+  
+n = size(A,1); 
+Aj = copy(A)
+L = zeros(n,n)
+U = zeros(n,n)
+
+for j = 1:n
+    U[j,j:n] = Aj[j,j:n]
+    L[j:n,j] = Aj[j:n,j] / U[j,j]
+    Aj[j+1:n,j+1:n] -= L[j+1:n,j]*U[j,j+1:n]'
+end
+
+return L,U
+end
+
+function lupivot(A)
+  
+  n = size(A,1); 
+  Aj = copy(A)
+  L = zeros(n,n)
+  U = zeros(n,n)
+  pivot = zeros(Int,n)
+  unused = trues(n)
+  
+  for j = 1:n
+      pivot[j] = argmax( abs.(Aj[:,j]) )
+      U[j,j:n] = Aj[pivot[j],j:n]
+      L[unused,j] = Aj[unused,j] / U[j,j]
+      unused[pivot[j]] = false
+      Aj[unused,j+1:n] -= L[unused,j]*U[j,j+1:n]'
+      Aj[pivot[j],j+1:n] .= 0
+  end
+  
+  return L,U,pivot
+  end
+
+  function lupivoteasy(A)
+  
+    n = size(A,1); 
+    Aj = copy(A)
+    L = zeros(n,n)
+    U = zeros(n,n)
+    pivot = zeros(Int,n)
+    
+    for j = 1:n
+        pivot[j] = argmax( abs.(Aj[:,j]) )
+        U[j,:] = Aj[pivot[j],:]
+        L[:,j] = Aj[:,j] / U[j,j]
+        Aj -= L[:,j]*U[j,:]'
+    end
+    
+    return tril(L),triu(U),pivot
+    end
