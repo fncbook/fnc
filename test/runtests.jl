@@ -1,4 +1,4 @@
-using FundamentalsNumericalComputation,LinearAlgebra,DifferentialEquations
+using FundamentalsNumericalComputation
 using Test
 
 @testset "Chapter 1" begin
@@ -99,7 +99,7 @@ end
 
 	g = (u,p,t) -> [t+p-sin(u[2]),u[1]]
 	ivp = ODEProblem(g,[-1.,4],(1.,2.),-6)
-	sol = solve(ivp)
+	sol = solve(ivp,Tsit5())
 	t,u = FNC.euler(ivp,4000)
 	@test u[end] ≈ sol.u[end] rtol=0.004
 	t,u = FNC.ie2(ivp,4000)
