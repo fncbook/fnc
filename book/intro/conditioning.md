@@ -200,22 +200,22 @@ Note that the condition number of a root of a quadratic polynomial, as a functio
     **(b)** $\kappa = \lim_{x\to 1} |x f'(x)/f(x)| = \lim_{x\to 1} |x x^{-1}/\ln x|$, which blows up as $x\to 1$.  We expect relative conditioning to be terrible near $x=1$. (Note that the _absolute_ conditioning, $|f'(1)|=1$, is fine.) The conditioning is fine as $x$ approaches zero from above.
     ```
 
-1. ✍ Use the chain rule {eq}`condition-chain` to find the condition number of the given function. Then check your result by applying {eq}`conditionderiv` directly.
+2. ✍ Use the chain rule {eq}`condition-chain` to find the condition number of the given function. Then check your result by applying {eq}`conditionderiv` directly.
 
     **(a)** $f(x) = \sqrt{x+5},\quad$
     **(b)** $f(x) = \cos(2\pi x),\quad$
     **(c)** $f(x) = e^{-x^2}.$
 
-1. ✍ Calculate the condition number of each function, and identify all values of $x$ at which $\kappa_{f}(x)\to\infty$ (including limits as $x\to\pm\infty$).
+3. ✍ Calculate the condition number of each function, and identify all values of $x$ at which $\kappa_{f}(x)\to\infty$ (including limits as $x\to\pm\infty$).
 
     **(a)** $f(x) = \tanh(x),\quad$
     **(b)** $f(x) = \dfrac{e^x-1}{x},\quad$
     **(c)** $f(x) = \dfrac{1-\cos(x)}{x}.$
 
     (problem-condchain)=
-1. ✍ Suppose that $f$ and $g$ are real-valued functions that have condition numbers $\kappa_f$ and $\kappa_g$, respectively. Define a new function $h(x)=f\bigl(g(x)\bigr)$. Show that for $x$ in the domain of $h$, the condition number of $h$ satisfies {eq}`condition-chain`.
+4. ✍ Suppose that $f$ and $g$ are real-valued functions that have condition numbers $\kappa_f$ and $\kappa_g$, respectively. Define a new function $h(x)=f\bigl(g(x)\bigr)$. Show that for $x$ in the domain of $h$, the condition number of $h$ satisfies {eq}`condition-chain`.
 
-1. ✍ Suppose that $f$ is a function with condition number $\kappa_f$, and that $f^{-1}$ is its inverse function. Show that the condition number of $f^{-1}$ satisfies
+5. ✍ Suppose that $f$ is a function with condition number $\kappa_f$, and that $f^{-1}$ is its inverse function. Show that the condition number of $f^{-1}$ satisfies
   
     ```{math}
     \kappa_{f^{-1}}(x) = \frac{1}{\kappa_f\Bigl( f^{-1}(x) \Bigr)},
@@ -224,15 +224,15 @@ Note that the condition number of a root of a quadratic polynomial, as a functio
     provided the denominator is nonzero.
 
    (problem-quadrootcond)=
-1. ✍  Referring to the derivation of {eq}`rootcond1`, derive an expression for the relative condition number of a root of $ax^2+bx+c=0$ due to perturbations in $b$ only. 
+6. ✍  Referring to the derivation of {eq}`rootcond1`, derive an expression for the relative condition number of a root of $ax^2+bx+c=0$ due to perturbations in $b$ only. 
 
-1. The polynomial $x^2-2x+1$ has a double root $r=1$.
+7. The polynomial $x^2-2x+1$ has a double root $r=1$.
   
-    **(a)** ✍ Using a computer or calculator, make a table of the roots of $x^2+(2+\epsilon)x+1$ for $\epsilon = 10^{-4}$, $10^{-6}$, $\ldots$, $10^{-12}$.
+    **(a)** ✍ Using a computer or calculator, make a table of the roots of $x^2-(2+\epsilon)x+1$ for $\epsilon = 10^{-4}$, $10^{-6}$, $\ldots$, $10^{-12}$.
 
     **(b)** ✍ What do the results of part (a) seem to imply about the condition number of the root?
   
-1. ✍ Generalize {eq}`rootcond1` to finding a root of the $n$th degree polynomial $p(x) = a_nx^n + \cdots + a_1 x + a_0$, and show that the relative condition number of a root $r$ with respect to perturbations only in $a_k$ is
+8. ✍ Generalize {eq}`rootcond1` to finding a root of the $n$th degree polynomial $p(x) = a_nx^n + \cdots + a_1 x + a_0$, and show that the relative condition number of a root $r$ with respect to perturbations only in $a_k$ is
   
     ```{math}
     \kappa_r(a_k) = \left| \frac{a_k r^{k-1}}{p'(r)} \right|.

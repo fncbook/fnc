@@ -133,7 +133,7 @@ Hence the trapezoid formula has second-order error. This fact is embedded rigoro
     :label: eulermaclaurin
     \begin{split}
     I = \int_a^b f(x)\, dx &= T_f(n) - \frac{h^2}{12} \left[ f'(b)-f'(a) \right] + \frac{h^4}{740} \left[ f'''(b)-f'''(a) \right] + O(h^6) \\
-        &= T_f(n) - \sum_{k=1}^\infty \frac{B_{2k}}{(2k)!}  \left[ f^{(2k-1)}(b)-f^{(2k-1)}(a) \right],
+        &= T_f(n) - \sum_{k=1}^\infty \frac{B_{2k}h^{2k}}{(2k)!}  \left[ f^{(2k-1)}(b)-f^{(2k-1)}(a) \right],
       \end{split}
 ```
 
@@ -236,7 +236,7 @@ What remains are the nodes with $n=m$. That is, if we have computed $T_f(m)$ and
 :label: nc-doubling
 \begin{split}
   T_f(2m) & = \frac{1}{2m} \left[  \tfrac{1}{2} f(0) + \tfrac{1}{2} f(1) + \sum_{k=1}^{m-1}  f\Bigl( \tfrac{2k-1}{2m} \Bigr) +  f\Bigl( \tfrac{2k}{2m} \Bigr) \right] \\
-  &=  \frac{1}{2m} \left[  \tfrac{1}{2} f(0) + \tfrac{1}{2} f(1) + \sum_{k=1}^{m-1} f\Bigl( \tfrac{k}{m} \Bigr) \right] + \frac{1}{2m} \sum_{k=1}^{m-1}  f\Bigl( \tfrac{2k-1}{2m} \Bigr)  \\
+  &=  \frac{1}{2m} \left[  \tfrac{1}{2} f(0) + \tfrac{1}{2} f(1) + \sum_{k=1}^{m-1} f\Bigl( \tfrac{k}{m} \Bigr) \right] + \frac{1}{2m} \sum_{k=1}^{m}  f\Bigl( \tfrac{2k-1}{2m} \Bigr)  \\
   &= \frac{1}{2} T_f(m) + \frac{1}{2m} \sum_{k=1}^{m-1}  f\left( t_{2k-1} \right),
 \end{split}
 ```

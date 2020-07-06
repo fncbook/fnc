@@ -55,7 +55,7 @@ The values of $h_k$ are derived from the nodes. Crucially, the unknown coefficie
 \end{bmatrix}
 =
   \begin{bmatrix}
-  y_0 & & \\ & \ddots & \\ & & y_{n-1}
+  y_0 \\ \ddots \\ y_{n-1}
 \end{bmatrix},
 ```
 
@@ -71,7 +71,7 @@ with $\mathbf{I}$ being an $n\times n$ identity. The right endpoint interpolatio
 \end{bmatrix}
   =
 \begin{bmatrix}
-  y_1 & & \\ & \ddots & \\ & & y_{n}
+  y_1 \\ \ddots \\ y_{n}
 \end{bmatrix},
 ```
 

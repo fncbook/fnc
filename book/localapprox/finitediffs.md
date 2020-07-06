@@ -173,7 +173,7 @@ Although function values at equally spaced nodes are a common and convenient sit
 
 ```{math}
 :label: fdgenformula
-  f^{(m)}(0) \approx \sum_{k=1}^{r} c_{k,m} \,f(t_k).
+  f^{(m)}(0) \approx \sum_{k=0}^{r} c_{k,m} \,f(t_k).
 ```
 
 ````{sidebar} Demo
@@ -262,7 +262,7 @@ end
 
 5. ⌨ For this problem, let $f(x)=\tan(2x)$.
 
-    **(a)** ⌨ Apply {ref}`function-fdweights` to find a finite difference approximation to $f''(0.3)$ using the five nodes $t_j=0.03+jh$ for $j=-2,\ldots,2$ and $h=0.05$. Compare to the exact value of $f''(0.3)$.
+    **(a)** ⌨ Apply {ref}`function-fdweights` to find a finite difference approximation to $f''(0.3)$ using the five nodes $t_j=0.3+jh$ for $j=-2,\ldots,2$ and $h=0.05$. Compare to the exact value of $f''(0.3)$.
 
     **(b)** ⌨  Repeat part~(a) for $f''(0.75)$ and $t_j=0.75+jh$. Why is the finite difference result so inaccurate?
 

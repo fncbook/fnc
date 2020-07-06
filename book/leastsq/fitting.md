@@ -42,7 +42,7 @@ f(t_m)
 c_1                                  \\
 c_2                                  \\
 \vdots                               \\
-c_m
+c_n
 \end{bmatrix}.
 ```
 
@@ -151,7 +151,7 @@ Thus the variable $z=\log y$ can be fit linearly in terms of the variable $s=\lo
 1. ✍ Suppose $f(x)$ is a differentiable nonnegative real function. Use calculus to prove that the local minimizers of $f(x)$ and $[f(x)]^2$ are the same values of $x$.
 
     (problem-fitcensus)=
-1. ⌨  Here are counts of the U.S. population from the census performed every ten years, beginning with 1790 and ending with 2010.
+2. ⌨  Here are counts of the U.S. population from the census performed every ten years, beginning with 1790 and ending with 2010.
 
     ``` julia
     3.929, 5.308, 7.240, 9.638, 12.87, 17.07, 23.19, 31.44, 39.82, 50.19, 62.95, 76.21,
@@ -199,12 +199,12 @@ Thus the variable $z=\log y$ can be fit linearly in terms of the variable $s=\lo
     pop2000 = a*exp(210*b)
     pop2010 = a*exp(220*b) -->
 
-1. ⌨  In this problem you are trying to find an approximation to the periodic function $f(t)=e^{\sin(t-1)}$ over one period, $0\le t \le 2\pi$. In Julia, let `t=LinRange(0,2pi,200)` and let `b` be a column vector of evaluations of $f$ at those values.
+3. ⌨  In this problem you are trying to find an approximation to the periodic function $f(t)=e^{\sin(t-1)}$ over one period, $0\le t \le 2\pi$. In Julia, let `t=LinRange(0,2pi,200)` and let `b` be a column vector of evaluations of $f$ at those values.
 
     **(a)** Find the coefficients of the least-squares fit
   
     ```{math}
-      f(t) \approx c_1 + c_2t + \cdots + c_7 t^7.
+      f(t) \approx c_1 + c_2t + \cdots + c_7 t^6.
     ```
 
      **(b)** Find the coefficients of the least-squares fit
@@ -263,7 +263,7 @@ Thus the variable $z=\log y$ can be fit linearly in terms of the variable $s=\lo
     % specified level of error we expect that using a smaller number of trig
     % functions should do the job.
 
-2. ⌨ Define the following data in Julia.
+4. ⌨ Define the following data in Julia.
 
     ``` julia
     t = 0:.5:10
@@ -284,7 +284,7 @@ Thus the variable $z=\log y$ can be fit linearly in terms of the variable $s=\lo
       plot(t,A*c) -->
       %% The key is that $z\to 1$ as $t\to \infty$.
 
-3. ⌨  One series for finding $\pi$ is
+5. ⌨  One series for finding $\pi$ is
 
     ```{math}
     \frac{\pi}{2} = 1 + \frac{1}{3} + \frac{1\cdot 2}{3\cdot5} + \frac{1\cdot 2\cdot 3}{3\cdot 5\cdot 7} + \cdots.
@@ -314,7 +314,7 @@ Thus the variable $z=\log y$ can be fit linearly in terms of the variable $s=\lo
     <!-- b = exp(c(1))
     a = exp(c(2)) -->
 
-4. ⌨  Kepler found that the orbital period $\tau$ of a planet depends on its mean distance $R$ from the sun according to $\tau=c R^{\alpha}$ for a simple rational number $\alpha$. Validate Kepler's result by using a linear least squares fit and the following table.
+6. ⌨  Kepler found that the orbital period $\tau$ of a planet depends on its mean distance $R$ from the sun according to $\tau=c R^{\alpha}$ for a simple rational number $\alpha$. Validate Kepler's result by using a linear least squares fit and the following table.
 
     | Planet  | Distance from sun in Mkm |  Orbital period in days              |
     |---------|:--------------------------------------------:|:-----------:|
@@ -328,7 +328,7 @@ Thus the variable $z=\log y$ can be fit linearly in terms of the variable $s=\lo
     | Neptune | 4499.9                                     | 60188   |
     | Pluto   | 5909                                        | 90710   |
 
-5. ✍ Show that finding a best fit of the form
+7. ✍ Show that finding a best fit of the form
 
     ```{math}
     y(t) \approx \frac{a}{t+b}
@@ -338,4 +338,4 @@ Thus the variable $z=\log y$ can be fit linearly in terms of the variable $s=\lo
 
     % We have $1/y \approx (t/a) + (a/b) = ct +d$, which is a straight line fitting problem.
 
-6. ✍ Show how to find the constants $a$ and $b$ in a data fitting problem of the form $y(t)\approx t/(at+b)$ by transforming it into a linear least squares fitting problem.
+8. ✍ Show how to find the constants $a$ and $b$ in a data fitting problem of the form $y(t)\approx t/(at+b)$ by transforming it into a linear least squares fitting problem.

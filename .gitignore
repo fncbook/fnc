@@ -23,3 +23,5 @@ docs/site/
 # environment.
 Manifest.toml
 _build
+
+.ipynb_checkpoints

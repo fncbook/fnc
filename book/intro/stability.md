@@ -90,29 +90,25 @@ Small backward error is the best we can hope for in a poorly conditioned problem
 
 ## Exercises
 
-1. The function
+1. The formulas
 
     ```{math}
-    f(x)=\frac{1-\cos x}{\sin x}
+    f(x)=\frac{1-\cos x}{\sin x},\qquad g(x) = \frac{2\sin^2(x/2)}{\sin(x)},
     ```
 
-    has a mathematically equivalent expression,
+    are mathematically equivalent in exact arithmetic but suggest algorithms that can behave quite differently in floating point.
 
-    ```{math}
-    \hat{f}(x) = \frac{2\sin^2(x/2)}{\sin(x)}.
-    ```
-
-    **(a)** ✍ Show that the relative condition numbers for these functions are the same. (You might want to use computer algebra to help; try simplifying their ratio to 1.)
+    **(a)** ✍ Show that the relative condition numbers for these expressions are the same. (You might want to use computer algebra to help; try simplifying their ratio to 1.)
 
     **(b)** ✍ Estimate the number of digits lost to subtractive cancellation in the numerator of $f$ when $x=10^{-6}$.
 
-    **(c)** ✍ The formula for $\hat{f}$ uses only multiplication, division, and evaluation of the sine function; any potential loss of accuracy would be due to evaluating sin. Find
+    **(c)** ✍ The formula for $g$ uses only multiplication, division, and evaluation of the sine function; therefore, any potential loss of accuracy would be due to evaluating sin. Find
 
     ```{math}
     \lim_{x\to 0} \kappa_\text{sin}(x).
     ```
 
-    d. ⌨ Apply $f$ and $\hat{f}$ for $x=10^{-6}$ and compute their relative difference.
+    **(d)** ⌨ Evaluate $f$ and $g$ at $x=10^{-6}$ and compute the relative difference.
   
     ```{only} solutions
     **(a)** Both are equivalent to $x\csc(x)$.
@@ -124,7 +120,7 @@ Small backward error is the best we can hope for in a poorly conditioned problem
     **(d)** The results are `5.000444502912538e-07` and `5.000000000000416e-07`, for a relative difference of about $8.89\times 10^{-5}$.
     ```
 
-1. Let $f(x) = (e^x-1)/x$.
+2. Let $f(x) = (e^x-1)/x$.
   
     **(a)** ✍ Find the condition number $\kappa_f(x)$. What is the maximum of $\kappa_f(x)$ over $-1\le x \le 1$?
   
@@ -146,7 +142,7 @@ Small backward error is the best we can hope for in a poorly conditioned problem
   
     **(d)** ⌨  Make a table of the relative difference between the two algorithms as a function of $x$. Which algorithm is more accurate, and why?
   
-1. ⌨ The function
+3. ⌨ The function
   
     ```{math}
     x = \cosh(y) = \frac{e^t + e^{-t}}{2}
@@ -174,7 +170,7 @@ Small backward error is the best we can hope for in a poorly conditioned problem
 
     Apply {eq}`acosh2` to approximate $f(x_i)$ for all $i$, again computing the relative accuracy of the results.
 
-1. ⌨ (Continuation of [a previous problem](problem-samplevar). Adapted from {cite}`highamAccuracyStability2002`.) One problem with the formula {eq}`samplevar` for sample variance is that one computes a sum for $\overline{x}$, then another sum to find $s^2$. Some statistics textbooks quote a one-pass formula
+4. ⌨ (Continuation of [a previous problem](problem-samplevar). Adapted from {cite}`highamAccuracyStability2002`.) One problem with the formula {eq}`samplevar` for sample variance is that one computes a sum for $\overline{x}$, then another sum to find $s^2$. Some statistics textbooks quote a one-pass formula
   
     ```{math}
     \begin{split}

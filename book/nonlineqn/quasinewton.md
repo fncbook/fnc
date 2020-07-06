@@ -31,7 +31,7 @@ In the system case, replacing the Jacobian evaluation is more complicated: deriv
   \frac{\mathbf{f}(\mathbf{x}+\delta \mathbf{e}_j) - \mathbf{f}(\mathbf{x})}{\delta}, \qquad j=1,\ldots,n.
 ```
 
-For reasons explained in \secref{fdconverge}, $\delta$ is usually chosen close to $\sqrt{\epsilon}$, where $\epsilon$ represents the expected noise level in evaluation of $\mathbf{f}$. If the only source of noise is floating-point roundoff, then $\delta=\sqrt{\epsilon_\text{mach}}$.
+For reasons explained in [the next chapter](../localapprox/fd-converge.md), $\delta$ is usually chosen close to $\sqrt{\epsilon}$, where $\epsilon$ represents the expected noise level in evaluation of $\mathbf{f}$. If the only source of noise is floating-point roundoff, then $\delta=\sqrt{\epsilon_\text{mach}}$.
 
 The finite-difference formula {eq}`jacobianfd` is implemented by the short code {ref}`function-fdjac`. (The code is written to accept the case where $\mathbf{f}$ maps $n$ variables to $m$ values with $m\neq n$, in anticipation of \secref{nl-least-sq}.)
 
@@ -87,7 +87,7 @@ Let $\mathbf{s}_k=\mathbf{x}_{k+1}-\mathbf{x}_k$  be the Newton step. We will ma
 This equation gets us from $\mathbf{x}_k$ to $\mathbf{x}_{k+1}$. To continue the iteration, we want to update the approximate Jacobian to $\mathbf{A}_{k+1}$. If we think one-dimensionally for a moment, the secant method would assume that $A_{k+1}=(f_{k+1}-f_k)/(x_{k+1}-x_k)$. It's not easy to generalize a fraction to vectors, but we can do it if we instead write it as
 
 ```{math}
-  f_{k+1}-f_k = A_{k+1} (x_{k+1}-x_k) = A_{k+1} s_k.
+  \mathbf{f}_{k+1}-\mathbf{f}_k = \mathbf{A}_{k+1} (\mathbf{x}_{k+1}-\mathbf{x}_k) = \mathbf{A}_{k+1} \mathbf{s}_k.
 ```
 
 This is used to justify the following requirement:
@@ -364,7 +364,7 @@ In some cases our simple logic in {ref}`function-levenberg` can make $\lambda$ o
     ```
     ````
 
-7. ✍ Show that the Levenberg equation {eq}`levenberg` is equivalent to the linear least squares problem
+7. ✍ Show that equation {eq}`levenberg` is equivalent to the linear least squares problem
   
     ```{math}
     \min_{\mathbf{v}} \Bigl(  \bigl\|\mathbf{A}_k\mathbf{v} + \mathbf{f}_k\bigr\|_2^2 +
