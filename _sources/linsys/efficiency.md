@@ -68,7 +68,7 @@ It's clear from the example in {doc}`demos/flops-mvmult` that the runtime increa
   t = Cn^p \qquad \Longrightarrow \qquad \log t = p(\log n) + (\log C).
 ```
 
-Hence, a graph of $\log n$ as a function of $\log t$ will be a straight line of slope $p$.
+Hence, a graph of $\log t$ as a function of $\log n$ will be a straight line of slope $p$.
 
 ## Flops for solving linear equations
 

@@ -397,7 +397,7 @@ f'(0) &amp;\approx h^{-1} \left[ \tfrac{1}{2} f(-2h) - 2 f(-h) + \tfrac{3}{2} f(
 <h2>Arbitrary nodes<a class="headerlink" href="#arbitrary-nodes" title="Permalink to this headline">¶</a></h2>
 <p>Although function values at equally spaced nodes are a common and convenient situation, the node locations may be arbitrary. The general form of a finite difference formula is</p>
 <div class="math notranslate nohighlight" id="equation-fdgenformula">
-<span class="eqno">(140)<a class="headerlink" href="#equation-fdgenformula" title="Permalink to this equation">¶</a></span>\[  f^{(m)}(0) \approx \sum_{k=1}^{r} c_{k,m} \,f(t_k).\]</div>
+<span class="eqno">(140)<a class="headerlink" href="#equation-fdgenformula" title="Permalink to this equation">¶</a></span>\[  f^{(m)}(0) \approx \sum_{k=0}^{r} c_{k,m} \,f(t_k).\]</div>
 <div class="demo sidebar">
 <p class="sidebar-title">Demo</p>
 <p><a class="reference internal" href="demos/fd-weights.html"><span class="doc">FD at arbitrary nodes</span></a></p>
@@ -501,7 +501,7 @@ f'(0) &amp;\approx h^{-1} \left[ \tfrac{1}{2} f(-2h) - 2 f(-h) + \tfrac{3}{2} f(
 <li><p>⌨ Use <a class="reference internal" href="#function-fdweights"><span class="std std-ref">fdweights</span></a> to write out a table analogous to <a class="reference internal" href="#table-fdcenter"><span class="std std-ref">Weights for centered finite difference formulas.</span></a> that lists centered finite difference weights for the second derivative <span class="math notranslate nohighlight">\(f''(0)\)</span>. (Hint: The “rat” command will let you express the results as exact rational numbers.)</p>
 </li>
 <li><p>⌨ For this problem, let <span class="math notranslate nohighlight">\(f(x)=\tan(2x)\)</span>.</p>
-<p><strong>(a)</strong> ⌨ Apply <a class="reference internal" href="#function-fdweights"><span class="std std-ref">fdweights</span></a> to find a finite difference approximation to <span class="math notranslate nohighlight">\(f''(0.3)\)</span> using the five nodes <span class="math notranslate nohighlight">\(t_j=0.03+jh\)</span> for <span class="math notranslate nohighlight">\(j=-2,\ldots,2\)</span> and <span class="math notranslate nohighlight">\(h=0.05\)</span>. Compare to the exact value of <span class="math notranslate nohighlight">\(f''(0.3)\)</span>.</p>
+<p><strong>(a)</strong> ⌨ Apply <a class="reference internal" href="#function-fdweights"><span class="std std-ref">fdweights</span></a> to find a finite difference approximation to <span class="math notranslate nohighlight">\(f''(0.3)\)</span> using the five nodes <span class="math notranslate nohighlight">\(t_j=0.3+jh\)</span> for <span class="math notranslate nohighlight">\(j=-2,\ldots,2\)</span> and <span class="math notranslate nohighlight">\(h=0.05\)</span>. Compare to the exact value of <span class="math notranslate nohighlight">\(f''(0.3)\)</span>.</p>
 <p><strong>(b)</strong> ⌨  Repeat part~(a) for <span class="math notranslate nohighlight">\(f''(0.75)\)</span> and <span class="math notranslate nohighlight">\(t_j=0.75+jh\)</span>. Why is the finite difference result so inaccurate?</p>
 </li>
 <li><p><strong>(a)</strong> ✍ Derive <a class="reference internal" href="#equation-fd-twocenter">(136)</a> by applying applying <a class="reference internal" href="#equation-centerfd12">(135)</a> twice (i.e., apply once to get <span class="math notranslate nohighlight">\(f'\)</span> values and then apply again to those values).</p>

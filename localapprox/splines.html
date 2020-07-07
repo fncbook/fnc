@@ -258,7 +258,7 @@
 \end{bmatrix}
 =
   \begin{bmatrix}
-  y_0 &amp; &amp; \\ &amp; \ddots &amp; \\ &amp; &amp; y_{n-1}
+  y_0 \\ \ddots \\ y_{n-1}
 \end{bmatrix},\end{split}\]</div>
 <p>with <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> being an <span class="math notranslate nohighlight">\(n\times n\)</span> identity. The right endpoint interpolation constraints, given by <a class="reference internal" href="#equation-spline0b">(117)</a>, become</p>
 <div class="math notranslate nohighlight" id="equation-spline0bsys">
@@ -270,7 +270,7 @@
 \end{bmatrix}
   =
 \begin{bmatrix}
-  y_1 &amp; &amp; \\ &amp; \ddots &amp; \\ &amp; &amp; y_{n}
+  y_1 \\ \ddots \\ y_{n}
 \end{bmatrix},\end{split}\]</div>
 <p>where we have defined the diagonal matrix</p>
 <div class="math notranslate nohighlight" id="equation-splinehsys">
@@ -407,65 +407,65 @@
 56
 57
 58
-59</pre></div></td><td class="code"><div class="highlight"><pre><span></span>&quot;&quot;&quot;
-spinterp(t,y)
+59</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">spinterp(t,y)</span>
 
-Create a cubic not-a-knot spline interpolating function for data
-values in `y` given at nodes in `t`.
-&quot;&quot;&quot;
-function spinterp(t,y)
+<span class="s">Create a cubic not-a-knot spline interpolating function for data</span>
+<span class="s">values in `y` given at nodes in `t`.</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="k">function</span> <span class="n">spinterp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>         <span class="c"># differences of all adjacent pairs</span>
 
-    n = length(t)-1
-    h = diff(t)         # differences of all adjacent pairs
+    <span class="c"># Preliminary definitions.</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">In</span> <span class="o">=</span> <span class="nb">I</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>  <span class="n">E</span> <span class="o">=</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">:</span><span class="p">];</span>
+    <span class="n">J</span> <span class="o">=</span> <span class="n">diagm</span><span class="p">(</span><span class="mi">0</span><span class="o">=&gt;</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="mi">1</span><span class="o">=&gt;-</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">diagm</span><span class="p">(</span><span class="mi">0</span><span class="o">=&gt;</span><span class="n">h</span><span class="p">)</span>
 
-    # Preliminary definitions.
-    Z = zeros(n,n);
-    In = I(n);  E = In[1:n-1,:];
-    J = diagm(0=&gt;ones(n),1=&gt;-ones(n-1))
-    H = diagm(0=&gt;h)
+    <span class="c"># Left endpoint interpolation:</span>
+    <span class="n">AL</span> <span class="o">=</span> <span class="p">[</span> <span class="n">In</span> <span class="n">Z</span> <span class="n">Z</span> <span class="n">Z</span> <span class="p">]</span>
+    <span class="n">vL</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">]</span>
 
-    # Left endpoint interpolation:
-    AL = [ In Z Z Z ]
-    vL = y[1:n]
+    <span class="c"># Right endpoint interpolation:</span>
+    <span class="n">AR</span> <span class="o">=</span> <span class="p">[</span> <span class="n">In</span> <span class="n">H</span> <span class="n">H</span><span class="o">^</span><span class="mi">2</span> <span class="n">H</span><span class="o">^</span><span class="mi">3</span> <span class="p">];</span>
+    <span class="n">vR</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
 
-    # Right endpoint interpolation:
-    AR = [ In H H^2 H^3 ];
-    vR = y[2:n+1]
+    <span class="c"># Continuity of first derivative:</span>
+    <span class="n">A1</span> <span class="o">=</span> <span class="n">E</span><span class="o">*</span><span class="p">[</span> <span class="n">Z</span> <span class="n">J</span> <span class="mi">2</span><span class="o">*</span><span class="n">H</span> <span class="mi">3</span><span class="o">*</span><span class="n">H</span><span class="o">^</span><span class="mi">2</span> <span class="p">]</span>
+    <span class="n">v1</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
-    # Continuity of first derivative:
-    A1 = E*[ Z J 2*H 3*H^2 ]
-    v1 = zeros(n-1)
+    <span class="c"># Continuity of second derivative:</span>
+    <span class="n">A2</span> <span class="o">=</span> <span class="n">E</span><span class="o">*</span><span class="p">[</span> <span class="n">Z</span> <span class="n">Z</span> <span class="n">J</span> <span class="mi">3</span><span class="o">*</span><span class="n">H</span> <span class="p">]</span>
+    <span class="n">v2</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
-    # Continuity of second derivative:
-    A2 = E*[ Z Z J 3*H ]
-    v2 = zeros(n-1)
+    <span class="c"># Not-a-knot conditions:</span>
+    <span class="n">nakL</span> <span class="o">=</span> <span class="p">[</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="n">n</span><span class="p">)</span> <span class="p">[</span><span class="mi">1</span> <span class="o">-</span><span class="mi">1</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)]</span> <span class="p">]</span>
+    <span class="n">nakR</span> <span class="o">=</span> <span class="p">[</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="n">n</span><span class="p">)</span> <span class="p">[</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="mi">1</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="p">]</span>
 
-    # Not-a-knot conditions:
-    nakL = [ zeros(1,3*n) [1 -1 zeros(1,n-2)] ]
-    nakR = [ zeros(1,3*n) [zeros(1,n-2) 1 -1] ]
+    <span class="c"># Assemble and solve the full system.</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="p">[</span> <span class="n">AL</span><span class="p">;</span> <span class="n">AR</span><span class="p">;</span> <span class="n">A1</span><span class="p">;</span> <span class="n">A2</span><span class="p">;</span> <span class="n">nakL</span><span class="p">;</span> <span class="n">nakR</span> <span class="p">]</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="p">[</span> <span class="n">vL</span><span class="p">;</span> <span class="n">vR</span><span class="p">;</span> <span class="n">v1</span><span class="p">;</span> <span class="n">v2</span><span class="p">;</span> <span class="mi">0</span><span class="p">;</span> <span class="mi">0</span> <span class="p">]</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">A</span><span class="o">\</span><span class="n">v</span>
 
-    # Assemble and solve the full system.
-    A = [ AL; AR; A1; A2; nakL; nakR ]
-    v = [ vL; vR; v1; v2; 0; 0 ]
-    z = A\v
+    <span class="c"># Break the coefficients into separate vectors.</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">rows</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">n</span><span class="o">.+</span><span class="n">rows</span><span class="p">];</span>  <span class="n">c</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">.+</span><span class="n">rows</span><span class="p">];</span>  <span class="n">d</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">n</span><span class="o">.+</span><span class="n">rows</span><span class="p">]</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="p">[</span> <span class="n">Polynomial</span><span class="p">([</span><span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]])</span> <span class="k">for</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">n</span> <span class="p">]</span>
+    <span class="c"># This function evaluates the spline when called with a value</span>
+    <span class="c"># for x.</span>
+    <span class="k">function</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">findfirst</span><span class="p">(</span><span class="n">x</span><span class="o">.&lt;</span><span class="n">t</span><span class="p">)</span>   <span class="c"># one greater than interval x belongs to</span>
+        <span class="n">k</span><span class="o">==</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="k">return</span> <span class="nb">NaN</span>
+        <span class="k">if</span> <span class="n">isnothing</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">x</span><span class="o">==</span><span class="n">t</span><span class="p">[</span><span class="k">end</span><span class="p">]</span> <span class="o">?</span> <span class="n">y</span><span class="p">[</span><span class="k">end</span><span class="p">]</span> <span class="o">:</span> <span class="nb">NaN</span>
+        <span class="k">end</span>
+        <span class="k">return</span> <span class="n">S</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">](</span><span class="n">x</span><span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">end</span>
+    <span class="k">return</span> <span class="n">evaluate</span>
 
-    # Break the coefficients into separate vectors.
-    rows = 1:n
-    a = z[rows]
-    b = z[n.+rows];  c = z[2*n.+rows];  d = z[3*n.+rows]
-    S = [ Polynomial([a[k],b[k],c[k],d[k]]) for k = 1:n ]
-    # This function evaluates the spline when called with a value
-    # for x.
-    function evaluate(x)
-        k = findfirst(@. x&lt;t)   # one greater than interval x belongs to
-        k==1 &amp;&amp; return NaN
-        if isnothing(k)
-            return x==t[end] ? y[end] : NaN
-        end
-        return S[k-1](x-t[k-1])
-    end
-    return evaluate
-end
+<span class="k">end</span>
 </pre></div>
 </td></tr></table></div>
 </div></div><p><a class="reference internal" href="#function-spinterp"><span class="std std-ref">spinterp</span></a> gives an implementation of cubic not-a-knot spline interpolation. For clarity it stays very close to the description given above. There are some possible shortcuts—for example, one could avoid using <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> and instead directly delete the last row of any matrix it left-multiplies. Observe that the linear system is assembled and solved just once, and the returned evaluation function simply uses the resulting coefficients. This allows us to make multiple calls to evaluate <span class="math notranslate nohighlight">\(S\)</span> without unnecessarily repeating the linear algebra.</p>

@@ -243,7 +243,7 @@
 <div class="math notranslate nohighlight" id="equation-jacobianfd">
 <span class="eqno">(95)<a class="headerlink" href="#equation-jacobianfd" title="Permalink to this equation">¶</a></span>\[  \mathbf{J}(\mathbf{x}) \mathbf{e}_j \approx
   \frac{\mathbf{f}(\mathbf{x}+\delta \mathbf{e}_j) - \mathbf{f}(\mathbf{x})}{\delta}, \qquad j=1,\ldots,n.\]</div>
-<p>For reasons explained in \secref{fdconverge}, <span class="math notranslate nohighlight">\(\delta\)</span> is usually chosen close to <span class="math notranslate nohighlight">\(\sqrt{\epsilon}\)</span>, where <span class="math notranslate nohighlight">\(\epsilon\)</span> represents the expected noise level in evaluation of <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>. If the only source of noise is floating-point roundoff, then <span class="math notranslate nohighlight">\(\delta=\sqrt{\epsilon_\text{mach}}\)</span>.</p>
+<p>For reasons explained in the next chapter, <span class="math notranslate nohighlight">\(\delta\)</span> is usually chosen close to <span class="math notranslate nohighlight">\(\sqrt{\epsilon}\)</span>, where <span class="math notranslate nohighlight">\(\epsilon\)</span> represents the expected noise level in evaluation of <span class="math notranslate nohighlight">\(\mathbf{f}\)</span>. If the only source of noise is floating-point roundoff, then <span class="math notranslate nohighlight">\(\delta=\sqrt{\epsilon_\text{mach}}\)</span>.</p>
 <p>The finite-difference formula <a class="reference internal" href="#equation-jacobianfd">(95)</a> is implemented by the short code <a class="reference internal" href="#function-fdjac"><span class="std std-ref">fdjac</span></a>. (The code is written to accept the case where <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> maps <span class="math notranslate nohighlight">\(n\)</span> variables to <span class="math notranslate nohighlight">\(m\)</span> values with <span class="math notranslate nohighlight">\(m\neq n\)</span>, in anticipation of \secref{nl-least-sq}.)</p>
 <div class="proof proof-type-function" id="id1">
 <span id="function-fdjac"></span>
@@ -311,7 +311,7 @@
 <span class="eqno">(96)<a class="headerlink" href="#equation-quasinewton-step" title="Permalink to this equation">¶</a></span>\[  \mathbf{A}_k \mathbf{s}_k = -\mathbf{f}_k.\]</div>
 <p>This equation gets us from <span class="math notranslate nohighlight">\(\mathbf{x}_k\)</span> to <span class="math notranslate nohighlight">\(\mathbf{x}_{k+1}\)</span>. To continue the iteration, we want to update the approximate Jacobian to <span class="math notranslate nohighlight">\(\mathbf{A}_{k+1}\)</span>. If we think one-dimensionally for a moment, the secant method would assume that <span class="math notranslate nohighlight">\(A_{k+1}=(f_{k+1}-f_k)/(x_{k+1}-x_k)\)</span>. It’s not easy to generalize a fraction to vectors, but we can do it if we instead write it as</p>
 <div class="math notranslate nohighlight">
-\[  f_{k+1}-f_k = A_{k+1} (x_{k+1}-x_k) = A_{k+1} s_k.\]</div>
+\[  \mathbf{f}_{k+1}-\mathbf{f}_k = \mathbf{A}_{k+1} (\mathbf{x}_{k+1}-\mathbf{x}_k) = \mathbf{A}_{k+1} \mathbf{s}_k.\]</div>
 <p>This is used to justify the following requirement:</p>
 <div class="math notranslate nohighlight" id="equation-secantsys">
 <span class="eqno">(97)<a class="headerlink" href="#equation-secantsys" title="Permalink to this equation">¶</a></span>\[  \mathbf{A}_{k+1} \mathbf{s}_k = \mathbf{f}_{k+1}-\mathbf{f}_k.\]</div>
@@ -536,7 +536,7 @@
 <p><strong>(a)</strong> Solve <a class="reference internal" href="#equation-levenberg">(99)</a> for <span class="math notranslate nohighlight">\(\mathbf{s}_1\)</span> with <span class="math notranslate nohighlight">\(\lambda=0\)</span>; this is the “pure” Newton step. Show numerically that <span class="math notranslate nohighlight">\(\|\mathbf{f}(\mathbf{x}_1+\mathbf{s}_1)\| &gt; \|\mathbf{f}(\mathbf{x}_1)\|\)</span>. (Thus, the Newton step made us go to a point seemingly farther from a root than where we started.)</p>
 <p><strong>(b)</strong> Now repeat part (a) with <span class="math notranslate nohighlight">\(\lambda=0.01j\)</span> for <span class="math notranslate nohighlight">\(j=1,2,3,\ldots\)</span>. What is the smallest value of <span class="math notranslate nohighlight">\(j\)</span> such that <span class="math notranslate nohighlight">\(\|\mathbf{f}(\mathbf{x}_1+\mathbf{s}_1)\| &lt; \|\mathbf{f}(\mathbf{x}_1)\|\)</span>?</p>
 </li>
-<li><p>✍ Show that the Levenberg equation <a class="reference internal" href="#equation-levenberg">(99)</a> is equivalent to the linear least squares problem</p>
+<li><p>✍ Show that equation <a class="reference internal" href="#equation-levenberg">(99)</a> is equivalent to the linear least squares problem</p>
 <div class="math notranslate nohighlight">
 \[\min_{\mathbf{v}} \Bigl(  \bigl\|\mathbf{A}_k\mathbf{v} + \mathbf{f}_k\bigr\|_2^2 +
 \lambda^2 \bigl\| \mathbf{v} \bigr\|_2^2 \Bigr).\]</div>

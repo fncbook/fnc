@@ -272,14 +272,7 @@ The theorem justifies a general definition of {term}`order of accuracy` as the l
     ````{only} solutions
     ````
 
-3. ⌨ For each IVP, compute the error at the final time in the numerical solution obtained by Euler's method with $n=32$. Compare this error to the bound {eq}`GTEbound` with the smallest allowable value of $L$.
-
-      **(a)** $y' = -2t y, \ 0 \le t \le 2, \ y(0) = 2;\ \hat{y}(t) = 2e^{-t^2}$
-
-      **(b)** $y' = y + t, \ 0 \le t \le 1, \ y(0) = 2;\ \hat{y}(t) = -1-t+3e^t$
-
-    ````{only} solutions
-    ````
+3. (deleted)
 
 4. ✍ Here is an alternative to Euler's method:
 

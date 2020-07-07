@@ -185,7 +185,7 @@
                 <!-- ipynb file if we had a myst markdown file -->
                 
                 <!-- Download raw file -->
-                <a class="dropdown-buttons" href="../../_sources/intro/demos/algorithms-horner.md"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.md</button></a>
+                <a class="dropdown-buttons" href="../../_sources/intro/demos/algorithms-horner.ipynb"><button type="button" class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip" data-placement="left">.ipynb</button></a>
                 <!-- Download PDF via print -->
                 <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF" onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
             </div>
@@ -228,7 +228,7 @@
 </div>
 </div>
 </div>
-<p>Once installed, any package (including a standard library that comes with Julia) can be loaded with the <code class="docutils literal notranslate"><span class="pre">using</span></code> command, as follows:<a class="footnote-reference brackets" href="#compile" id="id1">1</a></p>
+<p>Once installed, any package (including a standard library that comes with Julia) can be loaded with the <code class="docutils literal notranslate"><span class="pre">using</span></code> command, as follows. (Sometimes a <code class="docutils literal notranslate"><span class="pre">using</span></code> or <code class="docutils literal notranslate"><span class="pre">import</span></code> statement can take a few seconds or even minutes to execute. This book depends on a large package that must be compiled on first use and after every update.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">using</span> <span class="n">FundamentalsNumericalComputation</span>
@@ -269,12 +269,6 @@
 </div>
 <p>The above is the value of <span class="math notranslate nohighlight">\(p(1.6)\)</span>.</p>
 <p>While the namespace does lead to a little extra typing, a nice side effect of using this paradigm is that if you type <code class="docutils literal notranslate"><span class="pre">FNC.</span></code> (including the period) and hit the Tab key, you will see a list of all the functions known in that namespace.</p>
-<hr class="docutils" />
-<dl class="footnote brackets">
-<dt class="label" id="compile"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>Sometimes a <code class="docutils literal notranslate"><span class="pre">using</span></code> or <code class="docutils literal notranslate"><span class="pre">import</span></code> statement can take a few seconds or even minutes to execute. This book depends on a large package that must be compiled on first use and after every update.</p>
-</dd>
-</dl>
 </div>
 
 

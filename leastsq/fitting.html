@@ -236,7 +236,7 @@ f(t_m)
 c_1                                  \\
 c_2                                  \\
 \vdots                               \\
-c_m
+c_n
 \end{bmatrix}.\end{split}\]</div>
 <div class="demo sidebar" id="index-2">
 <p class="sidebar-title">Demo</p>
@@ -340,7 +340,7 @@ pop2010 = a<em>exp(220</em>b) –&gt;</p>
 <li><p>⌨  In this problem you are trying to find an approximation to the periodic function <span class="math notranslate nohighlight">\(f(t)=e^{\sin(t-1)}\)</span> over one period, <span class="math notranslate nohighlight">\(0\le t \le 2\pi\)</span>. In Julia, let <code class="docutils literal notranslate"><span class="pre">t=LinRange(0,2pi,200)</span></code> and let <code class="docutils literal notranslate"><span class="pre">b</span></code> be a column vector of evaluations of <span class="math notranslate nohighlight">\(f\)</span> at those values.</p>
 <p><strong>(a)</strong> Find the coefficients of the least-squares fit</p>
 <div class="math notranslate nohighlight">
-\[  f(t) \approx c_1 + c_2t + \cdots + c_7 t^7.\]</div>
+\[  f(t) \approx c_1 + c_2t + \cdots + c_7 t^6.\]</div>
 <p><strong>(b)</strong> Find the coefficients of the least-squares fit</p>
 <div class="math notranslate nohighlight">
 \[f(t) \approx d_1 + d_2\cos(t) + d_3\sin(t) + d_4\cos(2t) +

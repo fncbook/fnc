@@ -274,18 +274,16 @@ x_2 = \frac{-b - \sqrt{b^2-4ac}}{2a}.\]</div>
 <div class="section" id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
 <ol>
-<li><p>The function</p>
+<li><p>The formulas</p>
 <div class="math notranslate nohighlight">
-\[f(x)=\frac{1-\cos x}{\sin x}\]</div>
-<p>has a mathematically equivalent expression,</p>
-<div class="math notranslate nohighlight">
-\[\hat{f}(x) = \frac{2\sin^2(x/2)}{\sin(x)}.\]</div>
-<p><strong>(a)</strong> ✍ Show that the relative condition numbers for these functions are the same. (You might want to use computer algebra to help; try simplifying their ratio to 1.)</p>
+\[f(x)=\frac{1-\cos x}{\sin x},\qquad g(x) = \frac{2\sin^2(x/2)}{\sin(x)},\]</div>
+<p>are mathematically equivalent in exact arithmetic but suggest algorithms that can behave quite differently in floating point.</p>
+<p><strong>(a)</strong> ✍ Show that the relative condition numbers for these expressions are the same. (You might want to use computer algebra to help; try simplifying their ratio to 1.)</p>
 <p><strong>(b)</strong> ✍ Estimate the number of digits lost to subtractive cancellation in the numerator of <span class="math notranslate nohighlight">\(f\)</span> when <span class="math notranslate nohighlight">\(x=10^{-6}\)</span>.</p>
-<p><strong>(c)</strong> ✍ The formula for <span class="math notranslate nohighlight">\(\hat{f}\)</span> uses only multiplication, division, and evaluation of the sine function; any potential loss of accuracy would be due to evaluating sin. Find</p>
+<p><strong>(c)</strong> ✍ The formula for <span class="math notranslate nohighlight">\(g\)</span> uses only multiplication, division, and evaluation of the sine function; therefore, any potential loss of accuracy would be due to evaluating sin. Find</p>
 <div class="math notranslate nohighlight">
 \[\lim_{x\to 0} \kappa_\text{sin}(x).\]</div>
-<p>d. ⌨ Apply <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(\hat{f}\)</span> for <span class="math notranslate nohighlight">\(x=10^{-6}\)</span> and compute their relative difference.</p>
+<p><strong>(d)</strong> ⌨ Evaluate <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> at <span class="math notranslate nohighlight">\(x=10^{-6}\)</span> and compute the relative difference.</p>
 </li>
 <li><p>Let <span class="math notranslate nohighlight">\(f(x) = (e^x-1)/x\)</span>.</p>
 <p><strong>(a)</strong> ✍ Find the condition number <span class="math notranslate nohighlight">\(\kappa_f(x)\)</span>. What is the maximum of <span class="math notranslate nohighlight">\(\kappa_f(x)\)</span> over <span class="math notranslate nohighlight">\(-1\le x \le 1\)</span>?</p>

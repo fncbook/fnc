@@ -55,7 +55,7 @@ The values of $h_k$ are derived from the nodes. Crucially, the unknown coefficie
 \end{bmatrix}
 =
   \begin{bmatrix}
-  y_0 & & \\ & \ddots & \\ & & y_{n-1}
+  y_0 \\ \ddots \\ y_{n-1}
 \end{bmatrix},
 ```
 
@@ -71,7 +71,7 @@ with $\mathbf{I}$ being an $n\times n$ identity. The right endpoint interpolatio
 \end{bmatrix}
   =
 \begin{bmatrix}
-  y_1 & & \\ & \ddots & \\ & & y_{n}
+  y_1 \\ \ddots \\ y_{n}
 \end{bmatrix},
 ```
 
@@ -191,7 +191,6 @@ Create a cubic not-a-knot spline interpolating function for data
 values in `y` given at nodes in `t`.
 """
 function spinterp(t,y)
-
     n = length(t)-1
     h = diff(t)         # differences of all adjacent pairs
 
@@ -234,7 +233,7 @@ function spinterp(t,y)
     # This function evaluates the spline when called with a value
     # for x.
     function evaluate(x)
-        k = findfirst(@. x<t)   # one greater than interval x belongs to
+        k = findfirst(x.<t)   # one greater than interval x belongs to
         k==1 && return NaN
         if isnothing(k)
             return x==t[end] ? y[end] : NaN
@@ -242,6 +241,7 @@ function spinterp(t,y)
         return S[k-1](x-t[k-1])
     end
     return evaluate
+
 end
 ```
 ````

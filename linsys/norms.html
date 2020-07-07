@@ -226,7 +226,7 @@
 <p>The manipulations on matrices and vectors so far in this chapter have been algebraic, much like those in an introductory linear algebra course. In order to progress to the analysis of the algorithms we have introduced, we need a way to measure the “size” of vectors and matrices—size in the sense of magnitude or distance, not the number of rows and columns.</p>
 <div class="section" id="vector-norms">
 <h2>Vector norms<a class="headerlink" href="#vector-norms" title="Permalink to this headline">¶</a></h2>
-<p id="index-0">For vectors we use a <a class="reference internal" href="overview.html#term-0"><span class="xref std std-term">norm</span></a> <span class="math notranslate nohighlight">\(\| \cdot \|\)</span>, which is a function from <span class="math notranslate nohighlight">\(\complex^n\)</span> to <span class="math notranslate nohighlight">\(\real\)</span> with the following properties:</p>
+<p id="index-0">For vectors we use a <a class="reference internal" href="overview.html#term-0"><span class="xref std std-term">norm</span></a> <span class="math notranslate nohighlight">\(\| \cdot \|\)</span>, which is a function from <span class="math notranslate nohighlight">\(\real^n\)</span> to <span class="math notranslate nohighlight">\(\real\)</span> with the following properties:<a class="footnote-reference brackets" href="#complexnorm" id="id1">1</a></p>
 <div class="math notranslate nohighlight" id="equation-norm-properties">
 <span class="eqno">(38)<a class="headerlink" href="#equation-norm-properties" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}
 \| \mathbf{x} \| &amp;\ge 0 \text{ for all } \mathbf{x}\in\real^n \\
@@ -237,7 +237,7 @@
 <p>The last of these properties is known as the <strong>triangle inequality</strong>. Just as <span class="math notranslate nohighlight">\(\| \mathbf{x} \|=\| \mathbf{x}-\boldsymbol{0} \|\)</span> is the distance from <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> to the origin, <span class="math notranslate nohighlight">\(\| \mathbf{x}-\mathbf{y} \|\)</span> is the distance from <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>. The three most important vector norms are</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{split}
-  \| \mathbf{x} \|_2 &amp;= \left( \sum_{i=1}^n |x_i|^2 \right)^{\frac{1}{2}} = \sqrt{\mathbf{x}^* \mathbf{x}} \qquad \text{(2-norm)}   \\
+  \| \mathbf{x} \|_2 &amp;= \left( \sum_{i=1}^n |x_i|^2 \right)^{\frac{1}{2}} = \sqrt{\mathbf{x}^T \mathbf{x}} \qquad \text{(2-norm)}   \\
   \| \mathbf{x} \|_\infty &amp;= \max_{i=1,\dots,n} |x_i| \qquad \text{($\infty$-norm or max norm)}  \\
   \| \mathbf{x} \|_1 &amp;= \sum_{i=1}^n |x_i| \qquad \text{(1-norm)}
 \end{split}\end{split}\]</div>
@@ -253,7 +253,7 @@
 <div class="math notranslate nohighlight" id="equation-vectorconverge">
 <span class="eqno">(40)<a class="headerlink" href="#equation-vectorconverge" title="Permalink to this equation">¶</a></span>\[  \lim_{n\rightarrow\infty} \| \mathbf{x}_n - \mathbf{x} \| = 0.\]</div>
 <p>By definition, a sequence is convergent in the infinity norm if and only if it converges componentwise. The same is true for a convergent sequence in <em>any</em> norm.</p>
-<div class="proof proof-type-theorem" id="id2">
+<div class="proof proof-type-theorem" id="id3">
 <span id="theorem-normequivalence"></span>
     <div class="proof-title">
         <span class="proof-type">Theorem 19</span>
@@ -265,7 +265,7 @@
 </div></div></div>
 <div class="section" id="matrix-norms">
 <h2>Matrix norms<a class="headerlink" href="#matrix-norms" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-2"></span><p id="index-3">Although we view matrices as two-dimensional, we can also interpret them as vectors: simply stack the columns on top of one another.<a class="footnote-reference brackets" href="#colmajor" id="id1">1</a> Hence we can define matrix norms via vector norms. This is sometimes done with the vector 2-norm and leads to the matrix <a class="reference internal" href="overview.html#term-frobenius-norm"><span class="xref std std-term">Frobenius norm</span></a>:</p>
+<span class="target" id="index-2"></span><p id="index-3">Although we view matrices as two-dimensional, we can also interpret them as vectors: simply stack the columns on top of one another.<a class="footnote-reference brackets" href="#colmajor" id="id2">2</a> Hence we can define matrix norms via vector norms. This is sometimes done with the vector 2-norm and leads to the matrix <a class="reference internal" href="overview.html#term-frobenius-norm"><span class="xref std std-term">Frobenius norm</span></a>:</p>
 <div class="math notranslate nohighlight" id="equation-frobenius">
 <span class="eqno">(41)<a class="headerlink" href="#equation-frobenius" title="Permalink to this equation">¶</a></span>\[\| \mathbf{A} \|_F = \left( \sum_{i,j} |A_{ij}|^2 \right)^{1/2}\]</div>
 <p>This is the norm computed by the <a class="reference internal" href="overview.html#term-0"><span class="xref std std-term">norm</span></a> function in Julia.</p>
@@ -278,7 +278,7 @@
 \[\| \mathbf{A} \|_2 = \max_{\| \mathbf{x} \|_2=1} \| \mathbf{A}\mathbf{x} \|_2.\]</div>
 <p>For the rest of this section we will continue to omit subscripts when we want to refer to an unspecified norm; after this section, an unsubscripted norm is understood to be the 2-norm.</p>
 <p>The definition of an induced matrix norm may seem overly complicated. However, there are some key properties that follow directly from the definition.</p>
-<div class="proof proof-type-theorem" id="id3">
+<div class="proof proof-type-theorem" id="id4">
 <span id="theorem-norm-inequalities"></span>
     <div class="proof-title">
         <span class="proof-type">Theorem 20</span>
@@ -380,7 +380,10 @@
 </ol>
 <hr class="docutils" />
 <dl class="footnote brackets">
-<dt class="label" id="colmajor"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dt class="label" id="complexnorm"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>The same statements works for vectors with complex entries, with complex modulus in place of absolute values.</p>
+</dd>
+<dt class="label" id="colmajor"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
 <dd><p>Column stacking is actually how matrices are stored in memory within Julia and is known as <strong>column-major order</strong>. MATLAB and Fortran also use column-major order, while C and Python use row-major order, in which the rows are stacked.</p>
 </dd>
 </dl>

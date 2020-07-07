@@ -7,7 +7,9 @@ The manipulations on matrices and vectors so far in this chapter have been algeb
 ```{index} norm; vector
 ```
 
-For vectors we use a {term}`norm` $\| \cdot \|$, which is a function from $\complex^n$ to $\real$ with the following properties:
+For vectors we use a {term}`norm` $\| \cdot \|$, which is a function from $\real^n$ to $\real$ with the following properties:[^complexnorm]
+
+[^complexnorm]: The same statements works for vectors with complex entries, with complex modulus in place of absolute values.
   
 ```{math}
 :label: norm-properties
@@ -23,7 +25,7 @@ The last of these properties is known as the **triangle inequality**. Just as $\
 
 ```{math}
 \begin{split}
-  \| \mathbf{x} \|_2 &= \left( \sum_{i=1}^n |x_i|^2 \right)^{\frac{1}{2}} = \sqrt{\mathbf{x}^* \mathbf{x}} \qquad \text{(2-norm)}   \\
+  \| \mathbf{x} \|_2 &= \left( \sum_{i=1}^n |x_i|^2 \right)^{\frac{1}{2}} = \sqrt{\mathbf{x}^T \mathbf{x}} \qquad \text{(2-norm)}   \\
   \| \mathbf{x} \|_\infty &= \max_{i=1,\dots,n} |x_i| \qquad \text{($\infty$-norm or max norm)}  \\
   \| \mathbf{x} \|_1 &= \sum_{i=1}^n |x_i| \qquad \text{(1-norm)}
 \end{split}
