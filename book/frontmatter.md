@@ -6,4 +6,4 @@ This is a beta version of Chapters 1-6 of the textbook [Fundamentals of Numerica
 :align: center
 ```
 
-Please report problems or make suggestions at [the Github site](https://github.com/fncbook/fnc/issues).
+This resource is copyright (c) 2020 by Tobin A. Driscoll and Richard J. Braun. It is covered by the [CC BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/). Source files are available at [the Github site](https://github.com/fncbook/fnc), where you can also report problems and make suggestions.
