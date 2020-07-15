@@ -1,6 +1,6 @@
-*** Content of the site, including text, figures, and other explanatory or educational material (generally all material found in book/_build) are covered by the following license:
+This resource is derived from *Fundamentals of Numerical Computation*, copyright © Society of Applied and Industrial Mathematics, 2017. 
 
-Copyright (c) 2020 by Tobin A. Driscoll and Richard J. Braun
+The exercises are covered by the following license:
 
 Attribution-ShareAlike 4.0 International
 
@@ -430,9 +430,10 @@ licenses.
 
 Creative Commons may be contacted at creativecommons.org.
 
+=============================================================
+=============================================================
 
-
-*** The software files in src/ and /test/ and those in book/ used to generate the content, are subject to the following license:
+The software files in src/ and /test/ and those in book/ used to generate the content, are subject to the following license:
 
 MIT License
 
