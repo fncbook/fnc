@@ -16,6 +16,9 @@ execute:
   execute_notebooks: cache
   timeout: 120
 
+google_analytics:
+  mytrackingcode: UA-172898555-1
+
 sphinx:
   config:
     mathjax_config:
