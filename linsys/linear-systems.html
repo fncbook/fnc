@@ -33,7 +33,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}, "HTML-CSS": {"availableFonts": [], "preferredFont": null, "webFont": "TeX"}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"float": ["\\mathbb{F}"], "real": ["\\mathbb{R}"], "complex": ["\\mathbb{C}"], "nat": ["\\mathbb{N}"], "integer": ["\\mathbb{Z}"], "rmn{([^}]*)}{([^}]*)}": ["\\mathbb{R}^{#1 \\times #2}", 2], "dd{([^}]*)}{([^}]*)}": ["\\frac{d #1}{d #2}", 2], "ddd{([^}]*)}{([^}]*)}": ["\\frac{d^2 #1}{d #2^2}", 2], "pp{([^}]*)}{([^}]*)}": ["\\frac{\\partial #1}{\\partial #2}", 2], "ppp{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2], "ppdd{([^}]*)}{([^}]*)}{([^}]*)}": ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3], "norm{([^}]*)}": ["\\| #1 \\|", 1], "twonorm{([^}]*)}": ["\\| #1 \\|_2", 1], "onenorm{([^}]*)}": ["\\| #1 \\|_1", 1], "infnorm{([^}]*)}": ["\\| #1 \\|_\\infty", 1], "anynorm{([^}]*)}{([^}]*)}": ["\\| #1 \\|_#2", 2], "innerprod{([^}]*)}{([^}]*)}": ["\\langle #1,#2 \\rangle", 2], "pr{([^}]*)}": ["^{(#1)}", 1], "kron{([^}]*)}{([^}]*)}": ["#1 \\otimes #2", 2], "eye{([^}]*)}": ["\\mathbf{e}_#1", 1], "meye": ["\\mathbf{I}"], "Qhat": ["\\hat{\\mathbf{Q}}"], "Rhat": ["\\hat{\\mathbf{R}}"], "bfalpha": ["\\mathbf{alpha}"], "bfdelta": ["\\mathbf{delta}"], "bfzero": ["\\boldsymbol{0}"], "macheps": ["\\epsilon_\\text{mach}"], "fl": ["\\operatorname{fl}"], "diag": ["\\operatorname{diag}"], "ign": ["\\operatorname{sign}"], "Re": ["\\operatorname{Re}"], "Im": ["\\operatorname{Im}"], "ee": ["\\times 10^"], "lnorm": ["\\|"], "rnorm": ["\\|"], "floor": ["\\lfloor#1\\rfloor", 1]}}, "HTML-CSS": {"availableFonts": [], "preferredFont": null, "webFont": "Gyre-Termes"}})</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="LU factorization" href="lu.html" />
@@ -223,10 +223,10 @@
 <p>We now attend to the central problem of this chapter: Given a square, <span class="math notranslate nohighlight">\(n\times n\)</span> matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and an <span class="math notranslate nohighlight">\(n\)</span>-vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>, find an <span class="math notranslate nohighlight">\(n\)</span>-vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> such that <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span>. Writing out these equations, we obtain</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{split}
-  a_{11}x_1 + a_{12}x_2 + \cdot s + a_{1n}x_n &amp;= b_1 \\
-  a_{21}x_1 + a_{22}x_2 + \cdot s + a_{2n}x_n &amp;= b_2 \\
+  a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n &amp;= b_1 \\
+  a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n &amp;= b_2 \\
   \vdots  \\
-  a_{n1}x_1 + a_{n2}x_2 + \cdot s + a_{nn}x_n &amp;= b_n.
+  a_{n1}x_1 + a_{n2}x_2 + \cdots + a_{nn}x_n &amp;= b_n.
 \end{split}\end{split}\]</div>
 <p id="index-0">If <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> is nonsingular, then the mathematical expression of the solution is <span class="math notranslate nohighlight">\(\mathbf{x}=\mathbf{A}^{-1}\mathbf{b}\)</span>, because</p>
 <div class="math notranslate nohighlight">
@@ -446,9 +446,9 @@ infinitely many solutions.</p>
 <li><p>✍ Solve the following triangular systems by hand.</p>
 <p><strong>(a)</strong> <span class="math notranslate nohighlight">\(\displaystyle
    \begin{aligned}
-   -2x_1 &amp;        &amp;       &amp;= -4 \\
-     x_1 &amp; - x_2  &amp;       &amp;= 2 \\
-    3x_1 &amp;+ 2x_2  &amp; + x_3 &amp;= 1
+   -2x_1  &amp;= -4 \\
+     x_1  - x_2        &amp;= 2 \\
+    3x_1 + 2x_2  + x_3 &amp;= 1
    \end{aligned} \qquad\)</span>
 <strong>(b)</strong> <span class="math notranslate nohighlight">\(\displaystyle
    \begin{bmatrix}
@@ -462,9 +462,9 @@ infinitely many solutions.</p>
    \end{bmatrix}\qquad\)</span>
 <strong>(c)</strong> <span class="math notranslate nohighlight">\(\displaystyle
    \begin{aligned}
-    3x_1 + &amp;2x_2 &amp; +  x_3      &amp;= 1 \\
-         &amp; x_2   &amp; -   x_3      &amp;= 2 \\
-         &amp;          &amp; 2 x_3    &amp;= -4
+    3x_1 +  2x_2  +  x_3      &amp;= 1 \\
+            x_2   -  x_3      &amp;= 2 \\
+                     2 x_3    &amp;= -4
    \end{aligned}\)</span></p>
 </li>
 <li><p>⌨ Use <a class="reference internal" href="#function-forwardsub"><span class="std std-ref">forwardsub</span></a> to solve the systems from the previous problem. Verify that the solution is correct by computing <span class="math notranslate nohighlight">\(\mathbf{L}\mathbf{x}\)</span> and subtracting <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>.</p></li>

@@ -4,10 +4,10 @@ We now attend to the central problem of this chapter: Given a square, $n\times n
 
 ```{math}
 \begin{split}
-  a_{11}x_1 + a_{12}x_2 + \cdot s + a_{1n}x_n &= b_1 \\
-  a_{21}x_1 + a_{22}x_2 + \cdot s + a_{2n}x_n &= b_2 \\
+  a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n &= b_1 \\
+  a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n &= b_2 \\
   \vdots  \\
-  a_{n1}x_1 + a_{n2}x_2 + \cdot s + a_{nn}x_n &= b_n.
+  a_{n1}x_1 + a_{n2}x_2 + \cdots + a_{nn}x_n &= b_n.
 \end{split}
 ```
 
@@ -244,9 +244,9 @@ The example in {doc}`demos/systems-triangular` is our first clue that linear sys
 
     **(a)** $\displaystyle
       \begin{aligned}
-      -2x_1 &        &       &= -4 \\
-        x_1 & - x_2  &       &= 2 \\
-       3x_1 &+ 2x_2  & + x_3 &= 1
+      -2x_1  &= -4 \\
+        x_1  - x_2        &= 2 \\
+       3x_1 + 2x_2  + x_3 &= 1
       \end{aligned} \qquad$
     **(b)** $\displaystyle
       \begin{bmatrix}
@@ -260,9 +260,9 @@ The example in {doc}`demos/systems-triangular` is our first clue that linear sys
       \end{bmatrix}\qquad$
     **(c)** $\displaystyle
       \begin{aligned}
-       3x_1 + &2x_2 & +  x_3      &= 1 \\
-            & x_2   & -   x_3      &= 2 \\
-            &          & 2 x_3    &= -4
+       3x_1 +  2x_2  +  x_3      &= 1 \\
+               x_2   -  x_3      &= 2 \\
+                        2 x_3    &= -4
       \end{aligned}$
 
 3. ⌨ Use {ref}`function-forwardsub` to solve the systems from the previous problem. Verify that the solution is correct by computing $\mathbf{L}\mathbf{x}$ and subtracting $\mathbf{b}$.
