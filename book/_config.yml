@@ -61,6 +61,10 @@ sphinx:
           "lnorm": ["\\|"]
           "rnorm": ["\\|"]
           "floor": ["\\lfloor#1\\rfloor",1]
+      HTML-CSS:
+        availableFonts: []
+        preferredFont: null
+        webFont: Gyre-Termes
     proof_theorem_types:
       "algorithm": "Algorithm"
       "conjecture": "Conjecture"
