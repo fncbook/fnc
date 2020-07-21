@@ -16,8 +16,8 @@ execute:
   execute_notebooks: cache
   timeout: 120
 
-google_analytics:
-  mytrackingcode: UA-172898555-1
+html:
+  google_analytics_id: UA-172898555-1
 
 sphinx:
   config:
