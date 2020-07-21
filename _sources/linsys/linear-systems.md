@@ -50,12 +50,7 @@ then it is easy to check that for any real value of $\alpha$ we have
 \end{bmatrix}.
 ```
 
-Hence the linear system $\mathbf{S}\mathbf{x}=\mathbf{b}$ with $\mathbf{b}=
-\begin{bmatrix}
-1\\0
-\end{bmatrix}
-$ has infinitely many solutions. For many other choices of $\mathbf{b}$ the
-system can be proven to have no solutions.
+Hence the linear system $\mathbf{S}\mathbf{x}=\mathbf{b}$ with $\mathbf{b}=\begin{bmatrix} 1\\0\end{bmatrix}$ has infinitely many solutions. For many other choices of $\mathbf{b}$ the system can be proven to have no solutions.
 ````
 
 ## Don't use the inverse
