@@ -155,7 +155,7 @@ Most problems have multiple input and output values. These introduce some compli
 ````{proof:example}
 Consider the problem of finding the roots of a quadratic polynomial; that is, the values of $t$ for which $at^2+bt+c=0$. Here the data are the coefficients $a$, $b$, and $c$ that define the polynomial, and the solution to the problem are the two (maybe complex-valued) roots $t_1$ and $t_2$. Formally, we might write $f([a,b,c])=[t_1,t_2]$ using vector notation.
 
-In order to simplify matters, we will pick one root called $r$, and first consider what happens as we vary just the leading coefficient $a$. This suggests a scalar function $f(a)=r$. We could use the quadratic formula to express $f$ explicitly, but it's a bit easier to start from $ ar^2 + br + c = 0$ and use the technique of implicit differentiation to find $dr/da$, while $b$ and $c$ are held fixed. Taking $d/da$ of both sides and applying the chain rule, we get
+In order to simplify matters, we will pick one root called $r$, and first consider what happens as we vary just the leading coefficient $a$. This suggests a scalar function $f(a)=r$. We could use the quadratic formula to express $f$ explicitly, but it's a bit easier to start from $ar^2 + br + c = 0$ and use the technique of implicit differentiation to find $dr/da$, while $b$ and $c$ are held fixed. Taking $d/da$ of both sides and applying the chain rule, we get
 
 ```{math}
 r^2 + 2a r \left(\frac{dr}{da}\right) + b \,\frac{dr}{da} = 0.
