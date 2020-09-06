@@ -185,7 +185,7 @@ Exercises marked with ✍ are intended to be done by hand or with the aid of a s
     \lim_{n\to\infty} \frac{\pi \beta_n^2}{2n}=1.
     ```
 
-    In Julia the function `randn` simulates drawing numbers from the normal or Gaussian distribution (i.e., the bell curve) with mean zero and variance 1. Choose a unique positive integer seed value $s$ (for example, use the last 5 digits of your phone number) and enter `import Rand; Rand.seed!(s)` to initialize the random number generator. Then the following code generates one random walk for $n=10^4$:
+    In Julia the function `randn` simulates drawing numbers from the normal or Gaussian distribution (i.e., the bell curve) with mean zero and variance 1. Choose a unique positive integer seed value $s$ (for example, use the last 5 digits of your phone number) and enter `import Random; Random.seed!(s)` to initialize the random number generator. Then the following code generates one random walk for $n=10^4$:
 
     ``` julia
     r = randn(10000)           # draw random numbers
