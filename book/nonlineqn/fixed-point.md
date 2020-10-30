@@ -156,7 +156,7 @@ There are stronger and more general statements of [the contraction mapping theor
 
     **(b)** $g(x) = \sqrt{1+x}$, $r=(1+\sqrt{5})/2$
 
-    **(c)** $g(x) = \sqrt{1+x}$, $r=(1-\sqrt{5})/2$
+    **(c)** $g(x) = -\sqrt{1+x}$, $r=(1-\sqrt{5})/2$
 
     **(d)** $g(x) = x+1-\tan(\pi x)$, $r=1/4$
   
