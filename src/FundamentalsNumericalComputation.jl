@@ -16,6 +16,7 @@ using Reexport
 @reexport using Interpolations
 @reexport using GraphRecipes
 @reexport using Images
+@reexport using TestImages
 @reexport using FileIO
 
 
