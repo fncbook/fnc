@@ -15,6 +15,9 @@ using Reexport
 @reexport using QuadGK 
 @reexport using Interpolations
 @reexport using GraphRecipes
+@reexport using Images
+@reexport using FileIO
+
 
 @info "Exporting: LinearAlgebra,SparseArrays,Polynomials,NLsolve,Interpolations,OrdinaryDiffEq,PrettyTables,Plots"
 
