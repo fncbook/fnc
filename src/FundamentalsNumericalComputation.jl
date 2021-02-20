@@ -14,6 +14,7 @@ using Reexport
 @reexport using PrettyTables
 @reexport using QuadGK 
 @reexport using Interpolations
+@reexport using GraphRecipes
 
 @info "Exporting: LinearAlgebra,SparseArrays,Polynomials,NLsolve,Interpolations,OrdinaryDiffEq,PrettyTables,Plots"
 
