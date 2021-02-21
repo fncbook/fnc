@@ -18,6 +18,8 @@ using Reexport
 @reexport using Images
 @reexport using TestImages
 @reexport using FileIO
+@reexport using LaTeXStrings
+@reexport using JLD2
 
 
 @info "Exporting: LinearAlgebra,SparseArrays,Polynomials,NLsolve,Interpolations,OrdinaryDiffEq,PrettyTables,Plots"
