@@ -3,15 +3,15 @@ title: Fundamentals of Numerical Computation
 author: Tobin A. Driscoll and Richard J. Braun
 logo: logo.png
 
-# parse:
-#   myst_enable_extensions:
-#   - amsmath
-#   - colon_fence
-#   - deflist
-#   - dollarmath
-#   - html_image
-#   - linkify
-#   - replacements
+parse:
+  myst_enable_extensions:
+  - amsmath
+  - colon_fence
+  - deflist
+  - dollarmath
+  - html_image
+  - linkify
+  - replacements
 
 latex:
   latex_documents:
@@ -74,7 +74,8 @@ sphinx:
       HTML-CSS:
         availableFonts: []
         preferredFont: null
-        webFont: Gyre-Termes
+        #webFont: Gyre-Termes
+        webFont: Asana-Math
     proof_theorem_types:
       "algorithm": "Algorithm"
       "conjecture": "Conjecture"

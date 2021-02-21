@@ -1,0 +1,757 @@
+\chapter{Matrix analysis}
+\label{cha:matrixanaly}
+
+\graphicspath{{matrixanaly/figures/}{matrixanaly/examples/}}
+
+\begin{flushright}
+  \small \sf
+  \begin{tabular}{p{3in}}
+
+    Judge me by my size, do you?\\ \hfill --- Yoda, \textit{The Empire Strikes Back} \index{Yoda} \index{The Empire Strikes Back}
+  \end{tabular}
+\end{flushright}
+
+
+In previous chapters we have seen how matrices that represent square or overdetermined linear systems of equations can be manipulated into LU and QR factorizations. But matrices have other factorizations that are more intrinsic to their nature as mathematical linear transformations. The most fundamental of these are the eigenvalue and singular value decompositions.
+
+These decompositions can be used to solve linear and least squares systems, but they have greater value in how they represent the matrix itself. They lead to critical and quantitative insights about the structure of the underlying transformation and suggest ways to approximate it efficiently. In this chapter we will look at both of these fundamental decompositions and hint at just a few of their computational applications.
+
+\newpage
+
+\section{From matrix to insight}
+\label{sec:matrix-insight}
+
+\texthighlight{matrixinsight}{Any two-dimensional array of numbers may be interpreted as a matrix.} Whether or not this is the only point of view that matters to a particular application, it does lead to particular types of analysis. The related mathematical and computational tools are universally applicable and find diverse uses.
+
+\subsection{Tables as matrices}
+
+Tables are used to represent variation of a quantity with respect to two variables. These variables may be encoded as the rows and columns of a matrix.
+
+\begin{exam}
+  Suppose we have a \textit{corpus}, or collection of text documents. A \textit{term-document matrix} has one column for each document and one row for each unique term appearing in the corpus. The $(i,j)$ entry of the matrix is the number of times term $i$ appears in document $j$. That is, column $j$ of the matrix is a term-frequency vector quantifying all occurrences of the indexed terms. A new document could be represented by its term-frequency vector, which is then comparable to the columns of the matrix. Or, a new term could be represented by counting its appearances in all of the documents and be compared to the rows of the matrix.
+
+  It turns out that by finding the singular value decomposition (\secref{svd}) of the term-document matrix, the strongest patterns within the corpus can be isolated, frequently corresponding to what we interpret as textual meaning. This is known as \emph{latent semantic analysis.}
+\end{exam}
+
+\begin{exam}
+  The website \url{www.congress.gov/roll-call-votes} offers data on all the votes cast in each session of the U.S.\ Congress. We can put members of Congress along the columns of a matrix and bills along the rows, recording a number that codes for ``yea,''  ``nay,'' ``none,'' etc. The singular value decomposition (\secref{svd}) can reveal an objective, reproducible analysis of the partisanship and cooperation of individual members.
+\end{exam}
+
+\begin{exam}
+  In 2006 the online video service Netflix started an open competition for a \$1 million prize. They provided a data set of 100,480,507 ratings (one to five stars) made by 480,189 users for 17,770 movies. Each rating is implicitly an entry in a 17,770$\times$480,189 matrix. The object of the prize was to predict a user's ratings for movies they had not rated. This is known as a \emph{matrix completion problem.} (It took 6 days for a contestant to improve on Netflix's private algorithm, and in 2009 the million-dollar prize was awarded to a team that had improved the performance by over 10\%.)
+\end{exam}
+
+\subsection{Graphs as matrices}
+
+An important concept in modern mathematics is that of a \textbf{graph}. A graph consists of a set $V$ of \index{graph nodes and edges} \textbf{nodes} and a set $E$ of \textbf{edges}, each of which is an ordered pair of nodes. The natural interpretation is that the edge $(v_i,v_j)$ denotes a link from node $i$ to node $j$, in which case we say that node $i$ is adjacent to node $j$. One usually visualizes small graphs by drawing points for nodes and arrows or lines for the edges.
+
+Graphs are useful because they are the simplest way to represent link structure---of social networks, airline routes, power grids, sports teams, and web pages, to name a few examples. They also have close ties to linear algebra. Prominent among these is the \index{adjacency matrix} \index{matrix!adjacency|see {adjacency matrix}} \gls{adjacency matrix} of the graph. If the graph has $n$ nodes, then its $n\times n$ adjacency matrix $\mA$ has elements
+\begin{equation}
+\label{eq:adjmat}
+A_{ij} =
+\begin{cases}
+1,& \text{if $(v_i,v_j)\in E$ (i.e., there is an edge from node $i$ to node $j$)},\\
+0,& \text{otherwise}.
+\end{cases}
+\end{equation}
+
+\begin{exam}
+    \inputexample{matrixanaly}{buckyplot}
+\end{exam}
+
+
+The representation of a graph by its adjacency matrix opens up the possibility for many kinds of analysis of the graph. One might ask whether the nodes admit a natural partition into clusters, for example. Or one might ask to rank the nodes in order of importance to the network as determined by some objective criteria---an application made famous by Google's PageRank algorithm, and one which is mathematically stated as an eigenvalue problem (\secref{evd}).
+
+
+\subsection{Images as matrices}
+%\label{sec:images}
+
+\index{matrix!as image}
+Computers most often represent images as rectangular arrays of pixels, each of which is colored according to numerical values for red (R), green (G), and blue (B) components of white light. Typically these are given as integers in the range from zero (no color) to 255 (full color). Thus, an image that is $m$-by-$n$ pixels can be stored as an $m$-by-$n$-by-3 array of integer values.
+
+We will simplify the representation by considering images represented using pixels that can take only shades of gray. We will also use floating-point numbers rather than integers, so that we can operate on them using real arithmetic, though we will stay with the convention that values should be in the range $[0,255]$. (Pixels below zero or above 255 will be colored pure black or pure white, respectively.)
+
+\begin{exam}
+    \inputexample{matrixanaly}{imreaddemo}
+\end{exam}
+
+Representation of an image as a matrix allows us to describe some common image operations in terms of linear algebra. Furthermore, the singular value decomposition (\secref{svd}) can be used to compress the information.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{exercises}
+  \input{matrixanaly/exercises/Insight}
+\end{exercises}
+
+\clearpage
+
+\section{Eigenvalue decomposition}
+\label{sec:evd}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+To this point we have dealt frequently with the solution of the linear system $\mA \bfx=\bfb$. Alongside this problem in its importance to linear algebra is the eigenvalue problem,
+\begin{equation}
+  \label{eq:eigdef}
+  \mA \bfx = \lambda \bfx,
+\end{equation}
+for a scalar \index{eigenvalue} \textbf{eigenvalue} $\lambda$ and an associated nonzero \textbf{eigenvector} $\bfx$.
+
+\subsection{Complex matrices}
+
+A matrix with real entries can have complex eigenvalues. Therefore we assume all matrices, vectors, and scalars may be complex in what follows. Recall that a complex number can be represented as $a+ib$, for real $a$ and $b$ and where $i^2=-1$. The \textbf{complex conjugate} of $x=a+ib$ is denoted $\bar{x}$ and is given by $\bar{x}=a-ib$. The \gls{hermitian} or conjugate transpose of a matrix $\mA$ is denoted $\mA^*$ and is given by $\mA^*=(\overline{\mA})^T=\overline{\mA^T}$.
+
+For the most part, ``hermitian'' replaces ``transpose'' when dealing with complex matrices. For instance, the inner product of complex vectors $\bfu$ and $\bfv$ is
+\begin{equation}
+  \label{eq:complexinnerprod}
+  \bfu^* \bfv = \sum_{k=1}^n \overline{u}_k v_k,
+\end{equation}
+which in turn defines the 2-norm for complex vectors, and thereby
+matrices as well. The definitions of orthogonal and orthonormal sets
+of complex-valued vectors use ${}^*$
+instead of ${}^T$. The analog of an orthgonal matrix in the complex
+case---that is, a square matrix whose columns are orthonormal in the
+complex sense---is said to be \index{unitary matrix} \index{matrix!unitary|see {unitary matrix}} \index{orthogonal!matrix|seealso {unitary matrix}} \gls{unitary}. A unitary matrix $\mU$
+satisfies $\mU^{-1}=\mU^*$ and $\twonorm{\mU\bfx}=\twonorm{\bfx}$ for any
+complex vector $\bfx\in\complex^n$.
+
+% \subsection{Independence and basis}
+
+% Recall that a linear combination of vectors $\bfv_1$, \ldots, $\bfv_k$
+% is a vector of the form
+% \begin{equation*}
+%   c_1 \bfv_1 +  \dots + c_k \bfv_k,
+% \end{equation*}
+% for scalars $c_1,\dots,c_k$. Linear combinations are equivalent to
+% matrix-vector products, via
+% The \textbf{span} of these vectors is the set of all possible linear
+% combinations; i.~e., the range of $\mV$. The vectors are said to be
+% \textbf{independent} if
+% \begin{equation*}
+%   c_1 \bfv_1+\dots + c_k \bfv_k = \bfzero \text{ implies }
+%   c_1=c_2 = \dots = c_k = 0.
+% \end{equation*}
+% Otherwise they are said to be \textbf{dependent}. Dependence implies
+% that the equation $V\bfx=\bfzero$ has a nonzero solution for
+% $\bfx$. If $\mV$ is square, this fact is equivalent to the singularity
+% of $\mV$.
+
+% A \textbf{basis} of $\complex^n$ is a set of $n$ linearly independent
+% vectors. If $\{\bfv_{1},\dots,\bfv_{n}\}$ is such a set, then
+% $V\bfx=\bfb$ has a solution for every $\bfb$. If $\mV$ is square, then the
+% statements ``$\mV$ is nonsingular'' and ``the columns of $\mV$ form a
+% basis'' are equivalent.
+
+% %A basis is like a coordinate system for $\complex^n$.  If $\mV$ is
+% %square and nonsingular, its columns form a basis and the vector $y=Vx$
+% %is the linear combination whose coefficients are the components of
+% %$x$. In other words, the entries of $x=V^{-1}y$ are the coefficients
+% %of $y$ when it is expressed in the basis made up of the columns of
+% %$\mV$. This connection between matrix-vector multiplication and changes
+% %of basis is quite important.
+
+
+\subsection{Eigenvalue decomposition}
+
+The eigenvalue equation $\mA\bfx=\lambda\bfx$ is equivalent to $(\lambda\meye - \mA)\bfx=\bfzero$, which, since $\bfx$ is nonzero in order to be an eigenvector, implies that $\lambda\meye - \mA$ is a singular matrix. This observation leads to the familiar property of an eigenvalue being a root of the \index{characteristic polynomial} \textbf{characteristic polynomial} $\det(\lambda \meye - \mA)$. From here one concludes that an $n\times n$ matrix has $n$ eigenvalues, counting multiplicity.
+
+Hence suppose that $\mA\bfv_k=\lambda_k\bfv_k$ for $k=1\ldots,n$. We can summarize these as
+\begin{align}
+  \begin{bmatrix}
+    \mA\bfv_1 & \mA\bfv_2 & \cdots & \mA\bfv_n
+  \end{bmatrix}
+  &=
+    \begin{bmatrix}
+      \lambda_1 \bfv_1 & \lambda_2\bfv_2 & \cdots & \lambda_n \bfv_n
+    \end{bmatrix}\notag\\
+  \mA \begin{bmatrix}
+    \bfv_1 & \bfv_2 & \cdots & \bfv_n
+  \end{bmatrix}
+  &=
+\begin{bmatrix}
+    \bfv_1 & \bfv_2 & \cdots & \bfv_n
+  \end{bmatrix}
+  \begin{bmatrix}
+    \lambda_1 & &  &  \\
+    & \lambda_2 & & \\
+    & & \ddots & \\
+    & & & \lambda_n
+  \end{bmatrix} \notag\\
+  \mA \mV &= \mV \mD. \label{eq:ev-all}
+\end{align}
+So far $\mA$ could be any square matrix. But if we also assume that $\mV$ is a nonsingular matrix, we can rewrite~\eqref{eq:ev-all} as
+\begin{equation}
+  \label{eq:evdecomp}
+  \mA = \mV \mD \mV^{-1}.
+\end{equation}
+\texthighlight{evd}{Equation~\eqref{eq:evdecomp} is called an \index{matrix!factorization!|seealso {eigenvalue decomposition}} \index{eigenvalue decomposition} \gls{eigenvalue decomposition} (EVD) of $\mA$.} If $\mA$ has an EVD, we say that $\mA$ is \index{matrix!diagonalizable} \gls{diagonalizable}; otherwise $\mA$ is \textbf{nondiagonalizable} (or \emph{defective}). One simple example of a nondiagonalizable matrix is
+\begin{equation}
+  \label{eq:jordanblock}
+  \mB = \begin{bmatrix}
+    1 & 1\\0 & 1
+  \end{bmatrix}.
+\end{equation}
+There is a common circumstance in which we can guarantee an EVD exists; the proof of the following theorem can be found in many elementary texts on linear algebra.
+\begin{thm}
+  If the $n\times n$ matrix $\mA$ has $n$ distinct eigenvalues, then $\mA$
+  is diagonalizable.
+\end{thm}
+
+The \gls{eig} command can be used to compute the eigenvalue decomposition of a given matrix.
+
+\begin{exam}
+  \inputexample{matrixanaly}{eigintro}
+\end{exam}
+
+Observe that if $\mA\bfv = \lambda \bfv$ for nonzero $\bfv$, then the equation remains true for any nonzero multiple of $\bfv$, so eigenvectors are not unique, and neither is an EVD.
+
+
+
+\subsection{Similarity and change of basis}
+
+The particular relationship between matrices $\mA$ and $\mD$ in~\eqref{eq:evdecomp} is important.  If $\mS$ is any nonsingular matrix, we say that $\mB=\mS\mA\mS^{-1}$ is \index{matrix!similar} \textbf{similar} to $\mA$. A similarity transformation does not change eigenvalues, a fact that is typically proved in elementary linear algebra texts.
+%A similarity transformation is really a change of
+%basis. Interpret the product $SAS^{-1}x$ from right to left as follows:
+%First express $x$ in the basis of columns of $\mS$, then apply $\mA$, then
+%undo the change of basis.
+%The following theorem states that eigenvalues are independent of basis.
+\begin{thm}
+  If $\mX$ is an nonsingular matrix, then $\mX\mA\mX^{-1}$ has the same
+  eigenvalues as $\mA$.
+\end{thm}
+
+Similarity transformation has a relatively simple interpretation. First, consider the product of a nonsingular $\mX$ with any vector:
+\begin{equation*}
+  \bfy = \mX \bfz = z_1 \bfx_1 +  \dots + z_n \bfx_n.
+\end{equation*}
+We call $z_1,\ldots,z_n$ the \emph{coordinates} of the vector $\bfy$ with respect to the columns of $\mX$. That is, $\bfz$ is a representation of $\bfy$ relative to the basis implied by the columns of $\mX$. But then $\bfz = \mX^{-1} \bfy$, so left-multiplication by $\mX^{-1}$ converts the vector $\bfy$ into that representation. In other words, \texthighlight{changebasis}{multiplication by the inverse of a matrix performs a \textbf{change of basis} into the coordinates associated with the matrix.}
+
+So now consider the EVD~\eqref{eq:evdecomp} and the product $\bfu =\mA \bfx$, or $(\mV^{-1}\bfu) = \mD(\mV^{-1}\bfx)$. This equation says that if you express the input $\bfx$ and the output $\bfu$ into the coordinates of the $\mV$-basis, then the relationship between them
+is diagonal. That is, the EVD is about finding a basis for $\complex^n$ in which the map $\bfx\mapsto\mA\bfx$ is a diagonal one in which the coordinates are independently rescaled.
+
+The fact that the EVD represents a change of basis in both the domain and range spaces makes it useful for matrix powers: $$\mA^2=(\mV\mD\mV^{-1})(\mV\mD\mV^{-1})=\mV\mD(\mV^{-1}\mV)\mD\mV^{-1}=\mV\mD^2\mV^{-1},$$ and so on. Because $\mD$ is diagonal, its power $\mD^k$ is just the diagonal matrix of the powers of the eigenvalues.
+
+
+\subsection{Conditioning of eigenvalues}
+\label{sec:schur}
+
+\index{eigenvalue!conditioning of}
+\index{condition number!of eigenvalues}
+Just as linear systems have condition numbers that quantify the effect of fixed precision, eigenvalue problems may be poorly conditioned too. While many possible results can be derived, we will use just one, the \index{Bauer--Fike theorem} \textbf{Bauer--Fike theorem}.\footnote{We will apply it only in the 2-norm, though it is more generally true.}  \begin{thm}
+  \label{thm:bauerfike}
+  Let $\mA\in\complex^{n\times n}$ be diagonalizable, $\mA=\mV\mD\mV^{-1}$, with
+  eigenvalues $\lambda_1,\ldots,\lambda_n$. If $\mu$ is an eigenvalue
+  of $\mA+\mE$ for a complex matrix $\mE$, then
+  \begin{equation}
+    \label{eq:bauerfike}
+    \min_{j=1,\ldots,n} |\mu - \lambda_j| \le \kappa(\mV) \| \mE \|,
+  \end{equation}
+  where $\|\cdot\|$ and $\kappa$ are in the 2-norm.
+\end{thm}
+
+% \begin{proof}
+%   If the matrix $D-\mu I$ is singular, then $\mu=\lambda_j$ for some
+%   $j$ and we are done. Otherwise, the eigenvalue condition on $\mu$
+%   implies that $\mA+\Delta A - \mu I$ is singular. We can multiply on
+%   the left by $V^{-1}$ and on the right by $\mV$ without changing the
+%   singularity of the matrix. Using $\mA=VDV^{-1}$, we have that
+%   \begin{equation*}
+%     D + V^{-1}(\Delta A) V - \mu I
+%   \end{equation*}
+%   is singular. So there exists a unit vector $\bfx$ such that
+%   \begin{align*}
+%     (D-\mu I)\bfx &= -V^{-1}(\Delta A)V \bfx \\
+%     -(D-\mu I)^{-1} V^{-1}(\Delta A)V \bfx &= \bfx.
+%   \end{align*}
+%   By the definition of an induced matrix norm (see~\eqnref{normineq1}),
+%   \begin{equation*}
+%     \norm{-(D-\mu I)^{-1} V^{-1}(\Delta A)V} \ge 1.
+%   \end{equation*}
+%   Using norm inequality~\eqnref{normineq2}, we deduce
+%   \begin{equation*}
+%     1 \le \norm{-(D-\mu I)^{-1}}\, \norm{V^{-1}} \,\norm{\Delta A}\,
+%     \norm{V} = \norm{(D-\mu I)^{-1}}\, \norm{\Delta A} \kappa(\mV).
+%   \end{equation*}
+%   The proof is finished by noting that, by diagonality (see
+%   \proref{norms}{diagnorm}),
+%   \begin{equation*}
+%     \norm{(D-\mu I)^{-1}} = \max_{j} \frac{1}{|\lambda_j-\mu|}
+%     = \frac{1}{\displaystyle \min_j |\lambda_j-\mu|}.
+%   \end{equation*}
+% \end{proof}
+
+The Bauer--Fike theorem tells us that eigenvalues can be perturbed by an amount that is $\kappa(\mV)$ times larger than perturbations to the matrix. This result is a bit less straightforward than it might seem---eigenvectors are not unique, so there are multiple possible values for $\kappa(\mV)$. Still, the theorem indicates caution when a matrix has eigenvectors that form an ill-conditioned matrix. The limiting case of $\kappa(\mV)=\infty$ might be interpreted as indicating a nondiagonalizable matrix $\mA$.
+
+At the other extreme, if a unitary eigenvector matrix $\mV$ can be found, then $\kappa(\mV)=1$ and~\eqnref{bauerfike} guarantees that eigenvalues are robust under perturbations to the original matrix $\mA$. Such matrices are called \index{matrix!normal} \textbf{normal}, and they include the hermitian (or real symmetric) matrices. We consider them again in \secref{symm-eig}.
+
+\begin{exam*}
+  \inputexample{matrixanaly}{bauerfike}
+\end{exam*}
+
+\subsection{Computing the EVD}
+
+In elementary linear algebra you use the characteristic polynomial to compute the eigenvalues of small matrices. However, computing polynomial roots in finite time is impossible for degree~5 and over. In principle one could use Newton-like methods to find all of the roots, but doing so is relatively slow and difficult. Furthermore we know that polynomial roots tend to become poorly conditioned when roots get close to one another (see \exaref{quadrootcond}).
+
+Practical algorithms for computing the EVD go beyond the scope of this book. The essence of the matter is the connection to matrix powers, that is, $\mA^k = \mV \mD^k \mV^{-1}$. (We will see much more about the importance of matrix powers in \charef{krylov}.) If the eigenvalues have different complex magnitudes, then as $k\to\infty$ the entries on the diagonal of $\mD^k$ become increasingly well separated and easy to pick out. It turns out that there is an astonishingly easy and elegant way to accomplish this separation without explicitly computing the matrix powers.
+
+\begin{exam}
+  \inputexample{matrixanaly}{qriter}
+\end{exam}
+
+The process demonstrated in \exaref{qriter} is known as the \index{Francis QR iteration} \textit{Francis QR iteration}, and it can be formulated as an $O(n^3)$ algorithm for finding the EVD. Such an algorithm is what the \texttt{eig} command uses.
+
+
+
+% \subsection{The Schur decomposition}
+
+% Mathematically, a matrix $\mV$ whose columns are independent eigenvectors can be used to transform $\mA$ to a diagonal matrix having the same eigenvectors: $V^{-1}AV=D$. The possibility of a large $\kappa(\mV)$, or even a nondiagonalizable matrixthe ill conditioning---or even nonexistence---of $\mV$, however, suggests looking for alternative similarity transformations.
+
+% A unitary matrix has a condition number equal to one, the lowest possible value. Therefore let us consider the idea of finding a unitary $\mU$ such that $\mU^{-1}\mA\mU=\mU^*\mA\mU$ has easily computed eigenvalues. An important theorem tells us that this is always possible.
+% \begin{thm}
+%   \label{thm:schur}
+%   For any complex square matrix $\mA$ there exist a unitary $\mU$ and an
+%   upper triangular $T$ such that
+%   \begin{equation}
+%     \label{eq:schur}
+%     \mA = \mU\m{T}\mU^{-1} = \mU\m{T}\mU^*.
+%   \end{equation}
+%   That is, every square matrix is unitarily similar to a triangular matrix.
+% \end{thm}
+
+% Equation~\eqnref{schur} is called a \textbf{Schur decomposition}. The value of the Schur decomposition stems from the fact that the eigenvalues of a triangular matrix $\m{T}$ are the diagonal entries of $\m{T}$. Hence unitary similarity transformations of $\mA$ can be used to reveal its eigenvalues.
+
+\begin{exercises}
+  \input{matrixanaly/exercises/EigenvalueDecomposition}
+\end{exercises}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+
+\section{Singular value decomposition}
+\label{sec:svd}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We now introduce another factorization that is as fundamental as the EVD.
+
+\begin{thm}
+  Let $\mA\in\complex^{m\times n}$. Then $\mA$ can be written as
+  \begin{equation}
+    \label{eq:svd}
+    \mA = \mU \mS \mV^*,
+  \end{equation}
+  where $\mU\in\complex^{m\times m}$ and $\mV\in\complex^{n\times n}$ are
+  \index{unitary matrix} unitary and $\mS\in\real^{m\times n}$ is real and diagonal with
+  nonnegative entries. If $\mA$ is real, then so are $\mU$ and
+  $\mV$ (which are then orthogonal matrices).
+\end{thm}
+
+\texthighlight{svd}{Equation~\eqnref{svd} is called a \index{matrix!factorization|seealso {singular value decomposition}} \index{singular value decomposition} \gls{singular value decomposition}, or SVD, of $\mA$.} The columns of $\mU$ and $\mV$ are called \textbf{left} and \textbf{right singular vectors}, respectively. The diagonal entries of $\mS$, written $\sigma_1,\ldots,\sigma_r$, for $r=\min\{m,n\}$, are called the \index{singular value} \textbf{singular values} of $\mA$. By convention the singular values are ordered so that
+\begin{equation}
+  \label{eq:svdorder}
+  \sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_r\ge 0, \qquad r=\min\{m,n\}.
+\end{equation}
+We call $\sigma_1$ the \index{singular value!principal} \textbf{principal singular value} and $\bfu_{1}$ and $\bfv_{1}$ the \textbf{principal singular vectors}. The matrix $\mS$ in the SVD is uniquely defined when the ordering is imposed, but the singular vectors are not---one could replace both $\mU$ and $\mV$ by their negatives, for example.
+
+\begin{exam}
+  Suppose $\mA$ is a real matrix and that $\mA=\mU\mS\mV^T$ is an SVD. Then $\mA^T=\mV\mS^T\mU^T$ meets all the requirements of an SVD for $\mA^T$: the first and last matrices are orthogonal, and the middle matrix is diagonal with nonnegative entries. Hence $\mA$ and $\mA^T$ have the same singular values.
+\end{exam}
+
+\subsection{Interpreting the SVD}
+
+Another way to write $\mA=\mU\mS\mV^*$ is as $\mA\mV=\mU\mS$. Taken columnwise, this means
+\begin{equation}
+  \label{eq:svdcolumns}
+  \mA \bfv_{k} = \sigma_k \bfu_{k}, \qquad k=1,\ldots,r=\min\{m,n\}.
+\end{equation}
+In words, each right singular vector is mapped by $\mA$ to a scaled version of its corresponding left singular vector; the magnitude of scaling is its singular value. Together with the orthonormality of the columns of $\mU$ and $\mV$, these equations provide a simple graphical interpretation of the SVD. A representative $3\times 3$ case is shown in \figref{svdvisual}.
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[width=2in]{svdright}
+  \hspace{8mm}
+  \includegraphics[width=2in]{svdleft}
+  \caption{Visual interpretation of the SVD for $3\times 3$ real matrices. Under multiplication by the matrix, a unit sphere, expressed in the right singular vector coordinates (shown at left), maps to an ellipsoid, given in the left singular vector coordinates (shown at right).}
+  \label{fig:svdvisual}
+\end{figure}
+
+Both the SVD and the EVD describe a matrix in terms of some special vectors and a small number of scalars. \tabref{evdsvd} summarizes the key differences. The SVD sacrifices having the same basis in both source and image spaces---after all, they may not even have the same dimension---but as a result gains orthogonality in both spaces.
+\begin{table}[tb]
+  \centering
+  \caption{Differences between the EVD and the SVD.}
+  \label{tab:evdsvd}
+  \begin{tabular}{cc}
+    \textbf{EVD}  & \textbf{SVD} \\\hline
+    most square matrices & all rectangular and square matrices \\
+    $\mA\bfx_k = \lambda_k \bfx_k$    &   $\mA \bfv_k = \sigma_k \bfu_k$ \\
+    same basis for domain and range of $\mA$ & two orthogonal bases \\
+    may have poor conditioning & perfectly conditioned
+  \end{tabular}
+\end{table}
+
+
+
+
+\subsection{SVD and the 2-norm}
+
+\texthighlight{svd2norm}{The SVD is intimately connected to the 2-norm,} as the following theorem describes. \index{norm!matrix}
+\begin{thm}
+  \label{thm:svd}
+  Let $\mA\in\complex^{m\times n}$ have an SVD $\mA=\mU\mS\mV^*$ in
+  which~\eqnref{svdorder} holds. Then
+  \begin{remunerate}
+  \item The 2-norm satisfies
+    \begin{equation}
+      \label{eq:svdnorm}
+      \twonorm{\mA} = \sigma_1.
+    \end{equation}
+  \item The rank of $\mA$ is the number of nonzero singular values.
+  \item Let $r=\min\{m,n\}$. Then
+    \begin{equation}
+      \label{eq:svdcond}
+      \kappa_2(\mA) = \|\mA\|_2\|\mA^+\|_2 = \frac{\sigma_1}{\sigma_r},
+    \end{equation}
+    where a division by zero implies that $\mA$ does not have full rank.
+  % \item Let
+  % \begin{equation}
+  %     \label{eq:svdrank1}
+  %     \mA_k = \sigma_1 \bfu_{1}\bfv_{1}^* + \sigma_2
+  %     \bfu_{2}\bfv_{2}^*
+  %     + \cdots + \sigma_k \bfu_{k}\bfv_{k}^* = \mU_k\mS_k\mV_k^*,
+  % \end{equation}
+  % where $\mU_k$ and $\mV_k$ are $n\times k$ matrices with the first $k$
+  % columns of $\mU$ and $\mV$, and $\mS_k$ is the upper-left $k\times k$
+  % submatrix of $\mS$. Then $\mA_n=\mA$ and
+  % \begin{equation*}
+  %   \twonorm{\mA - \mA_k} = \sigma_{k+1}, \qquad k=1,\ldots,n-1.
+  % \end{equation*}
+  \end{remunerate}
+\end{thm}
+
+The conclusion~\eqnref{svdnorm} is intuitively clear from \figref{svdvisual}, and some straightforward vector calculus provides a proof (see \proref{svd}{svdnormproof}). In the square case $m=n$, $\mA$ having full rank is identical to being nonsingular.  The SVD is the usual means for computing the 2-norm and condition number of a matrix. We demonstrate this using MATLAB's \gls{svd} command.
+
+\begin{exam*}
+  \inputexample{matrixanaly}{svdproperties}
+\end{exam*}
+
+\subsection{Connections to the EVD}
+
+\index{matrix!factorization!eigenvalue}
+Let $\mA=\mU\mS\mV^*$ be $m\times n$, and consider the square \index{matrix!hermitian} hermitian matrix $\mB=\mA^*\mA$:
+\begin{equation*}
+  \mB = (\mV\mS^*\mU^*) (\mU\mS\mV^*) = \mV\mS^*\mS\mV^* = \mV(\mS^T\mS)\mV^{-1}.
+\end{equation*}
+Note that $\mS^T\mS$ is a diagonal $n \times n$ matrix. There are two cases to consider:
+\begin{center}
+  \begin{tabular}{lcl}
+    \underline{$m \ge n$:} & $\qquad$ & \underline{$m < n$:} \\
+    $\displaystyle \mS^T\mS =
+    \begin{bmatrix}
+      \sigma_1^2 & & \\
+      & \ddots & \\
+      & & \sigma_n^2
+    \end{bmatrix}$, &  &
+    $\displaystyle \mS^T\mS =
+    \begin{bmatrix}
+      \sigma_1^2 & & & \\
+      & \ddots & & \\
+      & & \sigma_m^2 & \\
+      & & & \bm{0}
+    \end{bmatrix}$,
+  \end{tabular}
+\end{center}
+where the lower-right zero in the last matrix is $n-m$ square. In both cases we may conclude that the squares of the singular values of $\mA$ are all eigenvalues of $\mB$. Conversely, an EVD of $\mB$ reveals the singular values and a set of right singular vectors of $\mA$. The left singular vectors could then be deduced from the identity $\mA\mV = \mU\mS$.
+
+Another close connection between EVD and SVD comes via the $(m+n)\times (m+n)$ matrix
+\begin{equation}
+  \label{eq:svdaugment}
+  \mC =
+  \begin{bmatrix}
+    0 & \mA^* \\ \mA & 0
+  \end{bmatrix}.
+\end{equation}
+If $\sigma$ is a singular value of $\mB$, then $\sigma$ and $-\sigma$ are eigenvalues of $\mC$, and the associated eigenvector immediately reveals a left and a right singular vector (see \proref{svd}{svdtoevd}). This connection is implicitly exploited by software to compute the SVD.
+
+\subsection{Thin form}
+
+In \secref{QR} we saw that a matrix has both a ``full'' and a ``thin'' or reduced form of the QR factorization. \index{singular value decomposition!thin form} A similar situation holds with the SVD. Suppose $\mA$ is $m\times n$ with $m > n$ and let $\mA=\mU\mS\mV^*$ be an SVD. The last $m-n$ rows of $\mS$ are all zero due to the fact that $\mS$ is diagonal. Hence
+\begin{align}
+  \mU \mS & =
+  \begin{bmatrix}
+    \bfu_1 & \cdots & \bfu_n & \bfu_{n+1} & \cdots & \bfu_m
+  \end{bmatrix}
+  \begin{bmatrix}
+    \sigma_1 & &  \\
+    & \ddots &  \\
+    & & \sigma_n \\
+    & & \\
+    & \bm{0} & \\
+    & &
+  \end{bmatrix} \notag\\
+  &=
+  \begin{bmatrix}
+    \bfu_1 & \cdots & \bfu_n
+  \end{bmatrix}
+  \begin{bmatrix}
+    \sigma_1 & &  \\
+    & \ddots &  \\
+    & & \sigma_n
+  \end{bmatrix} = \widehat{\mU} \widehat{\mS},
+        \label{eq:svd-reduced}
+\end{align}
+in which $\widehat{\mU}$ is $m\times n$ and $\widehat{\mS}$ is $n\times n$. This allows us to define the \textbf{thin SVD} $\mA=\widehat{\mU}\widehat{\mS}\mV^*$, in which $\widehat{\mS}$ is square and diagonal and $\widehat{\mU}$ is \index{ONC} ONC but not unitary. This form is computationally preferable when $m\gg n$, since it requires far less storage and contains the same information about $\mA$. In MATLAB one uses \verb|svd(A,0)| to get the thin form. In the dual case where $m<n$, you can use the reduced SVD of $\mA^*$ and then take the hermitian to get a reduced SVD for $\mA$.
+
+
+\begin{exercises}
+	\input{matrixanaly/exercises/SVD}
+\end{exercises}
+
+
+
+%\clearpage
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section{Computing the decompositions}
+% \label{sec:compdecomp}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %
+% %(This section can be skipped without interrupting the flow or breaking
+% %dependencies.)
+
+
+% There are some other important ways to connect singular values and eigenvalues.
+
+\clearpage
+
+\section{Symmetry and definiteness}
+\label{sec:symm-eig}
+
+\index{matrix!symmetric}
+As we saw in \secref{specialmatrix}, symmetry can simplify the LU factorization into a symmetric form, $\mA=\mL\mD\mL^T$. Certain specializations occur too for the eigenvalue and singular value factorizations. In this section we stay with complex-valued matrices, so we are interested in the case when $\mA^*=\mA$, or $\mA$ is hermitian. However, we often loosely speak of ``symmetry'' to mean this property in the complex case. All of the statements in this section easily specialize to the real case.
+
+\subsection{Unitary diagonalization}
+
+Suppose now that $\mA^*=\mA$ and that $\mA=\mU\mS\mV^*$ is an SVD. Since $\mS$ is real and square, we have
+\begin{equation*}
+  \mA^* = \mV \mS^* \mU^* = \mV \mS \mU^*,
+\end{equation*}
+and it's tempting to conclude that $\mU=\mV$. Happily, this is nearly true. The following theorem is typically proved in an advanced linear algebra course.
+\begin{thm}[Spectral decomposition]
+  \label{thm:spec-decomp} If $\mA=\mA^*$, then $\mA$ has a diagonalization $\mA=\mV \mD \mV^{-1}$ in which $\mV$ is unitary and $\mD$ is diagonal and real.
+\end{thm}
+Another way to state the result of \thmref{spec-decomp} is that \texthighlight{hermitianevec}{a hermitian matrix has a complete set of orthonormal eigenvectors---that is, a \emph{unitary diagonalization}---and real eigenvalues.} In this case, the EVD $\mA=\mV\mD\mV^{-1}=\mV \mD \mV^*$ is almost an SVD.
+\begin{thm}
+  If $\mA^*=\mA$ and $\mA=\mV\mD\mV^{-1}$ is a \index{unitary matrix} unitary diagonalization, then
+  \begin{equation}
+    \label{eq:herm-svd}
+    \mA = (\mV\m{T})\cdot |\mD|\cdot \mV^*
+  \end{equation}
+  is an SVD, where $|\mD|$ is the elementwise absolute value and $\m{T}$ is diagonal with $|T_{ii}|=1$ for all $i$.
+\end{thm}
+\begin{proof}
+  Let $T_{ii}=\operatorname{sign}(D_{ii})$. Then $\m{T}^2=\meye$ and $|\mD|=\m{T}\mD$. The result follows.
+\end{proof}
+
+The converse of \thmref{spec-decomp} is also true: every matrix with a unitary diagonalization and real eigenvalues is hermitian. However, there are nonhermitian matrices that meet just the requirement of a unitary EVD; any such matrix is called \textbf{normal}.
+
+\begin{exam}
+  \inputexample{matrixanaly}{svdnormal}
+\end{exam}
+
+Now consider again \thmref{bauerfike}, which says that the condition number of the eigenvalues is bounded above by $\kappa(\mV)$, where $\mV$ is an eigenvector matrix. Because $\kappa=1$ for any unitary or orthogonal matrix, \thmref{spec-decomp} then implies that the condition number of the eigenvalues of a hermitian or any normal matrix is one. That is, \texthighlight{normaleval}{eigenvalues of a normal matrix can be changed by no more than the norm of the perturbation to the matrix.}
+
+\begin{exam*}
+  \inputexample{matrixanaly}{normalperturb}
+\end{exam*}
+
+\subsection{Rayleigh quotient}
+
+\index{Rayleigh quotient}
+Recall that for a matrix $\mA$ and compatible vector $\bfx$, the quadratic form $\bfx^* \mA \bfx$ is a scalar. With a suitable normalization, it becomes the \gls{Rayleigh quotient}
+\begin{equation}
+  \label{eq:rayleigh}
+  R_{\mA}(\bfx) = \frac{ \bfx^* \mA \bfx}{\bfx^* \bfx}.
+\end{equation}
+If $\bfv$ is an eigenvector such that $\mA \bfv=\lambda \bfv$, then one easily calculates that $R_{\mA}(\bfv)=\lambda.$ That is, \texthighlight{rayleighquotient}{the Rayleigh quotient maps an eigenvector into its associated eigenvalue.}
+
+If $\mA^*=\mA$, then the Rayleigh quotient has another interesting property: $\nabla R_{\mA}(\bfv)=\bfzero$ if $\bfv$ is an eigenvector. By a multidimensional Taylor series, then,
+\begin{equation}
+  \label{eq:rq-series}
+  R_{\mA}(\bfv+\epsilon\bfz) = R_{\mA}(\bfv) + 0 + O( \epsilon^2) =  \lambda + O( \epsilon^2),
+\end{equation}
+as $\epsilon\to 0$. The conclusion is that a good estimate of an eigenvector becomes an even better estimate of an eigenvalue.
+
+\begin{exam*}
+  \inputexample{matrixanaly}{rayquo}
+\end{exam*}
+
+\subsection{Definite and indefinite matrices}
+
+\index{matrix!positive definite}
+In the real case, we called a symmetric matrix $\mA$ \emph{symmetric positive definite} (SPD)
+if $\bfx^T \mA\bfx > 0 $ for all nonzero vectors $\bfx$. In the complex case the relevant property is \index{hermitian positive definite} \textbf{hermitian positive definite} (HPD), meaning that $\mA^*=\mA$ and $\bfx^* \mA\bfx > 0$ for all complex vectors $\bfx$. Putting this property together with the Rayleigh quotient leads to
+\begin{thm}
+  \label{thm:hpd} If $\mA^*=\mA$, then the following statements are equivalent.
+  \begin{remunerate}
+  \item $\mA$ is HPD.
+  \item The eigenvalues of $\mA$ are positive numbers.
+  \item Any unitary EVD of $\mA$ is also an SVD of $\mA$.
+  \end{remunerate}
+\end{thm}
+
+Naturally, a hermitian matrix with all negative eigenvalues is called \emph{negative definite}, and one with eigenvalues of different signs is \emph{indefinite}. Finally, if one or more eigenvalues is zero and the rest have one sign, it is \emph{semidefinite}.
+
+
+\begin{exercises}
+  \input{matrixanaly/exercises/Symmetry}
+\end{exercises}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\section{Dimension reduction}
+\label{sec:dimreduce}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\index{singular value decomposition}
+\index{dimension reduction}
+The SVD has another important property that proves very useful in a variety of applications. Let $\mA$ be a real $m\times n$ matrix with SVD $\mA=\mU\mS\mV^T$ and (momentarily) $m\ge n$. Another way of writing the thin form of the SVD is
+\begin{align}
+  \mA = \widehat{\mU}\widehat{\mS}\mV^T &=
+  \begin{bmatrix}
+    \bfu_1 & \bfu_2 & \cdots & \bfu_n
+  \end{bmatrix}
+  \begin{bmatrix}
+    \sigma_1 & & \\
+    & \ddots & \\
+    & & \sigma_n
+  \end{bmatrix}
+        \begin{bmatrix}
+          \bfv_1^T \\ \vdots \\ \bfv_n^T
+        \end{bmatrix}  \notag \\
+  &=
+  \begin{bmatrix}
+    \sigma_1\bfu_1  & \cdots & \sigma_n\bfu_n
+  \end{bmatrix}
+                               \begin{bmatrix}
+                                  \bfv_1^T \\ \vdots \\ \bfv_n^T
+                               \end{bmatrix} \notag \\
+  \label{eq:svdsum}
+  &= \sigma_1 \bfu_{1}\bfv_{1}^T + \cdots + \sigma_r \bfu_{r}\bfv_{r}^T = \sum_{i=1}^r \sigma_i \bfu_{i}\bfv_{i}^T,
+\end{align}
+where $r$ is the rank of $\mA$. The final formula also holds for the case $m<n$.
+
+Each outer product $\bfu_{i}\bfv_{i}^T$ is a rank-1 matrix of unit norm. Thanks to the ordering of singular values, then, equation~\eqref{eq:svdsum} expresses $\mA$ as a sum of decreasingly important contributions. This motivates the definition, for $1\le k \le r$,
+\begin{equation}
+  \label{eq:svdlowrank}
+  \mA_k = \sum_{i=1}^k \sigma_i \bfu_{i}\bfv_{i}^T = \mU_k \mS_k \mV_k^T.
+\end{equation}
+where $\mU_k$ and $\mV_k$ are the first $k$
+columns of $\mU$ and $\mV$, respectively, and $\mS_k$ is the upper-left $k\times k$
+submatrix of $\mS$.
+
+The rank of a sum of matrices is always less than or equal to the sum of the ranks, so $\mA_k$ is a rank-$k$ approximation to $\mA$. It turns out that \texthighlight{bestrank}{$\mA_k$ is the \emph{best} rank-$k$ approximation of $\mA$,} as measured in the matrix 2-norm.
+\begin{thm}
+  \label{thm:best-rank-k}
+  Suppose $\mA$ has rank $r$ and let $\mA=\mU\mS\mV^T$ be an SVD. Let $\mA_k$ be as in~\eqref{eq:svdlowrank} for $1\le k < r$. Then
+  \begin{enumerate}
+  \item $\twonorm{\mA - \mA_k} = \sigma_{k+1}, \qquad k=1,\ldots,r-1$.
+  \item If the rank of $\mB$ is $k$ or less, then $\twonorm{\mA-\mB}\ge \sigma_{k+1}$.
+  \end{enumerate}
+\end{thm}
+\begin{proof}[Proof of part 1]
+  Note that~\eqref{eq:svdlowrank} is identical to~\eqref{eq:svdsum} with $\sigma_{k+1},\ldots,\sigma_r$ all set to zero. This implies that
+  \begin{equation*}
+    \mA - \mA_k = \mU(\mS-\hat{\mS})\mV^T,
+  \end{equation*}
+  where $\hat{\mS}$ has those same values of $\sigma_i$ replaced by zero. But that makes the above an SVD of $\mA - \mA_k$, with singular values $0,\ldots,0,\sigma_{k+1},\ldots,\sigma_r$, the largest of which is $\sigma_{k+1}$. That proves the first claim.
+\end{proof}
+
+
+%
+%\autoref{fig:dimreduce} shows a geometric interpretation: the vectors $\sigma_i \bfu_i$ are semi-axes of an $r$-dimensional hyperellipse that forms the image of the unit hypersphere under the mapping $\bfx\mapsto\mA\bfx$, and the low-rank approximation~\autoref{eq:svdlowrank} sets the shortest $r-k$ semi-axes to zero, effectively flattening out those dimensions.
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=3.5in]{dimreduce}
+%   \caption{Dimension reduction via the SVD. The left singular vectors give the principal directions of the ellipsoid that results from mapping the unit sphere. Zeroing out the direction with the smallest singular value leads to the ellipse in the figure, lying in the plane shown. Zeroing out the next smallest direction leads to a line in space, which is the best possible one-dimensional approximation of the range of this matrix.}
+%   \label{fig:dimreduce}
+% \end{figure}
+%
+If the singular values of $\mA$ decrease sufficiently rapidly, then $\mA_{k}$ may capture the ``most significant'' behavior of the matrix for a reasonably small value of $k$.
+
+\index{matrix!as image}
+\begin{exam*}
+  \inputexample{matrixanaly}{hellosvd}
+\end{exam*}
+
+\subsection{Capturing major trends}
+
+The use of dimension reduction offered by low-rank SVD approximation goes well beyond simply reducing computation time. By isolating the most important contributions to the matrix, \texthighlight{dimreduce}{dimension reduction can uncover deep connections and trends that are otherwise obscured by lower-order effects and noise.}
+
+One useful way to quantify the decay in the singular values is to compute
+\begin{equation}
+  \label{eq:sing-val-decay}
+  \tau_k = \frac{\sum_{i=1}^k \sigma_i^2}{\sum_{i=1}^r \sigma_i^2}, \quad k=1,\ldots,r.
+\end{equation}
+Clearly $0\le \tau_k \le 1$ and $\tau_k$ is nondecreasing as a function of $k$. We can think of $\tau_k$ as the fraction of ``energy'' contained in the singular values up to and including the $k$th.\footnote{In statistics this quantity may be interpreted as the fraction of explained variance.}
+
+\begin{exam}
+  \inputexample{matrixanaly}{voting}
+\end{exam}
+
+Not all data sets can be reduced effectively to a small number of dimensions, but as \exaref{voting} shows, in some cases reduction reveals information that may correspond to real-world understanding.
+
+\begin{exercises}
+	\input{matrixanaly/exercises/DimReduce}
+\end{exercises}
+
+% \begin{exam}
+%   \label{exa:mandrills}
+%   Here we show how SVD compression works on an image that ships with
+%   MATLAB. In this case the image is stored as a matrix of integer
+%   values that we interpret as gray levels.
+% \begin{verbatim}
+% >> load mandrill
+% >> size(X)
+
+% ans =
+%    480   500
+% >> [U,S,V] = svd(X);
+% >> X1 = U(:,1:40)*S(1:40,1:40)*V(:,1:40)';
+% >> colormap(gray(220))
+% >> subplot(121), image(X)
+% >> subplot(122), image(X1)
+% \end{verbatim}
+%   \begin{center}
+%     \includegraphics{mandrills}
+%   \end{center}
+%   SVD compression isn't competitive with standards like JPEG for
+%   single images in terms of preserving fine detail, but it functions
+%   quite well in some systems for facial recognition.
+% \end{exam}
+
+\clearpage
+\subsection*{Key ideas in this chapter}
+\begin{remunerate}
+\item Tables, graphs, and images are all examples of two-dimensional data that can be usefully interpreted as matrices (\hiref{matrixinsight}).
+\item A square matrix may have an eigenvalue decomposition $\mA=\mV\mD\mV^{-1}$, where $\mD$ is diagonal (\hiref{evd}).
+\item Multiplication by the inverse of a matrix performs a change of basis into the coordinates associated with the matrix. An EVD changes basis to one in which the matrix acts diagonally (\hiref{changebasis}).
+\item Any matrix has a singular value decomposition $\mA=\mU\mS\mV^*$, where $\mS$ is diagonal and nonnegative, and $\mU$ and $\mV$ are unitary (\hiref{svd}).
+\item The SVD is intimately connected to the 2-norm (\hiref{svd2norm}).
+\item A hermitian matrix has a complete set of orthonormal eigenvectors and real eigenvalues (\hiref{hermitianevec}).
+\item The eigenvalues of a normal matrix are perturbed by no more than the size of the perturbation to the matrix (\hiref{normaleval}).
+\item The Rayleigh quotient is a function mapping an eigenvector into its associated eigenvalue, and an eigenvector estimate into an eigenvalue estimate (\hiref{rayleighquotient}).
+\item Truncating the SVD provides the best low-rank approximation to a matrix (\hiref{bestrank}).
+\item Dimension reduction via the SVD can uncover connections that are otherwise obscured by lower-order effects and noise (\hiref{dimreduce}).
+\end{remunerate}
+
+
+\subsection*{Where to learn more}
+
+Details on the computation of the eigenvalue and singular value decompositions are presented at length in~\cite{StewartVol2} and more briefly in Chapters~7 and~8 of~\cite{GolubVan96}. A classic reference on the particulars of the symmetric case is~\cite{Parlett1980}, while~\cite{TrefEmb05} focuses on the non-normal case. Dimension reduction via the SVD often goes by the name \textit{principal component analysis}, which is the subject of~\cite{Jolliffe2002}.
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "natext"
+%%% End:

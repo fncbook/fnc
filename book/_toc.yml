@@ -56,6 +56,13 @@
     - file: ivp/implicit
     - file: ivp/zerostability
     - file: ivp/next
+- file:  matrixanaly/overview
+  sections:
+    - file: matrixanaly/insight
+    - file: matrixanaly/evd
+    - file: matrixanaly/svd
+    - file: matrixanaly/symm-eig
+    - file: matrixanaly/dimreduce
 - file: appendix/linear-algebra
 - file: appendix/demos
   sections:
