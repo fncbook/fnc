@@ -18,6 +18,7 @@ using Reexport
 @reexport using Images
 @reexport using TestImages
 @reexport using FileIO
+@reexport using SpecialFunctions
 @reexport using LaTeXStrings
 @reexport using JLD2
 
