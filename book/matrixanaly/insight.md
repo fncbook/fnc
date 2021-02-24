@@ -30,11 +30,10 @@ Tables are used to represent variation of a quantity with respect to two variabl
 ```{index} adjacency matrix
 ```
 ```{index} matrix; adjacency
-:see: adjacency matrix
 ```
-An important concept in modern mathematics is that of a **graph**. A graph consists of a set $V$ of **nodes** and a set $E$ of **edges**, each of which is an ordered pair of nodes. The natural interpretation is that the edge $(v_i,v_j)$ denotes a link from node $i$ to node $j$, in which case we say that node $i$ is adjacent to node $j$. One usually visualizes small graphs by drawing points for nodes and arrows or lines for the edges.
+An important concept in mathematics is that of a {term}`graph` or network. A graph consists of a set $V$ of **nodes** and a set $E$ of **edges**, each of which is an ordered pair of nodes. The natural interpretation is that the edge $(v_i,v_j)$ denotes a link from node $i$ to node $j$, in which case we say that node $i$ is adjacent to node $j$. One usually visualizes small graphs by drawing points for nodes and arrows or lines for the edges.
 
-Graphs are useful because they are the simplest way to represent link structure---of social networks, airline routes, power grids, sports teams, and web pages, to name a few examples. They also have close ties to linear algebra. Prominent among these is the {term}`adjacency matrix` of the graph. If the graph has $n$ nodes, then its $n\times n$ adjacency matrix $\mathbf{A}$ has elements
+Graphs are useful because they are the simplest way to represent link structure—of social networks, airline routes, power grids, sports teams, and web pages, to name a few examples. They also have close ties to linear algebra. Prominent among these is the {term}`adjacency matrix` of the graph. If the graph has $n$ nodes, then its $n\times n$ adjacency matrix $\mathbf{A}$ has elements
 
 ```{math}
 :label: adjmat
@@ -50,7 +49,7 @@ A_{ij} =
 {doc}`demos/insight-graph`
 ```
 
-The representation of a graph by its adjacency matrix opens up the possibility for many kinds of analysis of the graph. One might ask whether the nodes admit a natural partition into clusters, for example. Or one might ask to rank the nodes in order of importance to the network as determined by some objective criteria---an application made famous by Google's PageRank algorithm, and one which is mathematically stated as an [eigenvalue problem](evd).
+The representation of a graph by its adjacency matrix opens up the possibility for many kinds of analysis of the graph. One might ask whether the nodes admit a natural partition into clusters, for example. Or one might ask to rank the nodes in order of importance to the network as determined by some objective criteria—an application made famous by Google's PageRank algorithm, and one which is mathematically stated as an [eigenvalue problem](evd).
 
 ## Images as matrices
 
@@ -67,3 +66,49 @@ We will simplify the representation by considering images represented using pixe
 ```
 
 Representation of an image as a matrix allows us to describe some common image operations in terms of linear algebra. Furthermore, the [singular value decomposition](svd) can be used to compress the information.
+
+## Exercises
+
+1. ✍ Consider the terms *numerical*, *analysis*, and *fun*. Write out the term-document matrix for the following statements:
+
+    **(a)** Numerical analysis is the most fun type of analysis.
+
+    **(b)** It's fun to produce numerical values for the digits of pi.
+
+    **(c)** Complex analysis is a beautiful branch of mathematics.
+
+2. ✍ Write out the adjacency matrix for the following graph on six nodes.
+    
+    ```{image} demos/littlegraph.png
+    :alt: little graph
+    :width: 500px
+    :align: center
+    ```
+
+3. ✍ Here is a graph adjacency matrix.
+  
+    :::{math}
+    \begin{bmatrix}
+    0 & 1 & 0 & 1 & 0 & 1 & 0 \\
+    1 & 0 & 1 & 0 & 0 & 1 & 0 \\
+    0 & 1 & 0 & 0 & 1 & 0 & 1 \\
+    1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 & 0 & 1 & 0 \\
+    1 & 1 & 0 & 0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 & 0 & 0 & 0   
+    \end{bmatrix}
+    :::
+
+    **(a)** How many vertices are adjacent to vertex 5?
+
+    **(b)** How many edges are in the graph?
+
+    **(c)** Draw the graph. 
+
+4. ⌨ Refer to the [image manipulation demonstration](`demos/../demos/insight-image`).
+
+    **(a)** Display the "peppers" test image upside-down.
+
+    **(b)** Display it mirror-reversed from left to right. 
+
+    **(c)** Display the image so that it is cropped to include only the garlic bulb in the lower right of the original picture. 

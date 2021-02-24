@@ -166,7 +166,7 @@ While natural splines are popular and have important theoretical properties, not
 
 In the not-a-knot spline, the values and first three derivatives of the cubic polynomials $S_1$ and $S_2$ agree at the node $t_1$. Hence they must be the same cubic polynomial! The same is true of $S_{n-1}$ and $S_n$.[^nak] We could use these facts to eliminate some of the undetermined coefficients from our linear system of constraints. However, rather than rework the algebra we just append two more rows to the system, expressing the conditions
 
-[^nak]: This explains the name of the not-a-knot spline---for splines, "knots" are the points at which  different piecewise definitions meet.
+[^nak]: This explains the name of the not-a-knot spline—for splines, "knots" are the points at which  different piecewise definitions meet.
 
 ```{math}
 :label: splinenak
@@ -246,7 +246,7 @@ end
 ```
 ````
 
-{ref}`function-spinterp` gives an implementation of cubic not-a-knot spline interpolation. For clarity it stays very close to the description given above. There are some possible shortcuts---for example, one could avoid using $\mathbf{E}$ and instead directly delete the last row of any matrix it left-multiplies. Observe that the linear system is assembled and solved just once, and the returned evaluation function simply uses the resulting coefficients. This allows us to make multiple calls to evaluate $S$ without unnecessarily repeating the linear algebra.
+{ref}`function-spinterp` gives an implementation of cubic not-a-knot spline interpolation. For clarity it stays very close to the description given above. There are some possible shortcuts—for example, one could avoid using $\mathbf{E}$ and instead directly delete the last row of any matrix it left-multiplies. Observe that the linear system is assembled and solved just once, and the returned evaluation function simply uses the resulting coefficients. This allows us to make multiple calls to evaluate $S$ without unnecessarily repeating the linear algebra.
 
 ## Conditioning and convergence
 

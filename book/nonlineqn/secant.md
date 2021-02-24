@@ -132,7 +132,7 @@ Now suppose that $|\epsilon_k|=\epsilon$. Roughly speaking, two units of work (i
 The secant method is both easier to apply and faster than Newton's method, on an equal-work basis.
 ```
 
-it seems reasonable to say that the rate of convergence *per function evaluation* is $\sqrt{2}\approx 1.41$. This is actually less than the comparable rate of about $1.62$ for the secant method. Not only is the secant method easier to apply than Newton's method in practice, it's also more efficient when counting function evaluations---a rare double victory!
+it seems reasonable to say that the rate of convergence *per function evaluation* is $\sqrt{2}\approx 1.41$. This is actually less than the comparable rate of about $1.62$ for the secant method. Not only is the secant method easier to apply than Newton's method in practice, it's also more efficient when counting function evaluations—a rare double victory!
 
 ## Inverse interpolation
 
@@ -154,7 +154,7 @@ This leads to the idea of defining $q(y)$ as the quadratic interpolant to the po
 
 Like Newton's method, the secant and inverse quadratic interpolation methods cannot guarantee convergence. One final new idea is needed to make a foolproof algorithm.
 
-If $f$ is continuous on the interval $[a,b]$ and $f(a)f(b)<0$---that is, $f$ changes sign on the interval---then $f$ must have (at least) one root in the interval, due to the Intermediate Value Theorem from calculus. If we come up with a new root estimate $c\in(a,b)$, then whatever sign $f(c)$ is, it is different from the sign at one of the endpoints. (Of course, if $f(c)$ is zero, we are done!) So either $[a,c]$ or $[c,b]$ is guaranteed to have a root too, and in this way we can maintain not just individual estimates but an interval that always contains a root.
+If $f$ is continuous on the interval $[a,b]$ and $f(a)f(b)<0$—that is, $f$ changes sign on the interval—then $f$ must have (at least) one root in the interval, due to the Intermediate Value Theorem from calculus. If we come up with a new root estimate $c\in(a,b)$, then whatever sign $f(c)$ is, it is different from the sign at one of the endpoints. (Of course, if $f(c)$ is zero, we are done!) So either $[a,c]$ or $[c,b]$ is guaranteed to have a root too, and in this way we can maintain not just individual estimates but an interval that always contains a root.
 
 The best algorithms blend the use of fast-converging methods with the guarantee provided by a bracket. For example, say that an iteration begins with a bracketing interval. Make a list of the inverse quadratic estimate, the secant estimate, and the midpoint of the current interval and pick the first member of the list that lies within the current interval. Replace the interval with the bracketing subinterval, and start a new iteration. This is the idea behind **Brent's method**, which is a very successful rootfinding algorithm.
 

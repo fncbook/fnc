@@ -11,7 +11,7 @@ To this point we have dealt frequently with the solution of the linear system $\
 ```
 ```{index} eigenvector
 ```
-for a scalar **eigenvalue** $\lambda$ and an associated nonzero **eigenvector** $\mathbf{x}$.
+for a scalar {term}`eigenvalue` $\lambda$ and an associated nonzero {term}`eigenvector` $\mathbf{x}$.
 
 ## Complex matrices
 
@@ -31,7 +31,7 @@ For the most part, "hermitian" replaces "transpose" when dealing with complex ma
 ```{index} orthogonal; matrix
 ```
 
-which in turn defines the 2-norm for complex vectors, and thereby matrices as well. The definitions of orthogonal and orthonormal sets of complex-valued vectors use ${}^*$ instead of ${}^T$. The analog of an orthogonal matrix in the complex case---that is, a square matrix whose columns are orthonormal in the complex sense---is said to be {term}`unitary`. A unitary matrix $\mathbf{U}$ satisfies $\mathbf{U}^{-1}=\mathbf{U}^*$ and $\| \mathbf{U}\mathbf{x} \|_2=\| \mathbf{x} \|_2$ for any complex vector $\mathbf{x}\in\mathbb{C}^n$.
+which in turn defines the 2-norm for complex vectors, and thereby matrices as well. The definitions of orthogonal and orthonormal sets of complex-valued vectors use ${}^*$ instead of ${}^T$. The analog of an orthogonal matrix in the complex case—that is, a square matrix whose columns are orthonormal in the complex sense—is said to be {term}`unitary`. A unitary matrix $\mathbf{U}$ satisfies $\mathbf{U}^{-1}=\mathbf{U}^*$ and $\| \mathbf{U}\mathbf{x} \|_2=\| \mathbf{x} \|_2$ for any complex vector $\mathbf{x}\in\mathbb{C}^n$.
 
 
 ## Eigenvalue decomposition
@@ -84,7 +84,7 @@ So far $\mathbf{A}$ could be any square matrix. But if we also assume that $\mat
 ```{index} matrix; diagonalizable
 ```
 
-Equation {eq}`evdecomp` is called an {term}`eigenvalue decomposition` (EVD) of $\mathbf{A}$. If $\mathbf{A}$ has an EVD, we say that $\mathbf{A}$ is {term}`diagonalizable`; otherwise $\mathbf{A}$ is **nondiagonalizable** (or *defective*). One simple example of a nondiagonalizable matrix is
+Equation {eq}`evdecomp` is called an {term}`eigenvalue decomposition` (EVD) of $\mathbf{A}$. If $\mathbf{A}$ has an EVD, we say that $\mathbf{A}$ is {term}`diagonalizable`; otherwise $\mathbf{A}$ is nondiagonalizable (or *defective*). One simple example of a nondiagonalizable matrix is
 
 ```{math}
   :label: jordanblock
@@ -99,7 +99,7 @@ There is a common circumstance in which we can guarantee an EVD exists; the proo
 If the $n\times n$ matrix $\mathbf{A}$ has $n$ distinct eigenvalues, then $\mathbf{A}$ is diagonalizable.
 ````
 
-The {term}`eig` command can be used to compute the eigenvalue decomposition of a given matrix.
+The `eigen` command can be used to compute the eigenvalue decomposition of a given matrix.
 
 ```{sidebar} Demo
 :class: demo
@@ -156,7 +156,7 @@ Let $\mathbf{A}\in\mathbb{C}^{n\times n}$ be diagonalizable, $\mathbf{A}=\mathbf
 where $\|\cdot\|$ and $\kappa$ are in the 2-norm.
 ````
 
-The Bauer--Fike theorem tells us that eigenvalues can be perturbed by an amount that is $\kappa(\mathbf{V})$ times larger than perturbations to the matrix. This result is a bit less straightforward than it might seem---eigenvectors are not unique, so there are multiple possible values for $\kappa(\mathbf{V})$. Still, the theorem indicates caution when a matrix has eigenvectors that form an ill-conditioned matrix. The limiting case of $\kappa(\mathbf{V})=\infty$ might be interpreted as indicating a nondiagonalizable matrix $\mathbf{A}$.
+The Bauer--Fike theorem tells us that eigenvalues can be perturbed by an amount that is $\kappa(\mathbf{V})$ times larger than perturbations to the matrix. This result is a bit less straightforward than it might seem—eigenvectors are not unique, so there are multiple possible values for $\kappa(\mathbf{V})$. Still, the theorem indicates caution when a matrix has eigenvectors that form an ill-conditioned matrix. The limiting case of $\kappa(\mathbf{V})=\infty$ might be interpreted as indicating a nondiagonalizable matrix $\mathbf{A}$.
 
 ```{index} matrix; normal
 ```
@@ -184,7 +184,115 @@ Practical algorithms for computing the EVD go beyond the scope of this book. The
 
 The process demonstrated in {ref}`example-qriter` is known as the *Francis QR iteration*, and it can be formulated as an $O(n^3)$ algorithm for finding the EVD. Such an algorithm is what the `eigen` command uses.
 
-<!-- 
-\begin{exercises}
-  \input{matrixanaly/exercises/EigenvalueDecomposition}
-\end{exercises} -->
+## Exercises
+
+1.  **(a)** ✍ Suppose that matrix $\mathbf{A}$ has an eigenvalue $\lambda$. Show that
+    for any induced matrix norm, $\| \mathbf{A} \|\ge |\lambda|$.
+
+    **(b)** ✍ Find a matrix $\mathbf{A}$ such that $\| \mathbf{A} \|_2$ is strictly larger than $|\lambda|$ for all eigenvalues $\lambda$. (Proof-by-computer isn't allowed here. You don't need to compute $\| \mathbf{A} \|_2$ exactly, just a lower bound for it.)
+
+    ::::{only} solutions
+    %%
+    %% (a)
+    % Let $Av=\lambda v$ for nonzero $v$. Let $x=v/\|v\|$. Then $\|A x\| = |\lambda|$, so the max over all unit vectors is at least $|\lambda|$.
+    %% (b)
+    % An easy example is $[0,1; 0,0]$, which has a spectral radius of zero.
+    ::::
+
+    (problem-defectivematrix)=
+2. ✍ Prove that the matrix $\mathbf{B}$ in {eq}`jordanblock` does not have two independent eigenvectors.
+
+3. ⌨ Use `eigvals` to find the eigenvalues of each matrix. Then for each eigenvalue $\lambda$, use `rank` to verify that $\lambda\mathbf{I} - \mathbf{A}$ is singular.
+    
+    $\mathbf{A} = \begin{bmatrix}
+    2  & -1 & 0 \\
+    -1 &  2 & -1 \\
+    0  & -1 & 2
+    \end{bmatrix}\qquad$
+    $\mathbf{B} = \begin{bmatrix}
+         2 & -1 & -1 \\
+        -2 &  2 & -1 \\
+        -1 & -2 & 2
+      \end{bmatrix} \qquad$
+    $ \mathbf{C} = \begin{bmatrix}
+         2 & -1 & -1 \\
+        -1 &  2 & -1 \\
+        -1 & -1 & 2
+      \end{bmatrix} $
+    <br><br>
+    $\mathbf{D} = \begin{bmatrix}
+      3 & 1 & 0 & 0 \\
+      1 & 3 & 1 & 0 \\
+      0 & 1 & 3 & 1 \\
+      0 & 0 & 1 & 3
+    \end{bmatrix}\qquad $
+    $\mathbf{E} = \begin{bmatrix}
+         4 & -3 & -2 & -1\\
+        -2 &  4 & -2 & -1 \\
+        -1 & -2 & 4  & -1 \\
+        -1 & -2 & -1 & 4 \\
+      \end{bmatrix} $
+
+    (problem-triangeval)=
+1.  **(a)** ✍ Show that the eigenvalues of a diagonal $n\times n$ matrix $\mathbf{D}$
+    are the diagonal entries of $\mathbf{D}$. (That is, produce the associated
+    eigenvectors.)
+
+    **(b)** ✍ The eigenvalues of a triangular matrix are its diagonal entries. Prove this in the $3\times 3$ case
+    
+    :::{math}
+      \mathbf{T} =
+      \begin{bmatrix}
+        t_{11} & t_{12}&  t_{13}\\ 0 & t_{22} & t_{23} \\ 0 & 0 & t_{33}
+      \end{bmatrix},
+    :::
+
+    by finding the eigenvectors. (Start by showing that $[1,0,0]^T$ is an eigenvector. Then show how to make $[a,1,0]^T$ an eigenvector, except for one case that does not change the outcome. Continue the same logic for $[a,b,1]^T$.)
+
+    (problem-matrixpolyeig)=
+5. ✍ If $p(z)=c_0+c_1z+\cdots+c_k z^k$ is a polynomial, then its value for a matrix argument is defined as
+  
+    :::{math}
+    p(\mathbf{A})= c_0\mathbf{I} + c_1 \mathbf{A} + \cdots +c_k \mathbf{A}^k.
+    :::
+
+    Show that if an EVD of $\mathbf{A}$ is available, then $p(\mathbf{A})$ can be found using only evaluations of $p$ at the eigenvalues, plus two matrix multiplications.
+
+6. ⌨ In [an earlier problem](problem-lumpstring), you showed that the
+  displacements of point masses placed along a string satisfy a linear system $\mathbf{A}\mathbf{q}=\mathbf{f}$ for an $(n-1)\times(n-1)$ matrix $\mathbf{A}$. The eigenvalues and eigenvectors of $\mathbf{A}$ correspond to resonant frequencies and modes of vibration of the string. For $n=40$ and the physical parameters given in part (b) of that exercise, find the eigenvalue decomposition of $\mathbf{A}$. Report the four eigenvalues with
+  smallest absolute value, and plot all four associated eigenvectors on a single graph (as functions of the vector row index).
+
+7. not available
+    <!-- 
+    ⌨ The eigenvalues of *Toeplitz* matrices, which have a constant value on each diagonal, have beautiful connections to complex analysis. (This example is adapted from Chapter~7 of \cite{TrefEmb05}.)
+    -->
+
+    <!-- **(a)** Define a $160\times 160$ matrix using
+    ``` julia
+    n = 160
+    A = fill(complex(0),n,n)
+    for (d,v) in ((-2,-4),(-3,-2im))
+        A[1-d:n+1:n^2] .= v
+    end
+    for (d,v) in ((1,2im),(2,-1),(3,2))
+        A[1+n*d:n+1:n^2] .= v
+    end
+    ``` 
+    -->
+    <!-- Display the upper left $6\times 6$ block of $\mathbf{A}$ so that you get the idea of how it's defined.
+    **(b)** Plot the eigenvalues of $\mathbf{A}$ as black dots in the complex plane.
+    **()** Let $\mathbf{E}$ and $\mathbf{F}$ be $160\times 160$ random matrices generated by `randn`. Adding to the plot from (b), plot the eigenvalues of the matrix $\mathbf{A} + 10^{-3}\mathbf{E} + 10^{-3}i\mathbf{F}$ as blue dots.
+    **()** Repeat part (c) 100 more times (generating a single plot).
+    **()** Compute $\kappa(\mathbf{V})$ for an eigenvector matrix $\mathbf{V}$ and relate your picture to the conclusion of \thmref{bauerfike}. -->
+
+8. ⌨ Eigenvalues of random matrices and their perturbations can be very interesting.
+    
+    **(a)** Let `A=randn(36,36)`. Plot its eigenvalues as black dots in the complex plane.
+    
+    **(b)** Let $\mathbf{E}$ be another random $36\times 36$ matrix, and on top of the previous graph, plot the eigenvalues of $\mathbf{A}+0.01\mathbf{E}$ as blue dots. Repeat this for 100 different values of $\mathbf{E}$.
+    
+    **(c)** Let `T=triu(A)`. On a new graph, plot the eigenvalues of $\mathbf{T}$ as black dots in the complex plane (they all lie on the real axis).
+
+    **(d)** Repeat part (b) with $\mathbf{T}$ in place of $\mathbf{A}$.
+    
+    **(e)** Use `eigen` to get eigenvector matrices of $\mathbf{A}$ and $\mathbf{T}$, and compute the condition numbers of them. Apply the [Bauer–Fike theorem](theorem-bauer-fike) to explain your plots.

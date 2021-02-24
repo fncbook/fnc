@@ -33,7 +33,7 @@ The number of flops needed by LU factorization is $O(b_ub_\ell n)$ when the uppe
 ```{index} pivoting
 ```
 
-If no row pivoting is used, the $\mathbf{L}$ and $\mathbf{U}$ factors preserve the lower and upper bandwidths of $\mathbf{A}$. This is a consequence of the row elimination process---fewer zeros need to be introduced into each column (equivalently, most of the row multipliers are zero), and adding rows downward cannot introduce new nonzeros into the upper triangle. This observation implies computational savings in both the factorization and the triangular substitutions, because the zeros appear predictably and we can skip multiplication and addition with them. To be precise, the number of flops needed by LU factorization is $O(b_ub_\ell n)$ when the upper and lower bandwidths are $b_u$ and $b_\ell$.
+If no row pivoting is used, the $\mathbf{L}$ and $\mathbf{U}$ factors preserve the lower and upper bandwidths of $\mathbf{A}$. This is a consequence of the row elimination process—fewer zeros need to be introduced into each column (equivalently, most of the row multipliers are zero), and adding rows downward cannot introduce new nonzeros into the upper triangle. This observation implies computational savings in both the factorization and the triangular substitutions, because the zeros appear predictably and we can skip multiplication and addition with them. To be precise, the number of flops needed by LU factorization is $O(b_ub_\ell n)$ when the upper and lower bandwidths are $b_u$ and $b_\ell$.
 
 ```{index} sparse matrix
 ```

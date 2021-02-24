@@ -7,7 +7,7 @@ More advanced texts specifically on numerical linear algebra include the classic
 Numerical analysis of the fundamental algorithms is emphasized in Higham {cite}`highamAccuracyStability2002`; there are many interesting quotations there as well.  Here is a sample:
 
 ````{pull-quote}
-Many years ago we made out of half a dozen transformers a simple and rather inaccurate machine for solving simultaneous equations---the solutions being represented as flux in the cores of the transformers.  During the course of our experiments we set the machine to solve the equations---
+Many years ago we made out of half a dozen transformers a simple and rather inaccurate machine for solving simultaneous equations—the solutions being represented as flux in the cores of the transformers.  During the course of our experiments we set the machine to solve the equations—
 
 ```{math}
 \begin{split}
@@ -16,7 +16,7 @@ Many years ago we made out of half a dozen transformers a simple and rather inac
 & X+Y+Z=3
 \end{split}
 ```
-The machine reacted sharply---it blew the main fuse and put all the lights out.
+The machine reacted sharply—it blew the main fuse and put all the lights out.
 
 (B. V. Bowden, *The Organization of a Typical Machine*, 1953)
 ````

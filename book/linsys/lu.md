@@ -117,7 +117,7 @@ That reasoning carries across each of the new terms in the product on the left s
 
 Furthermore, the lower triangular entries of $\mathbf{L}$ are the row multipliers we found as in {doc}`demos/lu-gauss`, and the entries of $\mathbf{U}$ are those found at the end of the elimination process. Equation {eq}`lufact` is called an {term}`LU factorization` of the matrix $\mathbf{A}$.
 
-## An algorithm---for now
+## An algorithm—for now
 
 LU factorization reduces any linear system to two triangular ones. From this, solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ follows immediately:
 
@@ -303,7 +303,7 @@ Fortunately, this defect can be repaired for all nonsingular matrices at minor c
     %    end
     %end
 
-5. ⌨ {ref}`function-lufact` factors $\mathbf{A}=\mathbf{L}\mathbf{U}$ in such a way that $\mathbf{L}$ is a unit lower triangular matrix---that is, has all ones on the diagonal. It is also possible to define the factorization so that $\mathbf{U}$ is a unit upper triangular matrix instead. Write a function `lufact2` that uses {ref}`function-lufact` *without modification* to produce this version of the factorization. (Hint: Begin with the standard LU factorization of $\mathbf{A}^T$.) Demonstrate on a nontrivial $4\times 4$ example.
+5. ⌨ {ref}`function-lufact` factors $\mathbf{A}=\mathbf{L}\mathbf{U}$ in such a way that $\mathbf{L}$ is a unit lower triangular matrix—that is, has all ones on the diagonal. It is also possible to define the factorization so that $\mathbf{U}$ is a unit upper triangular matrix instead. Write a function `lufact2` that uses {ref}`function-lufact` *without modification* to produce this version of the factorization. (Hint: Begin with the standard LU factorization of $\mathbf{A}^T$.) Demonstrate on a nontrivial $4\times 4$ example.
 
     ````{only} solutions
     If $A=LU$, then $A^T=U^T L^T$, which is still of the form lower triangular $\times$ upper triangular. So if we apply our regular `lufact` to $A^T$, then the first matrix is $U^T$ and will leave $U$ as unit upper triangular.

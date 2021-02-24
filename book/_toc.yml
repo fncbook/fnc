@@ -63,6 +63,7 @@
     - file: matrixanaly/svd
     - file: matrixanaly/symm-eig
     - file: matrixanaly/dimreduce
+    - file: matrixanaly/next
 - file: appendix/linear-algebra
 - file: appendix/demos
   sections:

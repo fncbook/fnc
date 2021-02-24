@@ -10,7 +10,7 @@ invertible
 
 An $m\times n$ matrix $\mathbf{A}$ is a rectangular $m$-by-$n$ array of numbers called **elements** or **entries**.  The numbers $m$ and $n$ are called the **row dimension** and the **column dimension**, respectively; collectively they describe the **size** of $\mathbf{A}$. We say $\mathbf{A}$ belongs to $\mathbb{R}^{m\times n}$ if its entries are real or $\mathbb{C}^{m\times n}$ if they are complex-valued.  A **square** matrix has equal row and column dimensions. A **row vector** has dimension $1\times n$, while a **column vector** has dimension $m \times 1$. By default, a vector is understood to be a column vector, and we use $\mathbb{R}^n$ or $\mathbb{C}^n$ to denote spaces of vectors.  An ordinary number in $\mathbb{R}$ or $\mathbb{C}$ may be called a **scalar**.
 
-We use capital letters in bold to refer to matrices, and lowercase bold letters for vectors. In this book, all vectors are column vectors---in other words, matrices with multiple rows and one column. The bold symbol $\boldsymbol{0}$ may refer to a vector of all zeros or to a zero matrix, depending on context; we use $0$ as the scalar zero only.
+We use capital letters in bold to refer to matrices, and lowercase bold letters for vectors. In this book, all vectors are column vectors—in other words, matrices with multiple rows and one column. The bold symbol $\boldsymbol{0}$ may refer to a vector of all zeros or to a zero matrix, depending on context; we use $0$ as the scalar zero only.
 
 To refer to a specific element of a matrix, we use the uppercase name of the matrix *without* boldface, as in $A_{24}$ to mean the $(2,4)$ element of $\mathbf{A}$. To refer to an element of a vector, we use just one subscript, as in $x_3$. If you see a boldface character with one or more subscripts, then you know that it is a matrix or vector that belongs to a numbered collection.
 
@@ -49,7 +49,7 @@ The **conjugate transpose** or **hermitian** is given by $\mathbf{A}^*=\overline
 
 Matrices of the same size may be added componentwise.  Multiplication by a scalar is also defined elementwise. These operations obey the familiar laws of commutativity, associativity, and distributivity. The multiplication of two matrices, on the other hand, is much less straightforward.
 
-In order for matrices $\mathbf{A}$ and $\mathbf{B}$ to be multiplied, it is necessary that their "inner" dimensions match---i.~e., $\mathbf{A}$ is $m\times p$ and $\mathbf{B}$ is $p \times n$. Note that even if $\mathbf{A}\mathbf{B}$ is defined, $\mathbf{B}\mathbf{A}$ may not be, unless $m=n$. In terms of scalar components, the $(i,j)$ entry of $\mathbf{C}=\mathbf{A}\mathbf{B}$ is given by
+In order for matrices $\mathbf{A}$ and $\mathbf{B}$ to be multiplied, it is necessary that their "inner" dimensions match—i.~e., $\mathbf{A}$ is $m\times p$ and $\mathbf{B}$ is $p \times n$. Note that even if $\mathbf{A}\mathbf{B}$ is defined, $\mathbf{B}\mathbf{A}$ may not be, unless $m=n$. In terms of scalar components, the $(i,j)$ entry of $\mathbf{C}=\mathbf{A}\mathbf{B}$ is given by
 
 ```{math}
   :label: scalarmatrixmult

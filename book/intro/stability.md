@@ -27,7 +27,7 @@ x_2 = \frac{-b - \sqrt{b^2-4ac}}{2a}.
 ```{index} subtractive cancellation
 ```
 
-{doc}`demos/stability-quadbad` suggests that the venerable quadratic formula is an *unstable* means of computing roots in finite precision. The roots themselves were not sensitive to the data or arithmetic---it's the specific computational path we chose that caused the huge growth in errors. 
+{doc}`demos/stability-quadbad` suggests that the venerable quadratic formula is an *unstable* means of computing roots in finite precision. The roots themselves were not sensitive to the data or arithmetic—it's the specific computational path we chose that caused the huge growth in errors. 
 <!-- ```{sidebar} demo
 :class: demo
 {doc}`demos/stability-quadgood`
@@ -45,7 +45,7 @@ We can confirm this conclusion by finding a different path that avoids subtracti
 The sensitivity of the true problem is governed only by its condition number, but the sensitivity of an algorithm depends on the condition numbers of all of its steps.
 ```
 
-Both algorithms for calculating roots are equivalent when using real numbers and exact arithmetic. When perturbations are introduced into each intermediate value, though, their effects may depend dramatically on the specific sequence of steps taken. The sensitivity of the target problem $f(x)$ is governed only by $\kappa_f$, but the sensitivity of an algorithm depends on the condition numbers of all of its steps. In this example, the direct application of the quadratic formula included a poorly conditioned step---subtractive cancellation---that can be avoided.
+Both algorithms for calculating roots are equivalent when using real numbers and exact arithmetic. When perturbations are introduced into each intermediate value, though, their effects may depend dramatically on the specific sequence of steps taken. The sensitivity of the target problem $f(x)$ is governed only by $\kappa_f$, but the sensitivity of an algorithm depends on the condition numbers of all of its steps. In this example, the direct application of the quadratic formula included a poorly conditioned step—subtractive cancellation—that can be avoided.
 
 This situation may sound hopelessly complicated. But the elementary operations we take for granted are quite well conditioned in most circumstances. The glaring exceptions occur when $|f(x)|$ is much smaller than $|x|$, which is not inherently hard to detect; however, not all such situations create sensitivity. A practical characterization of instability is that results are much less accurate than the conditioning of the problem suggests. Typically one should apply an algorithm to test problems whose answers are well known, or for which other programs are known to work well, in order to spot likely instabilities. In the rest of this book we will see some specific ways in which instability is manifested for different types of problems.
 

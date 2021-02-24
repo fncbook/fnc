@@ -186,7 +186,7 @@ The `+=` operator means to increment the item on the left-hand side.
     \end{bmatrix}.
     ```
 
-    (Do not round off the values in $\mathbf{v}$---find them using native Julia commands.) For each expression below, use Julia to find the result, or explain why the result does not exist.
+    (Do not round off the values in $\mathbf{v}$—find them using native Julia commands.) For each expression below, use Julia to find the result, or explain why the result does not exist.
 
     **(a)** $\mathbf{A}\mathbf{B},\quad$
     **(b)** $\mathbf{B}^T \mathbf{A},\quad$

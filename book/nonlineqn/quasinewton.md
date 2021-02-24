@@ -108,7 +108,7 @@ Observe that $\mathbf{A}_{k+1}-\mathbf{A}_k$, being proportional to the outer pr
 
 ## Levenberg's method
 
-The most difficult part of many rootfinding problems is finding a starting point that will lead to convergence. The linear model implicitly constructed during a Newton iteration---whether we use an exact, finite-difference, or iteratively updated Jacobian matrix---becomes increasingly inaccurate as one ventures farther from the most recent root estimate, eventually failing to resemble the exact function much at all. Although one could imagine trying to do a detailed accuracy analysis of each linear model as we go, in practice simple strategies are valuable here. Suppose, after computing the step suggested by the linear model, we ask a binary question: Would taking that step improve our situation? Since we are trying to find a root of $\mathbf{f}$, we have a quantitative way to pose this question: Does the backward error $\|\mathbf{f}\|$ decrease? If not, we should reject the step and find an alternative.
+The most difficult part of many rootfinding problems is finding a starting point that will lead to convergence. The linear model implicitly constructed during a Newton iteration—whether we use an exact, finite-difference, or iteratively updated Jacobian matrix—becomes increasingly inaccurate as one ventures farther from the most recent root estimate, eventually failing to resemble the exact function much at all. Although one could imagine trying to do a detailed accuracy analysis of each linear model as we go, in practice simple strategies are valuable here. Suppose, after computing the step suggested by the linear model, we ask a binary question: Would taking that step improve our situation? Since we are trying to find a root of $\mathbf{f}$, we have a quantitative way to pose this question: Does the backward error $\|\mathbf{f}\|$ decrease? If not, we should reject the step and find an alternative.
 
 There are several ways to find alternatives to the standard step, but we will consider just one of them. Let $\mathbf{A}_k$ be the (exact or approximate) Jacobian matrix for iteration number $k$. **Levenberg's method** introduces a positive parameter $\lambda$ into the calculation of the next step: define
 
@@ -270,7 +270,7 @@ In some cases our simple logic in {ref}`function-levenberg` can make $\lambda$ o
 
     where $t$ represents time.
 
-    **(a)** ✍ Write out a $2\times 2$ nonlinear system of equations that describes an intersection of these orbits. (Note: An intersection is not the same as a collision---they don't have to occupy the same point at the same time.)
+    **(a)** ✍ Write out a $2\times 2$ nonlinear system of equations that describes an intersection of these orbits. (Note: An intersection is not the same as a collision—they don't have to occupy the same point at the same time.)
 
     **(b)** ⌨ Use {ref}`function-levenberg` to find all of the unique intersections.
 

@@ -83,7 +83,7 @@ Equation {eq}`newtonerr` suggests that eventually, each iteration of Newton's me
   \lim_{k\to\infty} \frac{|x_{k+1}-r|}{|x_k-r|^2} = \alpha.
 ```
 
-Recall that linear convergence is identifiable by trending toward a straight line on a log--linear plot of the error. When the convergence is quadratic, no such straight line exists---the convergence keeps getting steeper. Alternatively, note that (neglecting high-order terms)
+Recall that linear convergence is identifiable by trending toward a straight line on a log--linear plot of the error. When the convergence is quadratic, no such straight line exists—the convergence keeps getting steeper. Alternatively, note that (neglecting high-order terms)
 
 ```{math}
   \log(|\epsilon_{k+1}|) \approx 2 \log(|\epsilon_{k}|) + \text{constant},
@@ -102,7 +102,7 @@ which is equivalent to saying that the number of accurate digits approximately d
 Let's revisit the assumptions made to derive quadratic convergence as given by {eq}`newtonerr`:
 
 1. The residual function $f$ has to have enough continuous derivatives to make the Taylor series expansion valid. Often this is stated as $f$ being "smooth enough." This is usually not a problem, but see [this exercise](problem-newtonalternate).
-2. We required $f'(r)\neq 0$---that is, $r$ must be a *simple* root. See [this exercise](problem-newtonmultiple) to investigate what happens at a multiple root.
+2. We required $f'(r)\neq 0$—that is, $r$ must be a *simple* root. See [this exercise](problem-newtonmultiple) to investigate what happens at a multiple root.
 3. We assumed that the sequence converged, which is not easy to guarantee in any particular case. In fact,
 finding a starting guess from which the Newton iteration converges is
 often the most challenging part of a rootfinding problem. We will try to deal with this issue in \secref{quasinewton}.

@@ -11,7 +11,7 @@ parse:
   - dollarmath
   - html_image
   - linkify
-  - replacements
+#  - replacements
 
 latex:
   latex_documents:

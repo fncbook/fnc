@@ -133,7 +133,7 @@ Often the steps chosen adaptively clearly correspond to identifiable features of
 
 ## Exercises
 
-1. ⌨ Using {ref}`function-rk23`, solve $y'' +(1+y')^3 y = 0$ over $ 0 \le t \le 4 \pi$ with the indicated initial conditions. Plot $y(t)$ and $y'(t)$ as a function of $t$ and separately plot the solution curve parametrically in the phase plane---that is, the $\bigl(y(t),y'(t)\bigr)$-plane.
+1. ⌨ Using {ref}`function-rk23`, solve $y'' +(1+y')^3 y = 0$ over $ 0 \le t \le 4 \pi$ with the indicated initial conditions. Plot $y(t)$ and $y'(t)$ as a function of $t$ and separately plot the solution curve parametrically in the phase plane—that is, the $\bigl(y(t),y'(t)\bigr)$-plane.
 
     **(a)** $y(0) = 0.1, \quad y'(0) = 0$
 

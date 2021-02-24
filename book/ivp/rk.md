@@ -194,7 +194,7 @@ The most commonly used RK method, and perhaps the most popular IVP method of all
   \end{array}
 ```
 
-This formula is often called "the" fourth-order RK method---even though there are others---and we shall refer to it as RK4.  Written out, the recipe is
+This formula is often called "the" fourth-order RK method—even though there are others—and we shall refer to it as RK4.  Written out, the recipe is
 
 ```{math}
   :label: rk4def

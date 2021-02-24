@@ -41,7 +41,7 @@ Each hat function is globally continuous and is linear inside every interval $[t
 
 for some choice of the coefficients $c_0,\ldots,c_n$. No smaller set of functions can have the same properties. We summarize these facts by calling the hat functions a **basis** of the set of functions that are continuous and piecewise linear relative to $\mathbf{t}$.  Another point of view, familiar from abstract linear algebra, is that a basis sets up a one-to-one correspondence between the spanned function space and the more familiar space $\mathbb{R}^{n+1}$, with each function being represented by its coefficients $c_0,\ldots,c_n$.
 
-Note that the definitions of $H_0$ for $x<t_0$ and $H_n$ for $x>t_n$ are irrelevant---a fact exploited by the implementation given in {ref}`function-hatfun` through the introduction of two fictitious nodes lying on either side of the interval $[t_0,t_n]$. This trick allows the use of an identical formula for all of the hat functions. Otherwise, we would need to take special action for the two edge cases $H_0$ and $H_n$.
+Note that the definitions of $H_0$ for $x<t_0$ and $H_n$ for $x>t_n$ are irrelevant—a fact exploited by the implementation given in {ref}`function-hatfun` through the introduction of two fictitious nodes lying on either side of the interval $[t_0,t_n]$. This trick allows the use of an identical formula for all of the hat functions. Otherwise, we would need to take special action for the two edge cases $H_0$ and $H_n$.
 
 (function-hatfun)=
 

@@ -30,11 +30,11 @@ Equation {eq}`svd` is called a {term}`singular value decomposition`, or SVD, of 
 \sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_r\ge 0, \qquad r=\min\{m,n\}.
 ```
 
-We call $\sigma_1$ the **principal singular value** and $\mathbf{u}_{1}$ and $\mathbf{v}_{1}$ the **principal singular vectors**. The matrix $\mathbf{S}$ in the SVD is uniquely defined when the ordering is imposed, but the singular vectors are not---one could replace both $\mathbf{U}$ and $\mathbf{V}$ by their negatives, for example.
+We call $\sigma_1$ the **principal singular value** and $\mathbf{u}_{1}$ and $\mathbf{v}_{1}$ the **principal singular vectors**. The matrix $\mathbf{S}$ in the SVD is uniquely defined when the ordering is imposed, but the singular vectors are not—one could replace both $\mathbf{U}$ and $\mathbf{V}$ by their negatives, for example.
 
 
 ````{proof:example}
-  Suppose $\mathbf{A}$ is a real matrix and that $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^T$ is an SVD. Then $\mathbf{A}^T=\mathbf{V}\mathbf{S}^T\mathbf{U}^T$ meets all the requirements of an SVD for $\mathbf{A}^T$: the first and last matrices are orthogonal, and the middle matrix is diagonal with nonnegative entries. Hence $\mathbf{A}$ and $\mathbf{A}^T$ have the same singular values.
+Suppose $\mathbf{A}$ is a real matrix and that $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^T$ is an SVD. Then $\mathbf{A}^T=\mathbf{V}\mathbf{S}^T\mathbf{U}^T$ meets all the requirements of an SVD for $\mathbf{A}^T$: the first and last matrices are orthogonal, and the middle matrix is diagonal with nonnegative entries. Hence $\mathbf{A}$ and $\mathbf{A}^T$ have the same singular values.
 ````
 
 
@@ -49,7 +49,7 @@ Another way to write $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^*$ is as $\mathb
 
 In words, each right singular vector is mapped by $\mathbf{A}$ to a scaled version of its corresponding left singular vector; the magnitude of scaling is its singular value.
 
-Both the SVD and the EVD describe a matrix in terms of some special vectors and a small number of scalars. {ref}`tab-evdsvd` summarizes the key differences. The SVD sacrifices having the same basis in both source and image spaces---after all, they may not even have the same dimension---but as a result gains orthogonality in both spaces.
+Both the SVD and the EVD describe a matrix in terms of some special vectors and a small number of scalars. {ref}`tab-evdsvd` summarizes the key differences. The SVD sacrifices having the same basis in both source and image spaces—after all, they may not even have the same dimension—but as a result gains orthogonality in both spaces.
 
 :::{list-table} Comparison of the EVD and SVD
 :header-rows: 1
@@ -69,10 +69,11 @@ Both the SVD and the EVD describe a matrix in terms of some special vectors and 
 
 ## SVD and the 2-norm
 
-The SVD is intimately connected to the 2-norm,} as the following theorem describes. 
+The SVD is intimately connected to the 2-norm, as the following theorem describes. 
 ```{index} norm; matrix
 ```
 
+(theorem-svdprops)=
 ::::{proof:theorem} SVD properties
 Let $\mathbf{A}\in\mathbb{C}^{m\times n}$ have an SVD $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^*$ in
 which {eq}`svdorder` holds. Then:
@@ -85,7 +86,8 @@ which {eq}`svdorder` holds. Then:
 ```
 
 2. The rank of $\mathbf{A}$ is the number of nonzero singular values.
-\item Let $r=\min\{m,n\}$. Then
+
+3. Let $r=\min\{m,n\}$. Then
 
 ```{math}
 :label: svdcond
@@ -182,17 +184,109 @@ In [an earlier section](../leastsq/qr.md) we saw that a matrix has both a "full"
     \sigma_1 & &  \\
     & \ddots &  \\
     & & \sigma_n
-  \end{bmatrix} = \widehat{\mathbf{U}} \widehat{\mathbf{S}},
+  \end{bmatrix} = \hat{\mathbf{U}} \hat{\mathbf{S}},
 \end{align*}
 <!-- :label: svd-reduced -->
 
 ```{index} ONC
 ```
 
-in which $\widehat{\mathbf{U}}$ is $m\times n$ and $\widehat{\mathbf{S}}$ is $n\times n$. This allows us to define the **thin SVD** $\mathbf{A}=\widehat{\mathbf{U}}\widehat{\mathbf{S}}\mathbf{V}^*$, in which $\widehat{\mathbf{S}}$ is square and diagonal and $\widehat{\mathbf{U}}$ is ONC but not unitary. This form is computationally preferable when $m\gg n$, since it requires far less storage and contains the same information about $\mathbf{A}$. 
+in which $\hat{\mathbf{U}}$ is $m\times n$ and $\hat{\mathbf{S}}$ is $n\times n$. This allows us to define the **thin SVD** $\mathbf{A}=\hat{\mathbf{U}}\hat{\mathbf{S}}\mathbf{V}^*$, in which $\hat{\mathbf{S}}$ is square and diagonal and $\hat{\mathbf{U}}$ is ONC but not unitary. This form is computationally preferable when $m\gg n$, since it requires far less storage and contains the same information about $\mathbf{A}$. 
 
-<!-- 
-\begin{exercises}
-	\input{matrixanaly/exercises/SVD}
-\end{exercises} -->
+## Exercises
+
+1. ✍ Each factorization below is algebraically correct. In each case determine whether it is an SVD. If it is, write down $\sigma_1$, $\mathbf{u}_1$, and $\mathbf{v}_1$. The notation $\mathbf{I}_n$ means an $n\times n$ identity. 
+
+    **(a)** $\begin{bmatrix}
+      0 & 0 \\ 0 & -1
+    \end{bmatrix} = \begin{bmatrix}
+      0 & 1 \\ 1 & 0 
+    \end{bmatrix} \begin{bmatrix}
+      1 & 0 \\ 0 & 0
+    \end{bmatrix} \begin{bmatrix}
+      0 & 1 \\ -1 & 0 
+    \end{bmatrix}\qquad $
+    **(b)** $\begin{bmatrix}
+      0 & 0 \\ 0 & -1
+    \end{bmatrix} =
+    \mathbf{I}_2 \begin{bmatrix}
+      0 & 0 \\ 0 & -1
+    \end{bmatrix}
+    \mathbf{I}_2$
+    <br><br>
+
+    **(c)**
+    $\begin{bmatrix}
+      1 & 0\\ 0 & \sqrt{2}\\ 1 & 0
+    \end{bmatrix} = \begin{bmatrix}
+      \alpha & 0 & -\alpha \\ 0 & 1 & 0 \\ \alpha & 0 & -\alpha 
+    \end{bmatrix}  \begin{bmatrix}
+      \sqrt{2} & 0 \\ 0 & \sqrt{2} \\ 0 & 0 
+    \end{bmatrix}  \begin{bmatrix}
+      0 & 1 \\ 1 & 0 
+    \end{bmatrix}, \quad \alpha=1/\sqrt{2}$
+    <br><br>
+
+    **(d)**
+     $\begin{bmatrix}
+      \sqrt{2} & \sqrt{2}\\ -1 & 1\\ 0 & 0
+    \end{bmatrix} =
+    \mathbf{I}_3  \begin{bmatrix}
+      2 & 0 \\ 0 & \sqrt{2} \\ 0 & 0 
+    \end{bmatrix}  \begin{bmatrix}
+     \alpha & \alpha \\ -\alpha & \alpha 
+    \end{bmatrix}, \quad \alpha=1/\sqrt{2}$
+
+2. ✍ Solve a $2\times 2$ eigenvalue problem to find the singular values of $\mathbf{A}=\displaystyle \begin{bmatrix}
+    1 & 0 \\ 0 & 0 \\ 0 & 1 \\ -1 & -1 
+  \end{bmatrix}.$
+
+3. ⌨ Let $\mathbf{x}$ be a vector of 1000 equally spaced points between 0 and 1, and let $\mathbf{A}_n$ be the $1000\times n$ Vandermonde matrix whose $(i,j)$ entry is $x_i^{j-1}$ for $j=1,\ldots,n$.
+
+    **(a)** Print out the singular values of $\mathbf{A}_1$, $\mathbf{A}_2$, and $\mathbf{A}_3$.
+
+    **(b)** Make a semi-log plot of the singular values of $\mathbf{A}_{25}$. 
+
+    **(c)** Use `rank` to find the rank of $\mathbf{A}_{25}$. How does this relate to the graph from part (b)? You may want to use the online help for the `rank` function to understand what it does. 
+
+    ::::{only} solutions
+    ``` julia
+    x = linspace(0,1,1001)';
+    sigma = svd([x.^0 x.^1 x.^2 x.^3])
+    A=[]; for j = 1:25, A(:,j) = x.^(j-1); end
+    semilogy(svd(A),'o'), axis tight
+    rank(A)
+    ```
+    ::::
+
+4. ⌨ See an [earlier example](demos/insight-image.ipynb) for how to get the "mandrill" test image. Make a semi-log plot of the singular values of the matrix of the grayscale intensity values. (The shape of this graph is surprisingly similar across a wide range of images.) 
+
+5. ✍ Prove that for a square real matrix $\mathbf{A}$, $\| \mathbf{A} \|_2=\| \mathbf{A}^T \|_2$.
+
+6. ✍ Prove {eq}`svdcond` of the [SVD properties theorem](theorem-svdprops), given that {eq}`svdnorm` is true. (Hint: If the SVD of $\mathbf{A}$ is known, what is the SVD of $\mathbf{A}^{+}$?)
+
+7. ✍ Suppose $\mathbf{A}\in\mathbb{R}^{m\times n}$, for $m>n$, has the thin SVD $\mathbf{A}=\hat{\mathbf{U}}\hat{\mathbf{S}}\mathbf{V}^T$. Show that the orthogonal projector $\mathbf{A}\mathbf{A}^{+}$ is equal to $\hat{\mathbf{U}}\hat{\mathbf{U}}^T$. (You must be careful with matrix sizes in this derivation.)
+
+    (problem-rectcond)=
+8. ✍ In  {eq}`rectcond` we defined the 2-norm condition number of a rectangular matrix as $\kappa(\mathbf{A})=\|\mathbf{A}\|\cdot \|\mathbf{A}^{+}\|$, and then claimed (in the real case) that $\kappa(\mathbf{A}^*\mathbf{A})=\kappa(\mathbf{A})^2$. Prove this assertion using the SVD. 
+
+9. ✍ Show that the square of each singular value of $\mathbf{A}$ is an eigenvalue of the matrix $\mathbf{A}\mathbf{A}^*$ for any $m\times n$ matrix $\mathbf{A}$. (You should consider the cases $m>n$ and $m\le n$ separately.) 
+
+    (problem-svdnormproof)=
+10. ✍ In this problem you will see how {eq}`svdnorm` is proved.
+
+    **(a)** Use the technique of Lagrange multipliers to show that among vectors that satisfy $\|\mathbf{x}\|_2^2=1$, any vector that maximizes $\|\mathbf{A}\mathbf{x}\|_2^2$ must be an eigenvector of $\mathbf{A}^*\mathbf{A}$. It will help to know that if $\mathbf{B}$ is any hermitian matrix, the gradient of the scalar function $\mathbf{x}^*\mathbf{B}\mathbf{x}$ with respect to $\mathbf{x}$ is $2\mathbf{B}\mathbf{x}$. 
+
+    **(b)** Use the result of part (a) to prove {eq}`svdnorm`. 
+
+    (problem-svdtoevd)=
+11. ✍ Suppose $\mathbf{A}\in\mathbb{R}^{n \times n}$, and define $\mathbf{C}$ as in {eq}`svdaugment`. 
+
+    **(a)** Suppose that $\mathbf{v}=\begin{bmatrix} \mathbf{x} \\ \mathbf{y} \end{bmatrix}$, and write the block equation $\mathbf{C}\mathbf{v} = \lambda \mathbf{v}$ as two individual equations involving both $\mathbf{x}$ and $\mathbf{y}$.
+    
+    **(b)** By applying some substitutions, rewrite the equations from part~(a) as one in which $\mathbf{x}$ was eliminated and another in which $\mathbf{y}$ was eliminated.
+    
+    **(c)** Substitute the SVD $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^T$ and explain why $\lambda^2=\sigma_k^2$ for some singular value $\sigma_k$. 
+    
+    **(d)** As a more advanced variation, modify the argument to show that $\lambda=0$ is another possibility if $\mathbf{A}$ is not square.
 

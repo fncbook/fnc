@@ -190,7 +190,7 @@ It is a remarkable effect of the vector-friendliness of Julia that this program 
 - The Newton step is calculated using a backslash.
 - The function "norm" is used for the magnitude of a vector, instead of "abs" for the magnitude of a scalar.
 
-Indeed, {ref}`function-newtonsys` is a proper generalization---it can be used on scalar problems as well as on systems.
+Indeed, {ref}`function-newtonsys` is a proper generalization—it can be used on scalar problems as well as on systems.
 
 ## Exercises
 
@@ -264,7 +264,7 @@ Indeed, {ref}`function-newtonsys` is a proper generalization---it can be used on
     plot!(x2,y2,0,2pi)
     ```
 
-    **(b)** ✍ Write out a $2\times 2$ nonlinear system of equations that describes an intersection of these orbits. (Note: An intersection is not the same as a collision---they don't have to occupy the same point at the same time.)
+    **(b)** ✍ Write out a $2\times 2$ nonlinear system of equations that describes an intersection of these orbits. (Note: An intersection is not the same as a collision—they don't have to occupy the same point at the same time.)
 
     **(c)** ✍ Write out the Jacobian matrix of this nonlinear system.
 

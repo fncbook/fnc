@@ -61,7 +61,7 @@ Traditionally, in numerical linear algebra we count **floating point operations*
 {doc}`demos/flops-loglog`
 ```
 
-It's clear from the example in {doc}`demos/flops-mvmult` that the runtime increases at a function of $n$---but at what rate? Suppose that the time obeys a function that is not just $O(n^p)$, but actually equal to $Cn^p$ for some constants $C$ and $p$. For large enough $n$, this should be a good approximation. Then
+It's clear from the example in {doc}`demos/flops-mvmult` that the runtime increases at a function of $n$—but at what rate? Suppose that the time obeys a function that is not just $O(n^p)$, but actually equal to $Cn^p$ for some constants $C$ and $p$. For large enough $n$, this should be a good approximation. Then
 
 ```{math}
   :label: loglogfit

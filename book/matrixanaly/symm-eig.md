@@ -20,7 +20,7 @@ and it's tempting to conclude that $\mathbf{U}=\mathbf{V}$. Happily, this is nea
 If $\mathbf{A}=\mathbf{A}^*$, then $\mathbf{A}$ has a diagonalization $\mathbf{A}=\mathbf{V} \mathbf{D} \mathbf{V}^{-1}$ in which $\mathbf{V}$ is unitary and $\mathbf{D}$ is diagonal and real.
 ````
 
-Another way to state the result of this theorem is that a hermitian matrix has a complete set of orthonormal eigenvectors---that is, a *unitary diagonalization*---and real eigenvalues. In this case, the EVD 
+Another way to state the result of this theorem is that a hermitian matrix has a complete set of orthonormal eigenvectors—that is, a *unitary diagonalization*—and real eigenvalues. In this case, the EVD 
 
 $$
 \mathbf{A}=\mathbf{V}\mathbf{D}\mathbf{V}^{-1}=\mathbf{V} \mathbf{D} \mathbf{V}^*
@@ -46,7 +46,7 @@ is an SVD, where $|\mathbf{D}|$ is the elementwise absolute value and $\mathbf{T
 Let $T_{ii}=\operatorname{sign}(D_{ii})$ for all $i$. Then $\mathbf{T}^2=\mathbf{I}$ and $|\mathbf{D}|=\mathbf{T}\mathbf{D}$. The result follows.
 ::::
 
-The converse of the [Spectral Decomposition Theorem](thm-spec-decomp) is also true: every matrix with a unitary diagonalization and real eigenvalues is hermitian. However, there are non-hermitian matrices that meet just the requirement of a unitary EVD; any such matrix is called **normal**.
+The converse of the [Spectral Decomposition Theorem](thm-spec-decomp) is also true: every matrix with a unitary diagonalization and real eigenvalues is hermitian. However, there are non-hermitian matrices that meet just the requirement of a unitary EVD; any such matrix is called {term}`normal`.
 
 ::::{sidebar} Demo
 :class: demo
@@ -96,7 +96,7 @@ as $\epsilon\to 0$. The conclusion is that a good estimate of an eigenvector bec
 ```{index} hermitian positive definite
 ```
 
-In the real case, we called a symmetric matrix $\mathbf{A}$ *symmetric positive definite* (SPD) if $\mathbf{x}^T \mathbf{A}\mathbf{x} > 0 $ for all nonzero vectors $\mathbf{x}$. In the complex case the relevant property is  **hermitian positive definite** (HPD), meaning that $\mathbf{A}^*=\mathbf{A}$ and $\mathbf{x}^* \mathbf{A}\mathbf{x} > 0$ for all complex vectors $\mathbf{x}$. Putting this property together with the Rayleigh quotient leads to the following.
+In the real case, we called a symmetric matrix $\mathbf{A}$ *symmetric positive definite* (SPD) if $\mathbf{x}^T \mathbf{A}\mathbf{x} > 0 $ for all nonzero vectors $\mathbf{x}$. In the complex case the relevant property is  {term}`hermitian positive definite` (HPD), meaning that $\mathbf{A}^*=\mathbf{A}$ and $\mathbf{x}^* \mathbf{A}\mathbf{x} > 0$ for all complex vectors $\mathbf{x}$. Putting this property together with the Rayleigh quotient leads to the following.
 
 (thm-hpd)=
 ````{proof:theorem}
@@ -109,7 +109,69 @@ If $\mathbf{A}^*=\mathbf{A}$, then the following statements are equivalent.
 
 A hermitian matrix with all negative eigenvalues is called *negative definite*, and one with eigenvalues of different signs is *indefinite*. Finally, if one or more eigenvalues is zero and the rest have one sign, it is *semidefinite*.
 
-<!-- 
-\begin{exercises}
-  \input{matrixanaly/exercises/Symmetry}
-\end{exercises} -->
+## Exercises
+
+1. ✍ Each line below is an EVD for a hermitian matrix. State whether the matrix is definite, indefinite, or semidefinite. Then state whether the given factorization is also an SVD, and if it is not, modify it to find an SVD.
+
+    **(a)** $\begin{bmatrix}
+      0 & 0 \\ 0 & -1
+    \end{bmatrix} =   \begin{bmatrix}
+      0 & 1 \\ 1 & 0
+    \end{bmatrix}  \begin{bmatrix}
+      -1 & 0 \\ 0 & 0
+    \end{bmatrix}  \begin{bmatrix}
+      0 & 1 \\ 1 & 0
+    \end{bmatrix}, \qquad$
+    **(b)** $\begin{bmatrix}
+      4 & -2 \\ -2 & 1
+    \end{bmatrix} = \begin{bmatrix}
+      1 & -0.5 \\ -0.5 & -1
+    \end{bmatrix}  \begin{bmatrix}
+      5 & 0 \\ 0 & 0
+    \end{bmatrix}  \begin{bmatrix}
+      0.8 & -0.4 \\ -0.4 & -0.8
+    \end{bmatrix}$
+    <br><br>
+
+    **(c)**
+    $\begin{bmatrix}
+      -5 & 3\\ 3 & -5
+    \end{bmatrix} =  \begin{bmatrix}
+      \alpha & \alpha \\ \alpha & -\alpha
+    \end{bmatrix}  \begin{bmatrix}
+      -2 & 0 \\ 0 & -8
+    \end{bmatrix}  \begin{bmatrix}
+      \alpha & \alpha \\ \alpha & -\alpha
+    \end{bmatrix}, \quad\alpha=1/\sqrt{2}$
+
+2. ✍ Prove true, or give a counterexample: If $\mathbf{A}$ and $\mathbf{B}$ are hermitian matrices of the same size, then
+   
+    $$
+    R_{\mathbf{A}+\mathbf{B}}(\mathbf{x}) = R_{\mathbf{A}}(\mathbf{x})+R_{\mathbf{B}}(x).
+    $$
+
+    ```{index} field of values
+    ```
+3. ⌨ The range of the function $R_{\mathbf{A}}(\mathbf{x})$ is a subset of the complex plane known as the *field of values* of the matrix $\mathbf{A}$. Use 500 random vectors to plot points in the field of values of $\mathbf{A} = \displaystyle  \begin{bmatrix}
+     1  &   0   & -2\\
+     0  &   2  &   0\\
+    -2   &  0 &    1
+    \end{bmatrix}$. Then compute its eigenvalues and guess what the exact field of values is.
+    ::::{only} solutions
+    It's the interval $[-1,3]$ (between the extreme eigenvalues).
+    ::::
+
+4. ✍ Let $\mathbf{A}=\displaystyle \begin{bmatrix}
+    3 & -2 \\ -2 & 0
+  \end{bmatrix}.$
+  
+    **(a)** Write out $R_{\mathbf{A}}(\mathbf{x})$ explicitly as a function of $x_1$ and $x_2$.
+
+    **(b)** Find $R_{\mathbf{A}}(\mathbf{x})$ for $x_1=1$, $x_2=2$.
+    
+    **(c)** Find the gradient vector $\nabla R_{\mathbf{A}}(\mathbf{x})$.
+    
+    **(d)** Show that the gradient vector is zero when $x_1=1$, $x_2=2$.
+
+5. ✍ A *skew-Hermitian* matrix is one that satisfies $\mathbf{A}^*=-\mathbf{A}$. Show that if $\mathbf{A}$ is skew-Hermitian, then $R_{\mathbf{A}}$ is imaginary-valued.
+

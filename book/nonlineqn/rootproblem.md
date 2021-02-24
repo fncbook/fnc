@@ -76,7 +76,7 @@ The condition number {eq}`rootcondnum` naturally leads to the question of what h
   f(x) = (x-r)q(x),
 ```
 
-for a polynomial $q$ of degree $n-1$. If $r$ is a simple root of $f$---that is, it appears just once in the list of the $n$ roots---then it follows that $q(r)\neq 0$. Conversely, if $q(r)=0$, then $r$ appears among the roots of $q$ and is a multiple root of $f$. However, we don't need to know the quotient polynomial $q$ explicitly in order to make the determination. Consider that
+for a polynomial $q$ of degree $n-1$. If $r$ is a simple root of $f$—that is, it appears just once in the list of the $n$ roots—then it follows that $q(r)\neq 0$. Conversely, if $q(r)=0$, then $r$ appears among the roots of $q$ and is a multiple root of $f$. However, we don't need to know the quotient polynomial $q$ explicitly in order to make the determination. Consider that
 
 ```{math}
   f'(x) = (x-r)q'(x) + q(x),

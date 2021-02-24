@@ -97,13 +97,67 @@ Clearly $0\le \tau_k \le 1$ and $\tau_k$ is non-decreasing as a function of $k$.
 
 Not all data sets can be reduced effectively to a small number of dimensions, but as {ref}`example-voting` shows, in some cases reduction reveals information that may correspond to real-world understanding.
 
-<!-- \begin{exercises}
-	\input{matrixanaly/exercises/DimReduce}
-\end{exercises} -->
+## Exercises
 
+1. ✍  Suppose that $\mathbf{A}$ is an $n\times n$ matrix. Explain why $\sigma_n$ is the distance (in 2-norm) from $\mathbf{A}$ to the set of all singular matrices.
 
+2. ✍ Suppose $\mathbf{A}$ is a $7\times 4$ matrix and the eigenvalues of $\mathbf{A}^*\mathbf{A}$ are 3, 4, 7, and 10. How close is $\mathbf{A}$ (in the 2-norm) to (a) a rank-3 matrix? (b) a rank-2 matrix? 
 
-<!-- \subsection*{Where to learn more}
+3. 
+    **(a)** ⌨ Find the rank-1 matrix closest to 
+    
+    $$
+    \mathbf{A}=\displaystyle \begin{bmatrix}
+    1 & 5 \\ 5 & 1
+    \end{bmatrix},
+    $$
+    
+    as measured in the 2-norm.
 
-Details on the computation of the eigenvalue and singular value decompositions are presented at length in~\cite{StewartVol2} and more briefly in Chapters~7 and~8 of~\cite{GolubVan96}. A classic reference on the particulars of the symmetric case is~\cite{Parlett1980}, while~\cite{TrefEmb05} focuses on the non-normal case. Dimension reduction via the SVD often goes by the name *principal component analysis*, which is the subject of~\cite{Jolliffe2002}.
- -->
+    **(b)** ⌨ Repeat part (a) for 
+    
+    $$
+    \mathbf{A}=\displaystyle \begin{bmatrix}
+    1 & 5 \\ 0 & 1
+    \end{bmatrix}.
+    $$
+
+    ::::{only} solutions
+    %% (a) 
+    A = [1 5;5 1];
+    [U,S,V] = svd(A);
+    S(1)*U(:,1)*V(:,1)'
+    % Result is a matrix of all 3's.
+    %% (a) 
+    A = [1 5;0 1];
+    [U,S,V] = svd(A);
+    S(1)*U(:,1)*V(:,1)'
+    ::::
+
+4. ✍ Find the rank-1 matrix closest to 
+   
+    $$
+    \mathbf{A}=\displaystyle \begin{bmatrix}
+    1 & b \\ b & 1
+    \end{bmatrix},
+    $$
+  
+    as measured in the 2-norm, where $b>0$.
+
+::::{only} solutions
+The SVD is $\mathbf{U}[[1+b,0],[0,|1-b|]]\mathbf{U}^T$, where $\mathbf{U}=\tfrac{1}{\sqrt{2}}[[-1,1],[1,1]]$. So the rank-1 approximation is $(1+b)/2[[1,1],[1,1]]$.
+::::
+
+5. ⌨ Following [the demo above](demos/dimreduce-hello) as a guide, load the "mandrill" test image and convert it to a matrix of floating-point pixel grayscale intensities. Using the SVD, display as images the best approximations of rank 5, 10, 15, and 20. 
+
+    ::::{only} solutions
+    X = imread('peppers.png');
+    X = double(rgb2gray(X));
+    imshow(X,[0 255])
+    [U,S,V] = svd(X);
+    for k = 1:4
+        subplot(2,2,k)
+        r = 5*k;
+        imshow(U(:,1:r)*S(1:r,1:r)*V(:,1:r)',[0 255])
+    end
+    ::::

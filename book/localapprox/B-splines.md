@@ -6,7 +6,7 @@
 %interpolant as $\sum c_k H_k(x)$, using the hat function basis. This
 %basis has many attractive features, but its second order accuracy is
 %mediocre, and the resulting interpolant lacks a continuous derivative.
-%By changing the basis functions we can improve on both counts---at
+%By changing the basis functions we can improve on both counts—at
 %a cost.
 %
 %%  in two equivalent ways: first, from the point of view of a
@@ -117,7 +117,7 @@
 %
 %In {ref}`function-Bspline` we show an algorithm for evaluating a
 %B-spline using {eq}`bspline1` and {eq}`bspline`
-%directly. This is our first example of a recursive function---one that
+%directly. This is our first example of a recursive function—one that
 %calls itself. The first line of the function is like a contract: given
 %inputs that satisfy certain conditions, it returns an output
 %satisfying stated conditions. In this case, given value(s) of $x$ and
@@ -335,8 +335,8 @@ end
 %
 %So far we have treated the data $(t_k,y_k)$ supposing that $y$ is an explicit
 %function of an independent variable $x$. However, if we think of
-%$(x_k,y_k)$ as points in the plane, we know that many plane curves---for example,
-%circles---cannot be represented as graphs of any single-valued
+%$(x_k,y_k)$ as points in the plane, we know that many plane curves—for example,
+%circles—cannot be represented as graphs of any single-valued
 %function $y=f(x)$. It's more general to introduce an independent parameter
 %$t$ and treat both $x$ and $y$ as functions of $t$. In such cases, two independent interpolations with respect to $t$ can be used to represent an interpolating path.
 %

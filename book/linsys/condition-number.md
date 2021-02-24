@@ -82,7 +82,7 @@ Note that for any induced matrix norm,
   1 = \| \mathbf{I} \| = \| \mathbf{A} \mathbf{A}^{-1} \| \le \| \mathbf{A} \|\, \| \mathbf{A}^{-1} \| = \kappa(\mathbf{A}).
 ```
 
-A condition number of 1 is the best we can hope for---in that case, the relative perturbation of the solution has the same size as that of the data.  A condition number of size $10^t$ indicates that in floating point arithmetic, roughly $t$ digits are lost (i.e., become incorrect) in computing the solution $\mathbf{x}$.
+A condition number of 1 is the best we can hope for—in that case, the relative perturbation of the solution has the same size as that of the data.  A condition number of size $10^t$ indicates that in floating point arithmetic, roughly $t$ digits are lost (i.e., become incorrect) in computing the solution $\mathbf{x}$.
 
 ```{margin}
 If $\kappa(\mathbf{A}) > \epsilon_\text{mach}^{-1}$, then for computational purposes $\mathbf{A}$ is singular.

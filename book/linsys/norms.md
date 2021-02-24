@@ -1,6 +1,6 @@
 # Vector and matrix norms
 
-The manipulations on matrices and vectors so far in this chapter have been algebraic, much like those in an introductory linear algebra course. In order to progress to the analysis of the algorithms we have introduced, we need a way to measure the "size" of vectors and matrices---size in the sense of magnitude or distance, not the number of rows and columns.
+The manipulations on matrices and vectors so far in this chapter have been algebraic, much like those in an introductory linear algebra course. In order to progress to the analysis of the algorithms we have introduced, we need a way to measure the "size" of vectors and matrices—size in the sense of magnitude or distance, not the number of rows and columns.
 
 ## Vector norms
 

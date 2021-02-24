@@ -55,7 +55,7 @@ Hence the linear system $\mathbf{S}\mathbf{x}=\mathbf{b}$ with $\mathbf{b}=\begi
 
 ## Don't use the inverse
 
-Matrix inverses are indispensable for mathematical discussion and derivations. However, as you may remember from a linear algebra course, they are not trivial to compute from the entries of the original matrix. While it can be done numerically by computer, it almost never is, because when the goal is to solve a linear system of equations, the inverse is not needed---and the process of finding it is slower than solving the original problem. 
+Matrix inverses are indispensable for mathematical discussion and derivations. However, as you may remember from a linear algebra course, they are not trivial to compute from the entries of the original matrix. While it can be done numerically by computer, it almost never is, because when the goal is to solve a linear system of equations, the inverse is not needed—and the process of finding it is slower than solving the original problem. 
 
 ```{index} see: \\; backslash
 ```

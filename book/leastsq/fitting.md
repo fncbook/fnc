@@ -8,7 +8,7 @@
 {doc}`demos/fitting-tempinterp`
 ````
 
-In {doc}`../linsys/polyinterp` we saw how a polynomial can be used to interpolate data---that is, derive a continuous function that evaluates to give a set of prescribed values. But interpolation may not be appropriate in many applications.
+In {doc}`../linsys/polyinterp` we saw how a polynomial can be used to interpolate data—that is, derive a continuous function that evaluates to give a set of prescribed values. But interpolation may not be appropriate in many applications.
 
 ```{index} data fitting
 ```
@@ -144,7 +144,7 @@ While the fit of the $y_i$ to $f(t)$ is nonlinearly dependent on fitting paramet
 {doc}`demos/fitting-pirate`
 ````
 
-Thus the variable $z=\log y$ can be fit linearly in terms of the variable $s=\log t$. In practice these two cases---exponential fit and power-law---are easily detected by using log-linear or log-log plots, respectively.
+Thus the variable $z=\log y$ can be fit linearly in terms of the variable $s=\log t$. In practice these two cases—exponential fit and power-law—are easily detected by using log-linear or log-log plots, respectively.
 
 ## Exercises
 
