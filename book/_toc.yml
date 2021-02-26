@@ -64,6 +64,17 @@
     - file: matrixanaly/symm-eig
     - file: matrixanaly/dimreduce
     - file: matrixanaly/next
+- file:  krylov/overview
+  sections:
+    - file: krylov/structure
+    - file: krylov/power
+    - file: krylov/inviter
+    - file: krylov/subspace
+    - file: krylov/gmres
+    - file: krylov/minrescg
+    - file: krylov/matrixfree
+    - file: krylov/precond
+    - file: krylov/next
 - file: appendix/linear-algebra
 - file: appendix/demos
   sections:
@@ -154,5 +165,19 @@
         - file: ivp/demos/implicit-ab4
         - file: ivp/demos/implicit-stiff
         - file: ivp/demos/zs-LIAF
+    - file: appendix/demos-07
+      sections:
+        - file: matrixanaly/demos/basics-first
+        - file: matrixanaly/demos/insight-graph
+        - file: matrixanaly/demos/insight-image
+        - file: matrixanaly/demos/evd-eigen
+        - file: matrixanaly/demos/evd-bauerfike
+        - file: matrixanaly/demos/evd-francisqr
+        - file: matrixanaly/demos/svd-props
+        - file: matrixanaly/demos/symm-eig-normal
+        - file: matrixanaly/demos/symm-eig-perturb
+        - file: matrixanaly/demos/symm-eig-rayleigh
+        - file: matrixanaly/demos/dimreduce-hello
+        - file: matrixanaly/demos/dimreduce-voting
 - file: refs
 - file: genindex
