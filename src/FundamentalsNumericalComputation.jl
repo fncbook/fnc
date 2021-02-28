@@ -17,6 +17,7 @@ using Reexport
 @reexport using GraphRecipes
 @reexport using Images
 @reexport using TestImages
+@reexport using Arpack
 @reexport using FileIO
 @reexport using SpecialFunctions
 @reexport using LaTeXStrings

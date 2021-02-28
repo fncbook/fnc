@@ -4,6 +4,7 @@ authors = ["Toby Driscoll <driscoll@udel.edu>"]
 version = "0.1.0"
 
 [deps]
+Arpack = "7d9fca2a-8960-54d3-9f78-7d1dccf2cb97"
 FileIO = "5789e2e9-d7fb-5bc7-8068-2c6fae9b9549"
 GraphRecipes = "bd48cda9-67a9-57be-86fa-5b3c104eda73"
 Images = "916415d5-f1e6-5110-898d-aaa5f9f070e0"
