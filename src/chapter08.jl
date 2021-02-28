@@ -114,7 +114,10 @@ function sprandsym(n,density,lambda::Vector)
         # Random Jacobi rotation similarity transformation.
         theta = 2π*rand()
         c,s = cos(theta),sin(theta)
-        i,j = rand(1:n,2)
+        i = j = 0
+        while i==j
+          i,j = rand(1:n,2)
+        end
         A[[i,j],:] = [c s;-s c]*A[[i,j],:]
         A[:,[i,j]] = A[:,[i,j]]*[c -s;s c]
         return A
