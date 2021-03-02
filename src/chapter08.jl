@@ -70,13 +70,13 @@ function arnoldi(A,u,m)
 end
 
 """
-arngmres(A,b,m)
+gmres(A,b,m)
 
 Do `m` iterations of GMRES for the linear system `A`*x=`b`. Return
 the final solution estimate x and a vector with the history of
 residual norms. (This function is for demo only, not practical use.)
 """
-function arngmres(A,b,m)
+function gmres(A,b,m)
     n = length(b)
     Q = zeros(n,m+1)
     Q[:,1] = b/norm(b)
