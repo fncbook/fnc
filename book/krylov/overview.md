@@ -17,11 +17,38 @@ Krylov subspace methods have two other advantages that are subtle but critically
 ## Important terms
 
 ```{glossary}
+Arnoldi iteration
+  Stable algorithm for finding orthonormal bases of nested Krylov subspaces.
+
+dominant eigenvalue
+  Eigenvalue with the largest modulus (absolute value, in the real case).
+
 fill-in
   Tendency for a sparse matrix to lose sparsity when algebraic operations are performed on it.
 
+GMRES
+  Iterative solution of a linear system through stable least-squares solutions on nested Krylov subspaces.
+
+inverse iteration
+  Use of a shift, then inverse in power iteration to transform the eigenvalue closest to a target value into a dominant one. 
+
+Krylov matrix
+  Concatenation of a vector $\mathbf{u}$ with increasing powers of a matrix times $\mathbf{u}$.
+
+Lanczos iteration
+  Specialization of the Arnoldi iteration to the case of a hermitian (or real symmetric) matrix.
+
+power iteration
+  Repeated application of a matrix to a vector, followed by normalization, resulting in convergence to an eigenvector for the dominant eigenvalue.
+
+restarting
+  Technique used in GMRES to prevent the work per iteration and overall storage from growing unboundedly.
+
 sparse
   Term for a matrix with elements that are mostly zero for structural reasons.
+
+upper Hessenberg
+  Matrix that has nonzeros only in the upper triangle and first subdiagonal.
 
 ```
 

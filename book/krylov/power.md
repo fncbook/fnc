@@ -3,14 +3,14 @@
 ```{index} sparse matrix
 ```
 
-Given that matrix-vector multiplication is fast for sparse matrices, let's see what we might accomplish with just that at our disposal.
+Given that matrix-vector multiplication is fast for sparse matrices, let's see what we might accomplish with only that at our disposal.
 
 ::::{sidebar} Demo
 :class: demo
 {doc}`demos/power-one`
 ::::
 
-The [results here](demos/power-one) lead to some speculation. If it holds exactly, the equation $\mathbf{A}\mathbf{x} = \mathbf{x}$ is a special case of the eigenvalue condition $\mathbf{A}\mathbf{x} = \lambda \mathbf{x}$. It appears, then, that as $k\to\infty$, $\mathbf{A}^k \mathbf{x}$ converges to an eigenvector of $\mathbf{A}$ for the eigenvalue $\lambda=1$.
+The [results of the demo](demos/power-one) lead to some speculation. If it holds exactly, the equation $\mathbf{A}\mathbf{x} = \mathbf{x}$ is a special case of the eigenvalue condition $\mathbf{A}\mathbf{x} = \lambda \mathbf{x}$. It appears, then, that as $k\to\infty$, $\mathbf{A}^k \mathbf{x}$ converges to an eigenvector of $\mathbf{A}$ for the eigenvalue $\lambda=1$.
 
 ## Dominant eigenvalue
 
@@ -45,7 +45,7 @@ If we apply $\mathbf{A}$ repeatedly, then
 :label: powerAkx0
 \begin{split}
   \mathbf{A}^k\mathbf{x} &= \lambda_1^k c_1 \mathbf{v}_{1} + \lambda_2^k c_2
-			\mathbf{v}_{2} + \cdots + \lambda_n^k c_n \mathbf{v}_{n} \notag \\
+			\mathbf{v}_{2} + \cdots + \lambda_n^k c_n \mathbf{v}_{n}  \\
 	&= \lambda_1^k \left[ c_1 \mathbf{v}_{1} +
 		\left(\frac{\lambda_2}{\lambda_1}\right) ^k c_2
 		\mathbf{v}_{2} + \cdots + \left(\frac{\lambda_n}{\lambda_1}\right)^k
@@ -53,19 +53,21 @@ If we apply $\mathbf{A}$ repeatedly, then
 \end{split}
 ::::
 
-Since $\lambda_1$ is dominant, we see that in any norm,
+Since $\lambda_1$ is dominant, we conclude that in any norm,
 
 :::{math}
 :label: poweriterconverge
 \left\| \frac{ \mathbf{A}^k\mathbf{x}}{\lambda_1^k}
 - c_1\mathbf{v}_1\right\| \le |c_2|\cdot\left|\frac{\lambda_2}{\lambda_1}\right| ^k
-\| \mathbf{v}_{2 \|} + \cdots +  |c_n|\cdot\left|\frac{\lambda_n}{\lambda_1}\right|^k
-\| \mathbf{v}_{n \|} \rightarrow 0 \text{ as $k\rightarrow \infty$}.
+\| \mathbf{v}_{2} \| + \cdots +  |c_n|\cdot\left|\frac{\lambda_n}{\lambda_1}\right|^k
+\| \mathbf{v}_{n} \| \rightarrow 0 \text{ as $k\rightarrow \infty$}.
 :::
 
-As long as $c_1\neq 0$, $\mathbf{A}^k\mathbf{x}$ eventually is almost parallel to the dominant eigenvector.\footnote{If $\mathbf{x}$ is chosen randomly, the odds that $c_1=0$ are mathematically zero.}
+As long as $c_1\neq 0$, $\mathbf{A}^k\mathbf{x}$ eventually is almost parallel to the dominant eigenvector.[^zeromeasure]
 
-For algorithmic purposes, it is important to interpret $\mathbf{A}^k\mathbf{x}$ as $\mathbf{A}\bigl( \cdots\bigl( \mathbf{A} (\mathbf{A}\mathbf{x})\bigl) \cdots\bigl)$, i.e. as repeated applications of $\mathbf{A}$ to a vector. This interpretation allows us to fully exploit any sparsity of $\mathbf{A}$, something which is not preserved by taking a matrix power $\mathbf{A}^k$ explicitly.
+[^zeromeasure]: If $\mathbf{x}$ is chosen randomly, the odds that $c_1=0$ are mathematically zero.
+
+For algorithmic purposes, it is important to interpret $\mathbf{A}^k\mathbf{x}$ as $\mathbf{A}\bigl( \cdots\bigl( \mathbf{A} (\mathbf{A}\mathbf{x})\bigl) \cdots\bigl)$, i.e. as repeated applications of $\mathbf{A}$ to a vector. This interpretation allows us to fully exploit any sparsity of $\mathbf{A}$, something which is [not preserved](demos/structure-fill.ipynb) by taking a matrix power $\mathbf{A}^k$ explicitly.
 
 ## Power iteration
 
@@ -79,12 +81,12 @@ An important technicality separates us from an algorithm: unless $|\lambda_1|=1$
     :label: poweriter
     \begin{split}
     \mathbf{y}_k &= \mathbf{A} \mathbf{x}_k, \\
-    \alpha_k &= \frac{1}{y_{k,m}}, \text{ where } |y_{k,m}|=\infnorm{\mathbf{y}_k},\\
+    \alpha_k &= \frac{1}{y_{k,m}}, \text{ where } |y_{k,m}|=\|{\mathbf{y}_k} \|_\infty,\\
     \mathbf{x}_{k+1} &= \alpha_k \mathbf{y}_k.   
     \end{split}
 	::::
 
-Our notation here uses $y_{k,m}$ to mean the $m$th component of $\mathbf{y}_k$, or $\mathbf{e}_m^T\mathbf{y}_k$. Note that now $\infnorm{\mathbf{x}_{k+1}}=1$. We can write
+Our notation here uses $y_{k,m}$ to mean the $m$th component of $\mathbf{y}_k$, or $\mathbf{e}_m^T\mathbf{y}_k$. Note that now $\| \mathbf{x}_{k+1}\|_\infty=1$. We can write
 
 :::{math}
 :label: powernorm
@@ -103,10 +105,10 @@ So far we have discussed only eigenvector estimation. However, if $\mathbf{x}_k$
 
 where $r_j=\lambda_j/\lambda_1$ and the $b_j$ are constants. By assumption {eq}`evorder`, each $r_j$ satisfies $|r_j|<1$, so we see that $\gamma_k\rightarrow \lambda_1$ as $k\rightarrow\infty$.
 
-An implementation of power iteration is shown in {ref}`fun-poweriter`.
+Here is our implementation of power iteration.
 
 (function-poweriter)=
-````{proof:function} euler
+````{proof:function} poweriter
 **Power iteration to find a dominant eigenvalue.**
 
 ```{code-block} julia
