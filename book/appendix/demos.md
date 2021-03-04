@@ -93,7 +93,7 @@
 - {doc}`../ivp/demos/implicit-stiff`
 - {doc}`../ivp/demos/zs-LIAF`
 
-# Chapter 7 (Matrix analysis)
+## Chapter 7 (Matrix analysis)
 
 - {doc}`../matrixanaly/demos/insight-graph`
 - {doc}`../matrixanaly/demos/insight-image`
