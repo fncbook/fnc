@@ -19,6 +19,7 @@ using Reexport
 @reexport using TestImages
 @reexport using Arpack
 @reexport using IterativeSolvers
+@reexport using LinearMaps
 @reexport using FileIO
 @reexport using SpecialFunctions
 @reexport using LaTeXStrings
