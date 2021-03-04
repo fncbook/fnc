@@ -20,6 +20,8 @@ using Reexport
 @reexport using Arpack
 @reexport using IterativeSolvers
 @reexport using LinearMaps
+@reexport using IncompleteLU
+@reexport using Preconditioners
 @reexport using FileIO
 @reexport using SpecialFunctions
 @reexport using LaTeXStrings
