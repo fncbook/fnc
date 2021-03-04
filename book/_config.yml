@@ -91,11 +91,22 @@ sphinx:
       "myrule": "Rule"
       "theorem": "Theorem"
     proof_html_nonumbers:
-      "demo": "Demo"
-      "observation": "Observation"
-      "proof": "Proof"
-      "rule": "Rule"
-     
+    - "demo"
+    - "observation"
+    - "proof"
+    - "rule"
+    proof_html_title_template_visit: >
+      <div class="proof-title">
+      <span class="proof-type">{{ thmtype }} {% if number %}{{number}}{% endif %}</span>
+      {% if title %}
+      <span class="proof-title-name">: &nbsp;
+      {%- endif -%}
+    proof_html_title_template_depart: >
+      {%- if title -%}
+      </span>
+      {% endif %}
+      </div>
+ 
   extra_extensions:
   - sphinxcontrib.proof
 #  - sphinxcontrib.rsvgconverter
