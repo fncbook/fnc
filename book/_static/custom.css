@@ -1,3 +1,20 @@
+
+:root {
+	--ud-blue: rgb(0,83,159);
+	--ud-yellow: rgb(255,210,0);
+	--ud-darkblue: rgb(0,60,113);
+	--ud-gray: rgb(189,189,189);
+	--ud-black: rgb(0,0,0);
+	--ud-tan: rgb(238,232,197);
+	--ud-lightblue: rgb(0,160,223);
+	--ud-white: rgb(255,255,255);
+  
+	--light: #e2e3f0;
+	--neutral: #7377a5;
+	--dark: #1d1f3d;
+	--highlight: #29648a;
+  }
+  
 .demo a {
 	/* background-color: rgb(253, 253, 186); */
 	padding: 0.5ex 1ex;
@@ -8,15 +25,83 @@
 }
 
 .table tbody {
-	background-color: rgb(250, 250, 240	);
+	background-color: rgb(240, 240, 240	);
 }
 
 .table thead {
 	background-color: rgb(95,95,95);
-	color:rgb(253, 253, 186);
+	color:rgb(253, 253, 210);
+}
+
+.table th p {
+	margin-bottom: 0ex;
+}
+
+.table td p {
+	margin-bottom: 0ex;
 }
 
 .std-term {
 	font-weight: bolder;
 }
 
+
+.proof-type-demo > .proof-title {
+	border-bottom: 0px ;
+	}
+
+.proof-type-demo > .proof-content {
+border-top: 0px;
+background-color: var(--light);
+padding: 1em 1em 1em 1em;
+}
+
+.proof-type-function > .proof-title {
+display: block;
+font-weight: bold;
+background-color: var(--light);
+padding: 1rem;
+clear: both;
+}
+
+.proof-type-function {
+border: none;
+}
+
+.proof-type-function .proof-content > p {
+	margin: 0rem;
+	padding-top: 1ex;
+	padding-left: 1rem;
+  }
+
+/* 
+  .proof {
+	margin-top: 1em;
+	margin-bottom: 1em;
+  }
+  
+  .proof .proof-title {
+	padding-left: 1em;
+	padding-top: 1ex;
+	padding-bottom: 1ex;
+	background-color: var(--light);
+	/* border-top: 3px solid var(--neutral); */
+	/* border: none;
+	color: var(--highlight);
+	font-size: 100%;
+	font-weight: bold;
+	} */
+/*   
+  .proof.admonition > .admonition-title:before {
+	content: "";
+  } */
+/*   
+  .proof-content {
+	border: 1px solid var(--neutral);
+	border: none;
+	background-color: #FFFFFF;
+	padding: 1ex 1em 0em 1em;
+  }
+  
+  */
+  
