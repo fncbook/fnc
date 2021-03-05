@@ -2,7 +2,7 @@
 
 For the time being we will focus on single equations in one variable.
 
-```{proof:definition} Rootfinding problem
+```{prf:definition} Rootfinding problem
 Given a continuous scalar function $f$ of a scalar variable, find a real number $r$ such that $f(r)=0$.
 ```
 

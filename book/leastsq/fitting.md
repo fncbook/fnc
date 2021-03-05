@@ -101,7 +101,7 @@ c_1 \\ c_2 \\ \vdots \\ c_n
 
 Recalling that $\mathbf{r}^T\mathbf{r}=\| \mathbf{r} \|_2^2$, and renaming the variables to standardize the statement, we arrive at the general {term}`linear least squares problem`:
 
-````{proof:definition}
+````{prf:definition}
 Given $\mathbf{A}\in\mathbb{R}^{m \times n}$ and $\mathbf{b}\in\mathbb{R}^m$, with $m>n$, find
 
 ```{math}

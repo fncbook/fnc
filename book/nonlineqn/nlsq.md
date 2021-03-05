@@ -12,7 +12,7 @@ After the solution of square linear systems, we generalized to the case of havin
 
 We now define the {term}`nonlinear least squares problem`.
 
-```{proof:definition} Nonlinear least squares problem
+```{prf:definition} Nonlinear least squares problem
 Given a function $\mathbf{f}(\mathbf{x})$ mapping from $\real^n$ to $\real^m$, find $\mathbf{x}\in\real^n$ such that $\bigl\|\mathbf{f}(\mathbf{x})\bigr\|_2$ is minimized.
 ```
 

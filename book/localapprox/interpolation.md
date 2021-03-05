@@ -5,7 +5,7 @@ Formally, we now want to solve the following.
 ```{index} interpolation
 ```
 
-```{proof:definition} Interpolation problem
+```{prf:definition} Interpolation problem
 Given $n+1$ distinct points $(t_0,y_0)$, $(t_1,y_1),\ldots,(t_n,y_n)$, with $t_0<t_1<\ldots <t_n$, find a function $p(x)$, called the **interpolant**, such that $p(t_k)=y_k$ for $k=0,\dots,n$.
 ```
 

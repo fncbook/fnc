@@ -100,7 +100,7 @@ The convergence condition $\sigma=|g'(r)|<1$ derived by series expansion is a sp
 ```{index} Lipschitz condition
 ```
 
-````{proof:definition}
+````{prf:definition}
 A function $g$ is said to satisfy a **Lipschitz condition** with constant $L$ on the interval $S\subset\mathbb{R}$ if
   
 ```{math}
