@@ -116,7 +116,7 @@ finally conclude
 as an estimate of the number of iterations needed to achieve a fixed
 accuracy. This estimate fails for very large $\kappa$, however.
 
-::::{proof:example} Julia demo
+::::{prf:example} Julia demo
 :class: demo
 {doc}`demos/minrescg-conv`
 ::::

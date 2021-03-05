@@ -48,7 +48,7 @@ which is of size $(m+1)\times m$. We call the solution of this minimization $\ma
 The algorithm resulting from this discussion is known as {term}`GMRES`, for Generalized Minimum RESidual. GMRES uses the output of the Arnoldi iteration to minimize the residual of $\mathbf{A}\mathbf{x}=\mathbf{b}$ over successive Krylov subspaces.
 
 
-::::{proof:example} Julia demo
+::::{prf:example} Julia demo
 :class: demo
 {doc}`demos/gmres-intro`
 ::::
@@ -123,7 +123,7 @@ Suppose $\hat{\mathbf{x}}$ is an approximate solution of $\mathbf{A}\mathbf{x}=\
 
 Restarting guarantees a fixed upper bound on the per-iteration cost of GMRES. However, this bound comes at a price. Even though restarting preserves progress made in previous iterations, the Krylov space information is discarded and the residual minimization process starts again over low-dimensional choices. That can significantly retard or even stagnate the convergence. 
 
-::::{proof:example} Julia demo
+::::{prf:example} Julia demo
 :class: demo
 {doc}`demos/gmres-restart`
 ::::

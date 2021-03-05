@@ -150,7 +150,7 @@ In words, a matrix-matrix product is a horizontal concatenation of matrix-vector
 
 Thus, a matrix-matrix product is also a vertical concatenation of vector-matrix products involving the rows of the left-hand matrix. All of our representations of matrix multiplication are equivalent, so whichever one is most convenient at any moment can be used.
 
-````{proof:example}
+````{prf:example}
 Let
 ```{math}
 \mathbf{A} = \begin{bmatrix}
@@ -189,7 +189,7 @@ and so on, as according to {eq}`mmhoriz`.
 
 The {term}`identity matrix` of size $n$, called $\mathbf{I}$ (or sometimes $\mathbf{I}_n$), is a diagonal $n\times n$ matrix with every diagonal entry equal to one. As can be seen from {eq}`mmhoriz` and {eq}`mmvert`, it satisfies $\mathbf{A}\mathbf{I}=\mathbf{A}$ for $\mathbf{A}\in\mathbb{C}^{m\times n}$ and $\mathbf{I}\mathbf{B}=\mathbf{B}$ for $\mathbf{B}\in\mathbb{C}^{n\times p}$. It is therefore the matrix analog of the number $1$.
 
-````{proof:example}
+````{prf:example}
 Let
   
 ```{math}

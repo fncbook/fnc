@@ -80,7 +80,7 @@ function hatfun(x,t,k)
 end
 ````
 
-````{proof:example} Julia demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/pwlin-hat`
 ````
@@ -110,7 +110,7 @@ The appeal of a cardinal basis is that it makes the expression of the interpolan
   p(x) = \sum_{k=0}^n y_k H_k(x).
 ```
 
-````{proof:example} Julia demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/pwlin-usage`
 ````
@@ -197,7 +197,7 @@ For an outline of a proof, see [this exercise](problem-placcuracy).
 Piecewise linear interpolation is second-order accurate.
 ```
 
-````{proof:example} Julia demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/pwlin-converge`
 ````

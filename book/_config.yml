@@ -3,6 +3,8 @@ title: Fundamentals of Numerical Computation
 author: Tobin A. Driscoll and Richard J. Braun
 logo: logo.png
 
+exclude_patterns: [localapprox/B-splines.md]
+
 parse:
   myst_enable_extensions:
   - amsmath

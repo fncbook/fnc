@@ -3,7 +3,7 @@
 ```{index} interpolation; by polynomials
 ```
 
-````{proof:example} Julia demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/fitting-tempinterp`
 ````
@@ -49,7 +49,7 @@ c_n
 ```{index} Vandermonde matrix
 ```
 
-````{proof:example} Julia demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/fitting-tempfit`
 ````
@@ -139,7 +139,7 @@ While the fit of the $y_i$ to $f(t)$ is nonlinearly dependent on fitting paramet
 \log y \approx (\log a_1) + a_2 (\log t).
 ```
 
-````{proof:example} Julia demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/fitting-pirate`
 ````

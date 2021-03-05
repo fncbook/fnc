@@ -254,7 +254,7 @@ end
 The not-a-knot cubic spline has order of accuracy equal to four.
 ```
 
-````{proof:example}
+````{prf:example}
 :class: tip Julia demo
 :class: demo
 {doc}`demos/splines`

@@ -74,7 +74,7 @@
 %pairs of consecutive knots and can plug in {eq}`bspline1` for them.
 %
 %
-````{proof:example}
+````{prf:example}
 %  \label{exa:Bsplinehand}
 %  Let's find an explicit formula for $B(x;0,1,2,4)$ for $1 < x < 2$.
 %  It's easiest to start at the bottom level, from the indicator
@@ -139,7 +139,7 @@
 %(false) values using "double".
 %
 %
-````{proof:example}
+````{prf:example}
 %  ````{admonition}
 {doc}`demos/bsplinegraph`
 ````
@@ -306,7 +306,7 @@ end
 %\end{function}
 %
 %
-````{proof:example}
+````{prf:example}
 %  ````{admonition}
 {doc}`demos/bsplineinterp`
 ````
@@ -342,7 +342,7 @@ end
 %
 %
 %
-````{proof:example}
+````{prf:example}
 %  Here we approximate an S-shaped curve using splines for both
 %  coordinates.
 %
@@ -371,7 +371,7 @@ end
 
 %
 %
-````{proof:example}
+````{prf:example}
 %  \label{exa:dumbbell}
 %  Here we used the mouse to click on 20 points to make a vague
 %  dumbbell shape. Since we want to draw a closed curve, we treat the
@@ -510,7 +510,7 @@ end
 %them and the nodes to get the desired shape.
 %
 %
-````{proof:example}
+````{prf:example}
 %\label{exa:bezier}
 %In this example, we consider making a stylized ``V" using three
 %B\'ezier curves put together.  Certainly it is easiest to

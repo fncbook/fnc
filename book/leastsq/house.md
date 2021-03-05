@@ -99,7 +99,7 @@ The vector $\mathbf{v}$ defines an $n-1$ dimensional subspace $S$ perpendicular 
 The QR factorization is computed by using successive Householder reflections to introduce zeros in one column at a time.
 ```
 
-````{proof:example} Julia demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/house-qr`
 ````

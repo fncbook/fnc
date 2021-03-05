@@ -70,7 +70,7 @@ If the singular values of $\mathbf{A}$ decrease sufficiently rapidly, then $\mat
 ```{index} matrix; as image
 ```
 
-:::{proof:example} Julia demo
+:::{prf:example} Julia demo
 :class: demo
 {doc}`demos/dimreduce-hello`
 :::
@@ -90,7 +90,7 @@ Clearly $0\le \tau_k \le 1$ and $\tau_k$ is non-decreasing as a function of $k$.
 
 [^expvar]: In statistics this quantity may be interpreted as the fraction of explained variance.
 
-:::{proof:example} Julia demo
+:::{prf:example} Julia demo
 :class: demo
 {doc}`demos/dimreduce-voting`
 :::

@@ -65,7 +65,7 @@ In {doc}`../leastsq/fitting` we saw how to fit functions to data values, provide
 
 where $\mathbf{f}(\mathbf{c})$ is the vector of values $g(t_i;\mathbf{c})-y_i$. We call $\mathbf{f}$ a **misfit** function: the smaller the norm of the misfit, the better the fit.
 
-````{proof:example} Julia demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/nlsq-MM`
 ````

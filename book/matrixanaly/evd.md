@@ -101,7 +101,7 @@ If the $n\times n$ matrix $\mathbf{A}$ has $n$ distinct eigenvalues, then $\math
 
 The `eigen` command can be used to compute the eigenvalue decomposition of a given matrix.
 
-```{proof:example} Julia demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/evd-eigen`
 ```
@@ -163,7 +163,7 @@ The Bauer--Fike theorem tells us that eigenvalues can be perturbed by an amount 
 
 At the other extreme, if a unitary eigenvector matrix $\mathbf{V}$ can be found, then $\kappa(\mathbf{V})=1$ and {eq}`bauerfike` guarantees that eigenvalues are robust under perturbations to the original matrix $\mathbf{A}$. Such matrices are called **normal**, and they include the hermitian (or real symmetric) matrices. We consider them again [later on](symm-eig).
 
-```{proof:example} Julia demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/evd-bauerfike`
 ```
@@ -174,7 +174,7 @@ In elementary linear algebra you use the characteristic polynomial to compute th
 
 Practical algorithms for computing the EVD go beyond the scope of this book. The essence of the matter is the connection to matrix powers, that is, $\mathbf{A}^k = \mathbf{V} \mathbf{D}^k \mathbf{V}^{-1}$. (We will see much more about the importance of matrix powers in a [later chapter](../krylov).) If the eigenvalues have different complex magnitudes, then as $k\to\infty$ the entries on the diagonal of $\mathbf{D}^k$ become increasingly well separated and easy to pick out. It turns out that there is an astonishingly easy and elegant way to accomplish this separation without explicitly computing the matrix powers.
 
-```{proof:example} Julia demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/evd-francisqr`
 ```

@@ -12,7 +12,7 @@ Every first linear algebra course introduces {term}`Gaussian elimination` for a 
 
 Rather than writing out the process in full generality, we use an example to refresh your memory while getting arithmetic support from Julia.
 
-```{proof:example} Julia demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/lu-gauss`
 ```
@@ -54,7 +54,7 @@ In general, adding $\alpha$ times row $j$ of $\mathbf{A}$ to row $i$ in place is
 
 Following many introductory texts on linear algebra, we refer to the matrix in parentheses above as an **elementary matrix**.
 
-```{proof:example} Julia demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/lu-factors`
 ```
@@ -171,7 +171,7 @@ The second issue is that even when `A` has all integer entries, the LU factors m
 
 The multipliers are stored in the lower triangle of $\mathbf{L}$ as they are found. When operations are done to put zeros in column $j$, they are carried out only in lower rows to create an upper triangular matrix.  (Only columns $j$ through $n$ are accessed, since the other entries should already be zero.) At the end of the process the matrix $\mathbf{A}$ should be upper triangular, but since roundoff errors could create some small nonzeros the `triu` command is used to make them exactly zero.
 
-```{proof:example} Julia demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/lu-function`
 ```

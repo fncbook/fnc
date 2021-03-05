@@ -16,7 +16,7 @@ The values $t_0,\ldots,t_n$ are called the {term}`nodes` of the interpolant. In 
 ```{index} interpolation; by polynomials
 ```
 
-````{proof:example} Julia demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/interp-global`
 ````
@@ -36,11 +36,11 @@ In Chapter 9 we explore the large oscillations in the last figure of {doc}`demos
 
 In order to keep polynomial degrees small while interpolating large data sets, we will choose interpolants from the **piecewise polynomials**. Specifically, the interpolant $p$ must be a polynomial on each subinterval $[t_{k-1},t_k]$ for $k=1,\ldots,n$.
 
-````{proof:example}
+````{prf:example}
 Some examples of piecewise polynomials for the nodes  $t_0=-2$, $t_1=0$, $t_2=1$, and $t_3=4$ are $p_1(x)=x+1$, $p_2(x)=\operatorname{sign}(x)$, $p_3(x)=|x-1|^{3}$, and $p_4(x)=(\max\{0,x\})^{4}$. Note that $p_{1}$, $p_{2}$, and $p_4$ would also be piecewise polynomial on the node set $\{t_0,t_1,t_3\}$, but $p_3$ would not.
 ````
 
-````{proof:example} Julia demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/interp-pwise`
 ````
@@ -112,7 +112,7 @@ The absolute condition number maximizes this quantity over all $\Delta \mathbf{y
 The condition number of a linear interpolation method is essentially that of its cardinal functions.
 ```
 
-````{proof:example} Julia demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/interp-cond`
 ````

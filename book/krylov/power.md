@@ -5,7 +5,7 @@
 
 Given that matrix-vector multiplication is fast for sparse matrices, let's see what we might accomplish with only that at our disposal.
 
-::::{proof:example} Julia demo
+::::{prf:example} Julia demo
 :class: demo
 {doc}`demos/power-one`
 ::::
@@ -180,7 +180,7 @@ This is linear convergence with factor $r_2$. That is,
 
 The error in the eigenvalue estimates $\gamma_k$ of power iteration is reduced asymptotically by a constant factor $\lambda_2/\lambda_1$ on each iteration.
 
-::::{proof:example} Julia demo
+::::{prf:example} Julia demo
 :class: demo
 {doc}`demos/power-iter`
 ::::

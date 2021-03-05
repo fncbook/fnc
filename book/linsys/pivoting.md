@@ -3,7 +3,7 @@
 ```{index} matrix factorization; LU
 ```
 
-```{proof:example} Julia demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/pivot-fail`
 ```
@@ -64,7 +64,7 @@ where $\mathbf{P}$ is the permutation matrix resulting from all of the row swaps
 ```{index} matrix factorization; PLU
 ```
 
-```{proof:example} Julia demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/pivot-fixed`
 ```
