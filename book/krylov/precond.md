@@ -38,22 +38,6 @@ tricks are available. One of these is an
   \inputexample{krylov}{precondilu}
 ::::
 
-
-\subsection*{Symmetric preconditioning}
-
-A major drawback to replacing $\mathbf{A}\mathbf{x}=\mathbf{b}$ by the preconditioned $\mathbf{M}^{-1}\mathbf{A}\mathbf{x}=\mathbf{M}^{-1}\mathbf{b}$ is that the new system matrix $\mathbf{M}^{-1}\mathbf{A}$ need not be symmetric, even if $\mathbf{M}$ and $\mathbf{A}$ are. In the SPD case where we have a Cholesky factorization $\mathbf{M}=\mathbf{R}^T\mathbf{R}$, a symmetric form of preconditioning is
-
-:::{math}
-  :label: precond-sym
-  (\mathbf{R}^{-T}\mathbf{A}\mR^{-1})(\mathbf{R}\mathbf{x}) = \mathbf{R}^{-T}\mathbf{b},
-:::
-
-in which the system matrix is SPD if $\mathbf{A}$ is (see {ref}`prob-precond-precond-spd`). When using "minres" or "pcg", one gets symmetric preconditioning automatically. Corresponding to the incomplete LU factorization for any square matrix, there is an **incomplete Cholesky factorization** for an SPD matrix, leading to a natural preconditioner.
-<!-- 
-::::{proof:example}
-  \inputexample{krylov}{precondsym}
-:::: -->
-
 In many applications the problem $\mathbf{A}\mathbf{x}=\mathbf{b}$ has a known structure that may be exploited.
 It may be some approximation of a continuous mathematical model, and then $\mathbf{M}$ can be derived by using a cruder form of the approximation. Another important idea is to distinguish near-field and far-field influences in a physically motivated problem and make a fast approximation of the far field. These are advanced topics and require appreciation of the underlying problem that produces the linear system to be solved.
 <!-- 
