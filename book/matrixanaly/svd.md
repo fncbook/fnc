@@ -33,7 +33,7 @@ Equation {eq}`svd` is called a {term}`singular value decomposition`, or SVD, of 
 We call $\sigma_1$ the **principal singular value** and $\mathbf{u}_{1}$ and $\mathbf{v}_{1}$ the **principal singular vectors**. The matrix $\mathbf{S}$ in the SVD is uniquely defined when the ordering is imposed, but the singular vectors are not—one could replace both $\mathbf{U}$ and $\mathbf{V}$ by their negatives, for example.
 
 
-````{proof:example}
+````{prf:example}
 Suppose $\mathbf{A}$ is a real matrix and that $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^T$ is an SVD. Then $\mathbf{A}^T=\mathbf{V}\mathbf{S}^T\mathbf{U}^T$ meets all the requirements of an SVD for $\mathbf{A}^T$: the first and last matrices are orthogonal, and the middle matrix is diagonal with nonnegative entries. Hence $\mathbf{A}$ and $\mathbf{A}^T$ have the same singular values.
 ````
 
@@ -100,7 +100,7 @@ where a division by zero implies that $\mathbf{A}$ does not have full rank.
 
 The conclusion {eq}`svdnorm` is can be proved by straightforward vector calculus (see {ref}`prob-svd-svdnormproof`). In the square case $m=n$, $\mathbf{A}$ having full rank is identical to being nonsingular. The SVD is the usual means for computing the 2-norm and condition number of a matrix. 
 
-:::{sidebar} Demo
+:::{prf:example} Julia demo
 :class: demo
 {doc}`demos/svd-props`
 :::

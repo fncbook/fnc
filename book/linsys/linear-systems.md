@@ -28,7 +28,7 @@ infinitely many solutions.
 
  (example-singmatrix)=
 
-````{proof:example}
+````{prf:example}
 If we define
 
 ```{math}
@@ -65,7 +65,7 @@ Matrix inverses are indispensable for mathematical discussion and derivations. H
 
 Julia does have a command {term}`inv` that finds the inverse of a matrix. But, as demonstrated in {doc}`demos/interp-vander`, in order to solve a linear system of equations, you should use {term}`backslash`  (the `\` symbol, not to be confused with the slash `/` used in web addresses).
 
-```{sidebar} Demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/systems-backslash`
 ```
@@ -229,7 +229,7 @@ end
 ```
 ````
 
-```{sidebar} Demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/systems-triangular`
 ```

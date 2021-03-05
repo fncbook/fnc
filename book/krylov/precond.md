@@ -30,7 +30,7 @@ Hence we desire that solving the system $\mathbf{M}\mathbf{y}=\mathbf{u}$ be rel
 
 Methods for deriving a good preconditioner are numerous and often problem-dependent. Certain generic algebraic tricks are available. One of these is an **incomplete LU factorization**. Since true factorization of a sparse matrix usually leads to an undesirable amount of fill-in, incomplete LU prohibits or limits the fill-in in exchange for not getting an exact factorization.
 
-::::{sidebar} Demo
+::::{prf:example} Julia demo
 :class: demo
 {doc}`demos/precond-gmres`
 ::::

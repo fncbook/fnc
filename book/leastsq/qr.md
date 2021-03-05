@@ -159,7 +159,7 @@ r_{11} & r_{12} & \cdots & r_{1n} \\
 \end{bmatrix} = \hat{\mathbf{Q}} \hat{\mathbf{R}},
 ```
 
-````{sidebar} Demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/qr-qrfact`
 ````

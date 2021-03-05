@@ -10,7 +10,7 @@ We now consider some of the practical issues that arise when multistep formulas 
 \mathbf{u}_{i+1} = \mathbf{u}_i + \frac{h}{24} ( 55\mathbf{f}_i - 59 \mathbf{f}_{i-1} +37\mathbf{f}_{i-2} -9\mathbf{f}_{i-3}), \quad i=3,\ldots,n-1.
 ```
 
-```{sidebar} Demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/implicit-ab4`
 ```
@@ -128,7 +128,7 @@ It defines a nested function called `trapzero` that evaluates the left-hand side
 
 ## Stiff problems
 
-```{sidebar} Demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/implicit-stiff`
 ```

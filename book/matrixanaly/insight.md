@@ -6,19 +6,19 @@ Any two-dimensional array of numbers may be interpreted as a matrix. Whether or 
 
 Tables are used to represent variation of a quantity with respect to two variables. These variables may be encoded as the rows and columns of a matrix.
 
-````{proof:example}
+````{prf:example}
   Suppose we have a *corpus*, or collection of text documents. A *term-document matrix* has one column for each document and one row for each unique term appearing in the corpus. The $(i,j)$ entry of the matrix is the number of times term $i$ appears in document $j$. That is, column $j$ of the matrix is a term-frequency vector quantifying all occurrences of the indexed terms. A new document could be represented by its term-frequency vector, which is then comparable to the columns of the matrix. Or, a new term could be represented by counting its appearances in all of the documents and be compared to the rows of the matrix.
 
   It turns out that by finding the [singular value decomposition](svd) of the term-document matrix, the strongest patterns within the corpus can be isolated, frequently corresponding to what we interpret as textual meaning. This is known as *latent semantic analysis.*
 ````
 
-````{proof:example}
+````{prf:example}
   The website www.congress.gov/roll-call-votes offers data on all the votes cast in each session of the U. S. Congress. We can put members of Congress along the columns of a matrix and bills along the rows, recording a number that codes for "yea,"  "nay," "none," etc. The [singular value decomposition](svd) can reveal an objective, reproducible analysis of the partisanship and cooperation of individual members.
 ````
 
 
 
-````{proof:example}
+````{prf:example}
   In 2006 the online video service Netflix started an open competition for a $1 million prize. They provided a data set of 100,480,507 ratings (one to five stars) made by 480,189 users for 17,770 movies. Each rating is implicitly an entry in a 17,770-by-480,189 matrix. The object of the prize was to predict a user's ratings for movies they had not rated. This is known as a *matrix completion problem.* (It took 6 days for a contestant to improve on Netflix's private algorithm, and in 2009 the million-dollar prize was awarded to a team that had improved the performance by over 10%.)
 ````
 
@@ -44,7 +44,7 @@ A_{ij} =
 \end{cases}
 ```
 
-```{sidebar} Demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/insight-graph`
 ```
@@ -60,7 +60,7 @@ Computers most often represent images as rectangular arrays of pixels, each of w
 
 We will simplify the representation by considering images represented using pixels that can take only shades of gray. We will also use floating-point numbers rather than integers, so that we can operate on them using real arithmetic, though we will stay with the convention that values should be in the range $[0,255]$. (Pixels below zero or above 255 will be colored pure black or pure white, respectively.)
 
-```{sidebar} Demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/insight-image`
 ```

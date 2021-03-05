@@ -3,7 +3,7 @@
 ```{index} Newton's method
 ```
 
-````{sidebar} Demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/newton-line`
 ````
@@ -89,7 +89,7 @@ Recall that linear convergence is identifiable by trending toward a straight lin
   \log(|\epsilon_{k+1}|) \approx 2 \log(|\epsilon_{k}|) + \text{constant},
 ```
 
-````{sidebar} Demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/newton-converge`
 ````
@@ -149,7 +149,7 @@ end
 ```
 ````
 
-````{sidebar} Demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/newton-usage`
 ````

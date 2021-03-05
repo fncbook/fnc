@@ -25,7 +25,7 @@ for a fixed integer $d$. Equation {eq}`mantissa` represents the mantissa as a nu
 
 for an integer $z$ in the set $\{0,1,\ldots,2^d-1\}$. Consequently, starting at $2^e$ and ending just before $2^{e+1}$ there are exactly $2^d$ evenly spaced numbers belonging to $\float$.
 
-````{proof:example}
+````{prf:example}
   Suppose $d=2$. Hence with $e=0$ in {eq}`floatpoint`, we see that $1$, $5/4$, $3/2$, and $7/4$ are floating point numbers. They are the only members of $\float$ in the half-interval $[1,2)$. Taking $e=1$ gives the floating point numbers in $[2,4)$, specifically $2$, $2.5$, $3$, and $3.5$. Generally the spacing between the elements of $\float$ in $[2^e,2^{e+1})$ is $2^{e-d}$.
 ````
 
@@ -87,7 +87,7 @@ Absolute accuracy has the same units as $x$, while relative accuracy is dimensio
 \text{accurate digits} = -\log_{10} \left| \frac{\tilde{x}-x}{x} \right|.
 ```
 
-```{sidebar} Demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/float-accuracy`
 ```
@@ -111,7 +111,7 @@ Most numerical computing today is done in the **IEEE 754** standard. This define
 
 We often speak of double-precision floating point numbers as having about 16 decimal digits. The 52-bit mantissa is paired with a sign bit and 11 binary bits to represent the exponent $e$ in {eq}`floatpoint`, for a total of 64 binary bits per floating point number.
 
-```{sidebar} Demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/float-julia`
 ```
@@ -135,7 +135,7 @@ Computer arithmetic is performed on floating-point numbers and returns floating-
 \frac{|(x \oplus y)-(x+y)|}{|x+y|} \le \macheps.
 ```
 
-```{sidebar} Demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/float-arithmetic`
 ```

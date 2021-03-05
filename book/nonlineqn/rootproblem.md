@@ -11,7 +11,7 @@ Given a continuous scalar function $f$ of a scalar variable, find a real number 
 
 We call $r$ a **root** of the function $f$. The formulation $f(x)=0$ is general enough to solve any equation, for if we are given an equation $g(x)=h(x)$, we can define $f=g-h$ and find a root of $f$.
 
-````{sidebar} Demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/roots-bessel`
 ````
@@ -42,7 +42,7 @@ The condition number of the rootfinding problem is equivalent to that for evalua
 ```{index} condition number; of rootfinding
 ```
 
-````{sidebar} Demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/roots-cond`
 ````

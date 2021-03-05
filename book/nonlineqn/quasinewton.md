@@ -143,7 +143,7 @@ In summary, the $\lambda$ parameter in {eq}`levenberg` allows a smooth transitio
 
 ## Implementation
 
-````{sidebar} Demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/quasi-levenberg`
 ````
@@ -224,7 +224,7 @@ end
 ```
 ````
 
-<!-- ````{sidebar} Demo
+<!-- ````{prf:example} Julia demo
 :class: demo
 {doc}`demos/quasi-MM`
 ```` 

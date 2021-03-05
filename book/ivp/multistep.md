@@ -122,7 +122,7 @@ For multistep methods, the order of accuracy in the global error is the same as 
 
 The {term}`order of accuracy` of the method is the leading (lowest) exponent of $h$ in the series expansion of $\tau_{i+1}(h)$ around $h=0$. Although we shall not present the analysis, the conclusion for the multistep methods in this section is the same as for one-step methods: the order of accuracy in the global error is the same as for the local truncation error.
 
-````{proof:example}
+````{prf:example}
 The first-order Adams--Moulton method is also known as **backward Euler**, because its difference equation is
 
 ```{math}
@@ -147,7 +147,7 @@ To derive the LTE, we use the definition:
 Thus $\tau_{i+1}(h)=O(h)$ and AM1 (backward Euler) is a first-order method.
 ````
 
-````{proof:example}
+````{prf:example}
 The AB2 method has the formula
 
 ```{math}
@@ -186,7 +186,7 @@ The integrand is unknown over the interval of integration. But we can approximat
 
 (example-am2derive)=
 
-````{proof:example}
+````{prf:example}
 Let's derive a one-step AM method using the two values $(t_i,f_i)$ and $(t_{i+1},f_{i+1})$. The interpolating polynomial is the linear function
 
 ```{math}

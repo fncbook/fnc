@@ -42,7 +42,7 @@ Because of the Jacobian's role in {eq}`multitaylor`, we may write $\mathbf{J}(\m
 
 (example-nonlinsystem)=
 
-````{proof:example}
+````{prf:example}
 Let
   
 ```{math}
@@ -120,7 +120,7 @@ Computing the Newton step is equivalent to solving a linear system using the Jac
 
 so that $\mathbf{x}_{k+1}=\mathbf{x}_k+\mathbf{s}_k$. Computing the Newton step is equivalent to solving a linear system using the Jacobian matrix and the function value.
 
-````{sidebar} Demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/system-iter`
 ````
@@ -176,7 +176,7 @@ The output of {ref}`function-newtonsys` is a vector of vectors representing the 
 ```
 ````
 
-````{sidebar} Demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/system-usage`
 ````

@@ -76,7 +76,7 @@ provided that the individual block products are well-defined. For transposes we 
 
 In Julia, vectors and matrices are one-dimensional and two-dimensional arrays, respectively. A lot of how Julia deals with them is easy to remember once learned. There's a lot to learn, though, so we give just some of the basics here, and we will pick up more as we go from the code used in our examples and functions.  We begin with some handy functions for working with matrices ({term}`ones`, {term}`zeros`, {term}`size`, {term}`end`) and see how these work with familiar functions from algebra and calculus.
 
-```{sidebar} Demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/matrices-julia`
 ```
@@ -116,7 +116,7 @@ But $\mathbf{e}_j^T$ is the $j$th *row* of $\mathbf{I}$, and $\mathbf{b}_j^T$ is
 
 Being able to extract specific rows and columns of a matrix makes it straightforward to do row- and column-oriented operations, such as linear combinations.
 
-````{proof:example}
+````{prf:example}
  Say that $\mathbf{A}$ has five columns. Adding twice the third column of $\mathbf{A}$ to its first column is done by
 
 ```{math}

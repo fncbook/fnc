@@ -120,7 +120,7 @@ Our implementation of an embedded second/third order (RK23) code is given in {re
 
 First, as in {eq}`absreltolerance`, we use a combination of absolute and relative tolerances to judge the acceptability of a solution value. Second, we have a check whether $t_i+h$ equals $t_i$, which looks odd. This check is purely about roundoff error, because $h$ can become so small that it no longer changes the floating point value of $t_i$. When this happens, it's often a sign that the underlying exact solution has a singularity near $t=t_i$. Third, some adjustments are made to the step size prediction factor $q$. We use a smaller value than {eq}`adaptRKlocal`, to be conservative about the many assumptions that were made to derive it. We also prevent a huge jump in the step size for the same reason. And, we make sure that our final step doesn't take us past the requested end of the domain.
 
-```{sidebar} Demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/adapt-basic`
 

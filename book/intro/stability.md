@@ -19,7 +19,7 @@ x_1 = \frac{-b + \sqrt{b^2-4ac}}{2a}, \qquad
 x_2 = \frac{-b - \sqrt{b^2-4ac}}{2a}.
 ```
 
-```{sidebar} Demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/stability-quadbad`
 ```
@@ -28,13 +28,13 @@ x_2 = \frac{-b - \sqrt{b^2-4ac}}{2a}.
 ```
 
 {doc}`demos/stability-quadbad` suggests that the venerable quadratic formula is an *unstable* means of computing roots in finite precision. The roots themselves were not sensitive to the data or arithmetic—it's the specific computational path we chose that caused the huge growth in errors. 
-<!-- ```{sidebar} demo
+<!-- ```{prf:example} Julia demo
 :class: demo
 {doc}`demos/stability-quadgood`
 ``` 
 -->
 
-```{sidebar} Demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/stability-quadgood`
 ```
@@ -69,7 +69,7 @@ Let $\tilde{y} = \tilde{f}(x)$ be a computed result for the original data $x$. I
 f(\tilde{x}) = \tilde{y} = \tilde{f}(x),
 ```
 
-```{sidebar} Demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/stability-roots`
 ```
@@ -84,7 +84,7 @@ Small backward error is the best we can hope for in a poorly conditioned problem
 
 (example-not-backward-stable)=
 
-````{proof:example}
+````{prf:example}
   One stable algorithm that is not backward stable is floating point evaluation for our old standby, $f(x)=x+1$. If $|x|<\epsilon_\text{mach}/2$, then the computed result is $\tilde{f}(x)=1$, since there are no floating point numbers between $1$ and $1+\epsilon_\text{mach}$. Hence the only possible choice for a real number $\tilde{x}$ satisfying {eq}`backwarderror` is $\tilde{x}=0$. But then $|\tilde{x}-x|/|x|=1$, which indicates 100\% backward error!
 ````
 

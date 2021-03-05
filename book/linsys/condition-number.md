@@ -88,7 +88,7 @@ A condition number of 1 is the best we can hope for—in that case, the relative
 If $\kappa(\mathbf{A}) > \epsilon_\text{mach}^{-1}$, then for computational purposes $\mathbf{A}$ is singular.
 ```
 
-```{sidebar} Demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/condition-bound`
 ```

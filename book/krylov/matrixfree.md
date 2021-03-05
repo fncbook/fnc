@@ -50,7 +50,7 @@ using the symmetry of $\mathbf{C}$. So we can describe blur in both directions a
 
 for a positive integer $k$.
 
-::::{sidebar} Demo
+::::{prf:example} Julia demo
 :class: demo
 {doc}`demos/matrixfree-blur`
 ::::
@@ -77,7 +77,7 @@ The matrix $\mathbf{A}$ is $mn\times mn$; for a 12-megapixel image, it would hav
 
 The following example shows how to put these ideas into practice with MINRES.
 
-::::{sidebar} Demo
+::::{prf:example} Julia demo
 :class: demo
 {doc}`demos/matrixfree-deblur`
 ::::

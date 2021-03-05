@@ -1,7 +1,5 @@
 # Sparsity and structure
 
-\label{sec:sparse}
-
 ```{index} matrix; sparse
 ``` 
 ```{index} sparse matrix
@@ -16,7 +14,7 @@ Very large matrices cannot be stored all within primary memory of a computer unl
 
 Most graphs with real applications have many fewer edges than the maximum possible $n^2$ for $n$ nodes. Accordingly, their adjacency matrices have mostly zero elements and should be represented sparsely. 
 
-::::{sidebar} Demo
+::::{prf:example} Julia demo
 :class: demo
 {doc}`demos/structure-sparse`
 ::::
@@ -26,7 +24,7 @@ Arithmetic operations such as "+", "-", "*", and \verb?^? respect and exploit sp
 In the case of an adjacency matrix $\mathbf{A}$, for example, the $(i,j)$ entry of matrix $\mathbf{A}^k$ for positive integer $k$ is the number of paths of length $k$ from node $i$ to node $j$.
 
 
-::::{sidebar} Demo
+::::{prf:example} Julia demo
 :class: demo
 {doc}`demos/structure-fill`
 ::::
@@ -43,7 +41,7 @@ Banded matrices appear naturally in many applications where each node interacts 
 ```{index} matrix; factorization
 ```
 
-::::{sidebar} Demo
+::::{prf:example} Julia demo
 :class: demo
 {doc}`demos/structure-banded`
 ::::
@@ -57,7 +55,7 @@ If given a sparse matrix, the backslash operator will automatically try a form o
 
 For very large matrices, it's unlikely that you will want to find all of its eigenvalues and eigenvectors. In an [upcoming section](subspace.md) we will describe some of the math behind an algorithm that can find a selected number of eigenvalues of largest magnitude, lying to the extreme left or right, or nearest a given complex number. 
 
-::::{sidebar} Demo
+::::{prf:example} Julia demo
 :class: demo
 {doc}`demos/structure-linalg`
 ::::

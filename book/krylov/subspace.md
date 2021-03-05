@@ -64,7 +64,7 @@ For instance, we can interpret $\mathbf{A}\mathbf{x}_m\approx \mathbf{b}$ in the
 The natural seed vector for $\ck_m$ in this case is the vector $\mathbf{b}$. In the next example we try to implement {eq}`gmresdef`. We do take one precaution: because the vectors $\mathbf{A}^{k}\mathbf{b}$ may become very large or small in norm, we normalize after each multiplication by $\mathbf{A}$, just as we did in the power iteration.
 
 (demo-subspace-unstable)=
-::::{sidebar} Demo
+::::{prf:example} Julia demo
 :class: demo
 {doc}`demos/subspace-unstable`
 ::::
@@ -124,7 +124,7 @@ We can now proceed iteratively. If $\mathbf{u}$ is the Krylov seed vector, then
 ```
 We have just described the {term}`Arnoldi iteration`. The Arnoldi iteration finds  orthonormal bases for a nested sequence of Krylov subspaces.
 
-::::{Sidebar} Demo
+::::{prf:example} Julia demo
 :class: demo
 {doc}`demos/subspace-arnoldi`
 ::::

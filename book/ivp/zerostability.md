@@ -3,7 +3,7 @@
 ```{index} multistep method
 ```
 
-````{sidebar} Demo
+````{prf:example} Julia demo
 :class: demo
 {doc}`demos/zs-LIAF`
 ````
@@ -80,7 +80,7 @@ is a solution for any values of $c_1,\ldots,c_k$. These constants are determined
 independently of $h$ and $m$. This proves zero-stability. Conversely, if some $|r_j|>1$, then $|u_m|$ cannot be bounded above by a constant independent of $m$. Since $b=t_m$, $m\to\infty$ at $t=b$ as $h\to 0$, so zero-stability cannot hold.
 ````
 
-````{proof:example}
+````{prf:example}
 A $k$-step Adams method has $\rho(z) = z^k - z^{k-1} = z^{k-1}(z-1)$. Hence 1 is a simple root and 0 is a root of multiplicity $k-1$. So the Adams methods are all stable.
 ````
 

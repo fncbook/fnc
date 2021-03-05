@@ -66,7 +66,7 @@ Polynomial interpolation can be posed as a linear system of equations with a Van
 or more simply, $\mathbf{V} \mathbf{c} = \mathbf{y}$. The matrix $\mathbf{V}$ is of a
 special type known as a {term}`Vandermonde matrix`. Polynomial interpolation can be posed as a linear system of equations with a Vandermonde matrix.
 
-```{sidebar} Demo
+```{prf:example} Julia demo
 :class: demo
 {doc}`demos/interp-vander`
 ```

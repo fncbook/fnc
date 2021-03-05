@@ -109,6 +109,7 @@ sphinx:
  
   extra_extensions:
   - sphinxcontrib.proof
+  - sphinx_proof
 #  - sphinxcontrib.rsvgconverter
 
 bibtex_bibfiles:
