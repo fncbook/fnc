@@ -231,7 +231,7 @@ The local truncation error of a one-step method has the same order of accuracy a
 ```{index} order of accuracy; of a one-step IVP solver
 ```
 
-```{prf:example} Julia demo
+```{proof:example} Julia demo
 :class: demo
 {doc}`demos/euler-converge`
 ```

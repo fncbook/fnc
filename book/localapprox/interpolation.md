@@ -16,7 +16,7 @@ The values $t_0,\ldots,t_n$ are called the {term}`nodes` of the interpolant. In 
 ```{index} interpolation; by polynomials
 ```
 
-````{prf:example} Julia demo
+````{proof:example} Julia demo
 :class: demo
 {doc}`demos/interp-global`
 ````
@@ -36,11 +36,11 @@ In Chapter 9 we explore the large oscillations in the last figure of {doc}`demos
 
 In order to keep polynomial degrees small while interpolating large data sets, we will choose interpolants from the **piecewise polynomials**. Specifically, the interpolant $p$ must be a polynomial on each subinterval $[t_{k-1},t_k]$ for $k=1,\ldots,n$.
 
-````{prf:example}
-  Some examples of piecewise polynomials for the nodes  $t_0=-2$, $t_1=0$, $t_2=1$, and $t_3=4$ are $p_1(x)=x+1$, $p_2(x)=\operatorname{sign}(x)$, $p_3(x)=|x-1|^{3}$, and $p_4(x)=(\max\{0,x\})^{4}$. Note that $p_{1}$, $p_{2}$, and $p_4$ would also be piecewise polynomial on the node set $\{t_0,t_1,t_3\}$, but $p_3$ would not.
+````{proof:example}
+Some examples of piecewise polynomials for the nodes  $t_0=-2$, $t_1=0$, $t_2=1$, and $t_3=4$ are $p_1(x)=x+1$, $p_2(x)=\operatorname{sign}(x)$, $p_3(x)=|x-1|^{3}$, and $p_4(x)=(\max\{0,x\})^{4}$. Note that $p_{1}$, $p_{2}$, and $p_4$ would also be piecewise polynomial on the node set $\{t_0,t_1,t_3\}$, but $p_3$ would not.
 ````
 
-````{prf:example} Julia demo
+````{proof:example} Julia demo
 :class: demo
 {doc}`demos/interp-pwise`
 ````
@@ -82,9 +82,8 @@ where as always $\mathbf{e}_k$ is a column of an identity matrix. We use $\|\Del
 
 The absolute condition number $\kappa(\mathbf{y})$ relates $\|\Delta \mathcal{I} \|_\infty$ to $\|\Delta \mathbf{y}\|_\infty$.
 
-(theorem-interp-conditioning)=
-
 ````{proof:theorem} Interpolation conditioning
+:label: thm-interp-conditioning
 Suppose that $\mathcal{I}$ is a linear interpolation method. Then the absolute condition number of $\mathcal{I}$ satisfies
   
 ```{math}
@@ -113,12 +112,12 @@ The absolute condition number maximizes this quantity over all $\Delta \mathbf{y
 The condition number of a linear interpolation method is essentially that of its cardinal functions.
 ```
 
-````{prf:example} Julia demo
+````{proof:example} Julia demo
 :class: demo
 {doc}`demos/interp-cond`
 ````
 
-The [interpolation conditioning theorem](theorem-interp-conditioning) says that assessing the condition number of interpolation for any data can be simplified to measuring the effect of interpolation with each node "switched on" one at a time. The results of such interpolations are known as {term}`cardinal functions`.
+{prf:ref}`thm-interp-conditioning` says that assessing the condition number of interpolation for any data can be simplified to measuring the effect of interpolation with each node "switched on" one at a time. The results of such interpolations are known as {term}`cardinal functions`.
 
 ## Exercises
 
@@ -208,7 +207,7 @@ The [interpolation conditioning theorem](theorem-interp-conditioning) says that 
     ````{only} solutions
     ````
 
-5. ✍ Use the formula of [this previous exercise](problem-quadratic-interpolant) and the [interpolation conditioning theorem](theorem-interp-conditioning)` to derive bounds on the condition number of quadratic polynomial interpolation at the nodes $-1$, $0$, $1$.
+5. ✍ Use the formula of [this previous exercise](problem-quadratic-interpolant) and {prf:ref}`thm-interp-conditioning` to derive bounds on the condition number of quadratic polynomial interpolation at the nodes $-1$, $0$, $1$.
 
     ````{only} solutions
     ````

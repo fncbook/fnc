@@ -3,7 +3,7 @@
 ```{index} fixed point problem
 ```
 
-````{prf:example} Julia demo
+````{proof:example} Julia demo
 :class: demo
 {doc}`demos/fp-spiral`
 ````
@@ -47,7 +47,7 @@ Hence if $|g'(r)|>1$, we are led to the contradictory conclusion that the errors
 
 (example-fprate)=
 
-````{prf:example}
+````{proof:example}
   The role of $g'(r)$ is clear in {doc}`demos/fp-spiral`. We have $g(x) = -x^2+5x-3.5$ and $g'(x)=-2x+5$. For the first fixed point, near $2.71$, we get $g'(r)\approx-0.42$, indicating convergence. For the second fixed point, near 1.29, we get $g'(r)\approx 2.42$, which is consistent with the observed divergence.
 ````
 
@@ -86,7 +86,7 @@ Practically speaking, linear convergence is identified by two different observat
 1. The errors lie on a straight line on a log-linear graph, as implied by $\log |\epsilon_k| \approx \alpha k + \beta$.
 2. The error is reduced by a constant factor in each step, as implied by $|\epsilon_k| \approx C \sigma^k$.
 
-```{prf:example} Julia demo
+```{proof:example} Julia demo
 :class: demo
 {doc}`demos/fp-converge`
 ```

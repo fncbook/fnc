@@ -1,4 +1,4 @@
-# Square linear systems
+# Linear systems of equations
 
 ```{epigraph}
 It's all a lot of simple tricks and nonsense.
@@ -10,7 +10,7 @@ One of the most frequently encountered tasks in scientific computation is the so
 
 Analyzing the algorithm requires new tools. Because the computations will take place in floating point, we must first discuss a system for measuring the "size" of a perturbation to a vector or matrix data. Once that is understood, we find that the conditioning of the square linear system problem is quite straightforward to describe. Finally, we will see that the algorithm may change when certain things are known about the matrix $\mathbf{A}$.
 
-## Important terms
+**Important terms**
 
 ```{glossary}
 asymptotic
@@ -98,7 +98,7 @@ Vandermonde matrix
   Type of matrix important to posing polynomial interpolation conditions.
 ```
 
-## Important Julia terms
+**Important Julia terms**
 
 ```{glossary}
 backslash

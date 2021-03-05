@@ -10,7 +10,7 @@ Quantities that change continuously in time or space are often modeled by differ
 
 Methods for IVPs usually start from the known initial value and iterate or "march" forward from there. There is a large number of them, owing in part to differences in accuracy, stability, and convenience. The most broadly important methods fall into one of two camps: **Runge--Kutta** and **linear multistep** formulas. Each type introduces its own complications, and we will consider them separately.
 
-## Important terms
+**Important terms**
 
 ```{glossary}
 Euler's method
@@ -48,7 +48,7 @@ stiff
 
 ```
 
-## Important Julia commands and keywords
+**Important Julia commands and keywords**
 
 ```{glossary}
 `DifferentialEquations`

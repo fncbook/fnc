@@ -15,7 +15,7 @@ The general form of a scalar, first-order {term}`initial-value problem` (IVP) is
 
 We call $t$ the **independent variable** and $u$ the **dependent variable**. When $t$ is in fact meant to be time, sometimes we write $\dot{u}$ (read "u-dot") instead of $u'$. A solution of an initial-value problem is a function $u(t)$ that makes both $u'(t)=f\bigl(t,u(t)\bigr)$ and $u(a)=u_0$ true equations.
 
-````{prf:example}
+````{proof:example}
   Suppose $u(t)$ is the size of a population at time $t$. We idealize by allowing $u$ to take any real (not just integer) value. If we assume a constant per capita birth rate (births per unit population per unit time), then
   
 ```{math}
@@ -55,7 +55,7 @@ An ODE may have higher derivatives of the unknown solution present. For example,
 
 ## Numerical solutions
 
-```{prf:example} Julia demo
+```{proof:example} Julia demo
 :class: demo
 {doc}`demos/basics-first`
 
@@ -66,14 +66,14 @@ The `DifferentialEquations` package has numerous methods for solving ordinary di
 
 ## Existence and uniqueness
 
-```{prf:example} Julia demo
+```{proof:example} Julia demo
 :class: demo
 {doc}`demos/basics-sing`
 ```
 
 As demonstrated in {doc}`demos/basics-sing`, there are simple IVPs that do not have solutions at all possible times. Furthermore, we can easily find an IVP that has more than one solution.
 
-````{prf:example}
+````{proof:example}
   The functions $u(t)=u^2$ and $u(t)\equiv 0$ both satisfy the differential equation $u'=2\sqrt{u}$ and the initial condition $u(0)=0$. Thus the corresponding IVP has more than one solution.
 ````
 
@@ -105,7 +105,7 @@ If the derivative $\frac{\partial f}{\partial u}$ exists and $\left|\frac{\parti
 for all sufficiently small $|\delta|$.
 ````
 
-```{prf:example} Julia demo
+```{proof:example} Julia demo
 :class: demo
 {doc}`demos/basics-cond`
 ```

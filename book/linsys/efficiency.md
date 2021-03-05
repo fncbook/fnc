@@ -11,7 +11,7 @@ For positive-valued functions $f(n)$ and $g(n)$, we say $f(n)=O\bigl(g(n)\bigr)$
 
 [^sets]: More precisely, $O(g)$ and $\sim g$ are *sets* of functions, and $\sim g$ is a subset of $O(g)$. That we write $f=O(g)$ rather than $f\in O(g)$ is a quirk of convention.
 
-````{prf:example}
+````{proof:example}
 Consider the functions $f(n) = a_1 n^3 + b_1 n^2 + c_1 n$ and $g(n) = a_2 n^3$ in the limit $n\to \infty$.  Then
   
 ```{math}
@@ -23,7 +23,7 @@ Consider the functions $f(n) = a_1 n^3 + b_1 n^2 + c_1 n$ and $g(n) = a_2 n^3$ i
 Since $a_1/a_2$ is a constant, $f(n) = O(g(n))$; if $a_1=a_2$, then $f \sim g$.
 ````
 
-````{prf:example}
+````{proof:example}
   Consider $f(n) = \sin (1/n)$, $g(n)=1/n$ and $h(n) = 1/n^2$. For large $n$, Taylor's theorem with remainder implies that
   
 ```{math}
@@ -54,7 +54,7 @@ It's conventional to use asymptotic notation that is as specific as possible. Fo
 
 Traditionally, in numerical linear algebra we count **floating point operations**, or {term}`flops` for short. In our interpretation each scalar addition, subtraction, multiplication, division, and square root counts as one flop. Given any algorithm, we can simply add up the number of scalar flops and ignore everything else.
 
-```{prf:example} Julia demo
+```{proof:example} Julia demo
 :class: demo
 {doc}`demos/flops-mvmult`
 
@@ -130,7 +130,7 @@ LU factorization of an $n\times n$ matrix takes $\sim\frac{2}{3}n^3$ flops as $n
 \end{split}
 ```
 
-```{prf:example} Julia demo
+```{proof:example} Julia demo
 :class: demo
 {doc}`demos/flops-lufact`
 ```

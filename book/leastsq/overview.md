@@ -12,7 +12,7 @@ Since we cannot solve all of the system's equations, we need to define what the 
 
 The linear least squares problem serves as our introduction to the vast field of *optimization*. It is one of the simplest problems of this type. We will see an extension to a nonlinear version in {doc}`../nonlineqn/overview`.
 
-## Important terms
+**Important terms**
 
 ```{glossary}
 linear least squares problem
@@ -43,7 +43,7 @@ QR factorization
   Representation of a matrix as the product of an orthogonal and an upper triangular matrix.
 ```
 
-## Important Julia terms
+**Important Julia terms**
 
 ```{glossary}
 `pinv`

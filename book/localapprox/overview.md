@@ -10,7 +10,7 @@ In many scientific problems the solution is a function. Accordingly, our next ta
 
 Once we have selected a method of discretization, we can define numerical analogs of our two favorite operations on functions, differentiation and integration. These are linear operations, so the most natural numerical analogs are linear operations too. As we will see in many of the chapters following this one, a lot of numerical computing boils down to converting calculus to algebra, with discretization as the link between them.
 
-## Important terms
+**Important terms**
 
 ```{glossary}
 cardinal functions
@@ -52,7 +52,7 @@ truncation error
 
 ```
 
-## Important Julia terms
+**Important Julia terms**
 
 ```{glossary}
 `CubicSplineInterpolation`

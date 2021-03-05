@@ -116,7 +116,7 @@ The convergence rate is found by interpreting {eq}`poweriterconv` from the power
 
 We observe that the convergence is best when the shift $s$ is close to the target eigenvalue $\lambda_1$, specifically when it is much closer to that eigenvalue than to any other.
 
-::::{prf:example} Julia demo
+::::{proof:example} Julia demo
 :class: demo
 {doc}`demos/inviter-conv`
 ::::

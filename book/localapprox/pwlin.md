@@ -80,7 +80,7 @@ function hatfun(x,t,k)
 end
 ````
 
-````{prf:example} Julia demo
+````{proof:example} Julia demo
 :class: demo
 {doc}`demos/pwlin-hat`
 ````
@@ -110,7 +110,7 @@ The appeal of a cardinal basis is that it makes the expression of the interpolan
   p(x) = \sum_{k=0}^n y_k H_k(x).
 ```
 
-````{prf:example} Julia demo
+````{proof:example} Julia demo
 :class: demo
 {doc}`demos/pwlin-usage`
 ````
@@ -147,6 +147,7 @@ The condition number bounds from \thmref{interp-conditioning} are very simple fo
 ```
 
 ````{proof:theorem} Conditioning of PL interpolation
+:label: thm-plcondition
 The absolute condition number of piecewise linear interpolation in the infinity norm equals one. More specifically, if $\mathcal{I}$ is the piecewise linear interpolation operator, then 
 
 ```{math}
@@ -178,6 +179,7 @@ Now suppose that $f$ is a "nice" function on an interval $[a,b]$ containing all 
 (theorem-placcuracy)=
 
 ````{proof:theorem} Convergence of PL interpolation
+:label: thm-plconverge
 Suppose that $f(x)$ has a continuous second derivative in $[a,b]$ (often expressed as $f\in C^2[a,b]$). Let $p_n(x)$ be the piecewise linear interpolant of $\bigl(t_i,f(t_i)\bigr)$ for $i=0,\ldots,n$, where $t_i=a+i h$ and $h=(b-a)/n$. Then
   
 ```{math}
@@ -195,12 +197,12 @@ For an outline of a proof, see [this exercise](problem-placcuracy).
 Piecewise linear interpolation is second-order accurate.
 ```
 
-````{prf:example} Julia demo
+````{proof:example} Julia demo
 :class: demo
 {doc}`demos/pwlin-converge`
 ````
 
-We normally don't have access to $f''$, so the importance of the [convergence theorem](theorem-placcuracy) is that the error in the interpolant is $O(h^2)$ as $h\to 0$. The leading exponent of 2 is described by saying that piecewise linear interpolation is second-order accurate. For instance, if we double the number of equally spaced nodes used to sample a function, the piecewise linear interpolant becomes about four times more accurate.
+We normally don't have access to $f''$, so the importance of {prf:ref}`pl-converge` is that the error in the interpolant is $O(h^2)$ as $h\to 0$. The leading exponent of 2 is described by saying that piecewise linear interpolation is second-order accurate. For instance, if we double the number of equally spaced nodes used to sample a function, the piecewise linear interpolant becomes about four times more accurate.
 
 ## Exercises
 

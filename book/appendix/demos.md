@@ -1,6 +1,6 @@
 # All demo notebooks
 
-## Chapter 1: Introduction
+**Chapter 1: Introduction**
 
 - {doc}`../intro/demos/float-julia`
 - {doc}`../intro/demos/float-accuracy`
@@ -10,7 +10,7 @@
 - {doc}`../intro/demos/stability-quadgood`
 - {doc}`../intro/demos/stability-roots`
 
-## Chapter 2: Square linear systems
+**Chapter 2: Square linear systems**
 
 - {doc}`../linsys/demos/interp-vander`
 - {doc}`../linsys/demos/matrices-julia`
@@ -32,7 +32,7 @@
 - {doc}`../linsys/demos/structure-symm`
 - {doc}`../linsys/demos/structure-cholesky`
 
-## Chapter 3: Overdetermined linear systems
+**Chapter 3: Overdetermined linear systems**
 
 - {doc}`../leastsq/demos/fitting-tempinterp`
 - {doc}`../leastsq/demos/fitting-tempfit`
@@ -41,7 +41,7 @@
 - {doc}`../leastsq/demos/qr-qrfact`
 - {doc}`../leastsq/demos/house-qr`
 
-## Chapter 4: Roots of nonlinear equations
+**Chapter 4: Roots of nonlinear equations**
 
 - {doc}`../nonlineqn/demos/roots-bessel`
 - {doc}`../nonlineqn/demos/roots-cond`
@@ -58,7 +58,7 @@
 - {doc}`../nonlineqn/demos/quasi-levenberg`
 - {doc}`../nonlineqn/demos/nlsq-MM`
 
-## Chapter 5: Piecewise interpolation
+**Chapter 5: Piecewise interpolation**
 
 - {doc}`../localapprox/demos/interp-global`
 - {doc}`../localapprox/demos/interp-pwise`
@@ -77,7 +77,7 @@
 - {doc}`../localapprox/demos/adapt-motive`
 - {doc}`../localapprox/demos/adapt-usage`
 
-## Chapter 6: Initial-value problems for ODEs
+**Chapter 6: Initial-value problems for ODEs**
 
 - {doc}`../ivp/demos/basics-first`
 - {doc}`../ivp/demos/basics-usage`
@@ -93,7 +93,7 @@
 - {doc}`../ivp/demos/implicit-stiff`
 - {doc}`../ivp/demos/zs-LIAF`
 
-## Chapter 7 (Matrix analysis)
+**Chapter 7 (Matrix analysis)**
 
 - {doc}`../matrixanaly/demos/insight-graph`
 - {doc}`../matrixanaly/demos/insight-image`

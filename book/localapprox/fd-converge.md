@@ -19,7 +19,7 @@ where we have used translation invariance to set $x=0$ for simplicity. In order 
 
 [^trunc]: The term *truncation error* is derived from the idea that the finite difference formula, being finite, has to truncate the series representation and thus cannot be exactly correct for all functions.
 
-````{prf:example}
+````{proof:example}
 The finite difference formula {eq}`forwardFD11` implies
 
 ```{math}
@@ -32,7 +32,7 @@ The finite difference formula {eq}`forwardFD11` implies
 ```
 ````
 
-````{prf:example} Julia demo
+````{proof:example} Julia demo
 :class: demo
 {doc}`demos/fdconverge-1`
 ````
@@ -46,7 +46,7 @@ The most important conclusion of {eq}`fd1trunc` is that $\tau_f(h)=O(h)$. The de
 
 As a rule, including more function values in a finite difference formula (i.e., increasing $p$ and $q$ in {eq}`fdxformula`) gives a truncation error that depends on a higher power of $h$ and thus vanishes more quickly as $h\to 0$. The power of $h$ in the leading term of the truncation error is known as the {term}`order of accuracy`.
 
-````{prf:example}
+````{proof:example}
 We compute the truncation error of {eq}`centerFD12`:
   
 ```{math}
@@ -62,7 +62,7 @@ We compute the truncation error of {eq}`centerFD12`:
 Because the lowest-order term is proportional to $h^2$, we say that the method has order of accuracy equal to 2.
 ````
 
-````{prf:example} Julia demo
+````{proof:example} Julia demo
 :class: demo
 {doc}`demos/fdconverge-2`
 ````
@@ -131,7 +131,7 @@ Finally, at the optimal $h$ from {eq}`FDtruncbalance`, both the truncation and r
 O(h^m) = O\left( \epsilon_\text{mach}^{ m/(m+1) } \right).
 ```
 
-````{prf:example} Julia demo
+````{proof:example} Julia demo
 :class: demo
 {doc}`demos/fdconverge-round`
 ````

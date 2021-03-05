@@ -19,7 +19,7 @@ We next consider three important types of matrices that cause the LU factorizati
 ```{index} tridiagonal matrix
 ```
 
-```{prf:example} Julia demo
+```{proof:example} Julia demo
 :class: demo
 {doc}`demos/structure-banded`
 ```
@@ -38,7 +38,7 @@ If no row pivoting is used, the $\mathbf{L}$ and $\mathbf{U}$ factors preserve t
 ```{index} sparse matrix
 ```
 
-```{prf:example} Julia demo
+```{proof:example} Julia demo
 :class: demo
 {doc}`demos/structure-timing`
 ```
@@ -52,7 +52,7 @@ In order to take advantage of the savings, we would need minor modifications to 
 
 If $\mathbf{A}^T=\mathbf{A}$, then $\mathbf{A}$ is symmetric. Symmetric matrices arise frequently because so many types of interactions are symmetric: gravitation, social-network befriending, etc. Symmetry in linear algebra simplifies many properties and algorithms. As a rule of thumb, if your matrix has symmetry, you want to exploit and preserve it.
 
-```{prf:example} Julia demo
+```{proof:example} Julia demo
 :class: demo
 {doc}`demos/structure-symm`
 ```
@@ -128,7 +128,7 @@ Now we have $\mathbf{A}=\mathbf{L}\mathbf{D}^{1/2}\mathbf{D}^{1/2}\mathbf{L}^T= 
 
 Recall that the unpivoted LDL$^T$ (like unpivoted LU) factorization is not stable and not even always possible. However, in the SPD case one can prove that pivoting is not necessary for the existence nor the stability of the factorization $\mathbf{A}=\mathbf{R}^T\mathbf{R}$, which is known as the {term}`Cholesky factorization`. The elimination process is readily adapted into an algorithm for Cholesky factorization. Like LDL$^T$, the Cholesky factorization requires ${\sim\frac{1}{3}} n^3$ flops asymptotically in the $n\times n$ case, half as many as standard LU factorization.
 
-```{prf:example} Julia demo
+```{proof:example} Julia demo
 :class: demo
 {doc}`demos/structure-cholesky`
 ```

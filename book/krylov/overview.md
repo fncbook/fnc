@@ -14,7 +14,7 @@ Instead, we will replace LU factorization with an iterative algorithm. Unlike th
 
 Krylov subspace methods have two other advantages that are subtle but critically relevant to applications. One is that they allow us to do linear algebra *even without having the relevant matrix*. This may sound undesirable or even impossible, but it exploits the [connection](matrixfree.md) between matrix-vector multiplication and a linear transformation. The other major unique advantage of Krylov subspace iterations is that they can exploit "approximate inverses" when they are available. These two features are among the most powerful ideas behind scientific computation today.
 
-## Important terms
+**Important terms**
 
 ```{glossary}
 Arnoldi iteration
@@ -55,7 +55,7 @@ upper Hessenberg
 
 ```
 
-## Important Julia terms
+**Important Julia terms**
 
 ```{glossary}
 backslash

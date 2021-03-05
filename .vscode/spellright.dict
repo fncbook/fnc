@@ -79,3 +79,6 @@ deblurring
 operatorname
 vec
 unvec
+interpolant
+pointwise
+commutativity

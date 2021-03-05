@@ -3,7 +3,7 @@
 ```{index} numerical integration
 ```
 
-````{prf:example} Julia demo
+````{proof:example} Julia demo
 :class: demo
 {doc}`demos/adapt-motive`
 ````
@@ -85,7 +85,7 @@ If we bisect the interval and compute $T_f(4)$ on the subinterval $[0,1/2]$, we 
 
 Only the second and fourth nodes are new. The same is true on the subinterval $[1/2,1]$, and for every recursive bisection.
 
-````{prf:example} Julia demo
+````{proof:example} Julia demo
 :class: demo
 {doc}`demos/adapt-usage`
 ````

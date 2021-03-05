@@ -169,7 +169,7 @@ $(\mathbf{A}^T\mathbf{A})\mathbf{x} = \mathbf{A}^T \mathbf{b}$. When these equat
 \kappa(\mathbf{A}^T\mathbf{A}) = \kappa(\mathbf{A})^2
 ```
 
-````{prf:example} Julia demo
+````{proof:example} Julia demo
 :class: demo
 {doc}`demos/normaleqns-instab`
 ````

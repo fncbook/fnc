@@ -10,7 +10,7 @@ In previous chapters we have seen how matrices that represent square or overdete
 
 These decompositions can be used to solve linear and least squares systems, but they have greater value in how they represent the matrix itself. They lead to critical and quantitative insights about the structure of the underlying transformation and suggest ways to approximate it efficiently. In this chapter we will look at both of these fundamental decompositions and hint at just a few of their computational applications.
 
-## Important terms
+**Important terms**
 
 ```{glossary}
 adjacency matrix
@@ -54,7 +54,7 @@ unitary
 
 ```
 
-## Important Julia commands and keywords
+**Important Julia commands and keywords**
 
 `eigen`
   Compute the eigenvalue decomposition of a matrix (i.e., all eigenvalues and eigenvectors).

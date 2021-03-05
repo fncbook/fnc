@@ -48,14 +48,14 @@ Let $T_{ii}=\operatorname{sign}(D_{ii})$ for all $i$. Then $\mathbf{T}^2=\mathbf
 
 The converse of the [Spectral Decomposition Theorem](thm-spec-decomp) is also true: every matrix with a unitary diagonalization and real eigenvalues is hermitian. However, there are non-hermitian matrices that meet just the requirement of a unitary EVD; any such matrix is called {term}`normal`.
 
-::::{prf:example} Julia demo
+::::{proof:example} Julia demo
 :class: demo
 {doc}`demos/symm-eig-normal`
 ::::
 
 Now consider again [the Bauer--Fike Theorem](thm-bauer-fike), which says that the condition number of the eigenvalues is bounded above by $\kappa(\mathbf{V})$, for any eigenvector matrix $\mathbf{V}$. Because $\kappa=1$ for any unitary or orthogonal matrix, the [Spectral Decomposition Theorem](thm-spec-decomp)  then implies that the condition number of the eigenvalues of a hermitian or any normal matrix is one. That is, eigenvalues of a normal matrix can be changed by no more than the norm of the perturbation to the matrix.
 
-:::{prf:example} Julia demo
+:::{proof:example} Julia demo
 :class: demo
 {doc}`demos/symm-eig-perturb`
 :::
@@ -83,7 +83,7 @@ R_{\mathbf{A}}(\mathbf{v}+\epsilon\mathbf{z}) = R_{\mathbf{A}}(\mathbf{v}) + 0 +
 
 as $\epsilon\to 0$. The conclusion is that a good estimate of an eigenvector becomes an even better estimate of an eigenvalue.
 
-:::{prf:example} Julia demo
+:::{proof:example} Julia demo
 :class: demo
 {doc}`demos/symm-eig-rayleigh`
 :::

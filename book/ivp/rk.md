@@ -207,7 +207,7 @@ This formula is often called "the" fourth-order RK method—even though there ar
   \end{split}
 ```
 
-```{prf:example} Julia demo
+```{proof:example} Julia demo
 :class: demo
 {doc}`demos/rk-converge`
 ```

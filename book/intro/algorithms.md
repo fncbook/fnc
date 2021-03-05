@@ -4,7 +4,7 @@ When we idealize a problem as the mathematical function $f(x)$, we are explicitl
 
 Even simple problems can be associated with algorithms that have surprisingly different characteristics.
 
-````{prf:example}
+````{proof:example}
   Suppose we want to find an algorithm that maps a given $x$ to the
   value of the polynomial $f(x)= 5x^3 + 4x^2 + 3x + 2$.  Representing $x^2$ as $(x)(x)$, we can find it with one multiplication. We can then find $x^3=(x)(x^2)$ with one more multiplication. We can then apply all the coefficients (three more multiplications) and add all the terms (three
   additions), for a total of 8 arithmetic operations.
@@ -64,7 +64,7 @@ end
 ```
 ````
 
-```{prf:example} Julia demo
+```{proof:example} Julia demo
 :class: demo
 {doc}`demos/algorithms-horner`
 ```

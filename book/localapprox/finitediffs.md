@@ -125,7 +125,7 @@ We can in principle derive any finite difference formula from the same process: 
 
  The main motivation for using more function values in a formula is to improve the accuracy. This is measured by **order of accuracy**, which is show in the tables and explained in {doc}`fd-converge`. To get backward differences with $q=0$, you can use the change of variable $\hat{f}(x)=f(-x)$, which changes the sign and reverses the order of the coefficients in {numref}`table-FDforward`; see [this exercise](problem-backwardFD).
 
-````{prf:example}
+````{proof:example}
 According to the tables, here are two finite difference formulas:
 
 ```{math}
@@ -176,7 +176,7 @@ Although function values at equally spaced nodes are a common and convenient sit
   f^{(m)}(0) \approx \sum_{k=0}^{r} c_{k,m} \,f(t_k).
 ```
 
-````{prf:example} Julia demo
+````{proof:example} Julia demo
 :class: demo
 {doc}`demos/fd-weights`
 ````

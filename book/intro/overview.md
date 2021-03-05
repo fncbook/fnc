@@ -8,7 +8,7 @@ You must unlearn what you have learned.
 
 Our first step is to discretize the real numbers—specifically, to replace them with a finite surrogate set of numbers. This step keeps the time and storage requirements for operating with each number at constant levels, but (almost) every data set and arithmetic operation is perturbed slightly away from its idealized mathematical value. We can easily keep the individual roundoff errors very small, so small that simple random accumulation is unlikely to bother us. However, some problems are extremely sensitive to these perturbations, a trait we quantify using a *condition number*. Problems with large condition numbers are difficult to solve accurately. Furthermore, even when the condition number of a problem is not large, some algorithms for solving it allow errors to grow enormously. We call these algorithms *unstable*. In this chapter we discuss these ideas in simple settings before moving on to the more realistic problems in the rest of the book.
 
-## Important terms
+ **Important terms**
 
 ```{glossary}
 algorithm
@@ -39,7 +39,7 @@ unstable
   Allowing perturbations of the data to have much larger effects on the results than can be explained by the problem's condition number.
 ```
 
-## Important Julia commands and keywords
+**Important Julia commands and keywords**
 
 ```{glossary}
 `function`

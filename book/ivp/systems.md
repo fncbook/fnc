@@ -2,7 +2,7 @@
 
 Before we improve on Euler's method, we will address a straightforward but critically important generalization of the problem. Very few applications involve an initial-value problem with just a single dependent variable. Most of the time there are multiple unknowns and a system of equations to define them.
 
-````{prf:example}
+````{proof:example}
 Variations of the following model are commonly seen in ecology and epidemiology:
 
 ```{math}
@@ -38,14 +38,14 @@ The generic form of a first-order system IVP is
   \mathbf{u}(a)=\mathbf{u}_0,
 ```
 
-```{prf:example} Julia demo
+```{proof:example} Julia demo
 :class: demo
 {doc}`demos/systems-exp`
 ```
 
 where all of the boldface quantities are vectors in $\mathbb{R}^m$ or $\mathbb{C}^m$. This is an initial-value problem for a **first-order system of ODEs**, and the number $m$ of dependent variables (and equations) is called the **dimension** of the system. In particular, note that $\mathbf{f}$ represents $m$ scalar functions in $m+1$ scalar variables, including time.
 
-```{prf:example} Julia demo
+```{proof:example} Julia demo
 :class: demo
 {doc}`demos/systems-predator`
 ```
@@ -62,7 +62,7 @@ Fortunately the ability to solve first-order ODE systems implies the ability to 
 
 (example-nlosc3)=
 
-````{prf:example}
+````{proof:example}
  Consider the nonlinear initial-value problem
   
 ```{math}
@@ -88,7 +88,7 @@ condition of the system is
 
 (example-coupledpendula)=
 
-````{prf:example}
+````{proof:example}
 Two identical pendula suspended from the same rod and swinging in parallel planes can be modeled as the second-order system
 
 ```{math}

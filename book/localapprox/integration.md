@@ -3,7 +3,7 @@
 ```{index} numerical integration
 ```
 
-````{prf:example} Julia demo
+````{proof:example} Julia demo
 :class: demo
 {doc}`demos/int-antideriv`
 ````
@@ -114,7 +114,7 @@ end
 ```
 ````
 
-In the [PL convergence theorem](theorem-placcuracy) we stated that the pointwise error in a piecewise linear interpolant with equal node spacing $h$ is bounded by $O(h^2)$ as $h\rightarrow 0$. Using $p$ to stand for the piecewise linear interpolant, we obtain
+In {prf:ref}`thm-plconverge` we stated that the pointwise error in a piecewise linear interpolant with equal node spacing $h$ is bounded by $O(h^2)$ as $h\rightarrow 0$. Using $p$ to stand for the piecewise linear interpolant, we obtain
 
 ```{math}
 \begin{split}
@@ -127,7 +127,7 @@ In the [PL convergence theorem](theorem-placcuracy) we stated that the pointwise
 Tne trapezoid formula has order of accuracy equal to two.
 ```
 
-Hence the trapezoid formula has second-order error. This fact is embedded rigorously in "one of the most remarkable formulas in mathematics," the **Euler--Maclaurin formula**,  which may be stated as
+Hence the trapezoid formula has second-order error. This fact is embedded rigorously in the **Euler--Maclaurin formula**, which may be stated as
 
 ```{math}
     :label: eulermaclaurin
@@ -137,7 +137,7 @@ Hence the trapezoid formula has second-order error. This fact is embedded rigoro
       \end{split}
 ```
 
-````{prf:example} Julia demo
+````{proof:example} Julia demo
 :class: demo
 {doc}`demos/int-trap`
 ````
@@ -241,7 +241,7 @@ What remains are the nodes with $n=m$. That is, if we have computed $T_f(m)$ and
 \end{split}
 ```
 
-````{prf:example} Julia demo
+````{proof:example} Julia demo
 :class: demo
 {doc}`demos/int-extrap`
 ````

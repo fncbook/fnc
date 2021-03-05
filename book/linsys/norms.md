@@ -31,7 +31,7 @@ The last of these properties is known as the **triangle inequality**. Just as $\
 \end{split}
 ```
 
-```{prf:example} Julia demo
+```{proof:example} Julia demo
 :class: demo
 {doc}`demos/norms-vector`
 ```
@@ -168,7 +168,7 @@ In addition, two of the vector norms we have encountered lead to equivalent form
 The infinity norm of a matrix is the maximum row sum, and the 1-norm is the maximum column sum, all after taking absolute values.
 ```
 
-```{prf:example} Julia demo
+```{proof:example} Julia demo
 :class: demo
 {doc}`demos/norms-matrix`
 ```

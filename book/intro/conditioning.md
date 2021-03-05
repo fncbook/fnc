@@ -75,7 +75,7 @@ In retrospect it should come as no surprise that the change in values of $f(x)$ 
 Subtractive cancellation error occurs whenever the result of addition or subtraction is much smaller in magnitude than the operands.
 ```
 
-````{prf:example}
+````{proof:example}
 Let's return to our "add one" problem and generalize it slightly to $f(x)=x-c$ for constant $c$ (previously, we had $c=-1$). We easily compute, using {eq}`conditionderiv`,
 
 ```{math}
@@ -89,7 +89,7 @@ Let's return to our "add one" problem and generalize it slightly to $f(x)=x-c$ f
 The result is simply the relative change {eq}`plus1relerr` normalized by the size of the perturbation $\epsilon$. The condition number is large when $|x|\gg |x-c|$. There is of course no meaningful difference between addition and subtraction over real numbers. Furthermore, the situation is symmetric in $x$ and $c$; that is, if we perturbed $c$ and not $x$, the result would be $|c|/|x-c|$.
 ````
 
-````{prf:example}
+````{proof:example}
 Another elementary operation is to multiply by a constant: $f(x)=cx$ for nonzero $c$. We compute
   
 ```{math}
@@ -135,7 +135,7 @@ Large condition numbers signal when errors cannot be expected to remain comparab
 
 That is, whenever the data $x$ is perturbed by a small amount, we expect the relative change to be magnified by a factor of $\kappa_f(x)$ in the result. Large condition numbers signal when errors cannot be expected to remain comparable in size to roundoff error. We call a problem poorly conditioned or {term}`ill-conditioned` when $\kappa_f(x)$ is large. If $\kappa_f \approx 10^d$, then we expect to "lose" up to $d$ decimal digits of accuracy in computing $f(x)$ from $x$. If $\kappa_f \approx 1/\macheps$, then we can expect the result to be changed by as much as 100% simply by expressing $x$ in finite precision.
 
-````{prf:example}
+````{proof:example}
 Consider the problem $f(x)= \cos(x)$. By the table above, $\kappa_f(x) = |x \tan x|$. There are two different ways in which $\kappa$ might become large:
 
 - If $|x|$ is very large, then perturbations that are small relative to $x$ may still be large compared to $1$. Because $|f(x)|\le 1$ for all $x$, this implies that the perturbation will be large relative to the result, too.
@@ -152,7 +152,7 @@ Most problems have multiple input and output values. These introduce some compli
 
 (example-quadrootcond)=
 
-````{prf:example}
+````{proof:example}
 Consider the problem of finding the roots of a quadratic polynomial; that is, the values of $t$ for which $at^2+bt+c=0$. Here the data are the coefficients $a$, $b$, and $c$ that define the polynomial, and the solution to the problem are the two (maybe complex-valued) roots $t_1$ and $t_2$. Formally, we might write $f([a,b,c])=[t_1,t_2]$ using vector notation.
 
 In order to simplify matters, we will pick one root called $r$, and first consider what happens as we vary just the leading coefficient $a$. This suggests a scalar function $f(a)=r$. We could use the quadratic formula to express $f$ explicitly, but it's a bit easier to start from $ar^2 + br + c = 0$ and use the technique of implicit differentiation to find $dr/da$, while $b$ and $c$ are held fixed. Taking $d/da$ of both sides and applying the chain rule, we get
