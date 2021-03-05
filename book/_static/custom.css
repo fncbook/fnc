@@ -59,7 +59,7 @@ padding: 1em 1em 1em 1em;
 .proof-type-function > .proof-title {
 display: block;
 font-weight: bold;
-background-color: var(--light);
+background-color: rgb(255, 210, 195);
 padding: 1rem;
 clear: both;
 }
