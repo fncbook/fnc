@@ -257,7 +257,7 @@ We say that $\mathbf{A}$ is {term}`invertible` or **nonsingular** if there exist
 
 (theorem-singularity)=
 
-````{proof:theorem} (Linear algebra equivalence)
+````{prf:theorem} (Linear algebra equivalence)
   The following statements are equivalent:
 
   1. $\mathbf{A}$ is nonsingular.

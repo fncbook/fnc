@@ -144,7 +144,7 @@ It should be clear that forward or backward substitution fails if, and only if, 
 
 (theorem-triangleinvert)=
 
-```{proof:theorem} Triangular singularity
+```{prf:theorem} Triangular singularity
 A triangular matrix is singular if and only if at least one of its diagonal elements is zero.
 ```
 

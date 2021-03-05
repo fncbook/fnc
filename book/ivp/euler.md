@@ -143,7 +143,7 @@ The following theorem puts our observations above on a rigorous footing.
 
 (theorem-onestepGTE)=
 
-````{proof:theorem}
+````{prf:theorem}
 Suppose that the unit local truncation error of the one-step method {eq}`onestepODE` satisfies
   
 ```{math}
@@ -169,7 +169,7 @@ for all $t\in[a,b]$, all $u$, and all $h>0$. Then the global error satisfies
 as $h\rightarrow 0$.
 ````
 
-````{proof:proof}
+````{prf:proof}
 Define the global error sequence $E_i=\hat{u}(t_i)-u_i$. Using {eq}`onestepODE`, we obtain
   
 ```{math}

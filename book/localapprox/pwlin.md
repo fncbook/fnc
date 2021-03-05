@@ -146,7 +146,7 @@ The condition number bounds from \thmref{interp-conditioning} are very simple fo
 ```{index} condition number; of interpolation
 ```
 
-````{proof:theorem} Conditioning of PL interpolation
+````{prf:theorem} Conditioning of PL interpolation
 :label: thm-plcondition
 The absolute condition number of piecewise linear interpolation in the infinity norm equals one. More specifically, if $\mathcal{I}$ is the piecewise linear interpolation operator, then 
 
@@ -158,7 +158,7 @@ The absolute condition number of piecewise linear interpolation in the infinity 
 (The norm on the left side is on functions, while the norm on the right side is on vectors.)
 ````
 
-````{proof:proof}
+````{prf:proof}
 By linearity,
 
 ```{math}
@@ -178,7 +178,7 @@ Now suppose that $f$ is a "nice" function on an interval $[a,b]$ containing all 
 
 (theorem-placcuracy)=
 
-````{proof:theorem} Convergence of PL interpolation
+````{prf:theorem} Convergence of PL interpolation
 :label: thm-plconverge
 Suppose that $f(x)$ has a continuous second derivative in $[a,b]$ (often expressed as $f\in C^2[a,b]$). Let $p_n(x)$ be the piecewise linear interpolant of $\bigl(t_i,f(t_i)\bigr)$ for $i=0,\ldots,n$, where $t_i=a+i h$ and $h=(b-a)/n$. Then
   

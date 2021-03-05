@@ -2,7 +2,7 @@
 
 From a practical standpoint, one of the biggest drawbacks of Newton's method is the requirement to supply $f'$ in [`newton`](function-newton). It is both a programming inconvenience and a step that requires computational time. We can avoid using $f'$ however, by making a simple but easily overlooked observation:
 
-```{proof:observation}
+```{prf:observation}
  When a step produces an approximate result, you are free to carry it out approximately. 
 ```
 

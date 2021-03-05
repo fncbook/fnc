@@ -24,7 +24,7 @@ Such a space is called the $m$th {term}`Krylov subspace` $\ck_m$ of $\mathbb{C}^
 As we have seen with the power iteration, part of the appeal of the Krylov matrix is that it can be generated in a way that fully exploits the sparsity of $\mathbf{A}$, simply through repeated matrix-vector multiplication. Furthermore, we have some important mathematical properties.
 
 (theorem-krylovmult)=
-::::{proof:theorem}
+::::{prf:theorem}
 Suppose $\mathbf{A}$ is $n\times n$, $0<m<n$, and a vector $\mathbf{u}$ is used to generate Krylov subspaces. If $\mathbf{x}\in\ck_m$, then the following hold:
 
 1. $\mathbf{x} = \mathbf{K}_m \mathbf{z}$ for some $\mathbf{z}\in\mathbb{C}^m$.
@@ -32,7 +32,7 @@ Suppose $\mathbf{A}$ is $n\times n$, $0<m<n$, and a vector $\mathbf{u}$ is used 
 3. $\mathbf{A}\mathbf{x} \in \ck_{m+1}$.
 ::::
 
-::::{proof:proof}
+::::{prf:proof}
 If $\mathbf{x}\in\ck_m$, then for some coefficients $c_1,\ldots,c_m$,
 
 :::{math}

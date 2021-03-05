@@ -95,7 +95,7 @@ Equation {eq}`evdecomp` is called an {term}`eigenvalue decomposition` (EVD) of $
 
 There is a common circumstance in which we can guarantee an EVD exists; the proof of the following theorem can be found in many elementary texts on linear algebra.
 
-````{proof:theorem}
+````{prf:theorem}
 If the $n\times n$ matrix $\mathbf{A}$ has $n$ distinct eigenvalues, then $\mathbf{A}$ is diagonalizable.
 ````
 
@@ -115,7 +115,7 @@ observe that if $\mathbf{A}\mathbf{v} = \lambda \mathbf{v}$ for nonzero $\mathbf
 
 The particular relationship between matrices $\mathbf{A}$ and $\mathbf{D}$ in {eq}`evdecomp` is important. If $\mathbf{S}$ is any nonsingular matrix, we say that $\mathbf{B}=\mathbf{S}\mathbf{A}\mathbf{S}^{-1}$ is **similar** to $\mathbf{A}$. A similarity transformation does not change eigenvalues, a fact that is typically proved in elementary linear algebra texts.
 
-````{proof:theorem}
+````{prf:theorem}
 If $\mathbf{X}$ is an nonsingular matrix, then $\mathbf{X}\mathbf{A}\mathbf{X}^{-1}$ has the same eigenvalues as $\mathbf{A}$.
 ````
 
@@ -145,7 +145,7 @@ The fact that the EVD represents a change of basis in both the domain and range 
 Just as linear systems have condition numbers that quantify the effect of fixed precision, eigenvalue problems may be poorly conditioned too. While many possible results can be derived, we will use just one, the **Bauer--Fike theorem**.[^BFT]   
 
 (thm-bauer-fike)=
-````{proof:theorem} Bauer--Fike
+````{prf:theorem} Bauer--Fike
 Let $\mathbf{A}\in\mathbb{C}^{n\times n}$ be diagonalizable, $\mathbf{A}=\mathbf{V}\mathbf{D}\mathbf{V}^{-1}$, with eigenvalues $\lambda_1,\ldots,\lambda_n$. If $\mu$ is an eigenvalue of $\mathbf{A}+\mathbf{E}$ for a complex matrix $\mathbf{E}$, then
 
 ```{math}

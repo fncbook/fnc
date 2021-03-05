@@ -19,7 +19,7 @@ This error could be quite large if the denominator is small. In fact, we can mak
 
 You may have encountered this situation before when using significant digits for scientific calculations. Suppose we round all results to five decimal digits, and we add $-1.0012$ to $1.0000$. The result is $-0.0012$, or $-1.2\times 10^{-3}$ in scientific notation. Notice that even though both operands are specified to five digits, it makes no sense to write more than two digits in the answer, because there is no information in the problem beyond their decimal places. This phenomenon is known as {term}`subtractive cancellation`, or loss of significance. We may say that three digits were "lost" in the mapping from $-1.0012$ to $-0.0012$. There's no way the loss could be avoided, *regardless of the algorithm*, once we decided to round off everything to a fixed number of digits.
 
-```{proof:observation}
+```{prf:observation}
 Subtractive cancellation is one of the most common mechanisms introducing dramatic growth of errors in floating point computation.
 ```
 

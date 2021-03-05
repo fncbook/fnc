@@ -46,11 +46,11 @@ if $\mathbf{v}\neq\boldsymbol{0}$, or $\mathbf{P}=\mathbf{I}$ if $\mathbf{v}=\bo
 
 (theorem-hhreflect)=
 
-````{proof:theorem} (Householder reflector)
+````{prf:theorem} (Householder reflector)
 Let $\mathbf{v}=\| \mathbf{z} \|\mathbf{e}_1-\mathbf{z}$ and let $\mathbf{P}$ be given by {eq}`hhreflect`. Then $\mathbf{P}$ is symmetric and orthogonal, and $\mathbf{P}\mathbf{z}=\| \mathbf{z} \|\mathbf{e}_1$.
 ````
 
-````{proof:proof}
+````{prf:proof}
 The case $\mathbf{v}=\boldsymbol{0}$ is obvious. For $\mathbf{v}\neq\boldsymbol{0}$, the proofs of symmetry and orthogonality are left to the exercises. As for the last fact, we simply compute
   
 ```{math}

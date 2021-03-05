@@ -33,11 +33,11 @@ What if no nonzero pivot can be found? The following theorem ties up this loose 
 
 (theorem-pivot)=
 
-```{proof:theorem} Row pivoting
+```{prf:theorem} Row pivoting
   If a pivot element and all the elements below it are zero, then the original matrix $\mathbf{A}$ is singular. In other words, if $\mathbf{A}$ is nonsingular, then Gaussian elimination with row pivoting will run to completion.
 ```
 
-```{proof:proof}
+```{prf:proof}
 The proof of the first statement is considered in [an exercise](problem-zerocolumn). The second statement follows from it, because the only way that the Gaussian elimination algorithm can have an undefined step is when all of the choices for a  pivot element are zero.
 ```
 

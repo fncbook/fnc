@@ -262,7 +262,7 @@ The not-a-knot cubic spline has order of accuracy equal to four.
 
 Besides having more smoothness than a piecewise linear interpolant, the not-a-knot cubic spline improves the order of accuracy to four.
 
-````{proof:theorem}
+````{prf:theorem}
  Suppose that $f(x)$ has four continuous derivatives in $[a,b]$ (i.e., $f\in C^4[a,b]$). Let $S_n(x)$ be the not-a-knot cubic spline interpolant of $\bigl(t_i,f(t_i)\bigr)$ for $i=0,\ldots,n$, where $t_i=a+i h$ and $h=(b-a)/n$. Then for all sufficiently small $h$, there is a constant $C>0$ such that
 
 ```{math}

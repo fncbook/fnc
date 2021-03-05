@@ -59,7 +59,7 @@ By definition, a sequence is convergent in the infinity norm if and only if it c
 
 (theorem-normequivalence)=
 
-```{proof:theorem} Norm equivalence
+```{prf:theorem} Norm equivalence
   In a finite-dimensional space, convergence in any norm implies convergence in all norms.
 ```
 
@@ -102,7 +102,7 @@ The definition of an induced matrix norm may seem overly complicated. However, t
 
 (theorem-norm-inequalities)=
 
-````{proof:theorem} Norm inequalities
+````{prf:theorem} Norm inequalities
 Let $\| \cdot \|$ designate a matrix norm and the vector norm that induced it. Then for all matrices and vectors of compatible sizes,
 
 ```{math}
@@ -125,7 +125,7 @@ For a square matrix $\mathbf{A}$,
 ```
 ````
 
-````{proof:proof}
+````{prf:proof}
 The first result is trivial if $\mathbf{x}=\boldsymbol{0}$; otherwise,
 
 ```{math}

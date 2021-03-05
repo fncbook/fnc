@@ -82,7 +82,7 @@ where as always $\mathbf{e}_k$ is a column of an identity matrix. We use $\|\Del
 
 The absolute condition number $\kappa(\mathbf{y})$ relates $\|\Delta \mathcal{I} \|_\infty$ to $\|\Delta \mathbf{y}\|_\infty$.
 
-````{proof:theorem} Interpolation conditioning
+````{prf:theorem} Interpolation conditioning
 :label: thm-interp-conditioning
 Suppose that $\mathcal{I}$ is a linear interpolation method. Then the absolute condition number of $\mathcal{I}$ satisfies
   
@@ -94,7 +94,7 @@ Suppose that $\mathcal{I}$ is a linear interpolation method. Then the absolute c
 if vectors and functions are measured in the infinity norm.
 ````
 
-````{proof:proof}
+````{prf:proof}
 Because of {eq}`lininterp-perturb`, we have
 
 ```{math}

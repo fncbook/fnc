@@ -71,7 +71,7 @@ If the columns of $\mathbf{Q}$ are orthonormal, then $\mathbf{Q}^T\mathbf{Q}$ is
 
 (theorem-ONC)=
 
-````{proof:theorem} (ONC matrix)
+````{prf:theorem} (ONC matrix)
 Suppose $\mathbf{Q}$ is a real $n\times k$ ONC matrix (matrix with orthonormal columns). Then:
 
 1. $\mathbf{Q}^T\mathbf{Q} = \mathbf{I}$ ($k\times k$ identity).
@@ -79,7 +79,7 @@ Suppose $\mathbf{Q}$ is a real $n\times k$ ONC matrix (matrix with orthonormal c
 3. $\| \mathbf{Q} \|_2=1$.
 ````
 
-````{proof:proof}
+````{prf:proof}
 The first part is derived above. The second part follows a pattern that has become well established by now:
 
 ```{math}
@@ -98,7 +98,7 @@ Of particular interest is a *square* ONC matrix, for which $\mathbf{Q}^T\mathbf{
 
 (theorem-orthogmatrix)=
 
-````{proof:theorem} (Orthogonal matrix)
+````{prf:theorem} (Orthogonal matrix)
 Suppose $\mathbf{Q}$ is an $n\times n$ real orthogonal matrix. Then:
 1. $\mathbf{Q}^T$ is also an orthogonal matrix.
 1. $\kappa(\mathbf{Q})=1$ in the 2-norm.
@@ -119,7 +119,7 @@ Now we come to another important way to factor a matrix, the {term}`QR factoriza
 
 (theorem-QR)=
 
-````{proof:theorem}
+````{prf:theorem}
   Every real $m\times n$ matrix $\mathbf{A}$ ($m\ge n$) can be written as $\mathbf{A}=\mathbf{Q}\mathbf{R}$, where $\mathbf{Q}$ is an $m\times m$ orthogonal matrix and $\mathbf{R}$ is an $m\times n$ upper triangular matrix.
 ````
 

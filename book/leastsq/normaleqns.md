@@ -17,11 +17,11 @@ In the following proof we make use of the elementary algebraic fact that for two
 
 (theorem-normaleqns)=
 
-````{proof:theorem}
+````{prf:theorem}
   If $\mathbf{x}$ satisfies $\mathbf{A}^T(\mathbf{A}\mathbf{x}-\mathbf{b})=\boldsymbol{0}$, then $\mathbf{x}$ solves the linear least squares problem, i.e., $\mathbf{x}$ minimizes $\| \mathbf{b}-\mathbf{A}\mathbf{x} \|_2$.
 ````
 
-````{proof:proof}
+````{prf:proof}
 Let $\mathbf{y}\in \mathbb{R}^n$ be any vector. Then
   $\mathbf{A}(\mathbf{x}+\mathbf{y})-\mathbf{b}=\mathbf{A}\mathbf{x}-\mathbf{b}+\mathbf{A}\mathbf{y}$, and
   
@@ -79,7 +79,7 @@ The matrix $\mathbf{A}^T\mathbf{A}$ appearing in the pseudoinverse has some impo
 
 (theorem-ATA)=
 
-````{proof:theorem} (AtA)
+````{prf:theorem} (AtA)
   For any real $m\times n$ matrix $\mathbf{A}$ with $m\ge n$, the following are true:
 
 1. $\mathbf{A}^T\mathbf{A}$ is symmetric. 
@@ -87,7 +87,7 @@ The matrix $\mathbf{A}^T\mathbf{A}$ appearing in the pseudoinverse has some impo
 3. If $\mathbf{A}^T\mathbf{A}$ is nonsingular, then it is positive definite. 
 ````
 
-````{proof:proof}
+````{prf:proof}
 The first part is left as an [exercise](problem-normalsymmetry). For the second part, suppose that $\mathbf{A}^T\mathbf{A}\mathbf{z}=\boldsymbol{0}$. Note that $\mathbf{A}^T\mathbf{A}$ is singular if and only if $\mathbf{z}$ may be nonzero. Left-multiplying by $\mathbf{z}^T$, we find that
   
 ```{math}

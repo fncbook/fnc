@@ -60,11 +60,11 @@ The property we lacked in {doc}`demos/zs-LIAF` is called **zero-stability**. To 
 
 (theorem-rootcondition)=
 
-````{proof:theorem} Root condition
+````{prf:theorem} Root condition
 A linear multistep method is zero-stable (i.~e., has only bounded solutions as $h\rightarrow 0$) if and only if every root $r$ of the generating polynomial $\rho(z)$ satisfies $|r|\le 1$, and any root $r$ with $|r|=1$ is simple (that is, $\rho'(r)\neq 0$).
 ````
 
-````{proof:proof}
+````{prf:proof}
 (Partial proof) As described above, the values produced by the numerical method approach solutions of the difference equation $\rho(\mathcal{Z})u_m=0$. We consider only the case where the roots $r_1,\ldots,r_k$ of $\rho(z)$ are all distinct. Then $u_m=(r_j)^m$ is a solution of $\rho(\mathcal{Z})u_m=0$ for each $j=1,\ldots,k$. By linearity,
 
 ```{math}
@@ -90,7 +90,7 @@ It turns out that lacking zero-stability is the only thing that can go wrong for
 
 (theorem-dahlequiv)=
 
-```{proof:theorem} Dahlquist equivalence
+```{prf:theorem} Dahlquist equivalence
 A linear multistep method is convergent if and only if it is consistent and zero-stable.
 ```
 
@@ -98,7 +98,7 @@ The Dahlquist equivalence theorem is one of the most important and celebrated in
 
 You may have noticed that the Adams and BD formulas use only about half of the available data from the past $k$ steps, i.e., they have many possible coefficients set to zero. For instance, a $k$-step AB method uses only the $f_j$-values and has order $k$. The order could be made higher by also using $u_j$-values, like the LIAF method does for $k=2$. Also like the LIAF method, however, such attempts are doomed by instability.
 
-````{proof:theorem} First Dahlquist stability barrier
+````{prf:theorem} First Dahlquist stability barrier
 The order of accuracy $p$ of a stable $k$-step linear multistep method satisfies
 
 ```{math}

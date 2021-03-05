@@ -5,7 +5,7 @@ We now introduce another factorization that is as fundamental as the EVD.
 ```{index} unitary matrix
 ```
 
-````{proof:theorem}
+````{prf:theorem}
   Let $\mathbf{A}\in\mathbb{C}^{m\times n}$. Then $\mathbf{A}$ can be written as
 
 ```{math}
@@ -74,7 +74,7 @@ The SVD is intimately connected to the 2-norm, as the following theorem describe
 ```
 
 (theorem-svdprops)=
-::::{proof:theorem} SVD properties
+::::{prf:theorem} SVD properties
 Let $\mathbf{A}\in\mathbb{C}^{m\times n}$ have an SVD $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^*$ in
 which {eq}`svdorder` holds. Then:
 

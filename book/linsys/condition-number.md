@@ -57,7 +57,7 @@ The matrix condition number {eq}`mxcond` is equal to the condition number of sol
 
 Using a traditional $\Delta$ notation for the perturbation in a quantity, we can write the following.
 
-````{proof:observation}
+````{prf:observation}
 
 If $\mathbf{A}(\mathbf{x} + \Delta \mathbf{x}) = \mathbf{b} + \Delta \mathbf{b}$, then
 

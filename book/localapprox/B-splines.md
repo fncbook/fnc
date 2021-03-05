@@ -152,7 +152,7 @@
 %following theorem, which we give without proof.
 %
 %
-````{proof:theorem}
+````{prf:theorem}
 %  Given a sequence of $r$ distinct knots $s_1,\ldots,s_r$ and the
 %  definitions {eq}`bspline1` and {eq}`bspline`:
 %  (theorem-bspline)=

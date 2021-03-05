@@ -81,7 +81,7 @@ The following standard theorem gives us a condition that is easy to check and gu
 
 (theorem-existunique)=
 
-````{proof:theorem} (Existence and uniqueness)
+````{prf:theorem} (Existence and uniqueness)
  If the derivative $\frac{\partial f}{\partial u}$ exists and $\left|\frac{\partial f}{\partial u}\right|$ is bounded by a constant $L$ for all $a\le t \le b$ and all $u$, then the initial-value problem {eq}`IVP` has a unique solution for $t\in [a,b]$.
 ````
 
@@ -94,7 +94,7 @@ In a numerical context we have to be concerned about the conditioning of the IVP
 
 (theorem-depIC)=
 
-````{proof:theorem} IC dependence
+````{prf:theorem} IC dependence
 If the derivative $\frac{\partial f}{\partial u}$ exists and $\left|\frac{\partial f}{\partial u}\right|$ is bounded by a constant $L$ for all $a\le t \le b$ and all $u$, then the solution $u(t;u_0+\delta)$ of $u'=f(t,u)$ with initial condition $u(0)=u_0+\delta$ satisfies
   
 ```{math}
