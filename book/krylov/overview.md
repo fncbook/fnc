@@ -41,6 +41,9 @@ Lanczos iteration
 power iteration
   Repeated application of a matrix to a vector, followed by normalization, resulting in convergence to an eigenvector for the dominant eigenvalue.
 
+preconditioning
+  Use of an approximate inverse to improve the convergence rate of Krylov iterations for a linear system.
+
 restarting
   Technique used in GMRES to prevent the work per iteration and overall storage from growing unboundedly.
 

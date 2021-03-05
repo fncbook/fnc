@@ -118,7 +118,7 @@ accuracy. This estimate fails for very large $\kappa$, however.
 
 ::::{sidebar} Demo
 :class: demo
-  <!-- \inputexample{krylov}{minrescg} -->
+{doc}`demos/minrescg-conv`
 ::::
 
 We can explain some of the behavior seen in [our demo](`demos/minrescg-conv`). The first matrix has a condition number of $10^2$, whereas the second has $\kappa=10^4$. The linear convergence bounds of the two cases after 100 iterations have values $(9/11)^{100}\approx 2\times 10^{-9}$ and $(99/101)^{100}\approx 0.14$, respectively, which agrees fairly well with the observed reductions in the residual norms. The major practical difference between MINRES and CG lies in the interpretation of minimization of the residual versus minimization of the error in the $\mathbf{A}$-norm.

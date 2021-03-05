@@ -68,3 +68,14 @@ sqrt
 lfloor
 rfloor
 HPD
+preconditioner
+Hestenes
+Stiefel
+Bau
+iteratively
+rootfinding
+Deblurring
+deblurring
+operatorname
+vec
+unvec

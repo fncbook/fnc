@@ -167,7 +167,6 @@
         - file: ivp/demos/zs-LIAF
     - file: appendix/demos-07
       sections:
-        - file: matrixanaly/demos/basics-first
         - file: matrixanaly/demos/insight-graph
         - file: matrixanaly/demos/insight-image
         - file: matrixanaly/demos/evd-eigen
