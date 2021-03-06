@@ -5,6 +5,7 @@
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-int-antideriv
 {doc}`demos/int-antideriv`
 ````
 
@@ -139,6 +140,7 @@ Hence the trapezoid formula has second-order error. This fact is embedded rigoro
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-int-trap
 {doc}`demos/int-trap`
 ````
 
@@ -243,6 +245,7 @@ What remains are the nodes with $n=m$. That is, if we have computed $T_f(m)$ and
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-int-extrap
 {doc}`demos/int-extrap`
 ````
 

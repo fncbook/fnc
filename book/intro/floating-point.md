@@ -89,6 +89,7 @@ Absolute accuracy has the same units as $x$, while relative accuracy is dimensio
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-float-accuracy
 {doc}`demos/float-accuracy`
 ```
 
@@ -113,6 +114,7 @@ We often speak of double-precision floating point numbers as having about 16 dec
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-float-julia
 {doc}`demos/float-julia`
 ```
 
@@ -137,12 +139,14 @@ Computer arithmetic is performed on floating-point numbers and returns floating-
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demo-float-arithmetic
+:label: demos-float-arithmetic
 {doc}`demos/float-arithmetic`
 ```
 
 Hence the relative error in arithmetic is practically the same as for the floating point representation itself. However, even playing by these rules can lead to disturbing results.
 
-There are two ways to look at the result in {doc}`demos/float-arithmetic`. On one hand, its two versions of the result differ by less than $1.2\times 10^{-16}$, which is very small—not just in everyday terms, but with respect to the operands, which are all close to 1 in absolute value. On the other hand, the difference is as large as the exact result itself! We formalize and generalize this observation in the next section. In the meantime, keep in mind that exactness cannot be taken for granted in floating point computation. Even ideally, we should not expect that two mathematically equivalent results will be equal, only that they be relatively close together.
+There are two ways to look at the result in {prf:ref}`demo-float-arithmetic`. On one hand, its two versions of the result differ by less than $1.2\times 10^{-16}$, which is very small — not just in everyday terms, but with respect to the operands, which are all close to 1 in absolute value. On the other hand, the difference is as large as the exact result itself! We formalize and generalize this observation in the next section. In the meantime, keep in mind that exactness cannot be taken for granted in floating point computation. Even ideally, we should not expect that two mathematically equivalent results will be equal, only that they be relatively close together.
 
 ## Exercises
 

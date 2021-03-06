@@ -5,6 +5,7 @@
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-zs-LIAF
 {doc}`demos/zs-LIAF`
 ````
 
@@ -15,12 +16,12 @@ For one-step methods such as Runge--Kutta, the [convergence theorem](theorem-one
   \mathbf{u}_{i+1} = -4u_i + 5u_{i-1} + h(4f_i + 2f_{i-1}),
 ```
 
-is third-order accurate. Yet it is not useful, as can be seen in {doc}`demos/zs-LIAF`.
+is third-order accurate. Yet it is not useful, as can be seen in {prf:ref}`demos-zs-LIAF`.
 
 ```{index} instability; of a mutistep formula
 ```
 
-The source of the instability in~{doc}`demos/zs-LIAF` is not hard to identify. First though, we're going to encounter the possibility of complex numbers shortly. Because it's easy to confuse the node index $i$ with the imaginary unit, we'll switch to using $m$ as the step index in this section.
+The source of the instability in~{prf:ref}`demos-zs-LIAF` is not hard to identify. First though, we're going to encounter the possibility of complex numbers shortly. Because it's easy to confuse the node index $i$ with the imaginary unit, we'll switch to using $m$ as the step index in this section.
 
 Let's recall that we can rewrite {eq}`LIAF` as $\rho(\mathcal{Z})u_{m-1}=h \sigma(\mathcal{Z})u_{m-1}$ using the forward shift operator $\mathcal{Z}$:
 
@@ -36,7 +37,7 @@ Let's recall that we can rewrite {eq}`LIAF` as $\rho(\mathcal{Z})u_{m-1}=h \sigm
   (\mathcal{Z}^2 + 4\mathcal{Z} - 5) u_{m-1} = 0.
 ```
 
-The graph in {doc}`demos/zs-LIAF` strongly suggests that for small $h$, $|u_m|\approx c \alpha^m$ for some $\alpha>1$ as $m$ gets large. So we are motivated to posit $u_m = c z^m$ for all $m$ and see if we can prove that it is an exact solution. The beauty of this choice is that $\mathcal{Z} u_i = z u_i$; that is, the "shift ahead" operator on the sequence $u_0,u_1,\ldots$ is identical to "multiply by $z$." This observation implies that we can solve {eq}`LIAFshiftzero` with $u_m = c z^m$ for all $m$ simply by finding a numerical value of $z$ such that
+The graph in {prf:ref}`demos-zs-LIAF` strongly suggests that for small $h$, $|u_m|\approx c \alpha^m$ for some $\alpha>1$ as $m$ gets large. So we are motivated to posit $u_m = c z^m$ for all $m$ and see if we can prove that it is an exact solution. The beauty of this choice is that $\mathcal{Z} u_i = z u_i$; that is, the "shift ahead" operator on the sequence $u_0,u_1,\ldots$ is identical to "multiply by $z$." This observation implies that we can solve {eq}`LIAFshiftzero` with $u_m = c z^m$ for all $m$ simply by finding a numerical value of $z$ such that
 
 ```{math}
   :label: LIAFcharzero
@@ -45,7 +46,7 @@ The graph in {doc}`demos/zs-LIAF` strongly suggests that for small $h$, $|u_m|\a
 
 We've arrived at a polynomial rootfinding problem! The roots for this method are $z=1$ and $z=-5$.
 
-Now we see why exponentially large numbers were observed in {doc}`demos/zs-LIAF`: the sequence $u_m=c (-5)^m$ is approximately a solution of the multistep formula for small values of $h$. This causes exponential growth that drowns out the solution we were trying to find. In the general case, whenever there is a root $r$ of $\rho(z)=0$ such that $|r|>1$, we should expect exponentially growing solutions as $h\to 0$ and $m\to\infty$.
+Now we see why exponentially large numbers were observed in {prf:ref}`demos-zs-LIAF`: the sequence $u_m=c (-5)^m$ is approximately a solution of the multistep formula for small values of $h$. This causes exponential growth that drowns out the solution we were trying to find. In the general case, whenever there is a root $r$ of $\rho(z)=0$ such that $|r|>1$, we should expect exponentially growing solutions as $h\to 0$ and $m\to\infty$.
 
 ## The root condition
 
@@ -56,7 +57,7 @@ Zero-stability requires that as $h\to 0$, every numerical solution produced by t
 ```{index} zero-stability
 ```
 
-The property we lacked in {doc}`demos/zs-LIAF` is called **zero-stability**. To state it precisely, zero-stability requires that as $h\to 0$, every numerical solution produced by the multistep formula remains bounded throughout $a\le t_m \le b$. Without this property, any kind of error, whether from truncation or roundoff, will get exponentially amplified and overwhelm convergence to the exact solution. The following theorem concisely summarizes when we can expect zero-stability.
+The property we lacked in {prf:ref}`demos-zs-LIAF` is called **zero-stability**. To state it precisely, zero-stability requires that as $h\to 0$, every numerical solution produced by the multistep formula remains bounded throughout $a\le t_m \le b$. Without this property, any kind of error, whether from truncation or roundoff, will get exponentially amplified and overwhelm convergence to the exact solution. The following theorem concisely summarizes when we can expect zero-stability.
 
 (theorem-rootcondition)=
 

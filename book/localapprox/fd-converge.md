@@ -34,6 +34,7 @@ The finite difference formula {eq}`forwardFD11` implies
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-fdconverge-1
 {doc}`demos/fdconverge-1`
 ````
 
@@ -64,6 +65,7 @@ Because the lowest-order term is proportional to $h^2$, we say that the method h
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-fdconverge-2
 {doc}`demos/fdconverge-2`
 ````
 
@@ -133,6 +135,7 @@ O(h^m) = O\left( \epsilon_\text{mach}^{ m/(m+1) } \right).
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-fdconverge-round
 {doc}`demos/fdconverge-round`
 ````
 
@@ -142,7 +145,7 @@ Hence for a first order formula ($m=1$), we can expect only $O\left(\sqrt{\epsil
 Higher-order finite difference methods are both more efficient and less vulnerable to roundoff than low-order methods.
 ```
 
-The observations in {doc}`demos/fdconverge-round` match the analysis above quite well, with the optimal $h$ becoming larger and the optimal error getting smaller as the order increases. Thus, higher-order finite difference methods are both more efficient and less vulnerable to roundoff than low-order methods.
+The observations in {prf:ref}`demos-fdconverge-round` match the analysis above quite well, with the optimal $h$ becoming larger and the optimal error getting smaller as the order increases. Thus, higher-order finite difference methods are both more efficient and less vulnerable to roundoff than low-order methods.
 
 ## Exercises
 

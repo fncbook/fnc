@@ -82,6 +82,7 @@ end
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-pwlin-hat
 {doc}`demos/pwlin-hat`
 ````
 
@@ -112,6 +113,7 @@ The appeal of a cardinal basis is that it makes the expression of the interpolan
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-pwlin-usage
 {doc}`demos/pwlin-usage`
 ````
 
@@ -199,6 +201,7 @@ Piecewise linear interpolation is second-order accurate.
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-pwlin-converge
 {doc}`demos/pwlin-converge`
 ````
 

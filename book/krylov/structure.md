@@ -16,6 +16,7 @@ Most graphs with real applications have many fewer edges than the maximum possib
 
 ::::{prf:example} Julia demo
 :class: demo
+:label: demos-structure-sparse
 {doc}`demos/structure-sparse`
 ::::
 
@@ -26,6 +27,7 @@ In the case of an adjacency matrix $\mathbf{A}$, for example, the $(i,j)$ entry 
 
 ::::{prf:example} Julia demo
 :class: demo
+:label: demos-structure-fill
 {doc}`demos/structure-fill`
 ::::
 
@@ -43,6 +45,7 @@ Banded matrices appear naturally in many applications where each node interacts 
 
 ::::{prf:example} Julia demo
 :class: demo
+:label: demos-structure-banded
 {doc}`demos/structure-banded`
 ::::
 
@@ -57,6 +60,7 @@ For very large matrices, it's unlikely that you will want to find all of its eig
 
 ::::{prf:example} Julia demo
 :class: demo
+:label: demos-structure-linalg
 {doc}`demos/structure-linalg`
 ::::
 

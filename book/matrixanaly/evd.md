@@ -103,6 +103,7 @@ The `eigen` command can be used to compute the eigenvalue decomposition of a giv
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-evd-eigen
 {doc}`demos/evd-eigen`
 ```
 
@@ -165,17 +166,19 @@ At the other extreme, if a unitary eigenvector matrix $\mathbf{V}$ can be found,
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-evd-bauerfike
 {doc}`demos/evd-bauerfike`
 ```
 
 ## Computing the EVD
 
-In elementary linear algebra you use the characteristic polynomial to compute the eigenvalues of small matrices. However, computing polynomial roots in finite time is impossible for degree 5 and over. In principle one could use Newton-like methods to find all of the roots, but doing so is relatively slow and difficult. Furthermore we know that polynomial roots tend to become poorly conditioned when roots get close to one another (see {ref}`example-quadrootcond`).
+In elementary linear algebra you use the characteristic polynomial to compute the eigenvalues of small matrices. However, computing polynomial roots in finite time is impossible for degree 5 and over. In principle one could use Newton-like methods to find all of the roots, but doing so is relatively slow and difficult. Furthermore we know that polynomial roots tend to become poorly conditioned when roots get close to one another (see {prf:ref}`example-quad-root-cond`).
 
 Practical algorithms for computing the EVD go beyond the scope of this book. The essence of the matter is the connection to matrix powers, that is, $\mathbf{A}^k = \mathbf{V} \mathbf{D}^k \mathbf{V}^{-1}$. (We will see much more about the importance of matrix powers in a [later chapter](../krylov).) If the eigenvalues have different complex magnitudes, then as $k\to\infty$ the entries on the diagonal of $\mathbf{D}^k$ become increasingly well separated and easy to pick out. It turns out that there is an astonishingly easy and elegant way to accomplish this separation without explicitly computing the matrix powers.
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-evd-francisqr
 {doc}`demos/evd-francisqr`
 ```
 

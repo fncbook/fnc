@@ -141,6 +141,7 @@
 %
 ````{prf:example}
 %  ````{admonition}
+:label: demos-bsplinegraph
 {doc}`demos/bsplinegraph`
 ````
 %````
@@ -308,6 +309,7 @@ end
 %
 ````{prf:example}
 %  ````{admonition}
+:label: demos-bsplineinterp
 {doc}`demos/bsplineinterp`
 ````
 %````
@@ -541,7 +543,7 @@ end
 %\begin{figure}
 %  \centering
 %  \includegraphics[width=\textwidth]{letterexambezier}
-%  \caption{B\'ezier cubic curve interpolation (see {doc}`demos/bezier`).}
+%  \caption{B\'ezier cubic curve interpolation (see {prf:ref}`demos-bezier`).}
 %  \label{fig:exabezier}
 %\end{figure}
 %

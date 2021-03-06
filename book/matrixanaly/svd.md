@@ -102,6 +102,7 @@ The conclusion {eq}`svdnorm` is can be proved by straightforward vector calculus
 
 :::{prf:example} Julia demo
 :class: demo
+:label: demos-svd-props
 {doc}`demos/svd-props`
 :::
 

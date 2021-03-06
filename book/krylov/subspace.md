@@ -66,6 +66,7 @@ The natural seed vector for $\ck_m$ in this case is the vector $\mathbf{b}$. In 
 (demo-subspace-unstable)=
 ::::{prf:example} Julia demo
 :class: demo
+:label: demos-subspace-unstable
 {doc}`demos/subspace-unstable`
 ::::
 
@@ -126,6 +127,7 @@ We have just described the {term}`Arnoldi iteration`. The Arnoldi iteration find
 
 ::::{prf:example} Julia demo
 :class: demo
+:label: demos-subspace-arnoldi
 {doc}`demos/subspace-arnoldi`
 ::::
 

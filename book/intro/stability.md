@@ -4,7 +4,7 @@ If we solve a problem using a computer algorithm and see a large error in the re
 
 ## Case study
 
-In {ref}`sec-conditioning-multidim` we showed that finding the roots of a quadratic polynomial $ax^2 + b x+c$ is poorly conditioned if and only if the roots are close to each other relative to their size. Thus, for the polynomial
+In {prf:ref}`example-quad-root-cond` we showed that finding the roots of a quadratic polynomial $ax^2 + b x+c$ is poorly conditioned if and only if the roots are close to each other relative to their size. Thus, for the polynomial
 
 ```{math}
 :label: quadunstable
@@ -21,21 +21,25 @@ x_2 = \frac{-b - \sqrt{b^2-4ac}}{2a}.
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-stability-quadbad
+:label: demos-stability-quadbad
 {doc}`demos/stability-quadbad`
 ```
 
 ```{index} subtractive cancellation
 ```
 
-{doc}`demos/stability-quadbad` suggests that the venerable quadratic formula is an *unstable* means of computing roots in finite precision. The roots themselves were not sensitive to the data or arithmetic—it's the specific computational path we chose that caused the huge growth in errors. 
+{prf:ref}`demos-stability-quadbad` suggests that the venerable quadratic formula is an *unstable* means of computing roots in finite precision. The roots themselves were not sensitive to the data or arithmetic—it's the specific computational path we chose that caused the huge growth in errors. 
 <!-- ```{prf:example} Julia demo
 :class: demo
+:label: demos-stability-quadgood
 {doc}`demos/stability-quadgood`
 ``` 
 -->
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-stability-quadgood
 {doc}`demos/stability-quadgood`
 ```
 
@@ -71,6 +75,7 @@ f(\tilde{x}) = \tilde{y} = \tilde{f}(x),
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-stability-roots
 {doc}`demos/stability-roots`
 ```
 

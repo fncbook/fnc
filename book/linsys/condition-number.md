@@ -90,6 +90,7 @@ If $\kappa(\mathbf{A}) > \epsilon_\text{mach}^{-1}$, then for computational purp
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-condition-bound
 {doc}`demos/condition-bound`
 ```
 
@@ -138,7 +139,7 @@ Equation {eq}`residualcond` says that the relative error can be much larger than
 
     Make a table of the values of $\kappa(\mathbf{H}_n)$ in the 2-norm for $n=2,3,\ldots,16$. Why does the growth of $\kappa$ appear to slow down at $n=13$?
 
-2. ⌨ The purpose of this problem is to verify, like in {doc}`demos/condition-bound`, the error bound
+2. ⌨ The purpose of this problem is to verify, like in {prf:ref}`demos-condition-bound`, the error bound
 
     ```{math}
     \frac{\| \mathbf{x}-\tilde{\mathbf{x} \|}}{\| \mathbf{x} \|} \le \kappa(\mathbf{A})

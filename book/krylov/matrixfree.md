@@ -52,6 +52,7 @@ for a positive integer $k$.
 
 ::::{prf:example} Julia demo
 :class: demo
+:label: demos-matrixfree-blur
 {doc}`demos/matrixfree-blur`
 ::::
 
@@ -79,6 +80,7 @@ The following example shows how to put these ideas into practice with MINRES.
 
 ::::{prf:example} Julia demo
 :class: demo
+:label: demos-matrixfree-deblur
 {doc}`demos/matrixfree-deblur`
 ::::
 

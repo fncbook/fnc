@@ -178,6 +178,7 @@ Although function values at equally spaced nodes are a common and convenient sit
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-fd-weights
 {doc}`demos/fd-weights`
 ````
 

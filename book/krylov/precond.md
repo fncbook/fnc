@@ -32,6 +32,7 @@ Methods for deriving a good preconditioner are numerous and often problem-depend
 
 ::::{prf:example} Julia demo
 :class: demo
+:label: demos-precond-gmres
 {doc}`demos/precond-gmres`
 ::::
 

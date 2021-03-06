@@ -56,12 +56,14 @@ Traditionally, in numerical linear algebra we count **floating point operations*
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-flops-mvmult
 {doc}`demos/flops-mvmult`
 
+:label: demos-flops-loglog
 {doc}`demos/flops-loglog`
 ```
 
-It's clear from the example in {doc}`demos/flops-mvmult` that the runtime increases at a function of $n$—but at what rate? Suppose that the time obeys a function that is not just $O(n^p)$, but actually equal to $Cn^p$ for some constants $C$ and $p$. For large enough $n$, this should be a good approximation. Then
+It's clear from the example in {prf:ref}`demos-flops-mvmult` that the runtime increases at a function of $n$—but at what rate? Suppose that the time obeys a function that is not just $O(n^p)$, but actually equal to $Cn^p$ for some constants $C$ and $p$. For large enough $n$, this should be a good approximation. Then
 
 ```{math}
   :label: loglogfit
@@ -132,6 +134,7 @@ LU factorization of an $n\times n$ matrix takes $\sim\frac{2}{3}n^3$ flops as $n
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-flops-lufact
 {doc}`demos/flops-lufact`
 ```
 

@@ -137,7 +137,7 @@ The local truncation error measures the effect of a single step of the numerical
 
 To reach the time $t=b$ from $t=a$ with step size $h$, we need to take $n=(b-a)/h$ steps. If we want to reach, say, $t=(a+b)/2$, then we would have to take $n/2$ steps, and so on. The point is that to reach any fixed time in the interval, we need to take $O(n)=O(h^{-1})$ steps. That is why we express the error made in one step as $h\tau_{i+1}(h)$, with that extra factor of $h$ taken out. By this reasoning, for instance, the LTE of Euler computed in {eq}`eulerLTE` implies a global error that is $O(h)$.
 
-However, global error is not just a simple sum of local errors. As each step causes a perturbation of the solution, we jump from one solution curve to a new one. The new curve will have its own trajectory, i.e., the error will propagate through the ODE (see {doc}`demos/basics-cond`). This phenomenon is precisely the subject of {ref}`theorem-depIC`: jumping to a different solution curve incurs a condition number at time $t>t_i$ of $e^{L(t-t_i)}$, which is constant at fixed time as $h\to 0$.
+However, global error is not just a simple sum of local errors. As each step causes a perturbation of the solution, we jump from one solution curve to a new one. The new curve will have its own trajectory, i.e., the error will propagate through the ODE (see {prf:ref}`demos-basics-cond`). This phenomenon is precisely the subject of {ref}`theorem-depIC`: jumping to a different solution curve incurs a condition number at time $t>t_i$ of $e^{L(t-t_i)}$, which is constant at fixed time as $h\to 0$.
 
 The following theorem puts our observations above on a rigorous footing.
 
@@ -233,10 +233,11 @@ The local truncation error of a one-step method has the same order of accuracy a
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-euler-converge
 {doc}`demos/euler-converge`
 ```
 
-The theorem justifies a general definition of {term}`order of accuracy` as the leading exponent of $h$ in $\tau_{i+i}(h)$: the local truncation error of a one-step method has the same order of accuracy as the global error. This agrees with the first-order convergence we observed experimentally for Euler in {doc}`demos/euler-converge`. Note, however, that the $O(h^p)$ convergence hides a leading constant that grows exponentially in time. When the time interval is bounded as $h\to 0$, this does not interfere with the conclusion, but the behavior as $t\to\infty$ contains no such guarantee.
+The theorem justifies a general definition of {term}`order of accuracy` as the leading exponent of $h$ in $\tau_{i+i}(h)$: the local truncation error of a one-step method has the same order of accuracy as the global error. This agrees with the first-order convergence we observed experimentally for Euler in {prf:ref}`demos-euler-converge`. Note, however, that the $O(h^p)$ convergence hides a leading constant that grows exponentially in time. When the time interval is bounded as $h\to 0$, this does not interfere with the conclusion, but the behavior as $t\to\infty$ contains no such guarantee.
 
 ## Exercises
 

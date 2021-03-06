@@ -50,6 +50,7 @@ The converse of the [Spectral Decomposition Theorem](thm-spec-decomp) is also tr
 
 ::::{prf:example} Julia demo
 :class: demo
+:label: demos-symm-eig-normal
 {doc}`demos/symm-eig-normal`
 ::::
 
@@ -57,6 +58,7 @@ Now consider again [the Bauer--Fike Theorem](thm-bauer-fike), which says that th
 
 :::{prf:example} Julia demo
 :class: demo
+:label: demos-symm-eig-perturb
 {doc}`demos/symm-eig-perturb`
 :::
 
@@ -85,6 +87,7 @@ as $\epsilon\to 0$. The conclusion is that a good estimate of an eigenvector bec
 
 :::{prf:example} Julia demo
 :class: demo
+:label: demos-symm-eig-rayleigh
 {doc}`demos/symm-eig-rayleigh`
 :::
 

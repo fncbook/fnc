@@ -15,7 +15,7 @@ We can compute (in exact arithmetic) the relative error in this result:
   = \frac{|\epsilon x|}{|x+1|} .
 ```
 
-This error could be quite large if the denominator is small. In fact, we can make the relative error as large as we please by taking $x$ very close to $-1$. This is essentially what happened in {doc}`demos/float-arithmetic`.
+This error could be quite large if the denominator is small. In fact, we can make the relative error as large as we please by taking $x$ very close to $-1$. This is essentially what happened in {prf:ref}`demos-float-arithmetic`.
 
 You may have encountered this situation before when using significant digits for scientific calculations. Suppose we round all results to five decimal digits, and we add $-1.0012$ to $1.0000$. The result is $-0.0012$, or $-1.2\times 10^{-3}$ in scientific notation. Notice that even though both operands are specified to five digits, it makes no sense to write more than two digits in the answer, because there is no information in the problem beyond their decimal places. This phenomenon is known as {term}`subtractive cancellation`, or loss of significance. We may say that three digits were "lost" in the mapping from $-1.0012$ to $-0.0012$. There's no way the loss could be avoided, *regardless of the algorithm*, once we decided to round off everything to a fixed number of digits.
 
@@ -105,16 +105,29 @@ Condition numbers of the major elementary functions are given in the following t
 ```{index} condition number; of elementary functions
 ```
 
-(table-condition-functions)=
-Function  |      Condition number    |       
-|:--------|:-------------------------|
-| $f(x) = x + c$   | $\kappa_f(x) = \dfrac{\lvert x \rvert}{\lvert x+c\rvert}$ |
-| $f(x) = cx$      | $\kappa_f(x) = 1$         |       
-| $f(x) = x^p$     | $\kappa_f(x) = \lvert p \rvert$      |      
-| $f(x) = e^x$     | $\kappa_f(x) = \lvert x \rvert$        |             
-| $f(x) = \sin(x)$ | $\kappa_f(x) = \lvert x\cot(x) \rvert$ |      
-| $f(x) = \cos(x)$ | $\kappa_f(x) = \lvert x\tan(x) \rvert$ |
-| $f(x) = \log(x)$ | $\kappa_f(x) = \dfrac{1}{\lvert \log(x) \rvert}$ |
+```{list-table} Condition numbers of elementary functions
+:name: table-condition-functions
+:header-rows: 1
+
+* - Function 
+  - Condition number
+* - $f(x) = x + c$ 
+  - $\kappa_f(x) = \dfrac{\lvert x \rvert}{\lvert x+c\rvert}$ 
+* - $f(x) = cx$
+  - $\kappa_f(x) = 1$ 
+* - $f(x) = x^p$ 
+  - $\kappa_f(x) = \lvert p \rvert$
+* - $f(x) = e^x$
+  - $\kappa_f(x) = \lvert x \rvert$
+* - $f(x) = \sin(x)$ 
+  - $\kappa_f(x) = \lvert x\cot(x) \rvert$ 
+* - $f(x) = \cos(x)$
+  - $\kappa_f(x) = \lvert x\tan(x) \rvert$
+* - $f(x) = \log(x)$
+  - $\kappa_f(x) = \dfrac{1}{\lvert \log(x) \rvert}$
+```
+
+
 
 As you are asked to show in [an exercise](problem-condchain), when two functions $f$ and $g$ are combined in a chain $h(x)=f\bigl(g(x)\bigr)$, the composite condition number is
 
@@ -150,9 +163,8 @@ You may have noticed that for some functions, such as the square root, the condi
 
 Most problems have multiple input and output values. These introduce some complications into the formal definition of the condition number. Rather than worry over those details here, we can still look at variations in only one output and one input value at a time.
 
-(example-quadrootcond)=
-
 ````{prf:example}
+:label: example-quad-root-cond
 Consider the problem of finding the roots of a quadratic polynomial; that is, the values of $t$ for which $at^2+bt+c=0$. Here the data are the coefficients $a$, $b$, and $c$ that define the polynomial, and the solution to the problem are the two (maybe complex-valued) roots $t_1$ and $t_2$. Formally, we might write $f([a,b,c])=[t_1,t_2]$ using vector notation.
 
 In order to simplify matters, we will pick one root called $r$, and first consider what happens as we vary just the leading coefficient $a$. This suggests a scalar function $f(a)=r$. We could use the quadratic formula to express $f$ explicitly, but it's a bit easier to start from $ar^2 + br + c = 0$ and use the technique of implicit differentiation to find $dr/da$, while $b$ and $c$ are held fixed. Taking $d/da$ of both sides and applying the chain rule, we get
@@ -187,7 +199,7 @@ Note that the condition number of a root of a quadratic polynomial, as a functio
 
 ## Exercises
 
-1. ✍ Use {eq}`conditionderiv` to derive the relative condition numbers of the following functions appearing in [the table in this section](table-condition-functions).
+1. ✍ Use {eq}`conditionderiv` to derive the relative condition numbers of the following functions appearing in {numref}`table-condition-functions`.
 
     **(a)** $f(x) = x^p,\quad$
     **(b)** $f(x) = \log(x),\quad$

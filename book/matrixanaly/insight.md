@@ -46,6 +46,7 @@ A_{ij} =
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-insight-graph
 {doc}`demos/insight-graph`
 ```
 
@@ -62,6 +63,7 @@ We will simplify the representation by considering images represented using pixe
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-insight-image
 {doc}`demos/insight-image`
 ```
 

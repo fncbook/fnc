@@ -78,6 +78,7 @@ In Julia, vectors and matrices are one-dimensional and two-dimensional arrays, r
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-matrices-julia
 {doc}`demos/matrices-julia`
 ```
 

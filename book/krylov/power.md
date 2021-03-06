@@ -7,6 +7,7 @@ Given that matrix-vector multiplication is fast for sparse matrices, let's see w
 
 ::::{prf:example} Julia demo
 :class: demo
+:label: demos-power-one
 {doc}`demos/power-one`
 ::::
 
@@ -182,6 +183,7 @@ The error in the eigenvalue estimates $\gamma_k$ of power iteration is reduced a
 
 ::::{prf:example} Julia demo
 :class: demo
+:label: demos-power-iter
 {doc}`demos/power-iter`
 ::::
 

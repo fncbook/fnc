@@ -5,6 +5,7 @@
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-fitting-tempinterp
 {doc}`demos/fitting-tempinterp`
 ````
 
@@ -51,6 +52,7 @@ c_n
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-fitting-tempfit
 {doc}`demos/fitting-tempfit`
 ````
 
@@ -141,6 +143,7 @@ While the fit of the $y_i$ to $f(t)$ is nonlinearly dependent on fitting paramet
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-fitting-pirate
 {doc}`demos/fitting-pirate`
 ````
 

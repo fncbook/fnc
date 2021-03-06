@@ -14,6 +14,7 @@ Rather than writing out the process in full generality, we use an example to ref
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-lu-gauss
 {doc}`demos/lu-gauss`
 ```
 
@@ -21,7 +22,7 @@ Rather than writing out the process in full generality, we use an example to ref
 
 In [an earlier section](matrices) we observed that row and column operations can be expressed as linear algebra using columns from the identity matrix. This connection allows us to express Gaussian elimination using matrices. We will ignore the augmentation step, set aside $\mathbf{b}$ for now, and consider only the square system matrix $\mathbf{A}$.
 
-As the first step in the demo {doc}`demos/lu-gauss`,  we get the multiplier $A_{21}/A_{11}=-2$. The first row of $\mathbf{A}$ is extracted by $\mathbf{e}_1^T\mathbf{A}$. After $-2$ times this row is subtracted from row 2, with the other rows being left alone, we arrive at the matrix
+As the first step in {prf:ref}`demos-lu-gauss`, we get the multiplier $A_{21}/A_{11}=-2$. The first row of $\mathbf{A}$ is extracted by $\mathbf{e}_1^T\mathbf{A}$. After $-2$ times this row is subtracted from row 2, with the other rows being left alone, we arrive at the matrix
 
 ```{math}
   \begin{bmatrix}
@@ -56,15 +57,16 @@ Following many introductory texts on linear algebra, we refer to the matrix in p
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-lu-factors
 {doc}`demos/lu-factors`
 ```
 
 ```{index} unit triangular matrix
 ```
 
-The elementary matrix factors found in {doc}`demos/lu-factors`, each in the form {eq}`rowoperation`, have some important properties. First, in addition to being triangular, each has all ones on the diagonal, so we call each a {term}`unit triangular matrix`. {ref}`theorem-triangleinvert` implies that all unit triangular matrices are invertible, which is about to become important.
+The elementary matrix factors found in {prf:ref}`demos-lu-factors`, each in the form {eq}`rowoperation`, have some important properties. First, in addition to being triangular, each has all ones on the diagonal, so we call each a {term}`unit triangular matrix`. {prf:ref}`theorem-triangle-invert` implies that all unit triangular matrices are invertible, which is about to become important.
 
-Let's review. The Gaussian elimination procedure in {doc}`demos/lu-gauss` did six row operations in order to introduce six zeros into the lower triangle of $\mathbf{A}$. Each row operation can be expressed using multiplication by an elementary matrix $\mathbf{L}_{ij}$. At the end we get an upper triangular matrix, $\mathbf{U}$:
+Let's review. The Gaussian elimination procedure in {prf:ref}`demos-lu-gauss` did six row operations in order to introduce six zeros into the lower triangle of $\mathbf{A}$. Each row operation can be expressed using multiplication by an elementary matrix $\mathbf{L}_{ij}$. At the end we get an upper triangular matrix, $\mathbf{U}$:
 
 ```{math}
 :label: lufact0
@@ -74,8 +76,8 @@ Let's review. The Gaussian elimination procedure in {doc}`demos/lu-gauss` did si
 Now we multiply both sides on the left by $\mathbf{L}_{43}^{-1}$. On the right-hand side, it can be grouped together with $\mathbf{L}_{43}$ to form an identity matrix. Then we multiply both sides on the left by $\mathbf{L}_{42}^{-1}$, which knocks out the next term on the right side, etc. Eventually we get
 
 ```{math}
-  :label: lufact1
-    \mathbf{L}_{21}^{-1}\mathbf{L}_{31}^{-1}\mathbf{L}_{41}^{-1}\mathbf{L}_{32}^{-1}\mathbf{L}_{42}^{-1}\mathbf{L}_{43}^{-1} \mathbf{U} = \mathbf{A}.
+:label: lufact1
+\mathbf{L}_{21}^{-1}\mathbf{L}_{31}^{-1}\mathbf{L}_{41}^{-1}\mathbf{L}_{32}^{-1}\mathbf{L}_{42}^{-1}\mathbf{L}_{43}^{-1} \mathbf{U} = \mathbf{A}.
 ```
 
 We come next to an interesting property of these elementary matrices. If $i\ne j$, then for any scalar $\alpha$ we can calculate that
@@ -115,9 +117,9 @@ That reasoning carries across each of the new terms in the product on the left s
 \mathbf{L} \mathbf{U} = \mathbf{A}.
 ```
 
-Furthermore, the lower triangular entries of $\mathbf{L}$ are the row multipliers we found as in {doc}`demos/lu-gauss`, and the entries of $\mathbf{U}$ are those found at the end of the elimination process. Equation {eq}`lufact` is called an {term}`LU factorization` of the matrix $\mathbf{A}$.
+Furthermore, the lower triangular entries of $\mathbf{L}$ are the row multipliers we found as in {prf:ref}`demos-lu-gauss`, and the entries of $\mathbf{U}$ are those found at the end of the elimination process. Equation {eq}`lufact` is called an {term}`LU factorization` of the matrix $\mathbf{A}$.
 
-## An algorithm—for now
+## An algorithm — for now
 
 LU factorization reduces any linear system to two triangular ones. From this, solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ follows immediately:
 
@@ -125,12 +127,11 @@ LU factorization reduces any linear system to two triangular ones. From this, so
 1. Solve $\mathbf{L}\mathbf{z}=\mathbf{b}$ for $\mathbf{z}$ using forward substitution.
 1. Solve $\mathbf{U}\mathbf{x}=\mathbf{z}$ for $\mathbf{x}$ using backward substitution.
 
-One of the important aspects of this algorithm is that the factorization step depends only on the matrix $\mathbf{A}$; the right-hand side $\mathbf{b}$ is not involved. Thus if one has to solve multiple systems with a single matrix $\mathbf{A}$, the factorization needs to be performed only once for all systems. As we show in \secref{opcount}, the factorization is by far the most computationally expensive step, so this note is of more than academic interest.
+One of the important aspects of this algorithm is that the factorization step depends only on the matrix $\mathbf{A}$; the right-hand side $\mathbf{b}$ is not involved. Thus if one has to solve multiple systems with a single matrix $\mathbf{A}$, the factorization needs to be performed only once for all systems. As we show in [the next section](efficiency.md), the factorization is by far the most computationally expensive step, so this note is of more than academic interest.
 
-Based on the examples and discussion above, a code for LU factorization is given in {ref}`function-lufact`.
+Based on the examples and discussion above, a code for LU factorization is given in {numref}`Function {number}<function-lufact>`.
 
 (function-lufact)=
-
 ````{proof:function} lufact
 **LU factorization (not stable)**
 
@@ -163,7 +164,7 @@ end
 
 ````{tip}
 ```{toggle}
-Line 10 of {ref}`function-lufact` points out two subtle Julia issues. First, arrays, including vectors and matrices, are really just references to blocks of memory. This data is much more efficient to pass around than the complete contents of the array. However, it means that a statement such as `U=A` just clones the array reference into the variable `U`. Any changes made to entries of `U` would then also be made to entries of `A`, because they refer to the same contents. In the context of `lufact` we don't want to change the original matrix, so we use {term}`copy` here to create an independent clone of the array contents and a new reference to them.
+Line 10 of {numref}`Function {number}<function-lufact>` points out two subtle Julia issues. First, arrays, including vectors and matrices, are really just references to blocks of memory. This data is much more efficient to pass around than the complete contents of the array. However, it means that a statement such as `U=A` just clones the array reference into the variable `U`. Any changes made to entries of `U` would then also be made to entries of `A`, because they refer to the same contents. In the context of `lufact` we don't want to change the original matrix, so we use {term}`copy` here to create an independent clone of the array contents and a new reference to them.
 
 The second issue is that even when `A` has all integer entries, the LU factors may not. So if by copying `A` we create `U` as a matrix of integers, the function will fail with an {term}`InexactError` if we attempt to insert a noninteger result into `U` in line 16. To avoid this eventuality we convert `U` into a floating-point matrix with {term}`float`.
 ```
@@ -173,10 +174,11 @@ The multipliers are stored in the lower triangle of $\mathbf{L}$ as they are fou
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-lu-function
 {doc}`demos/lu-function`
 ```
 
-Observe from {ref}`function-lufact` that the factorization can fail if $A_{jj}=0$ when it is put in the denominator in line~14. This does *not* necessarily mean there is a zero in the diagonal of the original $\mathbf{A}$, because $\mathbf{A}$ is changed during the computation. Moreover, there are perfectly good nonsingular matrices for which this type of failure occurs, such as
+Observe from {numref}`Function {number}<function-lufact>` that the factorization can fail if $A_{jj}=0$ when it is put in the denominator in line~14. This does *not* necessarily mean there is a zero in the diagonal of the original $\mathbf{A}$, because $\mathbf{A}$ is changed during the computation. Moreover, there are perfectly good nonsingular matrices for which this type of failure occurs, such as
 
 ```{math}
   \begin{bmatrix}
@@ -345,7 +347,7 @@ Fortunately, this defect can be repaired for all nonsingular matrices at minor c
       
       1. 
       \item Make the changes as directed and verify that the function
-        works properly on the matrix from {doc}`demos/lufactfun`.
+        works properly on the matrix from {prf:ref}`demos-lufactfun`.
       \item Write out symbolically (i.e., using ordinary elementwise
         vector and matrix notation) what the new version of the function
         does in the case $n=5$ for the iteration with $j=3$.

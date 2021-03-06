@@ -209,6 +209,7 @@ This formula is often called "the" fourth-order RK method—even though there ar
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-rk-converge
 {doc}`demos/rk-converge`
 ```
 

@@ -50,6 +50,7 @@ The algorithm resulting from this discussion is known as {term}`GMRES`, for Gene
 
 ::::{prf:example} Julia demo
 :class: demo
+:label: demos-gmres-intro
 {doc}`demos/gmres-intro`
 ::::
 
@@ -125,6 +126,7 @@ Restarting guarantees a fixed upper bound on the per-iteration cost of GMRES. Ho
 
 ::::{prf:example} Julia demo
 :class: demo
+:label: demos-gmres-restart
 {doc}`demos/gmres-restart`
 ::::
 

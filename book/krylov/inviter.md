@@ -118,6 +118,7 @@ We observe that the convergence is best when the shift $s$ is close to the targe
 
 ::::{prf:example} Julia demo
 :class: demo
+:label: demos-inviter-conv
 {doc}`demos/inviter-conv`
 ::::
 
@@ -132,6 +133,7 @@ Let's estimate the resulting convergence. If the eigenvalues are ordered by dist
 
 ::::{sidebar}
 :class: demo
+:label: demos-inviter-accel
 {doc}`demos/inviter-accel`
 ::::
 
