@@ -181,5 +181,24 @@
       - file: matrixanaly/demos/symm-eig-rayleigh
       - file: matrixanaly/demos/dimreduce-hello
       - file: matrixanaly/demos/dimreduce-voting
+  - file: appendix/demos-08
+    sections:
+      - file: krylov/demos/structure-sparse`
+      - file: krylov/demos/structure-fill`
+      - file: krylov/demos/structure-banded`
+      - file: krylov/demos/structure-linalg`
+      - file: krylov/demos/power-iter`
+      - file: krylov/demos/power-one`
+      - file: krylov/demos/inviter-conv`
+      - file: krylov/demos/inviter-accel`
+      - file: krylov/demos/subspace-unstable`
+      - file: krylov/demos/subspace-arnoldi`
+      - file: krylov/demos/gmres-intro`
+      - file: krylov/demos/gmres-restart`
+      - file: krylov/demos/minrescg-conv`
+      - file: krylov/demos/matrixfree-blur`
+      - file: krylov/demos/matrixfree-deblur`
+      - file: krylov/demos/precond-gmres`
+
 - file: refs
 - file: genindex
