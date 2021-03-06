@@ -68,10 +68,11 @@ special type known as a {term}`Vandermonde matrix`. Polynomial interpolation can
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-interp-vander
 {doc}`demos/interp-vander`
 ```
 
-The construction of the Vandermonde matrix in the example {doc}`demos/interp-vander` was done in the line
+The construction of the Vandermonde matrix in {prf:ref}`demos-interp-vander` was done in the line
 
 ```julia
 V = [ t[i]^j for i in 1:4, j in 0:3 ]
@@ -106,7 +107,7 @@ This syntax uses a Julia {term}`comprehension`. For the most part comprehensions
 
 2. ✍ Say you want to find a cubic polynomial $p$ such that $p(0)=-2$, $p'(0)=1$, $p(1)=2$, and $p'(1)=-1$. (This is known as a *Hermite interpolant.*) Write out a linear system of equations for the coefficients of $p$. You do not need to solve the resulting system.
 
-3. ⌨ Here are population figures for three countries over the same 30-year period as in {doc}`demos/interp-vander`.
+3. ⌨ Here are population figures for three countries over the same 30-year period as in {prf:ref}`demos-interp-vander`.
 
     | Year | United States | China    | Germany |
     |:------:|:----------:|:---------:|:---------:|
@@ -121,9 +122,9 @@ This syntax uses a Julia {term}`comprehension`. For the most part comprehensions
   
     **(c)** Use cubic polynomial interpolation to make a plot of the German population from 1985 to 2000. Your plot should show a smooth curve and be well annotated.
   
-4. ⌨ The shifting of years in {doc}`demos/interp-vander`, so that $t=0$ means 1980, was more significant than it might seem.
+4. ⌨ The shifting of years in {prf:ref}`demos-interp-vander`, so that $t=0$ means 1980, was more significant than it might seem.
 
-    **(a)** Using {doc}`demos/interp-vander` as a model, find the ratio $a_4/a_1$ using the original code.
+    **(a)** Using {prf:ref}`demos-interp-vander` as a model, find the ratio $a_4/a_1$ using the original code.
 
     **(b)** Repeat the computation without shifting by 1980; that is, the entries of the time vector are the actual years. When you solve for the coefficients of the cubic polynomial, you will probably get a cryptic warning. Find $a_4/a_1$ again.
 

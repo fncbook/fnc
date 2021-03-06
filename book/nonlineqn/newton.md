@@ -5,10 +5,11 @@
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-newton-line
 {doc}`demos/newton-line`
 ````
 
-Newton's method is the cornerstone of rootfinding. We introduce the key idea with an example in {doc}`demos/newton-line`.
+Newton's method is the cornerstone of rootfinding. We introduce the key idea with an example in {prf:ref}`demos-newton-line`.
 
 Using general notation, if we have a root approximation $x_k$, we can construct a **linear model** of $f(x)$ using the classic formula for the tangent line of a differentiable function,
 
@@ -28,7 +29,7 @@ Starting with an initial estimate $x_1$, this formula defines a sequence of esti
 
 ## Quadratic convergence
 
-The graphs of {doc}`demos/newton-line` suggest why the Newton iteration may converge to a root: Any differentiable function looks more and more like its tangent line as we zoom in to the point of tangency. Yet it is far from clear that it *must* converge, or at what rate it will do so. The matter of the convergence rate is fairly straightforward to resolve. Define the error sequence
+The graphs of {prf:ref}`demos-newton-line` suggest why the Newton iteration may converge to a root: Any differentiable function looks more and more like its tangent line as we zoom in to the point of tangency. Yet it is far from clear that it *must* converge, or at what rate it will do so. The matter of the convergence rate is fairly straightforward to resolve. Define the error sequence
 
 ```{math}
 :label: errorseq
@@ -91,6 +92,7 @@ Recall that linear convergence is identifiable by trending toward a straight lin
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-newton-converge
 {doc}`demos/newton-converge`
 ````
 
@@ -151,10 +153,11 @@ end
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-newton-usage
 {doc}`demos/newton-usage`
 ````
 
-Our implementation of Newton's iteration is given in {ref}`function-newton`. It accepts mathematical functions $f$ and $f'$ and the starting guess $x_1$ as input arguments. Beginning programmers are tempted to embed the functions directly into the code, but there are two good reasons not to do so. First, you would need a new copy of the whole code for each new instance of the problem, even though very little code may need to change. Second, you may want to try more than one rootfinding implementation for a particular problem, and keeping the definition of the problem separate from the algorithm for its solution makes this task much easier. As a practical issue in MATLAB, you can define short functions inline as in {doc}`demos/newton-converge`. For longer functions, you can write separate function files and pass them as arguments to {ref}`function-newton` by affixing an at-sign \verb+@+ to the front of the name of the function file.
+Our implementation of Newton's iteration is given in {ref}`function-newton`. It accepts mathematical functions $f$ and $f'$ and the starting guess $x_1$ as input arguments. Beginning programmers are tempted to embed the functions directly into the code, but there are two good reasons not to do so. First, you would need a new copy of the whole code for each new instance of the problem, even though very little code may need to change. Second, you may want to try more than one rootfinding implementation for a particular problem, and keeping the definition of the problem separate from the algorithm for its solution makes this task much easier. As a practical issue in MATLAB, you can define short functions inline as in {prf:ref}`demos-newton-converge`. For longer functions, you can write separate function files and pass them as arguments to {ref}`function-newton` by affixing an at-sign \verb+@+ to the front of the name of the function file.
 
 ```{index} backward error
 ```

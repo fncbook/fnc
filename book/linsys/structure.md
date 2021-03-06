@@ -21,6 +21,7 @@ We next consider three important types of matrices that cause the LU factorizati
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-structure-banded
 {doc}`demos/structure-banded`
 ```
 
@@ -40,6 +41,7 @@ If no row pivoting is used, the $\mathbf{L}$ and $\mathbf{U}$ factors preserve t
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-structure-timing
 {doc}`demos/structure-timing`
 ```
 
@@ -54,10 +56,11 @@ If $\mathbf{A}^T=\mathbf{A}$, then $\mathbf{A}$ is symmetric. Symmetric matrices
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-structure-symm
 {doc}`demos/structure-symm`
 ```
 
-Now, if we create an LU factorization $\mathbf{A}=\mathbf{L}\mathbf{U}$ of a symmetric $\mathbf{A}$, at first glance it seems that because $\mathbf{A}^T=\mathbf{U}^T \mathbf{L}^T$, it might be that $\mathbf{U}$ and $\mathbf{L}$ are transposes of one another. But that's not possible in general, because we required only $\mathbf{L}$ to have ones on the diagonal, and that broke the symmetry. However, it's straightforward to restore the symmetry, as is demonstrated in {doc}`demos/structure-symm`.
+Now, if we create an LU factorization $\mathbf{A}=\mathbf{L}\mathbf{U}$ of a symmetric $\mathbf{A}$, at first glance it seems that because $\mathbf{A}^T=\mathbf{U}^T \mathbf{L}^T$, it might be that $\mathbf{U}$ and $\mathbf{L}$ are transposes of one another. But that's not possible in general, because we required only $\mathbf{L}$ to have ones on the diagonal, and that broke the symmetry. However, it's straightforward to restore the symmetry, as is demonstrated in {prf:ref}`demos-structure-symm`.
 
 If no pivoting is done, then the symmetric Gaussian elimination process yields $\mathbf{A}=\mathbf{L}\mathbf{D}\mathbf{L}^T$, where $\mathbf{L}$ is unit lower triangular and $\mathbf{D}$ is diagonal. In practice we don't actually have to carry out any arithmetic in the upper triangle as we work, since the operations are the mirror image of those in the lower triangle. As a result, it can be shown that LDL$^T$ factorization takes about half as much work as the standard LU, or $\sim \frac{1}{3}n^3$ flops.
 
@@ -130,6 +133,7 @@ Recall that the unpivoted LDL$^T$ (like unpivoted LU) factorization is not stabl
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-structure-cholesky
 {doc}`demos/structure-cholesky`
 ```
 

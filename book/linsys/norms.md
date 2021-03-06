@@ -33,6 +33,7 @@ The last of these properties is known as the **triangle inequality**. Just as $\
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-norms-vector
 {doc}`demos/norms-vector`
 ```
 
@@ -170,12 +171,13 @@ The infinity norm of a matrix is the maximum row sum, and the 1-norm is the maxi
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-norms-matrix
 {doc}`demos/norms-matrix`
 ```
 
 In words, the infinity norm is the maximum *row* sum, and the 1-norm is the maximum *column* sum. (One way to keep this straight: the horizontal orientation of the $\infty$ symbol suggests the row sum for the $\infty$-norm, while the vertical orientation of the 1 suggests the column sum of the 1-norm.) In both cases you must take absolute values of the entries first! 
 
-The geometric interpretation of the matrix 2-norm shown in {doc}`demos/norms-matrix`, as the radius of the smallest circle (or sphere or hypersphere in higher dimensions) containing the images of all unit vectors, is not a practical means of computing the norm. Nor is there a formula for it that makes it easy to compute directly from the matrix entries. The computation of the matrix 2-norm is discussed further in a later chapter.
+The geometric interpretation of the matrix 2-norm shown in {prf:ref}`demos-norms-matrix`, as the radius of the smallest circle (or sphere or hypersphere in higher dimensions) containing the images of all unit vectors, is not a practical means of computing the norm. Nor is there a formula for it that makes it easy to compute directly from the matrix entries. The computation of the matrix 2-norm is discussed further in a later chapter.
 
 ## Exercises
 

@@ -15,10 +15,11 @@ In the Newton context, the principle of approximate approximation begins with th
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-secant-line
 {doc}`demos/secant-line`
 ````
 
-The example in {doc}`demos/secant-line` demonstrates the {term}`secant method`. In the secant method, one finds the root of the linear approximation through the two most recent root estimates. That is, given previous approximations $x_1,\ldots,x_k$, define the linear model function as the line through $\bigl(x_{k-1},f(x_{k-1})\bigr)$ and $\bigl(x_k,f(x_k)\bigr)$:
+The example in {prf:ref}`demos-secant-line` demonstrates the {term}`secant method`. In the secant method, one finds the root of the linear approximation through the two most recent root estimates. That is, given previous approximations $x_1,\ldots,x_k$, define the linear model function as the line through $\bigl(x_{k-1},f(x_{k-1})\bigr)$ and $\bigl(x_k,f(x_k)\bigr)$:
 
 ```{math}
 :label: secantmodel
@@ -115,6 +116,7 @@ Hence the errors in the secant method converge like $\epsilon_{k+1} = c (\epsilo
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-secant-converge
 {doc}`demos/secant-converge`
 ````
 
@@ -147,6 +149,7 @@ This leads to the idea of defining $q(y)$ as the quadratic interpolant to the po
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-secant-iqi
 {doc}`demos/secant-iqi`
 ````
 

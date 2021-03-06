@@ -67,6 +67,7 @@ where $\mathbf{f}(\mathbf{c})$ is the vector of values $g(t_i;\mathbf{c})-y_i$. 
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-nlsq-MM
 {doc}`demos/nlsq-MM`
 ````
 

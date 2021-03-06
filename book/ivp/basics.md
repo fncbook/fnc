@@ -57,8 +57,10 @@ An ODE may have higher derivatives of the unknown solution present. For example,
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-basics-first
 {doc}`demos/basics-first`
 
+:label: demos-basics-usage
 {doc}`demos/basics-usage`
 ```
 
@@ -68,6 +70,7 @@ The `DifferentialEquations` package has numerous methods for solving ordinary di
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-basics-sing
 {doc}`demos/basics-sing`
 ```
 
@@ -107,6 +110,7 @@ for all sufficiently small $|\delta|$.
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-basics-cond
 {doc}`demos/basics-cond`
 ```
 

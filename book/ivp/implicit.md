@@ -12,6 +12,7 @@ We now consider some of the practical issues that arise when multistep formulas 
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-implicit-ab4
 {doc}`demos/implicit-ab4`
 ```
 
@@ -130,6 +131,7 @@ It defines a nested function called `trapzero` that evaluates the left-hand side
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-implicit-stiff
 {doc}`demos/implicit-stiff`
 ```
 
@@ -214,7 +216,8 @@ Because multistep methods rely on the solution history, though, changing the ste
     ````{only} solutions
     ````
 
-7. ⌨ For numerical purposes, the exact solution of the IVP in {doc}`demos/implicit-stiff` satisfies $\hat{u}(400)=1$.
+7. ⌨ For numerical purposes, the exact solution of the IVP in :label: demos-implicit-stiff
+{doc}`demos/implicit-stiff` satisfies $\hat{u}(400)=1$.
 
     **(a)** Use {ref}`function-ab4` with $n=200,400,600,\ldots,2000$ and make a log-log convergence plot of the error $|u_n-1|$ as a function of $n$.
 

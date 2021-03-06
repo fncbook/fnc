@@ -118,6 +118,7 @@ accuracy. This estimate fails for very large $\kappa$, however.
 
 ::::{prf:example} Julia demo
 :class: demo
+:label: demos-minrescg-conv
 {doc}`demos/minrescg-conv`
 ::::
 

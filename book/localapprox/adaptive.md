@@ -5,12 +5,13 @@
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-adapt-motive
 {doc}`demos/adapt-motive`
 ````
 
-To this point, we have used only equally spaced nodes to compute integrals. Yet there are problems in which non-uniformly distributed nodes would clearly be more appropriate, as demonstrated in {doc}`demos/adapt-motive`.
+To this point, we have used only equally spaced nodes to compute integrals. Yet there are problems in which non-uniformly distributed nodes would clearly be more appropriate, as demonstrated in {prf:ref}`demos-adapt-motive`.
 
-We would like an algorithm that automatically detects and reacts to a situation like that in {doc}`demos/adapt-motive`, a trait known as **adaptivity**.
+We would like an algorithm that automatically detects and reacts to a situation like that in {prf:ref}`demos-adapt-motive`, a trait known as **adaptivity**.
 
 ## Error estimation
 
@@ -71,7 +72,7 @@ and independently compute estimates to each of the half-length integrals. Each o
 
 ## Implementation
 
-It is typical to use just the minimal formula $S_f(4)$ and its error estimate $E$ to make decisions about adaptivity. A computation of $S_f(4)$ requires three trapezoid estimates $T_f(1)$, $T_f(2)$, and $T_f(4)$. As observed in {eq}`nc-doubling` and {doc}`demos/int-extrap`, the five integrand evaluations in $T_f(4)$ are sufficient to compute all of these values. There is one further exploitation of node locations to be found. For simplicity, assume $[a,b]=[0,1]$. The five nodes used in $T_f(4)$ are
+It is typical to use just the minimal formula $S_f(4)$ and its error estimate $E$ to make decisions about adaptivity. A computation of $S_f(4)$ requires three trapezoid estimates $T_f(1)$, $T_f(2)$, and $T_f(4)$. As observed in {eq}`nc-doubling` and {prf:ref}`demos-int-extrap`, the five integrand evaluations in $T_f(4)$ are sufficient to compute all of these values. There is one further exploitation of node locations to be found. For simplicity, assume $[a,b]=[0,1]$. The five nodes used in $T_f(4)$ are
 
 ```{math}
 0, \quad \frac{1}{4}, \quad  \frac{1}{2}, \quad  \frac{3}{4}, \quad 1.
@@ -87,6 +88,7 @@ Only the second and fourth nodes are new. The same is true on the subinterval $[
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-adapt-usage
 {doc}`demos/adapt-usage`
 ````
 
@@ -152,7 +154,7 @@ Although adaptivity and the error estimation that goes with it can be very power
 (problem-adaptquadtests)=
 % must be kept as #1
 
-1. ⌨ For each integral below, use {ref}`function-intadapt` with error tolerance $10^{-2}$, $10^{-3}$, \ldots, $10^{-12}$. Make a table of errors and the number of integrand evaluation nodes used, and use a convergence plot as in {doc}`demos/adapt-usage` to compare to fourth-order accuracy. (These integrals were taken from {cite}`baileyComparisonThree2005`.)
+1. ⌨ For each integral below, use {ref}`function-intadapt` with error tolerance $10^{-2}$, $10^{-3}$, \ldots, $10^{-12}$. Make a table of errors and the number of integrand evaluation nodes used, and use a convergence plot as in {prf:ref}`demos-adapt-usage` to compare to fourth-order accuracy. (These integrals were taken from {cite}`baileyComparisonThree2005`.)
 
     **(a)** $\displaystyle \int_0^1 x\log(1+x)\, dx = \frac{1}{4}$
 

@@ -18,6 +18,7 @@ The values $t_0,\ldots,t_n$ are called the {term}`nodes` of the interpolant. In 
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-interp-global
 {doc}`demos/interp-global`
 ````
 
@@ -27,7 +28,7 @@ Polynomials are the obvious first candidate to serve as interpolating functions.
 Interpolation by a polynomial at equally spaced nodes is ill-conditioned as the degree of the polynomial grows.
 ```
 
-In Chapter 9 we explore the large oscillations in the last figure of {doc}`demos/interp-global`; it turns out that one must abandon either equally spaced nodes or $n\to\infty$ for polynomials. In the rest of this chapter we will keep $n$ fairly small and let the nodes be unrestricted.
+In Chapter 9 we explore the large oscillations in the last figure of {prf:ref}`demos-interp-global`; it turns out that one must abandon either equally spaced nodes or $n\to\infty$ for polynomials. In the rest of this chapter we will keep $n$ fairly small and let the nodes be unrestricted.
 
 ## Piecewise polynomials
 
@@ -42,6 +43,7 @@ Some examples of piecewise polynomials for the nodes  $t_0=-2$, $t_1=0$, $t_2=1$
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-interp-pwise
 {doc}`demos/interp-pwise`
 ````
 
@@ -114,6 +116,7 @@ The condition number of a linear interpolation method is essentially that of its
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-interp-cond
 {doc}`demos/interp-cond`
 ````
 

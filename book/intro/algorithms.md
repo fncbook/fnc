@@ -26,7 +26,7 @@ Descriptions of algorithms vary widely. Sometimes they are presented as a mixtur
 
 Of all the desirable traits of code, we emphasize clarity the most. We do not represent our programs as being the shortest, fastest, or most elegant. Our primary goal is to illustrate and complement the mathematical underpinnings. Hopefully the language and codes are clear enough that if you would rather use a different computing environment to implement them, you will experience few difficulties. We do recommend an *interactive* environment, however, because being able to tweak inputs and pick apart the results is crucial to understanding.
 
-As our first example, [horner](function-horner) implements an algorithm that applies Horner's rule on a general polynomial, through the identity
+As our first example, {numref}`Function {number}<function-horner>` implements an algorithm that applies Horner's rule on a general polynomial, through the identity
 
 ```{math}
 :label: horner
@@ -66,10 +66,11 @@ end
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-algorithms-horner
 {doc}`demos/algorithms-horner`
 ```
 
-The quoted lines at the beginning of {ref}`function-horner` are an optional documentation string. The function itself starts off with the keyword `function`, followed by a list of its input arguments. The first of these is presumed to be a vector, whose length can be obtained and whose individual components are accessed through square bracket notation. After the computation is finished, the `return` keyword indicates which value or values are to be returned to the caller.
+The quoted lines at the beginning of {numref}`Function {number}<function-horner>` are an optional documentation string. The function itself starts off with the keyword `function`, followed by a list of its input arguments. The first of these is presumed to be a vector, whose length can be obtained and whose individual components are accessed through square bracket notation. After the computation is finished, the `return` keyword indicates which value or values are to be returned to the caller.
 
 The `Polynomials` package for Julia provides its own fast methods for polynomial evaluation that supersede our simple [`horner`](function-horner) function. This will often be the case for codes in this book, because the problems we study are classic and important. In a more practical setting you would take implementations of well-known methods for granted and build on top of them.
 
@@ -81,7 +82,7 @@ Julia code files are named with the extension `.jl`.
 
 Functions are a primary way of working in Julia. Any collection of statements organized around solving a type of problem should probably be wrapped in a function. Functions can be defined in their own files or at the command line (i.e., REPL prompt). Typically multiple related functions are grouped into a single file with extension `.jl`.
 
-As seen in [horner](function-horner), one way to start a function definition is with the `function` keyword, followed by the function name and the input arguments in parenthesis. For example, to represent the mathematical function $e^{\sin x}$, we could use
+As seen in {numref}`Function {number}<function-horner>`, one way to start a function definition is with the `function` keyword, followed by the function name and the input arguments in parenthesis. For example, to represent the mathematical function $e^{\sin x}$, we could use
 
 ``` julia
 function myfun(x)

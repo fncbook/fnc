@@ -5,13 +5,14 @@
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-pivot-fail
 {doc}`demos/pivot-fail`
 ```
 
 As mentioned in [the section on LU factorization](lu), the $\mathbf{A}=\mathbf{L}\mathbf{U}$ factorization
-does not work for every nonsingular $\mathbf{A}$. A simple rearrangement of the system found in {doc}`demos/lu-gauss` demonstrates this fact.
+does not work for every nonsingular $\mathbf{A}$. A simple rearrangement of the system found in {prf:ref}`demos-lu-gauss` demonstrates this fact.
 
-The breakdown in {doc}`demos/pivot-fail` is easily explained. After elimination is performed successfully in the first column, we have the matrix
+The breakdown in {prf:ref}`demos-pivot-fail` is easily explained. After elimination is performed successfully in the first column, we have the matrix
 
 ```{math}
   \begin{bmatrix}
@@ -66,6 +67,7 @@ where $\mathbf{P}$ is the permutation matrix resulting from all of the row swaps
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-pivot-fixed
 {doc}`demos/pivot-fixed`
 ```
 
@@ -78,7 +80,7 @@ Row pivoting does not add any flops to the factorization process. It does introd
 ```{index} stability
 ```
 
-If you're very attentive, you may have noticed something curious in the demo {doc}`demos/pivot-fixed`. The matrix we introduced had a single swap between rows 2 and 4, and therefore the elimination process could have been fixed by making just that swap again. But this is not what is shown by the $\mathbf{P}$ computed by Julia. The reason is that there is an additional rule about row pivoting that is essential to the success of the algorithm in the presence of rounding errors.
+If you're very attentive, you may have noticed something curious in the demo {prf:ref}`demos-pivot-fixed`. The matrix we introduced had a single swap between rows 2 and 4, and therefore the elimination process could have been fixed by making just that swap again. But this is not what is shown by the $\mathbf{P}$ computed by Julia. The reason is that there is an additional rule about row pivoting that is essential to the success of the algorithm in the presence of rounding errors.
 
 A simple example illustrates the key issue. Let
 
@@ -171,7 +173,7 @@ One consequence of this rule is that all the below-diagonal elements in the unit
     %
     % which is not the same as the correct solution, $U^{-1}L^{-1}b$.
 
-2. ⌨ Rework {doc}`demos/lu-gauss` with row pivoting, using Julia to do the elimination step by step and visual inspection of the values as you go to determine the correct pivot element for each column. Start with $\mathbf{P}=\mathbf{I}$ and perform all the same row swaps in $\mathbf{P}$ as you do in the process of creating $\mathbf{U}$. (There is no need to compute $\mathbf{L}$.)  
+2. ⌨ Rework {prf:ref}`demos-lu-gauss` with row pivoting, using Julia to do the elimination step by step and visual inspection of the values as you go to determine the correct pivot element for each column. Start with $\mathbf{P}=\mathbf{I}$ and perform all the same row swaps in $\mathbf{P}$ as you do in the process of creating $\mathbf{U}$. (There is no need to compute $\mathbf{L}$.)  
 
     (problem-lumpstring)=
 3. Suppose a string is stretched with tension $\tau$ horizontally between two anchors at $x=0$ and $x=1$. At each of the $n-1$ equally spaced positions $x_k=k/n$, $k=1,\ldots,n-1$, we attach a little mass $m_i$ and allow the string to come to equilibrium. This causes vertical displacement of the string. Let $q_k$ be the amount of displacement at $x_k$. If the displacements are not too large, then an approximate force balance equation is

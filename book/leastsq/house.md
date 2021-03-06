@@ -101,12 +101,13 @@ The QR factorization is computed by using successive Householder reflections to 
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-house-qr
 {doc}`demos/house-qr`
 ````
 
-The QR factorization is computed by using successive Householder reflections to introduce zeros in one column at a time. We first show the process for a small numerical example in {doc}`demos/house-qr`.
+The QR factorization is computed by using successive Householder reflections to introduce zeros in one column at a time. We first show the process for a small numerical example in {prf:ref}`demos-house-qr`.
 
-You may be wondering what happened to the $\mathbf{Q}$ in {doc}`demos/house-qr`. Each Householder reflector is orthogonal but not full-size. We have to pad it out to represent algebraically the fact that a block of the first rows are left alone. Given a reflector $\mathbf{P}_k$ that is of square size $m-k+1$, we define
+You may be wondering what happened to the $\mathbf{Q}$ in {prf:ref}`demos-house-qr`. Each Householder reflector is orthogonal but not full-size. We have to pad it out to represent algebraically the fact that a block of the first rows are left alone. Given a reflector $\mathbf{P}_k$ that is of square size $m-k+1$, we define
 
 ```{math}
 \mathbf{Q}_k =

@@ -72,6 +72,7 @@ If the singular values of $\mathbf{A}$ decrease sufficiently rapidly, then $\mat
 
 :::{prf:example} Julia demo
 :class: demo
+:label: demos-dimreduce-hello
 {doc}`demos/dimreduce-hello`
 :::
 
@@ -92,6 +93,7 @@ Clearly $0\le \tau_k \le 1$ and $\tau_k$ is non-decreasing as a function of $k$.
 
 :::{prf:example} Julia demo
 :class: demo
+:label: demos-dimreduce-voting
 {doc}`demos/dimreduce-voting`
 :::
 

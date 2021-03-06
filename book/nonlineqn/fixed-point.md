@@ -5,10 +5,11 @@
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-fp-spiral
 {doc}`demos/fp-spiral`
 ````
 
-The rootfinding problem $f(x)=0$ can always be transformed into another form, $g(x)=x$, known as the {term}`fixed point problem`. Given $f$, one such transformation is to define $g(x)=x-f(x)$. Then the fixed point equation is true at, and only at, a root of $f$. {doc}`demos/fp-spiral` shows that evaluations of the function $g$ can be used to try to locate a fixed point.
+The rootfinding problem $f(x)=0$ can always be transformed into another form, $g(x)=x$, known as the {term}`fixed point problem`. Given $f$, one such transformation is to define $g(x)=x-f(x)$. Then the fixed point equation is true at, and only at, a root of $f$. {prf:ref}`demos-fp-spiral` shows that evaluations of the function $g$ can be used to try to locate a fixed point.
 
 This is our first example of an **iterative algortihm**. The idea is to generate not a single answer but a sequence of values that one hopes will converge to the correct result. Often the iteration is constructed by defining a formula to map one member of the sequence to the next one. In this case we have
 
@@ -48,7 +49,7 @@ Hence if $|g'(r)|>1$, we are led to the contradictory conclusion that the errors
 (example-fprate)=
 
 ````{prf:example}
-  The role of $g'(r)$ is clear in {doc}`demos/fp-spiral`. We have $g(x) = -x^2+5x-3.5$ and $g'(x)=-2x+5$. For the first fixed point, near $2.71$, we get $g'(r)\approx-0.42$, indicating convergence. For the second fixed point, near 1.29, we get $g'(r)\approx 2.42$, which is consistent with the observed divergence.
+  The role of $g'(r)$ is clear in {prf:ref}`demos-fp-spiral`. We have $g(x) = -x^2+5x-3.5$ and $g'(x)=-2x+5$. For the first fixed point, near $2.71$, we get $g'(r)\approx-0.42$, indicating convergence. For the second fixed point, near 1.29, we get $g'(r)\approx 2.42$, which is consistent with the observed divergence.
 ````
 
 ## Linear convergence
@@ -88,6 +89,7 @@ Practically speaking, linear convergence is identified by two different observat
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-fp-converge
 {doc}`demos/fp-converge`
 ```
 
@@ -160,7 +162,7 @@ There are stronger and more general statements of [the contraction mapping theor
 
     **(d)** $g(x) = x+1-\tan(\pi x)$, $r=1/4$
   
-4. In {doc}`demos/fp-spiral` we used $g(x)=x-f(x)$ to find a fixed point of the polynomial $f(x)=x^2 - 4x + 3.5$.
+4. In {prf:ref}`demos-fp-spiral` we used $g(x)=x-f(x)$ to find a fixed point of the polynomial $f(x)=x^2 - 4x + 3.5$.
   
     **(a)** ✍ Why does the iteration "spiral in" to the fixed point? (Refer to the series analysis.)
 

@@ -122,6 +122,7 @@ so that $\mathbf{x}_{k+1}=\mathbf{x}_k+\mathbf{s}_k$. Computing the Newton step 
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-system-iter
 {doc}`demos/system-iter`
 ````
 
@@ -178,6 +179,7 @@ The output of {ref}`function-newtonsys` is a vector of vectors representing the 
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-system-usage
 {doc}`demos/system-usage`
 ````
 

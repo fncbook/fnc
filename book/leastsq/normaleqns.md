@@ -171,6 +171,7 @@ $(\mathbf{A}^T\mathbf{A})\mathbf{x} = \mathbf{A}^T \mathbf{b}$. When these equat
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-normaleqns-instab
 {doc}`demos/normaleqns-instab`
 ````
 

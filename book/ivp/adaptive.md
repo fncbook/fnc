@@ -122,8 +122,10 @@ First, as in {eq}`absreltolerance`, we use a combination of absolute and relativ
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-adapt-basic
 {doc}`demos/adapt-basic`
 
+:label: demos-adapt-sing
 {doc}`demos/adapt-sing`
 ```
 
@@ -189,7 +191,7 @@ Often the steps chosen adaptively clearly correspond to identifiable features of
 
     ````
 
-5. ⌨ Solve the problem $u'=u^2-u^3$, $u(0)=0.001$, $0\le t \le 2000$ and make plots as in {doc}`demos/adapt-basic` that show both the solution and the time steps taken. Does the step size selection seem to be entirely explained by the local variability of the solution?
+5. ⌨ Solve the problem $u'=u^2-u^3$, $u(0)=0.001$, $0\le t \le 2000$ and make plots as in {prf:ref}`demos-adapt-basic` that show both the solution and the time steps taken. Does the step size selection seem to be entirely explained by the local variability of the solution?
 
     ````{only} solutions
 

@@ -26,9 +26,9 @@ If $\mathbf{A}$ is nonsingular, then the mathematical expression of the solution
 When $\mathbf{A}$ is singular, then $\mathbf{A}\mathbf{x}=\mathbf{b}$ may have no solution or
 infinitely many solutions.
 
- (example-singmatrix)=
 
 ````{prf:example}
+:label: example-singmatrix
 If we define
 
 ```{math}
@@ -63,10 +63,11 @@ Matrix inverses are indispensable for mathematical discussion and derivations. H
 ```{index} backslash
 ```
 
-Julia does have a command {term}`inv` that finds the inverse of a matrix. But, as demonstrated in {doc}`demos/interp-vander`, in order to solve a linear system of equations, you should use {term}`backslash`  (the `\` symbol, not to be confused with the slash `/` used in web addresses).
+Julia does have a command {term}`inv` that finds the inverse of a matrix. But, as demonstrated in {prf:ref}`demos-interp-vander`, in order to solve a linear system of equations, you should use {term}`backslash`  (the `\` symbol, not to be confused with the slash `/` used in web addresses).
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-systems-backslash
 {doc}`demos/systems-backslash`
 ```
 
@@ -142,9 +143,10 @@ Solving the system backward, starting with $x_4$ first and then proceeding in de
 
 It should be clear that forward or backward substitution fails if, and only if, one of the diagonal entries of the system matrix is zero. We have essentially proved the following theorem.
 
-(theorem-triangleinvert)=
 
 ```{prf:theorem} Triangular singularity
+:label: theorem-triangle-invert
+
 A triangular matrix is singular if and only if at least one of its diagonal elements is zero.
 ```
 
@@ -231,10 +233,11 @@ end
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-systems-triangular
 {doc}`demos/systems-triangular`
 ```
 
-The example in {doc}`demos/systems-triangular` is our first clue that linear system problems may have large condition numbers, making inaccurate solutions inevitable in floating point arithmetic. We will learn how to spot such problems [later in the chapter](condition-number). Before reaching that point, however, we need to discuss how to solve general linear systems, not just triangular ones.
+The example in {prf:ref}`demos-systems-triangular` is our first clue that linear system problems may have large condition numbers, making inaccurate solutions inevitable in floating point arithmetic. We will learn how to spot such problems [later in the chapter](condition-number). Before reaching that point, however, we need to discuss how to solve general linear systems, not just triangular ones.
 
 ## Exercises
 
@@ -297,7 +300,8 @@ The example in {doc}`demos/systems-triangular` is our first clue that linear sys
     **(b)** If $\mathbf{A} \mathbf{X}=\mathbf{I}$, then $\mathbf{X}=\mathbf{A}^{-1}$. Use this fact to write a function `ltinverse` that uses your modified **forwardsub** to compute the inverse of a lower triangular matrix. Test your function on at least two nontrivial matrices. (We remind you here that this is just an exercise; matrix inverses are rarely a good idea in numerical practice!)
 
     (problem-triangillcond)=
-6. ⌨ {doc}`demos/systems-triangular` showed solutions of $\mathbf{A}\mathbf{x}=\mathbf{b}$, where
+6. ⌨ :label: demos-systems-triangular
+{doc}`demos/systems-triangular` showed solutions of $\mathbf{A}\mathbf{x}=\mathbf{b}$, where
   
     ```{math}
     \mathbf{A} = \begin{bmatrix} 1 & -1 & 0 & \alpha-\beta & \beta \\ 0 & 1 & -1 &

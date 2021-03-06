@@ -13,6 +13,7 @@ We call $r$ a **root** of the function $f$. The formulation $f(x)=0$ is general 
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-roots-bessel
 {doc}`demos/roots-bessel`
 ````
 
@@ -44,6 +45,7 @@ The condition number of the rootfinding problem is equivalent to that for evalua
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-roots-cond
 {doc}`demos/roots-cond`
 ````
 

@@ -161,6 +161,7 @@ r_{11} & r_{12} & \cdots & r_{1n} \\
 
 ````{prf:example} Julia demo
 :class: demo
+:label: demos-qr-qrfact
 {doc}`demos/qr-qrfact`
 ````
 

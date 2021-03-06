@@ -40,6 +40,7 @@ The generic form of a first-order system IVP is
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-systems-exp
 {doc}`demos/systems-exp`
 ```
 
@@ -47,6 +48,7 @@ where all of the boldface quantities are vectors in $\mathbb{R}^m$ or $\mathbb{C
 
 ```{prf:example} Julia demo
 :class: demo
+:label: demos-systems-predator
 {doc}`demos/systems-predator`
 ```
 
