@@ -1,10 +1,10 @@
 # Eigenvalue decomposition
 
-To this point we have dealt frequently with the solution of the linear system $\mathbf{A} \mathbf{A}\mathbf{x}=\mathbf{A}\mathbf{b}$. Alongside this problem in its importance to linear algebra is the eigenvalue problem,
+To this point we have dealt frequently with the solution of the linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$. Alongside this problem in its importance to linear algebra is the eigenvalue problem,
 
 ```{math}
-  :label: eigdef
-  \mathbf{A} \mathbf{A}\mathbf{x} = \lambda \mathbf{A}\mathbf{x},
+:label: eigdef
+\mathbf{A}\mathbf{x} = \lambda \mathbf{x},
 ```
 
 ```{index} eigenvalue
@@ -17,11 +17,11 @@ for a scalar {term}`eigenvalue` $\lambda$ and an associated nonzero {term}`eigen
 
 A matrix with real entries can have complex eigenvalues. Therefore we assume all matrices, vectors, and scalars may be complex in what follows. Recall that a complex number can be represented as $a+i b$, for real $a$ and $b$ and where $i^2=-1$. The **complex conjugate** of $x=a+i b$ is denoted $\bar{x}$ and is given by $\bar{x}=a-i b$. The {term}`hermitian` or conjugate transpose of a matrix $\mathbf{A}$ is denoted $\mathbf{A}^*$ and is given by $\mathbf{A}^*=(\overline{\mathbf{A}})^T=\overline{\mathbf{A}^T}$.
 
-For the most part, "hermitian" replaces "transpose" when dealing with complex matrices. For instance, the inner product of complex vectors $\mathbf{A}\mathbf{u}$ and $\mathbf{A}\mathbf{v}$ is
+For the most part, "hermitian" replaces "transpose" when dealing with complex matrices. For instance, the inner product of complex vectors $\mathbf{u}$ and $\mathbf{v}$ is
 
 ```{math}
-  :label: complexinnerprod
-  \mathbf{A}\mathbf{u}^* \mathbf{A}\mathbf{v} = \sum_{k=1}^n \overline{u}_k v_k,
+:label: complexinnerprod
+\mathbf{u}^* \mathbf{v} = \sum_{k=1}^n \overline{u}_k v_k,
 ```
 
 ```{index} unitary matrix
@@ -39,7 +39,7 @@ which in turn defines the 2-norm for complex vectors, and thereby matrices as we
 ```{index} characteristic polynomial
 ```
 
-The eigenvalue equation $\mathbf{A}\mathbf{x}=\lambda\mathbf{x}$ is equivalent to $(\lambda\mathbf{I} - \mathbf{A})\mathbf{x}=\boldsymbol{0}$, which, since $\mathbf{x}$ is nonzero in order to be an eigenvector, implies that $\lambda\mathbf{I} - \mathbf{A}$ is a singular matrix. This observation leads to the familiar property of an eigenvalue being a root of the **characteristic polynomial** $\det(\lambda \mathbf{I} - \mathbf{A})$. From here one concludes that an $n\times n$ matrix has $n$ eigenvalues, counting multiplicity.
+The eigenvalue equation $\mathbf{A}\mathbf{x}=\lambda\mathbf{x}$ is equivalent to $(\lambda\mathbf{I} - \mathbf{A})\mathbf{x}=\boldsymbol{0}$, which, since $\mathbf{x}$ is nonzero in order to be an eigenvector, implies that $\lambda\mathbf{I} - \mathbf{A}$ is a singular matrix. This observation leads to the familiar property of an eigenvalue being a root of the **characteristic polynomial** $\det(\lambda \mathbf{I} - \mathbf{A})$. From here one concludes that an $n\times n$ matrix has $n$ eigenvalues, counting algebraic multiplicity.
 
 Hence suppose that $\mathbf{A}\mathbf{v}_k=\lambda_k\mathbf{v}_k$ for $k=1\ldots,n$. We can summarize these as
 
@@ -52,7 +52,7 @@ Hence suppose that $\mathbf{A}\mathbf{v}_k=\lambda_k\mathbf{v}_k$ for $k=1\ldots
   &=
     \begin{bmatrix}
       \lambda_1 \mathbf{v}_1 & \lambda_2\mathbf{v}_2 & \cdots & \lambda_n \mathbf{v}_n
-    \end{bmatrix}\notag\\
+    \end{bmatrix} \\[1mm]
   \mathbf{A} \begin{bmatrix}
     \mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_n
   \end{bmatrix}
@@ -107,7 +107,7 @@ The `eigen` command can be used to compute the eigenvalue decomposition of a giv
 {doc}`demos/evd-eigen`
 ```
 
-observe that if $\mathbf{A}\mathbf{v} = \lambda \mathbf{v}$ for nonzero $\mathbf{v}$, then the equation remains true for any nonzero multiple of $\mathbf{v}$: eigenvectors are not unique, and neither is an EVD.
+Observe that if $\mathbf{A}\mathbf{v} = \lambda \mathbf{v}$ for nonzero $\mathbf{v}$, then the equation remains true for any nonzero multiple of $\mathbf{v}$: eigenvectors are not unique, and neither is an EVD.
 
 ## Similarity and change of basis
 
@@ -145,13 +145,13 @@ The fact that the EVD represents a change of basis in both the domain and range 
 
 Just as linear systems have condition numbers that quantify the effect of fixed precision, eigenvalue problems may be poorly conditioned too. While many possible results can be derived, we will use just one, the **Bauer--Fike theorem**.[^BFT]   
 
-(thm-bauer-fike)=
 ````{prf:theorem} Bauer--Fike
+:label: theorem-bauer-fike
 Let $\mathbf{A}\in\mathbb{C}^{n\times n}$ be diagonalizable, $\mathbf{A}=\mathbf{V}\mathbf{D}\mathbf{V}^{-1}$, with eigenvalues $\lambda_1,\ldots,\lambda_n$. If $\mu$ is an eigenvalue of $\mathbf{A}+\mathbf{E}$ for a complex matrix $\mathbf{E}$, then
 
 ```{math}
 :label: bauerfike
-\min_{j=1,\ldots,n} |\mu - \lambda_j| \le \kappa(\mathbf{V}) \| \mathbf{E} \|,
+\min_{j=1,\ldots,n} |\mu - \lambda_j| \le \kappa(\mathbf{V}) \, \| \mathbf{E} \|\,,
 ```
 
 where $\|\cdot\|$ and $\kappa$ are in the 2-norm.
@@ -205,7 +205,7 @@ The process demonstrated in {ref}`example-qriter` is known as the *Francis QR it
     (problem-defectivematrix)=
 2. ✍ Prove that the matrix $\mathbf{B}$ in {eq}`jordanblock` does not have two independent eigenvectors.
 
-3. ⌨ Use `eigvals` to find the eigenvalues of each matrix. Then for each eigenvalue $\lambda$, use `rank` to verify that $\lambda\mathbf{I} - \mathbf{A}$ is singular.
+3. ⌨ Use `eigvals` to find the eigenvalues of each matrix. Then for each eigenvalue $\lambda$, use `rank` to verify that $\lambda\mathbf{I}$ minus the given matrix is singular.
     
     $\mathbf{A} = \begin{bmatrix}
     2  & -1 & 0 \\
@@ -298,4 +298,4 @@ The process demonstrated in {ref}`example-qriter` is known as the *Francis QR it
 
     **(d)** Repeat part (b) with $\mathbf{T}$ in place of $\mathbf{A}$.
     
-    **(e)** Use `eigen` to get eigenvector matrices of $\mathbf{A}$ and $\mathbf{T}$, and compute the condition numbers of them. Apply the {prf:ref}`theorem-bauer-fike` to explain your plots.
+    **(e)** Use `eigen` to get eigenvector matrices of $\mathbf{A}$ and $\mathbf{T}$, and compute the condition numbers of them. Apply {prf:ref}`theorem-bauer-fike` to explain your plots.

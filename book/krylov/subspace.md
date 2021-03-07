@@ -17,32 +17,32 @@ The power and inverse iterations have a flaw that seems obvious once it is point
 
 ```{index} Krylov subspace
 ```
-Such a space is called the $m$th {term}`Krylov subspace` $\ck_m$ of $\mathbb{C}^n$.\footnote{A proper pronunciation of "Krylov" is something like "kree-luv," but American English speakers often say "kreye-lahv."} Implicitly we understand that $\mathbf{K}_m$ and $\ck_m$ depend on both $\mathbf{A}$ and the initial vector $\mathbf{u}$, but we rarely express the dependence notationally. In general, we expect that the dimension of $\ck_m$, which is the rank of $\mathbf{K}_m$, equals $m$, though it may be smaller.
+Such a space is called the $m$th {term}`Krylov subspace` $\mathcal{K}_m$ of $\mathbb{C}^n$.\footnote{A proper pronunciation of "Krylov" is something like "kree-luv," but American English speakers often say "kreye-lahv."} Implicitly we understand that $\mathbf{K}_m$ and $\mathcal{K}_m$ depend on both $\mathbf{A}$ and the initial vector $\mathbf{u}$, but we rarely express the dependence notationally. In general, we expect that the dimension of $\mathcal{K}_m$, which is the rank of $\mathbf{K}_m$, equals $m$, though it may be smaller.
 
 ## Properties
 
 As we have seen with the power iteration, part of the appeal of the Krylov matrix is that it can be generated in a way that fully exploits the sparsity of $\mathbf{A}$, simply through repeated matrix-vector multiplication. Furthermore, we have some important mathematical properties.
 
-(theorem-krylovmult)=
 ::::{prf:theorem}
-Suppose $\mathbf{A}$ is $n\times n$, $0<m<n$, and a vector $\mathbf{u}$ is used to generate Krylov subspaces. If $\mathbf{x}\in\ck_m$, then the following hold:
+:label: theorem-krylovmult
+Suppose $\mathbf{A}$ is $n\times n$, $0<m<n$, and a vector $\mathbf{u}$ is used to generate Krylov subspaces. If $\mathbf{x}\in\mathcal{K}_m$, then the following hold:
 
 1. $\mathbf{x} = \mathbf{K}_m \mathbf{z}$ for some $\mathbf{z}\in\mathbb{C}^m$.
-2. $\mathbf{x} \in \ck_{m+1}$.
-3. $\mathbf{A}\mathbf{x} \in \ck_{m+1}$.
+2. $\mathbf{x} \in \mathcal{K}_{m+1}$.
+3. $\mathbf{A}\mathbf{x} \in \mathcal{K}_{m+1}$.
 ::::
 
 ::::{prf:proof}
-If $\mathbf{x}\in\ck_m$, then for some coefficients $c_1,\ldots,c_m$,
+If $\mathbf{x}\in\mathcal{K}_m$, then for some coefficients $c_1,\ldots,c_m$,
 
 :::{math}
 \mathbf{x} = c_1 \mathbf{u} + c_2 \mathbf{A} \mathbf{u} + \cdots + c_m \mathbf{A}^{m-1} \mathbf{u}.
 :::
 
-Thus let $\mathbf{z}= \begin{bmatrix} c_1 & \cdots & c_m \end{bmatrix}^T$. Also $\mathbf{x}\in\ck_{m+1}$, as we can add zero times $\mathbf{A}^{m}\mathbf{u}$ to the sum. Finally,
+Thus let $\mathbf{z}= \begin{bmatrix} c_1 & \cdots & c_m \end{bmatrix}^T$. Also $\mathbf{x}\in\mathcal{K}_{m+1}$, as we can add zero times $\mathbf{A}^{m}\mathbf{u}$ to the sum. Finally,
   
 :::{math}
-\mathbf{A}\mathbf{x} = c_1 \mathbf{A} \mathbf{u} + c_2 \mathbf{A}^{2} \mathbf{u} + \cdots + c_m \mathbf{A}^{m} \mathbf{u} \in \ck_{m+1}.
+\mathbf{A}\mathbf{x} = c_1 \mathbf{A} \mathbf{u} + c_2 \mathbf{A}^{2} \mathbf{u} + \cdots + c_m \mathbf{A}^{m} \mathbf{u} \in \mathcal{K}_{m+1}.
 :::
 ::::
 
@@ -50,18 +50,18 @@ Thus let $\mathbf{z}= \begin{bmatrix} c_1 & \cdots & c_m \end{bmatrix}^T$. Also 
 
 ```{index} dimension reduction
 ```
-The problems $\mathbf{A}\mathbf{x}=\mathbf{b}$ and $\mathbf{A}\mathbf{x}=\lambda\mathbf{x}$ are statements about a very high-dimensional space $\mathbb{C}^n$. One way to approximate them is to replace the full $n$-dimensional space with a much lower-dimensional $\ck_m$ for $m\ll n$. This is the essence of the Krylov subspace approach.
+The problems $\mathbf{A}\mathbf{x}=\mathbf{b}$ and $\mathbf{A}\mathbf{x}=\lambda\mathbf{x}$ are statements about a very high-dimensional space $\mathbb{C}^n$. One way to approximate them is to replace the full $n$-dimensional space with a much lower-dimensional $\mathcal{K}_m$ for $m\ll n$. This is the essence of the Krylov subspace approach.
 
 For instance, we can interpret $\mathbf{A}\mathbf{x}_m\approx \mathbf{b}$ in the sense of linear least squares—that is, using \lemref{krylovmult} to let $\mathbf{x}=\mathbf{K}_m\mathbf{z}$,
 
 :::{math}
 :label: gmresdef
-\min_{\mathbf{x}\in\\\ck_m} \|  \mathbf{A}\mathbf{x}-\mathbf{b} \|
+\min_{\mathbf{x}\in\\\mathcal{K}_m} \|  \mathbf{A}\mathbf{x}-\mathbf{b} \|
 = \min_{\mathbf{z}\in\mathbb{C}^m} \| \mathbf{A}(\mathbf{K}_m\mathbf{z})-\mathbf{b} \|
 = \min_{\mathbf{z}\in\mathbb{C}^m} \| (\mathbf{A}\mathbf{K}_m)\mathbf{z})-\mathbf{b} \|.
 :::
 
-The natural seed vector for $\ck_m$ in this case is the vector $\mathbf{b}$. In the next example we try to implement {eq}`gmresdef`. We do take one precaution: because the vectors $\mathbf{A}^{k}\mathbf{b}$ may become very large or small in norm, we normalize after each multiplication by $\mathbf{A}$, just as we did in the power iteration.
+The natural seed vector for $\mathcal{K}_m$ in this case is the vector $\mathbf{b}$. In the next example we try to implement {eq}`gmresdef`. We do take one precaution: because the vectors $\mathbf{A}^{k}\mathbf{b}$ may become very large or small in norm, we normalize after each multiplication by $\mathbf{A}$, just as we did in the power iteration.
 
 (demo-subspace-unstable)=
 ::::{prf:example} Julia demo
@@ -72,9 +72,9 @@ The natural seed vector for $\ck_m$ in this case is the vector $\mathbf{b}$. In 
 
 ## The Arnoldi iteration
 
-The [observed breakdown](demos/subspace-unstable.ipynb) of convergence is due to a critical numerical defect in our approach: the columns of the Krylov matrix {eq}`krylovmatrix` increasingly become parallel to one another (and the dominant eigenvector), as {eq}`poweriterconverge` predicts. As we saw [previously](../leastsq/qr.md), near-parallel vectors create the potential for numerical cancellation. This manifests as a large condition number for $\mathbf{K}_m$ as $m$ grows, eventually creating excessive error when solving the least-squares system.
+The breakdown of convergence in {prf:ref}`demos-subspace-unstable` is due to a critical numerical defect in our approach: the columns of the Krylov matrix {eq}`krylovmatrix` increasingly become parallel to one another (and the dominant eigenvector), as {eq}`poweriterconverge` predicts. As we saw [previously](../leastsq/qr.md), near-parallel vectors create the potential for numerical cancellation. This manifests as a large condition number for $\mathbf{K}_m$ as $m$ grows, eventually creating excessive error when solving the least-squares system.
 
-The polar opposite of an ill-conditioned basis for $\ck_m$ is an orthonormal one. Suppose we had a thin QR factorization of $\mathbf{K}_m$:
+The polar opposite of an ill-conditioned basis for $\mathcal{K}_m$ is an orthonormal one. Suppose we had a thin QR factorization of $\mathbf{K}_m$:
 
 \begin{align*}
   \mathbf{K}_m  = \mathbf{Q}_m \mathbf{R}_m
@@ -90,7 +90,7 @@ The polar opposite of an ill-conditioned basis for $\ck_m$ is an orthonormal one
   \end{bmatrix}.
 \end{align*}
 
-Then the vectors $\mathbf{q}_1$, \ldots, $\mathbf{q}_m$ are the orthonormal basis we seek for $\ck_m$. By {prf:ref}`theorem-krylovmult`, we know that $\mathbf{A}\mathbf{q}_m \in \ck_{m+1}$, and therefore
+Then the vectors $\mathbf{q}_1$, \ldots, $\mathbf{q}_m$ are the orthonormal basis we seek for $\mathcal{K}_m$. By {prf:ref}`theorem-krylovmult`, we know that $\mathbf{A}\mathbf{q}_m \in \mathcal{K}_{m+1}$, and therefore
 
 :::{math}
 :label: arnoldivec
@@ -198,7 +198,7 @@ end
 
 An implementation of the Arnoldi iteration is given in {numref}`Function {number}<function-arnoldi>`. A careful inspection shows that the loop at line~18 does not exactly implement {eq}`arnoldiip` and {eq}`arnoldigs`. The reason is numerical stability. Though the described and implemented versions are mathematically equivalent in exact arithmetic (see {ref}`prob-arnoldi-modifiedgs`), the approach in {ref}`fun-arnoldi` is much more stable to roundoff.
 
-In the next section we revisit the idea of approximately solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ over a Krylov subspace $\ck_m$, using the ONC matrix $\mathbf{Q}_m$ in place of $\mathbf{K}_m$. A [related idea](`problem-krylov-arnoldieig`) is used to approximate the eigenvalue problem for $\mathbf{A}$, which is the approach that underlies `eigs` for sparse matrices.
+In the next section we revisit the idea of approximately solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ over a Krylov subspace $\mathcal{K}_m$, using the ONC matrix $\mathbf{Q}_m$ in place of $\mathbf{K}_m$. A [related idea](`problem-krylov-arnoldieig`) is used to approximate the eigenvalue problem for $\mathbf{A}$, which is the approach that underlies `eigs` for sparse matrices.
 
 
 <!-- 

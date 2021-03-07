@@ -3,7 +3,7 @@
 ```{index} matrix; symmetric
 ```
 
-As we saw [earlier](../linsys/structure.md), symmetry can simplify the LU factorization into a symmetric form, $\mathbf{A}=\mathbf{L}\mathbf{D}\mathbf{L}^T$. Certain specializations occur as well for the eigenvalue and singular value factorizations. In this section we stay with complex-valued matrices, so we are interested in the case when $\mathbf{A}^*=\mathbf{A}$, or $\mathbf{A}$ is hermitian. However, we often loosely speak of "symmetry" to mean this property in the complex case. All of the statements in this section easily specialize to the real case.
+As we saw [earlier](../linsys/structure.md), symmetry can simplify the LU factorization into a symmetric form, $\mathbf{A}=\mathbf{L}\mathbf{D}\mathbf{L}^T$. Certain specializations occur as well for the eigenvalue and singular value factorizations. In this section we stay with complex-valued matrices, so we are interested in the case when $\mathbf{A}^*=\mathbf{A}$, or $\mathbf{A}$ is hermitian. However, we often loosely speak of symmetry to mean this property in the complex case. All of the statements in this section easily specialize to the real case.
 
 ## Unitary diagonalization
 
@@ -15,8 +15,8 @@ Suppose now that $\mathbf{A}^*=\mathbf{A}$ and that $\mathbf{A}=\mathbf{U}\mathb
 
 and it's tempting to conclude that $\mathbf{U}=\mathbf{V}$. Happily, this is nearly true. The following theorem is typically proved in an advanced linear algebra course.
 
-(thm-spec-decomp)=
 ````{prf:theorem} Spectral decomposition
+:label: theorem-spec-decomp
 If $\mathbf{A}=\mathbf{A}^*$, then $\mathbf{A}$ has a diagonalization $\mathbf{A}=\mathbf{V} \mathbf{D} \mathbf{V}^{-1}$ in which $\mathbf{V}$ is unitary and $\mathbf{D}$ is diagonal and real.
 ````
 
@@ -46,7 +46,7 @@ is an SVD, where $|\mathbf{D}|$ is the elementwise absolute value and $\mathbf{T
 Let $T_{ii}=\operatorname{sign}(D_{ii})$ for all $i$. Then $\mathbf{T}^2=\mathbf{I}$ and $|\mathbf{D}|=\mathbf{T}\mathbf{D}$. The result follows.
 ::::
 
-The converse of the [Spectral Decomposition Theorem](thm-spec-decomp) is also true: every matrix with a unitary diagonalization and real eigenvalues is hermitian. However, there are non-hermitian matrices that meet just the requirement of a unitary EVD; any such matrix is called {term}`normal`.
+The converse of {prf:ref}`theorem-spec-decomp` is also true: every matrix with a unitary diagonalization and real eigenvalues is hermitian. However, there are non-hermitian matrices that meet just the requirement of a unitary EVD; any such matrix is called {term}`normal`.
 
 ::::{prf:example} Julia demo
 :class: demo
@@ -54,7 +54,7 @@ The converse of the [Spectral Decomposition Theorem](thm-spec-decomp) is also tr
 {doc}`demos/symm-eig-normal`
 ::::
 
-Now consider again [the Bauer--Fike Theorem](thm-bauer-fike), which says that the condition number of the eigenvalues is bounded above by $\kappa(\mathbf{V})$, for any eigenvector matrix $\mathbf{V}$. Because $\kappa=1$ for any unitary or orthogonal matrix, the [Spectral Decomposition Theorem](thm-spec-decomp)  then implies that the condition number of the eigenvalues of a hermitian or any normal matrix is one. That is, eigenvalues of a normal matrix can be changed by no more than the norm of the perturbation to the matrix.
+Now consider again {prf:ref}`theorem-bauer-fike`, which says that the condition number of the eigenvalues is bounded above by $\kappa(\mathbf{V})$, for any eigenvector matrix $\mathbf{V}$. Because $\kappa=1$ for any unitary or orthogonal matrix, {prf:ref}`theorem-spec-decomp` then implies that the condition number of the eigenvalues of a hermitian or any normal matrix is one. That is, eigenvalues of a normal matrix can be changed by no more than the norm of the perturbation to the matrix.
 
 :::{prf:example} Julia demo
 :class: demo

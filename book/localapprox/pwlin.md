@@ -318,7 +318,7 @@ We normally don't have access to $f''$, so the importance of {prf:ref}`theorem-p
     ````
 
     (problem-placcuracy)=
-5. ✍ Here we consider a proof of the {prf:ref}`theorem-pl-converge` using the mean value theorems from elementary calculus: If $f$ is continuously differentiable in $(a,b)$, then there exist points $s$ and $t$ in $(a,b)$ such that
+5. ✍ Here we consider a proof of {prf:ref}`theorem-pl-converge` using the mean value theorems from elementary calculus: If $f$ is continuously differentiable in $(a,b)$, then there exist points $s$ and $t$ in $(a,b)$ such that
   
     ```{math}
     \int_a^b f(z) \, dz = (b-a)f(s) \qquad \text{and} \qquad f'(t) = \frac{f(b)-f(a)}{b-a}.

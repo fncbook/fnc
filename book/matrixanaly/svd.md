@@ -6,6 +6,7 @@ We now introduce another factorization that is as fundamental as the EVD.
 ```
 
 ````{prf:theorem}
+:label: theorem-svd
   Let $\mathbf{A}\in\mathbb{C}^{m\times n}$. Then $\mathbf{A}$ can be written as
 
 ```{math}
@@ -37,7 +38,6 @@ We call $\sigma_1$ the **principal singular value** and $\mathbf{u}_{1}$ and $\m
 Suppose $\mathbf{A}$ is a real matrix and that $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^T$ is an SVD. Then $\mathbf{A}^T=\mathbf{V}\mathbf{S}^T\mathbf{U}^T$ meets all the requirements of an SVD for $\mathbf{A}^T$: the first and last matrices are orthogonal, and the middle matrix is diagonal with nonnegative entries. Hence $\mathbf{A}$ and $\mathbf{A}^T$ have the same singular values.
 ````
 
-
 ## Interpreting the SVD
 
 Another way to write $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^*$ is as $\mathbf{A}\mathbf{V}=\mathbf{U}\mathbf{S}$. Taken columnwise, this means
@@ -49,7 +49,7 @@ Another way to write $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^*$ is as $\mathb
 
 In words, each right singular vector is mapped by $\mathbf{A}$ to a scaled version of its corresponding left singular vector; the magnitude of scaling is its singular value.
 
-Both the SVD and the EVD describe a matrix in terms of some special vectors and a small number of scalars. {ref}`tab-evdsvd` summarizes the key differences. The SVD sacrifices having the same basis in both source and image spaces—after all, they may not even have the same dimension—but as a result gains orthogonality in both spaces.
+Both the SVD and the EVD describe a matrix in terms of some special vectors and a small number of scalars. {numref}`tab-evdsvd` summarizes the key differences. The SVD sacrifices having the same basis in both source and image spaces—after all, they may not even have the same dimension—but as a result gains orthogonality in both spaces.
 
 :::{list-table} Comparison of the EVD and SVD
 :header-rows: 1
@@ -73,8 +73,8 @@ The SVD is intimately connected to the 2-norm, as the following theorem describe
 ```{index} norm; matrix
 ```
 
-(theorem-svdprops)=
 ::::{prf:theorem} SVD properties
+:label: theorem-svdprops
 Let $\mathbf{A}\in\mathbb{C}^{m\times n}$ have an SVD $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^*$ in
 which {eq}`svdorder` holds. Then:
 
@@ -97,8 +97,7 @@ which {eq}`svdorder` holds. Then:
 where a division by zero implies that $\mathbf{A}$ does not have full rank.
 ::::
 
-
-The conclusion {eq}`svdnorm` is can be proved by straightforward vector calculus (see {ref}`prob-svd-svdnormproof`). In the square case $m=n$, $\mathbf{A}$ having full rank is identical to being nonsingular. The SVD is the usual means for computing the 2-norm and condition number of a matrix. 
+The conclusion {eq}`svdnorm` is can be proved by straightforward vector calculus. In the square case $m=n$, $\mathbf{A}$ having full rank is identical to being nonsingular. The SVD is the usual means for computing the 2-norm and condition number of a matrix. 
 
 :::{prf:example} Julia demo
 :class: demo
@@ -113,8 +112,7 @@ The conclusion {eq}`svdnorm` is can be proved by straightforward vector calculus
 ```{index} matrix; hermitian
 ```
 
-Let $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^*$ be $m\times n$, and consider the square 
- hermitian matrix $\mathbf{B}=\mathbf{A}^*\mathbf{A}$:
+Let $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^*$ be $m\times n$, and consider the square hermitian matrix $\mathbf{B}=\mathbf{A}^*\mathbf{A}$:
 
 ```{math}
 \mathbf{B} = (\mathbf{V}\mathbf{S}^*\mathbf{U}^*) (\mathbf{U}\mathbf{S}\mathbf{V}^*) = \mathbf{V}\mathbf{S}^*\mathbf{S}\mathbf{V}^* = \mathbf{V}(\mathbf{S}^T\mathbf{S})\mathbf{V}^{-1}.
@@ -162,7 +160,7 @@ If $\sigma$ is a singular value of $\mathbf{B}$, then $\sigma$ and $-\sigma$ are
 ```{index} singular value decomposition; thin form
 ```
 
-In [an earlier section](../leastsq/qr.md) we saw that a matrix has both a "full" and a "thin" form of the QR factorization. A similar situation holds with the SVD. Suppose $\mathbf{A}$ is $m\times n$ with $m > n$ and let $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^*$ be an SVD. The last $m-n$ rows of $\mathbf{S}$ are all zero due to the fact that $\mathbf{S}$ is diagonal. Hence
+In [an earlier section](../leastsq/qr.md) we saw that a matrix has both *full* and *thin* forms of the QR factorization. A similar situation holds with the SVD. Suppose $\mathbf{A}$ is $m\times n$ with $m > n$ and let $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^*$ be an SVD. The last $m-n$ rows of $\mathbf{S}$ are all zero due to the fact that $\mathbf{S}$ is diagonal. Hence
 
 \begin{align*}
   \mathbf{U} \mathbf{S} & =
@@ -264,7 +262,7 @@ in which $\hat{\mathbf{U}}$ is $m\times n$ and $\hat{\mathbf{S}}$ is $n\times n$
 
 5. ✍ Prove that for a square real matrix $\mathbf{A}$, $\| \mathbf{A} \|_2=\| \mathbf{A}^T \|_2$.
 
-6. ✍ Prove {eq}`svdcond` of the {prf:ref}`theorem-svdprops`, given that {eq}`svdnorm` is true. (Hint: If the SVD of $\mathbf{A}$ is known, what is the SVD of $\mathbf{A}^{+}$?)
+6. ✍ Prove {eq}`svdcond` of {prf:ref}`theorem-svdprops`, given that {eq}`svdnorm` is true. (Hint: If the SVD of $\mathbf{A}$ is known, what is the SVD of $\mathbf{A}^{+}$?)
 
 7. ✍ Suppose $\mathbf{A}\in\mathbb{R}^{m\times n}$, for $m>n$, has the thin SVD $\mathbf{A}=\hat{\mathbf{U}}\hat{\mathbf{S}}\mathbf{V}^T$. Show that the orthogonal projector $\mathbf{A}\mathbf{A}^{+}$ is equal to $\hat{\mathbf{U}}\hat{\mathbf{U}}^T$. (You must be careful with matrix sizes in this derivation.)
 

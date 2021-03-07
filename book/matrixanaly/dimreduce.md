@@ -10,7 +10,7 @@ The SVD has another important property that proves very useful in a variety of a
 ::::{math}
 :label: svdsum
 \begin{split}
-  \mathbf{A} = \widehat{\mathbf{U}}\widehat{\mathbf{S}}\mathbf{V}^T &=
+  \mathbf{A} = \hat{\mathbf{U}}\hat{\mathbf{S}}\mathbf{V}^T &=
   \begin{bmatrix}
     \mathbf{u}_1 & \mathbf{u}_2 & \cdots & \mathbf{u}_n
   \end{bmatrix}
@@ -46,8 +46,8 @@ where $\mathbf{U}_k$ and $\mathbf{V}_k$ are the first $k$ columns of $\mathbf{U}
 
 The rank of a sum of matrices is always less than or equal to the sum of the ranks, so $\mathbf{A}_k$ is a rank-$k$ approximation to $\mathbf{A}$. It turns out that $\mathbf{A}_k$ is the *best* rank-$k$ approximation of $\mathbf{A}$, as measured in the matrix 2-norm.
 
-(thm-best-rank-k)=
 ::::{prf:theorem}
+:label: theorem-best-rank-k
 Suppose $\mathbf{A}$ has rank $r$ and let $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^T$ be an SVD. Let $\mathbf{A}_k$ be as in {eq}`svdlowrank` for $1\le k < r$. Then
 
 1. $\| \mathbf{A} - \mathbf{A}_k \|_2 = \sigma_{k+1}, \quad k=1,\ldots,r-1$.
@@ -84,10 +84,10 @@ One useful way to quantify the decay in the singular values is to compute
 
 ```{math}
 :label: sing-val-decay
-\tau_k = \frac{\sum_{i=1}^k \sigma_i^2}{\sum_{i=1}^r \sigma_i^2}, \quad k=1,\ldots,r.
+s_k = \sum_{i=1}^k \sigma_i^2, \quad \tau_k = \frac{s_k}{s_r}, \quad k=1,\ldots,r.
 ```
 
-Clearly $0\le \tau_k \le 1$ and $\tau_k$ is non-decreasing as a function of $k$. We can think of $\tau_k$ as the fraction of "energy" contained in the singular values up to and including the $k$th.[^expvar] 
+Clearly $0\le \tau_k \le 1$ and $\tau_k$ is non-decreasing as a function of $k$. We can think of $\tau_k$ as the fraction of energy (or in statistical terms, variance) contained in the singular values up to and including the $k$th.[^expvar] 
 
 [^expvar]: In statistics this quantity may be interpreted as the fraction of explained variance.
 
@@ -146,11 +146,11 @@ Not all data sets can be reduced effectively to a small number of dimensions, bu
   
     as measured in the 2-norm, where $b>0$.
 
-::::{only} solutions
-The SVD is $\mathbf{U}[[1+b,0],[0,|1-b|]]\mathbf{U}^T$, where $\mathbf{U}=\tfrac{1}{\sqrt{2}}[[-1,1],[1,1]]$. So the rank-1 approximation is $(1+b)/2[[1,1],[1,1]]$.
-::::
+    ::::{only} solutions
+    The SVD is $\mathbf{U}[[1+b,0],[0,|1-b|]]\mathbf{U}^T$, where $\mathbf{U}=\tfrac{1}{\sqrt{2}}[[-1,1],[1,1]]$. So the rank-1 approximation is $(1+b)/2[[1,1],[1,1]]$.
+    ::::
 
-5. ⌨ Following [the demo above](demos/dimreduce-hello) as a guide, load the "mandrill" test image and convert it to a matrix of floating-point pixel grayscale intensities. Using the SVD, display as images the best approximations of rank 5, 10, 15, and 20. 
+5. ⌨ Following {prf:ref}`demos-dimreduce-hello` as a guide, load the "mandrill" test image and convert it to a matrix of floating-point pixel grayscale intensities. Using the SVD, display as images the best approximations of rank 5, 10, 15, and 20. 
 
     ::::{only} solutions
     X = imread('peppers.png');

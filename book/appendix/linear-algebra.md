@@ -255,15 +255,15 @@ Given a square, $n\times n$ matrix $\mathbf{A}$ and  $n$-vectors $\mathbf{x}$ an
 
 We say that $\mathbf{A}$ is {term}`invertible` or **nonsingular** if there exists another $n\times n$ matrix $\mathbf{A}^{-1}$, the {term}`inverse` of $\mathbf{A}$, such that $\mathbf{A}\mathbf{A}^{-1}=\mathbf{A}^{-1}\mathbf{A}=\mathbf{I}$, the identity matrix. Otherwise, $\mathbf{A}$ is **singular**. If a matrix is invertible, its inverse is unique. This and the following facts are usually proved in an elementary text on linear algebra.
 
-(theorem-singularity)=
 
-````{prf:theorem} (Linear algebra equivalence)
-  The following statements are equivalent:
+````{prf:theorem} Linear algebra equivalence
+:label: theorem-singularity
+The following statements are equivalent:
 
-  1. $\mathbf{A}$ is nonsingular.
-  2. $(\mathbf{A}^{-1})^{-1} = \mathbf{A}$.
-  3. $\mathbf{A}\mathbf{x}=\boldsymbol{0}$ implies that $\mathbf{x}=\boldsymbol{0}$.
-  4. $\mathbf{A}\mathbf{x}=\mathbf{b}$ has a unique solution, $\mathbf{x}=\mathbf{A}^{-1}\mathbf{b}$, for any $n$-vector $\mathbf{b}$.
+1. $\mathbf{A}$ is nonsingular.
+2. $(\mathbf{A}^{-1})^{-1} = \mathbf{A}$.
+3. $\mathbf{A}\mathbf{x}=\boldsymbol{0}$ implies that $\mathbf{x}=\boldsymbol{0}$.
+4. $\mathbf{A}\mathbf{x}=\mathbf{b}$ has a unique solution, $\mathbf{x}=\mathbf{A}^{-1}\mathbf{b}$, for any $n$-vector $\mathbf{b}$.
 ````
 
 ## Exercises

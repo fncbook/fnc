@@ -118,10 +118,9 @@ The QR factorization plays a role in linear least squares analogous to the role 
 
 Now we come to another important way to factor a matrix, the {term}`QR factorization`. As we will show below, the QR factorization plays a role in linear least squares analogous to the role of LU factorization in linear systems.
 
-(theorem-QR)=
-
 ````{prf:theorem}
-  Every real $m\times n$ matrix $\mathbf{A}$ ($m\ge n$) can be written as $\mathbf{A}=\mathbf{Q}\mathbf{R}$, where $\mathbf{Q}$ is an $m\times m$ orthogonal matrix and $\mathbf{R}$ is an $m\times n$ upper triangular matrix.
+:label: theorem-QR
+Every real $m\times n$ matrix $\mathbf{A}$ ($m\ge n$) can be written as $\mathbf{A}=\mathbf{Q}\mathbf{R}$, where $\mathbf{Q}$ is an $m\times m$ orthogonal matrix and $\mathbf{R}$ is an $m\times n$ upper triangular matrix.
 ````
 
 In most introductory books on linear algebra, the QR factorization is derived through a process known as **Gram--Schmidt orthogonalization**. However, while it is an important tool for theoretical work, the Gram--Schmidt process is numerically unstable. We will consider an alternative construction in the next section.

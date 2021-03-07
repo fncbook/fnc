@@ -11,7 +11,7 @@ Given that matrix-vector multiplication is fast for sparse matrices, let's see w
 {doc}`demos/power-one`
 ::::
 
-The [results of the demo](demos/power-one) lead to some speculation. If it holds exactly, the equation $\mathbf{A}\mathbf{x} = \mathbf{x}$ is a special case of the eigenvalue condition $\mathbf{A}\mathbf{x} = \lambda \mathbf{x}$. It appears, then, that as $k\to\infty$, $\mathbf{A}^k \mathbf{x}$ converges to an eigenvector of $\mathbf{A}$ for the eigenvalue $\lambda=1$.
+The results of {prf:ref}`demos-power-one` lead to some speculation. If it holds exactly, the equation $\mathbf{A}\mathbf{x} = \mathbf{x}$ is a special case of the eigenvalue condition $\mathbf{A}\mathbf{x} = \lambda \mathbf{x}$. It appears, then, that as $k\to\infty$, $\mathbf{A}^k \mathbf{x}$ converges to an eigenvector of $\mathbf{A}$ for the eigenvalue $\lambda=1$.
 
 ## Dominant eigenvalue
 
@@ -24,7 +24,7 @@ Analysis of matrix powers is fairly straightforward, if the matrix is diagonaliz
 |\lambda_1| > |\lambda_2| \ge |\lambda_3| \ge \cdots \ge |\lambda_n|.
 :::
 
-Given {eq}`evorder` we say that $\lambda_1$ is the {term}`dominant eigenvalue`. This was the case with $\lambda_1=1$ for $\mathbf{A}$ in [the demo above](demos/power-one).
+Given {eq}`evorder` we say that $\lambda_1$ is the {term}`dominant eigenvalue`. This was the case with $\lambda_1=1$ for $\mathbf{A}$ in {prf:ref}`demos-power-one`.
 
 Now let the initially chosen $\mathbf{x}$ be expressed as a linear combination in the eigenvector basis:
 
@@ -137,7 +137,7 @@ end
 ```
 ````
 
-The {term}`findmax` function used above returns both the largest element of a vector and its location in the vector. Observe that the only use of $\mathbf{A}$ is to find the matrix-vector product $\mathbf{A}\mathbf{x}$, which makes exploitation of the sparsity of $\mathbf{A}$ automatic.
+The `findmax` function used above returns both the largest element of a vector and its location in the vector. Observe that the only use of $\mathbf{A}$ is to find the matrix-vector product $\mathbf{A}\mathbf{x}$, which makes exploitation of the sparsity of $\mathbf{A}$ automatic.
 
 ## Convergence
 

@@ -97,7 +97,7 @@ If the derivative $\frac{\partial f}{\partial u}$ exists and $\left|\frac{\parti
 ```{index} condition number; of initial-value problems
 ```
 
-In a numerical context we have to be concerned about the conditioning of the IVP. There are two key items in {eq}`IVP` that we might consider to be the data of the initial-value ODE problem: the function $f(t,u)$, and the initial value $u_0$. It's easier to discuss perturbations to numbers than to functions, so we will focus on the effect of $u_0$ on the solution, using the following theorem that we give without proof. Happily, its conditions are identical to those in the {prf:ref}`theorem-existunique`.
+In a numerical context we have to be concerned about the conditioning of the IVP. There are two key items in {eq}`IVP` that we might consider to be the data of the initial-value ODE problem: the function $f(t,u)$, and the initial value $u_0$. It's easier to discuss perturbations to numbers than to functions, so we will focus on the effect of $u_0$ on the solution, using the following theorem that we give without proof. Happily, its conditions are identical to those in {prf:ref}`theorem-existunique`.
 
 ````{prf:theorem} IC dependence
 :label: theorem-depIC
@@ -117,7 +117,7 @@ for all sufficiently small $|\delta|$.
 {doc}`demos/basics-cond`
 ```
 
-Numerical solutions of IVPs have errors, and those errors can be seen as perturbations to the solution. The {prf:ref}`theorem-depIC`) gives an upper bound of $e^{L(b-a)}$ on the infinity norm (i.e., pointwise) absolute condition number of the solution with respect to perturbations at an initial time. However, the upper bound may be a terrible overestimate of the actual sensitivity for a particular problem.
+Numerical solutions of IVPs have errors, and those errors can be seen as perturbations to the solution. {prf:ref}`theorem-depIC`) gives an upper bound of $e^{L(b-a)}$ on the infinity norm (i.e., pointwise) absolute condition number of the solution with respect to perturbations at an initial time. However, the upper bound may be a terrible overestimate of the actual sensitivity for a particular problem.
 
 In general, solutions can diverge from, converge to, or oscillate around the original trajectory in response to perturbations. We won't fully consider these behaviors and their implications for numerical methods again until a later chapter.
 

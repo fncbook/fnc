@@ -20,7 +20,7 @@ Most graphs with real applications have many fewer edges than the maximum possib
 {doc}`demos/structure-sparse`
 ::::
 
-Arithmetic operations such as "+", "-", "*", and \verb?^? respect and exploit sparsity, if the matrix operands are sparse. However, matrix operations may substantially decrease the amount of sparsity, a phenomenon known as {term}`fill-in`.
+Arithmetic operations such as `+`, `-`, `*`, and `^` respect and exploit sparsity, if the matrix operands are sparse. However, matrix operations may substantially decrease the amount of sparsity, a phenomenon known as {term}`fill-in`.
 
 In the case of an adjacency matrix $\mathbf{A}$, for example, the $(i,j)$ entry of matrix $\mathbf{A}^k$ for positive integer $k$ is the number of paths of length $k$ from node $i$ to node $j$.
 

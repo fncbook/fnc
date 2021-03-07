@@ -184,7 +184,7 @@ The Julia command `qr` works similarly to, but more efficiently than, {numref}`F
     \end{bmatrix}.
     ```
 
-2. ✍ Prove the unfinished items in the {prf:ref}`theorem-hhreflect`, namely that a Householder reflector $\mathbf{P}$ is symmetric and orthogonal.
+2. ✍ Prove the unfinished items in {prf:ref}`theorem-hhreflect`, namely that a Householder reflector $\mathbf{P}$ is symmetric and orthogonal.
 
     % Prove that the Householder reflector $P$ is symmetric and orthogonal.  First,
     % we need to show that $P^T=P$, using

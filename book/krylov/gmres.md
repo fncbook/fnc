@@ -54,8 +54,7 @@ The algorithm resulting from this discussion is known as {term}`GMRES`, for Gene
 {doc}`demos/gmres-intro`
 ::::
 
-
-Compare the graph in [this demo](demos/gmres-intro.ipynb)  to the one in [the earlier unstable version](demos/subspace-unstable.ipynb). Both start with the same linear convergence, but only the version using Arnoldi avoids the instability created by the poor Krylov basis.
+Compare the graph in {prf:ref}`demos-gmres-intro`  to the one in {prf:ref}`demos-subspace-unstable`. Both start with the same linear convergence, but only the version using Arnoldi avoids the instability created by the poor Krylov basis.
 
 A basic implementation of GMRES is given below.
 
@@ -108,12 +107,12 @@ end
 
 Thanks to {prf:ref}`theorem-krylovmult`, minimization of $\|\mathbf{b}-\mathbf{A}\mathbf{x}\|$ over $\mathcal{K}_{m+1}$ includes minimization over $\mathcal{K}_m$. Hence the norm of the residual $\mathbf{r}_m = \mathbf{b} - \mathbf{A}\mathbf{x}_m$ (being the minimized quantity) cannot increase as the iteration unfolds.
 
-```{index} convergence rate!linear
+```{index} convergence rate; linear
 ```
 
-Unfortunately, making other conclusive statements about the convergence of GMRES is neither easy nor simple. [Our earlier demo](demos/gmres-intro.ipynb) shows the cleanest behavior: essentially linear convergence down to the range of machine epsilon. But it is possible for the convergence to go through phases of sublinear and superlinear convergence as well. There is a strong dependence on the spectrum of the matrix, a fact we state with more precision and detail in the next section.
+Unfortunately, making other conclusive statements about the convergence of GMRES is neither easy nor simple. {prf:ref}`demos-gmres-intro` shows the cleanest behavior: essentially linear convergence down to the range of machine epsilon. But it is possible for the convergence to go through phases of sublinear and superlinear convergence as well. There is a strong dependence on the spectrum of the matrix, a fact we state with more precision and detail in the next section.
 
-```{index} GMRES!restarting
+```{index} GMRES; restarting
 ```
 
 One of the practical challenges in GMRES is that as the dimension of the Krylov subspace grows, the number of new entries to be found in $\mathbf{H}_m$, and the total number of columns in $\mathbf{Q}$, also grow. Thus both the work and the storage requirements are quadratic in $m$, which can become intolerable in some applications. For this reason, GMRES is often used with {term}`restarting`.
@@ -132,7 +131,7 @@ Restarting guarantees a fixed upper bound on the per-iteration cost of GMRES. Ho
 
 If the restart takes place before GMRES has entered a rapidly converging phase, the restarted GMRES can converge a great deal more slowly. However, the later iterations for the restarted versions should be much faster than those of pure GMRES, making an apples-to-apples comparison difficult.
 
-<!-- There are other ways to avoid the growth in computational effort as the GMRES/Arnoldi iteration proceeds. Three of the more popular variations are abbreviated CGS, BiCGSTAB, and QMR, and these are also implemented in MATLAB. We do not describe them in this book. -->
+There are other ways to avoid the growth in computational effort as the GMRES/Arnoldi iteration proceeds. Three of the more popular variations are abbreviated CGS, BiCGSTAB, and QMR. We do not describe them in this book.
 
 <!-- 
 

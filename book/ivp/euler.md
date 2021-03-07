@@ -300,12 +300,12 @@ The theorem justifies a general definition of {term}`order of accuracy` as the l
     ````
 
     (problem-expdominate)=
-6. ✍ Prove the fact, used in the proof of the {prf:ref}`theorem-onestepGTE`, that $1+x\le e^x$ for all $x\ge 0$.
+6. ✍ Prove the fact, used in the proof of {prf:ref}`theorem-onestepGTE`, that $1+x\le e^x$ for all $x\ge 0$.
 
     ````{only} solutions
     ````
 
-7. ✍ Suppose that the error in making a step is also subject to roundoff error $\epsilon_{i+1}$, so that $\tau_{i+1}(h) = Ch^p+\epsilon_{i+1} h^{-1}$; assume that $|\epsilon_{i+1}| \le \epsilon$ is the largest roundoff error in the computation and that the initial condition is known exactly. Generalize the {prf:ref}`theorem-onestepGTE` for this case.
+7. ✍ Suppose that the error in making a step is also subject to roundoff error $\epsilon_{i+1}$, so that $\tau_{i+1}(h) = Ch^p+\epsilon_{i+1} h^{-1}$; assume that $|\epsilon_{i+1}| \le \epsilon$ is the largest roundoff error in the computation and that the initial condition is known exactly. Generalize {prf:ref}`theorem-onestepGTE` for this case.
 
     ````{only} solutions
     ````
