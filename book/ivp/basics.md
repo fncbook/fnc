@@ -55,17 +55,21 @@ An ODE may have higher derivatives of the unknown solution present. For example,
 
 ## Numerical solutions
 
+The `DifferentialEquations` package has numerous methods for solving ordinary differential equations, including initial-value problems. 
+
 ```{prf:example} Julia demo
 :class: demo
 :label: demos-basics-first
 {doc}`demos/basics-first`
+```
 
+Underlying each numerical solution is a set of point values of the solution. The package includes interpolation procedures that allow you to evaluate the solution at any time.
+
+```{prf:example} Julia demo
+:class: demo
 :label: demos-basics-usage
 {doc}`demos/basics-usage`
 ```
-
-The `DifferentialEquations` package has numerous methods for solving ordinary differential equations, including initial-value problems. Underlying each numerical solution is a set of point values of the solution. The package includes interpolation procedures that allow you to evaluate the solution at any time, however.
-
 ## Existence and uniqueness
 
 ```{prf:example} Julia demo
@@ -74,7 +78,7 @@ The `DifferentialEquations` package has numerous methods for solving ordinary di
 {doc}`demos/basics-sing`
 ```
 
-As demonstrated in {doc}`demos/basics-sing`, there are simple IVPs that do not have solutions at all possible times. Furthermore, we can easily find an IVP that has more than one solution.
+As demonstrated in {prf:ref}`demos-basics-sing`, there are simple IVPs that do not have solutions at all possible times. Furthermore, we can easily find an IVP that has more than one solution.
 
 ````{prf:example}
   The functions $u(t)=u^2$ and $u(t)\equiv 0$ both satisfy the differential equation $u'=2\sqrt{u}$ and the initial condition $u(0)=0$. Thus the corresponding IVP has more than one solution.
@@ -82,10 +86,10 @@ As demonstrated in {doc}`demos/basics-sing`, there are simple IVPs that do not h
 
 The following standard theorem gives us a condition that is easy to check and guarantees that a unique solution exists. But it is not the most general possible such condition, so there are problems with a unique solution that it cannot detect. We state the theorem without proof.
 
-(theorem-existunique)=
+````{prf:theorem} Existence and uniqueness
+:label: theorem-existunique
 
-````{prf:theorem} (Existence and uniqueness)
- If the derivative $\frac{\partial f}{\partial u}$ exists and $\left|\frac{\partial f}{\partial u}\right|$ is bounded by a constant $L$ for all $a\le t \le b$ and all $u$, then the initial-value problem {eq}`IVP` has a unique solution for $t\in [a,b]$.
+If the derivative $\frac{\partial f}{\partial u}$ exists and $\left|\frac{\partial f}{\partial u}\right|$ is bounded by a constant $L$ for all $a\le t \le b$ and all $u$, then the initial-value problem {eq}`IVP` has a unique solution for $t\in [a,b]$.
 ````
 
 ## Conditioning of first-order IVPs
@@ -93,11 +97,10 @@ The following standard theorem gives us a condition that is easy to check and gu
 ```{index} condition number; of initial-value problems
 ```
 
-In a numerical context we have to be concerned about the conditioning of the IVP. There are two key items in {eq}`IVP` that we might consider to be the data of the initial-value ODE problem: the function $f(t,u)$, and the initial value $u_0$. It's easier to discuss perturbations to numbers than to functions, so we will focus on the effect of $u_0$ on the solution, using the following theorem that we give without proof. Happily, its conditions are identical to those in the [existence--uniqueness theorem](theorem-existunique).
-
-(theorem-depIC)=
+In a numerical context we have to be concerned about the conditioning of the IVP. There are two key items in {eq}`IVP` that we might consider to be the data of the initial-value ODE problem: the function $f(t,u)$, and the initial value $u_0$. It's easier to discuss perturbations to numbers than to functions, so we will focus on the effect of $u_0$ on the solution, using the following theorem that we give without proof. Happily, its conditions are identical to those in the {prf:ref}`theorem-existunique`.
 
 ````{prf:theorem} IC dependence
+:label: theorem-depIC
 If the derivative $\frac{\partial f}{\partial u}$ exists and $\left|\frac{\partial f}{\partial u}\right|$ is bounded by a constant $L$ for all $a\le t \le b$ and all $u$, then the solution $u(t;u_0+\delta)$ of $u'=f(t,u)$ with initial condition $u(0)=u_0+\delta$ satisfies
   
 ```{math}
@@ -114,13 +117,13 @@ for all sufficiently small $|\delta|$.
 {doc}`demos/basics-cond`
 ```
 
-Numerical solutions of IVPs have errors, and those errors can be seen as perturbations to the solution. The [theorem](theorem-depIC) gives an upper bound of $e^{L(b-a)}$ on the infinity norm (i.e., pointwise) absolute condition number of the solution with respect to perturbations at an initial time. However, the upper bound may be a terrible overestimate of the actual sensitivity for a particular problem.
+Numerical solutions of IVPs have errors, and those errors can be seen as perturbations to the solution. The {prf:ref}`theorem-depIC`) gives an upper bound of $e^{L(b-a)}$ on the infinity norm (i.e., pointwise) absolute condition number of the solution with respect to perturbations at an initial time. However, the upper bound may be a terrible overestimate of the actual sensitivity for a particular problem.
 
 In general, solutions can diverge from, converge to, or oscillate around the original trajectory in response to perturbations. We won't fully consider these behaviors and their implications for numerical methods again until a later chapter.
 
 ## Exercises
 
-1. ✍ For each IVP, determine whether the problem satisfies the conditions of [the IC dependence theorem](theorem-depIC). If so, determine the smallest possible value for $L$.
+1. ✍ For each IVP, determine whether the problem satisfies the conditions of {prf:ref}`theorem-depIC`). If so, determine the smallest possible value for $L$.
 
     **(a)** $f(t,u) = 3 u,\; 0 \le t \le 1$%,\  -\infty < u < \infty.$
 
@@ -133,7 +136,7 @@ In general, solutions can diverge from, converge to, or oscillate around the ori
     ````{only} solutions
     ````
 
-2. ⌨ Solve each IVP in the preceding problem with `DifferentialEquations.solve`, and make a plot of the solution.
+2. ⌨ Solve each IVP in the preceding problem with `solve`, and make a plot of the solution.
 
     ````{only} solutions
     ````
@@ -149,7 +152,7 @@ In general, solutions can diverge from, converge to, or oscillate around the ori
 
 4. ✍ Consider the IVP $u'=u^2$, $u(0)=\alpha$.
 
-    **(a)** Does [the existence--uniqueness theorem](theorem-existunique) apply to this problem?
+    **(a)** Does {prf:ref}`theorem-existunique` apply to this problem?
 
     **(b)** Show that $u(t) = \alpha/(1-\alpha t)$ is a solution of the IVP.
 
@@ -231,7 +234,7 @@ In general, solutions can diverge from, converge to, or oscillate around the ori
    \frac{dv}{dt} = -g + \frac{k}{m}v^2,  \qquad v(0)=0,
    $$
 
-   where $g=9.8 \text{ m/sec}^2$ is gravitational acceleration, $m$ is the mass of the skydiver with parachute, and $k$ quantifies the effect of air resistance. At the US Air Force Academy, a training jump starts at about 1200 m and has $k=0.4875$ for $t<13$ and $k=29.16$ or $t\ge 13$. (This is an oversimplification; see~{cite}`meadeDifferentialEquations1999`.) Find the time at which the skydiver reaches the ground. Keep in mind that the distance fallen up to time $t$ is  $\displaystyle\int_0^t v(s)\, ds$, and use the output form of `solve` as shown in {doc}`demos/basics-usage`.
+   where $g=9.8 \text{ m/sec}^2$ is gravitational acceleration, $m$ is the mass of the skydiver with parachute, and $k$ quantifies the effect of air resistance. At the US Air Force Academy, a training jump starts at about 1200 m and has $k=0.4875$ for $t<13$ and $k=29.16$ or $t\ge 13$. (This is an oversimplification; see~{cite}`meadeDifferentialEquations1999`.) Find the time at which the skydiver reaches the ground. Keep in mind that the distance fallen up to time $t$ is  $\displaystyle\int_0^t v(s)\, ds$, and use the output form of `solve` as shown in {prf:ref}`demos-basics-usage`.
 
     ````{only} solutions
     ````

@@ -1,2 +1,3 @@
 [deps]
 FundamentalsNumericalComputation = "e48b7b93-d2a8-4750-aba7-f743ccd5256c"
+ImageMagick = "6218d12a-5da1-5696-b52f-db25d2ecc6d1"

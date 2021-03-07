@@ -47,7 +47,7 @@ We could also view the left-hand side as a forward-difference approximation to $
 
 Together with the starting value $u_0$ from the initial condition, this formula defines an iteration known as {term}`Euler's method`.  It is an explicit method, meaning that the answer at the new time level is explicitly given in terms of the older time level(s).
 
-A basic implementation of Euler's method is shown in {ref}`function-euler`. It expects the problem to be specified in the form of a function $f$ of two arguments, an interval defining the time domain, and an initial condition. It also requires the number of intervals $n$ defined by the nodes (or equivalently, the number of steps in the iteration). The output of {ref}`function-euler` is a vector of the nodes and a vector of approximate solution values at those nodes.
+A basic implementation of Euler's method is shown in {numref}`Function {number}<function-euler>`. It expects the problem to be specified in the form of a function $f$ of two arguments, an interval defining the time domain, and an initial condition. It also requires the number of intervals $n$ defined by the nodes (or equivalently, the number of steps in the iteration). The output of {numref}`Function {number}<function-euler>` is a vector of the nodes and a vector of approximate solution values at those nodes.
 
 (function-euler)=
 
@@ -137,13 +137,12 @@ The local truncation error measures the effect of a single step of the numerical
 
 To reach the time $t=b$ from $t=a$ with step size $h$, we need to take $n=(b-a)/h$ steps. If we want to reach, say, $t=(a+b)/2$, then we would have to take $n/2$ steps, and so on. The point is that to reach any fixed time in the interval, we need to take $O(n)=O(h^{-1})$ steps. That is why we express the error made in one step as $h\tau_{i+1}(h)$, with that extra factor of $h$ taken out. By this reasoning, for instance, the LTE of Euler computed in {eq}`eulerLTE` implies a global error that is $O(h)$.
 
-However, global error is not just a simple sum of local errors. As each step causes a perturbation of the solution, we jump from one solution curve to a new one. The new curve will have its own trajectory, i.e., the error will propagate through the ODE (see {prf:ref}`demos-basics-cond`). This phenomenon is precisely the subject of {ref}`theorem-depIC`: jumping to a different solution curve incurs a condition number at time $t>t_i$ of $e^{L(t-t_i)}$, which is constant at fixed time as $h\to 0$.
+However, global error is not just a simple sum of local errors. As each step causes a perturbation of the solution, we jump from one solution curve to a new one. The new curve will have its own trajectory, i.e., the error will propagate through the ODE (see {prf:ref}`demos-basics-cond`). This phenomenon is precisely the subject of {pref:ref}`theorem-depIC`: jumping to a different solution curve incurs a condition number at time $t>t_i$ of $e^{L(t-t_i)}$, which is constant at fixed time as $h\to 0$.
 
 The following theorem puts our observations above on a rigorous footing.
 
-(theorem-onestepGTE)=
-
 ````{prf:theorem}
+:label: theorem-onestepGTE
 Suppose that the unit local truncation error of the one-step method {eq}`onestepODE` satisfies
   
 ```{math}
@@ -254,7 +253,7 @@ The theorem justifies a general definition of {term}`order of accuracy` as the l
     ````{only} solutions
     ````
 
-2. ⌨ For each IVP, solve the problem using {ref}`function-euler`. (i) Plot the solution for $n=320$. (ii) For $n=10\cdot2^k$, $k=2,3,\ldots,10$, compute the error at the final time and make a log--log convergence plot, including a reference line for first-order convergence.
+2. ⌨ For each IVP, solve the problem using {numref}`Function {number}<function-euler>`. (i) Plot the solution for $n=320$. (ii) For $n=10\cdot2^k$, $k=2,3,\ldots,10$, compute the error at the final time and make a log--log convergence plot, including a reference line for first-order convergence.
 
     **(a)** $u' = -2t u, \ 0 \le t \le 2, \ u(0) = 2;\  \hat{u}(t) = 2e^{-t^2}$
 
@@ -301,12 +300,12 @@ The theorem justifies a general definition of {term}`order of accuracy` as the l
     ````
 
     (problem-expdominate)=
-6. ✍ Prove the fact, used in the proof of the [convergence theorem](theorem-onestepGTE)`, that $1+x\le e^x$ for all $x\ge 0$.
+6. ✍ Prove the fact, used in the proof of the {prf:ref}`theorem-onestepGTE`, that $1+x\le e^x$ for all $x\ge 0$.
 
     ````{only} solutions
     ````
 
-7. ✍ Suppose that the error in making a step is also subject to roundoff error $\epsilon_{i+1}$, so that $\tau_{i+1}(h) = Ch^p+\epsilon_{i+1} h^{-1}$; assume that $|\epsilon_{i+1}| \le \epsilon$ is the largest roundoff error in the computation and that the initial condition is known exactly. Generalize the [convergence theorem](theorem-onestepGTE) for this case.
+7. ✍ Suppose that the error in making a step is also subject to roundoff error $\epsilon_{i+1}$, so that $\tau_{i+1}(h) = Ch^p+\epsilon_{i+1} h^{-1}$; assume that $|\epsilon_{i+1}| \le \epsilon$ is the largest roundoff error in the computation and that the initial condition is known exactly. Generalize the {prf:ref}`theorem-onestepGTE` for this case.
 
     ````{only} solutions
     ````

@@ -136,7 +136,7 @@ Now suppose that for some $r\in S$, $g(r)=r$. By the definition of the fixed poi
 which shows that $x_k\to r$ as $k\to \infty$. To show that $r$ must exist and complete the proof, one needs to apply the Cauchy theory of convergence of a sequence, which is beyond the scope of this book.
 ````
 
-There are stronger and more general statements of [the contraction mapping theorem](theorem-contraction). For instance, it's possible to show that all initial $x_1$ that are sufficiently close to the fixed point will lead to convergence of the iteration. Algorithmically the main virtue of the fixed point iteration is that it is incredibly easy to apply. However, as we are about to discover, it's not the fastest option.
+There are stronger and more general statements of {prf:ref}`theorem-contraction`. For instance, it's possible to show that all initial $x_1$ that are sufficiently close to the fixed point will lead to convergence of the iteration. Algorithmically the main virtue of the fixed point iteration is that it is incredibly easy to apply. However, as we are about to discover, it's not the fastest option.
 
 ## Exercises
 

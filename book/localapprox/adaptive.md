@@ -92,7 +92,7 @@ Only the second and fourth nodes are new. The same is true on the subinterval $[
 {doc}`demos/adapt-usage`
 ````
 
-{ref}`function-intadapt` shows how to exploit this structure. The nested function `do_integral` does all of the work. It expects to receive the three nodes and integrand values that it shares with the level above. It adds the two new nodes and uses the set of all five to compute three trapezoid estimates with $n=1$, $n=2$, and $n=4$, using the updating formula {eq}`nc-doubling` twice. It goes on to find the two Simpson approximations and to estimate the error in the better one by {eq}`adapterr`.
+{numref}`Function {number}<function-intadapt>` shows how to exploit this structure. The nested function `do_integral` does all of the work. It expects to receive the three nodes and integrand values that it shares with the level above. It adds the two new nodes and uses the set of all five to compute three trapezoid estimates with $n=1$, $n=2$, and $n=4$, using the updating formula {eq}`nc-doubling` twice. It goes on to find the two Simpson approximations and to estimate the error in the better one by {eq}`adapterr`.
 
 If the error estimate passes the test {eq}`absreltolerance`, the better Simpson value is returned as the integral over the given interval. Otherwise, the interval is bisected, the two pieces computed using recursive calls, and those results are added to give the complete integral.
 
@@ -154,7 +154,7 @@ Although adaptivity and the error estimation that goes with it can be very power
 (problem-adaptquadtests)=
 % must be kept as #1
 
-1. ⌨ For each integral below, use {ref}`function-intadapt` with error tolerance $10^{-2}$, $10^{-3}$, \ldots, $10^{-12}$. Make a table of errors and the number of integrand evaluation nodes used, and use a convergence plot as in {prf:ref}`demos-adapt-usage` to compare to fourth-order accuracy. (These integrals were taken from {cite}`baileyComparisonThree2005`.)
+1. ⌨ For each integral below, use {numref}`Function {number}<function-intadapt>` with error tolerance $10^{-2}$, $10^{-3}$, \ldots, $10^{-12}$. Make a table of errors and the number of integrand evaluation nodes used, and use a convergence plot as in {prf:ref}`demos-adapt-usage` to compare to fourth-order accuracy. (These integrals were taken from {cite}`baileyComparisonThree2005`.)
 
     **(a)** $\displaystyle \int_0^1 x\log(1+x)\, dx = \frac{1}{4}$
 
@@ -197,13 +197,13 @@ Although adaptivity and the error estimation that goes with it can be very power
     loglog(num_,abs(err_),'o-')
     ````
 
-2. ⌨ For each integral below: (i) use `quadgk` to find the value to at least 12 digits; (ii) use {ref}`function-intadapt` to evaluate the integral to a tolerance of $10^{-8}$; (iii) compute the absolute error and the number of nodes used; (iv) use the $O(h^2)$ term in the Euler--Maclaurin formula {eq}`eulermaclaurin` to estimate how many nodes are required by the fixed-stepsize trapezoidal formula to reach an absolute error of $10^{-8}$.
+2. ⌨ For each integral below: (i) use `quadgk` to find the value to at least 12 digits; (ii) use {numref}`Function {number}<function-intadapt>` to evaluate the integral to a tolerance of $10^{-8}$; (iii) compute the absolute error and the number of nodes used; (iv) use the $O(h^2)$ term in the Euler--Maclaurin formula {eq}`eulermaclaurin` to estimate how many nodes are required by the fixed-stepsize trapezoidal formula to reach an absolute error of $10^{-8}$.
 
-    **(a)** $\displaystyle \int_{0.1}^3 \operatorname{sech}(\sin(1/x))\d x$
+    **(a)** $\displaystyle \int_{0.1}^3 \operatorname{sech}(\sin(1/x))\, d x$
 
-    **(b)** $\displaystyle\int_{-0.9}^9 \ln((x+1)^3))\d x$
+    **(b)** $\rule[2em]{0pt}{0pt} \displaystyle\int_{-0.9}^9 \ln((x+1)^3))\, d x$
 
-    **(c)** $\displaystyle\int_{-\pi}^\pi \cos(x^3)\d x$
+    **(c)** $\rule[2em]{0pt}{0pt} \displaystyle\int_{-\pi}^\pi \cos(x^3)\, d x$
   
     ````{only} solutions
     format long
@@ -253,12 +253,12 @@ Although adaptivity and the error estimation that goes with it can be very power
     n_trap = ceil( (pi+pi)/h_trap )
     ````
 
-3. ⌨ An integral such as $\displaystyle \int_0^1 x^{-\gamma}\, dx$ for $\gamma>0$, in which the integrand blows up at one or both ends, is known as an **improper** integral. It has a finite value if $\gamma<1$, despite the singularity. One way to deal with the problem of the infinite value for $f(t_0)$ is to replace the lower limit with a small number $\epsilon$. Using {ref}`function-intadapt` with a small tolerance, make a log--log plot of the error as a function of $\epsilon$ for $\epsilon=10^{-15},10^{-16},\ldots,10^{-45}$. (A more robust way to handle improper integrals is discussed in a later chapter.)
+3. ⌨ An integral such as $\displaystyle \int_0^1 x^{-\gamma}\, dx$ for $\gamma>0$, in which the integrand blows up at one or both ends, is known as an **improper** integral. It has a finite value if $\gamma<1$, despite the singularity. One way to deal with the problem of the infinite value for $f(t_0)$ is to replace the lower limit with a small number $\epsilon$. Using {numref}`Function {number}<function-intadapt>` with a small tolerance, make a log--log plot of the error as a function of $\epsilon$ for $\epsilon=10^{-15},10^{-16},\ldots,10^{-45}$. (A more robust way to handle improper integrals is discussed in a later chapter.)
 
     ````{only} solutions
     ````
 
-4. ⌨ A curious consequence of our logic in {ref}`function-intadapt` is that the algorithm uses what we believe to be a more accurate, sixth-order answer only for estimating error; the returned value is the supposedly less accurate $S_f(2n)$. The practice of returning the extrapolated $R_f(4n)$ instead is called {index}`local extrapolation` *local extrapolation*. Modify {ref}`function-intadapt` to use local extrapolation and repeat problem 1 above. Is the convergence more like 4th order or 6th order?
+4. ⌨ A curious consequence of our logic in {numref}`Function {number}<function-intadapt>` is that the algorithm uses what we believe to be a more accurate, sixth-order answer only for estimating error; the returned value is the supposedly less accurate $S_f(2n)$. The practice of returning the extrapolated $R_f(4n)$ instead is called {index}`local extrapolation` *local extrapolation*. Modify {numref}`Function {number}<function-intadapt>` to use local extrapolation and repeat problem 1 above. Is the convergence more like 4th order or 6th order?
 
     ````{only} solutions
     ````
@@ -269,7 +269,7 @@ Although adaptivity and the error estimation that goes with it can be very power
     \operatorname{Si}(x) = \int_0^x \frac{\sin z}{z}\, dz.
     ```
 
-    Use {ref}`function-intadapt` to plot Si over the interval $[1,10]$. Note: You will need to replace the lower bound of integration by $\macheps$.
+    Use {numref}`Function {number}<function-intadapt>` to plot Si over the interval $[1,10]$. Note: You will need to replace the lower bound of integration by $\macheps$.
 
     ````{only} solutions
     ````
@@ -282,8 +282,8 @@ Although adaptivity and the error estimation that goes with it can be very power
     \operatorname{erf}(x) = \frac{2}{\pi}\int_0^x e^{-s^2}\,ds.
     ```
 
-    **(a)** Define a function $g$ that approximates erf by applying {ref}`function-trapezoid` with $n=100$. Make a plot of the error $g(x)-\operatorname{erf}(x)$ at 300 points in the interval $[0,3]$.
+    **(a)** Define a function $g$ that approximates erf by applying {numref}`Function {number}<function-trapezoid>` with $n=100$. Make a plot of the error $g(x)-\operatorname{erf}(x)$ at 300 points in the interval $[0,3]$.
 
-    **(b)** Define another approximation $h$ that applies {ref}`function-intadapt` with error tolerance $10^{-7}$. Plot the error in $h$ as in part~(a). Why does it look so different from the previous case?
+    **(b)** Define another approximation $h$ that applies {numref}`Function {number}<function-intadapt>` with error tolerance $10^{-7}$. Plot the error in $h$ as in part~(a). Why does it look so different from the previous case?
 
     **(c)** Suppose you wished to find $x$ such that $\operatorname{erf}(x) = .95$ by using rootfinding on one of your two approximations. Which would be preferable?

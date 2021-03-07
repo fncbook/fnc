@@ -72,7 +72,11 @@ border: none;
 	margin: 0rem;
 	padding-top: 1ex;
 	padding-left: 1rem;
-  }
+}
+
+#exercises.section li {
+	padding-bottom: 1rem;
+}
 
 /* 
   .proof {

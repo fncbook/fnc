@@ -88,7 +88,7 @@ The second stage employs an Euler-style strategy over the whole time step, but u
 \end{split}
 ```
 
-Our implementation of IE2 is shown in {ref}`function-ie2`.
+Our implementation of IE2 is shown in {numref}`Function {number}<function-ie2>`.
 
 (function-ie2)=
 
@@ -213,7 +213,7 @@ This formula is often called "the" fourth-order RK method—even though there ar
 {doc}`demos/rk-converge`
 ```
 
-Our implementation is given in {ref}`function-rk4`.
+Our implementation is given in {numref}`Function {number}<function-rk4>`.
 
 (function-rk4)=
 
@@ -303,7 +303,7 @@ The error decreases *geometrically* as the number of stages grows algebraically,
     ````
 
     (problem-rk4converge)=
-7. ⌨ For each IVP, compute the solution using {ref}`function-rk4`. (i) Plot the solution for $n=300$. (ii) For $n=100,200,300,\ldots,1000$, compute the error at the final time and make a log--log convergence plot, including a reference line for 4th-order convergence.
+7. ⌨ For each IVP, compute the solution using {numref}`Function {number}<function-rk4>`. (i) Plot the solution for $n=300$. (ii) For $n=100,200,300,\ldots,1000$, compute the error at the final time and make a log--log convergence plot, including a reference line for 4th-order convergence.
 
     **(a)** $u''+ 9u = 9t, \: 0< t< 2\pi, \: u(0) = 1,\: u'(0) = 1; \: \hat{u}(t) = t+\cos (3t)$
 
@@ -330,12 +330,12 @@ The error decreases *geometrically* as the number of stages grows algebraically,
     ````{only} solutions
     ````
 
-8. ⌨ Do the [SIR model exercise](problem-SIR), but using {ref}`function-rk4` instead of `solve`.
+8. ⌨ Do the [SIR model exercise](problem-SIR), but using {numref}`Function {number}<function-rk4>` instead of `solve`.
 
     ````{only} solutions
     ````
 
-9. ⌨ Do the [FitzHugh--Nagumo model exercise](problem-fitznag), but using {ref}`function-rk4` instead of `solve`.
+9. ⌨ Do the [FitzHugh--Nagumo model exercise](problem-fitznag), but using {numref}`Function {number}<function-rk4>` instead of `solve`.
 
     ````{only} solutions
     ````
@@ -349,7 +349,7 @@ The error decreases *geometrically* as the number of stages grows algebraically,
     ````{only} solutions
     ````
 
-11. ⌨ Modify {ref}`function-rk4` to implement Heun's method. Test your function on $2 x^2 y'' +3x y' - y = 0$ over $[1,16]$, with $y(1) = 4$, $y'(1) = -1$. Use the exact solution $\hat{y}(x) = 2(x^{1/2} + x^{-1})$ to show that the error at $x=16$ converges at second order.
+11. ⌨ Modify {numref}`Function {number}<function-rk4>` to implement Heun's method. Test your function on $2 x^2 y'' +3x y' - y = 0$ over $[1,16]$, with $y(1) = 4$, $y'(1) = -1$. Use the exact solution $\hat{y}(x) = 2(x^{1/2} + x^{-1})$ to show that the error at $x=16$ converges at second order.
 
     ````{only} solutions
     f = @(x,u) [u(2); (u(1)-3*x*u(2))/(2*x^2) ];

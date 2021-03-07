@@ -298,4 +298,4 @@ The process demonstrated in {ref}`example-qriter` is known as the *Francis QR it
 
     **(d)** Repeat part (b) with $\mathbf{T}$ in place of $\mathbf{A}$.
     
-    **(e)** Use `eigen` to get eigenvector matrices of $\mathbf{A}$ and $\mathbf{T}$, and compute the condition numbers of them. Apply the [Bauer–Fike theorem](theorem-bauer-fike) to explain your plots.
+    **(e)** Use `eigen` to get eigenvector matrices of $\mathbf{A}$ and $\mathbf{T}$, and compute the condition numbers of them. Apply the {prf:ref}`theorem-bauer-fike` to explain your plots.

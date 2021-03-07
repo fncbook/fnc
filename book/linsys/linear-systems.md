@@ -245,63 +245,54 @@ The example in {prf:ref}`demos-systems-triangular` is our first clue that linear
 
 2. ✍ Solve the following triangular systems by hand.
 
-    **(a)** $\displaystyle
-      \begin{aligned}
+    **(a)** $\displaystyle \begin{aligned}
       -2x_1  &= -4 \\
         x_1  - x_2        &= 2 \\
        3x_1 + 2x_2  + x_3 &= 1
       \end{aligned} \qquad$
-    **(b)** $\displaystyle
-      \begin{bmatrix}
+    **(b)** $\displaystyle \begin{bmatrix}
         4 & 0 & 0 & 0 \\
         1 & -2 & 0 & 0 \\
         -1 & 4 & 4 & 0 \\
         2 & -5 & 5 & 1
-      \end{bmatrix} \mathbf{x} =
-      \begin{bmatrix}
+      \end{bmatrix} \mathbf{x} = \begin{bmatrix}
         -4 \\ 1 \\ -3 \\ 5
       \end{bmatrix}\qquad$
-    **(c)** $\displaystyle
-      \begin{aligned}
+    **(c)** $\displaystyle \begin{aligned}
        3x_1 +  2x_2  +  x_3      &= 1 \\
                x_2   -  x_3      &= 2 \\
                         2 x_3    &= -4
       \end{aligned}$
 
-3. ⌨ Use {ref}`function-forwardsub` to solve the systems from the previous problem. Verify that the solution is correct by computing $\mathbf{L}\mathbf{x}$ and subtracting $\mathbf{b}$.
+3. ⌨ Use {numref}`Function {number}<function-forwardsub>` to solve the systems from the previous problem. Verify that the solution is correct by computing $\mathbf{L}\mathbf{x}$ and subtracting $\mathbf{b}$.
 
-4. ⌨  Use {ref}`function-backsub` to solve the following systems.  Verify that the solution is correct by computing $\mathbf{U}\mathbf{x}$ and subtracting $\mathbf{b}$.
+4. ⌨  Use {numref}`Function {number}<function-backsub>` to solve the following systems.  Verify that the solution is correct by computing $\mathbf{U}\mathbf{x}$ and subtracting $\mathbf{b}$.
 
-    **(a)** $\displaystyle
-    \begin{bmatrix}
+    **(a)** $\begin{bmatrix}
       3 & 1 & 0  \\
       0 & -1 & -2  \\
       0 & 0 & 3  \\
-    \end{bmatrix} \mathbf{x} =
-    \begin{bmatrix}
+    \end{bmatrix} \mathbf{x} = \begin{bmatrix}
       1 \\ 1 \\ 6
     \end{bmatrix}\qquad$
-    **(b)** $\displaystyle
-    \begin{bmatrix}
+    **(b)** $\begin{bmatrix}
       3 & 1 & 0 & 6 \\
       0 & -1 & -2 & 7 \\
       0 & 0 & 3 & 4 \\
       0 & 0 & 0 & 5
-    \end{bmatrix} \mathbf{x} =
-    \begin{bmatrix}
+    \end{bmatrix} \mathbf{x} = \begin{bmatrix}
       4 \\ 1 \\ 1 \\ 5
     \end{bmatrix}$
 
     (problem-systemsinverse)=
 5. ⌨  If $\mathbf{B}\in\mathbb{R}^{n \times p}$, has columns $\mathbf{b}_1,\ldots,\mathbf{b}_p$, then we can pose $p$ linear systems at once by writing $\mathbf{A} \mathbf{X} = \mathbf{B}$, where $\mathbf{X}$ is $n\times p$. Specifically, this equation implies $\mathbf{A} \mathbf{x}_j = \mathbf{b}_j$ for $j=1,\ldots,p$.
 
-    **(a)** Modify {ref}`function-forwardsub` and {ref}`function-backsub` so that they solve the case where the second input is $n\times p$ for $p\ge 1$.
+    **(a)** Modify {numref}`Function {number}<function-forwardsub>` and {numref}`Function {number}<function-backsub>` so that they solve the case where the second input is $n\times p$ for $p\ge 1$.
 
     **(b)** If $\mathbf{A} \mathbf{X}=\mathbf{I}$, then $\mathbf{X}=\mathbf{A}^{-1}$. Use this fact to write a function `ltinverse` that uses your modified **forwardsub** to compute the inverse of a lower triangular matrix. Test your function on at least two nontrivial matrices. (We remind you here that this is just an exercise; matrix inverses are rarely a good idea in numerical practice!)
 
     (problem-triangillcond)=
-6. ⌨ :label: demos-systems-triangular
-{doc}`demos/systems-triangular` showed solutions of $\mathbf{A}\mathbf{x}=\mathbf{b}$, where
+6. ⌨ {prf:ref}`demos-systems-triangular` showed solutions of $\mathbf{A}\mathbf{x}=\mathbf{b}$, where
   
     ```{math}
     \mathbf{A} = \begin{bmatrix} 1 & -1 & 0 & \alpha-\beta & \beta \\ 0 & 1 & -1 &

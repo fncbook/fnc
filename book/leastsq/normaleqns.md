@@ -15,10 +15,10 @@ In the following proof we make use of the elementary algebraic fact that for two
 ```{index} normal equations
 ```
 
-(theorem-normaleqns)=
-
 ````{prf:theorem}
-  If $\mathbf{x}$ satisfies $\mathbf{A}^T(\mathbf{A}\mathbf{x}-\mathbf{b})=\boldsymbol{0}$, then $\mathbf{x}$ solves the linear least squares problem, i.e., $\mathbf{x}$ minimizes $\| \mathbf{b}-\mathbf{A}\mathbf{x} \|_2$.
+:label: theorem-normaleqns
+
+If $\mathbf{x}$ satisfies $\mathbf{A}^T(\mathbf{A}\mathbf{x}-\mathbf{b})=\boldsymbol{0}$, then $\mathbf{x}$ solves the linear least squares problem, i.e., $\mathbf{x}$ minimizes $\| \mathbf{b}-\mathbf{A}\mathbf{x} \|_2$.
 ````
 
 ````{prf:proof}
@@ -77,15 +77,15 @@ is called the {term}`pseudoinverse` of $\mathbf{A}$. Mathematically, the overdet
 
 The matrix $\mathbf{A}^T\mathbf{A}$ appearing in the pseudoinverse has some important properties.
 
-(theorem-ATA)=
+::::{prf:theorem} 
+:label: theorem-ATA
 
-````{prf:theorem} (AtA)
-  For any real $m\times n$ matrix $\mathbf{A}$ with $m\ge n$, the following are true:
+For any real $m\times n$ matrix $\mathbf{A}$ with $m\ge n$, the following are true:
 
 1. $\mathbf{A}^T\mathbf{A}$ is symmetric. 
 2. $\mathbf{A}^T \mathbf{A}$ is singular if and only if the columns of $\mathbf{A}$ are linearly dependent. (Equivalently, the rank of $\mathbf{A}$ is less than $n$.)
 3. If $\mathbf{A}^T\mathbf{A}$ is nonsingular, then it is positive definite. 
-````
+::::
 
 ````{prf:proof}
 The first part is left as an [exercise](problem-normalsymmetry). For the second part, suppose that $\mathbf{A}^T\mathbf{A}\mathbf{z}=\boldsymbol{0}$. Note that $\mathbf{A}^T\mathbf{A}$ is singular if and only if $\mathbf{z}$ may be nonzero. Left-multiplying by $\mathbf{z}^T$, we find that
@@ -105,7 +105,7 @@ The definition of the pseudoinverse involves taking the inverse of a matrix and 
 1. Compute $\mathbf{z} = \mathbf{A}^T\mathbf{b}$.
 1. Solve the $n\times n$ linear system $\mathbf{N}\mathbf{x} = \mathbf{z}$ for $\mathbf{x}$.
 
-In the last step we can exploit the fact, proved in [the AtA theorem](theorem-ATA), that $\mathbf{N}$ is symmetric and positive definite, and use Cholesky factorization as in {ref}`sec-SPD`. (The backslash command does this automatically.)
+In the last step we can exploit the fact, proved in {prf:ref}`theorem-ATA`, that $\mathbf{N}$ is symmetric and positive definite, and use Cholesky factorization as in {ref}`sec-SPD`. (The backslash command does this automatically.)
 
 ```{index} normal equations
 ```
@@ -202,7 +202,7 @@ in the 2-norm. If $\kappa(\mathbf{A})$ is large, the squaring of it can destabil
       ATAinvAT = ATA\A' -->
 
     (problem-normalsymmetry)=
-3. ✍ Prove the first statement of [the AtA theorem](theorem-ATA): $\mathbf{A}^T\mathbf{A}$ is symmetric for any $m\times n$ matrix $\mathbf{A}$ with $m \ge n$.
+3. ✍ Prove the first statement of {prf:ref}`theorem-ATA`: $\mathbf{A}^T\mathbf{A}$ is symmetric for any $m\times n$ matrix $\mathbf{A}$ with $m \ge n$.
 
     (problem-pinveqinv)=
 4. ✍ Prove that if $\mathbf{A}$ is a nonsingular square matrix, then $\mathbf{A}^+=\mathbf{A}^{-1}$.
@@ -213,7 +213,7 @@ in the 2-norm. If $\kappa(\mathbf{A})$ is large, the squaring of it can destabil
   
 6. ✍ Prove that the vector $\mathbf{A}\mathbf{A}^+\mathbf{b}$ is the vector in the column space (i.e., range) of $\mathbf{A}$ that is closest to $\mathbf{b}$, in the sense of the 2-norm.
 
-7. ✍ Show that the flop count for {ref}`function-lsnormal` is asymptotically $\sim 2m n^2 + \tfrac{1}{3}n^3$. (In finding the asymptotic count you can ignore terms like $mn$ whose total degree is less than three.)
+7. ✍ Show that the flop count for {numref}`Function {number}<function-lsnormal>` is asymptotically $\sim 2m n^2 + \tfrac{1}{3}n^3$. (In finding the asymptotic count you can ignore terms like $mn$ whose total degree is less than three.)
 
 8. ⌨ Let $t_1,\ldots,t_m$ be $m+1$ equally spaced points in $[0,2\pi]$.
   

@@ -22,7 +22,7 @@ where $a_k,b_k,c_k,d_k$ are values to be determined. Overall there are $4n$ such
 
 We are able to ensure that $S$ has at least two continuous derivatives everywhere by means of the following constraints.
 
-- *Interpolation by $S_k$ at both of its endpoints.*
+**1. Interpolation by $S_k$ at both of its endpoints.**
 
 Algebraically we require $S_k(t_{k-1})=y_{k-1}$ and $S_k(t_k)=y_k$ for every $k=1,\dots,n$. In terms of {eq}`splinepw`, these conditions are
 
@@ -87,7 +87,7 @@ where we have defined the diagonal matrix
 
 Collectively, {eq}`spline0asys` and {eq}`spline0bsys` express $2n$ scalar constraints on the unknowns.
 
-- *Continuity of $S'(x)$ at interior nodes.*
+**2. Continuity of $S'(x)$ at interior nodes.**
 
 We do not know what the slope of the interpolant should be at the nodes, but we do want the same slope whether a node is approached from the left or the right. Thus we obtain constraints at the nodes that sit between two neighboring piecewise definitions, so that $S_1'(t_1)=S_2'(t_1)$, and so on. Altogether these are
 
@@ -132,7 +132,7 @@ and $\mathbf{E}$ is the $(n-1)\times n$ matrix resulting from deleting the last 
 
 Left-multiplying by $\mathbf{E}$ deletes the last row of any matrix or vector. Hence {eq}`spline1sys` represents $n-1$ constraints on the unknowns. (Remember, there are only $n-1$ interior nodes.)
 
-- *Continuity of $S''(x)$ at interior nodes.*
+**3. Continuity of $S''(x)$ at interior nodes.**
 
 These again apply only at the interior nodes $t_1,\dots,t_{n-1}$, in the form $S_1''(t_1)=S_2''(t_1)$ and so on. Using {eq}`splinepw` once more, we obtain
 
@@ -246,7 +246,7 @@ end
 ```
 ````
 
-{ref}`function-spinterp` gives an implementation of cubic not-a-knot spline interpolation. For clarity it stays very close to the description given above. There are some possible shortcuts—for example, one could avoid using $\mathbf{E}$ and instead directly delete the last row of any matrix it left-multiplies. Observe that the linear system is assembled and solved just once, and the returned evaluation function simply uses the resulting coefficients. This allows us to make multiple calls to evaluate $S$ without unnecessarily repeating the linear algebra.
+{numref}`Function {number}<function-spinterp>` gives an implementation of cubic not-a-knot spline interpolation. For clarity it stays very close to the description given above. There are some possible shortcuts—for example, one could avoid using $\mathbf{E}$ and instead directly delete the last row of any matrix it left-multiplies. Observe that the linear system is assembled and solved just once, and the returned evaluation function simply uses the resulting coefficients. This allows us to make multiple calls to evaluate $S$ without unnecessarily repeating the linear algebra.
 
 ## Conditioning and convergence
 
@@ -294,7 +294,7 @@ The conditioning of spline interpolation is much more complicated than for the p
 2. ⌨ (continuation) For each case in the preceding problem, use Julia to set up and solve the linear system you wrote down. Then plot the resulting cubic spline over the interval between the second and third nodes.
 
     (problem-spinterp)=
-3. ⌨ For each given function, interval, and value of $n$, define $n+1$ evenly spaced nodes. Then use {ref}`function-spinterp` to plot the cubic spline interpolant at those nodes together with the original function over the given interval.
+3. ⌨ For each given function, interval, and value of $n$, define $n+1$ evenly spaced nodes. Then use {numref}`Function {number}<function-spinterp>` to plot the cubic spline interpolant at those nodes together with the original function over the given interval.
 
     **(a)** $\cos (\pi^2 x^2 ),\quad x\in[0,1],\quad n = 7$
 
@@ -302,7 +302,7 @@ The conditioning of spline interpolation is much more complicated than for the p
 
     **(c)** $\sin(x^2),\quad x\in[0,2.5],\quad n = 6$
 
-4. ⌨ For each of the functions and intervals in the preceding problem, use {ref}`function-spinterp` to perform cubic spline interpolation for equispaced nodes with $n=10,20,40,80,160$. In each case compute the interpolant at 1600 equally spaced points in the interval and use it to estimate the error
+4. ⌨ For each of the functions and intervals in the preceding problem, use {numref}`Function {number}<function-spinterp>` to perform cubic spline interpolation for equispaced nodes with $n=10,20,40,80,160$. In each case compute the interpolant at 1600 equally spaced points in the interval and use it to estimate the error
 
    ```{math}
     E(n) = \| f-S \|_\infty = \max_x | f(x) - S(x) |.
@@ -318,4 +318,4 @@ The conditioning of spline interpolation is much more complicated than for the p
 
 7. **(a)** ✍ If $y_0=y_n$, another possibility for cubic spline end conditions is to make $S(x)$ a periodic function. This implies that $S'$ and $S''$ are also periodic. Write out the two new algebraic equations for these constraints in terms of the piecewise coefficients.
 
-    **(b)** ⌨ Modify {ref}`function-spinterp` to compute a periodic spline interpolant. Test by making a plot of the interpolant for $f(x) =\exp(\sin(3x))$ over the interval $[0,2\pi/3]$ with equally spaced nodes and $n=8$.
+    **(b)** ⌨ Modify {numref}`Function {number}<function-spinterp>` to compute a periodic spline interpolant. Test by making a plot of the interpolant for $f(x) =\exp(\sin(3x))$ over the interval $[0,2\pi/3]$ with equally spaced nodes and $n=8$.

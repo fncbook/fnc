@@ -17,7 +17,7 @@ We call $r$ a **root** of the function $f$. The formulation $f(x)=0$ is general 
 {doc}`demos/roots-bessel`
 ````
 
-Unlike the linear problems of the earlier chapters, the usual situation here is that the root cannot be produced in a finite number of operations, even in exact arithmetic. Instead, we seek a sequence of approximations that formally converge to the root, stopping when some member of the sequence seems to be "good enough" (more on that later). The `NLsolve` package for Julia has a function `nlsolve` for general-purpose rootfinding.
+Unlike the linear problems of the earlier chapters, the usual situation here is that the root cannot be produced in a finite number of operations, even in exact arithmetic. Instead, we seek a sequence of approximations that formally converge to the root, stopping when some member of the sequence seems to be good enough, in a sense we will clarify later. The `NLsolve` package for Julia has a function `nlsolve` for general-purpose rootfinding.
 
 ## Conditioning, error, and residual
 

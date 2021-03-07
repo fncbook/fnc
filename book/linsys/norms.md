@@ -1,6 +1,6 @@
 # Vector and matrix norms
 
-The manipulations on matrices and vectors so far in this chapter have been algebraic, much like those in an introductory linear algebra course. In order to progress to the analysis of the algorithms we have introduced, we need a way to measure the "size" of vectors and matrices—size in the sense of magnitude or distance, not the number of rows and columns.
+The manipulations on matrices and vectors so far in this chapter have been algebraic, much like those in an introductory linear algebra course. In order to progress to the analysis of the algorithms we have introduced, we need a way to measure the size of vectors and matrices—size in the sense of magnitude or distance, not the number of rows and columns.
 
 ## Vector norms
 
@@ -58,9 +58,8 @@ as writing a nonzero vector $\mathbf{v}$ in magnitude--direction form. We say th
 
 By definition, a sequence is convergent in the infinity norm if and only if it converges componentwise. The same is true for a convergent sequence in *any* norm.
 
-(theorem-normequivalence)=
-
 ```{prf:theorem} Norm equivalence
+:label: theorem-normequivalence
   In a finite-dimensional space, convergence in any norm implies convergence in all norms.
 ```
 
@@ -101,9 +100,9 @@ For the rest of this section we will continue to omit subscripts when we want to
 
 The definition of an induced matrix norm may seem overly complicated. However, there are some key properties that follow directly from the definition.
 
-(theorem-norm-inequalities)=
 
 ````{prf:theorem} Norm inequalities
+:label: theorem-norm-inequalities
 Let $\| \cdot \|$ designate a matrix norm and the vector norm that induced it. Then for all matrices and vectors of compatible sizes,
 
 ```{math}
@@ -238,7 +237,7 @@ The geometric interpretation of the matrix 2-norm shown in {prf:ref}`demos-norms
     % $x$, so we conclude $\|Px\|_2=\|x\|_2$ for all $x$, which by
     % the definition of matrix norm implies $\|P\|_2=1$.    
 
-9. ✍ Show that for any induced matrix norm and nonsingular matrix $\mathbf{A}$, $\| \mathbf{A}^{-1} \| \ge (\| \mathbf{A} \|)^{-1}$. (Hint: Apply [the norm inequalities theorem](theorem-norm-inequalities).)
+9. ✍ Show that for any induced matrix norm and nonsingular matrix $\mathbf{A}$, $\| \mathbf{A}^{-1} \| \ge (\| \mathbf{A} \|)^{-1}$. (Hint: Apply {prf:ref}`theorem-norm-inequalities`.)
 
 10. ✍ **(a)** Show that for any $\mathbf{v}\in \real^n$,
 

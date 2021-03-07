@@ -72,7 +72,7 @@ end
 
 The quoted lines at the beginning of {numref}`Function {number}<function-horner>` are an optional documentation string. The function itself starts off with the keyword `function`, followed by a list of its input arguments. The first of these is presumed to be a vector, whose length can be obtained and whose individual components are accessed through square bracket notation. After the computation is finished, the `return` keyword indicates which value or values are to be returned to the caller.
 
-The `Polynomials` package for Julia provides its own fast methods for polynomial evaluation that supersede our simple [`horner`](function-horner) function. This will often be the case for codes in this book, because the problems we study are classic and important. In a more practical setting you would take implementations of well-known methods for granted and build on top of them.
+The `Polynomials` package for Julia provides its own fast methods for polynomial evaluation that supersede our simple {numref}`Function {number}<function-horner>` function. This will often be the case for codes in this book, because the problems we study are classic and important. In a more practical setting you would take implementations of well-known methods for granted and build on top of them.
 
 ## Writing your own functions
 

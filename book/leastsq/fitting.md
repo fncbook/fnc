@@ -103,7 +103,7 @@ c_1 \\ c_2 \\ \vdots \\ c_n
 
 Recalling that $\mathbf{r}^T\mathbf{r}=\| \mathbf{r} \|_2^2$, and renaming the variables to standardize the statement, we arrive at the general {term}`linear least squares problem`:
 
-````{prf:definition}
+````{prf:definition} Linear least squares problem
 Given $\mathbf{A}\in\mathbb{R}^{m \times n}$ and $\mathbf{b}\in\mathbb{R}^m$, with $m>n$, find
 
 ```{math}
@@ -163,9 +163,9 @@ Thus the variable $z=\log y$ can be fit linearly in terms of the variable $s=\lo
 
     **(a)** Find a best-fitting cubic polynomial for the data. Plot the data as points superimposed on a (smooth) graph of the cubic over the full range of time. Label the axes. What does the fit predict for the population in the years 2000,2010,2020?
 
-    **(b)**Repeat (a) but use a fitting function of the form $y(t)\approx a e^{b t}$.
+    **(b)** Repeat (a) but use a fitting function of the form $y(t)\approx a e^{b t}$.
 
-    **(c)**Look up the actual U.S. population in 2000 and 2010 and compare to the predictions of parts (a) and (b).
+    **(c)** Look up the actual U.S. population in 2000 and 2010 and compare to the predictions of parts (a) and (b).
 
     % To make $y\approx a e^{bt}$ into a linear least squares problem, take the log (natural) of both sides: $\log(y) = \log(a) + b t$; then, let $c_1=\log(a)$ and $c_2=b$ and solve for the $c_i$.
 

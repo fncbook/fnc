@@ -41,7 +41,7 @@ Each hat function is globally continuous and is linear inside every interval $[t
 
 for some choice of the coefficients $c_0,\ldots,c_n$. No smaller set of functions can have the same properties. We summarize these facts by calling the hat functions a **basis** of the set of functions that are continuous and piecewise linear relative to $\mathbf{t}$.  Another point of view, familiar from abstract linear algebra, is that a basis sets up a one-to-one correspondence between the spanned function space and the more familiar space $\mathbb{R}^{n+1}$, with each function being represented by its coefficients $c_0,\ldots,c_n$.
 
-Note that the definitions of $H_0$ for $x<t_0$ and $H_n$ for $x>t_n$ are irrelevant—a fact exploited by the implementation given in {ref}`function-hatfun` through the introduction of two fictitious nodes lying on either side of the interval $[t_0,t_n]$. This trick allows the use of an identical formula for all of the hat functions. Otherwise, we would need to take special action for the two edge cases $H_0$ and $H_n$.
+Note that the definitions of $H_0$ for $x<t_0$ and $H_n$ for $x>t_n$ are irrelevant—a fact exploited by the implementation given in {numref}`Function {number}<function-hatfun>` through the introduction of two fictitious nodes lying on either side of the interval $[t_0,t_n]$. This trick allows the use of an identical formula for all of the hat functions. Otherwise, we would need to take special action for the two edge cases $H_0$ and $H_n$.
 
 (function-hatfun)=
 
@@ -86,7 +86,7 @@ end
 {doc}`demos/pwlin-hat`
 ````
 
-Another trick in {ref}`function-hatfun` is to exploit the observation that at each $x$, $H_k(x)$ is the larger of two options: zero, or the smaller of two linear functions (those appearing in {eq}`hatfun`). This code is not the most efficient one possible, but it is more concise than detecting which particular subinterval each $x$ lies within.
+Another trick in {numref}`Function {number}<function-hatfun>` is to exploit the observation that at each $x$, $H_k(x)$ is the larger of two options: zero, or the smaller of two linear functions (those appearing in {eq}`hatfun`). This code is not the most efficient one possible, but it is more concise than detecting which particular subinterval each $x$ lies within.
 
 ## Cardinality conditions
 
@@ -117,7 +117,7 @@ The appeal of a cardinal basis is that it makes the expression of the interpolan
 {doc}`demos/pwlin-usage`
 ````
 
-The resulting algorithmic simplicity is reflected in {ref}`function-plinterp`. Take note that the output of {ref}`function-plinterp` is itself a function, meant to be called with a single argument representing values of $x$. Our mathematical viewpoint is that the result of an interpolation process is a function, and our codes reflect this.
+The resulting algorithmic simplicity is reflected in {numref}`Function {number}<function-plinterp>`. Take note that the output of {numref}`Function {number}<function-plinterp>` is itself a function, meant to be called with a single argument representing values of $x$. Our mathematical viewpoint is that the result of an interpolation process is a function, and our codes reflect this.
 
 A final appealing characteristic of the hat function basis is that it depends only on the node locations, while the expansion coefficients in {eq}`plbasis` depend only on the data values. This clean separation would be useful if we wanted to construct many interpolants on the same node set, and it has deeper theoretical uses as well.
 
@@ -178,10 +178,8 @@ You are asked to prove the final step above in [an exercise](problem-plpartunity
 
 Now suppose that $f$ is a "nice" function on an interval $[a,b]$ containing all of the nodes. We can play a game of sampling values of $f$ to get data, i.e. $y_k=f(t_k)$ for all $k$, then perform piecewise linear interpolation of the data to get a different function, the interpolant $p$. How close is $p$ to the original $f$? To make a simple statement, we will consider only the case of equally spaced nodes covering the interval.
 
-(theorem-placcuracy)=
-
 ````{prf:theorem} Convergence of PL interpolation
-:label: thm-plconverge
+:label: theorem-pl-converge
 Suppose that $f(x)$ has a continuous second derivative in $[a,b]$ (often expressed as $f\in C^2[a,b]$). Let $p_n(x)$ be the piecewise linear interpolant of $\bigl(t_i,f(t_i)\bigr)$ for $i=0,\ldots,n$, where $t_i=a+i h$ and $h=(b-a)/n$. Then
   
 ```{math}
@@ -205,11 +203,11 @@ Piecewise linear interpolation is second-order accurate.
 {doc}`demos/pwlin-converge`
 ````
 
-We normally don't have access to $f''$, so the importance of {prf:ref}`pl-converge` is that the error in the interpolant is $O(h^2)$ as $h\to 0$. The leading exponent of 2 is described by saying that piecewise linear interpolation is second-order accurate. For instance, if we double the number of equally spaced nodes used to sample a function, the piecewise linear interpolant becomes about four times more accurate.
+We normally don't have access to $f''$, so the importance of {prf:ref}`theorem-pl-converge` is that the error in the interpolant is $O(h^2)$ as $h\to 0$. The leading exponent of 2 is described by saying that piecewise linear interpolation is second-order accurate. For instance, if we double the number of equally spaced nodes used to sample a function, the piecewise linear interpolant becomes about four times more accurate.
 
 ## Exercises
 
-1. ⌨ For each of the functions and intervals given, perform piecewise linear interpolation using {ref}`function-plinterp` for equispaced nodes with $n=10,20,40,80,160$. For each $n$, estimate the error
+1. ⌨ For each of the functions and intervals given, perform piecewise linear interpolation using {numref}`Function {number}<function-plinterp>` for equispaced nodes with $n=10,20,40,80,160$. For each $n$, estimate the error
 
     ```{math}
     E(n) = \| f-p \|_\infty = \max_x | f(x) - p(x) |
@@ -320,8 +318,7 @@ We normally don't have access to $f''$, so the importance of {prf:ref}`pl-conver
     ````
 
     (problem-placcuracy)=
-
-5. ✍ Here we consider a proof of the [PL convergence theorem](theorem-placcuracy) using the mean value theorems from elementary calculus: If $f$ is continuously differentiable in $(a,b)$, then there exist points $s$ and $t$ in $(a,b)$ such that
+5. ✍ Here we consider a proof of the {prf:ref}`theorem-pl-converge` using the mean value theorems from elementary calculus: If $f$ is continuously differentiable in $(a,b)$, then there exist points $s$ and $t$ in $(a,b)$ such that
   
     ```{math}
     \int_a^b f(z) \, dz = (b-a)f(s) \qquad \text{and} \qquad f'(t) = \frac{f(b)-f(a)}{b-a}.

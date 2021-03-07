@@ -115,13 +115,13 @@
 %  \caption{Evaluation of a B-spline.}
 %\end{function}
 %
-%In {ref}`function-Bspline` we show an algorithm for evaluating a
+%In {numref}`Function {number}<function-Bspline>` we show an algorithm for evaluating a
 %B-spline using {eq}`bspline1` and {eq}`bspline`
 %directly. This is our first example of a recursive function—one that
 %calls itself. The first line of the function is like a contract: given
 %inputs that satisfy certain conditions, it returns an output
 %satisfying stated conditions. In this case, given value(s) of $x$ and
-%a vector of knots, {ref}`function-Bspline` returns the value of the
+%a vector of knots, {numref}`Function {number}<function-Bspline>` returns the value of the
 %B-spline. So in lines~16 and~17, where the recursive calls occur, we
 %may conclude that "B1" and "B2" contain the values of
 %B-splines on shorter sequences of knots. If we originally call the
@@ -233,7 +233,7 @@
 %nonzero entries per row, and upper bandwidth and lower bandwidth both
 %equal to two. Because the matrix has constant bandwidth 5 for any value
 %of $n$, only $O(n)$ operations are needed to find the coefficients.
-%{ref}`function-spinterp` demonstrates a basic implementation.
+%{numref}`Function {number}<function-spinterp>` demonstrates a basic implementation.
 %\begin{function}
 %  (function-spinterp)=
 

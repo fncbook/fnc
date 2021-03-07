@@ -157,7 +157,7 @@ end
 {doc}`demos/newton-usage`
 ````
 
-Our implementation of Newton's iteration is given in {ref}`function-newton`. It accepts mathematical functions $f$ and $f'$ and the starting guess $x_1$ as input arguments. Beginning programmers are tempted to embed the functions directly into the code, but there are two good reasons not to do so. First, you would need a new copy of the whole code for each new instance of the problem, even though very little code may need to change. Second, you may want to try more than one rootfinding implementation for a particular problem, and keeping the definition of the problem separate from the algorithm for its solution makes this task much easier. As a practical issue in MATLAB, you can define short functions inline as in {prf:ref}`demos-newton-converge`. For longer functions, you can write separate function files and pass them as arguments to {ref}`function-newton` by affixing an at-sign \verb+@+ to the front of the name of the function file.
+Our implementation of Newton's iteration is given in {numref}`Function {number}<function-newton>`. It accepts mathematical functions $f$ and $f'$ and the starting guess $x_1$ as input arguments. Beginning programmers are tempted to embed the functions directly into the code, but there are two good reasons not to do so. First, you would need a new copy of the whole code for each new instance of the problem, even though very little code may need to change. Second, you may want to try more than one rootfinding implementation for a particular problem, and keeping the definition of the problem separate from the algorithm for its solution makes this task much easier. As a practical issue in Julia, you can define short functions inline as in {prf:ref}`demos-newton-converge`. 
 
 ```{index} backward error
 ```
@@ -165,7 +165,7 @@ Our implementation of Newton's iteration is given in {ref}`function-newton`. It 
 ```{index} residual
 ```
 
-The function {ref}`function-newton` also deals with a thorny practical issue: how to stop the iteration. It adopts a three-part criterion. First, it monitors the difference between successive root estimates, $|x_k-x_{k-1}|$, which is used as a stand-in for the unknown error $|r-x_k|$. In addition, it monitors the residual $|f(x_k)|$, which is equivalent to the backward error and more realistic to control in badly conditioned problems (see {doc}`rootproblem`). If either of these quantities is considered to be sufficiently small, the iteration ends. Finally, we need to protect against the possibility of a nonconvergent iteration, so the procedure terminates with a warning if a maximum number of iterations is exceeded.[^inputs]
+The function {numref}`Function {number}<function-newton>` also deals with a thorny practical issue: how to stop the iteration. It adopts a three-part criterion. First, it monitors the difference between successive root estimates, $|x_k-x_{k-1}|$, which is used as a stand-in for the unknown error $|r-x_k|$. In addition, it monitors the residual $|f(x_k)|$, which is equivalent to the backward error and more realistic to control in badly conditioned problems (see {doc}`rootproblem`). If either of these quantities is considered to be sufficiently small, the iteration ends. Finally, we need to protect against the possibility of a nonconvergent iteration, so the procedure terminates with a warning if a maximum number of iterations is exceeded.[^inputs]
 
 [^inputs]: In more practical codes, the thresholds used to make these decisions are controllable through additional user inputs to the procedure.
 
@@ -173,7 +173,15 @@ The function {ref}`function-newton` also deals with a thorny practical issue: ho
 
 For each of problems 1--3, do the following steps.
   
-**(a)** ✍ Rewrite the equation into the standard form for rootfinding, $f(x) = 0$, and compute $f'(x)$. **(b)** ⌨  Make a plot of $f$ over the given interval and determine how many roots lie in the interval. **(c)** ⌨ Use `nlsolve` to find an "exact" value for each root. **(d)** ⌨ Use {ref}`function-newton` to find each root. **(e)** ⌨ For one of the roots, define `e` as a vector of the errors in the Newton sequence. Determine numerically whether the convergence is roughly quadratic.
+**(a)** ✍ Rewrite the equation into the standard form for rootfinding, $f(x) = 0$, and compute $f'(x)$. 
+
+**(b)** ⌨  Make a plot of $f$ over the given interval and determine how many roots lie in the interval. 
+
+**(c)** ⌨ Use `nlsolve` to find an "exact" value for each root. 
+
+**(d)** ⌨ Use {numref}`Function {number}<function-newton>` to find each root.
+
+**(e)** ⌨ For one of the roots, define `e` as a vector of the errors in the Newton sequence. Determine numerically whether the convergence is roughly quadratic.
 
 1. $x^2=e^{-x}$, over $[-2,2]$
 
@@ -279,8 +287,8 @@ For each of problems 1--3, do the following steps.
     r = -1;
     cond = f_inf_norm/abs(r)/abs(fp(r))
     ```
-
-4. ⌨  Consider the equation $f(x)=x^{-2} - \sin x=0$ on the interval $x \in [0.1,4\pi]$.  Use a plot to approximately locate the roots of $f$. To which roots do the following initial guesses converge when using {ref}`function-newton`?  Is the root obtained the one that is closest to that guess?
+  
+4. ⌨  Consider the equation $f(x)=x^{-2} - \sin x=0$ on the interval $x \in [0.1,4\pi]$.  Use a plot to approximately locate the roots of $f$. To which roots do the following initial guesses converge when using {numref}`Function {number}<function-newton>`?  Is the root obtained the one that is closest to that guess?
 
     **(a)** $x_0 = 1.5,\quad$
     **(b)** $x_0 = 2,\quad$
@@ -356,7 +364,7 @@ For each of problems 1--3, do the following steps.
     (problem-newtonmultiple)=
 7. ✍ In the case of a multiple root, where $f(r)=f'(r)=0$, the derivation of the quadratic error convergence in {eq}`newtonerr` is invalid. Redo the derivation to show that in this circumstance and with $f''(r)\neq 0$, the error converges only linearly.
 
-8. ✍ In {ref}`function-newton` and elsewhere, the actual error is not available, so we use $|x_k-x_{k-1}|$ as an approximate indicator of error to determine when to stop the iteration. Find an example that foils this indicator; that is, a sequence $\{x_k\}$ such that
+8. ✍ In {numref}`Function {number}<function-newton>` and elsewhere, the actual error is not available, so we use $|x_k-x_{k-1}|$ as an approximate indicator of error to determine when to stop the iteration. Find an example that foils this indicator; that is, a sequence $\{x_k\}$ such that
   
     ```{math}
     \lim_{k\rightarrow \infty} (x_k-x_{k-1}) = 0,

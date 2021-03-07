@@ -264,7 +264,7 @@ in which $\hat{\mathbf{U}}$ is $m\times n$ and $\hat{\mathbf{S}}$ is $n\times n$
 
 5. ✍ Prove that for a square real matrix $\mathbf{A}$, $\| \mathbf{A} \|_2=\| \mathbf{A}^T \|_2$.
 
-6. ✍ Prove {eq}`svdcond` of the [SVD properties theorem](theorem-svdprops), given that {eq}`svdnorm` is true. (Hint: If the SVD of $\mathbf{A}$ is known, what is the SVD of $\mathbf{A}^{+}$?)
+6. ✍ Prove {eq}`svdcond` of the {prf:ref}`theorem-svdprops`, given that {eq}`svdnorm` is true. (Hint: If the SVD of $\mathbf{A}$ is known, what is the SVD of $\mathbf{A}^{+}$?)
 
 7. ✍ Suppose $\mathbf{A}\in\mathbb{R}^{m\times n}$, for $m>n$, has the thin SVD $\mathbf{A}=\hat{\mathbf{U}}\hat{\mathbf{S}}\mathbf{V}^T$. Show that the orthogonal projector $\mathbf{A}\mathbf{A}^{+}$ is equal to $\hat{\mathbf{U}}\hat{\mathbf{U}}^T$. (You must be careful with matrix sizes in this derivation.)
 

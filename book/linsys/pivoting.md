@@ -3,14 +3,13 @@
 ```{index} matrix factorization; LU
 ```
 
+As mentioned in [the section on LU factorization](lu), the $\mathbf{A}=\mathbf{L}\mathbf{U}$ factorization does not work for every nonsingular $\mathbf{A}$. A simple rearrangement of the system found in {prf:ref}`demos-lu-gauss` demonstrates this fact.
+
 ```{prf:example} Julia demo
 :class: demo
 :label: demos-pivot-fail
 {doc}`demos/pivot-fail`
 ```
-
-As mentioned in [the section on LU factorization](lu), the $\mathbf{A}=\mathbf{L}\mathbf{U}$ factorization
-does not work for every nonsingular $\mathbf{A}$. A simple rearrangement of the system found in {prf:ref}`demos-lu-gauss` demonstrates this fact.
 
 The breakdown in {prf:ref}`demos-pivot-fail` is easily explained. After elimination is performed successfully in the first column, we have the matrix
 
@@ -32,17 +31,16 @@ A row swap is necessary when the algorithm would otherwise require a division by
 
 What if no nonzero pivot can be found? The following theorem ties up this loose end.
 
-(theorem-pivot)=
-
 ```{prf:theorem} Row pivoting
-  If a pivot element and all the elements below it are zero, then the original matrix $\mathbf{A}$ is singular. In other words, if $\mathbf{A}$ is nonsingular, then Gaussian elimination with row pivoting will run to completion.
+:label: theorem-pivot
+If a pivot element and all the elements below it are zero, then the original matrix $\mathbf{A}$ is singular. In other words, if $\mathbf{A}$ is nonsingular, then Gaussian elimination with row pivoting will run to completion.
 ```
 
 ```{prf:proof}
 The proof of the first statement is considered in [an exercise](problem-zerocolumn). The second statement follows from it, because the only way that the Gaussian elimination algorithm can have an undefined step is when all of the choices for a  pivot element are zero.
 ```
 
-It's important to keep in mind that [the pivoting theorem](theorem-pivot) does not refer to elements of the *original* matrix $\mathbf{A}$. Only the numbers that appear during the elimination process are relevant.
+It's important to keep in mind that {prf:ref}`theorem-pivot` does not refer to elements of the *original* matrix $\mathbf{A}$. Only the numbers that appear during the elimination process are relevant.
 
 ## The algebra of row pivoting
 
@@ -130,7 +128,8 @@ Each of the arithmetic steps is well-conditioned now, and the solution is comput
 
 In general, a small (in absolute value) pivot element means weak dependence on the variable that is about to be eliminated. Even though only a zero pivot makes elimination technically impossible, in floating point using a pivot close to zero can cause instability. As a result, the pivoting rule chosen in practice is the following:
 
-```{proof:myrule} Pivoting
+```{prf:criterion} Pivoting
+:label: rule-pivoting
 When performing elimination in column $j$, swap row $j$ with the row below it whose entry in column $j$ is the largest (in absolute value).
 ```
 
@@ -222,7 +221,7 @@ One consequence of this rule is that all the below-diagonal elements in the unit
     %⌨ Repeat the experiment of {ref}`prob-lufact-dramadah` using $\mathbf{P}\mathbf{A}=\mathbf{L}\mathbf{U}$ in place of $\mathbf{A}=\mathbf{L}\mathbf{U}$. Does the hypothesis on the entries of $\mathbf{L}$, $\mathbf{U}$, and their inverses remain true? 
 
     (problem-zerocolumn)=
-5. ✍ Suppose that $\mathbf{A}$ is an $n\times n$ matrix such that its first $k$ columns are upper triangular and $A_{kk}=0$. Show that $\mathbf{A}$ is singular. (This can be used to complete the proof of [the pivoting theorem](theorem-pivot), because such a matrix occurs when there is no possible choice of a nonzero pivot.)
+5. ✍ Suppose that $\mathbf{A}$ is an $n\times n$ matrix such that its first $k$ columns are upper triangular and $A_{kk}=0$. Show that $\mathbf{A}$ is singular. (This can be used to complete the proof of {prf:ref}`theorem-pivot`, because such a matrix occurs when there is no possible choice of a nonzero pivot.)
 
 6. ✍ How many unique $6\times 6$ permutation matrices are there?
 

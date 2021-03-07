@@ -33,7 +33,7 @@ In the system case, replacing the Jacobian evaluation is more complicated: deriv
 
 For reasons explained in the next chapter, $\delta$ is usually chosen close to $\sqrt{\epsilon}$, where $\epsilon$ represents the expected noise level in evaluation of $\mathbf{f}$. If the only source of noise is floating-point roundoff, then $\delta=\sqrt{\epsilon_\text{mach}}$.
 
-The finite-difference formula {eq}`jacobianfd` is implemented by the short code {ref}`function-fdjac`. (The code is written to accept the case where $\mathbf{f}$ maps $n$ variables to $m$ values with $m\neq n$, in anticipation of \secref{nl-least-sq}.)
+The finite-difference formula {eq}`jacobianfd` is implemented by the short code {numref}`Function {number}<function-fdjac>`. (The code is written to accept the case where $\mathbf{f}$ maps $n$ variables to $m$ values with $m\neq n$, in anticipation of \secref{nl-least-sq}.)
 
 (function-fdjac)=
 
@@ -149,7 +149,7 @@ In summary, the $\lambda$ parameter in {eq}`levenberg` allows a smooth transitio
 {doc}`demos/quasi-levenberg`
 ````
 
-To a large extent the incorporation of finite differences, Jacobian updates, and Levenberg step are independent. {ref}`function-levenberg` shows how they might be combined. This function is one of the most logically complex we have encountered so far.
+To a large extent the incorporation of finite differences, Jacobian updates, and Levenberg step are independent. {numref}`Function {number}<function-levenberg>` shows how they might be combined. This function is one of the most logically complex we have encountered so far.
 
 First observe that we have introduced a MATLAB convenience feature: *optional input parameters*. The keyword "nargin" inside a function evaluates to the number of input arguments that were provided by the caller. In this case we supply a default value for the third argument, "tol", if none was specified by the caller. Most modern computing languages have  analogous mechanisms for accepting a variable number of input parameters. A common use case is what we have done here, allowing the optional override of a default setting.
 
@@ -232,7 +232,7 @@ end
 ```` 
 -->
 
-In some cases our simple logic in {ref}`function-levenberg` can make $\lambda$ oscillate between small and large values; several better but more complicated strategies for controlling $\lambda$ are known. In addition, the linear system {eq}`levenberg` is usually modified to get the well-known **Levenberg--Marquardt** algorithm, which does a superior job in some problems as $\lambda\to \infty$.
+In some cases our simple logic in {numref}`Function {number}<function-levenberg>` can make $\lambda$ oscillate between small and large values; several better but more complicated strategies for controlling $\lambda$ are known. In addition, the linear system {eq}`levenberg` is usually modified to get the well-known **Levenberg--Marquardt** algorithm, which does a superior job in some problems as $\lambda\to \infty$.
 
 ## Exercises
 
@@ -240,9 +240,9 @@ In some cases our simple logic in {ref}`function-levenberg` can make $\lambda$ o
   
     **(a)** ✍ Write the intersection of these curves in the form $\mathbf{f}(\mathbf{x}) = \boldsymbol{0}$ for two-dimensional $\mathbf{f}$ and $\mathbf{x}$.
 
-    **(b)** ⌨ Use {ref}`function-levenberg` to find an intersection point near $u=1$, $v=0.1$.
+    **(b)** ⌨ Use {numref}`Function {number}<function-levenberg>` to find an intersection point near $u=1$, $v=0.1$.
 
-    **(d)** ⌨ Use {ref}`function-levenberg` to find an intersection point near $u=0.1$, $v=1$.
+    **(d)** ⌨ Use {numref}`Function {number}<function-levenberg>` to find an intersection point near $u=0.1$, $v=1$.
 
     ````{only} solutions
     ``` matlab
@@ -274,7 +274,7 @@ In some cases our simple logic in {ref}`function-levenberg` can make $\lambda$ o
 
     **(a)** ✍ Write out a $2\times 2$ nonlinear system of equations that describes an intersection of these orbits. (Note: An intersection is not the same as a collision—they don't have to occupy the same point at the same time.)
 
-    **(b)** ⌨ Use {ref}`function-levenberg` to find all of the unique intersections.
+    **(b)** ⌨ Use {numref}`Function {number}<function-levenberg>` to find all of the unique intersections.
 
     ````{only} solutions
 
@@ -299,9 +299,9 @@ In some cases our simple logic in {ref}`function-levenberg` can make $\lambda$ o
   
     ```{math}
     \begin{split}
-        x-5 &= \frac{\lambda x}{25} \\
-        y-4 &= \frac{\lambda y}{16} \\
-        z-3 &= \frac{\lambda z}{9} \\
+        x-5 &= \frac{\lambda x}{25} \\[1mm]
+        y-4 &= \frac{\lambda y}{16} \\[1mm]
+        z-3 &= \frac{\lambda z}{9} \\[1mm]
         1 &=  \frac{1}{25}x^2 + \frac{1}{16}y^2 + \frac{1}{9}z^2
     \end{split}
     ```
@@ -310,7 +310,7 @@ In some cases our simple logic in {ref}`function-levenberg` can make $\lambda$ o
   
     **(a)** Write out this system in the form $\mathbf{f}(\mathbf{u}) = \boldsymbol{0}$. (Note that the system has four variables to go with the four equations.)
 
-    **(b)** Use {ref}`function-levenberg` with different initial guesses to find the two roots of this system. Which is the closest point to $(5,4,3)$ and which is the farthest?
+    **(b)** Use {numref}`Function {number}<function-levenberg>` with different initial guesses to find the two roots of this system. Which is the closest point to $(5,4,3)$ and which is the farthest?
 
     ````{only} solutions
 

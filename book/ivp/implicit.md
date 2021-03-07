@@ -16,10 +16,10 @@ We now consider some of the practical issues that arise when multistep formulas 
 {doc}`demos/implicit-ab4`
 ```
 
-{ref}`function-ab4` shows a basic implementation of this formula. Observe that {ref}`function-rk4` is used to find the starting values $\mathbf{u}_1,\mathbf{u}_2,\mathbf{u}_3$ that are needed before the iteration formula takes over. As far as RK4 is concerned, it needs to solve the IVP over the time interval $a \le t \le a+3h$, using a step size $h$ (the same step size as in the AB4 iteration). These values are then used by {ref}`function-ab4` to find
+{numref}`Function {number}<function-ab4>` shows a basic implementation of this formula. Observe that {numref}`Function {number}<function-rk4>` is used to find the starting values $\mathbf{u}_1,\mathbf{u}_2,\mathbf{u}_3$ that are needed before the iteration formula takes over. As far as RK4 is concerned, it needs to solve the IVP over the time interval $a \le t \le a+3h$, using a step size $h$ (the same step size as in the AB4 iteration). These values are then used by {numref}`Function {number}<function-ab4>` to find
 $\mathbf{f}_0,\ldots,\mathbf{f}_3$ and get the main iteration started.
 
-For each value of $i$ the formula uses the four most recently known values of the solution's derivative in order to advance by one step. In {ref}`function-ab4` only these values of $\mathbf{f}$ are stored, and a matrix-vector product is used for the linear combination implied in {eq}`ab4`:
+For each value of $i$ the formula uses the four most recently known values of the solution's derivative in order to advance by one step. In {numref}`Function {number}<function-ab4>` only these values of $\mathbf{f}$ are stored, and a matrix-vector product is used for the linear combination implied in {eq}`ab4`:
 
 ```{math}
   :label: ab4mv
@@ -123,9 +123,9 @@ The implementation of an implicit multistep method is a bit more involved. Consi
   \mathbf{z} - \mathbf{u}_i - \tfrac{1}{2} h \bigl[ \mathbf{f}(t_i,\mathbf{u}_i) + f(t_{i+1},\mathbf{z}) \bigr] = 0
 ```
 
-for $\mathbf{z}$, and then set $\mathbf{u}_{i+1}=\mathbf{z}$. This equation takes the form $\mathbf{g}(\mathbf{z})=\boldsymbol{0}$, so we have a rootfinding problem as in {doc}`../nonlineqn/overview`. An implementation of AM2 using {ref}`function-levenberg` from {doc}`../nonlineqn/quasinewton` is shown in {ref}`function-am2`. 
+for $\mathbf{z}$, and then set $\mathbf{u}_{i+1}=\mathbf{z}$. This equation takes the form $\mathbf{g}(\mathbf{z})=\boldsymbol{0}$, so we have a rootfinding problem as in {doc}`../nonlineqn/overview`. An implementation of AM2 using {numref}`Function {number}<function-levenberg>` from {doc}`../nonlineqn/quasinewton` is shown in {numref}`Function {number}<function-am2>`. 
 
-It defines a nested function called `trapzero` that evaluates the left-hand side of {eq}`AM2solve`, given any value of $\mathbf{z}$. The time stepping iteration calls {ref}`function-levenberg` at each step, starting from the value $\mathbf{u}_i+\tfrac{1}{2}h\mathbf{f}_i$ that is halfway between $\mathbf{u}_i$ and the Euler step $\mathbf{u}_i+h\mathbf{f}_i$. A robust code would have to intercept the case where {ref}`function-levenberg` fails to converge, but we have ignored this issue for the sake of simplicity.
+It defines a nested function called `trapzero` that evaluates the left-hand side of {eq}`AM2solve`, given any value of $\mathbf{z}$. The time stepping iteration calls {numref}`Function {number}<function-levenberg>` at each step, starting from the value $\mathbf{u}_i+\tfrac{1}{2}h\mathbf{f}_i$ that is halfway between $\mathbf{u}_i$ and the Euler step $\mathbf{u}_i+h\mathbf{f}_i$. A robust code would have to intercept the case where {numref}`Function {number}<function-levenberg>` fails to converge, but we have ignored this issue for the sake of simplicity.
 
 ## Stiff problems
 
@@ -135,12 +135,12 @@ It defines a nested function called `trapzero` that evaluates the left-hand side
 {doc}`demos/implicit-stiff`
 ```
 
-At each time step in {ref}`function-am2` (or any implicit IVP solver), a rootfinding iteration of unknown length is needed. This fact makes the cost of an implicit method much greater on a per-step basis than for an explicit one. Given this drawback, you are justified to wonder whether implicit methods are ever competitive! The answer is emphatically yes, as {doc}`demos/implicit-stiff` demonstrates.
+At each time step in {numref}`Function {number}<function-am2>` (or any implicit IVP solver), a rootfinding iteration of unknown length is needed. This fact makes the cost of an implicit method much greater on a per-step basis than for an explicit one. Given this drawback, you are justified to wonder whether implicit methods are ever competitive! The answer is emphatically yes, as {prf:ref}`demos-implicit-stiff` demonstrates.
 
 ```{index} stiff differential equation
 ```
 
-Although the result of {doc}`demos/implicit-stiff` may seem strange, there is no contradiction: a fourth-order explicit formula is indeed more accurate than a second-order implicit one, in the limit $h\to 0$. But there is another limit to consider, $t\to \infty$ with $h$ fixed, and in this one the implicit method wins. Such problems are called {term}`stiff`. A complete mathematical description will wait for a later chapter, but a sure sign of stiffness is the presence of phenomena on widely different time scales. In the example, there is "slow time," where the solution changes very little, and "fast time," when it suddenly jumps from zero to one. For stiff problems, implicit methods are usually preferred, because they can take far fewer steps than an explicit method, more than offsetting the extra work required per step.
+Although the result of {prf:ref}`demos-implicit-stiff` may seem strange, there is no contradiction: a fourth-order explicit formula is indeed more accurate than a second-order implicit one, in the limit $h\to 0$. But there is another limit to consider, $t\to \infty$ with $h$ fixed, and in this one the implicit method wins. Such problems are called {term}`stiff`. A complete mathematical description will wait for a later chapter, but a sure sign of stiffness is the presence of phenomena on widely different time scales. In the example, there is "slow time," where the solution changes very little, and "fast time," when it suddenly jumps from zero to one. For stiff problems, implicit methods are usually preferred, because they can take far fewer steps than an explicit method, more than offsetting the extra work required per step.
 
 ## Adaptivity
 
@@ -153,7 +153,7 @@ Because multistep methods rely on the solution history, though, changing the ste
 % Must stay as #1
 (problem-ab4tests)=
 
-1. ⌨ For each IVP, use {ref}`function-ab4` to find the solution over the indicated time interval for $n=250$. Plot the computed solution $(t_i,u_i)$ for $i=0,\ldots,n$, and separately plot the error $\bigl(t_i,u_i-\hat{u}(t_i)\bigr)$.
+1. ⌨ For each IVP, use {numref}`Function {number}<function-ab4>` to find the solution over the indicated time interval for $n=250$. Plot the computed solution $(t_i,u_i)$ for $i=0,\ldots,n$, and separately plot the error $\bigl(t_i,u_i-\hat{u}(t_i)\bigr)$.
 
     **(a)** $u' = -2t u, \ 0 \le t \le 2, \ u(0) = 2;\  \hat{u}(t) = 2e^{-t^2}$
 
@@ -184,12 +184,12 @@ Because multistep methods rely on the solution history, though, changing the ste
     % Must stay as #2
     (problem-ab4converge)=
 
-2. ⌨ For each IVP in the preceding problem, use {ref}`function-ab4` for $n=10\cdot2^d$ and $d=1,\ldots,10$. Make a log-log convergence plot for the final time error $|u_n-\hat{u}(t_n)|$ versus $n$, and add a straight line indicating fourth-order convergence.
+2. ⌨ For each IVP in the preceding problem, use {numref}`Function {number}<function-ab4>` for $n=10\cdot2^d$ and $d=1,\ldots,10$. Make a log-log convergence plot for the final time error $|u_n-\hat{u}(t_n)|$ versus $n$, and add a straight line indicating fourth-order convergence.
 
     ````{only} solutions
     ````
 
-3. ⌨  Line 35 of {ref}`function-ab4` reads
+3. ⌨  Line 35 of {numref}`Function {number}<function-ab4>` reads
 
     ``` julia
     u(:,i+1) = u(:,i) + h*(f*sigma);
@@ -201,27 +201,26 @@ Because multistep methods rely on the solution history, though, changing the ste
     u(:,i+1) = u(:,i) + h*f*sigma;
     ```
 
-4. ⌨ Repeat [exercise 1](problem-ab4tests) above  using {ref}`function-am2`.
+4. ⌨ Repeat [exercise 1](problem-ab4tests) above  using {numref}`Function {number}<function-am2>`.
 
     ````{only} solutions
     ````
 
-5. ⌨  Repeat [exercise 2 above](problem-ab4converge)  using {ref}`function-am2` and comparing to second-order rather than fourth-order convergence.
+5. ⌨  Repeat [exercise 2 above](problem-ab4converge)  using {numref}`Function {number}<function-am2>` and comparing to second-order rather than fourth-order convergence.
 
     ````{only} solutions
     ````
 
-6. ⌨ Using {ref}`function-am2` as a model, write a function `bd2` that applies the BD2 method to solve an IVP. Test the convergence of your function on one of the IVPs in [exercise 1](problem-ab4tests) above.
+6. ⌨ Using {numref}`Function {number}<function-am2>` as a model, write a function `bd2` that applies the BD2 method to solve an IVP. Test the convergence of your function on one of the IVPs in [exercise 1](problem-ab4tests) above.
 
     ````{only} solutions
     ````
 
-7. ⌨ For numerical purposes, the exact solution of the IVP in :label: demos-implicit-stiff
-{doc}`demos/implicit-stiff` satisfies $\hat{u}(400)=1$.
+7. ⌨ For numerical purposes, the exact solution of the IVP in {prf:ref}`demos-implicit-stiff` satisfies $\hat{u}(400)=1$.
 
-    **(a)** Use {ref}`function-ab4` with $n=200,400,600,\ldots,2000$ and make a log-log convergence plot of the error $|u_n-1|$ as a function of $n$.
+    **(a)** Use {numref}`Function {number}<function-ab4>` with $n=200,400,600,\ldots,2000$ and make a log-log convergence plot of the error $|u_n-1|$ as a function of $n$.
 
-    **(b)** Repeat part~(a) using {ref}`function-am2`.
+    **(b)** Repeat part~(a) using {numref}`Function {number}<function-am2>`.
   
     ````{only} solutions
     %% (a)
@@ -256,7 +255,7 @@ Because multistep methods rely on the solution history, though, changing the ste
 
     **(a)** ✍ Define $E(t) = \bigl\|\mathbf{u}(t)\bigr\|_2^2$. Show that $E(t)$ is constant. (Differentiate $u^Tu$ with respect to time and show that it simplifies to zero.)
 
-    **(b)** ⌨ Use {ref}`function-ab4` to solve the IVP for $t\in[0,20]$ with $n=100$ and $n=150$. On a single graph using a log scale on the $y$-axis, plot $|E(t)-E(0)|$ versus time for both solutions. You should see exponential growth in time.
+    **(b)** ⌨ Use {numref}`Function {number}<function-ab4>` to solve the IVP for $t\in[0,20]$ with $n=100$ and $n=150$. On a single graph using a log scale on the $y$-axis, plot $|E(t)-E(0)|$ versus time for both solutions. You should see exponential growth in time.
 
     **(c)** ⌨ Repeat part~(b) with $n=400$ and $n=600$, but use a linear scale on the $y$-axis. Now you should see only linear growth of $|E(t)-E(0)|$.
   
@@ -282,7 +281,7 @@ Because multistep methods rely on the solution history, though, changing the ste
     end
     ````
 
-9. ⌨ **(a)** Modify {ref}`function-ab4` to implement the AB2 method.
+9. ⌨ **(a)** Modify {numref}`Function {number}<function-ab4>` to implement the AB2 method.
 
     **(b)** Repeat part (b) of the preceding exercise, using AB2 in place of AB4.
 

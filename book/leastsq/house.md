@@ -3,7 +3,7 @@
 ```{index} orthogonal; matrix
 ```
 
-To compute an LU factorization, we follow elimination rules to introduce zeros into the lower triangle of the matrix, leaving only the $\mathbf{U}$ factor. The row operations are themselves triangular and can be combined into the $\mathbf{L}$ factor. For the QR factorization, the game is again to introduce zeros into the lower triangle, but the rules have changed; now the row operations must be done orthogonally. Thanks to [the orthogonal matrix theorem](theorem-orthogmatrix), the product of orthogonal operations will also be orthogonal, providing us with the final $\mathbf{Q}$ of the QR.
+To compute an LU factorization, we follow elimination rules to introduce zeros into the lower triangle of the matrix, leaving only the $\mathbf{U}$ factor. The row operations are themselves triangular and can be combined into the $\mathbf{L}$ factor. For the QR factorization, the game is again to introduce zeros into the lower triangle, but the rules have changed; now the row operations must be done orthogonally. Thanks to {prf:ref}`theorem-orthogmatrix`, the product of orthogonal operations will also be orthogonal, providing us with the final $\mathbf{Q}$ of the QR.
 
 ## Householder reflections
 
@@ -23,7 +23,7 @@ A **Householder reflector** is a particular type of orthogonal matrix $\mathbf{P
 \end{bmatrix} = \pm \| \mathbf{z} \| \mathbf{e}_1.
 ```
 
-(Recall that $\mathbf{e}_k$ is the $k$th column of the identity matrix.) We choose the positive sign for our discussion, but see [`qrfact`](function-qrfact) and [an exercise](problem-hhsign) for important computational details.
+(Recall that $\mathbf{e}_k$ is the $k$th column of the identity matrix.) We choose the positive sign for our discussion, but see {numref}`Function {number}<function-qrfact>` and [an exercise](problem-hhsign) for important computational details.
 
 Given $\mathbf{z}$, let
 
@@ -44,9 +44,8 @@ if $\mathbf{v}\neq\boldsymbol{0}$, or $\mathbf{P}=\mathbf{I}$ if $\mathbf{v}=\bo
 ```{index} symmetric matrix
 ```
 
-(theorem-hhreflect)=
-
-````{prf:theorem} (Householder reflector)
+````{prf:theorem} Householder reflector
+:label: theorem-hhreflect
 Let $\mathbf{v}=\| \mathbf{z} \|\mathbf{e}_1-\mathbf{z}$ and let $\mathbf{P}$ be given by {eq}`hhreflect`. Then $\mathbf{P}$ is symmetric and orthogonal, and $\mathbf{P}\mathbf{z}=\| \mathbf{z} \|\mathbf{e}_1$.
 ````
 
@@ -130,7 +129,7 @@ But $\mathbf{Q}_n \mathbf{Q}_{n-1}\cdots \mathbf{Q}_1$ is orthogonal too, and we
 
 we can build $\mathbf{Q}^T$ iteratively by starting with the identity and doing the same row operations as on $\mathbf{A}$.  Creating $\mathbf{Q}^T$ with row operations on $\mathbf{I}$ uses much less memory than building the $\mathbf{Q}_k$ matrices explicitly.
 
-The algorithm we have described is encapsulated in [`qrfact`](function-qrfact). There is one more refinement in it, though. As indicated by {eq}`hhapply`, the application of a reflector $\mathbf{P}$ to a vector does not require the formation of the matrix $\mathbf{P}$ itself. Its effect can be computed directly from the vector $\mathbf{v}$, as is shown in [`qrfact`](function-qrfact).
+The algorithm we have described is encapsulated in {numref}`Function {number}<function-qrfact>`. There is one more refinement in it, though. As indicated by {eq}`hhapply`, the application of a reflector $\mathbf{P}$ to a vector does not require the formation of the matrix $\mathbf{P}$ itself. Its effect can be computed directly from the vector $\mathbf{v}$, as is shown in {numref}`Function {number}<function-qrfact>`.
 
 (function-qrfact)=
 
@@ -169,7 +168,7 @@ function qrfact(A)
 end
 ```
 
-The Julia command `qr` works similarly to, but more efficiently than, [`qrfact`](function-qrfact). It finds the factorization in $\sim(2m n^2-n^3/3)$ flops asymptotically.
+The Julia command `qr` works similarly to, but more efficiently than, {numref}`Function {number}<function-qrfact>`. It finds the factorization in $\sim(2m n^2-n^3/3>`$ flops asymptotically.
 
 ## Exercises
 
@@ -185,7 +184,7 @@ The Julia command `qr` works similarly to, but more efficiently than, [`qrfact`]
     \end{bmatrix}.
     ```
 
-2. ✍ Prove the unfinished items in the [reflector theorem](theorem-hhreflect), namely that a Householder reflector $\mathbf{P}$ is symmetric and orthogonal.
+2. ✍ Prove the unfinished items in the {prf:ref}`theorem-hhreflect`, namely that a Householder reflector $\mathbf{P}$ is symmetric and orthogonal.
 
     % Prove that the Householder reflector $P$ is symmetric and orthogonal.  First,
     % we need to show that $P^T=P$, using
@@ -215,7 +214,7 @@ The Julia command `qr` works similarly to, but more efficiently than, [`qrfact`]
     **(b)** What algebraic condition is necessary and sufficient for a vector $\mathbf{w}$ to satisfy $\mathbf{P}\mathbf{w}=\mathbf{w}$? In $n$ dimensions, how many such linearly independent vectors are there?
   
     (problem-hhsign)=
-4. ✍ Under certain circumstances, computing the vector $\mathbf{v}$ in {eq}`hhvector` could lead to subtractive cancellation, which is why line 13 of [`qrfact`](function-qrfact) reads as it does. Devise an example that causes subtractive cancellation if {eq}`hhvector` is used.
+4. ✍ Under certain circumstances, computing the vector $\mathbf{v}$ in {eq}`hhvector` could lead to subtractive cancellation, which is why line 13 of {numref}`Function {number}<function-qrfact>` reads as it does. Devise an example that causes subtractive cancellation if {eq}`hhvector` is used.
 
 5. ✍ Suppose QR factorization is used to compute the solution of a *square* linear system, $\mathbf{A}\mathbf{x}=\mathbf{b}$; i.~e., let $m=n$.
 
@@ -268,7 +267,7 @@ The Julia command `qr` works similarly to, but more efficiently than, [`qrfact`]
     % \]
     % Note that we never inverted $A$, $R$ or $Q$ because they are rectangular.
 
-7. ⌨ Modify [`qrfact`](function-qrfact) so that the loops in lines 18--23 are removed. In other words, update the matrices `A` and `Q` with a single statement for each.  Test your code against the original code on an example to verify it.
+7. ⌨ Modify {numref}`Function {number}<function-qrfact>` so that the loops in lines 18--23 are removed. In other words, update the matrices `A` and `Q` with a single statement for each.  Test your code against the original code on an example to verify it.
 
 8. Another algorithmic technique for orthogonally introducing zeros into a matrix is the   *Givens rotation*. Given a 2-vector $[\alpha\, \beta]$, it defines an angle $\theta$ such that
   

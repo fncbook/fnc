@@ -3,7 +3,7 @@
 ```{index} Runge--Kutta method
 ```
 
-The derivation and analysis of methods for initial-value problems usually assumes a fixed step size $h$. While the error behavior $O(h^p)$ is guaranteed by the [convergence theorem](theorem-onestepGTE) as $h\rightarrow 0$, this bound comes with an unknowable constant, and it is not very useful as a guide to the numerical value of the error at any particular value of $h$. Furthermore, as we saw in {doc}`../localapprox/adaptive` with numerical integration, in many problems a fixed value of $h$ throughout $a\le t \le b$ is far from the most efficient strategy.
+The derivation and analysis of methods for initial-value problems usually assumes a fixed step size $h$. While the error behavior $O(h^p)$ is guaranteed by {prf:ref}`theorem-onestepGTE` as $h\rightarrow 0$, this bound comes with an unknowable constant, and it is not very useful as a guide to the numerical value of the error at any particular value of $h$. Furthermore, as we saw in {doc}`../localapprox/adaptive` with numerical integration, in many problems a fixed value of $h$ throughout $a\le t \le b$ is far from the most efficient strategy.
 
 In response we will employ the basic strategy of {doc}`../localapprox/adaptive`: adapt the time step size in order to reach an accuracy goal, as measured by an error estimate formed from computing multiple approximations. The details are quite different, however.
 
@@ -116,7 +116,7 @@ end
 ```
 ````
 
-Our implementation of an embedded second/third order (RK23) code is given in {ref}`function-rk23`. It has a few details that are worth explaining.
+Our implementation of an embedded second/third order (RK23) code is given in {numref}`Function {number}<function-rk23>`. It has a few details that are worth explaining.
 
 First, as in {eq}`absreltolerance`, we use a combination of absolute and relative tolerances to judge the acceptability of a solution value. Second, we have a check whether $t_i+h$ equals $t_i$, which looks odd. This check is purely about roundoff error, because $h$ can become so small that it no longer changes the floating point value of $t_i$. When this happens, it's often a sign that the underlying exact solution has a singularity near $t=t_i$. Third, some adjustments are made to the step size prediction factor $q$. We use a smaller value than {eq}`adaptRKlocal`, to be conservative about the many assumptions that were made to derive it. We also prevent a huge jump in the step size for the same reason. And, we make sure that our final step doesn't take us past the requested end of the domain.
 
@@ -124,7 +124,10 @@ First, as in {eq}`absreltolerance`, we use a combination of absolute and relativ
 :class: demo
 :label: demos-adapt-basic
 {doc}`demos/adapt-basic`
+```
 
+```{prf:example} Julia demo
+:class: demo
 :label: demos-adapt-sing
 {doc}`demos/adapt-sing`
 ```
@@ -135,7 +138,7 @@ Often the steps chosen adaptively clearly correspond to identifiable features of
 
 ## Exercises
 
-1. ⌨ Using {ref}`function-rk23`, solve $y'' +(1+y')^3 y = 0$ over $ 0 \le t \le 4 \pi$ with the indicated initial conditions. Plot $y(t)$ and $y'(t)$ as a function of $t$ and separately plot the solution curve parametrically in the phase plane—that is, the $\bigl(y(t),y'(t)\bigr)$-plane.
+1. ⌨ Using {numref}`Function {number}<function-rk23>`, solve $y'' +(1+y')^3 y = 0$ over $ 0 \le t \le 4 \pi$ with the indicated initial conditions. Plot $y(t)$ and $y'(t)$ as a function of $t$ and separately plot the solution curve parametrically in the phase plane—that is, the $\bigl(y(t),y'(t)\bigr)$-plane.
 
     **(a)** $y(0) = 0.1, \quad y'(0) = 0$
 
@@ -148,7 +151,7 @@ Often the steps chosen adaptively clearly correspond to identifiable features of
     ````{only} solutions
     ````
 
-2. ⌨ Solve the [caffeine exercise](problem-caffeine) using {ref}`function-rk23` with an error tolerance of $10^{-5}$. Plot the solution so that you can see the individual points. What is the smallest time step taken, and at what time does it occur?
+2. ⌨ Solve the [caffeine exercise](problem-caffeine) using {numref}`Function {number}<function-rk23>` with an error tolerance of $10^{-5}$. Plot the solution so that you can see the individual points. What is the smallest time step taken, and at what time does it occur?
 
     ````{only} solutions
     k = log(2)/6;
@@ -166,7 +169,7 @@ Often the steps chosen adaptively clearly correspond to identifiable features of
     %    0.5002
     ````
 
-3. ⌨ Solve the [FitzHugh--Nagumo exercise](problem-fitznag) using {ref}`function-rk23`. Let the error tolerance be $10^{-k}$, increasing the integer $k$ until the graph of the solutions no longer changes. (This illustrates that the error tolerance is a request, not a guarantee!)
+3. ⌨ Solve the [FitzHugh--Nagumo exercise](problem-fitznag) using {numref}`Function {number}<function-rk23>`. Let the error tolerance be $10^{-k}$, increasing the integer $k$ until the graph of the solutions no longer changes. (This illustrates that the error tolerance is a request, not a guarantee!)
 
     ````{only} solutions
     a = 0.1;

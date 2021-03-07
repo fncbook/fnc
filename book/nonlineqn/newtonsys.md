@@ -130,7 +130,7 @@ An extension of our series analysis of the scalar Newton's method shows that the
 
 ## Implementation
 
-An implementation of Newton's method for systems is given in {ref}`function-newtonsys`.
+An implementation of Newton's method for systems is given in {numref}`Function {number}<function-newtonsys>`.
 
 (function-newtonsys)=
 
@@ -173,7 +173,7 @@ end
 
 ````{tip}
 ```{toggle}
-The output of {ref}`function-newtonsys` is a vector of vectors representing the entire history of root estimates. Since these are usually floating point, even when the initial estimate is integer, the initial estimate is converted with `float` in line 12.
+The output of {numref}`Function {number}<function-newtonsys>` is a vector of vectors representing the entire history of root estimates. Since these are usually floating point, even when the initial estimate is integer, the initial estimate is converted with `float` in line 12.
 ```
 ````
 
@@ -183,16 +183,14 @@ The output of {ref}`function-newtonsys` is a vector of vectors representing the 
 {doc}`demos/system-usage`
 ````
 
-It is a remarkable effect of the vector-friendliness of Julia that this program is hardly different from the scalar version {ref}`function-newton` presented earlier:
+It is a remarkable effect of the vector-friendliness of Julia that this program is hardly different from the scalar version {numref}`Function {number}<function-newton>` presented earlier:
 
 ```{index} backslash
 ```
 
 - The root estimates are stored as columns in an array.
 - The Newton step is calculated using a backslash.
-- The function "norm" is used for the magnitude of a vector, instead of "abs" for the magnitude of a scalar.
-
-Indeed, {ref}`function-newtonsys` is a proper generalization—it can be used on scalar problems as well as on systems.
+- The function `norm` is used for the magnitude of a vector, instead of `abs` for the magnitude of a scalar.
 
 ## Exercises
 
@@ -222,9 +220,9 @@ Indeed, {ref}`function-newtonsys` is a proper generalization—it can be used on
 
     **(b)** ✍ Find the Jacobian matrix of $\mathbf{f}$.
 
-    **(c)** ⌨ Use {ref}`function-newtonsys` to find an intersection point near $u=1$, $v=0.1$.
+    **(c)** ⌨ Use {numref}`Function {number}<function-newtonsys>` to find an intersection point near $u=1$, $v=0.1$.
 
-    **(d)** ⌨ Use {ref}`function-newtonsys` to find an intersection point near $u=0.1$, $v=1$.
+    **(d)** ⌨ Use {numref}`Function {number}<function-newtonsys>` to find an intersection point near $u=0.1$, $v=1$.
 
     ````{only} solutions
 
@@ -270,7 +268,7 @@ Indeed, {ref}`function-newtonsys` is a proper generalization—it can be used on
 
     **(c)** ✍ Write out the Jacobian matrix of this nonlinear system.
 
-    **(d)** ⌨ Use {ref}`function-newtonsys` to find all of the unique intersections.
+    **(d)** ⌨ Use {numref}`Function {number}<function-newtonsys>` to find all of the unique intersections.
   
     ````{only} solutions
     ``` matlab
@@ -298,9 +296,9 @@ Indeed, {ref}`function-newtonsys` is a proper generalization—it can be used on
   
     ```{math}
     \begin{split}
-        x-5 &= \frac{\lambda x}{25} \\
-        y-4 &= \frac{\lambda y}{16} \\
-        z-3 &= \frac{\lambda z}{9} \\
+        x-5 &= \frac{\lambda x}{25} \\[1mm]
+        y-4 &= \frac{\lambda y}{16} \\[1mm]
+        z-3 &= \frac{\lambda z}{9} \\[1mm]
         1 &=  \frac{1}{25}x^2 + \frac{1}{16}y^2 + \frac{1}{9}z^2
     \end{split}
     ```
@@ -311,7 +309,7 @@ Indeed, {ref}`function-newtonsys` is a proper generalization—it can be used on
 
     **(b)** Write out the Jacobian matrix of this system.
 
-    **(c)** Use {ref}`function-newtonsys` with different initial guesses to find the two roots of this system. Which is the closest point to $(5,4,3)$ and which is the farthest?
+    **(c)** Use {numref}`Function {number}<function-newtonsys>` with different initial guesses to find the two roots of this system. Which is the closest point to $(5,4,3)$ and which is the farthest?
   
     ````{only} solutions
     ``` matlab
@@ -361,7 +359,7 @@ Indeed, {ref}`function-newtonsys` is a proper generalization—it can be used on
     |------|------|------|------|------|------|
     | Population | 92.0 | 122.8 | 150.7 | 205.0$ | 248.7 |
   
-    **(a)** Determine the unknown parameters $a_1$, $a_2$, $a_3$ in $P$ by requiring that $P$ exactly reproduce the data in the years 1910, 1950, and 1990. This creates three nonlinear equations for $a_1$, $a_2$, and $a_3$ that may be solved using {ref}`function-newtonsys`.
+    **(a)** Determine the unknown parameters $a_1$, $a_2$, $a_3$ in $P$ by requiring that $P$ exactly reproduce the data in the years 1910, 1950, and 1990. This creates three nonlinear equations for $a_1$, $a_2$, and $a_3$ that may be solved using {numref}`Function {number}<function-newtonsys>`.
 
     **(b)** To obtain convergence, rescale the data using the time variable $t = (\text{year}-1900)/100$ and divide the population numbers above by  $100$. Using your model $P(t)$, predict the result of the 2000 census, and compare it to the true figure of 284.1 million.
   

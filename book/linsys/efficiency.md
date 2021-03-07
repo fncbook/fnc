@@ -58,12 +58,9 @@ Traditionally, in numerical linear algebra we count **floating point operations*
 :class: demo
 :label: demos-flops-mvmult
 {doc}`demos/flops-mvmult`
-
-:label: demos-flops-loglog
-{doc}`demos/flops-loglog`
 ```
 
-It's clear from the example in {prf:ref}`demos-flops-mvmult` that the runtime increases at a function of $n$—but at what rate? Suppose that the time obeys a function that is not just $O(n^p)$, but actually equal to $Cn^p$ for some constants $C$ and $p$. For large enough $n$, this should be a good approximation. Then
+It's clear from {prf:ref}`demos-flops-mvmult` that the runtime increases at a function of $n$—but at what rate? Suppose that the time obeys a function that is not just $O(n^p)$, but actually equal to $Cn^p$ for some constants $C$ and $p$. For large enough $n$, this should be a good approximation. Then
 
 ```{math}
   :label: loglogfit
@@ -72,6 +69,11 @@ It's clear from the example in {prf:ref}`demos-flops-mvmult` that the runtime in
 
 Hence, a graph of $\log t$ as a function of $\log n$ will be a straight line of slope $p$.
 
+
+```{prf:example} Julia demo
+:label: demos-flops-loglog
+{doc}`demos/flops-loglog`
+```
 ## Flops for solving linear equations
 
 Recall how we have proposed to solve the system $\mathbf{A}\mathbf{x}=\mathbf{b}$:
@@ -80,7 +82,7 @@ Recall how we have proposed to solve the system $\mathbf{A}\mathbf{x}=\mathbf{b}
 1. Solve $\mathbf{L}\mathbf{z}=\mathbf{b}$ for $\mathbf{z}$ using forward substitution.
 1. Solve $\mathbf{U}\mathbf{x}=\mathbf{z}$ for $\mathbf{x}$ using backward substitution.
 
-The second and third steps are solved by {ref}`function-forwardsub` and {ref}`function-backsub`. Only one line in each of these functions performs any arithmetic. Take `forwardsub`, for instance. It has a single flop in line 11.  Line 13 computes
+The second and third steps are solved by {numref}`Function {number}<function-forwardsub>` and {numref}`Function {number}<function-backsub>`. Only one line in each of these functions performs any arithmetic. Take `forwardsub`, for instance. It has a single flop in line 11.  Line 13 computes
 
 ```julia  
 sum( L[i,j]*x[j] for j=1:i-1 )
@@ -111,7 +113,7 @@ Solving a triangular $n\times n$ system takes $\sim n^2$ flops asymptotically.
 
 which holds for any positive integer $p$. This formula has memorable similarity to the antiderivative "power rule" for $\int x^p \, dx$. Applying it to {eq}`trisolveflops` leads us to conclude that solving a triangular linear system of size $n\times n$ takes $\sim n^2$ flops. An analysis of backward substitution yields the same result.
 
-Now let's count flops for LU factorization from the listing of {ref}`function-lufact`. Line 15 requires one division.  Line 16 is an operation on vectors of length $n-j+1$, requiring $n-j+1$ scalar multiplications and the same number of subtractions. These statements occur inside two loops, which requires a nested sum:
+Now let's count flops for LU factorization from the listing of {numref}`Function {number}<function-lufact>`. Line 15 requires one division.  Line 16 is an operation on vectors of length $n-j+1$, requiring $n-j+1$ scalar multiplications and the same number of subtractions. These statements occur inside two loops, which requires a nested sum:
 
 ```{math}
 :label: gecount1
@@ -187,7 +189,7 @@ In practice, flops are not the only aspect of an implementation that occupies si
 
     Assuming that `x` is a scalar, how many flops does this function take, as a function of $n$?
 
-    **(b)** Compare the count from (a) to the flop count for Horner's rule, [`horner`](function-horner).
+    **(b)** Compare the count from (a) to the flop count for Horner's rule, {numref}`Function {number}<function-horner>`.
   
     %%
     %% part (a)

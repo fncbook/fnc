@@ -25,7 +25,7 @@ We next consider three important types of matrices that cause the LU factorizati
 {doc}`demos/structure-banded`
 ```
 
-A matrix $\mathbf{A}$ has **upper bandwidth** $b_u$ if $j-i > b_u$ implies $A_{ij}=0$, and **lower bandwidth** $b_\ell$ if $i-j > b_\ell$ implies $A_{ij}=0$. We say the total {term}`bandwidth` is $b_u+b_\ell+1$. When $b_u=b_\ell=1$, we have the important case of a {term}`tridiagonal matrix`.  The {term}`spy` function in `Plots` is handy for visualizing the location of nonzero elements.
+A matrix $\mathbf{A}$ has **upper bandwidth** $b_u$ if $j-i > b_u$ implies $A_{ij}=0$, and **lower bandwidth** $b_\ell$ if $i-j > b_\ell$ implies $A_{ij}=0$. We say the total {term}`bandwidth` is $b_u+b_\ell+1$. When $b_u=b_\ell=1$, we have the important case of a {term}`tridiagonal matrix`.  The {term}`spy` function is handy for visualizing the location of nonzero elements.
 
 ```{margin}
 The number of flops needed by LU factorization is $O(b_ub_\ell n)$ when the upper and lower bandwidths are $b_u$ and $b_\ell$.
@@ -45,7 +45,7 @@ If no row pivoting is used, the $\mathbf{L}$ and $\mathbf{U}$ factors preserve t
 {doc}`demos/structure-timing`
 ```
 
-In order to take advantage of the savings, we would need minor modifications to {ref}`function-lufact` and the triangular substitution routines. Alternatively, we can get Julia to take advantage of the structure automatically by converting the matrix into a special type called {term}`sparse`, defined in the `SparseArrays` package. Sparse matrices are covered in more detail in later chapters.
+In order to take advantage of the savings, we would need minor modifications to {numref}`Function {number}<function-lufact>` and the triangular substitution routines. Alternatively, we can get Julia to take advantage of the structure automatically by converting the matrix into a special type called {term}`sparse`. Sparse matrices are covered in more detail in later chapters.
 
 ## Symmetric matrices
 
@@ -203,7 +203,7 @@ The speed and stability of the Cholesky factorization make it the top choice for
 
 3. ✍ Show that the diagonal entries of a positive definite matrix are positive numbers. (Hint: Use special cases of {eq}`SPD-def`.)
 
-4. ⌨ Using {ref}`function-lufact` as a guide, write a function
+4. ⌨ Using {numref}`Function {number}<function-lufact>` as a guide, write a function
 
     ``` julia
     function luband(A,upper,lower)

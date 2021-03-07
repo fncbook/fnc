@@ -141,7 +141,7 @@ The generalization of a scalar IVP solver to handle systems is straightforward. 
 
 The vector difference equation {eq}`eulersys` is just Euler's formula applied simultaneously to each component of the ODE system.  The method is still explicit for the solution at the new time level. Note here that as always in this book, an indexed boldface quantity such as $\mathbf{u}_i$ is a vector. If we want to refer to component $j$ of that vector, we would write $u_{i,j}$.
 
-It might surprise you that the function {ref}`function-euler` that we wrote for scalar IVPs works for systems as well. In large part that's because as we observed with the mathematics, operations such as addition and multiplication translate easily from scalars to vectors. As long as the definition of the IVP correctly handles a vector for the dependent variable and specifies a vector initial condition, we're all set.
+It might surprise you that the function {numref}`Function {number}<function-euler>` that we wrote for scalar IVPs works for systems as well. In large part that's because as we observed with the mathematics, operations such as addition and multiplication translate easily from scalars to vectors. As long as the definition of the IVP correctly handles a vector for the dependent variable and specifies a vector initial condition, we're all set.
 
 ### new demo needed here
 
@@ -186,7 +186,7 @@ In the rest of this chapter we present methods as though they are for scalar equ
     ````{only} solutions
     ````
 
-3. ⌨ Solve the following IVPs using {ref}`function-euler` using $n=100$ steps. Plot the solution and its first derivative together on one plot, and plot the error in each component as functions of time on another.
+3. ⌨ Solve the following IVPs using {numref}`Function {number}<function-euler>` using $n=100$ steps. Plot the solution and its first derivative together on one plot, and plot the error in each component as functions of time on another.
 
     **(a)** $u''+ 4u = 4t, \: 0< t< 2\pi, \: u(0) = 1,\: u'(0) = 1; \: \hat{u}(t) = t+\cos (2t)$
 

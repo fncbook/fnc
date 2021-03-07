@@ -45,7 +45,7 @@ As the figure and {eq}`orthosubtract` show, orthogonal vectors do not allow this
 
 ## Orthogonal and ONC matrices
 
-Statements about orthogonal vectors are often made more easily in matrix form. Let $\mathbf{Q}$ be an $n\times k$ matrix whose columns $\mathbf{q}_1$, \ldots, $\mathbf{q}_k$ are orthogonal vectors. The orthogonality conditions {eq}`orthogonality` become simply that $\mathbf{Q}^T\mathbf{Q}$ is a diagonal matrix, since
+Statements about orthogonal vectors are often made more easily in matrix form. Let $\mathbf{Q}$ be an $n\times k$ matrix whose columns $\mathbf{q}_1, \ldots, \mathbf{q}_k$ are orthogonal vectors. The orthogonality conditions {eq}`orthogonality` become simply that $\mathbf{Q}^T\mathbf{Q}$ is a diagonal matrix, since
 
 ```{math}
 \mathbf{Q}^T \mathbf{Q} =
@@ -69,9 +69,9 @@ Statements about orthogonal vectors are often made more easily in matrix form. L
 
 If the columns of $\mathbf{Q}$ are orthonormal, then $\mathbf{Q}^T\mathbf{Q}$ is the $k\times k$ identity matrix. This is such an important property that we will break with common practice here and give this type of matrix a name: an {term}`ONC matrix` is one whose columns are an orthonormal set of vectors. We summarize their important properties here.
 
-(theorem-ONC)=
+````{prf:theorem} ONC matrix
+:label: theorem-ONC
 
-````{prf:theorem} (ONC matrix)
 Suppose $\mathbf{Q}$ is a real $n\times k$ ONC matrix (matrix with orthonormal columns). Then:
 
 1. $\mathbf{Q}^T\mathbf{Q} = \mathbf{I}$ ($k\times k$ identity).
@@ -96,14 +96,15 @@ Of particular interest is a *square* ONC matrix, for which $\mathbf{Q}^T\mathbf{
 
 [^ortho]: Confusingly, a square matrix whose columns are orthogonal is not necessarily an orthogonal matrix; the columns must be orthonormal, which is a stricter condition.
 
-(theorem-orthogmatrix)=
 
-````{prf:theorem} (Orthogonal matrix)
+````{prf:theorem} Orthogonal matrix
+:label: theorem-orthogmatrix
+
 Suppose $\mathbf{Q}$ is an $n\times n$ real orthogonal matrix. Then:
 1. $\mathbf{Q}^T$ is also an orthogonal matrix.
-1. $\kappa(\mathbf{Q})=1$ in the 2-norm.
-1. For any other $n\times n$ matrix $\mathbf{A}$, $\| \mathbf{A}\mathbf{Q} \|_2=\| \mathbf{A} \|_2$.
-1. If $\mathbf{U}$ is another $n\times n$ orthogonal matrix, then $\mathbf{Q}\mathbf{U}$ is also orthogonal.
+2. $\kappa(\mathbf{Q})=1$ in the 2-norm.
+3. For any other $n\times n$ matrix $\mathbf{A}$, $\| \mathbf{A}\mathbf{Q} \|_2=\| \mathbf{A} \|_2$.
+4. If $\mathbf{U}$ is another $n\times n$ orthogonal matrix, then $\mathbf{Q}\mathbf{U}$ is also orthogonal.
 ````
 
 ## Orthogonal factorization
@@ -185,7 +186,7 @@ If we substitute the thin factorization {eq}`economyqr` into the normal equation
 \end{split}
 ```
 
-In order to have the normal equations be well posed, we require that $\mathbf{A}$ is not rank-deficient (as proved in a [theorem](theorem-ATA)). This is enough to guarantee that $\hat{\mathbf{R}}$ is nonsingular (see [this exercise](problem-nonsingR). Therefore, its transpose is nonsingular as well, and we arrive at
+In order to have the normal equations be well posed, we require that $\mathbf{A}$ is not rank-deficient (as proved in {prf:ref}`theorem-ATA`). This is enough to guarantee that $\hat{\mathbf{R}}$ is nonsingular (see [this exercise](problem-nonsingR)). Therefore, its transpose is nonsingular as well, and we arrive at
 
 ```{math}
 :label: lsqr
@@ -196,7 +197,7 @@ In order to have the normal equations be well posed, we require that $\mathbf{A}
 The solution of least squares problems via QR factorization does not suffer from the instability seen when the normal equations are solved by Cholesky factorization.
 ```
 
-This is a triangular $n\times n$ linear system that is easily solved by backward substitution, as demonstrated in {ref}`function-lsqrfact`. The function itself is superfluous, however, as this is essentially the algorithm used internally by Julia when \verb+A\b+ is called. Most importantly, even though we derived {eq}`lsqr` from the normal equations, the solution of least squares problems via QR factorization does not suffer from the instability seen when the normal equations are solved directly using Cholesky factorization.
+This is a triangular $n\times n$ linear system that is easily solved by backward substitution, as demonstrated in {numref}`Function {number}<function-lsqrfact>`. The function itself is superfluous, however, as this is essentially the algorithm used internally by Julia when `A\b` is called. Most importantly, even though we derived {eq}`lsqr` from the normal equations, the solution of least squares problems via QR factorization does not suffer from the instability seen when the normal equations are solved directly using Cholesky factorization.
 
 (function-lsqrfact)=
 
@@ -222,9 +223,9 @@ end
 
 ## Exercises
 
-1. ✍ Prove part 3 of [the ONC matrix theorem](theorem-ONC).
+1. ✍ Prove part 3 of {prf:ref}`theorem-ONC`.
 
-2. ✍ Prove [the orthogonal matrix theorem](theorem-orthogmatrix). For the third part, use the definition of the 2-norm as an induced matrix norm, then apply some of our other results as needed.
+2. ✍ Prove {prf:ref}`theorem-orthogmatrix`. For the third part, use the definition of the 2-norm as an induced matrix norm, then apply some of our other results as needed.
 
 3. ⌨ Let $t_0,\ldots,t_m$ be $m+1$ equally spaced points in $[-1,1]$. Let $\mathbf{A}$ be the matrix in {eq}`vandersystemrect` for $m=400$ and fitting by polynomials of degree less than 5. Find the thin QR factorization of $\mathbf{A}$, and, on a single graph, plot every column of $\hat{\mathbf{Q}}$ as a function of the vector $t$.
 

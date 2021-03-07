@@ -80,7 +80,7 @@ The trapezoid formula results from integration of the piecewise linear interpola
 ```{index} trapezoid formula; for integration
 ```
 
-This is called the {term}`trapezoid formula` or trapezoid rule.[^comp] The trapezoid formula results from integration of the piecewise linear interpolant, or equivalently, as illustrated in {numref}`fig-trapezoid`, from using the area of approximating trapezoids to estimate the area under a curve. The trapezoid formula is the Swiss Army knife of integration formulas. A short implementation is given as {ref}`function-trapezoid`.
+This is called the {term}`trapezoid formula` or trapezoid rule.[^comp] The trapezoid formula results from integration of the piecewise linear interpolant, or equivalently, as illustrated in {numref}`fig-trapezoid`, from using the area of approximating trapezoids to estimate the area under a curve. The trapezoid formula is the Swiss Army knife of integration formulas. A short implementation is given as {numref}`Function {number}<function-trapezoid>`.
 
 [^comp]: Some texts distinguish between a formula for a single subinterval $[t_{k-1},t_k]$ and a "composite" formula that adds them up over the whole interval to get something like our {eq}`trapezoid`.
 
@@ -256,7 +256,7 @@ where the nodes referenced in the last line are relative to $n=2m$. To summarize
 (problem-quadraturetests)=
 % must be kept as #1
 
-1. ⌨ For each integral below, use {ref}`function-trapezoid` to estimate the integral for $n=10\cdot 2^k$ nodes for $k=1,2,\ldots,10$. Make a log--log plot of the errors and confirm or refute second-order accuracy. (These integrals were taken from {cite}`baileyComparisonThree2005`.)
+1. ⌨ For each integral below, use {numref}`Function {number}<function-trapezoid>` to estimate the integral for $n=10\cdot 2^k$ nodes for $k=1,2,\ldots,10$. Make a log--log plot of the errors and confirm or refute second-order accuracy. (These integrals were taken from {cite}`baileyComparisonThree2005`.)
 
     **(a)** $\displaystyle \int_0^1 x\log(1+x)\, dx = \frac{1}{4}$
 

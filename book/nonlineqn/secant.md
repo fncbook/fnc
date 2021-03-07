@@ -1,12 +1,12 @@
 # Interpolation-based methods
 
-From a practical standpoint, one of the biggest drawbacks of Newton's method is the requirement to supply $f'$ in [`newton`](function-newton). It is both a programming inconvenience and a step that requires computational time. We can avoid using $f'$ however, by making a simple but easily overlooked observation:
+From a practical standpoint, one of the biggest drawbacks of Newton's method is the requirement to supply $f'$ in {numref}`Function {number}<function-newton>`. It is both a programming inconvenience and a step that requires computational time. We can avoid using $f'$ however, by making a simple but easily overlooked observation:
 
 ```{prf:observation}
  When a step produces an approximate result, you are free to carry it out approximately. 
 ```
 
-Let's call this the "principle of approximate approximation."
+Let's call this the *principle of approximate approximation.*
 
 In the Newton context, the principle of approximate approximation begins with the observation that the use of $f'$ is linked to the construction of a linear approximation $q(x)$ equivalent to a tangent line. The root of $q(x)$ is used to define the next iterate in the sequence. We can avoid calculating the value of $f'$ by choosing a different linear approximation.
 
@@ -37,7 +37,7 @@ Solving $q(x_{k+1})=0$ for $x_{k+1}$ gives the formula
 x_{k+1} = x_k - \frac{f(x_k)(x_k-x_{k-1})}{f(x_k)-f(x_{k-1})}, \quad n=1,2,\ldots.
 ```
 
-Our implementation of the method based on this formula is given in {ref}`function-secant`.
+Our implementation of the method based on this formula is given in {numref}`Function {number}<function-secant>`.
 
 (function-secant)=
 
@@ -122,7 +122,7 @@ Hence the errors in the secant method converge like $\epsilon_{k+1} = c (\epsilo
 
 In terms of error as a function of the iteration number $k$, the secant method converges at a rate between linear and quadratic, which is slower than Newton's method. In that sense we must conclude that the secant line is inferior to the tangent line for approximating $f$ near a root. But error versus iteration count may not be the best means of comparison.
 
-Often we analyze rootfinding methods by assuming that the bulk of computing time is spent evaluating the user-defined functions $f$ and $f'$. (Our simple examples and exercises mostly don't support this assumption, but many practical applications do.) In this light we see that Newton's method requires two evaluations, $f(x_k)$ and $f'(x_k)$, for each iteration. The secant method, on the other hand, while it *uses* the two function values $f(x_k)$ and $f(x_{k-1})$ at each iteration, only needs to *compute* a single new one. Note that {ref}`function-secant` keeps track of one previous function value rather than recomputing it.
+Often we analyze rootfinding methods by assuming that the bulk of computing time is spent evaluating the user-defined functions $f$ and $f'$. (Our simple examples and exercises mostly don't support this assumption, but many practical applications do.) In this light we see that Newton's method requires two evaluations, $f(x_k)$ and $f'(x_k)$, for each iteration. The secant method, on the other hand, while it *uses* the two function values $f(x_k)$ and $f(x_{k-1})$ at each iteration, only needs to *compute* a single new one. Note that {numref}`Function {number}<function-secant>` keeps track of one previous function value rather than recomputing it.
 
 Now suppose that $|\epsilon_k|=\epsilon$. Roughly speaking, two units of work (i.e., function evaluations) in Newton's method brings us to an error of $\epsilon^2$. If one spreads out the improvement in the error evenly across the two geometric steps, using
 
@@ -145,7 +145,7 @@ At each iteration, the secant method constructs a linear model function that int
 
 If we interpolate through three points by a polynomial, we get a unique quadratic function. Unfortunately, a parabola may have zero, one, or two crossings of the $x$-axis, leaving some doubt as to how to define the next root estimate. On the other hand, if we turn a parabola on its side, we get a graph that intersects the $x$-axis exactly once, which is ideal for defining the next root estimate.
 
-This leads to the idea of defining $q(y)$ as the quadratic interpolant to the points $(y_{k-2},x_{k-2})$, $(y_{k-1},x_{k-1})$, and $(y_k,x_k)$, where $y_i=f(x_i)$ for all $i$, and setting $x_{k+1}=q(0)$. The process defined in this way (given three initial estimates) is called **inverse quadratic interpolation**. Rather than deriving lengthy formulas for it here, we demonstrate how to perform inverse quadratic interpolation using `Polynomials.fit` to perform the interpolation step.
+This leads to the idea of defining $q(y)$ as the quadratic interpolant to the points $(y_{k-2},x_{k-2})$, $(y_{k-1},x_{k-1})$, and $(y_k,x_k)$, where $y_i=f(x_i)$ for all $i$, and setting $x_{k+1}=q(0)$. The process defined in this way (given three initial estimates) is called **inverse quadratic interpolation**. Rather than deriving lengthy formulas for it here, we demonstrate how to perform inverse quadratic interpolation using `fit` to perform the interpolation step.
 
 ````{prf:example} Julia demo
 :class: demo
@@ -165,7 +165,15 @@ The best algorithms blend the use of fast-converging methods with the guarantee 
 
 For each of problems 1--3, do the following steps.
   
-**(a)** ✍ Rewrite the equation into the standard form for rootfinding, $f(x) = 0$. **(b)** ⌨ Make a plot of $f$ over the given interval and determine how many roots lie in the interval. **(c)** ⌨ Use `nlsolve` to find an "exact" value for each root. **(d)** ⌨ Determine a bracketing interval for each root. Then use {ref}`function-secant`, starting with the endpoints of the interval, to find each root. **(e)** ⌨ For one of the roots, define `e` as a vector of the errors in the secant sequence. Determine numerically whether the convergence is superlinear.
+**(a)** ✍ Rewrite the equation into the standard form for rootfinding, $f(x) = 0$. 
+
+**(b)** ⌨ Make a plot of $f$ over the given interval and determine how many roots lie in the interval. 
+
+**(c)** ⌨ Use `nlsolve` to find an "exact" value for each root.
+
+**(d)** ⌨ Determine a bracketing interval for each root. Then use {numref}`Function {number}<function-secant>`, starting with the endpoints of the interval, to find each root.
+
+**(e)** ⌨ For one of the roots, define `e` as a vector of the errors in the secant sequence. Determine numerically whether the convergence is superlinear.
 
 1. $x^2=e^{-x}$, over $[-2,2]$
 
@@ -210,7 +218,7 @@ For each of problems 1--3, do the following steps.
 
 3. $e^{x+1}=2+x$, over $[-2,2]$
 
-4. ⌨ Use a plot to approximately locate all the roots of $f(x)=x^{-2}-\sin(x)$ in the interval $[0.5,4\pi]$. Then find a pair of initial points for each root such that {ref}`function-secant` converges to that root.
+4. ⌨ Use a plot to approximately locate all the roots of $f(x)=x^{-2}-\sin(x)$ in the interval $[0.5,4\pi]$. Then find a pair of initial points for each root such that {numref}`Function {number}<function-secant>` converges to that root.
 
 5. ✍ Show analytically that the secant method converges in one step for a linear function, regardless of the initialization.
 
@@ -220,5 +228,5 @@ For each of problems 1--3, do the following steps.
 
 8. ✍ Provide the details that show how to derive {eq}`secanterr` from {eq}`secant`.
 
-9. ⌨ Write a function `iqi(f,x1,x2,x3)` that performs inverse quadratic interpolation for finding a root of $f$, given three initial estimates. To find the quadratic polynomial $q(y)$ passing through the three most recent points, use `fit` from the `Polynomials` package. Test your function on the first problem
+9. ⌨ Write a function `iqi(f,x1,x2,x3)` that performs inverse quadratic interpolation for finding a root of $f$, given three initial estimates. To find the quadratic polynomial $q(y)$ passing through the three most recent points, use `fit`. Test your function on the first problem
 from this section.

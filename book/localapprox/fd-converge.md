@@ -160,14 +160,14 @@ The observations in {prf:ref}`demos-fdconverge-round` match the analysis above q
     % $$\frac{1}{2}h f''(0) - \frac{1}{6}h^2 f'''(0)$$
     ````
 
-3. ✍ Calculate the first nonzero term in the Taylor series of the truncation error $\tau_{f}(h)$ for the finite difference formula defined by the second row of~{ref}`table-FDforward`.
+3. ✍ Calculate the first nonzero term in the Taylor series of the truncation error $\tau_{f}(h)$ for the finite difference formula defined by the second row of {numref}`table-FDforward`.
 
     ````{only} solutions
     % In[1]:= Series[f'[0]-(\[Minus]3/2 f [0]+2 f [h]\[Minus]1/2 f [2h])/h,{h,0,3}]
     % Out[1]= 1/3 (f^(3))[0] h^2+1/4 (f^(4))[0] h^3+O[h]^4
     ````
 
-4. ✍ Calculate the first nonzero term in the Taylor series of the truncation error $\tau_{f}(h)$ for the finite difference formula defined by the third row of~{ref}`table-FDforward`.
+4. ✍ Calculate the first nonzero term in the Taylor series of the truncation error $\tau_{f}(h)$ for the finite difference formula defined by the third row of {numref}`table-FDforward`.
 
     ````{only} solutions
     ````

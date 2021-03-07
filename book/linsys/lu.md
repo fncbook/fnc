@@ -192,14 +192,12 @@ Fortunately, this defect can be repaired for all nonsingular matrices at minor c
 
 1. ✍ For each matrix, perform Gaussian elimination by hand to produce an LU factorization. Write out the $\mathbf{L}$ matrix using outer products of standard basis vectors.
 
-    **(a)** $\displaystyle
-    \begin{bmatrix}
+    **(a)** $\displaystyle \begin{bmatrix}
     2 & 3 & 4 \\
     4 & 5 & 10 \\
     4 & 8 & 2
     \end{bmatrix}\qquad$
-    **(b)** $\displaystyle
-    \begin{bmatrix}
+    **(b)** $\displaystyle \begin{bmatrix}
     6 & -2 & -4 & 4\\
     3 & -3 & -6 & 1 \\
     -12 & 8 & 21 & -8 \\
@@ -209,12 +207,10 @@ Fortunately, this defect can be repaired for all nonsingular matrices at minor c
 2. ⌨ The matrices
   
     ```{math}
-    \mathbf{T}(x,y) =
-    \begin{bmatrix}
+    \mathbf{T}(x,y) = \begin{bmatrix}
       1 & 0 & 0 \\ 0 & 1 & 0 \\ x & y & 1
     \end{bmatrix},\qquad
-    \mathbf{R}(\theta) =
-    \begin{bmatrix}
+    \mathbf{R}(\theta) = \begin{bmatrix}
       \cos\theta & \sin \theta & 0 \\ -\sin\theta & \cos \theta & 0 \\ 0 & 0 & 1
     \end{bmatrix}
     ```
@@ -222,8 +218,7 @@ Fortunately, this defect can be repaired for all nonsingular matrices at minor c
     are used to represent translations and rotations of plane points in computer graphics. For the following, let
   
     ```{math}
-    \mathbf{A} = \mathbf{T}(3,-1)\mathbf{R}(\pi/5)\mathbf{T}(-3,1), \qquad \mathbf{z} =
-    \begin{bmatrix}
+    \mathbf{A} = \mathbf{T}(3,-1)\mathbf{R}(\pi/5)\mathbf{T}(-3,1), \qquad \mathbf{z} = \begin{bmatrix}
       2 \\ 2 \\ 1
     \end{bmatrix}.
     ```
@@ -250,22 +245,20 @@ Fortunately, this defect can be repaired for all nonsingular matrices at minor c
 3. ⌨ In Julia, define
   
     ```{math}
-    \mathbf{A}=
-    \begin{bmatrix}
+    \mathbf{A}= \begin{bmatrix}
       1 & 0 & 0 & 0 & 10^{12} \\
       1 & 1 & 0 & 0 & 0 \\
       0 & 1 & 1 & 0 & 0 \\
       0 & 0 & 1 & 1 & 0 \\
       0 & 0 & 0 & 1 & 0
     \end{bmatrix},
-    \quad \hat{\mathbf{x}} =
-    \begin{bmatrix}
+    \quad \hat{\mathbf{x}} = \begin{bmatrix}
       0 \\ 1/3 \\ 2/3 \\ 1 \\ 4/3
     \end{bmatrix},
     \quad \mathbf{b} = \mathbf{A}\hat{\mathbf{x}}.
     ```
 
-    **(a)** Using {ref}`function-lufact` and triangular substitutions, solve the linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, showing the result. About how many (to the nearest integer) accurate digits are in the result? (The answer is much less than the default 16 of double precision).
+    **(a)** Using {numref}`Function {number}<function-lufact>` and triangular substitutions, solve the linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, showing the result. About how many (to the nearest integer) accurate digits are in the result? (The answer is much less than the default 16 of double precision).
 
     **(b)** Repeat part (a) with $10^{20}$ as the corner element. (The result is even less accurate. We will study the causes of such low accuracy later in the chapter.)
   
@@ -305,7 +298,7 @@ Fortunately, this defect can be repaired for all nonsingular matrices at minor c
     %    end
     %end
 
-5. ⌨ {ref}`function-lufact` factors $\mathbf{A}=\mathbf{L}\mathbf{U}$ in such a way that $\mathbf{L}$ is a unit lower triangular matrix—that is, has all ones on the diagonal. It is also possible to define the factorization so that $\mathbf{U}$ is a unit upper triangular matrix instead. Write a function `lufact2` that uses {ref}`function-lufact` *without modification* to produce this version of the factorization. (Hint: Begin with the standard LU factorization of $\mathbf{A}^T$.) Demonstrate on a nontrivial $4\times 4$ example.
+5. ⌨ The {numref}`Function {number}<function-lufact>` function factors $\mathbf{A}=\mathbf{L}\mathbf{U}$ in such a way that $\mathbf{L}$ is a unit lower triangular matrix—that is, has all ones on the diagonal. It is also possible to define the factorization so that $\mathbf{U}$ is a unit upper triangular matrix instead. Write a function `lufact2` that uses {numref}`Function {number}<function-lufact>` *without modification* to produce this version of the factorization. (Hint: Begin with the standard LU factorization of $\mathbf{A}^T$.) Demonstrate on a nontrivial $4\times 4$ example.
 
     ````{only} solutions
     If $A=LU$, then $A^T=U^T L^T$, which is still of the form lower triangular $\times$ upper triangular. So if we apply our regular `lufact` to $A^T$, then the first matrix is $U^T$ and will leave $U$ as unit upper triangular.
@@ -329,7 +322,7 @@ Fortunately, this defect can be repaired for all nonsingular matrices at minor c
       \det(\mathbf{A}) = U_{11}U_{22}\cdots U_{nn}=\prod_{i=1}^n U_{ii}.
     ```
 
-    **(b)** ⌨ Using the result of part (a), write a function `determinant(A)` that computes the determinant using {ref}`function-lufact`. Test your function on at least two nontriangular $5\times 5$ matrices, comparing your result to the result of `det` from the standard `LinearAlgebra` package.
+    **(b)** ⌨ Using the result of part (a), write a function `determinant(A)` that computes the determinant using {numref}`Function {number}<function-lufact>`. Test your function on at least two nontriangular $5\times 5$ matrices, comparing your result to the result of `det` from the standard `LinearAlgebra` package.
 
     <!-- Use your function and the built-in "det" on the matrices "magic(n)" for $n=3,4,\ldots,7$, and make a table showing $n$, the value from your function, and the relative error when compared to "det". -->
   
@@ -337,7 +330,7 @@ Fortunately, this defect can be repaired for all nonsingular matrices at minor c
   
 7. not available
 
-    <!-- ⌨ \label{pro:LUoneloop} Consider the portion of {ref}`function-lufact` in the innermost
+    <!-- ⌨ \label{pro:LUoneloop} Consider the portion of {numref}`Function {number}<function-lufact>` in the innermost
       loop. Because the different iterations in $i$ are all independent,
       it is possible to rewrite this group of operations without a
       loop. In fact, the necessary changes are to delete the keyword

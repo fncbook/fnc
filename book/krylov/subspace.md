@@ -90,7 +90,7 @@ The polar opposite of an ill-conditioned basis for $\ck_m$ is an orthonormal one
   \end{bmatrix}.
 \end{align*}
 
-Then the vectors $\mathbf{q}_1$, \ldots, $\mathbf{q}_m$ are the orthonormal basis we seek for $\ck_m$. By [the theorem above](theorem-krylovmult), we know that $\mathbf{A}\mathbf{q}_m \in \ck_{m+1}$, and therefore
+Then the vectors $\mathbf{q}_1$, \ldots, $\mathbf{q}_m$ are the orthonormal basis we seek for $\ck_m$. By {prf:ref}`theorem-krylovmult`, we know that $\mathbf{A}\mathbf{q}_m \in \ck_{m+1}$, and therefore
 
 :::{math}
 :label: arnoldivec
@@ -196,7 +196,7 @@ end
 ```
 ````
 
-An implementation of the Arnoldi iteration is given in {ref}`function-arnoldi`. A careful inspection shows that the loop at line~18 does not exactly implement {eq}`arnoldiip` and {eq}`arnoldigs`. The reason is numerical stability. Though the described and implemented versions are mathematically equivalent in exact arithmetic (see {ref}`prob-arnoldi-modifiedgs`), the approach in {ref}`fun-arnoldi` is much more stable to roundoff.
+An implementation of the Arnoldi iteration is given in {numref}`Function {number}<function-arnoldi>`. A careful inspection shows that the loop at line~18 does not exactly implement {eq}`arnoldiip` and {eq}`arnoldigs`. The reason is numerical stability. Though the described and implemented versions are mathematically equivalent in exact arithmetic (see {ref}`prob-arnoldi-modifiedgs`), the approach in {ref}`fun-arnoldi` is much more stable to roundoff.
 
 In the next section we revisit the idea of approximately solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ over a Krylov subspace $\ck_m$, using the ONC matrix $\mathbf{Q}_m$ in place of $\mathbf{K}_m$. A [related idea](`problem-krylov-arnoldieig`) is used to approximate the eigenvalue problem for $\mathbf{A}$, which is the approach that underlies `eigs` for sparse matrices.
 

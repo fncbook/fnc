@@ -27,7 +27,7 @@ where $p$, $q$ are integers, and the $a_k$'s are constants known as the **weight
 Before deriving some finite difference formulas, we make an important observation about them. Define the new variable $s=x-t_i$ and let $\tilde{f}(s) = f(x-t_i)$. Then it is elementary that
 
 ```{math}
-  \left. \frac{d f}{d x} \right|_{x=t_i} = \left. \dd{\tilde{f}}{s} \right|_{s=0}.
+  \left. \frac{d f}{d x} \right|_{x=t_i} = \left. \frac{d\tilde{f}}{ds} \right|_{s=0}.
 ```
 
 Applying the change of variables to {eq}`fdformula` yields
@@ -182,7 +182,7 @@ Although function values at equally spaced nodes are a common and convenient sit
 {doc}`demos/fd-weights`
 ````
 
-We no longer assume equally spaced nodes, so there is no "$h$" to be used in the formula. As before, the weights may be applied after any translation of the independent variable. The weights again follow from the interpolate/differentiate recipe, but the algebra becomes complicated. Fortunately there is an elegant recursion known as **Fornberg's algorithm** that can calculate these weights for any desired formula. We present it without derivation as {ref}`function-fdweights`.
+We no longer assume equally spaced nodes, so there is no "$h$" to be used in the formula. As before, the weights may be applied after any translation of the independent variable. The weights again follow from the interpolate/differentiate recipe, but the algebra becomes complicated. Fortunately there is an elegant recursion known as **Fornberg's algorithm** that can calculate these weights for any desired formula. We present it without derivation as {numref}`Function {number}<function-fdweights>`.
 
 (function-fdweights)=
 
@@ -244,26 +244,26 @@ end
     ````
 
     (problem-backwardFD)=
-2. **(a)** ✍ {ref}`table-FDforward` lists forward-difference formulas in which $p=0$ in {eq}`fdxformula`. Show that the change of variable $g(x) = f(-x)$ transforms these formulas into backward difference formulas with $q=0$, and write out the table analogous to {ref}`table-FDforward` for backward differences.
+2. **(a)** ✍ {numref}`table-FDforward` lists forward-difference formulas in which $p=0$ in {eq}`fdxformula`. Show that the change of variable $g(x) = f(-x)$ transforms these formulas into backward difference formulas with $q=0$, and write out the table analogous to {numref}`table-FDforward` for backward differences.
 
     **(b)** ⌨ Suppose you are given the nodes $t_0=0.9$, $t_1=1$, and $t_2=1.1$, and $f(x) = \sin(2x)$. Using formulas from {numref}`table-FDcenter` and {numref}`table-FDforward`, compute second-order accurate approximations to $f'$ at each of the three nodes.
 
     ````{only} solutions
     ````
 
-3. ⌨ Using {ref}`function-fdweights` to get the necessary weights, find finite-difference approximations to the first, second, third, and fourth derivatives of $f(x)=e^{-x}$ at $x=0.5$. In each case use a centered stencil of minimum possible width. Make a table showing the values and the errors in each case.
+3. ⌨ Using {numref}`Function {number}<function-fdweights>` to get the necessary weights, find finite-difference approximations to the first, second, third, and fourth derivatives of $f(x)=e^{-x}$ at $x=0.5$. In each case use a centered stencil of minimum possible width. Make a table showing the values and the errors in each case.
 
     ````{only} solutions
     ````
 
-4. ⌨ Use {ref}`function-fdweights` to write out a table analogous to {ref}`table-FDcenter` that lists centered finite difference weights for the second derivative $f''(0)$. (Hint: The "rat" command will let you express the results as exact rational numbers.)
+4. ⌨ Use {numref}`Function {number}<function-fdweights>` to write out a table analogous to {numref}`table-FDcenter` that lists centered finite difference weights for the second derivative $f''(0)$. 
 
     ````{only} solutions
     ````
 
 5. ⌨ For this problem, let $f(x)=\tan(2x)$.
 
-    **(a)** ⌨ Apply {ref}`function-fdweights` to find a finite difference approximation to $f''(0.3)$ using the five nodes $t_j=0.3+jh$ for $j=-2,\ldots,2$ and $h=0.05$. Compare to the exact value of $f''(0.3)$.
+    **(a)** ⌨ Apply {numref}`Function {number}<function-fdweights>` to find a finite difference approximation to $f''(0.3)$ using the five nodes $t_j=0.3+jh$ for $j=-2,\ldots,2$ and $h=0.05$. Compare to the exact value of $f''(0.3)$.
 
     **(b)** ⌨  Repeat part~(a) for $f''(0.75)$ and $t_j=0.75+jh$. Why is the finite difference result so inaccurate?
 

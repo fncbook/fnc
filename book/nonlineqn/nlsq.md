@@ -42,7 +42,7 @@ Gauss--Newton solves a series of linear least-squares problems in order to solve
 
 We have just described the {term}`Gauss--Newton method`. Gauss--Newton solves a series of linear least-squares problems in order to solve a nonlinear least squares problem.
 
-Here we reap an amazing benefit from Julia: The functions {ref}`function-newtonsys` and {ref}`function-levenberg`, which were introduced for the case of $m=n$ nonlinear equations, work *without modification* as the Gauss--Newton method for the overdetermined case! The reason is that the backslash operator applies equally well to the linear system and linear least squares problems, and nothing else in the function was written with explicit reference to $n$.
+Here we reap an amazing benefit from Julia: The functions {numref}`Function {number}<function-newtonsys>` and {numref}`Function {number}<function-levenberg>`, which were introduced for the case of $m=n$ nonlinear equations, work *without modification* as the Gauss--Newton method for the overdetermined case! The reason is that the backslash operator applies equally well to the linear system and linear least squares problems, and nothing else in the function was written with explicit reference to $n$.
 
 ## Convergence
 
@@ -136,7 +136,7 @@ then the misfit function is also linear in $\mathbf{c}$ and the fitting problem 
     700, 698, 880, 925, 800, 578, 400, 350, 202, 105, 65, 55, 40, 30, 20
     ```
 
-    **(a)** Use {ref}`function-levenberg` to find the best least-squares fit to the data using the $\operatorname{sech}^2$ model. Make a plot of the model fit superimposed on the data. What are $A$ and $C$?
+    **(a)** Use {numref}`Function {number}<function-levenberg>` to find the best least-squares fit to the data using the $\operatorname{sech}^2$ model. Make a plot of the model fit superimposed on the data. What are $A$ and $C$?
 
     **(b)** In practice, one would like a model to predict the full course of the epidemic before it has reached its peak and subsided. Redo the fitting from part~(a) using only the first 12 data values. Add this model to your plot and report $A$ and $C$. Is this model a useful predictor of the value and timing of the maximum death rate?
 
@@ -189,7 +189,7 @@ then the misfit function is also linear in $\mathbf{c}$ and the fitting problem 
     \end{bmatrix}.
     ```
 
-    Use {ref}`function-newtonsys` to find a minimizer of the banana function starting from $(-1.4,5.1)$. (If you're curious about its name, make a contour plot of the residual over $-2\le x_1 \le 3$, $-1\le x_2 \le 4$.) Show all the digits of the final result.
+    Use {numref}`Function {number}<function-newtonsys>` to find a minimizer of the banana function starting from $(-1.4,5.1)$. (If you're curious about its name, make a contour plot of the residual over $-2\le x_1 \le 3$, $-1\le x_2 \le 4$.) Show all the digits of the final result.
 
 5. ⌨  In this problem you are to fit a function of the form
   
@@ -259,7 +259,7 @@ then the misfit function is also linear in $\mathbf{c}$ and the fitting problem 
     ym(ir) = y(ir) + noise*rand(size(y(ir)));  % add noise
     ```
 
-    **(b)** Using the data `(t,ym)`, find the nonlinear least squares fit using {ref}`function-levenberg`.
+    **(b)** Using the data `(t,ym)`, find the nonlinear least squares fit using {numref}`Function {number}<function-levenberg>`.
 
     **(c)** Plot the fits using `np = 100` points over `t=(1:np)/np` together with symbols for the `N` measured data points `ym`.
 
