@@ -52,7 +52,7 @@ A basic implementation of Euler's method is shown in {numref}`Function {number}<
 (function-euler)=
 
 ````{proof:function} euler
-**Euler's method for an initial-value problem.**
+**Euler's method for an initial-value problem**
 
 ```{code-block} julia
 :lineno-start: 1

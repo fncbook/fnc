@@ -46,7 +46,7 @@ Note that the definitions of $H_0$ for $x<t_0$ and $H_n$ for $x>t_n$ are irrelev
 (function-hatfun)=
 
 ````{proof:function} hatfun
-**Hat function/piecewise linear basis function.**
+**Hat function/piecewise linear basis function**
 
 ```{code-block} julia
 :lineno-start: 1
@@ -124,7 +124,7 @@ A final appealing characteristic of the hat function basis is that it depends on
 (function-plinterp)=
 
 ````{proof:function} plinterp
-**Piecewise linear interpolation.**
+**Piecewise linear interpolation**
 
 ```{code-block} julia
 :lineno-start: 1

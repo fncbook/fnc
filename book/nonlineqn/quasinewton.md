@@ -38,7 +38,7 @@ The finite-difference formula {eq}`jacobianfd` is implemented by the short code 
 (function-fdjac)=
 
 ````{proof:function} fdjac
-**Finite-difference approximation of a Jacobian.**
+**Finite-difference approximation of a Jacobian**
 
 ```{code-block} julia
 :lineno-start: 1
@@ -160,7 +160,7 @@ Finally, we draw attention to lines 50--52. Rather than issuing a warning if the
 (function-levenberg)=
 
 ````{proof:function} levenberg
-**Quasi-Newton method for nonlinear systems.**
+**Quasi-Newton method for nonlinear systems**
 
 ```{code-block} julia
 :lineno-start: 1

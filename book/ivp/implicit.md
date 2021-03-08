@@ -40,7 +40,7 @@ We have distributed the factor of $1/24$ in order to point out that the $4\times
 (function-ab4)=
 
 ````{proof:function} ab4
-**4th-order Adams--Bashforth formula for an IVP.**
+**4th-order Adams--Bashforth formula for an IVP**
 
 ```{code-block} julia
 :lineno-start: 1
@@ -83,7 +83,7 @@ end
 (function-am2)=
 
 ````{proof:function} am2
-**2nd-order Adams--Moulton (trapezoid) formula for an IVP.**
+**2nd-order Adams--Moulton (trapezoid) formula for an IVP**
 
 ```{code-block} julia
 :lineno-start: 1

@@ -135,7 +135,7 @@ An implementation of Newton's method for systems is given in {numref}`Function {
 (function-newtonsys)=
 
 ```{proof:function} newtonsys
-**Newton's method for a system of equations.**
+**Newton's method for a system of equations**
 
 ```{code-block} julia
 :lineno-start: 1

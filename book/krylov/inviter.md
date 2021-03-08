@@ -74,7 +74,7 @@ Each step of inverse iteration therefore requires the solution of a linear syste
 
 (function-inviter)=
 ````{proof:function} inviter
-**Shifted inverse iteration for the closest eigenvalue.**
+**Shifted inverse iteration for the closest eigenvalue**
 
 ```{code-block} julia
 :lineno-start: 1

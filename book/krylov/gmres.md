@@ -60,7 +60,7 @@ A basic implementation of GMRES is given below.
 
 (function-gmres)=
 ````{proof:function} gmres
-**GMRES for a linear system.**
+**GMRES for a linear system**
 
 ```{code-block} julia
 :lineno-start: 1
@@ -133,8 +133,126 @@ If the restart takes place before GMRES has entered a rapidly converging phase, 
 
 There are other ways to avoid the growth in computational effort as the GMRES/Arnoldi iteration proceeds. Three of the more popular variations are abbreviated CGS, BiCGSTAB, and QMR. We do not describe them in this book.
 
-<!-- 
+## Exercises
 
-\begin{exercises}
-	\input{krylov/exercises/GMRES}
-\end{exercises} -->
+1. ✍ (See also [an earlier exercise](problem-krylovpermute).) Consider the linear system with
+  
+    $$
+    \mathbf{A}=\displaystyle 
+    \begin{bmatrix}
+      0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0
+    \end{bmatrix}, \qquad \mathbf{b}=\mathbf{e}_1.
+    $$
+
+    **(a)** Find the exact solution by inspection.
+
+    **(b)** Find the GMRES approximate solutions $\mathbf{x}_m$ for $m=1,2,3,4$. 
+
+
+    ::::{only} solutions
+    The Krylov vectors are $b=e_1$, $Ab=e_4$, $A^2b=e_3$,
+      $A^3b=e_2$. 
+    ::::
+
+2. ✍ (Continuation of [an earlier exercise](problem-matrixpolykrylov).) Show that if $\mathbf{x}_m\in\mathcal{K}_m$, then the residual $\mathbf{b}-\mathbf{A}\mathbf{x}_m$ is equal to $q(\mathbf{A})\mathbf{b}$, where $q$ is a polynomial of degree at most $m$ and $q(0)=1$. (This fact is a key one for many convergence results.) 
+
+3. ✍ Explain why GMRES, in exact arithmetic, converges to the true solution in $n$ iterations for an $n\times n$ matrix if $\operatorname{rank}(\mathbf{K}_n)=n$. (Hint: Consider how the algorithm is defined from first principles.) 
+
+4. ⌨ Let $\mathbf{A}$ be the $n\times n$ tridiagonal matrix
+  
+    \begin{bmatrix}
+      -4 & 1      &        &        &   \\
+      1  & -4     & 1      &        &   \\
+         & \ddots & \ddots & \ddots &   \\
+         &        & 1      & -4     & 1 \\
+         &        &        & 1      & -4 
+    \end{bmatrix}
+  
+    and let the $n$-vector $\mathbf{b}$ have entries $b_i=i/n$. For $n=8,16,32,64$, run {numref}`Function {number}<function-gmres>` for $m=n/2$ iterations. On one graph plot $\|\mathbf{r}_k\|/\|\mathbf{b}\|$ for all the cases. How does the convergence rate of GMRES seem to depend on $n$?  
+
+    (problem-gmres-surround)=
+5. ⌨  In this problem you will see the strong effect the eigenvalues of the matrix may have on GMRES convergence. Let 
+   
+    $$
+    \mathbf{B}=
+    \begin{bmatrix}
+      1 & & & \\
+      & 2 & & \\
+      & & \ddots & \\
+      & & & 100
+    \end{bmatrix},
+    $$ 
+    
+    let $\mathbf{I}$ be a $100\times 100$ identity, and let $\mathbf{Z}$ be a $100\times 100$ matrix of zeros. Also let $\mathbf{b}$ be a $200\times 1$ vector of ones. 
+
+    **(a)** Let $\mathbf{A} = \begin{bmatrix}
+        \mathbf{B} & \mathbf{I} \\ \mathbf{Z} & \mathbf{B}
+      \end{bmatrix}.$ What are its eigenvalues (no computer required here)? Apply `gmres` with tolerance $10^{-10}$ for 100 iterations without restarts, and plot the residual convergence. 
+    
+    **(b)** Repeat part (a) with restarts every 20 iterations. 
+    
+    **(c)** Now let $\mathbf{A} = \begin{bmatrix}
+        \mathbf{B} & \mathbf{I} \\ \mathbf{Z} & -\mathbf{B}
+      \end{bmatrix}.$ What are its eigenvalues? Repeat part~(a). Which matrix is more difficult for GMRES? 
+
+      ::::{only} solutions
+      %% (a)
+      B = diag(1:100);
+      A = [B eye(100); zeros(100) B];
+      b = ones(200,1);
+      [~,~,~,~,rv] = gmres(A,b,100,1e-10,1);
+      semilogy(rv)
+      %% (b) 
+      [~,~,~,~,rv] = gmres(A,b,20,1e-10,5);
+      semilogy(rv)
+      %% (c)
+      A = [B eye(100); 0*I -B];
+      [~,~,~,~,rv] = gmres(A,b,100,1e-10,1);
+      semilogy(rv)    % much less convergence  
+      ::::
+
+6. ⌨ (Continuation of [an earlier exercise](problem-power-lumpmembraneinveig).) We again consider the $n^2\times n^2$ sparse matrix defined by
+  
+    ```julia
+    A = n^2*gallery('poisson',n);
+    ```
+
+    The solution of $\mathbf{A}\mathbf{x}=\mathbf{b}$ may be interpreted as the deflection of a lumped membrane in response to a constant load represented by $\mathbf{b}$.
+    
+    **(a)** For  $n=10,15,20,25$, let $\mathbf{b}$ be the vector of $n^2$ ones and apply {numref}`Function {number} <function-gmres>` for 50 iterations. On one semi-log graph, plot the four convergence curves $\|\mathbf{r}_m\|/\|\mathbf{b}\|$.
+
+    **(b)** For the case $n=25$ use "plot(1:n,1:n,reshape(x,25,25))" to plot the solution, which should look physically plausible. 
+
+    ::::{only} solutions
+    A = @(n) n^2*gallery('poisson',n);
+    clf
+    nValues = 10:5:25;
+    for nI = 1:length(nValues)
+        n = nValues(nI)
+        b = ones(n^2,1);
+        [x,r] = arngmres(A(n),b,50);
+        semilogy(0:50,r/norm(b),'-o'), hold on
+    end
+    %%
+    clf
+    mesh(reshape(x,25,25))
+    ::::
+
+    (problem-helmhotzmatrix)=
+7. ⌨  Consider a matrix that arises from the Helmholtz equation for wave propagation. The matrix can be specified using 
+
+    ```julia
+    A = n^2*gallery('poisson',n) - k^2*I;
+    ```
+  
+    Let $n=20$ and use the two parameter values $k=1.3\pi$ and $k=1.5\pi$. Use `eigs` to find the five largest and five smallest eigenvalues in each case. (See {prf:ref}`demos-structure-linalg` for examples of its usage.) What happens to the spectrum of the matrix?  Specifically, does it remain definite?
+
+8. ✍ Recall {eq}`gmresproblem`, defining the stable form of the GMRES minimization problem.
+
+    **(a)** Show that $\mathbf{b}=\mathbf{Q}_{m+1}\tilde{\mathbf{b}}$ for an $(m+1)\times 1$ vector $\tilde{\mathbf{b}}$ that is nonzero only in its first component.
+
+    **(b)** Show that the quantity $\| \mathbf{A}\mathbf{Q}_m\mathbf{z}-\mathbf{b} \|$ is equal to $\| \mathbf{H}_m\mathbf{z} - \tilde{\mathbf{b} \|}$.
+      
+    **(c)** Modify {numref}`Function {number}<function-gmres>`, replacing line 33 with the solution of a linear least-squares problem of size $(m+1)\times m$.
+
+

@@ -201,7 +201,7 @@ This is a triangular $n\times n$ linear system that is easily solved by backward
 (function-lsqrfact)=
 
 ```{proof:function} lsqrfact
-
+**Linear least squares solution by QR factorization**
 ```{code-block} julia
 :lineno-start: 1
 """

@@ -161,7 +161,7 @@ where the matrix $\mathbf{H}_m$ has an {term}`upper Hessenberg` structure. Equat
 
 (function-arnoldi)=
 ````{proof:function} arnoldi
-**Arnoldi iteration for Krylov subspaces.**
+**Arnoldi iteration for Krylov subspaces**
 
 ```{code-block} julia
 :lineno-start: 1

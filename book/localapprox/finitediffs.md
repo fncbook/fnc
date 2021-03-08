@@ -187,7 +187,7 @@ We no longer assume equally spaced nodes, so there is no "$h$" to be used in the
 (function-fdweights)=
 
 ````{proof:function} fdweights
-**Fornberg's algorithm for finite difference weights.**
+**Fornberg's algorithm for finite difference weights**
 
 ```{code-block} julia
 :lineno-start: 1

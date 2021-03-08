@@ -114,7 +114,7 @@ often the most challenging part of a rootfinding problem. We will try to deal wi
 (function-newton)=
 
 ````{proof:function} newton
-**Newton's method for a scalar rootfinding problem.**
+**Newton's method for a scalar rootfinding problem**
 
 ```{code-block} julia
 :lineno-start: 1

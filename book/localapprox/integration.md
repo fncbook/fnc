@@ -92,7 +92,7 @@ Trapezoid formula for integration.
 (function-trapezoid)=
 
 ````{proof:function} trapezoid
-**Trapezoid formula for numerical integration.**
+**Trapezoid formula for numerical integration**
 
 ```{code-block} julia
 :lineno-start: 1

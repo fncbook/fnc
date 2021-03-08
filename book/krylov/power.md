@@ -110,7 +110,7 @@ Here is our implementation of power iteration.
 
 (function-poweriter)=
 ````{proof:function} poweriter
-**Power iteration to find a dominant eigenvalue.**
+**Power iteration to find a dominant eigenvalue**
 
 ```{code-block} julia
 :lineno-start: 1

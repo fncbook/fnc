@@ -99,7 +99,7 @@ If the error estimate passes the test {eq}`absreltolerance`, the better Simpson 
 (function-intadapt)=
 
 ````{proof:function} intadapt
-**Adaptive integration with error estimation.**
+**Adaptive integration with error estimation**
 
 ```{code-block} julia
 :lineno-start: 1

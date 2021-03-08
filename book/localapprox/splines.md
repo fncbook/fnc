@@ -180,7 +180,7 @@ Collectively, {eq}`spline0asys`,  {eq}`spline0bsys`,  {eq}`spline1sys`,  {eq}`sp
 (function-spinterp)=
 
 ````{proof:function} spinterp
-**Cubic not-a-knot spline interpolation.**
+**Cubic not-a-knot spline interpolation**
 
 ```{code-block} julia
 :lineno-start: 1

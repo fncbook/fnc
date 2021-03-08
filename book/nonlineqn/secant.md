@@ -42,7 +42,7 @@ Our implementation of the method based on this formula is given in {numref}`Func
 (function-secant)=
 
 ```{proof:function} secant
-**Secant method for scalar rootfinding.**
+**Secant method for scalar rootfinding**
 
 ```{code-block} julia
 :lineno-start: 1

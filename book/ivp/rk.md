@@ -93,7 +93,7 @@ Our implementation of IE2 is shown in {numref}`Function {number}<function-ie2>`.
 (function-ie2)=
 
 ````{proof:function} ie2
-**Improved Euler method for an IVP.**
+**Improved Euler method for an IVP**
 
 ```{code-block} julia
 :lineno-start: 1
@@ -218,7 +218,7 @@ Our implementation is given in {numref}`Function {number}<function-rk4>`.
 (function-rk4)=
 
 ````{proof:function} rk4
-**Fourth-order Runge-Kutta for an IVP.**
+**Fourth-order Runge-Kutta for an IVP**
 
 ```{code-block} julia
 :lineno-start: 1

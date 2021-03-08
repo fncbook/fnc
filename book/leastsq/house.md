@@ -134,9 +134,7 @@ The algorithm we have described is encapsulated in {numref}`Function {number}<fu
 (function-qrfact)=
 
 ```{proof:function} qrfact
-
-**QR factorization by Householder reflections.**
-
+**QR factorization by Householder reflections**
 ```{code-block} julia
 :lineno-start: 1
 """

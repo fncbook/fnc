@@ -111,9 +111,8 @@ In the last step we can exploit the fact, proved in {prf:ref}`theorem-ATA`, that
 ```
 
 (function-lsnormal)=
-
 ```{proof:function} lsnormal
-
+**Linear least squares solution by the normal equations**
 ```{code-block} julia
 :lineno-start: 1
 """
