@@ -62,7 +62,7 @@ The top part of the table describes four stages in the usual RK fashion. The las
 (function-rk23)=
 
 ````{proof:function} rk23
-**Adaptive IVP solver based on embedded RK formulas.**
+**Adaptive IVP solver based on embedded RK formulas**
 
 ```{code-block} julia
 :lineno-start: 1
