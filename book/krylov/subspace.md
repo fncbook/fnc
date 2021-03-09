@@ -200,12 +200,101 @@ An implementation of the Arnoldi iteration is given in {numref}`Function {number
 
 In the next section we revisit the idea of approximately solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ over a Krylov subspace $\mathcal{K}_m$, using the ONC matrix $\mathbf{Q}_m$ in place of $\mathbf{K}_m$. A [related idea](`problem-krylov-arnoldieig`) is used to approximate the eigenvalue problem for $\mathbf{A}$, which is the approach that underlies `eigs` for sparse matrices.
 
+## Exercises
 
-<!-- 
+(problem-krylovpermute)=
+1. ✍ Consider the matrix $\mathbf{A}=\displaystyle \begin{bmatrix}
+    0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0
+    \end{bmatrix}.$
 
-\begin{exercises}
-  \input{krylov/exercises/KrylovSubspaces}
-  \input{krylov/exercises/Arnoldi}
-\end{exercises}
-\clearpage -->
+    **(a)** Find the Krylov matrix $\mathbf{K}_3$ for the seed vector $\mathbf{u}=\mathbf{e}_1$. 
+
+    **(b)** Find $\mathbf{K}_3$ for the seed vector $\mathbf{u}=\begin{bmatrix}1 & 1 & 1 & 1\end{bmatrix}^T.$  
+
+    ::::{only} solutions
+        \begin{enumerate}
+        **()** The Krylov vectors are $b=e_1$, $Ab=e_4$, $A^2b=e_3$,
+          $A^3b=e_2$. 
+        **()** Application of $\mathbf{A}$ does not change the vector. 
+        \end{enumerate}
+    ::::
+
+2. ⌨ For each matrix, make a table of the 2-norm condition numbers $\kappa(\mathbf{K}_m)$ for $m=1,\ldots,10$. Use a vector of all ones as the Krylov seed.
+
+    **(a)** Matrix from {prf:ref}`demos-subspace-unstable`
+    
+    **(b)** $\begin{bmatrix}
+      -2 & 1 & & &  \\
+      1 & -2 & 1 & &  \\
+      & \ddots & \ddots & \ddots & \\
+      & & 1 & -2 & 1 \\
+       & & & 1 & -2
+     \end{bmatrix} \: (100\times 100)$
+
+   **(c)** $\begin{bmatrix}
+      -2 & 1 & & & 1 \\
+      1 & -2 & 1 & &  \\
+      & \ddots & \ddots & \ddots & \\
+      & & 1 & -2 & 1 \\
+      1 & & & 1 & -2
+    \end{bmatrix} \:(200\times 200) $
+
+    ::::{only} solutions
+    lambda = 10 + (1:100);
+    A = diag(lambda) + triu(rand(100),1);
+    u = ones(100,1);
+    K = [];
+    for m = 1:10
+        K = [ K A^(m-1)*u ];
+        kappa(m) = cond(K);
+    end
+    table(kappa(:))    
+    ::::
+
+    (problem-matrixpolykrylov)=
+3. ✍ (See also an [earlier exercise](problem-matrixpolyeig).) If $p(z)=c_0+c_1z+\cdots+c_kz^k$ is a polynomial, then its value for a matrix argument is defined as
+  
+    $$
+    p(\mathbf{A})= c_0\mathbf{I} + c_1 \mathbf{A} + \cdots +c_k \mathbf{A}^k.
+    $$
+
+    Show that if $\mathbf{x}\in\mathcal{K}_m$, then $\mathbf{x}=p(\mathbf{A})\mathbf{u}$ for a polynomial $p$ of degree at most $m-1$. 
+
+4. ✍ Compute the asymptotic flop requirements for {numref}`Function {number}<function-arnoldi>`. Assume that due to sparsity, a matrix-vector multiplication $\mathbf{A}\mathbf{u}$ requires only $c n$ flops for a constant $c$, rather than the usual $O(n^2)$. 
+
+5. ⌨ When Arnoldi iteration is performed on the Krylov subspace generated using the matrix $\mathbf{A}=\displaystyle \begin{bmatrix}  2& 1& 1& 0\\ 1 &3 &1& 0\\ 0& 1& 3& 1\\ 0& 1& 1& 2 \end{bmatrix}$, the results can depend strongly on the initial vector $\mathbf{u}$. 
+
+    **(a)** Compare the results for `Q` and `H` using the following initial guesses. 
+    
+    *(i)* `u=[1,0,0,0]`, $\qquad$ *(ii)* `u=[1,1,1,1]`, $\qquad$ *(iii)* `u=rand(4)`.
+   
+    **(b)** Can you explain what is different about case (ii) in part (a)?  You may have to show the output of {numref}`Function {number}<function-arnoldi>` to see what is happening. 
+
+    (problem-modifiedgs)=
+6. ✍ As mentioned in the text, {numref}`Function {number}<function-arnoldi>` does not compute $H_{ij}$ as defined by {eq}`arnoldiip`, but rather 
+  
+    $$
+    S_{ij} = \mathbf{q}_i^* ( \mathbf{A}\mathbf{q}_j - S_{1j}\,\mathbf{q}_1 - \cdots -
+    S_{i-1,j}\,\mathbf{q}_{i-1} )
+    $$
+
+    for $i=1,\ldots,j$. Show that $S_{ij}=H_{ij}$. (Hence the function is mathematically equivalent to our Arnoldi formulas.)
+
+    ```{index} eigenvalue
+    ```
+    (problem-arnoldieig)=
+7. One way to approximate the eigenvalue problem $\mathbf{A}\mathbf{x}=\lambda\mathbf{x}$ over $\mathcal{K}_m$ is to restrict $\mathbf{x}$ to $\mathcal{K}_m$, so that $\mathbf{x}=\mathbf{Q}_m\mathbf{z}$. Then multiply the approximate equality $\mathbf{A}\mQ_m\mathbf{z} \approx \lambda \mathbf{Q}_m\mathbf{z}$ on the left by $\mathbf{Q}_m^*$. 
+ 
+    **(a)** ✍ Show starting from {eq}`arnoldimat` that
+
+    $$
+    \mathbf{Q}_m^* \mathbf{A} \mathbf{Q}_m =  \tilde{\mathbf{H}}_m,
+    $$
+
+    where $\tilde{\mathbf{H}}_m$ is the upper Hessenberg matrix resulting from deleting the last row of $\mathbf{H}_m$. What is the size of this matrix? 
+
+    **(b)** ✍ Show the reasoning above leads to the approximate eigenvalue problem $\tilde{\mathbf{H}}_m\mathbf{z} \approx \lambda\mathbf{z}$. (That is, the exact eigenvalues of $\tilde{\mathbf{H}}_m$ ought to approximate some of the eigenvalues of $\mathbf{A}$.)  
+
+    **(c)** ⌨ Using {numref}`Function {number}<function-arnoldi>` and the matrix of {prf:ref}`demos-subspace-unstable`, compute eigenvalues of $\tilde{\mathbf{H}}_m$ for $m=1,\ldots,40$, keeping track of the error between the largest of those values and the largest eigenvalue of $\mathbf{A}$. Make a semi-log graph of the error as a function of $m$.  
+    
 
