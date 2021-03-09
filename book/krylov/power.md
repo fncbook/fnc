@@ -189,7 +189,112 @@ The error in the eigenvalue estimates $\gamma_k$ of power iteration is reduced a
 
 The practical utility of {eq}`poweriterconv` is limited, because if we knew $\lambda_1$ and $\lambda_2$, we wouldn't be running the power iteration in the first place! Sometimes it's possible to find estimates or bounds of the ratio. But for the most part we just find it a valuable theoretical statement of how power iteration should converge.
 
-<!-- \begin{exercises}
-    \input{krylov/exercises/PowerIteration}
-\end{exercises} -->
+## Exercises
 
+1. ⌨ Use {numref}`Function {number}<function-poweriter>` to perform 20 iterations of the power method for the following matrices. Quantitatively compare the observed convergence to {eq}`poweriterconv`.
+
+    **(a)**
+    $\mathbf{A} = \begin{bmatrix}
+      1.1 & 1 \\
+      0 & 2.1
+    \end{bmatrix}, \quad$
+    **(b)** $\mathbf{A} = \begin{bmatrix}
+      2 & 1 \\
+      1 & 0
+    \end{bmatrix}, \quad$
+    **(c)** $ \mathbf{A} = \begin{bmatrix}
+      6 & 5 & 4 \\
+      5 & 4 & 3 \\
+      4 & 3 & 2
+    \end{bmatrix}, \quad$
+    **(d)** $\mathbf{A} = \begin{bmatrix}
+      2 & -1 & 0 \\
+      -1 & 2 & -1 \\
+      0 & -1 & 2
+    \end{bmatrix}.$
+
+2. ⌨ Let $\mathbf{A}=\displaystyle\begin{bmatrix}6 & 3 & 3 \\
+    1 & 10 & 1 \\
+    2 & 5 & 5
+    \end{bmatrix}$. Use `eigen` to find an eigenvalue decomposition of $\mathbf{A}$.
+
+    **(a)** Modify {numref}`Function {number}<function-poweriter>` so that instead of choosing $\mathbf{x}$ as a random vector initially, choose `x=[3,-1,1]`. Run the new function for 100 iterations on $\mathbf{A}$. Explain why power iteration does *not* find the dominant eigenvalue in this case.
+
+    **(b)** Now make the starting vector be `x=[2,-1,2]` and again run for 100 iterations. Plot $|\gamma_k-6|$ and $|\gamma_k-12|$ versus $k$ on a single semilog graph.
+
+    **(c)** To the starting vector in part (b) add $10^{-8}$ elementwise, and run again, adding the results to the graph.
+
+    **(d)** Explain what you observed in parts (b) and (c).
+
+    ::::{only} solutions
+    %% (a)
+    A= [ 6 3 3; 1 10 1; 2 5 5];
+    [V,D] = eig(A);
+    x = [3;-1;1];
+    for n = 1:100
+        y = A*x;
+        [~,m] = max(abs(y));
+        gamma(n) = y(m)/x(m);
+        x = y/y(m);
+        end
+    %% (b)
+    A= [ 6 3 3; 1 10 1; 2 5 5];
+    [V,D] = eig(A);
+    x = [2;-1;2];
+    for n = 1:100
+        y = A*x;
+        [~,m] = max(abs(y));
+        gamma(n) = y(m)/x(m);
+        x = y/y(m);
+    end
+    semilogy(abs(gamma-6))
+    hold on, semilogy(abs(gamma-12))
+    %% (c)
+    A= [ 6 3 3; 1 10 1; 2 5 5];
+    [V,D] = eig(A);
+    x = [2;-1;2]+1e-8;
+    for n = 1:100
+        y = A*x;
+        [~,m] = max(abs(y));
+        gamma(n) = y(m)/x(m);
+        x = y/y(m);
+    end
+    semilogy(abs(gamma-6))
+    hold on, semilogy(abs(gamma-12))
+    ::::
+
+3. ✍ Describe what happens during power iteration using the matrix $\mathbf{A}= \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}$ and initial vector $\mathbf{x}=\begin{bmatrix} 0.4\\0.7 \end{bmatrix}$. Does the algorithm converge to an eigenvector? How does this relate to {eq}`powerAkx0`?
+
+    (problem-lumpmembraneeig)=
+4. ⌨  In an earlier chapter we considered a mass-lumped model of a hanging string that led to a tridiagonal system of linear equations. The same process can be applied to an idealized membrane hanging from a square frame. Now we use a cartesian grid of masses, each mass directly interacting with the four neighbors immediately to the north, south, east, and west. If $k$ masses are used in each coordinate direction, we get a sparse matrix $\mathbf{A}$ of size $k^2\times k^2$, constructed as follows:
+    ```julia
+    D = spdiagm(-1=>fill(-1,k-1),0=>fill(2,k),1=>fill(-1,k-1)) * (k+1)^2/pi^2
+    A = kron(D,I(k)) + kron(I(k),D)
+    ```
+ 
+    **(a)** Let $k=10$ and make a `spy` plot of $\mathbf{A}$. What is the density of $\mathbf{A}$? Most rows all have the same number of nonzeros; find this number.
+  
+    **(b)** Find the dominant $\lambda_1$ using `eigvals(Matrix(A))` for $k=10,15,20,25$.
+    
+    **(c)** For each case of $k$ in part (b), apply 100 steps of {numref}`Function {number}<function-poweriter>`. On one graph plot the four convergence curves $|\gamma_k-\lambda_1|$ using a semi-log scale. (They will not be smooth curves, because the matrix has many repeated eigenvalues that complicate our convergence analysis.) 
+
+    ::::{only} solutions
+    %% (a)
+    A = @(n) n^2*gallery('poisson',n);
+    spy(A(10))
+    nnz(A(10))/numel(A(10))
+    %% (b-c)
+    clf
+    nValues = 10:5:25;
+    for nI = 1:length(nValues)
+        n = nValues(nI)
+        lam1 = max(abs(eig(A(n))))
+        gamma = poweriter(A(n),100);
+        err = abs(lam1-gamma);
+        semilogy(err,'-o'), hold on
+    end
+    ::::
+
+5.  ⌨  The matrix $\mathbf{A}$ in the file `actors.jld2` available on the book site is described in [an earlier problem](problem-sparse-actorsmat). Use {numref}`Function {number}<function-poweriter>` to find the leading eigenvalue of $\mathbf{A}^T\mathbf{A}$ to at least 6 significant digits. 
+
+6. ⌨ For symmetric matrices, the Rayleigh quotient {eq}`rayleigh` converts an $O(\epsilon)$ eigenvector estimate into an $O(\epsilon^2)$ eigenvalue estimate. Duplicate {numref}`Function {number}<function-poweriter>` and rename it to `powitersym`. Modify the new function to use the Rayleigh quotient to produce the entries of $\gamma$. Test the original {numref}`Function {number}<function-poweriter>` and the new `powitersym` on a $50\times 50$ random symmetric matrix, and verify that the convergence rate for the new function is the square of that for the original one. 
