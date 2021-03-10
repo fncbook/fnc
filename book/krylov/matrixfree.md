@@ -84,7 +84,46 @@ The following example shows how to put these ideas into practice with MINRES.
 {doc}`demos/matrixfree-deblur`
 ::::
 
-<!-- 
-\begin{exercises}
-  \input{krylov/exercises/MatrixFree}
-\end{exercises} -->
+## Exercises
+
+1. ✍ Show using {eq}`lintrans` and {eq}`blurfunction` that the blur operation is a linear transformation. 
+
+2. ✍ In each case, state with reasons whether the given transformation on $n$-vectors is linear. 
+
+    **(a)** $\mathbf{f}(\mathbf{x}) = \begin{bmatrix}
+      x_2\\x_3 \\\vdots\\ x_n \\ x_1 
+    \end{bmatrix},\qquad$
+    **(b)** $\mathbf{f}(\mathbf{x}) = \begin{bmatrix}
+      x_1\\x_1+x_2\\x_1+x_2+x_3\\\vdots\\x_1+\cdots+x_n
+    \end{bmatrix}, \qquad$
+    **(c)** $\mathbf{f}(\mathbf{x}) = \begin{bmatrix}
+      x_1 + 1 \\x_2 + 2 \\ x_3 + 3 \\\vdots \\ x_n+n
+    \end{bmatrix}$.
+
+3. ✍ Suppose that code for the linear transformation $\mathbf{f}(\mathbf{x})=\mathbf{A}\mathbf{x}$ is given for an unknown matrix $\mathbf{A}$. Explain carefully how one could construct $\mathbf{A}$.
+
+4. ⌨ The matrix of the blur operation happens to be symmetric and positive definite. Repeat {prf:ref}`demos-matrixfree-deblur`, adding lines to do MINRES and CG (setting the maximum number of iterations to get convergence to tolerance $10^{-5}$). Report the running time required by each of the three Krylov methods.
+
+    ::::{only} solutions
+    load mandrill
+    [m,n] = size(X)
+    v = [1/4 1/2 1/4];
+    B = spdiags( repmat(v,m,1), -1:1, m,m);
+    C = spdiags( repmat(v,n,1), -1:1, n,n);
+    blur = @(X) B^12 * X * C^12;
+    Z = blur(X);
+    vec = @(X) reshape(X,m*n,1);
+    unvec = @(x) reshape(x,m,n);
+    T = @(x) vec( blur(unvec(x)) );
+    tic, y = gmres(T,vec(Z),50,1e-5); time_gmres = toc
+    tic, y = minres(T,vec(Z),1e-5,300); time_minres = toc 
+    tic, y = pcg(T,vec(Z),1e-5,300); time_pcg = toc 
+    ::::
+
+5. The condition number of the unknown matrix associated with blurring is plausibly related to the condition numbers of the single-dimension matrices $\mathbf{B}^k$ and $\mathbf{C}^k$ in {eq}`blurfunction`.
+
+    **(a)** ⌨  Let $m=50$. Show that $\mathbf{B}$ has a Cholesky factorization and thus is SPD. Find $\kappa(\mathbf{B})$. 
+
+    **(b)** ✍ Explain why part (a) implies $\kappa( \mathbf{B}^k ) = \kappa(\mathbf{B})^k$.
+
+    **(c)** ✍ Explain two important effects of the severity of blur (that is, as $k\to \infty$) on deblurring by Krylov methods. 

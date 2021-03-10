@@ -40,9 +40,53 @@ In many applications the problem $\mathbf{A}\mathbf{x}=\mathbf{b}$ has a known s
 
 Preconditioning is quite important to the practical use of Krylov iterations. However, they usually require deep understanding of the underlying problem that produces the particular linear system to be solved, and we cannot go further into the details here.
 
-<!-- 
+## Exercises
 
-\begin{exercises}
-  \input{krylov/exercises/Preconditioning}
-\end{exercises} -->
+(problem-precond-spd)=
+1. not available
+   
+     <!-- ✍ Show that the matrix $\mathbf{R}^{-T}\mathbf{A}\mR^{-1}$ in {eq}`precond-sym` is SPD, given that $\mathbf{A}$ is SPD and $\mathbf{R}$ is nonsingular. -->
+
+2. ✍ Suppose $\mathbf{M}=\mathbf{R}^T\mathbf{R}$. Show that the eigenvalues of $\mathbf{R}^{-T}\mathbf{A}\mathbf{R}^{-1}$ are the same as the eigenvalues of $\mathbf{M}^{-1}\mathbf{A}$.
+
+3. ⌨ Using the definitions in {prf:ref}`demos-precond-gmres`, with $\mathbf{M}=\mathbf{L}\mathbf{U}$, plot the eigenvalues of $\mathbf{A}$ and of $\mathbf{M}^{-1}\mathbf{A}$ in the complex plane. Do they support the notion that $\mathbf{M}^{-1}\mathbf{A}$ is "more like" an identity matrix than $\mathbf{A}$ is? (You have to convert a sparse matrix to dense form using `Matrix(A)` in order to apply `eigvals` to it.)
+
+    ::::{only} solutions
+    A = 0.6*speye(1000) + sprand(1000,1000,0.005,1/10000);
+    plot(eig(full(A)),'x')
+
+    %%
+    [L,U] = ilu(A);
+    B = U\(L\A);
+    hold on, plot(eig(full(B)),'o')
+    % eigenvalues of B are centered at and clustered near 1
+    ::::
+
+4. ⌨ (Continuation of [an earlier exercise](problem-gmres-surround).) Let $\mathbf{B}$ be `diagm(1:100)`,  let $\mathbf{I}$ be `I(100)`, and let $\mathbf{Z}$ be a $100\times 100$ matrix of zeros. Define 
+  
+    $$
+    \mathbf{A} = \begin{bmatrix}
+      \mathbf{B} & \mathbf{I} \\ \mathbf{Z} & -\mathbf{B}
+    \end{bmatrix}
+    $$ 
+  
+    and let $\mathbf{b}$ be a $200\times 1$ vector of ones. The matrix $\mathbf{A}$ is difficult for GMRES. 
+  
+    **(a)** Design a diagonal preconditioner $\mathbf{M}$ such that $\mathbf{M}^{-1}\mathbf{A}$ has all positive eigenvalues. Apply `gmres` without restarts using this preconditioner and a tolerance of $10^{-10}$ for 100 iterations. Plot the convergence curve. 
+  
+    **(b)** Now design another diagonal preconditioner such that all the eigenvalues of $\mathbf{M}^{-1}\mathbf{A}$ are 1 and apply preconditioned `gmres` again. How many iterations are apparently needed for full convergence? 
+
+    ::::{only} solutions
+    B = diag(1:100);
+    A = [B eye(100); zeros(100) -B];
+    b = ones(200,1);
+    M = diag([ones(100,1);-ones(100,1)]);
+    [~,~,~,~,rv] = gmres(A,b,100,1e-10,1,M);
+    semilogy(rv)
+    %% (b)
+    M = diag([(1:100),-(1:100)]);
+    [~,~,~,~,rv] = gmres(A,b,100,1e-10,1,M);
+    semilogy(rv)
+    % depending on how you count, it's 2 or 3 iterations. 
+    ::::
 
