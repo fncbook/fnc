@@ -266,17 +266,13 @@ The practical utility of {eq}`poweriterconv` is limited, because if we knew $\la
 3. ✍ Describe what happens during power iteration using the matrix $\mathbf{A}= \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}$ and initial vector $\mathbf{x}=\begin{bmatrix} 0.4\\0.7 \end{bmatrix}$. Does the algorithm converge to an eigenvector? How does this relate to {eq}`powerAkx0`?
 
     (problem-lumpmembraneeig)=
-4. ⌨  In an earlier chapter we considered a mass-lumped model of a hanging string that led to a tridiagonal system of linear equations. The same process can be applied to an idealized membrane hanging from a square frame. Now we use a cartesian grid of masses, each mass directly interacting with the four neighbors immediately to the north, south, east, and west. If $k$ masses are used in each coordinate direction, we get a sparse matrix $\mathbf{A}$ of size $k^2\times k^2$, constructed as follows:
-    ```julia
-    D = spdiagm(-1=>fill(-1,k-1),0=>fill(2,k),1=>fill(-1,k-1)) * (k+1)^2/pi^2
-    A = kron(D,I(k)) + kron(I(k),D)
-    ```
- 
-    **(a)** Let $k=10$ and make a `spy` plot of $\mathbf{A}$. What is the density of $\mathbf{A}$? Most rows all have the same number of nonzeros; find this number.
+4. ⌨  In an earlier chapter we considered a mass-lumped model of a hanging string that led to a tridiagonal system of linear equations. The same process can be applied to an idealized membrane hanging from a square frame. Now we use a cartesian grid of masses, each mass directly interacting with the four neighbors immediately to the north, south, east, and west. If $n$ masses are used in each coordinate direction, we get an $n^2\times n^2$ sparse matrix $\mathbf{A}$ that can be constructed by `FNC.poisson(n)`.
+   
+    **(a)** Let $n=10$ and make a `spy` plot of $\mathbf{A}$. What is the density of $\mathbf{A}$? Most rows all have the same number of nonzeros; find this number.
   
-    **(b)** Find the dominant $\lambda_1$ using `eigvals(Matrix(A))` for $k=10,15,20,25$.
+    **(b)** Find the dominant $\lambda_1$ using `eigvals(Matrix(A))` for $n=10,15,20,25$.
     
-    **(c)** For each case of $k$ in part (b), apply 100 steps of {numref}`Function {number}<function-poweriter>`. On one graph plot the four convergence curves $|\gamma_k-\lambda_1|$ using a semi-log scale. (They will not be smooth curves, because the matrix has many repeated eigenvalues that complicate our convergence analysis.) 
+    **(c)** For each $n$ in part (b), apply 100 steps of {numref}`Function {number}<function-poweriter>`. On one graph plot the four convergence curves $|\gamma_k-\lambda_1|$ using a semi-log scale. (They will not be smooth curves, because the matrix has many repeated eigenvalues that complicate our convergence analysis.) 
 
     ::::{only} solutions
     %% (a)

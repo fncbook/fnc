@@ -211,13 +211,8 @@ There are other ways to avoid the growth in computational effort as the GMRES/Ar
       semilogy(rv)    % much less convergence  
       ::::
 
-6. ⌨ (Continuation of [an earlier exercise](problem-power-lumpmembraneinveig).) We again consider the $n^2\times n^2$ sparse matrix defined by
-  
-    ```julia
-    A = n^2*gallery('poisson',n);
-    ```
-
-    The solution of $\mathbf{A}\mathbf{x}=\mathbf{b}$ may be interpreted as the deflection of a lumped membrane in response to a constant load represented by $\mathbf{b}$.
+6. ⌨ (Continuation of [an earlier exercise](problem-power-lumpmembraneinveig).) We again consider the $n^2\times n^2$ sparse matrix defined by `FNC.poisson(n)`.
+The solution of $\mathbf{A}\mathbf{x}=\mathbf{b}$ may be interpreted as the deflection of a lumped membrane in response to a constant load represented by $\mathbf{b}$.
     
     **(a)** For  $n=10,15,20,25$, let $\mathbf{b}$ be the vector of $n^2$ ones and apply {numref}`Function {number} <function-gmres>` for 50 iterations. On one semi-log graph, plot the four convergence curves $\|\mathbf{r}_m\|/\|\mathbf{b}\|$.
 
@@ -242,7 +237,7 @@ There are other ways to avoid the growth in computational effort as the GMRES/Ar
 7. ⌨  Consider a matrix that arises from the Helmholtz equation for wave propagation. The matrix can be specified using 
 
     ```julia
-    A = n^2*gallery('poisson',n) - k^2*I;
+    A = FNC.poisson(n) - k^2*I;
     ```
   
     Let $n=20$ and use the two parameter values $k=1.3\pi$ and $k=1.5\pi$. Use `eigs` to find the five largest and five smallest eigenvalues in each case. (See {prf:ref}`demos-structure-linalg` for examples of its usage.) What happens to the spectrum of the matrix?  Specifically, does it remain definite?

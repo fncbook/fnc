@@ -210,23 +210,16 @@ In practice power and inverse iteration are not as effective as the algorithms u
     ::::
 
     (problem-lumpmembraneinveig)=
-5. ⌨ (Continuation of [an earlier problem](problem-power-lumpmembraneeig).) This problem concerns the $k^2\times k^2$ sparse matrix defined by
+5. ⌨ (Continuation of [an earlier problem](problem-power-lumpmembraneeig).) This problem concerns the $n^2\times n^2$ sparse matrix defined by `FNC.poisson(n)`. It represents a lumped model of a vibrating square membrane held fixed around the edges.
 
-    ```julia
-    D = spdiagm(-1=>fill(-1,k-1),0=>fill(2,k),1=>fill(-1,k-1)) * (k+1)^2/pi^2
-    A = kron(D,I(k)) + kron(I(k),D)
-    ```
-
-    It represents a lumped model of a vibrating square membrane held fixed around the edges.
-
-    **(a)** The eigenvalues of $\mathbf{A}$ closest to zero are approximately squares of the frequencies of vibration for the membrane. Using `eigvals(Matrix(A))`, find the eigenvalue $\lambda_m$ closest to zero for $k=10,15,20,25$.
+    **(a)** The eigenvalues of $\mathbf{A}$ closest to zero are approximately squares of the frequencies of vibration for the membrane. Using `eigvals(Matrix(A))`, find the eigenvalue $\lambda_m$ closest to zero for $n=10,15,20,25$.
     
-    **(b)** For each case of $k$ in part (a), apply 50 steps of {numref}`Function {number}<function-inviter>`. On one graph plot the four convergence curves $|\gamma_k-\lambda_m|$ using a semi-log scale.
+    **(b)** For each $n$ in part (a), apply 50 steps of {numref}`Function {number}<function-inviter>`. On one graph plot the four convergence curves $|\gamma_k-\lambda_m|$ using a semi-log scale.
 
-    **(c)** Let `v` be the eigenvector (second output) found by {numref}`Function {number}<function-inviter>` for $k=25$. Visualize the vibration mode of the membrane using 
+    **(c)** Let `v` be the eigenvector (second output) found by {numref}`Function {number}<function-inviter>` for $n=25$. Visualize the vibration mode of the membrane using 
     
     ```julia
-    surface(1:k,1:k,reshape(v,k,k))
+    surface(1:n,1:n,reshape(v,n,n))
     ```
         
     ::::{only} solutions

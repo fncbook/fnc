@@ -135,3 +135,9 @@ function sprandsym(n,density,rcond::Number)
     lambda = [ rcond^(i/(n-1)) for i = 0:n-1 ]
     sprandsym(n,density,lambda)
 end
+
+# This function produces useful examples.
+function poisson(n)
+    D = spdiagm(-1=>fill(-1,n-1),0=>fill(2,n),1=>fill(-1,n-1)) * (n+1)^2/pi^2
+    return kron(D,I(n)) + kron(I(n),D)
+end
