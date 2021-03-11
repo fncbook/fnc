@@ -143,7 +143,7 @@ end
 
 ## Conditioning and convergence
 
-The condition number bounds from \thmref{interp-conditioning} are very simple for piecewise linear interpolation, because the interpolant of the data $\mathbf{e}_k$ is just the hat function $H_k$. Hence $1\le \kappa \le n+1$. However, there is an even simpler result.
+The condition number bounds from {prf:ref}`theorem-interp-conditioning` are very simple for piecewise linear interpolation, because the interpolant of the data $\mathbf{e}_k$ is just the hat function $H_k$. Hence $1\le \kappa \le n+1$. However, there is an even simpler result.
 
 ```{index} condition number; of interpolation
 ```

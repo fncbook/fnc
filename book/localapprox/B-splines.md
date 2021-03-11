@@ -171,7 +171,7 @@
 %````
 
 %
-%As a consequence of \thmref{bspline}, every linear combination of B-splines is a piecewise polynomial of degree $r-2$ and smoothness $C^{r-3}$ (i.e., $r-3$ continuous derivatives). We are next going to use them to create interpolants. But first notice that the B-splines of order greater than one are *not* cardinal functions, so we will lose one of the attractive features of hat functions.
+%As a consequence of {prf:ref}`theorem-bspline`, every linear combination of B-splines is a piecewise polynomial of degree $r-2$ and smoothness $C^{r-3}$ (i.e., $r-3$ continuous derivatives). We are next going to use them to create interpolants. But first notice that the B-splines of order greater than one are *not* cardinal functions, so we will lose one of the attractive features of hat functions.
 %
 %
 %## Cubic spline interpolants
@@ -292,7 +292,7 @@ function spinterp(t,y)
     # This function evaluates the spline when called with a value
     # for x.
     function evaluate(x)
-        k = findfirst(@. x<t)   # one greater than interval x belongs to
+        k = findfirst(x.<t)   # one greater than interval x belongs to
         k==1 && return NaN
         if isnothing(k)
             return x==t[end] ? y[end] : NaN

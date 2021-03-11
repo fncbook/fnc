@@ -47,27 +47,27 @@ Our implementation of the method based on this formula is given in {numref}`Func
 ```{code-block} julia
 :lineno-start: 1
 """
-secant(f,x1,x2)
+secant(f,x₁,x₂)
 
-Use the secant method to find a root of `f` starting from `x1` and
-`x2`. Returns a vector of root estimates.
+Use the secant method to find a root of `f` starting from `x₁` and
+`x₂`. Returns a vector of root estimates.
 """
-function secant(f,x1,x2)
+function secant(f,x₁,x₂)
     # Operating parameters.
     funtol = 100*eps();  xtol = 100*eps();  maxiter = 40;
 
-    x = [x1,x2]
-    y1 = f(x1); y2 = 100;
+    x = [x₁,x₂]
+    y₁ = f(x₁); y₂ = 100;
     dx = Inf   # for initial pass below
     k = 2
 
-    while (abs(dx) > xtol) && (abs(y2) > funtol) && (k < maxiter)
-        y2 = f(x[k])
-        dx = -y2 * (x[k]-x[k-1]) / (y2-y1)   # secant step
+    while (abs(dx) > xtol) && (abs(y₂) > funtol) && (k < maxiter)
+        y₂ = f(x[k])
+        dx = -y₂ * (x[k]-x[k-1]) / (y₂-y₁)   # secant step
         push!(x,x[k]+dx)        # append new estimate
 
-        k = k+1
-        y1 = y2    # current f-value becomes the old one next time
+        k += 1
+        y₁ = y₂    # current f-value becomes the old one next time
     end
 
     if k==maxiter

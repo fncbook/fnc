@@ -57,7 +57,7 @@ function ab4(ivp,n)
     t = [ a + i*h for i in 0:n ]
 
     # Constants in the AB4 method.
-    k = 4;    sigma = [55, -59, 37, -9]/24;
+    k = 4;    σ = [55, -59, 37, -9]/24;
 
     # Find starting values by RK4.
     u = fill(float(ivp.u0),n+1)
@@ -71,7 +71,7 @@ function ab4(ivp,n)
     # Time stepping.
     for i in k:n
       f = [ ivp.f(u[i],ivp.p,t[i]), f[1:k-1]... ]   # new value of du/dt
-      u[i+1] = u[i] + h*sum(f[j]*sigma[j] for j in 1:k)  # advance a step
+      u[i+1] = u[i] + h*sum(f[j]*σ[j] for j in 1:k)  # advance a step
     end
     return t,u
 end

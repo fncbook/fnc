@@ -119,17 +119,17 @@ often the most challenging part of a rootfinding problem. We will try to deal wi
 ```{code-block} julia
 :lineno-start: 1
 """
-newton(f,dfdx,x1)
+newton(f,dfdx,x₁)
 
-Use Newton's method to find a root of `f` starting from `x1`, where
+Use Newton's method to find a root of `f` starting from `x₁`, where
 `dfdx` is the derivative of `f`. Returns a vector of root estimates.
 """
-function newton(f,dfdx,x1)
+function newton(f,dfdx,x₁)
     # Operating parameters.
     funtol = 100*eps();  xtol = 100*eps();  maxiter = 40;
 
-    x = [x1]
-    y = f(x1)
+    x = [x₁]
+    y = f(x₁)
     dx = Inf   # for initial pass below
     k = 1
 
@@ -138,7 +138,7 @@ function newton(f,dfdx,x1)
         dx = -y/dydx            # Newton step
         push!(x,x[k]+dx)        # append new estimate
 
-        k = k+1
+        k += 1
         y = f(x[k])
     end
 

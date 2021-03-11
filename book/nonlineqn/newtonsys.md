@@ -140,19 +140,19 @@ An implementation of Newton's method for systems is given in {numref}`Function {
 ```{code-block} julia
 :lineno-start: 1
 """
-newtonsys(f,jac,x1)
+newtonsys(f,jac,x₁)
 
 Use Newton's method to find a root of a system of equations,
-starting from `x1`. The functions `f` and `jac should return the
+starting from `x₁`. The functions `f` and `jac should return the
 residual vector and the Jacobian matrix, respectively. Returns
 history of root estimates as a vector of vectors.
 """
-function newtonsys(f,jac,x1)
+function newtonsys(f,jac,x₁)
     # Operating parameters.
     funtol = 1000*eps();  xtol = 1000*eps();  maxiter = 40;
 
-    x = [float(x1)]
-    y,J = f(x1),jac(x1)
+    x = [float(x₁)]
+    y,J = f(x₁),jac(x₁)
     dx = Inf   # for initial pass below
     k = 1
 

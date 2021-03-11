@@ -191,6 +191,7 @@ Create a cubic not-a-knot spline interpolating function for data
 values in `y` given at nodes in `t`.
 """
 function spinterp(t,y)
+
     n = length(t)-1
     h = diff(t)         # differences of all adjacent pairs
 
@@ -241,7 +242,6 @@ function spinterp(t,y)
         return S[k-1](x-t[k-1])
     end
     return evaluate
-
 end
 ```
 ````

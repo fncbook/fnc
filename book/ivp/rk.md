@@ -240,11 +240,11 @@ function rk4(ivp,n)
 
     # Time stepping.
     for i in 1:n
-        k1 = h*ivp.f( u[i],      ivp.p, t[i]     )
-        k2 = h*ivp.f( u[i]+k1/2, ivp.p, t[i]+h/2 )
-        k3 = h*ivp.f( u[i]+k2/2, ivp.p, t[i]+h/2 )
-        k4 = h*ivp.f( u[i]+k3,   ivp.p, t[i]+h   )
-        u[i+1] = u[i] + (k1 + 2*(k2 + k3) + k4)/6
+        k₁ = h*ivp.f( u[i],      ivp.p, t[i]     )
+        k₂ = h*ivp.f( u[i]+k₁/2, ivp.p, t[i]+h/2 )
+        k₃ = h*ivp.f( u[i]+k₂/2, ivp.p, t[i]+h/2 )
+        k₄ = h*ivp.f( u[i]+k₃,   ivp.p, t[i]+h   )
+        u[i+1] = u[i] + (k₁ + 2(k₂+k₃) + k₄)/6
     end
     return t,u
 end
