@@ -33,7 +33,7 @@ In {ref}`prob-specquad-trapperiod` you are asked to verify that this result is i
 
 
 ::::{prf:example}
-  \inputexample{globalfuncapprox}{integrate_ellipse}
+  \inputexample{globalapprox}{integrate_ellipse}
 ::::
 
 
@@ -110,7 +110,7 @@ $$
 
 \begin{function}[tbp]
   \caption{("ccint") Clenshaw–Curtis numerical integration.}
-  \inputfunction{globalfuncapprox}{ccint}
+  \inputfunction{globalapprox}{ccint}
 \end{function}
 
 
@@ -214,7 +214,7 @@ From {prf:ref}`theorem-legroot` we know that the roots of $P_n$ are distinct and
 
 \begin{function}
   \caption{("glint") Gauss–Legendre numerical integration.}
-  \inputfunction{globalfuncapprox}{glint}
+  \inputfunction{globalapprox}{glint}
 \end{function}
 
 
@@ -225,7 +225,7 @@ Both Clenshaw–Curtis and Gauss–Legendre integration are based on the integra
 
 
 ::::{prf:example}
-  \inputexample{globalfuncapprox}{quadcompare}
+  \inputexample{globalapprox}{quadcompare}
 ::::
 
 
@@ -290,7 +290,7 @@ $$
 
 
 \begin{exercises}
-  \input{globalfuncapprox/exercises/SpectralQuadrature}
+  \input{globalapprox/exercises/SpectralQuadrature}
 \end{exercises}
 
 \clearpage

@@ -23,7 +23,7 @@ As usual, we have sample values $y_{-n},\ldots,y_n$, perhaps representing values
 \fxnote{Figure for the periodic interpolation setup?}
 %
 ::::{prf:example}
-%  \inputexample{globalfuncapprox}{periodicfunction}
+%  \inputexample{globalapprox}{periodicfunction}
 %::::
 
 %
@@ -77,7 +77,7 @@ $$
 ````
 
 ::::{prf:example}
-  \inputexample{globalfuncapprox}{periodicinterp}
+  \inputexample{globalapprox}{periodicinterp}
 ::::
 
 
@@ -87,7 +87,7 @@ $$
 %As always, spectral convergence is predicated on having infinitely many continuous derivatives. At the other extreme is a function with a jump discontinuity. Trigonometric interpolation across a jump leads to a lack of convergence altogether, a fact famously known as the **Gibbs phenomenon**.
 %
 ::::{prf:example}
-%  \inputexample{globalfuncapprox}{gibbs}
+%  \inputexample{globalapprox}{gibbs}
 %::::
 
 
@@ -154,14 +154,14 @@ N
 
 
 ::::{prf:example}
-  \inputexample{globalfuncapprox}{fft_ex}
+  \inputexample{globalapprox}{fft_ex}
 ::::
 
 
 The theoretical and computational aspects of Fourier analysis are vast and far-reaching. We have given only the briefest of introductions.
 
 \begin{exercises}
-  \input{globalfuncapprox/exercises/Trig}
+  \input{globalapprox/exercises/Trig}
 \end{exercises}
 \clearpage
 

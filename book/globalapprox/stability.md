@@ -8,7 +8,7 @@
 With  barycentric interpolation available in the form of {numref}`Function {number}<function-polyinterp>`, we can explore polynomial interpolation using a numerically stable algorithm. Any remaining sensitivity to error is due to the interpolation process itself.
 
 ::::{prf:example}
-  \inputexample{globalfuncapprox}{equiinterp1}
+  \inputexample{globalapprox}{equiinterp1}
 ::::
 
 
@@ -16,7 +16,7 @@ With  barycentric interpolation available in the form of {numref}`Function {numb
 %
 %
 ::::{prf:example}
-%  \inputexample{globalfuncapprox}{equiinterp2}
+%  \inputexample{globalapprox}{equiinterp2}
 %::::
 
 
@@ -38,7 +38,7 @@ The $\Phi(x)$ term can be studied as a function of the nodes only.
 
 
 ::::{prf:example}
-  \inputexample{globalfuncapprox}{equiPhi}
+  \inputexample{globalapprox}{equiPhi}
 ::::
 
 
@@ -46,7 +46,7 @@ Even though $\Phi\to 0$ at every point in the interval, the exponentially growin
 
 
 ::::{prf:example}
-  \inputexample{globalfuncapprox}{Runge}
+  \inputexample{globalapprox}{Runge}
 ::::
 
 
@@ -81,14 +81,14 @@ out to overcome the Runge phenomenon.
 
 ::::{prf:example}
   We repeat {ref}`example-equiPhi` but replace equally spaced nodes with Chebyshev points.
-  \inputexample{globalfuncapprox}{chebPhi}
+  \inputexample{globalapprox}{chebPhi}
 ::::
 
 
 
 ::::{prf:example}
   We repeat {ref}`example-Runge`, replacing equally spaced nodes with Chebyshev nodes.
-  \inputexample{globalfuncapprox}{chebRunge}
+  \inputexample{globalapprox}{chebRunge}
 ::::
 
 
@@ -129,7 +129,7 @@ In some contexts we refer to {eq}`spectral` as linear convergence, but here it i
  {term}`spectral convergence`. One achieves  constant reduction factors in the error by constant increments of $n$. By contrast, algebraic convergence in the form $O(n^{-p})$ for some $p>0$ requires *multiplying* $n$ by a constant factor in order to reduce error by a constant factor. Graphically, spectral error is linear on a log–linear scale, while algebraic convergence is a straight line on a log–log scale.
 
 \begin{exercises}
-  \input{globalfuncapprox/exercises/NodeLocations}
+  \input{globalapprox/exercises/NodeLocations}
 \end{exercises}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -77,16 +77,16 @@
   - file: krylov/matrixfree
   - file: krylov/precond
   - file: krylov/next
-- file: globalfuncapprox/overview
+- file: globalapprox/overview
   sections:
-  - file: globalfuncapprox/polynomial
-  - file: globalfuncapprox/barycentric
-  - file: globalfuncapprox/stability
-  - file: globalfuncapprox/orthogonal
-  - file: globalfuncapprox/trig
-  - file: globalfuncapprox/integration
-  - file: globalfuncapprox/improper
-  - file: globalfuncapprox/next
+  - file: globalapprox/polynomial
+  - file: globalapprox/barycentric
+  - file: globalapprox/stability
+  - file: globalapprox/orthogonal
+  - file: globalapprox/trig
+  - file: globalapprox/integration
+  - file: globalapprox/improper
+  - file: globalapprox/next
 - file: appendix/linear-algebra
 - file: appendix/demos
   numbered: false

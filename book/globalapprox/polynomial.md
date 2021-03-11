@@ -98,7 +98,7 @@ For $n=2$, we use $t_0= 0$, $_1 = \pi/6$ and $t_2 = \pi/3$. We now have
            = \frac{6\sqrt{3}}{\pi^2}x^2 + \frac{\sqrt{3}}{\pi} x
 \end{align*}
 
-%\inputexample{globalfuncapprox}{laginterp}
+%\inputexample{globalapprox}{laginterp}
 %The two interpolating polynomials are shown in Figure~\ref{fig:twointerpolants}, along
 %with the function $\tan x$.  Observe that $ P_1(\pi/4) = 1.2990$ and
 %$P_2(\pi/4) = 1.0825$ are approximations to $\tan (\pi/4)=1$. The

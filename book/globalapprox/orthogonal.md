@@ -7,7 +7,7 @@ Interpolation is not the only way to use polynomials for global approximation of
 
 
 ::::{prf:example}
-  \inputexample{globalfuncapprox}{lsfitexp}
+  \inputexample{globalapprox}{lsfitexp}
 ::::
 
 
@@ -290,7 +290,7 @@ These are known as the
 
 % 
 ::::{prf:example}
-%   \inputexample{globalfuncapprox}{chebpoints}
+%   \inputexample{globalapprox}{chebpoints}
 % ::::
 
 
@@ -321,7 +321,7 @@ There are many other families of orthogonal polynomials defined by the inner pro
 
 
 \begin{exercises}
-  \input{globalfuncapprox/exercises/OrthogonalPolys}
+  \input{globalapprox/exercises/OrthogonalPolys}
 \end{exercises}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage

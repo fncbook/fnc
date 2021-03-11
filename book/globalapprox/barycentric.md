@@ -148,6 +148,6 @@ You might expect that as the evaluation point $x$ approaches a node $t_i$, subtr
 
 <!-- 
 \begin{exercises}
-	\input{globalfuncapprox/exercises/Barycentric}
+	\input{globalapprox/exercises/Barycentric}
 \end{exercises}
  -->

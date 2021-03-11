@@ -101,7 +101,7 @@ The exponential terms introduced by the chain rule grow doubly exponentially, so
 
 ::::{prf:example}
   Consider again the case $f(x)=1/(1+x^2)$ from {ref}`example-slowdecay`. Suppose $x=x(t)$ as in {eq}`DEquadtrans1`. Although the chain rule term is doubly exponential in $t$, $x$ itself is doubly exponential, and since it's squared and in the denominator, the integrand in {eq}`DEquadchain1` *decays* doubly exponentially.
-  \inputexample{globalfuncapprox}{dedecay}
+  \inputexample{globalapprox}{dedecay}
 ::::
 
 
@@ -125,14 +125,14 @@ $$
 
 \begin{function}[tbp]
   \caption{("intde") Doubly exponential integration over $(-\infty,\infty)$.}
-  \inputfunction{globalfuncapprox}{intde}
+  \inputfunction{globalapprox}{intde}
 \end{function}
 
 
 
 ::::{prf:example}
   We use doubly exponential transformation to integrate $\pi=\int_{-\infty}^\infty 1/(1+x^2)\, dx$. We let $h$ and $M$ vary over orders of magnitude and measure the effect on the accuracy of the result from {numref}`Function {number}<function-intde>`.
-  \inputexample{globalfuncapprox}{unboundint}
+  \inputexample{globalapprox}{unboundint}
 ::::
 
 
@@ -145,7 +145,7 @@ If $f$ asymptotically approaches infinity as $x$ approaches an integration inter
 
 ::::{prf:example}
   Let's use {numref}`Function {number}<function-intadapt>` to try to integrate the function $\sqrt{x}$ over $[0,1]$. The exact result is 2/3.
-  \inputexample{globalfuncapprox}{intsqrtadapt}
+  \inputexample{globalapprox}{intsqrtadapt}
 ::::
 
 
@@ -187,12 +187,12 @@ $$
 This formula is used in {numref}`Function {number}<function-intsing>`, which accepts $h$ and $\delta$ to define the discretization.
 \begin{function}[tbp]
   \caption{("intsing") Integrate function with endpoint singularities.}
-  \inputfunction{globalfuncapprox}{intsing}
+  \inputfunction{globalapprox}{intsing}
 \end{function}
 
 
 ::::{prf:example}
-  \inputexample{globalfuncapprox}{intsqrtde}
+  \inputexample{globalapprox}{intsqrtde}
 ::::
 
 
@@ -200,7 +200,7 @@ Doubly-exponential mapped integration is a remarkably effective technique for a 
 
 
 \begin{exercises}
-  \input{globalfuncapprox/exercises/DoublyExp}
+  \input{globalapprox/exercises/DoublyExp}
 \end{exercises}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

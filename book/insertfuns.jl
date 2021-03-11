@@ -2,7 +2,7 @@ using FundamentalsNumericalComputation
 
 fncdir = dirname(pathof(FNC))
 
-for root in ["intro","linsys","leastsq","nonlineqn","localapprox","ivp","matrixanaly","krylov","globalfuncapprox","appendix"]
+for root in ["intro","linsys","leastsq","nonlineqn","localapprox","ivp","matrixanaly","krylov","globalapprox","appendix"]
 	for mdfile in filter(s->endswith(s,".md"),readdir(root))
 		str = readlines(joinpath(root,mdfile))
 		itext = findfirst(occursin.("{proof:function}",str))
