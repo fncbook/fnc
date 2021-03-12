@@ -64,7 +64,7 @@ The quasimatrix-vector product $\mathbf{V}\mathbf{c}$ is to be interpreted as {e
 
 :::{math}
   :label: quasimatfun
-  \mathbf{V}^Tg =
+  \mathbf{V}^T g =
   \begin{bmatrix}
     \langle 1,g \rangle \\ \vdots  \\  \langle x^n,g \rangle
   \end{bmatrix}.
