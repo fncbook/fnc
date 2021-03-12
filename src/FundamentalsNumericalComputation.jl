@@ -23,6 +23,7 @@ using Reexport
 @reexport using IncompleteLU
 @reexport using Preconditioners
 @reexport using OffsetArrays
+@reexport using FFTW
 @reexport using FileIO
 @reexport using SpecialFunctions
 @reexport using LaTeXStrings
