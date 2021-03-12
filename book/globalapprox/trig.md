@@ -52,8 +52,10 @@ Because any shift of a periodic function is also periodic, the cardinal basis fo
 ```
 ````
 
-::::{prf:example}
-  \inputexample{globalfuncapprox}{periodicinterp}
+::::{prf:example} Julia demo
+:class: demo
+:label: demos-trig-interp
+{doc}`demos/trig-interp`
 ::::
 
 ## Fast Fourier transform
@@ -107,8 +109,10 @@ $$
 \end{bmatrix}.
 $$
 
-::::{prf:example}
-  \inputexample{globalfuncapprox}{fft_ex}
+::::{prf:example} Julia demo
+:class: demo
+:label: demos-trig-interp
+{doc}`demos/trig-fft`
 ::::
 
 The theoretical and computational aspects of Fourier analysis are vast and far-reaching. We have given only the briefest of introductions.
