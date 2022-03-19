@@ -1,4 +1,8 @@
-# Fundamentals of Numerical Computation
+# Deprecation notice
+
+**This site is deprecated. Please visit the [new site](https://github.com/fncbook/FundamentalsNumericalComputation.jl) for this material instead.**
+
+---
 
 These are source files used to generate the online text [*Fundamentals of Numerical Computation*](https://fncbook.github.io/fnc) by T. A. Driscoll and R. J. Braun.
 
