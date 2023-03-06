@@ -105,7 +105,7 @@ Let's revisit the assumptions made to derive quadratic convergence as given by {
 2. We required $f'(r)\neq 0$---that is, $r$ must be a *simple* root. See [this exercise](problem-newtonmultiple) to investigate what happens at a multiple root.
 3. We assumed that the sequence converged, which is not easy to guarantee in any particular case. In fact,
 finding a starting guess from which the Newton iteration converges is
-often the most challenging part of a rootfinding problem. We will try to deal with this issue in \secref{quasinewton}.
+often the most challenging part of a rootfinding problem. We will try to deal with this issue in [a later section](quasinewton).
 
 ## Implementation
 
