@@ -125,7 +125,7 @@ LU factorization reduces any linear system to two triangular ones. From this, so
 1. Solve $\mathbf{L}\mathbf{z}=\mathbf{b}$ for $\mathbf{z}$ using forward substitution.
 1. Solve $\mathbf{U}\mathbf{x}=\mathbf{z}$ for $\mathbf{x}$ using backward substitution.
 
-One of the important aspects of this algorithm is that the factorization step depends only on the matrix $\mathbf{A}$; the right-hand side $\mathbf{b}$ is not involved. Thus if one has to solve multiple systems with a single matrix $\mathbf{A}$, the factorization needs to be performed only once for all systems. As we show in \secref{opcount}, the factorization is by far the most computationally expensive step, so this note is of more than academic interest.
+One of the important aspects of this algorithm is that the factorization step depends only on the matrix $\mathbf{A}$; the right-hand side $\mathbf{b}$ is not involved. Thus if one has to solve multiple systems with a single matrix $\mathbf{A}$, the factorization needs to be performed only once for all systems. As we show in [a later section](efficiency), the factorization is by far the most computationally expensive step, so this note is of more than academic interest.
 
 Based on the examples and discussion above, a code for LU factorization is given in {ref}`function-lufact`.
 
