@@ -214,7 +214,7 @@ Indeed, {ref}`function-newtonsys` is a proper generalization---it can be used on
 2. ✍ Suppose that $\mathbf{f}(\mathbf{x}) = \mathbf{A}\mathbf{x} - \mathbf{b}$ for a constant $n\times n$ matrix $\mathbf{A}$ and constant $n\times 1$ vector $\mathbf{b}$. Show that Newton's method converges to the exact root in one iteration.
 
     (problem-spherepotential)=
-3. Two curves in the $(u,v)$ plane are defined implicitly by the equations $u\log u + v \log v = -0.3$ and $u^4 + v^2 = 1$.
+3. Two curves in the $(u,v)$ plane are defined implicitly by the equations $u\log u + v \log v = -0.3$ and $u^4 + v^2 = 0.1$.
   
     **(a)** ✍ Write the intersection of these curves in the form $\mathbf{f}(\mathbf{x}) = \boldsymbol{0}$ for two-dimensional $\mathbf{f}$ and $\mathbf{x}$.
 
