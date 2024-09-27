@@ -21,7 +21,7 @@ The values $t_0,\ldots,t_n$ are called the {term}`nodes` of the interpolant. In 
 {doc}`demos/interp-global`
 ````
 
-Polynomials are the obvious first candidate to serve as interpolating functions. They are easy to work with, and in \secref{linsysinterp} we saw that a linear system of equations can be used to determine the coefficients of a polynomial that passes through every member of a set of given points in the plane. However, it's not hard to find examples for which polynomial interpolation leads to unusable results.
+Polynomials are the obvious first candidate to serve as interpolating functions. They are easy to work with, and in [a previous section](../linsys/polyinterp) we saw that a linear system of equations can be used to determine the coefficients of a polynomial that passes through every member of a set of given points in the plane. However, it's not hard to find examples for which polynomial interpolation leads to unusable results.
 
 ```{margin}
 Interpolation by a polynomial at equally spaced nodes is ill-conditioned as the degree of the polynomial grows.
