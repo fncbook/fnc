@@ -25,3 +25,4 @@ Manifest.toml
 _build
 
 .ipynb_checkpoints
+.vscode
