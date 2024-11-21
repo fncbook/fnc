@@ -33,7 +33,7 @@ We now introduce another factorization that is as fundamental as the EVD.
 ```
 
 (definition-svd-svd)=
-::::{proof:definition} Singular value decomposition (SVD)
+::::{prf:definition} Singular value decomposition (SVD)
 The **singular value decomposition** of an $m\times n$ matrix $\mathbf{A}$ is
 
 ```{math}
@@ -53,15 +53,15 @@ We call $\sigma_1$ the **principal singular value** and $\mathbf{u}_{1}$ and $\m
 ::::
 
 (theorem-svd)=
-````{proof:theorem}
+````{prf:theorem}
 Every $m\times n$ matrix has an SVD. The singular values of a matrix are unique, but the singular vectors are not. If the matrix is real, then $\mathbf{U}$ and $\mathbf{V}$ in {eq}`svd` can be chosen to be real, orthogonal matrices.  
 ````
-:::{proof:proof}
+:::{prf:proof}
 The nonuniqueness is easy: for instance, we can replace $\mathbf{U}$ and $\mathbf{V}$ by their negatives without affecting {eq}`svd`. Proof of the other statements usually relies on induction in the size of $\mathbf{A}$ and can be found in advanced linear algebra texts.
 :::
 
 (example-svd-vector)=
-````{proof:example}
+````{prf:example}
 It is easy to check that 
 
 ```{math}
@@ -78,7 +78,7 @@ It is easy to check that
 meets all the requirements of an SVD. Interpreted as a matrix, the vector $[3,4]$ has the lone singular value 5.
 ````
 
-````{proof:example}
+````{prf:example}
 Suppose $\mathbf{A}$ is a real matrix and that $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^T$ is an SVD. Then $\mathbf{A}^T=\mathbf{V}\mathbf{S}^T\mathbf{U}^T$ meets all the requirements of an SVD for $\mathbf{A}^T$: the first and last matrices are orthogonal, and the middle matrix is diagonal with nonnegative elements. Hence $\mathbf{A}$ and $\mathbf{A}^T$ have the same singular values.
 ````
 
@@ -91,11 +91,11 @@ Suppose $\mathbf{A}$ is a real matrix and that $\mathbf{A}=\mathbf{U}\mathbf{S}\
 ```
 
 (theorem-svd-ATA)=
-:::{proof:theorem}
+:::{prf:theorem}
 The nonzero eigenvalues of $\mathbf{A}^*\mathbf{A}$ are the squares of the singular values of $\mathbf{A}$.
 :::
 
-::::{proof:proof}
+::::{prf:proof}
 Let $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^*$ be $m\times n$, and compute the square hermitian matrix $\mathbf{B}=\mathbf{A}^*\mathbf{A}$:
 
 ```{math}
@@ -220,7 +220,7 @@ in which $\hat{\mathbf{U}}$ is $m\times n$ and $\hat{\mathbf{S}}$ is $n\times n$
 
 in which $\hat{\mathbf{S}}$ is square and diagonal and $\hat{\mathbf{U}}$ is ONC but not square. 
 
-::::{proof:example}
+::::{prf:example}
 Given the full SVD of {numref}`Example {number} <example-svd-vector>`, the corresponding thin SVD is
 ```{math}
 \begin{bmatrix} 3 \\ 4 \end{bmatrix}
@@ -244,7 +244,7 @@ The SVD is intimately connected to the 2-norm, as the following theorem describe
 ```
 
 (theorem-svdprops)=
-::::{proof:theorem} SVD properties
+::::{prf:theorem} SVD properties
 Let $\mathbf{A}\in\mathbb{C}^{m\times n}$ have an SVD $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^*$ in which {eq}`svdorder` holds. Then:
 
 1. The 2-norm satisfies
@@ -269,16 +269,12 @@ Let $\mathbf{A}\in\mathbb{C}^{m\times n}$ have an SVD $\mathbf{A}=\mathbf{U}\mat
 The conclusion {eq}`svdnorm` can be proved by vector calculus. In the square case $m=n$, $\mathbf{A}$ having full rank is identical to being invertible. The SVD is the usual means for computing the 2-norm and condition number of a matrix. 
 
 (demo-svd-props)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We verify some of the fundamental SVD properties using standard Julia functions from `LinearAlgebra`.
 
@@ -325,13 +321,9 @@ We verify the orthogonality of the singular vectors as follows:
 @show opnorm(U'*U - I);
 @show opnorm(V'*V - I);
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

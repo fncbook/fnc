@@ -27,7 +27,7 @@ Now we turn to one of the most common and important applications of interpolants
 ```{index} ! finite differences
 ```
 
-::::{proof:definition} Finite-difference formula
+::::{prf:definition} Finite-difference formula
 A **finite-difference** formula is a list of values $a_{-p},\ldots,a_q$, called **weights**, such that for all $f$ in some class of functions,
 
 ```{math}
@@ -47,7 +47,7 @@ Note that while {eq}`fdformula` is about finding the derivative at a single poin
 
 There are three appealing special cases of {eq}`fdformula` that get special attention.
 
-::::{proof:definition} Forward, backward, and centered FD formulas
+::::{prf:definition} Forward, backward, and centered FD formulas
 A **forward difference formula** is characterized by {eq}`fdformula` with $p=0$, a **backward difference formula** has $q=0$, and a **centered difference formula** has $p=q$.
 ::::
 
@@ -68,7 +68,7 @@ which is {eq}`fdformula` with $p=0$, $q=1$, $a_0=-1$, and $a_1=1$. Analogously, 
 in which $p=1$, $q=0$.
 
 (example-finitediffs-fd1bd1)=
-::::{proof:example}
+::::{prf:example}
 Suppose $f(x)=x^2$, and we take $h=\frac{1}{4}$ over the interval $[0,1]$. This results in the nodes $0,\frac{1}{4},\frac{1}{2},\frac{3}{4},1$. We evaluate $f$ at the nodes to get
 
 $$
@@ -154,7 +154,7 @@ We can in principle derive any finite-difference formula from the same process: 
 
  The main motivation for using more function values in a formula is to improve the accuracy. This is measured by **order of accuracy**, which is shown in the tables and explored in {numref}`section-localapprox-fd-converge`. 
 
-````{proof:example}
+````{prf:example}
 According to the tables, here are three specific finite-difference formulas:
 
 ```{math}
@@ -167,16 +167,12 @@ f'(0) &\approx \tfrac{1}{h} \left[ \tfrac{1}{2} f(-2h) - 2 f(-h) + \tfrac{3}{2} 
 ```
 ````
 
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 If $f(x)=e^{\,\sin(x)}$, then $f'(0)=1$. 
 
@@ -208,13 +204,9 @@ BD1 = (          -f(-h) +  f(0)) /  h
 BD2 = ( f(-2h) - 4f(-h) + 3f(0)) / 2h 
 @show (BD1,BD2);
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Higher derivatives
 
@@ -253,16 +245,12 @@ f''(0) \approx \frac{ 2f(0) - 5 f(h) + 4 f(2h) -f(3h) }{h^2}.
 
 For the second derivative, converting a forward difference to a backward difference requires reversing the order of the weights, while *not* changing their signs.
 
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 If $f(x)=e^{\,\sin(x)}$, then $f''(0)=1$. 
 
@@ -293,13 +281,9 @@ BD1 = (           f(-2h) - 2f(-h) +  f(0)) / h^2
 BD2 = (-f(-3h) + 4f(-2h) - 5f(-h) + 2f(0)) / h^2
 @show (BD1,BD2);
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Arbitrary nodes
 
@@ -314,7 +298,7 @@ We no longer assume equally spaced nodes, so there is no "$h$" to be used in the
 
 (function-fdweights)=
 
-````{proof:function} fdweights
+````{prf:function} fdweights
 **Fornberg's algorithm for finite-difference weights**
 
 ```{code-block} julia
@@ -361,16 +345,12 @@ end
 
 (demo-finitediffs-fd-weights)=
 
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We will estimate the derivative of $\cos(x^2)$ at $x=0.5$ using five nodes.
 
@@ -407,13 +387,9 @@ By giving nodes of type `Rational`, we can get exact values instead.
 ```{code-cell}
 FNC.fdweights(Rational.(0:3),1)
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

@@ -71,7 +71,7 @@ Matching this expression to the term in brackets in {eq}`rkexactexpand`, it seem
 
 Truncation of the series here results in a new one-step method.
 
-::::{proof:definition} Improved Euler method (IE2)
+::::{prf:definition} Improved Euler method (IE2)
 The improved Euler method is the one-step formula
 ```{math}
 :label: IE
@@ -111,7 +111,7 @@ Our implementation of IE2 is shown in {numref}`Function {number} <function-ie2>`
 
 (function-ie2)=
 
-````{proof:function} ie2
+````{prf:function} ie2
 **Improved Euler method for an IVP**
 
 ```{code-block} julia
@@ -219,7 +219,7 @@ The most commonly used RK method, and perhaps the most popular IVP method of all
 
 This formula is often referred to as *the* fourth-order RK method, even though there are many others, and we refer to it as **RK4**.  Written out, the recipe is as follows.
 
-::::{proof:definition} Fourth-order Runge–Kutta method (RK4)
+::::{prf:definition} Fourth-order Runge–Kutta method (RK4)
 
 ```{math}
   :label: rk4def
@@ -237,7 +237,7 @@ Our implementation is given in {numref}`Function {number} <function-rk4>`.
 
 (function-rk4)=
 
-````{proof:function} rk4
+````{prf:function} rk4
 **Fourth-order Runge-Kutta for an IVP**
 
 ```{code-block} julia
@@ -273,16 +273,12 @@ end
 
 
 (demo-rk-converge)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We solve the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
 
@@ -327,13 +323,9 @@ plot!(4n,1e-10*(n/n[end]).^(-4),l=:dash,label=L"O(n^{-4})")
 ```
 
 The fourth-order variant is more efficient in this problem over a wide range of accuracy.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Efficiency
 

@@ -31,7 +31,7 @@ f_i = f(t_i,u_i).
 ```{index} ! multistep method, ! implicit IVP solver
 ```
 
-::::{proof:definition} Multistep method for IVPs
+::::{prf:definition} Multistep method for IVPs
 A $k$-step **multistep** (or *linear multistep*) method is given by the difference equation
 
 ```{math}
@@ -128,7 +128,7 @@ For example, the AB3 method is completely specified by
   \rho(z) = z^3-z^2, \qquad \sigma(z) = \tfrac{1}{12}(23z^2-16z+5).
 ```
 
-:::{proof:observation}
+:::{prf:observation}
 Let $\rho$ and $\sigma$ be the generating polynomials of a multistep method. Then:
 
 1. The polynomial $\rho(z)$ is monic (i.e., its leading term has a unit coefficient).
@@ -151,7 +151,7 @@ The connection between the generating polynomials and the numerical method requi
 The definition of local truncation error is easily extended to multistep methods. 
 
 (definition-multistep-lte)=
-:::{proof:definition} LTE and order of accuracy for a multistep IVP method
+:::{prf:definition} LTE and order of accuracy for a multistep IVP method
 For the multistep formula defined by {eq}`multistep`, the **local truncation error** is 
 
 ```{math}
@@ -163,7 +163,7 @@ For the multistep formula defined by {eq}`multistep`, the **local truncation err
 If the local truncation error satisfies $\tau_{i+1}(h)=O(h^p)$, then $p$ is the **order of accuracy** of the formula. If $p>0$, the method is **consistent**.
 ::::
 
-````{proof:example}
+````{prf:example}
 The first-order Adams–Moulton method is also known as **backward Euler**, because its difference equation is
 
 ```{math}
@@ -188,7 +188,7 @@ To derive the LTE, we use the definition:
 Thus $\tau_{i+1}(h)=O(h)$ and AM1 (backward Euler) is a first-order method.
 ````
 
-````{proof:example}
+````{prf:example}
 The AB2 method has the formula
 
 ```{math}
@@ -215,7 +215,7 @@ so that $\tau_{i+1}(h)=O(h^2)$.
 
 Although we will not present the analysis, the main conclusion for the multistep methods in this section is the same as for one-step methods.
 
-:::{proof:observation}
+:::{prf:observation}
 The global error of each method in {numref}`table-adams` and {numref}`table-BD` converges at the same order as the local truncation error.
 :::
 
@@ -233,7 +233,7 @@ As a result, a $k$-step Adams method always has $\rho(z)=z^k-z^{k-1}$. While the
 
 (example-am2derive)=
 
-````{proof:example}
+````{prf:example}
 Let's derive a one-step AM method using the two values $(t_i,f_i)$ and $(t_{i+1},f_{i+1})$. The interpolating polynomial is the linear function
 
 ```{math}
@@ -264,7 +264,7 @@ The idea behind backward differentiation formulas is complementary to that for A
 
 The quantity $q'(t_{i+1})$ can be approximated by a finite difference of the past solution values, leading to the coefficients of $\rho(z)$ and $\sigma(z)=b_k z^k$.  
 
-:::{proof:example} 
+:::{prf:example} 
 Consulting {numref}`table-FDforward`, we find the finite-difference approximation
 
 $$

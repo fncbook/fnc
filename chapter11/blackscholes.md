@@ -104,7 +104,7 @@ The Black–Scholes equation can be transformed by a change of variables into a 
 ```{index} ! heat equation, ! parabolic PDE
 ```
 
-::::{proof:definition} Heat equation
+::::{prf:definition} Heat equation
 The **heat equation** or **diffusion equation** in one dimension is
 
 :::{math}
@@ -119,12 +119,12 @@ where $k$ is a constant *diffusion coefficient*.
 
 The heat equation is the archetype differential equation for the class known as **parabolic PDEs**. A diffusive process is one in which velocity is proportional to the gradient of the solution. Thus, rapid changes in the solution flatten out quickly. 
 
-::::{proof:observation}
+::::{prf:observation}
 Solutions of the heat equation smooth out quickly and become as flat as the boundary conditions allow.
 ::::
 
 (example-heateqnsolnexam)=
-::::{proof:example}
+::::{prf:example}
 Consider the following diffusion problem on 
 
 \begin{align*}
@@ -209,15 +209,11 @@ Now we take the boundaries on $x$ into account. The value $V_{0,j+1}$ is zero, s
 We can therefore solve {eq}`bsneumann` for the fictitious $V_{m+1,j}$ and use it where called for in the right-hand side of {eq}`bspdeFD2`. 
 
 (demo-blackscholes-solve)=
-```{proof:demo}
-```
-```{raw} html
-<div class='demo'>
+```{prf:example}
 ```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We consider the Black–Scholes problem for the following parameter values:
 
@@ -281,26 +277,18 @@ mp4(anim,"black-scholes-6.mp4")
 ```
 
 The results are easy to interpret, recalling that the time variable really means *time until strike*. Say you are close to the option's strike time. If the current stock price is, say, $S=2$, then it's not likely that the stock will end up over the strike price $K=3$, and therefore the option has little value. On the other hand, if presently $S=3$, then there are good odds that the option will be exercised at the strike time, and you will need to pay a substantial portion of the stock price in order to take advantage. As the time to strike increases, there is an expectation that the stock price is more likely to rise somewhat, making the value of the option larger at each fixed $S$. 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 Everything in {numref}`Demo {number} <demo-blackscholes-solve>` seems to go smoothly. However, trouble lurks just around the corner.
 
 (demo-blackscholes-unstable)=
-```{proof:demo}
-```
-```{raw} html
-<div class='demo'>
+```{prf:example}
 ```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Let's try to do everything the same as in {numref}`Demo {number} <demo-blackscholes-solve>`, but extending the simulation time to $T=8$.
 
@@ -343,13 +331,9 @@ mp4(anim,"black-scholes-8.mp4")
 ```
 
 This so-called solution is nonsense!
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 The explosive growth of error in {numref}`Demo {number} <demo-blackscholes-unstable>` suggests that there is instability at work. Understanding the source of that instability comes later in this chapter. First, though, we consider a general and robust strategy for solving evolutionary PDEs.
 

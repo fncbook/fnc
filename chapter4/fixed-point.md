@@ -24,7 +24,7 @@ In this section, we consider the alternative form of the rootfinding problem kno
 
 ```{index} ! fixed-point problem
 ```
-```{proof:definition} Fixed-point problem
+```{prf:definition} Fixed-point problem
 Given a function $g$, the **fixed-point problem** is to find a value $p$, called a **fixed point**, such that $g(p)=p$.
 ```
 
@@ -36,7 +36,7 @@ There is an extraordinarily simple way to try to find a fixed point of any given
 ```{index} ! fixed-point iteration
 ```
 
-```{proof:algorithm} Fixed-point iteration
+```{prf:algorithm} Fixed-point iteration
 Given function $g$ and initial value $x_1$, define
 ```{math}
   :label: fixedpointiter
@@ -46,16 +46,12 @@ Given function $g$ and initial value $x_1$, define
 This is our first example of an iterative algorithm that never quite gets to the answer, even if we use exact numbers. The idea is to generate a sequence of values that one hopes will converge to the correct result, and stop when we are satisfied that we are close enough to the limit. 
 
 (demo-fp-spiral)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Let's convert the roots of a quadratic polynomial $f(x)$ to a fixed point problem.
 
@@ -137,13 +133,9 @@ plt
 ```
 
 This time, the iteration is pushing us _away from_ the correct answer.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Series analysis
 
@@ -168,12 +160,12 @@ assuming that $g$ has at least two continuous derivatives. But by definition, $g
 
 If the iteration is to converge to $p$, the errors must approach zero. In this case we can neglect the second-order term and conclude that $\epsilon_{k+1} \approx g'(p) \epsilon_k$. This is consistent with convergence if $|g'(p)|<1$. However, if $|g'(p)| >1$, we are led to the conclusion that the errors must grow, not vanish, even if they start quite small.
 
-```{proof:observation}
+```{prf:observation}
 Fixed point iteration for a differentiable $g(x)$ converges to a fixed point $p$ if the initial error is sufficiently small and $|g'(p)|< 1$. The iteration diverges for all initial values if $|g'(p)| > 1$.
 ```
 
 (example-fprate)=
-````{proof:example}
+````{prf:example}
 The role of $g'(p)$ is clear in {numref}`Demo %s <demo-fp-spiral>`. We have $g(x) = -x^2+5x-3.5$ and $g'(x)=-2x+5$. For the first fixed point, near $2.71$, we get $g'(p)\approx-0.42$, indicating convergence. For the second fixed point, near 1.29, we get $g'(p)\approx 2.42$, which is consistent with the observed divergence.
 ````
 
@@ -186,7 +178,7 @@ The prediction of the series analysis above is that if the fixed point iteration
 ```{index} ! convergence rate; linear, ! linear convergence
 ```
 
-````{proof:definition} Linear convergence
+````{prf:definition} Linear convergence
 Suppose a sequence $x_k$ approaches limit $x^*$. If the error sequence $\epsilon_k=x_k - x^*$ satisfies
 
 ```{math}
@@ -205,21 +197,17 @@ If we suppose that the ratios in {eq}`linearconvergence` all equal $\sigma$ (i.e
 
 This is in the form $\log |\epsilon_k| = \alpha k + \beta$, which is a linear relationship.
 
-```{proof:observation} Linear convergence in practice
+```{prf:observation} Linear convergence in practice
 Linear convergence is marked by an approximate reduction of the error at each iteration by a constant factor, the convergence rate $\sigma$. When graphed on a log-linear scale, the errors lie on a straight line whose slope is the log of the convergence rate. Both phenomena manifest most strongly at the latest iterations.
 ```
 
 (demo-fp-converge)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We revisit {numref}`Demo %s <demo-fp-spiral>` and investigate the observed convergence more closely. Recall that above we calculated $g'(p)\approx-0.42$ at the convergent fixed point.
 
@@ -273,13 +261,9 @@ The error should therefore decrease by a factor of $\sigma$ at each iteration. W
 ```
 
 The methods for finding $\sigma$ agree well.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Contraction maps
 
@@ -288,7 +272,7 @@ The convergence condition $\sigma=|g'(p)|<1$ derived by series expansion is a sp
 ```{index} ! Lipschitz condition
 ```
 
-````{proof:definition}
+````{prf:definition}
 A function $g$ is said to satisfy a **Lipschitz condition** with constant $L$ on the interval $S\subset\mathbb{R}$ if, for all $s,t\in S$, 
   
 ```{math}
@@ -303,11 +287,11 @@ A function $g$ is said to satisfy a **Lipschitz condition** with constant $L$ on
 It can be shown that a function satisfying {eq}`lipschitz` is continuous in $S$. If $L<1$, we call $g$ a **contraction mapping** because distances between points all decrease after an application of $g$. This situation leads to a major result about fixed points.
 
 (theorem-contraction)=
-````{proof:theorem} Contraction mapping
+````{prf:theorem} Contraction mapping
 Suppose that $g$ satisfies {eq}`lipschitz` with $L<1$ on an interval $S$. Then $S$ contains exactly one fixed point $p$ of $g$. If $x_1,x_2,\ldots$ are generated by the fixed point iteration {eq}`fixedpointiter`, and $x_1,x_2,\ldots$ all lie in $S$, then $|x_k-p|\le L^{k-1} |x_1-p|$ for all $k>1$.
 ````
 
-````{proof:proof}
+````{prf:proof}
 (partial proof)  First we show there is at most one fixed point in $S$. Suppose $g(t)=t$ and $g(s)=s$ in $S$. Then by {eq}`lipschitz`, $|s-t|=|g(s)-g(t)|\le L|s-t|$, which for $L<1$ is possible only if $|s-t|=0$, so $s=t$.
 
 Now suppose that for some $p\in S$, $g(p)=p$. By the definition of the fixed point iteration and the Lipschitz condition,
@@ -321,7 +305,7 @@ which shows that $x_k\to p$ as $k\to \infty$. To show that $p$ must exist and co
 
 From the Fundamental Theorem of Calculus, which asserts that $g(s)-g(t)=\int_s^t g'(x)\, dx$, it's easy to conclude that an upper bound of $|g'(x)|\le L$ for all $x$ results in {eq}`lipschitz`. Hence:
 
-::::{proof:corollary}
+::::{prf:corollary}
 If $|g'(x)|\le L < 1$ for all $x$ in an interval $S$, then the conclusions of {numref}`Theorem {number} <theorem-contraction>` apply.
 ::::
 

@@ -91,16 +91,12 @@ provided that the individual block products are well-defined. For transposes we 
 In Julia, vectors and matrices are one-dimensional and two-dimensional arrays, respectively. A lot of how Julia deals with them is easy to remember once learned. There's a lot to learn, though, so we give just some of the basics here, and we will pick up more as we go from the code used in our examples and functions.  
 
 (demo-matrices-julia)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 :::{index} ! Julia; size, ! Julia; length
 :::
@@ -111,26 +107,18 @@ In Julia, vectors and matrices are one-dimensional and two-dimensional arrays, r
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Square brackets are used to enclose elements of a matrix or vector. Use spaces for horizontal concatenation, and semicolons or new lines to indicate vertical concatenation.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 
 The `size` function returns the number of rows and columns in a matrix. Use `length` to get the number of elements in a vector or matrix.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -149,25 +137,17 @@ m,n = size(A)
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 A vector is not quite the same thing as a matrix. It has only one dimension, not two. Separate its elements by commas or semicolons.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 Separate elements of a vector by commas or semicolons. If you use spaces, you will get a matrix with one row, which is treated differently.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -237,25 +217,17 @@ s = range(-1,1,length=5)
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Accessing an element is done by giving one (for a vector) or two (for a matrix) index values within square brackets. 
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The `end` keyword refers to the last element in a dimension. It saves you from having to compute and store the size of the matrix first.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -291,25 +263,17 @@ A[:,1:2:end]        # all of the odd columns
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 The matrix and vector senses of addition, subtraction, scalar multiplication, multiplication, and power are all handled by the usual symbols. 
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 Use `diagm` to construct a matrix by its diagonals. A more general syntax puts elements on super- or subdiagonals.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -326,25 +290,17 @@ BA = B*A     # matrix product
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 `A*B` causes an error because the dimensions aren't compatible.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 Errors are formally called *exceptions* in Julia.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -389,25 +345,17 @@ two_to_x = 2 .^ x
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Most of the mathematical functions, such as cos, sin, log, exp, and sqrt, expect scalars as operands. However, you can broadcast any function, including ones that you have defined, across a vector or array by using a special dot syntax.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 A dot added to the end of a function name means to apply the function elementwise to an array.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -421,13 +369,9 @@ Rather than dotting multiple individual functions, you can use `@.` before an ex
 show(@. cos(π*(x+1)^3))    # broadcast an entire expression
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Row and column operations
 
@@ -437,7 +381,7 @@ A critical identity in matrix multiplication is
   \mathbf{A} \mathbf{e}_j = \mathbf{a}_j.
 ```
 
-```{proof:observation}
+```{prf:observation}
 Multiplication on the right by column $j$ of the identity reproduces the $j$th column of a matrix. 
 ```
 
@@ -462,7 +406,7 @@ But $\mathbf{e}_j^T$ is the $j$th *row* of $\mathbf{I}$, and $\mathbf{b}_j^T$ is
 
 Being able to extract specific rows and columns of a matrix makes it straightforward to do row- and column-oriented operations, such as linear combinations.
 
-````{proof:example}
+````{prf:example}
  Say that $\mathbf{A}$ has five columns. Adding twice the third column of $\mathbf{A}$ to its first column is done by
 
 ```{math}

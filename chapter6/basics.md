@@ -25,7 +25,7 @@ FNC.init_format()
 ```
 
 (definition-basics-scalarivp)=
-::::{proof:definition} Initial-value problem (scalar)
+::::{prf:definition} Initial-value problem (scalar)
 A scalar first-order **initial-value problem** (IVP) is
   
 ```{math}
@@ -43,7 +43,7 @@ A **solution** of an initial-value problem is a function $u(t)$ that makes both 
 
 When $t$ is meant to be time, sometimes we write $\dot{u}$ (read "u-dot") instead of $u'$. 
 
-::::{proof:example}
+::::{prf:example}
   Suppose $u(t)$ is the size of a population at time $t$. We idealize by allowing $u$ to take any real (not just integer) value. If we assume a constant per capita birth rate (births per unit population per unit time), then
   
 ```{math}
@@ -85,16 +85,12 @@ An ODE may have higher derivatives of the unknown solution present. For example,
 
 
 (demo-basics-first)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 The `DifferentialEquations` package offers solvers for IVPs. Let's use it to define and solve an initial-value problem for $u'=\sin[(u+t)^2]$ over $t \in [0,4]$, such that $u(0)=-1$.  
 
@@ -104,25 +100,17 @@ The `DifferentialEquations` package offers solvers for IVPs. Let's use it to def
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Because many practical problems come with parameters that are fixed within an instance but varied from one instance to another, the syntax for IVPs includes a input argument `p` that stays fixed throughout the solution. Here we don't want to use that argument, but it must be in the definition for the solver to work.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 To create an initial-value problem for $u(t)$, you must supply a function that computes $u'$, an initial value for $u$, and the endpoints of the interval for $t$. The $t$ interval should be defined as `(a,b)`, where at least one of the values is a float.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -166,13 +154,9 @@ The solver initially finds approximate values of the solution (second column abo
 ```{code-cell}
 scatter!(sol.t,sol.u,label="discrete values")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ## Existence and uniqueness
@@ -180,16 +164,12 @@ scatter!(sol.t,sol.u,label="discrete values")
 There are simple IVPs that do not have solutions at all possible times. 
 
 (demo-basics-sing)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 The equation $u'=(u+t)^2$ gives us some trouble.
 
@@ -206,24 +186,20 @@ The warning message we received can mean that there is a bug in the formulation 
 plot(sol, label="",
     xlabel=L"t",yaxis=(:log10,L"u(t)"), title="Finite-time blowup")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 We can also produce an IVP that has more than one solution.
 
-````{proof:example}
+````{prf:example}
   The functions $u(t)=u^2$ and $u(t)\equiv 0$ both satisfy the differential equation $u'=2\sqrt{u}$ and the initial condition $u(0)=0$. Thus the corresponding IVP has more than one solution.
 ````
 
 The following standard theorem gives us a condition that is easy to check and guarantees that a unique solution exists. But it is not the most general possible such condition, so there are problems with a unique solution that it cannot detect. We state the theorem without proof.
 
 (theorem-existunique)=
-````{proof:theorem} Existence and uniqueness
+````{prf:theorem} Existence and uniqueness
 
 If the derivative $\frac{\partial f}{\partial u}$ exists and $\left|\frac{\partial f}{\partial u}\right|$ is bounded by a constant $L$ for all $a\le t \le b$ and all $u$, then the initial-value problem {eq}`IVP` has a unique solution for $t\in [a,b]$.
 ````
@@ -236,7 +212,7 @@ If the derivative $\frac{\partial f}{\partial u}$ exists and $\left|\frac{\parti
 In a numerical context we have to be concerned about the conditioning of the IVP. There are two key items in {eq}`IVP` that we might consider to be the data of the initial-value ODE problem: the function $f(t,u)$, and the initial value $u_0$. It's easier to discuss perturbations to numbers than to functions, so we will focus on the effect of $u_0$ on the solution, using the following theorem that we give without proof. Happily, its conditions are identical to those in {numref}`Theorem %s <theorem-existunique>`.
 
 (theorem-depIC)=
-````{proof:theorem} Dependence on initial value
+````{prf:theorem} Dependence on initial value
 If the derivative $\frac{\partial f}{\partial u}$ exists and $\left|\frac{\partial f}{\partial u}\right|$ is bounded by a constant $L$ for all $a\le t \le b$ and all $u$, then the solution $u(t;u_0+\delta)$ of $u'=f(t,u)$ with initial condition $u(0)=u_0+\delta$ satisfies
   
 ```{math}
@@ -250,16 +226,12 @@ for all sufficiently small $|\delta|$.
 Numerical solutions of IVPs have errors, and those errors can be seen as perturbations to the solution. {numref}`Theorem %s <theorem-depIC>` gives an upper bound of $e^{L(b-a)}$ on the infinity norm (i.e., pointwise) absolute condition number of the solution with respect to perturbations at an initial time. However, the upper bound may be a terrible overestimate of the actual sensitivity for a particular problem.
 
 (demo-basics-cond)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Consider the ODEs $u'=u$ and $u'=-u$. In each case we compute $\partial f/\partial u = \pm 1$, so the condition number bound from {numref}`Theorem %s <theorem-depIC>` is $e^{b-a}$ in both problems. However, they behave quite differently. In the case of exponential growth, $u'=u$, the bound is the actual condition number.
 
@@ -285,13 +257,9 @@ plot(t,u,l=:black,ribbon=(lower,upper),
 ```
 
 In this case the actual condition number is one, because the initial difference between solutions is the largest over all time. Hence the exponentially growing bound $e^{b-a}$ is a gross overestimate.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 In general, solutions can diverge from, converge to, or oscillate around the original trajectory in response to perturbations. We won't fully consider these behaviors and their implications for numerical methods again until a later chapter.
 

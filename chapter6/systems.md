@@ -24,7 +24,7 @@ FNC.init_format()
 Few applications involve an initial-value problem with just a single dependent variable. Usually there are multiple unknowns and a system of equations to define them.  
 
 (example-systems-predprey)=
-````{proof:example}
+````{prf:example}
 Variations of the following model are commonly seen in ecology:
 
 ```{math}
@@ -55,7 +55,7 @@ and identifying $u_1=y$, $u_2=z$.
 We now upgrade our IVP definition, {numref}`Definition {number} <definition-basics-scalarivp>`.
 
 (definition-systems-vectorivp)=
-::::{proof:definition} Vector-valued IVP / IVP system
+::::{prf:definition} Vector-valued IVP / IVP system
 A vector-valued first-order **initial-value problem** (IVP) is
   
 ```{math}
@@ -86,16 +86,12 @@ The generalization of any scalar IVP solver to handle systems is straightforward
 The vector difference equation {eq}`eulersys` is just Euler's formula applied simultaneously to each component of the ODE system. Because operations such as addition and multiplication translate easily from scalars to vectors, {numref}`Function {number} <function-euler>` that we wrote for scalar IVPs works for systems as well. Practically speaking, the only changes that must be made are that the initial condition and the ODE function have to be coded to use vectors. 
 
 (demo-systems-predator)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We encode the predator–prey equations via a function.
 
@@ -158,25 +154,17 @@ Notice above that the accuracy of the Euler solution deteriorates rapidly.
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 When there are just two components, it's common to plot the solution in the _phase plane_, i.e., with $u_1$ and $u_2$ along the axes and time as a parameterization of the curve.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 You can use `vars` in the plot of a solution produced by `solve` to specify the components of the solution that appear on each axis.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -186,13 +174,9 @@ plot(sol,vars=(1,2),title="Predator-prey in the phase plane",
 ```
 
 From this plot we can deduce that the solution approaches a periodic one, which in the phase plane is represented by a closed loop.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 In the rest of this chapter we present methods as though they are for scalar equations, but their application to systems is taken for granted. The generalization of error analysis can be more complicated, but our statements about order of accuracy and other properties are true for systems as well as scalars. The codes are all written to accept systems.
 
@@ -202,7 +186,7 @@ Fortunately, the ability to solve first-order ODE systems implies the ability to
 
 (example-nlosc3)=
 
-````{proof:example}
+````{prf:example}
  Consider the nonlinear initial-value problem
   
 ```{math}
@@ -227,7 +211,7 @@ condition of the system is
 ````
 
 (example-systems-coupledpendula)=
-````{proof:example}
+````{prf:example}
 Two identical pendulums suspended from the same rod and swinging in parallel planes can be modeled as the second-order system
 
 ```{math}
@@ -263,15 +247,11 @@ which is a first-order system in four dimensions. To complete the description of
 The trick illustrated in the preceding examples is always available. Suppose $y$ is a scalar dependent variable in the system. You should introduce a component of $\mathbf{u}$ for $y$, $y'$, etc., up to but not including the highest derivative appearing anywhere for $y$. This is done for each scalar variable in the original system. There should be one component of $\mathbf{u}$ for each scalar initial condition given. Many equations for the first-order system then come from the trivial relationships among all the lower derivatives. The remaining equations for the system come from the original, high-order equations. In the end, there must be as many scalar component equations as unknown first-order variables.
 
 (demo-systems-coupledpendula)=
-```{proof:demo}
-```
-```{raw} html
-<div class='demo'>
+```{prf:example}
 ```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 ::::{grid} 1 1 2 2
 :gutter: 2
@@ -279,25 +259,17 @@ The trick illustrated in the preceding examples is always available. Suppose $y$
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Let's implement the coupled pendulums from {numref}`Example {number} <example-systems-coupledpendula>`. The pendulums will be pulled in opposite directions and then released together from rest.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The `similar` function creates an array of the same size and type as a given value, without initializing the contents.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -322,25 +294,17 @@ tspan = (0.,50.);
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 First we check the behavior of the system when the pendulums are uncoupled, i.e., when $k=0$.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 Here `vars` is used to plot two components as functions of time.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -366,13 +330,9 @@ plot(sol,vars=[1,2],label=[L"\theta_1" L"\theta_2"],
 
 The coupling makes the pendulums swap energy back and forth. 
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

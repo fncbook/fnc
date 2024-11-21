@@ -49,7 +49,7 @@ When $\mathbf{A}$ is singular, then $\mathbf{A}\mathbf{x}=\mathbf{b}$ may have n
 infinitely many solutions.
 
 (example-singmatrix)=
-````{proof:example}
+````{prf:example}
 If we define
 
 ```{math}
@@ -85,16 +85,12 @@ Matrix inverses are indispensable for mathematical discussion and derivations. H
 As demonstrated in {numref}`Demo %s <demo-interp-vander>`, a linear system of equations can be solved by a backslash  (the `\` symbol, not to be confused with the slash `/` used in web addresses).
 
 (demo-systems-backslash)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 For a square matrix $A$, the command `A\b` is mathematically equivalent to $\mathbf{A}^{-1}\mathbf{b}$. 
 
@@ -133,25 +129,17 @@ x = A\b
 :::{grid-item}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 The error message here is admittedly cryptic. In this case we can check that the rank of $\mathbf{A}$ is less than its number of columns, indicating singularity.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The function `rank` computes the rank of a matrix. However, it is numerically unstable for matrices that are nearly singular, in a sense to be defined in a later section.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -161,13 +149,9 @@ rank(A)
 
 A linear system with a singular matrix might have no solution or infinitely many solutions, but in either case, backslash will fail. Moreover, detecting singularity is a lot like checking whether two floating-point numbers are *exactly* equal: because of roundoff, it could be missed. In {numref}`section-linsys-condition-number` we'll find a robust way to fully describe the situation.
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Triangular systems
 
@@ -243,7 +227,7 @@ It should be clear that forward or backward substitution fails if and only if on
 
 
 (theorem-triangle-invert)=
-```{proof:theorem} Triangular singularity
+```{prf:theorem} Triangular singularity
 
 A triangular matrix is singular if and only if at least one of its diagonal elements is zero.
 ```
@@ -275,7 +259,7 @@ However, when `i` equals 1, the range `1:i-1` is empty and the sum causes an err
 
 (function-forwardsub)=
 
-````{proof:function} forwardsub
+````{prf:function} forwardsub
 **Forward substitution to solve a lower triangular linear system**
 
 ```{code-block} julia
@@ -302,7 +286,7 @@ end
 The implementation of backward substitution is much like forward substitution and is given in {numref}`Function {number} <function-backsub>`.
 
 (function-backsub)=
-````{proof:function} backsub
+````{prf:function} backsub
 
 **Backward substitution to solve an upper triangular linear system**
 
@@ -328,16 +312,12 @@ end
 ````
 
 (demo-systems-triangular)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 ```{index} ! Julia; tril, ! Julia; triu
 ```
@@ -348,25 +328,17 @@ end
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 It's easy to get just the lower triangular part of any matrix using the `tril` function.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 Use `tril` to return a matrix that zeros out everything above the main diagonal. The `triu` function zeros out below the diagonal.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -397,25 +369,17 @@ b - L*x
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Next we'll engineer a problem to which we know the exact answer. Use `\alpha` <kbd>Tab</kbd> and `\beta` <kbd>Tab</kbd> to get the Greek letters.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The notation `0=>ones(5)` creates a `Pair`. In `diagm`, pairs indicate the position of a diagonal and the elements that are to be placed on it.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -454,13 +418,9 @@ err = x - x_exact
 
 It's not so good to get 4 digits of accuracy after starting with 16! The source of the error is not hard to track down. Solving for $x_1$ performs $(\alpha-\beta)+\beta$ in the first row. Since $|\alpha|$ is so much smaller than $|\beta|$, this a recipe for losing digits to subtractive cancellation.
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 The example in {numref}`Demo %s <demo-systems-triangular>` is our first clue that linear system problems may have large condition numbers, making inaccurate solutions inevitable in floating-point arithmetic. We will learn how to spot such problems in {numref}`section-linsys-condition-number`. Before reaching that point, however, we need to discuss how to solve general linear systems, not just triangular ones.
 

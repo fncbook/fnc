@@ -26,7 +26,7 @@ The real number set $\real$ is infinite in two ways: it is unbounded and continu
 ```{index} ! floating-point numbers
 ```
 
-::::{proof:definition} Floating-point numbers
+::::{prf:definition} Floating-point numbers
 The set $\float$ of **floating-point numbers** consists of zero and all numbers of the form
 
 ```{math}
@@ -59,7 +59,7 @@ f = 2^{-d}\, \sum_{i=1}^{d} b_{i} \, 2^{d-i} = 2^{-d} z
 for an integer $z$ in the set $\{0,1,\ldots,2^d-1\}$. Consequently, starting at $2^n$ and ending just before $2^{n+1}$ there are exactly $2^d$ evenly spaced numbers belonging to $\float$. 
 
 (example-float-2bits)=
-````{proof:example}
+````{prf:example}
 Suppose $d=2$. Taking $n=0$ in {eq}`floatpoint`, we enumerate
 
 $$
@@ -76,7 +76,7 @@ Taking $n=1$ doubles each of the values in the list above, and $n=-1$ halves the
 
 Observe that the smallest element of $\float$ that is greater than 1 is $1+2^{-d}$, and we call the difference *machine epsilon*.[^macheps]
 
-::::{proof:definition} Machine epsilon
+::::{prf:definition} Machine epsilon
 For a floating-point set with $d$ binary digits of precision, **machine epsilon** (or *machine precision*) is $\macheps = 2^{-d}$.
 ::::
 
@@ -144,16 +144,12 @@ Absolute accuracy has the same units as $x$, while relative accuracy is dimensio
 We often round this value down to an integer, but it does make sense to speak of "almost seven digits" or "ten and a half digits."
 
 (demo-float-accuracy)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Recall the grade-school approximation to the number $\pi$.
 
@@ -166,27 +162,19 @@ Recall the grade-school approximation to the number $\pi$.
 :::{grid-item}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 
 Not all the digits displayed for `p` are the same as those of $\pi$. 
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 
 The value of `pi` is predefined and equivalent to `π`, which is entered by typing `\pi` followed immediately by the <kbd>Tab</kbd> key.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -203,25 +191,17 @@ The value of `pi` is predefined and equivalent to `π`, which is entered by typi
 :::{grid-item}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 The absolute and relative accuracies of the approximation are as follows.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 A dollar sign `$` in a string substitutes (or *interpolates*) the named variable or expression into the string.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -237,25 +217,17 @@ println("relative accuracy = $(acc/π)")
 :::{grid-item}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Here we calculate the number of accurate digits in `p`.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The `log` function is for the natural log. For other common bases, use `log10` or `log2`.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -264,13 +236,9 @@ println("Number of accurate digits = $(-log10(acc/π))")
 ```
 This last value could be rounded down by using `floor`.
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Double precision
 
@@ -287,16 +255,12 @@ Most numerical computing today is done in the **IEEE 754** standard. This define
 We often speak of double-precision floating-point numbers as having about 16 decimal digits. The 52-bit significand is paired with a sign bit and 11 binary bits to represent the exponent $n$ in {eq}`floatpoint`, for a total of 64 binary bits per floating-point number.
 
 (demo-float-julia)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 In Julia, `1` and `1.0` are different values, because they have different types:
 
@@ -317,25 +281,17 @@ bitstring(1.0)
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 The first bit determines the sign of the number:
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 Square brackets concatenate the contained values into vectors.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -367,27 +323,19 @@ x = 0.125
 :::{grid-item}
 :columns: 6
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 
 The spacing between floating-point values in $[2^n,2^{n+1})$ is $2^n \epsilon_\text{mach}$, where $\epsilon_\text{mach}$ is machine epsilon. You can get its value from the `eps` function in Julia. By default, it returns the value for double precision.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 6
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 
 To call a function, including `eps`, you must use parentheses notation, even when there are no input arguments.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -447,13 +395,9 @@ There are some exceptions. A floating-point value can't be used as an index into
 
 If you try to convert a noninteger floating-point value into an integer you get an `InexactValue` error. This occurs whenever you try to force a type conversion that doesn't make clear sense.
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 Our theoretical description of $\float$ did not place limits on the exponent, but in double precision its range is limited to $-1022\le n \le 1023$. Thus, the largest number is just short of $2^{1024}\approx 2\times 10^{308}$, which is enough in most applications. Results that should be larger are said to *overflow* and will actually result in the value `Inf`. Similarly, the smallest positive number is $2^{-1022}\approx 2\times 10^{-308}$, and smaller values are said to *underflow* to zero.[^denormalized]
 
@@ -479,16 +423,12 @@ Computer arithmetic is performed on floating-point numbers and returns floating-
 Hence the relative error in arithmetic is essentially the same as for the floating-point representation itself. However, playing by these rules can lead to disturbing results.
 
 (demo-float-arithmetic)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 There is no double-precision number between $1$ and $1+\epsilon_\text{mach}$. Thus the following difference is zero despite its appearance.
 
@@ -505,17 +445,13 @@ However, the spacing between floats in $[1/2,1)$ is $\macheps/2$, so both $1-\ma
 
 This is now the expected result. But we have found a rather shocking breakdown of the associative law of addition!
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 There are two ways to look at {numref}`Demo %s <demo-float-arithmetic>`. On one hand, its two versions of the result differ by less than $1.2\times 10^{-16}$, which is very small — not just in everyday terms, but with respect to the operands, which are all close to 1 in absolute value. On the other hand, the difference is as large as the exact result itself! We formalize and generalize this observation in the next section. In the meantime, keep in mind that exactness cannot be taken for granted in floating-point computation. 
 
-::::{proof:observation}
+::::{prf:observation}
 We should not expect that two mathematically equivalent results will be equal when computed in floating point, only that they be relatively close together.
 ::::
 

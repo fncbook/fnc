@@ -28,16 +28,12 @@ FNC.init_format()
 To this point, we have used only equally spaced nodes to compute integrals. Yet there are problems in which non-uniformly distributed nodes would clearly be more appropriate, as demonstrated in {numref}`Demo %s <demo-adapt-motive>`.
 
 (demo-adapt-motive)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 This function gets increasingly oscillatory as $x$ increases.
 
@@ -66,13 +62,9 @@ pretty_table([n left_err right_err], header=["n" "left error" "right error"])
 ```
 
 Both the picture and the numerical results suggest that more nodes should be used on the right half of the interval than on the left half.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 We would like an algorithm that automatically detects and reacts to a situation like that in {numref}`Demo %s <demo-adapt-motive>`, a trait known as **adaptivity**.
 
@@ -151,7 +143,7 @@ If the error estimate passes the test {eq}`absreltolerance`, the better Simpson 
 
 (function-intadapt)=
 
-````{proof:function} intadapt
+````{prf:function} intadapt
 **Adaptive integration with error estimation**
 
 ```{code-block} julia
@@ -200,16 +192,12 @@ The intended way for a user to call {numref}`Function {number} <function-intadap
 :::
 
 (demo-adapt-usage)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We'll integrate the function from {numref}`Demo %s <demo-adapt-motive>`.
 
@@ -259,13 +247,9 @@ plot(n,abs.(err),m=:o,label="results",
 order4 = @. 0.01*(n/n[1])^(-4)
 plot!(n,order4,l=:dash,label=L"O(n^{-4})")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 Although adaptivity and the error estimation that goes with it can be very powerful, they come at some cost. The error estimation cannot be universally perfect, so sometimes the answer will not be as accurate as requested, and sometimes the function will be evaluated more times than necessary. Subtle problems may arise when the integral is a step within a larger computation (see [Exercise 6](problem-adaptive-nonsmooth)).
 

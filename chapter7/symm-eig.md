@@ -37,7 +37,7 @@ Suppose now that $\mathbf{A}^*=\mathbf{A}$ and that $\mathbf{A}=\mathbf{U}\mathb
 and it's tempting to conclude that $\mathbf{U}=\mathbf{V}$. Happily, this is nearly true. The following theorem is typically proved in an advanced linear algebra course.
 
 (theorem-symm-eig-spectral)=
-````{proof:theorem} Spectral decomposition
+````{prf:theorem} Spectral decomposition
 If $\mathbf{A}=\mathbf{A}^*$, then $\mathbf{A}$ has a diagonalization $\mathbf{A}=\mathbf{V} \mathbf{D} \mathbf{V}^{-1}$ in which $\mathbf{V}$ is unitary and $\mathbf{D}$ is diagonal and real.
 ````
 
@@ -56,7 +56,7 @@ is almost an SVD.
 ```{index} unitary matrix
 ```
 
-````{proof:theorem}
+````{prf:theorem}
 If $\mathbf{A}^*=\mathbf{A}$ and $\mathbf{A}=\mathbf{V}\mathbf{D}\mathbf{V}^{-1}$ is a unitary diagonalization, then
   
 ```{math}
@@ -67,7 +67,7 @@ If $\mathbf{A}^*=\mathbf{A}$ and $\mathbf{A}=\mathbf{V}\mathbf{D}\mathbf{V}^{-1}
 is an SVD, where $|\mathbf{D}|$ is the elementwise absolute value and $\mathbf{T}$ is diagonal with $|T_{ii}|=1$ for all $i$.
 ````
 
-::::{proof:proof}
+::::{prf:proof}
 Let $T_{ii}=\operatorname{sign}(D_{ii})$ for all $i$. Then $\mathbf{T}^2=\mathbf{I}$, $|\mathbf{D}|=\mathbf{T}\mathbf{D}$, and
 
 $$
@@ -84,7 +84,7 @@ $$
 Recall that for a matrix $\mathbf{A}$ and compatible vector $\mathbf{x}$, the quadratic form $\mathbf{x}^* \mathbf{A} \mathbf{x}$ is a scalar. 
 
 (definition-symm-eig-rq)=
-::::{proof:definition}
+::::{prf:definition}
 Given hermitian $\mathbf{A}$ and nonzero vector $\mathbf{x}$, the **Rayleigh quotient** is the function
 
 ```{math}
@@ -105,16 +105,12 @@ R_{\mathbf{A}}(\mathbf{v}+\epsilon\mathbf{z}) = R_{\mathbf{A}}(\mathbf{v}) + 0 +
 as $\epsilon\to 0$. The conclusion is that a good estimate of an eigenvector becomes an even better estimate of an eigenvalue.
 
 (demo-symm-eig-rayleigh)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We will use a symmetric matrix with a known EVD.
 
@@ -151,13 +147,9 @@ end
 labels = ["perturbation δ","δ²","R(x) - λ"]
 pretty_table([δ δ.^2 eval_diff], header=labels)
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Definite, semidefinite, and indefinite matrices
 
@@ -170,14 +162,14 @@ pretty_table([δ δ.^2 eval_diff], header=labels)
 In the real case, we called a symmetric matrix $\mathbf{A}$ *symmetric positive definite* (SPD) if $\mathbf{x}^T \mathbf{A}\mathbf{x} > 0 $ for all nonzero vectors $\mathbf{x}$. In the complex case the relevant property is  **hermitian positive definite** (HPD), meaning that $\mathbf{A}^*=\mathbf{A}$ and $\mathbf{x}^* \mathbf{A}\mathbf{x} > 0$ for all complex vectors $\mathbf{x}$. Putting this property together with the Rayleigh quotient leads to the following.
 
 (theorem-symm-eig-hpd)=
-````{proof:theorem}
+````{prf:theorem}
 If $\mathbf{A}^*=\mathbf{A}$, then the following statements are equivalent.
 
 1. $\mathbf{A}$ is HPD.
 2. The eigenvalues of $\mathbf{A}$ are positive numbers.
 ````
 
-::::{proof:proof}
+::::{prf:proof}
 Suppose item 1 is true. If $\mathbf{A}\mathbf{x} = \lambda \mathbf{x}$ is an eigenpair, then a Rayleigh quotient implies that
 
 $$

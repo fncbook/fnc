@@ -31,16 +31,12 @@ FNC.init_format()
  by {numref}`Theorem {number} <theorem-qr-ONC>`. Hence if $\mathbf{q}_j$ is the $j$th column of $\hat{\mathbf{Q}}$, then $\mathbf{q}_j\mathbf{A}$ is the $j$th row of $\hat{\mathbf{R}}$.
 
  (demo-house-qrouter)=
- ```{proof:demo}
+ ```{prf:example}
  ```
 
- ```{raw} html
-<div class='demo'>
-```
+ 
 
-```{raw} latex
-%%start demo%%
-```
+
 
 Since the $\mathbf{q}_j$ have to be unit vectors, we normalize the first column of $\mathbf{A}$ to get $\mathbf{q}_1$.
  
@@ -61,13 +57,9 @@ This can be repeated.
 
 ETC!
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 -->
 
 ```{index} orthogonal matrix
@@ -82,7 +74,7 @@ It is possible to compute a thin QR factorization using the outer product formul
 
 We will use a particular type of orthogonal matrix.
 
-::::{proof:definition} Householder reflector
+::::{prf:definition} Householder reflector
 A **Householder reflector** is a matrix of the form
 
 ```{math}
@@ -127,11 +119,11 @@ Given a vector $\mathbf{z}$, we can choose $\mathbf{v}$ so that $\mathbf{P}$ ref
 If it turns out that $\mathbf{w}=\boldsymbol{0}$, then $\mathbf{z}$ is already in the target form and we can take $\mathbf{P}=\mathbf{I}$.  Otherwise, we have the following.
 
 (theorem-hhreflect)=
-````{proof:theorem} Householder reflector
+````{prf:theorem} Householder reflector
 Let $\mathbf{v}$ be defined by {eq}`hhvector` and let $\mathbf{P}$ be given by {eq}`hhreflect`. Then $\mathbf{P}$ is symmetric and orthogonal, and $\mathbf{P}\mathbf{z}=\| \mathbf{z} \|\mathbf{e}_1$.
 ````
 
-````{proof:proof}
+````{prf:proof}
 The proofs of symmetry and orthogonality are left to [Exercise 2](problem-house-reflector). For the last fact, we use {eq}`hhapply` to compute
   
 ```{math}
@@ -165,16 +157,12 @@ leading finally to
 The QR factorization is computed by using successive Householder reflections to introduce zeros in one column at a time. We first show the process for a small numerical example in {numref}`Demo %s <demo-house-qr>`.
 
 (demo-house-qr)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 ::::{grid} 1 1 2 2
 :gutter: 2
@@ -182,25 +170,17 @@ The QR factorization is computed by using successive Householder reflections to 
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 We will use Householder reflections to produce a QR factorization of a random matrix.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The `rand` function can select randomly from within the interval $[0,1]$, or from a vector or range that you specify.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -218,25 +198,17 @@ m,n = size(A)
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Our first step is to introduce zeros below the diagonal in column 1 by using {eq}`hhvector` and {eq}`hhreflect`. 
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 `I` can stand for an identity matrix of any size, inferred from the context when needed.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -289,13 +261,9 @@ We have now reduced the original to an upper triangular matrix using four orthog
 ```{code-cell}
 R = triu(A)
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 You may be wondering what happened to $\mathbf{Q}$ in {numref}`Demo %s <demo-house-qr>`. Each Householder reflector is orthogonal but not full-size. We have to pad it out to represent algebraically the fact that a block of the first rows is left alone. Given a reflector $\mathbf{P}_k$ that is of square size $m-k+1$, we define
 
@@ -325,7 +293,7 @@ The algorithm we have described is encapsulated in {numref}`Function {number} <f
 
 (function-qrfact)=
 
-```{proof:function} qrfact
+```{prf:function} qrfact
 **QR factorization by Householder reflections**
 ```{code-block} julia
 :lineno-start: 1
@@ -365,7 +333,7 @@ This observation leads to the idea of the *Q-less QR factorization*, in which th
 In [Exercise 8](problem-house-flops) you are asked to derive the following result about the Q-less factorization.
 
 (theorem-house-flops)=
-:::{proof:theorem} 
+:::{prf:theorem} 
 Q-less QR factorization by Householder reflections takes $\sim(2mn^2-\frac{2}{3}n^3)$ flops.
 :::
 

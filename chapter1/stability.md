@@ -44,16 +44,12 @@ x_2 = \frac{-b - \sqrt{b^2-4ac}}{2a}.
 ```
 
 (demo-stability-quadbad)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 ```{index} ! Julia; scientific notation
 ```
@@ -64,25 +60,17 @@ x_2 = \frac{-b - \sqrt{b^2-4ac}}{2a}.
 :::{grid-item}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 We apply the quadratic formula to find the roots of a quadratic via {eq}`quadunstable`. 
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 7
  
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 A number in scientific notation is entered as `1.23e4` rather than as `1.23*10^{4}`.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -111,13 +99,9 @@ error = abs(1e-6-x₂)/1e-6
 
 Using {eq}`condition-chain`, the chain rule for condition numbers, the conditioning of the entire chain is the product of the individual steps, so there is essentially no growth of relative error here. However, if we use the quadratic formula for the "bad" root, the next-to-last step becomes $u_4=(-u_3) - b$, and now  $\kappa=|u_3|/|u_4|\approx 5\times 10^{11}$. So we can expect to lose 11 digits of accuracy, which is what we observed. The key issue is the subtractive cancellation in this one step.
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ```{index} subtractive cancellation
 ```
@@ -127,16 +111,12 @@ Using {eq}`condition-chain`, the chain rule for condition numbers, the condition
 We can confirm this conclusion by finding a different path that avoids subtractive cancellation. A little algebra using {eq}`quadform` confirms the additional formula $x_1x_2=c/a$.  So given one root $r$, we compute the other root using $c/ar$, which has only multiplication and division and therefore creates no numerical trouble.
 
 (demo-stability-quadgood)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We repeat the rootfinding experiment of {numref}`Demo %s <demo-stability-quadbad>` with an alternative algorithm.
 
@@ -161,17 +141,13 @@ As you see in this output, Julia often suppresses trailing zeros in a decimal ex
 ```{code-cell}
 abs(x₂-1e-6) / 1e-6
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 The algorithms in {numref}`Demo {number} <demo-stability-quadbad>` and {numref}`Demo {number} <demo-stability-quadgood>` are equivalent when using real numbers and exact arithmetic. When results are perturbed by machine representation at each step, though, the effects may depend dramatically on the specific sequence of operations, thanks to the chain rule {eq}`condition-chain`.
 
-::::{proof:observation}
+::::{prf:observation}
 The sensitivity of a problem $f(x)$ is governed only by $\kappa_f$, but the sensitivity of an algorithm depends on the condition numbers of all of its individual steps. 
 ::::
 
@@ -187,7 +163,7 @@ In the presence of poor conditioning for a problem $f(x)$, even just the act of 
 ```
 
 (definition-stability-backward)=
-:::{proof:definition} Backward error
+:::{prf:definition} Backward error
 Let $\tilde{f}$ be an algorithm for the problem $f$. Let $y=f(x)$ be an exact result and $\tilde{y}=\tilde{f}(x)$ be its approximation by the algorithm. If there is a value $\tilde{x}$ such that $f(\tilde{x}) = \tilde{y}$, then the relative **backward error** in $\tilde{y}$ is 
 
 ```{math}
@@ -206,16 +182,12 @@ Backward error is the difference between the original data and the data that exa
 ```
 
 (demo-stability-roots)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 ::::{grid} 1 1 2 2
 :gutter: 2
@@ -223,25 +195,17 @@ Backward error is the difference between the original data and the data that exa
 :::{grid-item}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 For this example we will use the `Polynomials` package, which is installed by the `FNC` package.  
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 In the rest of the book, we do not show the `using` statement needed to load the book's package, but you will need to enter it if you want to run the codes yourself.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -272,25 +236,17 @@ r̃ = sort(roots(p))   # type r\tilde and then press Tab
 :::{grid-item}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Here are the relative errors in each of the computed roots. 
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 7
  
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The `@.` notation at the start means to do the given operations on each element of the given vectors.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -317,18 +273,14 @@ println("Coefficient errors:")
 
 In summary, even though there are some computed roots relatively far from their correct values, they are nevertheless the roots of a polynomial that is very close to the original.
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 Small backward error is the best we can hope for in a poorly conditioned problem. Without getting into the formal details, know that if an algorithm always produces small backward errors, then it is stable. But the converse is not always true: some stable algorithms may produce a large backward error.
 
 (example-stability-notbs)=
-::::{proof:example}
+::::{prf:example}
 One stable algorithm that is not backward stable is floating-point evaluation for our old friend, $f(x)=x+1$. If $|x|<\epsilon_\text{mach}/2$, then the computed result is $\tilde{f}(x)=1$, since there are no floating-point numbers between $1$ and $1+\epsilon_\text{mach}$. Hence the only possible choice for a real number $\tilde{x}$ satisfying {eq}`backwarderror` is $\tilde{x}=0$. But then $|\tilde{x}-x|/|x|=1$, which indicates 100% backward error!
 ::::
 

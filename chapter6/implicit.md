@@ -40,7 +40,7 @@ As a concrete example, the AB4 method is defined by the formula
 Observe that {numref}`Function {number} <function-rk4>` is used to find the starting values $\mathbf{u}_1,\mathbf{u}_2,\mathbf{u}_3$ that are needed before the iteration formula takes over. As far as RK4 is concerned, it needs to solve  (the same step size as in the AB4 iteration). These results are then used to find $\mathbf{f}_0,\ldots,\mathbf{f}_3$ and get the main iteration started.
 
 (function-ab4)=
-````{proof:function} ab4
+````{prf:function} ab4
 **4th-order Adams–Bashforth formula for an IVP**
 
 ```{code-block} julia
@@ -89,16 +89,12 @@ Line 28 computes $f_i$, based on the most recent solution value and time. That g
 
 
 (demo-implicit-ab4)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We study the convergence of AB4 using the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. As usual, `solve` is called to give an accurate reference solution.
 
@@ -129,13 +125,9 @@ plot(n,err,m=3,label="AB4",
 
 plot!(n,(n/n[1]).^(-4),l=:dash,label=L"O(n^{-4})")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Implicit methods
 
@@ -154,7 +146,7 @@ for $\mathbf{z}$. This equation can be written as $\mathbf{g}(\mathbf{z})=\bolds
 An implementation of AM2 using {numref}`Function {number} <function-levenberg>` from {numref}`section-nonlineqn-quasinewton` is shown in {numref}`Function {number} <function-am2>`. 
 
 (function-am2)=
-````{proof:function} am2
+````{prf:function} am2
 **2nd-order Adams–Moulton (trapezoid) formula for an IVP**
 
 ```{code-block} julia
@@ -202,16 +194,12 @@ At each time step in {numref}`Function {number} <function-am2>`, or any implicit
 ```
 
 (demo-implicit-stiff)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 The following simple ODE uncovers a surprise.
 
@@ -256,13 +244,9 @@ plt
 ```
 
 So AB4, which is supposed to be _more_ accurate than AM2, actually needs something like 8 times as many steps to get a reasonable-looking answer!
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 Although the result of {numref}`Demo %s <demo-implicit-stiff>` may seem counter-intuitive, there is no contradiction. A fourth-order explicit formula is more accurate than a second-order implicit one, in the limit $h\to 0$. But there is another limit to consider, $t\to \infty$ with $h$ fixed, and in this one the implicit method wins. 
 

@@ -39,7 +39,7 @@ For now, we suppose there are no boundaries. Keep in mind that $c$ is a velocity
 In {numref}`section-advection-traffic` we argued that $u(x,t)=\psi(x-ct)$ is a solution of {eq}`advectioncc`. It's therefore clear that $u(x,t)=u_0(x-ct)$. 
 
 (definition-upwind-domdep)=
-::::{proof:definition} Domain of dependence
+::::{prf:definition} Domain of dependence
 Let $u(x,t)$ be the solution of an evolutionary PDE with initial condition $u_0(x)$. The  **domain of dependence** of the solution at $(x,t)$ is the set of all $x$ such that $u_0(x)$ can possibly affect $u(x,t)$. If this domain of dependence lies entirely in one direction relative to $x$, then that direction is called the **upwind** direction of the PDE, and its opposite is the **downwind** direction.
 ::::
 
@@ -48,12 +48,12 @@ In the advection equation, the domain of dependence at $(x,t)$ is the single poi
 Any numerical method we choose has an analogous property.
 
 (definition-upwind-numdomdep)=
-::::{proof:definition} Numerical domain of dependence
+::::{prf:definition} Numerical domain of dependence
 Let $U_{i,j}$ be the approximate solution of an evolutionary PDE at $x=x_i$, $t=t_j$ from a numerical method, when the initial condition is given by $U_{i,0}$ for all $i$. The **numerical domain of dependence** of the method at $(x_i,t_j)$ is the set of all $x_i$ such that $U_{i,0}$ can possibly affect $U_{i,j}$.
 ::::
 
 (example-upwind-centered)=
-::::{proof:example}
+::::{prf:example}
 In {eq}`advectioncc`, suppose we discretize $u_x$ by a centered difference,
 
 :::{math}
@@ -85,7 +85,7 @@ We now state an important principle about a required relationship between the do
 ```
 
 (theorem-upwind-cfl)=
-::::{proof:theorem} Courant–Friedrichs–Lewy (CFL) condition
+::::{prf:theorem} Courant–Friedrichs–Lewy (CFL) condition
 In order for a numerical method for an advection equation to converge to the correct solution, the limiting numerical domain of dependence must contain the exact domain of dependence.
 ::::
 
@@ -96,7 +96,7 @@ The CFL condition is a *necessary* criterion for convergence, but not a *suffici
 Although we will not provide the rigor behind this theorem, its conclusion is not difficult to justify. If the CFL condition does not hold, the exact solution at $(x,t)$ could be affected by a change in the initial data while having no effect on the numerical solution. Hence there is no way for the method to get the solution correct for all problems. By contradiction, then, the CFL criterion is necessary for convergence.
 
 (example-upwind-centeredcfl)=
-::::{proof:example}
+::::{prf:example}
 Returning to {numref}`Example {number} <example-upwind-centered>`, the numerical domain of dependence depicted in {numref}`Figure {number} <figure-cflpicture>` contains the exact domain of dependence $\{x_i-c t_j\}$ only if $x_i-j h \le x_i -c t_j \le x_i+jh$, or $|c j\tau|\le j h$. That is,
 
 :::{math}
@@ -107,7 +107,7 @@ Returning to {numref}`Example {number} <example-upwind-centered>`, the numerical
 
 Equation {eq}`cfl-speed` is the implication of the CFL condition for the stated discretization. Notice that $h/\tau$ is the speed at which information moves in the numerical method; thus, it is common to restate the CFL condition in terms of speeds. 
 
-:::{proof:observation}
+:::{prf:observation}
 The CFL condition required that the maximum propagation speed in the numerical method be at least as large as the maximum speed in the original PDE problem.
 :::
 
@@ -115,16 +115,12 @@ We can rearrange {eq}`cfl-speed` to imply a necessary time step restriction $\ta
 
 
 (demo-upwind-cfl)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We solve linear advection with velocity $c=2$ and periodic end conditions. The initial condition is numerically, though not mathematically, periodic. For time stepping, we use the adaptive explicit method `RK4`.
 
@@ -158,16 +154,12 @@ x,u = demo(800)
 println("Number of time steps for m = 800: $(length(u.t))")
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 (example-upwind-be)=
-::::{proof:example}
+::::{prf:example}
 Consider what happens in {numref}`Example {number} <example-upwind-centered>` if we replace Euler by backward Euler. Instead of {eq}`cflcenteuler`, we get
 
 \begin{align*}
@@ -180,7 +172,7 @@ The inverse of a tridiagonal matrix is not necessarily tridiagonal, and in fact 
 
 {numref}`Example {number} <example-upwind-be>` is a special case of a more general conclusion.
 
-:::{proof:observation}
+:::{prf:observation}
 An explicit time discretization must obey $\tau = O(h)$ as $h\to 0$ in order to solve {eq}`advectioncc`, while an implicit method is typically unrestricted by the CFL condition.
 :::
 
@@ -189,7 +181,7 @@ An explicit time discretization must obey $\tau = O(h)$ as $h\to 0$ in order to 
 There are other ways to discretize the $u_x$ term in the advection equation {eq}`advectioncc`. The implications of the CFL criterion may differ greatly depending on which is chosen.
 
 (example-upwind-onesided)=
-::::{proof:example}
+::::{prf:example}
 Suppose we use the backward difference 
 
 :::{math}
@@ -212,7 +204,7 @@ with explicit time stepping leads to the inverse conclusion: its upwind directio
 
 It's clear that when the domain of dependence and the numerical method both have a directional preference, they must agree.
 
-:::{proof:observation} Upwinding
+:::{prf:observation} Upwinding
 If a numerical method has an upwinding direction, it must be the same as the upwind direction of the PDE.
 :::
 
@@ -231,16 +223,12 @@ If we impose a condition at the downwind side of the domain, there is no way for
 In summary, we require an **inflow** condition on the PDE. For $c>0$ this is at the left end, and for $c<0$ it is at the right end. This requirement is true of the exact PDE as well as any discretization of it.
 
 (demo-upwind-direction)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 If we solve advection over $[0,1]$ with velocity $c=-1$, the right boundary is in the upwind/inflow direction. Thus a well-posed boundary condition is $u(1,t)=0$.
 
@@ -319,13 +307,9 @@ end
 mp4(anim,"upwind-outflow.mp4")
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ## Exercises

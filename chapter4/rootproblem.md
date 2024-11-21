@@ -26,7 +26,7 @@ For the time being we will focus on the **rootfinding problem** for single funct
 ```{index} ! rootfinding problem
 ```
 
-```{proof:definition} Rootfinding problem
+```{prf:definition} Rootfinding problem
 Given a continuous scalar function $f$ of a scalar variable, find a real number $r$, called a **root**, such that $f(r)=0$.
 ```
 
@@ -38,16 +38,12 @@ The formulation $f(x)=0$ is general enough to solve any equation. If we are tryi
 Unlike the linear problems of the earlier chapters, the usual situation here is that the root cannot be produced in a finite number of operations, even in exact arithmetic. Instead, we seek a sequence of approximations that formally converge to the root, stopping when some member of the sequence seems to be good enough, in a sense we will clarify later. The `NLsolve` package for Julia has a function `nlsolve` for general-purpose rootfinding.
 
 (demo-rootproblem-bessel)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 In the theory of vibrations of a circular drum, the displacement of the drumhead can be expressed in terms of pure harmonic modes, 
 
@@ -70,27 +66,19 @@ plot(J3,0,20,title="Bessel function",
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 From the graph we see roots near 6, 10, 13, 16, and 19. We use `nlsolve` from the `NLsolve` package to find these roots accurately. It uses vector variables, so we have to code accordingly.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 Type `\omega` followed by <kbd>Tab</kbd> to get the character `ω`.
 
 The argument `ftol=1e-14` below is called a **keyword argument**. Here it sets a goal for the maximum value of $|f(x)|$.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -121,13 +109,9 @@ for guess = [3.,6.,10.,13.]
 end
 scatter!(r,J3.(r),title="Roots and other Bessel values")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Conditioning, error, and residual
 
@@ -148,7 +132,7 @@ Since $r$ is a root, we have $f(r)=0$. This lets us relate $\delta$ to $\epsilon
 ```{index} condition number; of rootfinding
 ```
 
-````{proof:theorem} Condition number of rootfinding
+````{prf:theorem} Condition number of rootfinding
 If $f$ is differentiable at a root $r$, then the absolute condition number of $r$ with respect to constant changes in $f$ is
 
 ```{math}
@@ -163,16 +147,12 @@ Equivalently, {eq}`rootcondnum` is just the magnitude of the derivative of the i
 
 
 (demo-roots-cond)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Consider first the function
 
@@ -189,25 +169,17 @@ f  = x -> (x-1)*(x-2);
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 At the root $r=1$, we have $f'(r)=-1$. If the values of $f$ were perturbed at every point by a small amount of noise, we can imagine finding the root of the function drawn with a thick ribbon, giving a range of potential roots.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The syntax `interval...` is called **splatting** and means to insert all the individual elements of `interval` as a sequence.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -239,13 +211,9 @@ scatter!([1],[0],title="Poorly-conditioned root")
 ```
 
 The vertical displacements in this picture are exactly the same as before. But the potential _horizontal_ displacement of the root is much wider. In fact, if we perturb the function entirely upward by the amount drawn here, the root disappears!
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ```{index} ! residual; of rootfinding
@@ -253,7 +221,7 @@ The vertical displacements in this picture are exactly the same as before. But t
 
 We must accept that when $|f'|$ is small at the root, it may not be possible to get a small error in a computed root estimate. As always, the error is not a quantity we can compute without knowing the exact answer. There is something else we can measure, though.
 
-::::{proof:definition} Rootfinding residual
+::::{prf:definition} Rootfinding residual
 If $\tilde{r}$ approximates a root $r$ of function $f$, then the **residual** at $\tilde{r}$ is $f(\tilde{r})$.
 ::::
 
@@ -262,7 +230,7 @@ It stands to reason that a small residual might be associated with a small error
 ```{index} backward error
 ```
 
-```{proof:observation}
+```{prf:observation}
 The backward error in a root estimate is equal to the residual.
 ```
 
@@ -276,7 +244,7 @@ In general, it is not realistic to expect a small error in a root approximation 
 The condition number {eq}`rootcondnum` naturally leads to the question of what happens if $f'(r)=0$ at a root $r$. The following definition agrees with and extends the notion of algebraic multiplicity in a polynomial to roots of more general differentiable functions. 
 
 (definition-rootproblem-simple)=
-::::{proof:definition} Multiplicity of a root
+::::{prf:definition} Multiplicity of a root
 If $f(r)=f'(r)=\cdots=f^{(m-1)}(r)=0$, but $f^{(m)}(r)\neq 0$, then we say $f$ has a root of **multiplicity** $m$ at $r$. In particular, if $f(r)=0$ and $f'(r)\neq 0$, then $m=1$ and we call $r$ a **simple root**.
 ::::
 

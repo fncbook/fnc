@@ -24,7 +24,7 @@ FNC.init_format()
 Power iteration finds only the dominant eigenvalue. We next show that it can be adapted to find any eigenvalue, provided you start with a reasonably good estimate of it. Some simple linear algebra is all that is needed.
 
 
-::::{proof:theorem}
+::::{prf:theorem}
 Let $\mathbf{A}$ be an $n\times n$ matrix with eigenvalues $\lambda_1,\ldots,\lambda_n$ (possibly with repeats), and let $s$ be a complex scalar. Then:
 
 1. The eigenvalues of the matrix $\mathbf{A}-s\mathbf{I}$ are $\lambda_1-s,\ldots,\lambda_n-s$.
@@ -32,7 +32,7 @@ Let $\mathbf{A}$ be an $n\times n$ matrix with eigenvalues $\lambda_1,\ldots,\la
 3. The eigenvectors associated with the eigenvalues in the first two parts are the same as those of $\mathbf{A}$.
 ::::
 
-::::{proof:proof}
+::::{prf:proof}
 
 The equation $\mathbf{A}\mathbf{v}=\lambda \mathbf{v}$ implies that $(\mathbf{A}-s\mathbf{I})\mathbf{v} = \mathbf{A}\mathbf{v} - s\mathbf{I}\mathbf{v} = \lambda\mathbf{v} - s\mathbf{v} = (\lambda-s)\mathbf{v}$. That proves the first part of the theorem. For the second part, we note that by assumption, $(\mathbf{A}-s\mathbf{I})$ is nonsingular, so $(\mathbf{A}-s\mathbf{I})\mathbf{v} = (\lambda-s) \mathbf{v}$ implies that $\mathbf{v} = (\lambda-s) (\mathbf{A}-s\mathbf{I}) \mathbf{v}$, or $ (\lambda-s)^{-1} \mathbf{v} =(\mathbf{A}-s\mathbf{I})^{-1} \mathbf{v}$. The discussion above also proves the third part of the theorem.
 ::::
@@ -86,7 +86,7 @@ As always, we do not want to explicitly find the inverse of a matrix. Instead we
 
 
 (algorithm-inviter-inviter)=
-::::{proof:algorithm} Inverse iteration
+::::{prf:algorithm} Inverse iteration
 Given matrix $\mathbf{A}$ and shift $s$:
 1. Choose $\mathbf{x}_1$.
 2. For $k=1,2,\ldots$, 
@@ -109,7 +109,7 @@ Note that in {numref}`Algorithm {number} <algorithm-power-power>`, we used $y_{k
 Each pass of inverse iteration requires the solution of a linear system of equations with the matrix $\mathbf{B}=\mathbf{A}-s\mathbf{I}$. This solution might use methods we consider later in this chapter. Here, we use (sparse) PLU factorization and hope for the best. Since the matrix $\mathbf{B}$ is constant, the factorization needs to be done only once for all iterations. The details are in {numref}`Function {number} <function-inviter>`.
 
 (function-inviter)=
-````{proof:function} inviter
+````{prf:function} inviter
 **Shifted inverse iteration for the closest eigenvalue**
 
 ```{code-block} julia
@@ -149,16 +149,12 @@ The convergence is linear, at a rate found by reinterpreting {eq}`poweriterconv`
 with the eigenvalues ordered as in {eq}`shiftorder`. Thus, the convergence is best when the shift $s$ is close to the target eigenvalue $\lambda_1$, specifically when it is much closer to that eigenvalue than to any other.
 
 (demo-inviter-conv)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We set up a $5\times 5$ triangular matrix with prescribed eigenvalues on its diagonal.
 
@@ -200,25 +196,17 @@ The observed linear convergence rate is found from the data.
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 We reorder the eigenvalues to enforce {eq}`shiftorder`. 
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The `sortperm` function returns the index permutation needed to sort the given vector, rather than the sorted vector itself.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -231,13 +219,9 @@ Hence the theoretical convergence rate is
 ```{code-cell}
 @show theoretical_rate = (λ[1]-s) / (λ[2]-s);
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ## Dynamic shifting
@@ -250,16 +234,12 @@ There is a clear opportunity for positive feedback in {numref}`Algorithm {number
 Let's analyze the resulting convergence. If the eigenvalues are ordered by distance to $s$, then the convergence is linear with rate $|\lambda_1-s|/|\lambda_2-s|$. As $s\to\lambda_1$, the change in the denominator is negligible. So if the error $(\lambda_1-s)$ is $\epsilon$, then the error in the next estimate is reduced by a factor $O(\epsilon)$. That is, $\epsilon$ becomes $O(\epsilon^2)$, which is *quadratic* convergence.
 
 (demo-inviter-accel)=
-:::{proof:demo}
+:::{prf:example}
 :::
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 ```{code-cell}
 λ = [1,-0.75,0.6,-0.4,0]
@@ -295,13 +275,9 @@ for k in 1:4
     @show β = x[1]/y[1] + s
 end
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 There is a price to pay for this improvement. The matrix of the linear system to be solved, $(\mathbf{A}-s\mathbf{I})$, now changes with each iteration. That means that we can no longer do just one LU factorization for the entire iteration. The speedup in convergence usually makes this tradeoff worthwhile, however.
 

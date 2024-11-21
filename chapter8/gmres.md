@@ -70,7 +70,7 @@ which is of size $(m+1)\times m$. We call the solution of this minimization $\ma
 
 ```{index} ! GMRES
 ```
-::::{proof:algorithm} GMRES
+::::{prf:algorithm} GMRES
 Given $n\times n$ matrix $\mathbf{A}$ and $n$-vector $\mathbf{b}$:
 
 For $m=1,2,\ldots$, let $\mathbf{x}_m=\mathbf{Q}_m \mathbf{z}_m$, where $\mathbf{z}_m$ solves the linear least-squares problem {eq}`gmresproblemsmall`, and $\mathbf{Q}_m,\mathbf{H}_m$ arise from the Arnoldi iteration.
@@ -84,16 +84,12 @@ GMRES[^gmres] uses the Arnoldi iteration to minimize the residual $\mathbf{b} - 
 [^breakdown]: This statement is not strictly correct for rare special cases of *breakdown* where the rank of $\mathcal{K}_n$ is less than $n$. In that situation, some additional steps must be taken that we do not discuss here.
 
 (demo-gmres-intro)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We define a triangular matrix with known eigenvalues and a random vector $\mathbf{b}$.
 
@@ -128,20 +124,16 @@ plot(0:60,resid,m=:o,
     xaxis=(L"m"),yaxis=(:log10,"norm of mth residual"), 
     title="Residual for GMRES",leg=:none)
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 Compare the graph in {numref}`Demo %s <demo-gmres-intro>`  to the one in {numref}`Demo %s <demo-subspace-unstable>`. Both start with the same linear convergence, but only the version using Arnoldi avoids the instability created by the poor Krylov basis.
 
 A basic implementation of GMRES is given in {numref}`Function {number} <function-gmres>`.
 
 (function-gmres)=
-````{proof:function} gmres
+````{prf:function} gmres
 **GMRES for a linear system**
 
 ```{code-block} julia
@@ -205,16 +197,12 @@ Suppose $\hat{\mathbf{x}}$ is an approximate solution of $\mathbf{A}\mathbf{x}=\
 Restarting guarantees a fixed upper bound on the per-iteration cost of GMRES. However, this benefit comes at a price. Even though restarting preserves progress made in previous iterations, the Krylov space information is discarded and the residual minimization process starts again over low-dimensional spaces. That can significantly retard or even stagnate the convergence. 
 
 (demo-gmres-restart)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 The following experiments are based on a matrix resulting from discretization of a partial differential equation.
 
@@ -237,25 +225,17 @@ spy(A,color=:blues)
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 We compare unrestarted GMRES with three different thresholds for restarting. Here we are using `gmres` from the `IterativeSolvers` package, since our simple implementation does not offer restarting.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The syntax `f(x;foo)` is shorthand for `f(x,foo=foo)`.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -274,13 +254,9 @@ plt
 ```
 
 The "pure" GMRES curve is the lowest one. All of the other curves agree with it until the first restart. Decreasing the restart value makes the convergence per iteration generally worse, but the time required per iteration smaller as well.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 Restarting creates a tradeoff between the number of iterations and the speed per iteration. It's essentially impossible in general to predict the ideal restart location in any given problem, so one goes by experience and hopes for the best.
 

@@ -28,7 +28,7 @@ Suppose we want to approximate a function $f$ that is periodic, with one period 
 ```{index} ! trigonometric polynomial
 ```
 
-::::{proof:definition} Trigonometric polynomial
+::::{prf:definition} Trigonometric polynomial
 For an integer $n$, a **trigonometric polynomial** of degree $n$ is 
 
 :::{math}
@@ -68,7 +68,7 @@ We can explicitly state the cardinal function basis for equispaced trigonometric
 You can directly check the following facts. (See [Exercise 3](problem-triginterp-checktau).) 
 
 (theorem-triginterp-cardinal)=
-::::{proof:theorem}
+::::{prf:theorem}
 Given the definition of $\tau$ in {eq}`trigcardinal`,
 1. $\tau(x)$ is a trigonometric polynomial of degree $n$.
 2. $\tau(x)$ is 2-periodic.
@@ -94,7 +94,7 @@ The convergence of a trigonometric interpolant is spectral, i.e., exponential as
 ```
 
 (function-triginterp)=
-````{proof:function} triginterp
+````{prf:function} triginterp
 **Trigonometric interpolation**
 ```{code-block} julia
 :lineno-start: 1
@@ -129,16 +129,12 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 ::::
 
 (demo-trig-interp)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 ::::{grid} 1 1 2 2
 :gutter: 3
@@ -146,26 +142,18 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 :::{grid-item}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 We will get a cardinal function without using an explicit formula, just by passing data that is 1 at one node and 0 at the others.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 
 :::{grid-item-card}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The operator `÷`, typed as `\div` then <kbd>Tab</kbd>, returns the quotient without remainder of two integers.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -215,13 +203,9 @@ end
 plot(N,err,m=:o,title="Convergence of trig interpolation",
     xaxis=(L"N"),yaxis=(:log10,"max error"))
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Fast Fourier transform
 
@@ -282,16 +266,12 @@ $$
 $$
 
 (demo-trig-fft)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 
 This function has frequency content at $2\pi$, $-2\pi$, and $\pi$. 
@@ -334,13 +314,9 @@ scatter(freq,abs.(c),xaxis=(L"k",[-n,n]),yaxis=(L"|c_k|",:log10),
 ```
 
 The Fourier coefficients of smooth functions decay exponentially in magnitude as a function of the frequency. This decay rate is determines the convergence of the interpolation error.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 The theoretical and computational aspects of Fourier analysis are vast and far-reaching. We have given only the briefest of introductions.
 

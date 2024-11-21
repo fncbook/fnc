@@ -27,16 +27,12 @@ FNC.init_format()
 As mentioned in {numref}`section-linsys-lu`, the $\mathbf{A}=\mathbf{L}\mathbf{U}$ factorization is not stable for every nonsingular $\mathbf{A}$. Indeed, the factorization does not always even exist.
 
 (demo-pivoting-fail)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Here is a previously encountered matrix, which factors well.
 
@@ -67,13 +63,9 @@ A -= L[:,1]*U[1,:]'
 
 The next step is `U[2,:]=A[2,:]`, which is also OK. But then we are supposed to divide by `U[2,2]`, which is zero. The algorithm cannot continue.
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 In {numref}`section-linsys-lu` we remarked that LU factorization is equivalent to Gaussian elimination with no row swaps. However, those swaps are necessary in situations like those encountered in {numref}`Demo {number} <demo-pivoting-fail>`, in order to avoid division by zero. We will find a modification of the outer product procedure that allows us to do the same thing.
 
@@ -85,21 +77,17 @@ In {numref}`section-linsys-lu` we remarked that LU factorization is equivalent t
 The diagonal element of $\mathbf{U}$ that appears in the denominator of line 17 of {numref}`Function {number} <function-lufact>` is called the **pivot element** of its column. In order to avoid a zero pivot, we will use the largest available element in the column we are working on as the pivot. This technique is known as **row pivoting**.
 
 (rule-pivoting)=
-```{proof:algorithm} Row pivoting
+```{prf:algorithm} Row pivoting
 When performing elimination in column $j$, choose as the pivot the element in column $j$ that is largest in absolute value. (In case of ties, choose the lowest row index.)
 ```
 
 (demo-pivoting-fix)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Here is the trouble-making matrix from {numref}`Demo {number} <demo-pivoting-fail>`.
 
@@ -113,25 +101,17 @@ A₁ = [2 0 4 3 ; -2 0 2 -13; 1 15 2 -4.5 ; -4 5 -7 -10]
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 We now find the largest candidate pivot in the first column. We don't care about sign, so we take absolute values before finding the max.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The `argmax` function returns the location of the largest element of a vector or matrix.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -191,18 +171,14 @@ However, the triangularity of $\mathbf{L}$ has been broken.
 L
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 We will return to the loss of triangularity in $\mathbf{L}$ momentarily. First, though, there is a question left to answer: what if at some stage, all the elements of the targeted column are zero, i.e., there are no available pivots? Fortunately that loose end ties up nicely, although a proof is a bit beyond our scope here.
 
 (theorem-pivot)=
-```{proof:theorem} Row pivoting
+```{prf:theorem} Row pivoting
 The row-pivoted LU factorization runs to completion if and only if the original matrix is invertible.
 ```
 
@@ -213,16 +189,12 @@ A linear system with a singular matrix has either no solution or infinitely many
 Even though the resulting $\mathbf{L}$ in {numref}`Demo {number} <demo-pivoting-fix>` is no longer of unit lower triangular form, it is close. In fact, all that is needed is to reverse the order of its rows. 
 
 (demo-pivoting-permute)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Here again is the matrix from {numref}`Demo {number} <demo-pivoting-fix>`.
 
@@ -249,20 +221,16 @@ And $\mathbf{L}$ has the same rows as before, but arranged into triangular order
 L
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 In principle, if the permutation of rows implied by the pivot locations is applied all at once to the original $\mathbf{A}$, no further pivoting is needed. In practice, this permutation cannot be determined immediately from the original $\mathbf{A}$; the only way to find it is to run the algorithm. Having obtained it at the end, though, we can use it to state a simple relationship. 
 
 ```{index} ! matrix factorization; pivoted LU, ! PLU factorization
 ```
 
-::::{proof:definition} PLU factorization
+::::{prf:definition} PLU factorization
 Given $n\times n$ matrix $\mathbf{A}$, the **PLU factorization** is a unit lower triangular $\mathbf{L}$, an upper triangular $\mathbf{U}$, and a permutation $i_1,\ldots,i_n$ of the integers $1,\ldots,n$, such that
 
 $$\tilde{\mathbf{A}} = \mathbf{L}\mathbf{U},$$
@@ -275,7 +243,7 @@ where rows $1,\ldots,n$ of $\tilde{\mathbf{A}}$ are rows $i_1,\ldots,i_n$ of $\m
 [^PLU]: Because unpivoted LU factorization is not useful, in practice the term *LU factorization* mostly refers to pivoted LU.
 
 (function-plufact)=
-````{proof:function} plufact
+````{prf:function} plufact
 **Row=pivoted LU factorization**
 ```{code-block} julia
 :lineno-start: 1
@@ -313,16 +281,12 @@ Ideally, the PLU factorization takes $\sim \frac{2}{3}n^3$ flops asymptotically,
 The output of {numref}`Function {number} <function-plufact>` is a factorization of a row-permuted $\mathbf{A}$. Therefore, given a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, we have to permute $\mathbf{b}$ the same way before applying forward and backward substitution. This is equivalent to changing the order of the equations in a linear system, which does not affect its solution.
 
 (demo-pivoting-usage)=
-:::{proof:demo}
+:::{prf:example}
 :::
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 The third output of `plufact` is the permutation vector we need to apply to $\mathbf{A}$.
 
@@ -346,27 +310,19 @@ A residual check is successful:
 b - A*x
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 The `lu` function from the built-in package `LinearAlgebra` returns the same three outputs as {numref}`Function {number} <function-plufact>`. If you only request one output, it will be a factorization object that can be used with a backslash. This is useful when you want to solve with multiple versions of $\mathbf{b}$ but do the factorization only once.
 
 (demo-pivoting-builtin)=
-:::{proof:demo}
+:::{prf:example}
 :::
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 With the syntax `A\b`, the matrix `A` is PLU-factored, followed by two triangular solves.
 
@@ -384,13 +340,9 @@ factored\rand(500)   # force compilation
 @elapsed for k=1:50; factored\rand(500); end
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Stability
 
@@ -400,16 +352,12 @@ factored\rand(500)   # force compilation
 There is one detail of the row pivoting algorithm that might seem arbitrary: why choose the pivot of largest magnitude in a column, rather than, say, the uppermost nonzero in the column? The answer is numerical stability.
 
 (demo-pivoting-stable)=
-:::{proof:demo}
+:::{prf:example}
 :::
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Let
 
@@ -453,13 +401,9 @@ This effect is not due to ill conditioning of the problem—a solution with PLU 
 A\b
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 The factors of this $\mathbf{A}$ without pivoting are found to be
 

@@ -26,7 +26,7 @@ An important aspect of MINRES and CG (and, by extension, GMRES) is that the conv
 ```{index} GMRES; preconditioning in, ! preconditioning
 ```
 
-::::{proof:definition} Preconditioning
+::::{prf:definition} Preconditioning
 Given a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, a **preconditioner** is a matrix $\mathbf{M}$ or equivalent linear transformation that modifies the system to be
 
 :::{math}
@@ -49,7 +49,7 @@ As an implementation detail, it is common to provide the Krylov solver with code
 
 There are competing objectives in the choice of $\mathbf{M}$. On one hand, we want $\mathbf{M}^{-1}\mathbf{A}\approx \mathbf{I}$ in some sense because that makes {eq}`precond` easy to solve by Krylov iteration. Hence $\mathbf{M}\approx \mathbf{A}$. On the other hand, we desire that solving the system $\mathbf{M}\mathbf{v}=\mathbf{y}$ be relatively fast. 
 
-:::{proof:observation}
+:::{prf:observation}
 Good preconditioning is a matter of finding an easily inverted (i.e., quickly solvable) approximation of the original matrix. 
 :::
 
@@ -58,16 +58,12 @@ Good preconditioning is a matter of finding an easily inverted (i.e., quickly so
 One of the simplest choices for the preconditioner $\mathbf{M}$ is a diagonal matrix. This definitely meets the requirement of being fast to invert: the solution of $\mathbf{M}\mathbf{v}=\mathbf{y}$ is just $v_i=y_i/M_{ii}$. The only question is whether it can be chosen in such a way that $\mathbf{M}^{-1}\mathbf{A}$ is much more amenable to Krylov iterations than $\mathbf{A}$ is. This may be the case when the rows of $\mathbf{A}$ differ greatly in scale, or when $\mathbf{A}$ is diagonally dominant (see {eq}`diag-dominant`).
 
 (demo-precond-diagonal)=
-:::{proof:demo}
+:::{prf:example}
 :::
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Here is an SPD matrix that arises from solving partial differential equations.
 
@@ -106,13 +102,9 @@ title!("Diagonal preconditioning in CG")
 
 The diagonal preconditioner cut down substantially on the number of iterations. The effect on the total time is less dramatic, but this is not a large version of the problem.
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Incomplete factorization
 
@@ -122,16 +114,12 @@ The diagonal preconditioner cut down substantially on the number of iterations. 
 Another general-purpose technique is the **incomplete LU factorization**. Since true factorization of a sparse matrix usually leads to an undesirable amount of fill-in, incomplete LU sacrifices exact factors by dropping elements smaller than an adjustable threshold.
 
 (demo-precond-gmres)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Here is a nonsymmetric matrix arising from a probabilistic model in computational chemistry.
 
@@ -188,13 +176,9 @@ plt
 ```
 
 In any given problem, it's impossible to know in advance where the right balance lies between fidelity and speed for the preconditioner.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 In practice, good preconditioning is often as important, if not more important, than the specific choice of Krylov method. Effective preconditioning may require deep understanding of the underlying application, however, which limits our ability to go into further details. For instance, the linear system may be some approximation of a continuous mathematical model, and then $\mathbf{M}$ can be derived by using a cruder form of the approximation. Krylov methods offer a natural way to exploit these and other approximate inverses.
 

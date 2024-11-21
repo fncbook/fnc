@@ -27,16 +27,12 @@ FNC.init_format()
 In {numref}`section-linsys-polyinterp` we saw how a polynomial can be used to interpolate data—that is, derive a continuous function that evaluates to give a set of prescribed values. But interpolation may not be appropriate in many applications.
 
 (demo-fitting-tempinterp)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Here are 5-year averages of the worldwide temperature anomaly as compared to the 1951–1980 average (source: NASA).
 
@@ -68,24 +64,16 @@ c = V\temp
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 The coefficients in vector `c` are used to create a polynomial. Then we create a function that evaluates the polynomial after changing the time variable as we did for the Vandermonde matrix.
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 If you `plot` a function, then the points are chosen automatically to make a smooth curve.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -97,13 +85,9 @@ plot!(f,1955,2000,label="interpolant")
 ```
 
 As you can see, the interpolant does represent the data, in a sense. However it's a crazy-looking curve for the application. Trying too hard to reproduce all the data exactly is known as _overfitting_.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ```{index} data fitting
@@ -150,16 +134,12 @@ c_n
 Note that $\mathbf{V}$ has the same structure as the Vandermonde matrix in {eq}`vandersystem` but is $m\times n$, thus taller than it is wide. It's impossible in general to satisfy $m$ conditions with $n<m$ variables, and we say the system is **overdetermined**. Rather than solving the system exactly, we have to find a best approximation. Below we specify precisely what is meant by this, but first we note that Julia uses the same backslash notation to solve the problem in both the square and overdetermined cases.
 
 (demo-fitting-tempfit)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 
 Here are the 5-year temperature averages again.
@@ -180,24 +160,16 @@ temp = [ -0.0480, -0.0180, -0.0360, -0.0120, -0.0040,
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 The standard best-fit line results from using a linear polynomial that meets the least-squares criterion.
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 Backslash solves overdetermined linear systems in a least-squares sense.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -228,25 +200,17 @@ V = [ t[i]^j for i in 1:length(t), j in 0:3 ]
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Now we solve the new least-squares problem to redefine the fitting polynomial.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The definition of `f` above is in terms of `p`. When `p` is changed, then `f` calls the new version.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -257,13 +221,9 @@ plot!(f,1955,2000,label="cubic fit")
 ```
 
 If we were to continue increasing the degree of the polynomial, the residual at the data points would get smaller, but overfitting would increase.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ## The least-squares formulation
@@ -311,7 +271,7 @@ Recalling that $\mathbf{r}^T\mathbf{r}=\| \mathbf{r} \|_2^2$, and renaming the v
 ```
 
 (definition-fitting-linearls)=
-````{proof:definition} Linear least-squares problem
+````{prf:definition} Linear least-squares problem
 Given $\mathbf{A}\in\mathbb{R}^{m \times n}$ and $\mathbf{b}\in\mathbb{R}^m$, with $m>n$, find
 
 ```{math}
@@ -350,16 +310,12 @@ While the fit of the $y_i$ to $g(t)$ is nonlinearly dependent on fitting paramet
 ```
 
 (demo-fitting-pirate)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 
 Finding numerical approximations to $\pi$ has fascinated people for millennia. One famous formula is
@@ -408,13 +364,9 @@ It's tempting to conjecture that the slope $b\to -1$ asymptotically. Here is how
 ```{code-cell}
 plot!(k,a*k.^b,l=:dash,label="power-law fit")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 Thus the variable $z=\log y$ can be fit linearly in terms of the variable $s=\log t$. In practice these two cases—exponential fit and power law—are easily detected by using log-linear or log-log plots, respectively.

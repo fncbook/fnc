@@ -24,7 +24,7 @@ FNC.init_format()
 Many nonlinear elliptic PDEs include references to the Laplacian operator.
 
 (example-mems2dmodel)=
-::::{proof:example}
+::::{prf:example}
 Recall the micromechanical deflector modeled in a disk by {eq}`mems`. A fully two-dimensional equivalent is (see {cite}`peleskoEffectSmallaspectratio2006`)
   
 :::{math}
@@ -59,7 +59,7 @@ on the boundary of $R$.
 In order to solve for as few unknowns as possible, we use a Chebyshev discretization of the domain. The core idea is to formulate collocation equations at the grid points based on discrete approximations of {eq}`nonlinpdepde` and {eq}`nonlinpdebc`. If the PDE is nonlinear, then these equations are also nonlinear and are to be solved by a quasi-Newton iteration. {numref}`Function {number} <function-elliptic>` is our implementation. 
 
 (function-elliptic)=
-````{proof:function} elliptic
+````{prf:function} elliptic
 **Newton's method to solve an elliptic PDE**
 ```{code-block} julia
 :lineno-start: 1
@@ -134,16 +134,12 @@ The function returned by {numref}`Function {number} <function-elliptic>` perform
 [^grideval]: The interpolation algorithm in {numref}`Function {number} <function-elliptic>` is inefficient when $u$ is to be evaluated on a finer grid, as for plotting. A more careful version could re-use the same values $v_j = p_j(\xi)$ for multiple values of $\eta$.  
 
 (demo-nonlinear-mems)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We solve the PDE
 
@@ -198,28 +194,20 @@ u = FNC.elliptic(ϕ,g,25,[0,2.5],14,[0,1]);
 
 The original solution may be accurate to about four digits.
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ```{index} advection-diffusion equation
 ```
 (demo-nonlinear-advdiff)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 The steady-state limit of an advection-diffusion equation is 
 
@@ -244,29 +232,21 @@ contourf(x,y,U',color=:viridis,aspect_ratio=1,
      title="Steady advection–diffusion")
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ```{index} Allen–Cahn equation
 ```
 
 (demo-nonlinear-allencahn)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 The stationary Allen–Cahn equation in two dimensions is 
 
@@ -295,13 +275,9 @@ contourf( x,y,U',color=:viridis,aspect_ratio=1,
     xlabel=L"x",ylabel=L"y",zlabel=L"u(x,y)",title="Steady Allen-Cahn",
     right_margin=3Plots.mm )
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ## Exercises

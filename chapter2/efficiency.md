@@ -29,7 +29,7 @@ Predicting how long an algorithm will take to solve a particular problem, on a p
 
 ## Asymptotic analysis
 
-::::{proof:definition} Asymptotic notation
+::::{prf:definition} Asymptotic notation
 Let $f(n)$ and $g(n)$ be positive-valued functions. We say $f(n)=O(g(n))$ (read "$f$ is **big-O** of $g$") as $n\rightarrow \infty$ if $f(n)/g(n)$ is bounded above as $n\to\infty$.
 
 We say $f(n)\sim g(n)$ (read "$f$ is **asymptotic** to $g$") as $n\rightarrow \infty$ if $f(n)/g(n)\rightarrow 1$ as $n\rightarrow\infty$.
@@ -39,7 +39,7 @@ One immediate consequence is that $f\sim g$ implies $f=O(g)$.[^sets]
 
 [^sets]: More precisely, $O(g)$ and $\sim g$ are *sets* of functions, and $\sim g$ is a subset of $O(g)$. That we write $f=O(g)$ rather than $f\in O(g)$ is a quirk of convention.
 
-````{proof:example}
+````{prf:example}
 Consider the functions $f(n) = a_1 n^3 + b_1 n^2 + c_1 n$ and $g(n) = a_2 n^3$ in the limit $n\to \infty$.  Then
   
 ```{math}
@@ -51,7 +51,7 @@ Consider the functions $f(n) = a_1 n^3 + b_1 n^2 + c_1 n$ and $g(n) = a_2 n^3$ i
 Since $a_1/a_2$ is a constant, $f(n) = O(g(n))$; if $a_1=a_2$, then $f \sim g$.
 ````
 
-````{proof:example}
+````{prf:example}
   Consider $f(n) = \sin (1/n)$, $g(n)=1/n$ and $h(n) = 1/n^2$. For large $n$, Taylor's theorem with remainder implies that
   
 ```{math}
@@ -90,7 +90,7 @@ There is a memorable way to use asymptotic notation to simplify sums:
 These formulas greatly resemble the definite integral of $x^p$. 
 
 (example-efficiency-sums)=
-::::{proof:example}
+::::{prf:example}
 \begin{align*}
 \sum_{k=1}^{n-1} 4k^2 + 3 & = 4 \left( \sum_{k=1}^{n-1} k^2\right)  + 3 \sum_{k=1}^{n-1} 1\\ 
 &\sim 4 \left( \frac{1}{3} (n-1)^3 \right) + 3(n-1) \\ 
@@ -107,16 +107,12 @@ These formulas greatly resemble the definite integral of $x^p$.
 Traditionally, in numerical linear algebra we count **floating-point operations**, or **flops** for short. In our interpretation each scalar addition, subtraction, multiplication, division, and square root counts as one flop. Given any algorithm, we simply add up the number of scalar flops and ignore everything else.
 
 (demo-flops-mvmult)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 
 Here is a straightforward implementation of matrix-vector multiplication.
@@ -147,25 +143,17 @@ Since the matrix $\mathbf{A}$ has $n^2$ elements, all of which have to be involv
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Let's run an experiment with the built-in matrix-vector multiplication. Note that Julia is unusual in that loops have a variable scope separate from its enclosing code. Thus, `for n in n` below means that inside the loop, the name `n` will take on each one of the values that were previously assigned to the vector `n`.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The `push!` function attaches a new value to the end of a vector.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -195,25 +183,17 @@ pretty_table([n t], header=(["size", "time"], ["", "(sec)"]))
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Looking at the timings just for $n=2000$ and $n=4000$, they have ratio
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The expression `n.==4000` here produces a vector of Boolean (true/false) values the same size as `n`. This result is used to index within `t`, accessing only the value for which the comparison is true.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -222,13 +202,9 @@ The expression `n.==4000` here produces a vector of Boolean (true/false) values 
 ```
 
 If the run time is dominated by flops, then we expect this ratio to be $(4000)^2/(2000)^2=4$.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 Suppose that the running time $t$ of an algorithm obeys a function that is $O(n^p)$. For sufficiently large $n$, $t\approx Cn^p$ for a constant $C$ should be a good approximation. Hence
 
@@ -241,16 +217,12 @@ So we expect that a graph of $\log t$ as a function of $\log n$ will be a straig
 
 
 (demo-flops-loglog)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Let's repeat the experiment of the previous figure for more, and larger, values of $n$.
 
@@ -281,13 +253,9 @@ You can see that while the full story is complicated, the graph is trending to a
 plot!(n,t[end]*(n/n[end]).^2,l=:dash,
     label=L"O(n^2)",legend=:topleft)
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Solution of linear systems
 
@@ -312,7 +280,7 @@ This line requires $i-1$ multiplications and $(i-2)$ additions, for a total of $
 
 It is not hard to find an exact formula for the sum, but we use {eq}`sumflops` to simplify it to $\sim n^2$. After all, since flop counting is only an approximation of true running time, why bother with the more complicated exact expression? An analysis of backward substitution yields the same result.
 
-```{proof:lemma}
+```{prf:lemma}
 Solving a triangular $n\times n$ system by forward or backward substitution takes $\sim n^2$ flops asymptotically.
 ```
 
@@ -328,7 +296,7 @@ end
 ```
 
 We will use the following handy fact.
-:::{proof:observation}
+:::{prf:observation}
 The range `k:n`, where $k\le n$, has $n-k+1$ elements.
 :::
 
@@ -352,21 +320,17 @@ There are different ways to simplify this expression. We will make a change of s
 ```
 
 We have proved the following. 
-```{proof:theorem} Efficiency of LU factorization
+```{prf:theorem} Efficiency of LU factorization
 The LU factorization of an $n\times n$ matrix takes $\sim\frac{2}{3}n^3$ flops as $n\to \infty$. This dominates the flops for solving an $n\times n$ linear system.
 ```
 
 (demo-flops-lufact)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 ::::{grid} 1 1 2 2
 :gutter: 2
@@ -374,25 +338,17 @@ The LU factorization of an $n\times n$ matrix takes $\sim\frac{2}{3}n^3$ flops a
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 We'll test the conclusion of $O(n^3)$ flops experimentally, using the built-in `lu` function instead of the purely instructive `lufact`.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The first time a function is invoked, there may be significant time needed to compile it in memory. Thus, when timing a function, run it at least once before beginning the timing.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -415,13 +371,9 @@ scatter(n,t,label="data",legend=:topleft,
     xaxis=(:log10,L"n"), yaxis=(:log10,"elapsed time"))
 plot!(n,t[end]*(n/n[end]).^3,l=:dash,label=L"O(n^3)")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 In practice, flops are not the only aspect of an implementation that occupies significant time. Our position is that counting flops as a measure of performance is a useful oversimplification. We will assume that LU factorization (and as a result, the solution of a linear system of $n$ equations) requires a real-world time that is roughly $O(n^3)$. This growth rate is a great deal more tolerable than, say, $O(2^n)$, but it does mean that for (at this writing) $n$ greater than 10,000 or so, something other than general LU factorization will have to be used.

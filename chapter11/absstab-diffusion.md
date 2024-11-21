@@ -59,7 +59,7 @@ $$
    \bigl |e^{(\alpha+i\beta)t} \bigr| = \bigl |e^{\alpha t} \bigr| \cdot \bigl |e^{i \beta t} \bigr| = e^{\alpha t}.
 $$
 
-::::{proof:observation}
+::::{prf:observation}
 Solutions of {eq}`absstabmodel` are bounded as $t\to\infty$ if and only if $\alpha = \operatorname{Re} \lambda \le 0$. 
 ::::
 
@@ -70,7 +70,7 @@ We now consider the counterpart of this observation for the solution produced by
 ```
 
 (definition-absstab-model)=
-::::{proof:definition} Absolute stability
+::::{prf:definition} Absolute stability
 Let $\lambda$ be a complex number, and let $y_0,y_1,y_2,\ldots,y_n$ be the numerical solution at times $0,\tau,2\tau,\ldots,n\tau$ of {eq}`absstabmodel` using a Runge–Kutta or multistep method with fixed stepsize $\tau$. Then the method is said to be **absolutely stable** at $\zeta = \tau\lambda$ if $|y_n|$ is bounded above as $n\to\infty$. 
 ::::
 
@@ -82,12 +82,12 @@ Each numerical IVP solver has its own collection of $\zeta$ values for which it 
 ```{index} ! stability region
 ```
 
-::::{proof:definition} Stability region
+::::{prf:definition} Stability region
 The **stability region** of an IVP solver is the collection of all $\zeta\in\complex$ for which the method is absolutely stable.
 ::::
 
 (example-absstab-euler)=
-::::{proof:example}
+::::{prf:example}
 Consider an Euler discretization of $y'=\lambda y$:
   
 $$
@@ -110,7 +110,7 @@ That is, the distance in the plane from $\zeta$ to the point $-1$ is less than o
 ::::
 
 (example-absstab-AM1)=
-::::{proof:example}
+::::{prf:example}
 The backward Euler method discretizes {eq}`absstabmodel` as
 
 $$
@@ -127,7 +127,7 @@ This inequality describes the region *outside* of the open disk of radius 1 cent
 ::::
 
 (example-absstab-IE2)=
-::::{proof:example} 
+::::{prf:example} 
 The improved Euler method IE2 defined in {eq}`IE` discretizes {eq}`absstabmodel` as 
 
 ```{math}
@@ -158,7 +158,7 @@ Stability regions for backward differentiation methods of order 1–4 (left, ext
 For any particular method and value of $\lambda$ in {eq}`absstabmodel`, we can use the stability region to deduce which, if any, values of the time step $\tau$ will give bounded solutions. Both the magnitude and the argument (angle) of $\lambda$ play a role in determining such constraints.
 
 (example-absstab-FEBE)=
-::::{proof:example}
+::::{prf:example}
 Suppose $\lambda=-4$ and Euler's method is applied. Since the time step is always positive, $\zeta=-4\tau$ is always on the negative real axis. The only part of that line that lies within the stability region of Euler as derived in {numref}`Example {number} <example-absstab-euler>` is the real interval $[-2,0]$. Hence we require $\zeta\ge -2$, or $\tau \le 1/2$. By contrast, the stability region of backward Euler includes the entire negative real axis, so absolute stability is unconditional, i.e., assured regardless of $\tau$.
 
 Now suppose instead that $\lambda=i$, so that $\zeta=i\tau$. Clearly $\zeta$ is always on the positive imaginary axis. But no part of this axis, aside from the origin, lies in the stability region of Euler's method, so it is unconditionally *unstable* in this circumstance. The conclusion for backward Euler is the opposite; any value of $\tau$ will do, because the entire imaginary axis is within the stability region.
@@ -178,16 +178,12 @@ When adaptive time stepping methods are used, as in most software for IVPs, the 
 Now we return to the semidiscretization {eq}`heatMOL` of the heat equation, which was solved by Euler in {numref}`Demo %s <demo-methodlines-heatFE>` and backward Euler in {numref}`Demo {number} <demo-methodlines-heatBE>`.
 
 (demo-absstab-regions)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Euler and Backward Euler time-stepping methods were used to solve $\mathbf{u}'=\mathbf{D}_{xx}\mathbf{u}$.
 
@@ -242,13 +238,9 @@ scatter!(real(ζ),imag(ζ),
     xaxis=([-4,2],"Re ζ"),yaxis=([-3,3],"Im ζ"),aspect_ratio=1,
     title="Stability region and ζ values",frame=:zerolines)
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 The matrix $\mathbf{D}_{xx}$ occurring in {eq}`heatMOL` for semidiscretization of the periodic heat equation has eigenvalues that can be found explicitly. Assuming that $x\in[0,1)$ (with periodic boundary conditions), for which $h=1/m$, then the eigenvalues are
 

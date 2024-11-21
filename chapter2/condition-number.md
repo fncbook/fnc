@@ -68,7 +68,7 @@ Since also $\mathbf{b}=\mathbf{A}\mathbf{x}$ implies $\| \mathbf{b} \|\le
 
 It is possible to show that this bound is tight, in the sense that the inequalities are in fact equalities for some choices of $\mathbf{b}$ and $\mathbf{d}$. This result motivates a new definition.
 
-::::{proof:definition} Matrix condition number
+::::{prf:definition} Matrix condition number
 The **matrix condition number** of an invertible square matrix $\mathbf{A}$ is 
 
 ```{math}
@@ -85,7 +85,7 @@ The matrix condition number {eq}`mxcond` is equal to the condition number of sol
 
 Using a traditional $\Delta$ notation for the perturbation in a quantity, we can write the following.
 
-````{proof:theorem} Conditioning of linear systems
+````{prf:theorem} Conditioning of linear systems
 If $\mathbf{A}(\mathbf{x} + \Delta \mathbf{x}) = \mathbf{b} + \Delta \mathbf{b}$, then
 
 ```{math}
@@ -112,16 +112,12 @@ Note that for any induced matrix norm,
 A condition number of 1 is the best we can hope for—in that case, the relative perturbation of the solution has the same size as that of the data.  A condition number of size $10^t$ indicates that in floating-point arithmetic, roughly $t$ digits are lost (i.e., become incorrect) in computing the solution $\mathbf{x}$. And if $\kappa(\mathbf{A}) > \epsilon_\text{mach}^{-1}$, then for computational purposes the matrix is effectively singular. 
 
 (demo-condition-bound)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 ```{index} ! Julia; cond
 ```
@@ -131,25 +127,17 @@ A condition number of 1 is the best we can hope for—in that case, the relative
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Julia has a function `cond` to compute matrix condition numbers. By default, the 2-norm is used. As an example, the family of *Hilbert matrices* is famously badly conditioned. Here is the $6\times 6$  case.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 Type `\kappa` followed by <kbd>Tab</kbd> to get the Greek letter $\kappa$.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -225,13 +213,9 @@ b = A*x
 ```
 
 As anticipated, the solution has zero accurate digits in the 2-norm.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Residual and backward error
 
@@ -240,7 +224,7 @@ Suppose that $\mathbf{A}\mathbf{x}=\mathbf{b}$ and $\tilde{\mathbf{x}}$ is a com
 ```{index} ! residual; of a linear system
 ```
 
-::::{proof:definition} Residual of a linear system
+::::{prf:definition} Residual of a linear system
 For the problem $\mathbf{A}\mathbf{x}=\mathbf{b}$, the **residual** at a solution estimate $\tilde{\mathbf{x}}$ is 
 
 ```{math}
@@ -268,7 +252,7 @@ Thus {eq}`linsyscondb` is equivalent to
 
 Equation {eq}`residualcond` says that the gap between relative error and the relative residual is a multiplication by the matrix condition number. 
 
-```{proof:observation}
+```{prf:observation}
 When solving a linear system, all that can be expected is that the backward error, not the error, is small.
 ```
 

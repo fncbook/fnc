@@ -70,7 +70,7 @@ We impose the boundary conditions in much the same way as in {numref}`section-bv
 The left-hand side of {eq}`fdbvp` is a nonlinear function of the unknowns in the vector $\mathbf{u}$, so {eq}`fdbvp` is an $(n+1)\times 1$ set of nonlinear equations, amenable to solution by the techniques of [Chapter 4](../nonlineqn/overview.md).
 
 (example-fdresidual)=
-::::{proof:example}
+::::{prf:example}
 Given the BVP
   
 $$
@@ -121,7 +121,7 @@ Suppose $n=3$ for an equispaced grid, so that $h=\frac{1}{2}$, $x_0=0$, $x_1=\fr
 Our implementation using second-order finite differences is {numref}`Function {number} <function-bvp>`. It's surprisingly short, considering how general it is, because we have laid a lot of groundwork already.
 
 (function-bvp)=
-````{proof:function} bvp
+````{prf:function} bvp
 **Solve a nonlinear boundary-value problem**
 ```{code-block} julia
 :lineno-start: 1
@@ -167,16 +167,12 @@ The nested function `residual` uses differentiation matrices computed externally
 In order to solve a particular problem, we must write a function that computes $\phi$ for vector-valued inputs $\mathbf{x}$, $\mathbf{u}$, and $\mathbf{u}'$, and functions for the boundary conditions. We also have to supply `init`, which is an estimate of the solution used to initialize the quasi-Newton iteration. Since this argument is a vector of length $n+1$, it sets the value of $n$ in the discretization.
 
 (demo-nonlinear-pendulum)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Suppose a damped pendulum satisfies the nonlinear equation $\theta'' + 0.05\theta'+\sin \theta =0$. We want to start the pendulum at $\theta=2.5$ and give it the right initial velocity so that it reaches $\theta=-2$ at exactly $t=5$. This is a boundary-value problem with Dirichlet conditions $\theta(0)=2.5$ and $\theta(5)=-2$.
 
@@ -201,25 +197,17 @@ g₂(u,du) = u + 2;
 
 :::{grid-item}
 :columns: 7
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 The last ingredient is an initial estimate of the solution. Here we choose $n=100$ and a linear function between the endpoint values. 
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 
 :::{grid-item-card}
 :columns: 5
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The `collect` function turns a range object into a true vector.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -244,27 +232,19 @@ plot(t,θ,xaxis=(L"t"),yaxis=(L"\theta(t)"),
 ```
 
 This time, the pendulum is initially pushed toward the unstable equilibrium in the upright vertical position before gravity pulls it back down.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 The initial solution estimate can strongly influence how quickly a solution is found, or whether the quasi-Newton iteration converges at all. In situations where multiple solutions exist, the initialization can determine which is found. 
  
 (demo-nonlinear-mems)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We look for a solution to the parameterized membrane deflection problem from {numref}`Example {number} <example-tpbvp-mems>`,
 
@@ -299,13 +279,9 @@ init = 0.5*ones(301)
 r,w₂ = FNC.bvp(ϕ,domain,g₁,g₂,init)
 plot!(r,w₂,title="Two solutions of the membrane problem")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Parameter continuation
 
@@ -319,16 +295,12 @@ Sometimes the best way to get a useful initialization is to use the solution of 
 ```
 
 (demo-nonlinear-allencahn)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We solve the stationary **Allen–Cahn equation**,
   
@@ -374,13 +346,9 @@ In this case we can continue further.
 x,u₃ = FNC.bvp(ϕ,[0,1],g₁,g₂,u₂)
 plot!(x,u₃,label=L"\epsilon = 0.0005")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

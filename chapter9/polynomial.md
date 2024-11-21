@@ -29,11 +29,11 @@ In {numref}`section-linsys-polyinterp` and {numref}`section-localapprox-interpol
 Theoretically, we can always construct an interpolating polynomial, and the result is unique among polynomials whose degree is less than $n+1$.
 
 (theorem-polyinterp)=
-::::{proof:theorem}
+::::{prf:theorem}
 If the nodes $t_0,\dots,t_n$ are all distinct, there exists a unique polynomial $p$ of degree at most $n$ that satisfies $p(t_k)=y_k$ for all $k=0,\dots,n$.
 ::::
 
-::::{proof:proof}
+::::{prf:proof}
 We defer the existence part to Equation {eq}`lagrangeinterp`.  As for uniqueness, if $p$ and $q$ are two interpolating polynomials, then $p-q$ is a  polynomial of degree at most $n$ that is zero at the $n+1$ points  $t_0,\dots,t_n$. By the Fundamental Theorem of Algebra, which states that a $k$th degree polynomial has no more than $k$ roots, we conclude that $p-q\equiv 0$, so $p=q$.
 ::::
 
@@ -66,7 +66,7 @@ where $r_1,\dots,r_n$ are the roots of the polynomial and $c$ is a constant. The
 ```{index} ! Lagrange polynomial
 ```
 
-::::{proof:definition} Lagrange cardinal polynomial
+::::{prf:definition} Lagrange cardinal polynomial
 Given distinct nodes $t_0,\ldots,t_n$, the polynomial
 :::{math}
 :label: lagrange
@@ -78,16 +78,12 @@ is of degree at most $n$ and satisfies the cardinality conditions {eq}`lagrangec
 ::::
 
 (demo-polynomial-lagrange)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Here is a vector of nodes.
 
@@ -102,25 +98,17 @@ n = length(t)-1;
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Let's apply the definition of the cardinal Lagrange polynomial for $k=2$. First we define a polynomial $q$ that is zero at all the nodes except $i=k$. Then $\ell_2$ is found by normalizing $q$ by $q(t_k)$.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 Character ℓ is typed as `\ell`<kbd>Tab</kbd>.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -140,13 +128,9 @@ scatter!(t,y,color=:black,
 ```
 
 Observe that $\ell_k$ is _not_ between zero and one everywhere, unlike a hat function.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 Because they are a cardinal basis, the Lagrange polynomials lead to a simple expression for the polynomial interpolating the $(t_k,y_k)$ points.
 
@@ -154,7 +138,7 @@ Because they are a cardinal basis, the Lagrange polynomials lead to a simple exp
 ```
 
 (theorem-polynomial-lagrange)=
-::::{proof:theorem} Lagrange interpolation formula
+::::{prf:theorem} Lagrange interpolation formula
 Given points $(t_k,y_k)$ for $k=0,\ldots,n$ with all the $t_k$ distinct, the unique polynomial of degree $n$ or less that interpolates the points is
 
 :::{math}
@@ -166,7 +150,7 @@ p(x) = \sum_{k=0}^n y_k \ell_k(x).
 At this point we can say that we have completed the proof of {numref}`Theorem %s <theorem-polyinterp>`.
 
 (example-ClassicalLagrange)=
-::::{proof:example}
+::::{prf:example}
 We construct the Lagrange interpolating polynomials of degrees $n=1$ and 2 to interpolate samples of $f(x) = \tan (x)$.  For $n=1$, we use $t_0= 0$ and $t_1 = \pi/3$. The Lagrange formula then gives
 
 \begin{align*}
@@ -199,7 +183,7 @@ For $n=2$, we use $t_0= 0$, $_1 = \pi/6$ and $t_2 = \pi/3$. We now have
 In addition to existence, uniqueness,  and the constructive Lagrange formula, we have a useful formula for the error in a polynomial interpolant when the data are samples of a smooth function. We will refer to the following definition.
 
 (definition-polynomial-indicator)=
-::::{proof:definition} Error indicator function
+::::{prf:definition} Error indicator function
 The **error indicator function** for a set of distinct nodes $t_0,\ldots,t_n$ is
 :::{math}
 :label: lagrange-phi
@@ -208,7 +192,7 @@ The **error indicator function** for a set of distinct nodes $t_0,\ldots,t_n$ is
 ::::
 
 (theorem-polynomial-interperror)=
-::::{proof:theorem} Polynomial interpolation error
+::::{prf:theorem} Polynomial interpolation error
 Let $t_0,\dots,t_n$ be distinct points in $[a,b]$, and suppose $f$ has at least $n+1$ continuous derivatives in that interval. Let $p(x)$ be the unique polynomial of degree at most $n$ interpolating $f$ at $t_0,\dots,t_n$. Then for each $x\in[a,b]$, there exists a number $\xi(x)\in(a,b)$ such that
   
 :::{math}
@@ -219,7 +203,7 @@ f(x) - p(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!} \Phi(x),
 with $\Phi$ given in {eq}`lagrange-phi`.
 ::::
 
-::::{proof:proof}
+::::{prf:proof}
 If $x=t_i$ for some $i$, the statement of the theorem is trivially true. Otherwise, we define a new function $g(s)$ by
   
 $$
@@ -241,16 +225,12 @@ which is a restatement of {eq}`interperror`.
 Usually $f^{(n+1)}$ and the function $\xi(x)$ are unknown. The importance of the formula {eq}`interperror` is how it helps to express the error as a function of $x$, and its dependence on the nodes $t_0,\dots,t_n$. We will exploit this knowledge later.
 
 (demo-polynomial-error)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Consider the problem of interpolating $\log(x)$ at these nodes:
 
@@ -266,27 +246,19 @@ n = length(t)-1;
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Here $n=4$ and $f^{(5)}(\xi) = 4!/\xi^5$. For $\xi\in[1,3]$ we can say that $|f^{(5)}(\xi)| \le 4!$. Hence 
 
 $$ |f(x)-p(x)| \le \frac{1}{5} \left| \Phi(x) \right|.$$
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 Character Φ is typed as `\Phi`<kbd>Tab</kbd>. (Note the capitalization.)
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -300,18 +272,14 @@ scatter!(t,zeros(size(t)),color=:black,
 ```
 
 The error is zero at the nodes, by the definition of interpolation. The error bound, as well as the error itself, has one local maximum between each consecutive pair of nodes.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 For equispaced nodes, {numref}`Theorem %s <theorem-polyinterp>` has an immediate consequence. 
 
 (theorem-polyequi)=
-::::{proof:corollary}
+::::{prf:corollary}
 Suppose $t_i=i h$ for constant step size $h$ and all $i=0,1,\ldots,n$, and that $f$ has $n+1$ continuous derivatives in $(t_0,t_n)$. If $x\in[t_0,t_n]$, then there exists $\xi(x)\in(t_0,t_n)$ and $C$ independent of $x$ such that
   
 :::{math}
@@ -322,7 +290,7 @@ Suppose $t_i=i h$ for constant step size $h$ and all $i=0,1,\ldots,n$, and that 
 In particular, $|f(x)-p(x)|=O(h^{n+1})$ as $h\to 0$.
 ::::
 
-::::{proof:proof}
+::::{prf:proof}
 If $x\in[t_0,t_n]$, then $|x-t_i|<nh$ for all $i$, and {eq}`interperror` implies {eq}`equisperror`. As $h\to 0$, $\xi\to x$, and the continuity of $f^{(n+1)}$ allows us to make the asymptotic conclusion.
 ::::
 

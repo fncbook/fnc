@@ -24,16 +24,12 @@ FNC.init_format()
 Newton's method is the cornerstone of rootfinding. We introduce the key idea with an example in {numref}`Demo %s <demo-newton-line>`.
 
 (demo-newton-line)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Suppose we want to find a root of the function
 
@@ -95,13 +91,9 @@ y₃ = f(x₃)
 ```
 
 Judging by the residual, we appear to be getting closer to the true root each time.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 Using general notation, if we have a root approximation $x_k$, we can construct a **linear model** of $f(x)$ using the classic formula for the tangent line of a differentiable function,
 
@@ -116,7 +108,7 @@ Finding the root of $q(x)=0$ is trivial. We define the next approximation by the
 ```
 
 (algorithm-nonlineqn-newton)=
-::::{proof:algorithm} Newton's method
+::::{prf:algorithm} Newton's method
 Given a function $f$, its derivative, $f'$, and an initial value $x_1$, iteratively define
 
 ```{math}
@@ -165,7 +157,7 @@ The series in the denominator is of the form $1/(1+z)$. Provided $|z|<1$, this i
 \end{split}
 ```
 
-::::{proof:observation}
+::::{prf:observation}
 Asymptotically, each iteration of Newton's method roughly squares the error.
 ::::
 
@@ -175,7 +167,7 @@ Asymptotically, each iteration of Newton's method roughly squares the error.
 ```{index} ! convergence rate; quadratic
 ```
 
-::::{proof:definition} Quadratic convergence
+::::{prf:definition} Quadratic convergence
 Suppose a sequence $x_k$ approaches limit $x^*$. If the error sequence $\epsilon_k=x_k - x^*$ satisfies
 
 ```{math}
@@ -195,16 +187,12 @@ Recall that linear convergence is identifiable by trending toward a straight lin
 ```
 
 (demo-newton-converge)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We again look at finding a solution of $x e^x=2$ near $x=1$. To apply Newton's method, we need to calculate values of both the residual function $f$ and its derivative.
 
@@ -241,25 +229,17 @@ Here is the sequence of errors.
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Because the error reaches machine epsilon so rapidly, we're going to use extended precision to allow us to take a few more iterations. We'll take the last iteration as the most accurate root estimate.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 A `BigFloat` uses 256 bits of precision, rather than 53 in `Float64`. But arithmetic is done by software emulation and is much slower.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -283,13 +263,9 @@ logerr = @. log(abs(ϵ))
 ```
 
 The clear convergence to 2 above constitutes good evidence of quadratic convergence. 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ```{index} roots; multiplicity of
@@ -313,7 +289,7 @@ Our implementation of Newton's iteration is given in {numref}`Function {number} 
 ```
 
 (function-newton)=
-````{proof:function} newton
+````{prf:function} newton
 **Newton's method for a scalar rootfinding problem**
 
 ```{code-block} julia
@@ -363,16 +339,12 @@ The `break` statement, seen here in line 25, causes an immediate exit from the i
 {numref}`Function {number} <function-newton>` also deals with a thorny practical issue: how to stop the iteration. It adopts a three-part criterion. First, it monitors the difference between successive root estimates, $|x_k-x_{k-1}|$, which is used as a stand-in for the unknown error $|x_k-r|$. In addition, it monitors the residual $|f(x_k)|$, which is equivalent to the backward error and more realistic to control in badly conditioned problems (see {numref}`section-nonlineqn-rootproblem`). If either of these quantities is considered to be sufficiently small, the iteration ends. Finally, we need to protect against the possibility of a nonconvergent iteration, so the procedure terminates with a warning if a maximum number of iterations is exceeded.
 
 (demo-newton-usage)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 ```{index} ! Julia; enumerate
 ```
@@ -383,25 +355,17 @@ The `break` statement, seen here in line 25, causes an immediate exit from the i
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Suppose we want to evaluate the inverse of the function $h(x)=e^x-x$. This means solving $y=e^x-x$ for $x$ when $y$ is given, which has no elementary form. If a value of $y$ is given numerically, though, we simply have a rootfinding problem for $f(x)=e^x-x-y$.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The `enumerate` function produces a pair of values for each iteration: a positional index and the corresponding contents. 
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -422,13 +386,9 @@ plot(g,0,2,aspect_ratio=1,label=L"g(x)")
 plot!(y,x,label=L"g^{-1}(y)",title="Function and its inverse")
 plot!(x->x,0,maximum(y),label="",l=(:dash,1),color=:black)
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

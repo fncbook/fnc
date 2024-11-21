@@ -26,16 +26,12 @@ One way to attack the TPBVP {eq}`tpbvp` is to adapt our IVP solving techniques f
 This is the idea behind the **shooting method**. Imagine adjusting your aiming point and power to sink a basketball shot from the free-throw line. The way in which you miss—too long, flat trajectory, etc.—informs how you will adjust for your next attempt.
 
 (demo-shooting-naive)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 ::::{grid} 1 1 2 2
 :gutter: 2
@@ -43,26 +39,18 @@ This is the idea behind the **shooting method**. Imagine adjusting your aiming p
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Let's first examine the shooting approach for the TPBVP from {numref}`Example {number} <example-tpbvp-mems>` with $\lambda=0.6$. 
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The character `ϕ` is typed as `\phi`<kbd>Tab</kbd>. 
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -94,13 +82,9 @@ plt
 
 On the graph, it's the curve starting at $w(0)=0.8$ that comes closest to the required condition $w(1)=1$, but it's a bit too large.
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 We can do much better than trial-and-error for the unknown part of the initial state. As usual, we can rewrite the ODE $u''(x) = \phi(x,u,u')$ in first-order form as
 
@@ -125,7 +109,7 @@ The dependence of $v_2$ on $\mathbf{s}$ is indirect, through the solution of the
 Our implementation of shooting is given in {numref}`Function {number} <function-shoot>`. Note the structure: we use a rootfinding method that in turn relies on an IVP solver. This sort of arrangement is what makes us concerned with minimizing the number of objective function calls when rootfinding.
 
 (function-shoot)=
-````{proof:function} shoot
+````{prf:function} shoot
 **Shooting method for a two-point boundary-value problem**
 ```{code-block} julia
 :lineno-start: 1
@@ -170,16 +154,12 @@ The error tolerance in the IVP solver is kept smaller than in the rootfinder, to
 ::::
 
 (demo-shooting-mems)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We revisit {numref}`Demo {number} <demo-shooting-naive>` but let {numref}`Function {number} <function-shoot>` do the heavy lifting.
 
@@ -211,29 +191,21 @@ The accuracy is consistent with the error tolerance used for the IVP solution. T
 ```{code-cell}
 @show w[1];
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Instability
 
 The accuracy of the shooting method should be comparable to those of the component pieces, the rootfinder, and the IVP solver. However, the shooting method is unstable for some problems. An example illustrates the trouble.
 
 (demo-shooting-unstable)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We solve the problem
   
@@ -280,13 +252,9 @@ $$
 
 which grows rapidly with $\lambda$ near $x=1$. With the IVP solution so sensitive to $s_2$, a numerical approach to find $s_2$ approximately is doomed.
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 The essence of the instability is that errors can grow exponentially away from the boundary at $x=a$, where the state is arbitrarily being set (see {numref}`Theorem {number} <theorem-depIC>`). Using shooting, acceptable accuracy near $x=b$ therefore means requiring extraordinarily high accuracy near $x=a$.
 

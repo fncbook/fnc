@@ -35,7 +35,7 @@ It stands to reason that we could do no worse, and perhaps much better, if we se
 
 ```{index} ! Krylov matrix, ! Krylov subspace
 ```
-::::{proof:definition} Krylov matrix and subspace
+::::{prf:definition} Krylov matrix and subspace
 Given $n\times n$ matrix $\mathbf{A}$ and $n$-vector $\mathbf{u}$, the $m$th **Krylov matrix** is the $n\times m$ matrix {eq}`krylovmatrix`. The range (i.e., column space) of this matrix is the $m$th **Krylov subspace** $\mathcal{K}_m$.
 ::::
 
@@ -48,7 +48,7 @@ In general, we expect that the dimension of the Krylov[^kreeluv] subspace $\math
 As we have seen with the power iteration, part of the appeal of the Krylov matrix is that it can be generated in a way that fully exploits the sparsity of $\mathbf{A}$, simply through repeated matrix-vector multiplication. Furthermore, we have some important mathematical properties.
 
 (theorem-subspace-krylovmult)=
-::::{proof:theorem}
+::::{prf:theorem}
 Suppose $\mathbf{A}$ is $n\times n$, $0<m<n$, and a vector $\mathbf{u}$ is used to generate Krylov subspaces. If $\mathbf{x}\in\mathcal{K}_m$, then the following hold:
 
 1. $\mathbf{x} = \mathbf{K}_m \mathbf{z}$ for some $\mathbf{z}\in\mathbb{C}^m$.
@@ -56,7 +56,7 @@ Suppose $\mathbf{A}$ is $n\times n$, $0<m<n$, and a vector $\mathbf{u}$ is used 
 3. $\mathbf{A}\mathbf{x} \in \mathcal{K}_{m+1}$.
 ::::
 
-::::{proof:proof}
+::::{prf:proof}
 
 If $\mathbf{x}\in\mathcal{K}_m$, then for some coefficients $c_1,\ldots,c_m$,
 
@@ -90,16 +90,12 @@ For instance, we can interpret $\mathbf{A}\mathbf{x}_m\approx \mathbf{b}$ in the
 The natural seed vector for $\mathcal{K}_m$ in this case is the vector $\mathbf{b}$. In the next example we try to implement {eq}`gmresdef`. We do take one precaution: because the vectors $\mathbf{A}^{k}\mathbf{b}$ may become very large or small in norm, we normalize after each multiplication by $\mathbf{A}$, just as we did in the power iteration.
 
 (demo-subspace-unstable)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 First we define a triangular matrix with known eigenvalues, and a random vector $b$.
 
@@ -137,13 +133,9 @@ plot(0:29,resid,m=:o,
     xaxis=(L"m"),yaxis=(:log10,L"\| b-Ax_m \|"), 
     title="Residual for linear systems",leg=:none)
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## The Arnoldi iteration
 
@@ -186,7 +178,7 @@ We can now proceed iteratively.
 ```{index} ! Arnoldi iteration
 ```
 
-::::{proof:algorithm} Arnoldi iteration
+::::{prf:algorithm} Arnoldi iteration
 Given matrix $\mathbf{A}$ and vector $\mathbf{u}$:
 
 1. Let $\mathbf{q}_1= \mathbf{u} \,/\, \| \mathbf{u}\|$.
@@ -210,16 +202,12 @@ Given matrix $\mathbf{A}$ and vector $\mathbf{u}$:
 The Arnoldi iteration finds nested orthonormal bases for a family of nested Krylov subspaces.
 
 (demo-subspace-arnoldi)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We illustrate a few steps of the Arnoldi iteration for a small matrix.
 
@@ -267,13 +255,9 @@ And $\mathbf{Q}_m$ spans the same space as the three-dimensional Krylov matrix.
 K = [ u A*u A*A*u ];
 @show rank( [Q K] );
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Key identity
 
@@ -302,7 +286,7 @@ where the matrix $\mathbf{H}_m$ has a particular "triangular plus one" structure
 ```{index} ! upper Hessenberg matrix
 ```
 
-::::{proof:definition} Upper Hessenberg matrix
+::::{prf:definition} Upper Hessenberg matrix
 A matrix $\mathbf{H}$ is **upper Hessenberg** if $H_{ij}=0$ whenever $i>j+1$.
 ::::
 
@@ -311,7 +295,7 @@ Equation {eq}`arnoldimat` is a fundamental identity of Krylov subspace methods.
 ## Implementation
 
 (function-arnoldi)=
-````{proof:function} arnoldi
+````{prf:function} arnoldi
 **Arnoldi iteration for Krylov subspaces**
 
 ```{code-block} julia

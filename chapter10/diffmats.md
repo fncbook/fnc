@@ -131,7 +131,7 @@ f(x_0) \\[1mm] f(x_1) \\[1mm] f(x_2) \\[1mm] \vdots \\[1mm] f(x_{n-1}) \\[1mm] f
 We have multiple choices again for $\mathbf{D}_{xx}$, and it need not be the square of any particular $\mathbf{D}_x$. As pointed out in {numref}`section-localapprox-finitediffs`, squaring the first derivative is a valid approach but would place entries in $\mathbf{D}_{xx}$ farther from the diagonal than is necessary.
 
 (function-diffmat2)=
-````{proof:function} diffmat2
+````{prf:function} diffmat2
 **Second-order accurate differentiation matrices**
 ```{code-block} julia
 :lineno-start: 1
@@ -173,16 +173,12 @@ end
 Together the matrices {eq}`diffmat12b` and {eq}`diffmat22` give second-order approximations of the first and second derivatives at all nodes. These matrices, as well as the nodes $x_0,\ldots,x_n$, are returned by {numref}`Function {number} <function-diffmat2>`.
 
 (demo-diffmats-2nd)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We test first-order and second-order differentiation matrices for the function $x + \exp(\sin 4x)$ over $[-1,1]$. 
 
@@ -239,13 +235,9 @@ plot!(n,10*10*n.^(-2),l=(:dash,:gray),label="2nd order",
     xaxis=(:log10,"n"), yaxis=(:log10,"max error"),
     title="Convergence of finite differences")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Spectral differentiation
 
@@ -286,7 +278,7 @@ where $c_0=c_n=2$ and $c_i=1$ for $i=1,\ldots,n-1$. Note that this matrix is den
 {numref}`Function {number} <function-diffcheb>` returns these two matrices. The function uses a change of variable to transplant the standard $[-1,1]$ for Chebyshev nodes to any $[a,b]$. It also takes a different approach to computing the diagonal elements of $\mathbf{D}_x$ than the formulas in {eq}`chebdiffmat` (see {ref}`Exercise 5 <problem-diffmats-negsumtrick>`).
 
 (function-diffcheb)=
-````{proof:function} diffcheb
+````{prf:function} diffcheb
 **Chebyshev differentiation matrices**
 ```{code-block} julia
 :lineno-start: 1
@@ -324,16 +316,12 @@ end
 
 (demo-diffmats-cheb)=
 
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Here is a $4\times 4$ Chebyshev differentiation matrix.
 
@@ -370,13 +358,9 @@ plot(n,[err1 err2],m=:o,label=[L"f'" L"f''"],
     xaxis=(L"n"), yaxis=(:log10,"max error"),
     title="Convergence of Chebyshev derivatives")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 According to {numref}`Theorem %s <theorem-spectral>`, the convergence of polynomial interpolation to $f$ using Chebyshev nodes is spectral if $f$ is analytic (at least having infinitely many derivatives) on the interval. The derivatives of $f$ are also approximated with spectral accuracy.

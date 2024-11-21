@@ -150,7 +150,7 @@ Finally, we note that $\hat{u}(a)= \mathbf{e}_0^T\mathbf{u}$ and $\hat{u}(b)= \m
 Our implementation of linear collocation is {numref}`Function {number} <function-bvplin>`. It uses second-order finite differences but makes no attempt to exploit the sparsity of the matrices. It would be trivial to change the function to use spectral differentiation. 
 
 (function-bvplin)=
-````{proof:function} bvplin
+````{prf:function} bvplin
 **Solution of a linear boundary-value problem**
 ```{code-block} julia
 :lineno-start: 1
@@ -189,16 +189,12 @@ Note that there is no need to explicitly form the row-deletion matrix $\mathbf{E
 ::::
 
 (demo-linear-solve)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We solve linear BVP  
 
@@ -232,29 +228,21 @@ scatter!(x,u,m=:o,subplot=1,label="numerical",
 
 plot!(x,exact.(x)-u,subplot=2,xaxis=L"x",yaxis=("error"))
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Accuracy and stability
 
 We revisit {numref}`Demo %s <demo-shooting-unstable>`, which exposed instability in the shooting method, in order to verify second-order convergence.
 
 (demo-linear-converge)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 The BVP is
   
@@ -299,13 +287,9 @@ plot(n,err,m=:o,label="observed",
     title="Convergence for a linear BVP") 
 plot!(n,0.25*n.^(-2),l=(:dash,:gray),label="2nd order")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 If we write the solution $\mathbf{u}$ of Equation {eq}`fdlinbc` as the exact solution minus an error vector $\mathbf{e}$, i.e., $\mathbf{u} = \hat{\mathbf{u}} - \mathbf{e}$, we obtain
 

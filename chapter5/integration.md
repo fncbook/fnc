@@ -25,16 +25,12 @@ FNC.init_format()
 In calculus you learn that the elegant way to evaluate a definite integral is to apply the Fundamental Theorem of Calculus and find an antiderivative. The connection is so profound and pervasive that it's easy to overlook that a definite integral is a numerical quantity existing independently of antidifferentiation.  However, most conceivable integrands have no antiderivative in terms of familiar functions.
 
 (demo-int-antideriv)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 The antiderivative of $e^x$ is, of course, itself. That makes evaluation of $\int_0^1 e^x\,dx$ by the Fundamental Theorem trivial.
 
@@ -65,13 +61,9 @@ When you look at the graphs of these functions, what's remarkable is that one of
 plot([exp,x->exp(sin(x))],0,1,fill=0,layout=(2,1),
     xlabel=L"x",ylabel=[L"e^x" L"e^{\sin(x)}"],ylim=[0,2.7])
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ```{index} ! numerical integration
 ```
@@ -86,7 +78,7 @@ Numerical integration, which also goes by the older name *quadrature*, is perfor
   t_i = a +i h, \quad h=\frac{b-a}{n}, \qquad i=0,\ldots,n.
 ```
 
-::::{proof:definition} Numerical integration formula
+::::{prf:definition} Numerical integration formula
 A **numerical integration** formula is a list of **weights** $w_0,\ldots,w_n$ chosen so that for all $f$ in some class of functions,
 
 ```{math}
@@ -138,7 +130,7 @@ Putting everything together, the resulting formula is
 ```{index} ! trapezoid formula; for integration
 ```
 
-::::{proof:definition} Trapezoid formula
+::::{prf:definition} Trapezoid formula
 The **trapezoid formula** is a numerical integration formula in the form {eq}`quadrature`, with
 
 $$
@@ -162,7 +154,7 @@ Trapezoid formula for integration. The piecewise linear interpolant defines trap
 ```
 
 (function-trapezoid)=
-````{proof:function} trapezoid
+````{prf:function} trapezoid
 **Trapezoid formula for numerical integration**
 
 ```{code-block} julia
@@ -190,7 +182,7 @@ Like finite-difference formulas, numerical integration formulas have a truncatio
 ```{index} ! truncation error; of a numerical integration formula, ! order of accuracy; of numerical integration
 ```
 
-::::{proof:definition} Truncation error of a numerical integration formula
+::::{prf:definition} Truncation error of a numerical integration formula
 For the numerical integration formula {eq}`quadrature`, the **truncation error** is
 
 ```{math}
@@ -223,21 +215,17 @@ A more thorough statement of the truncation error is known as the **Euler–Macl
 
 where the $B_{2k}$ are constants known as *Bernoulli numbers*. Unless we happen to be fortunate enough to have a function with $f'(b)=f'(a)$, we should expect truncation error at second order and no better.
 
-::::{proof:observation}
+::::{prf:observation}
 The trapezoid integration formula is second-order accurate.
 ::::
 
 (demo-int-trap)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We will approximate the integral of the function $f(x)=e^{\sin 7x}$ over the interval $[0,2]$.
 
@@ -252,25 +240,17 @@ a = 0;  b = 2;
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 In lieu of the exact value, we use the `QuadGK` package to find an accurate result.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 If a function has multiple return values, you can use an underscore `_` to indicate a  return value you want to ignore.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -309,13 +289,9 @@ plot(n,abs.(err),m=:o,label="results",
 # Add line for perfect 2nd order.
 plot!(n,3e-3*(n/n[1]).^(-2),l=:dash,label=L"O(n^{-2})")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 
@@ -415,16 +391,12 @@ Specifically, we have
 where the nodes referenced in the last line are relative to $n=2m$. Hence in passing from $n=m$ to $n=2m$, new integrand evaluations are needed only at the odd-numbered nodes of the finer grid. 
 
 (demo-int-extrap)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We estimate $\displaystyle\int_0^2 x^2 e^{-2x}\, dx$ using extrapolation. First we use `quadgk` to get an accurate value.
 
@@ -481,25 +453,17 @@ R = (16S[2] - S[1]) / 15
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 We can make a triangular table of the errors:
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The value `nothing` equals nothing except `nothing`.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -510,13 +474,9 @@ pretty_table(err, header=["order 2","order 4","order 6"])
 
 If we consider the computational time to be dominated by evaluations of $f$, then we have obtained a result with about twice as many accurate digits as the best trapezoid result, at virtually no extra cost.
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

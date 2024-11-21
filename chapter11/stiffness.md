@@ -66,7 +66,7 @@ By dropping the higher-order terms, which are negligible at least initially, we 
 ```
 
 (definition-stiffness-linearization)=
-::::{proof:definition} Linearization of an ODE
+::::{prf:definition} Linearization of an ODE
 A **linearization** of system {eq}`stiffsystem` at an exact solution $\hat{\mathbf{u}}(t)$ is
 
 :::{math}
@@ -80,7 +80,7 @@ where $\mathbf{v}(t)$ is a perturbation to the exact solution, and $\mathbf{J}$ 
 ```{index} Oregonator
 ```
 (example-stiffness-oregon)=
-::::{proof:example}
+::::{prf:example}
 The **Oregonator** is a well-known ODE system modeling a chemical oscillator and is given by
   
 :::{math}
@@ -115,23 +115,19 @@ While {eq}`ODElinearization` is linear, the Jacobian matrix in it is time-depend
 
 This equation is of the type we used in {numref}`section-diffusion-absstab` to discuss the absolute stability of IVP solvers. This suggests the following.
 
-:::{proof:observation} Rule of thumb for absolute stability
+:::{prf:observation} Rule of thumb for absolute stability
 The eigenvalues of the Jacobian appearing in the linearization about an exact solution, after scaling by the time step $\tau$, must lie in the stability region of the IVP solver.
 :::
 
 We have not stated a theorem here because we made several approximations and assumptions along the way that are not trivial to quantify. Nevertheless, if the rule of thumb is violated, we should expect perturbations to the exact solution to grow significantly with time, eventually rendering the numerical solution useless. Note that roundoff error is constantly introducing perturbations, so the rule of thumb applies along the entire trajectory of the numerical solution.
 
 (demo-stiffness-oregon)=
-:::{proof:demo}
+:::{prf:example}
 :::
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 In {numref}`Example {number} <example-stiffness-oregon>` we derived a Jacobian matrix for the Oregonator model. Here is a numerical solution of the ODE.
 
@@ -176,19 +172,15 @@ scatter(real(λ),imag(λ),t,
 
 You can see that there is one eigenvalue that ranges over a wide portion of the negative real axis and dominates stability considerations.
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Multiple time scales
 
 The solution to $y' = \lambda y$, $y(0)=1$ is $\exp(\lambda t)$. If $\lambda$ is real, this solution grows or decays by a factor of $e$ at $t=1/|\lambda|$. If $\lambda = i\omega$ is imaginary, then the solution has sines and cosines of frequency $\omega$. A complex $\lambda$ combines these effects.
 
-::::{proof:observation}
+::::{prf:observation}
 We may regard $|\lambda|^{-1}$, which has units of time, as a characteristic time scale of dynamics due to eigenvalue $\lambda$.
 :::: 
 
@@ -197,16 +189,12 @@ A Jacobian matrix with eigenvalues at different orders of magnitude therefore im
 In {numref}`Demo {number} <demo-stiffness-oregon>`, for example, you can see a combination of fast changes and slow evolution. 
 
 (demo-stiffness-explicit)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 The `Rodas4P` solver is good for stiff problems, and needs few time steps to solve the Oregonator from {numref}`Demo {number} <demo-stiffness-oregon>`.
 
@@ -244,13 +232,9 @@ scatter(real(ζ),imag(ζ),m=2,
 ```
 
 Roughly speaking, the $\zeta$ values stay within or close to the RK2 stability region in {numref}`figure-stabreg_bd_rk`. Momentary departures from the region are possible, but time stepping repeatedly in that situation would cause instability. 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## A-stability
 
@@ -261,7 +245,7 @@ Hence it is desirable in stiff problems generally, and diffusion problems in par
 ```{index} ! A-stability and A(α)-stability
 ```
 
-::::{proof:definition} A($\alpha$)- and A-stability
+::::{prf:definition} A($\alpha$)- and A-stability
 A stability region that includes a sector of angle $\alpha$ in both directions from the negative real axis is called **A($\alpha$)-stable**. A time stepping method whose stability region contains the entire left half-plane is called **A-stable**.
 ::::
 
@@ -276,7 +260,7 @@ Referring to {numref}`figure-stabreg_ab_am` and {numref}`figure-stabreg_bd_rk`, 
 
 ```{index} Dahlquist theorems
 ```
-::::{proof:theorem} Second Dahlquist stability barrier
+::::{prf:theorem} Second Dahlquist stability barrier
 An A-stable linear multistep method must be implicit and have order of accuracy no greater than 2.
 ::::
 

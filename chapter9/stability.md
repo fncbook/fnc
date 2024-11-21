@@ -27,16 +27,12 @@ FNC.init_format()
 With  barycentric interpolation available in the form of {numref}`Function {number} <function-polyinterp>`, we can explore polynomial interpolation using a numerically stable algorithm. Any remaining sensitivity to error is due to the conditioning of the interpolation process itself.
 
 (demo-stability-equispaced)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We choose a function over the interval $[0,1]$. 
 
@@ -75,13 +71,9 @@ plot(n,err,m=:o,title="Interpolation error for equispaced nodes",
 
 The error initially decreases as one would expect but then begins to grow. Both phases occur at rates that are exponential in $n$, i.e., $O(K^n$) for a constant $K$, appearing linear on a semi-log plot.
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Runge phenomenon
 
@@ -94,16 +86,12 @@ $$
 While the dependence on $f$ is messy here, the error indicator $\Phi(x)$ can be studied as a function of the nodes only.
 
 (demo-stability-errfun)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We plot $|\Phi(x)|$ over the interval $[-1,1]$ with equispaced nodes for different values of $n$. 
 
@@ -122,28 +110,20 @@ title!("Error indicator for equispaced nodes")
 
 Each time $\Phi$ passes through zero at an interpolation node, the value on the log scale should go to $-\infty$, which explains the numerous cusps on the curves.
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 Two observations from the result of {numref}`Demo {number} <demo-stability-errfun>` are important. First, $|\Phi|$ decreases exponentially at each fixed location in the interval (note that the spacing between curves is constant for constant increments of $n$). Second, $|\Phi|$ is larger at the ends of the interval than in the middle, by an exponentially growing factor. This gap is what can ruin the convergence of polynomial interpolation.
 
 (demo-stability-runge)=
 
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 This function has infinitely many continuous derivatives on the entire real line and looks easy to approximate over $[-1,1]$.
 
@@ -188,13 +168,9 @@ title!("Error for higher degrees")
 ```
 
 The convergence in the middle can't get any better than machine precision relative to the function values. So maintaining the growing gap between the center and the ends pushes the error curves upward exponentially fast at the ends, wrecking the convergence.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ```{index} ! Runge phenomenon
@@ -219,16 +195,12 @@ The observations above hint that we might find success by having more nodes near
 These are the projections onto the $x$-axis of $n$ equally spaced points on a unit circle. They are densely clustered near the ends of $[-1,1]$, and this feature turns out to overcome the Runge phenomenon.
 
 (demo-stability-errcheb)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Now we look at the error indicator function $\Phi$ for Chebyshev node sets.
 
@@ -246,25 +218,17 @@ title!("Error indicator for Chebyshev nodes")
 ```
 
 In contrast to the equispaced case, $|\Phi|$ decreases exponentially with $n$ almost uniformly across the interval.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 (demo-stability-rungefix)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Here again is the function from {numref}`Demo {number} <demo-stability-runge>` that provoked the Runge phenomenon when using equispaced nodes.
 
@@ -288,13 +252,9 @@ title!("Error for Chebyshev interpolants")
 ```
 
 By degree 16 the error is uniformly within machine epsilon, and, importantly, it stays there as $n$ increases. Note that as predicted by the error indicator function, the error is uniform over the interval at each value of $n$.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 As a bonus, for Chebyshev nodes the barycentric weights are simple:
@@ -313,7 +273,7 @@ As a bonus, for Chebyshev nodes the barycentric weights are simple:
 If we take $n\rightarrow \infty$ and use polynomial interpolation on Chebyshev nodes, the convergence rate is exponential in $n$. The following is typical of the results that can be proved.
 
 (theorem-spectral)=
-::::{proof:theorem}
+::::{prf:theorem}
 Suppose $f(x)$ is analytic in an open real interval containing $[-1,1]$. Then there exist constants $C>0$ and $K>1$ such that
   
 :::{math}
@@ -333,16 +293,12 @@ The condition "$f$ is analytic" means that the Taylor series of $f$ converges to
 In other contexts we refer to {eq}`spectral` as linear convergence, but here it is usual to say that the rate is exponential or that one has **spectral convergence**. It achieves constant reduction factors in the error by constant increments of $n$. By contrast, algebraic convergence in the form $O(n^{-p})$ for some $p>0$ requires *multiplying* $n$ by a constant factor in order to reduce error by a constant factor. Graphically, spectral error is a straight line on a log-linear scale, while algebraic convergence is a straight line on a log-log scale.
 
 (demo-stability-spectral)=
-:::{proof:demo}
+:::{prf:example}
 :::
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 On the left, we use a log-log scale, which makes second-order algebraic convergence $O(n^{-4})$ a straight line. On the right, we use a log-linear scale, which makes spectral convergence $O(K^{-n})$ linear.
 
@@ -364,13 +320,9 @@ plot!(n,[algebraic spectral],subplot=2,
     label=["algebraic" "spectral"],title="log-linear")
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

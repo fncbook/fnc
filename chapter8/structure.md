@@ -35,16 +35,12 @@ Very large matrices cannot be stored all within primary memory of a computer unl
 Most graphs with real applications have many fewer edges than the maximum possible $n^2$ for $n$ nodes. Accordingly, their adjacency matrices have mostly zero elements and should be represented sparsely. Julia functions to deal with sparse matrices are found in the `SparseArrays` package in the standard library.
 
 (demo-structure-sparse)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Here we load the adjacency matrix of a graph with 2790 nodes. Each node is a web page referring to Roswell, NM, and the edges represent links between web pages. (Credit goes to Panayiotis Tsaparas and the University of Toronto for making this data public.)
 
@@ -60,25 +56,17 @@ Here we load the adjacency matrix of a graph with 2790 nodes. Each node is a web
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 We may define the density of $\mathbf{A}$ as the number of nonzeros divided by the total number of entries.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 Use `nnz` to count the number of nonzeros in a sparse matrix.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -110,13 +98,9 @@ F*x;
 @elapsed for i in 1:300; F*x; end
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ```{index} fill-in of sparse matrices
 ```
@@ -124,16 +108,12 @@ F*x;
 Arithmetic operations such as `+`, `-`, `*`, and `^` respect and exploit sparsity if the matrix operands are sparse. However, matrix operations may substantially decrease the amount of sparsity, a phenomenon known as **fill-in**.
 
 (demo-structure-fill)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Here is the adjacency matrix of a graph representing a small-world network, featuring connections to neighbors and a small number of distant contacts.
 
@@ -159,13 +139,9 @@ end
 plt
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Banded matrices
 
@@ -180,16 +156,12 @@ A particularly important type of sparse matrix is a banded matrix. Recall from {
 Without pivoting, an LU factorization preserves bandwidth, but pivoting can change or destroy bandedness.
 
 (demo-structure-banded)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 ```{index} ! Julia; spdiagm
 ```
@@ -214,25 +186,17 @@ Matrix(A[1:7,1:7])
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Without pivoting, the LU factors have the same lower and upper bandwidth as the orignal matrix.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The `sparse` function converts any matrix to sparse form. But it's usually better to construct a sparse matrix directly, as the standard form might not fit in memory.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -252,13 +216,9 @@ spy!(sparse(fact.L),m=2,subplot=1,title=L"\mathbf{L}",color=:blues)
 spy!(sparse(fact.U),m=2,subplot=2,title=L"\mathbf{U}",color=:blues)
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ## Systems and eigenvalues
@@ -271,16 +231,12 @@ If given a sparse matrix, the backslash operator will automatically try a form o
 For very large matrices, it's unlikely that you will want to find all of its eigenvalues and eigenvectors. In {numref}`section-krylov-subspace` we describe some of the math behind an algorithm that can find a selected number of eigenvalues of largest magnitude, lying to the extreme left or right, or nearest a given complex number. 
 
 (demo-structure-linalg)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 The following generates a random sparse matrix with prescribed eigenvalues.
 
@@ -337,13 +293,9 @@ println("Time for dense solve: $t")
 @show dense_err;
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

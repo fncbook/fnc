@@ -36,7 +36,7 @@ Starting from {eq}`arnoldimat`, we left-multiply by $\mathbf{Q}_m^*$ to get
 
 where $\tilde{\mathbf{H}}_m$ is rows 1 through $m$ of $\mathbf{H}_m$. If $\mathbf{A}$ is hermitian, then so is the left side of this equation, hence $\tilde{\mathbf{H}}_m$ is hermitian too. But it is also upper Hessenberg, meaning that the $(i,j)$ element is zero if $i > j+1$. By symmetry, this means that elements are zero when $j > i+1$ as well.
 
-::::{proof:observation}
+::::{prf:observation}
 For a hermitian (or real symmetric) matrix, the upper Hessenberg matrix $\mathbf{H}_m$ produced by the Arnoldi iteration is tridiagonal.
 ::::
 
@@ -66,7 +66,7 @@ When $\mathbf{A}$ is hermitian and the Arnoldi iteration is reduced to Lanczos, 
 MINRES is also more theoretically tractable than GMRES. The following result relies on some advanced approximation theory. Recall that the eigenvalues of a hermitian matrix are real. 
 
 (theorem-minrescg-indefinite)=
-::::{proof:theorem} Convergence of MINRES (indefinite case)
+::::{prf:theorem} Convergence of MINRES (indefinite case)
 Suppose $\mathbf{A}$ is hermitian, invertible, and indefinite. Divide its eigenvalues into positive and negative sets $\Lambda_+$ and $\Lambda_-$, and define
 
 $$
@@ -89,7 +89,7 @@ where $\lfloor m/2\rfloor$ means to round $m/2$ down to the nearest integer.
 
 The bound for a definite matrix is better, as the next theorem shows. The upper bound {eq}`minres-conv` on the residual obeys a linear convergence rate. As the product $\kappa_+\kappa_-$ grows, the rate of this convergence approaches 1. Hence the presence of eigenvalues close to the origin (relative to the max eigenvalues) is expected to force a slower convergence. 
 
-::::{proof:example}
+::::{prf:example}
 Suppose $\mathbf{A}$ has $\kappa_+=60$ and $\kappa_-=15$. Then to achieve a guaranteed reduction in the relative residual of $10^{-3}$, we require
 
 $$
@@ -108,16 +108,12 @@ Because the theorem gives an upper bound, MINRES may converge faster. All we can
 ::::
 
 (demo-minrescg-indefinite)=
-:::{proof:demo}
+:::{prf:example}
 :::
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 The following matrix is indefinite.
 
@@ -158,13 +154,9 @@ plot!(m,ρ.^(m/2),l=:dash,label="upper bound")
 ```
 
 The upper bound turns out to be pessimistic here, especially in the later iterations. However, you can see a slow linear phase in the convergence that tracks the bound closely.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Conjugate gradients
 
@@ -186,7 +178,7 @@ which is nonnegative and zero only when $\mathbf{u}=\boldsymbol{0}$, provided $\
 ```{index} ! conjugate gradients, symmetric positive definite matrix
 ```
 
-:::{proof:definition} Method of conjugate gradients (CG)
+:::{prf:definition} Method of conjugate gradients (CG)
 For each $m=1,2,3,\ldots$, minimize $\|\mathbf{x}_m-\mathbf{x}\|_{\mathbf{A}}$ for $\mathbf{x}$ in the Krylov subspace $\mathcal{K}_m$.
 :::
 
@@ -198,7 +190,7 @@ For each $m=1,2,3,\ldots$, minimize $\|\mathbf{x}_m-\mathbf{x}\|_{\mathbf{A}}$ f
 The convergence of CG and MINRES is dependent on the eigenvalues of $\mathbf{A}$. In the HPD case the eigenvalues are real and positive, and they equal the singular values. Hence the condition number $\kappa$ is equal to the ratio of the largest eigenvalue to the smallest one. The following theorem suggests that MINRES and CG are not so different in convergence.
 
 (theorem-minrescg-converge)=
-::::{proof:theorem} MINRES and CG convergence (definite case)
+::::{prf:theorem} MINRES and CG convergence (definite case)
 Let $\mathbf{A}$ be real and SPD with 2-norm condition number $\kappa$. For MINRES define $R(m)=\|\mathbf{r}_m\|_2/\|\mathbf{b}\|_2$, and for CG define $R(m)=\|\mathbf{x}_m-\mathbf{x}\|_{\mathbf{A}}/\|\mathbf{x}\|_{\mathbf{A}}$,
 where $\mathbf{r}_m$ and $\mathbf{x}_m$ are the residual and solution approximation associated with the space $\mathcal{K}_m$. Then
 
@@ -238,23 +230,19 @@ With the Taylor expansion $\log(1+x) = x - (x^2/2) + \cdots$, we finally conclud
 
 as an estimate of the number of iterations needed to achieve a fixed accuracy. 
 
-:::{proof:observation}
+:::{prf:observation}
 As a rule of thumb, the number of iterations required for MINRES or CG to converge is $O(\sqrt{\kappa})$, where $\kappa$ is the condition number.
 :::
 
 This estimate fails for very large $\kappa$, however.
 
 (demo-minrescg-converge)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We will compare MINRES and CG on some quasi-random SPD problems.  The first matrix has a condition number of 100. 
 
@@ -307,13 +295,9 @@ plt
 ```
 
 Both methods have an early superlinear phase that allow them to finish slightly sooner than the factor of 5 predicted: {numref}`Theorem {number} <theorem-minrescg-converge>` is an upper bound, not necessarily an approximation. Both methods ultimately achieve the same reduction in the residual; MINRES stops earlier, but with a slightly larger error.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

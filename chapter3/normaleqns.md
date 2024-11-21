@@ -37,12 +37,12 @@ There is a concise explicit solution. In the following proof we make use of the 
 ```
 
 (theorem-normaleqns)=
-````{proof:theorem}
+````{prf:theorem}
 
 If $\mathbf{x}$ satisfies $\mathbf{A}^T(\mathbf{A}\mathbf{x}-\mathbf{b})=\boldsymbol{0}$, then $\mathbf{x}$ solves the linear least-squares problem, i.e., $\mathbf{x}$ minimizes $\| \mathbf{b}-\mathbf{A}\mathbf{x} \|_2$.
 ````
 
-````{proof:proof}
+````{prf:proof}
 Let $\mathbf{y}\in \mathbb{R}^n$ be any vector. Then
   $\mathbf{A}(\mathbf{x}+\mathbf{y})-\mathbf{b}=\mathbf{A}\mathbf{x}-\mathbf{b}+\mathbf{A}\mathbf{y}$, and
   
@@ -58,7 +58,7 @@ Let $\mathbf{y}\in \mathbb{R}^n$ be any vector. Then
 ```
 ````
 
-::::{proof:definition} Normal equations
+::::{prf:definition} Normal equations
 Given $\mathbf{A}\in \real^{m\times n}$ and $\mathbf{b}\in \real^{m}$, the **normal equations** for the linear least-squares problem $\operatorname{argmin}\| \mathbf{b}- \mathbf{A} \mathbf{x}\|$ are $\mathbf{A}^T(\mathbf{A}\mathbf{x}-\mathbf{b})=\boldsymbol{0}$, or equivalently,
 
 ```{math}
@@ -81,7 +81,7 @@ Geometry of the normal equations. The smallest residual is orthogonal to the ran
 
 If we associate the left-hand side of the normal equations as $(\mathbf{A}^T\mathbf{A})\,\mathbf{x}$, we recognize {eq}`normaleqns` as a *square* $n\times n$ linear system to solve for $\mathbf{x}$. 
 
-::::{proof:definition} Pseudoinverse
+::::{prf:definition} Pseudoinverse
 If $\mathbf{A}\in\real^{m\times n}$  with $m>n$, its **pseudoinverse** is the $n\times m$ matrix
 
 ```{math}
@@ -100,7 +100,7 @@ The matrix $\mathbf{A}^T\mathbf{A}$ appearing in the pseudoinverse has some impo
 ```
 
 (theorem-ATA)=
-::::{proof:theorem} 
+::::{prf:theorem} 
 
 For any real $m\times n$ matrix $\mathbf{A}$ with $m\ge n$, the following are true:
 
@@ -109,7 +109,7 @@ For any real $m\times n$ matrix $\mathbf{A}$ with $m\ge n$, the following are tr
 3. If $\mathbf{A}^T\mathbf{A}$ is nonsingular, then it is positive definite. 
 ::::
 
-````{proof:proof}
+````{prf:proof}
 The first part is left as [Exercise 3](problem-normaleqns-symmetry). For the second part, suppose that $\mathbf{A}^T\mathbf{A}\mathbf{z}=\boldsymbol{0}$. Note that $\mathbf{A}^T\mathbf{A}$ is singular if and only if $\mathbf{z}$ may be nonzero. Left-multiplying by $\mathbf{z}^T$, we find that
   
 ```{math}
@@ -126,7 +126,7 @@ Finally, we can repeat the manipulations above to show that for any nonzero $n$-
 The definition of the pseudoinverse involves taking the inverse of a matrix, so it is not advisable to use the pseudoinverse computationally. Instead, we use the definition of the normal equations to set up a linear system, which we already know how to solve. In summary, the steps for solving the linear least squares problem $\mathbf{A}\mathbf{x}\approx\mathbf{b}$ are:
 
 (algorithm-normaleqns-solve)=
-::::{proof:algorithm} Solution of linear least squares by the normal equations
+::::{prf:algorithm} Solution of linear least squares by the normal equations
 1. Compute $\mathbf{N}=\mathbf{A}^T\mathbf{A}$.
 2. Compute $\mathbf{z} = \mathbf{A}^T\mathbf{b}$.
 3. Solve the $n\times n$ linear system $\mathbf{N}\mathbf{x} = \mathbf{z}$ for $\mathbf{x}$.
@@ -135,7 +135,7 @@ The definition of the pseudoinverse involves taking the inverse of a matrix, so 
 In the last step we can exploit the fact, proved in {numref}`Theorem %s <theorem-ATA>`, that $\mathbf{N}$ is symmetric and positive definite, and use Cholesky factorization as in {numref}`section-linsys-structure`. This detail is included in {numref}`Function {number} <function-lsnormal>`.
 
 (function-lsnormal)=
-```{proof:function} lsnormal
+```{prf:function} lsnormal
 **Linear least-squares solution by the normal equations**
 ```{code-block} julia
 :lineno-start: 1
@@ -162,7 +162,7 @@ The syntax on line 9 is a *field reference* to extract the matrix we want from t
 Steps 1 and 3 of {numref}`Algorithm {number} <algorithm-normaleqns-solve>` dominate the flop count.
 
 (theorem-normaleqns-flops)=
-```{proof:theorem}
+```{prf:theorem}
 Solution of linear least squares by the normal equations takes $\sim (mn^2 + \frac{1}{3}n^3)$ flops.
 ```
 
@@ -178,7 +178,7 @@ The conditioning of the linear least-squares problem relates changes in the solu
 ```{index} condition number; of a matrix
 ```
 
-````{proof:definition} Matrix condition number (rectangular case)
+````{prf:definition} Matrix condition number (rectangular case)
 If $\mathbf{A}$ is $m\times n$ with $m > n$, then its condition number is defined to be
 
 ```{math}
@@ -198,7 +198,7 @@ As an algorithm, the normal equations begin by computing the data for the $n\tim
 
 The following can be proved using results in Chapter 7.
 
-````{proof:theorem} Condition number in the normal equations
+````{prf:theorem} Condition number in the normal equations
 If $\mathbf{A}$ is $m\times n$ with $m > n$, then
 
 ```{math}
@@ -209,16 +209,12 @@ If $\mathbf{A}$ is $m\times n$ with $m > n$, then
 This squaring of the condition number in the normal equations is the cause of instability. If $\kappa(\mathbf{A})$ is large, the squaring of it can destabilize the normal equations: while the solution of the least-squares problem is sensitive, finding it via the normal equations makes it doubly so.
 
 (demo-normaleqns-instab)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 
 ::::{grid} 1 1 2 2
@@ -227,25 +223,17 @@ This squaring of the condition number in the normal equations is the cause of in
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Because the functions $\sin^2(t)$, $\cos^2(t)$, and $1$ are linearly dependent, we should find that the following matrix is somewhat ill-conditioned.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The local variable scoping rule for loops applies to comprehensions as well.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -279,13 +267,9 @@ x_NE = N\(A'*b)
 @show observed_err = norm(x_NE-x)/norm(x);
 @show digits = -log10(observed_err);
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

@@ -26,7 +26,7 @@ The rootfinding problem becomes much more difficult when multiple variables and 
 ```{index} ! rootfinding problem; multidimensional
 ```
 
-````{proof:definition} Multidimensional rootfinding problem
+````{prf:definition} Multidimensional rootfinding problem
 Given a continuous vector-valued function $\mathbf{f}$ mapping from $\mathbb{R}^n$ into $\mathbb{R}^n$, find a vector $\mathbf{r}$ such that
 
 ```{math}
@@ -43,7 +43,7 @@ Given a continuous vector-valued function $\mathbf{f}$ mapping from $\mathbb{R}^
 Particular problems are often posed using scalar variables and equations. 
 
 (example-newtonsys-predprey)=
-::::{proof:example}
+::::{prf:example}
 The steady state of interactions between the population $w(t)$ of a predator species and the population $h(t)$ of a prey species might be modeled as
 
 $$
@@ -85,7 +85,7 @@ Because of the Jacobian's role in {eq}`multitaylor`, we may write $\mathbf{J}(\m
 
 (example-nonlinsystem)=
 
-````{proof:example}
+````{prf:example}
 Let
   
 ```{math}
@@ -156,7 +156,7 @@ Note that $\mathbf{J}^{-1}\mathbf{f}$ now plays the role that $f/f'$ had in the 
 ```
 
 (algorithm-nonlineqn-newtonsys)=
-::::{proof:algorithm} Multidimensional Newton's method
+::::{prf:algorithm} Multidimensional Newton's method
 Given $\mathbf{f}$ and a starting value $\mathbf{x}_1$, for each $k=1,2,3,\ldots$
 
 1. Compute $\mathbf{y}_k = \mathbf{f}(\mathbf{x}_k)$ and $\mathbf{A}_k=\mathbf{f\,}'(\mathbf{x}_k)$.
@@ -175,7 +175,7 @@ An implementation of Newton's method for systems is given in {numref}`Function {
 
 (function-newtonsys)=
 
-```{proof:function} newtonsys
+```{prf:function} newtonsys
 **Newton's method for a system of equations**
 
 ```{code-block} julia
@@ -219,16 +219,12 @@ The output of {numref}`Function {number} <function-newtonsys>` is a vector of ve
 ````
 
 (demo-newtonsys-converge)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 ::::{grid} 1 1 2 2
 :gutter: 2
@@ -236,25 +232,17 @@ The output of {numref}`Function {number} <function-newtonsys>` is a vector of ve
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 A system of nonlinear equations is defined by its residual and Jacobian.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 Be careful when coding a Jacobian all in one statement. Spaces separate columns, so `x[3]-1` is not the same as `x[3] - 1`.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -300,13 +288,9 @@ logerr = [ Float64( log(norm(r-x[k])) ) for k in 1:length(x)-1 ]
 
 The ratio is neatly converging toward 2, which is expected for quadratic convergence.
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

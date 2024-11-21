@@ -27,16 +27,12 @@ FNC.init_format()
 Given that matrix-vector multiplication is fast for sparse matrices, let's see what we might accomplish with only that at our disposal.
 
 (demo-power-one)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Here we choose a random 5×5 matrix and a random 5-vector.
 
@@ -72,13 +68,9 @@ x = randn(5)
 for j in 1:8;  x = A*x;  end
 [x A*x]
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 There was a little cheating in {numref}`Demo %s <demo-power-one>` to make the story come out neatly (specifically, the line `A=A./sum(A,dims=1)`). But it illustrates an important general fact that we investigate now.
 
@@ -141,7 +133,7 @@ To make a practical algorithm, we alternate matrix-vector multiplication with a 
 ```
 
 (algorithm-power-power)=
-::::{proof:algorithm} Power iteration
+::::{prf:algorithm} Power iteration
 Given matrix $\mathbf{A}$:
 
 1. Choose $\mathbf{x}_1$.
@@ -178,7 +170,7 @@ where $r_j=\lambda_j/\lambda_1$ and the $b_j$ are constants. By assumption {eq}`
 {numref}`Function {number} <function-poweriter>` is our implementation of power iteration.
 
 (function-poweriter)=
-````{proof:function} poweriter
+````{prf:function} poweriter
 **Power iteration to find a dominant eigenvalue**
 
 ```{code-block} julia
@@ -247,21 +239,17 @@ This is linear convergence with factor $r_2$:
 \frac{\beta_{k+1} - \lambda_1}{\beta_{k}-\lambda_1} \rightarrow r_2 = \frac{\lambda_2}{\lambda_1} \quad \text{as } k\rightarrow \infty.
 :::
 
-::::{proof:observation}
+::::{prf:observation}
 The error in the power iteration eigenvalue estimates $\beta_k$ is reduced asymptotically by a constant factor $\lambda_2/\lambda_1$ at each iteration.
 ::::
 
 (demo-power-iter)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 
 We will experiment with the power iteration on a 5×5 matrix with prescribed eigenvalues and dominant eigenvalue at 1.
@@ -309,13 +297,9 @@ plot(0:58,abs.(err),m=:o,title="Convergence of power iteration",
 ```
 
 The results are very similar until the last few iterations, when the limited accuracy of the reference value begins to show. That is, while it is a good estimate of $\lambda_1$, it is less good as an estimate of the error in nearby estimates.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 The practical utility of {eq}`poweriterconv` is limited because if we knew $\lambda_1$ and $\lambda_2$, we wouldn't be running the power iteration in the first place! Sometimes it's possible to find estimates of or bounds on the ratio. If nothing else, though, it is useful to know that linear convergence is expected at a rate based solely on the dominant eigenvalues. 

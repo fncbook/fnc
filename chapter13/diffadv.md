@@ -43,7 +43,7 @@ As described in {numref}`section-twodim-tensorprod`, the rectangular domain is d
 Our destination is an IVP that can be solved by a Runge–Kutta or multistep solver. These solvers are intended for vector problems, but our unknowns naturally have a matrix shape, which is the most convenient for the differentiation formulas {eq}`partfpartx` and {eq}`partfparty`. Fortunately, it's easy to translate back and forth between a matrix and an equivalent vector. 
 
 (definition-diffadv-vec)=
-::::{proof:definition} vec and unvec operations
+::::{prf:definition} vec and unvec operations
 Let $\mathbf{A}$ be an $m\times n$ matrix. Define the **vec** function as stacking the columns of $\mathbf{A}$ into a vector, i.e.,
 
 :::{math}
@@ -70,16 +70,12 @@ Let $\mathbf{z}$ be a vector of length $m n$. Define the **unvec** function as t
 The function `vec` is built-in to Julia, whereas unvec is a particular use case of the `reshape` function. 
 
 (demo-diffadv-vec)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 ```{code-cell}
 m = 2;  n = 3;
@@ -95,13 +91,9 @@ unvec = z -> reshape(z,m,n)
 unvec(v)
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Periodic end conditions
 
@@ -110,16 +102,12 @@ If the boundary conditions are periodic, then the unknowns in the method of line
 ```{index} heat equation
 ```
 (demo-diffadv-heat)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We will solve a 2D heat equation, $u_t = 0.1(u_{xx} + u_{yy})$, on the square $[-1,1]\times[-1,1]$, with periodic behavior in both directions.
 
@@ -165,26 +153,18 @@ sol = solve(IVP,Rodas4P());
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Here is an animation of the solution. 
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 
 Here `clims` are set so that colors remain at fixed values throughout the animation.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -199,13 +179,9 @@ end
 closeall();  mp4(anim,"figures/diffadv-heat.mp4")
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ## Dirichlet conditions
@@ -251,16 +227,12 @@ Now suppose the ODE unknowns for the interior solution values are in the vector 
 ```
 
 (demo-diffadv-advdiff)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We will solve an advection-diffusion problem, $u_t + u_x = 1 + \epsilon(u_{xx} + u_{yy})$, where $u=0$ on the boundary of the square $[-1,1]^2$. The outline of our approach is based on {numref}`Function {number} <function-parabolic>` for parabolic PDEs in one space dimension.
 
@@ -316,13 +288,9 @@ end
 closeall();  mp4(anim,"figures/diffadv-advdiff.mp4")
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ```{index} wave equation
@@ -339,16 +307,12 @@ The wave equation introduces a little additional complexity. First, we write the
 Now the grid unknowns are a pair of matrices $\mathbf{U}(t)$ and $\mathbf{V}(t)$. Typical boundary conditions would prescribe $u$ on all of the boundary and let $v$ be unspecified. Since the boundary values of $\mathbf{U}$ are prescribed, those values are omitted from the semidiscretization IVP, while all of $\mathbf{V}$ is included. All of these unknowns need to be packed into and unpacked from a single vector $\mathbf{w}(t)$ for the IVP solver. 
 
 (demo-diffadv-wave)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We solve the wave equation with $c=1$ on the square $[-2,2]\times[-2,2]$, where $u=0$ on the boundary. We start with the discretization and initial condition.
 
@@ -402,13 +366,9 @@ end
 closeall();  mp4(anim,"figures/diffadv-wave.mp4")
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

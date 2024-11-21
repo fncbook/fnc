@@ -107,16 +107,12 @@ Because waves travel in both directions, there is no preferred upwind direction.
 The boundary conditions {eq}`waveBC` suggest that we should remove both of the end values of $\mathbf{u}$ from the discretization, but retain all of the $\mathbf{z}$ values. We use $\mathbf{w}(t)$ to denote the vector of all the unknowns in the semidiscretization. When computing $\mathbf{w}'(t)$, we extract the $\mathbf{u}$ and $\mathbf{z}$ components, and we use dedicated functions for padding with the zero end values or chopping off the zeros as necessary.
 
 (demo-wave-boundaries)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We solve the wave equation {eq}`wavefirst2` with speed $c=2$, subject to {eq}`waveBC` and initial conditions {eq}`waveIC2`.
 
@@ -182,29 +178,21 @@ mp4(anim,"figures/wave-boundaries.mp4")
 The original hump breaks into two pieces of different amplitudes, each traveling with speed $c=2$. They pass through one another without interference. When a hump encounters a boundary, it is perfectly reflected, but with inverted shape. At time $t=2$, the solution looks just like the initial condition.
 
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Variable speed
 
 An interesting situation is when the wave speed $c$ changes discontinuously, as when light passes from one material into another. For this we must replace the term $c^2$ in {eq}`waveMOL` with the matrix $\operatorname{diag}\bigl(c^2(x_0),\ldots,c^2(x_m)\bigr)$.
 
 (demo-wave-speed)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We now use a wave speed that is discontinuous at $x=0$; to the left, $c=1$, and to the right, $c=2$. The ODE implementation has to change slightly.
 
@@ -246,13 +234,9 @@ mp4(anim,"figures/wave-speed.mp4")
 ```
 
 Each pass through the interface at $x=0$ generates a reflected and transmitted wave. By conservation of energy, these are both smaller in amplitude than the incoming bump.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

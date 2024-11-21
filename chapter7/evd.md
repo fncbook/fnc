@@ -27,7 +27,7 @@ To this point we have dealt frequently with the solution of the linear system $\
 ```
 
 (definition-evd-eigenvalue)=
-::::{proof:definition} Eigenvalue and eigenvector
+::::{prf:definition} Eigenvalue and eigenvector
 Given a square matrix $\mathbf{A}$, if 
 
 ```{math}
@@ -49,7 +49,7 @@ $$
 ```{index} ! unitary matrix, orthogonal matrix
 ```
 
-::::{proof:definition} Terms for complex matrices
+::::{prf:definition} Terms for complex matrices
 The **adjoint** or *hermitian* of a matrix $\mathbf{A}$ is denoted $\mathbf{A}^*$ and is given by $\mathbf{A}^*=(\overline{\mathbf{A}})^T=\overline{\mathbf{A}^T}$. The matrix is **self-adjoint** or **hermitian** if $\mathbf{A}^*=\mathbf{A}$.
 
 The **2-norm** of a complex vector $\mathbf{u}$ is $\sqrt{\mathbf{u}^*\mathbf{u}}$. Other vector norms, and all matrix norms, are as defined in {numref}`section-linsys-norms`.
@@ -66,7 +66,7 @@ For the most part, "adjoint" replaces "transpose," "hermitian" replaces "symmetr
 
 An easy rewrite of the eigenvalue definition {eq}`eigdef` is that $(\mathbf{A} - \lambda\mathbf{I}) \mathbf{x} = \boldsymbol{0}$. Hence $(\mathbf{A} - \lambda\mathbf{I})$ is singular, and it therefore must have a zero determinant. This is the property most often used to compute eigenvalues by hand.
 
-::::{proof:example}
+::::{prf:example}
 Given 
 
 ```{math}
@@ -130,7 +130,7 @@ If we find that $\mathbf{V}$ is a nonsingular matrix, then we arrive at a key fa
 ```{index} ! eigenvalue decomposition, ! diagonalizable matrix
 ```
 
-::::{proof:definition} Eigenvalue decomposition (EVD)
+::::{prf:definition} Eigenvalue decomposition (EVD)
 An **eigenvalue decomposition** (EVD) of a square matrix $\mathbf{A}$ is
 
 ```{math}
@@ -154,21 +154,17 @@ We stress that while {eq}`ev-all` is possible for all square matrices, {eq}`evde
 
 There is a common circumstance in which we can guarantee an EVD exists. The proof of the following theorem can be found in many elementary texts on linear algebra.
 
-````{proof:theorem}
+````{prf:theorem}
 If the $n\times n$ matrix $\mathbf{A}$ has $n$ distinct eigenvalues, then $\mathbf{A}$ is diagonalizable.
 ````
 
 (demo-evd-eigen)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 ```{index} ! Julia; eigvals
 ```
@@ -226,13 +222,9 @@ Even in the nondiagonalizable case, $\mathbf{A}\mathbf{V} = \mathbf{V}\mathbf{D}
 ```{code-cell}
 opnorm(A*V - V*diagm(λ))
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Similarity and matrix powers
 
@@ -241,13 +233,13 @@ opnorm(A*V - V*diagm(λ))
 
 The particular relationship between matrices $\mathbf{A}$ and $\mathbf{D}$ in {eq}`evdecomp` is important. 
 
-:::{proof:definition} Similar matrices
+:::{prf:definition} Similar matrices
 If $\mathbf{S}$ is any nonsingular matrix, we say that $\mathbf{B}=\mathbf{S}\mathbf{A}\mathbf{S}^{-1}$ is a **similarity transformation** of $\mathbf{A}$, and we say that $\mathbf{B}$ is **similar** to $\mathbf{A}$.
 :::
 
  A similarity transformation does not change eigenvalues, a fact that is typically proved in elementary linear algebra texts.
 
-````{proof:theorem}
+````{prf:theorem}
 If $\mathbf{S}$ is a nonsingular matrix, then $\mathbf{S}\mathbf{A}\mathbf{S}^{-1}$ has the same eigenvalues as $\mathbf{A}$.
 ````
 
@@ -260,7 +252,7 @@ Similarity transformation has an interesting interpretation. First, consider the
 
 We call $z_1,\ldots,z_n$ the *coordinates* of the vector $\mathbf{y}$ with respect to the columns of $\mathbf{X}$. That is, $\mathbf{z}$ is a representation of $\mathbf{y}$ in the basis implied by the columns of $\mathbf{X}$. But also $\mathbf{z} = \mathbf{X}^{-1} \mathbf{y}$. Hence left-multiplication by $\mathbf{X}^{-1}$ converts the vector $\mathbf{y}$ into those coordinates. 
 
-:::{proof:observation} Change of basis
+:::{prf:observation} Change of basis
 Multiplication by the inverse of a matrix performs a *change of basis* into the coordinates associated with the columns of that matrix.
 :::
 
@@ -320,7 +312,7 @@ Finally, given the convergence of Taylor polynomials to common functions, we are
 Just as linear systems have condition numbers that quantify the effect of finite precision, eigenvalue problems may be poorly conditioned too. While many possible results can be derived, we will use just one, the **Bauer–Fike theorem**.
 
 (theorem-bauer-fike)=
-````{proof:theorem} Bauer–Fike
+````{prf:theorem} Bauer–Fike
 Let $\mathbf{A}\in\mathbb{C}^{n\times n}$ be diagonalizable, $\mathbf{A}=\mathbf{V}\mathbf{D}\mathbf{V}^{-1}$, with eigenvalues $\lambda_1,\ldots,\lambda_n$. If $\mu$ is an eigenvalue of $\mathbf{A}+\mathbf{E}$ for a complex matrix $\mathbf{E}$, then
 
 ```{math}
@@ -336,23 +328,19 @@ The Bauer–Fike theorem tells us that eigenvalues can be perturbed by an amount
 ```{index} ! normal matrix, unitary matrix
 ```
 
-::::{proof:definition} Normal matrix
+::::{prf:definition} Normal matrix
 If $\mathbf{A}$ has an EVD {eq}`evdecomp` with a unitary eigenvector matrix $\mathbf{V}$, then $\mathbf{A}$ is a **normal matrix**. 
 ::::
 
 As we will see in {numref}`section-matrixanaly-symm-eig`, hermitian and real symmetric matrices are normal. Since the condition number of a unitary matrix is equal to 1, {eq}`bauerfike` guarantees that a perturbation of a normal matrix changes the eigenvalues by the same amount or less.
 
 (demo-evd-bauerfike)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 ```{index} Julia; adjoint, Julia; \'
 ```
@@ -381,25 +369,17 @@ We confirm that the matrix $\mathbf{A}$ is normal by checking that $\kappa(\math
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Now we perturb $\mathbf{A}$ and measure the effect on the eigenvalues. The Bauer–Fike theorem uses absolute differences, not relative ones.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 Since the ordering of eigenvalues can change, we look at all pairwise differences and take the minima.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -450,13 +430,9 @@ plt
 ```
 
 The plot shows that some eigenvalues are much more affected than others. This situation is not unusual, but it is not explained by the Bauer–Fike theorem.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Computing the EVD
 
@@ -467,16 +443,12 @@ If the eigenvalues have different complex magnitudes, then as $k\to\infty$ the e
 [^eigpoly]: In fact, the situation is reversed: eigenvalue methods are among the best ways to compute the roots of a given polynomial.
 
 (demo-evd-francisqr)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Let's start with a known set of eigenvalues and an orthogonal eigenvector basis.
 
@@ -512,13 +484,9 @@ for k in 1:40
 end
 A
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ```{index} ! Francis QR iteration

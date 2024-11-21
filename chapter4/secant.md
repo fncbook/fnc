@@ -23,7 +23,7 @@ FNC.init_format()
 
 From a practical standpoint, one of the biggest drawbacks of Newton's method is the requirement to supply $f'$ in {numref}`Function {number} <function-newton>`. It is both a programming inconvenience and a step that requires computational time. We can avoid using $f'$, however, by making a simple but easily overlooked observation:
 
-```{proof:observation}
+```{prf:observation}
  When a step produces an approximate result, you are free to carry it out approximately. 
 ```
 
@@ -32,16 +32,12 @@ Let's call this the *principle of approximate approximation.*
 In the Newton context, the principle of approximate approximation begins with the observation that the use of $f'$ is linked to the construction of a linear approximation $q(x)$ equivalent to a tangent line. The root of $q(x)$ is used to define the next iterate in the sequence. We can avoid calculating the value of $f'$ by choosing a different linear approximation.
 
 (demo-secant-line)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We return to finding a root of the equation $x e^x=2$.
 
@@ -84,13 +80,9 @@ For the next linear model, we use the line through the two most recent points. T
 m₃ = (y₃-y₂) / (x₃-x₂)
 x₄ = x₃ - y₃/m₃
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 The example in {numref}`Demo %s <demo-secant-line>` demonstrates the **secant method**. In the secant method, one finds the root of the linear approximation through the two most recent root estimates. That is, given previous approximations $x_1,\ldots,x_k$, define the linear model function as the line through $\bigl(x_{k-1},f(x_{k-1})\bigr)$ and $\bigl(x_k,f(x_k)\bigr)$:
 
@@ -104,7 +96,7 @@ Solving $q(x_{k+1})=0$ for $x_{k+1}$ gives the iteration formula.
 ```{index} ! secant method
 ```
 
-:::{proof:algorithm} Secant iteration
+:::{prf:algorithm} Secant iteration
 Given function $f$ and two initial values $x_1$ and $x_2$, define
 ```{math}
 :label: secant
@@ -116,7 +108,7 @@ Our implementation of the secant method is given in {numref}`Function {number} <
 
 (function-secant)=
 
-```{proof:function} secant
+```{prf:function} secant
 **Secant method for scalar rootfinding**
 
 ```{code-block} julia
@@ -196,7 +188,7 @@ for an unknown constant $C$. Treating the approximation as an equality, this bec
 
 Hence the errors in the secant method converge like $\epsilon_{k+1} = c (\epsilon_k)^\alpha$  for $1<\alpha<2$.
 
-::::{proof:definition} Superlinear convergence
+::::{prf:definition} Superlinear convergence
 Suppose a sequence $x_k$ approaches limit $x^*$. If the error sequence $\epsilon_k=x_k - x^*$ satisfies
 
 ```{math}
@@ -218,16 +210,12 @@ Quadratic convergence is a particular case of superlinear convergence. Roughly s
 as $k\to\infty$.
 
 (demo-secant-converge)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We check the convergence of the secant method from {numref}`Demo %s <demo-secant-line>`. Again we will use extended precision to get a longer sequence than double precision allows.
 
@@ -255,13 +243,9 @@ It's not easy to see the convergence rate by staring at these numbers. We can us
 ```
 
 As expected, this settles in at around 1.618.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 In terms of the error as a function of the iteration number $k$, the secant method converges at a rate strictly between linear and quadratic, which is slower than Newton's method. But error versus iteration count may not be the best means of comparison.
@@ -276,7 +260,7 @@ Now suppose that $|\epsilon_k|=\delta$. Roughly speaking, two units of work (i.e
 
 it seems reasonable to say that the rate of convergence in Newton *per function evaluation* is $\sqrt{2}\approx 1.41$. This is actually less than the comparable rate of about $1.62$ for the secant method. 
 
-```{proof:observation}
+```{prf:observation}
 If function evaluations are used to measure computational work, the secant iteration converges more rapidly than Newton's method.
 ```
 
@@ -294,16 +278,12 @@ If we interpolate through three points by a polynomial, we get a unique quadrati
 This leads to the idea of defining $q(y)$ as the quadratic interpolant to the points $(y_{k-2},x_{k-2})$, $(y_{k-1},x_{k-1})$, and $(y_k,x_k)$, where $y_i=f(x_i)$ for all $i$, and setting $x_{k+1}=q(0)$. The process defined in this way (given three initial estimates) is called **inverse quadratic interpolation**. Rather than deriving lengthy formulas for it here, we demonstrate how to perform inverse quadratic interpolation using `fit` to perform the interpolation step.
 
 (demo-secant-iqi)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Here we look for a root of $x+\cos(10x)$ that is close to 1.
 
@@ -335,25 +315,17 @@ plot!(x->q(x),interval...,l=:dash,label="interpolant")
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 To do inverse interpolation, we swap the roles of $x$ and $y$ in the interpolation.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 By giving two functions in the plot call, we get the parametric plot $(q(y),y)$ as a function of $y$.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -396,13 +368,9 @@ logerr = @. log( Float64(abs(r-x[1:end-1])) )
 ```
 
 The convergence is probably superlinear at a rate of $\alpha=1.8$ or greater.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Bracketing
 

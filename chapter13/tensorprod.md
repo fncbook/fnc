@@ -39,7 +39,7 @@ The $\times$ in this notation is called a **tensor product**, and a rectangle is
 
 The discretization of a two-dimensional tensor-product domain is straightforward. 
 
-::::{proof:definition} Tensor-product grid
+::::{prf:definition} Tensor-product grid
 Given discretizations of two intervals,
 
 :::{math}
@@ -68,7 +68,7 @@ There is potential for confusion because the first dimension of a matrix varies 
 :::
 
 (example-tensorprod-smallgrid)=
-::::{proof:example}
+::::{prf:example}
 Let the interval $[0,2]$ be divided into $m=4$ equally sized pieces, and let $[1,3]$ be discretized in $n=2$ equal pieces. Then the grid in the rectangle $[0,2]\times[1,3]$ is given by all points $(i/2,1+j)$ for all choices $i=0,1,2,3,4$ and $j=0,1,2$. If $f(x,y)=\sin(\pi xy)$, then
 
 $$
@@ -87,16 +87,12 @@ $$
 ::::
 
 (demo-tensorprod-gridfun)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Here is the grid from {numref}`Example {number} <example-tensorprod-smallgrid>`.
 
@@ -125,25 +121,17 @@ plotlyjs();  # use better 3D renderer
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 We can make a nice plot of the function by first choosing a much finer grid. However, the contour and surface plotting functions expect the *transpose* of mtx($f$).
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 To emphasize departures from a zero level, use a colormap such as `redsblues`, and use `clims` to set balanced color differences.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -163,13 +151,9 @@ surface(x,y,F',l=0,leg=:none,
     xlabel="x",ylabel="y",zlabel="f(x,y)")
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Parameterized surfaces
 
@@ -213,16 +197,12 @@ z &= \cos v,
 :::
 
 (demo-tensorprod-disksphere)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 For a function given in polar form, such as $f(r,\theta)=1-r^4$, construction of a function over the unit disk is straightforward using a grid in $(r,\theta)$ space.
 
@@ -264,13 +244,9 @@ surface(X',Y',Z',fill_z=F',l=0,leg=:none,color=:viridis,
     title="Function on the unit sphere")
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Partial derivatives
 
@@ -298,16 +274,12 @@ Now we tackle $\frac{\partial u}{\partial y}$. Here the inactive coordinate $x$ 
 Keep in mind that the differentiation matrix $\mathbf{D}_x$ is based on the discretization $x_0,\ldots,x_m$, and as such it must be $(m+1)\times (m+1)$. On the other hand, $\mathbf{D}_y$ is based on $y_0,\ldots,y_n$ and is $(n+1)\times (n+1)$. This is exactly what is needed dimensionally to make the products in {eq}`partfpartx` and {eq}`partfparty` consistent. More subtly, if the differentiation is based on equispaced grids in each variable, the value of $h$ in a formula such as {eq}`centerFD12` will be different for $\mathbf{D}_x$ and $\mathbf{D}_y$.
 
 (demo-tensorprod-diff)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We define a function and, for reference, its two exact partial derivatives.
 
@@ -347,13 +319,9 @@ exact = mtx(∂u_∂y,x,y)
 norm(exact-∂yU) / norm(exact)
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

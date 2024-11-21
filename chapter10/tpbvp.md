@@ -25,7 +25,7 @@ The initial-value problems of {doc}`Chapter 6<../ivp/overview>` are characterize
 
 In a **boundary-value problem**, the state is not entirely given at any point. Instead, partial information is given at multiple values of the independent variable. We will focus on the most common type.
 
-::::{proof:definition} Two-point boundary-value problem (TPBVP)
+::::{prf:definition} Two-point boundary-value problem (TPBVP)
 :::{math}
 :label: tpbvp
 \begin{split}
@@ -52,7 +52,7 @@ Certain special cases of the boundary conditions have their own nomenclature.
 ```
 
 (definition-tpbvp-bctype)=
-:::{proof:definition} Dirichlet, Neumann, and Robin conditions
+:::{prf:definition} Dirichlet, Neumann, and Robin conditions
 Let $g_i$ be a boundary condition in {eq}`tpbvp`, and let $\alpha,\beta$ be constants.  
 
 **Dirichlet condition:** $g_i(u,u') = u - \alpha$
@@ -65,7 +65,7 @@ When $\alpha=0$ in the above, the condition is said to be **homogeneous**.
 :::
 
 (example-tpbvp-pendulum)=
-::::{proof:example}
+::::{prf:example}
 An ideal pendulum of length $L$ satisfies the ODE $\theta'' + \frac{g}{L}\sin \theta = 0$, where $\theta(t)$ is the angle of the pendulum's rod from straight downward, and $g$ is gravitational acceleration.
 
 If we pull the pendulum bob 1 radian and release it from rest, then we have an IVP with the initial condition $\theta(0)=1$, $\theta'(0)=0$. Everything about the future trajectory of the pendulum is completely determined by that condition. But if instead we want to know how far to pull up the pendulum bob initially so that it is in the downward position 2 seconds later, then we have the Neumann boundary condition $\theta'(0)=0$ and the Dirichlet boundary condition $\theta(2)=0$. 
@@ -76,7 +76,7 @@ Clearly, one solution is $\theta(0)=0$, and the pendulum never moves! But there 
 While time can be the independent variable in a TPBVP, as in {numref}`Example {number} <example-tpbvp-pendulum>`, it is often space, which has no intrinsic direction of information flow.
 
 (example-tpbvp-mems)=
-::::{proof:example}
+::::{prf:example}
 A micromechanical electrically driven actuator consists of two flat disk-shaped surfaces in parallel, one at $z=0$ and the other at $z=1$. The surface at $z=0$ is a rigid metal plate. The surface at $z=1$ is an elastic membrane fixed only at its boundary. When the surfaces are given different electric potentials, the membrane deflects in response to the induced electric field, and the field is also a position of the deflection. Assuming circular symmetry, one may derive the ordinary differential equation {cite}`peleskoEffectSmallaspectratio2006`
 
 :::{math}
@@ -99,16 +99,12 @@ derived from the circular symmetry and fixing the edge of the membrane, respecti
 We can solve the TPBVP {eq}`tpbvp` by recasting the problem as a first-order system in the usual way. 
 
 (demo-tpbvp-mems)=
-:::{proof:demo}
+:::{prf:example}
 :::
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 ```{index} ! Julia; in-place function
 ```
@@ -119,9 +115,7 @@ We can solve the TPBVP {eq}`tpbvp` by recasting the problem as a first-order sys
 ::::{grid-item}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 As a system, the MEMS problem from {numref}`Example {number} <example-tpbvp-mems>` uses $y_1=w$, $y_2=w'$ to obtain
 
 :::{math}
@@ -134,20 +128,14 @@ y_2' &= \frac{\lambda}{y_1^2} - \frac{y_2}{r}.
 
 We will code an *in-place* form of this ODE, in which the first argument is used to return the computed values of $y_1'$ and $y_2'$.  
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 ::::
 
 :::{grid-item-card}
 :columns: 5 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The in-place code here saves the computing time that would otherwise be needed to allocate memory for `f` repeatedly.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 :::::
 
@@ -193,13 +181,9 @@ plot(y,label=[L"w" L"w'"],legend=:right,
 
 To visual accuracy, the boundary conditions have been enforced.
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 Characterizing the conditioning of a TPBVP theoretically is difficult. There are some numerical tools going by the name  *sensitivity analysis*, but the details are too lengthy for us to explore here.
 

@@ -30,7 +30,7 @@ A piecewise linear interpolant is continuous but has discontinuities in its deri
 ```{index} ! cubic spline, ! spline (cubic spline)
 ```
 
-::::{proof:definition} Cubic spline
+::::{prf:definition} Cubic spline
 A **cubic spline** is a piecewise cubic function that has two continuous derivatives everywhere. 
 ::::
 
@@ -204,7 +204,7 @@ Collectively, {eq}`spline0asys`,  {eq}`spline0bsys`,  {eq}`spline1sys`,  {eq}`sp
 
 (function-spinterp)=
 
-````{proof:function} spinterp
+````{prf:function} spinterp
 **Cubic not-a-knot spline interpolation**
 
 ```{code-block} julia
@@ -277,16 +277,12 @@ end
 ## Conditioning and convergence
 
 (demo-splines-splines)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 For illustration, here is a spline interpolant using just a few nodes.
 
@@ -333,17 +329,13 @@ plot(n,[err order4],m=[:o :none],l=[:solid :dash],
     xaxis=(:log10,"n"), yaxis=(:log10,L"|| f-S\,||_\infty"),
     title="Convergence of spline interpolation")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 Besides having more smoothness than a piecewise linear interpolant, the not-a-knot cubic spline improves the order of accuracy to 4.
 
-````{proof:theorem}
+````{prf:theorem}
  Suppose that $f(x)$ has four continuous derivatives in $[a,b]$ (i.e., $f\in C^4[a,b]$). Let $S_n(x)$ be the not-a-knot cubic spline interpolant of $\bigl(t_i,f(t_i)\bigr)$ for $i=0,\ldots,n$, where $t_i=a+i h$ and $h=(b-a)/n$. Then for all sufficiently small $h$, there is a constant $C>0$ such that
 
 ```{math}

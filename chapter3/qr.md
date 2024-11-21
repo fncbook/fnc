@@ -26,7 +26,7 @@ FNC.init_format()
 
 Sets of vectors satisfying a certain property are useful both theoretically and computationally.
 
-::::{proof:definition} Orthogonal vectors
+::::{prf:definition} Orthogonal vectors
 Two vectors $\mathbf{u}$ and $\mathbf{v}$ in $\mathbb{R}^n$ are **orthogonal** if $\mathbf{u}^T\mathbf{v}=0$. We say that a collection of vectors $\mathbf{q}_1,\ldots,\mathbf{q}_k$ is orthogonal if
 
 ```{math}
@@ -63,7 +63,7 @@ Equation {eq}`orthosubtract` is the key to the computational attractiveness of o
 Nonorthogonal vectors can cause cancellation when subtracted, but orthogonal vectors never do.
 ```
 
-```{proof:observation}
+```{prf:observation}
 Addition and subtraction of vectors are guaranteed to be well conditioned when the vectors are orthogonal.
 ```
 ## Orthogonal and ONC matrices
@@ -92,12 +92,12 @@ Statements about orthogonal vectors are often made more easily in matrix form. L
 
 If the columns of $\mathbf{Q}$ are orthonormal, then $\mathbf{Q}^T\mathbf{Q}$ is the $k\times k$ identity matrix. This is such an important property that we will break with common practice here and give this type of matrix a name. 
 
-```{proof:definition} ONC matrix
+```{prf:definition} ONC matrix
 An **ONC matrix** is one whose columns are an orthonormal set of vectors. 
 ```
 
 (theorem-qr-ONC)=
-````{proof:theorem} ONC matrix
+````{prf:theorem} ONC matrix
 
 Suppose $\mathbf{Q}$ is a real $n\times k$ ONC matrix (matrix with orthonormal columns). Then:
 
@@ -106,7 +106,7 @@ Suppose $\mathbf{Q}$ is a real $n\times k$ ONC matrix (matrix with orthonormal c
 3. $\| \mathbf{Q} \|_2=1$.
 ````
 
-````{proof:proof}
+````{prf:proof}
 The first part is derived above. The second part follows a pattern that has become well established by now:
 
 ```{math}
@@ -121,7 +121,7 @@ The last part of the theorem is left to the exercises.
 
 Of particular interest is a *square* ONC matrix.[^ortho] 
 
-```{proof:definition}
+```{prf:definition}
 An **orthogonal matrix** is a square matrix with orthonormal columns.
 ```
 
@@ -131,7 +131,7 @@ Orthogonal matrices have properties beyond {numref}`Theorem {number} <theorem-qr
 
 
 (theorem-qr-orthogmatrix)=
-````{proof:theorem} Orthogonal matrix
+````{prf:theorem} Orthogonal matrix
 
 Suppose $\mathbf{Q}$ is an $n\times n$ real orthogonal matrix. Then:
 1. $\mathbf{Q}^T = \mathbf{Q}^{-1}$.
@@ -140,7 +140,7 @@ Suppose $\mathbf{Q}$ is an $n\times n$ real orthogonal matrix. Then:
 4. For any other $n\times n$ matrix $\mathbf{A}$, $\| \mathbf{A}\mathbf{Q} \|_2=\| \mathbf{A} \|_2$.
 5. If $\mathbf{U}$ is another $n\times n$ orthogonal matrix, then $\mathbf{Q}\mathbf{U}$ is also orthogonal.
 ````
-::::{proof:proof}
+::::{prf:proof}
 Since $\mathbf{Q}$ is an ONC matrix, $\mathbf{Q}^T\mathbf{Q}=\mathbf{I}$. All three matrices are $n\times n$, so $\mathbf{Q}^{-1}=\mathbf{Q}^T$. The proofs of the other statements are left to the exercises.
 ::::
 
@@ -152,7 +152,7 @@ Since $\mathbf{Q}$ is an ONC matrix, $\mathbf{Q}^T\mathbf{Q}=\mathbf{I}$. All th
 Now we come to another important way to factor a matrix: the **QR factorization**. As we will show below, the QR factorization plays a role in linear least squares analogous to the role of LU factorization in linear systems.
 
 (theorem-qr-QR)=
-````{proof:theorem} QR factorization
+````{prf:theorem} QR factorization
 Every real $m\times n$ matrix $\mathbf{A}$ ($m\ge n$) can be written as $\mathbf{A}=\mathbf{Q}\mathbf{R}$, where $\mathbf{Q}$ is an $m\times m$ orthogonal matrix and $\mathbf{R}$ is an $m\times n$ upper triangular matrix.
 ````
 
@@ -192,21 +192,17 @@ r_{11} & r_{12} & \cdots & r_{1n} \\
 \end{bmatrix} = \hat{\mathbf{Q}} \hat{\mathbf{R}}.
 ```
 
-::::{proof:definition} Thin QR factorization
+::::{prf:definition} Thin QR factorization
 The thin QR factorization is $\mathbf{A} = \hat{\mathbf{Q}} \hat{\mathbf{R}}$, where $\hat{\mathbf{Q}}$ is $m\times n$ and ONC, and $\hat{\mathbf{R}}$ is $n\times n$ and upper triangular.
 ::::
 
 (demo-qr-qrfact)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Julia provides access to both the thin and full forms of the QR factorization.
 
@@ -232,25 +228,17 @@ R
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 If you look carefully, you see that we seemingly got a full $\mathbf{Q}$ but a thin $\mathbf{R}$. However, the $\mathbf{Q}$ above is not a standard matrix type. If you convert it to a true matrix, then it reverts to the thin form.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 To enter the accented character `Q̂`, type `Q\hat` followed by <kbd>Tab</kbd>.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -269,13 +257,9 @@ The thin $\hat{\mathbf{Q}}$ cannot be an orthogonal matrix, because it is not sq
 ```{code-cell}
 Q̂'*Q̂ - I
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Least squares and QR
 
@@ -303,7 +287,7 @@ In order to have the normal equations be well posed, we require that $\mathbf{A}
 ```
 
 (algorithm-qr-solve)=
-::::{proof:algorithm} Solution of linear least squares by thin QR
+::::{prf:algorithm} Solution of linear least squares by thin QR
 1. Compute the thin QR factorization $\hat{\mathbf{Q}}\hat{\mathbf{R}}=\mathbf{A}$.
 1. Compute $\mathbf{z} = \hat{\mathbf{Q}}^T\mathbf{b}$.
 1. Solve the $n\times n$ linear system $\hat{\mathbf{R}}\mathbf{x} = \mathbf{z}$ for $\mathbf{x}$.
@@ -312,7 +296,7 @@ In order to have the normal equations be well posed, we require that $\mathbf{A}
 This algorithm is implemented in {numref}`Function {number} <function-lsqrfact>`. It is essentially the algorithm used internally by Julia when `A\b` is called. The execution time is dominated by the factorization, the most common method for which is described in {numref}`section-leastsq-house`.
 
 (function-lsqrfact)=
-```{proof:function} lsqrfact
+```{prf:function} lsqrfact
 **Linear least-squares solution by QR factorization**
 ```{code-block} julia
 :lineno-start: 1
@@ -333,16 +317,12 @@ end
 The solution of least-squares problems via QR factorization is more stable than when the normal equations are formulated and solved directly.
 
 (demo-qr-stable)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We'll repeat the experiment of {numref}`Demo {number} <demo-normaleqns-instab>`, which exposed instability in the normal equations. 
 
@@ -363,13 +343,9 @@ observed_error = norm(FNC.lsqrfact(A,b)-x)/norm(x);
 @show error_bound = κ*eps();
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

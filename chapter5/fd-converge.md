@@ -30,7 +30,7 @@ All of the finite-difference formulas in the previous section based on equally s
 ```{index} ! truncation error; of a finite-difference formula
 ```
 
-::::{proof:definition} Truncation error of a finite-difference formula
+::::{prf:definition} Truncation error of a finite-difference formula
 For the finite-difference method {eq}`fdformula` with weights $a_{-p},\ldots,a_{q}$, the **truncation error** is
 
 ```{math}
@@ -46,7 +46,7 @@ Although we are measuring the truncation error only at $x=0$, it could be define
 All of the finite-difference formulas given in {numref}`section-localapprox-finitediffs` are convergent.
 
 (example-fd-converge-FD11)=
-````{proof:example}
+````{prf:example}
 The forward difference formula {eq}`forwardFD11` given by $(f(h)-f(0))/h$ yields
 
 ```{math}
@@ -68,7 +68,7 @@ Of major interest is the rate at which $\tau_f\to 0$ in a convergent formula.
 ```{index} ! order of accuracy; of a finite-difference formula
 ```
 (definition-fd-converge-ooa)=
-::::{proof:definition} Order of accuracy of a finite-difference formula
+::::{prf:definition} Order of accuracy of a finite-difference formula
 If the truncation error of a finite-difference formula satisfies $\tau_f(h)=O(h^m)$ for a positive integer $m$, then $m$ is the **order of accuracy** of the formula.
 ::::
 
@@ -79,7 +79,7 @@ Order of accuracy is calculated by expanding $\tau_f$ in a Taylor series about $
 [^trunc]: The term *truncation error* is derived from the idea that the finite-difference formula, being finite, has to truncate the series representation and thus cannot be exactly correct for all functions.
 
 (example-fd-converge-FD12)=
-````{proof:example}
+````{prf:example}
 We compute the truncation error of the centered difference formula {eq}`centerFD12`:
   
 ```{math}
@@ -96,16 +96,12 @@ Thus, this method has order of accuracy equal to 2.
 ````
 
 (demo-fdconverge-order12)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Let's observe the convergence of the formulas in {numref}`Example {number} <example-fd-converge-FD11>` and {numref}`Example {number} <example-fd-converge-FD12>`, applied to the function $\sin(e^{x+1})$ at $x=0$.
 
@@ -148,13 +144,9 @@ plot(h,abs.([error_FD1 error_FD2]),m=:o,label=["FD1" "FD2"],
 # Add lines for perfect 1st and 2nd order.
 plot!(h,[h h.^2],l=:dash,label=[L"O(h)" L"O(h^2)"])
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Stability
 
@@ -207,7 +199,7 @@ for a constant $K$ that depends on $x$ and $f$, but not $h$. In summary, for a f
 
 For a method of truncation order $m$, the details of the subtractive cancellation are a bit different, but the conclusion generalizes.
 
-::::{proof:observation}
+::::{prf:observation}
 For computing with a finite-difference method of order $m$ in the presence of roundoff, the optimal spacing of nodes satisfies
 
 ```{math}
@@ -221,16 +213,12 @@ and the optimum total error is roughly $\epsilon_\text{mach}^{\,\, m/(m+1)}$.
 A different statement of the conclusion is that for a first-order formula, at most we can expect accuracy in only about half of the available machine digits. As $m$ increases, we get ever closer to using the full accuracy available. Higher-order finite-difference methods are both more efficient and less vulnerable to roundoff than low-order methods.
 
 (demo-fdconverge-round)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Let $f(x)=e^{-1.3x}$. We apply finite-difference formulas of first, second, and fourth order to estimate $f'(0)=-1.3$.
 
@@ -266,13 +254,9 @@ plot!(h,0.1*eps()./h,l=:dash,color=:black,label=L"O(h^{-1})")
 ```
 
 Again the graph is made so that $h$ decreases from left to right. The errors are dominated at first by truncation error, which decreases most rapidly for the fourth-order formula. However, increasing roundoff error eventually equals and then dominates the truncation error as $h$ continues to decrease. As the order of accuracy increases, the crossover point moves to the left (greater efficiency) and down (greater accuracy).
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

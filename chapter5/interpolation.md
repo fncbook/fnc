@@ -25,7 +25,7 @@ FNC.init_format()
 ```{index} ! interpolation
 ```
 
-:::{proof:definition} Interpolation problem
+:::{prf:definition} Interpolation problem
 Given $n+1$ distinct points $(t_0,y_0)$, $(t_1,y_1),\ldots,(t_n,y_n)$, with $t_0<t_1<\ldots <t_n$ called **nodes**, the **interpolation problem** is to find a function $p(x)$, called the **interpolant**, such that $p(t_k)=y_k$ for $k=0,\dots,n$.
 :::
 
@@ -46,16 +46,12 @@ The interpolation nodes are numbered from 0 to $n$. This is convenient for our m
 Polynomials are the obvious first candidate to serve as interpolating functions. They are easy to work with, and in {numref}`section-linsys-polyinterp` we saw that a linear system of equations can be used to determine the coefficients of a polynomial that passes through every member of a set of given points in the plane. However, it's not hard to find examples for which polynomial interpolation leads to unusable results.
 
 (demo-interpolation-global)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Here are some points that we could consider to be observations of an unknown function on $[-1,1]$.
 
@@ -96,16 +92,12 @@ plot!(x,p.(x),label="interpolant")
 ```
 
 Surely there must be functions that are more intuitively representative of those points!
-```{raw} html
-</div>
-```
-
-```{raw} latex
-%%end demo%%
-```
 
 
-```{proof:observation}
+
+
+
+```{prf:observation}
 Interpolation by a polynomial at equally spaced nodes is ill-conditioned as the degree of the polynomial grows.
 ```
 
@@ -118,23 +110,19 @@ In Chapter 9 we explore the large oscillations in the last figure of {numref}`De
 
 In order to keep polynomial degrees small while interpolating large data sets, we will choose interpolants from the **piecewise polynomials**. Specifically, the interpolant $p$ must be a polynomial on each subinterval $[t_{k-1},t_k]$ for $k=1,\ldots,n$.
 
-````{proof:example}
+````{prf:example}
 Some examples of piecewise polynomials for the nodes  $t_0=-2$, $t_1=0$, $t_2=1$, and $t_3=4$ are $p_1(x)=x+1$, $p_2(x)=\operatorname{sign}(x)$, $p_3(x)=|x-1|^{3}$, and $p_4(x)=(\max\{0,x\})^{4}$. Note that $p_{1}$, $p_{2}$, and $p_4$ would also be piecewise polynomial on the node set $\{t_0,t_1,t_3\}$, but $p_3$ would not.
 ````
 
 Usually we designate in advance a maximum degree $d$ for each polynomial piece of $p(x)$. An important property of the piecewise polynomials of degree $d$ is that they form a vector space: that is, any linear combination of piecewise polynomials of degree $d$ is another piecewise polynomial of degree $d$. If $p$ and $q$ share the same node set, then the combination is piecewise polynomial on that node set.
 
 (demo-interpolation-pwise)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Let us recall the data from {numref}`Demo %s <demo-interpolation-global>`.
 
@@ -163,13 +151,9 @@ We may prefer a smoother interpolant that is piecewise cubic, generated using `S
 p = Spline1D(t,y)
 plot!(x->p(x),-1,1,label="piecewise cubic")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 We will consider piecewise linear interpolation in more detail in {numref}`section-localapprox-pwlin`, and we look at piecewise cubic interpolation in {numref}`section-localapprox-splines`.
 
@@ -200,7 +184,7 @@ The functions appearing within the sum above have particular significance.
 ```{index} ! cardinal function
 ```
 
-::::{proof:definition} Cardinal function
+::::{prf:definition} Cardinal function
 A **cardinal function** $\phi_k$ for a node set $t_0,\ldots,t_n$ is the function that interpolates the value $(t_k,1)$ and $(t_j,0)$ for all $j\neq k$. 
 ::::
 
@@ -222,7 +206,7 @@ In the following result we use the function infinity-norm or max-norm defined by
 ```
 
 (theorem-interp-conditioning)=
-````{proof:theorem} Conditioning of interpolation 
+````{prf:theorem} Conditioning of interpolation 
 Suppose that $\cI$ is a linear interpolation method on nodes $t_0,\ldots,t_n$. Then with respect to the infinity norm, the absolute condition number of $\cI$ satisfies
   
 ```{math}
@@ -233,7 +217,7 @@ Suppose that $\cI$ is a linear interpolation method on nodes $t_0,\ldots,t_n$. T
 where the $\phi_k$ are cardinal interpolating functions.
 ````
 
-::::{proof:proof}
+::::{prf:proof}
 Suppose the data vector is perturbed from $\mathbf{y}$ to $\mathbf{y}+ \mathbf{d}$. Then
 
 ```{math}
@@ -258,16 +242,12 @@ Since $|d_k|\le \|\mathbf{d}\|_\infty$ for all $k$, this finishes {eq}`interp-co
 ::::
 
 (demo-interp-cond)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 In {numref}`Demo %s <demo-interpolation-global>` and {numref}`Demo %s <demo-interpolation-pwise>` we saw a big difference between polynomial interpolation and piecewise polynomial interpolation of some arbitrarily chosen data. The same effects can be seen clearly in the cardinal functions, which are closely tied to the condition numbers.
 
@@ -298,13 +278,9 @@ plot!(x->ϕ(x),-1,1,label="polynomial",
 ```
 
 From the figure we can see that the condition number for polynomial interpolation on these nodes is at least 500.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

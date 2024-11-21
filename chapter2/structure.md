@@ -37,22 +37,18 @@ We next consider three important types of matrices that cause the LU factorizati
 ```{index} ! bandwidth of a matrix, ! tridiagonal matrix
 ```
 
-::::{proof:definition} Bandwidth
+::::{prf:definition} Bandwidth
 A matrix $\mathbf{A}$ has **upper bandwidth** $b_u$ if $j-i > b_u$ implies $A_{ij}=0$, and **lower bandwidth** $b_\ell$ if $i-j > b_\ell$ implies $A_{ij}=0$. We say the total **bandwidth** is $b_u+b_\ell+1$. When $b_u=b_\ell=1$, we have the important case of a **tridiagonal matrix**. 
 ::::
 
 
 (demo-structure-banded)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 ```{index} ! Julia; fill, Julia; diagm, ! Julia; diag
 ```
@@ -63,25 +59,17 @@ A matrix $\mathbf{A}$ has **upper bandwidth** $b_u$ if $j-i > b_u$ implies $A_{i
 :::{grid-item}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Here is a small tridiagonal matrix. Note that there is one fewer element on the super- and subdiagonals than on the main diagonal.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 Use `fill` to create an array of a given size, with each element equal to a provided value.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -98,24 +86,16 @@ A = diagm( -1=>[4,3,2,1,0], 0=>[2,2,0,2,1,2], 1=>fill(-1,5) )
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 We can extract the elements on any diagonal using the `diag` function. The main or central diagonal is numbered zero, above and to the right of that is positive, and below and to the left is negative.
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The `diag` function extracts the elements from a specified diagonal of a matrix.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -133,20 +113,16 @@ L
 ```{code-cell}
 U
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ```{index} pivoting
 ```
 
 If row pivoting is not used, the $\mathbf{L}$ and $\mathbf{U}$ factors preserve the lower and upper bandwidths of $\mathbf{A}$. This fact implies computational savings in both the factorization and the triangular substitutions because the zeros appear predictably and we can skip multiplication and addition with them. 
 
-```{proof:observation}
+```{prf:observation}
 The number of flops needed by LU factorization without pivoting is $O(b_u b_\ell n)$ when the upper and lower bandwidths are $b_u$ and $b_\ell$.
 ```
 
@@ -156,16 +132,12 @@ The number of flops needed by LU factorization without pivoting is $O(b_u b_\ell
 In order to exploit the savings offered by sparsity, we would need to make modifications to {numref}`Function %s <function-lufact>` and the triangular substitution routines. Alternatively, we can get Julia to take advantage of the structure automatically by converting the matrix into a special type called **sparse**. Sparse matrices are covered in more detail in Chapters 7 and 8.
 
 (demo-structure-timing)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 If we use an ordinary or dense matrix, then there's no way to exploit a banded structure such as tridiagonality.
 
@@ -185,20 +157,16 @@ lu(A);    # compile for sparse case
 ```
 
 You can also see above that far less memory was used in the sparse case.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Symmetric matrices
 
 ```{index} symmetric matrix
 ```
 
-::::{proof:definition} Symmetric matrix
+::::{prf:definition} Symmetric matrix
 A square matrix $\mathbf{A}$ satisfying $\mathbf{A}^T = \mathbf{A}$ is called **symmetric**.
 ::::
 
@@ -212,7 +180,7 @@ $$
 
 where $\mathbf{L}$ is unit lower triangular and $\mathbf{D}$ is diagonal. To find an algorithm for this factorization, we begin by generalizing {eq}`matrixouter` a bit without furnishing proof.
 
-::::{proof:theorem} Linear combination of outer products
+::::{prf:theorem} Linear combination of outer products
 Let $\mathbf{D}$ be an $n\times n$ diagonal matrix with diagonal elements $d_1,d_2,\ldots,d_n$, and suppose $\mathbf{A}$ and $\mathbf{B}$ are $n\times n$ as well. Write the columns of $\mathbf{A}$ as $\mathbf{a}_1,\dots,\mathbf{a}_n$ and the rows of $\mathbf{B}$ as $\mathbf{b}_1^T,\dots,\mathbf{b}_n^T$. Then
 
 ```{math}
@@ -224,16 +192,12 @@ Let $\mathbf{D}$ be an $n\times n$ diagonal matrix with diagonal elements $d_1,d
 Let's derive the LDL$^T$ factorization for a small example.
 
 (demo-structure-symm)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We begin with a symmetric $\mathbf{A}$.
 
@@ -278,17 +242,13 @@ We have arrived at the targeted factorization.
 ```{code-cell}
 A₁ - L*diagm(d)*L'
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 In practice we don't actually have to carry out any arithmetic in the upper triangle of $\mathbf{A}$ as we work, since the operations are always the mirror image of those in the lower triangle. As a result, it can be shown that LDL$^T$ factorization takes about half as much work as the standard LU.
 
-::::{proof:observation}
+::::{prf:observation}
 LDL$^T$ factorization on an $n \times n$ symmetric matrix, when successful, takes $\sim \frac{1}{3}n^3$ flops.
 ::::
 
@@ -311,7 +271,7 @@ Suppose that $\mathbf{A}$ is $n\times n$ and $\mathbf{x}\in\mathbb{R}^n$. Observ
 ```{index} see: SPD matrix; symmetric positive definite matrix
 ```
 
-::::{proof:definition} Symmetric positive definite matrix
+::::{prf:definition} Symmetric positive definite matrix
 A real $n\times n$ matrix $\mathbf{A}$ is called a **symmetric positive definite matrix** (or SPD matrix) if it is symmetric and, for all nonzero $\mathbf{x}\in\mathbb{R}^n$,
 
 ```{math}
@@ -358,7 +318,7 @@ Now we have $\mathbf{A}=\mathbf{L}\mathbf{D}^{1/2}\mathbf{D}^{1/2}\mathbf{L}^T= 
 ```{index} pivoting
 ```
 
-::::{proof:theorem} Cholesky factorization
+::::{prf:theorem} Cholesky factorization
 Any SPD matrix $\mathbf{A}$ may be factored as 
 
 $$
@@ -370,23 +330,19 @@ where $\mathbf{R}$ is an upper triangular matrix with positive diagonal elements
 
 While the unpivoted LDL$^T$ factorization is not stable and not even always possible, in the SPD case one can prove that pivoting is not necessary for the existence nor the stability of the Cholesky factorization. 
 
-::::{proof:observation}
+::::{prf:observation}
 Cholesky factorization of an $n \times n$ SPD matrix takes $\sim \frac{1}{3}n^3$ flops.
 ::::
 
 The speed and stability of the Cholesky factorization make it the top choice for solving linear systems with SPD matrices. As a side benefit, the Cholesky algorithm fails (in the form of an imaginary square root or division by zero) if and only if the matrix $\mathbf{A}$ is not positive definite. This is often the best way to test the definiteness of a symmetric matrix about which nothing else is known.
 
 (demo-structure-cholesky)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 
 A randomly chosen matrix is extremely unlikely to be symmetric. However, there is a simple way to symmetrize one.
@@ -405,25 +361,17 @@ B = A + A'
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Similarly, a random symmetric matrix is unlikely to be positive definite. The Cholesky algorithm always detects a non-PD matrix by quitting with an error.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The `cholesky` function computes a Cholesky factorization if possible, or throws an error for a non-positive-definite matrix. However, it does *not* check for symmetry.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -449,13 +397,9 @@ Here we validate the factorization:
 ```{code-cell}
 opnorm(R'*R - B) / opnorm(B)
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

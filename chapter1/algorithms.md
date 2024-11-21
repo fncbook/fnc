@@ -31,7 +31,7 @@ Even simple problems can be associated with multiple algorithms.
 ```{index} ! Horner's algorithm
 ```
 
-````{proof:example}
+````{prf:example}
 Suppose we want to find an algorithm that maps a given $x$ to the value of the polynomial $f(x)= 5x^3 + 4x^2 + 3x + 2$. Representing $x^2$ as $(x)(x)$, we can find it with one multiplication. We can then find $x^3=(x)(x^2)$ with one more multiplication. We can then apply all the coefficients (three more multiplications) and add all the terms (three additions), for a total of 8 arithmetic operations.
 
 There is a more efficient algorithm, however: organize the polynomial according to **Horner's algorithm**,
@@ -59,7 +59,7 @@ p(x) &= c_1 + c_2 x + \cdots + c_n x^{n-1} \\
 
 (function-horner)=
 
-````{proof:function} horner
+````{prf:function} horner
 
 **Horner's algorithm for evaluating a polynomial**
 
@@ -97,16 +97,12 @@ The `return` statement in line 13 terminates the function and specifies one or m
 ```
 
 (demo-algorithms-horner)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Here we show how to use {numref}`Function {number} <function-horner>` to evaluate a polynomial. It's not a part of core Julia, so you need to download and install this text's package once, and load it for each new Julia session. The download is done by the following lines.
 
@@ -125,25 +121,17 @@ Pkg.add(Pkg.PackageSpec(url="https://github.com/fncbook/FundamentalsNumericalCom
 :::{grid-item}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Once installed, any package can be loaded with the `using` command, as follows.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 Many Julia functions, including the ones in this text, are in packages that must be loaded via `using` or `import` in each session. Sometimes a `using` statement can take a few seconds or even minutes to execute, if packages have been installed or updated. 
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -158,27 +146,19 @@ using FundamentalsNumericalComputation
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 
 For convenience, this package also imports many other packages used throughout the book and makes them available as though you had run a `using` command for each of them. 
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 
 If you are not sure where a particular function is defined, you can run `methods` on the function name to find all its definitions.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -197,27 +177,19 @@ c = [-1,3,-3,1]
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 
 In order to avoid clashes between similarly named functions, Julia has boxed all the book functions into a **namespace** called `FNC`. We use this namespace whenever we invoke one of the functions.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
  
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 
 You must use the module name when a package is loaded by `import`, but when loaded via `using`, some functions may be available with no prefix.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -231,13 +203,9 @@ While the namespace does lead to a little extra typing, a nice side effect of us
 
 The multi-line string at the start of {numref}`Function {number} <function-horner>` is documentation, which we can access using `?FNC.horner`.
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 The quoted lines at the beginning of {numref}`Function {number} <function-horner>` are a documentation string. The function itself starts off with the keyword `function`, followed by a list of its input arguments. The first of these is presumed to be a vector, whose length can be obtained and whose individual components are accessed through square bracket notation. After the computation is finished, the `return` keyword indicates which value or values are to be returned to the caller.
 

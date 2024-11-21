@@ -99,7 +99,7 @@ In order for matrices $\mathbf{A}$ and $\mathbf{B}$ to be multiplied, it is nece
 
 Note that even if $\mathbf{A}\mathbf{B}$ is defined, $\mathbf{B}\mathbf{A}$ may not be. Moreover, even when both products are defined, they may not equal each other.
 
-:::{proof:observation}
+:::{prf:observation}
 Matrix multiplication is not commutative, i.e., the order of terms in a product matters to the result.
 :::
 
@@ -150,7 +150,7 @@ It is worth reinterpreting {eq}`scalarmatrixmult` at a vector level. If $\mathbf
 
 We say that $\mathbf{A}\mathbf{v}$ is a **linear combination** of the columns of $\mathbf{A}$.  
 
-::::{proof:observation}
+::::{prf:observation}
 Multiplying a matrix on the right by a column vector produces a linear combination of the columns of the matrix.
 ::::
 
@@ -178,7 +178,7 @@ There is a similar interpretation of multiplying $\mathbf{A}$ on the left by a r
   \end{split}
 ```
 
-::::{proof:observation}
+::::{prf:observation}
 Multiplying a matrix on the left by a row vector produces a linear combination of the rows of the matrix.
 ::::
 
@@ -210,13 +210,13 @@ Equivalently, if we write $\mathbf{A}$ in terms of rows, then
   \end{bmatrix}.
 ```
 
-::::{proof:observation}
+::::{prf:observation}
 A matrix-matrix product is a horizontal concatenation of matrix-vector products involving the columns of the right-hand matrix. Equivalently, a matrix-matrix product is also a vertical concatenation of vector-matrix products involving the rows of the left-hand matrix.
 ::::
 
 The representations of matrix multiplication are interchangeable; whichever one is most convenient at any moment can be used.
 
-````{proof:example}
+````{prf:example}
 Let
 ```{math}
 \mathbf{A} = \begin{bmatrix}
@@ -260,7 +260,7 @@ There is also an interpretation, presented in {numref}`section-linsys-lu`, of ma
 
 The **identity matrix** of size $n$, called $\mathbf{I}$ (or sometimes $\mathbf{I}_n$), is a diagonal $n\times n$ matrix with every diagonal entry equal to one. As can be seen from {eq}`mmhoriz` and {eq}`mmvert`, it satisfies $\mathbf{A}\mathbf{I}=\mathbf{A}$ for $\mathbf{A}\in\mathbb{C}^{m\times n}$ and $\mathbf{I}\mathbf{B}=\mathbf{B}$ for $\mathbf{B}\in\mathbb{C}^{n\times p}$. It is therefore the matrix analog of the number 1, the multiplicative identity.
 
-::::{proof:example}
+::::{prf:example}
 Let
   
 ```{math}
@@ -328,7 +328,7 @@ Given a square, $n\times n$ matrix $\mathbf{A}$ and  $n$-vectors $\mathbf{x}$ an
 The following facts are usually proved in any elementary text on linear algebra.
 
 (theorem-singularity)=
-````{proof:theorem} Linear algebra equivalence
+````{prf:theorem} Linear algebra equivalence
 The following statements are equivalent:
 
 1. $\mathbf{A}$ is nonsingular.

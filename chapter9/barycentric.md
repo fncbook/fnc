@@ -48,7 +48,7 @@ The following formula is the key to efficient and stable evaluation of a polynom
 ```
 
 (theorem-barycentric-formula)=
-::::{proof:theorem} Barycentric interpolation formula
+::::{prf:theorem} Barycentric interpolation formula
 Given points $(t_k,y_k)$ for $k=0,\ldots,n$ with all the $t_k$ distinct, the unique polynomial of degree $n$ or less that interpolates the points is
 
 :::{math}
@@ -57,7 +57,7 @@ Given points $(t_k,y_k)$ for $k=0,\ldots,n$ with all the $t_k$ distinct, the uni
 :::
 ::::
 
-::::{proof:proof}
+::::{prf:proof}
 The Lagrange cardinal polynomial {eq}`lagrange` can be written as
 
 :::{math}
@@ -84,7 +84,7 @@ This is solved for $\Phi(x)$ and put back into {eq}`bary1` to get {eq}`bary2`.
 Equation {eq}`bary2` is certainly an odd-looking way to write a polynomial! Indeed, it is technically undefined when $x$ equals one of the nodes, but in fact, $\lim_{x\to t_k} p(x) = y_k$, so a continuous extension to the nodes is justified. (See [Exercise 3](problem-barycentric-limit).) 
 
 (example-writeoutbary2)=
-::::{proof:example}
+::::{prf:example}
 Let us write out the barycentric formula for the interpolating polynomial for the quadratic case ($n=2$) for {numref}`Example %s <example-ClassicalLagrange>`.  The weights are computed from {eq}`baryweight`:
   
 :::{math}
@@ -124,7 +124,7 @@ In {numref}`Function {number} <function-polyinterp>` we give an implementation o
 ```
 
 (function-polyinterp)=
-````{proof:function} polyinterp
+````{prf:function} polyinterp
 **Polynomial interpolation by the barycentric formula**
 
 ```{code-block} julia
@@ -175,16 +175,12 @@ The return value is a function that evaluates the polynomial interpolant. Within
 Computing all $n+1$ weights in {numref}`Function {number} <function-polyinterp>` takes $O(n^2)$ operations. Fortunately, the weights depend only on the nodes, not the data, and once they are known, computing $p(x)$ at a particular value of $x$ takes just $O(n)$ operations.
 
 (demo-barycentric-example)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We show the barycentric formula for values from the function $\sin(e^{2x})$ at equally spaced nodes in $[0,1]$ with $n=3$ and $n=6$.
 
@@ -215,13 +211,9 @@ scatter!(t,y,color=:black,label="nodes")
 plot!(p,0,1,label="interpolant",title="Interpolation on 7 nodes")
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Stability
 

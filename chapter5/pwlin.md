@@ -30,7 +30,7 @@ FNC.init_format()
 
 Piecewise linear interpolation is simply a game of connect-the-dots. That is, the data points are joined pairwise by line segments.
 
-::::{proof:definition} Piecewise linear interpolant
+::::{prf:definition} Piecewise linear interpolant
 Given nodes $t_0 < t_1 < \cdots < t_n$, the **piecewise linear** interpolant $p(x)$ is given by
 
 ```{math}
@@ -73,7 +73,7 @@ for some choice of the coefficients $c_0,\ldots,c_n$. No smaller set of function
 
 (function-hatfun)=
 
-````{proof:function} hatfun
+````{prf:function} hatfun
 **Hat function/piecewise linear basis function**
 
 ```{code-block} julia
@@ -101,16 +101,12 @@ end
 ````
 
 (demo-pwlin-hat)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Let's define a set of four nodes (i.e., $n=3$ in our formulas).
 
@@ -126,25 +122,17 @@ t = [0, 0.55, 0.7, 1]
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 We plot the hat functions $H_0,\ldots,H_3$.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 Use `annotate!` to add text to a plot.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -159,13 +147,9 @@ for k in 0:3
 end
 plt
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Cardinality conditions
 
@@ -191,16 +175,12 @@ All candidate piecewise linear (PL) functions can be expressed as a linear combi
 ```
 
 (demo-pwlin-usage)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We generate a piecewise linear interpolant of $f(x)=e^{\sin 7x}$.
 
@@ -225,13 +205,9 @@ Now we create a callable function that will evaluate the piecewise linear interp
 p = FNC.plinterp(t,y)
 plot!(p,0,1,label="interpolant",title="PL interpolation")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 The resulting algorithmic simplicity is reflected in {numref}`Function {number} <function-plinterp>`. Take note that the output of {numref}`Function {number} <function-plinterp>` is itself a function, meant to be called with a single argument representing a value of $x$. Our mathematical viewpoint is that the result of an interpolation process is a function, and our codes reflect this.
 
@@ -239,7 +215,7 @@ A final appealing characteristic of the hat function basis is that it depends on
 
 (function-plinterp)=
 
-````{proof:function} plinterp
+````{prf:function} plinterp
 **Piecewise linear interpolation**
 
 ```{code-block} julia
@@ -266,7 +242,7 @@ The condition number bounds from {numref}`Theorem %s <theorem-interp-conditionin
 ```
 
 (theorem-plcondition)=
-````{proof:theorem} Conditioning of PL interpolation
+````{prf:theorem} Conditioning of PL interpolation
 The absolute condition number of piecewise linear interpolation in the infinity norm equals 1. More specifically, if $\mathcal{I}$ is the piecewise linear interpolation operator, then 
 
 ```{math}
@@ -277,7 +253,7 @@ The absolute condition number of piecewise linear interpolation in the infinity 
 (The norm on the left side is on functions, while the norm on the right side is on vectors.)
 ````
 
-````{proof:proof}
+````{prf:proof}
 
 By linearity,
 
@@ -299,7 +275,7 @@ Now suppose that $f$ is a "nice" function on an interval $[a,b]$ containing all 
 To make a simple statement, we will consider only the case of equally spaced nodes covering the interval. It turns out that piecewise linear interpolation converges at second order in the spacing of the nodes.
 
 (theorem-pwlin-converge)=
-````{proof:theorem} Convergence of PL interpolation
+````{prf:theorem} Convergence of PL interpolation
 Suppose that $f(x)$ has a continuous second derivative in $[a,b]$ (often expressed as $f\in C^2([a,b])$). Let $p_n(x)$ be the piecewise linear interpolant of $\bigl(t_i,f(t_i)\bigr)$ for $i=0,\ldots,n$, where $t_i=a+i h$ and $h=(b-a)/n$. Then
   
 ```{math}
@@ -319,7 +295,7 @@ We normally don't have access to $f''$, so the importance of {numref}`Theorem %s
 ```
 
 (definition-pwlin-algconv)=
-::::{proof:definition} Algebraic convergence
+::::{prf:definition} Algebraic convergence
 If an approximation has error that is $O(h^m)$ as $h\to 0$ for an integer $m$ and a discretization size parameter $h$, then we say the approximation has **algebraic convergence**. If the error is not also $O(h^{m+1})$, then $m$ is the **order of accuracy**.
 ::::
 
@@ -332,16 +308,12 @@ $$
 Hence a log-log graph of error versus $h$ should be approximately a straight line of slope $m$.
 
 (demo-pwlin-converge)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We measure the convergence rate for piecewise linear interpolation of $e^{\sin 7x}$ over $x \in [0,1]$.
 
@@ -372,13 +344,9 @@ plot!(h,order2,l=:dash,label=L"O(h^2)",xflip=true,
     xaxis=(:log10,L"h"),yaxis=(:log10,L"|| f-p\, ||_\infty"),
     title="Convergence of PL interpolation")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

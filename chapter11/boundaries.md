@@ -84,7 +84,7 @@ Then Equation {eq}`parabolicBC` takes the form
 Given a value of $\mathbf{v}$ for the interior nodes, Equation {eq}`mol-bcsystem` may be considered a system of two equations for the unknown boundary values $u_0$ and $u_m$. This system will be a linear one for Dirichlet, Neumann, and Robin conditions. 
 
 (example-boundaries-bs1)=
-::::{proof:example}
+::::{prf:example}
 Recall the Black–Scholes PDE {eq}`bspdefor-t`,
   
 $$
@@ -117,7 +117,7 @@ $$
 ::::
 
 (example-boundaries-bs2)=
-::::{proof:example}
+::::{prf:example}
 Returning to {numref}`Example {number} <example-boundaries-bs1>`, suppose we use a global Chebyshev differentiation matrix for $\mathbf{D}_x$ in {eq}`mol-bcsystem`. Then $u_0=0$ and
 
 $$ 
@@ -148,7 +148,7 @@ $$
 The steps to evaluate $\mathbf{f}$ in {eq}`mol-interior` now go as follows. 
 
 (algorithm-boundaries-timeder)=
-::::{proof:algorithm} Time derivative for parabolic PDE
+::::{prf:algorithm} Time derivative for parabolic PDE
 Given a value of $t$ and $\mathbf{v}$,
 
 1. Use {eq}`mol-bcsystem` to solve for $u_0$ and $u_m$.
@@ -160,7 +160,7 @@ Given a value of $t$ and $\mathbf{v}$,
 Our full implementation of the method of lines for {eq}`parabolicPDE`--{eq}`parabolicBC` is given in {numref}`Function {number} <function-parabolic>`. It uses {numref}`Function {number} <function-diffcheb>` (`diffcheb`) to set up a Chebyshev discretization. The nested function `extend` performs steps 1--2 of {numref}`Algorithm {number} <algorithm-boundaries-timeder>` by calling {numref}`Function {number} <function-levenberg>` (`levenberg`) to solve the potentially nonlinear system {eq}`mol-bcsystem`. Then it sets up and solves an IVP, adding steps 3--4 of {numref}`Algorithm {number} <algorithm-boundaries-timeder>` within the `ode!` function. Finally, it returns the node vector `x` and a function of `t` that applies `extend` to $\mathbf{v}(t)$ to compute $\mathbf{u}(t)$. 
 
 (function-parabolic)=
-````{proof:function} parabolic
+````{prf:function} parabolic
 **Solution of parabolic PDEs by the method of lines**
 ```{code-block} julia
 :lineno-start: 1
@@ -216,16 +216,12 @@ In many specific problems, `extend` does more work than is truly necessary. Diri
 [^multidisp]: An important advanced feature of Julia is *multiple dispatch*, which allows you to make multiple definitions of a function for different sequences and types of input arguments. Thus, addition to the original {numref}`Function {number} <function-parabolic>`, we could also define a modified version in which `g₁` and `g₂` are of numeric type for the Dirichlet case. The correct version would be chosen (dispatched) depending on how the boundary conditions were supplied by the caller, allowing us speed when possible and generality as a fallback.
 
 (demo-boundaries-heat)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Let's solve the heat equation on $[-1,1]$. First, we define the PDE $u_t=u_{xx}$ and Dirichlet boundary conditions $u(-1,t)=0$, $u(1,t)=2$.
 
@@ -262,25 +258,17 @@ anim = @animate for t in range(0,0.75,length=201)
 end
 mp4(anim,"boundaries-heat.mp4",fps=30)
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 (demo-boundaries-bratu)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We solve a heat equation with a nonlinear source term,
 
@@ -307,27 +295,19 @@ anim = @animate for t in range(0,0.1,length=101)
 end
 mp4(anim,"boundaries-source.mp4",fps=30)
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 Finally, we return to the example of the Black–Scholes equation from {numref}`section-diffusion-blackscholes`. 
 
 (demo-boundaries-bs)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Here is the Black–Scholes PDE, with a homogeneous Dirichlet condition at zero stock price and a nonhomogeneous Neumann condition at the truncated right boundary.
 
@@ -354,13 +334,9 @@ mp4(anim,"boundaries-bs.mp4",fps=30)
 ```
 
 Recall that $u$ is the value of the call option, and time runs backward from the strike time. The longer the horizon, the more value the option has due to anticipated growth in the stock price.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ## Exercises

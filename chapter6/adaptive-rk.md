@@ -65,7 +65,7 @@ Experts have different recommendations about whether to use {eq}`adaptRKlocal` o
 We now have an outline of an algorithm.
 
 (algorithm-adaptive-adapt)=
-::::{proof:algorithm} Adaptive step size for an IVP
+::::{prf:algorithm} Adaptive step size for an IVP
 Given a solution estimate $u_i$ at $t=t_i$, and a step size $h$, do the following:
 1. Produce estimates ${u}_{i+1}$ and $\tilde{u}_{i+1}$, and estimate the error.
 2. If the error is small enough, adopt $\tilde{u}_{i+1}$ as the solution value at $t=t_i+h$, then increment $i$.
@@ -101,7 +101,7 @@ The top part of the table describes four stages in the usual RK fashion. The las
 Our implementation of an embedded second/third-order (RK23) code is given in {numref}`Function {number} <function-rk23>`. 
 
 (function-rk23)=
-````{proof:function} rk23
+````{prf:function} rk23
 **Adaptive IVP solver based on embedded RK formulas**
 
 ```{code-block} julia
@@ -167,16 +167,12 @@ While {eq}`bs23` calls for four stages to find the paired second- and third-orde
 ::::
 
 (demo-adapt-basic)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Let's run adaptive RK on  $u'=e^{t-u\sin u}$.
 
@@ -210,25 +206,17 @@ println( "average step size = $(sum(Δt)/(length(t)-1))" )
 ```
 
 We took fewer steps by a factor of almost 1000! Even accounting for the extra stage per step and the occasional rejected step, the savings are clear.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 (demo-adapt-sing)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 In {numref}`Demo %s <demo-basics-sing>` we saw an IVP that appears to blow up in a finite amount of time. Because the solution increases so rapidly as it approaches the blowup, adaptive stepping is required even to get close. 
 
@@ -248,13 +236,9 @@ tf = t[end]
 vline!([tf],l=:dash)
 annotate!(tf,1e5,latexstring(@sprintf("t = %.6f ",tf)),:right)
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ```{index} stiff differential equation
 ```

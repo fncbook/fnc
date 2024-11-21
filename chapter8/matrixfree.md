@@ -75,16 +75,12 @@ using the symmetry of $\mathbf{C}$. So we can describe blur in both directions a
 for a positive integer $k$.
 
 (demo-matrixfree-blur)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We use a readily available test image.
 
@@ -112,13 +108,9 @@ blur = X -> B^12 * X * C^12;
 Z = blur(X)
 plot(Gray.(Z),title="Blurred image")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ## Deblurring
@@ -146,16 +138,12 @@ Instead, given any vector $\mathbf{u}$ we can compute $\mathbf{v}=\mathbf{A}\mat
 The following example shows how to put these ideas into practice with MINRES.
 
 (demo-matrixfree-deblur)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 
 We repeat the earlier process to blur an original image $\mathbf{X}$ to get $\mathbf{Z}$. 
@@ -198,25 +186,17 @@ T = LinearMap(x -> vec(blur(unvec(x))),m*n);
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 The blurring operators are symmetric, so we apply `minres` to the composite blurring transformation `T`.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The function `clamp01` in `Images` restricts values to be in the interval $[0,1]$.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -227,13 +207,9 @@ Y = unvec( clamp01.(y) )
 plot(Gray.(X),layout=2,title="Original")
 plot!(Gray.(Y),subplot=2,title="Deblurred")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ## Exercises

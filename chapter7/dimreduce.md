@@ -68,14 +68,14 @@ where $\mathbf{U}_k$ and $\mathbf{V}_k$ are the first $k$ columns of $\mathbf{U}
 The rank of a sum of matrices is always less than or equal to the sum of the ranks, so $\mathbf{A}_k$ is a rank-$k$ approximation to $\mathbf{A}$. It turns out that $\mathbf{A}_k$ is the *best* rank-$k$ approximation of $\mathbf{A}$, as measured in the matrix 2-norm.
 
 (theorem-best-rank-k)=
-::::{proof:theorem}
+::::{prf:theorem}
 Suppose $\mathbf{A}$ has rank $r$ and let $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^T$ be an SVD. Let $\mathbf{A}_k$ be as in {eq}`svdlowrank` for $1\le k < r$. Then
 
 1. $\| \mathbf{A} - \mathbf{A}_k \|_2 = \sigma_{k+1}, \quad k=1,\ldots,r-1$, and
 2. If the rank of $\mathbf{B}$ is $k$ or less, then $\| \mathbf{A}-\mathbf{B} \|_2\ge \sigma_{k+1}$.
 ::::
 
-::::{proof:proof}
+::::{prf:proof}
 (part 1 only) Note that {eq}`svdlowrank` is identical to {eq}`svdsum` with $\sigma_{k+1},\ldots,\sigma_r$ all set to zero. This implies that
   
 ```{math}
@@ -94,16 +94,12 @@ If the singular values of $\mathbf{A}$ decrease sufficiently rapidly, then $\mat
 ```
 
 (demo-dimreduce-hello)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We make an image from some text, then reload it as a matrix.
 
@@ -143,13 +139,9 @@ Consider how little data is needed to reconstruct these images. For rank-9, for 
 m,n = size(A)
 compression = m*n / (9*(m+n+1))
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ## Capturing major trends
@@ -168,16 +160,12 @@ Clearly $0\le \tau_k \le 1$ and $\tau_k$ is non-decreasing as a function of $k$.
 [^expvar]: In statistics this quantity may be interpreted as the fraction of explained variance.
 
 (demo-dimreduce-voting)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 This matrix describes the votes on bills in the 111th session of the United States Senate. (The data set was obtained from [https://voteview.com].) Each row is one senator, and each column is a vote item.
 
@@ -224,13 +212,9 @@ scatter(x1[Dem],x2[Dem],color=:blue,label="D",
 scatter!(x1[Rep],x2[Rep],color=:red,label="R")
 scatter!(x1[Ind],x2[Ind],color=:yellow,label="I")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 Not all data sets can be reduced effectively to a small number of dimensions, but as {numref}`Demo {number} <demo-dimreduce-voting>` illustrates, in some cases reduction reveals information that corresponds to real-world understanding.
 

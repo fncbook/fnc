@@ -26,7 +26,7 @@ FNC.init_format()
 ```
 Consider the heat equation $u_t=u_{xx}+u_{yy}$. After a long time, the distribution of temperature will stop changing. This steady-state solution must satisfy the PDE $u_{xx}+u_{yy}=0$, which is our third and final canonical PDE.
 
-::::{proof:definition} Laplace and Poisson equations
+::::{prf:definition} Laplace and Poisson equations
 The **Poisson equation** in two dimensions is
 
 :::{math}
@@ -64,7 +64,7 @@ where $\mathbf{F}=\mtx(f)$. Equation {eq}`poissylvester`, with an unknown matrix
 ```{index} ! Kronecker product
 ```
 (definition-laplace-kron)=
-::::{proof:definition} Kronecker product
+::::{prf:definition} Kronecker product
 Let $\mathbf{A}$ be $m\times n$ and $\mathbf{B}$ be $p\times q$. The **Kronecker product** $\mathbf{A}\otimes \mathbf{B}$ is the $mp\times nq$ matrix given by
 
 :::{math}
@@ -80,16 +80,12 @@ Let $\mathbf{A}$ be $m\times n$ and $\mathbf{B}$ be $p\times q$. The **Kronecker
 ::::
 
 (demo-laplace-kron)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 ```{code-cell}
 A = [1 2; -2 0]
@@ -115,18 +111,14 @@ But `kron` is a built-in function.
 kron(A,B)
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 The Kronecker product obeys several natural-looking identities:
 
 (theorem-laplace-kron)=
-::::{proof:theorem} Kronecker product identities
+::::{prf:theorem} Kronecker product identities
 Given matrices for which the non-Kronecker operations make sense, the following hold.
 
 1. $\mathbf{A}\otimes (\mathbf{B} + \mathbf{C})   = \mathbf{A}\otimes \mathbf{B} + \mathbf{A}\otimes \mathbf{C}$  
@@ -144,7 +136,7 @@ For the vec operation defined in {numref}`Definition {number} <definition-diffad
 :::
 ::::
 
-::::{proof:proof}
+::::{prf:proof}
 (Partial proof.) These all boil down to algebraic manipulations. For instance, for item 5, let $\mathbf{Z}=\mathbf{A}^{-1}$. Then
 
 $$
@@ -204,16 +196,12 @@ Hence from $\mathbf{A}$ we should subtract away its $i$th row and add $\mathbf{e
 where $\mathbf{I}_B$ is a matrix with zeros everywhere except for ones at $(i,i)$ for all $i\in B$. A similar expression can be derived for the modification of $\mathbf{b}$. However, rather than implementing a literal interpretation of {eq}`pois2bcrep`, the changes to $\mathbf{A}$ and $\mathbf{b}$ are made more easily through logical indexing. A small example is more illuminating than further description.
 
 (demo-laplace-fd)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 
 Here is a forcing function for Poisson's equation.
@@ -296,13 +284,9 @@ u = A\b
 U = unvec(u)
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ## Implementation
@@ -310,7 +294,7 @@ U = unvec(u)
 {numref}`Function {number} <function-poissonfd>` is our code to solve the Poisson equation.
 
 (function-poissonfd)=
-````{proof:function} poissonfd
+````{prf:function} poissonfd
 **Solve Poisson's equation by finite differences**
 ```{code-block} julia
 :lineno-start: 1
@@ -358,16 +342,12 @@ end
 We use {numref}`Demo %s <demo-laplace-fd>` as a template: create the linear system, modify it for the boundary conditions, solve it using backslash, and reshape to get a grid function. The matrix is $N=(m+1)(n+1)$ on each side and very sparse, so we take care to use sparse matrices in the code to exploit that structure. There is a small but important change from {numref}`Demo %s <demo-laplace-fd>`: the boundary conditions are rescaled to read $\sigma u(x,y)=\sigma g(x,y)$, where $\sigma$ is the largest element of a row of $\mathbf{A}$. This tweak improves the condition number of the final matrix.
 
 (demo-laplace-poisson)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We can engineer an example by choosing the solution first. Let $u(x,y)=\sin(3xy-4y)$. Then one can derive $f=\Delta u = -\sin(3xy-4y)\bigl(9y^2+(3x-4)^2\bigr)$ for the forcing function and use $g=u$ on the boundary.
 
@@ -406,13 +386,9 @@ contour(x,y,error',levels=17,aspect_ratio=1,
 plot!([0,1,1,0,0],[0,0,2,2,0],l=(2,:black))
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Accuracy and efficiency
 

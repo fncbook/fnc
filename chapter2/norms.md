@@ -43,7 +43,7 @@ For vectors we use a **norm** $\| \cdot \|$, which is a function from $\real^n$ 
 The last of these properties is known as the **triangle inequality**. It is natural to interpret $\| \mathbf{x} \|=\| \mathbf{x}-\boldsymbol{0} \|$ as the distance from $\mathbf{x}$ to the origin and $\| \mathbf{x}-\mathbf{y} \|$ as the distance from $\mathbf{x}$ to $\mathbf{y}$. We will be using only the three most important vector norms, defined as follows.
 
 (definition-norms-vectornorms)=
-:::{proof:definition} Common vector norms
+:::{prf:definition} Common vector norms
 **2-norm:** $\quad \| \mathbf{x} \|_2 = \left( \displaystyle \sum_{i=1}^n |x_i|^2 \right)^{\frac{1}{2}} = \sqrt{\rule[1mm]{0pt}{0.75em}\mathbf{x}^T \mathbf{x}}$
 
 **$\infty$-norm** or **max-norm:** $ \quad \| \mathbf{x} \|_\infty = \displaystyle \max_{i=1,\dots,n} |x_i|$
@@ -66,16 +66,12 @@ In any norm, we refer to a vector $\mathbf{x}$ satisfying $\| \mathbf{x} \|=1$ a
 as writing a nonzero vector $\mathbf{v}$ in magnitude–direction form. 
 
 (demo-norms-vector)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Given the vector $\mathbf{x}= \bigl[ 2 ,\, -3 ,\, 1 ,\, -1 \bigr]^T$, we have
 \begin{align*}
@@ -110,13 +106,9 @@ There is also a `normalize` function that divides a vector by its norm, making i
 ```{code-cell}
 normalize(x,Inf)
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 :::{note}
 Most of the time, when just $\| \mathbf{x} \|$ is written, the 2-norm is implied. However, in this section we use it to mean a generic, unspecified vector norm.
@@ -132,7 +124,7 @@ We say that a sequence of vectors $\mathbf{x}_1,\mathbf{x}_2,\ldots$ **converges
 By definition, a sequence is convergent in the infinity norm if and only if it converges componentwise. The same is true for a convergent sequence in *any* norm.
 
 (theorem-normequivalence)=
-```{proof:theorem} Norm equivalence
+```{prf:theorem} Norm equivalence
   In a finite-dimensional space, convergence in any norm implies convergence in all norms.
 ```
 
@@ -161,7 +153,7 @@ However, it often proves to be more useful to define matrix norms differently.
 ```
 
 (definition-norms-matrix)=
-::::{proof:definition} Induced matrix norm
+::::{prf:definition} Induced matrix norm
 Given a vector norm $\| \cdot \|_p$, we define an **induced matrix norm** for any $m\times n$ matrix $\mathbf{A}$ as
 
 ```{math}
@@ -183,7 +175,7 @@ The definition of an induced matrix norm may seem oddly complicated. However, th
 
 
 (theorem-norms-inequalities)=
-````{proof:theorem} Norm inequalities
+````{prf:theorem} Norm inequalities
 Let $\| \cdot \|$ designate a matrix norm and the vector norm that induced it. Then for all matrices and vectors of compatible sizes,
 
 ```{math}
@@ -206,7 +198,7 @@ For a square matrix $\mathbf{A}$,
 ```
 ````
 
-````{proof:proof}
+````{prf:proof}
 
 The first result is trivial if $\mathbf{x}=\boldsymbol{0}$; otherwise,
 
@@ -236,7 +228,7 @@ One can interpret the definition of an induced norm geometrically.  Each vector 
 
 In addition, two of the vector norms we have encountered lead to equivalent formulas that are easy to compute from the matrix elements.
 
-::::{proof:theorem} Matrix $\infty$-norm and 1-norm
+::::{prf:theorem} Matrix $\infty$-norm and 1-norm
 
 ```{math}
 :label: mxinfnorm
@@ -253,16 +245,12 @@ A mnemonic for these is that the $\infty$ symbol extends horizontally while the 
 
 
 (demo-norms-matrix)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 
 ```{code-cell}
@@ -299,27 +287,19 @@ onenorm = opnorm(A,1)
 :::{grid-item}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 According to {eq}`mxonenorm`, the matrix 1-norm is equivalent to the maximum of the sums down the columns (in absolute value).
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 Use `sum` to sum along a dimension of a matrix. You can also sum over the entire matrix by omitting the `dims` argument.
 
 The `maximum` and `minimum` functions also work along one dimension or over an entire matrix. To get both values at once, use `extrema`.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -344,25 +324,17 @@ maximum( sum(abs.(A),dims=2) )
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Next we illustrate a geometric interpretation of the 2-norm. First, we will sample a lot of vectors on the unit circle in $\mathbb{R}^2$.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 You can use functions as values, e.g., as elements of a vector. 
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -401,13 +373,9 @@ That ellipse just touches the circle of radius $\|\mathbf{A}\|_2$.
 plot!(twonorm*x[1,:],twonorm*x[2,:],subplot=2,l=:dash)
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 The geometric interpretation of the matrix 2-norm shown in {numref}`Demo %s <demo-norms-matrix>`, as the radius of the smallest circle (or sphere or hypersphere in higher dimensions) containing the images of all unit vectors, is not a practical means of computing the norm. Nor is there a simple formula like {eq}`mxinfnorm` or {eq}`mxonenorm` for it. The computation of the matrix 2-norm is discussed further in Chapter 7.
 

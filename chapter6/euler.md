@@ -61,7 +61,7 @@ We can connect this derivative to the differential equation by following the mod
 We could view the left-hand side as a forward-difference approximation to $u'(t)$ at $t=t_i$. We can rearrange the equation to get **Euler's method**, our first method for IVPs.
 
 (algorithm-ivp-euler)=
-::::{proof:algorithm} Euler's method for an IVP
+::::{prf:algorithm} Euler's method for an IVP
 Given the IVP $u'=f(t,u)$, $u(a)=u_0$, and the nodes {eq}`nodes-euler`, iteratively compute the sequence
 
 ```{math}
@@ -76,7 +76,7 @@ Euler's method marches ahead in $t$, obtaining the solution at a new time level 
 A basic implementation of Euler's method is shown in {numref}`Function {number} <function-euler>`. It expects the IVP to be specified as an `ODEProblem`, as in {numref}`Demo {number} <demo-basics-first>`.  The output of {numref}`Function {number} <function-euler>` is a vector of the nodes and a vector of approximate solution values at those nodes.
 
 (function-euler)=
-````{proof:function} euler
+````{prf:function} euler
 **Euler's method for an initial-value problem**
 
 ```{code-block} julia
@@ -132,7 +132,7 @@ We now introduce some formalities.
 ```
 
 (definition-euler-onestep)=
-::::{proof:definition} One-step IVP method
+::::{prf:definition} One-step IVP method
 A **one-step method** for the IVP {eq}`euler-ivp` is a formula of the form
 
 ```{math}
@@ -149,7 +149,7 @@ Euler's method is the particular case of {eq}`onestepODE` with $\phi(t,u,h) = f(
 In close analogy with {numref}`section-localapprox-fd-converge`, we define truncation error as the residual of {eq}`onestepODE` when the exact solution is inserted. 
 
 (definition-euler-lte)=
-::::{proof:definition} Truncation error of a one-step IVP method
+::::{prf:definition} Truncation error of a one-step IVP method
 The **local truncation error** (LTE) of the one-step method {eq}`onestepODE` is
 
 ```{math}
@@ -162,7 +162,7 @@ The method is called **consistent** if $\tau_{i+1}(h)\to 0$ as $h\to 0$.
 
 The following follows immediately from the definitions.
 
-:::{proof:lemma}
+:::{prf:lemma}
 If $\phi(t,u,0)=f(t,u)$ for any function $u$, then the method {eq}`onestepODE` is consistent.
 ::::
 
@@ -174,7 +174,7 @@ While the local truncation error is straightforward to calculate from its defini
 ```
 
 (definition-euler-global)=
-::::{proof:definition} Global error of an IVP solution
+::::{prf:definition} Global error of an IVP solution
 Given an IVP whose exact solution is $\hat{u}(t)$, the **global error** of approximate solution values $u_0,u_1,\ldots,u_n$ at times $t_i$ in {eq}`nodes-euler` is the vector $[ \hat{u}(t_i) - u_i ]_{\,i=0,\ldots,n}$.
 ::::
 
@@ -187,7 +187,7 @@ By our definitions, the local error in stepping from $t_i$ to $t_{i+1}$ is $h\ta
 However, global error is not as simple as a sum of local errors. As explained in {numref}`Theorem {number} <theorem-depIC>` and illustrated in {numref}`Demo %s <demo-basics-cond>`, each step causes a perturbation of the solution that can grow as $t$ advances. Thus, we have to account for the flow evolution of individual step truncation errors as well as their mere accumulation. That is the subject of the following theorem.
 
 (theorem-euler-onestepGTE)=
-````{proof:theorem}
+````{prf:theorem}
 Suppose that the unit local truncation error of the one-step method {eq}`onestepODE` satisfies
   
 ```{math}
@@ -213,7 +213,7 @@ for all $t\in[a,b]$, all $u$, and all $h>0$. Then the global error satisfies
 as $h\rightarrow 0$.
 ````
 
-````{proof:proof}
+````{prf:proof}
 Define the global error sequence $ϵ_i=\hat{u}(t_i)-u_i$. Using {eq}`onestepODE`, we obtain
   
 ```{math}
@@ -274,23 +274,19 @@ We observe that $1+x \le e^x$ for $x\ge 0$ (see [Exercise 5](problem-expdominate
 The theorem justifies one more general definition.
 
 (definition-euler-ooa)=
-::::{proof:definition} Order of accuracy of a one-step IVP method
+::::{prf:definition} Order of accuracy of a one-step IVP method
 If the local truncation error of the one-step method {eq}`onestepODE` satisfies $\tau_{i+1}(h)=O(h^p)$ for a positive integer $p$, then $p$ is the **order of accuracy** of the formula.
 ::::
 
 We could restate {numref}`Theorem {number} <theorem-euler-onestepGTE>` as saying that the global error has the same order of accuracy as the LTE. Note, however, that the $O(h^p)$ convergence hides a leading constant that grows exponentially in time. When the time interval is bounded as $h\to 0$, this does not interfere with the conclusion, but the behavior as $t\to\infty$ contains no such guarantee.
 
 (demo-euler-converge)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We consider the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
 
@@ -349,13 +345,9 @@ plot(n,err,m=:o,label="results",
 # Add line for perfect 1st order.
 plot!(n,0.05*(n/n[1]).^(-1),l=:dash,label=L"O(n^{-1})")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 Euler's method is the ancestor of the two major families of IVP methods presented in this chapter. Before we describe them, though, we generalize the initial-value problem itself in a crucial way.
 ## Exercises

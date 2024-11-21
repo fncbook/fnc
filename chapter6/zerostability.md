@@ -27,16 +27,12 @@ FNC.init_format()
 For one-step methods such as Runge–Kutta, {numref}`Theorem %s <theorem-euler-onestepGTE>` guarantees that the method converges and that the global error is of the same order as the local truncation error. For multistep methods, however, a new wrinkle is introduced. 
 
 (demo-zs-LIAF)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 It is straightforward to check that the two-step method LIAF, defined by
 
@@ -78,13 +74,9 @@ plot(t,abs.(u),m=3,label="",
 ```
 
 It's clear that the solution is growing exponentially in time.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 The source of the exponential growth in {numref}`Demo %s <demo-zs-LIAF>` is not hard to identify. Recall that we can rewrite {eq}`LIAF` as $\rho(\mathcal{Z})u_{i-1}=h \sigma(\mathcal{Z})u_{i-1}$ using the forward shift operator $\mathcal{Z}$:
 
@@ -130,7 +122,7 @@ Here is the crucial property that LIAF lacks.
 ```{index} ! zero-stability
 ```
 
-::::{proof:definition} Zero-stability of a multistep IVP method
+::::{prf:definition} Zero-stability of a multistep IVP method
 A multistep method is **zero-stable** if, as $h\to 0$, every numerical solution produced by the method remains bounded throughout $a\le t_i \le b$.
 ::::
 
@@ -139,11 +131,11 @@ Without zero-stability, any truncation or roundoff error will get exponentially 
 The following theorem concisely summarizes when we can expect zero-stability.
 
 (theorem-zerostability-rootcondition)=
-````{proof:theorem} Root condition
+````{prf:theorem} Root condition
 A linear multistep method is zero-stable if and only if every root $r$ of the generating polynomial $\rho(z)$ satisfies $|r|\le 1$, and any root $r$ with $|r|=1$ is simple.
 ````
 
-````{proof:proof}
+````{prf:proof}
 (Partial proof, when all roots of $\rho$ are simple.) As explained above, the values produced by the numerical method approach solutions of the difference equation $\rho(\mathcal{Z})u_{i-k+1}=0$. We consider only the case where the roots $r_1,\ldots,r_k$ of $\rho(z)$. Then $u_i=(r_j)^i$ is a solution of $\rho(\mathcal{Z})u_i=0$ for each $j=1,\ldots,k$. By linearity,
 
 ```{math}
@@ -161,11 +153,11 @@ independently of $h$ and $i$. This proves zero-stability. Conversely, if some $|
 
 A nonsimple root of $\rho$ introduces a modification of {eq}`zsansatz` that is considered in [Exercise 4](problem-zerostability-nonsimple).
 
-````{proof:example}
+````{prf:example}
 A $k$-step Adams method has $\rho(z) = z^k - z^{k-1} = z^{k-1}(z-1)$. Hence 1 is a simple root and 0 is a root of multiplicity $k-1$. So the Adams methods are all stable.
 ````
 
-::::{proof:example}
+::::{prf:example}
 The method $u_{i+1} = 2u_i - u_{i-1} + h(f_i-f_{i-1})$ is first-order accurate. But $\rho(z)=(z-1)^2$, which has a double root at $z=1$, so it is not zero-stable.
 ::::
 
@@ -176,7 +168,7 @@ The method $u_{i+1} = 2u_i - u_{i-1} + h(f_i-f_{i-1})$ is first-order accurate. 
 It turns out that lacking zero-stability is the only thing that can go wrong for a consistent multistep method. 
 
 (theorem-dahlequiv)=
-```{proof:theorem} Dahlquist equivalence
+```{prf:theorem} Dahlquist equivalence
 A linear multistep method converges as $h\to 0$ if and only if it is consistent and zero-stable.
 ```
 
@@ -185,7 +177,7 @@ The Dahlquist equivalence theorem is one of the most important and celebrated in
 You may have noticed that the Adams and BD formulas use only about half of the available data from the past $k$ steps, i.e., they have many possible coefficients set to zero. For instance, a $k$-step AB method uses only the $f_j$-values and has order $k$. The order could be made higher by also using $u_j$-values, like the LIAF method does for $k=2$. Also like the LIAF method, however, such attempts are doomed by instability.
 
 (theorem-zerostability-dahlquist)=
-````{proof:theorem} First Dahlquist stability barrier
+````{prf:theorem} First Dahlquist stability barrier
 The order of accuracy $p$ of a stable $k$-step linear multistep method satisfies
 
 ```{math}

@@ -27,7 +27,7 @@ FNC.init_format()
 The United States carries out a census of its population every 10 years. Suppose we want to know the population at times in between the census years, or to estimate future populations. One technique is to find a polynomial that passes through all of the data points.[^census]
 
 (definition-polyinterp-polyinterp)=
-::::{proof:definition} Polynomial interpolation
+::::{prf:definition} Polynomial interpolation
 Given $n$ points $(t_1,y_1),\ldots,(t_n,y_n)$, where the $t_i$ are all distinct, the **polynomial interpolation** problem is to find a polynomial $p$ of degree less than $n$ such that $p(t_i)=y_i$ for all $i$.
 ::::
 
@@ -90,7 +90,7 @@ These equations form a linear system for the coefficients $c_i$:
 or more simply, $\mathbf{V} \mathbf{c} = \mathbf{y}$. The matrix $\mathbf{V}$ is of a
 special type.
 
-::::{proof:definition} Vandermonde matrix
+::::{prf:definition} Vandermonde matrix
 Given distinct values $t_1,\ldots,t_n$, a **Vandermonde matrix** for these values is the $n\times n$ matrix appearing in {eq}`vandersystem`.
 ::::
 
@@ -107,16 +107,12 @@ that is needed to run some of the statements.
 ````
 
 (demo-interp-vander)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We create two vectors for data about the population of China. The first has the years of census data and the other has the population, in millions of people.
 
@@ -137,25 +133,17 @@ pop = [1008.18, 1262.64, 1337.82, 1374.62];
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 It's convenient to measure time in years since 1980. We use `.-` to subtract a scalar from every element of a vector. We will also use a floating-point value in the subtraction, so the result is also in double precision.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
  
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 A dotted operator such as `.-` or `.*` acts elementwise, broadcasting scalar values to match up with elements of an array.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -173,26 +161,18 @@ y = pop;
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Now we have four data points $(t_1,y_1),\dots,(t_4,y_4)$, so $n=4$ and we seek an interpolating cubic polynomial. We construct the associated Vandermonde matrix:
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
  
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 
 An expression inside square brackets and ending with a `for` statement is called a **comprehension**. It's often an easy and readable way to construct vectors and matrices. 
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -209,24 +189,16 @@ V = [ t[i]^j for i=1:4, j=0:3 ]
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 To solve for the vector of polynomial coefficients, we use a backslash to solve the linear system:
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 A **backslash** `\` is used to solve a linear system of equations.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -248,25 +220,17 @@ Using floating-point arithmetic, it is not realistic to expect exact equality of
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 By our definitions, the elements of `c` are coefficients in ascending-degree order for the interpolating polynomial. We can use the polynomial to estimate the population of China in 2005:
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The `Polynomials` package has functions to make working with polynomials easy and efficient.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -286,25 +250,17 @@ The official population value for 2005 was 1303.72, so our result is rather good
 :::{grid-item}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 We can visualize the interpolation process. First, we plot the data as points.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 7
  
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The `scatter` function creates a scatter plot of points; you can specify a line connecting the points as well.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -326,27 +282,19 @@ scatter(t,y, label="actual", legend=:topleft,
 :::{grid-item}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 We want to superimpose a plot of the polynomial. We do that by evaluating it at a vector of points in the interval. The dot after the name of the polynomial is a universal way to apply a function to every element of an array, a technique known as **broadcasting**.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The `range` function constructs evenly spaced values given the endpoints and either the number of values, or the step size between them.
 
 Adding a dot to the end of a function name causes it to be broadcast, i.e., applied to every element of a vector or matrix.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -367,27 +315,19 @@ foreach(println,yy[1:4])
 :::{grid-item}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Now we use `plot!` to add to the current plot, rather than replacing it.
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The `plot` function plots lines connecting the given $x$ and $y$ values; you can also specify markers at the points.
 
 By convention, functions whose names end with the bang `!` change the value or state of something, in addition to possibly returning output.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -395,13 +335,9 @@ By convention, functions whose names end with the bang `!` change the value or s
 plot!(tt,yy,label="interpolant")
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

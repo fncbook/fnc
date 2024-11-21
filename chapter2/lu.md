@@ -41,7 +41,7 @@ u_1 v_1 & u_1 v_2 & \cdots & u_1 v_n \\u_2 v_1 & u_2 v_2 & \cdots & u_2 v_n \\ \
 We illustrate the connection of outer products to matrix multiplication by a small example.
 
 (example-lu-outer)=
-::::{proof:example}
+::::{prf:example}
 According to the usual definition of matrix multiplication,
 
 $$
@@ -97,7 +97,7 @@ Note that the vectors here are columns of the left-hand matrix and rows of the r
 
 It is not hard to derive the following generalization of {numref}`Example {number} <example-lu-outer>` to all matrix products. 
 
-::::{proof:theorem} Matrix multiplication by outer products
+::::{prf:theorem} Matrix multiplication by outer products
 Write the columns of $\mathbf{A}$ as $\mathbf{a}_1,\dots,\mathbf{a}_n$ and the rows of $\mathbf{B}$ as $\mathbf{b}_1^T,\dots,\mathbf{b}_n^T$. Then
 
 ```{math}
@@ -111,16 +111,12 @@ Write the columns of $\mathbf{A}$ as $\mathbf{a}_1,\dots,\mathbf{a}_n$ and the r
 Equation {eq}`matrixouter` has some interesting structure for the product $\mathbf{L}\mathbf{U}$, where $\mathbf{L}$ is $n\times n$ and **lower triangular** (i.e., zero above the main diagonal) and $\mathbf{U}$ is $n\times n$ and **upper triangular** (zero below the diagonal). 
 
 (demo-lu-outertri)=
-::::{proof:demo}
+::::{prf:example}
 ::::
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We explore the outer product formula for two random triangular matrices.
 
@@ -138,25 +134,17 @@ U = triu( rand(1:9,3,3) )
 :::{grid-item}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 Here are the three outer products in the sum in {eq}`matrixouter`:
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 Although `U[1,:]` is a row of `U`, it is a vector, and as such it has a default column interpretation.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -174,13 +162,9 @@ L[:,3]*U[3,:]'
 
 Simply because of the triangular zero structures, only the first outer product contributes to the first row and first column of the entire product. 
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 Let the columns of $\mathbf{L}$ be written as $\boldsymbol{\ell}_k$ and the rows of $\mathbf{U}$ be written as $\mathbf{u}_k^T$. Then the first row of $\mathbf{L}\mathbf{U}$ is
  
@@ -206,16 +190,12 @@ These two calculations are enough to derive one of the most important algorithms
 Our goal is to factor a given $n\times n$ matrix $\mathbf{A}$ as the triangular product $\mathbf{A}=\mathbf{L}\mathbf{U}$. It turns out that we have $n^2+n$ total nonzero unknowns in the two triangular matrices, so we set $L_{11}=\cdots = L_{nn}=1$, making $\mathbf{L}$ a **unit lower triangular** matrix.
 
 (demo-lu-derive)=
-:::{proof:demo}
+:::{prf:example}
 :::
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 For illustration, we work on a $4 \times 4$ matrix. We name it with a subscript in preparation for what comes.
 
@@ -298,20 +278,16 @@ A₁ - L*U
 
 In floating point, we cannot always expect all the elements to be exactly equal as we found in this toy example. Instead, we would be satisfied to see that each element of the difference above is comparable in size to machine precision.
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 We have arrived at the linchpin of solving linear systems. 
 
 ```{index} ! matrix factorization; LU, ! LU factorization
 ```
  
-::::{proof:definition} LU factorization
+::::{prf:definition} LU factorization
 Given $n\times n$ matrix $\mathbf{A}$, its **LU factorization** is
 
 :::{math}
@@ -325,7 +301,7 @@ where $\mathbf{L}$ is a unit lower triangular matrix and $\mathbf{U}$ is an uppe
 The outer product algorithm for LU factorization seen in {numref}`Demo {number} <demo-lu-derive>` is coded as {numref}`Function {number} <function-lufact>`. 
 
 (function-lufact)=
-````{proof:function} lufact
+````{prf:function} lufact
 **LU factorization (not stable)**
 ```{code-block} julia
 :lineno-start: 1
@@ -376,7 +352,7 @@ $$
 Defining $\mathbf{z} = \mathbf{U} \mathbf{x}$ leads to the following.
 
 (algorithm-lu-solve)=
-::::{proof:algorithm} Solution of linear systems by LU factorization (unstable)
+::::{prf:algorithm} Solution of linear systems by LU factorization (unstable)
 1. Factor $\mathbf{L}\mathbf{U}=\mathbf{A}$.
 2. Solve $\mathbf{L}\mathbf{z}=\mathbf{b}$ for $\mathbf{z}$ using forward substitution.
 3. Solve $\mathbf{U}\mathbf{x}=\mathbf{z}$ for $\mathbf{x}$ using backward substitution.
@@ -385,16 +361,12 @@ Defining $\mathbf{z} = \mathbf{U} \mathbf{x}$ leads to the following.
 A key advantage of the factorization point of view is that it depends only on the matrix $\mathbf{A}$. If systems are to be solved for a single $\mathbf{A}$ but multiple different versions of $\mathbf{b}$, then the factorization approach is more efficient, as we'll see in {numref}`section-linsys-efficiency`. 
 
 (demo-lu-solve)=
-::::{proof:demo}
+::::{prf:example}
 ::::
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Here are the data for a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$. 
 
@@ -417,13 +389,9 @@ A check on the residual assures us that we found the solution.
 b - A*x
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 As noted in the descriptions of {numref}`Function {number} <function-lufact>` and {numref}`Algorithm {number} <algorithm-lu-solve>`, the LU factorization as we have seen it so far is not stable for all matrices. In fact, it does not always even exist. The missing element is the row swapping allowed in Gaussian elimination. We will address these issues in {numref}`section-linsys-pivoting`.
 

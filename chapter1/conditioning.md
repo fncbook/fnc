@@ -49,7 +49,7 @@ You may have encountered this situation before when using significant digits for
 
 This phenomenon is known as **subtractive cancellation**, or loss of significance. We may say that three digits were "lost" in the mapping from $-1.0012$ to $-0.0012$. There's no way the loss could be avoided, *regardless of the algorithm*, once we decided to round off everything to a fixed number of digits.
 
-:::{proof:observation} Subtractive cancellation
+:::{prf:observation} Subtractive cancellation
 Subtractive cancellation is a loss of accuracy that occurs when two numbers add or subtract to give a result that is much smaller in magnitude. It is one of the most common mechanisms introducing dramatic growth of errors in floating-point computation.
 :::
 
@@ -80,7 +80,7 @@ Finally, we idealize what happens in a perfect computer by taking a limit as $\m
 ```
 
 (definition-intro-condno)=
-::::{proof:definition} Condition number (scalar function)
+::::{prf:definition} Condition number (scalar function)
 The relative **condition number** of a scalar function $f(x)$ is 
 
 ```{math}
@@ -105,7 +105,7 @@ Assuming that $f$ has at least one continuous derivative, we can simplify the ex
 
 In retrospect it should come as no surprise that the change in values of $f(x)$ due to small changes in $x$ involves the derivative of $f$. In fact, if we were making measurements of changes in absolute rather than relative terms, the condition number would be simply $|f'(x)|$.
 
-````{proof:example}
+````{prf:example}
 Let's return to our "add 1" problem and generalize it slightly to $f(x)=x-c$ for constant $c$. We compute, using {eq}`conditionderiv`,
 
 ```{math}
@@ -119,7 +119,7 @@ Let's return to our "add 1" problem and generalize it slightly to $f(x)=x-c$ for
 The result is the relative change {eq}`plus1relerr` normalized by the size of the perturbation $\epsilon$. The condition number is large when $|x|\gg |x-c|$. Considering that $c$ can be negative, this result applies to both addition and subtraction. Furthermore, the situation is symmetric in $x$ and $c$; that is, if we perturbed $c$ and not $x$, the result would be $|c|/|x-c|$.
 ````
 
-````{proof:example}
+````{prf:example}
 Another elementary operation is to multiply by a constant: $f(x)=cx$ for nonzero $c$. We compute
   
 ```{math}
@@ -174,7 +174,7 @@ Refer back to the definition of $\kappa_f$ as a limit in {eq}`condition`. Approx
 
 That is, whenever the data $x$ is perturbed by a small amount, we expect that relative perturbation to be magnified by a factor of $\kappa_f(x)$ in the result. 
 
-::::{proof:observation}
+::::{prf:observation}
 If $\kappa_f \approx 10^d$, then we expect to lose up to $d$ decimal digits of accuracy in computing $f(x)$ from $x$.
 ::::
 
@@ -182,7 +182,7 @@ Large condition numbers signal when errors cannot be expected to remain comparab
 
 If $\kappa_f \approx 1/\macheps$, then we can expect the result to have a relative error of as much as 100% simply by expressing the data $x$ in finite precision. Such a function is essentially not computable at this machine epsilon.
 
-````{proof:example}
+````{prf:example}
 Consider the problem $f(x)= \cos(x)$. By the table above, $\kappa_f(x) = |x \tan x|$. There are two different ways in which $\kappa$ might become large:
 
 - If $|x|$ is very large, then perturbations that are small relative to $x$ may still be large compared to $1$. Because $|f(x)|\le 1$ for all $x$, this implies that the perturbation will be large relative to the result, too.
@@ -196,7 +196,7 @@ You may have noticed that for some functions, such as the square root, the condi
 Most problems have multiple input and output values. These introduce complications into the formal definition of the condition number. Rather than worry over those details here, we can still look at variations in only one output value with respect to one data value at a time.
 
 (example-quad-root-cond)=
-````{proof:example}
+````{prf:example}
 Consider the problem of finding the roots of a quadratic polynomial; that is, the values of $t$ for which $at^2+bt+c=0$. Here the data are the coefficients $a$, $b$, and $c$ that define the polynomial, and the solution to the problem are the two (maybe complex-valued) roots $r_1$ and $r_2$. Formally, we might write $f([a,b,c])=[r_1,r_2]$ using vector notation.
 
 Let's pick one root $r_1$ and consider what happens to it as we vary just the leading coefficient $a$. This suggests a scalar function $f(a)=r_1$. Starting from $ar_1^2 + br_1 + c = 0$, we differentiate implicitly with respect to $a$ while holding $b$ and $c$ fixed:  
@@ -231,23 +231,19 @@ Based on {eq}`rootcond1`, we can expect poor conditioning in the rootfinding pro
 
 The calculation in {numref}`Example %s <example-quad-root-cond>` generalizes to polynomials of higher degree.
 
-:::{proof:observation}
+:::{prf:observation}
 Roots of polynomials are ill-conditioned with respect to changes in the polynomial coefficients when they are much closer to each other than to the origin.
 :::
 
 The condition number of a root can be arbitrarily large. In the extreme case of a repeated root, the condition number is formally infinite, which implies that the ratio of changes in the root to changes in the coefficients cannot be bounded. 
 
 (demo-condition-roots)=
-::::{proof:demo}
+::::{prf:example}
 ::::
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 ::::{grid} 1 1 2 2
 :gutter: 2
@@ -255,25 +251,17 @@ The condition number of a root can be arbitrarily large. In the extreme case of 
 :::{grid-item}
 :columns: 7
 
-```{raw} latex
-\begin{minipage}[t]{0.5\textwidth}
-```
+
 The polynomial $p(x) = \frac{1}{3}(x-1)(x-1-\epsilon)$ has roots $1$ and $1+\epsilon$. For small values of $\epsilon$, the roots are ill-conditioned. 
 
-```{raw} latex
-\end{minipage}\hfill
-```
+
 :::
 :::{grid-item-card}
 :columns: 5
 
-```{raw} latex
-\begin{minipage}[t]{0.4\textwidth}\begin{mdframed}[default]\small
-```
+
 The statement `x,y = 10,20` makes individual assignments to both `x` and `y`.
-```{raw} latex
-\end{mdframed}\end{minipage}
-```
+
 :::
 ::::
 
@@ -305,13 +293,9 @@ eps()/ϵ
 ```
 
 This matches the observation well.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 

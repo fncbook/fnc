@@ -78,7 +78,7 @@ This step is called **semidiscretization**, since space is discretized but time 
 Note well how the first and last rows have elements that "wrap around" from one end of the domain to the other by periodicity. Because we will be using this matrix quite a lot, we create {numref}`Function {number} <function-diffper>` to compute it, as well as the corresponding second-order first derivative matrix $\mathbf{D}_x$ for periodic end conditions.
 
 (function-diffper)=
-````{proof:function} diffper
+````{prf:function} diffper
 **Differentiation matrices for periodic end conditions**
 ```{code-block} julia
 :lineno-start: 1
@@ -128,7 +128,7 @@ which is simply a linear, constant-coefficient system of *ordinary* differential
 Semidiscretization is often called the **method of lines**. Despite the name, it is not exactly a single method because both space and time discretizations have to be specified in order to get a concrete algorithm. The key concept is the separation of those two discretizations, and in that way, it's related to separation of variables in analytic methods for the heat equation.
 
 (example-methodlines-heatFE)=
-::::{proof:example}
+::::{prf:example}
 Suppose we solve {eq}`heatMOL` using the Euler IVP integrator {eq}`euler1` from {numref}`section-ivp-euler` (and also AB1 from {numref}`section-ivp-multistep`). We select a time step $\tau$ and discrete times $t_j=j\tau$, $j=0,1,\ldots,n$. We can discretize the vector $\mathbf{u}$ in time as well to get a sequence $\mathbf{u}_j \approx \mathbf{u}(t_j)$ for varying $j$. (Remember the distinction in notation between $\mathbf{u}_j$, which is a vector, and $u_j$, which is a single element of a vector.) 
 
 Thus, a fully discrete method for the heat equation is 
@@ -140,16 +140,12 @@ Thus, a fully discrete method for the heat equation is
 
 
 (demo-methodlines-heatFE)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Let's implement the method of {numref}`Example {number} <example-methodlines-heatFE>` with second-order space semidiscretization.
 
@@ -207,18 +203,14 @@ plot(t[1:1000],M[1:1000],
     title="Nonphysical growth") 
 ```
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 The method in {numref}`Example {number} <example-methodlines-heatFE>` and {numref}`Demo {number} <demo-methodlines-heatFE>` is essentially the same one we used for the Black–Scholes equation in {numref}`section-diffusion-blackscholes`. By changing the time integrator, we can get much better results.
 
 (example-methodlines-heatBE)=
-::::{proof:example}
+::::{prf:example}
 An alternative time discretization of {eq}`heatMOL` is to use the backward Euler (AM1) method, resulting in
 
 :::{math}
@@ -234,16 +226,12 @@ Because backward Euler is an implicit method, a linear system must be solved for
 
 
 (demo-methodlines-heatBE)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Now we apply backward Euler to the heat equation. We will reuse the setup from {numref}`Demo {number} <demo-methodlines-heatFE>`. Since the matrix in {eq}`BExx` never changes during the time stepping, we do the necessary LU factorization only once.
 
@@ -276,13 +264,9 @@ mp4(anim,"diffusionBE.mp4")
 ```
 
 This solution looks physically plausible, as the large concentration in the center diffuses outward until the solution is essentially constant. Observe that the solution remains periodic in space for all time.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 {numref}`Demo %s <demo-methodlines-heatBE>` suggests that implicit time stepping methods have an important role in diffusion. We will analyze the reason in the next few sections.
@@ -292,16 +276,12 @@ This solution looks physically plausible, as the large concentration in the cent
 Instead of coding one of the Runge–Kutta or multistep formulas directly for a method of lines solution, we could use any of the IVP solvers from Chapter 6, or a solver from the `DifferentialEquations` package, to solve the ODE initial-value problem {eq}`heatMOL`.
 
 (demo-methodlines-auto)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We set up the semidiscretization and initial condition in $x$ just as before.
 
@@ -357,13 +337,9 @@ println("Number of time steps for Rodas4P: $(length(u.t)-1)")
 ```
 
 The number of steps selected is reduced by a factor of more than 100!
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 The adaptive time integrators can all produce solutions. But, as seen in {numref}`Demo %s <demo-methodlines-auto>`, they are not equivalent in every important sense. Whether we choose to implement a method directly with a fixed step size, or automatically with adaptation, there is something crucial to understand about the semidiscrete problem {eq}`heatMOL` that will occupy our attention in the next two sections.
 

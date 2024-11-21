@@ -38,7 +38,7 @@ When the integration domain is $(-\infty,\infty)$, the integrand has to decay as
 This integral can be discretized finitely by, say, the trapezoid formula, or an adaptive integrator. However, this approach can be inefficient.
 
 (example-improper-slowdecay)=
-::::{proof:example}
+::::{prf:example}
 Consider the integral of $f(x)=1/(1+x^2)$,
 
 $$
@@ -93,16 +93,12 @@ By the chain rule,
 The exponential terms introduced by the chain rule grow double exponentially, but the more rapid decay of $f$ in the new variable more than makes up for this.
 
 (demo-improper-decay)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Consider again $f(x)=1/(1+x^2)$ from {numref}`Example %s <example-improper-slowdecay>`, with $x(t)$ given by {eq}`DEquadtrans1`. As $t\to\infty$, 
 
@@ -142,18 +138,14 @@ plot!(g,-4,4,subplot=2,
 ```
 
 This graph suggests that we capture all of the integrand values that are larger than machine epsilon by integrating in $t$ from $-4$ to $4$.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 {numref}`Function {number} <function-intinf>` implements double exponential integration by applying the adaptive integrator {numref}`Function {number} <function-intadapt>` to {eq}`DEquadchain1`. It truncates the interval to $-M\le t \le M$ by increasing $M$ until the integrand is too small to matter relative to the error tolerance.
 
 (function-intinf)=
-````{proof:function} intinf
+````{prf:function} intinf
 **Integration of a function over $(-\infty,\infty)$**
 ```{code-block} julia
 :lineno-start: 1
@@ -192,16 +184,12 @@ The test `isinf(x(M))` in line 17 checks whether $x(M)$ is larger than the maxim
 ::::
 
 (demo-improper-intinf)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We compare direct truncation in $x$ to the double exponential method of {numref}`Function {number} <function-intinf>` for $f(x)=1/(1+x^2)$.
 
@@ -226,13 +214,9 @@ plot!(n,1000n.^(-4),l=:dash,label="fourth-order",
 
 Both methods are roughly fourth-order due to Simpson's formula in the underlying adaptive integration method. At equal numbers of evaluation nodes, however, the double exponential method is consistently 2--3 orders of magnitude more accurate.
 
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ## Integrand singularity
@@ -264,7 +248,7 @@ satisfies $x(0)=1$ and $x\to 0^+$ as $t\to \infty$, thereby transforming the int
 Now the growth of $f$ and $\cosh t$ together are counteracted by the double exponential denominator, allowing easy truncation of {eq}`DEquadchain2`. This variable transformation is paired with adaptive integration in {numref}`Function {number} <function-intsing>`.
 
 (function-intsing)=
-````{proof:function} intsing
+````{prf:function} intsing
 **Integration of a function with endpoint singularities**
 ```{code-block} julia
 :lineno-start: 1
@@ -302,16 +286,12 @@ The test `iszero(x(M))` in line 17 checks whether $x(M)$ is less than the smalle
 ::::
 
 (demo-improper-intsing)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 Let's use {numref}`Function {number} <function-intsing>` to compute
 
@@ -347,13 +327,9 @@ plot!(n,30n.^(-4),l=:dash,label="fourth-order",
 ```
 
 As in {numref}`Demo {number} <demo-improper-intinf>`, the double exponential method is more accurate than direct integration by a few orders of magnitude. Equivalently, the same accuracy can be reached with many fewer nodes.
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 Double exponential integration is an effective general-purpose technique for improper integrals that usually outperforms interval truncation in the original variable. There are specialized methods tailored to specific singularity types that can best it, but those require more analytical work to use properly.
 

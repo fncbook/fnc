@@ -64,7 +64,7 @@ Let's momentarily consider a simpler, more fundamental PDE.
 
 ```{index} ! advection equation, ! hyperbolic PDE
 ```
-::::{proof:definition} Advection equation
+::::{prf:definition} Advection equation
 The **advection equation** in one dimension is
 
 :::{math}
@@ -85,7 +85,7 @@ $$
 
 and the PDE is satisfied. The form of the solution tells us that $u$ remains constant along any path with $x-c t=a$ for a constant $a$, i.e., $x=a + c t$. So if $c>0$, a fixed value of $u$ moves rightward with speed $|c|$, and if $c<0$, it moves leftward with speed $|c|$.  
 
-::::{proof:observation}
+::::{prf:observation}
 Solutions to the advection equation propagates with constant speed and fixed shape.
 ::::
 
@@ -133,16 +133,12 @@ Returning to the traffic flow PDE {eq}`trafficpde`, we can interpret the conserv
 Exact solutions of {eq}`trafficpde` are much harder to come by than for the standard advection equation, but the method of lines is still effective. 
 
 (demo-traffic-solve)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We solve for traffic flow using periodic boundary conditions. The following are parameters and a function relevant to defining the problem. 
 
@@ -222,13 +218,9 @@ mp4(anim,"traffic-jam.mp4")
 ```
 
 In this case the density bump travels backward along the road. It also steepens on the side facing the incoming traffic and decreases much more slowly on the other side. A motorist would experience this as an abrupt increase in density, followed by a much more gradual decrease in density and resulting gradual increase in speed. (You also see some transient, high-frequency oscillations. These are caused by instabilities, as we discuss in simpler situations later in this chapter.)
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ```{index} shock wave
 ```

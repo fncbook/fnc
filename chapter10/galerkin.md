@@ -64,7 +64,7 @@ which is known as the **weak form** of the differential equation {eq}`strongbvp`
 
 ```{index} ! weak solution
 ```
-:::{proof:definition} Weak solution
+:::{prf:definition} Weak solution
 If $u(x)$ is a function such that {eq}`weakbvp` is satisfied for all valid choices of $\psi$, we say that $u$ is a **weak solution** of the BVP {eq}`strongbvp`. 
 :::
 
@@ -144,7 +144,7 @@ Then {eq}`galerkin` is simply
 ```
 The matrix $\mathbf{K}$ is called the **stiffness matrix** and $\mathbf{M}$ is called the **mass matrix**. By their definitions, they are symmetric. The last piece of the puzzle is to make some selection of $\phi_1,\ldots,\phi_m$ and obtain a fully specified algorithm.
 
-::::{proof:example}
+::::{prf:example}
   Suppose we are given $-u''+4u=x$, with $u(0)=u(\pi)=0$. We could choose the basis functions $\phi_k=\sin(kx)$ for $k=1,2,3$. Then
   \begin{align*}
     M_{ij} & = 4 \int_0^\pi \sin(ix) \sin(jx)\, dx, \\
@@ -310,7 +310,7 @@ Each $I_k$ contributes to four elements of each matrix and two of the vector $\m
 {numref}`Function {number} <function-fem>` implements the piecewise linear FEM on the linear problem as posed in {eq}`weakbvp`, using an equispaced grid. The code closely follows the description above.
 
 (function-fem)=
-````{proof:function} fem
+````{prf:function} fem
 **Piecewise linear finite elements for a linear BVP**
 ```{code-block} julia
 :lineno-start: 1
@@ -358,16 +358,12 @@ end
 ````
 
 (demo-galerkin-fem)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 We solve the equation
 
@@ -394,13 +390,9 @@ x,u = FNC.fem(c,q,f,0,1,50)
 plot(x,u,label="",
     xaxis=(L"x"),yaxis=(L"u"),title="Solution by finite elements")
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 
 ```{index} order of accuracy; of the finite element method

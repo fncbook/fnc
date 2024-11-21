@@ -63,7 +63,7 @@ For reasons explained in Chapter 5, $\delta$ is usually chosen close to $\sqrt{\
 The finite-difference formula {eq}`jacobianfd` is implemented by {numref}`Function {number} <function-fdjac>`.
 
 (function-fdjac)=
-````{proof:function} fdjac
+````{prf:function} fdjac
 **Finite-difference approximation of a Jacobian**
 
 ```{code-block} julia
@@ -135,7 +135,7 @@ This is used to justify the following requirement:
 
 This isn't enough to uniquely determine $\mathbf{A}_{k+1}$. However, if we also require that $\mathbf{A}_{k+1}-\mathbf{A}_k$ is a matrix of rank 1, then one arrives at the following.
 
-::::{proof:definition} Broyden update formula
+::::{prf:definition} Broyden update formula
 Using the definitions above,
 
 ```{math}
@@ -168,7 +168,7 @@ There are several ways to find alternatives to the standard step, but we will co
 ```
 
 (algorithm-nonlineqn-levenberg)=
-::::{proof:algorithm} Levenberg's method
+::::{prf:algorithm} Levenberg's method
 Given $\mathbf{f}$, a starting value $\mathbf{x}_1$, and a scalar $\lambda$, for each $k=1,2,3,\ldots$
 
 1. Compute $\mathbf{y}_k = \mathbf{f}(\mathbf{x}_k)$, and let $\mathbf{A}_k$ be an exact or approximate Jacobian matrix.
@@ -218,7 +218,7 @@ To a large extent, the incorporation of finite differences, Jacobian updates, an
 Each pass through the loop starts by using {eq}`levenberg` to propose a step $\mathbf{s}_k$. The function then asks whether using this step would decrease the value of $\|\mathbf{f}\|$ from its present value. If so, we accept the new root estimate, we decrease $\lambda$ in order to get more Newton-like (since things have gone well), and we apply the Broyden formula to get a cheap update of the Jacobian. If the proposed step is not successful, we increase $\lambda$ to get more gradient-like (since we just failed) and, if the current Jacobian was the result of a cheap update, use finite differences to reevaluate it.  
 
 (function-levenberg)=
-````{proof:function} levenberg
+````{prf:function} levenberg
 **Quasi-Newton method for nonlinear systems**
 
 ```{code-block} julia
@@ -285,16 +285,12 @@ end
 In some cases our simple logic in {numref}`Function {number} <function-levenberg>` can make $\lambda$ oscillate between small and large values; several better but more complicated strategies for controlling $\lambda$ are known. In addition, the linear system {eq}`levenberg` is usually modified to get the well-known **Levenberg–Marquardt** algorithm, which does a superior job in some problems as $\lambda\to \infty$.
 
 (demo-quasi-levenberg)=
-```{proof:demo}
+```{prf:example}
 ```
 
-```{raw} html
-<div class='demo'>
-```
 
-```{raw} latex
-%%start demo%%
-```
+
+
 
 To solve a nonlinear system, we need to code only the function defining the system, and not its Jacobian.
 
@@ -328,13 +324,9 @@ Looking at the convergence in norm, we find a convergence rate between linear an
 logerr = [ log( norm(x[k]-r) ) for k in 1:length(x)-1 ]
 [ logerr[k+1]/logerr[k] for k in 1:length(logerr)-1 ]
 ```
-```{raw} html
-</div>
-```
 
-```{raw} latex
-%%end demo%%
-```
+
+
 
 ## Exercises
 
