@@ -26,3 +26,5 @@ _build
 
 .ipynb_checkpoints
 .vscode
+**/__pycache__
+python/**/dist
