@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  headings: true
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-intro-conditioning)=
 # Problems and conditioning
 
@@ -237,65 +221,8 @@ Roots of polynomials are ill-conditioned with respect to changes in the polynomi
 
 The condition number of a root can be arbitrarily large. In the extreme case of a repeated root, the condition number is formally infinite, which implies that the ratio of changes in the root to changes in the coefficients cannot be bounded. 
 
-(demo-condition-roots)=
-::::{prf:example}
-::::
-
-
-
-
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 7
-
-
-The polynomial $p(x) = \frac{1}{3}(x-1)(x-1-\epsilon)$ has roots $1$ and $1+\epsilon$. For small values of $\epsilon$, the roots are ill-conditioned. 
-
-
+:::{embed} #demo-condition-roots-julia
 :::
-:::{grid-item-card}
-:columns: 5
-
-
-The statement `x,y = 10,20` makes individual assignments to both `x` and `y`.
-
-:::
-::::
-
-
-```{code-cell}
-ϵ = 1e-6   # type \epsilon and then press Tab
-a,b,c = 1/3,(-2-ϵ)/3,(1+ϵ)/3   # coefficients of p
-```
-
-Here are the roots as computed by the quadratic formula.
-
-```{code-cell}
-d = sqrt(b^2-4a*c)
-r₁ = (-b-d)/(2a)   # type r\_1 and then press Tab
-r₂ = (-b+d)/(2a)
-(r₁,r₂)
-```
-
-The display of `r₂` suggests that the last five digits or so are inaccurate. The relative error in the value is 
-
-```{code-cell}
-abs(r₂ - (1+ϵ)) / (1+ϵ)
-```
-
-The condition number of the roots is inversely proportional to $2\epsilon$, the difference between them. Thus roundoff error in the data can grow in the result to be roughly
-
-```{code-cell}
-eps()/ϵ
-```
-
-This matches the observation well.
-
-
-
 
 ## Exercises
 

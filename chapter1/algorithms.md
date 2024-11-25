@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-intro-algorithms)=
 # Algorithms
 
@@ -57,30 +37,9 @@ p(x) &= c_1 + c_2 x + \cdots + c_n x^{n-1} \\
 &= \Bigl( \bigl( (c_n x  + c_{n-1}) x + c_{n-2} \bigr) x + \cdots +c_{2} \Bigr)x + c_{1}.
 ```
 
-(function-horner)=
+:::{embed} #function-horner-julia
+:::
 
-````{prf:function} horner
-
-**Horner's algorithm for evaluating a polynomial**
-
-```{code-block} julia
-:lineno-start: 1
-"""
-    horner(c,x)
-
-Evaluate a polynomial whose coefficients are given in ascending
-order in `c`, at the point `x`, using Horner's rule.
-"""
-function horner(c,x)
-    n = length(c)
-    y = c[n]
-    for k in n-1:-1:1
-        y = x*y + c[k]
-    end
-    return y
-end
-```
-````
 
 ```{index} Julia; length, Julia; indexing arrays
 ```
@@ -96,115 +55,8 @@ The `return` statement in line 13 terminates the function and specifies one or m
 ```{index} ! Julia; for
 ```
 
-(demo-algorithms-horner)=
-```{prf:example}
-```
-
-
-
-
-
-Here we show how to use {numref}`Function {number} <function-horner>` to evaluate a polynomial. It's not a part of core Julia, so you need to download and install this text's package once, and load it for each new Julia session. The download is done by the following lines.
-
-```{code-cell}
-:tags: [remove-output]
-import Pkg
-Pkg.add(Pkg.PackageSpec(url="https://github.com/fncbook/FundamentalsNumericalComputation"));
-```
-
-```{index} ! Julia; using
-```
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 5
-
-
-Once installed, any package can be loaded with the `using` command, as follows.
-
-
+:::{embed} #demo-algorithms-horner-julia
 :::
-:::{grid-item-card}
-:columns: 7
-
-
-Many Julia functions, including the ones in this text, are in packages that must be loaded via `using` or `import` in each session. Sometimes a `using` statement can take a few seconds or even minutes to execute, if packages have been installed or updated. 
-
-:::
-::::
-
-```{code-cell}
-:tags: [remove-output]
-using FundamentalsNumericalComputation
-```
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 7
-
-
-
-For convenience, this package also imports many other packages used throughout the book and makes them available as though you had run a `using` command for each of them. 
-
-
-:::
-:::{grid-item-card}
-:columns: 5
-
-
-
-If you are not sure where a particular function is defined, you can run `methods` on the function name to find all its definitions.
-
-:::
-::::
-
-Returning to `horner`, let us define a vector of the coefficients of $p(x)=(x-1)^3=x^3-3x^2+3x-1$, in ascending degree order.
-
-```{code-cell}
-c = [-1,3,-3,1]
-```
-
-```{index} ! Julia; FNC, ! Julia; namespace
-```
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 7
-
-
-
-In order to avoid clashes between similarly named functions, Julia has boxed all the book functions into a **namespace** called `FNC`. We use this namespace whenever we invoke one of the functions.
-
-
-:::
-:::{grid-item-card}
-:columns: 5
- 
-
-
-You must use the module name when a package is loaded by `import`, but when loaded via `using`, some functions may be available with no prefix.
-
-:::
-::::
-
-```{code-cell}
-FNC.horner(c,1.6)
-```
-
-The above is the value of $p(1.6)$.
-
-While the namespace does lead to a little extra typing, a nice side effect of using this paradigm is that if you type `FNC.` (including the period) and hit the <kbd>Tab</kbd> key, you will see a list of all the functions known in that namespace.
-
-The multi-line string at the start of {numref}`Function {number} <function-horner>` is documentation, which we can access using `?FNC.horner`.
-
-
-
 
 
 The quoted lines at the beginning of {numref}`Function {number} <function-horner>` are a documentation string. The function itself starts off with the keyword `function`, followed by a list of its input arguments. The first of these is presumed to be a vector, whose length can be obtained and whose individual components are accessed through square bracket notation. After the computation is finished, the `return` keyword indicates which value or values are to be returned to the caller.

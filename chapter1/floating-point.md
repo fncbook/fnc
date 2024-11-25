@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-intro-floating-point)=
 # Floating-point numbers
 
@@ -143,101 +123,8 @@ Absolute accuracy has the same units as $x$, while relative accuracy is dimensio
 
 We often round this value down to an integer, but it does make sense to speak of "almost seven digits" or "ten and a half digits."
 
-(demo-float-accuracy)=
-```{prf:example}
-```
-
-
-
-
-
-Recall the grade-school approximation to the number $\pi$.
-
-```{code-cell}
-@show p = 22/7;
-```
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 5
-
-
-
-Not all the digits displayed for `p` are the same as those of $\pi$. 
-
-
+:::{embed} #demo-float-accuracy-julia
 :::
-:::{grid-item-card}
-:columns: 7
-
-
-
-The value of `pi` is predefined and equivalent to `π`, which is entered by typing `\pi` followed immediately by the <kbd>Tab</kbd> key.
-
-:::
-::::
-
-```{code-cell}
-@show float(π);
-```
-
-```{index} ! Julia; string interpolation
-```
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 5
-
-
-The absolute and relative accuracies of the approximation are as follows.
-
-
-:::
-:::{grid-item-card}
-:columns: 7
-
-
-A dollar sign `$` in a string substitutes (or *interpolates*) the named variable or expression into the string.
-
-:::
-::::
-
-```{code-cell}
-acc = abs(p-π)
-println("absolute accuracy = $acc")
-println("relative accuracy = $(acc/π)")
-```
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 5
-
-
-Here we calculate the number of accurate digits in `p`.
-
-
-:::
-:::{grid-item-card}
-:columns: 7
-
-
-The `log` function is for the natural log. For other common bases, use `log10` or `log2`.
-
-:::
-::::
-
-```{code-cell}
-println("Number of accurate digits = $(-log10(acc/π))")
-```
-This last value could be rounded down by using `floor`.
-
-
-
 
 
 ## Double precision
@@ -254,146 +141,8 @@ Most numerical computing today is done in the **IEEE 754** standard. This define
 
 We often speak of double-precision floating-point numbers as having about 16 decimal digits. The 52-bit significand is paired with a sign bit and 11 binary bits to represent the exponent $n$ in {eq}`floatpoint`, for a total of 64 binary bits per floating-point number.
 
-(demo-float-julia)=
-```{prf:example}
-```
-
-
-
-
-
-In Julia, `1` and `1.0` are different values, because they have different types:
-
-```{code-cell}
-@show typeof(1);
-@show typeof(1.0);
-```
-
-The standard choice for floating-point values is `Float64`, which is double precision using 64 binary bits. We can see all the bits by using `bitstring`.
-
-```{code-cell}
-bitstring(1.0)
-```
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 7
-
-
-The first bit determines the sign of the number:
-
-
+:::{embed} #demo-float-julia
 :::
-:::{grid-item-card}
-:columns: 5
-
-
-Square brackets concatenate the contained values into vectors.
-
-:::
-::::
-
-```{code-cell}
-[bitstring(1.0), bitstring(-1.0)]
-```
-
-The next 11 bits determine the exponent (scaling) of the number, and so on.
-
-```{code-cell}
-[bitstring(1.0), bitstring(2.0)]
-```
-
-The sign bit, exponent, and significand in {eq}`floatpoint` are all directly accessible.
-
-```{code-cell}
-x = 1.0
-@show sign(x),exponent(x),significand(x);
-```
-
-```{code-cell}
-x = 0.125
-@show sign(x),exponent(x),significand(x);
-```
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 6
-
-
-
-The spacing between floating-point values in $[2^n,2^{n+1})$ is $2^n \epsilon_\text{mach}$, where $\epsilon_\text{mach}$ is machine epsilon. You can get its value from the `eps` function in Julia. By default, it returns the value for double precision.
-
-
-:::
-:::{grid-item-card}
-:columns: 6
-
-
-
-To call a function, including `eps`, you must use parentheses notation, even when there are no input arguments.
-
-:::
-::::
-
-```{code-cell} julia
-eps()
-```
-
-Because double precision allocates 52 bits to the significand, the default value of machine epsilon is $2^{-52}$.
-
-```{code-cell}
-log2(eps())
-```
-
-The spacing between adjacent floating-point values is proportional to the magnitude of the value itself. This is how relative precision is kept roughly constant throughout the range of values. You can get the adjusted spacing by calling `eps` with a value.
-
-```{code-cell}
-eps(1.618)
-```
-
-```{code-cell}
-eps(161.8)
-```
-
-```{code-cell}
-nextfloat(161.8)
-```
-
-```{code-cell}
-ans - 161.8
-```
-
-A common mistake is to think that $\epsilon_\text{mach}$ is the smallest floating-point number. It's only the smallest *relative to 1*. The correct perspective is that the scaling of values is limited by the exponent, not the mantissa. The actual range of positive values in double precision is
-
-```{code-cell}
-@show floatmin(),floatmax();
-```
-
-For the most part you can mix integers and floating-point values and get what you expect.
-
-```{code-cell}
-1/7
-```
-
-```{code-cell}
-37.3 + 1
-```
-
-```{code-cell}
-2^(-4)
-```
-
-There are some exceptions. A floating-point value can't be used as an index into an array, for example, even if it is numerically equal to an integer. In such cases you use `Int` to convert it.
-
-```{code-cell}
-@show 5.0,Int(5.0);
-```
-
-If you try to convert a noninteger floating-point value into an integer you get an `InexactValue` error. This occurs whenever you try to force a type conversion that doesn't make clear sense.
 
 
 
@@ -422,32 +171,8 @@ Computer arithmetic is performed on floating-point numbers and returns floating-
 ```
 Hence the relative error in arithmetic is essentially the same as for the floating-point representation itself. However, playing by these rules can lead to disturbing results.
 
-(demo-float-arithmetic)=
-```{prf:example}
-```
-
-
-
-
-
-There is no double-precision number between $1$ and $1+\epsilon_\text{mach}$. Thus the following difference is zero despite its appearance.
-
-```{code-cell}
-e = eps()/2
-(1.0 + e) - 1.0
-```
-
-However, the spacing between floats in $[1/2,1)$ is $\macheps/2$, so both $1-\macheps/2$ and its negative are represented exactly:
-
-```{code-cell}
-1.0 + (e - 1.0)
-```
-
-This is now the expected result. But we have found a rather shocking breakdown of the associative law of addition!
-
-
-
-
+:::{embed} #demo-float-arithmetic-julia
+:::
 
 There are two ways to look at {numref}`Demo %s <demo-float-arithmetic>`. On one hand, its two versions of the result differ by less than $1.2\times 10^{-16}$, which is very small — not just in everyday terms, but with respect to the operands, which are all close to 1 in absolute value. On the other hand, the difference is as large as the exact result itself! We formalize and generalize this observation in the next section. In the meantime, keep in mind that exactness cannot be taken for granted in floating-point computation. 
 
