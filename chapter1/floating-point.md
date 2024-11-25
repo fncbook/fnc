@@ -16,7 +16,7 @@ The set $\float$ of **floating-point numbers** consists of zero and all numbers 
 
 ```{index} see: mantissa; significand
 ```
-```{index}  ! significand
+```{index} ! significand
 ```
 
 where $n$ is an integer called the **exponent**, and $1+f$ is the **mantissa** or **significand**, in which
@@ -51,16 +51,16 @@ These are the only members of $\float$ in the semi-closed interval $[1,2)$, and 
 Taking $n=1$ doubles each of the values in the list above, and $n=-1$ halves them. These give the floating-point numbers in $[2,4)$ and $[1/2,1)$, respectively. The spacing between them also is doubled and halved, respectively. 
 ````
 
-```{index} unit roundoff; see: machine epsilon, ! machine epsilon
-```
-
 Observe that the smallest element of $\float$ that is greater than 1 is $1+2^{-d}$, and we call the difference *machine epsilon*.[^macheps]
+
+[^macheps]: The terms machine epsilon, machine precision, and unit roundoff aren't used consistently across references, but the differences are not consequential for our purposes.
+
+```{index} ! machine epsilon, unit roundoff 
+```
 
 ::::{prf:definition} Machine epsilon
 For a floating-point set with $d$ binary digits of precision, **machine epsilon** (or *machine precision*) is $\macheps = 2^{-d}$.
 ::::
-
-[^macheps]: The terms machine epsilon, machine precision, and unit roundoff aren't used consistently across references, but the differences are not consequential for our purposes.
 
 We define the rounding function $\fl(x)$ as the map from real number $x$ to the nearest member of $\float$. The distance between the floating-point numbers in $[2^n,2^{n+1})$ is $2^n\macheps=2^{n-d}$. As a result, every real $x \in [2^n,2^{n+1})$ is no farther than $2^{n-d-1}$ away from a member of $\float$. Therefore we conclude that $|\fl(x)-x| \le \tfrac{1}{2}(2^{n-d})$, which leads to the bound
 

@@ -1,1 +1,3 @@
 # Index
+:::{show-index}
+:::

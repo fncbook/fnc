@@ -181,13 +181,13 @@ project:
     #         - file: chapter13/laplace.md
     #         - file: chapter13/nonlinear.md
     #         - file: chapter13/next.md
-    # - title: Appendices
-    #   children:
-    #     - file: appendix/linear-algebra.md
-    #     - file: appendix/glossary.md
-    #     - file: appendix/julia.md
-    #     - file: refs.md
-    #     - file: genindex.md
+    - title: Appendices
+      children:
+        # - file: appendix/linear-algebra.md
+        # - file: appendix/glossary.md
+        # - file: appendix/julia.md
+        # - file: refs.md
+        - file: genindex.md
 
     
 site:
