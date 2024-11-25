@@ -44,7 +44,7 @@ Left: A function whose values are the same at the endpoints of an interval does 
 As always, we use $\hat{u}$ when we specifically refer to the exact solution of the PDE. In order to avoid carrying along redundant information about the function, we use $x_i = ih$ only for $i=0,\ldots,m-1$, where $h=1/m$, and it's understood that a reference to $x_m$ is silently translated to one at $x_0$. More generally, we have the identity
 
 :::{math}
-  :label: periodicmod
+:label: periodicmod
   \hat{u}(x_i,t) = \hat{u}\bigl(x_{(i \bmod{m})},t \bigr)
 :::
 
@@ -117,7 +117,7 @@ end
 The PDE $u_t=u_{xx}$ is now approximated by the semidiscrete problem
 
 :::{math}
-  :label: heatMOL
+:label: heatMOL
   \frac{d \mathbf{u}(t)}{d t} = \mathbf{D}_{xx} \mathbf{u}(t),
 :::
 
@@ -360,7 +360,7 @@ The adaptive time integrators can all produce solutions. But, as seen in {numref
 3. ✍ Apply the trapezoid IVP formula (AM2) to the semidiscretization {eq}`heatMOL` and derive what is known as the *Crank–Nicolson* method:
 
     :::{math}
-    :label: CNxx
+:label: CNxx
     (\mathbf{I} - \tfrac{1}{2}\tau \mathbf{D}_{xx}) \mathbf{u}_{j+1} =  (\mathbf{I} + \tfrac{1}{2}\tau
     \mathbf{D}_{xx}) \mathbf{u}_{j}.
     :::

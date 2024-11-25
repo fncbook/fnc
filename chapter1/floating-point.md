@@ -10,7 +10,7 @@ The real number set $\real$ is infinite in two ways: it is unbounded and continu
 The set $\float$ of **floating-point numbers** consists of zero and all numbers of the form
 
 ```{math}
-  :label: floatpoint
+:label: floatpoint
   \pm (1 + f) \times 2^n,
 ```
 
@@ -22,7 +22,7 @@ The set $\float$ of **floating-point numbers** consists of zero and all numbers 
 where $n$ is an integer called the **exponent**, and $1+f$ is the **mantissa** or **significand**, in which
 
 ```{math}
-  :label: mantissa
+:label: mantissa
   f = \sum_{i=1}^d b_i \, 2^{-i}, \qquad b_i\in\{0,1\},
 ```
 
@@ -72,7 +72,7 @@ We define the rounding function $\fl(x)$ as the map from real number $x$ to the 
 In words, every real number is represented with a uniformly bounded relative precision. Inequality {eq}`fpbound` holds true for negative $x$ as well. In [Exercise 2](problem-fp-fprelative) you are asked to show that an equivalent statement is that
 
 ```{math}
-  :label: fpboundalt
+:label: fpboundalt
   \fl(x)=x(1+\epsilon) \quad \text{for some $|\epsilon|\le \tfrac{1}{2}\macheps$.}
 ```
 

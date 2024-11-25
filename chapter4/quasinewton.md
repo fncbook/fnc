@@ -31,7 +31,7 @@ Newton's method is a foundation for algorithms to solve equations and minimize q
 In the scalar case, we found an easy alternative to a direct evaluation of the derivative. In retrospect, we may interpret the secant formula {eq}`secant` as the Newton formula {eq}`newton` with $f'(x_k)$ replaced by the difference quotient
 
 ```{math}
-  :label: secantfd
+:label: secantfd
   \frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}.
 ```
 
@@ -50,7 +50,7 @@ In the system case, replacing the Jacobian evaluation is more complicated: deriv
 (As always, $\mathbf{e}_j$ represents the $j$th column of the identity matrix, here in $n$ dimensions.) Inspired by {eq}`secantfd`, we can replace the differentiation with a quotient involving a change in only $x_j$ while the other variables remain fixed:
 
 ```{math}
-  :label: jacobianfd
+:label: jacobianfd
   \mathbf{J}(\mathbf{x}) \mathbf{e}_j \approx
   \frac{\mathbf{f}(\mathbf{x}+\delta \mathbf{e}_j) - \mathbf{f}(\mathbf{x})}{\delta}, \qquad j=1,\ldots,n.
 ```
@@ -113,7 +113,7 @@ Recall that the Newton iteration is derived by solving the linear model implied 
 Let $\mathbf{s}_k=\mathbf{x}_{k+1}-\mathbf{x}_k$  be the Newton step. Let $\mathbf{y}_k=\mathbf{f}(\mathbf{x}_k)$, and now we replace $\mathbf{J}(\mathbf{x}_k)$ by a matrix $\mathbf{A}_{k}$ that is meant to approximate the Jacobian. Hence the Newton step is considered to be defined, as in {numref}`Algorithm {number} <algorithm-nonlineqn-newtonsys>`, by
 
 ```{math}
-  :label: quasinewton-step
+:label: quasinewton-step
   \mathbf{A}_k \mathbf{s}_k = -\mathbf{y}_k.
 ```
 
@@ -126,7 +126,7 @@ Once $\mathbf{x}_{k+1}$ is obtained, we should update the approximate Jacobian t
 This is used to justify the following requirement:
 
 ```{math}
-  :label: secantsys
+:label: secantsys
   \mathbf{A}_{k+1} \mathbf{s}_k = \mathbf{y}_{k+1}-\mathbf{y}_k.
 ```
 
@@ -139,7 +139,7 @@ This isn't enough to uniquely determine $\mathbf{A}_{k+1}$. However, if we also 
 Using the definitions above,
 
 ```{math}
-  :label: broyden
+:label: broyden
   \mathbf{A}_{k+1} = \mathbf{A}_k + \frac{1}{\mathbf{s}_k^T \mathbf{s}_k}(\mathbf{y}_{k+1} - \mathbf{y}_k -\mathbf{A}_k \mathbf{s}_k)\, \mathbf{s}_k^T.
 ```
 ::::
@@ -160,7 +160,7 @@ Although one could imagine trying to do a detailed accuracy analysis of each lin
 There are several ways to find alternatives to the standard step, but we will consider just one of them, based on the parameterized equation 
 
 ```{math}
-  :label: levenberg
+:label: levenberg
   (\mathbf{A}_k^T \mathbf{A}_k + \lambda \mathbf{I})\,\mathbf{s}_k = -\mathbf{A}_k^T \mathbf{f}_k.
 ```
 
@@ -187,7 +187,7 @@ Some justification of {eq}`levenberg` comes from considering extreme cases for $
 which is equivalent to the definition of the usual linear model (i.e., Newton or quasi-Newton) step {eq}`quasinewton-step`. On the other hand, as $\lambda\to\infty$, Equation {eq}`levenberg` approaches
 
 ```{math}
-  :label: steepest
+:label: steepest
   \lambda \mathbf{s}_k = - \mathbf{A}_k^T \mathbf{f}_k.
 ```
 
@@ -200,7 +200,7 @@ $$
 Finding a root of $\mathbf{f}$ is equivalent to minimizing $\phi$. A calculation shows that the gradient of $\phi$ is
 
 ```{math}
-   :label: nlsgradient
+:label: nlsgradient
    \nabla \phi(\mathbf{x}) = 2 \mathbf{J}(\mathbf{x})^T \mathbf{f}(\mathbf{x}).
 ```
 

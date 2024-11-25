@@ -65,7 +65,7 @@ We could view the left-hand side as a forward-difference approximation to $u'(t)
 Given the IVP $u'=f(t,u)$, $u(a)=u_0$, and the nodes {eq}`nodes-euler`, iteratively compute the sequence
 
 ```{math}
-  :label: euler1
+:label: euler1
   u_{i+1}=u_i + h f(t_i,u_i), \qquad i=0,\ldots,n-1.
 ```
 Then $u_i$ is approximately the value of the solution at $t=t_i$.
@@ -115,7 +115,7 @@ The structure created by `ODEFunction` contains the data used to define it, and 
 Let $\hat{u}(t)$ be the exact solution of the IVP {eq}`euler-ivp`, and suppose that somehow we have access to it at $t=t_i$, so that $u_i=\hat{u}(t_i)$. How good is $u_{i+1}$ as an approximation to $\hat{u}(t_{i+1})$? The answer is revealed through a Taylor series:
 
 ```{math}
-  :label: eulerLTE
+:label: eulerLTE
 \begin{split}
   \hat{u}(t_{i+1}) - \bigl[ u_i + hf(t_i,u_i) \bigr]
  &=  \hat{u}(t_{i+1}) - \bigl[ \hat{u}(t_i) + hf\bigl(t_i,\hat{u}(t_i)\bigr) \bigr] \\
@@ -153,7 +153,7 @@ In close analogy with {numref}`section-localapprox-fd-converge`, we define trunc
 The **local truncation error** (LTE) of the one-step method {eq}`onestepODE` is
 
 ```{math}
-  :label: onestepLTE
+:label: onestepLTE
   \tau_{i+1}(h) := \frac{\hat{u}(t_{i+1})-\hat{u}(t_i)}{h} - \phi\bigl(t_i,\hat{u}(t_i),h\bigr).
 ```
 
@@ -191,7 +191,7 @@ However, global error is not as simple as a sum of local errors. As explained in
 Suppose that the unit local truncation error of the one-step method {eq}`onestepODE` satisfies
   
 ```{math}
-  :label: ULTEbound
+:label: ULTEbound
   |\tau_{i+1}(h)| \le C h^p,
 ```
 

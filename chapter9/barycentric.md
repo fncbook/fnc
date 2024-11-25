@@ -52,7 +52,7 @@ The following formula is the key to efficient and stable evaluation of a polynom
 Given points $(t_k,y_k)$ for $k=0,\ldots,n$ with all the $t_k$ distinct, the unique polynomial of degree $n$ or less that interpolates the points is
 
 :::{math}
-  :label: bary2
+:label: bary2
   p(x) = \frac{\displaystyle \sum_{k=0}^n \, \dfrac{w_k y_k}{x-t_k}  }{\displaystyle\sum_{k=0}^n \, \dfrac{w_k}{x-t_k}}.
 :::
 ::::
@@ -61,7 +61,7 @@ Given points $(t_k,y_k)$ for $k=0,\ldots,n$ with all the $t_k$ distinct, the uni
 The Lagrange cardinal polynomial {eq}`lagrange` can be written as
 
 :::{math}
-  :label: lagrangealt
+:label: lagrangealt
   \ell_k(x) = \Phi(x) \frac{w_k}{x-t_k},
 :::
 

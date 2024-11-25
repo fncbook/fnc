@@ -31,7 +31,7 @@ Now we turn to one of the most common and important applications of interpolants
 A **finite-difference** formula is a list of values $a_{-p},\ldots,a_q$, called **weights**, such that for all $f$ in some class of functions,
 
 ```{math}
-  :label: fdformula
+:label: fdformula
   f'(x) \approx \frac{1}{h} \sum_{k=-p}^{q} a_k f(x + kh).
 ```
 
@@ -54,14 +54,14 @@ A **forward difference formula** is characterized by {eq}`fdformula` with $p=0$,
 The simplest example of a forward difference formula is inspired by the familiar limit definition of a derivative:
 
 ```{math}
-  :label: forwardFD11
+:label: forwardFD11
   f'(x) \approx \frac{f(x+h)-f(x)}{h},
 ```
 
 which is {eq}`fdformula` with $p=0$, $q=1$, $a_0=-1$, and $a_1=1$. Analogously, we have the backward difference
 
 ```{math}
-  :label: backwardFD11
+:label: backwardFD11
   f'(x) \approx \frac{f(x)-f(x-h)}{h},
 ```
 
@@ -225,7 +225,7 @@ f''(0) \approx  \frac{ f(-2h) - 2 f(0) + f(2h) }{4h^2}.
 This is a valid formula, but it uses values at $\pm 2h$ rather than the closer values at $\pm h$. A better and more generalizable tactic is to return to the quadratic $Q(x)$ in {eq}`fdinterp2` and use $Q''(0)$ to approximate $f''(0)$. Doing so yields
 
 ```{math}
-  :label: centerFD22
+:label: centerFD22
   f''(0) \approx  \frac{ f(-h) - 2 f(0) + f(h) }{h^2},
 ```
 

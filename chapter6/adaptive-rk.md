@@ -46,14 +46,14 @@ $$E_i(qh)\approx C q^{p+1}h^{p+1}.$$
 Our best guess for $q$ would therefore be to set $E_i(qh)\approx \epsilon$, or
 
 ```{math}
-  :label: adaptRKlocal
+:label: adaptRKlocal
   q \approx \left(\frac{\epsilon}{E_i}\right)^{1/(p+1)}.
 ```
 
 Perhaps, though, we should aim to control the contribution to *global* error, which is closer to $E_i(qh)/(q h)$. Then we end up with
 
 ```{math}
-  :label: adaptRKglobal
+:label: adaptRKglobal
   q \le \left(\frac{\epsilon}{E_i}\right)^{1/p}.
 ```
 

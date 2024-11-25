@@ -59,7 +59,7 @@ The 2-norm corresponds to ordinary Euclidean distance.
 In any norm, we refer to a vector $\mathbf{x}$ satisfying $\| \mathbf{x} \|=1$ as a **unit vector**. For any nonzero vector $\mathbf{v}$ we can find a unit vector through the normalization $\mathbf{x}=\mathbf{v}/\|\mathbf{v}\|$. Thus, we can interpret
 
 ```{math}
-  :label: magdir
+:label: magdir
   \mathbf{v} = \| \mathbf{v} \| \,\cdot\, \frac{\mathbf{v}}{\| \mathbf{v} \|}
 ```
 
@@ -117,7 +117,7 @@ Most of the time, when just $\| \mathbf{x} \|$ is written, the 2-norm is implied
 We say that a sequence of vectors $\mathbf{x}_1,\mathbf{x}_2,\ldots$ **converges** to $\mathbf{x}$ if
 
 ```{math}
-  :label: vectorconverge
+:label: vectorconverge
   \lim_{k\rightarrow\infty} \| \mathbf{x}_k - \mathbf{x} \| = 0.
 ```
 

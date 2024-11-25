@@ -29,7 +29,7 @@ FNC.init_format()
 As you learned when starting double integration in vector calculus, the simplest extension of an interval to two dimensions is a rectangle. We will use a particular notation for rectangles:
 
 :::{math}
-  :label: rectangleTP
+:label: rectangleTP
   [a,b] \times [c,d] = \bigl\{ (x,y)\in\mathbb{R}^2 : a\le x \le b,\; c\le y \le d \bigr\}.
 :::
 
@@ -50,7 +50,7 @@ a= x_0< x_1 < \cdots < x_m = b,  \qquad c = y_0 < y_1 < \cdots < y_n = d,
 then a **tensor-product grid** on $[a,b]\times[c,d]$ is the set
 
 :::{math}
-  :label: rectangledisc
+:label: rectangledisc
   \bigl\{ (x_i,y_j): i=0,\ldots,m,\; j=0,\ldots,n \bigr\}.
 :::
 ::::
@@ -257,7 +257,7 @@ In order to solve boundary-value problems in one dimension by collocation, we re
 Consider first $\frac{\partial u}{\partial x}$. In the definition of this partial derivative, the independent variable $y$ is held constant. Note that $y$ is constant within each column of $\mathbf{U} = \mtx(u)$. Thus, we may regard a single column $\mathbf{u}_j$ as a discretized function of $x$ and, as usual, left-multiply by a differentiation matrix $\mathbf{D}_x$ such as {eq}`diffmat12b`. We need to do this for each column of $\mathbf{U}$ by $\mathbf{D}_x$, which is accomplished by $\mathbf{D}_x \mathbf{U}$. Altogether,
 
 :::{math}
-  :label: partfpartx
+:label: partfpartx
   \mtx\left( \frac{\partial u}{\partial x} \right) \approx \mathbf{D}_x \, \mtx(u).
 :::
 

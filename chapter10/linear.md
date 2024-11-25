@@ -24,7 +24,7 @@ FNC.init_format()
 Let us now devise a numerical method based on finite differences for the linear TPBVP
 
 :::{math}
-  :label: linbvp
+:label: linbvp
   u'' + p(x)u' + q(x)u = r(x), \quad u(a)=\alpha,\; u(b)=\beta.
 :::
 
@@ -35,7 +35,7 @@ The first step is to select nodes $x_0=a < x_1< \cdots < x_n=b$. For finite diff
 Rather than solving for a function, we will solve for a vector of its approximate values at the nodes:
 
 :::{math}
-	:label: bvpsolndisc
+:label: bvpsolndisc
     \mathbf{u} =
     \begin{bmatrix}
         u_0 \\ u_1 \\ \vdots \\ u_{n-1} \\ u_n
@@ -54,7 +54,7 @@ where $\hat{u}$ is the exact solution of {eq}`linbvp`. If we so desire, we can u
 Having defined values at the nodes as our unknowns, we impose approximations to the ODE at the same nodes.  This approach is known as **collocation**. Derivatives of the solution are found using differentiation matrices. For example,
 
 :::{math}
-  :label: bvpD1
+:label: bvpD1
     \begin{bmatrix}
         \hat{u}'(x_0) \\[1mm] \hat{u}'(x_1) \\ \vdots \\ \hat{u}'(x_n)
     \end{bmatrix} \approx \mathbf{u}' = \mathbf{D}_x \mathbf{u},
@@ -63,7 +63,7 @@ Having defined values at the nodes as our unknowns, we impose approximations to 
 with an appropriately chosen differentiation matrix $\mathbf{D}_x$. Similarly, we define
 
 :::{math}
-  :label: bvpD2
+:label: bvpD2
     \begin{bmatrix}
         \hat{u}''(x_0) \\[1mm] \hat{u}''(x_1) \\ \vdots \\ \hat{u}''(x_n)
     \end{bmatrix} \approx \mathbf{u}'' = \mathbf{D}_{xx} \mathbf{u},
@@ -74,14 +74,14 @@ with $\mathbf{D}_{xx}$ chosen in accordance with the node set.
 The discrete form of {eq}`linbvp` at the $n+1$ chosen nodes is
 
 :::{math}
-    :label: fdlin2
+:label: fdlin2
     \mathbf{u}'' + \mathbf{P}\mathbf{u}' + \mathbf{Q}\mathbf{u} = \mathbf{r},
 :::
 
 where
 
 :::{math}
-  :label: fdlincoeff
+:label: fdlincoeff
   \begin{split}
   \mathbf{P} &= \begin{bmatrix}
         p(x_0) &  & \\
@@ -104,7 +104,7 @@ where
 If we apply the definitions of $\mathbf{u}'$ and $\mathbf{u}''$ and rearrange, we obtain
 
 :::{math}
-  :label: fdlinnobc
+:label: fdlinnobc
   \mathbf{L} \mathbf{u} = \mathbf{r}, \qquad \mathbf{L} =  \mathbf{D}_{xx} + \mathbf{P}\mathbf{D}_x + \mathbf{Q},
 :::
 
@@ -116,7 +116,7 @@ which is a linear system of $n+1$ equations in $n+1$ unknowns.
 We have not yet incorporated the boundary conditions. Those take the form of the additional linear conditions $u_0=\alpha$ and $u_n=\beta$. We might regard this situation as an overdetermined system, suitable for linear least-squares. However, it's usually preferred to impose the boundary conditions and collocation conditions exactly, so we need to discard two of the collocation equations to keep the system square. The obvious candidates for deletion are the collocation conditions at the two endpoints. We may express these deletions by means of a matrix that is an $(n+1)\times(n+1)$ identity with the first and last rows deleted:
 
 :::{math}
-  :label: rowdeletion
+:label: rowdeletion
   \mathbf{E} =
   \begin{bmatrix}
   	0      & 1      & 0      & \cdots & 0      \\
@@ -134,7 +134,7 @@ where as always $\mathbf{e}_k$ is the $k$th column (here starting from $k=0$) of
 Finally, we note that $\hat{u}(a)= \mathbf{e}_0^T\mathbf{u}$ and $\hat{u}(b)= \mathbf{e}_n^T\mathbf{u}$, so the linear system including both the ODE and the boundary condition collocations is
 
 :::{math}
-  :label: fdlinbc
+:label: fdlinbc
   \begin{bmatrix}
     \mathbf{e}_0^T \\[1mm] \mathbf{E}\mathbf{L} \\[1mm]  \mathbf{e}_n^T
   \end{bmatrix}

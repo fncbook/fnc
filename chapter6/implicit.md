@@ -137,7 +137,7 @@ plot!(n,(n/n[1]).^(-4),l=:dash,label=L"O(n^{-4})")
 The implementation of an implicit multistep method is more difficult. Consider the second-order implicit formula AM2, also known as the trapezoid method. To advance from step $i$ to $i+1$, we need to solve
 
 ```{math}
-  :label: AM2solve
+:label: AM2solve
   \mathbf{z} - \tfrac{1}{2} h f(t_{i+1},\mathbf{z})  = \mathbf{u}_i + \tfrac{1}{2} h \mathbf{f}(t_i,\mathbf{u}_i)
 ```
 

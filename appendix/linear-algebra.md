@@ -93,7 +93,7 @@ For real vectors, the complex conjugates above have no effect and ${}^*$ becomes
 In order for matrices $\mathbf{A}$ and $\mathbf{B}$ to be multiplied, it is necessary that their inner dimensions match. Thus, if $\mathbf{A}$ is $m\times p$, then $\mathbf{B}$ must be $p \times n$. In terms of scalar components, the $(i,j)$ entry of $\mathbf{C}=\mathbf{A}\mathbf{B}$ is given by
 
 ```{math}
-  :label: scalarmatrixmult
+:label: scalarmatrixmult
   C_{ij} = \sum_{k=1}^p A_{ik} B_{kj}.
 ```
 
@@ -112,7 +112,7 @@ $$
 Hence while we cannot change the ordering of the *terms*, we can change the order of the *operations*. This is a property that we will use repeatedly. We also note here the important identity
 
 ```{math}
-  :label: transposeidentity
+:label: transposeidentity
   (\mathbf{A}\mathbf{B})^T=\mathbf{B}^T\mathbf{A}^T.
 ```
 
@@ -123,7 +123,7 @@ Specifically, if either product is defined, then they both are defined and equal
 It is worth reinterpreting {eq}`scalarmatrixmult` at a vector level. If $\mathbf{A}$ has dimensions $m\times n$, it can be multiplied on the right by an $n \times 1$ column vector $\mathbf{v}$ to produce an $m \times 1$ column vector $\mathbf{A}\mathbf{v}$, which satisfies
 
 ```{math}
-  :label: mvcol
+:label: mvcol
   \mathbf{A}\mathbf{v} =
   \begin{bmatrix}
     \displaystyle \sum_k A_{1k}v_k \\[2mm]
@@ -157,7 +157,7 @@ Multiplying a matrix on the right by a column vector produces a linear combinati
 There is a similar interpretation of multiplying $\mathbf{A}$ on the left by a row vector. Keeping to our convention that boldface letters represent column vectors, we write, for $\mathbf{v}\in\mathbb{R}^m$,
 
 ```{math}
-  :label: mvrow
+:label: mvrow
   \begin{split}
   \mathbf{v}^T \mathbf{A} &=
   \begin{bmatrix}
@@ -185,7 +185,7 @@ Multiplying a matrix on the left by a row vector produces a linear combination o
 These two observations extend to more general matrix-matrix multiplications. One can show that (assuming that $\mathbf{A}$ is $m\times p$ and $\mathbf{B}$ is $p\times n$)
 
 ```{math}
-  :label: mmhoriz
+:label: mmhoriz
   \mathbf{A}\mathbf{B} =
   \mathbf{A} \begin{bmatrix}
     \mathbf{b}_1 & \mathbf{b}_2 & \cdots & \mathbf{b}_n
@@ -198,7 +198,7 @@ These two observations extend to more general matrix-matrix multiplications. One
 Equivalently, if we write $\mathbf{A}$ in terms of rows, then
 
 ```{math}
-  :label: mmvert
+:label: mmvert
   \mathbf{A} =
   \begin{bmatrix}
     \mathbf{w}_1^T \\[2mm] \mathbf{w}_2^T \\ \vdots \\ \mathbf{w}_m^T

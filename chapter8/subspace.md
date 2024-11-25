@@ -189,7 +189,7 @@ Given matrix $\mathbf{A}$ and vector $\mathbf{u}$:
     b. Let
 
     :::{math}
-    :label: arnoldigs
+:label: arnoldigs
     \mathbf{v} = (\mathbf{A} \mathbf{q}_m) - H_{1m} \,\mathbf{q}_1 - H_{2m}\, \mathbf{q}_2 - \cdots - H_{mm}\, \mathbf{q}_m.
     :::
 

@@ -93,7 +93,7 @@ Given matrix $\mathbf{A}$ and shift $s$:
 
     a. Solve for $\mathbf{y}_k$ in
     :::{math}
-    :label: shiftinvstep
+:label: shiftinvstep
     (\mathbf{A}-s\mathbf{I}) \mathbf{y}_k =\mathbf{x}_k .
     :::
 

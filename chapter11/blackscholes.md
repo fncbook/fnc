@@ -65,7 +65,7 @@ In order to follow the usual convention of having time flow forward instead of b
 now defined for $0\le \eta \le T$. Here we have adopted the common notation of using subscripts for partial derivatives. In the new time variable we have the **initial condition**
 
 :::{math}
-  :label: bspdeIC
+:label: bspdeIC
   v(S,0) = H(S),
 :::
 

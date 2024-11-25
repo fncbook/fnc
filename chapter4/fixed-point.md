@@ -39,7 +39,7 @@ There is an extraordinarily simple way to try to find a fixed point of any given
 ```{prf:algorithm} Fixed-point iteration
 Given function $g$ and initial value $x_1$, define
 ```{math}
-  :label: fixedpointiter
+:label: fixedpointiter
   x_{k+1} = g(x_k), \qquad k=1,2,\ldots.
 ```
 
@@ -154,7 +154,7 @@ Suppose a fixed point $p$ is the desired limit of an iteration $x_1,x_2,\ldots$.
 assuming that $g$ has at least two continuous derivatives. But by definition, $g(p)=p$, so
 
 ```{math}
-  :label: fpconverge
+:label: fpconverge
   \epsilon_{k+1} = g'(p) \epsilon_k + O(\epsilon_k^2).
 ```
 
@@ -182,7 +182,7 @@ The prediction of the series analysis above is that if the fixed point iteration
 Suppose a sequence $x_k$ approaches limit $x^*$. If the error sequence $\epsilon_k=x_k - x^*$ satisfies
 
 ```{math}
-  :label: linearconvergence
+:label: linearconvergence
   \lim_{k\to\infty} \frac{|\epsilon_{k+1}|}{|\epsilon_k|} = \sigma < 1,
 ```
 
@@ -276,7 +276,7 @@ The convergence condition $\sigma=|g'(p)|<1$ derived by series expansion is a sp
 A function $g$ is said to satisfy a **Lipschitz condition** with constant $L$ on the interval $S\subset\mathbb{R}$ if, for all $s,t\in S$, 
   
 ```{math}
-    :label: lipschitz
+:label: lipschitz
     \bigl| g(s)-g(t) \bigr| \le L \bigl| s-t \bigr|.
 ```
 ````

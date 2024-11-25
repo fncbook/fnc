@@ -63,7 +63,7 @@ The functions $H_0,\ldots,H_n$ are called **hat functions**. They depend on the 
 Each hat function is globally continuous and is linear inside every interval $[t_k,t_{k+1}]$.  Consequently, any linear combination of them will have the same property. Furthermore, *any* such function is expressible as a unique linear combination of hat functions, i.e.,
 
 ```{math}
-  :label: plbasis
+:label: plbasis
   \sum_{k=0}^n c_k H_k(x)
 ```
 
@@ -170,7 +170,7 @@ H_k(t_i) =
 All candidate piecewise linear (PL) functions can be expressed as a linear combination such as {eq}`plbasis` for some coefficients $c_0,\ldots,c_n$. But because of the cardinality conditions and the necessity for $p(x)$ to interpolate the data values in $\mathbf{y}$, expressing the interpolant using the hat functions is trivial:
 
 ```{math}
-  :label: plbasissol
+:label: plbasissol
   p(x) = \sum_{k=0}^n y_k H_k(x).
 ```
 
@@ -380,7 +380,7 @@ plot!(h,order2,l=:dash,label=L"O(h^2)",xflip=true,
 4. ✍ Show that for any node distribution and any $x\in[t_0,t_n]$,
   
     ```{math}
-    :label: plpu
+:label: plpu
     \sum_{k=0}^n H_k(x) = 1.
     ```
 

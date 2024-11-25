@@ -29,14 +29,14 @@ So far we have considered the method of lines for problems with periodic end con
 Suppose we are given a nonlinear PDE of the form
 
 :::{math}
-  :label: parabolicPDE
+:label: parabolicPDE
   u_t = \phi(t,x,u,u_x,u_{xx}), \quad  a \le x \le b.
 :::
 
 Not all such PDEs are parabolic (essentially, including diffusion), but we will assume this to be the case. Suppose also that the solution is subject to the boundary conditions
 
 :::{math}
-  :label: parabolicBC
+:label: parabolicBC
   g_1\left( u(a,t), \frac{\partial u}{\partial x}(a,t) \right) &= 0, \\
   g_2\left( u(b,t), \frac{\partial u}{\partial x}(b,t) \right) &= 0. \\ \\
 :::
@@ -50,7 +50,7 @@ These include Dirichlet, Neumann, and Robin conditions, which are the linear cas
 As usual, we replace $u(x,t)$ by the semidiscretized $\mathbf{u}(t)$, where $u_i(t)\approx \hat{u}(x_i,t)$ and $i=0,\ldots,m$. We require the endpoints of the interval to be included in the discretization, that is, $x_0=a$ and $x_m=b$. Then we have a division of the semidiscrete unknown $\mathbf{u}(t)$ into interior and boundary nodes:
 
 :::{math}
-  :label: mol-divide
+:label: mol-divide
   \mathbf{u} =
   \begin{bmatrix}
     u_0 \\ \mathbf{v} \\ u_m
@@ -60,7 +60,7 @@ As usual, we replace $u(x,t)$ by the semidiscretized $\mathbf{u}(t)$, where $u_i
 where $\mathbf{v}$ are the solution values over the interior of the interval. The guiding principle is to let the interior unknowns $\mathbf{v}$ be governed by a discrete form of the PDE, while the endpoint values are chosen to satisfy the boundary conditions. As a result, we will develop an initial-value problem for the interior unknowns only:
 
 :::{math}
-  :label: mol-interior
+:label: mol-interior
   \frac{d \mathbf{v}}{d t} = \mathbf{f}(t,\mathbf{v}).
 :::
 
@@ -76,7 +76,7 @@ Then Equation {eq}`parabolicBC` takes the form
 ```
 
 :::{math}
-  :label: mol-bcsystem
+:label: mol-bcsystem
   g_1( u_0, u'_0 ) &= 0, \\
   g_2( u_m, u'_m ) &= 0.
 :::

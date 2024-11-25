@@ -250,7 +250,7 @@ Let $\mathbf{A}\in\mathbb{C}^{m\times n}$ have an SVD $\mathbf{A}=\mathbf{U}\mat
 1. The 2-norm satisfies
 
     ```{math}
-    :label: svdnorm
+:label: svdnorm
     \| \mathbf{A} \|_2 = \sigma_1.
     ```
 
@@ -259,7 +259,7 @@ Let $\mathbf{A}\in\mathbb{C}^{m\times n}$ have an SVD $\mathbf{A}=\mathbf{U}\mat
 3. Let $r=\min\{m,n\}$. Then
 
     ```{math}
-    :label: svdcond
+:label: svdcond
     \kappa_2(\mathbf{A}) = \|\mathbf{A}\|_2\|\mathbf{A}^+\|_2 = \frac{\sigma_1}{\sigma_r},
     ```
 

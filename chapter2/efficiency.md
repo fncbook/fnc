@@ -209,7 +209,7 @@ If the run time is dominated by flops, then we expect this ratio to be $(4000)^2
 Suppose that the running time $t$ of an algorithm obeys a function that is $O(n^p)$. For sufficiently large $n$, $t\approx Cn^p$ for a constant $C$ should be a good approximation. Hence
 
 ```{math}
-  :label: loglogfit
+:label: loglogfit
   t \approx Cn^p \qquad \Longleftrightarrow \qquad \log t \approx p(\log n) + \log C.
 ```
 
@@ -274,7 +274,7 @@ sum( L[i,j]*x[j] for j in 1:i-1 )
 This line requires $i-1$ multiplications and $(i-2)$ additions, for a total of $2i-3$ flops. Line 14 adds two more flops. These lines are performed within a loop as $i$ ranges from 1 to $n$, so the total count is
 
 ```{math}
-  :label: trisolveflops
+:label: trisolveflops
   1 + \sum_{i=1}^n (2i-3) = 1 - 3n + 2 \sum_{i=1}^n i.
 ```
 

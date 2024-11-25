@@ -27,7 +27,7 @@ FNC.init_format()
 Closely related to the advection equation is the **wave equation**,
 
 :::{math}
-  :label: wavepde
+:label: wavepde
     u_{tt} - c^2 u_{xx} = 0.
 :::
 
@@ -72,7 +72,7 @@ In order to be compatible with the standard IVP solvers that we have encountered
 However, there is another, less obvious option for reducing to a first-order system:
 
 :::{math}
-  :label: wavefirst2
+:label: wavefirst2
     u_t &= z_x, \\
     z_t &= c^2 u_{x}.
 :::
@@ -91,7 +91,7 @@ z(x,0) &= g(x), \qquad 0 \le x \le 1.
 Because waves travel in both directions, there is no preferred upwind direction. This makes a centered finite difference in space appropriate. Before application of the boundary conditions, semidiscretization of {eq}`wavefirst2` leads to
 
 :::{math}
-  :label: waveMOL
+:label: waveMOL
   \begin{bmatrix}
     \mathbf{u}'(t) \\[2mm]  \mathbf{z}'(t)
   \end{bmatrix}

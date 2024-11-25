@@ -74,7 +74,7 @@ plot([exp,x->exp(sin(x))],0,1,fill=0,layout=(2,1),
 Numerical integration, which also goes by the older name *quadrature*, is performed by combining values of the integrand sampled at nodes. In this section we will assume equally spaced nodes using the definitions
 
 ```{math}
-  :label: nc-nodes
+:label: nc-nodes
   t_i = a +i h, \quad h=\frac{b-a}{n}, \qquad i=0,\ldots,n.
 ```
 
@@ -82,7 +82,7 @@ Numerical integration, which also goes by the older name *quadrature*, is perfor
 A **numerical integration** formula is a list of **weights** $w_0,\ldots,w_n$ chosen so that for all $f$ in some class of functions,
 
 ```{math}
-  :label: quadrature
+:label: quadrature
   \begin{split}
     \int_a^b f(x)\, dx \approx h \sum_{i=0}^n w_if(t_i) =  h \bigl[ w_0f(t_0)+w_1f(t_1)+\cdots w_nf(t_n) \bigr],
   \end{split}
@@ -306,7 +306,7 @@ Knowing the structure of the error allows the use of **extrapolation** to improv
 error expansion
 
 ```{math}
-  :label: extraperror
+:label: extraperror
   A_0 = A(h) + c_1 h + c_2 h^2 + c_3 h^3 + \cdots.
 ```
 
@@ -321,28 +321,28 @@ Using $I$ for the exact integral of $f$, the trapezoid formula has
 as proved by the Euler–Maclaurin formula {eq}`eulermaclaurin`. The error constants depend on $f$ and can't be evaluated in general, but we know that this expansion holds. For convenience we recast the error expansion in terms of $n=O(h^{-1})$:
 
 ```{math}
-  :label: traperrorexpansion
+:label: traperrorexpansion
   I = T_f(n) + c_2 n^{-2} + c_4 n^{-4} + \cdots.
 ```
 
 We now make the simple observation that
 
 ```{math}
-  :label: traperrorexpansion2n
+:label: traperrorexpansion2n
   I = T_f(2n) + \tfrac{1}{4} c_2 n^{-2} + \tfrac{1}{16} c_4 n^{-4} + \cdots.
 ```
 
 It follows that if we combine {eq}`traperrorexpansion` and {eq}`traperrorexpansion2n` correctly, we can cancel out the second-order term in the error. Specifically, define
 
 ```{math}
-  :label: nc-simpson
+:label: nc-simpson
   S_f(2n) = \frac{1}{3} \Bigl[ 4 T_f(2n) - T_f(n) \Bigr].
 ```
 
 (We associate $2n$ rather than $n$ with the extrapolated result because of the total number of nodes needed.) Then
 
 ```{math}
-  :label: extraplevel1
+:label: extraplevel1
   I = S_f(2n) + O(n^{-4}) =  b_4 n^{-4} + b_6 n^{-6} + \cdots.
 ```
 
@@ -360,7 +360,7 @@ Equation {eq}`extraplevel1` is another particular error expansion in the form {e
 the proper combination this time is
 
 ```{math}
-  :label: nc-sixth
+:label: nc-sixth
   R_f(4n) = \frac{1}{15} \Bigl[ 16 S_f(4n) - S_f(2n) \Bigr],
 ```
 
@@ -501,7 +501,7 @@ If we consider the computational time to be dominated by evaluations of $f$, the
     ```
 
     ```{math}
-      :label: gregory
+:label: gregory
         G_f(h) = T_f(h) - \frac{h}{24} \left[ 3\Bigl( f(t_n)+f(t_0) \Bigr) -4\Bigr( f(t_{n-1}) + f(t_1) \Bigr) + \Bigl( f(t_{n-2})+f(t_2)   \Bigr) \right],
     ```
 
@@ -540,7 +540,7 @@ If we consider the computational time to be dominated by evaluations of $f$, the
     **(d)** Now also assume that $n=2m$ for an integer $m$. Derive Simpson's formula,
 
     ```{math}
-      :label: simpson
+:label: simpson
       \begin{split}
         \int_a^b f(x)\, dx \approx  \frac{h}{3}\bigl[ &f(t_0) + 4f(t_1) + 2f(t_2) + 4f(t_3) + 2f(t_4) + \cdots\\
         &+ 2f(t_{n-2}) + 4f(t_{n-1}) + f(t_n) \bigr].

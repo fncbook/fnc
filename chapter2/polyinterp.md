@@ -59,7 +59,7 @@ such that $y_i=p(t_i)$ for all $i$. These conditions are used to determine the c
 These equations form a linear system for the coefficients $c_i$:
 
 ```{math}
-  :label: vandersystem
+:label: vandersystem
   \begin{bmatrix}
     1 & t_1 & \cdots & t_1^{n-2} & t_1^{n-1} \\
     1 & t_2 & \cdots & t_2^{n-2} & t_2^{n-1} \\

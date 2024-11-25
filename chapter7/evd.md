@@ -146,7 +146,7 @@ Observe that if $\mathbf{A}\mathbf{v} = \lambda \mathbf{v}$ for nonzero $\mathbf
 We stress that while {eq}`ev-all` is possible for all square matrices, {eq}`evdecomp` is not.  One simple example of a nondiagonalizable matrix is
 
 ```{math}
-  :label: jordanblock
+:label: jordanblock
   \mathbf{B} = \begin{bmatrix}
     1 & 1\\0 & 1
   \end{bmatrix}.

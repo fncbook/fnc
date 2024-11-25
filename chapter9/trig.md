@@ -45,7 +45,7 @@ for real constants $a_k,b_k$.
 It turns out that trigonometric interpolation allows us to return to equally spaced nodes without any problems. We therefore define $N=2n+1$ equally spaced nodes inside the interval $[-1,1]$ by
 
 :::{math}
-  :label: trignodes
+:label: trignodes
   t_k = \frac{2k}{N}, \quad k=-n,\ldots,n.
 :::
 
@@ -212,21 +212,21 @@ plot(N,err,m=:o,title="Convergence of trig interpolation",
 Although the cardinal form of the interpolant is useful and stable, there is a fundamental alternative. It begins with an equivalent complex form of the trigonometric interpolant {eq}`trigpoly-real`, 
 
 :::{math}
-  :label: trigpoly-complex
+:label: trigpoly-complex
   p(x) = \sum_{k=-n}^n c_k e^{ik\pi x}.
 :::
 
 The connection is made through Euler's formula,
 
 :::{math}
-  :label: eulerformula
+:label: eulerformula
   e^{i\theta} = \cos(\theta) + i\sin(\theta),
 :::
 
 and the resultant identities
 
 :::{math}
-  :label: eulersincos
+:label: eulersincos
   \cos \theta = \frac{e^{i \theta}+e^{-i\theta}}{2}, \qquad \sin \theta = \frac{e^{i \theta}-e^{-i\theta}}{2i}.
 :::
 

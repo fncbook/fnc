@@ -19,4 +19,5 @@ The book was originally written for MATLAB. That version is still [available for
 
 <!-- needed to make Mathjax work for some reason -->
 ```{math}
+\relax
 ```

@@ -24,7 +24,7 @@ FNC.init_format()
 A common situation in computation is that a problem has certain properties or structure that can be used to get a faster or more accurate solution. There are many properties of a matrix that can affect LU factorization. For example, an $n \times n$ matrix $A$ is **diagonally dominant** if
 
 ```{math}
-  :label: diag-dominant
+:label: diag-dominant
   |A_{ii}| > \sum_{\substack{j=1\\ j \neq i}}^{n} |A_{ij}| \hskip 0.25in \text{for each } i=1,\ldots,n.
 ```
 
@@ -261,7 +261,7 @@ Just as pivoting is necessary to stabilize LU factorization, the LDL$^T$ factori
 Suppose that $\mathbf{A}$ is $n\times n$ and $\mathbf{x}\in\mathbb{R}^n$. Observe that $\mathbf{x}^T\mathbf{A}\mathbf{x}$ is the product of $1\times n$, $n\times n$, and $n\times 1$ matrices, so it is a scalar, sometimes referred to as a **quadratic form**. It can be expressed as
 
 ```{math}
-  :label: quadratic-form
+:label: quadratic-form
   \mathbf{x}^T\mathbf{A}\mathbf{x} = \sum_{i=1}^n \sum_{j=1}^n A_{ij}x_ix_j.
 ```
 
@@ -275,7 +275,7 @@ Suppose that $\mathbf{A}$ is $n\times n$ and $\mathbf{x}\in\mathbb{R}^n$. Observ
 A real $n\times n$ matrix $\mathbf{A}$ is called a **symmetric positive definite matrix** (or SPD matrix) if it is symmetric and, for all nonzero $\mathbf{x}\in\mathbb{R}^n$,
 
 ```{math}
-  :label: SPD-def
+:label: SPD-def
   \mathbf{x}^T \mathbf{A} \mathbf{x} > 0.
 ```
 ::::
@@ -293,7 +293,7 @@ where $\mathbf{z}=\mathbf{L}^T \mathbf{x}$. Note that since $\mathbf{L}$ is unit
 [^sqrt]: Except for this diagonal, positive definite case, it's not trivial to define the square root of a matrix, so don't generalize the notation used here.
 
 ```{math}
-  :label: diag-sqrt
+:label: diag-sqrt
   \mathbf{D} =
   \begin{bmatrix}
     D_{11} &        &        & \\

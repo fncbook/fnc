@@ -51,7 +51,7 @@ In order to get a fully specified problem, the Laplace or Poisson equations must
 With the unknown solution represented by its values $\mathbf{U}=\mtx(u)$ on a rectangular grid, and second-derivative finite-difference or spectral differentiation matrices $\mathbf{D}_{xx}$ and $\mathbf{D}_{yy}$, the Poisson equation {eq}`poispde` becomes the discrete equation
 
 :::{math}
-  :label: poissylvester
+:label: poissylvester
    \mathbf{D}_{xx}\mathbf{U} + \mathbf{U} \mathbf{D}_{yy}^T = \mathbf{F},
 :::
 
@@ -68,7 +68,7 @@ where $\mathbf{F}=\mtx(f)$. Equation {eq}`poissylvester`, with an unknown matrix
 Let $\mathbf{A}$ be $m\times n$ and $\mathbf{B}$ be $p\times q$. The **Kronecker product** $\mathbf{A}\otimes \mathbf{B}$ is the $mp\times nq$ matrix given by
 
 :::{math}
-    :label: krondef
+:label: krondef
     \mathbf{A}\otimes \mathbf{B} =
     \begin{bmatrix}
     A_{11} \mathbf{B} & A_{12}\mathbf{B} & \cdots & A_{1n}\mathbf{B} \\
@@ -189,7 +189,7 @@ $$
 Hence from $\mathbf{A}$ we should subtract away its $i$th row and add $\mathbf{e}_i^T$ back in. When this is done for all $i\in B$, the result is the replacement of the relevant rows of $\mathbf{A}$ with relevant rows of the identity:
 
 :::{math}
-  :label: pois2bcrep
+:label: pois2bcrep
   \tilde{\mathbf{A}} = \mathbf{A} - \mathbf{I}_B\mathbf{A} +\mathbf{I}_B,
 :::
 

@@ -240,7 +240,7 @@ The numerical solutions evidently don't satisfy the right boundary condition as 
 The cause is readily explained. The solution to the ODE with $u(0)=-1$ and $u'(0)=s_2$  is
 
 :::{math}
-  :label: shootinstabshoot
+:label: shootinstabshoot
     \frac{s_2}{\lambda}\sinh(\lambda x) - 1.
 :::
 

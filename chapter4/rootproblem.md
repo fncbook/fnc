@@ -136,7 +136,7 @@ Since $r$ is a root, we have $f(r)=0$. This lets us relate $\delta$ to $\epsilon
 If $f$ is differentiable at a root $r$, then the absolute condition number of $r$ with respect to constant changes in $f$ is
 
 ```{math}
-  :label: rootcondnum
+:label: rootcondnum
   \kappa_r = \bigl| f'(r) \bigr|^{-1}.
 ```
 
@@ -283,7 +283,7 @@ When $r$ is a nonsimple root, the condition number {eq}`rootcondnum` is effectiv
 5. ⌨ The most easily observed properties of the orbit of a celestial body around the sun are the period $\tau$ and the elliptical eccentricity $\epsilon$. (A circle has $\epsilon=0$.) From these, it is possible to find at any time $t$ the angle $\theta(t)$ made between the body's position and the major axis of the ellipse. This is done through
   
     ```{math}
-    :label: kepler1
+:label: kepler1
     \tan \frac{\theta}{2} = \sqrt{\frac{1+\epsilon}{1-\epsilon}}\,
     \tan \frac{\psi}{2},
     ```
@@ -291,7 +291,7 @@ When $r$ is a nonsimple root, the condition number {eq}`rootcondnum` is effectiv
     where the eccentric anomaly $\psi(t)$ satisfies Kepler's equation:
   
     ```{math}
-    :label: kepler2
+:label: kepler2
     \psi - \epsilon \sin \psi - \frac{2\pi t}{\tau} = 0.
     ```
 

@@ -31,7 +31,7 @@ $$
 However, we will assume that the linear problem is presented in the equivalent form
 
 :::{math}
-    :label: strongbvp
+:label: strongbvp
     - \frac{d }{d x} \Bigl[ c(x)\, u'(x) \Bigr] + s(x) \, u(x) = f(x),
     \quad u(a)=0,\; u(b)=0.
 :::
@@ -211,7 +211,7 @@ where as usual $u_j$ is the value of the numerical solution at $t_j$. Note that 
 The importance of the hat function basis in the Galerkin method is that each one is nonzero in only two adjacent intervals. As a result, we shift the focus from integrations over the entire interval in {eq}`galerkinsystem` to integrations over each subinterval, $I_k=[t_{k-1},t_k]$. Specifically, we use
 
 :::{math}
-    :label: femsystem
+:label: femsystem
     \begin{split}
       K_{ij} &= \sum_{k=1}^{n} \left[ \int_{I_k} c(x) H_i'(x) H_j'(x) \,dx\right],
                \qquad i,j=1,\ldots,n-1, \\
@@ -260,7 +260,7 @@ where the squiggly arrow is meant to show that the values of the $2\times 2$ mat
 In general, over $I_k$ for $1<k<n$, we have $H_k'= h_k^{-1}$ and $H_{k-1}'=-h_k^{-1}$. The stiffness matrix contributions over $I_k$ become
 
 :::{math}
-    :label: PLstiff
+:label: PLstiff
   \frac{\overline{c}_k}{h_k}
   \begin{bmatrix}
     1 & -1 \\ -1 & 1
@@ -274,7 +274,7 @@ In general, over $I_k$ for $1<k<n$, we have $H_k'= h_k^{-1}$ and $H_{k-1}'=-h_k^
 One finds the contributions to the other structures by similar computations:
 
 :::{math}
-  :label: PLmass
+:label: PLmass
   \frac{\overline{s}_k h_k}{6}
   \begin{bmatrix}
     2 & 1 \\ 1 & 2
@@ -288,7 +288,7 @@ One finds the contributions to the other structures by similar computations:
 and
 
 :::{math}
-  :label: PLrhs
+:label: PLrhs
   \frac{\overline{f}_k h_k}{2}
   \begin{bmatrix}
     1 \\ 1

@@ -221,7 +221,7 @@ where the $\phi_k$ are cardinal interpolating functions.
 Suppose the data vector is perturbed from $\mathbf{y}$ to $\mathbf{y}+ \mathbf{d}$. Then
 
 ```{math}
-  :label: lininterp-perturb
+:label: lininterp-perturb
   \cI(\mathbf{y} + \mathbf{d}) - \cI(\mathbf{y}) = \cI(\mathbf{d}) = \sum_{k=0}^n d_k \phi_k.
 ```
 

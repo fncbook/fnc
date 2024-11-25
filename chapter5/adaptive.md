@@ -76,7 +76,7 @@ We would like an algorithm that automatically detects and reacts to a situation 
 Ideally, we would like to make adaptation decisions based on the error of the integration result. Knowing the error exactly would be equivalent to knowing the exact answer, but we can estimate it using the extrapolation technique of {numref}`section-localapprox-integration`. Consider the Simpson formula {eq}`extraplevel1` resulting from one level of extrapolation from trapezoid estimates:
 
 ```{math}
-  :label: extraplevel1repeat
+:label: extraplevel1repeat
   S_f(2n) = \frac{1}{3} \Bigl[ 4 T_f(2n) - T_f(n) \Bigr].
 ```
 
@@ -89,14 +89,14 @@ We expect this method to be fourth-order accurate, i.e.,
 We can further extrapolate to sixth-order accuracy using {eq}`nc-sixth`:
 
 ```{math}
-  :label: extraplevel2repeat
+:label: extraplevel2repeat
   R_f(4n) = \frac{1}{15} \Bigl[ 16 S_f(4n) - S_f(2n) \Bigr].
 ```
 
 By virtue of higher order of accuracy, $R_f(4n)$ should be more accurate than $S_f(4n)$. Hence a decent estimate of the error in the better of the two Simpson values is
 
 ```{math}
-  :label: adapterr
+:label: adapterr
   E = R_f(4n) - S_f(4n) = \frac{S_f(4n) - S_f(2n)}{15}.
 ```
 
@@ -116,7 +116,7 @@ We are likely to sample values of the integrand that are larger than, say, $1/2$
 Typically we use both relative and absolute error, stopping when either one is considered small enough. Algebraically, the test is
 
 ```{math}
-  :label: absreltolerance
+:label: absreltolerance
   |E| < \delta_a + \delta_r |S_f(n)|,
 ```
 

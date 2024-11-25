@@ -28,7 +28,7 @@ Few applications involve an initial-value problem with just a single dependent v
 Variations of the following model are commonly seen in ecology:
 
 ```{math}
-  :label: predprey
+:label: predprey
   \begin{split}
     \frac{d y}{d t} &= y(1-\alpha y) - \frac{yz}{1+\beta y}, \\
     \frac{d z}{d t} &= -z + \frac{yz}{1+\beta y},
@@ -59,7 +59,7 @@ We now upgrade our IVP definition, {numref}`Definition {number} <definition-basi
 A vector-valued first-order **initial-value problem** (IVP) is
   
 ```{math}
-  :label: IVPsys
+:label: IVPsys
   \mathbf{u}'(t) = \mathbf{f}\bigl(t,\mathbf{u}(t)\bigr), \qquad a \le t \le b, \qquad
   \mathbf{u}(a)=\mathbf{u}_0,
 ```
@@ -77,7 +77,7 @@ We use the terms *IVP system* and *vector-valued IVP* interchangeably; a system 
 The generalization of any scalar IVP solver to handle systems is straightforward. Consider Euler's method, which in system form becomes
 
 ```{math}
-  :label: eulersys
+:label: eulersys
   \begin{split}
     \mathbf{u}_{i+1} &= \mathbf{u}_i + h\,\mathbf{f}(t_i,\mathbf{u}_i), \qquad i=0,\ldots,n-1.
   \end{split}

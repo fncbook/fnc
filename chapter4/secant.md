@@ -192,7 +192,7 @@ Hence the errors in the secant method converge like $\epsilon_{k+1} = c (\epsilo
 Suppose a sequence $x_k$ approaches limit $x^*$. If the error sequence $\epsilon_k=x_k - x^*$ satisfies
 
 ```{math}
-  :label: superlinear-convergence
+:label: superlinear-convergence
   \lim_{k\to\infty} \frac{|\epsilon_{k+1}|}{|\epsilon_k|^\alpha} = L
 ```
 

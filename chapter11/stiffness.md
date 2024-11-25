@@ -304,7 +304,7 @@ Hence the trapezoid formula is as accurate as we can hope for in the family of A
 5. The *van der Pol equation* is a famous nonlinear oscillator given by
   
     :::{math}
-      :label: vanderpol
+:label: vanderpol
       y'' - \mu(1-y^2)y' + y = 0,
     :::
 

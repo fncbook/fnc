@@ -27,7 +27,7 @@ FNC.init_format()
 We next describe how to apply the method of lines to PDEs of the form
 
 :::{math}
-  :label: pde2d
+:label: pde2d
   u_t = \phi(u,u_x,u_y,u_{xx},u_{xy},u_{yy}), \quad (x,y)\in [a,b]\times [c,d].
 :::
 
@@ -390,7 +390,7 @@ closeall();  mp4(anim,"figures/diffadv-wave.mp4")
 5. From Maxwell's equations we can find a way to convert the wave equation to a first-order form that, unlike {eq}`wave2dfirst`, uses only first-order derivatives in space:
 
     :::{math}
-    :label: wave2dTM
+:label: wave2dTM
     u_t &= c^2(v_y - w_x),\\ 
     v_t &= u_y, \\ 
     w_t &= -u_x,

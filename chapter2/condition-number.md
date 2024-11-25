@@ -228,7 +228,7 @@ Suppose that $\mathbf{A}\mathbf{x}=\mathbf{b}$ and $\tilde{\mathbf{x}}$ is a com
 For the problem $\mathbf{A}\mathbf{x}=\mathbf{b}$, the **residual** at a solution estimate $\tilde{\mathbf{x}}$ is 
 
 ```{math}
-  :label: residual
+:label: residual
   \mathbf{r} = \mathbf{b} - \mathbf{A}\tilde{\mathbf{x}}.
 ```
 ::::
@@ -245,7 +245,7 @@ $$\mathbf{d} = \mathbf{A}(\mathbf{x}+\mathbf{h})-\mathbf{b}=\mathbf{A}\mathbf{h}
 Thus {eq}`linsyscondb` is equivalent to
 
 ```{math}
-  :label: residualcond
+:label: residualcond
   \frac{\| \mathbf{x}-\tilde{\mathbf{x}} \|}{\| \mathbf{x} \|} \le
   \kappa(\mathbf{A}) \frac{\| \mathbf{r} \|}{\| \mathbf{b} \|}.
 ```

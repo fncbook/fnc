@@ -28,7 +28,7 @@ FNC.init_format()
 Let's focus on the constant-velocity linear advection equation,
 
 :::{math}
-  :label: advectioncc
+:label: advectioncc
   u_t + c u_x = 0, \quad u(0,x)=u_0(x).
 :::
 
@@ -57,14 +57,14 @@ Let $U_{i,j}$ be the approximate solution of an evolutionary PDE at $x=x_i$, $t=
 In {eq}`advectioncc`, suppose we discretize $u_x$ by a centered difference,
 
 :::{math}
-  :label: cflcentral
+:label: cflcentral
   u_x(x_i,t_j) \approx \frac{U_{i+1,j}-U_{i-1,j}}{2h}.
 :::
 
 If we use the Euler time discretization, then
 
 :::{math}
-  :label: cflcenteuler
+:label: cflcenteuler
   \mathbf{u}_{j+1} = (\mathbf{I} - c \tau \mathbf{D}_x) \mathbf{u}_j,
 :::
 
@@ -100,7 +100,7 @@ Although we will not provide the rigor behind this theorem, its conclusion is no
 Returning to {numref}`Example {number} <example-upwind-centered>`, the numerical domain of dependence depicted in {numref}`Figure {number} <figure-cflpicture>` contains the exact domain of dependence $\{x_i-c t_j\}$ only if $x_i-j h \le x_i -c t_j \le x_i+jh$, or $|c j\tau|\le j h$. That is,
 
 :::{math}
-  :label: cfl-speed
+:label: cfl-speed
   \frac{h}{\tau} \ge |c|, \quad  \tau,h\rightarrow 0.
 :::
 ::::

@@ -52,7 +52,7 @@ u_t + q_x = 0,
 where $u$ represents a conserved quantity and $q$ represents the flux (flow rate) of $u.$ Using this in our traffic flow, we arrive at the evolutionary PDE
 
 :::{math}
-  :label: trafficpde
+:label: trafficpde
   \rho_t + Q_0'(\rho) \rho_x = \epsilon \rho_{xx}.
 :::
 
@@ -68,7 +68,7 @@ Let's momentarily consider a simpler, more fundamental PDE.
 The **advection equation** in one dimension is
 
 :::{math}
-  :label: advectpde
+:label: advectpde
   u_t + cu_x = 0,
 :::
 
@@ -92,7 +92,7 @@ Solutions to the advection equation propagates with constant speed and fixed sha
 We can solve {eq}`advectpde` by the method of lines as in [Chapter 11](../diffusion/overview). We need the second-order first-derivative matrix for periodic end conditions,
 
 :::{math}
-  :label: trafficdiffmat
+:label: trafficdiffmat
   \mathbf{D}_x =
  \frac{1}{2h}
     \begin{bmatrix}

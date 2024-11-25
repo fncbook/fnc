@@ -110,7 +110,7 @@ From this,
 where $w_k = \int_{-1}^1 \ell_k(x)\,dx.$ For even values of $n$ the result is
 
 :::{math}
-  :label: clencurtweights
+:label: clencurtweights
   w_k =
 \begin{cases}
 \dfrac{1}{n^2-1}, & \text{$k=0$ or $k=n$},\\[3mm]

@@ -262,7 +262,7 @@ $$
 then the resulting **Chebyshev differentiation matrix** has entries 
 
 :::{math}
-  :label: chebdiffmat
+:label: chebdiffmat
   \begin{gathered}
     D_{00} = \dfrac{2n^2+1}{6}, \qquad D_{n n} = -\dfrac{2n^2+1}{6}, \\
     D_{ij} =

@@ -78,7 +78,7 @@ We will use a particular type of orthogonal matrix.
 A **Householder reflector** is a matrix of the form
 
 ```{math}
-  :label: hhreflect
+:label: hhreflect
   \mathbf{P} = \mathbf{I} - 2 \mathbf{v} \mathbf{v}^T,
 ```
 
@@ -88,7 +88,7 @@ where $\mathbf{v}$ is any unit vector (in the 2-norm).
 In [Exercise 2](problem-house-reflector) you are asked to show that such a $\mathbf{P}$ is necessarily orthogonal. Note that for any vector $\mathbf{x}$ of appropriate dimension,
 
 ```{math}
-  :label: hhapply
+:label: hhapply
   \mathbf{P}\mathbf{x} = \mathbf{x} - 2 \mathbf{v} (\mathbf{v}^T\mathbf{x}).
 ```
 
@@ -112,7 +112,7 @@ Given a vector $\mathbf{z}$, we can choose $\mathbf{v}$ so that $\mathbf{P}$ ref
 (Recall that $\mathbf{e}_k$ is the $k$th column of the identity matrix.) We choose the positive sign above for our discussion, but see {numref}`Function {number} <function-qrfact>` and [Exercise 4](problem-house-sign) for important computational details. Let
 
 ```{math}
-  :label: hhvector
+:label: hhvector
   \mathbf{w} = \| \mathbf{z} \| \mathbf{e}_1-\mathbf{z}, \quad \mathbf{v} = \frac{\mathbf{w}}{\|\mathbf{w}\|}.
 ```
 

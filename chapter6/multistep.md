@@ -139,7 +139,7 @@ Let $\rho$ and $\sigma$ be the generating polynomials of a multistep method. The
 The connection between the generating polynomials and the numerical method requires a little abstraction. Let $\mathcal{Z}$ be a *forward-shift operator*, so that, for example, $\mathcal{Z} t_i = t_{i+1}$, $\mathcal{Z}^3 u_{i-1} = u_{i+2}$, and so on. With this, the difference formula {eq}`multistep` can be written concisely as
 
 ```{math}
-  :label: multistepshift
+:label: multistepshift
   \rho(\mathcal{Z}) u_{i-k+1} = h \sigma(\mathcal{Z}) f_{i-k+1}.
 ```
 
@@ -155,7 +155,7 @@ The definition of local truncation error is easily extended to multistep methods
 For the multistep formula defined by {eq}`multistep`, the **local truncation error** is 
 
 ```{math}
-  :label: MSLTE
+:label: MSLTE
   \tau_{i+1}(h) = \frac{\hat{u}(t_{i+1}) - a_{k-1}\hat{u}(t_i) - \cdots - a_0
     \hat{u}(t_{i-k+1})}{h} - \bigl[ b_kf(t_{i+1},\hat{u}(t_{i+1})) + \cdots +
   b_0f(t_{i-k+1},\hat{u}(t_{i-k+1})) \bigr].
@@ -224,7 +224,7 @@ The global error of each method in {numref}`table-adams` and {numref}`table-BD` 
 Where do coefficients like those in {numref}`table-adams` come from? There are different ways to answer that question, but Adams and BD methods have distinctive stories to tell. The derivation of Adams methods begins with the observation that
 
 ```{math}
-  :label: adamsderive
+:label: adamsderive
   \hat{u}(t_{i+1}) = \hat{u}(t_i) + \int_{t_i}^{t_{i+1}} \hat{u}'(t) \, dt =
   \hat{u}(t_i) + \int_{t_i}^{t_{i+1}} f\bigl(t,\hat{u}(t)\bigr) \, dt.
 ```
@@ -258,7 +258,7 @@ In AB methods, the interpolating polynomial has degree $k-1$, which means that i
 The idea behind backward differentiation formulas is complementary to that for Adams: Interpolate solution values ${u}_{i+1},\ldots,u_{i-k+1}$ by a polynomial $q$, and then, motivated by $f(t,\hat{u})=\hat{u}'(t)$, set
 
 ```{math}
-  :label: bdfderive
+:label: bdfderive
   f_{i+1} =q'(t_{i+1}).
 ```
 

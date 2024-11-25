@@ -61,14 +61,14 @@ In order to do better than direct truncation, we want to encourage the function 
 One way to accomplish this feat is to use
 
 :::{math}
-  :label: DEquadtrans1
+:label: DEquadtrans1
   x(t) = \sinh\left(  \sinh t \right).
 :::
 
 Noting the asymptotic behavior as $t \rightarrow \pm\infty$ that
 
 :::{math}
-  :label: sinh-asymp
+:label: sinh-asymp
   \left| \sinh(t) \right| \sim \frac{1}{2} e^{ |t| },
 :::
 
@@ -233,14 +233,14 @@ Let's consider
 where $f$ and/or a derivative of $f$ is unbounded at the left endpoint, zero. The change of variable
 
 :::{math}
-  :label: DEquadtrans2
+:label: DEquadtrans2
   x(t) = \frac{2}{1+\exp(2 \sinh t)}
 :::
 
 satisfies $x(0)=1$ and $x\to 0^+$ as $t\to \infty$, thereby transforming the integration interval to $t\in(0,\infty)$ and placing the singularity at infinity. The chain rule implies
 
 :::{math}
-  :label: DEquadchain2
+:label: DEquadchain2
   \int_{0}^1 f(x)\, dx &= \int_{0}^\infty f(x(t)) \frac{dx}{dt}\, dt \\
   &= \int_{0}^\infty f(x(t)) \frac{\cosh t}{\cosh(\sinh t)^2}  \,  dt.
 :::

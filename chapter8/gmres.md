@@ -62,7 +62,7 @@ The least-squares problems {eq}`gmresproblem`,  {eq}`gmresproblem1`, and {eq}`gm
 The first norm in that equation is on $\mathbb{C}^n$, while the last is on the much smaller space $\mathbb{C}^{m+1}$. Hence the least-squares problem {eq}`gmresproblem2` is equivalent to
 
 :::{math}
-  :label: gmresproblemsmall
+:label: gmresproblemsmall
   \min_{\mathbf{z}\in\mathbb{C}^m}\, \bigl\| \mathbf{H}_m\mathbf{z}-\|\mathbf{b}\|\,\mathbf{e}_1 \bigr\|,
 :::
 

@@ -120,7 +120,7 @@ There's a lot more to be said about functions in Julia, but this is enough to ge
 2. ⌨  In statistics, one defines the variance of sample values $x_1,\ldots,x_n$ by
   
     ```{math}
-        :label: samplevar
+:label: samplevar
         s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \overline{x})^2,
       \qquad \overline{x} = \frac{1}{n} \sum_{i=1}^n x_i.
     ```

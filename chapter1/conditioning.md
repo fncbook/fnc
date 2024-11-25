@@ -12,14 +12,14 @@ On a computer, $x$ will be represented by its floating-point counterpart, $\fl(x
 Let's suppose that we are fortunate and that the addition proceeds exactly, with no additional errors. Then the machine result is just
 
 ```{math}
-  :label: plus1fp
+:label: plus1fp
   {y} = x(1+\epsilon)+1.
 ```
 
 We can derive the relative error in this result:
 
 ```{math}
-  :label: plus1relerr
+:label: plus1relerr
   \frac{ |{y}-f(x)| }{ |f(x)| } = \frac{ |(x+\epsilon x+1) - (x+1)| }{ |x+1| }
   = \frac{ |\epsilon x| }{ |x+1| } .
 ```
@@ -46,7 +46,7 @@ Now we consider problems more generally. As above, we represent a problem as a f
 When the problem $f$ is approximated in floating point on a computer, the data $x$ is represented as a floating-point value $\tilde{x}=\fl(x)$. Ignoring all other sources of error, we define the quantitative measure
 
 ```{math}
-  :label: condition1
+:label: condition1
    \frac{ \vphantom{\dfrac{\bigl|}{\bigl|}}\dfrac{|f(x)-f(\tilde{x})|}{|f(x)|} }{%
      \vphantom{\dfrac{\bigl|}{\bigl|}}\dfrac{|x-\tilde{x}|}{|x|} },
 ```
@@ -54,7 +54,7 @@ When the problem $f$ is approximated in floating point on a computer, the data $
 which is the ratio of the relative changes in result and data. We make this expression more convenient if we recall that floating-point arithmetic gives $\tilde{x}=x(1+\epsilon)$ for some value $|\epsilon|\le \macheps/2$. Hence
 
 ```{math}
-  :label: condition2
+:label: condition2
    \dfrac{\left|f(x)-f(x+\epsilon x)\right| } {|\epsilon f(x)|}.
 ```
 
@@ -68,7 +68,7 @@ Finally, we idealize what happens in a perfect computer by taking a limit as $\m
 The relative **condition number** of a scalar function $f(x)$ is 
 
 ```{math}
-  :label: condition
+:label: condition
    \kappa_f(x) = \lim_{\epsilon\to 0} \dfrac{ |f(x)-f(x(1+\epsilon))| }{ |\epsilon f(x)| }.
 ```
 ::::

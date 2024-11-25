@@ -37,7 +37,7 @@ A **cubic spline** is a piecewise cubic function that has two continuous derivat
 We use $S(x)$ to denote the cubic spline interpolant. As before, suppose that distinct nodes $t_0 < t_1 < \cdots < t_n$ (not necessarily equally spaced) and data $y_0,\ldots,y_n$ are given. For any $k=1,\ldots,n$, the spline $S(x)$ on the interval $[t_{k-1},t_k]$ is by definition a cubic polynomial $S_k(x)$, which we express as
 
 ```{math}
- :label: splinepw
+:label: splinepw
  S_k(x) = a_k + b_k(x-t_{k-1}) + c_k(x-t_{k-1})^2 + d_k(x-t_{k-1})^3, \qquad k=1,\ldots,n,
 ```
 

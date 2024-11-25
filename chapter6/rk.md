@@ -46,7 +46,7 @@ If we replace $\hat{u}'$ by $f$ and keep only the first two terms on the right-h
 where we have applied the multidimensional chain rule to the derivative, because both of the arguments of $f$ depend on $t$. Using this expression in {eq}`taylor2`, we obtain
 
 ```{math}
-  :label: rkexactexpand
+:label: rkexactexpand
   \hat{u}(t_{i+1}) = \hat{u}(t_i) + h\left[f\bigl(t_i,\hat{u}(t_i)\bigr) +
     \frac{h}{2}f_t\bigl(t_i,\hat{u}(t_i)\bigr) +
     \frac{h}{2}f\bigl(t_i,\hat{u}(t_i)\bigr)\,f_u\bigl(t_i,\hat{u}(t_i)\bigr)\right] \\
@@ -56,7 +56,7 @@ where we have applied the multidimensional chain rule to the derivative, because
 We have no desire to calculate and then code those partial derivatives of $f$ directly; an approximate approximation is called for. Observe that
 
 ```{math}
-  :label: mvtaylor2
+:label: mvtaylor2
   f\bigl(t_i+\alpha,\hat{u}(t_i)+\beta\bigr) = f\bigl(t_i,\hat{u}(t_i)\bigr) +
   \alpha f_t\bigl(t_i,\hat{u}(t_i)\bigr) + \beta f_u\bigl(t_i,\hat{u}(t_i)\bigr) +
   O\bigl(\alpha^2 + |\alpha\beta| + \beta^2\bigr).
@@ -149,7 +149,7 @@ While it is interesting to interpret IE2 as a pair of Euler-like steps, the Tayl
 A generic $s$-stage RK method takes the form
 
 ```{math}
-  :label: rk
+:label: rk
   \begin{split}
     k_1 &= h f(t_i,u_i),\\
     k_2 &= h f(t_i+c_1h,u_i + a_{11}k_1),\\
@@ -207,7 +207,7 @@ Euler, improved Euler (IE2), and modified Euler (ME2) are all distinct numerical
 The most commonly used RK method, and perhaps the most popular IVP method of all, is the fourth-order one given by
 
 ```{math}
-  :label: rk4
+:label: rk4
   \begin{array}{r|cccc}
     \rule{0pt}{2.75ex}0 &  & & & \\
     \rule{0pt}{2.75ex}\frac{1}{2} & \frac{1}{2} & & &\\
@@ -222,7 +222,7 @@ This formula is often referred to as *the* fourth-order RK method, even though t
 ::::{prf:definition} Fourth-order Runge–Kutta method (RK4)
 
 ```{math}
-  :label: rk4def
+:label: rk4def
   \begin{split}
     k_1 &= hf(t_i,u_i), \\
     k_2 &= hf(t_i+h/2,u_i+k_1/2),\\

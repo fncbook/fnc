@@ -37,7 +37,7 @@ For one-step methods such as Runge–Kutta, {numref}`Theorem %s <theorem-euler-o
 It is straightforward to check that the two-step method LIAF, defined by
 
 ```{math}
-  :label: LIAF
+:label: LIAF
   \mathbf{u}_{i+1} = -4u_i + 5u_{i-1} + h(4f_i + 2f_{i-1}),
 ```
 
@@ -81,14 +81,14 @@ It's clear that the solution is growing exponentially in time.
 The source of the exponential growth in {numref}`Demo %s <demo-zs-LIAF>` is not hard to identify. Recall that we can rewrite {eq}`LIAF` as $\rho(\mathcal{Z})u_{i-1}=h \sigma(\mathcal{Z})u_{i-1}$ using the forward shift operator $\mathcal{Z}$:
 
 ```{math}
-  :label: LIAFshift
+:label: LIAFshift
   (\mathcal{Z}^2 + 4\mathcal{Z} - 5) u_{i-1} = h(4\mathcal{Z} + 2)f_{i-1}.
 ```
 
 (See {eq}`multistepshift`, using $k=2$ here.) Next, suppose that $h$ is negligible in {eq}`LIAFshift`. Then the numerical solution of LIAF is roughly defined by
 
 ```{math}
-  :label: LIAFshiftzero
+:label: LIAFshiftzero
   (\mathcal{Z}^2 + 4\mathcal{Z} - 5) u_{i-1} = 0.
 ```
 
@@ -106,7 +106,7 @@ $$\mathcal{Z} u_i = u_{i+1} = z u_i.$$
 Hence {eq}`LIAFshiftzero` becomes
 
 ```{math}
-  :label: LIAFcharzero
+:label: LIAFcharzero
   z^2 + 4z - 5 = 0.
 ```
 

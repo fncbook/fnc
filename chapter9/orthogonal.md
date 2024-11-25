@@ -146,7 +146,7 @@ For a vector $\mathbf{z} \in \real^n$, define the quasimatrix-vector product
 For another function $g\in S$, define the adjoint product
 
 :::{math}
-  :label: quasimatfun
+:label: quasimatfun
   \mathbf{F}^T g =
   \begin{bmatrix}
     \langle f_1,g \rangle \\ \vdots  \\  \langle f_n,g \rangle
@@ -156,7 +156,7 @@ For another function $g\in S$, define the adjoint product
 Finally, define the **Gram matrix**
 
 :::{math}
-  :label: Gram
+:label: Gram
   \mathbf{F}^T \mathbf{F} = \bigl[ \langle f_i,f_j \rangle \bigr]_{\,i,j=1,\ldots,n}.
 :::
 ::::
@@ -288,7 +288,7 @@ For what follows, let $\mathcal{P}_n \subset S$ be the set of polynomials of deg
 The **Legendre polynomials** are 
 
 :::{math}
- :label: legendre
+:label: legendre
  \begin{split}
      P_0(x) &= 1, \\
      P_1(x) &= x, \\
@@ -306,7 +306,7 @@ Here are some key facts that are straightforward to prove.
 3. The Legendre polynomials are mutually orthogonal. More specifically, the Gram matrix is given by
 
 :::{math}
- :label: legendreortho
+:label: legendreortho
  \langle P_i,P_j \rangle =
  \begin{cases}
    0, & i \neq j, \\
@@ -318,7 +318,7 @@ Here are some key facts that are straightforward to prove.
 Now let us define the quasimatrix
 
 :::{math}
-  :label: legquasi
+:label: legquasi
   \mathbf{L}_n(x) =
   \begin{bmatrix}
     \alpha_0^{-1} \underline{P_0} & \alpha_1^{-1} \underline{P_1} & \cdots
@@ -329,7 +329,7 @@ Now let us define the quasimatrix
 Then $\mathbf{L}_n^T\mathbf{L}_n=\mathbf{I}$. The normal equations {eq}`contLSsol` thus simplify accordingly. Unraveling the definitions, we find the least-squares solution
 
 :::{math}
-  :label: funlssoln
+:label: funlssoln
   \mathbf{L}_n \bigl( \mathbf{L}_n^T f \bigr) = \sum_{k=0}^n c_k P_k(x), \quad \text{where }
   c_k = \frac{1}{\alpha_k^2} \langle P_k,f \rangle.
 :::
@@ -339,14 +339,14 @@ Then $\mathbf{L}_n^T\mathbf{L}_n=\mathbf{I}$. The normal equations {eq}`contLSso
 Equation {eq}`leginner` is not the only useful way to define an inner product on a function space. It can be generalized to
 
 :::{math}
-  :label: weightedinner
+:label: weightedinner
   \langle f,g \rangle = \int_{-1}^1 f(x)g(x)w(x)\,dx
 :::
 
 for a positive function $w(x)$ called the **weight function** of the inner product. An important special case is
 
 :::{math}
-  :label: chebinner
+:label: chebinner
   \langle f,g \rangle  = \int_{-1}^1 \frac{f(x)g(x)}{\sqrt{1-x^2}}\,dx.
 :::
 
@@ -357,7 +357,7 @@ for a positive function $w(x)$ called the **weight function** of the inner produ
 The **Chebyshev polynomials** are defined by
 
 :::{math}
- :label: chebyshev
+:label: chebyshev
  \begin{split}
      T_0(x) &= 1, \\
      T_1(x) &= x, \\
@@ -404,7 +404,7 @@ $$
 By definition, $r(x)P_n(x)$ does not change sign over $(-1,1)$. Therefore
 
 :::{math}
-  :label: legrootint
+:label: legrootint
   \int_{-1}^1 r(x)P_n(x) \, dx \neq 0.
 :::
 
@@ -414,7 +414,7 @@ Because $r$ is a degree-$m$ polynomial, we can express it as a combination of $P
 The result of {numref}`Theorem {number} <theorem-orthogonal-roots>` holds for orthogonal families of polynomials for other weight functions. The Chebyshev case is unusual in that thanks to {eq}`chebaltform`, the roots of $T_n$ are known explicitly:
 
 :::{math}
-  :label: chebfirstpoints
+:label: chebfirstpoints
   t_k = \cos\left(\frac{2k-1}{2n}\pi\right), \qquad k=1,\ldots,n.
 :::
 

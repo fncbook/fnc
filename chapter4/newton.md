@@ -98,7 +98,7 @@ Judging by the residual, we appear to be getting closer to the true root each ti
 Using general notation, if we have a root approximation $x_k$, we can construct a **linear model** of $f(x)$ using the classic formula for the tangent line of a differentiable function,
 
 ```{math}
-  :label: tangentline
+:label: tangentline
   q(x) = f(x_k) + f'(x_k)(x-x_k).
 ```
 
@@ -112,7 +112,7 @@ Finding the root of $q(x)=0$ is trivial. We define the next approximation by the
 Given a function $f$, its derivative, $f'$, and an initial value $x_1$, iteratively define
 
 ```{math}
-  :label: newton
+:label: newton
   x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)}, \qquad k=1,2,\ldots.
 ```
 ::::
@@ -171,7 +171,7 @@ Asymptotically, each iteration of Newton's method roughly squares the error.
 Suppose a sequence $x_k$ approaches limit $x^*$. If the error sequence $\epsilon_k=x_k - x^*$ satisfies
 
 ```{math}
-  :label: quadratic-convergence
+:label: quadratic-convergence
   \lim_{k\to\infty} \frac{|\epsilon_{k+1}|}{|\epsilon_k|^2} = L
 ```
 
