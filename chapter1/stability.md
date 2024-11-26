@@ -38,6 +38,8 @@ matlab
 
 ````{tab-item} Python
 :sync: python
+:::{embed} #demo-stability-quadbad-python
+:::
 ```` 
 `````
 ``````
@@ -65,6 +67,8 @@ matlab
 
 ````{tab-item} Python
 :sync: python
+:::{embed} #demo-stability-quadgood-python
+:::
 ```` 
 `````
 ``````
@@ -121,6 +125,8 @@ matlab
 
 ````{tab-item} Python
 :sync: python
+:::{embed} #demo-stability-roots-python
+:::
 ```` 
 `````
 ``````
@@ -157,7 +163,7 @@ One stable algorithm that is not backward stable is floating-point evaluation fo
     **(b)** ⌨  Use the "obvious" algorithm
 
     ``` julia
-    (exp(x)-1) / x
+    (exp(x) - 1) / x
     ```
 
     to compute $f(x)$ at $x=10^{-2},10^{-3},10^{-4},\ldots,10^{-11}$.  
@@ -181,7 +187,7 @@ One stable algorithm that is not backward stable is floating-point evaluation fo
     can be inverted to yield a formula for $\operatorname{acosh}(x)$:
   
     ```{math}
-:label: acosh
+    :label: acosh
     \operatorname{acosh}(x) = y = \log\bigl(x-\sqrt{x^2-1}\bigr).
     ```
 
@@ -194,7 +200,7 @@ One stable algorithm that is not backward stable is floating-point evaluation fo
     **(c)** An alternative formula is
 
     ```{math}
-:label: acosh2
+    :label: acosh2
     y = -2\log\left(\sqrt{\frac{x+1}{2}} + \sqrt{\frac{x-1}{2}}\right).
     ```
 

@@ -186,6 +186,9 @@ project:
       - title: Julia codes
         children:
           - file: julia/chapter1.md
+      - title: Python codes
+        children:
+          - file: python/chapter1.md
     - file: genindex.md
 
     

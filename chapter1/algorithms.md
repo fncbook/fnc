@@ -55,6 +55,8 @@ matlab
 
 ````{tab-item} Python
 :sync: python
+:::{embed} #function-horner-python
+:::
 ```` 
 `````
 ``````
@@ -89,6 +91,8 @@ matlab
 
 ````{tab-item} Python
 :sync: python
+:::{embed} #demo-algorithms-horner-python
+:::
 ```` 
 `````
 ``````

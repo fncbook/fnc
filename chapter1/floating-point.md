@@ -123,10 +123,28 @@ Absolute accuracy has the same units as $x$, while relative accuracy is dimensio
 
 We often round this value down to an integer, but it does make sense to speak of "almost seven digits" or "ten and a half digits."
 
-:::::{prf:example}
+(demo-float-accuracy)= 
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
 :::{embed} #demo-float-accuracy-julia
 :::
-:::::
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+matlab
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-float-accuracy-python
+:::
+```` 
+`````
+::::
+
 
 ## Double precision
 
@@ -142,13 +160,27 @@ Most numerical computing today is done in the **IEEE 754** standard. This define
 
 We often speak of double-precision floating-point numbers as having about 16 decimal digits. The 52-bit significand is paired with a sign bit and 11 binary bits to represent the exponent $n$ in {eq}`floatpoint`, for a total of 64 binary bits per floating-point number.
 
-:::::{prf:example}
+(demo-float)=
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
 :::{embed} #demo-float-julia
 :::
-:::::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+matlab
+```` 
 
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-float-python
+:::
+```` 
+`````
+::::
 
 Our theoretical description of $\float$ did not place limits on the exponent, but in double precision its range is limited to $-1022\le n \le 1023$. Thus, the largest number is just short of $2^{1024}\approx 2\times 10^{308}$, which is enough in most applications. Results that should be larger are said to *overflow* and will actually result in the value `Inf`. Similarly, the smallest positive number is $2^{-1022}\approx 2\times 10^{-308}$, and smaller values are said to *underflow* to zero.[^denormalized]
 
@@ -173,10 +205,27 @@ Computer arithmetic is performed on floating-point numbers and returns floating-
 ```
 Hence the relative error in arithmetic is essentially the same as for the floating-point representation itself. However, playing by these rules can lead to disturbing results.
 
-:::::{prf:example}
+(demo-float-arithmetic)=
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
 :::{embed} #demo-float-arithmetic-julia
 :::
-:::::
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+matlab
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-float-arithmetic-python
+:::
+```` 
+`````
+::::
 
 There are two ways to look at {numref}`Demo %s <demo-float-arithmetic>`. On one hand, its two versions of the result differ by less than $1.2\times 10^{-16}$, which is very small — not just in everyday terms, but with respect to the operands, which are all close to 1 in absolute value. On the other hand, the difference is as large as the exact result itself! We formalize and generalize this observation in the next section. In the meantime, keep in mind that exactness cannot be taken for granted in floating-point computation. 
 

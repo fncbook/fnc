@@ -28,3 +28,4 @@ _build
 .vscode
 **/__pycache__
 python/**/dist
+python/Chapter*.ipynb

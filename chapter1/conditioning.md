@@ -237,6 +237,8 @@ matlab
 
 ````{tab-item} Python
 :sync: python
+:::{embed} #demo-condition-roots-python
+:::
 ```` 
 `````
 ::::

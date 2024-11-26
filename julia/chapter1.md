@@ -20,17 +20,11 @@ Recall the grade-school approximation to the number $\pi$.
 @show p = 22/7;
 ```
 ::::{grid} 1 1 2 2
-:::{grid-item}
-:columns: 5
-
 Not all the digits displayed for `p` are the same as those of $\pi$. 
-
-:::
-:::{grid-item-card}
+:::{card}
 :columns: 7
 
 The value of `pi` is predefined and equivalent to `π`, which is entered by typing `\pi` followed immediately by the <kbd>Tab</kbd> key.
-
 :::
 ::::
 
@@ -43,13 +37,8 @@ The value of `pi` is predefined and equivalent to `π`, which is entered by typi
 
 ::::{grid} 1 1 2 2
 
-:::{grid-item}
-:columns: 5
-
 The absolute and relative accuracies of the approximation are as follows.
-
-:::
-:::{grid-item-card}
+:::{card}
 :columns: 7
 
 A dollar sign `$` in a string substitutes (or *interpolates*) the named variable or expression into the string.
@@ -64,14 +53,8 @@ println("relative accuracy = $(acc/π)")
 ```
 
 ::::{grid} 1 1 2 2
-
-:::{grid-item}
-:columns: 5
-
 Here we calculate the number of accurate digits in `p`.
-
-:::
-:::{grid-item-card}
+:::{card}
 :columns: 7
 
 The `log` function is for the natural log. For other common bases, use `log10` or `log2`.
@@ -104,13 +87,10 @@ bitstring(1.0)
 
 ::::{grid} 1 1 2 2
 
-:::{grid-item}
-:columns: 7
-
 The first bit determines the sign of the number:
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 Square brackets concatenate the contained values into vectors.
@@ -132,23 +112,18 @@ The sign bit, exponent, and significand in {eq}`floatpoint` are all directly acc
 
 ```{code-cell}
 x = 1.0
-@show sign(x),exponent(x),significand(x);
+@show sign(x), exponent(x), significand(x);
 ```
 
 ```{code-cell}
 x = 0.125
-@show sign(x),exponent(x),significand(x);
+@show sign(x), exponent(x), significand(x);
 ```
 
 ::::{grid} 1 1 2 2
-
-:::{grid-item}
-:columns: 6
-
 The spacing between floating-point values in $[2^n,2^{n+1})$ is $2^n \epsilon_\text{mach}$, where $\epsilon_\text{mach}$ is machine epsilon. You can get its value from the `eps` function in Julia. By default, it returns the value for double precision.
 
-:::
-:::{grid-item-card}
+:::{card}
 :columns: 6
 
 To call a function, including `eps`, you must use parentheses notation, even when there are no input arguments.
@@ -207,7 +182,7 @@ For the most part you can mix integers and floating-point values and get what yo
 There are some exceptions. A floating-point value can't be used as an index into an array, for example, even if it is numerically equal to an integer. In such cases you use `Int` to convert it.
 
 ```{code-cell}
-@show 5.0,Int(5.0);
+@show 5.0, Int(5.0);
 ```
 
 If you try to convert a noninteger floating-point value into an integer you get an `InexactValue` error. This occurs whenever you try to force a type conversion that doesn't make clear sense.
@@ -233,13 +208,12 @@ However, the spacing between floats in $[1/2,1)$ is $\macheps/2$, so both $1-\ma
 This is now the expected result. But we have found a rather shocking breakdown of the associative law of addition!
 ``````
 
+<!-- SECTION 2 -->
+
 (demo-condition-roots-julia)=
 ``````{dropdown} Conditioning of polynomial roots
 :open: false
 ::::{grid} 1 1 2 2
-
-:::{grid-item}
-:columns: 7
 
 The polynomial $p(x) = \frac{1}{3}(x-1)(x-1-\epsilon)$ has roots $1$ and $1+\epsilon$. For small values of $\epsilon$, the roots are ill-conditioned. 
 
@@ -282,6 +256,8 @@ eps()/ϵ
 This matches the observation well.
 ``````
 
+<!-- SECTION 3 -->
+
 (function-horner-julia)=
 `````{dropdown} **Horner's algorithm for evaluating a polynomial**
 
@@ -302,7 +278,6 @@ function horner(c,x)
     return y
 end
 ```
-````
 `````
 
 (demo-algorithms-horner-julia)=
@@ -318,21 +293,12 @@ Pkg.add("FundamentalsNumericalComputation");
 
 ```{index} ! Julia; using
 ```
-
 ::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 5
-
 
 Once installed, any package can be loaded with the `using` command, as follows.
 
-
-:::
-:::{grid-item-card}
+:::{card}
 :columns: 7
-
 
 Many Julia functions, including the ones in this text, are in packages that must be loaded via `using` or `import` in each session. Sometimes a `using` statement can take a few seconds or even minutes to execute, if packages have been installed or updated. 
 
@@ -345,21 +311,13 @@ using FundamentalsNumericalComputation
 ```
 
 ::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 7
-
-
 
 For convenience, this package also imports many other packages used throughout the book and makes them available as though you had run a `using` command for each of them. 
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
-
-
 
 If you are not sure where a particular function is defined, you can run `methods` on the function name to find all its definitions.
 
@@ -376,21 +334,13 @@ c = [-1,3,-3,1]
 ```
 
 ::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 7
-
-
 
 In order to avoid clashes between similarly named functions, Julia has boxed all the book functions into a **namespace** called `FNC`. We use this namespace whenever we invoke one of the functions.
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
- 
-
 
 You must use the module name when a package is loaded by `import`, but when loaded via `using`, some functions may be available with no prefix.
 
@@ -398,7 +348,7 @@ You must use the module name when a package is loaded by `import`, but when load
 ::::
 
 ```{code-cell}
-FNC.horner(c,1.6)
+FNC.horner(c, 1.6)
 ```
 
 The above is the value of $p(1.6)$.
@@ -418,18 +368,10 @@ The multi-line string at the start of {numref}`Function {number} <function-horne
 ```
 
 ::::{grid} 1 1 2 2
-:::{grid-item}
-:columns: 5
-
 We apply the quadratic formula to find the roots of a quadratic via {eq}`quadunstable`. 
 
-:::
-:::{grid-item-card}
-:columns: 7
- 
-
+:::{card}
 A number in scientific notation is entered as `1.23e4` rather than as `1.23*10^{4}`.
-
 :::
 ::::
 
@@ -491,17 +433,10 @@ abs(x₂-1e-6) / 1e-6
 :open: false
 ::::{grid} 1 1 2 2
 
-:::{grid-item}
-:columns: 5
-
 For this example we will use the `Polynomials` package, which is installed by the `FNC` package.  
 
-:::
-:::{grid-item-card}
-:columns: 7
-
+:::{card}
 In the rest of the book, we do not show the `using` statement needed to load the book's package, but you will need to enter it if you want to run the codes yourself.
-
 :::
 ::::
 
@@ -527,14 +462,9 @@ r̃ = sort(roots(p))   # type r\tilde and then press Tab
 ```
 
 ::::{grid} 1 1 2 2
-:::{grid-item}
-:columns: 5
-
-
 Here are the relative errors in each of the computed roots. 
 
-:::
-:::{grid-item-card}
+:::{card}
 :columns: 7
 
 The `@.` notation at the start means to do the given operations on each element of the given vectors.
@@ -549,7 +479,7 @@ println("Root errors:")
 
 It seems that the forward error is acceptably close to machine epsilon for double precision in all cases except the double root at $x=1$. This is not a surprise, though, given the poor conditioning at such roots.
 
-Let's consider the backward error. The data in the rootfinding problem are the polynomial coefficients. We can apply `fromroots` to find the coefficients of the polynomial (that is, the data) whose roots were actually computed by the numerical algorithm. This corresponds to $\tilde{x}$ in {numref}`Definition {number} <definition-stability-backward>`. 
+Let's consider the backward error. The data in the rootfinding problem is the polynomial coefficients. We can apply `fromroots` to find the coefficients of the polynomial (that is, the data) whose roots were actually computed by the numerical algorithm. This corresponds to $\tilde{x}$ in {numref}`Definition {number} <definition-stability-backward>`. 
 
 ```{code-cell}
 p̃ = fromroots(r̃)
