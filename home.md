@@ -12,10 +12,9 @@ The book was originally written for MATLAB. That version is still [available for
 
 ## Usage tips
 
-```{raw} html
-<video controls src="_static/usage.mp4"></video>
+```{figure} _static/usage.mp4"
+Using this book.
 ```
-
 
 <!-- needed to make Mathjax work for some reason -->
 ```{math}
