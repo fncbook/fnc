@@ -33,13 +33,31 @@ As our first example, {numref}`Function {number} <function-horner>` implements a
 
 ```{math}
 :label: horner
+\begin{split}
 p(x) &= c_1 + c_2 x + \cdots + c_n x^{n-1} \\
 &= \Bigl( \bigl( (c_n x  + c_{n-1}) x + c_{n-2} \bigr) x + \cdots +c_{2} \Bigr)x + c_{1}.
+\end{split}
 ```
 
+(function-horner)=
+``````{prf:algorithm} horner
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
 :::{embed} #function-horner-julia
 :::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+matlab
+```` 
+
+````{tab-item} Python
+:sync: python
+```` 
+`````
+``````
 
 ```{index} Julia; length, Julia; indexing arrays
 ```
@@ -55,8 +73,25 @@ The `return` statement in line 13 terminates the function and specifies one or m
 ```{index} ! Julia; for
 ```
 
+(demo-algorithms-horner)=
+``````{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
 :::{embed} #demo-algorithms-horner-julia
 :::
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+matlab
+```` 
+
+````{tab-item} Python
+:sync: python
+```` 
+`````
+``````
 
 
 The quoted lines at the beginning of {numref}`Function {number} <function-horner>` are a documentation string. The function itself starts off with the keyword `function`, followed by a list of its input arguments. The first of these is presumed to be a vector, whose length can be obtained and whose individual components are accessed through square bracket notation. After the computation is finished, the `return` keyword indicates which value or values are to be returned to the caller.
@@ -120,9 +155,9 @@ There's a lot more to be said about functions in Julia, but this is enough to ge
 2. ⌨  In statistics, one defines the variance of sample values $x_1,\ldots,x_n$ by
   
     ```{math}
-:label: samplevar
-        s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \overline{x})^2,
-      \qquad \overline{x} = \frac{1}{n} \sum_{i=1}^n x_i.
+    :label: samplevar
+    s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \overline{x})^2,
+    \qquad \overline{x} = \frac{1}{n} \sum_{i=1}^n x_i.
     ```
 
     Write a Julia function

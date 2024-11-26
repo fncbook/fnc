@@ -65,12 +65,12 @@ project:
           children:
             - file: chapter1/floating-point.md
             - file: chapter1/conditioning.md
-            # - file: chapter1/algorithms.md
-            # - file: chapter1/stability.md
-            # - file: chapter1/next.md
-    # - title: Julia codes
-    #   children:
-    #     - file: julia/chapter1.md
+            - file: chapter1/algorithms.md
+            - file: chapter1/stability.md
+            - file: chapter1/next.md
+    - title: Julia codes
+      children:
+        - file: julia/chapter1.md
     #     - file: chapter2/overview.md
     #       children:
     #         - file: chapter2/polyinterp.md

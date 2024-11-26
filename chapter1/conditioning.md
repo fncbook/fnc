@@ -87,7 +87,7 @@ Assuming that $f$ has at least one continuous derivative, we can simplify the ex
 \end{split}
 ```
 
-In retrospect it should come as no surprise that the change in values of $f(x)$ due to small changes in $x$ involves the derivative of $f$. In fact, if we were making measurements of changes in absolute rather than relative terms, the condition number would be simply $|f'(x)|$.
+In retrospect, it should come as no surprise that the change in values of $f(x)$ due to small changes in $x$ involves the derivative of $f$. In fact, if we were making measurements of changes in absolute rather than relative terms, the condition number would be simply $|f'(x)|$.
 
 ````{prf:example}
 Let's return to our "add 1" problem and generalize it slightly to $f(x)=x-c$ for constant $c$. We compute, using {eq}`conditionderiv`,
@@ -221,8 +221,25 @@ Roots of polynomials are ill-conditioned with respect to changes in the polynomi
 
 The condition number of a root can be arbitrarily large. In the extreme case of a repeated root, the condition number is formally infinite, which implies that the ratio of changes in the root to changes in the coefficients cannot be bounded. 
 
+(demo-condition-roots)=
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
 :::{embed} #demo-condition-roots-julia
 :::
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+matlab
+```` 
+
+````{tab-item} Python
+:sync: python
+```` 
+`````
+::::
 
 ## Exercises
 

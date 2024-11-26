@@ -6,12 +6,14 @@ kernelspec:
 ---
 ```{code-cell}
 :tags: [remove-cell]
+import Pkg; Pkg.activate("/Users/driscoll/Documents/GitHub/fnc")
 using FundamentalsNumericalComputation
 FNC.init_format()
 ```
 
 (demo-float-accuracy-julia)=
-:::::{prf:example}
+``````{dropdown} Floating-point accuracy
+:open: false
 Recall the grade-school approximation to the number $\pi$.
 
 ```{code-cell}
@@ -82,10 +84,11 @@ println("Number of accurate digits = $(-log10(acc/π))")
 ```
 This last value could be rounded down by using `floor`.
 
-:::::
+``````
 
 (demo-float-julia)=
-:::::{prf:example}
+``````{dropdown} Floating-point representation
+:open: false
 In Julia, `1` and `1.0` are different values, because they have different types:
 
 ```{code-cell}
@@ -208,10 +211,11 @@ There are some exceptions. A floating-point value can't be used as an index into
 ```
 
 If you try to convert a noninteger floating-point value into an integer you get an `InexactValue` error. This occurs whenever you try to force a type conversion that doesn't make clear sense.
-:::::
+``````
 
 (demo-float-arithmetic-julia)=
-:::::{prf:example}
+``````{dropdown} Floating-point arithmetic oddity
+:open: false
 
 There is no double-precision number between $1$ and $1+\epsilon_\text{mach}$. Thus the following difference is zero despite its appearance.
 
@@ -227,10 +231,11 @@ However, the spacing between floats in $[1/2,1)$ is $\macheps/2$, so both $1-\ma
 ```
 
 This is now the expected result. But we have found a rather shocking breakdown of the associative law of addition!
-:::::
+``````
 
 (demo-condition-roots-julia)=
-:::::{prf:example}
+``````{dropdown} Conditioning of polynomial roots
+:open: false
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
@@ -268,19 +273,17 @@ The display of `r₂` suggests that the last five digits or so are inaccurate. T
 abs(r₂ - (1+ϵ)) / (1+ϵ)
 ```
 
-The condition number of the roots is inversely proportional to $2\epsilon$, the difference between them. Thus roundoff error in the data can grow in the result to be roughly
+The condition number of the roots is inversely proportional to $2\epsilon$, the difference between them. Thus, roundoff error in the data can grow in the result to be roughly
 
 ```{code-cell}
 eps()/ϵ
 ```
 
 This matches the observation well.
-:::::
+``````
 
 (function-horner-julia)=
-````{prf:function} horner
-
-**Horner's algorithm for evaluating a polynomial**
+`````{dropdown} **Horner's algorithm for evaluating a polynomial**
 
 ```{code-block} julia
 :lineno-start: 1
@@ -300,15 +303,17 @@ function horner(c,x)
 end
 ```
 ````
+`````
 
 (demo-algorithms-horner-julia)=
-:::::{prf:example}
+``````{dropdown} Using a function
+:open: false
 Here we show how to use {numref}`Function {number} <function-horner>` to evaluate a polynomial. It's not a part of core Julia, so you need to download and install this text's package once, and load it for each new Julia session. The download is done by the following lines.
 
 ```{code-cell}
 :tags: [remove-output]
 import Pkg
-Pkg.add(Pkg.PackageSpec(url="https://github.com/fncbook/FundamentalsNumericalComputation"));
+Pkg.add("FundamentalsNumericalComputation");
 ```
 
 ```{index} ! Julia; using
@@ -401,4 +406,162 @@ The above is the value of $p(1.6)$.
 While the namespace does lead to a little extra typing, a nice side effect of using this paradigm is that if you type `FNC.` (including the period) and hit the <kbd>Tab</kbd> key, you will see a list of all the functions known in that namespace.
 
 The multi-line string at the start of {numref}`Function {number} <function-horner>` is documentation, which we can access using `?FNC.horner`.
-:::::
+``````
+
+<!-- SECTION 4 -->
+
+(demo-stability-quadbad-julia)= 
+``````{dropdown} Instability of the quadratic formula
+:open: false
+
+```{index} ! Julia; scientific notation
+```
+
+::::{grid} 1 1 2 2
+:::{grid-item}
+:columns: 5
+
+We apply the quadratic formula to find the roots of a quadratic via {eq}`quadunstable`. 
+
+:::
+:::{grid-item-card}
+:columns: 7
+ 
+
+A number in scientific notation is entered as `1.23e4` rather than as `1.23*10^{4}`.
+
+:::
+::::
+
+```{code-cell}
+a = 1;  b = -(1e6+1e-6);  c = 1;
+@show x₁ = (-b + sqrt(b^2-4a*c)) / 2a;
+@show x₂ = (-b - sqrt(b^2-4a*c)) / 2a;
+```
+
+The first value is correct to all stored digits, but the second has fewer than six accurate digits:
+
+```{code-cell}
+error = abs(1e-6-x₂)/1e-6 
+@show accurate_digits = -log10(error);
+```
+
+ The instability is easily explained. Since $a=c=1$, we treat them as exact numbers. First, we compute the condition numbers with respect to $b$ for each elementary step in finding the "good" root:
+
+| Calculation | Result | $\kappa$ |
+|:------------|:-------|:---------|
+|$u_1 = b^2$  | $1.000000000002000\times 10^{12}$ |  2 |
+|$u_2 = u_1 - 4$ | $9.999999999980000\times 10^{11}$  | $\approx 1.00$ |
+|$u_3 = \sqrt{u_2}$ | $999999.9999990000$ | 1/2 |
+|$u_4 = u_3 - b$ | $2000000$ | $\approx 0.500$ |
+|$u_5 = u_4/2$ | $1000000$  | 1 |
+
+Using {eq}`condition-chain`, the chain rule for condition numbers, the conditioning of the entire chain is the product of the individual steps, so there is essentially no growth of relative error here. However, if we use the quadratic formula for the "bad" root, the next-to-last step becomes $u_4=(-u_3) - b$, and now  $\kappa=|u_3|/|u_4|\approx 5\times 10^{11}$. So we can expect to lose 11 digits of accuracy, which is what we observed. The key issue is the subtractive cancellation in this one step.
+``````
+
+(demo-stability-quadgood-julia)=
+````{dropdown} Stable alternative to the quadratic formula
+We repeat the rootfinding experiment of {numref}`Demo %s <demo-stability-quadbad>` with an alternative algorithm.
+
+```{code-cell}
+a = 1;  b = -(1e6+1e-6);  c = 1;
+```
+
+First, we find the "good" root using the quadratic formula.
+
+```{code-cell}
+@show x₁ = (-b + sqrt(b^2-4a*c)) / 2a;
+```
+
+Then we use the identity $x_1x_2=\frac{c}{a}$ to compute the smaller root:
+
+```{code-cell}
+@show x₂ = c / (a*x₁);
+```
+
+As you see in this output, Julia often suppresses trailing zeros in a decimal expansion. To be sure we have an accurate result, we compute its relative error.
+
+```{code-cell}
+abs(x₂-1e-6) / 1e-6
+```
+````
+
+(demo-stability-roots-julia)=
+````{dropdown} Backward error
+:open: false
+::::{grid} 1 1 2 2
+
+:::{grid-item}
+:columns: 5
+
+For this example we will use the `Polynomials` package, which is installed by the `FNC` package.  
+
+:::
+:::{grid-item-card}
+:columns: 7
+
+In the rest of the book, we do not show the `using` statement needed to load the book's package, but you will need to enter it if you want to run the codes yourself.
+
+:::
+::::
+
+```{code-cell}
+:tags: [remove-cell]
+using FundamentalsNumericalComputation
+```
+
+Our first step is to construct a polynomial with six known roots.
+
+```{code-cell}
+r = [-2.0,-1,1,1,3,6]
+p = fromroots(r)
+```
+
+Now we use a standard numerical method for finding those roots, pretending that we don't know them already. This corresponds to $\tilde{y}$ in {numref}`Definition {number} <definition-stability-backward>`. 
+
+```{code-cell}
+r̃ = sort(roots(p))   # type r\tilde and then press Tab
+```
+
+```{index} ! Julia; @., Julia; broadcasting
+```
+
+::::{grid} 1 1 2 2
+:::{grid-item}
+:columns: 5
+
+
+Here are the relative errors in each of the computed roots. 
+
+:::
+:::{grid-item-card}
+:columns: 7
+
+The `@.` notation at the start means to do the given operations on each element of the given vectors.
+
+:::
+::::
+
+```{code-cell}
+println("Root errors:") 
+@. abs(r-r̃) / r
+```
+
+It seems that the forward error is acceptably close to machine epsilon for double precision in all cases except the double root at $x=1$. This is not a surprise, though, given the poor conditioning at such roots.
+
+Let's consider the backward error. The data in the rootfinding problem are the polynomial coefficients. We can apply `fromroots` to find the coefficients of the polynomial (that is, the data) whose roots were actually computed by the numerical algorithm. This corresponds to $\tilde{x}$ in {numref}`Definition {number} <definition-stability-backward>`. 
+
+```{code-cell}
+p̃ = fromroots(r̃)
+```
+
+We find that in a relative sense, these coefficients are very close to those of the original, exact polynomial:
+
+```{code-cell}
+c,c̃ = coeffs(p),coeffs(p̃)
+println("Coefficient errors:") 
+@. abs(c-c̃) / c
+```
+
+In summary, even though there are some computed roots relatively far from their correct values, they are nevertheless the roots of a polynomial that is very close to the original.
+````

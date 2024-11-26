@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-intro-stability)=
 # Stability
 
@@ -28,7 +8,7 @@ If we solve a problem using a computer algorithm and see a large error in the re
 
 ## Case study
 
-In {numref}`Example %s <example-quad-root-cond>` we showed that finding the roots of a quadratic polynomial $ax^2 + b x+c$ is poorly conditioned if and only if the roots are close to each other relative to their size. Hence for the polynomial
+In {numref}`Example %s <example-quad-root-cond>` we showed that finding the roots of a quadratic polynomial $ax^2 + b x+c$ is poorly conditioned if and only if the roots are close to each other relative to their size. Hence, for the polynomial
 
 ```{math}
 :label: quadunstable
@@ -42,66 +22,25 @@ finding roots is a well-conditioned problem. An obvious algorithm for finding th
 x_1 = \frac{-b + \sqrt{b^2-4ac}}{2a}, \qquad
 x_2 = \frac{-b - \sqrt{b^2-4ac}}{2a}.
 ```
-
-(demo-stability-quadbad)=
-```{prf:example}
-```
-
-
-
-
-
-```{index} ! Julia; scientific notation
-```
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 5
-
-
-We apply the quadratic formula to find the roots of a quadratic via {eq}`quadunstable`. 
-
-
+(demo-stability-quadbad)= 
+``````{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-stability-quadbad-julia
 :::
-:::{grid-item-card}
-:columns: 7
- 
+```` 
 
-A number in scientific notation is entered as `1.23e4` rather than as `1.23*10^{4}`.
+````{tab-item} MATLAB
+:sync: matlab
+matlab
+```` 
 
-:::
-::::
-
-```{code-cell}
-a = 1;  b = -(1e6+1e-6);  c = 1;
-@show x₁ = (-b + sqrt(b^2-4a*c)) / 2a;
-@show x₂ = (-b - sqrt(b^2-4a*c)) / 2a;
-```
-
-The first value is correct to all stored digits, but the second has fewer than six accurate digits:
-
-```{code-cell}
-error = abs(1e-6-x₂)/1e-6 
-@show accurate_digits = -log10(error);
-```
-
- The instability is easily explained. Since $a=c=1$, we treat them as exact numbers. First, we compute the condition numbers with respect to $b$ for each elementary step in finding the "good" root:
-
-| Calculation | Result | $\kappa$ |
-|:------------|:-------|:---------|
-|$u_1 = b^2$  | $1.000000000002000\times 10^{12}$ |  2 |
-|$u_2 = u_1 - 4$ | $9.999999999980000\times 10^{11}$  | $\approx 1.00$ |
-|$u_3 = \sqrt{u_2}$ | $999999.9999990000$ | 1/2 |
-|$u_4 = u_3 - b$ | $2000000$ | $\approx 0.500$ |
-|$u_5 = u_4/2$ | $1000000$  | 1 |
-
-Using {eq}`condition-chain`, the chain rule for condition numbers, the conditioning of the entire chain is the product of the individual steps, so there is essentially no growth of relative error here. However, if we use the quadratic formula for the "bad" root, the next-to-last step becomes $u_4=(-u_3) - b$, and now  $\kappa=|u_3|/|u_4|\approx 5\times 10^{11}$. So we can expect to lose 11 digits of accuracy, which is what we observed. The key issue is the subtractive cancellation in this one step.
-
-
-
-
+````{tab-item} Python
+:sync: python
+```` 
+`````
+``````
 
 ```{index} subtractive cancellation
 ```
@@ -111,39 +50,24 @@ Using {eq}`condition-chain`, the chain rule for condition numbers, the condition
 We can confirm this conclusion by finding a different path that avoids subtractive cancellation. A little algebra using {eq}`quadform` confirms the additional formula $x_1x_2=c/a$.  So given one root $r$, we compute the other root using $c/ar$, which has only multiplication and division and therefore creates no numerical trouble.
 
 (demo-stability-quadgood)=
-```{prf:example}
-```
+``````{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-stability-quadgood-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+matlab
+```` 
 
-
-
-
-We repeat the rootfinding experiment of {numref}`Demo %s <demo-stability-quadbad>` with an alternative algorithm.
-
-```{code-cell}
-a = 1;  b = -(1e6+1e-6);  c = 1;
-```
-
-First, we find the "good" root using the quadratic formula.
-
-```{code-cell}
-@show x₁ = (-b + sqrt(b^2-4a*c)) / 2a;
-```
-
-Then we use the identity $x_1x_2=\frac{c}{a}$ to compute the smaller root:
-
-```{code-cell}
-@show x₂ = c / (a*x₁);
-```
-
-As you see in this output, Julia often suppresses trailing zeros in a decimal expansion. To be sure we have an accurate result, we compute its relative error.
-
-```{code-cell}
-abs(x₂-1e-6) / 1e-6
-```
-
-
-
+````{tab-item} Python
+:sync: python
+```` 
+`````
+``````
 
 The algorithms in {numref}`Demo {number} <demo-stability-quadbad>` and {numref}`Demo {number} <demo-stability-quadgood>` are equivalent when using real numbers and exact arithmetic. When results are perturbed by machine representation at each step, though, the effects may depend dramatically on the specific sequence of operations, thanks to the chain rule {eq}`condition-chain`.
 
@@ -182,99 +106,24 @@ Backward error is the difference between the original data and the data that exa
 ```
 
 (demo-stability-roots)=
-```{prf:example}
-```
-
-
-
-
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 5
-
-
-For this example we will use the `Polynomials` package, which is installed by the `FNC` package.  
-
-
+``````{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-stability-roots-julia
 :::
-:::{grid-item-card}
-:columns: 7
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+matlab
+```` 
 
-In the rest of the book, we do not show the `using` statement needed to load the book's package, but you will need to enter it if you want to run the codes yourself.
-
-:::
-::::
-
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-```
-
-Our first step is to construct a polynomial with six known roots.
-
-```{code-cell}
-r = [-2.0,-1,1,1,3,6]
-p = fromroots(r)
-```
-
-Now we use a standard numerical method for finding those roots, pretending that we don't know them already. This corresponds to $\tilde{y}$ in {numref}`Definition {number} <definition-stability-backward>`. 
-
-```{code-cell}
-r̃ = sort(roots(p))   # type r\tilde and then press Tab
-```
-
-```{index} ! Julia; @., Julia; broadcasting
-```
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 5
-
-
-Here are the relative errors in each of the computed roots. 
-
-
-:::
-:::{grid-item-card}
-:columns: 7
- 
-
-The `@.` notation at the start means to do the given operations on each element of the given vectors.
-
-:::
-::::
-
-```{code-cell}
-println("Root errors:") 
-@. abs(r-r̃) / r
-```
-
-It seems that the forward error is acceptably close to machine epsilon for double precision in all cases except the double root at $x=1$. This is not a surprise, though, given the poor conditioning at such roots.
-
-Let's consider the backward error. The data in the rootfinding problem are the polynomial coefficients. We can apply `fromroots` to find the coefficients of the polynomial (that is, the data) whose roots were actually computed by the numerical algorithm. This corresponds to $\tilde{x}$ in {numref}`Definition {number} <definition-stability-backward>`. 
-
-```{code-cell}
-p̃ = fromroots(r̃)
-```
-
-We find that in a relative sense, these coefficients are very close to those of the original, exact polynomial:
-
-```{code-cell}
-c,c̃ = coeffs(p),coeffs(p̃)
-println("Coefficient errors:") 
-@. abs(c-c̃) / c
-```
-
-In summary, even though there are some computed roots relatively far from their correct values, they are nevertheless the roots of a polynomial that is very close to the original.
-
-
-
+````{tab-item} Python
+:sync: python
+```` 
+`````
+``````
 
 
 Small backward error is the best we can hope for in a poorly conditioned problem. Without getting into the formal details, know that if an algorithm always produces small backward errors, then it is stable. But the converse is not always true: some stable algorithms may produce a large backward error.
