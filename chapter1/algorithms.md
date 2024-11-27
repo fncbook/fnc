@@ -46,6 +46,19 @@ p(x) &= c_1 + c_2 x + \cdots + c_n x^{n-1} \\
 :sync: julia
 :::{embed} #function-horner-julia
 :::
+
+:::{admonition} About the code
+:class: dropdown
+The `length` function in line 8 returns the number of elements in vector `c`. Here, that value is one greater than the degree of the polynomial. The syntax `c[i]` accesses element `i` of a vector `c`. In Julia, the first index of a vector is 1 by default, so in line 9, the last element of `c` is accessed.
+
+The `for` / `end` construct in lines 10–12 is a *loop*. The local variable `k` is assigned the value `n-1`, then the loop body is executed, then `k` is assigned `n-2`, the body is executed again, and so on until finally `k` is set to 1 and the body is executed for the last time.
+
+The `return` statement in line 13 terminates the function and specifies one or more values to be returned to the caller.
+:::
+
+```{index} ! Julia; for
+```
+
 ```` 
 
 ````{tab-item} MATLAB
@@ -57,23 +70,21 @@ matlab
 :sync: python
 :::{embed} #function-horner-python
 :::
-```` 
+:::{admonition} About the code
+:class: dropdown
+The `len` function in line 8 returns the number of elements in vector `c`. Here, that value is one greater than the degree of the polynomial. The syntax `c[i]` accesses element `i` of a vector `c`. In Numpy, the first index of a vector is 0, so in line 9, the first element of `c` is accessed.
+
+The `for` construct in lines 10–11 is a *loop*. The local variable `k` is assigned the value `1`, then the loop body is executed, then `k` is assigned `2`, the body is executed again, and so on until finally `k` is set to `n-1` and the body is executed for the last time.
+
+The `return` statement in line 12 terminates the function and specifies one or more values to be returned to the caller. 
+:::
+````
 `````
 ``````
 
 ```{index} Julia; length, Julia; indexing arrays
 ```
 
-:::{admonition} About the code
-The `length` function in line 1 returns the number of elements in vector `c`. The syntax `c[n]` accesses element `n` of a vector `c`. In Julia, the first index of a vector is 1 by default, so in line 2, the last element of `c` is accessed.
-
-The `for` / `end` construct is a *loop*. The local variable `k` is assigned the value `n-1`, then the loop body is executed, then `k` is assigned `n-2`, the body is executed again, and so on until finally `k` is set to 1 and the body is executed for the last time.
-
-The `return` statement in line 13 terminates the function and specifies one or more values to be returned to the caller. A function may have more than one `return` statement, in which case the first one encountered terminates the function; however, that coding style is mostly discouraged.
-:::
-
-```{index} ! Julia; for
-```
 
 (demo-algorithms-horner)=
 ``````{prf:example}
@@ -104,10 +115,16 @@ The `Polynomials` package for Julia provides its own fast methods for polynomial
 
 ## Writing your own functions
 
+
+Any collection of statements organized around solving a type of problem should probably be wrapped in a function. One clue is that if you find yourself copying and pasting code, perhaps with small changes in each instance, you should probably be writing a function instead.
+
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+
 ```{index} ! Julia; functions
 ```
-
-Functions are a primary way of working in Julia. Any collection of statements organized around solving a type of problem should probably be wrapped in a function. Functions can be defined in text files with the extension `.jl`, at the command line (called the *REPL prompt*), or in notebooks. 
+Functions can be defined in text files with the extension `.jl`, at the command line (called the *REPL prompt*), or in notebooks. 
 
 As seen in {numref}`Function {number} <function-horner>`, one way to start a function definition is with the `function` keyword, followed by the function name and the input arguments in parentheses. For example, to represent the mathematical function $e^{\sin x}$, we could use
 
@@ -121,7 +138,7 @@ end
 ```{index} ! Julia; return
 ```
 
-The `return` statement is used to end execution of the function and return one or more (comma-separated) values to the caller of the function. If an executing function reaches its `end` statement without encountering a `return` statement, then it returns the result of the most recent statement.
+The `return` statement is used to end execution of the function and return one or more (comma-separated) values to the caller of the function. If an executing function reaches its `end` statement without encountering a `return` statement, then it returns the result of the most recent statement, but this is considered poor style.
 
 For a function with a short definition like the one above, there is a more compact syntax to do the same thing:
 
@@ -129,10 +146,12 @@ For a function with a short definition like the one above, there is a more compa
 myfun(x) = exp(sin(x))
 ```
 
+```{index} ! Julia; anonymous functions
+```
 You can also define **anonymous functions** or **lambda functions**, which are typically simple functions that are provided as inputs to other functions. This is done with an arrow notation. For example, to plot the function above (in the `Plots` package) without permanently creating it, you could enter
 
 ``` julia
-plot( x->exp(sin(x)), 0, 6 )
+plot(x -> exp(sin(x)), 0, 6)
 ```
 
 As in most languages, input arguments and variables defined within a function have scope limited to the function itself. However, they can access values defined within an enclosing scope. For instance:
@@ -145,15 +164,109 @@ c = 2;  mycfun(3)   # returns exp(2*sin(3))
 
 There's a lot more to be said about functions in Julia, but this is enough to get started.
 
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+
+```{index} ! MATLAB; functions
+```
+Functions can be defined in text files with the extension `.m`, at the command line, or in Live Scripts. 
+
+As seen in {numref}`Function {number} <function-horner>`, one way to start a function definition is with the `function` keyword, followed one or more output arguments in brackets, the function name, and the input arguments in parentheses. For example, to represent the mathematical function $e^{\sin x}$, we could use the following in a file called `myfun.m`:
+
+``` matlab
+function [y] = myfun(x)
+    s = sin(x);
+    y = exp(s);
+end
+```
+
+Whatever value is assigned to `y` when the function terminates will be returned as the output of the function. 
+
+For a function with a short definition like the one above, there is a more compact syntax to do the same thing:
+
+``` matlab
+myfun = @(x) exp(sin(x));
+```
+
+```{index} ! MATLAB; anonymous functions
+```
+
+The syntax on the right of the `=` above defines an **anonymous function** (called a **lambda function** in computer science), which can be used in place without giving it a name as we did here. We'll have examples of doing this later on. 
+
+As in most languages, input arguments and variables defined within a function have scope limited to the function itself. However, they can access values defined within an enclosing scope, with those values being locked in at the time of creation. For instance:
+
+``` matlab
+c = 1;
+mycfun = @(x) exp(c*sin(x));
+mycfun(3)   % returns exp(1*sin(3))
+c = 2;  
+mycfun(3)   % also returns exp(1*sin(3))
+mycfun = @(x) exp(c*sin(x));   % redefines mycfun
+mycfun(3)   % now returns exp(2*sin(3))
+
+```
+
+There's a lot more to be said about functions, but this is enough to get started.
+
+```` 
+
+````{tab-item} Python
+:sync: python
+
+Functions can be defined in text files with the extension `.py`, at the command line (called the *REPL prompt*), or in notebooks. 
+
+As seen in {numref}`Function {number} <function-horner>`, one way to start a function definition is with the `def` keyword, followed by the function name and the input arguments in parentheses, ending with a colon. The statements for the body of the function must then all be indented. For example, to represent the mathematical function $e^{\sin x}$, we could use
+
+``` python
+def myfun(x):
+    s = np.sin(x)
+    return np.exp(s)
+```
+
+```{index} ! Python; return
+```
+
+The `return` statement is used to end execution of the function and return one or more (comma-separated) values to the caller of the function. 
+
+```{tip}
+If an executing function reaches its `end` statement without encountering a `return` statement, then the output is undefined, which is a common source of bugs.
+```
+
+For a function with a short definition like the one above, there is a more compact syntax to do the same thing:
+
+``` python
+myfun = lambda x : np.exp(np.sin(x))
+```
+
+The syntax on the right of the `=` above defines an **anonymous function** (called a **lambda function** in computer science), which can be used in place without giving it a name as we did here. We'll have examples of doing this later on. 
+
+As in most languages, input arguments and variables defined within a function have scope limited to the function itself. However, they can access values defined within an enclosing scope. For instance:
+
+``` python
+mycfun = lambda x : np.exp(c * np.sin(x))
+c = 1;  print(mycfun(3))   # exp(1*sin(3))
+c = 2;  print(mycfun(3))   # exp(2*sin(3))
+```
+
+There's a lot more to be said about functions in Python, but this is enough to get started.
+
+```` 
+``````
+
+
 ## Exercises
 
-1. ⌨ Write a Julia function
+```{note}
+The exercises marked with a computer icon require the use of a computer. The others can be done by hand.
+```
 
-    ``` julia
-    function poly1(p)
-    ```
+```{warning}
+A polynomial is represented as a vector of coefficients in all three languages covered by this book. However, in Julia they are given in *ascending* degree order, which is most convenient programmatically, while in MATLAB and Numpy they are given in *descending* order, which is the way we usually write them. This difference makes writing the exercises universally a little awkward, so be advised.
+```
 
-    that evaluates a polynomial $p(x) = c_1 + c_2 x + \cdots + c_n x^{n-1}$ at $x=-1$. You should do this directly, not by a call to or imitation of {numref}`Function {number} <function-horner>`. Test your function on $r(x)=3x^3-x+1$ and $s(x)=2x^2-x$.
+1. ⌨ Write a function `poly1(p)` that returns the value of a polynomial $p(x) = c_1 + c_2 x + \cdots + c_n x^{n-1}$ at $x=-1$. You should do this directly, not by a call to or imitation of {numref}`Function {number} <function-horner>`. Test your function on $r(x)=3x^3-x+1$ and $s(x)=2x^2-x$.
 
     (problem-algorithms-samplevar)=
 2. ⌨  In statistics, one defines the variance of sample values $x_1,\ldots,x_n$ by
@@ -164,21 +277,9 @@ There's a lot more to be said about functions in Julia, but this is enough to ge
     \qquad \overline{x} = \frac{1}{n} \sum_{i=1}^n x_i.
     ```
 
-    Write a Julia function
+    Write a function `samplevar(x)` that takes as input a vector `x` of any length and returns $s^2$ as calculated by the formula. You should test your function on the vectors `ones(100)` and `rand(200)`. If you enter `using Statistics` in Julia, then you can compare to the results of the `var` function.
 
-    ``` julia
-    function samplevar(x)
-    ```
-
-    that takes as input a vector `x` of any length and returns $s^2$ as calculated by the formula. You should test your function on the vectors `ones(100)` and `rand(200)`. If you enter `using Statistics` in Julia, then you can compare to the results of the `var` function.
-
-3. ⌨  Let `x` and `y` be vectors whose entries give the coordinates of the $n$ vertices of a polygon, given in counterclockwise order. Write a function
-
-    ``` julia
-    function polygonarea(x,y)
-    ```
-
-    that computes the area of the polygon, using this formula based on Green's theorem:
+3. ⌨  Let `x` and `y` be vectors whose entries give the coordinates of the $n$ vertices of a polygon, given in counterclockwise order. Write a function `polygonarea(x,y)` that computes and returns the area of the polygon using this formula based on Green's theorem:
   
     ```{math}
     A = \frac{1}{2} \left| \sum_{k=1}^n x_k y_{k+1} - x_{k+1}y_k \right|.

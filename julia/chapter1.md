@@ -260,7 +260,7 @@ This matches the observation well.
 
 (function-horner-julia)=
 `````{dropdown} **Horner's algorithm for evaluating a polynomial**
-
+:open: true
 ```{code-block} julia
 :lineno-start: 1
 """
