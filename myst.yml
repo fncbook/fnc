@@ -4,7 +4,7 @@ project:
   id: a36af5d8-56ed-4bf2-92e6-5f7fdb82e8e1
   title: Fundamentals of Numerical Computation
   short_title: FNC
-  # description:
+  description: Online textbook for computational mathematics
   # keywords: 
   authors:
     - name: Tobin A. Driscoll
@@ -202,4 +202,4 @@ site:
   template: book-theme
   # options:
   #   favicon: favicon.ico
-  #   logo: site_logo.png
+  logo: _static/FNClogo.png
