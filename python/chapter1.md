@@ -11,7 +11,7 @@ import FNC
 ```
 
 (demo-float-accuracy-python)=
-``````{dropdown} Floating-point accuracy
+``````{dropdown} Absolute and relative accuracy
 Recall the grade-school approximation to the number $\pi$.
 
 ```{code-cell} ipython3
@@ -89,13 +89,14 @@ print(f"The type of {one} is {type(one)}")
 Both `float` and `np.float64` are double precision, using 64 binary bits per value. Although it is not normally necessary to do so, we can deconstruct a float into its significand and exponent:
 
 ```{code-cell} ipython3
-significand, exponent = np.frexp(one)
-print(f"significand: {significand}, exponent: {exponent}")
+x = 3.14
+mantissa, exponent = np.frexp(x)
+print(f"significand: {mantissa * 2}, exponent: {exponent - 1}")
 ```
 
 ```{code-cell} ipython3
-significand, exponent = np.frexp(one / 8)
-print(f"significand: {significand}, exponent: {exponent}")
+mantissa, exponent = np.frexp(x / 8)
+print(f"significand: {mantissa * 2}, exponent: {exponent - 1}")
 ```
 
 The spacing between floating-point values in $[2^n,2^{n+1})$ is $2^n \epsilon_\text{mach}$, where $\epsilon_\text{mach}$ is machine epsilon, given here for double precision:
@@ -188,24 +189,28 @@ Here are the roots as computed by the quadratic formula.
 
 ```{code-cell}
 d = np.sqrt(b**2 - 4*a*c)
-r1 = (-b - d) / 2*a
-r2 = (-b + d) / 2*a
+r1 = (-b - d) / (2*a)
+r2 = (-b + d) / (2*a)
 print(r1, r2)
 ```
 
 The display of `r2` suggests that the last five digits or so are inaccurate. The relative error in the value is 
 
 ```{code-cell}
-print(abs(r2 - (1+ep)) / (1+ep))
+print(abs(r1 - 1) / abs(1))
+print(abs(r2 - (1+ep)) / abs(1+ep))
 ```
 
-The condition number of the roots is inversely proportional to $2\epsilon$, the difference between them. Thus, roundoff error in the data can grow in the result to be roughly
-
+The condition number of each root is 
+$$
+\kappa(r_i) = \frac{|r_i|}{|r_1-r_2|} \approx \frac{1}{\epsilon}. 
+$$
+Thus, relative error in the data at the level of roundoff can grow in the result to be roughly
 ```{code-cell}
 print(np.finfo(float).eps / ep)
 ```
 
-This matches the observation well.
+This matches the observation pretty well.
 ``````
 
 <!-- SECTION 3 -->
@@ -213,21 +218,13 @@ This matches the observation well.
 (function-horner-python)=
 `````{dropdown} **Horner's algorithm for evaluating a polynomial**
 :open: true
-```{code-block} python
+````{literalinclude} ../python/pkg/FNC/FNC01.py
 :lineno-start: 1
-def horner(c,x):
-    """
-    horner(c,x)
-
-    Evaluate a polynomial whose coefficients are given in descending order 
-    in `c`, at the point `x`, using Horner's rule.
-    """
-    n = len(c)
-    y = c[0]
-    for k in range(1, n):
-        y = x*y + c[k]   
-    return y
-```
+:start-at: def horner
+:end-before: def
+:filename: horner.py
+:language: python
+````
 `````
 
 (demo-algorithms-horner-python)=

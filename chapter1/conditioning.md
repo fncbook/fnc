@@ -232,7 +232,8 @@ The condition number of a root can be arbitrarily large. In the extreme case of 
 
 ````{tab-item} MATLAB
 :sync: matlab
-matlab
+:::{embed} #demo-condition-roots-matlab
+:::
 ```` 
 
 ````{tab-item} Python

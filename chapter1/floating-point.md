@@ -19,7 +19,7 @@ The set $\float$ of **floating-point numbers** consists of zero and all numbers 
 ```{index} ! significand
 ```
 
-where $n$ is an integer called the **exponent**, and $1+f$ is the **mantissa** or **significand**, in which
+where $n$ is an integer called the **exponent**, and $1+f$ is the **significand**, in which
 
 ```{math}
 :label: mantissa
@@ -134,7 +134,8 @@ We often round this value down to an integer, but it does make sense to speak of
 
 ````{tab-item} MATLAB
 :sync: matlab
-matlab
+:::{embed} #demo-float-accuracy-matlab
+:::
 ```` 
 
 ````{tab-item} Python
@@ -171,7 +172,8 @@ We often speak of double-precision floating-point numbers as having about 16 dec
 
 ````{tab-item} MATLAB
 :sync: matlab
-matlab
+:::{embed} #demo-float-matlab
+:::
 ```` 
 
 ````{tab-item} Python
@@ -216,7 +218,8 @@ Hence the relative error in arithmetic is essentially the same as for the floati
 
 ````{tab-item} MATLAB
 :sync: matlab
-matlab
+:::{embed} #demo-float-arithmetic-matlab
+:::
 ```` 
 
 ````{tab-item} Python

@@ -56,6 +56,9 @@ The `for` / `end` construct in lines 10–12 is a *loop*. The local variable `k`
 The `return` statement in line 13 terminates the function and specifies one or more values to be returned to the caller.
 :::
 
+```{index} ! Julia; length
+```
+
 ```{index} ! Julia; for
 ```
 
@@ -63,28 +66,49 @@ The `return` statement in line 13 terminates the function and specifies one or m
 
 ````{tab-item} MATLAB
 :sync: matlab
-matlab
+:::{embed} #function-horner-julia
+:::
+
+:::{admonition} About the code
+:class: dropdown
+The `length` function in line 9 returns the number of elements in vector `c`. Here, that value is one greater than the degree of the polynomial. The syntax `c(i)` accesses element `i` of a vector `c`. In MATLAB, the first index of a vector is 1 by default.
+
+The `for` / `end` construct in lines 11–13 is a *loop*. The variable `k` is assigned the value `n-1`, then the loop body is executed, then `k` is assigned `n-2`, the body is executed again, and so on until finally `k` is set to 1 and the body is executed for the last time.
+
+The final value assigned to `y` is returned to the caller.
+:::
+
+```{index} ! MATLAB; length
+```
+
+```{index} ! MATLAB; for
+```
 ```` 
+
 
 ````{tab-item} Python
 :sync: python
 :::{embed} #function-horner-python
 :::
+
 :::{admonition} About the code
 :class: dropdown
-The `len` function in line 8 returns the number of elements in vector `c`. Here, that value is one greater than the degree of the polynomial. The syntax `c[i]` accesses element `i` of a vector `c`. In Numpy, the first index of a vector is 0, so in line 9, the first element of `c` is accessed.
+The `len` function in line 8 returns the number of elements in list or vector `c`. Here, that value is one greater than the degree of the polynomial. The syntax `c[i]` accesses element `i` of a list or Numpy vector `c`. In both cases, the first index of a vector is 0.
 
 The `for` construct in lines 10–11 is a *loop*. The local variable `k` is assigned the value `1`, then the loop body is executed, then `k` is assigned `2`, the body is executed again, and so on until finally `k` is set to `n-1` and the body is executed for the last time.
 
 The `return` statement in line 12 terminates the function and specifies one or more values to be returned to the caller. 
 :::
+
+```{index} ! Python; len
+```
+
 ````
 `````
 ``````
 
-```{index} Julia; length, Julia; indexing arrays
+```{index} Python; length
 ```
-
 
 (demo-algorithms-horner)=
 ``````{prf:example}

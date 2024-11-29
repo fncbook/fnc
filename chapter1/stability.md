@@ -33,7 +33,8 @@ x_2 = \frac{-b - \sqrt{b^2-4ac}}{2a}.
 
 ````{tab-item} MATLAB
 :sync: matlab
-matlab
+:::{embed} #demo-stability-quadbad-matlab
+:::
 ```` 
 
 ````{tab-item} Python
@@ -62,7 +63,8 @@ We can confirm this conclusion by finding a different path that avoids subtracti
 
 ````{tab-item} MATLAB
 :sync: matlab
-matlab
+:::{embed} #demo-stability-quadgood-matlab
+:::
 ```` 
 
 ````{tab-item} Python
@@ -120,7 +122,8 @@ Backward error is the difference between the original data and the data that exa
 
 ````{tab-item} MATLAB
 :sync: matlab
-matlab
+:::{embed} #demo-stability-roots-matlab
+:::
 ```` 
 
 ````{tab-item} Python

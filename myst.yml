@@ -192,6 +192,9 @@ project:
       - title: Julia codes
         children:
           - file: julia/chapter1.md
+      - title: MATLAB codes
+        children:
+          - file: matlab/chapter1.md
       - title: Python codes
         children:
           - file: python/chapter1.md
