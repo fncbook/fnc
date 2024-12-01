@@ -110,7 +110,6 @@ We can solve the TPBVP {eq}`tpbvp` by recasting the problem as a first-order sys
 ```
 
 :::::{grid} 1 1 2 2
-:gutter: 2
 
 ::::{grid-item}
 :columns: 5
@@ -131,7 +130,7 @@ We will code an *in-place* form of this ODE, in which the first argument is used
 
 ::::
 
-:::{grid-item-card}
+:::{card}
 :columns: 5 
 
 The in-place code here saves the computing time that would otherwise be needed to allocate memory for `f` repeatedly.

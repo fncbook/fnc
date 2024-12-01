@@ -90,7 +90,6 @@ p = [1,1];
 ```
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -100,7 +99,7 @@ The function $\mathbf{g}(\mathbf{x}) - \mathbf{g}(\mathbf{p})$ obviously has a z
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 
@@ -189,7 +188,6 @@ plot!(s,ŵ,l=:dash,label="original data")
 ```
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -199,7 +197,7 @@ The idea is to pretend that we know nothing of the origins of this data and use 
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 

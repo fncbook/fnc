@@ -220,7 +220,6 @@ spy(A,color=:blues)
 ```
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -230,7 +229,7 @@ We compare unrestarted GMRES with three different thresholds for restarting. Her
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 

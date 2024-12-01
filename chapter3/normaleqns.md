@@ -218,7 +218,6 @@ This squaring of the condition number in the normal equations is the cause of in
 
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -228,7 +227,7 @@ Because the functions $\sin^2(t)$, $\cos^2(t)$, and $1$ are linearly dependent, 
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 

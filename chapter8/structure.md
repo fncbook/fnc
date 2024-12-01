@@ -51,7 +51,6 @@ Here we load the adjacency matrix of a graph with 2790 nodes. Each node is a web
 ```{index} ! Julia; nnz
 ```
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -61,7 +60,7 @@ We may define the density of $\mathbf{A}$ as the number of nonzeros divided by t
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 
@@ -181,7 +180,6 @@ Matrix(A[1:7,1:7])
 ```
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -191,7 +189,7 @@ Without pivoting, the LU factors have the same lower and upper bandwidth as the 
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 

@@ -235,7 +235,6 @@ a = 0;  b = 2;
 ```
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -245,7 +244,7 @@ In lieu of the exact value, we use the `QuadGK` package to find an accurate resu
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 
@@ -448,7 +447,6 @@ R = (16S[2] - S[1]) / 15
 ```
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -458,7 +456,7 @@ We can make a triangular table of the errors:
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 

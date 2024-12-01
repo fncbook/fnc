@@ -224,7 +224,6 @@ Here is the sequence of errors.
 ```
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -234,7 +233,7 @@ Because the error reaches machine epsilon so rapidly, we're going to use extende
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 
@@ -350,7 +349,6 @@ The `break` statement, seen here in line 25, causes an immediate exit from the i
 ```
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -360,7 +358,7 @@ Suppose we want to evaluate the inverse of the function $h(x)=e^x-x$. This means
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 

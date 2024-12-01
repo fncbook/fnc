@@ -165,7 +165,6 @@ The QR factorization is computed by using successive Householder reflections to 
 
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -175,7 +174,7 @@ We will use Householder reflections to produce a QR factorization of a random ma
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 
@@ -193,7 +192,6 @@ m,n = size(A)
 ```
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -203,7 +201,7 @@ Our first step is to introduce zeros below the diagonal in column 1 by using {eq
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 

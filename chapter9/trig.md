@@ -137,7 +137,6 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 
 
 ::::{grid} 1 1 2 2
-:gutter: 3
 
 :::{grid-item}
 :columns: 5
@@ -148,7 +147,7 @@ We will get a cardinal function without using an explicit formula, just by passi
 
 :::
 
-:::{grid-item-card}
+:::{card}
 :columns: 7
 
 

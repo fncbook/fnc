@@ -310,7 +310,6 @@ q = Polynomials.fit(x,y,2)      # interpolating polynomial
 plot!(x->q(x),interval...,l=:dash,label="interpolant")
 ```
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -320,7 +319,7 @@ To do inverse interpolation, we swap the roles of $x$ and $y$ in the interpolati
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 

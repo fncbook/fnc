@@ -59,7 +59,6 @@ c = V\temp
 
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -68,7 +67,7 @@ c = V\temp
 The coefficients in vector `c` are used to create a polynomial. Then we create a function that evaluates the polynomial after changing the time variable as we did for the Vandermonde matrix.
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 
@@ -155,7 +154,6 @@ temp = [ -0.0480, -0.0180, -0.0360, -0.0120, -0.0040,
 ```
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -164,7 +162,7 @@ temp = [ -0.0480, -0.0180, -0.0360, -0.0120, -0.0040,
 The standard best-fit line results from using a linear polynomial that meets the least-squares criterion.
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 
@@ -195,7 +193,6 @@ V = [ t[i]^j for i in 1:length(t), j in 0:3 ]
 ```
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -205,7 +202,7 @@ Now we solve the new least-squares problem to redefine the fitting polynomial.
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 

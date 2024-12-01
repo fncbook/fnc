@@ -191,7 +191,6 @@ The observed linear convergence rate is found from the data.
 ```
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -201,7 +200,7 @@ We reorder the eigenvalues to enforce {eq}`shiftorder`.
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 

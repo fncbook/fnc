@@ -93,7 +93,7 @@ The final value assigned to `y` is returned to the caller.
 
 :::{admonition} About the code
 :class: dropdown
-The `len` function in line 8 returns the number of elements in list or vector `c`. Here, that value is one greater than the degree of the polynomial. The syntax `c[i]` accesses element `i` of a list or Numpy vector `c`. In both cases, the first index of a vector is 0.
+The `len` function in line 8 returns the number of elements in list or vector `c`. Here, that value is one greater than the degree of the polynomial. The syntax `c[i]` accesses element `i` of a list or NumPy vector `c`. In both cases, the first index of a vector is 0.
 
 The `for` construct in lines 10–11 is a *loop*. The local variable `k` is assigned the value `1`, then the loop body is executed, then `k` is assigned `2`, the body is executed again, and so on until finally `k` is set to `n-1` and the body is executed for the last time.
 
@@ -287,7 +287,7 @@ The exercises marked with a computer icon require the use of a computer. The oth
 ```
 
 ```{warning}
-A polynomial is represented as a vector of coefficients in all three languages covered by this book. However, in Julia they are given in *ascending* degree order, which is most convenient programmatically, while in MATLAB and Numpy they are given in *descending* order, which is the way we usually write them. This difference makes writing the exercises universally a little awkward, so be advised.
+A polynomial is represented as a vector of coefficients in all three languages covered by this book. However, in Julia they are given in *ascending* degree order, which is most convenient programmatically, while in MATLAB and NumPy they are given in *descending* order, which is the way we usually write them. This difference makes writing the exercises universally a little awkward, so be advised.
 ```
 
 1. ⌨ Write a function `poly1(p)` that returns the value of a polynomial $p(x) = c_1 + c_2 x + \cdots + c_n x^{n-1}$ at $x=-1$. You should do this directly, not by a call to or imitation of {numref}`Function {number} <function-horner>`. Test your function on $r(x)=3x^3-x+1$ and $s(x)=2x^2-x$.

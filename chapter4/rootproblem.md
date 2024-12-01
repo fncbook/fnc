@@ -61,7 +61,6 @@ plot(J3,0,20,title="Bessel function",
     xaxis=(L"x"),yaxis=(L"J_3(x)"),grid=:xy)
 ```
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -71,7 +70,7 @@ From the graph we see roots near 6, 10, 13, 16, and 19. We use `nlsolve` from th
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 
@@ -164,7 +163,6 @@ f  = x -> (x-1)*(x-2);
 :::
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -174,7 +172,7 @@ At the root $r=1$, we have $f'(r)=-1$. If the values of $f$ were perturbed at ev
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 

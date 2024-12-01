@@ -117,7 +117,6 @@ Let's define a set of four nodes (i.e., $n=3$ in our formulas).
 t = [0, 0.55, 0.7, 1]
 ```
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -127,7 +126,7 @@ We plot the hat functions $H_0,\ldots,H_3$.
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 

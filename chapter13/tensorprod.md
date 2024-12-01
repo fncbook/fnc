@@ -116,7 +116,6 @@ plotlyjs();  # use better 3D renderer
 ```
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -126,7 +125,7 @@ We can make a nice plot of the function by first choosing a much finer grid. How
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 

@@ -93,7 +93,6 @@ n = length(t)-1;
 ```
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -103,7 +102,7 @@ Let's apply the definition of the cardinal Lagrange polynomial for $k=2$. First 
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 
@@ -241,7 +240,6 @@ n = length(t)-1;
 
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -253,7 +251,7 @@ $$ |f(x)-p(x)| \le \frac{1}{5} \left| \Phi(x) \right|.$$
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 

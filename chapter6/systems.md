@@ -149,7 +149,6 @@ plot!(t[1:3:end],u[1:3:end,:],l=(1,:black),m=2,
 Notice above that the accuracy of the Euler solution deteriorates rapidly. 
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -159,7 +158,7 @@ When there are just two components, it's common to plot the solution in the _pha
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 
@@ -254,7 +253,6 @@ The trick illustrated in the preceding examples is always available. Suppose $y$
 
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -264,7 +262,7 @@ Let's implement the coupled pendulums from {numref}`Example {number} <example-sy
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 
@@ -289,7 +287,6 @@ tspan = (0.,50.);
 ```
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -299,7 +296,7 @@ First we check the behavior of the system when the pendulums are uncoupled, i.e.
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 

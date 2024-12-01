@@ -95,7 +95,6 @@ An ODE may have higher derivatives of the unknown solution present. For example,
 The `DifferentialEquations` package offers solvers for IVPs. Let's use it to define and solve an initial-value problem for $u'=\sin[(u+t)^2]$ over $t \in [0,4]$, such that $u(0)=-1$.  
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -105,7 +104,7 @@ Because many practical problems come with parameters that are fixed within an in
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 

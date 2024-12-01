@@ -181,7 +181,6 @@ T = LinearMap(x -> vec(blur(unvec(x))),m*n);
 ```
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -191,7 +190,7 @@ The blurring operators are symmetric, so we apply `minres` to the composite blur
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 

@@ -88,6 +88,9 @@ Additionally, any two vectors $\mathbf{v}\in\mathbb{C}^m$ and $\mathbf{w}\in\mat
   \end{bmatrix}.
 ```
 
+```{index} ! matrix multiplication
+```
+
 For real vectors, the complex conjugates above have no effect and ${}^*$ becomes ${}^T$.
 
 In order for matrices $\mathbf{A}$ and $\mathbf{B}$ to be multiplied, it is necessary that their inner dimensions match. Thus, if $\mathbf{A}$ is $m\times p$, then $\mathbf{B}$ must be $p \times n$. In terms of scalar components, the $(i,j)$ entry of $\mathbf{C}=\mathbf{A}\mathbf{B}$ is given by

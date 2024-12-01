@@ -223,7 +223,6 @@ R
 ```
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -233,7 +232,7 @@ If you look carefully, you see that we seemingly got a full $\mathbf{Q}$ but a t
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 

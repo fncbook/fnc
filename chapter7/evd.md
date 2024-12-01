@@ -364,7 +364,6 @@ We confirm that the matrix $\mathbf{A}$ is normal by checking that $\kappa(\math
 ```
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -374,7 +373,7 @@ Now we perturb $\mathbf{A}$ and measure the effect on the eigenvalues. The Bauer
 
 
 :::
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 

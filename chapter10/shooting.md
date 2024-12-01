@@ -34,7 +34,6 @@ This is the idea behind the **shooting method**. Imagine adjusting your aiming p
 
 
 ::::{grid} 1 1 2 2
-:gutter: 2
 
 :::{grid-item}
 :columns: 7
@@ -45,7 +44,7 @@ Let's first examine the shooting approach for the TPBVP from {numref}`Example {n
 
 :::
 
-:::{grid-item-card}
+:::{card}
 :columns: 5
 
 
