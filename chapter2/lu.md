@@ -24,7 +24,7 @@ We illustrate the connection of outer products to matrix multiplication by a sma
 ::::{prf:example}
 According to the usual definition of matrix multiplication,
 
-$$
+\begin{align*}
 	\small
 	\begin{bmatrix}
 		4 & -1  \\ -3 & 5 \\ -2 &  6	  
@@ -39,7 +39,7 @@ $$
 		(-3)(2) + (5)(-3)  &  (-3)(-7) + (5)(5)  \\ 
 		(-2)(2) + (6)(-3)  &  (-2)(-7) + (6)(5)  
 	\end{bmatrix}.  
-  $$
+\end{align*}
 
 If we break this up into the sum of two matrices, however, each is an outer product.
 

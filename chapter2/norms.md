@@ -12,23 +12,23 @@ For vectors, we use a **norm** $\| \cdot \|$, which is a function from $\real^n$
 
 [^complexnorm]: The same statements work for vectors with complex entries, with complex modulus in place of absolute values.
   
-```{math}
-:label: norm-properties
-\| \mathbf{x} \| &\ge 0, \\
-\| \mathbf{x} \| &=0 \;\Leftrightarrow \; \mathbf{x}=\boldsymbol{0}, \\
-\| \alpha \mathbf{x} \| &= |\alpha|\, \| \mathbf{x}\|, \\
-\| \mathbf{x}+\mathbf{y} \| & \le \| \mathbf{x} \| + \| \mathbf{y} \|.
-```
+\begin{align*}
+\label{norm-properties}
+\norm{\mathbf{x}} &\ge 0, \\
+\norm{\mathbf{x}} &=0 \;\Leftrightarrow \; \mathbf{x}=\boldsymbol{0}, \\
+\norm{\alpha \mathbf{x}} &= \abs{\alpha}\, \norm{\mathbf{x}}, \\
+\norm{\mathbf{x}+\mathbf{y}} & \le \norm{\mathbf{x}} + \norm{\mathbf{y}}.
+\end{align*}
 
 The last of these properties is known as the **triangle inequality**. It is natural to interpret $\| \mathbf{x} \|=\| \mathbf{x}-\boldsymbol{0} \|$ as the distance from $\mathbf{x}$ to the origin and $\| \mathbf{x}-\mathbf{y} \|$ as the distance from $\mathbf{x}$ to $\mathbf{y}$. We will be using only the three most important vector norms, defined as follows.
 
 (definition-norms-vectornorms)=
 :::{prf:definition} Common vector norms
-**2-norm:** $\quad \| \mathbf{x} \|_2 = \left( \displaystyle \sum_{i=1}^n |x_i|^2 \right)^{\frac{1}{2}} = \sqrt{\rule[1mm]{0pt}{0.75em}\mathbf{x}^T \mathbf{x}}$
+**2-norm:** $\quad \twonorm{\mathbf{x}} = \left( \displaystyle \sum_{i=1}^n |x_i|^2 \right)^{\frac{1}{2}} = \sqrt{\rule[1mm]{0pt}{0.75em}\mathbf{x}^T \mathbf{x}}$
 
-**$\infty$-norm** or **max-norm:** $ \quad \| \mathbf{x} \|_\infty = \displaystyle \max_{i=1,\dots,n} |x_i|$
+**$\infty$-norm** or **max-norm:** $ \quad \infnorm{ \mathbf{x}} = \displaystyle \max_{i=1,\dots,n} |x_i|$
 
-**1-norm:** $\quad \| \mathbf{x} \|_1 = \displaystyle \sum_{i=1}^n |x_i| $
+**1-norm:** $\quad \onenorm{\mathbf{x}} = \displaystyle \sum_{i=1}^n |x_i| $
 :::
 
 The 2-norm corresponds to ordinary Euclidean distance. 
@@ -76,7 +76,7 @@ We say that a sequence of vectors $\mathbf{x}_1,\mathbf{x}_2,\ldots$ **converges
 
 ```{math}
 :label: vectorconverge
-  \lim_{k\rightarrow\infty} \| \mathbf{x}_k - \mathbf{x} \| = 0.
+  \lim_{k\rightarrow\infty} \norm{\mathbf{x}_k - \mathbf{x}} = 0.
 ```
 
 By definition, a sequence is convergent in the infinity norm if and only if it converges componentwise. The same is true for a convergent sequence in *any* norm.
@@ -101,7 +101,7 @@ Although we view matrices as two-dimensional, we can also interpret them as vect
 ```{index} Julia; norm
 ```
 
-This is the norm computed by the `norm` function in Julia.
+<!-- This is the norm computed by the `norm` function in Julia. -->
 
 [^colmajor]: Column stacking is actually how matrices are stored in memory within Julia and is known as **column-major order**. MATLAB and FORTRAN also use column-major order, while C and Python use row-major order, in which the rows are stacked.
 

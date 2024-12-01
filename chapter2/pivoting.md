@@ -183,6 +183,18 @@ There is one detail of the row pivoting algorithm that might seem arbitrary: why
 
 (demo-pivoting-stable)=
 ::::{prf:example}
+Let
+
+```{math}
+:label: plu-stab-A
+\mathbf{A} =
+  \begin{bmatrix}
+    -\epsilon & 1 \\ 1 & -1
+  \end{bmatrix}.
+```
+
+If $\epsilon=0$, LU factorization without pivoting fails for $\mathbf{A}$. But if $\epsilon\neq 0$, we can go without pivoting, at least in principle.
+
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

@@ -996,18 +996,6 @@ factored \ rand(500)   # force compilation
 
 (demo-pivoting-stable-julia)=
 ``````{dropdown} Stability of PLU factorization
-Let
-
-```{math}
-:label: plu-stab-A
-\mathbf{A} =
-  \begin{bmatrix}
-    -\epsilon & 1 \\ 1 & -1
-  \end{bmatrix}.
-```
-
-If $\epsilon=0$, LU factorization without pivoting fails for $\mathbf{A}$. But if $\epsilon\neq 0$, we can go without pivoting, at least in principle.
-
 We construct a linear system for this matrix with $\epsilon=10^{-12}$ and exact solution $[1,1]$:
 
 ```{code-cell}

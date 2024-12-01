@@ -196,11 +196,11 @@ Altogether the factorization takes
 
 There are different ways to simplify this expression. We will make a change of summation index using $j=n-k$. The endpoints of the sum are $j=n-1$ when $k=1$ and $j=1$ when $k=n-1$. Since the order of terms in a sum doesn't matter, we get
 
-```{math}
+\begin{align*}
 \sum_{j=1}^{n-1} 1+j+2(j+1)^2 &=  \sum_{j=1}^{n-1} 3 + 5j + 2j^2 \\
   & \sim  3(n-1) + \frac{5}{2}(n-1)^2 + \frac{2}{3}(n-1)^3 \\
   & \sim \frac{2}{3}n^3.
-```
+\end{align*}
 
 We have proved the following. 
 ```{prf:theorem} Efficiency of LU factorization

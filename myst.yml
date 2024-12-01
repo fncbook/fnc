@@ -20,21 +20,22 @@ project:
     '\complex': '\mathbb{C}'
     '\nat': '\mathbb{N}'
     '\integer': '\mathbb{Z}'
-    '\rmn{(^}*)}{(^}*)}' : '\mathbb{R}^{#1 \times #2}'
-    '\dd{(^}*)}{(^}*)}' : '\frac{d #1}{d #2}'
-    '\ddd{(^}*)}{(^}*)}' : '\frac{d^2 #1}{d #2^2}'
-    '\pp{(^}*)}{(^}*)}' : '\frac{\partial #1}{\partial #2}'
-    '\ppp{(^}*)}{(^}*)}' : '\frac{\partial^2 #1}{\partial #2^2}'
-    '\ppdd{(^}*)}{(^}*)}{(^}*)}' : '\frac{\partial^2 #1}{\partial #2 \partial #3}'
-    '\norm{(^}*)}' : '\| #1 \|'
-    '\twonorm{(^}*)}' : '\| #1 \|_2'
-    '\onenorm{(^}*)}' : '\| #1 \|_1'
-    '\infnorm{(^}*)}' : '\| #1 \|_\infty'
-    '\anynorm{(^}*)}{(^}*)}' : '\| #1 \|_#2'
-    '\innerprod{(^}*)}{(^}*)}' : '\langle #1,#2 \rangle'
-    '\pr{(^}*)}' : '^{(#1)}'
-    '\kron{(^}*)}{(^}*)}' : '#1 \otimes #2'
-    '\eye{(^}*)}' : '\mathbf{e}_#1'
+    '\rmn' : '\mathbb{R}^{#1 \times #2}'
+    '\dd' : '\frac{d #1}{d #2}'
+    '\ddd' : '\frac{d^2 #1}{d #2^2}'
+    '\pp' : '\frac{\partial #1}{\partial #2}'
+    '\ppp' : '\frac{\partial^2 #1}{\partial #2^2}'
+    '\ppdd' : '\frac{\partial^2 #1}{\partial #2 \partial #3}'
+    '\abs' : '\left\lvert #1 \right\rvert'
+    '\norm' : '\left\lVert #1 \right\rVert'
+    '\twonorm' : '\norm{#1}_2'
+    '\onenorm' : '\norm{#1}_1'
+    '\infnorm' : '\norm{#1}_\infty'
+    '\anynorm' : '\norm{#1}_#2'
+    '\innerprod' : '\langle #1,#2 \rangle'
+    '\pr' : '^{(#1)}'
+    '\kron' : '#1 \otimes #2'
+    '\eye' : '\mathbf{e}_#1'
     '\meye' : '\mathbf{I}'
     '\Qhat' : '\hat{\mathbf{Q}}'
     '\Rhat' : '\hat{\mathbf{R}}'
@@ -188,7 +189,7 @@ project:
     #         - file: chapter13/next.md
     - title: Appendices
       children:
-        # - file: appendix/linear-algebra.md
+      - file: appendix/linear-algebra.md
         # - file: appendix/glossary.md
         # - file: appendix/julia.md
         # - file: refs.md
@@ -208,6 +209,6 @@ project:
     
 site:
   template: book-theme
-  # options:
+  options:
   #   favicon: favicon.ico
-  logo: _static/FNClogo.png
+    logo: _static/FNClogo.png
