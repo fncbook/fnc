@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-linsys-matrices)=
 # Computing with matrices
 
@@ -86,290 +66,32 @@ provided that the individual block products are well-defined. For transposes we 
   \end{bmatrix}.
 ```
 
-## Vectors and matrices in Julia
+## Vector and matrix basics 
 
-In Julia, vectors and matrices are one-dimensional and two-dimensional arrays, respectively. A lot of how Julia deals with them is easy to remember once learned. There's a lot to learn, though, so we give just some of the basics here, and we will pick up more as we go from the code used in our examples and functions.  
+Vectors and matrices are integral to scientific computing. All modern languages provide ways to work with them beyond manipulation of individual elements. 
 
-(demo-matrices-julia)=
-```{prf:example}
-```
-
-
-
-
-
-:::{index} ! Julia; size, ! Julia; length
+(demo-matrices)=
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-matrices-julia
 :::
+```` 
 
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 7
-
-
-Square brackets are used to enclose elements of a matrix or vector. Use spaces for horizontal concatenation, and semicolons or new lines to indicate vertical concatenation.
-
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-matrices-matlab
 :::
-:::{grid-item-card}
-:columns: 5
+```` 
 
-
-
-The `size` function returns the number of rows and columns in a matrix. Use `length` to get the number of elements in a vector or matrix.
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-matrices-python
 :::
+```` 
+`````
 ::::
-
-
-```{code-cell}
-A = [ 1 2 3 4 5; 50 40 30 20 10
-    π sqrt(2) exp(1) (1+sqrt(5))/2 log(3) ]
-```
-
-```{code-cell}
-m,n = size(A)
-```
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 7
-
-
-A vector is not quite the same thing as a matrix. It has only one dimension, not two. Separate its elements by commas or semicolons.
-
-
-:::
-:::{grid-item-card}
-:columns: 5
-
-
-Separate elements of a vector by commas or semicolons. If you use spaces, you will get a matrix with one row, which is treated differently.
-
-:::
-::::
-
-```{code-cell}
-x = [ 3, 3, 0, 1, 0 ]
-size(x)
-```
-
-For many purposes, however, an $n$-vector in Julia is a lot like an $n\times 1$ column vector.
-
-Concatenated elements within brackets may be matrices or vectors for a block representation, as long as all the block sizes are compatible.
-
-```{code-cell}
-[ x  x ]
-```
-
-```{code-cell}
-[ x; x ]
-```
-
-The `zeros` and `ones` functions construct matrices with entries all zero or one, respectively.
-
-```{code-cell}
-B = [ zeros(3,2) ones(3,1) ]
-```
-
-```{index} ! Julia; transpose, ! Julia; adjoint, ! Julia; \'
-```
-
-A single quote `'` after a matrix returns its adjoint. For real matrices, this is the transpose; for complex-valued matrices, the elements are also conjugated. 
-
-```{code-cell}
-A'
-```
-
-If `x` is simply a vector, then its transpose has a row shape.
-
-```{code-cell}
-x'
-```
-
-```{index} ! Julia; range, ! Julia; \:
-```
-
-There are many convenient shorthand ways of building vectors and matrices other than entering all of their entries directly or in a loop. To get a range with evenly spaced entries between two endpoints, you have two options. One is to use a colon `:`.
-
-```{code-cell}
-y = 1:4              # start:stop
-```
-
-```{code-cell}
-z = 0:3:12           # start:step:stop
-```
-
-(Ranges are not strictly considered vectors, but they behave identically in most circumstances.) Instead of specifying the step size, you can give the number of points in the range if you use `range`.
-
-```{code-cell}
-s = range(-1,1,length=5)
-```
-
-:::{index} ! Julia; end, ! Julia; indexing arrays
-:::
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 7
-
-
-Accessing an element is done by giving one (for a vector) or two (for a matrix) index values within square brackets. 
-
-
-:::
-:::{grid-item-card}
-:columns: 5
-
-
-The `end` keyword refers to the last element in a dimension. It saves you from having to compute and store the size of the matrix first.
-
-:::
-::::
-
-```{code-cell}
-a = A[2,end-1]
-```
-
-```{code-cell}
-x[2]
-```
-
-The indices can be vectors or ranges, in which case a block of the matrix is accessed.
-
-```{code-cell}
-A[1:2,end-2:end]    # first two rows, last three columns
-```
-
-```{index} Julia; \:
-```
-
-If a dimension has only the index `:` (a colon), then it refers to all the entries in that dimension of the matrix.
-
-```{code-cell}
-A[:,1:2:end]        # all of the odd columns
-```
-
-:::{index} ! Julia; diagm
-:::
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 7
-
-
-The matrix and vector senses of addition, subtraction, scalar multiplication, multiplication, and power are all handled by the usual symbols. 
-
-
-:::
-:::{grid-item-card}
-:columns: 5
-
-
-Use `diagm` to construct a matrix by its diagonals. A more general syntax puts elements on super- or subdiagonals.
-
-:::
-::::
-
-```{code-cell}
-B = diagm( [-1,0,-5] )   # create a diagonal matrix
-```
-
-```{code-cell}
-BA = B*A     # matrix product
-```
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 7
-
-
-`A*B` causes an error because the dimensions aren't compatible.
-
-
-:::
-:::{grid-item-card}
-:columns: 5
-
-
-Errors are formally called *exceptions* in Julia.
-
-:::
-::::
-
-```{code-cell} julia
-A*B    # throws an error
-```
-
-A square matrix raised to an integer power is the same as repeated matrix multiplication.
-
-```{code-cell}
-B^3    # same as B*B*B
-```
-
-Sometimes one instead wants to treat a matrix or vector as a mere array and simply apply a single operation to each element of it. For multiplication, division, and power, the corresponding operators start with a dot.
-
-```{code-cell}
-C = -A;
-```
-
-`A*C` would be an error.
-
-```{code-cell}
-elementwise = A.*C
-```
-
-```{index} Julia; broadcasting
-```
-
-The two operands of a dot operator have to have the same size—unless one is a scalar, in which case it is expanded or *broadcast* to be the same size as the other operand.
-
-```{code-cell}
-x_to_two = x.^2
-```
-
-```{code-cell}
-two_to_x = 2 .^ x
-```
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 7
-
-
-Most of the mathematical functions, such as cos, sin, log, exp, and sqrt, expect scalars as operands. However, you can broadcast any function, including ones that you have defined, across a vector or array by using a special dot syntax.
-
-
-:::
-:::{grid-item-card}
-:columns: 5
-
-
-A dot added to the end of a function name means to apply the function elementwise to an array.
-
-:::
-::::
-
-```{code-cell}
-show(cos.(π*x))    # broadcast to a function
-```
-
-Rather than dotting multiple individual functions, you can use `@.` before an expression to broadcast everything within it.
-
-```{code-cell}
-show(@. cos(π*(x+1)^3))    # broadcast an entire expression
-```
-
-
 
 
 
@@ -404,7 +126,7 @@ We can extend the same idea to rows by using the general identity $(\mathbf{R}\m
 
 But $\mathbf{e}_j^T$ is the $j$th *row* of $\mathbf{I}$, and $\mathbf{b}_j^T$ is the transpose of the $j$th column of $\mathbf{B}$, which is the $j$th *row* of $\mathbf{A}$ by $\mathbf{B}=\mathbf{A}^T$. Thus, *multiplication on the left by row $j$ of the identity extracts the $j$th row*. Extracting the single element $(i,j)$ from the matrix is, therefore, $\mathbf{e}_i^T \mathbf{A} \mathbf{e}_j$.
 
-Being able to extract specific rows and columns of a matrix makes it straightforward to do row- and column-oriented operations, such as linear combinations.
+Being able to extract specific rows and columns of a matrix via algebra makes it straightforward to do row- and column-oriented operations, such as linear combinations.
 
 ````{prf:example}
  Say that $\mathbf{A}$ has five columns. Adding twice the third column of $\mathbf{A}$ to its first column is done by
@@ -422,16 +144,43 @@ Suppose we want to do this operation "in place," meaning replacing the first col
   \end{bmatrix}.
 ```
 
+:::::{tab-set}
+::::{tab-item} Julia
+:sync: julia
+
 ```{index} ! Julia; +=
 ```
 
 The Julia equivalent is
 
 ```julia
-A[:,1] += 2A[:,3]
+A[:, 1] += 2A[:, 3]
 ```
 
 The `+=` operator means to increment the item on the left-hand side. There are similar interpretations for `-=` and `*=`.
+::::
+
+:::{tab-item} MATLAB
+:sync: matlab
+The MATLAB equivalent is
+
+```matlab
+A(:, 1) = A(:, 1) + 2 * A(:, 3)
+```
+
+:::
+:::{tab-item} Python
+:sync: python
+The NumPy equivalent is
+
+```python
+A[:, 0] += 2 * A[:, 2]
+```
+
+The `+=` operator means to increment the item on the left-hand side. There are similar interpretations for `-=` and `*=`
+:::
+::::
+
 ````
 
 ## Exercises

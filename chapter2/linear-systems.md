@@ -1,24 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.11.5
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-linsys-linear-systems)=
 # Linear systems
 
@@ -76,82 +55,56 @@ Hence the linear system $\mathbf{S}\mathbf{x}=\mathbf{b}$ with $\mathbf{b}=\begi
 
 ## Don't use the inverse
 
-Matrix inverses are indispensable for mathematical discussion and derivations. However, as you may remember from a linear algebra course, they are not trivial to compute from the entries of the original matrix. Julia does have a command `inv` that finds the inverse of a matrix, but it is almost never the best means to solve a problem. In particular, for solving a linear system of equations, finding the inverse is slower than the standard algorithm. 
+Matrix inverses are indispensable for mathematical discussion and derivations. However, as you may remember from a linear algebra course, they are not trivial to compute from the entries of the original matrix. You might be surprised to learn that matrix inverses play almost no role in scientific computing.
 
+:::{important}
+Computing the inverse of a matrix is not a good way to solve a linear system of equations.
+:::
+
+In fact, when we encounter an expression such as $\mathbf{x} = \mathbf{A}^{-1} \mathbf{b}$ in computing, we interpret it as "solve the linear system $\mathbf{A} \mathbf{x} = \mathbf{b}$" and apply whatever algorithm is most expedient based on what we know about $\mathbf{A}$.
 
 ```{index} Julia; \\
 ```
 
-As demonstrated in {numref}`Demo %s <demo-interp-vander>`, a linear system of equations can be solved by a backslash  (the `\` symbol, not to be confused with the slash `/` used in web addresses).
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+As demonstrated in {numref}`Demo %s <demo-interp-vander>`, the backslash (the `\` symbol, not to be confused with the slash `/` used in web addresses) invokes a linear system solution. 
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+In MATLAB, the backslash operator `\` is used to solve linear systems. 
+```` 
+
+````{tab-item} Python
+:sync: python
+In Python, the `numpy.linalg.solve` function is used to solve linear systems. 
+```` 
+`````
 
 (demo-systems-backslash)=
-```{prf:example}
-```
-
-
-
-
-
-For a square matrix $A$, the command `A\b` is mathematically equivalent to $\mathbf{A}^{-1}\mathbf{b}$. 
-
-```{code-cell}
-A = [1 0 -1; 2 2 1; -1 -3 0]
-```
-
-```{code-cell}
-b = [1,2,3]
-```
-
-```{code-cell}
-x = A\b
-```
-
-```{index} residual
-```
-
-One way to check the answer is to compute a quantity known as the **residual**. It is (ideally) close to machine precision (relative to the elements in the solution).
-
-```{code-cell}
-residual = b - A*x
-```
-
-If the matrix $\mathbf{A}$ is singular, you may get an error.
-
-```{code-cell} julia
-A = [0 1; 0 0]
-b = [1,-1]
-x = A\b
-```
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 5
-
-
-The error message here is admittedly cryptic. In this case we can check that the rank of $\mathbf{A}$ is less than its number of columns, indicating singularity.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-systems-backslash-julia
 :::
-:::{grid-item-card}
-:columns: 7
+```` 
 
-
-The function `rank` computes the rank of a matrix. However, it is numerically unstable for matrices that are nearly singular, in a sense to be defined in a later section.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-systems-backslash-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-systems-backslash-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-rank(A)
-```
-
-A linear system with a singular matrix might have no solution or infinitely many solutions, but in either case, backslash will fail. Moreover, detecting singularity is a lot like checking whether two floating-point numbers are *exactly* equal: because of roundoff, it could be missed. In {numref}`section-linsys-condition-number` we'll find a robust way to fully describe the situation.
-
-
-
-
 
 ## Triangular systems
 
@@ -234,193 +187,80 @@ A triangular matrix is singular if and only if at least one of its diagonal elem
 
 ## Implementation
 
-Consider how to implement the sequential process implied by Equation {eq}`forwardsub`. It seems clear that we want to loop through the elements of $\mathbf{x}$ in order. Within each iteration of that loop, we have an expression whose length depends on the iteration number. One way we could do this would be with a nested loop:
-
-```julia
-for i in 1:4
-    s = 0
-    for j in 1:i-1
-        s += L[i,j]*x[j]
-    end
-    x[i] = (b[i]-s) / L[i,i]
-end
-```
-
-```{index} Julia; sum
-```
-
-A briefer version of the inner loop over `j` is the expression
-
-``` julia
-s = sum( L[i,j]*x[j] for j in 1:i-1 )
-```
-
-However, when `i` equals 1, the range `1:i-1` is empty and the sum causes an error. To avoid this we can handle this case before the `i` loop begins, and start that loop at 2. This is the approach taken in {numref}`Function {number} <function-forwardsub>`.
+Consider how to implement the sequential process implied by Equation {eq}`forwardsub`. It seems clear that we want to loop through the elements of $\mathbf{x}$ in order. Within each iteration of that loop, we have an expression whose length depends on the iteration number. This leads to a nested loop structure.
 
 (function-forwardsub)=
+``````{prf:algorithm} forwardsub
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-forwardsub-julia
+:::
+```` 
 
-````{prf:function} forwardsub
-**Forward substitution to solve a lower triangular linear system**
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-forwardsub-julia
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    forwardsub(L,b)
 
-Solve the lower triangular linear system with matrix `L` and
-right-hand side vector `b`.
-"""
-function forwardsub(L,b)
-    n = size(L,1)
-    x = zeros(n)
-    x[1] = b[1]/L[1,1]
-    for i in 2:n
-        s = sum( L[i,j]*x[j] for j in 1:i-1 )
-        x[i] = ( b[i] - s ) / L[i,i]
-    end
-    return x
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-forwardsub-python
+:::
 ````
+`````
+``````
 
 The implementation of backward substitution is much like forward substitution and is given in {numref}`Function {number} <function-backsub>`.
 
 (function-backsub)=
-````{prf:function} backsub
+``````{prf:algorithm} backsub
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-backsub-julia
+:::
+```` 
 
-**Backward substitution to solve an upper triangular linear system**
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-backsub-julia
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    backsub(U,b)
 
-Solve the upper triangular linear system with matrix `U` and
-right-hand side vector `b`.
-"""
-function backsub(U,b)
-    n = size(U,1)
-    x = zeros(n)
-    x[n] = b[n]/U[n,n]
-    for i in n-1:-1:1
-        s = sum( U[i,j]*x[j] for j in i+1:n )
-        x[i] = ( b[i] - s ) / U[i,i]
-    end
-    return x
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-backsub-python
+:::
 ````
+`````
+``````
 
 (demo-systems-triangular)=
-```{prf:example}
-```
-
-
-
-
-
-```{index} ! Julia; tril, ! Julia; triu
-```
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 7
-
-
-It's easy to get just the lower triangular part of any matrix using the `tril` function.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-systems-triangular-julia
 :::
-:::{grid-item-card}
-:columns: 5
+```` 
 
-
-Use `tril` to return a matrix that zeros out everything above the main diagonal. The `triu` function zeros out below the diagonal.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-systems-triangular-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-systems-triangular-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-A = rand(1.:9.,5,5)
-L = tril(A)
-```
-
-We'll set up and solve a linear system with this matrix.
-
-```{code-cell}
-b = ones(5)
-x = FNC.forwardsub(L,b)
-```
-
-It's not clear how accurate this answer is. However, the residual should be zero or comparable to $\macheps$.
-
-```{code-cell}
-b - L*x
-```
-
-```{index} ! Julia; Pair, Julia; diagm
-```
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 7
-
-
-Next we'll engineer a problem to which we know the exact answer. Use `\alpha` <kbd>Tab</kbd> and `\beta` <kbd>Tab</kbd> to get the Greek letters.
-
-
-:::
-:::{grid-item-card}
-:columns: 5
-
-
-The notation `0=>ones(5)` creates a `Pair`. In `diagm`, pairs indicate the position of a diagonal and the elements that are to be placed on it.
-
-:::
-::::
-
-```{code-cell}
-α = 0.3;
-β = 2.2;
-U = diagm( 0=>ones(5), 1=>[-1,-1,-1,-1] )
-U[1,[4,5]] = [ α-β, β ]
-U
-```
-
-```{code-cell}
-x_exact = ones(5)
-b = [α,0,0,0,1]
-```
-
-Now we use backward substitution to solve for $\mathbf{x}$, and compare to the exact solution we know already.
-
-```{code-cell}
-x = FNC.backsub(U,b)
-err = x - x_exact
-```
-
-Everything seems OK here. But another example, with a different value for $\beta$, is more troubling.
-
-```{code-cell}
-α = 0.3;
-β = 1e12;
-U = diagm( 0=>ones(5), 1=>[-1,-1,-1,-1] )
-U[1,[4,5]] = [ α-β, β ]
-b = [α,0,0,0,1]
-
-x = FNC.backsub(U,b)
-err = x - x_exact
-```
-
-It's not so good to get 4 digits of accuracy after starting with 16! The source of the error is not hard to track down. Solving for $x_1$ performs $(\alpha-\beta)+\beta$ in the first row. Since $|\alpha|$ is so much smaller than $|\beta|$, this a recipe for losing digits to subtractive cancellation.
-
-
-
-
 
 The example in {numref}`Demo %s <demo-systems-triangular>` is our first clue that linear system problems may have large condition numbers, making inaccurate solutions inevitable in floating-point arithmetic. We will learn how to spot such problems in {numref}`section-linsys-condition-number`. Before reaching that point, however, we need to discuss how to solve general linear systems, not just triangular ones.
 

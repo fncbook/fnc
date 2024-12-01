@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-linsys-norms)=
 # Vector and matrix norms
 
@@ -28,7 +8,7 @@ The manipulations on matrices and vectors so far in this chapter have been algeb
 ```{index} ! norm; vector
 ```
 
-For vectors we use a **norm** $\| \cdot \|$, which is a function from $\real^n$ to $\real$ with the following properties for all $n$-vectors $\mathbf{x},\mathbf{y}$ and scalars $\alpha$:[^complexnorm]
+For vectors, we use a **norm** $\| \cdot \|$, which is a function from $\real^n$ to $\real$ with the following properties for all $n$-vectors $\mathbf{x},\mathbf{y}$ and scalars $\alpha$:[^complexnorm]
 
 [^complexnorm]: The same statements work for vectors with complex entries, with complex modulus in place of absolute values.
   
@@ -66,49 +46,27 @@ In any norm, we refer to a vector $\mathbf{x}$ satisfying $\| \mathbf{x} \|=1$ a
 as writing a nonzero vector $\mathbf{v}$ in magnitude–direction form. 
 
 (demo-norms-vector)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-norms-vector-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-norms-vector-matlab
+:::
+```` 
 
-
-
-
-Given the vector $\mathbf{x}= \bigl[ 2 ,\, -3 ,\, 1 ,\, -1 \bigr]^T$, we have
-\begin{align*}
-    \| \mathbf{x} \|_2 &= \sqrt{ 4 + 9 + 1 + 1 } = \sqrt{15}, \\[1ex]
-    \| \mathbf{x} \|_\infty &= \max\{ 2,3,1,1 \} = 3,\\[1ex]
-    \| \mathbf{x} \|_1 &= 2 + 3 + 1 + 1 = 7.
-\end{align*}
-
-```{index} ! Julia; norm
-```
-
-In Julia the `LinearAlgebra` package has a `norm` function for vector norms.
-
-```{code-cell}
-x = [2,-3,1,-1]
-twonorm = norm(x)         # or norm(x,2)
-```
-
-```{code-cell}
-infnorm = norm(x,Inf)
-```
-
-```{code-cell}
-onenorm = norm(x,1)
-```
-
-```{index} ! Julia; normalize
-```
-
-There is also a `normalize` function that divides a vector by its norm, making it a unit vector.
-
-```{code-cell}
-normalize(x,Inf)
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-norms-vector-python
+:::
+```` 
+`````
+::::
 
 :::{note}
 Most of the time, when just $\| \mathbf{x} \|$ is written, the 2-norm is implied. However, in this section we use it to mean a generic, unspecified vector norm.
@@ -243,139 +201,28 @@ In addition, two of the vector norms we have encountered lead to equivalent form
 
 A mnemonic for these is that the $\infty$ symbol extends horizontally while the 1 character extends vertically, each indicating the direction of the summation in its formula. Also, both formulas give the same result for $m\times 1$ matrices as the vector norm. In both cases you must take absolute values of the matrix elements first. 
 
-
 (demo-norms-matrix)=
-```{prf:example}
-```
-
-
-
-
-
-
-```{code-cell}
-A = [ 2 0; 1 -1 ]
-```
-
-In Julia one uses `norm` for vector norms and for the Frobenius norm of a matrix, which is like stacking the matrix into a single vector before taking the 2-norm. 
-
-```{code-cell}
-Fronorm = norm(A)
-```
-
-```{index} ! Julia; opnorm
-```
-
-Most of the time we want to use `opnorm`, which is an induced matrix norm. The default is the 2-norm.
-
-```{code-cell}
-twonorm = opnorm(A)
-```
-
-You can get the 1-norm as well.
-
-```{code-cell}
-onenorm = opnorm(A,1)
-```
-
-```{index} ! Julia; maximum, ! Julia; minimum, ! Julia; sum
-```
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 5
-
-
-According to {eq}`mxonenorm`, the matrix 1-norm is equivalent to the maximum of the sums down the columns (in absolute value).
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-norms-matrix-julia
 :::
-:::{grid-item-card}
-:columns: 7
+```` 
 
-
-Use `sum` to sum along a dimension of a matrix. You can also sum over the entire matrix by omitting the `dims` argument.
-
-The `maximum` and `minimum` functions also work along one dimension or over an entire matrix. To get both values at once, use `extrema`.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-norms-matrix-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-norms-matrix-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-# Sum down the rows (1st matrix dimension):
-maximum( sum(abs.(A),dims=1) )   
-```
-
-Similarly, we can get the $\infty$-norm and check our formula for it.
-
-```{code-cell}
-infnorm = opnorm(A,Inf)
-```
-
-```{code-cell}
- # Sum across columns (2nd matrix dimension):
-maximum( sum(abs.(A),dims=2) )  
-```
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 7
-
-
-Next we illustrate a geometric interpretation of the 2-norm. First, we will sample a lot of vectors on the unit circle in $\mathbb{R}^2$.
-
-
-:::
-:::{grid-item-card}
-:columns: 5
-
-
-You can use functions as values, e.g., as elements of a vector. 
-
-:::
-::::
-
-```{code-cell}
-# Construct 601 unit column vectors.
-theta = 2pi*(0:1/600:1)
-x = [ fun(t) for fun in [cos,sin], t in theta ];
-```
-
-```{index} ! Julia; subplots
-```
-
-To create an array of plots, start with a `plot` that has a `layout` argument, then do subsequent `plot!` calls with a `subplot` argument.
-
-```{code-cell}
-plot(aspect_ratio=1,layout=(1,2),
-    xlabel=L"x_1", ylabel=L"x_2")
-plot!(x[1,:],x[2,:],subplot=1,title="Unit circle") 
-```
-
-The linear function $\mathbf{f}(\mathbf{x}) = \mathbf{A}\mathbf{x}$ defines a mapping from $\mathbb{R}^2$ to $\mathbb{R}^2$. We can apply `A` to every column of `x` by using a single matrix multiplication.
-
-```{code-cell}
-Ax = A*x;
-```
-
-The image of the transformed vectors is an ellipse. 
-
-```{code-cell}
-plot!(Ax[1,:],Ax[2,:],subplot=2,title="Image under x → Ax")
-```
-
-That ellipse just touches the circle of radius $\|\mathbf{A}\|_2$.
-
-```{code-cell}
-plot!(twonorm*x[1,:],twonorm*x[2,:],subplot=2,l=:dash)
-```
-
-
-
-
 
 The geometric interpretation of the matrix 2-norm shown in {numref}`Demo %s <demo-norms-matrix>`, as the radius of the smallest circle (or sphere or hypersphere in higher dimensions) containing the images of all unit vectors, is not a practical means of computing the norm. Nor is there a simple formula like {eq}`mxinfnorm` or {eq}`mxonenorm` for it. The computation of the matrix 2-norm is discussed further in Chapter 7.
 

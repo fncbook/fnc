@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-linsys-lu)=
 # LU factorization
 
@@ -63,7 +43,7 @@ $$
 
 If we break this up into the sum of two matrices, however, each is an outer product.
 
-$$
+\begin{align*}
 	& = 
 	\small
 	\begin{bmatrix}
@@ -90,7 +70,7 @@ $$
 	\begin{bmatrix}
 		-3 & 5 
 	\end{bmatrix}.
-$$
+\end{align*}
 
 Note that the vectors here are columns of the left-hand matrix and rows of the right-hand matrix. The matrix product is defined only if there are equal numbers of these.
 ::::
@@ -112,59 +92,26 @@ Equation {eq}`matrixouter` has some interesting structure for the product $\math
 
 (demo-lu-outertri)=
 ::::{prf:example}
-::::
-
-
-
-
-
-We explore the outer product formula for two random triangular matrices.
-
-```{code-cell}
-L = tril( rand(1:9,3,3) )
-```
-
-```{code-cell}
-U = triu( rand(1:9,3,3) )
-```
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 5
-
-
-Here are the three outer products in the sum in {eq}`matrixouter`:
-
-
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-lu-outertri-julia
 :::
-:::{grid-item-card}
-:columns: 7
+```` 
 
-
-Although `U[1,:]` is a row of `U`, it is a vector, and as such it has a default column interpretation.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-lu-outertri-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-lu-outertri-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-L[:,1]*U[1,:]'
-```
-
-```{code-cell}
-L[:,2]*U[2,:]'
-```
-
-```{code-cell}
-L[:,3]*U[3,:]'
-```
-
-Simply because of the triangular zero structures, only the first outer product contributes to the first row and first column of the entire product. 
-
-
-
-
 
 Let the columns of $\mathbf{L}$ be written as $\boldsymbol{\ell}_k$ and the rows of $\mathbf{U}$ be written as $\mathbf{u}_k^T$. Then the first row of $\mathbf{L}\mathbf{U}$ is
  
@@ -190,97 +137,27 @@ These two calculations are enough to derive one of the most important algorithms
 Our goal is to factor a given $n\times n$ matrix $\mathbf{A}$ as the triangular product $\mathbf{A}=\mathbf{L}\mathbf{U}$. It turns out that we have $n^2+n$ total nonzero unknowns in the two triangular matrices, so we set $L_{11}=\cdots = L_{nn}=1$, making $\mathbf{L}$ a **unit lower triangular** matrix.
 
 (demo-lu-derive)=
-:::{prf:example}
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-lu-derive-julia
 :::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-lu-derive-matlab
+:::
+```` 
 
-
-
-
-For illustration, we work on a $4 \times 4$ matrix. We name it with a subscript in preparation for what comes.
-
-```{code-cell}
-A₁ = [
-     2    0    4     3 
-    -4    5   -7   -10 
-     1   15    2   -4.5
-    -2    0    2   -13
-    ];
-L = diagm(ones(4))
-U = zeros(4,4);
-```
-
-Now we appeal to {eq}`outer-row1`. Since $L_{11}=1$, we see that the first row of $\mathbf{U}$ is just the first row of $\mathbf{A}_1$.
-
-```{code-cell}
-U[1,:] = A₁[1,:]
-U
-```
-
-From {eq}`outer-col1`, we see that we can find the first column of $\mathbf{L}$ from the first column of $\mathbf{A}_1$. 
-
-```{code-cell}
-L[:,1] = A₁[:,1]/U[1,1]
-L
-```
-
- We have obtained the first term in the sum {eq}`matrixouter` for $\mathbf{L}\mathbf{U}$, and we subtract it away from $\mathbf{A}_1$.
-
-```{code-cell}
-A₂ = A₁ - L[:,1]*U[1,:]'
-```
-
-Now $\mathbf{A}_2 = \boldsymbol{\ell}_2\mathbf{u}_2^T + \boldsymbol{\ell}_3\mathbf{u}_3^T + \boldsymbol{\ell}_4\mathbf{u}_4^T.$ If we ignore the first row and first column of the matrices in this equation, then in what remains we are in the same situation as at the start. Specifically, only $\boldsymbol{\ell}_2\mathbf{u}_2^T$ has any effect on the second row and column, so we can deduce them now.
-
-```{code-cell}
-U[2,:] = A₂[2,:]
-L[:,2] = A₂[:,2]/U[2,2]
-L
-```
-
-If we subtract off the latest outer product, we have a matrix that is zero in the first *two* rows and columns. 
-
-```{code-cell}
-A₃ = A₂ - L[:,2]*U[2,:]'
-```
-
-Now we can deal with the lower right $2\times 2$ submatrix of the remainder in a similar fashion.
-
-```{code-cell}
-U[3,:] = A₃[3,:]
-L[:,3] = A₃[:,3]/U[3,3]
-A₄ = A₃ - L[:,3]*U[3,:]'
-```
-
-Finally, we pick up the last unknown in the factors.
-
-```{code-cell}
-U[4,4] = A₄[4,4];
-```
-
-We now have all of $\mathbf{L}$,
-
-```{code-cell} 
-L
-```
-
-and all of $\mathbf{U}$,
-
-```{code-cell}
-U
-```
-
-We can verify that we have a correct factorization of the original matrix by computing the backward error:
-
-```{code-cell} 
-A₁ - L*U
-```
-
-In floating point, we cannot always expect all the elements to be exactly equal as we found in this toy example. Instead, we would be satisfied to see that each element of the difference above is comparable in size to machine precision.
-
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-lu-derive-python
+:::
+```` 
+`````
+::::
 
 We have arrived at the linchpin of solving linear systems. 
 
@@ -301,40 +178,29 @@ where $\mathbf{L}$ is a unit lower triangular matrix and $\mathbf{U}$ is an uppe
 The outer product algorithm for LU factorization seen in {numref}`Demo {number} <demo-lu-derive>` is coded as {numref}`Function {number} <function-lufact>`. 
 
 (function-lufact)=
-````{prf:function} lufact
-**LU factorization (not stable)**
-```{code-block} julia
-:lineno-start: 1
-"""
-    lufact(A)
+``````{prf:algorithm} lufact
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-lufact-julia
+:::
+```` 
 
-Compute the LU factorization of square matrix `A`, returning the
-factors.
-"""
-function lufact(A)
-    n = size(A,1)
-    L = diagm(ones(n))   # ones on main diagonal, zeros elsewhere
-    U = zeros(n,n)
-    Aₖ = float(copy(A))
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-lufact-julia
+:::
+```` 
 
-    # Reduction by outer products
-    for k in 1:n-1
-        U[k,:] = Aₖ[k,:]
-        L[:,k] = Aₖ[:,k]/U[k,k]
-        Aₖ -= L[:,k]*U[k,:]'
-    end
-    U[n,n] = Aₖ[n,n]
-    return LowerTriangular(L),UpperTriangular(U)
-end
-```
+
+````{tab-item} Python
+:sync: python
+:::{embed} #function-lufact-python
+:::
 ````
+`````
+``````
 
-````{admonition} About the code
-:class: dropdown
-Line 11 of {numref}`Function {number} <function-lufact>` points out two subtle Julia issues. First, vectors and matrix variables are really just references to blocks of memory. Such a reference is much more efficient to pass around than the complete contents of the array. However, it means that a statement `Aₖ=A` just clones the array reference of `A` into the variable `Aₖ`. Any changes made to entries of `Aₖ` would then also be made to entries of `A` because they refer to the same location in memory. In this context we don't want to change the original matrix, so we use `copy` here to create an independent copy of the array contents and a new reference to them.
-
-The second issue is that even when `A` has all integer entries, its LU factors may not. So we convert `Aₖ` to floating point so that line 17 will not fail due to the creation of floating-point values in an integer matrix. An alternative would be to require the caller to provide a floating-point array in the first place.
-````
 
 ## Gaussian elimination and linear systems
 
@@ -362,36 +228,26 @@ A key advantage of the factorization point of view is that it depends only on th
 
 (demo-lu-solve)=
 ::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-lu-solve-julia
+:::
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-lu-solve-matlab
+:::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-lu-solve-python
+:::
+```` 
+`````
 ::::
-
-
-
-
-
-Here are the data for a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$. 
-
-```{code-cell}
-A = [2 0 4 3; -4 5 -7 -10; 1 15 2 -4.5; -2 0 2 -13];
-b = [4,9,9,4];
-```
-
-We apply {numref}`Function {number} <function-lufact>` and then do two triangular solves.
-
-```{code-cell}
-L,U = FNC.lufact(A)
-z = FNC.forwardsub(L,b)
-x = FNC.backsub(U,z)
-```
-
-A check on the residual assures us that we found the solution.
-
-```{code-cell}
-b - A*x
-```
-
-
-
-
 
 As noted in the descriptions of {numref}`Function {number} <function-lufact>` and {numref}`Algorithm {number} <algorithm-lu-solve>`, the LU factorization as we have seen it so far is not stable for all matrices. In fact, it does not always even exist. The missing element is the row swapping allowed in Gaussian elimination. We will address these issues in {numref}`section-linsys-pivoting`.
 
@@ -437,7 +293,7 @@ As noted in the descriptions of {numref}`Function {number} <function-lufact>` an
     **(c)** Use the factors with triangular substitutions in order to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$, and find $\mathbf{x}-\mathbf{z}$.
   
     (problem-bigcorner)=
-3. ⌨ In Julia, define
+3. ⌨ Define
   
     ```{math}
     \mathbf{A}= \begin{bmatrix}

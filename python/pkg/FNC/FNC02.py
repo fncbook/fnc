@@ -1,4 +1,4 @@
-from scipy import *
+import numpy as np
 
 def forwardsub(L,b):
 	"""
@@ -8,10 +8,10 @@ def forwardsub(L,b):
 	vector b.
 	"""
 	n = len(b)
-	x = zeros(n)
+	x = np.zeros(n)
 	for i in range(n):
 		s = L[i,:i] @ x[:i]
-		x[i] = ( b[i] - s ) / L[i,i]
+		x[i] = ( b[i] - s ) / L[i, i]
 	return x
 
 
@@ -23,25 +23,50 @@ def backsub(U,b):
 	vector b.
 	"""
 	n = len(b)
-	x = zeros(n)
-	for i in range(n-1,-1,-1):
-		s = U[i,i+1:] @ x[i+1:]
-		x[i] = ( b[i] - s ) / U[i,i]
+	x = np.zeros(n)
+	for i in range(n-1, -1, -1):
+		s = U[i, i+1:] @ x[i+1:]
+		x[i] = ( b[i] - s ) / U[i, i]
 	return x
 
 def lufact(A):
-	"""
-	lufact(A)
+    """
+    lufact(A)
 
-	Compute the LU factorization of square matrix A, returning the factors.
-	"""
-	n = A.shape[0]
-	L = eye(n)      # puts ones on diagonal
-	U = copy(A)
+    Compute the LU factorization of square matrix `A`, returning the
+    factors.
+    """
+    n = A.shape[0]     # detect the dimensions from the input
+    L = np.eye(n)      # ones on main diagonal, zeros elsewhere
+    U = np.zeros((n,n))
+    A_k = np.copy(A)   # make a working copy 
 
-	# Gaussian elimination
-	for j in range(n-1):
-		for i in range(j+1,n):
-			L[i,j] = U[i,j] / U[j,j]   # row multiplier
-			U[i,j:] = U[i,j:] - L[i,j]*U[j,j:]
-	return L,triu(U)
+    # Reduction by outer products
+    for k in range(n-1):
+        U[k, :] = A_k[k, :]
+        L[:, k] = A_k[:, k] / U[k,k]
+        A_k -= np.outer(L[:,k], U[k,:])
+    U[n-1, n-1] = A_k[n-1, n-1]
+    return L, U
+
+def plufact(A):
+    """
+    	plufact(A)
+
+	Compute the PLU factorization of square matrix `A`, returning the
+	triangular factors and a row permutation vector.
+	"""
+    n = A.shape[0]
+    L = np.zeros((n, n))
+    U = np.zeros((n, n))
+    p = np.zeros(n, dtype=int)
+    A_k = np.copy(A)
+
+    # Reduction by outer products
+    for k in range(n):
+        p[k] = np.argmax(np.abs(A_k[:, k]))
+        U[k, :] = A_k[p[k], :]
+        L[:, k] = A_k[:, k] / U[k, k]
+        if k < n-1:
+            A_k -= np.outer(L[:, k], U[k,:])
+    return L[p, :], U, p

@@ -55,6 +55,9 @@ project:
     '\mtx': '\operatorname{mtx}'
     '\myvec': '\operatorname{vec}'
     '\argmin': '\operatorname{argmin}'
+  abbreviations:
+    - LU: lower triangular times upper triangular
+    - QR: orthogonal times upper triangular
   numbering:
     heading_1: true
     heading_2: true
@@ -73,19 +76,19 @@ project:
         - file: chapter1/algorithms.md
         - file: chapter1/stability.md
         - file: chapter1/next.md
-    #     - file: chapter2/overview.md
-    #       children:
-    #         - file: chapter2/polyinterp.md
-    #         - file: chapter2/matrices.md
-    #         - file: chapter2/linear-systems.md
-    #         - file: chapter2/lu.md
-    #         - file: chapter2/efficiency.md
-    #         - file: chapter2/pivoting.md
-    #         - file: chapter2/norms.md
-    #         - file: chapter2/condition-number.md
-    #         - file: chapter2/structure.md
-    #         - file: chapter2/next.md
-    #     - file: chapter3/overview.md
+    - file: chapter2/overview.md
+      children:
+        - file: chapter2/polyinterp.md
+        - file: chapter2/matrices.md
+        - file: chapter2/linear-systems.md
+        - file: chapter2/lu.md
+        - file: chapter2/efficiency.md
+        - file: chapter2/pivoting.md
+        - file: chapter2/norms.md
+        - file: chapter2/condition-number.md
+        - file: chapter2/structure.md
+        - file: chapter2/next.md
+    - file: chapter3/overview.md
     #       children:
     #         - file: chapter3/fitting.md
     #         - file: chapter3/normaleqns.md
@@ -192,12 +195,14 @@ project:
       - title: Julia codes
         children:
           - file: julia/chapter1.md
+          - file: julia/chapter2.md
       - title: MATLAB codes
         children:
           - file: matlab/chapter1.md
       - title: Python codes
         children:
           - file: python/chapter1.md
+          - file: python/chapter2.md
     - file: genindex.md
 
     

@@ -1,0 +1,3 @@
+[submodule "julia/package"]
+	path = julia/package
+	url = https://github.com/fncbook/FundamentalsNumericalComputation.jl.git

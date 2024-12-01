@@ -29,3 +29,5 @@ _build
 **/__pycache__
 python/**/dist
 python/Chapter*.ipynb
+**/gr-temp
+**/Untitled.ipynb

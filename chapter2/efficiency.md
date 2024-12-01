@@ -1,25 +1,4 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-disable_logging(Logging.Warn)
-```
-
-(section-linsys-efficiency)=
+ (section-linsys-efficiency)=
 # Efficiency of matrix computations
 
 Predicting how long an algorithm will take to solve a particular problem, on a particular computer, as written in a particular way in a particular programming language, is an enormously difficult undertaking. It's more practical to predict how the required time will scale as a function of the size of the problem. In the case of a linear system of equations, the problem size is $n$, the number of equations and variables in the system.  Because expressions of computational time are necessarily approximate, it's customary to suppress all but the term that is dominant as $n\to\infty$. We first need to build some terminology for these expressions.
@@ -107,104 +86,27 @@ These formulas greatly resemble the definite integral of $x^p$.
 Traditionally, in numerical linear algebra we count **floating-point operations**, or **flops** for short. In our interpretation each scalar addition, subtraction, multiplication, division, and square root counts as one flop. Given any algorithm, we simply add up the number of scalar flops and ignore everything else.
 
 (demo-flops-mvmult)=
-```{prf:example}
-```
-
-
-
-
-
-
-Here is a straightforward implementation of matrix-vector multiplication.
-
-```{code-cell}
-n = 6
-A,x = randn(n,n),rand(n)
-y = zeros(n)
-for i in 1:n
-    for j in 1:n
-        y[i] += A[i,j]*x[j]    # 1 multiply, 1 add
-    end
-end
-```
-
-Each of the loops implies a summation of flops. The total flop count for this algorithm is
-
-$$ \sum_{i=1}^n \sum_{j=1}^n 2 = \sum_{i=1}^n 2n = 2n^2. $$
-
-Since the matrix $\mathbf{A}$ has $n^2$ elements, all of which have to be involved in the product, it seems unlikely that we could get a flop count that is smaller than $O(n^2)$ in the general case.
-
-```{index} ! Julia; push\!, ! Julia; for
-```
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 7
-
-
-Let's run an experiment with the built-in matrix-vector multiplication. Note that Julia is unusual in that loops have a variable scope separate from its enclosing code. Thus, `for n in n` below means that inside the loop, the name `n` will take on each one of the values that were previously assigned to the vector `n`.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-flops-mvmult-julia
 :::
-:::{grid-item-card}
-:columns: 5
+```` 
 
-
-The `push!` function attaches a new value to the end of a vector.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-flops-mvmult-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-flops-mvmult-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-n = 1000:1000:5000
-t = []
-for n in n
-    A = randn(n,n)  
-    x = randn(n)
-    time = @elapsed for j in 1:80; A*x; end
-    push!(t,time)
-end
-```
-
-The reason for doing multiple repetitions at each value of $n$ in the loop above is to avoid having times so short that the resolution of the timer is significant.
-
-```{code-cell}
-pretty_table([n t], header=(["size", "time"], ["", "(sec)"]))
-```
-
-```{index} Julia; Boolean indexing
-```
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 7
-
-
-Looking at the timings just for $n=2000$ and $n=4000$, they have ratio
-
-
-:::
-:::{grid-item-card}
-:columns: 5
-
-
-The expression `n.==4000` here produces a vector of Boolean (true/false) values the same size as `n`. This result is used to index within `t`, accessing only the value for which the comparison is true.
-
-:::
-::::
-
-```{code-cell}
-@show t[n.==4000] ./ t[n.==2000];
-```
-
-If the run time is dominated by flops, then we expect this ratio to be $(4000)^2/(2000)^2=4$.
-
-
-
 
 Suppose that the running time $t$ of an algorithm obeys a function that is $O(n^p)$. For sufficiently large $n$, $t\approx Cn^p$ for a constant $C$ should be a good approximation. Hence
 
@@ -215,47 +117,28 @@ Suppose that the running time $t$ of an algorithm obeys a function that is $O(n^
 
 So we expect that a graph of $\log t$ as a function of $\log n$ will be a straight line of slope $p$.
 
-
 (demo-flops-loglog)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-flops-loglog-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-flops-loglog-matlab
+:::
+```` 
 
-
-
-
-Let's repeat the experiment of the previous figure for more, and larger, values of $n$.
-
-```{code-cell}
-randn(5,5)*randn(5);  # throwaway to force compilation
-
-n = 400:200:6000
-t = []
-for n in n
-    A = randn(n,n)  
-    x = randn(n)
-    time = @elapsed for j in 1:50; A*x; end
-    push!(t,time)
-end
-```
-
-Plotting the time as a function of $n$ on log-log scales is equivalent to plotting the logs of the variables.
-
-```{code-cell}
-scatter(n,t,label="data",legend=false,
-    xaxis=(:log10,L"n"), yaxis=(:log10,"elapsed time (sec)"),
-    title="Timing of matrix-vector multiplications")
-```
-
-You can see that while the full story is complicated, the graph is trending to a straight line of positive slope. For comparison, we can plot a line that represents $O(n^2)$ growth exactly. (All such lines have slope equal to 2.)
-
-```{code-cell}
-plot!(n,t[end]*(n/n[end]).^2,l=:dash,
-    label=L"O(n^2)",legend=:topleft)
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-flops-loglog-python
+:::
+```` 
+`````
+::::
 
 ## Solution of linear systems
 
@@ -302,7 +185,7 @@ The range `k:n`, where $k\le n$, has $n-k+1$ elements.
 
 Line 17 above divides each element of the vector `Aₖ[k:n,k]` by a scalar. Hence the number of flops equals the length of the vector, which is $n-k+1$. 
 
-Line 18 has an outer product followed by a matrix subtraction. The definition {eq}`def-outerprod` of the outer product makes it clear that that computation takes one flop (multiplication) per element of the result, which here results in $(n-k+1)^2$ flops. The number of subtractions is identical. 
+Line 18 has an outer product followed by a matrix subtraction. The definition @def-outerprod of the outer product makes it clear that that computation takes one flop (multiplication) per element of the result, which here results in $(n-k+1)^2$ flops. The number of subtractions is identical. 
 
 Altogether the factorization takes
 
@@ -323,58 +206,28 @@ We have proved the following.
 ```{prf:theorem} Efficiency of LU factorization
 The LU factorization of an $n\times n$ matrix takes $\sim\frac{2}{3}n^3$ flops as $n\to \infty$. This dominates the flops for solving an $n\times n$ linear system.
 ```
-
 (demo-flops-lufact)=
-```{prf:example}
-```
-
-
-
-
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 7
-
-
-We'll test the conclusion of $O(n^3)$ flops experimentally, using the built-in `lu` function instead of the purely instructive `lufact`.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-flops-lufact-julia
 :::
-:::{grid-item-card}
-:columns: 5
+```` 
 
-
-The first time a function is invoked, there may be significant time needed to compile it in memory. Thus, when timing a function, run it at least once before beginning the timing.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-flops-lufact-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-flops-lufact-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-lu(randn(3,3));   # throwaway to force compilation
-
-n = 400:400:4000
-t = []
-for n in n
-    A = randn(n,n)  
-    time = @elapsed for j in 1:12; lu(A); end
-    push!(t,time)
-end
-```
-
-We plot the timings on a log-log graph and compare it to $O(n^3)$. The result could vary significantly from machine to machine, but in theory the data should start to parallel the line as $n\to\infty$.
-
-```{code-cell}
-scatter(n,t,label="data",legend=:topleft,
-    xaxis=(:log10,L"n"), yaxis=(:log10,"elapsed time"))
-plot!(n,t[end]*(n/n[end]).^3,l=:dash,label=L"O(n^3)")
-```
-
-
-
-
 
 In practice, flops are not the only aspect of an implementation that occupies significant time. Our position is that counting flops as a measure of performance is a useful oversimplification. We will assume that LU factorization (and as a result, the solution of a linear system of $n$ equations) requires a real-world time that is roughly $O(n^3)$. This growth rate is a great deal more tolerable than, say, $O(2^n)$, but it does mean that for (at this writing) $n$ greater than 10,000 or so, something other than general LU factorization will have to be used.
 

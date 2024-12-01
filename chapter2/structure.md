@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-linsys-structure)=
 # Exploiting matrix structure
 
@@ -41,80 +21,28 @@ We next consider three important types of matrices that cause the LU factorizati
 A matrix $\mathbf{A}$ has **upper bandwidth** $b_u$ if $j-i > b_u$ implies $A_{ij}=0$, and **lower bandwidth** $b_\ell$ if $i-j > b_\ell$ implies $A_{ij}=0$. We say the total **bandwidth** is $b_u+b_\ell+1$. When $b_u=b_\ell=1$, we have the important case of a **tridiagonal matrix**. 
 ::::
 
-
 (demo-structure-banded)=
-```{prf:example}
-```
-
-
-
-
-
-```{index} ! Julia; fill, Julia; diagm, ! Julia; diag
-```
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 5
-
-
-Here is a small tridiagonal matrix. Note that there is one fewer element on the super- and subdiagonals than on the main diagonal.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-structure-banded-julia
 :::
-:::{grid-item-card}
-:columns: 7
+```` 
 
-
-Use `fill` to create an array of a given size, with each element equal to a provided value.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-structure-banded-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-structure-banded-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-A = diagm( -1=>[4,3,2,1,0], 0=>[2,2,0,2,1,2], 1=>fill(-1,5) )
-```
-
-```{index} ! Julia; diag
-```
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 7
-
-
-We can extract the elements on any diagonal using the `diag` function. The main or central diagonal is numbered zero, above and to the right of that is positive, and below and to the left is negative.
-
-:::
-:::{grid-item-card}
-:columns: 5
-
-
-The `diag` function extracts the elements from a specified diagonal of a matrix.
-
-:::
-::::
-
-```{code-cell}
-@show diag_main = diag(A);
-@show diag_minusone = diag(A,-1);
-```
-The lower and upper bandwidths of $\mathbf{A}$ are repeated in the factors from the unpivoted LU factorization. 
-
-```{code-cell}
-L,U = FNC.lufact(A)
-L
-```
-
-```{code-cell}
-U
-```
-
-
 
 
 ```{index} pivoting
@@ -130,36 +58,6 @@ The number of flops needed by LU factorization without pivoting is $O(b_u b_\ell
 ```
 
 In order to exploit the savings offered by sparsity, we would need to make modifications to {numref}`Function %s <function-lufact>` and the triangular substitution routines. Alternatively, we can get Julia to take advantage of the structure automatically by converting the matrix into a special type called **sparse**. Sparse matrices are covered in more detail in Chapters 7 and 8.
-
-(demo-structure-timing)=
-```{prf:example}
-```
-
-
-
-
-
-If we use an ordinary or dense matrix, then there's no way to exploit a banded structure such as tridiagonality.
-
-```{code-cell}
-n = 10000
-A = diagm(0=>1:n, 1=>n-1:-1:1, -1=>ones(n-1))
-lu(rand(3,3))  # force compilation
-@time lu(A);
-```
-
-If instead we construct a proper sparse matrix, though, the speedup can be dramatic.
-
-```{code-cell}
-A = spdiagm(0=>1:n, 1=>n-1:-1:1, -1=>ones(n-1))
-lu(A);    # compile for sparse case
-@time lu(A);
-```
-
-You can also see above that far less memory was used in the sparse case.
-
-
-
 
 ## Symmetric matrices
 
@@ -192,59 +90,27 @@ Let $\mathbf{D}$ be an $n\times n$ diagonal matrix with diagonal elements $d_1,d
 Let's derive the LDL$^T$ factorization for a small example.
 
 (demo-structure-symm)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-structure-symm-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-structure-symm-matlab
+:::
+```` 
 
-
-
-
-We begin with a symmetric $\mathbf{A}$.
-
-```{code-cell}
-A₁ = [  2     4     4     2
-        4     5     8    -5
-        4     8     6     2
-        2    -5     2   -26 ];
-```
-
-We won't use pivoting, so the pivot element is at position (1,1). This will become the first element on the diagonal of $\mathbf{D}$. Then we divide by that pivot to get the first column of $\mathbf{L}$.
-
-```{code-cell}
-L = diagm(ones(4))
-d = zeros(4)
-d[1] = A₁[1,1]
-L[:,1] = A₁[:,1]/d[1]
-A₂ = A₁ - d[1]*L[:,1]*L[:,1]'
-```
-
-We are now set up the same way for the submatrix in rows and columns 2–4.
-
-```{code-cell}
-d[2] = A₂[2,2]
-L[:,2] = A₂[:,2]/d[2]
-A₃ = A₂ - d[2]*L[:,2]*L[:,2]'
-```
-
-We continue working our way down the diagonal.
-
-```{code-cell}
-d[3] = A₃[3,3]
-L[:,3] = A₃[:,3]/d[3]
-A₄ = A₃ - d[3]*L[:,3]*L[:,3]'
-d[4] = A₄[4,4]
-@show d;
-L
-```
-
-We have arrived at the targeted factorization.
-
-```{code-cell}
-A₁ - L*diagm(d)*L'
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-structure-symm-python
+:::
+```` 
+`````
+::::
 
 In practice we don't actually have to carry out any arithmetic in the upper triangle of $\mathbf{A}$ as we work, since the operations are always the mirror image of those in the lower triangle. As a result, it can be shown that LDL$^T$ factorization takes about half as much work as the standard LU.
 
@@ -255,7 +121,6 @@ LDL$^T$ factorization on an $n \times n$ symmetric matrix, when successful, take
 Just as pivoting is necessary to stabilize LU factorization, the LDL$^T$ factorization without pivoting may be unstable or even fail to exist. We won't go into the details, because our interest is in specializing the factorization to matrices that also possess another important property.
 
 (sec-SPD)=
-
 ## Symmetric positive definite matrices
 
 Suppose that $\mathbf{A}$ is $n\times n$ and $\mathbf{x}\in\mathbb{R}^n$. Observe that $\mathbf{x}^T\mathbf{A}\mathbf{x}$ is the product of $1\times n$, $n\times n$, and $n\times 1$ matrices, so it is a scalar, sometimes referred to as a **quadratic form**. It can be expressed as
@@ -337,69 +202,27 @@ Cholesky factorization of an $n \times n$ SPD matrix takes $\sim \frac{1}{3}n^3$
 The speed and stability of the Cholesky factorization make it the top choice for solving linear systems with SPD matrices. As a side benefit, the Cholesky algorithm fails (in the form of an imaginary square root or division by zero) if and only if the matrix $\mathbf{A}$ is not positive definite. This is often the best way to test the definiteness of a symmetric matrix about which nothing else is known.
 
 (demo-structure-cholesky)=
-```{prf:example}
-```
-
-
-
-
-
-
-A randomly chosen matrix is extremely unlikely to be symmetric. However, there is a simple way to symmetrize one.
-
-```{code-cell}
-A = rand(1.0:9.0,4,4)
-B = A + A'
-```
-
-```{index} ! Julia; cholesky
-```
-
-::::{grid} 1 1 2 2
-:gutter: 2
-
-:::{grid-item}
-:columns: 7
-
-
-Similarly, a random symmetric matrix is unlikely to be positive definite. The Cholesky algorithm always detects a non-PD matrix by quitting with an error.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-structure-cholesky-julia
 :::
-:::{grid-item-card}
-:columns: 5
+```` 
 
-
-The `cholesky` function computes a Cholesky factorization if possible, or throws an error for a non-positive-definite matrix. However, it does *not* check for symmetry.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-structure-cholesky-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-structure-cholesky-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-cholesky(B)    # throws an error
-```
-
-It's not hard to manufacture an SPD matrix to try out the Cholesky factorization.
-
-```{code-cell}
-B = A'*A
-cf = cholesky(B)
-```
-
-What's returned is a factorization object. Another step is required to extract the factor as a matrix:
-
-```{code-cell}
-R = cf.U
-```
-
-Here we validate the factorization:
-
-```{code-cell}
-opnorm(R'*R - B) / opnorm(B)
-```
-
-
-
 
 ## Exercises
 
