@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-leastsq-qr)=
 # The QR factorization
 
@@ -197,68 +177,27 @@ The thin QR factorization is $\mathbf{A} = \hat{\mathbf{Q}} \hat{\mathbf{R}}$, w
 ::::
 
 (demo-qr-qrfact)=
-```{prf:example}
-```
-
-
-
-
-
-Julia provides access to both the thin and full forms of the QR factorization.
-
-```{code-cell}
-A = rand(1.:9.,6,4)
-@show m,n = size(A);
-```
-
-Here is a standard call:
-
-```{code-cell}
-Q,R = qr(A);
-Q
-```
-
-```{code-cell}
-R
-```
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-:columns: 7
-
-
-If you look carefully, you see that we seemingly got a full $\mathbf{Q}$ but a thin $\mathbf{R}$. However, the $\mathbf{Q}$ above is not a standard matrix type. If you convert it to a true matrix, then it reverts to the thin form.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-qr-qrfact-julia
 :::
-:::{card}
-:columns: 5
+```` 
 
-
-To enter the accented character `Q̂`, type `Q\hat` followed by <kbd>Tab</kbd>.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-qr-qrfact-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-qr-qrfact-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-Q̂ = Matrix(Q)
-```
-
-We can test that $\mathbf{Q}$ is an orthogonal matrix:
-
-```{code-cell}
-opnorm(Q'*Q - I)
-```
-
-The thin $\hat{\mathbf{Q}}$ cannot be an orthogonal matrix, because it is not square, but it is still ONC:
-
-```{code-cell}
-Q̂'*Q̂ - I
-```
-
-
-
 
 ## Least squares and QR
 
@@ -295,56 +234,53 @@ In order to have the normal equations be well posed, we require that $\mathbf{A}
 This algorithm is implemented in {numref}`Function {number} <function-lsqrfact>`. It is essentially the algorithm used internally by Julia when `A\b` is called. The execution time is dominated by the factorization, the most common method for which is described in {numref}`section-leastsq-house`.
 
 (function-lsqrfact)=
-```{prf:function} lsqrfact
-**Linear least-squares solution by QR factorization**
-```{code-block} julia
-:lineno-start: 1
-"""
-    lsqrfact(A,b)
+``````{prf:algorithm} lsqrfact
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-lsqrfact-julia
+:::
+```` 
 
-Solve a linear least-squares problem by QR factorization. Returns
-the minimizer of ||b-Ax||.
-"""
-function lsqrfact(A,b)
-    Q,R = qr(A)
-    c = Q'*b
-    x = backsub(R,c)
-    return x
-end
-```
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-lsqrfact-julia
+:::
+```` 
+
+
+````{tab-item} Python
+:sync: python
+:::{embed} #function-lsqrfact-python
+:::
+````
+`````
+``````
 
 The solution of least-squares problems via QR factorization is more stable than when the normal equations are formulated and solved directly.
 
 (demo-qr-stable)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-qr-stable-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-qr-stable-matlab
+:::
+```` 
 
-
-
-
-We'll repeat the experiment of {numref}`Demo {number} <demo-normaleqns-instab>`, which exposed instability in the normal equations. 
-
-```{code-cell}
-t = range(0,3,length=400)
-f = [ x->sin(x)^2, x->cos((1+1e-7)*x)^2, x->1. ]
-A = [ f(t) for t in t, f in f ]
-x = [1.,2,1]
-b = A*x;
-```
-
-The error in the solution by {numref}`Function {number} <function-lsqrfact>` is within the bound predicted by the condition number.
-
-```{code-cell}
-observed_error = norm(FNC.lsqrfact(A,b)-x)/norm(x);
-@show observed_error;
-κ = cond(A)
-@show error_bound = κ*eps();
-```
-
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-qr-stable-python
+:::
+```` 
+`````
+::::
 
 ## Exercises
 

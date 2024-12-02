@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-leastsq-normaleqns)=
 # The normal equations
 
@@ -132,34 +112,33 @@ The definition of the pseudoinverse involves taking the inverse of a matrix, so 
 3. Solve the $n\times n$ linear system $\mathbf{N}\mathbf{x} = \mathbf{z}$ for $\mathbf{x}$.
 ::::
 
+Steps 1 and 3 of {numref}`Algorithm {number} <algorithm-normaleqns-solve>` dominate the flop count.
+
 In the last step we can exploit the fact, proved in {numref}`Theorem %s <theorem-ATA>`, that $\mathbf{N}$ is symmetric and positive definite, and use Cholesky factorization as in {numref}`section-linsys-structure`. This detail is included in {numref}`Function {number} <function-lsnormal>`.
 
 (function-lsnormal)=
-```{prf:function} lsnormal
-**Linear least-squares solution by the normal equations**
-```{code-block} julia
-:lineno-start: 1
-"""
-    lsnormal(A,b)
-
-Solve a linear least-squares problem by the normal equations.
-Returns the minimizer of ||b-Ax||.
-"""
-function lsnormal(A,b)
-    N = A'*A;  z = A'*b;
-    R = cholesky(N).U
-    w = forwardsub(R',z)                   # solve R'z=c
-    x = backsub(R,w)                       # solve Rx=z
-    return x
-end
-```
-
-:::{admonition} About the code
-:class: dropdown
-The syntax on line 9 is a *field reference* to extract the matrix we want from the structure returned by `cholesky`.
+``````{prf:algorithm} lsnormal
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-lsnormal-julia
 :::
+```` 
 
-Steps 1 and 3 of {numref}`Algorithm {number} <algorithm-normaleqns-solve>` dominate the flop count.
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-lsnormal-julia
+:::
+```` 
+
+
+````{tab-item} Python
+:sync: python
+:::{embed} #function-lsnormal-python
+:::
+````
+`````
+``````
 
 (theorem-normaleqns-flops)=
 ```{prf:theorem}
@@ -208,67 +187,29 @@ If $\mathbf{A}$ is $m\times n$ with $m > n$, then
 ````
 This squaring of the condition number in the normal equations is the cause of instability. If $\kappa(\mathbf{A})$ is large, the squaring of it can destabilize the normal equations: while the solution of the least-squares problem is sensitive, finding it via the normal equations makes it doubly so.
 
+
 (demo-normaleqns-instab)=
-```{prf:example}
-```
-
-
-
-
-
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-:columns: 7
-
-
-Because the functions $\sin^2(t)$, $\cos^2(t)$, and $1$ are linearly dependent, we should find that the following matrix is somewhat ill-conditioned.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-normaleqns-instab-julia
 :::
-:::{card}
-:columns: 5
+```` 
 
-
-The local variable scoping rule for loops applies to comprehensions as well.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-normaleqns-instab-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-normaleqns-instab-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-t = range(0,3,length=400)
-f = [ x->sin(x)^2, x->cos((1+1e-7)*x)^2, x->1. ]
-A = [ f(t) for t in t, f in f ]
-κ = cond(A)
-```
-
-Now we set up an artificial linear least-squares problem with a known exact solution that actually makes the residual zero.
-
-```{code-cell}
-x = [1.,2,1]
-b = A*x;
-```
-
-Using backslash to find the least-squares solution, we get a relative error that is well below $\kappa$ times machine epsilon.
-
-```{code-cell}
-x_BS = A\b
-@show observed_error = norm(x_BS-x)/norm(x);
-@show error_bound = κ*eps();
-```
-
-If we formulate and solve via the normal equations, we get a much larger relative error. With $\kappa^2\approx 10^{14}$, we may not be left with more than about 2 accurate digits.
-
-```{code-cell}
-N = A'*A
-x_NE = N\(A'*b)
-@show observed_err = norm(x_NE-x)/norm(x);
-@show digits = -log10(observed_err);
-```
-
-
-
 
 ## Exercises
 

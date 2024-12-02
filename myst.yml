@@ -57,8 +57,8 @@ project:
     '\myvec': '\operatorname{vec}'
     '\argmin': '\operatorname{argmin}'
   abbreviations:
-    - LU: lower triangular times upper triangular
-    - QR: orthogonal times upper triangular
+    LU: lower triangular times upper triangular
+    QR: orthogonal times upper triangular
   numbering:
     heading_1: true
     heading_2: true
@@ -90,13 +90,13 @@ project:
         - file: chapter2/structure.md
         - file: chapter2/next.md
     - file: chapter3/overview.md
-    #       children:
-    #         - file: chapter3/fitting.md
-    #         - file: chapter3/normaleqns.md
-    #         - file: chapter3/qr.md
-    #         - file: chapter3/house.md
-    #         - file: chapter3/next.md
-    #     - file: chapter4/overview.md
+      children:
+        - file: chapter3/fitting.md
+        - file: chapter3/normaleqns.md
+        - file: chapter3/qr.md
+        - file: chapter3/house.md
+        - file: chapter3/next.md
+    - file: chapter4/overview.md
     #       children:
     #         - file: chapter4/rootproblem.md
     #         - file: chapter4/fixed-point.md
@@ -197,6 +197,7 @@ project:
         children:
           - file: julia/chapter1.md
           - file: julia/chapter2.md
+          - file: julia/chapter3.md
       - title: MATLAB codes
         children:
           - file: matlab/chapter1.md
@@ -211,5 +212,5 @@ project:
 site:
   template: book-theme
   options:
-  #   favicon: favicon.ico
+    favicon: favicon.png
     logo: _static/FNClogo.png

@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-leastsq-fitting)=
 # Fitting functions to data
 
@@ -27,66 +7,27 @@ FNC.init_format()
 In {numref}`section-linsys-polyinterp` we saw how a polynomial can be used to interpolate data—that is, derive a continuous function that evaluates to give a set of prescribed values. But interpolation may not be appropriate in many applications.
 
 (demo-fitting-tempinterp)=
-```{prf:example}
-```
-
-
-
-
-
-Here are 5-year averages of the worldwide temperature anomaly as compared to the 1951–1980 average (source: NASA).
-
-```{code-cell}
-year = 1955:5:2000
-temp = [ -0.0480, -0.0180, -0.0360, -0.0120, -0.0040,
-       0.1180, 0.2100, 0.3320, 0.3340, 0.4560 ]
-    
-scatter(year,temp,label="data",
-    xlabel="year",ylabel="anomaly (degrees C)",leg=:bottomright)
-```
-
-A polynomial interpolant can be used to fit the data. Here we build one using a Vandermonde matrix. First, though, we express time as decades since 1950, as it improves the condition number of the matrix.
-
-```{code-cell}
-t = @. (year-1950)/10
-n = length(t)
-V = [ t[i]^j for i in 1:n, j in 0:n-1 ]
-c = V\temp
-```
-
-```{index} Julia; plotting functions
-```
-
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-:columns: 7
-
-
-The coefficients in vector `c` are used to create a polynomial. Then we create a function that evaluates the polynomial after changing the time variable as we did for the Vandermonde matrix.
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-fitting-tempinterp-julia
 :::
-:::{card}
-:columns: 5
+```` 
 
-
-If you `plot` a function, then the points are chosen automatically to make a smooth curve.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-fitting-tempinterp-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-fitting-tempinterp-python
+:::
+```` 
+`````
 ::::
-
-
-```{code-cell}
-p = Polynomial(c)
-f = yr -> p((yr-1950)/10)
-plot!(f,1955,2000,label="interpolant")
-```
-
-As you can see, the interpolant does represent the data, in a sense. However it's a crazy-looking curve for the application. Trying too hard to reproduce all the data exactly is known as _overfitting_.
-
-
-
 
 
 ```{index} data fitting
@@ -133,95 +74,27 @@ c_n
 Note that $\mathbf{V}$ has the same structure as the Vandermonde matrix in {eq}`vandersystem` but is $m\times n$, thus taller than it is wide. It's impossible in general to satisfy $m$ conditions with $n<m$ variables, and we say the system is **overdetermined**. Rather than solving the system exactly, we have to find a best approximation. Below we specify precisely what is meant by this, but first we note that Julia uses the same backslash notation to solve the problem in both the square and overdetermined cases.
 
 (demo-fitting-tempfit)=
-```{prf:example}
-```
-
-
-
-
-
-
-Here are the 5-year temperature averages again.
-
-```{code-cell}
-year = 1955:5:2000
-t = @. (year-1950)/10
-temp = [ -0.0480, -0.0180, -0.0360, -0.0120, -0.0040,
-          0.1180, 0.2100, 0.3320, 0.3340, 0.4560 ]
-```
-
-```{index} Julia; \\
-```
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-:columns: 7
-
-
-The standard best-fit line results from using a linear polynomial that meets the least-squares criterion.
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-fitting-tempfit-julia
 :::
-:::{card}
-:columns: 5
+```` 
 
-
-Backslash solves overdetermined linear systems in a least-squares sense.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-fitting-tempfit-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-fitting-tempfit-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-V = [ t.^0 t ]    # Vandermonde-ish matrix
-@show size(V)
-c = V\temp
-p = Polynomial(c)
-```
-
-```{code-cell}
-f = yr -> p((yr-1955)/10)
-scatter(year,temp,label="data",
-    xlabel="year",ylabel="anomaly (degrees C)",leg=:bottomright)
-plot!(f,1955,2000,label="linear fit")
-```
-
-If we use a global cubic polynomial, the points are fit more closely.
-
-```{code-cell}
-V = [ t[i]^j for i in 1:length(t), j in 0:3 ]   
-@show size(V)
-```
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-:columns: 7
-
-
-Now we solve the new least-squares problem to redefine the fitting polynomial.
-
-
-:::
-:::{card}
-:columns: 5
-
-
-The definition of `f` above is in terms of `p`. When `p` is changed, then `f` calls the new version.
-
-:::
-::::
-
-```{code-cell}
-p = Polynomial( V\temp )
-
-plot!(f,1955,2000,label="cubic fit")
-```
-
-If we were to continue increasing the degree of the polynomial, the residual at the data points would get smaller, but overfitting would increase.
-
-
-
-
 
 ## The least-squares formulation
 
@@ -273,7 +146,7 @@ Given $\mathbf{A}\in\mathbb{R}^{m \times n}$ and $\mathbf{b}\in\mathbb{R}^m$, wi
 
 ```{math}
 :label: linls
-\argmin_\limits{\mathbf{x}\in \mathbb{R}^n}\,  \bigl\| \mathbf{b}-\mathbf{A} \mathbf{x} \bigr\|_2^2.
+\argmin_{{\mathbf{x}\in \mathbb{R}^n}} \, \twonorm{\mathbf{b}-\mathbf{A} \mathbf{x}}^2.
 ```
 ````
 
@@ -306,67 +179,30 @@ While the fit of the $y_i$ to $g(t)$ is nonlinearly dependent on fitting paramet
 \log y \approx (\log a_1) + a_2 (\log t).
 ```
 
+Thus, the variable $z=\log y$ can be fit linearly in terms of the variable $s=\log t$. In practice these two cases—exponential fit and power law—are easily detected by using log-linear or log-log plots, respectively.
+
 (demo-fitting-pirate)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-fitting-pirate-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-fitting-pirate-matlab
+:::
+```` 
 
-
-
-
-
-Finding numerical approximations to $\pi$ has fascinated people for millennia. One famous formula is
-
-$$ 
-\displaystyle \frac{\pi^2}{6} = 1 + \frac{1}{2^2} + \frac{1}{3^2} + \cdots. 
-$$
-
-
-Say $s_k$ is the sum of the first $k$ terms of the series above, and $p_k = \sqrt{6s_k}$. Here is a fancy way to compute these sequences in a compact code.
-
-```{code-cell}
-a = [1/k^2 for k=1:100] 
-s = cumsum(a)        # cumulative summation
-p = @. sqrt(6*s)
-
-scatter(1:100,p,title="Sequence convergence",
-    xlabel=L"k",ylabel=L"p_k")
-```
-
-This graph suggests that maybe $p_k\to \pi$, but it's far from clear how close the sequence gets. It's more informative to plot the sequence of errors, $\epsilon_k= |\pi-p_k|$. By plotting the error sequence on a log-log scale, we can see a nearly linear relationship.
-
-```{code-cell}
-ϵ = @. abs(π-p)    # error sequence
-scatter(1:100,ϵ,title="Convergence of errors",
-    xaxis=(:log10,L"k"),yaxis=(:log10,"error"))
-```
-
-The straight line on the log-log scale suggests a power-law relationship where $\epsilon_k\approx a k^b$, or $\log \epsilon_k \approx b (\log k) + \log a$.
-
-```{code-cell}
-k = 1:100
-V = [ k.^0 log.(k) ]     # fitting matrix
-c = V \ log.(ϵ)          # coefficients of linear fit
-```
-
-In terms of the parameters $a$ and $b$ used above, we have
-
-```{code-cell}
-a,b = exp(c[1]),c[2];
-@show b;
-```
-
-It's tempting to conjecture that the slope $b\to -1$ asymptotically. Here is how the numerical fit compares to the original convergence curve.
-
-```{code-cell}
-plot!(k,a*k.^b,l=:dash,label="power-law fit")
-```
-
-
-
-
-
-Thus the variable $z=\log y$ can be fit linearly in terms of the variable $s=\log t$. In practice these two cases—exponential fit and power law—are easily detected by using log-linear or log-log plots, respectively.
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-fitting-pirate-python
+:::
+```` 
+`````
+::::
 
 ## Exercises
 

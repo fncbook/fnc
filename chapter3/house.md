@@ -1,66 +1,5 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-leastsq-house)=
 # Computing QR factorizations
-
-<!--
- It is possible to compute a thin QR factorization using the outer product formula {eq}`matrixouter`, producing the columns and rows of the factors one by one. If $\mathbf{A}=\hat{\mathbf{Q}}\hat{\mathbf{R}}$, then 
-
- $$
- \hat{\mathbf{Q}}^T\mathbf{A}=\hat{\mathbf{Q}}^T\hat{\mathbf{Q}}\hat{\mathbf{R}} = \hat{\mathbf{R}},
- $$
-
- by {numref}`Theorem {number} <theorem-qr-ONC>`. Hence if $\mathbf{q}_j$ is the $j$th column of $\hat{\mathbf{Q}}$, then $\mathbf{q}_j\mathbf{A}$ is the $j$th row of $\hat{\mathbf{R}}$.
-
- (demo-house-qrouter)=
- ```{prf:example}
- ```
-
- 
-
-
-
-Since the $\mathbf{q}_j$ have to be unit vectors, we normalize the first column of $\mathbf{A}$ to get $\mathbf{q}_1$.
- 
-```{code-cell}
-A₁ = rand(1:9,6,4)
-Q̂,R̂ = zeros(6,4),zeros(4,4)
-Q̂[:,1] = normalize(A[:,1]);
-```
-
-This leaves us ready to compute the first row of $\hat{\mathbf{R}}$, then subtract off the outer product $\mathbf{q}_1\mathbf{r}_1^T$. 
-
-```{code-cell}
-R̂[1,:] = Q̂[:,1]'*A₁
-A₂ = A₁ - Q̂[:,1]*R̂[1,:]'
-```
-
-This can be repeated.
-
-ETC!
-
-
-
-
--->
 
 ```{index} orthogonal matrix
 ```
@@ -157,111 +96,27 @@ leading finally to
 The QR factorization is computed by using successive Householder reflections to introduce zeros in one column at a time. We first show the process for a small numerical example in {numref}`Demo %s <demo-house-qr>`.
 
 (demo-house-qr)=
-```{prf:example}
-```
-
-
-
-
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-:columns: 7
-
-
-We will use Householder reflections to produce a QR factorization of a random matrix.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-house-qr-julia
 :::
-:::{card}
-:columns: 5
+```` 
 
-
-The `rand` function can select randomly from within the interval $[0,1]$, or from a vector or range that you specify.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-house-qr-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-house-qr-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-A = rand(float(1:9),6,4)
-m,n = size(A)
-```
-
-```{index} Julia; normalize, ! Julia; I
-```
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-:columns: 7
-
-
-Our first step is to introduce zeros below the diagonal in column 1 by using {eq}`hhvector` and {eq}`hhreflect`. 
-
-
-:::
-:::{card}
-:columns: 5
-
-
-`I` can stand for an identity matrix of any size, inferred from the context when needed.
-
-:::
-::::
-
-```{code-cell}
-z = A[:,1];
-v = normalize(z - norm(z)*[1;zeros(m-1)])
-P₁ = I - 2v*v'   # reflector
-```
-
-We check that this reflector introduces zeros as it should:
-
-```{code-cell}
-P₁*z
-```
-
-Now we replace $\mathbf{A}$ by $\mathbf{P}\mathbf{A}$.
-
-```{code-cell}
-A = P₁*A
-```
-
-We are set to put zeros into column 2. We must not use row 1 in any way, lest it destroy the zeros we just introduced. So we leave it out of the next reflector.
-
-```{code-cell}
-z = A[2:m,2]
-v = normalize(z - norm(z)*[1;zeros(m-2)])
-P₂ = I - 2v*v'
-```
-
-We now apply this reflector to rows 2 and below only.
-
-```{code-cell}
-A[2:m,:] = P₂*A[2:m,:]
-A
-```
-
-We need to iterate the process for the last two columns.
-
-```{code-cell}
-for j in 3:n
-    z = A[j:m,j]
-    v = normalize(z - norm(z)*[1;zeros(m-j)])
-    P = I - 2v*v'
-    A[j:m,:] = P*A[j:m,:]
-end
-```
-
-We have now reduced the original to an upper triangular matrix using four orthogonal Householder reflections:
-
-```{code-cell}
-R = triu(A)
-```
-
-
-
 
 You may be wondering what happened to $\mathbf{Q}$ in {numref}`Demo %s <demo-house-qr>`. Each Householder reflector is orthogonal but not full-size. We have to pad it out to represent algebraically the fact that a block of the first rows is left alone. Given a reflector $\mathbf{P}_k$ that is of square size $m-k+1$, we define
 
@@ -290,37 +145,27 @@ we can build $\mathbf{Q}^T$ iteratively by starting with the identity and doing 
 The algorithm we have described is encapsulated in {numref}`Function {number} <function-qrfact>`. There is one more refinement in it, however. As indicated by {eq}`hhapply`, the application of a reflector $\mathbf{P}$ to a vector does not require the formation of the matrix $\mathbf{P}$ explicitly.
 
 (function-qrfact)=
+``````{prf:algorithm} qrfact
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-qrfact-julia
+:::
+```` 
 
-```{prf:function} qrfact
-**QR factorization by Householder reflections**
-```{code-block} julia
-:lineno-start: 1
-"""
-    qrfact(A)
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-qrfact-julia
+:::
+```` 
 
-QR factorization by Householder reflections. Returns Q and R.
-"""
-function qrfact(A)
-    m,n = size(A)
-    Qt = diagm(ones(m))
-    R = float(copy(A))
-    for k in 1:n
-        z = R[k:m,k]
-        w = [ -sign(z[1])*norm(z) - z[1]; -z[2:end] ]
-        nrmw = norm(w)
-        if nrmw < eps() continue; end    # skip this iteration
-        v = w / nrmw;
-        # Apply the reflection to each relevant column of A and Q
-        for j in 1:n
-            R[k:m,j] -= v*( 2*(v'*R[k:m,j]) )
-        end
-        for j in 1:m
-            Qt[k:m,j] -= v*( 2*(v'*Qt[k:m,j]) )
-        end
-    end
-    return Qt',triu(R)
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-qrfact-python
+:::
+````
+`````
+``````
 
 ## Q-less QR and least squares
 
