@@ -47,6 +47,13 @@ as writing a nonzero vector $\mathbf{v}$ in magnitude–direction form.
 
 (demo-norms-vector)=
 ::::{prf:example}
+Given the vector $\mathbf{x}= \bigl[ 2 ,\, -3 ,\, 1 ,\, -1 \bigr]^T$, we have
+\begin{align*}
+    \| \mathbf{x} \|_2 &= \sqrt{ 4 + 9 + 1 + 1 } = \sqrt{15}, \\[1ex]
+    \| \mathbf{x} \|_\infty &= \max\{ 2,3,1,1 \} = 3,\\[1ex]
+    \| \mathbf{x} \|_1 &= 2 + 3 + 1 + 1 = 7.
+\end{align*}
+
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

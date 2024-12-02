@@ -1034,12 +1034,6 @@ A \ b
 <!-- SECTION 7 -->
 (demo-norms-vector-julia)=
 ``````{dropdown} Vector norms
-Given the vector $\mathbf{x}= \bigl[ 2 ,\, -3 ,\, 1 ,\, -1 \bigr]^T$, we have
-\begin{align*}
-    \| \mathbf{x} \|_2 &= \sqrt{ 4 + 9 + 1 + 1 } = \sqrt{15}, \\[1ex]
-    \| \mathbf{x} \|_\infty &= \max\{ 2,3,1,1 \} = 3,\\[1ex]
-    \| \mathbf{x} \|_1 &= 2 + 3 + 1 + 1 = 7.
-\end{align*}
 
 ```{index} ! Julia; norm
 ```

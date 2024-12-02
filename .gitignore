@@ -31,3 +31,4 @@ python/**/dist
 python/Chapter*.ipynb
 **/gr-temp
 **/Untitled.ipynb
+python/Chapter??.md
