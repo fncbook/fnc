@@ -127,10 +127,9 @@ In the last step we can exploit the fact, proved in {numref}`Theorem %s <theorem
 
 ````{tab-item} MATLAB
 :sync: matlab
-:::{embed} #function-lsnormal-julia
+:::{embed} #function-lsnormal-matlab
 :::
 ```` 
-
 
 ````{tab-item} Python
 :sync: python

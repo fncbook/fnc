@@ -244,10 +244,9 @@ This algorithm is implemented in {numref}`Function {number} <function-lsqrfact>`
 
 ````{tab-item} MATLAB
 :sync: matlab
-:::{embed} #function-lsqrfact-julia
+:::{embed} #function-lsqrfact-matlab
 :::
 ```` 
-
 
 ````{tab-item} Python
 :sync: python

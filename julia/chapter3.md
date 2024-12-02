@@ -28,10 +28,10 @@ scatter(year, temp, label="data",
 A polynomial interpolant can be used to fit the data. Here we build one using a Vandermonde matrix. First, though, we express time as decades since 1950, as it improves the condition number of the matrix.
 
 ```{code-cell}
-t = @. (year-1950)/10
+t = @. (year - 1950) / 10
 n = length(t)
 V = [ t[i]^j for i in 1:n, j in 0:n-1 ]
-c = V\temp
+c = V \ temp
 ```
 
 ```{index} Julia; plotting functions
@@ -46,8 +46,8 @@ If you `plot` a function, then the points are chosen automatically to make a smo
 
 ```{code-cell}
 p = Polynomial(c)
-f = yr -> p((yr-1950)/10)
-plot!(f,1955,2000,label="interpolant")
+f = yr -> p((yr - 1950) / 10)
+plot!(f, 1955, 2000, label="interpolant")
 ```
 
 As you can see, the interpolant does represent the data, in a sense. However it's a crazy-looking curve for the application. Trying too hard to reproduce all the data exactly is known as _overfitting_.
@@ -78,15 +78,15 @@ Backslash solves overdetermined linear systems in a least-squares sense.
 ```{code-cell}
 V = [ t.^0 t ]    # Vandermonde-ish matrix
 @show size(V)
-c = V\temp
+c = V \ temp
 p = Polynomial(c)
 ```
 
 ```{code-cell}
-f = yr -> p((yr-1955)/10)
-scatter(year,temp,label="data",
-    xlabel="year",ylabel="anomaly (degrees C)",leg=:bottomright)
-plot!(f,1955,2000,label="linear fit")
+f = yr -> p((yr - 1955) / 10)
+scatter(year, temp, label="data",
+    xlabel="year", ylabel="anomaly (degrees C)", leg=:bottomright)
+plot!(f, 1955, 2000, label="linear fit")
 ```
 
 If we use a global cubic polynomial, the points are fit more closely.
@@ -104,8 +104,8 @@ The definition of `f` above is in terms of `p`. When `p` is changed, then `f` ca
 ::::
 
 ```{code-cell}
-p = Polynomial( V\temp )
-plot!(f,1955,2000,label="cubic fit")
+p = Polynomial( V \ temp )
+plot!(f, 1955, 2000, label="cubic fit")
 ```
 
 If we were to continue increasing the degree of the polynomial, the residual at the data points would get smaller, but overfitting would increase.
@@ -113,30 +113,22 @@ If we were to continue increasing the degree of the polynomial, the residual at 
 
 (demo-fitting-pirate-julia)=
 ``````{dropdown} Fitting a power law
-Finding numerical approximations to $\pi$ has fascinated people for millennia. One famous formula is
-
-$$ 
-\displaystyle \frac{\pi^2}{6} = 1 + \frac{1}{2^2} + \frac{1}{3^2} + \cdots. 
-$$
-
-
-Say $s_k$ is the sum of the first $k$ terms of the series above, and $p_k = \sqrt{6s_k}$. Here is a fancy way to compute these sequences in a compact code.
 
 ```{code-cell}
 a = [1/k^2 for k=1:100] 
 s = cumsum(a)        # cumulative summation
 p = @. sqrt(6*s)
 
-scatter(1:100,p,title="Sequence convergence",
-    xlabel=L"k",ylabel=L"p_k")
+scatter(1:100, p, title="Sequence convergence",
+    xlabel=L"k", ylabel=L"p_k")
 ```
 
 This graph suggests that maybe $p_k\to \pi$, but it's far from clear how close the sequence gets. It's more informative to plot the sequence of errors, $\epsilon_k= |\pi-p_k|$. By plotting the error sequence on a log-log scale, we can see a nearly linear relationship.
 
 ```{code-cell}
-ϵ = @. abs(π-p)    # error sequence
-scatter(1:100,ϵ,title="Convergence of errors",
-    xaxis=(:log10,L"k"),yaxis=(:log10,"error"))
+ϵ = @. abs(π - p)    # error sequence
+scatter(1:100, ϵ, title="Convergence of errors",
+    xaxis=(:log10,L"k"), yaxis=(:log10,"error"))
 ```
 
 The straight line on the log-log scale suggests a power-law relationship where $\epsilon_k\approx a k^b$, or $\log \epsilon_k \approx b (\log k) + \log a$.
@@ -150,16 +142,18 @@ c = V \ log.(ϵ)          # coefficients of linear fit
 In terms of the parameters $a$ and $b$ used above, we have
 
 ```{code-cell}
-a,b = exp(c[1]),c[2];
+a, b = exp(c[1]), c[2];
 @show b;
 ```
 
 It's tempting to conjecture that the slope $b\to -1$ asymptotically. Here is how the numerical fit compares to the original convergence curve.
 
 ```{code-cell}
-plot!(k,a*k.^b,l=:dash,label="power-law fit")
+plot!(k, a * k.^b, l=:dash, label="power-law fit")
 ```
 ``````
+
+<!-- SECTION 2 -->
 
 (function-lsnormal-julia)=
 ``````{dropdown} Solution of least squares by the normal equations
@@ -181,7 +175,6 @@ The syntax on line 9 is a *field reference* to extract the matrix we want from t
 (demo-normaleqns-instab-julia)=
 ``````{dropdown} Instability in the normal equations
 
-
 ::::{grid} 1 1 2 2
 Because the functions $\sin^2(t)$, $\cos^2(t)$, and $1$ are linearly dependent, we should find that the following matrix is somewhat ill-conditioned.
 :::{card}
@@ -190,7 +183,7 @@ The local variable scoping rule for loops applies to comprehensions as well.
 ::::
 
 ```{code-cell}
-t = range(0,3,length=400)
+t = range(0, 3, 400)
 f = [ x->sin(x)^2, x->cos((1+1e-7)*x)^2, x->1. ]
 A = [ f(t) for t in t, f in f ]
 @show κ = cond(A);
@@ -199,7 +192,7 @@ A = [ f(t) for t in t, f in f ]
 Now we set up an artificial linear least-squares problem with a known exact solution that actually makes the residual zero.
 
 ```{code-cell}
-x = [1.,2,1]
+x = [1., 2, 1]
 b = A * x;
 ```
 
@@ -221,13 +214,14 @@ x_NE = N \ (A'*b)
 ```
 ``````
 
+<!-- SECTION 3 -->
 (demo-qr-qrfact-julia)=
 ``````{dropdown} QR factorization
 
 Julia provides access to both the thin and full forms of the QR factorization.
 
 ```{code-cell}
-A = rand(1.:9.,6,4)
+A = rand(1.:9., 6, 4)
 @show m,n = size(A);
 ```
 
@@ -256,13 +250,13 @@ Q̂ = Matrix(Q)
 We can test that $\mathbf{Q}$ is an orthogonal matrix:
 
 ```{code-cell}
-opnorm(Q'*Q - I)
+opnorm(Q' * Q - I)
 ```
 
 The thin $\hat{\mathbf{Q}}$ cannot be an orthogonal matrix, because it is not square, but it is still ONC:
 
 ```{code-cell}
-Q̂'*Q̂ - I
+Q̂' * Q̂ - I
 ```
 ``````
 

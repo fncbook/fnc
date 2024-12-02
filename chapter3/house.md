@@ -155,7 +155,7 @@ The algorithm we have described is encapsulated in {numref}`Function {number} <f
 
 ````{tab-item} MATLAB
 :sync: matlab
-:::{embed} #function-qrfact-julia
+:::{embed} #function-qrfact-matlab
 :::
 ```` 
 

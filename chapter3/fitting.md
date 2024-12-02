@@ -183,6 +183,15 @@ Thus, the variable $z=\log y$ can be fit linearly in terms of the variable $s=\l
 
 (demo-fitting-pirate)=
 ::::{prf:example}
+Finding numerical approximations to $\pi$ has fascinated people for millennia. One famous formula is
+
+$$ 
+\displaystyle \frac{\pi^2}{6} = 1 + \frac{1}{2^2} + \frac{1}{3^2} + \cdots. 
+$$
+
+
+Say $s_k$ is the sum of the first $k$ terms of the series above, and $p_k = \sqrt{6s_k}$. Here is a fancy way to compute these sequences in a compact code.
+
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
