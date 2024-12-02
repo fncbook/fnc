@@ -150,7 +150,6 @@ sol = solve(IVP,Rodas4P());
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 Here is an animation of the solution. 
@@ -158,7 +157,6 @@ Here is an animation of the solution.
 
 :::
 :::{card}
-:columns: 5
 
 
 

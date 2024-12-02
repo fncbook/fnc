@@ -193,7 +193,6 @@ The observed linear convergence rate is found from the data.
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 We reorder the eigenvalues to enforce {eq}`shiftorder`. 
@@ -201,7 +200,6 @@ We reorder the eigenvalues to enforce {eq}`shiftorder`.
 
 :::
 :::{card}
-:columns: 5
 
 
 The `sortperm` function returns the index permutation needed to sort the given vector, rather than the sorted vector itself.

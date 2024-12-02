@@ -183,7 +183,6 @@ T = LinearMap(x -> vec(blur(unvec(x))),m*n);
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 The blurring operators are symmetric, so we apply `minres` to the composite blurring transformation `T`.
@@ -191,7 +190,6 @@ The blurring operators are symmetric, so we apply `minres` to the composite blur
 
 :::
 :::{card}
-:columns: 5
 
 
 The function `clamp01` in `Images` restricts values to be in the interval $[0,1]$.

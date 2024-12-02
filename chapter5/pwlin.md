@@ -119,7 +119,6 @@ t = [0, 0.55, 0.7, 1]
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 We plot the hat functions $H_0,\ldots,H_3$.
@@ -127,7 +126,6 @@ We plot the hat functions $H_0,\ldots,H_3$.
 
 :::
 :::{card}
-:columns: 5
 
 
 Use `annotate!` to add text to a plot.

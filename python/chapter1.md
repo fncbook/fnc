@@ -23,7 +23,6 @@ print(p)
 Not all the digits displayed for `p` are the same as those of $\pi$. 
 
 :::{card}
-:columns: 7
 
 The value of `pi` is predefined in the `numpy` package, which is typically abbreviated as `np`.
 :::
@@ -38,7 +37,6 @@ print(np.pi)
 The absolute and relative accuracies of the approximation are as follows:
 
 :::{card}
-:columns: 7
 
 We often use [Python f-strings](https://docs.python.org/3/tutorial/inputoutput.html#tut-f-strings) to format numerical output. 
 
@@ -172,7 +170,6 @@ This is now the "correct" result. But we have found a rather shocking breakdown 
 The polynomial $p(x) = \frac{1}{3}(x-1)(x-1-\epsilon)$ has roots $1$ and $1+\epsilon$. For small values of $\epsilon$, the roots are ill-conditioned. 
 
 :::{card}
-:columns: 5
 
 The statement `x, y = 10, 20` makes individual assignments to both `x` and `y`.
 

@@ -312,7 +312,6 @@ plot!(x->q(x),interval...,l=:dash,label="interpolant")
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 To do inverse interpolation, we swap the roles of $x$ and $y$ in the interpolation.
@@ -320,7 +319,6 @@ To do inverse interpolation, we swap the roles of $x$ and $y$ in the interpolati
 
 :::
 :::{card}
-:columns: 5
 
 
 By giving two functions in the plot call, we get the parametric plot $(q(y),y)$ as a function of $y$.

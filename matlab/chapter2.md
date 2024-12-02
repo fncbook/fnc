@@ -6,7 +6,7 @@ kernelspec:
 ---
 ```{code-cell}
 :tags: [remove-cell]
-addpath ../matlab/fnc
+addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
 format short
 set(0, 'defaultlinelinewidth', 1.5, 'defaultscattermarkerfacecolor', 'k')
 ```

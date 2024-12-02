@@ -151,7 +151,6 @@ Notice above that the accuracy of the Euler solution deteriorates rapidly.
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 When there are just two components, it's common to plot the solution in the _phase plane_, i.e., with $u_1$ and $u_2$ along the axes and time as a parameterization of the curve.
@@ -159,7 +158,6 @@ When there are just two components, it's common to plot the solution in the _pha
 
 :::
 :::{card}
-:columns: 5
 
 
 You can use `vars` in the plot of a solution produced by `solve` to specify the components of the solution that appear on each axis.
@@ -255,7 +253,6 @@ The trick illustrated in the preceding examples is always available. Suppose $y$
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 Let's implement the coupled pendulums from {numref}`Example {number} <example-systems-coupledpendula>`. The pendulums will be pulled in opposite directions and then released together from rest.
@@ -263,7 +260,6 @@ Let's implement the coupled pendulums from {numref}`Example {number} <example-sy
 
 :::
 :::{card}
-:columns: 5
 
 
 The `similar` function creates an array of the same size and type as a given value, without initializing the contents.
@@ -289,7 +285,6 @@ tspan = (0.,50.);
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 First we check the behavior of the system when the pendulums are uncoupled, i.e., when $k=0$.
@@ -297,7 +292,6 @@ First we check the behavior of the system when the pendulums are uncoupled, i.e.
 
 :::
 :::{card}
-:columns: 5
 
 
 Here `vars` is used to plot two components as functions of time.

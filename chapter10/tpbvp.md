@@ -112,7 +112,6 @@ We can solve the TPBVP {eq}`tpbvp` by recasting the problem as a first-order sys
 :::::{grid} 1 1 2 2
 
 ::::{grid-item}
-:columns: 5
 
 
 As a system, the MEMS problem from {numref}`Example {number} <example-tpbvp-mems>` uses $y_1=w$, $y_2=w'$ to obtain

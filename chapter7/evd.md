@@ -366,7 +366,6 @@ We confirm that the matrix $\mathbf{A}$ is normal by checking that $\kappa(\math
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 Now we perturb $\mathbf{A}$ and measure the effect on the eigenvalues. The Bauer–Fike theorem uses absolute differences, not relative ones.
@@ -374,7 +373,6 @@ Now we perturb $\mathbf{A}$ and measure the effect on the eigenvalues. The Bauer
 
 :::
 :::{card}
-:columns: 5
 
 
 Since the ordering of eigenvalues can change, we look at all pairwise differences and take the minima.

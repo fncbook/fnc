@@ -95,7 +95,6 @@ n = length(t)-1;
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 Let's apply the definition of the cardinal Lagrange polynomial for $k=2$. First we define a polynomial $q$ that is zero at all the nodes except $i=k$. Then $\ell_2$ is found by normalizing $q$ by $q(t_k)$.
@@ -103,7 +102,6 @@ Let's apply the definition of the cardinal Lagrange polynomial for $k=2$. First 
 
 :::
 :::{card}
-:columns: 5
 
 
 Character ℓ is typed as `\ell`<kbd>Tab</kbd>.
@@ -242,7 +240,6 @@ n = length(t)-1;
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 Here $n=4$ and $f^{(5)}(\xi) = 4!/\xi^5$. For $\xi\in[1,3]$ we can say that $|f^{(5)}(\xi)| \le 4!$. Hence 
@@ -252,7 +249,6 @@ $$ |f(x)-p(x)| \le \frac{1}{5} \left| \Phi(x) \right|.$$
 
 :::
 :::{card}
-:columns: 5
 
 
 Character Φ is typed as `\Phi`<kbd>Tab</kbd>. (Note the capitalization.)

@@ -97,7 +97,6 @@ The `DifferentialEquations` package offers solvers for IVPs. Let's use it to def
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 Because many practical problems come with parameters that are fixed within an instance but varied from one instance to another, the syntax for IVPs includes a input argument `p` that stays fixed throughout the solution. Here we don't want to use that argument, but it must be in the definition for the solver to work.
@@ -105,7 +104,6 @@ Because many practical problems come with parameters that are fixed within an in
 
 :::
 :::{card}
-:columns: 5
 
 
 To create an initial-value problem for $u(t)$, you must supply a function that computes $u'$, an initial value for $u$, and the endpoints of the interval for $t$. The $t$ interval should be defined as `(a,b)`, where at least one of the values is a float.

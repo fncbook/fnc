@@ -226,7 +226,6 @@ Here is the sequence of errors.
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 Because the error reaches machine epsilon so rapidly, we're going to use extended precision to allow us to take a few more iterations. We'll take the last iteration as the most accurate root estimate.
@@ -234,7 +233,6 @@ Because the error reaches machine epsilon so rapidly, we're going to use extende
 
 :::
 :::{card}
-:columns: 5
 
 
 A `BigFloat` uses 256 bits of precision, rather than 53 in `Float64`. But arithmetic is done by software emulation and is much slower.
@@ -351,7 +349,6 @@ The `break` statement, seen here in line 25, causes an immediate exit from the i
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 Suppose we want to evaluate the inverse of the function $h(x)=e^x-x$. This means solving $y=e^x-x$ for $x$ when $y$ is given, which has no elementary form. If a value of $y$ is given numerically, though, we simply have a rootfinding problem for $f(x)=e^x-x-y$.
@@ -359,7 +356,6 @@ Suppose we want to evaluate the inverse of the function $h(x)=e^x-x$. This means
 
 :::
 :::{card}
-:columns: 5
 
 
 The `enumerate` function produces a pair of values for each iteration: a positional index and the corresponding contents. 

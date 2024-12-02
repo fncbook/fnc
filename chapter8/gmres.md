@@ -222,7 +222,6 @@ spy(A,color=:blues)
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 We compare unrestarted GMRES with three different thresholds for restarting. Here we are using `gmres` from the `IterativeSolvers` package, since our simple implementation does not offer restarting.
@@ -230,7 +229,6 @@ We compare unrestarted GMRES with three different thresholds for restarting. Her
 
 :::
 :::{card}
-:columns: 5
 
 
 The syntax `f(x;foo)` is shorthand for `f(x,foo=foo)`.

@@ -139,7 +139,6 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 5
 
 
 We will get a cardinal function without using an explicit formula, just by passing data that is 1 at one node and 0 at the others.
@@ -148,7 +147,6 @@ We will get a cardinal function without using an explicit formula, just by passi
 :::
 
 :::{card}
-:columns: 7
 
 
 The operator `÷`, typed as `\div` then <kbd>Tab</kbd>, returns the quotient without remainder of two integers.

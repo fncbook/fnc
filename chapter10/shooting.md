@@ -36,7 +36,6 @@ This is the idea behind the **shooting method**. Imagine adjusting your aiming p
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 Let's first examine the shooting approach for the TPBVP from {numref}`Example {number} <example-tpbvp-mems>` with $\lambda=0.6$. 
@@ -45,7 +44,6 @@ Let's first examine the shooting approach for the TPBVP from {numref}`Example {n
 :::
 
 :::{card}
-:columns: 5
 
 
 The character `ϕ` is typed as `\phi`<kbd>Tab</kbd>. 

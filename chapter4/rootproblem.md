@@ -63,7 +63,6 @@ plot(J3,0,20,title="Bessel function",
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 From the graph we see roots near 6, 10, 13, 16, and 19. We use `nlsolve` from the `NLsolve` package to find these roots accurately. It uses vector variables, so we have to code accordingly.
@@ -71,7 +70,6 @@ From the graph we see roots near 6, 10, 13, 16, and 19. We use `nlsolve` from th
 
 :::
 :::{card}
-:columns: 5
 
 
 Type `\omega` followed by <kbd>Tab</kbd> to get the character `ω`.
@@ -165,7 +163,6 @@ f  = x -> (x-1)*(x-2);
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 At the root $r=1$, we have $f'(r)=-1$. If the values of $f$ were perturbed at every point by a small amount of noise, we can imagine finding the root of the function drawn with a thick ribbon, giving a range of potential roots.
@@ -173,7 +170,6 @@ At the root $r=1$, we have $f'(r)=-1$. If the values of $f$ were perturbed at ev
 
 :::
 :::{card}
-:columns: 5
 
 
 The syntax `interval...` is called **splatting** and means to insert all the individual elements of `interval` as a sequence.

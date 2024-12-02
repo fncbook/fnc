@@ -237,7 +237,6 @@ a = 0;  b = 2;
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 In lieu of the exact value, we use the `QuadGK` package to find an accurate result.
@@ -245,7 +244,6 @@ In lieu of the exact value, we use the `QuadGK` package to find an accurate resu
 
 :::
 :::{card}
-:columns: 5
 
 
 If a function has multiple return values, you can use an underscore `_` to indicate a  return value you want to ignore.
@@ -449,7 +447,6 @@ R = (16S[2] - S[1]) / 15
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 We can make a triangular table of the errors:
@@ -457,7 +454,6 @@ We can make a triangular table of the errors:
 
 :::
 :::{card}
-:columns: 5
 
 
 The value `nothing` equals nothing except `nothing`.

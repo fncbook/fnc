@@ -53,7 +53,6 @@ Here we load the adjacency matrix of a graph with 2790 nodes. Each node is a web
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 We may define the density of $\mathbf{A}$ as the number of nonzeros divided by the total number of entries.
@@ -61,7 +60,6 @@ We may define the density of $\mathbf{A}$ as the number of nonzeros divided by t
 
 :::
 :::{card}
-:columns: 5
 
 
 Use `nnz` to count the number of nonzeros in a sparse matrix.
@@ -182,7 +180,6 @@ Matrix(A[1:7,1:7])
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 Without pivoting, the LU factors have the same lower and upper bandwidth as the orignal matrix.
@@ -190,7 +187,6 @@ Without pivoting, the LU factors have the same lower and upper bandwidth as the 
 
 :::
 :::{card}
-:columns: 5
 
 
 The `sparse` function converts any matrix to sparse form. But it's usually better to construct a sparse matrix directly, as the standard form might not fit in memory.

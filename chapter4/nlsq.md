@@ -92,7 +92,6 @@ p = [1,1];
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 The function $\mathbf{g}(\mathbf{x}) - \mathbf{g}(\mathbf{p})$ obviously has a zero residual at $\mathbf{p}$. We'll make different perturbations of that function in order to create nonzero residuals.
@@ -100,7 +99,6 @@ The function $\mathbf{g}(\mathbf{x}) - \mathbf{g}(\mathbf{p})$ obviously has a z
 
 :::
 :::{card}
-:columns: 5
 
 
 `@sprintf` is a way to format numerical values as strings, patterned after the C function `printf`. 
@@ -190,7 +188,6 @@ plot!(s,ŵ,l=:dash,label="original data")
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 The idea is to pretend that we know nothing of the origins of this data and use nonlinear least squares to find the parameters in the theoretical model function $v(s)$. In {eq}`nlsq-misfit`, the $s$ variable plays the role of $t$, and $v$ plays the role of $g$.
@@ -198,7 +195,6 @@ The idea is to pretend that we know nothing of the origins of this data and use 
 
 :::
 :::{card}
-:columns: 5
 
 
 Putting comma-separated values on the left of an assignment will **destructure** the right-hand side, drawing individual assignments from entries of a vector, for example.

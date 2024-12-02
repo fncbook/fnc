@@ -118,7 +118,6 @@ plotlyjs();  # use better 3D renderer
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 We can make a nice plot of the function by first choosing a much finer grid. However, the contour and surface plotting functions expect the *transpose* of mtx($f$).
@@ -126,7 +125,6 @@ We can make a nice plot of the function by first choosing a much finer grid. How
 
 :::
 :::{card}
-:columns: 5
 
 
 To emphasize departures from a zero level, use a colormap such as `redsblues`, and use `clims` to set balanced color differences.

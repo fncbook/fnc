@@ -195,7 +195,6 @@ g₂(u,du) = u + 2;
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 The last ingredient is an initial estimate of the solution. Here we choose $n=100$ and a linear function between the endpoint values. 
 
@@ -203,7 +202,6 @@ The last ingredient is an initial estimate of the solution. Here we choose $n=10
 :::
 
 :::{card}
-:columns: 5
 
 The `collect` function turns a range object into a true vector.
 

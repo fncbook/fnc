@@ -229,7 +229,6 @@ The output of {numref}`Function {number} <function-newtonsys>` is a vector of ve
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
-:columns: 7
 
 
 A system of nonlinear equations is defined by its residual and Jacobian.
@@ -237,7 +236,6 @@ A system of nonlinear equations is defined by its residual and Jacobian.
 
 :::
 :::{card}
-:columns: 5
 
 
 Be careful when coding a Jacobian all in one statement. Spaces separate columns, so `x[3]-1` is not the same as `x[3] - 1`.

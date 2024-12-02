@@ -22,7 +22,6 @@ Recall the grade-school approximation to the number $\pi$.
 ::::{grid} 1 1 2 2
 Not all the digits displayed for `p` are the same as those of $\pi$. 
 :::{card}
-:columns: 7
 
 The value of `pi` is predefined and equivalent to `π`, which is entered by typing `\pi` followed immediately by the <kbd>Tab</kbd> key.
 :::
@@ -39,7 +38,6 @@ The value of `pi` is predefined and equivalent to `π`, which is entered by typi
 
 The absolute and relative accuracies of the approximation are as follows.
 :::{card}
-:columns: 7
 
 A dollar sign `$` in a string substitutes (or *interpolates*) the named variable or expression into the string.
 
@@ -55,7 +53,6 @@ println("relative accuracy = $(acc/π)")
 ::::{grid} 1 1 2 2
 Here we calculate the number of accurate digits in `p`.
 :::{card}
-:columns: 7
 
 The `log` function is for the natural log. For other common bases, use `log10` or `log2`.
 
@@ -91,7 +88,6 @@ The first bit determines the sign of the number:
 
 :::
 :::{card}
-:columns: 5
 
 Square brackets concatenate the contained values into vectors.
 
@@ -313,7 +309,6 @@ For convenience, this package also imports many other packages used throughout t
 
 :::
 :::{card}
-:columns: 5
 
 If you are not sure where a particular function is defined, you can run `methods` on the function name to find all its definitions.
 
@@ -336,7 +331,6 @@ In order to avoid clashes between similarly named functions, Julia has boxed all
 
 :::
 :::{card}
-:columns: 5
 
 You must use the module name when a package is loaded by `import`, but when loaded via `using`, some functions may be available with no prefix.
 
@@ -461,7 +455,6 @@ r̃ = sort(roots(p))   # type r\tilde and then press Tab
 Here are the relative errors in each of the computed roots. 
 
 :::{card}
-:columns: 7
 
 The `@.` notation at the start means to do the given operations on each element of the given vectors.
 
