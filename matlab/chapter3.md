@@ -235,18 +235,17 @@ QTQ = Q' * Q
 norm(QTQ - eye(m))
 ```
 
-With a second input argument given to `qr`, the thin form is returned.
+With a second input argument given to `qr`, the thin form is returned. (This is usually the one we want in practice.)
 
 ```{code-cell}
-[Q,R] = qr(A, 0);
-szQ = size(Q), szR = size(R)
+[Q_hat, R_hat] = qr(A, 0);
+szQ_hat = size(Q_hat), szR_hat = size(R_hat)
 ```
 
-
-Now $\mathbf{Q}$ cannot be an orthogonal matrix, because it is not square, but it is still ONC.
+Now $\hat{\mathbf{Q}}$ cannot be an orthogonal matrix, because it is not square, but it is still ONC. Mathematically, $\hat{\mathbf{Q}}^T \hat{\mathbf{Q}}$ is a $4\times 4$ identity matrix.
 
 ```{code-cell}
-Q' * Q - eye(n)
+Q_hat' * Q_hat - eye(n)
 ```
 ``````
 
@@ -291,7 +290,7 @@ A = A(:, 1:4);
 [m, n] = size(A)
 ```
 
-```{index} Julia; normalize, ! Julia; I
+```{index} ! MATLAB; eye
 ```
 
 Our first step is to introduce zeros below the diagonal in column 1 by using {eq}`hhvector` and {eq}`hhreflect`. 

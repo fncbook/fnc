@@ -1,7 +1,7 @@
 from scipy import *
 from scipy.linalg import norm, lstsq
-from numpy import finfo, double
-eps = finfo(double).eps 
+from numpy import finfo
+eps = finfo(float).eps 
 import warnings
 
 def newton(f,dfdx,x1):

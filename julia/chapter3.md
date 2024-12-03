@@ -293,6 +293,7 @@ observed_error = norm(FNC.lsqrfact(A,b) - x) / norm(x);
 ```
 ``````
 
+<!-- SECTION 4 -->
 (demo-house-qr-julia)=
 ``````{dropdown} Householder QR factorization
 
