@@ -1,33 +1,32 @@
-import numpy as np
-
+from numpy import *
 def forwardsub(L,b):
-	"""
- 	forwardsub(L,b)
+    """
+     forwardsub(L,b)
 
-	Solve the lower-triangular linear system with matrix L and right-hand side
-	vector b.
-	"""
-	n = len(b)
-	x = np.zeros(n)
-	for i in range(n):
-		s = L[i,:i] @ x[:i]
-		x[i] = ( b[i] - s ) / L[i, i]
-	return x
+    Solve the lower-triangular linear system with matrix L and right-hand side
+    vector b.
+    """
+    n = len(b)
+    x = np.zeros(n)
+    for i in range(n):
+        s = L[i,:i] @ x[:i]
+        x[i] = ( b[i] - s ) / L[i, i]
+    return x
 
 
 def backsub(U,b):
-	"""
-	backsub(U,b)
+    """
+    backsub(U,b)
 
-	Solve the upper-triangular linear system with matrix U and right-hand side
-	vector b.
-	"""
-	n = len(b)
-	x = np.zeros(n)
-	for i in range(n-1, -1, -1):
-		s = U[i, i+1:] @ x[i+1:]
-		x[i] = ( b[i] - s ) / U[i, i]
-	return x
+    Solve the upper-triangular linear system with matrix U and right-hand side
+    vector b.
+    """
+    n = len(b)
+    x = np.zeros(n)
+    for i in range(n-1, -1, -1):
+        s = U[i, i+1:] @ x[i+1:]
+        x[i] = ( b[i] - s ) / U[i, i]
+    return x
 
 def lufact(A):
     """
@@ -51,11 +50,11 @@ def lufact(A):
 
 def plufact(A):
     """
-    	plufact(A)
+        plufact(A)
 
-	Compute the PLU factorization of square matrix `A`, returning the
-	triangular factors and a row permutation vector.
-	"""
+    Compute the PLU factorization of square matrix `A`, returning the
+    triangular factors and a row permutation vector.
+    """
     n = A.shape[0]
     L = np.zeros((n, n))
     U = np.zeros((n, n))

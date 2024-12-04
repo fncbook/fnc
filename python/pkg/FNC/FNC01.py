@@ -8,5 +8,5 @@ def horner(c,x):
     n = len(c)
     y = c[0]
     for k in range(1, n):
-        y = x*y + c[k]   
+        y = x * y + c[k]   
     return y
