@@ -1,6 +1,7 @@
 from scipy.linalg import cholesky
 from numpy.linalg import qr, norm
-import numpy as np
+from numpy import *
+eps = finfo(float).eps
 from .FNC02 import forwardsub, backsub
 
 def lsnormal(A,b):
@@ -36,17 +37,17 @@ def qrfact(A):
     QR factorization by Householder reflections. Returns Q and R.
     """
     m, n = A.shape
-    Qt = np.eye(m)
-    R = np.copy(A)
+    Qt = eye(m)
+    R = copy(A)
     for k in range(n):
         z = R[k:, k]
-        w = np.hstack((-np.sign(z[0]) * norm(z) - z[0], -z[1:]))
+        w = hstack((-sign(z[0]) * norm(z) - z[0], -z[1:]))
         nrmw = norm(w)
-        if nrmw < np.finfo(float).eps: continue    # skip this iteration
+        if nrmw < eps: continue    # skip this iteration
         v = w / nrmw
         # Apply the reflection to each relevant column of R and Q
         for j in range(k, n):
-            R[k:, j] -= 2 * np.dot(v, R[k: ,j]) * v
+            R[k:, j] -= 2 * dot(v, R[k:, j]) * v
         for j in range(m):
-            Qt[k:, j] -= 2 * np.dot(v, Qt[k: ,j]) * v 
-    return Qt.T, np.triu(R)
+            Qt[k:, j] -= 2 * dot(v, Qt[k:, j]) * v 
+    return Qt.T, triu(R)

@@ -1,8 +1,5 @@
-from scipy import *
 from numpy import *
-from scipy.linalg import *
-from numpy.linalg import *
-
+from numpy.linalg import solve
 
 def hatfun(x, t, k):
     """
@@ -126,23 +123,20 @@ def fdweights(t, m):
             c = 1
         else:  # generic recursion
             if k < r:
-                c = (t[r] * weight(t, m, r - 1, k) - m * weight(t, m - 1, r - 1, k)) / (
-                    t[r] - t[k]
-                )
+                c = t[r] * weight(t, m, r - 1, k) - m * weight(t, m - 1, r - 1, k)
+                c = c / (t[r] - t[k])
             else:
                 if r <= 1:
                     numer = 1.0
                 else:
-                    numer = prod(t[r - 1] - t[: r - 1])
+                    numer = prod(t[r-1] - t[:r-1])
                 if r <= 0:
                     denom = 1.0
                 else:
                     denom = prod(t[r] - t[:r])
                 beta = numer / denom
-                c = beta * (
-                    m * weight(t, m - 1, r - 1, r - 1)
-                    - t[r - 1] * weight(t, m, r - 1, r - 1)
-                )
+                c = weight(t, m - 1, r - 1, r - 1) - t[r-1] * weight(t, m, r - 1, r - 1)
+                c *= beta
         return c
 
     r = len(t) - 1
@@ -184,7 +178,7 @@ def intadapt(f, a, b, tol):
 
         # Compute the trapezoid values iteratively.
         h = b - a
-        T = array([0.0, 0.0, 0.0])
+        T = zeros(3)
         T[0] = h * (fa + fb) / 2
         T[1] = T[0] / 2 + (h / 2) * fm
         T[2] = T[1] / 2 + (h / 4) * (fl + fr)
