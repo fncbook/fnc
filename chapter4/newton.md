@@ -1,99 +1,30 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-nonlineqn-newton)=
 # Newton's method
 
 Newton's method is the cornerstone of rootfinding. We introduce the key idea with an example in {numref}`Demo %s <demo-newton-line>`.
 
 (demo-newton-line)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-newton-line-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-newton-line-matlab
+:::
+```` 
 
-
-
-
-Suppose we want to find a root of the function
-
-```{code-cell}
-f = x -> x*exp(x) - 2
-
-plot(f,0,1.5,label="function",
-    grid=:y,ylim=[-2,4],xlabel=L"x",ylabel=L"y",legend=:topleft)
-```
-
-From the graph, it is clear that there is a root near $x=1$. So we call that our initial guess, $x_1$.
-
-```{code-cell}
-x₁ = 1
-y₁ = f(x₁)
-scatter!([x₁],[y₁],label="initial point")
-```
-
-Next, we can compute the tangent line at the point $\bigl(x_1,f(x_1)\bigr)$, using the derivative.
-
-```{code-cell}
-dfdx = x -> exp(x)*(x+1)
-m₁ = dfdx(x₁)
-tangent = x -> y₁ + m₁*(x-x₁)
-
-plot!(tangent,0,1.5,l=:dash,label="tangent line",
-    title="Tangent line approximation")
-```
-
-In lieu of finding the root of $f$ itself, we settle for finding the root of the tangent line approximation, which is trivial. Call this $x_2$, our next approximation to the root.
-
-```{code-cell}
-@show x₂ = x₁ - y₁/m₁
-scatter!([x₂],[0],label="tangent root",title="First iteration")
-```
-
-```{code-cell}
-y₂ = f(x₂)
-```
-
-The residual (i.e., value of $f$) is smaller than before, but not zero. So we repeat the process with a new tangent line based on the latest point on the curve.
-
-```{code-cell}
-plot(f,0.82,0.87,label="function",legend=:topleft,
-    xlabel=L"x",ylabel=L"y",title="Second iteration")
-
-scatter!([x₂],[y₂],label="starting point")
-
-m₂ = dfdx(x₂)
-tangent = x -> y₂ + m₂*(x-x₂)
-plot!(tangent,0.82,0.87,l=:dash,label="tangent line")
-
-@show x₃ = x₂ - y₂/m₂
-scatter!([x₃],[0],label="tangent root")
-```
-
-```{code-cell}
-y₃ = f(x₃)
-```
-
-Judging by the residual, we appear to be getting closer to the true root each time.
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-newton-line-python
+:::
+```` 
+`````
+::::
 
 Using general notation, if we have a root approximation $x_k$, we can construct a **linear model** of $f(x)$ using the classic formula for the tangent line of a differentiable function,
 
@@ -187,79 +118,28 @@ Recall that linear convergence is identifiable by trending toward a straight lin
 ```
 
 (demo-newton-converge)=
-```{prf:example}
-```
-
-
-
-
-
-We again look at finding a solution of $x e^x=2$ near $x=1$. To apply Newton's method, we need to calculate values of both the residual function $f$ and its derivative.
-
-```{code-cell}
-f = x -> x*exp(x) - 2;
-dfdx = x -> exp(x)*(x+1);
-```
-
-We don't know the exact root, so we use `nlsolve` to determine a proxy for it.
-
-```{code-cell}
-r = nlsolve(x -> f(x[1]),[1.]).zero
-```
-
-We use $x_1=1$ as a starting guess and apply the iteration in a loop, storing the sequence of iterates in a vector.
-
-```{code-cell}
-x = [1;zeros(4)]
-for k = 1:4
-    x[k+1] = x[k] - f(x[k]) / dfdx(x[k])
-end
-x
-```
-
-Here is the sequence of errors.
-
-```{code-cell}
-ϵ = @. x - r
-```
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-Because the error reaches machine epsilon so rapidly, we're going to use extended precision to allow us to take a few more iterations. We'll take the last iteration as the most accurate root estimate.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-newton-converge-julia
 :::
-:::{card}
+```` 
 
-
-A `BigFloat` uses 256 bits of precision, rather than 53 in `Float64`. But arithmetic is done by software emulation and is much slower.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-newton-converge-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-newton-converge-python
+:::
+```` 
+`````
 ::::
 
-```{code-cell}
-x = [BigFloat(1);zeros(7)]
-for k = 1:7
-    x[k+1] = x[k] - f(x[k]) / dfdx(x[k])
-end
-r = x[end]
-```
-
-```{code-cell}
-ϵ = @. Float64(x[1:end-1] - r)
-```
-
-The exponents in the scientific notation definitely suggest a squaring sequence. We can check the evolution of the ratio in {eq}`quadratictest`. 
-
-```{code-cell}
-logerr = @. log(abs(ϵ))
-[ logerr[i+1]/logerr[i] for i in 1:length(logerr)-1 ]
-```
-
-The clear convergence to 2 above constitutes good evidence of quadratic convergence. 
 
 
 
@@ -286,49 +166,28 @@ Our implementation of Newton's iteration is given in {numref}`Function {number} 
 ```
 
 (function-newton)=
-````{prf:function} newton
-**Newton's method for a scalar rootfinding problem**
+``````{prf:algorithm} newton
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-newton-julia
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    newton(f,dfdx,x₁[;maxiter,ftol,xtol])
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-newton-matlab
+:::
+```` 
 
-Use Newton's method to find a root of `f` starting from `x₁`, where
-`dfdx` is the derivative of `f`. Returns a vector of root estimates.
-
-The optional keyword parameters set the maximum number of iterations
-and the stopping tolerance for values of `f` and changes in `x`.
-"""
-function newton(f,dfdx,x₁;maxiter=40,ftol=100*eps(),xtol=100*eps())
-    x = [float(x₁)]
-    y = f(x₁)
-    Δx = Inf   # for initial pass below
-    k = 1
-
-    while (abs(Δx) > xtol) && (abs(y) > ftol)
-        dydx = dfdx(x[k])
-        Δx = -y/dydx            # Newton step
-        push!(x,x[k]+Δx)        # append new estimate
-
-        k += 1
-        y = f(x[k])
-        if k==maxiter
-            @warn "Maximum number of iterations reached."
-            break   # exit loop
-        end
-    end
-    return x
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-newton-python
+:::
 ````
+`````
+``````
 
-```{admonition} About the code
-:class: dropdown
-{numref}`Function {number} <function-newton>` accepts *keyword arguments*. In the function declaration, these follow the semicolon, and when the function is called, they may be supplied as `keyword=value` in the argument list. Here, these arguments are also given default values by the assignments within the declaration. This arrangement is useful when there are multiple optional arguments, because the ordering of them doesn't matter.
-
-The `break` statement, seen here in line 25, causes an immediate exit from the innermost loop in which it is called. It is often used as a safety valve to escape an iteration that may not be able to terminate otherwise.
-```
 
 ```{index} backward error, residual
 ```
@@ -336,52 +195,27 @@ The `break` statement, seen here in line 25, causes an immediate exit from the i
 {numref}`Function {number} <function-newton>` also deals with a thorny practical issue: how to stop the iteration. It adopts a three-part criterion. First, it monitors the difference between successive root estimates, $|x_k-x_{k-1}|$, which is used as a stand-in for the unknown error $|x_k-r|$. In addition, it monitors the residual $|f(x_k)|$, which is equivalent to the backward error and more realistic to control in badly conditioned problems (see {numref}`section-nonlineqn-rootproblem`). If either of these quantities is considered to be sufficiently small, the iteration ends. Finally, we need to protect against the possibility of a nonconvergent iteration, so the procedure terminates with a warning if a maximum number of iterations is exceeded.
 
 (demo-newton-usage)=
-```{prf:example}
-```
-
-
-
-
-
-```{index} ! Julia; enumerate
-```
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-Suppose we want to evaluate the inverse of the function $h(x)=e^x-x$. This means solving $y=e^x-x$ for $x$ when $y$ is given, which has no elementary form. If a value of $y$ is given numerically, though, we simply have a rootfinding problem for $f(x)=e^x-x-y$.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-newton-usage-julia
 :::
-:::{card}
+```` 
 
-
-The `enumerate` function produces a pair of values for each iteration: a positional index and the corresponding contents. 
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-newton-usage-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-newton-usage-python
+:::
+```` 
+`````
 ::::
-
-
-```{code-cell}
-g = x -> exp(x) - x
-dgdx = x -> exp(x) - 1
-y = range(g(0),g(2),length=200)
-x = zeros(length(y))
-for (i,y) in enumerate(y)
-    f = x -> g(x) - y
-    dfdx = x -> dgdx(x)
-    r = FNC.newton(f,dfdx,y)
-    x[i] = r[end]
-end
-
-plot(g,0,2,aspect_ratio=1,label=L"g(x)")
-plot!(y,x,label=L"g^{-1}(y)",title="Function and its inverse")
-plot!(x->x,0,maximum(y),label="",l=(:dash,1),color=:black)
-```
-
-
 
 
 ## Exercises

@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-nonlineqn-nlsq)=
 # Nonlinear least squares
 
@@ -72,58 +52,27 @@ In the multidimensional Newton method for a nonlinear system, we expect quadrati
 As always in least-squares problems, the residual $\mathbf{f}(\mathbf{x})$ will not necessarily be zero when $\|\mathbf{f}\|$ is minimized. Suppose that the minimum value of $\|\mathbf{f}\|$ is $R>0$. In general, we might observe quadratic-like convergence until the iterate $\|\mathbf{x}_k\|$ is within distance $R$ of a true minimizer, and linear convergence thereafter. When $R$ is not sufficiently small, the convergence can be quite slow.
 
 (demo-nlsq-converge)=
-```{prf:example}
-```
-
-
-
-
-
-We will observe the convergence of {numref}`Function {number} <function-levenberg>` for different levels of the minimum least-squares residual. We start with a function mapping from $\real^2$ into $\real^3$, and a point that will be near the optimum.
-
-```{code-cell}
-g(x) = [sin(x[1]+x[2]),cos(x[1]-x[2]),exp(x[1]-x[2])]
-p = [1,1];
-```
-
-```{index} ! Julia; @sprintf
-```
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-The function $\mathbf{g}(\mathbf{x}) - \mathbf{g}(\mathbf{p})$ obviously has a zero residual at $\mathbf{p}$. We'll make different perturbations of that function in order to create nonzero residuals.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-nlsq-converge-julia
 :::
-:::{card}
+```` 
 
-
-`@sprintf` is a way to format numerical values as strings, patterned after the C function `printf`. 
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-nlsq-converge-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-nlsq-converge-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-plt = plot(xlabel="iteration",yaxis=(:log10,"error"),
-    title="Convergence of Gauss–Newton")
-for R in [1e-3,1e-2,1e-1]
-    # Define the perturbed function.
-    f(x) = g(x) - g(p) + R*normalize([-1,1,-1])
-    x = FNC.levenberg(f,[0,0])
-    r = x[end]
-    err = [norm(x-r) for x in x[1:end-1]]
-    normres = norm(f(r))
-    plot!(err,label=@sprintf("R=%.2g",normres))
-end
-plt
-```
-
-In the least perturbed case, where the minimized residual is less than $10^{-3}$, the convergence is plausibly quadratic. At the next level up, the convergence starts similarly but suddenly stagnates for a long time. In the most perturbed case, the quadratic phase is nearly gone and the overall shape looks linear.
-
-
 
 
 ## Nonlinear data fitting
@@ -143,7 +92,7 @@ Suppose that $(t_i,y_i)$ for $i=1,\ldots,m$ are given points. We wish to model t
 We call $\mathbf{f}$ a **misfit** function. By minimizing $\bigl\| \mathbf{f}(\mathbf{c}) \bigr\|^2$, we get the best possible fit to the data. If an explicit Jacobian matrix is desired for the minimization, we can compute
 
 ```{math}
-\mathbf{f}\,'(\mathbf{x}) = \left[ \frac{\partial}{\partial x_j} g(t_i,\mathbf{x}) \right]_{\,i=1,\ldots,m;\,j=1,\ldots,n.}
+\mathbf{f}{\,}'(\mathbf{x}) = \left[ \frac{\partial}{\partial x_j} g(t_i,\mathbf{x}) \right]_{\,i=1,\ldots,m;\,j=1,\ldots,n.}
 ```
 
 The form of $g$ is up to the modeler. There may be compelling theoretical choices, or you may just be looking for enough algebraic power to express the data well. Naturally, in the special case where the dependence on $\mathbf{c}$ is linear, i.e.,
@@ -155,107 +104,27 @@ The form of $g$ is up to the modeler. There may be compelling theoretical choice
 then the misfit function is also linear in $\mathbf{c}$ and the fitting problem reduces to linear least squares.
 
 (demo-nlsq-MM)=
-```{prf:example}
-```
-
-
-
-
-
-Inhibited enzyme reactions often follow what are known as _Michaelis–Menten_ kinetics, in which a reaction rate $w$ follows a law of the form
-
-$$w(s) = \frac{V s}{K_m + s},$$ 
-
-where $s$ is the concentration of a substrate. The real values $V$ and $K_m$ are parameters that are free to fit to data. For this example, we cook up some artificial data with $V=2$ and $K_m=1/2$.
-
-
-```{code-cell}
-m = 25;
-s = range(0.05,6,length=m)
-ŵ = @. 2*s/(0.5+s)                      # exactly on the curve
-w = @. ŵ + 0.15*cos(2*exp(s/16)*s);     # smooth noise added
-```
-
-```{code-cell}
-scatter(s,w,label="noisy data",
-    xlabel="s",ylabel="v",leg=:bottomright)
-plot!(s,ŵ,l=:dash,label="original data")
-```
-
-```{index} ! Julia; destructuring
-```
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-The idea is to pretend that we know nothing of the origins of this data and use nonlinear least squares to find the parameters in the theoretical model function $v(s)$. In {eq}`nlsq-misfit`, the $s$ variable plays the role of $t$, and $v$ plays the role of $g$.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-nlsq-MM-julia
 :::
-:::{card}
+```` 
 
-
-Putting comma-separated values on the left of an assignment will **destructure** the right-hand side, drawing individual assignments from entries of a vector, for example.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-nlsq-MM-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-nlsq-MM-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-function misfit(x)
-    V,Km = x   # rename components for clarity
-    return @. V*s/(Km+s) - w
-end
-```
-
-In the Jacobian the derivatives are with respect to the parameters in $\mathbf{x}$.
-
-```{code-cell}
-function misfitjac(x)
-    V,Km = x   # rename components for clarity
-    J = zeros(m,2)
-    J[:,1] = @. s/(Km+s)              # dw/dV
-    J[:,2] = @. -V*s/(Km+s)^2         # dw/d_Km
-    return J
-end
-```
-
-```{code-cell}
-x₁ = [1, 0.75]
-x = FNC.newtonsys(misfit,misfitjac,x₁)
-
-@show V,Km = x[end]  # final values
-```
-
-The final values are reasonably close to the values $V=2$, $K_m=0.5$ that we used to generate the noise-free data. Graphically, the model looks close to the original data.
-
-```{code-cell}
-model = s -> V*s/(Km+s)
-plot!(model,0,6,label="nonlinear fit" )
-```
-
-For this particular model, we also have the option of linearizing the fit process. Rewrite the model as $1/w = (\alpha/s)+\beta$ for the new parameters $\alpha=K_m/V$ and $\beta=1/V$. This corresponds to the misfit function whose entries are 
-
-$$f_i([\alpha,\beta]) = \alpha \cdot \frac{1}{s_i} + \beta - \frac{1}{w_i}$$ 
-
-for $i=1,\ldots,m$. Although this misfit is nonlinear in $s$ and $w$, it's linear in the unknown parameters $\alpha$ and $\beta$. This lets us pose and solve it as a linear least-squares problem.
-
-```{code-cell}
-A = [ s.^(-1) s.^0 ]
-u = 1 ./ w
-α,β = A\u
-```
-
-The two fits are different because they do not optimize the same quantities.
-
-```{code-cell}
-linmodel = x -> 1 / (β + α/x)
-plot!(linmodel,0,6,label="linearized fit")
-```
-
-The truly nonlinear fit is clearly better in this case. It optimizes a residual for the original measured quantity rather than a transformed one we picked for algorithmic convenience.
-
 
 
 

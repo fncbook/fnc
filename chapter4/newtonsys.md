@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-nonlineqn-newtonsys)=
 # Newton for nonlinear systems
 
@@ -81,7 +61,7 @@ where $\mathbf{J}$ is called the **Jacobian matrix** of $\mathbf{f}$ and is defi
   \end{bmatrix} = \left[ \frac{\partial f_i}{\partial x_j} \right]_{\,i,j=1,\ldots,n}.
 ```
 
-Because of the Jacobian's role in {eq}`multitaylor`, we may write $\mathbf{J}(\mathbf{x})$ as $\mathbf{f}\,'(\mathbf{x})$. Like any derivative, it is a function of the independent variable $\mathbf{x}$.
+Because of the Jacobian's role in {eq}`multitaylor`, we may write $\mathbf{J}(\mathbf{x})$ as $\mathbf{f}{\,}'(\mathbf{x})$. Like any derivative, it is a function of the independent variable $\mathbf{x}$.
 
 (example-nonlinsystem)=
 
@@ -174,125 +154,55 @@ An extension of our series analysis of the scalar Newton's method shows that the
 An implementation of Newton's method for systems is given in {numref}`Function {number} <function-newtonsys>`. Other than computing the Newton step using backslash and taking vector magnitudes with `norm`, {numref}`Function {number} <function-newtonsys>` is virtually identical to the scalar version {numref}`Function {number} <function-newton>` presented earlier.
 
 (function-newtonsys)=
+``````{prf:algorithm} newtonsys
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-newtonsys-julia
+:::
+```` 
 
-```{prf:function} newtonsys
-**Newton's method for a system of equations**
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-newtonsys-matlab
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    newtonsys(f,jac,x₁[;maxiter,ftol,xtol])
-
-Use Newton's method to find a root of a system of equations,
-starting from `x₁`. The functions `f` and `jac` should return the
-residual vector and the Jacobian matrix, respectively. Returns the
-history of root estimates as a vector of vectors.
-
-The optional keyword parameters set the maximum number of iterations
-and the stopping tolerance for values of `f` and changes in `x`.
-
-"""
-function newtonsys(f,jac,x₁;maxiter=40,ftol=1000*eps(),xtol=1000*eps())
-    x = [float(x₁)]
-    y,J = f(x₁),jac(x₁)
-    Δx = Inf   # for initial pass below
-    k = 1
-
-    while (norm(Δx) > xtol) && (norm(y) > ftol)
-        Δx = -(J\y)             # Newton step
-        push!(x,x[k] + Δx)    # append to history
-        k += 1
-        y,J = f(x[k]),jac(x[k])
-
-        if k==maxiter
-            @warn "Maximum number of iterations reached."
-            break
-        end
-    end
-    return x
-end
-```
-
-````{admonition} About the code
-:class: dropdown
-The output of {numref}`Function {number} <function-newtonsys>` is a vector of vectors representing the entire history of root estimates. Since these should be in floating point, the starting value is converted with `float` before the iteration starts.
+````{tab-item} Python
+:sync: python
+:::{embed} #function-newtonsys-python
+:::
 ````
+`````
+``````
 
 (demo-newtonsys-converge)=
-```{prf:example}
-```
-
-
-
-
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-A system of nonlinear equations is defined by its residual and Jacobian.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-newtonsys-converge-julia
 :::
-:::{card}
+```` 
 
-
-Be careful when coding a Jacobian all in one statement. Spaces separate columns, so `x[3]-1` is not the same as `x[3] - 1`.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-newtonsys-converge-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-newtonsys-converge-python
+:::
+```` 
+`````
 ::::
-
-
-```{code-cell}
-function func(x)
-    [  exp(x[2]-x[1]) - 2,
-       x[1]*x[2] + x[3],
-       x[2]*x[3] + x[1]^2 - x[2]
-    ];
-end;
-   
-function jac(x)
-    [ 
-      -exp(x[2]-x[1])  exp(x[2]-x[1])   0
-       x[2]            x[1]             1
-       2*x[1]          x[3]-1           x[2]
-    ];
-end;
-```
-
-We will use a `BigFloat` starting value, and commensurately small stopping tolerances, in order to get a sequence long enough to measure convergence. 
-
-```{code-cell}
-x₁ = BigFloat.([0,0,0])
-ϵ = eps(BigFloat)
-x = FNC.newtonsys(func,jac,x₁,xtol=ϵ,ftol=ϵ);
-```
-
-Let's compute the residual of the last result in order to check the quality.
-
-```{code-cell}
-r = x[end]
-@show residual = norm(func(r));
-```
-
-We take the sequence of norms of errors, applying the log so that we can look at the exponents.
-
-```{code-cell}
-logerr = [ Float64( log(norm(r-x[k])) ) for k in 1:length(x)-1 ]
-[ logerr[k+1]/logerr[k] for k in 1:length(logerr)-1 ]
-```
-
-The ratio is neatly converging toward 2, which is expected for quadratic convergence.
-
-
-
-
 
 ## Exercises
 
 (problem-newtonsys-byhand)=
-1. ✍  Suppose that
+1. ✍ Suppose that
   
     ```{math}
     \mathbf{f}(\mathbf{x}) =

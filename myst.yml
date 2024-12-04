@@ -97,15 +97,15 @@ project:
         - file: chapter3/house.md
         - file: chapter3/next.md
     - file: chapter4/overview.md
-    #       children:
-    #         - file: chapter4/rootproblem.md
-    #         - file: chapter4/fixed-point.md
-    #         - file: chapter4/newton.md
-    #         - file: chapter4/secant.md
-    #         - file: chapter4/newtonsys.md
-    #         - file: chapter4/quasinewton.md
-    #         - file: chapter4/nlsq.md
-    #         - file: chapter4/next.md
+      children:
+        - file: chapter4/rootproblem.md
+        - file: chapter4/fixed-point.md
+        - file: chapter4/newton.md
+        - file: chapter4/secant.md
+        - file: chapter4/newtonsys.md
+        - file: chapter4/quasinewton.md
+        - file: chapter4/nlsq.md
+        - file: chapter4/next.md
     #     - file: chapter5/overview.md
     #       children:
     #         - file: chapter5/interpolation.md
@@ -198,6 +198,7 @@ project:
           - file: julia/chapter1.md
           - file: julia/chapter2.md
           - file: julia/chapter3.md
+          - file: julia/chapter4.md
       - title: MATLAB codes
         children:
           - file: matlab/chapter1.md

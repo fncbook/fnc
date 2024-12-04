@@ -1,22 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
 (section-nonlineqn-fixed-point)=
 # Fixed-point iteration
 
@@ -46,96 +27,27 @@ Given function $g$ and initial value $x_1$, define
 This is our first example of an iterative algorithm that never quite gets to the answer, even if we use exact numbers. The idea is to generate a sequence of values that one hopes will converge to the correct result, and stop when we are satisfied that we are close enough to the limit. 
 
 (demo-fp-spiral)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-fp-spiral-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-fp-spiral-matlab
+:::
+```` 
 
-
-
-
-Let's convert the roots of a quadratic polynomial $f(x)$ to a fixed point problem.
-
-```{code-cell}
-f = Polynomial([3.5,-4,1])
-r = roots(f)
-rmin,rmax = extrema(r)
-@show rmin,rmax;
-```
-
-We define $g(x)=x-f(x)$. 
-
-```{code-cell}
-g = x -> x - f(x)
-```
-
-Intersections of $y=g(x)$ with the line $y=x$ are fixed points of $g$ and thus roots of $f$. (Only one is shown in the chosen plot range.)
-
-```{code-cell}
-plt = plot([g x->x],2,3,l=2,label=[L"y=g(x)" L"y=x"],
-    xlabel=L"x",ylabel=L"y",aspect_ratio=1,
-    title="Finding a fixed point",legend=:bottomright)
-```
-
-If we evaluate $g(2.1)$, we get a value of almost 2.6, so this is not a fixed point.
-
-```{code-cell}
-x = 2.1;
-y = g(x)
-```
-
-However, $y=g(x)$ is considerably closer to the fixed point at around 2.7 than $x$ is. Suppose then that we adopt $y$ as our new $x$ value. Changing the $x$ coordinate in this way is the same as following a horizontal line over to the graph of $y=x$.
-
-```{code-cell}
-plot!([x,y],[y,y],arrow=true,color=3)
-```
-
-Now we can compute a new value for $y$. We leave $x$ alone here, so we travel along a vertical line to the graph of $g$.
-
-```{code-cell}
-x = y;  y = g(x)
-plot!([x,x],[x,y],arrow=true,color=4)
-```
-
-You see that we are in a position to repeat these steps as often as we like. Let's apply them a few times and see the result.
-
-```{code-cell}
-for k = 1:5
-    plot!([x,y],[y,y],color=3);  
-    x = y       # y becomes the new x
-    y = g(x)    # g(x) becomes the new y
-    plot!([x,x],[x,y],color=4)  
-end
-plt
-```
-
-The process spirals in beautifully toward the fixed point we seek. Our last estimate has almost 4 accurate digits.
-
-```{code-cell}
-abs(y-rmax)/rmax
-```
-
-Now let's try to find the other fixed point $\approx 1.29$ in the same way. We'll use 1.3 as a starting approximation.
-
-```{code-cell}
-plt = plot([g x->x],1,2,l=2,label=["y=g(x)" "y=x"],aspect_ratio=1,
-    xlabel=L"x",ylabel=L"y",title="Divergence",legend=:bottomright)
-
-x = 1.3; y = g(x);
-arrow = false
-for k = 1:5
-    plot!([x,y],[y,y],arrow=arrow,color=3)  
-    x = y       # y --> new x
-    y = g(x)    # g(x) --> new y
-    plot!([x,x],[x,y],arrow=arrow,color=4)
-    if k > 2; arrow = true; end
-end
-plt
-```
-
-This time, the iteration is pushing us _away from_ the correct answer.
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-fp-spiral-python
+:::
+```` 
+`````
+::::
 
 ## Series analysis
 
@@ -202,68 +114,27 @@ Linear convergence is marked by an approximate reduction of the error at each it
 ```
 
 (demo-fp-converge)=
-```{prf:example}
-```
-
-
-
-
-
-We revisit {numref}`Demo %s <demo-fp-spiral>` and investigate the observed convergence more closely. Recall that above we calculated $g'(p)\approx-0.42$ at the convergent fixed point.
-
-```{code-cell}
-p = Polynomial([3.5,-4,1])
-r = roots(p)
-rmin,rmax = extrema(r)
-@show rmin,rmax;
-```
-
-Here is the fixed point iteration. This time we keep track of the whole sequence of approximations.
-
-:::{index} Julia; push!
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-fp-converge-julia
 :::
+```` 
 
-```{code-cell}
-g = x -> x - p(x)
-x = [2.1] 
-for k = 1:12
-    push!(x,g(x[k]))
-end
-x
-```
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-fp-converge-matlab
+:::
+```` 
 
-It's illuminating to construct and plot the sequence of errors.
-
-```{code-cell}
-err = @. abs(x - rmax)
-plot(0:12,err,m=:o,
-    xaxis=("iteration number"),yaxis=("error",:log10),
-    title="Convergence of fixed point iteration")
-```
-
-It's quite clear that the convergence quickly settles into a linear rate. We could estimate this rate by doing a least-squares fit to a straight line. Keep in mind that the values for small $k$ should be left out of the computation, as they don't represent the linear trend.
-
-```{code-cell}
-y = log.(err[5:12])
-p = Polynomials.fit(5:12,y,1)
-```
-
-We can exponentiate the slope to get the convergence constant $\sigma$.
-
-```{code-cell}
-σ = exp(p.coeffs[2])
-```
-
-The error should therefore decrease by a factor of $\sigma$ at each iteration. We can check this easily from the observed data.
-
-```{code-cell}
-[ err[i+1]/err[i] for i in 8:11 ]
-```
-
-The methods for finding $\sigma$ agree well.
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-fp-converge-python
+:::
+```` 
+`````
+::::
 
 ## Contraction maps
 

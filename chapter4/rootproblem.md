@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-nonlineqn-rootproblem)=
 # The rootfinding problem
 
@@ -38,13 +18,7 @@ The formulation $f(x)=0$ is general enough to solve any equation. If we are tryi
 Unlike the linear problems of the earlier chapters, the usual situation here is that the root cannot be produced in a finite number of operations, even in exact arithmetic. Instead, we seek a sequence of approximations that formally converge to the root, stopping when some member of the sequence seems to be good enough, in a sense we will clarify later. The `NLsolve` package for Julia has a function `nlsolve` for general-purpose rootfinding.
 
 (demo-rootproblem-bessel)=
-```{prf:example}
-```
-
-
-
-
-
+::::{prf:example}
 In the theory of vibrations of a circular drum, the displacement of the drumhead can be expressed in terms of pure harmonic modes, 
 
 $$J_m(\omega_{k,m} r) \cos(m\theta) \cos(c \omega_{k,m} t),$$
@@ -55,60 +29,26 @@ $$J_m(\omega_{k,m}) = 0,$$
 
 which states that the drumhead is clamped around the rim. Bessel functions often appear in physical problems featuring radial symmetry, and tabulating approximations to the zeros of Bessel functions occupied numerous mathematician-hours before computers were on the scene.
 
-```{code-cell}
-J3(x) = besselj(3,x)
-plot(J3,0,20,title="Bessel function",
-    xaxis=(L"x"),yaxis=(L"J_3(x)"),grid=:xy)
-```
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-From the graph we see roots near 6, 10, 13, 16, and 19. We use `nlsolve` from the `NLsolve` package to find these roots accurately. It uses vector variables, so we have to code accordingly.
-
-
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-rootproblem-bessel-julia
 :::
-:::{card}
+```` 
 
-
-Type `\omega` followed by <kbd>Tab</kbd> to get the character `ω`.
-
-The argument `ftol=1e-14` below is called a **keyword argument**. Here it sets a goal for the maximum value of $|f(x)|$.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-rootproblem-bessel-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-rootproblem-bessel-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-ω = []
-for guess = [6.,10.,13.,16.,19.]
-    s = nlsolve(x->besselj(3,x[1]),[guess],ftol=1e-14)
-    append!(ω,s.zero)
-end
-```
-
-```{code-cell}
-pretty_table([ω J3.(ω)], header=["root estimate","function value"])
-```
-
-```{code-cell}
-scatter!(ω,J3.(ω),title="Bessel function with roots")
-```
-
-If instead we seek values at which $J_3(x)=0.2$, then we must find roots of the function $J_3(x)-0.2$.
-
-```{code-cell}
-r = []
-for guess = [3.,6.,10.,13.]
-    f = x -> besselj(3,x[1])-0.2
-    s = nlsolve(f,[guess],ftol=1e-14)
-    append!(r,s.zero)
-end
-scatter!(r,J3.(r),title="Roots and other Bessel values")
-```
-
-
-
 
 ## Conditioning, error, and residual
 
@@ -144,71 +84,27 @@ Equivalently, {eq}`rootcondnum` is just the magnitude of the derivative of the i
 
 
 (demo-roots-cond)=
-```{prf:example}
-```
-
-
-
-
-
-Consider first the function
-
-```{code-cell}
-f  = x -> (x-1)*(x-2);
-```
-
-:::{index} ! Julia; splatting
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-roots-cond-julia
 :::
+```` 
 
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-At the root $r=1$, we have $f'(r)=-1$. If the values of $f$ were perturbed at every point by a small amount of noise, we can imagine finding the root of the function drawn with a thick ribbon, giving a range of potential roots.
-
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-roots-cond-matlab
 :::
-:::{card}
+```` 
 
-
-The syntax `interval...` is called **splatting** and means to insert all the individual elements of `interval` as a sequence.
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-roots-cond-python
 :::
+```` 
+`````
 ::::
-
-
-```{code-cell}
-interval = [0.8,1.2]
-
-plot(f,interval...,ribbon=0.03,aspect_ratio=1,
-    xlabel=L"x",yaxis=(L"f(x)",[-0.2,0.2]))
-
-scatter!([1],[0],title="Well-conditioned root")
-```
-
-The possible values for a perturbed root all lie within the interval where the ribbon intersects the $x$-axis. The width of that zone is about the same as the vertical thickness of the ribbon.
-
-By contrast, consider the function
-
-```{code-cell}
-f = x -> (x-1)*(x-1.01);
-```
-
-Now $f'(1)=-0.01$, and the graph of $f$ will be much shallower near $x=1$. Look at the effect this has on our thick rendering:
-
-```{code-cell}
-plot(f,interval...,ribbon=0.03,aspect_ratio=1,
-    xlabel=L"x",yaxis=(L"f(x)",[-0.2,0.2]))
-
-scatter!([1],[0],title="Poorly-conditioned root")
-```
-
-The vertical displacements in this picture are exactly the same as before. But the potential _horizontal_ displacement of the root is much wider. In fact, if we perturb the function entirely upward by the amount drawn here, the root disappears!
-
-
-
-
 
 ```{index} ! residual; of rootfinding
 ```
@@ -277,7 +173,7 @@ When $r$ is a nonsimple root, the condition number {eq}`rootcondnum` is effectiv
 5. ⌨ The most easily observed properties of the orbit of a celestial body around the sun are the period $\tau$ and the elliptical eccentricity $\epsilon$. (A circle has $\epsilon=0$.) From these, it is possible to find at any time $t$ the angle $\theta(t)$ made between the body's position and the major axis of the ellipse. This is done through
   
     ```{math}
-:label: kepler1
+    :label: kepler1
     \tan \frac{\theta}{2} = \sqrt{\frac{1+\epsilon}{1-\epsilon}}\,
     \tan \frac{\psi}{2},
     ```
@@ -285,7 +181,7 @@ When $r$ is a nonsimple root, the condition number {eq}`rootcondnum` is effectiv
     where the eccentric anomaly $\psi(t)$ satisfies Kepler's equation:
   
     ```{math}
-:label: kepler2
+    :label: kepler2
     \psi - \epsilon \sin \psi - \frac{2\pi t}{\tau} = 0.
     ```
 

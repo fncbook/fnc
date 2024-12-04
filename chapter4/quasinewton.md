@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-nonlineqn-quasinewton)=
 # Quasi-Newton methods
 
@@ -63,42 +43,27 @@ For reasons explained in Chapter 5, $\delta$ is usually chosen close to $\sqrt{\
 The finite-difference formula {eq}`jacobianfd` is implemented by {numref}`Function {number} <function-fdjac>`.
 
 (function-fdjac)=
-````{prf:function} fdjac
-**Finite-difference approximation of a Jacobian**
+``````{prf:algorithm} fdjac
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-fdjac-julia
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    fdjac(f,x₀[,y₀])
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-fdjac-matlab
+:::
+```` 
 
-Compute a finite-difference approximation of the Jacobian matrix for
-`f` at `x₀`, where `y₀`=`f(x₀)` may be given.
-"""
-function fdjac(f,x₀,y₀=f(x₀))
-    δ = sqrt(eps())*max(norm(x₀),1)   # FD step size
-    m,n = length(y₀),length(x₀)
-    if n==1
-        J = (f(x₀+δ) - y₀) / δ
-    else
-        J = zeros(m,n)
-        x = copy(x₀)
-        for j in 1:n
-            x[j] += δ
-            J[:,j] = (f(x) - y₀) / δ
-            x[j] -= δ
-        end
-    end
-    return J
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-fdjac-python
+:::
 ````
-
-::::{admonition} About the code
-:class: dropdown
-{numref}`Function {number} <function-fdjac>` is written to accept the case where $\mathbf{f}$ maps $n$ variables to $m$ values with $m\neq n$, in anticipation of {numref}`section-nonlineqn-nlsq`.
-
-Note that a default value is given for the third argument `y₀`, and it refers to earlier arguments in the list. The reason is that in some contexts, the caller of `fdjac` may have already computed `y₀` and can supply it without computational cost, while in other contexts, it must be computed fresh. The configuration here adapts to either situation.
-::::
+`````
+``````
 
 ## Broyden's update
 
@@ -207,7 +172,7 @@ Finding a root of $\mathbf{f}$ is equivalent to minimizing $\phi$. A calculation
 ```{index} steepest descent
 ```
 
-Hence if $\mathbf{A}_k=\mathbf{J}(\mathbf{x}_k)$, then $\mathbf{s}_k$ from {eq}`steepest` is in the opposite direction from the gradient vector. In vector calculus you learn that this direction is the one of most rapid decrease or **steepest descent**. A small enough step in this direction is guaranteed in all but pathological cases to decrease $\phi$, which is exactly what we want from a backup plan.
+Hence, if $\mathbf{A}_k=\mathbf{J}(\mathbf{x}_k)$, then $\mathbf{s}_k$ from {eq}`steepest` is in the opposite direction from the gradient vector. In vector calculus you learn that this direction is the one of most rapid decrease or **steepest descent**. A small enough step in this direction is guaranteed in all but pathological cases to decrease $\phi$, which is exactly what we want from a backup plan.
 
 In effect, the $\lambda$ parameter in {eq}`levenberg` allows a smooth transition between the pure Newton step, for which convergence is very rapid near a root, and a small step in the gradient descent direction, which guarantees progress for the iteration when we are far from a root. 
 
@@ -218,114 +183,52 @@ To a large extent, the incorporation of finite differences, Jacobian updates, an
 Each pass through the loop starts by using {eq}`levenberg` to propose a step $\mathbf{s}_k$. The function then asks whether using this step would decrease the value of $\|\mathbf{f}\|$ from its present value. If so, we accept the new root estimate, we decrease $\lambda$ in order to get more Newton-like (since things have gone well), and we apply the Broyden formula to get a cheap update of the Jacobian. If the proposed step is not successful, we increase $\lambda$ to get more gradient-like (since we just failed) and, if the current Jacobian was the result of a cheap update, use finite differences to reevaluate it.  
 
 (function-levenberg)=
-````{prf:function} levenberg
-**Quasi-Newton method for nonlinear systems**
+``````{prf:algorithm} levenberg
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-levenberg-julia
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    levenberg(f,x₁[;maxiter,ftol,xtol])
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-levenberg-matlab
+:::
+```` 
 
-Use Levenberg's quasi-Newton iteration to find a root of the system
-`f` starting from `x₁`. Returns the history of root estimates 
-as a vector of vectors.
-
-The optional keyword parameters set the maximum number of iterations
-and the stopping tolerance for values of `f` and changes in `x`.
-
-"""
-function levenberg(f,x₁;maxiter=40,ftol=1e-12,xtol=1e-12)
-    x = [float(x₁)]
-    yₖ = f(x₁)
-    k = 1;  s = Inf;
-    A = fdjac(f,x[k],yₖ)   # start with FD Jacobian
-    jac_is_new = true
-
-    λ = 10;
-    while (norm(s) > xtol) && (norm(yₖ) > ftol)
-        # Compute the proposed step.
-        B = A'*A + λ*I
-        z = A'*yₖ
-        s = -(B\z)
-        
-        x̂ = x[k] + s
-        ŷ = f(x̂)
-
-        # Do we accept the result?
-        if norm(ŷ) < norm(yₖ)    # accept
-            λ = λ/10   # get closer to Newton
-            # Broyden update of the Jacobian.
-            A += (ŷ-yₖ-A*s)*(s'/(s'*s))
-            jac_is_new = false
-            
-            push!(x,x̂)
-            yₖ = ŷ
-            k += 1
-        else                       # don't accept
-            # Get closer to gradient descent.
-            λ = 4λ
-            # Re-initialize the Jacobian if it's out of date.
-            if !jac_is_new
-                A = fdjac(f,x[k],yₖ)
-                jac_is_new = true
-            end
-        end
-
-        if k==maxiter
-            @warn "Maximum number of iterations reached."
-            break
-        end
-        
-    end
-    return x
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-levenberg-python
+:::
 ````
+`````
+``````
 
 In some cases our simple logic in {numref}`Function {number} <function-levenberg>` can make $\lambda$ oscillate between small and large values; several better but more complicated strategies for controlling $\lambda$ are known. In addition, the linear system {eq}`levenberg` is usually modified to get the well-known **Levenberg–Marquardt** algorithm, which does a superior job in some problems as $\lambda\to \infty$.
 
 (demo-quasi-levenberg)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-quasi-levenberg-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-quasi-levenberg-matlab
+:::
+```` 
 
-
-
-
-To solve a nonlinear system, we need to code only the function defining the system, and not its Jacobian.
-
-```{code-cell}
-function f(x)  
-    [
-      exp(x[2]-x[1]) - 2,
-      x[1]*x[2] + x[3],
-      x[2]*x[3] + x[1]^2 - x[2]
-    ]
-end;
-```
-
-In all other respects usage is the same as for the `newtonsys` function.
-
-```{code-cell}
-x₁ = [0.,0.,0.]   
-x = FNC.levenberg(f,x₁)
-```
-
-It's always a good idea to check the accuracy of the root, by measuring the residual (backward error).
-
-```{code-cell}
-r = x[end]
-println("backward error = $(norm(f(r)))")
-```
-
-Looking at the convergence in norm, we find a convergence rate between linear and quadratic, like with the secant method.
-
-```{code-cell}
-logerr = [ log( norm(x[k]-r) ) for k in 1:length(x)-1 ]
-[ logerr[k+1]/logerr[k] for k in 1:length(logerr)-1 ]
-```
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-quasi-levenberg-python
+:::
+```` 
+`````
+::::
 
 
 ## Exercises

@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-nonlineqn-secant)=
 # Interpolation-based methods
 
@@ -32,55 +12,27 @@ Let's call this the *principle of approximate approximation.*
 In the Newton context, the principle of approximate approximation begins with the observation that the use of $f'$ is linked to the construction of a linear approximation $q(x)$ equivalent to a tangent line. The root of $q(x)$ is used to define the next iterate in the sequence. We can avoid calculating the value of $f'$ by choosing a different linear approximation.
 
 (demo-secant-line)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-secant-line-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-secant-line-matlab
+:::
+```` 
 
-
-
-
-We return to finding a root of the equation $x e^x=2$.
-
-```{code-cell}
-f = x -> x*exp(x) - 2;
-
-plot(f,0.25,1.25,label="function",
-    xlabel=L"x",ylabel=L"y",legend=:topleft)
-```
-
-From the graph, it's clear that there is a root near $x=1$. To be more precise, there is a root in the interval $[0.5,1]$. So let us take the endpoints of that interval as _two_ initial approximations.
-
-```{code-cell}
-x₁ = 1;    y₁ = f(x₁);
-x₂ = 0.5;  y₂ = f(x₂);
-scatter!([x₁,x₂],[y₁,y₂],label="initial points",
-    title="Two initial values")
-```
-
-Instead of constructing the tangent line by evaluating the derivative, we can construct a linear model function by drawing the line between the two points $\bigl(x_1,f(x_1)\bigr)$ and $\bigl(x_2,f(x_2)\bigr)$. This is called a _secant line_.
-
-```{code-cell}
-m₂ = (y₂-y₁) / (x₂-x₁)
-secant = x -> y₂ + m₂*(x-x₂)
-plot!(secant,0.25,1.25,label="secant line",l=:dash,color=:black,
-    title="Secant line")
-```
-
-As before, the next root estimate in the iteration is the root of this linear model.
-
-```{code-cell}
-x₃ = x₂ - y₂/m₂
-@show y₃ = f(x₃)
-scatter!([x₃],[0],label="root of secant",title="First iteration")
-```
-
-For the next linear model, we use the line through the two most recent points. The next iterate is the root of that secant line, and so on.
-
-```{code-cell}
-m₃ = (y₃-y₂) / (x₃-x₂)
-x₄ = x₃ - y₃/m₃
-```
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-secant-line-python
+:::
+```` 
+`````
+::::
 
 
 
@@ -107,48 +59,27 @@ x_{k+1} = x_k - \frac{f(x_k)(x_k-x_{k-1})}{f(x_k)-f(x_{k-1})}, \quad k=2,3,\ldot
 Our implementation of the secant method is given in {numref}`Function {number} <function-secant>`.
 
 (function-secant)=
+``````{prf:algorithm} secant
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-secant-julia
+:::
+```` 
 
-```{prf:function} secant
-**Secant method for scalar rootfinding**
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-secant-matlab
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    secant(f,x₁,x₂[;maxiter,ftol,xtol])
-
-Use the secant method to find a root of `f` starting from `x₁` and
-`x₂`. Returns a vector of root estimates.
-
-The optional keyword parameters set the maximum number of iterations
-and the stopping tolerance for values of `f` and changes in `x`.
-"""
-function secant(f,x₁,x₂;maxiter=40,ftol=100*eps(),xtol=100*eps())
-    x = [float(x₁),float(x₂)]
-    y₁ = f(x₁)
-    Δx,y₂ = Inf,Inf   # for initial pass in the loop below
-    k = 2
-
-    while (abs(Δx) > xtol) && (abs(y₂) > ftol) 
-        y₂ = f(x[k])
-        Δx = -y₂ * (x[k]-x[k-1]) / (y₂-y₁)   # secant step
-        push!(x,x[k]+Δx)        # append new estimate
-
-        k += 1
-        y₁ = y₂    # current f-value becomes the old one next time
-        
-        if k==maxiter
-            @warn "Maximum number of iterations reached."
-            break   # exit loop
-        end
-    end
-    return x
-end
-```
-
-```{admonition} About the code
-:class: dropdown
-Because we want to observe the convergence of the method, {numref}`Function {number} <function-secant>` stores and returns the entire sequence of root estimates. However, only the most recent two are needed by the iterative formula. This is demonstrated by the use of `y₁` and `y₂` for the two most recent values of $f$.
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-secant-python
+:::
+````
+`````
+``````
 
 ## Convergence
 
@@ -210,42 +141,27 @@ Quadratic convergence is a particular case of superlinear convergence. Roughly s
 as $k\to\infty$.
 
 (demo-secant-converge)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-secant-converge-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-secant-converge-matlab
+:::
+```` 
 
-
-
-
-We check the convergence of the secant method from {numref}`Demo %s <demo-secant-line>`. Again we will use extended precision to get a longer sequence than double precision allows.
-
-```{code-cell}
-f = x -> x*exp(x) - 2
-x = FNC.secant(f,BigFloat(1),BigFloat(0.5),xtol=1e-80,ftol=1e-80);
-```
-
-We don't know the exact root, so we use the last value as a proxy.
-
-```{code-cell}
-r = x[end]
-```
-
-Here is the sequence of errors.
-
-```{code-cell}
-ϵ = @. Float64(r - x[1:end-1])
-```
-
-It's not easy to see the convergence rate by staring at these numbers. We can use {eq}`superlinear-rate` to try to expose the superlinear convergence rate.
-
-```{code-cell}
-[ log(abs(ϵ[k+1])) / log(abs(ϵ[k])) for k in 1:length(ϵ)-1 ]
-```
-
-As expected, this settles in at around 1.618.
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-secant-converge-python
+:::
+```` 
+`````
+::::
 
 
 In terms of the error as a function of the iteration number $k$, the secant method converges at a rate strictly between linear and quadratic, which is slower than Newton's method. But error versus iteration count may not be the best means of comparison.
@@ -278,95 +194,27 @@ If we interpolate through three points by a polynomial, we get a unique quadrati
 This leads to the idea of defining $q(y)$ as the quadratic interpolant to the points $(y_{k-2},x_{k-2})$, $(y_{k-1},x_{k-1})$, and $(y_k,x_k)$, where $y_i=f(x_i)$ for all $i$, and setting $x_{k+1}=q(0)$. The process defined in this way (given three initial estimates) is called **inverse quadratic interpolation**. Rather than deriving lengthy formulas for it here, we demonstrate how to perform inverse quadratic interpolation using `fit` to perform the interpolation step.
 
 (demo-secant-iqi)=
-```{prf:example}
-```
-
-
-
-
-
-Here we look for a root of $x+\cos(10x)$ that is close to 1.
-
-```{code-cell}
-f = x -> x + cos(10*x)
-interval = [0.5,1.5]
-
-plot(f,interval...,label="Function",legend=:bottomright,
-    grid=:y,ylim=[-.1,3],xlabel=L"x",ylabel=L"y")
-```
-
-We choose three values to get the iteration started.
-
-```{code-cell}
-x = [0.8,1.2,1]
-y = @. f(x)
-scatter!(x,y,label="initial points")
-```
-
-If we were using forward interpolation, we would ask for the polynomial interpolant of $y$ as a function of $x$. But that parabola has no real roots.
-
-```{code-cell}
-q = Polynomials.fit(x,y,2)      # interpolating polynomial
-plot!(x->q(x),interval...,l=:dash,label="interpolant")
-```
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-To do inverse interpolation, we swap the roles of $x$ and $y$ in the interpolation.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-secant-iqi-julia
 :::
-:::{card}
+```` 
 
-
-By giving two functions in the plot call, we get the parametric plot $(q(y),y)$ as a function of $y$.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-secant-iqi-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-secant-iqi-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-plot(f,interval...,label="Function",
-    legend=:bottomright,grid=:y,xlabel=L"x",ylabel=L"y")
-scatter!(x,y,label="initial points")
-
-q = Polynomials.fit(y,x,2)       # interpolating polynomial
-plot!(y->q(y),y->y,-.1,2.6,l=:dash,label="inverse interpolant")
-```
-
-We seek the value of $x$ that makes $y$ zero. This means evaluating $q$ at zero.
-
-```{code-cell}
-q(0)
-```
-
-Let's restart the process with `BigFloat` numbers to get a convergent sequence.
-
-```{code-cell}
-x = BigFloat.([8,12,10])/10
-y = @. f(x)
-
-for k = 3:12
-    q = Polynomials.fit(y[k-2:k],x[k-2:k],2)
-    push!(x,q(0))
-    push!(y,f(x[k+1]))
-end
-
-println("residual = $(f(x[end]))")
-```
-
-As far as our current precision is concerned, we have an exact root.
-
-```{code-cell}
-r = x[end]
-logerr = @. log( Float64(abs(r-x[1:end-1])) )
-[ logerr[k+1] / logerr[k] for k in 1:length(logerr)-1 ]
-```
-
-The convergence is probably superlinear at a rate of $\alpha=1.8$ or greater.
-
-
 
 
 ## Bracketing
