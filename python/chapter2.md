@@ -13,7 +13,7 @@ kernelspec:
 
 ```{code-cell} ipython3
 # from scipy import *
-import numpy as np
+from numpy import *
 from matplotlib.pyplot import *
 from numpy.linalg import solve
 # from numpy.linalg import *
@@ -40,8 +40,8 @@ rcParams['animation.html'] = "jshtml"  # or try "html5"
 We create two vectors for data about the population of China. The first has the years of census data and the other has the population, in millions of people.
 
 ```{code-cell} ipython3
-year = np.arange(1980, 2020, 10)   # from 1980 to 2020 by 10
-pop = np.array([984.736, 1148.364, 1263.638, 1330.141])
+year = arange(1980, 2020, 10)   # from 1980 to 2020 by 10
+pop = array([984.736, 1148.364, 1263.638, 1330.141])
 ```
 
 It's convenient to measure time in years since 1980. 
@@ -54,7 +54,7 @@ y = pop
 Now we have four data points $(t_1,y_1),\dots,(t_4,y_4)$, so $n=4$ and we seek an interpolating cubic polynomial. We construct the associated Vandermonde matrix: 
 
 ```{code-cell} ipython3
-V = np.vander(t)
+V = vander(t)
 print(V)
 ```
 
@@ -79,7 +79,7 @@ print(y - V @ c)
 By our definitions, the coefficients in `c` are given in descending order of power in $t$. We can use the resulting polynomial to estimate the population of China in 2005:
 
 ```{code-cell} ipython3
-p = np.poly1d(c)          # construct a polynomial
+p = poly1d(c)          # construct a polynomial
 print(p(2005 - 1980))     # apply the 1980 time shift
 ```
 
@@ -89,7 +89,7 @@ We can visualize the interpolation process. First, we plot the data as points. T
 
 ```{code-cell} ipython3
 scatter(year, y, color="k", label="data");
-tt = np.linspace(0, 30, 300)   # 300 times from 1980 to 2010
+tt = linspace(0, 30, 300)   # 300 times from 1980 to 2010
 plot(1980 + tt, p(tt), label="interpolant");
 xlabel("year");
 ylabel("population (millions)");
@@ -114,17 +114,17 @@ see: Python; size, Python; shape
 A vector is created using square brackets and commas to enclose and separate its entries.
 
 ```{code-cell} ipython3
-x = np.array([3, 3, 0, 1, 0 ])
+x = array([3, 3, 0, 1, 0 ])
 print(x.shape)
 ```
 
 To construct a matrix, you nest the brackets to create a "vector of vectors". The inner vectors are the rows.
 
 ```{code-cell} ipython3
-A = np.array([ 
+A = array([ 
     [1, 2, 3, 4, 5],
     [50, 40, 30, 20, 10], 
-    [np.pi, np.sqrt(2), np.exp(1), (1+np.sqrt(5))/2, np.log(3)] 
+    [pi, sqrt(2), exp(1), (1+sqrt(5))/2, log(3)] 
     ])
 
 print(A)
@@ -134,7 +134,7 @@ print(A.shape)
 In this text, we treat all vectors as equivalent to matrices with a single column. That isn't true in NumPy, because even an $n \times 1$ array has two dimensions, unlike a vector.
 
 ```{code-cell} ipython3
-np.array([[3], [1], [2]]).shape
+array([[3], [1], [2]]).shape
 ```
 
 :::{index} ! Python; hstack, ! Python; vstack
@@ -143,11 +143,11 @@ np.array([[3], [1], [2]]).shape
 You can concatenate arrays with compatible dimensions using `hstack` and `vstack`.
 
 ```{code-cell} ipython3
-print( np.hstack([A, A]) )
+print( hstack([A, A]) )
 ```
 
 ```{code-cell} ipython3
-print( np.vstack([A, A]) )
+print( vstack([A, A]) )
 ```
 
 ```{index} ! Python; transpose, ! Python; adjoint
@@ -171,11 +171,11 @@ print((x + 1j).conj().T)
 There are many convenient shorthand ways of building vectors and matrices other than entering all of their entries directly or in a loop. To get a vector with evenly spaced entries between two endpoints, you have two options.
 
 ```{code-cell} ipython3
-print(np.arange(1, 7, 2))   # from 1 to 7 (not inclusive), step by 2        
+print(arange(1, 7, 2))   # from 1 to 7 (not inclusive), step by 2        
 ```
 
 ```{code-cell} ipython3
-print(np.linspace(-1, 1, 5))   # from -1 to 1 (inclusive), with 5 total values
+print(linspace(-1, 1, 5))   # from -1 to 1 (inclusive), with 5 total values
 ```
 
 The practical difference between these is whether you want to specify the step size in `arange` or the number of points in `linspace`.
@@ -183,12 +183,12 @@ The practical difference between these is whether you want to specify the step s
 Accessing an element is done by giving one (for a vector) or two index values in square brackets. **In Python, indexing always starts with zero, not 1.**
 
 ```{code-cell} ipython3
-A = np.array([ 
+A = array([ 
     [1, 2, 3, 4, 5],
     [50, 40, 30, 20, 10], 
-    np.linspace(-5, 5, 5) 
+    linspace(-5, 5, 5) 
     ])
-x = np.array([3, 2, 0, 1, -1 ])
+x = array([3, 2, 0, 1, -1 ])
 ```
 
 ```{code-cell} ipython3
@@ -238,7 +238,7 @@ print(A[:, ::-1])  # reverse the columns
 The matrix and vector senses of addition, subtraction, and scalar multiplication and division are all handled by the usual symbols. Two matrices of the same size (what NumPy calls shape) are operated on elementwise. 
 
 ```{code-cell} ipython3
-print(A - 2 * np.ones([3, 5]))  # subtract two from each element
+print(A - 2 * ones([3, 5]))  # subtract two from each element
 ```
 
 ```{index} ! Python; broadcast
@@ -251,13 +251,13 @@ print(A - 2)    # subtract two from each element
 ```
 
 ```{code-cell} ipython3
-u = np.array([1, 2, 3, 4, 5])
+u = array([1, 2, 3, 4, 5])
 print(A - u)    # repeat this row for every row of A
 ```
 
 ```{code-cell} ipython3
 :tags: raises-exception
-v = np.array([1, 2, 3])
+v = array([1, 2, 3])
 print(A - v)  # broadcasting this would be 3x3, so it's an error
 ```
 
@@ -278,7 +278,7 @@ see: Python; matrix multiplication, Python; \@
 Matrix–matrix and matrix–vector products are computed using `@` or `matmul`.
 
 ```{code-cell} ipython3
-B = np.diag([-1, 0, -5])    # create a diagonal 3x3
+B = diag([-1, 0, -5])    # create a diagonal 3x3
 print(B @ A)    # matrix product
 ```
 
@@ -325,7 +325,7 @@ If `A` is a matrix, `A**2` is *not* the same as mathematically raising it to the
 Most of the mathematical functions, such as cos, sin, log, exp and sqrt, expecting scalars as operands will be broadcast to arrays.
 
 ```{code-cell} ipython3
-print(np.cos(np.pi * x))      
+print(cos(pi * x))      
 ```
 ``````
 
@@ -335,8 +335,8 @@ print(np.cos(np.pi * x))
 For a square matrix $A$, the command `solve(A, B)` is mathematically equivalent to $\mathbf{A}^{-1} \mathbf{b}$. 
 
 ```{code-cell} ipython3
-A = np.array([[1, 0, -1], [2, 2, 1], [-1, -3, 0]])
-b = np.array([1, 2, 3])
+A = array([[1, 0, -1], [2, 2, 1], [-1, -3, 0]])
+b = array([1, 2, 3])
 ```
 
 ```{code-cell} ipython3
@@ -358,8 +358,8 @@ If the matrix $\mathbf{A}$ is singular, you may get an error.
 
 ```{code-cell} ipython3
 :tags: raises-exception
-A = np.array([[0, 1], [0, 0]])
-b = np.array([1, -1])
+A = array([[0, 1], [0, 0]])
+b = array([1, -1])
 solve(A, b)    # error, singular matrix
 ```
 
@@ -399,15 +399,15 @@ A linear system with a singular matrix might have no solution or infinitely many
 It's easy to get just the lower triangular part of any matrix using the `tril` function.
 
 ```{code-cell} ipython3
-A = 1 + np.floor(9 * np.random.rand(5, 5))
-L = np.tril(A)
+A = 1 + floor(9 * random.rand(5, 5))
+L = tril(A)
 print(L)
 ```
 
 We'll set up and solve a linear system with this matrix.
 
 ```{code-cell} ipython3
-b = np.ones(5)
+b = ones(5)
 x = FNC.forwardsub(L, b)
 print(x)
 ```
@@ -423,14 +423,14 @@ Next we'll engineer a problem to which we know the exact answer.
 ```{code-cell} ipython3
 alpha = 0.3;
 beta = 2.2;
-U = np.diag(np.ones(5)) + np.diag([-1, -1, -1, -1], k=1)
+U = diag(ones(5)) + diag([-1, -1, -1, -1], k=1)
 U[0, 3:5] = [ alpha - beta, beta ]
 print(U)
 ```
 
 ```{code-cell} ipython3
-x_exact = np.ones(5)
-b = np.array([alpha, 0, 0, 0, 1])
+x_exact = ones(5)
+b = array([alpha, 0, 0, 0, 1])
 x = FNC.backsub(U, b)
 print("error:", x - x_exact)
 ```
@@ -440,9 +440,9 @@ Everything seems OK here. But another example, with a different value for $\beta
 ```{code-cell} ipython3
 alpha = 0.3;
 beta = 1e12;
-U = np.diag(np.ones(5)) + np.diag([-1, -1, -1, -1], k=1)
+U = diag(ones(5)) + diag([-1, -1, -1, -1], k=1)
 U[0, 3:5] = [ alpha - beta, beta ]
-b = np.array([alpha, 0, 0, 0, 1])
+b = array([alpha, 0, 0, 0, 1])
 
 x = FNC.backsub(U, b)
 print("error:", x - x_exact)
@@ -460,27 +460,27 @@ We explore the outer product formula for two random triangular matrices.
 
 ```{code-cell}
 from numpy.random import randint
-L = np.tril(randint(1, 10, size=(3, 3)))
+L = tril(randint(1, 10, size=(3, 3)))
 print(L)
 ```
 
 ```{code-cell}
-U = np.triu(randint(1, 10, size=(3, 3)))
+U = triu(randint(1, 10, size=(3, 3)))
 print(U)
 ```
 
 Here are the three outer products appearing in the sum in {eq}`matrixouter`:
 
 ```{code-cell}
-print(np.outer(L[:, 0], U[0, :]))
+print(outer(L[:, 0], U[0, :]))
 ```
 
 ```{code-cell}
-print(np.outer(L[:, 1], U[1, :]))
+print(outer(L[:, 1], U[1, :]))
 ```
 
 ```{code-cell}
-print(np.outer(L[:, 2], U[2, :]))
+print(outer(L[:, 2], U[2, :]))
 ```
 
 Simply because of the triangular zero structures, only the first outer product contributes to the first row and first column of the entire product. 
@@ -492,14 +492,14 @@ Simply because of the triangular zero structures, only the first outer product c
 For illustration, we work on a $4 \times 4$ matrix. We name it with a subscript in preparation for what comes.
 
 ```{code-cell} ipython3
-A_1 = np.array([
+A_1 = array([
      [2,    0,    4,    3], 
      [-4,    5,   -7,  -10], 
      [1,   15,    2,   -4.5],
      [-2,    0,    2,  -13]
         ])
-L = np.eye(4)
-U = np.zeros((4, 4));
+L = eye(4)
+U = zeros((4, 4));
 ```
 
 Now we appeal to {eq}`outer-row1`. Since $L_{11}=1$, we see that the first row of $\mathbf{U}$ is just the first row of $\mathbf{A}_1$.
@@ -519,7 +519,7 @@ print(L)
 We have obtained the first term in the sum {eq}`matrixouter` for $\mathbf{L}\mathbf{U}$, and we subtract it away from $\mathbf{A}_1$.
 
 ```{code-cell}
-A_2 = A_1 - np.outer(L[:, 0],  U[0, :])
+A_2 = A_1 - outer(L[:, 0],  U[0, :])
 ```
 
 Now $\mathbf{A}_2 = \boldsymbol{\ell}_2\mathbf{u}_2^T + \boldsymbol{\ell}_3\mathbf{u}_3^T + \boldsymbol{\ell}_4\mathbf{u}_4^T.$ If we ignore the first row and first column of the matrices in this equation, then in what remains we are in the same situation as at the start. Specifically, only $\boldsymbol{\ell}_2\mathbf{u}_2^T$ has any effect on the second row and column, so we can deduce them now.
@@ -532,7 +532,7 @@ print(L)
 If we subtract off the latest outer product, we have a matrix that is zero in the first *two* rows and columns. 
 
 ```{code-cell}
-A_3 = A_2 - np.outer(L[:, 1], U[1, :])
+A_3 = A_2 - outer(L[:, 1], U[1, :])
 ```
 
 Now we can deal with the lower right $2\times 2$ submatrix of the remainder in a similar fashion.
@@ -540,7 +540,7 @@ Now we can deal with the lower right $2\times 2$ submatrix of the remainder in a
 ```{code-cell}
 U[2, :] = A_3[2, :]
 L[:, 2] = A_3[:, 2] / U[2, 2]
-A_4 = A_3 - np.outer(L[:, 2], U[2, :])
+A_4 = A_3 - outer(L[:, 2], U[2, :])
 ```
 
 Finally, we pick up the last unknown in the factors.
@@ -593,13 +593,13 @@ Line 11 of {numref}`Function {number} <function-lufact>` points out a subtle iss
 Here are the data for a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$. 
 
 ```{code-cell}
-A = np.array([
+A = array([
     [2, 0, 4, 3], 
     [-4, 5, -7, -10], 
     [1, 15, 2, -4.5],
     [-2, 0, 2, -13]
     ])
-b = np.array([4, 9, 9, 4])
+b = array([4, 9, 9, 4])
 ```
 
 We apply {numref}`Function {number} <function-lufact>` and then do two triangular solves.
@@ -627,9 +627,9 @@ Here is a straightforward implementation of matrix-vector multiplication.
 
 ```{code-cell} ipython3
 n = 6
-A = np.random.rand(n, n)
-x = np.ones(n)
-y = np.zeros(n)
+A = random.rand(n, n)
+x = ones(n)
+y = zeros(n)
 for i in range(n):
     for j in range(n):
         y[i] += A[i, j] * x[j]   # 2 flops
@@ -646,12 +646,12 @@ Since the matrix $\mathbf{A}$ has $n^2$ elements, all of which have to be involv
 Let's run an experiment with the built-in matrix-vector multiplication. We assume that flops dominate the computation time and thus measure elapsed time. 
 
 ```{code-cell} ipython3
-N = 400 * np.arange(1, 11)
+N = 400 * arange(1, 11)
 t = []
 print("  n           t")
 for i, n in enumerate(N):
-    A = np.random.randn(n, n)  
-    x = np.random.randn(n)
+    A = random.randn(n, n)  
+    x = random.randn(n)
     start = timer()
     for j in range(50): A @ x
     t.append(timer() - start)
@@ -679,11 +679,11 @@ $$
 Let's repeat the experiment of the previous example for more, and larger, values of $n$.
 
 ```{code-cell} ipython3
-N = np.arange(400, 6200, 200)
-t = np.zeros(len(N))
+N = arange(400, 6200, 200)
+t = zeros(len(N))
 for i, n in enumerate(N):
-    A = np.random.randn(n,n)  
-    x = np.random.randn(n)
+    A = random.randn(n,n)  
+    x = random.randn(n)
     start = timer()
     for j in range(20): A@x
     t[i] = timer() - start
@@ -714,10 +714,10 @@ We'll test the conclusion of $O(n^3)$ flops experimentally using the `lu` functi
 
 ```{code-cell}
 from scipy.linalg import lu
-N = np.arange(200, 2600, 200)
-t = np.zeros(len(N))
+N = arange(200, 2600, 200)
+t = zeros(len(N))
 for i, n in enumerate(N):
-    A = np.random.randn(n,n)  
+    A = random.randn(n,n)  
     start = timer()
     for j in range(5): lu(A)
     t[i] = timer() - start
@@ -741,7 +741,7 @@ title("Timing of LU factorizations");
 Here is a previously encountered matrix that factors well.
 
 ```{code-cell} ipython3
-A = np.array([
+A = array([
     [2, 0, 4, 3],
     [-4, 5, -7, -10],
     [1, 15, 2, -4.5],
@@ -767,7 +767,7 @@ The presence of `NaN` in the result indicates that some impossible operation was
 ```{code-cell}
 U[0, :] = A[0, :]
 L[:, 0] = A[:, 0] / U[0, 0]
-A -= np.outer(L[:, 0],  U[0, :])
+A -= outer(L[:, 0],  U[0, :])
 print(A)
 ```
 
@@ -779,7 +779,7 @@ The next step is `U[1, :] = A[1, :]`, which is also OK. But then we are supposed
 Here is the trouble-making matrix from {numref}`Demo {number} <demo-pivoting-fail>`.
 
 ```{code-cell}
-A_1 = np.array([
+A_1 = array([
     [2, 0, 4, 3],
     [-2, 0, 2, -13],
     [1, 15, 2, -4.5],
@@ -796,43 +796,43 @@ The `argmax` function returns the location of the largest element of a vector or
 
 
 ```{code-cell}
-i = np.argmax( np.abs(A_1[:, 0]) )
+i = argmax( abs(A_1[:, 0]) )
 print(i)
 ```
 
 This is the row of the matrix that we extract to put into $\mathbf{U}$. That guarantees that the division used to find $\boldsymbol{\ell}_1$ will be valid.
 
 ```{code-cell}
-L, U = np.eye(4), np.zeros((4, 4))
+L, U = eye(4), zeros((4, 4))
 U[0, :] = A_1[i, :]
 L[:, 0] = A_1[:, 0] / U[0, 0]
-A_2 = A_1 - np.outer(L[:, 0], U[0, :])
+A_2 = A_1 - outer(L[:, 0], U[0, :])
 print(A_2)
 ```
 
 Observe that $\mathbf{A}_2$ has a new zero row and zero column, but the zero row is the fourth rather than the first. However, we forge on by using the largest possible pivot in column 2 for the next outer product.
 
 ```{code-cell}
-i = np.argmax( np.abs(A_2[:, 1]) ) 
+i = argmax( abs(A_2[:, 1]) ) 
 print(f"new pivot row is {i}")
 U[1, :] = A_2[i, :]
 L[:, 1] = A_2[:, 1] / U[1, 1]
-A_3 = A_2 - np.outer(L[:, 1], U[1, :])
+A_3 = A_2 - outer(L[:, 1], U[1, :])
 print(A_3)
 ```
 Now we have zeroed out the third row as well as the second column. We can finish out the procedure.
 
 ```{code-cell}
-i = np.argmax( np.abs(A_3[:, 2]) ) 
+i = argmax( abs(A_3[:, 2]) ) 
 print(f"new pivot row is {i}")
 U[2, :] = A_3[i, :]
 L[:, 2] = A_3[:, 2] / U[2, 2]
-A_4 = A_3 - np.outer(L[:, 2], U[2, :])
+A_4 = A_3 - outer(L[:, 2], U[2, :])
 print(A_4)
 ```
 
 ```{code-cell}
-i = np.argmax( np.abs(A_4[:, 3]) ) 
+i = argmax( abs(A_4[:, 3]) ) 
 print(f"new pivot row is {i}")
 U[3, :] = A_4[i, :]
 L[:, 3] = A_4[:, 3] / U[3, 3];
@@ -863,7 +863,7 @@ print(L)
 Here again is the matrix from {numref}`Demo {number} <demo-pivoting-fix>`.
 
 ```{code-cell}
-A = np.array([
+A = array([
     [2, 0, 4, 3],
     [-2, 0, 2, -13],
     [1, 15, 2, -4.5],
@@ -908,7 +908,7 @@ print(L)
 The third output of `plufact` is the permutation vector we need to apply to $\mathbf{A}$.
 
 ```{code-cell}
-A = np.random.randn(4, 4)
+A = random.randn(4, 4)
 L, U, p = FNC.plufact(A)
 A[p, :] - L @ U   # should be ≈ 0
 ```
@@ -916,7 +916,7 @@ A[p, :] - L @ U   # should be ≈ 0
 Given a vector $\mathbf{b}$, we solve $\mathbf{A}\mathbf{x}=\mathbf{b}$ by first permuting the entries of $\mathbf{b}$ and then proceeding as before.
 
 ```{code-cell}
-b = np.random.randn(4)
+b = random.randn(4)
 z = FNC.forwardsub(L, b[p])
 x = FNC.backsub(U, z)
 ```
@@ -930,12 +930,12 @@ b - A @ x
 
 (demo-pivoting-builtin-python)=
 ``````{dropdown} Built-in PLU factorization
-In `np.linalg.solve`, the matrix `A` is PLU-factored, followed by two triangular solves. If we want to do those steps seamlessly, we can use the `lu_factor` and `lu_solve` from `scipy.linalg`.
+In `linalg.solve`, the matrix `A` is PLU-factored, followed by two triangular solves. If we want to do those steps seamlessly, we can use the `lu_factor` and `lu_solve` from `scipy.linalg`.
 
 ```{code-cell}
 from scipy.linalg import lu_factor, lu_solve
-A = np.random.randn(500, 500) 
-b = np.ones(500)  
+A = random.randn(500, 500) 
+b = ones(500)  
 LU, perm = lu_factor(A)
 x = lu_solve((LU, perm), b)
 ```
@@ -944,12 +944,12 @@ Why would we ever bother with this? In {numref}`section-linsys-efficiency` we sh
 
 ```{code-cell}
 start = timer()
-for k in range(50): np.linalg.solve(A, np.random.rand(500))
+for k in range(50): linalg.solve(A, random.rand(500))
 print(f"elapsed time for 50 full solves: {timer() - start}")
 
 start = timer()
 LU, perm = lu_factor(A)
-for k in range(50): lu_solve((LU, perm), np.random.rand(500))
+for k in range(50): lu_solve((LU, perm), random.rand(500))
 print(f"elapsed time for 50 shortcut solves: {timer() - start}")
 ```
 ``````
@@ -960,8 +960,8 @@ We construct a linear system for this matrix with $\epsilon=10^{-12}$ and exact 
 
 ```{code-cell}
 ep = 1e-12
-A = np.array([[-ep, 1], [1, -1]])
-b = A @ np.array([1, 1])
+A = array([[-ep, 1], [1, -1]])
+b = A @ array([1, 1])
 ```
 
 We can factor the matrix without pivoting and solve for $\mathbf{x}$.
@@ -975,8 +975,8 @@ Note that we have obtained only about 5 accurate digits for $x_1$. We could make
 
 ```{code-cell}
 ep = 1e-20;
-A = np.array([[-ep, 1], [1, -1]])
-b = A @ np.array([1, 1])
+A = array([[-ep, 1], [1, -1]])
+b = A @ array([1, 1])
 L, U = FNC.lufact(A)
 print(FNC.backsub( U, FNC.forwardsub(L, b) ))
 ```
@@ -998,12 +998,12 @@ The `norm` function from `numpy.linalg` computes vector norms.
 
 ```{code-cell} ipython3
 from numpy.linalg import norm
-x = np.array([2, -3, 1, -1])
+x = array([2, -3, 1, -1])
 print(norm(x))       # 2-norm by default
 ```
 
 ```{code-cell} ipython3
-print(norm(x, np.inf))
+print(norm(x, inf))
 ```
 
 ```{code-cell} ipython3
@@ -1015,7 +1015,7 @@ print(norm(x, 1))
 ``````{dropdown} Matrix norms
 ```{code-cell} ipython3
 from numpy.linalg import norm
-A = np.array([ [2, 0], [1, -1] ])
+A = array([ [2, 0], [1, -1] ])
 ```
 
 ```{index} ! Python; norm
@@ -1039,24 +1039,24 @@ print(norm(A, 1))
 The 1-norm is equivalent to 
 
 ```{code-cell} ipython3
-print(np.max( np.sum(np.abs(A), axis=0)) )  # sum down the rows
+print(max( sum(abs(A), axis=0)) )  # sum down the rows
 ```
 
 Similarly, we can get the $\infty$-norm and check our formula for it.
 
 ```{code-cell} ipython3
-print(norm(A, np.inf))
+print(norm(A, inf))
 ```
 
 ```{code-cell} ipython3
-print(np.max( np.sum(np.abs(A), axis=1)) )  # sum across columns 
+print(max( sum(abs(A), axis=1)) )  # sum across columns 
 ```
 
 Here we illustrate the geometric interpretation of the 2-norm. First, we will sample a lot of vectors on the unit circle in $\mathbb{R}^2$. 
 
 ```{code-cell} ipython3
-theta = np.linspace(0, 2*np.pi, 601)
-x = np.vstack([np.cos(theta), np.sin(theta)])  # 601 unit columns
+theta = linspace(0, 2*pi, 601)
+x = vstack([cos(theta), sin(theta)])  # 601 unit columns
 ```
 
 The linear function $\mathbf{f}(\mathbf{x}) = \mathbf{A}\mathbf{x}$ defines a mapping from $\mathbb{R}^2$ to $\mathbb{R}^2$. We can apply `A` to every column of `x` simply by using a matrix multiplication.
@@ -1098,7 +1098,7 @@ As seen on the right-side plot, the image of the transformed vectors is an ellip
 The function `cond` from `numpy.linalg` is used to computes matrix condition numbers. By default, the 2-norm is used. As an example, the family of *Hilbert matrices* is famously badly conditioned. Here is the $6\times 6$  case. 
 
 ```{code-cell} ipython3
-A = np.array([ 
+A = array([ 
     [1/(i + j + 2) for j in range(6)] 
     for i in range(6) 
     ])
@@ -1114,16 +1114,16 @@ print(f"kappa is {kappa:.3e}")
 Next we engineer a linear system problem to which we know the exact answer.
 
 ```{code-cell} ipython3
-x_exact = 1.0 + np.arange(6)
+x_exact = 1.0 + arange(6)
 b = A @ x_exact
 ```
 
 Now we perturb the data randomly with a vector of norm $10^{-12}$. 
 
 ```{code-cell} ipython3
-dA = np.random.randn(6, 6)
+dA = random.randn(6, 6)
 dA = 1e-12 * (dA / norm(dA, 2))
-db = np.random.randn(6)
+db = random.randn(6)
 db = 1e-12 * (db / norm(db, 2))
 ```
 
@@ -1161,7 +1161,7 @@ Because $\kappa\approx 10^8$, it's possible to lose 8 digits of accuracy in the 
 Larger Hilbert matrices are even more poorly conditioned.
 
 ```{code-cell} ipython3
-A = np.array([ [1/(i+j+2) for j in range(14)] for i in range(14) ])
+A = array([ [1/(i+j+2) for j in range(14)] for i in range(14) ])
 kappa = cond(A)
 print(f"kappa is {kappa:.3e}")
 ```
@@ -1173,7 +1173,7 @@ print(f"rounding bound: {kappa / 2**52:.2e}")
 ```
 
 ```{code-cell} ipython3
-x_exact = 1.0 + np.arange(14)
+x_exact = 1.0 + arange(14)
 b = A @ x_exact  
 x = solve(A, b)
 ```
@@ -1191,7 +1191,7 @@ print(f"relative error: {norm(x - x_exact) / norm(x_exact):.2e}")
 Here is a matrix with both lower and upper bandwidth equal to one. Such a matrix is called tridiagonal.
 
 ```{code-cell} ipython3
-A = np.array([ 
+A = array([ 
     [2, -1,  0,  0,  0,  0],
     [4,  2, -1,  0,  0,  0],
     [0,  3,  0, -1,  0,  0],
@@ -1207,21 +1207,21 @@ A = np.array([
 We can extract the elements on any diagonal using the `diag` command. The "main" or central diagonal is numbered zero, above and to the right of that is positive, and below and to the left is negative.
 
 ```{code-cell} ipython3
-print( np.diag(A) )
+print( diag(A) )
 ```
 
 ```{code-cell} ipython3
-print( np.diag(A, 1) )
+print( diag(A, 1) )
 ```
 
 ```{code-cell} ipython3
-print( np.diag(A, -1) )
+print( diag(A, -1) )
 ```
 
 We can also construct matrices by specifying a diagonal with the `diag` function.
 
 ```{code-cell} ipython3
-A = A + np.diag([np.pi, 8, 6, 7], 2)
+A = A + diag([pi, 8, 6, 7], 2)
 print(A)
 ```
 
@@ -1244,10 +1244,10 @@ We'll use a large banded matrix to observe the speedup possible in LU factorizat
 
 ```{code-cell} ipython3
 n = 8000
-main = 1 + np.arange(n)
-plusone = np.linspace(n-1, 1, n-1)
-minusone = np.ones(n-1)
-A = np.diag(main) + np.diag(plusone,1) + np.diag(minusone,1)
+main = 1 + arange(n)
+plusone = linspace(n-1, 1, n-1)
+minusone = ones(n-1)
+A = diag(main) + diag(plusone,1) + diag(minusone,1)
 ```
 
 ```{code-cell} ipython3
@@ -1277,7 +1277,7 @@ print(f"time for sparse banded: {timer() - start:.5f}")
 We begin with a symmetric $\mathbf{A}$. 
 
 ```{code-cell} ipython3
-A_1 = np.array([
+A_1 = array([
     [2,     4,     4,     2],
     [4,     5,     8,    -5],
     [4,     8,     6,     2],
@@ -1288,11 +1288,11 @@ A_1 = np.array([
 We won't use pivoting, so the pivot element is at position (1,1). This will become the first element on the diagonal of $\mathbf{D}$. Then we divide by that pivot to get the first column of $\mathbf{L}$.
 
 ```{code-cell}
-L = np.eye(4)
-d = np.zeros(4)
+L = eye(4)
+d = zeros(4)
 d[0] = A_1[0, 0]
 L[:, 0] = A_1[:, 0] / d[0]
-A_2 = A_1 - d[0] * np.outer(L[:, 0], L[:, 0])
+A_2 = A_1 - d[0] * outer(L[:, 0], L[:, 0])
 print(A_2)
 ```
 We are now set up the same way for the submatrix in rows and columns 2–4.
@@ -1300,7 +1300,7 @@ We are now set up the same way for the submatrix in rows and columns 2–4.
 ```{code-cell}
 d[1] = A_2[1, 1]
 L[:, 1] = A_2[:, 1] / d[1]
-A_3 = A_2 - d[1] * np.outer(L[:, 1], L[:, 1])
+A_3 = A_2 - d[1] * outer(L[:, 1], L[:, 1])
 print(A_3)
 ```
 
@@ -1309,7 +1309,7 @@ We continue working our way down the diagonal.
 ```{code-cell}
 d[2] = A_3[2, 2]
 L[:, 2] = A_3[:, 2] / d[2]
-A_4 = A_3 - d[2] * np.outer(L[:, 2], L[:, 2])
+A_4 = A_3 - d[2] * outer(L[:, 2], L[:, 2])
 print(A_4)
 ```
 
@@ -1326,7 +1326,7 @@ print(L)
 This should be comparable to machine roundoff:
 
 ```{code-cell}
-print(norm(A_1 - (L @ np.diag(d) @ L.T), 2) / norm(A_1))
+print(norm(A_1 - (L @ diag(d) @ L.T), 2) / norm(A_1))
 ```
 ``````
 
@@ -1335,7 +1335,7 @@ print(norm(A_1 - (L @ np.diag(d) @ L.T), 2) / norm(A_1))
 A randomly chosen matrix is extremely unlikely to be symmetric. However, there is a simple way to symmetrize one.
 
 ```{code-cell} ipython3
-A = 1.0 + np.floor(9 * np.random.rand(4, 4))
+A = 1.0 + floor(9 * random.rand(4, 4))
 B = A + A.T
 print(B)
 ```
