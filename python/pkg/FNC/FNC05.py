@@ -1,4 +1,4 @@
-from numpy import *
+from numpy import eye, zeros, ones, linspace, sum, array, minimum, maximum, hstack, vstack, arange, diag, prod, poly1d
 from numpy.linalg import solve
 
 def hatfun(x, t, k):
@@ -9,7 +9,6 @@ def hatfun(x, t, k):
     n+1 interpolation nodes and `k` is an integer in 0:n giving the index of the node
     where the hat function equals one.
     """
-
     n = len(t) - 1
 
     # Return correct node given mathematical index k, including fictitious choices.
@@ -26,7 +25,6 @@ def hatfun(x, t, k):
     H = minimum(H1, H2)
     return maximum(0, H)
 
-
 def plinterp(t, y):
     """
     plinterp(t,y)
@@ -34,10 +32,8 @@ def plinterp(t, y):
     Create a piecewise linear interpolating function for data values in `y` given at nodes
     in `t`.
     """
-
     n = len(t) - 1
     return lambda x: sum(y[k] * hatfun(x, t, k) for k in range(n + 1))
-
 
 def spinterp(t, y):
     """
@@ -99,7 +95,6 @@ def spinterp(t, y):
 
     return evaluate
 
-
 def fdweights(t, m):
     """
     fdweights(t,m)
@@ -142,8 +137,6 @@ def fdweights(t, m):
     r = len(t) - 1
     w = zeros(t.shape)
     return [weight(t, m, r, k) for k in range(r + 1)]
-    # return weight(t,m,r,0)
-
 
 def trapezoid(f, a, b, n):
     """
@@ -155,9 +148,7 @@ def trapezoid(f, a, b, n):
     t = linspace(a, b, n + 1)
     y = f(t)
     T = h * (sum(y[1:-1]) + 0.5 * (y[0] + y[-1]))
-
     return T, t, y
-
 
 def intadapt(f, a, b, tol):
     """
