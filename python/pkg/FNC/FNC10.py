@@ -1,10 +1,7 @@
-from numpy import *
-from matplotlib.pyplot import *
-from numpy.linalg import solve
-from scipy.optimize import root_scalar
-from scipy.integrate import solve_ivp
+import numpy as np
+import scipy.optimize as opt
+import scipy.integrate as integ
 from .FNC04 import levenberg
-
 
 def shoot(phi, xspan, lval, lder, rval, rder, init):
     """
@@ -35,10 +32,10 @@ def shoot(phi, xspan, lval, lder, rval, rder, init):
 
         # ODE posed as a first-order equation in 2 variables.
         def shootivp(x, v):
-            return array([v[1], phi(x, v[0], v[1])])
+            return np.array([v[1], phi(x, v[0], v[1])])
 
-        x = linspace(xspan[0], xspan[1], 400)  # make decent plots on return
-        sol = solve_ivp(shootivp, xspan, v_init, t_eval=x)
+        x = np.linspace(xspan[0], xspan[1], 400)  # make decent plots on return
+        sol = integ.solve_ivp(shootivp, xspan, v_init, t_eval=x)
         x = sol.t
         v = sol.y
 
@@ -51,7 +48,7 @@ def shoot(phi, xspan, lval, lder, rval, rder, init):
     x = []
     v = []
     # the values will be overwritten
-    s = root_scalar(objective, x0=init, x1=init + 0.05, xtol=optim_opt).root
+    s = opt.root_scalar(objective, x0=init, x1=init + 0.05, xtol=optim_opt).root
 
     # Don't need to solve the IVP again. It was done within the
     # objective function already.
@@ -71,25 +68,25 @@ def diffmat2(n, xspan):
     """
     a, b = xspan
     h = (b - a) / n
-    x = linspace(a, b, n + 1)  # nodes
+    x = np.linspace(a, b, n + 1)  # nodes
 
     # Define most of Dx by its diagonals.
-    dp = 0.5 / h * ones(n)  # superdiagonal
-    dm = -0.5 / h * ones(n)  # subdiagonal
-    Dx = diag(dm, -1) + diag(dp, 1)
+    dp = 0.5 / h * np.ones(n)  # superdiagonal
+    dm = -0.5 / h * np.ones(n)  # subdiagonal
+    Dx = np.diag(dm, -1) + np.diag(dp, 1)
 
     # Fix first and last rows.
-    Dx[0, :3] = array([-1.5, 2, -0.5]) / h
-    Dx[-1, -3:] = array([0.5, -2, 1.5]) / h
+    Dx[0, :3] = np.array([-1.5, 2, -0.5]) / h
+    Dx[-1, -3:] = np.array([0.5, -2, 1.5]) / h
 
     # Define most of Dxx by its diagonals.
-    d0 = -2 / h**2 * ones(n + 1)  # main diagonal
-    dp = ones(n) / h**2  # superdiagonal and subdiagonal
-    Dxx = diag(d0, 0) + diag(dp, -1) + diag(dp, 1)
+    d0 = -2 / h**2 * np.ones(n + 1)  # main diagonal
+    dp = np.ones(n) / h**2  # superdiagonal and subdiagonal
+    Dxx = np.diag(d0, 0) + np.diag(dp, -1) + np.diag(dp, 1)
 
     # Fix first and last rows.
-    Dxx[0, :4] = array([2, -5, 4, -1]) / h**2
-    Dxx[-1, -4:] = array([-1, 4, -5, 2]) / h**2
+    Dxx[0, :4] = np.array([2, -5, 4, -1]) / h**2
+    Dxx[-1, -4:] = np.array([-1, 4, -5, 2]) / h**2
 
     return x, Dx, Dxx
 
@@ -102,12 +99,12 @@ def diffcheb(n, xspan):
     interval `xspan`. Return a vector of nodes, and the matrices for the first
     and second derivatives.
     """
-    x = -cos(arange(n + 1) * pi / n)  # nodes in [-1,1]
-    Dx = zeros([n + 1, n + 1])
-    c = hstack([2.0, ones(n - 1), 2.0])  # endpoint factors
+    x = -np.cos(np.arange(n + 1) * np.pi / n)  # nodes in [-1,1]
+    Dx = np.zeros([n + 1, n + 1])
+    c = np.hstack([2.0, np.ones(n - 1), 2.0])  # endpoint factors
 
     # Off-diagonal entries
-    Dx = zeros([n + 1, n + 1])
+    Dx = np.zeros([n + 1, n + 1])
     for i in range(n + 1):
         for j in range(n + 1):
             if i != j:
@@ -115,7 +112,7 @@ def diffcheb(n, xspan):
 
     # Diagonal entries by the "negative sum trick"
     for i in range(n + 1):
-        Dx[i, i] = -sum([Dx[i, j] for j in range(n + 1) if j != i])
+        Dx[i, i] = -np.sum([Dx[i, j] for j in range(n + 1) if j != i])
 
     # Transplant to [a,b]
     a, b = xspan
@@ -141,17 +138,17 @@ def bvplin(p, q, r, xspan, lval, rval, n):
     """
     x, Dx, Dxx = diffmat2(n, xspan)
 
-    P = diag(p(x))
-    Q = diag(q(x))
+    P = np.diag(p(x))
+    Q = np.diag(q(x))
     L = Dxx + P @ Dx + Q  # ODE expressed at the nodes
 
     # Replace first and last rows using boundary conditions.
-    I = eye(n + 1)
-    A = vstack([I[0], L[1:-1], I[-1]])
-    b = hstack([lval, r(x[1:-1]), rval])
+    I = np.eye(n + 1)
+    A = np.vstack([I[0], L[1:-1], I[-1]])
+    b = np.hstack([lval, r(x[1:-1]), rval])
 
     # Solve the system.
-    u = solve(A, b)
+    u = np.linalg.solve(A, b)
 
     return x, u
 
@@ -208,12 +205,12 @@ def fem(c, s, f, a, b, n):
     """
     # Define the grid.
     h = (b - a) / n
-    x = linspace(a, b, n + 1)
+    x = np.linspace(a, b, n + 1)
 
     # Templates for the subinterval matrix and vector contributions.
-    Ke = array([[1, -1], [-1, 1]])
-    Me = (1 / 6) * array([[2, 1], [1, 2]])
-    fe = (1 / 2) * array([1, 1])
+    Ke = np.array([[1, -1], [-1, 1]])
+    Me = (1 / 6) * np.array([[2, 1], [1, 2]])
+    fe = (1 / 2) * np.array([1, 1])
 
     # Evaluate coefficent functions and find average values.
     cval = c(x)
@@ -224,9 +221,9 @@ def fem(c, s, f, a, b, n):
     fbar = (fval[:-1] + fval[1:]) / 2
 
     # Assemble global system, one interval at a time.
-    K = zeros([n - 1, n - 1])
-    M = zeros([n - 1, n - 1])
-    f = zeros(n - 1)
+    K = np.zeros([n - 1, n - 1])
+    M = np.zeros([n - 1, n - 1])
+    f = np.zeros(n - 1)
     K[0, 0] = cbar[0] / h
     M[0, 0] = sbar[0] * h / 3
     f[0] = fbar[0] * h / 2
@@ -239,7 +236,7 @@ def fem(c, s, f, a, b, n):
         f[k - 1 : k + 1] += (fbar[k] * h) * fe
 
     # Solve system for the interior values.
-    u = solve(K + M, f)
-    u = hstack([0, u, 0])  # put the boundary values into the result
+    u = np.linalg.solve(K + M, f)
+    u = np.hstack([0, u, 0])  # put the boundary values into the result
 
     return x, u

@@ -1,4 +1,4 @@
-from numpy import eye, zeros, ones, linspace, sum, array, minimum, maximum, hstack, vstack, arange, diag, prod, poly1d
+import numpy as np
 from numpy.linalg import solve
 
 def hatfun(x, t, k):
@@ -22,8 +22,8 @@ def hatfun(x, t, k):
 
     H1 = (x - node(k - 1)) / (node(k) - node(k - 1))  # upward slope
     H2 = (node(k + 1) - x) / (node(k + 1) - node(k))  # downward slope
-    H = minimum(H1, H2)
-    return maximum(0, H)
+    H = np.minimum(H1, H2)
+    return np.maximum(0, H)
 
 def plinterp(t, y):
     """
@@ -33,7 +33,7 @@ def plinterp(t, y):
     in `t`.
     """
     n = len(t) - 1
-    return lambda x: sum(y[k] * hatfun(x, t, k) for k in range(n + 1))
+    return lambda x: np.sum(y[k] * hatfun(x, t, k) for k in range(n + 1))
 
 def spinterp(t, y):
     """
@@ -45,48 +45,48 @@ def spinterp(t, y):
     h = [t[i + 1] - t[i] for i in range(n)]
 
     # Preliminary definitions.
-    Z = zeros([n, n])
-    I = eye(n)
+    Z = np.zeros([n, n])
+    I = np.eye(n)
     E = I[: n - 1, :]
-    J = eye(n) + diag(-ones(n - 1), 1)
-    H = diag(h)
+    J = np.eye(n) + np.diag(-np.ones(n - 1), 1)
+    H = np.diag(h)
 
     # Left endpoint interpolation:
-    AL = hstack([I, Z, Z, Z])
+    AL = np.hstack([I, Z, Z, Z])
     vL = y[:-1]
 
     # Right endpoint interpolation:
-    AR = hstack([I, H, H**2, H**3])
+    AR = np.hstack([I, H, H**2, H**3])
     vR = y[1:]
 
     # Continuity of first derivative:
-    A1 = E @ hstack([Z, J, 2 * H, 3 * H**2])
-    v1 = zeros(n - 1)
+    A1 = E @ np.hstack([Z, J, 2 * H, 3 * H**2])
+    v1 = np.zeros(n - 1)
 
     # Continuity of second derivative:
-    A2 = E @ hstack([Z, Z, J, 3 * H])
-    v2 = zeros(n - 1)
+    A2 = E @ np.hstack([Z, Z, J, 3 * H])
+    v2 = np.zeros(n - 1)
 
     # Not-a-knot conditions:
-    nakL = hstack([zeros(3 * n), hstack([1, -1, zeros(n - 2)])])
-    nakR = hstack([zeros(3 * n), hstack([zeros(n - 2), 1, -1])])
+    nakL = np.hstack([np.zeros(3 * n), np.hstack([1, -1, np.zeros(n - 2)])])
+    nakR = np.hstack([np.zeros(3 * n), np.hstack([np.zeros(n - 2), 1, -1])])
 
     # Assemble and solve the full system.
-    A = vstack([AL, AR, A1, A2, nakL, nakR])
-    v = hstack([vL, vR, v1, v2, 0, 0])
+    A = np.vstack([AL, AR, A1, A2, nakL, nakR])
+    v = np.hstack([vL, vR, v1, v2, 0, 0])
     z = solve(A, v)
 
     # Break the coefficients into separate vectors.
-    rows = arange(n)
+    rows = np.arange(n)
     a = z[rows]
     b = z[n + rows]
     c = z[2 * n + rows]
     d = z[3 * n + rows]
-    S = [poly1d([d[k], c[k], b[k], a[k]]) for k in range(n)]
+    S = [np.poly1d([d[k], c[k], b[k], a[k]]) for k in range(n)]
 
     # This function evaluates the spline when called with a value for x.
     def evaluate(x):
-        f = zeros(x.shape)
+        f = np.zeros(x.shape)
         for k in range(n):
             # Evaluate this piece's cubic at the points inside it.
             index = (x >= t[k]) & (x <= t[k + 1])
@@ -124,18 +124,18 @@ def fdweights(t, m):
                 if r <= 1:
                     numer = 1.0
                 else:
-                    numer = prod(t[r-1] - t[:r-1])
+                    numer = np.prod(t[r-1] - t[:r-1])
                 if r <= 0:
                     denom = 1.0
                 else:
-                    denom = prod(t[r] - t[:r])
+                    denom = np.prod(t[r] - t[:r])
                 beta = numer / denom
                 c = weight(t, m - 1, r - 1, r - 1) - t[r-1] * weight(t, m, r - 1, r - 1)
                 c *= beta
         return c
 
     r = len(t) - 1
-    w = zeros(t.shape)
+    w = np.zeros(t.shape)
     return [weight(t, m, r, k) for k in range(r + 1)]
 
 def trapezoid(f, a, b, n):
@@ -145,9 +145,9 @@ def trapezoid(f, a, b, n):
     Apply the trapezoid integration formula for integrand `f` over interval [`a`,`b`], broken up into `n` equal pieces. Returns estimate, vector of nodes, and vector of integrand values at the nodes.
     """
     h = (b - a) / n
-    t = linspace(a, b, n + 1)
+    t = np.linspace(a, b, n + 1)
     y = f(t)
-    T = h * (sum(y[1:-1]) + 0.5 * (y[0] + y[-1]))
+    T = h * (np.sum(y[1:-1]) + 0.5 * (y[0] + y[-1]))
     return T, t, y
 
 def intadapt(f, a, b, tol):
@@ -165,11 +165,11 @@ def intadapt(f, a, b, tol):
         fl = f(xl)
         xr = (m + b) / 2
         fr = f(xr)
-        t = array([a, xl, m, xr, b])  # all 5 nodes at this level
+        t = np.array([a, xl, m, xr, b])  # all 5 nodes at this level
 
         # Compute the trapezoid values iteratively.
         h = b - a
-        T = zeros(3)
+        T = np.zeros(3)
         T[0] = h * (fa + fb) / 2
         T[1] = T[0] / 2 + (h / 2) * fm
         T[2] = T[1] / 2 + (h / 4) * (fl + fr)
@@ -184,7 +184,7 @@ def intadapt(f, a, b, tol):
             QL, tL = do_integral(a, fa, m, fm, xl, fl, tol)
             QR, tR = do_integral(m, fm, b, fb, xr, fr, tol)
             Q = QL + QR
-            t = hstack([tL, tR[1:]])  # merge the nodes w/o duplicate
+            t = np.hstack([tL, tR[1:]])  # merge the nodes w/o duplicate
         return Q, t
 
     m = (b + a) / 2

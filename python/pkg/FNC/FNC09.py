@@ -1,7 +1,6 @@
-from numpy import *
+import numpy as np
 from numpy.linalg import eig
 from matplotlib.pyplot import *
-
 
 def polyinterp(t, y):
     """
@@ -15,25 +14,25 @@ def polyinterp(t, y):
     tc = t / C
 
     # Adding one node at a time, compute inverses of the weights.
-    omega = ones(n + 1)
+    omega = np.ones(n + 1)
     for m in range(n):
         d = tc[: m + 1] - tc[m + 1]  # vector of node differences
         omega[: m + 1] = omega[: m + 1] * d  # update previous
-        omega[m + 1] = prod(-d)  # compute the new one
+        omega[m + 1] = np.prod(-d)  # compute the new one
     w = 1 / omega  # go from inverses to weights
 
     def p(x):
         # Compute interpolant.
-        z = where(x == t)[0]
+        z = np.where(x == t)[0]
         if len(z) > 0:  # avoid dividing by zero
             # Apply L'Hopital's Rule exactly.
             f = y[z[0]]
         else:
             terms = w / (x - t)
-            f = sum(y * terms) / sum(terms)
+            f = np.sum(y * terms) / np.sum(terms)
         return f
 
-    return vectorize(p)
+    return np.vectorize(p)
 
 
 def triginterp(t, y):
@@ -47,16 +46,16 @@ def triginterp(t, y):
     def trigcardinal(x):
         if x == 0:
             tau = 1.0
-        elif mod(N, 2) == 1:  # odd
-            tau = sin(N * pi * x / 2) / (N * sin(pi * x / 2))
+        elif np.mod(N, 2) == 1:  # odd
+            tau = np.sin(N * np.pi * x / 2) / (N * np.sin(np.pi * x / 2))
         else:  # even
-            tau = sin(N * pi * x / 2) / (N * tan(pi * x / 2))
+            tau = np.sin(N * np.pi * x / 2) / (N * np.tan(np.pi * x / 2))
         return tau
 
     def p(x):
-        return sum([y[k] * trigcardinal(x - t[k]) for k in range(N)])
+        return np.sum([y[k] * trigcardinal(x - t[k]) for k in range(N)])
 
-    return vectorize(p)
+    return np.vectorize(p)
 
 
 def ccint(f, n):
@@ -67,20 +66,20 @@ def ccint(f, n):
     integral and a vector of the nodes used. Note: `n` must be even.
     """
     # Find Chebyshev extreme nodes.
-    theta = linspace(0, pi, n + 1)
-    x = -cos(theta)
+    theta = np.linspace(0, np.pi, n + 1)
+    x = -np.cos(theta)
 
     # Compute the C-C weights.
-    c = zeros(n + 1)
+    c = np.zeros(n + 1)
     c[[0, n]] = 1 / (n**2 - 1)
-    v = ones(n - 1)
+    v = np.ones(n - 1)
     for k in range(1, int(n / 2)):
-        v -= 2 * cos(2 * k * theta[1:-1]) / (4 * k**2 - 1)
-    v -= cos(n * theta[1:-1]) / (n**2 - 1)
+        v -= 2 * np.cos(2 * k * theta[1:-1]) / (4 * k**2 - 1)
+    v -= np.cos(n * theta[1:-1]) / (n**2 - 1)
     c[1:-1] = 2 * v / n
 
     # Evaluate integrand and integral.
-    I = dot(c, f(x))  # use vector inner product
+    I = np.dot(c, f(x))  # use vector inner product
     return I, x
 
 
@@ -92,16 +91,16 @@ def glint(f, n):
     integral and a vector of the nodes used.
     """
     # Nodes and weights are found via a tridiagonal eigenvalue problem.
-    beta = 0.5 / sqrt(1 - (2.0 * arange(1, n)) ** (-2))
-    T = diag(beta, 1) + diag(beta, -1)
+    beta = 0.5 / np.sqrt(1 - (2.0 * np.arange(1, n)) ** (-2))
+    T = np.diag(beta, 1) + np.diag(beta, -1)
     ev, V = eig(T)
-    ev = real_if_close(ev)
-    p = argsort(ev)
+    ev = np.real_if_close(ev)
+    p = np.argsort(ev)
     x = ev[p]  # nodes
     c = 2 * V[0, p] ** 2  # weights
 
     # Evaluate the integrand and compute the integral.
-    I = dot(c, f(x))  # vector inner product
+    I = np.dot(c, f(x))  # vector inner product
     return I, x
 
 
@@ -114,14 +113,14 @@ def intde(f, h, M):
     nodes used.
     """
     # Find where to truncate the trapezoid sum.
-    K = ceil(log(4 / pi * log(2 * M)) / h)
+    K = np.ceil(np.log(4 / np.pi * np.log(2 * M)) / h)
 
     # Integrate by trapezoids in a transformed variable t.
-    t = h * arange(-K, K + 1)
-    x = sinh(pi / 2 * sinh(t))
-    dxdt = pi / 2 * cosh(t) * cosh(pi / 2 * sinh(t))
+    t = h * np.arange(-K, K + 1)
+    x = np.sinh(np.pi / 2 * np.sinh(t))
+    dxdt = np.pi / 2 * np.cosh(t) * np.cosh(np.pi / 2 * np.sinh(t))
 
-    I = h * dot(f(x), dxdt)
+    I = h * np.dot(f(x), dxdt)
     return I, x
 
 
@@ -134,12 +133,12 @@ def intsing(f, h, delta):
     nodes used.
     """
     # Find where to truncate the trapezoid sum.
-    K = ceil(log(-2 / pi * log(delta / 2)) / h)
+    K = np.ceil(np.log(-2 / np.pi * np.log(delta / 2)) / h)
 
     # Integrate over a transformed variable.
-    t = h * arange(-K, K + 1)
-    x = tanh(pi / 2 * sinh(t))
-    dxdt = pi / 2 * cosh(t) / (cosh(pi / 2 * sinh(t)) ** 2)
+    t = h * np.arange(-K, K + 1)
+    x = np.tanh(np.pi / 2 * np.sinh(t))
+    dxdt = np.pi / 2 * np.cosh(t) / (np.cosh(np.pi / 2 * np.sinh(t)) ** 2)
 
-    I = h * dot(f(x), dxdt)
+    I = h * np.dot(f(x), dxdt)
     return I, x

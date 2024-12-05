@@ -1,8 +1,6 @@
-from numpy import *
-from numpy.linalg import norm
+import numpy as np
 from .FNC04 import levenberg
 import warnings
-
 
 def eulerivp(dudt, tspan, u0, n):
     """
@@ -14,8 +12,8 @@ def eulerivp(dudt, tspan, u0, n):
     """
     a, b = tspan
     h = (b - a) / n
-    t = linspace(a, b, n + 1)
-    u = zeros(n + 1)
+    t = np.linspace(a, b, n + 1)
+    u = np.zeros(n + 1)
     u[0] = u0
     for i in range(n):
         u[i + 1] = u[i] + h * dudt(t[i], u[i])
@@ -32,10 +30,10 @@ def eulersys(dudt, tspan, u0, n):
     # Time discretization.
     a, b = tspan
     h = (b - a) / n
-    t = linspace(a, b, n + 1)
+    t = np.linspace(a, b, n + 1)
 
     # Initial condition and output setup.
-    u = zeros((len(u0), n + 1))
+    u = np.zeros((len(u0), n + 1))
     u[:, 0] = u0
 
     # The time stepping iteration.
@@ -56,10 +54,10 @@ def ie2(dudt, tspan, u0, n):
     # Time discretization.
     a, b = tspan
     h = (b - a) / n
-    t = linspace(a, b, n + 1)
+    t = np.linspace(a, b, n + 1)
 
     # Initialize output.
-    u = zeros([len(u0), n + 1])
+    u = np.zeros([len(u0), n + 1])
     u[:, 0] = u0
 
     # Time stepping.
@@ -81,10 +79,10 @@ def rk4(dudt, tspan, u0, n):
     # Time discretization.
     a, b = tspan
     h = (b - a) / n
-    t = linspace(a, b, n + 1)
+    t = np.linspace(a, b, n + 1)
 
     # Initialize output.
-    u = zeros([len(u0), n + 1])
+    u = np.zeros([len(u0), n + 1])
     u[:, 0] = u0
 
     # Time stepping.
@@ -125,8 +123,8 @@ def rk23(dudt, tspan, u0, tol):
         unew2 = u[i] + h * (2 * s1 + 3 * s2 + 4 * s3) / 9  # 2rd order solution
         s4 = dudt(t[i] + h, unew2)
         err = h * (-5 * s1 / 72 + s2 / 12 + s3 / 9 - s4 / 8)  # 2nd/3rd order difference
-        E = norm(err, inf)  # error estimate
-        maxerr = tol * (1 + norm(u[i], inf))  # relative/absolute blend
+        E = np.linalg.norm(err, np.inf)  # error estimate
+        maxerr = tol * (1 + np.linalg.norm(u[i], np.inf))  # relative/absolute blend
 
         # Accept the proposed step?
         if E < maxerr:  # yes
@@ -141,7 +139,7 @@ def rk23(dudt, tspan, u0, tol):
         h = min(q * h, tspan[-1] - t[i])  # don't step past the end
 
     # Convert outputs to arrays
-    return array(t), array(u).T
+    return np.array(t), np.array(u).T
 
 
 def ab4(dudt, tspan, u0, n):
@@ -154,24 +152,24 @@ def ab4(dudt, tspan, u0, n):
     # Time discretization.
     a, b = tspan
     h = (b - a) / n
-    t = linspace(a, b, n + 1)
+    t = np.linspace(a, b, n + 1)
 
     # Constants in the AB4 method.
     k = 4
-    sigma = array([55, -59, 37, -9]) / 24
+    sigma = np.array([55, -59, 37, -9]) / 24
 
     # Find starting values by RK4.
     ts, us = rk4(dudt, [a, a + (k - 1) * h], u0, k - 1)
-    u = zeros([u0.size, n + 1])
+    u = np.zeros([u0.size, n + 1])
     u[:, :k] = us[:, :k]
 
     # Compute history of u' values, from newest to oldest.
-    f = array([dudt(t[k - j - 2], u[:, k - j - 2]) for j in range(k)])
+    f = np.array([dudt(t[k - j - 2], u[:, k - j - 2]) for j in range(k)])
 
     # Time stepping.
     for i in range(k - 1, n):
-        f = vstack([dudt(t[i], u[:, i]), f[:-1]])  # new value of du/dt
-        u[:, i + 1] = u[:, i] + h * dot(sigma, f)  # advance one step
+        f = np.vstack([dudt(t[i], u[:, i]), f[:-1]])  # new value of du/dt
+        u[:, i + 1] = u[:, i] + h * np.dot(sigma, f)  # advance one step
     return t, u
 
 
@@ -185,10 +183,10 @@ def am2(dudt, tspan, u0, n):
     # Time discretization.
     a, b = tspan
     h = (b - a) / n
-    t = linspace(a, b, n + 1)
+    t = np.linspace(a, b, n + 1)
 
     # Initialize output.
-    u = zeros([u0.size, n+1])
+    u = np.zeros([u0.size, n+1])
     u[:, 0] = u0
 
     # Time stepping.

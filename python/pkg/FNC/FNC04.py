@@ -1,9 +1,6 @@
 from numpy.linalg import norm, lstsq
-from numpy import *
-
-eps = finfo(float).eps
+import numpy as np
 import warnings
-
 
 def newton(f, dfdx, x1):
     """
@@ -13,14 +10,15 @@ def newton(f, dfdx, x1):
     derivative of `f`. Returns a vector of root estimates.
     """
     # Operating parameters.
+    eps = np.finfo(float).eps
     funtol = 100 * eps
     xtol = 100 * eps
     maxiter = 40
 
-    x = zeros(maxiter)
+    x = np.zeros(maxiter)
     x[0] = x1
     y = f(x1)
-    dx = inf  # for initial pass below
+    dx = np.inf  # for initial pass below
     k = 0
 
     while (abs(dx) > xtol) and (abs(y) > funtol) and (k < maxiter):
@@ -45,15 +43,16 @@ def secant(f, x1, x2):
     vector of root estimates.
     """
     # Operating parameters.
+    eps = np.finfo(float).eps
     funtol = 100 * eps
     xtol = 100 * eps
     maxiter = 40
 
-    x = zeros(maxiter)
+    x = np.zeros(maxiter)
     x[:2] = [x1, x2]
     y1 = f(x1)
     y2 = 100
-    dx = inf  # for initial pass below
+    dx = np.inf  # for initial pass below
     k = 1
 
     while (abs(dx) > xtol) and (abs(y2) > funtol) and (k < maxiter):
@@ -78,11 +77,11 @@ def newtonsys(f, x1):
     root estimates as a matrix, one estimate per column.
     """
     # Operating parameters.
-    funtol = 1000 * eps
-    xtol = 1000 * eps
+    funtol = 1000 * np.finfo(float).eps
+    xtol = 1000 * np.finfo(float).eps
     maxiter = 40
 
-    x = zeros((len(x1), maxiter))
+    x = np.zeros((len(x1), maxiter))
     x[:, 0] = x1
     y, J = f(x1)
     dx = 10.0  # for initial pass below
@@ -108,10 +107,10 @@ def fdjac(f, x0, y0):
     where `y0`=`f(x0)` is given.
     """
 
-    delta = sqrt(eps)  # FD step size
+    delta = np.sqrt(np.finfo(float).eps)  # FD step size
     m, n = len(y0), len(x0)
-    J = zeros(m, n)
-    I = eye(n)
+    J = np.zeros(m, n)
+    I = np.eye(n)
     for j in range(n):
         J[:, j] = (f(x0 + delta * I[:, j]) - y0) / delta
     return J
@@ -132,7 +131,7 @@ def levenberg(f, x1, tol=1e-12):
     maxiter = 40
 
     n = len(x1)
-    x = zeros(n, maxiter)
+    x = np.zeros(n, maxiter)
     x[:, 0] = x1
     fk = f(x1)
     k = 0
@@ -143,7 +142,7 @@ def levenberg(f, x1, tol=1e-12):
     lam = 10
     while (norm(s) > xtol) and (norm(fk) > ftol) and (k < maxiter):
         # Compute the proposed step.
-        B = Ak.T @ Ak + lam * eye(n)
+        B = Ak.T @ Ak + lam * np.eye(n)
         z = Ak.T @ fk
         s = -lstsq(B, z)[0]
 
@@ -159,7 +158,7 @@ def levenberg(f, x1, tol=1e-12):
 
             lam = lam / 10  # get closer to Newton
             # Broyden update of the Jacobian.
-            Ak = Ak + outer(y - Ak @ s, s / dot(s, s))
+            Ak = Ak + np.outer(y - Ak @ s, s / np.dot(s, s))
             jac_is_new = False
         else:  # don't accept
             # Get closer to steepest descent.

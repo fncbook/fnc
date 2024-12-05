@@ -62,7 +62,7 @@ Line 11 of {numref}`Function {number} <function-lufact>` points out a subtle iss
 
 ## Examples
 
-```{code-cell} ipython3
+```{code-cell} 
 # from scipy import *
 from numpy import *
 from matplotlib.pyplot import *
@@ -72,7 +72,7 @@ from timeit import default_timer as timer
 import FNC
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 :tags: [remove-cell]
 # This (optional) block is for improving the display of plots.
 # from IPython.display import set_matplotlib_formats
@@ -89,28 +89,28 @@ rcParams['animation.html'] = "jshtml"  # or try "html5"
 ``````{dropdown} Linear system for polynomial interpolation
 We create two vectors for data about the population of China. The first has the years of census data and the other has the population, in millions of people.
 
-```{code-cell} ipython3
+```{code-cell} 
 year = arange(1980, 2020, 10)   # from 1980 to 2020 by 10
 pop = array([984.736, 1148.364, 1263.638, 1330.141])
 ```
 
 It's convenient to measure time in years since 1980. 
 
-```{code-cell} ipython3
+```{code-cell} 
 t = year - 1980
 y = pop
 ```
 
 Now we have four data points $(t_1,y_1),\dots,(t_4,y_4)$, so $n=4$ and we seek an interpolating cubic polynomial. We construct the associated Vandermonde matrix: 
 
-```{code-cell} ipython3
+```{code-cell} 
 V = vander(t)
 print(V)
 ```
 
 To solve a linear system $\mathbf{V} \mathbf{c} = \mathbf{y}$ for the vector of polynomial coefficients, we use `solve` (imported from `numpy.linalg`):
 
-```{code-cell} ipython3
+```{code-cell} 
 c = solve(V, y)
 print(c)
 ```
@@ -122,13 +122,13 @@ Matrix multiplication in NumPy is done with `@` or `matmul`.
 :::
 ::::
 
-```{code-cell} ipython3
+```{code-cell} 
 print(y - V @ c)
 ```
 
 By our definitions, the coefficients in `c` are given in descending order of power in $t$. We can use the resulting polynomial to estimate the population of China in 2005:
 
-```{code-cell} ipython3
+```{code-cell} 
 p = poly1d(c)          # construct a polynomial
 print(p(2005 - 1980))     # apply the 1980 time shift
 ```
@@ -137,7 +137,7 @@ The official figure was 1303.72, so our result is rather good.
 
 We can visualize the interpolation process. First, we plot the data as points. Then we add a plot of the interpolant, taking care to shift the $t$ variable back to actual years.
 
-```{code-cell} ipython3
+```{code-cell} 
 scatter(year, y, color="k", label="data");
 tt = linspace(0, 30, 300)   # 300 times from 1980 to 2010
 plot(1980 + tt, p(tt), label="interpolant");
@@ -164,14 +164,14 @@ see: Python; size, Python; shape
 
 A vector is created using square brackets and commas to enclose and separate its entries.
 
-```{code-cell} ipython3
+```{code-cell} 
 x = array([3, 3, 0, 1, 0 ])
 print(x.shape)
 ```
 
 To construct a matrix, you nest the brackets to create a "vector of vectors". The inner vectors are the rows.
 
-```{code-cell} ipython3
+```{code-cell} 
 A = array([ 
     [1, 2, 3, 4, 5],
     [50, 40, 30, 20, 10], 
@@ -184,7 +184,7 @@ print(A.shape)
 
 In this text, we treat all vectors as equivalent to matrices with a single column. That isn't true in NumPy, because even an $n \times 1$ array has two dimensions, unlike a vector.
 
-```{code-cell} ipython3
+```{code-cell} 
 array([[3], [1], [2]]).shape
 ```
 
@@ -193,11 +193,11 @@ array([[3], [1], [2]]).shape
 
 You can concatenate arrays with compatible dimensions using `hstack` and `vstack`.
 
-```{code-cell} ipython3
+```{code-cell} 
 print( hstack([A, A]) )
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 print( vstack([A, A]) )
 ```
 
@@ -206,13 +206,13 @@ print( vstack([A, A]) )
 
 Transposing a matrix is done by appending `.T` to it. 
 
-```{code-cell} ipython3
+```{code-cell} 
 print(A.T)
 ```
 
 For matrices with complex values, we usually want instead the adjoint or hermitian, which is `.conj().T`. 
 
-```{code-cell} ipython3
+```{code-cell} 
 print((x + 1j).conj().T)
 ```
 
@@ -221,11 +221,11 @@ print((x + 1j).conj().T)
 
 There are many convenient shorthand ways of building vectors and matrices other than entering all of their entries directly or in a loop. To get a vector with evenly spaced entries between two endpoints, you have two options.
 
-```{code-cell} ipython3
+```{code-cell} 
 print(arange(1, 7, 2))   # from 1 to 7 (not inclusive), step by 2        
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 print(linspace(-1, 1, 5))   # from -1 to 1 (inclusive), with 5 total values
 ```
 
@@ -233,7 +233,7 @@ The practical difference between these is whether you want to specify the step s
 
 Accessing an element is done by giving one (for a vector) or two index values in square brackets. **In Python, indexing always starts with zero, not 1.**
 
-```{code-cell} ipython3
+```{code-cell} 
 A = array([ 
     [1, 2, 3, 4, 5],
     [50, 40, 30, 20, 10], 
@@ -242,7 +242,7 @@ A = array([
 x = array([3, 2, 0, 1, -1 ])
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 print("row 2, col 3 of A:", A[1, 2])
 print("first element of x:", x[0])
 ```
@@ -254,17 +254,17 @@ print("first element of x:", x[0])
 
 The indices can be ranges, in which case a **slice** or block of the matrix is accessed. You build these using a colon in the form `start:stop`. However, the last value of this range is `stop-1`, not `stop`.
 
-```{code-cell} ipython3
+```{code-cell} 
 print(A[1:3, 0:2])    # rows 2 and 3, cols 1 and 2
 ```
 
 If `start` or `stop` is omitted, the range extends to the first or last index.
 
-```{code-cell} ipython3
+```{code-cell} 
 print(x[1:])  # elements 2 through the end
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 print(A[:2, 0])  # first two rows in column 1
 ```
 
@@ -272,23 +272,23 @@ Notice in the last case above that even when the slice is in the shape of a colu
 
 There are more variations on the colon ranges. A negative value means to count from the end rather than the beginning. And a colon by itself means to include everything from the relevant dimension.
 
-```{code-cell} ipython3
+```{code-cell} 
 print(A[:-1, :])    # all rows up to the last, all columns
 ```
 
 Finally, `start:stop:step` means to step size or stride other than one. You can mix this with the other variations.
 
-```{code-cell} ipython3
+```{code-cell} 
 print(x[::2])  # all the odd indexes
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 print(A[:, ::-1])  # reverse the columns
 ```
 
 The matrix and vector senses of addition, subtraction, and scalar multiplication and division are all handled by the usual symbols. Two matrices of the same size (what NumPy calls shape) are operated on elementwise. 
 
-```{code-cell} ipython3
+```{code-cell} 
 print(A - 2 * ones([3, 5]))  # subtract two from each element
 ```
 
@@ -297,22 +297,22 @@ print(A - 2 * ones([3, 5]))  # subtract two from each element
 
 If one operand has a smaller number of dimensions than the other, Python tries to **broadcast** it in the "missing" dimension(s), and the operation proceeds if the resulting shapes are identical. 
 
-```{code-cell} ipython3
+```{code-cell} 
 print(A - 2)    # subtract two from each element
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 u = array([1, 2, 3, 4, 5])
 print(A - u)    # repeat this row for every row of A
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 :tags: raises-exception
 v = array([1, 2, 3])
 print(A - v)  # broadcasting this would be 3x3, so it's an error
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 print(A - v.reshape([3, 1]))    # broadcasts to each column of A
 ```
 
@@ -328,14 +328,14 @@ see: Python; matrix multiplication, Python; \@
 
 Matrix–matrix and matrix–vector products are computed using `@` or `matmul`.
 
-```{code-cell} ipython3
+```{code-cell} 
 B = diag([-1, 0, -5])    # create a diagonal 3x3
 print(B @ A)    # matrix product
 ```
 
 $AB$ is undefined for these matrix sizes. 
 
-```{code-cell} ipython3
+```{code-cell} 
 :tags: raises-exception
 print(A @ B)    # incompatible sizes
 ```
@@ -345,22 +345,22 @@ print(A @ B)    # incompatible sizes
 
 The multiplication operator `*` is reserved for elementwise multiplication. Both operands have to be the same size, after any potential broadcasts.
 
-```{code-cell} ipython3
+```{code-cell} 
 :tags: raises-exception
 print(B * A)    # not the same size, so it's an error
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 print((A / 2) * A)    # elementwise
 ```
 To raise to a power elementwise, use a double star. This will broadcast as well.
 
-```{code-cell} ipython3
+```{code-cell} 
 print(B)
 print(B**3)
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 print(x)
 print(2.0**x)
 ```
@@ -375,7 +375,7 @@ If `A` is a matrix, `A**2` is *not* the same as mathematically raising it to the
 
 Most of the mathematical functions, such as cos, sin, log, exp and sqrt, expecting scalars as operands will be broadcast to arrays.
 
-```{code-cell} ipython3
+```{code-cell} 
 print(cos(pi * x))      
 ```
 ``````
@@ -385,12 +385,12 @@ print(cos(pi * x))
 ``````{dropdown} Solving linear systems
 For a square matrix $A$, the command `solve(A, B)` is mathematically equivalent to $\mathbf{A}^{-1} \mathbf{b}$. 
 
-```{code-cell} ipython3
+```{code-cell} 
 A = array([[1, 0, -1], [2, 2, 1], [-1, -3, 0]])
 b = array([1, 2, 3])
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 x = solve(A, b)
 print(x)
 ```
@@ -400,14 +400,14 @@ print(x)
 
 One way to check the answer is to compute a quantity known as the **residual**. It is (ideally) close to machine precision(relative to the elements in the data). 
 
-```{code-cell} ipython3
+```{code-cell} 
 residual = b - A @ x
 print(residual)
 ```
 
 If the matrix $\mathbf{A}$ is singular, you may get an error.
 
-```{code-cell} ipython3
+```{code-cell} 
 :tags: raises-exception
 A = array([[0, 1], [0, 0]])
 b = array([1, -1])
@@ -425,7 +425,7 @@ A linear system with a singular matrix might have no solution or infinitely many
 
 It's easy to get just the lower triangular part of any matrix using the `tril` function.
 
-```{code-cell} ipython3
+```{code-cell} 
 A = 1 + floor(9 * random.rand(5, 5))
 L = tril(A)
 print(L)
@@ -433,7 +433,7 @@ print(L)
 
 We'll set up and solve a linear system with this matrix.
 
-```{code-cell} ipython3
+```{code-cell} 
 b = ones(5)
 x = FNC.forwardsub(L, b)
 print(x)
@@ -441,13 +441,13 @@ print(x)
 
 It's not clear how accurate this answer is. However, the residual should be zero or comparable to $\macheps$.
 
-```{code-cell} ipython3
+```{code-cell} 
 b - L @ x
 ```
 
 Next we'll engineer a problem to which we know the exact answer. 
 
-```{code-cell} ipython3
+```{code-cell} 
 alpha = 0.3;
 beta = 2.2;
 U = diag(ones(5)) + diag([-1, -1, -1, -1], k=1)
@@ -455,7 +455,7 @@ U[0, 3:5] = [ alpha - beta, beta ]
 print(U)
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 x_exact = ones(5)
 b = array([alpha, 0, 0, 0, 1])
 x = FNC.backsub(U, b)
@@ -464,7 +464,7 @@ print("error:", x - x_exact)
 
 Everything seems OK here. But another example, with a different value for $\beta$, is more troubling.
 
-```{code-cell} ipython3
+```{code-cell} 
 alpha = 0.3;
 beta = 1e12;
 U = diag(ones(5)) + diag([-1, -1, -1, -1], k=1)
@@ -518,7 +518,7 @@ Simply because of the triangular zero structures, only the first outer product c
 ``````{dropdown} LU factorization
 For illustration, we work on a $4 \times 4$ matrix. We name it with a subscript in preparation for what comes.
 
-```{code-cell} ipython3
+```{code-cell} 
 A_1 = array([
      [2,    0,    4,    3], 
      [-4,    5,   -7,  -10], 
@@ -635,7 +635,7 @@ b - A @ x
 
 Here is a straightforward implementation of matrix-vector multiplication.
 
-```{code-cell} ipython3
+```{code-cell} 
 n = 6
 A = random.rand(n, n)
 x = ones(n)
@@ -655,7 +655,7 @@ Since the matrix $\mathbf{A}$ has $n^2$ elements, all of which have to be involv
 
 Let's run an experiment with the built-in matrix-vector multiplication. We assume that flops dominate the computation time and thus measure elapsed time. 
 
-```{code-cell} ipython3
+```{code-cell} 
 N = 400 * arange(1, 11)
 t = []
 print("  n           t")
@@ -672,7 +672,7 @@ The reason for doing multiple repetitions at each value of $n$ above is to avoid
 
 Looking at the timings just for $n=2000$ and $n=4000$, they have ratio:
 
-```{code-cell} ipython3
+```{code-cell} 
 print(t[9] / t[4])
 ```
 
@@ -688,7 +688,7 @@ $$
 ``````{dropdown} Asymptotics in log-log plots
 Let's repeat the experiment of the previous example for more, and larger, values of $n$.
 
-```{code-cell} ipython3
+```{code-cell} 
 N = arange(400, 6200, 200)
 t = zeros(len(N))
 for i, n in enumerate(N):
@@ -701,7 +701,7 @@ for i, n in enumerate(N):
 
 Plotting the time as a function of $n$ on log-log scales is equivalent to plotting the logs of the variables, but is formatted more neatly. 
 
-```{code-cell} ipython3
+```{code-cell} 
 fig, ax = subplots()
 ax.loglog(N, t, "-o", label="observed")
 ylabel("elapsed time (sec)");
@@ -711,7 +711,7 @@ title("Timing of matrix-vector multiplications");
 
 You can see that while the full story is complicated, the graph is trending to a straight line of positive slope. For comparison, we can plot a line that represents $O(n^2)$ growth exactly. (All such lines have slope equal to 2.)
 
-```{code-cell} ipython3
+```{code-cell} 
 ax.loglog(N, t[-1] * (N/N[-1])**2, "--", label="$O(n^2)$")
 ax.legend();  fig
 ```
@@ -750,7 +750,7 @@ title("Timing of LU factorizations");
 ``````{dropdown} Failure of naive LU factorization
 Here is a previously encountered matrix that factors well.
 
-```{code-cell} ipython3
+```{code-cell} 
 A = array([
     [2, 0, 4, 3],
     [-4, 5, -7, -10],
@@ -763,7 +763,7 @@ print(L)
 
 If we swap the second and fourth rows of $\mathbf{A}$, the result is still nonsingular. However, the factorization now fails.
 
-```{code-cell} ipython3
+```{code-cell} 
 A[[1, 3], :] = A[[3, 1], :]  
 L, U = FNC.lufact(A)
 print(L)
@@ -994,24 +994,24 @@ print(solve(A, b))
 
 The `norm` function from `numpy.linalg` computes vector norms.
 
-```{code-cell} ipython3
+```{code-cell} 
 from numpy.linalg import norm
 x = array([2, -3, 1, -1])
 print(norm(x))       # 2-norm by default
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 print(norm(x, inf))
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 print(norm(x, 1))
 ```
 ``````
 
 (demo-norms-matrix-python)=
 ``````{dropdown} Matrix norms
-```{code-cell} ipython3
+```{code-cell} 
 from numpy.linalg import norm
 A = array([ [2, 0], [1, -1] ])
 ```
@@ -1021,13 +1021,13 @@ A = array([ [2, 0], [1, -1] ])
 
 The default matrix norm is *not* the 2-norm. Instead, you must provide the 2 explicitly. 
 
-```{code-cell} ipython3
+```{code-cell} 
 print(norm(A, 2))
 ```
 
 You can get the 1-norm as well.
 
-```{code-cell} ipython3
+```{code-cell} 
 print(norm(A, 1))
 ```
 
@@ -1036,36 +1036,36 @@ print(norm(A, 1))
 
 The 1-norm is equivalent to 
 
-```{code-cell} ipython3
+```{code-cell} 
 print(max( sum(abs(A), axis=0)) )  # sum down the rows
 ```
 
 Similarly, we can get the $\infty$-norm and check our formula for it.
 
-```{code-cell} ipython3
+```{code-cell} 
 print(norm(A, inf))
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 print(max( sum(abs(A), axis=1)) )  # sum across columns 
 ```
 
 Here we illustrate the geometric interpretation of the 2-norm. First, we will sample a lot of vectors on the unit circle in $\mathbb{R}^2$. 
 
-```{code-cell} ipython3
+```{code-cell} 
 theta = linspace(0, 2*pi, 601)
 x = vstack([cos(theta), sin(theta)])  # 601 unit columns
 ```
 
 The linear function $\mathbf{f}(\mathbf{x}) = \mathbf{A}\mathbf{x}$ defines a mapping from $\mathbb{R}^2$ to $\mathbb{R}^2$. We can apply `A` to every column of `x` simply by using a matrix multiplication.
 
-```{code-cell} ipython3
+```{code-cell} 
 y = A @ x
 ```
 
 We plot the unit circle on the left and the image of all mapped vectors on the right: 
 
-```{code-cell} ipython3
+```{code-cell} 
 subplot(1,2,1)
 plot(x[0, :], x[1, :])
 axis("equal")
@@ -1095,7 +1095,7 @@ As seen on the right-side plot, the image of the transformed vectors is an ellip
 
 The function `cond` from `numpy.linalg` is used to computes matrix condition numbers. By default, the 2-norm is used. As an example, the family of *Hilbert matrices* is famously badly conditioned. Here is the $6\times 6$  case. 
 
-```{code-cell} ipython3
+```{code-cell} 
 A = array([ 
     [1/(i + j + 2) for j in range(6)] 
     for i in range(6) 
@@ -1103,7 +1103,7 @@ A = array([
 print(A)
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 from numpy.linalg import cond
 kappa = cond(A)
 print(f"kappa is {kappa:.3e}")
@@ -1111,14 +1111,14 @@ print(f"kappa is {kappa:.3e}")
 
 Next we engineer a linear system problem to which we know the exact answer.
 
-```{code-cell} ipython3
+```{code-cell} 
 x_exact = 1.0 + arange(6)
 b = A @ x_exact
 ```
 
 Now we perturb the data randomly with a vector of norm $10^{-12}$. 
 
-```{code-cell} ipython3
+```{code-cell} 
 dA = random.randn(6, 6)
 dA = 1e-12 * (dA / norm(dA, 2))
 db = random.randn(6)
@@ -1127,27 +1127,27 @@ db = 1e-12 * (db / norm(db, 2))
 
 We solve the perturbed problem using built-in pivoted LU and see how the solution was changed.
 
-```{code-cell} ipython3
+```{code-cell} 
 x = solve(A + dA, b + db) 
 dx = x - x_exact
 ```
 
 Here is the relative error in the solution.
 
-```{code-cell} ipython3
+```{code-cell} 
 print(f"relative error is {norm(dx) / norm(x_exact):.2e}")
 ```
 
 And here are upper bounds predicted using the condition number of the original matrix. 
 
-```{code-cell} ipython3
+```{code-cell} 
 print(f"b_bound: {kappa * 1e-12 / norm(b):.2e}")
 print(f"A_bound: {kappa * 1e-12 / norm(A, 2):.2e}")
 ```
 
 Even if we don't make any manual perturbations to the data, machine epsilon does when we solve the linear system numerically.
 
-```{code-cell} ipython3
+```{code-cell} 
 x = solve(A, b)
 print(f"relative error: {norm(x - x_exact) / norm(x_exact):.2e}")
 print(f"rounding bound: {kappa / 2**52:.2e}")
@@ -1158,7 +1158,7 @@ Because $\kappa\approx 10^8$, it's possible to lose 8 digits of accuracy in the 
 
 Larger Hilbert matrices are even more poorly conditioned.
 
-```{code-cell} ipython3
+```{code-cell} 
 A = array([ [1/(i+j+2) for j in range(14)] for i in range(14) ])
 kappa = cond(A)
 print(f"kappa is {kappa:.3e}")
@@ -1166,11 +1166,11 @@ print(f"kappa is {kappa:.3e}")
 
 Before we compute the solution, note that $\kappa$ exceeds `1/eps`. In principle we therefore might end up with an answer that is completely wrong (i.e., a relative error greater than 100%).
 
-```{code-cell} ipython3
+```{code-cell} 
 print(f"rounding bound: {kappa / 2**52:.2e}")
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 x_exact = 1.0 + arange(14)
 b = A @ x_exact  
 x = solve(A, b)
@@ -1178,7 +1178,7 @@ x = solve(A, b)
 
 We got an answer. But in fact, the error does exceed 100%:
 
-```{code-cell} ipython3
+```{code-cell} 
 print(f"relative error: {norm(x - x_exact) / norm(x_exact):.2e}")
 ```
 ``````
@@ -1188,7 +1188,7 @@ print(f"relative error: {norm(x - x_exact) / norm(x_exact):.2e}")
 ``````{dropdown} Banded matrices
 Here is a matrix with both lower and upper bandwidth equal to one. Such a matrix is called tridiagonal.
 
-```{code-cell} ipython3
+```{code-cell} 
 A = array([ 
     [2, -1,  0,  0,  0,  0],
     [4,  2, -1,  0,  0,  0],
@@ -1204,31 +1204,31 @@ A = array([
 
 We can extract the elements on any diagonal using the `diag` command. The "main" or central diagonal is numbered zero, above and to the right of that is positive, and below and to the left is negative.
 
-```{code-cell} ipython3
+```{code-cell} 
 print( diag(A) )
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 print( diag(A, 1) )
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 print( diag(A, -1) )
 ```
 
 We can also construct matrices by specifying a diagonal with the `diag` function.
 
-```{code-cell} ipython3
+```{code-cell} 
 A = A + diag([pi, 8, 6, 7], 2)
 print(A)
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 L, U = FNC.lufact(A)
 print(L)
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 print(U)
 ```
 
@@ -1240,7 +1240,7 @@ Observe above that the lower and upper bandwidths of $\mathbf{A}$ are preserved 
 ``````{dropdown} Timing banded LU
 We'll use a large banded matrix to observe the speedup possible in LU factorization. If we use an ordinary dense matrix, then there's no way to exploit a banded structure:
 
-```{code-cell} ipython3
+```{code-cell} 
 n = 8000
 main = 1 + arange(n)
 plusone = linspace(n-1, 1, n-1)
@@ -1248,7 +1248,7 @@ minusone = ones(n-1)
 A = diag(main) + diag(plusone,1) + diag(minusone,1)
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 from scipy.linalg import lu
 start = timer()
 lu(A)
@@ -1260,7 +1260,7 @@ If instead we construct a proper sparse matrix, the speedup can be dramatic.
 ```{index} ! Python; diags, ! Python; splu
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 from scipy.sparse import diags
 from scipy.sparse.linalg import splu
 A = diags([main, plusone, minusone], [0, 1, -1], format="csc")
@@ -1274,7 +1274,7 @@ print(f"time for sparse banded: {timer() - start:.5f}")
 ``````{dropdown} Symmetric LDL$^T$ factorization
 We begin with a symmetric $\mathbf{A}$. 
 
-```{code-cell} ipython3
+```{code-cell} 
 A_1 = array([
     [2,     4,     4,     2],
     [4,     5,     8,    -5],
@@ -1332,7 +1332,7 @@ print(norm(A_1 - (L @ diag(d) @ L.T), 2) / norm(A_1))
 ``````{dropdown} Cholesky factorization
 A randomly chosen matrix is extremely unlikely to be symmetric. However, there is a simple way to symmetrize one.
 
-```{code-cell} ipython3
+```{code-cell} 
 A = 1.0 + floor(9 * random.rand(4, 4))
 B = A + A.T
 print(B)
@@ -1343,7 +1343,7 @@ Similarly, a random symmetric matrix is unlikely to be positive definite. The Ch
 ```{index} ! Python; cholesky
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 :tags: raises-exception
 from numpy.linalg import cholesky
 cholesky(B)
@@ -1351,13 +1351,13 @@ cholesky(B)
 
 It's not hard to manufacture an SPD matrix to try out the Cholesky factorization:
 
-```{code-cell} ipython3
+```{code-cell} 
 B = A.T @ A
 R = cholesky(B)
 print(R)
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 print(norm(R @ R.T - B) / norm(B))
 ```
 ``````

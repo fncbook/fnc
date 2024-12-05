@@ -1,5 +1,5 @@
-from numpy import *
-from numpy.linalg import norm, solve, lstsq
+import numpy as np
+# from numpy.linalg import norm, solve, lstsq
 from scipy.linalg import lu
 from scipy.sparse import csc_matrix, diags
 
@@ -12,12 +12,12 @@ def poweriter(A, numiter):
     and return a vector of eigenvalue estimates and the final eigenvector approximation.
     """
     n = A.shape[0]
-    x = random.randn(n)
-    x = x / norm(x, inf)
-    gamma = zeros(numiter)
+    x = np.random.randn(n)
+    x = x / np.linalg.norm(x, np.inf)
+    gamma = np.zeros(numiter)
     for k in range(numiter):
         y = A @ x
-        m = argmax(abs(y))
+        m = np.argmax(abs(y))
         gamma[k] = y[m] / x[m]
         x = y / y[m]
 
@@ -33,13 +33,13 @@ def inviter(A, s, numiter):
     eigenvector approximation.
     """
     n = A.shape[0]
-    x = random.randn(n)
-    x = x / norm(x, inf)
-    gamma = zeros(numiter)
-    PL, U = lu(A - s * eye(n), permute_l=True)
+    x = np.random.randn(n)
+    x = x / np.linalg.norm(x, np.inf)
+    gamma = np.zeros(numiter)
+    PL, U = lu(A - s * np.eye(n), permute_l=True)
     for k in range(numiter):
-        y = solve(U, solve(PL, x))
-        m = argmax(abs(y))
+        y = np.linalg.solve(U, np.linalg.solve(PL, x))
+        m = np.argmax(abs(y))
         gamma[k] = x[m] / y[m] + s
         x = y / y[m]
 
@@ -55,9 +55,9 @@ def arnoldi(A, u, m):
     Hessenberg `H` of size `m`+1 by `m`.
     """
     n = u.size
-    Q = zeros([n, m + 1])
-    H = zeros([m + 1, m])
-    Q[:, 0] = u / norm(u)
+    Q = np.zeros([n, m + 1])
+    H = np.zeros([m + 1, m])
+    Q[:, 0] = u / np.linalg.norm(u)
     for j in range(m):
         # Find the new direction that extends the Krylov subspace.
         v = A @ Q[:, j]
@@ -66,7 +66,7 @@ def arnoldi(A, u, m):
             H[i, j] = Q[:, i] @ v
             v -= H[i, j] * Q[:, i]
         # Normalize and store the new basis vector.
-        H[j + 1, j] = norm(v)
+        H[j + 1, j] = np.linalg.norm(v)
         Q[:, j + 1] = v / H[j + 1, j]
 
     return Q, H
@@ -81,12 +81,12 @@ def arngmres(A, b, m):
     demo only, not practical use.)
     """
     n = len(b)
-    Q = zeros([n, m + 1])
-    Q[:, 0] = b / norm(b)
-    H = zeros([m + 1, m])
+    Q = np.zeros([n, m + 1])
+    Q[:, 0] = b / np.linalg.norm(b)
+    H = np.zeros([m + 1, m])
 
     # Initial "solution" is zero.
-    residual = hstack([norm(b), zeros(m)])
+    residual = np.hstack([np.linalg.norm(b), np.zeros(m)])
 
     for j in range(m):
         # Next step of Arnoldi iteration.
@@ -94,38 +94,38 @@ def arngmres(A, b, m):
         for i in range(j + 1):
             H[i, j] = Q[:, i] @ v
             v -= H[i, j] * Q[:, i]
-        H[j + 1, j] = norm(v)
+        H[j + 1, j] = np.linalg.norm(v)
         Q[:, j + 1] = v / H[j + 1, j]
 
         # Solve the minimum residual problem.
-        r = hstack([norm(b), zeros(j + 1)])
-        z = lstsq(H[:j + 2, :j + 1], r)[0]
+        r = np.hstack([np.linalg.norm(b), np.zeros(j + 1)])
+        z = np.linalg.lstsq(H[:j + 2, :j + 1], r)[0]
         x = Q[:, :j + 1] @ z
-        residual[j + 1] = norm(A @ x - b)
+        residual[j + 1] = np.linalg.norm(A @ x - b)
 
     return x, residual
 
 
 def sprandsym(n, density, **kwargs):
     if "rcond" in kwargs:
-        ev = array([kwargs["rcond"] ** (i / (n - 1)) for i in range(n)])
+        ev = np.array([kwargs["rcond"] ** (i / (n - 1)) for i in range(n)])
     elif "eigvals" in kwargs:
         ev = kwargs["eigvals"]
     else:
-        ev = sqrt(n) * random.randn(n)
+        ev = np.sqrt(n) * np.random.randn(n)
 
     def randjr(A):
         # Random Jacobi rotation similarity transformation.
-        theta = 2 * pi * random.rand()
-        c = cos(theta)
-        s = sin(theta)
-        idx = [int(k) for k in floor(n * random.rand(2))]
-        R = array([[c, s], [-s, c]])
+        theta = 2 * np.pi * np.random.rand()
+        c = np.cos(theta)
+        s = np.sin(theta)
+        idx = [int(k) for k in np.floor(n * np.random.rand(2))]
+        R = np.array([[c, s], [-s, c]])
         A[idx, :] = R @ A[idx, :]
         A[:, idx] = A[:, idx] @ R.T
         return A
 
-    targetnz = ceil(min(0.98, density) * n * n)
+    targetnz = np.ceil(min(0.98, density) * n * n)
     A = diags(ev, 0, format="lil")
     while A.nnz < targetnz:
         A = randjr(A)
