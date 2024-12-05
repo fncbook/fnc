@@ -6,13 +6,6 @@ kernelspec:
 numbering: 
   headings: false
 ---
-```{code-cell}
-:tags: [remove-cell]
-import Pkg; Pkg.activate("/Users/driscoll/Documents/GitHub/fnc")
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 # Chapter 5
 
 ## Functions
@@ -89,6 +82,13 @@ The intended way for a user to call {numref}`Function {number} <function-intadap
 ``````
 
 ## Examples
+
+```{code-cell}
+:tags: [remove-cell]
+import Pkg; Pkg.activate("/Users/driscoll/Documents/GitHub/fnc")
+using FundamentalsNumericalComputation
+FNC.init_format()
+```
 
 ### Section 5.1
 

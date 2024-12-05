@@ -3,7 +3,55 @@ kernelspec:
   display_name: Julia 1
   language: julia
   name: julia-1.11
+numbering:
+  headings: false
 ---
+# Chapter 3
+
+Julia implementations
+
+## Functions
+
+(function-lsnormal-julia)=
+``````{dropdown} Solution of least squares by the normal equations
+```{literalinclude} ../julia/package/src/chapter03.jl
+:filename: lsnormal.jl
+:language: julia
+:start-line: 0
+:end-line: 12
+:linenos: true
+```
+:::{admonition} About the code
+:class: dropdown
+The syntax on line 9 is a *field reference* to extract the matrix we want from the structure returned by `cholesky`.
+:::
+
+``````
+
+(function-lsqrfact-julia)=
+``````{dropdown} Solution of least squares by QR factorization
+```{literalinclude} ../julia/package/src/chapter03.jl
+:filename: lsqrfact.jl
+:language: julia
+:start-line: 15
+:end-line: 26
+:linenos: true
+```
+``````
+
+(function-qrfact-julia)=
+``````{dropdown} QR factorization by Householder reflections
+```{literalinclude} ../julia/package/src/chapter03.jl
+:filename: qrfact.jl
+:language: julia
+:start-line: 28
+:end-line: 52
+:linenos: true
+```
+``````
+
+## Examples
+
 ```{code-cell}
 :tags: [remove-cell]
 import Pkg; Pkg.activate("/Users/driscoll/Documents/GitHub/fnc")
@@ -11,7 +59,7 @@ using FundamentalsNumericalComputation
 FNC.init_format()
 ```
 
-<!-- SECTION 1 -->
+### Section 3.1
 (demo-fitting-tempinterp-julia)=
 ``````{dropdown} Interpolating temperature data
 Here are 5-year averages of the worldwide temperature anomaly as compared to the 1951–1980 average (source: NASA).
@@ -153,24 +201,7 @@ plot!(k, a * k.^b, l=:dash, label="power-law fit")
 ```
 ``````
 
-<!-- SECTION 2 -->
-
-(function-lsnormal-julia)=
-``````{dropdown} Solution of least squares by the normal equations
-:open:
-```{literalinclude} ../julia/package/src/chapter03.jl
-:filename: lsnormal.jl
-:language: julia
-:start-line: 0
-:end-line: 12
-:linenos: true
-```
-:::{admonition} About the code
-:class: dropdown
-The syntax on line 9 is a *field reference* to extract the matrix we want from the structure returned by `cholesky`.
-:::
-
-``````
+### Section 3.2
 
 (demo-normaleqns-instab-julia)=
 ``````{dropdown} Instability in the normal equations
@@ -214,7 +245,7 @@ x_NE = N \ (A'*b)
 ```
 ``````
 
-<!-- SECTION 3 -->
+### Section 3.3
 (demo-qr-qrfact-julia)=
 ``````{dropdown} QR factorization
 
@@ -260,18 +291,6 @@ Q̂' * Q̂ - I
 ```
 ``````
 
-(function-lsqrfact-julia)=
-``````{dropdown} Solution of least squares by QR factorization
-:open:
-```{literalinclude} ../julia/package/src/chapter03.jl
-:filename: lsqrfact.jl
-:language: julia
-:start-line: 15
-:end-line: 26
-:linenos: true
-```
-``````
-
 (demo-qr-stable-julia)=
 ``````{dropdown} Stability of least-squares via QR
 We'll repeat the experiment of {numref}`Demo {number} <demo-normaleqns-instab>`, which exposed instability in the normal equations. 
@@ -293,7 +312,7 @@ observed_error = norm(FNC.lsqrfact(A,b) - x) / norm(x);
 ```
 ``````
 
-<!-- SECTION 4 -->
+### Section 3.4
 (demo-house-qr-julia)=
 ``````{dropdown} Householder QR factorization
 
@@ -368,17 +387,5 @@ We have now reduced the original to an upper triangular matrix using four orthog
 
 ```{code-cell}
 R = triu(A)
-```
-``````
-
-(function-qrfact-julia)=
-``````{dropdown} QR factorization by Householder reflections
-:open:
-```{literalinclude} ../julia/package/src/chapter03.jl
-:filename: qrfact.jl
-:language: julia
-:start-line: 28
-:end-line: 52
-:linenos: true
 ```
 ``````

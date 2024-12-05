@@ -3,13 +3,36 @@ kernelspec:
   display_name: Python 3
   language: python
   name: python3
+numbering:
+  headings: false
 ---
+
+# Chapter 1 
+
+Python implementations
+
+## Functions
+
+(function-horner-python)=
+`````{dropdown} **Horner's algorithm for evaluating a polynomial**
+:open: true
+````{literalinclude} ../python/pkg/FNC/FNC01.py
+:lineno-start: 1
+:start-at: def horner
+:end-before: def
+:filename: horner.py
+:language: python
+````
+`````
+
+## Examples
 
 ```{code-cell} ipython3
 from numpy import *
 import FNC
 ```
 
+## Section 1.1
 (demo-float-accuracy-python)=
 ``````{dropdown} Absolute and relative accuracy
 Recall the grade-school approximation to the number $\pi$.
@@ -153,7 +176,7 @@ This is now the "correct" result. But we have found a rather shocking breakdown 
 
 ``````
 
-<!-- SECTION 2 -->
+### Section 1.2
 
 (demo-condition-roots-python)=
 ``````{dropdown} Conditioning of polynomial roots
@@ -203,19 +226,7 @@ print(finfo(float).eps / ep)
 This matches the observation pretty well.
 ``````
 
-<!-- SECTION 3 -->
-
-(function-horner-python)=
-`````{dropdown} **Horner's algorithm for evaluating a polynomial**
-:open: true
-````{literalinclude} ../python/pkg/FNC/FNC01.py
-:lineno-start: 1
-:start-at: def horner
-:end-before: def
-:filename: horner.py
-:language: python
-````
-`````
+### Section 1.3
 
 (demo-algorithms-horner-python)=
 ``````{dropdown} Using a function
@@ -244,7 +255,7 @@ The above is the value of $p(1.6)$, up to a rounding error.
 
 ``````
 
-<!-- SECTION 4 -->
+### Section 1.4
 
 (demo-stability-quadbad-python)= 
 ``````{dropdown} Instability of the quadratic formula

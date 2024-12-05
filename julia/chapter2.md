@@ -3,7 +3,12 @@ kernelspec:
   display_name: Julia 1
   language: julia
   name: julia-1.11
+numbering:
+  headings: false
 ---
+
+# Chapter 2 
+
 ```{code-cell}
 :tags: [remove-cell]
 import Pkg; Pkg.activate("/Users/driscoll/Documents/GitHub/fnc")
@@ -11,7 +16,73 @@ using FundamentalsNumericalComputation
 FNC.init_format()
 ```
 
-<!-- SECTION 1 -->
+Julia implementations
+
+## Functions
+
+(function-forwardsub-julia)=
+``````{dropdown} Forward substitution
+:open: true 
+```{literalinclude} ../julia/package/src/chapter02.jl
+:filename: forwardsub.jl
+:start-line: 0
+:end-line: 15
+:linenos: true
+:language: julia
+```
+
+```{index} Julia; sum
+```
+
+```{admonition} About the code
+:class: dropdown
+The `sum` in line 12 gives an error if `i` equals 1, so that case is taken care of before the loop starts.
+```
+``````
+
+(function-backsub-julia)=
+``````{dropdown} Backward substitution
+```{literalinclude} ../julia/package/src/chapter02.jl
+:filename: backsub.jl
+:start-line: 17
+:end-line: 32
+:linenos: true
+:language: julia
+```
+``````
+
+(function-lufact-julia)=
+`````{dropdown} LU factorization (not stable)
+```{literalinclude} ../julia/package/src/chapter02.jl
+:filename: lufact.jl
+:start-line: 34
+:end-line: 54
+:linenos: true
+:language: julia
+```
+
+```{admonition} About the code
+:class: dropdown
+Line 11 of {numref}`Function {number} <function-lufact>` points out two subtle Julia issues. First, vectors and matrix variables are really just references to blocks of memory. Such a reference is much more efficient to pass around than the complete contents of the array. However, it means that a statement `Aₖ=A` just clones the array reference of `A` into the variable `Aₖ`. Any changes made to entries of `Aₖ` would then also be made to entries of `A` because they refer to the same location in memory. In this context we don't want to change the original matrix, so we use `copy` here to create an independent copy of the array contents and a new reference to them.
+
+The second issue is that even when `A` has all integer entries, its LU factors may not. So we convert `Aₖ` to floating point so that line 17 will not fail due to the creation of floating-point values in an integer matrix. An alternative would be to require the caller to provide a floating-point array in the first place.
+```
+`````
+
+(function-plufact-julia)=
+``````{dropdown} LU factorization with partial pivoting
+```{literalinclude} ../julia/package/src/chapter02.jl
+:filename: plufact.jl
+:start-line: 56
+:end-line: 80
+:linenos: true
+:language: julia
+```
+```
+``````
+
+## Examples
+### Section 2.1
 (demo-interp-vander-julia)=
 ``````{dropdown} Linear system for polynomial interpolation
 :open: false
@@ -147,7 +218,7 @@ plot!(tt,yy,label="interpolant")
 ```
 ``````
 
-<!-- SECTION 2 -->
+### Section 2.2
 (demo-matrices-julia)=
 ``````{dropdown} Matrix operations
 :open: false
@@ -348,7 +419,7 @@ show(@. cos(π*(x+1)^3))    # broadcast an entire expression
 ```
 ``````
 
-<!-- SECTION 3 -->
+### Section 2.3
 (demo-systems-backslash-julia)=
 ``````{dropdown} Solving linear systems
 :open: false
@@ -396,38 +467,6 @@ rank(A)
 ```
 
 A linear system with a singular matrix might have no solution or infinitely many solutions, but in either case, backslash will fail. Moreover, detecting singularity is a lot like checking whether two floating-point numbers are *exactly* equal: because of roundoff, it could be missed. In {numref}`section-linsys-condition-number` we'll find a robust way to fully describe this situation.
-``````
-
-(function-forwardsub-julia)=
-``````{dropdown} Forward substitution
-:open: true 
-```{literalinclude} ../julia/package/src/chapter02.jl
-:filename: forwardsub.jl
-:start-line: 0
-:end-line: 15
-:linenos: true
-:language: julia
-```
-
-```{index} Julia; sum
-```
-
-```{admonition} About the code
-:class: dropdown
-The `sum` in line 12 gives an error if `i` equals 1, so that case is taken care of before the loop starts.
-```
-``````
-
-(function-backsub-julia)=
-``````{dropdown} Backward substitution
-:open: true 
-```{literalinclude} ../julia/package/src/chapter02.jl
-:filename: backsub.jl
-:start-line: 17
-:end-line: 32
-:linenos: true
-:language: julia
-```
 ``````
 
 (demo-systems-triangular-julia)=
@@ -506,7 +545,7 @@ err = x - x_exact
 
 It's not so good to get 4 digits of accuracy after starting with 16! The source of the error is not hard to track down. Solving for $x_1$ performs $(\alpha-\beta)+\beta$ in the first row. Since $|\alpha|$ is so much smaller than $|\beta|$, this a recipe for losing digits to subtractive cancellation.
 ``````
-<!-- SECTION 4 -->
+### Section 2.4
 (demo-lu-outertri-julia)= 
 ``````{dropdown} Triangular outer products
 :open: false
@@ -630,25 +669,6 @@ IIn floating point, we cannot expect the difference to be exactly zero as we fou
 
 ``````
 
-(function-lufact-julia)=
-`````{dropdown} LU factorization (not stable)
-:open: true
-```{literalinclude} ../julia/package/src/chapter02.jl
-:filename: lufact.jl
-:start-line: 34
-:end-line: 54
-:linenos: true
-:language: julia
-```
-
-```{admonition} About the code
-:class: dropdown
-Line 11 of {numref}`Function {number} <function-lufact>` points out two subtle Julia issues. First, vectors and matrix variables are really just references to blocks of memory. Such a reference is much more efficient to pass around than the complete contents of the array. However, it means that a statement `Aₖ=A` just clones the array reference of `A` into the variable `Aₖ`. Any changes made to entries of `Aₖ` would then also be made to entries of `A` because they refer to the same location in memory. In this context we don't want to change the original matrix, so we use `copy` here to create an independent copy of the array contents and a new reference to them.
-
-The second issue is that even when `A` has all integer entries, its LU factors may not. So we convert `Aₖ` to floating point so that line 17 will not fail due to the creation of floating-point values in an integer matrix. An alternative would be to require the caller to provide a floating-point array in the first place.
-```
-`````
-
 (demo-lu-solve-julia)=
 ``````{dropdown} Solving a linear system by LU factors
 Here are the data for a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$. 
@@ -673,7 +693,7 @@ b - A*x
 ```
 ``````
 
-<!-- SECTION 5 -->
+### Section 2.5
 
 (demo-flops-mvmult-julia)=
 ``````{dropdown} Floating-point operations in matrix-vector multiplication
@@ -808,7 +828,7 @@ plot!(n, t[end ]* (n/n[end]).^3, l=:dash, label=L"O(n^3)")
 ```
 ``````
 
-<!-- SECTION 6 -->
+### Section 2.6
 (demo-pivoting-fail-julia)=
 ``````{dropdown} Failure of naive LU factorization
 Here is a previously encountered matrix that factors well.
@@ -941,19 +961,6 @@ L
 ```
 ``````
 
-(function-plufact-julia)=
-``````{dropdown} LU factorization with partial pivoting
-:open: true
-```{literalinclude} ../julia/package/src/chapter02.jl
-:filename: plufact.jl
-:start-line: 56
-:end-line: 80
-:linenos: true
-:language: julia
-```
-```
-``````
-
 (demo-pivoting-usage-julia)=
 ``````{dropdown} PLU factorization for solving linear systems
 The third output of `plufact` is the permutation vector we need to apply to $\mathbf{A}$.
@@ -1031,7 +1038,7 @@ A \ b
 ```
 ``````
 
-<!-- SECTION 7 -->
+### Section 2.7
 (demo-norms-vector-julia)=
 ``````{dropdown} Vector norms
 
@@ -1162,7 +1169,7 @@ plot!(twonorm*x[1, :], twonorm*x[2, :], subplot=2, l=:dash)
 ``````
 
 
-<!-- SECTION 8 -->
+### Section 2.8
 (demo-condition-bound-julia)=
 ``````{dropdown} Matrix condition number
 
@@ -1250,7 +1257,7 @@ b = A * x
 As anticipated, the solution has zero accurate digits in the 2-norm.
 ``````
 
-<!-- SECTION 9 -->
+### Section 2.9
 (demo-structure-banded-julia)=
 ``````{dropdown} Banded matrices
 ```{index} ! Julia; fill, Julia; diagm, ! Julia; diag

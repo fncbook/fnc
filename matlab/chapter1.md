@@ -3,13 +3,34 @@ kernelspec:
   display_name: MATLAB
   language: matlab
   name: jupyter_matlab_kernel
+numbering:
+  headings: false
 ---
+
+# Chapter 1
+
+MATLAB implementations
+
+## Functions 
+
+(function-horner-matlab)=
+`````{dropdown} **Horner's algorithm for evaluating a polynomial**
+:open: true
+```{literalinclude} ../matlab/fnc/horner.m
+:lineno-start: 1
+:language: matlab
+```
+`````
+
+## Examples
+
 ```{code-cell}
 :tags: [remove-cell]
 addpath ../matlab/fnc
 format short
 ```
 
+## Section 1.1
 (demo-float-accuracy-matlab)=
 ``````{dropdown} Absolute and relative accuracy
 :open: false
@@ -127,7 +148,7 @@ However, the spacing between floats in $[1/2,1)$ is $\macheps/2$, so both $1-\ma
 This is now the expected result. But we have found a rather shocking breakdown of the associative law of addition!
 ``````
 
-<!-- SECTION 2 -->
+### Section 1.2
 
 (demo-condition-roots-matlab)=
 ``````{dropdown} Conditioning of polynomial roots
@@ -178,16 +199,7 @@ eps / ep
 This matches the observation pretty well.
 ``````
 
-<!-- SECTION 3 -->
-
-(function-horner-matlab)=
-`````{dropdown} **Horner's algorithm for evaluating a polynomial**
-:open: true
-```{literalinclude} ../matlab/fnc/horner.m
-:lineno-start: 1
-:language: matlab
-```
-`````
+### Section 1.3
 
 (demo-algorithms-horner-matlab)=
 ``````{dropdown} Using a function
@@ -211,7 +223,7 @@ The comments at the start of {numref}`Function {number} <function-horner>` are d
 ```
 ``````
 
-<!-- SECTION 4 -->
+### Section 1.4
 
 (demo-stability-quadbad-matlab)= 
 ``````{dropdown} Instability of the quadratic formula

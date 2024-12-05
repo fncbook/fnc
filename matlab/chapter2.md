@@ -3,7 +3,56 @@ kernelspec:
   display_name: MATLAB
   language: matlab
   name: jupyter_matlab_kernel
+numbering:
+  headings: false
 ---
+
+# Chapter 2
+
+MATLAB implementations
+
+## Functions
+
+(function-forwardsub-matlab)=
+``````{dropdown} Forward substitution
+```{literalinclude} ../matlab/fnc/forwardsub.m
+:linenos: true
+:language: matlab
+```
+
+```{admonition} About the code
+:class: dropdown
+Line 12 implements @forwardsub. It contains an inner product between row $i$ of $\mathbf{L}$ and the solution vector $\mathbf{x}$, using only the entries of $\mathbf{x}$ that have already been computed. 
+```
+``````
+
+(function-backsub-matlab)=
+``````{dropdown} Backward substitution
+```{literalinclude} ../matlab/fnc/backsub.m
+:linenos: true
+:language: matlab
+```
+``````
+
+(function-lufact-matlab)=
+`````{dropdown} LU factorization (not stable)
+```{literalinclude} ../matlab/fnc/lufact.m
+:linenos: true
+:language: matlab
+```
+`````
+
+(function-plufact-matlab)=
+``````{dropdown} LU factorization with partial pivoting
+```{literalinclude} ../matlab/fnc/plufact.m
+:linenos: true
+:language: matlab
+```
+```
+``````
+
+
+## Examples
 ```{code-cell}
 :tags: [remove-cell]
 addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
@@ -11,7 +60,7 @@ format short
 set(0, 'defaultlinelinewidth', 1.5, 'defaultscattermarkerfacecolor', 'k')
 ```
 
-<!-- SECTION 1 -->
+### Section 2.1
 (demo-interp-vander-matlab)=
 ``````{dropdown} Linear system for polynomial interpolation
 We create two column vectors for data about the population of China. The first has the years of census data and the other has the population, in millions of people.
@@ -119,7 +168,7 @@ legend("data", "interpolant", "location", "northwest")
 ```
 ``````
 
-<!-- SECTION 2 -->
+### Section 2.2
 (demo-matrices-matlab)=
 ``````{dropdown} Matrix operations
 :::{index} ! MATLAB; size, ! MATLAB; length
@@ -306,7 +355,7 @@ cos(pi * x)
 ```
 ``````
 
-<!-- SECTION 3 -->
+### Section 2.3
 (demo-systems-backslash-matlab)=
 ``````{dropdown} Solving linear systems
 For a square matrix $\mathbf{A}$, the syntax `A \ b` is mathematically equivalent to $\mathbf{A}^{-1} \mathbf{b}$. 
@@ -353,29 +402,6 @@ rank(A)
 ```
 
 A linear system with a singular matrix might have no solution or infinitely many solutions, but in either case, backslash will fail. Moreover, detecting singularity is a lot like checking whether two floating-point numbers are *exactly* equal: because of roundoff, it could be missed. In {numref}`section-linsys-condition-number` we'll find a robust way to fully describe this situation.
-``````
-
-(function-forwardsub-matlab)=
-``````{dropdown} Forward substitution
-:open: true 
-```{literalinclude} ../matlab/fnc/forwardsub.m
-:linenos: true
-:language: matlab
-```
-
-```{admonition} About the code
-:class: dropdown
-Line 12 implements @forwardsub. It contains an inner product between row $i$ of $\mathbf{L}$ and the solution vector $\mathbf{x}$, using only the entries of $\mathbf{x}$ that have already been computed. 
-```
-``````
-
-(function-backsub-matlab)=
-``````{dropdown} Backward substitution
-:open: true 
-```{literalinclude} ../matlab/fnc/backsub.m
-:linenos: true
-:language: matlab
-```
 ``````
 
 (demo-systems-triangular-matlab)=
@@ -455,7 +481,7 @@ err = x - x_exact
 
 It's not so good to get 4 digits of accuracy after starting with sixteen! The source of the error is not hard to track down. Solving for $x_1$ performs $(\alpha-\beta)+\beta$ in the first row. Since $|\alpha|$ is so much smaller than $|\beta|$, this a recipe for losing digits to subtractive cancellation.
 ``````
-<!-- SECTION 4 -->
+### Section 2.4
 (demo-lu-outertri-matlab)= 
 ``````{dropdown} Triangular outer products
 :open: false
@@ -571,15 +597,6 @@ In floating point, we cannot expect the difference to be exactly zero as we foun
 
 ``````
 
-(function-lufact-matlab)=
-`````{dropdown} LU factorization (not stable)
-:open: true
-```{literalinclude} ../matlab/fnc/lufact.m
-:linenos: true
-:language: matlab
-```
-`````
-
 (demo-lu-solve-matlab)=
 ``````{dropdown} Solving a linear system by LU factors
 Here are the data for a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$. 
@@ -604,7 +621,7 @@ b - A * x
 ```
 ``````
 
-<!-- SECTION 5 -->
+### Section 2.5
 (demo-flops-mvmult-matlab)=
 ``````{dropdown} Floating-point operations in matrix-vector multiplication
 Here is a straightforward implementation of matrix-vector multiplication.
@@ -749,7 +766,7 @@ legend('lu','O(n^3)','location','southeast')
 ```
 ``````
 
-<!-- SECTION 6 -->
+### Section 2.6
 (demo-pivoting-fail-matlab)=
 ``````{dropdown} Failure of naive LU factorization
 Here is a previously encountered matrix that factors well.
@@ -891,16 +908,6 @@ L
 ```
 ``````
 
-(function-plufact-matlab)=
-``````{dropdown} LU factorization with partial pivoting
-:open: true
-```{literalinclude} ../matlab/fnc/plufact.m
-:linenos: true
-:language: matlab
-```
-```
-``````
-
 (demo-pivoting-usage-matlab)=
 ``````{dropdown} PLU factorization for solving linear systems
 The third output of `plufact` is the permutation vector we need to apply to $\mathbf{A}$.
@@ -981,7 +988,7 @@ A \ b
 ```
 ``````
 
-<!-- SECTION 7 -->
+### Section 2.7
 (demo-norms-vector-matlab)=
 ``````{dropdown} Vector norms
 ```{index} ! MATLAB; norm
@@ -1087,7 +1094,7 @@ ylabel('x_2')
 ``````
 
 
-<!-- SECTION 8 -->
+### Section 2.8
 (demo-condition-bound-matlab)=
 ``````{dropdown} Matrix condition number
 
@@ -1168,7 +1175,7 @@ relative_error = norm(dx) / norm(x)
 As anticipated, the solution has zero accurate digits in the 2-norm.
 ``````
 
-<!-- SECTION 9 -->
+### Section 2.9
 (demo-structure-banded-matlab)=
 ``````{dropdown} Banded matrices
 ```{index} ! MATLAB; fill, MATLAB; diagm, ! MATLAB; diag

@@ -3,7 +3,41 @@ kernelspec:
   display_name: MATLAB
   language: matlab
   name: jupyter_matlab_kernel
+numbering:
+  headings: false
 ---
+# Chapter 3
+
+MATLAB implementations
+
+## Functions
+
+(function-lsnormal-matlab)=
+``````{dropdown} Solution of least squares by the normal equations
+```{literalinclude} ../matlab/fnc/lsnormal.m
+:language: matlab
+:linenos: true
+```
+``````
+
+(function-lsqrfact-matlab)=
+``````{dropdown} Solution of least squares by QR factorization
+```{literalinclude} ../matlab/fnc/lsqrfact.m
+:language: matlab
+:linenos: true
+```
+``````
+
+(function-qrfact-matlab)=
+``````{dropdown} QR factorization by Householder reflections
+```{literalinclude} ../matlab/fnc/qrfact.m
+:language: matlab
+:linenos: true
+```
+``````
+
+## Examples
+
 ```{code-cell}
 :tags: [remove-cell]
 addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
@@ -13,7 +47,7 @@ set(0, 'defaultlinelinewidth', 1.5, 'defaultscattermarkerfacecolor', 'k')
 set(0, 'defaultFunctionLinelinewidth', 1.5)
 ```
 
-<!-- SECTION 1 -->
+### Section 3.1
 (demo-fitting-tempinterp-matlab)=
 ``````{dropdown} Interpolating temperature data
 Here are 5-year averages of the worldwide temperature anomaly as compared to the 1951–1980 average (source: NASA).
@@ -158,16 +192,7 @@ legend('sequence', 'power-law fit')
 ```
 ``````
 
-<!-- SECTION 2 -->
-(function-lsnormal-matlab)=
-``````{dropdown} Solution of least squares by the normal equations
-:open:
-```{literalinclude} ../matlab/fnc/lsnormal.m
-:language: matlab
-:linenos: true
-```
-``````
-
+### Section 3.2
 (demo-normaleqns-instab-matlab)=
 ``````{dropdown} Instability in the normal equations
 
@@ -209,7 +234,7 @@ digits = -log10(observed_err)
 ```
 ``````
 
-<!-- SECTION 3 -->
+### Section 3.3
 (demo-qr-qrfact-matlab)=
 ``````{dropdown} QR factorization
 
@@ -249,15 +274,6 @@ Q_hat' * Q_hat - eye(n)
 ```
 ``````
 
-(function-lsqrfact-matlab)=
-``````{dropdown} Solution of least squares by QR factorization
-:open:
-```{literalinclude} ../matlab/fnc/lsqrfact.m
-:language: matlab
-:linenos: true
-```
-``````
-
 (demo-qr-stable-matlab)=
 ``````{dropdown} Stability of least-squares via QR
 We'll repeat the experiment of {numref}`Demo {number} <demo-normaleqns-instab>`, which exposed instability in the normal equations. 
@@ -277,7 +293,7 @@ error_bound = cond(A) * eps
 ```
 ``````
 
-<!-- SECTION 4 -->
+### Section 3.4
 
 (demo-house-qr-matlab)=
 ``````{dropdown} Householder QR factorization
@@ -343,14 +359,5 @@ We have now reduced the original to an upper triangular matrix using four orthog
 
 ```{code-cell}
 R = A
-```
-``````
-
-(function-qrfact-matlab)=
-``````{dropdown} QR factorization by Householder reflections
-:open:
-```{literalinclude} ../matlab/fnc/qrfact.m
-:language: matlab
-:linenos: true
 ```
 ``````

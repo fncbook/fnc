@@ -3,6 +3,8 @@ kernelspec:
   display_name: Julia 1
   language: julia
   name: julia-1.11
+numbering:
+  headings: false
 ---
 ```{code-cell}
 :tags: [remove-cell]

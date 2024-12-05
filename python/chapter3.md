@@ -1,15 +1,53 @@
 ---
-jupytext:
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.16.4
 kernelspec:
   display_name: Python 3
   language: python
   name: python3
+numbering:
+  headings: false
 ---
+# Chapter 3
+
+Python implementations
+
+## Functions 
+
+(function-lsnormal-python)=
+``````{dropdown} Solution of least squares by the normal equations
+```{literalinclude} ../python/pkg/FNC/FNC03.py
+:filename: lsnormal.py
+:language: python
+:start-line: 6
+:end-line: 18
+:linenos: true
+```
+:::{admonition} About the code
+:class: dropdown
+`cholesky` is imported from `scipy.linalg`.
+:::
+``````
+
+(function-lsqrfact-python)=
+``````{dropdown} Solution of least squares by QR factorization
+```{literalinclude} ../python/pkg/FNC/FNC03.py
+:filename: lsqrfact.py
+:start-line: 20
+:end-line: 30
+:linenos: true
+```
+``````
+
+(function-qrfact-python)=
+``````{dropdown} QR factorization by Householder reflections
+```{literalinclude} ../python/pkg/FNC/FNC03.py
+:filename: qrfact.py
+:start-line: 32
+:end-line: 52
+:linenos: true
+```
+``````
+
+## Examples
 
 ```{code-cell} ipython3
 from numpy import *
@@ -22,6 +60,7 @@ import FNC
 ```
 
 ```{code-cell} ipython3
+:tags: [remove-cell]
 # This (optional) block is for improving the display of plots.
 rcParams["figure.figsize"] = [7, 4]
 rcParams["lines.linewidth"] = 2
@@ -29,7 +68,7 @@ rcParams["lines.markersize"] = 4
 rcParams['animation.html'] = "jshtml"  # or try "html5"
 ```
 
-<!-- SECTION 1 -->
+### Section 3.1
 (demo-fitting-tempinterp-python)=
 ``````{dropdown} Interpolating temperature data
 Here are 5-year averages of the worldwide temperature anomaly as compared to the 1951–1980 average (source: NASA).
@@ -192,23 +231,7 @@ legend(); title("Sequence convergence");
 ```
 ``````
 
-<!-- SECTION 2 -->
-
-(function-lsnormal-python)=
-``````{dropdown} Solution of least squares by the normal equations
-:open:
-```{literalinclude} ../python/pkg/FNC/FNC03.py
-:filename: lsnormal.py
-:language: python
-:start-line: 6
-:end-line: 18
-:linenos: true
-```
-:::{admonition} About the code
-:class: dropdown
-`cholesky` is imported from `scipy.linalg`.
-:::
-``````
+### Section 3.2
 
 (demo-normaleqns-instab-python)=
 ``````{dropdown} Instability in the normal equations
@@ -250,7 +273,7 @@ print(f"accurate digits: {-log10(relative_err):.2f}")
 ```
 ``````
 
-<!-- SECTION 3 -->
+### Section 3.3
 (demo-qr-qrfact-python)=
 ``````{dropdown} QR factorization
 
@@ -293,17 +316,6 @@ print(f"norm of (Q_hat^T Q_hat - I) is {norm(Q_hat.T @ Q_hat - eye(4)):.3e}")
 ```
 ``````
 
-(function-lsqrfact-python)=
-``````{dropdown} Solution of least squares by QR factorization
-:open:
-```{literalinclude} ../python/pkg/FNC/FNC03.py
-:filename: lsqrfact.py
-:start-line: 20
-:end-line: 30
-:linenos: true
-```
-``````
-
 (demo-qr-stable-python)=
 ``````{dropdown} Stability of least-squares via QR
 We'll repeat the experiment of {numref}`Demo {number} <demo-normaleqns-instab>`, which exposed instability in the normal equations. 
@@ -323,7 +335,7 @@ print(f"conditioning bound: {cond(A) * finfo(float).eps:.3e}")
 ```
 ``````
 
-<!-- SECTION 4 -->
+### Section 3.4
 (demo-house-qr-python)=
 ``````{dropdown} Householder QR factorization
 
@@ -389,16 +401,5 @@ We have now reduced the original to an upper triangular matrix using four orthog
 ```{code-cell}
 R = triu(A)
 print(R)
-```
-``````
-
-(function-qrfact-python)=
-``````{dropdown} QR factorization by Householder reflections
-:open:
-```{literalinclude} ../python/pkg/FNC/FNC03.py
-:filename: qrfact.py
-:start-line: 32
-:end-line: 52
-:linenos: true
 ```
 ``````

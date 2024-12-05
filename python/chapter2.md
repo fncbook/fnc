@@ -1,29 +1,79 @@
 ---
-jupytext:
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.16.4
 kernelspec:
   display_name: Python 3
   language: python
   name: python3
+numbering:
+  headings: false
 ---
+
+# Chapter 2 
+
+## Functions
+
+(function-forwardsub-python)=
+``````{dropdown} Forward substitution
+```{literalinclude} ../python/pkg/FNC/FNC02.py
+:filename: forwardsub.py
+:start-line: 2
+:end-line: 14
+:linenos: true
+:language: python
+```
+``````
+
+(function-backsub-python)=
+``````{dropdown} Backward substitution
+```{literalinclude} ../python/pkg/FNC/FNC02.py
+:filename: backsub.py
+:start-line: 17
+:end-line: 29
+:linenos: true
+:language: python
+```
+``````
+
+(function-lufact-python)=
+`````{dropdown} LU factorization (not stable)
+```{literalinclude} ../python/pkg/FNC/FNC02.py
+:filename: lufact.py
+:start-line: 31
+:end-line: 49
+:linenos: true
+:language: python
+```
+
+```{admonition} About the code
+:class: dropdown
+Line 11 of {numref}`Function {number} <function-lufact>` points out a subtle issue. Array variables are really just references to blocks of memory. Such a reference is much more efficient to pass around than the complete contents of the array. However, it means that a statement `A_k = A` would just clone the array reference of `A` into the new variable. Any changes made to entries of `A_k` would then also be made to entries of `A`, because they refer to the same location in memory. In this context, we don't want to change the original matrix, so we use `copy` here to create an independent copy of the array contents and a new reference to them.
+```
+`````
+
+(function-plufact-python)=
+``````{dropdown} LU factorization with partial pivoting
+```{literalinclude} ../python/pkg/FNC/FNC02.py
+:filename: plufact.py
+:start-line: 51
+:end-line: 71
+:linenos: true
+:language: python
+```
+``````
+
+## Examples
 
 ```{code-cell} ipython3
 # from scipy import *
 from numpy import *
 from matplotlib.pyplot import *
 from numpy.linalg import solve
-# from numpy.linalg import *
 import scipy.sparse as sparse
-from scipy.sparse.linalg import splu
 from timeit import default_timer as timer
 import FNC
 ```
 
 ```{code-cell} ipython3
+:tags: [remove-cell]
 # This (optional) block is for improving the display of plots.
 # from IPython.display import set_matplotlib_formats
 # set_matplotlib_formats("svg","pdf")
@@ -34,7 +84,7 @@ rcParams["lines.markersize"] = 4
 rcParams['animation.html'] = "jshtml"  # or try "html5"
 ```
 
-<!-- SECTION 1 -->
+### Section 2.1
 (demo-interp-vander-python)=
 ``````{dropdown} Linear system for polynomial interpolation
 We create two vectors for data about the population of China. The first has the years of census data and the other has the population, in millions of people.
@@ -98,6 +148,7 @@ legend();
 ```
 ``````
 
+### Section 2.2
 (demo-matrices-python)=
 ``````{dropdown} Matrix operations
 ```{note}
@@ -329,7 +380,7 @@ print(cos(pi * x))
 ```
 ``````
 
-<!-- SECTION 3 -->
+### Section 2.3
 (demo-systems-backslash-python)=
 ``````{dropdown} Solving linear systems
 For a square matrix $A$, the command `solve(A, B)` is mathematically equivalent to $\mathbf{A}^{-1} \mathbf{b}$. 
@@ -364,30 +415,6 @@ solve(A, b)    # error, singular matrix
 ```
 
 A linear system with a singular matrix might have no solution or infinitely many solutions, but in either case, a numerical solution becomes trickier. Detecting singularity is a lot like checking whether two floating-point numbers are *exactly* equal: because of roundoff, it could be missed. We're headed toward a more robust way to fully describe this situation.
-``````
-
-(function-forwardsub-python)=
-``````{dropdown} Forward substitution
-:open:
-```{literalinclude} ../python/pkg/FNC/FNC02.py
-:filename: forwardsub.py
-:start-line: 2
-:end-line: 14
-:linenos: true
-:language: python
-```
-``````
-
-(function-backsub-python)=
-``````{dropdown} Backward substitution
-:open:
-```{literalinclude} ../python/pkg/FNC/FNC02.py
-:filename: backsub.py
-:start-line: 17
-:end-line: 29
-:linenos: true
-:language: python
-```
 ``````
 
 (demo-systems-triangular-python)=
@@ -451,7 +478,7 @@ print("error:", x - x_exact)
 It's not so good to get 4 digits of accuracy after starting with sixteen! But the source of the error is not hard to track down. Solving for $x_1$ performs $(\alpha-\beta)+\beta$ in the first row. Since $|\alpha|$ is so much smaller than $|\beta|$, this a recipe for losing digits to subtractive cancellation.
 ``````
 
-<!-- SECTION 4 -->
+### Section 2.4
 (demo-lu-outertri-python)= 
 ``````{dropdown} Triangular outer products
 ```{index} Python; tril, Python; triu
@@ -571,23 +598,6 @@ In floating point, we cannot expect the difference to be exactly zero as we foun
 
 ``````
 
-(function-lufact-python)=
-`````{dropdown} LU factorization (not stable)
-:open: true
-```{literalinclude} ../python/pkg/FNC/FNC02.py
-:filename: lufact.py
-:start-line: 31
-:end-line: 49
-:linenos: true
-:language: python
-```
-
-```{admonition} About the code
-:class: dropdown
-Line 11 of {numref}`Function {number} <function-lufact>` points out a subtle issue. Array variables are really just references to blocks of memory. Such a reference is much more efficient to pass around than the complete contents of the array. However, it means that a statement `A_k = A` would just clone the array reference of `A` into the new variable. Any changes made to entries of `A_k` would then also be made to entries of `A`, because they refer to the same location in memory. In this context, we don't want to change the original matrix, so we use `copy` here to create an independent copy of the array contents and a new reference to them.
-```
-`````
-
 (demo-lu-solve-python)=
 ``````{dropdown} Solving a linear system by LU factors
 Here are the data for a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$. 
@@ -618,7 +628,7 @@ b - A @ x
 
 ``````
 
-<!-- SECTION 5 -->
+### Section 2.5
 
 (demo-flops-mvmult-python)=
 ``````{dropdown} Floating-point operations in matrix-vector multiplication
@@ -735,7 +745,7 @@ title("Timing of LU factorizations");
 ```
 ``````
 
-<!-- SECTION 6 -->
+### Section 2.6
 (demo-pivoting-fail-python)=
 ``````{dropdown} Failure of naive LU factorization
 Here is a previously encountered matrix that factors well.
@@ -891,18 +901,6 @@ print(L)
 ```
 ``````
 
-(function-plufact-python)=
-``````{dropdown} LU factorization with partial pivoting
-:open: true
-```{literalinclude} ../python/pkg/FNC/FNC02.py
-:filename: plufact.py
-:start-line: 51
-:end-line: 71
-:linenos: true
-:language: python
-```
-``````
-
 (demo-pivoting-usage-python)=
 ``````{dropdown} PLU factorization for solving linear systems
 The third output of `plufact` is the permutation vector we need to apply to $\mathbf{A}$.
@@ -988,7 +986,7 @@ print(solve(A, b))
 ```
 ``````
 
-<!-- SECTION 7 -->
+### Section 2.7
 (demo-norms-vector-python)=
 ``````{dropdown} Vector norms
 ```{index} ! Python; norm
@@ -1088,7 +1086,7 @@ As seen on the right-side plot, the image of the transformed vectors is an ellip
 
 ``````
 
-<!-- SECTION 8 -->
+### Section 2.8
 (demo-condition-bound-python)=
 ``````{dropdown} Matrix condition number
 
@@ -1185,7 +1183,7 @@ print(f"relative error: {norm(x - x_exact) / norm(x_exact):.2e}")
 ```
 ``````
 
-<!-- SECTION 9 -->
+### Section 2.9
 (demo-structure-banded-python)=
 ``````{dropdown} Banded matrices
 Here is a matrix with both lower and upper bandwidth equal to one. Such a matrix is called tridiagonal.

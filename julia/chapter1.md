@@ -3,6 +3,8 @@ kernelspec:
   display_name: Julia 1
   language: julia
   name: julia-1.11
+numbering:
+  headings: false
 ---
 ```{code-cell}
 :tags: [remove-cell]
@@ -10,7 +12,34 @@ import Pkg; Pkg.activate("/Users/driscoll/Documents/GitHub/fnc")
 using FundamentalsNumericalComputation
 FNC.init_format()
 ```
+# Chapter 1
+## Functions
 
+(function-horner-julia)=
+`````{dropdown} **Horner's algorithm for evaluating a polynomial**
+:open: true
+```{code-block} julia
+:lineno-start: 1
+"""
+    horner(c,x)
+
+Evaluate a polynomial whose coefficients are given in ascending
+order in `c`, at the point `x`, using Horner's rule.
+"""
+function horner(c,x)
+    n = length(c)
+    y = c[n]
+    for k in n-1:-1:1
+        y = x*y + c[k]
+    end
+    return y
+end
+```
+`````
+
+## Examples
+
+### Section 1.1
 (demo-float-accuracy-julia)=
 ``````{dropdown} Absolute and relative accuracy
 :open: false
@@ -204,8 +233,7 @@ However, the spacing between floats in $[1/2,1)$ is $\macheps/2$, so both $1-\ma
 This is now the expected result. But we have found a rather shocking breakdown of the associative law of addition!
 ``````
 
-<!-- SECTION 2 -->
-
+### Section 1.2
 (demo-condition-roots-julia)=
 ``````{dropdown} Conditioning of polynomial roots
 :open: false
@@ -252,29 +280,7 @@ eps() / ϵ
 This matches the observation pretty well.
 ``````
 
-<!-- SECTION 3 -->
-
-(function-horner-julia)=
-`````{dropdown} **Horner's algorithm for evaluating a polynomial**
-:open: true
-```{code-block} julia
-:lineno-start: 1
-"""
-    horner(c,x)
-
-Evaluate a polynomial whose coefficients are given in ascending
-order in `c`, at the point `x`, using Horner's rule.
-"""
-function horner(c,x)
-    n = length(c)
-    y = c[n]
-    for k in n-1:-1:1
-        y = x*y + c[k]
-    end
-    return y
-end
-```
-`````
+### Section 1.3
 
 (demo-algorithms-horner-julia)=
 ``````{dropdown} Using a function
@@ -348,8 +354,7 @@ While the namespace does lead to a little extra typing, a nice side effect of us
 The multi-line string at the start of {numref}`Function {number} <function-horner>` is documentation, which we can access using `?FNC.horner`.
 ``````
 
-<!-- SECTION 4 -->
-
+### Section 1.4
 (demo-stability-quadbad-julia)= 
 ``````{dropdown} Instability of the quadratic formula
 :open: false
