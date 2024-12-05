@@ -106,16 +106,16 @@ project:
         - file: chapter4/quasinewton.md
         - file: chapter4/nlsq.md
         - file: chapter4/next.md
-    #     - file: chapter5/overview.md
-    #       children:
-    #         - file: chapter5/interpolation.md
-    #         - file: chapter5/pwlin.md
-    #         - file: chapter5/splines.md
-    #         - file: chapter5/finitediffs.md
-    #         - file: chapter5/fd-converge.md
-    #         - file: chapter5/integration.md
-    #         - file: chapter5/adaptive.md
-    #         - file: chapter5/next.md
+    - file: chapter5/overview.md
+      children:
+        - file: chapter5/interpolation.md
+        - file: chapter5/pwlin.md
+        - file: chapter5/splines.md
+        - file: chapter5/finitediffs.md
+        - file: chapter5/fd-converge.md
+        - file: chapter5/integration.md
+        - file: chapter5/adaptive.md
+        - file: chapter5/next.md
     #     - file: chapter6/overview.md
     #       children:
     #         - file: chapter6/basics.md
@@ -199,6 +199,7 @@ project:
           - file: julia/chapter2.md
           - file: julia/chapter3.md
           - file: julia/chapter4.md
+          - file: julia/chapter5.md
       - title: MATLAB codes
         children:
           - file: matlab/chapter1.md

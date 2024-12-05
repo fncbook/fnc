@@ -1,24 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-localapprox-finitediffs)=
 # Finite differences
 
@@ -124,9 +103,6 @@ Besides the aesthetic appeal of symmetry, in {numref}`section-localapprox-fd-con
 
 We can in principle derive any finite-difference formula from the same process: Interpolate the given function values, then differentiate the interpolant exactly. Some results of the process are given in {numref}`table-FDcenter` for centered differences, and in {numref}`table-FDforward` for forward differences. Both show the weights for estimating the derivative at $x=0$. To get backward differences, you change the signs and reverse the order of the coefficients in any row of {numref}`table-FDforward`; see [Exercise 2](problem-backwardFD).
 
-```{tabularcolumns} |r|ccccccccc
-```
-
 (table-FDcenter)=
 ```{table} Weights for centered finite-difference formulas.
 
@@ -136,9 +112,6 @@ We can in principle derive any finite-difference formula from the same process: 
 | 4                |                 |                  | $\frac{1}{12}$ | $-\frac{2}{3}$ | $0$ | $\frac{2}{3}$ | $-\frac{1}{12}$ |                 |                  |
 | 6                |                 | $-\frac{1}{60}$  | $\frac{3}{20}$ | $-\frac{3}{4}$ | $0$ | $\frac{3}{4}$ | $-\frac{3}{20}$ | $\frac{1}{60}$  |                  |
 | 8                | $\frac{1}{280}$ | $-\frac{4}{105}$ | $\frac{1}{5}$  | $-\frac{4}{5}$ | $0$ | $\frac{4}{5}$ | $-\frac{1}{5}$  | $\frac{4}{105}$ | $-\frac{1}{280}$ |
-```
-
-```{tabularcolumns} |r|ccccc
 ```
 
 (table-FDforward)=
@@ -167,46 +140,28 @@ f'(0) &\approx \tfrac{1}{h} \left[ \tfrac{1}{2} f(-2h) - 2 f(-h) + \tfrac{3}{2} 
 ```
 ````
 
-```{prf:example}
-```
+(demo-finitediffs-fd1)=
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-finitediffs-fd1-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-finitediffs-fd1-matlab
+:::
+```` 
 
-
-
-
-If $f(x)=e^{\,\sin(x)}$, then $f'(0)=1$. 
-
-```{code-cell}
-f = x -> exp(sin(x));
-```
-
-Here are the first two centered differences from {numref}`table-FDcenter`.
-
-```{code-cell}
-h = 0.05
-CD2 = (       - f(-h)  + f(h)         ) /  2h
-CD4 = (f(-2h) - 8f(-h) + 8f(h) - f(2h)) / 12h
-@show (CD2,CD4);
-```
-
-Here are the first two forward differences from {numref}`table-FDforward`.
-
-```{code-cell}
-FD1 = ( -f(0) +  f(h)        ) /  h
-FD2 = (-3f(0) + 4f(h) - f(2h)) / 2h 
-@show (FD1,FD2);
-```
-
-Finally, here are the backward differences that come from reverse-negating the forward differences. 
-
-```{code-cell}
-BD1 = (          -f(-h) +  f(0)) /  h
-BD2 = ( f(-2h) - 4f(-h) + 3f(0)) / 2h 
-@show (BD1,BD2);
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-finitediffs-fd1-python
+:::
+```` 
+`````
+::::
 
 ## Higher derivatives
 
@@ -245,45 +200,28 @@ f''(0) \approx \frac{ 2f(0) - 5 f(h) + 4 f(2h) -f(3h) }{h^2}.
 
 For the second derivative, converting a forward difference to a backward difference requires reversing the order of the weights, while *not* changing their signs.
 
-```{prf:example}
-```
+(demo-finitediffs-fd2)=
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-finitediffs-fd2-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-finitediffs-fd2-matlab
+:::
+```` 
 
-
-
-
-If $f(x)=e^{\,\sin(x)}$, then $f''(0)=1$. 
-
-```{code-cell}
-f = x -> exp(sin(x));
-```
-
-Here is a centered estimate given by {eq}`centerFD22`.
-
-```{code-cell}
-h = 0.05
-CD2 = (f(-h) - 2f(0) + f(h)) / h^2
-@show CD2;
-```
-
-For the same $h$, here are forward estimates given by {eq}`forwardFD21` and {eq}`forwardFD22`.
-
-```{code-cell}
-FD1 = ( f(0) - 2f(h) +  f(2h)        ) / h^2
-FD2 = (2f(0) - 5f(h) + 4f(2h) - f(3h)) / h^2
-@show (FD1,FD2);
-```
-
-Finally, here are the backward estimates that come from reversing {eq}`forwardFD21` and {eq}`forwardFD22`.
-
-```{code-cell}
-BD1 = (           f(-2h) - 2f(-h) +  f(0)) / h^2
-BD2 = (-f(-3h) + 4f(-2h) - 5f(-h) + 2f(0)) / h^2
-@show (BD1,BD2);
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-finitediffs-fd2-python
+:::
+```` 
+`````
+::::
 
 ## Arbitrary nodes
 
@@ -297,99 +235,50 @@ Although function values at equally spaced nodes are a common and convenient sit
 We no longer assume equally spaced nodes, so there is no "$h$" to be used in the formula. As before, the weights may be applied after any translation of the independent variable. The weights again follow from the interpolate/differentiate recipe, but the algebra becomes complicated. Fortunately there is an elegant recursion known as **Fornberg's algorithm** that can calculate these weights for any desired formula. We present it without derivation as {numref}`Function {number} <function-fdweights>`.
 
 (function-fdweights)=
+``````{prf:algorithm} fdweights
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-fdweights-julia
+:::
+```` 
 
-````{prf:function} fdweights
-**Fornberg's algorithm for finite-difference weights**
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-fdweights-matlab
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    fdweights(t,m)
-
-Compute weights for the `m`th derivative of a function at zero using
-values at the nodes in vector `t`.
-"""
-function fdweights(t,m)
-# This is a compact implementation, not an efficient one.
-    # Recursion for one weight. 
-    function weight(t,m,r,k)
-        # Inputs
-        #   t: vector of nodes 
-        #   m: order of derivative sought 
-        #   r: number of nodes to use from t 
-        #   k: index of node whose weight is found
-
-        if (m<0) || (m>r)        # undefined coeffs must be zero
-            c = 0
-        elseif (m==0) && (r==0)  # base case of one-point interpolation
-            c = 1
-        else                     # generic recursion
-            if k<r
-                c = (t[r+1]*weight(t,m,r-1,k) -
-                    m*weight(t,m-1,r-1,k))/(t[r+1]-t[k+1])
-            else
-                numer = r > 1 ? prod(t[r]-x for x in t[1:r-1]) : 1
-                denom = r > 0 ? prod(t[r+1]-x for x in t[1:r]) : 1
-                β = numer/denom
-                c = β*(m*weight(t,m-1,r-1,r-1) - t[r]*weight(t,m,r-1,r-1))
-            end
-        end
-        return c
-    end
-    r = length(t)-1
-    w = zeros(size(t))
-    return [ weight(t,m,r,k) for k=0:r ]
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-fdweights-python
+:::
 ````
+`````
+``````
 
 (demo-finitediffs-fd-weights)=
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-finitediffs-fd-weights-julia
+:::
+```` 
 
-```{prf:example}
-```
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-finitediffs-fd-weights-matlab
+:::
+```` 
 
-
-
-
-
-We will estimate the derivative of $\cos(x^2)$ at $x=0.5$ using five nodes.
-
-```{code-cell}
-t = [ 0.35,0.5,0.57,0.6,0.75 ]   # nodes
-f = x -> cos(x^2)
-dfdx = x -> -2*x*sin(x^2)
-exact_value = dfdx(0.5)
-```
-
-We have to shift the nodes so that the point of estimation for the derivative is at $x=0$. (To subtract a scalar from a vector, we must use the `.-` operator.)
-
-```{code-cell}
-w = FNC.fdweights(t.-0.5,1)
-```
-
-The finite-difference formula is a dot product (i.e., inner product) between the vector of weights and the vector of function values at the nodes.
-
-```{code-cell}
-fd_value = dot(w,f.(t))
-```
-
-We can reproduce the weights in the finite-difference tables by using equally spaced nodes with $h=1$. For example, here is a one-sided formula at four nodes.
-
-```{code-cell}
-FNC.fdweights(0:3,1)
-```
-
-```{index} ! Julia; Rational
-```
-
-By giving nodes of type `Rational`, we can get exact values instead.
-
-```{code-cell}
-FNC.fdweights(Rational.(0:3),1)
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-finitediffs-fd-weights-python
+:::
+```` 
+`````
+::::
 
 ## Exercises
 

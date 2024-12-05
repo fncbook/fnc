@@ -1,24 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-localapprox-fd-converge)=
 # Convergence of finite differences
 
@@ -94,59 +73,28 @@ We compute the truncation error of the centered difference formula {eq}`centerFD
 
 Thus, this method has order of accuracy equal to 2.
 ````
-
 (demo-fdconverge-order12)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-fdconverge-order12-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-fdconverge-order12-matlab
+:::
+```` 
 
-
-
-
-Let's observe the convergence of the formulas in {numref}`Example {number} <example-fd-converge-FD11>` and {numref}`Example {number} <example-fd-converge-FD12>`, applied to the function $\sin(e^{x+1})$ at $x=0$.
-
-```{code-cell}
-f = x -> sin(exp(x+1))
-exact_value = exp(1)*cos(exp(1))
-```
-
-We'll compute the formulas in parallel for a sequence of $h$ values.
-
-```{code-cell}
-h = [ 5/10^n for n in 1:6 ]
-FD1 = [];  FD2 = [];
-for h in h
-    push!(FD1, (f(h)-f(0)) / h )
-    push!(FD2, (f(h)-f(-h)) / 2h ) 
-end
-
-pretty_table([h FD1 FD2], header=["h","FD1","FD2"])
-```
-
-All that's easy to see from this table is that FD2 appears to converge to the same result as FD1, but more rapidly. A table of errors is more informative. 
-
-```{code-cell}
-error_FD1 = @. exact_value-FD1 
-error_FD2 = @. exact_value-FD2
-table = [h error_FD1 error_FD2]
-pretty_table(table, header=["h","error in FD1","error in FD2"])
-```
-
-In each row, $h$ is decreased by a factor of 10, so that the error is reduced by a factor of 10 in the first-order method and 100 in the second-order method.
-
-A graphical comparison can be useful as well. On a log-log scale, the error should (as $h\to 0$) be a straight line whose slope is the order of accuracy. However, it's conventional in convergence plots to show $h$ _decreasing_ from left to right, which negates the slopes.
-
-```{code-cell}
-plot(h,abs.([error_FD1 error_FD2]),m=:o,label=["FD1" "FD2"],
-    xflip=true,xaxis=(:log10,L"h"),yaxis=(:log10,"error"),
-    title="Convergence of finite differences",leg=:bottomleft)
-
-# Add lines for perfect 1st and 2nd order.
-plot!(h,[h h.^2],l=:dash,label=[L"O(h)" L"O(h^2)"])
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-fdconverge-order12-python
+:::
+```` 
+`````
+::::
 
 ## Stability
 
@@ -213,50 +161,27 @@ and the optimum total error is roughly $\epsilon_\text{mach}^{\,\, m/(m+1)}$.
 A different statement of the conclusion is that for a first-order formula, at most we can expect accuracy in only about half of the available machine digits. As $m$ increases, we get ever closer to using the full accuracy available. Higher-order finite-difference methods are both more efficient and less vulnerable to roundoff than low-order methods.
 
 (demo-fdconverge-round)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-fdconverge-round-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-fdconverge-round-matlab
+:::
+```` 
 
-
-
-
-Let $f(x)=e^{-1.3x}$. We apply finite-difference formulas of first, second, and fourth order to estimate $f'(0)=-1.3$.
-
-```{code-cell}
-f = x -> exp(-1.3*x);
-exact = -1.3
-
-h = [ 1/10^n for n in 1:12 ]
-FD1,FD2,FD4 = [],[],[]
-for h in h 
-    nodes = h*(-2:2)
-    vals = @. f(nodes)
-    push!(FD1, dot([   0    0 -1    1     0]/h,vals) )
-    push!(FD2, dot([   0 -1/2  0  1/2     0]/h,vals) )
-    push!(FD4, dot([1/12 -2/3  0  2/3 -1/12]/h,vals) )
-end
-
-table = [ h FD1 FD2 FD4 ]
-pretty_table(table[1:4,:], header=["h","FD1","FD2","FD4"])
-```
-
-They all seem to be converging to $-1.3$. The convergence plot reveals some interesting structure to the errors, though.
-
-```{code-cell}
-err = @. abs([FD1 FD2 FD4] - exact)
-
-plot(h,err,m=:o,label=["FD1" "FD2" "FD4"],
-    xaxis=(:log10,L"h"),xflip=true,yaxis=(:log10,"error"),
-    title="FD error with roundoff",legend=:bottomright)
-
-# Add line for perfect 1st order.
-plot!(h,0.1*eps()./h,l=:dash,color=:black,label=L"O(h^{-1})")
-```
-
-Again the graph is made so that $h$ decreases from left to right. The errors are dominated at first by truncation error, which decreases most rapidly for the fourth-order formula. However, increasing roundoff error eventually equals and then dominates the truncation error as $h$ continues to decrease. As the order of accuracy increases, the crossover point moves to the left (greater efficiency) and down (greater accuracy).
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-fdconverge-round-python
+:::
+```` 
+`````
+::::
 
 ## Exercises
 

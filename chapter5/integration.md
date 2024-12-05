@@ -1,69 +1,30 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-localapprox-integration)=
 # Numerical integration
 
 In calculus you learn that the elegant way to evaluate a definite integral is to apply the Fundamental Theorem of Calculus and find an antiderivative. The connection is so profound and pervasive that it's easy to overlook that a definite integral is a numerical quantity existing independently of antidifferentiation.  However, most conceivable integrands have no antiderivative in terms of familiar functions.
 
 (demo-int-antideriv)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-int-antideriv-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-int-antideriv-matlab
+:::
+```` 
 
-
-
-
-The antiderivative of $e^x$ is, of course, itself. That makes evaluation of $\int_0^1 e^x\,dx$ by the Fundamental Theorem trivial.
-
-```{code-cell}
-exact = exp(1)-1
-```
-
-```{index} ! Julia; quadgk
-```
-
-The Julia package `QuadGK` has an all-purpose numerical integrator that estimates the value without finding the antiderivative first. As you can see here, it's often just as accurate.
-
-```{code-cell}
-Q,errest = quadgk(x->exp(x),0,1)
-@show Q;
-```
-
-The numerical approach is also far more robust. For example, $e^{\,\sin x}$ has no useful antiderivative. But numerically, it's no more difficult.
-
-```{code-cell}
-Q,errest = quadgk(x->exp(sin(x)),0,1)
-@show Q;
-```
-
-When you look at the graphs of these functions, what's remarkable is that one of these areas is basic calculus while the other is almost impenetrable analytically. From a numerical standpoint, they are practically the same problem.
-
-```{code-cell}
-plot([exp,x->exp(sin(x))],0,1,fill=0,layout=(2,1),
-    xlabel=L"x",ylabel=[L"e^x" L"e^{\sin(x)}"],ylim=[0,2.7])
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-int-antideriv-python
+:::
+```` 
+`````
+::::
 
 ```{index} ! numerical integration
 ```
@@ -154,28 +115,27 @@ Trapezoid formula for integration. The piecewise linear interpolant defines trap
 ```
 
 (function-trapezoid)=
-````{prf:function} trapezoid
-**Trapezoid formula for numerical integration**
+``````{prf:algorithm} trapezoid
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-trapezoid-julia
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    trapezoid(f,a,b,n)
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-trapezoid-matlab
+:::
+```` 
 
-Apply the trapezoid integration formula for integrand `f` over
-interval [`a`,`b`], broken up into `n` equal pieces. Returns
-the estimate, a vector of nodes, and a vector of integrand values at the
-nodes.
-"""
-function trapezoid(f,a,b,n)
-    h = (b-a)/n
-    t = range(a,b,length=n+1)
-    y = f.(t)
-    T = h * ( sum(y[2:n]) + 0.5*(y[1] + y[n+1]) )
-    return T,t,y
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-trapezoid-python
+:::
 ````
+`````
+``````
 
 Like finite-difference formulas, numerical integration formulas have a truncation error.
 
@@ -220,77 +180,27 @@ The trapezoid integration formula is second-order accurate.
 ::::
 
 (demo-int-trap)=
-```{prf:example}
-```
-
-
-
-
-
-We will approximate the integral of the function $f(x)=e^{\sin 7x}$ over the interval $[0,2]$.
-
-```{code-cell}
-f = x -> exp(sin(7*x));
-a = 0;  b = 2;
-```
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-In lieu of the exact value, we use the `QuadGK` package to find an accurate result.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-int-trap-julia
 :::
-:::{card}
+```` 
 
-
-If a function has multiple return values, you can use an underscore `_` to indicate a  return value you want to ignore.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-int-trap-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-int-trap-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-Q,_ = quadgk(f,a,b,atol=1e-14,rtol=1e-14);
-println("Integral = $Q")
-```
-
-Here is the trapezoid result at $n=40$, and its error.
-
-```{code-cell}
-T,t,y = FNC.trapezoid(f,a,b,40)
-@show (T,Q-T);
-```
-
-In order to check the order of accuracy, we increase $n$ by orders of magnitude and observe how the error decreases.
-
-```{code-cell}
-n = [ 10^n for n in 1:5 ]
-err = []
-for n in n
-    T,t,y = FNC.trapezoid(f,a,b,n)
-    push!(err,Q-T)
-end
-
-pretty_table([n err], header=["n","error"])
-```
-
-Each increase by a factor of 10 in $n$ cuts the error by a factor of about 100, which is consistent with second-order convergence. Another check is that a log-log graph should give a line of slope $-2$ as $n\to\infty$.
-
-```{code-cell}
-plot(n,abs.(err),m=:o,label="results",
-    xaxis=(:log10,L"n"),yaxis=(:log10,"error"),
-    title="Convergence of trapezoidal integration")
-
-# Add line for perfect 2nd order.
-plot!(n,3e-3*(n/n[1]).^(-2),l=:dash,label=L"O(n^{-2})")
-```
-
-
-
-
-
 
 ## Extrapolation
 
@@ -388,89 +298,27 @@ Specifically, we have
 where the nodes referenced in the last line are relative to $n=2m$. Hence in passing from $n=m$ to $n=2m$, new integrand evaluations are needed only at the odd-numbered nodes of the finer grid. 
 
 (demo-int-extrap)=
-```{prf:example}
-```
-
-
-
-
-
-We estimate $\displaystyle\int_0^2 x^2 e^{-2x}\, dx$ using extrapolation. First we use `quadgk` to get an accurate value.
-
-```{code-cell}
-f = x -> x^2*exp(-2*x);
-a = 0;  b = 2; 
-Q,_ = quadgk(f,a,b,atol=1e-14,rtol=1e-14)
-@show Q;
-```
-
-We start with the trapezoid formula on $n=N$ nodes.
-
-```{code-cell}
-N = 20;       # the coarsest formula
-n = N;  h = (b-a)/n;
-t = h*(0:n);   y = f.(t);
-```
-
-We can now apply weights to get the estimate $T_f(N)$.
-
-```{code-cell}
-T = [ h*(sum(y[2:n]) + y[1]/2 + y[n+1]/2) ]
-```
-
-Now we double to $n=2N$, but we only need to evaluate $f$ at every other interior node and apply {eq}`nc-doubling`.
-
-```{code-cell}
-n = 2n;  h = h/2;  t = h*(0:n);
-T = [ T; T[end]/2 + h*sum( f.(t[2:2:n]) ) ]
-```
-
-We can repeat the same code to double $n$ again.
-
-```{code-cell}
-n = 2n;  h = h/2;  t = h*(0:n);
-T = [ T; T[end]/2 + h*sum( f.(t[2:2:n]) ) ]
-```
-
-Let us now do the first level of extrapolation to get results from Simpson's formula. We combine the elements `T[i]` and `T[i+1]` the same way for $i=1$ and $i=2$.
-
-```{code-cell}
-S = [ (4T[i+1]-T[i])/3 for i in 1:2 ]
-```
-
-With the two Simpson values $S_f(N)$ and $S_f(2N)$ in hand, we can do one more level of extrapolation to get a sixth-order accurate result.
-
-```{code-cell}
-R = (16S[2] - S[1]) / 15
-```
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-We can make a triangular table of the errors:
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-int-extrap-julia
 :::
-:::{card}
+```` 
 
-
-The value `nothing` equals nothing except `nothing`.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-int-extrap-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-int-extrap-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-err = [ T.-Q [nothing;S.-Q] [nothing;nothing;R-Q] ]
-pretty_table(err, header=["order 2","order 4","order 6"])
-```
-
-If we consider the computational time to be dominated by evaluations of $f$, then we have obtained a result with about twice as many accurate digits as the best trapezoid result, at virtually no extra cost.
-
-
-
-
 
 ## Exercises
 

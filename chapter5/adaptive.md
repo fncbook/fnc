@@ -1,24 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-localapprox-adaptive)=
 # Adaptive integration
 
@@ -28,43 +7,27 @@ FNC.init_format()
 To this point, we have used only equally spaced nodes to compute integrals. Yet there are problems in which non-uniformly distributed nodes would clearly be more appropriate, as demonstrated in {numref}`Demo %s <demo-adapt-motive>`.
 
 (demo-adapt-motive)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-adapt-motive-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-adapt-motive-matlab
+:::
+```` 
 
-
-
-
-This function gets increasingly oscillatory as $x$ increases.
-
-```{code-cell}
-f = x -> (x+1)^2*cos((2*x+1)/(x-4.3))
-plot(f,0,4,xlabel=L"x",ylabel=L"f(x)")
-```
-
-Accordingly, the trapezoid rule is more accurate on the left half of this interval than on the right half.
-
-```{code-cell}
-left_val,_ = quadgk(f,0,2,atol=1e-14,rtol=1e-14)
-right_val,_ = quadgk(f,2,4,atol=1e-14,rtol=1e-14)
-
-n = [ 50*2^k for k in 0:3 ]
-left_err,right_err = [],[]
-for n in n
-    T,_ = FNC.trapezoid(f,0,2,n)
-    push!(left_err,T-left_val)
-    
-    T,_ = FNC.trapezoid(f,2,4,n)
-    push!(right_err,T-right_val)
-end
-
-pretty_table([n left_err right_err], header=["n" "left error" "right error"])
-```
-
-Both the picture and the numerical results suggest that more nodes should be used on the right half of the interval than on the left half.
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-adapt-motive-python
+:::
+```` 
+`````
+::::
 
 We would like an algorithm that automatically detects and reacts to a situation like that in {numref}`Demo %s <demo-adapt-motive>`, a trait known as **adaptivity**.
 
@@ -93,7 +56,7 @@ We can further extrapolate to sixth-order accuracy using {eq}`nc-sixth`:
   R_f(4n) = \frac{1}{15} \Bigl[ 16 S_f(4n) - S_f(2n) \Bigr].
 ```
 
-By virtue of higher order of accuracy, $R_f(4n)$ should be more accurate than $S_f(4n)$. Hence a decent estimate of the error in the better of the two Simpson values is
+By virtue of higher order of accuracy, $R_f(4n)$ should be more accurate than $S_f(4n)$. Hence, a decent estimate of the error in the better of the two Simpson values is
 
 ```{math}
 :label: adapterr
@@ -113,7 +76,7 @@ If $|E|$ is judged to be acceptably small, we are done. This judgment takes some
 
 We are likely to sample values of the integrand that are larger than, say, $1/2$ in absolute value, so obtaining this very small result has to rely on subtractive cancellation. We cannot hope for more than 4-5 accurate digits, so a strict test of the relative error is also not recommended. In other words, we can seek an error that is small relative to the data (the integrand), which is $O(1)$, but not relative to the answer itself. 
 
-Typically we use both relative and absolute error, stopping when either one is considered small enough. Algebraically, the test is
+Typically, we use both relative and absolute error, stopping when either one is considered small enough. Algebraically, the test is
 
 ```{math}
 :label: absreltolerance
@@ -143,113 +106,53 @@ If the error estimate passes the test {eq}`absreltolerance`, the better Simpson 
 
 (function-intadapt)=
 
-````{prf:function} intadapt
-**Adaptive integration with error estimation**
+``````{prf:algorithm} intadapt
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    intadapt(f,a,b,tol)
-
-Adaptively integrate `f` over [`a`,`b`] to within target error 
-tolerance `tol`. Returns the estimate and a vector of evaluation 
-nodes.
-"""
-function intadapt(f,a,b,tol,fa=f(a),fb=f(b),m=(a+b)/2,fm=f(m))
-    # Use error estimation and recursive bisection.
-    # These are the two new nodes and their f-values.
-    xl = (a+m)/2;  fl = f(xl);
-    xr = (m+b)/2;  fr = f(xr);
-    
-    # Compute the trapezoid values iteratively.
-    h = (b-a)
-    T = [0.,0.,0.]
-    T[1] = h*(fa+fb)/2
-    T[2] = T[1]/2 + (h/2)*fm
-    T[3] = T[2]/2 + (h/4)*(fl+fr)
-    
-    S = (4T[2:3]-T[1:2]) / 3      # Simpson values
-    E = (S[2]-S[1]) / 15           # error estimate
-    
-    if abs(E) < tol*(1+abs(S[2]))  # acceptable error?
-        Q = S[2]                   # yes--done
-        nodes = [a,xl,m,xr,b]      # all nodes at this level
-    else
-        # Error is too large--bisect and recurse.
-        QL,tL = intadapt(f,a,m,tol,fa,fm,xl,fl)
-        QR,tR = intadapt(f,m,b,tol,fm,fb,xr,fr)
-        Q = QL + QR
-        nodes = [tL;tR[2:end]]   # merge the nodes w/o duplicate
-    end
-    return Q,nodes
-end
-```
-````
-
-:::{admonition} About the code
-:class: dropdown
-The intended way for a user to call {numref}`Function {number} <function-intadapt>` is with only `f`, `a`, `b`, and `tol` provided. We then use default values on the other parameters to compute the function values at the endpoints, the interval's midpoint, and the function value at the midpoint. Recursive calls from within the function itself will provide all of that information, since it was already calculated along the way.
+:::{embed} #function-intadapt-julia
 :::
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+
+:::{embed} #function-intadapt-matlab
+:::
+```` 
+
+````{tab-item} Python
+:sync: python
+
+:::{embed} #function-intadapt-python
+:::
+````
+`````
+``````
 
 (demo-adapt-usage)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-adapt-usage-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-adapt-usage-matlab
+:::
+```` 
 
-
-
-
-We'll integrate the function from {numref}`Demo %s <demo-adapt-motive>`.
-
-```{code-cell}
-f = x -> (x+1)^2*cos((2*x+1)/(x-4.3));
-```
-
-We perform the integration and show the nodes selected underneath the curve.
-
-```{code-cell}
-A,t = FNC.intadapt(f,0,4,0.001)
-@show num_nodes = length(t);
-
-plot(f,0,4,color=:black,legend=:none,
-    xlabel=L"x",ylabel=L"f(x)",title="Adaptive node selection")
-plot!(t,f.(t),seriestype=:sticks,m=(:o,2))
-```
-
-The error turns out to be a bit more than we requested. It's only an estimate, not a guarantee.
-
-```{code-cell}
-Q,_ = quadgk(f,0,4,atol=1e-14,rtol=1e-14);    # 'exact' value
-println("error: $(Q-A)");
-```
-
-Let's see how the number of integrand evaluations and the error vary with the requested tolerance.
-
-```{code-cell}
-tol = [ 1/10^k for k in 4:14 ]
-err,n = [],[]
-for tol in 10.0.^(-4:-1:-14)
-    A,t = FNC.intadapt(f,0,4,tol)
-    push!(err,Q-A)
-    push!(n,length(t))
-end
-
-pretty_table([tol err n], header=["tolerance","error","number of nodes"])
-```
-
-As you can see, even though the errors are not smaller than the estimates, the two columns decrease in tandem. If we consider now the convergence not in $h$, which is poorly defined now, but in the number of nodes actually chosen, we come close to the fourth-order accuracy of the underlying Simpson scheme.
-
-```{code-cell}
-plot(n,abs.(err),m=:o,label="results",
-    xaxis=(:log10,"number of nodes"),yaxis=(:log10,"error"),
-    title="Convergence of adaptive integration")
-
-order4 = @. 0.01*(n/n[1])^(-4)
-plot!(n,order4,l=:dash,label=L"O(n^{-4})")
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-adapt-usage-python
+:::
+```` 
+`````
+::::
 
 Although adaptivity and the error estimation that goes with it can be very powerful, they come at some cost. The error estimation cannot be universally perfect, so sometimes the answer will not be as accurate as requested, and sometimes the function will be evaluated more times than necessary. Subtle problems may arise when the integral is a step within a larger computation (see [Exercise 6](problem-adaptive-nonsmooth)).
 

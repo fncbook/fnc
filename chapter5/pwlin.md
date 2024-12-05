@@ -1,24 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-localapprox-pwlin)=
 # Piecewise linear interpolation
 
@@ -69,84 +48,55 @@ Each hat function is globally continuous and is linear inside every interval $[t
 
 for some choice of the coefficients $c_0,\ldots,c_n$. No smaller set of functions can have the same properties. We summarize these facts by calling the hat functions a **basis** of the set of functions that are continuous and piecewise linear relative to $\mathbf{t}$.  Another point of view, familiar from abstract linear algebra, is that a basis sets up a one-to-one correspondence between the spanned function space and the more familiar space $\mathbb{R}^{n+1}$, with each function being represented by its coefficients $c_0,\ldots,c_n$.
 
+An appealing characteristic of the hat function basis is that it depends only on the node locations, while the expansion coefficients in {eq}`plbasis` depend only on the data values. This clean separation would be useful if we wanted to construct many interpolants on the same node set, and it has deeper theoretical uses as well.
+
 {numref}`Function {number} <function-hatfun>` presents a simple implementation of hat functions. The inputs are a presorted vector of nodes and a value of $k$ between 0 and $n$, which represent the indices of the endpoints. The return value is a function of $x$ that can be evaluated as needed. Note that we have not formally defined values for a hat function outside of the node interval; our choice in {numref}`Function {number} <function-hatfun>` is to make it zero there.
 
 (function-hatfun)=
+``````{prf:algorithm} hatfun
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-hatfun-julia
+:::
+```` 
 
-````{prf:function} hatfun
-**Hat function/piecewise linear basis function**
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-hatfun-matlab
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    hatfun(t,k)
-
-Create a piecewise linear hat function, where `t` is a
-vector of n+1 interpolation nodes and `k` is an integer in 0:n
-giving the index of the node where the hat function equals one.
-"""
-
-function hatfun(t,k)
-    n = length(t)-1
-    return function(x)
-        if k > 0 && t[k] ≤ x ≤ t[k+1]
-            return (x-t[k])/(t[k+1]-t[k])
-        elseif k < n && t[k+1] ≤ x ≤ t[k+2]
-            return (t[k+2]-x)/(t[k+2]-t[k+1])
-        else
-            return 0
-        end
-    end
-end
+````{tab-item} Python
+:sync: python
+:::{embed} #function-hatfun-python
+:::
 ````
+`````
+``````
 
 (demo-pwlin-hat)=
-```{prf:example}
-```
-
-
-
-
-
-Let's define a set of four nodes (i.e., $n=3$ in our formulas).
-
-```{index} ! Julia; annotate!
-```
-
-```{code-cell}
-t = [0, 0.55, 0.7, 1]
-```
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-We plot the hat functions $H_0,\ldots,H_3$.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-pwlin-hat-julia
 :::
-:::{card}
+```` 
 
-
-Use `annotate!` to add text to a plot.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-pwlin-hat-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-pwlin-hat-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-plt = plot(layout=(4,1),legend=:top,
-    xlabel=L"x",ylims=[-0.1,1.1],ytick=[])
-for k in 0:3
-  Hₖ = FNC.hatfun(t,k)
-  plot!(Hₖ,0,1,subplot=k+1)
-  scatter!(t,Hₖ.(t),m=3,subplot=k+1)
-  annotate!(t[k+1],0.25,text(latexstring("H_$k"),10),subplot=k+1)
-end
-plt
-```
-
-
-
 
 ## Cardinality conditions
 
@@ -171,65 +121,53 @@ All candidate piecewise linear (PL) functions can be expressed as a linear combi
   p(x) = \sum_{k=0}^n y_k H_k(x).
 ```
 
-(demo-pwlin-usage)=
-```{prf:example}
-```
-
-
-
-
-
-We generate a piecewise linear interpolant of $f(x)=e^{\sin 7x}$.
-
-```{code-cell}
-f = x -> exp(sin(7*x))
-
-plot(f,0,1,label="function",xlabel=L"x",ylabel=L"y")
-```
-
-First we sample the function to create the data.
-
-```{code-cell}
-t = [0, 0.075, 0.25, 0.55, 0.7, 1]    # nodes
-y = f.(t)                             # function values
-
-scatter!(t,y,label="values at nodes")
-```
-
-Now we create a callable function that will evaluate the piecewise linear interpolant at any $x$, and then plot it.
-
-```{code-cell}
-p = FNC.plinterp(t,y)
-plot!(p,0,1,label="interpolant",title="PL interpolation")
-```
-
-
-
-
 The resulting algorithmic simplicity is reflected in {numref}`Function {number} <function-plinterp>`. Take note that the output of {numref}`Function {number} <function-plinterp>` is itself a function, meant to be called with a single argument representing a value of $x$. Our mathematical viewpoint is that the result of an interpolation process is a function, and our codes reflect this.
 
-A final appealing characteristic of the hat function basis is that it depends only on the node locations, while the expansion coefficients in {eq}`plbasis` depend only on the data values. This clean separation would be useful if we wanted to construct many interpolants on the same node set, and it has deeper theoretical uses as well.
-
 (function-plinterp)=
+``````{prf:algorithm} plinterp
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-plinterp-julia
+:::
+```` 
 
-````{prf:function} plinterp
-**Piecewise linear interpolation**
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-plinterp-matlab
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    plinterp(t,y)
-
-Construct a piecewise linear interpolating function for data values in
-`y` given at nodes in `t`.
-"""
-function plinterp(t,y)
-    n = length(t)-1
-    H = [ hatfun(t,k) for k in 0:n ]
-    return x -> sum( y[k+1]*H[k+1](x) for k in 0:n )
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-plinterp-python
+:::
 ````
+`````
+``````
+
+(demo-pwlin-usage)=
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-pwlin-usage-julia
+:::
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-pwlin-usage-matlab
+:::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-pwlin-usage-python
+:::
+```` 
+`````
+::::
 
 ## Conditioning and convergence
 
@@ -305,45 +243,27 @@ $$
 Hence a log-log graph of error versus $h$ should be approximately a straight line of slope $m$.
 
 (demo-pwlin-converge)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-pwlin-converge-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-pwlin-converge-matlab
+:::
+```` 
 
-
-
-
-We measure the convergence rate for piecewise linear interpolation of $e^{\sin 7x}$ over $x \in [0,1]$.
-
-```{code-cell}
-f = x -> exp(sin(7*x))
-x = range(0,1,length=10001)  # sample the difference at many points
-n = @. round(Int,10^(1:0.25:3.5))
-maxerr = zeros(0)
-for n in n
-    t = (0:n)/n    # interpolation nodes
-    p = FNC.plinterp(t,f.(t))
-    err = @. f(x)-p(x)
-    push!(maxerr,norm(err,Inf) )
-end
-
-data = (n=n[1:4:end],err=maxerr[1:4:end])
-pretty_table(data, header=["n","max-norm error"])
-```
-
-As predicted, a factor of 10 in $n$ produces a factor of 100 in the error. In a convergence plot, it is traditional to have $h$ *decrease* from left to right, so we expect a straight line of slope $-2$ on a log-log plot. 
-
-```{code-cell}
-h = @. 1/n
-order2 = @. 10*(h/h[1])^2
-
-plot(h,maxerr,m=:o,label="error")
-plot!(h,order2,l=:dash,label=L"O(h^2)",xflip=true,
-    xaxis=(:log10,L"h"),yaxis=(:log10,L"|| f-p\, ||_\infty"),
-    title="Convergence of PL interpolation")
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-pwlin-converge-python
+:::
+```` 
+`````
+::::
 
 ## Exercises
 
@@ -377,7 +297,7 @@ plot!(h,order2,l=:dash,label=L"O(h^2)",xflip=true,
 4. ✍ Show that for any node distribution and any $x\in[t_0,t_n]$,
   
     ```{math}
-:label: plpu
+    :label: plpu
     \sum_{k=0}^n H_k(x) = 1.
     ```
 

@@ -1,24 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-localapprox-splines)=
 # Cubic splines
 
@@ -203,135 +182,53 @@ Collectively, {eq}`spline0asys`,  {eq}`spline0bsys`,  {eq}`spline1sys`,  {eq}`sp
 ## Implementation
 
 (function-spinterp)=
+``````{prf:algorithm} spinterp
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-spinterp-julia
+:::
+```` 
 
-````{prf:function} spinterp
-**Cubic not-a-knot spline interpolation**
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-spinterp-matlab
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    spinterp(t,y)
-
-Construct a cubic not-a-knot spline interpolating function for data
-values in `y` given at nodes in `t`.
-"""
-function spinterp(t,y)
-    n = length(t)-1
-    h = [ t[k+1]-t[k] for k in 1:n ]
-
-    # Preliminary definitions.
-    Z = zeros(n,n);
-    In = I(n);  E = In[1:n-1,:];
-    J = diagm(0=>ones(n),1=>-ones(n-1))
-    H = diagm(0=>h)
-
-    # Left endpoint interpolation:
-    AL = [ In Z Z Z ]
-    vL = y[1:n]
-
-    # Right endpoint interpolation:
-    AR = [ In H H^2 H^3 ];
-    vR = y[2:n+1]
-
-    # Continuity of first derivative:
-    A1 = E*[ Z J 2*H 3*H^2 ]
-    v1 = zeros(n-1)
-
-    # Continuity of second derivative:
-    A2 = E*[ Z Z J 3*H ]
-    v2 = zeros(n-1)
-
-    # Not-a-knot conditions:
-    nakL = [ zeros(1,3*n) [1 -1 zeros(1,n-2)] ]
-    nakR = [ zeros(1,3*n) [zeros(1,n-2) 1 -1] ]
-
-    # Assemble and solve the full system.
-    A = [ AL; AR; A1; A2; nakL; nakR ]
-    v = [ vL; vR; v1; v2; 0; 0 ]
-    z = A\v
-
-    # Break the coefficients into separate vectors.
-    rows = 1:n
-    a = z[rows]
-    b = z[n.+rows];  c = z[2*n.+rows];  d = z[3*n.+rows]
-    S = [ Polynomial([a[k],b[k],c[k],d[k]]) for k in 1:n ]
-
-    # This function evaluates the spline when called with a value
-    # for x.
-    return function (x)
-        if x < t[1] || x > t[n+1]    # outside the interval
-            return NaN
-        elseif x==t[1]
-            return y[1]
-        else
-            k = findlast(x .> t)    # last node to the left of x
-            return S[k](x-t[k])
-        end
-    end
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-spinterp-python
+:::
 ````
+`````
+``````
 
 {numref}`Function {number} <function-spinterp>` gives an implementation of cubic not-a-knot spline interpolation. For clarity it stays very close to the description given above. There are some possible shortcuts—for example, one could avoid using $\mathbf{E}$ and instead directly delete the last row of any matrix it left-multiplies. Observe that the linear system is assembled and solved just once, and the returned evaluation function simply uses the resulting coefficients. This allows us to make multiple calls to evaluate $S$ without unnecessarily repeating the linear algebra.
 
 ## Conditioning and convergence
-
 (demo-splines-splines)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-splines-splines-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-splines-splines-matlab
+:::
+```` 
 
-
-
-
-For illustration, here is a spline interpolant using just a few nodes.
-
-```{code-cell}
-f = x -> exp(sin(7*x))
-
-plot(f,0,1,label="function",xlabel=L"x",ylabel=L"y")
-
-t = [0, 0.075, 0.25, 0.55, 0.7, 1]  # nodes
-y = f.(t)                           # values at nodes
-
-scatter!(t,y,label="values at nodes")
-```
-
-```{code-cell}
-S = FNC.spinterp(t,y)
-
-plot!(S,0,1,label="spline")
-```
-
-Now we look at the convergence rate as the number of nodes increases.
-
-```{code-cell}
-x = (0:10000)/1e4              # sample the difference at many points
-n = @. round(Int,2^(3:0.5:7))  # numbers of nodes
-err = zeros(0)
-for n in n
-    t = (0:n)/n 
-    S = FNC.spinterp(t,f.(t))
-    dif = @. f(x)-S(x)
-    push!(err,norm(dif,Inf))
-end
-
-pretty_table((;n, err), header=["n","error"])
-```
-
-Since we expect convergence that is $O(h^4)=O(n^{-4})$, we use a log-log graph of error and expect a straight line of slope $-4$.
-
-```{code-cell} 
-order4 = @. (n/n[1])^(-4)
-
-plot(n,[err order4],m=[:o :none],l=[:solid :dash],
-    label=["error" "4th order"],
-    xaxis=(:log10,"n"), yaxis=(:log10,L"|| f-S\,||_\infty"),
-    title="Convergence of spline interpolation")
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-splines-splines-python
+:::
+```` 
+`````
+::::
 
 Besides having more smoothness than a piecewise linear interpolant, the not-a-knot cubic spline improves the order of accuracy to 4.
 

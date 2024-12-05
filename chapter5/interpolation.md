@@ -1,24 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-localapprox-interpolation)=
 # The interpolation problem
 
@@ -46,55 +25,27 @@ The interpolation nodes are numbered from 0 to $n$. This is convenient for our m
 Polynomials are the obvious first candidate to serve as interpolating functions. They are easy to work with, and in {numref}`section-linsys-polyinterp` we saw that a linear system of equations can be used to determine the coefficients of a polynomial that passes through every member of a set of given points in the plane. However, it's not hard to find examples for which polynomial interpolation leads to unusable results.
 
 (demo-interpolation-global)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-interpolation-global-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-interpolation-global-matlab
+:::
+```` 
 
-
-
-
-Here are some points that we could consider to be observations of an unknown function on $[-1,1]$.
-
-```{code-cell}
-n = 5
-t = range(-1,1,length=n+1)
-y = @. t^2 + t + 0.05*sin(20*t)
-
-scatter(t,y,label="data",leg=:top)
-```
-
-```{index} ! Julia; fit
-```
-
-The polynomial interpolant, as computed using `fit`, looks very sensible. It's the kind of function you'd take home to meet your parents. 
-
-```{code-cell}
-p = Polynomials.fit(t,y,n)     # interpolating polynomial
-plot!(p,-1,1,label="interpolant")
-```
-
-But now consider a different set of points generated in almost exactly the same way.
-
-```{code-cell}
-n = 18
-t = range(-1,1,length=n+1)
-y = @. t^2 + t + 0.05*sin(20*t)
-
-scatter(t,y,label="data",leg=:top)
-```
-
-The points themselves are unremarkable. But take a look at what happens to the polynomial interpolant.
-
-```{code-cell}
-p = Polynomials.fit(t,y,n)
-x = range(-1,1,length=1000)    # use a lot of points
-plot!(x,p.(x),label="interpolant")
-```
-
-Surely there must be functions that are more intuitively representative of those points!
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-interpolation-global-python
+:::
+```` 
+`````
+::::
 
 
 ```{prf:observation}
@@ -117,43 +68,27 @@ Some examples of piecewise polynomials for the nodes  $t_0=-2$, $t_1=0$, $t_2=1$
 Usually we designate in advance a maximum degree $d$ for each polynomial piece of $p(x)$. An important property of the piecewise polynomials of degree $d$ is that they form a vector space: that is, any linear combination of piecewise polynomials of degree $d$ is another piecewise polynomial of degree $d$. If $p$ and $q$ share the same node set, then the combination is piecewise polynomial on that node set.
 
 (demo-interpolation-pwise)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-interpolation-pwise-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-interpolation-pwise-matlab
+:::
+```` 
 
-
-
-
-Let us recall the data from {numref}`Demo %s <demo-interpolation-global>`.
-
-```{code-cell}
-:tags: [hide-input]
-n = 12
-t = range(-1,1,length=n+1)
-y = @. t^2 + t + 0.5*sin(20*t)
-
-scatter(t,y,label="data",leg=:top)
-```
-
-Here is an interpolant that is linear between each consecutive pair of nodes, using `plinterp` from {numref}`section-localapprox-pwlin`.
-
-```{code-cell}
-p = FNC.plinterp(t,y)
-plot!(p,-1,1,label="piecewise linear")
-```
-
-```{index} ! Julia; Spline1D
-```
-
-We may prefer a smoother interpolant that is piecewise cubic, generated using `Spline1D` from the `Dierckx` package.
-
-```{code-cell}
-p = Spline1D(t,y)
-plot!(x->p(x),-1,1,label="piecewise cubic")
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-interpolation-pwise-python
+:::
+```` 
+`````
+::::
 
 We will consider piecewise linear interpolation in more detail in {numref}`section-localapprox-pwlin`, and we look at piecewise cubic interpolation in {numref}`section-localapprox-splines`.
 
@@ -242,45 +177,27 @@ Since $|d_k|\le \|\mathbf{d}\|_\infty$ for all $k$, this finishes {eq}`interp-co
 ::::
 
 (demo-interp-cond)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-interp-cond-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-interp-cond-matlab
+:::
+```` 
 
-
-
-
-In {numref}`Demo %s <demo-interpolation-global>` and {numref}`Demo %s <demo-interpolation-pwise>` we saw a big difference between polynomial interpolation and piecewise polynomial interpolation of some arbitrarily chosen data. The same effects can be seen clearly in the cardinal functions, which are closely tied to the condition numbers.
-
-```{code-cell}
-n = 18
-t = range(-1,stop=1,length=n+1)
-y = [zeros(9);1;zeros(n-9)];  # data for 10th cardinal function
-
-scatter(t,y,label="data")
-```
-
-```{code-cell}
-ϕ = Spline1D(t,y)
-plot!(x->ϕ(x),-1,1,label="spline",
-    xlabel=L"x",ylabel=L"\phi(x)",
-    title="Piecewise cubic cardinal function")
-```
-
-The piecewise cubic cardinal function is nowhere greater than one in absolute value. This happens to be true for all the cardinal functions, ensuring a good condition number for any interpolation with these functions. But the story for global polynomials is very different.
-
-```{code-cell}
-scatter(t,y,label="data")
-
-ϕ = Polynomials.fit(t,y,n)
-plot!(x->ϕ(x),-1,1,label="polynomial",
-    xlabel=L"x",ylabel=L"\phi(x)",legend=:top,
-    title="Polynomial cardinal function")
-```
-
-From the figure we can see that the condition number for polynomial interpolation on these nodes is at least 500.
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-interp-cond-python
+:::
+```` 
+`````
+::::
 
 ## Exercises
 
