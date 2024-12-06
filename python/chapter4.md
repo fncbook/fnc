@@ -1,22 +1,24 @@
 ---
 kernelspec:
-  display_name: Julia 1
-  language: julia
-  name: julia-1.11
+  display_name: Python 3
+  language: python
+  name: python3
 numbering:
   headings: false
 ---
 # Chapter 4
 
+Python implementations
+
 ## Functions
 
-(function-newton-julia)=
+(function-newton-python)=
 ``````{dropdown} Newton's method
-```{literalinclude} ../julia/package/src/chapter04.jl
-:filename: newton.jl
-:start-line: 0
-:end-line: 28
-:language: julia
+```{literalinclude} ../python/pkg/FNC/FNC04.py
+:filename: newton.py
+:start-line: 4
+:end-line: 34
+:language: python
 :linenos: true
 ```
 ```{admonition} About the code
@@ -27,13 +29,13 @@ The `break` statement, seen here in line 25, causes an immediate exit from the i
 ```
 ``````
 
-(function-secant-julia)=
+(function-secant-python)=
 ``````{dropdown} Secant method
-```{literalinclude} ../julia/package/src/chapter04.jl
-:filename: secant.jl
-:start-line: 40
-:end-line: 59
-:language: julia
+```{literalinclude} ../python/pkg/FNC/FNC04.py
+:filename: secant.py
+:start-line: 36
+:end-line: 66
+:language: python
 :linenos: true
 ```
 ```{admonition} About the code
@@ -42,13 +44,13 @@ Because we want to observe the convergence of the method, {numref}`Function {num
 ```
 ``````
 
-(function-newtonsys-julia)=
+(function-newtonsys-python)=
 ``````{dropdown} Newton's method for systems
-```{literalinclude} ../julia/package/src/chapter04.jl
-:filename: newtonsys.jl
-:start-line: 61
-:end-line: 91
-:language: julia
+```{literalinclude} ../python/pkg/FNC/FNC04.py
+:filename: newtonsys.py
+:start-line: 68
+:end-line: 96
+:language: python
 :linenos: true
 ```
 ````{admonition} About the code
@@ -57,13 +59,13 @@ The output of {numref}`Function {number} <function-newtonsys>` is a vector of ve
 ````
 ``````
 
-(function-fdjac-julia)=
+(function-fdjac-python)=
 ``````{dropdown} Finite differences for Jacobian
-```{literalinclude} ../julia/package/src/chapter04.jl
-:filename: fdjac.jl
-:start-line: 93
-:end-line: 114
-:language: julia
+```{literalinclude} ../python/pkg/FNC/FNC04.py
+:filename: fdjac.py
+:start-line: 98
+:end-line: 112
+:language: python
 :linenos: true
 ```
 ::::{admonition} About the code
@@ -74,99 +76,100 @@ Note that a default value is given for the third argument `y₀`, and it refers 
 ::::
 ``````
 
-(function-levenberg-julia)=
+(function-levenberg-python)=
 ``````{dropdown} Levenberg's method
-```{literalinclude} ../julia/package/src/chapter04.jl
-:filename: levenberg.jl
-:start-line: 116
-:end-line: 171
-:language: julia
+```{literalinclude} ../python/pkg/FNC/FNC04.py
+:filename: levenberg.py
+:start-line: 114
+:end-line: 168
+:language: python
 :linenos: true
 ```
 ``````
 
 ## Examples
 
-```{code-cell}
-:tags: [remove-cell]
-import Pkg; Pkg.activate("/Users/driscoll/Documents/GitHub/fnc")
-using FundamentalsNumericalComputation
-FNC.init_format()
+```{code-cell} ipython3
+from numpy import *
+from matplotlib.pyplot import *
+from numpy.linalg import solve, norm
+import scipy.sparse as sparse
+from scipy.sparse.linalg import splu
+from timeit import default_timer as timer
+from prettytable import PrettyTable
+import FNC
 ```
+
 ### Section 4.1
-(demo-rootproblem-bessel-julia)=
+(demo-rootproblem-bessel-python)=
 ``````{dropdown} The rootfinding problem for Bessel functions
 
 ```{code-cell}
-J₃(x) = besselj(3, x)
-plot(J₃, 0, 20, title="Bessel function",
-    xaxis=(L"x"), yaxis=(L"J_3(x)"), grid=:xy)
-```
-::::{grid} 1 1 2 2
-From the graph we see roots near 6, 10, 13, 16, and 19. We use `nlsolve` from the `NLsolve` package to find these roots accurately. It uses vector variables, so we have to code accordingly.
-:::{card}
-Type `\omega` followed by <kbd>Tab</kbd> to get the character `ω`.
+import scipy.special as special
+def J3(x):
+    return special.jv(3.0, x)
 
-The argument `ftol=1e-14` below is called a **keyword argument**. Here it sets a goal for the maximum value of $|f(x)|$.
-:::
-::::
+xx = linspace(0, 20, 500)
+fig, ax = subplots()
+ax.plot(xx, J3(xx))
+ax.grid()
+xlabel("$x$"), ylabel("$J_3(x)$")
+title("Bessel function")
+```
+From the graph we see roots near 6, 10, 13, 16, and 19. We use `root_scalar` from the `scipy.optimize` package to find these roots accurately.
 
 ```{code-cell}
-ω = []
-for guess = [6., 10. ,13., 16., 19.]
-    s = nlsolve(x -> J₃(x[1]), [guess], ftol=1e-14)
-    append!(ω, s.zero)
-end
+from scipy.optimize import root_scalar
+
+omega = []
+for guess in [6.0, 10.0, 13.0, 16.0, 19.0]:
+    s = root_scalar(J3, bracket=[guess - 0.5, guess + 0.5]).root
+    omega.append(s)
+
+results = PrettyTable()
+results.add_column("root estimate", omega)
+results.add_column("function value", [J3(ω) for ω in omega])
+print(results)
 ```
 
 ```{code-cell}
-pretty_table([ω J₃.(ω)], header=["root estimate","function value"])
-```
-
-```{code-cell}
-scatter!(ω, J₃.(ω), title="Bessel function with roots")
+ax.scatter(omega, J3(omega))
+ax.set_title("Bessel function roots")
+fig
 ```
 
 If instead we seek values at which $J_3(x)=0.2$, then we must find roots of the function $J_3(x)-0.2$.
 
 ```{code-cell}
-r = []
-for guess = [3., 6., 10., 13.]
-    f(x) = J₃(x[1]) - 0.2
-    s = nlsolve(f, [guess], ftol=1e-14)
-    append!(r, s.zero)
-end
-scatter!(r, J₃.(r), title="Roots and other Bessel values")
+omega = []
+for guess in [3., 6., 10., 13.]:
+    f = lambda x: J3(x) - 0.2
+    s = root_scalar(f, x0=guess).root
+    omega.append(s)
+
+ax.scatter(omega, J3(omega))
+fig
 ```
 ``````
 
-(demo-roots-cond-julia)=
+(demo-roots-cond-python)=
 ``````{dropdown} Condition number of a rootfinding problem
 Consider first the function
 
 ```{code-cell}
-f(x) = (x - 1) * (x - 2);
+f = lambda x: (x - 1) * (x - 2)
 ```
 
-:::{index} ! Julia; splatting
-:::
-
-::::{grid} 1 1 2 2
-
 At the root $r=1$, we have $f'(r)=-1$. If the values of $f$ were perturbed at every point by a small amount of noise, we can imagine finding the root of the function drawn with a thick ribbon, giving a range of potential roots.
-:::{card}
-The syntax `interval...` is called **splatting** and means to insert all the individual elements of `interval` as a sequence.
-:::
-::::
-
 
 ```{code-cell}
-interval = [0.8, 1.2]
-
-plot(f, interval..., ribbon=0.03, aspect_ratio=1,
-    xlabel=L"x", yaxis=(L"f(x)", [-0.2, 0.2]))
-
-scatter!([1], [0], title="Well-conditioned root")
+xx = linspace(0.8, 1.2, 400)
+plot(xx, f(xx))
+plot(xx, f(xx) + 0.02, "k")
+plot(xx, f(xx) - 0.02, "k")
+axis("equal"), grid(True)
+xlabel("x"), ylabel("f(x)")
+title("Well-conditioned root")
 ```
 
 The possible values for a perturbed root all lie within the interval where the ribbon intersects the $x$-axis. The width of that zone is about the same as the vertical thickness of the ribbon.
@@ -174,117 +177,128 @@ The possible values for a perturbed root all lie within the interval where the r
 By contrast, consider the function
 
 ```{code-cell}
-f(x) = (x - 1) * (x - 1.01);
+f = lambda x: (x - 1) * (x - 1.01)
 ```
 
 Now $f'(1)=-0.01$, and the graph of $f$ will be much shallower near $x=1$. Look at the effect this has on our thick rendering:
 
 ```{code-cell}
-plot(f, interval..., ribbon=0.03, aspect_ratio=1,
-    xlabel=L"x", yaxis=(L"f(x)", [-0.2, 0.2]))
-
-scatter!([1], [0], title="Poorly-conditioned root")
+xx = linspace(0.8, 1.2, 400)
+plot(xx, f(xx))
+plot(xx, f(xx) + 0.02, "k")
+plot(xx, f(xx) - 0.02, "k")
+axis("equal"), grid(True)
+xlabel("x"), ylabel("f(x)")
+title("Poorly-conditioned root")
 ```
 
 The vertical displacements in this picture are exactly the same as before. But the potential _horizontal_ displacement of the root is much wider. In fact, if we perturb the function entirely upward by the amount drawn here, the root disappears!
-
 ``````
 
 ### Section 4.2
 
-(demo-fp-spiral-julia)=
+(demo-fp-spiral-python)=
 ``````{dropdown} Fixed-point iteration 
 Let's convert the roots of a quadratic polynomial $f(x)$ to a fixed point problem.
 
 ```{code-cell}
-p = Polynomial([3.5, -4,1])
-r = roots(p)
-rmin, rmax = extrema(r)
-@show rmin, rmax;
+f = poly1d([1, -4, 3.5])
+r = f.roots
+print(r)
 ```
 
-We define $g(x)=x-p(x)$. 
+We define $g(x)=x - f(x)$. 
 
 ```{code-cell}
-g(x) = x - p(x)
+g = lambda x: x - f(x)
 ```
 
 Intersections of $y=g(x)$ with the line $y=x$ are fixed points of $g$ and thus roots of $f$. (Only one is shown in the chosen plot range.)
 
 ```{code-cell}
-plt = plot([g x->x], 2, 3, l=2, label=[L"y=g(x)" L"y=x"],
-    xlabel=L"x", ylabel=L"y", aspect_ratio=1,
-    title="Finding a fixed point", legend=:bottomright)
+fig, ax = subplots()
+g = lambda x: x - f(x)
+xx = linspace(2, 3, 400)
+ax.plot(xx, g(xx), label="y=g(x)")
+ax.plot(xx, xx, label="y=x")
+axis("equal"), legend()
+title("Finding a fixed point")
 ```
 
 If we evaluate $g(2.1)$, we get a value of almost 2.6, so this is not a fixed point.
 
 ```{code-cell}
-x = 2.1;
+x = 2.1
 y = g(x)
+print(y)
 ```
 
 However, $y=g(x)$ is considerably closer to the fixed point at around 2.7 than $x$ is. Suppose then that we adopt $y$ as our new $x$ value. Changing the $x$ coordinate in this way is the same as following a horizontal line over to the graph of $y=x$.
 
 ```{code-cell}
-plot!([x, y], [y, y], arrow=true, color=3)
+ax.plot([x, y], [y, y], "r:", label="")
+fig
 ```
 
 Now we can compute a new value for $y$. We leave $x$ alone here, so we travel along a vertical line to the graph of $g$.
 
 ```{code-cell}
-x = y;  y = g(x)
-plot!([x, x], [x, y], arrow=true, color=4)
+x = y
+y = g(x)
+print("y:", y)
+ax.plot([x, x], [x, y], "k:")
+fig
 ```
 
 You see that we are in a position to repeat these steps as often as we like. Let's apply them a few times and see the result.
 
 ```{code-cell}
-for k = 1:5
-    plot!([x, y], [y, y], color=3);  
-    x = y       # y becomes the new x
-    y = g(x)    # g(x) becomes the new y
-    plot!([x, x], [x, y], color=4)  
-end
-plt
+for k in range(5):
+    ax.plot([x, y], [y, y], "r:")
+    x = y       # y --> new x
+    y = g(x)    # g(x) --> new y
+    ax.plot([x, x], [x, y], "k:")  
+fig
 ```
 
 The process spirals in beautifully toward the fixed point we seek. Our last estimate has almost 4 accurate digits.
 
 ```{code-cell} 
-abs(y - rmax) / rmax
+print(abs(y - max(r)) / max(r))
 ```
 
 Now let's try to find the other fixed point $\approx 1.29$ in the same way. We'll use 1.3 as a starting approximation.
 
 ```{code-cell}
-plt = plot([g x->x], 1, 2, l=2, label=["y=g(x)" "y=x"], aspect_ratio=1, 
-    xlabel=L"x", ylabel=L"y", title="Divergence", legend=:bottomright)
+xx = linspace(1, 2, 400)
+fig, ax = subplots()
+ax.plot(xx, g(xx), label="y=g(x)")
+ax.plot(xx, xx, label="y=x")
+ax.set_aspect(1.0)
+ax.legend()
 
-x = 1.3; y = g(x);
-arrow = false
-for k = 1:5
-    plot!([x, y], [y, y], arrow=arrow, color=3)  
-    x = y       # y --> new x
-    y = g(x)    # g(x) --> new y
-    plot!([x, x], [x, y], arrow=arrow, color=4)
-    if k > 2; arrow = true; end
-end
-plt
+x = 1.3
+y = g(x)
+for k in range(5):
+    ax.plot([x, y], [y, y], "r:")
+    x = y
+    y = g(x)
+    ax.plot([x, x], [x, y], "k:")
+ylim(1, 2.5)
+title("No convergence")
 ```
 
 This time, the iteration is pushing us _away from_ the correct answer.
 ``````
 
-(demo-fp-converge-julia)=
+(demo-fp-converge-python)=
 ``````{dropdown} Convergence of fixed-point iteration
 We revisit {numref}`Demo %s <demo-fp-spiral>` and investigate the observed convergence more closely. Recall that above we calculated $g'(p)\approx-0.42$ at the convergent fixed point.
 
 ```{code-cell}
-p = Polynomial([3.5, -4, 1])
-r = roots(p)
-rmin, rmax = extrema(r)
-@show rmin, rmax;
+f = poly1d([1, -4, 3.5])
+r = f.roots
+print(r)
 ```
 
 Here is the fixed point iteration. This time we keep track of the whole sequence of approximations.
@@ -293,171 +307,169 @@ Here is the fixed point iteration. This time we keep track of the whole sequence
 :::
 
 ```{code-cell}
-g(x) = x - p(x)
-x = [2.1]
-for k = 1:12
-    push!(x, g(x[k]))
-end
-x
+g = lambda x: x - f(x)
+x = zeros(12)
+x[0] = 2.1
+for k in range(11):
+    x[k + 1] = g(x[k])
+
+print(x)
 ```
 
 It's illuminating to construct and plot the sequence of errors.
 
 ```{code-cell}
-err = @. abs(x - rmax)
-plot(0:12, err, m=:o,
-    xaxis=("iteration number"), yaxis=("error", :log10),
-    title="Convergence of fixed point iteration")
+err = abs(x - max(r))
+semilogy(err, "-o")
+xlabel("iteration number"), ylabel("error")
+title("Convergence of fixed point iteration")
 ```
 
 It's quite clear that the convergence quickly settles into a linear rate. We could estimate this rate by doing a least-squares fit to a straight line. Keep in mind that the values for small $k$ should be left out of the computation, as they don't represent the linear trend.
 
 ```{code-cell}
-y = log.(err[5:12])
-p = Polynomials.fit(5:12, y, 1)
+p = polyfit(arange(5, 13), log(err[4:]), 1)
+print(p)
 ```
 
 We can exponentiate the slope to get the convergence constant $\sigma$.
 
 ```{code-cell}
-σ = exp(p.coeffs[2])
+print("sigma:", exp(p[0]))
 ```
 
 The error should therefore decrease by a factor of $\sigma$ at each iteration. We can check this easily from the observed data.
 
 ```{code-cell}
-[err[i+1] / err[i] for i in 8:11]
+err[8:] / err[7:-1]
 ```
 
 The methods for finding $\sigma$ agree well.
 ``````
+
 ### Section 4.3
-(demo-newton-line-julia)=
+(demo-newton-line-python)=
 ``````{dropdown} Graphical interpretation of Newton's method
 
-Suppose we want to find a root of the function
+Suppose we want to find a root of this function:
 
 ```{code-cell}
-f(x) = x * exp(x) - 2
+f = lambda x: x * exp(x) - 2
+xx = linspace(0, 1.5, 400)
 
-plot(f, 0, 1.5, label="function",
-    grid=:y, ylim=[-2, 4], xlabel=L"x", ylabel=L"y", legend=:topleft)
+fig, ax = subplots()
+ax.plot(xx, f(xx), label="function")
+ax.grid()
+ax.set_xlabel("$x$")
+ax.set_ylabel("$y$")
 ```
 
 From the graph, it is clear that there is a root near $x=1$. So we call that our initial guess, $x_1$.
 
 ```{code-cell}
-x₁ = 1
-y₁ = f(x₁)
-scatter!([x₁], [y₁], label="initial point")
+x1 = 1
+y1 = f(x1)
+ax.plot(x1, y1, "ko", label="initial point")
+ax.legend()
+fig
 ```
 
 Next, we can compute the tangent line at the point $\bigl(x_1,f(x_1)\bigr)$, using the derivative.
 
 ```{code-cell}
-df_dx(x) = exp(x) * (x + 1)
-m₁ = df_dx(x₁)
-tangent = x -> y₁ + m₁ * (x - x₁)
+dfdx = lambda x: exp(x) * (x + 1)
+slope1 = dfdx(x1)
+tangent1 = lambda x: y1 + slope1 * (x - x1)
 
-plot!(tangent, 0, 1.5, l=:dash, label="tangent line",
-    title="Tangent line approximation")
+ax.plot(xx, tangent1(xx), "--", label="tangent line")
+ax.set_ylim(-2, 4)
+ax.legend()
+fig
 ```
 
 In lieu of finding the root of $f$ itself, we settle for finding the root of the tangent line approximation, which is trivial. Call this $x_2$, our next approximation to the root.
 
 ```{code-cell}
-@show x₂ = x₁ - y₁ / m₁
-scatter!([x₂], [0], label="tangent root", title="First iteration")
+x2 = x1 - y1 / slope1
+ax.plot(x2, 0, "ko", label="tangent root")
+ax.legend()
+fig
 ```
 
 ```{code-cell}
-y₂ = f(x₂)
+y2 = f(x2)
+print(y2)
 ```
 
 The residual (i.e., value of $f$) is smaller than before, but not zero. So we repeat the process with a new tangent line based on the latest point on the curve.
 
 ```{code-cell}
-plot(f, 0.82, 0.87, label="function", legend=:topleft,
-    xlabel=L"x", ylabel=L"y", title="Second iteration")
+xx = linspace(0.83, 0.88, 200)
 
-scatter!([x₂], [y₂], label="starting point")
+plot(xx, f(xx))
+plot(x2, y2, "ko")
+grid(), xlabel("$x$"), ylabel("$y$")
 
-m₂ = df_dx(x₂)
-tangent = x -> y₂ + m₂ * (x - x₂)
-plot!(tangent, 0.82, 0.87, l=:dash, label="tangent line")
-
-@show x₃ = x₂ - y₂ / m₂
-scatter!([x₃], [0], label="tangent root")
+slope2 = dfdx(x2)
+tangent2 = lambda x: y2 + slope2 * (x - x2)
+plot(xx, tangent2(xx), "--")
+x3 = x2 - y2 / slope2
+plot(x3, 0, "ko")
+title("Second iteration")
 ```
 
 ```{code-cell}
-y₃ = f(x₃)
+y3 = f(x3)
+print(y3)
 ```
 
 Judging by the residual, we appear to be getting closer to the true root each time.
 ``````
 
-(demo-newton-converge-julia)=
+(demo-newton-converge-python)=
 ``````{dropdown} Convergence of Newton's method
 We again look at finding a solution of $x e^x=2$ near $x=1$. To apply Newton's method, we need to calculate values of both the residual function $f$ and its derivative.
 
 ```{code-cell}
-f(x) = x * exp(x) - 2;
-df_dx(x) = exp(x) * (x + 1);
+f = lambda x: x * exp(x) - 2
+dfdx = lambda x: exp(x) * (x + 1)
 ```
 
 We don't know the exact root, so we use `nlsolve` to determine a proxy for it.
 
 ```{code-cell}
-r = nlsolve(x -> f(x[1]), [1.0]).zero
+r = root_scalar(f, bracket=[0.8, 1.0]).root
+print(r)
 ```
 
 We use $x_1=1$ as a starting guess and apply the iteration in a loop, storing the sequence of iterates in a vector.
 
 ```{code-cell}
-x = [1; zeros(4)]
-for k = 1:4
-    x[k+1] = x[k] - f(x[k]) / df_dx(x[k])
-end
-x
+x = ones(7)
+for k in range(6):
+    x[k + 1] = x[k] - f(x[k]) / dfdx(x[k])
+
+print(x)
 ```
 
 Here is the sequence of errors.
 
 ```{code-cell}
-ϵ = @. x - r
-```
-
-::::{grid} 1 1 2 2
-Because the error reaches machine epsilon so rapidly, we're going to use extended precision to allow us to take a few more iterations. We'll take the last iteration as the most accurate root estimate.
-:::{card}
-A `BigFloat` uses 256 bits of precision, rather than 53 in `Float64`. But arithmetic is done by software emulation and is much slower.
-:::
-::::
-
-```{code-cell}
-x = [BigFloat(1); zeros(7)]
-for k = 1:7
-    x[k+1] = x[k] - f(x[k]) / df_dx(x[k])
-end
-r = x[end]
-```
-
-```{code-cell}
-ϵ = @. Float64(x[1:end-1] - r)
+err = x - r
+print(err)
 ```
 
 The exponents in the scientific notation definitely suggest a squaring sequence. We can check the evolution of the ratio in {eq}`quadratictest`.
 
 ```{code-cell}
-logerr = @. log(abs(ϵ))
-[logerr[i+1] / logerr[i] for i in 1:length(logerr)-1]
+logerr = log(abs(err))
+print([logerr[i+1] / logerr[i] for i in range(len(err)-1)])
 ```
 
 The clear convergence to 2 above constitutes good evidence of quadratic convergence.
 ``````
 
-(demo-newton-usage-julia)=
+(demo-newton-usage-python)=
 ``````{dropdown} Using Newton's method
 ```{index} ! Julia; enumerate
 ```
@@ -487,7 +499,7 @@ plot!(x -> x, 0, maximum(y), label="", l=(:dash, 1), color=:black)
 ```
 ``````
 ### Section 4.4
-(demo-secant-line-julia)=
+(demo-secant-line-python)=
 ``````{dropdown} Graphical interpretation of the secant method
 
 
@@ -536,7 +548,7 @@ x₄ = x₃ - y₃ / m₃
 ```
 ``````
 
-(demo-secant-converge-julia)=
+(demo-secant-converge-python)=
 ``````{dropdown} Convergence of the secant method
 We check the convergence of the secant method from {numref}`Demo %s <demo-secant-line>`. Again we will use extended precision to get a longer sequence than double precision allows.
 
@@ -566,7 +578,7 @@ It's not easy to see the convergence rate by staring at these numbers. We can us
 As expected, this settles in at around 1.618.
 ``````
 
-(demo-secant-iqi-julia)=
+(demo-secant-iqi-python)=
 ``````{dropdown} Inverse quadratic interpolation
 Here we look for a root of $x+\cos(10x)$ that is close to 1.
 
@@ -642,7 +654,7 @@ logerr = @. log(Float64(abs(r - x[1:end-1])))
 The convergence is probably superlinear at a rate of $\alpha=1.8$ or greater.
 ``````
 ### Section 4.5
-(demo-newtonsys-converge-julia)=
+(demo-newtonsys-converge-python)=
 ``````{dropdown} Convergence of Newton's method for systems
 ::::{grid} 1 1 2 2
 
@@ -703,7 +715,7 @@ logerr = [Float64(log(norm(r - x[k]))) for k in 1:length(x)-1]
 The ratio is neatly converging toward 2, which is expected for quadratic convergence.
 ``````
 ### Section 4.6
-(demo-quasi-levenberg-julia)=
+(demo-quasi-levenberg-python)=
 ``````{dropdown} Using Levenberg's method
 To solve a nonlinear system, we need to code only the function defining the system, and not its Jacobian.
 
@@ -738,7 +750,7 @@ logerr = [log(norm(x[k] - r)) for k in 1:length(x)-1]
 ```
 ``````
 ### Section 4.7
-(demo-nlsq-converge-julia)=
+(demo-nlsq-converge-python)=
 ``````{dropdown} Convergence of nonlinear least squares
 We will observe the convergence of {numref}`Function {number} <function-levenberg>` for different levels of the minimum least-squares residual. We start with a function mapping from $\real^2$ into $\real^3$, and a point that will be near the optimum.
 
@@ -775,7 +787,7 @@ plt
 In the least perturbed case, where the minimized residual is less than $10^{-3}$, the convergence is plausibly quadratic. At the next level up, the convergence starts similarly but suddenly stagnates for a long time. In the most perturbed case, the quadratic phase is nearly gone and the overall shape looks linear.
 ``````
 
-(demo-nlsq-MM-julia)=
+(demo-nlsq-MM-python)=
 ``````{dropdown} Nonlinear data fitting
 ```{code-cell}
 m = 25;

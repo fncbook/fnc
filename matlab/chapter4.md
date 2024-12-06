@@ -99,7 +99,7 @@ table(omega, J3(omega), 'VariableNames', {'root estimate', 'function value'})
 ```{code-cell}
 hold on
 scatter(omega, J3(omega))
-title('Bessel roots')    % ignore this line
+title('Bessel roots')    
 ```
 
 If instead we seek values at which $J_3(x)=0.2$, then we must find roots of the function $J_3(x)-0.2$.
@@ -304,9 +304,9 @@ Suppose we want to find a root of the function
 ```{code-cell}
 f = @(x) x .* exp(x) - 2;
 clf, fplot(f, [0, 1.5])
-xlabel('x'), ylabel('y')    % ignore this line
-set(gca, 'ygrid', 'on')  % ignore this line
-title('Objective function')    % ignore this line
+xlabel('x'), ylabel('y')    
+set(gca, 'ygrid', 'on')  
+title('Objective function')    
 
 ```
 
@@ -325,7 +325,7 @@ dfdx = @(x) exp(x) .* (x + 1);
 slope1 = dfdx(x1);
 tangent1 = @(x) y1 + slope1 * (x - x1);
 fplot(tangent1, [0, 1.5],'--')
-title('Function and tangent line')    % ignore this line
+title('Function and tangent line')    
 
 ```
 
@@ -334,7 +334,7 @@ In lieu of finding the root of $f$ itself, we settle for finding the root of the
 ```{code-cell}
 x2 = x1 - y1 / slope1
 scatter(x2, 0)
-title('Root of the tangent')    % ignore this line
+title('Root of the tangent')    
 ```
 
 ```{code-cell}
@@ -351,7 +351,7 @@ tangent2 = @(x) y2 + slope2 * (x - x2);
 fplot(tangent2, [0.8, 0.9], '--')
 x3 = x2 - y2 / slope2;
 scatter(x3, 0)
-title('Next iteration')    % ignore this line
+title('Next iteration')    
 ```
 
 ```{code-cell}
@@ -449,9 +449,9 @@ We return to finding a root of the equation $x e^x=2$.
 ```{code-cell}
 f = @(x) x .* exp(x) - 2;
 clf, fplot(f, [0.25, 1.25])
-set(gca, 'ygrid', 'on')  % ignore this line
-xlabel('x'), ylabel('y')    % ignore this line
-title('Objective function')    % ignore this line
+set(gca, 'ygrid', 'on')  
+xlabel('x'), ylabel('y')    
+title('Objective function')    
 ```
 
 From the graph, it's clear that there is a root near $x=1$. To be more precise, there is a root in the interval $[0.5,1]$. So let us take the endpoints of that interval as _two_ initial approximations.
@@ -460,7 +460,7 @@ From the graph, it's clear that there is a root near $x=1$. To be more precise, 
 x1 = 1;    y1 = f(x1);
 x2 = 0.5;  y2 = f(x2);
 hold on, scatter([x1, x2], [y1, y2])
-title('Two initial values')    % ignore this line
+title('Two initial values')    
 ```
 
 Instead of constructing the tangent line by evaluating the derivative, we can construct a linear model function by drawing the line between the two points $\bigl(x_1,f(x_1)\bigr)$ and $\bigl(x_2,f(x_2)\bigr)$. This is called a _secant line_.
@@ -529,9 +529,9 @@ Here we look for a root of $x+\cos(10x)$ that is close to 1.
 f = @(x) x + cos(10 * x);
 interval = [0.5, 1.5];
 clf, fplot(f, interval)
-set(gca, 'ygrid', 'on'), axis(axis)   % ignore this line
-title('Objective function')    % ignore this line
-xlabel('x'), ylabel('y')    % ignore this line
+set(gca, 'ygrid', 'on'), axis(axis)   
+title('Objective function')    
+xlabel('x'), ylabel('y')    
 r = fzero(f, 1)
 ```
 
@@ -541,7 +541,7 @@ We choose three values to get the iteration started.
 x = [0.8, 1.2, 1]';
 y = f(x);
 hold on, scatter(x, y)
-title('Three initial points')    % ignore this line
+title('Three initial points')    
 ```
 
 If we were using forward interpolation, we would ask for the polynomial interpolant of $y$ as a function of $x$. But that parabola has no real roots.
@@ -550,7 +550,7 @@ If we were using forward interpolation, we would ask for the polynomial interpol
 c = polyfit(x, y, 2);    % coefficients of interpolant
 q = @(x) polyval(c, x);
 fplot(q, interval, '--')
-title('Parabola model')     % ignore this line
+title('Parabola model')     
 ```
 
 ::::{grid} 1 1 2 2
@@ -563,11 +563,11 @@ By giving two functions in the `fplot` call, we get the parametric plot $(q(y),y
 
 ```{code-cell}
 cla, fplot(f, interval)
-scatter(x, y)     % ignore this line
+scatter(x, y)     
 c = polyfit(y, x, 2);    % coefficients of interpolating polynomial
 q = @(y) polyval(c, y);
 fplot(q, @(y) y, ylim,'--')    % plot x=q(y), y=y
-title('Sideways parabola')    % ignore this line
+title('Sideways parabola')    
 ```
 
 We seek the value of $x$ that makes $y$ zero. This means evaluating $q$ at zero.
@@ -727,8 +727,8 @@ w = V * s ./ (Km + s);                      % exactly on the curve
 w = w + 0.15 * cos(2 * exp(s / 16) .* s);   % noise added
 clf, fplot(@(s) V * s ./ (Km + s), [0, 6], '--')
 hold on, scatter(s, w)
-xlabel('concentration'), ylabel('reaction rate')    % ignore this line
-labels = ["ideal", "noisy data"];    % ignore this line
+xlabel('concentration'), ylabel('reaction rate')    
+labels = ["ideal", "noisy data"];    
 legend(labels, 'location', 'east')
 ```
 
@@ -758,8 +758,8 @@ The final values are reasonably close to the values $V=2$, $K_m=0.5$ that we use
 ```{code-cell}
 final_misfit_norm = norm(model(s) - w) 
 hold on, fplot(model, [0, 6])
-title('Michaelis-Menten fitting')    % ignore this line
-labels = [labels, "nonlinear fit"];    % ignore this line
+title('Michaelis-Menten fitting')    
+labels = [labels, "nonlinear fit"];    
 legend(labels, 'location', 'east')
 ```
 
@@ -789,7 +789,7 @@ The two fits are different because they do not optimize the same quantities.
 linmodel = @(s) 1 ./ (beta + alpha ./ s);
 final_misfit_linearized = norm(linmodel(s) - w)
 fplot(linmodel, [0, 6])
-labels = [labels, "linearized fit"];    % ignore this line
+labels = [labels, "linearized fit"];    
 legend(labels, 'location', 'east')
 ```
 

@@ -211,6 +211,7 @@ project:
           - file: python/chapter1.md
           - file: python/chapter2.md
           - file: python/chapter3.md
+          - file: python/chapter4.md
           - file: python/chapter5.md
     - file: genindex.md
 

@@ -34,7 +34,6 @@ def newton(f, dfdx, x1):
 
     return x[: k + 1]
 
-
 def secant(f, x1, x2):
     """
     secant(f,x1,x2)
@@ -67,7 +66,6 @@ def secant(f, x1, x2):
         warnings.warn("Maximum number of iterations reached.")
     return x[:k+1]
 
-
 def newtonsys(f, x1):
     """
         newtonsys(f,x1)
@@ -98,7 +96,6 @@ def newtonsys(f, x1):
         warnings.warn("Maximum number of iterations reached.")
     return x[:, :k+1]
 
-
 def fdjac(f, x0, y0):
     """
     fdjac(f,x0,y0)
@@ -114,7 +111,6 @@ def fdjac(f, x0, y0):
     for j in range(n):
         J[:, j] = (f(x0 + delta * I[:, j]) - y0) / delta
     return J
-
 
 def levenberg(f, x1, tol=1e-12):
     """
