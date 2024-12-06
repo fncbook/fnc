@@ -6,13 +6,94 @@ kernelspec:
 numbering:
   headings: false
 ---
+# Chapter 4
+
+## Functions
+
+(function-newton-julia)=
+``````{dropdown} Newton's method
+```{literalinclude} ../julia/package/src/chapter04.jl
+:filename: newton.jl
+:start-line: 0
+:end-line: 28
+:language: julia
+:linenos: true
+```
+```{admonition} About the code
+:class: dropdown
+{numref}`Function {number} <function-newton>` accepts *keyword arguments*. In the function declaration, these follow the semicolon, and when the function is called, they may be supplied as `keyword=value` in the argument list. Here, these arguments are also given default values by the assignments within the declaration. This arrangement is useful when there are multiple optional arguments, because the ordering of them doesn't matter.
+
+The `break` statement, seen here in line 25, causes an immediate exit from the innermost loop in which it is called. It is often used as a safety valve to escape an iteration that may not be able to terminate otherwise.
+```
+``````
+
+(function-secant-julia)=
+``````{dropdown} Secant method
+```{literalinclude} ../julia/package/src/chapter04.jl
+:filename: secant.jl
+:start-line: 40
+:end-line: 59
+:language: julia
+:linenos: true
+```
+```{admonition} About the code
+:class: dropdown
+Because we want to observe the convergence of the method, {numref}`Function {number} <function-secant>` stores and returns the entire sequence of root estimates. However, only the most recent two are needed by the iterative formula. This is demonstrated by the use of `y₁` and `y₂` for the two most recent values of $f$.
+```
+``````
+
+(function-newtonsys-julia)=
+``````{dropdown} Newton's method for systems
+```{literalinclude} ../julia/package/src/chapter04.jl
+:filename: newtonsys.jl
+:start-line: 61
+:end-line: 91
+:language: julia
+:linenos: true
+```
+````{admonition} About the code
+:class: dropdown
+The output of {numref}`Function {number} <function-newtonsys>` is a vector of vectors representing the entire history of root estimates. Since these should be in floating point, the starting value is converted with `float` before the iteration starts.
+````
+``````
+
+(function-fdjac-julia)=
+``````{dropdown} Finite differences for Jacobian
+```{literalinclude} ../julia/package/src/chapter04.jl
+:filename: fdjac.jl
+:start-line: 93
+:end-line: 114
+:language: julia
+:linenos: true
+```
+::::{admonition} About the code
+:class: dropdown
+{numref}`Function {number} <function-fdjac>` is written to accept the case where $\mathbf{f}$ maps $n$ variables to $m$ values with $m\neq n$, in anticipation of {numref}`section-nonlineqn-nlsq`.
+
+Note that a default value is given for the third argument `y₀`, and it refers to earlier arguments in the list. The reason is that in some contexts, the caller of `fdjac` may have already computed `y₀` and can supply it without computational cost, while in other contexts, it must be computed fresh. The configuration here adapts to either situation.
+::::
+``````
+
+(function-levenberg-julia)=
+``````{dropdown} Levenberg's method
+```{literalinclude} ../julia/package/src/chapter04.jl
+:filename: levenberg.jl
+:start-line: 116
+:end-line: 171
+:language: julia
+:linenos: true
+```
+``````
+
+## Examples
+
 ```{code-cell}
 :tags: [remove-cell]
 import Pkg; Pkg.activate("/Users/driscoll/Documents/GitHub/fnc")
 using FundamentalsNumericalComputation
 FNC.init_format()
 ```
-
+### Section 4.1
 (demo-rootproblem-bessel-julia)=
 ``````{dropdown} The rootfinding problem for Bessel functions
 
@@ -110,6 +191,8 @@ scatter!([1], [0], title="Poorly-conditioned root")
 The vertical displacements in this picture are exactly the same as before. But the potential _horizontal_ displacement of the root is much wider. In fact, if we perturb the function entirely upward by the amount drawn here, the root disappears!
 
 ``````
+
+### Section 4.2
 
 (demo-fp-spiral-julia)=
 ``````{dropdown} Fixed-point iteration 
@@ -250,7 +333,7 @@ The error should therefore decrease by a factor of $\sigma$ at each iteration. W
 
 The methods for finding $\sigma$ agree well.
 ``````
-
+### Section 4.3
 (demo-newton-line-julia)=
 ``````{dropdown} Graphical interpretation of Newton's method
 
@@ -376,23 +459,6 @@ logerr = @. log(abs(ϵ))
 The clear convergence to 2 above constitutes good evidence of quadratic convergence.
 ``````
 
-(function-newton-julia)=
-``````{dropdown} Newton's method
-```{literalinclude} ../julia/package/src/chapter04.jl
-:filename: newton.jl
-:start-line: 0
-:end-line: 28
-:language: julia
-:linenos: true
-```
-```{admonition} About the code
-:class: dropdown
-{numref}`Function {number} <function-newton>` accepts *keyword arguments*. In the function declaration, these follow the semicolon, and when the function is called, they may be supplied as `keyword=value` in the argument list. Here, these arguments are also given default values by the assignments within the declaration. This arrangement is useful when there are multiple optional arguments, because the ordering of them doesn't matter.
-
-The `break` statement, seen here in line 25, causes an immediate exit from the innermost loop in which it is called. It is often used as a safety valve to escape an iteration that may not be able to terminate otherwise.
-```
-``````
-
 (demo-newton-usage-julia)=
 ``````{dropdown} Using Newton's method
 ```{index} ! Julia; enumerate
@@ -422,7 +488,7 @@ plot!(y, x, label=L"g^{-1}(y)", title="Function and its inverse")
 plot!(x -> x, 0, maximum(y), label="", l=(:dash, 1), color=:black)
 ```
 ``````
-
+### Section 4.4
 (demo-secant-line-julia)=
 ``````{dropdown} Graphical interpretation of the secant method
 
@@ -469,21 +535,6 @@ For the next linear model, we use the line through the two most recent points. T
 ```{code-cell}
 m₃ = (y₃ - y₂) / (x₃ - x₂)
 x₄ = x₃ - y₃ / m₃
-```
-``````
-
-(function-secant-julia)=
-``````{dropdown} Finite differences for Jacobian
-```{literalinclude} ../julia/package/src/chapter04.jl
-:filename: secant.jl
-:start-line: 40
-:end-line: 59
-:language: julia
-:linenos: true
-```
-```{admonition} About the code
-:class: dropdown
-Because we want to observe the convergence of the method, {numref}`Function {number} <function-secant>` stores and returns the entire sequence of root estimates. However, only the most recent two are needed by the iterative formula. This is demonstrated by the use of `y₁` and `y₂` for the two most recent values of $f$.
 ```
 ``````
 
@@ -592,22 +643,7 @@ logerr = @. log(Float64(abs(r - x[1:end-1])))
 
 The convergence is probably superlinear at a rate of $\alpha=1.8$ or greater.
 ``````
-
-(function-newtonsys-julia)=
-``````{dropdown} Newton's method for systems
-```{literalinclude} ../julia/package/src/chapter04.jl
-:filename: newtonsys.jl
-:start-line: 61
-:end-line: 91
-:language: julia
-:linenos: true
-```
-````{admonition} About the code
-:class: dropdown
-The output of {numref}`Function {number} <function-newtonsys>` is a vector of vectors representing the entire history of root estimates. Since these should be in floating point, the starting value is converted with `float` before the iteration starts.
-````
-``````
-
+### Section 4.5
 (demo-newtonsys-converge-julia)=
 ``````{dropdown} Convergence of Newton's method for systems
 ::::{grid} 1 1 2 2
@@ -668,35 +704,7 @@ logerr = [Float64(log(norm(r - x[k]))) for k in 1:length(x)-1]
 
 The ratio is neatly converging toward 2, which is expected for quadratic convergence.
 ``````
-
-(function-fdjac-julia)=
-``````{dropdown} Finite differences for Jacobian
-```{literalinclude} ../julia/package/src/chapter04.jl
-:filename: fdjac.jl
-:start-line: 93
-:end-line: 114
-:language: julia
-:linenos: true
-```
-::::{admonition} About the code
-:class: dropdown
-{numref}`Function {number} <function-fdjac>` is written to accept the case where $\mathbf{f}$ maps $n$ variables to $m$ values with $m\neq n$, in anticipation of {numref}`section-nonlineqn-nlsq`.
-
-Note that a default value is given for the third argument `y₀`, and it refers to earlier arguments in the list. The reason is that in some contexts, the caller of `fdjac` may have already computed `y₀` and can supply it without computational cost, while in other contexts, it must be computed fresh. The configuration here adapts to either situation.
-::::
-``````
-
-(function-levenberg-julia)=
-``````{dropdown} Levenberg's method
-```{literalinclude} ../julia/package/src/chapter04.jl
-:filename: levenberg.jl
-:start-line: 116
-:end-line: 171
-:language: julia
-:linenos: true
-```
-``````
-
+### Section 4.6
 (demo-quasi-levenberg-julia)=
 ``````{dropdown} Using Levenberg's method
 To solve a nonlinear system, we need to code only the function defining the system, and not its Jacobian.
@@ -731,7 +739,7 @@ logerr = [log(norm(x[k] - r)) for k in 1:length(x)-1]
 [logerr[k+1] / logerr[k] for k in 1:length(logerr)-1]
 ```
 ``````
-
+### Section 4.7
 (demo-nlsq-converge-julia)=
 ``````{dropdown} Convergence of nonlinear least squares
 We will observe the convergence of {numref}`Function {number} <function-levenberg>` for different levels of the minimum least-squares residual. We start with a function mapping from $\real^2$ into $\real^3$, and a point that will be near the optimum.
@@ -771,12 +779,6 @@ In the least perturbed case, where the minimized residual is less than $10^{-3}$
 
 (demo-nlsq-MM-julia)=
 ``````{dropdown} Nonlinear data fitting
-Inhibited enzyme reactions often follow what are known as _Michaelis–Menten_ kinetics, in which a reaction rate $w$ follows a law of the form
-
-$$w(s) = \frac{V s}{K_m + s},$$
-
-where $s$ is the concentration of a substrate. The real values $V$ and $K_m$ are parameters that are free to fit to data. For this example, we cook up some artificial data with $V=2$ and $K_m=1/2$.
-
 ```{code-cell}
 m = 25;
 s = range(0.05, 6, length=m)
@@ -787,7 +789,7 @@ w = @. ŵ + 0.15 * cos(2 * exp(s / 16) * s);     # smooth noise added
 ```{code-cell}
 scatter(s, w, label="noisy data",
     xlabel="s", ylabel="v", leg=:bottomright)
-plot!(s, ŵ, l=:dash, label="original data")
+plot!(s, ŵ, l=:dash, color=:black, label="perfect data")
 ```
 
 ```{index} ! Julia; destructuring
@@ -833,10 +835,16 @@ model(s) = V * s / (Km + s)
 plot!(model, 0, 6, label="nonlinear fit")
 ```
 
-For this particular model, we also have the option of linearizing the fit process. Rewrite the model as $1/w = (\alpha/s)+\beta$ for the new parameters $\alpha=K_m/V$ and $\beta=1/V$. This corresponds to the misfit function whose entries are
+For this particular model, we also have the option of linearizing the fit process. Rewrite the model as 
 
-$$f_i([\alpha,\beta]) = \alpha \cdot \frac{1}{s_i} + \beta - \frac{1}{w_i}$$
+```{math}
+:enumerated: false
+\frac{1}{w} = \frac{\alpha}{s} + \beta = \alpha \cdot s^{-1} + \beta
+```
 
+for the new fitting parameters $\alpha=K_m/V$ and $\beta=1/V$. This corresponds to the misfit function whose entries are
+
+$$f_i([\alpha,\beta]) = \left(\alpha \cdot \frac{1}{s_i} + \beta\right) - \frac{1}{w_i}$$
 for $i=1,\ldots,m$. Although this misfit is nonlinear in $s$ and $w$, it's linear in the unknown parameters $\alpha$ and $\beta$. This lets us pose and solve it as a linear least-squares problem.
 
 ```{code-cell}

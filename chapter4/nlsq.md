@@ -105,6 +105,12 @@ then the misfit function is also linear in $\mathbf{c}$ and the fitting problem 
 
 (demo-nlsq-MM)=
 ::::{prf:example}
+Inhibited enzyme reactions often follow what are known as _Michaelis–Menten_ kinetics, in which a reaction rate $w$ follows a law of the form
+
+$$w(s) = \frac{V s}{K_m + s},$$
+
+where $s$ is the concentration of a substrate. The real values $V$ and $K_m$ are parameters that are free to fit to data. For this example, we cook up some artificial data with $V=2$ and $K_m=1/2$.
+
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
