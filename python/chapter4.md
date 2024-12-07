@@ -303,9 +303,6 @@ print(r)
 
 Here is the fixed point iteration. This time we keep track of the whole sequence of approximations.
 
-:::{index} Julia; push!
-:::
-
 ```{code-cell}
 g = lambda x: x - f(x)
 x = zeros(12)
@@ -377,8 +374,8 @@ fig
 Next, we can compute the tangent line at the point $\bigl(x_1,f(x_1)\bigr)$, using the derivative.
 
 ```{code-cell}
-dfdx = lambda x: exp(x) * (x + 1)
-slope1 = dfdx(x1)
+df_dx = lambda x: exp(x) * (x + 1)
+slope1 = df_dx(x1)
 tangent1 = lambda x: y1 + slope1 * (x - x1)
 
 ax.plot(xx, tangent1(xx), "--", label="tangent line")
@@ -410,7 +407,7 @@ plot(xx, f(xx))
 plot(x2, y2, "ko")
 grid(), xlabel("$x$"), ylabel("$y$")
 
-slope2 = dfdx(x2)
+slope2 = df_dx(x2)
 tangent2 = lambda x: y2 + slope2 * (x - x2)
 plot(xx, tangent2(xx), "--")
 x3 = x2 - y2 / slope2
@@ -432,7 +429,7 @@ We again look at finding a solution of $x e^x=2$ near $x=1$. To apply Newton's m
 
 ```{code-cell}
 f = lambda x: x * exp(x) - 2
-dfdx = lambda x: exp(x) * (x + 1)
+df_dx = lambda x: exp(x) * (x + 1)
 ```
 
 We don't know the exact root, so we use `nlsolve` to determine a proxy for it.
@@ -445,9 +442,9 @@ print(r)
 We use $x_1=1$ as a starting guess and apply the iteration in a loop, storing the sequence of iterates in a vector.
 
 ```{code-cell}
-x = ones(7)
-for k in range(6):
-    x[k + 1] = x[k] - f(x[k]) / dfdx(x[k])
+x = ones(5)
+for k in range(4):
+    x[k + 1] = x[k] - f(x[k]) / df_dx(x[k])
 
 print(x)
 ```
@@ -463,7 +460,8 @@ The exponents in the scientific notation definitely suggest a squaring sequence.
 
 ```{code-cell}
 logerr = log(abs(err))
-print([logerr[i+1] / logerr[i] for i in range(len(err)-1)])
+for i in range(len(err) - 1):
+    print(logerr[i+1] / logerr[i])
 ```
 
 The clear convergence to 2 above constitutes good evidence of quadratic convergence.
@@ -471,108 +469,123 @@ The clear convergence to 2 above constitutes good evidence of quadratic converge
 
 (demo-newton-usage-python)=
 ``````{dropdown} Using Newton's method
-```{index} ! Julia; enumerate
-```
-
 ::::{grid} 1 1 2 2
-Suppose we want to evaluate the inverse of the function $h(x)=e^x-x$. This means solving $y=e^x-x$ for $x$ when $y$ is given, which has no elementary form. If a value of $y$ is given numerically, though, we simply have a rootfinding problem for $f(x)=e^x-x-y$.
+Suppose we want to evaluate the inverse of the function $h(x)=e^x-x$. This means solving $y=h(x)$, or $h(x)-y=0$, for $x$ when $y$ is given. That equation has no solution in terms of elementary functions. If a value of $y$ is given numerically, though, we simply have a rootfinding problem for $f(x)=e^x-x-y$.
 :::{card}
 The `enumerate` function produces a pair of values for each iteration: a positional index and the corresponding contents.
 :::
 ::::
 
-```{code-cell}
-g(x) = exp(x) - x
-dg_dx(x) = exp(x) - 1
-y = range(g(0), g(2), 200)
-x = zeros(length(y))
-for (i, y) in enumerate(y)
-    f(x) = g(x) - y
-    df_dx(x) = dg_dx(x)
-    r = FNC.newton(f, df_dx, y)
-    x[i] = r[end]
-end
+```{index} ! Python; enumerate
+```
 
-plot(g, 0, 2, aspect_ratio=1, label=L"g(x)")
-plot!(y, x, label=L"g^{-1}(y)", title="Function and its inverse")
-plot!(x -> x, 0, maximum(y), label="", l=(:dash, 1), color=:black)
+```{code-cell}
+h = lambda x: exp(x) - x
+dh_dx = lambda x: exp(x) - 1
+y_ = linspace(h(0), h(2), 200)
+x_ = zeros(y_.shape)
+for (i, y) in enumerate(y_):
+    f = lambda x: h(x) - y
+    df_dx = lambda x: dh_dx(x)
+    x = FNC.newton(f, df_dx, y)
+    x_[i] = x[-1]
+
+plot(x_, y_, label="$y=h(x)$")
+plot(y_, x_, label="$y=h^{-1}(x)$")
+plot([0, max(y_)], [0, max(y_)], 'k--', label="")
+title("Function and its inverse")
+xlabel("x"), ylabel("y"), axis("equal")
+ax.grid(), legend()
 ```
 ``````
 ### Section 4.4
 (demo-secant-line-python)=
 ``````{dropdown} Graphical interpretation of the secant method
 
-
-We return to finding a root of the equation $x e^x=2$.
-
 ```{code-cell}
-f(x) = x * exp(x) - 2;
+f = lambda x: x * exp(x) - 2
+xx = linspace(0.25, 1.25, 400)
 
-plot(f, 0.25, 1.25, label="function",
-    xlabel=L"x", ylabel=L"y", legend=:topleft)
+fig, ax = subplots()
+ax.plot(xx, f(xx), label="function")
+ax.set_xlabel("$x$")
+ax.set_ylabel("$f(x)$")
+ax.grid()
 ```
 
 From the graph, it's clear that there is a root near $x=1$. To be more precise, there is a root in the interval $[0.5,1]$. So let us take the endpoints of that interval as _two_ initial approximations.
 
 ```{code-cell}
-x₁ = 1;
-y₁ = f(x₁);
-x₂ = 0.5;
-y₂ = f(x₂);
-scatter!([x₁, x₂], [y₁, y₂], label="initial points",
-    title="Two initial values")
+x1 = 1
+y1 = f(x1)
+x2 = 0.5
+y2 = f(x2)
+ax.plot([x1, x2], [y1, y2], "ko", label="initial points")
+ax.legend()
+fig
 ```
 
 Instead of constructing the tangent line by evaluating the derivative, we can construct a linear model function by drawing the line between the two points $\bigl(x_1,f(x_1)\bigr)$ and $\bigl(x_2,f(x_2)\bigr)$. This is called a _secant line_.
 
 ```{code-cell}
-m₂ = (y₂ - y₁) / (x₂ - x₁)
-secant = x -> y₂ + m₂ * (x - x₂)
-plot!(secant, 0.25, 1.25, label="secant line", l=:dash, color=:black,
-    title="Secant line")
+slope2 = (y2 - y1) / (x2 - x1)
+secant2 = lambda x: y2 + slope2 * (x - x2)
+ax.plot(xx, secant2(xx), "--", label="secant line")
+ax.legend()
+fig
 ```
 
 As before, the next root estimate in the iteration is the root of this linear model.
 
 ```{code-cell}
-x₃ = x₂ - y₂ / m₂
-@show y₃ = f(x₃)
-scatter!([x₃], [0], label="root of secant", title="First iteration")
+x3 = x2 - y2 / slope2
+ax.plot(x3, 0, "o", label="root of secant")
+y3 = f(x3)
+print(y3)
+ax.legend()
+fig
 ```
 
 For the next linear model, we use the line through the two most recent points. The next iterate is the root of that secant line, and so on.
 
 ```{code-cell}
-m₃ = (y₃ - y₂) / (x₃ - x₂)
-x₄ = x₃ - y₃ / m₃
+slope3 = (y3 - y2) / (x3 - x2)
+x4 = x3 - y3 / slope3
+print(f(x4))
 ```
 ``````
 
 (demo-secant-converge-python)=
 ``````{dropdown} Convergence of the secant method
-We check the convergence of the secant method from {numref}`Demo %s <demo-secant-line>`. Again we will use extended precision to get a longer sequence than double precision allows.
+We check the convergence of the secant method from {numref}`Demo %s <demo-secant-line>`.
 
 ```{code-cell}
-f(x) = x * exp(x) - 2
-x = FNC.secant(f, BigFloat(1), BigFloat(0.5), xtol=1e-80, ftol=1e-80);
+f = lambda x: x * exp(x) - 2
+x = FNC.secant(f, 1, 0.5)
+print(x)
 ```
 
-We don't know the exact root, so we use the last value as a proxy.
+We don't know the exact root, so we use `root_scalar` to get a substitute.
 
 ```{code-cell}
-r = x[end]
+from scipy.optimize import root_scalar
+r = root_scalar(f, bracket=[0.5, 1]).root
+print(r)
 ```
 
 Here is the sequence of errors.
 
 ```{code-cell}
-ϵ = @. Float64(r - x[1:end-1])
+err = r - x
+print(err)
 ```
 
 It's not easy to see the convergence rate by staring at these numbers. We can use {eq}`superlinear-rate` to try to expose the superlinear convergence rate.
 
 ```{code-cell}
-[log(abs(ϵ[k+1])) / log(abs(ϵ[k])) for k in 1:length(ϵ)-1]
+logerr = log(abs(err))
+for i in range(len(err) - 2):
+    print(logerr[i+1] / logerr[i])
 ```
 
 As expected, this settles in at around 1.618.
@@ -583,170 +596,168 @@ As expected, this settles in at around 1.618.
 Here we look for a root of $x+\cos(10x)$ that is close to 1.
 
 ```{code-cell}
-f(x) = x + cos(10 * x)
-interval = [0.5, 1.5]
-
-plot(f, interval..., label="Function", legend=:bottomright,
-    grid=:y, ylim=[-0.1, 3], xlabel=L"x", ylabel=L"y")
+f = lambda x: x + cos(10 * x)
+xx = linspace(0.5, 1.5, 400)
+fig, ax = subplots()
+ax.plot(xx, f(xx), label="function")
+ax.grid()
+xlabel("$x$"), ylabel("$y$")
+fig
 ```
 
 We choose three values to get the iteration started.
 
 ```{code-cell}
-x = [0.8, 1.2, 1]
-y = @. f(x)
-scatter!(x, y, label="initial points")
+x = array([0.8, 1.2, 1])
+y = f(x)
+ax.plot(x, y, "ko", label="initial points")
+ax.legend()
+fig
 ```
 
 If we were using forward interpolation, we would ask for the polynomial interpolant of $y$ as a function of $x$. But that parabola has no real roots.
 
 ```{code-cell}
-q = Polynomials.fit(x, y, 2)      # interpolating polynomial
-plot!(x -> q(x), interval..., l=:dash, label="interpolant")
+q = poly1d(polyfit(x, y, 2))  # interpolating polynomial
+ax.plot(xx, q(xx), "--", label="interpolant")
+ax.set_ylim(-0.1, 3), ax.legend()
+fig
 ```
 
-::::{grid} 1 1 2 2
 To do inverse interpolation, we swap the roles of $x$ and $y$ in the interpolation.
-:::
-:::{card}
-By giving two functions in the plot call, we get the parametric plot $(q(y),y)$ as a function of $y$.
-:::
-::::
 
 ```{code-cell}
-plot(f, interval..., label="Function",
-    legend=:bottomright, grid=:y, xlabel=L"x", ylabel=L"y")
-scatter!(x, y, label="initial points")
+plot(xx, f(xx), label="function")
+plot(x, y, "ko", label="initial points")
 
-q = Polynomials.fit(y, x, 2)       # interpolating polynomial
-plot!(y -> q(y), y -> y, -0.1, 2.6, l=:dash, label="inverse interpolant")
+q = poly1d(polyfit(y, x, 2))  # inverse interpolating polynomial
+yy = linspace(-0.1, 2.6, 400)
+plot(q(yy), yy, "--", label="inverse interpolant")
+
+grid(), xlabel("$x$"), ylabel("$y$")
+legend()
 ```
 
 We seek the value of $x$ that makes $y$ zero. This means evaluating $q$ at zero.
 
 ```{code-cell}
-q(0)
+x = hstack([x, q(0)])
+y = hstack([y, f(x[-1])])
+print("x:", x, "\ny:", y)
 ```
 
-Let's restart the process with `BigFloat` numbers to get a convergent sequence.
+We repeat the process a few more times.
 
 ```{code-cell}
-x = BigFloat.([8, 12, 10]) / 10
-y = @. f(x)
-
-for k = 3:12
-    q = Polynomials.fit(y[k-2:k], x[k-2:k], 2)
-    push!(x, q(0))
-    push!(y, f(x[k+1]))
-end
-
-println("residual = $(f(x[end]))")
+for k in range(6):
+    q = poly1d(polyfit(y[-3:], x[-3:], 2))
+    x = hstack([x, q(0)])
+    y = hstack([y, f(x[-1])])
+print(f"final residual is {y[-1]:.2e}")
 ```
 
-As far as our current precision is concerned, we have an exact root.
+Here is the sequence of errors.
 
 ```{code-cell}
-r = x[end]
-logerr = @. log(Float64(abs(r - x[1:end-1])))
-[logerr[k+1] / logerr[k] for k in 1:length(logerr)-1]
+from scipy.optimize import root_scalar
+r = root_scalar(f, bracket=[0.9, 1]).root
+err = x - r
+print(err)
 ```
 
-The convergence is probably superlinear at a rate of $\alpha=1.8$ or greater.
+The error seems to be superlinear, but subquadratic:
+
+```{code-cell}
+logerr = log(abs(err))
+for i in range(len(err) - 1):
+    print(logerr[i+1] / logerr[i])
+```
 ``````
+
 ### Section 4.5
 (demo-newtonsys-converge-python)=
 ``````{dropdown} Convergence of Newton's method for systems
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
 A system of nonlinear equations is defined by its residual and Jacobian.
 
-
-:::
-:::{card}
-
-
-Be careful when coding a Jacobian all in one statement. Spaces separate columns, so `x[3]-1` is not the same as `x[3] - 1`.
-
-:::
-::::
-
 ```{code-cell}
-function func(x)
-    [exp(x[2] - x[1]) - 2,
-        x[1] * x[2] + x[3],
-        x[2] * x[3] + x[1]^2 - x[2]
-    ]
-end;
+def func(x):
+    return array([
+        exp(x[1] - x[0]) - 2, 
+        x[0] * x[1] + x[2], 
+        x[1] * x[2] + x[0]**2 - x[1]
+    ])
 
-function jac(x)
-    [
-        -exp(x[2] - x[1]) exp(x[2] - x[1]) 0
-        x[2] x[1] 1
-        2*x[1] x[3]-1 x[2]
-    ]
-end;
+def jac(x):
+    return array([
+            [-exp(x[1] - x[0]), exp(x[1] - x[0]), 0],
+            [x[1], x[0], 1],
+            [2 * x[0], x[2] - 1, x[1]],
+    ])
 ```
 
-We will use a `BigFloat` starting value, and commensurately small stopping tolerances, in order to get a sequence long enough to measure convergence.
+Our initial guess at a root is the origin. 
 
 ```{code-cell}
-x₁ = BigFloat.([0, 0, 0])
-ϵ = eps(BigFloat)
-x = FNC.newtonsys(func, jac, x₁, xtol=ϵ, ftol=ϵ);
+x1 = zeros(3)
+x = FNC.newtonsys(func, jac, x1)
+print(x)
 ```
 
-Let's compute the residual of the last result in order to check the quality.
+The output has one column per iteration, so the last column contains the final Newton estimate. Let's compute the residual of the last result.
 
 ```{code-cell}
-r = x[end]
-@show residual = norm(func(r));
+r = x[:, -1]
+f = func(r)
+print("final residual:", f)
 ```
 
-We take the sequence of norms of errors, applying the log so that we can look at the exponents.
+Let's check the convergence rate:
 
 ```{code-cell}
-logerr = [Float64(log(norm(r - x[k]))) for k in 1:length(x)-1]
-[logerr[k+1] / logerr[k] for k in 1:length(logerr)-1]
+logerr = [log(norm(x[:, k] - r)) for k in range(x.shape[1] - 1)]
+for k in range(len(logerr) - 1):
+    print(logerr[k+1] / logerr[k])
 ```
 
-The ratio is neatly converging toward 2, which is expected for quadratic convergence.
+The ratio is apparently converging toward 2, as expected for quadratic convergence.
 ``````
+
 ### Section 4.6
 (demo-quasi-levenberg-python)=
 ``````{dropdown} Using Levenberg's method
 To solve a nonlinear system, we need to code only the function defining the system, and not its Jacobian.
 
 ```{code-cell}
-f(x) = 
-    [
-        exp(x[2] - x[1]) - 2,
-        x[1] * x[2] + x[3],
-        x[2] * x[3] + x[1]^2 - x[2]
-    ]
+def func(x):
+    return array([
+        exp(x[1] - x[0]) - 2, 
+        x[0] * x[1] + x[2], 
+        x[1] * x[2] + x[0]**2 - x[1]
+    ])
 ```
 
 In all other respects usage is the same as for the `newtonsys` function.
 
 ```{code-cell}
-x₁ = [0.0, 0.0, 0.0]
-x = FNC.levenberg(f, x₁)
+x1 = zeros(3)
+x = FNC.levenberg(func, x1)
+print(f"Took {x.shape[1]-1} iterations.")
 ```
 
 It's always a good idea to check the accuracy of the root, by measuring the residual (backward error).
 
 ```{code-cell}
-r = x[end]
-println("backward error = $(norm(f(r)))")
+r = x[:, -1]
+print("backward error:", norm(func(r)))
 ```
 
-Looking at the convergence in norm, we find a convergence rate between linear and quadratic, like with the secant method.
+
+Looking at the convergence in norm, we find a convergence rate between linear and quadratic, like with the secant method:
 
 ```{code-cell}
-logerr = [log(norm(x[k] - r)) for k in 1:length(x)-1]
-[logerr[k+1] / logerr[k] for k in 1:length(logerr)-1]
+logerr = [log(norm(x[:, k] - r)) for k in range(x.shape[1] - 1)]
+for k in range(len(logerr) - 1):
+    print(logerr[k+1] / logerr[k])
 ```
 ``````
 ### Section 4.7
@@ -755,33 +766,24 @@ logerr = [log(norm(x[k] - r)) for k in 1:length(x)-1]
 We will observe the convergence of {numref}`Function {number} <function-levenberg>` for different levels of the minimum least-squares residual. We start with a function mapping from $\real^2$ into $\real^3$, and a point that will be near the optimum.
 
 ```{code-cell}
-g(x) = [sin(x[1] + x[2]), cos(x[1] - x[2]), exp(x[1] - x[2])]
-p = [1, 1];
+g = lambda x: array([sin(x[0] + x[1]), cos(x[0] - x[1]), exp(x[0] - x[1])])
+p = array([1, 1])
 ```
 
-```{index} ! Julia; @sprintf
-```
-
-::::{grid} 1 1 2 2
 The function $\mathbf{g}(\mathbf{x}) - \mathbf{g}(\mathbf{p})$ obviously has a zero residual at $\mathbf{p}$. We'll make different perturbations of that function in order to create nonzero residuals.
-:::{card}
-`@sprintf` is a way to format numerical values as strings, patterned after the C function `printf`.
-:::
-::::
 
 ```{code-cell}
-plt = plot(xlabel="iteration", yaxis=(:log10, "error"),
-    title="Convergence of Gauss–Newton")
-for R in [1e-3, 1e-2, 1e-1]
+for R in [1e-3, 1e-2, 1e-1]:
     # Define the perturbed function.
-    f(x) = g(x) - g(p) + R * normalize([-1, 1, -1])
+    f = lambda x: g(x) - g(p) + R * array([-1, 1, -1]) / sqrt(3)
     x = FNC.levenberg(f, [0, 0])
-    r = x[end]
-    err = [norm(x - r) for x in x[1:end-1]]
+    r = x[:, -1]
+    err = [norm(x[:, j] - r) for j in range(x.shape[1] - 1)]
     normres = norm(f(r))
-    plot!(err, label=@sprintf("R=%.2g", normres))
-end
-plt
+    semilogy(err, label=f"R={normres:.2g}")
+title("Convergence of Gauss–Newton")
+xlabel("iteration"), ylabel("error")
+legend();
 ```
 
 In the least perturbed case, where the minimized residual is less than $10^{-3}$, the convergence is plausibly quadratic. At the next level up, the convergence starts similarly but suddenly stagnates for a long time. In the most perturbed case, the quadratic phase is nearly gone and the overall shape looks linear.
@@ -790,19 +792,20 @@ In the least perturbed case, where the minimized residual is less than $10^{-3}$
 (demo-nlsq-MM-python)=
 ``````{dropdown} Nonlinear data fitting
 ```{code-cell}
-m = 25;
-s = range(0.05, 6, length=m)
-ŵ = @. 2 * s / (0.5 + s)                      # exactly on the curve
-w = @. ŵ + 0.15 * cos(2 * exp(s / 16) * s);     # smooth noise added
+m = 25
+V, Km = 2, 0.5
+s = linspace(0.05, 6, m)
+model = lambda x: V * x / (Km + x)
+w = model(s) + 0.15 * cos(2 * exp(s / 16) * s)    # noise added
+
+fig, ax = subplots()
+ax.scatter(s, w, label="data")
+ax.plot(s, model(s), 'k--', label="unperturbed model")
+xlabel("s"), ylabel("w")
+legend()
 ```
 
-```{code-cell}
-scatter(s, w, label="noisy data",
-    xlabel="s", ylabel="v", leg=:bottomright)
-plot!(s, ŵ, l=:dash, color=:black, label="perfect data")
-```
-
-```{index} ! Julia; destructuring
+```{index} ! Python; destructuring
 ```
 
 ::::{grid} 1 1 2 2
@@ -813,36 +816,35 @@ Putting comma-separated values on the left of an assignment will **destructure**
 ::::
 
 ```{code-cell}
-function misfit(x)
-    V, Km = x   # rename components for clarity
-    return @. V * s / (Km + s) - w
-end
+def misfit(c):
+    V, Km = c  # rename components for clarity
+    f = V * s / (Km + s) - w
+    return f
 ```
 
 In the Jacobian the derivatives are with respect to the parameters in $\mathbf{x}$.
 
 ```{code-cell}
-function misfitjac(x)
+def misfitjac(x):
     V, Km = x   # rename components for clarity
-    J = zeros(m, 2)
-    J[:, 1] = @. s / (Km + s)              # dw/dV
-    J[:, 2] = @. -V * s / (Km + s)^2         # dw/d_Km
+    J = zeros([m, 2])
+    J[:, 0] = s / (Km + s)          # d/d(V)
+    J[:, 1] = -V * s / (Km + s)**2  # d/d(Km)
     return J
-end
 ```
 
 ```{code-cell}
-x₁ = [1, 0.75]
-x = FNC.newtonsys(misfit, misfitjac, x₁)
-
-@show V, Km = x[end]  # final values
+x1 = [1, 0.75]
+x = FNC.newtonsys(misfit, misfitjac, x1)
+V, Km = x[:, -1]  # final values
+print(f"estimates are V = {V:.3f}, Km = {Km:.3f}")
 ```
 
 The final values are reasonably close to the values $V=2$, $K_m=0.5$ that we used to generate the noise-free data. Graphically, the model looks close to the original data.
 
 ```{code-cell}
-model(s) = V * s / (Km + s)
-plot!(model, 0, 6, label="nonlinear fit")
+# since V and Km have been updated, model() is too
+ax.plot(s, model(s), label="nonlinear fit")
 ```
 
 For this particular model, we also have the option of linearizing the fit process. Rewrite the model as 
@@ -858,16 +860,20 @@ $$f_i([\alpha,\beta]) = \left(\alpha \cdot \frac{1}{s_i} + \beta\right) - \frac{
 for $i=1,\ldots,m$. Although this misfit is nonlinear in $s$ and $w$, it's linear in the unknown parameters $\alpha$ and $\beta$. This lets us pose and solve it as a linear least-squares problem.
 
 ```{code-cell}
-A = [s .^ (-1) s .^ 0]
-u = 1 ./ w
-α, β = A \ u
+from numpy.linalg import lstsq
+A = array( [[1 / s[i], 1.0] for i in range(len(s))] )
+z = lstsq(A, 1 / w, rcond=None)[0]
+alpha, beta = z
+print("alpha:", alpha, "beta:", beta)
 ```
 
-The two fits are different because they do not optimize the same quantities.
+The two fits are different; they do not optimize the same quantities.
 
 ```{code-cell}
-linmodel(x) = 1 / (β + α / x)
-plot!(linmodel, 0, 6, label="linearized fit")
+linmodel = lambda x: 1 / (beta + alpha / x)
+ax.plot(s, linmodel(s), label="linear fit")
+ax.legend()
+fig
 ```
 
 The truly nonlinear fit is clearly better in this case. It optimizes a residual for the original measured quantity rather than a transformed one we picked for algorithmic convenience.

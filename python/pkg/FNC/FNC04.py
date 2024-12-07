@@ -4,7 +4,7 @@ import warnings
 
 def newton(f, dfdx, x1):
     """
-    newton(f,dfdx,x1)
+    newton(f, dfdx, x1)
 
     Use Newton's method to find a root of `f` starting from `x1`, where `dfdx` is the
     derivative of `f`. Returns a vector of root estimates.
@@ -36,7 +36,7 @@ def newton(f, dfdx, x1):
 
 def secant(f, x1, x2):
     """
-    secant(f,x1,x2)
+    secant(f, x1, x2)
 
     Use the secant method to find a root of `f` starting from `x1` and `x2`. Returns a
     vector of root estimates.
@@ -66,13 +66,13 @@ def secant(f, x1, x2):
         warnings.warn("Maximum number of iterations reached.")
     return x[:k+1]
 
-def newtonsys(f, x1):
+def newtonsys(f, jac, x1):
     """
-        newtonsys(f,x1)
+        newtonsys(f, jac, x1)
 
     Use Newton's method to find a root of a system of equations, starting from `x1`. The
-    function `f` should return both the residual vector and the Jacobian matrix. Returns
-    root estimates as a matrix, one estimate per column.
+    function `f` should return the residual vector, and the function `jac` should return 
+    the Jacobian matrix. Returns root estimates as a matrix, one estimate per column.
     """
     # Operating parameters.
     funtol = 1000 * np.finfo(float).eps
@@ -81,7 +81,7 @@ def newtonsys(f, x1):
 
     x = np.zeros((len(x1), maxiter))
     x[:, 0] = x1
-    y, J = f(x1)
+    y, J = f(x1), jac(x1)
     dx = 10.0  # for initial pass below
     k = 0
 
@@ -90,7 +90,7 @@ def newtonsys(f, x1):
         x[:, k+1] = x[:, k] + dx
 
         k = k + 1
-        y, J = f(x[:, k])
+        y, J = f(x[:, k]), jac(x[:, k])
 
     if k == maxiter:
         warnings.warn("Maximum number of iterations reached.")
@@ -106,7 +106,7 @@ def fdjac(f, x0, y0):
 
     delta = np.sqrt(np.finfo(float).eps)  # FD step size
     m, n = len(y0), len(x0)
-    J = np.zeros(m, n)
+    J = np.zeros((m, n))
     I = np.eye(n)
     for j in range(n):
         J[:, j] = (f(x0 + delta * I[:, j]) - y0) / delta
@@ -127,7 +127,7 @@ def levenberg(f, x1, tol=1e-12):
     maxiter = 40
 
     n = len(x1)
-    x = np.zeros(n, maxiter)
+    x = np.zeros((n, maxiter))
     x[:, 0] = x1
     fk = f(x1)
     k = 0
