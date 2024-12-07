@@ -26,8 +26,11 @@ MATLAB implementations
 
 ```{code-cell}
 :tags: [remove-cell]
-addpath ../matlab/fnc
+addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
 format short
+set(0, 'defaultaxesfontsize', 12)
+set(0, 'defaultlinelinewidth', 1.5, 'defaultscattermarkerfacecolor', 'k')
+set(0, 'defaultFunctionLinelinewidth', 1.5)
 ```
 
 ## Section 1.1
