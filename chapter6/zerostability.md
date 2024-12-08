@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-ivp-zerostability)=
 # Zero-stability of multistep methods
 
@@ -27,56 +7,27 @@ FNC.init_format()
 For one-step methods such as Runge–Kutta, {numref}`Theorem %s <theorem-euler-onestepGTE>` guarantees that the method converges and that the global error is of the same order as the local truncation error. For multistep methods, however, a new wrinkle is introduced. 
 
 (demo-zs-LIAF)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-zs-LIAF-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-zs-LIAF-matlab
+:::
+```` 
 
-
-
-
-It is straightforward to check that the two-step method LIAF, defined by
-
-```{math}
-:label: LIAF
-  \mathbf{u}_{i+1} = -4u_i + 5u_{i-1} + h(4f_i + 2f_{i-1}),
-```
-
-is third-order accurate. Let's apply it to the ridiculously simple IVP $u'=u$, $u(0)=1$, whose solution is $e^t$. We'll measure the error at the time $t=1$.
-
-```{code-cell}
-:tags: [hide-input]
-dudt = (u,t) -> u
-û = exp
-a,b = 0.0,1.0;
-n = [5,10,20,40,60]
-err = []
-t,u = [],[]
-for n in n
-    h = (b-a)/n
-    t = [ a + i*h for i in 0:n ]
-    u = [1; û(h); zeros(n-1)]
-    f = [dudt(u[1],t[1]); zeros(n)]
-    for i in 2:n
-        f[i] = dudt(u[i],t[i])
-        u[i+1] = -4*u[i] + 5*u[i-1] + h*(4*f[i]+2*f[i-1])
-    end
-    push!( err, abs(û(b) - u[end]) )
-end
-
-pretty_table( [n (b-a)./n err], header=["n","h","error"] )
-```
-
-The error starts out promisingly, but things explode from there. A graph of the last numerical attempt yields a clue.
-
-```{code-cell}
-plot(t,abs.(u),m=3,label="",
-    xlabel=L"t",yaxis=(:log10,L"|u(t)|"),title="LIAF solution")
-```
-
-It's clear that the solution is growing exponentially in time.
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-zs-LIAF-python
+:::
+```` 
+`````
+::::
 
 The source of the exponential growth in {numref}`Demo %s <demo-zs-LIAF>` is not hard to identify. Recall that we can rewrite {eq}`LIAF` as $\rho(\mathcal{Z})u_{i-1}=h \sigma(\mathcal{Z})u_{i-1}$ using the forward shift operator $\mathcal{Z}$:
 

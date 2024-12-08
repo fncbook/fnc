@@ -116,17 +116,17 @@ project:
         - file: chapter5/integration.md
         - file: chapter5/adaptive.md
         - file: chapter5/next.md
-    #     - file: chapter6/overview.md
-    #       children:
-    #         - file: chapter6/basics.md
-    #         - file: chapter6/euler.md
-    #         - file: chapter6/systems.md
-    #         - file: chapter6/rk.md
-    #         - file: chapter6/adaptive-rk.md
-    #         - file: chapter6/multistep.md
-    #         - file: chapter6/implicit.md
-    #         - file: chapter6/zerostability.md
-    #         - file: chapter6/next.md
+    - file: chapter6/overview.md
+      children:
+        - file: chapter6/basics.md
+        - file: chapter6/euler.md
+        - file: chapter6/systems.md
+        - file: chapter6/rk.md
+        - file: chapter6/adaptive-rk.md
+        - file: chapter6/multistep.md
+        - file: chapter6/implicit.md
+        - file: chapter6/zerostability.md
+        - file: chapter6/next.md
     #     - file: chapter7/overview.md
     #       children:
     #         - file: chapter7/insight.md
@@ -200,6 +200,7 @@ project:
           - file: julia/chapter3.md
           - file: julia/chapter4.md
           - file: julia/chapter5.md
+          - file: julia/chapter6.md
       - title: MATLAB codes
         children:
           - file: matlab/chapter1.md

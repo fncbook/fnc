@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-ivp-adaptive)=
 # Adaptive Runge–Kutta
 
@@ -101,142 +81,73 @@ The top part of the table describes four stages in the usual RK fashion. The las
 Our implementation of an embedded second/third-order (RK23) code is given in {numref}`Function {number} <function-rk23>`. 
 
 (function-rk23)=
-````{prf:function} rk23
-**Adaptive IVP solver based on embedded RK formulas**
+``````{prf:algorithm} rk23
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-rk23-julia
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    rk23(ivp,tol)
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-rk23-matlab
+:::
+```` 
 
-Apply an adaptive embedded RK formula pair to solve given IVP with
-estimated error `tol`. Returns a vector of times and a vector of
-solution values.
-"""
-function rk23(ivp,tol)
-    # Initialize for the first time step.
-    a,b = ivp.tspan
-    t = [a]
-    u = [float(ivp.u0)];   i = 1;
-    h = 0.5*tol^(1/3)
-    s₁ = ivp.f(ivp.u0,ivp.p,a)
-
-    # Time stepping.
-    while t[i] < b
-        # Detect underflow of the step size.
-        if t[i]+h == t[i]
-            @warn "Stepsize too small near t=$(t[i])"
-            break  # quit time stepping loop
-        end
-
-        # New RK stages.
-        s₂ = ivp.f( u[i]+(h/2)*s₁,   ivp.p, t[i]+h/2   )
-        s₃ = ivp.f( u[i]+(3h/4)*s₂, ivp.p, t[i]+3h/4 )
-        unew2 = u[i] + h*(2s₁  + 3s₂ + 4s₃)/9   # 2rd order solution
-        s₄ = ivp.f( unew2, ivp.p, t[i]+h )
-        err = h*(-5s₁/72 + s₂/12 + s₃/9 - s₄/8)  # 2nd/3rd difference
-        E = norm(err,Inf)                         # error estimate
-        maxerr = tol*(1 + norm(u[i],Inf))     # relative/absolute blend
-
-        # Accept the proposed step?
-        if E < maxerr     # yes
-            push!(t,t[i]+h)
-            push!(u,unew2)
-            i += 1
-            s₁ = s₄       # use FSAL property
-        end
-
-        # Adjust step size.
-        q = 0.8*(maxerr/E)^(1/3)   # conservative optimal step factor
-        q = min(q,4)               # limit stepsize growth
-        h = min(q*h,b-t[i])        # don't step past the end
-    end
-    return t,u
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-rk23-python
+:::
 ````
-
-::::{admonition} About the code
-:class: dropdown
-The check `t[i]+h==t[i]`on line 19 is to detect when $h$ has become so small that it no longer changes the floating-point value of $t_i$. This may be a sign that the underlying exact solution has a singularity near $t=t_i$, but in any case, the solver must halt by using a `break` statement to exit the loop.
-
-On line 30, we use a combination of absolute and relative tolerances to judge the acceptability of a solution value, as in {eq}`absreltolerance`. In lines 41--43 we underestimate the step factor $q$ a bit and prevent a huge increase in the step size, since a rejected step is expensive, and then we make sure that our final step doesn't take us past the end of the domain.
-
-Finally, line 37 exploits a subtle property of the BS23 formula called *first same as last* (FSAL). 
-While {eq}`bs23` calls for four stages to find the paired second- and third-order estimates, the final stage computed in stepping from $t_i$ to $t_{i+1}$ is identical to the first stage needed to step from $t_{i+1}$ to $t_{i+2}$. By repurposing `s₄` as `s₁` for the next pass, one of the stage evaluations comes for free, and only three evaluations of $f$ are needed per successful step.
-::::
+`````
+``````
 
 (demo-adapt-basic)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-adapt-basic-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-adapt-basic-matlab
+:::
+```` 
 
-
-
-
-Let's run adaptive RK on  $u'=e^{t-u\sin u}$.
-
-```{code-cell}
-f = (u,p,t) -> exp(t-u*sin(u))
-ivp = ODEProblem(f,0,(0.,5.))
-t,u = FNC.rk23(ivp,1e-5)
-
-plot(t,u,m=2,
-    xlabel=L"t",ylabel=L"u(t)",title="Adaptive IVP solution")
-```
-
-The solution makes a very abrupt change near $t=2.4$. The resulting time steps vary over three orders of magnitude.
-
-```{code-cell}
-Δt = diff(t)
-plot(t[1:end-1],Δt,title="Adaptive step sizes",
-    xaxis=(L"t",(0,5)),yaxis=(:log10,"step size"))
-```
-
-If we had to run with a uniform step size to get this accuracy, it would be
-
-```{code-cell}
-println( "minimum step size = $(minimum(Δt))" )
-```
-
-On the other hand, the average step size that was actually taken was
-
-```{code-cell}
-println( "average step size = $(sum(Δt)/(length(t)-1))" )
-```
-
-We took fewer steps by a factor of almost 1000! Even accounting for the extra stage per step and the occasional rejected step, the savings are clear.
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-adapt-basic-python
+:::
+```` 
+`````
+::::
 
 (demo-adapt-sing)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-adapt-sing`-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-adapt-sing`-matlab
+:::
+```` 
 
-
-
-
-In {numref}`Demo %s <demo-basics-sing>` we saw an IVP that appears to blow up in a finite amount of time. Because the solution increases so rapidly as it approaches the blowup, adaptive stepping is required even to get close. 
-
-```{code-cell}
-f = (u,p,t) -> (t+u)^2
-ivp = ODEProblem(f,1,(0.,1.))
-t,u = FNC.rk23(ivp,1e-5);
-```
-
-In fact, the failure of the adaptivity gives a decent idea of when the singularity occurs.
-
-```{code-cell}
-plot(t,u,legend=:none,
-    xlabel=L"t",yaxis=(:log10,L"u(t)"),title="Finite-time blowup")
-
-tf = t[end]
-vline!([tf],l=:dash)
-annotate!(tf,1e5,latexstring(@sprintf("t = %.6f ",tf)),:right)
-```
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-adapt-sing`-python
+:::
+```` 
+`````
+::::
 
 
 

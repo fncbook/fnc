@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-ivp-basics)=
 # Basics of IVPs
 
@@ -83,109 +63,55 @@ An ODE may have higher derivatives of the unknown solution present. For example,
 
 ## Numerical solutions
 
-
 (demo-basics-first)=
-```{prf:example}
-```
-
-
-
-
-
-The `DifferentialEquations` package offers solvers for IVPs. Let's use it to define and solve an initial-value problem for $u'=\sin[(u+t)^2]$ over $t \in [0,4]$, such that $u(0)=-1$.  
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-Because many practical problems come with parameters that are fixed within an instance but varied from one instance to another, the syntax for IVPs includes a input argument `p` that stays fixed throughout the solution. Here we don't want to use that argument, but it must be in the definition for the solver to work.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-basics-first-julia
 :::
-:::{card}
+```` 
 
-
-To create an initial-value problem for $u(t)$, you must supply a function that computes $u'$, an initial value for $u$, and the endpoints of the interval for $t$. The $t$ interval should be defined as `(a,b)`, where at least one of the values is a float.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-basics-first-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-basics-first-python
+:::
+```` 
+`````
 ::::
-
-```{index} ! Julia; ODEProblem, ! Julia; solve
-```
-
-```{code-cell}
-f = (u,p,t) -> sin((t+u)^2)     # defines du/dt, must include p argument
-u₀ = -1.0                       # initial value
-tspan = (0.0,4.0)               # t interval 
-```
-
-With the data above we define an IVP problem object and then solve it. Here we tell the solver to use the `Tsit5` method, which is a good first choice for most problems.
-
-```{code-cell}
-ivp = ODEProblem(f,u₀,tspan)
-sol = solve(ivp,Tsit5());
-```
-
-The resulting solution object can be shown using `plot`.
-
-```{code-cell}
-plot(sol,label="solution",legend=:bottom,
-    xlabel="t",ylabel=L"u(t)",title=L"u'=\sin((t+u)^2)")
-```
-
-The solution also acts like any callable function that can be evaluated at different values of $t$. 
-
-```{code-cell}
-@show sol(1.0);
-```
-
-Under the hood, the solution object holds some information about how the values and plot are produced:
-
-```{code-cell}
-[sol.t sol.u]
-```
-
-The solver initially finds approximate values of the solution (second column above) at some automatically chosen times (first column above). To compute the solution at other times, the object performs an interpolation on those values. This chapter is about how the discrete $t$ and $u$ values are computed. For now, just note how we can extract them from the solution object.
-
-```{code-cell}
-scatter!(sol.t,sol.u,label="discrete values")
-```
-
-
-
-
 
 ## Existence and uniqueness
 
 There are simple IVPs that do not have solutions at all possible times. 
 
 (demo-basics-sing)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-basics-sing-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-basics-sing-matlab
+:::
+```` 
 
-
-
-
-The equation $u'=(u+t)^2$ gives us some trouble.
-
-```{code-cell}
-f = (u,p,t) -> (t+u)^2
-
-ivp = ODEProblem(f,1.0,(0.,1.))
-sol = solve(ivp,Tsit5());
-```
-
-The warning message we received can mean that there is a bug in the formulation of the problem. But if everything has been done correctly, it suggests that the solution may not exist past the indicated time. This is a possibility in nonlinear ODEs.
-
-```{code-cell}
-plot(sol, label="",
-    xlabel=L"t",yaxis=(:log10,L"u(t)"), title="Finite-time blowup")
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-basics-sing-python
+:::
+```` 
+`````
+::::
 
 We can also produce an IVP that has more than one solution.
 
@@ -223,40 +149,27 @@ for all sufficiently small $|\delta|$.
 Numerical solutions of IVPs have errors, and those errors can be seen as perturbations to the solution. {numref}`Theorem %s <theorem-depIC>` gives an upper bound of $e^{L(b-a)}$ on the infinity norm (i.e., pointwise) absolute condition number of the solution with respect to perturbations at an initial time. However, the upper bound may be a terrible overestimate of the actual sensitivity for a particular problem.
 
 (demo-basics-cond)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-basics-cond-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-basics-cond-matlab
+:::
+```` 
 
-
-
-
-Consider the ODEs $u'=u$ and $u'=-u$. In each case we compute $\partial f/\partial u = \pm 1$, so the condition number bound from {numref}`Theorem %s <theorem-depIC>` is $e^{b-a}$ in both problems. However, they behave quite differently. In the case of exponential growth, $u'=u$, the bound is the actual condition number.
-
-```{code-cell}
-:tags: [hide-input]
-t = range(0,3,length=800)
-u = @. exp(t)*1
-lower,upper = @. exp(t)*0.7, @. exp(t)*1.3
-plot(t,u,l=:black,ribbon=(lower,upper),
-    leg=:none,xlabel=L"t",ylabel=L"u(t)",
-    title="Exponential divergence of solutions")
-```
-
-But with $u'=-u$, solutions actually get closer together with time.
-
-```{code-cell}
-:tags: [hide-input]
-u = @. exp(-t)*1
-lower,upper = @. exp(-t)*0.7, @. exp(-t)*1.3
-plot(t,u,l=:black,ribbon=(lower,upper),
-    leg=:none,xlabel=L"t",ylabel=L"u(t)", 
-    title="Exponential convergence of solutions")
-```
-
-In this case the actual condition number is one, because the initial difference between solutions is the largest over all time. Hence the exponentially growing bound $e^{b-a}$ is a gross overestimate.
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-basics-cond-python
+:::
+```` 
+`````
+::::
 
 In general, solutions can diverge from, converge to, or oscillate around the original trajectory in response to perturbations. We won't fully consider these behaviors and their implications for numerical methods again until a later chapter.
 

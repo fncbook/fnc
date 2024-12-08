@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-ivp-implicit)=
 # Implementation of multistep methods
 
@@ -40,94 +20,50 @@ As a concrete example, the AB4 method is defined by the formula
 Observe that {numref}`Function {number} <function-rk4>` is used to find the starting values $\mathbf{u}_1,\mathbf{u}_2,\mathbf{u}_3$ that are needed before the iteration formula takes over. As far as RK4 is concerned, it needs to solve  (the same step size as in the AB4 iteration). These results are then used to find $\mathbf{f}_0,\ldots,\mathbf{f}_3$ and get the main iteration started.
 
 (function-ab4)=
-````{prf:function} ab4
-**4th-order Adams–Bashforth formula for an IVP**
+``````{prf:algorithm} ab4
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-ab4-julia
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    ab4(ivp,n)
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-ab4-matlab
+:::
+```` 
 
-Apply the Adams-Bashforth 4th order method to solve the given IVP
-using `n` time steps. Returns a vector of times and a vector of
-solution values.
-"""
-function ab4(ivp,n) 
-    # Time discretization.
-    a,b = ivp.tspan
-    h = (b-a)/n
-    t = [ a + i*h for i in 0:n ]
-
-    # Constants in the AB4 method.
-    k = 4;   σ = [55,-59,37,-9]/24;
-
-    # Find starting values by RK4.
-    u = fill(float(ivp.u0),n+1)
-    rkivp = ODEProblem(ivp.f,ivp.u0,(a,a+(k-1)*h),ivp.p)
-    ts,us = rk4(rkivp,k-1)
-    u[1:k] .= us
-
-    # Compute history of u' values, from newest to oldest.
-    f = [ ivp.f(u[k-i],ivp.p,t[k-i]) for i in 1:k-1  ]
-
-    # Time stepping.
-    for i in k:n
-        f = [ ivp.f(u[i],ivp.p,t[i]), f[1:k-1]... ]   # new value of du/dt
-        u[i+1] = u[i] + h*sum(f[j]*σ[j] for j in 1:k)  # advance a step
-    end
-    return t,u
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-ab4-python
+:::
 ````
-
-::::{admonition} About the code
-:class: dropdown
-Line 15 sets `σ` to be the coefficients of the generating polynomial $\sigma(z)$ of AB4. Lines 19--21 set up the IVP over the time interval $a \le t \le a+3 h$, call `rk4` to solve it using the step size $h$, and use the result to fill the first four values of the solution. Then line 24 computes the vector $[f_2,f_1,f_0]$. 
-
-Line 28 computes $f_i$, based on the most recent solution value and time. That goes into the first spot of `f`, followed by the three values that were previously most recent. These are the four values that appear in {eq}`ab4`. Each particular $f_i$ value starts at the front of `f`, moves through each position in the vector over three iterations, and then is forgotten.
-::::
-
+`````
+``````
 
 (demo-implicit-ab4)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-implicit-ab4-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-implicit-ab4-matlab
+:::
+```` 
 
-
-
-
-We study the convergence of AB4 using the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. As usual, `solve` is called to give an accurate reference solution.
-
-```{code-cell}
-ivp = ODEProblem((u,p,t)->sin((t+u)^2),-1.,(0.0,4.0))
-u_ref = solve(ivp,Tsit5(),reltol=1e-14,abstol=1e-14);
-```
-
-Now we perform a convergence study of the AB4 code.
-
-```{code-cell}
-n = @. [ round(Int,4*10^k) for k in 0:0.5:3 ]
-err = []
-for n in n
-    t,u = FNC.ab4(ivp,n)
-    push!( err, norm(u_ref.(t)-u,Inf) )
-end
-
-pretty_table([n err], header=["n","inf-norm error"])
-```
-
-The method should converge as $O(h^4)$, so a log-log scale is appropriate for the errors.
-
-```{code-cell}
-plot(n,err,m=3,label="AB4",
-    xaxis=(:log10,L"n"),yaxis=(:log10,"inf-norm error"),
-    title="Convergence of AB4",leg=:bottomleft)
-
-plot!(n,(n/n[1]).^(-4),l=:dash,label=L"O(n^{-4})")
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-implicit-ab4-python
+:::
+```` 
+`````
+::::
 
 ## Implicit methods
 
@@ -146,45 +82,27 @@ for $\mathbf{z}$. This equation can be written as $\mathbf{g}(\mathbf{z})=\bolds
 An implementation of AM2 using {numref}`Function {number} <function-levenberg>` from {numref}`section-nonlineqn-quasinewton` is shown in {numref}`Function {number} <function-am2>`. 
 
 (function-am2)=
-````{prf:function} am2
-**2nd-order Adams–Moulton (trapezoid) formula for an IVP**
+``````{prf:algorithm} am2
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-am2-julia
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    am2(ivp,n)
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-am2-matlab
+:::
+```` 
 
-Apply the Adams-Moulton 2nd order method to solve given IVP using
-`n` time steps. Returns a vector of times and a vector of
-solution values.
-"""
-function am2(ivp,n)
-    # Time discretization.
-    a,b = ivp.tspan
-    h = (b-a)/n
-    t = [ a + i*h for i in 0:n ]
-
-    # Initialize output.
-    u = fill(float(ivp.u0),n+1)
-
-    # Time stepping.
-    for i in 1:n
-        # Data that does not depend on the new value.
-        known = u[i] + h/2*ivp.f(u[i],ivp.p,t[i])
-        # Find a root for the new value.
-        g = z -> z - h/2*ivp.f(z,ivp.p,t[i+1]) - known
-        unew = levenberg(g,known)
-        u[i+1] = unew[end]
-    end
-    return t,u
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-am2-python
+:::
 ````
-
-::::{admonition} About the code
-:class: dropdown
-Lines 22-23 define the function $\mathbf{g}$ and call `levenberg` to find the new solution value, using an Euler half-step as its starting value. A robust code would have to intercept the case where `levenberg` fails to converge, but we have ignored this issue for the sake of brevity.
-::::
+`````
+``````
 
 ## Stiff problems
 
@@ -194,59 +112,27 @@ At each time step in {numref}`Function {number} <function-am2>`, or any implicit
 ```
 
 (demo-implicit-stiff)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-implicit-stiff-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-implicit-stiff-matlab
+:::
+```` 
 
-
-
-
-The following simple ODE uncovers a surprise.
-
-```{code-cell}
-ivp = ODEProblem((u,p,t)->u^2-u^3, 0.005, (0,400.))
-```
-
-We will solve the problem first with the implicit AM2 method using $n=200$ steps.
-
-```{code-cell}
-tI,uI = FNC.am2(ivp,200)
-
-plot(tI,uI,label="AM2",
-    xlabel=L"t",ylabel=L"u(t)",leg=:bottomright)
-```
-
-Now we repeat the process using the explicit AB4 method.
-
-```{code-cell}
-tE,uE = FNC.ab4(ivp,200)
-
-scatter!(tE,uE,m=3,label="AB4",ylim=[-4,2])
-```
-
-Once the solution starts to take off, the AB4 result goes catastrophically wrong.
-
-```{code-cell}
-uE[105:111]
-```
-
-We hope that AB4 will converge in the limit $h\to 0$, so let's try using more steps.
-
-```{code-cell}
-plt = scatter(tI,uI,label="AM2, n=200",m=3,
-    xlabel=L"t",ylabel=L"u(t)",leg=:bottomright)
-
-for n in [1000,1600]
-    tE,uE = FNC.ab4(ivp,n)
-    plot!(tE,uE,label="AM4, n=$n")
-end
-plt
-```
-
-So AB4, which is supposed to be _more_ accurate than AM2, actually needs something like 8 times as many steps to get a reasonable-looking answer!
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-implicit-stiff-python
+:::
+```` 
+`````
+::::
 
 Although the result of {numref}`Demo %s <demo-implicit-stiff>` may seem counter-intuitive, there is no contradiction. A fourth-order explicit formula is more accurate than a second-order implicit one, in the limit $h\to 0$. But there is another limit to consider, $t\to \infty$ with $h$ fixed, and in this one the implicit method wins. 
 

@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-ivp-systems)=
 # IVP systems
 
@@ -86,94 +66,27 @@ The generalization of any scalar IVP solver to handle systems is straightforward
 The vector difference equation {eq}`eulersys` is just Euler's formula applied simultaneously to each component of the ODE system. Because operations such as addition and multiplication translate easily from scalars to vectors, {numref}`Function {number} <function-euler>` that we wrote for scalar IVPs works for systems as well. Practically speaking, the only changes that must be made are that the initial condition and the ODE function have to be coded to use vectors. 
 
 (demo-systems-predator)=
-```{prf:example}
-```
-
-
-
-
-
-We encode the predator–prey equations via a function.
-
-```{code-cell}
-function predprey(u,p,t)
-    α,β = p      # rename parameters for convenience
-    y,z = u      # rename solution components
-    s = (y*z) / (1+β*y)     # appears in both equations
-    return [ y*(1-α*y) - s, -z + s ]
-end;
-```
-
-As before, the ODE function must accept three inputs, `u`, `p`, and `t`, even though in this case there is no explicit dependence on `t`. The second input is used to pass parameters that don't change throughout a single instance of the problem. 
-
-To specify the IVP we must also provide the initial condition, which is a 2-vector here, and the interval for the independent variable.
-
-```{code-cell}
-u₀ = [1,0.01]
-tspan = (0.,60.)
-α,β = 0.1,0.25
-
-ivp = ODEProblem(predprey,u₀,tspan,[α,β])
-```
-
-You can use any `DifferentialEquations` solver on the IVP system.
-
-```{code-cell}
-sol = solve(ivp,Tsit5());
-plot(sol,label=["prey" "predator"],title="Predator-prey solution")
-```
-
-We can find the discrete values used to compute the interpolated solution. The `sol.u` value is a vector of vectors. 
-
-```{code-cell}
-t,u = sol.t,sol.u    # extract times and solution values
-@show size(u);
-@show t[20];
-@show u[20];
-```
-
-We can also use {numref}`Function {number} <function-euler>` to find the solution. 
-
-```{code-cell}
-t,u = FNC.euler(ivp,1200);
-```
-
-The solution `u` is a vector of [prey,predator] 2-vectors for each of the discrete times in `t`. Manipulating the vector-of-vectors output can be a little tricky. Here, we convert it to an $n\times 2$ matrix. Each column is one component, while each row is a single value of $t$.
-
-```{code-cell}
-u = [ u[j] for u in u, j in 1:2 ]
-plot!(t[1:3:end],u[1:3:end,:],l=(1,:black),m=2,
-    label=["Euler prey" "Euler predator"])
-```
-
-Notice above that the accuracy of the Euler solution deteriorates rapidly. 
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-When there are just two components, it's common to plot the solution in the _phase plane_, i.e., with $u_1$ and $u_2$ along the axes and time as a parameterization of the curve.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-systems-predator-julia
 :::
-:::{card}
+```` 
 
-
-You can use `vars` in the plot of a solution produced by `solve` to specify the components of the solution that appear on each axis.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-systems-predator-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-systems-predator-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-plot(sol,vars=(1,2),title="Predator-prey in the phase plane",
-    xlabel=L"y",ylabel=L"z")
-```
-
-From this plot we can deduce that the solution approaches a periodic one, which in the phase plane is represented by a closed loop.
-
-
-
 
 In the rest of this chapter we present methods as though they are for scalar equations, but their application to systems is taken for granted. The generalization of error analysis can be more complicated, but our statements about order of accuracy and other properties are true for systems as well as scalars. The codes are all written to accept systems.
 
@@ -244,86 +157,27 @@ which is a first-order system in four dimensions. To complete the description of
 The trick illustrated in the preceding examples is always available. Suppose $y$ is a scalar dependent variable in the system. You should introduce a component of $\mathbf{u}$ for $y$, $y'$, etc., up to but not including the highest derivative appearing anywhere for $y$. This is done for each scalar variable in the original system. There should be one component of $\mathbf{u}$ for each scalar initial condition given. Many equations for the first-order system then come from the trivial relationships among all the lower derivatives. The remaining equations for the system come from the original, high-order equations. In the end, there must be as many scalar component equations as unknown first-order variables.
 
 (demo-systems-coupledpendula)=
-```{prf:example}
-```
-
-
-
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-Let's implement the coupled pendulums from {numref}`Example {number} <example-systems-coupledpendula>`. The pendulums will be pulled in opposite directions and then released together from rest.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-systems-coupledpendula-julia
 :::
-:::{card}
+```` 
 
-
-The `similar` function creates an array of the same size and type as a given value, without initializing the contents.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-systems-coupledpendula-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-systems-coupledpendula-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-function couple(u,p,t)
-    γ,L,k = p
-    g = 9.8
-    udot = similar(u)
-    udot[1:2] .= u[3:4]
-    udot[3] = - γ*u[3] - (g/L)*sin(u[1]) + k*(u[2]-u[1])
-    udot[4] = - γ*u[4] - (g/L)*sin(u[2]) + k*(u[1]-u[2])
-    return udot 
-end
-
-u₀ = [1.25,-0.5,0,0]
-tspan = (0.,50.);
-```
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-First we check the behavior of the system when the pendulums are uncoupled, i.e., when $k=0$.
-
-
-:::
-:::{card}
-
-
-Here `vars` is used to plot two components as functions of time.
-
-:::
-::::
-
-```{code-cell}
-γ,L,k = 0,0.5,0
-ivp = ODEProblem(couple,u₀,tspan,[γ,L,k])
-sol = solve(ivp,Tsit5())
-plot(sol,vars=[1,2],label=[L"\theta_1" L"\theta_2"],
-    xlims=[20,50],title="Uncoupled pendulums")
-```
-
-You can see that the pendulums swing independently. Because the model is nonlinear and the initial angles are not small, they have slightly different periods of oscillation, and they go in and out of phase.
-
-With coupling activated, a different behavior is seen.
-
-```{code-cell}
-k = 1
-ivp = ODEProblem(couple,u₀,tspan,[γ,L,k])
-sol = solve(ivp,Tsit5())
-plot(sol,vars=[1,2],label=[L"\theta_1" L"\theta_2"],
-    xlims=[20,50],title="Coupled pendulums")
-```
-
-The coupling makes the pendulums swap energy back and forth. 
-
-
-
-
 
 ## Exercises
 

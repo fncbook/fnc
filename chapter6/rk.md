@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-ivp-rk)=
 # Runge–Kutta methods
 
@@ -236,96 +216,50 @@ This formula is often referred to as *the* fourth-order RK method, even though t
 Our implementation is given in {numref}`Function {number} <function-rk4>`.
 
 (function-rk4)=
+``````{prf:algorithm} rk4
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-rk4-julia
+:::
+```` 
 
-````{prf:function} rk4
-**Fourth-order Runge-Kutta for an IVP**
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-rk4-matlab
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    rk4(ivp,n)
-
-Apply the common Runge-Kutta 4th order method to solve the given 
-IVP using `n` time steps. Returns a vector of times and a vector of
-solution values.
-"""
-function rk4(ivp,n)
-    # Time discretization.
-    a,b = ivp.tspan
-    h = (b-a)/n
-    t = [ a + i*h for i in 0:n ]
-
-    # Initialize output.
-    u = fill(float(ivp.u0),n+1)
-
-    # Time stepping.
-    for i in 1:n
-        k₁ = h*ivp.f( u[i],      ivp.p, t[i]     )
-        k₂ = h*ivp.f( u[i]+k₁/2, ivp.p, t[i]+h/2 )
-        k₃ = h*ivp.f( u[i]+k₂/2, ivp.p, t[i]+h/2 )
-        k₄ = h*ivp.f( u[i]+k₃,   ivp.p, t[i]+h   )
-        u[i+1] = u[i] + (k₁ + 2(k₂+k₃) + k₄)/6
-    end
-    return t,u
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-rk4-python
+:::
 ````
-
+`````
+``````
 
 (demo-rk-converge)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-rk-converge-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-rk-converge-matlab
+:::
+```` 
 
-
-
-
-We solve the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
-
-```{code-cell}
-f = (u,p,t) -> sin((t+u)^2)
-tspan = (0.0,4.0)
-u₀ = -1.0
-
-ivp = ODEProblem(f,u₀,tspan)
-```
-
-We use a `DifferentialEquations` solver to construct an accurate approximation to the exact solution.
-
-```{code-cell}
-u_ref = solve(ivp,Tsit5(),reltol=1e-14,abstol=1e-14);
-```
-
-Now we perform a convergence study of our two Runge–Kutta implementations.
-
-```{code-cell}
-n = [ round(Int,2*10^k) for k in 0:0.5:3 ]
-err_IE2,err_RK4 = [],[]
-for n in n
-    t,u = FNC.ie2(ivp,n)
-    push!( err_IE2, maximum( @.abs(u_ref(t)-u) ) )
-    t,u = FNC.rk4(ivp,n)
-    push!( err_RK4, maximum( @.abs(u_ref(t)-u) ) )
-end
-
-pretty_table([n err_IE2 err_RK4], header=["n","IE2 error","RK4 error"])
-```
-
-The amount of computational work at each time step is assumed to be proportional to the number of stages. Let's compare on an apples-to-apples basis by using the number of $f$-evaluations on the horizontal axis.
-
-```{code-cell}
-plot([2n 4n],[err_IE2 err_RK4],m=3,label=["IE2" "RK4"],
-    xaxis=(:log10,"f-evaluations"),yaxis=(:log10,"inf-norm error"),
-    title="Convergence of RK methods",leg=:bottomleft)
-
-plot!(2n,1e-5*(n/n[end]).^(-2),l=:dash,label=L"O(n^{-2})")
-plot!(4n,1e-10*(n/n[end]).^(-4),l=:dash,label=L"O(n^{-4})")
-```
-
-The fourth-order variant is more efficient in this problem over a wide range of accuracy.
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-rk-converge-python
+:::
+```` 
+`````
+::::
 
 ## Efficiency
 
