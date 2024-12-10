@@ -8,6 +8,15 @@ For one-step methods such as Runge–Kutta, {numref}`Theorem %s <theorem-euler-o
 
 (demo-zs-LIAF)=
 ::::{prf:example}
+It is straightforward to check that the two-step method LIAF, defined by
+
+```{math}
+:label: LIAF
+  \mathbf{u}_{i+1} = -4u_i + 5u_{i-1} + h(4f_i + 2f_{i-1}),
+```
+
+is third-order accurate. Let's apply it to the ridiculously simple IVP $u'=u$, $u(0)=1$, whose solution is $e^t$. 
+
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

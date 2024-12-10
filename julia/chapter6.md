@@ -396,7 +396,7 @@ The coupling makes the pendulums swap energy back and forth.
 ``````
 
 (demo-rk-converge-julia)=
-``````{dropdown} Convergence of RK4
+``````{dropdown} Convergence of Runge–Kutta methods
 We solve the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
 
 ```{code-cell}
@@ -583,14 +583,7 @@ So AB4, which is supposed to be _more_ accurate than AM2, actually needs somethi
 
 (demo-zs-LIAF-julia)=
 ``````{dropdown} Instability
-It is straightforward to check that the two-step method LIAF, defined by
-
-```{math}
-:label: LIAF
-  \mathbf{u}_{i+1} = -4u_i + 5u_{i-1} + h(4f_i + 2f_{i-1}),
-```
-
-is third-order accurate. Let's apply it to the ridiculously simple IVP $u'=u$, $u(0)=1$, whose solution is $e^t$. We'll measure the error at the time $t=1$.
+We'll measure the error at the time $t=1$.
 
 ```{code-cell}
 du_dt(u, t) = u
@@ -604,7 +597,7 @@ for n in n
     t = [a + i * h for i in 0:n]
     u = [1; û(h); zeros(n - 1)]
     f_val = [du_dt(u[1], t[1]); zeros(n)]
-    f_valor i in 2:n
+    for i in 2:n
         f_val[i] = du_dt(u[i], t[i])
         u[i+1] = -4 * u[i] + 5 * u[i-1] + h * (4 * f_val[i] + 2 * f_val[i-1])
     end

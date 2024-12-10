@@ -90,37 +90,27 @@ The second stage employs an Euler-style strategy over the whole time step, but u
 Our implementation of IE2 is shown in {numref}`Function {number} <function-ie2>`.
 
 (function-ie2)=
+``````{prf:algorithm} ie2
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-ie2-julia
+:::
+```` 
 
-````{prf:function} ie2
-**Improved Euler method for an IVP**
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-ie2-matlab
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    ie2(ivp,n)
-
-Apply the Improved Euler method to solve the given IVP using `n`
-time steps. Returns a vector of times and a vector of solution
-values.
-"""
-function ie2(ivp,n)
-    # Time discretization.
-    a,b = ivp.tspan
-    h = (b-a)/n
-    t = [ a + i*h for i in 0:n ]
-
-    # Initialize output.
-    u = fill(float(ivp.u0),n+1)
-
-    # Time stepping.
-    for i in 1:n
-        uhalf = u[i] + h/2*ivp.f(u[i],ivp.p,t[i]);
-        u[i+1] = u[i] + h*ivp.f(uhalf,ivp.p,t[i]+h/2);
-    end
-    return t,u
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-ie2-python
+:::
 ````
+`````
+``````
 
 ## More Runge–Kutta methods
 
