@@ -225,6 +225,7 @@ title("Exponential convergence of solutions")
 In this case the actual condition number is one, because the initial difference between solutions is the largest over all time. Hence, the exponentially growing upper bound $e^{b-a}$ is a gross overestimate.
 ``````
 
+### Section 6.2
 (demo-euler-converge-python)=
 ``````{dropdown} Convergence of Euler's method
 We consider the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
@@ -285,6 +286,7 @@ legend()
 ```
 ``````
 
+### Section 6.3
 (demo-systems-predator-python)=
 ``````{dropdown} Predator-prey model
 We encode the predator–prey equations via a function.
@@ -390,6 +392,7 @@ title("Coupled pendulums");
 The coupling makes the pendulums swap energy back and forth.
 ``````
 
+### Section 6.4
 (demo-rk-converge-python)=
 ``````{dropdown} Convergence of Runge–Kutta methods
 We solve the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. We start by getting a reference solution to validate against.
@@ -435,6 +438,7 @@ title("Convergence of RK methods");
 The fourth-order variant is more efficient in this problem over a wide range of accuracy.
 ``````
 
+### Section 6.5
 (demo-adapt-basic-python)=
 ``````{dropdown} Adaptive step size
 Let's run adaptive RK on  $u'=e^{t-u\sin u}$.
@@ -496,6 +500,7 @@ legend();
 ```
 ``````
 
+### Section 6.6
 (demo-implicit-ab4-python)=
 ``````{dropdown} Convergence of Adams–Bashforth
 We study the convergence of AB4 using the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. As usual, `solve_ivp` is called to give an accurate reference solution.
@@ -582,6 +587,7 @@ legend()
 So AB4, which is supposed to be _more_ accurate than AM2, actually needs something like 8 times as many steps to get a reasonable-looking answer!
 ``````
 
+### Section 6.7
 (demo-zs-LIAF-python)=
 ``````{dropdown} Instability
 We'll measure the error at the time $t=1$.

@@ -109,6 +109,7 @@ using FundamentalsNumericalComputation
 FNC.init_format()
 ```
 
+### Section 6.1
 (demo-basics-first-julia)=
 ``````{dropdown} Solving an IVP
 The `DifferentialEquations` package offers solvers for IVPs. Let's use it to define and solve an initial-value problem for $u'=\sin[(u+t)^2]$ over $t \in [0,4]$, such that $u(0)=-1$.
@@ -208,6 +209,7 @@ plot(t, u, l=:black, ribbon=(lower, upper),
 In this case the actual condition number is one, because the initial difference between solutions is the largest over all time. Hence the exponentially growing bound $e^{b-a}$ is a gross overestimate.
 ``````
 
+### Section 6.2
 (demo-euler-converge-julia)=
 ``````{dropdown} Convergence of Euler's method
 We consider the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
@@ -269,6 +271,7 @@ plot!(n, 0.05 * (n / n[1]) .^ (-1), l=:dash, label=L"O(n^{-1})")
 ```
 ``````
 
+### Section 6.3
 (demo-systems-predator-julia)=
 ``````{dropdown} Predator-prey model
 We encode the predator–prey equations via a function.
@@ -395,6 +398,7 @@ plot(sol, idxs=[1, 2], label=[L"\theta_1" L"\theta_2"],
 The coupling makes the pendulums swap energy back and forth.
 ``````
 
+### Section 6.4
 (demo-rk-converge-julia)=
 ``````{dropdown} Convergence of Runge–Kutta methods
 We solve the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
@@ -442,6 +446,7 @@ plot!(4n, 1e-10 * (n / n[end]) .^ (-4), l=:dash, label=L"O(n^{-4})")
 The fourth-order variant is more efficient in this problem over a wide range of accuracy.
 ``````
 
+### Section 6.5
 (demo-adapt-basic-julia)=
 ``````{dropdown} Adaptive step size
 Let's run adaptive RK on  $u'=e^{t-u\sin u}$.
@@ -501,6 +506,7 @@ annotate!(tf, 1e5, latexstring(@sprintf("t = %.6f ", tf)), :right)
 ```
 ``````
 
+### Section 6.6
 (demo-implicit-ab4-julia)=
 ``````{dropdown} Convergence of Adams–Bashforth
 We study the convergence of AB4 using the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. As usual, `solve` is called to give an accurate reference solution.
@@ -581,6 +587,7 @@ plt
 So AB4, which is supposed to be _more_ accurate than AM2, actually needs something like 8 times as many steps to get a reasonable-looking answer!
 ``````
 
+### Section 6.7
 (demo-zs-LIAF-julia)=
 ``````{dropdown} Instability
 We'll measure the error at the time $t=1$.
