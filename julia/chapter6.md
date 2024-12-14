@@ -21,7 +21,7 @@ numbering:
 ```
 ::::{admonition} About the code
 :class: dropdown
-The structure created by `ODEFunction` contains the data used to define it, and it is accessed in {numref}`Function {number} <function-euler>` by dot notation, such as `ivp.f`.
+The `ivp` input argument is an `ODEProblem`, like in {numref}`Demo {number} <demo-basics-first>`. It has fields `ivp.f`, `ivp.tspan`, `ivp.u0`, and `ivp.p` that fully define the problem. The outputs are vectors of the nodes and approximate solution values at those nodes.
 ::::
 ``````
 
@@ -58,7 +58,7 @@ The structure created by `ODEFunction` contains the data used to define it, and 
 ```
 ::::{admonition} About the code
 :class: dropdown
-The check `t[i]+h==t[i]`on line 19 is to detect when $h$ has become so small that it no longer changes the floating-point value of $t_i$. This may be a sign that the underlying exact solution has a singularity near $t=t_i$, but in any case, the solver must halt by using a `break` statement to exit the loop.
+The check `t[i]+h == t[i]`on line 19 is to detect when $h$ has become so small that it no longer changes the floating-point value of $t_i$. This may be a sign that the underlying exact solution has a singularity near $t=t_i$, but in any case, the solver must halt by using a `break` statement to exit the loop.
 
 On line 30, we use a combination of absolute and relative tolerances to judge the acceptability of a solution value, as in {eq}`absreltolerance`. In lines 41--43 we underestimate the step factor $q$ a bit and prevent a huge increase in the step size, since a rejected step is expensive, and then we make sure that our final step doesn't take us past the end of the domain.
 

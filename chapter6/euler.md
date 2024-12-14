@@ -52,7 +52,7 @@ Then $u_i$ is approximately the value of the solution at $t=t_i$.
 
 Euler's method marches ahead in $t$, obtaining the solution at a new time level explicitly in terms of the latest value.
 
-A basic implementation of Euler's method is shown in {numref}`Function {number} <function-euler>`. It expects the IVP to be specified as an `ODEProblem`, as in {numref}`Demo {number} <demo-basics-first>`.  The output of {numref}`Function {number} <function-euler>` is a vector of the nodes and a vector of approximate solution values at those nodes.
+A basic implementation of Euler's method is shown in {numref}`Function {number} <function-euler>`. 
 
 (function-euler)=
 ``````{prf:algorithm} euler
@@ -76,6 +76,7 @@ A basic implementation of Euler's method is shown in {numref}`Function {number} 
 ````
 `````
 ``````
+
 
 ## Local truncation error
 

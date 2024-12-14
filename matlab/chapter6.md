@@ -12,13 +12,13 @@ numbering:
 
 (function-euler-matlab)=
 ``````{dropdown} Euler's method for an initial-value problem
-```{literalinclude} ../matlab/fnc/euler.m
+```{literalinclude} ../matlab/fnc/eulerivp.m
 :language: matlab
 :linenos: true
 ```
 ::::{admonition} About the code
 :class: dropdown
-The structure created by `ODEFunction` contains the data used to define it, and it is accessed in {numref}`Function {number} <function-euler>` by dot notation, such as `ivp.f`.
+The `ivp` input argument is the same structure that is used with the built-in `solve` solvers. The outputs `t` and `u` are row vectors of the same length, like the fields in a solution object output by `solve`. While the entries of `u` could be simplified to `u(1)`, `u(i)`, etc., we chose a column-access syntax like `u(:, i)` that will prove useful for what's coming next in the chapter.
 ::::
 ``````
 
@@ -46,12 +46,12 @@ The structure created by `ODEFunction` contains the data used to define it, and 
 ```
 ::::{admonition} About the code
 :class: dropdown
-The check `t[i]+h==t[i]`on line 19 is to detect when $h$ has become so small that it no longer changes the floating-point value of $t_i$. This may be a sign that the underlying exact solution has a singularity near $t=t_i$, but in any case, the solver must halt by using a `break` statement to exit the loop.
+The check `t(i) + h == t(i)`on line 24 is to detect when $h$ has become so small that it no longer changes the floating-point value of $t_i$. This may be a sign that the underlying exact solution has a singularity near $t=t_i$, but in any case, the solver must halt by using a `break` statement to exit the loop.
 
-On line 30, we use a combination of absolute and relative tolerances to judge the acceptability of a solution value, as in {eq}`absreltolerance`. In lines 41--43 we underestimate the step factor $q$ a bit and prevent a huge increase in the step size, since a rejected step is expensive, and then we make sure that our final step doesn't take us past the end of the domain.
+On line 36, we use a combination of absolute and relative tolerances to judge the acceptability of a solution value, as in {eq}`absreltolerance`. In lines 47--49 we underestimate the step factor $q$ a bit and prevent a huge increase in the step size, since a rejected step is expensive, and then we make sure that our final step doesn't take us past the end of the domain.
 
-Finally, line 37 exploits a subtle property of the BS23 formula called *first same as last* (FSAL).
-While {eq}`bs23` calls for four stages to find the paired second- and third-order estimates, the final stage computed in stepping from $t_i$ to $t_{i+1}$ is identical to the first stage needed to step from $t_{i+1}$ to $t_{i+2}$. By repurposing `s₄` as `s₁` for the next pass, one of the stage evaluations comes for free, and only three evaluations of $f$ are needed per successful step.
+Finally, line 43 exploits a subtle property of the BS23 formula called *first same as last* (FSAL).
+While {eq}`bs23` calls for four stages to find the paired second- and third-order estimates, the final stage computed in stepping from $t_i$ to $t_{i+1}$ is identical to the first stage needed to step from $t_{i+1}$ to $t_{i+2}$. By repurposing `s4` as `s1` for the next pass, one of the stage evaluations comes for free, and only three evaluations of $f$ are needed per successful step.
 ::::
 
 ``````
@@ -64,9 +64,9 @@ While {eq}`bs23` calls for four stages to find the paired second- and third-orde
 ```
 ::::{admonition} About the code
 :class: dropdown
-Line 15 sets `σ` to be the coefficients of the generating polynomial $\sigma(z)$ of AB4. Lines 19--21 set up the IVP over the time interval $a \le t \le a+3 h$, call `rk4` to solve it using the step size $h$, and use the result to fill the first four values of the solution. Then line 24 computes the vector $[f_2,f_1,f_0]$.
+Line 21 sets `sigma` to be the coefficients of the generating polynomial $\sigma(z)$ of AB4. Lines 24--26 set up the IVP over the time interval $a \le t \le a+3 h$, call `rk4` to solve it using the step size $h$, and use the result to fill the first four values of the solution. Then lines 29--32 compute the vector $[f_2,f_1,f_0]$.
 
-Line 28 computes $f_i$, based on the most recent solution value and time. That goes into the first spot of `f`, followed by the three values that were previously most recent. These are the four values that appear in {eq}`ab4`. Each particular $f_i$ value starts at the front of `f`, moves through each position in the vector over three iterations, and then is forgotten.
+Line 36 computes $f_i$, based on the most recent solution value and time. That goes into the first column of `f`, followed by the three values that were previously most recent. These are the four values that appear in {eq}`ab4`. Each particular $f_i$ value starts at the front of `f`, moves through each position in the vector over three iterations, and then is forgotten.
 ::::
 ``````
 
@@ -78,7 +78,7 @@ Line 28 computes $f_i$, based on the most recent solution value and time. That g
 ```
 ::::{admonition} About the code
 :class: dropdown
-Lines 22-23 define the function $\mathbf{g}$ and call `levenberg` to find the new solution value, using an Euler half-step as its starting value. A robust code would have to intercept the case where `levenberg` fails to converge, but we have ignored this issue for the sake of brevity.
+Lines 32--34 define the function $\mathbf{g}$. This is sent to `levenberg` in line~27 to find the new solution value, using an Euler half-step as its starting value. A robust code would have to intercept the case where `levenberg` fails to converge, but we have ignored this issue for the sake of brevity.
 ::::
 ``````
 
@@ -262,7 +262,7 @@ We encode the predator–prey equations via a function, defined here externally.
 :language: matlab
 ```
 
-In this case, the ODE function accepts the required inputs `t` and `u` as well as a vector of parameters whose values don't change throughout a single instance of the problem. Now we can specify and solve the IVP like before, also giving a value for the parameter vector.
+The values of `alpha` and `beta` are parameters that influence the solution of the IVP. We use the `Parameters` field of the IVP object to define them for the solver, which in turn passes them as the third argument into our ODE function. 
 
 ```{code-cell}
 u0 = [1; 0.01];    % column vector
@@ -289,7 +289,7 @@ legend('prey', 'predator')  % ignore this line
 We can also use {numref}`Function {number} <function-euler>` to find the solution.
 
 ```{code-cell}
-[t, u] = eulersys(ivp, 0, 60, 1200);
+[t, u] = eulerivp(ivp, 0, 60, 1200);
 ```
 
 ```{code-cell}
