@@ -226,3 +226,5 @@ site:
   options:
     favicon: favicon.png
     logo: _static/FNClogo.png
+  domains:
+    - tobydriscoll.curve.space
