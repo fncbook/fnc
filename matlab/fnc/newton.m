@@ -16,13 +16,14 @@ dx = Inf;   % for initial pass below
 k = 1;
 
 while (abs(dx) > xtol) && (abs(y) > funtol) && (k < maxiter)
-  dydx = dfdx(x(k));
-  dx = -y/dydx;           % Newton step
-  x(k+1) = x(k) + dx;
+    dydx = dfdx(x(k));
+    dx = -y/dydx;           % Newton step
+    x(k+1) = x(k) + dx;
 
-  k = k+1;
-  y = f(x(k));
+    k = k+1;
+    y = f(x(k));
 end
 
-if k==maxiter, warning('Maximum number of iterations reached.'), end
-
+if k==maxiter
+  warning('Maximum number of iterations reached.')
+end

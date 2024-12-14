@@ -15,12 +15,13 @@ dx = Inf;
 k = 1;
 
 while (norm(dx) > xtol) && (norm(y) > funtol) && (k < maxiter)
-  dx = -(J\y);   % Newton step
-  x(:,k+1) = x(:,k) + dx;
+    dx = -(J\y);   % Newton step
+    x(:,k+1) = x(:,k) + dx;
 
-  k = k+1;
-  [y,J] = f(x(:,k));
+    k = k+1;
+    [y,J] = f(x(:,k));
 end
 
-if k==maxiter, warning('Maximum number of iterations reached.'), end
-
+if k==maxiter
+    warning('Maximum number of iterations reached.')
+end

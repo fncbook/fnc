@@ -14,8 +14,8 @@ x = x/norm(x,inf);
 B = A - s*eye(n);
 [L,U] = lu(B);
 for k = 1:numiter
-  y = U \ (L\x);
-  [normy,m] = max(abs(y));
-  gamma(k) = x(m)/y(m) + s;
-  x = y/y(m);
+    y = U \ (L\x);
+    [normy,m] = max(abs(y));
+    gamma(k) = x(m)/y(m) + s;
+    x = y/y(m);
 end 

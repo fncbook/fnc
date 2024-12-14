@@ -17,4 +17,3 @@ x = tanh(pi/2*sinh(t));
 dxdt = pi/2*cosh(t) ./ (cosh(pi/2*sinh(t)).^2);
 
 I = h*sum( f(x).*dxdt );
-

@@ -28,5 +28,3 @@ b(d.isbndy) = scale*g( X(d.isbndy),Y(d.isbndy) );  % assigned values
 % Solve the linear sytem and reshape the output.
 u = A\b;
 U = d.unvec(u);
-
-end

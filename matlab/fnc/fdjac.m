@@ -14,5 +14,3 @@ I = eye(n);
 for j = 1:n
     J(:,j) = ( f(x0+delta*I(:,j)) - y0) / delta;
 end
-
-end

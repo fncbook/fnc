@@ -23,4 +23,3 @@ for k = 1:n
 end
 L = tril(L(p, :));
 U = triu(U);
-end

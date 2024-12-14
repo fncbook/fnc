@@ -29,6 +29,4 @@ Dxx = diag(dp,-1) + diag(d0) + diag(dp,1);
 % Fix first and last rows.
 Dxx(1,1:4) = [2,-5,4,-1]/h^2;
 Dxx(n+1,n-2:n+1) = [-1,4,-5,2]/h^2;
-
-end
     

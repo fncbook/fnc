@@ -25,5 +25,3 @@ disc.isbndy(2:m,2:n) = false;
 
 disc.vec = @(U) U(:);
 disc.unvec = @(u) reshape(u,m+1,n+1);
-
-end

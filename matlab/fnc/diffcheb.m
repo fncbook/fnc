@@ -31,6 +31,3 @@ Dx = 2*Dx/(b-a);
 
 % Second derivative
 Dxx = Dx^2;
-
-end
-    

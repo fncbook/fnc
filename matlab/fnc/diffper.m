@@ -26,6 +26,4 @@ dm =  dp;                    % subdiagonal
 Dxx = diag(dm,-1) + diag(d0) + diag(dp,1);
 Dxx(1,n) = 1/(h^2);
 Dxx(n,1) = 1/(h^2);
-
-end
     

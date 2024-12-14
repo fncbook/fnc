@@ -50,6 +50,3 @@ end
 if (norm(fk) > 1e-3)
     warning('Iteration did not find a root.')
 end
-
-end
-

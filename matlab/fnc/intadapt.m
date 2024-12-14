@@ -39,5 +39,4 @@ m = (b+a)/2;
         end        
     end
 
-end
-
+end  % main function
