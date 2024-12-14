@@ -35,3 +35,4 @@ python/Chapter??.md
 python/pkg/build/*
 python/pkg/dist/*
 python/pkg/FNC.egg-info
+**/tmp.*
