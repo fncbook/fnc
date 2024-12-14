@@ -70,10 +70,8 @@ The intended way for a user to call {numref}`Function {number} <function-intadap
 ```{code-cell}
 :tags: [remove-cell]
 addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
-format short
-set(0, 'defaultaxesfontsize', 12)
-set(0, 'defaultlinelinewidth', 1.5, 'defaultscattermarkerfacecolor', 'k')
-set(0, 'defaultFunctionLinelinewidth', 1.5)
+addpath /Users/driscoll/Documents/GitHub/fnc/matlab
+FNC_init
 ```
 
 ### Section 5.1
@@ -191,26 +189,21 @@ Let's define a set of four nodes (i.e., $n=3$ in our formulas).
 ```
 
 ```{code-cell}
-t = [0, 0.55, 0.7, 1]
+t = [0, 0.55, 0.7, 1];
 ```
 
-::::{grid} 1 1 2 2
 We plot the hat functions $H_0,\ldots,H_3$.
-:::{card}
-Use `annotate!` to add text to a plot.
-:::
-::::
 
 ```{code-cell}
-plt = plot(layout=(4, 1), legend=:top,
-    xlabel=L"x", ylims=[-0.1, 1.1], ytick=[])
-for k in 0:3
-    Hₖ = FNC.hatfun(t, k)
-    plot!(Hₖ, 0, 1, subplot=k + 1)
-    scatter!(t, Hₖ.(t), m=3, subplot=k + 1)
-    annotate!(t[k+1], 0.25, text(latexstring("H_$k"), 10), subplot=k + 1)
+clf
+for k = 0:3
+    subplot(4, 1, k+1)
+    Hk = @(x) hatfun(x, t, k);
+    fplot(Hk, [0, 1])
+    hold on
+    scatter(t, Hk(t))
+    text(t(k+1), 0.6, sprintf("H_%d", k))
 end
-plt
 ```
 ``````
 
@@ -219,25 +212,28 @@ plt
 We generate a piecewise linear interpolant of $f(x)=e^{\sin 7x}$.
 
 ```{code-cell}
-f = x -> exp(sin(7 * x))
-
-plot(f, 0, 1, label="function", xlabel=L"x", ylabel=L"y")
+f = @(x) exp(sin(7 * x));
+clf
+fplot(f, [0, 1], displayname="function")
+xlabel("x");  ylabel("y")
 ```
 
 First we sample the function to create the data.
 
 ```{code-cell}
-t = [0, 0.075, 0.25, 0.55, 0.7, 1]    # nodes
-y = f.(t)                             # function values
-
-scatter!(t, y, label="values at nodes")
+t = [0, 0.075, 0.25, 0.55, 0.7, 1];    % nodes
+y = f(t);                              % function values
 ```
 
 Now we create a callable function that will evaluate the piecewise linear interpolant at any $x$, and then plot it.
 
 ```{code-cell}
-p = FNC.plinterp(t, y)
-plot!(p, 0, 1, label="interpolant", title="PL interpolation")
+p = plinterp(t, y);
+hold on
+fplot(p, [0, 1], displayname="interpolant")
+scatter(t, y, displayname="values at nodes")
+title("PL interpolation")
+legend()
 ```
 ``````
 
@@ -246,31 +242,29 @@ plot!(p, 0, 1, label="interpolant", title="PL interpolation")
 We measure the convergence rate for piecewise linear interpolation of $e^{\sin 7x}$ over $x \in [0,1]$.
 
 ```{code-cell}
-f = x -> exp(sin(7 * x))
-x = range(0, 1, length=10001)  # sample the difference at many points
-n = @. round(Int, 10^(1:0.25:3.5))
-maxerr = zeros(0)
-for n in n
-    t = (0:n) / n    # interpolation nodes
-    p = FNC.plinterp(t, f.(t))
-    err = @. f(x) - p(x)
-    push!(maxerr, norm(err, Inf))
+f = @(x) exp(sin(7 * x));
+x = linspace(0, 1, 10001)';    % sample the difference at many points
+n = round(10.^(1:0.25:3.5))';
+maxerr = zeros(size(n));
+for i = 1:length(n)
+    t = (0:n(i)) / n(i);       % interpolation nodes
+    p = plinterp(t, f(t));
+    maxerr(i) = norm(f(x) - p(x), Inf);
 end
-
-data = (n=n[1:4:end], err=maxerr[1:4:end])
-pretty_table(data, header=["n", "max-norm error"])
+disp(table(n(1:4:end), maxerr(1:4:end), variableNames=["n", "inf-norm error"]))
 ```
 
-As predicted, a factor of 10 in $n$ produces a factor of 100 in the error. In a convergence plot, it is traditional to have $h$ *decrease* from left to right, so we expect a straight line of slope $-2$ on a log-log plot.
+As predicted, a factor of 10 in $n$ produces a factor of 100 reduction in the error. In a convergence plot, it is traditional to have $h$ *decrease* from left to right, so we expect a straight line of slope $-2$ on a log-log plot.
 
 ```{code-cell}
-h = @. 1 / n
-order2 = @. 10 * (h / h[1])^2
-
-plot(h, maxerr, m=:o, label="error")
-plot!(h, order2, l=:dash, label=L"O(h^2)", xflip=true,
-    xaxis=(:log10, L"h"), yaxis=(:log10, L"|| f-p\, ||_\infty"),
-    title="Convergence of PL interpolation")
+clf
+loglog(n, maxerr, "-o", displayname="error")
+order2 = 0.5 * maxerr(end) * (n / n(end)) .^ (-2);
+hold on
+loglog(n, order2, "k--", displayname="O(n^{-2})")
+xlabel("n");  ylabel("|| f-p ||_{\infty}")
+title("Convergence of PL interpolation")
+legend()
 ```
 ``````
 
@@ -281,47 +275,46 @@ plot!(h, order2, l=:dash, label=L"O(h^2)", xflip=true,
 For illustration, here is a spline interpolant using just a few nodes.
 
 ```{code-cell}
-f = x -> exp(sin(7 * x))
+clf
+f = @(x) exp(sin(7 * x));
+fplot(f, [0, 1], displayname="function")
 
-plot(f, 0, 1, label="function", xlabel=L"x", ylabel=L"y")
+t = [0, 0.075, 0.25, 0.55, 0.7, 1];    % nodes
+y = f(t);                              % values at nodes
+hold on, scatter(t, y, displayname="values at nodes")
 
-t = [0, 0.075, 0.25, 0.55, 0.7, 1]  # nodes
-y = f.(t)                           # values at nodes
+S = spinterp(t, y);
+fplot(S, [0, 1], displayname="spline")
 
-scatter!(t, y, label="values at nodes")
-```
-
-```{code-cell}
-S = FNC.spinterp(t, y)
-
-plot!(S, 0, 1, label="spline")
+xlabel("x");  ylabel("y")
+legend()
 ```
 
 Now we look at the convergence rate as the number of nodes increases.
 
 ```{code-cell}
-x = (0:10000) / 1e4              # sample the difference at many points
-n = @. round(Int, 2^(3:0.5:7))  # numbers of nodes
-err = zeros(0)
-for n in n
-    t = (0:n) / n
-    S = FNC.spinterp(t, f.(t))
-    dif = @. f(x) - S(x)
-    push!(err, norm(dif, Inf))
+x = (0:10000)' / 1e4;              % sample the difference at many points
+n = round(2 .^ (3:0.5:7))';        % numbers of nodes
+maxerr = zeros(size(n));
+for i = 1:length(n)
+    t = (0:n(i))' / n(i);
+    S = spinterp(t, f(t));
+    err = f(x) - S(x);
+    maxerr(i) = norm(err, Inf);
 end
-
-pretty_table((; n, err), header=["n", "error"])
+disp(table(n(1:2:end), maxerr(1:2:end), variableNames=["n", "inf-norm error"]))
 ```
 
 Since we expect convergence that is $O(h^4)=O(n^{-4})$, we use a log-log graph of error and expect a straight line of slope $-4$.
 
 ```{code-cell}
-order4 = @. (n / n[1])^(-4)
-
-plot(n, [err order4], m=[:o :none], l=[:solid :dash],
-    label=["error" "4th order"],
-    xaxis=(:log10, "n"), yaxis=(:log10, L"|| f-S\,||_\infty"),
-    title="Convergence of spline interpolation")
+clf
+loglog(n, maxerr, "-o", displayname="error")
+order4 = 0.5 * maxerr(end) * (n / n(end)) .^ (-4);
+hold on
+loglog(n, order4, "k--", displayname="O(n^{-4})")
+xlabel("n");  ylabel("|| f-S ||_{\infty}")
+title("Convergence of spline interpolation")
 ```
 ``````
 
@@ -332,32 +325,30 @@ plot(n, [err order4], m=[:o :none], l=[:solid :dash],
 If $f(x)=e^{\,\sin(x)}$, then $f'(0)=1$.
 
 ```{code-cell}
-f = x -> exp(sin(x));
+f = @(x) exp(sin(x));
 ```
 
 Here are the first two centered differences from {numref}`table-FDcenter`.
 
 ```{code-cell}
-h = 0.05
-CD2 = (-f(-h) + f(h)) / 2h
-CD4 = (f(-2h) - 8f(-h) + 8f(h) - f(2h)) / 12h
-@show (CD2, CD4);
+h = 0.05;
+format long
+CD2 = (-f(-h) + f(h)) / (2*h)
+CD4 = (f(-2*h) - 8*f(-h) + 8*f(h) - f(2*h)) / (12*h)
 ```
 
 Here are the first two forward differences from {numref}`table-FDforward`.
 
 ```{code-cell}
 FD1 = (-f(0) + f(h)) / h
-FD2 = (-3f(0) + 4f(h) - f(2h)) / 2h
-@show (FD1, FD2);
+FD2 = (-3*f(0) + 4*f(h) - f(2*h)) / (2*h)
 ```
 
 Finally, here are the backward differences that come from reverse-negating the forward differences.
 
 ```{code-cell}
 BD1 = (-f(-h) + f(0)) / h
-BD2 = (f(-2h) - 4f(-h) + 3f(0)) / 2h
-@show (BD1, BD2);
+BD2 = (f(-2*h) - 4*f(-h) + 3*f(0)) / (2*h)
 ```
 ``````
 
@@ -366,31 +357,29 @@ BD2 = (f(-2h) - 4f(-h) + 3f(0)) / 2h
 If $f(x)=e^{\,\sin(x)}$, then $f''(0)=1$.
 
 ```{code-cell}
-f = x -> exp(sin(x));
+f = @(x) exp(sin(x));
 ```
 
 Here is a centered estimate given by {eq}`centerFD22`.
 
 ```{code-cell}
-h = 0.05
-CD2 = (f(-h) - 2f(0) + f(h)) / h^2
-@show CD2;
+h = 0.05;
+format long
+CD2 = (f(-h) - 2*f(0) + f(h)) / h^2
 ```
 
 For the same $h$, here are forward estimates given by {eq}`forwardFD21` and {eq}`forwardFD22`.
 
 ```{code-cell}
-FD1 = (f(0) - 2f(h) + f(2h)) / h^2
-FD2 = (2f(0) - 5f(h) + 4f(2h) - f(3h)) / h^2
-@show (FD1, FD2);
+FD1 = (f(0) - 2*f(h) + f(2*h)) / h^2
+FD2 = (2*f(0) - 5*f(h) + 4*f(2*h) - f(3*h)) / h^2
 ```
 
 Finally, here are the backward estimates that come from reversing {eq}`forwardFD21` and {eq}`forwardFD22`.
 
 ```{code-cell}
-BD1 = (f(-2h) - 2f(-h) + f(0)) / h^2
-BD2 = (-f(-3h) + 4f(-2h) - 5f(-h) + 2f(0)) / h^2
-@show (BD1, BD2);
+BD1 = (f(-2*h) - 2*f(-h) + f(0)) / h^2
+BD2 = (-f(-3*h) + 4*f(-2*h) - 5*f(-h) + 2*f(0)) / h^2
 ```
 ``````
 
@@ -399,38 +388,31 @@ BD2 = (-f(-3h) + 4f(-2h) - 5f(-h) + 2f(0)) / h^2
 We will estimate the derivative of $\cos(x^2)$ at $x=0.5$ using five nodes.
 
 ```{code-cell}
-t = [0.35, 0.5, 0.57, 0.6, 0.75]   # nodes
-f = x -> cos(x^2)
-dfdx = x -> -2 * x * sin(x^2)
+t = [0.35, 0.5, 0.57, 0.6, 0.75];    % nodes
+f = @(x) cos(x.^2);
+dfdx = @(x) -2 * x * sin(x^2);
 exact_value = dfdx(0.5)
 ```
 
 We have to shift the nodes so that the point of estimation for the derivative is at $x=0$. (To subtract a scalar from a vector, we must use the `.-` operator.)
 
 ```{code-cell}
-w = FNC.fdweights(t .- 0.5, 1)
+format short
+w = fdweights(t - 0.5, 1)
 ```
 
 The finite-difference formula is a dot product (i.e., inner product) between the vector of weights and the vector of function values at the nodes.
 
 ```{code-cell}
-fd_value = dot(w, f.(t))
+fd_value = w * f(t)'
 ```
 
 We can reproduce the weights in the finite-difference tables by using equally spaced nodes with $h=1$. For example, here is a one-sided formula at four nodes.
 
 ```{code-cell}
-FNC.fdweights(0:3, 1)
+fdweights(0:3, 1)
 ```
 
-```{index} ! Julia; Rational
-```
-
-By giving nodes of type `Rational`, we can get exact values instead.
-
-```{code-cell}
-FNC.fdweights(Rational.(0:3), 1)
-```
 ``````
 
 ### Section 5.5
@@ -440,31 +422,30 @@ FNC.fdweights(Rational.(0:3), 1)
 Let's observe the convergence of the formulas in {numref}`Example {number} <example-fd-converge-FD11>` and {numref}`Example {number} <example-fd-converge-FD12>`, applied to the function $\sin(e^{x+1})$ at $x=0$.
 
 ```{code-cell}
-f = x -> sin(exp(x + 1))
+f = @(x) sin(exp(x + 1));
 exact_value = exp(1) * cos(exp(1))
 ```
 
 We'll compute the formulas in parallel for a sequence of $h$ values.
 
 ```{code-cell}
-h = [5 / 10^n for n in 1:6]
-FD1 = [];
-FD2 = [];
-for h in h
-    push!(FD1, (f(h) - f(0)) / h)
-    push!(FD2, (f(h) - f(-h)) / 2h)
+h = 5 ./ 10.^(1:6)';
+FD1 = zeros(size(h));
+FD2 = zeros(size(h));
+for i = 1:length(h)
+    h_i = h(i);
+    FD1(i) = (f(h_i) - f(0)    ) / h_i;
+    FD2(i) = (f(h_i) - f(-h_i)) / (2*h_i);
 end
-
-pretty_table([h FD1 FD2], header=["h", "FD1", "FD2"])
+disp(table(h, FD1, FD2))
 ```
 
 All that's easy to see from this table is that FD2 appears to converge to the same result as FD1, but more rapidly. A table of errors is more informative.
 
 ```{code-cell}
-error_FD1 = @. exact_value - FD1
-error_FD2 = @. exact_value - FD2
-table = [h error_FD1 error_FD2]
-pretty_table(table, header=["h", "error in FD1", "error in FD2"])
+err1 = abs(exact_value - FD1);
+err2 = abs(exact_value - FD2);
+disp(table(h, err1, err2, variableNames=["h", "error in FD1", "error in FD2"]))
 ```
 
 In each row, $h$ is decreased by a factor of 10, so that the error is reduced by a factor of 10 in the first-order method and 100 in the second-order method.
@@ -472,12 +453,16 @@ In each row, $h$ is decreased by a factor of 10, so that the error is reduced by
 A graphical comparison can be useful as well. On a log-log scale, the error should (as $h\to 0$) be a straight line whose slope is the order of accuracy. However, it's conventional in convergence plots to show $h$ _decreasing_ from left to right, which negates the slopes.
 
 ```{code-cell}
-plot(h, abs.([error_FD1 error_FD2]), m=:o, label=["FD1" "FD2"],
-    xflip=true, xaxis=(:log10, L"h"), yaxis=(:log10, "error"),
-    title="Convergence of finite differences", leg=:bottomleft)
-
-# Add lines for perfect 1st and 2nd order.
-plot!(h, [h h .^ 2], l=:dash, label=[L"O(h)" L"O(h^2)"])
+clf
+loglog(h, abs([err1 err2]), "o-")
+set(gca, "xdir", "reverse")
+order1 = 0.1 * err1(end) * (h / h(end)) .^ 1;
+order2 = 0.1 * err2(end) * (h / h(end)) .^ 2;
+hold on
+loglog(h, order1, "--", h, order2, "--")
+xlabel("h");  ylabel("error")
+title("Convergence of finite differences")
+legend("FD1", "FD2", "O(h)", "O(h^2)")
 ```
 ``````
 
@@ -486,34 +471,36 @@ plot!(h, [h h .^ 2], l=:dash, label=[L"O(h)" L"O(h^2)"])
 Let $f(x)=e^{-1.3x}$. We apply finite-difference formulas of first, second, and fourth order to estimate $f'(0)=-1.3$.
 
 ```{code-cell}
-f = x -> exp(-1.3 * x);
-exact = -1.3
+f = @(x) exp(-1.3 * x);
+exact = -1.3;
 
-h = [1 / 10^n for n in 1:12]
-FD1, FD2, FD4 = [], [], []
-for h in h
-    nodes = h * (-2:2)
-    vals = @. f(nodes)
-    push!(FD1, dot([0 0 -1 1 0] / h, vals))
-    push!(FD2, dot([0 -1 / 2 0 1 / 2 0] / h, vals))
-    push!(FD4, dot([1 / 12 -2 / 3 0 2 / 3 -1 / 12] / h, vals))
+h = 10 .^ (-(1:12))';
+FD = zeros(length(h), 3);
+for i = 1:length(h)
+    h_i = h(i);
+    nodes = h_i * (-2:2);
+    vals = f(nodes);
+    FD(i, 1) = dot([0      0 -1   1    0] / h_i, vals);
+    FD(i, 2) = dot([0    -1/2 0 1/2    0] / h_i, vals);
+    FD(i, 3) = dot([1/12 -2/3 0 2/3 -1/12] / h_i, vals);
 end
-
-table = [h FD1 FD2 FD4]
-pretty_table(table[1:4, :], header=["h", "FD1", "FD2", "FD4"])
+format long
+disp(table(h, FD(:, 1), FD(:, 2), FD(:, 3), variableNames=["h", "FD1", "FD2", "FD4"]))
 ```
 
 They all seem to be converging to $-1.3$. The convergence plot reveals some interesting structure to the errors, though.
 
 ```{code-cell}
-err = @. abs([FD1 FD2 FD4] - exact)
-
-plot(h, err, m=:o, label=["FD1" "FD2" "FD4"],
-    xaxis=(:log10, L"h"), xflip=true, yaxis=(:log10, "error"),
-    title="FD error with roundoff", legend=:bottomright)
-
-# Add line for perfect 1st order.
-plot!(h, 0.1 * eps() ./ h, l=:dash, color=:black, label=L"O(h^{-1})")
+err = abs(FD - exact);
+clf
+loglog(h, err, "o-")
+set(gca, "xdir", "reverse")
+order1 = 0.1 * err(end, 1) * (h / h(end)) .^ (-1);
+hold on
+loglog(h, order1, "k--")
+xlabel("h");  ylabel("error")
+title("FD error with roundoff")
+legend("FD1", "FD2", "FD4", "O(1/h)", "location", "northeast")
 ```
 
 Again the graph is made so that $h$ decreases from left to right. The errors are dominated at first by truncation error, which decreases most rapidly for the fourth-order formula. However, increasing roundoff error eventually equals and then dominates the truncation error as $h$ continues to decrease. As the order of accuracy increases, the crossover point moves to the left (greater efficiency) and down (greater accuracy).
@@ -525,31 +512,36 @@ Again the graph is made so that $h$ decreases from left to right. The errors are
 The antiderivative of $e^x$ is, of course, itself. That makes evaluation of $\int_0^1 e^x\,dx$ by the Fundamental Theorem trivial.
 
 ```{code-cell}
+format long
 exact = exp(1) - 1
 ```
 
-```{index} ! Julia; quadgk
+```{index} ! MATLAB; integral
 ```
 
-The Julia package `QuadGK` has an all-purpose numerical integrator that estimates the value without finding the antiderivative first. As you can see here, it's often just as accurate.
+MATLAB has numerical integrator `integral` that estimates the value without finding the antiderivative first. As you can see here, it can be as accurate as floating-point precision allows.
 
 ```{code-cell}
-Q, errest = quadgk(x -> exp(x), 0, 1)
-@show Q;
+integral(@(x) exp(x), 0, 1)
 ```
 
 The numerical approach is also far more robust. For example, $e^{\,\sin x}$ has no useful antiderivative. But numerically, it's no more difficult.
 
 ```{code-cell}
-Q, errest = quadgk(x -> exp(sin(x)), 0, 1)
-@show Q;
+integral(@(x) exp(sin(x)), 0, 1)
 ```
 
 When you look at the graphs of these functions, what's remarkable is that one of these areas is basic calculus while the other is almost impenetrable analytically. From a numerical standpoint, they are practically the same problem.
 
 ```{code-cell}
-plot([exp, x -> exp(sin(x))], 0, 1, fill=0, layout=(2, 1),
-    xlabel=L"x", ylabel=[L"e^x" L"e^{\sin(x)}"], ylim=[0, 2.7])
+:tags: hide-input
+x = linspace(0, 1, 201)';
+subplot(2,1,1), fill([x; 1; 0], [exp(x); 0;0 ], [1, 0.9, 0.9])
+title('exp(x)')  % ignore this line
+ylabel('f(x)')    % ignore this line
+subplot(2, 1, 2), fill([x; 1; 0], [exp(sin(x)); 0; 0], [1, 0.9, 0.9])
+title('exp(sin(x))')  % ignore this line
+xlabel('x'), ylabel('f(x)')    % ignore this line
 ```
 ``````
 
@@ -558,53 +550,46 @@ plot([exp, x -> exp(sin(x))], 0, 1, fill=0, layout=(2, 1),
 We will approximate the integral of the function $f(x)=e^{\sin 7x}$ over the interval $[0,2]$.
 
 ```{code-cell}
-f = x -> exp(sin(7 * x));
-a = 0;
-b = 2;
+f = @(x) exp(sin(7 * x));
+a = 0;  b = 2;
 ```
 
-::::{grid} 1 1 2 2
-In lieu of the exact value, we use the `QuadGK` package to find an accurate result.
-:::
-:::{card}
-If a function has multiple return values, you can use an underscore `_` to indicate a  return value you want to ignore.
-:::
-::::
+In lieu of the exact value, we use the `integral` function to find an accurate result.
 
 ```{code-cell}
-Q, _ = quadgk(f, a, b, atol=1e-14, rtol=1e-14);
-println("Integral = $Q")
+I = integral(f, a, b, abstol=1e-14, reltol=1e-14);
+fprintf("Integral = %.15f", I)
 ```
 
 Here is the trapezoid result at $n=40$, and its error.
 
 ```{code-cell}
-T, t, y = FNC.trapezoid(f, a, b, 40)
-@show (T, Q - T);
+T = trapezoid(f, a, b, 40);
+fprintf("Trapezoid error = %.2e", I - T)
 ```
 
 In order to check the order of accuracy, we increase $n$ by orders of magnitude and observe how the error decreases.
 
 ```{code-cell}
-n = [10^n for n in 1:5]
-err = []
-for n in n
-    T, t, y = FNC.trapezoid(f, a, b, n)
-    push!(err, Q - T)
+n = 10 .^ (1:5)';
+err = zeros(size(n));
+for i = 1:length(n)
+    T = trapezoid(f, a, b, n(i));
+    err(i) = I - T;
 end
-
-pretty_table([n err], header=["n", "error"])
+disp(table(n, err, variableNames=["n", "Trapezoid error"]))
 ```
 
 Each increase by a factor of 10 in $n$ cuts the error by a factor of about 100, which is consistent with second-order convergence. Another check is that a log-log graph should give a line of slope $-2$ as $n\to\infty$.
 
 ```{code-cell}
-plot(n, abs.(err), m=:o, label="results",
-    xaxis=(:log10, L"n"), yaxis=(:log10, "error"),
-    title="Convergence of trapezoidal integration")
-
-# Add line for perfect 2nd order.
-plot!(n, 3e-3 * (n / n[1]) .^ (-2), l=:dash, label=L"O(n^{-2})")
+clf
+loglog(n, abs(err), "-o", displayname="trapezoid")
+hold on
+loglog(n, 0.1 * abs(err(end)) * (n / n(end)).^(-2), "k--", displayname="O(n^{-2})")
+xlabel("n");  ylabel("error")
+title("Convergence of trapezoidal integration")
+legend()
 ```
 ``````
 
@@ -613,69 +598,63 @@ plot!(n, 3e-3 * (n / n[1]) .^ (-2), l=:dash, label=L"O(n^{-2})")
 We estimate $\displaystyle\int_0^2 x^2 e^{-2x}\, dx$ using extrapolation. First we use `quadgk` to get an accurate value.
 
 ```{code-cell}
-f = x -> x^2 * exp(-2 * x);
-a = 0;
-b = 2;
-Q, _ = quadgk(f, a, b, atol=1e-14, rtol=1e-14)
-@show Q;
+f = @(x) x.^2 .* exp(-2 * x);
+a = 0;  b = 2;
+format long
+I = integral(f, a, b, abstol=1e-14, reltol=1e-14)
 ```
 
 We start with the trapezoid formula on $n=N$ nodes.
 
 ```{code-cell}
-N = 20;       # the coarsest formula
-n = N;
-h = (b - a) / n;
-t = h * (0:n);
-y = f.(t);
+N = 20;       % the coarsest formula
+n = N;  h = (b - a) / n;
+t = h * (0:n)';
+y = f(t);
 ```
 
 We can now apply weights to get the estimate $T_f(N)$.
 
 ```{code-cell}
-T = [h * (sum(y[2:n]) + y[1] / 2 + y[n+1] / 2)]
+T = h * ( sum(y(2:n)) + y(1) / 2 + y(n+1) / 2 )
 ```
 
 Now we double to $n=2N$, but we only need to evaluate $f$ at every other interior node and apply {eq}`nc-doubling`.
 
 ```{code-cell}
-n = 2n;
-h = h / 2;
-t = h * (0:n);
-T = [T; T[end] / 2 + h * sum(f.(t[2:2:n]))]
+n = 2*n;  h = h / 2;
+t = h * (0:n)';
+T(2) = T(1) / 2 + h * sum( f(t(2:2:n)) )
 ```
 
 We can repeat the same code to double $n$ again.
 
 ```{code-cell}
-n = 2n;
-h = h / 2;
-t = h * (0:n);
-T = [T; T[end] / 2 + h * sum(f.(t[2:2:n]))]
+n = 2*n;  h = h / 2;
+t = h * (0:n)';
+T(3) = T(2) / 2 + h * sum( f(t(2:2:n)) )
 ```
 
 Let us now do the first level of extrapolation to get results from Simpson's formula. We combine the elements `T[i]` and `T[i+1]` the same way for $i=1$ and $i=2$.
 
 ```{code-cell}
-S = [(4T[i+1] - T[i]) / 3 for i in 1:2]
+S = (4 * T(2:3) - T(1:2)) / 3
 ```
 
 With the two Simpson values $S_f(N)$ and $S_f(2N)$ in hand, we can do one more level of extrapolation to get a sixth-order accurate result.
 
 ```{code-cell}
-R = (16S[2] - S[1]) / 15
+R = (16*S(2) - S(1)) / 15
 ```
 
-::::{grid} 1 1 2 2
 We can make a triangular table of the errors:
-:::{card}
-The value `nothing` equals nothing except `nothing`.
-:::
-::::
 
 ```{code-cell}
-err = [T .- Q [nothing; S .- Q] [nothing; nothing; R - Q]]
-pretty_table(err, header=["order 2", "order 4", "order 6"])
+err2 = T(:) - I;
+err4 = [NaN; S(:) - I];
+err6 = [NaN; NaN; R - I];
+format short e
+disp(table(err2, err4, err6, variablenames=["order 2", "order 4", "order 6"]))
 ```
 
 If we consider the computational time to be dominated by evaluations of $f$, then we have obtained a result with about twice as many accurate digits as the best trapezoid result, at virtually no extra cost.
@@ -688,27 +667,27 @@ If we consider the computational time to be dominated by evaluations of $f$, the
 This function gets increasingly oscillatory as $x$ increases.
 
 ```{code-cell}
-f = x -> (x + 1)^2 * cos((2 * x + 1) / (x - 4.3))
-plot(f, 0, 4, xlabel=L"x", ylabel=L"f(x)")
+f = @(x) (x + 1).^2 .* cos((2 * x + 1) ./ (x - 4.3));
+clf
+fplot(f, [0, 4], 2000)
+xlabel('x'), ylabel('f(x)')
 ```
 
 Accordingly, the trapezoid rule is more accurate on the left half of this interval than on the right half.
 
 ```{code-cell}
-left_val, _ = quadgk(f, 0, 2, atol=1e-14, rtol=1e-14)
-right_val, _ = quadgk(f, 2, 4, atol=1e-14, rtol=1e-14)
+left_val = integral(f, 0, 2, abstol=1e-14, reltol=1e-14);
+right_val = integral(f, 2, 4, abstol=1e-14, reltol=1e-14);
 
-n = [50 * 2^k for k in 0:3]
-left_err, right_err = [], []
-for n in n
-    T, _ = FNC.trapezoid(f, 0, 2, n)
-    push!(left_err, T - left_val)
-
-    T, _ = FNC.trapezoid(f, 2, 4, n)
-    push!(right_err, T - right_val)
+n = round(50 * 2 .^ (0:3)');
+err = zeros(length(n), 2);
+for i = 1:length(n)
+    T = trapezoid(f, 0, 2, n(i));
+    err(i, 1) = T - left_val;
+    T = trapezoid(f, 2, 4, n(i));
+    err(i, 2) = T - right_val;
 end
-
-pretty_table([n left_err right_err], header=["n", "left error", "right error"])
+disp(table(n, err(:, 1), err(:, 2), variableNames=["n", "left error", "right error"]))
 ```
 
 Both the picture and the numerical results suggest that more nodes should be used on the right half of the interval than on the left half.
@@ -719,49 +698,52 @@ Both the picture and the numerical results suggest that more nodes should be use
 We'll integrate the function from {numref}`Demo %s <demo-adapt-motive>`.
 
 ```{code-cell}
-f = x -> (x + 1)^2 * cos((2 * x + 1) / (x - 4.3));
+f = @(x) (x + 1).^2 .* cos((2 * x + 1) ./ (x - 4.3));
 ```
 
 We perform the integration and show the nodes selected underneath the curve.
 
 ```{code-cell}
-A, t = FNC.intadapt(f, 0, 4, 0.001)
-@show num_nodes = length(t);
-
-plot(f, 0, 4, color=:black, legend=:none,
-    xlabel=L"x", ylabel=L"f(x)", title="Adaptive node selection")
-plot!(t, f.(t), seriestype=:sticks, m=(:o, 2))
+[Q, t] = intadapt(f, 0, 4, 0.001);
+clf, fplot(f, [0, 4], 2000)
+hold on
+stem(t, f(t), '.-')
+title('Adaptive node selection')    % ignore this line
+xlabel('x'), ylabel('f(x)')    % ignore this line
+fprintf("number of nodes = %d", length(t))
 ```
 
 The error turns out to be a bit more than we requested. It's only an estimate, not a guarantee.
 
 ```{code-cell}
-Q, _ = quadgk(f, 0, 4, atol=1e-14, rtol=1e-14);    # 'exact' value
-println("error: $(Q-A)");
+I = integral(f, 0, 4, abstol=1e-14, reltol=1e-14);    % 'exact' value
+fprintf("error = %.2e", abs(Q - I))
 ```
 
 Let's see how the number of integrand evaluations and the error vary with the requested tolerance.
 
 ```{code-cell}
-tol = [1 / 10^k for k in 4:14]
-err, n = [], []
-for tol in 10.0 .^ (-4:-1:-14)
-    A, t = FNC.intadapt(f, 0, 4, tol)
-    push!(err, Q - A)
-    push!(n, length(t))
+tol = 1 ./ 10.^(4:14)';
+err = zeros(size(tol));
+n = zeros(size(tol));
+for i = 1:length(tol)
+    [A, t] = intadapt(f, 0, 4, tol(i));
+    err(i) =  I - A;
+    n(i) = length(t);
 end
-
-pretty_table([tol err n], header=["tolerance", "error", "number of nodes"])
+disp(table(tol, err, n, variableNames=["tolerance", "error", "number of nodes"]))
 ```
 
 As you can see, even though the errors are not smaller than the estimates, the two columns decrease in tandem. If we consider now the convergence not in $h$, which is poorly defined now, but in the number of nodes actually chosen, we come close to the fourth-order accuracy of the underlying Simpson scheme.
 
 ```{code-cell}
-plot(n, abs.(err), m=:o, label="results",
-    xaxis=(:log10, "number of nodes"), yaxis=(:log10, "error"),
-    title="Convergence of adaptive integration")
-
-order4 = @. 0.01 * (n / n[1])^(-4)
-plot!(n, order4, l=:dash, label=L"O(n^{-4})")
+clf
+loglog(n, abs(err), "-o", displayname="results")
+xlabel("number of nodes"), ylabel("error")
+title("Convergence of adaptive integration")
+order4 = 0.1 * abs(err(end)) * (n / n(end)).^(-4);
+hold on
+loglog(n, order4, "k--", displayname="O(n^{-4})")
+legend()
 ```
 ``````
