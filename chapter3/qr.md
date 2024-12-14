@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 3.3.%s
+---
 (section-leastsq-qr)=
 # The QR factorization
 

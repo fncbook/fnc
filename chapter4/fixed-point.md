@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 4.2.%s
+---
 (section-nonlineqn-fixed-point)=
 # Fixed-point iteration
 

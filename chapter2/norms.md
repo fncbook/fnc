@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 2.7.%s
+---
 (section-linsys-norms)=
 # Vector and matrix norms
 

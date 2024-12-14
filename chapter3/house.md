@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 3.4.%s
+---
 (section-leastsq-house)=
 # Computing QR factorizations
 

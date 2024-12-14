@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 6.3.%s
+---
 (section-ivp-systems)=
 # IVP systems
 

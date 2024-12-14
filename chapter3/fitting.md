@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 3.1.%s
+---
 (section-leastsq-fitting)=
 # Fitting functions to data
 

@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 5.6.%s
+---
 (section-localapprox-integration)=
 # Numerical integration
 

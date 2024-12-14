@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 2.6.%s
+---
 (section-linsys-pivoting)=
 # Row pivoting
 

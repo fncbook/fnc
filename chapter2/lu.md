@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 2.4.%s
+---
 (section-linsys-lu)=
 # LU factorization
 

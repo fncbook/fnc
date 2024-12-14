@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 4.4.%s
+---
 (section-nonlineqn-secant)=
 # Interpolation-based methods
 

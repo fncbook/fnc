@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 4.7.%s
+---
 (section-nonlineqn-nlsq)=
 # Nonlinear least squares
 

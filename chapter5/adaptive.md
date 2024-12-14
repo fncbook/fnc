@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 5.7.%s
+---
 (section-localapprox-adaptive)=
 # Adaptive integration
 

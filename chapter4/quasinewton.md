@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 4.6.%s
+---
 (section-nonlineqn-quasinewton)=
 # Quasi-Newton methods
 

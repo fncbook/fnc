@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 6.8.%s
+---
 (section-ivp-zerostability)=
 # Zero-stability of multistep methods
 

@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 1.3.%s
+---
 (section-intro-algorithms)=
 # Algorithms
 

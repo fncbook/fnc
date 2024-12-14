@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 1.4.%s
+---
 (section-intro-stability)=
 # Stability
 

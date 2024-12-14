@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 2.9.%s
+---
 (section-linsys-structure)=
 # Exploiting matrix structure
 

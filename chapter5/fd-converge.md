@@ -1,3 +1,8 @@
+---
+numbering:
+  enumerator: 5.5.%s
+  heading_1: true
+---
 (section-localapprox-fd-converge)=
 # Convergence of finite differences
 

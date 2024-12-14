@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 4.5.%s
+---
 (section-nonlineqn-newtonsys)=
 # Newton for nonlinear systems
 

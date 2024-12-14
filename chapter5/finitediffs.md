@@ -1,3 +1,8 @@
+---
+numbering:
+  enumerator: 5.4.%s
+  heading_1: true
+---
 (section-localapprox-finitediffs)=
 # Finite differences
 
@@ -125,7 +130,7 @@ We can in principle derive any finite-difference formula from the same process: 
 |  4            | $-\frac{25}{12}$ | $4$ | $-3$           | $\frac{4}{3}$ | $-\frac{1}{4}$ |
 ```
 
- The main motivation for using more function values in a formula is to improve the accuracy. This is measured by **order of accuracy**, which is shown in the tables and explored in {numref}`section-localapprox-fd-converge`. 
+ The main motivation for using more function values in a formula is to improve the accuracy. This is measured by **order of accuracy**, which is shown in the tables and explored in [Section 5.5](#section-localapprox-fd-converge). 
 
 ````{prf:example}
 According to the tables, here are three specific finite-difference formulas:

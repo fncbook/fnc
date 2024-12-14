@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 1.1.%s
+---
 (section-intro-floating-point)=
 # Floating-point numbers
 

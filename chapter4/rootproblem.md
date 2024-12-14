@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 4.1.%s
+---
 (section-nonlineqn-rootproblem)=
 # The rootfinding problem
 

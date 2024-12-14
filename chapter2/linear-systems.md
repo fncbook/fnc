@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 2.3.%s
+---
 (section-linsys-linear-systems)=
 # Linear systems
 

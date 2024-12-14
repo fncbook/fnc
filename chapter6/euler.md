@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 6.2.%s
+---
 (section-ivp-euler)=
 # Euler's method
 

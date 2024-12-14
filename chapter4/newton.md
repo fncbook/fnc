@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 4.3.%s
+---
 (section-nonlineqn-newton)=
 # Newton's method
 

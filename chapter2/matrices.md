@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 2.2.%s
+---
 (section-linsys-matrices)=
 # Computing with matrices
 

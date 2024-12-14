@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 5.3.%s
+---
 (section-localapprox-splines)=
 # Cubic splines
 

@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 2.8.%s
+---
 (section-linsys-condition-number)=
 # Conditioning of linear systems
 

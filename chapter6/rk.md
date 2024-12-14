@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 6.4.%s
+---
 (section-ivp-rk)=
 # Runge–Kutta methods
 

@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 6.7.%s
+---
 (section-ivp-implicit)=
 # Implementation of multistep methods
 

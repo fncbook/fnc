@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 6.5.%s
+---
 (section-ivp-adaptive)=
 # Adaptive Runge–Kutta
 

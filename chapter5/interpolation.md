@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 5.1.%s
+---
 (section-localapprox-interpolation)=
 # The interpolation problem
 

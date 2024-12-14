@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 3.2.%s
+---
 (section-leastsq-normaleqns)=
 # The normal equations
 

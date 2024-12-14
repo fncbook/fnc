@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 5.2.%s
+---
 (section-localapprox-pwlin)=
 # Piecewise linear interpolation
 

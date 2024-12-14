@@ -1,6 +1,6 @@
 ---
 numbering:
-  headings: true
+  enumerator: 1.2.%s
 ---
 (section-intro-conditioning)=
 # Problems and conditioning

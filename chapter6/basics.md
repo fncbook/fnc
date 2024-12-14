@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 6.1.%s
+---
 (section-ivp-basics)=
 # Basics of IVPs
 
