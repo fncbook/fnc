@@ -1,0 +1,733 @@
+---
+kernelspec:
+  display_name: Julia 1
+  language: julia
+  name: julia-1.11
+---
+```{code-cell}
+:tags: [remove-cell]
+import Pkg; Pkg.activate("/Users/driscoll/Documents/GitHub/fnc")
+using FundamentalsNumericalComputation
+FNC.init_format()
+```
+
+
+
+
+(function-ho-julia)=
+`````{dropdown} **Horner's algorithm for evaluating a polynomial**
+:open: true
+```{code-block} julia
+:lineno-start: 1
+"""
+    horner(c,x)
+
+Evaluate a polynomial whose coefficients are given in ascending
+order in `c`, at the point `x`, using Horner's rule.
+"""
+function horner(c,x)
+    n = length(c)
+    y = c[n]
+    for k in n-1:-1:1
+        y = x*y + c[k]
+    end
+    return y
+end
+```
+`````
+
+<!-- SECTION 1 -->
+(demo-interp-vander-julia)=
+``````{dropdown} **Vandermonde matrix and polynomial interpolation**
+:open: false
+
+
+We create two vectors for data about the population of China. The first has the years of census data and the other has the population, in millions of people.
+
+```{code-cell}
+year = [1982,2000,2010,2015]; 
+pop = [1008.18, 1262.64, 1337.82, 1374.62];
+```
+
+:::{index} ! Julia; .-, ! Julia; .+
+:::
+
+:::{index} Julia; broadcasting
+:::
+
+::::{grid} 1 1 2 2
+
+:::{grid-item}
+:columns: 7
+
+
+It's convenient to measure time in years since 1980. We use `.-` to subtract a scalar from every element of a vector. We will also use a floating-point value in the subtraction, so the result is also in double precision.
+
+
+:::
+:::{card}
+:columns: 5
+ 
+
+A dotted operator such as `.-` or `.*` acts elementwise, broadcasting scalar values to match up with elements of an array.
+
+:::
+::::
+
+```{code-cell}
+t = year .- 1980.0
+y = pop;
+```
+
+:::{index} ! Julia; comprehension
+:::
+
+::::{grid} 1 1 2 2
+:::{grid-item}
+Now we have four data points $(t_1,y_1),\dots,(t_4,y_4)$, so $n=4$ and we seek an interpolating cubic polynomial. We construct the associated Vandermonde matrix:
+:::
+:::{card}
+An expression inside square brackets and ending with a `for` statement is called a **comprehension**. It's often an easy and readable way to construct vectors and matrices. 
+
+:::
+::::
+
+```{code-cell}
+V = [ t[i]^j for i=1:4, j=0:3 ]
+```
+
+:::{index} ! Julia; \\
+:::
+
+::::{grid} 1 1 2 2
+
+:::{grid-item}
+:columns: 7
+
+
+To solve for the vector of polynomial coefficients, we use a backslash to solve the linear system:
+
+:::
+:::{card}
+:columns: 5
+
+
+A **backslash** `\` is used to solve a linear system of equations.
+
+:::
+::::
+
+```{code-cell}
+c = V \ y
+```
+
+The algorithms used by the backslash operator are the main topic of this chapter. As a check on the solution, we can compute the *residual*.
+
+```{code-cell} julia
+y - V*c
+```
+
+Using floating-point arithmetic, it is not realistic to expect exact equality of quantities; a relative difference comparable to $\macheps$ is all we can look for.
+
+::::{grid} 1 1 2 2
+
+:::{grid-item}
+:columns: 7
+
+
+By our definitions, the elements of `c` are coefficients in ascending-degree order for the interpolating polynomial. We can use the polynomial to estimate the population of China in 2005:
+
+
+:::
+:::{card}
+:columns: 5
+
+
+The `Polynomials` package has functions to make working with polynomials easy and efficient.
+
+:::
+::::
+
+```{code-cell}
+p = Polynomial(c)    # construct a polynomial
+p(2005-1980)         # include the 1980 time shift
+```
+
+The official population value for 2005 was 1303.72, so our result is rather good. 
+
+:::{index} ! Julia; scatter
+:::
+
+::::{grid} 1 1 2 2
+
+:::{grid-item}
+:columns: 5
+
+
+We can visualize the interpolation process. First, we plot the data as points.
+
+
+:::
+:::{card}
+:columns: 7
+ 
+
+The `scatter` function creates a scatter plot of points; you can specify a line connecting the points as well.
+
+:::
+::::
+
+```{code-cell}
+scatter(t,y, label="actual", legend=:topleft,
+    xlabel="years since 1980", ylabel="population (millions)", 
+    title="Population of China")
+```
+
+:::{index} Julia; range
+:::
+
+```{index} ! Julia; broadcasting
+```
+
+::::{grid} 1 1 2 2
+
+:::{grid-item}
+:columns: 5
+
+
+We want to superimpose a plot of the polynomial. We do that by evaluating it at a vector of points in the interval. The dot after the name of the polynomial is a universal way to apply a function to every element of an array, a technique known as **broadcasting**.
+
+
+:::
+:::{card}
+:columns: 7
+
+
+The `range` function constructs evenly spaced values given the endpoints and either the number of values, or the step size between them.
+
+Adding a dot to the end of a function name causes it to be broadcast, i.e., applied to every element of a vector or matrix.
+
+:::
+::::
+
+```{code-cell}
+# Choose 500 times in the interval [0,35].
+tt = range(0,35,length=500)   
+# Evaluate the polynomial at all the vector components.
+yy = p.(tt)
+foreach(println,yy[1:4])
+```
+
+:::{index} ! Julia; \!
+:::
+
+::::{grid} 1 1 2 2
+
+:::{grid-item}
+:columns: 5
+
+
+Now we use `plot!` to add to the current plot, rather than replacing it.
+
+
+:::
+:::{card}
+:columns: 7
+
+
+The `plot` function plots lines connecting the given $x$ and $y$ values; you can also specify markers at the points.
+
+By convention, functions whose names end with the bang `!` change the value or state of something, in addition to possibly returning output.
+
+:::
+::::
+
+```{code-cell}
+plot!(tt,yy,label="interpolant")
+```
+``````
+
+<!-- SECTION 2 -->
+(demo-matrices-julia)=
+``````{dropdown} **Matrix operations**
+:open: false
+
+:::{index} ! Julia; size, ! Julia; length
+:::
+
+::::{grid} 1 1 2 2
+
+:::{grid-item}
+:columns: 7
+
+
+Square brackets are used to enclose elements of a matrix or vector. Use spaces for horizontal concatenation, and semicolons or new lines to indicate vertical concatenation.
+
+
+:::
+:::{card}
+:columns: 5
+
+
+
+The `size` function returns the number of rows and columns in a matrix. Use `length` to get the number of elements in a vector or matrix.
+
+:::
+::::
+
+
+```{code-cell}
+A = [ 1 2 3 4 5; 50 40 30 20 10
+    π sqrt(2) exp(1) (1+sqrt(5))/2 log(3) ]
+```
+
+```{code-cell}
+m,n = size(A)
+```
+::::{grid} 1 1 2 2
+
+:::{grid-item}
+:columns: 7
+
+
+A vector is not quite the same thing as a matrix. It has only one dimension, not two. Separate its elements by commas or semicolons.
+
+
+:::
+:::{card}
+:columns: 5
+
+
+Separate elements of a vector by commas or semicolons. If you use spaces, you will get a matrix with one row, which is treated differently.
+
+:::
+::::
+
+```{code-cell}
+x = [ 3, 3, 0, 1, 0 ]
+size(x)
+```
+
+For many purposes, however, an $n$-vector in Julia is a lot like an $n\times 1$ column vector.
+
+Concatenated elements within brackets may be matrices or vectors for a block representation, as long as all the block sizes are compatible.
+
+```{code-cell}
+[ x  x ]
+```
+
+```{code-cell}
+[ x; x ]
+```
+
+The `zeros` and `ones` functions construct matrices with entries all zero or one, respectively.
+
+```{code-cell}
+B = [ zeros(3,2) ones(3,1) ]
+```
+
+```{index} ! Julia; transpose, ! Julia; adjoint, ! Julia; \'
+```
+
+A single quote `'` after a matrix returns its adjoint. For real matrices, this is the transpose; for complex-valued matrices, the elements are also conjugated. 
+
+```{code-cell}
+A'
+```
+
+If `x` is simply a vector, then its transpose has a row shape.
+
+```{code-cell}
+x'
+```
+
+```{index} ! Julia; range, ! Julia; \:
+```
+
+There are many convenient shorthand ways of building vectors and matrices other than entering all of their entries directly or in a loop. To get a range with evenly spaced entries between two endpoints, you have two options. One is to use a colon `:`.
+
+```{code-cell}
+y = 1:4              # start:stop
+```
+
+```{code-cell}
+z = 0:3:12           # start:step:stop
+```
+
+(Ranges are not strictly considered vectors, but they behave identically in most circumstances.) Instead of specifying the step size, you can give the number of points in the range if you use `range`.
+
+```{code-cell}
+s = range(-1,1,length=5)
+```
+
+:::{index} ! Julia; end, ! Julia; indexing arrays
+:::
+
+::::{grid} 1 1 2 2
+
+:::{grid-item}
+:columns: 7
+
+
+Accessing an element is done by giving one (for a vector) or two (for a matrix) index values within square brackets. 
+
+
+:::
+:::{card}
+:columns: 5
+
+
+The `end` keyword refers to the last element in a dimension. It saves you from having to compute and store the size of the matrix first.
+
+:::
+::::
+
+```{code-cell}
+a = A[2,end-1]
+```
+
+```{code-cell}
+x[2]
+```
+
+The indices can be vectors or ranges, in which case a block of the matrix is accessed.
+
+```{code-cell}
+A[1:2,end-2:end]    # first two rows, last three columns
+```
+
+```{index} Julia; \:
+```
+
+If a dimension has only the index `:` (a colon), then it refers to all the entries in that dimension of the matrix.
+
+```{code-cell}
+A[:,1:2:end]        # all of the odd columns
+```
+
+:::{index} ! Julia; diagm
+:::
+
+::::{grid} 1 1 2 2
+
+:::{grid-item}
+:columns: 7
+
+
+The matrix and vector senses of addition, subtraction, scalar multiplication, multiplication, and power are all handled by the usual symbols. 
+
+
+:::
+:::{card}
+:columns: 5
+
+
+Use `diagm` to construct a matrix by its diagonals. A more general syntax puts elements on super- or subdiagonals.
+
+:::
+::::
+
+```{code-cell}
+B = diagm( [-1,0,-5] )   # create a diagonal matrix
+```
+
+```{code-cell}
+BA = B*A     # matrix product
+```
+::::{grid} 1 1 2 2
+
+:::{grid-item}
+:columns: 7
+
+
+`A*B` causes an error because the dimensions aren't compatible.
+
+
+:::
+:::{card}
+:columns: 5
+
+
+Errors are formally called *exceptions* in Julia.
+
+:::
+::::
+
+```{code-cell} julia
+A*B    # throws an error
+```
+
+A square matrix raised to an integer power is the same as repeated matrix multiplication.
+
+```{code-cell}
+B^3    # same as B*B*B
+```
+
+Sometimes one instead wants to treat a matrix or vector as a mere array and simply apply a single operation to each element of it. For multiplication, division, and power, the corresponding operators start with a dot.
+
+```{code-cell}
+C = -A;
+```
+
+`A*C` would be an error.
+
+```{code-cell}
+elementwise = A.*C
+```
+
+```{index} Julia; broadcasting
+```
+
+The two operands of a dot operator have to have the same size—unless one is a scalar, in which case it is expanded or *broadcast* to be the same size as the other operand.
+
+```{code-cell}
+x_to_two = x.^2
+```
+
+```{code-cell}
+two_to_x = 2 .^ x
+```
+
+::::{grid} 1 1 2 2
+
+:::{grid-item}
+:columns: 7
+
+
+Most of the mathematical functions, such as cos, sin, log, exp, and sqrt, expect scalars as operands. However, you can broadcast any function, including ones that you have defined, across a vector or array by using a special dot syntax.
+
+
+:::
+:::{card}
+:columns: 5
+
+
+A dot added to the end of a function name means to apply the function elementwise to an array.
+
+:::
+::::
+
+```{code-cell}
+show(cos.(π*x))    # broadcast to a function
+```
+
+Rather than dotting multiple individual functions, you can use `@.` before an expression to broadcast everything within it.
+
+```{code-cell}
+show(@. cos(π*(x+1)^3))    # broadcast an entire expression
+```
+``````
+
+<!-- SECTION 3 -->
+(demo-systems-julia)=
+``````{dropdown} **Linear systems of equations**
+:open: false
+For a square matrix $A$, the command `A\b` is mathematically equivalent to $\mathbf{A}^{-1}\mathbf{b}$. 
+
+```{code-cell}
+A = [1 0 -1; 2 2 1; -1 -3 0]
+```
+
+```{code-cell}
+b = [1,2,3]
+```
+
+```{code-cell}
+x = A\b
+```
+
+```{index} residual
+```
+
+One way to check the answer is to compute a quantity known as the **residual**. It is (ideally) close to machine precision (relative to the elements in the solution).
+
+```{code-cell}
+residual = b - A*x
+```
+
+If the matrix $\mathbf{A}$ is singular, you may get an error.
+
+```{code-cell} julia
+A = [0 1; 0 0]
+b = [1,-1]
+x = A\b
+```
+
+::::{grid} 1 1 2 2
+
+:::{grid-item}
+:columns: 5
+
+
+The error message here is admittedly cryptic. In this case we can check that the rank of $\mathbf{A}$ is less than its number of columns, indicating singularity.
+
+
+:::
+:::{card}
+:columns: 7
+
+
+The function `rank` computes the rank of a matrix. However, it is numerically unstable for matrices that are nearly singular, in a sense to be defined in a later section.
+
+:::
+::::
+
+```{code-cell}
+rank(A)
+```
+
+A linear system with a singular matrix might have no solution or infinitely many solutions, but in either case, backslash will fail. Moreover, detecting singularity is a lot like checking whether two floating-point numbers are *exactly* equal: because of roundoff, it could be missed. In {numref}`section-linsys-condition-number` we'll find a robust way to fully describe the situation.
+``````
+
+(demo-systems-triangular-julia)=
+``````{dropdown} **Triangular systems of equations**
+
+```{index} ! Julia; tril, ! Julia; triu
+```
+
+::::{grid} 1 1 2 2
+
+:::{grid-item}
+:columns: 7
+
+
+It's easy to get just the lower triangular part of any matrix using the `tril` function.
+
+
+:::
+:::{card}
+:columns: 5
+
+
+Use `tril` to return a matrix that zeros out everything above the main diagonal. The `triu` function zeros out below the diagonal.
+
+:::
+::::
+
+```{code-cell}
+A = rand(1.:9.,5,5)
+L = tril(A)
+```
+
+We'll set up and solve a linear system with this matrix.
+
+```{code-cell}
+b = ones(5)
+x = FNC.forwardsub(L,b)
+```
+
+It's not clear how accurate this answer is. However, the residual should be zero or comparable to $\macheps$.
+
+```{code-cell}
+b - L*x
+```
+
+```{index} ! Julia; Pair, Julia; diagm
+```
+
+::::{grid} 1 1 2 2
+
+:::{grid-item}
+:columns: 7
+
+
+Next we'll engineer a problem to which we know the exact answer. Use `\alpha` <kbd>Tab</kbd> and `\beta` <kbd>Tab</kbd> to get the Greek letters.
+
+
+:::
+:::{card}
+:columns: 5
+
+
+The notation `0=>ones(5)` creates a `Pair`. In `diagm`, pairs indicate the position of a diagonal and the elements that are to be placed on it.
+
+:::
+::::
+
+```{code-cell}
+α = 0.3;
+β = 2.2;
+U = diagm( 0=>ones(5), 1=>[-1,-1,-1,-1] )
+U[1,[4,5]] = [ α-β, β ]
+U
+```
+
+```{code-cell}
+x_exact = ones(5)
+b = [α,0,0,0,1]
+```
+
+Now we use backward substitution to solve for $\mathbf{x}$, and compare to the exact solution we know already.
+
+```{code-cell}
+x = FNC.backsub(U,b)
+err = x - x_exact
+```
+
+Everything seems OK here. But another example, with a different value for $\beta$, is more troubling.
+
+```{code-cell}
+α = 0.3;
+β = 1e12;
+U = diagm( 0=>ones(5), 1=>[-1,-1,-1,-1] )
+U[1,[4,5]] = [ α-β, β ]
+b = [α,0,0,0,1]
+
+x = FNC.backsub(U,b)
+err = x - x_exact
+```
+
+It's not so good to get 4 digits of accuracy after starting with 16! The source of the error is not hard to track down. Solving for $x_1$ performs $(\alpha-\beta)+\beta$ in the first row. Since $|\alpha|$ is so much smaller than $|\beta|$, this a recipe for losing digits to subtractive cancellation.
+``````
+<!-- SECTION 4 -->
+(demo-lu-outertri-julia)= 
+``````{dropdown} **Instability of the quadratic formula**
+We explore the outer product formula for two random triangular matrices.
+
+```{code-cell}
+L = tril( rand(1:9,3,3) )
+```
+
+```{code-cell}
+U = triu( rand(1:9,3,3) )
+```
+
+::::{grid} 1 1 2 2
+
+:::{grid-item}
+:columns: 5
+
+
+Here are the three outer products in the sum in {eq}`matrixouter`:
+
+
+:::
+:::{card}
+:columns: 7
+
+
+Although `U[1,:]` is a row of `U`, it is a vector, and as such it has a default column interpretation.
+
+:::
+::::
+
+```{code-cell}
+L[:,1]*U[1,:]'
+```
+
+```{code-cell}
+L[:,2]*U[2,:]'
+```
+
+```{code-cell}
+L[:,3]*U[3,:]'
+```
+
+Simply because of the triangular zero structures, only the first outer product contributes to the first row and first column of the entire product. 
+``````
+<!-- SECTION 5 -->
+<!-- SECTION 6 -->
+<!-- SECTION 7 -->
+<!-- SECTION 8 -->
+<!-- SECTION 9 -->
+<!-- SECTION 10 -->
