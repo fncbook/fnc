@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-matrixanaly-svd)=
 # Singular value decomposition
 
@@ -269,61 +249,27 @@ Let $\mathbf{A}\in\mathbb{C}^{m\times n}$ have an SVD $\mathbf{A}=\mathbf{U}\mat
 The conclusion {eq}`svdnorm` can be proved by vector calculus. In the square case $m=n$, $\mathbf{A}$ having full rank is identical to being invertible. The SVD is the usual means for computing the 2-norm and condition number of a matrix. 
 
 (demo-svd-props)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-svd-props-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-svd-props-matlab
+:::
+```` 
 
-
-
-
-We verify some of the fundamental SVD properties using standard Julia functions from `LinearAlgebra`.
-
-```{code-cell}
-A = [i^j for i=1:5, j=0:3]
-```
-
-```{index} ! Julia; svdvals
-```
-
-
-To get only the singular values, use `svdvals`.
-
-```{code-cell}
-σ = svdvals(A)
-```
-
-Here is verification of the connections between the singular values, norm, and condition number.
-
-```{code-cell}
-@show opnorm(A,2);
-@show σ[1];
-```
-
-```{code-cell}
-@show cond(A,2);
-@show σ[1]/σ[end];
-```
-
-```{index} ! Julia; svd
-```
-
-To get singular vectors as well, use `svd`. The thin form of the factorization is the default.
-
-```{code-cell}
-U,σ,V = svd(A);
-@show size(U);
-@show size(V);
-```
-
-We verify the orthogonality of the singular vectors as follows:
-
-```{code-cell}
-@show opnorm(U'*U - I);
-@show opnorm(V'*V - I);
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-svd-props-python
+:::
+```` 
+`````
+::::
 
 ## Exercises
 

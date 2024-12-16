@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-matrixanaly-insight)=
 # From matrix to insight
 
@@ -83,45 +63,28 @@ $$
 which is the $(i,j)$ element of $\mathbf{A}^k$.
 ::::
 
-
 (demo-insight-graph)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-insight-graph-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-insight-graph-matlab
+:::
+```` 
 
-
-
-
-Here we create an adjacency matrix for a graph on four nodes.
-
-```{code-cell}
-A = [ 0 1 0 0; 1 0 0 0; 1 1 0 1; 0 1 1 0 ]
-```
-
-```{index} ! Julia; graphplot
-```
-
-The `graphplot` function makes a visual representation of this graph.
-
-```{code-cell}
-graphplot(A,names=1:4,markersize=0.2,arrow=6)
-```
-
-Since this adjacency matrix is not symmetric, the edges are all directed, as indicated by the arrows. Here are the counts of all walks of length 3 in the graph:
-
-```{code-cell}
-A^3
-```
-
-If the adjacency matrix is symmetric, the result is an undirected graph: all edges connect in both directions.
-
-```{code-cell}
-A = [0 1 1 0;1 0 0 1;1 0 0 0;0 1 0 0]
-graphplot(A,names=1:4,markersize=0.2)
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-insight-graph-python
+:::
+```` 
+`````
+::::
 
 The representation of a graph by its adjacency matrix opens up the possibility of many kinds of analysis of the graph. One might ask whether the nodes admit a natural partition into clusters, for example. Or one might ask to rank the nodes in order of importance to the network as determined by some objective criteria—an application made famous by Google's PageRank algorithm, and one which is mathematically stated as an {ref}`eigenvalue <section-matrixanaly-evd>` problem.
 
@@ -133,71 +96,27 @@ The representation of a graph by its adjacency matrix opens up the possibility o
 Computers typically represent images as rectangular arrays of pixels, each of which is colored according to numerical values for red (R), green (G), and blue (B) components of white light. Most often, these are given as integers in the range from zero (no color) to 255 (full color). Thus, an image that is $m$-by-$n$ pixels can be stored as an $m$-by-$n$-by-3 array of integer values. In Julia, we can work with an $m\times n$ matrix of 3-vectors representing entire colors.
 
 (demo-insight-image)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-insight-image-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-insight-image-matlab
+:::
+```` 
 
-
-
-
-```{index} ! Julia; Images
-```
-
-The `Images` package has many functions for image manipulation, and `TestImages` has some standard images to play with.
-
-```{code-cell}
-img = testimage("mandrill")
-```
-
-The variable `img` is a matrix.
-
-```{code-cell}
-size(img)
-```
-
-However, its entries are colors, not numbers.
-
-```{code-cell}
-img[100,10]
-```
-
-```{index} ! Julia; eltype
-```
-
-You can use `eltype` to find out the type of the elements of any array.
-
-```{code-cell}
-eltype(img)
-```
-
-It's possible to extract matrices of red, green, and blue intensities, scaled from 0 to 1.
-
-```{code-cell}
-R,G,B = red.(img),green.(img),blue.(img);
-@show minB,maxB = extrema(B);
-```
-
-Or we can convert the pixels to gray, each pixel again scaled from 0 to 1.
-
-```{code-cell}
-Gray.(img)
-```
-
-In order to do our usual operations, we need to tell Julia that we want to interpret the elements of the image matrix as floating-point values.
-
-```{code-cell}
-A = Float64.(Gray.(img))
-A[1:4,1:5]
-```
-
-We can use `Gray` to reinterpret a matrix of floating-point values as grayscale pixels.
-
-```{code-cell}
-Gray.(reverse(A,dims=1))
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-insight-image-python
+:::
+```` 
+`````
+::::
 
 Representation of an image as a matrix allows us to describe some common image operations in terms of linear algebra. For example, in {numref}`section-matrixanaly-svd` we will use the singular value decomposition to compress the information, and in {numref}`section-krylov-matrixfree` we will see how to apply and remove blurring effects.
 

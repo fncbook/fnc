@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-matrixanaly-symm-eig)=
 # Symmetry and definiteness
 
@@ -105,51 +85,27 @@ R_{\mathbf{A}}(\mathbf{v}+\epsilon\mathbf{z}) = R_{\mathbf{A}}(\mathbf{v}) + 0 +
 as $\epsilon\to 0$. The conclusion is that a good estimate of an eigenvector becomes an even better estimate of an eigenvalue.
 
 (demo-symm-eig-rayleigh)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-symm-eig-rayleigh-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-symm-eig-rayleigh-matlab
+:::
+```` 
 
-
-
-
-We will use a symmetric matrix with a known EVD.
-
-```{code-cell}
-n = 20;
-λ = 1:n 
-D = diagm(λ)
-V,_ = qr(randn(n,n))   # get a random orthogonal V
-A = V*D*V';
-```
-
-The Rayleigh quotient is a scalar-valued function of a vector.
-
-```{code-cell}
-R = x -> (x'*A*x)/(x'*x);
-```
-
-The Rayleigh quotient evaluated at an eigenvector gives the corresponding eigenvalue.
-
-```{code-cell}
-R(V[:,7])
-```
-
-If the input to he Rayleigh quotient is within a small $\delta$ of an eigenvector, its output is within $O(\delta^2)$ of the corresponding eigenvalue. In this experiment, we observe that each additional digit of accuracy in an approximate eigenvector gives two more digits to the eigenvalue estimate coming from the Rayleigh quotient.
-
-```{code-cell}
-δ = @. 1 ./10^(1:5)
-eval_diff = zeros(size(δ))
-for (k,delta) in enumerate(δ)
-    e = randn(n);  e = delta*e/norm(e);
-    x = V[:,7] + e
-    eval_diff[k] = R(x) - 7
-end
-labels = ["perturbation δ","δ²","R(x) - λ"]
-pretty_table([δ δ.^2 eval_diff], header=labels)
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-symm-eig-rayleigh-python
+:::
+```` 
+`````
+::::
 
 ## Definite, semidefinite, and indefinite matrices
 

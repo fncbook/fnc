@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-matrixanaly-evd)=
 # Eigenvalue decomposition
 
@@ -159,72 +139,27 @@ If the $n\times n$ matrix $\mathbf{A}$ has $n$ distinct eigenvalues, then $\math
 ````
 
 (demo-evd-eigen)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-evd-eigen-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-evd-eigen-matlab
+:::
+```` 
 
-
-
-
-```{index} ! Julia; eigvals
-```
-
-The `eigvals` function returns a vector of the eigenvalues of a matrix.
-
-```{code-cell}
-A = π*ones(2,2)
-```
-
-```{code-cell}
-λ = eigvals(A)
-```
-
-```{index} ! Julia; eigen
-```
-
-If you want the eigenvectors as well, use `eigen`.
-
-```{code-cell}
-λ,V = eigen(A)
-```
-
-```{code-cell}
-norm( A*V[:,2] - λ[2]*V[:,2] )
-```
-
-```{index} ! Julia; sortby
-```
-
-Both functions allow you to sort the eigenvalues by specified criteria.
-
-```{code-cell}
-A = diagm(-2.3:1.7)
-@show eigvals(A,sortby=real);
-@show eigvals(A,sortby=abs);
-```
-
-If the matrix is not diagonalizable, no message is given, but `V` will be singular. The robust way to detect that circumstance is via $\kappa(\mathbf{V})$. 
-
-```{index} condition number; of a matrix
-```
-
-```{code-cell}
-A = [-1 1;0 -1]
-λ,V = eigen(A)
-```
-
-```{code-cell}
-cond(V)
-```
-
-Even in the nondiagonalizable case, $\mathbf{A}\mathbf{V} = \mathbf{V}\mathbf{D}$ holds.
-
-```{code-cell}
-opnorm(A*V - V*diagm(λ))
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-evd-eigen-python
+:::
+```` 
+`````
+::::
 
 ## Similarity and matrix powers
 
@@ -335,101 +270,27 @@ If $\mathbf{A}$ has an EVD {eq}`evdecomp` with a unitary eigenvector matrix $\ma
 As we will see in {numref}`section-matrixanaly-symm-eig`, hermitian and real symmetric matrices are normal. Since the condition number of a unitary matrix is equal to 1, {eq}`bauerfike` guarantees that a perturbation of a normal matrix changes the eigenvalues by the same amount or less.
 
 (demo-evd-bauerfike)=
-```{prf:example}
-```
-
-
-
-
-
-```{index} Julia; adjoint, Julia; \'
-```
-
-We first define a hermitian matrix. Note that the `'` operation is the adjoint and includes complex conjugation. 
-
-```{code-cell}
-n = 7
-A = randn(n,n) + 1im*randn(n,n)
-A = (A+A')/2
-```
-
-```{index} Julia; cond
-```
-
-We confirm that the matrix $\mathbf{A}$ is normal by checking that $\kappa(\mathbf{V}) = 1$ (to within roundoff).
-
-```{code-cell}
-λ,V = eigen(A)
-@show cond(V);
-```
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-Now we perturb $\mathbf{A}$ and measure the effect on the eigenvalues. The Bauer–Fike theorem uses absolute differences, not relative ones.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-evd-bauerfike-julia
 :::
-:::{card}
+```` 
 
-
-Since the ordering of eigenvalues can change, we look at all pairwise differences and take the minima.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-evd-bauerfike-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-evd-bauerfike-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-ΔA = 1e-8*normalize(randn(n,n) + 1im*randn(n,n))
-λ̃ = eigvals(A+ΔA)
-dist = minimum( [abs(x-y) for x in λ̃, y in λ], dims=2 )
-```
-
-As promised, the perturbations in the eigenvalues do not exceed the normwise perturbation to the original matrix.
-
-Now we see what happens for a triangular matrix.
-
-```{code-cell}
-n = 20
-x = 1:n
-A = triu( x*ones(n)' )
-A[1:5,1:5]
-```
-
-This matrix is not especially close to normal.
-
-```{code-cell}
-λ,V = eigen(A)
-@show cond(V);
-```
-
-As a result, the eigenvalues can change by a good deal more. 
-
-```{code-cell}
-ΔA = 1e-8*normalize(randn(n,n) + 1im*randn(n,n))
-λ̃ = eigvals(A+ΔA)
-dist = minimum( [abs(x-y) for x in λ̃, y in λ], dims=2 )
-BF_bound = cond(V)*norm(ΔA)
-@show maximum(dist),BF_bound;
-```
-
-If we plot the eigenvalues of many perturbations, we get a cloud of points that roughly represents all the possible eigenvalues when representing this matrix with single-precision accuracy.
-
-```{code-cell}
-plt = scatter(λ,zeros(n),aspect_ratio=1)
-for _ in 1:200
-    ΔA = eps(Float32)*normalize(randn(n,n) + 1im*randn(n,n))
-    λ̃ = eigvals(A+ΔA)
-    scatter!(real(λ̃),imag(λ̃),m=1,color=:black)
-end
-plt
-```
-
-The plot shows that some eigenvalues are much more affected than others. This situation is not unusual, but it is not explained by the Bauer–Fike theorem.
-
-
-
 
 ## Computing the EVD
 
@@ -440,50 +301,27 @@ If the eigenvalues have different complex magnitudes, then as $k\to\infty$ the e
 [^eigpoly]: In fact, the situation is reversed: eigenvalue methods are among the best ways to compute the roots of a given polynomial.
 
 (demo-evd-francisqr)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-evd-francisqr-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-evd-francisqr-matlab
+:::
+```` 
 
-
-
-
-Let's start with a known set of eigenvalues and an orthogonal eigenvector basis.
-
-```{code-cell}
-D = diagm( [-6,-1,2,4,5] )
-V,R = qr(randn(5,5))    # V is unitary
-A = V*D*V'
-```
-
-```{code-cell}
-eigvals(A)
-```
-
-Now we will take the QR factorization and just reverse the factors.
-
-```{code-cell}
-Q,R = qr(A)
-A = R*Q;
-```
-
-It turns out that this is a similarity transformation, so the eigenvalues are unchanged.
-
-```{code-cell}
-eigvals(A)
-```
-
-What's remarkable, and not elementary, is that if we repeat this transformation many times, the resulting matrix converges to $\mathbf{D}$.
-
-```{code-cell}
-for k in 1:40
-    Q,R = qr(A)
-    A = R*Q
-end
-A
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-evd-francisqr-python
+:::
+```` 
+`````
+::::
 
 
 ```{index} ! Francis QR iteration

@@ -1,23 +1,3 @@
----
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
----
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-matrixanaly-dimreduce)=
 # Dimension reduction
 
@@ -94,55 +74,27 @@ If the singular values of $\mathbf{A}$ decrease sufficiently rapidly, then $\mat
 ```
 
 (demo-dimreduce-hello)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-dimreduce-hello-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-dimreduce-hello-matlab
+:::
+```` 
 
-
-
-
-We make an image from some text, then reload it as a matrix.
-
-```{code-cell}
-:tags: [hide-input]
-plot(annotations=(0.5,0.5,text("Hello world",44,:center,:center)),
-    grid=:none,frame=:none,size=(400,150))
-savefig("hello.png")
-img = load("hello.png")
-A = @. Float64(Gray(img))
-Gray.(A)
-```
-
-Next we show that the singular values decrease until they reach zero (more precisely, until they are about $\epsilon_\text{mach}$ times the norm of the matrix) at around $k=45$. 
-
-```{code-cell}
-U,σ,V = svd(A)
-scatter(σ,xaxis=(L"i"), yaxis=(:log10,L"\sigma_i"),
-    title="Singular values")
-```
-
-The rapid decrease suggests that we can get fairly good low-rank approximations.
-
-```{code-cell}
-plt = plot(layout=(2,2),frame=:none,aspect_ratio=1,titlefontsize=10)
-for i in 1:4
-    k = 3i
-    Ak = U[:,1:k]*diagm(σ[1:k])*V[:,1:k]'
-    plot!(Gray.(Ak),subplot=i,title="rank = $k")
-end
-plt
-```
-
-Consider how little data is needed to reconstruct these images. For rank-9, for instance, we have 9 left and right singular vectors plus 9 singular values, for a compression ratio of better than 12:1.
-
-```{code-cell}
-m,n = size(A)
-compression = m*n / (9*(m+n+1))
-```
-
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-dimreduce-hello-python
+:::
+```` 
+`````
+::::
 
 ## Capturing major trends
 
@@ -160,61 +112,27 @@ Clearly $0\le \tau_k \le 1$ and $\tau_k$ is non-decreasing as a function of $k$.
 [^expvar]: In statistics this quantity may be interpreted as the fraction of explained variance.
 
 (demo-dimreduce-voting)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-dimreduce-voting-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-dimreduce-voting-matlab
+:::
+```` 
 
-
-
-
-This matrix describes the votes on bills in the 111th session of the United States Senate. (The data set was obtained from [https://voteview.com].) Each row is one senator, and each column is a vote item.
-
-```{code-cell}
-@load "voting.jld2" A;
-```
-
-If we visualize the votes (yellow is "yea," blue is "nay"), we can see great similarity between many rows, reflecting party unity.
-
-```{code-cell}
-heatmap(A,color=:viridis,
-    title="Votes in 111th U.S. Senate",xlabel="bill",ylabel="senator")
-```
-
-We use {eq}`sing-val-decay` to quantify the decay rate of the values.
-
-```{code-cell}
-U,σ,V = svd(A)
-τ = cumsum(σ.^2) / sum(σ.^2)
-scatter(τ[1:16], xaxis=("k"), yaxis=(L"\tau_k"), 
-    title="Fraction of singular value energy")
-```
-
-The first and second singular triples contain about 58% and 17%, respectively, of the energy of the matrix. All others have far less effect, suggesting that the information is primarily two-dimensional. The first left and right singular vectors also contain interesting structure.
-
-```{code-cell}
-:tags: [hide-input]
-scatter( U[:,1],label="",layout=(1,2),
-    xlabel="senator" ,title="left singular vector")
-scatter!( V[:,1],label="",subplot=2,
-    xlabel="bill",title="right singular vector")
-```
-
-Both vectors have values greatly clustered near $\pm C$ for a constant $C$. These can be roughly interpreted as how partisan a particular senator or bill was, and for which political party. Projecting the senators' vectors into the first two $\mathbf{V}$-coordinates gives a particularly nice way to reduce them to two dimensions. Political scientists label these dimensions *partisanship* and *bipartisanship*. Here we color them by actual party affiliation (also given in the data file): red for Republican, blue for Democrat, and yellow for independent.
-
-```{code-cell}
-:tags: [hide-input]
-x1 = A*V[:,1];   x2 = A*V[:,2];
-
-@load "voting.jld2" Rep Dem Ind
-Rep = vec(Rep); Dem = vec(Dem);  Ind = vec(Ind);
-scatter(x1[Dem],x2[Dem],color=:blue,label="D",
-    xaxis=("partisanship"),yaxis=("bipartisanship"),title="111th US Senate by voting record" )
-scatter!(x1[Rep],x2[Rep],color=:red,label="R")
-scatter!(x1[Ind],x2[Ind],color=:yellow,label="I")
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-dimreduce-voting-python
+:::
+```` 
+`````
+::::
 
 Not all data sets can be reduced effectively to a small number of dimensions, but as {numref}`Demo {number} <demo-dimreduce-voting>` illustrates, in some cases reduction reveals information that corresponds to real-world understanding.
 

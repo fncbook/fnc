@@ -128,15 +128,15 @@ project:
         - file: chapter6/implicit.md
         - file: chapter6/zerostability.md
         - file: chapter6/next.md
-    #     - file: chapter7/overview.md
-    #       children:
-    #         - file: chapter7/insight.md
-    #         - file: chapter7/evd.md
-    #         - file: chapter7/svd.md
-    #         - file: chapter7/symm-eig.md
-    #         - file: chapter7/dimreduce.md
-    #         - file: chapter7/next.md
-    #     - file: chapter8/overview.md
+    - file: chapter7/overview.md
+      children:
+        - file: chapter7/insight.md
+        - file: chapter7/evd.md
+        - file: chapter7/svd.md
+        - file: chapter7/symm-eig.md
+        - file: chapter7/dimreduce.md
+        - file: chapter7/next.md
+        # - file: chapter8/overview.md
     #       children:
     #         - file: chapter8/structure.md
     #         - file: chapter8/power.md
@@ -202,6 +202,7 @@ project:
           - file: julia/chapter4.md
           - file: julia/chapter5.md
           - file: julia/chapter6.md
+          - file: julia/chapter7.md
       - title: MATLAB codes
         children:
           - file: matlab/chapter1.md
@@ -218,10 +219,12 @@ project:
           - file: python/chapter4.md
           - file: python/chapter5.md
           - file: python/chapter6.md
+          - file: python/chapter7.md
     - file: genindex.md
 
     
 site:
+  title: Fundamentals of Numerical Computation
   template: book-theme
   options:
     favicon: favicon.png
