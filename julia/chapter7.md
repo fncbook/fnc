@@ -355,7 +355,7 @@ We verify the orthogonality of the singular vectors as follows:
 
 (demo-symm-eig-rayleigh-julia)=
 ``````{dropdown} Rayleigh quotient
-We will use a symmetric matrix with a known EVD.
+We will use a symmetric matrix with a known EVD and eigenvalues equal to the integers from 1 to 20.
 
 ```{code-cell}
 n = 20;

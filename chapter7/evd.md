@@ -139,7 +139,7 @@ If the $n\times n$ matrix $\mathbf{A}$ has $n$ distinct eigenvalues, then $\math
 ````
 
 (demo-evd-eigen)=
-::::{prf:example}
+::::{prf:example}  Eigenvalues and eigenvectors
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

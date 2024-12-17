@@ -243,7 +243,7 @@ scatter(d, zeros(n), 18)
 axis("equal") 
 for _ in range(100):
     E = random.randn(n, n) + 1j * random.randn(n, n)
-    E = 2**(-26) * E / norm(E, 2)
+    E = finfo(np.float32).eps * E / norm(E, 2)
     dd, _ = eig(A + E)
     scatter(real(dd), imag(dd), 2, 'k')
 ```
