@@ -191,8 +191,7 @@ project:
     - title: Appendices
       children:
       - file: appendix/linear-algebra.md
-        # - file: appendix/glossary.md
-        # - file: appendix/julia.md
+      - file: appendix/glossary.md
         # - file: refs.md
       - title: Julia codes
         children:

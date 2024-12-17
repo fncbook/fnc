@@ -1,399 +1,532 @@
 # Glossary
 
-**adjacency matrix** ({numref}`§ {number} <section-matrixanaly-insight>`)</br>
-  Matrix whose nonzero entries show the links between nodes in a graph.
+:::{glossary}
+adjacency matrix
+: Matrix whose nonzero entries show the links between nodes in a graph. \
+(@section-matrixanaly-insight)
+
+adjoint
+: Conjugate transpose of a complex matrix. \
+(@section-linsys-matrices)
+
+advection equation
+: Archetypical PDE of hyperbolic type, representing transport phenomena. \
+(@section-advection-traffic)
+
+algorithm
+: List of instructions for transforming data into a result. \
+(@section-intro-algorithms)
+
+Arnoldi iteration
+: Stable algorithm for finding orthonormal bases of nested Krylov subspaces. \
+(@section-krylov-subspace)
+
+asymptotic
+: Relationship indicating that two functions have the same leading behavior in some limit. \
+(@section-linsys-efficiency)
+
+backward error
+: Change to the input of a problem required to produce the result found by an inexact algorithm. \
+(@section-intro-stability)
+
+backward substitution
+: Systematic method for solving a linear system with an upper triangular matrix. \
+(@section-linsys-linear-systems)
+
+bandwidth
+: The number of diagonals around the main diagonal that have nonzero elements. \
+(@section-linsys-structure)
+
+barycentric formula
+: Computationally useful expression for the interpolating polynomial as a ratio of rational terms. \
+(@section-globalapprox-barycentric)
+
+big-O
+: Relationship indicating that one function is bounded above by a multiple of another in some limit. \
+(@section-linsys-efficiency)
+
+boundary-value problem
+: A differential equation with which partial information about the solution is given at multiple points on the boundary of the domain. \
+(@section-bvp-tpbvp)
+
+cardinal function
+: Interpolating function that is 1 at one node and 0 at all the others. \
+(@section-localapprox-interpolation)
+
+Cholesky factorization
+: Symmetrized version of LU factorization for SPD matrices. \
+(@section-linsys-structure)
+
+collocation
+: Solution of a differential equation by imposing it approximately at a set of nodes. \
+(@section-bvp-linear)
+
+condition number
+: Ratio of the size of change in the output of a function to the size of change in the input that produced it. \
+(@section-intro-conditioning)
+
+cubic spline
+: Piecewise cubic function with two globally continuous derivatives, most often used for interpolation or approximation. \
+(@section-localapprox-splines)
+
+diagonalizable
+: Matrix that admits an eigenvalue decomposition. Also known as nondefective. \
+(@section-matrixanaly-evd)
+
+differentiation matrix
+: Matrix mapping a vector of function values to a vector of approximate derivative values. \
+(@section-bvp-diffmats)
+
+Dirichlet condition
+: Boundary condition specifying the value of the solution. \
+(@section-bvp-tpbvp)
+
+dominant eigenvalue
+: Eigenvalue with the largest modulus (absolute value, in the real case). \
+(@section-krylov-power)
+
+double precision
+: Typical standard in floating-point representation, using 64 bits to achieve about 16 decimal significant digits of precision. \
+(@section-intro-floating-point)
+
+eigenvalue
+: Scalar $\lambda$ such that $\mathbf{A}\mathbf{x} = \lambda \mathbf{x}$ for a square matrix $\mathbf{A}$ and nonzero vector $\mathbf{x}$. \
+(@section-matrixanaly-evd)
+
+eigenvalue decomposition (EVD)
+: Expression of a square matrix as the product of eigenvector and diagonal eigenvalue matrices. \
+(@section-matrixanaly-evd)
+
+eigenvector
+: Vector for which the action of a matrix is effectively one-dimensional.  \
+(@section-matrixanaly-evd)
+
+Euler's method
+: Prototype of all IVP solution methods, obtained by assuming constant derivatives for the solution over short time intervals. \
+(@section-ivp-euler)
 
-**adjoint** ({numref}`§ {number} <section-linsys-matrices>`)</br>
-  Conjugate transpose of a complex matrix.
+evolutionary PDE
+: A partial differential equation in which one of the independent variables is time or a close analog. \
+(@section-diffusion-blackscholes)
 
-**advection equation** ({numref}`§ {number} <section-advection-traffic>`)</br>
-  Archetypical PDE of hyperbolic type, representing transport phenomena.
+extrapolation
+: Use of multiple discretization values to cancel out leading terms in an error expansion. \
+(@section-localapprox-integration)
 
-**algorithm** ({numref}`§ {number} <section-intro-algorithms>`)</br>
-  List of instructions for transforming data into a result.
+finite difference
+: Linear combination of function values that approximates the value of a derivative of the function at a point. \
+(@section-localapprox-finitediffs)
 
-**Arnoldi iteration** ({numref}`§ {number} <section-krylov-subspace>`)</br>
-  Stable algorithm for finding orthonormal bases of nested Krylov subspaces.
+finite element method (FEM)
+: Use of piecewise integration to pose a linear system of equations for the approximate solution of a boundary-value problem. \
+(@section-bvp-galerkin)
 
-**asymptotic** ({numref}`§ {number} <section-linsys-efficiency>`)</br>
-  Relationship indicating that two functions have the same leading behavior in some limit.
+fixed point iteration
+: Repeated application of a function in hopes of converging to a fixed point. \
+(@section-nonlineqn-fixed-point)
 
-**backward error** ({numref}`§ {number} <section-intro-stability>`)</br>
-  Change to the input of a problem required to produce the result found by an inexact algorithm.
+fixed point problem
+: Finding a value of a given function where the input and output values are the same; equivalent to rootfinding. \
+(@section-nonlineqn-fixed-point)
 
-**backward substitution** ({numref}`§ {number} <section-linsys-linear-systems>`)</br>
-  Systematic method for solving a linear system with an upper triangular matrix.
+floating-point numbers
+: A finite set that substitutes for the real numbers in machine calculations. Denoted by $\mathbb{F}$. \
+(@section-intro-floating-point)
 
-**bandwidth** ({numref}`§ {number} <section-linsys-structure>`)</br>
-  The number of diagonals around the main diagonal that have nonzero elements.
+flops
+: Arithmetic operations on floating-point numbers, often counted as a proxy for computer runtime. \
+(@section-linsys-efficiency)
 
-**barycentric formula** ({numref}`§ {number} <section-globalapprox-barycentric>`)</br>
-  Computationally useful expression for the interpolating polynomial as a ratio of rational terms.
+forward substitution
+: Systematic method for solving a linear system with a lower triangular matrix. \
+(@section-linsys-linear-systems)
 
-**big-O** ({numref}`§ {number} <section-linsys-efficiency>`)</br>
-  Relationship indicating that one function is bounded above by a multiple of another in some limit.
+Frobenius norm
+: Matrix norm computed by applying the vector 2-norm to a vector interpretation of the matrix. \
+(@section-linsys-norms)
 
-**boundary-value problem** ({numref}`§ {number} <section-bvp-tpbvp>`)</br>
-  A differential equation with which partial information about the solution is given at multiple points on the boundary of the domain.
+Gauss–Newton method
+: Generalization of Newton's method for nonlinear least squares. \
+(@section-nonlineqn-nlsq)
 
-**cardinal function** ({numref}`§ {number} <section-localapprox-interpolation>`)</br>
-  Interpolating function that is 1 at one node and 0 at all the others.
+Gaussian elimination
+: Use of row operations to transform a linear system to an equivalent one in triangular form. \
+(@section-linsys-lu)
 
-**Cholesky factorization** ({numref}`§ {number} <section-linsys-structure>`)</br>
-  Symmetrized version of LU factorization for SPD matrices.
+generating polynomials
+: A pair of polynomials whose coefficients match those of a multistep method for IVPs. \
+(@section-ivp-multistep)
 
-**collocation** ({numref}`§ {number} <section-bvp-linear>`)</br>
-  Solution of a differential equation by imposing it approximately at a set of nodes.
+global error
+: Error made by an IVP method over the entire time interval of the solution. \
+(@section-ivp-euler)
 
-**condition number** ({numref}`§ {number} <section-intro-conditioning>`)</br>
-  Ratio of the size of change in the output of a function to the size of change in the input that produced it.
+GMRES
+: Iterative solution of a linear system through stable least-squares solutions on nested Krylov subspaces. \
+(@section-krylov-gmres)
 
-**cubic spline** ({numref}`§ {number} <section-localapprox-splines>`)</br>
-  Piecewise cubic function with two globally continuous derivatives, most often used for interpolation or approximation.
+graph
+: Representation of a network as a set of nodes and edges. \
+(@section-matrixanaly-insight)
 
-**diagonalizable** ({numref}`§ {number} <section-matrixanaly-evd>`)</br>
-  Matrix that admits an eigenvalue decomposition. Also known as nondefective.
+hat functions
+: Cardinal functions for piecewise linear interpolation. \
+(@section-localapprox-pwlin)
 
-**differentiation matrix** ({numref}`§ {number} <section-bvp-diffmats>`)</br>
-  Matrix mapping a vector of function values to a vector of approximate derivative values.
+heat equation
+: Archetypical parabolic PDE that describes diffusion. \
+(@section-diffusion-blackscholes)
 
-**Dirichlet condition** ({numref}`§ {number} <section-bvp-tpbvp>`)</br>
-  Boundary condition specifying the value of the solution.
+hermitian
+: Combination of transpose and elementwise complex conjugation. Also describes a matrix that equals its own hermitian. \
+(@section-matrixanaly-symm-eig)
 
-**dominant eigenvalue** ({numref}`§ {number} <section-krylov-power>`)</br>
-  Eigenvalue with the largest modulus (absolute value, in the real case).
+hermitian positive definite (HPD)
+: Matrix that is hermitian with strictly positive eigenvalues; complex variant of symmetric positive definite. \
+(@section-matrixanaly-symm-eig)
 
-**double precision** ({numref}`§ {number} <section-intro-floating-point>`)</br>
-  Typical standard in floating-point representation, using 64 bits to achieve about 16 decimal significant digits of precision.
+identity matrix
+: Matrix with ones on the diagonal and zeros elsewhere, acting as the multiplicative identity. \
+(@section-linsys-matrices)
 
-**eigenvalue** ({numref}`§ {number} <section-matrixanaly-evd>`)</br>
-  Scalar $\lambda$ such that $\mathbf{A}\mathbf{x} = \lambda \mathbf{x}$ for a square matrix $\mathbf{A}$ and nonzero vector $\mathbf{x}$.
+ill-conditioned
+: Exhibiting a large condition number, indicating high sensitivity of a result to changes in the data. \
+(@section-intro-conditioning)
 
-**eigenvalue decomposition (EVD)** ({numref}`§ {number} <section-matrixanaly-evd>`)</br>
-  Expression of a square matrix as the product of eigenvector and diagonal eigenvalue matrices.
+implicit
+: Formula that defines a quantity only indirectly, e.g., as the solution of a nonlinear equation. \
+(@section-ivp-multistep)
 
-**eigenvector** ({numref}`§ {number} <section-matrixanaly-evd>`)</br>
-  Vector for which the action of a matrix is effectively one-dimensional. 
+induced matrix norm
+: Norm computed using the interpretation of a matrix as a linear operator. \
+(@section-linsys-norms)
 
-**Euler's method** ({numref}`§ {number} <section-ivp-euler>`)</br>
-  Prototype of all IVP solution methods, obtained by assuming constant derivatives for the solution over short time intervals.
+initial-value problem (IVP)
+: An ordinary differential equation (possibly vector-valued) together with an initial condition. \
+(@section-ivp-basics, @section-ivp-systems)
 
-**evolutionary PDE** ({numref}`§ {number} <section-diffusion-blackscholes>`)</br>
-  A partial differential equation in which one of the independent variables is time or a close analog.
+inner product
+: Scalar or dot product of a pair of vectors, or its extension to a pair of functions. \
+(@section-globalapprox-orthogonal)
 
-**extrapolation** ({numref}`§ {number} <section-localapprox-integration>`)</br>
-  Use of multiple discretization values to cancel out leading terms in an error expansion.
+interpolation
+: Construction of a function that passes through a given set of data points. \
+(@section-linsys-polyinterp, @section-localapprox-interpolation)
 
-**finite difference** ({numref}`§ {number} <section-localapprox-finitediffs>`)</br>
-  Linear combination of function values that approximates the value of a derivative of the function at a point.
+inverse iteration
+: Subtraction of a shift followed by matrix inversion, used in power iteration to transform the eigenvalue closest to a target value into a dominant one.  \
+(@section-krylov-inviter)
 
-**finite element method (FEM)** ({numref}`§ {number} <section-bvp-galerkin>`)</br>
-  Use of piecewise integration to pose a linear system of equations for the approximate solution of a boundary-value problem.
+Jacobian matrix
+: Matrix of first partial derivatives that defines the linearization of a vector-valued function. \
+(@section-nonlineqn-newtonsys)
 
-**fixed point iteration** ({numref}`§ {number} <section-nonlineqn-fixed-point>`)</br>
-  Repeated application of a function in hopes of converging to a fixed point.
+Kronecker product
+: Alternative type of matrix multiplication useful for problems on a tensor-product domain. \
+(@section-twodim-laplace)
 
-**fixed point problem** ({numref}`§ {number} <section-nonlineqn-fixed-point>`)</br>
-  Finding a value of a given function where the input and output values are the same; equivalent to rootfinding.
+Krylov subspace
+: Vector space generated by powers of a square matrix that is often useful for reducing the dimension of large problems. \
+(@section-krylov-subspace)
 
-**floating-point numbers** ({numref}`§ {number} <section-intro-floating-point>`)</br>
-  A finite set that substitutes for the real numbers in machine calculations. Denoted by $\mathbb{F}$.
+Lagrange formula
+: Theoretically useful expression for an interpolating polynomial. \
+(@section-globalapprox-polynomial)
 
-**flops** ({numref}`§ {number} <section-linsys-efficiency>`)</br>
-  Arithmetic operations on floating-point numbers, often counted as a proxy for computer runtime.
+Lanczos iteration
+: Specialization of the Arnoldi iteration to the case of a hermitian (or real symmetric) matrix. \
+(@section-krylov-minrescg)
 
-**forward substitution** ({numref}`§ {number} <section-linsys-linear-systems>`)</br>
-  Systematic method for solving a linear system with a lower triangular matrix.
+Laplace equation
+: Archetypical elliptic PDE describing a steady state. \
+(@section-twodim-laplace)
 
-**Frobenius norm** ({numref}`§ {number} <section-linsys-norms>`)</br>
-  Matrix norm computed by applying the vector 2-norm to a vector interpretation of the matrix.
+linear convergence
+: Sequence in which the difference between sequence value and limit asymptotically decreases by a constant factor at each term, making a straight line on a log-linear graph.\ 
+(@section-nonlineqn-fixed-point)
 
-**Gauss–Newton method** ({numref}`§ {number} <section-nonlineqn-nlsq>`)</br>
-  Generalization of Newton's method for nonlinear least squares.
+linear least-squares problem
+: Minimization of the 2-norm of the residual for an overdetermined linear system. \
+(@section-leastsq-fitting)
 
-**Gaussian elimination** ({numref}`§ {number} <section-linsys-lu>`)</br>
-  Use of row operations to transform a linear system to an equivalent one in triangular form.
+local truncation error
+: Discretization error made in one time step of an IVP solution method. \
+(@section-ivp-euler, @section-ivp-multistep)
 
-**generating polynomials** ({numref}`§ {number} <section-ivp-multistep>`)</br>
-  A pair of polynomials whose coefficients match those of a multistep method for IVPs.
+LU factorization
+: Factorization of a square matrix into the product of a unit lower triangular matrix and an upper triangular matrix. \
+(@section-linsys-lu)
 
-**global error** ({numref}`§ {number} <section-ivp-euler>`)</br>
-  Error made by an IVP method over the entire time interval of the solution.
+machine epsilon
+: Distance from 1 to the next-largest floating-point number. Also called unit roundoff or machine precision, though the usages are not consistent across different references.\ 
+(@section-intro-floating-point)
 
-**GMRES** ({numref}`§ {number} <section-krylov-gmres>`)</br>
-  Iterative solution of a linear system through stable least-squares solutions on nested Krylov subspaces.
+matrix condition number
+: Norm of the matrix times the norm of its inverse, equivalent to the condition number for solving a linear system. \
+(@section-linsys-condition-number)
 
-**graph** ({numref}`§ {number} <section-matrixanaly-insight>`)</br>
-  Representation of a network as a set of nodes and edges.
+method of lines
+: Solution technique for partial differential equations in which each independent variable is discretized separately. \
+(@section-diffusion-methodlines)
 
-**hat functions** ({numref}`§ {number} <section-localapprox-pwlin>`)</br>
-  Cardinal functions for piecewise linear interpolation.
+multistep
+: Formula using information over more than a single time step to advance the solution. \
+(@section-ivp-multistep)
 
-**heat equation** ({numref}`§ {number} <section-diffusion-blackscholes>`)</br>
-  Archetypical parabolic PDE that describes diffusion.
+Neumann condition
+: Boundary condition specifying the derivative of the solution. \
+(@section-bvp-tpbvp)
 
-**hermitian** ({numref}`§ {number} <section-matrixanaly-symm-eig>`)</br>
-  Combination of transpose and elementwise complex conjugation. Also describes a matrix that equals its own hermitian.
+Newton's method
+: Rootfinding iteration that uses the linearization of the given function in order to define the next root approximation. \
+(@section-nonlineqn-newton)
 
-**hermitian positive definite (HPD)** ({numref}`§ {number} <section-matrixanaly-symm-eig>`)</br>
-  Matrix that is hermitian with strictly positive eigenvalues; complex variant of symmetric positive definite.
+nodes
+: Values of the independent variable where an interpolant's values are prescribed. \
+(@section-localapprox-interpolation)
 
-**identity matrix** ({numref}`§ {number} <section-linsys-matrices>`)</br>
-  Matrix with ones on the diagonal and zeros elsewhere, acting as the multiplicative identity.
+nonlinear least-squares problem
+: Minimization of the 2-norm of the residual of a function that depends nonlinearly on a vector. \
+(@section-nonlineqn-nlsq)
 
-**ill-conditioned** ({numref}`§ {number} <section-intro-conditioning>`)</br>
-  Exhibiting a large condition number, indicating high sensitivity of a result to changes in the data.
+norm
+: Means of defining the magnitude of a vector or matrix. \
+(@section-linsys-norms)
 
-**implicit** ({numref}`§ {number} <section-ivp-multistep>`)</br>
-  Formula that defines a quantity only indirectly, e.g., as the solution of a nonlinear equation.
+normal
+: Matrix that has a unitary eigenvalue decomposition. \
+(@section-matrixanaly-evd)
 
-**induced matrix norm** ({numref}`§ {number} <section-linsys-norms>`)</br>
-  Norm computed using the interpretation of a matrix as a linear operator.
+normal equations
+: Square linear system equivalent to the linear least-squares problem. \
+(@section-leastsq-normaleqns)
 
-**initial-value problem (IVP)** ({numref}`§ {number} <section-ivp-basics>`, {numref}`§ {number} <section-ivp-systems>`)</br>
-  An ordinary differential equation (possibly vector-valued) together with an initial condition.
+numerical integration
+: Estimation of a definite integral by combining values of the integrand, rather than by finding an antiderivative. \
+(@section-localapprox-integration)
 
-**inner product** ({numref}`§ {number} <section-globalapprox-orthogonal>`)</br>
-  Scalar or dot product of a pair of vectors, or its extension to a pair of functions.
+one-step IVP method
+: IVP solver that uses information from just one time level to advance to the next. \
+(@section-ivp-euler)
 
-**interpolation** ({numref}`§ {number} <section-linsys-polyinterp>`, {numref}`§ {number} <section-localapprox-interpolation>`)</br>
-  Construction of a function that passes through a given set of data points.
+ONC matrix
+: Matrix whose columns are orthonormal vectors. \
+(@section-leastsq-qr)
 
-**inverse iteration** ({numref}`§ {number} <section-krylov-inviter>`)</br>
-  Subtraction of a shift followed by matrix inversion, used in power iteration to transform the eigenvalue closest to a target value into a dominant one. 
+order of accuracy
+: Leading power of the truncation error as a function of a discretization size parameter. \
+(@section-localapprox-fd-converge, @section-localapprox-integration, @section-ivp-euler, @section-ivp-multistep)
 
-**Jacobian matrix** ({numref}`§ {number} <section-nonlineqn-newtonsys>`)</br>
-  Matrix of first partial derivatives that defines the linearization of a vector-valued function.
+orthogonal vectors
+: Nonzero vectors that have an inner product of zero. \
+(@section-leastsq-qr)
 
-**Kronecker product** ({numref}`§ {number} <section-twodim-laplace>`)</br>
-  Alternative type of matrix multiplication useful for problems on a tensor-product domain.
+orthogonal matrix
+: Square ONC matrix, i.e., matrix whose transpose is its inverse. \
+(@section-leastsq-qr)
 
-**Krylov subspace** ({numref}`§ {number} <section-krylov-subspace>`)</br>
-  Vector space generated by powers of a square matrix that is often useful for reducing the dimension of large problems.
+orthogonal polynomials
+: Family of polynomials whose distinct members have an integral inner product equal to zero, as with Legendre and Chebyshev polynomials. \
+(@section-globalapprox-orthogonal)
 
-**Lagrange formula** ({numref}`§ {number} <section-globalapprox-polynomial>`)</br>
-  Theoretically useful expression for an interpolating polynomial.
+orthonormal vectors
+: Vectors that are both mutually orthogonal and all of unit 2-norm. \
+(@section-leastsq-qr)
 
-**Lanczos iteration** ({numref}`§ {number} <section-krylov-minrescg>`)</br>
-  Specialization of the Arnoldi iteration to the case of a hermitian (or real symmetric) matrix.
+outer product
+: Multiplication of two vectors resulting in a rank-1 matrix. \
+(@section-linsys-lu)
 
-**Laplace equation** ({numref}`§ {number} <section-twodim-laplace>`)</br>
-  Archetypical elliptic PDE describing a steady state.
+overdetermined
+: Characterized by having more constraints than available degrees of freedom. \
+(@section-leastsq-fitting)
 
-**linear convergence** ({numref}`§ {number} <section-nonlineqn-fixed-point>`)</br>
-  Sequence in which the difference between sequence value and limit asymptotically decreases by a constant factor at each term, making a straight line on a log-linear graph.
+piecewise linear
+: Function that is linear between each consecutive pair of nodes, but whose slope may jump at the nodes. \
+(@section-localapprox-pwlin)
 
-**linear least-squares problem** ({numref}`§ {number} <section-leastsq-fitting>`)</br>
-  Minimization of the 2-norm of the residual for an overdetermined linear system.
+PLU factorization
+: LU factorization with row pivoting. \
+(@section-linsys-pivoting)
 
-**local truncation error** ({numref}`§ {number} <section-ivp-euler>`, {numref}`§ {number} <section-ivp-multistep>`)</br>
-  Discretization error made in one time step of an IVP solution method.
+power iteration
+: Repeated application of a matrix to a vector, followed by normalization, resulting in convergence to an eigenvector for the dominant eigenvalue. \
+(@section-krylov-power)
 
-**LU factorization** ({numref}`§ {number} <section-linsys-lu>`)</br>
-  Factorization of a square matrix into the product of a unit lower triangular matrix and an upper triangular matrix.
+preconditioning
+: Use of an approximate inverse to improve the convergence rate of Krylov iterations for a linear system. \
+(@section-krylov-precond)
 
-**machine epsilon** ({numref}`§ {number} <section-intro-floating-point>`)</br>
-  Distance from 1 to the next-largest floating-point number. Also called unit roundoff or machine precision, though the usages are not consistent across different references.
+pseudoinverse
+: Rectangular matrix that maps data to solution in the linear least-squares problem, generalizing the matrix inverse. \
+(@section-leastsq-normaleqns)
 
-**matrix condition number** ({numref}`§ {number} <section-linsys-condition-number>`)</br>
-  Norm of the matrix times the norm of its inverse, equivalent to the condition number for solving a linear system.
+QR factorization
+: Representation of a matrix as the product of an orthogonal and an upper triangular matrix. \
+(@section-leastsq-qr)
 
-**method of lines** ({numref}`§ {number} <section-diffusion-methodlines>`)</br>
-  Solution technique for partial differential equations in which each independent variable is discretized separately.
+quadratic convergence
+: Sequence in which the difference between sequence value and limit asymptotically decreases by a constant times the square of the preceding difference. \
+(@section-nonlineqn-newton)
 
-**multistep** ({numref}`§ {number} <section-ivp-multistep>`)</br>
-  Formula using information over more than a single time step to advance the solution.
+quasi-Newton methods
+: Rootfinding methods that overcome the issues of Jacobian computation and lack of global convergence in Newton's method. \
+(@section-nonlineqn-quasinewton)
 
-**Neumann condition** ({numref}`§ {number} <section-bvp-tpbvp>`)</br>
-  Boundary condition specifying the derivative of the solution.
+quasimatrix
+: Collection of functions (such as orthogonal polynomials) that have algebraic parallels to columns of a matrix. \
+(@section-globalapprox-orthogonal)
 
-**Newton's method** ({numref}`§ {number} <section-nonlineqn-newton>`)</br>
-  Rootfinding iteration that uses the linearization of the given function in order to define the next root approximation.
+Rayleigh quotient
+: Function of vectors that equals an eigenvalue when given its eigenvector as input. \
+(@section-matrixanaly-symm-eig)
 
-**nodes** ({numref}`§ {number} <section-localapprox-interpolation>`)</br>
-  Values of the independent variable where an interpolant's values are prescribed.
+reduced QR factorization
+: See *thin QR*. \
+/br>
 
-**nonlinear least-squares problem** ({numref}`§ {number} <section-nonlineqn-nlsq>`)</br>
-  Minimization of the 2-norm of the residual of a function that depends nonlinearly on a vector.
+reduced SVD
+: See *thin SVD*. \
+/br>
 
-**norm** ({numref}`§ {number} <section-linsys-norms>`)</br>
-  Means of defining the magnitude of a vector or matrix.
+residual
+: For a linear system, the difference between $\mathbf{b}$ and $\mathbf{A}\tilde{\mathbf{x}}$ for a computed solution approximation $\tilde{\mathbf{x}}$. More generally, the actual value of a quantity that is made zero by an exact solution. \
+(@section-linsys-condition-number, @section-nonlineqn-rootproblem)
 
-**normal** ({numref}`§ {number} <section-matrixanaly-evd>`)</br>
-  Matrix that has a unitary eigenvalue decomposition.
+restarting
+: Technique used in GMRES to prevent the work per iteration and overall storage from growing uncontrollably. \
+(@section-krylov-gmres)
 
-**normal equations** ({numref}`§ {number} <section-leastsq-normaleqns>`)</br>
-  Square linear system equivalent to the linear least-squares problem.
+rootfinding problem
+: Finding the input value for a given function which makes that function zero. \
+(@section-nonlineqn-rootproblem)
 
-**numerical integration** ({numref}`§ {number} <section-localapprox-integration>`)</br>
-  Estimation of a definite integral by combining values of the integrand, rather than by finding an antiderivative.
+row pivoting
+: Reordering rows during LU factorization to ensure that the factorization exists and can be computed stably. \
+(@section-linsys-pivoting)
 
-**one-step IVP method** ({numref}`§ {number} <section-ivp-euler>`)</br>
-  IVP solver that uses information from just one time level to advance to the next.
+Runge phenomenon
+: Manifestation of the instability of polynomial interpolation at equally spaced nodes as degree increases. \
+(@section-globalapprox-stability)
 
-**ONC matrix** ({numref}`§ {number} <section-leastsq-qr>`)</br>
-  Matrix whose columns are orthonormal vectors.
+Runge--Kutta
+: One-step method for IVPs that evaluates the derivative of the solution more than once to advance a single step. \
+(@section-ivp-rk)
 
-**order of accuracy** ({numref}`§ {number} <section-localapprox-fd-converge>`, {numref}`§ {number} <section-localapprox-integration>`, {numref}`§ {number} <section-ivp-euler>`, {numref}`§ {number} <section-ivp-multistep>`)</br>
-  Leading power of the truncation error as a function of a discretization size parameter.
+secant method
+: Scalar quasi-Newton method that uses a secant line rather than a tangent line to define a root estimate. \
+(@section-nonlineqn-secant)
 
-**orthogonal vectors** ({numref}`§ {number} <section-leastsq-qr>`)</br>
-  Nonzero vectors that have an inner product of zero.
+shooting
+: Unstable technique for solving a boundary-value problem in which an initial value is sought for by a rootfinding algorithm. \
+(@section-bvp-shooting)
 
-**orthogonal matrix** ({numref}`§ {number} <section-leastsq-qr>`)</br>
-  Square ONC matrix, i.e., matrix whose transpose is its inverse.
+simple root
+: Root of a function at which the derivative of the function is nonzero. \
+(@section-nonlineqn-rootproblem)
 
-**orthogonal polynomials** ({numref}`§ {number} <section-globalapprox-orthogonal>`)</br>
-  Family of polynomials whose distinct members have an integral inner product equal to zero, as with Legendre and Chebyshev polynomials.
+singular value decomposition (SVD)
+: Expression of a matrix as a product of two orthogonal/unitary matrices and a nonnegative diagonal matrix. \
+(@section-matrixanaly-svd)
 
-**orthonormal vectors** ({numref}`§ {number} <section-leastsq-qr>`)</br>
-  Vectors that are both mutually orthogonal and all of unit 2-norm.
+sparse
+: Describing a matrix that has mostly zero elements for structural reasons. \
+(@section-linsys-structure, @section-krylov-structure)
 
-**outer product** ({numref}`§ {number} <section-linsys-lu>`)</br>
-  Multiplication of two vectors resulting in a rank-1 matrix.
+spectral convergence
+: Exponentially rapid decrease in error as the number of interpolation nodes increases, e.g., as observed in Chebyshev polynomial and trigonometric interpolation. \
+(@section-globalapprox-stability)
 
-**overdetermined** ({numref}`§ {number} <section-leastsq-fitting>`)</br>
-  Characterized by having more constraints than available degrees of freedom.
+stability region
+: Region of the complex plane describing when numerical solution of a linear IVP is bounded as $t\to\infty$. \
+(@section-diffusion-absstab)
 
-**piecewise linear** ({numref}`§ {number} <section-localapprox-pwlin>`)</br>
-  Function that is linear between each consecutive pair of nodes, but whose slope may jump at the nodes.
+step size
+: Increment in time between successive solution values in a numerical IVP solver. \
+(@section-ivp-euler)
 
-**PLU factorization** ({numref}`§ {number} <section-linsys-pivoting>`)</br>
-  LU factorization with row pivoting.
+stiff
+: Describes an IVP in which stability is a greater restriction than accuracy for many solution methods, usually favoring the use of an implicit time stepping method. \
+(@section-ivp-implicit, @section-diffusion-stiffness)
 
-**power iteration** ({numref}`§ {number} <section-krylov-power>`)</br>
-  Repeated application of a matrix to a vector, followed by normalization, resulting in convergence to an eigenvector for the dominant eigenvalue.
+subtractive cancellation
+: Growth in relative error that occurs when two numbers are added/subtracted to get a result that is much smaller in magnitude than the operands; also called *loss of significance* or *cancellation error*. \
+(@section-intro-conditioning)
 
-**preconditioning** ({numref}`§ {number} <section-krylov-precond>`)</br>
-  Use of an approximate inverse to improve the convergence rate of Krylov iterations for a linear system.
+superlinear convergence
+: Sequence for which the convergence is asymptotically faster than any linear rate. \
+(@section-nonlineqn-secant)
 
-**pseudoinverse** ({numref}`§ {number} <section-leastsq-normaleqns>`)</br>
-  Rectangular matrix that maps data to solution in the linear least-squares problem, generalizing the matrix inverse.
+symmetric matrix
+: Square matrix that is equal to its transpose. \
+(@section-linsys-matrices)
 
-**QR factorization** ({numref}`§ {number} <section-leastsq-qr>`)</br>
-  Representation of a matrix as the product of an orthogonal and an upper triangular matrix.
+symmetric positive definite (SPD) matrix
+: Matrix that is symmetric and positive definite, thereby permitting a Cholesky factorization. Correspondingly called hermitian positive definite in the complex case. \
+(@section-linsys-structure)
 
-**quadratic convergence** ({numref}`§ {number} <section-nonlineqn-newton>`)</br>
-  Sequence in which the difference between sequence value and limit asymptotically decreases by a constant times the square of the preceding difference.
+tensor-product domain
+: A domain that can be parameterized using variables that lay in a logical rectangle or cuboid; i.e., each variable independently varies in an interval. \
+(@section-twodim-tensorprod)
 
-**quasi-Newton methods** ({numref}`§ {number} <section-nonlineqn-quasinewton>`)</br>
-  Rootfinding methods that overcome the issues of Jacobian computation and lack of global convergence in Newton's method.
+thin QR factorization
+: Variant of the QR factorization that discards information not needed to fully represent the original matrix. \
+(@section-leastsq-qr)
 
-**quasimatrix** ({numref}`§ {number} <section-globalapprox-orthogonal>`)</br>
-  Collection of functions (such as orthogonal polynomials) that have algebraic parallels to columns of a matrix.
+thin SVD
+: Variant of the singular value decomposition that discards information not needed to fully represent the original matrix. \
+(@section-matrixanaly-svd)
 
-**Rayleigh quotient** ({numref}`§ {number} <section-matrixanaly-symm-eig>`)</br>
-  Function of vectors that equals an eigenvalue when given its eigenvector as input.
+trapezoid formula
+: Numerical integration method resulting from integration of a piecewise linear interpolant. \
+(@section-localapprox-integration, @section-ivp-multistep)
 
-**reduced QR factorization**</br>
-  See *thin QR*.
+triangular matrix
+: Matrix that is all zero either above (for lower triangular) or below (for upper triangular) the main diagonal. \
+(@section-linsys-linear-systems)
 
-**reduced SVD**</br>
-  See *thin SVD*.
+tridiagonal matrix
+: Matrix with nonzeros only on the main diagonal and the adjacent two diagonals. \
+(@section-linsys-structure)
 
-**residual** ({numref}`§ {number} <section-linsys-condition-number>`, {numref}`§ {number} <section-nonlineqn-rootproblem>`)</br>
-  For a linear system, the difference between $\mathbf{b}$ and $\mathbf{A}\tilde{\mathbf{x}}$ for a computed solution approximation $\tilde{\mathbf{x}}$. More generally, the actual value of a quantity that is made zero by an exact solution.
+trigonometric interpolation
+: Interpolation of a periodic function by a linear combination of real or complex trigonometric functions. \
+(@section-globalapprox-trig)
 
-**restarting** ({numref}`§ {number} <section-krylov-gmres>`)</br>
-  Technique used in GMRES to prevent the work per iteration and overall storage from growing uncontrollably.
+truncation error
+: Difference between an exact value and an approximation, such as one that truncates an infinite series. \
+(@section-localapprox-fd-converge, @section-localapprox-integration)
 
-**rootfinding problem** ({numref}`§ {number} <section-nonlineqn-rootproblem>`)</br>
-  Finding the input value for a given function which makes that function zero.
+unit triangular matrix
+: Triangular matrix that has a 1 in every position on the main diagonal. \
+(@section-linsys-lu)
 
-**row pivoting** ({numref}`§ {number} <section-linsys-pivoting>`)</br>
-  Reordering rows during LU factorization to ensure that the factorization exists and can be computed stably.
+unit vector
+: A vector whose norm equals 1. \
+(@section-linsys-norms)
 
-**Runge phenomenon** ({numref}`§ {number} <section-globalapprox-stability>`)</br>
-  Manifestation of the instability of polynomial interpolation at equally spaced nodes as degree increases.
+unitary
+: Square matrix with complex-valued entries whose columns are orthonormal. \
+(@section-matrixanaly-evd)
 
-**Runge--Kutta** ({numref}`§ {number} <section-ivp-rk>`)</br>
-  One-step method for IVPs that evaluates the derivative of the solution more than once to advance a single step.
+unstable
+: Allowing perturbations of the data to have much larger effects on the results than can be explained by the problem's condition number. \
+(@section-intro-stability)
 
-**secant method** ({numref}`§ {number} <section-nonlineqn-secant>`)</br>
-  Scalar quasi-Newton method that uses a secant line rather than a tangent line to define a root estimate.
+upper Hessenberg
+: Describing a matrix that has nonzeros only in the upper triangle and first subdiagonal. \
+(@section-krylov-subspace)
 
-**shooting** ({numref}`§ {number} <section-bvp-shooting>`)</br>
-  Unstable technique for solving a boundary-value problem in which an initial value is sought for by a rootfinding algorithm.
+Vandermonde matrix
+: Matrix whose columns are formed from elementwise powers of a given vector, important for polynomial interpolation and approximation of data. \
+(@section-linsys-polyinterp)
 
-**simple root** ({numref}`§ {number} <section-nonlineqn-rootproblem>`)</br>
-  Root of a function at which the derivative of the function is nonzero.
+weights
+: Coefficients in a linear combination of function values in a finite-difference or integration method. \
+(@section-localapprox-finitediffs, @section-localapprox-integration, @section-globalapprox-integration)
 
-**singular value decomposition (SVD)** ({numref}`§ {number} <section-matrixanaly-svd>`)</br>
-  Expression of a matrix as a product of two orthogonal/unitary matrices and a nonnegative diagonal matrix.
+zero-stable
+: Boundedness property of multistep methods that is required for convergence. \
+(@section-ivp-zerostability)
 
-**sparse** ({numref}`§ {number} <section-linsys-structure>`, {numref}`§ {number} <section-krylov-structure>`)</br>
-  Describing a matrix that has mostly zero elements for structural reasons.
-
-**spectral convergence** ({numref}`§ {number} <section-globalapprox-stability>`)</br>
-  Exponentially rapid decrease in error as the number of interpolation nodes increases, e.g., as observed in Chebyshev polynomial and trigonometric interpolation.
-
-**stability region** ({numref}`§ {number} <section-diffusion-absstab>`)</br>
-  Region of the complex plane describing when numerical solution of a linear IVP is bounded as $t\to\infty$.
-
-**step size** ({numref}`§ {number} <section-ivp-euler>`)</br>
-  Increment in time between successive solution values in a numerical IVP solver.
-
-**stiff** ({numref}`§ {number} <section-ivp-implicit>`, {numref}`§ {number} <section-diffusion-stiffness>`)</br>
-  Describes an IVP in which stability is a greater restriction than accuracy for many solution methods, usually favoring the use of an implicit time stepping method.
-
-**subtractive cancellation** ({numref}`§ {number} <section-intro-conditioning>`)</br>
-  Growth in relative error that occurs when two numbers are added/subtracted to get a result that is much smaller in magnitude than the operands; also called *loss of significance* or *cancellation error*.
-
-**superlinear convergence** ({numref}`§ {number} <section-nonlineqn-secant>`)</br>
-  Sequence for which the convergence is asymptotically faster than any linear rate.
-
-**symmetric matrix** ({numref}`§ {number} <section-linsys-matrices>`)</br>
-  Square matrix that is equal to its transpose.
-
-**symmetric positive definite (SPD) matrix** ({numref}`§ {number} <section-linsys-structure>`)</br>
-  Matrix that is symmetric and positive definite, thereby permitting a Cholesky factorization. Correspondingly called hermitian positive definite in the complex case.
-
-**tensor-product domain** ({numref}`§ {number} <section-twodim-tensorprod>`)</br>
-  A domain that can be parameterized using variables that lay in a logical rectangle or cuboid; i.e., each variable independently varies in an interval.
-
-**thin QR factorization** ({numref}`§ {number} <section-leastsq-qr>`)</br>
-  Variant of the QR factorization that discards information not needed to fully represent the original matrix.
-
-**thin SVD** ({numref}`§ {number} <section-matrixanaly-svd>`)</br>
-  Variant of the singular value decomposition that discards information not needed to fully represent the original matrix.
-
-**trapezoid formula** ({numref}`§ {number} <section-localapprox-integration>`, {numref}`§ {number} <section-ivp-multistep>`)</br>
-  Numerical integration method resulting from integration of a piecewise linear interpolant.
-
-**triangular matrix** ({numref}`§ {number} <section-linsys-linear-systems>`)</br>
-  Matrix that is all zero either above (for lower triangular) or below (for upper triangular) the main diagonal.
-
-**tridiagonal matrix** ({numref}`§ {number} <section-linsys-structure>`)</br>
-  Matrix with nonzeros only on the main diagonal and the adjacent two diagonals.
-
-**trigonometric interpolation** ({numref}`§ {number} <section-globalapprox-trig>`)</br>
-  Interpolation of a periodic function by a linear combination of real or complex trigonometric functions.
-
-**truncation error** ({numref}`§ {number} <section-localapprox-fd-converge>`, {numref}`§ {number} <section-localapprox-integration>`)</br>
-  Difference between an exact value and an approximation, such as one that truncates an infinite series.
-
-**unit triangular matrix** ({numref}`§ {number} <section-linsys-lu>`)</br>
-  Triangular matrix that has a 1 in every position on the main diagonal.
-
-**unit vector** ({numref}`§ {number} <section-linsys-norms>`)</br>
-  A vector whose norm equals 1.
-
-**unitary** ({numref}`§ {number} <section-matrixanaly-evd>`)</br>
-  Square matrix with complex-valued entries whose columns are orthonormal.
-
-**unstable** ({numref}`§ {number} <section-intro-stability>`)</br>
-  Allowing perturbations of the data to have much larger effects on the results than can be explained by the problem's condition number.
-
-**upper Hessenberg** ({numref}`§ {number} <section-krylov-subspace>`)</br>
-  Describing a matrix that has nonzeros only in the upper triangle and first subdiagonal.
-
-**Vandermonde matrix** ({numref}`§ {number} <section-linsys-polyinterp>`)</br>
-  Matrix whose columns are formed from elementwise powers of a given vector, important for polynomial interpolation and approximation of data.
-
-**weights** ({numref}`§ {number} <section-localapprox-finitediffs>`, {numref}`§ {number} <section-localapprox-integration>`, {numref}`§ {number} <section-globalapprox-integration>`)</br>
-  Coefficients in a linear combination of function values in a finite-difference or integration method.
-
-**zero-stable** ({numref}`§ {number} <section-ivp-zerostability>`)</br>
-  Boundedness property of multistep methods that is required for convergence.
-
-
+:::
