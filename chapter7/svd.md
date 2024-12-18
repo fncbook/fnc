@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 7.3.%s
+---
 (section-matrixanaly-svd)=
 # Singular value decomposition
 

@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 7.1.%s
+---
 (section-matrixanaly-insight)=
 # From matrix to insight
 

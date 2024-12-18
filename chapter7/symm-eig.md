@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 7.4.%s
+---
 (section-matrixanaly-symm-eig)=
 # Symmetry and definiteness
 

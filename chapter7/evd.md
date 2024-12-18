@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: 7.2.%s
+---
 (section-matrixanaly-evd)=
 # Eigenvalue decomposition
 
