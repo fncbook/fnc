@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 8.3.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-krylov-inviter)=
 # Inverse iteration
 
@@ -109,33 +93,28 @@ Note that in {numref}`Algorithm {number} <algorithm-power-power>`, we used $y_{k
 Each pass of inverse iteration requires the solution of a linear system of equations with the matrix $\mathbf{B}=\mathbf{A}-s\mathbf{I}$. This solution might use methods we consider later in this chapter. Here, we use (sparse) PLU factorization and hope for the best. Since the matrix $\mathbf{B}$ is constant, the factorization needs to be done only once for all iterations. The details are in {numref}`Function {number} <function-inviter>`.
 
 (function-inviter)=
-````{prf:function} inviter
-**Shifted inverse iteration for the closest eigenvalue**
+``````{prf:algorithm} inviter
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-inviter-julia
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    inviter(A,s,numiter)
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-inviter-matlab
+:::
+```` 
 
-Perform `numiter` inverse iterations with the matrix `A` and shift
-`s`, starting from a random vector. Returns a vector of
-eigenvalue estimates and the final eigenvector approximation.
-"""
-function inviter(A,s,numiter)
-    n = size(A,1)
-    x = normalize(randn(n),Inf)
-    β = zeros(numiter)
-    fact = lu(A - s*I)
-    for k in 1:numiter
-        y = fact\x
-        normy,m = findmax(abs.(y))
-        β[k] = x[m]/y[m] + s
-        x = y/y[m]
-    end
-    return β,x
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-inviter-python
+:::
 ````
+`````
+``````
+
 ## Convergence
 
 The convergence is linear, at a rate found by reinterpreting {eq}`poweriterconv` with $(\mathbf{A}-s\mathbf{I})^{-1}$ in place of $\mathbf{A}$:
@@ -149,77 +128,27 @@ The convergence is linear, at a rate found by reinterpreting {eq}`poweriterconv`
 with the eigenvalues ordered as in {eq}`shiftorder`. Thus, the convergence is best when the shift $s$ is close to the target eigenvalue $\lambda_1$, specifically when it is much closer to that eigenvalue than to any other.
 
 (demo-inviter-conv)=
-```{prf:example}
-```
-
-
-
-
-
-We set up a $5\times 5$ triangular matrix with prescribed eigenvalues on its diagonal.
-
-```{code-cell}
-λ = [1,-0.75,0.6,-0.4,0]
-# Make a triangular matrix with eigenvalues on the diagonal.
-A = triu(ones(5,5),1) + diagm(λ)
-```
-
-We run inverse iteration with the shift $s=0.7$ and take the final estimate as our "exact" answer to observe the convergence. 
-
-```{code-cell}
-s = 0.7
-β,x = FNC.inviter(A,s,30)
-eigval = β[end]
-```
-
-As expected, the eigenvalue that was found is the one closest to 0.7. The convergence is again linear.
-
-```{code-cell}
-err = @. abs(eigval-β)
-plot(0:28,err[1:end-1],m=:o,
-    title="Convergence of inverse iteration",
-    xlabel=L"k",yaxis=(L"|\lambda_3-\beta_k|",:log10,[1e-16,1]))
-```
-
-The observed linear convergence rate is found from the data. 
-
-```{code-cell}
-@show observed_rate = err[22]/err[21];
-```
-
-```{index} ! Julia; sortperm
-```
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-We reorder the eigenvalues to enforce {eq}`shiftorder`. 
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-inviter-conv-julia
 :::
-:::{card}
+```` 
 
-
-The `sortperm` function returns the index permutation needed to sort the given vector, rather than the sorted vector itself.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-inviter-conv-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-inviter-conv-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-λ = λ[ sortperm(abs.(λ.-s)) ]
-```
-
-Hence the theoretical convergence rate is
-
-```{code-cell}
-@show theoretical_rate = (λ[1]-s) / (λ[2]-s);
-```
-
-
-
-
 
 ## Dynamic shifting
 
@@ -231,50 +160,27 @@ There is a clear opportunity for positive feedback in {numref}`Algorithm {number
 Let's analyze the resulting convergence. If the eigenvalues are ordered by distance to $s$, then the convergence is linear with rate $|\lambda_1-s|/|\lambda_2-s|$. As $s\to\lambda_1$, the change in the denominator is negligible. So if the error $(\lambda_1-s)$ is $\epsilon$, then the error in the next estimate is reduced by a factor $O(\epsilon)$. That is, $\epsilon$ becomes $O(\epsilon^2)$, which is *quadratic* convergence.
 
 (demo-inviter-accel)=
-:::{prf:example}
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-inviter-accel-julia
 :::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-inviter-accel-matlab
+:::
+```` 
 
-
-
-
-```{code-cell}
-λ = [1,-0.75,0.6,-0.4,0]
-# Make a triangular matrix with eigenvalues on the diagonal.
-A = triu(ones(5,5),1) + diagm(λ) 
-```
-
-We begin with a shift $s=0.7$, which is closest to the eigenvalue 0.6.
-
-```{code-cell}
-s = 0.7
-x = ones(5)
-y = (A-s*I)\x
-β = x[1]/y[1] + s
-```
-
-Note that the result is not yet any closer to the targeted 0.6. But we proceed (without being too picky about normalization here).
-
-```{code-cell}
-s = β
-x = y/y[1]
-y = (A-s*I)\x
-β = x[1]/y[1] + s
-```
-
-Still not much apparent progress. However, in just a few more iterations the results are dramatically better.
-
-```{code-cell}
-for k in 1:4
-    s = β  
-    x = y/y[1]
-    y = (A-s*I)\x  
-    @show β = x[1]/y[1] + s
-end
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-inviter-accel-python
+:::
+```` 
+`````
+::::
 
 There is a price to pay for this improvement. The matrix of the linear system to be solved, $(\mathbf{A}-s\mathbf{I})$, now changes with each iteration. That means that we can no longer do just one LU factorization for the entire iteration. The speedup in convergence usually makes this tradeoff worthwhile, however.
 

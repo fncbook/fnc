@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 8.4.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-krylov-subspace)=
 # Krylov subspaces
 
@@ -90,51 +74,27 @@ For instance, we can interpret $\mathbf{A}\mathbf{x}_m\approx \mathbf{b}$ in the
 The natural seed vector for $\mathcal{K}_m$ in this case is the vector $\mathbf{b}$. In the next example we try to implement {eq}`gmresdef`. We do take one precaution: because the vectors $\mathbf{A}^{k}\mathbf{b}$ may become very large or small in norm, we normalize after each multiplication by $\mathbf{A}$, just as we did in the power iteration.
 
 (demo-subspace-unstable)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-subspace-unstable-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-subspace-unstable-matlab
+:::
+````
 
-
-
-
-First we define a triangular matrix with known eigenvalues, and a random vector $b$.
-
-```{code-cell}
-λ = @. 10 + (1:100)
-A = triu(rand(100,100),1) + diagm(λ)
-b = rand(100);
-```
-
-Next we build up the first ten Krylov matrices iteratively, using renormalization after each matrix-vector multiplication. 
-
-```{code-cell}
-Km = [b zeros(100,29)]
-for m in 1:29      
-    v = A*Km[:,m]
-    Km[:,m+1] = v/norm(v)
-end
-```
-
-Now we solve least-squares problems for Krylov matrices of increasing dimension, recording the residual in each case.
-
-```{code-cell}
-resid = zeros(30)
-for m in 1:30  
-    z = (A*Km[:,1:m])\b
-    x = Km[:,1:m]*z
-    resid[m] = norm(b-A*x)
-end
-```
-
-The linear system approximations show smooth linear convergence at first, but the convergence stagnates after only a few digits have been found.
-
-```{code-cell}
-plot(0:29,resid,m=:o,
-    xaxis=(L"m"),yaxis=(:log10,L"\| b-Ax_m \|"), 
-    title="Residual for linear systems",leg=:none)
-```
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-subspace-unstable-python
+:::
+````
+`````
+::::
 
 
 ## The Arnoldi iteration
@@ -202,61 +162,27 @@ Given matrix $\mathbf{A}$ and vector $\mathbf{u}$:
 The Arnoldi iteration finds nested orthonormal bases for a family of nested Krylov subspaces.
 
 (demo-subspace-arnoldi)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-subspace-arnoldi-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-subspace-arnoldi-matlab
+:::
+````
 
-
-
-
-We illustrate a few steps of the Arnoldi iteration for a small matrix.
-
-```{code-cell}
-A = rand(1.:9.,6,6)
-```
-
-The seed vector we choose here determines the first member of the orthonormal basis.
-
-```{code-cell}
-u = randn(6)
-Q = u/norm(u);
-```
-
-Multiplication by $\mathbf{A}$ gives us a new vector in $\mathcal{K}_2$. 
-
-```{code-cell}
-Aq = A*Q[:,1];
-```
-
-We subtract off its projection in the previous direction. The remainder is rescaled to give us the next orthonormal column.
-
-```{code-cell}
-v = Aq - dot(Q[:,1],Aq)*Q[:,1]
-Q = [Q v/norm(v)];
-```
-
-On the next pass, we have to subtract off the projections in two previous directions.
-
-```{code-cell}
-Aq = A*Q[:,2]
-v = Aq - dot(Q[:,1],Aq)*Q[:,1] - dot(Q[:,2],Aq)*Q[:,2]
-Q = [Q v/norm(v)];
-```
-
-At every step, $\mathbf{Q}_m$ is an ONC matrix.
-
-```{code-cell}
-@show opnorm( Q'*Q - I );
-```
-
-And $\mathbf{Q}_m$ spans the same space as the three-dimensional Krylov matrix.
-
-```{code-cell}
-K = [ u A*u A*A*u ];
-@show rank( [Q K] );
-```
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-subspace-arnoldi-python
+:::
+````
+`````
+::::
 
 
 ## Key identity
@@ -295,39 +221,27 @@ Equation {eq}`arnoldimat` is a fundamental identity of Krylov subspace methods.
 ## Implementation
 
 (function-arnoldi)=
-````{prf:function} arnoldi
-**Arnoldi iteration for Krylov subspaces**
+``````{prf:algorithm} arnoldi
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-arnoldi-julia
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    arnoldi(A,u,m)
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-arnoldi-matlab
+:::
+```` 
 
-Perform the Arnoldi iteration for `A` starting with vector `u`, out
-to the Krylov subspace of degree `m`. Returns the orthonormal basis
-(`m`+1 columns) and the upper Hessenberg `H` of size `m`+1 by `m`.
-"""
-function arnoldi(A,u,m)
-    n = length(u)
-    Q = zeros(n,m+1)
-    H = zeros(m+1,m)
-    Q[:,1] = u/norm(u)
-    for j in 1:m
-        # Find the new direction that extends the Krylov subspace.
-        v = A*Q[:,j]
-        # Remove the projections onto the previous vectors.
-        for i in 1:j
-            H[i,j] = dot(Q[:,i],v)
-            v -= H[i,j]*Q[:,i]
-        end
-        # Normalize and store the new basis vector.
-        H[j+1,j] = norm(v)
-        Q[:,j+1] = v/H[j+1,j]
-    end
-    return Q,H
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-arnoldi-python
+:::
 ````
+`````
+``````
 
 An implementation of the Arnoldi iteration is given in {numref}`Function {number} <function-arnoldi>`. A careful inspection shows that the loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}`arnoldigs`. The reason is numerical stability. Though the described and implemented versions are mathematically equivalent in exact arithmetic (see [Exercise 6](problem-subspace-modifiedgs)), the approach in {numref}`Function {number} <function-arnoldi>` is more stable.
 

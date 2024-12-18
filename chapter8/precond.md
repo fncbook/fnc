@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 8.8.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-krylov-precond)=
 # Preconditioning
 
@@ -58,52 +42,27 @@ Good preconditioning is a matter of finding an easily inverted (i.e., quickly so
 One of the simplest choices for the preconditioner $\mathbf{M}$ is a diagonal matrix. This definitely meets the requirement of being fast to invert: the solution of $\mathbf{M}\mathbf{v}=\mathbf{y}$ is just $v_i=y_i/M_{ii}$. The only question is whether it can be chosen in such a way that $\mathbf{M}^{-1}\mathbf{A}$ is much more amenable to Krylov iterations than $\mathbf{A}$ is. This may be the case when the rows of $\mathbf{A}$ differ greatly in scale, or when $\mathbf{A}$ is diagonally dominant (see {eq}`diag-dominant`).
 
 (demo-precond-diagonal)=
-:::{prf:example}
+::::{prf:example}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-precond-diagonal-julia
 :::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-precond-diagonal-matlab
+:::
+````
 
-
-
-
-Here is an SPD matrix that arises from solving partial differential equations.
-
-```{code-cell}
-A = matrixdepot("wathen",60)
-n = size(A,1)
-@show n,nnz(A);
-```
-
-```{index} ! Julia; DiagonalPreconditioner
-```
-
-There is an easy way to use the diagonal elements of $\mathbf{A}$, or any other vector, as a diagonal preconditioner.
-
-```{code-cell}
-b = ones(n)
-M = DiagonalPreconditioner(diag(A));
-```
-
-We now compare CG with and without the preconditioner.
-
-```{code-cell}
-:tags: [hide-input]
-plain(b) = cg(A,b,maxiter=200,reltol=1e-4,log=true)
-time_plain = @elapsed x,hist1 = plain(b)
-prec(b) = cg(A,b,Pl=M,maxiter=200,reltol=1e-4,log=true)
-time_prec = @elapsed x,hist2 = prec(b)
-@show time_plain,time_prec
-
-rr = hist1[:resnorm]
-plot(0:length(rr)-1,rr/rr[1],yscale=:log10,label="plain")
-rr = hist2[:resnorm]
-plot!(0:length(rr)-1,rr/rr[1],yscale=:log10,label="preconditioned")
-title!("Diagonal preconditioning in CG")
-```
-
-The diagonal preconditioner cut down substantially on the number of iterations. The effect on the total time is less dramatic, but this is not a large version of the problem.
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-precond-diagonal-python
+:::
+````
+`````
+::::
 
 
 ## Incomplete factorization
@@ -114,70 +73,27 @@ The diagonal preconditioner cut down substantially on the number of iterations. 
 Another general-purpose technique is the **incomplete LU factorization**. Since true factorization of a sparse matrix usually leads to an undesirable amount of fill-in, incomplete LU sacrifices exact factors by dropping elements smaller than an adjustable threshold.
 
 (demo-precond-gmres)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-precond-gmres-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-precond-gmres-matlab
+:::
+````
 
-
-
-
-Here is a nonsymmetric matrix arising from a probabilistic model in computational chemistry.
-
-```{code-cell}
-A = sparse(matrixdepot("Watson/chem_master1"))
-n = size(A,1)
-@show n,nnz(A),issymmetric(A)
-```
-
-Without a preconditioner, GMRES makes essentially no progress after 100 iterations. 
-
-```{code-cell}
-b = rand(40000)
-const GMRES = IterativeSolvers.gmres
-x,history = GMRES(A,b,maxiter=100,reltol=1e-5,log=true)
-resnorm = history[:resnorm]
-@show resnorm[end] / resnorm[1];
-```
-
-```{index} ! Julia; ilu
-```
-
-The following version of incomplete LU factorization drops all sufficiently small values (i.e., replaces them with zeros). This keeps the number of nonzeros in the factors under control. 
-
-```{code-cell}
-iLU = ilu(A,τ=0.25)
-@show nnz(iLU)/nnz(A);
-```
-
-The result is almost 10 times as dense as $\mathbf{A}$ and yet still not a true factorization of it. However, it's close enough for an approximate inverse in a preconditioner. The actual preconditioning matrix is $\mathbf{M}=\mathbf{L}\mathbf{U}$, but we just supply the factorization to `gmres`.
-
-```{code-cell}
-_,history = GMRES(A,b,Pl=iLU,maxiter=100,reltol=1e-5,log=true)
-history
-```
-
-The $\tau$ parameter in `ilu` balances the accuracy of the iLU factorization with the time needed to compute it and invert it. As $\tau\to 0$, more of the elements are kept, making the preconditioner more effective but slower per iteration. 
-
-```{code-cell}
-:tags: [hide-input]
-
-plt = plot(0:40,resnorm[1:41]/resnorm[1],label="no preconditioning",
-        xaxis=("iteration number"),yaxis=(:log10,"residual norm"),
-        leg=:bottomright,title="Incomplete LU preconditioning")
-    for τ in [2,1,0.25,0.1]
-        t = @elapsed iLU = ilu(A;τ)
-        t += @elapsed _,history = GMRES(A,b,Pl=iLU,maxiter=100,
-                                        reltol=1e-5,log=true)
-        resnorm = history[:resnorm]
-        label = "τ = $τ, time = $(round(t,digits=3))"
-        plot!(0:length(resnorm)-1,resnorm/resnorm[1];label)
-    end
-plt
-```
-
-In any given problem, it's impossible to know in advance where the right balance lies between fidelity and speed for the preconditioner.
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-precond-gmres-python
+:::
+````
+`````
+::::
 
 
 In practice, good preconditioning is often as important, if not more important, than the specific choice of Krylov method. Effective preconditioning may require deep understanding of the underlying application, however, which limits our ability to go into further details. For instance, the linear system may be some approximation of a continuous mathematical model, and then $\mathbf{M}$ can be derived by using a cruder form of the approximation. Krylov methods offer a natural way to exploit these and other approximate inverses.

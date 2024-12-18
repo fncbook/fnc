@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 8.5.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-krylov-gmres)=
 # GMRES
 
@@ -84,97 +68,54 @@ GMRES[^gmres] uses the Arnoldi iteration to minimize the residual $\mathbf{b} - 
 [^breakdown]: This statement is not strictly correct for rare special cases of *breakdown* where the rank of $\mathcal{K}_n$ is less than $n$. In that situation, some additional steps must be taken that we do not discuss here.
 
 (demo-gmres-intro)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-gmres-intro-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-gmres-intro-matlab
+:::
+```` 
 
-
-
-
-We define a triangular matrix with known eigenvalues and a random vector $\mathbf{b}$.
-
-```{code-cell}
-λ = @. 10 + (1:100)
-A = triu(rand(100,100),1) + diagm(λ)
-b = rand(100);
-```
-
-Instead of building the Krylov matrices, we use the Arnoldi iteration to generate equivalent orthonormal vectors. 
-
-```{code-cell}
-Q,H = FNC.arnoldi(A,b,60);
-```
-
-The Arnoldi bases are used to solve the least-squares problems defining the GMRES iterates. 
-
-```{code-cell}
-resid = [norm(b);zeros(60)]
-for m in 1:60  
-    s = [norm(b); zeros(m)]
-    z = H[1:m+1,1:m]\s
-    x = Q[:,1:m]*z
-    resid[m+1] = norm(b-A*x)
- end
-```
-
-The approximations converge smoothly, practically all the way to machine epsilon.
-
-```{code-cell}
-plot(0:60,resid,m=:o,
-    xaxis=(L"m"),yaxis=(:log10,"norm of mth residual"), 
-    title="Residual for GMRES",leg=:none)
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-gmres-intro-python
+:::
+```` 
+`````
+::::
 
 Compare the graph in {numref}`Demo %s <demo-gmres-intro>`  to the one in {numref}`Demo %s <demo-subspace-unstable>`. Both start with the same linear convergence, but only the version using Arnoldi avoids the instability created by the poor Krylov basis.
 
 A basic implementation of GMRES is given in {numref}`Function {number} <function-gmres>`.
 
 (function-gmres)=
-````{prf:function} gmres
-**GMRES for a linear system**
+``````{prf:algorithm} gmres
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-gmres-julia
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    gmres(A,b,m)
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-gmres-matlab
+:::
+```` 
 
-Do `m` iterations of GMRES for the linear system `A`*x=`b`. Returns
-the final solution estimate x and a vector with the history of
-residual norms. (This function is for demo only, not practical use.)
-"""
-function gmres(A,b,m)
-    n = length(b)
-    Q = zeros(n,m+1)
-    Q[:,1] = b/norm(b)
-    H = zeros(m+1,m)
-
-    # Initial solution is zero.
-    x = 0
-    residual = [norm(b);zeros(m)]
-
-    for j in 1:m
-        # Next step of Arnoldi iteration.
-        v = A*Q[:,j]
-        for i in 1:j
-            H[i,j] = dot(Q[:,i],v)
-            v -= H[i,j]*Q[:,i]
-        end
-        H[j+1,j] = norm(v)
-        Q[:,j+1] = v/H[j+1,j]
-
-        # Solve the minimum residual problem.
-        r = [norm(b); zeros(j)]
-        z = H[1:j+1,1:j] \ r
-        x = Q[:,1:j]*z
-        residual[j+1] = norm( A*x - b )
-    end
-    return x,residual
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-gmres-python
+:::
 ````
+`````
+``````
 
 ## Convergence and restarting
 
@@ -197,63 +138,27 @@ Suppose $\hat{\mathbf{x}}$ is an approximate solution of $\mathbf{A}\mathbf{x}=\
 Restarting guarantees a fixed upper bound on the per-iteration cost of GMRES. However, this benefit comes at a price. Even though restarting preserves progress made in previous iterations, the Krylov space information is discarded and the residual minimization process starts again over low-dimensional spaces. That can significantly retard or even stagnate the convergence. 
 
 (demo-gmres-restart)=
-```{prf:example}
-```
-
-
-
-
-
-The following experiments are based on a matrix resulting from discretization of a partial differential equation.
-
-```{index} Julia; keyword function arguments
-```
-
-```{code-cell}
-A = FNC.poisson(50)
-n = size(A,1)
-b = ones(n);
-spy(A,color=:blues)
-```
-
-```{index} ! Julia; gmres
-```
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-We compare unrestarted GMRES with three different thresholds for restarting. Here we are using `gmres` from the `IterativeSolvers` package, since our simple implementation does not offer restarting.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-gmres-restart-julia
 :::
-:::{card}
+```` 
 
-
-The syntax `f(x;foo)` is shorthand for `f(x,foo=foo)`.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-gmres-restart-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-gmres-restart-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-reltol = 1e-12;
-plt = plot(title="Convergence of restarted GMRES",leg=:bottomleft,
-    xaxis=(L"m"), yaxis=(:log10,"residual norm",[1e-8,100]))
-
-for restart in [n,20,40,60]
-    x,hist = IterativeSolvers.gmres(A,b;restart,reltol,
-                                    maxiter=100,log=true)
-    plot!(hist[:resnorm],label="restart = $restart")
-end
-
-plt
-```
-
-The "pure" GMRES curve is the lowest one. All of the other curves agree with it until the first restart. Decreasing the restart value makes the convergence per iteration generally worse, but the time required per iteration smaller as well.
-
-
-
 
 Restarting creates a tradeoff between the number of iterations and the speed per iteration. It's essentially impossible in general to predict the ideal restart location in any given problem, so one goes by experience and hopes for the best.
 

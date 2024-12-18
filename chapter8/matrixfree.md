@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 8.7.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-krylov-matrixfree)=
 # Matrix-free iterations
 
@@ -75,43 +59,27 @@ using the symmetry of $\mathbf{C}$. So we can describe blur in both directions a
 for a positive integer $k$.
 
 (demo-matrixfree-blur)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-matrixfree-blur-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-matrixfree-blur-matlab
+:::
+```` 
 
-
-
-
-We use a readily available test image.
-
-```{code-cell}
-img = testimage("mandrill")
-m,n = size(img)
-X = @. Float64(Gray(img))
-plot(Gray.(X),title="Original image",aspect_ratio=1)
-```
-
-We define the one-dimensional tridiagonal blurring matrices.
-
-```{code-cell}
-function blurmatrix(d)
-    v1 = fill(0.25,d-1)
-    return spdiagm(0=>fill(0.5,d), 1=>v1, -1=>v1)
-end
-B,C = blurmatrix(m),blurmatrix(n);
-```
-
-Finally, we show the results of using $k=12$ repetitions of the blur in each direction.
-
-```{code-cell}
-blur = X -> B^12 * X * C^12;
-Z = blur(X)
-plot(Gray.(Z),title="Blurred image")
-```
-
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-matrixfree-blur-python
+:::
+```` 
+`````
+::::
 
 ## Deblurring
 
@@ -138,76 +106,27 @@ Instead, given any vector $\mathbf{u}$ we can compute $\mathbf{v}=\mathbf{A}\mat
 The following example shows how to put these ideas into practice with MINRES.
 
 (demo-matrixfree-deblur)=
-```{prf:example}
-```
-
-
-
-
-
-
-We repeat the earlier process to blur an original image $\mathbf{X}$ to get $\mathbf{Z}$. 
-
-```{code-cell}
-:tags: [hide-input]
-
-img = testimage("lighthouse")
-m,n = size(img)
-X = @. Float64(Gray(img))
-
-B = spdiagm(0=>fill(0.5,m),
-        1=>fill(0.25,m-1),-1=>fill(0.25,m-1))
-C = spdiagm(0=>fill(0.5,n),
-        1=>fill(0.25,n-1),-1=>fill(0.25,n-1))
-blur = X -> B^12 * X * C^12
-Z = blur(X)
-plot(Gray.(Z),title="Blurred image")
-```
-
-Now we imagine that $\mathbf{X}$ is unknown and that we want to recover it from $\mathbf{Z}$. We first need functions that translate between vector and matrix representations. 
-
-```{code-cell}
-# vec (built-in) converts matrix to vector
-unvec = z -> reshape(z,m,n);  # convert vector to matrix
-```
-
-```{index} ! Julia; LinearMap
-```
-
-Now we declare the three-step blur transformation as a `LinearMap`, supplying also the size of the vector form of an image.
-
-```{code-cell}
-T = LinearMap(x -> vec(blur(unvec(x))),m*n);
-```
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-The blurring operators are symmetric, so we apply `minres` to the composite blurring transformation `T`.
-
-
+::::{prf:example}
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-matrixfree-deblur-julia
 :::
-:::{card}
+```` 
 
-
-The function `clamp01` in `Images` restricts values to be in the interval $[0,1]$.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-matrixfree-deblur-matlab
 :::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-matrixfree-deblur-python
+:::
+```` 
+`````
 ::::
-
-```{code-cell}
-y = minres(T,vec(Z),maxiter=50,reltol=1e-5);
-Y = unvec( clamp01.(y) )
-
-plot(Gray.(X),layout=2,title="Original")
-plot!(Gray.(Y),subplot=2,title="Deblurred")
-```
-
-
-
-
 
 ## Exercises
 

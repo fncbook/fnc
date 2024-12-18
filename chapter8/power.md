@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 8.2.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-krylov-power)=
 # Power iteration
 
@@ -27,47 +11,27 @@ FNC.init_format()
 Given that matrix-vector multiplication is fast for sparse matrices, let's see what we might accomplish with only that at our disposal.
 
 (demo-power-one)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-power-one-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-power-one-matlab
+:::
+````
 
-
-
-
-Here we choose a random 5×5 matrix and a random 5-vector.
-
-```{code-cell}
-A = rand(1.:9.,5,5)
-A = A./sum(A,dims=1)
-x = randn(5)
-```
-
-Applying matrix-vector multiplication once doesn't do anything recognizable.
-
-```{code-cell}
-y = A*x
-```
-
-Repeating the multiplication still doesn't do anything obvious.
-
-```{code-cell}
-z = A*y
-```
-
-But if we keep repeating the matrix-vector multiplication, something remarkable happens: $\mathbf{A} \mathbf{x} \approx \mathbf{x}$.
-
-```{code-cell}
-for j in 1:8;  x = A*x;  end
-[x A*x]
-```
-
-This phenomenon seems to occur regardless of the starting vector.
-
-```{code-cell}
-x = randn(5)
-for j in 1:8;  x = A*x;  end
-[x A*x]
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-power-one-python
+:::
+````
+`````
+::::
 
 
 
@@ -170,32 +134,27 @@ where $r_j=\lambda_j/\lambda_1$ and the $b_j$ are constants. By assumption {eq}`
 {numref}`Function {number} <function-poweriter>` is our implementation of power iteration.
 
 (function-poweriter)=
-````{prf:function} poweriter
-**Power iteration to find a dominant eigenvalue**
+``````{prf:algorithm} poweriter
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-poweriter-julia
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    poweriter(A,numiter)
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-poweriter-matlab
+:::
+```` 
 
-Perform `numiter` power iterations with the matrix `A`, starting
-from a random vector. Returns a vector of eigenvalue estimates
-and the final eigenvector approximation.
-"""
-function poweriter(A,numiter)
-    n = size(A,1)
-    x = normalize(randn(n),Inf)
-    β = zeros(numiter)
-    for k in 1:numiter
-        y = A*x
-        m = argmax(abs.(y))
-        β[k] = y[m]/x[m]
-        x = y/y[m]
-    end
-    return β,x
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-poweriter-python
+:::
 ````
+`````
+``````
 
 Observe that the only use of $\mathbf{A}$ is to find the matrix-vector product $\mathbf{A}\mathbf{x}$, which makes exploitation of the sparsity of $\mathbf{A}$ trivial.
 
@@ -244,62 +203,27 @@ The error in the power iteration eigenvalue estimates $\beta_k$ is reduced asymp
 ::::
 
 (demo-power-iter)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-power-iter-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-power-iter-matlab
+:::
+````
 
-
-
-
-
-We will experiment with the power iteration on a 5×5 matrix with prescribed eigenvalues and dominant eigenvalue at 1.
-
-```{code-cell}
-λ = [1,-0.75,0.6,-0.4,0]
-# Make a triangular matrix with eigenvalues on the diagonal.
-A = triu(ones(5,5),1) + diagm(λ)
-```
-
-We run the power iteration 60 times. The best estimate of the dominant eigenvalue is the last entry of the first output.
-
-```{code-cell}
-β,x = FNC.poweriter(A,60)
-eigval = β[end]
-```
-
-We check for linear convergence using a log-linear plot of the error.
-
-```{code-cell}
-err = @. 1 - β
-plot(0:59,abs.(err),m=:o,title="Convergence of power iteration",
-    xlabel=L"k",yaxis=(L"|\lambda_1-\beta_k|",:log10,[1e-10,1]))
-```
-
-The asymptotic trend seems to be a straight line, consistent with linear convergence. To estimate the convergence rate, we look at the ratio of two consecutive errors in the linear part of the convergence curve. The ratio of the first two eigenvalues should match the observed rate.  
-
-```{code-cell}
-@show theory = λ[2]/λ[1];
-@show observed = err[40]/err[39];
-```
-
-Note that the error is supposed to change sign on each iteration. The effect of these alternating signs is that estimates oscillate around the exact value.
-
-```{code-cell}
-β[26:30]
-```
-
-In practical situations, we don't know the exact eigenvalue that the algorithm is supposed to find. In that case we would base errors on the final $\beta$ that was found, as in the following plot.
-
-```{code-cell}
-err = @. β[end] - β[1:end-1]
-plot(0:58,abs.(err),m=:o,title="Convergence of power iteration",
-    xlabel=L"k",yaxis=(L"|\beta_{60}-\beta_k|",:log10,[1e-10,1]))
-```
-
-The results are very similar until the last few iterations, when the limited accuracy of the reference value begins to show. That is, while it is a good estimate of $\lambda_1$, it is less good as an estimate of the error in nearby estimates.
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-power-iter-python
+:::
+````
+`````
+::::
 
 
 The practical utility of {eq}`poweriterconv` is limited because if we knew $\lambda_1$ and $\lambda_2$, we wouldn't be running the power iteration in the first place! Sometimes it's possible to find estimates of or bounds on the ratio. If nothing else, though, it is useful to know that linear convergence is expected at a rate based solely on the dominant eigenvalues. 

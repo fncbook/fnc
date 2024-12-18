@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 8.6.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-krylov-minrescg)=
 # MINRES and conjugate gradients
 
@@ -108,52 +92,27 @@ Because the theorem gives an upper bound, MINRES may converge faster. All we can
 ::::
 
 (demo-minrescg-indefinite)=
-:::{prf:example}
+::::{prf:example}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-minrescg-indefinite-julia
 :::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-minrescg-indefinite-matlab
+:::
+````
 
-
-
-
-The following matrix is indefinite.
-
-```{code-cell}
-A = FNC.poisson(10) - 20I
-λ = eigvals(Matrix(A))
-isneg = @. λ < 0
-@show sum(isneg),sum(.!isneg);
-```
-
-We can compute the relevant quantities from {numref}`Theorem {number} <theorem-minrescg-indefinite>`.
-
-```{code-cell}
-mn,mx = extrema(-λ[isneg])
-κ₋ = mx/mn
-mn,mx = extrema(λ[.!isneg])
-κ₊ = mx/mn
-ρ = (sqrt(κ₋*κ₊)-1) / (sqrt(κ₋*κ₊)+1)
-```
-
-Because the iteration number $m$ is halved in {eq}`minres-conv`, the rate constant of linear convergence is the square root of this number, which makes it even closer to 1. 
-
-Now we apply MINRES to a linear system with this matrix, and compare the observed convergence to the upper bound from the theorem.
-
-```{index} ! Julia; minres
-```
-
-```{code-cell}
-b = rand(100)
-x,hist = minres(A,b,reltol=1e-10,maxiter=51,log=true);
-
-relres = hist[:resnorm] / norm(b)
-m = 0:length(relres)-1
-plot(m,relres,label="observed",leg=:left,
-	xaxis=L"m",yaxis=(:log10,"relative residual"),
-	title=("Convergence of MINRES") )
-plot!(m,ρ.^(m/2),l=:dash,label="upper bound")
-```
-
-The upper bound turns out to be pessimistic here, especially in the later iterations. However, you can see a slow linear phase in the convergence that tracks the bound closely.
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-minrescg-indefinite-python
+:::
+````
+`````
+::::
 
 
 
@@ -237,65 +196,27 @@ As a rule of thumb, the number of iterations required for MINRES or CG to conver
 This estimate fails for very large $\kappa$, however.
 
 (demo-minrescg-converge)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-minrescg-converge-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-minrescg-converge-matlab
+:::
+````
 
-
-
-
-We will compare MINRES and CG on some quasi-random SPD problems.  The first matrix has a condition number of 100. 
-
-```{code-cell}
-n = 5000
-density = 0.001
-A = FNC.sprandsym(n,density,1/100)
-x = (1:n)/n
-b = A*x;
-```
-
-```{index} ! Julia; cg
-```
-
-Now we apply both methods and compare the convergence of the system residuals, using implementations imported from `IterativeSolvers`.
-
-```{code-cell}
-plt = plot(title="Convergence of MINRES and CG",
-    xaxis=("Krylov dimension"),yaxis=(:log10,"relative residual norm"))
-for method in [minres,cg]
-    x̃,history = method(A,b,reltol=1e-6,maxiter=1000,log=true);
-    relres = history[:resnorm] / norm(b)
-    plot!(0:length(relres)-1,relres,label="$method")
-    err = round( norm( x̃ - x ) / norm(x), sigdigits=4 )
-    println("$method error: $err")
-end
-plt
-```
-
-There is little difference between the two methods here. Next, we increase the condition number of the matrix by a factor of 25. The rule of thumb predicts that the number of iterations required should increase by a factor of about 5.
-
-```{code-cell}
-A = FNC.sprandsym(n,density,1/2500)
-b = A*x;
-```
-
-```{code-cell}
-:tags: [hide-input]
-
-plt = plot(title="Convergence of MINRES and CG",
-    xaxis=("Krylov dimension"),yaxis=(:log10,"relative residual norm"))
-for method in [minres,cg]
-    x̃,history = method(A,b,reltol=1e-6,maxiter=1000,log=true);
-    relres = history[:resnorm] / norm(b)
-    plot!(0:length(relres)-1,relres,label="$method")
-    err = round( norm( x̃ - x ) / norm(x), sigdigits=4 )
-    println("$method error: $err")
-end
-plt
-```
-
-Both methods have an early superlinear phase that allow them to finish slightly sooner than the factor of 5 predicted: {numref}`Theorem {number} <theorem-minrescg-converge>` is an upper bound, not necessarily an approximation. Both methods ultimately achieve the same reduction in the residual; MINRES stops earlier, but with a slightly larger error.
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-minrescg-converge-python
+:::
+````
+`````
+::::
 
 
 
