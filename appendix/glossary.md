@@ -382,12 +382,10 @@ Rayleigh quotient
 (@section-matrixanaly-symm-eig)
 
 reduced QR factorization
-: See *thin QR*. \
-/br>
+: See *thin QR*.
 
 reduced SVD
-: See *thin SVD*. \
-/br>
+: See *thin SVD*.
 
 residual
 : For a linear system, the difference between $\mathbf{b}$ and $\mathbf{A}\tilde{\mathbf{x}}$ for a computed solution approximation $\tilde{\mathbf{x}}$. More generally, the actual value of a quantity that is made zero by an exact solution. \
