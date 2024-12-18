@@ -131,3 +131,11 @@ def sprandsym(n, density, **kwargs):
         A = randjr(A)
 
     return csc_matrix(A)
+
+def poisson2d(m):
+    n = m**2
+    d0 = [4.0] * n
+    d1 = [-1.0] * (n-1)
+    d1[m-1::m] = np.zeros(m-1)
+    dm = np.array([-1.0] * (n - m))
+    return (m + 1)**2 / np.pi**2 * diags([d0, d1, d1, dm, dm], [0, 1, -1, m, -m], format="csc")

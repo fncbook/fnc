@@ -1,3 +1,6 @@
 [submodule "julia/package"]
 	path = julia/package
 	url = https://github.com/fncbook/FundamentalsNumericalComputation.jl.git
+[submodule "python/rogues"]
+	path = python/rogues
+	url = https://github.com/macd/rogues.git

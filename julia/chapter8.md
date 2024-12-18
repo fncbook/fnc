@@ -183,7 +183,7 @@ Matrix(A[1:7, 1:7])
 :::{grid-item}
 
 
-Without pivoting, the LU factors have the same lower and upper bandwidth as the orignal matrix.
+Without pivoting, the LU factors have the same lower and upper bandwidth as the original matrix.
 
 
 :::
