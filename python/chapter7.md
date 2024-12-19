@@ -11,26 +11,8 @@ numbering:
 ## Examples
 
 ```{code-cell} ipython3
-from numpy import *
-from numpy.linalg import norm
-from matplotlib.pyplot import *
-from prettytable import PrettyTable
-from timeit import default_timer as timer
-import sys
-sys.path.append('pkg/')
-import FNC
-import importlib
-importlib.reload(FNC)
+exec(open("FNC_init.py").read())
 ```
-
-```{code-cell} ipython3
-:tags: [remove-cell]
-# This (optional) block is for improving the display of plots.
-rcParams["figure.figsize"] = [7, 4]
-rcParams["lines.linewidth"] = 2
-rcParams["lines.markersize"] = 4
-rcParams['animation.html'] = "jshtml"  # or try "html5"
-``` 
 
 ### Section 7.1
 

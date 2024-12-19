@@ -50,24 +50,7 @@ Python implementations
 ## Examples
 
 ```{code-cell} ipython3
-from numpy import *
-from numpy.linalg import norm
-from matplotlib.pyplot import *
-from prettytable import PrettyTable
-import sys
-sys.path.append('pkg/')
-import FNC
-import importlib
-importlib.reload(FNC)
-```
-
-```{code-cell} ipython3
-:tags: [remove-cell]
-# This (optional) block is for improving the display of plots.
-rcParams["figure.figsize"] = [7, 4]
-rcParams["lines.linewidth"] = 2
-rcParams["lines.markersize"] = 4
-rcParams['animation.html'] = "jshtml"  # or try "html5"
+exec(open("FNC_init.py").read())
 ```
 
 ### Section 3.1
@@ -92,7 +75,7 @@ A polynomial interpolant can be used to fit the data. Here we build one using a 
 ```{code-cell}
 t = (year - 1950) / 10
 V = vander(t)
-c = solve(V, y)
+c = linalg.solve(V, y)
 print(c)
 ```
 
@@ -268,7 +251,7 @@ If we formulate and solve via the normal equations, we get a much larger relativ
 
 ```{code-cell}
 N = A.T @ A
-x_NE = solve(N, A.T @ b)
+x_NE = linalg.solve(N, A.T @ b)
 relative_err = norm(x_NE - x) / norm(x)
 print(f"observed error: {relative_err:.3e}")
 print(f"accurate digits: {-log10(relative_err):.2f}")

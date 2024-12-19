@@ -28,8 +28,7 @@ Python implementations
 ## Examples
 
 ```{code-cell} ipython3
-from numpy import *
-import FNC
+exec(open("FNC_init.py").read())
 ```
 
 ## Section 1.1

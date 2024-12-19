@@ -63,27 +63,7 @@ Line 11 of {numref}`Function {number} <function-lufact>` points out a subtle iss
 ## Examples
 
 ```{code-cell} 
-from numpy import *
-from numpy.linalg import norm
-from matplotlib.pyplot import *
-from prettytable import PrettyTable
-import sys
-sys.path.append('pkg/')
-import FNC
-import importlib
-importlib.reload(FNC)
-```
-
-```{code-cell} 
-:tags: [remove-cell]
-# This (optional) block is for improving the display of plots.
-# from IPython.display import set_matplotlib_formats
-# set_matplotlib_formats("svg","pdf")
-# %config InlineBackend.figure_format = 'svg'
-rcParams["figure.figsize"] = [7, 4]
-rcParams["lines.linewidth"] = 2
-rcParams["lines.markersize"] = 4
-rcParams['animation.html'] = "jshtml"  # or try "html5"
+exec(open("FNC_init.py").read())
 ```
 
 ### Section 2.1
@@ -113,7 +93,7 @@ print(V)
 To solve a linear system $\mathbf{V} \mathbf{c} = \mathbf{y}$ for the vector of polynomial coefficients, we use `solve` (imported from `numpy.linalg`):
 
 ```{code-cell} 
-c = solve(V, y)
+c = linalg.solve(V, y)
 print(c)
 ```
 ::::{grid} 1 1 2 2
@@ -385,15 +365,15 @@ print(cos(pi * x))
 ### Section 2.3
 (demo-systems-backslash-python)=
 ``````{dropdown} @demo-systems-backslash
-For a square matrix $A$, the command `solve(A, B)` is mathematically equivalent to $\mathbf{A}^{-1} \mathbf{b}$. 
+For a square matrix $A$, the command `solve(A, B)` from `numpy.linalg` is mathematically equivalent to $\mathbf{A}^{-1} \mathbf{b}$. 
 
 ```{code-cell} 
 A = array([[1, 0, -1], [2, 2, 1], [-1, -3, 0]])
 b = array([1, 2, 3])
 ```
 
-```{code-cell} 
-x = solve(A, b)
+```{code-cell}
+x = linalg.solve(A, b)
 print(x)
 ```
 
@@ -413,7 +393,7 @@ If the matrix $\mathbf{A}$ is singular, you may get an error.
 :tags: raises-exception
 A = array([[0, 1], [0, 0]])
 b = array([1, -1])
-solve(A, b)    # error, singular matrix
+linalg.solve(A, b)    # error, singular matrix
 ```
 
 A linear system with a singular matrix might have no solution or infinitely many solutions, but in either case, a numerical solution becomes trickier. Detecting singularity is a lot like checking whether two floating-point numbers are *exactly* equal: because of roundoff, it could be missed. We're headed toward a more robust way to fully describe this situation.
@@ -984,7 +964,7 @@ print(FNC.backsub( U, FNC.forwardsub(L, b) ))
 This effect is not due to ill conditioning of the problem—a solution with PLU factorization works perfectly:
 
 ```{code-cell}
-print(solve(A, b))
+print(linalg.solve(A, b))
 ```
 ``````
 
@@ -1130,7 +1110,7 @@ db = 1e-12 * (db / norm(db, 2))
 We solve the perturbed problem using built-in pivoted LU and see how the solution was changed.
 
 ```{code-cell} 
-x = solve(A + dA, b + db) 
+x = linalg.solve(A + dA, b + db) 
 dx = x - x_exact
 ```
 
@@ -1150,7 +1130,7 @@ print(f"A_bound: {kappa * 1e-12 / norm(A, 2):.2e}")
 Even if we don't make any manual perturbations to the data, machine epsilon does when we solve the linear system numerically.
 
 ```{code-cell} 
-x = solve(A, b)
+x = linalg.solve(A, b)
 print(f"relative error: {norm(x - x_exact) / norm(x_exact):.2e}")
 print(f"rounding bound: {kappa / 2**52:.2e}")
 
@@ -1175,7 +1155,7 @@ print(f"rounding bound: {kappa / 2**52:.2e}")
 ```{code-cell} 
 x_exact = 1.0 + arange(14)
 b = A @ x_exact  
-x = solve(A, b)
+x = linalg.solve(A, b)
 ```
 
 We got an answer. But in fact, the error does exceed 100%:
@@ -1313,7 +1293,7 @@ Similarly, a random symmetric matrix is unlikely to be positive definite. The Ch
 ```{code-cell} 
 :tags: raises-exception
 from numpy.linalg import cholesky
-cholesky(B)
+cholesky(B)    # raises an exception, not positive definite
 ```
 
 It's not hard to manufacture an SPD matrix to try out the Cholesky factorization:

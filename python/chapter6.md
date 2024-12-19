@@ -99,25 +99,8 @@ Lines 22-23 define the function $\mathbf{g}$ and call `levenberg` to find the ne
 ## Examples
 
 ```{code-cell} ipython3
-from numpy import *
-from numpy.linalg import norm
-from matplotlib.pyplot import *
-from prettytable import PrettyTable
-import sys
-sys.path.append('pkg/')
-import FNC
-import importlib
-importlib.reload(FNC)
+exec(open("FNC_init.py").read())
 ```
-
-```{code-cell} ipython3
-:tags: [remove-cell]
-# This (optional) block is for improving the display of plots.
-rcParams["figure.figsize"] = [7, 4]
-rcParams["lines.linewidth"] = 2
-rcParams["lines.markersize"] = 4
-rcParams['animation.html'] = "jshtml"  # or try "html5"
-``` 
 
 ### Section 6.1
 

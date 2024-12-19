@@ -85,24 +85,8 @@ The intended way for a user to call {numref}`Function {number} <function-intadap
 ## Examples
 
 ```{code-cell} ipython3
-import FNC
-from numpy import *
-from matplotlib.pyplot import *
-from numpy.linalg import solve, norm
-from scipy.interpolate import interp1d
-from scipy.integrate import quad
-from prettytable import PrettyTable
+exec(open("FNC_init.py").read())
 ```
-
-```{code-cell} ipython3
-:tags: [remove-cell]
-# This (optional) block is for improving the display of plots.
-rcParams["figure.figsize"] = [7, 4]
-rcParams["lines.linewidth"] = 2
-rcParams["lines.markersize"] = 4
-rcParams['animation.html'] = "jshtml"  # or try "html5"
-``` 
-
 
 ### Section 5.1
 
@@ -175,6 +159,7 @@ ylabel("$y$")
 Here is an interpolant that is linear between each consecutive pair of nodes, using `plinterp` from {numref}`section-localapprox-pwlin`.
 
 ```{code-cell}
+from scipy.interpolate import interp1d
 tt = linspace(-1, 1, 400)
 p = interp1d(t, y, kind="linear")
 ax.plot(tt, p(tt), label="piecewise linear")
@@ -581,6 +566,7 @@ The module `scipy.integrate` has multiple functions that estimate the value of a
 
 
 ```{code-cell}
+from scipy.integrate import quad
 Q, errest = quad(exp, 0, 1, epsabs=1e-13, epsrel=1e-13)
 print(Q)
 
@@ -618,6 +604,7 @@ a, b = 0, 2
 In lieu of the exact value, we will use the `quad` function to find an accurate result.
 
 ```{code-cell}
+from scipy.integrate import quad
 I, errest = quad(f, a, b, epsabs=1e-13, epsrel=1e-13)
 print(f"Integral = {I:.14f}")
 ```
@@ -658,6 +645,7 @@ title("Convergence of trapezoidal integration");
 We estimate $\displaystyle\int_0^2 x^2 e^{-2x}\, dx$ using extrapolation. First we use `quadgk` to get an accurate value.
 
 ```{code-cell}
+from scipy.integrate import quad
 f = lambda x: x**2 * exp(-2 * x)
 a = 0
 b = 2
@@ -760,6 +748,7 @@ print("right half:", Tright)
 ```
 
 ```{code-cell}
+from scipy.integrate import quad
 left_val, err = quad(f, 0, 2, epsabs=1e-13, epsrel=1e-13)
 right_val, err = quad(f, 2, 4, epsabs=1e-13, epsrel=1e-13)
 
@@ -776,6 +765,7 @@ Both the picture and the numerical results suggest that more nodes should be use
 We'll integrate the function from {numref}`Demo %s <demo-adapt-motive>`.
 
 ```{code-cell}
+from scipy.integrate import quad
 f = lambda x: (x + 1) ** 2 * cos((2 * x + 1) / (x - 4.3))
 I, errest = quad(f, 0, 4, epsabs=1e-12, epsrel=1e-12)
 print("integral:", I)    # 'exact' value
