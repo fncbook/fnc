@@ -1,3 +1,4 @@
 [deps]
 FundamentalsNumericalComputation = "e48b7b93-d2a8-4750-aba7-f743ccd5256c"
 IJulia = "7073ff75-c697-5162-941a-fcdaad2a7d2a"
+MAT = "23992714-dd62-5051-b70f-ba57cb901cac"

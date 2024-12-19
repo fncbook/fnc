@@ -643,7 +643,7 @@ kappa_minus = M / m
 m, M = min(ev[ev > 0]), max(ev[ev > 0])
 kappa_plus = M / m
 S = sqrt(kappa_plus * kappa_minus)
-rho = (S - 1) / (S + 1)
+rho = sqrt((S - 1) / (S + 1))
 print(f"Condition numbers: {kappa_minus:.2e}, {kappa_plus:.2e}")
 print(f"Convergence rate: {rho:.3f}")
 ```
