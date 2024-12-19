@@ -298,8 +298,8 @@ We check for linear convergence using a log-linear plot of the error.
 ```{code-cell}
 err = 1 - beta;
 clf,  semilogy(abs(err), '.-')
-title('Convergence of power iteration')   % ignore this line
-xlabel('k'),  ylabel('|\lambda_1 - \beta_k|')    % ignore this line
+title('Convergence of power iteration')
+xlabel('k'),  ylabel('|\lambda_1 - \beta_k|')
 ```
 
 The asymptotic trend seems to be a straight line, consistent with linear convergence. To estimate the convergence rate, we look at the ratio of two consecutive errors in the linear part of the convergence curve. The ratio of the first two eigenvalues should match the observed rate.
@@ -320,8 +320,8 @@ In practical situations, we don't know the exact eigenvalue that the algorithm i
 ```{code-cell}
 err = beta(end) - beta(1:end-1);
 semilogy(abs(err), '.-')
-title('Convergence of power iteration')   % ignore this line
-xlabel('k'),  ylabel('|\beta_{60} - \beta_k|')    % ignore this line
+title('Convergence of power iteration')
+xlabel('k'),  ylabel('|\beta_{60} - \beta_k|')
 ```
 
 The results are very similar until the last few iterations, when the limited accuracy of the reference value begins to show. That is, while it is a good estimate of $\lambda_1$, it is less good as an estimate of the error in nearby estimates.
@@ -353,8 +353,8 @@ The convergence is again linear.
 ```{code-cell}
 err = abs(0.6 - beta);
 semilogy(abs(err),'.-')
-title('Convergence of inverse iteration')   % ignore this line
-xlabel('k'), ylabel('|\lambda_j - \beta_k|')    % ignore this line
+title('Convergence of inverse iteration')
+xlabel('k'), ylabel('|\lambda_j - \beta_k|')
 ```
 
 ::::{grid} 1 1 2 2
@@ -454,7 +454,7 @@ The linear system approximations show smooth linear convergence at first, but th
 clf
 semilogy(resid, '.-')
 xlabel('m'),  ylabel('|| b-Ax_m ||')
-set(gca,'ytick',10.^(-6:2:0))   % ignore this line
+set(gca,'ytick',10.^(-6:2:0))
 axis tight, title('Residual for linear systems') 
 ```
 ``````
@@ -545,8 +545,8 @@ The approximations converge smoothly, practically all the way to machine epsilon
 ```{code-cell}
 clf
 semilogy(resid,'.-')
-xlabel('m'),  ylabel('|| b - Ax_m ||')    % ignore this line
-axis tight, title('Residual for GMRES')   % ignore this line
+xlabel('m'),  ylabel('|| b - Ax_m ||')
+axis tight, title('Residual for GMRES')
 ```
 ``````
 
@@ -574,9 +574,9 @@ for j = 1:4
     [~,~,~,~,rv] = gmres(A, b, restart(j), 1e-9,120 / restart(j));
     semilogy(0:length(rv) - 1, rv),  hold on
 end
-title('Convergence of restarted GMRES')    % ignore this line
-xlabel('m'),  ylabel('residual norm')   % ignore this line
-legend('no restart','every 20','every 40','every 60','location','southwest')    % ignore this line
+title('Convergence of restarted GMRES')
+xlabel('m'),  ylabel('residual norm')
+legend('no restart','every 20','every 40','every 60','location','southwest')
 ```
 
 The "pure" GMRES curve is the lowest one. All of the other curves agree with it until the first restart. Decreasing the restart value makes the convergence per iteration generally worse, but the time required per iteration smaller as well.
@@ -662,10 +662,10 @@ M = length(residMR) - 1;
 clf,  semilogy(0:M, residMR / norm(b), '.-')
 M = length(residCG) - 1;
 hold on,  semilogy(0:M, residCG / norm(b), '.-')
-title('Convergence of MINRES and CG') % ignore this line
+title('Convergence of MINRES and CG')
 xlabel('Krylov dimension m')
-ylabel('||r_m|| / ||b||')     % ignore this line
-legend('MINRES', 'CG')   % ignore this line
+ylabel('||r_m|| / ||b||')
+legend('MINRES', 'CG')
 ```
 
 There is little difference between the two methods here. Next, we increase the condition number of the matrix by a factor of 25. The rule of thumb predicts that the number of iterations required should increase by a factor of about 5.
@@ -684,10 +684,10 @@ M = length(residMR) - 1;
 clf,  semilogy(0:M, residMR / norm(b), '.-')
 M = length(residCG) - 1;
 hold on,  semilogy(0:M, residCG / norm(b), '.-')
-title('Convergence of MINRES and CG') % ignore this line
+title('Convergence of MINRES and CG')
 xlabel('Krylov dimension m')
-ylabel('||r_m|| / ||b||')     % ignore this line
-legend('MINRES', 'CG')   % ignore this line
+ylabel('||r_m|| / ||b||')
+legend('MINRES', 'CG')
 ```
 
 Both methods have an early superlinear phase that allow them to finish slightly sooner than the factor of 5 predicted: {numref}`Theorem {number} <theorem-minrescg-converge>` is an upper bound, not necessarily an approximation. Both methods ultimately achieve the same reduction in the residual; MINRES stops earlier, but with a slightly larger error.
@@ -793,13 +793,13 @@ We now compare MINRES with and without the preconditioner.
 b = ones(n, 1);
 [x, ~, ~, ~, resid_plain] = minres(A, b, 1e-10, 400);
 clf,  semilogy(resid_plain)
-xlabel('iteration number'), ylabel('residual norm')    % ignore this line
-title('Unpreconditioned MINRES')   % ignore this line
+xlabel('iteration number'), ylabel('residual norm')
+title('Unpreconditioned MINRES')
 
 [x, ~, ~, ~, resid_prec] = minres(A, b, 1e-10, 400, M);
 hold on,  semilogy(resid_prec)
-title('Precondtioned MINRES')   % ignore this line
-legend('no prec.', 'with prec.')    % ignore this line
+title('Precondtioned MINRES')
+legend('no prec.', 'with prec.')
 ```
 
 The diagonal preconditioner cut down substantially on the number of iterations. The effect on the total time is less dramatic, but this is not a large version of the problem.
@@ -833,9 +833,9 @@ This version of incomplete LU factorization simply prohibits fill-in for the fac
 [L, U] = ilu(A);
 clf
 subplot(121), spy(L)
-title('L')   % ignore this line
+title('L')
 subplot(122), spy(U)
-title('U')   % ignore this line
+title('U')
 disp(sprintf("There are %d nonzeros in A", nnz(A)))
 ```
 
@@ -856,8 +856,8 @@ The preconditioner makes a significant difference in the number of iterations ne
 ```{code-cell}
 clf, semilogy(resid_plain)
 hold on, semilogy(resid_prec)
-xlabel('iteration number'), ylabel('residual norm')    % ignore this line
-title('Precondtioned GMRES ')   % ignore this line
-legend('no preconditioner', 'with preconditioner')    % ignore this line
+xlabel('iteration number'), ylabel('residual norm')
+title('Precondtioned GMRES ')
+legend('no preconditioner', 'with preconditioner')
 ```
 ```

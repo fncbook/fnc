@@ -166,8 +166,8 @@ for u0 = [0.7, 1, 1.3]    % initial values
     fplot(@(t) exp(t) * u0, [0, 3]), hold on
 end
 xlabel('t')
-ylabel('u(t)')   % ignore this line
-title('Exponential divergence of solutions')   % ignore this line
+ylabel('u(t)')
+title('Exponential divergence of solutions')
 ```
 
 But with $u'=-u$, solutions actually get closer together with time.
@@ -179,8 +179,8 @@ for u0 = [0.7, 1, 1.3]    % initial values
     fplot(@(t) exp(-t) * u0, [0, 3]), hold on
 end
 xlabel('t')
-ylabel('u(t)')   % ignore this line
-title('Exponential convergence of solutions')   % ignore this line
+ylabel('u(t)')
+title('Exponential convergence of solutions')
 ```
 
 In this case the actual condition number is one, because the initial difference between solutions is the largest over all time. Hence the exponentially growing bound $e^{b-a}$ is a gross overestimate.
@@ -205,7 +205,7 @@ Here is the call to {numref}`Function {number} <function-euler>`.
 clf, plot(t, u, '.-')
 xlabel('t')
 ylabel('u(t)')
-title('Solution by Euler''s method')  % ignore this line
+title('Solution by Euler''s method')
 ```
 
 We could define a different interpolant to get a smoother picture above, but the derivation of Euler's method assumed a piecewise linear interpolant. We can instead request more steps to make the interpolant look smoother.
@@ -243,9 +243,9 @@ clf
 loglog(n, err, 'o-')
 hold on, loglog(n, 0.5 * err(end) * (n / n(end)).^(-1), '--')
 xlabel('n')
-ylabel('inf-norm error')  % ignore this line
-title('Convergence of Euler''s method')  % ignore this line
-legend('error', 'O(n^{-1})', 'location', 'southwest')  % ignore this line
+ylabel('inf-norm error')
+title('Convergence of Euler''s method')
+legend('error', 'O(n^{-1})', 'location', 'southwest')
 ```
 ``````
 
@@ -278,8 +278,8 @@ clf
 plot(sol.Time, sol.Solution)
 xlabel("t")
 ylabel("u(t)")
-title('Predator-prey solution')  % ignore this line
-legend('prey', 'predator')  % ignore this line
+title('Predator-prey solution')
+legend('prey', 'predator')
 ```
 
 We can also use {numref}`Function {number} <function-euler>` to find the solution.

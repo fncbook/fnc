@@ -537,11 +537,11 @@ When you look at the graphs of these functions, what's remarkable is that one of
 :tags: hide-input
 x = linspace(0, 1, 201)';
 subplot(2,1,1), fill([x; 1; 0], [exp(x); 0;0 ], [1, 0.9, 0.9])
-title('exp(x)')  % ignore this line
-ylabel('f(x)')    % ignore this line
+title('exp(x)')
+ylabel('f(x)')
 subplot(2, 1, 2), fill([x; 1; 0], [exp(sin(x)); 0; 0], [1, 0.9, 0.9])
-title('exp(sin(x))')  % ignore this line
-xlabel('x'), ylabel('f(x)')    % ignore this line
+title('exp(sin(x))')
+xlabel('x'), ylabel('f(x)')
 ```
 ``````
 
@@ -708,8 +708,8 @@ We perform the integration and show the nodes selected underneath the curve.
 clf, fplot(f, [0, 4], 2000)
 hold on
 stem(t, f(t), '.-')
-title('Adaptive node selection')    % ignore this line
-xlabel('x'), ylabel('f(x)')    % ignore this line
+title('Adaptive node selection')
+xlabel('x'), ylabel('f(x)')
 fprintf("number of nodes = %d", length(t))
 ```
 
