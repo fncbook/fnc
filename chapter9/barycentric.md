@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 9.2.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-globalapprox-barycentric)=
 # The barycentric formula
 
@@ -124,96 +108,54 @@ In {numref}`Function {number} <function-polyinterp>` we give an implementation o
 ```
 
 (function-polyinterp)=
-````{prf:function} polyinterp
-**Polynomial interpolation by the barycentric formula**
+``````{prf:algorithm} polyinterp
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-polyinterp-julia
+:::
+```` 
 
-```{code-block} julia
-:lineno-start: 1
-"""
-    polyinterp(t,y)
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-polyinterp-matlab
+:::
+```` 
 
-Construct a callable polynomial interpolant through the points in
-vectors `t`,`y` using the barycentric interpolation formula.
-"""
-function polyinterp(t,y)
-    n = length(t)-1
-    C = (t[n+1]-t[1]) / 4           # scaling factor to ensure stability
-    tc = t/C
-
-    # Adding one node at a time, compute inverses of the weights.
-    ω = ones(n+1)
-    for m in 0:n-1
-        d = tc[1:m+1] .- tc[m+2]    # vector of node differences
-        @. ω[1:m+1] *= d            # update previous
-        ω[m+2] = prod( -d )         # compute the new one
-    end
-    w = 1 ./ ω                      # go from inverses to weights
-
-    # This function evaluates the interpolant at given x.
-    p = function (x)
-        terms = @. w / (x - t)
-        if any(isinf.(terms))     # there was division by zero
-            # return the node's data value
-            idx = findfirst(x.==t)
-            f = y[idx]
-        else
-            f = sum(y.*terms) / sum(terms)
-        end
-    end
-    return p
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-polyinterp-python
+:::
 ````
-
-::::{admonition} About the code
-:class: dropdown
-As noted in {numref}`Example %s <example-writeoutbary2>`, a common scaling factor in the weights does not affect the barycentric formula {eq}`bary2`. In lines 9--10 this fact is used to rescale the nodes in order to avoid eventual tiny or enormous numbers that could go outside the bounds of double precision.
-
-The return value is a function that evaluates the polynomial interpolant. Within this function, `isinf` is used to detect either `Inf` or `-Inf`, which occurs when $x$ exactly equals one of the nodes. In this event, the corresponding data value is returned.
-::::
+`````
+``````
 
 Computing all $n+1$ weights in {numref}`Function {number} <function-polyinterp>` takes $O(n^2)$ operations. Fortunately, the weights depend only on the nodes, not the data, and once they are known, computing $p(x)$ at a particular value of $x$ takes just $O(n)$ operations.
 
 (demo-barycentric-example)=
-```{prf:example}
-```
+::::{prf:example}
+We show the barycentric formula in action for values from the function $\sin(e^{2x})$ at equally spaced nodes in $[0,1]$ with $n=3$ and $n=6$.
 
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-barycentric-example-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-barycentric-example-matlab
+:::
+````
 
-
-
-We show the barycentric formula for values from the function $\sin(e^{2x})$ at equally spaced nodes in $[0,1]$ with $n=3$ and $n=6$.
-
-```{code-cell}
-f = x -> sin(exp(2*x))
-plot(f,0,1,label="function",legend=:bottomleft)
-```
-
-```{code-cell}
-t = (0:3)/3
-y = f.(t)
-scatter!(t,y,color=:black,label="nodes")
-```
-
-```{code-cell}
-p = FNC.polyinterp(t,y)
-plot!(p,0,1,label="interpolant",title="Interpolation on 4 nodes")
-```
-
-The curves must intersect at the interpolation nodes. For $n=6$ the interpolant is noticeably better.
-
-```{code-cell}
-plot(f,0,1,label="function",legend=:bottomleft)
-t = (0:6)/6
-y = f.(t)
-p = FNC.polyinterp(t,y)
-scatter!(t,y,color=:black,label="nodes")
-plot!(p,0,1,label="interpolant",title="Interpolation on 7 nodes")
-```
-
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-barycentric-example-python
+:::
+````
+`````
+::::
 
 ## Stability
 

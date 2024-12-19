@@ -147,16 +147,16 @@ project:
         - file: chapter8/matrixfree.md
         - file: chapter8/precond.md
         - file: chapter8/next.md
-    #     - file: chapter9/overview.md
-    #       children:
-    #         - file: chapter9/polynomial.md
-    #         - file: chapter9/barycentric.md
-    #         - file: chapter9/stability.md
-    #         - file: chapter9/orthogonal.md
-    #         - file: chapter9/trig.md
-    #         - file: chapter9/spectral-integration.md
-    #         - file: chapter9/improper.md
-    #         - file: chapter9/next.md
+    - file: chapter9/overview.md
+      children:
+        - file: chapter9/polynomial.md
+        - file: chapter9/barycentric.md
+        - file: chapter9/stability.md
+        - file: chapter9/orthogonal.md
+        - file: chapter9/trig.md
+        - file: chapter9/spectral-integration.md
+        - file: chapter9/improper.md
+        - file: chapter9/next.md
     #     - file: chapter10/overview.md
     #       children:
     #         - file: chapter10/tpbvp.md
@@ -203,6 +203,7 @@ project:
           - file: julia/chapter6.md
           - file: julia/chapter7.md
           - file: julia/chapter8.md
+          - file: julia/chapter9.md
       - title: MATLAB codes
         children:
           - file: matlab/chapter1.md

@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 9.3.%s
 ---
-```{code-cell} 
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-globalapprox-stability)=
 # Stability of polynomial interpolation
 
@@ -27,49 +11,27 @@ FNC.init_format()
 With  barycentric interpolation available in the form of {numref}`Function {number} <function-polyinterp>`, we can explore polynomial interpolation using a numerically stable algorithm. Any remaining sensitivity to error is due to the conditioning of the interpolation process itself.
 
 (demo-stability-equispaced)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-stability-equispaced-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-stability-equispaced-matlab
+:::
+````
 
-
-
-
-We choose a function over the interval $[0,1]$. 
-
-```{code-cell} 
-f = x -> sin(exp(2*x));
-```
-
-Here is a graph of $f$ and its polynomial interpolant using seven equally spaced nodes.
-
-```{code-cell} 
-:tags: [hide-input]
-plot(f,0,1,label="function",legend=:bottomleft)
-t = (0:6)/6
-y = f.(t)
-scatter!(t,y,label="nodes")
-
-p = FNC.polyinterp(t,y)
-plot!(p,0,1,label="interpolant",title="Equispaced interpolant, n=6")
-```
-
-This looks pretty good. We want to track the behavior of the error as $n$ increases. We will estimate the error in the continuous interpolant by sampling it at a large number of points and taking the max-norm.
-
-```{code-cell} 
-:tags: [hide-input]
-n = 5:5:60;  err = zeros(size(n))
-x = range(0,1,length=2001)      # for measuring error
-for (i,n) in enumerate(n) 
-  t = (0:n)/n                   # equally spaced nodes
-  y = f.(t)                     # interpolation data
-  p = FNC.polyinterp(t,y)
-  err[i] = norm( (@. f(x)-p(x)), Inf )
-end
-plot(n,err,m=:o,title="Interpolation error for equispaced nodes",
-    xaxis=(L"n"),yaxis=(:log10,"max error"),)
-```
-
-The error initially decreases as one would expect but then begins to grow. Both phases occur at rates that are exponential in $n$, i.e., $O(K^n$) for a constant $K$, appearing linear on a semi-log plot.
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-stability-equispaced-python
+:::
+````
+`````
+::::
 
 
 
@@ -86,29 +48,27 @@ $$
 While the dependence on $f$ is messy here, the error indicator $\Phi(x)$ can be studied as a function of the nodes only.
 
 (demo-stability-errfun)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-stability-errfun-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-stability-errfun-matlab
+:::
+````
 
-
-
-
-We plot $|\Phi(x)|$ over the interval $[-1,1]$ with equispaced nodes for different values of $n$. 
-
-```{code-cell} 
-:tags: [hide-input]
-plot(xaxis=(L"x"),yaxis=(:log10,L"|\Phi(x)|",[1e-25,1]),legend=:bottomleft)
-
-x = range(-1,1,length=2001)
-for n in 10:10:50
-    t = range(-1,1,length=n+1)
-    Φ = [ prod(xₖ.-t) for xₖ in x ]
-    scatter!(x,abs.(Φ),m=(1,stroke(0)),label="n=$n")
-end
-title!("Error indicator for equispaced nodes")
-```
-
-Each time $\Phi$ passes through zero at an interpolation node, the value on the log scale should go to $-\infty$, which explains the numerous cusps on the curves.
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-stability-errfun-python
+:::
+````
+`````
+::::
 
 
 
@@ -117,57 +77,27 @@ Each time $\Phi$ passes through zero at an interpolation node, the value on the 
 Two observations from the result of {numref}`Demo {number} <demo-stability-errfun>` are important. First, $|\Phi|$ decreases exponentially at each fixed location in the interval (note that the spacing between curves is constant for constant increments of $n$). Second, $|\Phi|$ is larger at the ends of the interval than in the middle, by an exponentially growing factor. This gap is what can ruin the convergence of polynomial interpolation.
 
 (demo-stability-runge)=
+::::{prf:example}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-stability-runge-julia
+:::
+````
 
-```{prf:example}
-```
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-stability-runge-matlab
+:::
+````
 
-
-
-
-
-This function has infinitely many continuous derivatives on the entire real line and looks easy to approximate over $[-1,1]$.
-
-```{code-cell} 
-f = x -> 1/(x^2 + 16)
-plot(f,-1,1,title="Test function",legend=:none)
-```
-
-We start by doing equispaced polynomial interpolation for some small values of $n$.
-
-```{code-cell} 
-:tags: [hide-input]
-plot(xaxis=(L"x"),yaxis=(:log10,L"|f(x)-p(x)|",[1e-20,1]))
-
-x = range(-1,1,length=2501)
-n = 4:4:12
-for (k,n) in enumerate(n)
-    t = range(-1,1,length=n+1)      # equally spaced nodes
-    y = f.(t)                       # interpolation data
-    p = FNC.polyinterp(t,y)
-    err = @. abs(f(x)-p(x))
-    plot!(x,err,m=(1,:o,stroke(0)),label="degree $n")
-end
-title!("Error for low degrees")
-```
-
-The convergence so far appears rather good, though not uniformly so. However, notice what happens as we continue to increase the degree.
-
-```{code-cell} 
-:tags: [hide-input]
-n = @. 12 + 15*(1:3)
-plot(xaxis=(L"x"),yaxis=(:log10,L"|f(x)-p(x)|",[1e-20,1]))
-
-for (k,n) in enumerate(n)
-    t = range(-1,1,length=n+1)      # equally spaced nodes
-    y = f.(t)                       # interpolation data
-    p = FNC.polyinterp(t,y)
-    err = @. abs(f(x)-p(x))
-    plot!(x,err,m=(1,:o,stroke(0)),label="degree $n")
-end
-title!("Error for higher degrees")
-```
-
-The convergence in the middle can't get any better than machine precision relative to the function values. So maintaining the growing gap between the center and the ends pushes the error curves upward exponentially fast at the ends, wrecking the convergence.
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-stability-runge-python
+:::
+````
+`````
+::::
 
 
 
@@ -195,63 +125,53 @@ The observations above hint that we might find success by having more nodes near
 These are the projections onto the $x$-axis of $n$ equally spaced points on a unit circle. They are densely clustered near the ends of $[-1,1]$, and this feature turns out to overcome the Runge phenomenon.
 
 (demo-stability-errcheb)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-stability-errcheb-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-stability-errcheb-matlab
+:::
+````
 
-
-
-
-Now we look at the error indicator function $\Phi$ for Chebyshev node sets.
-
-```{code-cell} 
-:tags: [hide-input]
-
-plot(xaxis=(L"x"),yaxis=(:log10,L"|\Phi(x)|",[1e-18,1e-2]))
-x = range(-1,1,length=2001)
-for n in 10:10:50
-    t = [ -cos(π*k/n) for k in 0:n ]                  
-    Φ = [ prod(xₖ.-t) for xₖ in x ]
-    plot!(x,abs.(Φ),m=(1,:o,stroke(0)),label="n=$n")
-end
-title!("Error indicator for Chebyshev nodes")
-```
-
-In contrast to the equispaced case, $|\Phi|$ decreases exponentially with $n$ almost uniformly across the interval.
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-stability-errcheb-python
+:::
+````
+`````
+::::
 
 
 
 
 (demo-stability-rungefix)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-stability-rungefix-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-stability-rungefix-matlab
+:::
+````
 
-
-
-
-Here again is the function from {numref}`Demo {number} <demo-stability-runge>` that provoked the Runge phenomenon when using equispaced nodes.
-
-```{code-cell} 
-f = x -> 1/(x^2 + 16);
-```
-
-```{code-cell} 
-:tags: [hide-input]
-
-plot(label="",xaxis=(L"x"),yaxis=(:log10,L"|f(x)-p(x)|",[1e-20,1]))
-x = range(-1,1,length=2001)
-for (k,n) in enumerate([4,10,16,40])
-    t = [ -cos(pi*k/n) for k in 0:n ]
-    y = f.(t)                           # interpolation data
-    p = FNC.polyinterp(t,y)
-    err = @.abs(f(x)-p(x))
-    plot!(x,err,m=(1,:o,stroke(0)),label="degree $n")
-end
-title!("Error for Chebyshev interpolants")
-```
-
-By degree 16 the error is uniformly within machine epsilon, and, importantly, it stays there as $n$ increases. Note that as predicted by the error indicator function, the error is uniform over the interval at each value of $n$.
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-stability-rungefix-python
+:::
+````
+`````
+::::
 
 
 
@@ -293,32 +213,27 @@ The condition "$f$ is analytic" means that the Taylor series of $f$ converges to
 In other contexts we refer to {eq}`spectral` as linear convergence, but here it is usual to say that the rate is exponential or that one has **spectral convergence**. It achieves constant reduction factors in the error by constant increments of $n$. By contrast, algebraic convergence in the form $O(n^{-p})$ for some $p>0$ requires *multiplying* $n$ by a constant factor in order to reduce error by a constant factor. Graphically, spectral error is a straight line on a log-linear scale, while algebraic convergence is a straight line on a log-log scale.
 
 (demo-stability-spectral)=
-:::{prf:example}
+::::{prf:example}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-stability-spectral-julia
 :::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-stability-spectral-matlab
+:::
+````
 
-
-
-
-On the left, we use a log-log scale, which makes second-order algebraic convergence $O(n^{-4})$ a straight line. On the right, we use a log-linear scale, which makes spectral convergence $O(K^{-n})$ linear.
-
-```{code-cell} 
-:tags: [remove-cell]
-disable_logging(Logging.Warn)
-```
-
-```{code-cell} 
-:tags: [hide-input]
-n = 20:20:400
-algebraic = @. 100/n^4
-spectral = @. 10*0.85^n
-plot(n,[algebraic spectral],layout=(1,2),subplot=1,
-    xaxis=(L"n",:log10),yaxis=(:log10,(1e-15,1)),
-    label=["algebraic" "spectral"],title="Log-log")
-plot!(n,[algebraic spectral],subplot=2,  
-    xaxis=L"n",yaxis=(:log10,(1e-15,1)),
-    label=["algebraic" "spectral"],title="log-linear")
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-stability-spectral-python
+:::
+````
+`````
+::::
 
 
 

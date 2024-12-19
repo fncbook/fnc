@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 9.7.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-globalapprox-improper)=
 # Improper integrals
 
@@ -93,13 +77,7 @@ By the chain rule,
 The exponential terms introduced by the chain rule grow double exponentially, but the more rapid decay of $f$ in the new variable more than makes up for this.
 
 (demo-improper-decay)=
-```{prf:example}
-```
-
-
-
-
-
+::::{prf:example}
 Consider again $f(x)=1/(1+x^2)$ from {numref}`Example %s <example-improper-slowdecay>`, with $x(t)$ given by {eq}`DEquadtrans1`. As $t\to\infty$, 
 
 $$
@@ -121,23 +99,26 @@ $$
 
 The total integrand in {eq}`DEquadchain1` therefore has double exponential decay in $t$, essentially because of the squaring of $x$ in the denominator of $f$. The same result holds as $t\to-\infty$.
 
-```{code-cell}
-:tags: [hide-input]
-f = x -> 1/(1+x^2)
-plot(f,-4,4,layout=(2,1),
-    xlabel=L"x",yaxis=(:log10,L"f(x)",(1e-16,2)),
-    title="Original integrand")
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-improper-decay-julia
+:::
+````
 
-x = t -> sinh(π*sinh(t)/2)
-dx_dt = t -> pi/2*cosh(t)*cosh(pi*sinh(t)/2)
-g = t -> f(x(t))*dx_dt(t)
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-improper-decay-matlab
+:::
+````
 
-plot!(g,-4,4,subplot=2,
-    xlabel=L"t",yaxis=(:log10,L"f(x(t))\cdot x'(t)",(1e-16,2)),
-    title="Transformed integrand")
-```
-
-This graph suggests that we capture all of the integrand values that are larger than machine epsilon by integrating in $t$ from $-4$ to $4$.
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-improper-decay-python
+:::
+````
+`````
+::::
 
 
 
@@ -145,79 +126,53 @@ This graph suggests that we capture all of the integrand values that are larger 
 {numref}`Function {number} <function-intinf>` implements double exponential integration by applying the adaptive integrator {numref}`Function {number} <function-intadapt>` to {eq}`DEquadchain1`. It truncates the interval to $-M\le t \le M$ by increasing $M$ until the integrand is too small to matter relative to the error tolerance.
 
 (function-intinf)=
-````{prf:function} intinf
-**Integration of a function over $(-\infty,\infty)$**
-```{code-block} julia
-:lineno-start: 1
-"""
-    intinf(f,tol)
+``````{prf:algorithm} intinf
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-intinf-julia
+:::
+```` 
 
-Perform adaptive doubly-exponential integration of function `f` 
-over (-Inf,Inf), with error tolerance `tol`. Returns the integral 
-estimate and a vector of the nodes used.
-"""
-function intinf(f,tol)   
-    x = t -> sinh(sinh(t))
-    dx_dt = t -> cosh(t)*cosh(sinh(t))
-    g = t -> f(x(t))*dx_dt(t)
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-intinf-matlab
+:::
+```` 
 
-    # Find where to truncate the integration interval.
-    M = 3
-    while (abs(g(-M)) > tol/100) || (abs(g(M)) > tol/100)
-        M += 0.5
-        if isinf(x(M)) 
-            @warn "Function may not decay fast enough."
-            M -= 0.5
-            break
-        end
-    end
-
-    I,t = intadapt(g,-M,M,tol)
-	return I,x.(t)
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-intinf-python
+:::
 ````
-
-::::{admonition} About the code
-:class: dropdown
-The test `isinf(x(M))` in line 17 checks whether $x(M)$ is larger than the maximum double-precision value, causing it to *overflow* to `Inf`.
-::::
+`````
+``````
 
 (demo-improper-intinf)=
-```{prf:example}
-```
-
-
-
-
-
+::::{prf:example}
 We compare direct truncation in $x$ to the double exponential method of {numref}`Function {number} <function-intinf>` for $f(x)=1/(1+x^2)$.
 
-```{code-cell}
-:tags: [hide-input]
-f = x -> 1/(1+x^2)
-tol = [1/10^d for d in 5:0.5:14]
-err = zeros(length(tol),2)
-len = zeros(Int,length(tol),2)
-for (i,tol) in enumerate(tol)
-    I1,x1 = FNC.intadapt(f,-2/tol,2/tol,tol)
-    I2,x2 = FNC.intinf(f,tol)
-    @. err[i,:] = abs(π-[I1,I2])
-    @. len[i,:] = length([x1,x2])
-end
-plot(len,err,m=:o,label=["direct" "double exponential"])
-n = [100,10000]
-plot!(n,1000n.^(-4),l=:dash,label="fourth-order",
-     xaxis=(:log10,"number of nodes"),yaxis=(:log10,"error"),
-     title="Comparison of integration methods",leg=:bottomleft)
-```
 
-Both methods are roughly fourth-order due to Simpson's formula in the underlying adaptive integration method. At equal numbers of evaluation nodes, however, the double exponential method is consistently 2--3 orders of magnitude more accurate.
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-improper-intinf-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-improper-intinf-matlab
+:::
+````
 
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-improper-intinf-python
+:::
+````
+`````
+::::
 
 ## Integrand singularity
 
@@ -248,51 +203,30 @@ satisfies $x(0)=1$ and $x\to 0^+$ as $t\to \infty$, thereby transforming the int
 Now the growth of $f$ and $\cosh t$ together are counteracted by the double exponential denominator, allowing easy truncation of {eq}`DEquadchain2`. This variable transformation is paired with adaptive integration in {numref}`Function {number} <function-intsing>`.
 
 (function-intsing)=
-````{prf:function} intsing
-**Integration of a function with endpoint singularities**
-```{code-block} julia
-:lineno-start: 1
-"""
-    intsing(f,tol)
+``````{prf:algorithm} intsing
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-intsing-julia
+:::
+```` 
 
-Adaptively integrate function `f` over (0,1), where `f` may be 
-singular at zero, with error tolerance `tol`. Returns the
-integral estimate and a vector of the nodes used.
-"""
-function intsing(f,tol)
-    x = t -> 2/(1+exp(2sinh(t)))
-	dx_dt = t -> cosh(t)/cosh(sinh(t))^2
-	g = t -> f(x(t))*dx_dt(t)
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-intsing-matlab
+:::
+```` 
 
-    # Find where to truncate the integration interval.
-    M = 3
-    while abs(g(M)) > tol/100
-        M += 0.5
-        if iszero(x(M)) 
-            @warn "Function may grow too rapidly."
-            M -= 0.5
-            break
-        end
-    end
-
-    I,t = intadapt(g,0,M,tol)
-	return I,x.(t)
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-intsing-python
+:::
 ````
-::::{admonition} About the code
-:class: dropdown
-The test `iszero(x(M))` in line 17 checks whether $x(M)$ is less than the smallest positive double-precision value, causing it to *underflow* to zero.
-::::
+`````
+``````
 
 (demo-improper-intsing)=
-```{prf:example}
-```
-
-
-
-
-
+::::{prf:example}
 Let's use {numref}`Function {number} <function-intsing>` to compute
 
 $$
@@ -306,30 +240,26 @@ $$
 $$
 
 In order to use {numref}`Function {number} <function-intadapt>`, we must truncate on the left to avoid evaluation at zero, where $f$ is infinite. Since the integral from $0$ to $\delta$ is $20\sqrt{\delta}$, we use $\delta=(\epsilon/20)^2$ to achieve error tolerance $\epsilon$.
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-improper-intsing-julia
+:::
+````
 
-```{code-cell}
-:tags: [hide-input]
-f = x -> 1/(10*sqrt(x))
-tol = [1/10^d for d in 5:0.5:14]
-err = zeros(length(tol),2)
-len = zeros(Int,length(tol),2)
-for (i,tol) in enumerate(tol)
-    I1,x1 = FNC.intadapt(f,(tol/20)^2,1,tol)
-    I2,x2 = FNC.intsing(f,tol)
-    @. err[i,:] = abs(0.2-[I1,I2])
-    @. len[i,:] = length([x1,x2])
-end
-plot(len,err,m=:o,label=["direct" "double exponential"])
-n = [30,3000]
-plot!(n,30n.^(-4),l=:dash,label="fourth-order",
-     xaxis=(:log10,"number of nodes"),yaxis=(:log10,"error"),
-     title="Comparison of integration methods",leg=:bottomleft)
-```
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-improper-intsing-matlab
+:::
+````
 
-As in {numref}`Demo {number} <demo-improper-intinf>`, the double exponential method is more accurate than direct integration by a few orders of magnitude. Equivalently, the same accuracy can be reached with many fewer nodes.
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-improper-intsing-python
+:::
+````
+`````
+::::
 
 Double exponential integration is an effective general-purpose technique for improper integrals that usually outperforms interval truncation in the original variable. There are specialized methods tailored to specific singularity types that can best it, but those require more analytical work to use properly.
 

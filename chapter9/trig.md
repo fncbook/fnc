@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 9.5.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-globalapprox-trig)=
 # Trigonometric interpolation
 
@@ -92,117 +76,51 @@ The convergence of a trigonometric interpolant is spectral, i.e., exponential as
 
 ```{index} ! Julia; ternary operator, ! Julia; eachindex, ! Julia; isodd
 ```
-
 (function-triginterp)=
-````{prf:function} triginterp
-**Trigonometric interpolation**
-```{code-block} julia
-:lineno-start: 1
-"""
-    triginterp(t,y)
+``````{prf:algorithm} triginterp
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-triginterp-julia
+:::
+```` 
 
-Construct the trigonometric interpolant for the points defined by 
-vectors `t` and `y`.
-"""
-function triginterp(t,y)
-    N = length(t)
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-triginterp-matlab
+:::
+```` 
 
-    function τ(x)
-        if x==0
-            return 1.0
-        else
-            denom = isodd(N) ? N*sin(π*x/2) : N*tan(π*x/2)
-            return sin(N*π*x/2)/denom
-        end
-    end
-
-    return function (x)
-        sum( y[k]*τ(x-t[k]) for k in eachindex(y) )
-    end
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-triginterp-python
+:::
 ````
-
-::::{admonition} About the code
-:class: dropdown
-The construct on line 13 is known as a *ternary operator*. It is a shorthand for an `if`–`else` statement, giving two alternative results for the true/false cases. Line 19 uses `eachindex(y)`, which generalizes `1:length(y)` to cases where a vector might have a more exotic form of indexing.
-::::
+`````
+``````
 
 (demo-trig-interp)=
-```{prf:example}
-```
-
-
-
-
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-We will get a cardinal function without using an explicit formula, just by passing data that is 1 at one node and 0 at the others.
-
-
+::::{prf:example}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-trig-interp-julia
 :::
+````
 
-:::{card}
-
-
-The operator `÷`, typed as `\div` then <kbd>Tab</kbd>, returns the quotient without remainder of two integers.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-trig-interp-matlab
 :::
+````
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-trig-interp-python
+:::
+````
+`````
 ::::
-
-```{code-cell}
-N = 7;  n = (N-1)÷2
-t = 2*(-n:n)/N
-y = zeros(N);  y[n+1] = 1;
-
-p = FNC.triginterp(t,y);
-plot(p,-1,1)
-
-scatter!(t,y,color=:black,title="Trig cardinal function, N=$N",
-    xaxis=(L"x"),yaxis=(L"\tau(x)"))
-```
-
-Here is a 2-periodic function and one of its interpolants.
-
-```{code-cell}
-f = x -> exp(sin(pi*x)-2*cos(pi*x))
-y = f.(t)
-p = FNC.triginterp(t,y)
-
-plot(f,-1,1,label="function",
-    xaxis=(L"x"),yaxis=(L"p(x)"),
-    title="Trig interpolation, N=$N",legend=:top)  
-scatter!(t,y,m=:o,color=:black,label="nodes")
-plot!(p,-1,1,label="interpolant")
-```
-
-```{index} ! Julia; ÷
-```
-
-The convergence of the interpolant is spectral. We let $N$ go needlessly large here in order to demonstrate that unlike polynomials, trigonometric interpolation is stable on equally spaced nodes. Note that when $N$ is even, the value of $n$ is not an integer but works fine for defining the nodes.
-
-```{code-cell}
-:tags: [hide-input]
-N = 2:2:60
-err = zeros(size(N))
-
-x = range(-1,1,length=2501)  # for measuring error
-for (k,N) in enumerate(N)
-    n = (N-1)/2;   t = 2*(-n:n)/N;
-    p = FNC.triginterp(t,f.(t))
-    err[k] = norm(f.(x)-p.(x),Inf)
-end
-
-plot(N,err,m=:o,title="Convergence of trig interpolation",
-    xaxis=(L"N"),yaxis=(:log10,"max error"))
-```
-
-
-
 
 ## Fast Fourier transform
 
@@ -263,57 +181,27 @@ $$
 $$
 
 (demo-trig-fft)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-trig-fft-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-trig-fft-matlab
+:::
+````
 
-
-
-
-
-This function has frequency content at $2\pi$, $-2\pi$, and $\pi$. 
-
-```{code-cell}
-f = x -> 3*cos(2π*x) - exp(1im*π*x);
-```
-
-To use `fft`, we set up nodes in the interval $[0,2)$. 
-
-```{code-cell}
-n = 4;  N = 2n+1;
-t = [ 2j/N for j=0:N-1 ]      # nodes in [0,2)
-y = f.(t);
-```
-
-We perform Fourier analysis using `fft` and then examine the resulting coefficients.
-
-```{code-cell}
-c = fft(y)/N
-freq = [0:n;-n:-1]
-data = round.(c,sigdigits=5)
-pretty_table((k=freq,coef=data), header=["k","coefficient"])
-```
-
-Note that $1.5 e^{2i\pi x}+1.5 e^{-2i\pi x} = 3 \cos(2\pi x)$, so this result is sensible.
-
-Fourier's greatest contribution to mathematics was to point out that *every* periodic function is just a combination of frequencies—infinitely many of them in general, but truncated for computational use. Here we look at the magnitudes of the coefficients for $f(x) = \exp( \sin(\pi x) )$.
-
-```{code-cell}
-:tags: [hide-input]
-f = x -> exp( sin(pi*x) )     # content at all frequencies
-n = 9;  N = 2n+1;
-t = [ 2j/N for j=0:N-1 ]      # nodes in [0,2)
-c = fft(f.(t))/N
-
-freq = [0:n;-n:-1]
-scatter(freq,abs.(c),xaxis=(L"k",[-n,n]),yaxis=(L"|c_k|",:log10), 
-    title="Fourier coefficients",leg=:none)
-```
-
-The Fourier coefficients of smooth functions decay exponentially in magnitude as a function of the frequency. This decay rate is determines the convergence of the interpolation error.
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-trig-fft-python
+:::
+````
+`````
+::::
 
 The theoretical and computational aspects of Fourier analysis are vast and far-reaching. We have given only the briefest of introductions.
 

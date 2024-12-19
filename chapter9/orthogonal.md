@@ -1,80 +1,34 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 9.4.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-globalapprox-orthogonal)=
 # Orthogonal polynomials
 
 Interpolation is not the only way to use polynomials for global approximation of functions. In {numref}`section-leastsq-fitting` we saw how to find least-squares polynomial fits to data by solving linear least-squares matrix problems. This idea can be extended to fitting functions.
 
 (demo-orthogonal-approx)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-orthogonal-approx-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-orthogonal-approx-matlab
+:::
+````
 
-
-
-
-Let's approximate $e^x$ over the interval $[−1,1]$. We can sample it at, say, 20 points, and find the best-fitting straight line to that data.
-
-```{code-cell}
-plot(exp,-1,1,label="function")
-
-t = range(-1,1,length=20)
-y = exp.(t)
-V = [ ti^j for ti in t, j in 0:1 ]  # Vandermonde-ish
-c = V\y
-plot!(t->c[1]+c[2]*t,-1,1,label="linear fit for 20 points",
-    xaxis=("x"),yaxis=("value"),
-    title="Least-squares fit of exp(x)",leg=:bottomright)
-```
-
-There's nothing special about 20 points. Choosing more doesn't change the result much.
-
-```{code-cell}
-t = range(-1,1,length=200)
-y = exp.(t)
-V = [ ti^j for ti in t, j=0:1 ]
-c = V\y
-plot!(t->c[1]+c[2]*t,-1,1,label="linear fit for 200 points",
-    xaxis=("x"),yaxis=("value"),
-    title="Least-squares fit of exp(x)",leg=:bottomright)
-```
-
-This situation is unlike interpolation, where the degree of the interpolant increases with the number of nodes. Here, the linear fit is apparently approaching a limit that we may think of as a continuous least-squares fit.
-
-```{code-cell}
-n = 40:60:400
-slope = zeros(size(n))
-intercept = zeros(size(n))
-
-for (k,n) in enumerate(n)
-    t = range(-1,1,length=n)
-    y = exp.(t)
-    V = [ ti^j for ti in t, j=0:1 ]
-    c = V\y
-    intercept[k],slope[k] = c
-end
-
-labels = ["n","intercept","slope"]
-pretty_table((;n, intercept, slope), header=labels)
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-orthogonal-approx-python
+:::
+````
+`````
+::::
 
 
 

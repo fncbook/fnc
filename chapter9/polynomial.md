@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 9.1.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-globalapprox-polynomial)=
 # Polynomial interpolation
 
@@ -78,53 +62,27 @@ is of degree at most $n$ and satisfies the cardinality conditions {eq}`lagrangec
 ::::
 
 (demo-polynomial-lagrange)=
-```{prf:example}
-```
-
-
-
-
-
-Here is a vector of nodes.
-
-```{code-cell}
-t = [ 1, 1.5, 2, 2.25, 2.75, 3 ]
-n = length(t)-1;
-```
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-Let's apply the definition of the cardinal Lagrange polynomial for $k=2$. First we define a polynomial $q$ that is zero at all the nodes except $i=k$. Then $\ell_2$ is found by normalizing $q$ by $q(t_k)$.
-
-
+::::{prf:example}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-polynomial-lagrange-julia
 :::
-:::{card}
+````
 
-
-Character ℓ is typed as `\ell`<kbd>Tab</kbd>.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-polynomial-lagrange-matlab
 :::
+````
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-polynomial-lagrange-python
+:::
+````
+`````
 ::::
-
-```{code-cell}
-k = 2
-q = x -> prod( x-t[i] for i in [0:k-1;k+1:n].+1 )
-ℓₖ = x -> q(x) / q(t[k+1]);
-```
-
-A plot confirms the cardinal property of the result.
-
-```{code-cell}
-plot(ℓₖ,1,3)
-y = zeros(n+1);  y[k+1] = 1
-scatter!(t,y,color=:black,
-    xaxis=(L"x"),yaxis=(L"\ell_2(x)"),title="Lagrange cardinal function")
-```
-
-Observe that $\ell_k$ is _not_ between zero and one everywhere, unlike a hat function.
 
 
 
@@ -222,50 +180,27 @@ which is a restatement of {eq}`interperror`.
 Usually $f^{(n+1)}$ and the function $\xi(x)$ are unknown. The importance of the formula {eq}`interperror` is how it helps to express the error as a function of $x$, and its dependence on the nodes $t_0,\dots,t_n$. We will exploit this knowledge later.
 
 (demo-polynomial-error)=
-```{prf:example}
-```
-
-
-
-
-
-Consider the problem of interpolating $\log(x)$ at these nodes:
-
-```{code-cell}
-t =  [ 1, 1.6, 1.9, 2.7, 3 ]
-n = length(t)-1;
-```
-
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-Here $n=4$ and $f^{(5)}(\xi) = 4!/\xi^5$. For $\xi\in[1,3]$ we can say that $|f^{(5)}(\xi)| \le 4!$. Hence 
-
-$$ |f(x)-p(x)| \le \frac{1}{5} \left| \Phi(x) \right|.$$
-
-
+::::{prf:example}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-polynomial-error-julia
 :::
-:::{card}
+````
 
-
-Character Φ is typed as `\Phi`<kbd>Tab</kbd>. (Note the capitalization.)
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-polynomial-error-matlab
 :::
+````
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-polynomial-error-python
+:::
+````
+`````
 ::::
-
-```{code-cell}
-Φ = x -> prod(x-tᵢ for tᵢ in t)
-plot(x->0.2*abs(Φ(x)),1,3,label=L"\frac{1}{5}|\Phi(t)|" )
-p = Polynomials.fit(t,log.(t))
-plot!(t->abs(log(t)-p(t)),1,3,label=L"|f(x)-p(x)|")
-scatter!(t,zeros(size(t)),color=:black,
-    xaxis=(L"x"),title="Interpolation error and upper bound")
-```
-
-The error is zero at the nodes, by the definition of interpolation. The error bound, as well as the error itself, has one local maximum between each consecutive pair of nodes.
 
 
 

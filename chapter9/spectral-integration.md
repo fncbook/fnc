@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 9.6.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-globalapprox-integration)=
 # Spectrally accurate integration
 
@@ -53,33 +37,31 @@ The trapezoid integration formula is spectrally accurate for periodic functions.
 ```
 
 (demo-integration-ellipse)=
-```{prf:example}
-```
-
-
-
-
-
+::::{prf:example}
 We use the trapezoidal integration formula to compute the perimeter of an ellipse with semi-axes 1 and 1/2. Parameterizing the ellipse as $x=\cos \pi t$, $y=\frac{1}{2}\sin \pi t$ leads to the arc-length integral 
 
 $$\int_{-1}^1 \pi\sqrt{ \cos^2(\pi t) + \tfrac{1}{4}\sin^2(\pi t)}\,dt.$$ 
 
-```{code-cell}
-f = t->π*sqrt( cos(π*t)^2+sin(π*t)^2/4 );
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-integration-ellipse-julia
+:::
+````
 
-n = 4:4:48
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-integration-ellipse-matlab
+:::
+````
 
-for (i,n) in enumerate(n)
-    h = 2/n
-    t = @. h*(0:n-1)-1
-    S = h*sum(f.(t))
-   println("n = $n, value = $S")
-end
-```
-The approximations gain about one digit of accuracy for each constant increment of $n$, which is consistent with spectral convergence.
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-integration-ellipse-python
+:::
+````
+`````
+::::
 
 ## Clenshaw–Curtis integration
 
@@ -132,36 +114,27 @@ There are different formulas for odd values of $n$. Note that the weights also d
 [^clencurt]: This function is modeled after the function `clencurt.m` of {cite}`trefethenSpectralMethods2000`.
 
 (function-ccint)=
-````{prf:function} ccint
-**Clenshaw–Curtis numerical integration**
-```{code-block} julia
-:lineno-start: 1
-"""
-    ccint(f,n)
+``````{prf:algorithm} ccint
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-ccint-julia
+:::
+```` 
 
-Perform Clenshaw-Curtis integration for the function `f` on `n`+1
-nodes in [-1,1]. Returns the integral estimate and a vector of the 
-nodes used. Note: `n` must be even.
-"""
-function ccint(f,n)
-    @assert iseven(n) "Value of `n` must be an even integer."
-    # Find Chebyshev extreme nodes.
-    θ = [ i*π/n for i in 0:n ]
-    x = -cos.(θ)
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-ccint-matlab
+:::
+```` 
 
-    # Compute the C-C weights.
-    c = similar(θ)
-    c[[1,n+1]] .= 1/(n^2-1)
-    s = sum( cos.(2k*θ[2:n])/(4k^2-1) for k in 1:n/2-1 )
-    v = @. 1 - 2s - cos(n*θ[2:n])/(n^2-1)
-    c[2:n] = 2v/n
-
-    # Evaluate integrand and integral.
-    I = dot(c,f.(x))   # vector inner product
-    return I,x
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-ccint-python
+:::
 ````
+`````
+``````
 
 ## Gauss–Legendre integration
 
@@ -266,129 +239,54 @@ for all $q \in {\mathcal{P}}_{n-1}$. Hence satisfaction of {eq}`gqorthogonality`
 From {numref}`Theorem %s <theorem-orthogonal-roots>` we know that the roots of $P_n$ are distinct and all within $(-1,1)$. (Indeed, it would be strange to have the integral of a function depend on some of its values outside the integration interval!)  While there is no explicit formula for the roots, there are fast algorithms to compute them and the integration weights on demand. {numref}`Function {number} <function-glint>` uses one of the oldest methods,  practical up to $n=100$ or so.
 
 (function-glint)=
-````{prf:function} glint
-**Gauss–Legendre numerical integration**
-```{code-block} julia
-:lineno-start: 1
-"""
-    glint(f,n)
+``````{prf:algorithm} glint
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-glint-julia
+:::
+```` 
 
-Perform Gauss-Legendre integration for the function `f` on `n` nodes
-in (-1,1). Returns the integral estimate and a vector of the nodes used.
-"""
-function glint(f,n)
-    # Nodes and weights are found via a tridiagonal eigenvalue problem.
-    β = @. 0.5/sqrt(1-(2*(1:n-1))^(-2))
-    T = diagm(-1=>β,1=>β)
-    λ,V = eigen(T)
-    p = sortperm(λ)
-    x = λ[p]               # nodes
-    c = @. 2V[1,p]^2       # weights
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-glint-matlab
+:::
+```` 
 
-    # Evaluate the integrand and compute the integral.
-    I = dot(c,f.(x))      # vector inner product
-    return I,x
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-glint-python
+:::
 ````
+`````
+``````
 
 ## Convergence
 
 Both Clenshaw–Curtis and Gauss–Legendre integration are spectrally accurate. The Clenshaw–Curtis method on $n+1$ points has degree $n$, whereas the Gauss–Legendre method with $n$ points has degree ${2n-1}$. For this reason, it is possible for Gauss–Legendre to converge at a rate that is "twice as fast," i.e., with roughly the square of the error of Clenshaw–Curtis. But the full story is not simple.
 
 (demo-integration-compare)=
-```{prf:example}
-```
+::::{prf:example}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-integration-compare-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-integration-compare-matlab
+:::
+````
 
-
-
-
-First consider the integral 
-
-$$
-\int_{-1}^1 \frac{1}{1+4x^2} \, dx = \arctan(2).
-$$
-
-```{code-cell}
-f = x->1/(1+4*x^2);
-exact = atan(2);
-```
-
-We compare the two spectral integration methods for a range of $n$ values.
-
-```{code-cell}
-:tags: [hide-input]
-n = 8:4:96
-errCC = zeros(size(n))
-errGL = zeros(size(n))
-for (k,n) in enumerate(n)
-  errCC[k] = abs(exact - FNC.ccint(f,n)[1])
-  errGL[k] = abs(exact - FNC.glint(f,n)[1])
-end
-
-errCC[iszero.(errCC)] .= NaN
-errGL[iszero.(errGL)] .= NaN
-plot(n,[errCC errGL],m=:o,label=["CC" "GL"],
-    xaxis=("number of nodes"), yaxis=(:log10,"error",[1e-16,1]), 
-    title="Spectral integration")
-```
-
-(The missing dots are where the error is exactly zero.) Gauss–Legendre does converge faster here, but at something less than twice the rate.
-
-Now we try a more sharply peaked integrand:
- 
- $$\int_{-1}^1 \frac{1}{1+16x^2} \, dx = \frac{1}{2}\arctan(4).$$ 
-
-```{code-cell}
-f = x->1/(1+16*x^2);
-exact = atan(4)/2;
-```
-
-```{code-cell}
-:tags: [hide-input]
-n = 8:4:96
-errCC = zeros(size(n))
-errGL = zeros(size(n))
-for (k,n) in enumerate(n)
-  errCC[k] = abs(exact - FNC.ccint(f,n)[1])
-  errGL[k] = abs(exact - FNC.glint(f,n)[1])
-end
-
-errCC[iszero.(errCC)] .= NaN
-errGL[iszero.(errGL)] .= NaN
-plot(n,[errCC errGL],m=:o,label=["CC" "GL"],
-    xaxis=("number of nodes"), yaxis=(:log10,"error",[1e-16,1]), 
-    title="Spectral integration")
-```
-
-The two are very close until about $n=40$, when the Clenshaw–Curtis method slows down.
-
-Now let's compare the spectral performance to that of our earlier adaptive method in `intadapt`. We will specify varying error tolerances and record the error as well as the total number of evaluations of $f$.
-
-```{code-cell}
-:tags: [hide-input]
-
-tol = 10 .^(-2.0:-2:-14)
-n = zeros(size(tol))  
-errAdapt = zeros(size(tol))
-for (k,tol) in enumerate(tol)
-  Q,t = FNC.intadapt(f,-1,1,tol)
-  errAdapt[k] = abs(exact - Q)
-  n[k] = length(t)
-end
-
-errAdapt[iszero.(errAdapt)] .= NaN
-plot!(n,errAdapt,m=:o,label="intadapt")
-plot!(n,n.^(-4),l=:dash,label="4th order",
-        xaxis=(:log10), title="Spectral vs 4th order" )
-```
-
-At the core of `intadapt` is a fourth-order formula, and the results track that rate closely. For all but the most relaxed error tolerances, both spectral methods are far more efficient than the low-order counterpart. For other integrands, particularly those that vary nonuniformly across the interval, the adaptive method might be more competitive.
-
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-integration-compare-python
+:::
+````
+`````
+::::
 
 The difference in convergence between Clenshaw–Curtis and Gauss–Legendre is dwarfed by the difference between spectral and algebraic convergence. It is possible, though, to encounter integrands for which adaptivity is critical.  Choosing a method is highly problem-dependent, but a rule of thumb is that for large error tolerances, an adaptive low-order method is likely to be a good choice, while for high accuracy, the spectral methods often dominate.
 
