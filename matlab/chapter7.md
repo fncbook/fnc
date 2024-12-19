@@ -20,7 +20,7 @@ FNC_init
 ### (7.1) @section-matrixanaly-insight
 
 (demo-insight-graph-matlab)=
-``````{dropdown} Adjacency matrix
+``````{dropdown} @demo-insight-graph
 Here we create an adjacency matrix for a graph on four nodes.
 
 ```{code-cell}
@@ -57,7 +57,7 @@ plot(graph(bucky))
 ``````
 
 (demo-insight-image-matlab)=
-``````{dropdown} Images as matrices
+``````{dropdown} @demo-insight-image
 ```{index} ! Julia; Images
 ```
 
@@ -93,7 +93,7 @@ A = double(A);
 ### (7.2) @section-matrixanaly-evd
 
 (demo-evd-eigen-matlab)=
-``````{dropdown} Eigenvalues and eigenvectors
+``````{dropdown} @demo-evd-eigen
 
 ```{index} ! MATLAB; eig
 ```
@@ -139,7 +139,7 @@ norm(A * V - V * D)
 ``````
 
 (demo-evd-bauerfike-matlab)=
-``````{dropdown} Eigenvalue conditioning
+``````{dropdown} @demo-evd-bauerfike
 
 ```{index} MATLAB; adjoint, MATLAB; \'
 ```
@@ -224,7 +224,7 @@ The plot shows that some eigenvalues are much more affected than others. This si
 ``````
 
 (demo-evd-francisqr-matlab)=
-``````{dropdown} Francis QR iteration
+``````{dropdown} @demo-evd-francisqr
 Let's start with a known set of eigenvalues and an orthogonal eigenvector basis.
 
 ```{code-cell}
@@ -265,7 +265,7 @@ A
 ### (7.3) @section-matrixanaly-svd
 
 (demo-svd-props-matlab)=
-``````{dropdown} SVD properties
+``````{dropdown} @demo-svd-props
 We verify some of the fundamental SVD properties using the built-in `svd` function.
 
 ```{index} ! MATLAB; svd
@@ -305,7 +305,7 @@ sigma_ratio = s(1) / s(end)
 ### (7.4) @section-matrixanaly-symm-eig
 
 (demo-symm-eig-rayleigh-matlab)=
-``````{dropdown} Rayleigh quotient
+``````{dropdown} @demo-symm-eig-rayleigh
 We will use a symmetric matrix with a known EVD and eigenvalues equal to the integers from 1 to 20.
 
 ```{code-cell}
@@ -347,7 +347,7 @@ disp(table(delta, dif, variablenames=["perturbation size", "R(x) - lambda"]))
 ### (7.5) @section-matrixanaly-dimreduce
 
 (demo-dimreduce-hello-matlab)=
-``````{dropdown} Image compression
+``````{dropdown} @demo-dimreduce-hello
 We make an image from some text, then reload it as a matrix.
 
 ```{code-cell}
@@ -396,7 +396,7 @@ fprintf("compression ratio: %.1f", full_size / compressed_size)
 ``````
 
 (demo-dimreduce-voting-matlab)=
-``````{dropdown} Dimension reduction in voting records
+``````{dropdown} @demo-dimreduce-voting
 This matrix describes the votes on bills in the 111th session of the United States Senate. (The data set was obtained from [https://voteview.com].) Each row is one senator, and each column is a vote item.
 
 ```{code-cell}

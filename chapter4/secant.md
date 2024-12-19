@@ -16,7 +16,7 @@ Let's call this the *principle of approximate approximation.*
 In the Newton context, the principle of approximate approximation begins with the observation that the use of $f'$ is linked to the construction of a linear approximation $q(x)$ equivalent to a tangent line. The root of $q(x)$ is used to define the next iterate in the sequence. We can avoid calculating the value of $f'$ by choosing a different linear approximation.
 
 (demo-secant-line)=
-::::{prf:example}
+::::{prf:example} Graphical interpretation of the secant method
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -145,7 +145,7 @@ Quadratic convergence is a particular case of superlinear convergence. Roughly s
 as $k\to\infty$.
 
 (demo-secant-converge)=
-::::{prf:example}
+::::{prf:example} Convergence of the secant method
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -198,7 +198,7 @@ If we interpolate through three points by a polynomial, we get a unique quadrati
 This leads to the idea of defining $q(y)$ as the quadratic interpolant to the points $(y_{k-2},x_{k-2})$, $(y_{k-1},x_{k-1})$, and $(y_k,x_k)$, where $y_i=f(x_i)$ for all $i$, and setting $x_{k+1}=q(0)$. The process defined in this way (given three initial estimates) is called **inverse quadratic interpolation**. Rather than deriving lengthy formulas for it here, we demonstrate how to perform inverse quadratic interpolation using `fit` to perform the interpolation step.
 
 (demo-secant-iqi)=
-::::{prf:example}
+::::{prf:example} Inverse quadratic interpolation
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

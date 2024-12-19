@@ -212,7 +212,7 @@ Each pass through the loop starts by using {eq}`levenberg` to propose a step $\m
 In some cases our simple logic in {numref}`Function {number} <function-levenberg>` can make $\lambda$ oscillate between small and large values; several better but more complicated strategies for controlling $\lambda$ are known. In addition, the linear system {eq}`levenberg` is usually modified to get the well-known **Levenberg–Marquardt** algorithm, which does a superior job in some problems as $\lambda\to \infty$.
 
 (demo-quasi-levenberg)=
-::::{prf:example}
+::::{prf:example} Using Levenberg's method
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

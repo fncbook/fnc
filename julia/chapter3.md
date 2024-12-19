@@ -61,7 +61,7 @@ FNC.init_format()
 
 ### Section 3.1
 (demo-fitting-tempinterp-julia)=
-``````{dropdown} Interpolating temperature data
+``````{dropdown} @demo-fitting-tempinterp
 Here are 5-year averages of the worldwide temperature anomaly as compared to the 1951–1980 average (source: NASA).
 
 ```{code-cell}
@@ -103,7 +103,7 @@ As you can see, the interpolant does represent the data, in a sense. However it'
 ``````
 
 (demo-fitting-tempfit-julia)=
-``````{dropdown} Fitting temperature data
+``````{dropdown} @demo-fitting-tempfit
 Here are the 5-year temperature averages again.
 
 ```{code-cell}
@@ -160,7 +160,7 @@ If we were to continue increasing the degree of the polynomial, the residual at 
 ``````
 
 (demo-fitting-pirate-julia)=
-``````{dropdown} Fitting a power law
+``````{dropdown} @demo-fitting-pirate
 
 ```{code-cell}
 a = [1/k^2 for k=1:100] 
@@ -204,7 +204,7 @@ plot!(k, a * k.^b, l=:dash, label="power-law fit")
 ### Section 3.2
 
 (demo-normaleqns-instab-julia)=
-``````{dropdown} Instability in the normal equations
+``````{dropdown} @demo-normaleqns-instab
 
 ::::{grid} 1 1 2 2
 Because the functions $\sin^2(t)$, $\cos^2(t)$, and $1$ are linearly dependent, we should find that the following matrix is somewhat ill-conditioned.
@@ -247,7 +247,7 @@ x_NE = N \ (A'*b)
 
 ### Section 3.3
 (demo-qr-qrfact-julia)=
-``````{dropdown} QR factorization
+``````{dropdown} @demo-qr-qrfact
 
 Julia provides access to both the thin and full forms of the QR factorization.
 
@@ -292,7 +292,7 @@ Q̂' * Q̂ - I
 ``````
 
 (demo-qr-stable-julia)=
-``````{dropdown} Stability of least-squares via QR
+``````{dropdown} @demo-qr-stable
 We'll repeat the experiment of {numref}`Demo {number} <demo-normaleqns-instab>`, which exposed instability in the normal equations. 
 
 ```{code-cell}
@@ -314,7 +314,7 @@ observed_error = norm(FNC.lsqrfact(A,b) - x) / norm(x);
 
 ### Section 3.4
 (demo-house-qr-julia)=
-``````{dropdown} Householder QR factorization
+``````{dropdown} @demo-house-qr
 
 ::::{grid} 1 1 2 2
 We will use Householder reflections to produce a QR factorization of a random matrix.

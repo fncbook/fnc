@@ -50,7 +50,7 @@ In any norm, we refer to a vector $\mathbf{x}$ satisfying $\| \mathbf{x} \|=1$ a
 as writing a nonzero vector $\mathbf{v}$ in magnitude–direction form. 
 
 (demo-norms-vector)=
-::::{prf:example}
+::::{prf:example} Vector norms
 Given the vector $\mathbf{x}= \bigl[ 2 ,\, -3 ,\, 1 ,\, -1 \bigr]^T$, we have
 \begin{align*}
     \| \mathbf{x} \|_2 &= \sqrt{ 4 + 9 + 1 + 1 } = \sqrt{15}, \\[1ex]
@@ -213,7 +213,7 @@ In addition, two of the vector norms we have encountered lead to equivalent form
 A mnemonic for these is that the $\infty$ symbol extends horizontally while the 1 character extends vertically, each indicating the direction of the summation in its formula. Also, both formulas give the same result for $m\times 1$ matrices as the vector norm. In both cases you must take absolute values of the matrix elements first. 
 
 (demo-norms-matrix)=
-::::{prf:example}
+::::{prf:example} Matrix norms
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

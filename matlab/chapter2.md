@@ -63,7 +63,7 @@ FNC_init
 
 ### Section 2.1
 (demo-interp-vander-matlab)=
-``````{dropdown} Linear system for polynomial interpolation
+``````{dropdown} @demo-interp-vander
 We create two column vectors for data about the population of China. The first has the years of census data and the other has the population, in millions of people.
 
 ```{code-cell}
@@ -171,7 +171,7 @@ legend("data", "interpolant", "location", "northwest")
 
 ### Section 2.2
 (demo-matrices-matlab)=
-``````{dropdown} Matrix operations
+``````{dropdown} @demo-matrices
 :::{index} ! MATLAB; size, ! MATLAB; length
 :::
 
@@ -358,7 +358,7 @@ cos(pi * x)
 
 ### Section 2.3
 (demo-systems-backslash-matlab)=
-``````{dropdown} Solving linear systems
+``````{dropdown} @demo-systems-backslash
 For a square matrix $\mathbf{A}$, the syntax `A \ b` is mathematically equivalent to $\mathbf{A}^{-1} \mathbf{b}$. 
 
 ```{code-cell}
@@ -406,7 +406,7 @@ A linear system with a singular matrix might have no solution or infinitely many
 ``````
 
 (demo-systems-triangular-matlab)=
-``````{dropdown} Triangular systems of equations
+``````{dropdown} @demo-systems-triangular
 ```{index} ! MATLAB; tril, ! MATLAB; triu
 ```
 
@@ -484,7 +484,7 @@ It's not so good to get 4 digits of accuracy after starting with sixteen! The so
 ``````
 ### Section 2.4
 (demo-lu-outertri-matlab)= 
-``````{dropdown} Triangular outer products
+``````{dropdown} @demo-lu-outertri
 :open: false
 
 ```{index} MATLAB; tril, MATLAB; triu
@@ -517,7 +517,7 @@ Simply because of the triangular zero structures, only the first outer product c
 ``````
 
 (demo-lu-derive-matlab)=
-``````{dropdown} LU factorization
+``````{dropdown} @demo-lu-derive
 For illustration, we work on a $4 \times 4$ matrix. We name it with a subscript in preparation for what comes.
 
 ```{code-cell}
@@ -599,7 +599,7 @@ In floating point, we cannot expect the difference to be exactly zero as we foun
 ``````
 
 (demo-lu-solve-matlab)=
-``````{dropdown} Solving a linear system by LU factors
+``````{dropdown} @demo-lu-solve
 Here are the data for a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$. 
 
 ```{code-cell}
@@ -624,7 +624,7 @@ b - A * x
 
 ### Section 2.5
 (demo-flops-mvmult-matlab)=
-``````{dropdown} Floating-point operations in matrix-vector multiplication
+``````{dropdown} @demo-flops-mvmult
 Here is a straightforward implementation of matrix-vector multiplication.
 
 ```{code-cell}
@@ -693,7 +693,7 @@ $$
 ``````
 
 (demo-flops-loglog-matlab)=
-``````{dropdown} Asymptotics in log-log plots
+``````{dropdown} @demo-flops-loglog
 
 Let's repeat the previous experiment for more, and larger, values of $n$.
 
@@ -733,7 +733,7 @@ legend('data', 'O(n^2)', 'location', 'southeast')
 ``````
 
 (demo-flops-lufact-matlab)=
-``````{dropdown} Floating-point operations in LU factorization
+``````{dropdown} @demo-flops-lufact
 ::::{grid} 1 1 2 2
 We'll test the conclusion of $O(n^3)$ flops experimentally, using the built-in `lu` function instead of the purely instructive `lufact`.
 :::{card}
@@ -769,7 +769,7 @@ legend('lu','O(n^3)','location','southeast')
 
 ### Section 2.6
 (demo-pivoting-fail-matlab)=
-``````{dropdown} Failure of naive LU factorization
+``````{dropdown} @demo-pivoting-fail
 Here is a previously encountered matrix that factors well.
 
 ```{code-cell}
@@ -806,7 +806,7 @@ The next step is `U(2, :) = A(2, :)`, which is also OK. But then we are supposed
 ``````
 
 (demo-pivoting-fix-matlab)=
-``````{dropdown} Row pivoting in LU factorization
+``````{dropdown} @demo-pivoting-fix
 Here is the trouble-making matrix from {numref}`Demo {number} <demo-pivoting-fail>`.
 
 ```{code-cell}
@@ -882,7 +882,7 @@ L
 ``````
 
 (demo-pivoting-permute-matlab)=
-``````{dropdown} Row permutation in LU factorization
+``````{dropdown} @demo-pivoting-permute
 Here again is the matrix from {numref}`Demo {number} <demo-pivoting-fix>`.
 
 ```{code-cell}
@@ -910,7 +910,7 @@ L
 ``````
 
 (demo-pivoting-usage-matlab)=
-``````{dropdown} PLU factorization for solving linear systems
+``````{dropdown} @demo-pivoting-usage
 The third output of `plufact` is the permutation vector we need to apply to $\mathbf{A}$.
 
 ```{code-cell}
@@ -935,7 +935,7 @@ b - A*x
 ``````
 
 (demo-pivoting-builtin-matlab)=
-``````{dropdown} Built-in PLU factorization
+``````{dropdown} @demo-pivoting-builtin
 With the syntax `A \ b`, the matrix `A` is PLU-factored, followed by two triangular solves.
 
 ```{code-cell}
@@ -957,7 +957,7 @@ toc
 ``````
 
 (demo-pivoting-stable-matlab)=
-``````{dropdown} Stability of PLU factorization
+``````{dropdown} @demo-pivoting-stable
 We construct a linear system for this matrix with $\epsilon=10^{-12}$ and exact solution $[1, 1]$:
 
 ```{code-cell}
@@ -991,7 +991,7 @@ A \ b
 
 ### Section 2.7
 (demo-norms-vector-matlab)=
-``````{dropdown} Vector norms
+``````{dropdown} @demo-norms-vector
 ```{index} ! MATLAB; norm
 ```
 
@@ -1010,7 +1010,7 @@ onenorm = norm(x, 1)
 ``````
 
 (demo-norms-matrix-matlab)=
-``````{dropdown} Matrix norms
+``````{dropdown} @demo-norms-matrix
 
 ```{code-cell}
 A = [ 2 0; 1 -1 ]
@@ -1097,7 +1097,7 @@ ylabel('x_2')
 
 ### Section 2.8
 (demo-condition-bound-matlab)=
-``````{dropdown} Matrix condition number
+``````{dropdown} @demo-condition-bound
 
 ```{index} ! MATLAB; cond
 ```
@@ -1178,7 +1178,7 @@ As anticipated, the solution has zero accurate digits in the 2-norm.
 
 ### Section 2.9
 (demo-structure-banded-matlab)=
-``````{dropdown} Banded matrices
+``````{dropdown} @demo-structure-banded
 ```{index} ! MATLAB; fill, MATLAB; diagm, ! MATLAB; diag
 ```
 
@@ -1222,25 +1222,8 @@ The lower and upper bandwidths of $\mathbf{A}$ are repeated in the factors from 
 ```
 ``````
 
-(demo-structure-timing-matlab)=
-``````{dropdown} Timing banded LU
-If we use an ordinary or dense matrix, then there's no way to exploit a banded structure such as tridiagonality.
-
-```{code-cell}
-n = 10000;
-A = diag(1:n) + diag(n-1:-1:1, 1) + diag(ones(n-1, 1), -1);
-tic, [L,U] = lu(A); toc
-```
-
-If instead we convert the matrix to `sparse` form, though, the speedup can be dramatic.
-
-```{code-cell}
-tic, [L,U] = lu(sparse(A)); toc
-```
-``````
-
 (demo-structure-symm-matlab)=
-``````{dropdown} Symmetric LDL$^T$ factorization
+``````{dropdown} @demo-structure-symm
 
 We begin with a symmetric $\mathbf{A}$.
 
@@ -1288,7 +1271,7 @@ norm(A_1 - (L * diag(d) * L'))
 ``````
 
 (demo-structure-cholesky-matlab)=
-``````{dropdown} Cholesky factorization
+``````{dropdown} @demo-structure-cholesky
 A randomly chosen matrix is extremely unlikely to be symmetric. However, there is a simple way to symmetrize one.
 
 ```{code-cell}

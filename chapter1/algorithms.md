@@ -115,7 +115,7 @@ The `return` statement in line 12 terminates the function and specifies one or m
 ```
 
 (demo-algorithms-horner)=
-``````{prf:example}
+``````{prf:example} Using a function
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

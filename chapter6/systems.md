@@ -70,7 +70,7 @@ The generalization of any scalar IVP solver to handle systems is straightforward
 The vector difference equation {eq}`eulersys` is just Euler's formula applied simultaneously to each component of the ODE system. Because operations such as addition and multiplication translate easily from scalars to vectors, {numref}`Function {number} <function-euler>` that we wrote for scalar IVPs works for systems as well. Practically speaking, the only changes that must be made are that the initial condition and the ODE function have to be coded to use vectors. 
 
 (demo-systems-predator)=
-::::{prf:example}
+::::{prf:example} Predator-prey model
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -161,7 +161,7 @@ which is a first-order system in four dimensions. To complete the description of
 The trick illustrated in the preceding examples is always available. Suppose $y$ is a scalar dependent variable in the system. You should introduce a component of $\mathbf{u}$ for $y$, $y'$, etc., up to but not including the highest derivative appearing anywhere for $y$. This is done for each scalar variable in the original system. There should be one component of $\mathbf{u}$ for each scalar initial condition given. Many equations for the first-order system then come from the trivial relationships among all the lower derivatives. The remaining equations for the system come from the original, high-order equations. In the end, there must be as many scalar component equations as unknown first-order variables.
 
 (demo-systems-coupledpendula)=
-::::{prf:example}
+::::{prf:example} Coupled pendulums
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

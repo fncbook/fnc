@@ -96,7 +96,7 @@ Note that for any induced matrix norm,
 A condition number of 1 is the best we can hope for—in that case, the relative perturbation of the solution has the same size as that of the data.  A condition number of size $10^t$ indicates that in floating-point arithmetic, roughly $t$ digits are lost (i.e., become incorrect) in computing the solution $\mathbf{x}$. And if $\kappa(\mathbf{A}) > \epsilon_\text{mach}^{-1}$, then for computational purposes the matrix is effectively singular. 
 
 (demo-condition-bound)=
-::::{prf:example}
+::::{prf:example} Matrix condition number
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

@@ -75,7 +75,7 @@ provided that the individual block products are well-defined. For transposes we 
 Vectors and matrices are integral to scientific computing. All modern languages provide ways to work with them beyond manipulation of individual elements. 
 
 (demo-matrices)=
-::::{prf:example}
+::::{prf:example} Matrix operations
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

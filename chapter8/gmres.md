@@ -68,7 +68,7 @@ GMRES[^gmres] uses the Arnoldi iteration to minimize the residual $\mathbf{b} - 
 [^breakdown]: This statement is not strictly correct for rare special cases of *breakdown* where the rank of $\mathcal{K}_n$ is less than $n$. In that situation, some additional steps must be taken that we do not discuss here.
 
 (demo-gmres-intro)=
-::::{prf:example}
+::::{prf:example} GMRES GMRES GMRES GMRES
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -138,7 +138,7 @@ Suppose $\hat{\mathbf{x}}$ is an approximate solution of $\mathbf{A}\mathbf{x}=\
 Restarting guarantees a fixed upper bound on the per-iteration cost of GMRES. However, this benefit comes at a price. Even though restarting preserves progress made in previous iterations, the Krylov space information is discarded and the residual minimization process starts again over low-dimensional spaces. That can significantly retard or even stagnate the convergence. 
 
 (demo-gmres-restart)=
-::::{prf:example}
+::::{prf:example} Restarting GMRES Restarting GMRES Restarting GMRES Restarting GMRES
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

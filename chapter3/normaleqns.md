@@ -192,7 +192,7 @@ This squaring of the condition number in the normal equations is the cause of in
 
 
 (demo-normaleqns-instab)=
-::::{prf:example}
+::::{prf:example} Instability in the normal equations
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

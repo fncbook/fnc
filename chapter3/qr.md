@@ -181,7 +181,7 @@ The thin QR factorization is $\mathbf{A} = \hat{\mathbf{Q}} \hat{\mathbf{R}}$, w
 ::::
 
 (demo-qr-qrfact)=
-::::{prf:example}
+::::{prf:example} QR factorization
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -263,7 +263,7 @@ This algorithm is implemented in {numref}`Function {number} <function-lsqrfact>`
 The solution of least-squares problems via QR factorization is more stable than when the normal equations are formulated and solved directly.
 
 (demo-qr-stable)=
-::::{prf:example}
+::::{prf:example} Stability of least-squares via QR
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

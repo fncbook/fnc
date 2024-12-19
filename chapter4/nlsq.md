@@ -56,7 +56,7 @@ In the multidimensional Newton method for a nonlinear system, we expect quadrati
 As always in least-squares problems, the residual $\mathbf{f}(\mathbf{x})$ will not necessarily be zero when $\|\mathbf{f}\|$ is minimized. Suppose that the minimum value of $\|\mathbf{f}\|$ is $R>0$. In general, we might observe quadratic-like convergence until the iterate $\|\mathbf{x}_k\|$ is within distance $R$ of a true minimizer, and linear convergence thereafter. When $R$ is not sufficiently small, the convergence can be quite slow.
 
 (demo-nlsq-converge)=
-::::{prf:example}
+::::{prf:example} Convergence of nonlinear least squares
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -108,7 +108,7 @@ The form of $g$ is up to the modeler. There may be compelling theoretical choice
 then the misfit function is also linear in $\mathbf{c}$ and the fitting problem reduces to linear least squares.
 
 (demo-nlsq-MM)=
-::::{prf:example}
+::::{prf:example} Nonlinear data fitting
 Inhibited enzyme reactions often follow what are known as _Michaelis–Menten_ kinetics, in which a reaction rate $w$ follows a law of the form
 
 $$w(s) = \frac{V s}{K_m + s},$$

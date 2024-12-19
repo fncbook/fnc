@@ -122,7 +122,7 @@ rcParams['animation.html'] = "jshtml"  # or try "html5"
 ### Section 6.1
 
 (demo-basics-first-python)=
-``````{dropdown} Solving an IVP
+``````{dropdown} @demo-basics-first
 Let's use `solve_ivp` from `scipy.integrate` to define and solve an initial-value problem for $u'=\sin[(u+t)^2]$ over $t \in [0,4]$, such that $u(0)=-1$.
 
 To create an initial-value problem for $u(t)$, you must supply a function that computes $u'$, an initial value for $u$, and the endpoints of the interval for $t$. The $t$ interval should be defined as `(a,b)`, where at least one of the values is a float.
@@ -172,7 +172,7 @@ for t in linspace(0, 4, 6):
 ``````
 
 (demo-basics-sing-python)=
-``````{dropdown} Finite-time singularity
+``````{dropdown} @demo-basics-sing
 
 ::::{grid} 1 1 2 2
 The equation $u'=(u+t)^2$ gives us some trouble.
@@ -199,7 +199,7 @@ title("Blowup in finite time")
 ``````
 
 (demo-basics-cond-python)=
-``````{dropdown} Conditioning of an IVP
+``````{dropdown} @demo-basics-cond
 Consider the ODEs $u'=u$ and $u'=-u$. In each case we compute $\partial f/\partial u = \pm 1$, so the condition number bound from {numref}`Theorem %s <theorem-depIC>` is $e^{b-a}$ in both problems. However, they behave quite differently. In the case of exponential growth, $u'=u$, the bound is the actual condition number.
 
 ```{code-cell}
@@ -227,7 +227,7 @@ In this case the actual condition number is one, because the initial difference 
 
 ### Section 6.2
 (demo-euler-converge-python)=
-``````{dropdown} Convergence of Euler's method
+``````{dropdown} @demo-euler-converge
 We consider the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
 
 ```{code-cell}
@@ -288,7 +288,7 @@ legend()
 
 ### Section 6.3
 (demo-systems-predator-python)=
-``````{dropdown} Predator-prey model
+``````{dropdown} @demo-systems-predator
 We encode the predator–prey equations via a function.
 
 ```{code-cell}
@@ -344,7 +344,7 @@ From this plot we can see that the solution approaches a periodic one, which in 
 ``````
 
 (demo-systems-coupledpendula-python)=
-``````{dropdown} Coupled pendulums
+``````{dropdown} @demo-systems-coupledpendula
 Let's implement the coupled pendulums from {numref}`Example {number} <example-systems-coupledpendula>`. The pendulums will be pulled in opposite directions and then released together from rest.
 
 ```{code-cell}
@@ -394,7 +394,7 @@ The coupling makes the pendulums swap energy back and forth.
 
 ### Section 6.4
 (demo-rk-converge-python)=
-``````{dropdown} Convergence of Runge–Kutta methods
+``````{dropdown} @demo-rk-converge
 We solve the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. We start by getting a reference solution to validate against.
 
 ```{code-cell}
@@ -440,7 +440,7 @@ The fourth-order variant is more efficient in this problem over a wide range of 
 
 ### Section 6.5
 (demo-adapt-basic-python)=
-``````{dropdown} Adaptive step size
+``````{dropdown} @demo-adapt-basic
 Let's run adaptive RK on  $u'=e^{t-u\sin u}$.
 
 ```{code-cell}
@@ -476,8 +476,8 @@ We took fewer steps by a factor of 1000! Even accounting for the extra stage per
 
 ``````
 
-(demo-adpat-sing-python)=
-``````{dropdown} Adaptive step size near a singularity
+(demo-adapt-sing-python)=
+``````{dropdown} @demo-adapt-sing
 In {numref}`Demo %s <demo-basics-sing>` we saw an IVP that appears to blow up in a finite amount of time. Because the solution increases so rapidly as it approaches the blowup, adaptive stepping is required even to get close.
 
 ```{code-cell}
@@ -502,7 +502,7 @@ legend();
 
 ### Section 6.6
 (demo-implicit-ab4-python)=
-``````{dropdown} Convergence of Adams–Bashforth
+``````{dropdown} @demo-implicit-ab4
 We study the convergence of AB4 using the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. As usual, `solve_ivp` is called to give an accurate reference solution.
 
 ```{code-cell}
@@ -539,7 +539,7 @@ legend(), title("Convergence of AB4");
 ``````
 
 (demo-implicit-stiff-python)=
-``````{dropdown} Stiffness
+``````{dropdown} @demo-implicit-stiff
 The following simple ODE uncovers a surprise.
 
 ```{code-cell}
@@ -589,7 +589,7 @@ So AB4, which is supposed to be _more_ accurate than AM2, actually needs somethi
 
 ### Section 6.7
 (demo-zs-LIAF-python)=
-``````{dropdown} Instability
+``````{dropdown} @demo-zs-LIAF
 We'll measure the error at the time $t=1$.
 
 ```{code-cell}

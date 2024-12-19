@@ -90,7 +90,7 @@ These formulas greatly resemble the definite integral of $x^p$.
 Traditionally, in numerical linear algebra we count **floating-point operations**, or **flops** for short. In our interpretation each scalar addition, subtraction, multiplication, division, and square root counts as one flop. Given any algorithm, we simply add up the number of scalar flops and ignore everything else.
 
 (demo-flops-mvmult)=
-::::{prf:example}
+::::{prf:example} Floating-point operations in matrix-vector multiplication
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -122,7 +122,7 @@ Suppose that the running time $t$ of an algorithm obeys a function that is $O(n^
 So we expect that a graph of $\log t$ as a function of $\log n$ will be a straight line of slope $p$.
 
 (demo-flops-loglog)=
-::::{prf:example}
+::::{prf:example} Asymptotics in log-log plots
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -211,7 +211,7 @@ We have proved the following.
 The LU factorization of an $n\times n$ matrix takes $\sim\frac{2}{3}n^3$ flops as $n\to \infty$. This dominates the flops for solving an $n\times n$ linear system.
 ```
 (demo-flops-lufact)=
-::::{prf:example}
+::::{prf:example} Floating-point operations in LU factorization
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

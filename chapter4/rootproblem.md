@@ -22,7 +22,7 @@ The formulation $f(x)=0$ is general enough to solve any equation. If we are tryi
 Unlike the linear problems of the earlier chapters, the usual situation here is that the root cannot be produced in a finite number of operations, even in exact arithmetic. Instead, we seek a sequence of approximations that formally converge to the root, stopping when some member of the sequence seems to be good enough, in a sense we will clarify later. The `NLsolve` package for Julia has a function `nlsolve` for general-purpose rootfinding.
 
 (demo-rootproblem-bessel)=
-::::{prf:example}
+::::{prf:example} The rootfinding problem for Bessel functions
 In the theory of vibrations of a circular drum, the displacement of the drumhead can be expressed in terms of pure harmonic modes, 
 
 $$J_m(\omega_{k,m} r) \cos(m\theta) \cos(c \omega_{k,m} t),$$
@@ -88,7 +88,7 @@ Equivalently, {eq}`rootcondnum` is just the magnitude of the derivative of the i
 
 
 (demo-roots-cond)=
-::::{prf:example}
+::::{prf:example} Condition number of a rootfinding problem
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

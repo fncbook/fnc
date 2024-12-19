@@ -181,7 +181,7 @@ An implementation of Newton's method for systems is given in {numref}`Function {
 ``````
 
 (demo-newtonsys-converge)=
-::::{prf:example}
+::::{prf:example} Convergence of Newton's method for systems
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

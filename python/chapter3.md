@@ -51,12 +51,14 @@ Python implementations
 
 ```{code-cell} ipython3
 from numpy import *
+from numpy.linalg import norm
 from matplotlib.pyplot import *
-from numpy.linalg import solve, norm
-import scipy.sparse as sparse
-from scipy.sparse.linalg import splu
-from timeit import default_timer as timer
+from prettytable import PrettyTable
+import sys
+sys.path.append('pkg/')
 import FNC
+import importlib
+importlib.reload(FNC)
 ```
 
 ```{code-cell} ipython3
@@ -70,7 +72,7 @@ rcParams['animation.html'] = "jshtml"  # or try "html5"
 
 ### Section 3.1
 (demo-fitting-tempinterp-python)=
-``````{dropdown} Interpolating temperature data
+``````{dropdown} @demo-fitting-tempinterp
 Here are 5-year averages of the worldwide temperature anomaly as compared to the 1951–1980 average (source: NASA).
 
 ```{code-cell}
@@ -112,7 +114,7 @@ As you can see, the interpolant does represent the data, in a sense. However it'
 ``````
 
 (demo-fitting-tempfit-python)=
-``````{dropdown} Fitting temperature data
+``````{dropdown} @demo-fitting-tempfit
 Here are the 5-year temperature averages again.
 
 ```{code-cell}
@@ -183,7 +185,7 @@ If we were to continue increasing the degree of the polynomial, the residual at 
 ``````
 
 (demo-fitting-pirate-python)=
-``````{dropdown} Fitting a power law
+``````{dropdown} @demo-fitting-pirate
 ```{code-cell}
 a = array([1 / (k+1)**2 for k in range(100)])
 s = cumsum(a)        # cumulative summation
@@ -234,7 +236,7 @@ legend(); title("Sequence convergence");
 ### Section 3.2
 
 (demo-normaleqns-instab-python)=
-``````{dropdown} Instability in the normal equations
+``````{dropdown} @demo-normaleqns-instab
 
 Because the functions $\sin^2(t)$, $\cos^2(t)$, and $1$ are linearly dependent, we should find that the following matrix is somewhat ill-conditioned.
 
@@ -275,7 +277,7 @@ print(f"accurate digits: {-log10(relative_err):.2f}")
 
 ### Section 3.3
 (demo-qr-qrfact-python)=
-``````{dropdown} QR factorization
+``````{dropdown} @demo-qr-qrfact
 
 MATLAB provides access to both the thin and full forms of the QR factorization.
 
@@ -317,7 +319,7 @@ print(f"norm of (Q_hat^T Q_hat - I) is {norm(Q_hat.T @ Q_hat - eye(4)):.3e}")
 ``````
 
 (demo-qr-stable-python)=
-``````{dropdown} Stability of least-squares via QR
+``````{dropdown} @demo-qr-stable
 We'll repeat the experiment of {numref}`Demo {number} <demo-normaleqns-instab>`, which exposed instability in the normal equations. 
 
 ```{code-cell}
@@ -337,7 +339,7 @@ print(f"conditioning bound: {cond(A) * finfo(float).eps:.3e}")
 
 ### Section 3.4
 (demo-house-qr-python)=
-``````{dropdown} Householder QR factorization
+``````{dropdown} @demo-house-qr
 
 We will use Householder reflections to produce a QR factorization of a matrix.
 

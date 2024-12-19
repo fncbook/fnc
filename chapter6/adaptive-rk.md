@@ -108,7 +108,7 @@ Our implementation of an embedded second/third-order (RK23) code is given in {nu
 ``````
 
 (demo-adapt-basic)=
-::::{prf:example}
+::::{prf:example} Adaptive step size
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -131,7 +131,7 @@ Our implementation of an embedded second/third-order (RK23) code is given in {nu
 ::::
 
 (demo-adapt-sing)=
-::::{prf:example}
+::::{prf:example} Adaptive step size near a singularity
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

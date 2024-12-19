@@ -54,7 +54,7 @@ FNC_init
 ### 8.1 @section-krylov-structure
 
 (demo-structure-sparse-matlab)=
-``````{dropdown} Sparsity
+``````{dropdown} @demo-structure-sparse
 Here we load the adjacency matrix of a graph with 2790 nodes. Each node is a web page referring to Roswell, NM, and the edges represent links between web pages. (Credit goes to Panayiotis Tsaparas and the University of Toronto for making this data public.)
 
 ```{code-cell}
@@ -109,7 +109,7 @@ row_time = toc
 ``````
 
 (demo-structure-fill-matlab)=
-``````{dropdown} Fill-in of a sparse matrix
+``````{dropdown} @demo-structure-fill
 
 Here is the adjacency matrix of a graph representing a small-world network, featuring connections to neighbors and a small number of distant contacts.
 
@@ -138,8 +138,8 @@ end
 ```
 ``````
 
-(demo-structure-banded-matlab)=
-``````{dropdown} Banded matrices
+(demo-structure-sparseband-matlab)=
+``````{dropdown} @demo-structure-sparseband 
 
 ```{index} ! MATLAB; spdiags
 ```
@@ -186,7 +186,8 @@ subplot(1, 2, 2), spy(U), title('U')
 
 (demo-structure-linalg-matlab)=
 
-``````{dropdown} Eigenvalues of sparse matrices
+``````{dropdown} @demo-structure-linalg
+
 The following generates a random sparse matrix with prescribed eigenvalues.
 
 ```{code-cell}
@@ -235,7 +236,7 @@ tic, dense_err = norm(x - F\b), dense_time = toc
 ### 8.2 @section-krylov-power
 
 (demo-power-one-matlab)=
-``````{dropdown} Power iteration
+``````{dropdown} @demo-power-one
 Here we choose a magic 5×5 matrix and a random 5-vector.
 
 ```{code-cell}
@@ -276,7 +277,7 @@ end
 ``````
 
 (demo-power-iter-matlab)=
-``````{dropdown} Convergence of power iteration
+``````{dropdown} @demo-power-iter
 We will experiment with the power iteration on a 5×5 matrix with prescribed eigenvalues and dominant eigenvalue at 1.
 
 ```{code-cell}
@@ -331,7 +332,7 @@ The results are very similar until the last few iterations, when the limited acc
 ### 8.3 @section-krylov-inviter
 
 (demo-inviter-conv-matlab)=
-``````{dropdown} Convergence of inverse iteration
+``````{dropdown} @demo-inviter-conv
 We set up a $5\times 5$ triangular matrix with prescribed eigenvalues on its diagonal.
 
 ```{code-cell}
@@ -377,7 +378,7 @@ observed_rate = err(26) / err(25)
 ``````
 
 (demo-inviter-accel-matlab)=
-``````{dropdown} Dynamic shift strategy
+``````{dropdown} @demo-inviter-accel
 ```{code-cell}
 ev = [1, -0.75, 0.6, -0.4, 0];
 A = triu(ones(5, 5), 1) + diag(ev);
@@ -417,7 +418,7 @@ end
 ### 8.4 @section-krylov-subspace
 
 (demo-subspace-unstable-matlab)=
-``````{dropdown} Limitations of the Krylov matrix
+``````{dropdown} @demo-subspace-unstable
 First we define a triangular matrix with known eigenvalues, and a random vector $b$.
 
 ```{code-cell}
@@ -460,7 +461,7 @@ axis tight, title('Residual for linear systems')
 ``````
 
 (demo-subspace-arnoldi-matlab)=
-``````{dropdown} Arnoldi iteration
+``````{dropdown} @demo-subspace-arnoldi
 We illustrate a few steps of the Arnoldi iteration for a small matrix.
 
 ```{code-cell}
@@ -513,7 +514,7 @@ rank([Q, K])
 ### 8.5 @section-krylov-gmres
 
 (demo-gmres-intro-matlab)=
-``````{dropdown} GMRES
+``````{dropdown} @demo-gmres-intro
 We define a triangular matrix with known eigenvalues and a random vector $\mathbf{b}$.
 
 ```{code-cell}
@@ -551,7 +552,7 @@ axis tight, title('Residual for GMRES')
 ``````
 
 (demo-gmres-restart-matlab)=
-``````{dropdown} Restarting GMRES
+``````{dropdown} 
 The following experiments are based on a matrix resulting from discretization of a partial differential equation.
 
 ```{code-cell}
@@ -585,7 +586,7 @@ The "pure" GMRES curve is the lowest one. All of the other curves agree with it 
 ### 8.6 @section-krylov-minrescg
 
 (demo-minrescg-indefinite-matlab)=
-``````{dropdown} MINRES
+``````{dropdown} @demo-minrescg-indefinite
 The following matrix is indefinite.
 
 ```{code-cell}
@@ -634,7 +635,7 @@ The upper bound turns out to be pessimistic here, especially in the later iterat
 ``````
 
 (demo-minrescg-converge-matlab)=
-``````{dropdown} Convergence of MINRES and CG
+``````{dropdown} @demo-minrescg-converge
 We will compare MINRES and CG on some quasi-random SPD problems.  The first matrix has a condition number of 100.
 
 ```{code-cell}
@@ -697,7 +698,7 @@ Both methods have an early superlinear phase that allow them to finish slightly 
 ### 8.7 @section-krylov-matrixfree
 
 (demo-matrixfree-blur-matlab)=
-``````{dropdown} Blurring an image
+``````{dropdown} @demo-matrixfree-blur
 We use a readily available test image.
 
 ```{code-cell}
@@ -726,7 +727,7 @@ title('Blurred image')
 ``````
 
 (demo-matrixfree-deblur-matlab)=
-``````{dropdown} Deblurring an image
+``````{dropdown} @demo-matrixfree-deblur
 We repeat the earlier process to blur an original image $\mathbf{X}$ to get $\mathbf{Z}$.
 
 ```{code-cell}
@@ -770,7 +771,7 @@ title("Deblurred")
 ### 8.8 @section-krylov-precond
 
 (demo-precond-diagonal-matlab)=
-``````{dropdown} Diagonal preconditioning
+``````{dropdown} @demo-precond-diagonal
 Here is an SPD matrix that arises from solving partial differential equations.
 
 ```{code-cell}
@@ -807,7 +808,7 @@ The diagonal preconditioner cut down substantially on the number of iterations. 
 ``````
 
 (demo-precond-gmres-matlab)=
-``````{dropdown} Incomplete LU preconditioning
+``````{dropdown} @demo-precond-gmres
 Here is a random nonsymmetric matrix.
 
 ```{code-cell}

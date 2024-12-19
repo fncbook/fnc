@@ -93,7 +93,7 @@ FNC_init
 ### Section 6.1
 
 (demo-basics-first-matlab)=
-``````{dropdown} Solving an IVP
+``````{dropdown} @demo-basics-first
 
 ::::{grid} 1 1 2 2
 Let's use it to define and solve an initial-value problem for $u'=\sin[(u+t)^2]$ over $t \in [0,4]$, such that $u(0)=-1$. To create an initial-value problem for $u(t)$, you must create an `ode` with a function that computes $u'$ and an initial condition for $u$. Then you create a solution by calling `solve` with a time interval. 
@@ -132,7 +132,7 @@ u(0:5)
 ``````
 
 (demo-basics-sing-matlab)=
-``````{dropdown} Finite-time singularity
+``````{dropdown} @demo-basics-sing
 
 The equation $u'=(u+t)^2$ gives us some trouble.
 
@@ -156,7 +156,7 @@ title("Finite-time blowup")
 ``````
 
 (demo-basics-cond-matlab)=
-``````{dropdown} Conditioning of an IVP
+``````{dropdown} @demo-basics-cond
 Consider the ODEs $u'=u$ and $u'=-u$. In each case we compute $\partial f/\partial u = \pm 1$, so the condition number bound from {numref}`Theorem %s <theorem-depIC>` is $e^{b-a}$ in both problems. However, they behave quite differently. In the case of exponential growth, $u'=u$, the bound is the actual condition number.
 
 ```{code-cell}
@@ -188,7 +188,7 @@ In this case the actual condition number is one, because the initial difference 
 
 ### Section 6.2
 (demo-euler-converge-matlab)=
-``````{dropdown} Convergence of Euler's method
+``````{dropdown} @demo-euler-converge
 We consider the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. We need to define the function for the right-hand side of the ODE, the interval for the independent variable, and the initial value.
 
 ```{code-cell}
@@ -251,7 +251,7 @@ legend('error', 'O(n^{-1})', 'location', 'southwest')
 
 ### Section 6.3
 (demo-systems-predator-matlab)=
-``````{dropdown} Predator-prey model
+``````{dropdown} @demo-systems-predator
 We encode the predator–prey equations via a function, defined here externally.
 
 ```{literalinclude} f63_predprey.m
@@ -309,7 +309,7 @@ From this plot we can deduce that the solution approaches a periodic one, which 
 ``````
 
 (demo-systems-coupledpendula-matlab)=
-``````{dropdown} Coupled pendulums
+``````{dropdown} @demo-systems-coupledpendula
 Let's implement the coupled pendulums from {numref}`Example {number} <example-systems-coupledpendula>`. The pendulums will be pulled in opposite directions and then released together from rest.
 
 ```{literalinclude} f63_pendulums.m
@@ -359,7 +359,7 @@ The coupling makes the pendulums swap energy back and forth.
 ### Section 6.4
 
 (demo-rk-converge-matlab)=
-``````{dropdown} Convergence of Runge–Kutta methods
+``````{dropdown} @demo-rk-converge
 We solve the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
 
 ```{code-cell}
@@ -409,7 +409,7 @@ The fourth-order variant is more efficient in this problem over a wide range of 
 
 ### Section 6.5
 (demo-adapt-basic-matlab)=
-``````{dropdown} Adaptive step size
+``````{dropdown} @demo-adapt-basic
 Let's run adaptive RK on  $u'=e^{t-u\sin u}$.
 
 ```{code-cell}
@@ -449,8 +449,8 @@ We took fewer steps by a factor of almost 1000! Even accounting for the extra st
 
 ``````
 
-(demo-adpat-sing-matlab)=
-``````{dropdown} Adaptive step size near a singularity
+(demo-adapt-sing-matlab)=
+``````{dropdown} @demo-adapt-sing
 In {numref}`Demo %s <demo-basics-sing>` we saw an IVP that appears to blow up in a finite amount of time. Because the solution increases so rapidly as it approaches the blowup, adaptive stepping is required even to get close.
 
 ```{code-cell}
@@ -474,7 +474,7 @@ text(tf, 1e5, sprintf(" t = %.6f ", tf))
 ``````
 ### Section 6.6
 (demo-implicit-ab4-matlab)=
-``````{dropdown} Convergence of Adams–Bashforth
+``````{dropdown} @demo-implicit-ab4
 We study the convergence of AB4 using the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. As usual, a built-in solver is called to give an accurate reference solution.
 
 ```{code-cell}
@@ -513,7 +513,7 @@ legend("AB4", "O(n^{-4})", "location", "southwest")
 ``````
 
 (demo-implicit-stiff-matlab)=
-``````{dropdown} Stiffness
+``````{dropdown} @demo-implicit-stiff
 The following simple ODE uncovers a surprise.
 
 ```{code-cell}
@@ -565,7 +565,7 @@ So AB4, which is supposed to be _more_ accurate than AM2, actually needs somethi
 
 ### Section 6.7
 (demo-zs-LIAF-matlab)=
-``````{dropdown} Instability
+``````{dropdown} @demo-zs-LIAF
 We'll measure the error at the time $t=1$.
 
 ```{code-cell}

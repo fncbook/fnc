@@ -31,7 +31,7 @@ Given function $g$ and initial value $x_1$, define
 This is our first example of an iterative algorithm that never quite gets to the answer, even if we use exact numbers. The idea is to generate a sequence of values that one hopes will converge to the correct result, and stop when we are satisfied that we are close enough to the limit. 
 
 (demo-fp-spiral)=
-::::{prf:example}
+::::{prf:example} Fixed-point iteration 
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -118,7 +118,7 @@ Linear convergence is marked by an approximate reduction of the error at each it
 ```
 
 (demo-fp-converge)=
-::::{prf:example}
+::::{prf:example} Convergence of fixed-point iteration
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

@@ -95,7 +95,7 @@ FNC.init_format()
 ```
 ### Section 4.1
 (demo-rootproblem-bessel-julia)=
-``````{dropdown} The rootfinding problem for Bessel functions
+``````{dropdown} @demo-rootproblem-bessel
 
 ```{code-cell}
 J₃(x) = besselj(3, x)
@@ -141,7 +141,7 @@ scatter!(r, J₃.(r), title="Roots and other Bessel values")
 ``````
 
 (demo-roots-cond-julia)=
-``````{dropdown} Condition number of a rootfinding problem
+``````{dropdown} @demo-roots-cond
 Consider first the function
 
 ```{code-cell}
@@ -193,7 +193,7 @@ The vertical displacements in this picture are exactly the same as before. But t
 ### Section 4.2
 
 (demo-fp-spiral-julia)=
-``````{dropdown} Fixed-point iteration 
+``````{dropdown} @demo-fp-spiral
 Let's convert the roots of a quadratic polynomial $f(x)$ to a fixed point problem.
 
 ```{code-cell}
@@ -277,7 +277,7 @@ This time, the iteration is pushing us _away from_ the correct answer.
 ``````
 
 (demo-fp-converge-julia)=
-``````{dropdown} Convergence of fixed-point iteration
+``````{dropdown} @demo-fp-converge
 We revisit {numref}`Demo %s <demo-fp-spiral>` and investigate the observed convergence more closely. Recall that above we calculated $g'(p)\approx-0.42$ at the convergent fixed point.
 
 ```{code-cell}
@@ -333,7 +333,7 @@ The methods for finding $\sigma$ agree well.
 ``````
 ### Section 4.3
 (demo-newton-line-julia)=
-``````{dropdown} Graphical interpretation of Newton's method
+``````{dropdown} @demo-newton-line
 
 Suppose we want to find a root of the function
 
@@ -398,7 +398,7 @@ Judging by the residual, we appear to be getting closer to the true root each ti
 ``````
 
 (demo-newton-converge-julia)=
-``````{dropdown} Convergence of Newton's method
+``````{dropdown} @demo-newton-converge
 We again look at finding a solution of $x e^x=2$ near $x=1$. To apply Newton's method, we need to calculate values of both the residual function $f$ and its derivative.
 
 ```{code-cell}
@@ -458,7 +458,7 @@ The clear convergence to 2 above constitutes good evidence of quadratic converge
 ``````
 
 (demo-newton-usage-julia)=
-``````{dropdown} Using Newton's method
+``````{dropdown} @demo-newton-usage
 ```{index} ! Julia; enumerate
 ```
 
@@ -488,7 +488,7 @@ plot!(x -> x, 0, maximum(y), label="", l=(:dash, 1), color=:black)
 ``````
 ### Section 4.4
 (demo-secant-line-julia)=
-``````{dropdown} Graphical interpretation of the secant method
+``````{dropdown} @demo-secant-line
 
 
 We return to finding a root of the equation $x e^x=2$.
@@ -537,7 +537,7 @@ x₄ = x₃ - y₃ / m₃
 ``````
 
 (demo-secant-converge-julia)=
-``````{dropdown} Convergence of the secant method
+``````{dropdown} @demo-secant-converge
 We check the convergence of the secant method from {numref}`Demo %s <demo-secant-line>`. Again we will use extended precision to get a longer sequence than double precision allows.
 
 ```{code-cell}
@@ -567,7 +567,7 @@ As expected, this settles in at around 1.618.
 ``````
 
 (demo-secant-iqi-julia)=
-``````{dropdown} Inverse quadratic interpolation
+``````{dropdown} @demo-secant-iqi
 Here we look for a root of $x+\cos(10x)$ that is close to 1.
 
 ```{code-cell}
@@ -643,7 +643,7 @@ The convergence is probably superlinear at a rate of $\alpha=1.8$ or greater.
 ``````
 ### Section 4.5
 (demo-newtonsys-converge-julia)=
-``````{dropdown} Convergence of Newton's method for systems
+``````{dropdown} @demo-newtonsys-converge
 ::::{grid} 1 1 2 2
 
 :::{grid-item}
@@ -704,7 +704,7 @@ The ratio is neatly converging toward 2, which is expected for quadratic converg
 ``````
 ### Section 4.6
 (demo-quasi-levenberg-julia)=
-``````{dropdown} Using Levenberg's method
+``````{dropdown} @demo-quasi-levenberg
 To solve a nonlinear system, we need to code only the function defining the system, and not its Jacobian.
 
 ```{code-cell}
@@ -739,7 +739,7 @@ logerr = [log(norm(x[k] - r)) for k in 1:length(x)-1]
 ``````
 ### Section 4.7
 (demo-nlsq-converge-julia)=
-``````{dropdown} Convergence of nonlinear least squares
+``````{dropdown} @demo-nlsq-converge
 We will observe the convergence of {numref}`Function {number} <function-levenberg>` for different levels of the minimum least-squares residual. We start with a function mapping from $\real^2$ into $\real^3$, and a point that will be near the optimum.
 
 ```{code-cell}
@@ -776,7 +776,7 @@ In the least perturbed case, where the minimized residual is less than $10^{-3}$
 ``````
 
 (demo-nlsq-MM-julia)=
-``````{dropdown} Nonlinear data fitting
+``````{dropdown} @demo-nlsq-MM
 ```{code-cell}
 m = 25;
 s = range(0.05, 6, length=m)

@@ -84,7 +84,7 @@ The second issue is that even when `A` has all integer entries, its LU factors m
 ## Examples
 ### Section 2.1
 (demo-interp-vander-julia)=
-``````{dropdown} Linear system for polynomial interpolation
+``````{dropdown} @demo-interp-vander
 :open: false
 
 
@@ -220,7 +220,7 @@ plot!(tt,yy,label="interpolant")
 
 ### Section 2.2
 (demo-matrices-julia)=
-``````{dropdown} Matrix operations
+``````{dropdown} @demo-matrices
 :open: false
 
 :::{index} ! Julia; size, ! Julia; length
@@ -421,7 +421,7 @@ show(@. cos(π*(x+1)^3))    # broadcast an entire expression
 
 ### Section 2.3
 (demo-systems-backslash-julia)=
-``````{dropdown} Solving linear systems
+``````{dropdown} @demo-systems-backslash
 :open: false
 For a square matrix $\mathbf{A}$, the syntax `A \ b` is mathematically equivalent to $\mathbf{A}^{-1} \mathbf{b}$. 
 
@@ -470,7 +470,7 @@ A linear system with a singular matrix might have no solution or infinitely many
 ``````
 
 (demo-systems-triangular-julia)=
-``````{dropdown} Triangular systems of equations
+``````{dropdown} @demo-systems-triangular
 :open: false
 ```{index} ! Julia; tril, ! Julia; triu
 ```
@@ -547,7 +547,7 @@ It's not so good to get 4 digits of accuracy after starting with 16! The source 
 ``````
 ### Section 2.4
 (demo-lu-outertri-julia)= 
-``````{dropdown} Triangular outer products
+``````{dropdown} @demo-lu-outertri
 :open: false
 
 ```{index} Julia; tril, Julia; triu
@@ -585,7 +585,7 @@ Simply because of the triangular zero structures, only the first outer product c
 ``````
 
 (demo-lu-derive-julia)=
-``````{dropdown} LU factorization
+``````{dropdown} @demo-lu-derive
 For illustration, we work on a $4 \times 4$ matrix. We name it with a subscript in preparation for what comes.
 
 ```{code-cell}
@@ -670,7 +670,7 @@ IIn floating point, we cannot expect the difference to be exactly zero as we fou
 ``````
 
 (demo-lu-solve-julia)=
-``````{dropdown} Solving a linear system by LU factors
+``````{dropdown} @demo-lu-solve
 Here are the data for a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$. 
 
 ```{code-cell}
@@ -696,7 +696,7 @@ b - A*x
 ### Section 2.5
 
 (demo-flops-mvmult-julia)=
-``````{dropdown} Floating-point operations in matrix-vector multiplication
+``````{dropdown} @demo-flops-mvmult
 Here is a straightforward implementation of matrix-vector multiplication.
 
 ```{code-cell}
@@ -766,7 +766,7 @@ $$
 ``````
 
 (demo-flops-loglog-julia)=
-``````{dropdown} Asymptotics in log-log plots
+``````{dropdown} @demo-flops-loglog
 Let's repeat the experiment of the previous figure for more, and larger, values of $n$.
 
 ```{code-cell}
@@ -799,7 +799,7 @@ plot!(n, t[end] * (n/n[end]).^2, l=:dash,
 ``````
 
 (demo-flops-lufact-julia)=
-``````{dropdown} Floating-point operations in LU factorization
+``````{dropdown} @demo-flops-lufact
 ::::{grid} 1 1 2 2
 We'll test the conclusion of $O(n^3)$ flops experimentally, using the built-in `lu` function instead of the purely instructive `lufact`.
 :::{card}
@@ -830,7 +830,7 @@ plot!(n, t[end ]* (n/n[end]).^3, l=:dash, label=L"O(n^3)")
 
 ### Section 2.6
 (demo-pivoting-fail-julia)=
-``````{dropdown} Failure of naive LU factorization
+``````{dropdown} @demo-pivoting-fail
 Here is a previously encountered matrix that factors well.
 
 ```{code-cell}
@@ -862,7 +862,7 @@ The next step is `U[2, :] = A[2, :]`, which is also OK. But then we are supposed
 ``````
 
 (demo-pivoting-fix-julia)=
-``````{dropdown} Row pivoting in LU factorization
+``````{dropdown} @demo-pivoting-fix
 Here is the trouble-making matrix from {numref}`Demo {number} <demo-pivoting-fail>`.
 
 ```{code-cell}
@@ -934,7 +934,7 @@ L
 ``````
 
 (demo-pivoting-permute-julia)=
-``````{dropdown} Row permutation in LU factorization
+``````{dropdown} @demo-pivoting-permute
 Here again is the matrix from {numref}`Demo {number} <demo-pivoting-fix>`.
 
 ```{code-cell}
@@ -962,7 +962,7 @@ L
 ``````
 
 (demo-pivoting-usage-julia)=
-``````{dropdown} PLU factorization for solving linear systems
+``````{dropdown} @demo-pivoting-usage
 The third output of `plufact` is the permutation vector we need to apply to $\mathbf{A}$.
 
 ```{code-cell}
@@ -987,7 +987,7 @@ b - A*x
 ``````
 
 (demo-pivoting-builtin-julia)=
-``````{dropdown} Built-in PLU factorization
+``````{dropdown} @demo-pivoting-builtin
 With the syntax `A \ b`, the matrix `A` is PLU-factored, followed by two triangular solves.
 
 ```{code-cell}
@@ -1006,7 +1006,7 @@ factored \ rand(500)   # force compilation
 ``````
 
 (demo-pivoting-stable-julia)=
-``````{dropdown} Stability of PLU factorization
+``````{dropdown} @demo-pivoting-stable
 We construct a linear system for this matrix with $\epsilon=10^{-12}$ and exact solution $[1,1]$:
 
 ```{code-cell}
@@ -1040,7 +1040,7 @@ A \ b
 
 ### Section 2.7
 (demo-norms-vector-julia)=
-``````{dropdown} Vector norms
+``````{dropdown} @demo-norms-vector
 
 ```{index} ! Julia; norm
 ```
@@ -1071,7 +1071,7 @@ normalize(x, Inf)
 ``````
 
 (demo-norms-matrix-julia)=
-``````{dropdown} Matrix norms
+``````{dropdown} @demo-norms-matrix
 ```{code-cell}
 A = [ 2 0; 1 -1 ]
 ```
@@ -1171,7 +1171,7 @@ plot!(twonorm*x[1, :], twonorm*x[2, :], subplot=2, l=:dash)
 
 ### Section 2.8
 (demo-condition-bound-julia)=
-``````{dropdown} Matrix condition number
+``````{dropdown} @demo-condition-bound
 
 ```{index} ! Julia; cond
 ```
@@ -1259,7 +1259,7 @@ As anticipated, the solution has zero accurate digits in the 2-norm.
 
 ### Section 2.9
 (demo-structure-banded-julia)=
-``````{dropdown} Banded matrices
+``````{dropdown} @demo-structure-banded
 ```{index} ! Julia; fill, Julia; diagm, ! Julia; diag
 ```
 
@@ -1302,30 +1302,8 @@ U
 ```
 ``````
 
-(demo-structure-timing-julia)=
-``````{dropdown} Timing banded LU
-If we use an ordinary or dense matrix, then there's no way to exploit a banded structure such as tridiagonality.
-
-```{code-cell}
-n = 10000
-A = diagm(0=>1:n, 1=>n-1:-1:1, -1=>ones(n-1))
-lu(rand(3, 3))  # force compilation
-@time lu(A);
-```
-
-If instead we construct a proper sparse matrix, though, the speedup can be dramatic.
-
-```{code-cell}
-A = spdiagm(0=>1:n, 1=>n-1:-1:1, -1=>ones(n-1))
-lu(A);    # compile for sparse case
-@time lu(A);
-```
-
-You can also see above that far less memory was used in the sparse case.
-``````
-
 (demo-structure-symm-julia)=
-``````{dropdown} Symmetric LDL$^T$ factorization
+``````{dropdown} @demo-structure-symm
 
 We begin with a symmetric $\mathbf{A}$.
 
@@ -1373,7 +1351,7 @@ opnorm(A₁ - (L * diagm(d) * L'))
 ``````
 
 (demo-structure-cholesky-julia)=
-``````{dropdown} Cholesky factorization
+``````{dropdown} @demo-structure-cholesky
 A randomly chosen matrix is extremely unlikely to be symmetric. However, there is a simple way to symmetrize one.
 
 ```{code-cell}

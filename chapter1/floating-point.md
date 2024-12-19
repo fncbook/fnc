@@ -128,7 +128,7 @@ Absolute accuracy has the same units as $x$, while relative accuracy is dimensio
 We often round this value down to an integer, but it does make sense to speak of "almost seven digits" or "ten and a half digits."
 
 (demo-float-accuracy)= 
-::::{prf:example}
+::::{prf:example} Absolute and relative accuracy
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -166,7 +166,7 @@ Most numerical computing today is done in the **IEEE 754** standard. This define
 We often speak of double-precision floating-point numbers as having about 16 decimal digits. The 52-bit significand is paired with a sign bit and 11 binary bits to represent the exponent $n$ in {eq}`floatpoint`, for a total of 64 binary bits per floating-point number.
 
 (demo-float)=
-::::{prf:example}
+::::{prf:example} @demo-float-accuracy
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -212,7 +212,7 @@ Computer arithmetic is performed on floating-point numbers and returns floating-
 Hence the relative error in arithmetic is essentially the same as for the floating-point representation itself. However, playing by these rules can lead to disturbing results.
 
 (demo-float-arithmetic)=
-::::{prf:example}
+::::{prf:example} Floating-point arithmetic oddity
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

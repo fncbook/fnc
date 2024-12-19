@@ -20,7 +20,7 @@ FNC.init_format()
 ### Section 7.1
 
 (demo-insight-graph-julia)=
-``````{dropdown} Adjacency matrix
+``````{dropdown} @demo-insight-graph
 Here we create an adjacency matrix for a graph on four nodes.
 
 ```{code-cell}
@@ -51,7 +51,7 @@ graphplot(A, names=1:4, markersize=0.2)
 ``````
 
 (demo-insight-image-julia)=
-``````{dropdown} Images as matrices
+``````{dropdown} @demo-insight-image
 ```{index} ! Julia; Images
 ```
 
@@ -112,7 +112,7 @@ Gray.(reverse(A, dims=1))
 ### Section 7.2
 
 (demo-evd-eigen-julia)=
-``````{dropdown} Eigenvalues and eigenvectors
+``````{dropdown} @demo-evd-eigen
 
 ```{index} ! Julia; eigvals
 ```
@@ -173,7 +173,7 @@ opnorm(A * V - V * diagm(λ))
 ``````
 
 (demo-evd-bauerfike-julia)=
-``````{dropdown} Eigenvalue conditioning
+``````{dropdown} @demo-evd-bauerfike
 
 ```{index} Julia; adjoint, Julia; \'
 ```
@@ -263,7 +263,7 @@ The plot shows that some eigenvalues are much more affected than others. This si
 ``````
 
 (demo-evd-francisqr-julia)=
-``````{dropdown} Francis QR iteration
+``````{dropdown} @demo-evd-francisqr
 Let's start with a known set of eigenvalues and an orthogonal eigenvector basis.
 
 ```{code-cell}
@@ -303,7 +303,7 @@ A
 ### Section 7.3
 
 (demo-svd-props-julia)=
-``````{dropdown} SVD properties
+``````{dropdown} @demo-svd-props
 We verify some of the fundamental SVD properties using standard Julia functions from `LinearAlgebra`.
 
 ```{code-cell}
@@ -354,7 +354,7 @@ We verify the orthogonality of the singular vectors as follows:
 ### Section 7.4
 
 (demo-symm-eig-rayleigh-julia)=
-``````{dropdown} Rayleigh quotient
+``````{dropdown} @demo-symm-eig-rayleigh
 We will use a symmetric matrix with a known EVD and eigenvalues equal to the integers from 1 to 20.
 
 ```{code-cell}
@@ -396,7 +396,7 @@ pretty_table([δ δ .^ 2 eval_diff], header=labels)
 ### Section 7.5
 
 (demo-dimreduce-hello-julia)=
-``````{dropdown} Image compression
+``````{dropdown} @demo-dimreduce-hello
 We make an image from some text, then reload it as a matrix.
 
 ```{code-cell}
@@ -437,7 +437,7 @@ compression = m * n / (9 * (m + n + 1))
 ``````
 
 (demo-dimreduce-voting-julia)=
-``````{dropdown} Dimension reduction in voting records
+``````{dropdown} @demo-dimreduce-voting
 This matrix describes the votes on bills in the 111th session of the United States Senate. (The data set was obtained from [https://voteview.com].) Each row is one senator, and each column is a vote item.
 
 ```{code-cell}

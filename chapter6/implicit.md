@@ -47,7 +47,7 @@ Observe that {numref}`Function {number} <function-rk4>` is used to find the star
 ``````
 
 (demo-implicit-ab4)=
-::::{prf:example}
+::::{prf:example} Convergence of Adams–Bashforth
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -116,7 +116,7 @@ At each time step in {numref}`Function {number} <function-am2>`, or any implicit
 ```
 
 (demo-implicit-stiff)=
-::::{prf:example}
+::::{prf:example} Stiffness
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

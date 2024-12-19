@@ -15,6 +15,7 @@ from numpy import *
 from numpy.linalg import norm
 from matplotlib.pyplot import *
 from prettytable import PrettyTable
+from timeit import default_timer as timer
 import sys
 sys.path.append('pkg/')
 import FNC
@@ -34,7 +35,7 @@ rcParams['animation.html'] = "jshtml"  # or try "html5"
 ### Section 7.1
 
 (demo-insight-graph-python)=
-``````{dropdown} Adjacency matrix
+``````{dropdown} @demo-insight-graph
 Here we create an adjacency matrix for a graph on four nodes.
 
 ```{code-cell}
@@ -69,7 +70,7 @@ nx.draw(G, with_labels=True, node_color="yellow")
 ``````
 
 (demo-insight-image-python)=
-``````{dropdown} Images as matrices
+``````{dropdown} @demo-insight-image
 ```{index} ! Julia; Images
 ```
 
@@ -130,7 +131,7 @@ axis('off');
 ### Section 7.2
 
 (demo-evd-eigen-python)=
-``````{dropdown} Eigenvalues and eigenvectors
+``````{dropdown} @demo-evd-eigen
 
 ```{index} ! Python; eig
 ```
@@ -176,7 +177,7 @@ print(f"should be near zero: {norm(A @ V - V @ diag(d), 2):.2e}")
 ``````
 
 (demo-evd-bauerfike-python)=
-``````{dropdown} Eigenvalue conditioning
+``````{dropdown} @demo-evd-bauerfike
 
 We first define a hermitian matrix. Note that we add the *conjugate* transpose of a matrix to itself.
 
@@ -252,7 +253,7 @@ The plot shows that some eigenvalues are much more affected than others. This si
 ``````
 
 (demo-evd-francisqr-python)=
-``````{dropdown} Francis QR iteration
+``````{dropdown} @demo-evd-francisqr
 Let's start with a known set of eigenvalues and an orthogonal eigenvector basis.
 
 ```{code-cell}
@@ -293,7 +294,7 @@ print(A)
 ### Section 7.3
 
 (demo-svd-props-python)=
-``````{dropdown} SVD properties
+``````{dropdown} @demo-svd-props
 We verify some of the fundamental SVD properties using standard Julia functions from `LinearAlgebra`.
 
 ```{code-cell}
@@ -359,7 +360,7 @@ print("size of V:", Vh.shape)
 ### Section 7.4
 
 (demo-symm-eig-rayleigh-python)=
-``````{dropdown} Rayleigh quotient
+``````{dropdown} @demo-symm-eig-rayleigh
 We will use a symmetric matrix with a known EVD and eigenvalues equal to the integers from 1 to 20.
 
 ```{code-cell}
@@ -401,7 +402,7 @@ print(results)
 ### Section 7.5
 
 (demo-dimreduce-hello-python)=
-``````{dropdown} Image compression
+``````{dropdown} @demo-dimreduce-hello
 We make an image from some text, then reload it as a matrix.
 
 ```{code-cell}
@@ -462,7 +463,7 @@ print(f"compression ratio: {full_size / compressed_size:.1f}")
 ``````
 
 (demo-dimreduce-voting-python)=
-``````{dropdown} Dimension reduction in voting records
+``````{dropdown} @demo-dimreduce-voting
 This matrix describes the votes on bills in the 111th session of the United States Senate. (The data set was obtained from [https://voteview.com].) Each row is one senator, and each column is a vote item.
 
 ```{code-cell}

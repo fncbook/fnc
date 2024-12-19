@@ -71,7 +71,7 @@ FNC.init_format()
 ### 8.1 @section-krylov-structure
 
 (demo-structure-sparse-julia)=
-``````{dropdown} Sparsity
+``````{dropdown} @demo-structure-sparse
 Here we load the adjacency matrix of a graph with 2790 nodes. Each node is a web page referring to Roswell, NM, and the edges represent links between web pages. (Credit goes to Panayiotis Tsaparas and the University of Toronto for making this data public.)
 
 ```{code-cell}
@@ -131,7 +131,9 @@ end
 ``````
 
 (demo-structure-fill-julia)=
-``````{dropdown} Fill-in of a sparse matrix
+``````{dropdown} @demo-structure-fill
+```{index} ! Julia; sprandsym
+```
 
 Here is the adjacency matrix of a graph representing a small-world network, featuring connections to neighbors and a small number of distant contacts.
 
@@ -158,8 +160,8 @@ plt
 ```
 ``````
 
-(demo-structure-banded-julia)=
-``````{dropdown} Banded matrices
+(demo-structure-sparseband-julia)=
+``````{dropdown} @demo-structure-sparseband
 
 ```{index} ! Julia; spdiagm
 ```
@@ -214,7 +216,7 @@ spy!(sparse(fact.U), m=2, subplot=2, title=L"\mathbf{U}", color=:blues)
 
 (demo-structure-linalg-julia)=
 
-``````{dropdown} Eigenvalues of sparse matrices
+``````{dropdown} @demo-structure-linalg
 The following generates a random sparse matrix with prescribed eigenvalues.
 
 ```{code-cell}

@@ -222,7 +222,7 @@ Roots of polynomials are ill-conditioned with respect to changes in the polynomi
 The condition number of a root can be arbitrarily large. In the extreme case of a repeated root, the condition number is formally infinite, which implies that the ratio of changes in the root to changes in the coefficients cannot be bounded. 
 
 (demo-condition-roots)=
-::::{prf:example}
+::::{prf:example} Conditioning of polynomial roots
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

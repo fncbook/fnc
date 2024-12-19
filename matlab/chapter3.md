@@ -47,7 +47,7 @@ FNC_init
 
 ### Section 3.1
 (demo-fitting-tempinterp-matlab)=
-``````{dropdown} Interpolating temperature data
+``````{dropdown} @demo-fitting-tempinterp
 Here are 5-year averages of the worldwide temperature anomaly as compared to the 1951–1980 average (source: NASA).
     
 ```{code-cell} matlab
@@ -84,7 +84,7 @@ fplot(p, [1955, 2000])    % plot the interpolating function
 ``````
 
 (demo-fitting-tempfit-matlab)=
-``````{dropdown} Fitting temperature data
+``````{dropdown} @demo-fitting-tempfit
 Here are the 5-year temperature averages again.
 
 ```{code-cell}
@@ -147,7 +147,7 @@ If we were to continue increasing the degree of the polynomial, the residual at 
 ``````
 
 (demo-fitting-pirate-matlab)=
-``````{dropdown} Fitting a power law
+``````{dropdown} @demo-fitting-pirate
 ```{code-cell}
 k = (1:100)';
 a = 1./k.^2;      % sequence
@@ -192,7 +192,7 @@ legend('sequence', 'power-law fit')
 
 ### Section 3.2
 (demo-normaleqns-instab-matlab)=
-``````{dropdown} Instability in the normal equations
+``````{dropdown} @demo-normaleqns-instab
 
 ::::{grid} 1 1 2 2
 Because the functions $\sin^2(t)$, $\cos^2(t)$, and $1$ are linearly dependent, we should find that the following matrix is somewhat ill-conditioned.
@@ -234,7 +234,7 @@ digits = -log10(observed_err)
 
 ### Section 3.3
 (demo-qr-qrfact-matlab)=
-``````{dropdown} QR factorization
+``````{dropdown} @demo-qr-qrfact
 
 MATLAB provides access to both the thin and full forms of the QR factorization.
 
@@ -273,7 +273,7 @@ Q_hat' * Q_hat - eye(n)
 ``````
 
 (demo-qr-stable-matlab)=
-``````{dropdown} Stability of least-squares via QR
+``````{dropdown} @demo-qr-stable
 We'll repeat the experiment of {numref}`Demo {number} <demo-normaleqns-instab>`, which exposed instability in the normal equations. 
 
 ```{code-cell}
@@ -294,7 +294,7 @@ error_bound = cond(A) * eps
 ### Section 3.4
 
 (demo-house-qr-matlab)=
-``````{dropdown} Householder QR factorization
+``````{dropdown} @demo-house-qr
 
 We will use Householder reflections to produce a QR factorization of a matrix.
 

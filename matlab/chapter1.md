@@ -33,7 +33,7 @@ FNC_init
 
 ## Section 1.1
 (demo-float-accuracy-matlab)=
-``````{dropdown} Absolute and relative accuracy
+``````{dropdown} @demo-float
 :open: false
 ::::{grid} 1 1 2 2
 Recall the grade-school approximation to the number $\pi$.
@@ -131,7 +131,7 @@ format short e
 ``````
 
 (demo-float-arithmetic-matlab)=
-``````{dropdown} Floating-point arithmetic oddity
+``````{dropdown} @demo-float-arithmetic
 :open: false
 
 There is no double-precision number between $1$ and $1+\epsilon_\text{mach}$. Thus the following difference is zero despite its appearance.
@@ -152,7 +152,7 @@ This is now the expected result. But we have found a rather shocking breakdown o
 ### Section 1.2
 
 (demo-condition-roots-matlab)=
-``````{dropdown} Conditioning of polynomial roots
+``````{dropdown} @demo-condition-roots
 :open: false
 
 The polynomial $p(x) = \frac{1}{3}(x-1)(x-1-\epsilon)$ has roots $1$ and $1+\epsilon$. For small values of $\epsilon$, the roots are ill-conditioned. 
@@ -203,7 +203,7 @@ This matches the observation pretty well.
 ### Section 1.3
 
 (demo-algorithms-horner-matlab)=
-``````{dropdown} Using a function
+``````{dropdown} @demo-algorithms-horner
 :open: false
 Here we show how to use {numref}`Function {number} <function-horner>` to evaluate a polynomial. Let us define a vector of the coefficients of $p(x)=(x-1)^3=x^3-3x^2+3x-1$, in ascending degree order.
 
@@ -227,7 +227,7 @@ The comments at the start of {numref}`Function {number} <function-horner>` are d
 ### Section 1.4
 
 (demo-stability-quadbad-matlab)= 
-``````{dropdown} Instability of the quadratic formula
+``````{dropdown} @demo-stability-quadbad
 :open: false
 
 ```{index} ! MATLAB; scientific notation
@@ -268,7 +268,7 @@ Using {eq}`condition-chain`, the chain rule for condition numbers, the condition
 ``````
 
 (demo-stability-quadgood-matlab)=
-````{dropdown} Stable alternative to the quadratic formula
+````{dropdown} @demo-stability-quadgood
 We repeat the rootfinding experiment of {numref}`Demo %s <demo-stability-quadbad>` with an alternative algorithm.
 
 ```{code-cell}
@@ -295,7 +295,7 @@ abs(x2 - 1e-6) / 1e-6
 ````
 
 (demo-stability-roots-matlab)=
-````{dropdown} Backward error
+````{dropdown} @demo-stability-roots
 :open: false
 
 

@@ -253,7 +253,7 @@ Let $\mathbf{A}\in\mathbb{C}^{m\times n}$ have an SVD $\mathbf{A}=\mathbf{U}\mat
 The conclusion {eq}`svdnorm` can be proved by vector calculus. In the square case $m=n$, $\mathbf{A}$ having full rank is identical to being invertible. The SVD is the usual means for computing the 2-norm and condition number of a matrix. 
 
 (demo-svd-props)=
-::::{prf:example}
+::::{prf:example} SVD properties
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

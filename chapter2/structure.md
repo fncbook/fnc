@@ -26,7 +26,7 @@ A matrix $\mathbf{A}$ has **upper bandwidth** $b_u$ if $j-i > b_u$ implies $A_{i
 ::::
 
 (demo-structure-banded)=
-::::{prf:example}
+::::{prf:example} Banded matrices
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -94,7 +94,7 @@ Let $\mathbf{D}$ be an $n\times n$ diagonal matrix with diagonal elements $d_1,d
 Let's derive the LDL$^T$ factorization for a small example.
 
 (demo-structure-symm)=
-::::{prf:example}
+::::{prf:example} Symmetric LDL$^T$ factorization
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -206,7 +206,7 @@ Cholesky factorization of an $n \times n$ SPD matrix takes $\sim \frac{1}{3}n^3$
 The speed and stability of the Cholesky factorization make it the top choice for solving linear systems with SPD matrices. As a side benefit, the Cholesky algorithm fails (in the form of an imaginary square root or division by zero) if and only if the matrix $\mathbf{A}$ is not positive definite. This is often the best way to test the definiteness of a symmetric matrix about which nothing else is known.
 
 (demo-structure-cholesky)=
-::::{prf:example}
+::::{prf:example} Cholesky factorization
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

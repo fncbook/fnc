@@ -143,7 +143,7 @@ If the $n\times n$ matrix $\mathbf{A}$ has $n$ distinct eigenvalues, then $\math
 ````
 
 (demo-evd-eigen)=
-::::{prf:example}  Eigenvalues and eigenvectors
+::::{prf:example}  Eigenvalues and eigenvectors Eigenvalues and eigenvectors
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -274,7 +274,7 @@ If $\mathbf{A}$ has an EVD {eq}`evdecomp` with a unitary eigenvector matrix $\ma
 As we will see in {numref}`section-matrixanaly-symm-eig`, hermitian and real symmetric matrices are normal. Since the condition number of a unitary matrix is equal to 1, {eq}`bauerfike` guarantees that a perturbation of a normal matrix changes the eigenvalues by the same amount or less.
 
 (demo-evd-bauerfike)=
-::::{prf:example}
+::::{prf:example} Eigenvalue conditioning
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -305,7 +305,7 @@ If the eigenvalues have different complex magnitudes, then as $k\to\infty$ the e
 [^eigpoly]: In fact, the situation is reversed: eigenvalue methods are among the best ways to compute the roots of a given polynomial.
 
 (demo-evd-francisqr)=
-::::{prf:example}
+::::{prf:example} Francis QR iteration
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

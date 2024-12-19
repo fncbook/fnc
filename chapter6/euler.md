@@ -253,7 +253,7 @@ If the local truncation error of the one-step method {eq}`onestepODE` satisfies 
 We could restate {numref}`Theorem {number} <theorem-euler-onestepGTE>` as saying that the global error has the same order of accuracy as the LTE. Note, however, that the $O(h^p)$ convergence hides a leading constant that grows exponentially in time. When the time interval is bounded as $h\to 0$, this does not interfere with the conclusion, but the behavior as $t\to\infty$ contains no such guarantee.
 
 (demo-euler-converge)=
-::::{prf:example}
+::::{prf:example} Convergence of Euler's method
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

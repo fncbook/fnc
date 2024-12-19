@@ -89,7 +89,7 @@ R_{\mathbf{A}}(\mathbf{v}+\epsilon\mathbf{z}) = R_{\mathbf{A}}(\mathbf{v}) + 0 +
 as $\epsilon\to 0$. The conclusion is that a good estimate of an eigenvector becomes an even better estimate of an eigenvalue.
 
 (demo-symm-eig-rayleigh)=
-::::{prf:example}
+::::{prf:example} Rayleigh quotient
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

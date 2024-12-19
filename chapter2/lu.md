@@ -95,7 +95,7 @@ Write the columns of $\mathbf{A}$ as $\mathbf{a}_1,\dots,\mathbf{a}_n$ and the r
 Equation {eq}`matrixouter` has some interesting structure for the product $\mathbf{L}\mathbf{U}$, where $\mathbf{L}$ is $n\times n$ and **lower triangular** (i.e., zero above the main diagonal) and $\mathbf{U}$ is $n\times n$ and **upper triangular** (zero below the diagonal). 
 
 (demo-lu-outertri)=
-::::{prf:example}
+::::{prf:example} Triangular outer products
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -141,7 +141,7 @@ These two calculations are enough to derive one of the most important algorithms
 Our goal is to factor a given $n\times n$ matrix $\mathbf{A}$ as the triangular product $\mathbf{A}=\mathbf{L}\mathbf{U}$. It turns out that we have $n^2+n$ total nonzero unknowns in the two triangular matrices, so we set $L_{11}=\cdots = L_{nn}=1$, making $\mathbf{L}$ a **unit lower triangular** matrix.
 
 (demo-lu-derive)=
-::::{prf:example}
+::::{prf:example} LU factorization
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -231,7 +231,7 @@ Defining $\mathbf{z} = \mathbf{U} \mathbf{x}$ leads to the following.
 A key advantage of the factorization point of view is that it depends only on the matrix $\mathbf{A}$. If systems are to be solved for a single $\mathbf{A}$ but multiple different versions of $\mathbf{b}$, then the factorization approach is more efficient, as we'll see in {numref}`section-linsys-efficiency`. 
 
 (demo-lu-solve)=
-::::{prf:example}
+::::{prf:example} Solving a linear system by LU factors
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

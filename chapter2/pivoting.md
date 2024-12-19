@@ -11,7 +11,7 @@ numbering:
 As mentioned in {numref}`section-linsys-lu`, the $\mathbf{A}=\mathbf{L}\mathbf{U}$ factorization is not stable for every nonsingular $\mathbf{A}$. Indeed, the factorization does not always even exist.
 
 (demo-pivoting-fail)=
-::::{prf:example}
+::::{prf:example} Failure of naive LU factorization
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -48,7 +48,7 @@ When performing elimination in column $j$, choose as the pivot the element in co
 ```
 
 (demo-pivoting-fix)=
-::::{prf:example}
+::::{prf:example} Row pivoting in LU factorization
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -82,6 +82,30 @@ A linear system with a singular matrix has either no solution or infinitely many
 ## Permutations
 
 Even though the resulting $\mathbf{L}$ in {numref}`Demo {number} <demo-pivoting-fix>` is no longer of unit lower triangular form, it is close. In fact, all that is needed is to reverse the order of its rows. 
+
+(demo-pivoting-permute)=
+::::{prf:example} Pivoting as row permutation
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-pivoting-permute-julia
+:::
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-pivoting-permute-matlab
+:::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-pivoting-permute-python
+:::
+```` 
+`````
+::::
+
 
 In principle, if the permutation of rows implied by the pivot locations is applied all at once to the original $\mathbf{A}$, no further pivoting is needed. In practice, this permutation cannot be determined immediately from the original $\mathbf{A}$; the only way to find it is to run the algorithm. Having obtained it at the end, though, we can use it to state a simple relationship. 
 
@@ -131,7 +155,7 @@ Ideally, the PLU factorization takes $\sim \frac{2}{3}n^3$ flops asymptotically,
 The output of {numref}`Function {number} <function-plufact>` is a factorization of a row-permuted $\mathbf{A}$. Therefore, given a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, we have to permute $\mathbf{b}$ the same way before applying forward and backward substitution. This is equivalent to changing the order of the equations in a linear system, which does not affect its solution.
 
 (demo-pivoting-usage)=
-::::{prf:example}
+::::{prf:example} PLU factorization for solving linear systems
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -156,7 +180,7 @@ The output of {numref}`Function {number} <function-plufact>` is a factorization 
 The `lu` function from the built-in package `LinearAlgebra` returns the same three outputs as {numref}`Function {number} <function-plufact>`. If you only request one output, it will be a factorization object that can be used with a backslash. This is useful when you want to solve with multiple versions of $\mathbf{b}$ but do the factorization only once.
 
 (demo-pivoting-builtin)=
-::::{prf:example}
+::::{prf:example} Built-in PLU factorization
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -186,7 +210,7 @@ The `lu` function from the built-in package `LinearAlgebra` returns the same thr
 There is one detail of the row pivoting algorithm that might seem arbitrary: why choose the pivot of largest magnitude in a column, rather than, say, the uppermost nonzero in the column? The answer is numerical stability.
 
 (demo-pivoting-stable)=
-::::{prf:example}
+::::{prf:example} Stability of PLU factorization
 Let
 
 ```{math}

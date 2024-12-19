@@ -212,7 +212,7 @@ Collectively, {eq}`spline0asys`,  {eq}`spline0bsys`,  {eq}`spline1sys`,  {eq}`sp
 
 ## Conditioning and convergence
 (demo-splines-splines)=
-::::{prf:example}
+::::{prf:example} Cubic splines
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

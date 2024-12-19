@@ -68,7 +68,7 @@ An ODE may have higher derivatives of the unknown solution present. For example,
 ## Numerical solutions
 
 (demo-basics-first)=
-::::{prf:example}
+::::{prf:example} Solving an IVP
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -95,7 +95,7 @@ An ODE may have higher derivatives of the unknown solution present. For example,
 There are simple IVPs that do not have solutions at all possible times. 
 
 (demo-basics-sing)=
-::::{prf:example}
+::::{prf:example} Finite-time singularity
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -153,7 +153,7 @@ for all sufficiently small $|\delta|$.
 Numerical solutions of IVPs have errors, and those errors can be seen as perturbations to the solution. {numref}`Theorem %s <theorem-depIC>` gives an upper bound of $e^{L(b-a)}$ on the infinity norm (i.e., pointwise) absolute condition number of the solution with respect to perturbations at an initial time. However, the upper bound may be a terrible overestimate of the actual sensitivity for a particular problem.
 
 (demo-basics-cond)=
-::::{prf:example}
+::::{prf:example} Conditioning of an IVP
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

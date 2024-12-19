@@ -62,7 +62,7 @@ FNC_init
 ### Section 4.1
 
 (demo-rootproblem-bessel-matlab)=
-``````{dropdown} The rootfinding problem for Bessel functions
+``````{dropdown} @demo-rootproblem-bessel
 
 ```{code-cell}
 J3 = @(x) besselj(3,x);
@@ -111,7 +111,7 @@ scatter(omega, J3(omega), '<')
 ``````
 
 (demo-roots-cond-matlab)=
-``````{dropdown} Condition number of a rootfinding problem
+``````{dropdown} @demo-roots-cond
 Consider first the function
 
 ```{code-cell}
@@ -156,7 +156,7 @@ The vertical displacements in this picture are exactly the same as before. But t
 
 ### Section 4.2
 (demo-fp-spiral-matlab)=
-``````{dropdown} Fixed-point iteration 
+``````{dropdown} @demo-fp-spiral
 Let's convert the roots of a quadratic polynomial $f(x)$ to a fixed point problem.
 
 ```{code-cell}
@@ -239,7 +239,7 @@ This time, the iteration is pushing us _away from_ the correct answer.
 ``````
 
 (demo-fp-converge-matlab)=
-``````{dropdown} Convergence of fixed-point iteration
+``````{dropdown} @demo-fp-converge
 We revisit {numref}`Demo %s <demo-fp-spiral>` and investigate the observed convergence more closely. Recall that above we calculated $g'(p)\approx-0.42$ at the convergent fixed point.
 
 ```{code-cell}
@@ -293,7 +293,7 @@ The methods for finding $\sigma$ agree well.
 ``````
 ### Section 4.3
 (demo-newton-line-matlab)=
-``````{dropdown} Graphical interpretation of Newton's method
+``````{dropdown} @demo-newton-line
 
 Suppose we want to find a root of the function
 
@@ -358,7 +358,7 @@ Judging by the residual, we appear to be getting closer to the true root each ti
 ``````
 
 (demo-newton-converge-matlab)=
-``````{dropdown} Convergence of Newton's method
+``````{dropdown} @demo-newton-converge
 We again look at finding a solution of $x e^x=2$ near $x=1$. To apply Newton's method, we need to calculate values of both the residual function $f$ and its derivative.
 
 ```{code-cell}
@@ -400,7 +400,7 @@ The clear convergence to 2 above constitutes good evidence of quadratic converge
 ``````
 
 (demo-newton-usage-matlab)=
-``````{dropdown} Using Newton's method
+``````{dropdown} @demo-newton-usage
 ```{index} ! Julia; enumerate
 ```
 
@@ -437,7 +437,7 @@ legend('h(x)', 'inverse', 'y=x')
 ### Section 4.4
 
 (demo-secant-line-matlab)=
-``````{dropdown} Graphical interpretation of the secant method
+``````{dropdown} @demo-secant-line
 
 
 We return to finding a root of the equation $x e^x=2$.
@@ -486,7 +486,7 @@ y4 = f(x4)
 ``````
 
 (demo-secant-converge-matlab)=
-``````{dropdown} Convergence of the secant method
+``````{dropdown} @demo-secant-converge
 We check the convergence of the secant method from {numref}`Demo %s <demo-secant-line>`. 
 
 ```{code-cell}
@@ -518,7 +518,7 @@ As expected, this settles in at around 1.618.
 ``````
 
 (demo-secant-iqi-matlab)=
-``````{dropdown} Inverse quadratic interpolation
+``````{dropdown} @demo-secant-iqi
 Here we look for a root of $x+\cos(10x)$ that is close to 1.
 
 ```{code-cell}
@@ -602,7 +602,7 @@ ratios = logerr(2:end) ./ logerr(1:end-1)
 ``````
 ### Section 4.5
 (demo-newtonsys-converge-matlab)=
-``````{dropdown} Convergence of Newton's method for systems
+``````{dropdown} @demo-newtonsys-converge
 ::::{grid} 1 1 2 2
 A system of nonlinear equations is defined by its residual and Jacobian.
 :::{card}
@@ -641,7 +641,7 @@ This sequence looks to be nearly doubling at each iteration, which is a good sig
 
 ### Section 4.6
 (demo-quasi-levenberg-matlab)=
-``````{dropdown} Using Levenberg's method
+``````{dropdown} @demo-quasi-levenberg
 
 ::::{grid} 1 1 2 2
 To solve a nonlinear system, we need to code only the function defining the system, and not its Jacobian.
@@ -676,7 +676,7 @@ log10( abs(x(1, 1:end-1) - r(1)) )'
 
 ### Section 4.7
 (demo-nlsq-converge-matlab)=
-``````{dropdown} Convergence of nonlinear least squares
+``````{dropdown} @demo-nlsq-converge
 We will observe the convergence of {numref}`Function {number} <function-levenberg>` for different levels of the minimum least-squares residual. We start with a function mapping from $\real^2$ into $\real^3$, and a point that will be near the optimum.
 
 ```{code-cell}
@@ -715,7 +715,7 @@ In the least perturbed case, where the minimized residual is less than $10^{-3}$
 ``````
 
 (demo-nlsq-MM-matlab)=
-``````{dropdown} Nonlinear data fitting
+``````{dropdown} @demo-nlsq-MM
 ```{code-cell}
 m = 25; V = 2; Km = 0.5;
 s = linspace(0.05, 6, m)';

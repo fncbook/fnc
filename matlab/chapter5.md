@@ -77,7 +77,7 @@ FNC_init
 ### Section 5.1
 
 (demo-interpolation-global-matlab)=
-``````{dropdown} Trouble in polynomial interpolation
+``````{dropdown} @demo-interpolation-global
 Here are some points that we could consider to be observations of an unknown function on $[-1,1]$.
 
 ```{code-cell}
@@ -122,7 +122,7 @@ Surely there must be functions that are more intuitively representative of those
 ``````
 
 (demo-interpolation-pwise-matlab)=
-``````{dropdown} Piecewise polynomial interpolation
+``````{dropdown} @demo-interpolation-pwise
 Let us recall the data from {numref}`Demo %s <demo-interpolation-global>`.
 
 ```{code-cell}
@@ -151,7 +151,7 @@ title('Piecewise cubic interpolant')
 ``````
 
 (demo-interp-cond-matlab)=
-``````{dropdown} Conditioning of interpolation
+``````{dropdown} @demo-interp-cond
 In {numref}`Demo %s <demo-interpolation-global>` and {numref}`Demo %s <demo-interpolation-pwise>` we saw a big difference between polynomial interpolation and piecewise polynomial interpolation of some arbitrarily chosen data. The same effects can be seen clearly in the cardinal functions, which are closely tied to the condition numbers.
 
 ```{code-cell}
@@ -182,7 +182,7 @@ From the figure we can see that the condition number for polynomial interpolatio
 ### Section 5.2
 
 (demo-pwlin-hat-matlab)=
-``````{dropdown} A look at hat functions
+``````{dropdown} @demo-pwlin-hat
 Let's define a set of four nodes (i.e., $n=3$ in our formulas).
 
 ```{index} ! Julia; annotate!
@@ -208,7 +208,7 @@ end
 ``````
 
 (demo-pwlin-usage-matlab)=
-``````{dropdown} Using piecewise linear interpolation
+``````{dropdown} @demo-pwlin-usage
 We generate a piecewise linear interpolant of $f(x)=e^{\sin 7x}$.
 
 ```{code-cell}
@@ -238,7 +238,7 @@ legend()
 ``````
 
 (demo-pwlin-converge-matlab)=
-``````{dropdown} Convergence of piecewise linear interpolation
+``````{dropdown} @demo-pwlin-converge
 We measure the convergence rate for piecewise linear interpolation of $e^{\sin 7x}$ over $x \in [0,1]$.
 
 ```{code-cell}
@@ -271,7 +271,7 @@ legend()
 ### Section 5.3 
 
 (demo-splines-splines-matlab)=
-``````{dropdown} Cubic splines
+``````{dropdown} @demo-splines-splines
 For illustration, here is a spline interpolant using just a few nodes.
 
 ```{code-cell}
@@ -321,7 +321,7 @@ title("Convergence of spline interpolation")
 ### Section 5.4
 
 (demo-finitediffs-fd1-matlab)=
-``````{dropdown} Finite differences
+``````{dropdown} @demo-finitediffs-fd1
 If $f(x)=e^{\,\sin(x)}$, then $f'(0)=1$.
 
 ```{code-cell}
@@ -353,7 +353,7 @@ BD2 = (f(-2*h) - 4*f(-h) + 3*f(0)) / (2*h)
 ``````
 
 (demo-finitediffs-fd2-matlab)=
-``````{dropdown} Finite differences for $f''$
+``````{dropdown} @demo-finitediffs-fd2
 If $f(x)=e^{\,\sin(x)}$, then $f''(0)=1$.
 
 ```{code-cell}
@@ -384,7 +384,7 @@ BD2 = (-f(-3*h) + 4*f(-2*h) - 5*f(-h) + 2*f(0)) / h^2
 ``````
 
 (demo-finitediffs-fd-weights-matlab)=
-``````{dropdown} Finite differences at arbitrary nodes
+``````{dropdown} @demo-finitediffs-fd-weights
 We will estimate the derivative of $\cos(x^2)$ at $x=0.5$ using five nodes.
 
 ```{code-cell}
@@ -418,7 +418,7 @@ fdweights(0:3, 1)
 ### Section 5.5
 
 (demo-fdconverge-order12-matlab)=
-``````{dropdown} Convergence of finite differences
+``````{dropdown} @demo-fdconverge-order12
 Let's observe the convergence of the formulas in {numref}`Example {number} <example-fd-converge-FD11>` and {numref}`Example {number} <example-fd-converge-FD12>`, applied to the function $\sin(e^{x+1})$ at $x=0$.
 
 ```{code-cell}
@@ -467,7 +467,7 @@ legend("FD1", "FD2", "O(h)", "O(h^2)")
 ``````
 
 (demo-fdconverge-round-matlab)=
-``````{dropdown} Roundoff error in finite differences
+``````{dropdown} @demo-fdconverge-round
 Let $f(x)=e^{-1.3x}$. We apply finite-difference formulas of first, second, and fourth order to estimate $f'(0)=-1.3$.
 
 ```{code-cell}
@@ -508,7 +508,7 @@ Again the graph is made so that $h$ decreases from left to right. The errors are
 
 ### Section 5.6
 (demo-int-antideriv-matlab)=
-``````{dropdown} Numerical integration
+``````{dropdown} @demo-int-antideriv
 The antiderivative of $e^x$ is, of course, itself. That makes evaluation of $\int_0^1 e^x\,dx$ by the Fundamental Theorem trivial.
 
 ```{code-cell}
@@ -546,7 +546,7 @@ xlabel('x'), ylabel('f(x)')
 ``````
 
 (demo-int-trap-matlab)=
-``````{dropdown} Trapezoid integration
+``````{dropdown} @demo-int-trap
 We will approximate the integral of the function $f(x)=e^{\sin 7x}$ over the interval $[0,2]$.
 
 ```{code-cell}
@@ -594,7 +594,7 @@ legend()
 ``````
 
 (demo-int-extrap-matlab)=
-``````{dropdown} Integration by extrapolation
+``````{dropdown} @demo-int-extrap
 We estimate $\displaystyle\int_0^2 x^2 e^{-2x}\, dx$ using extrapolation. First we use `quadgk` to get an accurate value.
 
 ```{code-cell}
@@ -663,7 +663,7 @@ If we consider the computational time to be dominated by evaluations of $f$, the
 ### Section 5.7
 
 (demo-adapt-motive-matlab)=
-``````{dropdown} Motivation for adaptive integration
+``````{dropdown} @demo-adapt-motive
 This function gets increasingly oscillatory as $x$ increases.
 
 ```{code-cell}
@@ -694,7 +694,7 @@ Both the picture and the numerical results suggest that more nodes should be use
 ``````
 
 (demo-adapt-usage-matlab)=
-``````{dropdown} Using adaptive integration
+``````{dropdown} @demo-adapt-usage
 We'll integrate the function from {numref}`Demo %s <demo-adapt-motive>`.
 
 ```{code-cell}

@@ -88,7 +88,7 @@ In Python, the `numpy.linalg.solve` function is used to solve linear systems.
 `````
 
 (demo-systems-backslash)=
-::::{prf:example}
+::::{prf:example} Solving linear systems
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -244,7 +244,7 @@ The implementation of backward substitution is much like forward substitution an
 ``````
 
 (demo-systems-triangular)=
-::::{prf:example}
+::::{prf:example} Triangular systems of equations
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

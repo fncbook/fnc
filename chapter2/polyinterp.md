@@ -82,7 +82,7 @@ Polynomial interpolation can therefore be posed as a linear system of equations 
 
 
 (demo-interp-vander)=
-::::{prf:example}
+::::{prf:example} Linear system for polynomial interpolation
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

@@ -11,7 +11,7 @@ numbering:
 Given that matrix-vector multiplication is fast for sparse matrices, let's see what we might accomplish with only that at our disposal.
 
 (demo-power-one)=
-::::{prf:example}
+::::{prf:example} Power iteration Power iteration Power iteration Power iteration
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -203,7 +203,7 @@ The error in the power iteration eigenvalue estimates $\beta_k$ is reduced asymp
 ::::
 
 (demo-power-iter)=
-::::{prf:example}
+::::{prf:example} Convergence of power iteration Convergence of power iteration Convergence of power iteration Convergence of power iteration
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia

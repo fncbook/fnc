@@ -78,7 +78,7 @@ If the singular values of $\mathbf{A}$ decrease sufficiently rapidly, then $\mat
 ```
 
 (demo-dimreduce-hello)=
-::::{prf:example}
+::::{prf:example} Image compression
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -116,7 +116,7 @@ Clearly $0\le \tau_k \le 1$ and $\tau_k$ is non-decreasing as a function of $k$.
 [^expvar]: In statistics this quantity may be interpreted as the fraction of explained variance.
 
 (demo-dimreduce-voting)=
-::::{prf:example}
+::::{prf:example} Dimension reduction in voting records
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

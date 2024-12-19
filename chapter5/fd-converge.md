@@ -79,7 +79,7 @@ We compute the truncation error of the centered difference formula {eq}`centerFD
 Thus, this method has order of accuracy equal to 2.
 ````
 (demo-fdconverge-order12)=
-::::{prf:example}
+::::{prf:example} Convergence of finite differences
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -166,7 +166,7 @@ and the optimum total error is roughly $\epsilon_\text{mach}^{\,\, m/(m+1)}$.
 A different statement of the conclusion is that for a first-order formula, at most we can expect accuracy in only about half of the available machine digits. As $m$ increases, we get ever closer to using the full accuracy available. Higher-order finite-difference methods are both more efficient and less vulnerable to roundoff than low-order methods.
 
 (demo-fdconverge-round)=
-::::{prf:example}
+::::{prf:example} Roundoff error in finite differences
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

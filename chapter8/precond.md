@@ -42,7 +42,7 @@ Good preconditioning is a matter of finding an easily inverted (i.e., quickly so
 One of the simplest choices for the preconditioner $\mathbf{M}$ is a diagonal matrix. This definitely meets the requirement of being fast to invert: the solution of $\mathbf{M}\mathbf{v}=\mathbf{y}$ is just $v_i=y_i/M_{ii}$. The only question is whether it can be chosen in such a way that $\mathbf{M}^{-1}\mathbf{A}$ is much more amenable to Krylov iterations than $\mathbf{A}$ is. This may be the case when the rows of $\mathbf{A}$ differ greatly in scale, or when $\mathbf{A}$ is diagonally dominant (see {eq}`diag-dominant`).
 
 (demo-precond-diagonal)=
-::::{prf:example}
+::::{prf:example} Diagonal preconditioning Diagonal preconditioning Diagonal preconditioning Diagonal preconditioning
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -73,7 +73,7 @@ One of the simplest choices for the preconditioner $\mathbf{M}$ is a diagonal ma
 Another general-purpose technique is the **incomplete LU factorization**. Since true factorization of a sparse matrix usually leads to an undesirable amount of fill-in, incomplete LU sacrifices exact factors by dropping elements smaller than an adjustable threshold.
 
 (demo-precond-gmres)=
-::::{prf:example}
+::::{prf:example} Incomplete LU preconditioning Incomplete LU preconditioning Incomplete LU preconditioning Incomplete LU preconditioning
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia

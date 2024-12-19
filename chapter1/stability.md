@@ -27,7 +27,7 @@ x_1 = \frac{-b + \sqrt{b^2-4ac}}{2a}, \qquad
 x_2 = \frac{-b - \sqrt{b^2-4ac}}{2a}.
 ```
 (demo-stability-quadbad)= 
-``````{prf:example}
+``````{prf:example} Instability of the quadratic formula
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -57,7 +57,7 @@ x_2 = \frac{-b - \sqrt{b^2-4ac}}{2a}.
 We can confirm this conclusion by finding a different path that avoids subtractive cancellation. A little algebra using {eq}`quadform` confirms the additional formula $x_1x_2=c/a$.  So given one root $r$, we compute the other root using $c/ar$, which has only multiplication and division and therefore creates no numerical trouble.
 
 (demo-stability-quadgood)=
-``````{prf:example}
+``````{prf:example} Stable alternative to the quadratic formula
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -116,7 +116,7 @@ Backward error is the difference between the original data and the data that exa
 ```
 
 (demo-stability-roots)=
-``````{prf:example}
+``````{prf:example} Backward error
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

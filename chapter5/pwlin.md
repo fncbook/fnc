@@ -80,7 +80,7 @@ An appealing characteristic of the hat function basis is that it depends only on
 ``````
 
 (demo-pwlin-hat)=
-::::{prf:example}
+::::{prf:example} A look at hat functions
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -151,7 +151,7 @@ The resulting algorithmic simplicity is reflected in {numref}`Function {number} 
 ``````
 
 (demo-pwlin-usage)=
-::::{prf:example}
+::::{prf:example} Using piecewise linear interpolation
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -247,7 +247,7 @@ $$
 Hence a log-log graph of error versus $h$ should be approximately a straight line of slope $m$.
 
 (demo-pwlin-converge)=
-::::{prf:example}
+::::{prf:example} Convergence of piecewise linear interpolation
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

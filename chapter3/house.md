@@ -100,7 +100,7 @@ leading finally to
 The QR factorization is computed by using successive Householder reflections to introduce zeros in one column at a time. We first show the process for a small numerical example in {numref}`Demo %s <demo-house-qr>`.
 
 (demo-house-qr)=
-::::{prf:example}
+::::{prf:example} Householder QR factorization
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

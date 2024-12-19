@@ -8,7 +8,7 @@ numbering:
 In calculus you learn that the elegant way to evaluate a definite integral is to apply the Fundamental Theorem of Calculus and find an antiderivative. The connection is so profound and pervasive that it's easy to overlook that a definite integral is a numerical quantity existing independently of antidifferentiation.  However, most conceivable integrands have no antiderivative in terms of familiar functions.
 
 (demo-int-antideriv)=
-::::{prf:example}
+::::{prf:example} Numerical integration
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -184,7 +184,7 @@ The trapezoid integration formula is second-order accurate.
 ::::
 
 (demo-int-trap)=
-::::{prf:example}
+::::{prf:example} Trapezoid integration
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -302,7 +302,7 @@ Specifically, we have
 where the nodes referenced in the last line are relative to $n=2m$. Hence in passing from $n=m$ to $n=2m$, new integrand evaluations are needed only at the odd-numbered nodes of the finer grid. 
 
 (demo-int-extrap)=
-::::{prf:example}
+::::{prf:example} Integration by extrapolation
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

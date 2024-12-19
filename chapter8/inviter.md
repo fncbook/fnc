@@ -128,7 +128,7 @@ The convergence is linear, at a rate found by reinterpreting {eq}`poweriterconv`
 with the eigenvalues ordered as in {eq}`shiftorder`. Thus, the convergence is best when the shift $s$ is close to the target eigenvalue $\lambda_1$, specifically when it is much closer to that eigenvalue than to any other.
 
 (demo-inviter-conv)=
-::::{prf:example}
+::::{prf:example} Convergence of inverse iteration Convergence of inverse iteration Convergence of inverse iteration Convergence of inverse iteration
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -160,7 +160,7 @@ There is a clear opportunity for positive feedback in {numref}`Algorithm {number
 Let's analyze the resulting convergence. If the eigenvalues are ordered by distance to $s$, then the convergence is linear with rate $|\lambda_1-s|/|\lambda_2-s|$. As $s\to\lambda_1$, the change in the denominator is negligible. So if the error $(\lambda_1-s)$ is $\epsilon$, then the error in the next estimate is reduced by a factor $O(\epsilon)$. That is, $\epsilon$ becomes $O(\epsilon^2)$, which is *quadratic* convergence.
 
 (demo-inviter-accel)=
-::::{prf:example}
+::::{prf:example} Dynamic shift strategy Dynamic shift strategy Dynamic shift strategy Dynamic shift strategy
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

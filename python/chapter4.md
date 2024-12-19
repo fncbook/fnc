@@ -90,19 +90,12 @@ Note that a default value is given for the third argument `y₀`, and it refers 
 ## Examples
 
 ```{code-cell} ipython3
-from numpy import *
-from matplotlib.pyplot import *
-from numpy.linalg import solve, norm
-import scipy.sparse as sparse
-from scipy.sparse.linalg import splu
-from timeit import default_timer as timer
-from prettytable import PrettyTable
-import FNC
+exec(open("FNC_init.py").read())
 ```
 
 ### Section 4.1
 (demo-rootproblem-bessel-python)=
-``````{dropdown} The rootfinding problem for Bessel functions
+``````{dropdown} @demo-rootproblem-bessel
 
 ```{code-cell}
 import scipy.special as special
@@ -153,7 +146,7 @@ fig
 ``````
 
 (demo-roots-cond-python)=
-``````{dropdown} Condition number of a rootfinding problem
+``````{dropdown} @demo-roots-cond
 Consider first the function
 
 ```{code-cell}
@@ -198,7 +191,7 @@ The vertical displacements in this picture are exactly the same as before. But t
 ### Section 4.2
 
 (demo-fp-spiral-python)=
-``````{dropdown} Fixed-point iteration 
+``````{dropdown} @demo-fp-spiral
 Let's convert the roots of a quadratic polynomial $f(x)$ to a fixed point problem.
 
 ```{code-cell}
@@ -292,7 +285,7 @@ This time, the iteration is pushing us _away from_ the correct answer.
 ``````
 
 (demo-fp-converge-python)=
-``````{dropdown} Convergence of fixed-point iteration
+``````{dropdown} @demo-fp-converge
 We revisit {numref}`Demo %s <demo-fp-spiral>` and investigate the observed convergence more closely. Recall that above we calculated $g'(p)\approx-0.42$ at the convergent fixed point.
 
 ```{code-cell}
@@ -346,7 +339,7 @@ The methods for finding $\sigma$ agree well.
 
 ### Section 4.3
 (demo-newton-line-python)=
-``````{dropdown} Graphical interpretation of Newton's method
+``````{dropdown} @demo-newton-line
 
 Suppose we want to find a root of this function:
 
@@ -424,7 +417,7 @@ Judging by the residual, we appear to be getting closer to the true root each ti
 ``````
 
 (demo-newton-converge-python)=
-``````{dropdown} Convergence of Newton's method
+``````{dropdown} @demo-newton-converge
 We again look at finding a solution of $x e^x=2$ near $x=1$. To apply Newton's method, we need to calculate values of both the residual function $f$ and its derivative.
 
 ```{code-cell}
@@ -468,7 +461,7 @@ The clear convergence to 2 above constitutes good evidence of quadratic converge
 ``````
 
 (demo-newton-usage-python)=
-``````{dropdown} Using Newton's method
+``````{dropdown} @demo-newton-usage
 ::::{grid} 1 1 2 2
 Suppose we want to evaluate the inverse of the function $h(x)=e^x-x$. This means solving $y=h(x)$, or $h(x)-y=0$, for $x$ when $y$ is given. That equation has no solution in terms of elementary functions. If a value of $y$ is given numerically, though, we simply have a rootfinding problem for $f(x)=e^x-x-y$.
 :::{card}
@@ -500,7 +493,7 @@ ax.grid(), legend()
 ``````
 ### Section 4.4
 (demo-secant-line-python)=
-``````{dropdown} Graphical interpretation of the secant method
+``````{dropdown} @demo-secant-line
 
 ```{code-cell}
 f = lambda x: x * exp(x) - 2
@@ -556,7 +549,7 @@ print(f(x4))
 ``````
 
 (demo-secant-converge-python)=
-``````{dropdown} Convergence of the secant method
+``````{dropdown} @demo-secant-converge
 We check the convergence of the secant method from {numref}`Demo %s <demo-secant-line>`.
 
 ```{code-cell}
@@ -592,7 +585,7 @@ As expected, this settles in at around 1.618.
 ``````
 
 (demo-secant-iqi-python)=
-``````{dropdown} Inverse quadratic interpolation
+``````{dropdown} @demo-secant-iqi
 Here we look for a root of $x+\cos(10x)$ that is close to 1.
 
 ```{code-cell}
@@ -676,7 +669,7 @@ for i in range(len(err) - 1):
 
 ### Section 4.5
 (demo-newtonsys-converge-python)=
-``````{dropdown} Convergence of Newton's method for systems
+``````{dropdown} @demo-newtonsys-converge
 A system of nonlinear equations is defined by its residual and Jacobian.
 
 ```{code-cell}
@@ -724,7 +717,7 @@ The ratio is apparently converging toward 2, as expected for quadratic convergen
 
 ### Section 4.6
 (demo-quasi-levenberg-python)=
-``````{dropdown} Using Levenberg's method
+``````{dropdown} @demo-quasi-levenberg
 To solve a nonlinear system, we need to code only the function defining the system, and not its Jacobian.
 
 ```{code-cell}
@@ -762,7 +755,7 @@ for k in range(len(logerr) - 1):
 ``````
 ### Section 4.7
 (demo-nlsq-converge-python)=
-``````{dropdown} Convergence of nonlinear least squares
+``````{dropdown} @demo-nlsq-converge
 We will observe the convergence of {numref}`Function {number} <function-levenberg>` for different levels of the minimum least-squares residual. We start with a function mapping from $\real^2$ into $\real^3$, and a point that will be near the optimum.
 
 ```{code-cell}
@@ -790,7 +783,7 @@ In the least perturbed case, where the minimized residual is less than $10^{-3}$
 ``````
 
 (demo-nlsq-MM-python)=
-``````{dropdown} Nonlinear data fitting
+``````{dropdown} @demo-nlsq-MM
 ```{code-cell}
 m = 25
 V, Km = 2, 0.5

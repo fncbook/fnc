@@ -29,7 +29,7 @@ The interpolation nodes are numbered from 0 to $n$. This is convenient for our m
 Polynomials are the obvious first candidate to serve as interpolating functions. They are easy to work with, and in {numref}`section-linsys-polyinterp` we saw that a linear system of equations can be used to determine the coefficients of a polynomial that passes through every member of a set of given points in the plane. However, it's not hard to find examples for which polynomial interpolation leads to unusable results.
 
 (demo-interpolation-global)=
-::::{prf:example}
+::::{prf:example} Trouble in polynomial interpolation
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -72,7 +72,7 @@ Some examples of piecewise polynomials for the nodes  $t_0=-2$, $t_1=0$, $t_2=1$
 Usually we designate in advance a maximum degree $d$ for each polynomial piece of $p(x)$. An important property of the piecewise polynomials of degree $d$ is that they form a vector space: that is, any linear combination of piecewise polynomials of degree $d$ is another piecewise polynomial of degree $d$. If $p$ and $q$ share the same node set, then the combination is piecewise polynomial on that node set.
 
 (demo-interpolation-pwise)=
-::::{prf:example}
+::::{prf:example} Piecewise polynomial interpolation
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -181,7 +181,7 @@ Since $|d_k|\le \|\mathbf{d}\|_\infty$ for all $k$, this finishes {eq}`interp-co
 ::::
 
 (demo-interp-cond)=
-::::{prf:example}
+::::{prf:example} Conditioning of interpolation
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

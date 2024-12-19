@@ -34,7 +34,7 @@ import FNC
 
 ## Section 1.1
 (demo-float-accuracy-python)=
-``````{dropdown} Absolute and relative accuracy
+``````{dropdown} @demo-float
 Recall the grade-school approximation to the number $\pi$.
 
 ```{code-cell} ipython3
@@ -155,7 +155,7 @@ int(3.14)
 ``````
 
 (demo-float-arithmetic-python)=
-``````{dropdown} Floating-point arithmetic oddity
+``````{dropdown} @demo-float-arithmetic
 :open: false
 
 There is no double precision number between $1$ and $1+\varepsilon_\text{mach}$. Thus, the following difference is zero despite its appearance.
@@ -179,7 +179,7 @@ This is now the "correct" result. But we have found a rather shocking breakdown 
 ### Section 1.2
 
 (demo-condition-roots-python)=
-``````{dropdown} Conditioning of polynomial roots
+``````{dropdown} @demo-condition-roots
 :open: false
 ::::{grid} 1 1 2 2
 
@@ -229,7 +229,7 @@ This matches the observation pretty well.
 ### Section 1.3
 
 (demo-algorithms-horner-python)=
-``````{dropdown} Using a function
+``````{dropdown} @demo-algorithms-horner
 :open: false
 
 Here we show how to use `horner` to evaluate a polynomial. First, we have to ensure that the `FNC` package is imported.
@@ -258,7 +258,7 @@ The above is the value of $p(1.6)$, up to a rounding error.
 ### Section 1.4
 
 (demo-stability-quadbad-python)= 
-``````{dropdown} Instability of the quadratic formula
+``````{dropdown} @demo-stability-quadbad
 :open: false
 
 ```{index} ! Python; scientific notation
@@ -299,7 +299,7 @@ Using {eq}`condition-chain`, the chain rule for condition numbers, the condition
 ``````
 
 (demo-stability-quadgood-python)=
-````{dropdown} Stable alternative to the quadratic formula
+````{dropdown} @demo-stability-quadgood
 We repeat the rootfinding experiment of {numref}`Demo %s <demo-stability-quadbad>` with an alternative algorithm.
 
 ```{code-cell}
@@ -327,7 +327,7 @@ print(abs(x2 - 1e-6) / 1e-6)
 ````
 
 (demo-stability-roots-python)=
-````{dropdown} Backward error
+````{dropdown} @demo-stability-roots
 :open: false
 
 

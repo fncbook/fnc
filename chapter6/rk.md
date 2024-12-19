@@ -233,7 +233,7 @@ Our implementation is given in {numref}`Function {number} <function-rk4>`.
 ``````
 
 (demo-rk-converge)=
-::::{prf:example}
+::::{prf:example} Convergence of Runge–Kutta methods
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

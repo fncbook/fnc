@@ -11,7 +11,7 @@ numbering:
 For one-step methods such as Runge–Kutta, {numref}`Theorem %s <theorem-euler-onestepGTE>` guarantees that the method converges and that the global error is of the same order as the local truncation error. For multistep methods, however, a new wrinkle is introduced. 
 
 (demo-zs-LIAF)=
-::::{prf:example}
+::::{prf:example} Instability
 It is straightforward to check that the two-step method LIAF, defined by
 
 ```{math}

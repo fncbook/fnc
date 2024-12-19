@@ -68,7 +68,7 @@ which is the $(i,j)$ element of $\mathbf{A}^k$.
 ::::
 
 (demo-insight-graph)=
-::::{prf:example}
+::::{prf:example} Adjacency matrix
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -100,7 +100,7 @@ The representation of a graph by its adjacency matrix opens up the possibility o
 Computers typically represent images as rectangular arrays of pixels, each of which is colored according to numerical values for red (R), green (G), and blue (B) components of white light. Most often, these are given as integers in the range from zero (no color) to 255 (full color). Thus, an image that is $m$-by-$n$ pixels can be stored as an $m$-by-$n$-by-3 array of integer values. In Julia, we can work with an $m\times n$ matrix of 3-vectors representing entire colors.
 
 (demo-insight-image)=
-::::{prf:example}
+::::{prf:example} Images as matrices
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
