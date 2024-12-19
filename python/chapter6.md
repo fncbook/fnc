@@ -102,7 +102,7 @@ Lines 22-23 define the function $\mathbf{g}$ and call `levenberg` to find the ne
 exec(open("FNC_init.py").read())
 ```
 
-### Section 6.1
+### 6.1 @section-ivp-basics
 
 (demo-basics-first-python)=
 ``````{dropdown} @demo-basics-first
@@ -208,7 +208,7 @@ title("Exponential convergence of solutions")
 In this case the actual condition number is one, because the initial difference between solutions is the largest over all time. Hence, the exponentially growing upper bound $e^{b-a}$ is a gross overestimate.
 ``````
 
-### Section 6.2
+### 6.2 @section-ivp-euler
 (demo-euler-converge-python)=
 ``````{dropdown} @demo-euler-converge
 We consider the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
@@ -269,7 +269,7 @@ legend()
 ```
 ``````
 
-### Section 6.3
+### 6.3 @section-ivp-systems
 (demo-systems-predator-python)=
 ``````{dropdown} @demo-systems-predator
 We encode the predator–prey equations via a function.
@@ -375,7 +375,7 @@ title("Coupled pendulums");
 The coupling makes the pendulums swap energy back and forth.
 ``````
 
-### Section 6.4
+### 6.4 @section-ivp-rk
 (demo-rk-converge-python)=
 ``````{dropdown} @demo-rk-converge
 We solve the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. We start by getting a reference solution to validate against.
@@ -421,7 +421,7 @@ title("Convergence of RK methods");
 The fourth-order variant is more efficient in this problem over a wide range of accuracy.
 ``````
 
-### Section 6.5
+### 6.5 @section-ivp-adaptive
 (demo-adapt-basic-python)=
 ``````{dropdown} @demo-adapt-basic
 Let's run adaptive RK on  $u'=e^{t-u\sin u}$.
@@ -483,7 +483,7 @@ legend();
 ```
 ``````
 
-### Section 6.6
+### 6.6 @section-ivp-multistep
 (demo-implicit-ab4-python)=
 ``````{dropdown} @demo-implicit-ab4
 We study the convergence of AB4 using the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. As usual, `solve_ivp` is called to give an accurate reference solution.
@@ -570,7 +570,7 @@ legend()
 So AB4, which is supposed to be _more_ accurate than AM2, actually needs something like 8 times as many steps to get a reasonable-looking answer!
 ``````
 
-### Section 6.7
+### 6.7 @section-ivp-implicit
 (demo-zs-LIAF-python)=
 ``````{dropdown} @demo-zs-LIAF
 We'll measure the error at the time $t=1$.

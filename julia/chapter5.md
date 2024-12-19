@@ -90,7 +90,7 @@ using FundamentalsNumericalComputation
 FNC.init_format()
 ```
 
-### Section 5.1
+### 5.1 @section-localapprox-interpolation
 
 (demo-interpolation-global-julia)=
 ``````{dropdown} @demo-interpolation-global
@@ -198,7 +198,7 @@ plot!(x -> ϕ(x), -1, 1, label="polynomial",
 From the figure we can see that the condition number for polynomial interpolation on these nodes is at least 500.
 ``````
 
-### Section 5.2
+### 5.2 @section-localapprox-pwlin
 
 (demo-pwlin-hat-julia)=
 ``````{dropdown} @demo-pwlin-hat
@@ -291,7 +291,7 @@ plot!(h, order2, l=:dash, label=L"O(h^2)", xflip=true,
 ```
 ``````
 
-### Section 5.3 
+### 5.3 @section-localapprox-splines 
 
 (demo-splines-splines-julia)=
 ``````{dropdown} @demo-splines-splines
@@ -342,7 +342,7 @@ plot(n, [err order4], m=[:o :none], l=[:solid :dash],
 ```
 ``````
 
-### Section 5.4
+### 5.4 @section-localapprox-finitediffs
 
 (demo-finitediffs-fd1-julia)=
 ``````{dropdown} @demo-finitediffs-fd1
@@ -450,7 +450,7 @@ FNC.fdweights(Rational.(0:3), 1)
 ```
 ``````
 
-### Section 5.5
+### 5.5 @section-localapprox-fd-converge
 
 (demo-fdconverge-order12-julia)=
 ``````{dropdown} @demo-fdconverge-order12
@@ -536,7 +536,7 @@ plot!(h, 0.1 * eps() ./ h, l=:dash, color=:black, label=L"O(h^{-1})")
 Again the graph is made so that $h$ decreases from left to right. The errors are dominated at first by truncation error, which decreases most rapidly for the fourth-order formula. However, increasing roundoff error eventually equals and then dominates the truncation error as $h$ continues to decrease. As the order of accuracy increases, the crossover point moves to the left (greater efficiency) and down (greater accuracy).
 ``````
 
-### Section 5.6
+### 5.6 @section-localapprox-integration
 (demo-int-antideriv-julia)=
 ``````{dropdown} @demo-int-antideriv
 The antiderivative of $e^x$ is, of course, itself. That makes evaluation of $\int_0^1 e^x\,dx$ by the Fundamental Theorem trivial.
@@ -698,7 +698,7 @@ pretty_table(err, header=["order 2", "order 4", "order 6"])
 If we consider the computational time to be dominated by evaluations of $f$, then we have obtained a result with about twice as many accurate digits as the best trapezoid result, at virtually no extra cost.
 ``````
 
-### Section 5.7
+### 5.7 @section-localapprox-adaptive
 
 (demo-adapt-motive-julia)=
 ``````{dropdown} @demo-adapt-motive

@@ -93,7 +93,7 @@ import Pkg; Pkg.activate("/Users/driscoll/Documents/GitHub/fnc")
 using FundamentalsNumericalComputation
 FNC.init_format()
 ```
-### Section 4.1
+### 4.1 @section-nonlineqn-rootproblem
 (demo-rootproblem-bessel-julia)=
 ``````{dropdown} @demo-rootproblem-bessel
 
@@ -190,7 +190,7 @@ The vertical displacements in this picture are exactly the same as before. But t
 
 ``````
 
-### Section 4.2
+### 4.2 @section-nonlineqn-fixed-point
 
 (demo-fp-spiral-julia)=
 ``````{dropdown} @demo-fp-spiral
@@ -331,7 +331,7 @@ The error should therefore decrease by a factor of $\sigma$ at each iteration. W
 
 The methods for finding $\sigma$ agree well.
 ``````
-### Section 4.3
+### 4.3 @section-nonlineqn-newton
 (demo-newton-line-julia)=
 ``````{dropdown} @demo-newton-line
 
@@ -486,7 +486,7 @@ plot!(y, x, label=L"g^{-1}(y)", title="Function and its inverse")
 plot!(x -> x, 0, maximum(y), label="", l=(:dash, 1), color=:black)
 ```
 ``````
-### Section 4.4
+### 4.4 @section-nonlineqn-secant
 (demo-secant-line-julia)=
 ``````{dropdown} @demo-secant-line
 
@@ -641,7 +641,7 @@ logerr = @. log(Float64(abs(r - x[1:end-1])))
 
 The convergence is probably superlinear at a rate of $\alpha=1.8$ or greater.
 ``````
-### Section 4.5
+### 4.5 @section-nonlineqn-newtonsys
 (demo-newtonsys-converge-julia)=
 ``````{dropdown} @demo-newtonsys-converge
 ::::{grid} 1 1 2 2
@@ -702,7 +702,7 @@ logerr = [Float64(log(norm(r - x[k]))) for k in 1:length(x)-1]
 
 The ratio is neatly converging toward 2, which is expected for quadratic convergence.
 ``````
-### Section 4.6
+### 4.6 @section-nonlineqn-quasinewton
 (demo-quasi-levenberg-julia)=
 ``````{dropdown} @demo-quasi-levenberg
 To solve a nonlinear system, we need to code only the function defining the system, and not its Jacobian.
@@ -737,7 +737,7 @@ logerr = [log(norm(x[k] - r)) for k in 1:length(x)-1]
 [logerr[k+1] / logerr[k] for k in 1:length(logerr)-1]
 ```
 ``````
-### Section 4.7
+### 4.7 @section-nonlineqn-nlsq
 (demo-nlsq-converge-julia)=
 ``````{dropdown} @demo-nlsq-converge
 We will observe the convergence of {numref}`Function {number} <function-levenberg>` for different levels of the minimum least-squares residual. We start with a function mapping from $\real^2$ into $\real^3$, and a point that will be near the optimum.

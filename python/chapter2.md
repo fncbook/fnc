@@ -66,7 +66,7 @@ Line 11 of {numref}`Function {number} <function-lufact>` points out a subtle iss
 exec(open("FNC_init.py").read())
 ```
 
-### Section 2.1
+### 2.1 @section-linsys-polyinterp
 (demo-interp-vander-python)=
 ``````{dropdown} @demo-interp-vander
 We create two vectors for data about the population of China. The first has the years of census data and the other has the population, in millions of people.
@@ -130,7 +130,7 @@ legend();
 ```
 ``````
 
-### Section 2.2
+### 2.2 @section-linsys-matrices
 (demo-matrices-python)=
 ``````{dropdown} @demo-matrices
 ```{note}
@@ -362,7 +362,7 @@ print(cos(pi * x))
 ```
 ``````
 
-### Section 2.3
+### 2.3 @section-linsys-linear-systems
 (demo-systems-backslash-python)=
 ``````{dropdown} @demo-systems-backslash
 For a square matrix $A$, the command `solve(A, B)` from `numpy.linalg` is mathematically equivalent to $\mathbf{A}^{-1} \mathbf{b}$. 
@@ -460,7 +460,7 @@ print("error:", x - x_exact)
 It's not so good to get 4 digits of accuracy after starting with sixteen! But the source of the error is not hard to track down. Solving for $x_1$ performs $(\alpha-\beta)+\beta$ in the first row. Since $|\alpha|$ is so much smaller than $|\beta|$, this a recipe for losing digits to subtractive cancellation.
 ``````
 
-### Section 2.4
+### 2.4 @section-linsys-lu
 (demo-lu-outertri-python)= 
 ``````{dropdown} @demo-lu-outertri
 ```{index} Python; tril, Python; triu
@@ -610,7 +610,7 @@ b - A @ x
 
 ``````
 
-### Section 2.5
+### 2.5 @section-linsys-efficiency
 
 (demo-flops-mvmult-python)=
 ``````{dropdown} @demo-flops-mvmult
@@ -727,7 +727,7 @@ title("Timing of LU factorizations");
 ```
 ``````
 
-### Section 2.6
+### 2.6 @section-linsys-pivoting
 (demo-pivoting-fail-python)=
 ``````{dropdown} @demo-pivoting-fail
 Here is a previously encountered matrix that factors well.
@@ -968,7 +968,7 @@ print(linalg.solve(A, b))
 ```
 ``````
 
-### Section 2.7
+### 2.7 @section-linsys-norms
 (demo-norms-vector-python)=
 ``````{dropdown} @demo-norms-vector
 ```{index} ! Python; norm
@@ -1068,7 +1068,7 @@ As seen on the right-side plot, the image of the transformed vectors is an ellip
 
 ``````
 
-### Section 2.8
+### 2.8 @section-linsys-condition-number
 (demo-condition-bound-python)=
 ``````{dropdown} @demo-condition-bound
 
@@ -1165,7 +1165,7 @@ print(f"relative error: {norm(x - x_exact) / norm(x_exact):.2e}")
 ```
 ``````
 
-### Section 2.9
+### 2.9 @section-linsys-structure
 (demo-structure-banded-python)=
 ``````{dropdown} @demo-structure-banded
 Here is a matrix with both lower and upper bandwidth equal to one. Such a matrix is called tridiagonal.

@@ -45,7 +45,7 @@ addpath /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
-### Section 3.1
+### 3.1 @section-leastsq-fitting
 (demo-fitting-tempinterp-matlab)=
 ``````{dropdown} @demo-fitting-tempinterp
 Here are 5-year averages of the worldwide temperature anomaly as compared to the 1951–1980 average (source: NASA).
@@ -190,7 +190,7 @@ legend('sequence', 'power-law fit')
 ```
 ``````
 
-### Section 3.2
+### 3.2 @section-leastsq-normaleqns
 (demo-normaleqns-instab-matlab)=
 ``````{dropdown} @demo-normaleqns-instab
 
@@ -232,7 +232,7 @@ digits = -log10(observed_err)
 ```
 ``````
 
-### Section 3.3
+### 3.3 @section-leastsq-qr
 (demo-qr-qrfact-matlab)=
 ``````{dropdown} @demo-qr-qrfact
 
@@ -291,7 +291,7 @@ error_bound = cond(A) * eps
 ```
 ``````
 
-### Section 3.4
+### 3.4 @section-leastsq-house
 
 (demo-house-qr-matlab)=
 ``````{dropdown} @demo-house-qr

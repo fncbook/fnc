@@ -14,7 +14,7 @@ numbering:
 exec(open("FNC_init.py").read())
 ```
 
-### Section 7.1
+### 7.1 @section-matrixanaly-insight
 
 (demo-insight-graph-python)=
 ``````{dropdown} @demo-insight-graph
@@ -110,7 +110,7 @@ axis('off');
 ```
 ``````
 
-### Section 7.2
+### 7.2 @section-matrixanaly-evd
 
 (demo-evd-eigen-python)=
 ``````{dropdown} @demo-evd-eigen
@@ -273,7 +273,7 @@ print(A)
 ```
 ``````
 
-### Section 7.3
+### 7.3 @section-matrixanaly-svd
 
 (demo-svd-props-python)=
 ``````{dropdown} @demo-svd-props
@@ -339,7 +339,7 @@ print("size of V:", Vh.shape)
 ```
 ``````
 
-### Section 7.4
+### 7.4 @section-matrixanaly-symm-eig
 
 (demo-symm-eig-rayleigh-python)=
 ``````{dropdown} @demo-symm-eig-rayleigh
@@ -381,7 +381,7 @@ print(results)
 ```
 ``````
 
-### Section 7.5
+### 7.5 @section-matrixanaly-dimreduce
 
 (demo-dimreduce-hello-python)=
 ``````{dropdown} @demo-dimreduce-hello

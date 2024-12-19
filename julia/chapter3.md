@@ -59,7 +59,7 @@ using FundamentalsNumericalComputation
 FNC.init_format()
 ```
 
-### Section 3.1
+### 3.1 @section-leastsq-fitting
 (demo-fitting-tempinterp-julia)=
 ``````{dropdown} @demo-fitting-tempinterp
 Here are 5-year averages of the worldwide temperature anomaly as compared to the 1951–1980 average (source: NASA).
@@ -201,7 +201,7 @@ plot!(k, a * k.^b, l=:dash, label="power-law fit")
 ```
 ``````
 
-### Section 3.2
+### 3.2 @section-leastsq-normaleqns
 
 (demo-normaleqns-instab-julia)=
 ``````{dropdown} @demo-normaleqns-instab
@@ -245,7 +245,7 @@ x_NE = N \ (A'*b)
 ```
 ``````
 
-### Section 3.3
+### 3.3 @section-leastsq-qr
 (demo-qr-qrfact-julia)=
 ``````{dropdown} @demo-qr-qrfact
 
@@ -312,7 +312,7 @@ observed_error = norm(FNC.lsqrfact(A,b) - x) / norm(x);
 ```
 ``````
 
-### Section 3.4
+### 3.4 @section-leastsq-house
 (demo-house-qr-julia)=
 ``````{dropdown} @demo-house-qr
 

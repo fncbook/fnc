@@ -59,7 +59,7 @@ addpath /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
-### Section 4.1
+### 4.1 @section-nonlineqn-rootproblem
 
 (demo-rootproblem-bessel-matlab)=
 ``````{dropdown} @demo-rootproblem-bessel
@@ -154,7 +154,7 @@ title('Poorly conditioned root')
 The vertical displacements in this picture are exactly the same as before. But the potential _horizontal_ displacement of the root is much wider. In fact, if we perturb the function entirely upward by the amount drawn here, the root disappears!
 ``````
 
-### Section 4.2
+### 4.2 @section-nonlineqn-fixed-point
 (demo-fp-spiral-matlab)=
 ``````{dropdown} @demo-fp-spiral
 Let's convert the roots of a quadratic polynomial $f(x)$ to a fixed point problem.
@@ -291,7 +291,7 @@ err(9:12) ./ err(8:11)
 
 The methods for finding $\sigma$ agree well.
 ``````
-### Section 4.3
+### 4.3 @section-nonlineqn-newton
 (demo-newton-line-matlab)=
 ``````{dropdown} @demo-newton-line
 
@@ -434,7 +434,7 @@ legend('h(x)', 'inverse', 'y=x')
 ```
 ``````
 
-### Section 4.4
+### 4.4 @section-nonlineqn-secant
 
 (demo-secant-line-matlab)=
 ``````{dropdown} @demo-secant-line
@@ -600,7 +600,7 @@ ratios = logerr(2:end) ./ logerr(1:end-1)
 ```
 
 ``````
-### Section 4.5
+### 4.5 @section-nonlineqn-newtonsys
 (demo-newtonsys-converge-matlab)=
 ``````{dropdown} @demo-newtonsys-converge
 ::::{grid} 1 1 2 2
@@ -639,7 +639,7 @@ log10( abs(x(1, 1:end-1) - r(1)) )'
 This sequence looks to be nearly doubling at each iteration, which is a good sign of quadratic convergence.
 ``````
 
-### Section 4.6
+### 4.6 @section-nonlineqn-quasinewton
 (demo-quasi-levenberg-matlab)=
 ``````{dropdown} @demo-quasi-levenberg
 
@@ -674,7 +674,7 @@ log10( abs(x(1, 1:end-1) - r(1)) )'
 ```
 ``````
 
-### Section 4.7
+### 4.7 @section-nonlineqn-nlsq
 (demo-nlsq-converge-matlab)=
 ``````{dropdown} @demo-nlsq-converge
 We will observe the convergence of {numref}`Function {number} <function-levenberg>` for different levels of the minimum least-squares residual. We start with a function mapping from $\real^2$ into $\real^3$, and a point that will be near the optimum.

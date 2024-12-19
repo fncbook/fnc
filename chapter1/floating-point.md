@@ -165,24 +165,24 @@ Most numerical computing today is done in the **IEEE 754** standard. This define
 
 We often speak of double-precision floating-point numbers as having about 16 decimal digits. The 52-bit significand is paired with a sign bit and 11 binary bits to represent the exponent $n$ in {eq}`floatpoint`, for a total of 64 binary bits per floating-point number.
 
-(demo-float)=
-::::{prf:example} @demo-float-accuracy
+(demo-float-double)=
+::::{prf:example} Floating-point representation
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
-:::{embed} #demo-float-julia
+:::{embed} #demo-float-double-julia
 :::
 ```` 
 
 ````{tab-item} MATLAB
 :sync: matlab
-:::{embed} #demo-float-matlab
+:::{embed} #demo-float-double-matlab
 :::
 ```` 
 
 ````{tab-item} Python
 :sync: python
-:::{embed} #demo-float-python
+:::{embed} #demo-float-double-python
 :::
 ```` 
 `````

@@ -109,7 +109,7 @@ using FundamentalsNumericalComputation
 FNC.init_format()
 ```
 
-### Section 6.1
+### 6.1 @section-ivp-basics
 (demo-basics-first-julia)=
 ``````{dropdown} @demo-basics-first
 The `DifferentialEquations` package offers solvers for IVPs. Let's use it to define and solve an initial-value problem for $u'=\sin[(u+t)^2]$ over $t \in [0,4]$, such that $u(0)=-1$.
@@ -209,7 +209,7 @@ plot(t, u, l=:black, ribbon=(lower, upper),
 In this case the actual condition number is one, because the initial difference between solutions is the largest over all time. Hence the exponentially growing bound $e^{b-a}$ is a gross overestimate.
 ``````
 
-### Section 6.2
+### 6.2 @section-ivp-euler
 (demo-euler-converge-julia)=
 ``````{dropdown} @demo-euler-converge
 We consider the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
@@ -271,7 +271,7 @@ plot!(n, 0.05 * (n / n[1]) .^ (-1), l=:dash, label=L"O(n^{-1})")
 ```
 ``````
 
-### Section 6.3
+### 6.3 @section-ivp-systems
 (demo-systems-predator-julia)=
 ``````{dropdown} @demo-systems-predator
 We encode the predator–prey equations via a function.
@@ -398,7 +398,7 @@ plot(sol, idxs=[1, 2], label=[L"\theta_1" L"\theta_2"],
 The coupling makes the pendulums swap energy back and forth.
 ``````
 
-### Section 6.4
+### 6.4 @section-ivp-rk
 (demo-rk-converge-julia)=
 ``````{dropdown} @demo-rk-converge
 We solve the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
@@ -446,7 +446,7 @@ plot!(4n, 1e-10 * (n / n[end]) .^ (-4), l=:dash, label=L"O(n^{-4})")
 The fourth-order variant is more efficient in this problem over a wide range of accuracy.
 ``````
 
-### Section 6.5
+### 6.5 @section-ivp-adaptive
 (demo-adapt-basic-julia)=
 ``````{dropdown} @demo-adapt-basic
 Let's run adaptive RK on  $u'=e^{t-u\sin u}$.
@@ -506,7 +506,7 @@ annotate!(tf, 1e5, latexstring(@sprintf("t = %.6f ", tf)), :right)
 ```
 ``````
 
-### Section 6.6
+### 6.6 @section-ivp-multistep
 (demo-implicit-ab4-julia)=
 ``````{dropdown} @demo-implicit-ab4
 We study the convergence of AB4 using the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. As usual, `solve` is called to give an accurate reference solution.
@@ -587,7 +587,7 @@ plt
 So AB4, which is supposed to be _more_ accurate than AM2, actually needs something like 8 times as many steps to get a reasonable-looking answer!
 ``````
 
-### Section 6.7
+### 6.7 @section-ivp-implicit
 (demo-zs-LIAF-julia)=
 ``````{dropdown} @demo-zs-LIAF
 We'll measure the error at the time $t=1$.

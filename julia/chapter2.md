@@ -82,7 +82,7 @@ The second issue is that even when `A` has all integer entries, its LU factors m
 ``````
 
 ## Examples
-### Section 2.1
+### 2.1 @section-linsys-polyinterp
 (demo-interp-vander-julia)=
 ``````{dropdown} @demo-interp-vander
 :open: false
@@ -218,7 +218,7 @@ plot!(tt,yy,label="interpolant")
 ```
 ``````
 
-### Section 2.2
+### 2.2 @section-linsys-matrices
 (demo-matrices-julia)=
 ``````{dropdown} @demo-matrices
 :open: false
@@ -419,7 +419,7 @@ show(@. cos(π*(x+1)^3))    # broadcast an entire expression
 ```
 ``````
 
-### Section 2.3
+### 2.3 @section-linsys-linear-systems
 (demo-systems-backslash-julia)=
 ``````{dropdown} @demo-systems-backslash
 :open: false
@@ -545,7 +545,7 @@ err = x - x_exact
 
 It's not so good to get 4 digits of accuracy after starting with 16! The source of the error is not hard to track down. Solving for $x_1$ performs $(\alpha-\beta)+\beta$ in the first row. Since $|\alpha|$ is so much smaller than $|\beta|$, this a recipe for losing digits to subtractive cancellation.
 ``````
-### Section 2.4
+### 2.4 @section-linsys-lu
 (demo-lu-outertri-julia)= 
 ``````{dropdown} @demo-lu-outertri
 :open: false
@@ -693,7 +693,7 @@ b - A*x
 ```
 ``````
 
-### Section 2.5
+### 2.5 @section-linsys-efficiency
 
 (demo-flops-mvmult-julia)=
 ``````{dropdown} @demo-flops-mvmult
@@ -828,7 +828,7 @@ plot!(n, t[end ]* (n/n[end]).^3, l=:dash, label=L"O(n^3)")
 ```
 ``````
 
-### Section 2.6
+### 2.6 @section-linsys-pivoting
 (demo-pivoting-fail-julia)=
 ``````{dropdown} @demo-pivoting-fail
 Here is a previously encountered matrix that factors well.
@@ -1038,7 +1038,7 @@ A \ b
 ```
 ``````
 
-### Section 2.7
+### 2.7 @section-linsys-norms
 (demo-norms-vector-julia)=
 ``````{dropdown} @demo-norms-vector
 
@@ -1169,7 +1169,7 @@ plot!(twonorm*x[1, :], twonorm*x[2, :], subplot=2, l=:dash)
 ``````
 
 
-### Section 2.8
+### 2.8 @section-linsys-condition-number
 (demo-condition-bound-julia)=
 ``````{dropdown} @demo-condition-bound
 
@@ -1257,7 +1257,7 @@ b = A * x
 As anticipated, the solution has zero accurate digits in the 2-norm.
 ``````
 
-### Section 2.9
+### 2.9 @section-linsys-structure
 (demo-structure-banded-julia)=
 ``````{dropdown} @demo-structure-banded
 ```{index} ! Julia; fill, Julia; diagm, ! Julia; diag

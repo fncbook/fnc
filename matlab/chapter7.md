@@ -17,7 +17,7 @@ addpath /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
-### (7.1) @section-matrixanaly-insight
+### 7.1 @section-matrixanaly-insight
 
 (demo-insight-graph-matlab)=
 ``````{dropdown} @demo-insight-graph
@@ -90,7 +90,7 @@ A = double(A);
 ```
 ``````
 
-### (7.2) @section-matrixanaly-evd
+### 7.2 @section-matrixanaly-evd
 
 (demo-evd-eigen-matlab)=
 ``````{dropdown} @demo-evd-eigen
@@ -262,7 +262,7 @@ A
 ```
 ``````
 
-### (7.3) @section-matrixanaly-svd
+### 7.3 @section-matrixanaly-svd
 
 (demo-svd-props-matlab)=
 ``````{dropdown} @demo-svd-props
@@ -302,7 +302,7 @@ sigma_ratio = s(1) / s(end)
 ```
 ``````
 
-### (7.4) @section-matrixanaly-symm-eig
+### 7.4 @section-matrixanaly-symm-eig
 
 (demo-symm-eig-rayleigh-matlab)=
 ``````{dropdown} @demo-symm-eig-rayleigh
@@ -344,7 +344,7 @@ disp(table(delta, dif, variablenames=["perturbation size", "R(x) - lambda"]))
 ```
 ``````
 
-### (7.5) @section-matrixanaly-dimreduce
+### 7.5 @section-matrixanaly-dimreduce
 
 (demo-dimreduce-hello-matlab)=
 ``````{dropdown} @demo-dimreduce-hello

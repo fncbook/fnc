@@ -53,7 +53,7 @@ Python implementations
 exec(open("FNC_init.py").read())
 ```
 
-### Section 3.1
+### 3.1 @section-leastsq-fitting
 (demo-fitting-tempinterp-python)=
 ``````{dropdown} @demo-fitting-tempinterp
 Here are 5-year averages of the worldwide temperature anomaly as compared to the 1951–1980 average (source: NASA).
@@ -216,7 +216,7 @@ legend(); title("Sequence convergence");
 ```
 ``````
 
-### Section 3.2
+### 3.2 @section-leastsq-normaleqns
 
 (demo-normaleqns-instab-python)=
 ``````{dropdown} @demo-normaleqns-instab
@@ -258,7 +258,7 @@ print(f"accurate digits: {-log10(relative_err):.2f}")
 ```
 ``````
 
-### Section 3.3
+### 3.3 @section-leastsq-qr
 (demo-qr-qrfact-python)=
 ``````{dropdown} @demo-qr-qrfact
 
@@ -320,7 +320,7 @@ print(f"conditioning bound: {cond(A) * finfo(float).eps:.3e}")
 ```
 ``````
 
-### Section 3.4
+### 3.4 @section-leastsq-house
 (demo-house-qr-python)=
 ``````{dropdown} @demo-house-qr
 

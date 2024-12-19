@@ -17,7 +17,7 @@ using FundamentalsNumericalComputation
 FNC.init_format()
 ```
 
-### Section 7.1
+### 7.1 @section-matrixanaly-insight
 
 (demo-insight-graph-julia)=
 ``````{dropdown} @demo-insight-graph
@@ -109,7 +109,7 @@ Gray.(reverse(A, dims=1))
 ```
 ``````
 
-### Section 7.2
+### 7.2 @section-matrixanaly-evd
 
 (demo-evd-eigen-julia)=
 ``````{dropdown} @demo-evd-eigen
@@ -300,7 +300,7 @@ A
 ```
 ``````
 
-### Section 7.3
+### 7.3 @section-matrixanaly-svd
 
 (demo-svd-props-julia)=
 ``````{dropdown} @demo-svd-props
@@ -351,7 +351,7 @@ We verify the orthogonality of the singular vectors as follows:
 ```
 ``````
 
-### Section 7.4
+### 7.4 @section-matrixanaly-symm-eig
 
 (demo-symm-eig-rayleigh-julia)=
 ``````{dropdown} @demo-symm-eig-rayleigh
@@ -393,7 +393,7 @@ pretty_table([δ δ .^ 2 eval_diff], header=labels)
 ```
 ``````
 
-### Section 7.5
+### 7.5 @section-matrixanaly-dimreduce
 
 (demo-dimreduce-hello-julia)=
 ``````{dropdown} @demo-dimreduce-hello

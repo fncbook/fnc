@@ -31,9 +31,9 @@ Python implementations
 exec(open("FNC_init.py").read())
 ```
 
-## Section 1.1
+## 1.1 @section-intro-floating-point
 (demo-float-accuracy-python)=
-``````{dropdown} @demo-float
+``````{dropdown} @demo-float-accuracy
 Recall the grade-school approximation to the number $\pi$.
 
 ```{code-cell} ipython3
@@ -81,8 +81,8 @@ print(f"accurate digits: {-log10(rel_acc):.1f}")
 ```
 ``````
 
-(demo-float-python)=
-``````{dropdown} Floating-point representation
+(demo-float-double-python)=
+``````{dropdown} @demo-float-double
 :open: false
 
 Python has native `int` and `float` types.
@@ -175,7 +175,7 @@ This is now the "correct" result. But we have found a rather shocking breakdown 
 
 ``````
 
-### Section 1.2
+### 1.2 @section-intro-conditioning
 
 (demo-condition-roots-python)=
 ``````{dropdown} @demo-condition-roots
@@ -225,7 +225,7 @@ print(finfo(float).eps / ep)
 This matches the observation pretty well.
 ``````
 
-### Section 1.3
+### 1.3 @section-intro-algorithms
 
 (demo-algorithms-horner-python)=
 ``````{dropdown} @demo-algorithms-horner
@@ -254,7 +254,7 @@ The above is the value of $p(1.6)$, up to a rounding error.
 
 ``````
 
-### Section 1.4
+### 1.4 @section-intro-stability
 
 (demo-stability-quadbad-python)= 
 ``````{dropdown} @demo-stability-quadbad

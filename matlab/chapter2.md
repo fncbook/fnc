@@ -61,7 +61,7 @@ addpath /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
-### Section 2.1
+### 2.1 @section-linsys-polyinterp
 (demo-interp-vander-matlab)=
 ``````{dropdown} @demo-interp-vander
 We create two column vectors for data about the population of China. The first has the years of census data and the other has the population, in millions of people.
@@ -169,7 +169,7 @@ legend("data", "interpolant", "location", "northwest")
 ```
 ``````
 
-### Section 2.2
+### 2.2 @section-linsys-matrices
 (demo-matrices-matlab)=
 ``````{dropdown} @demo-matrices
 :::{index} ! MATLAB; size, ! MATLAB; length
@@ -356,7 +356,7 @@ cos(pi * x)
 ```
 ``````
 
-### Section 2.3
+### 2.3 @section-linsys-linear-systems
 (demo-systems-backslash-matlab)=
 ``````{dropdown} @demo-systems-backslash
 For a square matrix $\mathbf{A}$, the syntax `A \ b` is mathematically equivalent to $\mathbf{A}^{-1} \mathbf{b}$. 
@@ -482,7 +482,7 @@ err = x - x_exact
 
 It's not so good to get 4 digits of accuracy after starting with sixteen! The source of the error is not hard to track down. Solving for $x_1$ performs $(\alpha-\beta)+\beta$ in the first row. Since $|\alpha|$ is so much smaller than $|\beta|$, this a recipe for losing digits to subtractive cancellation.
 ``````
-### Section 2.4
+### 2.4 @section-linsys-lu
 (demo-lu-outertri-matlab)= 
 ``````{dropdown} @demo-lu-outertri
 :open: false
@@ -622,7 +622,7 @@ b - A * x
 ```
 ``````
 
-### Section 2.5
+### 2.5 @section-linsys-efficiency
 (demo-flops-mvmult-matlab)=
 ``````{dropdown} @demo-flops-mvmult
 Here is a straightforward implementation of matrix-vector multiplication.
@@ -767,7 +767,7 @@ legend('lu','O(n^3)','location','southeast')
 ```
 ``````
 
-### Section 2.6
+### 2.6 @section-linsys-pivoting
 (demo-pivoting-fail-matlab)=
 ``````{dropdown} @demo-pivoting-fail
 Here is a previously encountered matrix that factors well.
@@ -989,7 +989,7 @@ A \ b
 ```
 ``````
 
-### Section 2.7
+### 2.7 @section-linsys-norms
 (demo-norms-vector-matlab)=
 ``````{dropdown} @demo-norms-vector
 ```{index} ! MATLAB; norm
@@ -1095,7 +1095,7 @@ ylabel('x_2')
 ``````
 
 
-### Section 2.8
+### 2.8 @section-linsys-condition-number
 (demo-condition-bound-matlab)=
 ``````{dropdown} @demo-condition-bound
 
@@ -1176,7 +1176,7 @@ relative_error = norm(dx) / norm(x)
 As anticipated, the solution has zero accurate digits in the 2-norm.
 ``````
 
-### Section 2.9
+### 2.9 @section-linsys-structure
 (demo-structure-banded-matlab)=
 ``````{dropdown} @demo-structure-banded
 ```{index} ! MATLAB; fill, MATLAB; diagm, ! MATLAB; diag

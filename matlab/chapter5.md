@@ -74,7 +74,7 @@ addpath /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
-### Section 5.1
+### 5.1 @section-localapprox-interpolation
 
 (demo-interpolation-global-matlab)=
 ``````{dropdown} @demo-interpolation-global
@@ -179,7 +179,7 @@ xlabel('x'), ylabel('p(x)')
 From the figure we can see that the condition number for polynomial interpolation on these nodes is at least 500.
 ``````
 
-### Section 5.2
+### 5.2 @section-localapprox-pwlin
 
 (demo-pwlin-hat-matlab)=
 ``````{dropdown} @demo-pwlin-hat
@@ -268,7 +268,7 @@ legend()
 ```
 ``````
 
-### Section 5.3 
+### 5.3 @section-localapprox-splines 
 
 (demo-splines-splines-matlab)=
 ``````{dropdown} @demo-splines-splines
@@ -318,7 +318,7 @@ title("Convergence of spline interpolation")
 ```
 ``````
 
-### Section 5.4
+### 5.4 @section-localapprox-finitediffs
 
 (demo-finitediffs-fd1-matlab)=
 ``````{dropdown} @demo-finitediffs-fd1
@@ -415,7 +415,7 @@ fdweights(0:3, 1)
 
 ``````
 
-### Section 5.5
+### 5.5 @section-localapprox-fd-converge
 
 (demo-fdconverge-order12-matlab)=
 ``````{dropdown} @demo-fdconverge-order12
@@ -506,7 +506,7 @@ legend("FD1", "FD2", "FD4", "O(1/h)", "location", "northeast")
 Again the graph is made so that $h$ decreases from left to right. The errors are dominated at first by truncation error, which decreases most rapidly for the fourth-order formula. However, increasing roundoff error eventually equals and then dominates the truncation error as $h$ continues to decrease. As the order of accuracy increases, the crossover point moves to the left (greater efficiency) and down (greater accuracy).
 ``````
 
-### Section 5.6
+### 5.6 @section-localapprox-integration
 (demo-int-antideriv-matlab)=
 ``````{dropdown} @demo-int-antideriv
 The antiderivative of $e^x$ is, of course, itself. That makes evaluation of $\int_0^1 e^x\,dx$ by the Fundamental Theorem trivial.
@@ -660,7 +660,7 @@ disp(table(err2, err4, err6, variablenames=["order 2", "order 4", "order 6"]))
 If we consider the computational time to be dominated by evaluations of $f$, then we have obtained a result with about twice as many accurate digits as the best trapezoid result, at virtually no extra cost.
 ``````
 
-### Section 5.7
+### 5.7 @section-localapprox-adaptive
 
 (demo-adapt-motive-matlab)=
 ``````{dropdown} @demo-adapt-motive

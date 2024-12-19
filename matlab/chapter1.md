@@ -31,9 +31,9 @@ addpath /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
-## Section 1.1
+### 1.1 @section-intro-floating-point
 (demo-float-accuracy-matlab)=
-``````{dropdown} @demo-float
+``````{dropdown} @demo-float-accuracy
 :open: false
 ::::{grid} 1 1 2 2
 Recall the grade-school approximation to the number $\pi$.
@@ -77,8 +77,8 @@ accurate_digits = -log10(rel_accuracy)
 
 ``````
 
-(demo-float-matlab)=
-``````{dropdown} Floating-point representation
+(demo-float-double-matlab)=
+``````{dropdown} @demo-float-double
 :open: false
 In MATLAB, values are double-precision floats unless declared otherwise. 
 
@@ -149,7 +149,7 @@ However, the spacing between floats in $[1/2,1)$ is $\macheps/2$, so both $1-\ma
 This is now the expected result. But we have found a rather shocking breakdown of the associative law of addition!
 ``````
 
-### Section 1.2
+### 1.2 @section-intro-conditioning
 
 (demo-condition-roots-matlab)=
 ``````{dropdown} @demo-condition-roots
@@ -200,7 +200,7 @@ eps / ep
 This matches the observation pretty well.
 ``````
 
-### Section 1.3
+### 1.3 @section-intro-algorithms
 
 (demo-algorithms-horner-matlab)=
 ``````{dropdown} @demo-algorithms-horner
@@ -224,7 +224,7 @@ The comments at the start of {numref}`Function {number} <function-horner>` are d
 ```
 ``````
 
-### Section 1.4
+### 1.4 @section-intro-stability
 
 (demo-stability-quadbad-matlab)= 
 ``````{dropdown} @demo-stability-quadbad

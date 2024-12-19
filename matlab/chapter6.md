@@ -90,7 +90,7 @@ addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
 addpath /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
-### Section 6.1
+### 6.1 @section-ivp-basics
 
 (demo-basics-first-matlab)=
 ``````{dropdown} @demo-basics-first
@@ -186,7 +186,7 @@ title('Exponential convergence of solutions')
 In this case the actual condition number is one, because the initial difference between solutions is the largest over all time. Hence the exponentially growing bound $e^{b-a}$ is a gross overestimate.
 ``````
 
-### Section 6.2
+### 6.2 @section-ivp-euler
 (demo-euler-converge-matlab)=
 ``````{dropdown} @demo-euler-converge
 We consider the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. We need to define the function for the right-hand side of the ODE, the interval for the independent variable, and the initial value.
@@ -249,7 +249,7 @@ legend('error', 'O(n^{-1})', 'location', 'southwest')
 ```
 ``````
 
-### Section 6.3
+### 6.3 @section-ivp-systems
 (demo-systems-predator-matlab)=
 ``````{dropdown} @demo-systems-predator
 We encode the predator–prey equations via a function, defined here externally.
@@ -356,7 +356,7 @@ legend("\theta_1", "\theta_2")
 The coupling makes the pendulums swap energy back and forth.
 ``````
 
-### Section 6.4
+### 6.4 @section-ivp-rk
 
 (demo-rk-converge-matlab)=
 ``````{dropdown} @demo-rk-converge
@@ -407,7 +407,7 @@ legend("IE2", "RK4", "O(n^{-2})", "O(n^{-4})", "location", "southwest")
 The fourth-order variant is more efficient in this problem over a wide range of accuracy.
 ``````
 
-### Section 6.5
+### 6.5 @section-ivp-adaptive
 (demo-adapt-basic-matlab)=
 ``````{dropdown} @demo-adapt-basic
 Let's run adaptive RK on  $u'=e^{t-u\sin u}$.
@@ -472,7 +472,7 @@ xline(tf, "linestyle", "--")
 text(tf, 1e5, sprintf(" t = %.6f ", tf))
 ```
 ``````
-### Section 6.6
+### 6.6 @section-ivp-multistep
 (demo-implicit-ab4-matlab)=
 ``````{dropdown} @demo-implicit-ab4
 We study the convergence of AB4 using the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. As usual, a built-in solver is called to give an accurate reference solution.
@@ -563,7 +563,7 @@ legend("AM2, n=200", "AB4, n=1000", "AB4, n=1600")
 So AB4, which is supposed to be _more_ accurate than AM2, actually needs something like 8 times as many steps to get a reasonable-looking answer!
 ``````
 
-### Section 6.7
+### 6.7 @section-ivp-implicit
 (demo-zs-LIAF-matlab)=
 ``````{dropdown} @demo-zs-LIAF
 We'll measure the error at the time $t=1$.

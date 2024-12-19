@@ -39,9 +39,9 @@ end
 
 ## Examples
 
-### Section 1.1
+### 1.1 @section-intro-floating-point
 (demo-float-accuracy-julia)=
-``````{dropdown} @demo-float
+``````{dropdown} @demo-float-accuracy
 :open: false
 Recall the grade-school approximation to the number $\pi$.
 
@@ -95,8 +95,8 @@ This last value could be rounded down by using `floor`.
 
 ``````
 
-(demo-float-julia)=
-``````{dropdown} Floating-point representation
+(demo-float-double-julia)=
+``````{dropdown} @demo-float-double
 :open: false
 In Julia, `1` and `1.0` are different values, because they have different types:
 
@@ -233,7 +233,7 @@ However, the spacing between floats in $[1/2,1)$ is $\macheps/2$, so both $1-\ma
 This is now the expected result. But we have found a rather shocking breakdown of the associative law of addition!
 ``````
 
-### Section 1.2
+### 1.2 @section-intro-conditioning
 (demo-condition-roots-julia)=
 ``````{dropdown} @demo-condition-roots
 :open: false
@@ -280,7 +280,7 @@ eps() / ϵ
 This matches the observation pretty well.
 ``````
 
-### Section 1.3
+### 1.3 @section-intro-algorithms
 
 (demo-algorithms-horner-julia)=
 ``````{dropdown} @demo-algorithms-horner
@@ -354,7 +354,7 @@ While the namespace does lead to a little extra typing, a nice side effect of us
 The multi-line string at the start of {numref}`Function {number} <function-horner>` is documentation, which we can access using `?FNC.horner`.
 ``````
 
-### Section 1.4
+### 1.4 @section-intro-stability
 (demo-stability-quadbad-julia)= 
 ``````{dropdown} @demo-stability-quadbad
 :open: false
