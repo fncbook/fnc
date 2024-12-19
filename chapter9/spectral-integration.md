@@ -266,7 +266,7 @@ From {numref}`Theorem %s <theorem-orthogonal-roots>` we know that the roots of $
 Both Clenshaw–Curtis and Gauss–Legendre integration are spectrally accurate. The Clenshaw–Curtis method on $n+1$ points has degree $n$, whereas the Gauss–Legendre method with $n$ points has degree ${2n-1}$. For this reason, it is possible for Gauss–Legendre to converge at a rate that is "twice as fast," i.e., with roughly the square of the error of Clenshaw–Curtis. But the full story is not simple.
 
 (demo-integration-compare)=
-::::{prf:example}
+::::{prf:example} Comparing spectral integration methods
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia

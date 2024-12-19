@@ -62,7 +62,7 @@ is of degree at most $n$ and satisfies the cardinality conditions {eq}`lagrangec
 ::::
 
 (demo-polynomial-lagrange)=
-::::{prf:example}
+::::{prf:example} Lagrange cardinal polynomials
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -83,9 +83,6 @@ is of degree at most $n$ and satisfies the cardinality conditions {eq}`lagrangec
 ````
 `````
 ::::
-
-
-
 
 Because they are a cardinal basis, the Lagrange polynomials lead to a simple expression for the polynomial interpolating the $(t_k,y_k)$ points.
 
@@ -180,8 +177,8 @@ which is a restatement of {eq}`interperror`.
 Usually $f^{(n+1)}$ and the function $\xi(x)$ are unknown. The importance of the formula {eq}`interperror` is how it helps to express the error as a function of $x$, and its dependence on the nodes $t_0,\dots,t_n$. We will exploit this knowledge later.
 
 (demo-polynomial-error)=
-::::{prf:example}
-`````{tab-set}
+::::{prf:example} Polynomial interpolation error
+`````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-polynomial-error-julia
@@ -201,9 +198,6 @@ Usually $f^{(n+1)}$ and the function $\xi(x)$ are unknown. The importance of the
 ````
 `````
 ::::
-
-
-
 
 For equispaced nodes, {numref}`Theorem %s <theorem-polyinterp>` has an immediate consequence. 
 

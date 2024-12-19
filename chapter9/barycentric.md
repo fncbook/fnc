@@ -133,7 +133,7 @@ In {numref}`Function {number} <function-polyinterp>` we give an implementation o
 Computing all $n+1$ weights in {numref}`Function {number} <function-polyinterp>` takes $O(n^2)$ operations. Fortunately, the weights depend only on the nodes, not the data, and once they are known, computing $p(x)$ at a particular value of $x$ takes just $O(n)$ operations.
 
 (demo-barycentric-example)=
-::::{prf:example}
+::::{prf:example} Barycentric interpolation
 We show the barycentric formula in action for values from the function $\sin(e^{2x})$ at equally spaced nodes in $[0,1]$ with $n=3$ and $n=6$.
 
 `````{tab-set}

@@ -11,7 +11,7 @@ numbering:
 With  barycentric interpolation available in the form of {numref}`Function {number} <function-polyinterp>`, we can explore polynomial interpolation using a numerically stable algorithm. Any remaining sensitivity to error is due to the conditioning of the interpolation process itself.
 
 (demo-stability-equispaced)=
-::::{prf:example}
+::::{prf:example} Ill-conditioning in polynomial interpolation
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -33,10 +33,6 @@ With  barycentric interpolation available in the form of {numref}`Function {numb
 `````
 ::::
 
-
-
-
-
 ## Runge phenomenon
 
 The disappointing loss of convergence in {numref}`Demo {number} <demo-stability-equispaced>` is a sign of ill conditioning due to the use of equally spaced nodes. We will examine this effect using the error formula {eq}`interperror` as a guide:
@@ -48,7 +44,7 @@ $$
 While the dependence on $f$ is messy here, the error indicator $\Phi(x)$ can be studied as a function of the nodes only.
 
 (demo-stability-errfun)=
-::::{prf:example}
+::::{prf:example} Error indicator function for equispaced nodes
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -70,14 +66,10 @@ While the dependence on $f$ is messy here, the error indicator $\Phi(x)$ can be 
 `````
 ::::
 
-
-
-
-
 Two observations from the result of {numref}`Demo {number} <demo-stability-errfun>` are important. First, $|\Phi|$ decreases exponentially at each fixed location in the interval (note that the spacing between curves is constant for constant increments of $n$). Second, $|\Phi|$ is larger at the ends of the interval than in the middle, by an exponentially growing factor. This gap is what can ruin the convergence of polynomial interpolation.
 
 (demo-stability-runge)=
-::::{prf:example}
+::::{prf:example} Runge phenomenon
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -98,10 +90,6 @@ Two observations from the result of {numref}`Demo {number} <demo-stability-errfu
 ````
 `````
 ::::
-
-
-
-
 
 ```{index} ! Runge phenomenon
 ```
@@ -125,7 +113,7 @@ The observations above hint that we might find success by having more nodes near
 These are the projections onto the $x$-axis of $n$ equally spaced points on a unit circle. They are densely clustered near the ends of $[-1,1]$, and this feature turns out to overcome the Runge phenomenon.
 
 (demo-stability-errcheb)=
-::::{prf:example}
+::::{prf:example} Error indicator function for Chebyshev nodes
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -148,10 +136,8 @@ These are the projections onto the $x$-axis of $n$ equally spaced points on a un
 ::::
 
 
-
-
 (demo-stability-rungefix)=
-::::{prf:example}
+::::{prf:example} Stability of interpolation with Chebyshev nodes
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -172,10 +158,6 @@ These are the projections onto the $x$-axis of $n$ equally spaced points on a un
 ````
 `````
 ::::
-
-
-
-
 
 As a bonus, for Chebyshev nodes the barycentric weights are simple:
 
@@ -213,7 +195,7 @@ The condition "$f$ is analytic" means that the Taylor series of $f$ converges to
 In other contexts we refer to {eq}`spectral` as linear convergence, but here it is usual to say that the rate is exponential or that one has **spectral convergence**. It achieves constant reduction factors in the error by constant increments of $n$. By contrast, algebraic convergence in the form $O(n^{-p})$ for some $p>0$ requires *multiplying* $n$ by a constant factor in order to reduce error by a constant factor. Graphically, spectral error is a straight line on a log-linear scale, while algebraic convergence is a straight line on a log-log scale.
 
 (demo-stability-spectral)=
-::::{prf:example}
+::::{prf:example} Spectral convergence
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -234,10 +216,6 @@ In other contexts we refer to {eq}`spectral` as linear convergence, but here it 
 ````
 `````
 ::::
-
-
-
-
 
 ## Exercises
 

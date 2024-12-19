@@ -8,7 +8,7 @@ numbering:
 Interpolation is not the only way to use polynomials for global approximation of functions. In {numref}`section-leastsq-fitting` we saw how to find least-squares polynomial fits to data by solving linear least-squares matrix problems. This idea can be extended to fitting functions.
 
 (demo-orthogonal-approx)=
-::::{prf:example}
+::::{prf:example} Continuous least-squares fitting
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -29,9 +29,6 @@ Interpolation is not the only way to use polynomials for global approximation of
 ````
 `````
 ::::
-
-
-
 
 We can extend least-squares fitting from data to functions by extending several familiar finite-dimensional definitions. The continuous extension of a sum is an integral, which leads to the following.
 

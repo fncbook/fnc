@@ -77,7 +77,7 @@ By the chain rule,
 The exponential terms introduced by the chain rule grow double exponentially, but the more rapid decay of $f$ in the new variable more than makes up for this.
 
 (demo-improper-decay)=
-::::{prf:example}
+::::{prf:example} Decay by transformation
 Consider again $f(x)=1/(1+x^2)$ from {numref}`Example %s <example-improper-slowdecay>`, with $x(t)$ given by {eq}`DEquadtrans1`. As $t\to\infty$, 
 
 $$
@@ -120,9 +120,6 @@ The total integrand in {eq}`DEquadchain1` therefore has double exponential decay
 `````
 ::::
 
-
-
-
 {numref}`Function {number} <function-intinf>` implements double exponential integration by applying the adaptive integrator {numref}`Function {number} <function-intadapt>` to {eq}`DEquadchain1`. It truncates the interval to $-M\le t \le M$ by increasing $M$ until the integrand is too small to matter relative to the error tolerance.
 
 (function-intinf)=
@@ -149,7 +146,7 @@ The total integrand in {eq}`DEquadchain1` therefore has double exponential decay
 ``````
 
 (demo-improper-intinf)=
-::::{prf:example}
+::::{prf:example} Infinite interval
 We compare direct truncation in $x$ to the double exponential method of {numref}`Function {number} <function-intinf>` for $f(x)=1/(1+x^2)$.
 
 
@@ -226,7 +223,7 @@ Now the growth of $f$ and $\cosh t$ together are counteracted by the double expo
 ``````
 
 (demo-improper-intsing)=
-::::{prf:example}
+::::{prf:example} Singularity at an endpoint
 Let's use {numref}`Function {number} <function-intsing>` to compute
 
 $$

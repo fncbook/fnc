@@ -100,7 +100,7 @@ The convergence of a trigonometric interpolant is spectral, i.e., exponential as
 ``````
 
 (demo-trig-interp)=
-::::{prf:example}
+::::{prf:example} Trigonometric interpolation
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -181,7 +181,7 @@ $$
 $$
 
 (demo-trig-fft)=
-::::{prf:example}
+::::{prf:example} FFT 
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
