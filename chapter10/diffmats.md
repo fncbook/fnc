@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 10.3.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-bvp-diffmats)=
 # Differentiation matrices
 
@@ -131,112 +115,52 @@ f(x_0) \\[1mm] f(x_1) \\[1mm] f(x_2) \\[1mm] \vdots \\[1mm] f(x_{n-1}) \\[1mm] f
 We have multiple choices again for $\mathbf{D}_{xx}$, and it need not be the square of any particular $\mathbf{D}_x$. As pointed out in {numref}`section-localapprox-finitediffs`, squaring the first derivative is a valid approach but would place entries in $\mathbf{D}_{xx}$ farther from the diagonal than is necessary.
 
 (function-diffmat2)=
-````{prf:function} diffmat2
-**Second-order accurate differentiation matrices**
-```{code-block} julia
-:lineno-start: 1
-"""
-    diffmat2(n,xspan)
+``````{prf:algorithm} diffmat2
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-diffmat2-julia
+:::
+```` 
 
-Compute 2nd-order-accurate differentiation matrices on `n`+1 points
-in the interval `xspan`. Returns a vector of nodes and the matrices
-for the first and second derivatives.
-"""
-function diffmat2(n,xspan)
-    a,b = xspan
-    h = (b-a)/n
-    x = [ a + i*h for i in 0:n ]   # nodes
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-diffmat2-matlab
+:::
+```` 
 
-    # Define most of Dₓ by its diagonals.
-    dp = fill(0.5/h,n)        # superdiagonal
-    dm = fill(-0.5/h,n)       # subdiagonal
-    Dₓ = diagm(-1=>dm,1=>dp)
-
-    # Fix first and last rows.
-    Dₓ[1,1:3] = [-1.5,2,-0.5]/h
-    Dₓ[n+1,n-1:n+1] = [0.5,-2,1.5]/h
-
-    # Define most of Dₓₓ by its diagonals.
-    d0 =  fill(-2/h^2,n+1)    # main diagonal
-    dp =  ones(n)/h^2         # super- and subdiagonal
-    Dₓₓ = diagm(-1=>dp,0=>d0,1=>dp)
-
-    # Fix first and last rows.
-    Dₓₓ[1,1:4] = [2,-5,4,-1]/h^2
-    Dₓₓ[n+1,n-2:n+1] = [-1,4,-5,2]/h^2
-
-    return x,Dₓ,Dₓₓ
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-diffmat2-python
+:::
 ````
+`````
+``````
 
 Together the matrices {eq}`diffmat12b` and {eq}`diffmat22` give second-order approximations of the first and second derivatives at all nodes. These matrices, as well as the nodes $x_0,\ldots,x_n$, are returned by {numref}`Function {number} <function-diffmat2>`.
 
 (demo-diffmats-2nd)=
-```{prf:example}
-```
+::::{prf:example} Differentiation matrices
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-diffmats-2nd-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-diffmats-2nd-matlab
+:::
+````
 
-
-
-
-We test first-order and second-order differentiation matrices for the function $x + \exp(\sin 4x)$ over $[-1,1]$. 
-
-```{code-cell}
-f = x -> x + exp(sin(4*x));
-```
-
-For reference, here are the exact first and second derivatives.
-
-```{code-cell}
-dfdx = x -> 1 + 4*exp(sin(4*x)) * cos(4*x);
-d2fdx2 = x -> 4*exp(sin(4*x)) * (4*cos(4*x)^2-4*sin(4*x));
-```
-
-We discretize on equally spaced nodes and evaluate $f$ at the nodes. 
-
-```{code-cell}
-t,Dₓ,Dₓₓ = FNC.diffmat2(18,[-1,1])
-y = f.(t);
-```
-
-Then the first two derivatives of $f$ each require one matrix-vector multiplication.
-
-```{code-cell}
-yₓ = Dₓ*y;
-yₓₓ = Dₓₓ*y;
-```
-
-The results show poor accuracy for this small value of $n$. 
-
-```{code-cell}
-plot(dfdx,-1,1,layout=2,xaxis=(L"x"),yaxis=(L"f'(x)"))
-scatter!(t, yₓ,subplot=1)
-plot!(d2fdx2,-1,1,subplot=2,xaxis=(L"x"),yaxis=(L"f''(x)"))
-scatter!(t, yₓₓ,subplot=2)
-```
-
-An convergence experiment confirms the order of accuracy. Because we expect an algebraic convergence rate, we use a log-log plot of the errors.
-
-```{code-cell}
-:tags: [hide-input]
-
-n = @. round(Int,2^(4:.5:11) )
-err1 = zeros(size(n))
-err2 = zeros(size(n))
-for (k,n) in enumerate(n)
-    t,Dₓ,Dₓₓ = FNC.diffmat2(n,[-1,1])
-    y = f.(t)
-    err1[k] = norm( dfdx.(t) - Dₓ*y, Inf )
-    err2[k] = norm( d2fdx2.(t) - Dₓₓ*y, Inf )
-end
-plot(n,[err1 err2],m=:o,label=[L"f'" L"f''"])
-plot!(n,10*10*n.^(-2),l=(:dash,:gray),label="2nd order",
-    xaxis=(:log10,"n"), yaxis=(:log10,"max error"),
-    title="Convergence of finite differences")
-```
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-diffmats-2nd-python
+:::
+````
+`````
+::::
 
 
 ## Spectral differentiation
@@ -278,90 +202,52 @@ where $c_0=c_n=2$ and $c_i=1$ for $i=1,\ldots,n-1$. Note that this matrix is den
 {numref}`Function {number} <function-diffcheb>` returns these two matrices. The function uses a change of variable to transplant the standard $[-1,1]$ for Chebyshev nodes to any $[a,b]$. It also takes a different approach to computing the diagonal elements of $\mathbf{D}_x$ than the formulas in {eq}`chebdiffmat` (see {ref}`Exercise 5 <problem-diffmats-negsumtrick>`).
 
 (function-diffcheb)=
-````{prf:function} diffcheb
-**Chebyshev differentiation matrices**
-```{code-block} julia
-:lineno-start: 1
-"""
-    diffcheb(n,xspan)
+``````{prf:algorithm} diffcheb
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-diffcheb-julia
+:::
+```` 
 
-Compute Chebyshev differentiation matrices on `n`+1 points in the
-interval `xspan`. Returns a vector of nodes and the matrices for the
-first and second derivatives.
-"""
-function diffcheb(n,xspan)
-    x = [ -cos( k*π/n ) for k in 0:n ]    # nodes in [-1,1]
-    
-    # Off-diagonal entries.
-    c = [2; ones(n-1); 2];    # endpoint factors
-    dij = (i,j) -> (-1)^(i+j)*c[i+1]/(c[j+1]*(x[i+1]-x[j+1]))
-    Dₓ = [ dij(i,j) for i in 0:n, j in 0:n ]
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-diffcheb-matlab
+:::
+```` 
 
-    # Diagonal entries.
-    Dₓ[isinf.(Dₓ)] .= 0         # fix divisions by zero on diagonal
-    s = sum(Dₓ,dims=2)
-    Dₓ -= diagm(s[:,1])         # "negative sum trick"
-
-    # Transplant to [a,b].
-    a,b = xspan
-    x = @. a + (b-a)*(x+1)/2
-    Dₓ = 2*Dₓ/(b-a)             # chain rule
-
-    # Second derivative.
-    Dₓₓ = Dₓ^2
-    return x,Dₓ,Dₓₓ
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-diffcheb-python
+:::
 ````
+`````
+``````
 
 (demo-diffmats-cheb)=
+::::{prf:example} Chebyshev differentiation matrices
+`````{tab-set}
+````{tab-item} Julia
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-diffmats-cheb-julia
+:::
+````
 
-```{prf:example}
-```
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-diffmats-cheb-matlab
+:::
+````
 
-
-
-
-
-Here is a $4\times 4$ Chebyshev differentiation matrix.
-
-```{code-cell}
-t,Dₓ = FNC.diffcheb(3,[-1,1])
-Dₓ
-```
-
-We again test the convergence rate.  
-
-```{code-cell}
-f = x -> x + exp(sin(4*x));
-dfdx = x -> 1 + 4*exp(sin(4*x))*cos(4*x);
-d2fdx2 = x -> 4*exp(sin(4*x))*(4*cos(4*x)^2-4*sin(4*x));
-```
-
-```{code-cell}
-n = 5:5:70
-err1 = zeros(size(n))
-err2 = zeros(size(n))
-for (k,n) in enumerate(n)
-    t,Dₓ,Dₓₓ = FNC.diffcheb(n,[-1,1])
-    y = f.(t)
-    err1[k] = norm( dfdx.(t) - Dₓ*y, Inf )
-    err2[k] = norm( d2fdx2.(t) - Dₓₓ*y, Inf )
-end
-```
-
-Since we expect a spectral convergence rate, we use a semi-log plot for the error.
-
-```{code-cell}
-:tags: [hide-input]
-plot(n,[err1 err2],m=:o,label=[L"f'" L"f''"],
-    xaxis=(L"n"), yaxis=(:log10,"max error"),
-    title="Convergence of Chebyshev derivatives")
-```
-
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-diffmats-cheb-python
+:::
+````
+`````
+::::
 
 According to {numref}`Theorem %s <theorem-spectral>`, the convergence of polynomial interpolation to $f$ using Chebyshev nodes is spectral if $f$ is analytic (at least having infinitely many derivatives) on the interval. The derivatives of $f$ are also approximated with spectral accuracy.
 

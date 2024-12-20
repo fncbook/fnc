@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 10.5.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-bvp-nonlinear)=
 # Nonlinearity and boundary conditions
 
@@ -120,165 +104,55 @@ Suppose $n=3$ for an equispaced grid, so that $h=\frac{1}{2}$, $x_0=0$, $x_1=\fr
 
 Our implementation using second-order finite differences is {numref}`Function {number} <function-bvp>`. It's surprisingly short, considering how general it is, because we have laid a lot of groundwork already.
 
-(function-bvp)=
-````{prf:function} bvp
-**Solve a nonlinear boundary-value problem**
-```{code-block} julia
-:lineno-start: 1
-"""
-    bvp(ϕ,xspan,lval,lder,rval,rder,init)
-
-Finite differences to solve a two-point boundary value problem with
-ODE u'' = `ϕ`(x,u,u') for x in `xspan`, left boundary condition 
-`g₁`(u,u')=0, and right boundary condition `g₂`(u,u')=0. The value 
-`init` is an initial estimate for the values of the solution u at
-equally spaced values of x, which also sets the number of nodes.
-    
-Returns vectors for the nodes and the values of u.
-"""
-function bvp(ϕ,xspan,g₁,g₂,init)
-    n = length(init) - 1
-    x,Dₓ,Dₓₓ = diffmat2(n,xspan)
-    h = x[2]-x[1]
-
-    function residual(u)
-        # Residual of the ODE at the nodes. 
-        du_dx = Dₓ*u                   # discrete u'
-        d2u_dx2 = Dₓₓ*u                # discrete u''
-        f = d2u_dx2 - ϕ.(x,u,du_dx)
-
-        # Replace first and last values by boundary conditions.
-        f[1] = g₁(u[1],du_dx[1])/h
-        f[n+1] = g₂(u[n+1],du_dx[n+1])/h
-        return f
-    end
-    
-    u = levenberg(residual,init)
-    return x,u[end]
-end
-```
-````
-
-:::{admonition} About the code
-:class: dropdown
-The nested function `residual` uses differentiation matrices computed externally to it, rather than computing them anew on each invocation. As in {numref}`Function {number} <function-bvplin>`, there is no need to form the row-deletion matrix $\mathbf{E}$ explicitly. In lines 23--24, we divide the values of $g_1$ and $g_2$ by a factor of $h$. This helps scale the residual components more uniformly and improves the robustness of convergence a bit.
-:::
-
 In order to solve a particular problem, we must write a function that computes $\phi$ for vector-valued inputs $\mathbf{x}$, $\mathbf{u}$, and $\mathbf{u}'$, and functions for the boundary conditions. We also have to supply `init`, which is an estimate of the solution used to initialize the quasi-Newton iteration. Since this argument is a vector of length $n+1$, it sets the value of $n$ in the discretization.
 
 (demo-nonlinear-pendulum)=
-```{prf:example}
-```
-
-
-
-
-
-Suppose a damped pendulum satisfies the nonlinear equation $\theta'' + 0.05\theta'+\sin \theta =0$. We want to start the pendulum at $\theta=2.5$ and give it the right initial velocity so that it reaches $\theta=-2$ at exactly $t=5$. This is a boundary-value problem with Dirichlet conditions $\theta(0)=2.5$ and $\theta(5)=-2$.
-
-The first step is to define the function $\phi$ that equals $\theta''$.
-
-```{code-cell}
-ϕ = (t,θ,ω) -> -0.05*ω - sin(θ);
-```
-
-Next, we define the boundary conditions.
-
-```{code-cell}
-g₁(u,du) = u - 2.5
-g₂(u,du) = u + 2;
-```
-
-```{index} ! Julia; collect
-```
-
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-The last ingredient is an initial estimate of the solution. Here we choose $n=100$ and a linear function between the endpoint values. 
-
-
+::::{prf:example} BVP for a nonlinear pendulum
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-nonlinear-pendulum-julia
 :::
+````
 
-:::{card}
-
-The `collect` function turns a range object into a true vector.
-
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-nonlinear-pendulum-matlab
 :::
+````
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-nonlinear-pendulum-python
+:::
+````
+`````
 ::::
 
-```{code-cell}
-init = collect( range(2.5,-2,length=101) );
-```
-
-We find a solution with negative initial slope, i.e., the pendulum is initially pushed back toward equilibrium.
-
-```{code-cell}
-t,θ = FNC.bvp(ϕ,[0,5],g₁,g₂,init)
-plot(t,θ,xaxis=(L"t"),yaxis=(L"\theta(t)"),
-     title="Pendulum over [0,5]")
-```
-
-If we extend the time interval longer for the same boundary values, then the initial slope must adjust.
-
-```{code-cell}
-t,θ = FNC.bvp(ϕ,[0,8],g₁,g₂,init)
-plot(t,θ,xaxis=(L"t"),yaxis=(L"\theta(t)"),
-     title="Pendulum over [0,8]")
-```
-
-This time, the pendulum is initially pushed toward the unstable equilibrium in the upright vertical position before gravity pulls it back down.
-
-
-
-
 The initial solution estimate can strongly influence how quickly a solution is found, or whether the quasi-Newton iteration converges at all. In situations where multiple solutions exist, the initialization can determine which is found. 
- 
+
 (demo-nonlinear-mems)=
-```{prf:example}
-```
+::::{prf:example} BVP for a nonlinear MEMS device
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-nonlinear-mems-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-nonlinear-mems-matlab
+:::
+````
 
-
-
-
-We look for a solution to the parameterized membrane deflection problem from {numref}`Example {number} <example-tpbvp-mems>`,
-
-$$
-w''+ \frac{1}{r}w'= \frac{\lambda}{w^2},\quad w'(0)=0,\; w(1)=1.
-$$ 
-
-Here is the problem definition. We use a truncated domain to avoid division by zero at $r=0$.
-
-```{code-cell}
-domain = [eps(),1]
-λ = 0.5
-ϕ = (r,w,dwdr) -> λ/w^2 - dwdr/r
-g₁(w,dw) = dw
-g₂(w,dw) = w-1;
-```
-
-First we try a constant function as the initialization.
-
-```{code-cell}
-init = ones(301)
-r,w₁ = FNC.bvp(ϕ,domain,g₁,g₂,init)
-
-plot(r,w₁,xaxis=(L"r"),yaxis=(L"w(r)"),
-     title="Solution of the membrane problem")
-```
-
-It's not necessary that the initialization satisfy the boundary conditions. In fact, by choosing a different constant function as the initial guess, we arrive at another valid solution.
-
-```{code-cell}
-init = 0.5*ones(301)
-r,w₂ = FNC.bvp(ϕ,domain,g₁,g₂,init)
-plot!(r,w₂,title="Two solutions of the membrane problem")
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-nonlinear-mems-python
+:::
+````
+`````
+::::
 
 ## Parameter continuation
 
@@ -292,59 +166,27 @@ Sometimes the best way to get a useful initialization is to use the solution of 
 ```
 
 (demo-nonlinear-allencahn)=
-```{prf:example}
-```
+::::{prf:example} Allen–Cahn equation
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-nonlinear-allencahn-julia
+:::
+```` 
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-nonlinear-allencahn-matlab
+:::
+```` 
 
-
-
-
-We solve the stationary **Allen–Cahn equation**,
-  
-$$
-\epsilon u'' = u^3-u, \quad 0 \le x \le 1, \quad u'(0)=0, \; u(1)=1.
-$$
-
-```{code-cell}
-ϕ = (x,u,dudx) -> (u^3 - u) / ϵ;
-g₁(u,du) = du
-g₂(u,du) = u-1;
-```
-
-Finding a solution is easy at larger values of $\epsilon$. 
-
-```{code-cell}
-ϵ = 0.02
-init = collect( range(-1,1,length=141) )
-x,u₁ = FNC.bvp(ϕ,[0,1],g₁,g₂,init)
-
-plot(x,u₁,label=L"\epsilon = 0.02",leg=:bottomright,
-    xaxis=(L"x"),yaxis=(L"u(x)"),title="Allen–Cahn solution")
-```
-
-However, finding a good initialization is not trivial for smaller values of $\epsilon$. Note below that the iteration stops without converging to a solution.
-
-```{code-cell}
-ϵ = 0.002;
-x,z = FNC.bvp(ϕ,[0,1],g₁,g₂,init);
-```
-
-The iteration succeeds if we use the first solution instead as the initialization here.
-
-```{code-cell}
-x,u₂ = FNC.bvp(ϕ,[0,1],g₁,g₂,u₁)
-plot!(x,u₂,label=L"\epsilon = 0.002")
-```
-
-In this case we can continue further.
-
-```{code-cell}
-ϵ = 0.0005
-x,u₃ = FNC.bvp(ϕ,[0,1],g₁,g₂,u₂)
-plot!(x,u₃,label=L"\epsilon = 0.0005")
-```
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-nonlinear-allencahn-python
+:::
+```` 
+`````
+::::
 
 
 ## Exercises
@@ -415,6 +257,4 @@ plot!(x,u₃,label=L"\epsilon = 0.0005")
 
     **(c)** Starting with the last solution of part (b), reverse the continuation steps to return to $\epsilon=0.003$. Plot the result, which is an entirely different solution from part (a).
 
-8. ⌨  {numref}`Demo %s <demo-nonlinear-mems>` finds two solutions at $\lambda=0.5$. Continue both solutions by taking 50 steps from $\lambda=0.5$ to $\lambda=0.79$. Make a plot with $\lambda$ on the horizontal axis and $w(0)$ on the vertical axis, with one point to represent each solution found. You should get two paths that converge as $\lambda$ approaches $0.79$ from below. 
-
-
+8. ⌨  {numref}`Demo %s <demo-nonlinear-mems>` finds two solutions at $\lambda=0.5$. Continue both solutions by taking 50 steps from $\lambda=0.5$ to $\lambda=0.79$. Make a plot with $\lambda$ on the horizontal axis and $w(0)$ on the vertical axis, with one point to represent each solution found. You should get two paths that converge as $\lambda$ approaches $0.79$ from below.

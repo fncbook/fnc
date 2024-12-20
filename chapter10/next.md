@@ -1,3 +1,4 @@
+
 (section-bvp-next)=
 # Next steps
 
@@ -6,5 +7,3 @@ A text a bit above the level of this text is by Ascher and Petzold {cite}`ascher
 For spectral methods, an introduction to BVPs may be found in Trefethen's book {cite}`trefethenSpectralMethods2000`, and a more theoretical take is in Quarteroni *et al.* {cite}`quarteroniNumericalMathematics2007`.
 
 In this chapter, a number of linear variable-coefficient BVPs for so-called special functions were mentioned: Bessel's equation, Laguerre's equation, etc.  These ODEs and their solutions arise in the solution of partial differential equations of mathematical physics, and were extensively characterized before prior to wide use of computers {cite}`abramowitzHandbookMathematical2013`.  These special functions have come to be used for many things and are now available at https://dlmf.nist.gov {cite}`olverNISTHandbook2010`.
-
-

@@ -157,15 +157,15 @@ project:
         - file: chapter9/spectral-integration.md
         - file: chapter9/improper.md
         - file: chapter9/next.md
-    #     - file: chapter10/overview.md
-    #       children:
-    #         - file: chapter10/tpbvp.md
-    #         - file: chapter10/shooting.md
-    #         - file: chapter10/diffmats.md
-    #         - file: chapter10/linear.md
-    #         - file: chapter10/nonlinear.md
-    #         - file: chapter10/galerkin.md
-    #         - file: chapter10/next.md
+    - file: chapter10/overview.md
+      children:
+        - file: chapter10/tpbvp.md
+        - file: chapter10/shooting.md
+        - file: chapter10/diffmats.md
+        - file: chapter10/linear.md
+        - file: chapter10/nonlinear.md
+        - file: chapter10/galerkin.md
+        - file: chapter10/next.md
     #     - file: chapter11/overview.md
     #       children:
     #         - file: chapter11/blackscholes.md
@@ -204,6 +204,7 @@ project:
           - file: julia/chapter7.md
           - file: julia/chapter8.md
           - file: julia/chapter9.md
+          - file: julia/chapter10.md
       - title: MATLAB codes
         children:
           - file: matlab/chapter1.md

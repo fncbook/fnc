@@ -1,8 +1,16 @@
-dir = "/Users/driscoll/Documents/GitHub/fnc/chapter9"
-grabbed = []
+dir = "/Users/driscoll/Documents/GitHub/fnc/chapter10"
+files = [
+# "tpbvp.md",
+# "shooting.md",
+# "diffmats.md",
+# "linear.md",
+# "nonlinear.md",
+"galerkin.md",
+];
+# grabbed = []
 
-for file in filter(endswith(".md"), readdir(dir, join=true))
-    lines = readlines(file)
+for file in files
+    lines = readlines(joinpath(dir, file))
     n = findfirst(startswith("###DEMO"), lines)
     while !isnothing(n)
         stop = findnext(startswith("###END"), lines, n + 1)

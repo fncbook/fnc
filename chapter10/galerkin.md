@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 10.6.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-bvp-galerkin)=
 # The Galerkin method
 
@@ -310,93 +294,56 @@ Each $I_k$ contributes to four elements of each matrix and two of the vector $\m
 {numref}`Function {number} <function-fem>` implements the piecewise linear FEM on the linear problem as posed in {eq}`weakbvp`, using an equispaced grid. The code closely follows the description above.
 
 (function-fem)=
-````{prf:function} fem
-**Piecewise linear finite elements for a linear BVP**
-```{code-block} julia
-:lineno-start: 1
-"""
-    fem(c,s,f,a,b,n)
+``````{prf:algorithm} fem
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-fem-julia
+:::
+```` 
 
-Use a piecewise linear finite element method to solve a two-point
-boundary value problem. The ODE is (`c`(x)u')' + `s`(x)u = `f`(x) on
-the interval [`a`,`b`], and the boundary values are zero. The
-discretization uses `n` equal subintervals.
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-fem-matlab
+:::
+```` 
 
-Return vectors for the nodes and the values of u.
-"""
-function fem(c,s,f,a,b,n)
-    # Define the grid.
-    h = (b-a)/n
-    x = @. a + h*(0:n)
-
-    # Templates for the subinterval matrix and vector contributions.
-    Ke = [1 -1; -1 1]
-    Me = (1/6)*[2 1; 1 2]
-    fe = (1/2)*[1; 1]
-
-    # Evaluate coefficient functions and find average values.
-    cval = c.(x);   cbar = (cval[1:n]+cval[2:n+1]) / 2;
-    sval = s.(x);   sbar = (sval[1:n]+sval[2:n+1]) / 2;
-    fval = f.(x);   fbar = (fval[1:n]+fval[2:n+1]) / 2;
-
-    # Assemble global system, one interval at a time.
-    K = zeros(n-1,n-1);  M = zeros(n-1,n-1);  f = zeros(n-1);
-    K[1,1] = cbar[1]/h;  M[1,1] = sbar[1]*h/3;  f[1] = fbar[1]*h/2;
-    K[n-1,n-1] = cbar[n]/h;  M[n-1,n-1] = sbar[n]*h/3;  f[n-1] = fbar[n]*h/2;
-    for k in 2:n-1
-        K[k-1:k,k-1:k] += (cbar[k]/h) * Ke
-        M[k-1:k,k-1:k] += (sbar[k]*h) * Me
-        f[k-1:k] += (fbar[k]*h) * fe
-    end
-
-    # Solve system for the interior values.
-    u = (K+M) \ f
-    u = [0; u; 0]      # put the boundary values into the result
-    return x,u
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-fem-python
+:::
 ````
+`````
+``````
 
 (demo-galerkin-fem)=
-```{prf:example}
-```
+::::{prf:example} Finite element solution of a BVP
 
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-galerkin-fem-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-galerkin-fem-matlab
+:::
+````
 
-
-
-We solve the equation
-
-$$
-  -(x^2u')' + 4 y = \sin(\pi x), \qquad u(0)=u(1)=0,
-$$
-
-in which
-
-$$
-  c(x) = x^2, \qquad s(x) = 4, \qquad f(x)=\sin(\pi x).
-$$
-
-Here are the coefficient function definitions. Even though $s$ is a constant, it has to be defined as a function for {numref}`Function {number} <function-fem>` to use it.
-
-```{code-cell}
-c = x -> x^2;
-q = x -> 4;
-f = x -> sin(π*x);
-```
-
-```{code-cell}
-x,u = FNC.fem(c,q,f,0,1,50)
-plot(x,u,label="",
-    xaxis=(L"x"),yaxis=(L"u"),title="Solution by finite elements")
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-galerkin-fem-python
+:::
+````
+`````
+::::
 
 
 ```{index} order of accuracy; of the finite element method
 ```
+
 Because piecewise linear interpolation on a uniform grid of size $h$ is $O(h^2)$ accurate, the accuracy of the FEM method based on linear interpolation as implemented here is similar to the second-order finite-difference method. 
 
 ## Exercises
@@ -443,4 +390,3 @@ Because piecewise linear interpolation on a uniform grid of size $h$ is $O(h^2)$
     $$
 
     whose exact solution is $(x-1)\cos(x) - \sin(x)$. Show second-order convergence.
-    

@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 10.4.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-bvp-linear)=
 # Collocation for linear problems
 
@@ -149,147 +133,83 @@ Finally, we note that $\hat{u}(a)= \mathbf{e}_0^T\mathbf{u}$ and $\hat{u}(b)= \m
 
 Our implementation of linear collocation is {numref}`Function {number} <function-bvplin>`. It uses second-order finite differences but makes no attempt to exploit the sparsity of the matrices. It would be trivial to change the function to use spectral differentiation. 
 
-(function-bvplin)=
-````{prf:function} bvplin
-**Solution of a linear boundary-value problem**
-```{code-block} julia
-:lineno-start: 1
-"""
-    bvplin(p,q,r,xspan,lval,rval,n)
+(function-bvplin
+)=
+``````{prf:algorithm} bvplin
 
-Use finite differences to solve a linear boundary value problem.
-The ODE is u''+`p`(x)u'+`q`(x)u = `r`(x) on the interval `xspan`,
-with endpoint function values given as `lval` and `rval`. There will
-be `n`+1 equally spaced nodes, including the endpoints.
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-bvplin
+-julia
+:::
+```` 
 
-Returns vectors of the nodes and the solution values.
-"""
-function bvplin(p,q,r,xspan,lval,rval,n)
-    x,Dₓ,Dₓₓ = diffmat2(n,xspan)
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-bvplin
+-matlab
+:::
+```` 
 
-    P = diagm(p.(x))
-    Q = diagm(q.(x))
-    L = Dₓₓ + P*Dₓ + Q     # ODE expressed at the nodes
-
-    # Replace first and last rows using boundary conditions.
-    z = zeros(1,n)
-    A = [ [1 z]; L[2:n,:]; [z 1] ]
-    b = [ lval; r.(x[2:n]); rval ]
-
-    # Solve the system.
-    u = A\b
-    return x,u
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-bvplin
+-python
+:::
 ````
-
-::::{admonition} About the code
-:class: dropdown
-Note that there is no need to explicitly form the row-deletion matrix $\mathbf{E}$ from {eq}`rowdeletion`. Since it only appears as left-multiplying $\mathbf{L}$ or $\mathbf{r}$, we simply perform the row deletions as needed using indexing.
-::::
+`````
+``````
 
 (demo-linear-solve)=
-```{prf:example}
-```
+::::{prf:example} Solving a linear BVP
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-linear-solve-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-linear-solve-matlab
+:::
+````
 
-
-
-
-We solve linear BVP  
-
-$$ u'' - (\cos x) u' + (\sin x) u = 0, \quad u(0)=1, \; u\left(\frac{3\pi}{2}\right)=\frac{1}{e}. $$ 
-
-Its exact solution is known:
-
-```{code-cell}
-exact = x -> exp(sin(x));
-```
-
-The problem is presented above in our standard form, so we can identify the coefficient functions in the ODE. Each should be coded as a function.
-
-```{code-cell}
-p = x -> -cos(x);
-q = sin;
-r = x -> 0;      # function, not value 
-```
-
-We solve the BVP and compare the result to the exact solution.
-
-```{code-cell}
-x,u = FNC.bvplin(p,q,r,[0,3π/2],1,exp(-1),30);
-```
-
-```{code-cell}
-:tags: [hide-input]
-plot(exact,0,3π/2,layout=(2,1),label="exact")
-scatter!(x,u,m=:o,subplot=1,label="numerical",
-    yaxis=("solution"),title="Solution of a linear BVP")
-
-plot!(x,exact.(x)-u,subplot=2,xaxis=L"x",yaxis=("error"))
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-linear-solve-python
+:::
+````
+`````
+::::
 
 ## Accuracy and stability
 
 We revisit {numref}`Demo %s <demo-shooting-unstable>`, which exposed instability in the shooting method, in order to verify second-order convergence.
 
 (demo-linear-converge)=
-```{prf:example}
-```
+::::{prf:example} Convergence for a linear BVP
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-linear-converge-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-linear-converge-matlab
+:::
+````
 
-
-
-
-The BVP is
-  
-$$
-u'' - \lambda^2 u = \lambda^2, \quad  u(0)=-1, \; u(1)=0,
-$$
-
-with exact solution $\sinh(\lambda x)/\sinh(\lambda) - 1$.
-
-```{code-cell}
-λ = 10
-exact = x -> sinh(λ*x)/sinh(λ) - 1;
-```
-
-The following functions define the ODE.
-
-```{code-cell}
-p = x -> 0
-q = x -> -λ^2
-r = x -> λ^2;
-```
-
-We compare the computed solution to the exact one for increasing $n$. 
-
-```{code-cell}
-n = 5*[round(Int,10^d) for d in 0:.25:3]
-err = zeros(size(n))
-for (k,n) in enumerate(n)
-    x,u = FNC.bvplin(p,q,r,[0,1],-1,0,n)    
-    err[k] = norm(exact.(x)-u,Inf)
-end
-
-data = (n=n[1:4:end],err=err[1:4:end])
-pretty_table(data, header=["n","inf-norm error"])
-```
-
-Each factor of 10 in $n$ reduces error by a factor of 100, which is indicative of second-order convergence.
-
-```{code-cell}
-plot(n,err,m=:o,label="observed",
-    xaxis=(:log10,L"n"), yaxis=(:log10,"inf-norm error"),
-    title="Convergence for a linear BVP") 
-plot!(n,0.25*n.^(-2),l=(:dash,:gray),label="2nd order")
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-linear-converge-python
+:::
+````
+`````
+::::
 
 If we write the solution $\mathbf{u}$ of Equation {eq}`fdlinbc` as the exact solution minus an error vector $\mathbf{e}$, i.e., $\mathbf{u} = \hat{\mathbf{u}} - \mathbf{e}$, we obtain
 
@@ -362,6 +282,4 @@ where $\boldsymbol{\tau}$ is the truncation error of the finite differences (exc
     
     **(d)** ⌨ Develop a hypothesis for the leading-order behavior of $N(\epsilon)$. Plot the observed $N(\epsilon)$ and your hypothesis together on a log-log plot.
     
-    **(e)** ✍ Finite-difference errors depend on the solution as well as on $n$. Given that this error decreases as $O(n^{-2})$, what does your hypothesis for $N(\epsilon)$ suggest about the behavior of the error for fixed $n$ as $\epsilon\to 0$? 
-
-   
+    **(e)** ✍ Finite-difference errors depend on the solution as well as on $n$. Given that this error decreases as $O(n^{-2})$, what does your hypothesis for $N(\epsilon)$ suggest about the behavior of the error for fixed $n$ as $\epsilon\to 0$?
