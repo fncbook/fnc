@@ -178,6 +178,10 @@ Usually $f^{(n+1)}$ and the function $\xi(x)$ are unknown. The importance of the
 
 (demo-polynomial-error)=
 ::::{prf:example} Polynomial interpolation error
+Consider the problem of interpolating $\log(x)$ at nodes $1, 1.6, 1.9, 2.7, 3$. Then $n=4$ and $f^{(5)}(\xi) = 4!/\xi^5$. For $\xi\in[1, 3]$ we can say that $|f^{(5)}(\xi)| \le 4!$. Hence 
+
+$$ |f(x)-p(x)| \le \frac{1}{5} \left| \Phi(x) \right|.$$
+
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

@@ -6,7 +6,7 @@ kernelspec:
 numbering:
   headings: false
 ---
-# Chapter 8
+# Chapter 9
 
 ## Functions
 
@@ -83,7 +83,7 @@ The test `isinf(x(M))` in line 17 checks whether $x(M)$ is larger than the maxim
 ``````
 
 (function-intsing-julia)=
-``````{dropdown} Integration of a function with endpoint singularities
+``````{dropdown} Integration with endpoint singularities
 ```{literalinclude} ../julia/package/src/chapter09.jl
 :filename: intsing.jl
 :start-line: 129

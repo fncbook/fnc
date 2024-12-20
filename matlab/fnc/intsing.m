@@ -1,19 +1,27 @@
-function [I,x] = intsing(f,h,delta)
-% INTSING   Integrate function with endpoint singularities.
+function [I, x] = intsing(f, tol)
+% INTSING   Adaptively integrate a function with a singularity at the left endpoint.
 % Input:
 %   f   integrand  (function)
-%   h   discretization node spacing (positive scalar)
-%   delta   distance away from endpoints (positive scalar)
+%   tol error tolerance (positive scalar)
 % Output:
-%   I   approximation to integral(f,-1+delta,1-delta)
+%   I   approximation to integral(f) over (0,1)
 %   x   evaluation nodes (vector)
 
-% Find where to truncate the trapezoid sum.
-K = ceil(log(-2/pi*log(delta/2))/h);  
+xi = @(t) 2 ./ (1 + exp( 2*sinh(t) ));
+dxi_dt = @(t) cosh(t) ./ cosh( sinh(t) ).^2;
+g = @(t) f(xi(t)) .* dxi_dt(t);
 
-% Integrate over a transformed variable. 
-t = h*(-K:K)';                    
-x = tanh(pi/2*sinh(t));
-dxdt = pi/2*cosh(t) ./ (cosh(pi/2*sinh(t)).^2);
+% Find where to truncate the integration interval.
+M = 3;
+while abs(g(M)) > tol/100
+    M = M + 0.5;
+    if iszero(x(M)) 
+        warning("Function may grow too rapidly.")
+        M = M - 0.5;
+        break
+    end
+end
 
-I = h*sum( f(x).*dxdt );
+[I, t] = intadapt(g, 0, M, tol);
+x = xi(t);
+end
