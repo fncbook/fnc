@@ -1,6 +1,9 @@
+import warnings
 import numpy as np
 from numpy.linalg import eig
 from matplotlib.pyplot import *
+from .FNC05 import intadapt
+
 
 def polyinterp(t, y):
     """
@@ -103,42 +106,48 @@ def glint(f, n):
     I = np.dot(c, f(x))  # vector inner product
     return I, x
 
-
-def intde(f, h, M):
+def intinf(f, tol):
     """
     intde(f,h,M)
 
     Perform doubly-exponential integration of function `f` over (-Inf,Inf), using
-    discretization size `h` and truncation point `M`. Return integral and a vector of the
-    nodes used.
+    error tolerance `tol`. Return integral and a vector of the nodes used.
     """
-    # Find where to truncate the trapezoid sum.
-    K = np.ceil(np.log(4 / np.pi * np.log(2 * M)) / h)
+    xi = lambda t: np.sinh(np.sinh(t))
+    dxi_dt = lambda t: np.cosh(t) * np.cosh(np.sinh(t))
+    g = lambda t: f(xi(t)) * dxi_dt(t)
+    M = 3
+    while (abs(g(-M)) > tol/100) or (abs(g(M)) > tol/100):
+        M += 0.5
+        if np.isinf(xi(M)):
+            warnings.warn("Function may not decay fast enough.")
+            M -= 0.5
+            break
 
-    # Integrate by trapezoids in a transformed variable t.
-    t = h * np.arange(-K, K + 1)
-    x = np.sinh(np.pi / 2 * np.sinh(t))
-    dxdt = np.pi / 2 * np.cosh(t) * np.cosh(np.pi / 2 * np.sinh(t))
-
-    I = h * np.dot(f(x), dxdt)
+    I, t = intadapt(g,-M,M,tol)
+    x = xi(t)
     return I, x
 
-
-def intsing(f, h, delta):
+def intsing(f, tol):
     """
-    intsing(f,h,delta)
+    intsing(f, tol)
 
-    Integrate function `f` (possibly singular at 1 and -1) over [-1+`delta`,1-`delta`]
-    using discretization size `h`. Return integral and a vector of the
-    nodes used.
+    Adaptively integrate function `f` over (0,1), where `f` may be 
+    singular at zero, with error tolerance `tol`. Returns the
+    integral estimate and a vector of the nodes used.
     """
-    # Find where to truncate the trapezoid sum.
-    K = np.ceil(np.log(-2 / np.pi * np.log(delta / 2)) / h)
+    xi = lambda t: 2 / (1 + np.exp( 2*np.sinh(t) ))
+    dxi_dt = lambda t: np.cosh(t) / np.cosh(np.sinh(t))**2
+    g = lambda t: f(xi(t)) * dxi_dt(t)
+    # Find where to truncate the integration interval.
+    M = 3
+    while abs(g(M)) > tol/100:
+        M += 0.5
+        if xi(M) == 0:
+            warnings.warn("Function may grow too rapidly.")
+            M -= 0.5
+            break
 
-    # Integrate over a transformed variable.
-    t = h * np.arange(-K, K + 1)
-    x = np.tanh(np.pi / 2 * np.sinh(t))
-    dxdt = np.pi / 2 * np.cosh(t) / (np.cosh(np.pi / 2 * np.sinh(t)) ** 2)
-
-    I = h * np.dot(f(x), dxdt)
+    I, t = intadapt(g, 0, M, tol)
+    x = xi(t)
     return I, x

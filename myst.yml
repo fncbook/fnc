@@ -225,6 +225,7 @@ project:
           - file: python/chapter6.md
           - file: python/chapter7.md
           - file: python/chapter8.md
+          - file: python/chapter9.md
     - file: genindex.md
 
     

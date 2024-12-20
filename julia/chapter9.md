@@ -321,7 +321,7 @@ Now we look at the error indicator function $\Phi$ for Chebyshev node sets.
 ```{code-cell} 
 :tags: hide-input
 plot(xaxis=(L"x"), yaxis=(:log10, L"|\Phi(x)|", [1e-18, 1e-2]))
-x = range(-1, 1, length=2001)
+x = range(-1, 1, 2001)
 for n in 10:10:50
     t = [-cos(π * k / n) for k in 0:n]
     Φ(x) = prod(x - t for t in t)
@@ -386,16 +386,16 @@ plot!(n, [algebraic spectral], subplot=2,
 
 (demo-orthogonal-approx-julia)=
 ``````{dropdown} @demo-orthogonal-approx
-Let's approximate $e^x$ over the interval $[−1,1]$. We can sample it at, say, 20 points, and find the best-fitting straight line to that data.
+Let's approximate $e^x$ over the interval $[−1,1]$. We can sample it at, say, 15 points, and find the best-fitting straight line to that data.
 
 ```{code-cell}
 plot(exp, -1, 1, label="function")
 
-t = range(-1, 1, 20)
+t = range(-1, 1, 15)
 y = exp.(t)
 V = [ti^j for ti in t, j in 0:1]  # Vandermonde-ish
 c = V \ y
-plot!(t -> c[1] + c[2] * t, -1, 1, label="linear fit for 20 points",
+plot!(t -> c[1] + c[2] * t, -1, 1, label="linear fit for 15 points",
     xaxis=("x"), yaxis=("value"),
     title="Least-squares fit of exp(x)", leg=:bottomright)
 ```
@@ -403,11 +403,11 @@ plot!(t -> c[1] + c[2] * t, -1, 1, label="linear fit for 20 points",
 There's nothing special about 20 points. Choosing more doesn't change the result much.
 
 ```{code-cell}
-t = range(-1, 1, 200)
+t = range(-1, 1, 150)
 y = exp.(t)
 V = [ ti^j for ti in t, j=0:1 ]
 c = V\y
-plot!(t -> c[1] + c[2]*t, -1, 1, label="linear fit for 200 points",
+plot!(t -> c[1] + c[2]*t, -1, 1, label="linear fit for 150 points",
     xaxis=("x"), yaxis=("value"),
     title="Least-squares fit of exp(x)", leg=:bottomright)
 ```

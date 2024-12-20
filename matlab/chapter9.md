@@ -100,8 +100,8 @@ fplot(ell_k, [1, 3])
 hold on, grid on
 plot(t(not_k + 1), 0 * t(not_k + 1), 'o')
 plot(t(k + 1), 1, 'o')
-xlabel('x'),  ylabel('\ell_2(x)')    % ignore this line
-title('Lagrange cardinal function')   % ignore this line
+xlabel('x'),  ylabel('\ell_2(x)')    
+title('Lagrange cardinal function')   
 ```
 
 Observe that $\ell_k$ is _not_ between zero and one everywhere, unlike a hat function.
@@ -117,8 +117,8 @@ Phi = @(x) prod(x - t);
 
 clf,  fplot(@(x) Phi(x) / 5, [1, 3])
 hold on,  plot(t, 0*t, 'o')
-xlabel('x'),  ylabel('\Phi(x)')   % ignore this line
-title('Interpolation error function')   % ignore this line
+xlabel('x'),  ylabel('\Phi(x)')   
+title('Interpolation error function')   
 ```
 
 The error is zero at the nodes, by the definition of interpolation. The error bound, as well as the error itself, has one local maximum between each consecutive pair of nodes.
@@ -131,7 +131,7 @@ The error is zero at the nodes, by the definition of interpolation. The error bo
 ```{code-cell}
 f = @(x) sin( exp(2 * x) );
 clf,  fplot(f, [0, 1], displayname="function")
-xlabel('x'),  ylabel('f(x)')   % ignore this line
+xlabel('x'),  ylabel('f(x)')   
 legend(location="southwest")
 ```
 
@@ -171,8 +171,8 @@ y = f(t);
 hold on,  scatter(t, y, displayname="nodes")
 p = polyinterp(t, y)
 fplot(p, [0, 1], displayname="interpolant")
-xlabel('x'),  ylabel('f(x)') % ignore this line
-title('Test function')    % ignore this line
+xlabel('x'),  ylabel('f(x)') 
+title('Test function')    
 ```
 
 We want to track the behavior of the error as $n$ increases. We will estimate the error in the continuous interpolant by sampling it at a large number of points and taking the max-norm.
@@ -189,8 +189,8 @@ for k = 1:length(n)
   err(k) = norm(f(x) - p(x), Inf);
 end
 clf,  semilogy(n, err, 'o-')
-xlabel('n'),  ylabel('max error')   % ignore this line
-title('Equispaced polynomial interpolation error')   % ignore this line
+xlabel('n'),  ylabel('max error')   
+title('Equispaced polynomial interpolation error')   
 ```
 
 The error initially decreases as one would expect but then begins to grow. Both phases occur at rates that are exponential in $n$, i.e., $O(K^n$) for a constant $K$, appearing linear on a semi-log plot.
@@ -212,8 +212,8 @@ for n = 10:10:50
     end
     semilogy(x, abs(Phi)),  hold on
 end
-title('Error indicator on equispaced nodes')    % ignore this line
-xlabel('x'),  ylabel('|\Phi(x)|')   % ignore this line
+title('Error indicator on equispaced nodes')    
+xlabel('x'),  ylabel('|\Phi(x)|')   
 ```
 
 Each time $\Phi$ passes through zero at an interpolation node, the value on the log scale should go to $-\infty$, which explains the numerous cusps on the curves.
@@ -226,8 +226,8 @@ This function has infinitely many continuous derivatives on the entire real line
 ```{code-cell} 
 f = @(x) 1 ./ (x.^2 + 16);
 clf,  fplot(f, [-1, 1])
-xlabel('x'),  ylabel('f(x)')    % ignore this line
-title('Test function')    % ignore this line
+xlabel('x'),  ylabel('f(x)')    
+title('Test function')    
 ```
 
 We start by doing equispaced polynomial interpolation for some small values of $n$.
@@ -241,8 +241,8 @@ for k = 1:length(n)
     p = polyinterp(t, f(t));
     semilogy(x, abs(f(x) - p(x)));  hold on
 end
-title('Error for degrees 4, 8, 12')   % ignore this line
-xlabel('x'), ylabel('|f(x) - p(x)|')   % ignore this line
+title('Error for degrees 4, 8, 12')   
+xlabel('x'), ylabel('|f(x) - p(x)|')   
 ```
 
 The convergence so far appears rather good, though not uniformly so. However, notice what happens as we continue to increase the degree.
@@ -256,8 +256,8 @@ for k = 1:length(n)
     p = polyinterp(t, f(t));
     semilogy(x, abs(f(x) - p(x)));  hold on
 end
-title('Error for degrees 27, 42, 57')   % ignore this line
-xlabel('x'), ylabel('|f(x) - p(x)|')   % ignore this line
+title('Error for degrees 27, 42, 57')   
+xlabel('x'), ylabel('|f(x) - p(x)|')   
 ```
 
 The convergence in the middle can't get any better than machine precision relative to the function values. So maintaining the growing gap between the center and the ends pushes the error curves upward exponentially fast at the ends, wrecking the convergence.
@@ -280,9 +280,9 @@ for n = 10:10:50
     end
     semilogy(x, abs(Phi));  hold on
 end
-axis tight, title('Effect of Chebyshev nodes')    % ignore this line
-xlabel('x'), ylabel('|\Phi(x)|')   % ignore this line
-ylim([1e-18, 1e-2])   % ignore this line
+axis tight, title('Effect of Chebyshev nodes')    
+xlabel('x'), ylabel('|\Phi(x)|')   
+ylim([1e-18, 1e-2])   
 ```
 
 In contrast to the equispaced case, $|\Phi|$ decreases exponentially with $n$ almost uniformly across the interval.
@@ -307,8 +307,8 @@ for k = 1:length(n)
     p = polyinterp(t, f(t));
     semilogy( x, abs(f(x) - p(x)) );  hold on
 end
-title('Error for degrees 4, 10, 16, 40')   % ignore this line
-xlabel('x'), ylabel('|f(x)-p(x)|')   % ignore this line
+title('Error for degrees 4, 10, 16, 40')   
+xlabel('x'), ylabel('|f(x)-p(x)|')   
 
 ```
 
@@ -327,16 +327,16 @@ spectral = 10 * 0.85.^n;
 clf, subplot(2, 1, 1)
 loglog(n, algebraic, 'o-', displayname="algebraic")
 hold on;  loglog(n, spectral, 'o-', displayname="spectral")
-xlabel('n'),  ylabel('error')   % ignore this line
-title('log–log')   % ignore this line
-axis tight,  ylim([1e-16, 1]);  legend(location="southwest")   % ignore this line
+xlabel('n'),  ylabel('error')   
+title('log–log')   
+axis tight,  ylim([1e-16, 1]);  legend(location="southwest")   
 
 subplot(2, 1, 2)
 semilogy(n, algebraic, 'o-', displayname="algebraic")
 hold on;  semilogy(n, spectral, 'o-', displayname="spectral")
-xlabel('n'), ylabel('error'),  ylim([1e-16, 1])   % ignore this line
-title('log–linear')   % ignore this line
-axis tight,  ylim([1e-16, 1]);  legend(location="southwest")   % ignore this line
+xlabel('n'), ylabel('error'),  ylim([1e-16, 1])   
+title('log–linear')   
+axis tight,  ylim([1e-16, 1]);  legend(location="southwest")   
 ```
 ``````
 
@@ -355,9 +355,9 @@ c = V \ y;
 p = @(t) c(1) + c(2)*t;
 
 hold on,  fplot(p, [-1, 1], displayname="LS fit at 15 points")
-title('Least-squares fit to samples of exp(x)')    % ignore this line
-xlabel('x'),  ylabel('f(x)')    % ignore this line
-legend(location="northwest")    % ignore this line
+title('Least-squares fit to samples of exp(x)')    
+xlabel('x'),  ylabel('f(x)')    
+legend(location="northwest")    
 ```
 
 There's nothing special about 15 points. Choosing more doesn't change the result much.
@@ -404,7 +404,7 @@ clf,  scatter(t, y, 'k'),  hold on
 
 p = triginterp(t, y);
 fplot(p, [-1, 1])
-xlabel('x'),  ylabel('p(x)')   % ignore this line
+xlabel('x'),  ylabel('p(x)')   
 title('Trig cardinal function')  
 ```
 
@@ -416,8 +416,8 @@ f = @(x) exp( sin(pi*x) - 2 * cos(pi*x) );
 fplot(f, [-1, 1], displayname="periodic function"),  hold on
 fplot(triginterp(t, f(t)), [-1, 1], displayname="trig interpolant")
 y = f(t);  scatter(t, f(t), 'k')
-xlabel('x'),  ylabel('f(x)')   % ignore this line
-title('Trig interpolation');  legend()    % ignore this line
+xlabel('x'),  ylabel('f(x)')   
+title('Trig interpolation');  legend()    
 ```
 
 The convergence of the interpolant is spectral. We let $N$ go needlessly large here in order to demonstrate that unlike polynomials, trigonometric interpolation is stable on equally spaced nodes. Note that when $N$ is even, the value of $n$ is not an integer but works fine for defining the nodes.
@@ -434,8 +434,8 @@ for k = 1:length(N)
     err(k) = norm(f(x) - p(x), Inf);
 end
 clf,  semilogy(N, err, 'o-')
-axis tight, title('Convergence of trig interpolation')   % ignore this line
-xlabel('N'),  ylabel('max error')   % ignore this line
+axis tight, title('Convergence of trig interpolation')   
+xlabel('N'),  ylabel('max error')   
 ```
 ``````
 
@@ -480,8 +480,8 @@ freq = [0:n, -n:-1]';
 
 clf
 semilogy(freq, abs(c), 'o')
-xlabel('k'),  ylabel('|c_k|')   % ignore this line
-title('Fourier coefficients')    % ignore this line
+xlabel('k'),  ylabel('|c_k|')   
+title('Fourier coefficients')    
 ```
 
 The Fourier coefficients of smooth functions decay exponentially in magnitude as a function of the frequency. This decay rate is determines the convergence of the interpolation error.
@@ -532,8 +532,8 @@ for k = 1:length(n)
 end
 clf,  semilogy(n, abs([errCC errGL]), 'o-')
 xlabel('number of nodes'),  ylabel('error')
-title('Spectral integration')   % ignore this line
-legend('Clenshaw–Curtis', 'Gauss–Legendre')   % ignore this line
+title('Spectral integration')   
+legend('Clenshaw–Curtis', 'Gauss–Legendre')   
 ```
 
 (The missing points are where the error is exactly zero.) Gauss–Legendre does converge faster here, but at something less than twice the rate.
@@ -558,8 +558,8 @@ for k = 1:length(n)
 end
 clf,  semilogy(n, abs([errCC errGL]), 'o-')
 xlabel('number of nodes'),  ylabel('error')
-title('Spectral integration')   % ignore this line
-legend('Clenshaw–Curtis', 'Gauss–Legendre')   % ignore this line
+title('Spectral integration')   
+legend('Clenshaw–Curtis', 'Gauss–Legendre')   
 ```
 
 The two are very close until about $n=40$, when the Clenshaw–Curtis method slows down.
@@ -578,8 +578,8 @@ for k = 1:length(n)
 end
 hold on;  semilogy(n, abs(errAdapt), 'o-')
 plot(n, n.^(-4), 'k--')        % 4th order error
-set(gca, 'xscale', 'log')     % ignore this line
-legend('ccint', 'glint', 'intadapt', '4th order')  % ignore this line
+set(gca, 'xscale', 'log')     
+legend('ccint', 'glint', 'intadapt', '4th order')  
 title('Spectral vs 4th order')
 ```
 
@@ -595,16 +595,16 @@ At the core of `intadapt` is a fourth-order formula, and the results track that 
 f = @(x) 1 ./ (1 + x.^2);
 clf,  subplot(2, 1, 1)
 fplot(f, [-4, 4]);  set(gca, 'yscale', 'log') 
-xlabel('x'),  ylabel('f(x)'),  ylim([1e-20, 1])  % ignore this line
-title('Original integrand')   % ignore this line
+xlabel('x'),  ylabel('f(x)'),  ylim([1e-20, 1])  
+title('Original integrand')   
 
 x = @(t) sinh( pi * sinh(t) / 2 );
 chain = @(t) pi/2 * cosh(t) .* cosh( pi * sinh(t) / 2 );
 integrand = @(t) f(x(t)) .* chain(t);
 subplot(2, 1, 2)
 fplot(integrand, [-4, 4]);  set(gca, 'yscale', 'log') 
-xlabel('t'), ylabel('f(x(t))'),  ylim([1e-20, 1])  % ignore this line
-title('Transformed integrand')  % ignore this line
+xlabel('t'), ylabel('f(x(t))'),  ylim([1e-20, 1])  
+title('Transformed integrand')  
 ```
 
 This graph suggests that we capture all of the integrand values that are larger than machine epsilon by integrating in $t$ from $-4$ to $4$.
