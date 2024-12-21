@@ -36,16 +36,20 @@ We can do much better than trial-and-error for the unknown part of the initial s
 
 :::{math}
 :label: shoot-first
-y_1'&=y_2,\\ 
-y_2'&=\phi(x,y_1,y_2).
+\begin{split}
+y_1' &= y_2,\\ 
+y_2' &= \phi(x,y_1,y_2).
+\end{split}
 :::
 
 We turn this into an IVP by specifying $y(a)=s_1$, $y'(a)=s_2$, for a vector $\mathbf{s}$ to be determined by the boundary conditions. Define the residual function $\mathbf{v}(\mathbf{s})$ by
 
 :::{math}
 :label: shoot-resid
+\begin{split}
 v_1(s_1,s_2) &= g_1(y_1(a),y_2(a)) = g_1(s_1,s_2),\\ 
 v_2(s_1,s_2) &= g_2(y_1(b),y_2(b)).
+\end{split}
 :::
 
 The dependence of $v_2$ on $\mathbf{s}$ is indirect, through the solution of the IVP for $\mathbf{y}(x)$. We now have a standard rootfinding problem that can be solved via the methods of [Chapter 4](../nonlineqn/overview.md). 
@@ -106,6 +110,20 @@ The accuracy of the shooting method should be comparable to those of the compone
 
 (demo-shooting-unstable)=
 ::::{prf:example} Instability of shooting
+We solve the problem
+  
+$$
+u'' = \lambda^2 u + \lambda^2, \quad 0\le x \le 1, \quad u(0)=-1,\; u(1)=0.
+$$
+
+The exact solution is easily confirmed to be
+
+$$
+u(x) = \frac{\sinh(\lambda x)}{\sinh(\lambda)} - 1.
+$$
+
+This solution satisfies $-1\le u(x) \le 0$ for all $x\in[0,1]$. Now we compute shooting solutions for several values of $\lambda$.
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -125,6 +143,21 @@ The accuracy of the shooting method should be comparable to those of the compone
 :::
 ````
 `````
+
+The cause is readily explained. The solution to the ODE with $u(0)=-1$ and $u'(0)=s_2$  is
+
+:::{math}
+:label: shootinstabshoot
+    \frac{s_2}{\lambda}\sinh(\lambda x) - 1.
+:::
+
+If $x$ is a fixed value in $[0,1]$, we compute that the absolute condition number of {eq}`shootinstabshoot` with respect to $s_2$ is the magnitude of the partial derivative,
+
+$$
+  \left| \frac{\sinh\lambda x}{\lambda} \right|,
+$$
+
+which grows rapidly with $\lambda$ near $x=1$. With the IVP solution so sensitive to $s_2$, a numerical approach to find $s_2$ approximately is doomed.
 ::::
 
 

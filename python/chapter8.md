@@ -145,7 +145,7 @@ While `A**6` is valid syntax here, it means elementwise power, not matrix power.
 ```{code-cell}
 from scipy.sparse.linalg import matrix_power
 spy(matrix_power(A, 6))
-title("$A^6$")
+title(("$A^6$"));
 ```
 ``````
 
@@ -356,7 +356,7 @@ err = beta[-1] - beta    # last estimate is our best
 semilogy(arange(30), abs(err), "-o")
 ylim(1e-16, 1)
 xlabel("$k$"),  ylabel("$|\\lambda_3 - \\beta_k|$")
-title("Convergence of inverse iteration")
+title(("Convergence of inverse iteration"));
 ```
 
 ```{index} ! Python; argsort
@@ -460,7 +460,7 @@ The linear system approximations show smooth linear convergence at first, but th
 ```{code-cell}
 semilogy(range(30), resid, "-o")
 xlabel("$m$"),  ylabel("$\\| b-Ax_m \\|$")
-title("Residual for linear systems")
+title(("Residual for linear systems"));
 ```
 ``````
 
@@ -582,7 +582,7 @@ resid = [1.]
 x, flag = gmres(A, b, restart=None, rtol=1e-8, atol=1e-14, maxiter=120, callback=ctr)
 semilogy(resid); 
 xlabel("$m$"), ylabel("residual norm")
-title("Convergence of unrestarted GMRES")
+title(("Convergence of unrestarted GMRES"));
 ```
 
 ```{code-cell}
@@ -597,7 +597,7 @@ for r in restarts:
 
 ylim(1e-8, 2)
 legend(["none", "20", "40", "60"])
-title("Convergence of restarted GMRES")
+title(("Convergence of restarted GMRES"));
 ```
 
 The "pure" GMRES curve is the lowest one. All of the other curves agree with it until the first restart. Decreasing the restart value makes the convergence per iteration generally worse, but the time required per iteration smaller as well.

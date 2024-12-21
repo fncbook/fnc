@@ -70,8 +70,10 @@ By the chain rule,
 
 :::{math}
 :label: DEquadchain1
+\begin{split}
 \int_{-\infty}^\infty f(x)\, dx &= \int_{-\infty}^\infty f(x(t))\frac{dx}{dt}\, dt \\
   &= \int_{-\infty}^\infty f(x(t))\, \cosh\left( \sinh t \right)  \cosh t  \, dt.
+\end{split}
 :::
 
 The exponential terms introduced by the chain rule grow double exponentially, but the more rapid decay of $f$ in the new variable more than makes up for this.
@@ -193,8 +195,10 @@ satisfies $x(0)=1$ and $x\to 0^+$ as $t\to \infty$, thereby transforming the int
 
 :::{math}
 :label: DEquadchain2
+\begin{split}
   \int_{0}^1 f(x)\, dx &= \int_{0}^\infty f(x(t)) \frac{dx}{dt}\, dt \\
   &= \int_{0}^\infty f(x(t)) \frac{\cosh t}{\cosh(\sinh t)^2}  \,  dt.
+\end{split}
 :::
 
 Now the growth of $f$ and $\cosh t$ together are counteracted by the double exponential denominator, allowing easy truncation of {eq}`DEquadchain2`. This variable transformation is paired with adaptive integration in {numref}`Function {number} <function-intsing>`.

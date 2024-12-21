@@ -31,8 +31,10 @@ Particular problems are often posed using scalar variables and equations.
 The steady state of interactions between the population $w(t)$ of a predator species and the population $h(t)$ of a prey species might be modeled as
 
 $$
+\begin{split}
 ah - b h w &= 0, \\ 
--cw + d w h &= 0
+-cw + d w h &= 0,
+\end{split}
 $$
 
 for positive parameters $a,b,c,d$. To cast this in the form of {eq}`rootvector`, we could define $\mathbf{x}=[h,w]$, $f_1(x_1,x_2) = ax_1 - bx_1x_2$, and $f_2(x_1,x_2)= -c x_2 + d x_1 x_2$.

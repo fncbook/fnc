@@ -75,6 +75,7 @@ The determinant $\det(\mathbf{A} - \lambda \mathbf{I})$ is called the **characte
 Suppose that $\mathbf{A}\mathbf{v}_k=\lambda_k\mathbf{v}_k$ for $k=1,\ldots,n$. We can summarize these as
 
 ```{math}
+\begin{split}
    \begin{bmatrix}
     \mathbf{A}\mathbf{v}_1 & \mathbf{A}\mathbf{v}_2 & \cdots & \mathbf{A}\mathbf{v}_n
   \end{bmatrix}
@@ -95,6 +96,7 @@ Suppose that $\mathbf{A}\mathbf{v}_k=\lambda_k\mathbf{v}_k$ for $k=1,\ldots,n$. 
     & & \ddots & \\
     & & & \lambda_n
   \end{bmatrix},
+\end{split}
 ```
 
 which we write as
@@ -230,11 +232,13 @@ Applying {eq}`evdpower` leads to
 
 ```{math}
 :label: matrixpolyevd
+\begin{split}
 p(\mathbf{A}) & = c_0\mathbf{V}\mathbf{V}^{-1}  +c_1 \mathbf{V}\mathbf{D}\mathbf{V}^{-1} + \cdots + c_m \mathbf{V}\mathbf{D}^m\mathbf{V}^{-1} \\ 
 &= \mathbf{V} \cdot [ c_0\mathbf{I}  +c_1 \mathbf{D} + \cdots + c_m \mathbf{D}^m] \cdot \mathbf{V}^{-1} \\[1mm] 
 &= \mathbf{V} \cdot \begin{bmatrix}
   p(\lambda_1) & & & \\ & p(\lambda_2) & &  \\ & & \ddots & \\ & & & p(\lambda_n)  
 \end{bmatrix} \cdot \mathbf{V}^{-1}.
+\end{split}
 ```
 
 Finally, given the convergence of Taylor polynomials to common functions, we are able to apply a function $f$ to a square matrix by replacing $p$ with $f$ in {eq}`matrixpoly`.

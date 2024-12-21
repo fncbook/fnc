@@ -20,8 +20,10 @@ A $k$-step **multistep** (or *linear multistep*) method is given by the differen
 
 ```{math}
 :label: multistep
+\begin{split}
 u_{i+1} &= a_{k-1}u_i + \cdots + a_0 u_{i-k+1} \qquad \\ 
 & \qquad + h ( b_kf_{i+1} + \cdots + b_0 f_{i-k+1}),
+\end{split}
 ```
 
 where the $a_j$ and the $b_j$ are constants. If $b_k=0$, the method is **explicit**; otherwise, it is **implicit**.  
@@ -102,8 +104,10 @@ An alternative description of a multistep method is the **generating polynomials
 
 ```{math}
 :label: genpoly
+\begin{split}
   \rho(z) &= z^k - a_{k-1} z^{k-1} - \cdots - a_0,\\
   \sigma(z) &= b_k z^k + b_{k-1}z^{k-1} + \cdots + b_0.
+\end{split}
 ```
 
 For example, the AB3 method is completely specified by

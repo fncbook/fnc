@@ -83,14 +83,12 @@ We use the fact that $f(r)=0$ and additionally assume now that $r$ is a simple r
 
 The series in the denominator is of the form $1/(1+z)$. Provided $|z|<1$, this is the limit of the geometric series $1-z+z^2-z^3 + \cdots$. Keeping only the lowest-order terms, we derive
 
-```{math}
-:label: newtonerr
-\begin{split}
+\begin{align*}
+\label{newtonerr}
 \epsilon_{k+1} &= \epsilon_k - \epsilon_k \left[ 1 + \dfrac{1}{2}\dfrac{f''(r)}{f'(r)} \epsilon_k + O(\epsilon_k^2) \right] \, \left[ 1 - \dfrac{f''(r)}{f'(r)}
 \epsilon_k + O(\epsilon_k^2) \right]\\
 &= \frac{1}{2}\, \frac{f''(r)}{f'(r)} \epsilon_k^2 + O(\epsilon_k^3).
-\end{split}
-```
+\end{align*}
 
 ::::{prf:observation}
 Asymptotically, each iteration of Newton's method roughly squares the error.
@@ -117,8 +115,10 @@ Recall that linear convergence is identifiable by trending toward a straight lin
 
 ```{math}
 :label: quadratictest
+\begin{split}
   \log |\epsilon_{k+1}| & \approx 2 \log |\epsilon_{k}| + L,\\
     \frac{\log |\epsilon_{k+1}|}{\log |\epsilon_{k}|} &\approx 2 + \frac{L}{\log |\epsilon_{k}|} \to 2. 
+\end{split}
 ```
 
 (demo-newton-converge)=

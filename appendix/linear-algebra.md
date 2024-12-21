@@ -1,3 +1,4 @@
+(section-appendix-linear-algebra)=
 # Review of linear algebra
 
 ## Terminology

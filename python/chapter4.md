@@ -107,7 +107,7 @@ fig, ax = subplots()
 ax.plot(xx, J3(xx))
 ax.grid()
 xlabel("$x$"), ylabel("$J_3(x)$")
-title("Bessel function")
+title("Bessel function");
 ```
 From the graph we see roots near 6, 10, 13, 16, and 19. We use `root_scalar` from the `scipy.optimize` package to find these roots accurately.
 
@@ -162,7 +162,7 @@ plot(xx, f(xx) + 0.02, "k")
 plot(xx, f(xx) - 0.02, "k")
 axis("equal"), grid(True)
 xlabel("x"), ylabel("f(x)")
-title("Well-conditioned root")
+title("Well-conditioned root");
 ```
 
 The possible values for a perturbed root all lie within the interval where the ribbon intersects the $x$-axis. The width of that zone is about the same as the vertical thickness of the ribbon.
@@ -182,7 +182,7 @@ plot(xx, f(xx) + 0.02, "k")
 plot(xx, f(xx) - 0.02, "k")
 axis("equal"), grid(True)
 xlabel("x"), ylabel("f(x)")
-title("Poorly-conditioned root")
+title("Poorly-conditioned root");
 ```
 
 The vertical displacements in this picture are exactly the same as before. But the potential _horizontal_ displacement of the root is much wider. In fact, if we perturb the function entirely upward by the amount drawn here, the root disappears!
@@ -215,7 +215,7 @@ xx = linspace(2, 3, 400)
 ax.plot(xx, g(xx), label="y=g(x)")
 ax.plot(xx, xx, label="y=x")
 axis("equal"), legend()
-title("Finding a fixed point")
+title("Finding a fixed point");
 ```
 
 If we evaluate $g(2.1)$, we get a value of almost 2.6, so this is not a fixed point.
@@ -278,7 +278,7 @@ for k in range(5):
     y = g(x)
     ax.plot([x, x], [x, y], "k:")
 ylim(1, 2.5)
-title("No convergence")
+title("No convergence");
 ```
 
 This time, the iteration is pushing us _away from_ the correct answer.
@@ -312,7 +312,7 @@ It's illuminating to construct and plot the sequence of errors.
 err = abs(x - max(r))
 semilogy(err, "-o")
 xlabel("iteration number"), ylabel("error")
-title("Convergence of fixed point iteration")
+title("Convergence of fixed point iteration");
 ```
 
 It's quite clear that the convergence quickly settles into a linear rate. We could estimate this rate by doing a least-squares fit to a straight line. Keep in mind that the values for small $k$ should be left out of the computation, as they don't represent the linear trend.
@@ -351,7 +351,7 @@ fig, ax = subplots()
 ax.plot(xx, f(xx), label="function")
 ax.grid()
 ax.set_xlabel("$x$")
-ax.set_ylabel("$y$")
+ax.set_ylabel("$y$");
 ```
 
 From the graph, it is clear that there is a root near $x=1$. So we call that our initial guess, $x_1$.
@@ -405,7 +405,7 @@ tangent2 = lambda x: y2 + slope2 * (x - x2)
 plot(xx, tangent2(xx), "--")
 x3 = x2 - y2 / slope2
 plot(x3, 0, "ko")
-title("Second iteration")
+title("Second iteration");
 ```
 
 ```{code-cell}
@@ -488,7 +488,7 @@ plot(y_, x_, label="$y=h^{-1}(x)$")
 plot([0, max(y_)], [0, max(y_)], 'k--', label="")
 title("Function and its inverse")
 xlabel("x"), ylabel("y"), axis("equal")
-ax.grid(), legend()
+ax.grid(), legend();
 ```
 ``````
 ### 4.4 @section-nonlineqn-secant
@@ -503,7 +503,7 @@ fig, ax = subplots()
 ax.plot(xx, f(xx), label="function")
 ax.set_xlabel("$x$")
 ax.set_ylabel("$f(x)$")
-ax.grid()
+ax.grid();
 ```
 
 From the graph, it's clear that there is a root near $x=1$. To be more precise, there is a root in the interval $[0.5,1]$. So let us take the endpoints of that interval as _two_ initial approximations.
@@ -628,7 +628,7 @@ yy = linspace(-0.1, 2.6, 400)
 plot(q(yy), yy, "--", label="inverse interpolant")
 
 grid(), xlabel("$x$"), ylabel("$y$")
-legend()
+legend();
 ```
 
 We seek the value of $x$ that makes $y$ zero. This means evaluating $q$ at zero.
@@ -743,8 +743,6 @@ It's always a good idea to check the accuracy of the root, by measuring the resi
 r = x[:, -1]
 print("backward error:", norm(func(r)))
 ```
-
-
 Looking at the convergence in norm, we find a convergence rate between linear and quadratic, like with the secant method:
 
 ```{code-cell}
@@ -795,7 +793,7 @@ fig, ax = subplots()
 ax.scatter(s, w, label="data")
 ax.plot(s, model(s), 'k--', label="unperturbed model")
 xlabel("s"), ylabel("w")
-legend()
+legend();
 ```
 
 ```{index} ! Python; destructuring

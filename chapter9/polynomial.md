@@ -52,10 +52,13 @@ where $r_1,\dots,r_n$ are the roots of the polynomial and $c$ is a constant. The
 
 ::::{prf:definition} Lagrange cardinal polynomial
 Given distinct nodes $t_0,\ldots,t_n$, the polynomial
+
 :::{math}
 :label: lagrange
+\begin{split}
 \ell_{k}(x) & = \frac{(x-t_0)\dots(x-t_{k-1})(x-t_{k+1})\dots(x-t_n)}{(t_k-t_0)\dots(t_k-t_{k-1})(t_k-t_{k+1})\dots(t_k-t_n)} \\[1mm]
 &= \prod_{\substack{i=0\\i\ne k}}^n \frac{(x-t_i)}{(t_k-t_i)}
+\end{split}
 :::
 
 is of degree at most $n$ and satisfies the cardinality conditions {eq}`lagrangecond`.

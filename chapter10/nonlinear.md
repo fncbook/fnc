@@ -104,6 +104,30 @@ Suppose $n=3$ for an equispaced grid, so that $h=\frac{1}{2}$, $x_0=0$, $x_1=\fr
 
 Our implementation using second-order finite differences is {numref}`Function {number} <function-bvp>`. It's surprisingly short, considering how general it is, because we have laid a lot of groundwork already.
 
+(function-bvp)=
+``````{prf:algorithm} bvp
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-bvp-julia
+:::
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-bvp-matlab
+:::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #function-bvp-python
+:::
+````
+`````
+``````
+
+
 In order to solve a particular problem, we must write a function that computes $\phi$ for vector-valued inputs $\mathbf{x}$, $\mathbf{u}$, and $\mathbf{u}'$, and functions for the boundary conditions. We also have to supply `init`, which is an estimate of the solution used to initialize the quasi-Newton iteration. Since this argument is a vector of length $n+1$, it sets the value of $n$ in the discretization.
 
 (demo-nonlinear-pendulum)=

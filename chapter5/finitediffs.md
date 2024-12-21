@@ -61,21 +61,22 @@ $$
 
 This gives four forward difference estimates,
 
-$$
+\begin{align*}
 f'(0) & \approx 4\left(\frac{1}{16}-0\right), &\quad 
 f'\left(\tfrac{1}{4}\right)& \approx 4\left(\frac{1}{4}-\frac{1}{16}\right), \\
 f'\left(\tfrac{1}{2}\right)& \approx 4\left(\frac{9}{16}-\frac{1}{4}\right), &\quad 
 f'\left(\tfrac{3}{4}\right) &\approx 4\left(1-\frac{9}{16}\right).
-$$
+\end{align*}
 
 We also get four backward difference estimates,
 
-$$
+\begin{align*}
 f'\left(\tfrac{1}{4}\right) &\approx 4\left(\frac{1}{16}-0\right), &\quad 
 f'\left(\tfrac{1}{2}\right) &\approx 4\left(\frac{1}{4}-\frac{1}{16}\right), \\ 
 f'\left(\tfrac{3}{4}\right) &\approx 4\left(\frac{9}{16}-\frac{1}{4}\right), &\quad 
 f'\left(1\right) &\approx 4\left(1-\frac{9}{16}\right).
-$$
+\end{align*}
+
 
 Notice that it's the same four differences each time, but we're interpreting them as derivative estimates at different nodes.
 ::::
@@ -85,7 +86,7 @@ As pointed out in {numref}`Example {number} <example-finitediffs-fd1bd1>`, the o
 
 Let's derive the shortest centered formula using $p=q=1$. For simplicity, we will set $x=0$ without affecting the result. This means that $f(-h)$, $f(0)$, and $f(h)$ are all available in {eq}`fdformula`. 
 
-Note that {eq}`forwardFD11` is simply the slope of the line through the points $\bigl(0,f(0)\bigr)$ and $\bigl(h,f(h)\bigr)$. One route to using all three function values is to differentiate the quadratic polynomial that interpolates $\bigl(-h,f(-h)\bigr)$ as well (see [Exercise 1](problem-quadraticFD)):
+Note that {eq}`forwardFD11` is simply the slope of the line through the points $\bigl(0,f(0)\bigr)$ and $\bigl(h,f(h)\bigr)$. One route to using all three function values is to differentiate the quadratic polynomial that interpolates $\bigl(-h,f(-h)\bigr)$ as well (see [Exercise 1](#problem-quadraticFD)):
  
 ```{math}
 :label: fdinterp2

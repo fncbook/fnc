@@ -132,7 +132,7 @@ The error is zero at the nodes, by the definition of interpolation. The error bo
 f = @(x) sin( exp(2 * x) );
 clf,  fplot(f, [0, 1], displayname="function")
 xlabel('x'),  ylabel('f(x)')   
-legend(location="southwest")
+legend((location="southwest"));
 ```
 
 We start with 4 equally spaced nodes ($n=3$).
@@ -580,7 +580,7 @@ hold on;  semilogy(n, abs(errAdapt), 'o-')
 plot(n, n.^(-4), 'k--')        % 4th order error
 set(gca, 'xscale', 'log')     
 legend('ccint', 'glint', 'intadapt', '4th order')  
-title('Spectral vs 4th order')
+title(('Spectral vs 4th order'));
 ```
 
 At the core of `intadapt` is a fourth-order formula, and the results track that rate closely. For all but the most relaxed error tolerances, both spectral methods are far more efficient than the low-order counterpart. For other integrands, particularly those that vary nonuniformly across the interval, the adaptive method might be more competitive.
@@ -628,7 +628,7 @@ clf,  loglog(len, err, 'o-')
 n = [100, 10000];
 hold on,  loglog(n, 1000 * n.^(-4), 'k--')  % 4th order error
 legend("direct", "double exponential", "4th order", location="southwest")
-title("Comparison of integration methods")
+title(("Comparison of integration methods"));
 ```
 
 Both methods are roughly fourth-order due to Simpson's formula in the underlying adaptive integration method. At equal numbers of evaluation nodes, however, the double exponential method is consistently 2–3 orders of magnitude more accurate.
@@ -653,7 +653,7 @@ clf,  loglog(len, err, 'o-')
 n = [30, 3000];
 hold on,  loglog(n, 30 * n.^(-4), 'k--')  % 4th order error
 legend("direct", "double exponential", "4th order", location="southwest")
-title("Comparison of integration methods")
+title(("Comparison of integration methods"));
 ```
 
 As in {numref}`Demo {number} <demo-improper-intinf>`, the double exponential method is more accurate than direct integration by a few orders of magnitude. Equivalently, the same accuracy can be reached with many fewer nodes.

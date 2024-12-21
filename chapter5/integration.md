@@ -173,8 +173,10 @@ A more thorough statement of the truncation error is known as the **Euler–Macl
 
 ```{math}
 :label: eulermaclaurin
+\begin{split}
 \int_a^b f(x)\, dx &= T_f(n) - \frac{h^2}{12} \left[ f'(b)-f'(a) \right] + \frac{h^4}{740} \left[ f'''(b)-f'''(a) \right] + O(h^6) \\
     &= T_f(n) - \sum_{k=1}^\infty \frac{B_{2k}h^{2k}}{(2k)!}  \left[ f^{(2k-1)}(b)-f^{(2k-1)}(a) \right],
+\end{split}
 ```
 
 where the $B_{2k}$ are constants known as *Bernoulli numbers*. Unless we happen to be fortunate enough to have a function with $f'(b)=f'(a)$, we should expect truncation error at second order and no better.
@@ -347,7 +349,7 @@ where the nodes referenced in the last line are relative to $n=2m$. Hence in pas
     ```
 
     ```{math}
-:label: gregory
+    :label: gregory
         G_f(h) = T_f(h) - \frac{h}{24} \left[ 3\Bigl( f(t_n)+f(t_0) \Bigr) -4\Bigr( f(t_{n-1}) + f(t_1) \Bigr) + \Bigl( f(t_{n-2})+f(t_2)   \Bigr) \right],
     ```
 
@@ -386,12 +388,12 @@ where the nodes referenced in the last line are relative to $n=2m$. Hence in pas
     **(d)** Now also assume that $n=2m$ for an integer $m$. Derive Simpson's formula,
 
     ```{math}
-:label: simpson
+    :label: simpson
       \begin{split}
         \int_a^b f(x)\, dx \approx  \frac{h}{3}\bigl[ &f(t_0) + 4f(t_1) + 2f(t_2) + 4f(t_3) + 2f(t_4) + \cdots\\
         &+ 2f(t_{n-2}) + 4f(t_{n-1}) + f(t_n) \bigr].
       \end{split}
-     ```
+    ```
 
 5. ✍ Show that the Simpson formula {eq}`simpson` is equivalent to $S_f(n/2)$, given the definition of $S_f$ in {eq}`nc-simpson`.
 

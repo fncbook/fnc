@@ -120,7 +120,7 @@ clf
 plot(sol.Time, sol.Solution, '-o')
 xlabel("t")
 ylabel("u(t)")
-title("Solution of an IVP")
+title(("Solution of an IVP"));
 ```
 
 You might want to know the solution at particular times other than the ones selected by the solver. That requires an interpolation, which is done by `solutionFcn`.
@@ -151,7 +151,7 @@ clf
 semilogy(sol.Time, sol.Solution)
 xlabel("t")
 ylabel("u(t)")
-title("Finite-time blowup")
+title(("Finite-time blowup"));
 ```
 ``````
 
@@ -167,7 +167,7 @@ for u0 = [0.7, 1, 1.3]    % initial values
 end
 xlabel('t')
 ylabel('u(t)')
-title('Exponential divergence of solutions')
+title(('Exponential divergence of solutions'));
 ```
 
 But with $u'=-u$, solutions actually get closer together with time.
@@ -180,7 +180,7 @@ for u0 = [0.7, 1, 1.3]    % initial values
 end
 xlabel('t')
 ylabel('u(t)')
-title('Exponential convergence of solutions')
+title(('Exponential convergence of solutions'));
 ```
 
 In this case the actual condition number is one, because the initial difference between solutions is the largest over all time. Hence the exponentially growing bound $e^{b-a}$ is a gross overestimate.
@@ -205,7 +205,7 @@ Here is the call to {numref}`Function {number} <function-euler>`.
 clf, plot(t, u, '.-')
 xlabel('t')
 ylabel('u(t)')
-title('Solution by Euler''s method')
+title(('Solution by Euler''s method'));
 ```
 
 We could define a different interpolant to get a smoother picture above, but the derivation of Euler's method assumed a piecewise linear interpolant. We can instead request more steps to make the interpolant look smoother.
@@ -213,7 +213,7 @@ We could define a different interpolant to get a smoother picture above, but the
 ```{code-cell}
 [t, u] = eulerivp(ivp, a, b, 50);
 hold on, plot(t, u, '.-')
-legend('20 steps', '50 steps')
+legend(('20 steps', '50 steps'));
 ```
 
 Increasing $n$ changed the solution noticeably. Since we know that interpolants and finite differences become more accurate as $h\to 0$, we should anticipate the same behavior from Euler's method. We don't have an exact solution to compare to, so we will use a built-in solver to construct an accurate reference solution.
@@ -245,7 +245,7 @@ hold on, loglog(n, 0.5 * err(end) * (n / n(end)).^(-1), '--')
 xlabel('n')
 ylabel('inf-norm error')
 title('Convergence of Euler''s method')
-legend('error', 'O(n^{-1})', 'location', 'southwest')
+legend(('error', 'O(n^{-1})', 'location', 'southwest'));
 ```
 ``````
 
@@ -279,7 +279,7 @@ plot(sol.Time, sol.Solution)
 xlabel("t")
 ylabel("u(t)")
 title('Predator-prey solution')
-legend('prey', 'predator')
+legend(('prey', 'predator'));
 ```
 
 We can also use {numref}`Function {number} <function-euler>` to find the solution.
@@ -302,7 +302,7 @@ clf
 plot(u(1, :), u(2, :))
 title("Predator-prey in the phase plane")
 xlabel("y")
-ylabel("z")
+ylabel(("z"));
 ```
 
 From this plot we can deduce that the solution approaches a periodic one, which in the phase plane is represented by a closed loop.
@@ -336,7 +336,7 @@ t = linspace(a, b, 1001);
 clf, plot(t, theta(t))
 xlabel("t");  ylabel("angle")
 title("Uncoupled pendulums")
-legend("\theta_1", "\theta_2")
+legend(("\theta_1", "\theta_2"));
 ```
 
 You can see that the pendulums swing independently. Because the model is nonlinear and the initial angles are not small, they have slightly different periods of oscillation, and they go in and out of phase.
@@ -350,7 +350,7 @@ theta = solutionFcn(ivp, a, b, OutputVariables = 1:2);
 clf, plot(t, theta(t))
 xlabel("t");  ylabel("angle")
 title("Coupled pendulums")
-legend("\theta_1", "\theta_2")
+legend(("\theta_1", "\theta_2"));
 ```
 
 The coupling makes the pendulums swap energy back and forth.
@@ -401,7 +401,7 @@ loglog(2*n, 1e-5 * (n / n(end)) .^ (-2), '--')
 loglog(4*n, 1e-10 * (n / n(end)) .^ (-4), '--')
 xlabel("f-evaluations");  ylabel("inf-norm error")
 title("Convergence of RK methods")
-legend("IE2", "RK4", "O(n^{-2})", "O(n^{-4})", "location", "southwest")
+legend(("IE2", "RK4", "O(n^{-2})", "O(n^{-4})", "location", "southwest"));
 ```
 
 The fourth-order variant is more efficient in this problem over a wide range of accuracy.
@@ -421,7 +421,7 @@ a = 0;  b = 5;
 [t, u] = rk23(ivp, a, b, 1e-5);
 clf, plot(t, u)
 xlabel("t");  ylabel("u(t)")
-title("Adaptive IVP solution")
+title(("Adaptive IVP solution"));
 ```
 
 The solution makes a very abrupt change near $t=2.4$. The resulting time steps vary over three orders of magnitude.
@@ -430,7 +430,7 @@ The solution makes a very abrupt change near $t=2.4$. The resulting time steps v
 Delta_t = diff(t);
 semilogy(t(1:end-1), Delta_t) 
 xlabel("t");  ylabel("step size")
-title("Adaptive step sizes")
+title(("Adaptive step sizes"));
 ```
 
 If we had to run with a uniform step size to get this accuracy, it would be
@@ -508,7 +508,7 @@ hold on
 loglog(n, 0.5 * err(end) * (n / n(end)) .^ (-4), '--')
 xlabel("n");  ylabel("inf-norm error")
 title("Convergence of AB4")
-legend("AB4", "O(n^{-4})", "location", "southwest")
+legend(("AB4", "O(n^{-4})", "location", "southwest"));
 ```
 ``````
 
@@ -528,7 +528,7 @@ We will solve the problem first with the implicit AM2 method using $n=200$ steps
 [tI, uI] = am2(ivp, 0, 400, 200);
 clf
 plot(tI, uI)
-xlabel("t");  ylabel("u(t)")
+xlabel("t");  ylabel(("u(t)"));
 ```
 
 Now we repeat the process using the explicit AB4 method.
@@ -538,7 +538,7 @@ Now we repeat the process using the explicit AB4 method.
 hold on
 plot(tE, uE, '.', 'markersize', 8)
 ylim([-5, 3])
-legend("AM2", "AB4")
+legend(("AM2", "AB4"));
 ```
 
 Once the solution starts to take off, the AB4 result goes catastrophically wrong.
@@ -557,7 +557,7 @@ hold on
 plot(tE, uE)
 [tE, uE] = ab4(ivp, 0, 400, 1600);
 plot(tE, uE)
-legend("AM2, n=200", "AB4, n=1000", "AB4, n=1600")
+legend(("AM2, n=200", "AB4, n=1000", "AB4, n=1600"));
 ```
 
 So AB4, which is supposed to be _more_ accurate than AM2, actually needs something like 8 times as many steps to get a reasonable-looking answer!
@@ -596,7 +596,7 @@ The error starts out promisingly, but things explode from there. A graph of the 
 clf
 semilogy(t, abs(u))
 xlabel("t");  ylabel("|u(t)|")
-title("LIAF solution")
+title(("LIAF solution"));
 ```
 
 It's clear that the solution is growing exponentially in time.

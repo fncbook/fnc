@@ -6,7 +6,7 @@ numbering:
 # Computing with matrices
 
 ```{attention}
-We recommend that you review the linear algebra material in {doc}`../appendix/linear-algebra` before reading this section.
+We recommend that you review the linear algebra material in @section-appendix-linear-algebra before reading this section.
 ```
 
 At a reductive level, a matrix is a table of numbers that obeys certain algebraic laws. But matrices are pervasive in scientific computation, mainly because they represent linear operations on vectors. Moreover, vectors go far beyond the three-dimensional representations of physical quantities you learned about in calculus. 

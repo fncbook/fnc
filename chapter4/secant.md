@@ -136,11 +136,11 @@ for constants $\alpha >1$ and $L>0$, then the sequence has **superlinear converg
 
 Quadratic convergence is a particular case of superlinear convergence. Roughly speaking, we expect
 
-```{math}
-:label: superlinear-rate
+\begin{align*}
+\label{superlinear-rate}
 \log |\epsilon_{k+1}| & \approx \alpha (\log |\epsilon_k|) + \log L, \\ 
 \frac{\log |\epsilon_{k+1}|}{\log |\epsilon_k|} & \approx \alpha + \frac{\log L}{\log |\epsilon_k|} \to \alpha,
-```
+\end{align*}
 
 as $k\to\infty$.
 

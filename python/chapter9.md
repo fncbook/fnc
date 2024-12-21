@@ -132,7 +132,7 @@ y = zeros(n+1)
 y[k] = 1
 plot(t, y, "ko")
 xlabel("$x$"),  ylabel("$\\ell_2(x)$")
-title("Lagrange cardinal function")
+title(("Lagrange cardinal function"));
 ```
 
 Observe that $\ell_k$ is _not_ between zero and one everywhere, unlike a hat function.
@@ -220,7 +220,7 @@ y = f(t)
 p = FNC.polyinterp(t, y)
 plot(x, p(x), label="interpolant")
 plot(t, y, 'ko', label="nodes")
-legend(),  title("Equispaced interpolant, n=6")
+legend(),  title("Equispaced interpolant, n=6");
 ```
 
 This looks pretty good. We want to track the behavior of the error as $n$ increases. We will estimate the error in the continuous interpolant by sampling it at a large number of points and taking the max-norm.
@@ -238,7 +238,7 @@ for k, n in enumerate(N):
 
 semilogy(N, err, "-o")
 xlabel("$n$"),  ylabel("max error")
-title("Polynomial interpolation error")
+title(("Polynomial interpolation error"));
 ```
 
 The error initially decreases as one would expect but then begins to grow. Both phases occur at rates that are exponential in $n$, i.e., $O(K^n$) for a constant $K$, appearing linear on a semi-log plot.
@@ -258,7 +258,7 @@ for n in range(10, 60, 10):
 xlabel("$x$")
 ylabel("$|\Phi(x)|$")
 ylim([1e-25, 1])
-title("Effect of equispaced nodes")
+title(("Effect of equispaced nodes"));
 ```
 
 Each time $\Phi$ passes through zero at an interpolation node, the value on the log scale should go to $-\infty$, which explains the numerous cusps on the curves.
@@ -357,7 +357,7 @@ for k, n in enumerate([4, 10, 16, 40]):
     labels.append(f"degree {n}")
 
 xlabel("$x$"),  ylabel("$|f(x)-p(x)|$"),  ylim([1e-20, 1])
-legend(label),  title("Error for Chebyshev interpolants")
+legend((label),  title("Error for Chebyshev interpolants"));
 ```
 
 By degree 16 the error is uniformly within machine epsilon, and, importantly, it stays there as $n$ increases. Note that as predicted by the error indicator function, the error is uniform over the interval at each value of $n$.
@@ -703,7 +703,7 @@ n = array([100, 10000])
 loglog(n, 1000 / n**4, 'k--')
 xlabel("number of nodes"),  ylabel("error")
 title("Comparison of integration methods")
-legend(["direct", "double exponential", "4th-order"], loc="lower left")
+legend((["direct", "double exponential", "4th-order"], loc="lower left"));
 ```
 
 Both methods are roughly fourth-order due to Simpson's formula in the underlying adaptive integration method. At equal numbers of evaluation nodes, however, the double exponential method is consistently 2--3 orders of magnitude more accurate.
@@ -730,7 +730,7 @@ n = array([100, 10000])
 loglog(n, 30 / n**4, 'k--')
 xlabel("number of nodes"),  ylabel("error")
 title("Comparison of integration methods")
-legend(["direct", "double exponential", "4th-order"], loc="lower left")
+legend((["direct", "double exponential", "4th-order"], loc="lower left"));
 ```
 
 As in {numref}`Demo {number} <demo-improper-intinf>`, the double exponential method is more accurate than direct integration by a few orders of magnitude. Equivalently, the same accuracy can be reached with many fewer nodes.

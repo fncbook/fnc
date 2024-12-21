@@ -113,7 +113,7 @@ FNC.init_format()
 As a system, the MEMS problem from {numref}`Example {number} <example-tpbvp-mems>` uses $y_1=w$, $y_2=w'$ to obtain
 
 :::{math}
-:label: memssys
+:label: memssys-intro
 \begin{split}
 y_1' &= y_2, \\
 y_2' &= \frac{\lambda}{y_1^2} - \frac{y_2}{r}.
@@ -122,7 +122,6 @@ y_2' &= \frac{\lambda}{y_1^2} - \frac{y_2}{r}.
 
 We will code an *in-place* form of this ODE, in which the first argument is used to return the computed values of $y_1'$ and $y_2'$.  
 :::{card}
-:columns: 5 
 The in-place code here saves the computing time that would otherwise be needed to allocate memory for `f` repeatedly.
 :::
 :::::
@@ -258,19 +257,6 @@ The accuracy is consistent with the error tolerance used for the IVP solution. T
 
 (demo-shooting-unstable-julia)=
 ``````{dropdown} @demo-shooting-unstable
-We solve the problem
-  
-$$
-u'' = \lambda^2 u + \lambda^2, \quad 0\le x \le 1, \quad u(0)=-1,\; u(1)=0.
-$$
-
-The exact solution is easily confirmed to be
-
-$$
-u(x) = \frac{\sinh(\lambda x)}{\sinh(\lambda)} - 1.
-$$
-
-This solution satisfies $-1\le u(x) \le 0$ for all $x\in[0,1]$. Now we compute shooting solutions for several values of $\lambda$.
 
 ```{code-cell}
 plt = plot(
@@ -290,21 +276,6 @@ plt
 ```
 
 The numerical solutions evidently don't satisfy the right boundary condition as $\lambda$ increases, which makes them invalid. 
-
-The cause is readily explained. The solution to the ODE with $u(0)=-1$ and $u'(0)=s_2$  is
-
-:::{math}
-:label: shootinstabshoot
-    \frac{s_2}{\lambda}\sinh(\lambda x) - 1.
-:::
-
-If $x$ is a fixed value in $[0,1]$, we compute that the absolute condition number of {eq}`shootinstabshoot` with respect to $s_2$ is the magnitude of the partial derivative,
-
-$$
-  \left| \frac{\sinh\lambda x}{\lambda} \right|,
-$$
-
-which grows rapidly with $\lambda$ near $x=1$. With the IVP solution so sensitive to $s_2$, a numerical approach to find $s_2$ approximately is doomed.
 
 ``````
 

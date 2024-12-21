@@ -36,10 +36,10 @@ The forward difference formula {eq}`forwardFD11` given by $(f(h)-f(0))/h$ yields
 ```{math}
 :label: fd1trunc
 \begin{split}
-  \tau_f(h) &= f'(0) - \frac{ f(h)-f(0)}{h} \\
-  &=f'(0) - h^{-1} \left[ \bigl( f(0) + h f'(0) + \tfrac{1}{2}h^2f''(0)+ \cdots \bigr) - f(0) \right] \\
-  & = -\frac{1}{2}h f''(0) + O(h^2).
-  \end{split}
+\tau_f(h) &= f'(0) - \frac{ f(h)-f(0)}{h} \\
+&=f'(0) - h^{-1} \left[ \bigl( f(0) + h f'(0) + \tfrac{1}{2}h^2f''(0)+ \cdots \bigr) - f(0) \right] \\
+& = -\frac{1}{2}h f''(0) + O(h^2).
+\end{split}
 ```
 
 The primary conclusion is that the truncation error is $O(h)$ as $h\to 0$.
@@ -121,8 +121,10 @@ As $h\to 0$, the numerator approaches zero even though the values $f(x+h)$ and $
 implying a relative error of size $\kappa(h) \epsilon_\text{mach}$ in its computation. Hence the numerical value we actually compute for $\delta$ is
 
 ```{math}
+\begin{split}
 \tilde{\delta}(h) &= \frac{f(x+h)-f(x)}{h}\, (1+\kappa(h)\epsilon_\text{mach}) \\
-&= \delta(h) + \frac{ \max\{\,|f(x+h)|,|f(x)|\,\} }{ |f(x+h)-f(x) | }\cdot \frac{f(x+h)-f(x)}{h} \cdot \epsilon_\text{mach}.\\
+&= \delta(h) + \frac{ \max\{\,|f(x+h)|,|f(x)|\,\} }{ |f(x+h)-f(x) | }\cdot \frac{f(x+h)-f(x)}{h} \cdot \epsilon_\text{mach}.
+\end{split}
 ```
 
 Hence as $h\to 0$, 

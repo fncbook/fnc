@@ -91,7 +91,6 @@ fprintf('1.0 has type: %s', class(1.0))
 The spacing between floating-point values in $[2^n,2^{n+1})$ is $2^n \epsilon_\text{mach}$, where $\epsilon_\text{mach}$ is machine epsilon. Its value is predefined as `eps`.
 
 :::{card}
-:columns: 6
 While you can assign a different value to `eps`, doing so does not change any arithmetic. It's generally a bad idea. 
 :::
 ::::

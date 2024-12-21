@@ -133,29 +133,25 @@ Finally, we note that $\hat{u}(a)= \mathbf{e}_0^T\mathbf{u}$ and $\hat{u}(b)= \m
 
 Our implementation of linear collocation is {numref}`Function {number} <function-bvplin>`. It uses second-order finite differences but makes no attempt to exploit the sparsity of the matrices. It would be trivial to change the function to use spectral differentiation. 
 
-(function-bvplin
-)=
+(function-bvplin)=
 ``````{prf:algorithm} bvplin
 
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
-:::{embed} #function-bvplin
--julia
+:::{embed} #function-bvplin-julia
 :::
 ```` 
 
 ````{tab-item} MATLAB
 :sync: matlab
-:::{embed} #function-bvplin
--matlab
+:::{embed} #function-bvplin-matlab
 :::
 ```` 
 
 ````{tab-item} Python
 :sync: python
-:::{embed} #function-bvplin
--python
+:::{embed} #function-bvplin-python
 :::
 ````
 `````

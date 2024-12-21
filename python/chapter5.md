@@ -100,8 +100,7 @@ t = linspace(-1, 1, n + 1)
 y = t**2 + t + 0.05 * sin(20 * t)
 fig, ax = subplots()
 plot(t, y, "o", label="data")
-xlabel("$x$")
-ylabel("$y$")
+xlabel("$x$"),  ylabel("$y$");
 ```
 
 ```{index} ! Julia; fit
@@ -125,8 +124,7 @@ t = linspace(-1, 1, n + 1)
 y = t**2 + t + 0.05 * sin(20 * t)
 fig, ax = subplots()
 plot(t, y, "o", label="data")
-xlabel("$x$")
-ylabel("$y$")
+xlabel("$x$"),  ylabel("$y$");
 ```
 
 The points themselves are unremarkable. But take a look at what happens to the polynomial interpolant.
@@ -152,8 +150,7 @@ t = linspace(-1, 1, n + 1)
 y = t**2 + t + 0.5 * sin(20 * t)
 fig, ax = subplots()
 scatter(t, y, label="data")
-xlabel("$x$")
-ylabel("$y$")
+xlabel("$x$"),  ylabel("$y$");
 ```
 
 Here is an interpolant that is linear between each consecutive pair of nodes, using `plinterp` from {numref}`section-localapprox-pwlin`.
@@ -177,9 +174,8 @@ scatter(t, y, label="data")
 p = interp1d(t, y, kind="cubic")
 tt = linspace(-1, 1, 400)
 plot(tt, p(tt), label="cubic spline")
-xlabel("$x$")
-ylabel("$y$")
-legend()
+xlabel("$x$"),  ylabel("$y$")
+legend();
 ```
 ``````
 
@@ -199,7 +195,7 @@ scatter(t, y, label="data")
 tt = linspace(-1, 1, 400)
 plot(tt, p(tt), label="cardinal function")
 title("Cubic spline cardinal function")
-legend()
+legend();
 ```
 
 The piecewise cubic cardinal function is nowhere greater than one in absolute value. This happens to be true for all the cardinal functions, ensuring a good condition number for any interpolation with these functions. But the story for global polynomials is very different.
@@ -211,7 +207,7 @@ plot(tt, p(tt), label="cardinal function")
 xlabel("$x$")
 ylabel("$y$")
 title("Polynomial cardinal function")
-legend()
+legend();
 ```
 
 From the figure we can see that the condition number for polynomial interpolation on these nodes is at least 500.
@@ -238,7 +234,7 @@ for k in range(6):
     plot(x, FNC.hatfun(x, t, k))
 xlabel("$x$")
 ylabel("$H_k(x)$")
-title("Hat functions")
+title("Hat functions");
 ```
 ``````
 
@@ -252,7 +248,7 @@ x = linspace(0, 1, 400)
 fig, ax = subplots()
 plot(x, f(x), label="function")
 xlabel("$x$")
-ylabel("$f(x)$")
+ylabel("$f(x)$");
 ```
 
 First we sample the function to create the data.
@@ -300,7 +296,7 @@ loglog(N, err, "-o", label="observed error")
 loglog(N, order2, "--", label="2nd order")
 xlabel("$n$")
 ylabel("$\|f-p\|_\infty$")
-legend()
+legend();
 ```
 ``````
 
@@ -352,7 +348,7 @@ loglog(N, err, "-o", label="observed error")
 loglog(N, order4, "--", label="4th order")
 xlabel("$n$")
 ylabel("$\|f-S\|_\infty$")
-legend()
+legend();
 ```
 ``````
 
@@ -504,7 +500,7 @@ loglog(h_, h_, "--", label="$O(h)$")
 loglog(h_, h_**2, "--", label="$O(h^2)$")
 xlabel("$h$")
 ylabel("error")
-legend()
+legend(());
 ```
 ``````
 
@@ -544,7 +540,7 @@ plot(h_, 0.1 * 2 ** (-52) / h_, "--", color="k", label="$O(h^{-1})$")
 xlabel("$h$")
 ylabel("total error")
 title("FD error with roundoff")
-legend()
+legend(());
 ```
 
 Again the graph is made so that $h$ decreases from left to right. The errors are dominated at first by truncation error, which decreases most rapidly for the fourth-order formula. However, increasing roundoff error eventually equals and then dominates the truncation error as $h$ continues to decrease. As the order of accuracy increases, the crossover point moves to the left (greater efficiency) and down (greater accuracy).

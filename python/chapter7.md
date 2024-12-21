@@ -501,9 +501,7 @@ scatter(x1[Dem], x2[Dem], color="blue", label="D")
 scatter(x1[Rep], x2[Rep], color="red", label="R")
 scatter(x1[Ind], x2[Ind], color="darkorange", label="I")
 
-xlabel("partisanship")
-ylabel("bipartisanship")
-legend()
-title("111th US Senate in 2D");
+xlabel("partisanship"),  ylabel("bipartisanship")
+legend(),  title("111th US Senate in 2D");
 ```
 ``````

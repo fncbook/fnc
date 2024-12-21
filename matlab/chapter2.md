@@ -131,7 +131,7 @@ The `scatter` function creates a scatter plot of points; you can specify a line 
 scatter(year, y)
 xlabel("years since 1980")
 ylabel("population (millions)")
-title("Population of China")
+title(("Population of China"));
 ```
 
 :::{index} ! MATLAB; linspace
@@ -165,7 +165,7 @@ The `plot` function plots lines connecting the given $x$ and $y$ values; you can
 ```{code-cell}
 hold on 
 plot(tt, yy)
-legend("data", "interpolant", "location", "northwest")
+legend(("data", "interpolant", "location", "northwest"));
 ```
 ``````
 
@@ -719,7 +719,7 @@ clf    % clear any existing figure
 loglog(n_, t_, '.-')
 xlabel('size of matrix')
 ylabel('time (sec)')
-title('Timing of matrix-vector multiplications')
+title(('Timing of matrix-vector multiplications'));
 ```
 
 You can see that while the full story is complicated, the graph is trending to a straight line of positive slope. For comparison, we can plot a line that represents $O(n^2)$ growth exactly. (All such lines have slope equal to 2.)
@@ -728,7 +728,7 @@ You can see that while the full story is complicated, the graph is trending to a
 hold on
 loglog(n_, t_(1) * (n_ / n_(1)).^2, '--')
 axis tight
-legend('data', 'O(n^2)', 'location', 'southeast')
+legend(('data', 'O(n^2)', 'location', 'southeast'));
 ```
 ``````
 
@@ -763,7 +763,7 @@ hold on, loglog(n_,t_(end)*(n_/n_(end)).^3,'--')
 axis tight
 xlabel('size of matrix'), ylabel('time (sec)')
 title('Timing of LU factorization')
-legend('lu','O(n^3)','location','southeast')
+legend(('lu','O(n^3)','location','southeast'));
 ```
 ``````
 
@@ -1074,7 +1074,7 @@ subplot(1, 2, 1)
 plot(x(1, :), x(2, :)), axis equal
 title('Unit circle in 2-norm')
 xlabel('x_1')
-ylabel('x_2')
+ylabel(('x_2'));
 ```
 
 The linear function $\mathbf{f}(\mathbf{x}) = \mathbf{A}\mathbf{x}$ defines a mapping from $\mathbb{R}^2$ to $\mathbb{R}^2$. We can apply `A` to every column of `x` by using a single matrix multiplication.
@@ -1090,7 +1090,7 @@ subplot(1,2,2), plot(Ax(1,:), Ax(2,:)), axis equal
 hold on, plot(twonorm * x(1,:), twonorm * x(2,:), '--')
 title('Image of Ax, with ||A||')
 xlabel('x_1')
-ylabel('x_2')
+ylabel(('x_2'));
 ```
 ``````
 

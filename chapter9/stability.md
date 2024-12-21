@@ -244,7 +244,7 @@ In other contexts we refer to {eq}`spectral` as linear convergence, but here it 
 5. The Chebyshev points can be used when the interval of interpolation is $[a,b]$ rather than $[-1,1]$ by means of the change of variable
 
     :::{math}
-:label: changeinterval
+    :label: changeinterval
       z = \psi(x) = a + (b-a)\frac{(x+1)}{2}.
     :::
 
@@ -259,7 +259,7 @@ In other contexts we refer to {eq}`spectral` as linear convergence, but here it 
 6. The Chebyshev points can be used for interpolation of functions defined on the entire real line by using the change of variable
 
     :::{math}
-:label: changeintervalinf
+    :label: changeintervalinf
     z = \phi(x) = \frac{2x}{1-x^2},
     :::
 

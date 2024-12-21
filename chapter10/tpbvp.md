@@ -5,7 +5,7 @@ numbering:
 (section-bvp-tpbvp)=
 # Two-point BVP
 
-The initial-value problems of {doc}`Chapter 6<../ivp/overview>` are characterized by an ordinary differential equation plus a value of the solution's state at one value of the independent variable.
+The initial-value problems of @chapter-ivp are characterized by an ordinary differential equation plus a value of the solution's state at one value of the independent variable.
 
 In a **boundary-value problem**, the state is not entirely given at any point. Instead, partial information is given at multiple values of the independent variable. We will focus on the most common type.
 
@@ -84,6 +84,18 @@ We can solve the TPBVP {eq}`tpbvp` by recasting the problem as a first-order sys
 
 (demo-tpbvp-mems)=
 ::::{prf:example} Solving a TPBVP
+As a system, the MEMS problem from {numref}`Example {number} <example-tpbvp-mems>` uses $y_1=w$, $y_2=w'$ to obtain
+
+:::{math}
+:label: memssys
+\begin{split}
+y_1' &= y_2, \\
+y_2' &= \frac{\lambda}{y_1^2} - \frac{y_2}{r}.
+\end{split}
+:::
+
+This has the form $\mathbf{y}' = \mathbf{f}(r,\mathbf{y})$. The boundary conditions are $y_2(0)=0$ and $y_1(1)=1$.
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia

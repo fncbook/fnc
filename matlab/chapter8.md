@@ -172,7 +172,7 @@ The `sparse` function converts any matrix to sparse form. But it's usually bette
 [L, U] = lufact(A);
 clf
 subplot(1, 2, 1), spy(L), title('L')
-subplot(1, 2, 2), spy(U), title('U')
+subplot(1, 2, 2), spy(U), title(('U'));
 ```
 
 However, if we introduce row pivoting, bandedness may be expanded or destroyed.
@@ -180,7 +180,7 @@ However, if we introduce row pivoting, bandedness may be expanded or destroyed.
 ```{code-cell}
 [L, U, p] = plufact(A);
 subplot(1, 2, 1), spy(L(p, :)), title('L')
-subplot(1, 2, 2), spy(U), title('U')
+subplot(1, 2, 2), spy(U), title(('U'));
 ```
 ``````
 
@@ -300,7 +300,7 @@ We check for linear convergence using a log-linear plot of the error.
 err = 1 - beta;
 clf,  semilogy(abs(err), '.-')
 title('Convergence of power iteration')
-xlabel('k'),  ylabel('|\lambda_1 - \beta_k|')
+xlabel('k'),  ylabel(('|\lambda_1 - \beta_k|'));
 ```
 
 The asymptotic trend seems to be a straight line, consistent with linear convergence. To estimate the convergence rate, we look at the ratio of two consecutive errors in the linear part of the convergence curve. The ratio of the first two eigenvalues should match the observed rate.
@@ -322,7 +322,7 @@ In practical situations, we don't know the exact eigenvalue that the algorithm i
 err = beta(end) - beta(1:end-1);
 semilogy(abs(err), '.-')
 title('Convergence of power iteration')
-xlabel('k'),  ylabel('|\beta_{60} - \beta_k|')
+xlabel('k'),  ylabel(('|\beta_{60} - \beta_k|'));
 ```
 
 The results are very similar until the last few iterations, when the limited accuracy of the reference value begins to show. That is, while it is a good estimate of $\lambda_1$, it is less good as an estimate of the error in nearby estimates.
@@ -355,7 +355,7 @@ The convergence is again linear.
 err = abs(0.6 - beta);
 semilogy(abs(err),'.-')
 title('Convergence of inverse iteration')
-xlabel('k'), ylabel('|\lambda_j - \beta_k|')
+xlabel('k'), ylabel(('|\lambda_j - \beta_k|'));
 ```
 
 ::::{grid} 1 1 2 2
@@ -547,7 +547,7 @@ The approximations converge smoothly, practically all the way to machine epsilon
 clf
 semilogy(resid,'.-')
 xlabel('m'),  ylabel('|| b - Ax_m ||')
-axis tight, title('Residual for GMRES')
+axis tight, title(('Residual for GMRES'));
 ```
 ``````
 
@@ -577,7 +577,7 @@ for j = 1:4
 end
 title('Convergence of restarted GMRES')
 xlabel('m'),  ylabel('residual norm')
-legend('no restart','every 20','every 40','every 60','location','southwest')
+legend(('no restart','every 20','every 40','every 60','location','southwest'));
 ```
 
 The "pure" GMRES curve is the lowest one. All of the other curves agree with it until the first restart. Decreasing the restart value makes the convergence per iteration generally worse, but the time required per iteration smaller as well.
@@ -628,7 +628,7 @@ hold on
 semilogy(m, rho .^ m, 'k--')
 xlabel('m'),  ylabel('relative residual') 
 title('Convergence of MINRES') 
-legend('MINRES', 'upper bound', 'location', 'southwest')
+legend(('MINRES', 'upper bound', 'location', 'southwest'));
 ```
 
 The upper bound turns out to be pessimistic here, especially in the later iterations. However, you can see a slow linear phase in the convergence that tracks the bound closely.
@@ -666,7 +666,7 @@ hold on,  semilogy(0:M, residCG / norm(b), '.-')
 title('Convergence of MINRES and CG')
 xlabel('Krylov dimension m')
 ylabel('||r_m|| / ||b||')
-legend('MINRES', 'CG')
+legend(('MINRES', 'CG'));
 ```
 
 There is little difference between the two methods here. Next, we increase the condition number of the matrix by a factor of 25. The rule of thumb predicts that the number of iterations required should increase by a factor of about 5.
@@ -688,7 +688,7 @@ hold on,  semilogy(0:M, residCG / norm(b), '.-')
 title('Convergence of MINRES and CG')
 xlabel('Krylov dimension m')
 ylabel('||r_m|| / ||b||')
-legend('MINRES', 'CG')
+legend(('MINRES', 'CG'));
 ```
 
 Both methods have an early superlinear phase that allow them to finish slightly sooner than the factor of 5 predicted: {numref}`Theorem {number} <theorem-minrescg-converge>` is an upper bound, not necessarily an approximation. Both methods ultimately achieve the same reduction in the residual; MINRES stops earlier, but with a slightly larger error.
@@ -722,7 +722,7 @@ Finally, we show the results of using $k=12$ repetitions of the blur in each dir
 ```{code-cell}
 blur = @(X) B^12 * X * C^12;
 imshow(blur(X), [0, 255])
-title('Blurred image')
+title(('Blurred image'));
 ```
 ``````
 
@@ -743,7 +743,7 @@ blur = @(X) B^12 * X * C^12;
 ```{code-cell}
 Z = blur(X);
 clf,  imshow(Z, [0, 255])
-title("Blurred image")
+title(("Blurred image"));
 ```
 
 Now we imagine that $\mathbf{X}$ is unknown and that we want to recover it from $\mathbf{Z}$. We first need functions that translate between vector and matrix representations.
@@ -764,7 +764,7 @@ imshow(X, [0, 255])
 title("Original")
 subplot(122)
 imshow(Y, [0, 255])
-title("Deblurred")
+title(("Deblurred"));
 ```
 ``````
 
@@ -800,7 +800,7 @@ title('Unpreconditioned MINRES')
 [x, ~, ~, ~, resid_prec] = minres(A, b, 1e-10, 400, M);
 hold on,  semilogy(resid_prec)
 title('Precondtioned MINRES')
-legend('no prec.', 'with prec.')
+legend(('no prec.', 'with prec.'));
 ```
 
 The diagonal preconditioner cut down substantially on the number of iterations. The effect on the total time is less dramatic, but this is not a large version of the problem.
@@ -859,6 +859,6 @@ clf, semilogy(resid_plain)
 hold on, semilogy(resid_prec)
 xlabel('iteration number'), ylabel('residual norm')
 title('Precondtioned GMRES ')
-legend('no preconditioner', 'with preconditioner')
+legend(('no preconditioner', 'with preconditioner'));
 ```
 ```

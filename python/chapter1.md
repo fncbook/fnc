@@ -19,7 +19,7 @@ Python implementations
 ````{literalinclude} ../python/pkg/FNC/FNC01.py
 :lineno-start: 1
 :start-at: def horner
-:end-before: def
+:end-at: return
 :filename: horner.py
 :language: python
 ````

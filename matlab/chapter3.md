@@ -56,7 +56,7 @@ y = [ -0.0480; -0.0180; -0.0360; -0.0120; -0.0040;
     0.1180; 0.2100; 0.3320; 0.3340; 0.4560 ];
 scatter(t, y), axis tight
 xlabel('year')
-ylabel('anomaly ({\circ}C)')
+ylabel(('anomaly ({\circ}C)'));
 ```
 
 A polynomial interpolant can be used to fit the data. Here we build one using a Vandermonde matrix. First, though, we express time as decades since 1950, as it improves the condition number of the matrix.
@@ -140,7 +140,7 @@ The definition of `f` above is in terms of `c`. When `c` is changed, then `f` ha
 c = V \ y;
 f = @(year) polyval(c(end:-1:1), (year - 1955) / 10);
 fplot(f, [1955, 2000]) 
-legend('data', 'linear', 'cubic', 'Location', 'northwest')
+legend(('data', 'linear', 'cubic', 'Location', 'northwest'));
 ```
 
 If we were to continue increasing the degree of the polynomial, the residual at the data points would get smaller, but overfitting would increase.
@@ -156,7 +156,7 @@ p = sqrt(6*s);
 clf
 plot(k, p, 'o-')
 xlabel('k'), ylabel('p_k')
-title('Sequence converging to \pi')
+title(('Sequence converging to \pi'));
 ```
 
 This graph suggests that maybe $p_k\to \pi$, but it's far from clear how close the sequence gets. It's more informative to plot the sequence of errors, $\epsilon_k= |\pi-p_k|$. By plotting the error sequence on a log-log scale, we can see a nearly linear relationship.
@@ -186,7 +186,7 @@ It's tempting to conjecture that the slope $b\to -1$ asymptotically. Here is how
 ```{code-cell}
 hold on
 loglog(k, a * k.^b)
-legend('sequence', 'power-law fit')
+legend(('sequence', 'power-law fit'));
 ```
 ``````
 

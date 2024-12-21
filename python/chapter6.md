@@ -133,7 +133,7 @@ print("t shape:", sol.t.shape)
 print("u shape:", sol.y.shape)
 plot(sol.t, sol.y[0, :], "-o")
 xlabel("$t$"), ylabel("$u(t)$")
-title("Solution of $u' = sin((t+u)^2)$")
+title(("Solution of $u' = sin((t+u)^2)$"));
 ```
 
 You can see above that the solution was not computed at enough points to make a smooth graph. There is a way to request output at times of your choosing.
@@ -142,7 +142,7 @@ You can see above that the solution was not computed at enough points to make a 
 sol = solve_ivp(f, tspan, u0, t_eval=linspace(0, 4, 200))
 plot(sol.t, sol.y[0, :], "-")
 xlabel("$t$"), ylabel("$u(t)$")
-title("Solution of $u' = sin((t+u)^2)$")
+title(("Solution of $u' = sin((t+u)^2)$"));
 ```
 
 Another option is to enable interpolation to evaluate the solution anywhere after the fact:
@@ -177,7 +177,7 @@ The warning message we received can mean that there is a bug in the formulation 
 semilogy(sol.t, sol.y[0, :])
 xlabel("$t$")
 ylabel("$u(t)$")
-title("Blowup in finite time")
+title(("Blowup in finite time"));
 ```
 ``````
 
@@ -191,7 +191,7 @@ u = array([exp(t) * u0 for u0 in [0.7, 1, 1.3]])
 plot(t, u.T)
 xlabel("$t$")
 ylabel("$u(t)$")
-title("Exponential divergence of solutions")
+title(("Exponential divergence of solutions"));
 ```
 
 But with $u'=-u$, solutions actually get closer together with time.
@@ -202,7 +202,7 @@ u = array([exp(-t) * u0 for u0 in [0.7, 1, 1.3]])
 plot(t, u.T)
 xlabel("$t$")
 ylabel("$u(t)$")
-title("Exponential convergence of solutions")
+title(("Exponential convergence of solutions"));
 ```
 
 In this case the actual condition number is one, because the initial difference between solutions is the largest over all time. Hence, the exponentially growing upper bound $e^{b-a}$ is a gross overestimate.
@@ -223,7 +223,7 @@ fig, ax = subplots()
 ax.plot(t, u[0, :], "-o", label="$n=20$")
 xlabel("$t$"), ylabel("$u(t)$")
 title("Solution by Euler's method")
-legend()
+legend(());
 ```
 
 We could define a different interpolant to get a smoother picture above, but the derivation of Euler's method assumed a piecewise linear interpolant. We can instead request more steps to make the interpolant look smoother.
@@ -265,7 +265,7 @@ loglog(n_, err_, "-o", label="results")
 plot(n_, 0.5 * (n_ / n_[0])**(-1), "--", label="1st order")
 xlabel("$n$"), ylabel("inf-norm error")
 title("Convergence of Euler's method")
-legend()
+legend(());
 ```
 ``````
 
@@ -303,7 +303,7 @@ fig, ax = subplots()
 ax.plot(t, u[0, :], label="prey")
 ax.plot(t, u[1, :], label="predator")
 xlabel("$t$"), ylabel("population")
-title("Predator-prey solution")
+title(("Predator-prey solution"));
 ```
 
 We can also use {numref}`Function {number} <function-euler>` to find the solution.
@@ -321,7 +321,7 @@ You can see above that the Euler solution is not very accurate. When the solutio
 ```{code-cell}
 plot(u[0, :], u[1, :])
 xlabel("prey"), ylabel("predator")
-title("Predator-prey phase plane")
+title(("Predator-prey phase plane"));
 ```
 From this plot we can see that the solution approaches a periodic one, which in the phase plane is represented by a closed path.
 ``````
@@ -431,7 +431,7 @@ f = lambda t, u: exp(t - u * sin(u))
 t, u = FNC.rk23(f, [0.0, 5.0], [0.0], 1e-5)
 scatter(t, u[0, :])
 xlabel("$t$"), ylabel("$u(t)$")
-title("Adaptive IVP solution")
+title(("Adaptive IVP solution"));
 ```
 
 The solution makes a very abrupt change near $t=2.4$. The resulting time steps vary over three orders of magnitude.
@@ -440,7 +440,7 @@ The solution makes a very abrupt change near $t=2.4$. The resulting time steps v
 dt = [t[i + 1] - t[i] for i in range(t.size - 1)]
 semilogy(t[:-1], dt)
 xlabel("$t$"), ylabel("time step")
-title("Adaptive step sizes")
+title(("Adaptive step sizes"));
 ```
 
 If we had to run with a uniform step size to get this accuracy, it would be
@@ -564,7 +564,7 @@ plot(tE, uE[0], ".-", label="AM4, n=1000")
 tE, uE = FNC.ab4(f, [0, 400], u0, 1600)
 plot(tE, uE[0], ".-", label="AM4, n=1600")
 xlabel("$t$"),  ylabel("$u(t)$")
-legend()
+legend(());
 ```
 
 So AB4, which is supposed to be _more_ accurate than AM2, actually needs something like 8 times as many steps to get a reasonable-looking answer!
@@ -608,7 +608,7 @@ There is no convergence in sight! A graph of the last numerical attempt yields a
 ```{code-cell}
 semilogy(t, abs(u[0]), "-o")
 xlabel("$t$"), ylabel("$|u|$")
-title("LIAF solution")
+title(("LIAF solution"));
 ```
 
 It's clear that the solution is growing exponentially in time.

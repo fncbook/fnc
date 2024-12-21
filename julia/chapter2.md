@@ -22,7 +22,7 @@ Julia implementations
 
 (function-forwardsub-julia)=
 ``````{dropdown} Forward substitution
-:open: true 
+:open:
 ```{literalinclude} ../julia/package/src/chapter02.jl
 :filename: forwardsub.jl
 :start-line: 0

@@ -97,7 +97,7 @@ c = polyfit(t, y, n);     % polynomial coefficients
 p = @(x) polyval(c, x);
 hold on
 fplot(p, [-1 1])
-legend('data', 'interpolant', 'location', 'north')
+legend(('data', 'interpolant', 'location', 'north'));
 ```
 
 But now consider a different set of points generated in almost exactly the same way.
@@ -115,7 +115,7 @@ The points themselves are unremarkable. But take a look at what happens to the p
 c = polyfit(t, y, n);     % polynomial coefficients
 p = @(x) polyval(c, x);
 hold on, fplot(p, [-1 1])
-legend('data', 'interpolant', 'location', 'north')
+legend(('data', 'interpolant', 'location', 'north'));
 ```
 
 Surely there must be functions that are more intuitively representative of those points!
@@ -173,7 +173,7 @@ clf, scatter(t, y)
 c = polyfit(t, y, n);
 hold on, plot(x, polyval(c, x))
 title('Polynomial cardinal function')
-xlabel('x'), ylabel('p(x)')
+xlabel('x'), ylabel(('p(x)'));
 ```
 
 From the figure we can see that the condition number for polynomial interpolation on these nodes is at least 500.
@@ -215,7 +215,7 @@ We generate a piecewise linear interpolant of $f(x)=e^{\sin 7x}$.
 f = @(x) exp(sin(7 * x));
 clf
 fplot(f, [0, 1], displayname="function")
-xlabel("x");  ylabel("y")
+xlabel("x");  ylabel(("y"));
 ```
 
 First we sample the function to create the data.
@@ -233,7 +233,7 @@ hold on
 fplot(p, [0, 1], displayname="interpolant")
 scatter(t, y, displayname="values at nodes")
 title("PL interpolation")
-legend()
+legend(());
 ```
 ``````
 
@@ -264,7 +264,7 @@ hold on
 loglog(n, order2, "k--", displayname="O(n^{-2})")
 xlabel("n");  ylabel("|| f-p ||_{\infty}")
 title("Convergence of PL interpolation")
-legend()
+legend(());
 ```
 ``````
 
@@ -287,7 +287,7 @@ S = spinterp(t, y);
 fplot(S, [0, 1], displayname="spline")
 
 xlabel("x");  ylabel("y")
-legend()
+legend(());
 ```
 
 Now we look at the convergence rate as the number of nodes increases.
@@ -314,7 +314,7 @@ order4 = 0.5 * maxerr(end) * (n / n(end)) .^ (-4);
 hold on
 loglog(n, order4, "k--", displayname="O(n^{-4})")
 xlabel("n");  ylabel("|| f-S ||_{\infty}")
-title("Convergence of spline interpolation")
+title(("Convergence of spline interpolation"));
 ```
 ``````
 
@@ -462,7 +462,7 @@ hold on
 loglog(h, order1, "--", h, order2, "--")
 xlabel("h");  ylabel("error")
 title("Convergence of finite differences")
-legend("FD1", "FD2", "O(h)", "O(h^2)")
+legend(("FD1", "FD2", "O(h)", "O(h^2)"));
 ```
 ``````
 
@@ -500,7 +500,7 @@ hold on
 loglog(h, order1, "k--")
 xlabel("h");  ylabel("error")
 title("FD error with roundoff")
-legend("FD1", "FD2", "FD4", "O(1/h)", "location", "northeast")
+legend(("FD1", "FD2", "FD4", "O(1/h)", "location", "northeast"));
 ```
 
 Again the graph is made so that $h$ decreases from left to right. The errors are dominated at first by truncation error, which decreases most rapidly for the fourth-order formula. However, increasing roundoff error eventually equals and then dominates the truncation error as $h$ continues to decrease. As the order of accuracy increases, the crossover point moves to the left (greater efficiency) and down (greater accuracy).
@@ -541,7 +541,7 @@ title('exp(x)')
 ylabel('f(x)')
 subplot(2, 1, 2), fill([x; 1; 0], [exp(sin(x)); 0; 0], [1, 0.9, 0.9])
 title('exp(sin(x))')
-xlabel('x'), ylabel('f(x)')
+xlabel('x'), ylabel(('f(x)'));
 ```
 ``````
 
@@ -589,7 +589,7 @@ hold on
 loglog(n, 0.1 * abs(err(end)) * (n / n(end)).^(-2), "k--", displayname="O(n^{-2})")
 xlabel("n");  ylabel("error")
 title("Convergence of trapezoidal integration")
-legend()
+legend(());
 ```
 ``````
 
@@ -670,7 +670,7 @@ This function gets increasingly oscillatory as $x$ increases.
 f = @(x) (x + 1).^2 .* cos((2 * x + 1) ./ (x - 4.3));
 clf
 fplot(f, [0, 4], 2000)
-xlabel('x'), ylabel('f(x)')
+xlabel('x'), ylabel(('f(x)'));
 ```
 
 Accordingly, the trapezoid rule is more accurate on the left half of this interval than on the right half.
@@ -744,6 +744,6 @@ title("Convergence of adaptive integration")
 order4 = 0.1 * abs(err(end)) * (n / n(end)).^(-4);
 hold on
 loglog(n, order4, "k--", displayname="O(n^{-4})")
-legend()
+legend(());
 ```
 ``````

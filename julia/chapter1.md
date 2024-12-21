@@ -149,10 +149,7 @@ x = x / 8
 The spacing between floating-point values in $[2^n,2^{n+1})$ is $2^n \epsilon_\text{mach}$, where $\epsilon_\text{mach}$ is machine epsilon. You can get its value from the `eps` function in Julia. By default, it returns the value for double precision.
 
 :::{card}
-:columns: 6
-
 To call a function, including `eps`, you must use parentheses notation, even when there are no input arguments.
-
 :::
 ::::
 

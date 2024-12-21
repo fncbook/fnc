@@ -31,19 +31,25 @@ where we have applied the multidimensional chain rule to the derivative, because
 
 ```{math}
 :label: rkexactexpand
-  \hat{u}(t_{i+1}) = \hat{u}(t_i) + h\left[f\bigl(t_i,\hat{u}(t_i)\bigr) +
+\begin{split}
+  \hat{u}(t_{i+1}) &= \hat{u}(t_i) \\ 
+  & + h\left[f\bigl(t_i,\hat{u}(t_i)\bigr) +
     \frac{h}{2}f_t\bigl(t_i,\hat{u}(t_i)\bigr) +
     \frac{h}{2}f\bigl(t_i,\hat{u}(t_i)\bigr)\,f_u\bigl(t_i,\hat{u}(t_i)\bigr)\right] \\
-  + O(h^3).
+  &+ O(h^3).
+\end{split}
 ```
 
 We have no desire to calculate and then code those partial derivatives of $f$ directly; an approximate approximation is called for. Observe that
 
 ```{math}
 :label: mvtaylor2
-  f\bigl(t_i+\alpha,\hat{u}(t_i)+\beta\bigr) = f\bigl(t_i,\hat{u}(t_i)\bigr) +
-  \alpha f_t\bigl(t_i,\hat{u}(t_i)\bigr) + \beta f_u\bigl(t_i,\hat{u}(t_i)\bigr) +
-  O\bigl(\alpha^2 + |\alpha\beta| + \beta^2\bigr).
+\begin{split}
+  f\bigl(t_i+\alpha,\hat{u}(t_i)+\beta\bigr) & = f\bigl(t_i,\hat{u}(t_i)\bigr) \\ 
+  & +
+  \alpha f_t\bigl(t_i,\hat{u}(t_i)\bigr) + \beta f_u\bigl(t_i,\hat{u}(t_i)\bigr) \\ 
+  & + O\bigl(\alpha^2 + |\alpha\beta| + \beta^2\bigr).
+\end{split}
 ```
 
 Matching this expression to the term in brackets in {eq}`rkexactexpand`, it seems natural to select $\alpha = h/2$ and $\beta = \frac{1}{2}h f\bigl(t_i,\hat{u}(t_i)\bigr)$. Doing so, we find
@@ -278,7 +284,7 @@ The error decreases geometrically as $s$ is incremented, so trading a stage for 
 
 3. ⌨ Modify {numref}`Function {number} <function-rk4>` to implement the modified Euler method. Test your function on the IVP in part (a) of Exercise 1 by solving with $n=30,60,90,\ldots,300$ and plotting the convergence of the error at the final time together with a line showing $O(n^{-2})$. 
 
-4. ✍ Use Heun's method to solve the problems in [Exercise 1 above](problem-rkhandexamples).
+4. ✍ Use Heun's method to solve the problems in [Exercise 1 above](#problem-rkhandexamples).
 
 5. ⌨ Modify {numref}`Function {number} <function-rk4>` to implement Heun's method. Test your function on the IVP in part (a) of Exercise 1 by solving with $n=30,60,90,\ldots,300$ and plotting the convergence of the error at the final time together with a line showing $O(n^{-2})$. 
 

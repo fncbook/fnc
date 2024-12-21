@@ -1,3 +1,4 @@
+(chapter-leastsq)=
 # Overdetermined linear systems
 
 ```{index} Han Solo, The Empire Strikes Back
