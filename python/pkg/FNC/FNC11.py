@@ -2,7 +2,7 @@ import numpy as np
 
 def diffper(n, xspan):
     """
-    diffper(n,xspan)
+    diffper(n, xspan)
 
     Construct 2nd-order differentiation matrices for functions with periodic end
     conditions, using `n` unique nodes in the interval `xspan`. Return a vector of

@@ -33,7 +33,7 @@ def lufact(A):
     """
     lufact(A)
 
-    Compute the LU factorization of square matrix `A`, returning the
+    Compute the LU factorization of square matrix A, returning the
     factors.
     """
     n = A.shape[0]     # detect the dimensions from the input
@@ -53,7 +53,7 @@ def plufact(A):
     """
         plufact(A)
 
-    Compute the PLU factorization of square matrix `A`, returning the
+    Compute the PLU factorization of square matrix A, returning the
     triangular factors and a row permutation vector.
     """
     n = A.shape[0]

@@ -7,10 +7,10 @@ from .FNC10 import diffmat2
 
 def rectdisc(m, xspan, n, yspan):
     """
-    rectdisc(m,xspan,n,yspan)
+    rectdisc(m, xspan, n, yspan)
 
     Create matrices and helpers for finite-difference discretization of a rectangle that is
-    the tensor  product of intervals `xspan` and `yspan`, using `m`+1 and `n`+1 points in
+    the tensor  product of intervals xspan and yspan, using m+1 and n+1 points in
     the two coordinates.
     """
     # Initialize grid and finite differences.
@@ -39,12 +39,12 @@ def rectdisc(m, xspan, n, yspan):
 
 def poissonfd(f, g, m, xspan, n, yspan):
     """
-    poissonfd(f,g,m,xspan,n,yspan)
+    poissonfd(f, g, m, xspan, n, yspan)
 
-    Solve Poisson's equation on a rectangle by finite differences. Function `f` is the
-    forcing function and function `g` gives the  Dirichlet boundary condition. The rectangle
-    is the tensor product of intervals `xspan` and `yspan`,  and the discretization uses
-    `m`+1 and `n`+1 points in the two coordinates.
+    Solve Poisson's equation on a rectangle by finite differences. Function f is the
+    forcing function and function g gives the  Dirichlet boundary condition. The rectangle
+    is the tensor product of intervals xspan and yspan,  and the discretization uses
+    m+1 and n+1 points in the two coordinates.
 
     Return matrices of the solution values, and the coordinate functions, on the grid.
     """
@@ -71,11 +71,11 @@ def poissonfd(f, g, m, xspan, n, yspan):
 
 def newtonpde(f, g, m, xspan, n, yspan):
     """
-    newtonpde(f,g,m,xspan,n,yspan)
+    newtonpde(f, g, m, xspan, n, yspan)
 
-    Newton's method with finite differences to solve the PDE `f`(u,x,y,disc)=0 on the
-    rectangle `xspan` ``\times`` `yspan`, subject to `g`(x,y)=0 on the boundary. Use `m`+1
-    points in x by `n`+1 points in y.
+    Newton's method with finite differences to solve the PDE f(u,x,y,disc)=0 on the
+    rectangle xspan \times yspan, subject to g(x,y)=0 on the boundary. Use m+1
+    points in x by n+1 points in y.
 
     Return matrices of the solution values, and the coordinate functions, on the grid.
     """

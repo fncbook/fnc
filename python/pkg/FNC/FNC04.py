@@ -6,8 +6,8 @@ def newton(f, dfdx, x1):
     """
     newton(f, dfdx, x1)
 
-    Use Newton's method to find a root of `f` starting from `x1`, where `dfdx` is the
-    derivative of `f`. Returns a vector of root estimates.
+    Use Newton's method to find a root of f starting from x1, where dfdx is the
+    derivative of f. Returns a vector of root estimates.
     """
     # Operating parameters.
     eps = np.finfo(float).eps
@@ -38,7 +38,7 @@ def secant(f, x1, x2):
     """
     secant(f, x1, x2)
 
-    Use the secant method to find a root of `f` starting from `x1` and `x2`. Returns a
+    Use the secant method to find a root of f starting from x1 and x2. Returns a
     vector of root estimates.
     """
     # Operating parameters.
@@ -70,8 +70,8 @@ def newtonsys(f, jac, x1):
     """
         newtonsys(f, jac, x1)
 
-    Use Newton's method to find a root of a system of equations, starting from `x1`. The
-    function `f` should return the residual vector, and the function `jac` should return 
+    Use Newton's method to find a root of a system of equations, starting from x1. The
+    function f should return the residual vector, and the function jac should return 
     the Jacobian matrix. Returns root estimates as a matrix, one estimate per column.
     """
     # Operating parameters.
@@ -100,8 +100,8 @@ def fdjac(f, x0, y0):
     """
     fdjac(f,x0,y0)
 
-    Compute a finite-difference approximation of the Jacobian matrix for `f` at `x0`,
-    where `y0`=`f(x0)` is given.
+    Compute a finite-difference approximation of the Jacobian matrix for f at x0,
+    where y0=f(x0) is given.
     """
 
     delta = np.sqrt(np.finfo(float).eps)  # FD step size
@@ -116,9 +116,8 @@ def levenberg(f, x1, tol=1e-12):
     """
     levenberg(f,x1,tol)
 
-    Use Levenberg's quasi-Newton iteration to find a root of the system `f`, starting from
-    `x1`, with `tol` as the stopping tolerance in both step size and residual norm. Returns
-    root estimates as a matrix, one estimate per column.
+    Use Levenberg's quasi-Newton iteration to find a root of the system f, 
+    starting from x1, with tol as the stopping tolerance in both step size and residual norm. Returns root estimates as a matrix, one estimate per column.
     """
 
     # Operating parameters.

@@ -6,9 +6,9 @@ from scipy.sparse import csc_matrix, diags
 
 def poweriter(A, numiter):
     """
-    poweriter(A,numiter)
+    poweriter(A, numiter)
 
-    Perform `numiter` power iterations with the matrix `A`, starting from a random vector, 
+    Perform numiter power iterations with the matrix A, starting from a random vector, 
     and return a vector of eigenvalue estimates and the final eigenvector approximation.
     """
     n = A.shape[0]
@@ -26,9 +26,9 @@ def poweriter(A, numiter):
 
 def inviter(A, s, numiter):
     """
-    inviter(A,s,numiter)
+    inviter(A, s, numiter)
 
-    Perform `numiter` inverse iterations with the matrix `A` and shift `s`, starting
+    Perform numiter inverse iterations with the matrix A and shift s, starting
     from a random vector, and return a vector of eigenvalue estimates and the final
     eigenvector approximation.
     """
@@ -48,11 +48,11 @@ def inviter(A, s, numiter):
 
 def arnoldi(A, u, m):
     """
-    arnoldi(A,u,m)
+    arnoldi(A, u, m)
 
-    Perform the Arnoldi iteration for `A` starting with vector `u`, out to the Krylov
-    subspace of degree `m`. Return the orthonormal basis (`m`+1 columns) and the upper
-    Hessenberg `H` of size `m`+1 by `m`.
+    Perform the Arnoldi iteration for A starting with vector u, out to the Krylov
+    subspace of degree m. Return the orthonormal basis (m+1 columns) and the upper
+    Hessenberg H of size m+1 by m.
     """
     n = u.size
     Q = np.zeros([n, m + 1])
@@ -74,9 +74,9 @@ def arnoldi(A, u, m):
 
 def arngmres(A, b, m):
     """
-    arngmres(A,b,m)
+    arngmres(A, b, m)
 
-    Do `m` iterations of GMRES for the linear system `A`*x=`b`. Return the final solution
+    Do m iterations of GMRES for the linear system A*x=b. Return the final solution
     estimate x and a vector with the history of residual norms. (This function is for
     demo only, not practical use.)
     """

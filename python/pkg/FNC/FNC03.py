@@ -2,9 +2,9 @@ import scipy
 import numpy as np
 from .FNC02 import forwardsub, backsub
 
-def lsnormal(A,b):
+def lsnormal(A, b):
     """
-    lsnormal(A,b)
+    lsnormal(A, b)
     
     Solve a linear least squares problem by the normal equations. Returns the
     minimizer of ||b-Ax||.
@@ -16,9 +16,9 @@ def lsnormal(A,b):
     x = backsub(R, w)                        # solve Rx=z
     return x
 
-def lsqrfact(A,b):
+def lsqrfact(A, b):
     """
-    lsqrfact(A,b)
+    lsqrfact(A, b)
     
     Solve a linear least squares problem by QR factorization. Returns the
     minimizer of ||b-Ax||.

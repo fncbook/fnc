@@ -7,9 +7,9 @@ from .FNC05 import intadapt
 
 def polyinterp(t, y):
     """
-    polyinterp(t,y)
+    polyinterp(t, y)
 
-    Return a callable polynomial interpolant through the points in vectors `t`,`y`. Uses
+    Return a callable polynomial interpolant through the points in vectors t, y. Uses
     the barycentric interpolation formula.
     """
     n = len(t) - 1
@@ -40,9 +40,9 @@ def polyinterp(t, y):
 
 def triginterp(t, y):
     """
-        triginterp(t,y)
+        triginterp(t, y)
 
-    Return trigonometric interpolant for points defined by vectors `t` and `y`.
+    Return trigonometric interpolant for points defined by vectors t and y.
     """
     N = len(t)
 
@@ -63,10 +63,10 @@ def triginterp(t, y):
 
 def ccint(f, n):
     """
-    ccint(f,n)
+    ccint(f, n)
 
-    Perform Clenshaw-Curtis integration for the function `f` on `n`+1 nodes in [-1,1]. Return
-    integral and a vector of the nodes used. Note: `n` must be even.
+    Perform Clenshaw-Curtis integration for the function f on n+1 nodes in [-1,1]. Return
+    integral and a vector of the nodes used. Note: n must be even.
     """
     # Find Chebyshev extreme nodes.
     theta = np.linspace(0, np.pi, n + 1)
@@ -88,9 +88,9 @@ def ccint(f, n):
 
 def glint(f, n):
     """
-    glint(f,n)
+    glint(f, n)
 
-    Perform Gauss-Legendre integration for the function `f` on `n` nodes in (-1,1). Return
+    Perform Gauss-Legendre integration for the function f on n nodes in (-1,1). Return
     integral and a vector of the nodes used.
     """
     # Nodes and weights are found via a tridiagonal eigenvalue problem.
@@ -108,10 +108,10 @@ def glint(f, n):
 
 def intinf(f, tol):
     """
-    intde(f,h,M)
+    intinf(f, tol)
 
-    Perform doubly-exponential integration of function `f` over (-Inf,Inf), using
-    error tolerance `tol`. Return integral and a vector of the nodes used.
+    Perform doubly-exponential integration of function f over (-Inf,Inf), using
+    error tolerance tol. Return integral and a vector of the nodes used.
     """
     xi = lambda t: np.sinh(np.sinh(t))
     dxi_dt = lambda t: np.cosh(t) * np.cosh(np.sinh(t))
@@ -132,8 +132,8 @@ def intsing(f, tol):
     """
     intsing(f, tol)
 
-    Adaptively integrate function `f` over (0,1), where `f` may be 
-    singular at zero, with error tolerance `tol`. Returns the
+    Adaptively integrate function f over (0,1), where f may be 
+    singular at zero, with error tolerance tol. Returns the
     integral estimate and a vector of the nodes used.
     """
     xi = lambda t: 2 / (1 + np.exp( 2*np.sinh(t) ))

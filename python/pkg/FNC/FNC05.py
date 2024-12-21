@@ -3,10 +3,10 @@ from numpy.linalg import solve
 
 def hatfun(x, t, k):
     """
-    hatfun(x,t,k)
+    hatfun(x, t, k)
 
-    Evaluate a piecewise linear "hat" function at `x`, where `t` is a vector of
-    n+1 interpolation nodes and `k` is an integer in 0:n giving the index of the node
+    Evaluate a piecewise linear "hat" function at x, where t is a vector of
+    n+1 interpolation nodes and k is an integer in 0:n giving the index of the node
     where the hat function equals one.
     """
     n = len(t) - 1
@@ -27,19 +27,19 @@ def hatfun(x, t, k):
 
 def plinterp(t, y):
     """
-    plinterp(t,y)
+    plinterp(t, y)
 
-    Create a piecewise linear interpolating function for data values in `y` given at nodes
-    in `t`.
+    Create a piecewise linear interpolating function for data values in y given at nodes
+    in t.
     """
     n = len(t) - 1
     return lambda x: np.sum(y[k] * hatfun(x, t, k) for k in range(n + 1))
 
 def spinterp(t, y):
     """
-    spinterp(t,y)
+    spinterp(t, y)
 
-    Create a cubic not-a-knot spline interpolating function for data values in `y` given at nodes in `t`.
+    Create a cubic not-a-knot spline interpolating function for data values in y given at nodes in t.
     """
     n = len(t) - 1
     h = [t[i + 1] - t[i] for i in range(n)]
@@ -97,10 +97,10 @@ def spinterp(t, y):
 
 def fdweights(t, m):
     """
-    fdweights(t,m)
+    fdweights(t, m)
 
-    Return weights for the `m`th derivative of a function at zero using values at the
-    nodes in vector `t`.
+    Return weights for the mth derivative of a function at zero using values at the
+    nodes in vector t.
     """
     # This is a compact implementation, not an efficient one.
 
@@ -140,9 +140,9 @@ def fdweights(t, m):
 
 def trapezoid(f, a, b, n):
     """
-    trapezoid(f,a,b,n)
+    trapezoid(f, a, b, n)
 
-    Apply the trapezoid integration formula for integrand `f` over interval [`a`,`b`], broken up into `n` equal pieces. Returns estimate, vector of nodes, and vector of integrand values at the nodes.
+    Apply the trapezoid integration formula for integrand f over interval [a,b], broken up into n equal pieces. Returns estimate, vector of nodes, and vector of integrand values at the nodes.
     """
     h = (b - a) / n
     t = np.linspace(a, b, n + 1)
@@ -152,10 +152,10 @@ def trapezoid(f, a, b, n):
 
 def intadapt(f, a, b, tol):
     """
-    intadapt(f,a,b,tol)
+    intadapt(f, a, b, tol)
 
-    Do adaptive integration to estimate the integral of `f` over [`a`,`b`] to desired
-    error tolerance `tol`. Returns estimate and a vector of evaluation nodes used.
+    Do adaptive integration to estimate the integral of f over [a,b] to desired
+    error tolerance tol. Returns estimate and a vector of evaluation nodes used.
     """
 
     # Use error estimation and recursive bisection.

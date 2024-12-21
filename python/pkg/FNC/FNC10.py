@@ -1,69 +1,55 @@
 import numpy as np
 import scipy.optimize as opt
-import scipy.integrate as integ
+from scipy.integrate import solve_ivp
 from .FNC04 import levenberg
 
-def shoot(phi, xspan, lval, lder, rval, rder, init):
+def shoot(phi, a, b, ga, gb, init):
     """
-    shoot(phi,xspan,lval,lder,rval,rder,init)
+    shoot(phi, a, b, ga, gb, init)
 
-    Use the shooting method to solve a two-point boundary value problem. The ODE is
-    u'' = `phi`(x,u,u') for x in `xspan`. Specify a function value or derivative at
-    the left endpoint using `lval` and `lder`, respectively, and similarly for the
-    right endpoint  using `rval` and `rder`. (Use an empty array to denote an
-    unknown quantity.) The value `init` is an initial guess for whichever value is
-    missing at the left endpoint.
+    Use the shooting method to solve a two-point boundary value problem. 
+    The ODE is u'' = phi(x, u, u') for x in (a,b). The functions 
+    ga(u(a), u'(a)) and gb(u(b), u'(b)) specify the boundary conditions. 
+    The value init is an initial guess for [u(a), u'(a)].
 
     Return vectors for the nodes, the values of u, and the values of u'.
     """
 
     # Tolerances for IVP solver and rootfinder.
-    ivp_opt = 1e-6
-    optim_opt = 1e-5
+    tol = 1e-5
+    # To be solved by the IVP solver
+    def shootivp(x, y):
+        return np.array([y[1], phi(x, y[0], y[1])])
 
     # Evaluate the difference between computed and target values at x=b.
     def objective(s):
-        nonlocal x, v  # change these values in outer scope
-        # Combine s with the known left endpoint value.
-        if len(lder) == 0:
-            v_init = [lval[0], s]
-        else:
-            v_init = [s, lder[0]]
+        nonlocal x, y  # change these values in outer scope
 
-        # ODE posed as a first-order equation in 2 variables.
-        def shootivp(x, v):
-            return np.array([v[1], phi(x, v[0], v[1])])
-
-        x = np.linspace(xspan[0], xspan[1], 400)  # make decent plots on return
-        sol = integ.solve_ivp(shootivp, xspan, v_init, t_eval=x)
+        x = np.linspace(a, b, 400)  # make decent plots on return
+        sol = solve_ivp(shootivp, [a, b], s, atol=tol/10, rto=tol/10, t_eval=x)
         x = sol.t
-        v = sol.y
-
-        if len(rder) == 0:
-            return v[0, -1] - rval[0]
-        else:
-            return v[1, -1] - rder[0]
+        y = sol.y
+        residual = array([ga(y[0, 0], y[1, 0]), gb(y[0, -1], y[0, -1])])
+        return residual
 
     # Find the unknown quantity at x=a by rootfinding.
-    x = []
-    v = []
-    # the values will be overwritten
-    s = opt.root_scalar(objective, x0=init, x1=init + 0.05, xtol=optim_opt).root
+    x, y = [], []    # the values will be overwritten
+    s = levenberg(objective, init, tol)
 
     # Don't need to solve the IVP again. It was done within the
     # objective function already.
-    u = v[0]  # solution
-    dudx = v[1]  # derivative
+    u = y[0]        # solution
+    du_dx = y[1]    # derivative
 
-    return x, u, dudx
+    return x, u, du_dx
 
 
 def diffmat2(n, xspan):
     """
-    diffmat2(n,xspan)
+    diffmat2(n, xspan)
 
-    Compute 2nd-order-accurate differentiation matrices on `n`+1 points in the
-    interval `xspan`. Return a vector of nodes, and the matrices for the first
+    Compute 2nd-order-accurate differentiation matrices on n+1 points in the
+    interval xspan. Return a vector of nodes, and the matrices for the first
     and second derivatives.
     """
     a, b = xspan
@@ -93,10 +79,10 @@ def diffmat2(n, xspan):
 
 def diffcheb(n, xspan):
     """
-    diffcheb(n,xspan)
+    diffcheb(n, xspan)
 
-    Compute Chebyshev differentiation matrices on `n`+1 points in the
-    interval `xspan`. Return a vector of nodes, and the matrices for the first
+    Compute Chebyshev differentiation matrices on n+1 points in the
+    interval xspan. Return a vector of nodes, and the matrices for the first
     and second derivatives.
     """
     x = -np.cos(np.arange(n + 1) * np.pi / n)  # nodes in [-1,1]
@@ -127,11 +113,11 @@ def diffcheb(n, xspan):
 
 def bvplin(p, q, r, xspan, lval, rval, n):
     """
-        bvplin(p,q,r,xspan,lval,rval,n)
+        bvplin(p, q, r, xspan, lval, rval, n)
 
     Use finite differences to solve a linear bopundary value problem. The ODE is
-    u''+`p`(x)u'+`q`(x)u = `r`(x) on the interval `xspan`, with endpoint function
-    values given as `lval` and `rval`. There will be `n`+1 equally spaced nodes,
+    u''+p(x)u'+q(x)u = r(x) on the interval xspan, with endpoint function
+    values given as lval and rval. There will be n+1 equally spaced nodes,
     including the endpoints.
 
     Return vectors of the nodes and the solution values.
@@ -155,13 +141,13 @@ def bvplin(p, q, r, xspan, lval, rval, n):
 
 def bvp(phi, xspan, lval, lder, rval, rder, init):
     """
-    bvp(phi,xspan,lval,lder,rval,rder,init)
+    bvp(phi, xspan, lval, lder, rval, rder, init)
 
     Use finite differences to solve a two-point boundary value problem. The ODE is
-    u'' = `phi`(x,u,u') for x in `xspan`. Specify a function value or derivative at
-    the left endpoint using `lval` and `lder`, respectively, and similarly for the
-    right endpoint  using `rval` and `rder`. (Use an empty array to denote an
-    unknown quantity.) The value `init` is an initial guess for whichever value is
+    u'' = phi(x,u,u') for x in xspan. Specify a function value or derivative at
+    the left endpoint using lval and lder, respectively, and similarly for the
+    right endpoint  using rval and rder. (Use an empty array to denote an
+    unknown quantity.) The value init is an initial guess for whichever value is
     missing at the left endpoint.
 
     Return vectors for the nodes and the values of u.
@@ -194,11 +180,11 @@ def bvp(phi, xspan, lval, lder, rval, rder, init):
 
 def fem(c, s, f, a, b, n):
     """
-    fem(c,s,f,a,b,n)
+    fem(c, s, f, a, b, n)
 
     Use a piecewise linear finite element method to solve a two-point boundary
-    value problem. The ODE is (`c`(x)u')' + `s`(x)u = `f`(x) on the interval
-    [`a`,`b`], and the boundary values are zero. The discretization uses `n` equal
+    value problem. The ODE is (c(x)u')' + s(x)u = f(x) on the interval
+    [a,b], and the boundary values are zero. The discretization uses n equal
     subintervals.
 
     Return vectors for the nodes and the values of u.

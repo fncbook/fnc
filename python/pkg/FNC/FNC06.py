@@ -4,10 +4,10 @@ import warnings
 
 def euler(dudt, tspan, u0, n):
     """
-    euler(dudt,tspan,u0,n)
+    euler(dudt, tspan, u0, n)
 
-    Apply Euler's method to solve the IVP u'=`dudt`(u,t) over the interval `tspan` with
-    u(`tspan[1]`)=`u0`, using `n` subintervals/steps. Return vectors of times and solution
+    Apply Euler's method to solve the IVP u'=dudt(u,t) over the interval tspan with
+    u(tspan[1])=u0, using n subintervals/steps. Return vectors of times and solution
     values.
     """
     a, b = tspan
@@ -21,10 +21,10 @@ def euler(dudt, tspan, u0, n):
 
 def ie2(dudt, tspan, u0, n):
     """
-    ie2(dudt,tspan,u0,n)
+    ie2(dudt, tspan, u0, n)
 
-    Apply the Improved Euler method to solve the vector-valued IVP u'=`dudt`(u,p,t) over the
-    interval `tspan` with u(`tspan[1]`)=`u0`, using `n` subintervals/steps. Returns a vector
+    Apply the Improved Euler method to solve the vector-valued IVP u'=dudt(u,p,t) over the
+    interval tspan with u(tspan[1])=u0, using n subintervals/steps. Returns a vector
     of times and a vector of solution values/vectors.
     """
     # Time discretization.
@@ -44,10 +44,10 @@ def ie2(dudt, tspan, u0, n):
 
 def rk4(dudt, tspan, u0, n):
     """
-    rk4(dudt,tspan,u0,n)
+    rk4(dudt, tspan, u0, n)
 
-    Apply "the" Runge-Kutta 4th order method to solve the vector-valued IVP u'=`dudt`(u,p,t)
-    over the interval `tspan` with u(`tspan[1]`)=`u0`, using `n` subintervals/steps.
+    Apply "the" Runge-Kutta 4th order method to solve the vector-valued IVP u'=dudt(u,p,t)
+    over the interval tspan with u(tspan[1])=u0, using n subintervals/steps.
     Return a vector of times and a vector of solution values/vectors.
     """
     # Time discretization.
@@ -70,10 +70,10 @@ def rk4(dudt, tspan, u0, n):
 
 def rk23(dudt, tspan, u0, tol):
     """
-    rk23(dudt,tspan,u0,tol)
+    rk23(dudt, tspan, u0, tol)
 
-    Apply adaptive embedded RK formula to solve the vector-valued IVP u'=`dudt`(u,p,t)
-    over the interval `tspan` with u(`tspan[1]`)=`u0`, with error tolerance `tol`.
+    Apply adaptive embedded RK formula to solve the vector-valued IVP u'=dudt(u,p,t)
+    over the interval tspan with u(tspan[1])=u0, with error tolerance tol.
     Return a vector of times and a vector of solution values/vectors.
     """
     # Initialize for the first time step.
@@ -116,10 +116,10 @@ def rk23(dudt, tspan, u0, tol):
 
 def ab4(dudt, tspan, u0, n):
     """
-    ab4(dudt,tspan,u0,n)
+    ab4(dudt, tspan, u0, n)
 
-    Apply the Adams-Bashforth 4th order method to solve the vector-valued IVP u'=`dudt`(u,p,t)
-    over the interval `tspan` with u(`tspan[1]`)=`u0`, using `n` subintervals/steps.
+    Apply the Adams-Bashforth 4th order method to solve the vector-valued IVP u'=dudt(u,p,t)
+    over the interval tspan with u(tspan[1])=u0, using n subintervals/steps.
     """
     # Time discretization.
     a, b = tspan
@@ -147,10 +147,10 @@ def ab4(dudt, tspan, u0, n):
 
 def am2(dudt, tspan, u0, n):
     """
-    am2(dudt,tspan,u0,n)
+    am2(dudt, tspan, u0, n)
 
-    Apply the Adams-Moulton 2nd order method to solve the vector-valued IVP u'=`dudt`(u,p,t)
-    over the interval `tspan` with u(`tspan[1]`)=`u0`, using `n` subintervals/steps.
+    Apply the Adams-Moulton 2nd order method to solve the vector-valued IVP u'=dudt(u,p,t)
+    over the interval tspan with u(tspan[1])=u0, using n subintervals/steps.
     """
     # Time discretization.
     a, b = tspan
