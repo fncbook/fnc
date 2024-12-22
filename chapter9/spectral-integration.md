@@ -37,7 +37,7 @@ The trapezoid integration formula is spectrally accurate for periodic functions.
 ```
 
 (demo-integration-ellipse)=
-::::{prf:example}
+::::{prf:example} Perimeter of an ellipse
 We use the trapezoidal integration formula to compute the perimeter of an ellipse with semi-axes 1 and 1/2. Parameterizing the ellipse as $x=\cos \pi t$, $y=\frac{1}{2}\sin \pi t$ leads to the arc-length integral 
 
 $$\int_{-1}^1 \pi\sqrt{ \cos^2(\pi t) + \tfrac{1}{4}\sin^2(\pi t)}\,dt.$$ 
