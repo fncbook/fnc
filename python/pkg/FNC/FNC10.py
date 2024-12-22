@@ -26,10 +26,10 @@ def shoot(phi, a, b, ga, gb, init):
         nonlocal x, y  # change these values in outer scope
 
         x = np.linspace(a, b, 400)  # make decent plots on return
-        sol = solve_ivp(shootivp, [a, b], s, atol=tol/10, rto=tol/10, t_eval=x)
+        sol = solve_ivp(shootivp, [a, b], s, atol=tol/10, rtol=tol/10, t_eval=x)
         x = sol.t
         y = sol.y
-        residual = array([ga(y[0, 0], y[1, 0]), gb(y[0, -1], y[0, -1])])
+        residual = np.array([ga(y[0, 0], y[1, 0]), gb(y[0, -1], y[0, -1])])
         return residual
 
     # Find the unknown quantity at x=a by rootfinding.
@@ -138,43 +138,33 @@ def bvplin(p, q, r, xspan, lval, rval, n):
 
     return x, u
 
-
-def bvp(phi, xspan, lval, lder, rval, rder, init):
+def bvp(phi, xspan, ga, gb, init):
     """
-    bvp(phi, xspan, lval, lder, rval, rder, init)
+    bvp(phi, xspan, ga, gb, init)
 
-    Use finite differences to solve a two-point boundary value problem. The ODE is
-    u'' = phi(x,u,u') for x in xspan. Specify a function value or derivative at
-    the left endpoint using lval and lder, respectively, and similarly for the
-    right endpoint  using rval and rder. (Use an empty array to denote an
-    unknown quantity.) The value init is an initial guess for whichever value is
-    missing at the left endpoint.
+    Use finite differences to solve a two-point boundary value problem. 
+    The ODE is u'' = phi(x, u, u') for x in (a,b). The functions 
+    ga(u(a), u'(a)) and gb(u(b), u'(b)) specify the boundary conditions. 
+    The value init is an initial guess for [u(a), u'(a)].
 
     Return vectors for the nodes and the values of u.
     """
     n = len(init) - 1
     x, Dx, Dxx = diffmat2(n, xspan)
     h = x[1] - x[0]
-
     def residual(u):
         # Compute the difference between u'' and phi(x,u,u') at the
         # interior nodes and appends the error at the boundaries.
-        dudx = Dx @ u  # discrete u'
-        d2udx2 = Dxx @ u  # discrete u''
-        f = d2udx2 - phi(x, u, dudx)
+        du_dx = Dx @ u  # discrete u'
+        d2u_dx2 = Dxx @ u  # discrete u''
+        f = d2u_dx2 - phi(x, u, du_dx)
 
         # Replace first and last values by boundary conditions.
-        if len(lder) == 0:
-            f[0] = (u[0] - lval[0]) / h**2
-        else:
-            f[0] = (dudx[0] - lder[0]) / h
-        if len(rder) == 0:
-            f[-1] = (u[-1] - rval[0]) / h**2
-        else:
-            f[-1] = (dudx[-1] - rder[0]) / h
+        f[0] = ga(u[0], du_dx[0]) / h
+        f[n] = gb(u[n], du_dx[n]) / h
         return f
 
-    u = levenberg(residual, init)
+    u = levenberg(residual, init.copy())
     return x, u[:, -1]
 
 

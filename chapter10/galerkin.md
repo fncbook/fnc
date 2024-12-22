@@ -318,6 +318,17 @@ Each $I_k$ contributes to four elements of each matrix and two of the vector $\m
 
 (demo-galerkin-fem)=
 ::::{prf:example} Finite element solution of a BVP
+We solve the equation
+
+$$
+  -(x^2u')' + 4 y = \sin(\pi x), \qquad u(0)=u(1)=0,
+$$
+
+in which
+
+$$
+  c(x) = x^2, \qquad s(x) = 4, \qquad f(x)=\sin(\pi x).
+$$
 
 `````{tab-set}
 ````{tab-item} Julia

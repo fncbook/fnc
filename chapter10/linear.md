@@ -159,6 +159,12 @@ Our implementation of linear collocation is {numref}`Function {number} <function
 
 (demo-linear-solve)=
 ::::{prf:example} Solving a linear BVP
+We solve the linear BVP  
+
+$$ u'' - (\cos x) u' + (\sin x) u = 0, \quad u(0)=1, \; u\left(\frac{3\pi}{2}\right)=\frac{1}{e}. $$ 
+
+Its exact solution is $u(x) = e^{\sin x}$.
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -186,6 +192,14 @@ We revisit {numref}`Demo %s <demo-shooting-unstable>`, which exposed instability
 
 (demo-linear-converge)=
 ::::{prf:example} Convergence for a linear BVP
+The BVP is
+  
+$$
+u'' - \lambda^2 u = \lambda^2, \quad  u(0)=-1, \; u(1)=0,
+$$
+
+with exact solution $\sinh(\lambda x)/\sinh(\lambda) - 1$.
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia

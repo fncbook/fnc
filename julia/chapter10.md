@@ -318,7 +318,7 @@ plot!(d2fdx2, -1, 1, subplot = 2, xaxis = (L"x"), yaxis = (L"f''(x)"))
 scatter!(t, yₓₓ, subplot = 2)
 ```
 
-An convergence experiment confirms the order of accuracy. Because we expect an algebraic convergence rate, we use a log-log plot of the errors.
+A convergence experiment confirms the order of accuracy. Because we expect an algebraic convergence rate, we use a log-log plot of the errors.
 
 ```{code-cell}
 n = @. round(Int, 2^(4:0.5:11))
@@ -390,12 +390,6 @@ plot(
 ### 10.4 @section-bvp-linear
 (demo-linear-solve-julia)=
 ``````{dropdown} @demo-linear-solve
-We solve linear BVP  
-
-$$ u'' - (\cos x) u' + (\sin x) u = 0, \quad u(0)=1, \; u\left(\frac{3\pi}{2}\right)=\frac{1}{e}. $$ 
-
-Its exact solution is known:
-
 ```{code-cell}
 exact = x -> exp(sin(x));
 ```
@@ -432,14 +426,6 @@ plot!(x, exact.(x) - u, subplot = 2, xaxis = L"x", yaxis = ("error"))
 
 (demo-linear-converge-julia)=
 ``````{dropdown} @demo-linear-converge
-The BVP is
-  
-$$
-u'' - \lambda^2 u = \lambda^2, \quad  u(0)=-1, \; u(1)=0,
-$$
-
-with exact solution $\sinh(\lambda x)/\sinh(\lambda) - 1$.
-
 ```{code-cell}
 λ = 10
 exact = x -> sinh(λ * x) / sinh(λ) - 1;
@@ -486,8 +472,6 @@ plot!(n, 0.25 * n .^ (-2), l = (:dash, :gray), label = "2nd order")
 ### 10.5 @section-bvp-nonlinear
 (demo-nonlinear-pendulum-julia)=
 ``````{dropdown} @demo-nonlinear-pendulum
-Suppose a damped pendulum satisfies the nonlinear equation $\theta'' + 0.05\theta'+\sin \theta =0$. We want to start the pendulum at $\theta=2.5$ and give it the right initial velocity so that it reaches $\theta=-2$ at exactly $t=5$. This is a boundary-value problem with Dirichlet conditions $\theta(0)=2.5$ and $\theta(5)=-2$.
-
 The first step is to define the function $\phi$ that equals $\theta''$.
 
 ```{code-cell}
@@ -505,18 +489,9 @@ g₂(u, du) = u + 2;
 ```
 
 ::::{grid} 1 1 2 2
-
-:::{grid-item}
-
 The last ingredient is an initial estimate of the solution. Here we choose $n=100$ and a linear function between the endpoint values. 
-
-
-:::
-
 :::{card}
-
 The `collect` function turns a range object into a true vector.
-
 :::
 ::::
 
@@ -543,12 +518,6 @@ This time, the pendulum is initially pushed toward the unstable equilibrium in t
 
 (demo-nonlinear-mems-julia)=
 ``````{dropdown} @demo-nonlinear-mems
-We look for a solution to the parameterized membrane deflection problem from {numref}`Example {number} <example-tpbvp-mems>`,
-
-$$
-w''+ \frac{1}{r}w'= \frac{\lambda}{w^2},\quad w'(0)=0,\; w(1)=1.
-$$ 
-
 Here is the problem definition. We use a truncated domain to avoid division by zero at $r=0$.
 
 ```{code-cell}
@@ -562,7 +531,7 @@ g₂(w, dw) = w - 1;
 First we try a constant function as the initialization.
 
 ```{code-cell}
-init = ones(301)
+    init = ones(301)
 r, w₁ = FNC.bvp(ϕ, domain, g₁, g₂, init)
 
 plot(r, w₁, xaxis = (L"r"), yaxis = (L"w(r)"), title = "Solution of the membrane problem")
@@ -579,11 +548,6 @@ plot!(r, w₂, title = "Two solutions of the membrane problem")
 
 (demo-nonlinear-allencahn-julia)=
 ``````{dropdown} @demo-nonlinear-allencahn
-We solve the stationary **Allen–Cahn equation**,
-  
-$$
-\epsilon u'' = u^3-u, \quad 0 \le x \le 1, \quad u'(0)=0, \; u(1)=1.
-$$
 
 ```{code-cell}
 ϕ = (x, u, dudx) -> (u^3 - u) / ϵ;
@@ -635,17 +599,6 @@ plot!(x, u₃, label = L"\epsilon = 0.0005")
 ### 10.6 @section-bvp-galerkin
 (demo-galerkin-fem-julia)=
 ``````{dropdown} @demo-galerkin-fem
-We solve the equation
-
-$$
-  -(x^2u')' + 4 y = \sin(\pi x), \qquad u(0)=u(1)=0,
-$$
-
-in which
-
-$$
-  c(x) = x^2, \qquad s(x) = 4, \qquad f(x)=\sin(\pi x).
-$$
 
 Here are the coefficient function definitions. Even though $s$ is a constant, it has to be defined as a function for {numref}`Function {number} <function-fem>` to use it.
 

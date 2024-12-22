@@ -126,7 +126,7 @@ def levenberg(f, x1, tol=1e-12):
     maxiter = 40
 
     n = len(x1)
-    x = np.zeros((n, maxiter))
+    x = np.zeros((n, maxiter+1))
     x[:, 0] = x1
     fk = f(x1)
     k = 0

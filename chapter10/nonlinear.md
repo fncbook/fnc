@@ -132,6 +132,9 @@ In order to solve a particular problem, we must write a function that computes $
 
 (demo-nonlinear-pendulum)=
 ::::{prf:example} BVP for a nonlinear pendulum
+
+Suppose a damped pendulum satisfies the nonlinear equation $\theta'' + 0.05\theta'+\sin \theta =0$. We want to start the pendulum at $\theta=2.5$ and give it the right initial velocity so that it reaches $\theta=-2$ at exactly $t=5$. This is a boundary-value problem with Dirichlet conditions $\theta(0)=2.5$ and $\theta(5)=-2$.
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -157,6 +160,12 @@ The initial solution estimate can strongly influence how quickly a solution is f
 
 (demo-nonlinear-mems)=
 ::::{prf:example} BVP for a nonlinear MEMS device
+We look for a solution to the parameterized membrane deflection problem from {numref}`Example {number} <example-tpbvp-mems>`,
+
+$$
+w''+ \frac{1}{r}w'= \frac{\lambda}{w^2},\quad w'(0)=0,\; w(1)=1.
+$$ 
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -191,6 +200,12 @@ Sometimes the best way to get a useful initialization is to use the solution of 
 
 (demo-nonlinear-allencahn)=
 ::::{prf:example} Allen–Cahn equation
+We solve the stationary **Allen–Cahn equation**,
+  
+$$
+\epsilon u'' = u^3-u, \quad 0 \le x \le 1, \quad u'(0)=0, \; u(1)=1.
+$$
+
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
