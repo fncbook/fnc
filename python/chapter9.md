@@ -357,7 +357,7 @@ for k, n in enumerate([4, 10, 16, 40]):
     labels.append(f"degree {n}")
 
 xlabel("$x$"),  ylabel("$|f(x)-p(x)|$"),  ylim([1e-20, 1])
-legend((label),  title("Error for Chebyshev interpolants"));
+legend(labels),  title("Error for Chebyshev interpolants");
 ```
 
 By degree 16 the error is uniformly within machine epsilon, and, importantly, it stays there as $n$ increases. Note that as predicted by the error indicator function, the error is uniform over the interval at each value of $n$.
@@ -383,7 +383,7 @@ legend()
 subplot(2, 1, 2)
 semilogy(n, algebraic, 'o-', label="algebraic")
 semilogy(n, spectral, 'o-', label="spectral")
-xlabel('n'), ylabel('error')
+xlabel('n'),  ylabel('error')
 title('log–linear') ,  ylim([1e-16, 1]);  
 legend();
 ```
