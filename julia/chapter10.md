@@ -558,14 +558,14 @@ g₂(u, du) = u - 1;
 Finding a solution is easy at larger values of $\epsilon$.
 
 ```{code-cell}
-ϵ = 0.02
+ϵ = 0.05
 init = collect(range(-1, 1, length = 141))
 x, u₁ = FNC.bvp(ϕ, [0, 1], g₁, g₂, init)
 
 plot(
     x,
     u₁,
-    label = L"\epsilon = 0.02",
+    label = L"\epsilon = 0.05",
     leg = :bottomright,
     xaxis = (L"x"),
     yaxis = (L"u(x)"),
