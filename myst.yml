@@ -166,15 +166,15 @@ project:
         - file: chapter10/nonlinear.md
         - file: chapter10/galerkin.md
         - file: chapter10/next.md
-    #     - file: chapter11/overview.md
-    #       children:
-    #         - file: chapter11/blackscholes.md
-    #         - file: chapter11/methodlines.md
-    #         - file: chapter11/absstab-diffusion.md
-    #         - file: chapter11/stiffness.md
-    #         - file: chapter11/boundaries.md
-    #         - file: chapter11/next.md
-    #     - file: chapter12/overview.md
+    - file: chapter11/overview.md
+      children:
+        - file: chapter11/blackscholes.md
+        - file: chapter11/methodlines.md
+        - file: chapter11/absstab-diffusion.md
+        - file: chapter11/stiffness.md
+        - file: chapter11/boundaries.md
+        - file: chapter11/next.md
+    # - file: chapter12/overview.md
     #       children:
     #         - file: chapter12/traffic.md
     #         - file: chapter12/upwind.md
@@ -205,6 +205,7 @@ project:
           - file: julia/chapter8.md
           - file: julia/chapter9.md
           - file: julia/chapter10.md
+          - file: julia/chapter11.md
       - title: MATLAB codes
         children:
           - file: matlab/chapter1.md

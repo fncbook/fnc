@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia fastload
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 11.2.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-diffusion-methodlines)=
 # The method of lines
 
@@ -25,6 +9,7 @@ Our strategy in {numref}`section-diffusion-blackscholes` was to discretize both 
 
 ```{index} ! boundary conditions; periodic
 ```
+
 First, though, we want to look at a broader version of the discretization approach. To introduce ideas, let's use the simpler heat equation, $u_t = u_{xx}$, as a model. Because boundaries always complicate things, we will start by doing the next best thing to having no boundaries at all: **periodic end conditions**. Specifically, we will solve the PDE over $0\le x < 1$ and require at all times that
 
 $$
@@ -33,8 +18,10 @@ $$
 
 This is a little different from simply $u(1,t)=u(0,t)$, as {numref}`figure-periodicfun` illustrates.
 
-:::{figure-md} figure-periodicfun
-<img src="figures/periodicfun.svg" alt="periodic function illustration">
+:::{figure} figures/periodicfun.svg
+:label: figure-periodicfun
+:alt: periodic function illustration
+:align: center
 
 Left: A function whose values are the same at the endpoints of an interval does not necessarily extend to a smooth periodic function. Right: For a truly periodic function, the function values and all derivatives match at the endpoints of one period.
 :::
@@ -52,6 +39,7 @@ for the exact solution $\hat{u}$ at any value of $i$.
 
 ```{index} ! semidiscretization; see method of lines
 ```
+
 ```{index} finite difference; for parabolic PDE, differentiation matrix
 ```
 
@@ -78,41 +66,27 @@ This step is called **semidiscretization**, since space is discretized but time 
 Note well how the first and last rows have elements that "wrap around" from one end of the domain to the other by periodicity. Because we will be using this matrix quite a lot, we create {numref}`Function {number} <function-diffper>` to compute it, as well as the corresponding second-order first derivative matrix $\mathbf{D}_x$ for periodic end conditions.
 
 (function-diffper)=
-````{prf:function} diffper
-**Differentiation matrices for periodic end conditions**
-```{code-block} julia
-:lineno-start: 1
-"""
-    diffper(n,xspan)
+``````{prf:algorithm} diffper
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-diffper-julia
+:::
+```` 
 
-Construct 2nd-order differentiation matrices for functions with
-periodic end conditions, using `n` unique nodes in the interval
-`xspan`. Returns a vector of nodes and the matrices for the first
-and second derivatives.
-"""
-function diffper(n,xspan)
-    a,b = xspan
-    h = (b-a)/n
-    x = @. a + h*(0:n-1)   # nodes, omitting the repeated data
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-diffper-matlab
+:::
+```` 
 
-    # Construct Dx by diagonals, then correct the corners.
-    dp = fill(0.5/h,n-1)        # superdiagonal
-    dm = fill(-0.5/h,n-1)       # subdiagonal
-    Dx = diagm(-1=>dm,1=>dp)
-    Dx[1,n] = -1/(2*h)
-    Dx[n,1] = 1/(2*h)
-
-    # Construct Dxx by diagonals, then correct the corners.
-    d0 =  fill(-2/h^2,n)        # main diagonal
-    dp =  ones(n-1)/h^2         # superdiagonal and subdiagonal
-    Dxx = diagm(-1=>dp,0=>d0,1=>dp)
-    Dxx[1,n] = 1/(h^2)
-    Dxx[n,1] = 1/(h^2)
-
-    return x,Dx,Dxx
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-diffper-python
+:::
 ````
+`````
+``````
 
 The PDE $u_t=u_{xx}$ is now approximated by the semidiscrete problem
 
@@ -125,6 +99,7 @@ which is simply a linear, constant-coefficient system of *ordinary* differential
 
 ```{index} ! method of lines
 ```
+
 Semidiscretization is often called the **method of lines**. Despite the name, it is not exactly a single method because both space and time discretizations have to be specified in order to get a concrete algorithm. The key concept is the separation of those two discretizations, and in that way, it's related to separation of variables in analytic methods for the heat equation.
 
 (example-methodlines-heatFE)=
@@ -138,74 +113,28 @@ Thus, a fully discrete method for the heat equation is
 :::
 ::::
 
-
 (demo-methodlines-heatFE)=
-```{prf:example}
-```
+::::{prf:example} Forward Euler for the heat equation
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-methodlines-heatFE-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-methodlines-heatFE-matlab
+:::
+````
 
-
-
-
-Let's implement the method of {numref}`Example {number} <example-methodlines-heatFE>` with second-order space semidiscretization.
-
-```{code-cell}
-m = 100
-x,Dx,Dxx = FNC.diffper(m,[0,1]);
-
-tfinal = 0.16;  n = 2400;  
-τ = tfinal/n;  t = τ*(0:n);
-```
-
-Next we set an initial condition. It isn't mathematically periodic, but the end values and derivatives are so small that for numerical purposes it may as well be.
-
-```{code-cell}
-U = zeros(m,n+1);
-U[:,1] = @. exp( -60*(x-0.5)^2 )
-plot(x,U[:,1],xaxis=(L"x"),yaxis=(L"u(x,0)"),
-    title="Initial condition")
-```
-
-The Euler time stepping simply multiplies by the constant matrix in {eq}`Eulerxx` at each time step. Since that matrix is sparse, we will declare it as such, even though the run-time savings may not be detectable for this small value of $m$.
-
-```{code-cell}
-A = sparse(I+τ*Dxx)
-for j in 1:n
-    U[:,j+1] = A*U[:,j]
-end
-
-idx = [1,21,41,61]
-times = round.(t[idx],digits=4)
-label = reshape(["t = $t" for t in times],1,length(idx))
-plot(x,U[:,idx];label,
-    title="Heat equation by forward Euler",legend=:topleft,  
-    xaxis=(L"x"),yaxis=(L"u(x,0)",[0,1]))
-```
-
-Things seem to start well, with the initial peak widening and shrinking. But then there is a nonphysical growth in the solution.
-
-```{code-cell}
-:tags: [hide-input]
-anim = @animate for j in 1:101
-    plot(x,U[:,j],label=@sprintf("t=%.5f",t[j]),
-    xaxis=(L"x"),yaxis=(L"u(x,t)",[-1,3]),dpi=100,
-    title="Heat equation by forward Euler")
-end
-mp4(anim,"diffusionFE.mp4")
-```
-
-The growth in norm is exponential in time.
-
-```{code-cell}
-M = vec( maximum(abs,U,dims=1) )   
-plot(t[1:1000],M[1:1000],
-    xaxis=(L"t"), yaxis=(:log10,L"\max_x |u(x,t)|"),
-    title="Nonphysical growth") 
-```
-
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-methodlines-heatFE-python
+:::
+````
+`````
+::::
 
 The method in {numref}`Example {number} <example-methodlines-heatFE>` and {numref}`Demo {number} <demo-methodlines-heatFE>` is essentially the same one we used for the Black–Scholes equation in {numref}`section-diffusion-blackscholes`. By changing the time integrator, we can get much better results.
 
@@ -224,46 +153,29 @@ An alternative time discretization of {eq}`heatMOL` is to use the backward Euler
 Because backward Euler is an implicit method, a linear system must be solved for $\mathbf{u}_{j+1}$ at each time step. 
 ::::
 
-
 (demo-methodlines-heatBE)=
-```{prf:example}
-```
+::::{prf:example} Backward Euler for the heat equation
 
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-methodlines-heatBE-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-methodlines-heatBE-matlab
+:::
+````
 
-
-
-Now we apply backward Euler to the heat equation. We will reuse the setup from {numref}`Demo {number} <demo-methodlines-heatFE>`. Since the matrix in {eq}`BExx` never changes during the time stepping, we do the necessary LU factorization only once.
-
-```{code-cell}
-B = sparse(I-τ*Dxx)
-factor = lu(B)
-for j in 1:n
-    U[:,j+1] = factor\U[:,j]
-end
-```
-
-```{code-cell}
-:tags: [hide-input]
-idx = 1:600:n+1
-times = round.(t[idx],digits=4)
-label = reshape(["t = $t" for t in times],1,length(idx))
-plot(x,U[:,idx];label,
-    title="Heat equation by backward Euler",legend=:topleft,  
-    xaxis=(L"x"),yaxis=(L"u(x,0)",[0,1]))
-```
-
-```{code-cell}
-:tags: [hide-input]
-anim = @animate for j in 1:20:n+1
-    plot(x,U[:,j],label=@sprintf("t=%.5f",t[j]),
-    xaxis=(L"x"),yaxis=(L"u(x,t)",[0,1]),dpi=100,
-    title="Heat equation by backward Euler")
-end
-mp4(anim,"diffusionBE.mp4")
-```
-
-This solution looks physically plausible, as the large concentration in the center diffuses outward until the solution is essentially constant. Observe that the solution remains periodic in space for all time.
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-methodlines-heatBE-python
+:::
+````
+`````
+::::
 
 
 
@@ -276,70 +188,27 @@ This solution looks physically plausible, as the large concentration in the cent
 Instead of coding one of the Runge–Kutta or multistep formulas directly for a method of lines solution, we could use any of the IVP solvers from Chapter 6, or a solver from the `DifferentialEquations` package, to solve the ODE initial-value problem {eq}`heatMOL`.
 
 (demo-methodlines-auto)=
-```{prf:example}
-```
+::::{prf:example} Adaptive time stepping for the heat equation
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-methodlines-auto-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-methodlines-auto-matlab
+:::
+````
 
-
-
-
-We set up the semidiscretization and initial condition in $x$ just as before.
-
-```{code-cell}
-m = 100
-x,Dx,Dxx = FNC.diffper(m,[0,1])
-u0 = @. exp(-60*(x-0.5)^2);
-```
-
-Now, however, we apply {numref}`Function {number} <function-rk23>` (`rk23`) to the initial-value problem $\mathbf{u}'=\mathbf{D}_{xx}\mathbf{u}$.
-
-```{code-cell}
-tfinal = 0.25
-ODE = (u,p,t) -> Dxx*u;  
-IVP = ODEProblem(ODE,u0,(0,tfinal))
-
-t,u = FNC.rk23(IVP,1e-5);
-```
-
-We check that the resulting solution looks realistic.
-
-```{code-cell}
-:tags: [hide-input]
-plt = plot(title="Heat equation by rk23",legend=:topleft,  
-    xaxis=(L"x"),yaxis=(L"u(x,0)",[0,1]))
-for idx in 1:600:n+1
-    plot!(x,u[idx],label="t = $(round.(t[idx],digits=4))")
-end
-plt
-```
-
-```{code-cell}
-:tags: [hide-input]
-anim = @animate for j in 1:20:1600
-    plot(x,u[j],label=@sprintf("t=%.4f",t[j]),
-      xaxis=(L"x"), yaxis=(L"u(x,t)",[0,1]),dpi=100,
-      title="Heat equation by rk23")
-end
-mp4(anim,"diffusionRK23.mp4")
-```
-
-The solution appears to be correct. But the number of time steps that were selected automatically is surprisingly large, considering how smoothly the solution changes.
-
-```{code-cell}
-println("Number of time steps for rk23: $(length(t)-1)")
-```
-
-Now we apply a solver from `DifferentialEquations`.
-
-```{code-cell}
-u = solve(IVP,Rodas4P());
-println("Number of time steps for Rodas4P: $(length(u.t)-1)")
-```
-
-The number of steps selected is reduced by a factor of more than 100!
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-methodlines-auto-python
+:::
+````
+`````
+::::
 
 The adaptive time integrators can all produce solutions. But, as seen in {numref}`Demo %s <demo-methodlines-auto>`, they are not equivalent in every important sense. Whether we choose to implement a method directly with a fixed step size, or automatically with adaptation, there is something crucial to understand about the semidiscrete problem {eq}`heatMOL` that will occupy our attention in the next two sections.
 
@@ -360,7 +229,7 @@ The adaptive time integrators can all produce solutions. But, as seen in {numref
 3. ✍ Apply the trapezoid IVP formula (AM2) to the semidiscretization {eq}`heatMOL` and derive what is known as the *Crank–Nicolson* method:
 
     :::{math}
-:label: CNxx
+    :label: CNxx
     (\mathbf{I} - \tfrac{1}{2}\tau \mathbf{D}_{xx}) \mathbf{u}_{j+1} =  (\mathbf{I} + \tfrac{1}{2}\tau
     \mathbf{D}_{xx}) \mathbf{u}_{j}.
     :::

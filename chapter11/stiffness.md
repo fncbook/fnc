@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 11.4.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-diffusion-stiffness)=
 # Stiffness
 
@@ -122,55 +106,28 @@ The eigenvalues of the Jacobian appearing in the linearization about an exact so
 We have not stated a theorem here because we made several approximations and assumptions along the way that are not trivial to quantify. Nevertheless, if the rule of thumb is violated, we should expect perturbations to the exact solution to grow significantly with time, eventually rendering the numerical solution useless. Note that roundoff error is constantly introducing perturbations, so the rule of thumb applies along the entire trajectory of the numerical solution.
 
 (demo-stiffness-oregon)=
-:::{prf:example}
+::::{prf:example} Solution of the Oregonator
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-stiffness-oregon-julia
 :::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-stiffness-oregon-matlab
+:::
+````
 
-
-
-
-In {numref}`Example {number} <example-stiffness-oregon>` we derived a Jacobian matrix for the Oregonator model. Here is a numerical solution of the ODE.
-
-```{code-cell}
-:tags: [hide-input]
-function ode(u,p,t)
-    s,w,q = p
-    f = [ 
-        s*(u[2]*(1-u[1]) + u[1]*(1-q*u[1])),
-        (u[3]-u[2]-u[1]*u[2]) /s,   
-        w*(u[1]-u[3])
-        ]
-    return f
-end
-
-s,w,q = 77.27,.161,8.375e-6
-oregon = ODEProblem(ode,[1.,2,3],(0.,500.),[s,w,q])
-sol = solve(oregon)
-plot(sol,yscale=:log10,legend=:none,
-    title="Solution of the Oregonator")
-```
-
-At each value of the numerical solution, we can compute the eigenvalues of the Jacobian. Here we plot all of those eigenvalues in the complex plane.
-
-```{code-cell}
-:tags: [hide-input]
-t,u = sol.t[1:2:end],sol.u[1:2:end]
-λ = fill(0.0im,length(t),3)
-for (k,u) in enumerate(u)
-    J = [
-    s*(1-u[2]-2q*u[1]) s*(1-u[1])        0 
-         -u[2]/s       -(1+u[1])/s     1/s 
-            w               0           -w
-        ]
-    λ[k,:] .= eigvals(J)
-end
-
-scatter(real(λ),imag(λ),t,
-    xaxis=("Re(λ)",25000*(-5:2:-1)),ylabel="Im(λ)",zlabel="t",
-    title="Oregonator eigenvalues")
-```
-
-You can see that there is one eigenvalue that ranges over a wide portion of the negative real axis and dominates stability considerations.
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-stiffness-oregon-python
+:::
+````
+`````
+::::
 
 
 
@@ -189,52 +146,28 @@ A Jacobian matrix with eigenvalues at different orders of magnitude therefore im
 In {numref}`Demo {number} <demo-stiffness-oregon>`, for example, you can see a combination of fast changes and slow evolution. 
 
 (demo-stiffness-explicit)=
-```{prf:example}
-```
+::::{prf:example} Stiff solver for the Oregonator
 
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-stiffness-explicit-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-stiffness-explicit-matlab
+:::
+````
 
-
-
-The `Rodas4P` solver is good for stiff problems, and needs few time steps to solve the Oregonator from {numref}`Demo {number} <demo-stiffness-oregon>`.
-
-```{code-cell}
-oregon = remake(oregon,tspan=(0.,25.))
-sol = solve(oregon,Rodas4P())
-println("Number of time steps for Rodas4P: $(length(sol.t)-1)")
-```
-
-But if we apply {numref}`Function {number} <function-rk23>` to the problem, the step size will be made small enough to cope with the large negative eigenvalue. 
-
-```{code-cell}
-t,u = FNC.rk23(oregon,1e-4)
-println("Number of time steps for RK23: $(length(t)-1)")
-```
-
-Starting from the eigenvalues of the Jacobian matrix, we can find an effective $\zeta(t)$ by multiplying with the local time step size. The values of $\zeta(t)$ for each time level are plotted below and color coded by component of the diagonalized system.
-
-```{code-cell}
-:tags: [hide-input]
-λ = fill(1.0im,length(t),3)
-for (i,u) in enumerate(u)
-    J = [
-    s*(1-u[2]-2q*u[1]) s*(1-u[1])        0 
-         -u[2]/s       -(1+u[1])/s     1/s 
-            w               0           -w
-        ]
-    λ[i,:] .= eigvals(J)
-end
-
-ζ = diff(t).*λ[1:end-1,:]
-scatter(real(ζ),imag(ζ),m=2,
-    xlabel="Re(ζ)",ylabel="Im(ζ)",
-    title="Oregonator stability")
-```
-
-Roughly speaking, the $\zeta$ values stay within or close to the RK2 stability region in {numref}`figure-stabreg_bd_rk`. Momentary departures from the region are possible, but time stepping repeatedly in that situation would cause instability. 
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-stiffness-explicit-python
+:::
+````
+`````
+::::
 
 ## A-stability
 
@@ -260,6 +193,7 @@ Referring to {numref}`figure-stabreg_ab_am` and {numref}`figure-stabreg_bd_rk`, 
 
 ```{index} Dahlquist theorems
 ```
+
 ::::{prf:theorem} Second Dahlquist stability barrier
 An A-stable linear multistep method must be implicit and have order of accuracy no greater than 2.
 ::::
@@ -304,7 +238,7 @@ Hence the trapezoid formula is as accurate as we can hope for in the family of A
 5. The *van der Pol equation* is a famous nonlinear oscillator given by
   
     :::{math}
-:label: vanderpol
+    :label: vanderpol
       y'' - \mu(1-y^2)y' + y = 0,
     :::
 

@@ -1,24 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.11.5
-kernelspec:
-  display_name: Julia fastload
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 11.1.%s
 ---
-
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-diffusion-blackscholes)=
 # Black–Scholes equation
 
@@ -209,131 +192,54 @@ Now we take the boundaries on $x$ into account. The value $V_{0,j+1}$ is zero, s
 We can therefore solve {eq}`bsneumann` for the fictitious $V_{m+1,j}$ and use it where called for in the right-hand side of {eq}`bspdeFD2`. 
 
 (demo-blackscholes-solve)=
-```{prf:example}
-```
+::::{prf:example} FD solution of Black–Scholes
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-blackscholes-solve-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-blackscholes-solve-matlab
+:::
+````
 
-
-
-We consider the Black–Scholes problem for the following parameter values:
-
-```{code-cell}
-Smax = 8;  T = 6;
-K,σ,r = 3, 0.06, 0.08;
-```
-
-We discretize space and time.
-
-```{code-cell}
-m = 200;  h = Smax / m;
-x = h*(0:m)
-n = 1000;  τ = T / n;
-t = τ*(0:n)
-λ = τ / h^2;  μ = τ / h;
-```
-
-We set the initial condition and then march forward in time.
-
-```{code-cell}
-V = zeros(m+1,n+1)
-V[:,1] = @. max( 0, x-K )
-
-for j in 1:n
-    # Fictitious value from Neumann condition.
-    Vfict = 2*h + V[m,j]
-    Vj = [ V[:,j]; Vfict ]
-    # First row is zero by the Dirichlet condition.
-    for i in 2:m+1 
-        diff1 = (Vj[i+1] - Vj[i-1])
-        diff2 = (Vj[i+1] - 2*Vj[i] + Vj[i-1])
-        V[i,j+1] = Vj[i] +
-            (λ*σ^2*x[i]^2/2)*diff2 + (r*x[i]*μ)/2*diff1 - r*τ*Vj[i]
-    end 
-end
-```
-
-Here is a plot of the solution after every 250 time steps.
-
-```{code-cell}
-idx = 1:250:n+1
-label = reshape(["t = $t" for t in t[idx]],1,length(idx))
-plot(x,V[:,idx];label,
-    title="Black–Scholes solution",legend=:topleft,  
-    xaxis=("stock price"),yaxis=("option value") )
-```
-
-```{index} ! Julia; @animate
-```
-
-Alternatively, here is an animation of the solution.
-
-```{code-cell}
-anim = @animate for j in 1:10:n+1
-    plot(x,V[:,j],
-        xaxis=(L"S"),yaxis=([0,6],L"v(S,t)"),dpi=100,    
-        title=@sprintf("B–S equation, t = %.2f",t[j]))
-end
-mp4(anim,"black-scholes-6.mp4")
-```
-
-The results are easy to interpret, recalling that the time variable really means *time until strike*. Say you are close to the option's strike time. If the current stock price is, say, $S=2$, then it's not likely that the stock will end up over the strike price $K=3$, and therefore the option has little value. On the other hand, if presently $S=3$, then there are good odds that the option will be exercised at the strike time, and you will need to pay a substantial portion of the stock price in order to take advantage. As the time to strike increases, there is an expectation that the stock price is more likely to rise somewhat, making the value of the option larger at each fixed $S$. 
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-blackscholes-solve-python
+:::
+````
+`````
+::::
 
 
 Everything in {numref}`Demo {number} <demo-blackscholes-solve>` seems to go smoothly. However, trouble lurks just around the corner.
 
 (demo-blackscholes-unstable)=
-```{prf:example}
-```
+::::{prf:example} Trouble with the FD solution
 
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-blackscholes-unstable-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-blackscholes-unstable-matlab
+:::
+````
 
-
-Let's try to do everything the same as in {numref}`Demo {number} <demo-blackscholes-solve>`, but extending the simulation time to $T=8$.
-
-```{code-cell}
-T = 8;
-
-m = 200;  h = Smax / m;
-x = h*(0:m)
-n = 1000;  τ = T / n;
-t = τ*(0:n)
-λ = τ / h^2;  μ = τ / h;
-
-for j in 1:n
-    # Fictitious value from Neumann condition.
-    Vfict = 2h + V[m,j]
-    Vj = [ V[:,j]; Vfict ]
-    # First row is zero by the Dirichlet condition.
-    for i in 2:m+1 
-        diff1 = (Vj[i+1] - Vj[i-1])
-        diff2 = (Vj[i+1] - 2Vj[i] + Vj[i-1])
-        V[i,j+1] = Vj[i] +
-            (λ*σ^2*x[i]^2/2)*diff2 + (r*x[i]*μ)/2*diff1 - r*τ*Vj[i]
-    end   
-end
-
-idx = 1:250:n+1
-label = reshape(["t = $t" for t in t[idx]],1,length(idx))
-plot(x,V[:,idx];label,
-    title="Black–Scholes solution",legend=:topleft,  
-    xaxis=("stock price"),yaxis=("option value",[0,6]))
-```
-
-```{code-cell}
-anim = @animate for j in 1:10:n+1 
-    plot(x,V[:,j],
-        xaxis=(L"S"),yaxis=([0,6],L"v(S,t)"),dpi=100,    
-        title=@sprintf("t = %.2f",t[j]) )
-end
-mp4(anim,"black-scholes-8.mp4")
-```
-
-This so-called solution is nonsense!
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-blackscholes-unstable-python
+:::
+````
+`````
+::::
 
 The explosive growth of error in {numref}`Demo {number} <demo-blackscholes-unstable>` suggests that there is instability at work. Understanding the source of that instability comes later in this chapter. First, though, we consider a general and robust strategy for solving evolutionary PDEs.
 

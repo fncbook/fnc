@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 11.3.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-diffusion-absstab)=
 # Absolute stability
 
@@ -178,69 +162,28 @@ When adaptive time stepping methods are used, as in most software for IVPs, the 
 Now we return to the semidiscretization {eq}`heatMOL` of the heat equation, which was solved by Euler in {numref}`Demo %s <demo-methodlines-heatFE>` and backward Euler in {numref}`Demo {number} <demo-methodlines-heatBE>`.
 
 (demo-absstab-regions)=
-```{prf:example}
-```
+::::{prf:example} Stability regions and the heat equation
 
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-absstab-regions-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-absstab-regions-matlab
+:::
+````
 
-
-
-Euler and Backward Euler time-stepping methods were used to solve $\mathbf{u}'=\mathbf{D}_{xx}\mathbf{u}$.
-
-```{code-cell}
-m = 40;  _,_,Dₓₓ = FNC.diffper(m,[0,1]);
-```
-
-The eigenvalues of this matrix are real and negative:
-
-```{code-cell}
-λ = eigvals(Dₓₓ)
-scatter(real(λ),imag(λ),title="Eigenvalues",frame=:zerolines,
-    xaxis=("Re λ"),yaxis=("Im λ",(-1000,1000)),aspect_ratio=1)
-```
-
-The Euler method is absolutely stable in the region $|\zeta+1| \le 1$ in the complex plane:
-
-```{code-cell}
-:tags: [hide-input]
-phi = 2π*(0:360)/360
-z = @. exp(1im*phi) - 1;   # unit circle shifted to the left by 1
-
-plot(Shape(real(z),imag(z)),color=RGB(.8,.8,1),
-    xaxis=("Re ζ"),yaxis=("Im ζ"),aspect_ratio=1,
-    title="Stability region",frame=:zerolines) 
-```
-
-In order to get inside this region, we have to find $\tau$ such that $\lambda \tau > -2$ for all eigenvalues $\lambda$. This is an upper bound on $\tau$. 
-
-```{code-cell}
-λ_min = minimum(λ)
-@show max_τ = -2 / λ_min;
-```
-
-Here we plot the resulting values of $\zeta=\lambda \tau$. 
-
-```{code-cell}
-ζ = λ*max_τ
-scatter!(real(ζ),imag(ζ),title="Stability region and ζ values")
-```
-
-In backward Euler, the region is $|\zeta-1|\ge 1$. Because they are all on the negative real axis, all of the $\zeta$ values will fit no matter what $\tau$ is chosen.
-
-```{code-cell}
-:tags: [hide-input]
-plot(Shape([-6,6,6,-6],[-6,-6,6,6]),color=RGB(.8,.8,1))
-
-z = @. exp(1im*phi) + 1;   # unit circle shifted right by 1
-plot!(Shape(real(z),imag(z)),color=:white)
-
-scatter!(real(ζ),imag(ζ),
-    xaxis=([-4,2],"Re ζ"),yaxis=([-3,3],"Im ζ"),aspect_ratio=1,
-    title="Stability region and ζ values",frame=:zerolines)
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-absstab-regions-python
+:::
+````
+`````
+::::
 
 The matrix $\mathbf{D}_{xx}$ occurring in {eq}`heatMOL` for semidiscretization of the periodic heat equation has eigenvalues that can be found explicitly. Assuming that $x\in[0,1)$ (with periodic boundary conditions), for which $h=1/m$, then the eigenvalues are
 

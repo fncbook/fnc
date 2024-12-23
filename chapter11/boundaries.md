@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 11.5.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-diffusion-boundaries)=
 # Boundaries
 
@@ -160,53 +144,28 @@ Given a value of $t$ and $\mathbf{v}$,
 Our full implementation of the method of lines for {eq}`parabolicPDE`--{eq}`parabolicBC` is given in {numref}`Function {number} <function-parabolic>`. It uses {numref}`Function {number} <function-diffcheb>` (`diffcheb`) to set up a Chebyshev discretization. The nested function `extend` performs steps 1--2 of {numref}`Algorithm {number} <algorithm-boundaries-timeder>` by calling {numref}`Function {number} <function-levenberg>` (`levenberg`) to solve the potentially nonlinear system {eq}`mol-bcsystem`. Then it sets up and solves an IVP, adding steps 3--4 of {numref}`Algorithm {number} <algorithm-boundaries-timeder>` within the `ode!` function. Finally, it returns the node vector `x` and a function of `t` that applies `extend` to $\mathbf{v}(t)$ to compute $\mathbf{u}(t)$. 
 
 (function-parabolic)=
-````{prf:function} parabolic
-**Solution of parabolic PDEs by the method of lines**
-```{code-block} julia
-:lineno-start: 1
-"""
-    parabolic(ϕ,xspan,m,g₁,g₂,tspan,init)
+``````{prf:algorithm} parabolic
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-parabolic-julia
+:::
+```` 
 
-Solve a parabolic PDE by the method of lines. The PDE is 
-∂u/∂t = `ϕ`(t,x,u,∂u/∂x,∂^2u/∂x^2), `xspan` gives the space 
-domain, m gives the degree of a Chebyshev spectral discretization, 
-`g₁` and `g₂` are functions of (u,∂u/∂x) at the domain ends that 
-should be made zero, `tspan` is the time domain, and `init` is a 
-function of x that gives the initial condition. Returns a vector
-`x` and a function of t that gives the semidiscrete solution at `x`. 
-"""
-function parabolic(ϕ,xspan,m,g₁,g₂,tspan,init)
-    x,Dₓ,Dₓₓ = diffcheb(m,xspan)
-    int = 2:m    # indexes of interior nodes
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-parabolic-matlab
+:::
+```` 
 
-    function extend(v)
-        function objective(ubc)
-            u₀,uₘ = ubc
-            uₓ = Dₓ*[u₀;v;uₘ]
-            return [g₁(u₀,uₓ[1]),g₂(uₘ,uₓ[end])]
-        end
-        ubc = levenberg(objective,[0,0])[end]
-        return [ubc[1];v;ubc[2]]
-    end
-
-    function ode!(f,v,p,t)
-        u = extend(v)
-        uₓ,uₓₓ = Dₓ*u,Dₓₓ*u
-        @. f = ϕ(t,x[int],u[int],uₓ[int],uₓₓ[int])
-    end
-
-    ivp = ODEProblem(ode!,init.(x[int]),float.(tspan))
-    u = solve(ivp)
-
-    return x,t->extend(u(t))
-end
-```
+````{tab-item} Python
+:sync: python
+:::{embed} #function-parabolic-python
+:::
 ````
+`````
+``````
 
-::::{admonition} About the code
-:class: dropdown
-Line 29 uses the macro `@.` to assign into the vector `f` elementwise. Without it, the function would allocate space for the result of `phi` and then change `f` to point at that vector, and that would defeat the purpose of using the preallocated `f` for speed.
-::::
 
 ```{index} Dirichlet boundary conditions
 ```
@@ -216,59 +175,33 @@ In many specific problems, `extend` does more work than is truly necessary. Diri
 [^multidisp]: An important advanced feature of Julia is *multiple dispatch*, which allows you to make multiple definitions of a function for different sequences and types of input arguments. Thus, addition to the original {numref}`Function {number} <function-parabolic>`, we could also define a modified version in which `g₁` and `g₂` are of numeric type for the Dirichlet case. The correct version would be chosen (dispatched) depending on how the boundary conditions were supplied by the caller, allowing us speed when possible and generality as a fallback.
 
 (demo-boundaries-heat)=
-```{prf:example}
-```
+::::{prf:example} Heat equation with Dirichlet boundary conditions
 
+Let's solve the heat equation $u_t=u_{xx}$ on $[-1,1]$, subject to the Dirichlet boundary conditions $u(-1,t)=0$, $u(1,t)=2$.
 
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-boundaries-heat-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-boundaries-heat-matlab
+:::
+````
 
-
-Let's solve the heat equation on $[-1,1]$. First, we define the PDE $u_t=u_{xx}$ and Dirichlet boundary conditions $u(-1,t)=0$, $u(1,t)=2$.
-
-```{code-cell}
-ϕ = (t,x,u,uₓ,uₓₓ) -> uₓₓ
-g₁ = (u,uₓ) -> u
-g₂ = (u,uₓ) -> u-2;
-```
-
-Our next step is to write a function to define the initial condition. This one satisfies the boundary conditions exactly.
-
-```{code-cell}
-init = x -> 1 + sin(π*x/2) + 3*(1-x^2)*exp(-4x^2);
-```
-
-Now we can use {numref}`Function {number} <function-parabolic>` to solve the problem.
-
-```{code-cell}
-x,u = FNC.parabolic(ϕ,(-1,1),60,g₁,g₂,(0,0.75),init)
-plt = plot(xlabel=L"x",ylabel=L"u(x,t)",legend=:topleft,
-          title="Solution of the heat equation")
-for t in 0:0.1:0.4
-    plot!(x,u(t),label=@sprintf("t=%.2f",t))
-end
-plt
-```
-
-```{code-cell}
-:tags: [hide-input]
-anim = @animate for t in range(0,0.75,length=201) 
-    plot(x,u(t),label=@sprintf("t=%.2f",t),
-        xaxis=(L"x"), yaxis=(L"u(x,t)",(0,4.2)), 
-        title="Heat equation",leg=:topleft,dpi=100)
-end
-mp4(anim,"boundaries-heat.mp4",fps=30)
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-boundaries-heat-python
+:::
+````
+`````
+::::
 
 (demo-boundaries-bratu)=
-```{prf:example}
-```
-
-
-
-
+::::{prf:example} Heat equation with nonlinear source
 
 We solve a heat equation with a nonlinear source term,
 
@@ -278,66 +211,54 @@ $$
 
 One interpretation of this PDE is an exothermic chemical reaction whose rate increases with temperature. We solve over $x \in [0,1]$ with homogeneous conditions of different kinds. 
 
-```{code-cell}
-ϕ = (t,x,u,uₓ,uₓₓ) -> u^2 + uₓₓ
-g₁ = (u,uₓ) -> u
-g₂ = (u,uₓ) -> uₓ
-init = x -> 400x^4*(1-x)^2
-x,u = FNC.parabolic(ϕ,(0,1),60,g₁,g₂,(0,0.1),init);
-```
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-boundaries-bratu-julia
+:::
+````
 
-```{code-cell}
-:tags: [hide-input]
-anim = @animate for t in range(0,0.1,length=101) 
-    plot(x,u(t),label=@sprintf("t=%.4f",t),
-        xaxis=(L"x"), yaxis=(L"u(x,t)",(0,10)),dpi=100, 
-        title="Heat equation with source",leg=:topleft)
-end
-mp4(anim,"boundaries-source.mp4",fps=30)
-```
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-boundaries-bratu-matlab
+:::
+````
 
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-boundaries-bratu-python
+:::
+````
+`````
+::::
 
 Finally, we return to the example of the Black–Scholes equation from {numref}`section-diffusion-blackscholes`. 
 
 (demo-boundaries-bs)=
-```{prf:example}
-```
+::::{prf:example} Black–Scholes equation with mixed boundary conditions
 
+We solve the Black–Scholes PDE @bspde with initial condition $u(x,0) = \max\{0,x-K\}$ and the boundary conditions $u(0,t)=0$ and $u_x(S_\text{max},t)=1$. We choose $S_\text{max}=8$, $r=0.08$, $\sigma=0.06$, and $K=3$.
 
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-boundaries-bs-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-boundaries-bs-matlab
+:::
+````
 
-
-Here is the Black–Scholes PDE, with a homogeneous Dirichlet condition at zero stock price and a nonhomogeneous Neumann condition at the truncated right boundary.
-
-```{code-cell}
-K = 3;  σ = 0.06;  r = 0.08;  Smax = 8;
-ϕ = (t,x,u,uₓ,uₓₓ) -> σ^2/2*(x^2*uₓₓ) + r*x*uₓ - r*u
-g₁ = (u,uₓ) -> u
-g₂ = (u,uₓ) -> uₓ-1;
-```
-
-```{code-cell}
-u₀ = x -> max(0,x-K)
-x,u = FNC.parabolic(ϕ,(0,Smax),80,g₁,g₂,(0,15),u₀);
-```
-
-```{code-cell}
-:tags: [hide-input]
-anim = @animate for t in range(0,15,length=151) 
-    plot(x,u(t),label=@sprintf("t=%.4f",t),
-        xaxis=(L"x"), yaxis=(L"u(x,t)",(-0.5,8)),dpi=100, 
-        title="Black–Scholes equation",leg=:topleft)
-end
-mp4(anim,"boundaries-bs.mp4",fps=30)
-```
-
-Recall that $u$ is the value of the call option, and time runs backward from the strike time. The longer the horizon, the more value the option has due to anticipated growth in the stock price.
-
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-boundaries-bs-python
+:::
+````
+`````
+::::
 
 ## Exercises
 
