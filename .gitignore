@@ -36,3 +36,5 @@ python/pkg/build/*
 python/pkg/dist/*
 python/pkg/FNC.egg-info
 **/tmp.*
+python/black-scholes-6.mp4
+*.mp4
