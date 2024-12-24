@@ -38,3 +38,4 @@ python/pkg/FNC.egg-info
 **/tmp.*
 python/black-scholes-6.mp4
 *.mp4
+.DS_Store
