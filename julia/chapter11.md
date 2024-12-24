@@ -1,11 +1,4 @@
 ---
-jupytext:
-  encoding: '# -*- coding: utf-8 -*-'
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.16.4
 kernelspec:
   display_name: Julia 1
   language: julia
@@ -189,48 +182,51 @@ mp4(anim,"black-scholes-8.mp4")
 This so-called solution is nonsense!
 ``````
 
+### 11.2 @section-diffusion-methodlines
+
 (demo-methodlines-heatFE-julia)=
 ``````{dropdown} @demo-methodlines-heatFE
 Let's implement the method of {numref}`Example {number} <example-methodlines-heatFE>` with second-order space semidiscretization.
 
 ```{code-cell}
 m = 100
-x,Dx,Dxx = FNC.diffper(m, [0,1]);
+x, Dx, Dxx = FNC.diffper(m, [0, 1]);
 
-tfinal = 0.16;  n = 2400;  
-τ = tfinal / n
-t = τ * (0:n)
+tfinal = 0.16 
+n = 2400           # number of time steps
+τ = tfinal / n     # time step    
+t = τ * (0:n)      # time values
 ```
 
 Next we set an initial condition. It isn't mathematically periodic, but the end values and derivatives are so small that for numerical purposes it may as well be.
 
 ```{code-cell}
 U = zeros(m, n+1);
-U[:, 1] = @. exp( -60*(x - 0.5)^2 )
-plot(x,U[:, 1];
+U[:, 1] = @. exp( -60 * (x - 0.5)^2 )
+plot(x, U[:, 1];
     xaxis=(L"x"),
     yaxis=(L"u(x,0)"),
     title="Initial condition"
     )
 ```
 
-The Euler time stepping simply multiplies by the constant matrix in {eq}`Eulerxx` at each time step. Since that matrix is sparse, we will declare it as such, even though the run-time savings may not be detectable for this small value of $m$.
+The Euler time stepping simply multiplies $\mathbf{u}_j$ by the constant matrix in {eq}`Eulerxx` at each time step. Since that matrix is sparse, we will declare it as such, even though the run-time savings may not be detectable for this small value of $m$.
 
 ```{code-cell}
-A = sparse(I+τ*Dxx)
+A = sparse(I + τ * Dxx)
 for j in 1:n
     U[:, j+1] = A * U[:, j]
 end
 
-idx = [1, 21, 41, 61]
-times = round.(t[idx], digits=4)
-label = reshape(["t = $t" for t in times], 1, length(idx))
-plot(x, U[:, idx];
-    label,
+plot_idx = [1, 21, 41, 61]
+plot_times = round.(t[plot_idx], digits=4)
+labels = ["t = $t" for t in plot_times]
+plot(x, U[:, plot_idx];
+    label=reshape(labels, 1, :),
     title="Heat equation by forward Euler",
     legend=:topleft,  
     xaxis=(L"x"),
-    yaxis=(L"u(x,0)",[0,1])
+    yaxis=(L"u(x,0)", [-0.25, 1])
     )
 ```
 
@@ -242,7 +238,7 @@ anim = @animate for j in 1:101
     plot(x, U[:, j];
     label=@sprintf("t=%.5f", t[j]),
     xaxis=(L"x"),
-    yaxis=(L"u(x,t)",[-1,3]),
+    yaxis=(L"u(x,t)", [-1, 2]),
     dpi=150,
     title="Heat equation by forward Euler"
     )
@@ -262,7 +258,6 @@ plot(t[1:1000], M[1:1000];
 ```
 ``````
 
-### 11.2 @section-diffusion-methodlines
 (demo-methodlines-heatBE-julia)=
 ``````{dropdown} @demo-methodlines-heatBE
 Now we apply backward Euler to the heat equation. We will reuse the setup from {numref}`Demo {number} <demo-methodlines-heatFE>`. Since the matrix in {eq}`BExx` never changes during the time stepping, we do the necessary LU factorization only once.

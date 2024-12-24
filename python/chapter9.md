@@ -703,7 +703,7 @@ n = array([100, 10000])
 loglog(n, 1000 / n**4, 'k--')
 xlabel("number of nodes"),  ylabel("error")
 title("Comparison of integration methods")
-legend((["direct", "double exponential", "4th-order"], loc="lower left"));
+legend(["direct", "double exponential", "4th-order"], loc="lower left");
 ```
 
 Both methods are roughly fourth-order due to Simpson's formula in the underlying adaptive integration method. At equal numbers of evaluation nodes, however, the double exponential method is consistently 2--3 orders of magnitude more accurate.
@@ -730,7 +730,7 @@ n = array([100, 10000])
 loglog(n, 30 / n**4, 'k--')
 xlabel("number of nodes"),  ylabel("error")
 title("Comparison of integration methods")
-legend((["direct", "double exponential", "4th-order"], loc="lower left"));
+legend(["direct", "double exponential", "4th-order"], loc="lower left");
 ```
 
 As in {numref}`Demo {number} <demo-improper-intinf>`, the double exponential method is more accurate than direct integration by a few orders of magnitude. Equivalently, the same accuracy can be reached with many fewer nodes.
