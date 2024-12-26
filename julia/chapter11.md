@@ -118,8 +118,9 @@ anim = @animate for j in 1:10:n+1
     plot(x, V[:, j],
         xaxis=(L"S"),
         yaxis=([0,6],L"v(S,t)"),
+        title="Black–Scholes solution",
         dpi=150,    
-        title=@sprintf("B–S equation, t = %.2f", t[j])
+        title=@sprintf("t = %.2f", t[j])
         )
 end
 mp4(anim, "black-scholes-6.mp4")
@@ -163,7 +164,7 @@ plot(x, V[:, idx];
     title="Black–Scholes solution",
     legend=:topleft,  
     xaxis=("stock price"),
-    yaxis=("option value",[0,6])
+    yaxis=("option value",[0, 6])
     )
 ```
 
@@ -172,6 +173,7 @@ anim = @animate for j in 1:10:n+1
     plot(x, V[:, j];
         xaxis=(L"S"),
         yaxis=([0,6],L"v(S,t)"),
+        title="Black–Scholes solution...?",
         dpi=150,    
         title=@sprintf("t = %.2f",t[j]) 
         )
@@ -192,7 +194,7 @@ Let's implement the method of {numref}`Example {number} <example-methodlines-hea
 m = 100
 x, Dx, Dxx = FNC.diffper(m, [0, 1]);
 
-tfinal = 0.16 
+tfinal = 0.15 
 n = 2400           # number of time steps
 τ = tfinal / n     # time step    
 t = τ * (0:n)      # time values
@@ -218,7 +220,7 @@ for j in 1:n
     U[:, j+1] = A * U[:, j]
 end
 
-plot_idx = [1, 21, 41, 61]
+plot_idx = 1:10:31
 plot_times = round.(t[plot_idx], digits=4)
 labels = ["t = $t" for t in plot_times]
 plot(x, U[:, plot_idx];
@@ -263,10 +265,10 @@ plot(t[1:1000], M[1:1000];
 Now we apply backward Euler to the heat equation. We will reuse the setup from {numref}`Demo {number} <demo-methodlines-heatFE>`. Since the matrix in {eq}`BExx` never changes during the time stepping, we do the necessary LU factorization only once.
 
 ```{code-cell}
-B = sparse(I-τ*Dxx)
+B = sparse(I - τ * Dxx)
 factor = lu(B)
 for j in 1:n
-    U[:, j+1] = factor\U[:, j]
+    U[:, j+1] = factor \ U[:, j]
 end
 ```
 
