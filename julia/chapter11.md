@@ -120,7 +120,7 @@ anim = @animate for j in 1:10:n+1
         yaxis=([0,6],L"v(S,t)"),
         title="Black–Scholes solution",
         dpi=150,    
-        title=@sprintf("t = %.2f", t[j])
+        label=@sprintf("t = %.2f", t[j])
         )
 end
 mp4(anim, "black-scholes-6.mp4")
@@ -175,7 +175,7 @@ anim = @animate for j in 1:10:n+1
         yaxis=([0,6],L"v(S,t)"),
         title="Black–Scholes solution...?",
         dpi=150,    
-        title=@sprintf("t = %.2f",t[j]) 
+        label=@sprintf("t = %.2f",t[j]) 
         )
 end
 mp4(anim,"black-scholes-8.mp4")
