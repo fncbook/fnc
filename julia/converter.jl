@@ -1,10 +1,9 @@
-dir = "/Users/driscoll/Documents/GitHub/fnc/chapter11"
+dir = "/Users/driscoll/Documents/GitHub/fnc/chapter12"
 files = [
-    "blackscholes.md",
-    "methodlines.md",
-    "absstab-diffusion.md",
-    "stiffness.md",
-    "boundaries.md",
+    "traffic.md",
+    "upwind.md",
+    "absstab-advection.md",
+    "wave.md",
 ]
 grabbed = []
 

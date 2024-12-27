@@ -60,7 +60,7 @@ anim = @animate for t in range(0, 4, 120)
         dpi=150,
     )
 end
-mp4(anim,"advection.mp4")
+mp4(anim,"figures/advection.mp4")
 ```
 
 ``````
@@ -114,7 +114,7 @@ anim = @animate for t in range(0,0.9,91)
         xaxis=(L"x"),yaxis=([400,410],"density"),dpi=150,    
         title=@sprintf("Traffic flow, t=%.2f",t) )
 end
-mp4(anim,"traffic-fade.mp4")
+mp4(anim,"figures/traffic-fade.mp4")
 ```
 
 Now we use an initial condition with a larger bump. Note that the scale on the $y$-axis is much different for this solution.
@@ -142,7 +142,7 @@ anim = @animate for t in range(0,0.5,101)
         xaxis=(L"x"),yaxis=([400,480],"density"),dpi=150,    
         title=@sprintf("Traffic jam, t=%.2f",t) )
 end
-mp4(anim,"traffic-jam.mp4")
+mp4(anim,"figures/traffic-jam.mp4")
 ```
 
 In this case the density bump travels backward along the road. It also steepens on the side facing the incoming traffic and decreases much more slowly on the other side. A motorist would experience this as an abrupt increase in density, followed by a much more gradual decrease in density and resulting gradual increase in speed. (You also see some transient, high-frequency oscillations. These are caused by instabilities, as we discuss in simpler situations later in this chapter.)
@@ -199,20 +199,20 @@ We'll pattern a solution after {numref}`Function {number} <function-parabolic>`.
 m = 80
 x, Dₓ = FNC.diffcheb(m, [0, 1])
 
-int = 1:m
+interior = 1:m
 extend = v -> [v; 0]
 
 function ode!(f, v, c, t)
     u = extend(v)
     uₓ = Dₓ * u
-    @. f = -c * uₓ[int]
+    @. f = -c * uₓ[interior]
 end;
 ```
 
 Now we solve for an initial condition that has a single hump.
 
 ```{code-cell}
-init = @. exp( -80*(x[int] - 0.5)^2 )
+init = @. exp( -80*(x[interior] - 0.5)^2 )
 ivp = ODEProblem(ode!, init, (0., 1), -1)
 u = solve(ivp);
 ```
@@ -239,16 +239,16 @@ anim = @animate for t in range(0, 1, 161)
         dpi=150
         )
 end
-mp4(anim,"upwind-inflow.mp4")
+mp4(anim,"figures/upwind-inflow.mp4")
 ```
 
 If instead of $u(1,t)=0$ we were to try to impose the downwind condition $u(0,t)=0$, we only need to change the index of the interior nodes and where to append the zero value.
 
 ```{code-cell}
-int = 2:m+1
+interior = 2:m+1
 extend = v -> [0; v]
 
-init = @. exp( -80*(x[int] - 0.5)^2 )
+init = @. exp( -80*(x[interior] - 0.5)^2 )
 ivp = ODEProblem(ode!, init, (0., 0.25), -1)
 u = solve(ivp);
 ```
@@ -274,7 +274,7 @@ anim = @animate for t in range(0, 0.2, 41)
         xaxis=(L"x"),  yaxis=(L"u(x,t)", (0, 1)), 
         title="Advection equation with outflow BC",dpi=150)
 end
-mp4(anim,"upwind-outflow.mp4")
+mp4(anim,"figures/upwind-outflow.mp4")
 ```
 ``````
 
@@ -304,7 +304,7 @@ Let's choose a time step of $\tau=0.1$ and compare to the stability regions of t
 :tags: hide-input
 zc = @. cispi(2 * (0:360) / 360);     # points on |z|=1
 z = zc .- 1;                          # shift left by 1
-plot(Shape(real(z), imag(z)), color=RGB(.8,. 8, 1))
+plot(Shape(real(z), imag(z)), color=RGB(.8, .8, 1))
 
 ζ = 0.1 * λ
 scatter!(real(ζ), imag(ζ);
@@ -410,8 +410,8 @@ The following function computes the time derivative of the system at interior po
 ode = function(w, c, t)
     u = extend(w[1:m-1])
     z = w[m:2m]
-    dudt = Dₓ*z
-    dzdt = c^2 * (Dₓ*u)
+    dudt = Dₓ * z
+    dzdt = c^2 * (Dₓ * u)
     return [ chop(dudt); dzdt ]
 end;
 ```
