@@ -1,24 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.11.5
-kernelspec:
-  display_name: Julia 1.7
-  language: julia
-  name: julia-1.7
+numbering:
+  enumerator: 12.2.%s
 ---
-
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-advection-upwind)=
 # Upwinding and stability
 
@@ -36,6 +19,7 @@ For now, we suppose there are no boundaries. Keep in mind that $c$ is a velocity
 
 ```{index} ! domain of dependence, ! upwind direction
 ```
+
 In {numref}`section-advection-traffic` we argued that $u(x,t)=\psi(x-ct)$ is a solution of {eq}`advectioncc`. It's therefore clear that $u(x,t)=u_0(x-ct)$. 
 
 (definition-upwind-domdep)=
@@ -113,49 +97,31 @@ The CFL condition required that the maximum propagation speed in the numerical m
 
 We can rearrange {eq}`cfl-speed` to imply a necessary time step restriction $\tau \le h/|c|$. This restriction for advection is much less severe than the $\tau = O(h^2)$ restriction we derived for Euler in the heat equation in {numref}`section-diffusion-stiffness`, which is our first indication that advection is less stiff than diffusion.
 
-
 (demo-upwind-cfl)=
-```{prf:example}
-```
+::::{prf:example} The CFL condition in action
 
+We solve linear advection with velocity $c=2$ and periodic end conditions. The initial condition is numerically, though not mathematically, periodic.
 
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-upwind-cfl-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-upwind-cfl-matlab
+:::
+````
 
-
-We solve linear advection with velocity $c=2$ and periodic end conditions. The initial condition is numerically, though not mathematically, periodic. For time stepping, we use the adaptive explicit method `RK4`.
-
-```{code-cell}
-function demo(m)
-  x,Dₓ = FNC.diffper(m,[0,1])
-  uinit = @. exp(-80*(x-0.5)^2)
-  ode = (u,c,t) -> -c*(Dₓ*u)
-  IVP = ODEProblem(ode,uinit,(0.,2.),2.)
-  return x,solve(IVP,RK4())
-end
-x,u = demo(400);
-```
-
-```{code-cell}
-:tags: [hide-input]
-t = 2*(0:80)/80
-U = reduce(hcat,u(t) for t in t)
-contour(x,t,U',color=:redsblues,clims=(-1,1),
-    xaxis=(L"x"),yaxis=(L"t"),title="Linear advection",
-    right_margin=3Plots.mm)
-```
-
-In the space-time plot above, you can see the initial hump traveling rightward at constant speed. It fully traverses the domain once for each integer multiple of $t=1/2$. 
-
-If we cut $h$ by a factor of 2 (i.e., double $m$), then the CFL condition suggests that the time step should be cut by a factor of 2 also.
-
-```{code-cell}
-println("Number of time steps for m = 400: $(length(u.t))")
-x,u = demo(800)
-println("Number of time steps for m = 800: $(length(u.t))")
-```
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-upwind-cfl-python
+:::
+````
+`````
+::::
 
 
 (example-upwind-be)=
@@ -223,90 +189,28 @@ If we impose a condition at the downwind side of the domain, there is no way for
 In summary, we require an **inflow** condition on the PDE. For $c>0$ this is at the left end, and for $c<0$ it is at the right end. This requirement is true of the exact PDE as well as any discretization of it.
 
 (demo-upwind-direction)=
-```{prf:example}
-```
+::::{prf:example} Upwind versus downwind
 
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-upwind-direction-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-upwind-direction-matlab
+:::
+````
 
-
-
-If we solve advection over $[0,1]$ with velocity $c=-1$, the right boundary is in the upwind/inflow direction. Thus a well-posed boundary condition is $u(1,t)=0$.
-
-We'll pattern a solution after {numref}`Function {number} <function-parabolic>`. Since $u(x_m,t)=0$, we define the ODE interior problem {eq}`mol-interior` for $\mathbf{v}$ without $u_m$. For each evaluation of $\mathbf{v}'$, we must extend the data back to $x_m$ first.
-
-```{code-cell}
-m = 80
-x,Dₓ = FNC.diffcheb(m,[0,1])
-
-int = 1:m
-extend = v -> [v;0]
-
-function ode!(f,v,c,t)
-    u = extend(v)
-    uₓ = Dₓ*u
-    @. f = -c*uₓ[int]
-end;
-```
-
-Now we solve for an initial condition that has a single hump.
-
-```{code-cell}
-init = @. exp(-80*(x[int]-0.5)^2)
-ivp = ODEProblem(ode!,init,(0.,1),-1)
-u = solve(ivp);
-```
-
-```{code-cell}
-t = range(0,0.75,80)
-U = reduce(hcat,extend(u(t)) for t in t)
-contour(x,t,U',color=:blues,clims=(0,1),
-    xaxis=(L"x"),yaxis=(L"t"),title="Advection with inflow BC")
-```
-
-We find that the hump gracefully exits out the downwind end.
-
-```{code-cell}
-:tags: [hide-input]
-anim = @animate for t in range(0,1,length=161) 
-    plot(x,extend(u(t)),label=@sprintf("t=%.4f",t),
-        xaxis=(L"x"), yaxis=(L"u(x,t)",(0,1)), 
-        title="Advection equation with inflow BC",dpi=100)
-end
-mp4(anim,"upwind-inflow.mp4")
-```
-
-If instead of $u(1,t)=0$ we were to try to impose the downwind condition $u(0,t)=0$, we only need to change the index of the interior nodes and where to append the zero value.
-
-```{code-cell}
-int = 2:m+1
-extend = v -> [0;v]
-
-init = @. exp(-80*(x[int]-0.5)^2)
-ivp = ODEProblem(ode!,init,(0.,0.25),-1)
-u = solve(ivp);
-```
-
-```{code-cell}
-:tags: [hide-input]
-t = range(0,0.1,length=61)
-U = reduce(hcat,extend(u(t)) for t in t)
-contour(x,t,U',color=:redsblues,clims=(-1,1),
-    xaxis=(L"x"),yaxis=(L"t"),title="Advection with outflow BC",
-    right_margin=3Plots.mm)
-```
-
-This time, the solution blows up as soon as the hump runs into the boundary because there are conflicting demands there.
-
-```{code-cell}
-:tags: [hide-input]
-anim = @animate for t in range(0,0.1,length=41) 
-    plot(x,extend(u(t)),label=@sprintf("t=%.4f",t),
-        xaxis=(L"x"), yaxis=(L"u(x,t)",(0,1)), 
-        title="Advection equation with outflow BC",dpi=100)
-end
-mp4(anim,"upwind-outflow.mp4")
-```
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-upwind-direction-python
+:::
+````
+`````
+::::
 
 
 

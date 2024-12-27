@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 12.3.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-advection-absstab)=
 # Absolute stability
 
@@ -25,6 +9,7 @@ The CFL criterion gives a necessary condition for convergence. It suggests, but 
 
 ```{index} method of lines
 ```
+
 Let the advection equation {eq}`advectioncc` over $[0,1]$ be subjected to periodic end conditions. Suppose we use the central-difference matrix $\mathbf{D}_x$ defined in {eq}`trafficdiffmat` to discretize the space derivative, leaving us with
 
 $$
@@ -41,54 +26,28 @@ To apply an IVP solver, we need to compare the stability region of the solver wi
 Two things stand out about these eigenvalues: they are purely imaginary, which is consistent with conservation of magnitude, and they extend no farther than $O(m)=O(h^{-1})$ away from the origin. These characteristics suggest how to analyze the use of different time-stepping methods by referring to stability regions.
 
 (demo-absstab-advection)=
-```{prf:example}
-```
+::::{prf:example} Eigenvalues for advection
 
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-absstab-advection-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-absstab-advection-matlab
+:::
+````
 
-
-
-For $c=1$ we get purely imaginary eigenvalues.
-
-```{code-cell}
-:tags: [hide-input]
-x,Dₓ = FNC.diffper(40,[0,1])
-λ = eigvals(Dₓ);
-
-scatter(real(λ),imag(λ),aspect_ratio = 1,
-    xlabel="Re λ",ylabel="Im λ",frame=:zerolines,
-    title="Eigenvalues for pure advection",leg=:none)
-```
-
-Let's choose a time step of $\tau=0.1$ and compare to the stability regions of the Euler and backward Euler time steppers (shown as shaded regions):
-
-```{code-cell}
-:tags: [hide-input]
-zc = @.exp(1im*2π*(0:360)/360);     # points on |z|=1
-z = zc .- 1;                        # shift left by 1
-plot(Shape(real(z),imag(z)),color=RGB(.8,.8,1))
-
-ζ = 0.1*λ
-scatter!(real(ζ),imag(ζ),aspect_ratio=1,
-    xlabel="Re ζ",ylabel="Im ζ",frame=:zerolines,
-    xlim=[-5,5],ylim=[-5,5],title="Euler for advection")
-```
-
-In the Euler case it's clear that *no* real value of $\tau>0$ is going to make $\zeta$ values fit within the stability region. Any method whose stability region includes none of the imaginary axis is an unsuitable choice for advection.
-
-```{code-cell}
-:tags: [hide-input]
-z = zc .+ 1;                        # shift right by 1
-plot(Shape([-6,6,6,-6],[-6,-6,6,6]),color=RGB(.8,.8,1))
-plot!(Shape(real(z),imag(z)),color=:white)
-
-scatter!(real(ζ),imag(ζ),aspect_ratio=1,
-    xlabel="Re ζ",ylabel="Im ζ",frame=:zerolines,
-    xlim=[-5,5],ylim=[-5,5],title="Backward Euler for advection")
-```
-
-The A-stable backward Euler time stepping tells the exact opposite story: it will be absolutely stable for any choice of the time step $\tau$.
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-absstab-advection-python
+:::
+````
+`````
+::::
 
 
 
@@ -100,6 +59,7 @@ The location of eigenvalues near $\pm ic/h$ also confirms what the CFL condition
 
 ```{index} ! advection-diffusion equation
 ```
+
 The traffic flow equation {eq}`trafficpde` combines a nonlinear advection with a diffusion term. The simplest linear problem with the same feature is the **advection–diffusion equation**
 
 $$
@@ -109,30 +69,28 @@ $$
 The parameter $\epsilon$ controls the relative strength between the two mechanisms, and the eigenvalues accordingly vary between the purely imaginary ones of advection and the negative real ones of diffusion.
 
 (demo-absstab-advdiff)=
-```{prf:example}
-```
+::::{prf:example} Eigenvalues for advection–diffusion
 
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-absstab-advdiff-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-absstab-advdiff-matlab
+:::
+````
 
-
-
-The eigenvalues of advection-diffusion are near-imaginary for $\epsilon\approx 0$ and get closer to the negative real axis as $\epsilon$ increases.
-
-```{code-cell}
-:tags: [hide-input]
-plt = plot(leg=:topleft,aspect_ratio=1,
-    xlabel="Re ζ",ylabel="Im ζ",title="Eigenvalues for advection-diffusion")
-x,Dₓ,Dₓₓ = FNC.diffper(40,[0,1]);
-for ϵ in [0.001 0.01 0.05]
-    λ = eigvals(-Dₓ + ϵ*Dₓₓ)
-    scatter!(real(λ),imag(λ),m=:o,label="\\epsilon = $ϵ")
-end
-plt
-```
-
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-absstab-advdiff-python
+:::
+````
+`````
+::::
 
 In a nonlinear problem, the eigenvalues come from the linearization about an exact solution, as in {numref}`section-diffusion-stiffness`.
 
@@ -153,39 +111,28 @@ $$
 As a result, we conclude that $\mathbf{A} = \mathbf{E} \mathbf{D}_x \mathbf{E}^T$ is the appropriate matrix for determining the eigenvalues of the semidiscretization. More simply, we can simply delete the last row and last column from $\mathbf{D}_x$. 
 
 (demo-absstab-inflow)=
-```{prf:example}
-```
+::::{prf:example} Eigenvalues for an inflow boundary
 
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-absstab-inflow-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-absstab-inflow-matlab
+:::
+````
 
-
-
-Deleting the last row and column places all the eigenvalues of the discretization into the left half of the complex plane. 
-
-```{code-cell}
-x,Dₓ,_ = FNC.diffcheb(40,[0,1])
-A = Dₓ[1:end-1,1:end-1];     # delete last row and column
-λ = eigvals(A);
-```
-
-```{code-cell}
-:tags: [hide-input]
-
-scatter(real(λ),imag(λ),m=3,label="",
-    xaxis=([-300,100],"Re λ"),yaxis=("Im λ"),
-    title="Eigenvalues of advection with zero inflow",aspect_ratio=1) 
-```
-
-Note that the rightmost eigenvalues have real part at most
-
-```{code-cell}
-maximum( real(λ) )
-```
-
-Consequently all solutions decay exponentially to zero as $t\to\infty$. This matches our observation of the solution: eventually, everything flows out of the domain.
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-absstab-inflow-python
+:::
+````
+`````
+::::
 
 ## Exercises
 

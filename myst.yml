@@ -174,14 +174,14 @@ project:
         - file: chapter11/stiffness.md
         - file: chapter11/boundaries.md
         - file: chapter11/next.md
-    # - file: chapter12/overview.md
-    #       children:
-    #         - file: chapter12/traffic.md
-    #         - file: chapter12/upwind.md
-    #         - file: chapter12/absstab-advection.md
-    #         - file: chapter12/wave.md
-    #         - file: chapter12/next.md
-    #     - file: chapter13/overview.md
+    - file: chapter12/overview.md
+      children:
+        - file: chapter12/traffic.md
+        - file: chapter12/upwind.md
+        - file: chapter12/absstab-advection.md
+        - file: chapter12/wave.md
+        - file: chapter12/next.md
+    #- file: chapter13/overview.md
     #       children:
     #         - file: chapter13/tensorprod.md
     #         - file: chapter13/diffadv.md
@@ -206,6 +206,7 @@ project:
           - file: julia/chapter9.md
           - file: julia/chapter10.md
           - file: julia/chapter11.md
+          - file: julia/chapter12.md
       - title: MATLAB codes
         children:
           - file: matlab/chapter1.md

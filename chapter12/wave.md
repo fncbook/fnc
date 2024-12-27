@@ -1,29 +1,13 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.11.5
-kernelspec:
-  display_name: Julia fastload
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 12.4.%s
 ---
-
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-advection-wave)=
 # The wave equation
 
 ```{index} ! wave equation
 ```
+
 Closely related to the advection equation is the **wave equation**,
 
 :::{math}
@@ -107,136 +91,60 @@ Because waves travel in both directions, there is no preferred upwind direction.
 The boundary conditions {eq}`waveBC` suggest that we should remove both of the end values of $\mathbf{u}$ from the discretization, but retain all of the $\mathbf{z}$ values. We use $\mathbf{w}(t)$ to denote the vector of all the unknowns in the semidiscretization. When computing $\mathbf{w}'(t)$, we extract the $\mathbf{u}$ and $\mathbf{z}$ components, and we use dedicated functions for padding with the zero end values or chopping off the zeros as necessary.
 
 (demo-wave-boundaries)=
-```{prf:example}
-```
-
-
-
-
+::::{prf:example} Wave equation with boundaries
 
 We solve the wave equation {eq}`wavefirst2` with speed $c=2$, subject to {eq}`waveBC` and initial conditions {eq}`waveIC2`.
 
-```{code-cell}
-m = 200
-x,Dₓ = FNC.diffcheb(m,[-1,1]);
-```
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-wave-boundaries-julia
+:::
+````
 
-The boundary values of $u$ are given to be zero, so they are not unknowns in the ODEs. Instead they are added or removed as necessary.
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-wave-boundaries-matlab
+:::
+````
 
-```{code-cell}
-extend = v -> [0;v;0]
-chop = u -> u[2:m];
-```
-
-The following function computes the time derivative of the system at interior points.
-
-```{code-cell}
-ode = function(w,c,t)
-    u = extend(w[1:m-1])
-    z = w[m:2m]
-    dudt = Dₓ*z
-    dzdt = c^2*(Dₓ*u)
-    return [ chop(dudt); dzdt ]
-end;
-```
-
-Our initial condition is a single hump for $u$.
-
-```{code-cell}
-u_init = @. exp(-100*(x+0.5)^2)
-z_init = -u_init
-w_init = [ chop(u_init); z_init ];  
-```
-
-Because the wave equation is hyperbolic, we can use a nonstiff explicit solver.
-
-```{code-cell}
-IVP = ODEProblem(ode,w_init,(0.,2.),2)
-w = solve(IVP,RK4());
-```
-
-We plot the results for the original $u$ variable only. Its interior values are at indices `1:m-1` of the composite $\mathbf{w}$ variable.
-
-```{code-cell}
-t = range(0,2,length=80)
-U = [extend(w(t)[1:m-1]) for t in t]
-contour(x,t,hcat(U...)',color=:redsblues,clims=(-1,1),
-    levels=24,xlabel=L"x",ylabel=L"t",title="Wave equation",
-    right_margin=3Plots.mm)
-```
-
-```{code-cell}
-:tags: [hide-input]
-anim = @animate for t in range(0,2,length=120)
-    plot(x,extend(w(t)[1:m-1]),label=@sprintf("t=%.3f",t),
-        xaxis=(L"x"),yaxis=([-1,1],L"u(x,t)"),dpi=100,    
-        title="Wave equation")
-end
-mp4(anim,"figures/wave-boundaries.mp4")
-```
-
-The original hump breaks into two pieces of different amplitudes, each traveling with speed $c=2$. They pass through one another without interference. When a hump encounters a boundary, it is perfectly reflected, but with inverted shape. At time $t=2$, the solution looks just like the initial condition.
-
-
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-wave-boundaries-python
+:::
+````
+`````
+::::
 
 ## Variable speed
 
 An interesting situation is when the wave speed $c$ changes discontinuously, as when light passes from one material into another. For this we must replace the term $c^2$ in {eq}`waveMOL` with the matrix $\operatorname{diag}\bigl(c^2(x_0),\ldots,c^2(x_m)\bigr)$.
 
 (demo-wave-speed)=
-```{prf:example}
-```
+::::{prf:example} Wave equation with variable speed
 
+We now use a wave speed that is discontinuous at $x=0$; to the left, $c=1$, and to the right, $c=2$. 
 
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-wave-speed-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-wave-speed-matlab
+:::
+````
 
-
-We now use a wave speed that is discontinuous at $x=0$; to the left, $c=1$, and to the right, $c=2$. The ODE implementation has to change slightly.
-
-```{code-cell}
-ode = function(w,c,t)
-    u = extend(w[1:m-1])
-    z = w[m:2m]
-    dudt = Dₓ*z
-    dzdt = c.^2 .* (Dₓ*u)
-    return [ chop(dudt); dzdt ]
-end;
-```
-
-The variable wave speed is passed as an extra parameter through the IVP solver.
-
-```{code-cell}
-c = @. 1 + (sign(x)+1)/2
-IVP = ODEProblem(ode,w_init,(0.,5.),c)
-w = solve(IVP,RK4());
-```
-
-```{code-cell}
-t = range(0,5,length=80)
-U = [extend(w(t)[1:m-1]) for t in t]
-contour(x,t,hcat(U...)',color=:redsblues,clims=(-1,1),
-    levels=24,xlabel=L"x",ylabel=L"t",title="Wave equation",
-    right_margin=3Plots.mm)
-```
-
-```{code-cell}
-:tags: [hide-input]
-anim = @animate for t in range(0,5,length=181)
-    plot(Shape([-1,0,0,-1],[-1,-1,1,1]),color=RGB(.8,.8,.8),l=0,label="")
-    plot!(x,extend(w(t,idxs=1:m-1)),label=@sprintf("t=%.2f",t),
-        xaxis=(L"x"),yaxis=([-1,1],L"u(x,t)"),dpi=100,   
-        title="Wave equation, variable speed" )
-end
-mp4(anim,"figures/wave-speed.mp4")
-```
-
-Each pass through the interface at $x=0$ generates a reflected and transmitted wave. By conservation of energy, these are both smaller in amplitude than the incoming bump.
-
-
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-wave-speed-python
+:::
+````
+`````
+::::
 
 ## Exercises
 

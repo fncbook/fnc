@@ -1,23 +1,7 @@
 ---
-jupytext:
-  cell_metadata_filter: -all
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.10.3
-kernelspec:
-  display_name: Julia 1.7.1
-  language: julia
-  name: julia-fast
+numbering:
+  enumerator: 12.1.%s
 ---
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 (section-advection-traffic)=
 # Traffic flow
 
@@ -106,21 +90,32 @@ We can solve {eq}`advectpde` by the method of lines as in [Chapter 11](../diffus
 
 This matrix is returned by {numref}`Function {number} <function-diffper>`.
 
-`````{tab-set} 
+(demo-traffic-advection)=
+::::{prf:example} Advection equation
+
+We solve the advection equation on $[-4,4]$ with periodic end conditions using the method of lines.
+
+`````{tab-set}
 ````{tab-item} Julia
-:sync: Julia
-Julia
-```` 
+:sync: julia
+:::{embed} #demo-traffic-advection-julia
+:::
+````
+
 ````{tab-item} MATLAB
-:sync: Julia
-matlab
-```` 
+:sync: matlab
+:::{embed} #demo-traffic-advection-matlab
+:::
+````
+
 ````{tab-item} Python
-:sync: Python
-```{include} python/example12.1.3.md
-```
-```` 
+:sync: python
+:::{embed} #demo-traffic-advection-python
+:::
+````
 `````
+::::
+
 
 If you look carefully at {numref}`Demo %s <demo-traffic-advection>`, you'll notice that we used the time integrator `RK4`, a nonstiff method. As we will see later in this chapter, the pure advection equation is not inherently stiff.
 
@@ -128,97 +123,36 @@ If you look carefully at {numref}`Demo %s <demo-traffic-advection>`, you'll noti
 
 ```{index} advection-diffusion equation
 ```
+
 Returning to the traffic flow PDE {eq}`trafficpde`, we can interpret the conservation law as advection at velocity $Q_0'(\rho)$.  The dependence of velocity on the solution is different from the linear PDE {eq}`advectpde` and is the key to the peculiar behavior of traffic jams. In particular, the velocity is low at high density, and higher at low density.  The term on the right side of {eq}`trafficpde` provides a bit of diffusion, and the parameter $\epsilon$ determines the balance between the two effects—advection effects dominate if $\epsilon$ is small.
 
 Exact solutions of {eq}`trafficpde` are much harder to come by than for the standard advection equation, but the method of lines is still effective. 
 
 (demo-traffic-solve)=
-```{prf:example}
-```
+::::{prf:example} Traffic flow model
 
+We solve for traffic flow using periodic boundary conditions. 
 
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-traffic-solve-julia
+:::
+````
 
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-traffic-solve-matlab
+:::
+````
 
-
-We solve for traffic flow using periodic boundary conditions. The following are parameters and a function relevant to defining the problem. 
-
-```{code-cell}
-ρc = 1080;  ρm = 380;  q_m = 10000;
-dQ0 = ρ -> 4q_m*ρc^2*(ρc-ρm)*ρm*(ρm-ρ)/(ρ*(ρc-2*ρm) + ρc*ρm)^3;
-```
-
-Here we create a discretization on $m=800$ points.
-
-```{code-cell}
-x,Dₓ,Dₓₓ = FNC.diffper(800,[0,4]);
-```
-
-Next we define the ODE resulting from the method of lines.
-
-```{code-cell}
-ode = (ρ,ϵ,t) -> -dQ0.(ρ).*(Dₓ*ρ) + ϵ*(Dₓₓ*ρ);
-```
-
-Our first initial condition has moderate density with a small bump. Because of the diffusion present, we use a stiff solver for the IVP.
-
-```{code-cell}
-ρ_init = @. 400 + 10*exp(-20*(x-3)^2)
-IVP = ODEProblem(ode,ρ_init,(0.,1.),0.02)
-sol = solve(IVP,Rodas4P());
-```
-
-```{code-cell}
-:tags: [hide-input]
-plt = plot(legend=:topleft,title="Traffic flow",
-    xaxis=(L"x"),yaxis=("car density"))
-for t in 0:0.2:1
-    plot!(x,sol(t),label=@sprintf("t=%.1f",t))
-end
-plt
-```
-
-The bump slowly moves backward on the roadway, spreading out and gradually fading away due to the presence of diffusion.
-
-```{code-cell}
-:tags: [hide-input]
-anim = @animate for t in range(0,0.9,length=91) 
-    plot(x,sol(t),
-        xaxis=(L"x"),yaxis=([400,410],"density"),dpi=100,    
-        title=@sprintf("Traffic flow, t=%.2f",t) )
-end
-mp4(anim,"traffic-fade.mp4")
-```
-
-Now we use an initial condition with a larger bump. Note that the scale on the $y$-axis is much different for this solution.
-
-```{code-cell}
-ρ_init = @. 400 + 80*exp(-16*(x-3)^2)
-IVP = ODEProblem(ode,ρ_init,(0.,0.5),0.02)
-sol = solve(IVP,Rodas4P());
-```
-
-```{code-cell}
-:tags: [hide-input]
-plt = plot(legend=:topleft,title="Traffic jam",
-    xaxis=(L"x"),yaxis=("car density"))
-for t in (0:5)/10
-    plot!(x,sol(t),label=@sprintf("t=%.1f",t))
-end
-plt
-```
-
-```{code-cell}
-:tags: [hide-input]
-anim = @animate for t in range(0,0.5,length=101) 
-    plot(x,sol(t),
-        xaxis=(L"x"),yaxis=([400,480],"density"),dpi=100,    
-        title=@sprintf("Traffic jam, t=%.2f",t) )
-end
-mp4(anim,"traffic-jam.mp4")
-```
-
-In this case the density bump travels backward along the road. It also steepens on the side facing the incoming traffic and decreases much more slowly on the other side. A motorist would experience this as an abrupt increase in density, followed by a much more gradual decrease in density and resulting gradual increase in speed. (You also see some transient, high-frequency oscillations. These are caused by instabilities, as we discuss in simpler situations later in this chapter.)
-
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-traffic-solve-python
+:::
+````
+`````
+::::
 
 
 
