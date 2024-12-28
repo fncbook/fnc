@@ -220,6 +220,7 @@ project:
           - file: matlab/chapter9.md
           - file: matlab/chapter10.md
           - file: matlab/chapter11.md
+          - file: matlab/chapter12.md
       - title: Python codes
         children:
           - file: python/chapter1.md
