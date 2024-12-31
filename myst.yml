@@ -181,13 +181,13 @@ project:
         - file: chapter12/absstab-advection.md
         - file: chapter12/wave.md
         - file: chapter12/next.md
-    #- file: chapter13/overview.md
-    #       children:
-    #         - file: chapter13/tensorprod.md
-    #         - file: chapter13/diffadv.md
-    #         - file: chapter13/laplace.md
-    #         - file: chapter13/nonlinear.md
-    #         - file: chapter13/next.md
+    - file: chapter13/overview.md
+      children:
+        - file: chapter13/tensorprod.md
+        - file: chapter13/diffadv.md
+        - file: chapter13/laplace.md
+        - file: chapter13/nonlinear.md
+        - file: chapter13/next.md
     - title: Appendices
       children:
       - file: appendix/linear-algebra.md
@@ -207,6 +207,7 @@ project:
           - file: julia/chapter10.md
           - file: julia/chapter11.md
           - file: julia/chapter12.md
+          - file: julia/chapter13.md
       - title: MATLAB codes
         children:
           - file: matlab/chapter1.md
@@ -235,6 +236,7 @@ project:
           - file: python/chapter10.md
           - file: python/chapter11.md
           - file: python/chapter12.md
+          - file: python/chapter13.md
     - file: genindex.md
 
     
