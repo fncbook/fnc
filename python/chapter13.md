@@ -17,7 +17,7 @@ numbering:
 :linenos: true
 :language: python
 :start-at: def tensorgrid
-:end at: return mtx
+:end-at: return mtx
 ```
 ``````
 
@@ -28,7 +28,7 @@ numbering:
 :linenos: true
 :language: python
 :start-at: def poissonfd
-:end at: return U, X, Y
+:end-at: return U
 ```
 ``````
 
@@ -39,7 +39,7 @@ numbering:
 :linenos: true
 :language: python
 :start-at: def elliptic
-:end at: return np.vectorize(evaluate)
+:end-at: return np.vectorize(evaluate)
 ```
 ``````
 
