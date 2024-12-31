@@ -13,8 +13,8 @@ kernelspec:
 ``````{dropdown} Differentiation matrices for periodic end conditions
 ```{literalinclude} package/src/chapter11.jl
 :filename: diffper.jl
-:start-line: 0
-:end-line: 28
+:start-after: # begin diffper
+:end-before: # end diffper
 :language: julia
 :linenos: true
 ```
@@ -24,12 +24,11 @@ kernelspec:
 ``````{dropdown} Solution of parabolic PDEs by the method of lines
 ```{literalinclude} package/src/chapter11.jl
 :filename: parabolic.jl
-:start-line: 30
-:end-line: 65
+:start-after: # begin parabolic
+:end-before: # end parabolic
 :language: julia
 :linenos: true
 ```
-
 
 ::::{admonition} About the code
 :class: dropdown

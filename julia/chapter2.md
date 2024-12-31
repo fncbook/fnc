@@ -16,17 +16,14 @@ using FundamentalsNumericalComputation
 FNC.init_format()
 ```
 
-Julia implementations
-
 ## Functions
 
 (function-forwardsub-julia)=
 ``````{dropdown} Forward substitution
-:open:
-```{literalinclude} ../julia/package/src/chapter02.jl
+```{literalinclude} package/src/chapter02.jl
 :filename: forwardsub.jl
-:start-line: 0
-:end-line: 15
+:start-after: # begin forwardsub
+:end-before: # end forwardsub
 :linenos: true
 :language: julia
 ```
@@ -42,10 +39,10 @@ The `sum` in line 12 gives an error if `i` equals 1, so that case is taken care 
 
 (function-backsub-julia)=
 ``````{dropdown} Backward substitution
-```{literalinclude} ../julia/package/src/chapter02.jl
+```{literalinclude} package/src/chapter02.jl
 :filename: backsub.jl
-:start-line: 17
-:end-line: 32
+:start-after: # begin backsub
+:end-before: # end backsub
 :linenos: true
 :language: julia
 ```
@@ -53,10 +50,10 @@ The `sum` in line 12 gives an error if `i` equals 1, so that case is taken care 
 
 (function-lufact-julia)=
 `````{dropdown} LU factorization (not stable)
-```{literalinclude} ../julia/package/src/chapter02.jl
+```{literalinclude} package/src/chapter02.jl
 :filename: lufact.jl
-:start-line: 34
-:end-line: 54
+:start-after: # begin lufact
+:end-before: # end lufact
 :linenos: true
 :language: julia
 ```
@@ -71,10 +68,10 @@ The second issue is that even when `A` has all integer entries, its LU factors m
 
 (function-plufact-julia)=
 ``````{dropdown} LU factorization with partial pivoting
-```{literalinclude} ../julia/package/src/chapter02.jl
+```{literalinclude} package/src/chapter02.jl
 :filename: plufact.jl
-:start-line: 56
-:end-line: 80
+:start-after: # begin plufact
+:end-before: # end plufact
 :linenos: true
 :language: julia
 ```

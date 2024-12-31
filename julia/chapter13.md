@@ -8,11 +8,18 @@ numbering:
 ---
 # Chapter 13
 
-```{include}
-
-<script data-main="../_static/proof.js" src="../_static/require.js"></script>
-
 ## Functions
+
+(function-tensorgrid-julia)=
+``````{dropdown} Create a tensor-product grid
+```{literalinclude} package/src/chapter13.jl
+:filename: tensorgrid.jl
+:linenos: true
+:language: julia
+:start-after: # begin tensorgrid
+:end-before: # end tensorgrid
+```
+``````
 
 (function-poissonfd-julia)=
 ``````{dropdown} Solution of Poisson's equation by finite differences
@@ -20,8 +27,8 @@ numbering:
 :filename: poissonfd.jl
 :linenos: true
 :language: julia
-:start-line: 0
-:end-line: 37
+:start-after: # begin poissonfd
+:end-before: # end poissonfd
 ```
 ``````
 
@@ -31,8 +38,8 @@ numbering:
 :filename: elliptic.jl
 :linenos: true
 :language: julia
-:start-line: 39
-:end-line: 95
+:start-after: # begin elliptic
+:end-before: # end elliptic
 ```
 ::::{admonition} About the code
 :class: dropdown

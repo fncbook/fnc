@@ -12,10 +12,10 @@ numbering:
 
 (function-poweriter-julia)=
 ``````{dropdown} Power iteration
-```{literalinclude} ../julia/package/src/chapter08.jl
+```{literalinclude} package/src/chapter08.jl
 :filename: poweriter.jl
-:start-line: 0
-:end-line: 18
+:end-before: # begin poweriter
+:end-before: # end poweriter
 :language: julia
 :linenos: true
 ```
@@ -23,10 +23,10 @@ numbering:
 
 (function-inviter-julia)=
 ``````{dropdown} Inverse iteration
-```{literalinclude} ../julia/package/src/chapter08.jl
+```{literalinclude} package/src/chapter08.jl
 :filename: inviter.jl
-:start-line: 20
-:end-line: 39
+:end-before: # begin inviter
+:end-before: # end inviter
 :language: julia
 :linenos: true
 ```
@@ -34,10 +34,10 @@ numbering:
 
 (function-arnoldi-julia)=
 ``````{dropdown} Arnoldi iteration
-```{literalinclude} ../julia/package/src/chapter08.jl
+```{literalinclude} package/src/chapter08.jl
 :filename: arnoldi.jl
-:start-line: 0
-:end-line: 18
+:end-before: # begin arnoldi
+:end-before: # end arnoldi
 :language: julia
 :linenos: true
 ```
@@ -49,10 +49,10 @@ The loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}
 
 (function-gmres-julia)=
 ``````{dropdown} GMRES
-```{literalinclude} ../julia/package/src/chapter08.jl
+```{literalinclude} package/src/chapter08.jl
 :filename: gmres.jl
-:start-line: 68
-:end-line: 102
+:end-before: # begin gmres
+:end-before: # end gmres
 :language: julia
 :linenos: true
 ```

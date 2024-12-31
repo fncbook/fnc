@@ -13,10 +13,10 @@ numbering:
 
 (function-hatfun-julia)=
 ``````{dropdown} Hat function
-```{literalinclude} ../julia/package/src/chapter05.jl
+```{literalinclude} package/src/chapter05.jl
 :filename: hatfun.jl
-:start-line: 0
-:end-line: 19
+:start-after: # begin hatfun
+:end-before: # end hatfun
 :language: julia
 :linenos: true
 ```
@@ -24,10 +24,10 @@ numbering:
 
 (function-plinterp-julia)=
 ``````{dropdown} Piecewise linear interpolation
-```{literalinclude} ../julia/package/src/chapter05.jl
+```{literalinclude} package/src/chapter05.jl
 :filename: plinterp.jl
-:start-line: 21
-:end-line: 31
+:start-after: # begin plinterp
+:end-before: # end plinterp
 :language: julia
 :linenos: true
 ```
@@ -35,10 +35,10 @@ numbering:
 
 (function-spinterp-julia)=
 ``````{dropdown} Cubic spline interpolation
-```{literalinclude} ../julia/package/src/chapter05.jl
+```{literalinclude} package/src/chapter05.jl
 :filename: spinterp.jl
-:start-line: 33
-:end-line: 92
+:start-after: # begin spinterp
+:end-before: # end spinterp
 :language: julia
 :linenos: true
 ```
@@ -46,10 +46,10 @@ numbering:
 
 (function-fdweights-julia)=
 ``````{dropdown} Fornberg's algorithm for finite difference weights
-```{literalinclude} ../julia/package/src/chapter05.jl
+```{literalinclude} package/src/chapter05.jl
 :filename: fdweights.jl
-:start-line: 94
-:end-line: 130
+:start-after: # begin fdweights
+:end-before: # end fdweights
 :language: julia
 :linenos: true
 ```
@@ -57,10 +57,10 @@ numbering:
 
 (function-trapezoid-julia)=
 ``````{dropdown} Trapezoid formula for numerical integration
-```{literalinclude} ../julia/package/src/chapter05.jl
+```{literalinclude} package/src/chapter05.jl
 :filename: trapezoid.jl
-:start-line: 132
-:end-line: 146
+:start-after: # begin trapezoid
+:end-before: # end trapezoid
 :language: julia
 :linenos: true
 ```
@@ -68,10 +68,10 @@ numbering:
 
 (function-intadapt-julia)=
 ``````{dropdown} Adaptive integration
-```{literalinclude} ../julia/package/src/chapter05.jl
+```{literalinclude} package/src/chapter05.jl
 :filename: intadapt.jl
-:start-line: 148
-:end-line: 182
+:start-after: # begin intadapt
+:end-before: # end intadapt
 :language: julia
 :linenos: true
 ```

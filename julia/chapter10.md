@@ -12,10 +12,10 @@ numbering:
 
 (function-shoot-julia)=
 ``````{dropdown} Shooting method for a two-point boundary-value problem
-```{literalinclude} ../julia/package/src/chapter10.jl
+```{literalinclude} package/src/chapter10.jl
 :filename: shoot.jl
-:start-line: 0
-:end-line: 29
+:start-after: # begin shoot
+:end-before: # end shoot
 :language: julia
 :linenos: true
 ```
@@ -31,10 +31,10 @@ The error tolerance in the IVP solver is kept smaller than in the rootfinder, to
 
 (function-diffmats2-julia)=
 ``````{dropdown} Second-order differentiation matrices
-```{literalinclude} ../julia/package/src/chapter10.jl
+```{literalinclude} package/src/chapter10.jl
 :filename: diffmats2.jl
-:start-line: 31
-:end-line: 62
+:start-after: # begin diffmat2
+:end-before: # end diffmat2
 :language: julia
 :linenos: true
 ```
@@ -42,10 +42,10 @@ The error tolerance in the IVP solver is kept smaller than in the rootfinder, to
 
 (function-diffcheb-julia)=
 ``````{dropdown} Chebyshev differentiation matrices
-```{literalinclude} ../julia/package/src/chapter10.jl
+```{literalinclude} package/src/chapter10.jl
 :filename: diffcheb.jl
-:start-line: 64
-:end-line: 92
+:start-after: # begin diffcheb
+:end-before: # end diffcheb
 :language: julia
 :linenos: true
 ```
@@ -53,10 +53,10 @@ The error tolerance in the IVP solver is kept smaller than in the rootfinder, to
 
 (function-bvplin-julia)=
 ``````{dropdown} Solution of a linear boundary-value problem
-```{literalinclude} ../julia/package/src/chapter10.jl
+```{literalinclude} package/src/chapter10.jl
 :filename: bvplin.jl
-:start-line: 94
-:end-line: 119
+:start-after: # begin bvplin
+:end-before: # end bvplin
 :language: julia
 :linenos: true
 ```
@@ -69,10 +69,10 @@ Note that there is no need to explicitly form the row-deletion matrix $\mathbf{E
 
 (function-bvp-julia)=
 ``````{dropdown} Solution of a nonlinear boundary-value problem
-```{literalinclude} ../julia/package/src/chapter10.jl
+```{literalinclude} package/src/chapter10.jl
 :filename: bvp.jl
-:start-line: 121
-:end-line: 151
+:start-after: # begin bvp
+:end-before: # end bvp
 :language: julia
 :linenos: true
 ```
@@ -84,10 +84,10 @@ The nested function `residual` uses differentiation matrices computed externally
 
 (function-fem-julia)=
 ``````{dropdown} Piecewise linear finite elements for a linear BVP
-```{literalinclude} ../julia/package/src/chapter10.jl
+```{literalinclude} package/src/chapter10.jl
 :filename: fem.jl
-:start-line: 153
-:end-line: 192
+:start-after: # begin fem
+:end-before: # end fem
 :language: julia
 :linenos: true
 ```

@@ -12,10 +12,10 @@ numbering:
 
 (function-polyinterp-julia)=
 ``````{dropdown} Barycentric polynomial interpolation
-```{literalinclude} ../julia/package/src/chapter09.jl
+```{literalinclude} package/src/chapter09.jl
 :filename: polyinterp.jl
-:start-line: 0
-:end-line: 32
+:start-after: # begin polyinterp
+:end-before: # end polyinterp
 :language: julia
 :linenos: true
 ```
@@ -30,10 +30,10 @@ The return value is a function that evaluates the polynomial interpolant. Within
 
 (function-triginterp-julia)=
 ``````{dropdown} Trigonometric interpolation
-```{literalinclude} ../julia/package/src/chapter09.jl
+```{literalinclude} package/src/chapter09.jl
 :filename: triginterp.jl
-:start-line: 34
-:end-line: 55
+:start-after: # begin triginterp
+:end-before: # end triginterp
 :language: julia
 :linenos: true
 ```
@@ -46,10 +46,10 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 
 (function-ccint-julia)=
 ``````{dropdown} Clenshaw–Curtis integration
-```{literalinclude} ../julia/package/src/chapter09.jl
+```{literalinclude} package/src/chapter09.jl
 :filename: ccint.jl
-:start-line: 57
-:end-line: 80
+:start-after: # begin ccint
+:end-before: # end ccint
 :language: julia
 :linenos: true
 ```
@@ -57,10 +57,10 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 
 (function-glint-julia)=
 ``````{dropdown} Gauss–Legendre integration
-```{literalinclude} ../julia/package/src/chapter09.jl
+```{literalinclude} package/src/chapter09.jl
 :filename: glint.jl
-:start-line: 82
-:end-line: 100
+:start-after: # begin glint
+:end-before: # end glint
 :language: julia
 :linenos: true
 ```
@@ -68,10 +68,10 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 
 (function-intinf-julia)=
 ``````{dropdown} Integration over $(-\infty,\infty)$
-```{literalinclude} ../julia/package/src/chapter09.jl
+```{literalinclude} package/src/chapter09.jl
 :filename: intinf.jl
-:start-line: 102
-:end-line: 127
+:start-after: # begin intinf
+:end-before: # end intinf
 :language: julia
 :linenos: true
 ```
@@ -84,10 +84,10 @@ The test `isinf(x(M))` in line 17 checks whether $x(M)$ is larger than the maxim
 
 (function-intsing-julia)=
 ``````{dropdown} Integration with endpoint singularities
-```{literalinclude} ../julia/package/src/chapter09.jl
+```{literalinclude} package/src/chapter09.jl
 :filename: intsing.jl
-:start-line: 129
-:end-line: 154
+:start-after: # begin intsing
+:end-before: # end intsing
 :language: julia
 :linenos: true
 ```
