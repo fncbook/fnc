@@ -26,7 +26,7 @@ FNC.init_format()
 
 ```{code-cell}
 x, Dₓ, Dₓₓ = FNC.diffper(300, [-4, 4]);
-f = (u,c,t) -> -c * (Dₓ*u);
+f = (u, c, t) -> -c * (Dₓ*u);
 ```
 
 The following initial condition isn't mathematically periodic, but the deviation is less than machine precision. We specify RK4 as the solver.  
@@ -40,7 +40,7 @@ sol = solve(IVP, RK4());
 ```{code-cell}
 :tags: hide-input
 plt = plot(legend=:bottomleft,
-    title="Advection",
+    title="Advection with periodic boundary",
     xaxis=(L"x"),  yaxis=(L"u(x,t)")
     )
 for t in (0:4) * 2/3
@@ -98,9 +98,9 @@ sol = solve(IVP, Rodas4P());
 :tags: hide-input
 plt = plot(legend=:topleft, 
     title="Traffic flow",
-    xaxis=(L"x"),yaxis=("car density"))
+    xaxis=(L"x"),  yaxis=("car density"))
 for t in 0:0.2:1
-    plot!(x,sol(t),label=@sprintf("t=%.1f",t))
+    plot!(x, sol(t), label=@sprintf("t=%.1f", t))
 end
 plt
 ```
@@ -110,9 +110,11 @@ The bump slowly moves backward on the roadway, spreading out and gradually fadin
 ```{code-cell}
 :tags: hide-input
 anim = @animate for t in range(0,0.9,91) 
-    plot(x,sol(t),
-        xaxis=(L"x"),yaxis=([400,410],"density"),dpi=150,    
-        title=@sprintf("Traffic flow, t=%.2f",t) )
+    plot(x, sol(t),
+        xaxis=(L"x"), yaxis=([400,410], "density"),
+        dpi=150,    
+        title=@sprintf("Traffic flow, t=%.2f",t) 
+        )
 end
 mp4(anim,"figures/traffic-fade.mp4")
 ```
@@ -120,27 +122,31 @@ mp4(anim,"figures/traffic-fade.mp4")
 Now we use an initial condition with a larger bump. Note that the scale on the $y$-axis is much different for this solution.
 
 ```{code-cell}
-ρ_init = @. 400 + 80*exp(-16*(x-3)^2)
-IVP = ODEProblem(ode,ρ_init,(0.,0.5),0.02)
-sol = solve(IVP,Rodas4P());
+ρ_init = @. 400 + 80 * exp( -16*(x - 3)^2 )
+IVP = ODEProblem(ode, ρ_init, (0., 0.5), 0.02)
+sol = solve(IVP, Rodas4P());
 ```
 
 ```{code-cell}
 :tags: hide-input
-plt = plot(legend=:topleft,title="Traffic jam",
-    xaxis=(L"x"),yaxis=("car density"))
-for t in (0:5)/10
-    plot!(x,sol(t),label=@sprintf("t=%.1f",t))
+plt = plot(legend=:topleft,
+    title="Traffic jam",
+    xaxis=(L"x"),  yaxis=("car density")
+    )
+for t in range(0, 5, 11)
+    plot!(x, sol(t), label=@sprintf("t=%.1f", t))
 end
 plt
 ```
 
 ```{code-cell}
 :tags: hide-input
-anim = @animate for t in range(0,0.5,101) 
-    plot(x,sol(t),
-        xaxis=(L"x"),yaxis=([400,480],"density"),dpi=150,    
-        title=@sprintf("Traffic jam, t=%.2f",t) )
+anim = @animate for t in range(0, 0.5, 101) 
+    plot(x, sol(t);
+        xaxis=(L"x"),  yaxis=([400,480], "density"),
+        dpi=150,    
+        title=@sprintf("Traffic jam, t=%.2f",t) 
+        )
 end
 mp4(anim,"figures/traffic-jam.mp4")
 ```
@@ -157,7 +163,7 @@ For time stepping, we use the adaptive explicit method `RK4`.
 ```{code-cell}
 function demo(m)
   x, Dₓ = FNC.diffper(m, [0, 1])
-  uinit = @. exp( -80*(x-0.5)^2 )
+  uinit = @. exp( -80 * (x - 0.5)^2 )
   ode = (u, c, t) -> -c * (Dₓ*u)
   IVP = ODEProblem(ode, uinit, (0., 2.), 2.)
   return x, solve(IVP, RK4())
@@ -167,9 +173,9 @@ x,u = demo(400);
 
 ```{code-cell}
 :tags: hide-input
-t = 2 * (0:80) / 80
+t = range(0, 2, 81);
 U = reduce(hcat, u(t) for t in t)
-contour(x, t, U', 
+contour(x, t, U'; 
     color=:redsblues, 
     clims=(-1, 1),
     xaxis=(L"x"),  yaxis=(L"t"),
@@ -196,8 +202,8 @@ If we solve advection over $[0,1]$ with velocity $c=-1$, the right boundary is i
 We'll pattern a solution after {numref}`Function {number} <function-parabolic>`. Since $u(x_m,t)=0$, we define the ODE interior problem {eq}`mol-interior` for $\mathbf{v}$ without $u_m$. For each evaluation of $\mathbf{v}'$, we must extend the data back to $x_m$ first.
 
 ```{code-cell}
-m = 80
-x, Dₓ = FNC.diffcheb(m, [0, 1])
+m = 100
+x, Dₓ = FNC.diffmat2(m, [0, 1])
 
 interior = 1:m
 extend = v -> [v; 0]
