@@ -249,8 +249,8 @@ If we solve advection over $[0,1]$ with velocity $c=-1$, the right boundary is i
 We'll pattern a solution after {numref}`Function {number} <function-parabolic>`. Since $u(x_m,t)=0$, we define the ODE interior problem {eq}`mol-interior` for $\mathbf{v}$ without $u_m$. For each evaluation of $\mathbf{v}'$, we must extend the data back to $x_m$ first.
 
 ```{code-cell}
-m = 80;  c = -1;
-[x, Dx] = diffcheb(m, [0, 1]);
+m = 100;  c = -1;
+[x, Dx] = diffmat2(m, [0, 1]);
 chop = @(u) u(1:m);  
 extend = @(v) [v; 0];
 odefun = @(t, v) -c * chop( Dx * extend(v) );
@@ -314,7 +314,7 @@ u = @(t) [zeros(1, length(t)); sol(t)];
 :tags: hide-input
 clf,  contour(x, t, u(t)', 0.15:0.2:1)
 xlabel x,  ylabel t
-title('Advection with outflow BC')   % ignore this line
+title('Advection with outflow BC')
 ```
 
 This time, the solution blows up as soon as the hump runs into the boundary because there are conflicting demands there.
