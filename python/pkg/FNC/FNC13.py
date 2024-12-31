@@ -2,39 +2,32 @@ import numpy as np
 import scipy
 import scipy.sparse as sp
 import warnings
-from .FNC10 import diffmat2
+from .FNC10 import diffmat2, diffcheb
+from .FNC04 import levenberg
 
 
-def rectdisc(m, xspan, n, yspan):
+def tensorgrid(x, y):
     """
-    rectdisc(m, xspan, n, yspan)
+    tensor_grid(x, y)
 
-    Create matrices and helpers for finite-difference discretization of a rectangle that is
-    the tensor  product of intervals xspan and yspan, using m+1 and n+1 points in
-    the two coordinates.
+    Create a tensor grid for a rectangle from its 1d projections x and y.
+    Returns a function to reshape a 2d array to a vector, a function to reshape 
+    a vector into a 2d array, a function to evaluate a function on the grid, 
+    two arrays to give the grid coordinates, and a boolean array to identify 
+    the boundary points.
     """
-    # Initialize grid and finite differences.
-    x, Dx, Dxx = diffmat2(m, xspan)
-    y, Dy, Dyy = diffmat2(n, yspan)
-    X, Y = np.meshgrid(x, y)
+    m, n = len(x) - 1, len(y) - 1
+    vec = lambda U: U.T.flatten()
+    unvec = lambda u: np.reshape(u, (n+1, m+1)).T
+    mtx = lambda h: np.array([[h(xi ,yj) for yj in y] for xi in x])
+    X = mtx(lambda x, y: x)
+    Y = mtx(lambda x, y: y)
 
-    # Locate boundary points.
-    isbndy = np.tile(True, (n + 1, m + 1))
-    isbndy[1:-1, 1:-1] = False
-
-    # Get the diff. matrices recognized as sparse. Also include reshaping functions.
-    disc = {
-        "Dx": sp.lil_matrix(Dx),
-        "Dxx": sp.lil_matrix(Dxx),
-        "Dy": sp.lil_matrix(Dy),
-        "Dyy": sp.lil_matrix(Dyy),
-        "Ix": sp.np.eye(m + 1, format="lil"),
-        "Iy": sp.np.eye(n + 1, format="lil"),
-        "isbndy": isbndy,
-        "vec": lambda U: U.flatten(),
-        "unvec": lambda u: np.reshape(u, (n + 1, m + 1)),
-    }
-    return X, Y, disc
+    # Identify boundary points.
+    is_boundary = np.tile(True, (m+1, n+1))
+    is_boundary[1:-1, 1:-1] = False
+    
+    return mtx, X, Y, vec, unvec, is_boundary
 
 
 def poissonfd(f, g, m, xspan, n, yspan):
@@ -48,28 +41,33 @@ def poissonfd(f, g, m, xspan, n, yspan):
 
     Return matrices of the solution values, and the coordinate functions, on the grid.
     """
-    # Initialize the rectangle discretization.
-    X, Y, d = rectdisc(m, xspan, n, yspan)
+    # Discretize the domain.
+    x, Dx, Dxx = diffmat2(m, xspan)
+    y, Dy, Dyy = diffmat2(n, yspan)
+    mtx, X, Y, vec, unvec, is_boundary = tensorgrid(x, y)
+    N = (m+1) * (n+1)    # total number of unknowns
 
     # Form the collocated PDE as a linear system.
-    A = sp.kron(d["Iy"], d["Dxx"]) + sp.kron(d["Dyy"], d["Ix"])  # Laplacian matrix
-    b = d["vec"](f(X, Y))
+    Dxx = sp.lil_matrix(Dxx)
+    Dyy = sp.lil_matrix(Dyy)
+    A = sp.kron(sp.eye(n+1, format="lil"), Dxx) + sp.kron(Dyy, sp.eye(m+1, format="lil"))
+    b = vec(mtx(f))
 
-    # Replace collocation equations on the boundary.
-    scale = np.max(abs(A[n + 1, :]))
-    I = sp.lil_matrix(sp.np.eye((m + 1) * (n + 1)))
-    isbndy = d["isbndy"]
-    vec = d["vec"]
-    A[vec(isbndy), :] = scale * I[vec(isbndy), :]  # Dirichet assignment
-    b[vec(isbndy)] = scale * g(X[isbndy], Y[isbndy])  # assigned values
+    # Apply Dirichlet condition.
+    idx = vec(is_boundary)
+    scale = np.max(abs(A[n+1, :]))
+    I = sp.eye(N, format="lil")
+    A[idx, :] = scale * I[idx, :]         # Dirichet assignment
+    X_bd, Y_bd = vec(X)[idx], vec(Y)[idx]
+    b[idx] = scale * g(X_bd, Y_bd)    # assigned values
 
     # Solve the linear sytem and reshape the output.
-    u = scipy.sparse.linalg.spsolve(A, b)
-    U = d["unvec"](u)
+    u = scipy.sparse.linalg.spsolve(A.tocsr(), b)
+    U = unvec(u)
     return U, X, Y
 
 
-def newtonpde(f, g, m, xspan, n, yspan):
+def elliptic(f, g, m, xspan, n, yspan):
     """
     newtonpde(f, g, m, xspan, n, yspan)
 
@@ -79,59 +77,42 @@ def newtonpde(f, g, m, xspan, n, yspan):
 
     Return matrices of the solution values, and the coordinate functions, on the grid.
     """
-    # Discretization.
-    X, Y, d = rectdisc(m, xspan, n, yspan)
+    from scipy.sparse.linalg import spsolve
+    x, Dx, Dxx = diffcheb(m, xspan)
+    y, Dy, Dyy = diffcheb(n, yspan)
+    mtx, X, Y, vec, unvec, is_boundary = tensorgrid(x, y)
 
-    # This evaluates the discretized PDE and its Jacobian, with all the
-    # boundary condition modifications applied.
-    bndy = d["isbndy"]
-    vec = d["vec"]
+    # Evaluate the boundary condition at the boundary nodes.
+    idx = vec(is_boundary)
+    X_bd, Y_bd = vec(X)[idx], vec(Y)[idx]
+    g_bd = g(X_bd, Y_bd)
 
-    def residual(U):
-        R, J = f(U, X, Y, d)
-        scale = np.max(abs(J))
-        I = sp.np.eye((m + 1) * (n + 1), format="lil")
-        J[vec(bndy), :] = scale * I[vec(bndy), :]
-        XB = X[bndy]
-        YB = Y[bndy]
-        R[bndy] = scale * (U[bndy] - g(XB, YB))
+    # Evaluate the PDE+BC residual.
+    def residual(u):
+        U = unvec(u)
+        R = f(X, Y, U, Dx @ U, Dxx @ U, U @ Dy.T, U @ Dyy.T)    # PDE
         r = vec(R)
-        return r, J
+        r[idx] = u[idx] - g_bd                                  # BC
+        return r
+    
+    # Solve the equation.
+    u = levenberg(residual, vec(np.zeros(X.shape)))[:, -1]
+    U = unvec(u)
 
-    # Intialize the Newton iteration.
-    U = np.zeros(X.shape)
-    r, J = residual(U)
-    tol = 1e-10
-    itermax = 20
-    s = 2
-    normr = np.linalg.norm(r)
-    k = 1
+    def evaluate(xi, eta):
+        v = [chebinterp(y, u, eta) for u in U]
+        return chebinterp(x, v, xi)
+    
+    return np.vectorize(evaluate)
 
-    lamb = 1
-    I = sp.np.eye((m + 1) * (n + 1))
-    while (np.linalg.norm(s) > tol) and (normr > tol):
-        M = J.T @ J + lamb * I
-        s = -scipy.sparse.linalgspsolve(M,  J.T @ r)  # damped step
-        Unew = U + d["unvec"](s)
-        rnew, Jnew = residual(Unew)
-
-        if np.linalg.norm(rnew) < normr:
-            # Accept and update.
-            lamb = lamb / 6
-            # dampen the Newton step less
-            U = Unew
-            r = rnew
-            J = Jnew
-            normr = np.linalg.norm(r)
-            k = k + 1
-            print(f"Norm of residual = {normr:.4g}")
-        else:
-            # Reject.
-            lamb = lamb * 4
-            # dampen the Newton step more
-
-        if k == itermax:
-            warnings.warn("Maximum number of Newton iterations reached.")
-            break
-
-    return U, X, Y
+def chebinterp(x, v, xi):
+    "Evaluate Chebyshev interpolant with nodes x, values v, at point xi"
+    n = len(x) - 1
+    w = np.ones(n+1)
+    w[1::2] = -1    # alternating ±1
+    w[[0, n]] *= 0.5
+    if xi in x:    # exactly at a node
+        return v[np.where(x == xi)[0][0]]
+    else:
+        terms = w / (xi - x)
+        return np.sum(v * terms) / np.sum(terms)
