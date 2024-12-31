@@ -66,6 +66,7 @@ anim = animation.FuncAnimation(
     fig, snapshot, frames=linspace(0, 3, 201)
     )
 anim.save("figures/advection-periodic.mp4", fps=30)
+close()
 ```
 
 ![Advection with periodic boundary](figures/advection-periodic.mp4)
@@ -136,6 +137,7 @@ anim = animation.FuncAnimation(
     fig, snapshot, frames=linspace(0, 1, 101)
     )
 anim.save("figures/traffic-small.mp4", fps=30)
+close()
 ```
 
 ![Traffic flow simulation](figures/traffic-small.mp4)
@@ -170,6 +172,7 @@ anim = animation.FuncAnimation(
     fig, snapshot, frames=linspace(0, 0.5, 101)
     )
 anim.save("figures/traffic-jam.mp4", fps=30)
+close()
 ```
 
 ![Traffic jam simulation](figures/traffic-jam.mp4)
@@ -269,6 +272,7 @@ anim = animation.FuncAnimation(
     fig, snapshot, frames=linspace(0, 1, 101)
     )
 anim.save("figures/advection-inflow.mp4", fps=30)
+close()
 ```
 
 ![Advection with inflow BC](figures/advection-inflow.mp4)
@@ -286,6 +290,7 @@ u = lambda t: extend(sol.sol(t))
 ```{code-cell}
 :tags: hide-input
 U = [u(tj) for tj in t]
+clf
 contour(x, t, U, levels=arange(0.15, 1.0, 0.2))
 xlabel("$x$"),  ylabel("$t$")
 title("Outflow boundary condition");
@@ -307,6 +312,7 @@ anim = animation.FuncAnimation(
     fig, snapshot, frames=linspace(0, 0.5, 51)
     )
 anim.save("figures/advection-outflow.mp4", fps=30)
+close()
 ```
 
 ![Advection with outflow BC](figures/advection-outflow.mp4)
@@ -475,6 +481,7 @@ anim = animation.FuncAnimation(
     fig, snapshot, frames=linspace(0, 2, 161)
     )
 anim.save("figures/wave-boundaries.mp4", fps=30)
+close()
 ```
 
 ![Wave equation with boundaries](figures/wave-boundaries.mp4)
@@ -521,6 +528,7 @@ anim = animation.FuncAnimation(
     fig, snapshot, frames=linspace(0, 5, 251)
     )
 anim.save("figures/wave-speed.mp4", fps=30)
+close()
 ```
 
 ![Wave equation with variable speed](figures/wave-speed.mp4)

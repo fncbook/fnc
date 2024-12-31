@@ -121,7 +121,8 @@ def animate(j):
 
 anim = animation.FuncAnimation(
     fig, animate, frames=range(0, n+1, 10), blit=True);
-anim.save("black-scholes-6.mp4", fps=30)
+anim.save("figures/black-scholes-6.mp4", fps=30)
+close()
 ```
 
 ![](black-scholes-6.mp4)
@@ -186,7 +187,8 @@ def animate(j):
 
 anim = animation.FuncAnimation(
     fig, animate, frames=range(0, n+1, 10), blit=True);
-anim.save("black-scholes-8.mp4", fps=30)
+anim.save("figures/black-scholes-8.mp4", fps=30)
+close()
 ```
 
 ![](black-scholes-8.mp4)
@@ -256,7 +258,8 @@ def animate(j):
 
 anim = animation.FuncAnimation(
     fig, animate, frames=range(0, 100), blit=True)
-anim.save("diffusionFE.mp4", fps=30)
+anim.save("figures/diffusionFE.mp4", fps=30)
+close()
 ```
 
 ![](diffusionFE.mp4)
@@ -300,7 +303,8 @@ time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
 
 anim = animation.FuncAnimation(
     fig, animate, frames=range(0, n+1, 20), blit=True)
-anim.save("diffusionBE.mp4")
+anim.save("figures/diffusionBE.mp4")
+close()
 ```
 
 ![](diffusionBE.mp4)
@@ -562,7 +566,8 @@ def animate(t):
 
 anim = animation.FuncAnimation(
     fig, animate, frames=linspace(0, 0.75, 201), blit=True)
-anim.save("boundaries-heat.mp4", fps=30)
+anim.save("figures/boundaries-heat.mp4", fps=30)
+close()
 ```
 ![Heat equation with Dirichlet boundaries](boundaries-heat.mp4)
 
@@ -591,7 +596,8 @@ time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
 
 anim = animation.FuncAnimation(
     fig, animate, frames=linspace(0, 0.1, 101), blit=True)
-anim.save("boundaries-source.mp4", fps=30)
+anim.save("figures/boundaries-source.mp4", fps=30)
+close()
 ```
 
 ![Heat equation with source](boundaries-source.mp4)
@@ -623,7 +629,8 @@ time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
 
 anim = animation.FuncAnimation(
     fig, animate, frames=linspace(0, 15, 151), blit=True)
-anim.save("boundaries-bs.mp4", fps=30)
+anim.save("figures/boundaries-bs.mp4", fps=30)
+close()
 ```
 ![Black–Scholes equation with boundaries"](boundaries-bs.mp4)
 
