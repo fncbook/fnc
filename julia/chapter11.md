@@ -123,7 +123,7 @@ anim = @animate for j in 1:10:n+1
         label=@sprintf("t = %.2f", t[j])
         )
 end
-mp4(anim, "black-scholes-6.mp4")
+mp4(anim, "figures/black-scholes-6.mp4")
 ```
 
 The results are easy to interpret, recalling that the time variable really means *time until strike*. Say you are close to the option's strike time. If the current stock price is, say, $S=2$, then it's not likely that the stock will end up over the strike price $K=3$, and therefore the option has little value. On the other hand, if presently $S=3$, then there are good odds that the option will be exercised at the strike time, and you will need to pay a substantial portion of the stock price in order to take advantage. As the time to strike increases, there is an expectation that the stock price is more likely to rise somewhat, making the value of the option larger at each fixed $S$. 
@@ -178,7 +178,7 @@ anim = @animate for j in 1:10:n+1
         label=@sprintf("t = %.2f",t[j]) 
         )
 end
-mp4(anim,"black-scholes-8.mp4")
+mp4(anim, "figures/black-scholes-8.mp4")
 ```
 
 This so-called solution is nonsense!
@@ -297,7 +297,7 @@ anim = @animate for j in 1:20:n+1
     title="Heat equation by backward Euler"
     )
 end
-mp4(anim, "diffusionBE.mp4")
+mp4(anim, "figures/diffusionBE.mp4")
 ```
 
 This solution looks physically plausible, as the large concentration in the center diffuses outward until the solution is essentially constant. Observe that the solution remains periodic in space for all time.
@@ -350,7 +350,7 @@ anim = @animate for j in 1:20:1600
       title="Heat equation by rk23"
       )
 end
-mp4(anim, "diffusionRK23.mp4")
+mp4(anim, "figures/diffusionRK23.mp4")
 ```
 
 The solution appears to be correct. But the number of time steps that were selected automatically is surprisingly large, considering how smoothly the solution changes.
@@ -579,7 +579,7 @@ anim = @animate for t in range(0,0.75,length=201)
     dpi=150
     )
 end
-mp4(anim, "boundaries-heat.mp4", fps=30)
+mp4(anim, "figures/boundaries-heat.mp4", fps=30)
 ```
 ``````
 
@@ -604,7 +604,7 @@ anim = @animate for t in range(0, 0.1, length=101)
         title="Heat equation with source",  leg=:topleft
         )
 end
-mp4(anim, "boundaries-source.mp4", fps=30)
+mp4(anim, "figures/boundaries-source.mp4", fps=30)
 ```
 ``````
 
@@ -634,7 +634,7 @@ anim = @animate for t in range(0, 15, 151)
         leg=:topleft
         )
 end
-mp4(anim, "boundaries-bs.mp4", fps=30)
+mp4(anim, "figures/boundaries-bs.mp4", fps=30)
 ```
 
 Recall that $u$ is the value of the call option, and time runs backward from the strike time. The longer the horizon, the more value the option has due to anticipated growth in the stock price.
