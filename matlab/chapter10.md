@@ -5,7 +5,6 @@ kernelspec:
   name: jupyter_matlab_kernel
 numbering:
   headings: false
-output_matplotlib_strings: remove
 ---
 # Chapter 10
 

@@ -9,8 +9,6 @@ numbering:
 
 # Chapter 1
 
-MATLAB implementations
-
 ## Functions 
 
 (function-horner-matlab)=
@@ -25,7 +23,7 @@ MATLAB implementations
 ## Examples
 
 ```{code-cell}
-:tags: [remove-cell]
+:tags: remove-cell
 addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
 addpath /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
@@ -267,7 +265,7 @@ Using {eq}`condition-chain`, the chain rule for condition numbers, the condition
 ``````
 
 (demo-stability-quadgood-matlab)=
-````{dropdown} @demo-stability-quadgood
+``````{dropdown} @demo-stability-quadgood
 We repeat the rootfinding experiment of {numref}`Demo %s <demo-stability-quadbad>` with an alternative algorithm.
 
 ```{code-cell}
@@ -291,10 +289,10 @@ This matches the exact root to the displayed digits; to be sure we have an accur
 ```{code-cell}
 abs(x2 - 1e-6) / 1e-6
 ```
-````
+``````
 
 (demo-stability-roots-matlab)=
-````{dropdown} @demo-stability-roots
+``````{dropdown} @demo-stability-roots
 :open: false
 
 
@@ -344,4 +342,4 @@ abs(p - pp) ./ abs(p)
 ```
 
 In summary, even though there are some computed roots relatively far from their correct values, they are nevertheless the roots of a polynomial that is very close to the original.
-````
+``````

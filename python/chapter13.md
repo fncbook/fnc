@@ -579,8 +579,8 @@ colorbar(),  title("Error");
 
 ### 13.4 @section-twodim-nonlinear
 
-(demo-nonlinear-mems-python)=
-``````{dropdown} @demo-nonlinear-mems
+(demo-nonlinear2d-mems-python)=
+``````{dropdown} @demo-nonlinear2d-mems
 All we need to define are $\phi$ from {eq}`nonlinpdepde` for the PDE, and a trivial zero function for the boundary condition.
 
 ```{code-cell}
@@ -660,8 +660,8 @@ title("Steady advection–diffusion");
 
 ``````
 
-(demo-nonlinear-allencahn-python)=
-``````{dropdown} @demo-nonlinear-allencahn
+(demo-nonlinear2d-allencahn-python)=
+``````{dropdown} @demo-nonlinear2d-allencahn
 
 The following defines the PDE and a nontrivial Dirichlet boundary condition for the square $[0,1]^2$.
 

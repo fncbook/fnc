@@ -5,7 +5,6 @@ kernelspec:
   name: jupyter_matlab_kernel
 numbering:
   headings: false
-output_matplotlib_strings: remove
 ---
 # Chapter 11
 
@@ -38,7 +37,7 @@ FNC_init
 
 ### 11.1 @section-diffusion-blackscholes
 
-(demo-blackscholes-solve-python)=
+(demo-blackscholes-solve-matlab)=
 ``````{dropdown} @demo-blackscholes-solve
 We consider the Black–Scholes problem for the following parameter values:
 
@@ -124,7 +123,7 @@ close(vid)
 The results are easy to interpret, recalling that the time variable really means *time until strike*. Say you are close to the option's strike time. If the current stock price is, say, $S=2$, then it's not likely that the stock will end up over the strike price $K=3$, and therefore the option has little value. On the other hand, if presently $S=3$, then there are good odds that the option will be exercised at the strike time, and you will need to pay a substantial portion of the stock price in order to take advantage. As the time to strike increases, there is an expectation that the stock price is more likely to rise somewhat, making the value of the option larger at each fixed $S$. 
 ``````
 
-(demo-blackscholes-unstable-python)=
+(demo-blackscholes-unstable-matlab)=
 ``````{dropdown} @demo-blackscholes-unstable
 Let's try to do everything the same as in {numref}`Demo {number} <demo-blackscholes-solve>`, but extending the simulation time to $T=8$.
 
@@ -185,7 +184,7 @@ This so-called solution is nonsense!
 
 ### 11.2 @section-diffusion-methodlines
 
-(demo-methodlines-heatFE-python)=
+(demo-methodlines-heatFE-matlab)=
 ``````{dropdown} @demo-methodlines-heatFE
 Let's implement the method of {numref}`Example {number} <example-methodlines-heatFE>` with second-order space semidiscretization.
 
@@ -260,7 +259,7 @@ title('Nonphysical growth')
 ```
 ``````
 
-(demo-methodlines-heatBE-python)=
+(demo-methodlines-heatBE-matlab)=
 ``````{dropdown} @demo-methodlines-heatBE
 Now we apply backward Euler to the heat equation. Mathematically this means multiplying by the *inverse* of a matrix, but we interpret that numerically as a linear system solution. We will reuse the setup from {numref}`Demo {number} <demo-methodlines-heatFE>`. 
 
@@ -285,7 +284,7 @@ title('Heat equation by backward Euler')
 ```
 
 ```{code-cell}
-:tags: [hide-input]
+:tags: hide-input
 clf
 index_times = 1:24:n+1;
 plot(x, U(:, 1))
@@ -309,7 +308,7 @@ close(vid)
 
 This solution looks physically plausible, as the large concentration in the center diffuses outward until the solution is essentially constant. Observe that the solution remains periodic in space for all time.
 ``````
-(demo-methodlines-auto-python)=
+(demo-methodlines-auto-matlab)=
 ``````{dropdown} @demo-methodlines-auto
 We set up the semidiscretization and initial condition in $x$ just as before.
 
@@ -360,7 +359,7 @@ The number of steps selected was reduced by a factor of 20!
 ``````
 
 ### 11.3 @section-diffusion-absstab
-(demo-absstab-regions-python)=
+(demo-absstab-regions-matlab)=
 ``````{dropdown} @demo-absstab-regions
 Euler and Backward Euler time-stepping methods were used to solve $\mathbf{u}'=\mathbf{D}_{xx}\mathbf{u}$.
 
@@ -383,7 +382,7 @@ title('Eigenvalues')
 The Euler method is absolutely stable in the region $|\zeta+1| \le 1$ in the complex plane:
 
 ```{code-cell}
-:tags: [hide-input]
+:tags: hide-input
 phi = linspace(0, 2*pi, 361);
 z = exp(1i*phi) - 1;   % unit circle shifted to the left by 1
 fill(real(z), imag(z), [.8, .8, 1])
@@ -411,7 +410,7 @@ title('Stability region and \zeta values')
 In backward Euler, the region is $|\zeta-1|\ge 1$. Because they are all on the negative real axis, all of the $\zeta$ values will fit no matter what $\tau$ is chosen.
 
 ```{code-cell}
-:tags: [hide-input]
+:tags: hide-input
 clf,  fill([-6, 6, 6, -6],[-6, -6, 6, 6],[.8, .8, 1])
 hold on
 z = exp(1i*phi) + 1;   % unit circle shifted right by 1
@@ -425,7 +424,7 @@ title('Stability region and \zeta values')
 
 
 ### 11.4 @section-diffusion-stiffness
-(demo-stiffness-oregon-python)=
+(demo-stiffness-oregon-matlab)=
 ``````{dropdown} @demo-stiffness-oregon
 In {numref}`Example {number} <example-stiffness-oregon>` we derived a Jacobian matrix for the Oregonator model. Here is a numerical solution of the ODE.
 
@@ -468,7 +467,7 @@ title("Oregonator eigenvalues")
 You can see that there is one eigenvalue that ranges over a wide portion of the negative real axis and dominates stability considerations.
 ``````
 
-(demo-stiffness-explicit-python)=
+(demo-stiffness-explicit-matlab)=
 ``````{dropdown} @demo-stiffness-explicit
 The `ode15s` solver is good for stiff problems and needs few time steps to solve the Oregonator from {numref}`Demo {number} <demo-stiffness-oregon>`.
 
@@ -489,7 +488,7 @@ num_steps_rk23 = length(t) - 1
 Starting from the eigenvalues of the Jacobian matrix, we can find an effective $\zeta(t)$ by multiplying with the local time step size. The values of $\zeta(t)$ for each time level are plotted below and color coded by component of the diagonalized system.
 
 ```{code-cell}
-:tags: [hide-input]
+:tags: hide-input
 zeta = zeros(length(t) - 1, 3);
 for j = 1:length(t)-1
     lambda = eig(J(u(:, j)));
@@ -505,7 +504,7 @@ Roughly speaking, the $\zeta$ values stay within or close to the RK2 stability r
 ``````
 
 ### 11.5 @section-diffusion-boundaries
-(demo-boundaries-heat-python)=
+(demo-boundaries-heat-matlab)=
 ``````{dropdown} @demo-boundaries-heat
 First, we define functions for the PDE and each boundary condition.
 
@@ -561,7 +560,7 @@ close(vid)
 ``````
 
 
-(demo-boundaries-bratu-python)=
+(demo-boundaries-bratu-matlab)=
 ``````{dropdown} @demo-boundaries-bratu
 
 ```{code-cell}
@@ -596,7 +595,7 @@ close(vid)
 ![Heat equation with source](figures/boundaries-source.mp4)
 ``````
 
-(demo-boundaries-bs-python)=
+(demo-boundaries-bs-matlab)=
 ``````{dropdown} @demo-boundaries-bs
 
 ```{code-cell}
