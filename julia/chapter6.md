@@ -14,7 +14,7 @@ numbering:
 ``````{dropdown} Euler's method for an initial-value problem
 ```{literalinclude} package/src/chapter06.jl
 :filename: euler.jl
-:end-before: # begin euler
+:start-after: # begin euler
 :end-before: # end euler
 :language: julia
 :linenos: true
@@ -29,7 +29,7 @@ The `ivp` input argument is an `ODEProblem`, like in {numref}`Demo {number} <dem
 ``````{dropdown} Improved Euler method for an IVP
 ```{literalinclude} package/src/chapter06.jl
 :filename: ie2.jl
-:end-before: # begin ie2
+:start-after: # begin ie2
 :end-before: # end ie2
 :language: julia
 :linenos: true
@@ -40,7 +40,7 @@ The `ivp` input argument is an `ODEProblem`, like in {numref}`Demo {number} <dem
 ``````{dropdown} Fourth-order Runge-Kutta for an IVP
 ```{literalinclude} package/src/chapter06.jl
 :filename: rk4.jl
-:end-before: # begin rk4
+:start-after: # begin rk4
 :end-before: # end rk4
 :language: julia
 :linenos: true
@@ -51,7 +51,7 @@ The `ivp` input argument is an `ODEProblem`, like in {numref}`Demo {number} <dem
 ``````{dropdown} Adaptive IVP solver based on embedded RK formulas
 ```{literalinclude} package/src/chapter06.jl
 :filename: rk23.jl
-:end-before: # begin rk23
+:start-after: # begin rk23
 :end-before: # end rk23
 :language: julia
 :linenos: true
@@ -72,7 +72,7 @@ While {eq}`bs23` calls for four stages to find the paired second- and third-orde
 ``````{dropdown} 4th-order Adams–Bashforth formula for an IVP
 ```{literalinclude} package/src/chapter06.jl
 :filename: ab4.jl
-:end-before: # begin ab4
+:start-after: # begin ab4
 :end-before: # end ab4
 :language: julia
 :linenos: true
@@ -89,7 +89,7 @@ Line 28 computes $f_i$, based on the most recent solution value and time. That g
 ``````{dropdown} 2nd-order Adams–Moulton (trapezoid) formula for an IVP
 ```{literalinclude} package/src/chapter06.jl
 :filename: am2.jl
-:end-before: # begin am2
+:start-after: # begin am2
 :end-before: # end am2
 :language: julia
 :linenos: true
@@ -103,16 +103,14 @@ Lines 22-23 define the function $\mathbf{g}$ and call `levenberg` to find the ne
 ## Examples
 
 ```{code-cell}
-:tags: [remove-output]
-import Pkg; Pkg.activate("/Users/driscoll/Documents/GitHub/fnc")
-using FundamentalsNumericalComputation
-FNC.init_format()
+:tags: remove-output
+include("FNC_init.jl")
 ```
 
 ### 6.1 @section-ivp-basics
 (demo-basics-first-julia)=
 ``````{dropdown} @demo-basics-first
-The `DifferentialEquations` package offers solvers for IVPs. Let's use it to define and solve an initial-value problem for $u'=\sin[(u+t)^2]$ over $t \in [0,4]$, such that $u(0)=-1$.
+The `OrdinaryDiffEq` package offers solvers for IVPs. Let's use it to define and solve an initial-value problem for $u'=\sin[(u+t)^2]$ over $t \in [0,4]$, such that $u(0)=-1$.
 
 ::::{grid} 1 1 2 2
 Because many practical problems come with parameters that are fixed within an instance but varied from one instance to another, the syntax for IVPs includes a input argument `p` that stays fixed throughout the solution. Here we don't want to use that argument, but it must be in the definition for the solver to work.
@@ -133,6 +131,7 @@ tspan = (0.0, 4.0)               # t interval
 With the data above we define an IVP problem object and then solve it. Here we tell the solver to use the `Tsit5` method, which is a good first choice for most problems.
 
 ```{code-cell}
+using OrdinaryDiffEq
 ivp = ODEProblem(f, u₀, tspan)
 sol = solve(ivp, Tsit5());
 ```
@@ -140,8 +139,11 @@ sol = solve(ivp, Tsit5());
 The resulting solution object can be shown using `plot`.
 
 ```{code-cell}
-plot(sol, label="solution", legend=:bottom,
-    xlabel="t", ylabel=L"u(t)", title=L"u'=\sin((t+u)^2)")
+using Plots
+plot(sol;
+    label="solution", legend=:bottom,
+    xlabel="t",  ylabel=L"u(t)",
+    title=L"u'=\sin((t+u)^2)")
 ```
 
 The solution also acts like any callable function that can be evaluated at different values of $t$.
@@ -170,7 +172,6 @@ The equation $u'=(u+t)^2$ gives us some trouble.
 
 ```{code-cell}
 f(u, p, t) = (t + u)^2
-
 ivp = ODEProblem(f, 1.0, (0.0, 1.0))
 sol = solve(ivp, Tsit5());
 ```
@@ -178,8 +179,9 @@ sol = solve(ivp, Tsit5());
 The warning message we received can mean that there is a bug in the formulation of the problem. But if everything has been done correctly, it suggests that the solution may not exist past the indicated time. This is a possibility in nonlinear ODEs.
 
 ```{code-cell}
-plot(sol, label="",
-    xlabel=L"t", yaxis=(:log10, L"u(t)"), title="Finite-time blowup")
+plot(sol, label="";
+    xlabel=L"t",  yaxis=(:log10, L"u(t)"),
+    title="Finite-time blowup")
 ```
 ``````
 
@@ -188,21 +190,25 @@ plot(sol, label="",
 Consider the ODEs $u'=u$ and $u'=-u$. In each case we compute $\partial f/\partial u = \pm 1$, so the condition number bound from {numref}`Theorem %s <theorem-depIC>` is $e^{b-a}$ in both problems. However, they behave quite differently. In the case of exponential growth, $u'=u$, the bound is the actual condition number.
 
 ```{code-cell}
+:tags: remove-input
 t = range(0, 3, length=800)
 u = @. exp(t) * 1
 lower, upper = @. exp(t) * 0.7, @. exp(t) * 1.3
-plot(t, u, l=:black, ribbon=(lower, upper),
-    leg=:none, xlabel=L"t", ylabel=L"u(t)",
+plot(t, u;
+    l=:black, ribbon=(lower, upper),
+    leg=:none,  xlabel=L"t",  ylabel=L"u(t)",
     title="Exponential divergence of solutions")
 ```
 
 But with $u'=-u$, solutions actually get closer together with time.
 
 ```{code-cell}
+:tags: remove-input
 u = @. exp(-t) * 1
 lower, upper = @. exp(-t) * 0.7, @. exp(-t) * 1.3
-plot(t, u, l=:black, ribbon=(lower, upper),
-    leg=:none, xlabel=L"t", ylabel=L"u(t)",
+plot(t, u;
+    l=:black,  ribbon=(lower, upper),
+    leg=:none,  xlabel=L"t",  ylabel=L"u(t)",
     title="Exponential convergence of solutions")
 ```
 
@@ -210,25 +216,28 @@ In this case the actual condition number is one, because the initial difference 
 ``````
 
 ### 6.2 @section-ivp-euler
+
 (demo-euler-converge-julia)=
 ``````{dropdown} @demo-euler-converge
 We consider the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
 
 ```{code-cell}
+using OrdinaryDiffEq
 f(u, p, t) = sin((t + u)^2);
 tspan = (0.0, 4.0);
 u0 = -1.0;
-
 ivp = ODEProblem(f, u0, tspan)
 ```
 
 Here is the call to {numref}`Function {number} <function-euler>`.
 
 ```{code-cell}
+using Plots
 t, u = FNC.euler(ivp, 20)
-
-plot(t, u, m=2, label="n=20",
-    xlabel=L"t", ylabel=L"u(t)", title="Solution by Euler's method")
+plot(t, u;
+    m=2,  label="n=20", 
+    xlabel=L"t",  ylabel=L"u(t)",
+    title="Solution by Euler's method")
 ```
 
 We could define a different interpolant to get a smoother picture above, but the derivation of Euler's method assumed a piecewise linear interpolant. We can instead request more steps to make the interpolant look smoother.
@@ -242,7 +251,6 @@ Increasing $n$ changed the solution noticeably. Since we know that interpolants 
 
 ```{code-cell}
 u_exact = solve(ivp, Tsit5(), reltol=1e-14, abstol=1e-14)
-
 plot!(u_exact, l=(2, :black), label="reference")
 ```
 
@@ -255,23 +263,24 @@ for n in n
     t, u = FNC.euler(ivp, n)
     push!(err, norm(u_exact.(t) - u, Inf))
 end
-
-pretty_table((n=n, err=err), header=["n", "Inf-norm error"])
+@pt :header=["n", "inf-norm error"] [n err]
 ```
 
 The error is approximately cut by a factor of 10 for each increase in $n$ by the same factor. A log-log plot also confirms first-order convergence. Keep in mind that since $h=(b-a)/n$, it follows that $O(h)=O(n^{-1})$.
 
 ```{code-cell}
-plot(n, err, m=:o, label="results",
-    xaxis=(:log10, L"n"), yaxis=(:log10, "Inf-norm global error"),
+plot(n, err;
+    m=:o, label="results",
+    xaxis=(:log10, L"n"),  yaxis=(:log10, "inf-norm global error"),
     title="Convergence of Euler's method")
 
 # Add line for perfect 1st order.
-plot!(n, 0.05 * (n / n[1]) .^ (-1), l=:dash, label=L"O(n^{-1})")
+plot!(n, 0.5 * err[end] * (n / n[end]) .^ (-1), l=:dash, label=L"O(n^{-1})")
 ```
 ``````
 
 ### 6.3 @section-ivp-systems
+
 (demo-systems-predator-julia)=
 ``````{dropdown} @demo-systems-predator
 We encode the predator–prey equations via a function.
@@ -290,18 +299,20 @@ As before, the ODE function must accept three inputs, `u`, `p`, and `t`, even th
 To specify the IVP we must also provide the initial condition, which is a 2-vector here, and the interval for the independent variable.
 
 ```{code-cell}
+using OrdinaryDiffEq
 u₀ = [1, 0.01]
 tspan = (0.0, 60.0)
 α, β = 0.1, 0.25
-
 ivp = ODEProblem(predprey, u₀, tspan, [α, β])
 ```
 
 You can use any `DifferentialEquations` solver on the IVP system.
 
 ```{code-cell}
+using Plots
 sol = solve(ivp, Tsit5());
-plot(sol, label=["prey" "predator"], title="Predator-prey solution")
+plot(sol, label=["prey" "predator"],
+    title="Predator-prey solution")
 ```
 
 We can find the discrete values used to compute the interpolated solution. The `sol.u` value is a vector of vectors.
@@ -323,7 +334,8 @@ The solution `u` is a vector of [prey,predator] 2-vectors for each of the discre
 
 ```{code-cell}
 u = [u[j] for u in u, j in 1:2]
-plot!(t[1:3:end], u[1:3:end, :], l=(1, :black), m=2,
+plot!(t[1:3:end], u[1:3:end, :];
+    l=(1, :black),  m=2,
     label=["Euler prey" "Euler predator"])
 ```
 
@@ -337,8 +349,9 @@ You can use `idxs` in the plot of a solution produced by `solve` to specify the 
 ::::
 
 ```{code-cell}
-plot(sol, idxs=(1, 2), title="Predator-prey in the phase plane",
-    xlabel=L"y", ylabel=L"z")
+plot(sol, idxs=(1, 2),
+    title="Predator-prey in the phase plane",
+    xlabel=L"y",  ylabel=L"z")
 ```
 
 From this plot we can deduce that the solution approaches a periodic one, which in the phase plane is represented by a closed loop.
@@ -379,8 +392,10 @@ Here `idxs` is used to plot two components as functions of time.
 γ, L, k = 0, 0.5, 0
 ivp = ODEProblem(couple, u₀, tspan, [γ, L, k])
 sol = solve(ivp, Tsit5())
-plot(sol, idxs=[1, 2], label=[L"\theta_1" L"\theta_2"],
-    xlims=[20, 50], title="Uncoupled pendulums")
+plot(sol, idxs=[1, 2], 
+    label=[L"\theta_1" L"\theta_2"],
+    xlims=[20, 50], 
+    title="Uncoupled pendulums")
 ```
 
 You can see that the pendulums swing independently. Because the model is nonlinear and the initial angles are not small, they have slightly different periods of oscillation, and they go in and out of phase.
@@ -391,23 +406,26 @@ With coupling activated, a different behavior is seen.
 k = 1
 ivp = ODEProblem(couple, u₀, tspan, [γ, L, k])
 sol = solve(ivp, Tsit5())
-plot(sol, idxs=[1, 2], label=[L"\theta_1" L"\theta_2"],
-    xlims=[20, 50], title="Coupled pendulums")
+plot(sol, idxs=[1, 2], 
+    label=[L"\theta_1" L"\theta_2"],
+    xlims=[20, 50], 
+    title="Coupled pendulums")
 ```
 
 The coupling makes the pendulums swap energy back and forth.
 ``````
 
 ### 6.4 @section-ivp-rk
+
 (demo-rk-converge-julia)=
 ``````{dropdown} @demo-rk-converge
 We solve the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
 
 ```{code-cell}
+using OrdinaryDiffEq
 f(u, p, t) = sin((t + u)^2)
 tspan = (0.0, 4.0)
 u₀ = -1.0
-
 ivp = ODEProblem(f, u₀, tspan)
 ```
 
@@ -421,51 +439,55 @@ Now we perform a convergence study of our two Runge–Kutta implementations.
 
 ```{code-cell}
 n = [round(Int, 2 * 10^k) for k in 0:0.5:3]
-err_IE2, err_RK4 = [], []
-for n in n
+err = zeros(length(n), 2)
+for (k, n) in enumerate(n)
     t, u = FNC.ie2(ivp, n)
-    push!(err_IE2, maximum(@.abs(u_ref(t) - u)))
+    err[k, 1] = norm(u_ref.(t) - u, Inf)
     t, u = FNC.rk4(ivp, n)
-    push!(err_RK4, maximum(@.abs(u_ref(t) - u)))
+    err[k, 2] = norm(u_ref.(t) - u, Inf)
 end
-
-pretty_table([n err_IE2 err_RK4], header=["n", "IE2 error", "RK4 error"])
+@pt :header=["n", "IE2 error", "RK4 error"] [n err]
 ```
 
 The amount of computational work at each time step is assumed to be proportional to the number of stages. Let's compare on an apples-to-apples basis by using the number of $f$-evaluations on the horizontal axis.
 
 ```{code-cell}
-plot([2n 4n], [err_IE2 err_RK4], m=3, label=["IE2" "RK4"],
-    xaxis=(:log10, "f-evaluations"), yaxis=(:log10, "inf-norm error"),
-    title="Convergence of RK methods", leg=:bottomleft)
+using Plots
+plot([2n 4n], err;
+    m=3, label=["IE2" "RK4"], legend=:bottomleft,
+    xaxis=(:log10, "f-evaluations"),  yaxis=(:log10, "inf-norm error"),
+    title="Convergence of RK methods")
 
-plot!(2n, 1e-5 * (n / n[end]) .^ (-2), l=:dash, label=L"O(n^{-2})")
-plot!(4n, 1e-10 * (n / n[end]) .^ (-4), l=:dash, label=L"O(n^{-4})")
+plot!(2n, 0.1 * err[end,1] * (n / n[end]) .^ (-2), l=:dash, label=L"O(n^{-2})")
+plot!(4n, 0.1 * err[end,2] * (n / n[end]) .^ (-4), l=:dash, label=L"O(n^{-4})")
 ```
 
 The fourth-order variant is more efficient in this problem over a wide range of accuracy.
 ``````
 
 ### 6.5 @section-ivp-adaptive
+
 (demo-adapt-basic-julia)=
 ``````{dropdown} @demo-adapt-basic
 Let's run adaptive RK on  $u'=e^{t-u\sin u}$.
 
 ```{code-cell}
+using OrdinaryDiffEq, Plots
 f(u, p, t) = exp(t - u * sin(u))
 ivp = ODEProblem(f, 0, (0.0, 5.0))
 t, u = FNC.rk23(ivp, 1e-5)
-
 plot(t, u, m=2,
-    xlabel=L"t", ylabel=L"u(t)", title="Adaptive IVP solution")
+    xlabel=L"t",  ylabel=L"u(t)", 
+    title="Adaptive IVP solution")
 ```
 
 The solution makes a very abrupt change near $t=2.4$. The resulting time steps vary over three orders of magnitude.
 
 ```{code-cell}
 Δt = diff(t)
-plot(t[1:end-1], Δt, title="Adaptive step sizes",
-    xaxis=(L"t", (0, 5)), yaxis=(:log10, "step size"))
+plot(t[1:end-1], Δt;
+    xaxis=(L"t", (0, 5)), yaxis=(:log10, "step size"),
+    title="Adaptive step sizes")
 ```
 
 If we had to run with a uniform step size to get this accuracy, it would be
@@ -497,8 +519,10 @@ t, u = FNC.rk23(ivp, 1e-5);
 In fact, the failure of the adaptivity gives a decent idea of when the singularity occurs.
 
 ```{code-cell}
-plot(t, u, legend=:none,
-    xlabel=L"t", yaxis=(:log10, L"u(t)"), title="Finite-time blowup")
+plot(t, u;
+    legend=:none,
+    xlabel=L"t",  yaxis=(:log10, L"u(t)"), 
+    title="Finite-time blowup")
 
 tf = t[end]
 vline!([tf], l=:dash)
@@ -507,11 +531,13 @@ annotate!(tf, 1e5, latexstring(@sprintf("t = %.6f ", tf)), :right)
 ``````
 
 ### 6.6 @section-ivp-multistep
+
 (demo-implicit-ab4-julia)=
 ``````{dropdown} @demo-implicit-ab4
 We study the convergence of AB4 using the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. As usual, `solve` is called to give an accurate reference solution.
 
 ```{code-cell}
+using OrdinaryDiffEq
 ivp = ODEProblem((u, p, t) -> sin((t + u)^2), -1.0, (0.0, 4.0))
 u_ref = solve(ivp, Tsit5(), reltol=1e-14, abstol=1e-14);
 ```
@@ -525,18 +551,19 @@ for n in n
     t, u = FNC.ab4(ivp, n)
     push!(err, norm(u_ref.(t) - u, Inf))
 end
-
-pretty_table([n err], header=["n", "inf-norm error"])
+@pt :header=["n", "inf-norm error"] [n err]
 ```
 
 The method should converge as $O(h^4)$, so a log-log scale is appropriate for the errors.
 
 ```{code-cell}
-plot(n, err, m=3, label="AB4",
-    xaxis=(:log10, L"n"), yaxis=(:log10, "inf-norm error"),
-    title="Convergence of AB4", leg=:bottomleft)
+using Plots
+plot(n, err, m=3, 
+    label="AB4",  legend=:bottomleft,
+    xaxis=(:log10, L"n"),  yaxis=(:log10, "inf-norm error"),
+    title="Convergence of AB4")
 
-plot!(n, (n / n[1]) .^ (-4), l=:dash, label=L"O(n^{-4})")
+plot!(n, 0.1 * err[end] * (n / n[end]) .^ (-4), l=:dash, label=L"O(n^{-4})")
 ```
 ``````
 
@@ -553,15 +580,15 @@ We will solve the problem first with the implicit AM2 method using $n=200$ steps
 ```{code-cell}
 tI, uI = FNC.am2(ivp, 200)
 
-plot(tI, uI, label="AM2",
-    xlabel=L"t", ylabel=L"u(t)", leg=:bottomright)
+plot(tI, uI;
+    label="AM2", legend=:bottomright,
+    xlabel=L"t",  ylabel=L"u(t)")
 ```
 
 Now we repeat the process using the explicit AB4 method.
 
 ```{code-cell}
 tE, uE = FNC.ab4(ivp, 200)
-
 scatter!(tE, uE, m=3, label="AB4", ylim=[-4, 2])
 ```
 
@@ -574,8 +601,9 @@ uE[105:111]
 We hope that AB4 will converge in the limit $h\to 0$, so let's try using more steps.
 
 ```{code-cell}
-plt = scatter(tI, uI, label="AM2, n=200", m=3,
-    xlabel=L"t", ylabel=L"u(t)", leg=:bottomright)
+plt = scatter(tI, uI;
+    m=3,  label="AM2, n=200",  legend=:bottomright,
+    xlabel=L"t",  ylabel=L"u(t)")
 
 for n in [1000, 1600]
     tE, uE = FNC.ab4(ivp, n)
@@ -588,6 +616,7 @@ So AB4, which is supposed to be _more_ accurate than AM2, actually needs somethi
 ``````
 
 ### 6.7 @section-ivp-implicit
+
 (demo-zs-LIAF-julia)=
 ``````{dropdown} @demo-zs-LIAF
 We'll measure the error at the time $t=1$.
@@ -610,15 +639,17 @@ for n in n
     end
     push!(err, abs(û(b) - u[end]))
 end
-
-pretty_table([n (b - a) ./ n err], header=["n", "h", "error"])
+@pt :header=["n", "h", "error"] [n (b - a) ./ n err]
 ```
 
 The error starts out promisingly, but things explode from there. A graph of the last numerical attempt yields a clue.
 
 ```{code-cell}
-plot(t, abs.(u), m=3, label="",
-    xlabel=L"t", yaxis=(:log10, L"|u(t)|"), title="LIAF solution")
+using Plots
+plot(t, abs.(u);
+    m=3,  label="",
+    xlabel=L"t",  yaxis=(:log10, L"|u(t)|"), 
+    title="LIAF solution")
 ```
 
 It's clear that the solution is growing exponentially in time.

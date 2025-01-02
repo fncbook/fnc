@@ -8,8 +8,6 @@ numbering:
 ---
 # Chapter 3
 
-Julia implementations
-
 ## Functions
 
 (function-lsnormal-julia)=
@@ -53,10 +51,8 @@ The syntax on line 9 is a *field reference* to extract the matrix we want from t
 ## Examples
 
 ```{code-cell}
-:tags: [remove-cell]
-import Pkg; Pkg.activate("/Users/driscoll/Documents/GitHub/fnc")
-using FundamentalsNumericalComputation
-FNC.init_format()
+:tags: remove-cell
+include("FNC_init.jl")
 ```
 
 ### 3.1 @section-leastsq-fitting
@@ -70,7 +66,8 @@ temp = [ -0.0480, -0.0180, -0.0360, -0.0120, -0.0040,
        0.1180, 0.2100, 0.3320, 0.3340, 0.4560 ]
     
 scatter(year, temp, label="data",
-    xlabel="year", ylabel="anomaly (degrees C)", leg=:bottomright)
+    xlabel="year", ylabel="anomaly (degrees C)", 
+    legend=:bottomright)
 ```
 
 A polynomial interpolant can be used to fit the data. Here we build one using a Vandermonde matrix. First, though, we express time as decades since 1950, as it improves the condition number of the matrix.
@@ -93,6 +90,7 @@ If you `plot` a function, then the points are chosen automatically to make a smo
 ::::
 
 ```{code-cell}
+using Polynomials, Plots
 p = Polynomial(c)
 f = yr -> p((yr - 1950) / 10)
 plot!(f, 1955, 2000, label="interpolant")
@@ -108,7 +106,7 @@ Here are the 5-year temperature averages again.
 
 ```{code-cell}
 year = 1955:5:2000
-t = @. (year-1950)/10
+t = @. (year - 1950) / 10
 temp = [ -0.0480, -0.0180, -0.0360, -0.0120, -0.0040,
           0.1180, 0.2100, 0.3320, 0.3340, 0.4560 ]
 ```
@@ -167,16 +165,18 @@ a = [1/k^2 for k=1:100]
 s = cumsum(a)        # cumulative summation
 p = @. sqrt(6*s)
 
-scatter(1:100, p, title="Sequence convergence",
-    xlabel=L"k", ylabel=L"p_k")
+scatter(1:100, p;
+    title="Sequence convergence",
+    xlabel=L"k",  ylabel=L"p_k")
 ```
 
 This graph suggests that maybe $p_k\to \pi$, but it's far from clear how close the sequence gets. It's more informative to plot the sequence of errors, $\epsilon_k= |\pi-p_k|$. By plotting the error sequence on a log-log scale, we can see a nearly linear relationship.
 
 ```{code-cell}
 ϵ = @. abs(π - p)    # error sequence
-scatter(1:100, ϵ, title="Convergence of errors",
-    xaxis=(:log10,L"k"), yaxis=(:log10,"error"))
+scatter(1:100, ϵ;
+    title="Convergence of errors",
+    xaxis=(:log10,L"k"),  yaxis=(:log10,"error"))
 ```
 
 The straight line on the log-log scale suggests a power-law relationship where $\epsilon_k\approx a k^b$, or $\log \epsilon_k \approx b (\log k) + \log a$.
@@ -215,7 +215,7 @@ The local variable scoping rule for loops applies to comprehensions as well.
 
 ```{code-cell}
 t = range(0, 3, 400)
-f = [ x->sin(x)^2, x->cos((1+1e-7)*x)^2, x->1. ]
+f = [ x -> sin(x)^2, x -> cos((1 + 1e-7) * x)^2, x -> 1. ]
 A = [ f(t) for t in t, f in f ]
 @show κ = cond(A);
 ```
@@ -297,7 +297,7 @@ We'll repeat the experiment of {numref}`Demo {number} <demo-normaleqns-instab>`,
 
 ```{code-cell}
 t = range(0, 3, 400)
-f = [ x->sin(x)^2, x->cos((1+1e-7)*x)^2, x->1. ]
+f = [ x -> sin(x)^2, x -> cos((1 + 1e-7) * x)^2, x -> 1. ]
 A = [ f(t) for t in t, f in f ]
 x = [1., 2, 1]
 b = A * x;
@@ -306,7 +306,7 @@ b = A * x;
 The error in the solution by {numref}`Function {number} <function-lsqrfact>` is similar to the bound predicted by the condition number.
 
 ```{code-cell}
-observed_error = norm(FNC.lsqrfact(A,b) - x) / norm(x);
+observed_error = norm(FNC.lsqrfact(A, b) - x) / norm(x);
 @show observed_error;
 @show error_bound = cond(A) * eps();
 ```
@@ -324,7 +324,7 @@ The `rand` function can select randomly from within the interval $[0,1]$, or fro
 ::::
 
 ```{code-cell}
-A = rand(float(1:9),6,4)
+A = rand(float(1:9), 6, 4)
 m,n = size(A)
 ```
 

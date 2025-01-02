@@ -6,13 +6,8 @@ kernelspec:
 numbering:
   headings: false
 ---
-```{code-cell}
-:tags: [remove-cell]
-import Pkg; Pkg.activate("/Users/driscoll/Documents/GitHub/fnc")
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
 # Chapter 1
+
 ## Functions
 
 (function-horner-julia)=
@@ -24,8 +19,12 @@ FNC.init_format()
 :linenos: true
 :language: julia
 ```
-
 `````
+
+```{code-cell}
+:tags: remove-cell
+include("FNC_init.jl")
+```
 
 ## Examples
 
@@ -174,7 +173,7 @@ ans - 161.8
 A common mistake is to think that $\epsilon_\text{mach}$ is the smallest floating-point number. It's only the smallest *relative to 1*. The correct perspective is that the scaling of values is limited by the exponent, not the mantissa. The actual range of positive values in double precision is
 
 ```{code-cell}
-@show floatmin(),floatmax();
+@show floatmin(), floatmax();
 ```
 
 For the most part you can mix integers and floating-point values and get what you expect.
@@ -275,9 +274,9 @@ This matches the observation pretty well.
 Here we show how to use {numref}`Function {number} <function-horner>` to evaluate a polynomial. It's not a part of core Julia, so you need to download and install this text's package once, and load it for each new Julia session. The download is done by the following lines.
 
 ```{code-cell}
-:tags: [remove-output]
-import Pkg
-Pkg.add("FundamentalsNumericalComputation");
+:tags: remove-output
+#import Pkg
+#Pkg.add("FNCBook");
 ```
 
 ```{index} ! Julia; using
@@ -291,8 +290,10 @@ Many Julia functions, including the ones in this text, are in packages that must
 ::::
 
 ```{code-cell}
-:tags: [remove-output]
-using FundamentalsNumericalComputation
+:tags: remove-output
+#using FundamentalsNumericalComputation
+using FNCFunctions
+FNC = FNCFunctions
 ```
 
 ::::{grid} 1 1 2 2
@@ -358,7 +359,7 @@ A number in scientific notation is entered as `1.23e4` rather than as `1.23*10^{
 ::::
 
 ```{code-cell}
-a = 1;  b = -(1e6+1e-6);  c = 1;
+a = 1;  b = -(1e6 + 1e-6);  c = 1;
 @show x₁ = (-b + sqrt(b^2 - 4a*c)) / 2a;
 @show x₂ = (-b - sqrt(b^2 - 4a*c)) / 2a;
 ```
@@ -366,11 +367,11 @@ a = 1;  b = -(1e6+1e-6);  c = 1;
 The first value is correct to all stored digits, but the second has fewer than six accurate digits:
 
 ```{code-cell}
-error = abs(1e-6-x₂)/1e-6 
+error = abs(1e-6 - x₂) / 1e-6 
 @show accurate_digits = -log10(error);
 ```
 
- The instability is easily explained. Since $a=c=1$, we treat them as exact numbers. First, we compute the condition numbers with respect to $b$ for each elementary step in finding the "good" root:
+The instability is easily explained. Since $a=c=1$, we treat them as exact numbers. First, we compute the condition numbers with respect to $b$ for each elementary step in finding the "good" root:
 
 | Calculation | Result | $\kappa$ |
 |:------------|:-------|:---------|
@@ -388,25 +389,25 @@ Using {eq}`condition-chain`, the chain rule for condition numbers, the condition
 We repeat the rootfinding experiment of {numref}`Demo %s <demo-stability-quadbad>` with an alternative algorithm.
 
 ```{code-cell}
-a = 1;  b = -(1e6+1e-6);  c = 1;
+a = 1;  b = -(1e6 + 1e-6);  c = 1;
 ```
 
 First, we find the "good" root using the quadratic formula.
 
 ```{code-cell}
-@show x₁ = (-b + sqrt(b^2-4a*c)) / 2a;
+@show x₁ = (-b + sqrt(b^2 - 4a*c)) / 2a;
 ```
 
 Then we use the identity $x_1x_2=\frac{c}{a}$ to compute the smaller root:
 
 ```{code-cell}
-@show x₂ = c / (a*x₁);
+@show x₂ = c / (a * x₁);
 ```
 
 As you see in this output, Julia often suppresses trailing zeros in a decimal expansion. To be sure we have an accurate result, we compute its relative error.
 
 ```{code-cell}
-abs(x₂-1e-6) / 1e-6
+abs(x₂ - 1e-6) / 1e-6
 ```
 ````
 
@@ -422,15 +423,11 @@ In the rest of the book, we do not show the `using` statement needed to load the
 :::
 ::::
 
-```{code-cell}
-:tags: [remove-cell]
-using FundamentalsNumericalComputation
-```
-
 Our first step is to construct a polynomial with six known roots.
 
 ```{code-cell}
-r = [-2.0,-1,1,1,3,6]
+using Polynomials
+r = [-2.0, -1, 1, 1, 3, 6]
 p = fromroots(r)
 ```
 
@@ -455,7 +452,7 @@ The `@.` notation at the start means to do the given operations on each element 
 
 ```{code-cell}
 println("Root errors:") 
-@. abs(r-r̃) / r
+@. abs(r - r̃) / r
 ```
 
 It seems that the forward error is acceptably close to machine epsilon for double precision in all cases except the double root at $x=1$. This is not a surprise, though, given the poor conditioning at such roots.
@@ -469,9 +466,9 @@ p̃ = fromroots(r̃)
 We find that in a relative sense, these coefficients are very close to those of the original, exact polynomial:
 
 ```{code-cell}
-c,c̃ = coeffs(p),coeffs(p̃)
+c,c̃ = coeffs(p), coeffs(p̃)
 println("Coefficient errors:") 
-@. abs(c-c̃) / c
+@. abs(c - c̃) / c
 ```
 
 In summary, even though there are some computed roots relatively far from their correct values, they are nevertheless the roots of a polynomial that is very close to the original.

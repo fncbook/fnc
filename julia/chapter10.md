@@ -96,10 +96,8 @@ The nested function `residual` uses differentiation matrices computed externally
 ## Examples
 
 ```{code-cell}
-:tags: [remove-output]
-import Pkg; Pkg.activate("/Users/driscoll/Documents/GitHub/fnc")
-using FundamentalsNumericalComputation
-FNC.init_format()
+:tags: remove-output
+include("FNC_init.jl")
 ```
 
 ### 10.1 @section-bvp-tpbvp
@@ -134,12 +132,12 @@ function ode!(f, y, λ, r)
 end;
 ```
 
-Notice that the `return` value is irrelevant with the in-place style. We use the same style for the boundary conditions $y_2(0)=0$, $y_1(2)=1$.
+Notice that the `return` value is irrelevant with the in-place style. We use the same style for the boundary conditions $y_2(0)=0$, $y_1(1)=1$.
 
 ```{code-cell}
 function bc!(g, y, λ, r)
-    g[1] = y(0)[2]
-    g[2] = y(1)[1] - 1
+    g[1] = y[1][2]          # first node, second component = 0
+    g[2] = y[end][1] - 1    # last node, first component = 1
     return nothing
 end;
 ```
@@ -161,10 +159,10 @@ est = [1, 0]
 Now we set up and solve a `BVProblem` with the parameter value $\lambda=0.6$.
 
 ```{code-cell}
+using BoundaryValueDiffEq, Plots
 bvp = BVProblem(ode!, bc!, est, domain, 0.6)
-y = solve(bvp)
-plot(
-    y,
+y = solve(bvp, Shooting(Tsit5()))
+plot(y;
     label = [L"w" L"w'"],
     legend = :right,
     xlabel = L"r",
@@ -173,16 +171,20 @@ plot(
 )
 ```
 
-To visual accuracy, the boundary conditions have been enforced.
+To visual accuracy, the boundary conditions have been enforced. We can check them numerically.
+
+```{code-cell}
+@show y(0)[2];    # y_2(0)
+@show y(1)[1];    # y_1(1)
+```
 ``````
 
 ### 10.2 @section-bvp-shooting
+
 (demo-shooting-naive-julia)=
 ``````{dropdown} @demo-shooting-naive
 ::::{grid} 1 1 2 2
-
 Let's first examine the shooting approach for the TPBVP from {numref}`Example {number} <example-tpbvp-mems>` with $\lambda=0.6$. 
-
 :::{card}
 The character `ϕ` is typed as `\phi`<kbd>Tab</kbd>. 
 :::
@@ -203,12 +205,10 @@ a, b = eps(), 1.0;
 The BVP specifies $w'(0)=y_2(0)=0$. We can try multiple values for the unknown $w(0)=y_1(0)$ and plot the solutions.
 
 ```{code-cell}
+using OrdinaryDiffEq, Plots
 plt = plot(
-    xaxis = (L"x"),
-    yaxis = (L"w(x)"),
-    title = "Different initial values",
-    leg = :bottomright,
-)
+    xaxis = (L"x"),  yaxis = (L"w(x)"),
+    title = "Different initial values",  legend = :bottomright)
 
 for w0 in 0.4:0.1:0.9
     IVP = ODEProblem(f, [w0, 0], (a, b))
@@ -228,16 +228,14 @@ We revisit {numref}`Demo {number} <demo-shooting-naive>` but let {numref}`Functi
 ```{code-cell}
 λ = 0.6
 ϕ = (r, w, dwdr) -> λ / w^2 - dwdr / r;
-a = eps();
-b = 1;
+a, b = eps(), 1.0;
 ```
 
 We specify the given and unknown endpoint values.
 
 ```{code-cell}
-g₁(w, dw) = dw     # w'=0 at left
-g₂(w, dw) = w - 1    # w=1 at right
-
+g₁(w, dw) = dw       # w' = 0 at left
+g₂(w, dw) = w - 1    # w = 1 at right
 r, w, dw_dx = FNC.shoot(ϕ, (a, b), g₁, g₂, [0.8, 0])
 plot(r, w, title = "Shooting solution", xaxis = (L"x"), yaxis = (L"w(x)"))
 ```
@@ -276,10 +274,10 @@ plt
 ```
 
 The numerical solutions evidently don't satisfy the right boundary condition as $\lambda$ increases, which makes them invalid. 
-
 ``````
 
 ### 10.3 @section-bvp-diffmats
+
 (demo-diffmats-2nd-julia)=
 ``````{dropdown} @demo-diffmats-2nd
 We test first-order and second-order differentiation matrices for the function $x + \exp(\sin 4x)$ over $[-1,1]$.
@@ -291,8 +289,8 @@ f = x -> x + exp(sin(4 * x));
 For reference, here are the exact first and second derivatives.
 
 ```{code-cell}
-dfdx = x -> 1 + 4 * exp(sin(4 * x)) * cos(4 * x);
-d2fdx2 = x -> 4 * exp(sin(4 * x)) * (4 * cos(4 * x)^2 - 4 * sin(4 * x));
+df_dx = x -> 1 + 4 * exp(sin(4x)) * cos(4x);
+d2f_dx2 = x -> 4 * exp(sin(4x)) * (4 * cos(4x)^2 - 4 * sin(4x));
 ```
 
 We discretize on equally spaced nodes and evaluate $f$ at the nodes.
@@ -305,16 +303,17 @@ y = f.(t);
 Then the first two derivatives of $f$ each require one matrix-vector multiplication.
 
 ```{code-cell}
-yₓ = Dₓ * y;
+yₓ = Dₓ * y
 yₓₓ = Dₓₓ * y;
 ```
 
 The results show poor accuracy for this small value of $n$.
 
 ```{code-cell}
-plot(dfdx, -1, 1, layout = 2, xaxis = (L"x"), yaxis = (L"f'(x)"))
+using Plots
+plot(df_dx, -1, 1, layout = 2, xaxis = (L"x"), yaxis = (L"f'(x)"))
 scatter!(t, yₓ, subplot = 1)
-plot!(d2fdx2, -1, 1, subplot = 2, xaxis = (L"x"), yaxis = (L"f''(x)"))
+plot!(d2f_dx2, -1, 1, subplot = 2, xaxis = (L"x"), yaxis = (L"f''(x)"))
 scatter!(t, yₓₓ, subplot = 2)
 ```
 
@@ -322,24 +321,20 @@ A convergence experiment confirms the order of accuracy. Because we expect an al
 
 ```{code-cell}
 n = @. round(Int, 2^(4:0.5:11))
-err1 = zeros(size(n))
-err2 = zeros(size(n))
+err = zeros(length(n), 2)
 for (k, n) in enumerate(n)
     t, Dₓ, Dₓₓ = FNC.diffmat2(n, [-1, 1])
     y = f.(t)
-    err1[k] = norm(dfdx.(t) - Dₓ * y, Inf)
-    err2[k] = norm(d2fdx2.(t) - Dₓₓ * y, Inf)
+    err[k, 1] = norm(df_dx.(t) - Dₓ * y, Inf)
+    err[k, 2] = norm(d2f_dx2.(t) - Dₓₓ * y, Inf)
 end
-plot(n, [err1 err2], m = :o, label = [L"f'" L"f''"])
-plot!(
-    n,
-    10 * 10 * n .^ (-2),
-    l = (:dash, :gray),
+plot(n, err, m = :o, label = [L"f'" L"f''"])
+plot!(n, 10 * 10 * n .^ (-2);
+    l = (:dash, :black),
     label = "2nd order",
     xaxis = (:log10, "n"),
     yaxis = (:log10, "max error"),
-    title = "Convergence of finite differences",
-)
+    title = "Convergence of finite differences")
 ```
 ``````
 
@@ -356,8 +351,8 @@ We again test the convergence rate.
 
 ```{code-cell}
 f = x -> x + exp(sin(4 * x));
-dfdx = x -> 1 + 4 * exp(sin(4 * x)) * cos(4 * x);
-d2fdx2 = x -> 4 * exp(sin(4 * x)) * (4 * cos(4 * x)^2 - 4 * sin(4 * x));
+df_dx = x -> 1 + 4 * exp(sin(4 * x)) * cos(4 * x);
+d2f_dx2 = x -> 4 * exp(sin(4 * x)) * (4 * cos(4 * x)^2 - 4 * sin(4 * x));
 ```
 
 ```{code-cell}
@@ -367,27 +362,23 @@ err2 = zeros(size(n))
 for (k, n) in enumerate(n)
     t, Dₓ, Dₓₓ = FNC.diffcheb(n, [-1, 1])
     y = f.(t)
-    err1[k] = norm(dfdx.(t) - Dₓ * y, Inf)
-    err2[k] = norm(d2fdx2.(t) - Dₓₓ * y, Inf)
+    err1[k] = norm(df_dx.(t) - Dₓ * y, Inf)
+    err2[k] = norm(d2f_dx2.(t) - Dₓₓ * y, Inf)
 end
 ```
 
 Since we expect a spectral convergence rate, we use a semi-log plot for the error.
 
 ```{code-cell}
-plot(
-    n,
-    [err1 err2],
-    m = :o,
-    label = [L"f'" L"f''"],
-    xaxis = (L"n"),
-    yaxis = (:log10, "max error"),
-    title = "Convergence of Chebyshev derivatives",
-)
+plot(n, [err1 err2]; m = :o,
+    label=[L"f'" L"f''"],
+    xaxis=(L"n"),  yaxis = (:log10, "max error"),
+    title="Convergence of Chebyshev derivatives")
 ```
 ``````
 
 ### 10.4 @section-bvp-linear
+
 (demo-linear-solve-julia)=
 ``````{dropdown} @demo-linear-solve
 ```{code-cell}
@@ -409,17 +400,12 @@ x, u = FNC.bvplin(p, q, r, [0, 3π / 2], 1, exp(-1), 30);
 ```
 
 ```{code-cell}
+using Plots
 plot(exact, 0, 3π / 2, layout = (2, 1), label = "exact")
-scatter!(
-    x,
-    u,
-    m = :o,
-    subplot = 1,
-    label = "numerical",
-    yaxis = ("solution"),
-    title = "Solution of a linear BVP",
-)
-
+scatter!(x, u, m = :o,
+    subplot=1,  label="numerical",
+    yaxis=("solution"),
+    title="Solution of a linear BVP")
 plot!(x, exact.(x) - u, subplot = 2, xaxis = L"x", yaxis = ("error"))
 ```
 ``````
@@ -443,33 +429,29 @@ We compare the computed solution to the exact one for increasing $n$.
 
 ```{code-cell}
 n = 5 * [round(Int, 10^d) for d in 0:0.25:3]
-err = zeros(size(n))
+err = zeros(length(n))
 for (k, n) in enumerate(n)
     x, u = FNC.bvplin(p, q, r, [0, 1], -1, 0, n)
     err[k] = norm(exact.(x) - u, Inf)
 end
-
 data = (n = n[1:4:end], err = err[1:4:end])
-pretty_table(data, header = ["n", "inf-norm error"])
+@pt :header = ["n", "inf-norm error"] data
 ```
 
 Each factor of 10 in $n$ reduces error by a factor of 100, which is indicative of second-order convergence.
 
 ```{code-cell}
-plot(
-    n,
-    err,
-    m = :o,
+plot(n, err, m = :o,
     label = "observed",
     xaxis = (:log10, L"n"),
     yaxis = (:log10, "inf-norm error"),
-    title = "Convergence for a linear BVP",
-)
+    title = "Convergence for a linear BVP")
 plot!(n, 0.25 * n .^ (-2), l = (:dash, :gray), label = "2nd order")
 ```
 ``````
 
 ### 10.5 @section-bvp-nonlinear
+
 (demo-nonlinear-pendulum-julia)=
 ``````{dropdown} @demo-nonlinear-pendulum
 The first step is to define the function $\phi$ that equals $\theta''$.
@@ -502,15 +484,20 @@ init = collect(range(2.5, -2, length = 101));
 We find a solution with negative initial slope, i.e., the pendulum is initially pushed back toward equilibrium.
 
 ```{code-cell}
+using Plots
 t, θ = FNC.bvp(ϕ, [0, 5], g₁, g₂, init)
-plot(t, θ, xaxis = (L"t"), yaxis = (L"\theta(t)"), title = "Pendulum over [0,5]")
+plot(t, θ;
+    xaxis=(L"t"),  yaxis=(L"\theta(t)"),
+    title="Pendulum over [0,5]" )
 ```
 
 If we extend the time interval longer for the same boundary values, then the initial slope must adjust.
 
 ```{code-cell}
 t, θ = FNC.bvp(ϕ, [0, 8], g₁, g₂, init)
-plot(t, θ, xaxis = (L"t"), yaxis = (L"\theta(t)"), title = "Pendulum over [0,8]")
+plot(t, θ;
+    xaxis=(L"t"),  yaxis=(L"\theta(t)"),
+    title="Pendulum over [0,8]" )
 ```
 
 This time, the pendulum is initially pushed toward the unstable equilibrium in the upright vertical position before gravity pulls it back down.
@@ -531,10 +518,12 @@ g₂(w, dw) = w - 1;
 First we try a constant function as the initialization.
 
 ```{code-cell}
-    init = ones(301)
+init = ones(301)
 r, w₁ = FNC.bvp(ϕ, domain, g₁, g₂, init)
 
-plot(r, w₁, xaxis = (L"r"), yaxis = (L"w(r)"), title = "Solution of the membrane problem")
+plot(r, w₁;
+    xaxis = (L"r"),  yaxis = (L"w(r)"), 
+    title = "Solution of the MEMS problem")
 ```
 
 It's not necessary that the initialization satisfy the boundary conditions. In fact, by choosing a different constant function as the initial guess, we arrive at another valid solution.
@@ -542,7 +531,7 @@ It's not necessary that the initialization satisfy the boundary conditions. In f
 ```{code-cell}
 init = 0.5 * ones(301)
 r, w₂ = FNC.bvp(ϕ, domain, g₁, g₂, init)
-plot!(r, w₂, title = "Two solutions of the membrane problem")
+plot!(r, w₂, title = "Two solutions of the MEMS problem")
 ```
 ``````
 
@@ -562,15 +551,10 @@ Finding a solution is easy at larger values of $\epsilon$.
 init = collect(range(-1, 1, length = 141))
 x, u₁ = FNC.bvp(ϕ, [0, 1], g₁, g₂, init)
 
-plot(
-    x,
-    u₁,
-    label = L"\epsilon = 0.05",
-    leg = :bottomright,
-    xaxis = (L"x"),
-    yaxis = (L"u(x)"),
-    title = "Allen–Cahn solution",
-)
+plot(x, u₁;
+    label=L"\epsilon = 0.05",  legend=:bottomright,
+    xaxis=(L"x"),  yaxis=(L"u(x)"),
+    title = "Allen–Cahn solution")
 ```
 
 However, finding a good initialization is not trivial for smaller values of $\epsilon$. Note below that the iteration stops without converging to a solution.
@@ -584,7 +568,7 @@ The iteration succeeds if we use the first solution instead as the initializatio
 
 ```{code-cell}
 x, u₂ = FNC.bvp(ϕ, [0, 1], g₁, g₂, u₁)
-plot!(x, u₂, label = L"\epsilon = 0.002")
+plot!(x, u₂; label = L"\epsilon = 0.002")
 ```
 
 In this case we can continue further.
@@ -609,15 +593,11 @@ f = x -> sin(π * x);
 ```
 
 ```{code-cell}
+using Plots
 x, u = FNC.fem(c, q, f, 0, 1, 50)
-plot(
-    x,
-    u,
-    label = "",
-    xaxis = (L"x"),
-    yaxis = (L"u"),
-    title = "Solution by finite elements",
-)
+plot(x, u;
+    xaxis=(L"x"),  yaxis = (L"u"),
+    title = "Solution by finite elements", legend=:none)
 ```
 ``````
 

@@ -9,13 +9,6 @@ numbering:
 
 # Chapter 2 
 
-```{code-cell}
-:tags: [remove-cell]
-import Pkg; Pkg.activate("/Users/driscoll/Documents/GitHub/fnc")
-using FundamentalsNumericalComputation
-FNC.init_format()
-```
-
 ## Functions
 
 (function-forwardsub-julia)=
@@ -79,11 +72,15 @@ The second issue is that even when `A` has all integer entries, its LU factors m
 ``````
 
 ## Examples
+
+```{code-cell}
+:tags: remove-cell
+include("FNC_init.jl")
+```
+
 ### 2.1 @section-linsys-polyinterp
 (demo-interp-vander-julia)=
 ``````{dropdown} @demo-interp-vander
-:open: false
-
 
 We create two vectors for data about the population of China. The first has the years of census data and the other has the population, in millions of people.
 
@@ -121,7 +118,7 @@ An expression inside square brackets and ending with a `for` statement is called
 ::::
 
 ```{code-cell}
-V = [ t[i]^j for i=1:4, j=0:3 ]
+V = [ t[i]^j for i in 1:4, j in 0:3 ]
 ```
 
 :::{index} ! Julia; \\
@@ -141,7 +138,7 @@ c = V \ y
 The algorithms used by the backslash operator are the main topic of this chapter. As a check on the solution, we can compute the *residual*.
 
 ```{code-cell} julia
-y - V*c
+y - V * c
 ```
 
 Using floating-point arithmetic, it is not realistic to expect exact equality of quantities; a relative difference comparable to $\macheps$ is all we can look for.
@@ -154,6 +151,7 @@ The `Polynomials` package has functions to make working with polynomials easy an
 ::::
 
 ```{code-cell}
+using Polynomials
 p = Polynomial(c)    # construct a polynomial
 p(2005-1980)         # include the 1980 time shift
 ```
@@ -170,8 +168,10 @@ The `scatter` function creates a scatter plot of points; you can specify a line 
 ::::
 
 ```{code-cell}
-scatter(t,y, label="actual", legend=:topleft,
-    xlabel="years since 1980", ylabel="population (millions)", 
+using Plots
+scatter(t, y;
+    label="actual",  legend=:topleft,
+    xlabel="years since 1980",  ylabel="population (millions)", 
     title="Population of China")
 ```
 
@@ -192,10 +192,12 @@ Adding a dot to the end of a function name causes it to be broadcast, i.e., appl
 
 ```{code-cell}
 # Choose 500 times in the interval [0,35].
-tt = range(0,35,length=500)   
+tt = range(0, 35, 500)
+
 # Evaluate the polynomial at all the vector components.
 yy = p.(tt)
-foreach(println,yy[1:4])
+
+foreach(println, yy[1:4])
 ```
 
 :::{index} ! Julia; \!
@@ -211,15 +213,13 @@ By convention, functions whose names end with the bang `!` change the value or s
 ::::
 
 ```{code-cell}
-plot!(tt,yy,label="interpolant")
+plot!(tt, yy, label="interpolant")
 ```
 ``````
 
 ### 2.2 @section-linsys-matrices
 (demo-matrices-julia)=
 ``````{dropdown} @demo-matrices
-:open: false
-
 :::{index} ! Julia; size, ! Julia; length
 :::
 
@@ -229,7 +229,6 @@ In Julia, vectors and matrices are one-dimensional and two-dimensional arrays, r
 The `size` function returns the number of rows and columns in a matrix. Use `length` to get the number of elements in a vector or matrix.
 :::
 ::::
-
 
 ```{code-cell}
 A = [ 1 2 3 4 5; 50 40 30 20 10
@@ -391,7 +390,7 @@ elementwise = A .* C
 The two operands of a dot operator have to have the same size—unless one is a scalar, in which case it is expanded or *broadcast* to be the same size as the other operand.
 
 ```{code-cell}
-x_to_two = x.^2
+x_to_two = x .^ 2
 ```
 
 ```{code-cell}
@@ -406,13 +405,13 @@ A dot added to the end of a function name means to apply the function elementwis
 ::::
 
 ```{code-cell}
-show(cos.(π*x))    # broadcast to a function
+show(cos.(π * x))    # broadcast to a function
 ```
 
 Rather than dotting multiple individual functions, you can use `@.` before an expression to broadcast everything within it.
 
 ```{code-cell}
-show(@. cos(π*(x+1)^3))    # broadcast an entire expression
+show(@. cospi( (x + 1)^3) )    # broadcast an entire expression
 ```
 ``````
 
@@ -440,7 +439,7 @@ x = A \ b
 One way to check the answer is to compute a quantity known as the **residual**. It is (ideally) close to machine precision (relative to the elements in the data).
 
 ```{code-cell}
-residual = b - A*x
+residual = b - A * x
 ```
 
 If the matrix $\mathbf{A}$ is singular, you may get an error.
@@ -449,7 +448,10 @@ If the matrix $\mathbf{A}$ is singular, you may get an error.
 :tags: raises-exception
 A = [0 1; 0 0]
 b = [1, -1]
-x = A \ b
+x = A \ b    # throws an error
+```
+
+```{index} ! Julia; rank
 ```
 
 ::::{grid} 1 1 2 2
@@ -738,7 +740,7 @@ end
 The reason for doing multiple repetitions at each value of $n$ in the loop above is to avoid having times so short that the resolution of the timer is significant.
 
 ```{code-cell}
-pretty_table([n t], header=(["size", "time"], ["", "(sec)"]))
+@pt :header = ["size", "time (sec.)"] [n t]
 ```
 
 ```{index} Julia; Boolean indexing

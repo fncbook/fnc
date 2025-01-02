@@ -14,7 +14,7 @@ numbering:
 ``````{dropdown} Power iteration
 ```{literalinclude} package/src/chapter08.jl
 :filename: poweriter.jl
-:end-before: # begin poweriter
+:start-after: # begin poweriter
 :end-before: # end poweriter
 :language: julia
 :linenos: true
@@ -25,7 +25,7 @@ numbering:
 ``````{dropdown} Inverse iteration
 ```{literalinclude} package/src/chapter08.jl
 :filename: inviter.jl
-:end-before: # begin inviter
+:start-after: # begin inviter
 :end-before: # end inviter
 :language: julia
 :linenos: true
@@ -36,7 +36,7 @@ numbering:
 ``````{dropdown} Arnoldi iteration
 ```{literalinclude} package/src/chapter08.jl
 :filename: arnoldi.jl
-:end-before: # begin arnoldi
+:start-after: # begin arnoldi
 :end-before: # end arnoldi
 :language: julia
 :linenos: true
@@ -51,7 +51,7 @@ The loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}
 ``````{dropdown} GMRES
 ```{literalinclude} package/src/chapter08.jl
 :filename: gmres.jl
-:end-before: # begin gmres
+:start-after: # begin gmres
 :end-before: # end gmres
 :language: julia
 :linenos: true
@@ -62,10 +62,8 @@ The loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}
 ## Examples
 
 ```{code-cell}
-:tags: [remove-output]
-import Pkg; Pkg.activate("/Users/driscoll/Documents/GitHub/fnc")
-using FundamentalsNumericalComputation
-FNC.init_format()
+:tags: remove-output
+include("FNC_init.jl")
 ```
 
 ### 8.1 @section-krylov-structure
@@ -75,25 +73,16 @@ FNC.init_format()
 Here we load the adjacency matrix of a graph with 2790 nodes. Each node is a web page referring to Roswell, NM, and the edges represent links between web pages. (Credit goes to Panayiotis Tsaparas and the University of Toronto for making this data public.)
 
 ```{code-cell}
+using SparseArrays, JLD2
 @load "roswell.jld2" A;      # file is on the book's website
 ```
 
 ```{index} ! Julia; nnz
 ```
 ::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
 We may define the density of $\mathbf{A}$ as the number of nonzeros divided by the total number of entries.
-
-
-:::
 :::{card}
-
-
 Use `nnz` to count the number of nonzeros in a sparse matrix.
-
 :::
 ::::
 
@@ -138,6 +127,7 @@ end
 Here is the adjacency matrix of a graph representing a small-world network, featuring connections to neighbors and a small number of distant contacts.
 
 ```{code-cell}
+using GraphRecipes
 @load "smallworld.jld2" A
 graphplot(A, linealpha=0.5)
 ```
@@ -153,7 +143,8 @@ By {numref}`Theorem {number} <theorem-insight-adjmat>`, the entries of $\mathbf{
 ```{code-cell}
 plt = plot(layout=(1, 3), legend=:none, size=(600, 240))
 for k in 2:4
-    spy!(A^k, subplot=k - 1, color=:blues,
+    spy!(A^k;
+        subplot=k - 1, color=:blues,
         title=latexstring("\\mathbf{A}^$k"))
 end
 plt
@@ -229,9 +220,10 @@ A = FNC.sprandsym(n, density, λ);
 ```{index} ! Julia; eigs
 ```
 
-The `eigs` function finds a small number eigenvalues meeting some criterion. First, we ask for the 5 of largest (complex) magnitude using `which=:LM`.
+The `eigs` function from `Arpack` finds a small number eigenvalues meeting some criterion. First, we ask for the 5 of largest (complex) magnitude using `which=:LM`.
 
 ```{code-cell}
+using Arpack
 λmax, V = eigs(A, nev=5, which=:LM)    # Largest Magnitude
 fmt = ft_printf("%20.15f")
 pretty_table([λmax λ[1:5]], header=["found", "exact"], formatters=fmt)
@@ -338,9 +330,12 @@ eigval = β[end]
 We check for linear convergence using a log-linear plot of the error.
 
 ```{code-cell}
+using Plots
 err = @. 1 - β
-plot(0:59, abs.(err), m=:o, title="Convergence of power iteration",
-    xlabel=L"k", yaxis=(L"|\lambda_1-\beta_k|", :log10, [1e-10, 1]))
+plot(0:59, abs.(err); m=:o, 
+    xlabel=L"k",  
+    yaxis=(L"|\lambda_1-\beta_k|", :log10, [1e-10, 1]),
+    title="Convergence of power iteration")
 ```
 
 The asymptotic trend seems to be a straight line, consistent with linear convergence. To estimate the convergence rate, we look at the ratio of two consecutive errors in the linear part of the convergence curve. The ratio of the first two eigenvalues should match the observed rate.
@@ -360,8 +355,10 @@ In practical situations, we don't know the exact eigenvalue that the algorithm i
 
 ```{code-cell}
 err = @. β[end] - β[1:end-1]
-plot(0:58, abs.(err), m=:o, title="Convergence of power iteration",
-    xlabel=L"k", yaxis=(L"|\beta_{60}-\beta_k|", :log10, [1e-10, 1]))
+plot(0:58, abs.(err), m=:o, 
+    xlabel=L"k", 
+    yaxis=(L"|\beta_{60}-\beta_k|", :log10, [1e-10, 1]),
+    title="Convergence of power iteration")
 ```
 
 The results are very similar until the last few iterations, when the limited accuracy of the reference value begins to show. That is, while it is a good estimate of $\lambda_1$, it is less good as an estimate of the error in nearby estimates.
@@ -391,10 +388,12 @@ eigval = β[end]
 As expected, the eigenvalue that was found is the one closest to 0.7. The convergence is again linear.
 
 ```{code-cell}
+using Plots
 err = @. abs(eigval - β)
-plot(0:28, err[1:end-1], m=:o,
-    title="Convergence of inverse iteration",
-    xlabel=L"k", yaxis=(L"|\lambda_3-\beta_k|", :log10, [1e-16, 1]))
+plot(0:28, err[1:end-1];
+    m=:o,  xlabel=L"k", 
+    yaxis=(L"|\lambda_3-\beta_k|", :log10, [1e-16, 1]),
+    title="Convergence of inverse iteration")
 ```
 
 The observed linear convergence rate is found from the data.
@@ -407,19 +406,9 @@ The observed linear convergence rate is found from the data.
 ```
 
 ::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
 We reorder the eigenvalues to enforce {eq}`shiftorder`.
-
-
-:::
 :::{card}
-
-
 The `sortperm` function returns the index permutation needed to sort the given vector, rather than the sorted vector itself.
-
 :::
 ::::
 
@@ -508,9 +497,10 @@ end
 The linear system approximations show smooth linear convergence at first, but the convergence stagnates after only a few digits have been found.
 
 ```{code-cell}
-plot(0:29, resid, m=:o,
+using Plots
+plot(0:29, resid; m=:o,
     xaxis=(L"m"), yaxis=(:log10, L"\| b-Ax_m \|"),
-    title="Residual for linear systems", leg=:none)
+    title="Residual for linear systems", legend=:none)
 ```
 ``````
 
@@ -597,9 +587,10 @@ end
 The approximations converge smoothly, practically all the way to machine epsilon.
 
 ```{code-cell}
+using Plots
 plot(0:60, resid, m=:o,
-    xaxis=(L"m"), yaxis=(:log10, "norm of mth residual"),
-    title="Residual for GMRES", leg=:none)
+    xaxis=(L"m"),  yaxis=(:log10, "norm of mth residual"),
+    title="Residual for GMRES",  legend=:none)
 ```
 ``````
 
@@ -621,26 +612,17 @@ spy(A, color=:blues)
 ```
 
 ::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
 We compare unrestarted GMRES with three different thresholds for restarting. Here we are using `gmres` from the `IterativeSolvers` package, since our simple implementation does not offer restarting.
-
-
-:::
 :::{card}
-
-
 The syntax `f(x;foo)` is shorthand for `f(x,foo=foo)`.
-
 :::
 ::::
 
 ```{code-cell}
+using IterativeSolvers
 reltol = 1e-12;
-plt = plot(title="Convergence of restarted GMRES", leg=:bottomleft,
-    xaxis=(L"m"), yaxis=(:log10, "residual norm", [1e-8, 100]))
+plt = plot(title="Convergence of restarted GMRES", legend=:bottomleft,
+    xaxis=(L"m"),  yaxis=(:log10, "residual norm", [1e-8, 100]))
 
 for restart in [n, 20, 40, 60]
     x, hist = IterativeSolvers.gmres(A, b; restart, reltol,
@@ -654,6 +636,7 @@ plt
 The "pure" GMRES curve is the lowest one. All of the other curves agree with it until the first restart. Decreasing the restart value makes the convergence per iteration generally worse, but the time required per iteration smaller as well.
 
 ``````
+
 ### 8.6 @section-krylov-minrescg
 
 (demo-minrescg-indefinite-julia)=
@@ -685,13 +668,14 @@ Now we apply MINRES to a linear system with this matrix, and compare the observe
 ```
 
 ```{code-cell}
+using IterativeSolvers, Plots
 b = rand(100)
 x, hist = minres(A, b, reltol=1e-10, maxiter=51, log=true);
-
 relres = hist[:resnorm] / norm(b)
 m = 0:length(relres)-1
-plot(m, relres, label="observed", leg=:left,
-    xaxis=L"m", yaxis=(:log10, "relative residual"),
+plot(m, relres;
+    label="observed", legend=:left,
+    xaxis=L"m",  yaxis=(:log10, "relative residual"),
     title=("Convergence of MINRES"))
 plot!(m, ρ .^ (m / 2), l=:dash, label="upper bound")
 ```
@@ -718,7 +702,7 @@ Now we apply both methods and compare the convergence of the system residuals, u
 
 ```{code-cell}
 plt = plot(title="Convergence of MINRES and CG",
-    xaxis=("Krylov dimension"), yaxis=(:log10, "relative residual norm"))
+    xaxis=("Krylov dimension"),  yaxis=(:log10, "relative residual norm"))
 for method in [minres, cg]
     x̃, history = method(A, b, reltol=1e-6, maxiter=1000, log=true)
     relres = history[:resnorm] / norm(b)
@@ -737,7 +721,7 @@ b = A * x;
 ```
 
 ```{code-cell}
-:tags: [hide-input]
+:tags: hide-input
 
 plt = plot(title="Convergence of MINRES and CG",
     xaxis=("Krylov dimension"), yaxis=(:log10, "relative residual norm"))
@@ -762,6 +746,7 @@ Both methods have an early superlinear phase that allow them to finish slightly 
 We use a readily available test image.
 
 ```{code-cell}
+using Images, TestImages
 img = testimage("mandrill")
 m, n = size(img)
 X = @. Float64(Gray(img))
@@ -771,6 +756,7 @@ plot(Gray.(X), title="Original image", aspect_ratio=1)
 We define the one-dimensional tridiagonal blurring matrices.
 
 ```{code-cell}
+using SparseArrays
 function blurmatrix(d)
     v1 = fill(0.25, d - 1)
     return spdiagm(0 => fill(0.5, d), 1 => v1, -1 => v1)
@@ -781,6 +767,7 @@ B, C = blurmatrix(m), blurmatrix(n);
 Finally, we show the results of using $k=12$ repetitions of the blur in each direction.
 
 ```{code-cell}
+using Plots
 blur = X -> B^12 * X * C^12;
 Z = blur(X)
 plot(Gray.(Z), title="Blurred image")
@@ -792,7 +779,7 @@ plot(Gray.(Z), title="Blurred image")
 We repeat the earlier process to blur an original image $\mathbf{X}$ to get $\mathbf{Z}$.
 
 ```{code-cell}
-:tags: [hide-input]
+:tags: hide-input
 
 img = testimage("lighthouse")
 m, n = size(img)
@@ -820,27 +807,19 @@ unvec = z -> reshape(z, m, n);  # convert vector to matrix
 Now we declare the three-step blur transformation as a `LinearMap`, supplying also the size of the vector form of an image.
 
 ```{code-cell}
+using LinearMaps
 T = LinearMap(x -> vec(blur(unvec(x))), m * n);
 ```
 
 ::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
 The blurring operators are symmetric, so we apply `minres` to the composite blurring transformation `T`.
-
-
-:::
 :::{card}
-
-
 The function `clamp01` in `Images` restricts values to be in the interval $[0,1]$.
-
 :::
 ::::
 
 ```{code-cell}
+using IterativeSolvers
 y = minres(T, vec(Z), maxiter=50, reltol=1e-5);
 Y = unvec(clamp01.(y))
 
@@ -856,6 +835,7 @@ plot!(Gray.(Y), subplot=2, title="Deblurred")
 Here is an SPD matrix that arises from solving partial differential equations.
 
 ```{code-cell}
+using MatrixDepot
 A = matrixdepot("wathen", 60)
 n = size(A, 1)
 @show n, nnz(A);
@@ -867,6 +847,7 @@ n = size(A, 1)
 There is an easy way to use the diagonal elements of $\mathbf{A}$, or any other vector, as a diagonal preconditioner.
 
 ```{code-cell}
+using Preconditioners
 b = ones(n)
 M = DiagonalPreconditioner(diag(A));
 ```
@@ -874,8 +855,8 @@ M = DiagonalPreconditioner(diag(A));
 We now compare CG with and without the preconditioner.
 
 ```{code-cell}
-:tags: [hide-input]
-
+:tags: hide-input
+using IterativeSolvers, Plots
 plain(b) = cg(A, b, maxiter=200, reltol=1e-4, log=true)
 time_plain = @elapsed x, hist1 = plain(b)
 prec(b) = cg(A, b, Pl=M, maxiter=200, reltol=1e-4, log=true)
@@ -898,6 +879,7 @@ The diagonal preconditioner cut down substantially on the number of iterations. 
 Here is a nonsymmetric matrix arising from a probabilistic model in computational chemistry.
 
 ```{code-cell}
+using SparseArrays
 A = sparse(matrixdepot("Watson/chem_master1"))
 n = size(A, 1)
 @show n, nnz(A), issymmetric(A)
@@ -919,6 +901,7 @@ resnorm = history[:resnorm]
 The following version of incomplete LU factorization drops all sufficiently small values (i.e., replaces them with zeros). This keeps the number of nonzeros in the factors under control.
 
 ```{code-cell}
+using IncompleteLU
 iLU = ilu(A, τ=0.25)
 @show nnz(iLU) / nnz(A);
 ```
@@ -933,11 +916,13 @@ history
 The $\tau$ parameter in `ilu` balances the accuracy of the iLU factorization with the time needed to compute it and invert it. As $\tau\to 0$, more of the elements are kept, making the preconditioner more effective but slower per iteration.
 
 ```{code-cell}
-:tags: [hide-input]
+:tags: hide-input
 
-plt = plot(0:40, resnorm[1:41] / resnorm[1], label="no preconditioning",
-    xaxis=("iteration number"), yaxis=(:log10, "residual norm"),
-    leg=:bottomright, title="Incomplete LU preconditioning")
+plt = plot(0:40, resnorm[1:41] / resnorm[1];
+    label="no preconditioning",  legend=:bottomright,
+    xaxis=("iteration number"),
+    yaxis=(:log10, "residual norm"),
+    title="Incomplete LU preconditioning")
 for τ in [2, 1, 0.25, 0.1]
     t = @elapsed iLU = ilu(A; τ)
     t += @elapsed _, history = GMRES(A, b, Pl=iLU, maxiter=100,

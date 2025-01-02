@@ -84,7 +84,7 @@ The function returned by {numref}`Function {number} <function-elliptic>` perform
 
 [^grideval]: The interpolation algorithm in {numref}`Function {number} <function-elliptic>` is inefficient when $u$ is to be evaluated on a finer grid, as for plotting. A more careful version could re-use the same values $v_j = p_j(\xi)$ for multiple values of $\eta$.
 
-(demo-nonlinear-mems)=
+(demo-nonlinear2d-mems)=
 ::::{prf:example} MEMS model in 2D
 
 We solve the PDE
@@ -98,19 +98,19 @@ on the rectangle $[0,2.5] \times [0,1]$, with a zero Dirichlet condition on the 
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
-:::{embed} #demo-nonlinear-mems-julia
+:::{embed} #demo-nonlinear2d-mems-julia
 :::
 ````
 
 ````{tab-item} MATLAB
 :sync: matlab
-:::{embed} #demo-nonlinear-mems-matlab
+:::{embed} #demo-nonlinear2d-mems-matlab
 :::
 ````
 
 ````{tab-item} Python
 :sync: python
-:::{embed} #demo-nonlinear-mems-python
+:::{embed} #demo-nonlinear2d-mems-python
 :::
 ````
 `````
@@ -155,7 +155,7 @@ Here we solve it with a homogeneous Dirichlet condition on the square $[-1,1]^2$
 ```{index} Allen–Cahn equation
 ```
 
-(demo-nonlinear-allencahn)=
+(demo-nonlinear2d-allencahn)=
 ::::{prf:example} Steady Allen–Cahn in 2D
 
 The stationary Allen–Cahn equation in two dimensions is
@@ -167,19 +167,19 @@ $$
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
-:::{embed} #demo-nonlinear-allencahn-julia
+:::{embed} #demo-nonlinear2d-allencahn-julia
 :::
 ````
 
 ````{tab-item} MATLAB
 :sync: matlab
-:::{embed} #demo-nonlinear-allencahn-matlab
+:::{embed} #demo-nonlinear2d-allencahn-matlab
 :::
 ````
 
 ````{tab-item} Python
 :sync: python
-:::{embed} #demo-nonlinear-allencahn-python
+:::{embed} #demo-nonlinear2d-allencahn-python
 :::
 ````
 `````
@@ -199,7 +199,7 @@ $$
 
     ```{index} soap film
     ```
-    
+
 2. ⌨ A soap film stretched on a wire frame above the $(x,y)$ plane assumes a shape $u(x,y)$ of minimum area and is governed by
 
     \begin{align*}

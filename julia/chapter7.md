@@ -11,10 +11,7 @@ numbering:
 ## Examples
 
 ```{code-cell}
-:tags: [remove-output]
-import Pkg; Pkg.activate("/Users/driscoll/Documents/GitHub/fnc")
-using FundamentalsNumericalComputation
-FNC.init_format()
+include("FNC_init.jl")
 ```
 
 ### 7.1 @section-matrixanaly-insight
@@ -33,6 +30,7 @@ A = [0 1 0 0; 1 0 0 0; 1 1 0 1; 0 1 1 0]
 The `graphplot` function makes a visual representation of this graph.
 
 ```{code-cell}
+using Plots, GraphRecipes
 graphplot(A, names=1:4, markersize=0.2, arrow=6)
 ```
 
@@ -58,6 +56,7 @@ graphplot(A, names=1:4, markersize=0.2)
 The `Images` package has many functions for image manipulation, and `TestImages` has some standard images to play with.
 
 ```{code-cell}
+using Images, TestImages
 img = testimage("mandrill")
 ```
 
@@ -197,19 +196,9 @@ We confirm that the matrix $\mathbf{A}$ is normal by checking that $\kappa(\math
 ```
 
 ::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
 Now we perturb $\mathbf{A}$ and measure the effect on the eigenvalues. The Bauer–Fike theorem uses absolute differences, not relative ones.
-
-
-:::
 :::{card}
-
-
 Since the ordering of eigenvalues can change, we look at all pairwise differences and take the minima.
-
 :::
 ::::
 
@@ -250,6 +239,7 @@ BF_bound = cond(V) * norm(ΔA)
 If we plot the eigenvalues of many perturbations, we get a cloud of points that roughly represents all the possible eigenvalues when representing this matrix with single-precision accuracy.
 
 ```{code-cell}
+using Plots
 plt = scatter(λ, zeros(n), aspect_ratio=1)
 for _ in 1:200
     ΔA = eps(Float32) * normalize(randn(n, n) + 1im * randn(n, n))
@@ -389,7 +379,7 @@ for (k, delta) in enumerate(δ)
     eval_diff[k] = R(x) - 7
 end
 labels = ["perturbation δ", "δ²", "R(x) - λ"]
-pretty_table([δ δ .^ 2 eval_diff], header=labels)
+@pt :header=labels [δ δ .^ 2 eval_diff]
 ```
 ``````
 
@@ -400,6 +390,7 @@ pretty_table([δ δ .^ 2 eval_diff], header=labels)
 We make an image from some text, then reload it as a matrix.
 
 ```{code-cell}
+using Plots, Images
 plot(annotations=(0.5, 0.5, text("Hello world", 44, :center, :center)),
     grid=:none, frame=:none, size=(400, 150))
 savefig("hello.png")
@@ -412,7 +403,8 @@ Next we show that the singular values decrease until they reach zero (more preci
 
 ```{code-cell}
 U, σ, V = svd(A)
-scatter(σ, xaxis=(L"i"), yaxis=(:log10, L"\sigma_i"),
+scatter(σ;
+    xaxis=(L"i"),  yaxis=(:log10, L"\sigma_i"),
     title="Singular values")
 ```
 
@@ -441,14 +433,16 @@ compression = m * n / (9 * (m + n + 1))
 This matrix describes the votes on bills in the 111th session of the United States Senate. (The data set was obtained from [https://voteview.com].) Each row is one senator, and each column is a vote item.
 
 ```{code-cell}
+using JLD2
 @load "voting.jld2" A;
 ```
 
 If we visualize the votes (yellow is "yea," blue is "nay"), we can see great similarity between many rows, reflecting party unity.
 
 ```{code-cell}
-heatmap(A, color=:viridis,
-    title="Votes in 111th U.S. Senate", xlabel="bill", ylabel="senator")
+heatmap(A;
+    color=:viridis,  xlabel="bill",  ylabel="senator",
+    title="Votes in 111th U.S. Senate")
 ```
 
 We use {eq}`sing-val-decay` to quantify the decay rate of the values.
@@ -456,7 +450,8 @@ We use {eq}`sing-val-decay` to quantify the decay rate of the values.
 ```{code-cell}
 U, σ, V = svd(A)
 τ = cumsum(σ .^ 2) / sum(σ .^ 2)
-scatter(τ[1:16], xaxis=("k"), yaxis=(L"\tau_k"),
+scatter(τ[1:16];
+    xaxis=("k"),  yaxis=(L"\tau_k"),
     title="Fraction of singular value energy")
 ```
 
@@ -464,9 +459,9 @@ The first and second singular triples contain about 58% and 17%, respectively, o
 
 ```{code-cell}
 scatter(U[:, 1], label="", layout=(1, 2),
-    xlabel="senator", title="left singular vector")
+    xlabel="senator",  title="left singular vector")
 scatter!(V[:, 1], label="", subplot=2,
-    xlabel="bill", title="right singular vector")
+    xlabel="bill",  title="right singular vector")
 ```
 
 Both vectors have values greatly clustered near $\pm C$ for a constant $C$. These can be roughly interpreted as how partisan a particular senator or bill was, and for which political party. Projecting the senators' vectors into the first two $\mathbf{V}$-coordinates gives a particularly nice way to reduce them to two dimensions. Political scientists label these dimensions *partisanship* and *bipartisanship*. Here we color them by actual party affiliation (also given in the data file): red for Republican, blue for Democrat, and yellow for independent.
@@ -479,8 +474,10 @@ x2 = A * V[:, 2];
 Rep = vec(Rep);
 Dem = vec(Dem);
 Ind = vec(Ind);
-scatter(x1[Dem], x2[Dem], color=:blue, label="D",
-    xaxis=("partisanship"), yaxis=("bipartisanship"), title="111th US Senate by voting record")
+scatter(x1[Dem], x2[Dem];
+    color=:blue,  label="D",
+    xaxis=("partisanship"),  yaxis=("bipartisanship"), 
+    title="111th US Senate by voting record")
 scatter!(x1[Rep], x2[Rep], color=:red, label="R")
 scatter!(x1[Ind], x2[Ind], color=:yellow, label="I")
 ```

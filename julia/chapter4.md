@@ -88,19 +88,19 @@ Note that a default value is given for the third argument `y₀`, and it refers 
 ## Examples
 
 ```{code-cell}
-:tags: [remove-cell]
-import Pkg; Pkg.activate("/Users/driscoll/Documents/GitHub/fnc")
-using FundamentalsNumericalComputation
-FNC.init_format()
+:tags: remove-cell
+include("FNC_init.jl")
 ```
 ### 4.1 @section-nonlineqn-rootproblem
 (demo-rootproblem-bessel-julia)=
 ``````{dropdown} @demo-rootproblem-bessel
 
 ```{code-cell}
+using Plots, SpecialFunctions
 J₃(x) = besselj(3, x)
-plot(J₃, 0, 20, title="Bessel function",
-    xaxis=(L"x"), yaxis=(L"J_3(x)"), grid=:xy)
+plot(J₃, 0, 20;
+    title="Bessel function",
+    xaxis=(L"x"),  yaxis=(L"J_3(x)"),  grid=:xy)
 ```
 ::::{grid} 1 1 2 2
 From the graph we see roots near 6, 10, 13, 16, and 19. We use `nlsolve` from the `NLsolve` package to find these roots accurately. It uses vector variables, so we have to code accordingly.
@@ -112,6 +112,7 @@ The argument `ftol=1e-14` below is called a **keyword argument**. Here it sets a
 ::::
 
 ```{code-cell}
+using NLsolve
 ω = []
 for guess = [6., 10. ,13., 16., 19.]
     s = nlsolve(x -> J₃(x[1]), [guess], ftol=1e-14)
@@ -120,11 +121,12 @@ end
 ```
 
 ```{code-cell}
-pretty_table([ω J₃.(ω)], header=["root estimate","function value"])
+y = J₃.(ω)
+@pt :header=["root estimate", "function value"] [ω y]
 ```
 
 ```{code-cell}
-scatter!(ω, J₃.(ω), title="Bessel function with roots")
+scatter!(ω, y, title="Bessel function with roots")
 ```
 
 If instead we seek values at which $J_3(x)=0.2$, then we must find roots of the function $J_3(x)-0.2$.
@@ -197,6 +199,7 @@ The vertical displacements in this picture are exactly the same as before. But t
 Let's convert the roots of a quadratic polynomial $f(x)$ to a fixed point problem.
 
 ```{code-cell}
+using Polynomials
 p = Polynomial([3.5, -4,1])
 r = roots(p)
 rmin, rmax = extrema(r)
@@ -212,9 +215,12 @@ g(x) = x - p(x)
 Intersections of $y=g(x)$ with the line $y=x$ are fixed points of $g$ and thus roots of $f$. (Only one is shown in the chosen plot range.)
 
 ```{code-cell}
-plt = plot([g x->x], 2, 3, l=2, label=[L"y=g(x)" L"y=x"],
-    xlabel=L"x", ylabel=L"y", aspect_ratio=1,
-    title="Finding a fixed point", legend=:bottomright)
+using Plots
+plt = plot([g x->x], 2, 3;
+    l=2, label=[L"y=g(x)" L"y=x"],
+    xlabel=L"x",  ylabel=L"y", 
+    aspect_ratio=1,
+    title="Finding a fixed point",  legend=:bottomright)
 ```
 
 If we evaluate $g(2.1)$, we get a value of almost 2.6, so this is not a fixed point.
@@ -305,8 +311,9 @@ It's illuminating to construct and plot the sequence of errors.
 
 ```{code-cell}
 err = @. abs(x - rmax)
-plot(0:12, err, m=:o,
-    xaxis=("iteration number"), yaxis=("error", :log10),
+plot(0:12, err;
+    m=:o,
+    xaxis=("iteration number"),  yaxis=("error", :log10),
     title="Convergence of fixed point iteration")
 ```
 
@@ -331,7 +338,9 @@ The error should therefore decrease by a factor of $\sigma$ at each iteration. W
 
 The methods for finding $\sigma$ agree well.
 ``````
+
 ### 4.3 @section-nonlineqn-newton
+
 (demo-newton-line-julia)=
 ``````{dropdown} @demo-newton-line
 
@@ -339,9 +348,10 @@ Suppose we want to find a root of the function
 
 ```{code-cell}
 f(x) = x * exp(x) - 2
-
-plot(f, 0, 1.5, label="function",
-    grid=:y, ylim=[-2, 4], xlabel=L"x", ylabel=L"y", legend=:topleft)
+using Plots
+plot(f, 0, 1.5; 
+    label="function",  legend=:topleft,
+    grid=:y,  ylim=[-2, 4],  xlabel=L"x",  ylabel=L"y")
 ```
 
 From the graph, it is clear that there is a root near $x=1$. So we call that our initial guess, $x_1$.
@@ -377,14 +387,16 @@ y₂ = f(x₂)
 The residual (i.e., value of $f$) is smaller than before, but not zero. So we repeat the process with a new tangent line based on the latest point on the curve.
 
 ```{code-cell}
-plot(f, 0.82, 0.87, label="function", legend=:topleft,
-    xlabel=L"x", ylabel=L"y", title="Second iteration")
+plot(f, 0.82, 0.87;
+    label="function",  legend=:topleft,
+    xlabel=L"x",  ylabel=L"y",
+    title="Second iteration")
 
 scatter!([x₂], [y₂], label="starting point")
 
 m₂ = df_dx(x₂)
 tangent = x -> y₂ + m₂ * (x - x₂)
-plot!(tangent, 0.82, 0.87, l=:dash, label="tangent line")
+plot!(tangent, 0.82, 0.87; l=:dash, label="tangent line")
 
 @show x₃ = x₂ - y₂ / m₂
 scatter!([x₃], [0], label="tangent root")
@@ -409,6 +421,7 @@ df_dx(x) = exp(x) * (x + 1);
 We don't know the exact root, so we use `nlsolve` to determine a proxy for it.
 
 ```{code-cell}
+using NLsolve
 r = nlsolve(x -> f(x[1]), [1.0]).zero
 ```
 
@@ -450,8 +463,9 @@ r = x[end]
 The exponents in the scientific notation definitely suggest a squaring sequence. We can check the evolution of the ratio in {eq}`quadratictest`.
 
 ```{code-cell}
-logerr = @. log(abs(ϵ))
-[logerr[i+1] / logerr[i] for i in 1:length(logerr)-1]
+logerr = @. log10(abs(ϵ))
+ratios = [NaN; [logerr[i+1] / logerr[i] for i in 1:length(logerr)-1]]
+@pt :header=["iteration", "error", "log error", "ratio"] [1:7 ϵ logerr ratios]
 ```
 
 The clear convergence to 2 above constitutes good evidence of quadratic convergence.
@@ -486,6 +500,7 @@ plot!(y, x, label=L"g^{-1}(y)", title="Function and its inverse")
 plot!(x -> x, 0, maximum(y), label="", l=(:dash, 1), color=:black)
 ```
 ``````
+
 ### 4.4 @section-nonlineqn-secant
 (demo-secant-line-julia)=
 ``````{dropdown} @demo-secant-line
@@ -494,10 +509,11 @@ plot!(x -> x, 0, maximum(y), label="", l=(:dash, 1), color=:black)
 We return to finding a root of the equation $x e^x=2$.
 
 ```{code-cell}
+using Plots
 f(x) = x * exp(x) - 2;
-
-plot(f, 0.25, 1.25, label="function",
-    xlabel=L"x", ylabel=L"y", legend=:topleft)
+plot(f, 0.25, 1.25;
+    label="function",  legend=:topleft,
+    xlabel=L"x",  ylabel=L"y")
 ```
 
 From the graph, it's clear that there is a root near $x=1$. To be more precise, there is a root in the interval $[0.5,1]$. So let us take the endpoints of that interval as _two_ initial approximations.
@@ -507,7 +523,8 @@ x₁ = 1;
 y₁ = f(x₁);
 x₂ = 0.5;
 y₂ = f(x₂);
-scatter!([x₁, x₂], [y₁, y₂], label="initial points",
+scatter!([x₁, x₂], [y₁, y₂];
+    label="initial points",
     title="Two initial values")
 ```
 
@@ -554,13 +571,15 @@ r = x[end]
 Here is the sequence of errors.
 
 ```{code-cell}
-ϵ = @. Float64(r - x[1:end-1])
+ϵ = @. Float64(r - x[1:end-2])
 ```
 
 It's not easy to see the convergence rate by staring at these numbers. We can use {eq}`superlinear-rate` to try to expose the superlinear convergence rate.
 
 ```{code-cell}
-[log(abs(ϵ[k+1])) / log(abs(ϵ[k])) for k in 1:length(ϵ)-1]
+logerr = @. log10(abs(ϵ))
+ratios = [NaN; [logerr[i+1] / logerr[i] for i in 1:length(logerr)-1]]
+@pt :header=["iteration", "error", "log error", "ratio"] [eachindex(ϵ) ϵ logerr ratios]
 ```
 
 As expected, this settles in at around 1.618.
@@ -589,6 +608,7 @@ scatter!(x, y, label="initial points")
 If we were using forward interpolation, we would ask for the polynomial interpolant of $y$ as a function of $x$. But that parabola has no real roots.
 
 ```{code-cell}
+using Polynomials
 q = Polynomials.fit(x, y, 2)      # interpolating polynomial
 plot!(x -> q(x), interval..., l=:dash, label="interpolant")
 ```
@@ -635,29 +655,23 @@ As far as our current precision is concerned, we have an exact root.
 
 ```{code-cell}
 r = x[end]
-logerr = @. log(Float64(abs(r - x[1:end-1])))
-[logerr[k+1] / logerr[k] for k in 1:length(logerr)-1]
+ϵ = @. Float64(abs(r - x[1:end-1]))
+logerr = @. log10(abs(ϵ))
+ratios = [NaN; [logerr[i+1] / logerr[i] for i in 1:length(logerr)-1]]
+@pt :header=["iteration", "error", "log error", "ratio"] [eachindex(ϵ) ϵ logerr ratios]
 ```
 
-The convergence is probably superlinear at a rate of $\alpha=1.8$ or greater.
+The convergence is probably superlinear at a rate of $\alpha=1.8$ or so.
 ``````
+
 ### 4.5 @section-nonlineqn-newtonsys
+
 (demo-newtonsys-converge-julia)=
 ``````{dropdown} @demo-newtonsys-converge
 ::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
 A system of nonlinear equations is defined by its residual and Jacobian.
-
-
-:::
 :::{card}
-
-
 Be careful when coding a Jacobian all in one statement. Spaces separate columns, so `x[3]-1` is not the same as `x[3] - 1`.
-
 :::
 ::::
 
@@ -697,12 +711,15 @@ We take the sequence of norms of errors, applying the log so that we can look at
 
 ```{code-cell}
 logerr = [Float64(log(norm(r - x[k]))) for k in 1:length(x)-1]
-[logerr[k+1] / logerr[k] for k in 1:length(logerr)-1]
+ratios = [NaN; [logerr[i+1] / logerr[i] for i in 1:length(logerr)-1]]
+@pt :header=["iteration", "log error", "ratio"] [eachindex(logerr) logerr ratios]
 ```
 
 The ratio is neatly converging toward 2, which is expected for quadratic convergence.
 ``````
+
 ### 4.6 @section-nonlineqn-quasinewton
+
 (demo-quasi-levenberg-julia)=
 ``````{dropdown} @demo-quasi-levenberg
 To solve a nonlinear system, we need to code only the function defining the system, and not its Jacobian.
@@ -733,11 +750,14 @@ println("backward error = $(norm(f(r)))")
 Looking at the convergence in norm, we find a convergence rate between linear and quadratic, like with the secant method.
 
 ```{code-cell}
-logerr = [log(norm(x[k] - r)) for k in 1:length(x)-1]
-[logerr[k+1] / logerr[k] for k in 1:length(logerr)-1]
+logerr = [log(norm(r - x[k])) for k in 1:length(x)-1]
+ratios = [NaN; [logerr[i+1] / logerr[i] for i in 1:length(logerr)-1]]
+@pt :header=["iteration", "log error", "ratio"] [eachindex(logerr) logerr ratios]
 ```
 ``````
+
 ### 4.7 @section-nonlineqn-nlsq
+
 (demo-nlsq-converge-julia)=
 ``````{dropdown} @demo-nlsq-converge
 We will observe the convergence of {numref}`Function {number} <function-levenberg>` for different levels of the minimum least-squares residual. We start with a function mapping from $\real^2$ into $\real^3$, and a point that will be near the optimum.
@@ -758,6 +778,7 @@ The function $\mathbf{g}(\mathbf{x}) - \mathbf{g}(\mathbf{p})$ obviously has a z
 ::::
 
 ```{code-cell}
+using Printf
 plt = plot(xlabel="iteration", yaxis=(:log10, "error"),
     title="Convergence of Gauss–Newton")
 for R in [1e-3, 1e-2, 1e-1]
