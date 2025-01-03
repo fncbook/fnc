@@ -15,7 +15,7 @@ Closely related to the advection equation is the **wave equation**,
     u_{tt} - c^2 u_{xx} = 0.
 :::
 
-This is our first PDE having a second derivative in time. As in the advection equation, $u(x,t)=\phi(x-ct)$ is a solution of {eq}`wavepde`, but now so is $u(x,t)=\phi(x+c t)$ for any twice-differentiable $\phi$ (see [Exercise 2](problem-wave-twodir)). Thus, the wave equation supports advection in both directions simultaneously. 
+This is our first PDE having a second derivative in time. As in the advection equation, $u(x,t)=\phi(x-ct)$ is a solution of {eq}`wavepde`, but now so is $u(x,t)=\phi(x+c t)$ for any twice-differentiable $\phi$ (see [Exercise 2](#problem-wave-twodir)). Thus, the wave equation supports advection in both directions simultaneously. 
 
 We will use $x \in [0,1]$ and $t>0$ as the domain. Because $u$ has two derivatives in $t$ and in $x$, we need two boundary conditions. We will use the Dirichlet conditions  
 
@@ -28,8 +28,10 @@ and two initial conditions,
 
 :::{math}
 :label: waveIC
+\begin{split}
 u(x,0) &= f(x), \qquad 0 \le x \le 1,  \\
 u_t(x,0) &= g(x), \qquad 0 \le x \le 1. 
+\end{split}
 :::
 
 One approach is to discretize both the $u_{tt}$ and $u_{xx}$ terms using finite differences:
@@ -57,8 +59,10 @@ However, there is another, less obvious option for reducing to a first-order sys
 
 :::{math}
 :label: wavefirst2
+\begin{split}
     u_t &= z_x, \\
     z_t &= c^2 u_{x}.
+\end{split}
 :::
 
 ```{index} Maxwell's equations
@@ -68,8 +72,10 @@ This second form is appealing in part because it's equivalent to Maxwell's equat
 
 :::{math}
 :label: waveIC2
+\begin{split}
 u(x,0) &= f(x), \qquad 0 \le x \le 1,  \\
 z(x,0) &= g(x), \qquad 0 \le x \le 1.
+\end{split}
 :::
 
 Because waves travel in both directions, there is no preferred upwind direction. This makes a centered finite difference in space appropriate. Before application of the boundary conditions, semidiscretization of {eq}`wavefirst2` leads to
@@ -154,7 +160,7 @@ We now use a wave speed that is discontinuous at $x=0$; to the left, $c=1$, and 
     
     **(b)** Show that $z_{tt} = c^2 z_{xx}$.
 
-    (problem-wave-twodir)=
+(problem-wave-twodir)=
 2. ✍ Suppose that $\phi(s)$ is any twice-differentiable function.
     
     **(a)** Show that $u(x,t) = \phi(x-c t)$ is a solution of $u_{tt}=c^2u_{xx}$. (As in the advection equation, this is a traveling wave of velocity $c$.)
@@ -191,9 +197,9 @@ We now use a wave speed that is discontinuous at $x=0$; to the left, $c=1$, and 
  
     **(a)** ✍ Show that the beam PDE is equivalent to the first-order system
 
-    $$
+    \begin{align*}
     u_t &= v_{xx}, \\
     v_t &= -u_{xx}.
-    $$
+    \end{align*}
     
     **(b)** ⌨ Assuming periodic end conditions on $[-1,1]$, use $m=100$, let $u(x,0) =\exp(-24x^2)$, $v(x,0) = 0$, and simulate the solution of the beam equation for $0\le t \le 1$ using {numref}`Function {number} <function-am2>` with $n=100$ time steps. Make a plot or animation of the solution.

@@ -395,7 +395,7 @@ Interpolation has no easy connection to inner products or the 2-norm. With inter
     **(b)** Using {numref}`Theorem {number} <theorem-orthogonal-normal>`, explain why the best fitting quadratic polynomial will be the linear function you found in part (a). (Note: You do not need to carry out the complete calculation.)
 
 3. 
-    **(a)** ✍ ⌨ Use {eq}`legendre` to write out $P_2(x)$ and $P_3(x)$. Plot $P_0,P_1,P_2,P_3$ on one graph for $-1\le x \le 1$. (You may find it interesting to compare to the graph in [Exercise 3.3.3](problem-qr-legendre).)
+    **(a)** ✍ ⌨ Use {eq}`legendre` to write out $P_2(x)$ and $P_3(x)$. Plot $P_0,P_1,P_2,P_3$ on one graph for $-1\le x \le 1$. (You may find it interesting to compare to the graph in [Exercise 3.3.3](#problem-qr-legendre).)
     
     **(b)** ✍ ⌨  Use {eq}`chebyshev` to write out $T_2(x)$ and $T_3(x)$. Plot $T_0,T_1,T_2,T_3$ on one graph for $-1\le x \le 1$.
 

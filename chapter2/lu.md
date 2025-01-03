@@ -296,7 +296,7 @@ As noted in the descriptions of {numref}`Function {number} <function-lufact>` an
 
     **(c)** Use the factors with triangular substitutions in order to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$, and find $\mathbf{x}-\mathbf{z}$.
   
-    (problem-bigcorner)=
+(problem-bigcorner)=
 3. ⌨ Define
   
     ```{math}

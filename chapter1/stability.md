@@ -213,7 +213,7 @@ One stable algorithm that is not backward stable is floating-point evaluation fo
 
     Apply {eq}`acosh2` to approximate $f(x_i)$ for all $i$, again computing the relative accuracy of the results.
 
-4. ⌨ (Continuation of [Exercise 1.3.2](problem-algorithms-samplevar). Adapted from {cite}`highamAccuracyStability2002`.) One drawback of the formula {eq}`samplevar` for sample variance is that you must compute a sum for $\overline{x}$ before beginning another sum to find $s^2$. Some statistics textbooks quote a single-loop formula
+4. ⌨ (Continuation of [Exercise 1.3.2](#problem-algorithms-samplevar). Adapted from {cite}`highamAccuracyStability2002`.) One drawback of the formula {eq}`samplevar` for sample variance is that you must compute a sum for $\overline{x}$ before beginning another sum to find $s^2$. Some statistics textbooks quote a single-loop formula
   
     ```{math}
     \begin{split}

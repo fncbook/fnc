@@ -311,6 +311,6 @@ The speed and stability of the Cholesky factorization make it the top choice for
 
     **(c)** Now perform the experiment of part (b) for $n=1000,1200,1400,\ldots,3000$, keeping the total time for each value of $n$ in a vector. Plot running time as a function of $n$ on a log-log scale. Is the time most like $O(n)$, $O(n^2)$, or $O(n^3)$? (If the answer is unclear, try increasing the number of solves per value of $n$ to 100 or more.)
 
-    (problem-ATAisspd)=
+(problem-ATAisspd)=
 6. ✍ Prove that if $\mathbf{A}$ is any real invertible square matrix, then $\mathbf{A}^T\mathbf{A}$ is SPD. (Hint: First show that $\mathbf{x}^T\mathbf{A}^T\mathbf{A}\mathbf{x} \ge 0$ for all $\mathbf{x}$. Then explain why zero is ruled out if $\mathbf{x}\neq \boldsymbol{0}$.)
 

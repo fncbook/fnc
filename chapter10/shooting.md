@@ -167,17 +167,17 @@ The instability of shooting can be circumvented by breaking the interval into sm
 
 ## Exercises
 
-1. ⌨ For each BVP in [Exercise 10.1.2](problem-tpbvp-verify) , use {numref}`Function {number} <function-shoot>` to compute the solution. Plot the solution and, separately, its error as functions of $x$. 
+1. ⌨ For each BVP in [Exercise 10.1.2](#problem-tpbvp-verify) , use {numref}`Function {number} <function-shoot>` to compute the solution. Plot the solution and, separately, its error as functions of $x$. 
 
     ```{index} pendulum
     ```
-    (problem-shooting-pendulum)=
-2. ⌨ (Continuation of [Exercise 10.1.4](problem-tpbvp-allencahn).) Consider the pendulum from {numref}`Example {number} <example-tpbvp-pendulum>` with $g=L=1$. Suppose we want to release the pendulum from rest such that $\theta(5)=\pi/2$. Find one solution that passes through $\theta=0$, and another solution that does not. Plot $\theta(t)$ for both cases together.
+(problem-shooting-pendulum)=
+2. ⌨ (Continuation of [Exercise 10.1.4](#problem-tpbvp-allencahn).) Consider the pendulum from {numref}`Example {number} <example-tpbvp-pendulum>` with $g=L=1$. Suppose we want to release the pendulum from rest such that $\theta(5)=\pi/2$. Find one solution that passes through $\theta=0$, and another solution that does not. Plot $\theta(t)$ for both cases together.
 
     ```{index} Allen–Cahn equation
     ```
-    (problem-shooting-allencahn)=
-3. ⌨  (Continuation of [Exercise 10.1.5](problem-tpbvp-allencahn).) The stationary Allen–Cahn equation is 
+(problem-shooting-allencahn)=
+3. ⌨  (Continuation of [Exercise 10.1.5](#problem-tpbvp-allencahn).) The stationary Allen–Cahn equation is 
  
     $$
       \epsilon u'' = u^3-u, \qquad 0 \le x \le 1, \qquad u(0)=-1, \quad u(1)=1.

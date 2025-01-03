@@ -343,7 +343,7 @@ The process demonstrated in {numref}`Demo {number} <demo-evd-francisqr>` is know
 
     **(b)** ✍ Find a matrix $\mathbf{A}$ such that $\| \mathbf{A} \|_2$ is strictly larger than $|\lambda|$ for all eigenvalues $\lambda$. (Proof-by-computer isn't allowed here. You don't need to compute $\| \mathbf{A} \|_2$ exactly, just a lower bound for it.)
 
-    (problem-defectivematrix)=
+(problem-defectivematrix)=
 2. ✍ Prove that the matrix $\mathbf{B}$ in {eq}`jordanblock` does not have two independent eigenvectors.
 
 3. ⌨ Use `eigvals` to find the eigenvalues of each matrix. Then for each eigenvalue $\lambda$, use `rank` to verify that $\lambda\mathbf{I}$ minus the given matrix is singular.
@@ -377,7 +377,7 @@ The process demonstrated in {numref}`Demo {number} <demo-evd-francisqr>` is know
         -1 & -2 & -1 & 4 \\
       \end{bmatrix} $
 
-    (problem-triangeval)=
+(problem-triangeval)=
 4.  **(a)** ✍ Show that the eigenvalues of a diagonal $n\times n$ matrix $\mathbf{D}$ are the diagonal entries of $\mathbf{D}$. (That is, produce the associated eigenvectors.)
 
     **(b)** ✍ The eigenvalues of a triangular matrix are its diagonal entries. Prove this in the $3\times 3$ case,
@@ -405,8 +405,8 @@ The process demonstrated in {numref}`Demo {number} <demo-evd-francisqr>` is know
 
     **(c)** Use the function analog of {eq}`matrixpolyevd` to evaluate $\cos(\mathbf{A})$.
 
-    (problem-evd-lumpstring)=
-6. ⌨ In [Exercise 2.3.5](problem-linear-systems-lumpstring), you showed that the
+(problem-evd-lumpstring)=
+6. ⌨ In [Exercise 2.3.5](#problem-linear-systems-lumpstring), you showed that the
 displacements of point masses placed along a string satisfy a linear system $\mathbf{A}\mathbf{q}=\mathbf{f}$ for an $(n-1)\times(n-1)$ matrix $\mathbf{A}$. The eigenvalues and eigenvectors of $\mathbf{A}$ correspond to resonant frequencies and modes of vibration of the string. For $n=40$ and the physical parameters given in part (b) of that exercise, find the eigenvalue decomposition of $\mathbf{A}$. Report the three eigenvalues with smallest absolute value, and plot all three associated eigenvectors on a single graph (as functions of the vector row index).
 
 7. ⌨ {numref}`Demo {number} <demo-evd-francisqr>` suggests that the result of the Francis QR iteration as $k\to\infty$ sorts the eigenvalues on the diagonal according to a particular ordering. Following the code there as a model, create a random matrix with eigenvalues equal to $-9.6,-8.6,\ldots,10.4$, perform the iteration 200 times, and check whether the sorting criterion holds in your experiment as well.

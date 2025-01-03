@@ -177,7 +177,7 @@ For very large matrices, it's unlikely that you will want to find all of its eig
 
     **(c)** Repeat part (b) for the QR factorization using `qr`.
 
-    (problem-structure-roswell)=
+(problem-structure-roswell)=
 3. ⌨ One use of adjacency matrices is to analyze the links between members of a collection. Obtain the adjacency matrix $\mathbf{A}$ from {numref}`Demo %s <demo-structure-sparse>` via the following:
     
     ```julia
@@ -208,8 +208,8 @@ For very large matrices, it's unlikely that you will want to find all of its eig
    
     Follow the directions in Exercise 3 to obtain an adjacency matrix $\mathbf{A}$. Then find the five eigenvalues of $\mathbf{L}$ having largest magnitude.
 
-    (problem-structure-actorsmat)=
-5. ⌨ See [Exercise 7.1.5](problem-insight-actors) for instructions on loading a matrix $\mathbf{A}$ that contains information about the appearances of 392,400 actors in 127,823 movies, as given by the Internet Movie Database. Specifically, $A_{ij}=1$ if actor $j$ appeared in movie $i$, and all other elements are zero.
+(problem-structure-actorsmat)=
+5. ⌨ See [Exercise 7.1.5](#problem-insight-actors) for instructions on loading a matrix $\mathbf{A}$ that contains information about the appearances of 392,400 actors in 127,823 movies, as given by the Internet Movie Database. Specifically, $A_{ij}=1$ if actor $j$ appeared in movie $i$, and all other elements are zero.
 
     **(a)** What is the maximum number of actors appearing in any one movie?
 
@@ -220,7 +220,7 @@ For very large matrices, it's unlikely that you will want to find all of its eig
     ```{index} ! Helmholtz equation
     ```
     
-    (problem-helmhotzmatrix)=
+(problem-helmhotzmatrix)=
 6. ⌨  A matrix that arises from the *Helmholtz equation* for wave propagation can be specified using 
 
     ```julia

@@ -49,7 +49,7 @@ We can explicitly state the cardinal function basis for equispaced trigonometric
     + \cdots + \cos n\pi x\right) = \frac{\sin(N\pi x/2)}{N\sin(\pi x/2)}.
 :::
 
-You can directly check the following facts. (See [Exercise 3](problem-triginterp-checktau).) 
+You can directly check the following facts. (See [Exercise 3](#problem-triginterp-checktau).) 
 
 (theorem-triginterp-cardinal)=
 ::::{prf:theorem}
@@ -219,7 +219,7 @@ The theoretical and computational aspects of Fourier analysis are vast and far-r
 
     **(b)** ⌨  Demonstrate part (a) with a graph for the case $N=11$, $s=2$, $r=-9$. Specifically, plot the two functions on one graph, and plot points to show that they intersect at all of the interpolation nodes.
 
-    (problem-triginterp-checktau)=
+(problem-triginterp-checktau)=
 3. ✍ Verify that the cardinal function given in Equation {eq}`trigcardinal` is (a) 2-periodic, (b) satisfies $\tau(t_k)=0$ for $k\neq 0$ at the nodes {eq}`trignodes`, and (c) satisfies $\lim_{x\to0}\tau(x)=1$.
 
 4. ✍ Prove the equality of the two expressions in {eq}`trigcardinal`. (Hint: Set $z=e^{i\pi x/2}$ and rewrite the sum using $z$ by applying Euler's identity.)

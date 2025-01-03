@@ -108,7 +108,7 @@ title('Black-Scholes solution')
 xlabel('stock price'),  ylabel('option value')
 vid = VideoWriter("figures/black-scholes-6.mp4","MPEG-4");
 vid.Quality = 85;
-open(vid);
+open(vid)
 for frame = 1:10:n+1
     cla, plot(x, V(:, frame))
     str = sprintf("t = %.2f", t(frame));
@@ -118,7 +118,7 @@ end
 close(vid)
 ```
 
-![](figures/black-scholes-6.mp4)
+![Black–Scholes solution](figures/black-scholes-6.mp4)
 
 The results are easy to interpret, recalling that the time variable really means *time until strike*. Say you are close to the option's strike time. If the current stock price is, say, $S=2$, then it's not likely that the stock will end up over the strike price $K=3$, and therefore the option has little value. On the other hand, if presently $S=3$, then there are good odds that the option will be exercised at the strike time, and you will need to pay a substantial portion of the stock price in order to take advantage. As the time to strike increases, there is an expectation that the stock price is more likely to rise somewhat, making the value of the option larger at each fixed $S$. 
 ``````
@@ -177,7 +177,7 @@ end
 close(vid)
 ```
 
-![](/figures/black-scholes-8.mp4)
+![Trouble in Black–Scholes solution](figures/black-scholes-8.mp4)
 
 This so-called solution is nonsense!
 ``````
@@ -247,7 +247,7 @@ end
 close(vid)
 ```
 
-![](figures/diffusionFE.mp4)
+![Instability in Euler solution](figures/diffusionFE.mp4)
 
 The growth in norm is exponential in time.
 
@@ -304,7 +304,7 @@ end
 close(vid) 
 ```
 
-![](figures/diffusionBE.mp4)
+![Stable Backward Euler solution](figures/diffusionBE.mp4)
 
 This solution looks physically plausible, as the large concentration in the center diffuses outward until the solution is essentially constant. Observe that the solution remains periodic in space for all time.
 ``````
@@ -629,7 +629,7 @@ for t = linspace(0, 15, 151)
 end
 close(vid)
 ```
-![Black–Scholes equation with boundaries"](figures/boundaries-bs.mp4)
+![Black–Scholes equation with boundaries](figures/boundaries-bs.mp4)
 
 Recall that $u$ is the value of the call option, and time runs backward from the strike time. The longer the horizon, the more value the option has due to anticipated growth in the stock price.
 ``````

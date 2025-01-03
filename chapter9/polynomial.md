@@ -229,7 +229,7 @@ If $x\in[t_0,t_n]$, then $|x-t_i|<nh$ for all $i$, and {eq}`interperror` implies
 
 This result is consistent with our observations in {numref}`section-localapprox-fd-converge`: piecewise linear interpolation with node spacing $h$ has accuracy $O(h^2)$, and the error of a finite-difference method for the first derivative based on $n+1$ nodes of spacing $h$ is $O(h^n)$, remembering the division by $h$ in a finite-difference formula.
 
-As presented in {eq}`lagrangeinterp`, the Lagrange formula is not a good choice for numerical computation, because it is unstable (see [Exercise 7](problem-lagrange-instability)). In the next section we derive an algebraically equivalent formula that is both numerically stable and faster to apply.
+As presented in {eq}`lagrangeinterp`, the Lagrange formula is not a good choice for numerical computation, because it is unstable (see [Exercise 7](#problem-lagrange-instability)). In the next section we derive an algebraically equivalent formula that is both numerically stable and faster to apply.
 
 ## Exercises
 
@@ -276,7 +276,7 @@ As presented in {eq}`lagrangeinterp`, the Lagrange formula is not a good choice 
 
     where $\Phi$ is the function defined in {eq}`lagrange-phi`. 
 
-    (problem-lagrange-instability)=
+(problem-lagrange-instability)=
 7. ✍ Consider the nodes $t_0=0$, $t_1=1$, $t_2=\beta$, where $\beta>1$.
 
     **(a)** Write out the Lagrange cardinal polynomials $\ell_0$, $\ell_1$, and $\ell_2$.      

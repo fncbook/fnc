@@ -1,6 +1,6 @@
 # Advection equations
 
-```{index} Obi-Wan Kenobi, Star Wars: A New Hope
+```{index} Obi-Wan Kenobi, A New Hope
 ```
 
 ```{epigraph}

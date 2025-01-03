@@ -241,7 +241,7 @@ Since $|d_k|\le \|\mathbf{d}\|_\infty$ for all $k$, this finishes {eq}`interp-co
 
     **(b)** One drawback of the result in part (a) is the noticeable corner at the left side, which corresponds to $s=0$ from above and $s=15$ from below. There is a periodic variation on cubic spline interpolation that you can invoke by adding the keyword `periodic=true` to the `Spline1D` call. Use this to re-plot the flying saucer.
 
-    (problem-quadratic-interpolant)=
+(problem-quadratic-interpolant)=
 4. ✍ Define
 
     ```{math}

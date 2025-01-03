@@ -128,7 +128,7 @@ The convergence is linear, at a rate found by reinterpreting {eq}`poweriterconv`
 with the eigenvalues ordered as in {eq}`shiftorder`. Thus, the convergence is best when the shift $s$ is close to the target eigenvalue $\lambda_1$, specifically when it is much closer to that eigenvalue than to any other.
 
 (demo-inviter-conv)=
-::::{prf:example} Convergence of inverse iteration Convergence of inverse iteration Convergence of inverse iteration Convergence of inverse iteration
+::::{prf:example} Convergence of inverse iteration 
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -160,7 +160,7 @@ There is a clear opportunity for positive feedback in {numref}`Algorithm {number
 Let's analyze the resulting convergence. If the eigenvalues are ordered by distance to $s$, then the convergence is linear with rate $|\lambda_1-s|/|\lambda_2-s|$. As $s\to\lambda_1$, the change in the denominator is negligible. So if the error $(\lambda_1-s)$ is $\epsilon$, then the error in the next estimate is reduced by a factor $O(\epsilon)$. That is, $\epsilon$ becomes $O(\epsilon^2)$, which is *quadratic* convergence.
 
 (demo-inviter-accel)=
-::::{prf:example} Dynamic shift strategy Dynamic shift strategy Dynamic shift strategy Dynamic shift strategy
+::::{prf:example} Dynamic shift strategy
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -226,8 +226,8 @@ In practice power and inverse iteration are not as effective as the algorithms u
     Prove that $\displaystyle \begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix}$ has an eigenvalue at zero with associated eigenvector $\mathbf{v}=[-1,1]^T$. Suppose this matrix is perturbed slightly to $\displaystyle \mathbf{A} = \begin{bmatrix} 1 & 1 \\ 0 & \epsilon \end{bmatrix}$, and that $\mathbf{x}_k=[1,1]$ in {eq}`shiftinvstep`. Show that once $\mathbf{y}_k$ is normalized by its infinity norm, the result is within $\epsilon$ of a multiple of $\mathbf{v}$.
 
     % must stay as #5
-    (problem-inviter-lumpmembraneinveig)=
-5. ⌨ (Continuation of [Exercise 8.2.3](problem-power-lumpmembraneeig).) This exercise concerns the $n^2\times n^2$ sparse matrix defined by `FNC.poisson(n)` for integer $n$. It represents a lumped model of a vibrating square membrane held fixed around the edges.
+(problem-inviter-lumpmembraneinveig)=
+5. ⌨ (Continuation of [Exercise 8.2.3](#problem-power-lumpmembraneeig).) This exercise concerns the $n^2\times n^2$ sparse matrix defined by `FNC.poisson(n)` for integer $n$. It represents a lumped model of a vibrating square membrane held fixed around the edges.
 
     **(a)** The eigenvalues of $\mathbf{A}$ closest to zero are approximately squares of the frequencies of vibration for the membrane. Using `eigs`, find the eigenvalue $\lambda_m$ closest to zero for $n=10,15,20,25$.
     
@@ -240,7 +240,7 @@ In practice power and inverse iteration are not as effective as the algorithms u
     ```
     
     % must remain as number 6
-    (problem-inviter-dynamicshift)=
+(problem-inviter-dynamicshift)=
 6. ⌨ This problem explores the use of dynamic shifting to accelerate the inverse iteration.
   
     **(a)** Modify {numref}`Function {number} <function-inviter>` to change the value of the shift $s$ to be the most recently computed value in the vector $\beta$. Note that the matrix `B` must also change with each iteration, and the LU factorization cannot be done just once.

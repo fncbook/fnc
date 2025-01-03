@@ -1,7 +1,7 @@
 (chapter-ivp)=
 # Initial-value problems for ODEs
 
-```{index} Han Solo, Star Wars: A New Hope
+```{index} Han Solo, A New Hope
 ```
 
 ```{epigraph}

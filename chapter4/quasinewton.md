@@ -237,7 +237,7 @@ In some cases our simple logic in {numref}`Function {number} <function-levenberg
 
 ## Exercises
 
-1. ⌨ (Variation on [Exercise 4.5.2](problem-newtonsys-spherepotential).) Two curves in the $(u,v)$ plane are defined implicitly by the equations $u\log u + v \log v = -0.3$ and $u^4 + v^2 = 1$.
+1. ⌨ (Variation on [Exercise 4.5.2](#problem-newtonsys-spherepotential).) Two curves in the $(u,v)$ plane are defined implicitly by the equations $u\log u + v \log v = -0.3$ and $u^4 + v^2 = 1$.
   
     **(a)** ✍ Write the intersection of these curves in the form $\mathbf{f}(\mathbf{x}) = \boldsymbol{0}$ for two-dimensional $\mathbf{f}$ and $\mathbf{x}$.
 
@@ -245,7 +245,7 @@ In some cases our simple logic in {numref}`Function {number} <function-levenberg
 
     **(d)** ⌨ Use {numref}`Function {number} <function-levenberg>` to find an intersection point starting from $u=0.1$, $v=1$.
 
-2. ⌨ (Variation on [Exercise 4.5.4](problem-newtonsys-orbitintersect)) Two elliptical orbits $(x_1(s),y_1(s))$ and $(x_2(t),y_2(t))$ are described by the equations
+2. ⌨ (Variation on [Exercise 4.5.4](#problem-newtonsys-orbitintersect)) Two elliptical orbits $(x_1(s),y_1(s))$ and $(x_2(t),y_2(t))$ are described by the equations
   
     ```{math}
     \begin{bmatrix}
@@ -269,7 +269,7 @@ In some cases our simple logic in {numref}`Function {number} <function-levenberg
 
     **(b)** ⌨ Use {numref}`Function {number} <function-levenberg>` to find all of the unique intersections.
 
-3. ⌨  (Variation on [Exercise 4.5.5](problem-newtonsys-ellipsemin)) Suppose one wants to find the points on the ellipsoid $x^2/25 + y^2/16 + z^2/9 = 1$ that are closest to and farthest from the point $(5,4,3)$. The method of Lagrange multipliers implies that any such point satisfies
+3. ⌨  (Variation on [Exercise 4.5.5](#problem-newtonsys-ellipsemin)) Suppose one wants to find the points on the ellipsoid $x^2/25 + y^2/16 + z^2/9 = 1$ that are closest to and farthest from the point $(5,4,3)$. The method of Lagrange multipliers implies that any such point satisfies
   
     ```{math}
     \begin{split}
@@ -297,7 +297,7 @@ In some cases our simple logic in {numref}`Function {number} <function-levenberg
 
 5. ✍ Derive Equation {eq}`nlsgradient`.
   
-6. ⌨ (See also [Exercise 4.5.11](problem-newtonsys-byhand).) Suppose that
+6. ⌨ (See also [Exercise 4.5.11](#problem-newtonsys-byhand).) Suppose that
 
     ```{math}
     \mathbf{f}(\mathbf{x}) =

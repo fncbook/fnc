@@ -181,14 +181,14 @@ Because multistep methods rely on the solution history, though, changing the ste
     **(j)** $x^2 u'' -xu' + 2u = 0,\: 1<x<e^{\pi}, \: u(1) =3, \: u'(1) = 4$;
     $\quad \hat{u}(x) = x \left[ 3 \cos \left( \ln x \right)+\sin \left( \ln x \right) \right]$
 
-    (problem-implicit-ab4converge)=
+(problem-implicit-ab4converge)=
 2. ⌨ For each IVP in Exercise 1, use {numref}`Function {number} <function-ab4>` for $n=10\cdot2^d$ and $d=1,\ldots,10$. Make a log-log convergence plot for the final time error $|u_n-\hat{u}(t_n)|$ versus $n$, and add a straight line indicating fourth-order convergence.
 
 3. ⌨ Repeat Exercise 1 above  using {numref}`Function {number} <function-am2>`.
 
 4. ⌨  Repeat Exercise 2 above using {numref}`Function {number} <function-am2>` and comparing to second-order rather than fourth-order convergence.
 
-5. ⌨ Using {numref}`Function {number} <function-am2>` as a model, write a function `bd2` that applies the BD2 method to solve an IVP. Test the convergence of your function on one of the IVPs in [Exercise 1](problem-implicit-ab4tests) above.
+5. ⌨ Using {numref}`Function {number} <function-am2>` as a model, write a function `bd2` that applies the BD2 method to solve an IVP. Test the convergence of your function on one of the IVPs in [Exercise 1](#problem-implicit-ab4tests) above.
 
 6. ⌨ For double-precision purposes, the exact solution of the IVP in {numref}`Demo %s <demo-implicit-stiff>` satisfies $\hat{u}(400)=1$.
 
@@ -196,7 +196,7 @@ Because multistep methods rely on the solution history, though, changing the ste
 
     **(b)** Repeat part (a) using {numref}`Function {number} <function-am2>`.
 
-    (problem-implicit-ivpimag)=
+(problem-implicit-ivpimag)=
 7. Consider the IVP
   
     ```{math}

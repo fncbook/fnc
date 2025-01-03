@@ -172,7 +172,7 @@ Often the adaptively chosen steps clearly correspond to identifiable features of
 
     **(d)** $y(0) = 0.95, \quad y'(0) = 0$
 
-2. ⌨ Solve the FitzHugh–Nagumo system from [Exercise 4.3.6](problem-systems-fitznag) for $I=0.05740$ using {numref}`Function {number} <function-rk23>` with error tolerance $10^{-2}$, $10^{-3}$, and $10^{-4}$. (This illustrates that the error tolerance is a target, not a guarantee!)
+2. ⌨ Solve the FitzHugh–Nagumo system from [Exercise 4.3.6](#problem-systems-fitznag) for $I=0.05740$ using {numref}`Function {number} <function-rk23>` with error tolerance $10^{-2}$, $10^{-3}$, and $10^{-4}$. (This illustrates that the error tolerance is a target, not a guarantee!)
 
 3. ✍ Derive Equation {eq}`adaptRKglobal` using the stated assumption about controlling global rather than local error.
 

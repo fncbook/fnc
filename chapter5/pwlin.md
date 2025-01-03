@@ -206,7 +206,7 @@ Call this piecewise linear function $p(x)$. Consider a maximum element of $\math
 |p(x)| = \left|\sum_{k=0}^n z_k H_k(x)\right| \le \sum_{k=0}^n |z_k| H_k(x) \le \|\mathbf{z}\|_\infty \sum_{k=0}^n H_k(x) = \|\mathbf{z}\|_\infty.
 ```
 
-You are asked to prove the final step above in [Exercise 4](problem-plpartunity). We conclude that  $\|p\|_\infty\le \|\mathbf{z}\|_\infty$, so that $\|p\|_\infty = \|\mathbf{z}\|_\infty$, which completes the proof.
+You are asked to prove the final step above in [Exercise 4](#problem-plpartunity). We conclude that  $\|p\|_\infty\le \|\mathbf{z}\|_\infty$, so that $\|p\|_\infty = \|\mathbf{z}\|_\infty$, which completes the proof.
 ````
 
 Now suppose that $f$ is a "nice" function on an interval $[a,b]$ containing all of the nodes. We can sample values of $f$ to get data, i.e., $y_k=f(t_k)$ for all $k$, then perform piecewise linear interpolation of the data to get a different function, the interpolant $p$. How close is $p$ to the original $f$? 
@@ -226,7 +226,7 @@ Suppose that $f(x)$ has a continuous second derivative in $[a,b]$ (often express
 where $M = \bigl\| f'' \bigr\|_\infty$.
 ````
 
-For an outline of a proof, see [Exercise 5](problem-pwlin-placcuracy).
+For an outline of a proof, see [Exercise 5](#problem-pwlin-placcuracy).
 
 We normally don't have access to $f''$, so the importance of {numref}`Theorem %s <theorem-pwlin-converge>` is that the error in the interpolant is $O(h^2)$ as $h\to 0$. 
 
@@ -297,7 +297,7 @@ Hence a log-log graph of error versus $h$ should be approximately a straight lin
   
 3. ✍ Before electronic calculators, the function $\ln(x)$ was often computed using piecewise linear interpolation with a table of values. If you were using such a table at the nodes $3.1,3.2,\ldots,3.9,4$, what is an upper bound on the error in the result?
 
-    (problem-plpartunity)=
+(problem-plpartunity)=
 4. ✍ Show that for any node distribution and any $x\in[t_0,t_n]$,
   
     ```{math}
@@ -307,7 +307,7 @@ Hence a log-log graph of error versus $h$ should be approximately a straight lin
 
     (Hint: The simplest way is to apply {eq}`plbasissol`.) This is called the **partition of unity** property.
 
-    (problem-pwlin-placcuracy)=
+(problem-pwlin-placcuracy)=
 5. ✍ Here we consider a proof of {numref}`Theorem %s <theorem-pwlin-converge>` using the mean value theorems from elementary calculus: If $f$ is continuously differentiable in $(a,b)$, then there exist points $s$ and $t$ in $(a,b)$ such that
   
     ```{math}

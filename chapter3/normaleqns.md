@@ -94,7 +94,7 @@ For any real $m\times n$ matrix $\mathbf{A}$ with $m\ge n$, the following are tr
 ::::
 
 ````{prf:proof}
-The first part is left as [Exercise 3](problem-normaleqns-symmetry). For the second part, suppose that $\mathbf{A}^T\mathbf{A}\mathbf{z}=\boldsymbol{0}$. Note that $\mathbf{A}^T\mathbf{A}$ is singular if and only if $\mathbf{z}$ may be nonzero. Left-multiplying by $\mathbf{z}^T$, we find that
+The first part is left as [Exercise 3](#problem-normaleqns-symmetry). For the second part, suppose that $\mathbf{A}^T\mathbf{A}\mathbf{z}=\boldsymbol{0}$. Note that $\mathbf{A}^T\mathbf{A}$ is singular if and only if $\mathbf{z}$ may be nonzero. Left-multiplying by $\mathbf{z}^T$, we find that
   
 ```{math}
 0 = \mathbf{z}^T\mathbf{A}^T\mathbf{A}\mathbf{z}=(\mathbf{A}\mathbf{z})^T(\mathbf{A}\mathbf{z}) = \| \mathbf{A}\mathbf{z} \|_2^2,
@@ -229,13 +229,13 @@ This squaring of the condition number in the normal equations is the cause of in
     \end{bmatrix}.
     ```
 
-    (problem-normaleqns-pinvcompute)=
+(problem-normaleqns-pinvcompute)=
 2. ✍ Use {eq}`pinv` to find the pseudoinverse $\mathbf{A}^+$ of the matrix $\mathbf{A}=\begin{bmatrix}1&-2&3\end{bmatrix}^T$.
 
-    (problem-normaleqns-symmetry)=
+(problem-normaleqns-symmetry)=
 3. ✍ Prove the first statement of {numref}`Theorem %s <theorem-ATA>`: $\mathbf{A}^T\mathbf{A}$ is symmetric for any $m\times n$ matrix $\mathbf{A}$ with $m \ge n$.
 
-    (problem-normaleqns-pinveqinv)=
+(problem-normaleqns-pinveqinv)=
 4. ✍ Prove that if $\mathbf{A}$ is an invertible square matrix, then $\mathbf{A}^+=\mathbf{A}^{-1}$.
 
 5. **(a)** ✍ Show that for any $m\times n$ $\mathbf{A}$ with $m>n$ for which $\mathbf{A}^T\mathbf{A}$ is nonsingular, $\mathbf{A}^+\mathbf{A}$ is the $n\times n$ identity.

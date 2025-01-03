@@ -21,8 +21,10 @@ Not all such PDEs are parabolic (essentially, including diffusion), but we will 
 
 :::{math}
 :label: parabolicBC
+\begin{split}
   g_1\left( u(a,t), \frac{\partial u}{\partial x}(a,t) \right) &= 0, \\
-  g_2\left( u(b,t), \frac{\partial u}{\partial x}(b,t) \right) &= 0. \\ \\
+  g_2\left( u(b,t), \frac{\partial u}{\partial x}(b,t) \right) &= 0. \\ 
+\end{split}
 :::
 
 These include Dirichlet, Neumann, and Robin conditions, which are the linear cases of {eq}`parabolicBC`.
@@ -61,8 +63,10 @@ Then Equation {eq}`parabolicBC` takes the form
 
 :::{math}
 :label: mol-bcsystem
+\begin{split}
   g_1( u_0, u'_0 ) &= 0, \\
   g_2( u_m, u'_m ) &= 0.
+\end{split}
 :::
 
 Given a value of $\mathbf{v}$ for the interior nodes, Equation {eq}`mol-bcsystem` may be considered a system of two equations for the unknown boundary values $u_0$ and $u_m$. This system will be a linear one for Dirichlet, Neumann, and Robin conditions. 
@@ -170,7 +174,7 @@ Our full implementation of the method of lines for {eq}`parabolicPDE`--{eq}`para
 ```{index} Dirichlet boundary conditions
 ```
 
-In many specific problems, `extend` does more work than is truly necessary. Dirichlet boundary conditions, for instance, define $u_0$ and $u_m$ directly, and there is no need to solve a nonlinear system. [Exercise 6](problem-boundaries-dirichlet) asks you to modify the code to take advantage of this case. The price of solving a more general set of problems in {numref}`Function {number} <function-parabolic>` is some speed in such special cases.[^multidisp] 
+In many specific problems, `extend` does more work than is truly necessary. Dirichlet boundary conditions, for instance, define $u_0$ and $u_m$ directly, and there is no need to solve a nonlinear system. [Exercise 6](#problem-boundaries-dirichlet) asks you to modify the code to take advantage of this case. The price of solving a more general set of problems in {numref}`Function {number} <function-parabolic>` is some speed in such special cases.[^multidisp] 
 
 [^multidisp]: An important advanced feature of Julia is *multiple dispatch*, which allows you to make multiple definitions of a function for different sequences and types of input arguments. Thus, addition to the original {numref}`Function {number} <function-parabolic>`, we could also define a modified version in which `g₁` and `g₂` are of numeric type for the Dirichlet case. The correct version would be chosen (dispatched) depending on how the boundary conditions were supplied by the caller, allowing us speed when possible and generality as a fallback.
 
@@ -304,7 +308,7 @@ We solve the Black–Scholes PDE @bspde with initial condition $u(x,0) = \max\{0
 
     **(c)** If we set $u_t=0$ in the Fisher equation at steady state, we get a TPBVP in $u(x)$. Use {numref}`Function {number} <function-bvp>` with $m=300$ to solve this BVP, and make sure that the value at $x=0$ matches the result of part (b) to at least four digits.
 
-    (problem-boundaries-dirichlet)=
+(problem-boundaries-dirichlet)=
 6. ⌨ Modify {numref}`Function {number} <function-parabolic>` for the special case of Dirichlet boundary conditions, in which {eq}`parabolicBC` becomes simply
 
     $$

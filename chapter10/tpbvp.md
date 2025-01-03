@@ -138,7 +138,7 @@ Characterizing the conditioning of a TPBVP theoretically is difficult. There are
     ```{index} Hermite equation, Laguerre equation, Chebyshev equation, Legendre equation
     ```
 
-    (problem-tpbvp-verify)=
+(problem-tpbvp-verify)=
 2. ✍ For each BVP, verify that the given solution is valid, i.e., check that the differential equation and the boundary conditions are satisfied.
 
     **(a)** $u'' - 2xu' + 8 u = 0, \quad u(0) = 1, \; u(1) = -\frac{5}{3}\qquad$ *(Hermite equation)* 
@@ -163,12 +163,12 @@ Characterizing the conditioning of a TPBVP theoretically is difficult. There are
 
 3. ⌨ For each TPBVP in Exercise 2, use `solve` to find the solution. Plot the solution and separately plot the error as a function of $x$. (In some cases you will need to truncate the domain to avoid division by zero.)
 
-    (problem-tpbvp-pendulum)=
+(problem-tpbvp-pendulum)=
 4. ⌨ Consider the pendulum from {numref}`Example {number} <example-tpbvp-pendulum>` with $g=L=1$. Suppose we want to release the pendulum from rest such that $\theta(5)=\pi/2$. Find one solution that passes through $\theta=0$ and another solution that does not. Plot $\theta(t)$ for both cases together. (Hint: Vary the initial estimate for the solution.)
 
     ```{index} Allen–Cahn equation
     ```
-    (problem-tpbvp-allencahn)=
+(problem-tpbvp-allencahn)=
 5. ⌨  The *stationary Allen–Cahn equation* is a model of phase changes, such as the change from liquid to solid. In one spatial dimension it can be written as
 
     $$

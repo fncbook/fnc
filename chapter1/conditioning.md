@@ -141,7 +141,7 @@ Condition numbers of the major elementary functions are given in {numref}`Table 
   - $\kappa_f(x) = \dfrac{1}{\lvert \log(x) \rvert}$
 ```
 
-As you are asked to show in [Exercise 4](problem-conditioning-chain), when two functions $f$ and $g$ are combined in a chain as $h(x)=f(g(x))$, the composite condition number is
+As you are asked to show in [Exercise 4](#problem-conditioning-chain), when two functions $f$ and $g$ are combined in a chain as $h(x)=f(g(x))$, the composite condition number is
 
 ```{math}
 :label: condition-chain
@@ -265,7 +265,7 @@ The condition number of a root can be arbitrarily large. In the extreme case of 
     **(b)** $f(x) = \dfrac{e^x-1}{x},\quad$
     **(c)** $f(x) = \dfrac{1-\cos(x)}{x}.$
 
-    (problem-conditioning-chain)=
+(problem-conditioning-chain)=
 4. ✍ Suppose that $f$ and $g$ are real-valued functions that have relative condition numbers $\kappa_f$ and $\kappa_g$, respectively. Define a new function $h(x)=f\bigl(g(x)\bigr)$. Show that for $x$ in the domain of $h$, the relative condition number of $h$ satisfies {eq}`condition-chain`.
 
 5. ✍ Suppose that $f$ is a function with relative condition number $\kappa_f$, and that $f^{-1}$ is its inverse function. Show that the relative condition number of $f^{-1}$ satisfies
@@ -276,7 +276,7 @@ The condition number of a root can be arbitrarily large. In the extreme case of 
 
     provided the denominator is nonzero.
 
-   (problem-quadrootcond)=
+(problem-quadrootcond)=
 6. ✍  Referring to the derivation of {eq}`rootcond1`, derive an expression for the relative condition number of a root of $ax^2+bx+c=0$ due to perturbations in $b$ only. 
 
 7. The polynomial $x^2-2x+1$ has a double root at 1. Let $r_1(\epsilon)$ and $r_2(\epsilon)$ be the roots of the perturbed polynomial $x^2-(2+\epsilon)x+1$.

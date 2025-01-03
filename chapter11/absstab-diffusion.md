@@ -283,7 +283,7 @@ The last restriction becomes rather burdensome as $h\to 0$, i.e., as we improve 
     **(c)** BD4 $\qquad$
     **(d)** RK4
 
-    (problem-absstab-D2eigs)=
+(problem-absstab-D2eigs)=
 7. ✍ Let $\mathbf{D}_{xx}$ be $m\times m$ and given by {eq}`heatFD22`. For any integer $k \in \{0,\ldots,m-1\}$, define $\omega = \exp(2i k\pi/m)$ and $\mathbf{v} = \bigl[ 1,\; \omega,\; \omega^2,\; \ldots,\; \omega^{m-1} \bigr].$ Show that $\mathbf{v}$ is an eigenvector of $\mathbf{D}_{xx}$, with eigenvalue
 
     $$

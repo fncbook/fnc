@@ -20,7 +20,7 @@ However, we will assume that the linear problem is presented in the equivalent f
     \quad u(a)=0,\; u(b)=0.
 :::
 
-Such a transformation is always possible, at least in principle (see [Exercise 3](problem-galerkin-galintfactor)), and the case when $u(a)$ and $u(b)$ are nonzero can also be incorporated (see [Exercise 2](problem-galerkin-bvpnonhom)). The approach is also adaptable to Neumann conditions (see [Exercise 5](problem-galerkin-neumann)). As with finite differences, a nonlinear problem is typically solved by using a Newton iteration to create a sequence of linear problems.
+Such a transformation is always possible, at least in principle (see [Exercise 3](#problem-galerkin-galintfactor)), and the case when $u(a)$ and $u(b)$ are nonzero can also be incorporated (see [Exercise 2](#problem-galerkin-bvpnonhom)). The approach is also adaptable to Neumann conditions (see [Exercise 5](#problem-galerkin-neumann)). As with finite differences, a nonlinear problem is typically solved by using a Newton iteration to create a sequence of linear problems.
 
 ## Weak formulation
 
@@ -373,15 +373,15 @@ Because piecewise linear interpolation on a uniform grid of size $h$ is $O(h^2)$
     
     Exact solution: $-x^2\sin(x)$
 
-    (problem-galerkin-bvpnonhom)=
+(problem-galerkin-bvpnonhom)=
 2. ✍  Suppose you want to solve the differential equation $-[c(x)u']'+d(x)u = f(x)$, as in Equation {eq}`strongbvp`, except with the boundary conditions $u(a)=\alpha$, $u(b)=\beta$. Find constants $p$ and $q$ such that if $v(x)=u(x)+px+q$, then $v$ satisfies the same BVP, except that $v(a)=v(b)=0$ and $f$ is replaced by a different function. 
 
-    (problem-galerkin-galintfactor)=
+(problem-galerkin-galintfactor)=
 3. ✍  Suppose $p(x)u''(x)+q(x)u'(x)+r(x)=0$, and assume that $p(x)\neq 0$ for all $x$ in $[a,b]$. Let $z(x)$ be any function satisfying $z'=q/p$. Show that the differential equation is equivalent to one in the form {eq}`strongbvp`, and find the functions $c(x)$, $d(x)$, and $f(x)$ in that equation. (Hint: Start by multiplying through the equation by $\exp(z)$.) 
 
 4. ✍ Derive {eq}`PLmass`, starting from the mass matrix definition in {eq}`femsystem`. You should replace $s(x)$ by the constant $\overline{s}_k$ within interval $I_k$.  
 
-    (problem-galerkin-neumann)=
+(problem-galerkin-neumann)=
 5. Suppose the Dirichlet boundary conditions $u(a)=u(b)=0$ are replaced by the homogeneous Neumann conditions $u'(a)=u'(b)=0$.
  
     **(a)** ✍ Explain why the weak form {eq}`weakbvp` can be derived without any boundary conditions on the test function $\psi$. 

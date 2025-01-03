@@ -245,7 +245,7 @@ Besides having more smoothness than a piecewise linear interpolant, the not-a-kn
 ```
 ````
 
-The conditioning of spline interpolation is much more complicated than for the piecewise linear case. First, the fact that the coefficients of all the cubics must be solved for simultaneously implies that each data value in $\mathbf{y}$ has an influence on $S$ over the entire interval. Second, $S$ can take on values larger in magnitude than all of the values in $\mathbf{y}$ (see [Exercise 5](problem-splines-overshoot)). The details may be found in more advanced texts.
+The conditioning of spline interpolation is much more complicated than for the piecewise linear case. First, the fact that the coefficients of all the cubics must be solved for simultaneously implies that each data value in $\mathbf{y}$ has an influence on $S$ over the entire interval. Second, $S$ can take on values larger in magnitude than all of the values in $\mathbf{y}$ (see [Exercise 5](#problem-splines-overshoot)). The details may be found in more advanced texts.
 
 ## Exercises
 
@@ -266,7 +266,7 @@ The conditioning of spline interpolation is much more complicated than for the p
 
 2. ⌨ (continuation) For each case in the preceding problem, use Julia to solve the linear system you wrote down. Then plot the resulting cubic spline over the interval between the second and third nodes.
 
-    (problem-spinterp)=
+(problem-spinterp)=
 3. ⌨ For each given function, interval, and value of $n$, define $n+1$ evenly spaced nodes. Then use {numref}`Function {number} <function-spinterp>` to plot the cubic spline interpolant using those nodes, together with the original function over the given interval.
 
     **(a)** $\cos(\pi x^2)$ on $[0,4]$, $n=18$
@@ -289,7 +289,7 @@ The conditioning of spline interpolation is much more complicated than for the p
 
     **(c)** $\sin\left(\frac{1}{x}\right)$ on $\left[\frac{1}{2},7\right]$
 
-    (problem-splines-overshoot)=
+(problem-splines-overshoot)=
 
 5. ⌨  Although the cardinal cubic splines are intractable in closed form, they can be found numerically. Each cardinal spline interpolates the data from one column of an identity matrix. Define the nodes $\mathbf{t} = \bigl[0,\, 0.075,\, 0.25,\, 0.55,\, 1]$. Plot over $[0,1]$ the five cardinal functions for this node set over the interval $[0,1]$.
 

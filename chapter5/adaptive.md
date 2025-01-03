@@ -158,7 +158,7 @@ If the error estimate passes the test {eq}`absreltolerance`, the better Simpson 
 `````
 ::::
 
-Although adaptivity and the error estimation that goes with it can be very powerful, they come at some cost. The error estimation cannot be universally perfect, so sometimes the answer will not be as accurate as requested, and sometimes the function will be evaluated more times than necessary. Subtle problems may arise when the integral is a step within a larger computation (see [Exercise 6](problem-adaptive-nonsmooth)).
+Although adaptivity and the error estimation that goes with it can be very powerful, they come at some cost. The error estimation cannot be universally perfect, so sometimes the answer will not be as accurate as requested, and sometimes the function will be evaluated more times than necessary. Subtle problems may arise when the integral is a step within a larger computation (see [Exercise 6](#problem-adaptive-nonsmooth)).
 
 ## Exercises
 
@@ -207,7 +207,7 @@ Although adaptivity and the error estimation that goes with it can be very power
     Use {numref}`Function {number} <function-intadapt>` to plot Si over the interval $[1,10]$. Note: You will need to replace the lower bound of integration by $\macheps$.
 
 
-    (problem-adaptive-nonsmooth)=
+(problem-adaptive-nonsmooth)=
 6. ⌨  Adaptive integration can have subtle drawbacks. This exercise is based on the *error function*, a smooth function defined as
   
     ```{math}

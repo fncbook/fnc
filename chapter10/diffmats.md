@@ -273,7 +273,7 @@ According to {numref}`Theorem %s <theorem-spectral>`, the convergence of polynom
 
 4. ✍ Explain in detail how lines 23-24 in {numref}`Function {number} <function-diffcheb>` correctly change the interval from $[-1,1]$ to $[a,b]$.
 
-    (problem-diffmats-negsumtrick)=
+(problem-diffmats-negsumtrick)=
 5. 
     **(a)** ✍ What is the derivative of a constant function?
     

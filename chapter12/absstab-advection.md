@@ -16,7 +16,7 @@ $$
   \mathbf{u}' = -c \mathbf{D}_x \mathbf{u}.
 $$
 
-To apply an IVP solver, we need to compare the stability region of the solver with the eigenvalues of $-c \mathbf{D}_x$, as in {numref}`section-diffusion-absstab`. You can verify (see [Exercise 1](problem-absstab-D1eigs)) that for $m$ points in $[0,1)$, these are
+To apply an IVP solver, we need to compare the stability region of the solver with the eigenvalues of $-c \mathbf{D}_x$, as in {numref}`section-diffusion-absstab`. You can verify (see [Exercise 1](#problem-absstab-D1eigs)) that for $m$ points in $[0,1)$, these are
 
 :::{math}
 :label: D1eigs
@@ -143,7 +143,7 @@ As a result, we conclude that $\mathbf{A} = \mathbf{E} \mathbf{D}_x \mathbf{E}^T
     \lambda =  i\, m  \sin \frac{2k\pi}{m}.
     $$
     
-    (See also [Exercise 11.3.7](problem-absstab-D2eigs).)
+    (See also [Exercise 11.3.7](#problem-absstab-D2eigs).)
 
 2. ⌨ Refer to the semidiscretization of the advection–diffusion equation on $x\in[0,1]$ with $c=1$, $\epsilon=0.01$, and periodic end conditions in {numref}`Demo %s <demo-absstab-advdiff>`. For $m=100$, find the upper bound on $\tau$ that gives absolute stability for Euler time stepping. (Hint: The stability region of Euler is the set of complex values whose distance from $-1$ is less than or equal to one. The effect of $\tau$ is to uniformly scale that distance for the eigenvalues.)
 

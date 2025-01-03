@@ -237,7 +237,7 @@ To get the last line we applied the inequality recursively until reaching $ϵ_0$
   \left[ (1+hL)^i - 1 \right].
 ```
 
-We observe that $1+x \le e^x$ for $x\ge 0$ (see [Exercise 5](problem-expdominate)). Hence $(1+hL)^i \le e^{i h L}$, which completes the proof.
+We observe that $1+x \le e^x$ for $x\ge 0$ (see [Exercise 5](#problem-expdominate)). Hence $(1+hL)^i \le e^{i h L}$, which completes the proof.
 ````
 
 ```{index} ! order of accuracy; of a one-step IVP method
@@ -324,7 +324,7 @@ Euler's method is the ancestor of the two major families of IVP methods presente
 
       **(b)** Find values of $k$ and $h$ such that $|u_i|\to\infty$ as $i\to\infty$ while the exact solution $\hat{u}(t)$ is bounded as $t\to\infty$.
   
-    (problem-expdominate)=
+(problem-expdominate)=
 5. ✍ Prove the fact, used in the proof of {numref}`Theorem %s <theorem-euler-onestepGTE>`, that $1+x\le e^x$ for all $x\ge 0$.
 
 6. ✍ Suppose that the error in making a step is also subject to roundoff error $\epsilon_{i+1}$, so that the total local error per unit step is $Ch^p+\epsilon_{i+1} h^{-1}$; assume that $|\epsilon_{i+1}| \le \epsilon$ for all $i$ and that the initial condition is known exactly. Generalize {numref}`Theorem %s <theorem-euler-onestepGTE>` for this case.

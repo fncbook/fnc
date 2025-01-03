@@ -221,7 +221,7 @@ Say $s_k$ is the sum of the first $k$ terms of the series above, and $p_k = \sqr
 
 1. ✍ Suppose $f$ is a twice-differentiable, nonnegative real function. Show that if there is an $x^*$ such that $f'(x^*)=0$ and $f''(x^*)>0$, then $x^*$ is a local minimizer of the function $[f(x)]^2$.
 
-    (problem-fitting-census)=
+(problem-fitting-census)=
 2. ⌨  Here are counts of the U.S. population in millions from the census performed every ten years, beginning with 1790 and ending with 2010.
 
     ``` julia

@@ -107,7 +107,7 @@ Besides the aesthetic appeal of symmetry, in {numref}`section-localapprox-fd-con
 ```{index} interpolation; by polynomials
 ```
 
-We can in principle derive any finite-difference formula from the same process: Interpolate the given function values, then differentiate the interpolant exactly. Some results of the process are given in {numref}`table-FDcenter` for centered differences, and in {numref}`table-FDforward` for forward differences. Both show the weights for estimating the derivative at $x=0$. To get backward differences, you change the signs and reverse the order of the coefficients in any row of {numref}`table-FDforward`; see [Exercise 2](problem-backwardFD).
+We can in principle derive any finite-difference formula from the same process: Interpolate the given function values, then differentiate the interpolant exactly. Some results of the process are given in {numref}`table-FDcenter` for centered differences, and in {numref}`table-FDforward` for forward differences. Both show the weights for estimating the derivative at $x=0$. To get backward differences, you change the signs and reverse the order of the coefficients in any row of {numref}`table-FDforward`; see [Exercise 2](#problem-backwardFD).
 
 (table-FDcenter)=
 ```{table} Weights for centered finite-difference formulas.
@@ -299,7 +299,7 @@ We no longer assume equally spaced nodes, so there is no "$h$" to be used in the
     ````{only} solutions
     ````
 
-    (problem-backwardFD)=
+(problem-backwardFD)=
 2. **(a)** ✍ {numref}`table-FDforward` lists forward difference formulas in which $p=0$ in {eq}`fdformula`. Show that the change of variable $g(x) = f(-x)$ transforms these formulas into backward difference formulas with $q=0$, and write out the table analogous to {numref}`table-FDforward` for backward differences.
 
     **(b)** ⌨ Suppose you are given the nodes $t_0=0.9$, $t_1=1$, and $t_2=1.1$, and $f(x) = \sin(2x)$. Using formulas from {numref}`table-FDcenter` and {numref}`table-FDforward`, compute second-order accurate approximations to $f'$ at each of the three nodes.

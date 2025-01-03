@@ -73,7 +73,7 @@ We define the rounding function $\fl(x)$ as the map from real number $x$ to the 
 \frac{|\fl(x)-x|}{|x|} \le \frac{2^{n-d-1}}{2^n} \le  \tfrac{1}{2}\macheps.
 ```
 
-In words, every real number is represented with a uniformly bounded relative precision. Inequality {eq}`fpbound` holds true for negative $x$ as well. In [Exercise 2](problem-fp-fprelative) you are asked to show that an equivalent statement is that
+In words, every real number is represented with a uniformly bounded relative precision. Inequality {eq}`fpbound` holds true for negative $x$ as well. In [Exercise 2](#problem-fp-fprelative) you are asked to show that an equivalent statement is that
 
 ```{math}
 :label: fpboundalt
@@ -254,7 +254,7 @@ Exercises marked with ✍ are intended to be done by hand or with the aid of a s
 
     **(c)** What is the smallest positive integer not in $\float$? (Hint: For what value of the exponent does the spacing between floating-point numbers become larger than 1?)
 
-    (problem-fp-fprelative)=
+(problem-fp-fprelative)=
 2. ✍ Prove that {eq}`fpbound` is equivalent to {eq}`fpboundalt`. This means showing first that {eq}`fpbound` implies {eq}`fpboundalt`, and then separately that {eq}`fpboundalt` implies {eq}`fpbound`.
 
 3. ⌨ There are much better rational approximations to $\pi$ than 22/7 as used in {numref}`Demo {number} <demo-float-accuracy>`. For each one below, find its absolute and relative accuracy, and (rounding down to an integer) the number of accurate digits. 

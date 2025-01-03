@@ -296,7 +296,7 @@ A polynomial is represented as a vector of coefficients in all three languages c
 
 1. ⌨ Write a function `poly1(p)` that returns the value of a polynomial $p(x) = c_1 + c_2 x + \cdots + c_n x^{n-1}$ at $x=-1$. You should do this directly, not by a call to or imitation of {numref}`Function {number} <function-horner>`. Test your function on $r(x)=3x^3-x+1$ and $s(x)=2x^2-x$.
 
-    (problem-algorithms-samplevar)=
+(problem-algorithms-samplevar)=
 2. ⌨  In statistics, one defines the variance of sample values $x_1,\ldots,x_n$ by
   
     ```{math}

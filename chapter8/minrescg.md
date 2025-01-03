@@ -92,7 +92,7 @@ Because the theorem gives an upper bound, MINRES may converge faster. All we can
 ::::
 
 (demo-minrescg-indefinite)=
-::::{prf:example} MINRES MINRES MINRES MINRES
+::::{prf:example} MINRES
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -196,7 +196,7 @@ As a rule of thumb, the number of iterations required for MINRES or CG to conver
 This estimate fails for very large $\kappa$, however.
 
 (demo-minrescg-converge)=
-::::{prf:example} Convergence of MINRES and CG Convergence of MINRES and CG Convergence of MINRES and CG Convergence of MINRES and CG
+::::{prf:example} Convergence of MINRES and CG
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia

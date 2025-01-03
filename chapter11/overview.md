@@ -1,6 +1,6 @@
 # Diffusion equations
 
-```{index} Wedge Antilles, Star Wars: A New Hope
+```{index} Wedge Antilles, A New Hope
 ```
 
 ```{epigraph}

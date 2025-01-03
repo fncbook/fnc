@@ -59,7 +59,7 @@ using the symmetry of $\mathbf{C}$. So we can describe blur in both directions a
 for a positive integer $k$.
 
 (demo-matrixfree-blur)=
-::::{prf:example} Blurring an image Blurring an image Blurring an image Blurring an image
+::::{prf:example} Blurring an image
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -106,7 +106,7 @@ Instead, given any vector $\mathbf{u}$ we can compute $\mathbf{v}=\mathbf{A}\mat
 The following example shows how to put these ideas into practice with MINRES.
 
 (demo-matrixfree-deblur)=
-::::{prf:example} Deblurring an image Deblurring an image Deblurring an image Deblurring an image
+::::{prf:example} Deblurring an image
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

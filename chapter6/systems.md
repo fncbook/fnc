@@ -238,7 +238,7 @@ The trick illustrated in the preceding examples is always available. Suppose $y$
 
     **(j)** $x^2 y'' + 3xy' + 4y = 0,\: e^{\pi/12} < x < e^{\pi}, \: y(e^{\pi/12}) = 0,  \: y'(e^{\pi/12}) = -6$; $\quad \hat{y}(x) = x^{-1} \left[ 3 \cos \left( 3 \ln x \right)+\sin \left( 3 \ln x \right) \right]$
 
-    (problem-SIR)=
+(problem-SIR)=
 4. ⌨ A disease that is endemic to a population can be modeled by tracking the fraction of the population that is susceptible to infection, $v(t)$, and the fraction that is infectious, $w(t)$. (The rest of the population is considered to be recovered and immune.) A typical model is the *SIR model* (see {cite}`brittonEssentialMathematical2003`)
 
     ```{math}
@@ -271,7 +271,7 @@ The trick illustrated in the preceding examples is always available. Suppose $y$
 
     with $[x(0),y(0)]=[0.95,0]$, $[0,1.05]$, and $[-2.5,0]$.
 
-    (problem-systems-fitznag)=
+(problem-systems-fitznag)=
 6. ⌨ The **FitzHugh–Nagumo equations** are a simple model of the repeated firing of a neuron. They are given by
 
     ```{math}

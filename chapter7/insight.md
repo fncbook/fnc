@@ -172,7 +172,7 @@ Representation of an image as a matrix allows us to describe some common image o
 
     **(c)** Display the image so that it is cropped to isolate the black beacon section at the top of the lighthouse. 
 
-    (problem-insight-actors)=
+(problem-insight-actors)=
 5. ⌨ For this problem you need to download and import data via:
    
    ```julia

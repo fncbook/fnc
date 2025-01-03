@@ -74,7 +74,7 @@ For instance, we can interpret $\mathbf{A}\mathbf{x}_m\approx \mathbf{b}$ in the
 The natural seed vector for $\mathcal{K}_m$ in this case is the vector $\mathbf{b}$. In the next example we try to implement {eq}`gmresdef`. We do take one precaution: because the vectors $\mathbf{A}^{k}\mathbf{b}$ may become very large or small in norm, we normalize after each multiplication by $\mathbf{A}$, just as we did in the power iteration.
 
 (demo-subspace-unstable)=
-::::{prf:example}
+::::{prf:example} Conditioning of the Krylov matrix
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -162,7 +162,7 @@ Given matrix $\mathbf{A}$ and vector $\mathbf{u}$:
 The Arnoldi iteration finds nested orthonormal bases for a family of nested Krylov subspaces.
 
 (demo-subspace-arnoldi)=
-::::{prf:example}
+::::{prf:example} Arnoldi iteration
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -243,9 +243,9 @@ Equation {eq}`arnoldimat` is a fundamental identity of Krylov subspace methods.
 `````
 ``````
 
-An implementation of the Arnoldi iteration is given in {numref}`Function {number} <function-arnoldi>`. A careful inspection shows that the loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}`arnoldigs`. The reason is numerical stability. Though the described and implemented versions are mathematically equivalent in exact arithmetic (see [Exercise 6](problem-subspace-modifiedgs)), the approach in {numref}`Function {number} <function-arnoldi>` is more stable.
+An implementation of the Arnoldi iteration is given in {numref}`Function {number} <function-arnoldi>`. A careful inspection shows that the loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}`arnoldigs`. The reason is numerical stability. Though the described and implemented versions are mathematically equivalent in exact arithmetic (see [Exercise 6](#problem-subspace-modifiedgs)), the approach in {numref}`Function {number} <function-arnoldi>` is more stable.
 
-In the next section we revisit the idea of approximately solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ over a Krylov subspace $\mathcal{K}_m$, using the ONC matrix $\mathbf{Q}_m$ in place of $\mathbf{K}_m$. A related idea explored in [Exercise 7](problem-krylov-arnoldieig) is used to approximate the eigenvalue problem for $\mathbf{A}$, which is the approach that underlies `eigs` for sparse matrices.
+In the next section we revisit the idea of approximately solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ over a Krylov subspace $\mathcal{K}_m$, using the ONC matrix $\mathbf{Q}_m$ in place of $\mathbf{K}_m$. A related idea explored in [Exercise 7](#problem-krylov-arnoldieig) is used to approximate the eigenvalue problem for $\mathbf{A}$, which is the approach that underlies `eigs` for sparse matrices.
 
 ## Exercises
 
@@ -279,7 +279,7 @@ In the next section we revisit the idea of approximately solving $\mathbf{A}\mat
     \end{bmatrix} \:(200\times 200) $
 
     % must stay as #3
-    (problem-subspace-matrixpolykrylov)=
+(problem-subspace-matrixpolykrylov)=
 3. ✍ Show that if $\mathbf{x}\in\mathcal{K}_m$, then $\mathbf{x}=p(\mathbf{A})\mathbf{u}$ for a polynomial $p$ of degree at most $m-1$. (See {eq}`matrixpoly` for applying a polynomial to a matrix.)
 
 4. ✍ Compute the asymptotic flop requirements for {numref}`Function {number} <function-arnoldi>`. Assume that due to sparsity, a matrix-vector multiplication $\mathbf{A}\mathbf{u}$ requires only $c n$ flops for a constant $c$, rather than the usual $O(n^2)$. 
@@ -291,9 +291,9 @@ In the next section we revisit the idea of approximately solving $\mathbf{A}\mat
     *(i)* `u=[1,0,0,0]` $\qquad$ *(ii)* `u=[1,1,1,1]` $\qquad$ *(iii)* `u=rand(4)`
    
     **(b)** Can you explain why case (ii) in part (a) cannot finish successfully? (Hint: What line(s) of the function can possibly return NaN when applied to finite values?) 
-
+    
     % must stay as #6
-    (problem-subspace-modifiedgs)=
+(problem-subspace-modifiedgs)=
 6. ✍ As mentioned in the text, {numref}`Function {number} <function-arnoldi>` does not compute $H_{ij}$ as defined by {eq}`arnoldiip`, but rather 
   
     $$
@@ -306,7 +306,7 @@ In the next section we revisit the idea of approximately solving $\mathbf{A}\mat
     ```{index} eigenvalue
     ```
     % must stay as #7
-    (problem-krylov-arnoldieig)=
+(problem-krylov-arnoldieig)=
 7. One way to approximate the eigenvalue problem $\mathbf{A}\mathbf{x}=\lambda\mathbf{x}$ over $\mathcal{K}_m$ is to restrict $\mathbf{x}$ to the low-dimensional spaces $\mathcal{K}_m$. 
  
     **(a)** ✍ Show starting from {eq}`arnoldimat` that

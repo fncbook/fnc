@@ -229,7 +229,7 @@ In other contexts we refer to {eq}`spectral` as linear convergence, but here it 
     **(c)** $f(x) = \cosh(\sin x)\qquad$
     **(d)** $f(x) = \sin(\cosh x)$
 
-    (problem-chebinterp)=
+(problem-chebinterp)=
 3. ⌨ Write a function `chebinterp(f,n)` that returns a function representing the polynomial interpolant of the input function `f` using $n+1$ Chebyshev second kind nodes over $[-1,1]$. You should use {eq}`weightcheb` to compute the barycentric weights directly, rather than using the method in {numref}`Function {number} <function-polyinterp>`. Test your function by revisiting {numref}`Demo %s <demo-stability-runge>` to use Chebyshev rather than equally spaced nodes. 
 
 4. {numref}`Theorem %s <theorem-spectral>` assumes that the function being approximated has infinitely many derivatives over $[-1,1]$. But now consider the family of functions $f_m(x)=|x|^m$. 
@@ -240,7 +240,7 @@ In other contexts we refer to {eq}`spectral` as linear convergence, but here it 
     
     **(c)** ✍  Based on the results of parts (a) and (b), form a hypothesis about the asymptotic behavior of the error for fixed $m$ as $n\rightarrow \infty$. 
 
-    (problem-stability-changeinterval)=
+(problem-stability-changeinterval)=
 5. The Chebyshev points can be used when the interval of interpolation is $[a,b]$ rather than $[-1,1]$ by means of the change of variable
 
     :::{math}

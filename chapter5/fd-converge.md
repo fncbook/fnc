@@ -208,7 +208,7 @@ A different statement of the conclusion is that for a first-order formula, at mo
     ````{only} solutions
     ````
 
-    (problem-fd-muc)=
+(problem-fd-muc)=
 6. ✍  A different way to derive finite-difference formulas is the **method of undetermined coefficients**. Starting from {eq}`fdformula`,
 
     ```{math}

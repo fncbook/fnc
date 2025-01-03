@@ -250,10 +250,10 @@ where $\boldsymbol{\tau}$ is the truncation error of the finite differences (exc
  
     Solution: $u(x) = \left(x+\frac{1}{2}\right)^{-2}$
 
-    (problem-linear-fdlin2)=
+(problem-linear-fdlin2)=
 2. ⌨  For each of the cases in the previous exercise, use {numref}`Function {number} <function-bvplin>` to solve the problem with $n=60$ and make a plot of its error as a function of $x$. Then, for each $n=10,20,40,\ldots,640$, find the infinity norm of the error. Make a log-log plot of error versus $n$ and include a graphical comparison to second-order convergence.
 
-    (problem-linear-fdlinspec)= 
+(problem-linear-fdlinspec)= 
 3. ⌨ Modify {numref}`Function {number} <function-bvplin>` to use spectral differentiation rather than second-order finite differences. For each of the cases in Exercise 1, solve the problem with $n=5,10,15,\ldots,40$, finding the infinity norm of the error in each case. Make a log-linear plot of error versus $n$.
 
     ```{index} Bessel equation

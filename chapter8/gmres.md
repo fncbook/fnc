@@ -68,7 +68,7 @@ GMRES[^gmres] uses the Arnoldi iteration to minimize the residual $\mathbf{b} - 
 [^breakdown]: This statement is not strictly correct for rare special cases of *breakdown* where the rank of $\mathcal{K}_n$ is less than $n$. In that situation, some additional steps must be taken that we do not discuss here.
 
 (demo-gmres-intro)=
-::::{prf:example} GMRES GMRES GMRES GMRES
+::::{prf:example} GMRES
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -138,7 +138,7 @@ Suppose $\hat{\mathbf{x}}$ is an approximate solution of $\mathbf{A}\mathbf{x}=\
 Restarting guarantees a fixed upper bound on the per-iteration cost of GMRES. However, this benefit comes at a price. Even though restarting preserves progress made in previous iterations, the Krylov space information is discarded and the residual minimization process starts again over low-dimensional spaces. That can significantly retard or even stagnate the convergence. 
 
 (demo-gmres-restart)=
-::::{prf:example} Restarting GMRES Restarting GMRES Restarting GMRES Restarting GMRES
+::::{prf:example} Restarting GMRES 
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -166,7 +166,7 @@ There are other ways to avoid the growth in computational effort as the GMRES/Ar
 
 ## Exercises
 
-1. ✍ (See also [Exercise 8.4.1](problem-krylovpermute).) Consider the linear system with
+1. ✍ (See also [Exercise 8.4.1](#problem-krylovpermute).) Consider the linear system with
   
     $$
     \mathbf{A}=\displaystyle 
@@ -179,7 +179,7 @@ There are other ways to avoid the growth in computational effort as the GMRES/Ar
 
     **(b)** Find the GMRES approximate solutions $\mathbf{x}_m$ for $m=1,2,3,4$. 
 
-2. ✍ (Continuation of [Exercise 8.4.3](problem-subspace-matrixpolykrylov).) Show that if $\mathbf{x}_m\in\mathcal{K}_m$, then the residual $\mathbf{b}-\mathbf{A}\mathbf{x}_m$ is equal to $q(\mathbf{A})\mathbf{b}$, where $q$ is a polynomial of degree at most $m$ and $q(0)=1$. (This fact is a key one for many convergence results.) 
+2. ✍ (Continuation of [Exercise 8.4.3](#problem-subspace-matrixpolykrylov).) Show that if $\mathbf{x}_m\in\mathcal{K}_m$, then the residual $\mathbf{b}-\mathbf{A}\mathbf{x}_m$ is equal to $q(\mathbf{A})\mathbf{b}$, where $q$ is a polynomial of degree at most $m$ and $q(0)=1$. (This fact is a key one for many convergence results.) 
 
 3. ✍ Explain why GMRES, in exact arithmetic, converges to the true solution in $n$ iterations for an $n\times n$ matrix if $\operatorname{rank}(\mathbf{K}_n)=n$. (Hint: Consider how the algorithm is defined from first principles.) 
 
@@ -198,7 +198,7 @@ There are other ways to avoid the growth in computational effort as the GMRES/Ar
     and let the $n$-vector $\mathbf{b}$ have elements $b_i=i/n$. For $n=8,16,32,64$, run {numref}`Function {number} <function-gmres>` for $m=n/2$ iterations. On one semi-log graph, plot $\|\mathbf{r}_k\|/\|\mathbf{b}\|$ for all the cases. How does the convergence rate of GMRES seem to depend on $n$?  
 
     % must stay as #5
-    (problem-gmres-surround)=
+(problem-gmres-surround)=
 5. ⌨  In this exercise you will see the strong effect the eigenvalues of the matrix may have on GMRES convergence. Let 
    
     $$
@@ -219,7 +219,7 @@ There are other ways to avoid the growth in computational effort as the GMRES/Ar
     
     **(c)** Now let $\mathbf{A} = \begin{bmatrix} \mathbf{B} & \mathbf{I} \\ \mathbf{Z} & -\mathbf{B} \end{bmatrix}.$ What are its eigenvalues? Repeat part (a). Which matrix is more difficult for GMRES? (Note: Even though this matrix is triangular, GMRES has no way of exploiting that fact.)
 
-6. ⌨ (Continuation of [Exercise 8.3.5](problem-inviter-lumpmembraneinveig).) We again consider the $n^2\times n^2$ sparse matrix defined by `FNC.poisson(n)`. The solution of $\mathbf{A}\mathbf{x}=\mathbf{b}$ may be interpreted as the deflection of a lumped membrane in response to a load represented by $\mathbf{b}$.
+6. ⌨ (Continuation of [Exercise 8.3.5](#problem-inviter-lumpmembraneinveig).) We again consider the $n^2\times n^2$ sparse matrix defined by `FNC.poisson(n)`. The solution of $\mathbf{A}\mathbf{x}=\mathbf{b}$ may be interpreted as the deflection of a lumped membrane in response to a load represented by $\mathbf{b}$.
     
     **(a)** For $n=10,15,20,25$, let $\mathbf{b}$ be the vector of $n^2$ ones and apply {numref}`Function {number} <function-gmres>` for 50 iterations. On one semi-log graph, plot the four convergence curves $\|\mathbf{r}_m\|/\|\mathbf{b}\|$.
 

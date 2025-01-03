@@ -115,7 +115,7 @@ is a solution for any values of $c_1,\ldots,c_k$. These constants are determined
 independently of $h$ and $i$. This proves zero-stability. Conversely, if some $|r_j|>1$, then $|u_i|$ cannot be bounded above by a constant independent of $i$. Since $b=t_i$, $i\to\infty$ at $t=b$ as $h\to 0$, so zero-stability cannot hold.
 ````
 
-A nonsimple root of $\rho$ introduces a modification of {eq}`zsansatz` that is considered in [Exercise 4](problem-zerostability-nonsimple).
+A nonsimple root of $\rho$ introduces a modification of {eq}`zsansatz` that is considered in [Exercise 4](#problem-zerostability-nonsimple).
 
 ````{prf:example}
 A $k$-step Adams method has $\rho(z) = z^k - z^{k-1} = z^{k-1}(z-1)$. Hence 1 is a simple root and 0 is a root of multiplicity $k-1$. So the Adams methods are all stable.
@@ -177,7 +177,7 @@ The lesson of {numref}`Theorem {number} <theorem-zerostability-dahlquist>` is th
 
 3. ✍  A Fibonacci sequence is defined by $u_{i+1}=u_i+u_{i-1}$, where $u_0$ and $u_1$ are seed values. Using the proof of {numref}`Theorem %s <theorem-zerostability-rootcondition>`, find $r_1$ and $r_2$ such that $u_i=c_1(r_1)^i+c_2(r_2)^i$ for all $i$.
 
-    (problem-zerostability-nonsimple)=
+(problem-zerostability-nonsimple)=
 4. ✍ **(a)** Suppose that $\rho(r) = \rho'(r) = 0$. Show that $u_i = i r^i$ is a solution of the difference equation $\rho(\mathcal{Z})u_i=0$. 
     
     **(b)** Explain why the result of part (a) implies that a non-simple root $r$ with $|r|=1$ makes it impossible for a multistep method to be zero-stable.

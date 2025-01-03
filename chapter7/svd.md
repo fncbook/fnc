@@ -122,7 +122,7 @@ Another close connection between EVD and SVD comes via the $(m+n)\times (m+n)$ m
 \end{bmatrix}.
 ```
 
-If $\sigma$ is a singular value of $\mathbf{B}$, then $\sigma$ and $-\sigma$ are eigenvalues of $\mathbf{C}$, and the associated eigenvector immediately reveals a left and a right singular vector (see [Exercise 11](problem-svd-svdtoevd)). This connection is implicitly exploited by software to compute the SVD.
+If $\sigma$ is a singular value of $\mathbf{B}$, then $\sigma$ and $-\sigma$ are eigenvalues of $\mathbf{C}$, and the associated eigenvector immediately reveals a left and a right singular vector (see [Exercise 11](#problem-svd-svdtoevd)). This connection is implicitly exploited by software to compute the SVD.
 
 ## Interpreting the SVD
 
@@ -339,19 +339,19 @@ The conclusion {eq}`svdnorm` can be proved by vector calculus. In the square cas
 
 7. ✍ Suppose $\mathbf{A}\in\mathbb{R}^{m\times n}$, with $m>n$, has the thin SVD $\mathbf{A}=\hat{\mathbf{U}}\hat{\mathbf{S}}\mathbf{V}^T$. Show that the matrix $\mathbf{A}\mathbf{A}^{+}$ is equal to $\hat{\mathbf{U}}\hat{\mathbf{U}}^T$. (You must be careful with matrix sizes in this derivation.)
 
-    (problem-rectcond)=
+(problem-rectcond)=
 8. ✍ In  {eq}`rectcond` we defined the 2-norm condition number of a rectangular matrix as $\kappa(\mathbf{A})=\|\mathbf{A}\|\cdot \|\mathbf{A}^{+}\|$, and then claimed (in the real case) that $\kappa(\mathbf{A}^*\mathbf{A})=\kappa(\mathbf{A})^2$. Prove this assertion using the SVD. 
 
 9. ✍ Show that the square of each singular value of $\mathbf{A}$ is an eigenvalue of the matrix $\mathbf{A}\mathbf{A}^*$ for any $m\times n$ matrix $\mathbf{A}$. (You should consider the cases $m>n$ and $m\le n$ separately.) 
 
-    (problem-svdnormproof)=
+(problem-svdnormproof)=
 10. ✍ In this problem you will see how {eq}`svdnorm` is proved in the real case.
 
     **(a)** Use the technique of Lagrange multipliers to show that among vectors that satisfy $\|\mathbf{x}\|_2^2=1$, any vector that maximizes $\|\mathbf{A}\mathbf{x}\|_2^2$ must be an eigenvector of $\mathbf{A}^T\mathbf{A}$. It will help to know that if $\mathbf{B}$ is any symmetric matrix, the gradient of the scalar function $\mathbf{x}^T\mathbf{B}\mathbf{x}$ with respect to $\mathbf{x}$ is $2\mathbf{B}\mathbf{x}$. 
 
     **(b)** Use the result of part (a) to prove {eq}`svdnorm` for real matrices. 
 
-    (problem-svd-svdtoevd)=
+(problem-svd-svdtoevd)=
 11. ✍ Suppose $\mathbf{A}\in\mathbb{R}^{n \times n}$, and define $\mathbf{C}$ as in {eq}`svdaugment`. 
 
     **(a)** Suppose that $\mathbf{v}=\begin{bmatrix} \mathbf{x} \\ \mathbf{y} \end{bmatrix}$, and write the block equation $\mathbf{C}\mathbf{v} = \lambda \mathbf{v}$ as two individual equations involving both $\mathbf{x}$ and $\mathbf{y}$.

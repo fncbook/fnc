@@ -175,7 +175,7 @@ When solving a linear system, all that can be expected is that the backward erro
 
     Make a table including columns for $n$, the condition number of $\mathbf{A}$, the observed relative error in $\tilde{\mathbf{x}}$, and the right-hand side of the inequality above. You should find that the inequality holds in every case.
 
-3. ⌨ [Exercise 2.3.7](problem-ls-triangillcond) suggests that the solutions of linear systems
+3. ⌨ [Exercise 2.3.7](#problem-ls-triangillcond) suggests that the solutions of linear systems
 
     ```{math}
     \mathbf{A} = \begin{bmatrix} 1 & -1 & 0 & \alpha-\beta & \beta \\ 0 & 1 & -1 &
@@ -215,5 +215,5 @@ When solving a linear system, all that can be expected is that the backward erro
     \kappa(\mathbf{D}) = \frac{\max_i |D_{ii}|}{\min_i |D_{ii}|}.
     ```
 
-    (Hint: See [Exercise 2.7.10](problem-norms-diagnorm).)
+    (Hint: See [Exercise 2.7.10](#problem-norms-diagnorm).)
 

@@ -272,7 +272,7 @@ The example in {numref}`Demo %s <demo-systems-triangular>` is our first clue tha
 
 1. ✍ Find a vector $\mathbf{b}$ such that the system $\begin{bmatrix} 0&1\\0&0 \end{bmatrix} \mathbf{x}=\mathbf{b}$ has no solution.
 
-    (problem-linear-systems-triangular)=
+(problem-linear-systems-triangular)=
 2. ✍ Solve the following triangular systems by hand.
 
     **(a)** $\displaystyle \begin{aligned}
@@ -314,7 +314,7 @@ The example in {numref}`Demo %s <demo-systems-triangular>` is our first clue tha
       4 \\ 1 \\ 1 \\ 5
     \end{bmatrix}$
 
-    (problem-linear-systems-lumpstring)=
+(problem-linear-systems-lumpstring)=
 5. Suppose a string is stretched with tension $\tau$ horizontally between two anchors at $x=0$ and $x=1$. At each of the $n-1$ equally spaced positions $x_k=k/n$, $k=1,\ldots,n-1$, we attach a little mass $m_i$ and allow the string to come to equilibrium. This causes vertical displacement of the string. Let $q_k$ be the amount of displacement at $x_k$. If the displacements are not too large, then an approximate force balance equation is
   
     ```{math} 
@@ -330,14 +330,14 @@ The example in {numref}`Demo %s <demo-systems-triangular>` is our first clue tha
 
     **(c)** ⌨  Repeat (b) for the case $m_k = (k/5n^2)$ kg.
 
-    (problem-systemsinverse)=
+(problem-systemsinverse)=
 6. ⌨  If $\mathbf{B}\in\mathbb{R}^{n \times p}$ has columns $\mathbf{b}_1,\ldots,\mathbf{b}_p$, then we can pose $p$ linear systems at once by writing $\mathbf{A} \mathbf{X} = \mathbf{B}$, where $\mathbf{X}$ is $n\times p$. Specifically, this equation implies $\mathbf{A} \mathbf{x}_j = \mathbf{b}_j$ for $j=1,\ldots,p$.
 
     **(a)** Modify {numref}`Function {number} <function-forwardsub>` and {numref}`Function {number} <function-backsub>` so that they solve the case where the second input is $n\times p$ for $p\ge 1$.
 
     **(b)** If $\mathbf{A} \mathbf{X}=\mathbf{I}$, then $\mathbf{X}=\mathbf{A}^{-1}$. Use this fact to write a function `ltinverse` that uses your modified **forwardsub** to compute the inverse of a lower triangular matrix. Test your function on at least two nontrivial matrices. (We remind you here that this is just an exercise; matrix inverses are rarely a good idea in numerical practice!)
 
-    (problem-ls-triangillcond)=
+(problem-ls-triangillcond)=
 7. ⌨ {numref}`Demo %s <demo-systems-triangular>` showed solutions of $\mathbf{A}\mathbf{x}=\mathbf{b}$, where
   
     ```{math}

@@ -171,7 +171,7 @@ where $s$ is the concentration of a substrate. The real values $V$ and $K_m$ are
 
     **(b)** Repeat part (a) using only the first 15 data values.
 
-4. ⌨  (Variation on [Exercise 4.5.6](problem-newtonsys-circlefit).) Suppose the points $(x_i,y_i)$ for $i=1,\ldots,m$ are given, and the goal is to find the circle with center $(a,b)$ and radius $r$ that best fits the points. Define 
+4. ⌨  (Variation on [Exercise 4.5.6](#problem-newtonsys-circlefit).) Suppose the points $(x_i,y_i)$ for $i=1,\ldots,m$ are given, and the goal is to find the circle with center $(a,b)$ and radius $r$ that best fits the points. Define 
     
     $$f_i(a,b,r) = (a-x_i)^2 + (b-y_i)^2 - r^2, \qquad i=1,\ldots,m.$$ 
     

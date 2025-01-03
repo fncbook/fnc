@@ -115,7 +115,7 @@ For the vec operation defined in {numref}`Definition {number} <definition-diffad
 ::::{prf:proof}
 (Partial proof.) These all boil down to algebraic manipulations. For instance, for item 5, let $\mathbf{Z}=\mathbf{A}^{-1}$. Then
 
-$$
+\begin{align*}
 \bigl(\mathbf{A} \otimes \mathbf{B}\bigr) \bigl(\mathbf{A}^{-1} \otimes \mathbf{B}^{-1}\bigr) &=     \begin{bmatrix}
     A_{11} \mathbf{B} & A_{12}\mathbf{B} & \cdots & A_{1n}\mathbf{B} \\
     A_{21} \mathbf{B} & A_{22}\mathbf{B} & \cdots & A_{2n}\mathbf{B} \\
@@ -132,7 +132,7 @@ $$
     \vdots &  & \vdots \\
     (A_{n1} Z_{11} + \cdots +  A_{n n}Z_{n1})\mathbf{I}_n & \cdots & (A_{n1} Z_{1n} + \cdots +  A_{n n}Z_{n n})\mathbf{I}_n
     \end{bmatrix} \\ & = (\mathbf{A}\mathbf{Z}) \otimes \mathbf{I}_n \\ & = \mathbf{I}_{2n}.
-$$
+\end{align*}
 ::::
 
 ## Poisson as a linear system
@@ -147,8 +147,10 @@ where $\mathbf{I}_{x}$ and $\mathbf{I}_{y}$ are the $(m+1)\times (m+1)$ and $(n+
 
 :::{math}
 :label: poiskronpde
+\begin{split}
 \underbrace{\bigl[ ({\mathbf{I}_{y}} \otimes {\mathbf{D}_{xx}}) + ({\mathbf{D}_{yy}}\otimes {\mathbf{I}_{x}})\bigr]}_{\mathbf{A}} \, \underbrace{\operatorname{vec}(\mathbf{U})}_{\mathbf{u}} &=
   \underbrace{\operatorname{vec}(\mathbf{F})}_{\mathbf{b}}  \\[1mm] \mathbf{A} \mathbf{u} &= \mathbf{b}.
+\end{split}
 :::
 
 This is in the form of a standard linear system in $(m+1)(n+1)$ variables.
@@ -264,10 +266,10 @@ If we chose a Chebyshev spectral discretization instead, the calculus changes. P
 
 1. ✍ Using general $2\times 2$ matrices, verify identities 4 and 6 in {numref}`Theorem {number} <theorem-laplace-kron>`.
 
-    (problem-laplace-symmetry)=
+(problem-laplace-symmetry)=
 2. ✍ Prove that the matrix $\mathbf{A}$ defined in {eq}`poiskronpde` is symmetric if $\mathbf{D}_{xx}$ and $\mathbf{D}_{yy}$ are symmetric.
 
-    (problem-laplace-usage)=
+(problem-laplace-usage)=
 3. ⌨  Use {numref}`Function {number} <function-poissonfd>` to solve the following problems on $[0,1]\times[0,1]$ using $m=n=50$. In each case, make a plot of the solution and a plot of the error.
 
     **(a)** $u_{xx}+u_{yy} = 2x^2[x^2(x-1)+(10x-6)(y^2-y)]$, with $u=0$ on the boundary.
@@ -284,7 +286,7 @@ If we chose a Chebyshev spectral discretization instead, the calculus changes. P
 
 4. ⌨ For each case in Exercise 3, solve the problem using  {numref}`Function {number} <function-poissonfd>` with $m=n=20,30,40,\ldots,120$. For each numerical solution compute the maximum absolute error on the grid. On a log-log plot, compare the convergence of the error as a function of $n$ to theoretical second-order accuracy.
 
-5. ⌨ Copy {numref}`Function {number} <function-poissonfd>` to a new function named `poischeb`, and modify it to use a Chebyshev discretization rather than finite differences. For each item in [Exercise 3](problem-laplace-usage), solve the problem using `poischeb` for $m=n=10,15,20,\ldots,40$. For each numerical solution compute the maximum absolute error on the grid. Show the convergence of the error as a function of $n$ on a log-linear plot.
+5. ⌨ Copy {numref}`Function {number} <function-poissonfd>` to a new function named `poischeb`, and modify it to use a Chebyshev discretization rather than finite differences. For each item in [Exercise 3](#problem-laplace-usage), solve the problem using `poischeb` for $m=n=10,15,20,\ldots,40$. For each numerical solution compute the maximum absolute error on the grid. Show the convergence of the error as a function of $n$ on a log-linear plot.
 
 6. ⌨ Sometimes boundary conditions are specified using a piecewise definition, with a different formula for each side of the domain. Use {numref}`Function {number} <function-poissonfd>` with $m=n=60$ to solve the Laplace equation on $[0,1]^2$ with boundary conditions
 

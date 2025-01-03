@@ -43,7 +43,7 @@ numbering:
 ```
 
 ```{admonition} About the code
-The loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}`arnoldigs`. The reason is numerical stability. Though the described and implemented versions are mathematically equivalent in exact arithmetic (see [Exercise 6](problem-subspace-modifiedgs)), the approach in {numref}`Function {number} <function-arnoldi>` is more stable.
+The loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}`arnoldigs`. The reason is numerical stability. Though the described and implemented versions are mathematically equivalent in exact arithmetic (see [Exercise 6](#problem-subspace-modifiedgs)), the approach in {numref}`Function {number} <function-arnoldi>` is more stable.
 ```
 ``````
 
@@ -269,7 +269,7 @@ println("Time for dense solve: $t")
 ### 8.2 @section-krylov-power
 
 (demo-power-one-julia)=
-``````{dropdown} Power iteration
+``````{dropdown} @demo-power-one
 Here we choose a random 5×5 matrix and a random 5-vector.
 
 ```{code-cell}
@@ -311,7 +311,7 @@ end
 ``````
 
 (demo-power-iter-julia)=
-``````{dropdown} Convergence of power iteration
+``````{dropdown} @demo-power-iter
 We will experiment with the power iteration on a 5×5 matrix with prescribed eigenvalues and dominant eigenvalue at 1.
 
 ```{code-cell}
@@ -368,7 +368,7 @@ The results are very similar until the last few iterations, when the limited acc
 ### 8.3 @section-krylov-inviter
 
 (demo-inviter-conv-julia)=
-``````{dropdown} Convergence of inverse iteration
+``````{dropdown} @demo-inviter-conv
 We set up a $5\times 5$ triangular matrix with prescribed eigenvalues on its diagonal.
 
 ```{code-cell}
@@ -424,7 +424,7 @@ Hence the theoretical convergence rate is
 ``````
 
 (demo-inviter-accel-julia)=
-``````{dropdown} Dynamic shift strategy
+``````{dropdown} @demo-inviter-accel
 ```{code-cell}
 λ = [1, -0.75, 0.6, -0.4, 0]
 # Make a triangular matrix with eigenvalues on the diagonal.
@@ -464,7 +464,7 @@ end
 ### 8.4 @section-krylov-subspace
 
 (demo-subspace-unstable-julia)=
-``````{dropdown} Conditioning of the Krylov matrix
+``````{dropdown} @demo-subspace-unstable
 First we define a triangular matrix with known eigenvalues, and a random vector $b$.
 
 ```{code-cell}
@@ -505,7 +505,7 @@ plot(0:29, resid; m=:o,
 ``````
 
 (demo-subspace-arnoldi-julia)=
-``````{dropdown} Arnoldi iteration
+``````{dropdown} @demo-subspace-arnoldi
 We illustrate a few steps of the Arnoldi iteration for a small matrix.
 
 ```{code-cell}
@@ -557,7 +557,7 @@ K = [u A * u A * A * u];
 ### 8.5 @section-krylov-gmres
 
 (demo-gmres-intro-julia)=
-``````{dropdown} GMRES
+``````{dropdown} @demo-gmres-intro
 We define a triangular matrix with known eigenvalues and a random vector $\mathbf{b}$.
 
 ```{code-cell}
@@ -595,7 +595,7 @@ plot(0:60, resid, m=:o,
 ``````
 
 (demo-gmres-restart-julia)=
-``````{dropdown} Restarting GMRES
+``````{dropdown} @demo-gmres-restart
 The following experiments are based on a matrix resulting from discretization of a partial differential equation.
 
 ```{index} Julia; keyword function arguments
@@ -640,7 +640,7 @@ The "pure" GMRES curve is the lowest one. All of the other curves agree with it 
 ### 8.6 @section-krylov-minrescg
 
 (demo-minrescg-indefinite-julia)=
-``````{dropdown} MINRES
+``````{dropdown} @demo-minrescg-indefinite
 The following matrix is indefinite.
 
 ```{code-cell}
@@ -684,7 +684,7 @@ The upper bound turns out to be pessimistic here, especially in the later iterat
 ``````
 
 (demo-minrescg-converge-julia)=
-``````{dropdown} Convergence of MINRES and CG
+``````{dropdown} @demo-minrescg-converge
 We will compare MINRES and CG on some quasi-random SPD problems.  The first matrix has a condition number of 100.
 
 ```{code-cell}
@@ -742,7 +742,7 @@ Both methods have an early superlinear phase that allow them to finish slightly 
 ### 8.7 @section-krylov-matrixfree
 
 (demo-matrixfree-blur-julia)=
-``````{dropdown} Blurring an image
+``````{dropdown} @demo-matrixfree-blur
 We use a readily available test image.
 
 ```{code-cell}
@@ -775,7 +775,7 @@ plot(Gray.(Z), title="Blurred image")
 ``````
 
 (demo-matrixfree-deblur-julia)=
-``````{dropdown} Deblurring an image
+``````{dropdown} @demo-matrixfree-deblur
 We repeat the earlier process to blur an original image $\mathbf{X}$ to get $\mathbf{Z}$.
 
 ```{code-cell}
@@ -831,7 +831,7 @@ plot!(Gray.(Y), subplot=2, title="Deblurred")
 ### 8.8 @section-krylov-precond
 
 (demo-precond-diagonal-julia)=
-``````{dropdown} Diagonal preconditioning
+``````{dropdown} @demo-precond-diagonal
 Here is an SPD matrix that arises from solving partial differential equations.
 
 ```{code-cell}
@@ -875,7 +875,7 @@ The diagonal preconditioner cut down substantially on the number of iterations. 
 ``````
 
 (demo-precond-gmres-julia)=
-``````{dropdown} Incomplete LU preconditioning
+``````{dropdown} @demo-precond-gmres
 Here is a nonsymmetric matrix arising from a probabilistic model in computational chemistry.
 
 ```{code-cell}

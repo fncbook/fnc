@@ -221,7 +221,7 @@ An implementation of Newton's method for systems is given in {numref}`Function {
 
 2. ✍ Suppose that $\mathbf{f}(\mathbf{x}) = \mathbf{A}\mathbf{x} - \mathbf{b}$ for a constant $n\times n$ matrix $\mathbf{A}$ and constant $n\times 1$ vector $\mathbf{b}$. Show that Newton's method converges to the exact root in one iteration.
 
-    (problem-newtonsys-spherepotential)=
+(problem-newtonsys-spherepotential)=
 3. Two curves in the $(u,v)$ plane are defined implicitly by the equations $u\log u + v \log v = -0.3$ and $u^4 + v^2 = 1$.
   
     **(a)** ✍ Write the intersection of these curves in the form $\mathbf{f}(\mathbf{x}) = \boldsymbol{0}$ for two-dimensional $\mathbf{f}$ and $\mathbf{x}$.
@@ -232,7 +232,7 @@ An implementation of Newton's method for systems is given in {numref}`Function {
 
     **(d)** ⌨ Use {numref}`Function {number} <function-newtonsys>` to find an intersection point starting from $u=0.1$, $v=1$.
 
-    (problem-newtonsys-orbitintersect)=
+(problem-newtonsys-orbitintersect)=
 4. Two elliptical orbits $(x_1(t),y_1(t))$ and $(x_2(t),y_2(t))$ are described by the equations
   
     ```{math}
@@ -268,7 +268,7 @@ An implementation of Newton's method for systems is given in {numref}`Function {
 
     **(d)** ⌨ Use {numref}`Function {number} <function-newtonsys>` to find all of the unique intersections.
   
-    (problem-newtonsys-ellipsemin)=
+(problem-newtonsys-ellipsemin)=
 5. ⌨  Suppose one wants to find the points on the ellipsoid $x^2/25 + y^2/16 + z^2/9 = 1$ that are closest to and farthest from the point $(5,4,3)$. The method of Lagrange multipliers implies that any such point satisfies
   
     ```{math}
@@ -288,7 +288,7 @@ An implementation of Newton's method for systems is given in {numref}`Function {
 
     **(c)** Use {numref}`Function {number} <function-newtonsys>` with different initial guesses to find the two roots of this system. Which is the closest point to $(5,4,3)$, and which is the farthest?
   
-    (problem-newtonsys-circlefit)=
+(problem-newtonsys-circlefit)=
 6. ⌨  Any three noncollinear points in the plane determine a unique circle. Suppose the points are given as $(x_i,y_i)$ for $i=1,2,3$. We can define the circle in terms of its center $(a,b)$ and radius $r$. Then 
     
     $$f_i(a,b,r) = (a-x_i)^2 + (b-y_i)^2 - r^2$$ 

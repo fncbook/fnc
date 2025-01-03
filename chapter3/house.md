@@ -28,7 +28,7 @@ A **Householder reflector** is a matrix of the form
 where $\mathbf{v}$ is any unit vector (in the 2-norm).
 ::::
 
-In [Exercise 2](problem-house-reflector) you are asked to show that such a $\mathbf{P}$ is necessarily orthogonal. Note that for any vector $\mathbf{x}$ of appropriate dimension,
+In [Exercise 2](#problem-house-reflector) you are asked to show that such a $\mathbf{P}$ is necessarily orthogonal. Note that for any vector $\mathbf{x}$ of appropriate dimension,
 
 ```{math}
 :label: hhapply
@@ -52,7 +52,7 @@ Given a vector $\mathbf{z}$, we can choose $\mathbf{v}$ so that $\mathbf{P}$ ref
 \end{bmatrix} = \pm \| \mathbf{z} \| \mathbf{e}_1.
 ```
 
-(Recall that $\mathbf{e}_k$ is the $k$th column of the identity matrix.) We choose the positive sign above for our discussion, but see {numref}`Function {number} <function-qrfact>` and [Exercise 4](problem-house-sign) for important computational details. Let
+(Recall that $\mathbf{e}_k$ is the $k$th column of the identity matrix.) We choose the positive sign above for our discussion, but see {numref}`Function {number} <function-qrfact>` and [Exercise 4](#problem-house-sign) for important computational details. Let
 
 ```{math}
 :label: hhvector
@@ -67,7 +67,7 @@ Let $\mathbf{v}$ be defined by {eq}`hhvector` and let $\mathbf{P}$ be given by {
 ````
 
 ````{prf:proof}
-The proofs of symmetry and orthogonality are left to [Exercise 2](problem-house-reflector). For the last fact, we use {eq}`hhapply` to compute
+The proofs of symmetry and orthogonality are left to [Exercise 2](#problem-house-reflector). For the last fact, we use {eq}`hhapply` to compute
   
 ```{math}
 \mathbf{P}\mathbf{z} = \mathbf{z} - 2 \frac{\mathbf{w}^T \mathbf{z}}{\mathbf{w}^T\mathbf{w}} \mathbf{w}.
@@ -177,7 +177,7 @@ In {numref}`Demo {number} <demo-qr-qrfact>` it was seen that the $\mathbf{Q}$ ou
 
 This observation leads to the idea of the *Q-less QR factorization*, in which the full or thin $\mathbf{Q}$ is never computed explicitly. This is the variant used by Julia's `qr`. The returned value `Q` used within {numref}`Function {number} <function-lsqrfact>` is of a special type that allows Julia to perform `Q'*b` efficiently for the least-squares solution. 
 
-In [Exercise 8](problem-house-flops) you are asked to derive the following result about the Q-less factorization.
+In [Exercise 8](#problem-house-flops) you are asked to derive the following result about the Q-less factorization.
 
 (theorem-house-flops)=
 :::{prf:theorem} 
@@ -199,7 +199,7 @@ The flop count quoted in {numref}`Theorem {number} <theorem-house-flops>` domina
       11\\0\\0
     \end{bmatrix}.
     ```
-    (problem-house-reflector)=
+(problem-house-reflector)=
 2. ✍ Prove the unfinished items in {numref}`Theorem %s <theorem-hhreflect>`, namely that a Householder reflector $\mathbf{P}$ is symmetric and orthogonal.
 
 3. ✍ Let $\mathbf{P}$ be a Householder reflector as in {eq}`hhreflect`.
@@ -208,7 +208,7 @@ The flop count quoted in {numref}`Theorem {number} <theorem-house-flops>` domina
 
     **(b)** What algebraic condition is necessary and sufficient for a vector $\mathbf{x}$ to satisfy $\mathbf{P}\mathbf{x}=\mathbf{x}$? In $n$ dimensions, how many such linearly independent vectors are there?
   
-    (problem-house-sign)=
+(problem-house-sign)=
 4. ✍ Under certain circumstances, computing the vector $\mathbf{v}$ in {eq}`hhvector` could lead to subtractive cancellation, which is why line 12 of {numref}`Function {number} <function-qrfact>` reads as it does. Devise an example that causes subtractive cancellation if {eq}`hhvector` is used.
 
 5. ✍ Suppose QR factorization is used to compute the solution of a *square* linear system, $\mathbf{A}\mathbf{x}=\mathbf{b}$, i.e., let $m=n$.
@@ -238,8 +238,8 @@ The flop count quoted in {numref}`Theorem {number} <theorem-house-flops>` domina
 
     **(b)** ⌨ Given the vector $\mathbf{z}=[1\;2\;3\;4\;5]^T$, use Julia to find a sequence of Givens rotations that transforms $\mathbf{z}$ into the vector $\| \mathbf{z} \|\mathbf{e}_1$. (Hint: You can operate only on pairs of elements at a time, introducing a zero at the lower of the two positions.)
   
-    (problem-house-flops)=
+(problem-house-flops)=
 8. ✍ Derive the result of {numref}`Theorem {number} <theorem-house-flops>` by analyzing {numref}`Function {number} <function-qrfact>` without lines 20–22. 
 
-    (problem-house-speed)=
+(problem-house-speed)=
 9. ✍ Suppose $m=Kn$ for constant $K \ge 1$ as both $m$ and $n$ go to infinity. Show that the flop counts from {numref}`Theorem {number} <theorem-house-flops>`  and {numref}`Theorem {number} <theorem-normaleqns-flops>` have a ratio of 1 when $K=1$ and approaches 2 as $K\to \infty$. 

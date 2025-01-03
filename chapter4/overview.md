@@ -1,7 +1,7 @@
 (chapter-nonlineqn)=
 # Roots of nonlinear equations
 
-```{index} C3PO, Star Wars: A New Hope
+```{index} C3PO, A New Hope
 ```
 
 ```{epigraph}

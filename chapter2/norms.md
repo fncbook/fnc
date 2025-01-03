@@ -132,7 +132,7 @@ Given a vector norm $\| \cdot \|_p$, we define an **induced matrix norm** for an
 ```
 ::::
 
-The last equality above follows from linearity (as shown in [Exercise 5](problem-linearity)).  It is derived from the interpretation of a matrix as a linear operator between $\real^n$ and $\real^m$. Thus in the 2-norm, for instance,
+The last equality above follows from linearity (as shown in [Exercise 5](#problem-linearity)).  It is derived from the interpretation of a matrix as a linear operator between $\real^n$ and $\real^m$. Thus in the 2-norm, for instance,
 
 ```{math}
 \| \mathbf{A} \|_2 = \max_{\| \mathbf{x} \|_2=1} \| \mathbf{A}\mathbf{x} \|_2.
@@ -252,7 +252,7 @@ The geometric interpretation of the matrix 2-norm shown in {numref}`Demo %s <dem
 
 4. ✍ Prove that for any vectors $\mathbf{x}$, $\mathbf{y}$ in $\real^n$, $|\mathbf{x}^T\mathbf{y}| \le \| \mathbf{x} \|_1\| \mathbf{y} \|_\infty$.
 
-    (problem-linearity)=
+(problem-linearity)=
 5. ✍ Prove using {numref}`Definition {number} <definition-norms-matrix>` that for any induced matrix norm, matrix $\mathbf{A}$, and scalar $c$, $\| c\mathbf{A} \| = |c|\cdot \| \mathbf{A} \|$.
 
 6. ✍ Let $\mathbf{A} =
@@ -286,7 +286,7 @@ The geometric interpretation of the matrix 2-norm shown in {numref}`Demo %s <dem
 
     where $p=1$, $2$, or $\infty$. (Hint: For $p=2$, rearrange {eq}`normineq1` for a well-chosen particular value of $\mathbf{x}$.)
 
-    (problem-norms-diagnorm)=
+(problem-norms-diagnorm)=
 10. ✍ Prove using {numref}`Definition {number} <definition-norms-matrix>` that if $\mathbf{D}$ is a diagonal matrix, then $\|\mathbf{D}\|_2 = \max_{i} |D_{ii}|$. You may assume the matrix is real and square, but that does not affect the result or the proof in any significant way. (Hint: Let $M=\max_{i} |D_{ii}|$. Proceed in two stages, showing that $\|\mathbf{D}\|_2\ge M$ and separately that $\|\mathbf{D}\|_2\le M$.)
 
 11. ✍ Suppose that $\mathbf{A}$ is ${n\times n}$ and that $\| \mathbf{A} \|<1$ in some induced matrix norm.

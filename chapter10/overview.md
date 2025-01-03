@@ -1,10 +1,7 @@
 (chapter-bvp)=
 # Boundary-value problems
 
-```{index} C3PO
-```
- 
-```{index} Star Wars: A New Hope
+```{index} C3PO, A New Hope
 ```
 
 ```{epigraph}

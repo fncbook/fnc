@@ -262,7 +262,7 @@ It follows that if we combine {eq}`traperrorexpansion` and {eq}`traperrorexpansi
 ```{index} ! Simpson's formula
 ```
 
-The formula {eq}`nc-simpson` is called **Simpson's formula**, or *Simpson's rule*. A different presentation and derivation are considered in [Exercise 4](problem-simpson).
+The formula {eq}`nc-simpson` is called **Simpson's formula**, or *Simpson's rule*. A different presentation and derivation are considered in [Exercise 4](#problem-simpson).
 
 Equation {eq}`extraplevel1` is another particular error expansion in the form {eq}`extraperror`, so we can extrapolate again! The details change only a little. Considering that
 
@@ -358,7 +358,7 @@ where the nodes referenced in the last line are relative to $n=2m$. Hence in pas
 
 3. ⌨ Repeat each integral in Exercise 1 above using Gregory integration {eq}`gregory` instead of the trapezoid formula. Compare the observed errors to fourth-order convergence.
 
-    (problem-simpson)=
+(problem-simpson)=
 4. ✍  Simpson's formula can be derived without appealing to extrapolation.
 
     **(a)** Show that

@@ -65,7 +65,7 @@ $$
 This is solved for $\Phi(x)$ and put back into {eq}`bary1` to get {eq}`bary2`.
 ::::
 
-Equation {eq}`bary2` is certainly an odd-looking way to write a polynomial! Indeed, it is technically undefined when $x$ equals one of the nodes, but in fact, $\lim_{x\to t_k} p(x) = y_k$, so a continuous extension to the nodes is justified. (See [Exercise 3](problem-barycentric-limit).) 
+Equation {eq}`bary2` is certainly an odd-looking way to write a polynomial! Indeed, it is technically undefined when $x$ equals one of the nodes, but in fact, $\lim_{x\to t_k} p(x) = y_k$, so a continuous extension to the nodes is justified. (See [Exercise 3](#problem-barycentric-limit).) 
 
 (example-writeoutbary2)=
 ::::{prf:example}
@@ -167,9 +167,9 @@ You might suspect that as the evaluation point $x$ approaches a node $t_k$, subt
 
     **(b)** Compute the interpolant at $x=2$ for the nodes in part (a) and the data $y_0=-2$, $y_1=2$, $y_2=1$.
 
-2. ✍ For each case of [Exercise 9.1.1](problem-polynomial-lagrange), write out the barycentric form of the interpolating polynomial.
+2. ✍ For each case of [Exercise 9.1.1](#problem-polynomial-lagrange), write out the barycentric form of the interpolating polynomial.
 
-    (problem-barycentric-limit)=
+(problem-barycentric-limit)=
 3. ✍  Show using L'Hôpital's rule on {eq}`bary2` that $p(t_i)=y_i$ for all $i=0,\ldots,n$.
 
 4. ⌨ In each case, use {numref}`Function {number}<function-polyinterp>` to interpolate the given function using $n+1$ evenly spaced nodes in the given interval. Plot each interpolant together with the exact function.

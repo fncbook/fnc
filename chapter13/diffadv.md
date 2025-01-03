@@ -182,8 +182,10 @@ The wave equation introduces a little additional complexity. First, we write the
 
 :::{math}
 :label: wave2dfirst
+\begin{split}
     u_t &= v, \\
     v_t &= c^2(u_{xx}+u_{yy}).
+\end{split}
 :::
 
 Now the grid unknowns are a pair of matrices $\mathbf{U}(t)$ and $\mathbf{V}(t)$. Typical boundary conditions would prescribe $u$ on all of the boundary and let $v$ be unspecified. Since the boundary values of $\mathbf{U}$ are prescribed, those values are omitted from the semidiscretization IVP, while all of $\mathbf{V}$ is included. All of these unknowns need to be packed into and unpacked from a single vector $\mathbf{w}(t)$ for the IVP solver.
@@ -235,9 +237,11 @@ We solve the wave equation with $c=1$ on the square $[-2,2]\times[-2,2]$, where 
 
     :::{math}
     :label: wave2dTM
+    \begin{split}
     u_t &= c^2(v_y - w_x),\\
     v_t &= u_y, \\
     w_t &= -u_x,
+    \end{split}
     :::
 
     subject to $u=0$ on the boundary.

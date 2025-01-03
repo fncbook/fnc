@@ -221,7 +221,7 @@ If we substitute the thin factorization {eq}`economyqr` into the normal equation
 \end{split}
 ```
 
-In order to have the normal equations be well posed, we require that $\mathbf{A}$ is not rank-deficient (as proved in {numref}`Theorem %s <theorem-ATA>`). This is enough to guarantee that $\hat{\mathbf{R}}$ is nonsingular (see [Exercise 4](problem-qr-nonsingR)). Therefore, its transpose is nonsingular as well, and we arrive at
+In order to have the normal equations be well posed, we require that $\mathbf{A}$ is not rank-deficient (as proved in {numref}`Theorem %s <theorem-ATA>`). This is enough to guarantee that $\hat{\mathbf{R}}$ is nonsingular (see [Exercise 4](#problem-qr-nonsingR)). Therefore, its transpose is nonsingular as well, and we arrive at
 
 ```{math}
 :label: lsqr
@@ -291,17 +291,17 @@ The solution of least-squares problems via QR factorization is more stable than 
 
 2. ✍ Prove {numref}`Theorem %s <theorem-qr-orthogmatrix>`. For the third part, use the definition of the 2-norm as an induced matrix norm, then apply some of our other results as needed.
 
-    (problem-qr-legendre)=
+(problem-qr-legendre)=
 3. ⌨ Let $t_0,\ldots,t_m$ be $m+1$ equally spaced points in $[-1,1]$. Let $\mathbf{A}$ be the matrix in {eq}`vandersystemrect` for $m=400$ and fitting by polynomials of degree less than 5. Find the thin QR factorization of $\mathbf{A}$, and, on a single graph, plot every column of $\hat{\mathbf{Q}}$ as a function of the vector $t$.
 
-    (problem-qr-nonsingR)=
+(problem-qr-nonsingR)=
 4. ✍ Prove that if the $m\times n$ ($m\ge n$) matrix $\mathbf{A}$ is not rank-deficient, then the factor $\hat{\mathbf{R}}$ of the thin QR factorization is invertible. (Hint: Suppose on the contrary that $\hat{\mathbf{R}}$ is singular. Show using the factored form of $\mathbf{A}$ that this would imply that $\mathbf{A}$ is rank-deficient.)
 
 5. ✍ Let $\mathbf{A}$ be $m\times n$ with $m>n$. Show that if $\mathbf{A}=\mathbf{Q}\mathbf{R}$ is a QR factorization and $\mathbf{R}$ has rank $n$, then $\mathbf{A}^+=\mathbf{R}^+\mathbf{Q}^T$.
 
 6. ✍ Let $\mathbf{A}$ be $m\times n$ with $m>n$. Show that if $\mathbf{A}=\hat{\mathbf{Q}}\hat{\mathbf{R}}$ is a thin QR factorization and $\hat{\mathbf{R}}$ is invertible, then $\mathbf{A}^+=\hat{\mathbf{R}}^{-1}\hat{\mathbf{Q}}^T$.
 
-7. ⌨ Repeat [Exercise 3.1.2](problem-fitting-census), but use thin QR factorization rather than the backslash to solve the least-squares problem.
+7. ⌨ Repeat [Exercise 3.1.2](#problem-fitting-census), but use thin QR factorization rather than the backslash to solve the least-squares problem.
 
 8. ✍ The matrix $\mathbf{P}=\hat{\mathbf{Q}} \hat{\mathbf{Q}}^T$ derived from the thin QR factorization has some interesting and important properties.
 

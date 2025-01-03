@@ -220,9 +220,9 @@ Keep in mind that the differentiation matrix $\mathbf{D}_x$ is based on the disc
     **(c)** $f(x,y) = \exp \bigl[-6(x^2+y^2-1)^2 \bigr]$, $\quad[-2,2]\times[-2,2]$
 
 
-2. ⌨ For each function in [Exercise 1](problem-tensorprod-surfcontourplot), make side-by-side surface plots of $f_x$ and $f_y$ using Chebyshev spectral differentiation.
+2. ⌨ For each function in [Exercise 1](#problem-tensorprod-surfcontourplot), make side-by-side surface plots of $f_x$ and $f_y$ using Chebyshev spectral differentiation.
 
-3. ⌨ For each function in [Exercise 1](problem-tensorprod-surfcontourplot), make a contour plot of the mixed derivative $f_{xy}$ using Chebyshev spectral differentiation.
+3. ⌨ For each function in [Exercise 1](#problem-tensorprod-surfcontourplot), make a contour plot of the mixed derivative $f_{xy}$ using Chebyshev spectral differentiation.
 
 4. ⌨ In each case, make a plot of the function given in polar or Cartesian coordinates over the unit disk.
 
