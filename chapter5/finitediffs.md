@@ -26,10 +26,10 @@ Note that while {eq}`fdformula` is about finding the derivative at a single poin
 
 ## Common examples
 
+There are three appealing special cases of {eq}`fdformula` that get special attention.
+
 ```{index} ! forward difference, ! backward difference, ! centered difference
 ```
-
-There are three appealing special cases of {eq}`fdformula` that get special attention.
 
 ::::{prf:definition} Forward, backward, and centered FD formulas
 A **forward difference formula** is characterized by {eq}`fdformula` with $p=0$, a **backward difference formula** has $q=0$, and a **centered difference formula** has $p=q$.

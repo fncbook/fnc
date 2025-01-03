@@ -24,9 +24,10 @@ where $\tilde{\mathbf{H}}_m$ is rows 1 through $m$ of $\mathbf{H}_m$. If $\mathb
 For a hermitian (or real symmetric) matrix, the upper Hessenberg matrix $\mathbf{H}_m$ produced by the Arnoldi iteration is tridiagonal.
 ::::
 
-```{index} Arnoldi iteration
-```
 Equation {eq}`arnoldivec` of the Arnoldi iteration now simplifies to a much shorter expression:
+
+```{index} Arnoldi iteration, Lanczos iteration
+```
 
 :::{math}
 :label: lanczos

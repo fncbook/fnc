@@ -7,11 +7,11 @@ numbering:
 
 Predicting how long an algorithm will take to solve a particular problem, on a particular computer, as written in a particular way in a particular programming language, is an enormously difficult undertaking. It's more practical to predict how the required time will scale as a function of the size of the problem. In the case of a linear system of equations, the problem size is $n$, the number of equations and variables in the system.  Because expressions of computational time are necessarily approximate, it's customary to suppress all but the term that is dominant as $n\to\infty$. We first need to build some terminology for these expressions.
 
-```{index} ! asymptotic notation
-```
-
 ## Asymptotic analysis
 
+```{index} ! asymptotic notation
+```
+(definition-asymptotic-notation)=
 ::::{prf:definition} Asymptotic notation
 Let $f(n)$ and $g(n)$ be positive-valued functions. We say $f(n)=O(g(n))$ (read "$f$ is **big-O** of $g$") as $n\rightarrow \infty$ if $f(n)/g(n)$ is bounded above as $n\to\infty$.
 

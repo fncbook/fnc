@@ -12,10 +12,10 @@ It is possible to compute a thin QR factorization using the outer product formul
 
 ## Householder reflections
 
+We will use a particular type of orthogonal matrix.
+
 ```{index} ! Householder reflector, orthogonal matrix
 ```
-
-We will use a particular type of orthogonal matrix.
 
 ::::{prf:definition} Householder reflector
 A **Householder reflector** is a matrix of the form

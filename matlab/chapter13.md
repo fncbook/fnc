@@ -325,7 +325,7 @@ U = @(t) unpack(sol(t));
 
 clf,  pcolor(X', Y', U(0.5)')
 clim([0, 2]), shading interp
-axis equal,  colormap(bone), colorbar
+axis equal,  colormap(sky), colorbar
 title('Advection-diffusion at t = 0.5')  
 xlabel('x'),  ylabel('y')  
 ```
@@ -593,7 +593,7 @@ x = linspace(0, 2.5, 91);
 y = linspace(0, 1, 51);
 [mtx, X, Y] = tensorgrid(x, y);
 clf,  pcolor(x, y, mtx(u)')
-colormap(flipud(bone)),  shading interp,  colorbar
+colormap(flipud(sky)),  shading interp,  colorbar
 axis equal
 xlabel("x"),  ylabel("y")
 title("Deflection of a MEMS membrane")

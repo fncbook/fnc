@@ -9,22 +9,26 @@ The Lagrange formula {eq}`lagrangeinterp` is useful theoretically but not ideal 
 
 ## Derivation
 
-We again will use the function $\Phi$ from {numref}`Definition {number} <definition-polynomial-indicator>`,
+We again will use the error indicator function $\Phi$ from {numref}`Definition {number} <definition-polynomial-indicator>`,
 
 :::{math}
-  \Phi(x) = \prod_{j=0}^n (x-t_j).
+  \Phi(x) = \prod_{j=0}^n (x-t_j),
 :::
+
+as well as a set of values derived from the nodes.
 
 ```{index} ! barycentric weights
 ```
 
-We also define the **barycentric weights**
-
+(definition-barycentric-weights)=
+::::{prf:definition} Barycentric weights
+The **barycentric weights** for nodes $x_0,\dots,x_n$ are defined as
 :::{math}
 :label: baryweight
 w_k = \frac{1}{\displaystyle \prod_{\substack{j=0\\j\neq k}}^n (t_k - t_j)} = \frac{1}{\Phi'(x_k)}, \qquad
 k = 0,\ldots,n.
 :::
+::::
 
 The following formula is the key to efficient and stable evaluation of a polynomial interpolant.
 

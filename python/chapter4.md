@@ -294,7 +294,7 @@ r = f.roots
 print(r)
 ```
 
-Here is the fixed point iteration. This time we keep track of the whole sequence of approximations.
+Here is the fixed-point iteration. This time we keep track of the whole sequence of approximations.
 
 ```{code-cell}
 g = lambda x: x - f(x)
@@ -312,7 +312,7 @@ It's illuminating to construct and plot the sequence of errors.
 err = abs(x - max(r))
 semilogy(err, "-o")
 xlabel("iteration number"), ylabel("error")
-title("Convergence of fixed point iteration");
+title("Convergence of fixed-point iteration");
 ```
 
 It's quite clear that the convergence quickly settles into a linear rate. We could estimate this rate by doing a least-squares fit to a straight line. Keep in mind that the values for small $k$ should be left out of the computation, as they don't represent the linear trend.

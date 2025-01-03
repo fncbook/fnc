@@ -37,7 +37,7 @@ bandwidth
 : The number of diagonals around the main diagonal that have nonzero elements. \
 (@section-linsys-structure)
 
-barycentric formula
+barycentric interpolation formula
 : Computationally useful expression for the interpolating polynomial as a ratio of rational terms. \
 (@section-globalapprox-barycentric)
 
@@ -69,7 +69,7 @@ cubic spline
 : Piecewise cubic function with two globally continuous derivatives, most often used for interpolation or approximation. \
 (@section-localapprox-splines)
 
-diagonalizable
+diagonalizable matrix
 : Matrix that admits an eigenvalue decomposition. Also known as nondefective. \
 (@section-matrixanaly-evd)
 
@@ -113,7 +113,7 @@ extrapolation
 : Use of multiple discretization values to cancel out leading terms in an error expansion. \
 (@section-localapprox-integration)
 
-finite difference
+finite differences
 : Linear combination of function values that approximates the value of a derivative of the function at a point. \
 (@section-localapprox-finitediffs)
 
@@ -121,7 +121,7 @@ finite element method (FEM)
 : Use of piecewise integration to pose a linear system of equations for the approximate solution of a boundary-value problem. \
 (@section-bvp-galerkin)
 
-fixed point iteration
+fixed-point iteration
 : Repeated application of a function in hopes of converging to a fixed point. \
 (@section-nonlineqn-fixed-point)
 
@@ -181,9 +181,13 @@ hermitian
 : Combination of transpose and elementwise complex conjugation. Also describes a matrix that equals its own hermitian. \
 (@section-matrixanaly-symm-eig)
 
-hermitian positive definite (HPD)
+hermitian positive definite matrix
 : Matrix that is hermitian with strictly positive eigenvalues; complex variant of symmetric positive definite. \
 (@section-matrixanaly-symm-eig)
+
+homogeneous boundary condition
+: Having a zero value. \
+(@section-bvp-tpbvp, @section-diffusion-blackscholes)
 
 identity matrix
 : Matrix with ones on the diagonal and zeros elsewhere, acting as the multiplicative identity. \
@@ -201,7 +205,7 @@ induced matrix norm
 : Norm computed using the interpretation of a matrix as a linear operator. \
 (@section-linsys-norms)
 
-initial-value problem (IVP)
+initial-value problem
 : An ordinary differential equation (possibly vector-valued) together with an initial condition. \
 (@section-ivp-basics, @section-ivp-systems)
 
@@ -407,7 +411,7 @@ Runge phenomenon
 : Manifestation of the instability of polynomial interpolation at equally spaced nodes as degree increases. \
 (@section-globalapprox-stability)
 
-Runge--Kutta
+Runge–Kutta
 : One-step method for IVPs that evaluates the derivative of the solution more than once to advance a single step. \
 (@section-ivp-rk)
 
@@ -427,7 +431,7 @@ singular value decomposition (SVD)
 : Expression of a matrix as a product of two orthogonal/unitary matrices and a nonnegative diagonal matrix. \
 (@section-matrixanaly-svd)
 
-sparse
+sparse matrix
 : Describing a matrix that has mostly zero elements for structural reasons. \
 (@section-linsys-structure, @section-krylov-structure)
 
@@ -443,7 +447,7 @@ step size
 : Increment in time between successive solution values in a numerical IVP solver. \
 (@section-ivp-euler)
 
-stiff
+stiff differential equation
 : Describes an IVP in which stability is a greater restriction than accuracy for many solution methods, usually favoring the use of an implicit time stepping method. \
 (@section-ivp-implicit, @section-diffusion-stiffness)
 
@@ -459,7 +463,7 @@ symmetric matrix
 : Square matrix that is equal to its transpose. \
 (@section-linsys-matrices)
 
-symmetric positive definite (SPD) matrix
+symmetric positive definite matrix
 : Matrix that is symmetric and positive definite, thereby permitting a Cholesky factorization. Correspondingly called hermitian positive definite in the complex case. \
 (@section-linsys-structure)
 
@@ -503,7 +507,7 @@ unit vector
 : A vector whose norm equals 1. \
 (@section-linsys-norms)
 
-unitary
+unitary matrix
 : Square matrix with complex-valued entries whose columns are orthonormal. \
 (@section-matrixanaly-evd)
 
@@ -511,8 +515,8 @@ unstable
 : Allowing perturbations of the data to have much larger effects on the results than can be explained by the problem's condition number. \
 (@section-intro-stability)
 
-upper Hessenberg
-: Describing a matrix that has nonzeros only in the upper triangle and first subdiagonal. \
+upper Hessenberg matrix
+: Matrix that has nonzeros only in the upper triangle and first subdiagonal. \
 (@section-krylov-subspace)
 
 Vandermonde matrix
@@ -523,7 +527,7 @@ weights
 : Coefficients in a linear combination of function values in a finite-difference or integration method. \
 (@section-localapprox-finitediffs, @section-localapprox-integration, @section-globalapprox-integration)
 
-zero-stable
+zero-stability
 : Boundedness property of multistep methods that is required for convergence. \
 (@section-ivp-zerostability)
 

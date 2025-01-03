@@ -68,11 +68,10 @@ These equations form a linear system for the coefficients $c_i$:
   \end{bmatrix},
 ```
 
+or more simply, $\mathbf{V} \mathbf{c} = \mathbf{y}$. The matrix $\mathbf{V}$ is of a special type.
+
 ```{index} ! Vandermonde matrix
 ```
-
-or more simply, $\mathbf{V} \mathbf{c} = \mathbf{y}$. The matrix $\mathbf{V}$ is of a
-special type.
 
 ::::{prf:definition} Vandermonde matrix
 Given distinct values $t_1,\ldots,t_n$, a **Vandermonde matrix** for these values is the $n\times n$ matrix appearing in {eq}`vandersystem`.

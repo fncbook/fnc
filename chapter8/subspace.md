@@ -19,6 +19,7 @@ It stands to reason that we could do no worse, and perhaps much better, if we se
 
 ```{index} ! Krylov matrix, ! Krylov subspace
 ```
+
 ::::{prf:definition} Krylov matrix and subspace
 Given $n\times n$ matrix $\mathbf{A}$ and $n$-vector $\mathbf{u}$, the $m$th **Krylov matrix** is the $n\times m$ matrix {eq}`krylovmatrix`. The range (i.e., column space) of this matrix is the $m$th **Krylov subspace** $\mathcal{K}_m$.
 ::::
@@ -137,7 +138,7 @@ We can now proceed iteratively.
 
 ```{index} ! Arnoldi iteration
 ```
-
+(algorithm-subspace-arnoldi)=
 ::::{prf:algorithm} Arnoldi iteration
 Given matrix $\mathbf{A}$ and vector $\mathbf{u}$:
 

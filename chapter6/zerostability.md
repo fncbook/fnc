@@ -125,11 +125,11 @@ A $k$-step Adams method has $\rho(z) = z^k - z^{k-1} = z^{k-1}(z-1)$. Hence 1 is
 The method $u_{i+1} = 2u_i - u_{i-1} + h(f_i-f_{i-1})$ is first-order accurate. But $\rho(z)=(z-1)^2$, which has a double root at $z=1$, so it is not zero-stable.
 ::::
 
+## Dahlquist theorems
+It turns out that lacking zero-stability is the only thing that can go wrong for a consistent multistep method. 
+
 ```{index} Dahlquist theorems
 ```
-## Dahlquist theorems
-
-It turns out that lacking zero-stability is the only thing that can go wrong for a consistent multistep method. 
 
 (theorem-dahlequiv)=
 ```{prf:theorem} Dahlquist equivalence
@@ -139,6 +139,9 @@ A linear multistep method converges as $h\to 0$ if and only if it is consistent 
 The Dahlquist equivalence theorem is one of the most important and celebrated in the history of numerical analysis. It can be proved more precisely that a zero-stable, consistent method is convergent in the same sense as {numref}`Theorem %s <theorem-euler-onestepGTE>`, with the error between numerical and exact solutions being of the same order as the local truncation error, for a wide class of problems.
 
 You may have noticed that the Adams and BD formulas use only about half of the available data from the past $k$ steps, i.e., they have many possible coefficients set to zero. For instance, a $k$-step AB method uses only the $f_j$-values and has order $k$. The order could be made higher by also using $u_j$-values, like the LIAF method does for $k=2$. Also like the LIAF method, however, such attempts are doomed by instability.
+
+```{index} Dahlquist theorems
+```
 
 (theorem-zerostability-dahlquist)=
 ````{prf:theorem} First Dahlquist stability barrier

@@ -32,7 +32,7 @@ Often the domain of $x$ in {eq}`tpbvp` is not explicitly stated but is implied b
 
 Certain special cases of the boundary conditions have their own nomenclature.
 
-```{index} ! Dirichlet boundary condition, ! Neumann boundary condition, ! Robin boundary condition
+```{index} ! Dirichlet boundary condition, ! Neumann boundary condition, ! Robin boundary condition, homogeneous boundary condition
 ```
 
 (definition-tpbvp-bctype)=

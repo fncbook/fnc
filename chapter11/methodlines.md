@@ -40,7 +40,7 @@ for the exact solution $\hat{u}$ at any value of $i$.
 ```{index} ! semidiscretization; see method of lines
 ```
 
-```{index} finite difference; for parabolic PDE, differentiation matrix
+```{index} finite differences; for parabolic PDE, differentiation matrix
 ```
 
 Next we define a vector $\mathbf{u}$ by 

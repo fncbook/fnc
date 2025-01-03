@@ -69,7 +69,7 @@ Because {eq}`bspde` has two derivatives in $S$, we also require a condition at e
 ```{index} Dirichlet boundary condition, Neumann boundary condition
 ```
 
-```{index} ! initial-boundary-value problem
+```{index} ! initial-boundary-value problem, homogeneous boundary condition
 ```
 
 At the left we have a **homogeneous Dirichlet** condition, and at the right we have a nonhomogeneous **Neumann** condition.

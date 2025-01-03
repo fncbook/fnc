@@ -71,11 +71,12 @@ Statements about orthogonal vectors are often made more easily in matrix form. L
 \end{bmatrix}.
 ```
 
+If the columns of $\mathbf{Q}$ are orthonormal, then $\mathbf{Q}^T\mathbf{Q}$ is the $k\times k$ identity matrix. This is such an important property that we will break with common practice here and give this type of matrix a name. 
+
 ```{index} ! ONC matrix
 ```
 
-If the columns of $\mathbf{Q}$ are orthonormal, then $\mathbf{Q}^T\mathbf{Q}$ is the $k\times k$ identity matrix. This is such an important property that we will break with common practice here and give this type of matrix a name. 
-
+(definition-qr-ONC)=
 ```{prf:definition} ONC matrix
 An **ONC matrix** is one whose columns are an orthonormal set of vectors. 
 ```

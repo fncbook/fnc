@@ -16,10 +16,10 @@ Given a continuous scalar function $f$ of a scalar variable, find a real number 
 
 The formulation $f(x)=0$ is general enough to solve any equation. If we are trying to solve an equation $g(x)=h(x)$, we can define $f=g-h$ and find a root of $f$.
 
-```{index} ! Julia; nlsolve
-```
+Unlike the linear problems of the earlier chapters, the usual situation here is that the root cannot be produced in a finite number of operations, even in exact arithmetic. Instead, we seek a sequence of approximations that formally converge to the root, stopping when some member of the sequence seems to be good enough, in a sense we will clarify later.
 
-Unlike the linear problems of the earlier chapters, the usual situation here is that the root cannot be produced in a finite number of operations, even in exact arithmetic. Instead, we seek a sequence of approximations that formally converge to the root, stopping when some member of the sequence seems to be good enough, in a sense we will clarify later. The `NLsolve` package for Julia has a function `nlsolve` for general-purpose rootfinding.
+```{index} Bessel function
+```
 
 (demo-rootproblem-bessel)=
 ::::{prf:example} The rootfinding problem for Bessel functions

@@ -247,7 +247,7 @@ f = @(x) x.^2 - 4*x + 3.5;
 r = roots([1, -4, 3.5]);
 ```
 
-Here is the fixed point iteration. This time we keep track of the whole sequence of approximations.
+Here is the fixed-point iteration. This time we keep track of the whole sequence of approximations.
 
 :::{index} Julia; push!
 :::
@@ -267,7 +267,7 @@ err = abs(x - r(1));
 clf
 semilogy(err, 'o-'), axis tight
 xlabel('iteration'),  ylabel('error')
-title(('Convergence of fixed point iteration'));
+title(('Convergence of fixed-point iteration'));
 ```
 
 It's quite clear that the convergence quickly settles into a linear rate. We could estimate this rate by doing a least-squares fit to a straight line. Keep in mind that the values for small $k$ should be left out of the computation, as they don't represent the linear trend.

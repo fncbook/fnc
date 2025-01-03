@@ -1,7 +1,7 @@
 (section-nonlineqn-next)=
 # Next steps
 
-The fixed point iteration has been used to prove results about convergence; see Quarteroni *et al.* {cite}`quarteroniNumericalMathematics2007` for more details.
+The fixed-point iteration has been used to prove results about convergence; see Quarteroni *et al.* {cite}`quarteroniNumericalMathematics2007` for more details.
 
 Solving nonlinear systems is a complex task.  Some classic texts on the subject include Ortega and Rheinbolt {cite}`ortegaIterativeSolution2014`, Kelley {cite}`kelleyIterativeMethods1995`, and many others.
 

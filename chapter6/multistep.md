@@ -58,7 +58,7 @@ For an implicit method, however, $b_k\neq 0$ and {eq}`multistep` has the form
 Now the unknown ${u}_{i+1}$ that we seek appears inside the function $f$. In general this equation is a nonlinear rootfinding problem for ${u}_{i+1}$ and is not solvable in a finite number of steps by a formula. The implementation of both explicit and implicit multistep formulas is discussed in detail in {numref}`section-ivp-implicit`.
 
 
-```{index} ! Adams--Bashforth formula, ! Adams--Moulton formula, ! backward differentiation formula for IVPs
+```{index} ! Adams–Bashforth formula, ! Adams–Moulton formula, ! backward differentiation formula for IVPs
 ```
 
 As with RK formulas, a multistep method is entirely specified by the values of a few constants. {numref}`table-adams` and {numref}`table-BD` present some of the most well-known and important formulas. The **Adams–Bashforth** (AB) methods are explicit, while **Adams–Moulton** (AM) and **backward differentiation formulas** (BD) are implicit. The tables also list the methods' order of accuracy, to be defined shortly. We adopt the convention of referring to a multistep method by appending its order of accuracy to a two-letter name abbreviation, e.g., the AB3 method.

@@ -293,7 +293,7 @@ rmin, rmax = extrema(r)
 @show rmin, rmax;
 ```
 
-Here is the fixed point iteration. This time we keep track of the whole sequence of approximations.
+Here is the fixed-point iteration. This time we keep track of the whole sequence of approximations.
 
 :::{index} Julia; push!
 :::
@@ -314,7 +314,7 @@ err = @. abs(x - rmax)
 plot(0:12, err;
     m=:o,
     xaxis=("iteration number"),  yaxis=("error", :log10),
-    title="Convergence of fixed point iteration")
+    title="Convergence of fixed-point iteration")
 ```
 
 It's quite clear that the convergence quickly settles into a linear rate. We could estimate this rate by doing a least-squares fit to a straight line. Keep in mind that the values for small $k$ should be left out of the computation, as they don't represent the linear trend.

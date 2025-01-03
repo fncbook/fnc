@@ -62,8 +62,15 @@ project:
     '\myvec': '\operatorname{vec}'
     '\argmin': '\operatorname{argmin}'
   abbreviations:
-    LU: lower triangular times upper triangular
-    QR: orthogonal times upper triangular
+    IVP: initial-value problem
+    BVP: boundary-value problem
+    ONC: matrix with orthonormal columns
+    SVD: singular value decomposition
+    EVD: eigenvalue decomposition
+    SPD: symmetric positive definite
+    HPD: hermitian positive definite
+    PDE: partial differential equation
+    ODE: ordinary differential equation
   numbering:
     heading_1: true
     heading_2: true
@@ -196,7 +203,6 @@ project:
     - title: Appendices
       children:
       - file: appendix/linear-algebra.md
-      - file: appendix/glossary.md
         # - file: refs.md
       - title: Julia codes
         children:
@@ -243,6 +249,7 @@ project:
           - file: python/chapter11.md
           - file: python/chapter12.md
           - file: python/chapter13.md
+    - file: appendix/glossary.md
     - file: genindex.md
 
     

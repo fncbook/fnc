@@ -181,7 +181,7 @@ where $\mathbf{z}=\mathbf{L}^T \mathbf{x}$. Note that since $\mathbf{L}$ is unit
 
 Now we have $\mathbf{A}=\mathbf{L}\mathbf{D}^{1/2}\mathbf{D}^{1/2}\mathbf{L}^T= \mathbf{R}^T \mathbf{R}$, where $\mathbf{R} =\mathbf{D}^{1/2}\mathbf{L}^T$ is an upper triangular matrix whose diagonal entries are positive.
 
-```{index} ! matrix factorization; Cholesky
+```{index} ! matrix factorization; Cholesky, Cholesky factorization
 ```
 
 ```{index} pivoting
