@@ -400,8 +400,8 @@ We can now define and solve the IVP. Since this problem is hyperbolic, not parab
 def dw_dt(t, w):
     U, V = unpack(w)
     dU_dt = V
-    dW_dt = Dxx @ U + U @ Dyy.T
-    return pack(dU_dt, dW_dt)
+    dV_dt = Dxx @ U + U @ Dyy.T
+    return pack(dU_dt, dV_dt)
 
 from scipy.integrate import solve_ivp
 sol = solve_ivp(dw_dt, (0, 4), pack(U0, V0), method="RK45", dense_output=True)
@@ -634,7 +634,7 @@ with printoptions(precision=7, suppress=True):
     print(mtx_test(u))
 ```
 
-The original solution may be accurate to about four digits.
+The original solution seems to be accurate to about four digits.
 
 ``````
 

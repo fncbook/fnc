@@ -7,7 +7,7 @@ function [x, u] = parabolic(phi, xspan, m, ga, gb, tspan, init)
 %   ga, gb   boundary conditions as functions of u and ∂u/∂x
 %   tspan    time interval
 %   init     initial condition as a function of x
-% Output       
+% Output:       
 %   x        spatial nodes (vector)
 %   u        function for the solution u(t) at nodes
 

@@ -8,7 +8,7 @@ from .FNC04 import levenberg
 
 def tensorgrid(x, y):
     """
-    tensor_grid(x, y)
+    tensorgrid(x, y)
 
     Create a tensor grid for a rectangle from its 1d projections x and y.
     Returns a function to reshape a 2d array to a vector, a function to reshape 

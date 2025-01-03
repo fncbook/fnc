@@ -1,4 +1,4 @@
-function [U,X,Y] = poissonfd(f,g,m,xspan,n,yspan)
+function [X, Y, U] = poissonfd(f,g,m,xspan,n,yspan)
 %POISSONFD   Solve Poisson's equation by finite differences.
 % Input:
 %   f            forcing function (function of x,y)
@@ -12,19 +12,23 @@ function [U,X,Y] = poissonfd(f,g,m,xspan,n,yspan)
 %   U            solution (m+1 by n+1)
 %   X,Y          grid matrices (m+1 by n+1)
 
-% Initialize the rectangle discretization. 
-[X,Y,d] = rectdisc(m,xspan,n,yspan);
+% Discretize the domain.
+[x, Dx, Dxx] = diffmat2(m, xspan);
+[y, Dy, Dyy] = diffmat2(n, yspan);
+[mtx, X, Y, vec, unvec, is_boundary] = tensorgrid(x, y);
 
 % Form the collocated PDE as a linear system. 
-A = kron(d.Iy,d.Dxx) + kron(d.Dyy,d.Ix);  % Laplacian matrix
-b = d.vec(f(X,Y));
+Ix = speye(m+1);  Iy = speye(n+1);
+A = kron(Iy, sparse(Dxx)) + kron(sparse(Dyy), Ix);  % Laplacian matrix
+b = vec(mtx(f));
 
 % Replace collocation equations on the boundary.
-scale = max(abs(A(n+2,:)));
+scale = max(abs(A(n+2, :)));
 I = speye(size(A));
-A(d.isbndy,:) = scale*I(d.isbndy,:);           % Dirichet assignment
-b(d.isbndy) = scale*g( X(d.isbndy),Y(d.isbndy) );  % assigned values
+idx = vec(is_boundary);
+A(idx, :) = scale * I(idx, :);           % Dirichet assignment
+b(idx) = scale * g( X(idx),Y(idx) );     % assigned values
 
 % Solve the linear sytem and reshape the output.
-u = A\b;
-U = d.unvec(u);
+u = A \ b;
+U = unvec(u);
