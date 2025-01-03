@@ -1,0 +1,265 @@
+---
+numbering:
+  enumerator: 4.3.%s
+---
+(section-nonlineqn-newton)=
+# Newton's method
+
+Newton's method is the cornerstone of rootfinding. We introduce the key idea with an example in {numref}`Demo %s <demo-newton-line>`.
+
+(demo-newton-line)=
+::::{prf:example} Graphical interpretation of Newton's method
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-newton-line-julia
+:::
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-newton-line-matlab
+:::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-newton-line-python
+:::
+```` 
+`````
+::::
+
+Using general notation, if we have a root approximation $x_k$, we can construct a **linear model** of $f(x)$ using the classic formula for the tangent line of a differentiable function,
+
+```{math}
+:label: tangentline
+  q(x) = f(x_k) + f'(x_k)(x-x_k).
+```
+
+Finding the root of $q(x)=0$ is trivial. We define the next approximation by the condition $q(x_{k+1})=0$, which leads to the following.
+
+```{index} ! Newton's method
+```
+
+(algorithm-nonlineqn-newton)=
+::::{prf:algorithm} Newton's method
+Given a function $f$, its derivative, $f'$, and an initial value $x_1$, iteratively define
+
+```{math}
+:label: newton
+  x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)}, \qquad k=1,2,\ldots.
+```
+::::
+
+## Convergence
+
+The graphs of {numref}`Demo %s <demo-newton-line>` suggest why the Newton iteration may converge to a root: any differentiable function looks more and more like its tangent line as we zoom in to the point of tangency. Yet it is far from clear that it *must* converge, or at what rate it will do so. The matter of the convergence rate is fairly straightforward to resolve. Define the error sequence
+
+```{math}
+:label: errorseq
+\epsilon_k = x_k - r , \quad k=1,2,\ldots,
+```
+
+where $r$ is the limit of the sequence and $f(r)=0$. Exchanging $x$-values for $\epsilon$-values in {eq}`newton` gives
+
+```{math}
+  \epsilon_{k+1}+r = \epsilon_k + r - \frac{f(r+\epsilon_k)}{f'(r+\epsilon_k)}.
+```
+
+We assume that $|\epsilon_k|\to 0$; eventually, the errors remain as small as we please forever. Then a Taylor expansion of $f$ about $x=r$ gives
+
+```{math}
+  \epsilon_{k+1} = \epsilon_k - \frac{ f(r) + \epsilon_kf'(r) + \frac{1}{2}\epsilon_k^2f''(r) +
+    O(\epsilon_k^3)}{ f'(r) + \epsilon_kf''(r) + O(\epsilon_k^2)}.
+```
+
+We use the fact that $f(r)=0$ and additionally assume now that $r$ is a simple root, i.e., $f'(r)\neq 0$. Then
+
+```{math}
+\epsilon_{k+1} = \epsilon_k - \epsilon_k \left[ 1 + \dfrac{1}{2}\dfrac{f''(r)}{f'(r)} \epsilon_k
++ O(\epsilon_k^2)\right] \, \left[ 1 + \dfrac{f''(r)}{f'(r)}\epsilon_k + O(\epsilon_k^2)\right]^{-1}.
+```
+
+The series in the denominator is of the form $1/(1+z)$. Provided $|z|<1$, this is the limit of the geometric series $1-z+z^2-z^3 + \cdots$. Keeping only the lowest-order terms, we derive
+
+\begin{align*}
+\label{newtonerr}
+\epsilon_{k+1} &= \epsilon_k - \epsilon_k \left[ 1 + \dfrac{1}{2}\dfrac{f''(r)}{f'(r)} \epsilon_k + O(\epsilon_k^2) \right] \, \left[ 1 - \dfrac{f''(r)}{f'(r)}
+\epsilon_k + O(\epsilon_k^2) \right]\\
+&= \frac{1}{2}\, \frac{f''(r)}{f'(r)} \epsilon_k^2 + O(\epsilon_k^3).
+\end{align*}
+
+::::{prf:observation}
+Asymptotically, each iteration of Newton's method roughly squares the error.
+::::
+
+```{index} ! quadratic convergence
+```
+
+```{index} ! convergence rate; quadratic
+```
+
+::::{prf:definition} Quadratic convergence
+Suppose a sequence $x_k$ approaches limit $x^*$. If the error sequence $\epsilon_k=x_k - x^*$ satisfies
+
+```{math}
+:label: quadratic-convergence
+  \lim_{k\to\infty} \frac{|\epsilon_{k+1}|}{|\epsilon_k|^2} = L
+```
+
+for a positive constant $L$, then the sequence has **quadratic convergence** to the limit.
+::::
+
+Recall that linear convergence is identifiable by trending toward a straight line on a log-linear plot of the error. When the convergence is quadratic, no such straight line exists—the convergence keeps getting steeper. As a numerical test, note that $|\epsilon_{k+1}|\approx K |\epsilon_{k}|^2$ implies that as $k\to\infty$,
+
+```{math}
+:label: quadratictest
+\begin{split}
+  \log |\epsilon_{k+1}| & \approx 2 \log |\epsilon_{k}| + L,\\
+    \frac{\log |\epsilon_{k+1}|}{\log |\epsilon_{k}|} &\approx 2 + \frac{L}{\log |\epsilon_{k}|} \to 2. 
+\end{split}
+```
+
+(demo-newton-converge)=
+::::{prf:example} Convergence of Newton's method
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-newton-converge-julia
+:::
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-newton-converge-matlab
+:::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-newton-converge-python
+:::
+```` 
+`````
+::::
+
+
+
+
+
+
+```{index} roots; multiplicity of
+```
+
+Let's summarize the assumptions made to derive quadratic convergence as given by {eq}`newtonerr`:
+
+1. The residual function $f$ has to have enough continuous derivatives to make the Taylor series expansion valid. Often this is stated as $f$ having sufficient *smoothness*. This is usually not a problem, but see [Exercise 6](#problem-newton-alternate).
+2. We required $f'(r)\neq 0$, meaning that $r$ must be a simple root. See [Exercise 7](#problem-newton-multiple) to investigate what happens at a multiple root.
+3. We assumed that the sequence converged, which is not easy to guarantee in any particular case. In fact,
+finding a starting value from which the Newton iteration converges is often the most challenging part of a rootfinding problem. We will try to deal with this issue in {numref}`section-nonlineqn-quasinewton`.
+
+## Implementation
+
+Our implementation of Newton's iteration is given in {numref}`Function {number} <function-newton>`. It accepts functions that evaluate $f$ and $f'$ and the starting value $x_1$ as input arguments. Beginning programmers are tempted to embed $f$ and $f'$ directly into the code, but there are two good reasons not to do so. First, each new rootfinding problem would require its own copy of the code, creating a lot of duplication. Second, you may want to try more than one rootfinding algorithm for a particular problem, and keeping the definition of the problem separate from the algorithm for its solution makes this task much easier.  
+
+```{index} ! Julia; keyword function arguments
+```
+
+```{index} ! Julia; break
+```
+
+(function-newton)=
+``````{prf:algorithm} newton
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-newton-julia
+:::
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-newton-matlab
+:::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #function-newton-python
+:::
+````
+`````
+``````
+
+
+```{index} backward error, residual
+```
+
+{numref}`Function {number} <function-newton>` also deals with a thorny practical issue: how to stop the iteration. It adopts a three-part criterion. First, it monitors the difference between successive root estimates, $|x_k-x_{k-1}|$, which is used as a stand-in for the unknown error $|x_k-r|$. In addition, it monitors the residual $|f(x_k)|$, which is equivalent to the backward error and more realistic to control in badly conditioned problems (see {numref}`section-nonlineqn-rootproblem`). If either of these quantities is considered to be sufficiently small, the iteration ends. Finally, we need to protect against the possibility of a nonconvergent iteration, so the procedure terminates with a warning if a maximum number of iterations is exceeded.
+
+(demo-newton-usage)=
+::::{prf:example} Using Newton's method
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-newton-usage-julia
+:::
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-newton-usage-matlab
+:::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-newton-usage-python
+:::
+```` 
+`````
+::::
+
+
+## Exercises
+
+For each of Exercises 1–3, do the following steps.
+  
+**(a)** ✍ Rewrite the equation into the standard form for rootfinding, $f(x) = 0$, and compute $f'(x)$. 
+
+**(b)** ⌨  Make a plot of $f$ over the given interval and determine how many roots lie in the interval. 
+
+**(c)** ⌨ Use `nlsolve` with `ftol=1e-15` to find a reference value for each root. 
+
+**(d)** ⌨ Use {numref}`Function {number} <function-newton>` to find each root.
+
+**(e)** ⌨ For one of the roots, use the errors in the Newton sequence to determine numerically whether the convergence is roughly quadratic.
+
+1. $x^2=e^{-x}$, over $[-2,2]$
+
+2. $2x = \tan x$, over $[-0.2,1.4]$
+
+3. $e^{x+1}=2+x$, over $[-2,2]$
+
+    ---
+
+4. ⌨  Plot the function $f(x)=x^{-2} - \sin x$ on the interval $x \in [0.5,10]$.  For each initial value $x_1=1,\, x_1=2,\,\ldots,\, x_1=7$, apply {numref}`Function {number} <function-newton>` to $f$, and make a table showing $x_1$ and the resulting root found by the method. In which case does the iteration converge to a root other than the one closest to it? Use the plot to explain why that happened.
+  
+5. ✍ Show that if $f(x)=x^{-1}-b$ for nonzero $b$, then Newton's iteration converging to the root $r=1/b$ can be implemented without performing any divisions. 
+
+(problem-newton-alternate)=
+6. ✍ Discuss what happens when Newton's method is applied to find a root of $f(x) = \operatorname{sign}(x) \sqrt{|x|}$, starting at $x_1\ne 0$. (Hint: Write out both $f(x)$ and $f'(x)$ as piecewise functions.)
+
+(problem-newton-multiple)=
+7. ✍ In the case of a multiple root, where $f(r)=f'(r)=0$, the derivation of the quadratic error convergence in {eq}`newtonerr` is invalid. Redo the derivation to show that in this circumstance and with $f''(r)\neq 0$, the error converges only linearly. 
+
+8. ✍ In {numref}`Function {number} <function-newton>` and elsewhere, the actual error is not available, so we use $|x_k-x_{k-1}|$ as an approximate indicator of error to determine when to stop the iteration. Find an example that foils this indicator; that is, a sequence $\{x_k\}$ such that
+  
+    ```{math}
+    \lim_{k\rightarrow \infty} (x_k-x_{k-1}) = 0,
+    ```
+
+    but $\{x_k\}$ diverges. (Hint: You have seen such sequences in calculus.) Hence the need for residual tolerances and safety valves in the code!
+
+
