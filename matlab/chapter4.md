@@ -430,7 +430,7 @@ hold on, axis equal
 plot(y_, x_)
 plot([0, max(y_)], [0, max(y_)], 'k--')
 xlabel('x'), ylabel('y')
-legend(('h(x)', 'inverse', 'y=x'));
+legend('h(x)', 'inverse', 'y=x');
 ```
 ``````
 
@@ -708,7 +708,7 @@ for R = [1e-3, 1e-2, 1e-1]
     labels = [labels; sprintf("R=%.2g", normres)];
 end
 xlabel("iteration"), ylabel("error")
-legend((labels));
+legend(labels);
 ```
 
 In the least perturbed case, where the minimized residual is less than $10^{-3}$, the convergence is plausibly quadratic. At the next level up, the convergence starts similarly but suddenly stagnates for a long time. In the most perturbed case, the quadratic phase is nearly gone and the overall shape looks linear.
@@ -725,7 +725,7 @@ clf, fplot(@(s) V * s ./ (Km + s), [0, 6], '--')
 hold on, scatter(s, w)
 xlabel('concentration'), ylabel('reaction rate')    
 labels = ["ideal", "noisy data"];    
-legend((labels, 'location', 'east'));
+legend(labels, 'location', 'east');
 ```
 
 The idea is to pretend that we know nothing of the origins of this data and use nonlinear least squares to find the parameters in the theoretical model function $v(s)$. In {eq}`nlsq-misfit`, the $s$ variable plays the role of $t$, and $v$ plays the role of $g$. In the Jacobian, the derivatives are with respect to the parameters in $\mathbf{x}$.
@@ -756,7 +756,7 @@ final_misfit_norm = norm(model(s) - w)
 hold on, fplot(model, [0, 6])
 title('Michaelis-Menten fitting')    
 labels = [labels, "nonlinear fit"];    
-legend((labels, 'location', 'east'));
+legend(labels, 'location', 'east');
 ```
 
 For this particular model, we also have the option of linearizing the fit process. Rewrite the model as 
@@ -786,7 +786,7 @@ linmodel = @(s) 1 ./ (beta + alpha ./ s);
 final_misfit_linearized = norm(linmodel(s) - w)
 fplot(linmodel, [0, 6])
 labels = [labels, "linearized fit"];    
-legend((labels, 'location', 'east'));
+legend(labels, 'location', 'east');
 ```
 
 The truly nonlinear fit is clearly better in this case. It optimizes a residual for the original measured quantity rather than a transformed one we picked for algorithmic convenience.

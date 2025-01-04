@@ -140,7 +140,7 @@ The definition of `f` above is in terms of `c`. When `c` is changed, then `f` ha
 c = V \ y;
 f = @(year) polyval(c(end:-1:1), (year - 1955) / 10);
 fplot(f, [1955, 2000]) 
-legend(('data', 'linear', 'cubic', 'Location', 'northwest'));
+legend('data', 'linear', 'cubic', 'Location', 'northwest');
 ```
 
 If we were to continue increasing the degree of the polynomial, the residual at the data points would get smaller, but overfitting would increase.
@@ -186,7 +186,7 @@ It's tempting to conjecture that the slope $b\to -1$ asymptotically. Here is how
 ```{code-cell}
 hold on
 loglog(k, a * k.^b)
-legend(('sequence', 'power-law fit'));
+legend('sequence', 'power-law fit');
 ```
 ``````
 

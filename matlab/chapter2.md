@@ -165,7 +165,7 @@ The `plot` function plots lines connecting the given $x$ and $y$ values; you can
 ```{code-cell}
 hold on 
 plot(tt, yy)
-legend(("data", "interpolant", "location", "northwest"));
+legend("data", "interpolant", "location", "northwest");
 ```
 ``````
 
@@ -728,7 +728,7 @@ You can see that while the full story is complicated, the graph is trending to a
 hold on
 loglog(n_, t_(1) * (n_ / n_(1)).^2, '--')
 axis tight
-legend(('data', 'O(n^2)', 'location', 'southeast'));
+legend('data', 'O(n^2)', 'location', 'southeast');
 ```
 ``````
 
@@ -763,7 +763,7 @@ hold on, loglog(n_,t_(end)*(n_/n_(end)).^3,'--')
 axis tight
 xlabel('size of matrix'), ylabel('time (sec)')
 title('Timing of LU factorization')
-legend(('lu','O(n^3)','location','southeast'));
+legend('lu','O(n^3)','location','southeast');
 ```
 ``````
 

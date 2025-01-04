@@ -19,7 +19,7 @@ numbering:
 ``````
 
 (function-poissonfd-matlab)=
-``````{dropdown} Create a tensor-product grid
+``````{dropdown} Solution of Poisson's equation by finite differences
 ```{literalinclude} fnc/poissonfd.m
 :language: matlab
 :linenos: true
@@ -27,7 +27,7 @@ numbering:
 ``````
 
 (function-elliptic-matlab)=
-``````{dropdown} Create a tensor-product grid
+``````{dropdown} Solution of elliptic PDE by Chebyshev collocation
 ```{literalinclude} fnc/elliptic.m
 :language: matlab
 :linenos: true

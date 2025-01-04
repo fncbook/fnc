@@ -500,7 +500,7 @@ loglog(h_, h_, "--", label="$O(h)$")
 loglog(h_, h_**2, "--", label="$O(h^2)$")
 xlabel("$h$")
 ylabel("error")
-legend(());
+legend();
 ```
 ``````
 
@@ -540,7 +540,7 @@ plot(h_, 0.1 * 2 ** (-52) / h_, "--", color="k", label="$O(h^{-1})$")
 xlabel("$h$")
 ylabel("total error")
 title("FD error with roundoff")
-legend(());
+legend();
 ```
 
 Again the graph is made so that $h$ decreases from left to right. The errors are dominated at first by truncation error, which decreases most rapidly for the fourth-order formula. However, increasing roundoff error eventually equals and then dominates the truncation error as $h$ continues to decrease. As the order of accuracy increases, the crossover point moves to the left (greater efficiency) and down (greater accuracy).

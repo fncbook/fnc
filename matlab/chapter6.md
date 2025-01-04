@@ -213,7 +213,7 @@ We could define a different interpolant to get a smoother picture above, but the
 ```{code-cell}
 [t, u] = eulerivp(ivp, a, b, 50);
 hold on, plot(t, u, '.-')
-legend(('20 steps', '50 steps'));
+legend('20 steps', '50 steps');
 ```
 
 Increasing $n$ changed the solution noticeably. Since we know that interpolants and finite differences become more accurate as $h\to 0$, we should anticipate the same behavior from Euler's method. We don't have an exact solution to compare to, so we will use a built-in solver to construct an accurate reference solution.
@@ -245,7 +245,7 @@ hold on, loglog(n, 0.5 * err(end) * (n / n(end)).^(-1), '--')
 xlabel('n')
 ylabel('inf-norm error')
 title('Convergence of Euler''s method')
-legend(('error', 'O(n^{-1})', 'location', 'southwest'));
+legend('error', 'O(n^{-1})', 'location', 'southwest');
 ```
 ``````
 
@@ -279,7 +279,7 @@ plot(sol.Time, sol.Solution)
 xlabel("t")
 ylabel("u(t)")
 title('Predator-prey solution')
-legend(('prey', 'predator'));
+legend('prey', 'predator');
 ```
 
 We can also use {numref}`Function {number} <function-euler>` to find the solution.
@@ -336,7 +336,7 @@ t = linspace(a, b, 1001);
 clf, plot(t, theta(t))
 xlabel("t");  ylabel("angle")
 title("Uncoupled pendulums")
-legend(("\theta_1", "\theta_2"));
+legend("\theta_1", "\theta_2");
 ```
 
 You can see that the pendulums swing independently. Because the model is nonlinear and the initial angles are not small, they have slightly different periods of oscillation, and they go in and out of phase.
@@ -350,7 +350,7 @@ theta = solutionFcn(ivp, a, b, OutputVariables = 1:2);
 clf, plot(t, theta(t))
 xlabel("t");  ylabel("angle")
 title("Coupled pendulums")
-legend(("\theta_1", "\theta_2"));
+legend("\theta_1", "\theta_2");
 ```
 
 The coupling makes the pendulums swap energy back and forth.
@@ -401,7 +401,7 @@ loglog(2*n, 1e-5 * (n / n(end)) .^ (-2), '--')
 loglog(4*n, 1e-10 * (n / n(end)) .^ (-4), '--')
 xlabel("f-evaluations");  ylabel("inf-norm error")
 title("Convergence of RK methods")
-legend(("IE2", "RK4", "O(n^{-2})", "O(n^{-4})", "location", "southwest"));
+legend("IE2", "RK4", "O(n^{-2})", "O(n^{-4})", "location", "southwest");
 ```
 
 The fourth-order variant is more efficient in this problem over a wide range of accuracy.
@@ -508,7 +508,7 @@ hold on
 loglog(n, 0.5 * err(end) * (n / n(end)) .^ (-4), '--')
 xlabel("n");  ylabel("inf-norm error")
 title("Convergence of AB4")
-legend(("AB4", "O(n^{-4})", "location", "southwest"));
+legend("AB4", "O(n^{-4})", "location", "southwest");
 ```
 ``````
 
@@ -538,7 +538,7 @@ Now we repeat the process using the explicit AB4 method.
 hold on
 plot(tE, uE, '.', 'markersize', 8)
 ylim([-5, 3])
-legend(("AM2", "AB4"));
+legend("AM2", "AB4");
 ```
 
 Once the solution starts to take off, the AB4 result goes catastrophically wrong.
@@ -557,7 +557,7 @@ hold on
 plot(tE, uE)
 [tE, uE] = ab4(ivp, 0, 400, 1600);
 plot(tE, uE)
-legend(("AM2, n=200", "AB4, n=1000", "AB4, n=1600"));
+legend("AM2, n=200", "AB4, n=1000", "AB4, n=1600");
 ```
 
 So AB4, which is supposed to be _more_ accurate than AM2, actually needs something like 8 times as many steps to get a reasonable-looking answer!

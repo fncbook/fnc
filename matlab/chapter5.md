@@ -97,7 +97,7 @@ c = polyfit(t, y, n);     % polynomial coefficients
 p = @(x) polyval(c, x);
 hold on
 fplot(p, [-1 1])
-legend(('data', 'interpolant', 'location', 'north'));
+legend('data', 'interpolant', 'location', 'north');
 ```
 
 But now consider a different set of points generated in almost exactly the same way.
@@ -115,7 +115,7 @@ The points themselves are unremarkable. But take a look at what happens to the p
 c = polyfit(t, y, n);     % polynomial coefficients
 p = @(x) polyval(c, x);
 hold on, fplot(p, [-1 1])
-legend(('data', 'interpolant', 'location', 'north'));
+legend('data', 'interpolant', 'location', 'north');
 ```
 
 Surely there must be functions that are more intuitively representative of those points!
@@ -233,7 +233,7 @@ hold on
 fplot(p, [0, 1], displayname="interpolant")
 scatter(t, y, displayname="values at nodes")
 title("PL interpolation")
-legend(());
+legend();
 ```
 ``````
 
@@ -264,7 +264,7 @@ hold on
 loglog(n, order2, "k--", displayname="O(n^{-2})")
 xlabel("n");  ylabel("|| f-p ||_{\infty}")
 title("Convergence of PL interpolation")
-legend(());
+legend();
 ```
 ``````
 
@@ -287,7 +287,7 @@ S = spinterp(t, y);
 fplot(S, [0, 1], displayname="spline")
 
 xlabel("x");  ylabel("y")
-legend(());
+legend();
 ```
 
 Now we look at the convergence rate as the number of nodes increases.
@@ -462,7 +462,7 @@ hold on
 loglog(h, order1, "--", h, order2, "--")
 xlabel("h");  ylabel("error")
 title("Convergence of finite differences")
-legend(("FD1", "FD2", "O(h)", "O(h^2)"));
+legend("FD1", "FD2", "O(h)", "O(h^2)");
 ```
 ``````
 
@@ -500,7 +500,7 @@ hold on
 loglog(h, order1, "k--")
 xlabel("h");  ylabel("error")
 title("FD error with roundoff")
-legend(("FD1", "FD2", "FD4", "O(1/h)", "location", "northeast"));
+legend("FD1", "FD2", "FD4", "O(1/h)", "location", "northeast");
 ```
 
 Again the graph is made so that $h$ decreases from left to right. The errors are dominated at first by truncation error, which decreases most rapidly for the fourth-order formula. However, increasing roundoff error eventually equals and then dominates the truncation error as $h$ continues to decrease. As the order of accuracy increases, the crossover point moves to the left (greater efficiency) and down (greater accuracy).
@@ -589,7 +589,7 @@ hold on
 loglog(n, 0.1 * abs(err(end)) * (n / n(end)).^(-2), "k--", displayname="O(n^{-2})")
 xlabel("n");  ylabel("error")
 title("Convergence of trapezoidal integration")
-legend(());
+legend();
 ```
 ``````
 
@@ -744,6 +744,6 @@ title("Convergence of adaptive integration")
 order4 = 0.1 * abs(err(end)) * (n / n(end)).^(-4);
 hold on
 loglog(n, order4, "k--", displayname="O(n^{-4})")
-legend(());
+legend();
 ```
 ``````

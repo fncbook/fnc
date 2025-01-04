@@ -132,7 +132,7 @@ The error is zero at the nodes, by the definition of interpolation. The error bo
 f = @(x) sin( exp(2 * x) );
 clf,  fplot(f, [0, 1], displayname="function")
 xlabel('x'),  ylabel('f(x)')   
-legend((location="southwest"));
+legend(location="southwest");
 ```
 
 We start with 4 equally spaced nodes ($n=3$).

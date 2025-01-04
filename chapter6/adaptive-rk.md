@@ -135,19 +135,19 @@ Our implementation of an embedded second/third-order (RK23) code is given in {nu
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
-:::{embed} #demo-adapt-sing`-julia
+:::{embed} #demo-adapt-sing-julia
 :::
 ```` 
 
 ````{tab-item} MATLAB
 :sync: matlab
-:::{embed} #demo-adapt-sing`-matlab
+:::{embed} #demo-adapt-sing-matlab
 :::
 ```` 
 
 ````{tab-item} Python
 :sync: python
-:::{embed} #demo-adapt-sing`-python
+:::{embed} #demo-adapt-sing-python
 :::
 ```` 
 `````

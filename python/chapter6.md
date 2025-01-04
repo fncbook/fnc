@@ -223,7 +223,7 @@ fig, ax = subplots()
 ax.plot(t, u[0, :], "-o", label="$n=20$")
 xlabel("$t$"), ylabel("$u(t)$")
 title("Solution by Euler's method")
-legend(());
+legend();
 ```
 
 We could define a different interpolant to get a smoother picture above, but the derivation of Euler's method assumed a piecewise linear interpolant. We can instead request more steps to make the interpolant look smoother.
@@ -265,7 +265,7 @@ loglog(n_, err_, "-o", label="results")
 plot(n_, 0.5 * (n_ / n_[0])**(-1), "--", label="1st order")
 xlabel("$n$"), ylabel("inf-norm error")
 title("Convergence of Euler's method")
-legend(());
+legend();
 ```
 ``````
 
@@ -564,7 +564,7 @@ plot(tE, uE[0], ".-", label="AM4, n=1000")
 tE, uE = FNC.ab4(f, [0, 400], u0, 1600)
 plot(tE, uE[0], ".-", label="AM4, n=1600")
 xlabel("$t$"),  ylabel("$u(t)$")
-legend(());
+legend();
 ```
 
 So AB4, which is supposed to be _more_ accurate than AM2, actually needs something like 8 times as many steps to get a reasonable-looking answer!

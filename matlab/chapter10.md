@@ -102,7 +102,7 @@ sol = bvp4c(bvpfcn, bcfcn, sol_init);
 plot(sol.x, sol.y, '-o')
 xlabel('r'), ylabel('y(r)')
 title('Solution of the membrane problem')
-legend(("w(r)", "w'(r)", location="east"));
+legend("w(r)", "w'(r)", location="east");
 ```
 
 It's smart to check visually that the boundary conditions are satisfied.

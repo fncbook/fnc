@@ -577,7 +577,7 @@ for j = 1:4
 end
 title('Convergence of restarted GMRES')
 xlabel('m'),  ylabel('residual norm')
-legend(('no restart','every 20','every 40','every 60','location','southwest'));
+legend('no restart','every 20','every 40','every 60','location','southwest');
 ```
 
 The "pure" GMRES curve is the lowest one. All of the other curves agree with it until the first restart. Decreasing the restart value makes the convergence per iteration generally worse, but the time required per iteration smaller as well.
@@ -628,7 +628,7 @@ hold on
 semilogy(m, rho .^ m, 'k--')
 xlabel('m'),  ylabel('relative residual') 
 title('Convergence of MINRES') 
-legend(('MINRES', 'upper bound', 'location', 'southwest'));
+legend('MINRES', 'upper bound', 'location', 'southwest');
 ```
 
 The upper bound turns out to be pessimistic here, especially in the later iterations. However, you can see a slow linear phase in the convergence that tracks the bound closely.
@@ -666,7 +666,7 @@ hold on,  semilogy(0:M, residCG / norm(b), '.-')
 title('Convergence of MINRES and CG')
 xlabel('Krylov dimension m')
 ylabel('||r_m|| / ||b||')
-legend(('MINRES', 'CG'));
+legend('MINRES', 'CG');
 ```
 
 There is little difference between the two methods here. Next, we increase the condition number of the matrix by a factor of 25. The rule of thumb predicts that the number of iterations required should increase by a factor of about 5.
@@ -688,7 +688,7 @@ hold on,  semilogy(0:M, residCG / norm(b), '.-')
 title('Convergence of MINRES and CG')
 xlabel('Krylov dimension m')
 ylabel('||r_m|| / ||b||')
-legend(('MINRES', 'CG'));
+legend('MINRES', 'CG');
 ```
 
 Both methods have an early superlinear phase that allow them to finish slightly sooner than the factor of 5 predicted: {numref}`Theorem {number} <theorem-minrescg-converge>` is an upper bound, not necessarily an approximation. Both methods ultimately achieve the same reduction in the residual; MINRES stops earlier, but with a slightly larger error.
@@ -800,7 +800,7 @@ title('Unpreconditioned MINRES')
 [x, ~, ~, ~, resid_prec] = minres(A, b, 1e-10, 400, M);
 hold on,  semilogy(resid_prec)
 title('Precondtioned MINRES')
-legend(('no prec.', 'with prec.'));
+legend('no prec.', 'with prec.');
 ```
 
 The diagonal preconditioner cut down substantially on the number of iterations. The effect on the total time is less dramatic, but this is not a large version of the problem.
@@ -859,6 +859,6 @@ clf, semilogy(resid_plain)
 hold on, semilogy(resid_prec)
 xlabel('iteration number'), ylabel('residual norm')
 title('Precondtioned GMRES ')
-legend(('no preconditioner', 'with preconditioner'));
+legend('no preconditioner', 'with preconditioner');
 ```
 ```
