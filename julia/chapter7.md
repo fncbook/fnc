@@ -30,7 +30,7 @@ A = [0 1 0 0; 1 0 0 0; 1 1 0 1; 0 1 1 0]
 The `graphplot` function makes a visual representation of this graph.
 
 ```{code-cell}
-using Plots, GraphRecipes
+using GraphRecipes
 graphplot(A, names=1:4, markersize=0.2, arrow=6)
 ```
 
@@ -239,7 +239,6 @@ BF_bound = cond(V) * norm(ΔA)
 If we plot the eigenvalues of many perturbations, we get a cloud of points that roughly represents all the possible eigenvalues when representing this matrix with single-precision accuracy.
 
 ```{code-cell}
-using Plots
 plt = scatter(λ, zeros(n), aspect_ratio=1)
 for _ in 1:200
     ΔA = eps(Float32) * normalize(randn(n, n) + 1im * randn(n, n))
@@ -297,7 +296,7 @@ A
 We verify some of the fundamental SVD properties using standard Julia functions from `LinearAlgebra`.
 
 ```{code-cell}
-A = [i^j for i = 1:5, j = 0:3]
+A = [i^j for i in 1:5, j in 0:3]
 ```
 
 ```{index} ! Julia; svdvals
@@ -390,7 +389,7 @@ labels = ["perturbation δ", "δ²", "R(x) - λ"]
 We make an image from some text, then reload it as a matrix.
 
 ```{code-cell}
-using Plots, Images
+using Images
 plot(annotations=(0.5, 0.5, text("Hello world", 44, :center, :center)),
     grid=:none, frame=:none, size=(400, 150))
 savefig("hello.png")

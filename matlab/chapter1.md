@@ -13,7 +13,6 @@ numbering:
 
 (function-horner-matlab)=
 `````{dropdown} **Horner's algorithm for evaluating a polynomial**
-:open: true
 ```{literalinclude} ../matlab/fnc/horner.m
 :lineno-start: 1
 :language: matlab
@@ -23,7 +22,7 @@ numbering:
 ## Examples
 
 ```{code-cell}
-:tags: remove-cell
+:tags: [remove-cell]
 addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
 addpath /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
@@ -32,7 +31,6 @@ FNC_init
 ### 1.1 @section-intro-floating-point
 (demo-float-accuracy-matlab)=
 ``````{dropdown} @demo-float-accuracy
-:open: false
 ::::{grid} 1 1 2 2
 Recall the grade-school approximation to the number $\pi$.
 
@@ -77,7 +75,6 @@ accurate_digits = -log10(rel_accuracy)
 
 (demo-float-double-matlab)=
 ``````{dropdown} @demo-float-double
-:open: false
 In MATLAB, values are double-precision floats unless declared otherwise. 
 
 ```{code-cell}
@@ -129,7 +126,6 @@ format short e
 
 (demo-float-arithmetic-matlab)=
 ``````{dropdown} @demo-float-arithmetic
-:open: false
 
 There is no double-precision number between $1$ and $1+\epsilon_\text{mach}$. Thus the following difference is zero despite its appearance.
 
@@ -150,7 +146,6 @@ This is now the expected result. But we have found a rather shocking breakdown o
 
 (demo-condition-roots-matlab)=
 ``````{dropdown} @demo-condition-roots
-:open: false
 
 The polynomial $p(x) = \frac{1}{3}(x-1)(x-1-\epsilon)$ has roots $1$ and $1+\epsilon$. For small values of $\epsilon$, the roots are ill-conditioned. 
 
@@ -201,7 +196,6 @@ This matches the observation pretty well.
 
 (demo-algorithms-horner-matlab)=
 ``````{dropdown} @demo-algorithms-horner
-:open: false
 Here we show how to use {numref}`Function {number} <function-horner>` to evaluate a polynomial. Let us define a vector of the coefficients of $p(x)=(x-1)^3=x^3-3x^2+3x-1$, in ascending degree order.
 
 ```{code-cell}
@@ -225,7 +219,6 @@ The comments at the start of {numref}`Function {number} <function-horner>` are d
 
 (demo-stability-quadbad-matlab)= 
 ``````{dropdown} @demo-stability-quadbad
-:open: false
 
 ```{index} ! MATLAB; scientific notation
 ```
@@ -293,7 +286,6 @@ abs(x2 - 1e-6) / 1e-6
 
 (demo-stability-roots-matlab)=
 ``````{dropdown} @demo-stability-roots
-:open: false
 
 
 ::::{grid} 1 1 2 2

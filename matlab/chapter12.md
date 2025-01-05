@@ -11,7 +11,7 @@ numbering:
 ## Examples
 
 ```{code-cell}
-:tags: remove-cell
+:tags: [remove-cell]
 addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
 addpath /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
@@ -44,7 +44,7 @@ U = sol.Solution;
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 waterfall(x, t(1:5:end), U(:, 1:5:end)')
 view(-13, 65)
 xlabel('x'), ylabel('t'), zlabel('u(x,t)')
@@ -54,7 +54,7 @@ title('Advection equation')
 An animation shows the solution nicely. The bump moves with speed 2 to the right, reentering on the left as it exits to the right because of the periodic conditions. 
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 clf
 plot(x, U(:, 1))
 hold on,  grid on
@@ -115,7 +115,7 @@ RHO = sol.Solution;
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 clf
 for plot_idx = 1:20:101
     str = sprintf("t = %.2f", t(plot_idx));
@@ -130,7 +130,7 @@ legend(location="northwest")
 The bump slowly moves backward on the roadway, spreading out and gradually fading away due to the presence of diffusion.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 clf
 plot(x, RHO(:, 1))
 hold on,  grid on
@@ -162,7 +162,7 @@ RHO = sol.Solution;
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 clf
 for plot_idx = 1:16:81
     str = sprintf("t = %.2f", t(plot_idx));
@@ -175,7 +175,7 @@ legend(location="northwest")
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 clf
 plot(x, RHO(:, 1))
 hold on,  grid on
@@ -217,7 +217,7 @@ ivp.InitialValue = u_init;
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 clf
 t = linspace(0, 2, 81);
 contour(x, t, u(t)', 12)
@@ -278,7 +278,7 @@ title('Advection with inflow BC')
 We find that the hump gracefully exits out the downwind end.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 clf
 plot(x, u(0))
 hold on
@@ -311,7 +311,7 @@ u = @(t) [zeros(1, length(t)); sol(t)];
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 clf,  contour(x, t, u(t)', 0.15:0.2:1)
 xlabel x,  ylabel t
 title('Advection with outflow BC')
@@ -320,7 +320,7 @@ title('Advection with outflow BC')
 This time, the solution blows up as soon as the hump runs into the boundary because there are conflicting demands there.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 clf
 plot(x, u(0))
 hold on
@@ -349,7 +349,7 @@ close(vid)
 For $c=1$ we get purely imaginary eigenvalues.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 [x, Dx] = diffper(40, [0, 1]);
 lambda = eig(Dx);
 clf
@@ -361,7 +361,7 @@ title('Eigenvalues for pure advection')
 Let's choose a time step of $\tau=0.1$ and compare to the stability regions of the Euler and backward Euler time steppers (shown as shaded regions):
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 zc = exp( 1i * linspace(0,2*pi,361)' );    % points on |z|=1
 z = zc - 1;    % shift circle left by 1
 clf,  fill(real(z), imag(z), [.8, .8, 1])
@@ -374,7 +374,7 @@ title('Euler')
 In the Euler case it's clear that *no* real value of $\tau>0$ is going to make $\zeta$ values fit within the stability region. Any method whose stability region includes none of the imaginary axis is an unsuitable choice for advection.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 clf,  fill([-6, 6, 6, -6],[-6, -6, 6, 6], [.8, .8, 1])
 z = zc + 1;   % shift circle right by 1
 hold on,  scatter(real(0.1*lambda), imag(0.1*lambda))
@@ -392,7 +392,7 @@ The A-stable backward Euler time stepping tells the exact opposite story: it wil
 The eigenvalues of advection-diffusion are near-imaginary for $\epsilon\approx 0$ and get closer to the negative real axis as $\epsilon$ increases.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 [x, Dx, Dxx] = diffper(40, [0, 1]);
 tau = 0.1;
 clf
@@ -419,7 +419,7 @@ lambda = eig(A);
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 clf,  scatter(real(lambda), imag(lambda))
 axis equal,  grid on 
 title('Eigenvalues of advection with zero inflow')
@@ -499,7 +499,7 @@ title("Wave equation with boundaries")
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 clf
 plot(x, U(:, 1))
 hold on
@@ -553,7 +553,7 @@ title("Wave equation with variable speed")
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 clf
 plot(x, U(:, 1))
 hold on

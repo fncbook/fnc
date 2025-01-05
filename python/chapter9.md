@@ -212,7 +212,7 @@ f = lambda x: sin(exp(2 * x))
 Here is a graph of $f$ and its polynomial interpolant using seven equally spaced nodes.
 
 ```{code-cell} 
-:tags: hide-input
+:tags: [hide-input]
 x = linspace(0, 1, 500)
 plot(x, f(x), label="function")
 t = linspace(0, 1, 7)
@@ -226,7 +226,7 @@ legend(),  title("Equispaced interpolant, n=6");
 This looks pretty good. We want to track the behavior of the error as $n$ increases. We will estimate the error in the continuous interpolant by sampling it at a large number of points and taking the max-norm.
 
 ```{code-cell} 
-:tags: hide-input
+:tags: [hide-input]
 N = arange(5, 65, 5)
 err = zeros(N.size)
 x = linspace(0, 1, 1001)         # for measuring error
@@ -249,7 +249,7 @@ The error initially decreases as one would expect but then begins to grow. Both 
 We plot $|\Phi(x)|$ over the interval $[-1,1]$ with equispaced nodes for different values of $n$. 
 
 ```{code-cell} 
-:tags: hide-input
+:tags: [hide-input]
 x = linspace(-1, 1, 1601)
 for n in range(10, 60, 10):
     t = linspace(-1, 1, n + 1)
@@ -278,7 +278,7 @@ title("Test function");
 We start by doing equispaced polynomial interpolation for some small values of $n$.
 
 ```{code-cell} 
-:tags: hide-input
+:tags: [hide-input]
 N = arange(4, 16, 4)
 label = []
 for k, n in enumerate(N):
@@ -297,7 +297,7 @@ legend(label),  title("Error for low degrees");
 The convergence so far appears rather good, though not uniformly so. However, notice what happens as we continue to increase the degree.
 
 ```{code-cell} 
-:tags: hide-input
+:tags: [hide-input]
 N = 12 + 15 * arange(1, 4)
 labels = []
 for k, n in enumerate(N):
@@ -319,7 +319,7 @@ The convergence in the middle can't get any better than machine precision relati
 Now we look at the error indicator function $\Phi$ for Chebyshev node sets.
 
 ```{code-cell} 
-:tags: hide-input
+:tags: [hide-input]
 x = linspace(-1, 1, 1601)
 labels = []
 for n in range(10, 60, 10):
@@ -345,7 +345,7 @@ f = lambda x: 1 / (x**2 + 16)
 ```
 
 ```{code-cell} 
-:tags: hide-input
+:tags: [hide-input]
 x = linspace(-1, 1, 1601)
 labels = []
 for k, n in enumerate([4, 10, 16, 40]):
@@ -368,7 +368,7 @@ By degree 16 the error is uniformly within machine epsilon, and, importantly, it
 On the left, we use a log-log scale, which makes second-order algebraic convergence $O(n^{-4})$ a straight line. On the right, we use a log-linear scale, which makes spectral convergence $O(K^{-n})$ linear.
 
 ```{code-cell} 
-:tags: hide-input
+:tags: [hide-input]
 n = arange(20, 420, 20)
 algebraic = 100 / n**4
 spectral = 10 * 0.85**n
@@ -493,7 +493,7 @@ legend(),  title("Trig interpolation");
 The convergence of the interpolant is spectral. We let $N$ go needlessly large here in order to demonstrate that unlike polynomials, trigonometric interpolation is stable on equally spaced nodes. Note that when $N$ is even, the value of $n$ is not an integer but works fine for defining the nodes.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 N = arange(2, 62, 2)
 err = zeros(N.size)
 
@@ -544,7 +544,7 @@ Note that $1.5 e^{2i\pi x}+1.5 e^{-2i\pi x} = 3 \cos(2\pi x)$, so this result is
 Fourier's greatest contribution to mathematics was to point out that *every* periodic function is just a combination of frequencies—infinitely many of them in general, but truncated for computational use. Here we look at the magnitudes of the coefficients for $f(x) = \exp( \sin(\pi x) )$.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 f = lambda x: exp(sin(pi * x))    # content at all frequencies
 n = 9;  N = 2*n + 1;
 t = 2 * arange(0, N) / N    # nodes in [0,2)
@@ -592,7 +592,7 @@ exact = arctan(2)
 We compare the two spectral integration methods for a range of $n$ values.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 N = range(8, 100, 4)
 errCC = zeros(len(N))
 errGL = zeros(len(N))
@@ -618,7 +618,7 @@ exact = atan(4) / 2
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 N = range(8, 100, 4)
 errCC = zeros(len(N))
 errGL = zeros(len(N))
@@ -637,7 +637,7 @@ The two are very close until about $n=40$, when the Clenshaw–Curtis method slo
 Now let's compare the spectral performance to that of our earlier adaptive method in `intadapt`. We will specify varying error tolerances and record the error as well as the total number of evaluations of $f$.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 loglog(N, abs(errCC), "-o", label="ccint")
 loglog(N, abs(errGL), "-o", label="glint")
 
@@ -686,7 +686,7 @@ This graph suggests that we capture all of the integrand values that are larger 
 (demo-improper-intinf-python)=
 ``````{dropdown} @demo-improper-intinf
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 f = lambda x: 1 / (1 + x**2)
 exact = pi
 tol = array([1 / 10**d for d in arange(5, 14, 0.5)])
@@ -713,7 +713,7 @@ Both methods are roughly fourth-order due to Simpson's formula in the underlying
 ``````{dropdown} @demo-improper-intsing
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 f = lambda x: 1 / (10 * sqrt(x))
 exact = 0.2
 tol = array([1 / 10**d for d in arange(5, 14, 0.5)])

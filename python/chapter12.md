@@ -36,7 +36,7 @@ sol = solve_ivp(f, [0, 3.0], u_init, method="Radau", dense_output=True)
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 for t in arange(0, 3, 2/3):
     plot(x, sol.sol(t), label=f"t = {t:.1f}")
 legend()
@@ -47,7 +47,7 @@ title("Advection with periodic boundary");
 An animation shows the solution nicely. The bump moves with speed 2 to the right, reentering on the left as it exits to the right because of the periodic conditions. 
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 from matplotlib import animation
 fig, ax = subplots()
 curve = ax.plot(x, u_init)[0]
@@ -113,7 +113,7 @@ sol = solve_ivp(ode, [0, 1.0], rho_init, method="Radau", dense_output=True)
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 for t in linspace(0, 1, 6):
     plot(x, sol.sol(t), label=f"t = {t:.1f}")
 
@@ -124,7 +124,7 @@ legend(),  title("Traffic flow");
 The bump slowly moves backward on the roadway, spreading out and gradually fading away due to the presence of diffusion.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 fig, ax = subplots()
 curve = ax.plot(x, rho_init)[0]
 time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
@@ -150,7 +150,7 @@ sol = solve_ivp(ode, [0, 0.5], rho_init, method="Radau", dense_output=True)
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 for t in linspace(0, 0.5, 6):
     plot(x, sol.sol(t), label=f"t = {t:.1f}")
 
@@ -159,7 +159,7 @@ legend(),  title("Traffic jam");
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 fig, ax = subplots()
 curve = ax.plot(x, rho_init)[0]
 time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
@@ -196,7 +196,7 @@ u = sol.sol
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 t = linspace(0, 2, 81)
 U = vstack([u(tj) for tj in t])
 contour(x, t, U, levels=arange(0.15, 1.0, 0.2))
@@ -254,7 +254,7 @@ title("Advection with inflow BC");
 We find that the hump gracefully exits out the downwind end.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 from matplotlib import animation
 fig, ax = subplots()
 curve = ax.plot(x, u_init)[0]
@@ -288,7 +288,7 @@ u = lambda t: extend(sol.sol(t))
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 U = [u(tj) for tj in t]
 clf
 contour(x, t, U, levels=arange(0.15, 1.0, 0.2))
@@ -299,7 +299,7 @@ title("Outflow boundary condition");
 This time, the solution blows up as soon as the hump runs into the boundary because there are conflicting demands there.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 fig, ax = subplots()
 curve = ax.plot(x, u_init)[0]
 time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
@@ -325,7 +325,7 @@ close()
 For $c=1$ we get purely imaginary eigenvalues.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 from scipy.linalg import eigvals
 x, Dx, Dxx = FNC.diffper(40, [0, 1])
 lamb = eigvals(Dx)
@@ -339,7 +339,7 @@ title("Eigenvalues for pure advection");
 Let's choose a time step of $\tau=0.1$ and compare to the stability regions of the Euler and backward Euler time steppers (shown as shaded regions):
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 zc = exp(2j * pi * arange(361) / 360)
 # points on |z|=1
 
@@ -353,7 +353,7 @@ title("Euler");
 In the Euler case it's clear that *no* real value of $\tau>0$ is going to make $\zeta$ values fit within the stability region. Any method whose stability region includes none of the imaginary axis is an unsuitable choice for advection.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 z = zc + 1    # shift circle right by 1
 fill([-6, 6, 6, -6], [-6, -6, 6, 6], color=(0.8, 0.8, 1))
 fill(real(z), imag(z), color="w")
@@ -371,7 +371,7 @@ The A-stable backward Euler time stepping tells the exact opposite story: it wil
 The eigenvalues of advection-diffusion are near-imaginary for $\epsilon\approx 0$ and get closer to the negative real axis as $\epsilon$ increases.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 x, Dx, Dxx = FNC.diffper(40, [0, 1])
 tau = 0.1
 for ep in [0.001, 0.01, 0.05]:
@@ -463,7 +463,7 @@ title("Wave equation with boundaries");
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 from matplotlib import animation
 fig, ax = subplots()
 curve = ax.plot(x, u_init)[0]
@@ -515,7 +515,7 @@ title("Wave equation with variable speed");
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 fig, ax = subplots()
 curve = ax.plot(x, u_init)[0]
 time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)

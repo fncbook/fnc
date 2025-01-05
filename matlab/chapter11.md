@@ -29,7 +29,7 @@ numbering:
 ## Examples
 
 ```{code-cell}
-:tags: remove-cell
+:tags: [remove-cell]
 addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
 addpath /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
@@ -99,7 +99,7 @@ legend(location="northwest")
 Alternatively, here is an animation of the solution.
 
 ```{code-cell}
-:tags: remove-output
+:tags: [remove-output]
 clf
 plot(x, V(:,1))
 hold on,  grid on
@@ -158,7 +158,7 @@ legend(location="northwest")
 ```
 
 ```{code-cell}
-:tags: remove-output
+:tags: [remove-output]
 clf
 plot(x, V(:,1))
 hold on,  grid on
@@ -227,7 +227,7 @@ title('Heat equation by forward Euler')
 You see above that things seem to start well, with the initial peak widening and shrinking. But then there is a nonphysical growth in the solution.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 clf
 index_times = 1:101;
 plot(x, U(:, 1))
@@ -284,7 +284,7 @@ title('Heat equation by backward Euler')
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 clf
 index_times = 1:24:n+1;
 plot(x, U(:, 1))
@@ -382,7 +382,7 @@ title('Eigenvalues')
 The Euler method is absolutely stable in the region $|\zeta+1| \le 1$ in the complex plane:
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 phi = linspace(0, 2*pi, 361);
 z = exp(1i*phi) - 1;   % unit circle shifted to the left by 1
 fill(real(z), imag(z), [.8, .8, 1])
@@ -410,7 +410,7 @@ title('Stability region and \zeta values')
 In backward Euler, the region is $|\zeta-1|\ge 1$. Because they are all on the negative real axis, all of the $\zeta$ values will fit no matter what $\tau$ is chosen.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 clf,  fill([-6, 6, 6, -6],[-6, -6, 6, 6],[.8, .8, 1])
 hold on
 z = exp(1i*phi) + 1;   % unit circle shifted right by 1
@@ -429,7 +429,7 @@ title('Stability region and \zeta values')
 In {numref}`Example {number} <example-stiffness-oregon>` we derived a Jacobian matrix for the Oregonator model. Here is a numerical solution of the ODE.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 q = 8.375e-6;  s = 77.27;  w = 0.161;
 f = @(t, u, p) [ s*(u(2)- u(1) * u(2) + u(1) - q * u(1)^2);...
     (-u(2) - u(1) * u(2) + u(3)) / s; ...
@@ -448,7 +448,7 @@ title('Oregonator')
 At each value of the numerical solution, we can compute the eigenvalues of the Jacobian. Here we plot all of those eigenvalues in the complex plane.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 J = @(u) [ -s*(u(2)+1-2*q*u(1)), s*(1-u(1)), 0; ...
     -u(2)/s, (-1-u(1))/s, 1/s; ...
     w,0,-w];
@@ -488,7 +488,7 @@ num_steps_rk23 = length(t) - 1
 Starting from the eigenvalues of the Jacobian matrix, we can find an effective $\zeta(t)$ by multiplying with the local time step size. The values of $\zeta(t)$ for each time level are plotted below and color coded by component of the diagonalized system.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 zeta = zeros(length(t) - 1, 3);
 for j = 1:length(t)-1
     lambda = eig(J(u(:, j)));
@@ -537,7 +537,7 @@ title("Heat equation with Dirichlet boundaries")
 ```
 
 ```{code-cell}
-:tags: remove-cell
+:tags: [remove-cell]
 clf
 plot(x, u(0))
 hold on,  grid on
@@ -573,7 +573,7 @@ init = @(x) 400 * x.^4 .* (1 - x).^2;
 ```
 
 ```{code-cell}
-:tags: hide-cell
+:tags: [hide-cell]
 clf
 plot(x, u(0))
 hold on,  grid on
@@ -611,7 +611,7 @@ init = @(x) max(0, x - K);
 ```
 
 ```{code-cell}
-:tags: remove-input
+:tags: [remove-input]
 clf
 plot(x, u(0))
 hold on,  grid on

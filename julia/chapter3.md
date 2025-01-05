@@ -51,7 +51,7 @@ The syntax on line 9 is a *field reference* to extract the matrix we want from t
 ## Examples
 
 ```{code-cell}
-:tags: remove-cell
+:tags: [remove-cell]
 include("FNC_init.jl")
 ```
 
@@ -90,7 +90,7 @@ If you `plot` a function, then the points are chosen automatically to make a smo
 ::::
 
 ```{code-cell}
-using Polynomials, Plots
+using Polynomials
 p = Polynomial(c)
 f = yr -> p((yr - 1950) / 10)
 plot!(f, 1955, 2000, label="interpolant")
@@ -122,6 +122,7 @@ Backslash solves overdetermined linear systems in a least-squares sense.
 ::::
 
 ```{code-cell}
+using Polynomials
 V = [ t.^0 t ]    # Vandermonde-ish matrix
 @show size(V)
 c = V \ temp

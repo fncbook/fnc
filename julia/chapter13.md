@@ -50,7 +50,7 @@ The boundary values are accessed using Boolean indexing. One advantage of this s
 ## Examples
 
 ```{code-cell}
-:tags: remove-output
+:tags: [remove-output]
 include("FNC_init.jl")
 ```
 
@@ -82,7 +82,6 @@ To emphasize departures from a zero level, use a colormap such as `redsblues`, a
 ::::
 
 ```{code-cell}
-using Plots
 m, n = 80, 60
 x = range(0, 2, m+1);
 y = range(1, 3, n+1);
@@ -199,7 +198,6 @@ unvec = z -> reshape(z, m, n);
 Note that the initial condition should also be periodic on the domain.
 
 ```{code-cell}
-using Plots
 u_init = (x, y) -> sin(4 * π * x) * exp(cos(π * y))
 U₀ = mtx(u_init)
 M = maximum(abs, U₀)
@@ -248,10 +246,10 @@ anim = @animate for t in range(0, 0.2, 81)
         dpi=150, colorbar=:none)
 end
 closeall();
-mp4(anim, "figures/diffadv-heat.mp4");
+mp4(anim, "diffadv-heat.mp4");
 ```
 
-![Heat equation in 2d](figures/diffadv-heat.mp4)
+![Heat equation in 2d](diffadv-heat.mp4)
 
 ``````
 
@@ -281,6 +279,7 @@ unpack = w -> extend(unvec(w))
 Now we can define and solve the IVP using a stiff solver.
 
 ```{code-cell}
+using OrdinaryDiffEq
 function dw_dt(w, ϵ, t)
     U = unpack(w)
     Ux, Uxx = Dx * U, Dxx * U
@@ -319,10 +318,10 @@ anim = @animate for t in 0:0.02:2
         title=@sprintf("t = %.2f", t))
 end
 closeall();
-mp4(anim, "figures/diffadv-advdiff.mp4");
+mp4(anim, "diffadv-advdiff.mp4");
 ```
 
-![Advection-diffusion in 2d](figures/diffadv-advdiff.mp4)
+![Advection-diffusion in 2d](diffadv-advdiff.mp4)
 ``````
 
 (demo-diffadv-wave-julia)=
@@ -353,6 +352,7 @@ unpack = w -> ( extend(unvec_u(w[1:N])), unvec_v(w[N+1:end]) )
 We can now define and solve the IVP. Since this problem is hyperbolic, not parabolic, a nonstiff integrator is faster than a stiff one.
 
 ```{code-cell}
+using OrdinaryDiffEq
 function dw_dt(w, c, t)
     U, V = unpack(w)
     du_dt = V
@@ -381,10 +381,10 @@ anim = @animate for t in 0:4/100:4
         colorbar=:none,  title=@sprintf("t = %.2f", t))
 end
 closeall();
-mp4(anim, "figures/diffadv-wave.mp4");
+mp4(anim, "diffadv-wave.mp4");
 ```
 
-![Wave equation in 2d](figures/diffadv-wave.mp4)
+![Wave equation in 2d](diffadv-wave.mp4)
 ``````
 
 ### 13.3 @section-twodim-laplace
@@ -440,7 +440,7 @@ b = vec(mtx(ϕ));
 Here are the coefficients for the PDE collocation, before any modifications are made for the boundary conditions. The combination of Kronecker products and finite differences produces a characteristic sparsity pattern.
 
 ```{code-cell}
-using SparseArrays, Plots
+using SparseArrays
 A = kron(I(n+1), sparse(Dxx)) + kron(sparse(Dyy), I(m+1))
 spy(A;
     color=:blues,  m=3,
@@ -478,7 +478,7 @@ A[idx, :] .= I_N[idx, :];     # Dirichlet conditions
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 spy(A;
     color=:blues,  m=3,
     title="System matrix with boundary conditions")
@@ -559,7 +559,6 @@ u = FNC.elliptic(ϕ, g, 15, [0, 2.5], 8, [0, 1]);
 ```
 
 ```{code-cell}
-using Plots
 x = range(0, 2.5, 100)
 y = range(0, 1, 50)
 U = [u(x, y) for x in x, y in y]

@@ -351,7 +351,7 @@ disp(table(delta, dif, variablenames=["perturbation size", "R(x) - lambda"]))
 We make an image from some text, then reload it as a matrix.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 clf
 tobj = text(0, 0,'Hello world','fontsize',44);
 ex = get(tobj, 'extent');

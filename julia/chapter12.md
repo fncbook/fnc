@@ -11,7 +11,7 @@ numbering:
 ## Examples
 
 ```{code-cell}
-:tags: remove-output
+:tags: [remove-output]
 include("FNC_init.jl")
 ```
 
@@ -23,7 +23,7 @@ include("FNC_init.jl")
  In the following definition we allow the velocity $c$ to be specified as a parameter in the `ODEProblem`.
 
 ```{code-cell}
-x, Dₓ, Dₓₓ = FNC.diffper(300, [-4, 4]);
+x, Dₓ, Dₓₓ = FNC.diffper(300, [-4, 4])
 f = (u, c, t) -> -c * (Dₓ*u);
 ```
 
@@ -37,7 +37,7 @@ sol = solve(IVP, RK4());
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 using Plots
 plt = plot(
     legend=:bottomleft,
@@ -52,14 +52,14 @@ plt
 An animation shows the solution nicely. The bump moves with speed 2 to the right, reentering on the left as it exits to the right because of the periodic conditions. 
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 anim = @animate for t in range(0, 4, 120) 
     plot(x, sol(t),
         title=@sprintf("Advection equation, t = %.2f", t),
         xaxis=(L"x"),  yaxis=([1, 2], L"u(x,t)"),
         dpi=150)
 end
-mp4(anim, "figures/advection.mp4")
+mp4(anim, "advection.mp4")
 ```
 
 ``````
@@ -94,7 +94,7 @@ sol = solve(IVP, Rodas4P());
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 plt = plot(
     legend=:topleft, 
     title="Traffic flow",
@@ -108,13 +108,13 @@ plt
 The bump slowly moves backward on the roadway, spreading out and gradually fading away due to the presence of diffusion.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 anim = @animate for t in range(0,0.9,91) 
     plot(x, sol(t);
         xaxis=(L"x"),  yaxis=([400,410], "density"),
         dpi=150,  title=@sprintf("Traffic flow, t=%.2f",t))
 end
-mp4(anim, "figures/traffic-fade.mp4")
+mp4(anim, "traffic-fade.mp4")
 ```
 
 Now we use an initial condition with a larger bump. Note that the scale on the $y$-axis is much different for this solution.
@@ -126,7 +126,7 @@ sol = solve(IVP, Rodas4P());
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 plt = plot(
     legend=:topleft,
     title="Traffic jam",
@@ -138,13 +138,13 @@ plt
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 anim = @animate for t in range(0, 0.5, 101) 
     plot(x, sol(t);
         xaxis=(L"x"),  yaxis=([400,480], "density"),
         dpi=150,  title=@sprintf("Traffic jam, t=%.2f",t))
 end
-mp4(anim,"figures/traffic-jam.mp4")
+mp4(anim,"traffic-jam.mp4")
 ```
 
 In this case the density bump travels backward along the road. It also steepens on the side facing the incoming traffic and decreases much more slowly on the other side. A motorist would experience this as an abrupt increase in density, followed by a much more gradual decrease in density and resulting gradual increase in speed. (You also see some transient, high-frequency oscillations. These are caused by instabilities, as we discuss in simpler situations later in this chapter.)
@@ -168,8 +168,7 @@ u = solve(IVP, RK4());
 ```
 
 ```{code-cell}
-:tags: hide-input
-using Plots
+:tags: [hide-input]
 t = range(0, 2, 81);
 U = reduce(hcat, u(t) for t in t)
 contour(x, t, U'; 
@@ -216,6 +215,7 @@ end;
 Now we solve for an initial condition that has a single hump.
 
 ```{code-cell}
+using OrdinaryDiffEq
 init = @. exp( -80*(x[interior] - 0.5)^2 )
 ivp = ODEProblem(ode!, init, (0., 1), -1)
 u = solve(ivp);
@@ -233,14 +233,14 @@ contour(x, t, U';
 We find that the hump gracefully exits out the downwind end.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 anim = @animate for t in range(0, 1, 161) 
     plot(x, extend(u(t));
         label=@sprintf("t = %.4f", t), 
         xaxis=(L"x"),  yaxis=(L"u(x, t)", (0, 1)), 
         title="Advection equation with inflow BC",  dpi=150)
 end
-mp4(anim,"figures/upwind-inflow.mp4")
+mp4(anim,"upwind-inflow.mp4")
 ```
 
 If instead of $u(1,t)=0$ we were to try to impose the downwind condition $u(0,t)=0$, we only need to change the index of the interior nodes and where to append the zero value.
@@ -255,7 +255,7 @@ u = solve(ivp);
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 t = range(0, 0.2, 61)
 U = reduce(hcat, extend(u(t)) for t in t)
 contour(x, t, U'; 
@@ -267,14 +267,14 @@ contour(x, t, U';
 This time, the solution blows up as soon as the hump runs into the boundary because there are conflicting demands there.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 anim = @animate for t in range(0, 0.2, 41) 
     plot(x, extend(u(t));
         label=@sprintf("t = %.4f", t),
         xaxis=(L"x"),  yaxis=(L"u(x,t)", (0, 1)), 
         title="Advection equation with outflow BC",  dpi=150)
 end
-mp4(anim,"figures/upwind-outflow.mp4")
+mp4(anim,"upwind-outflow.mp4")
 ```
 ``````
 
@@ -285,8 +285,7 @@ mp4(anim,"figures/upwind-outflow.mp4")
 For $c=1$ we get purely imaginary eigenvalues.
 
 ```{code-cell}
-:tags: hide-input
-using Plots
+:tags: [hide-input]
 x, Dₓ = FNC.diffper(40, [0, 1])
 λ = eigvals(Dₓ);
 scatter(real(λ), imag(λ);
@@ -298,7 +297,7 @@ scatter(real(λ), imag(λ);
 Let's choose a time step of $\tau=0.1$ and compare to the stability regions of the Euler and backward Euler time steppers (shown as shaded regions):
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 zc = @. cispi(2 * (0:360) / 360);     # points on |z|=1
 z = zc .- 1;                          # shift left by 1
 plot(Shape(real(z), imag(z)), color=RGB(.8, .8, 1))
@@ -312,7 +311,7 @@ scatter!(real(ζ), imag(ζ);
 In the Euler case it's clear that *no* real value of $\tau>0$ is going to make $\zeta$ values fit within the stability region. Any method whose stability region includes none of the imaginary axis is an unsuitable choice for advection.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 z = zc .+ 1;                        # shift circle right by 1
 plot(Shape([-6, 6, 6, -6], [-6, -6, 6, 6]), color=RGB(.8, .8, 1))
 plot!(Shape(real(z), imag(z)), color=:white)
@@ -330,7 +329,7 @@ The A-stable backward Euler time stepping tells the exact opposite story: it wil
 The eigenvalues of advection-diffusion are near-imaginary for $\epsilon\approx 0$ and get closer to the negative real axis as $\epsilon$ increases.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 plt = plot(
     legend=:topleft,
     aspect_ratio=1,
@@ -356,7 +355,7 @@ A = Dₓ[1:end-1, 1:end-1];     # delete last row and column
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 
 scatter(real(λ), imag(λ);
     m=3,  aspect_ratio=1,
@@ -434,14 +433,14 @@ contour(x, t, hcat(U...)';
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 anim = @animate for t in range(0 ,2, 120)
     plot(x, extend(w(t)[1:m-1]);
         label=@sprintf("t=%.3f",t),
         xaxis=(L"x"),  yaxis=([-1, 1], L"u(x,t)"),
         dpi=150,  title="Wave equation")
 end
-mp4(anim, "figures/wave-boundaries.mp4")
+mp4(anim, "wave-boundaries.mp4")
 ```
 
 The original hump breaks into two pieces of different amplitudes, each traveling with speed $c=2$. They pass through one another without interference. When a hump encounters a boundary, it is perfectly reflected, but with inverted shape. At time $t=2$, the solution looks just like the initial condition.
@@ -465,6 +464,7 @@ end;
 The variable wave speed is passed as an extra parameter through the IVP solver.
 
 ```{code-cell}
+using OrdinaryDiffEq
 c = @. 1 + (sign(x)+1)/2
 IVP = ODEProblem(ode, w_init, (0., 5.), c)
 w = solve(IVP, RK4());
@@ -483,7 +483,7 @@ contour(x, t, hcat(U...)';
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 anim = @animate for t in range(0,5,181)
     plot(Shape([-1, 0, 0, -1], [-1, -1, 1, 1]), color=RGB(.8, .8, .8), l=0, label="")
     plot!(x, extend(w(t, idxs=1:m-1));
@@ -491,7 +491,7 @@ anim = @animate for t in range(0,5,181)
         xaxis=(L"x"),  yaxis=([-1, 1], L"u(x,t)"),
         dpi=150,  title="Wave equation, variable speed")
 end
-mp4(anim, "figures/wave-speed.mp4")
+mp4(anim, "wave-speed.mp4")
 ```
 
 Each pass through the interface at $x=0$ generates a reflected and transmitted wave. By conservation of energy, these are both smaller in amplitude than the incoming bump.

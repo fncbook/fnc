@@ -104,7 +104,7 @@ xlabel("stock price"),  ylabel("option value");
 Alternatively, here is an animation of the solution.
 
 ```{code-cell}
-:tags: remove-output
+:tags: [remove-output]
 from matplotlib import animation
 fig = figure()
 ax = fig.add_subplot(autoscale_on=False, xlim=(0, 8), ylim=(0, 6))
@@ -170,7 +170,7 @@ ylim([0, 6]);  ylabel("option value")
 ```
 
 ```{code-cell}
-:tags: remove-output
+:tags: [remove-output]
 from matplotlib import animation
 fig = figure()
 ax = fig.add_subplot(autoscale_on=False, xlim=(0, 8), ylim=(0, 6))
@@ -241,7 +241,7 @@ title("Heat equation by forward Euler");
 You see above that things seem to start well, with the initial peak widening and shrinking. But then there is a nonphysical growth in the solution.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 from matplotlib import animation
 fig = figure()
 ax = fig.add_subplot(autoscale_on=False, xlim=(0, 1), ylim=(-1, 2))
@@ -292,7 +292,7 @@ title("Heat equation by backward Euler");
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 fig = figure()
 ax = fig.add_subplot(autoscale_on=False, xlim=(0, 1), ylim=(-0.25, 1))
 ax.grid()
@@ -376,7 +376,7 @@ title("Eigenvalues");
 The Euler method is absolutely stable in the region $|\zeta+1| \le 1$ in the complex plane:
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 phi = 2 * pi * arange(361) / 360
 z = exp(1j * phi) - 1  # unit circle shifted to the left by 1
 
@@ -410,7 +410,7 @@ title("Stability region and $\zeta$ values");
 In backward Euler, the region is $|\zeta-1|\ge 1$. Because they are all on the negative real axis, all of the $\zeta$ values will fit no matter what $\tau$ is chosen.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 fill([-6, 6, 6, -6], [-6, -6, 6, 6], color=(0.8, 0.8, 1))
 z = exp(1j * phi) + 1
 # unit circle shifted right by 1
@@ -432,7 +432,7 @@ title("Stability region and $\\zeta$ values");
 In {numref}`Example {number} <example-stiffness-oregon>` we derived a Jacobian matrix for the Oregonator model. Here is a numerical solution of the ODE.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 from scipy.integrate import solve_ivp
 q, s, w = (8.375e-6, 77.27, 0.161)
 
@@ -457,7 +457,7 @@ title("Oregonator");
 At each value of the numerical solution, we can compute the eigenvalues of the Jacobian. Here we plot all of those eigenvalues in the complex plane.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 J = lambda u: array(
     [
         [-s * (u[1] + 1 - 2 * q * u[0]), s * (1 - u[0]), 0],
@@ -503,7 +503,7 @@ print(f"rk23 solver took {timer() - start:.3f} seconds with {len(t) - 1} time st
 Starting from the eigenvalues of the Jacobian matrix, we can find an effective $\zeta(t)$ by multiplying with the local time step size. The values of $\zeta(t)$ for each time level are plotted below and color coded by component of the diagonalized system.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 zeta = zeros([len(t)- 1, 3]) + 0j    # complex array
 for i in range(len(t) - 1):
     dt = t[i+1] - t[i]
@@ -550,7 +550,7 @@ title("Heat equation with Dirichlet boundaries");
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 from matplotlib import animation
 fig = figure()
 ax = fig.add_subplot(autoscale_on=False, xlim=(-1, 1), ylim=(0, 4.2))
@@ -586,7 +586,7 @@ x, u = FNC.parabolic(phi, (0, 1), 60, ga, gb, (0, 0.1), init);
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 fig = figure()
 ax = fig.add_subplot(autoscale_on=False, xlim=(0, 1), ylim=(0, 10))
 
@@ -619,7 +619,7 @@ x, u = FNC.parabolic(phi, (0, Smax), 80, ga, gb, (0, 15), u0);
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 fig = figure()
 ax = fig.add_subplot(autoscale_on=False, xlim=(0, Smax), ylim=(-0.5, 8))
 

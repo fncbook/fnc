@@ -15,7 +15,6 @@ Python implementations
 
 (function-horner-python)=
 `````{dropdown} **Horner's algorithm for evaluating a polynomial**
-:open: true
 ````{literalinclude} ../python/pkg/FNC/FNC01.py
 :lineno-start: 1
 :start-at: def horner
@@ -83,7 +82,6 @@ print(f"accurate digits: {-log10(rel_acc):.1f}")
 
 (demo-float-double-python)=
 ``````{dropdown} @demo-float-double
-:open: false
 
 Python has native `int` and `float` types.
 
@@ -155,7 +153,6 @@ int(3.14)
 
 (demo-float-arithmetic-python)=
 ``````{dropdown} @demo-float-arithmetic
-:open: false
 
 There is no double precision number between $1$ and $1+\varepsilon_\text{mach}$. Thus, the following difference is zero despite its appearance.
 
@@ -179,7 +176,6 @@ This is now the "correct" result. But we have found a rather shocking breakdown 
 
 (demo-condition-roots-python)=
 ``````{dropdown} @demo-condition-roots
-:open: false
 ::::{grid} 1 1 2 2
 
 The polynomial $p(x) = \frac{1}{3}(x-1)(x-1-\epsilon)$ has roots $1$ and $1+\epsilon$. For small values of $\epsilon$, the roots are ill-conditioned. 
@@ -229,7 +225,6 @@ This matches the observation pretty well.
 
 (demo-algorithms-horner-python)=
 ``````{dropdown} @demo-algorithms-horner
-:open: false
 
 Here we show how to use `horner` to evaluate a polynomial. First, we have to ensure that the `FNC` package is imported.
   
@@ -258,7 +253,6 @@ The above is the value of $p(1.6)$, up to a rounding error.
 
 (demo-stability-quadbad-python)= 
 ``````{dropdown} @demo-stability-quadbad
-:open: false
 
 ```{index} ! Python; scientific notation
 ```
@@ -327,7 +321,6 @@ print(abs(x2 - 1e-6) / 1e-6)
 
 (demo-stability-roots-python)=
 ````{dropdown} @demo-stability-roots
-:open: false
 
 
 Our first step is to construct a polynomial with six known roots.

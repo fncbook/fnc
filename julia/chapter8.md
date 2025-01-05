@@ -62,7 +62,7 @@ The loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}
 ## Examples
 
 ```{code-cell}
-:tags: remove-output
+:tags: [remove-output]
 include("FNC_init.jl")
 ```
 
@@ -127,7 +127,7 @@ end
 Here is the adjacency matrix of a graph representing a small-world network, featuring connections to neighbors and a small number of distant contacts.
 
 ```{code-cell}
-using GraphRecipes
+using GraphRecipes, SparseArrays
 @load "smallworld.jld2" A
 graphplot(A, linealpha=0.5)
 ```
@@ -160,6 +160,7 @@ plt
 The `spdiagm` function creates a sparse matrix given its diagonal elements. The main or central diagonal is numbered zero, above and to the right of that is positive, and below and to the left is negative.
 
 ```{code-cell}
+using SparseArrays
 n = 50;
 A = spdiagm(-3 => fill(n, n - 3),
     0 => ones(n),
@@ -172,19 +173,8 @@ Matrix(A[1:7, 1:7])
 ```
 
 ::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
-Without pivoting, the LU factors have the same lower and upper bandwidth as the original matrix.
-
-
-:::
 :::{card}
-
-
 The `sparse` function converts any matrix to sparse form. But it's usually better to construct a sparse matrix directly, as the standard form might not fit in memory.
-
 :::
 ::::
 
@@ -211,6 +201,7 @@ spy!(sparse(fact.U), m=2, subplot=2, title=L"\mathbf{U}", color=:blues)
 The following generates a random sparse matrix with prescribed eigenvalues.
 
 ```{code-cell}
+using SparseArrays
 n = 4000
 density = 4e-4
 λ = @. 1 + 1 / (1:n)   # exact eigenvalues
@@ -330,7 +321,6 @@ eigval = β[end]
 We check for linear convergence using a log-linear plot of the error.
 
 ```{code-cell}
-using Plots
 err = @. 1 - β
 plot(0:59, abs.(err); m=:o, 
     xlabel=L"k",  
@@ -388,7 +378,6 @@ eigval = β[end]
 As expected, the eigenvalue that was found is the one closest to 0.7. The convergence is again linear.
 
 ```{code-cell}
-using Plots
 err = @. abs(eigval - β)
 plot(0:28, err[1:end-1];
     m=:o,  xlabel=L"k", 
@@ -497,7 +486,6 @@ end
 The linear system approximations show smooth linear convergence at first, but the convergence stagnates after only a few digits have been found.
 
 ```{code-cell}
-using Plots
 plot(0:29, resid; m=:o,
     xaxis=(L"m"), yaxis=(:log10, L"\| b-Ax_m \|"),
     title="Residual for linear systems", legend=:none)
@@ -587,7 +575,6 @@ end
 The approximations converge smoothly, practically all the way to machine epsilon.
 
 ```{code-cell}
-using Plots
 plot(0:60, resid, m=:o,
     xaxis=(L"m"),  yaxis=(:log10, "norm of mth residual"),
     title="Residual for GMRES",  legend=:none)
@@ -668,7 +655,7 @@ Now we apply MINRES to a linear system with this matrix, and compare the observe
 ```
 
 ```{code-cell}
-using IterativeSolvers, Plots
+using IterativeSolvers
 b = rand(100)
 x, hist = minres(A, b, reltol=1e-10, maxiter=51, log=true);
 relres = hist[:resnorm] / norm(b)
@@ -701,6 +688,7 @@ b = A * x;
 Now we apply both methods and compare the convergence of the system residuals, using implementations imported from `IterativeSolvers`.
 
 ```{code-cell}
+using IterativeSolvers
 plt = plot(title="Convergence of MINRES and CG",
     xaxis=("Krylov dimension"),  yaxis=(:log10, "relative residual norm"))
 for method in [minres, cg]
@@ -721,7 +709,7 @@ b = A * x;
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 
 plt = plot(title="Convergence of MINRES and CG",
     xaxis=("Krylov dimension"), yaxis=(:log10, "relative residual norm"))
@@ -767,7 +755,6 @@ B, C = blurmatrix(m), blurmatrix(n);
 Finally, we show the results of using $k=12$ repetitions of the blur in each direction.
 
 ```{code-cell}
-using Plots
 blur = X -> B^12 * X * C^12;
 Z = blur(X)
 plot(Gray.(Z), title="Blurred image")
@@ -779,8 +766,9 @@ plot(Gray.(Z), title="Blurred image")
 We repeat the earlier process to blur an original image $\mathbf{X}$ to get $\mathbf{Z}$.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 
+using TestImages, Images, SparseArrays
 img = testimage("lighthouse")
 m, n = size(img)
 X = @. Float64(Gray(img))
@@ -855,8 +843,8 @@ M = DiagonalPreconditioner(diag(A));
 We now compare CG with and without the preconditioner.
 
 ```{code-cell}
-:tags: hide-input
-using IterativeSolvers, Plots
+:tags: [hide-input]
+using IterativeSolvers
 plain(b) = cg(A, b, maxiter=200, reltol=1e-4, log=true)
 time_plain = @elapsed x, hist1 = plain(b)
 prec(b) = cg(A, b, Pl=M, maxiter=200, reltol=1e-4, log=true)
@@ -889,6 +877,7 @@ Without a preconditioner, GMRES makes essentially no progress after 100 iteratio
 
 ```{code-cell}
 b = rand(40000)
+using IterativeSolvers
 const GMRES = IterativeSolvers.gmres
 x, history = GMRES(A, b, maxiter=100, reltol=1e-5, log=true)
 resnorm = history[:resnorm]
@@ -916,7 +905,7 @@ history
 The $\tau$ parameter in `ilu` balances the accuracy of the iLU factorization with the time needed to compute it and invert it. As $\tau\to 0$, more of the elements are kept, making the preconditioner more effective but slower per iteration.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 
 plt = plot(0:40, resnorm[1:41] / resnorm[1];
     label="no preconditioning",  legend=:bottomright,
@@ -935,3 +924,4 @@ plt
 ```
 
 In any given problem, it's impossible to know in advance where the right balance lies between fidelity and speed for the preconditioner.
+``````

@@ -61,7 +61,7 @@ numbering:
 ## Examples
 
 ```{code-cell}
-:tags: remove-cell
+:tags: [remove-cell]
 addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
 addpath /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
@@ -188,7 +188,7 @@ w(1)
 ``````{dropdown} @demo-shooting-unstable
 
 ```{code-cell}
-:tags: raises-exception
+:tags: [raises-exception]
 ga = @(u, du) u + 1;
 gb = @(u, du) u;
 clf

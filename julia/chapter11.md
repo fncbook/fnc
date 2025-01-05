@@ -39,7 +39,7 @@ Line 29 uses the macro `@.` to assign into the vector `f` elementwise. Without i
 ## Examples
 
 ```{code-cell}
-:tags: remove-output
+:tags: [remove-output]
 include("FNC_init.jl")
 ```
 
@@ -90,7 +90,6 @@ end
 Here is a plot of the solution after every 250 time steps.
 
 ```{code-cell}
-using Plots
 idx = 1:250:n+1
 label = reshape(["t = $t" for t in t[idx]], 1, length(idx))
 plot(x, V[:, idx]; 
@@ -112,7 +111,7 @@ anim = @animate for j in 1:10:n+1
         dpi=150,    
         label=@sprintf("t = %.2f", t[j]))
 end
-mp4(anim, "figures/black-scholes-6.mp4")
+mp4(anim, "black-scholes-6.mp4")
 ```
 
 The results are easy to interpret, recalling that the time variable really means *time until strike*. Say you are close to the option's strike time. If the current stock price is, say, $S=2$, then it's not likely that the stock will end up over the strike price $K=3$, and therefore the option has little value. On the other hand, if presently $S=3$, then there are good odds that the option will be exercised at the strike time, and you will need to pay a substantial portion of the stock price in order to take advantage. As the time to strike increases, there is an expectation that the stock price is more likely to rise somewhat, making the value of the option larger at each fixed $S$. 
@@ -161,7 +160,7 @@ anim = @animate for j in 1:10:n+1
         title="Black–Scholes solution...?",
         dpi=150,  label=@sprintf("t = %.2f",t[j]))
 end
-mp4(anim, "figures/black-scholes-8.mp4")
+mp4(anim, "black-scholes-8.mp4")
 ```
 
 This so-called solution is nonsense!
@@ -185,7 +184,6 @@ t = τ * (0:n)      # time values
 Next we set an initial condition. It isn't mathematically periodic, but the end values and derivatives are so small that for numerical purposes it may as well be.
 
 ```{code-cell}
-using Plots
 U = zeros(m, n+1);
 U[:, 1] = @. exp( -60 * (x - 0.5)^2 )
 plot(x, U[:, 1];
@@ -214,14 +212,14 @@ plot(x, U[:, plot_idx];
 Things seem to start well, with the initial peak widening and shrinking. But then there is a nonphysical growth in the solution.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 anim = @animate for j in 1:101
     plot(x, U[:, j];
     label=@sprintf("t=%.5f", t[j]),
     xaxis=(L"x"),  yaxis=(L"u(x,t)", [-1, 2]),
     dpi=150,  title="Heat equation by forward Euler")
 end
-mp4(anim, "figures/diffusionFE.mp4")
+mp4(anim, "diffusionFE.mp4")
 ```
 
 The growth in norm is exponential in time.
@@ -248,8 +246,7 @@ end
 ```
 
 ```{code-cell}
-:tags: hide-input
-using Plots
+:tags: [hide-input]
 idx = 1:600:n+1
 times = round.(t[idx], digits=4)
 label = reshape(["t = $t" for t in times], 1, length(idx))
@@ -260,14 +257,14 @@ plot(x,U[:, idx];
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 anim = @animate for j in 1:20:n+1
     plot(x, U[:, j];
     label=@sprintf("t=%.5f", t[j]),
     xaxis=(L"x"),  yaxis=(L"u(x,t)", [0, 1]),
     dpi=150,  title="Heat equation by backward Euler")
 end
-mp4(anim, "figures/diffusionBE.mp4")
+mp4(anim, "diffusionBE.mp4")
 ```
 
 This solution looks physically plausible, as the large concentration in the center diffuses outward until the solution is essentially constant. Observe that the solution remains periodic in space for all time.
@@ -296,7 +293,7 @@ t, u = FNC.rk23(IVP, 1e-5);
 We check that the resulting solution looks realistic.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 plt = plot(
     title="Heat equation by rk23",
     legend=:topleft,  
@@ -308,14 +305,14 @@ plt
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 anim = @animate for j in 1:20:1600
     plot(x, u[j];
     label=@sprintf("t=%.4f", t[j]),
       xaxis=(L"x"),  yaxis=(L"u(x,t)", [0, 1]),
       dpi=150,  title="Heat equation by rk23")
 end
-mp4(anim, "figures/diffusionRK23.mp4")
+mp4(anim, "diffusionRK23.mp4")
 ```
 
 The solution appears to be correct. But the number of time steps that were selected automatically is surprisingly large, considering how smoothly the solution changes.
@@ -348,7 +345,6 @@ _, _, Dₓₓ = FNC.diffper(m, [0, 1]);
 The eigenvalues of this matrix are real and negative:
 
 ```{code-cell}
-using Plots
 λ = eigvals(Dₓₓ)
 scatter(real(λ), imag(λ);
     title="Eigenvalues",
@@ -359,7 +355,7 @@ scatter(real(λ), imag(λ);
 The Euler method is absolutely stable in the region $|\zeta+1| \le 1$ in the complex plane:
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 phi = 2π * (0:360) / 360
 z = @. cis(phi) - 1;    # unit circle shifted to the left by 1
 
@@ -387,7 +383,7 @@ scatter!(real(ζ), imag(ζ), title="Stability region and ζ values")
 In backward Euler, the region is $|\zeta-1|\ge 1$. Because they are all on the negative real axis, all of the $\zeta$ values will fit no matter what $\tau$ is chosen.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 plot(Shape([-6, 6, 6, -6], [-6, -6, 6, 6]), color=RGB(.8, .8, 1))
 z = @. cis(phi) + 1;   # unit circle shifted right by 1
 plot!(Shape(real(z), imag(z)), color=:white)
@@ -406,8 +402,8 @@ scatter!(real(ζ), imag(ζ);
 In {numref}`Example {number} <example-stiffness-oregon>` we derived a Jacobian matrix for the Oregonator model. Here is a numerical solution of the ODE.
 
 ```{code-cell}
-:tags: hide-input
-using OrdinaryDiffEq, Plots
+:tags: [hide-input]
+using OrdinaryDiffEq
 function ode(u,p,t)
     s,w,q = p
     f = [ 
@@ -426,7 +422,7 @@ plot(sol, yscale=:log10, legend=:none, title="Solution of the Oregonator")
 At each value of the numerical solution, we can compute the eigenvalues of the Jacobian. Here we plot all of those eigenvalues in the complex plane.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 t,u = sol.t[1:2:end], sol.u[1:2:end]
 λ = fill(0.0im, length(t), 3)
 for (k, u) in enumerate(u)
@@ -466,7 +462,7 @@ println("Number of time steps for RK23: $(length(t) - 1)")
 Starting from the eigenvalues of the Jacobian matrix, we can find an effective $\zeta(t)$ by multiplying with the local time step size. The values of $\zeta(t)$ for each time level are plotted below and color coded by component of the diagonalized system.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 λ = fill(1.0im, length(t),3)
 for (k, u) in enumerate(u)
     J = [
@@ -508,7 +504,6 @@ init = x -> 1 + sinpi(x/2) + 3 * (1-x^2) * exp(-4x^2);
 Now we can use {numref}`Function {number} <function-parabolic>` to solve the problem.
 
 ```{code-cell}
-using Plots
 x, u = FNC.parabolic(ϕ, (-1, 1), 60, g₁, g₂, (0, 0.75), init)
 plt = plot(
     xlabel=L"x",  ylabel=L"u(x,t)",
@@ -520,14 +515,14 @@ plt
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 anim = @animate for t in range(0,0.75,length=201) 
     plot(x, u(t);
         label=@sprintf("t=%.2f", t),  legend=:topleft,
         xaxis=(L"x"),  yaxis=(L"u(x,t)", (0, 4.2)), 
         title="Heat equation",  dpi=150)
 end
-mp4(anim, "figures/boundaries-heat.mp4", fps=30)
+mp4(anim, "boundaries-heat.mp4", fps=30)
 ```
 ``````
 
@@ -543,14 +538,14 @@ x, u = FNC.parabolic(ϕ, (0, 1), 60, g₁, g₂, (0, 0.1), init);
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 anim = @animate for t in range(0, 0.1, length=101) 
     plot(x, u(t);
         label=@sprintf("t=%.4f", t),  legend=:topleft,
         xaxis=(L"x"),  yaxis=(L"u(x,t)", (0, 10)),
         dpi=150, title="Heat equation with source")
 end
-mp4(anim, "figures/boundaries-source.mp4", fps=30)
+mp4(anim, "boundaries-source.mp4", fps=30)
 ```
 ``````
 
@@ -570,14 +565,14 @@ x, u = FNC.parabolic(ϕ, (0, Smax), 80, g₁, g₂, (0, 15), u₀);
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 anim = @animate for t in range(0, 15, 151) 
     plot(x, u(t);
         label=@sprintf("t=%.4f", t),  legend=:topleft,
         xaxis=(L"x"),  yaxis=(L"u(x,t)", (-0.5, 8)), 
         dpi=150,  title="Black–Scholes equation")
 end
-mp4(anim, "figures/boundaries-bs.mp4", fps=30)
+mp4(anim, "boundaries-bs.mp4", fps=30)
 ```
 
 Recall that $u$ is the value of the call option, and time runs backward from the strike time. The longer the horizon, the more value the option has due to anticipated growth in the stock price.

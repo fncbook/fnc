@@ -37,7 +37,7 @@ numbering:
 ## Examples
 
 ```{code-cell}
-:tags: remove-cell
+:tags: [remove-cell]
 addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
 addpath /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
@@ -244,7 +244,7 @@ U = @(t) unvec(sol(t));
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 surf(X', Y', U0')
 mx = max(abs(vec(U0)));
 clim([-mx, mx]),  shading interp
@@ -331,7 +331,7 @@ xlabel('x'),  ylabel('y')
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 hold on
 vid = VideoWriter("figures/2d-advdiff.mp4","MPEG-4");
 vid.Quality = 85;
@@ -409,7 +409,7 @@ title("Wave equation at t = 0.5")
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 hold on
 vid = VideoWriter("figures/2d-wave.mp4","MPEG-4");
 vid.Quality = 85;
@@ -588,7 +588,7 @@ disp(sprintf("solution at (2, 0.6) is %.7f", u(2, 0.6)))
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 x = linspace(0, 2.5, 91);
 y = linspace(0, 1, 51);
 [mtx, X, Y] = tensorgrid(x, y);
@@ -615,7 +615,7 @@ mtx_test(u)
 ```
 
 ```{code-cell}
-:tags: remove-cell
+:tags: [remove-cell]
 format
 ```
 
@@ -633,7 +633,7 @@ u = elliptic(phi, g, 32, [-1, 1], 32, [-1, 1]);
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 x = linspace(-1, 1, 80);
 y = x;
 mtx = tensorgrid(x, y);
@@ -662,7 +662,7 @@ u = elliptic(phi, g, 36, [0, 1], 36, [0, 1]);
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 x = linspace(0, 1, 80);
 y = x;
 mtx = tensorgrid(x, y);

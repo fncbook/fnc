@@ -96,7 +96,7 @@ The nested function `residual` uses differentiation matrices computed externally
 ## Examples
 
 ```{code-cell}
-:tags: remove-output
+:tags: [remove-output]
 include("FNC_init.jl")
 ```
 
@@ -159,7 +159,7 @@ est = [1, 0]
 Now we set up and solve a `BVProblem` with the parameter value $\lambda=0.6$.
 
 ```{code-cell}
-using BoundaryValueDiffEq, Plots
+using BoundaryValueDiffEq
 bvp = BVProblem(ode!, bc!, est, domain, 0.6)
 y = solve(bvp, Shooting(Tsit5()))
 plot(y;
@@ -205,11 +205,10 @@ a, b = eps(), 1.0;
 The BVP specifies $w'(0)=y_2(0)=0$. We can try multiple values for the unknown $w(0)=y_1(0)$ and plot the solutions.
 
 ```{code-cell}
-using OrdinaryDiffEq, Plots
+using OrdinaryDiffEq
 plt = plot(
     xaxis = (L"x"),  yaxis = (L"w(x)"),
     title = "Different initial values",  legend = :bottomright)
-
 for w0 in 0.4:0.1:0.9
     IVP = ODEProblem(f, [w0, 0], (a, b))
     y = solve(IVP, Tsit5())
@@ -310,7 +309,6 @@ yₓₓ = Dₓₓ * y;
 The results show poor accuracy for this small value of $n$.
 
 ```{code-cell}
-using Plots
 plot(df_dx, -1, 1, layout = 2, xaxis = (L"x"), yaxis = (L"f'(x)"))
 scatter!(t, yₓ, subplot = 1)
 plot!(d2f_dx2, -1, 1, subplot = 2, xaxis = (L"x"), yaxis = (L"f''(x)"))
@@ -350,9 +348,9 @@ Dₓ
 We again test the convergence rate.
 
 ```{code-cell}
-f = x -> x + exp(sin(4 * x));
-df_dx = x -> 1 + 4 * exp(sin(4 * x)) * cos(4 * x);
-d2f_dx2 = x -> 4 * exp(sin(4 * x)) * (4 * cos(4 * x)^2 - 4 * sin(4 * x));
+f = x -> x + exp(sin(4x))
+df_dx = x -> 1 + 4 * exp(sin(4x)) * cos(4x)
+d2f_dx2 = x -> 4 * exp(sin(4x)) * (4 * cos(4x)^2 - 4 * sin(4x));
 ```
 
 ```{code-cell}
@@ -400,7 +398,6 @@ x, u = FNC.bvplin(p, q, r, [0, 3π / 2], 1, exp(-1), 30);
 ```
 
 ```{code-cell}
-using Plots
 plot(exact, 0, 3π / 2, layout = (2, 1), label = "exact")
 scatter!(x, u, m = :o,
     subplot=1,  label="numerical",
@@ -484,7 +481,6 @@ init = collect(range(2.5, -2, length = 101));
 We find a solution with negative initial slope, i.e., the pendulum is initially pushed back toward equilibrium.
 
 ```{code-cell}
-using Plots
 t, θ = FNC.bvp(ϕ, [0, 5], g₁, g₂, init)
 plot(t, θ;
     xaxis=(L"t"),  yaxis=(L"\theta(t)"),
@@ -539,7 +535,7 @@ plot!(r, w₂, title = "Two solutions of the MEMS problem")
 ``````{dropdown} @demo-nonlinear-allencahn
 
 ```{code-cell}
-ϕ = (x, u, dudx) -> (u^3 - u) / ϵ;
+ϕ = (x, u, dudx) -> (u^3 - u) / ϵ
 g₁(u, du) = du
 g₂(u, du) = u - 1;
 ```
@@ -548,9 +544,8 @@ Finding a solution is easy at larger values of $\epsilon$.
 
 ```{code-cell}
 ϵ = 0.05
-init = collect(range(-1, 1, length = 141))
+init = collect(range(-1, 1, 141))
 x, u₁ = FNC.bvp(ϕ, [0, 1], g₁, g₂, init)
-
 plot(x, u₁;
     label=L"\epsilon = 0.05",  legend=:bottomright,
     xaxis=(L"x"),  yaxis=(L"u(x)"),
@@ -593,7 +588,6 @@ f = x -> sin(π * x);
 ```
 
 ```{code-cell}
-using Plots
 x, u = FNC.fem(c, q, f, 0, 1, 50)
 plot(x, u;
     xaxis=(L"x"),  yaxis = (L"u"),

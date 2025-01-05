@@ -40,7 +40,7 @@ sol = solve_ivp(f,[0,3.],u_init,method="Radau",dense_output=True)
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 fig, ax = subplots()
 for t in linspace(0, 8/3, 5):
     ax.plot(x, sol.sol(t), label=f"t={t:.1f}")

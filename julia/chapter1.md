@@ -22,7 +22,7 @@ numbering:
 `````
 
 ```{code-cell}
-:tags: remove-cell
+:tags: [remove-cell]
 include("FNC_init.jl")
 ```
 
@@ -31,7 +31,6 @@ include("FNC_init.jl")
 ### 1.1 @section-intro-floating-point
 (demo-float-accuracy-julia)=
 ``````{dropdown} @demo-float-accuracy
-:open: false
 Recall the grade-school approximation to the number $\pi$.
 
 ```{code-cell}
@@ -86,7 +85,6 @@ This last value could be rounded down by using `floor`.
 
 (demo-float-double-julia)=
 ``````{dropdown} @demo-float-double
-:open: false
 In Julia, `1` and `1.0` are different values, because they have different types:
 
 ```{code-cell}
@@ -201,7 +199,6 @@ If you try to convert a noninteger floating-point value into an integer you get 
 
 (demo-float-arithmetic-julia)=
 ``````{dropdown} @demo-float-arithmetic
-:open: false
 
 There is no double-precision number between $1$ and $1+\epsilon_\text{mach}$. Thus the following difference is zero despite its appearance.
 
@@ -222,7 +219,6 @@ This is now the expected result. But we have found a rather shocking breakdown o
 ### 1.2 @section-intro-conditioning
 (demo-condition-roots-julia)=
 ``````{dropdown} @demo-condition-roots
-:open: false
 ::::{grid} 1 1 2 2
 The polynomial $p(x) = \frac{1}{3}(x-1)(x-1-\epsilon)$ has roots $1$ and $1+\epsilon$. For small values of $\epsilon$, the roots are ill-conditioned. 
 :::{card}
@@ -270,11 +266,10 @@ This matches the observation pretty well.
 
 (demo-algorithms-horner-julia)=
 ``````{dropdown} @demo-algorithms-horner
-:open: false
 Here we show how to use {numref}`Function {number} <function-horner>` to evaluate a polynomial. It's not a part of core Julia, so you need to download and install this text's package once, and load it for each new Julia session. The download is done by the following lines.
 
 ```{code-cell}
-:tags: remove-output
+:tags: [remove-output]
 #import Pkg
 #Pkg.add("FNCBook");
 ```
@@ -290,7 +285,7 @@ Many Julia functions, including the ones in this text, are in packages that must
 ::::
 
 ```{code-cell}
-:tags: remove-output
+:tags: [remove-output]
 #using FundamentalsNumericalComputation
 using FNCFunctions
 FNC = FNCFunctions
@@ -345,7 +340,6 @@ The multi-line string at the start of {numref}`Function {number} <function-horne
 ### 1.4 @section-intro-stability
 (demo-stability-quadbad-julia)= 
 ``````{dropdown} @demo-stability-quadbad
-:open: false
 
 ```{index} ! Julia; scientific notation
 ```
@@ -385,7 +379,7 @@ Using {eq}`condition-chain`, the chain rule for condition numbers, the condition
 ``````
 
 (demo-stability-quadgood-julia)=
-````{dropdown} @demo-stability-quadgood
+``````{dropdown} @demo-stability-quadgood
 We repeat the rootfinding experiment of {numref}`Demo %s <demo-stability-quadbad>` with an alternative algorithm.
 
 ```{code-cell}
@@ -409,11 +403,10 @@ As you see in this output, Julia often suppresses trailing zeros in a decimal ex
 ```{code-cell}
 abs(x₂ - 1e-6) / 1e-6
 ```
-````
+``````
 
 (demo-stability-roots-julia)=
-````{dropdown} @demo-stability-roots
-:open: false
+``````{dropdown} @demo-stability-roots
 ::::{grid} 1 1 2 2
 
 For this example we will use the `Polynomials` package, which is installed by the `FNC` package.  
@@ -472,4 +465,4 @@ println("Coefficient errors:")
 ```
 
 In summary, even though there are some computed roots relatively far from their correct values, they are nevertheless the roots of a polynomial that is very close to the original.
-````
+``````

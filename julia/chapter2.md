@@ -74,7 +74,7 @@ The second issue is that even when `A` has all integer entries, its LU factors m
 ## Examples
 
 ```{code-cell}
-:tags: remove-cell
+:tags: [remove-cell]
 include("FNC_init.jl")
 ```
 
@@ -218,7 +218,7 @@ plot!(tt, yy, label="interpolant")
 ``````
 
 ### 2.2 @section-linsys-matrices
-(demo-matrices-julia)=
+(demo-matrices-basics-julia)=
 ``````{dropdown} @demo-matrices
 :::{index} ! Julia; size, ! Julia; length
 :::
@@ -362,7 +362,7 @@ Errors are formally called *exceptions* in Julia.
 ::::
 
 ```{code-cell} julia
-:tags: raises-exception
+:tags: [raises-exception]
 A * B    # throws an error
 ```
 
@@ -418,7 +418,6 @@ show(@. cospi( (x + 1)^3) )    # broadcast an entire expression
 ### 2.3 @section-linsys-linear-systems
 (demo-systems-backslash-julia)=
 ``````{dropdown} @demo-systems-backslash
-:open: false
 For a square matrix $\mathbf{A}$, the syntax `A \ b` is mathematically equivalent to $\mathbf{A}^{-1} \mathbf{b}$. 
 
 ```{code-cell}
@@ -445,7 +444,7 @@ residual = b - A * x
 If the matrix $\mathbf{A}$ is singular, you may get an error.
 
 ```{code-cell} julia
-:tags: raises-exception
+:tags: [raises-exception]
 A = [0 1; 0 0]
 b = [1, -1]
 x = A \ b    # throws an error
@@ -470,7 +469,6 @@ A linear system with a singular matrix might have no solution or infinitely many
 
 (demo-systems-triangular-julia)=
 ``````{dropdown} @demo-systems-triangular
-:open: false
 ```{index} ! Julia; tril, ! Julia; triu
 ```
 
@@ -547,7 +545,6 @@ It's not so good to get 4 digits of accuracy after starting with 16! The source 
 ### 2.4 @section-linsys-lu
 (demo-lu-outertri-julia)= 
 ``````{dropdown} @demo-lu-outertri
-:open: false
 
 ```{index} Julia; tril, Julia; triu
 ```
@@ -1369,7 +1366,7 @@ The `cholesky` function computes a Cholesky factorization if possible, or throws
 ::::
 
 ```{code-cell}
-:tags: raises-exception
+:tags: [raises-exception]
 cholesky(B)    # throws an error
 ```
 

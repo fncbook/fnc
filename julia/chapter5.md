@@ -84,7 +84,7 @@ The intended way for a user to call {numref}`Function {number} <function-intadap
 ## Examples
 
 ```{code-cell}
-:tags: remove-cell
+:tags: [remove-cell]
 include("FNC_init.jl")
 ```
 
@@ -95,7 +95,6 @@ include("FNC_init.jl")
 Here are some points that we could consider to be observations of an unknown function on $[-1,1]$.
 
 ```{code-cell}
-using Plots
 n = 5
 t = range(-1, 1, n+1)
 y = @. t^2 + t + 0.05 * sin(20t)
@@ -176,6 +175,7 @@ scatter(t, y, label="data")
 ```
 
 ```{code-cell}
+using Dierckx
 ϕ = Spline1D(t, y)
 plot!(x -> ϕ(x), -1, 1;
     label="spline",
@@ -186,9 +186,9 @@ plot!(x -> ϕ(x), -1, 1;
 The piecewise cubic cardinal function is nowhere greater than one in absolute value. This happens to be true for all the cardinal functions, ensuring a good condition number for any interpolation with these functions. But the story for global polynomials is very different.
 
 ```{code-cell}
-scatter(t, y, label="data")
-
+using Polynomials
 ϕ = Polynomials.fit(t, y, n)
+scatter(t, y, label="data")
 plot!(x -> ϕ(x), -1, 1;
     label="polynomial",  legend=:top,
     xlabel=L"x",  ylabel=L"\phi(x)", 
@@ -219,7 +219,6 @@ Use `annotate!` to add text to a plot.
 ::::
 
 ```{code-cell}
-using Plots
 plt = plot(layout=(4, 1),  legend=:top,
     xlabel=L"x",  ylims=[-0.1, 1.1],  ytick=[])
 for k in 0:3
@@ -299,7 +298,6 @@ plot!(h, order2;
 For illustration, here is a spline interpolant using just a few nodes.
 
 ```{code-cell}
-using Plots
 f = x -> exp(sin(7x))
 plot(f, 0, 1, label="function", xlabel=L"x", ylabel=L"y")
 
@@ -484,7 +482,6 @@ In each row, $h$ is decreased by a factor of 10, so that the error is reduced by
 A graphical comparison can be useful as well. On a log-log scale, the error should (as $h\to 0$) be a straight line whose slope is the order of accuracy. However, it's conventional in convergence plots to show $h$ _decreasing_ from left to right, which negates the slopes.
 
 ```{code-cell}
-using Plots
 plot(h, abs.(error_FD); 
     m=:o,  label=["FD1" "FD2"], leg=:bottomleft,
     xflip=true,  xaxis=(:log10, L"h"),  yaxis=(:log10, "error"),
@@ -519,7 +516,6 @@ They all seem to be converging to $-1.3$. The convergence plot reveals some inte
 
 ```{code-cell}
 err = @. abs(FD - exact)
-
 plot(h, err;
     m=:o, label=["FD1" "FD2" "FD4"],  legend=:bottomright,
     xaxis=(:log10, L"h"),  xflip=true,  yaxis=(:log10, "error"),
@@ -563,7 +559,6 @@ Q, errest = quadgk(x -> exp(sin(x)), 0, 1)
 When you look at the graphs of these functions, what's remarkable is that one of these areas is basic calculus while the other is almost impenetrable analytically. From a numerical standpoint, they are practically the same problem.
 
 ```{code-cell}
-using Plots
 plot([exp, x -> exp(sin(x))], 0, 1, fill=0, layout=(2, 1),
     xlabel=L"x", ylabel=[L"e^x" L"e^{\sin(x)}"], ylim=[0, 2.7])
 ```
@@ -588,6 +583,7 @@ If a function has multiple return values, you can use an underscore `_` to indic
 ::::
 
 ```{code-cell}
+using QuadGK
 Q, _ = quadgk(f, a, b, atol=1e-14, rtol=1e-14);
 println("Integral = $Q")
 ```
@@ -629,6 +625,7 @@ plot!(n, 3e-3 * (n / n[1]) .^ (-2), l=:dash, label=L"O(n^{-2})")
 We estimate $\displaystyle\int_0^2 x^2 e^{-2x}\, dx$ using extrapolation. First we use `quadgk` to get an accurate value.
 
 ```{code-cell}
+using QuadGK
 f = x -> x^2 * exp(-2x);
 a = 0;
 b = 2;
@@ -704,7 +701,6 @@ If we consider the computational time to be dominated by evaluations of $f$, the
 This function gets increasingly oscillatory as $x$ increases.
 
 ```{code-cell}
-using Plots
 f = x -> (x + 1)^2 * cos((2x + 1) / (x - 4.3))
 plot(f, 0, 4, xlabel=L"x", ylabel=L"f(x)")
 ```
@@ -756,6 +752,7 @@ plot!(t, f.(t), seriestype=:sticks, m=(:o, 2))
 The error turns out to be a bit more than we requested. It's only an estimate, not a guarantee.
 
 ```{code-cell}
+using QuadGK
 Q, _ = quadgk(f, 0, 4, atol=1e-14, rtol=1e-14);    # 'exact' value
 println("error: $(Q-A)");
 ```

@@ -534,7 +534,7 @@ integral(@(x) exp(sin(x)), 0, 1)
 When you look at the graphs of these functions, what's remarkable is that one of these areas is basic calculus while the other is almost impenetrable analytically. From a numerical standpoint, they are practically the same problem.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 x = linspace(0, 1, 201)';
 subplot(2,1,1), fill([x; 1; 0], [exp(x); 0;0 ], [1, 0.9, 0.9])
 title('exp(x)')

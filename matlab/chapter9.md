@@ -61,7 +61,7 @@ numbering:
 ## Examples
 
 ```{code-cell}
-:tags: remove-cell
+:tags: [remove-cell]
 addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
 addpath /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
@@ -178,7 +178,7 @@ title('Test function')
 We want to track the behavior of the error as $n$ increases. We will estimate the error in the continuous interpolant by sampling it at a large number of points and taking the max-norm.
 
 ```{code-cell} 
-:tags: hide-input
+:tags: [hide-input]
 n = (5:5:60)';   
 err = zeros(size(n));
 x = linspace(0, 1, 1001)';         % for measuring error
@@ -201,7 +201,7 @@ The error initially decreases as one would expect but then begins to grow. Both 
 We plot $|\Phi(x)|$ over the interval $[-1,1]$ with equispaced nodes for different values of $n$. 
 
 ```{code-cell} 
-:tags: hide-input
+:tags: [hide-input]
 clf
 x = linspace(-1, 1, 1601)';
 Phi = zeros(size(x));
@@ -233,7 +233,7 @@ title('Test function')
 We start by doing equispaced polynomial interpolation for some small values of $n$.
 
 ```{code-cell} 
-:tags: hide-input
+:tags: [hide-input]
 x = linspace(-1, 1, 1601)';
 n = (4:4:12)';
 for k = 1:length(n)
@@ -248,7 +248,7 @@ xlabel('x'), ylabel('|f(x) - p(x)|')
 The convergence so far appears rather good, though not uniformly so. However, notice what happens as we continue to increase the degree.
 
 ```{code-cell} 
-:tags: hide-input
+:tags: [hide-input]
 n = 12 + 15 * (1:3);
 clf
 for k = 1:length(n)
@@ -268,7 +268,7 @@ The convergence in the middle can't get any better than machine precision relati
 Now we look at the error indicator function $\Phi$ for Chebyshev node sets.
 
 ```{code-cell} 
-:tags: hide-input
+:tags: [hide-input]
 clf
 x = linspace(-1, 1, 1601)';
 Phi = zeros(size(x));
@@ -297,7 +297,7 @@ f = @(x) 1 ./ (x.^2 + 16);
 ```
 
 ```{code-cell} 
-:tags: hide-input
+:tags: [hide-input]
 clf
 x = linspace(-1, 1, 1601)';
 n = [4, 10, 16, 40];
@@ -320,7 +320,7 @@ By degree 16 the error is uniformly within machine epsilon, and, importantly, it
 On the left, we use a log-log scale, which makes second-order algebraic convergence $O(n^{-4})$ a straight line. On the right, we use a log-linear scale, which makes spectral convergence $O(K^{-n})$ linear.
 
 ```{code-cell} 
-:tags: hide-input
+:tags: [hide-input]
 n = (20:20:400)';
 algebraic = 100 ./ n.^4;
 spectral = 10 * 0.85.^n;
@@ -423,7 +423,7 @@ title('Trig interpolation');  legend()
 The convergence of the interpolant is spectral. We let $N$ go needlessly large here in order to demonstrate that unlike polynomials, trigonometric interpolation is stable on equally spaced nodes. Note that when $N$ is even, the value of $n$ is not an integer but works fine for defining the nodes.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 N = 2:2:60;
 err = zeros(size(N));
 x = linspace(-1, 1, 1601)';  % for measuring error
@@ -470,7 +470,7 @@ Note that $1.5 e^{2i\pi x}+1.5 e^{-2i\pi x} = 3 \cos(2\pi x)$, so this result is
 Fourier's greatest contribution to mathematics was to point out that *every* periodic function is just a combination of frequencies—infinitely many of them in general, but truncated for computational use. Here we look at the magnitudes of the coefficients for $f(x) = \exp( \sin(\pi x) )$.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 f = @(x) exp( sin(pi*x) );    % content at all frequencies
 n = 9;  N = 2*n + 1;
 t = 2 * (0:N-1)' / N;         % nodes in $[0,2)$
@@ -522,7 +522,7 @@ exact = atan(2);
 We compare the two spectral integration methods for a range of $n$ values.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 n = (8:4:96)';
 errCC = zeros(size(n));
 errGL = zeros(size(n));
@@ -548,7 +548,7 @@ exact = atan(4) / 2;
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 n = (8:4:96)';
 errCC = zeros(size(n));
 errGL = zeros(size(n));
@@ -567,7 +567,7 @@ The two are very close until about $n=40$, when the Clenshaw–Curtis method slo
 Now let's compare the spectral performance to that of our earlier adaptive method in `intadapt`. We will specify varying error tolerances and record the error as well as the total number of evaluations of $f$.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 tol = 10 .^ (-2:-2:-14)';
 n = zeros(size(tol));  
 errAdapt = zeros(size(tol));
@@ -591,7 +591,7 @@ At the core of `intadapt` is a fourth-order formula, and the results track that 
 (demo-improper-decay-matlab)=
 ``````{dropdown} @demo-improper-decay
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 f = @(x) 1 ./ (1 + x.^2);
 clf,  subplot(2, 1, 1)
 fplot(f, [-4, 4]);  set(gca, 'yscale', 'log') 
@@ -613,7 +613,7 @@ This graph suggests that we capture all of the integrand values that are larger 
 (demo-improper-intinf-matlab)=
 ``````{dropdown} @demo-improper-intinf
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 f = @(x) 1 ./ (1 + x.^2);
 tol = 1 ./ 10.^(5:0.5:14);
 err = zeros(length(tol), 2);
@@ -638,7 +638,7 @@ Both methods are roughly fourth-order due to Simpson's formula in the underlying
 ``````{dropdown} @demo-improper-intsing
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 f = @(x) 1 ./ (10 * sqrt(x));
 tol = 1 ./ 10.^(5:0.5:14);
 err = zeros(length(tol), 2);

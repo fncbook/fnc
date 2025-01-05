@@ -312,7 +312,7 @@ Errors are formally called *exceptions* in Julia.
 ::::
 
 ```{code-cell} julia
-:tags: raises-exception
+:tags: [raises-exception]
 A * B    % throws an error
 ```
 
@@ -385,7 +385,7 @@ residual = b - A*x
 If the matrix $\mathbf{A}$ is singular, you may get a warning and nonsense result.
 
 ```{code-cell} julia
-:tags: raises-exception
+:tags: [raises-exception]
 A = [0 1; 0 0]
 b = [1; -1]
 x = A \ b
@@ -485,7 +485,6 @@ It's not so good to get 4 digits of accuracy after starting with sixteen! The so
 ### 2.4 @section-linsys-lu
 (demo-lu-outertri-matlab)= 
 ``````{dropdown} @demo-lu-outertri
-:open: false
 
 ```{index} MATLAB; tril, MATLAB; triu
 ```
@@ -1294,7 +1293,7 @@ The `chol` function does *not* check for symmetry. It may give a nonsensical res
 ```
 
 ```{code-cell}
-:tags: raises-exception
+:tags: [raises-exception]
 chol(B)    % throws an error
 ```
 

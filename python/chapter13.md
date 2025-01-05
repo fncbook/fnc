@@ -559,7 +559,7 @@ U, X, Y = FNC.poissonfd(f, g, 50, xspan, 80, yspan)
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 pcolormesh(X.T, Y.T, U.T, cmap="viridis")
 xlabel("$x$"),  ylabel("$y$"),  axis("equal")
 colorbar(), title("Solution of Poisson's equation");
@@ -598,7 +598,7 @@ print(f"solution at (2, 0.6) is {u(2, 0.6):.7f}")
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 x = linspace(0, 2.5, 90)
 y = linspace(0, 1, 60)
 mtx, X, Y, _, _, _ = FNC.tensorgrid(x, y)
@@ -677,7 +677,7 @@ u = FNC.elliptic(phi, g, 36, [0, 1], 36, [0, 1])
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 x = y = linspace(0, 1, 70)
 mtx, X, Y, _, _, _ = FNC.tensorgrid(x, y)
 U = mtx(u)

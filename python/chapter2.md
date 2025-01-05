@@ -289,7 +289,7 @@ print(A - u)    # repeat this row for every row of A
 ```
 
 ```{code-cell} 
-:tags: raises-exception
+:tags: [raises-exception]
 v = array([1, 2, 3])
 print(A - v)  # broadcasting this would be 3x3, so it's an error
 ```
@@ -318,7 +318,7 @@ print(B @ A)    # matrix product
 $AB$ is undefined for these matrix sizes. 
 
 ```{code-cell} 
-:tags: raises-exception
+:tags: [raises-exception]
 print(A @ B)    # incompatible sizes
 ```
 
@@ -328,7 +328,7 @@ print(A @ B)    # incompatible sizes
 The multiplication operator `*` is reserved for elementwise multiplication. Both operands have to be the same size, after any potential broadcasts.
 
 ```{code-cell} 
-:tags: raises-exception
+:tags: [raises-exception]
 print(B * A)    # not the same size, so it's an error
 ```
 
@@ -390,7 +390,7 @@ print(residual)
 If the matrix $\mathbf{A}$ is singular, you may get an error.
 
 ```{code-cell} 
-:tags: raises-exception
+:tags: [raises-exception]
 A = array([[0, 1], [0, 0]])
 b = array([1, -1])
 linalg.solve(A, b)    # error, singular matrix
@@ -1291,7 +1291,7 @@ Similarly, a random symmetric matrix is unlikely to be positive definite. The Ch
 ```
 
 ```{code-cell} 
-:tags: raises-exception
+:tags: [raises-exception]
 from numpy.linalg import cholesky
 cholesky(B)    # raises an exception, not positive definite
 ```

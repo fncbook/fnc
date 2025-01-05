@@ -731,7 +731,7 @@ title(('Blurred image'));
 We repeat the earlier process to blur an original image $\mathbf{X}$ to get $\mathbf{Z}$.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 load mandrill
 [m, n] = size(X);
 v = [1/4, 1/2, 1/4];
@@ -789,7 +789,7 @@ M = spdiags(diag(A), 0, n, n);
 We now compare MINRES with and without the preconditioner.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input]
 
 b = ones(n, 1);
 [x, ~, ~, ~, resid_plain] = minres(A, b, 1e-10, 400);

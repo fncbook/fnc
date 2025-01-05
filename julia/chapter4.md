@@ -88,7 +88,7 @@ Note that a default value is given for the third argument `y₀`, and it refers 
 ## Examples
 
 ```{code-cell}
-:tags: remove-cell
+:tags: [remove-cell]
 include("FNC_init.jl")
 ```
 ### 4.1 @section-nonlineqn-rootproblem
@@ -96,7 +96,7 @@ include("FNC_init.jl")
 ``````{dropdown} @demo-rootproblem-bessel
 
 ```{code-cell}
-using Plots, SpecialFunctions
+using SpecialFunctions
 J₃(x) = besselj(3, x)
 plot(J₃, 0, 20;
     title="Bessel function",
@@ -215,7 +215,6 @@ g(x) = x - p(x)
 Intersections of $y=g(x)$ with the line $y=x$ are fixed points of $g$ and thus roots of $f$. (Only one is shown in the chosen plot range.)
 
 ```{code-cell}
-using Plots
 plt = plot([g x->x], 2, 3;
     l=2, label=[L"y=g(x)" L"y=x"],
     xlabel=L"x",  ylabel=L"y", 
@@ -287,6 +286,7 @@ This time, the iteration is pushing us _away from_ the correct answer.
 We revisit {numref}`Demo %s <demo-fp-spiral>` and investigate the observed convergence more closely. Recall that above we calculated $g'(p)\approx-0.42$ at the convergent fixed point.
 
 ```{code-cell}
+using Polynomials
 p = Polynomial([3.5, -4, 1])
 r = roots(p)
 rmin, rmax = extrema(r)
@@ -348,7 +348,6 @@ Suppose we want to find a root of the function
 
 ```{code-cell}
 f(x) = x * exp(x) - 2
-using Plots
 plot(f, 0, 1.5; 
     label="function",  legend=:topleft,
     grid=:y,  ylim=[-2, 4],  xlabel=L"x",  ylabel=L"y")
@@ -509,7 +508,6 @@ plot!(x -> x, 0, maximum(y), label="", l=(:dash, 1), color=:black)
 We return to finding a root of the equation $x e^x=2$.
 
 ```{code-cell}
-using Plots
 f(x) = x * exp(x) - 2;
 plot(f, 0.25, 1.25;
     label="function",  legend=:topleft,
