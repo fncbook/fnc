@@ -163,12 +163,11 @@ for t in linspace(0, 4, 6):
 (demo-basics-sing-python)=
 ``````{dropdown} @demo-basics-sing
 
-::::{grid} 1 1 2 2
 The equation $u'=(u+t)^2$ gives us some trouble.
-:::{card}
+```{tip}
+:class: dropdown
 It's a good idea to check `sol.success` after calling `solve_ivp`. If it's `False`, the solution may not be reliable. 
-:::
-::::
+```
 
 ```{code-cell}
 f = lambda t, u: (t + u) ** 2
@@ -350,12 +349,11 @@ u0 = array([1.25, -0.5, 0, 0])
 tspan = [0.0, 50.0]
 ```
 
-::::{grid} 1 1 2 2
 First we check the behavior of the system when the pendulums are uncoupled, i.e., when $k=0$.
-:::{card}
+```{tip}
+:class: dropdown
 We use a closure here to pass the fixed parameter values into `couple`.
-:::
-::::
+```
 
 ```{code-cell}
 gamma, L, k = 0.01, 0.5, 0.0

@@ -137,11 +137,11 @@ spy(A)
 title("Adjacency matrix $A$");
 ```
 
-::::{grid} 1 1 2 2
 By {numref}`Theorem {number} <theorem-insight-adjmat>`, the entries of $\mathbf{A}^k$ give the number of walks of length $k$ between pairs of nodes, as with "*k* degrees of separation" within a social network. As $k$ grows, the density of $\mathbf{A}^k$ also grows.
-:::{card}
+```{tip}
+:class: dropdown
 While `A**6` is valid syntax here, it means elementwise power, not matrix power. 
-:::
+```
 
 ```{index} ! Python; matrix_power
 ```
@@ -366,11 +366,11 @@ title(("Convergence of inverse iteration"));
 ```{index} ! Python; argsort
 ```
 
-::::{grid} 1 1 2 2
 Let's reorder the eigenvalues to enforce {eq}`shiftorder`.
-:::{card}
+```{tip}
+:class: dropdown
 The `argsort` function returns the index permutation needed to sort the given vector, rather than the sorted vector itself.
-::::
+```
 
 ```{code-cell}
 ev = ev[argsort(abs(ev - 0.7))]

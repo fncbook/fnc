@@ -68,12 +68,11 @@ a = whos('A')
 
 ```{index} ! MATLAB; nnz
 ```
-::::{grid} 1 1 2 2
 We may define the density of $\mathbf{A}$ as the number of nonzeros divided by the total number of entries.
-:::{card}
+```{tip}
+:class: dropdown
 Use `nnz` to count the number of nonzeros in a sparse matrix.
-:::
-::::
+```
 
 ```{code-cell}
 sz = size(A);  n = sz(1);
@@ -163,12 +162,11 @@ full(A(1:7, 1:7))
 ```{index} ! MATLAB; sparse
 ```
 
-::::{grid} 1 1 2 2
 Without pivoting, the LU factors have the same lower and upper bandwidth as the original matrix.
-:::{card}
+```{tip}
+:class: dropdown
 The `sparse` function converts any matrix to sparse form. But it's usually better to construct a sparse matrix directly, as the standard form might not fit in memory.
-:::
-::::
+```
 
 
 
@@ -362,11 +360,11 @@ title('Convergence of inverse iteration')
 xlabel('k'), ylabel(('|\lambda_j - \beta_k|'));
 ```
 
-::::{grid} 1 1 2 2
 Let's reorder the eigenvalues to enforce {eq}`shiftorder`.
-:::{card}
+```{tip}
+:class: dropdown
 The second output of `sort` returns the index permutation needed to sort the given vector.
-::::
+```
 
 ```{code-cell}
 [~, idx] = sort(abs(ev - s));

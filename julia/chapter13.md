@@ -77,12 +77,11 @@ f = (x, y) -> cos(π * x * y - y)
 F = [f(x, y) for x in x, y in y]
 ```
 
-::::{grid} 1 1 2 2
 We can make a nice plot of the function by first choosing a much finer grid. However, the contour and surface plotting functions expect the *transpose* of mtx($f$).
-:::{card}
+```{tip}
+:class: dropdown
 To emphasize departures from a zero level, use a colormap such as `redsblues`, and use `clims` to set balanced color differences.
-:::
-::::
+```
 
 ```{code-cell}
 using Plots
@@ -233,12 +232,11 @@ IVP = ODEProblem(du_dt, vec(U₀), (0, 0.2), 0.1)
 sol = solve(IVP, Rodas4P());
 ```
 
-::::{grid} 1 1 2 2
 Here is an animation of the solution.
-:::{card}
+```{tip}
+:class: dropdown
 Here `clims` are set so that colors remain at fixed values throughout the animation.
-:::
-::::
+```
 
 ```{code-cell}
 anim = @animate for t in range(0, 0.2, 81)

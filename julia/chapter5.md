@@ -217,12 +217,12 @@ Let's define a set of four nodes (i.e., $n=3$ in our formulas).
 t = [0, 0.55, 0.7, 1]
 ```
 
-::::{grid} 1 1 2 2
 We plot the hat functions $H_0,\ldots,H_3$.
-:::{card}
+
+```{tip}
+:class: dropdown
 Use `annotate!` to add text to a plot.
-:::
-::::
+```
 
 ```{code-cell}
 using Plots
@@ -585,13 +585,12 @@ a = 0;
 b = 2;
 ```
 
-::::{grid} 1 1 2 2
 In lieu of the exact value, we use the `QuadGK` package to find an accurate result.
-:::
-:::{card}
+
+```{tip}
+:class: dropdown
 If a function has multiple return values, you can use an underscore `_` to indicate a  return value you want to ignore.
-:::
-::::
+```
 
 ```{code-cell}
 Q, _ = quadgk(f, a, b, atol=1e-14, rtol=1e-14);
@@ -688,12 +687,11 @@ With the two Simpson values $S_f(N)$ and $S_f(2N)$ in hand, we can do one more l
 R = (16S[2] - S[1]) / 15
 ```
 
-::::{grid} 1 1 2 2
 We can make a triangular table of the errors:
-:::{card}
+```{tip}
+:class: dropdown
 The value `nothing` equals nothing except `nothing`.
-:::
-::::
+```
 
 ```{code-cell}
 err = [T .- Q [nothing; S .- Q] [nothing; nothing; R - Q]]

@@ -467,12 +467,11 @@ The clear convergence to 2 above constitutes good evidence of quadratic converge
 
 (demo-newton-usage-python)=
 ``````{dropdown} @demo-newton-usage
-::::{grid} 1 1 2 2
 Suppose we want to evaluate the inverse of the function $h(x)=e^x-x$. This means solving $y=h(x)$, or $h(x)-y=0$, for $x$ when $y$ is given. That equation has no solution in terms of elementary functions. If a value of $y$ is given numerically, though, we simply have a rootfinding problem for $f(x)=e^x-x-y$.
-:::{card}
+```{tip}
+:class: dropdown
 The `enumerate` function produces a pair of values for each iteration: a positional index and the corresponding contents.
-:::
-::::
+```
 
 ```{index} ! Python; enumerate
 ```
@@ -804,12 +803,11 @@ legend();
 ```{index} ! Python; destructuring
 ```
 
-::::{grid} 1 1 2 2
 The idea is to pretend that we know nothing of the origins of this data and use nonlinear least squares to find the parameters in the theoretical model function $v(s)$. In {eq}`nlsq-misfit`, the $s$ variable plays the role of $t$, and $v$ plays the role of $g$.
-:::{card}
+```{tip}
+:class: dropdown
 Putting comma-separated values on the left of an assignment will **destructure** the right-hand side, drawing individual assignments from entries of a vector, for example.
-:::
-::::
+```
 
 ```{code-cell}
 def misfit(c):

@@ -27,7 +27,7 @@ It is waiting for you to enter commands that will be executed right away. To ent
 
 Now you enter `add FNCFunctions` and press `Enter`. This will install the functions that are used in this book. It may take a few minutes to download and install everything. This is a one-time operation.
 
-When you are done with package management, type {kdb}`delete` or a backspace to return to the normal Julia prompt.
+When you are done with package management, type {kbd}`delete` or a backspace to return to the normal Julia prompt.
 
 ## Using packages
 

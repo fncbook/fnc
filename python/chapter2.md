@@ -100,13 +100,12 @@ To solve a linear system $\mathbf{V} \mathbf{c} = \mathbf{y}$ for the vector of 
 c = linalg.solve(V, y)
 print(c)
 ```
-::::{grid} 1 1 2 2
 The algorithms used by `solve` are the main topic of this chapter. As a check on the solution, we can compute the *residual* $\mathbf{y} - \mathbf{V} \mathbf{c}$, which should be small (near machine precision).
 
-:::{card}
+```{tip}
+:class: dropdown
 Matrix multiplication in NumPy is done with `@` or `matmul`.
-:::
-::::
+```
 
 ```{code-cell} 
 print(y - V @ c)
@@ -783,12 +782,11 @@ A_1 = array([
     ])
 ```
 
-::::{grid} 1 1 2 2
 We now find the largest candidate pivot in the first column. We don't care about sign, so we take absolute values before finding the max.
-:::{card}
+```{tip}
+:class: dropdown
 The `argmax` function returns the location of the largest element of a vector or matrix.
-:::
-::::
+```
 
 
 ```{code-cell}

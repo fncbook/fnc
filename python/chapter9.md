@@ -457,12 +457,11 @@ print(results)
 
 (demo-trig-interp-python)=
 ``````{dropdown} @demo-trig-interp
-::::{grid} 1 1 2 2
 We will get a cardinal function without using an explicit formula, just by passing data that is 1 at one node and 0 at the others.
-:::{card}
+```{tip}
+:class: dropdown
 The operator `÷`, typed as `\div` then <kbd>Tab</kbd>, returns the quotient without remainder of two integers.
-:::
-::::
+```
 
 ```{code-cell}
 N = 7
@@ -741,4 +740,3 @@ legend(["direct", "double exponential", "4th-order"], loc="lower left");
 
 As in {numref}`Demo {number} <demo-improper-intinf>`, the double exponential method is more accurate than direct integration by a few orders of magnitude. Equivalently, the same accuracy can be reached with many fewer nodes.
 ``````
-

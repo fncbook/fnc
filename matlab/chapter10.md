@@ -538,4 +538,3 @@ xlabel('x'),  ylabel('u')
 title('Solution by finite elements')
 ```
 ``````
-

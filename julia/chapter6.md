@@ -118,12 +118,11 @@ include("FNC_init.jl")
 ``````{dropdown} @demo-basics-first
 The `OrdinaryDiffEq` package offers solvers for IVPs. Let's use it to define and solve an initial-value problem for $u'=\sin[(u+t)^2]$ over $t \in [0,4]$, such that $u(0)=-1$.
 
-::::{grid} 1 1 2 2
 Because many practical problems come with parameters that are fixed within an instance but varied from one instance to another, the syntax for IVPs includes a input argument `p` that stays fixed throughout the solution. Here we don't want to use that argument, but it must be in the definition for the solver to work.
-:::{card}
+```{tip}
+:class: dropdown
 To create an initial-value problem for $u(t)$, you must supply a function that computes $u'$, an initial value for $u$, and the endpoints of the interval for $t$. The $t$ interval should be defined as `(a,b)`, where at least one of the values is a float.
-:::
-::::
+```
 
 ```{index} ! Julia; ODEProblem, ! Julia; solve
 ```
@@ -347,12 +346,11 @@ plot!(t[1:3:end], u[1:3:end, :];
 
 Notice above that the accuracy of the Euler solution deteriorates rapidly.
 
-::::{grid} 1 1 2 2
 When there are just two components, it's common to plot the solution in the _phase plane_, i.e., with $u_1$ and $u_2$ along the axes and time as a parameterization of the curve.
-:::{card}
+```{tip}
+:class: dropdown
 You can use `idxs` in the plot of a solution produced by `solve` to specify the components of the solution that appear on each axis.
-:::
-::::
+```
 
 ```{code-cell}
 plot(sol, idxs=(1, 2),
@@ -365,12 +363,11 @@ From this plot we can deduce that the solution approaches a periodic one, which 
 
 (demo-systems-coupledpendula-julia)=
 ``````{dropdown} @demo-systems-coupledpendula
-::::{grid} 1 1 2 2
 Let's implement the coupled pendulums from {numref}`Example {number} <example-systems-coupledpendula>`. The pendulums will be pulled in opposite directions and then released together from rest.
-:::{card}
+```{tip}
+:class: dropdown
 The `similar` function creates an array of the same size and type as a given value, without initializing the contents.
-:::
-::::
+```
 
 ```{code-cell}
 function couple(u, p, t)
@@ -387,12 +384,11 @@ u₀ = [1.25, -0.5, 0, 0]
 tspan = (0.0, 50.0);
 ```
 
-::::{grid} 1 1 2 2
 First we check the behavior of the system when the pendulums are uncoupled, i.e., when $k=0$.
-:::{card}
+```{tip}
+:class: dropdown
 Here `idxs` is used to plot two components as functions of time.
-:::
-::::
+```
 
 ```{code-cell}
 γ, L, k = 0, 0.5, 0

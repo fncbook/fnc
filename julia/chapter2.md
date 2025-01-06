@@ -99,12 +99,11 @@ pop = [1008.18, 1262.64, 1337.82, 1374.62];
 :::{index} Julia; broadcasting
 :::
 
-::::{grid} 1 1 2 2
 It's convenient to measure time in years since 1980. We use `.-` to subtract a scalar from every element of a vector. We will also use a floating-point value in the subtraction, so the result is also in double precision.
-:::{card}
+```{tip}
+:class: dropdown
 A dotted operator such as `.-` or `.*` acts elementwise, broadcasting scalar values to match up with elements of an array.
-:::
-::::
+```
 
 ```{code-cell}
 t = year .- 1980.0
@@ -114,12 +113,12 @@ y = pop;
 :::{index} ! Julia; comprehension
 :::
 
-::::{grid} 1 1 2 2
 Now we have four data points $(t_1,y_1),\dots,(t_4,y_4)$, so $n=4$ and we seek an interpolating cubic polynomial. We construct the associated Vandermonde matrix:
-:::{card}
+
+```{tip}
+:class: dropdown
 An expression inside square brackets and ending with a `for` statement is called a **comprehension**. It's often an easy and readable way to construct vectors and matrices. 
-:::
-::::
+```
 
 ```{code-cell}
 V = [ t[i]^j for i in 1:4, j in 0:3 ]
@@ -128,12 +127,11 @@ V = [ t[i]^j for i in 1:4, j in 0:3 ]
 :::{index} ! Julia; \\
 :::
 
-::::{grid} 1 1 2 2
 To solve for the vector of polynomial coefficients, we use a backslash to solve the linear system:
-:::{card}
+```{tip}
+:class: dropdown
 A **backslash** `\` is used to solve a linear system of equations.
-:::
-::::
+```
 
 ```{code-cell}
 c = V \ y
@@ -147,12 +145,11 @@ y - V * c
 
 Using floating-point arithmetic, it is not realistic to expect exact equality of quantities; a relative difference comparable to $\macheps$ is all we can look for.
 
-::::{grid} 1 1 2 2
 By our definitions, the elements of `c` are coefficients in ascending-degree order for the interpolating polynomial. We can use the polynomial to estimate the population of China in 2005:
-:::{card}
+```{tip}
+:class: dropdown
 The `Polynomials` package has functions to make working with polynomials easy and efficient.
-:::
-::::
+```
 
 ```{code-cell}
 using Polynomials
@@ -165,11 +162,12 @@ The official population value for 2005 was 1303.72, so our result is rather good
 :::{index} ! Julia; scatter
 :::
 
-::::{grid} 1 1 2 2
 We can visualize the interpolation process. First, we plot the data as points.
-:::{card}
+
+```{tip}
+:class: dropdown
 The `scatter` function creates a scatter plot of points; you can specify a line connecting the points as well.
-::::
+```
 
 ```{code-cell}
 using Plots
@@ -207,14 +205,12 @@ foreach(println, yy[1:4])
 :::{index} ! Julia; \!
 :::
 
-::::{grid} 1 1 2 2
 Now we use `plot!` to add to the current plot, rather than replacing it.
-:::{card}
+```{tip}
+:class: dropdown
 The `plot` function plots lines connecting the given $x$ and $y$ values; you can also specify markers at the points.
-
 By convention, functions whose names end with the bang `!` change the value or state of something, in addition to possibly returning output.
-:::
-::::
+```
 
 ```{code-cell}
 plot!(tt, yy, label="interpolant")
@@ -227,12 +223,11 @@ plot!(tt, yy, label="interpolant")
 :::{index} ! Julia; size, ! Julia; length
 :::
 
-::::{grid} 1 1 2 2
 In Julia, vectors and matrices are one-dimensional and two-dimensional arrays, respectively. Square brackets are used to enclose elements of a matrix or vector. Use spaces for horizontal concatenation, and semicolons or new lines to indicate vertical concatenation.
-:::{card}
+```{tip}
+:class: dropdown
 The `size` function returns the number of rows and columns in a matrix. Use `length` to get the number of elements in a vector or matrix.
-:::
-::::
+```
 
 ```{code-cell}
 A = [ 1 2 3 4 5; 50 40 30 20 10
@@ -311,11 +306,12 @@ s = range(-1, 1, 5)
 :::{index} ! Julia; end, ! Julia; indexing arrays
 :::
 
-::::{grid} 1 1 2 2
 Accessing an element is done by giving one (for a vector) or two (for a matrix) index values within square brackets. 
-:::{card}
+
+```{tip}
+:class: dropdown
 The `end` keyword refers to the last element in a dimension. It saves you from having to compute and store the size of the matrix first.
-::::
+```
 
 ```{code-cell}
 a = A[2, end-1]
@@ -343,12 +339,12 @@ A[:, 1:2:end]        # all of the odd columns
 :::{index} ! Julia; diagm
 :::
 
-::::{grid} 1 1 2 2
 The matrix and vector senses of addition, subtraction, scalar multiplication, multiplication, and power are all handled by the usual symbols. 
-:::{card}
+
+```{tip}
+:class: dropdown
 Use `diagm` to construct a matrix by its diagonals. A more general syntax puts elements on super- or subdiagonals.
-:::
-::::
+```
 
 ```{code-cell}
 B = diagm( [-1, 0, -5] )   # create a diagonal matrix
@@ -358,12 +354,13 @@ B = diagm( [-1, 0, -5] )   # create a diagonal matrix
 @show size(A), size(B);
 BA = B * A     # matrix product
 ```
-::::{grid} 1 1 2 2
+
 `A * B` causes an error here, because the dimensions aren't compatible.
-:::{card}
+
+```{tip}
+:class: dropdown
 Errors are formally called *exceptions* in Julia.
-:::
-::::
+```
 
 ```{code-cell} julia
 :tags: raises-exception
@@ -401,12 +398,11 @@ x_to_two = x .^ 2
 two_to_x = 2 .^ x
 ```
 
-::::{grid} 1 1 2 2
 Most of the mathematical functions, such as cos, sin, log, exp, and sqrt, expect scalars as operands. However, you can broadcast any function, including ones that you have defined, across a vector or array by using a special dot syntax.
-:::{card}
+```{tip}
+:class: dropdown
 A dot added to the end of a function name means to apply the function elementwise to an array.
-:::
-::::
+```
 
 ```{code-cell}
 show(cos.(π * x))    # broadcast to a function
@@ -458,12 +454,11 @@ x = A \ b    # throws an error
 ```{index} ! Julia; rank
 ```
 
-::::{grid} 1 1 2 2
 In this case we can check that the rank of $\mathbf{A}$ is less than its number of columns, indicating singularity.
-:::{card}
+```{tip}
+:class: dropdown
 The function `rank` computes the rank of a matrix. However, it is numerically unstable for matrices that are nearly singular, in a sense to be defined in a later section.
-:::
-::::
+```
 
 ```{code-cell}
 rank(A)
@@ -478,12 +473,11 @@ A linear system with a singular matrix might have no solution or infinitely many
 ```{index} ! Julia; tril, ! Julia; triu
 ```
 
-::::{grid} 1 1 2 2
 It's easy to get just the lower triangular part of any matrix using the `tril` function.
-:::{card}
+```{tip}
+:class: dropdown
 Use `tril` to return a matrix that zeros out everything above the main diagonal. The `triu` function zeros out below the diagonal.
-:::
-::::
+```
 
 ```{code-cell}
 A = rand(1.:9., 5, 5)
@@ -506,12 +500,11 @@ b - L * x
 ```{index} ! Julia; Pair, Julia; diagm
 ```
 
-::::{grid} 1 1 2 2
 Next we'll engineer a problem to which we know the exact answer. Use `\alpha` <kbd>Tab</kbd> and `\beta` <kbd>Tab</kbd> to get the Greek letters.
-:::{card}
+```{tip}
+:class: dropdown
 The notation `0=>ones(5)` creates a `Pair`. In `diagm`, pairs indicate the position of a diagonal and the elements that are to be placed on it.
-:::
-::::
+```
 
 ```{code-cell}
 α = 0.3;
@@ -565,12 +558,11 @@ L = tril( rand(1:9, 3, 3) )
 U = triu( rand(1:9, 3, 3) )
 ```
 
-::::{grid} 1 1 2 2
 Here are the three outer products in the sum in {eq}`matrixouter`:
-:::{card}
+```{tip}
+:class: dropdown
 Although `U[1,:]` is a row of `U`, it is a vector, and as such it has a default column interpretation.
-:::
-::::
+```
 
 ```{code-cell}
 L[:, 1] * U[1, :]'
@@ -723,12 +715,11 @@ Since the matrix $\mathbf{A}$ has $n^2$ elements, all of which have to be involv
 ```{index} ! Julia; push\!, ! Julia; for
 ```
 
-::::{grid} 1 1 2 2
 Let's run an experiment with the built-in matrix-vector multiplication. Note that Julia is unusual in that loops have a variable scope separate from its enclosing code. Thus, `for n in n` below means that inside the loop, the name `n` will take on each one of the values that were previously assigned to the vector `n`.
-:::{card}
+```{tip}
+:class: dropdown
 The `push!` function attaches a new value to the end of a vector.
-:::
-::::
+```
 
 ```{code-cell}
 n = 1000:1000:5000
@@ -750,12 +741,11 @@ The reason for doing multiple repetitions at each value of $n$ in the loop above
 ```{index} Julia; Boolean indexing
 ```
 
-::::{grid} 1 1 2 2
 Looking at the timings just for $n=2000$ and $n=4000$, they have ratio
-:::{card}
+```{tip}
+:class: dropdown
 The expression `n.==4000` here produces a vector of Boolean (true/false) values the same size as `n`. This result is used to index within `t`, accessing only the value for which the comparison is true.
-:::
-::::
+```
 
 ```{code-cell}
 @show t[n.==4000] ./ t[n.==2000];
@@ -803,12 +793,11 @@ plot!(n, t[end] * (n/n[end]).^2, l=:dash,
 
 (demo-flops-lufact-julia)=
 ``````{dropdown} @demo-flops-lufact
-::::{grid} 1 1 2 2
 We'll test the conclusion of $O(n^3)$ flops experimentally, using the built-in `lu` function instead of the purely instructive `lufact`.
-:::{card}
+```{tip}
+:class: dropdown
 The first time a function is invoked, there may be significant time needed to compile it in memory. Thus, when timing a function, run it at least once before beginning the timing.
-:::
-::::
+```
 
 ```{code-cell}
 lu(randn(3, 3));   # throwaway to force compilation
@@ -872,12 +861,11 @@ Here is the trouble-making matrix from {numref}`Demo {number} <demo-pivoting-fai
 A₁ = [2 0 4 3 ; -2 0 2 -13; 1 15 2 -4.5 ; -4 5 -7 -10]
 ```
 
-::::{grid} 1 1 2 2
 We now find the largest candidate pivot in the first column. We don't care about sign, so we take absolute values before finding the max.
-:::{card}
+```{tip}
+:class: dropdown
 The `argmax` function returns the location of the largest element of a vector or matrix.
-:::
-::::
+```
 
 
 ```{code-cell}
@@ -1103,14 +1091,12 @@ onenorm = opnorm(A, 1)
 ```{index} ! Julia; maximum, ! Julia; minimum, ! Julia; sum
 ```
 
-::::{grid} 1 1 2 2
 According to {eq}`mxonenorm`, the matrix 1-norm is equivalent to the maximum of the sums down the columns (in absolute value).
-:::{card}
+```{tip}
+:class: dropdown
 Use `sum` to sum along a dimension of a matrix. You can also sum over the entire matrix by omitting the `dims` argument.
-
 The `maximum` and `minimum` functions also work along one dimension or over an entire matrix. To get both values at once, use `extrema`.
-:::
-::::
+```
 
 ```{code-cell}
 # Sum down the rows (1st matrix dimension):
@@ -1127,12 +1113,11 @@ infnorm = opnorm(A, Inf)
  # Sum across columns (2nd matrix dimension):
 maximum( sum(abs.(A), dims=2) )  
 ```
-::::{grid} 1 1 2 2
 Next we illustrate a geometric interpretation of the 2-norm. First, we will sample a lot of vectors on the unit circle in $\mathbb{R}^2$.
-:::{card}
+```{tip}
+:class: dropdown
 You can use functions as values, e.g., as elements of a vector. 
-:::
-::::
+```
 
 ```{code-cell}
 # Construct 601 unit column vectors.
@@ -1178,12 +1163,11 @@ plot!(twonorm*x[1, :], twonorm*x[2, :], subplot=2, l=:dash)
 
 ```{index} ! Julia; cond
 ```
-::::{grid} 1 1 2 2
 Julia has a function `cond` to compute matrix condition numbers. By default, the 2-norm is used. As an example, the family of *Hilbert matrices* is famously badly conditioned. Here is the $6\times 6$  case.
-:::{card}
+```{tip}
+:class: dropdown
 Type `\kappa` followed by <kbd>Tab</kbd> to get the Greek letter $\kappa$.
-:::
-::::
+```
 
 ```{code-cell}
 A = [ 1 / (i + j) for i in 1:6, j in 1:6 ]
@@ -1266,12 +1250,11 @@ As anticipated, the solution has zero accurate digits in the 2-norm.
 ```{index} ! Julia; fill, Julia; diagm, ! Julia; diag
 ```
 
-::::{grid} 1 1 2 2
 Here is a small tridiagonal matrix. Note that there is one fewer element on the super- and subdiagonals than on the main diagonal.
-:::{card}
+```{tip}
+:class: dropdown
 Use `fill` to create an array of a given size, with each element equal to a provided value.
-:::
-::::
+```
 
 ```{code-cell}
 A = diagm( -1 => [4, 3, 2, 1, 0], 
@@ -1282,12 +1265,11 @@ A = diagm( -1 => [4, 3, 2, 1, 0],
 ```{index} ! Julia; diag
 ```
 
-::::{grid} 1 1 2 2
 We can extract the elements on any diagonal using the `diag` function. The main or central diagonal is numbered zero, above and to the right of that is positive, and below and to the left is negative.
-:::{card}
+```{tip}
+:class: dropdown
 The `diag` function extracts the elements from a specified diagonal of a matrix.
-:::
-::::
+```
 
 ```{code-cell}
 @show diag_main = diag(A);
@@ -1365,12 +1347,11 @@ B = A + A'
 ```{index} ! Julia; cholesky
 ```
 
-::::{grid} 1 1 2 2
 Similarly, a random symmetric matrix is unlikely to be positive definite. The Cholesky algorithm always detects a non-PD matrix by quitting with an error.
-:::{card}
+```{tip}
+:class: dropdown
 The `cholesky` function computes a Cholesky factorization if possible, or throws an error for a non-positive-definite matrix. However, it does *not* check for symmetry.
-:::
-::::
+```
 
 ```{code-cell}
 :tags: raises-exception

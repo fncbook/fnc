@@ -101,12 +101,11 @@ FNC_init
 (demo-basics-first-matlab)=
 ``````{dropdown} @demo-basics-first
 
-::::{grid} 1 1 2 2
 Let's use it to define and solve an initial-value problem for $u'=\sin[(u+t)^2]$ over $t \in [0,4]$, such that $u(0)=-1$. To create an initial-value problem for $u(t)$, you must create an `ode` with a function that computes $u'$ and an initial condition for $u$. Then you create a solution by calling `solve` with a time interval. 
-:::{card}
+```{tip}
+:class: dropdown
 Most real ODE problems contain parameters that are constant during the solution but that can change from one problem instance to the next. Accordingly, we define the ODE function below to accept a third argument, `p`, which is a vector of parameters. We always include this argument for consistency, even when there are no parameters.
-:::
-::::
+```
 
 ```{index} ! MATLAB; ode, ! MATLAB; solve
 ```
@@ -327,12 +326,11 @@ u0 = [1.25; -0.5; 0; 0];
 a = 0; b = 50;
 ```
 
-::::{grid} 1 1 2 2
 First we check the behavior of the system when the pendulums are uncoupled, i.e., when $k=0$.
-:::{card}
+```{tip}
+:class: dropdown
 Here `OutputVariables` is used to restrict output to just $u_1$ and $u_2$.
-:::
-::::
+```
 
 ```{code-cell}
 params =[0.01, 0.5, 0];    % gamma, L, k

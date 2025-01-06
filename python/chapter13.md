@@ -73,12 +73,11 @@ F = array( [ [f(xi, yj) for yj in y] for xi in x ] )
 print(F)
 ```
 
-::::{grid} 1 1 2 2
 We can make a nice plot of the function by first choosing a much finer grid. However, the contour and surface plotting functions expect the *transpose* of mtx($f$).
-:::{card}
+```{tip}
+:class: dropdown
 To emphasize departures from a zero level, use a colormap such as `RdBu` and set the color limits to be symmetric around zero.
-:::
-::::
+```
 
 ::::{warning}
 The contour and surface plotting functions expect the *transpose* of the outputs of `mtx`. If you forget to do that, the $x$ and $y$ axes will be swapped.
@@ -251,12 +250,11 @@ xlabel("$x$"),  ylabel("$y$")
 title("Heat equation, t=0.02")
 ```
 
-::::{grid} 1 1 2 2
 Here is an animation of the solution.
-:::{card}
+```{tip}
+:class: dropdown
 Here `clims` are set so that colors remain at fixed values throughout the animation.
-:::
-::::
+```
 
 ```{code-cell}
 from matplotlib import animation
@@ -509,12 +507,11 @@ spy(is_boundary)
 title("Boundary points");
 ```
 
-::::{grid} 1 1 2 2
 In order to impose Dirichlet boundary conditions, we replace the boundary rows of the system by rows of the identity.
-:::{card}
+```{tip}
+:class: dropdown
 Changing rows of a sparse array requires that the operands be in a particular sparse representation called `lil`. The conversion isn't done automatically because it can be slow and you are encouraged to avoid it when possible. We're just trying to keep things conceptually simple here.
-:::
-::::
+```
 
 ```{code-cell}
 I = sp.eye(N, format="lil")

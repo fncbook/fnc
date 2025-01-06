@@ -122,12 +122,11 @@ t = [ 1, 1.5, 2, 2.25, 2.75, 3 ]
 n = length(t) - 1;
 ```
 
-::::{grid} 1 1 2 2
 Let's apply the definition of the cardinal Lagrange polynomial for $k=2$. First we define a polynomial $q$ that is zero at all the nodes except $i=k$. Then $\ell_2$ is found by normalizing $q$ by $q(t_k)$.
-:::{card}
+```{tip}
+:class: dropdown
 Character ℓ is typed as `\ell`<kbd>Tab</kbd>.
-:::
-::::
+```
 
 ```{code-cell}
 k = 2
@@ -158,14 +157,13 @@ t =  [ 1, 1.6, 1.9, 2.7, 3 ]
 n = length(t) - 1;
 ```
 
-::::{grid} 1 1 2 2
 Here $n=4$ and $f^{(5)}(\xi) = 4!/\xi^5$. For $\xi\in[1,3]$ we can say that $|f^{(5)}(\xi)| \le 4!$. Hence 
 
 $$ |f(x)-p(x)| \le \frac{1}{5} \left| \Phi(x) \right|.$$
-:::{card}
+```{tip}
+:class: dropdown
 Character Φ is typed as `\Phi`<kbd>Tab</kbd>. (Note the capitalization.)
-:::
-::::
+```
 
 ```{code-cell}
 using Polynomials
@@ -446,12 +444,11 @@ labels = ["n", "intercept", "slope"]
 
 (demo-trig-interp-julia)=
 ``````{dropdown} @demo-trig-interp
-::::{grid} 1 1 2 2
 We will get a cardinal function without using an explicit formula, just by passing data that is 1 at one node and 0 at the others.
-:::{card}
+```{tip}
+:class: dropdown
 The operator `÷`, typed as `\div` then <kbd>Tab</kbd>, returns the quotient without remainder of two integers.
-:::
-::::
+```
 
 ```{code-cell}
 using Plots
@@ -732,4 +729,3 @@ plot!(n, 30n.^(-4);
 
 As in {numref}`Demo {number} <demo-improper-intinf>`, the double exponential method is more accurate than direct integration by a few orders of magnitude. Equivalently, the same accuracy can be reached with many fewer nodes.
 ``````
-

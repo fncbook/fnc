@@ -85,12 +85,11 @@ n = 5;  k = 2;
 not_k = [0:k-1 k+1:n];   % all except the kth node
 ```
 
-::::{grid} 1 1 2 2
 Let's apply the definition of the cardinal Lagrange polynomial for $k=2$. First we define a polynomial $q$ that is zero at all the nodes except $i=k$. Then $\ell_2$ is found by normalizing $q$ by $q(t_k)$.
-:::{card}
+```{tip}
+:class: dropdown
 Whenever we index into the node vector `t`, we have to add 1 since the mathematical index starts at zero.
-:::
-::::
+```
 
 ```{code-cell}
 q = @(x) prod(x - t(not_k + 1));
@@ -664,4 +663,3 @@ title(("Comparison of integration methods"));
 
 As in {numref}`Demo {number} <demo-improper-intinf>`, the double exponential method is more accurate than direct integration by a few orders of magnitude. Equivalently, the same accuracy can be reached with many fewer nodes.
 ``````
-

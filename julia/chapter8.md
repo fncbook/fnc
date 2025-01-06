@@ -83,12 +83,11 @@ using SparseArrays, JLD2
 
 ```{index} ! Julia; nnz
 ```
-::::{grid} 1 1 2 2
 We may define the density of $\mathbf{A}$ as the number of nonzeros divided by the total number of entries.
-:::{card}
+```{tip}
+:class: dropdown
 Use `nnz` to count the number of nonzeros in a sparse matrix.
-:::
-::::
+```
 
 ```{code-cell}
 m, n = size(A)
@@ -175,22 +174,12 @@ Matrix(A[1:7, 1:7])
 ```{index} ! Julia; sparse
 ```
 
-::::{grid} 1 1 2 2
-
-:::{grid-item}
-
-
 Without pivoting, the LU factors have the same lower and upper bandwidth as the original matrix.
 
-
-:::
-:::{card}
-
-
+```{tip}
+:class: dropdown
 The `sparse` function converts any matrix to sparse form. But it's usually better to construct a sparse matrix directly, as the standard form might not fit in memory.
-
-:::
-::::
+```
 
 ```{code-cell}
 L, U = FNC.lufact(A)
@@ -409,12 +398,11 @@ The observed linear convergence rate is found from the data.
 ```{index} ! Julia; sortperm
 ```
 
-::::{grid} 1 1 2 2
 We reorder the eigenvalues to enforce {eq}`shiftorder`.
-:::{card}
+```{tip}
+:class: dropdown
 The `sortperm` function returns the index permutation needed to sort the given vector, rather than the sorted vector itself.
-:::
-::::
+```
 
 ```{code-cell}
 λ = λ[sortperm(abs.(λ .- s))]
@@ -615,12 +603,11 @@ spy(A, color=:blues)
 ```{index} ! Julia; gmres
 ```
 
-::::{grid} 1 1 2 2
 We compare unrestarted GMRES with three different thresholds for restarting. Here we are using `gmres` from the `IterativeSolvers` package, since our simple implementation does not offer restarting.
-:::{card}
+```{tip}
+:class: dropdown
 The syntax `f(x;foo)` is shorthand for `f(x,foo=foo)`.
-:::
-::::
+```
 
 ```{code-cell}
 using IterativeSolvers
@@ -815,12 +802,11 @@ using LinearMaps
 T = LinearMap(x -> vec(blur(unvec(x))), m * n);
 ```
 
-::::{grid} 1 1 2 2
 The blurring operators are symmetric, so we apply `minres` to the composite blurring transformation `T`.
-:::{card}
+```{tip}
+:class: dropdown
 The function `clamp01` in `Images` restricts values to be in the interval $[0,1]$.
-:::
-::::
+```
 
 ```{code-cell}
 using IterativeSolvers
