@@ -16,6 +16,9 @@ The book was originally written for MATLAB. That version is still [available for
 Using this book.
 ```
 
+- @section-setup-julia
+
+
 <!-- needed to make Mathjax work for some reason -->
 ```{math}
 \relax

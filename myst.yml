@@ -206,6 +206,7 @@ project:
         # - file: refs.md
       - title: Julia codes
         children:
+          - file: julia/setup.md
           - file: julia/chapter1.md
           - file: julia/chapter2.md
           - file: julia/chapter3.md
