@@ -12,7 +12,7 @@ numbering:
 
 (function-euler-julia)=
 ``````{dropdown} Euler's method for an initial-value problem
-```{literalinclude} package/src/chapter06.jl
+```{literalinclude} FNCFunctions/src/chapter06.jl
 :filename: euler.jl
 :start-after: # begin euler
 :end-before: # end euler
@@ -27,7 +27,7 @@ The `ivp` input argument is an `ODEProblem`, like in {numref}`Demo {number} <dem
 
 (function-ie2-julia)=
 ``````{dropdown} Improved Euler method for an IVP
-```{literalinclude} package/src/chapter06.jl
+```{literalinclude} FNCFunctions/src/chapter06.jl
 :filename: ie2.jl
 :start-after: # begin ie2
 :end-before: # end ie2
@@ -38,7 +38,7 @@ The `ivp` input argument is an `ODEProblem`, like in {numref}`Demo {number} <dem
 
 (function-rk4-julia)=
 ``````{dropdown} Fourth-order Runge-Kutta for an IVP
-```{literalinclude} package/src/chapter06.jl
+```{literalinclude} FNCFunctions/src/chapter06.jl
 :filename: rk4.jl
 :start-after: # begin rk4
 :end-before: # end rk4
@@ -49,7 +49,7 @@ The `ivp` input argument is an `ODEProblem`, like in {numref}`Demo {number} <dem
 
 (function-rk23-julia)=
 ``````{dropdown} Adaptive IVP solver based on embedded RK formulas
-```{literalinclude} package/src/chapter06.jl
+```{literalinclude} FNCFunctions/src/chapter06.jl
 :filename: rk23.jl
 :start-after: # begin rk23
 :end-before: # end rk23
@@ -70,7 +70,7 @@ While {eq}`bs23` calls for four stages to find the paired second- and third-orde
 
 (function-ab4-julia)=
 ``````{dropdown} 4th-order Adams–Bashforth formula for an IVP
-```{literalinclude} package/src/chapter06.jl
+```{literalinclude} FNCFunctions/src/chapter06.jl
 :filename: ab4.jl
 :start-after: # begin ab4
 :end-before: # end ab4
@@ -87,7 +87,7 @@ Line 28 computes $f_i$, based on the most recent solution value and time. That g
 
 (function-am2-julia)=
 ``````{dropdown} 2nd-order Adams–Moulton (trapezoid) formula for an IVP
-```{literalinclude} package/src/chapter06.jl
+```{literalinclude} FNCFunctions/src/chapter06.jl
 :filename: am2.jl
 :start-after: # begin am2
 :end-before: # end am2

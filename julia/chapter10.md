@@ -12,7 +12,7 @@ numbering:
 
 (function-shoot-julia)=
 ``````{dropdown} Shooting method for a two-point boundary-value problem
-```{literalinclude} package/src/chapter10.jl
+```{literalinclude} FNCFunctions/src/chapter10.jl
 :filename: shoot.jl
 :start-after: # begin shoot
 :end-before: # end shoot
@@ -31,7 +31,7 @@ The error tolerance in the IVP solver is kept smaller than in the rootfinder, to
 
 (function-diffmats2-julia)=
 ``````{dropdown} Second-order differentiation matrices
-```{literalinclude} package/src/chapter10.jl
+```{literalinclude} FNCFunctions/src/chapter10.jl
 :filename: diffmats2.jl
 :start-after: # begin diffmat2
 :end-before: # end diffmat2
@@ -42,7 +42,7 @@ The error tolerance in the IVP solver is kept smaller than in the rootfinder, to
 
 (function-diffcheb-julia)=
 ``````{dropdown} Chebyshev differentiation matrices
-```{literalinclude} package/src/chapter10.jl
+```{literalinclude} FNCFunctions/src/chapter10.jl
 :filename: diffcheb.jl
 :start-after: # begin diffcheb
 :end-before: # end diffcheb
@@ -53,7 +53,7 @@ The error tolerance in the IVP solver is kept smaller than in the rootfinder, to
 
 (function-bvplin-julia)=
 ``````{dropdown} Solution of a linear boundary-value problem
-```{literalinclude} package/src/chapter10.jl
+```{literalinclude} FNCFunctions/src/chapter10.jl
 :filename: bvplin.jl
 :start-after: # begin bvplin
 :end-before: # end bvplin
@@ -69,7 +69,7 @@ Note that there is no need to explicitly form the row-deletion matrix $\mathbf{E
 
 (function-bvp-julia)=
 ``````{dropdown} Solution of a nonlinear boundary-value problem
-```{literalinclude} package/src/chapter10.jl
+```{literalinclude} FNCFunctions/src/chapter10.jl
 :filename: bvp.jl
 :start-after: # begin bvp
 :end-before: # end bvp
@@ -84,7 +84,7 @@ The nested function `residual` uses differentiation matrices computed externally
 
 (function-fem-julia)=
 ``````{dropdown} Piecewise linear finite elements for a linear BVP
-```{literalinclude} package/src/chapter10.jl
+```{literalinclude} FNCFunctions/src/chapter10.jl
 :filename: fem.jl
 :start-after: # begin fem
 :end-before: # end fem

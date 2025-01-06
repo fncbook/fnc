@@ -12,7 +12,7 @@ numbering:
 
 (function-polyinterp-julia)=
 ``````{dropdown} Barycentric polynomial interpolation
-```{literalinclude} package/src/chapter09.jl
+```{literalinclude} FNCFunctions/src/chapter09.jl
 :filename: polyinterp.jl
 :start-after: # begin polyinterp
 :end-before: # end polyinterp
@@ -30,7 +30,7 @@ The return value is a function that evaluates the polynomial interpolant. Within
 
 (function-triginterp-julia)=
 ``````{dropdown} Trigonometric interpolation
-```{literalinclude} package/src/chapter09.jl
+```{literalinclude} FNCFunctions/src/chapter09.jl
 :filename: triginterp.jl
 :start-after: # begin triginterp
 :end-before: # end triginterp
@@ -46,7 +46,7 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 
 (function-ccint-julia)=
 ``````{dropdown} Clenshaw–Curtis integration
-```{literalinclude} package/src/chapter09.jl
+```{literalinclude} FNCFunctions/src/chapter09.jl
 :filename: ccint.jl
 :start-after: # begin ccint
 :end-before: # end ccint
@@ -57,7 +57,7 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 
 (function-glint-julia)=
 ``````{dropdown} Gauss–Legendre integration
-```{literalinclude} package/src/chapter09.jl
+```{literalinclude} FNCFunctions/src/chapter09.jl
 :filename: glint.jl
 :start-after: # begin glint
 :end-before: # end glint
@@ -68,7 +68,7 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 
 (function-intinf-julia)=
 ``````{dropdown} Integration over $(-\infty,\infty)$
-```{literalinclude} package/src/chapter09.jl
+```{literalinclude} FNCFunctions/src/chapter09.jl
 :filename: intinf.jl
 :start-after: # begin intinf
 :end-before: # end intinf
@@ -84,7 +84,7 @@ The test `isinf(x(M))` in line 17 checks whether $x(M)$ is larger than the maxim
 
 (function-intsing-julia)=
 ``````{dropdown} Integration with endpoint singularities
-```{literalinclude} package/src/chapter09.jl
+```{literalinclude} FNCFunctions/src/chapter09.jl
 :filename: intsing.jl
 :start-after: # begin intsing
 :end-before: # end intsing

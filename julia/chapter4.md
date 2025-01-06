@@ -12,7 +12,7 @@ numbering:
 
 (function-newton-julia)=
 ``````{dropdown} Newton's method
-```{literalinclude} package/src/chapter04.jl
+```{literalinclude} FNCFunctions/src/chapter04.jl
 :filename: newton.jl
 :start-after: # begin newton
 :end-before: # end newton
@@ -29,7 +29,7 @@ The `break` statement, seen here in line 25, causes an immediate exit from the i
 
 (function-secant-julia)=
 ``````{dropdown} Secant method
-```{literalinclude} package/src/chapter04.jl
+```{literalinclude} FNCFunctions/src/chapter04.jl
 :filename: secant.jl
 :start-after: # begin secant
 :end-before: # end secant
@@ -44,7 +44,7 @@ Because we want to observe the convergence of the method, {numref}`Function {num
 
 (function-newtonsys-julia)=
 ``````{dropdown} Newton's method for systems
-```{literalinclude} package/src/chapter04.jl
+```{literalinclude} FNCFunctions/src/chapter04.jl
 :filename: newtonsys.jl
 :start-after: # begin newtonsys
 :end-before: # end newtonsys
@@ -59,7 +59,7 @@ The output of {numref}`Function {number} <function-newtonsys>` is a vector of ve
 
 (function-fdjac-julia)=
 ``````{dropdown} Finite differences for Jacobian
-```{literalinclude} package/src/chapter04.jl
+```{literalinclude} FNCFunctions/src/chapter04.jl
 :filename: fdjac.jl
 :start-after: # begin fdjac
 :end-before: # end fdjac
@@ -76,7 +76,7 @@ Note that a default value is given for the third argument `y₀`, and it refers 
 
 (function-levenberg-julia)=
 ``````{dropdown} Levenberg's method
-```{literalinclude} package/src/chapter04.jl
+```{literalinclude} FNCFunctions/src/chapter04.jl
 :filename: levenberg.jl
 :start-after: # begin levenberg
 :end-before: # end levenberg

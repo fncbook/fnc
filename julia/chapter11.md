@@ -11,7 +11,7 @@ kernelspec:
 
 (function-diffper-julia)=
 ``````{dropdown} Differentiation matrices for periodic end conditions
-```{literalinclude} package/src/chapter11.jl
+```{literalinclude} FNCFunctions/src/chapter11.jl
 :filename: diffper.jl
 :start-after: # begin diffper
 :end-before: # end diffper
@@ -22,7 +22,7 @@ kernelspec:
 
 (function-parabolic-julia)=
 ``````{dropdown} Solution of parabolic PDEs by the method of lines
-```{literalinclude} package/src/chapter11.jl
+```{literalinclude} FNCFunctions/src/chapter11.jl
 :filename: parabolic.jl
 :start-after: # begin parabolic
 :end-before: # end parabolic

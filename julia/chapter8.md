@@ -12,7 +12,7 @@ numbering:
 
 (function-poweriter-julia)=
 ``````{dropdown} Power iteration
-```{literalinclude} package/src/chapter08.jl
+```{literalinclude} FNCFunctions/src/chapter08.jl
 :filename: poweriter.jl
 :start-after: # begin poweriter
 :end-before: # end poweriter
@@ -23,7 +23,7 @@ numbering:
 
 (function-inviter-julia)=
 ``````{dropdown} Inverse iteration
-```{literalinclude} package/src/chapter08.jl
+```{literalinclude} FNCFunctions/src/chapter08.jl
 :filename: inviter.jl
 :start-after: # begin inviter
 :end-before: # end inviter
@@ -34,7 +34,7 @@ numbering:
 
 (function-arnoldi-julia)=
 ``````{dropdown} Arnoldi iteration
-```{literalinclude} package/src/chapter08.jl
+```{literalinclude} FNCFunctions/src/chapter08.jl
 :filename: arnoldi.jl
 :start-after: # begin arnoldi
 :end-before: # end arnoldi
@@ -49,7 +49,7 @@ The loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}
 
 (function-gmres-julia)=
 ``````{dropdown} GMRES
-```{literalinclude} package/src/chapter08.jl
+```{literalinclude} FNCFunctions/src/chapter08.jl
 :filename: gmres.jl
 :start-after: # begin gmres
 :end-before: # end gmres

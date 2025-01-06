@@ -13,7 +13,7 @@ numbering:
 
 (function-forwardsub-julia)=
 ``````{dropdown} Forward substitution
-```{literalinclude} package/src/chapter02.jl
+```{literalinclude} FNCFunctions/src/chapter02.jl
 :filename: forwardsub.jl
 :start-after: # begin forwardsub
 :end-before: # end forwardsub
@@ -32,7 +32,7 @@ The `sum` in line 12 gives an error if `i` equals 1, so that case is taken care 
 
 (function-backsub-julia)=
 ``````{dropdown} Backward substitution
-```{literalinclude} package/src/chapter02.jl
+```{literalinclude} FNCFunctions/src/chapter02.jl
 :filename: backsub.jl
 :start-after: # begin backsub
 :end-before: # end backsub
@@ -43,7 +43,7 @@ The `sum` in line 12 gives an error if `i` equals 1, so that case is taken care 
 
 (function-lufact-julia)=
 `````{dropdown} LU factorization (not stable)
-```{literalinclude} package/src/chapter02.jl
+```{literalinclude} FNCFunctions/src/chapter02.jl
 :filename: lufact.jl
 :start-after: # begin lufact
 :end-before: # end lufact
@@ -61,7 +61,7 @@ The second issue is that even when `A` has all integer entries, its LU factors m
 
 (function-plufact-julia)=
 ``````{dropdown} LU factorization with partial pivoting
-```{literalinclude} package/src/chapter02.jl
+```{literalinclude} FNCFunctions/src/chapter02.jl
 :filename: plufact.jl
 :start-after: # begin plufact
 :end-before: # end plufact

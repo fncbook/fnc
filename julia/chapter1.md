@@ -13,7 +13,7 @@ numbering:
 (function-horner-julia)=
 `````{dropdown} **Horner's algorithm for evaluating a polynomial**
 :open:
-```{literalinclude} package/src/chapter01.jl
+```{literalinclude} FNCFunctions/src/chapter01.jl
 :filename: horner.jl
 :start-after: # begin horner
 :end-before: # end horner
