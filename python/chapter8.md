@@ -12,6 +12,7 @@ numbering:
 
 (function-poweriter-python)=
 ``````{dropdown} Power iteration
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC08.py
 :filename: poweriter.py
 :start-at: def poweriter
@@ -23,6 +24,7 @@ numbering:
 
 (function-inviter-python)=
 ``````{dropdown} Inverse iteration
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC08.py
 :filename: inviter.py
 :start-at: def inviter
@@ -34,6 +36,7 @@ numbering:
 
 (function-arnoldi-python)=
 ``````{dropdown} Arnoldi iteration
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC08.py
 :filename: arnoldi.py
 :start-at: def arnoldi
@@ -49,6 +52,7 @@ The loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}
 
 (function-gmres-python)=
 ``````{dropdown} GMRES
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC08.py
 :filename: gmres.py
 :start-at: def arngmres

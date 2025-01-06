@@ -12,6 +12,7 @@ numbering:
 
 (function-shoot-matlab)=
 ``````{dropdown} Shooting method for a two-point boundary-value problem
+:open:
 ```{literalinclude} fnc/shoot.m
 :language: matlab
 :linenos: true
@@ -20,6 +21,7 @@ numbering:
 
 (function-diffmats2-matlab)=
 ``````{dropdown} Second-order differentiation matrices
+:open:
 ```{literalinclude} fnc/diffmat2.m
 :language: matlab
 :linenos: true
@@ -28,6 +30,7 @@ numbering:
 
 (function-diffcheb-matlab)=
 ``````{dropdown} Chebyshev differentiation matrices
+:open:
 ```{literalinclude} fnc/diffcheb.m
 :language: matlab
 :linenos: true
@@ -36,6 +39,7 @@ numbering:
 
 (function-bvplin-matlab)=
 ``````{dropdown} Solution of a linear boundary-value problem
+:open:
 ```{literalinclude} fnc/bvplin.m
 :language: matlab
 :linenos: true
@@ -44,6 +48,7 @@ numbering:
 
 (function-bvp-matlab)=
 ``````{dropdown} Solution of a nonlinear boundary-value problem
+:open:
 ```{literalinclude} fnc/bvp.m
 :language: matlab
 :linenos: true
@@ -52,6 +57,7 @@ numbering:
 
 (function-fem-matlab)=
 ``````{dropdown} Piecewise linear finite elements for a linear BVP
+:open:
 ```{literalinclude} fnc/fem.m
 :language: matlab
 :linenos: true

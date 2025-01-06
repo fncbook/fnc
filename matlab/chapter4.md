@@ -12,6 +12,7 @@ numbering:
 
 (function-newton-matlab)=
 ``````{dropdown} Newton's method
+:open:
 ```{literalinclude} ../matlab/fnc/newton.m
 :language: matlab
 :linenos: true
@@ -20,6 +21,7 @@ numbering:
 
 (function-secant-matlab)=
 ``````{dropdown} Secant method
+:open:
 ```{literalinclude} ../matlab/fnc/secant.m
 :language: matlab
 :linenos: true
@@ -28,6 +30,7 @@ numbering:
 
 (function-newtonsys-matlab)=
 ``````{dropdown} Newton's method for systems
+:open:
 ```{literalinclude} ../matlab/fnc/newtonsys.m
 :language: matlab
 :linenos: true
@@ -36,6 +39,7 @@ numbering:
 
 (function-fdjac-matlab)=
 ``````{dropdown} Finite differences for Jacobian
+:open:
 ```{literalinclude} ../matlab/fnc/fdjac.m
 :language: matlab
 :linenos: true
@@ -44,6 +48,7 @@ numbering:
 
 (function-levenberg-matlab)=
 ``````{dropdown} Levenberg's method
+:open:
 ```{literalinclude} ../matlab/fnc/levenberg.m
 :language: matlab
 :linenos: true

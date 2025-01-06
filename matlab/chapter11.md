@@ -12,6 +12,7 @@ numbering:
 
 (function-diffper-matlab)=
 ``````{dropdown} Differentiation matrices for periodic end conditions
+:open:
 ```{literalinclude} fnc/diffper.m
 :language:matlab
 :linenos: true
@@ -20,6 +21,7 @@ numbering:
 
 (function-parabolic-matlab)=
 ``````{dropdown} Solution of parabolic PDEs by the method of lines
+:open:
 ```{literalinclude} fnc/parabolic.m
 :language:matlab
 :linenos: true

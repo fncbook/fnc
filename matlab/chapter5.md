@@ -15,6 +15,7 @@ MATLAB implementations
 
 (function-hatfun-matlab)=
 ``````{dropdown} Hat function
+:open:
 ```{literalinclude} ../matlab/fnc/hatfun.m
 :language: matlab
 :linenos: true
@@ -23,6 +24,7 @@ MATLAB implementations
 
 (function-plinterp-matlab)=
 ``````{dropdown} Piecewise linear interpolation
+:open:
 ```{literalinclude} ../matlab/fnc/plinterp.m
 :language: matlab
 :linenos: true
@@ -31,6 +33,7 @@ MATLAB implementations
 
 (function-spinterp-matlab)=
 ``````{dropdown} Cubic spline interpolation
+:open:
 ```{literalinclude} ../matlab/fnc/spinterp.m
 :language: matlab
 :linenos: true
@@ -39,6 +42,7 @@ MATLAB implementations
 
 (function-fdweights-matlab)=
 ``````{dropdown} Fornberg's algorithm for finite difference weights
+:open:
 ```{literalinclude} ../matlab/fnc/fdweights.m
 :language: matlab
 :linenos: true
@@ -47,6 +51,7 @@ MATLAB implementations
 
 (function-trapezoid-matlab)=
 ``````{dropdown} Trapezoid formula for numerical integration
+:open:
 ```{literalinclude} ../matlab/fnc/trapezoid.m
 :language: matlab
 :linenos: true
@@ -55,6 +60,7 @@ MATLAB implementations
 
 (function-intadapt-matlab)=
 ``````{dropdown} Adaptive integration
+:open:
 ```{literalinclude} ../matlab/fnc/intadapt.m
 :language: matlab
 :linenos: true

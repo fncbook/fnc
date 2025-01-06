@@ -14,6 +14,7 @@ Python implementations
 
 (function-lsnormal-python)=
 ``````{dropdown} Solution of least squares by the normal equations
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC03.py
 :filename: lsnormal.py
 :language: python
@@ -29,6 +30,7 @@ Python implementations
 
 (function-lsqrfact-python)=
 ``````{dropdown} Solution of least squares by QR factorization
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC03.py
 :filename: lsqrfact.py
 :start-line: 20
@@ -39,6 +41,7 @@ Python implementations
 
 (function-qrfact-python)=
 ``````{dropdown} QR factorization by Householder reflections
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC03.py
 :filename: qrfact.py
 :start-line: 32

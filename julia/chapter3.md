@@ -12,6 +12,7 @@ numbering:
 
 (function-lsnormal-julia)=
 ``````{dropdown} Solution of least squares by the normal equations
+:open:
 ```{literalinclude} FNCFunctions/src/chapter03.jl
 :filename: lsnormal.jl
 :language: julia
@@ -28,6 +29,7 @@ The syntax on line 9 is a *field reference* to extract the matrix we want from t
 
 (function-lsqrfact-julia)=
 ``````{dropdown} Solution of least squares by QR factorization
+:open:
 ```{literalinclude} FNCFunctions/src/chapter03.jl
 :filename: lsqrfact.jl
 :language: julia
@@ -39,6 +41,7 @@ The syntax on line 9 is a *field reference* to extract the matrix we want from t
 
 (function-qrfact-julia)=
 ``````{dropdown} QR factorization by Householder reflections
+:open:
 ```{literalinclude} FNCFunctions/src/chapter03.jl
 :filename: qrfact.jl
 :language: julia

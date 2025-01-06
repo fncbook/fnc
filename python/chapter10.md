@@ -11,6 +11,7 @@ numbering:
 ## Functions
 (function-shoot-python)=
 ``````{dropdown} Shooting method for a two-point boundary-value problem
+:open:
 ```{literalinclude} pkg/FNC/FNC10.py
 :filename: shoot.py
 :start-at: def shoot
@@ -23,6 +24,7 @@ numbering:
 
 (function-diffmats2-python)=
 ``````{dropdown} Second-order differentiation matrices
+:open:
 ```{literalinclude} pkg/FNC/FNC10.py
 :filename: diffmats2.py
 :start-at: def diffmat2
@@ -34,6 +36,7 @@ numbering:
 
 (function-diffcheb-python)=
 ``````{dropdown} Chebyshev differentiation matrices
+:open:
 ```{literalinclude} pkg/FNC/FNC10.py
 :filename: diffcheb.py
 :start-at: def diffcheb
@@ -45,6 +48,7 @@ numbering:
 
 (function-bvplin-python)=
 ``````{dropdown} Solution of a linear boundary-value problem
+:open:
 ```{literalinclude} pkg/FNC/FNC10.py
 :filename: bvplin.py
 :start-at: def bvplin(
@@ -61,6 +65,7 @@ Note that there is no need to explicitly form the row-deletion matrix $\mathbf{E
 
 (function-bvp-python)=
 ``````{dropdown} Solution of a nonlinear boundary-value problem
+:open:
 ```{literalinclude} pkg/FNC/FNC10.py
 :filename: bvp.py
 :start-at: def bvp(
@@ -76,6 +81,7 @@ The nested function `residual` uses differentiation matrices computed externally
 
 (function-fem-python)=
 ``````{dropdown} Piecewise linear finite elements for a linear BVP
+:open:
 ```{literalinclude} pkg/FNC/FNC10.py
 :filename: fem.py
 :start-at: def fem

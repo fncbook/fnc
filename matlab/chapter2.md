@@ -15,6 +15,7 @@ MATLAB implementations
 
 (function-forwardsub-matlab)=
 ``````{dropdown} Forward substitution
+:open:
 ```{literalinclude} ../matlab/fnc/forwardsub.m
 :linenos: true
 :language: matlab
@@ -28,6 +29,7 @@ Line 12 implements @forwardsub. It contains an inner product between row $i$ of 
 
 (function-backsub-matlab)=
 ``````{dropdown} Backward substitution
+:open:
 ```{literalinclude} ../matlab/fnc/backsub.m
 :linenos: true
 :language: matlab
@@ -36,6 +38,7 @@ Line 12 implements @forwardsub. It contains an inner product between row $i$ of 
 
 (function-lufact-matlab)=
 `````{dropdown} LU factorization (not stable)
+:open:
 ```{literalinclude} ../matlab/fnc/lufact.m
 :linenos: true
 :language: matlab
@@ -44,6 +47,7 @@ Line 12 implements @forwardsub. It contains an inner product between row $i$ of 
 
 (function-plufact-matlab)=
 ``````{dropdown} LU factorization with partial pivoting
+:open:
 ```{literalinclude} ../matlab/fnc/plufact.m
 :linenos: true
 :language: matlab

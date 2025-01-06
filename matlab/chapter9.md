@@ -12,6 +12,7 @@ numbering:
 
 (function-polyinterp-matlab)=
 ``````{dropdown} Barycentric polynomial interpolation
+:open:
 ```{literalinclude} ../matlab/fnc/polyinterp.m
 :language: matlab
 :linenos: true
@@ -20,6 +21,7 @@ numbering:
 
 (function-triginterp-matlab)=
 ``````{dropdown} Trigonometric interpolation
+:open:
 ```{literalinclude} ../matlab/fnc/triginterp.m
 :language: matlab
 :linenos: true
@@ -28,6 +30,7 @@ numbering:
 
 (function-ccint-matlab)=
 ``````{dropdown} Clenshaw-Curtis integration
+:open:
 ```{literalinclude} ../matlab/fnc/ccint.m
 :language: matlab
 :linenos: true
@@ -36,6 +39,7 @@ numbering:
 
 (function-glint-matlab)=
 ``````{dropdown} Gauss-Legendre integration
+:open:
 ```{literalinclude} ../matlab/fnc/glint.m
 :language: matlab
 :linenos: true
@@ -44,6 +48,7 @@ numbering:
 
 (function-intinf-matlab)=
 ``````{dropdown} Integration over $(-\infty,\infty)$
+:open:
 ```{literalinclude} ../matlab/fnc/intinf.m
 :language: matlab
 :linenos: true
@@ -52,6 +57,7 @@ numbering:
 
 (function-intsing-matlab)=
 ``````{dropdown} Integration with endpoint singularities
+:open:
 ```{literalinclude} ../matlab/fnc/intsing.m
 :language: matlab
 :linenos: true

@@ -12,6 +12,7 @@ numbering:
 
 (function-tensorgrid-python)=
 ``````{dropdown} Create a tensor-product grid
+:open:
 ```{literalinclude} pkg/FNC/FNC13.py
 :filename: tensorgrid.py
 :linenos: true
@@ -23,6 +24,7 @@ numbering:
 
 (function-poissonfd-python)=
 ``````{dropdown} Solution of Poisson's equation by finite differences
+:open:
 ```{literalinclude} pkg/FNC/FNC13.py
 :filename: poissonfd.py
 :linenos: true
@@ -34,6 +36,7 @@ numbering:
 
 (function-elliptic-python)=
 ``````{dropdown} Solution of elliptic PDE by Chebyshev collocation
+:open:
 ```{literalinclude} pkg/FNC/FNC13.py
 :filename: elliptic.py
 :linenos: true

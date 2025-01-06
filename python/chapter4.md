@@ -14,6 +14,7 @@ Python implementations
 
 (function-newton-python)=
 ``````{dropdown} Newton's method
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC04.py
 :filename: newton.py
 :start-line: 4
@@ -31,6 +32,7 @@ The `break` statement, seen here in line 25, causes an immediate exit from the i
 
 (function-secant-python)=
 ``````{dropdown} Secant method
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC04.py
 :filename: secant.py
 :start-line: 36
@@ -46,6 +48,7 @@ Because we want to observe the convergence of the method, {numref}`Function {num
 
 (function-newtonsys-python)=
 ``````{dropdown} Newton's method for systems
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC04.py
 :filename: newtonsys.py
 :start-line: 68
@@ -61,6 +64,7 @@ The output of {numref}`Function {number} <function-newtonsys>` is a vector of ve
 
 (function-fdjac-python)=
 ``````{dropdown} Finite differences for Jacobian
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC04.py
 :filename: fdjac.py
 :start-line: 98
@@ -78,6 +82,7 @@ Note that a default value is given for the third argument `y₀`, and it refers 
 
 (function-levenberg-python)=
 ``````{dropdown} Levenberg's method
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC04.py
 :filename: levenberg.py
 :start-line: 114

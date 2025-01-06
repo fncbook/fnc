@@ -14,6 +14,7 @@ Python implementations
 
 (function-hatfun-python)=
 ``````{dropdown} Hat function
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC05.py
 :filename: hatfun.py
 :start-line: 3
@@ -25,6 +26,7 @@ Python implementations
 
 (function-plinterp-python)=
 ``````{dropdown} Piecewise linear interpolation
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC05.py
 :filename: plinterp.py
 :start-line: 27
@@ -36,6 +38,7 @@ Python implementations
 
 (function-spinterp-python)=
 ``````{dropdown} Cubic spline interpolation
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC05.py
 :filename: spinterp.py
 :start-line: 37
@@ -47,6 +50,7 @@ Python implementations
 
 (function-fdweights-python)=
 ``````{dropdown} Fornberg's algorithm for finite difference weights
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC05.py
 :filename: fdweights.py
 :start-line: 97
@@ -58,6 +62,7 @@ Python implementations
 
 (function-trapezoid-python)=
 ``````{dropdown} Trapezoid formula for numerical integration
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC05.py
 :filename: trapezoid.py
 :start-line: 140
@@ -69,6 +74,7 @@ Python implementations
 
 (function-intadapt-python)=
 ``````{dropdown} Adaptive integration
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC05.py
 :filename: intadapt.py
 :start-line: 152

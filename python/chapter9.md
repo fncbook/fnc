@@ -12,6 +12,7 @@ numbering:
 
 (function-polyinterp-python)=
 ``````{dropdown} Barycentric polynomial interpolation
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC09.py
 :filename: polyinterp.py
 :start-at: def polyinterp
@@ -30,6 +31,7 @@ The return value is a function that evaluates the polynomial interpolant. Within
 
 (function-triginterp-python)=
 ``````{dropdown} Trigonometric interpolation
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC09.py
 :filename: triginterp.py
 :start-at: def triginterp
@@ -46,6 +48,7 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 
 (function-ccint-python)=
 ``````{dropdown} Clenshaw–Curtis integration
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC09.py
 :filename: ccint.py
 :start-at: def ccint
@@ -57,6 +60,7 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 
 (function-glint-python)=
 ``````{dropdown} Gauss–Legendre integration
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC09.py
 :filename: glint.py
 :start-at: def glint
@@ -68,6 +72,7 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 
 (function-intinf-python)=
 ``````{dropdown} Integration over $(-\infty,\infty)$
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC09.py
 :filename: intinf.py
 :start-at: def intinf
@@ -84,6 +89,7 @@ The test `isinf(x(M))` in line 17 checks whether $x(M)$ is larger than the maxim
 
 (function-intsing-python)=
 ``````{dropdown} Integration with endpoint singularities
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC09.py
 :filename: intsing.py
 :start-at: def intsing

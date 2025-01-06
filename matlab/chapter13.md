@@ -12,6 +12,7 @@ numbering:
 
 (function-tensorgrid-matlab)=
 ``````{dropdown} Create a tensor-product grid
+:open:
 ```{literalinclude} fnc/tensorgrid.m
 :language: matlab
 :linenos: true
@@ -20,6 +21,7 @@ numbering:
 
 (function-poissonfd-matlab)=
 ``````{dropdown} Solution of Poisson's equation by finite differences
+:open:
 ```{literalinclude} fnc/poissonfd.m
 :language: matlab
 :linenos: true
@@ -28,6 +30,7 @@ numbering:
 
 (function-elliptic-matlab)=
 ``````{dropdown} Solution of elliptic PDE by Chebyshev collocation
+:open:
 ```{literalinclude} fnc/elliptic.m
 :language: matlab
 :linenos: true

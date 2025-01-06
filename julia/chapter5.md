@@ -13,6 +13,7 @@ numbering:
 
 (function-hatfun-julia)=
 ``````{dropdown} Hat function
+:open:
 ```{literalinclude} FNCFunctions/src/chapter05.jl
 :filename: hatfun.jl
 :start-after: # begin hatfun
@@ -24,6 +25,7 @@ numbering:
 
 (function-plinterp-julia)=
 ``````{dropdown} Piecewise linear interpolation
+:open:
 ```{literalinclude} FNCFunctions/src/chapter05.jl
 :filename: plinterp.jl
 :start-after: # begin plinterp
@@ -35,6 +37,7 @@ numbering:
 
 (function-spinterp-julia)=
 ``````{dropdown} Cubic spline interpolation
+:open:
 ```{literalinclude} FNCFunctions/src/chapter05.jl
 :filename: spinterp.jl
 :start-after: # begin spinterp
@@ -46,6 +49,7 @@ numbering:
 
 (function-fdweights-julia)=
 ``````{dropdown} Fornberg's algorithm for finite difference weights
+:open:
 ```{literalinclude} FNCFunctions/src/chapter05.jl
 :filename: fdweights.jl
 :start-after: # begin fdweights
@@ -57,6 +61,7 @@ numbering:
 
 (function-trapezoid-julia)=
 ``````{dropdown} Trapezoid formula for numerical integration
+:open:
 ```{literalinclude} FNCFunctions/src/chapter05.jl
 :filename: trapezoid.jl
 :start-after: # begin trapezoid
@@ -68,6 +73,7 @@ numbering:
 
 (function-intadapt-julia)=
 ``````{dropdown} Adaptive integration
+:open:
 ```{literalinclude} FNCFunctions/src/chapter05.jl
 :filename: intadapt.jl
 :start-after: # begin intadapt

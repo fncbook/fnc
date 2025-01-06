@@ -12,6 +12,7 @@ numbering:
 
 (function-poweriter-matlab)=
 ``````{dropdown} Power iteration
+:open:
 ```{literalinclude} ../matlab/fnc/poweriter.m
 :language: matlab
 :linenos: true
@@ -20,6 +21,7 @@ numbering:
 
 (function-inviter-matlab)=
 ``````{dropdown} Inverse iteration
+:open:
 ```{literalinclude} ../matlab/fnc/inviter.m
 :language: matlab
 :linenos: true
@@ -28,6 +30,7 @@ numbering:
 
 (function-arnoldi-matlab)=
 ``````{dropdown} Arnoldi iteration
+:open:
 ```{literalinclude} ../matlab/fnc/arnoldi.m
 :language: matlab
 :linenos: true
@@ -36,6 +39,7 @@ numbering:
 
 (function-gmres-matlab)=
 ``````{dropdown} GMRES
+:open:
 ```{literalinclude} ../matlab/fnc/arngmres.m
 :language: matlab
 :linenos: true

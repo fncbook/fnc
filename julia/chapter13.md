@@ -12,6 +12,7 @@ numbering:
 
 (function-tensorgrid-julia)=
 ``````{dropdown} Create a tensor-product grid
+:open:
 ```{literalinclude} FNCFunctions/src/chapter13.jl
 :filename: tensorgrid.jl
 :linenos: true
@@ -23,6 +24,7 @@ numbering:
 
 (function-poissonfd-julia)=
 ``````{dropdown} Solution of Poisson's equation by finite differences
+:open:
 ```{literalinclude} FNCFunctions/src/chapter13.jl
 :filename: poissonfd.jl
 :linenos: true
@@ -34,6 +36,7 @@ numbering:
 
 (function-elliptic-julia)=
 ``````{dropdown} Solution of elliptic PDE by Chebyshev collocation
+:open:
 ```{literalinclude} FNCFunctions/src/chapter13.jl
 :filename: elliptic.jl
 :linenos: true

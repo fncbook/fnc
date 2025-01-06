@@ -12,6 +12,7 @@ numbering:
 
 (function-euler-python)=
 ``````{dropdown} Euler's method for an initial-value problem
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC06.py
 :filename: euler.py
 :start-at: def euler
@@ -23,6 +24,7 @@ numbering:
 
 (function-ie2-python)=
 ``````{dropdown} Improved Euler method for an IVP
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC06.py
 :filename: ie2.py
 :start-at: def ie2
@@ -34,6 +36,7 @@ numbering:
 
 (function-rk4-python)=
 ``````{dropdown} Fourth-order Runge-Kutta for an IVP
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC06.py
 :filename: rk4.py
 :start-at: def rk4
@@ -45,6 +48,7 @@ numbering:
 
 (function-rk23-python)=
 ``````{dropdown} Adaptive IVP solver based on embedded RK formulas
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC06.py
 :filename: rk23.py
 :start-at: def euler
@@ -66,6 +70,7 @@ While {eq}`bs23` calls for four stages to find the paired second- and third-orde
 
 (function-ab4-python)=
 ``````{dropdown} 4th-order Adams–Bashforth formula for an IVP
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC06.py
 :filename: ab4.py
 :start-at: def ab4
@@ -83,6 +88,7 @@ Line 28 computes $f_i$, based on the most recent solution value and time. That g
 
 (function-am2-python)=
 ``````{dropdown} 2nd-order Adams–Moulton (trapezoid) formula for an IVP
+:open:
 ```{literalinclude} ../python/pkg/FNC/FNC06.py
 :filename: am2.py
 :start-at: def am2

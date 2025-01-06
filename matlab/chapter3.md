@@ -14,6 +14,7 @@ MATLAB implementations
 
 (function-lsnormal-matlab)=
 ``````{dropdown} Solution of least squares by the normal equations
+:open:
 ```{literalinclude} ../matlab/fnc/lsnormal.m
 :language: matlab
 :linenos: true
@@ -22,6 +23,7 @@ MATLAB implementations
 
 (function-lsqrfact-matlab)=
 ``````{dropdown} Solution of least squares by QR factorization
+:open:
 ```{literalinclude} ../matlab/fnc/lsqrfact.m
 :language: matlab
 :linenos: true
@@ -30,6 +32,7 @@ MATLAB implementations
 
 (function-qrfact-matlab)=
 ``````{dropdown} QR factorization by Householder reflections
+:open:
 ```{literalinclude} ../matlab/fnc/qrfact.m
 :language: matlab
 :linenos: true

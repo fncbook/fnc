@@ -12,6 +12,7 @@ numbering:
 
 (function-polyinterp-julia)=
 ``````{dropdown} Barycentric polynomial interpolation
+:open:
 ```{literalinclude} FNCFunctions/src/chapter09.jl
 :filename: polyinterp.jl
 :start-after: # begin polyinterp
@@ -30,6 +31,7 @@ The return value is a function that evaluates the polynomial interpolant. Within
 
 (function-triginterp-julia)=
 ``````{dropdown} Trigonometric interpolation
+:open:
 ```{literalinclude} FNCFunctions/src/chapter09.jl
 :filename: triginterp.jl
 :start-after: # begin triginterp
@@ -46,6 +48,7 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 
 (function-ccint-julia)=
 ``````{dropdown} Clenshaw–Curtis integration
+:open:
 ```{literalinclude} FNCFunctions/src/chapter09.jl
 :filename: ccint.jl
 :start-after: # begin ccint
@@ -57,6 +60,7 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 
 (function-glint-julia)=
 ``````{dropdown} Gauss–Legendre integration
+:open:
 ```{literalinclude} FNCFunctions/src/chapter09.jl
 :filename: glint.jl
 :start-after: # begin glint
@@ -68,6 +72,7 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 
 (function-intinf-julia)=
 ``````{dropdown} Integration over $(-\infty,\infty)$
+:open:
 ```{literalinclude} FNCFunctions/src/chapter09.jl
 :filename: intinf.jl
 :start-after: # begin intinf
@@ -84,6 +89,7 @@ The test `isinf(x(M))` in line 17 checks whether $x(M)$ is larger than the maxim
 
 (function-intsing-julia)=
 ``````{dropdown} Integration with endpoint singularities
+:open:
 ```{literalinclude} FNCFunctions/src/chapter09.jl
 :filename: intsing.jl
 :start-after: # begin intsing
