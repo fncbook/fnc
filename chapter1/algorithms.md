@@ -66,6 +66,29 @@ p(x) &= c_1 + c_2 x + \cdots + c_n x^{n-1} \\
 `````
 ``````
 
+(demo-algorithms-horner)=
+``````{prf:example} Using a function
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-algorithms-horner-julia
+:::
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+matlab
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-algorithms-horner-python
+:::
+```` 
+`````
+``````
+
+
 ## Writing your own functions
 
 
@@ -206,7 +229,7 @@ c = 2;  print(mycfun(3))   # exp(2*sin(3))
 There's a lot more to be said about functions in Python, but this is enough to get started.
 
 ```` 
-``````
+`````
 
 
 ## Exercises
