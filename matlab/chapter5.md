@@ -203,7 +203,7 @@ We plot the hat functions $H_0,\ldots,H_3$.
 clf
 for k = 0:3
     subplot(4, 1, k+1)
-    Hk = @(x) hatfun(x, t, k);
+    Hk = hatfun(t, k);
     fplot(Hk, [0, 1])
     hold on
     scatter(t, Hk(t))
