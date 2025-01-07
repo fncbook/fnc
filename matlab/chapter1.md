@@ -31,7 +31,11 @@ FNC_init
 ### 1.1 @section-intro-floating-point
 (demo-float-accuracy-matlab)=
 ``````{dropdown} @demo-float-accuracy
-:open: false
+:::{tip} Getting started in MATLAB
+:class: dropdown
+See @section-setup-matlab for instructions on how to install functions for MATLAB for this book.
+:::
+
 Recall the grade-school approximation to the number $\pi$.
 
 ```{index} MATLAB; format

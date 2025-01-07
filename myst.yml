@@ -222,6 +222,7 @@ project:
           - file: julia/chapter13.md
       - title: MATLAB codes
         children:
+          - file: matlab/setup.md
           - file: matlab/chapter1.md
           - file: matlab/chapter2.md
           - file: matlab/chapter3.md
