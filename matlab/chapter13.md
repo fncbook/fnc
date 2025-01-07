@@ -41,7 +41,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -56,6 +56,7 @@ m = 4;
 x = linspace(0, 2, m+1);
 n = 2;   
 y = linspace(1, 3, n+1);
+m
 ```
 
 For a given $f(x,y)$ we can find $\operatorname{mtx}(f)$ by using a comprehension syntax.
@@ -273,11 +274,17 @@ for t = linspace(0, 0.2, 61)
     writeVideo(vid, frame2im(getframe(gcf)));
 end
 close(vid)
+close(gcf)
 ```
 
 ![Heat equation in 2d](figures/2d-heat.mp4)
 
 ``````
+
+```{code-cell}
+:tags: remove-cell
+FNC_init
+```
 
 (demo-diffadv-advdiff-matlab)=
 ``````{dropdown} @demo-diffadv-advdiff
@@ -344,10 +351,16 @@ for t = linspace(0, 2, 81)
     writeVideo(vid, frame2im(getframe(gcf)));
 end
 close(vid)
+close(gcf)
 ```
 
 ![Advection-diffusion in 2d](figures/2d-advdiff.mp4)
 ``````
+
+```{code-cell}
+:tags: remove-cell
+FNC_init
+```
 
 (demo-diffadv-wave-matlab)=
 ``````{dropdown} @demo-diffadv-wave
@@ -423,11 +436,16 @@ for t = linspace(0, 4, 121)
     writeVideo(vid, frame2im(getframe(gcf)));
 end
 close(vid)
-  
+close(gcf)
 ```
 
 ![Wave equation in 2d](figures/2d-wave.mp4)
 ``````
+
+```{code-cell}
+:tags: remove-cell
+FNC_init
+```
 
 ### 13.3 @section-twodim-laplace
 

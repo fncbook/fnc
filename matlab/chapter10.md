@@ -68,7 +68,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -76,8 +76,6 @@ FNC_init
 
 (demo-tpbvp-mems-matlab)=
 ``````{dropdown} @demo-tpbvp-mems
-```{index} ! Julia; in-place function
-```
 
 To define the BVP, we need to define some functions. (For this simple problem, we will use anonymous functions, but for a more substantial one, it would be better to use separate files.) The first defines $\mathbf{f}(x, \mathbf{y})$. 
 

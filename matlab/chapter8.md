@@ -50,7 +50,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -553,7 +553,7 @@ axis tight, title(('Residual for GMRES'));
 ``````
 
 (demo-gmres-restart-matlab)=
-``````{dropdown} 
+``````{dropdown} @demo-gmres-restart
 The following experiments are based on a matrix resulting from discretization of a partial differential equation.
 
 ```{code-cell}

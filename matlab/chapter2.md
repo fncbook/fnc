@@ -60,7 +60,7 @@ Line 12 implements @forwardsub. It contains an inner product between row $i$ of 
 
 ```{code-cell}
 :tags: [remove-cell]
-cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -302,12 +302,8 @@ BA = B * A     % matrix product
 ```
 
 `A * B` causes an error here, because the dimensions aren't compatible.
-```{tip}
-:class: dropdown
-Errors are formally called *exceptions* in Julia.
-```
 
-```{code-cell} julia
+```{code-cell} 
 :tags: raises-exception
 A * B    % throws an error
 ```
@@ -381,7 +377,7 @@ residual = b - A*x
 
 If the matrix $\mathbf{A}$ is singular, you may get a warning and nonsense result.
 
-```{code-cell} julia
+```{code-cell}
 :tags: raises-exception
 A = [0 1; 0 0]
 b = [1; -1]
@@ -645,7 +641,7 @@ Since the matrix $\mathbf{A}$ has $n^2$ elements, all of which have to be involv
 Let's run an experiment with the built-in matrix-vector multiplication, using `tic` and `toc` to time the operation.
 
 ```{code-cell}
-n_ = (400:400:4000)';
+n_ = 800 * (1:10)';
 t_ = zeros(size(n_));
 for i = 1:length(n_)
     n = n_(i);
@@ -668,20 +664,20 @@ table(n_, t_, 'variablenames', {'size', 'time'})
 ```{index} MATLAB; Boolean indexing
 ```
 
-Looking at the timings just for $n=2000$ and $n=4000$, they have ratio
+Looking at the timings just for $n=4000$ and $n=8000$, they have ratio
 ```{tip}
 :class: dropdown
 The expression `n_==4000` here produces a vector of Boolean (true/false) values the same size as `n_`. This result is used to index within `t_`, accessing only the value for which the comparison is true.
 ```
 
 ```{code-cell}
-t_(n_==4000) / t_(n_==2000)
+t_(n_==8000) / t_(n_==4000)
 ```
 
 If the run time is dominated by flops, then we expect this ratio to be 
 
 $$
-\frac{2(4000)^2}{2(2000)^2}=4.
+\frac{2(8000)^2}{2(4000)^2}=4.
 $$
 ``````
 
@@ -691,7 +687,7 @@ $$
 Let's repeat the previous experiment for more, and larger, values of $n$.
 
 ```{code-cell}
-n_ = (400:400:6000)';
+n_ = 800 * (2:2:16)';
 t_ = zeros(size(n_));
 for i = 1:length(n_)
     n = n_(i);
@@ -719,7 +715,7 @@ You can see that while the full story is complicated, the graph is trending to a
 
 ```{code-cell}
 hold on
-loglog(n_, t_(1) * (n_ / n_(1)).^2, '--')
+loglog(n_, 0.5 * t_(end) * (n_ / n_(end)).^2, '--')
 axis tight
 legend('data', 'O(n^2)', 'location', 'southeast');
 ```
@@ -734,7 +730,7 @@ The first time a function is invoked, there may be significant time needed to co
 ```
 
 ```{code-cell}
-n_ = (200:100:2400)';
+n_ = (600:200:3200)';
 t_ = zeros(size(n_));
 for i = 1:length(n_)
     n = n_(i);

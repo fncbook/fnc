@@ -59,7 +59,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -251,9 +251,6 @@ r = roots([1, -4, 3.5]);
 
 Here is the fixed-point iteration. This time we keep track of the whole sequence of approximations.
 
-:::{index} Julia; push!
-:::
-
 ```{code-cell}
 g = @(x) x - f(x);
 x = 2.1; 
@@ -403,10 +400,9 @@ The clear convergence to 2 above constitutes good evidence of quadratic converge
 
 (demo-newton-usage-matlab)=
 ``````{dropdown} @demo-newton-usage
-```{index} ! Julia; enumerate
-```
 
 Suppose we want to evaluate the inverse of the function $h(x)=e^x-x$. This means solving $y=e^x-x$ for $x$ when $y$ is given, which has no elementary form. If a value of $y$ is given numerically, though, we simply have a rootfinding problem for $f(x)=e^x-x-y$.
+
 ```{tip}
 :class: dropdown
 When a function is created, it can refer to any variables in scope at that moment. Those values are locked in to the definition, which is called a _closure_. If the enclosed variables change values later, the function still uses the values it was created with.
@@ -643,13 +639,17 @@ This sequence looks to be nearly doubling at each iteration, which is a good sig
 ``````{dropdown} @demo-quasi-levenberg
 
 To solve a nonlinear system, we need to code only the function defining the system, and not its Jacobian.
+
 ```{tip}
 :class: dropdown
 A rule of thumb is that if you use a function as an input argument for another function, there needs to be an `@` involved once: either for an anonymous definition or to reference a function defined elsewhere. 
+```
+
 ```{literalinclude} f45_nlsystem.m
 :language: matlab
 ```
 In all other respects usage is the same as for the `newtonsys` function.
+
 ```{code-cell}
 f = @f46_nlsystem;
 x1 = [0; 0; 0];   
@@ -673,14 +673,14 @@ We will observe the convergence of {numref}`Function {number} <function-levenber
 g = @(x) [sin(x(1) + x(2)); cos(x(1) - x(2)); exp(x(1) - x(2))];
 p = [1; 1];
 ```
-```{index} ! Julia; @sprintf
+```{index} ! MATLAB; sprintf
 ```
 
 The function $\mathbf{g}(\mathbf{x}) - \mathbf{g}(\mathbf{p})$ obviously has a zero residual at $\mathbf{p}$. We'll make different perturbations of that function in order to create nonzero residuals.
 
 ```{tip}
 :class: dropdown
-`@sprintf` is a way to format numerical values as strings, patterned after the C function `printf`.
+`sprintf` is a way to format numerical values as strings, patterned after the C function `printf`.
 ```
 
 ```{code-cell}

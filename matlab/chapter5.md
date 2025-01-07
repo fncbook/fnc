@@ -75,7 +75,7 @@ The intended way for a user to call {numref}`Function {number} <function-intadap
 
 ```{code-cell}
 :tags: [remove-cell]
-cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -92,7 +92,7 @@ y = t.^2 + t + 0.05 * sin(20 * t);
 clf, scatter(t,y)
 ```
 
-```{index} ! Julia; fit
+```{index} ! MATLAB; polyfit
 ```
 
 The polynomial interpolant, as computed using `polyfit`, looks very sensible. It's the kind of function you'd take home to meet your parents.
@@ -189,9 +189,6 @@ From the figure we can see that the condition number for polynomial interpolatio
 (demo-pwlin-hat-matlab)=
 ``````{dropdown} @demo-pwlin-hat
 Let's define a set of four nodes (i.e., $n=3$ in our formulas).
-
-```{index} ! Julia; annotate!
-```
 
 ```{code-cell}
 t = [0, 0.55, 0.7, 1];

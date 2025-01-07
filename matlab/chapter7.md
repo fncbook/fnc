@@ -12,7 +12,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -22,7 +22,7 @@ FNC_init
 ``````{dropdown} @demo-insight-graph
 Here we create an adjacency matrix for a graph on four nodes.
 
-```{code-cell}
+```{code-cell} matlab
 A = [0 1 0 0; 1 0 0 0; 1 1 0 1; 0 1 1 0]
 ```
 
@@ -57,7 +57,7 @@ plot(graph(bucky))
 
 (demo-insight-image-matlab)=
 ``````{dropdown} @demo-insight-image
-```{index} ! Julia; Images
+```{index} ! MATLAB; images
 ```
 
 MATLAB ships with a few test images to play with.
@@ -437,10 +437,11 @@ Both vectors have values greatly clustered near $\pm C$ for a constant $C$. Thes
 ```{code-cell}
 clf
 x1 = V(:, 1)'*A';   x2 = V(:, 2)'*A'; 
-scatter(x1(Dem), x2(Dem), 20, 'b'),  hold on
-scatter(x1(Rep), x2(Rep), 20, 'r')
-scatter(x1(Ind), x2(Ind), 20, 'k')
+scatter(x1(Dem), x2(Dem), 24, 'b'),  hold on
+scatter(x1(Rep), x2(Rep), 24, 'r')
+scatter(x1(Ind), x2(Ind), 24, 'y')
 xlabel('partisanship'),  ylabel('bipartisanship')
 title(('111th US Senate in 2D'));
+legend("Dem", "Rep", "Ind", Location='northeast')
 ```
 ``````

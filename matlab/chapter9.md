@@ -68,7 +68,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -560,7 +560,7 @@ for k = 1:length(n)
   errCC(k) = exact - ccint(f, n(k));
   errGL(k) = exact - glint(f, n(k));
 end
-clf,  semilogy(n, abs([errCC errGL]), 'o-')
+semilogy(n, abs([errCC errGL]), 'o-')
 xlabel('number of nodes'),  ylabel('error')
 title('Spectral integration')   
 legend('Clenshaw–Curtis', 'Gauss–Legendre')   
@@ -648,8 +648,8 @@ tol = 1 ./ 10.^(5:0.5:14);
 err = zeros(length(tol), 2);
 len = zeros(length(tol), 2);
 for k = 1:length(tol)
-    [I1, x1] = intadapt(f, (tol/20)^2, 1, tol);
-    [I2, x2] = intsing(f, tol);
+    [I1, x1] = intadapt(f, (tol(k)/20)^2, 1, tol(k));
+    [I2, x2] = intsing(f, tol(k));
     err(k, :) = abs(0.2 - [I1, I2]);
     len(k, :) = [length(x1), length(x2)];
 end
