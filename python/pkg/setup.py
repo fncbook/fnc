@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='FNC',
-    version='0.2.5',
+    name='fncbook',
+    version='0.1.0',
     packages=find_packages(),
     install_requires=[
         'numpy',
@@ -11,10 +11,10 @@ setup(
     ],
     author='Tobin Driscoll',
     author_email='driscoll@udel.edu',
-    description='Python codes for the book "FUNDAMENTALS OF NUMERICAL COMPUTATION"',
+    description='Python codes for the book "Fundamentals of Numerical Computation"',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url='https://github.com/fncbook/fundamentals-numerical-computation',
+    url='https://github.com/fncbook/fncbook.py',
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',

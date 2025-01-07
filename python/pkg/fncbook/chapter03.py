@@ -1,6 +1,6 @@
 import scipy
 import numpy as np
-from .FNC02 import forwardsub, backsub
+from .chapter02 import forwardsub, backsub
 
 def lsnormal(A, b):
     """

@@ -1,7 +1,6 @@
 import numpy as np
-import scipy.optimize as opt
 from scipy.integrate import solve_ivp
-from .FNC04 import levenberg
+from .chapter04 import levenberg
 
 def shoot(phi, a, b, ga, gb, init):
     """

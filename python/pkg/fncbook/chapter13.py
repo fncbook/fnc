@@ -1,9 +1,8 @@
 import numpy as np
 import scipy
 import scipy.sparse as sp
-import warnings
-from .FNC10 import diffmat2, diffcheb
-from .FNC04 import levenberg
+from .chapter10 import diffmat2, diffcheb
+from .chapter04 import levenberg
 
 
 def tensorgrid(x, y):

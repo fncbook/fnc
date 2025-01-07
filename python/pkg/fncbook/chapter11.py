@@ -1,6 +1,6 @@
 import numpy as np
-from .FNC04 import levenberg
-from .FNC10 import diffcheb
+from .chapter04 import levenberg
+from .chapter10 import diffcheb
 from scipy.integrate import solve_ivp
 
 def diffper(n, xspan):

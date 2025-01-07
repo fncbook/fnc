@@ -139,3 +139,4 @@ def poisson2d(m):
     d1[m-1::m] = np.zeros(m-1)
     dm = np.array([-1.0] * (n - m))
     return (m + 1)**2 / np.pi**2 * diags([d0, d1, d1, dm, dm], [0, 1, -1, m, -m], format="csc")
+

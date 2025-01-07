@@ -1,8 +1,7 @@
 import warnings
 import numpy as np
 from numpy.linalg import eig
-from matplotlib.pyplot import *
-from .FNC05 import intadapt
+from .chapter05 import intadapt
 
 
 def polyinterp(t, y):

@@ -1,5 +1,5 @@
 import numpy as np
-from .FNC04 import levenberg
+from .chapter04 import levenberg
 import warnings
 
 def euler(dudt, tspan, u0, n):
