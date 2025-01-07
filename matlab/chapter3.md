@@ -8,14 +8,12 @@ numbering:
 ---
 # Chapter 3
 
-MATLAB implementations
-
 ## Functions
 
 (function-lsnormal-matlab)=
 ``````{dropdown} Solution of least squares by the normal equations
 :open:
-```{literalinclude} ../matlab/fnc/lsnormal.m
+```{literalinclude} FNC-matlab/lsnormal.m
 :language: matlab
 :linenos: true
 ```
@@ -24,7 +22,7 @@ MATLAB implementations
 (function-lsqrfact-matlab)=
 ``````{dropdown} Solution of least squares by QR factorization
 :open:
-```{literalinclude} ../matlab/fnc/lsqrfact.m
+```{literalinclude} FNC-matlab/lsqrfact.m
 :language: matlab
 :linenos: true
 ```
@@ -33,7 +31,7 @@ MATLAB implementations
 (function-qrfact-matlab)=
 ``````{dropdown} QR factorization by Householder reflections
 :open:
-```{literalinclude} ../matlab/fnc/qrfact.m
+```{literalinclude} FNC-matlab/qrfact.m
 :language: matlab
 :linenos: true
 ```
@@ -43,8 +41,7 @@ MATLAB implementations
 
 ```{code-cell}
 :tags: [remove-cell]
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab
+cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 

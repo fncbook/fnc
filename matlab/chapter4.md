@@ -13,7 +13,7 @@ numbering:
 (function-newton-matlab)=
 ``````{dropdown} Newton's method
 :open:
-```{literalinclude} ../matlab/fnc/newton.m
+```{literalinclude} FNC-matlab/newton.m
 :language: matlab
 :linenos: true
 ```
@@ -22,7 +22,7 @@ numbering:
 (function-secant-matlab)=
 ``````{dropdown} Secant method
 :open:
-```{literalinclude} ../matlab/fnc/secant.m
+```{literalinclude} FNC-matlab/secant.m
 :language: matlab
 :linenos: true
 ```
@@ -31,7 +31,7 @@ numbering:
 (function-newtonsys-matlab)=
 ``````{dropdown} Newton's method for systems
 :open:
-```{literalinclude} ../matlab/fnc/newtonsys.m
+```{literalinclude} FNC-matlab/newtonsys.m
 :language: matlab
 :linenos: true
 ```
@@ -40,7 +40,7 @@ numbering:
 (function-fdjac-matlab)=
 ``````{dropdown} Finite differences for Jacobian
 :open:
-```{literalinclude} ../matlab/fnc/fdjac.m
+```{literalinclude} FNC-matlab/fdjac.m
 :language: matlab
 :linenos: true
 ```
@@ -49,7 +49,7 @@ numbering:
 (function-levenberg-matlab)=
 ``````{dropdown} Levenberg's method
 :open:
-```{literalinclude} ../matlab/fnc/levenberg.m
+```{literalinclude} FNC-matlab/levenberg.m
 :language: matlab
 :linenos: true
 ```
@@ -59,8 +59,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab
+cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 

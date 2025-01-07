@@ -13,7 +13,7 @@ numbering:
 (function-poweriter-matlab)=
 ``````{dropdown} Power iteration
 :open:
-```{literalinclude} ../matlab/fnc/poweriter.m
+```{literalinclude} FNC-matlab/poweriter.m
 :language: matlab
 :linenos: true
 ```
@@ -22,7 +22,7 @@ numbering:
 (function-inviter-matlab)=
 ``````{dropdown} Inverse iteration
 :open:
-```{literalinclude} ../matlab/fnc/inviter.m
+```{literalinclude} FNC-matlab/inviter.m
 :language: matlab
 :linenos: true
 ```
@@ -31,7 +31,7 @@ numbering:
 (function-arnoldi-matlab)=
 ``````{dropdown} Arnoldi iteration
 :open:
-```{literalinclude} ../matlab/fnc/arnoldi.m
+```{literalinclude} FNC-matlab/arnoldi.m
 :language: matlab
 :linenos: true
 ```
@@ -40,7 +40,7 @@ numbering:
 (function-gmres-matlab)=
 ``````{dropdown} GMRES
 :open:
-```{literalinclude} ../matlab/fnc/arngmres.m
+```{literalinclude} FNC-matlab/arngmres.m
 :language: matlab
 :linenos: true
 ```
@@ -50,8 +50,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab
+cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 

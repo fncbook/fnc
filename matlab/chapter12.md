@@ -11,9 +11,8 @@ numbering:
 ## Examples
 
 ```{code-cell}
-:tags: remove-cell
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab
+:tags: [remove-cell]
+cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 

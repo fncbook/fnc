@@ -13,7 +13,7 @@ numbering:
 (function-euler-matlab)=
 ``````{dropdown} Euler's method for an initial-value problem
 :open:
-```{literalinclude} ../matlab/fnc/eulerivp.m
+```{literalinclude} FNC-matlab/eulerivp.m
 :language: matlab
 :linenos: true
 ```
@@ -26,7 +26,7 @@ The `ivp` input argument is the same structure that is used with the built-in `s
 (function-ie2-matlab)=
 ``````{dropdown} Improved Euler method for an IVP
 :open:
-```{literalinclude} ../matlab/fnc/ie2.m
+```{literalinclude} FNC-matlab/ie2.m
 :language: matlab
 :linenos: true
 ```
@@ -35,7 +35,7 @@ The `ivp` input argument is the same structure that is used with the built-in `s
 (function-rk4-matlab)=
 ``````{dropdown} Fourth-order Runge-Kutta for an IVP
 :open:
-```{literalinclude} ../matlab/fnc/rk4.m
+```{literalinclude} FNC-matlab/rk4.m
 :language: matlab
 :linenos: true
 ```
@@ -44,7 +44,7 @@ The `ivp` input argument is the same structure that is used with the built-in `s
 (function-rk23-matlab)=
 ``````{dropdown} Adaptive IVP solver based on embedded RK formulas
 :open:
-```{literalinclude} ../matlab/fnc/rk23.m
+```{literalinclude} FNC-matlab/rk23.m
 :language: matlab
 :linenos: true
 ```
@@ -63,7 +63,7 @@ While {eq}`bs23` calls for four stages to find the paired second- and third-orde
 (function-ab4-matlab)=
 ``````{dropdown} 4th-order Adams–Bashforth formula for an IVP
 :open:
-```{literalinclude} ../matlab/fnc/ab4.m
+```{literalinclude} FNC-matlab/ab4.m
 :language: matlab
 :linenos: true
 ```
@@ -78,7 +78,7 @@ Line 36 computes $f_i$, based on the most recent solution value and time. That g
 (function-am2-matlab)=
 ``````{dropdown} 2nd-order Adams–Moulton (trapezoid) formula for an IVP
 :open:
-```{literalinclude} ../matlab/fnc/am2.m
+```{literalinclude} FNC-matlab/am2.m
 :language: matlab
 :linenos: true
 ```
@@ -92,8 +92,7 @@ Lines 32--34 define the function $\mathbf{g}$. This is sent to `levenberg` in li
 
 ```{code-cell}
 :tags: [remove-cell]
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab
+cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 ### 6.1 @section-ivp-basics

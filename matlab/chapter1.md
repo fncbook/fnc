@@ -12,9 +12,9 @@ numbering:
 ## Functions 
 
 (function-horner-matlab)=
-`````{dropdown} **Horner's algorithm for evaluating a polynomial**
+`````{dropdown} Horner's algorithm for evaluating a polynomial
 :open: true
-```{literalinclude} ../matlab/fnc/horner.m
+```{literalinclude} FNC-matlab/horner.m
 :lineno-start: 1
 :language: matlab
 ```
@@ -23,9 +23,8 @@ numbering:
 ## Examples
 
 ```{code-cell}
-:tags: remove-cell
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab
+:tags: [remove-cell]
+cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -35,7 +34,7 @@ FNC_init
 :open: false
 Recall the grade-school approximation to the number $\pi$.
 
-```{index} MATLAB; `format`
+```{index} MATLAB; format
 ```
 
 ```{tip}
@@ -48,6 +47,7 @@ format long
 p = 22/7
 ```
 Not all the digits displayed for `p` are the same as those of $\pi$. 
+
 ```{tip}
 :class: dropdown
 The value of `pi` is predefined.

@@ -16,7 +16,7 @@ MATLAB implementations
 (function-hatfun-matlab)=
 ``````{dropdown} Hat function
 :open:
-```{literalinclude} ../matlab/fnc/hatfun.m
+```{literalinclude} FNC-matlab/hatfun.m
 :language: matlab
 :linenos: true
 ```
@@ -25,7 +25,7 @@ MATLAB implementations
 (function-plinterp-matlab)=
 ``````{dropdown} Piecewise linear interpolation
 :open:
-```{literalinclude} ../matlab/fnc/plinterp.m
+```{literalinclude} FNC-matlab/plinterp.m
 :language: matlab
 :linenos: true
 ```
@@ -34,7 +34,7 @@ MATLAB implementations
 (function-spinterp-matlab)=
 ``````{dropdown} Cubic spline interpolation
 :open:
-```{literalinclude} ../matlab/fnc/spinterp.m
+```{literalinclude} FNC-matlab/spinterp.m
 :language: matlab
 :linenos: true
 ```
@@ -43,7 +43,7 @@ MATLAB implementations
 (function-fdweights-matlab)=
 ``````{dropdown} Fornberg's algorithm for finite difference weights
 :open:
-```{literalinclude} ../matlab/fnc/fdweights.m
+```{literalinclude} FNC-matlab/fdweights.m
 :language: matlab
 :linenos: true
 ```
@@ -52,7 +52,7 @@ MATLAB implementations
 (function-trapezoid-matlab)=
 ``````{dropdown} Trapezoid formula for numerical integration
 :open:
-```{literalinclude} ../matlab/fnc/trapezoid.m
+```{literalinclude} FNC-matlab/trapezoid.m
 :language: matlab
 :linenos: true
 ```
@@ -61,7 +61,7 @@ MATLAB implementations
 (function-intadapt-matlab)=
 ``````{dropdown} Adaptive integration
 :open:
-```{literalinclude} ../matlab/fnc/intadapt.m
+```{literalinclude} FNC-matlab/intadapt.m
 :language: matlab
 :linenos: true
 ```
@@ -75,8 +75,7 @@ The intended way for a user to call {numref}`Function {number} <function-intadap
 
 ```{code-cell}
 :tags: [remove-cell]
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab
+cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 

@@ -13,7 +13,7 @@ numbering:
 (function-shoot-matlab)=
 ``````{dropdown} Shooting method for a two-point boundary-value problem
 :open:
-```{literalinclude} fnc/shoot.m
+```{literalinclude} FNC-matlab/shoot.m
 :language: matlab
 :linenos: true
 ```
@@ -22,7 +22,7 @@ numbering:
 (function-diffmats2-matlab)=
 ``````{dropdown} Second-order differentiation matrices
 :open:
-```{literalinclude} fnc/diffmat2.m
+```{literalinclude} FNC-matlab/diffmat2.m
 :language: matlab
 :linenos: true
 ```
@@ -31,7 +31,7 @@ numbering:
 (function-diffcheb-matlab)=
 ``````{dropdown} Chebyshev differentiation matrices
 :open:
-```{literalinclude} fnc/diffcheb.m
+```{literalinclude} FNC-matlab/diffcheb.m
 :language: matlab
 :linenos: true
 ```
@@ -40,7 +40,7 @@ numbering:
 (function-bvplin-matlab)=
 ``````{dropdown} Solution of a linear boundary-value problem
 :open:
-```{literalinclude} fnc/bvplin.m
+```{literalinclude} FNC-matlab/bvplin.m
 :language: matlab
 :linenos: true
 ```
@@ -49,7 +49,7 @@ numbering:
 (function-bvp-matlab)=
 ``````{dropdown} Solution of a nonlinear boundary-value problem
 :open:
-```{literalinclude} fnc/bvp.m
+```{literalinclude} FNC-matlab/bvp.m
 :language: matlab
 :linenos: true
 ```
@@ -58,7 +58,7 @@ numbering:
 (function-fem-matlab)=
 ``````{dropdown} Piecewise linear finite elements for a linear BVP
 :open:
-```{literalinclude} fnc/fem.m
+```{literalinclude} FNC-matlab/fem.m
 :language: matlab
 :linenos: true
 ```
@@ -67,9 +67,8 @@ numbering:
 ## Examples
 
 ```{code-cell}
-:tags: remove-cell
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab
+:tags: [remove-cell]
+cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 

@@ -13,7 +13,7 @@ numbering:
 (function-polyinterp-matlab)=
 ``````{dropdown} Barycentric polynomial interpolation
 :open:
-```{literalinclude} ../matlab/fnc/polyinterp.m
+```{literalinclude} FNC-matlab/polyinterp.m
 :language: matlab
 :linenos: true
 ```
@@ -22,7 +22,7 @@ numbering:
 (function-triginterp-matlab)=
 ``````{dropdown} Trigonometric interpolation
 :open:
-```{literalinclude} ../matlab/fnc/triginterp.m
+```{literalinclude} FNC-matlab/triginterp.m
 :language: matlab
 :linenos: true
 ```
@@ -31,7 +31,7 @@ numbering:
 (function-ccint-matlab)=
 ``````{dropdown} Clenshaw-Curtis integration
 :open:
-```{literalinclude} ../matlab/fnc/ccint.m
+```{literalinclude} FNC-matlab/ccint.m
 :language: matlab
 :linenos: true
 ```
@@ -40,7 +40,7 @@ numbering:
 (function-glint-matlab)=
 ``````{dropdown} Gauss-Legendre integration
 :open:
-```{literalinclude} ../matlab/fnc/glint.m
+```{literalinclude} FNC-matlab/glint.m
 :language: matlab
 :linenos: true
 ```
@@ -49,7 +49,7 @@ numbering:
 (function-intinf-matlab)=
 ``````{dropdown} Integration over $(-\infty,\infty)$
 :open:
-```{literalinclude} ../matlab/fnc/intinf.m
+```{literalinclude} FNC-matlab/intinf.m
 :language: matlab
 :linenos: true
 ```
@@ -58,7 +58,7 @@ numbering:
 (function-intsing-matlab)=
 ``````{dropdown} Integration with endpoint singularities
 :open:
-```{literalinclude} ../matlab/fnc/intsing.m
+```{literalinclude} FNC-matlab/intsing.m
 :language: matlab
 :linenos: true
 ```
@@ -67,9 +67,8 @@ numbering:
 ## Examples
 
 ```{code-cell}
-:tags: remove-cell
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab
+:tags: [remove-cell]
+cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 

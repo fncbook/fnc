@@ -16,7 +16,7 @@ MATLAB implementations
 (function-forwardsub-matlab)=
 ``````{dropdown} Forward substitution
 :open:
-```{literalinclude} ../matlab/fnc/forwardsub.m
+```{literalinclude} FNC-matlab/forwardsub.m
 :linenos: true
 :language: matlab
 ```
@@ -30,7 +30,7 @@ Line 12 implements @forwardsub. It contains an inner product between row $i$ of 
 (function-backsub-matlab)=
 ``````{dropdown} Backward substitution
 :open:
-```{literalinclude} ../matlab/fnc/backsub.m
+```{literalinclude} FNC-matlab/backsub.m
 :linenos: true
 :language: matlab
 ```
@@ -39,7 +39,7 @@ Line 12 implements @forwardsub. It contains an inner product between row $i$ of 
 (function-lufact-matlab)=
 `````{dropdown} LU factorization (not stable)
 :open:
-```{literalinclude} ../matlab/fnc/lufact.m
+```{literalinclude} FNC-matlab/lufact.m
 :linenos: true
 :language: matlab
 ```
@@ -48,7 +48,7 @@ Line 12 implements @forwardsub. It contains an inner product between row $i$ of 
 (function-plufact-matlab)=
 ``````{dropdown} LU factorization with partial pivoting
 :open:
-```{literalinclude} ../matlab/fnc/plufact.m
+```{literalinclude} FNC-matlab/plufact.m
 :linenos: true
 :language: matlab
 ```
@@ -60,8 +60,7 @@ Line 12 implements @forwardsub. It contains an inner product between row $i$ of 
 
 ```{code-cell}
 :tags: [remove-cell]
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab
+cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
