@@ -1,0 +1,111 @@
+---
+numbering: false
+title: Julia setup
+---
+(section-setup-julia)=
+# Setting up Julia for this book
+
+Julia, and all the packages this book depends on, is free and open-source. Much of the functionality outside the core is distributed via packages that need to be installed once per system.
+
+## Installing Julia
+
+To install Julia, go to the [Julia website](https://julialang.org/downloads/) and download the appropriate version for your operating system. Any 1.x version at 1.11 or greater should be fine. I strongly recommend using the `juliaup` version manager rather than manually downloading and installing the application. 
+
+## Installing the book's functions
+
+When you start Julia, you will see a prompt that looks like this:
+
+```julia
+julia>
+```
+
+It is waiting for you to enter commands that will be executed right away. To enter package management mode, type `]` (the `]` key) and you will see the prompt change to something like this:
+
+```julia
+(@v1.11) pkg>
+```
+
+Now you enter `add FNCFunctions` and press `Enter`. This will install the functions that are used in this book. It may take a few minutes to download and install everything. This is a one-time operation.
+
+When you are done with package management, type {kdb}`delete` or a backspace to return to the normal Julia prompt.
+
+## Using packages
+
+Julia offers both `import` and `using` as ways to load packages. The difference is that `import` loads a package into its own namespace, so that you have to refer to its functions with a prefix. For example:
+
+``` julia-repl
+julia> import Statistics
+
+julia> mean
+ERROR: UndefVarError: `mean` not defined in `Main`
+Suggestion: check for spelling errors or missing imports.
+Hint: a global variable of this name also exists in Statistics.
+
+julia> Statistics.mean
+mean (generic function with 6 methods)
+```
+
+If you use `using` rather than `import`, then the package *may* also make its functions available in the global namespace. For example:
+
+``` julia-repl
+julia> using Statistics
+
+julia> mean
+mean (generic function with 6 methods)
+```
+
+This is convenient for functions that you will call frequently, but it can lead to name conflicts if you are not careful. The package written for this book do *not* go into the global namespace. This is a deliberate reminder that they are for learning purposes only and not meant as tools for serious work. The package does define a shortcut called `FNC`, though, so you can write `FNC.lufact` instead of `FNCFunctions.lufact`.
+
+## Installing other packages
+
+Julia comes with a few core packages such as `Statistics` and `LinearAlgebra` that you can use right away. But if you try `import` or `using` at the prompt with an unknown package, you will get a message like this:
+
+```julia-repl
+julia> using Plots
+ │ Package Plots not found, but a package named Plots is available from a registry. 
+ │ Install package?
+ │   (@v1.11) pkg> add Plots 
+ └ (y/n/o) [y]: 
+```
+
+If you answer `y`, then the package will be downloaded and installed. You can also install packages from the prompt manually by typing `] add PackageName`. For example, to install the `Plots` package, you would type `] add Plots`.
+
+## Packages used in the book
+
+In order to avoid repeating low-information code, the book demos are run with a few packages installed and always imported:
+
+- `FNCFunctions`
+- `Printf`, `LinearAlgebra` (part of the default Julia installation)
+- `Plots`, `PrettyTables`, `LaTeXStrings` (external packages)
+
+Of the external packages, `Plots` is essential for the exercises, while the others are used to make the results look nicer in the book.
+
+Throughout the book demos there are other external packages loaded by `using` as needed. These include:
+
+- `Arpack`
+- `BoundaryValueDiffEq`
+- `Dierckx`
+- `FFTW`
+- `GraphRecipes`
+- `Images`
+- `IncompleteLU`
+- `IterativeSolvers`
+- `JLD2`
+- `LinearMaps`
+- `MatrixDepot`
+- `NLsolve`
+- `OrdinaryDiffEq`
+- `Polynomials`
+- `Preconditioners`
+- `QuadGK`
+- `SpecialFunctions`
+- `TestImages`
+
+You could simply install all of these at once and be done with them; except for the ones dealing with differential equations, they are pretty quick to install.
+
+## Coding environments
+
+You *could* interact with Julia only by typing in at the prompt (also called the REPL) and then pasting the results into a word processor, but you can do much, much better. The most popular ways to use Julia are:
+
+- **[Jupyter lab](https://jupyter.org)**. This is a notebook-based interface that mixes cells having text and code, including text and graphical output. This entire book is based on the notebook architecture. You write and run code within your web browser, but the files are local.
+- **[VS Code](https://code.visualstudio.com)**. This is a full-featured code editor that can be extended with [Julia-specific tools](https://code.visualstudio.com/docs/languages/julia). It can also write and run Jupyter notebooks. This book (the version you are reading now, anyway) was written in VS Code.
