@@ -13,7 +13,7 @@ numbering:
 (function-diffper-python)=
 ``````{dropdown} Differentiation matrices for periodic end conditions
 :open:
-```{literalinclude} pkg/FNC/FNC11.py
+```{literalinclude} pkg/fncbook/chapter11.py
 :filename: diffper.py
 :start-at: def diffper
 :end-at: return x, Dx, Dxx
@@ -25,7 +25,7 @@ numbering:
 (function-parabolic-python)=
 ``````{dropdown} Solution of parabolic PDEs by the method of lines
 :open:
-```{literalinclude} pkg/FNC/FNC11.py
+```{literalinclude} pkg/fncbook/chapter11.py
 :filename: parabolic.py
 :start-at: def parabolic
 :end-at: return x, lambda t
@@ -37,6 +37,9 @@ numbering:
 ## Examples
 
 ```{code-cell}
+:tags: [remove-cell]
+import os
+print(os.chdir("/Users/driscoll/Documents/GitHub/fnc/python"))
 exec(open("FNC_init.py").read())
 ```
 

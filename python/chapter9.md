@@ -13,7 +13,7 @@ numbering:
 (function-polyinterp-python)=
 ``````{dropdown} Barycentric polynomial interpolation
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC09.py
+```{literalinclude} pkg/fncbook/chapter09.py
 :filename: polyinterp.py
 :start-at: def polyinterp
 :end-at: return np.vectorize(p)
@@ -32,7 +32,7 @@ The return value is a function that evaluates the polynomial interpolant. Within
 (function-triginterp-python)=
 ``````{dropdown} Trigonometric interpolation
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC09.py
+```{literalinclude} pkg/fncbook/chapter09.py
 :filename: triginterp.py
 :start-at: def triginterp
 :end-at: return np.vectorize(p)
@@ -49,7 +49,7 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 (function-ccint-python)=
 ``````{dropdown} Clenshaw–Curtis integration
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC09.py
+```{literalinclude} pkg/fncbook/chapter09.py
 :filename: ccint.py
 :start-at: def ccint
 :end-at: return I, x
@@ -61,7 +61,7 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 (function-glint-python)=
 ``````{dropdown} Gauss–Legendre integration
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC09.py
+```{literalinclude} pkg/fncbook/chapter09.py
 :filename: glint.py
 :start-at: def glint
 :end-at: return I, x
@@ -73,7 +73,7 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 (function-intinf-python)=
 ``````{dropdown} Integration over $(-\infty,\infty)$
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC09.py
+```{literalinclude} pkg/fncbook/chapter09.py
 :filename: intinf.py
 :start-at: def intinf
 :end-at: return I, x
@@ -90,7 +90,7 @@ The test `isinf(x(M))` in line 17 checks whether $x(M)$ is larger than the maxim
 (function-intsing-python)=
 ``````{dropdown} Integration with endpoint singularities
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC09.py
+```{literalinclude} pkg/fncbook/chapter09.py
 :filename: intsing.py
 :start-at: def intsing
 :end-at: return I, x
@@ -107,6 +107,9 @@ The test `iszero(x(M))` in line 17 checks whether $x(M)$ is less than the smalle
 ## Examples
 
 ```{code-cell}
+:tags: [remove-cell]
+import os
+print(os.chdir("/Users/driscoll/Documents/GitHub/fnc/python"))
 exec(open("FNC_init.py").read())
 ```
 

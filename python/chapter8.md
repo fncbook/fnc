@@ -13,7 +13,7 @@ numbering:
 (function-poweriter-python)=
 ``````{dropdown} Power iteration
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC08.py
+```{literalinclude} pkg/fncbook/chapter08.py
 :filename: poweriter.py
 :start-at: def poweriter
 :end-at: return gamma, x
@@ -25,7 +25,7 @@ numbering:
 (function-inviter-python)=
 ``````{dropdown} Inverse iteration
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC08.py
+```{literalinclude} pkg/fncbook/chapter08.py
 :filename: inviter.py
 :start-at: def inviter
 :end-at: return gamma, x
@@ -37,7 +37,7 @@ numbering:
 (function-arnoldi-python)=
 ``````{dropdown} Arnoldi iteration
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC08.py
+```{literalinclude} pkg/fncbook/chapter08.py
 :filename: arnoldi.py
 :start-at: def arnoldi
 :end-at: return Q, H
@@ -53,7 +53,7 @@ The loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}
 (function-gmres-python)=
 ``````{dropdown} GMRES
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC08.py
+```{literalinclude} pkg/fncbook/chapter08.py
 :filename: gmres.py
 :start-at: def arngmres
 :end-at: return x, residual
@@ -65,6 +65,9 @@ The loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}
 ## Examples
 
 ```{code-cell} ipython3
+:tags: [remove-cell]
+import os
+print(os.chdir("/Users/driscoll/Documents/GitHub/fnc/python"))
 exec(open("FNC_init.py").read())
 ```
 
@@ -155,7 +158,7 @@ title(("$A^6$"));
 
 (demo-structure-sparseband-python)=
 ``````{dropdown} @demo-structure-sparseband
-```{index} ! Julia; spdiagm
+```{index} ! Python; diags
 ```
 
 The `scipi.sparse.diags` function creates a sparse matrix given its diagonal elements and the diagonal indexes to put them on. The main or central diagonal is numbered zero, above and to the right of that is positive, and below and to the left is negative.
@@ -842,12 +845,9 @@ Here is an SPD matrix that arises from solving partial differential equations.
 ```{code-cell}
 from scipy.sparse import sparray
 import rogues
-A = rogues.wathen(60, 60)
+A = rogues.wathen(50, 50)
 n = A.shape[0]
 print(f"Matrix is {n} x {n} with {A.nnz} nonzeros")
-```
-
-```{index} ! Julia; DiagonalPreconditioner
 ```
 
 There is an easy way to use the diagonal elements of $\mathbf{A}$, or any other vector, as a diagonal preconditioner.

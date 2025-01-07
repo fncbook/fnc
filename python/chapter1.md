@@ -16,7 +16,7 @@ Python implementations
 (function-horner-python)=
 `````{dropdown} **Horner's algorithm for evaluating a polynomial**
 :open: true
-````{literalinclude} ../python/pkg/FNC/FNC01.py
+````{literalinclude} pkg/fncbook/chapter01.py
 :lineno-start: 1
 :start-at: def horner
 :end-at: return
@@ -27,7 +27,10 @@ Python implementations
 
 ## Examples
 
-```{code-cell} ipython3
+```{code-cell} 
+:tags: [remove-cell]
+import os
+print(os.chdir("/Users/driscoll/Documents/GitHub/fnc/python"))
 exec(open("FNC_init.py").read())
 ```
 
@@ -36,7 +39,7 @@ exec(open("FNC_init.py").read())
 ``````{dropdown} @demo-float-accuracy
 Recall the grade-school approximation to the number $\pi$.
 
-```{code-cell} ipython3
+```{code-cell} 
 p = 22/7
 print(p)
 ```
@@ -46,7 +49,7 @@ Not all the digits displayed for `p` are the same as those of $\pi$.
 The value of `pi` is predefined in the `numpy` package.
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 print(pi)
 ```
 
@@ -57,11 +60,11 @@ We often use [Python f-strings](https://docs.python.org/3/tutorial/inputoutput.h
 ```
 
 
-```{code-cell} ipython3
+```{code-cell} 
 print(f"absolute accuracy: {abs(p - pi)}")
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 rel_acc = abs(p - pi) / pi
 print("relative accuracy: {rel_acc:.4e}")
 ```
@@ -73,7 +76,7 @@ The `log` function is for the natural log. For other common bases, use `log10` o
 ```
 
 
-```{code-cell} ipython3
+```{code-cell} 
 print(f"accurate digits: {-log10(rel_acc):.1f}")
 ```
 ``````
@@ -84,34 +87,34 @@ print(f"accurate digits: {-log10(rel_acc):.1f}")
 
 Python has native `int` and `float` types.
 
-```{code-cell} ipython3
+```{code-cell} 
 print(f"The type of {1} is {type(1)}")
 print(f"The type of {float(1)} is {type(1.0)}")
 ```
 
 The `numpy` package has its own `float` types:
 
-```{code-cell} ipython3
+```{code-cell} 
 one = float64(1)
 print(f"The type of {one} is {type(one)}")
 ```
 
 Both `float` and `float64` are double precision, using 64 binary bits per value. Although it is not normally necessary to do so, we can deconstruct a float into its significand and exponent:
 
-```{code-cell} ipython3
+```{code-cell} 
 x = 3.14
 mantissa, exponent = frexp(x)
 print(f"significand: {mantissa * 2}, exponent: {exponent - 1}")
 ```
 
-```{code-cell} ipython3
+```{code-cell} 
 mantissa, exponent = frexp(x / 8)
 print(f"significand: {mantissa * 2}, exponent: {exponent - 1}")
 ```
 
 The spacing between floating-point values in $[2^n,2^{n+1})$ is $2^n \epsilon_\text{mach}$, where $\epsilon_\text{mach}$ is machine epsilon, given here for double precision:
 
-```{code-cell} ipython3
+```{code-cell} 
 mach_eps = finfo(float).eps
 print(f"machine epsilon is {mach_eps:.4e}")
 ```

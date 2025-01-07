@@ -8,14 +8,12 @@ numbering:
 ---
 # Chapter 5
 
-Python implementations
-
 ## Functions 
 
 (function-hatfun-python)=
 ``````{dropdown} Hat function
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC05.py
+```{literalinclude} pkg/fncbook/chapter05.py
 :filename: hatfun.py
 :start-line: 3
 :end-line: 25
@@ -27,7 +25,7 @@ Python implementations
 (function-plinterp-python)=
 ``````{dropdown} Piecewise linear interpolation
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC05.py
+```{literalinclude} pkg/fncbook/chapter05.py
 :filename: plinterp.py
 :start-line: 27
 :end-line: 35
@@ -39,7 +37,7 @@ Python implementations
 (function-spinterp-python)=
 ``````{dropdown} Cubic spline interpolation
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC05.py
+```{literalinclude} pkg/fncbook/chapter05.py
 :filename: spinterp.py
 :start-line: 37
 :end-line: 95
@@ -51,7 +49,7 @@ Python implementations
 (function-fdweights-python)=
 ``````{dropdown} Fornberg's algorithm for finite difference weights
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC05.py
+```{literalinclude} pkg/fncbook/chapter05.py
 :filename: fdweights.py
 :start-line: 97
 :end-line: 138
@@ -63,7 +61,7 @@ Python implementations
 (function-trapezoid-python)=
 ``````{dropdown} Trapezoid formula for numerical integration
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC05.py
+```{literalinclude} pkg/fncbook/chapter05.py
 :filename: trapezoid.py
 :start-line: 140
 :end-line: 150
@@ -75,7 +73,7 @@ Python implementations
 (function-intadapt-python)=
 ``````{dropdown} Adaptive integration
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC05.py
+```{literalinclude} pkg/fncbook/chapter05.py
 :filename: intadapt.py
 :start-line: 152
 :end-line: 191
@@ -91,6 +89,9 @@ The intended way for a user to call {numref}`Function {number} <function-intadap
 ## Examples
 
 ```{code-cell} ipython3
+:tags: [remove-cell]
+import os
+print(os.chdir("/Users/driscoll/Documents/GitHub/fnc/python"))
 exec(open("FNC_init.py").read())
 ```
 
@@ -109,7 +110,7 @@ plot(t, y, "o", label="data")
 xlabel("$x$"),  ylabel("$y$");
 ```
 
-```{index} ! Julia; fit
+```{index} ! Python; polyfit
 ```
 
 The polynomial interpolant, as computed using `fit`, looks very sensible. It's the kind of function you'd take home to meet your parents.
@@ -170,7 +171,7 @@ ax.legend()
 fig
 ```
 
-```{index} ! Julia; Spline1D
+```{index} ! Python; interp1d
 ```
 
 We may prefer a smoother interpolant that is piecewise cubic:
@@ -224,9 +225,6 @@ From the figure we can see that the condition number for polynomial interpolatio
 (demo-pwlin-hat-python)=
 ``````{dropdown} @demo-pwlin-hat
 Let's define a set of four nodes (i.e., $n=3$ in our formulas).
-
-```{index} ! Julia; annotate!
-```
 
 ```{code-cell}
 t = array([0, 0.075, 0.25, 0.55, 0.7, 1])
@@ -561,7 +559,7 @@ The antiderivative of $e^x$ is, of course, itself. That makes evaluation of $\in
 exact = exp(1) - 1
 ```
 
-```{index} ! Julia; quadgk
+```{index} ! Python; quad
 ```
 
 The module `scipy.integrate` has multiple functions that estimate the value of an integral numerically without finding the antiderivative first. As you can see here, it's often just as accurate.

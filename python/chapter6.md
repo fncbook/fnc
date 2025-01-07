@@ -13,7 +13,7 @@ numbering:
 (function-euler-python)=
 ``````{dropdown} Euler's method for an initial-value problem
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC06.py
+```{literalinclude} pkg/fncbook/chapter06.py
 :filename: euler.py
 :start-at: def euler
 :end-at: return t
@@ -25,7 +25,7 @@ numbering:
 (function-ie2-python)=
 ``````{dropdown} Improved Euler method for an IVP
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC06.py
+```{literalinclude} pkg/fncbook/chapter06.py
 :filename: ie2.py
 :start-at: def ie2
 :end-at: return t
@@ -37,7 +37,7 @@ numbering:
 (function-rk4-python)=
 ``````{dropdown} Fourth-order Runge-Kutta for an IVP
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC06.py
+```{literalinclude} pkg/fncbook/chapter06.py
 :filename: rk4.py
 :start-at: def rk4
 :end-at: return t
@@ -49,7 +49,7 @@ numbering:
 (function-rk23-python)=
 ``````{dropdown} Adaptive IVP solver based on embedded RK formulas
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC06.py
+```{literalinclude} pkg/fncbook/chapter06.py
 :filename: rk23.py
 :start-at: def euler
 :end-at: return
@@ -71,7 +71,7 @@ While {eq}`bs23` calls for four stages to find the paired second- and third-orde
 (function-ab4-python)=
 ``````{dropdown} 4th-order Adams–Bashforth formula for an IVP
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC06.py
+```{literalinclude} pkg/fncbook/chapter06.py
 :filename: ab4.py
 :start-at: def ab4
 :end-at: return t
@@ -89,7 +89,7 @@ Line 28 computes $f_i$, based on the most recent solution value and time. That g
 (function-am2-python)=
 ``````{dropdown} 2nd-order Adams–Moulton (trapezoid) formula for an IVP
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC06.py
+```{literalinclude} pkg/fncbook/chapter06.py
 :filename: am2.py
 :start-at: def am2
 :end-at: return t
@@ -105,6 +105,9 @@ Lines 22-23 define the function $\mathbf{g}$ and call `levenberg` to find the ne
 ## Examples
 
 ```{code-cell} ipython3
+:tags: [remove-cell]
+import os
+print(os.chdir("/Users/driscoll/Documents/GitHub/fnc/python"))
 exec(open("FNC_init.py").read())
 ```
 
@@ -116,7 +119,7 @@ Let's use `solve_ivp` from `scipy.integrate` to define and solve an initial-valu
 
 To create an initial-value problem for $u(t)$, you must supply a function that computes $u'$, an initial value for $u$, and the endpoints of the interval for $t$. The $t$ interval should be defined as `(a,b)`, where at least one of the values is a float.
 
-```{index} ! Julia; ODEProblem, ! Julia; solve
+```{index} ! Python; solve_ivp
 ```
 
 ```{code-cell}
