@@ -4,3 +4,6 @@
 [submodule "julia/FNCFunctions"]
 	path = julia/FNCFunctions
 	url = https://github.com/fncbook/FNCFunctions.jl.git
+[submodule "matlab/FNC-matlab"]
+	path = matlab/FNC-matlab
+	url = https://github.com/fncbook/FNC-matlab.git
