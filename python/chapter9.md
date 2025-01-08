@@ -571,12 +571,16 @@ The Fourier coefficients of smooth functions decay exponentially in magnitude as
 ```{code-cell}
 f = lambda t: pi * sqrt(cos(pi * t) ** 2 + sin(pi * t) ** 2 / 4)
 N = arange(4, 48, 6)
-results = PrettyTable(["N", "perimeter estimate"])
+perim = zeros(N.size)
 for k in range(N.size):
     h = 2 / N[k]
     t = h * arange(N[k]) - 1
-    results.add_row([N[k], h * sum(f(t))])
-
+    perim[k] = h * sum(f(t))
+err = abs(perim - perim[-1])    # use the last value as reference
+results = PrettyTable()
+results.add_column("N", N)
+results.add_column("perimeter", perim)
+results.add_column("error", err)
 results
 ```
 The approximations gain about one digit of accuracy for each constant increment of $n$, which is consistent with spectral convergence.

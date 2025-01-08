@@ -232,10 +232,10 @@ This matches the observation pretty well.
 ``````{dropdown} @demo-algorithms-horner
 :open: false
 
-Here we show how to use `horner` to evaluate a polynomial. First, we have to ensure that the `FNC` package is imported.
+Here we show how to use `horner` to evaluate a polynomial. First, we have to ensure that the book's package is imported.
   
 ```{code-cell} ipython3
-import FNC
+import fncbook as FNC
 ```
 
 Here is the help string for the function:
