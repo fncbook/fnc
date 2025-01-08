@@ -9,4 +9,4 @@ The book relies only on base MATLAB (no Toolboxes). The code requires MATLAB R20
 
 ## Installation
 
-Download the latest release as a zip file and unpack somewhere on your computer. Add the `FNC-matlab` directory to your MATLAB path. By typing `addpath /path/to/FNC-matlab` at the MATLAB prompt, or by typing `pathtool` and using the GUI. The `pathtool` method allows you to save the path for all future MATLAB sessions.
+Download the [latest release](https://github.com/fncbook/FNC-matlab/releases/latest) and unpack somewhere on your computer. Add the `FNC-matlab` directory to your MATLAB path. By typing `addpath /path/to/FNC-matlab` at the MATLAB prompt, or by typing `pathtool` and using the GUI. The `pathtool` method allows you to save the path for all future MATLAB sessions.
