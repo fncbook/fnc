@@ -92,7 +92,7 @@ Lines 32--34 define the function $\mathbf{g}$. This is sent to `levenberg` in li
 
 ```{code-cell}
 :tags: [remove-cell]
-cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 ### 6.1 @section-ivp-basics
@@ -494,12 +494,11 @@ Now we perform a convergence study of the AB4 code.
 
 ```{code-cell}
 n = round(4 * 10.^(0:0.5:3)');
-err = [];
+err = zeros(size(n));
 for i = 1:length(n)
     [t, u] = ab4(ivp, a, b, n(i));
     err(i) = norm(u_ref(t) - u, Inf);
 end
-
 disp(table(n, err, variableNames=["n", "inf-norm error"]))
 ```
 
@@ -511,7 +510,7 @@ hold on
 loglog(n, 0.5 * err(end) * (n / n(end)) .^ (-4), '--')
 xlabel("n");  ylabel("inf-norm error")
 title("Convergence of AB4")
-legend("AB4", "O(n^{-4})", "location", "southwest");
+legend("AB4", "O(n^{-4})", location="southwest");
 ```
 ``````
 
@@ -560,7 +559,7 @@ hold on
 plot(tE, uE)
 [tE, uE] = ab4(ivp, 0, 400, 1600);
 plot(tE, uE)
-legend("AM2, n=200", "AB4, n=1000", "AB4, n=1600");
+legend("AM2, n=200", "AB4, n=1000", "AB4, n=1600", location="northwest");
 ```
 
 So AB4, which is supposed to be _more_ accurate than AM2, actually needs something like 8 times as many steps to get a reasonable-looking answer!

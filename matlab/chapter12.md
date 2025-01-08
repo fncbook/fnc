@@ -12,7 +12,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -70,11 +70,17 @@ for frame = 1:length(t)
     writeVideo(vid, frame2im(getframe(gcf)));
 end
 close(vid)
+close(gcf)
 ```
 
 ![Advection equation with periodic boundary](figures/advection-periodic.mp4)
 
 ``````
+
+```{code-cell}
+:tags: [remove-cell]
+FNC_init
+```
 
 (demo-traffic-solve-matlab)=
 ``````{dropdown} @demo-traffic-solve
@@ -146,6 +152,7 @@ for frame = 1:length(t)
     writeVideo(vid, frame2im(getframe(gcf)));
 end
 close(vid)
+close(gcf)
 ```
 
 ![Traffic flow](figures/traffic-small.mp4)
@@ -162,7 +169,7 @@ RHO = sol.Solution;
 
 ```{code-cell}
 :tags: hide-input
-clf
+FNC_init    % open new figure
 for plot_idx = 1:16:81
     str = sprintf("t = %.2f", t(plot_idx));
     plot(x, RHO(:, plot_idx), displayname=str)
@@ -191,6 +198,7 @@ for frame = 1:length(t)
     writeVideo(vid, frame2im(getframe(gcf)));
 end
 close(vid)
+close(gcf)
 ```
 
 ![Traffic jam](figures/traffic-jam.mp4)
@@ -198,6 +206,11 @@ close(vid)
 In this case the density bump travels backward along the road. It also steepens on the side facing the incoming traffic and decreases much more slowly on the other side. A motorist would experience this as an abrupt increase in density, followed by a much more gradual decrease in density and resulting gradual increase in speed. (You also see some transient, high-frequency oscillations. These are caused by instabilities, as we discuss in simpler situations later in this chapter.)
 
 ``````
+
+```{code-cell}
+:tags: [remove-cell]
+FNC_init
+```
 
 ### 12.2 @section-advection-upwind
 (demo-upwind-cfl-matlab)=
@@ -294,6 +307,7 @@ for frame = 1:length(t)
     writeVideo(vid, frame2im(getframe(gcf)));
 end
 close(vid)
+close(gcf)
 ```
 
 ![Advection with inflow BC](figures/advection-inflow.mp4)
@@ -311,7 +325,8 @@ u = @(t) [zeros(1, length(t)); sol(t)];
 
 ```{code-cell}
 :tags: hide-input
-clf,  contour(x, t, u(t)', 0.15:0.2:1)
+FNC_init
+contour(x, t, u(t)', 0.15:0.2:1)
 xlabel x,  ylabel t
 title('Advection with outflow BC')
 ```
@@ -336,10 +351,16 @@ for frame = 1:45
     writeVideo(vid, frame2im(getframe(gcf)));
 end
 close(vid)
+close(gcf)
 ```
 
 ![Advection with outflow BC](figures/advection-outflow.mp4)
 ``````
+
+```{code-cell}
+:tags: [remove-cell]
+FNC_init
+```
 
 ### 12.3 @section-advection-absstab
 
@@ -419,7 +440,8 @@ lambda = eig(A);
 
 ```{code-cell}
 :tags: hide-input
-clf,  scatter(real(lambda), imag(lambda))
+clf
+scatter(real(lambda), imag(lambda))
 axis equal,  grid on 
 title('Eigenvalues of advection with zero inflow')
 ```
@@ -515,6 +537,7 @@ for frame = 1:length(t)
     writeVideo(vid, frame2im(getframe(gcf)));
 end
 close(vid)
+close(gcf)
 ```
 
 ![Wave equation with boundaries](figures/wave-boundaries.mp4)
@@ -522,6 +545,11 @@ close(vid)
 The original hump breaks into two pieces of different amplitudes, each traveling with speed $c=2$. They pass through one another without interference. When a hump encounters a boundary, it is perfectly reflected, but with inverted shape. At time $t=2$, the solution looks just like the initial condition.
 
 ``````
+
+```{code-cell}
+:tags: [remove-cell]
+FNC_init
+```
 
 (demo-wave-speed-matlab)=
 ``````{dropdown} @demo-wave-speed
@@ -569,7 +597,10 @@ for frame = 1:length(t)
     writeVideo(vid, frame2im(getframe(gcf)));
 end
 close(vid)
+close(gcf)
 ```
+
+![Wave equation with variable speed](figures/wave-speed.mp4)
 
 Each pass through the interface at $x=0$ generates a reflected and transmitted wave. By conservation of energy, these are both smaller in amplitude than the incoming bump.
 ``````

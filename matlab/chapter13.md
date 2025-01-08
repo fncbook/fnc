@@ -41,7 +41,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -613,14 +613,14 @@ u = elliptic(phi, g, 25, [0, 2.5], 14, [0, 1]);
 mtx_test(u)
 ```
 
+The original solution seems to be accurate to about four digits.
+
+``````
+
 ```{code-cell}
 :tags: remove-cell
 format
 ```
-
-The original solution seems to be accurate to about four digits.
-
-``````
 
 (demo-nonlinear-advdiff-matlab)=
 ``````{dropdown} @demo-nonlinear-advdiff

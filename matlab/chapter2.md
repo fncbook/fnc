@@ -60,7 +60,7 @@ Line 12 implements @forwardsub. It contains an inner product between row $i$ of 
 
 ```{code-cell}
 :tags: [remove-cell]
-cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 

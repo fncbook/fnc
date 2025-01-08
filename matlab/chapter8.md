@@ -50,7 +50,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-cd /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -527,7 +527,7 @@ b = rand(100, 1);
 Instead of building the Krylov matrices, we use the Arnoldi iteration to generate equivalent orthonormal vectors.
 
 ```{code-cell}
-[Q, H] = arnoldi(A,b,60);
+[Q, H] = arnoldi(A, b, 60);
 ```
 
 The Arnoldi bases are used to solve the least-squares problems defining the GMRES iterates.
@@ -535,7 +535,7 @@ The Arnoldi bases are used to solve the least-squares problems defining the GMRE
 ```{code-cell}
 resid = norm(b);
 for m = 1:60
-    s = [norm(b); zeros(m)];
+    s = [norm(b); zeros(m, 1)];
     z = H(1:m+1, 1:m) \ s;
     x = Q(:, 1:m) * z;
     resid = [resid, norm(b - A * x)];
@@ -553,7 +553,7 @@ axis tight, title(('Residual for GMRES'));
 ``````
 
 (demo-gmres-restart-matlab)=
-``````{dropdown} 
+``````{dropdown} @demo-gmres-restart
 The following experiments are based on a matrix resulting from discretization of a partial differential equation.
 
 ```{code-cell}
