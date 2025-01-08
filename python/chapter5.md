@@ -30,7 +30,7 @@ Python implementations
 ```{literalinclude} fncbook/fncbook/chapter05.py
 :filename: plinterp.py
 :start-at: def plinterp
-:end-at: return
+:end-at: return evaluate
 :language: python
 :linenos: true
 ```
@@ -54,7 +54,7 @@ Python implementations
 ```{literalinclude} fncbook/fncbook/chapter05.py
 :filename: fdweights.py
 :start-at: def fdweights
-:end-at: return [weight
+:end-at: return np.array
 :language: python
 :linenos: true
 ```
@@ -66,7 +66,7 @@ Python implementations
 ```{literalinclude} fncbook/fncbook/chapter05.py
 :filename: trapezoid.py
 :start-at: def trapezoid
-:end-at: return T
+:end-at: return T, t, y
 :language: python
 :linenos: true
 ```

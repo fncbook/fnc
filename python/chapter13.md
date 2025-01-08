@@ -13,7 +13,7 @@ numbering:
 (function-tensorgrid-python)=
 ``````{dropdown} Create a tensor-product grid
 :open:
-```{literalinclude} pkg/fncbook/fncbook/chapter13.py
+```{literalinclude} fncbook/fncbook/chapter13.py
 :filename: tensorgrid.py
 :linenos: true
 :language: python
@@ -25,7 +25,7 @@ numbering:
 (function-poissonfd-python)=
 ``````{dropdown} Solution of Poisson's equation by finite differences
 :open:
-```{literalinclude} pkg/fncbook/fncbook/chapter13.py
+```{literalinclude} fncbook/fncbook/chapter13.py
 :filename: poissonfd.py
 :linenos: true
 :language: python
@@ -37,7 +37,7 @@ numbering:
 (function-elliptic-python)=
 ``````{dropdown} Solution of elliptic PDE by Chebyshev collocation
 :open:
-```{literalinclude} pkg/fncbook/fncbook/chapter13.py
+```{literalinclude} fncbook/fncbook/chapter13.py
 :filename: elliptic.py
 :linenos: true
 :language: python
@@ -248,7 +248,7 @@ pcolormesh(X.T, Y.T, U(0.02).T,
     vmin=-mx, vmax=mx, cmap="RdBu", shading="gouraud")
 axis("equal"),  colorbar()
 xlabel("$x$"),  ylabel("$y$")
-title("Heat equation, t=0.02")
+title("Heat equation, t=0.02");
 ```
 
 Here is an animation of the solution.

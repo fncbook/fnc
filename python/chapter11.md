@@ -13,7 +13,7 @@ numbering:
 (function-diffper-python)=
 ``````{dropdown} Differentiation matrices for periodic end conditions
 :open:
-```{literalinclude} pkg/fncbook/fncbook/chapter11.py
+```{literalinclude} fncbook/fncbook/chapter11.py
 :filename: diffper.py
 :start-at: def diffper
 :end-at: return x, Dx, Dxx
@@ -25,7 +25,7 @@ numbering:
 (function-parabolic-python)=
 ``````{dropdown} Solution of parabolic PDEs by the method of lines
 :open:
-```{literalinclude} pkg/fncbook/fncbook/chapter11.py
+```{literalinclude} fncbook/fncbook/chapter11.py
 :filename: parabolic.py
 :start-at: def parabolic
 :end-at: return x, lambda t
@@ -59,10 +59,10 @@ We discretize space and time.
 ```{code-cell}
 m = 200
 h = Smax / m
-x = h * arange(m + 1)
+x = h * arange(m+1)
 n = 1000
 tau = T / n
-t = tau * arange(n + 1)
+t = tau * arange(n+1)
 lamb, mu = tau / h**2, tau / h
 ```
 
@@ -189,8 +189,8 @@ def animate(j):
     return line, time_text
 
 anim = animation.FuncAnimation(
-    fig, animate, frames=range(0, n+1, 10), blit=True);
-anim.save("figures/black-scholes-8.mp4", fps=30)
+    fig, animate, frames=range(0, n+1), blit=True);
+anim.save("figures/black-scholes-8.mp4", fps=24)
 close()
 ```
 
@@ -261,7 +261,7 @@ def animate(j):
 
 anim = animation.FuncAnimation(
     fig, animate, frames=range(0, 100), blit=True)
-anim.save("figures/diffusionFE.mp4", fps=30)
+anim.save("figures/diffusionFE.mp4", fps=24)
 close()
 ```
 
@@ -271,7 +271,7 @@ The growth in norm is exponential in time.
 
 ```{code-cell}
 M = abs(U).max(axis=0)  # max in each column
-semilogy(t, M)
+semilogy(t[:500], M[:500])
 xlabel("$t$");  ylabel("$\\max_x |u(x,t)|$")
 title("Nonphysical growth");
 ```
@@ -306,7 +306,7 @@ time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
 
 anim = animation.FuncAnimation(
     fig, animate, frames=range(0, n+1, 20), blit=True)
-anim.save("figures/diffusionBE.mp4")
+anim.save("figures/diffusionBE.mp4", fps=30)
 close()
 ```
 
