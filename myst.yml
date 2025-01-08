@@ -12,6 +12,7 @@ project:
     - name: Richard J. Braun 
   github: https://github.com/fncbook/fnc
   # To autogenerate a Table of Contents, run 'myst init --write-toc'
+  thebe: false    # don't try in-browser execution
   exports:
     # - format: typst
     #   template: lapreprint-typst
