@@ -238,6 +238,7 @@ project:
           - file: matlab/chapter13.md
       - title: Python codes
         children:
+          - file: python/setup.md
           - file: python/chapter1.md
           - file: python/chapter2.md
           - file: python/chapter3.md
