@@ -13,7 +13,7 @@ numbering:
 (function-diffper-python)=
 ``````{dropdown} Differentiation matrices for periodic end conditions
 :open:
-```{literalinclude} pkg/FNC/FNC11.py
+```{literalinclude} pkg/fncbook/fncbook/chapter11.py
 :filename: diffper.py
 :start-at: def diffper
 :end-at: return x, Dx, Dxx
@@ -25,7 +25,7 @@ numbering:
 (function-parabolic-python)=
 ``````{dropdown} Solution of parabolic PDEs by the method of lines
 :open:
-```{literalinclude} pkg/FNC/FNC11.py
+```{literalinclude} pkg/fncbook/fncbook/chapter11.py
 :filename: parabolic.py
 :start-at: def parabolic
 :end-at: return x, lambda t
@@ -37,6 +37,7 @@ numbering:
 ## Examples
 
 ```{code-cell}
+:tags: remove-cell
 exec(open("FNC_init.py").read())
 ```
 
@@ -96,8 +97,8 @@ for j, col in enumerate(select_times):
     plot(x, V[:, col], label=f"t={show_times[j]:.1f}")
 
 legend()
-title("Black-Scholes solution")
-xlabel("stock price"),  ylabel("option value");
+xlabel("stock price"),  ylabel("option value")
+title("Black-Scholes solution");
 ```
 
 ```{index} ! Python; animation
@@ -166,9 +167,9 @@ for j, col in enumerate(select_times):
     plot(x, V[:, col], label=f"t={show_times[j]:.1f}")
 
 legend()
-title("Black-Scholes solution")
 xlabel("stock price")
 ylim([0, 6]);  ylabel("option value")
+title("Black-Scholes solution");
 ```
 
 ```{code-cell}
@@ -477,7 +478,7 @@ for i in range(3):
 ax.set_xlabel("Re $\\lambda$")
 ax.set_ylabel("Im $\\lambda$")
 ax.set_zlabel("$t$")
-ax.set_title("Oregonator eigenvalues")
+ax.set_title("Oregonator eigenvalues");
 ```
 
 You can see that there is one eigenvalue that ranges over a wide portion of the negative real axis and dominates stability considerations.
@@ -515,7 +516,7 @@ plot(real(zeta), imag(zeta), ".")
 axis("equal")
 xlabel("Re $\\zeta$")
 ylabel("Im $\\zeta$")
-title("Oregonator stability")
+title("Oregonator stability");
 ```
 
 Roughly speaking, the $\zeta$ values stay within or close to the RK2 stability region in {numref}`figure-stabreg_bd_rk`. Momentary departures from the region are possible, but time stepping repeatedly in that situation would cause instability. 

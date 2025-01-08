@@ -14,7 +14,7 @@ numbering:
 (function-forwardsub-python)=
 ``````{dropdown} Forward substitution
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC02.py
+```{literalinclude} fncbook/fncbook/chapter02.py
 :filename: forwardsub.py
 :start-line: 2
 :end-line: 14
@@ -26,7 +26,7 @@ numbering:
 (function-backsub-python)=
 ``````{dropdown} Backward substitution
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC02.py
+```{literalinclude} fncbook/fncbook/chapter02.py
 :filename: backsub.py
 :start-line: 17
 :end-line: 29
@@ -38,7 +38,7 @@ numbering:
 (function-lufact-python)=
 `````{dropdown} LU factorization (not stable)
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC02.py
+```{literalinclude} fncbook/fncbook/chapter02.py
 :filename: lufact.py
 :start-line: 31
 :end-line: 49
@@ -55,7 +55,7 @@ Line 11 of {numref}`Function {number} <function-lufact>` points out a subtle iss
 (function-plufact-python)=
 ``````{dropdown} LU factorization with partial pivoting
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC02.py
+```{literalinclude} fncbook/fncbook/chapter02.py
 :filename: plufact.py
 :start-line: 51
 :end-line: 71
@@ -67,6 +67,7 @@ Line 11 of {numref}`Function {number} <function-lufact>` points out a subtle iss
 ## Examples
 
 ```{code-cell} 
+:tags: remove-cell
 exec(open("FNC_init.py").read())
 ```
 

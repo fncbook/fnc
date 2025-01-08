@@ -16,7 +16,7 @@ Python implementations
 (function-horner-python)=
 `````{dropdown} **Horner's algorithm for evaluating a polynomial**
 :open: true
-````{literalinclude} ../python/pkg/FNC/FNC01.py
+````{literalinclude} fncbook/fncbook/chapter01.py
 :lineno-start: 1
 :start-at: def horner
 :end-at: return
@@ -28,12 +28,19 @@ Python implementations
 ## Examples
 
 ```{code-cell} ipython3
+:tags: remove-cell
 exec(open("FNC_init.py").read())
 ```
 
 ## 1.1 @section-intro-floating-point
 (demo-float-accuracy-python)=
 ``````{dropdown} @demo-float-accuracy
+```{tip} Getting started with Python
+:class: dropdown
+:open:
+See @section-setup-python for guidance on how to set up Python for the demos in this book.
+```
+
 Recall the grade-school approximation to the number $\pi$.
 
 ```{code-cell} ipython3

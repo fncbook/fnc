@@ -15,10 +15,10 @@ Python implementations
 (function-hatfun-python)=
 ``````{dropdown} Hat function
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC05.py
+```{literalinclude} fncbook/fncbook/chapter05.py
 :filename: hatfun.py
-:start-line: 3
-:end-line: 25
+:start-at: def hatfun
+:end-at: return evaluate
 :language: python
 :linenos: true
 ```
@@ -27,10 +27,10 @@ Python implementations
 (function-plinterp-python)=
 ``````{dropdown} Piecewise linear interpolation
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC05.py
+```{literalinclude} fncbook/fncbook/chapter05.py
 :filename: plinterp.py
-:start-line: 27
-:end-line: 35
+:start-at: def plinterp
+:end-at: return
 :language: python
 :linenos: true
 ```
@@ -39,10 +39,10 @@ Python implementations
 (function-spinterp-python)=
 ``````{dropdown} Cubic spline interpolation
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC05.py
+```{literalinclude} fncbook/fncbook/chapter05.py
 :filename: spinterp.py
-:start-line: 37
-:end-line: 95
+:start-at: def spinterp
+:end-at: return evaluate
 :language: python
 :linenos: true
 ```
@@ -51,10 +51,10 @@ Python implementations
 (function-fdweights-python)=
 ``````{dropdown} Fornberg's algorithm for finite difference weights
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC05.py
+```{literalinclude} fncbook/fncbook/chapter05.py
 :filename: fdweights.py
-:start-line: 97
-:end-line: 138
+:start-at: def fdweights
+:end-at: return [weight
 :language: python
 :linenos: true
 ```
@@ -63,10 +63,10 @@ Python implementations
 (function-trapezoid-python)=
 ``````{dropdown} Trapezoid formula for numerical integration
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC05.py
+```{literalinclude} fncbook/fncbook/chapter05.py
 :filename: trapezoid.py
-:start-line: 140
-:end-line: 150
+:start-at: def trapezoid
+:end-at: return T
 :language: python
 :linenos: true
 ```
@@ -75,10 +75,9 @@ Python implementations
 (function-intadapt-python)=
 ``````{dropdown} Adaptive integration
 :open:
-```{literalinclude} ../python/pkg/FNC/FNC05.py
+```{literalinclude} fncbook/fncbook/chapter05.py
 :filename: intadapt.py
-:start-line: 152
-:end-line: 191
+:start-at: def intadapt
 :language: python
 :linenos: true
 ```
@@ -91,6 +90,7 @@ The intended way for a user to call {numref}`Function {number} <function-intadap
 ## Examples
 
 ```{code-cell} ipython3
+:tags: remove-cell
 exec(open("FNC_init.py").read())
 ```
 
@@ -237,9 +237,8 @@ We plot the hat functions $H_0,\ldots,H_3$.
 ```{code-cell}
 x = linspace(0, 1, 300)
 for k in range(6):
-    plot(x, FNC.hatfun(x, t, k))
-xlabel("$x$")
-ylabel("$H_k(x)$")
+    plot(x, FNC.hatfun(t, k)(x))
+xlabel("$x$"),  ylabel("$H_k(x)$")
 title("Hat functions");
 ```
 ``````
