@@ -296,16 +296,10 @@ We no longer assume equally spaced nodes, so there is no "$h$" to be used in the
 
     **(b)** Show that $Q'(0)$ gives the finite-difference formula defined by {eq}`centerFD12`.
 
-    ````{only} solutions
-    ````
-
 (problem-backwardFD)=
 2. **(a)** ✍ {numref}`table-FDforward` lists forward difference formulas in which $p=0$ in {eq}`fdformula`. Show that the change of variable $g(x) = f(-x)$ transforms these formulas into backward difference formulas with $q=0$, and write out the table analogous to {numref}`table-FDforward` for backward differences.
 
     **(b)** ⌨ Suppose you are given the nodes $t_0=0.9$, $t_1=1$, and $t_2=1.1$, and $f(x) = \sin(2x)$. Using formulas from {numref}`table-FDcenter` and {numref}`table-FDforward`, compute second-order accurate approximations to $f'$ at each of the three nodes.
-
-    ````{only} solutions
-    ````
 
 3. ⌨ Let $f(x)=e^{-x}$, $x=0.5$, and $h=0.2$. Using {numref}`Function {number} <function-fdweights>` to get the necessary weights on five nodes centered at $x$, find finite-difference approximations to the first, second, third, and fourth derivatives of $f$. Make a table showing the derivative values and the errors in each case.
 

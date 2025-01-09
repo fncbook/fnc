@@ -353,10 +353,6 @@ The following statements are equivalent:
 
     and that $\mathbf{x} = \begin{bmatrix} 1 & 1 & 0 & 1 & 0  \end{bmatrix}^T$. Give an interpretation of the product $\mathbf{A}\mathbf{x}$.
 
-    ````{only} solutions
-    Entry $i$ of $A\mathbf{x}$ is the sum of $a_{ij}x_j$, so the result is the number of the terms 'numerical', 'analysis', and 'cool' that appear in document $i$. (Note: this is not the same as the  total number of occurrences of the words; each term is counted only once.)
-    ````
-
 3. ✍ Let
   
     ```{math}

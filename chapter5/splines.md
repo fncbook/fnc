@@ -261,9 +261,6 @@ The conditioning of spline interpolation is much more complicated than for the p
 
     **(d)** $\sin(x^2),\:  \mathbf{t} = [-1,0,1]$
 
-    ````{only} solutions
-    ````
-
 2. ⌨ (continuation) For each case in the preceding problem, use Julia to solve the linear system you wrote down. Then plot the resulting cubic spline over the interval between the second and third nodes.
 
 (problem-spinterp)=
