@@ -84,6 +84,7 @@ project:
       children:
         - file: preface.md
         - file: preface-original.md
+    - file: differences.md
     - file: chapter1/overview.md
       children:
         - file: chapter1/floating-point.md

@@ -23,7 +23,7 @@ This is a new edition of the textbook [Fundamentals of Numerical Computation](ht
 There are some changes from the print editions. Exercise numbers may not align. 
 ```
 
-Codes are available for [Julia](#section-setup-julia), [MATLAB](#section-setup-matlab), and [Python](#section-setup-python).
+Codes are available for [Julia](#section-setup-julia), [MATLAB](#section-setup-matlab), and [Python](#section-setup-python). Please see the section on @section-key-differences for a discussion of the differences between these languages.
 
 `````{grid}
 
