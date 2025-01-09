@@ -1,5 +1,5 @@
 (chapter-linsys)=
-# Linear systems of equations
+# 2. Linear systems of equations
 
 ```{index} Han Solo, A New Hope
 ```

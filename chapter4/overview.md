@@ -1,5 +1,5 @@
 (chapter-nonlineqn)=
-# Roots of nonlinear equations
+# 4. Roots of nonlinear equations
 
 ```{index} C3PO, A New Hope
 ```

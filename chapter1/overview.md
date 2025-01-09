@@ -1,5 +1,5 @@
 (chapter-intro)=
-# Introduction
+# 1. Introduction
 
 ```{index} Yoda, The Empire Strikes Back
 ```

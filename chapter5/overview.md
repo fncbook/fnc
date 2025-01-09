@@ -1,5 +1,5 @@
 (chapter-localapprox)=
-# Piecewise interpolation
+# 5. Piecewise interpolation
 
 ```{index} Yoda, The Empire Strikes Back
 ```
