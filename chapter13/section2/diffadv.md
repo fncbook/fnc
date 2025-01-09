@@ -99,6 +99,7 @@ If the boundary conditions are periodic, then the unknowns in the method of line
 :open:
 ```{include} julia/heat.ipynb
 ```
+![Heat equation in 2D](julia/heat-2d.*)
 ````
 `````
 
@@ -117,6 +118,7 @@ If the boundary conditions are periodic, then the unknowns in the method of line
 :open:
 ```{include} python/heat.ipynb
 ```
+![Heat equation in 2D](python/heat-2d.*)
 ````
 `````
 ``````
@@ -174,6 +176,8 @@ Now suppose the ODE unknowns for the interior solution values are in the vector 
 :open:
 ```{include} julia/advdiff.ipynb
 ```
+![Advection-diffusion in 2D](julia/advdiff-2d.*)
+
 ````
 `````
 
@@ -192,6 +196,8 @@ Now suppose the ODE unknowns for the interior solution values are in the vector 
 :open:
 ```{include} python/advdiff.ipynb
 ```
+![Advection-diffusion in 2D](python/advdiff-2d.*)
+
 ````
 `````
 ``````
@@ -223,6 +229,7 @@ Now the grid unknowns are a pair of matrices $\mathbf{U}(t)$ and $\mathbf{V}(t)$
 :open:
 ```{include} julia/wave.ipynb
 ```
+![Wave equation in 2D](julia/wave-2d.*)
 ````
 `````
 
@@ -241,6 +248,7 @@ Now the grid unknowns are a pair of matrices $\mathbf{U}(t)$ and $\mathbf{V}(t)$
 :open:
 ```{include} python/wave.ipynb
 ```
+![Wave equation in 2D](python/wave-2d.*)
 ````
 `````
 ``````
