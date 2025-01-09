@@ -164,13 +164,35 @@ For very large matrices, it's unlikely that you will want to find all of its eig
 
     For each matrix, use `spy` and an inspection of the $5\times 5$ submatrices in the corners to verify the correctness of your matrices.
 
-2. ⌨ This problem requires the matrix used in {numref}`Demo %s <demo-structure-fill>`; you can load it via
-
-    ```julia
-    url = "https://tobydriscoll.net/fnc-julia/_static/resources/smallworld.jld2"
-    datafile = download(url)
-    @load datafile A
+2. ⌨ This problem requires the matrix used in {numref}`Demo %s <demo-structure-fill>`.
+    `````{tab-set} 
+    ````{tab-item} Julia
+    :sync: julia
+    Download [smallworld.mat](smallworld.mat) by clicking the link and saving (you may need to fix the file name).
+    ``` julia
+    using MAT
+    A = matread("smallworld.mat")["A"]
     ```
+    ```` 
+
+    ````{tab-item} MATLAB
+    :sync: matlab
+    Download [smallworld.mat](smallworld.mat) by clicking the link and saving (you may need to fix the file name).
+    ``` matlab
+    load smallworld
+    ```
+    ```` 
+
+    ````{tab-item} Python
+    :sync: python
+    Download [smallworld.mtx](smallworld.mtx) by clicking the link and saving (you may need to fix the file name).
+    ``` python
+    import scipy.io as spio
+    A = spio.mmread("smallworld.mtx")
+    ```
+    ```` 
+    `````
+
     **(a)** Find the density of $\mathbf{A}$ (number of nonzeros divided by total number of elements), $\mathbf{A}^2$, $\mathbf{A}^4$, and $\mathbf{A}^8$. (You should find that it increases with the power of $A$.)
 
     **(b)** The LU factors tend to at least partially retain sparsity. Find the density of the $\mathbf{L}$ and $\mathbf{U}$ factors of $\mathbf{A}$ using the built-in `lu`. (See {numref}`Demo {number} <demo-structure-banded>` for usage of `lu` in the sparse case.)
@@ -180,12 +202,34 @@ For very large matrices, it's unlikely that you will want to find all of its eig
 (problem-structure-roswell)=
 3. ⌨ One use of adjacency matrices is to analyze the links between members of a collection. Obtain the adjacency matrix $\mathbf{A}$ from {numref}`Demo %s <demo-structure-sparse>` via the following:
     
-    ```julia
-    url = "https://tobydriscoll.net/fnc-julia/_static/resources/roswell.jld2"
-    datafile = download(url)
-    @load datafile A
+   `````{tab-set} 
+    ````{tab-item} Julia
+    :sync: julia
+    Download [roswell.mat](roswell.mat) by clicking the link and saving (you may need to fix the file name).
+    ``` julia
+    using MAT
+    A = matread("roswell.mat")["A"]
     ```
-    
+    ```` 
+
+    ````{tab-item} MATLAB
+    :sync: matlab
+    Download [roswell.mat](roswell.mat) by clicking the link and saving (you may need to fix the file name).
+    ``` matlab
+    load roswell
+    ```
+    ```` 
+
+    ````{tab-item} Python
+    :sync: python
+    Download [roswell.mtx](roswell.mtx) by clicking the link and saving (you may need to fix the file name).
+    ``` python
+    import scipy.io as spio
+    A = spio.mmread("roswell.mtx")
+    ```
+    ```` 
+    `````
+
     The matrix catalogs the links between web sites related to the town of Roswell, NM, with $A_{ij}=1$ if and only if site $i$ links to site $j$.
   
     **(a)** Verify numerically that the matrix does not include any links from a site to itself.

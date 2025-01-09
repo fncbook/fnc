@@ -2,7 +2,7 @@
 
 julia_version = "1.11.2"
 manifest_format = "2.0"
-project_hash = "93687c9805a65091adf8b7183b7efade8c1dc506"
+project_hash = "79fc97f512895889698099efefc1da30380f9bca"
 
 [[deps.ADTypes]]
 git-tree-sha1 = "72af59f5b8f09faee36b4ec48e014a79210f2f4f"
@@ -687,7 +687,7 @@ version = "3.3.10+3"
 deps = ["LinearAlgebra", "OrdinaryDiffEq", "Polynomials", "SparseArrays"]
 path = "../FNCFunctions.jl"
 uuid = "ab0dfefa-d313-416d-841c-e73335ae36c8"
-version = "1.0.0"
+version = "0.1.0"
 
 [[deps.FastAlmostBandedMatrices]]
 deps = ["ArrayInterface", "ArrayLayouts", "BandedMatrices", "ConcreteStructs", "LazyArrays", "LinearAlgebra", "MatrixFactorizations", "PrecompileTools", "Reexport"]
@@ -1600,6 +1600,12 @@ weakdeps = ["BandedMatrices"]
     [deps.MatrixFactorizations.extensions]
     MatrixFactorizationsBandedMatricesExt = "BandedMatrices"
 
+[[deps.MatrixMarket]]
+deps = ["CodecZlib", "LinearAlgebra", "SparseArrays"]
+git-tree-sha1 = "da6fde5ea219bbe414f9d6f878ea9ab5d3476e64"
+uuid = "4d4711f2-db25-561a-b6b3-d35e7d4047d3"
+version = "0.5.2"
+
 [[deps.MaybeInplace]]
 deps = ["ArrayInterface", "LinearAlgebra", "MacroTools"]
 git-tree-sha1 = "54e2fdc38130c05b42be423e90da3bade29b74bd"
@@ -1668,6 +1674,12 @@ deps = ["Distances", "LineSearches", "LinearAlgebra", "NLSolversBase", "Printf",
 git-tree-sha1 = "019f12e9a1a7880459d0173c182e6a99365d7ac1"
 uuid = "2774e3e8-f4cf-5e23-947b-6d7e65073b56"
 version = "4.5.1"
+
+[[deps.NPZ]]
+deps = ["FileIO", "ZipFile"]
+git-tree-sha1 = "60a8e272fe0c5079363b28b0953831e2dd7b7e6f"
+uuid = "15e1cf62-19b3-5cfa-8e77-841668bca605"
+version = "0.4.3"
 
 [[deps.NaNMath]]
 deps = ["OpenLibm_jll"]
@@ -3019,6 +3031,12 @@ deps = ["Artifacts", "JLLWrappers", "Libdl", "libsodium_jll"]
 git-tree-sha1 = "f02ce8f0fda1ed40f4d0d59a2ad05e35e8ac9b0e"
 uuid = "8f1865be-045e-5c20-9c9f-bfbfb0764568"
 version = "4.3.5+3"
+
+[[deps.ZipFile]]
+deps = ["Libdl", "Printf", "Zlib_jll"]
+git-tree-sha1 = "f492b7fe1698e623024e873244f10d89c95c340a"
+uuid = "a5390f91-8eb1-5f08-bee0-b1d1ffed6cea"
+version = "0.10.1"
 
 [[deps.Zlib_jll]]
 deps = ["Libdl"]
