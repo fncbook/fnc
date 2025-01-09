@@ -220,9 +220,6 @@ A hermitian matrix with all negative eigenvalues is called **negative definite**
      0  &   2  &   0\\
     -2   &  0 &    1
     \end{bmatrix}$. Then compute its eigenvalues and guess what the exact field of values is.
-    ::::{only} solutions
-    It's the interval $[-1,3]$ (between the extreme eigenvalues).
-    ::::
 
 5. ✍ Let $\mathbf{A}=\displaystyle \begin{bmatrix} 3 & -2 \\ -2 & 0 \end{bmatrix}.$
   
