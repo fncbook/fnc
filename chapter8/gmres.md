@@ -211,7 +211,7 @@ There are other ways to avoid the growth in computational effort as the GMRES/Ar
     \end{bmatrix},
     $$ 
     
-    let $\mathbf{I}$ be a $100\times 100$ identity, and let $\mathbf{Z}$ be a $100\times 100$ matrix of zeros. Also let $\mathbf{b}$ be a $200\times 1$ vector of ones. You will use `IterativeSolvers.gmres` with restarts, as in {numref}`Demo {number} <demo-gmres-restart>`.
+    let $\mathbf{I}$ be a $100\times 100$ identity, and let $\mathbf{Z}$ be a $100\times 100$ matrix of zeros. Also let $\mathbf{b}$ be a $200\times 1$ vector of ones. You will use GMRES with restarts, as in {numref}`Demo {number} <demo-gmres-restart>` (i.e., not the book's version of `gmres`).
 
     **(a)** Let $\mathbf{A} = \begin{bmatrix} \mathbf{B} & \mathbf{I} \\ \mathbf{Z} & \mathbf{B} \end{bmatrix}.$ What are its eigenvalues (no computer required here)? Apply `gmres` with tolerance $10^{-10}$ for 100 iterations without restarts, and plot the residual convergence. 
     
@@ -223,4 +223,4 @@ There are other ways to avoid the growth in computational effort as the GMRES/Ar
     
     **(a)** For $n=10,15,20,25$, let $\mathbf{b}$ be the vector of $n^2$ ones and apply {numref}`Function {number} <function-gmres>` for 50 iterations. On one semi-log graph, plot the four convergence curves $\|\mathbf{r}_m\|/\|\mathbf{b}\|$.
 
-    **(b)** For the case $n=25$ use `surface(1:n,1:n,reshape(x,25,25))` to plot the solution, which should look physically plausible (though upside-down for a weighted membrane).
+    **(b)** For the case $n=25$ make a surface plot of `x` after reshaping it to a 25×25 matrix. It should look physically plausible (though upside-down for a weighted membrane).

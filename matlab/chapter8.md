@@ -78,7 +78,7 @@ sz = size(A);  n = sz(1);
 density = nnz(A) / prod(sz)
 ```
 
-The computer memory consumed by any variable can be discovered using `summarysize`. We can use it to compare the space needed for the sparse representation to its dense counterpart, that is, the space needed to store all the elements, whether zero or not.
+The computer memory consumed by any variable can be discovered using `whos`. We can use it to compare the space needed for the sparse representation to its dense counterpart, that is, the space needed to store all the elements, whether zero or not.
 
 ```{code-cell}
 F = full(A);
@@ -146,7 +146,7 @@ end
 ```{index} ! MATLAB; spdiags
 ```
 
-The `spdiagm` function creates a sparse matrix given its diagonal elements. The main or central diagonal is numbered zero, above and to the right of that is positive, and below and to the left is negative.
+The `spdiags` function creates a sparse matrix given its diagonal elements. The main or central diagonal is numbered zero, above and to the right of that is positive, and below and to the left is negative.
 
 ```{code-cell}
 n = 50;

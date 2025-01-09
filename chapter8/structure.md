@@ -15,7 +15,7 @@ Very large matrices cannot be stored all within primary memory of a computer unl
 ```{index} adjacency matrix
 ```
 
-Most graphs with real applications have many fewer edges than the maximum possible $n^2$ for $n$ nodes. Accordingly, their adjacency matrices have mostly zero elements and should be represented sparsely. Julia functions to deal with sparse matrices are found in the `SparseArrays` package in the standard library.
+Most graphs with real applications have many fewer edges than the maximum possible $n^2$ for $n$ nodes. Accordingly, their adjacency matrices have mostly zero elements and should be represented sparsely. 
 
 (demo-structure-sparse)=
 ::::{prf:example} Sparsity

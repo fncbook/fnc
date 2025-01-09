@@ -186,17 +186,17 @@ A hermitian matrix with all negative eigenvalues is called **negative definite**
       \alpha & \alpha \\ \alpha & -\alpha
     \end{bmatrix}, \quad\alpha=1/\sqrt{2}$
 
-2. ⌨ Determine whether each matrix is positive definite, negative definite, positive or negative semidefinite, or indefinite. 
+2. ⌨ The matrix names below are found in `MatrixDepot` for Julia, `gallery` for MATLAB, and `rogues` for Python. You will have to adjust the syntax accordingly. For each matrix, determine whether it is positive definite, negative definite, positive or negative semidefinite, or indefinite. 
 
-    **(a)** `matrixdepot("pei",5)-6I`
+    **(a)** `pei(5)` $ - 6 \mathbf{I}$
 
-    **(b)** `matrixdepot("hilb",8)-2I`
+    **(b)** `hilb(8)` $ - 2 \mathbf{I}$
 
-    **(c)** `matrixdepot("dingdong",20)`
+    **(c)** `dingdong(20)`
 
-    **(d)** `matrixdepot("lehmer",100)`
+    **(d)** `lehmer(100)`
 
-    **(e)** `matrixdepot("fiedler",200)`
+    **(e)** `fiedler(200)`
 
 3. ✍ Prove true, or give a counterexample: If $\mathbf{A}$ and $\mathbf{B}$ are hermitian matrices of the same size, then
    
@@ -211,9 +211,6 @@ A hermitian matrix with all negative eigenvalues is called **negative definite**
      0  &   2  &   0\\
     -2   &  0 &    1
     \end{bmatrix}$. Then compute its eigenvalues and guess what the exact field of values is.
-    ::::{only} solutions
-    It's the interval $[-1,3]$ (between the extreme eigenvalues).
-    ::::
 
 5. ✍ Let $\mathbf{A}=\displaystyle \begin{bmatrix} 3 & -2 \\ -2 & 0 \end{bmatrix}.$
   
@@ -229,6 +226,6 @@ A hermitian matrix with all negative eigenvalues is called **negative definite**
 
 7. ⌨ Thanks largely to {numref}`Theorem {number} <theorem-symm-eig-spectral>`, the eigenvalue problem for symmetric/hermitian matrices is easier than for general matrices. 
   
-    **(a)** Let $\mathbf{A}$ be a $1000\times 1000$ random real matrix, and let $\mathbf{S}=\mathbf{A}+\mathbf{A}^T$. Using `@elapsed`, time the `eigvals` function for $\mathbf{A}$ and then for $\mathbf{S}$. You should find that the computation for $\mathbf{S}$ is around an order of magnitude faster.
+    **(a)** Let $\mathbf{A}$ be a $1000\times 1000$ random real matrix, and let $\mathbf{S}=\mathbf{A}+\mathbf{A}^T$. Time finding the eigenvalues of $\mathbf{A}$ and then of $\mathbf{S}$. You should find that the computation for $\mathbf{S}$ is around an order of magnitude faster.
 
     **(b)** Perform the experiment from part (a) on $n\times n$ matrices for $n=200,300,\ldots,1600$. Plot running time as a function of $n$ for both matrices on a single log-log plot. Is the ratio of running times roughly constant, or does it grow with $n$?
