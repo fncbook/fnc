@@ -21,8 +21,19 @@ docs/site/
 # It records a fixed state of all packages used by the project. As such, it should not be
 # committed for packages, but should be committed for applications that require a static
 # environment.
-Manifest.toml
 _build
 
 .ipynb_checkpoints
 .vscode
+**/__pycache__
+python/**/dist
+python/Chapter*.ipynb
+**/gr-temp
+**/Untitled.ipynb
+python/pkg/build/*
+python/pkg/dist/*
+python/pkg/FNC.egg-info
+**/tmp.*
+*.mp4
+**/.DS_Store
+matlab/hello.png
