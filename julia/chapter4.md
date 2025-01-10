@@ -12,7 +12,8 @@ numbering:
 
 (function-newton-julia)=
 ``````{dropdown} Newton's method
-```{literalinclude} package/src/chapter04.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter04.jl
 :filename: newton.jl
 :start-after: # begin newton
 :end-before: # end newton
@@ -29,7 +30,8 @@ The `break` statement, seen here in line 25, causes an immediate exit from the i
 
 (function-secant-julia)=
 ``````{dropdown} Secant method
-```{literalinclude} package/src/chapter04.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter04.jl
 :filename: secant.jl
 :start-after: # begin secant
 :end-before: # end secant
@@ -44,7 +46,8 @@ Because we want to observe the convergence of the method, {numref}`Function {num
 
 (function-newtonsys-julia)=
 ``````{dropdown} Newton's method for systems
-```{literalinclude} package/src/chapter04.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter04.jl
 :filename: newtonsys.jl
 :start-after: # begin newtonsys
 :end-before: # end newtonsys
@@ -59,7 +62,8 @@ The output of {numref}`Function {number} <function-newtonsys>` is a vector of ve
 
 (function-fdjac-julia)=
 ``````{dropdown} Finite differences for Jacobian
-```{literalinclude} package/src/chapter04.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter04.jl
 :filename: fdjac.jl
 :start-after: # begin fdjac
 :end-before: # end fdjac
@@ -76,7 +80,8 @@ Note that a default value is given for the third argument `y₀`, and it refers 
 
 (function-levenberg-julia)=
 ``````{dropdown} Levenberg's method
-```{literalinclude} package/src/chapter04.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter04.jl
 :filename: levenberg.jl
 :start-after: # begin levenberg
 :end-before: # end levenberg
@@ -102,14 +107,12 @@ plot(J₃, 0, 20;
     title="Bessel function",
     xaxis=(L"x"),  yaxis=(L"J_3(x)"),  grid=:xy)
 ```
-::::{grid} 1 1 2 2
 From the graph we see roots near 6, 10, 13, 16, and 19. We use `nlsolve` from the `NLsolve` package to find these roots accurately. It uses vector variables, so we have to code accordingly.
-:::{card}
+```{tip}
+:class: dropdown
 Type `\omega` followed by <kbd>Tab</kbd> to get the character `ω`.
-
 The argument `ftol=1e-14` below is called a **keyword argument**. Here it sets a goal for the maximum value of $|f(x)|$.
-:::
-::::
+```
 
 ```{code-cell}
 using NLsolve
@@ -153,13 +156,12 @@ f(x) = (x - 1) * (x - 2);
 :::{index} ! Julia; splatting
 :::
 
-::::{grid} 1 1 2 2
 
 At the root $r=1$, we have $f'(r)=-1$. If the values of $f$ were perturbed at every point by a small amount of noise, we can imagine finding the root of the function drawn with a thick ribbon, giving a range of potential roots.
-:::{card}
+```{tip}
+:class: dropdown
 The syntax `interval...` is called **splatting** and means to insert all the individual elements of `interval` as a sequence.
-:::
-::::
+```
 
 
 ```{code-cell}
@@ -440,12 +442,11 @@ Here is the sequence of errors.
 ϵ = @. x - r
 ```
 
-::::{grid} 1 1 2 2
 Because the error reaches machine epsilon so rapidly, we're going to use extended precision to allow us to take a few more iterations. We'll take the last iteration as the most accurate root estimate.
-:::{card}
+```{tip}
+:class: dropdown
 A `BigFloat` uses 256 bits of precision, rather than 53 in `Float64`. But arithmetic is done by software emulation and is much slower.
-:::
-::::
+```
 
 ```{code-cell}
 x = [BigFloat(1); zeros(7)]
@@ -475,12 +476,11 @@ The clear convergence to 2 above constitutes good evidence of quadratic converge
 ```{index} ! Julia; enumerate
 ```
 
-::::{grid} 1 1 2 2
 Suppose we want to evaluate the inverse of the function $h(x)=e^x-x$. This means solving $y=e^x-x$ for $x$ when $y$ is given, which has no elementary form. If a value of $y$ is given numerically, though, we simply have a rootfinding problem for $f(x)=e^x-x-y$.
-:::{card}
+```{tip}
+:class: dropdown
 The `enumerate` function produces a pair of values for each iteration: a positional index and the corresponding contents.
-:::
-::::
+```
 
 ```{code-cell}
 g(x) = exp(x) - x
@@ -611,13 +611,12 @@ q = Polynomials.fit(x, y, 2)      # interpolating polynomial
 plot!(x -> q(x), interval..., l=:dash, label="interpolant")
 ```
 
-::::{grid} 1 1 2 2
 To do inverse interpolation, we swap the roles of $x$ and $y$ in the interpolation.
 :::
-:::{card}
+```{tip}
+:class: dropdown
 By giving two functions in the plot call, we get the parametric plot $(q(y),y)$ as a function of $y$.
-:::
-::::
+```
 
 ```{code-cell}
 plot(f, interval..., label="Function",
@@ -666,12 +665,11 @@ The convergence is probably superlinear at a rate of $\alpha=1.8$ or so.
 
 (demo-newtonsys-converge-julia)=
 ``````{dropdown} @demo-newtonsys-converge
-::::{grid} 1 1 2 2
 A system of nonlinear equations is defined by its residual and Jacobian.
-:::{card}
+```{tip}
+:class: dropdown
 Be careful when coding a Jacobian all in one statement. Spaces separate columns, so `x[3]-1` is not the same as `x[3] - 1`.
-:::
-::::
+```
 
 ```{code-cell}
 function func(x)
@@ -768,12 +766,11 @@ p = [1, 1];
 ```{index} ! Julia; @sprintf
 ```
 
-::::{grid} 1 1 2 2
 The function $\mathbf{g}(\mathbf{x}) - \mathbf{g}(\mathbf{p})$ obviously has a zero residual at $\mathbf{p}$. We'll make different perturbations of that function in order to create nonzero residuals.
-:::{card}
+```{tip}
+:class: dropdown
 `@sprintf` is a way to format numerical values as strings, patterned after the C function `printf`.
-:::
-::::
+```
 
 ```{code-cell}
 using Printf
@@ -812,12 +809,11 @@ plot!(s, ŵ, l=:dash, color=:black, label="perfect data")
 ```{index} ! Julia; destructuring
 ```
 
-::::{grid} 1 1 2 2
 The idea is to pretend that we know nothing of the origins of this data and use nonlinear least squares to find the parameters in the theoretical model function $v(s)$. In {eq}`nlsq-misfit`, the $s$ variable plays the role of $t$, and $v$ plays the role of $g$.
-:::{card}
+```{tip}
+:class: dropdown
 Putting comma-separated values on the left of an assignment will **destructure** the right-hand side, drawing individual assignments from entries of a vector, for example.
-:::
-::::
+```
 
 ```{code-cell}
 function misfit(x)

@@ -12,7 +12,8 @@ numbering:
 
 (function-poweriter-matlab)=
 ``````{dropdown} Power iteration
-```{literalinclude} ../matlab/fnc/poweriter.m
+:open:
+```{literalinclude} FNC-matlab/poweriter.m
 :language: matlab
 :linenos: true
 ```
@@ -20,7 +21,8 @@ numbering:
 
 (function-inviter-matlab)=
 ``````{dropdown} Inverse iteration
-```{literalinclude} ../matlab/fnc/inviter.m
+:open:
+```{literalinclude} FNC-matlab/inviter.m
 :language: matlab
 :linenos: true
 ```
@@ -28,7 +30,8 @@ numbering:
 
 (function-arnoldi-matlab)=
 ``````{dropdown} Arnoldi iteration
-```{literalinclude} ../matlab/fnc/arnoldi.m
+:open:
+```{literalinclude} FNC-matlab/arnoldi.m
 :language: matlab
 :linenos: true
 ```
@@ -36,7 +39,8 @@ numbering:
 
 (function-gmres-matlab)=
 ``````{dropdown} GMRES
-```{literalinclude} ../matlab/fnc/arngmres.m
+:open:
+```{literalinclude} FNC-matlab/arngmres.m
 :language: matlab
 :linenos: true
 ```
@@ -46,8 +50,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -64,19 +67,18 @@ a = whos('A')
 
 ```{index} ! MATLAB; nnz
 ```
-::::{grid} 1 1 2 2
 We may define the density of $\mathbf{A}$ as the number of nonzeros divided by the total number of entries.
-:::{card}
+```{tip}
+:class: dropdown
 Use `nnz` to count the number of nonzeros in a sparse matrix.
-:::
-::::
+```
 
 ```{code-cell}
 sz = size(A);  n = sz(1);
 density = nnz(A) / prod(sz)
 ```
 
-The computer memory consumed by any variable can be discovered using `summarysize`. We can use it to compare the space needed for the sparse representation to its dense counterpart, that is, the space needed to store all the elements, whether zero or not.
+The computer memory consumed by any variable can be discovered using `whos`. We can use it to compare the space needed for the sparse representation to its dense counterpart, that is, the space needed to store all the elements, whether zero or not.
 
 ```{code-cell}
 F = full(A);
@@ -144,7 +146,7 @@ end
 ```{index} ! MATLAB; spdiags
 ```
 
-The `spdiagm` function creates a sparse matrix given its diagonal elements. The main or central diagonal is numbered zero, above and to the right of that is positive, and below and to the left is negative.
+The `spdiags` function creates a sparse matrix given its diagonal elements. The main or central diagonal is numbered zero, above and to the right of that is positive, and below and to the left is negative.
 
 ```{code-cell}
 n = 50;
@@ -159,12 +161,11 @@ full(A(1:7, 1:7))
 ```{index} ! MATLAB; sparse
 ```
 
-::::{grid} 1 1 2 2
 Without pivoting, the LU factors have the same lower and upper bandwidth as the original matrix.
-:::{card}
+```{tip}
+:class: dropdown
 The `sparse` function converts any matrix to sparse form. But it's usually better to construct a sparse matrix directly, as the standard form might not fit in memory.
-:::
-::::
+```
 
 
 
@@ -358,11 +359,11 @@ title('Convergence of inverse iteration')
 xlabel('k'), ylabel(('|\lambda_j - \beta_k|'));
 ```
 
-::::{grid} 1 1 2 2
 Let's reorder the eigenvalues to enforce {eq}`shiftorder`.
-:::{card}
+```{tip}
+:class: dropdown
 The second output of `sort` returns the index permutation needed to sort the given vector.
-::::
+```
 
 ```{code-cell}
 [~, idx] = sort(abs(ev - s));
@@ -526,7 +527,7 @@ b = rand(100, 1);
 Instead of building the Krylov matrices, we use the Arnoldi iteration to generate equivalent orthonormal vectors.
 
 ```{code-cell}
-[Q, H] = arnoldi(A,b,60);
+[Q, H] = arnoldi(A, b, 60);
 ```
 
 The Arnoldi bases are used to solve the least-squares problems defining the GMRES iterates.
@@ -534,7 +535,7 @@ The Arnoldi bases are used to solve the least-squares problems defining the GMRE
 ```{code-cell}
 resid = norm(b);
 for m = 1:60
-    s = [norm(b); zeros(m)];
+    s = [norm(b); zeros(m, 1)];
     z = H(1:m+1, 1:m) \ s;
     x = Q(:, 1:m) * z;
     resid = [resid, norm(b - A * x)];
@@ -552,7 +553,7 @@ axis tight, title(('Residual for GMRES'));
 ``````
 
 (demo-gmres-restart-matlab)=
-``````{dropdown} 
+``````{dropdown} @demo-gmres-restart
 The following experiments are based on a matrix resulting from discretization of a partial differential equation.
 
 ```{code-cell}

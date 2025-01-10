@@ -12,7 +12,8 @@ numbering:
 
 (function-diffper-python)=
 ``````{dropdown} Differentiation matrices for periodic end conditions
-```{literalinclude} pkg/FNC/FNC11.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter11.py
 :filename: diffper.py
 :start-at: def diffper
 :end-at: return x, Dx, Dxx
@@ -23,7 +24,8 @@ numbering:
 
 (function-parabolic-python)=
 ``````{dropdown} Solution of parabolic PDEs by the method of lines
-```{literalinclude} pkg/FNC/FNC11.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter11.py
 :filename: parabolic.py
 :start-at: def parabolic
 :end-at: return x, lambda t
@@ -35,6 +37,7 @@ numbering:
 ## Examples
 
 ```{code-cell}
+:tags: remove-cell
 exec(open("FNC_init.py").read())
 ```
 
@@ -56,10 +59,10 @@ We discretize space and time.
 ```{code-cell}
 m = 200
 h = Smax / m
-x = h * arange(m + 1)
+x = h * arange(m+1)
 n = 1000
 tau = T / n
-t = tau * arange(n + 1)
+t = tau * arange(n+1)
 lamb, mu = tau / h**2, tau / h
 ```
 
@@ -94,8 +97,8 @@ for j, col in enumerate(select_times):
     plot(x, V[:, col], label=f"t={show_times[j]:.1f}")
 
 legend()
-title("Black-Scholes solution")
-xlabel("stock price"),  ylabel("option value");
+xlabel("stock price"),  ylabel("option value")
+title("Black-Scholes solution");
 ```
 
 ```{index} ! Python; animation
@@ -163,9 +166,9 @@ for j, col in enumerate(select_times):
     plot(x, V[:, col], label=f"t={show_times[j]:.1f}")
 
 legend()
-title("Black-Scholes solution")
 xlabel("stock price")
 ylim([0, 6]);  ylabel("option value")
+title("Black-Scholes solution");
 ```
 
 ```{code-cell}
@@ -254,7 +257,7 @@ def animate(j):
 
 anim = animation.FuncAnimation(
     fig, animate, frames=range(0, 100), blit=True)
-anim.save("figures/diffusionFE.mp4", fps=30)
+anim.save("figures/diffusionFE.mp4", fps=24)
 close()
 ```
 
@@ -264,7 +267,7 @@ The growth in norm is exponential in time.
 
 ```{code-cell}
 M = abs(U).max(axis=0)  # max in each column
-semilogy(t, M)
+semilogy(t[:500], M[:500])
 xlabel("$t$");  ylabel("$\\max_x |u(x,t)|$")
 title("Nonphysical growth");
 ```
@@ -471,7 +474,7 @@ for i in range(3):
 ax.set_xlabel("Re $\\lambda$")
 ax.set_ylabel("Im $\\lambda$")
 ax.set_zlabel("$t$")
-ax.set_title("Oregonator eigenvalues")
+ax.set_title("Oregonator eigenvalues");
 ```
 
 You can see that there is one eigenvalue that ranges over a wide portion of the negative real axis and dominates stability considerations.
@@ -510,7 +513,7 @@ plot(real(zeta), imag(zeta), ".")
 axis("equal")
 xlabel("Re $\\zeta$")
 ylabel("Im $\\zeta$")
-title("Oregonator stability")
+title("Oregonator stability");
 ```
 
 Roughly speaking, the $\zeta$ values stay within or close to the RK2 stability region in {numref}`figure-stabreg_bd_rk`. Momentary departures from the region are possible, but time stepping repeatedly in that situation would cause instability. 

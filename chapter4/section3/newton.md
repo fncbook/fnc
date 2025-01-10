@@ -164,11 +164,6 @@ Recall that linear convergence is identifiable by trending toward a straight lin
 ```````
     
 
-
-
-
-
-
 ```{index} roots; multiplicity of
 ```
 

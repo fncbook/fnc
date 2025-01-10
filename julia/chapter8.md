@@ -12,7 +12,8 @@ numbering:
 
 (function-poweriter-julia)=
 ``````{dropdown} Power iteration
-```{literalinclude} package/src/chapter08.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter08.jl
 :filename: poweriter.jl
 :start-after: # begin poweriter
 :end-before: # end poweriter
@@ -23,7 +24,8 @@ numbering:
 
 (function-inviter-julia)=
 ``````{dropdown} Inverse iteration
-```{literalinclude} package/src/chapter08.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter08.jl
 :filename: inviter.jl
 :start-after: # begin inviter
 :end-before: # end inviter
@@ -34,7 +36,8 @@ numbering:
 
 (function-arnoldi-julia)=
 ``````{dropdown} Arnoldi iteration
-```{literalinclude} package/src/chapter08.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter08.jl
 :filename: arnoldi.jl
 :start-after: # begin arnoldi
 :end-before: # end arnoldi
@@ -49,7 +52,8 @@ The loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}
 
 (function-gmres-julia)=
 ``````{dropdown} GMRES
-```{literalinclude} package/src/chapter08.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter08.jl
 :filename: gmres.jl
 :start-after: # begin gmres
 :end-before: # end gmres
@@ -70,6 +74,11 @@ include("FNC_init.jl")
 
 (demo-structure-sparse-julia)=
 ``````{dropdown} @demo-structure-sparse
+
+```{tip}
+Julia functions to deal with sparse matrices are found in the `SparseArrays` package in the standard library.
+```
+
 Here we load the adjacency matrix of a graph with 2790 nodes. Each node is a web page referring to Roswell, NM, and the edges represent links between web pages. (Credit goes to Panayiotis Tsaparas and the University of Toronto for making this data public.)
 
 ```{code-cell}
@@ -79,12 +88,11 @@ using SparseArrays, JLD2
 
 ```{index} ! Julia; nnz
 ```
-::::{grid} 1 1 2 2
 We may define the density of $\mathbf{A}$ as the number of nonzeros divided by the total number of entries.
-:::{card}
+```{tip}
+:class: dropdown
 Use `nnz` to count the number of nonzeros in a sparse matrix.
-:::
-::::
+```
 
 ```{code-cell}
 m, n = size(A)
@@ -394,12 +402,11 @@ The observed linear convergence rate is found from the data.
 ```{index} ! Julia; sortperm
 ```
 
-::::{grid} 1 1 2 2
 We reorder the eigenvalues to enforce {eq}`shiftorder`.
-:::{card}
+```{tip}
+:class: dropdown
 The `sortperm` function returns the index permutation needed to sort the given vector, rather than the sorted vector itself.
-:::
-::::
+```
 
 ```{code-cell}
 λ = λ[sortperm(abs.(λ .- s))]
@@ -598,12 +605,11 @@ spy(A, color=:blues)
 ```{index} ! Julia; gmres
 ```
 
-::::{grid} 1 1 2 2
 We compare unrestarted GMRES with three different thresholds for restarting. Here we are using `gmres` from the `IterativeSolvers` package, since our simple implementation does not offer restarting.
-:::{card}
+```{tip}
+:class: dropdown
 The syntax `f(x;foo)` is shorthand for `f(x,foo=foo)`.
-:::
-::::
+```
 
 ```{code-cell}
 using IterativeSolvers
@@ -799,12 +805,11 @@ using LinearMaps
 T = LinearMap(x -> vec(blur(unvec(x))), m * n);
 ```
 
-::::{grid} 1 1 2 2
 The blurring operators are symmetric, so we apply `minres` to the composite blurring transformation `T`.
-:::{card}
+```{tip}
+:class: dropdown
 The function `clamp01` in `Images` restricts values to be in the interval $[0,1]$.
-:::
-::::
+```
 
 ```{code-cell}
 using IterativeSolvers

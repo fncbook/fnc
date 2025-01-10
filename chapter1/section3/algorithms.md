@@ -50,69 +50,21 @@ p(x) &= c_1 + c_2 x + \cdots + c_n x^{n-1} \\
 :sync: julia
 :::{embed} #function-horner-julia
 :::
-
-:::{admonition} About the code
-:class: dropdown
-The `length` function in line 8 returns the number of elements in vector `c`. Here, that value is one greater than the degree of the polynomial. The syntax `c[i]` accesses element `i` of a vector `c`. In Julia, the first index of a vector is 1 by default, so in line 9, the last element of `c` is accessed.
-
-The `for` / `end` construct in lines 10–12 is a *loop*. The local variable `k` is assigned the value `n-1`, then the loop body is executed, then `k` is assigned `n-2`, the body is executed again, and so on until finally `k` is set to 1 and the body is executed for the last time.
-
-The `return` statement in line 13 terminates the function and specifies one or more values to be returned to the caller.
-:::
-
-```{index} ! Julia; length
-```
-
-```{index} ! Julia; for
-```
-
-```` 
+````
 
 ````{tab-item} MATLAB
 :sync: matlab
-:::{embed} #function-horner-julia
+:::{embed} #function-horner-matlab
 :::
-
-:::{admonition} About the code
-:class: dropdown
-The `length` function in line 9 returns the number of elements in vector `c`. Here, that value is one greater than the degree of the polynomial. The syntax `c(i)` accesses element `i` of a vector `c`. In MATLAB, the first index of a vector is 1 by default.
-
-The `for` / `end` construct in lines 11–13 is a *loop*. The variable `k` is assigned the value `n-1`, then the loop body is executed, then `k` is assigned `n-2`, the body is executed again, and so on until finally `k` is set to 1 and the body is executed for the last time.
-
-The final value assigned to `y` is returned to the caller.
-:::
-
-```{index} ! MATLAB; length
-```
-
-```{index} ! MATLAB; for
-```
-```` 
-
+````
 
 ````{tab-item} Python
 :sync: python
 :::{embed} #function-horner-python
 :::
-
-:::{admonition} About the code
-:class: dropdown
-The `len` function in line 8 returns the number of elements in list or vector `c`. Here, that value is one greater than the degree of the polynomial. The syntax `c[i]` accesses element `i` of a list or NumPy vector `c`. In both cases, the first index of a vector is 0.
-
-The `for` construct in lines 10–11 is a *loop*. The local variable `k` is assigned the value `1`, then the loop body is executed, then `k` is assigned `2`, the body is executed again, and so on until finally `k` is set to `n-1` and the body is executed for the last time.
-
-The `return` statement in line 12 terminates the function and specifies one or more values to be returned to the caller. 
-:::
-
-```{index} ! Python; len
-```
-
 ````
 `````
 ``````
-
-```{index} Python; length
-```
 
 (demo-algorithms-horner)=
 ```````{prf:example}
@@ -147,10 +99,6 @@ The `return` statement in line 12 terminates the function and specifies one or m
 ```````
     
 
-
-The quoted lines at the beginning of {numref}`Function {number} <function-horner>` are a documentation string. The function itself starts off with the keyword `function`, followed by a list of its input arguments. The first of these is presumed to be a vector, whose length can be obtained and whose individual components are accessed through square bracket notation. After the computation is finished, the `return` keyword indicates which value or values are to be returned to the caller.
-
-The `Polynomials` package for Julia provides its own fast methods for polynomial evaluation that supersede our simple {numref}`Function {number} <function-horner>` function. This will be the case for all the codes in this book because the problems we study are well-known and important. In a more practical setting, you would take implementations of basic methods for granted and build on top of them.
 
 ## Writing your own functions
 
@@ -292,7 +240,7 @@ c = 2;  print(mycfun(3))   # exp(2*sin(3))
 There's a lot more to be said about functions in Python, but this is enough to get started.
 
 ```` 
-``````
+`````
 
 
 ## Exercises

@@ -12,7 +12,8 @@ numbering:
 
 (function-tensorgrid-julia)=
 ``````{dropdown} Create a tensor-product grid
-```{literalinclude} package/src/chapter13.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter13.jl
 :filename: tensorgrid.jl
 :linenos: true
 :language: julia
@@ -23,7 +24,8 @@ numbering:
 
 (function-poissonfd-julia)=
 ``````{dropdown} Solution of Poisson's equation by finite differences
-```{literalinclude} package/src/chapter13.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter13.jl
 :filename: poissonfd.jl
 :linenos: true
 :language: julia
@@ -34,7 +36,8 @@ numbering:
 
 (function-elliptic-julia)=
 ``````{dropdown} Solution of elliptic PDE by Chebyshev collocation
-```{literalinclude} package/src/chapter13.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter13.jl
 :filename: elliptic.jl
 :linenos: true
 :language: julia
@@ -74,12 +77,11 @@ f = (x, y) -> cos(π * x * y - y)
 F = [f(x, y) for x in x, y in y]
 ```
 
-::::{grid} 1 1 2 2
 We can make a nice plot of the function by first choosing a much finer grid. However, the contour and surface plotting functions expect the *transpose* of mtx($f$).
-:::{card}
+```{tip}
+:class: dropdown
 To emphasize departures from a zero level, use a colormap such as `redsblues`, and use `clims` to set balanced color differences.
-:::
-::::
+```
 
 ```{code-cell}
 m, n = 80, 60
@@ -228,12 +230,11 @@ IVP = ODEProblem(du_dt, vec(U₀), (0, 0.2), 0.1)
 sol = solve(IVP, Rodas4P());
 ```
 
-::::{grid} 1 1 2 2
 Here is an animation of the solution.
-:::{card}
+```{tip}
+:class: dropdown
 Here `clims` are set so that colors remain at fixed values throughout the animation.
-:::
-::::
+```
 
 ```{code-cell}
 anim = @animate for t in range(0, 0.2, 81)

@@ -12,7 +12,8 @@ numbering:
 
 (function-shoot-matlab)=
 ``````{dropdown} Shooting method for a two-point boundary-value problem
-```{literalinclude} fnc/shoot.m
+:open:
+```{literalinclude} FNC-matlab/shoot.m
 :language: matlab
 :linenos: true
 ```
@@ -20,7 +21,8 @@ numbering:
 
 (function-diffmats2-matlab)=
 ``````{dropdown} Second-order differentiation matrices
-```{literalinclude} fnc/diffmat2.m
+:open:
+```{literalinclude} FNC-matlab/diffmat2.m
 :language: matlab
 :linenos: true
 ```
@@ -28,7 +30,8 @@ numbering:
 
 (function-diffcheb-matlab)=
 ``````{dropdown} Chebyshev differentiation matrices
-```{literalinclude} fnc/diffcheb.m
+:open:
+```{literalinclude} FNC-matlab/diffcheb.m
 :language: matlab
 :linenos: true
 ```
@@ -36,7 +39,8 @@ numbering:
 
 (function-bvplin-matlab)=
 ``````{dropdown} Solution of a linear boundary-value problem
-```{literalinclude} fnc/bvplin.m
+:open:
+```{literalinclude} FNC-matlab/bvplin.m
 :language: matlab
 :linenos: true
 ```
@@ -44,7 +48,8 @@ numbering:
 
 (function-bvp-matlab)=
 ``````{dropdown} Solution of a nonlinear boundary-value problem
-```{literalinclude} fnc/bvp.m
+:open:
+```{literalinclude} FNC-matlab/bvp.m
 :language: matlab
 :linenos: true
 ```
@@ -52,7 +57,8 @@ numbering:
 
 (function-fem-matlab)=
 ``````{dropdown} Piecewise linear finite elements for a linear BVP
-```{literalinclude} fnc/fem.m
+:open:
+```{literalinclude} FNC-matlab/fem.m
 :language: matlab
 :linenos: true
 ```
@@ -62,8 +68,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -219,8 +224,8 @@ f = @(x) x + exp(sin(4*x));
 For reference, here are the exact first and second derivatives.
 
 ```{code-cell}
-dfdx = @(x) 1 + 4 * exp(sin(4*x)) .* cos(4*x);
-d2fdx2 = @(x) 4 * exp(sin(4*x)) .* (4*cos(4*x).^2 - 4*sin(4*x));
+df_dx = @(x) 1 + 4 * exp(sin(4*x)) .* cos(4*x);
+d2f_dx2 = @(x) 4 * exp(sin(4*x)) .* (4*cos(4*x).^2 - 4*sin(4*x));
 ```
 
 We discretize on equally spaced nodes and evaluate $f$ at the nodes.
@@ -241,11 +246,11 @@ The results show poor accuracy for this small value of $n$.
 
 ```{code-cell}
 clf,  subplot(2, 1, 1)
-fplot(dfdx, [-1, 1]),  hold on
+fplot(df_dx, [-1, 1]),  hold on
 plot(t, yx, 'ko')
 xlabel('x'),  ylabel('f''(x)')
 subplot(2, 1, 2)
-fplot(d2fdx2, [-1, 1]),  hold on
+fplot(d2f_dx2, [-1, 1]),  hold on
 plot(t, yxx, 'ko')
 xlabel('x'),  ylabel('f''''(x)')
 ```
@@ -258,8 +263,8 @@ err = zeros(length(n), 2);
 for k = 1:length(n)
     [t, Dx, Dxx] = diffmat2(n(k), [-1, 1]);
     y = f(t);
-    err(k, 1) = norm(dfdx(t) - Dx * y, Inf);
-    err(k, 2) = norm(d2fdx2(t) - Dxx * y, Inf);
+    err(k, 1) = norm(df_dx(t) - Dx * y, Inf);
+    err(k, 2) = norm(d2f_dx2(t) - Dxx * y, Inf);
 end
 clf
 loglog(n, err, 'o-'), hold on
@@ -284,8 +289,8 @@ We again test the convergence rate.
 
 ```{code-cell}
 f = @(x) x + exp(sin(4*x));
-dfdx = @(x) 1 + 4 * exp(sin(4*x)) .* cos(4*x);
-d2fdx2 = @(x) 4 * exp(sin(4*x)) .* (4*cos(4*x).^2 - 4*sin(4*x));
+df_dx = @(x) 1 + 4 * exp(sin(4*x)) .* cos(4*x);
+d2f_dx2 = @(x) 4 * exp(sin(4*x)) .* (4*cos(4*x).^2 - 4*sin(4*x));
 
 ```
 
@@ -295,8 +300,8 @@ err = zeros(length(n), 2);
 for k = 1:length(n)
     [t, Dx, Dxx] = diffcheb(n(k), [-1, 1]);
     y = f(t);
-    err(k, 1) = norm(dfdx(t) - Dx * y, Inf);
-    err(k, 2) = norm(d2fdx2(t) - Dxx * y, Inf);
+    err(k, 1) = norm(df_dx(t) - Dx * y, Inf);
+    err(k, 2) = norm(d2f_dx2(t) - Dxx * y, Inf);
 end
 ```
 
@@ -532,4 +537,3 @@ xlabel('x'),  ylabel('u')
 title('Solution by finite elements')
 ```
 ``````
-

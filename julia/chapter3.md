@@ -12,7 +12,8 @@ numbering:
 
 (function-lsnormal-julia)=
 ``````{dropdown} Solution of least squares by the normal equations
-```{literalinclude} package/src/chapter03.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter03.jl
 :filename: lsnormal.jl
 :language: julia
 :start-after: # begin lsnormal
@@ -28,7 +29,8 @@ The syntax on line 9 is a *field reference* to extract the matrix we want from t
 
 (function-lsqrfact-julia)=
 ``````{dropdown} Solution of least squares by QR factorization
-```{literalinclude} package/src/chapter03.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter03.jl
 :filename: lsqrfact.jl
 :language: julia
 :start-after: # begin lsqrfact
@@ -39,7 +41,8 @@ The syntax on line 9 is a *field reference* to extract the matrix we want from t
 
 (function-qrfact-julia)=
 ``````{dropdown} QR factorization by Householder reflections
-```{literalinclude} package/src/chapter03.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter03.jl
 :filename: qrfact.jl
 :language: julia
 :start-after: # begin qrfact
@@ -82,12 +85,11 @@ c = V \ temp
 ```{index} Julia; plotting functions
 ```
 
-::::{grid} 1 1 2 2
 The coefficients in vector `c` are used to create a polynomial. Then we create a function that evaluates the polynomial after changing the time variable as we did for the Vandermonde matrix.
-:::{card}
+```{tip}
+:class: dropdown
 If you `plot` a function, then the points are chosen automatically to make a smooth curve.
-:::
-::::
+```
 
 ```{code-cell}
 using Polynomials
@@ -114,12 +116,11 @@ temp = [ -0.0480, -0.0180, -0.0360, -0.0120, -0.0040,
 ```{index} Julia; \\
 ```
 
-::::{grid} 1 1 2 2
 The standard best-fit line results from using a linear polynomial that meets the least-squares criterion.
-:::{card}
+```{tip}
+:class: dropdown
 Backslash solves overdetermined linear systems in a least-squares sense.
-:::
-::::
+```
 
 ```{code-cell}
 using Polynomials
@@ -143,12 +144,11 @@ V = [ t[i]^j for i in 1:length(t), j in 0:3 ]
 @show size(V);
 ```
 
-::::{grid} 1 1 2 2
 Now we solve the new least-squares problem to redefine the fitting polynomial.
-:::{card}
+```{tip}
+:class: dropdown
 The definition of `f` above is in terms of `p`. When `p` is changed, then `f` calls the new version.
-:::
-::::
+```
 
 ```{code-cell}
 p = Polynomial( V \ temp )
@@ -207,12 +207,11 @@ plot!(k, a * k.^b, l=:dash, label="power-law fit")
 (demo-normaleqns-instab-julia)=
 ``````{dropdown} @demo-normaleqns-instab
 
-::::{grid} 1 1 2 2
 Because the functions $\sin^2(t)$, $\cos^2(t)$, and $1$ are linearly dependent, we should find that the following matrix is somewhat ill-conditioned.
-:::{card}
+```{tip}
+:class: dropdown
 The local variable scoping rule for loops applies to comprehensions as well.
-:::
-::::
+```
 
 ```{code-cell}
 t = range(0, 3, 400)
@@ -268,12 +267,11 @@ Q
 R
 ```
 
-::::{grid} 1 1 2 2
 If you look carefully, you see that we seemingly got a full $\mathbf{Q}$ but a thin $\mathbf{R}$. However, the $\mathbf{Q}$ above is not a standard matrix type. If you convert it to a true matrix, then it reverts to the thin form.
-:::{card}
+```{tip}
+:class: dropdown
 To enter the accented character `Q̂`, type `Q\hat` followed by <kbd>Tab</kbd>.
-:::
-::::
+```
 
 ```{code-cell}
 Q̂ = Matrix(Q)
@@ -317,12 +315,11 @@ observed_error = norm(FNC.lsqrfact(A, b) - x) / norm(x);
 (demo-house-qr-julia)=
 ``````{dropdown} @demo-house-qr
 
-::::{grid} 1 1 2 2
 We will use Householder reflections to produce a QR factorization of a random matrix.
-:::{card}
+```{tip}
+:class: dropdown
 The `rand` function can select randomly from within the interval $[0,1]$, or from a vector or range that you specify.
-:::
-::::
+```
 
 ```{code-cell}
 A = rand(float(1:9), 6, 4)
@@ -332,13 +329,12 @@ m,n = size(A)
 ```{index} Julia; normalize, ! Julia; I
 ```
 
-::::{grid} 1 1 2 2
 Our first step is to introduce zeros below the diagonal in column 1 by using {eq}`hhvector` and {eq}`hhreflect`. 
 :::
-:::{card}
+```{tip}
+:class: dropdown
 `I` can stand for an identity matrix of any size, inferred from the context when needed.
-:::
-::::
+```
 
 ```{code-cell}
 z = A[:, 1];

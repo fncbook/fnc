@@ -43,10 +43,7 @@ Given that matrix-vector multiplication is fast for sparse matrices, let's see w
 ```````
     
 
-
-
-
-There was a little cheating in {numref}`Demo %s <demo-power-one>` to make the story come out neatly (specifically, the line `A=A./sum(A,dims=1)`). But it illustrates an important general fact that we investigate now.
+There was a little cheating in {numref}`Demo %s <demo-power-one>` to make the story come out neatly (specifically, the normalization step after creating a random matrix). But it illustrates an important general fact that we investigate now.
 
 ## Dominant eigenvalue
 
@@ -287,6 +284,6 @@ The practical utility of {eq}`poweriterconv` is limited because if we knew $\lam
 
 4. ⌨ Copy the instructions from [Exercise 8.1.5](#problem-structure-actorsmat) to obtain a large, sparse matrix $\mathbf{A}$. Use {numref}`Function {number} <function-poweriter>` to find the leading eigenvalue of $\mathbf{A}^T\mathbf{A}$ to at least six significant digits.
 
-5. ⌨ For symmetric matrices, the Rayleigh quotient {eq}`rayleigh` converts an $O(\epsilon)$ eigenvector estimate into an $O(\epsilon^2)$ eigenvalue estimate. Duplicate {numref}`Function {number} <function-poweriter>` and rename it to `powersym`. Modify the new function to use the Rayleigh quotient to produce the entries of `β`. Your function should not introduce any additional matrix-vector multiplications. Apply the original {numref}`Function {number} <function-poweriter>` and the new `powersym` on the matrix `matrixdepot("fiedler",100)`, plotting the convergence curves on one graph.
+5. ⌨ For symmetric matrices, the Rayleigh quotient {eq}`rayleigh` converts an $O(\epsilon)$ eigenvector estimate into an $O(\epsilon^2)$ eigenvalue estimate. Duplicate {numref}`Function {number} <function-poweriter>` and rename it to `powersym`. Modify the new function to use the Rayleigh quotient to produce the entries of `β` or `beta`. Your function should not introduce any additional matrix-vector multiplications. Apply the original {numref}`Function {number} <function-poweriter>` and the new `powersym` on the `MatrixDepot`/`gallery`/`rogues` matrix `fiedler(100)`, plotting the convergence curves on one graph.
 
 

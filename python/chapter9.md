@@ -12,7 +12,8 @@ numbering:
 
 (function-polyinterp-python)=
 ``````{dropdown} Barycentric polynomial interpolation
-```{literalinclude} ../python/pkg/FNC/FNC09.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter09.py
 :filename: polyinterp.py
 :start-at: def polyinterp
 :end-at: return np.vectorize(p)
@@ -30,7 +31,8 @@ The return value is a function that evaluates the polynomial interpolant. Within
 
 (function-triginterp-python)=
 ``````{dropdown} Trigonometric interpolation
-```{literalinclude} ../python/pkg/FNC/FNC09.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter09.py
 :filename: triginterp.py
 :start-at: def triginterp
 :end-at: return np.vectorize(p)
@@ -46,7 +48,8 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 
 (function-ccint-python)=
 ``````{dropdown} Clenshaw–Curtis integration
-```{literalinclude} ../python/pkg/FNC/FNC09.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter09.py
 :filename: ccint.py
 :start-at: def ccint
 :end-at: return I, x
@@ -57,7 +60,8 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 
 (function-glint-python)=
 ``````{dropdown} Gauss–Legendre integration
-```{literalinclude} ../python/pkg/FNC/FNC09.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter09.py
 :filename: glint.py
 :start-at: def glint
 :end-at: return I, x
@@ -68,7 +72,8 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 
 (function-intinf-python)=
 ``````{dropdown} Integration over $(-\infty,\infty)$
-```{literalinclude} ../python/pkg/FNC/FNC09.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter09.py
 :filename: intinf.py
 :start-at: def intinf
 :end-at: return I, x
@@ -84,7 +89,8 @@ The test `isinf(x(M))` in line 17 checks whether $x(M)$ is larger than the maxim
 
 (function-intsing-python)=
 ``````{dropdown} Integration with endpoint singularities
-```{literalinclude} ../python/pkg/FNC/FNC09.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter09.py
 :filename: intsing.py
 :start-at: def intsing
 :end-at: return I, x
@@ -101,6 +107,7 @@ The test `iszero(x(M))` in line 17 checks whether $x(M)$ is less than the smalle
 ## Examples
 
 ```{code-cell}
+:tags: remove-cell
 exec(open("FNC_init.py").read())
 ```
 
@@ -451,12 +458,11 @@ print(results)
 
 (demo-trig-interp-python)=
 ``````{dropdown} @demo-trig-interp
-::::{grid} 1 1 2 2
 We will get a cardinal function without using an explicit formula, just by passing data that is 1 at one node and 0 at the others.
-:::{card}
+```{tip}
+:class: dropdown
 The operator `÷`, typed as `\div` then <kbd>Tab</kbd>, returns the quotient without remainder of two integers.
-:::
-::::
+```
 
 ```{code-cell}
 N = 7
@@ -565,12 +571,16 @@ The Fourier coefficients of smooth functions decay exponentially in magnitude as
 ```{code-cell}
 f = lambda t: pi * sqrt(cos(pi * t) ** 2 + sin(pi * t) ** 2 / 4)
 N = arange(4, 48, 6)
-results = PrettyTable(["N", "perimeter estimate"])
+perim = zeros(N.size)
 for k in range(N.size):
     h = 2 / N[k]
     t = h * arange(N[k]) - 1
-    results.add_row([N[k], h * sum(f(t))])
-
+    perim[k] = h * sum(f(t))
+err = abs(perim - perim[-1])    # use the last value as reference
+results = PrettyTable()
+results.add_column("N", N)
+results.add_column("perimeter", perim)
+results.add_column("error", err)
 results
 ```
 The approximations gain about one digit of accuracy for each constant increment of $n$, which is consistent with spectral convergence.
@@ -735,4 +745,3 @@ legend(["direct", "double exponential", "4th-order"], loc="lower left");
 
 As in {numref}`Demo {number} <demo-improper-intinf>`, the double exponential method is more accurate than direct integration by a few orders of magnitude. Equivalently, the same accuracy can be reached with many fewer nodes.
 ``````
-

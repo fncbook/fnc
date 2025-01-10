@@ -1,5 +1,5 @@
 (chapter-globalapprox)=
-# Global function approximation
+# 9. Global function approximation
 
 ```{index} Han Solo, The Empire Strikes Back
 ```

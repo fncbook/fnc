@@ -12,13 +12,33 @@ numbering:
 
 (function-horner-julia)=
 `````{dropdown} **Horner's algorithm for evaluating a polynomial**
-```{literalinclude} package/src/chapter01.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter01.jl
 :filename: horner.jl
 :start-after: # begin horner
 :end-before: # end horner
 :linenos: true
 :language: julia
 ```
+
+```{index} ! Julia; length, ! Julia; for
+```
+
+:::{admonition} About the code
+:class: dropdown
+The quoted lines at the beginning are a documentation string. The function itself starts off with the keyword `function`, followed by a list of its input arguments. The first of these is presumed to be a vector, whose length can be obtained and whose individual components are accessed through square bracket notation. After the computation is finished, the `return` keyword indicates which value or values are to be returned to the caller.
+
+The `length` function in line 8 returns the number of elements in vector `c`. Here, that value is one greater than the degree of the polynomial. The syntax `c[i]` accesses element `i` of a vector `c`. In Julia, the first index of a vector is 1 by default, so in line 9, the last element of `c` is accessed.
+
+The `for` / `end` construct in lines 10–12 is a *loop*. The local variable `k` is assigned the value `n-1`, then the loop body is executed, then `k` is assigned `n-2`, the body is executed again, and so on until finally `k` is set to 1 and the body is executed for the last time.
+
+The `return` statement in line 13 terminates the function and specifies one or more values to be returned to the caller.
+:::
+
+:::{important}
+The `Polynomials` package for Julia provides its own fast methods for polynomial evaluation that supersede our simple `horner`. This will be the case for all the codes in this book because the problems we study are well-known and important. In a more practical setting, you would take implementations of basic methods for granted and build on top of them.
+:::
+
 `````
 
 ```{code-cell}
@@ -31,18 +51,23 @@ include("FNC_init.jl")
 ### 1.1 @section-intro-floating-point
 (demo-float-accuracy-julia)=
 ``````{dropdown} @demo-float-accuracy
+
+:::{tip} Getting started in Julia
+:class: dropdown
+See @section-setup-julia for instructions on how to install and use Julia for this book.
+:::
+
 Recall the grade-school approximation to the number $\pi$.
 
 ```{code-cell}
 @show p = 22/7;
 ```
-::::{grid} 1 1 2 2
 Not all the digits displayed for `p` are the same as those of $\pi$. 
-:::{card}
 
+```{tip}
+:class: dropdown
 The value of `pi` is predefined and equivalent to `π`, which is entered by typing `\pi` followed immediately by the <kbd>Tab</kbd> key.
-:::
-::::
+```
 
 ```{code-cell}
 @show float(π);
@@ -51,15 +76,13 @@ The value of `pi` is predefined and equivalent to `π`, which is entered by typi
 ```{index} ! Julia; string interpolation
 ```
 
-::::{grid} 1 1 2 2
 
 The absolute and relative accuracies of the approximation are as follows.
-:::{card}
 
+```{tip}
+:class: dropdown
 A dollar sign `$` in a string substitutes (or *interpolates*) the named variable or expression into the string.
-
-:::
-::::
+```
 
 ```{code-cell}
 acc = abs(p-π)
@@ -67,14 +90,12 @@ println("absolute accuracy = $acc")
 println("relative accuracy = $(acc/π)")
 ```
 
-::::{grid} 1 1 2 2
 Here we calculate the number of accurate digits in `p`.
-:::{card}
 
+```{tip}
+:class: dropdown
 The `log` function is for the natural log. For other common bases, use `log10` or `log2`.
-
-:::
-::::
+```
 
 ```{code-cell}
 println("Number of accurate digits = $(-log10(acc/π))")
@@ -98,17 +119,13 @@ The standard choice for floating-point values is `Float64`, which is double prec
 bitstring(1.0)
 ```
 
-::::{grid} 1 1 2 2
 
 The first bit determines the sign of the number:
 
-:::
-:::{card}
-
+```{tip}
+:class: dropdown
 Square brackets concatenate the contained values into vectors.
-
-:::
-::::
+```
 
 ```{code-cell}
 [bitstring(1.0), bitstring(-1.0)]
@@ -132,13 +149,12 @@ x = x / 8
 @show sign(x), exponent(x), significand(x);
 ```
 
-::::{grid} 1 1 2 2
 The spacing between floating-point values in $[2^n,2^{n+1})$ is $2^n \epsilon_\text{mach}$, where $\epsilon_\text{mach}$ is machine epsilon. You can get its value from the `eps` function in Julia. By default, it returns the value for double precision.
 
-:::{card}
+```{tip}
+:class: dropdown
 To call a function, including `eps`, you must use parentheses notation, even when there are no input arguments.
-:::
-::::
+```
 
 ```{code-cell} julia
 eps()
@@ -221,10 +237,11 @@ This is now the expected result. But we have found a rather shocking breakdown o
 ``````{dropdown} @demo-condition-roots
 ::::{grid} 1 1 2 2
 The polynomial $p(x) = \frac{1}{3}(x-1)(x-1-\epsilon)$ has roots $1$ and $1+\epsilon$. For small values of $\epsilon$, the roots are ill-conditioned. 
-:::{card}
+
+```{tip}
+:class: dropdown
 The statement `x,y = 10,20` makes individual assignments to both `x` and `y`.
-:::
-::::
+```
 
 
 ```{code-cell}
@@ -276,13 +293,12 @@ Here we show how to use {numref}`Function {number} <function-horner>` to evaluat
 
 ```{index} ! Julia; using
 ```
-::::{grid} 1 1 2 2
 Once installed, any package can be loaded with the `using` command, as follows.
 
-:::{card}
+```{tip}
+:class: dropdown
 Many Julia functions, including the ones in this text, are in packages that must be loaded via `using` or `import` in each session. Sometimes a `using` statement can take a few seconds or even minutes to execute, if packages have been installed or updated. 
-:::
-::::
+```
 
 ```{code-cell}
 :tags: [remove-output]
@@ -291,18 +307,13 @@ using FNCFunctions
 FNC = FNCFunctions
 ```
 
-::::{grid} 1 1 2 2
 
 For convenience, this package also imports many other packages used throughout the book and makes them available as though you had run a `using` command for each of them. 
 
-
-:::
-:::{card}
-
+```{tip}
+:class: dropdown
 If you are not sure where a particular function is defined, you can run `methods` on the function name to find all its definitions.
-
-:::
-::::
+```
 
 Returning to `horner`, let us define a vector of the coefficients of $p(x)=(x-1)^3=x^3-3x^2+3x-1$, in ascending degree order.
 
@@ -313,18 +324,13 @@ c = [-1, 3, -3, 1]
 ```{index} ! Julia; FNC, ! Julia; namespace
 ```
 
-::::{grid} 1 1 2 2
 
 In order to avoid clashes between similarly named functions, Julia has boxed all the book functions into a **namespace** called `FNC`. We use this namespace whenever we invoke one of the functions.
 
-
-:::
-:::{card}
-
+```{tip}
+:class: dropdown
 You must use the module name when a package is loaded by `import`, but when loaded via `using`, some functions may be available with no prefix.
-
-:::
-::::
+```
 
 ```{code-cell}
 FNC.horner(c, 1.6)
@@ -344,13 +350,12 @@ The multi-line string at the start of {numref}`Function {number} <function-horne
 ```{index} ! Julia; scientific notation
 ```
 
-::::{grid} 1 1 2 2
 We apply the quadratic formula to find the roots of a quadratic via {eq}`quadunstable`. 
 
-:::{card}
+```{tip}
+:class: dropdown
 A number in scientific notation is entered as `1.23e4` rather than as `1.23*10^{4}`.
-:::
-::::
+```
 
 ```{code-cell}
 a = 1;  b = -(1e6 + 1e-6);  c = 1;
@@ -411,10 +416,10 @@ abs(x₂ - 1e-6) / 1e-6
 
 For this example we will use the `Polynomials` package, which is installed by the `FNC` package.  
 
-:::{card}
+```{tip}
+:class: dropdown
 In the rest of the book, we do not show the `using` statement needed to load the book's package, but you will need to enter it if you want to run the codes yourself.
-:::
-::::
+```
 
 Our first step is to construct a polynomial with six known roots.
 
@@ -433,15 +438,12 @@ r̃ = sort(roots(p))   # type r\tilde and then press Tab
 ```{index} ! Julia; @., Julia; broadcasting
 ```
 
-::::{grid} 1 1 2 2
 Here are the relative errors in each of the computed roots. 
 
-:::{card}
-
+```{tip}
+:class: dropdown
 The `@.` notation at the start means to do the given operations on each element of the given vectors.
-
-:::
-::::
+```
 
 ```{code-cell}
 println("Root errors:") 

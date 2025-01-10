@@ -365,7 +365,7 @@ If the eigenvalues have different complex magnitudes, then as $k\to\infty$ the e
 ```{index} ! Francis QR iteration
 ```
 
-The process demonstrated in {numref}`Demo {number} <demo-evd-francisqr>` is known as the *Francis QR iteration*, and it can be formulated as an $O(n^3)$ algorithm for finding the EVD. Such an algorithm is the foundation of what the `eigen` function uses.
+The process demonstrated in {numref}`Demo {number} <demo-evd-francisqr>` is known as the *Francis QR iteration*, and it can be formulated as an $O(n^3)$ algorithm for finding the EVD. It forms the basis of most practical eigenvalue computations, at least until the matrix size approaches $10^4$ or so.
 
 ## Exercises
 
@@ -376,7 +376,7 @@ The process demonstrated in {numref}`Demo {number} <demo-evd-francisqr>` is know
 (problem-defectivematrix)=
 2. ✍ Prove that the matrix $\mathbf{B}$ in {eq}`jordanblock` does not have two independent eigenvectors.
 
-3. ⌨ Use `eigvals` to find the eigenvalues of each matrix. Then for each eigenvalue $\lambda$, use `rank` to verify that $\lambda\mathbf{I}$ minus the given matrix is singular.
+3. ⌨ Find the eigenvalues of each matrix. Then, for each eigenvalue $\lambda$, use `rank` to verify that $\lambda\mathbf{I}$ minus the given matrix is singular.
     
     $\mathbf{A} = \begin{bmatrix}
     2  & -1 & 0 \\
@@ -443,7 +443,7 @@ displacements of point masses placed along a string satisfy a linear system $\ma
 
 8. ⌨ Eigenvalues of random matrices and their perturbations can be very interesting.
     
-    **(a)** Let `A=randn(60,60)`. Scatter plot its eigenvalues in the complex plane, using `aspect_ratio=1` and red diamonds as markers.
+    **(a)** Let `A=randn(60,60)`.[^randn] Scatter plot its eigenvalues in the complex plane, using a plot aspect ratio of 1 and red diamonds as markers.
     
     **(b)** Let $\mathbf{E}$ be another random $60\times 60$ matrix, and on top of the previous graph, plot the eigenvalues of $\mathbf{A}+0.05\mathbf{E}$ as blue dots. Repeat this for 100 different values of $\mathbf{E}$.
     
@@ -453,3 +453,4 @@ displacements of point masses placed along a string satisfy a linear system $\ma
     
     **(e)** Compute some condition numbers and apply {numref}`Theorem %s <theorem-bauer-fike>` to explain the dramatic difference between your plots with respect to the dot distributions.
 
+[^randn]: The `randn` function generates random numbers from a standard normal distribution. In Python, it is found in the `numpy.random` module.

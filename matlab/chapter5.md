@@ -15,7 +15,8 @@ MATLAB implementations
 
 (function-hatfun-matlab)=
 ``````{dropdown} Hat function
-```{literalinclude} ../matlab/fnc/hatfun.m
+:open:
+```{literalinclude} FNC-matlab/hatfun.m
 :language: matlab
 :linenos: true
 ```
@@ -23,7 +24,8 @@ MATLAB implementations
 
 (function-plinterp-matlab)=
 ``````{dropdown} Piecewise linear interpolation
-```{literalinclude} ../matlab/fnc/plinterp.m
+:open:
+```{literalinclude} FNC-matlab/plinterp.m
 :language: matlab
 :linenos: true
 ```
@@ -31,7 +33,8 @@ MATLAB implementations
 
 (function-spinterp-matlab)=
 ``````{dropdown} Cubic spline interpolation
-```{literalinclude} ../matlab/fnc/spinterp.m
+:open:
+```{literalinclude} FNC-matlab/spinterp.m
 :language: matlab
 :linenos: true
 ```
@@ -39,7 +42,8 @@ MATLAB implementations
 
 (function-fdweights-matlab)=
 ``````{dropdown} Fornberg's algorithm for finite difference weights
-```{literalinclude} ../matlab/fnc/fdweights.m
+:open:
+```{literalinclude} FNC-matlab/fdweights.m
 :language: matlab
 :linenos: true
 ```
@@ -47,7 +51,8 @@ MATLAB implementations
 
 (function-trapezoid-matlab)=
 ``````{dropdown} Trapezoid formula for numerical integration
-```{literalinclude} ../matlab/fnc/trapezoid.m
+:open:
+```{literalinclude} FNC-matlab/trapezoid.m
 :language: matlab
 :linenos: true
 ```
@@ -55,7 +60,8 @@ MATLAB implementations
 
 (function-intadapt-matlab)=
 ``````{dropdown} Adaptive integration
-```{literalinclude} ../matlab/fnc/intadapt.m
+:open:
+```{literalinclude} FNC-matlab/intadapt.m
 :language: matlab
 :linenos: true
 ```
@@ -69,8 +75,7 @@ The intended way for a user to call {numref}`Function {number} <function-intadap
 
 ```{code-cell}
 :tags: [remove-cell]
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -198,7 +203,7 @@ We plot the hat functions $H_0,\ldots,H_3$.
 clf
 for k = 0:3
     subplot(4, 1, k+1)
-    Hk = @(x) hatfun(x, t, k);
+    Hk = hatfun(t, k);
     fplot(Hk, [0, 1])
     hold on
     scatter(t, Hk(t))

@@ -12,7 +12,8 @@ numbering:
 
 (function-shoot-julia)=
 ``````{dropdown} Shooting method for a two-point boundary-value problem
-```{literalinclude} package/src/chapter10.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter10.jl
 :filename: shoot.jl
 :start-after: # begin shoot
 :end-before: # end shoot
@@ -31,7 +32,8 @@ The error tolerance in the IVP solver is kept smaller than in the rootfinder, to
 
 (function-diffmats2-julia)=
 ``````{dropdown} Second-order differentiation matrices
-```{literalinclude} package/src/chapter10.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter10.jl
 :filename: diffmats2.jl
 :start-after: # begin diffmat2
 :end-before: # end diffmat2
@@ -42,7 +44,8 @@ The error tolerance in the IVP solver is kept smaller than in the rootfinder, to
 
 (function-diffcheb-julia)=
 ``````{dropdown} Chebyshev differentiation matrices
-```{literalinclude} package/src/chapter10.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter10.jl
 :filename: diffcheb.jl
 :start-after: # begin diffcheb
 :end-before: # end diffcheb
@@ -53,7 +56,8 @@ The error tolerance in the IVP solver is kept smaller than in the rootfinder, to
 
 (function-bvplin-julia)=
 ``````{dropdown} Solution of a linear boundary-value problem
-```{literalinclude} package/src/chapter10.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter10.jl
 :filename: bvplin.jl
 :start-after: # begin bvplin
 :end-before: # end bvplin
@@ -69,7 +73,8 @@ Note that there is no need to explicitly form the row-deletion matrix $\mathbf{E
 
 (function-bvp-julia)=
 ``````{dropdown} Solution of a nonlinear boundary-value problem
-```{literalinclude} package/src/chapter10.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter10.jl
 :filename: bvp.jl
 :start-after: # begin bvp
 :end-before: # end bvp
@@ -84,7 +89,8 @@ The nested function `residual` uses differentiation matrices computed externally
 
 (function-fem-julia)=
 ``````{dropdown} Piecewise linear finite elements for a linear BVP
-```{literalinclude} package/src/chapter10.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter10.jl
 :filename: fem.jl
 :start-after: # begin fem
 :end-before: # end fem
@@ -107,7 +113,6 @@ include("FNC_init.jl")
 ```{index} ! Julia; in-place function
 ```
 
-:::::{grid} 1 1 2 2
 As a system, the MEMS problem from {numref}`Example {number} <example-tpbvp-mems>` uses $y_1=w$, $y_2=w'$ to obtain
 
 :::{math}
@@ -119,10 +124,10 @@ y_2' &= \frac{\lambda}{y_1^2} - \frac{y_2}{r}.
 :::
 
 We will code an *in-place* form of this ODE, in which the first argument is used to return the computed values of $y_1'$ and $y_2'$.  
-:::{card}
+```{tip}
+:class: dropdown
 The in-place code here saves the computing time that would otherwise be needed to allocate memory for `f` repeatedly.
-:::
-:::::
+```
 
 ```{code-cell}
 function ode!(f, y, λ, r)
@@ -183,12 +188,11 @@ To visual accuracy, the boundary conditions have been enforced. We can check the
 
 (demo-shooting-naive-julia)=
 ``````{dropdown} @demo-shooting-naive
-::::{grid} 1 1 2 2
 Let's first examine the shooting approach for the TPBVP from {numref}`Example {number} <example-tpbvp-mems>` with $\lambda=0.6$. 
-:::{card}
+```{tip}
+:class: dropdown
 The character `ϕ` is typed as `\phi`<kbd>Tab</kbd>. 
-:::
-::::
+```
 
 ```{code-cell}
 λ = 0.6
@@ -467,12 +471,11 @@ g₂(u, du) = u + 2;
 ```{index} ! Julia; collect
 ```
 
-::::{grid} 1 1 2 2
 The last ingredient is an initial estimate of the solution. Here we choose $n=100$ and a linear function between the endpoint values. 
-:::{card}
+```{tip}
+:class: dropdown
 The `collect` function turns a range object into a true vector.
-:::
-::::
+```
 
 ```{code-cell}
 init = collect(range(2.5, -2, length = 101));
@@ -594,4 +597,3 @@ plot(x, u;
     title = "Solution by finite elements", legend=:none)
 ```
 ``````
-

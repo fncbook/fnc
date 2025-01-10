@@ -15,7 +15,8 @@ Python implementations
 
 (function-horner-python)=
 `````{dropdown} **Horner's algorithm for evaluating a polynomial**
-````{literalinclude} ../python/pkg/FNC/FNC01.py
+:open: true
+````{literalinclude} fncbook/fncbook/chapter01.py
 :lineno-start: 1
 :start-at: def horner
 :end-at: return
@@ -27,35 +28,40 @@ Python implementations
 ## Examples
 
 ```{code-cell} ipython3
+:tags: remove-cell
 exec(open("FNC_init.py").read())
 ```
 
 ## 1.1 @section-intro-floating-point
 (demo-float-accuracy-python)=
 ``````{dropdown} @demo-float-accuracy
+```{tip} Getting started with Python
+:class: dropdown
+:open:
+See @section-setup-python for guidance on how to set up Python for the demos in this book.
+```
+
 Recall the grade-school approximation to the number $\pi$.
 
 ```{code-cell} ipython3
 p = 22/7
 print(p)
 ```
-::::{grid} 1 1 2 2
 Not all the digits displayed for `p` are the same as those of $\pi$. 
-:::{card}
+```{tip}
+:class: dropdown
 The value of `pi` is predefined in the `numpy` package.
-:::
-::::
+```
 
 ```{code-cell} ipython3
 print(pi)
 ```
 
-::::{grid} 1 1 2 2
 The absolute and relative accuracies of the approximation are as follows:
-:::{card}
+```{tip}
+:class: dropdown
 We often use [Python f-strings](https://docs.python.org/3/tutorial/inputoutput.html#tut-f-strings) to format numerical output. 
-:::
-::::
+```
 
 
 ```{code-cell} ipython3
@@ -67,12 +73,11 @@ rel_acc = abs(p - pi) / pi
 print("relative accuracy: {rel_acc:.4e}")
 ```
 
-::::{grid} 1 1 2 2
 Here we calculate the number of accurate digits in `p`:
-:::{card}
+```{tip}
+:class: dropdown
 The `log` function is for the natural log. For other common bases, use `log10` or `log2`.
-:::
-::::
+```
 
 
 ```{code-cell} ipython3
@@ -180,12 +185,10 @@ This is now the "correct" result. But we have found a rather shocking breakdown 
 
 The polynomial $p(x) = \frac{1}{3}(x-1)(x-1-\epsilon)$ has roots $1$ and $1+\epsilon$. For small values of $\epsilon$, the roots are ill-conditioned. 
 
-:::{card}
-
+```{tip}
+:class: dropdown
 The statement `x, y = 10, 20` makes individual assignments to both `x` and `y`.
-
-:::
-::::
+```
 
 
 ```{code-cell}
@@ -226,10 +229,10 @@ This matches the observation pretty well.
 (demo-algorithms-horner-python)=
 ``````{dropdown} @demo-algorithms-horner
 
-Here we show how to use `horner` to evaluate a polynomial. First, we have to ensure that the `FNC` package is imported.
+Here we show how to use `horner` to evaluate a polynomial. First, we have to ensure that the book's package is imported.
   
 ```{code-cell} ipython3
-import FNC
+import fncbook as FNC
 ```
 
 Here is the help string for the function:
@@ -257,12 +260,11 @@ The above is the value of $p(1.6)$, up to a rounding error.
 ```{index} ! Python; scientific notation
 ```
 
-::::{grid} 1 1 2 2
 We apply the quadratic formula to find the roots of a quadratic via {eq}`quadunstable`. 
-:::{card}
+```{tip}
+:class: dropdown
 A number in scientific notation is entered as `1.23e4` rather than as `1.23*10^{4}`.
-:::
-::::
+```
 
 ```{code-cell}
 a = 1;  b = -(1e6 + 1e-6);  c = 1;

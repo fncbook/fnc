@@ -1,6 +1,12 @@
-[submodule "julia/package"]
-	path = julia/package
-	url = https://github.com/fncbook/FundamentalsNumericalComputation.jl.git
 [submodule "python/rogues"]
 	path = python/rogues
 	url = https://github.com/macd/rogues.git
+[submodule "julia/FNCFunctions"]
+	path = julia/FNCFunctions
+	url = https://github.com/fncbook/FNCFunctions.jl.git
+[submodule "matlab/FNC-matlab"]
+	path = matlab/FNC-matlab
+	url = https://github.com/fncbook/FNC-matlab.git
+[submodule "python/fncbook"]
+	path = python/fncbook
+	url = https://github.com/fncbook/fncbook.py

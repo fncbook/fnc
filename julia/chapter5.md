@@ -13,7 +13,8 @@ numbering:
 
 (function-hatfun-julia)=
 ``````{dropdown} Hat function
-```{literalinclude} package/src/chapter05.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter05.jl
 :filename: hatfun.jl
 :start-after: # begin hatfun
 :end-before: # end hatfun
@@ -24,7 +25,8 @@ numbering:
 
 (function-plinterp-julia)=
 ``````{dropdown} Piecewise linear interpolation
-```{literalinclude} package/src/chapter05.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter05.jl
 :filename: plinterp.jl
 :start-after: # begin plinterp
 :end-before: # end plinterp
@@ -35,7 +37,8 @@ numbering:
 
 (function-spinterp-julia)=
 ``````{dropdown} Cubic spline interpolation
-```{literalinclude} package/src/chapter05.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter05.jl
 :filename: spinterp.jl
 :start-after: # begin spinterp
 :end-before: # end spinterp
@@ -46,7 +49,8 @@ numbering:
 
 (function-fdweights-julia)=
 ``````{dropdown} Fornberg's algorithm for finite difference weights
-```{literalinclude} package/src/chapter05.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter05.jl
 :filename: fdweights.jl
 :start-after: # begin fdweights
 :end-before: # end fdweights
@@ -57,7 +61,8 @@ numbering:
 
 (function-trapezoid-julia)=
 ``````{dropdown} Trapezoid formula for numerical integration
-```{literalinclude} package/src/chapter05.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter05.jl
 :filename: trapezoid.jl
 :start-after: # begin trapezoid
 :end-before: # end trapezoid
@@ -68,7 +73,8 @@ numbering:
 
 (function-intadapt-julia)=
 ``````{dropdown} Adaptive integration
-```{literalinclude} package/src/chapter05.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter05.jl
 :filename: intadapt.jl
 :start-after: # begin intadapt
 :end-before: # end intadapt
@@ -211,12 +217,12 @@ Let's define a set of four nodes (i.e., $n=3$ in our formulas).
 t = [0, 0.55, 0.7, 1]
 ```
 
-::::{grid} 1 1 2 2
 We plot the hat functions $H_0,\ldots,H_3$.
-:::{card}
+
+```{tip}
+:class: dropdown
 Use `annotate!` to add text to a plot.
-:::
-::::
+```
 
 ```{code-cell}
 plt = plot(layout=(4, 1),  legend=:top,
@@ -574,13 +580,12 @@ a = 0;
 b = 2;
 ```
 
-::::{grid} 1 1 2 2
 In lieu of the exact value, we use the `QuadGK` package to find an accurate result.
-:::
-:::{card}
+
+```{tip}
+:class: dropdown
 If a function has multiple return values, you can use an underscore `_` to indicate a  return value you want to ignore.
-:::
-::::
+```
 
 ```{code-cell}
 using QuadGK
@@ -679,12 +684,11 @@ With the two Simpson values $S_f(N)$ and $S_f(2N)$ in hand, we can do one more l
 R = (16S[2] - S[1]) / 15
 ```
 
-::::{grid} 1 1 2 2
 We can make a triangular table of the errors:
-:::{card}
+```{tip}
+:class: dropdown
 The value `nothing` equals nothing except `nothing`.
-:::
-::::
+```
 
 ```{code-cell}
 err = [T .- Q [nothing; S .- Q] [nothing; nothing; R - Q]]

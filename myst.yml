@@ -12,6 +12,7 @@ project:
     - name: Richard J. Braun 
   github: https://github.com/fncbook/fnc
   # To autogenerate a Table of Contents, run 'myst init --write-toc'
+  thebe: false    # don't try in-browser execution
   exports:
     # - format: typst
     #   template: lapreprint-typst
@@ -80,8 +81,9 @@ project:
     - file: home.md
     - title: Preface
       children:
-        - file: preface.md
-        - file: preface-original.md
+        - file: frontmatter/preface.md
+        - file: frontmatter/preface-original.md
+    - file: frontmatter/differences.md
     - file: chapter1/overview.md
       children:
         - file: chapter1/section1/floating-point.md
@@ -488,7 +490,7 @@ site:
   title: Fundamentals of Numerical Computation
   template: book-theme
   options:
-    favicon: favicon.png
+    favicon: _static/favicon.png
     logo: _static/FNClogo.png
   domains:
     - tobydriscoll.curve.space

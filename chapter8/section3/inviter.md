@@ -253,11 +253,7 @@ In practice power and inverse iteration are not as effective as the algorithms u
     
     **(b)** For each $n$ in part (a), apply 50 steps of {numref}`Function {number} <function-inviter>` with zero shift. On one graph, plot the four convergence curves $|\beta_k-\lambda_m|$ using a semi-log scale.
 
-    **(c)** Let `v` be the eigenvector (second output) found by {numref}`Function {number} <function-inviter>` for $n=25$. Visualize the vibration mode of the membrane using 
-    
-    ```julia
-    surface(reshape(v,n,n))
-    ```
+    **(c)** Let `v` be the eigenvector (second output) found by {numref}`Function {number} <function-inviter>` for $n=25$. Make a surface plot of the vibration mode by reshaping `v` into an $n\times n$ matrix.
     
     % must remain as number 6
 (problem-inviter-dynamicshift)=
@@ -265,13 +261,7 @@ In practice power and inverse iteration are not as effective as the algorithms u
   
     **(a)** Modify {numref}`Function {number} <function-inviter>` to change the value of the shift $s$ to be the most recently computed value in the vector $\beta$. Note that the matrix `B` must also change with each iteration, and the LU factorization cannot be done just once.
 
-    **(b)** Define a matrix with eigenvalues at $k^2$ for $k=1,\ldots,100$ via
-    
-    ```julia
-    A = diagm(0=>(1:100).^2,1=>rand(99))
-    ```
-
-    Using an initial shift of $s=920$, apply the dynamic inverse iteration. Determine which eigenvalue was found and make a table of the `log10` of the errors in the iteration as a function of iteration number. (These should approximately double, until machine precision is reached, due to quadratic convergence.)
+    **(b)** Define a $100\times 100$ matrix with values $k^2$ for $k=1,\ldots,100$ on the main diagonal and random values uniformly distributed between 0 and 1 on the first superdiagonal. (Since this matrix is triangular, the diagonal values are its eigenvalues.) Using an initial shift of $s=920$, apply the dynamic inverse iteration. Determine which eigenvalue was found and make a table of the `log10` of the errors in the iteration as a function of iteration number. (These should approximately double, until machine precision is reached, due to quadratic convergence.)
   
     **(c)** Repeat part (b) using a different initial shift of your choice.
 

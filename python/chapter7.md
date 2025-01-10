@@ -11,6 +11,7 @@ numbering:
 ## Examples
 
 ```{code-cell} ipython3
+:tags: remove-cell
 exec(open("FNC_init.py").read())
 ```
 

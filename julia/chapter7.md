@@ -195,12 +195,11 @@ We confirm that the matrix $\mathbf{A}$ is normal by checking that $\kappa(\math
 @show cond(V);
 ```
 
-::::{grid} 1 1 2 2
 Now we perturb $\mathbf{A}$ and measure the effect on the eigenvalues. The Bauer–Fike theorem uses absolute differences, not relative ones.
-:::{card}
+```{tip}
+:class: dropdown
 Since the ordering of eigenvalues can change, we look at all pairwise differences and take the minima.
-:::
-::::
+```
 
 ```{code-cell}
 ΔA = 1e-8 * normalize(randn(n, n) + 1im * randn(n, n))

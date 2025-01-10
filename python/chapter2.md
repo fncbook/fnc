@@ -13,7 +13,8 @@ numbering:
 
 (function-forwardsub-python)=
 ``````{dropdown} Forward substitution
-```{literalinclude} ../python/pkg/FNC/FNC02.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter02.py
 :filename: forwardsub.py
 :start-line: 2
 :end-line: 14
@@ -24,7 +25,8 @@ numbering:
 
 (function-backsub-python)=
 ``````{dropdown} Backward substitution
-```{literalinclude} ../python/pkg/FNC/FNC02.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter02.py
 :filename: backsub.py
 :start-line: 17
 :end-line: 29
@@ -35,7 +37,8 @@ numbering:
 
 (function-lufact-python)=
 `````{dropdown} LU factorization (not stable)
-```{literalinclude} ../python/pkg/FNC/FNC02.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter02.py
 :filename: lufact.py
 :start-line: 31
 :end-line: 49
@@ -51,7 +54,8 @@ Line 11 of {numref}`Function {number} <function-lufact>` points out a subtle iss
 
 (function-plufact-python)=
 ``````{dropdown} LU factorization with partial pivoting
-```{literalinclude} ../python/pkg/FNC/FNC02.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter02.py
 :filename: plufact.py
 :start-line: 51
 :end-line: 71
@@ -63,6 +67,7 @@ Line 11 of {numref}`Function {number} <function-lufact>` points out a subtle iss
 ## Examples
 
 ```{code-cell} 
+:tags: remove-cell
 exec(open("FNC_init.py").read())
 ```
 
@@ -96,13 +101,12 @@ To solve a linear system $\mathbf{V} \mathbf{c} = \mathbf{y}$ for the vector of 
 c = linalg.solve(V, y)
 print(c)
 ```
-::::{grid} 1 1 2 2
 The algorithms used by `solve` are the main topic of this chapter. As a check on the solution, we can compute the *residual* $\mathbf{y} - \mathbf{V} \mathbf{c}$, which should be small (near machine precision).
 
-:::{card}
+```{tip}
+:class: dropdown
 Matrix multiplication in NumPy is done with `@` or `matmul`.
-:::
-::::
+```
 
 ```{code-cell} 
 print(y - V @ c)
@@ -779,12 +783,11 @@ A_1 = array([
     ])
 ```
 
-::::{grid} 1 1 2 2
 We now find the largest candidate pivot in the first column. We don't care about sign, so we take absolute values before finding the max.
-:::{card}
+```{tip}
+:class: dropdown
 The `argmax` function returns the location of the largest element of a vector or matrix.
-:::
-::::
+```
 
 
 ```{code-cell}

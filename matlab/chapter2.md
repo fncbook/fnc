@@ -15,7 +15,8 @@ MATLAB implementations
 
 (function-forwardsub-matlab)=
 ``````{dropdown} Forward substitution
-```{literalinclude} ../matlab/fnc/forwardsub.m
+:open:
+```{literalinclude} FNC-matlab/forwardsub.m
 :linenos: true
 :language: matlab
 ```
@@ -28,7 +29,8 @@ Line 12 implements @forwardsub. It contains an inner product between row $i$ of 
 
 (function-backsub-matlab)=
 ``````{dropdown} Backward substitution
-```{literalinclude} ../matlab/fnc/backsub.m
+:open:
+```{literalinclude} FNC-matlab/backsub.m
 :linenos: true
 :language: matlab
 ```
@@ -36,7 +38,8 @@ Line 12 implements @forwardsub. It contains an inner product between row $i$ of 
 
 (function-lufact-matlab)=
 `````{dropdown} LU factorization (not stable)
-```{literalinclude} ../matlab/fnc/lufact.m
+:open:
+```{literalinclude} FNC-matlab/lufact.m
 :linenos: true
 :language: matlab
 ```
@@ -44,7 +47,8 @@ Line 12 implements @forwardsub. It contains an inner product between row $i$ of 
 
 (function-plufact-matlab)=
 ``````{dropdown} LU factorization with partial pivoting
-```{literalinclude} ../matlab/fnc/plufact.m
+:open:
+```{literalinclude} FNC-matlab/plufact.m
 :linenos: true
 :language: matlab
 ```
@@ -56,8 +60,7 @@ Line 12 implements @forwardsub. It contains an inner product between row $i$ of 
 
 ```{code-cell}
 :tags: [remove-cell]
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -90,12 +93,11 @@ V = vander(t)
 :::{index} ! MATLAB; \\
 :::
 
-::::{grid} 1 1 2 2
 To solve for the vector of polynomial coefficients, we use a backslash to solve the linear system:
-:::{card}
+```{tip}
+:class: dropdown
 A **backslash** `\` is used to solve a linear system of equations.
-:::
-::::
+```
 
 ```{code-cell}
 c = V \ y
@@ -121,11 +123,11 @@ The official population value for 2005 was 1303.72, so our result is rather good
 :::{index} ! MATLAB; scatter
 :::
 
-::::{grid} 1 1 2 2
 We can visualize the interpolation process. First, we plot the data as points.
-:::{card}
+```{tip}
+:class: dropdown
 The `scatter` function creates a scatter plot of points; you can specify a line connecting the points as well.
-::::
+```
 
 ```{code-cell}
 scatter(year, y)
@@ -137,12 +139,11 @@ title(("Population of China"));
 :::{index} ! MATLAB; linspace
 :::
 
-::::{grid} 1 1 2 2
 We want to superimpose a plot of the polynomial. We do that by evaluating it at a vector of points in the interval.
-:::{card}
+```{tip}
+:class: dropdown
 The `linspace` function constructs evenly spaced values given the endpoints and the number of values.
-:::
-::::
+```
 
 ```{code-cell}
 tt = linspace(1980, 2015, 500);    % 500 times in the interval [1980, 2015]
@@ -153,14 +154,12 @@ yy(1:4)
 ```{index} ! MATLAB; hold on, ! MATLAB; plot
 ```
 
-::::{grid} 1 1 2 2
 Now we use `plot!` to add to the current plot, rather than replacing it.
-:::{card}
+```{tip}
+:class: dropdown
 Use `hold on` to add to an existing plot rather than replacing it.
-
 The `plot` function plots lines connecting the given $x$ and $y$ values; you can also specify markers at the points.
-:::
-::::
+```
 
 ```{code-cell}
 hold on 
@@ -175,14 +174,13 @@ legend("data", "interpolant", "location", "northwest");
 :::{index} ! MATLAB; size, ! MATLAB; length
 :::
 
-::::{grid} 1 1 2 2
 In MATLAB, every numerical value is treated like a matrix. A matrix with one row or one column is interpreted as a vector, and a $1\times 1$ matrix is interpreted as a scalar. 
 
 Square brackets are used to enclose elements of a matrix or vector. Use spaces for horizontal concatenation, and semicolons or new lines to indicate vertical concatenation.
-:::{card}
+```{tip}
+:class: dropdown
 The `size` function returns the number of rows and columns in a matrix. Use `length` to get the number of elements in a vector or matrix.
-:::
-::::
+```
 
 
 ```{code-cell}
@@ -252,11 +250,11 @@ s = linspace(-1, 1, 5)    % row result
 :::{index} ! MATLAB; end, ! MATLAB; indexing arrays
 :::
 
-::::{grid} 1 1 2 2
 Accessing an element is done by giving one (for a vector) or two (for a matrix) index values within parentheses. 
-:::{card}
+```{tip}
+:class: dropdown
 The `end` keyword refers to the last element in a dimension. It saves you from having to compute and store the size of the matrix first.
-::::
+```
 
 ```{code-cell}
 a = A(2, end-1)
@@ -284,12 +282,11 @@ A(:, 1:2:end)        % all of the odd columns
 :::{index} ! MATLAB; diag
 :::
 
-::::{grid} 1 1 2 2
 The matrix and vector senses of addition, subtraction, scalar multiplication, multiplication, and power are all handled by the usual symbols. 
-:::{card}
+```{tip}
+:class: dropdown
 Use `diag` to construct a matrix by its diagonals. A more general syntax puts elements on super- or subdiagonals.
-:::
-::::
+```
 
 ```{code-cell}
 B = diag([-1, 0, -5])   % create a diagonal matrix
@@ -304,12 +301,11 @@ size(B)
 BA = B * A     % matrix product
 ```
 
-::::{grid} 1 1 2 2
 `A * B` causes an error here, because the dimensions aren't compatible.
-:::{card}
+```{tip}
+:class: dropdown
 Errors are formally called *exceptions* in Julia.
-:::
-::::
+```
 
 ```{code-cell} julia
 :tags: [raises-exception]
@@ -347,9 +343,10 @@ x_to_two = x .^ 2
 two_to_x = 2 .^ x
 ```
 
-::::{grid} 1 1 2 2
+```{tip}
+:class: dropdown
 Most of the mathematical functions, such as cos, sin, log, exp, and sqrt, can operate elementwise on vectors and matrices. 
-::::
+```
 
 ```{code-cell}
 cos(pi * x) 
@@ -391,12 +388,11 @@ b = [1; -1]
 x = A \ b
 ```
 
-::::{grid} 1 1 2 2
 In this case, we can check that the rank of $\mathbf{A}$ is less than its number of columns, indicating singularity.
-:::{card}
+```{tip}
+:class: dropdown
 The function `rank` computes the rank of a matrix. However, it is numerically unstable for matrices that are nearly singular, in a sense to be defined in a later section.
-:::
-::::
+```
 
 ```{code-cell}
 rank(A)
@@ -410,12 +406,11 @@ A linear system with a singular matrix might have no solution or infinitely many
 ```{index} ! MATLAB; tril, ! MATLAB; triu
 ```
 
-::::{grid} 1 1 2 2
 It's easy to get just the lower triangular part of any matrix using the `tril` function.
-:::{card}
+```{tip}
+:class: dropdown
 Use `tril` to return a matrix that zeros out everything above the main diagonal. The `triu` function zeros out below the diagonal.
-:::
-::::
+```
 
 ```{code-cell}
 A = randi(9, 5, 5);
@@ -441,12 +436,11 @@ b - L * x
 ```{index} ! MATLAB; diag, ! MATLAB; eye
 ```
 
-::::{grid} 1 1 2 2
 Next, we'll engineer a problem to which we know the exact answer. 
-:::{card}
+```{tip}
+:class: dropdown
 The `eye` function creates an identity matrix. The `diag` function uses 0 as the main diagonal, positive integers as superdiagonals, and negative integers as subdiagonals.
-:::
-::::
+```
 
 ```{code-cell}
 alpha = 0.3;
@@ -673,12 +667,11 @@ table(n_, t_, 'variablenames', {'size', 'time'})
 ```{index} MATLAB; Boolean indexing
 ```
 
-::::{grid} 1 1 2 2
 Looking at the timings just for $n=2000$ and $n=4000$, they have ratio
-:::{card}
+```{tip}
+:class: dropdown
 The expression `n_==4000` here produces a vector of Boolean (true/false) values the same size as `n_`. This result is used to index within `t_`, accessing only the value for which the comparison is true.
-:::
-::::
+```
 
 ```{code-cell}
 t_(n_==4000) / t_(n_==2000)
@@ -733,12 +726,11 @@ legend('data', 'O(n^2)', 'location', 'southeast');
 
 (demo-flops-lufact-matlab)=
 ``````{dropdown} @demo-flops-lufact
-::::{grid} 1 1 2 2
 We'll test the conclusion of $O(n^3)$ flops experimentally, using the built-in `lu` function instead of the purely instructive `lufact`.
-:::{card}
+```{tip}
+:class: dropdown
 The first time a function is invoked, there may be significant time needed to compile it in memory. Thus, when timing a function, run it at least once before beginning the timing.
-:::
-::::
+```
 
 ```{code-cell}
 n_ = (200:100:2400)';
@@ -815,12 +807,11 @@ A_1 = [2 0 4 3; -2 0 2 -13; 1 15 2 -4.5; -4 5 -7 -10]
 ```{index} ! MATLAB; max, ! MATLAB; \~
 ```
 
-::::{grid} 1 1 2 2
 We now find the largest candidate pivot in the first column. We don't care about sign, so we take absolute values before finding the max.
-:::{card}
+```{tip}
+:class: dropdown
 The second output of `max` returns the location of the largest element of a vector. The `~` symbol is used to ignore the value of the first output.
-:::
-::::
+```
 
 
 ```{code-cell}
@@ -1033,12 +1024,11 @@ onenorm = norm(A, 1)
 ```{index} ! MATLAB; max, ! MATLAB; sum
 ```
 
-::::{grid} 1 1 2 2
 According to {eq}`mxonenorm`, the matrix 1-norm is equivalent to the maximum of the sums down the columns (in absolute value).
-:::{card}
+```{tip}
+:class: dropdown
 Use `sum` to sum along a dimension of a matrix. The `max` and `min` functions also work along one dimension.
-:::
-::::
+```
 
 ```{code-cell}
 % Sum down the rows (1st matrix dimension):
@@ -1055,12 +1045,11 @@ infnorm = norm(A, Inf)
 % Sum across columns (2nd matrix dimension):
 max( sum(abs(A), 2) )  
 ```
-::::{grid} 1 1 2 2
 Next we illustrate a geometric interpretation of the 2-norm. First, we will sample a lot of vectors on the unit circle in $\mathbb{R}^2$.
-:::{card}
+```{tip}
+:class: dropdown
 You can use functions as values, e.g., as elements of a vector. 
-:::
-::::
+```
 
 ```{index} ! MATLAB; subplot
 ```
@@ -1195,12 +1184,11 @@ A = [ 2 -1  0  0  0  0
 ```{index} ! MATLAB; diag
 ```
 
-::::{grid} 1 1 2 2
 We can extract the elements on any diagonal using the `diag` function. The main or central diagonal is numbered zero, above and to the right of that is positive, and below and to the left is negative.
-:::{card}
+```{tip}
+:class: dropdown
 The `diag` function extracts the elements from a specified diagonal of a matrix.
-:::
-::::
+```
 
 ```{code-cell}
 diag_main = diag(A, 0)'
@@ -1281,12 +1269,11 @@ B = A + A'
 ```{index} ! MATLAB; chol
 ```
 
-::::{grid} 1 1 2 2
 Similarly, a random symmetric matrix is unlikely to be positive definite. The Cholesky algorithm always detects a non-PD matrix by quitting with an error.
-:::{card}
+```{tip}
+:class: dropdown
 The `chol` function computes a Cholesky factorization if possible, or throws an error for a non-positive-definite matrix. 
-:::
-::::
+```
 
 ```{warning} 
 The `chol` function does *not* check for symmetry. It may give a nonsensical result if the input is not symmetric.

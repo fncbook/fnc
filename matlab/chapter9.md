@@ -12,7 +12,8 @@ numbering:
 
 (function-polyinterp-matlab)=
 ``````{dropdown} Barycentric polynomial interpolation
-```{literalinclude} ../matlab/fnc/polyinterp.m
+:open:
+```{literalinclude} FNC-matlab/polyinterp.m
 :language: matlab
 :linenos: true
 ```
@@ -20,7 +21,8 @@ numbering:
 
 (function-triginterp-matlab)=
 ``````{dropdown} Trigonometric interpolation
-```{literalinclude} ../matlab/fnc/triginterp.m
+:open:
+```{literalinclude} FNC-matlab/triginterp.m
 :language: matlab
 :linenos: true
 ```
@@ -28,7 +30,8 @@ numbering:
 
 (function-ccint-matlab)=
 ``````{dropdown} Clenshaw-Curtis integration
-```{literalinclude} ../matlab/fnc/ccint.m
+:open:
+```{literalinclude} FNC-matlab/ccint.m
 :language: matlab
 :linenos: true
 ```
@@ -36,7 +39,8 @@ numbering:
 
 (function-glint-matlab)=
 ``````{dropdown} Gauss-Legendre integration
-```{literalinclude} ../matlab/fnc/glint.m
+:open:
+```{literalinclude} FNC-matlab/glint.m
 :language: matlab
 :linenos: true
 ```
@@ -44,7 +48,8 @@ numbering:
 
 (function-intinf-matlab)=
 ``````{dropdown} Integration over $(-\infty,\infty)$
-```{literalinclude} ../matlab/fnc/intinf.m
+:open:
+```{literalinclude} FNC-matlab/intinf.m
 :language: matlab
 :linenos: true
 ```
@@ -52,7 +57,8 @@ numbering:
 
 (function-intsing-matlab)=
 ``````{dropdown} Integration with endpoint singularities
-```{literalinclude} ../matlab/fnc/intsing.m
+:open:
+```{literalinclude} FNC-matlab/intsing.m
 :language: matlab
 :linenos: true
 ```
@@ -62,8 +68,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -79,12 +84,11 @@ n = 5;  k = 2;
 not_k = [0:k-1 k+1:n];   % all except the kth node
 ```
 
-::::{grid} 1 1 2 2
 Let's apply the definition of the cardinal Lagrange polynomial for $k=2$. First we define a polynomial $q$ that is zero at all the nodes except $i=k$. Then $\ell_2$ is found by normalizing $q$ by $q(t_k)$.
-:::{card}
+```{tip}
+:class: dropdown
 Whenever we index into the node vector `t`, we have to add 1 since the mathematical index starts at zero.
-:::
-::::
+```
 
 ```{code-cell}
 q = @(x) prod(x - t(not_k + 1));
@@ -374,7 +378,7 @@ fplot(p, [-1, 1], displayname="LS fit at 150 points")
 This situation is unlike interpolation, where the degree of the interpolant increases with the number of nodes. Here, the linear fit is apparently approaching a limit that we may think of as a continuous least-squares fit.
 
 ```{code-cell}
-n = 40:60:400;
+n = (40:60:400)';
 slope = zeros(size(n));
 intercept = zeros(size(n));
 
@@ -494,14 +498,15 @@ The Fourier coefficients of smooth functions decay exponentially in magnitude as
 ```{code-cell}
 f = @(t) pi * sqrt( cos(pi*t).^2 + sin(pi*t).^2 / 4 );
 N = (4:4:48)';
-C = zeros(size(N));
+perim = zeros(size(N));
 for k = 1:length(N)
     h = 2 / N(k);
     t = h * (0:N(k)-1);
-    C(k) = h * sum(f(t));
+    perim(k) = h * sum(f(t));
 end
+err = abs(perim - perim(end));    % use last value as "exact"
 format long
-disp(table(N, C, variableNames=["number of nodes", "perimeter"]))
+disp(table(N, perim, err, variableNames=["number of nodes", "perimeter", "error"]))
 ```
 The approximations gain about one digit of accuracy for each constant increment of $n$, which is consistent with spectral convergence.
 ``````
@@ -644,8 +649,8 @@ tol = 1 ./ 10.^(5:0.5:14);
 err = zeros(length(tol), 2);
 len = zeros(length(tol), 2);
 for k = 1:length(tol)
-    [I1, x1] = intadapt(f, (tol/20)^2, 1, tol);
-    [I2, x2] = intsing(f, tol);
+    [I1, x1] = intadapt(f, (tol(k)/20)^2, 1, tol(k));
+    [I2, x2] = intsing(f, tol(k));
     err(k, :) = abs(0.2 - [I1, I2]);
     len(k, :) = [length(x1), length(x2)];
 end
@@ -658,4 +663,3 @@ title(("Comparison of integration methods"));
 
 As in {numref}`Demo {number} <demo-improper-intinf>`, the double exponential method is more accurate than direct integration by a few orders of magnitude. Equivalently, the same accuracy can be reached with many fewer nodes.
 ``````
-

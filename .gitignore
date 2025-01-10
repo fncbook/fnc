@@ -36,3 +36,4 @@ python/pkg/FNC.egg-info
 **/tmp.*
 *.mp4
 **/.DS_Store
+matlab/hello.png

@@ -12,7 +12,8 @@ numbering:
 
 (function-newton-matlab)=
 ``````{dropdown} Newton's method
-```{literalinclude} ../matlab/fnc/newton.m
+:open:
+```{literalinclude} FNC-matlab/newton.m
 :language: matlab
 :linenos: true
 ```
@@ -20,7 +21,8 @@ numbering:
 
 (function-secant-matlab)=
 ``````{dropdown} Secant method
-```{literalinclude} ../matlab/fnc/secant.m
+:open:
+```{literalinclude} FNC-matlab/secant.m
 :language: matlab
 :linenos: true
 ```
@@ -28,7 +30,8 @@ numbering:
 
 (function-newtonsys-matlab)=
 ``````{dropdown} Newton's method for systems
-```{literalinclude} ../matlab/fnc/newtonsys.m
+:open:
+```{literalinclude} FNC-matlab/newtonsys.m
 :language: matlab
 :linenos: true
 ```
@@ -36,7 +39,8 @@ numbering:
 
 (function-fdjac-matlab)=
 ``````{dropdown} Finite differences for Jacobian
-```{literalinclude} ../matlab/fnc/fdjac.m
+:open:
+```{literalinclude} FNC-matlab/fdjac.m
 :language: matlab
 :linenos: true
 ```
@@ -44,7 +48,8 @@ numbering:
 
 (function-levenberg-matlab)=
 ``````{dropdown} Levenberg's method
-```{literalinclude} ../matlab/fnc/levenberg.m
+:open:
+```{literalinclude} FNC-matlab/levenberg.m
 :language: matlab
 :linenos: true
 ```
@@ -54,8 +59,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -71,14 +75,12 @@ grid on
 xlabel('x'), ylabel('J_3(x)')  
 title('Bessel function') 
 ```
-::::{grid} 1 1 2 2
 From the graph we see roots near 6, 10, 13, 16, and 19. We use `nlsolve` from the `NLsolve` package to find these roots accurately. It uses vector variables, so we have to code accordingly.
-:::{card}
+```{tip}
+:class: dropdown
 Type `\omega` followed by <kbd>Tab</kbd> to get the character `ω`.
-
 The argument `ftol=1e-14` below is called a **keyword argument**. Here it sets a goal for the maximum value of $|f(x)|$.
-:::
-::::
+```
 
 ```{code-cell}
 omega = [];
@@ -404,12 +406,11 @@ The clear convergence to 2 above constitutes good evidence of quadratic converge
 ```{index} ! Julia; enumerate
 ```
 
-::::{grid} 1 1 2 2
 Suppose we want to evaluate the inverse of the function $h(x)=e^x-x$. This means solving $y=e^x-x$ for $x$ when $y$ is given, which has no elementary form. If a value of $y$ is given numerically, though, we simply have a rootfinding problem for $f(x)=e^x-x-y$.
-:::{card}
+```{tip}
+:class: dropdown
 When a function is created, it can refer to any variables in scope at that moment. Those values are locked in to the definition, which is called a _closure_. If the enclosed variables change values later, the function still uses the values it was created with.
-:::
-::::
+```
 
 ```{code-cell}
 h = @(x) exp(x) - x;
@@ -549,13 +550,12 @@ fplot(q, interval, '--')
 title('Parabola model')     
 ```
 
-::::{grid} 1 1 2 2
 To do inverse interpolation, we swap the roles of $x$ and $y$ in the interpolation.
-:::
-:::{card}
+
+```{tip}
+:class: dropdown
 By giving two functions in the `fplot` call, we get the parametric plot $(q(y),y)$ as a function of $y$.
-:::
-::::
+```
 
 ```{code-cell}
 cla, fplot(f, interval)
@@ -603,12 +603,11 @@ ratios = logerr(2:end) ./ logerr(1:end-1)
 ### 4.5 @section-nonlineqn-newtonsys
 (demo-newtonsys-converge-matlab)=
 ``````{dropdown} @demo-newtonsys-converge
-::::{grid} 1 1 2 2
 A system of nonlinear equations is defined by its residual and Jacobian.
-:::{card}
+```{tip}
+:class: dropdown
 This function needs to be defined within a script file or in a file of its own with the `.m` extension.
-:::
-::::
+```
 
 ```{literalinclude} f45_nlsystem.m
 :language: matlab
@@ -643,56 +642,46 @@ This sequence looks to be nearly doubling at each iteration, which is a good sig
 (demo-quasi-levenberg-matlab)=
 ``````{dropdown} @demo-quasi-levenberg
 
-::::{grid} 1 1 2 2
 To solve a nonlinear system, we need to code only the function defining the system, and not its Jacobian.
-:::{card}
+```{tip}
+:class: dropdown
 A rule of thumb is that if you use a function as an input argument for another function, there needs to be an `@` involved once: either for an anonymous definition or to reference a function defined elsewhere. 
-
 ```{literalinclude} f45_nlsystem.m
 :language: matlab
 ```
-
 In all other respects usage is the same as for the `newtonsys` function.
-
 ```{code-cell}
 f = @f46_nlsystem;
 x1 = [0; 0; 0];   
 x = levenberg(f, x1);
 ```
-
 It's always a good idea to check the accuracy of the root, by measuring the residual (backward error).
-
 ```{code-cell}
 r = x(:, end)
 backward_err = norm(f(r))
 ```
-
 Looking at the convergence of the first component, we find a rate between linear and quadratic, like with the secant method.
-
 ```{code-cell}
 log10( abs(x(1, 1:end-1) - r(1)) )'
 ```
 ``````
-
 ### 4.7 @section-nonlineqn-nlsq
 (demo-nlsq-converge-matlab)=
 ``````{dropdown} @demo-nlsq-converge
 We will observe the convergence of {numref}`Function {number} <function-levenberg>` for different levels of the minimum least-squares residual. We start with a function mapping from $\real^2$ into $\real^3$, and a point that will be near the optimum.
-
 ```{code-cell}
 g = @(x) [sin(x(1) + x(2)); cos(x(1) - x(2)); exp(x(1) - x(2))];
 p = [1; 1];
 ```
-
 ```{index} ! Julia; @sprintf
 ```
 
-::::{grid} 1 1 2 2
 The function $\mathbf{g}(\mathbf{x}) - \mathbf{g}(\mathbf{p})$ obviously has a zero residual at $\mathbf{p}$. We'll make different perturbations of that function in order to create nonzero residuals.
-:::{card}
+
+```{tip}
+:class: dropdown
 `@sprintf` is a way to format numerical values as strings, patterned after the C function `printf`.
-:::
-::::
+```
 
 ```{code-cell}
 clf

@@ -14,7 +14,8 @@ Python implementations
 
 (function-lsnormal-python)=
 ``````{dropdown} Solution of least squares by the normal equations
-```{literalinclude} ../python/pkg/FNC/FNC03.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter03.py
 :filename: lsnormal.py
 :language: python
 :start-line: 6
@@ -29,7 +30,8 @@ Python implementations
 
 (function-lsqrfact-python)=
 ``````{dropdown} Solution of least squares by QR factorization
-```{literalinclude} ../python/pkg/FNC/FNC03.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter03.py
 :filename: lsqrfact.py
 :start-line: 20
 :end-line: 30
@@ -39,7 +41,8 @@ Python implementations
 
 (function-qrfact-python)=
 ``````{dropdown} QR factorization by Householder reflections
-```{literalinclude} ../python/pkg/FNC/FNC03.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter03.py
 :filename: qrfact.py
 :start-line: 32
 :end-line: 52
@@ -50,6 +53,7 @@ Python implementations
 ## Examples
 
 ```{code-cell} ipython3
+:tags: remove-cell
 exec(open("FNC_init.py").read())
 ```
 
@@ -108,12 +112,11 @@ t = (year - 1950) / 10
 ```
 
 
-::::{grid} 1 1 2 2
 The standard best-fit line results from using a linear polynomial that meets the least-squares criterion.
-:::{card}
+```{tip}
+:class: dropdown
 Backslash solves overdetermined linear systems in a least-squares sense.
-:::
-::::
+```
 
 ```{code-cell}
 V = array([ [t[i], 1] for i in range(t.size) ])    # Vandermonde-ish matrix
@@ -150,12 +153,11 @@ V = array([ [t[i]**3,t[i]**2,t[i],1] for i in range(t.size) ])    # Vandermonde-
 print(V.shape)
 ```
 
-::::{grid} 1 1 2 2
 Now we solve the new least-squares problem to redefine the fitting polynomial.
-:::{card}
+```{tip}
+:class: dropdown
 The definition of `f` above is in terms of `c`. When `c` is changed, `f` is updated with it.
-:::
-::::
+```
 
 ```{code-cell}
 c, res, rank, sv = lstsq(V, y, rcond=None)

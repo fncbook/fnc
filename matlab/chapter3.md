@@ -8,13 +8,12 @@ numbering:
 ---
 # Chapter 3
 
-MATLAB implementations
-
 ## Functions
 
 (function-lsnormal-matlab)=
 ``````{dropdown} Solution of least squares by the normal equations
-```{literalinclude} ../matlab/fnc/lsnormal.m
+:open:
+```{literalinclude} FNC-matlab/lsnormal.m
 :language: matlab
 :linenos: true
 ```
@@ -22,7 +21,8 @@ MATLAB implementations
 
 (function-lsqrfact-matlab)=
 ``````{dropdown} Solution of least squares by QR factorization
-```{literalinclude} ../matlab/fnc/lsqrfact.m
+:open:
+```{literalinclude} FNC-matlab/lsqrfact.m
 :language: matlab
 :linenos: true
 ```
@@ -30,7 +30,8 @@ MATLAB implementations
 
 (function-qrfact-matlab)=
 ``````{dropdown} QR factorization by Householder reflections
-```{literalinclude} ../matlab/fnc/qrfact.m
+:open:
+```{literalinclude} FNC-matlab/qrfact.m
 :language: matlab
 :linenos: true
 ```
@@ -40,8 +41,7 @@ MATLAB implementations
 
 ```{code-cell}
 :tags: [remove-cell]
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -96,12 +96,11 @@ y = [ -0.0480; -0.0180; -0.0360; -0.0120; -0.0040;
 ```{index} ! MATLAB; \\
 ```
 
-::::{grid} 1 1 2 2
 The standard best-fit line results from using a linear polynomial that meets the least-squares criterion.
-:::{card}
+```{tip}
+:class: dropdown
 Backslash solves overdetermined linear systems in a least-squares sense.
-:::
-::::
+```
 
 ```{code-cell}
 t = (year - 1955) / 10;    % better matrix conditioning later
@@ -129,12 +128,11 @@ V = [t.^0, t.^1, t.^2, t.^3];    % Vandermonde-ish matrix
 size(V)
 ```
 
-::::{grid} 1 1 2 2
 Now we solve the new least-squares problem to redefine the fitting polynomial.
-:::{card}
+```{tip}
+:class: dropdown
 The definition of `f` above is in terms of `c`. When `c` is changed, then `f` has to be redefined.
-:::
-::::
+```
 
 ```{code-cell}
 c = V \ y;
@@ -194,12 +192,11 @@ legend('sequence', 'power-law fit');
 (demo-normaleqns-instab-matlab)=
 ``````{dropdown} @demo-normaleqns-instab
 
-::::{grid} 1 1 2 2
 Because the functions $\sin^2(t)$, $\cos^2(t)$, and $1$ are linearly dependent, we should find that the following matrix is somewhat ill-conditioned.
-:::{card}
+```{tip}
+:class: dropdown
 The local variable scoping rule for loops applies to comprehensions as well.
-:::
-::::
+```
 
 ```{code-cell}
 t = linspace(0, 3, 400)';

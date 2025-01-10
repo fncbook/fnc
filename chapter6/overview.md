@@ -1,5 +1,5 @@
 (chapter-ivp)=
-# Initial-value problems for ODEs
+# 6. Initial-value problems for ODEs
 
 ```{index} Han Solo, A New Hope
 ```

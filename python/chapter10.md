@@ -11,7 +11,8 @@ numbering:
 ## Functions
 (function-shoot-python)=
 ``````{dropdown} Shooting method for a two-point boundary-value problem
-```{literalinclude} pkg/FNC/FNC10.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter10.py
 :filename: shoot.py
 :start-at: def shoot
 :end-at: return x, u, du_dx
@@ -23,7 +24,8 @@ numbering:
 
 (function-diffmats2-python)=
 ``````{dropdown} Second-order differentiation matrices
-```{literalinclude} pkg/FNC/FNC10.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter10.py
 :filename: diffmats2.py
 :start-at: def diffmat2
 :end-at: return x, Dx, Dxx
@@ -34,7 +36,8 @@ numbering:
 
 (function-diffcheb-python)=
 ``````{dropdown} Chebyshev differentiation matrices
-```{literalinclude} pkg/FNC/FNC10.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter10.py
 :filename: diffcheb.py
 :start-at: def diffcheb
 :end-at: return x, Dx, Dxx
@@ -45,7 +48,8 @@ numbering:
 
 (function-bvplin-python)=
 ``````{dropdown} Solution of a linear boundary-value problem
-```{literalinclude} pkg/FNC/FNC10.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter10.py
 :filename: bvplin.py
 :start-at: def bvplin(
 :end-at: return x, u
@@ -61,7 +65,8 @@ Note that there is no need to explicitly form the row-deletion matrix $\mathbf{E
 
 (function-bvp-python)=
 ``````{dropdown} Solution of a nonlinear boundary-value problem
-```{literalinclude} pkg/FNC/FNC10.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter10.py
 :filename: bvp.py
 :start-at: def bvp(
 :end-at: return x
@@ -76,7 +81,8 @@ The nested function `residual` uses differentiation matrices computed externally
 
 (function-fem-python)=
 ``````{dropdown} Piecewise linear finite elements for a linear BVP
-```{literalinclude} pkg/FNC/FNC10.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter10.py
 :filename: fem.py
 :start-at: def fem
 :end-at: return x, u
@@ -88,6 +94,7 @@ The nested function `residual` uses differentiation matrices computed externally
 ## Examples
 
 ```{code-cell}
+:tags: remove-cell
 exec(open("FNC_init.py").read())
 ```
 
@@ -552,4 +559,3 @@ xlabel("$x$"),  ylabel("$u$")
 title("Solution by finite elements");
 ```
 ``````
-

@@ -12,8 +12,9 @@ numbering:
 ## Functions 
 
 (function-horner-matlab)=
-`````{dropdown} **Horner's algorithm for evaluating a polynomial**
-```{literalinclude} ../matlab/fnc/horner.m
+`````{dropdown} Horner's algorithm for evaluating a polynomial
+:open: true
+```{literalinclude} FNC-matlab/horner.m
 :lineno-start: 1
 :language: matlab
 ```
@@ -23,21 +24,25 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
 ### 1.1 @section-intro-floating-point
 (demo-float-accuracy-matlab)=
 ``````{dropdown} @demo-float-accuracy
-::::{grid} 1 1 2 2
+:::{tip} Getting started in MATLAB
+:class: dropdown
+See @section-setup-matlab for instructions on how to install functions for MATLAB for this book.
+:::
+
 Recall the grade-school approximation to the number $\pi$.
 
-```{index} MATLAB; `format`
+```{index} MATLAB; format
 ```
 
-```{card}
+```{tip}
+:class: dropdown
 The number of digits displayed is controlled by `format`, but the underlying values are not affected by it.
 ```
 
@@ -45,12 +50,12 @@ The number of digits displayed is controlled by `format`, but the underlying val
 format long
 p = 22/7
 ```
-::::{grid} 1 1 2 2
 Not all the digits displayed for `p` are the same as those of $\pi$. 
-:::{card}
+
+```{tip}
+:class: dropdown
 The value of `pi` is predefined.
-:::
-::::
+```
 
 The absolute and relative accuracies of the approximation are as follows.
 
@@ -59,12 +64,11 @@ abs_accuracy = abs(p - pi)
 rel_accuracy = abs(p - pi) / pi
 ```
 
-::::{grid} 1 1 2 2
 Here we calculate the number of accurate digits in `p`.
-:::{card}
+```{tip}
+:class: dropdown
 The `log` function is for the natural log. For other common bases, use `log10` or `log2`.
-:::
-::::
+```
 
 ```{code-cell}
 format short
@@ -82,13 +86,12 @@ fprintf('1 has type: %s', class(1))
 fprintf('1.0 has type: %s', class(1.0))
 ```
 
-::::{grid} 1 1 2 2
 The spacing between floating-point values in $[2^n,2^{n+1})$ is $2^n \epsilon_\text{mach}$, where $\epsilon_\text{mach}$ is machine epsilon. Its value is predefined as `eps`.
 
-:::{card}
+```{tip}
+:class: dropdown
 While you can assign a different value to `eps`, doing so does not change any arithmetic. It's generally a bad idea. 
-:::
-::::
+```
 
 ```{code-cell} 
 eps
@@ -166,12 +169,11 @@ r1 = (-b - d) / (2*a)
 r2 = (-b + d) / (2*a)
 ```
 
-::::{grid} 1 1 2 2
 The display of `r2` suggests that the last five digits or so are inaccurate. The relative errors are
-:::{card}
+```{tip}
+:class: dropdown
 Putting values inside square brackets creates a vector.
-:::
-::::
+```
 
 ```{code-cell}
 format short e
@@ -223,13 +225,12 @@ The comments at the start of {numref}`Function {number} <function-horner>` are d
 ```{index} ! MATLAB; scientific notation
 ```
 
-::::{grid} 1 1 2 2
 We apply the quadratic formula to find the roots of a quadratic via {eq}`quadunstable`. 
 
-:::{card}
+```{tip}
+:class: dropdown
 A number in scientific notation is entered as `1.23e4` rather than as `1.23 * 10^4`.
-:::
-::::
+```
 
 ```{code-cell}
 a = 1;  b = -(1e6 + 1e-6);  c = 1;
@@ -288,12 +289,11 @@ abs(x2 - 1e-6) / 1e-6
 ``````{dropdown} @demo-stability-roots
 
 
-::::{grid} 1 1 2 2
 Our first step is to construct a polynomial with six known roots.
-:::{card}
+```{tip}
+:class: dropdown
 The `'` operator is used for transposition. Here, we want to make `r` a column vector.
-:::
-::::
+```
 
 ```{code-cell}
 r = [-2 ,-1, 1, 1, 3, 6]';
@@ -306,12 +306,11 @@ Now we use a standard numerical method for finding those roots, pretending that 
 rr = sort(roots(p))   
 ```
 
-::::{grid} 1 1 2 2
 Here are the relative errors in each of the computed roots. 
-:::{card}
+```{tip}
+:class: dropdown
 The `./` operator is used for element-wise division.
-:::
-::::
+```
 
 ```{code-cell}
 disp("Root errors:") 

@@ -12,7 +12,8 @@ numbering:
 
 (function-poweriter-python)=
 ``````{dropdown} Power iteration
-```{literalinclude} ../python/pkg/FNC/FNC08.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter08.py
 :filename: poweriter.py
 :start-at: def poweriter
 :end-at: return gamma, x
@@ -23,7 +24,8 @@ numbering:
 
 (function-inviter-python)=
 ``````{dropdown} Inverse iteration
-```{literalinclude} ../python/pkg/FNC/FNC08.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter08.py
 :filename: inviter.py
 :start-at: def inviter
 :end-at: return gamma, x
@@ -34,7 +36,8 @@ numbering:
 
 (function-arnoldi-python)=
 ``````{dropdown} Arnoldi iteration
-```{literalinclude} ../python/pkg/FNC/FNC08.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter08.py
 :filename: arnoldi.py
 :start-at: def arnoldi
 :end-at: return Q, H
@@ -49,9 +52,10 @@ The loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}
 
 (function-gmres-python)=
 ``````{dropdown} GMRES
-```{literalinclude} ../python/pkg/FNC/FNC08.py
+:open:
+```{literalinclude} fncbook/fncbook/chapter08.py
 :filename: gmres.py
-:start-at: def arngmres
+:start-at: def gmres
 :end-at: return x, residual
 :language: python
 :linenos: true
@@ -61,6 +65,7 @@ The loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}
 ## Examples
 
 ```{code-cell} ipython3
+:tags: remove-cell
 exec(open("FNC_init.py").read())
 ```
 
@@ -68,6 +73,10 @@ exec(open("FNC_init.py").read())
 
 (demo-structure-sparse-python)=
 ``````{dropdown} @demo-structure-sparse
+```{tip}
+Functions to work with sparse matrices are found in the `scipy.sparse` module.
+```
+
 Here we load the adjacency matrix of a graph with 2790 nodes. Each node is a web page referring to Roswell, NM, and the edges represent links between web pages. (Credit goes to Panayiotis Tsaparas and the University of Toronto for making this data public.)
 
 ```{code-cell}
@@ -133,11 +142,11 @@ spy(A)
 title("Adjacency matrix $A$");
 ```
 
-::::{grid} 1 1 2 2
 By {numref}`Theorem {number} <theorem-insight-adjmat>`, the entries of $\mathbf{A}^k$ give the number of walks of length $k$ between pairs of nodes, as with "*k* degrees of separation" within a social network. As $k$ grows, the density of $\mathbf{A}^k$ also grows.
-:::{card}
+```{tip}
+:class: dropdown
 While `A**6` is valid syntax here, it means elementwise power, not matrix power. 
-:::
+```
 
 ```{index} ! Python; matrix_power
 ```
@@ -362,11 +371,11 @@ title(("Convergence of inverse iteration"));
 ```{index} ! Python; argsort
 ```
 
-::::{grid} 1 1 2 2
 Let's reorder the eigenvalues to enforce {eq}`shiftorder`.
-:::{card}
+```{tip}
+:class: dropdown
 The `argsort` function returns the index permutation needed to sort the given vector, rather than the sorted vector itself.
-::::
+```
 
 ```{code-cell}
 ev = ev[argsort(abs(ev - 0.7))]

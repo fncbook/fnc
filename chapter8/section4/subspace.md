@@ -309,7 +309,7 @@ In the next section we revisit the idea of approximately solving $\mathbf{A}\mat
 
     **(a)** Apply {numref}`Function {number} <function-arnoldi>` and output `Q` and `H` when using the following seed vectors. 
     
-    *(i)* `u=[1,0,0,0]` $\qquad$ *(ii)* `u=[1,1,1,1]` $\qquad$ *(iii)* `u=rand(4)`
+    *(i)* $\bigl[1,\,0,\,0,\,0\bigr]$ $\qquad$ *(ii)* $\bigl[1,\,1,\,1,\,1\bigr]$ $\qquad$ *(iii)* `rand(4)`
    
     **(b)** Can you explain why case (ii) in part (a) cannot finish successfully? (Hint: What line(s) of the function can possibly return NaN when applied to finite values?) 
     

@@ -12,7 +12,8 @@ numbering:
 
 (function-polyinterp-julia)=
 ``````{dropdown} Barycentric polynomial interpolation
-```{literalinclude} package/src/chapter09.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter09.jl
 :filename: polyinterp.jl
 :start-after: # begin polyinterp
 :end-before: # end polyinterp
@@ -30,7 +31,8 @@ The return value is a function that evaluates the polynomial interpolant. Within
 
 (function-triginterp-julia)=
 ``````{dropdown} Trigonometric interpolation
-```{literalinclude} package/src/chapter09.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter09.jl
 :filename: triginterp.jl
 :start-after: # begin triginterp
 :end-before: # end triginterp
@@ -46,7 +48,8 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 
 (function-ccint-julia)=
 ``````{dropdown} Clenshaw–Curtis integration
-```{literalinclude} package/src/chapter09.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter09.jl
 :filename: ccint.jl
 :start-after: # begin ccint
 :end-before: # end ccint
@@ -57,7 +60,8 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 
 (function-glint-julia)=
 ``````{dropdown} Gauss–Legendre integration
-```{literalinclude} package/src/chapter09.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter09.jl
 :filename: glint.jl
 :start-after: # begin glint
 :end-before: # end glint
@@ -68,7 +72,8 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 
 (function-intinf-julia)=
 ``````{dropdown} Integration over $(-\infty,\infty)$
-```{literalinclude} package/src/chapter09.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter09.jl
 :filename: intinf.jl
 :start-after: # begin intinf
 :end-before: # end intinf
@@ -84,7 +89,8 @@ The test `isinf(x(M))` in line 17 checks whether $x(M)$ is larger than the maxim
 
 (function-intsing-julia)=
 ``````{dropdown} Integration with endpoint singularities
-```{literalinclude} package/src/chapter09.jl
+:open:
+```{literalinclude} FNCFunctions/src/chapter09.jl
 :filename: intsing.jl
 :start-after: # begin intsing
 :end-before: # end intsing
@@ -116,12 +122,11 @@ t = [ 1, 1.5, 2, 2.25, 2.75, 3 ]
 n = length(t) - 1;
 ```
 
-::::{grid} 1 1 2 2
 Let's apply the definition of the cardinal Lagrange polynomial for $k=2$. First we define a polynomial $q$ that is zero at all the nodes except $i=k$. Then $\ell_2$ is found by normalizing $q$ by $q(t_k)$.
-:::{card}
+```{tip}
+:class: dropdown
 Character ℓ is typed as `\ell`<kbd>Tab</kbd>.
-:::
-::::
+```
 
 ```{code-cell}
 k = 2
@@ -151,14 +156,13 @@ t =  [ 1, 1.6, 1.9, 2.7, 3 ]
 n = length(t) - 1;
 ```
 
-::::{grid} 1 1 2 2
 Here $n=4$ and $f^{(5)}(\xi) = 4!/\xi^5$. For $\xi\in[1,3]$ we can say that $|f^{(5)}(\xi)| \le 4!$. Hence 
 
 $$ |f(x)-p(x)| \le \frac{1}{5} \left| \Phi(x) \right|.$$
-:::{card}
+```{tip}
+:class: dropdown
 Character Φ is typed as `\Phi`<kbd>Tab</kbd>. (Note the capitalization.)
-:::
-::::
+```
 
 ```{code-cell}
 using Polynomials
@@ -436,12 +440,11 @@ labels = ["n", "intercept", "slope"]
 
 (demo-trig-interp-julia)=
 ``````{dropdown} @demo-trig-interp
-::::{grid} 1 1 2 2
 We will get a cardinal function without using an explicit formula, just by passing data that is 1 at one node and 0 at the others.
-:::{card}
+```{tip}
+:class: dropdown
 The operator `÷`, typed as `\div` then <kbd>Tab</kbd>, returns the quotient without remainder of two integers.
-:::
-::::
+```
 
 ```{code-cell}
 N = 7
@@ -719,4 +722,3 @@ plot!(n, 30n.^(-4);
 
 As in {numref}`Demo {number} <demo-improper-intinf>`, the double exponential method is more accurate than direct integration by a few orders of magnitude. Equivalently, the same accuracy can be reached with many fewer nodes.
 ``````
-

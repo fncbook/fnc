@@ -12,7 +12,8 @@ numbering:
 
 (function-euler-matlab)=
 ``````{dropdown} Euler's method for an initial-value problem
-```{literalinclude} ../matlab/fnc/eulerivp.m
+:open:
+```{literalinclude} FNC-matlab/eulerivp.m
 :language: matlab
 :linenos: true
 ```
@@ -24,7 +25,8 @@ The `ivp` input argument is the same structure that is used with the built-in `s
 
 (function-ie2-matlab)=
 ``````{dropdown} Improved Euler method for an IVP
-```{literalinclude} ../matlab/fnc/ie2.m
+:open:
+```{literalinclude} FNC-matlab/ie2.m
 :language: matlab
 :linenos: true
 ```
@@ -32,7 +34,8 @@ The `ivp` input argument is the same structure that is used with the built-in `s
 
 (function-rk4-matlab)=
 ``````{dropdown} Fourth-order Runge-Kutta for an IVP
-```{literalinclude} ../matlab/fnc/rk4.m
+:open:
+```{literalinclude} FNC-matlab/rk4.m
 :language: matlab
 :linenos: true
 ```
@@ -40,7 +43,8 @@ The `ivp` input argument is the same structure that is used with the built-in `s
 
 (function-rk23-matlab)=
 ``````{dropdown} Adaptive IVP solver based on embedded RK formulas
-```{literalinclude} ../matlab/fnc/rk23.m
+:open:
+```{literalinclude} FNC-matlab/rk23.m
 :language: matlab
 :linenos: true
 ```
@@ -58,7 +62,8 @@ While {eq}`bs23` calls for four stages to find the paired second- and third-orde
 
 (function-ab4-matlab)=
 ``````{dropdown} 4th-order Adams–Bashforth formula for an IVP
-```{literalinclude} ../matlab/fnc/ab4.m
+:open:
+```{literalinclude} FNC-matlab/ab4.m
 :language: matlab
 :linenos: true
 ```
@@ -72,7 +77,8 @@ Line 36 computes $f_i$, based on the most recent solution value and time. That g
 
 (function-am2-matlab)=
 ``````{dropdown} 2nd-order Adams–Moulton (trapezoid) formula for an IVP
-```{literalinclude} ../matlab/fnc/am2.m
+:open:
+```{literalinclude} FNC-matlab/am2.m
 :language: matlab
 :linenos: true
 ```
@@ -86,8 +92,7 @@ Lines 32--34 define the function $\mathbf{g}$. This is sent to `levenberg` in li
 
 ```{code-cell}
 :tags: [remove-cell]
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab/fnc
-addpath /Users/driscoll/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 ### 6.1 @section-ivp-basics
@@ -95,12 +100,11 @@ FNC_init
 (demo-basics-first-matlab)=
 ``````{dropdown} @demo-basics-first
 
-::::{grid} 1 1 2 2
 Let's use it to define and solve an initial-value problem for $u'=\sin[(u+t)^2]$ over $t \in [0,4]$, such that $u(0)=-1$. To create an initial-value problem for $u(t)$, you must create an `ode` with a function that computes $u'$ and an initial condition for $u$. Then you create a solution by calling `solve` with a time interval. 
-:::{card}
+```{tip}
+:class: dropdown
 Most real ODE problems contain parameters that are constant during the solution but that can change from one problem instance to the next. Accordingly, we define the ODE function below to accept a third argument, `p`, which is a vector of parameters. We always include this argument for consistency, even when there are no parameters.
-:::
-::::
+```
 
 ```{index} ! MATLAB; ode, ! MATLAB; solve
 ```
@@ -321,12 +325,11 @@ u0 = [1.25; -0.5; 0; 0];
 a = 0; b = 50;
 ```
 
-::::{grid} 1 1 2 2
 First we check the behavior of the system when the pendulums are uncoupled, i.e., when $k=0$.
-:::{card}
+```{tip}
+:class: dropdown
 Here `OutputVariables` is used to restrict output to just $u_1$ and $u_2$.
-:::
-::::
+```
 
 ```{code-cell}
 params =[0.01, 0.5, 0];    % gamma, L, k
@@ -491,12 +494,11 @@ Now we perform a convergence study of the AB4 code.
 
 ```{code-cell}
 n = round(4 * 10.^(0:0.5:3)');
-err = [];
+err = zeros(size(n));
 for i = 1:length(n)
     [t, u] = ab4(ivp, a, b, n(i));
     err(i) = norm(u_ref(t) - u, Inf);
 end
-
 disp(table(n, err, variableNames=["n", "inf-norm error"]))
 ```
 
@@ -508,7 +510,7 @@ hold on
 loglog(n, 0.5 * err(end) * (n / n(end)) .^ (-4), '--')
 xlabel("n");  ylabel("inf-norm error")
 title("Convergence of AB4")
-legend("AB4", "O(n^{-4})", "location", "southwest");
+legend("AB4", "O(n^{-4})", location="southwest");
 ```
 ``````
 
@@ -557,7 +559,7 @@ hold on
 plot(tE, uE)
 [tE, uE] = ab4(ivp, 0, 400, 1600);
 plot(tE, uE)
-legend("AM2, n=200", "AB4, n=1000", "AB4, n=1600");
+legend("AM2, n=200", "AB4, n=1000", "AB4, n=1600", location="northwest");
 ```
 
 So AB4, which is supposed to be _more_ accurate than AM2, actually needs something like 8 times as many steps to get a reasonable-looking answer!
