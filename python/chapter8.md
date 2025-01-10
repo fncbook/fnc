@@ -13,7 +13,7 @@ numbering:
 (function-poweriter-python)=
 ``````{dropdown} Power iteration
 :open:
-```{literalinclude} pkg/fncbook/chapter08.py
+```{literalinclude} fncbook/fncbook/chapter08.py
 :filename: poweriter.py
 :start-at: def poweriter
 :end-at: return gamma, x
@@ -25,7 +25,7 @@ numbering:
 (function-inviter-python)=
 ``````{dropdown} Inverse iteration
 :open:
-```{literalinclude} pkg/fncbook/chapter08.py
+```{literalinclude} fncbook/fncbook/chapter08.py
 :filename: inviter.py
 :start-at: def inviter
 :end-at: return gamma, x
@@ -37,7 +37,7 @@ numbering:
 (function-arnoldi-python)=
 ``````{dropdown} Arnoldi iteration
 :open:
-```{literalinclude} pkg/fncbook/chapter08.py
+```{literalinclude} fncbook/fncbook/chapter08.py
 :filename: arnoldi.py
 :start-at: def arnoldi
 :end-at: return Q, H
@@ -53,9 +53,9 @@ The loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}
 (function-gmres-python)=
 ``````{dropdown} GMRES
 :open:
-```{literalinclude} pkg/fncbook/chapter08.py
+```{literalinclude} fncbook/fncbook/chapter08.py
 :filename: gmres.py
-:start-at: def arngmres
+:start-at: def gmres
 :end-at: return x, residual
 :language: python
 :linenos: true
@@ -65,9 +65,7 @@ The loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}
 ## Examples
 
 ```{code-cell} ipython3
-:tags: [remove-cell]
-import os
-print(os.chdir("/Users/driscoll/Documents/GitHub/fnc/python"))
+:tags: remove-cell
 exec(open("FNC_init.py").read())
 ```
 
@@ -75,6 +73,10 @@ exec(open("FNC_init.py").read())
 
 (demo-structure-sparse-python)=
 ``````{dropdown} @demo-structure-sparse
+```{tip}
+Functions to work with sparse matrices are found in the `scipy.sparse` module.
+```
+
 Here we load the adjacency matrix of a graph with 2790 nodes. Each node is a web page referring to Roswell, NM, and the edges represent links between web pages. (Credit goes to Panayiotis Tsaparas and the University of Toronto for making this data public.)
 
 ```{code-cell}

@@ -11,9 +11,7 @@ numbering:
 ## Examples
 
 ```{code-cell} ipython3
-:tags: [remove-cell]
-import os
-print(os.chdir("/Users/driscoll/Documents/GitHub/fnc/python"))
+:tags: remove-cell
 exec(open("FNC_init.py").read())
 ```
 

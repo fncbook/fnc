@@ -1,4 +1,4 @@
-# Advection equations
+# 12. Advection equations
 
 ```{index} Obi-Wan Kenobi, A New Hope
 ```

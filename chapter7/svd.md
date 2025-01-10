@@ -327,7 +327,7 @@ The conclusion {eq}`svdnorm` can be proved by vector calculus. In the square cas
 
     **(b)** Make a log-linear plot of the singular values of $\mathbf{A}_{40}$. 
 
-    **(c)** Repeat part (b) after converting the elements of `x` to type `Float32` (i.e., single precision).
+    **(c)** Repeat part (b) after converting the elements of `x` to single precision.
 
     **(d)** Having seen the plot for part (c), which singular values in part (b) do you suspect may be incorrect?
 

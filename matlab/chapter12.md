@@ -79,7 +79,7 @@ close(gcf)
 ``````
 
 ```{code-cell}
-:tags: remove-cell
+:tags: [remove-cell]
 FNC_init
 ```
 
@@ -210,7 +210,7 @@ In this case the density bump travels backward along the road. It also steepens 
 ``````
 
 ```{code-cell}
-:tags: remove-cell
+:tags: [remove-cell]
 FNC_init
 ```
 
@@ -328,7 +328,7 @@ u = @(t) [zeros(1, length(t)); sol(t)];
 ```{code-cell}
 :tags: hide-input
 FNC_init
-clf,  contour(x, t, u(t)', 0.15:0.2:1)
+contour(x, t, u(t)', 0.15:0.2:1)
 xlabel x,  ylabel t
 title('Advection with outflow BC')
 ```
@@ -360,7 +360,7 @@ close(gcf)
 ``````
 
 ```{code-cell}
-:tags: remove-cell
+:tags: [remove-cell]
 FNC_init
 ```
 
@@ -442,7 +442,8 @@ lambda = eig(A);
 
 ```{code-cell}
 :tags: hide-input
-clf,  scatter(real(lambda), imag(lambda))
+clf
+scatter(real(lambda), imag(lambda))
 axis equal,  grid on 
 title('Eigenvalues of advection with zero inflow')
 ```
@@ -548,7 +549,7 @@ The original hump breaks into two pieces of different amplitudes, each traveling
 ``````
 
 ```{code-cell}
-:tags: remove-cell
+:tags: [remove-cell]
 FNC_init
 ```
 

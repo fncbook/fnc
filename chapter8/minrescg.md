@@ -231,25 +231,22 @@ This estimate fails for very large $\kappa$, however.
     
     **(c)** $1,2,\ldots,100$
 
-2. ⌨ Let $\mathbf{b}$ be a random unit vector of length 200. Define the matrix
-   
-    ```julia
-    u = range(-200,-5,length=100); 
-    v = range(10,100,length=100);
-    A = diagm([u;v]);
-    ```
+2. ⌨ Let $\mathbf{b}$ be a random unit vector of length 202. Define a diagonal matrix with diagonal entries $d_k$ given by
+    \begin{align*}
+    d_k &= -200 + 1.95k, \quad k=0,1,\ldots,100, \\
+    d_{k+101} &= 10 + 0.9k, \quad k=0,1,\ldots,100.
+    \end{align*}
     
-    **(a)**  Apply 120 iterations of `minres` to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$. Compute the relative error of the answer, and plot the norm of the residual as a function of $m$ on a log-linear scale.
+    **(a)**  Apply 120 iterations of MINRES to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$. Compute the relative error of the answer, and plot the norm of the residual as a function of $m$ on a log-linear scale.
 
-    **(b)** Add to your graph the line representing the upper bound {eq}`minres-conv`. (Ignore the rounding in the exponent.) This line should stay strictly on or above the convergence curve.
+    **(b)** Add to your graph the line representing the upper bound {eq}`minres-conv`. (Ignore the rounding in the exponent.) This line should stay strictly on or above the error curve.
 
-3. ⌨ Let $\mathbf{b}$ be a random unit vector of length 500. Define the matrix
-   
-    ```julia
-    A = spdiagm(range(4,10000,length=500));
-    ```
+3. ⌨ Let $\mathbf{b}$ be a random unit vector of length 501. Define a sparse diagonal matrix $\mathbf{A}$ with diagonal entries $d_k$ given by
+    \begin{align*}
+    d_k &= 4 + k\cdot\frac{9996}{500}, \quad k=0,1,\ldots,500.
+    \end{align*}
 
-    **(a)**  Apply 100 iterations of `minres` to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$. Compute the relative norm of the answer. Plot the norm of the residual as a function of $m$.
+    **(a)** Apply 100 iterations of MINRES to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$. Compute the relative norm of the answer. Plot the norm of the residual as a function of $m$.
     
     **(b)** Add to your graph the line representing the upper bound {eq}`cgconv`. This line should stay strictly on or above the convergence curve.
   
@@ -274,19 +271,10 @@ This estimate fails for very large $\kappa$, however.
     ```{index} Helmholtz equation
     ```
     
-6. ⌨ The following linear system arises from the Helmholtz equation for wave propagation:
-    
-    ```julia
-    A = FNC.poisson(n) - k^2*I
-    b = -ones(n^2)
-    ```
+6. ⌨  Let $n=50$. Define the matrix $\mathbf{A}_k$ as `FNC.poisson(n)` minus $k^2$ times the $n^2\times n^2$ identity matrix, and define vector $\mathbf{b}$ as $n^2$ copies of $-1$. The linear system $\mathbf{A}_k\mathbf{x}=\mathbf{b}$ arises from the *Helmholtz equation* for wave propagation at a single frequency $k$.
 
-    **(a)** Apply both MINRES and CG to the linear system for $n=50$ and $k=1.3$, solving to a relative residual tolerance of $10^{-5}$. Plotting their convergence curves together.
+    **(a)** Apply both MINRES and CG to the Helmholtz system for $k=1.3$, solving to a relative residual tolerance of $10^{-5}$. Plotting their convergence curves together.
   
     **(b)** Repeat part (a) for $k=8$. 
 
-    **(c)** Use `eigs` on the matrix from part (b) to show that it is indefinite. (Hint: Use `which=:SR` and `which=:LR` to get the smallest real and largest real values.) This helps explain why the CG convergence curve for this matrix looks rather strange.
-
-
-
-
+    **(c)** Use `eigs` on the matrix from part (b) to show that it is indefinite. (Hint: Use additional arguments to get the eigenvalues with smallest and largest real parts.) This helps explain why the CG convergence curve for this matrix looks rather strange.

@@ -1,5 +1,5 @@
 (chapter-bvp)=
-# Boundary-value problems
+# 10. Boundary-value problems
 
 ```{index} C3PO, A New Hope
 ```

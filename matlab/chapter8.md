@@ -78,7 +78,7 @@ sz = size(A);  n = sz(1);
 density = nnz(A) / prod(sz)
 ```
 
-The computer memory consumed by any variable can be discovered using `summarysize`. We can use it to compare the space needed for the sparse representation to its dense counterpart, that is, the space needed to store all the elements, whether zero or not.
+The computer memory consumed by any variable can be discovered using `whos`. We can use it to compare the space needed for the sparse representation to its dense counterpart, that is, the space needed to store all the elements, whether zero or not.
 
 ```{code-cell}
 F = full(A);
@@ -146,7 +146,7 @@ end
 ```{index} ! MATLAB; spdiags
 ```
 
-The `spdiagm` function creates a sparse matrix given its diagonal elements. The main or central diagonal is numbered zero, above and to the right of that is positive, and below and to the left is negative.
+The `spdiags` function creates a sparse matrix given its diagonal elements. The main or central diagonal is numbered zero, above and to the right of that is positive, and below and to the left is negative.
 
 ```{code-cell}
 n = 50;
@@ -527,7 +527,7 @@ b = rand(100, 1);
 Instead of building the Krylov matrices, we use the Arnoldi iteration to generate equivalent orthonormal vectors.
 
 ```{code-cell}
-[Q, H] = arnoldi(A,b,60);
+[Q, H] = arnoldi(A, b, 60);
 ```
 
 The Arnoldi bases are used to solve the least-squares problems defining the GMRES iterates.
@@ -535,7 +535,7 @@ The Arnoldi bases are used to solve the least-squares problems defining the GMRE
 ```{code-cell}
 resid = norm(b);
 for m = 1:60
-    s = [norm(b); zeros(m)];
+    s = [norm(b); zeros(m, 1)];
     z = H(1:m+1, 1:m) \ s;
     x = Q(:, 1:m) * z;
     resid = [resid, norm(b - A * x)];

@@ -15,7 +15,7 @@ Python implementations
 (function-newton-python)=
 ``````{dropdown} Newton's method
 :open:
-```{literalinclude} pkg/fncbook/chapter04.py
+```{literalinclude} fncbook/fncbook/chapter04.py
 :filename: newton.py
 :start-line: 4
 :end-line: 34
@@ -33,7 +33,7 @@ The `break` statement, seen here in line 25, causes an immediate exit from the i
 (function-secant-python)=
 ``````{dropdown} Secant method
 :open:
-```{literalinclude} pkg/fncbook/chapter04.py
+```{literalinclude} fncbook/fncbook/chapter04.py
 :filename: secant.py
 :start-line: 36
 :end-line: 66
@@ -49,7 +49,7 @@ Because we want to observe the convergence of the method, {numref}`Function {num
 (function-newtonsys-python)=
 ``````{dropdown} Newton's method for systems
 :open:
-```{literalinclude} pkg/fncbook/chapter04.py
+```{literalinclude} fncbook/fncbook/chapter04.py
 :filename: newtonsys.py
 :start-line: 68
 :end-line: 96
@@ -65,7 +65,7 @@ The output of {numref}`Function {number} <function-newtonsys>` is a vector of ve
 (function-fdjac-python)=
 ``````{dropdown} Finite differences for Jacobian
 :open:
-```{literalinclude} pkg/fncbook/chapter04.py
+```{literalinclude} fncbook/fncbook/chapter04.py
 :filename: fdjac.py
 :start-line: 98
 :end-line: 112
@@ -83,7 +83,7 @@ Note that a default value is given for the third argument `y₀`, and it refers 
 (function-levenberg-python)=
 ``````{dropdown} Levenberg's method
 :open:
-```{literalinclude} pkg/fncbook/chapter04.py
+```{literalinclude} fncbook/fncbook/chapter04.py
 :filename: levenberg.py
 :start-line: 114
 :end-line: 168
@@ -95,9 +95,7 @@ Note that a default value is given for the third argument `y₀`, and it refers 
 ## Examples
 
 ```{code-cell} ipython3
-:tags: [remove-cell]
-import os
-print(os.chdir("/Users/driscoll/Documents/GitHub/fnc/python"))
+:tags: remove-cell
 exec(open("FNC_init.py").read())
 ```
 
@@ -495,7 +493,8 @@ plot(y_, x_, label="$y=h^{-1}(x)$")
 plot([0, max(y_)], [0, max(y_)], 'k--', label="")
 title("Function and its inverse")
 xlabel("x"), ylabel("y"), axis("equal")
-ax.grid(), legend();
+ax.grid()
+legend();
 ```
 ``````
 ### 4.4 @section-nonlineqn-secant
@@ -703,10 +702,10 @@ x = FNC.newtonsys(func, jac, x1)
 print(x)
 ```
 
-The output has one column per iteration, so the last column contains the final Newton estimate. Let's compute the residual of the last result.
+The output has one row per iteration, so the last row contains the final Newton estimate. Let's compute its residual.
 
 ```{code-cell}
-r = x[:, -1]
+r = x[-1]
 f = func(r)
 print("final residual:", f)
 ```
@@ -714,7 +713,7 @@ print("final residual:", f)
 Let's check the convergence rate:
 
 ```{code-cell}
-logerr = [log(norm(x[:, k] - r)) for k in range(x.shape[1] - 1)]
+logerr = [log(norm(x[k] - r)) for k in range(x.shape[0] - 1)]
 for k in range(len(logerr) - 1):
     print(logerr[k+1] / logerr[k])
 ```
@@ -741,19 +740,19 @@ In all other respects usage is the same as for the `newtonsys` function.
 ```{code-cell}
 x1 = zeros(3)
 x = FNC.levenberg(func, x1)
-print(f"Took {x.shape[1]-1} iterations.")
+print(f"Took {len(x) - 1} iterations.")
 ```
 
 It's always a good idea to check the accuracy of the root, by measuring the residual (backward error).
 
 ```{code-cell}
-r = x[:, -1]
+r = x[-1]
 print("backward error:", norm(func(r)))
 ```
 Looking at the convergence in norm, we find a convergence rate between linear and quadratic, like with the secant method:
 
 ```{code-cell}
-logerr = [log(norm(x[:, k] - r)) for k in range(x.shape[1] - 1)]
+logerr = [log(norm(x[k] - r)) for k in range(len(x) - 1)]
 for k in range(len(logerr) - 1):
     print(logerr[k+1] / logerr[k])
 ```
@@ -775,8 +774,8 @@ for R in [1e-3, 1e-2, 1e-1]:
     # Define the perturbed function.
     f = lambda x: g(x) - g(p) + R * array([-1, 1, -1]) / sqrt(3)
     x = FNC.levenberg(f, [0, 0])
-    r = x[:, -1]
-    err = [norm(x[:, j] - r) for j in range(x.shape[1] - 1)]
+    r = x[-1]
+    err = [norm(x[j] - r) for j in range(len(x) - 1)]
     normres = norm(f(r))
     semilogy(err, label=f"R={normres:.2g}")
 title("Convergence of Gauss–Newton")
@@ -833,7 +832,7 @@ def misfitjac(x):
 ```{code-cell}
 x1 = [1, 0.75]
 x = FNC.newtonsys(misfit, misfitjac, x1)
-V, Km = x[:, -1]  # final values
+V, Km = x[-1]  # final values
 print(f"estimates are V = {V:.3f}, Km = {Km:.3f}")
 ```
 

@@ -1,4 +1,4 @@
-# Diffusion equations
+# 11. Diffusion equations
 
 ```{index} Wedge Antilles, A New Hope
 ```

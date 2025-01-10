@@ -13,7 +13,7 @@ numbering:
 (function-polyinterp-python)=
 ``````{dropdown} Barycentric polynomial interpolation
 :open:
-```{literalinclude} pkg/fncbook/chapter09.py
+```{literalinclude} fncbook/fncbook/chapter09.py
 :filename: polyinterp.py
 :start-at: def polyinterp
 :end-at: return np.vectorize(p)
@@ -32,7 +32,7 @@ The return value is a function that evaluates the polynomial interpolant. Within
 (function-triginterp-python)=
 ``````{dropdown} Trigonometric interpolation
 :open:
-```{literalinclude} pkg/fncbook/chapter09.py
+```{literalinclude} fncbook/fncbook/chapter09.py
 :filename: triginterp.py
 :start-at: def triginterp
 :end-at: return np.vectorize(p)
@@ -49,7 +49,7 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 (function-ccint-python)=
 ``````{dropdown} Clenshaw–Curtis integration
 :open:
-```{literalinclude} pkg/fncbook/chapter09.py
+```{literalinclude} fncbook/fncbook/chapter09.py
 :filename: ccint.py
 :start-at: def ccint
 :end-at: return I, x
@@ -61,7 +61,7 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 (function-glint-python)=
 ``````{dropdown} Gauss–Legendre integration
 :open:
-```{literalinclude} pkg/fncbook/chapter09.py
+```{literalinclude} fncbook/fncbook/chapter09.py
 :filename: glint.py
 :start-at: def glint
 :end-at: return I, x
@@ -73,7 +73,7 @@ The construct on line 13 is known as a *ternary operator*. It is a shorthand for
 (function-intinf-python)=
 ``````{dropdown} Integration over $(-\infty,\infty)$
 :open:
-```{literalinclude} pkg/fncbook/chapter09.py
+```{literalinclude} fncbook/fncbook/chapter09.py
 :filename: intinf.py
 :start-at: def intinf
 :end-at: return I, x
@@ -90,7 +90,7 @@ The test `isinf(x(M))` in line 17 checks whether $x(M)$ is larger than the maxim
 (function-intsing-python)=
 ``````{dropdown} Integration with endpoint singularities
 :open:
-```{literalinclude} pkg/fncbook/chapter09.py
+```{literalinclude} fncbook/fncbook/chapter09.py
 :filename: intsing.py
 :start-at: def intsing
 :end-at: return I, x
@@ -107,9 +107,7 @@ The test `iszero(x(M))` in line 17 checks whether $x(M)$ is less than the smalle
 ## Examples
 
 ```{code-cell}
-:tags: [remove-cell]
-import os
-print(os.chdir("/Users/driscoll/Documents/GitHub/fnc/python"))
+:tags: remove-cell
 exec(open("FNC_init.py").read())
 ```
 
@@ -573,12 +571,16 @@ The Fourier coefficients of smooth functions decay exponentially in magnitude as
 ```{code-cell}
 f = lambda t: pi * sqrt(cos(pi * t) ** 2 + sin(pi * t) ** 2 / 4)
 N = arange(4, 48, 6)
-results = PrettyTable(["N", "perimeter estimate"])
+perim = zeros(N.size)
 for k in range(N.size):
     h = 2 / N[k]
     t = h * arange(N[k]) - 1
-    results.add_row([N[k], h * sum(f(t))])
-
+    perim[k] = h * sum(f(t))
+err = abs(perim - perim[-1])    # use the last value as reference
+results = PrettyTable()
+results.add_column("N", N)
+results.add_column("perimeter", perim)
+results.add_column("error", err)
 results
 ```
 The approximations gain about one digit of accuracy for each constant increment of $n$, which is consistent with spectral convergence.

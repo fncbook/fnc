@@ -200,13 +200,7 @@ A different statement of the conclusion is that for a first-order formula, at mo
 
 4. ✍ Calculate the first nonzero term in the Taylor series of the truncation error $\tau_{f}(h)$ for the finite-difference formula defined by the third row of {numref}`table-FDforward`.
 
-    ````{only} solutions
-    ````
-
 5. ✍ Show that the formula {eq}`centerFD22` is second-order accurate. 
-
-    ````{only} solutions
-    ````
 
 (problem-fd-muc)=
 6. ✍  A different way to derive finite-difference formulas is the **method of undetermined coefficients**. Starting from {eq}`fdformula`,

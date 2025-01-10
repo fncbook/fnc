@@ -1,5 +1,5 @@
 (chapter-krylov)=
-# Krylov methods in linear algebra
+# 8. Krylov methods in linear algebra
 
 ```{index} Luke Skywalker, Return of the Jedi
 ```

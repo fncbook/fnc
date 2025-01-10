@@ -164,22 +164,45 @@ Representation of an image as a matrix allows us to describe some common image o
 
     **(d)** Draw the graph. 
 
-4. ⌨ Refer to {numref}`Demo %s <demo-insight-image>` on loading and displaying test images.
+4. ⌨ Refer to {numref}`Demo %s <demo-insight-image>` on loading and displaying images. Choose a test image of your liking.
 
-    **(a)** Display the "lighthouse" test image upside-down.
+    **(a)** Display the test image upside-down.
 
     **(b)** Display it mirror-reversed from left to right. 
 
-    **(c)** Display the image so that it is cropped to isolate the black beacon section at the top of the lighthouse. 
+    **(c)** Display the image so that it is cropped to isolate a part of the subject. 
 
 (problem-insight-actors)=
-5. ⌨ For this problem you need to download and import data via:
-   
-   ```julia
-   datafile = download("https://tobydriscoll.net/fnc-julia/_static/resources/actors.jld2")
-   @load datafile A
-   ```
-    Based on data provided by the Self-Organized Networks Database at the University of Notre Dame, it contains information about the appearances of 392,400 actors in 127,823 movies, as given by the Internet Movie Database. The matrix $\mathbf{A}$ has $A_{ij}=1$ if actor $j$ appeared in movie $i$ and zero elements elsewhere.
+5. ⌨ For this problem you need to download and import data:
+   `````{tab-set} 
+    ````{tab-item} Julia
+    :sync: julia
+    Download [actors.mat](actors.mat) by clicking the link and saving (you may need to fix the file name).
+    ``` julia
+    using MAT
+    A = matread("actors.mat")["A"]
+    ```
+    ```` 
+
+    ````{tab-item} MATLAB
+    :sync: matlab
+    Download [actors.mat](actors.mat) by clicking the link and saving (you may need to fix the file name).
+    ``` matlab
+    load actors
+    ```
+    ```` 
+
+    ````{tab-item} Python
+    :sync: python
+    Download [actors.mtx](actors.mtx) by clicking the link and saving (you may need to fix the file name).
+    ``` python
+    import scipy.io as spio
+    A = spio.mmread("actors.mtx")
+    ```
+    ```` 
+    `````
+
+    Based on data provided by the Self-Organized Networks Database at the University of Notre Dame, the matrix `A` contains information about the appearances of 392,400 actors in 127,823 movies, as given by the Internet Movie Database. It has $A_{ij}=1$ if actor $j$ appeared in movie $i$ and zero elements elsewhere.
 
     **(a)** What is the maximum number of actors appearing in any one movie?
 

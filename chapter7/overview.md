@@ -1,5 +1,5 @@
 (chapter-matrixanaly)=
-# Matrix analysis
+# 7. Matrix analysis
 
 ```{index} Yoda, The Empire Strikes Back
 ```

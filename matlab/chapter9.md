@@ -378,7 +378,7 @@ fplot(p, [-1, 1], displayname="LS fit at 150 points")
 This situation is unlike interpolation, where the degree of the interpolant increases with the number of nodes. Here, the linear fit is apparently approaching a limit that we may think of as a continuous least-squares fit.
 
 ```{code-cell}
-n = 40:60:400;
+n = (40:60:400)';
 slope = zeros(size(n));
 intercept = zeros(size(n));
 
@@ -498,14 +498,15 @@ The Fourier coefficients of smooth functions decay exponentially in magnitude as
 ```{code-cell}
 f = @(t) pi * sqrt( cos(pi*t).^2 + sin(pi*t).^2 / 4 );
 N = (4:4:48)';
-C = zeros(size(N));
+perim = zeros(size(N));
 for k = 1:length(N)
     h = 2 / N(k);
     t = h * (0:N(k)-1);
-    C(k) = h * sum(f(t));
+    perim(k) = h * sum(f(t));
 end
+err = abs(perim - perim(end));    % use last value as "exact"
 format long
-disp(table(N, C, variableNames=["number of nodes", "perimeter"]))
+disp(table(N, perim, err, variableNames=["number of nodes", "perimeter", "error"]))
 ```
 The approximations gain about one digit of accuracy for each constant increment of $n$, which is consistent with spectral convergence.
 ``````

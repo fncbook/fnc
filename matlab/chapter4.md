@@ -547,7 +547,7 @@ title('Parabola model')
 ```
 
 To do inverse interpolation, we swap the roles of $x$ and $y$ in the interpolation.
-:::
+
 ```{tip}
 :class: dropdown
 By giving two functions in the `fplot` call, we get the parametric plot $(q(y),y)$ as a function of $y$.

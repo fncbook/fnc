@@ -222,8 +222,8 @@ f = @(x) x + exp(sin(4*x));
 For reference, here are the exact first and second derivatives.
 
 ```{code-cell}
-dfdx = @(x) 1 + 4 * exp(sin(4*x)) .* cos(4*x);
-d2fdx2 = @(x) 4 * exp(sin(4*x)) .* (4*cos(4*x).^2 - 4*sin(4*x));
+df_dx = @(x) 1 + 4 * exp(sin(4*x)) .* cos(4*x);
+d2f_dx2 = @(x) 4 * exp(sin(4*x)) .* (4*cos(4*x).^2 - 4*sin(4*x));
 ```
 
 We discretize on equally spaced nodes and evaluate $f$ at the nodes.
@@ -244,11 +244,11 @@ The results show poor accuracy for this small value of $n$.
 
 ```{code-cell}
 clf,  subplot(2, 1, 1)
-fplot(dfdx, [-1, 1]),  hold on
+fplot(df_dx, [-1, 1]),  hold on
 plot(t, yx, 'ko')
 xlabel('x'),  ylabel('f''(x)')
 subplot(2, 1, 2)
-fplot(d2fdx2, [-1, 1]),  hold on
+fplot(d2f_dx2, [-1, 1]),  hold on
 plot(t, yxx, 'ko')
 xlabel('x'),  ylabel('f''''(x)')
 ```
@@ -261,8 +261,8 @@ err = zeros(length(n), 2);
 for k = 1:length(n)
     [t, Dx, Dxx] = diffmat2(n(k), [-1, 1]);
     y = f(t);
-    err(k, 1) = norm(dfdx(t) - Dx * y, Inf);
-    err(k, 2) = norm(d2fdx2(t) - Dxx * y, Inf);
+    err(k, 1) = norm(df_dx(t) - Dx * y, Inf);
+    err(k, 2) = norm(d2f_dx2(t) - Dxx * y, Inf);
 end
 clf
 loglog(n, err, 'o-'), hold on
@@ -287,8 +287,8 @@ We again test the convergence rate.
 
 ```{code-cell}
 f = @(x) x + exp(sin(4*x));
-dfdx = @(x) 1 + 4 * exp(sin(4*x)) .* cos(4*x);
-d2fdx2 = @(x) 4 * exp(sin(4*x)) .* (4*cos(4*x).^2 - 4*sin(4*x));
+df_dx = @(x) 1 + 4 * exp(sin(4*x)) .* cos(4*x);
+d2f_dx2 = @(x) 4 * exp(sin(4*x)) .* (4*cos(4*x).^2 - 4*sin(4*x));
 
 ```
 
@@ -298,8 +298,8 @@ err = zeros(length(n), 2);
 for k = 1:length(n)
     [t, Dx, Dxx] = diffcheb(n(k), [-1, 1]);
     y = f(t);
-    err(k, 1) = norm(dfdx(t) - Dx * y, Inf);
-    err(k, 2) = norm(d2fdx2(t) - Dxx * y, Inf);
+    err(k, 1) = norm(df_dx(t) - Dx * y, Inf);
+    err(k, 2) = norm(d2f_dx2(t) - Dxx * y, Inf);
 end
 ```
 

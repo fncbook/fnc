@@ -7,3 +7,6 @@
 [submodule "matlab/FNC-matlab"]
 	path = matlab/FNC-matlab
 	url = https://github.com/fncbook/FNC-matlab.git
+[submodule "python/fncbook"]
+	path = python/fncbook
+	url = https://github.com/fncbook/fncbook.py
