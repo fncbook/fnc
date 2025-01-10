@@ -110,7 +110,7 @@ The absolute backward error is $|\tilde{x}-x|$.
 
 Backward error measures the change to the original data that reproduces the result that was found by the algorithm. The situation is illustrated in {numref}`fig-backwarderror`. 
 
-```{figure} figures/backwarderror.svg
+```{figure} backwarderror.svg
 :name: fig-backwarderror
 Backward error is the difference between the original data and the data that exactly produces the computed value.
 ```

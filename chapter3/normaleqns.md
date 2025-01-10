@@ -53,7 +53,7 @@ Given $\mathbf{A}\in \real^{m\times n}$ and $\mathbf{b}\in \real^{m}$, the **nor
 
 The normal equations have a geometric interpretation, as shown in {numref}`fig-normaleqns2d`. The vector in the range (column space) of $\mathbf{A}$ that lies closest to $\mathbf{b}$ makes the vector difference $\mathbf{A}\mathbf{x}-\mathbf{b}$ perpendicular to the range. Thus for any $\mathbf{z}$, we must have $(\mathbf{A} \mathbf{z})^T(\mathbf{A}\mathbf{x}-\mathbf{b})=0$, which is satisfied if $\mathbf{A}^T(\mathbf{A}\mathbf{x}-\mathbf{b})=\boldsymbol{0}$.
 
-```{figure} figures/normaleqns2d.svg
+```{figure} normaleqns2d.svg
 :name: fig-normaleqns2d
 Geometry of the normal equations. The smallest residual is orthogonal to the range of the matrix $\mathbf{A}$. 
 ```

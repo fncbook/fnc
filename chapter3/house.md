@@ -37,7 +37,7 @@ In [Exercise 2](#problem-house-reflector) you are asked to show that such a $\ma
 
 The reason $\mathbf{P}$ is called a reflector is sketched in {numref}`fig-hhreflect`.
 
-```{figure} figures/hhreflect.svg
+```{figure} hhreflect.svg
 :name: fig-hhreflect
 A Householder reflector. Because $\mathbf{v}$ is a unit vector, $\mathbf{v}^T\mathbf{x}$ is the component of $\mathbf{x}$ in the direction of $\mathbf{v}$. Hence subtracting $(\mathbf{v}^T\mathbf{x})\mathbf{v}$ projects $\mathbf{x}$ into a hyperplane orthogonal to $\mathbf{v}$. By subtracting off twice as much, we get the reflection of $\mathbf{x}$ through the hyperplane instead.
 ```
