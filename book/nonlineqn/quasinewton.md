@@ -33,7 +33,7 @@ In the system case, replacing the Jacobian evaluation is more complicated: deriv
 
 For reasons explained in the next chapter, $\delta$ is usually chosen close to $\sqrt{\epsilon}$, where $\epsilon$ represents the expected noise level in evaluation of $\mathbf{f}$. If the only source of noise is floating-point roundoff, then $\delta=\sqrt{\epsilon_\text{mach}}$.
 
-The finite-difference formula {eq}`jacobianfd` is implemented by the short code {ref}`function-fdjac`. (The code is written to accept the case where $\mathbf{f}$ maps $n$ variables to $m$ values with $m\neq n$, in anticipation of \secref{nl-least-sq}.)
+The finite-difference formula {eq}`jacobianfd` is implemented by the short code {ref}`function-fdjac`. (The code is written to accept the case where $\mathbf{f}$ maps $n$ variables to $m$ values with $m\neq n$, in anticipation of [a later section](nlsq).)
 
 (function-fdjac)=
 
