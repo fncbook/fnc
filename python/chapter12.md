@@ -48,7 +48,7 @@ An animation shows the solution nicely. The bump moves with speed 2 to the right
 
 ```{code-cell}
 :tags: [hide-input]
-from matplotlib import animation
+from matplotlib.animation import FuncAnimation
 fig, ax = subplots()
 curve = ax.plot(x, u_init)[0]
 time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
@@ -62,19 +62,17 @@ def snapshot(t):
     curve.set_ydata(sol.sol(t))
     time_text.set_text(f"t = {t:.2f}")
 
-anim = animation.FuncAnimation(
-    fig, snapshot, frames=linspace(0, 3, 201)
-    )
-anim.save("figures/advection-periodic.mp4", fps=30)
+anim = FuncAnimation(fig, snapshot, frames=linspace(0, 3, 201))    )
+anim.save("advection-periodic.mp4", fps=30)
 close()
 ```
 
-![Advection with periodic boundary](figures/advection-periodic.mp4)
+![Advection with periodic boundary](advection-periodic.mp4)
 
 ``````
 
-(demo-traffic-solve-python)=
-``````{dropdown} @demo-traffic-solve
+(demo-traffic-solve-a-python)=
+``````{dropdown} @demo-traffic-solve-a
 The following are parameters and a function relevant to defining the problem. 
 
 ```{code-cell}
@@ -107,6 +105,7 @@ ode = lambda t, rho: -Q0prime(rho) * (Dx @ rho) + ep * (Dxx @ rho)
 Our first initial condition has moderate density with a small bump. Because of the diffusion present, we use a stiff solver for the IVP.
 
 ```{code-cell}
+from scipy.integrate import solve_ivp
 rho_init = 400 + 10 * exp(-20 * (x - 3) ** 2)
 ep = 0.02
 sol = solve_ivp(ode, [0, 1.0], rho_init, method="Radau", dense_output=True)
@@ -125,6 +124,7 @@ The bump slowly moves backward on the roadway, spreading out and gradually fadin
 
 ```{code-cell}
 :tags: [hide-input]
+from matplotlib.animation import FuncAnimation
 fig, ax = subplots()
 curve = ax.plot(x, rho_init)[0]
 time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
@@ -132,19 +132,24 @@ ax.set_xlabel("$x$")
 ax.set_ylabel("density")
 ax.set_ylim(400, 410)
 ax.set_title("Traffic flow")
+def snapshot(t):
+    curve.set_ydata(sol.sol(t))
+    time_text.set_text(f"t = {t:.2f}")
 
-anim = animation.FuncAnimation(
-    fig, snapshot, frames=linspace(0, 1, 101)
-    )
-anim.save("figures/traffic-small.mp4", fps=30)
+anim = FuncAnimation(fig, snapshot, frames=linspace(0, 1, 101))
+anim.save("traffic-small.mp4", fps=30)
 close()
 ```
 
-![Traffic flow simulation](figures/traffic-small.mp4)
+![Traffic flow simulation](traffic-small.mp4)
+``````
 
+(demo-traffic-solve-b-python)=
+``````{dropdown} @demo-traffic-solve-b
 Now we use an initial condition with a larger bump. Note that the scale on the $y$-axis is much different for this solution.
 
 ```{code-cell}
+from scipy.integrate import solve_ivp
 rho_init = 400 + 80 * exp(-16 * (x - 3) ** 2)
 sol = solve_ivp(ode, [0, 0.5], rho_init, method="Radau", dense_output=True)
 ```
@@ -153,13 +158,13 @@ sol = solve_ivp(ode, [0, 0.5], rho_init, method="Radau", dense_output=True)
 :tags: [hide-input]
 for t in linspace(0, 0.5, 6):
     plot(x, sol.sol(t), label=f"t = {t:.1f}")
-
 xlabel("$x$"),  ylabel("car density")
 legend(),  title("Traffic jam");
 ```
 
 ```{code-cell}
 :tags: [hide-input]
+from matplotlib.animation import FuncAnimation
 fig, ax = subplots()
 curve = ax.plot(x, rho_init)[0]
 time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
@@ -167,15 +172,16 @@ ax.set_xlabel("$x$")
 ax.set_ylabel("density")
 ax.set_ylim(400, 480)
 ax.set_title("Traffic jam")
+def snapshot(t):
+    curve.set_ydata(sol.sol(t))
+    time_text.set_text(f"t = {t:.2f}")
 
-anim = animation.FuncAnimation(
-    fig, snapshot, frames=linspace(0, 0.5, 101)
-    )
-anim.save("figures/traffic-jam.mp4", fps=30)
+anim = FuncAnimation(fig, snapshot, frames=linspace(0, 0.5, 101))
+anim.save("traffic-jam.mp4", fps=30)
 close()
 ```
 
-![Traffic jam simulation](figures/traffic-jam.mp4)
+![Traffic jam simulation](traffic-jam.mp4)
 
 In this case the density bump travels backward along the road. It also steepens on the side facing the incoming traffic and decreases much more slowly on the other side. A motorist would experience this as an abrupt increase in density, followed by a much more gradual decrease in density and resulting gradual increase in speed. (You also see some transient, high-frequency oscillations. These are caused by instabilities, as we discuss in simpler situations later in this chapter.)
 
@@ -187,6 +193,7 @@ In this case the density bump travels backward along the road. It also steepens 
 For time stepping, we use the adaptive explicit method `RK45`.
 
 ```{code-cell}
+from scipy.integrate import solve_ivp
 x, Dx, Dxx = FNC.diffper(400, [0, 1])
 u_init = exp(-80 * (x - 0.5) ** 2)
 c = 2
@@ -210,7 +217,6 @@ If we cut $h$ by a factor of 2 (i.e., double $m$), then the CFL condition sugges
 
 ```{code-cell}
 print(f"{len(sol.t) - 1} time steps taken for m = 400")
-
 x, Dx, Dxx = FNC.diffper(800, [0, 1])
 u_init = exp(-80 * (x - 0.5) ** 2)
 sol = solve_ivp(ode, (0, 2), u_init, method="RK45", dense_output=True)
@@ -218,8 +224,8 @@ print(f"{len(sol.t) - 1} time steps taken for m = 800")
 ```
 ``````
 
-(demo-upwind-direction-python)=
-``````{dropdown} @demo-upwind-direction
+(demo-upwind-direction-a-python)=
+``````{dropdown} @demo-upwind-direction-a
 If we solve advection over $[0,1]$ with velocity $c=-1$, the right boundary is in the upwind/inflow direction. Thus a well-posed boundary condition is $u(1,t)=0$.
 
 We'll pattern a solution after {numref}`Function {number} <function-parabolic>`. Since $u(x_m,t)=0$, we define the ODE interior problem {eq}`mol-interior` for $\mathbf{v}$ without $u_m$. For each evaluation of $\mathbf{v}'$, we must extend the data back to $x_m$ first.
@@ -227,7 +233,6 @@ We'll pattern a solution after {numref}`Function {number} <function-parabolic>`.
 ```{code-cell}
 m = 80
 x, Dx, Dxx = FNC.diffmat2(m, [0, 1])
-
 chop = lambda u : u[:-1]
 extend = lambda v: hstack([v, 0])
 
@@ -238,6 +243,7 @@ c = -1
 Now we solve for an initial condition that has a single hump.
 
 ```{code-cell}
+from scipy.integrate import solve_ivp
 u_init = exp(-80 * (x - 0.5) ** 2)
 sol = solve_ivp(ode, (0, 1), chop(u_init), method="RK45", dense_output=True)
 u = lambda t: extend(sol.sol(t))
@@ -271,11 +277,15 @@ def snapshot(t):
 anim = animation.FuncAnimation(
     fig, snapshot, frames=linspace(0, 1, 101)
     )
-anim.save("figures/advection-inflow.mp4", fps=30)
+anim.save("advection-inflow.mp4", fps=30)
 close()
 ```
 
-![Advection with inflow BC](figures/advection-inflow.mp4)
+![Advection with inflow BC](advection-inflow.mp4)
+``````
+
+(demo-upwind-direction-b-python)=
+``````{dropdown} @demo-upwind-direction-b
 
 If, instead of $u(1,t)=0$, we were to try to impose the downwind condition $u(0,t)=0$, we only need to change the index of the interior nodes and where to append the zero value.
 
@@ -300,6 +310,7 @@ This time, the solution blows up as soon as the hump runs into the boundary beca
 
 ```{code-cell}
 :tags: [hide-input]
+from matplotlib.animation import FuncAnimation
 fig, ax = subplots()
 curve = ax.plot(x, u_init)[0]
 time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
@@ -308,14 +319,12 @@ ax.set_ylabel("$u(x,t)$")
 ax.set_ylim(-0.1, 1.1)
 ax.set_title("Advection with outflow BC")
 
-anim = animation.FuncAnimation(
-    fig, snapshot, frames=linspace(0, 0.5, 51)
-    )
-anim.save("figures/advection-outflow.mp4", fps=30)
+anim = FuncAnimation(fig, snapshot, frames=linspace(0, 0.5, 51))
+anim.save("advection-outflow.mp4", fps=30)
 close()
 ```
 
-![Advection with outflow BC](figures/advection-outflow.mp4)
+![Advection with outflow BC](advection-outflow.mp4)
 ``````
 
 ### 12.3 @section-advection-absstab
@@ -372,6 +381,7 @@ The eigenvalues of advection-diffusion are near-imaginary for $\epsilon\approx 0
 
 ```{code-cell}
 :tags: [hide-input]
+from scipy.linalg import eigvals
 x, Dx, Dxx = FNC.diffper(40, [0, 1])
 tau = 0.1
 for ep in [0.001, 0.01, 0.05]:
@@ -447,6 +457,7 @@ w_init = hstack([chop(u_init), z_init])
 Because the wave equation is hyperbolic, we can use a nonstiff explicit solver.
 
 ```{code-cell}
+from scipy.integrate import solve_ivp
 c = 2
 sol = solve_ivp(dw_dt, (0, 2), w_init, dense_output=True)
 u = lambda t: extend(sol.sol(t)[:m-1])   # extract the u component
@@ -464,7 +475,7 @@ title("Wave equation with boundaries");
 
 ```{code-cell}
 :tags: [hide-input]
-from matplotlib import animation
+from matplotlib.animation import FuncAnimation
 fig, ax = subplots()
 curve = ax.plot(x, u_init)[0]
 time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
@@ -477,14 +488,12 @@ def snapshot(t):
     curve.set_ydata(u(t))
     time_text.set_text(f"t = {t:.2f}")
 
-anim = animation.FuncAnimation(
-    fig, snapshot, frames=linspace(0, 2, 161)
-    )
-anim.save("figures/wave-boundaries.mp4", fps=30)
+anim = FuncAnimation(fig, snapshot, frames=linspace(0, 2, 161))
+anim.save("wave-boundaries.mp4", fps=30)
 close()
 ```
 
-![Wave equation with boundaries](figures/wave-boundaries.mp4)
+![Wave equation with boundaries](wave-boundaries.mp4)
 
 The original hump breaks into two pieces of different amplitudes, each traveling with speed $c=2$. They pass through one another without interference. When a hump encounters a boundary, it is perfectly reflected, but with inverted shape. At time $t=2$, the solution looks just like the initial condition.
 
@@ -495,6 +504,7 @@ The original hump breaks into two pieces of different amplitudes, each traveling
 The variable wave speed is set to be re-used
 
 ```{code-cell}
+from scipy.integrate import solve_ivp
 m = 120
 x, Dx, Dxx = FNC.diffcheb(m, [-1, 1])
 c = 1 + (sign(x) + 1) / 2
@@ -516,6 +526,7 @@ title("Wave equation with variable speed");
 
 ```{code-cell}
 :tags: [hide-input]
+from matplotlib.animation import FuncAnimation
 fig, ax = subplots()
 curve = ax.plot(x, u_init)[0]
 time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
@@ -524,14 +535,12 @@ ax.set_ylabel("$u(x,t)$")
 ax.set_ylim(-1.05, 1.05)
 ax.set_title("Wave equation with variable speed")
 
-anim = animation.FuncAnimation(
-    fig, snapshot, frames=linspace(0, 5, 251)
-    )
-anim.save("figures/wave-speed.mp4", fps=30)
+anim = FuncAnimation(fig, snapshot, frames=linspace(0, 5, 251)    )
+anim.save("wave-speed.mp4", fps=30)
 close()
 ```
 
-![Wave equation with variable speed](figures/wave-speed.mp4)
+![Wave equation with variable speed](wave-speed.mp4)
 
 Each pass through the interface at $x=0$ generates a reflected and transmitted wave. By conservation of energy, these are both smaller in amplitude than the incoming bump.
 ``````

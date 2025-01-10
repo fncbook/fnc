@@ -123,7 +123,9 @@ The boundary conditions {eq}`waveBC` suggest that we should remove both of the e
 :open:
 ```{include} python/boundaries.ipynb
 ```
-````
+![Wave equation with boundaries](python/wave-boundaries.*)
+
+The original hump breaks into two pieces of different amplitudes, each traveling with speed $c=2$. They pass through one another without interference. When a hump encounters a boundary, it is perfectly reflected, but with inverted shape. At time $t=2$, the solution looks just like the initial condition.````
 `````
 ``````
 ```````
@@ -160,6 +162,10 @@ An interesting situation is when the wave speed $c$ changes discontinuously, as 
 :open:
 ```{include} python/speed.ipynb
 ```
+
+![Wave equation with variable speed](python/wave-speed.*)
+
+Each pass through the interface at $x=0$ generates a reflected and transmitted wave. By conservation of energy, these are both smaller in amplitude than the incoming bump.
 ````
 `````
 ``````

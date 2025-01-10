@@ -453,8 +453,33 @@ project:
             children:
           - title: Chapter 12
             children:
+              - file: chapter12/section1/python/advection.ipynb
+              - file: chapter12/section1/python/solve-a.ipynb
+              - file: chapter12/section1/python/solve-b.ipynb
+              - file: chapter12/section2/python/cfl.ipynb
+              - file: chapter12/section2/python/direction-a.ipynb
+              - file: chapter12/section2/python/direction-b.ipynb
+              - file: chapter12/section3/python/advection.ipynb
+              - file: chapter12/section3/python/advdiff.ipynb
+              - file: chapter12/section3/python/inflow.ipynb
+              - file: chapter12/section4/python/boundaries.ipynb
+              - file: chapter12/section4/python/speed.ipynb
           - title: Chapter 13
             children:
+              - file: chapter13/section1/python/gridfun.ipynb
+              - file: chapter13/section1/python/disksphere.ipynb
+              - file: chapter13/section1/python/diff.ipynb
+              - file: chapter13/section2/python/vec.ipynb
+              - file: chapter13/section2/python/heat.ipynb
+              - file: chapter13/section2/python/advdiff.ipynb
+              - file: chapter13/section2/python/wave.ipynb
+              - file: chapter13/section3/python/kron.ipynb
+              - file: chapter13/section3/python/fd.ipynb
+              - file: chapter13/section3/python/poisson.ipynb
+              - file: chapter13/section4/python/mems.ipynb
+              - file: chapter13/section4/python/advdiff.ipynb
+              - file: chapter13/section4/python/allencahn.ipynb
+
     - file: appendix/glossary.md
     - file: genindex.md
 

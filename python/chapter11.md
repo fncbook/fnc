@@ -105,7 +105,7 @@ Alternatively, here is an animation of the solution.
 
 ```{code-cell}
 :tags: [remove-output]
-from matplotlib import animation
+from matplotlib.animation import FuncAnimation
 fig = figure()
 ax = fig.add_subplot(autoscale_on=False, xlim=(0, 8), ylim=(0, 6))
 ax.grid()
@@ -119,8 +119,7 @@ def animate(j):
     time_text.set_text(f"t = {t[j]:.2f}")
     return line, time_text
 
-anim = animation.FuncAnimation(
-    fig, animate, frames=range(0, n+1, 10), blit=True);
+anim = FuncAnimation(fig, animate, frames=range(0, n+1, 10), blit=True);
 anim.save("figures/black-scholes-6.mp4", fps=30)
 close()
 ```
@@ -170,8 +169,7 @@ ylim([0, 6]);  ylabel("option value")
 ```
 
 ```{code-cell}
-:tags: [remove-output]
-from matplotlib import animation
+from matplotlib.animation import FuncAnimation
 fig = figure()
 ax = fig.add_subplot(autoscale_on=False, xlim=(0, 8), ylim=(0, 6))
 ax.grid()
@@ -185,8 +183,7 @@ def animate(j):
     time_text.set_text(f"t = {t[j]:.2f}")
     return line, time_text
 
-anim = animation.FuncAnimation(
-    fig, animate, frames=range(0, n+1, 10), blit=True);
+anim = FuncAnimation(fig, animate, frames=range(0, n+1, 10), blit=True);
 anim.save("figures/black-scholes-8.mp4", fps=30)
 close()
 ```
@@ -241,7 +238,6 @@ title("Heat equation by forward Euler");
 You see above that things seem to start well, with the initial peak widening and shrinking. But then there is a nonphysical growth in the solution.
 
 ```{code-cell}
-:tags: [hide-input]
 from matplotlib import animation
 fig = figure()
 ax = fig.add_subplot(autoscale_on=False, xlim=(0, 1), ylim=(-1, 2))
@@ -293,6 +289,7 @@ title("Heat equation by backward Euler");
 
 ```{code-cell}
 :tags: [hide-input]
+from matplotlib.animation import FuncAnimation
 fig = figure()
 ax = fig.add_subplot(autoscale_on=False, xlim=(0, 1), ylim=(-0.25, 1))
 ax.grid()
@@ -301,8 +298,7 @@ line, = ax.plot([], [], '-', lw=2)
 ax.set_title("Backward Euler")
 time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
 
-anim = animation.FuncAnimation(
-    fig, animate, frames=range(0, n+1, 20), blit=True)
+anim = FuncAnimation(fig, animate, frames=range(0, n+1, 20), blit=True)
 anim.save("figures/diffusionBE.mp4")
 close()
 ```
@@ -486,6 +482,7 @@ You can see that there is one eigenvalue that ranges over a wide portion of the 
 The `BDF` solver is good for stiff problems and needs few time steps to solve the Oregonator from {numref}`Demo {number} <demo-stiffness-oregon>`.
 
 ```{code-cell}
+from scipy.integrate import solve_ivp
 tspan = (0, 25)
 start = timer()
 sol = solve_ivp(ode, tspan, u0, method="BDF")

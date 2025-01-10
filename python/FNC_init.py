@@ -4,10 +4,8 @@ from matplotlib.pyplot import *
 from prettytable import PrettyTable
 from timeit import default_timer as timer
 import sys
-sys.path.append('pkg/')
-import FNC
-import importlib
-importlib.reload(FNC)
+sys.path.append('/Users/driscoll/Documents/GitHub/fnc/python/fncbook')
+import fncbook as FNC
 
 # This (optional) block is for improving the display of plots.
 # from IPython.display import set_matplotlib_formats

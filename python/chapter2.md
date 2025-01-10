@@ -131,7 +131,7 @@ legend();
 ``````
 
 ### 2.2 @section-linsys-matrices
-(demo-matrices-python)=
+(demo-matrices-basics-python)=
 ``````{dropdown} @demo-matrices
 ```{note}
 While NumPy does have distinct representations for matrices and 2D arrays, use of the explicit matrix class is officially discouraged. We follow this advice here and use arrays to represent both matrices and vectors.

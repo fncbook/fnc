@@ -13,14 +13,15 @@ function grid_to_tip(lines)
     return lines
 end
 
-init_cell = ["```{code-cell}", ":tags: [remove-cell]", "include(\"../../../julia/FNC_init.jl\")", "```"]
+# init_cell = ["```{code-cell}", ":tags: [remove-cell]", "include(\"../../../julia/FNC_init.jl\")", "```"]
+init_cell = ["```{code-cell}", ":tags: [remove-cell]", "exec(open(\"../../../python/FNC_init.py\").read())", "```"]
 
-lang = "julia"
+lang = "python"
 yaml = open("yaml.txt", "w")
-for chap in [13]
+for chap in [12]
     println("chapter $chap")
     local stop, start, name, file, output
-    file = "julia/chapter$chap.md"
+    file = "$lang/chapter$chap.md"
     dest = "chapter$chap"
 
     lines = readlines(file)
@@ -37,8 +38,8 @@ for chap in [13]
             if start >= stop
                 break
             end
-            fullname = match(r"(demo-.*-[^-]*)-julia", lines[start])[1]
-            name = match(r"demo-.*-([^-]*)-julia", lines[start])[1]
+            fullname = match(Regex("(demo-.*-[^-]*)-$lang"), lines[start])[1]
+            name = match(Regex("demo-.*-([^-]*)-$lang"), lines[start])[1]
             if isnothing(name)
                 println("Error: $chap.$section, line $start")
                 break

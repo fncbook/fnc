@@ -220,8 +220,15 @@ In summary, we require an **inflow** condition on the PDE. For $c>0$ this is at 
 :sync: python
 ````{dropdown} Upwind versus downwind
 :open:
-```{include} python/direction.ipynb
+```{include} python/direction-a.ipynb
 ```
+
+![Advection with inflow BC](python/advection-inflow.*)
+
+```{include} python/direction-b.ipynb
+```
+
+![Advection with outflow BC](python/advection-outflow.*)
 ````
 `````
 ``````
