@@ -137,6 +137,17 @@ The results are easy to interpret, recalling that the time variable really means
 Let's try to do everything the same as in {numref}`Demo {number} <demo-blackscholes-solve>`, but extending the simulation time to $T=8$.
 
 ```{code-cell}
+:tags: [remove-cell]
+Smax = 8
+K = 3
+sigma = 0.06
+r = 0.08
+m = 200
+h = Smax / m
+x = h * arange(m+1)
+```
+
+```{code-cell}
 T = 8
 n = 1000;  tau = T / n
 t = tau * arange(n + 1)
@@ -172,6 +183,7 @@ title("Black-Scholes solution");
 ```
 
 ```{code-cell}
+:tags: hide-input
 from matplotlib.animation import FuncAnimation
 fig = figure()
 ax = fig.add_subplot(autoscale_on=False, xlim=(0, 8), ylim=(0, 6))
@@ -278,6 +290,18 @@ title("Nonphysical growth");
 Now we apply backward Euler to the heat equation. Mathematically this means multiplying by the *inverse* of a matrix, but we interpret that numerically as a linear system solution. We will reuse the setup from {numref}`Demo {number} <demo-methodlines-heatFE>`. 
 
 ```{code-cell}
+:tags: [remove-cell]
+m = 100
+x, Dx, Dxx = FNC.diffper(m, [0, 1])
+tfinal = 0.15  
+n = 2400                 # number of time steps  
+tau = tfinal / n         # time step
+t = tau * arange(n+1)    # time values
+U = zeros([m, n+1])
+U[:, 0] = exp(-60 * (x - 0.5) ** 2)
+```
+
+```{code-cell}
 from scipy.sparse.linalg import spsolve
 B = sp.csr_matrix(I - tau * Dxx)
 for j in range(n):
@@ -310,6 +334,7 @@ close()
 
 This solution looks physically plausible, as the large concentration in the center diffuses outward until the solution is essentially constant. Observe that the solution remains periodic in space for all time.
 ``````
+
 (demo-methodlines-auto-python)=
 ``````{dropdown} @demo-methodlines-auto
 We set up the semidiscretization and initial condition in $x$ just as before.
@@ -551,7 +576,7 @@ title("Heat equation with Dirichlet boundaries");
 
 ```{code-cell}
 :tags: [hide-input]
-from matplotlib import animation
+from matplotlib.animation import FuncAnimation
 fig = figure()
 ax = fig.add_subplot(autoscale_on=False, xlim=(-1, 1), ylim=(0, 4.2))
 
@@ -559,16 +584,16 @@ line, = ax.plot([], [], '-')
 ax.set_title("Heat equation with Dirichlet boundaries")
 time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
 
-def animate(t):
+def snapshot(t):
     line.set_data(x, u(t))
     time_text.set_text(f"t = {t:.2e}")
     return line, time_text
 
-anim = animation.FuncAnimation(
-    fig, animate, frames=linspace(0, 0.75, 201), blit=True)
+anim = FuncAnimation(fig, snapshot, frames=linspace(0, 0.75, 201), blit=True)
 anim.save("figures/boundaries-heat.mp4", fps=30)
 close()
 ```
+
 ![Heat equation with Dirichlet boundaries](figures/boundaries-heat.mp4)
 
 ``````
@@ -587,15 +612,19 @@ x, u = FNC.parabolic(phi, (0, 1), 60, ga, gb, (0, 0.1), init);
 
 ```{code-cell}
 :tags: [hide-input]
+from matplotlib.animation import FuncAnimation
 fig = figure()
 ax = fig.add_subplot(autoscale_on=False, xlim=(0, 1), ylim=(0, 10))
-
 line, = ax.plot([], [], '-')
 ax.set_title("Heat equation with source")
 time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
 
-anim = animation.FuncAnimation(
-    fig, animate, frames=linspace(0, 0.1, 101), blit=True)
+def snapshot(t):
+    line.set_data(x, u(t))
+    time_text.set_text(f"t = {t:.2e}")
+    return line, time_text
+
+anim = FuncAnimation(fig, snapshot, frames=linspace(0, 0.1, 101), blit=True)
 anim.save("figures/boundaries-source.mp4", fps=30)
 close()
 ```
@@ -620,18 +649,23 @@ x, u = FNC.parabolic(phi, (0, Smax), 80, ga, gb, (0, 15), u0);
 
 ```{code-cell}
 :tags: [hide-input]
+from matplotlib.animation import FuncAnimation
 fig = figure()
 ax = fig.add_subplot(autoscale_on=False, xlim=(0, Smax), ylim=(-0.5, 8))
-
 line, = ax.plot([], [], '-')
 ax.set_title("Black–Scholes equation with boundaries")
 time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
 
-anim = animation.FuncAnimation(
-    fig, animate, frames=linspace(0, 15, 151), blit=True)
+def snapshot(t):
+    line.set_data(x, u(t))
+    time_text.set_text(f"t = {t:.2e}")
+    return line, time_text
+
+anim = FuncAnimation(fig, animate, frames=linspace(0, 15, 151), blit=True)
 anim.save("figures/boundaries-bs.mp4", fps=30)
 close()
 ```
+
 ![Black–Scholes equation with boundaries](figures/boundaries-bs.mp4)
 
 Recall that $u$ is the value of the call option, and time runs backward from the strike time. The longer the horizon, the more value the option has due to anticipated growth in the stock price.

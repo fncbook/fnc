@@ -18,7 +18,7 @@ $$
 
 This is a little different from simply $u(1,t)=u(0,t)$, as {numref}`figure-periodicfun` illustrates.
 
-:::{figure} figures/periodicfun.svg
+:::{figure} periodicfun.*
 :label: figure-periodicfun
 :alt: periodic function illustration
 :align: center
@@ -140,6 +140,7 @@ Thus, a fully discrete method for the heat equation is
 :open:
 ```{include} python/heatFE.ipynb
 ```
+![Instability in Euler solution](python/diffusionFE.*)
 ````
 `````
 ``````
@@ -190,15 +191,12 @@ Because backward Euler is an implicit method, a linear system must be solved for
 :open:
 ```{include} python/heatBE.ipynb
 ```
+![Backward Euler solution](python/diffusionBE.mp4)
 ````
 `````
 ``````
 ```````
     
-
-
-
-
 
 {numref}`Demo %s <demo-methodlines-heatBE>` suggests that implicit time stepping methods have an important role in diffusion. We will analyze the reason in the next few sections.
 

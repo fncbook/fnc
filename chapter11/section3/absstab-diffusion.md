@@ -129,12 +129,12 @@ for some real $\theta$, and thus we can use the quadratic formula to find all th
 
 Stability regions for the most common IVP integrators are given in {numref}`figure-stabreg_ab_am` and {numref}`figure-stabreg_bd_rk`.  Note that those for the implicit Adams-Moulton methods are larger than those for the explicit Adams-Bashforth methods of the same order.  For the implicit backward differentiation methods, the exteriors of the curves provide large regions of stability, but significant portions of the imaginary axis may be excluded.  Finally, while the single-step Runge-Kutta methods have smaller regions of stability, those of orders 3 and 4 do include significant portions of the imaginary axis.
 
-```{figure} figures/stabreg_ab_am.svg
+```{figure} stabreg_ab_am.*
 :name: figure-stabreg_ab_am
 Stability regions for Adams–Bashforth methods of order 1–4 (left) and Adams–Moulton methods of order 2–5 (right). The plots are in the complex $\zeta$-plane.
 ```
 
-```{figure} figures/stabreg_bd_rk.svg
+```{figure} stabreg_bd_rk.*
 :name: figure-stabreg_bd_rk
 Stability regions for backward differentiation methods of order 1–4 (left, exteriors of curves) and Runge–Kutta methods of order 1–4 (right). The plots are in the complex $\zeta$-plane.
 ```
@@ -210,6 +210,7 @@ In summary, three things happen as $h\to 0$:
 3. If we use an explicit time stepping method, then absolute stability requires $O(h^{-2})$ steps. 
 
 The last restriction becomes rather burdensome as $h\to 0$, i.e., as we improve the spatial discretization, which is why implicit methods are preferred for diffusion. While any convergent IVP solver will get the right solution as $\tau\to 0$, the results are exponentially large nonsense until $\tau$ is small enough to satisfy absolute stability.
+
 ## Exercises
 
 1. ✍ Use an eigenvalue decomposition to write the system

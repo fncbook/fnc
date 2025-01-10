@@ -404,55 +404,43 @@ project:
       - title: MATLAB codes
         children:
           - title: Chapter 1
-            children:
           - title: Chapter 2
-            children:
           - title: Chapter 3
-            children:
           - title: Chapter 4
-            children:
           - title: Chapter 5
-            children:
           - title: Chapter 6
-            children:
           - title: Chapter 7
-            children:
           - title: Chapter 8
-            children:
           - title: Chapter 9
-            children:
           - title: Chapter 10
-            children:
           - title: Chapter 11
-            children:
           - title: Chapter 12
-            children:
           - title: Chapter 13
-            children:
       - title: Python codes
         children:
           - title: Chapter 1
-            children:
           - title: Chapter 2
-            children:
           - title: Chapter 3
-            children:
           - title: Chapter 4
-            children:
           - title: Chapter 5
-            children:
           - title: Chapter 6
-            children:
           - title: Chapter 7
-            children:
           - title: Chapter 8
-            children:
           - title: Chapter 9
-            children:
           - title: Chapter 10
-            children:
           - title: Chapter 11
             children:
+              - file: chapter11/section1/python/solve.ipynb
+              - file: chapter11/section1/python/unstable.ipynb
+              - file: chapter11/section2/python/heatFE.ipynb
+              - file: chapter11/section2/python/heatBE.ipynb
+              - file: chapter11/section2/python/auto.ipynb
+              - file: chapter11/section3/python/regions.ipynb
+              - file: chapter11/section4/python/oregon.ipynb
+              - file: chapter11/section4/python/explicit.ipynb
+              - file: chapter11/section5/python/heat.ipynb
+              - file: chapter11/section5/python/bratu.ipynb
+              - file: chapter11/section5/python/bs.ipynb
           - title: Chapter 12
             children:
               - file: chapter12/section1/python/advection.ipynb

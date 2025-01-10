@@ -205,6 +205,7 @@ In many specific problems, `extend` does more work than is truly necessary. Diri
 :open:
 ```{include} python/heat.ipynb
 ```
+![Heat equation with Dirichlet boundaries](python/boundaries-heat.*)
 ````
 `````
 ``````
@@ -238,6 +239,7 @@ In many specific problems, `extend` does more work than is truly necessary. Diri
 :open:
 ```{include} python/bratu.ipynb
 ```
+![Heat equation with source](python/boundaries-source.*)
 ````
 `````
 ``````
@@ -273,6 +275,8 @@ Finally, we return to the example of the Black–Scholes equation from {numref}`
 :open:
 ```{include} python/bs.ipynb
 ```
+![Black–Scholes equation with boundaries](python/boundaries-bs.*)
+
 ````
 `````
 ``````

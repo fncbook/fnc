@@ -55,7 +55,7 @@ If we use the Euler time discretization, then
 where $\tau$ is the time step. Because the matrix in this time step is tridiagonal, the entry $U_{i,j}$ can depend directly only on $U_{i-1,j}$, $U_{i,j}$, and $U_{i+1,j}$. Going back another time step, the dependence extends to space positions $i-2$ and $i+2$, and so on. When we reach the initial time, the dependence of $U_{i,j}$ reaches from $x_{i-j}$ to $x_{i+j}$, or between $x_i-jh$ and $x_i+jh$. If we ignore boundaries, the situation is illustrated in {numref}`figure-cflpicture`. As $\tau,h\rightarrow 0$, the numerical domain of dependence fills in the shaded region in the figure, but that region itself does not change.
 ::::
 
-```{figure} figures/cflpicture.svg
+```{figure} cflpicture.*
 :name: figure-cflpicture
 :width: 450px
 Numerical domain of dependence for the explicit time stepping scheme in {numref}`Example {number} <example-upwind-centered>`. If  $\tau$ and $h$ are infinitesimally small, the shaded region is filled in.
