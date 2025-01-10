@@ -82,9 +82,9 @@ project:
     - file: home.md
     - title: Preface
       children:
-        - file: preface.md
-        - file: preface-original.md
-    - file: differences.md
+        - file: frontmatter/preface.md
+        - file: frontmatter/preface-original.md
+    - file: frontmatter/differences.md
     - file: chapter1/overview.md
       children:
         - file: chapter1/floating-point.md
@@ -262,7 +262,7 @@ site:
   title: Fundamentals of Numerical Computation
   template: book-theme
   options:
-    favicon: favicon.png
+    favicon: _static/favicon.png
     logo: _static/FNClogo.png
   domains:
     - tobydriscoll.curve.space
