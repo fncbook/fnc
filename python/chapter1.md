@@ -32,7 +32,7 @@ Python implementations
 exec(open("FNC_init.py").read())
 ```
 
-## 1.1 @section-intro-floating-point
+### 1.1 @section-intro-floating-point
 (demo-float-accuracy-python)=
 ``````{dropdown} @demo-float-accuracy
 ```{tip} Getting started with Python
@@ -181,7 +181,6 @@ This is now the "correct" result. But we have found a rather shocking breakdown 
 
 (demo-condition-roots-python)=
 ``````{dropdown} @demo-condition-roots
-::::{grid} 1 1 2 2
 
 The polynomial $p(x) = \frac{1}{3}(x-1)(x-1-\epsilon)$ has roots $1$ and $1+\epsilon$. For small values of $\epsilon$, the roots are ill-conditioned. 
 
@@ -294,7 +293,7 @@ Using {eq}`condition-chain`, the chain rule for condition numbers, the condition
 ``````
 
 (demo-stability-quadgood-python)=
-````{dropdown} @demo-stability-quadgood
+``````{dropdown} @demo-stability-quadgood
 We repeat the rootfinding experiment of {numref}`Demo %s <demo-stability-quadbad>` with an alternative algorithm.
 
 ```{code-cell}
@@ -319,10 +318,10 @@ To be sure we have an accurate result, we compute its relative error.
 ```{code-cell}
 print(abs(x2 - 1e-6) / 1e-6)
 ```
-````
+``````
 
 (demo-stability-roots-python)=
-````{dropdown} @demo-stability-roots
+``````{dropdown} @demo-stability-roots
 
 
 Our first step is to construct a polynomial with six known roots.
@@ -362,3 +361,4 @@ print(abs(p - p_computed) / p)
 ```
 
 In summary, even though there are some computed roots relatively far from their correct values, they are nevertheless the roots of a polynomial that is very close to the original.
+``````

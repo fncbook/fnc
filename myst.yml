@@ -207,6 +207,7 @@ project:
         # - file: refs.md
       - title: Julia codes
         children:
+          - file: julia/setup.md
           - title: Chapter 1
             children:
               - file: chapter1/section1/julia/accuracy.ipynb
@@ -403,6 +404,7 @@ project:
                 - file: chapter13/section4/julia/allencahn.ipynb
       - title: MATLAB codes
         children:
+          - file: matlab/setup.md
           - title: Chapter 1
           - title: Chapter 2
           - title: Chapter 3
@@ -418,16 +420,182 @@ project:
           - title: Chapter 13
       - title: Python codes
         children:
+          - file: python/setup.md
           - title: Chapter 1
+            children:
+              - file: chapter1/section1/python/accuracy.ipynb
+              - file: chapter1/section1/python/double.ipynb
+              - file: chapter1/section1/python/arithmetic.ipynb
+              - file: chapter1/section2/python/roots.ipynb
+              - file: chapter1/section3/python/horner.ipynb
+              - file: chapter1/section4/python/quadbad.ipynb
+              - file: chapter1/section4/python/quadgood.ipynb
+              - file: chapter1/section4/python/roots.ipynb
           - title: Chapter 2
+            children:
+              - file: chapter2/section1/python/vander.ipynb
+              - file: chapter2/section2/python/basics.ipynb
+              - file: chapter2/section3/python/backslash.ipynb
+              - file: chapter2/section3/python/triangular.ipynb
+              - file: chapter2/section4/python/outertri.ipynb
+              - file: chapter2/section4/python/derive.ipynb
+              - file: chapter2/section4/python/solve.ipynb
+              - file: chapter2/section5/python/mvmult.ipynb
+              - file: chapter2/section5/python/loglog.ipynb
+              - file: chapter2/section5/python/lufact.ipynb
+              - file: chapter2/section6/python/fail.ipynb
+              - file: chapter2/section6/python/fix.ipynb
+              - file: chapter2/section6/python/permute.ipynb
+              - file: chapter2/section6/python/usage.ipynb
+              - file: chapter2/section6/python/builtin.ipynb
+              - file: chapter2/section6/python/stable.ipynb
+              - file: chapter2/section7/python/vector.ipynb
+              - file: chapter2/section7/python/matrix.ipynb
+              - file: chapter2/section8/python/bound.ipynb
+              - file: chapter2/section9/python/banded.ipynb
+              - file: chapter2/section9/python/symm.ipynb
+              - file: chapter2/section9/python/cholesky.ipynb
           - title: Chapter 3
+            children:
+              - file: chapter3/section1/python/tempinterp.ipynb
+              - file: chapter3/section1/python/tempfit.ipynb
+              - file: chapter3/section1/python/pirate.ipynb
+              - file: chapter3/section2/python/instab.ipynb
+              - file: chapter3/section3/python/qrfact.ipynb
+              - file: chapter3/section3/python/stable.ipynb
+              - file: chapter3/section4/python/qr.ipynb
           - title: Chapter 4
+            children:
+              - file: chapter4/section1/python/bessel.ipynb
+              - file: chapter4/section1/python/cond.ipynb
+              - file: chapter4/section2/python/spiral.ipynb
+              - file: chapter4/section2/python/converge.ipynb
+              - file: chapter4/section3/python/line.ipynb
+              - file: chapter4/section3/python/converge.ipynb
+              - file: chapter4/section3/python/usage.ipynb
+              - file: chapter4/section4/python/line.ipynb
+              - file: chapter4/section4/python/converge.ipynb
+              - file: chapter4/section4/python/iqi.ipynb
+              - file: chapter4/section5/python/converge.ipynb
+              - file: chapter4/section6/python/levenberg.ipynb
+              - file: chapter4/section7/python/converge.ipynb
+              - file: chapter4/section7/python/MM.ipynb
           - title: Chapter 5
+            children:
+              - file: chapter5/section1/python/global.ipynb
+              - file: chapter5/section1/python/pwise.ipynb
+              - file: chapter5/section1/python/cond.ipynb
+              - file: chapter5/section2/python/hat.ipynb
+              - file: chapter5/section2/python/usage.ipynb
+              - file: chapter5/section2/python/converge.ipynb
+              - file: chapter5/section3/python/splines.ipynb
+              - file: chapter5/section4/python/fd1.ipynb
+              - file: chapter5/section4/python/fd2.ipynb
+              - file: chapter5/section4/python/weights.ipynb
+              - file: chapter5/section5/python/order12.ipynb
+              - file: chapter5/section5/python/round.ipynb
+              - file: chapter5/section6/python/trap.ipynb
+              - file: chapter5/section6/python/extrap.ipynb
+              - file: chapter5/section7/python/motive.ipynb
+              - file: chapter5/section7/python/usage.ipynb
           - title: Chapter 6
+            children:
+              - file: chapter6/section1/python/first.ipynb
+              - file: chapter6/section1/python/sing.ipynb
+              - file: chapter6/section1/python/cond.ipynb
+              - file: chapter6/section2/python/converge.ipynb
+              - file: chapter6/section3/python/predator.ipynb
+              - file: chapter6/section3/python/coupledpendula.ipynb
+              - file: chapter6/section4/python/converge.ipynb
+              - file: chapter6/section5/python/basic.ipynb
+              - file: chapter6/section5/python/sing.ipynb
+              - file: chapter6/section7/python/ab4.ipynb
+              - file: chapter6/section7/python/stiff.ipynb
+              - file: chapter6/section8/python/LIAF.ipynb
           - title: Chapter 7
+            children:
+              - file: chapter7/section1/python/graph.ipynb
+              - file: chapter7/section1/python/image.ipynb
+              - file: chapter7/section2/python/eigen.ipynb
+              - file: chapter7/section2/python/bauerfike.ipynb
+              - file: chapter7/section2/python/francisqr.ipynb
+              - file: chapter7/section3/python/props.ipynb
+              - file: chapter7/section4/python/rayleigh.ipynb
+              - file: chapter7/section5/python/hello.ipynb
+              - file: chapter7/section5/python/voting.ipynb
           - title: Chapter 8
+            children:
+              - file: chapter8/section1/python/sparse.ipynb
+              - file: chapter8/section1/python/fill.ipynb
+              - file: chapter8/section1/python/sparseband.ipynb
+              - file: chapter8/section1/python/linalg.ipynb
+              - file: chapter8/section2/python/one.ipynb
+              - file: chapter8/section2/python/iter.ipynb
+              - file: chapter8/section3/python/conv.ipynb
+              - file: chapter8/section3/python/accel.ipynb
+              - file: chapter8/section4/python/unstable.ipynb
+              - file: chapter8/section4/python/arnoldi.ipynb
+              - file: chapter8/section5/python/intro.ipynb
+              - file: chapter8/section5/python/restart.ipynb
+              - file: chapter8/section6/python/indefinite.ipynb
+              - file: chapter8/section6/python/converge.ipynb
+              - file: chapter8/section7/python/blur.ipynb
+              - file: chapter8/section7/python/deblur.ipynb
+              - file: chapter8/section8/python/diagonal.ipynb
+              - file: chapter8/section8/python/gmres.ipynb
           - title: Chapter 9
+            children:
+              - file: chapter8/section1/python/sparse.ipynb
+              - file: chapter8/section1/python/fill.ipynb
+              - file: chapter8/section1/python/sparseband.ipynb
+              - file: chapter8/section1/python/linalg.ipynb
+              - file: chapter8/section2/python/one.ipynb
+              - file: chapter8/section2/python/iter.ipynb
+              - file: chapter8/section3/python/conv.ipynb
+              - file: chapter8/section3/python/accel.ipynb
+              - file: chapter8/section4/python/unstable.ipynb
+              - file: chapter8/section4/python/arnoldi.ipynb
+              - file: chapter8/section5/python/intro.ipynb
+              - file: chapter8/section5/python/restart.ipynb
+              - file: chapter8/section6/python/indefinite.ipynb
+              - file: chapter8/section6/python/converge.ipynb
+              - file: chapter8/section7/python/blur.ipynb
+              - file: chapter8/section7/python/deblur.ipynb
+              - file: chapter8/section8/python/diagonal.ipynb
+              - file: chapter8/section8/python/gmres.ipynb
+          - title: Chapter 9
+            children:
+              - file: chapter9/section1/python/lagrange.ipynb
+              - file: chapter9/section1/python/error.ipynb
+              - file: chapter9/section2/python/example.ipynb
+              - file: chapter9/section3/python/equispaced.ipynb
+              - file: chapter9/section3/python/errfun.ipynb
+              - file: chapter9/section3/python/runge.ipynb
+              - file: chapter9/section3/python/errcheb.ipynb
+              - file: chapter9/section3/python/rungefix.ipynb
+              - file: chapter9/section3/python/spectral.ipynb
+              - file: chapter9/section4/python/approx.ipynb
+              - file: chapter9/section5/python/interp.ipynb
+              - file: chapter9/section5/python/fft.ipynb
+              - file: chapter9/section6/python/ellipse.ipynb
+              - file: chapter9/section6/python/compare.ipynb
+              - file: chapter9/section7/python/decay.ipynb
+              - file: chapter9/section7/python/intinf.ipynb
+              - file: chapter9/section7/python/intsing.ipynb
           - title: Chapter 10
+            children:
+              - file: chapter10/section1/python/mems.ipynb
+              - file: chapter10/section2/python/naive.ipynb
+              - file: chapter10/section2/python/mems.ipynb
+              - file: chapter10/section2/python/unstable.ipynb
+              - file: chapter10/section3/python/2nd.ipynb
+              - file: chapter10/section3/python/cheb.ipynb
+              - file: chapter10/section4/python/solve.ipynb
+              - file: chapter10/section4/python/converge.ipynb
+              - file: chapter10/section5/python/pendulum.ipynb
+              - file: chapter10/section5/python/mems.ipynb
+              - file: chapter10/section5/python/allencahn.ipynb
+              - file: chapter10/section6/python/fem.ipynb
           - title: Chapter 11
             children:
               - file: chapter11/section1/python/solve.ipynb
