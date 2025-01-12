@@ -278,7 +278,7 @@ project:
               - file: chapter5/section3/julia/splines.ipynb
               - file: chapter5/section4/julia/fd1.ipynb
               - file: chapter5/section4/julia/fd2.ipynb
-              - file: chapter5/section4/julia/weights.ipynb
+              - file: chapter5/section4/julia/fd-weights.ipynb
               - file: chapter5/section5/julia/order12.ipynb
               - file: chapter5/section5/julia/round.ipynb
               - file: chapter5/section6/julia/trap.ipynb
@@ -475,7 +475,7 @@ project:
               - file: chapter5/section3/matlab/splines.ipynb
               - file: chapter5/section4/matlab/fd1.ipynb
               - file: chapter5/section4/matlab/fd2.ipynb
-              - file: chapter5/section4/matlab/weights.ipynb
+              - file: chapter5/section4/matlab/fd-weights.ipynb
               - file: chapter5/section5/matlab/order12.ipynb
               - file: chapter5/section5/matlab/round.ipynb
               - file: chapter5/section6/matlab/trap.ipynb
@@ -674,7 +674,7 @@ project:
               - file: chapter5/section3/python/splines.ipynb
               - file: chapter5/section4/python/fd1.ipynb
               - file: chapter5/section4/python/fd2.ipynb
-              - file: chapter5/section4/python/weights.ipynb
+              - file: chapter5/section4/python/fd-weights.ipynb
               - file: chapter5/section5/python/order12.ipynb
               - file: chapter5/section5/python/round.ipynb
               - file: chapter5/section6/python/trap.ipynb
