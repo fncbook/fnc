@@ -83,7 +83,7 @@ close(gcf)
 FNC_init
 ```
 
-(demo-traffic-solve-matlab)=
+(demo-traffic-solvea-matlab)=
 ``````{dropdown} @demo-traffic-solve
 The following are parameters and a function relevant to defining the problem. 
 
@@ -156,7 +156,11 @@ close(vid)
 close(gcf)
 ```
 
-![Traffic flow](figures/traffic-small.mp4)
+``````
+
+
+(demo-traffic-solveb-matlab)=
+``````{dropdown} @demo-traffic-solve
 
 Now we use an initial condition with a larger bump. Note that the scale on the $y$-axis is much different for this solution.
 
@@ -201,8 +205,6 @@ end
 close(vid)
 close(gcf)
 ```
-
-![Traffic jam](figures/traffic-jam.mp4)
 
 In this case the density bump travels backward along the road. It also steepens on the side facing the incoming traffic and decreases much more slowly on the other side. A motorist would experience this as an abrupt increase in density, followed by a much more gradual decrease in density and resulting gradual increase in speed. (You also see some transient, high-frequency oscillations. These are caused by instabilities, as we discuss in simpler situations later in this chapter.)
 
@@ -255,7 +257,7 @@ ratio = num_steps_800 / num_steps_400
 ```
 ``````
 
-(demo-upwind-direction-matlab)=
+(demo-upwind-directiona-matlab)=
 ``````{dropdown} @demo-upwind-direction
 If we solve advection over $[0,1]$ with velocity $c=-1$, the right boundary is in the upwind/inflow direction. Thus a well-posed boundary condition is $u(1,t)=0$.
 
@@ -310,8 +312,10 @@ end
 close(vid)
 close(gcf)
 ```
+``````
 
-![Advection with inflow BC](figures/advection-inflow.mp4)
+(demo-upwind-directionb-matlab)=
+``````{dropdown} @demo-upwind-direction
 
 If instead of $u(1,t)=0$ we were to try to impose the downwind condition $u(0,t)=0$, we only need to change the index of the interior nodes and where to append the zero value.
 
@@ -355,7 +359,6 @@ close(vid)
 close(gcf)
 ```
 
-![Advection with outflow BC](figures/advection-outflow.mp4)
 ``````
 
 ```{code-cell}
@@ -541,8 +544,6 @@ close(vid)
 close(gcf)
 ```
 
-![Wave equation with boundaries](figures/wave-boundaries.mp4)
-
 The original hump breaks into two pieces of different amplitudes, each traveling with speed $c=2$. They pass through one another without interference. When a hump encounters a boundary, it is perfectly reflected, but with inverted shape. At time $t=2$, the solution looks just like the initial condition.
 
 ``````
@@ -600,8 +601,6 @@ end
 close(vid)
 close(gcf)
 ```
-
-![Wave equation with variable speed](figures/wave-speed.mp4)
 
 Each pass through the interface at $x=0$ generates a reflected and transmitted wave. By conservation of energy, these are both smaller in amplitude than the incoming bump.
 ``````

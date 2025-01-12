@@ -170,7 +170,7 @@ legend("data", "interpolant", "location", "northwest");
 ``````
 
 ### 2.2 @section-linsys-matrices
-(demo-matrices-matlab)=
+(demo-matrices-basics-matlab)=
 ``````{dropdown} @demo-matrices
 :::{index} ! MATLAB; size, ! MATLAB; length
 :::

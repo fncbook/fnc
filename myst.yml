@@ -406,18 +406,201 @@ project:
         children:
           - file: matlab/setup.md
           - title: Chapter 1
+            children:
+              - file: chapter1/section1/matlab/accuracy.ipynb
+              - file: chapter1/section1/matlab/double.ipynb
+              - file: chapter1/section1/matlab/arithmetic.ipynb
+              - file: chapter1/section2/matlab/roots.ipynb
+              - file: chapter1/section3/matlab/horner.ipynb
+              - file: chapter1/section4/matlab/quadbad.ipynb
+              - file: chapter1/section4/matlab/quadgood.ipynb
+              - file: chapter1/section4/matlab/roots.ipynb
           - title: Chapter 2
+            children:
+              - file: chapter2/section1/matlab/vander.ipynb
+              - file: chapter2/section2/matlab/basics.ipynb
+              - file: chapter2/section3/matlab/backslash.ipynb
+              - file: chapter2/section3/matlab/triangular.ipynb
+              - file: chapter2/section4/matlab/outertri.ipynb
+              - file: chapter2/section4/matlab/derive.ipynb
+              - file: chapter2/section4/matlab/solve.ipynb
+              - file: chapter2/section5/matlab/mvmult.ipynb
+              - file: chapter2/section5/matlab/loglog.ipynb
+              - file: chapter2/section5/matlab/lufact.ipynb
+              - file: chapter2/section6/matlab/fail.ipynb
+              - file: chapter2/section6/matlab/fix.ipynb
+              - file: chapter2/section6/matlab/permute.ipynb
+              - file: chapter2/section6/matlab/usage.ipynb
+              - file: chapter2/section6/matlab/builtin.ipynb
+              - file: chapter2/section6/matlab/stable.ipynb
+              - file: chapter2/section7/matlab/vector.ipynb
+              - file: chapter2/section7/matlab/matrix.ipynb
+              - file: chapter2/section8/matlab/bound.ipynb
+              - file: chapter2/section9/matlab/banded.ipynb
+              - file: chapter2/section9/matlab/symm.ipynb
+              - file: chapter2/section9/matlab/cholesky.ipynb
           - title: Chapter 3
+            children:
+              - file: chapter3/section1/matlab/tempinterp.ipynb
+              - file: chapter3/section1/matlab/tempfit.ipynb
+              - file: chapter3/section1/matlab/pirate.ipynb
+              - file: chapter3/section2/matlab/instab.ipynb
+              - file: chapter3/section3/matlab/qrfact.ipynb
+              - file: chapter3/section3/matlab/stable.ipynb
+              - file: chapter3/section4/matlab/qr.ipynb
           - title: Chapter 4
+            children:
+              - file: chapter4/section1/matlab/bessel.ipynb
+              - file: chapter4/section1/matlab/cond.ipynb
+              - file: chapter4/section2/matlab/spiral.ipynb
+              - file: chapter4/section2/matlab/converge.ipynb
+              - file: chapter4/section3/matlab/line.ipynb
+              - file: chapter4/section3/matlab/converge.ipynb
+              - file: chapter4/section3/matlab/usage.ipynb
+              - file: chapter4/section4/matlab/line.ipynb
+              - file: chapter4/section4/matlab/converge.ipynb
+              - file: chapter4/section4/matlab/iqi.ipynb
+              - file: chapter4/section5/matlab/converge.ipynb
+              - file: chapter4/section6/matlab/levenberg.ipynb
+              - file: chapter4/section7/matlab/converge.ipynb
+              - file: chapter4/section7/matlab/MM.ipynb
           - title: Chapter 5
+            children:
+              - file: chapter5/section1/matlab/global.ipynb
+              - file: chapter5/section1/matlab/pwise.ipynb
+              - file: chapter5/section1/matlab/cond.ipynb
+              - file: chapter5/section2/matlab/hat.ipynb
+              - file: chapter5/section2/matlab/usage.ipynb
+              - file: chapter5/section2/matlab/converge.ipynb
+              - file: chapter5/section3/matlab/splines.ipynb
+              - file: chapter5/section4/matlab/fd1.ipynb
+              - file: chapter5/section4/matlab/fd2.ipynb
+              - file: chapter5/section4/matlab/weights.ipynb
+              - file: chapter5/section5/matlab/order12.ipynb
+              - file: chapter5/section5/matlab/round.ipynb
+              - file: chapter5/section6/matlab/trap.ipynb
+              - file: chapter5/section6/matlab/extrap.ipynb
+              - file: chapter5/section7/matlab/motive.ipynb
+              - file: chapter5/section7/matlab/usage.ipynb
           - title: Chapter 6
+            children:
+              - file: chapter6/section1/matlab/first.ipynb
+              - file: chapter6/section1/matlab/sing.ipynb
+              - file: chapter6/section1/matlab/cond.ipynb
+              - file: chapter6/section2/matlab/converge.ipynb
+              - file: chapter6/section3/matlab/predator.ipynb
+              - file: chapter6/section3/matlab/coupledpendula.ipynb
+              - file: chapter6/section4/matlab/converge.ipynb
+              - file: chapter6/section5/matlab/basic.ipynb
+              - file: chapter6/section5/matlab/sing.ipynb
+              - file: chapter6/section7/matlab/ab4.ipynb
+              - file: chapter6/section7/matlab/stiff.ipynb
+              - file: chapter6/section8/matlab/LIAF.ipynb
           - title: Chapter 7
+            children:
+              - file: chapter7/section1/matlab/graph.ipynb
+              - file: chapter7/section1/matlab/image.ipynb
+              - file: chapter7/section2/matlab/eigen.ipynb
+              - file: chapter7/section2/matlab/bauerfike.ipynb
+              - file: chapter7/section2/matlab/francisqr.ipynb
+              - file: chapter7/section3/matlab/props.ipynb
+              - file: chapter7/section4/matlab/rayleigh.ipynb
+              - file: chapter7/section5/matlab/hello.ipynb
+              - file: chapter7/section5/matlab/voting.ipynb
           - title: Chapter 8
+            children:
+              - file: chapter8/section1/matlab/sparse.ipynb
+              - file: chapter8/section1/matlab/fill.ipynb
+              - file: chapter8/section1/matlab/sparseband.ipynb
+              - file: chapter8/section1/matlab/linalg.ipynb
+              - file: chapter8/section2/matlab/one.ipynb
+              - file: chapter8/section2/matlab/iter.ipynb
+              - file: chapter8/section3/matlab/conv.ipynb
+              - file: chapter8/section3/matlab/accel.ipynb
+              - file: chapter8/section4/matlab/unstable.ipynb
+              - file: chapter8/section4/matlab/arnoldi.ipynb
+              - file: chapter8/section5/matlab/intro.ipynb
+              - file: chapter8/section5/matlab/restart.ipynb
+              - file: chapter8/section6/matlab/indefinite.ipynb
+              - file: chapter8/section6/matlab/converge.ipynb
+              - file: chapter8/section7/matlab/blur.ipynb
+              - file: chapter8/section7/matlab/deblur.ipynb
+              - file: chapter8/section8/matlab/diagonal.ipynb
+              - file: chapter8/section8/matlab/gmres.ipynb
           - title: Chapter 9
+            children:
+              - file: chapter9/section1/matlab/lagrange.ipynb
+              - file: chapter9/section1/matlab/error.ipynb
+              - file: chapter9/section2/matlab/example.ipynb
+              - file: chapter9/section3/matlab/equispaced.ipynb
+              - file: chapter9/section3/matlab/errfun.ipynb
+              - file: chapter9/section3/matlab/runge.ipynb
+              - file: chapter9/section3/matlab/errcheb.ipynb
+              - file: chapter9/section3/matlab/rungefix.ipynb
+              - file: chapter9/section3/matlab/spectral.ipynb
+              - file: chapter9/section4/matlab/approx.ipynb
+              - file: chapter9/section5/matlab/interp.ipynb
+              - file: chapter9/section5/matlab/fft.ipynb
+              - file: chapter9/section6/matlab/ellipse.ipynb
+              - file: chapter9/section6/matlab/compare.ipynb
+              - file: chapter9/section7/matlab/decay.ipynb
+              - file: chapter9/section7/matlab/intinf.ipynb
+              - file: chapter9/section7/matlab/intsing.ipynb
           - title: Chapter 10
+            children:
+              - file: chapter10/section1/matlab/mems.ipynb
+              - file: chapter10/section2/matlab/naive.ipynb
+              - file: chapter10/section2/matlab/mems.ipynb
+              - file: chapter10/section2/matlab/unstable.ipynb
+              - file: chapter10/section3/matlab/2nd.ipynb
+              - file: chapter10/section3/matlab/cheb.ipynb
+              - file: chapter10/section4/matlab/solve.ipynb
+              - file: chapter10/section4/matlab/converge.ipynb
+              - file: chapter10/section5/matlab/pendulum.ipynb
+              - file: chapter10/section5/matlab/mems.ipynb
+              - file: chapter10/section5/matlab/allencahn.ipynb
+              - file: chapter10/section6/matlab/fem.ipynb
           - title: Chapter 11
+            children:
+              - file: chapter11/section1/matlab/solve.ipynb
+              - file: chapter11/section1/matlab/unstable.ipynb
+              - file: chapter11/section2/matlab/heatFE.ipynb
+              - file: chapter11/section2/matlab/heatBE.ipynb
+              - file: chapter11/section2/matlab/auto.ipynb
+              - file: chapter11/section3/matlab/regions.ipynb
+              - file: chapter11/section4/matlab/oregon.ipynb
+              - file: chapter11/section4/matlab/explicit.ipynb
+              - file: chapter11/section5/matlab/heat.ipynb
+              - file: chapter11/section5/matlab/bratu.ipynb
+              - file: chapter11/section5/matlab/bs.ipynb
           - title: Chapter 12
+            children:
+              - file: chapter12/section1/matlab/advection.ipynb
+              - file: chapter12/section1/matlab/solve-a.ipynb
+              - file: chapter12/section1/matlab/solve-b.ipynb
+              - file: chapter12/section2/matlab/cfl.ipynb
+              - file: chapter12/section2/matlab/direction-a.ipynb
+              - file: chapter12/section2/matlab/direction-b.ipynb
+              - file: chapter12/section3/matlab/advection.ipynb
+              - file: chapter12/section3/matlab/advdiff.ipynb
+              - file: chapter12/section3/matlab/inflow.ipynb
+              - file: chapter12/section4/matlab/boundaries.ipynb
+              - file: chapter12/section4/matlab/speed.ipynb
           - title: Chapter 13
+            children:
+                - file: chapter13/section1/matlab/gridfun.ipynb
+                - file: chapter13/section1/matlab/disksphere.ipynb
+                - file: chapter13/section1/matlab/diff.ipynb
+                - file: chapter13/section2/matlab/vec.ipynb
+                - file: chapter13/section2/matlab/heat.ipynb
+                - file: chapter13/section2/matlab/advdiff.ipynb
+                - file: chapter13/section2/matlab/wave.ipynb
+                - file: chapter13/section3/matlab/kron.ipynb
+                - file: chapter13/section3/matlab/fd.ipynb
+                - file: chapter13/section3/matlab/poisson.ipynb
+                - file: chapter13/section4/matlab/mems.ipynb
+                - file: chapter13/section4/matlab/advdiff.ipynb
+                - file: chapter13/section4/matlab/allencahn.ipynb
       - title: Python codes
         children:
           - file: python/setup.md
@@ -524,26 +707,6 @@ project:
               - file: chapter7/section5/python/hello.ipynb
               - file: chapter7/section5/python/voting.ipynb
           - title: Chapter 8
-            children:
-              - file: chapter8/section1/python/sparse.ipynb
-              - file: chapter8/section1/python/fill.ipynb
-              - file: chapter8/section1/python/sparseband.ipynb
-              - file: chapter8/section1/python/linalg.ipynb
-              - file: chapter8/section2/python/one.ipynb
-              - file: chapter8/section2/python/iter.ipynb
-              - file: chapter8/section3/python/conv.ipynb
-              - file: chapter8/section3/python/accel.ipynb
-              - file: chapter8/section4/python/unstable.ipynb
-              - file: chapter8/section4/python/arnoldi.ipynb
-              - file: chapter8/section5/python/intro.ipynb
-              - file: chapter8/section5/python/restart.ipynb
-              - file: chapter8/section6/python/indefinite.ipynb
-              - file: chapter8/section6/python/converge.ipynb
-              - file: chapter8/section7/python/blur.ipynb
-              - file: chapter8/section7/python/deblur.ipynb
-              - file: chapter8/section8/python/diagonal.ipynb
-              - file: chapter8/section8/python/gmres.ipynb
-          - title: Chapter 9
             children:
               - file: chapter8/section1/python/sparse.ipynb
               - file: chapter8/section1/python/fill.ipynb

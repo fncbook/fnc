@@ -15,10 +15,11 @@ end
 
 # init_cell = ["```{code-cell}", ":tags: [remove-cell]", "include(\"../../../julia/FNC_init.jl\")", "```"]
 init_cell = ["```{code-cell}", ":tags: [remove-cell]", "exec(open(\"../../../python/FNC_init.py\").read())", "```"]
+init_cell = ["```{code-cell}", ":tags: [remove-cell]", "cd  /Users/driscoll/Documents/GitHub/fnc/matlab", "FNC_init", "```"]
 
-lang = "python"
-yaml = open("yaml.txt", "w")
-for chap in [12]
+lang = "matlab"
+# yaml = open("yaml.txt", "w")
+for chap in 1:13
     println("chapter $chap")
     local stop, start, name, file, output
     file = "$lang/chapter$chap.md"
@@ -60,12 +61,12 @@ for chap in [12]
                     foreach(tofile, text)
                 end
             end
-            try
-                # run(`jupytext --to notebook --execute $output`)
-                println(yaml, "- file: chapter$chap/section$section/$lang/$name.ipynb")
-            catch
-                println("Error executing: $chap.$section, $name")
-            end
+            # try
+            #     # run(`jupytext --to notebook --execute $output`)
+            #     # println(yaml, "- file: chapter$chap/section$section/$lang/$name.ipynb")
+            # catch
+            #     println("Error executing: $chap.$section, $name")
+            # end
         end
     end
 end

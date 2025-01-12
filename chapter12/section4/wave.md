@@ -114,6 +114,7 @@ The boundary conditions {eq}`waveBC` suggest that we should remove both of the e
 :open:
 ```{include} matlab/boundaries.ipynb
 ```
+![Wave equation with boundaries](../../matlab/wave-boundaries.*)
 ````
 `````
 
@@ -153,6 +154,8 @@ An interesting situation is when the wave speed $c$ changes discontinuously, as 
 :open:
 ```{include} matlab/speed.ipynb
 ```
+![Wave equation with variable speed](../../matlab/wave-speed.*)
+
 ````
 `````
 

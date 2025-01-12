@@ -276,8 +276,6 @@ end
 close(vid)
 ```
 
-![Heat equation in 2d](figures/2d-heat.mp4)
-
 ``````
 
 (demo-diffadv-advdiff-matlab)=
@@ -347,7 +345,6 @@ end
 close(vid)
 ```
 
-![Advection-diffusion in 2d](figures/2d-advdiff.mp4)
 ``````
 
 (demo-diffadv-wave-matlab)=
@@ -427,7 +424,6 @@ close(vid)
   
 ```
 
-![Wave equation in 2d](figures/2d-wave.mp4)
 ``````
 
 ### 13.3 @section-twodim-laplace

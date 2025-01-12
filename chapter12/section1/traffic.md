@@ -108,6 +108,8 @@ This matrix is returned by {numref}`Function {number} <function-diffper>`.
 :open:
 ```{include} matlab/advection.ipynb
 ```
+![Advection equation with periodic boundary](matlab/advection-periodic.mp4)
+
 ````
 `````
 
@@ -153,8 +155,14 @@ Exact solutions of {eq}`trafficpde` are much harder to come by than for the stan
 :sync: matlab
 ````{dropdown} Traffic flow model
 :open:
-```{include} matlab/solve.ipynb
+```{include} matlab/solve-a.ipynb
 ```
+![Traffic simulation](matlab/traffic-small.*)
+
+```{include} matlab/solve-b.ipynb
+```
+
+![Traffic jam](matlab/traffic-jam.*)
 ````
 `````
 
@@ -172,7 +180,6 @@ Exact solutions of {eq}`trafficpde` are much harder to come by than for the stan
 
 ![Traffic jam](python/traffic-jam.*)
 
-In this case the density bump travels backward along the road. It also steepens on the side facing the incoming traffic and decreases much more slowly on the other side. A motorist would experience this as an abrupt increase in density, followed by a much more gradual decrease in density and resulting gradual increase in speed. (You also see some transient, high-frequency oscillations. These are caused by instabilities, as we discuss in simpler situations later in this chapter.)
 ````
 `````
 ``````

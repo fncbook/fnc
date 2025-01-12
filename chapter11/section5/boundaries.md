@@ -230,6 +230,7 @@ In many specific problems, `extend` does more work than is truly necessary. Diri
 :open:
 ```{include} matlab/bratu.ipynb
 ```
+![Heat equation with source](../../matlab/boundaries-source.*)
 ````
 `````
 
@@ -266,6 +267,7 @@ Finally, we return to the example of the Black–Scholes equation from {numref}`
 :open:
 ```{include} matlab/bs.ipynb
 ```
+![Black–Scholes equation with boundaries](../../matlab/boundaries-bs.*)
 ````
 `````
 

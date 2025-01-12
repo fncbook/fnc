@@ -131,6 +131,7 @@ Thus, a fully discrete method for the heat equation is
 :open:
 ```{include} matlab/heatFE.ipynb
 ```
+![Instability in Euler solution](../../matlab/diffusionFE.*)
 ````
 `````
 
@@ -182,6 +183,8 @@ Because backward Euler is an implicit method, a linear system must be solved for
 :open:
 ```{include} matlab/heatBE.ipynb
 ```
+![Backward Euler solution](../../matlab/diffusionBE.mp4)
+
 ````
 `````
 

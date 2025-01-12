@@ -109,6 +109,8 @@ If the boundary conditions are periodic, then the unknowns in the method of line
 :open:
 ```{include} matlab/heat.ipynb
 ```
+![Heat equation in 2D](../../matlab/heat-2d.*)
+
 ````
 `````
 
@@ -187,6 +189,8 @@ Now suppose the ODE unknowns for the interior solution values are in the vector 
 :open:
 ```{include} matlab/advdiff.ipynb
 ```
+![Advection-diffusion in 2D](../../matlab/advdiff-2d.*)
+
 ````
 `````
 
@@ -239,6 +243,8 @@ Now the grid unknowns are a pair of matrices $\mathbf{U}(t)$ and $\mathbf{V}(t)$
 :open:
 ```{include} matlab/wave.ipynb
 ```
+![Wave equation in 2D](../../matlab/wave-2d.*)
+
 ````
 `````
 

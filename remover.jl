@@ -1,5 +1,6 @@
 using JSON
-file = "chapter13/section2/python/vec.ipynb"
+file = "chapter3/section1/matlab/pirate.ipynb"
+file = "chapter1/section1/matlab/accuracy.ipynb"
 function isdoomed(cell)
     return haskey(cell, "metadata") && haskey(cell["metadata"], "tags") && "remove-cell" in cell["metadata"]["tags"]
 end

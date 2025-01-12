@@ -211,8 +211,15 @@ In summary, we require an **inflow** condition on the PDE. For $c>0$ this is at 
 :sync: matlab
 ````{dropdown} Upwind versus downwind
 :open:
-```{include} matlab/direction.ipynb
+```{include} matlab/direction-a.ipynb
 ```
+
+![Advection with inflow BC](../../matlab/advection-inflow.*)
+
+```{include} matlab/direction-b.ipynb
+```
+
+![Advection with outflow BC](../../matlab/advection-outflow.*)
 ````
 `````
 
@@ -234,11 +241,6 @@ In summary, we require an **inflow** condition on the PDE. For $c>0$ this is at 
 ``````
 ```````
     
-
-
-
-
-
 ## Exercises
 
 1. ✍ Suppose you want to model the weather, including winds up to speed $200$ km/hr, using an explicit method with a second-order centered spatial discretization. If the shortest time step you can take is 4 hr, what is the CFL limit on the spatial resolution of the model? Is this a lower bound or an upper bound?

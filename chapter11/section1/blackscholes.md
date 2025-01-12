@@ -209,6 +209,8 @@ We can therefore solve {eq}`bsneumann` for the fictitious $V_{m+1,j}$ and use it
 :open:
 ```{include} matlab/solve.ipynb
 ```
+![Black–Scholes solution](../../matlab/black-scholes-6.*)
+
 ````
 `````
 
@@ -247,6 +249,8 @@ Everything in {numref}`Demo {number} <demo-blackscholes-solve>` seems to go smoo
 :open:
 ```{include} matlab/unstable.ipynb
 ```
+![Trouble in Black–Scholes solution](../../matlab/black-scholes-8.*)
+
 ````
 `````
 
