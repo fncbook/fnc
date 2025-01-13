@@ -1,0 +1,23 @@
+# This file was created automatically with `myst init --gh-curvenote` 🪄 💚
+
+name: Curvenote Deploy
+on:
+  push:
+    # Runs on pushes targeting the default branch
+    branches: [master]
+permissions:
+  # Sets permissions of the GITHUB_TOKEN to allow read of private repos
+  contents: read
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy 🚀
+        uses: curvenote/action-myst-publish@v1
+        env:
+          CURVENOTE_TOKEN: ${{ secrets.CURVENOTE_TOKEN }}
