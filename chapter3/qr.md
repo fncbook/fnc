@@ -42,7 +42,7 @@ As in the rest of this chapter, we will be using the 2-norm exclusively.
 
 Equation {eq}`orthosubtract` is the key to the computational attractiveness of orthogonality. {numref}`fig-nonorthogonal` shows how nonorthogonal vectors can allow a multidimensional version of subtractive cancellation, in which $\|\mathbf{x}-\mathbf{y}\|$ is much smaller than $\|\mathbf{x}\|$ and $\|\mathbf{y}\|$. As the figure illustrates, orthogonal vectors do not allow this phenomenon. By {eq}`orthosubtract`, the magnitude of a vector difference or sum is larger than the magnitudes of the original vectors. 
 
-```{figure} nonorthogonal.svg
+```{figure} figures/nonorthogonal.svg
 :name: fig-nonorthogonal
 Nonorthogonal vectors can cause cancellation when subtracted, but orthogonal vectors never do.
 ```

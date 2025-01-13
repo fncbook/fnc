@@ -113,7 +113,7 @@ Geometrically, as illustrated in {numref}`fig-trapezoid`, the trapezoid formula 
 The trapezoid formula is the Swiss Army knife of integration formulas. A short implementation is given as {numref}`Function {number} <function-trapezoid>`.
 
 
-```{figure} trapezoid.svg
+```{figure} figures/trapezoid.svg
 :name: fig-trapezoid
 Trapezoid formula for integration. The piecewise linear interpolant defines trapezoids that approximate the region under the curve.
 ```
@@ -284,7 +284,7 @@ which is sixth-order accurate. Clearly the process can be repeated to get eighth
 Note in {eq}`nc-sixth` that $R_f(4n)$ depends on $S_f(2n)$ and $S_f(4n)$, which in turn depend on $T_f(n)$, $T_f(2n)$, and $T_f(4n)$.  There is a useful benefit realized by doubling of the nodes in each application of the trapezoid formula. As shown in {numref}`figure-node-doubling`, when doubling $n$, only about half of the nodes are new ones, and previously computed function values at the other nodes can be reused.
 
 
-```{figure} node-doubling.svg
+```{figure} figures/node-doubling.svg
 :name: figure-node-doubling
 Dividing the node spacing by half introduces new nodes only at midpoints, allowing the function values at existing nodes to be reused for extrapolation.
 ```
