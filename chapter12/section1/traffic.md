@@ -108,7 +108,7 @@ This matrix is returned by {numref}`Function {number} <function-diffper>`.
 :open:
 ```{include} matlab/advection.ipynb
 ```
-![Advection equation with periodic boundary](matlab/advection-periodic.mp4)
+![Advection equation with periodic boundary](../../matlab/advection-periodic.mp4)
 
 ````
 `````
@@ -157,12 +157,12 @@ Exact solutions of {eq}`trafficpde` are much harder to come by than for the stan
 :open:
 ```{include} matlab/solve-a.ipynb
 ```
-![Traffic simulation](matlab/traffic-small.*)
+![Traffic simulation](../../matlab/traffic-small.*)
 
 ```{include} matlab/solve-b.ipynb
 ```
 
-![Traffic jam](matlab/traffic-jam.*)
+![Traffic jam](../../matlab/traffic-jam.*)
 ````
 `````
 
