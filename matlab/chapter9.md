@@ -399,7 +399,7 @@ for k = 1:length(n)
     intercept(k) = c(1);
     slope(k) = c(2);
 end
-disp(table(n, intercept, slope))
+table(n, intercept, slope)
 ```
 ``````
 
@@ -478,7 +478,7 @@ We perform Fourier analysis using `fft` and then examine the resulting coefficie
 c = fft(y) / N;
 freq = [0:n, -n:-1]';
 format short
-disp(table(freq, c, variableNames=["k", "coefficient"]))
+table(freq, c, variableNames=["k", "coefficient"])
 ```
 
 Note that $1.5 e^{2i\pi x}+1.5 e^{-2i\pi x} = 3 \cos(2\pi x)$, so this result is sensible.
@@ -519,7 +519,7 @@ for k = 1:length(N)
 end
 err = abs(perim - perim(end));    % use last value as "exact"
 format long
-disp(table(N, perim, err, variableNames=["number of nodes", "perimeter", "error"]))
+table(N, perim, err, variableNames=["number of nodes", "perimeter", "error"])
 ```
 The approximations gain about one digit of accuracy for each constant increment of $n$, which is consistent with spectral convergence.
 ``````

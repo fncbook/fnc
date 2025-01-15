@@ -13,7 +13,7 @@ numbering:
 ```{code-cell}
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
-FNC_init
+FNC_init;
 ```
 
 ### 7.1 @section-matrixanaly-insight
@@ -213,7 +213,7 @@ If we plot the eigenvalues of many perturbations, we get a cloud of points that 
 
 ```{code-cell}
 clf
-plot(lambda, 0*lambda, 'o')
+scatter(lambda, 0*lambda)
 axis equal; hold on
 for k = 1:60
     E = randn(n, n) + 1i * randn(n, n);
@@ -346,7 +346,7 @@ for k = 1:length(delta)
     x = V(:, 6) + e;
     dif(k) = R(x) - lambda(6);
 end
-disp(table(delta, dif, variablenames=["perturbation size", "R(x) - lambda"]))
+table(delta, dif, variablenames=["perturbation size", "R(x) - lambda"])
 ```
 ``````
 
