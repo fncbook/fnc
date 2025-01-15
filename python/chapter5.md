@@ -8,8 +8,6 @@ numbering:
 ---
 # Chapter 5
 
-Python implementations
-
 ## Functions 
 
 (function-hatfun-python)=

@@ -9,8 +9,6 @@ numbering:
 
 # Chapter 2
 
-MATLAB implementations
-
 ## Functions
 
 (function-forwardsub-matlab)=

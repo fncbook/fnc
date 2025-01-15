@@ -685,7 +685,7 @@ version = "3.3.10+3"
 
 [[deps.FNCFunctions]]
 deps = ["LinearAlgebra", "OrdinaryDiffEq", "Polynomials", "SparseArrays"]
-path = "../FNCFunctions.jl"
+git-tree-sha1 = "0c25c00d8746aa8b972b255675d4490aa47d65c5"
 uuid = "ab0dfefa-d313-416d-841c-e73335ae36c8"
 version = "0.1.0"
 

@@ -8,8 +8,6 @@ numbering:
 ---
 # Chapter 4
 
-Python implementations
-
 ## Functions
 
 (function-newton-python)=

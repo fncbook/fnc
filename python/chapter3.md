@@ -8,8 +8,6 @@ numbering:
 ---
 # Chapter 3
 
-Python implementations
-
 ## Functions 
 
 (function-lsnormal-python)=

@@ -9,8 +9,6 @@ numbering:
 
 # Chapter 1 
 
-Python implementations
-
 ## Functions
 
 (function-horner-python)=
