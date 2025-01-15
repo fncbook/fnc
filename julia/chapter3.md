@@ -336,7 +336,7 @@ m,n = size(A)
 ```
 
 Our first step is to introduce zeros below the diagonal in column 1 by using {eq}`hhvector` and {eq}`hhreflect`. 
-:::
+
 ```{tip}
 :class: dropdown
 `I` can stand for an identity matrix of any size, inferred from the context when needed.
