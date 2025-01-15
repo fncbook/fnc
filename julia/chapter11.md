@@ -76,16 +76,16 @@ V = zeros(m+1, n+1)
 V[:, 1] = @. max(0, x - K)
 for j in 1:n
     # Fictitious value from Neumann condition.
-    Vfict = 2*h + V[m,j]
+    Vfict = 2h + V[m, j]
     Vj = [ V[:, j]; Vfict ]
     # First row is zero by the Dirichlet condition.
     for i in 2:m+1 
         diff1 = (Vj[i+1] - Vj[i-1])
         diff2 = (Vj[i+1] - 2Vj[i] + Vj[i-1])
         V[i,j+1] = Vj[i] +
-            (λ * σ^2 * x[i]^2 / 2) * diff2 
-            + (r * x[i] * μ) / 2 * diff1 
-            - (r * τ) * Vj[i]
+            (λ * σ^2 * x[i]^2 / 2) * diff2 +
+            (r * x[i] * μ) / 2 * diff1 -
+            (r * τ) * Vj[i]
     end 
 end
 ```
