@@ -69,7 +69,7 @@ Recall that for a matrix $\mathbf{A}$ and compatible vector $\mathbf{x}$, the qu
 
 (definition-symm-eig-rq)=
 ::::{prf:definition}
-Given hermitian $\mathbf{A}$ and nonzero vector $\mathbf{x}$, the **Rayleigh quotient** is the function
+Given hermitian $\mathbf{A}$ and nonzero vector $\mathbf{x}$, the {term}`Rayleigh quotient` is the function
 
 ```{math}
 :label: rayleigh
@@ -119,7 +119,7 @@ as $\epsilon\to 0$. The conclusion is that a good estimate of an eigenvector bec
 ```{index} see: hermitian positive definite matrix; symmetric positive definite matrix
 ```
 
-In the real case, we called a symmetric matrix $\mathbf{A}$ *symmetric positive definite* (SPD) if $\mathbf{x}^T \mathbf{A}\mathbf{x} > 0 $ for all nonzero vectors $\mathbf{x}$. In the complex case the relevant property is  **hermitian positive definite** (HPD), meaning that $\mathbf{A}^*=\mathbf{A}$ and $\mathbf{x}^* \mathbf{A}\mathbf{x} > 0$ for all complex vectors $\mathbf{x}$. Putting this property together with the Rayleigh quotient leads to the following.
+In the real case, we called a symmetric matrix $\mathbf{A}$ *symmetric positive definite* (SPD) if $\mathbf{x}^T \mathbf{A}\mathbf{x} > 0 $ for all nonzero vectors $\mathbf{x}$. In the complex case the analog is a {term}`hermitian positive definite matrix` (HPD matrix), meaning that $\mathbf{A}^*=\mathbf{A}$ and $\mathbf{x}^* \mathbf{A}\mathbf{x} > 0$ for all complex vectors $\mathbf{x}$. Putting this property together with the Rayleigh quotient leads to the following.
 
 (theorem-symm-eig-hpd)=
 ````{prf:theorem}
