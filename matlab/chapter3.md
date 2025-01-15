@@ -41,13 +41,14 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
-FNC_init
+cd  /Users/driscoll/Documents/GitHub/fnc/matlab
+FNC_init;
 ```
 
 ### 3.1 @section-leastsq-fitting
 (demo-fitting-tempinterp-matlab)=
 ``````{dropdown} @demo-fitting-tempinterp
+:open:
 Here are 5-year averages of the worldwide temperature anomaly as compared to the 1951–1980 average (source: NASA).
     
 ```{code-cell} matlab
@@ -85,6 +86,7 @@ fplot(p, [1955, 2000])    % plot the interpolating function
 
 (demo-fitting-tempfit-matlab)=
 ``````{dropdown} @demo-fitting-tempfit
+:open:
 Here are the 5-year temperature averages again.
 
 ```{code-cell}
@@ -146,6 +148,7 @@ If we were to continue increasing the degree of the polynomial, the residual at 
 
 (demo-fitting-pirate-matlab)=
 ``````{dropdown} @demo-fitting-pirate
+:open:
 ```{code-cell}
 k = (1:100)';
 a = 1./k.^2;      % sequence
@@ -154,7 +157,7 @@ p = sqrt(6*s);
 clf
 plot(k, p, 'o-')
 xlabel('k'), ylabel('p_k')
-title(('Sequence converging to \pi'));
+title('Sequence converging to \pi')
 ```
 
 This graph suggests that maybe $p_k\to \pi$, but it's far from clear how close the sequence gets. It's more informative to plot the sequence of errors, $\epsilon_k= |\pi-p_k|$. By plotting the error sequence on a log-log scale, we can see a nearly linear relationship.
@@ -191,6 +194,7 @@ legend('sequence', 'power-law fit');
 ### 3.2 @section-leastsq-normaleqns
 (demo-normaleqns-instab-matlab)=
 ``````{dropdown} @demo-normaleqns-instab
+:open:
 
 Because the functions $\sin^2(t)$, $\cos^2(t)$, and $1$ are linearly dependent, we should find that the following matrix is somewhat ill-conditioned.
 ```{tip}
@@ -232,6 +236,7 @@ digits = -log10(observed_err)
 ### 3.3 @section-leastsq-qr
 (demo-qr-qrfact-matlab)=
 ``````{dropdown} @demo-qr-qrfact
+:open:
 
 MATLAB provides access to both the thin and full forms of the QR factorization.
 
@@ -271,6 +276,7 @@ Q_hat' * Q_hat - eye(n)
 
 (demo-qr-stable-matlab)=
 ``````{dropdown} @demo-qr-stable
+:open:
 We'll repeat the experiment of {numref}`Demo {number} <demo-normaleqns-instab>`, which exposed instability in the normal equations. 
 
 ```{code-cell}
@@ -292,6 +298,7 @@ error_bound = cond(A) * eps
 
 (demo-house-qr-matlab)=
 ``````{dropdown} @demo-house-qr
+:open:
 
 We will use Householder reflections to produce a QR factorization of a matrix.
 

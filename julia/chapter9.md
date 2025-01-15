@@ -115,6 +115,7 @@ include("FNC_init.jl")
 
 (demo-polynomial-lagrange-julia)=
 ``````{dropdown} @demo-polynomial-lagrange
+:open:
 Here is a vector of nodes.
 
 ```{code-cell}
@@ -150,6 +151,7 @@ Observe that $\ell_k$ is _not_ between zero and one everywhere, unlike a hat fun
 
 (demo-polynomial-error-julia)=
 ``````{dropdown} @demo-polynomial-error
+:open:
 Consider the problem of interpolating $\log(x)$ at these nodes:
 
 ```{code-cell}
@@ -182,6 +184,7 @@ The error is zero at the nodes, by the definition of interpolation. The error bo
 
 (demo-barycentric-example-julia)=
 ``````{dropdown} @demo-barycentric-example
+:open:
 ```{code-cell}
 using Plots
 f(x) = sin(exp(2x))
@@ -215,6 +218,7 @@ plot!(p, 0, 1, label="interpolant", title="Interpolation on 7 nodes")
 
 (demo-stability-equispaced-julia)=
 ``````{dropdown} @demo-stability-equispaced
+:open:
 We choose a function over the interval $[0,1]$. 
 
 ```{code-cell} 
@@ -258,6 +262,7 @@ The error initially decreases as one would expect but then begins to grow. Both 
 
 (demo-stability-errfun-julia)=
 ``````{dropdown} @demo-stability-errfun
+:open:
 We plot $|\Phi(x)|$ over the interval $[-1,1]$ with equispaced nodes for different values of $n$. 
 
 ```{code-cell} 
@@ -277,6 +282,7 @@ Each time $\Phi$ passes through zero at an interpolation node, the value on the 
 
 (demo-stability-runge-julia)=
 ``````{dropdown} @demo-stability-runge
+:open:
 This function has infinitely many continuous derivatives on the entire real line and looks easy to approximate over $[-1,1]$.
 
 ```{code-cell} 
@@ -322,6 +328,7 @@ The convergence in the middle can't get any better than machine precision relati
 
 (demo-stability-errcheb-julia)=
 ``````{dropdown} @demo-stability-errcheb
+:open:
 Now we look at the error indicator function $\Phi$ for Chebyshev node sets.
 
 ```{code-cell} 
@@ -341,6 +348,7 @@ In contrast to the equispaced case, $|\Phi|$ decreases exponentially with $n$ al
 
 (demo-stability-rungefix-julia)=
 ``````{dropdown} @demo-stability-rungefix
+:open:
 Here again is the function from {numref}`Demo {number} <demo-stability-runge>` that provoked the Runge phenomenon when using equispaced nodes.
 
 ```{code-cell} 
@@ -367,6 +375,7 @@ By degree 16 the error is uniformly within machine epsilon, and, importantly, it
 
 (demo-stability-spectral-julia)=
 ``````{dropdown} @demo-stability-spectral
+:open:
 ```{code-cell} 
 :tags: remove-cell
 using Logging
@@ -392,6 +401,7 @@ plot!(n, [algebraic spectral], subplot=2,
 
 (demo-orthogonal-approx-julia)=
 ``````{dropdown} @demo-orthogonal-approx
+:open:
 Let's approximate $e^x$ over the interval $[−1,1]$. We can sample it at, say, 15 points, and find the best-fitting straight line to that data.
 
 ```{code-cell}
@@ -444,6 +454,7 @@ labels = ["n", "intercept", "slope"]
 
 (demo-trig-interp-julia)=
 ``````{dropdown} @demo-trig-interp
+:open:
 We will get a cardinal function without using an explicit formula, just by passing data that is 1 at one node and 0 at the others.
 ```{tip}
 :class: dropdown
@@ -504,6 +515,7 @@ plot(N, err, m=:o,
 
 (demo-trig-fft-julia)=
 ``````{dropdown} @demo-trig-fft
+:open:
 This function has frequency content at $2\pi$, $-2\pi$, and $\pi$. 
 
 ```{code-cell}
@@ -551,6 +563,7 @@ The Fourier coefficients of smooth functions decay exponentially in magnitude as
 
 (demo-integration-ellipse-julia)=
 ``````{dropdown} @demo-integration-ellipse
+:open:
 ```{code-cell}
 f(t) = π * sqrt( cospi(t)^2 + sinpi(t)^2 / 4 );
 n = 4:4:48
@@ -569,6 +582,7 @@ The approximations gain about one digit of accuracy for each constant increment 
 
 (demo-integration-compare-julia)=
 ``````{dropdown} @demo-integration-compare
+:open:
 First consider the integral 
 
 $$
@@ -653,6 +667,7 @@ At the core of `intadapt` is a fourth-order formula, and the results track that 
 
 (demo-improper-decay-julia)=
 ``````{dropdown} @demo-improper-decay
+:open:
 ```{code-cell}
 :tags: hide-input
 using Plots
@@ -677,6 +692,7 @@ This graph suggests that we capture all of the integrand values that are larger 
 
 (demo-improper-intinf-julia)=
 ``````{dropdown} @demo-improper-intinf
+:open:
 ```{code-cell}
 :tags: hide-input
 f(x) = 1 / (1 + x^2)
@@ -704,6 +720,7 @@ Both methods are roughly fourth-order due to Simpson's formula in the underlying
 
 (demo-improper-intsing-julia)=
 ``````{dropdown} @demo-improper-intsing
+:open:
 
 ```{code-cell}
 :tags: hide-input

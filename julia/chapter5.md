@@ -98,6 +98,7 @@ include("FNC_init.jl")
 
 (demo-interpolation-global-julia)=
 ``````{dropdown} @demo-interpolation-global
+:open:
 Here are some points that we could consider to be observations of an unknown function on $[-1,1]$.
 
 ```{code-cell}
@@ -141,6 +142,7 @@ Surely there must be functions that are more intuitively representative of those
 
 (demo-interpolation-pwise-julia)=
 ``````{dropdown} @demo-interpolation-pwise
+:open:
 Let us recall the data from {numref}`Demo %s <demo-interpolation-global>`.
 
 ```{code-cell}
@@ -171,6 +173,7 @@ plot!(x -> p(x), -1, 1, label="piecewise cubic")
 
 (demo-interp-cond-julia)=
 ``````{dropdown} @demo-interp-cond
+:open:
 In {numref}`Demo %s <demo-interpolation-global>` and {numref}`Demo %s <demo-interpolation-pwise>` we saw a big difference between polynomial interpolation and piecewise polynomial interpolation of some arbitrarily chosen data. The same effects can be seen clearly in the cardinal functions, which are closely tied to the condition numbers.
 
 ```{code-cell}
@@ -208,6 +211,7 @@ From the figure we can see that the condition number for polynomial interpolatio
 
 (demo-pwlin-hat-julia)=
 ``````{dropdown} @demo-pwlin-hat
+:open:
 Let's define a set of four nodes (i.e., $n=3$ in our formulas).
 
 ```{index} ! Julia; annotate!
@@ -240,6 +244,7 @@ plt
 
 (demo-pwlin-usage-julia)=
 ``````{dropdown} @demo-pwlin-usage
+:open:
 We generate a piecewise linear interpolant of $f(x)=e^{\sin 7x}$.
 
 ```{code-cell}
@@ -266,6 +271,7 @@ plot!(p, 0, 1, label="interpolant", title="PL interpolation")
 
 (demo-pwlin-converge-julia)=
 ``````{dropdown} @demo-pwlin-converge
+:open:
 We measure the convergence rate for piecewise linear interpolation of $e^{\sin 7x}$ over $x \in [0,1]$.
 
 ```{code-cell}
@@ -302,6 +308,7 @@ plot!(h, order2;
 
 (demo-splines-splines-julia)=
 ``````{dropdown} @demo-splines-splines
+:open:
 For illustration, here is a spline interpolant using just a few nodes.
 
 ```{code-cell}
@@ -351,6 +358,7 @@ plot(n, [err order4];
 
 (demo-finitediffs-fd1-julia)=
 ``````{dropdown} @demo-finitediffs-fd1
+:open:
 If $f(x)=e^{\,\sin(x)}$, then $f'(0)=1$.
 
 ```{code-cell}
@@ -385,6 +393,7 @@ BD2 = (f(-2h) - 4f(-h) + 3f(0)) / 2h
 
 (demo-finitediffs-fd2-julia)=
 ``````{dropdown} @demo-finitediffs-fd2
+:open:
 If $f(x)=e^{\,\sin(x)}$, then $f''(0)=1$.
 
 ```{code-cell}
@@ -418,6 +427,7 @@ BD2 = (-f(-3h) + 4f(-2h) - 5f(-h) + 2f(0)) / h^2
 
 (demo-finitediffs-fd-weights-julia)=
 ``````{dropdown} @demo-finitediffs-fd-weights
+:open:
 We will estimate the derivative of $\cos(x^2)$ at $x=0.5$ using five nodes.
 
 ```{code-cell}
@@ -459,6 +469,7 @@ FNC.fdweights(Rational.(0:3), 1)
 
 (demo-fdconverge-order12-julia)=
 ``````{dropdown} @demo-fdconverge-order12
+:open:
 Let's observe the convergence of the formulas in {numref}`Example {number} <example-fd-converge-FD11>` and {numref}`Example {number} <example-fd-converge-FD12>`, applied to the function $\sin(e^{x+1})$ at $x=0$.
 
 ```{code-cell}
@@ -503,6 +514,7 @@ plot!(h, [h h .^ 2], l=:dash, label=[L"O(h)" L"O(h^2)"])
 
 (demo-fdconverge-round-julia)=
 ``````{dropdown} @demo-fdconverge-round
+:open:
 Let $f(x)=e^{-1.3x}$. We apply finite-difference formulas of first, second, and fourth order to estimate $f'(0)=-1.3$.
 
 ```{code-cell}
@@ -542,6 +554,7 @@ Again the graph is made so that $h$ decreases from left to right. The errors are
 
 (demo-int-antideriv-julia)=
 ``````{dropdown} @demo-int-antideriv
+:open:
 The antiderivative of $e^x$ is, of course, itself. That makes evaluation of $\int_0^1 e^x\,dx$ by the Fundamental Theorem trivial.
 
 ```{code-cell}
@@ -577,6 +590,7 @@ plot([exp, x -> exp(sin(x))], 0, 1, fill=0, layout=(2, 1),
 
 (demo-int-trap-julia)=
 ``````{dropdown} @demo-int-trap
+:open:
 We will approximate the integral of the function $f(x)=e^{\sin 7x}$ over the interval $[0,2]$.
 
 ```{code-cell}
@@ -631,6 +645,7 @@ plot!(n, 3e-3 * (n / n[1]) .^ (-2), l=:dash, label=L"O(n^{-2})")
 
 (demo-int-extrap-julia)=
 ``````{dropdown} @demo-int-extrap
+:open:
 We estimate $\displaystyle\int_0^2 x^2 e^{-2x}\, dx$ using extrapolation. First we use `quadgk` to get an accurate value.
 
 ```{code-cell}
@@ -705,6 +720,7 @@ If we consider the computational time to be dominated by evaluations of $f$, the
 
 (demo-adapt-motive-julia)=
 ``````{dropdown} @demo-adapt-motive
+:open:
 This function gets increasingly oscillatory as $x$ increases.
 
 ```{code-cell}
@@ -738,6 +754,7 @@ Both the picture and the numerical results suggest that more nodes should be use
 
 (demo-adapt-usage-julia)=
 ``````{dropdown} @demo-adapt-usage
+:open:
 We'll integrate the function from {numref}`Demo %s <demo-adapt-motive>`.
 
 ```{code-cell}

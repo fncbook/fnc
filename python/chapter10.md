@@ -102,6 +102,7 @@ exec(open("FNC_init.py").read())
 
 (demo-tpbvp-mems-python)=
 ``````{dropdown} @demo-tpbvp-mems
+:open:
 To solve this problem, we have to define functions for the ODE and boundary conditions. The first returns the computed values of $y_1'$ and $y_2'$.  
 
 ```{code-cell}
@@ -151,6 +152,7 @@ title("Solution of MEMS problem for $\\lambda=0.6$");
 ### 10.2 @section-bvp-shooting
 (demo-shooting-naive-python)=
 ``````{dropdown} @demo-shooting-naive
+:open:
 
 Let's first examine the shooting approach for the TPBVP from {numref}`Example {number} <example-tpbvp-mems>` with $\lambda=0.6$. 
 
@@ -185,6 +187,7 @@ On the graph, it's the curve starting at $w(0)=0.8$ that comes closest to the re
 
 (demo-shooting-mems-python)=
 ``````{dropdown} @demo-shooting-mems
+:open:
 We revisit {numref}`Demo {number} <demo-shooting-naive>` but let {numref}`Function {number} <function-shoot>` do the heavy lifting.
 
 ```{code-cell}
@@ -225,6 +228,7 @@ print(f"w at left end is {w[0]}")
 
 (demo-shooting-unstable-python)=
 ``````{dropdown} @demo-shooting-unstable
+:open:
 
 ```{code-cell}
 ga = lambda u, du : u + 1    # u=-1 at left
@@ -247,6 +251,7 @@ The numerical solutions evidently don't satisfy the right boundary condition as 
 ### 10.3 @section-bvp-diffmats
 (demo-diffmats-2nd-python)=
 ``````{dropdown} @demo-diffmats-2nd
+:open:
 We test first-order and second-order differentiation matrices for the function $x + \exp(\sin 4x)$ over $[-1,1]$.
 
 ```{code-cell}
@@ -312,6 +317,7 @@ title("Convergence of finite differences");
 
 (demo-diffmats-cheb-python)=
 ``````{dropdown} @demo-diffmats-cheb
+:open:
 Here is a $4\times 4$ Chebyshev differentiation matrix.
 
 ```{code-cell}
@@ -350,6 +356,7 @@ title("Convergence of Chebyshev derivatives");
 ### 10.4 @section-bvp-linear
 (demo-linear-solve-python)=
 ``````{dropdown} @demo-linear-solve
+:open:
 
 ```{code-cell}
 exact = lambda x: exp( sin(x) )
@@ -382,6 +389,7 @@ ylabel("error");
 
 (demo-linear-converge-python)=
 ``````{dropdown} @demo-linear-converge
+:open:
 ```{code-cell}
 lamb = 10
 exact = lambda x: sinh(lamb * x) / sinh(lamb) - 1
@@ -421,6 +429,7 @@ legend(),  title("Convergence of finite differences");
 ### 10.5 @section-bvp-nonlinear
 (demo-nonlinear-pendulum-python)=
 ``````{dropdown} @demo-nonlinear-pendulum
+:open:
 The first step is to define the function $\phi$ that equals $\theta''$.
 
 ```{code-cell}
@@ -466,6 +475,7 @@ This time, the pendulum is initially pushed toward the unstable equilibrium in t
 
 (demo-nonlinear-mems-python)=
 ``````{dropdown} @demo-nonlinear-mems
+:open:
 Here is the problem definition. We use a truncated domain to avoid division by zero at $r=0$.
 
 ```{code-cell}
@@ -499,6 +509,7 @@ fig
 
 (demo-nonlinear-allencahn-python)=
 ``````{dropdown} @demo-nonlinear-allencahn
+:open:
 
 ```{code-cell}
 phi = lambda x, u, dudx: (u**3 - u) / epsilon
@@ -544,6 +555,7 @@ fig
 ### 10.6 @section-bvp-galerkin
 (demo-galerkin-fem-python)=
 ``````{dropdown} @demo-galerkin-fem
+:open:
 Here are the coefficient function definitions. Even though $s$ is a constant, it has to be defined as a function for {numref}`Function {number} <function-fem>` to use it.
 
 ```{code-cell}

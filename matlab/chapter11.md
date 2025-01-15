@@ -32,7 +32,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -40,6 +40,7 @@ FNC_init
 
 (demo-blackscholes-solve-matlab)=
 ``````{dropdown} @demo-blackscholes-solve
+:open:
 We consider the Black–Scholes problem for the following parameter values:
 
 ```{code-cell}
@@ -51,26 +52,26 @@ We discretize space and time.
 
 ```{code-cell}
 m = 200;  h = Smax / m;
-x = h*(0:m)';
+x = h * (0:m)';
 n = 1000;  tau = T / n;
-t = tau*(0:n)';
+t = tau * (0:n)';
 lambda = tau / h^2;  mu = tau / h;
 ```
 
 We set the initial condition and then march forward in time.
 
 ```{code-cell}
-V = zeros(m+1,n+1);
-V(:,1) = max( 0, x-K );
+V = zeros(m+1, n+1);
+V(:, 1) = max(0, x-K);
 for j = 1:n
     % Fictitious value from Neumann condition.
-    Vfict = 2*h + V(m,j);
-    Vj = [ V(:,j); Vfict ];
+    Vfict = 2*h + V(m, j);
+    Vj = [ V(:, j); Vfict ];
     % First row is zero by the Dirichlet condition.
     for i = 2:m+1 
         diff1 = (Vj(i+1) - Vj(i-1));
         diff2 = (Vj(i+1) - 2*Vj(i) + Vj(i-1));
-        V(i,j+1) = Vj(i) ...
+        V(i, j+1) = Vj(i) ...
             + (lambda * sigma^2* x(i)^2/2) * diff2  ...
             + (r*mu * x(i))/2 * diff1 - r*tau * Vj(i);
     end 
@@ -80,7 +81,7 @@ end
 Here is a plot of the solution after every 250 time steps.
 
 ```{code-cell}
-index_times = 1 + 250*(0:4);
+index_times = 1:250:n+1;
 show_times = t(index_times);
 clf
 for j = index_times
@@ -100,7 +101,7 @@ legend(location="northwest")
 Alternatively, here is an animation of the solution.
 
 ```{code-cell}
-:tags: remove-output
+:tag: remove-output
 clf
 plot(x, V(:,1))
 hold on,  grid on
@@ -126,6 +127,7 @@ The results are easy to interpret, recalling that the time variable really means
 
 (demo-blackscholes-unstable-matlab)=
 ``````{dropdown} @demo-blackscholes-unstable
+:open:
 Let's try to do everything the same as in {numref}`Demo {number} <demo-blackscholes-solve>`, but extending the simulation time to $T=8$.
 
 ```{code-cell}
@@ -187,6 +189,7 @@ This so-called solution is nonsense!
 
 (demo-methodlines-heatFE-matlab)=
 ``````{dropdown} @demo-methodlines-heatFE
+:open:
 Let's implement the method of {numref}`Example {number} <example-methodlines-heatFE>` with second-order space semidiscretization.
 
 ```{code-cell}
@@ -228,7 +231,7 @@ title('Heat equation by forward Euler')
 You see above that things seem to start well, with the initial peak widening and shrinking. But then there is a nonphysical growth in the solution.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [remove-output, hide-input]
 clf
 index_times = 1:101;
 plot(x, U(:, 1))
@@ -262,6 +265,7 @@ title('Nonphysical growth')
 
 (demo-methodlines-heatBE-matlab)=
 ``````{dropdown} @demo-methodlines-heatBE
+:open:
 Now we apply backward Euler to the heat equation. Mathematically this means multiplying by the *inverse* of a matrix, but we interpret that numerically as a linear system solution. We will reuse the setup from {numref}`Demo {number} <demo-methodlines-heatFE>`. 
 
 ```{code-cell}
@@ -285,7 +289,7 @@ title('Heat equation by backward Euler')
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input, remove-output]
 clf
 index_times = 1:24:n+1;
 plot(x, U(:, 1))
@@ -311,6 +315,7 @@ This solution looks physically plausible, as the large concentration in the cent
 ``````
 (demo-methodlines-auto-matlab)=
 ``````{dropdown} @demo-methodlines-auto
+:open:
 We set up the semidiscretization and initial condition in $x$ just as before.
 
 ```{code-cell}
@@ -362,6 +367,7 @@ The number of steps selected was reduced by a factor of 20!
 ### 11.3 @section-diffusion-absstab
 (demo-absstab-regions-matlab)=
 ``````{dropdown} @demo-absstab-regions
+:open:
 Euler and Backward Euler time-stepping methods were used to solve $\mathbf{u}'=\mathbf{D}_{xx}\mathbf{u}$.
 
 ```{code-cell}
@@ -427,6 +433,7 @@ title('Stability region and \zeta values')
 ### 11.4 @section-diffusion-stiffness
 (demo-stiffness-oregon-matlab)=
 ``````{dropdown} @demo-stiffness-oregon
+:open:
 In {numref}`Example {number} <example-stiffness-oregon>` we derived a Jacobian matrix for the Oregonator model. Here is a numerical solution of the ODE.
 
 ```{code-cell}
@@ -470,6 +477,7 @@ You can see that there is one eigenvalue that ranges over a wide portion of the 
 
 (demo-stiffness-explicit-matlab)=
 ``````{dropdown} @demo-stiffness-explicit
+:open:
 The `ode15s` solver is good for stiff problems and needs few time steps to solve the Oregonator from {numref}`Demo {number} <demo-stiffness-oregon>`.
 
 ```{code-cell}
@@ -507,6 +515,7 @@ Roughly speaking, the $\zeta$ values stay within or close to the RK2 stability r
 ### 11.5 @section-diffusion-boundaries
 (demo-boundaries-heat-matlab)=
 ``````{dropdown} @demo-boundaries-heat
+:open:
 First, we define functions for the PDE and each boundary condition.
 
 ```{code-cell}
@@ -538,7 +547,7 @@ title("Heat equation with Dirichlet boundaries")
 ```
 
 ```{code-cell}
-:tags: remove-cell
+:tags: remove-output
 clf
 plot(x, u(0))
 hold on,  grid on
@@ -563,6 +572,7 @@ close(vid)
 
 (demo-boundaries-bratu-matlab)=
 ``````{dropdown} @demo-boundaries-bratu
+:open:
 
 ```{code-cell}
 phi = @(t, x, u, ux, uxx) u.^2 + uxx;
@@ -574,7 +584,7 @@ init = @(x) 400 * x.^4 .* (1 - x).^2;
 ```
 
 ```{code-cell}
-:tags: hide-cell
+:tags: remove-output
 clf
 plot(x, u(0))
 hold on,  grid on
@@ -598,6 +608,7 @@ close(vid)
 
 (demo-boundaries-bs-matlab)=
 ``````{dropdown} @demo-boundaries-bs
+:open:
 
 ```{code-cell}
 K = 3;  sigma = 0.06;  r = 0.08;  Smax = 8;
@@ -612,7 +623,7 @@ init = @(x) max(0, x - K);
 ```
 
 ```{code-cell}
-:tags: remove-input
+:tags: remove-output
 clf
 plot(x, u(0))
 hold on,  grid on

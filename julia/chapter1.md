@@ -285,7 +285,7 @@ This matches the observation pretty well.
 
 (demo-algorithms-horner-julia)=
 ``````{dropdown} @demo-algorithms-horner
-:open: false
+:open: 
 Here we show how to use {numref}`Function {number} <function-horner>` to evaluate a polynomial. It's not a part of core Julia, so you need to download and install this text's package once, and load it for each new Julia session. The download is done by the following lines.
 
 ```{code-cell}
@@ -349,7 +349,7 @@ The multi-line string at the start of {numref}`Function {number} <function-horne
 ### 1.4 @section-intro-stability
 (demo-stability-quadbad-julia)= 
 ``````{dropdown} @demo-stability-quadbad
-:open: false
+:open:
 
 ```{index} ! Julia; scientific notation
 ```
@@ -389,6 +389,7 @@ Using {eq}`condition-chain`, the chain rule for condition numbers, the condition
 
 (demo-stability-quadgood-julia)=
 ````{dropdown} @demo-stability-quadgood
+:open:
 We repeat the rootfinding experiment of {numref}`Demo %s <demo-stability-quadbad>` with an alternative algorithm.
 
 ```{code-cell}
@@ -416,7 +417,7 @@ abs(x₂ - 1e-6) / 1e-6
 
 (demo-stability-roots-julia)=
 ````{dropdown} @demo-stability-roots
-:open: false
+:open: 
 
 For this example we will use the `Polynomials` package, which is installed by the `FNC` package.  
 

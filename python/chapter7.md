@@ -19,6 +19,7 @@ exec(open("FNC_init.py").read())
 
 (demo-insight-graph-python)=
 ``````{dropdown} @demo-insight-graph
+:open:
 Here we create an adjacency matrix for a graph on four nodes.
 
 ```{code-cell}
@@ -54,6 +55,7 @@ nx.draw(G, with_labels=True, node_color="yellow")
 
 (demo-insight-image-python)=
 ``````{dropdown} @demo-insight-image
+:open:
 ```{index} ! Julia; Images
 ```
 
@@ -115,6 +117,7 @@ axis('off');
 
 (demo-evd-eigen-python)=
 ``````{dropdown} @demo-evd-eigen
+:open:
 
 ```{index} ! Python; eig
 ```
@@ -161,6 +164,7 @@ print(f"should be near zero: {norm(A @ V - V @ diag(d), 2):.2e}")
 
 (demo-evd-bauerfike-python)=
 ``````{dropdown} @demo-evd-bauerfike
+:open:
 
 We first define a hermitian matrix. Note that we add the *conjugate* transpose of a matrix to itself.
 
@@ -237,6 +241,7 @@ The plot shows that some eigenvalues are much more affected than others. This si
 
 (demo-evd-francisqr-python)=
 ``````{dropdown} @demo-evd-francisqr
+:open:
 Let's start with a known set of eigenvalues and an orthogonal eigenvector basis.
 
 ```{code-cell}
@@ -278,6 +283,7 @@ print(A)
 
 (demo-svd-props-python)=
 ``````{dropdown} @demo-svd-props
+:open:
 We verify some of the fundamental SVD properties using standard Julia functions from `LinearAlgebra`.
 
 ```{code-cell}
@@ -344,6 +350,7 @@ print("size of V:", Vh.shape)
 
 (demo-symm-eig-rayleigh-python)=
 ``````{dropdown} @demo-symm-eig-rayleigh
+:open:
 We will use a symmetric matrix with a known EVD and eigenvalues equal to the integers from 1 to 20.
 
 ```{code-cell}
@@ -386,6 +393,7 @@ print(results)
 
 (demo-dimreduce-hello-python)=
 ``````{dropdown} @demo-dimreduce-hello
+:open:
 We make an image from some text, then reload it as a matrix.
 
 ```{code-cell}
@@ -447,6 +455,7 @@ print(f"compression ratio: {full_size / compressed_size:.1f}")
 
 (demo-dimreduce-voting-python)=
 ``````{dropdown} @demo-dimreduce-voting
+:open:
 This matrix describes the votes on bills in the 111th session of the United States Senate. (The data set was obtained from [https://voteview.com].) Each row is one senator, and each column is a vote item.
 
 ```{code-cell}

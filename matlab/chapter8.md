@@ -50,7 +50,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -58,6 +58,7 @@ FNC_init
 
 (demo-structure-sparse-matlab)=
 ``````{dropdown} @demo-structure-sparse
+:open:
 Here we load the adjacency matrix of a graph with 2790 nodes. Each node is a web page referring to Roswell, NM, and the edges represent links between web pages. (Credit goes to Panayiotis Tsaparas and the University of Toronto for making this data public.)
 
 ```{code-cell}
@@ -112,6 +113,7 @@ row_time = toc
 
 (demo-structure-fill-matlab)=
 ``````{dropdown} @demo-structure-fill
+:open:
 
 Here is the adjacency matrix of a graph representing a small-world network, featuring connections to neighbors and a small number of distant contacts.
 
@@ -142,6 +144,7 @@ end
 
 (demo-structure-sparseband-matlab)=
 ``````{dropdown} @demo-structure-sparseband 
+:open:
 
 ```{index} ! MATLAB; spdiags
 ```
@@ -188,6 +191,7 @@ subplot(1, 2, 2), spy(U), title(('U'));
 (demo-structure-linalg-matlab)=
 
 ``````{dropdown} @demo-structure-linalg
+:open:
 
 The following generates a random sparse matrix with prescribed eigenvalues.
 
@@ -238,6 +242,7 @@ tic, dense_err = norm(x - F\b), dense_time = toc
 
 (demo-power-one-matlab)=
 ``````{dropdown} @demo-power-one
+:open:
 Here we choose a magic 5×5 matrix and a random 5-vector.
 
 ```{code-cell}
@@ -279,6 +284,7 @@ end
 
 (demo-power-iter-matlab)=
 ``````{dropdown} @demo-power-iter
+:open:
 We will experiment with the power iteration on a 5×5 matrix with prescribed eigenvalues and dominant eigenvalue at 1.
 
 ```{code-cell}
@@ -334,6 +340,7 @@ The results are very similar until the last few iterations, when the limited acc
 
 (demo-inviter-conv-matlab)=
 ``````{dropdown} @demo-inviter-conv
+:open:
 We set up a $5\times 5$ triangular matrix with prescribed eigenvalues on its diagonal.
 
 ```{code-cell}
@@ -380,6 +387,7 @@ observed_rate = err(26) / err(25)
 
 (demo-inviter-accel-matlab)=
 ``````{dropdown} @demo-inviter-accel
+:open:
 ```{code-cell}
 ev = [1, -0.75, 0.6, -0.4, 0];
 A = triu(ones(5, 5), 1) + diag(ev);
@@ -420,6 +428,7 @@ end
 
 (demo-subspace-unstable-matlab)=
 ``````{dropdown} @demo-subspace-unstable
+:open:
 First we define a triangular matrix with known eigenvalues, and a random vector $b$.
 
 ```{code-cell}
@@ -463,6 +472,7 @@ axis tight, title('Residual for linear systems')
 
 (demo-subspace-arnoldi-matlab)=
 ``````{dropdown} @demo-subspace-arnoldi
+:open:
 We illustrate a few steps of the Arnoldi iteration for a small matrix.
 
 ```{code-cell}
@@ -516,6 +526,7 @@ rank([Q, K])
 
 (demo-gmres-intro-matlab)=
 ``````{dropdown} @demo-gmres-intro
+:open:
 We define a triangular matrix with known eigenvalues and a random vector $\mathbf{b}$.
 
 ```{code-cell}
@@ -554,6 +565,7 @@ axis tight, title(('Residual for GMRES'));
 
 (demo-gmres-restart-matlab)=
 ``````{dropdown} @demo-gmres-restart
+:open:
 The following experiments are based on a matrix resulting from discretization of a partial differential equation.
 
 ```{code-cell}
@@ -588,6 +600,7 @@ The "pure" GMRES curve is the lowest one. All of the other curves agree with it 
 
 (demo-minrescg-indefinite-matlab)=
 ``````{dropdown} @demo-minrescg-indefinite
+:open:
 The following matrix is indefinite.
 
 ```{code-cell}
@@ -637,6 +650,7 @@ The upper bound turns out to be pessimistic here, especially in the later iterat
 
 (demo-minrescg-converge-matlab)=
 ``````{dropdown} @demo-minrescg-converge
+:open:
 We will compare MINRES and CG on some quasi-random SPD problems.  The first matrix has a condition number of 100.
 
 ```{code-cell}
@@ -700,6 +714,7 @@ Both methods have an early superlinear phase that allow them to finish slightly 
 
 (demo-matrixfree-blur-matlab)=
 ``````{dropdown} @demo-matrixfree-blur
+:open:
 We use a readily available test image.
 
 ```{code-cell}
@@ -729,6 +744,7 @@ title(('Blurred image'));
 
 (demo-matrixfree-deblur-matlab)=
 ``````{dropdown} @demo-matrixfree-deblur
+:open:
 We repeat the earlier process to blur an original image $\mathbf{X}$ to get $\mathbf{Z}$.
 
 ```{code-cell}
@@ -773,6 +789,7 @@ title(("Deblurred"));
 
 (demo-precond-diagonal-matlab)=
 ``````{dropdown} @demo-precond-diagonal
+:open:
 Here is an SPD matrix that arises from solving partial differential equations.
 
 ```{code-cell}
@@ -810,6 +827,7 @@ The diagonal preconditioner cut down substantially on the number of iterations. 
 
 (demo-precond-gmres-matlab)=
 ``````{dropdown} @demo-precond-gmres
+:open:
 Here is a random nonsymmetric matrix.
 
 ```{code-cell}

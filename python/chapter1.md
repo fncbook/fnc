@@ -87,7 +87,7 @@ print(f"accurate digits: {-log10(rel_acc):.1f}")
 
 (demo-float-double-python)=
 ``````{dropdown} @demo-float-double
-:open: false
+:open: 
 
 Python has native `int` and `float` types.
 
@@ -159,7 +159,7 @@ int(3.14)
 
 (demo-float-arithmetic-python)=
 ``````{dropdown} @demo-float-arithmetic
-:open: false
+:open: 
 
 There is no double precision number between $1$ and $1+\varepsilon_\text{mach}$. Thus, the following difference is zero despite its appearance.
 
@@ -183,7 +183,7 @@ This is now the "correct" result. But we have found a rather shocking breakdown 
 
 (demo-condition-roots-python)=
 ``````{dropdown} @demo-condition-roots
-:open: false
+:open: 
 
 The polynomial $p(x) = \frac{1}{3}(x-1)(x-1-\epsilon)$ has roots $1$ and $1+\epsilon$. For small values of $\epsilon$, the roots are ill-conditioned. 
 
@@ -230,7 +230,7 @@ This matches the observation pretty well.
 
 (demo-algorithms-horner-python)=
 ``````{dropdown} @demo-algorithms-horner
-:open: false
+:open: 
 
 Here we show how to use `horner` to evaluate a polynomial. First, we have to ensure that the book's package is imported.
   
@@ -259,8 +259,7 @@ The above is the value of $p(1.6)$, up to a rounding error.
 
 (demo-stability-quadbad-python)= 
 ``````{dropdown} @demo-stability-quadbad
-:open: false
-
+:open: 
 ```{index} ! Python; scientific notation
 ```
 
@@ -299,6 +298,7 @@ Using {eq}`condition-chain`, the chain rule for condition numbers, the condition
 
 (demo-stability-quadgood-python)=
 ````{dropdown} @demo-stability-quadgood
+:open:
 We repeat the rootfinding experiment of {numref}`Demo %s <demo-stability-quadbad>` with an alternative algorithm.
 
 ```{code-cell}
@@ -327,8 +327,7 @@ print(abs(x2 - 1e-6) / 1e-6)
 
 (demo-stability-roots-python)=
 ````{dropdown} @demo-stability-roots
-:open: false
-
+:open: 
 
 Our first step is to construct a polynomial with six known roots.
 

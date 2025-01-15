@@ -60,13 +60,14 @@ Line 12 implements @forwardsub. It contains an inner product between row $i$ of 
 
 ```{code-cell}
 :tags: [remove-cell]
-cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
-FNC_init
+cd  /Users/driscoll/Documents/GitHub/fnc/matlab
+FNC_init;
 ```
 
 ### 2.1 @section-linsys-polyinterp
 (demo-interp-vander-matlab)=
 ``````{dropdown} @demo-interp-vander
+:open:
 We create two column vectors for data about the population of China. The first has the years of census data and the other has the population, in millions of people.
 
 ```{code-cell}
@@ -133,7 +134,7 @@ The `scatter` function creates a scatter plot of points; you can specify a line 
 scatter(year, y)
 xlabel("years since 1980")
 ylabel("population (millions)")
-title(("Population of China"));
+title("Population of China")
 ```
 
 :::{index} ! MATLAB; linspace
@@ -171,6 +172,7 @@ legend("data", "interpolant", "location", "northwest");
 ### 2.2 @section-linsys-matrices
 (demo-matrices-matlab)=
 ``````{dropdown} @demo-matrices
+:open:
 :::{index} ! MATLAB; size, ! MATLAB; length
 :::
 
@@ -356,6 +358,7 @@ cos(pi * x)
 ### 2.3 @section-linsys-linear-systems
 (demo-systems-backslash-matlab)=
 ``````{dropdown} @demo-systems-backslash
+:open:
 For a square matrix $\mathbf{A}$, the syntax `A \ b` is mathematically equivalent to $\mathbf{A}^{-1} \mathbf{b}$. 
 
 ```{code-cell}
@@ -403,6 +406,7 @@ A linear system with a singular matrix might have no solution or infinitely many
 
 (demo-systems-triangular-matlab)=
 ``````{dropdown} @demo-systems-triangular
+:open:
 ```{index} ! MATLAB; tril, ! MATLAB; triu
 ```
 
@@ -479,6 +483,7 @@ It's not so good to get 4 digits of accuracy after starting with sixteen! The so
 ### 2.4 @section-linsys-lu
 (demo-lu-outertri-matlab)= 
 ``````{dropdown} @demo-lu-outertri
+:open:
 :open: false
 
 ```{index} MATLAB; tril, MATLAB; triu
@@ -512,6 +517,7 @@ Simply because of the triangular zero structures, only the first outer product c
 
 (demo-lu-derive-matlab)=
 ``````{dropdown} @demo-lu-derive
+:open:
 For illustration, we work on a $4 \times 4$ matrix. We name it with a subscript in preparation for what comes.
 
 ```{code-cell}
@@ -594,6 +600,7 @@ In floating point, we cannot expect the difference to be exactly zero as we foun
 
 (demo-lu-solve-matlab)=
 ``````{dropdown} @demo-lu-solve
+:open:
 Here are the data for a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$. 
 
 ```{code-cell}
@@ -619,6 +626,7 @@ b - A * x
 ### 2.5 @section-linsys-efficiency
 (demo-flops-mvmult-matlab)=
 ``````{dropdown} @demo-flops-mvmult
+:open:
 Here is a straightforward implementation of matrix-vector multiplication.
 
 ```{code-cell}
@@ -645,63 +653,62 @@ Since the matrix $\mathbf{A}$ has $n^2$ elements, all of which have to be involv
 Let's run an experiment with the built-in matrix-vector multiplication, using `tic` and `toc` to time the operation.
 
 ```{code-cell}
-n_ = (400:400:4000)';
-t_ = zeros(size(n_));
-for i = 1:length(n_)
-    n = n_(i);
-    A = randn(n, n);  x = randn(n, 1);
+n = (500:500:5000)';
+t = zeros(size(n));
+for k = 1:length(n)
+    A = randn(n(k), n(k));  x = randn(n(k), 1);
     tic    % start a timer
-    for j = 1:100      % repeat 100 times
+    for j = 1:200      % repeat 100 times
         A*x;
     end
-    t = toc;           % read the timer
-    t_(i) = t / 100;   % seconds per instance
+    time = toc;           % read the timer
+    t(k) = time / 200;   % seconds per instance
 end
 ```
 
 The reason for doing multiple repetitions at each value of $n$ in the loop above is to avoid having times so short that the resolution of the timer is significant.
 
 ```{code-cell}
-table(n_, t_, 'variablenames', {'size', 'time'})
+table(n, t, 'variablenames', ["size", "time"])
 ```
 
 ```{index} MATLAB; Boolean indexing
 ```
 
-Looking at the timings just for $n=2000$ and $n=4000$, they have ratio
+Looking at the timings just for $n=2500$ and $n=5000$, they have ratio
 ```{tip}
 :class: dropdown
-The expression `n_==4000` here produces a vector of Boolean (true/false) values the same size as `n_`. This result is used to index within `t_`, accessing only the value for which the comparison is true.
+The expression `n==5000` here produces a vector of Boolean (true/false) values the same size as `n`. This result is used to index within `t`, accessing only the value for which the comparison is true.
 ```
 
 ```{code-cell}
-t_(n_==4000) / t_(n_==2000)
+t(n==5000) / t(n==2500)
 ```
 
 If the run time is dominated by flops, then we expect this ratio to be 
 
 $$
-\frac{2(4000)^2}{2(2000)^2}=4.
+\frac{2(5000)^2}{2(2500)^2}=4.
 $$
 ``````
 
 (demo-flops-loglog-matlab)=
 ``````{dropdown} @demo-flops-loglog
+:open:
 
 Let's repeat the previous experiment for more, and larger, values of $n$.
 
 ```{code-cell}
-n_ = (400:400:6000)';
-t_ = zeros(size(n_));
-for i = 1:length(n_)
-    n = n_(i);
-    A = randn(n, n);  x = randn(n, 1);
+n = (400:400:6000)';
+t = zeros(size(n));
+for k = 1:length(n)
+    A = randn(n(k), n(k));  x = randn(n(k), 1);
     tic    % start a timer
     for j = 1:100      % repeat ten times
         A*x;
     end
-    t = toc;          % read the timer
-    t_(i) = t / 100;   % seconds per instance
+    time = toc;          % read the timer
+    t(k) = time / 100;   % seconds per instance
 end
 ```
 
@@ -709,24 +716,25 @@ Plotting the time as a function of $n$ on log-log scales is equivalent to plotti
 
 ```{code-cell}
 clf    % clear any existing figure
-loglog(n_, t_, '.-')
+loglog(n, t, 'o-')
 xlabel('size of matrix')
 ylabel('time (sec)')
-title(('Timing of matrix-vector multiplications'));
+title('Timing of matrix-vector multiplications')
 ```
 
 You can see that while the full story is complicated, the graph is trending to a straight line of positive slope. For comparison, we can plot a line that represents $O(n^2)$ growth exactly. (All such lines have slope equal to 2.)
 
 ```{code-cell}
 hold on
-loglog(n_, t_(1) * (n_ / n_(1)).^2, '--')
+loglog(n, 0.5 * t(end) * (n / n(end)).^2, 'k--')
 axis tight
-legend('data', 'O(n^2)', 'location', 'southeast');
+legend('data', 'O(n^2)', 'location', 'southeast')
 ```
 ``````
 
 (demo-flops-lufact-matlab)=
 ``````{dropdown} @demo-flops-lufact
+:open:
 We'll test the conclusion of $O(n^3)$ flops experimentally, using the built-in `lu` function instead of the purely instructive `lufact`.
 ```{tip}
 :class: dropdown
@@ -734,15 +742,14 @@ The first time a function is invoked, there may be significant time needed to co
 ```
 
 ```{code-cell}
-n_ = (200:100:2400)';
-t_ = zeros(size(n_));
-for i = 1:length(n_)
-    n = n_(i);
-    A = randn(n, n);  
+n = (200:100:2400)';
+t = zeros(size(n));
+for k = 1:length(n)
+    A = randn(n(k), n(k));  
     tic    % start a timer
     for j = 1:6,  [L, U] = lu(A);  end
-    t = toc;
-    t_(i) = t / 6;  
+    time = toc;
+    t(k) = time / 6;  
 end
 ```
 
@@ -750,8 +757,9 @@ We plot the timings on a log-log graph and compare it to $O(n^3)$. The result co
 
 ```{code-cell}
 clf
-loglog(n_,t_,'.-')
-hold on, loglog(n_,t_(end)*(n_/n_(end)).^3,'--')
+loglog(n, t, 'o-')
+hold on
+loglog(n, 0.5 * t(end) * (n/n(end)).^3, 'k--')
 axis tight
 xlabel('size of matrix'), ylabel('time (sec)')
 title('Timing of LU factorization')
@@ -762,6 +770,7 @@ legend('lu','O(n^3)','location','southeast');
 ### 2.6 @section-linsys-pivoting
 (demo-pivoting-fail-matlab)=
 ``````{dropdown} @demo-pivoting-fail
+:open:
 Here is a previously encountered matrix that factors well.
 
 ```{code-cell}
@@ -799,6 +808,7 @@ The next step is `U(2, :) = A(2, :)`, which is also OK. But then we are supposed
 
 (demo-pivoting-fix-matlab)=
 ``````{dropdown} @demo-pivoting-fix
+:open:
 Here is the trouble-making matrix from {numref}`Demo {number} <demo-pivoting-fail>`.
 
 ```{code-cell}
@@ -874,6 +884,7 @@ L
 
 (demo-pivoting-permute-matlab)=
 ``````{dropdown} @demo-pivoting-permute
+:open:
 Here again is the matrix from {numref}`Demo {number} <demo-pivoting-fix>`.
 
 ```{code-cell}
@@ -902,6 +913,7 @@ L
 
 (demo-pivoting-usage-matlab)=
 ``````{dropdown} @demo-pivoting-usage
+:open:
 The third output of `plufact` is the permutation vector we need to apply to $\mathbf{A}$.
 
 ```{code-cell}
@@ -927,6 +939,7 @@ b - A*x
 
 (demo-pivoting-builtin-matlab)=
 ``````{dropdown} @demo-pivoting-builtin
+:open:
 With the syntax `A \ b`, the matrix `A` is PLU-factored, followed by two triangular solves.
 
 ```{code-cell}
@@ -949,6 +962,7 @@ toc
 
 (demo-pivoting-stable-matlab)=
 ``````{dropdown} @demo-pivoting-stable
+:open:
 We construct a linear system for this matrix with $\epsilon=10^{-12}$ and exact solution $[1, 1]$:
 
 ```{code-cell}
@@ -983,6 +997,7 @@ A \ b
 ### 2.7 @section-linsys-norms
 (demo-norms-vector-matlab)=
 ``````{dropdown} @demo-norms-vector
+:open:
 ```{index} ! MATLAB; norm
 ```
 
@@ -1002,6 +1017,7 @@ onenorm = norm(x, 1)
 
 (demo-norms-matrix-matlab)=
 ``````{dropdown} @demo-norms-matrix
+:open:
 
 ```{code-cell}
 A = [ 2 0; 1 -1 ]
@@ -1087,6 +1103,7 @@ ylabel(('x_2'));
 ### 2.8 @section-linsys-condition-number
 (demo-condition-bound-matlab)=
 ``````{dropdown} @demo-condition-bound
+:open:
 
 ```{index} ! MATLAB; cond
 ```
@@ -1168,6 +1185,7 @@ As anticipated, the solution has zero accurate digits in the 2-norm.
 ### 2.9 @section-linsys-structure
 (demo-structure-banded-matlab)=
 ``````{dropdown} @demo-structure-banded
+:open:
 ```{index} ! MATLAB; fill, MATLAB; diagm, ! MATLAB; diag
 ```
 
@@ -1212,6 +1230,7 @@ The lower and upper bandwidths of $\mathbf{A}$ are repeated in the factors from 
 
 (demo-structure-symm-matlab)=
 ``````{dropdown} @demo-structure-symm
+:open:
 
 We begin with a symmetric $\mathbf{A}$.
 
@@ -1260,6 +1279,7 @@ norm(A_1 - (L * diag(d) * L'))
 
 (demo-structure-cholesky-matlab)=
 ``````{dropdown} @demo-structure-cholesky
+:open:
 A randomly chosen matrix is extremely unlikely to be symmetric. However, there is a simple way to symmetrize one.
 
 ```{code-cell}

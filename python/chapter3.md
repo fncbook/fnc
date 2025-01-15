@@ -60,6 +60,7 @@ exec(open("FNC_init.py").read())
 ### 3.1 @section-leastsq-fitting
 (demo-fitting-tempinterp-python)=
 ``````{dropdown} @demo-fitting-tempinterp
+:open:
 Here are 5-year averages of the worldwide temperature anomaly as compared to the 1951–1980 average (source: NASA).
 
 ```{code-cell}
@@ -102,6 +103,7 @@ As you can see, the interpolant does represent the data, in a sense. However it'
 
 (demo-fitting-tempfit-python)=
 ``````{dropdown} @demo-fitting-tempfit
+:open:
 Here are the 5-year temperature averages again.
 
 ```{code-cell}
@@ -171,6 +173,7 @@ If we were to continue increasing the degree of the polynomial, the residual at 
 
 (demo-fitting-pirate-python)=
 ``````{dropdown} @demo-fitting-pirate
+:open:
 ```{code-cell}
 a = array([1 / (k+1)**2 for k in range(100)])
 s = cumsum(a)        # cumulative summation
@@ -222,6 +225,7 @@ legend(); title("Sequence convergence");
 
 (demo-normaleqns-instab-python)=
 ``````{dropdown} @demo-normaleqns-instab
+:open:
 
 Because the functions $\sin^2(t)$, $\cos^2(t)$, and $1$ are linearly dependent, we should find that the following matrix is somewhat ill-conditioned.
 
@@ -263,6 +267,7 @@ print(f"accurate digits: {-log10(relative_err):.2f}")
 ### 3.3 @section-leastsq-qr
 (demo-qr-qrfact-python)=
 ``````{dropdown} @demo-qr-qrfact
+:open:
 
 MATLAB provides access to both the thin and full forms of the QR factorization.
 
@@ -305,6 +310,7 @@ print(f"norm of (Q_hat^T Q_hat - I) is {norm(Q_hat.T @ Q_hat - eye(4)):.3e}")
 
 (demo-qr-stable-python)=
 ``````{dropdown} @demo-qr-stable
+:open:
 We'll repeat the experiment of {numref}`Demo {number} <demo-normaleqns-instab>`, which exposed instability in the normal equations. 
 
 ```{code-cell}
@@ -325,6 +331,7 @@ print(f"conditioning bound: {cond(A) * finfo(float).eps:.3e}")
 ### 3.4 @section-leastsq-house
 (demo-house-qr-python)=
 ``````{dropdown} @demo-house-qr
+:open:
 
 We will use Householder reflections to produce a QR factorization of a matrix.
 

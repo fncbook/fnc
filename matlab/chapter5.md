@@ -8,10 +8,7 @@ numbering:
 ---
 # Chapter 5
 
-MATLAB implementations
-
 ## Functions
-
 
 (function-hatfun-matlab)=
 ``````{dropdown} Hat function
@@ -75,14 +72,15 @@ The intended way for a user to call {numref}`Function {number} <function-intadap
 
 ```{code-cell}
 :tags: [remove-cell]
-cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
-FNC_init
+cd  /Users/driscoll/Documents/GitHub/fnc/matlab
+FNC_init;
 ```
 
 ### 5.1 @section-localapprox-interpolation
 
 (demo-interpolation-global-matlab)=
 ``````{dropdown} @demo-interpolation-global
+:open:
 Here are some points that we could consider to be observations of an unknown function on $[-1,1]$.
 
 ```{code-cell}
@@ -128,6 +126,7 @@ Surely there must be functions that are more intuitively representative of those
 
 (demo-interpolation-pwise-matlab)=
 ``````{dropdown} @demo-interpolation-pwise
+:open:
 Let us recall the data from {numref}`Demo %s <demo-interpolation-global>`.
 
 ```{code-cell}
@@ -157,6 +156,7 @@ title('Piecewise cubic interpolant')
 
 (demo-interp-cond-matlab)=
 ``````{dropdown} @demo-interp-cond
+:open:
 In {numref}`Demo %s <demo-interpolation-global>` and {numref}`Demo %s <demo-interpolation-pwise>` we saw a big difference between polynomial interpolation and piecewise polynomial interpolation of some arbitrarily chosen data. The same effects can be seen clearly in the cardinal functions, which are closely tied to the condition numbers.
 
 ```{code-cell}
@@ -188,6 +188,7 @@ From the figure we can see that the condition number for polynomial interpolatio
 
 (demo-pwlin-hat-matlab)=
 ``````{dropdown} @demo-pwlin-hat
+:open:
 Let's define a set of four nodes (i.e., $n=3$ in our formulas).
 
 ```{index} ! Julia; annotate!
@@ -214,6 +215,7 @@ end
 
 (demo-pwlin-usage-matlab)=
 ``````{dropdown} @demo-pwlin-usage
+:open:
 We generate a piecewise linear interpolant of $f(x)=e^{\sin 7x}$.
 
 ```{code-cell}
@@ -244,6 +246,7 @@ legend();
 
 (demo-pwlin-converge-matlab)=
 ``````{dropdown} @demo-pwlin-converge
+:open:
 We measure the convergence rate for piecewise linear interpolation of $e^{\sin 7x}$ over $x \in [0,1]$.
 
 ```{code-cell}
@@ -256,7 +259,7 @@ for i = 1:length(n)
     p = plinterp(t, f(t));
     maxerr(i) = norm(f(x) - p(x), Inf);
 end
-disp(table(n(1:4:end), maxerr(1:4:end), variableNames=["n", "inf-norm error"]))
+table(n(1:4:end), maxerr(1:4:end), variableNames=["n", "inf-norm error"])
 ```
 
 As predicted, a factor of 10 in $n$ produces a factor of 100 reduction in the error. In a convergence plot, it is traditional to have $h$ *decrease* from left to right, so we expect a straight line of slope $-2$ on a log-log plot.
@@ -277,6 +280,7 @@ legend();
 
 (demo-splines-splines-matlab)=
 ``````{dropdown} @demo-splines-splines
+:open:
 For illustration, here is a spline interpolant using just a few nodes.
 
 ```{code-cell}
@@ -307,7 +311,7 @@ for i = 1:length(n)
     err = f(x) - S(x);
     maxerr(i) = norm(err, Inf);
 end
-disp(table(n(1:2:end), maxerr(1:2:end), variableNames=["n", "inf-norm error"]))
+table(n(1:2:end), maxerr(1:2:end), variableNames=["n", "inf-norm error"])
 ```
 
 Since we expect convergence that is $O(h^4)=O(n^{-4})$, we use a log-log graph of error and expect a straight line of slope $-4$.
@@ -327,6 +331,7 @@ title(("Convergence of spline interpolation"));
 
 (demo-finitediffs-fd1-matlab)=
 ``````{dropdown} @demo-finitediffs-fd1
+:open:
 If $f(x)=e^{\,\sin(x)}$, then $f'(0)=1$.
 
 ```{code-cell}
@@ -359,6 +364,7 @@ BD2 = (f(-2*h) - 4*f(-h) + 3*f(0)) / (2*h)
 
 (demo-finitediffs-fd2-matlab)=
 ``````{dropdown} @demo-finitediffs-fd2
+:open:
 If $f(x)=e^{\,\sin(x)}$, then $f''(0)=1$.
 
 ```{code-cell}
@@ -390,6 +396,7 @@ BD2 = (-f(-3*h) + 4*f(-2*h) - 5*f(-h) + 2*f(0)) / h^2
 
 (demo-finitediffs-fd-weights-matlab)=
 ``````{dropdown} @demo-finitediffs-fd-weights
+:open:
 We will estimate the derivative of $\cos(x^2)$ at $x=0.5$ using five nodes.
 
 ```{code-cell}
@@ -424,6 +431,7 @@ fdweights(0:3, 1)
 
 (demo-fdconverge-order12-matlab)=
 ``````{dropdown} @demo-fdconverge-order12
+:open:
 Let's observe the convergence of the formulas in {numref}`Example {number} <example-fd-converge-FD11>` and {numref}`Example {number} <example-fd-converge-FD12>`, applied to the function $\sin(e^{x+1})$ at $x=0$.
 
 ```{code-cell}
@@ -442,7 +450,7 @@ for i = 1:length(h)
     FD1(i) = (f(h_i) - f(0)    ) / h_i;
     FD2(i) = (f(h_i) - f(-h_i)) / (2*h_i);
 end
-disp(table(h, FD1, FD2))
+table(h, FD1, FD2)
 ```
 
 All that's easy to see from this table is that FD2 appears to converge to the same result as FD1, but more rapidly. A table of errors is more informative.
@@ -450,7 +458,7 @@ All that's easy to see from this table is that FD2 appears to converge to the sa
 ```{code-cell}
 err1 = abs(exact_value - FD1);
 err2 = abs(exact_value - FD2);
-disp(table(h, err1, err2, variableNames=["h", "error in FD1", "error in FD2"]))
+table(h, err1, err2, variableNames=["h", "error in FD1", "error in FD2"])
 ```
 
 In each row, $h$ is decreased by a factor of 10, so that the error is reduced by a factor of 10 in the first-order method and 100 in the second-order method.
@@ -473,6 +481,7 @@ legend("FD1", "FD2", "O(h)", "O(h^2)");
 
 (demo-fdconverge-round-matlab)=
 ``````{dropdown} @demo-fdconverge-round
+:open:
 Let $f(x)=e^{-1.3x}$. We apply finite-difference formulas of first, second, and fourth order to estimate $f'(0)=-1.3$.
 
 ```{code-cell}
@@ -490,7 +499,7 @@ for i = 1:length(h)
     FD(i, 3) = dot([1/12 -2/3 0 2/3 -1/12] / h_i, vals);
 end
 format long
-disp(table(h, FD(:, 1), FD(:, 2), FD(:, 3), variableNames=["h", "FD1", "FD2", "FD4"]))
+table(h, FD(:, 1), FD(:, 2), FD(:, 3), variableNames=["h", "FD1", "FD2", "FD4"])
 ```
 
 They all seem to be converging to $-1.3$. The convergence plot reveals some interesting structure to the errors, though.
@@ -514,6 +523,7 @@ Again the graph is made so that $h$ decreases from left to right. The errors are
 ### 5.6 @section-localapprox-integration
 (demo-int-antideriv-matlab)=
 ``````{dropdown} @demo-int-antideriv
+:open:
 The antiderivative of $e^x$ is, of course, itself. That makes evaluation of $\int_0^1 e^x\,dx$ by the Fundamental Theorem trivial.
 
 ```{code-cell}
@@ -552,6 +562,7 @@ xlabel('x'), ylabel(('f(x)'));
 
 (demo-int-trap-matlab)=
 ``````{dropdown} @demo-int-trap
+:open:
 We will approximate the integral of the function $f(x)=e^{\sin 7x}$ over the interval $[0,2]$.
 
 ```{code-cell}
@@ -582,7 +593,7 @@ for i = 1:length(n)
     T = trapezoid(f, a, b, n(i));
     err(i) = I - T;
 end
-disp(table(n, err, variableNames=["n", "Trapezoid error"]))
+table(n, err, variableNames=["n", "Trapezoid error"])
 ```
 
 Each increase by a factor of 10 in $n$ cuts the error by a factor of about 100, which is consistent with second-order convergence. Another check is that a log-log graph should give a line of slope $-2$ as $n\to\infty$.
@@ -600,6 +611,7 @@ legend();
 
 (demo-int-extrap-matlab)=
 ``````{dropdown} @demo-int-extrap
+:open:
 We estimate $\displaystyle\int_0^2 x^2 e^{-2x}\, dx$ using extrapolation. First we use `quadgk` to get an accurate value.
 
 ```{code-cell}
@@ -659,7 +671,7 @@ err2 = T(:) - I;
 err4 = [NaN; S(:) - I];
 err6 = [NaN; NaN; R - I];
 format short e
-disp(table(err2, err4, err6, variablenames=["order 2", "order 4", "order 6"]))
+table(err2, err4, err6, variablenames=["order 2", "order 4", "order 6"])
 ```
 
 If we consider the computational time to be dominated by evaluations of $f$, then we have obtained a result with about twice as many accurate digits as the best trapezoid result, at virtually no extra cost.
@@ -669,6 +681,7 @@ If we consider the computational time to be dominated by evaluations of $f$, the
 
 (demo-adapt-motive-matlab)=
 ``````{dropdown} @demo-adapt-motive
+:open:
 This function gets increasingly oscillatory as $x$ increases.
 
 ```{code-cell}
@@ -692,7 +705,7 @@ for i = 1:length(n)
     T = trapezoid(f, 2, 4, n(i));
     err(i, 2) = T - right_val;
 end
-disp(table(n, err(:, 1), err(:, 2), variableNames=["n", "left error", "right error"]))
+table(n, err(:, 1), err(:, 2), variableNames=["n", "left error", "right error"])
 ```
 
 Both the picture and the numerical results suggest that more nodes should be used on the right half of the interval than on the left half.
@@ -700,6 +713,7 @@ Both the picture and the numerical results suggest that more nodes should be use
 
 (demo-adapt-usage-matlab)=
 ``````{dropdown} @demo-adapt-usage
+:open:
 We'll integrate the function from {numref}`Demo %s <demo-adapt-motive>`.
 
 ```{code-cell}
@@ -731,12 +745,12 @@ Let's see how the number of integrand evaluations and the error vary with the re
 tol = 1 ./ 10.^(4:14)';
 err = zeros(size(tol));
 n = zeros(size(tol));
-for i = 1:length(tol)
-    [A, t] = intadapt(f, 0, 4, tol(i));
-    err(i) =  I - A;
-    n(i) = length(t);
+for k = 1:length(tol)
+    [A, t] = intadapt(f, 0, 4, tol(k));
+    err(k) =  I - A;
+    n(k) = length(t);
 end
-disp(table(tol, err, n, variableNames=["tolerance", "error", "number of nodes"]))
+table(tol, err, n, variableNames=["tolerance", "error", "number of nodes"])
 ```
 
 As you can see, even though the errors are not smaller than the estimates, the two columns decrease in tandem. If we consider now the convergence not in $h$, which is poorly defined now, but in the number of nodes actually chosen, we come close to the fourth-order accuracy of the underlying Simpson scheme.

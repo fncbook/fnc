@@ -68,7 +68,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -76,6 +76,7 @@ FNC_init
 
 (demo-polynomial-lagrange-matlab)=
 ``````{dropdown} @demo-polynomial-lagrange
+:open:
 Here is a vector of nodes.
 
 ```{code-cell}
@@ -113,6 +114,7 @@ Observe that $\ell_k$ is _not_ between zero and one everywhere, unlike a hat fun
 
 (demo-polynomial-error-matlab)=
 ``````{dropdown} @demo-polynomial-error
+:open:
 
 ```{code-cell}
 t =  [ 1, 1.6, 1.9, 2.7, 3 ];
@@ -132,6 +134,7 @@ The error is zero at the nodes, by the definition of interpolation. The error bo
 
 (demo-barycentric-example-matlab)=
 ``````{dropdown} @demo-barycentric-example
+:open:
 ```{code-cell}
 f = @(x) sin( exp(2 * x) );
 clf,  fplot(f, [0, 1], displayname="function")
@@ -165,6 +168,7 @@ scatter(t, y, 'k', displayname="nodes")
 
 (demo-stability-equispaced-matlab)=
 ``````{dropdown} @demo-stability-equispaced
+:open:
 We choose a function over the interval $[0,1]$. Using 7 equally spaced nodes, the interpolation looks fine.
 
 ```{code-cell} 
@@ -202,6 +206,7 @@ The error initially decreases as one would expect but then begins to grow. Both 
 
 (demo-stability-errfun-matlab)=
 ``````{dropdown} @demo-stability-errfun
+:open:
 We plot $|\Phi(x)|$ over the interval $[-1,1]$ with equispaced nodes for different values of $n$. 
 
 ```{code-cell} 
@@ -225,6 +230,7 @@ Each time $\Phi$ passes through zero at an interpolation node, the value on the 
 
 (demo-stability-runge-matlab)=
 ``````{dropdown} @demo-stability-runge
+:open:
 This function has infinitely many continuous derivatives on the entire real line and looks easy to approximate over $[-1,1]$.
 
 ```{code-cell} 
@@ -269,6 +275,7 @@ The convergence in the middle can't get any better than machine precision relati
 
 (demo-stability-errcheb-matlab)=
 ``````{dropdown} @demo-stability-errcheb
+:open:
 Now we look at the error indicator function $\Phi$ for Chebyshev node sets.
 
 ```{code-cell} 
@@ -294,6 +301,7 @@ In contrast to the equispaced case, $|\Phi|$ decreases exponentially with $n$ al
 
 (demo-stability-rungefix-matlab)=
 ``````{dropdown} @demo-stability-rungefix
+:open:
 Here again is the function from {numref}`Demo {number} <demo-stability-runge>` that provoked the Runge phenomenon when using equispaced nodes.
 
 ```{code-cell} 
@@ -321,6 +329,7 @@ By degree 16 the error is uniformly within machine epsilon, and, importantly, it
 
 (demo-stability-spectral-matlab)=
 ``````{dropdown} @demo-stability-spectral
+:open:
 On the left, we use a log-log scale, which makes second-order algebraic convergence $O(n^{-4})$ a straight line. On the right, we use a log-linear scale, which makes spectral convergence $O(K^{-n})$ linear.
 
 ```{code-cell} 
@@ -348,6 +357,7 @@ axis tight,  ylim([1e-16, 1]);  legend(location="southwest")
 
 (demo-orthogonal-approx-matlab)=
 ``````{dropdown} @demo-orthogonal-approx
+:open:
 Let's approximate $e^x$ over the interval $[−1,1]$. We can sample it at, say, 15 points, and find the best-fitting straight line to that data.
 
 ```{code-cell}
@@ -397,6 +407,7 @@ disp(table(n, intercept, slope))
 
 (demo-trig-interp-matlab)=
 ``````{dropdown} @demo-trig-interp
+:open:
 
 We will get a cardinal function without using an explicit formula, just by passing data that is 1 at one node and 0 at the others.
 
@@ -445,6 +456,7 @@ xlabel('N'),  ylabel('max error')
 
 (demo-trig-fft-matlab)=
 ``````{dropdown} @demo-trig-fft
+:open:
 This function has frequency content at $2\pi$, $-2\pi$, and $\pi$. 
 
 ```{code-cell}
@@ -495,6 +507,7 @@ The Fourier coefficients of smooth functions decay exponentially in magnitude as
 
 (demo-integration-ellipse-matlab)=
 ``````{dropdown} @demo-integration-ellipse
+:open:
 ```{code-cell}
 f = @(t) pi * sqrt( cos(pi*t).^2 + sin(pi*t).^2 / 4 );
 N = (4:4:48)';
@@ -513,6 +526,7 @@ The approximations gain about one digit of accuracy for each constant increment 
 
 (demo-integration-compare-matlab)=
 ``````{dropdown} @demo-integration-compare
+:open:
 First consider the integral 
 
 $$
@@ -595,6 +609,7 @@ At the core of `intadapt` is a fourth-order formula, and the results track that 
 
 (demo-improper-decay-matlab)=
 ``````{dropdown} @demo-improper-decay
+:open:
 ```{code-cell}
 :tags: hide-input
 f = @(x) 1 ./ (1 + x.^2);
@@ -617,6 +632,7 @@ This graph suggests that we capture all of the integrand values that are larger 
 
 (demo-improper-intinf-matlab)=
 ``````{dropdown} @demo-improper-intinf
+:open:
 ```{code-cell}
 :tags: hide-input
 f = @(x) 1 ./ (1 + x.^2);
@@ -641,6 +657,7 @@ Both methods are roughly fourth-order due to Simpson's formula in the underlying
 
 (demo-improper-intsing-matlab)=
 ``````{dropdown} @demo-improper-intsing
+:open:
 
 ```{code-cell}
 :tags: hide-input

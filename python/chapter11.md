@@ -45,6 +45,7 @@ exec(open("FNC_init.py").read())
 
 (demo-blackscholes-solve-python)=
 ``````{dropdown} @demo-blackscholes-solve
+:open:
 We consider the Black–Scholes problem for the following parameter values:
 
 ```{code-cell}
@@ -135,6 +136,7 @@ The results are easy to interpret, recalling that the time variable really means
 
 (demo-blackscholes-unstable-python)=
 ``````{dropdown} @demo-blackscholes-unstable
+:open:
 Let's try to do everything the same as in {numref}`Demo {number} <demo-blackscholes-solve>`, but extending the simulation time to $T=8$.
 
 ```{code-cell}
@@ -203,6 +205,7 @@ This so-called solution is nonsense!
 
 (demo-methodlines-heatFE-python)=
 ``````{dropdown} @demo-methodlines-heatFE
+:open:
 Let's implement the method of {numref}`Example {number} <example-methodlines-heatFE>` with second-order space semidiscretization.
 
 ```{code-cell}
@@ -279,6 +282,7 @@ title("Nonphysical growth");
 
 (demo-methodlines-heatBE-python)=
 ``````{dropdown} @demo-methodlines-heatBE
+:open:
 Now we apply backward Euler to the heat equation. Mathematically this means multiplying by the *inverse* of a matrix, but we interpret that numerically as a linear system solution. We will reuse the setup from {numref}`Demo {number} <demo-methodlines-heatFE>`. 
 
 ```{code-cell}
@@ -316,6 +320,7 @@ This solution looks physically plausible, as the large concentration in the cent
 ``````
 (demo-methodlines-auto-python)=
 ``````{dropdown} @demo-methodlines-auto
+:open:
 We set up the semidiscretization and initial condition in $x$ just as before.
 
 ```{code-cell}
@@ -358,6 +363,7 @@ The number of steps selected was reduced by a factor of 20!
 ### 11.3 @section-diffusion-absstab
 (demo-absstab-regions-python)=
 ``````{dropdown} @demo-absstab-regions
+:open:
 Euler and Backward Euler time-stepping methods were used to solve $\mathbf{u}'=\mathbf{D}_{xx}\mathbf{u}$.
 
 ```{code-cell}
@@ -432,6 +438,7 @@ title("Stability region and $\\zeta$ values");
 ### 11.4 @section-diffusion-stiffness
 (demo-stiffness-oregon-python)=
 ``````{dropdown} @demo-stiffness-oregon
+:open:
 In {numref}`Example {number} <example-stiffness-oregon>` we derived a Jacobian matrix for the Oregonator model. Here is a numerical solution of the ODE.
 
 ```{code-cell}
@@ -486,6 +493,7 @@ You can see that there is one eigenvalue that ranges over a wide portion of the 
 
 (demo-stiffness-explicit-python)=
 ``````{dropdown} @demo-stiffness-explicit
+:open:
 The `BDF` solver is good for stiff problems and needs few time steps to solve the Oregonator from {numref}`Demo {number} <demo-stiffness-oregon>`.
 
 ```{code-cell}
@@ -526,6 +534,7 @@ Roughly speaking, the $\zeta$ values stay within or close to the RK2 stability r
 ### 11.5 @section-diffusion-boundaries
 (demo-boundaries-heat-python)=
 ``````{dropdown} @demo-boundaries-heat
+:open:
 First, we define functions for the PDE and each boundary condition.
 
 ```{code-cell}
@@ -579,6 +588,7 @@ close()
 
 (demo-boundaries-bratu-python)=
 ``````{dropdown} @demo-boundaries-bratu
+:open:
 
 ```{code-cell}
 phi = lambda t, x, u, ux, uxx: u**2 + uxx
@@ -608,6 +618,7 @@ close()
 
 (demo-boundaries-bs-python)=
 ``````{dropdown} @demo-boundaries-bs
+:open:
 
 ```{code-cell}
 K = 3;  sigma = 0.06;  r = 0.08;  Smax = 8;

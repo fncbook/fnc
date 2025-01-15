@@ -102,6 +102,7 @@ exec(open("FNC_init.py").read())
 ### 4.1 @section-nonlineqn-rootproblem
 (demo-rootproblem-bessel-python)=
 ``````{dropdown} @demo-rootproblem-bessel
+:open:
 
 ```{code-cell}
 import scipy.special as special
@@ -153,6 +154,7 @@ fig
 
 (demo-roots-cond-python)=
 ``````{dropdown} @demo-roots-cond
+:open:
 Consider first the function
 
 ```{code-cell}
@@ -198,6 +200,7 @@ The vertical displacements in this picture are exactly the same as before. But t
 
 (demo-fp-spiral-python)=
 ``````{dropdown} @demo-fp-spiral
+:open:
 Let's convert the roots of a quadratic polynomial $f(x)$ to a fixed point problem.
 
 ```{code-cell}
@@ -292,6 +295,7 @@ This time, the iteration is pushing us _away from_ the correct answer.
 
 (demo-fp-converge-python)=
 ``````{dropdown} @demo-fp-converge
+:open:
 We revisit {numref}`Demo %s <demo-fp-spiral>` and investigate the observed convergence more closely. Recall that above we calculated $g'(p)\approx-0.42$ at the convergent fixed point.
 
 ```{code-cell}
@@ -346,6 +350,7 @@ The methods for finding $\sigma$ agree well.
 ### 4.3 @section-nonlineqn-newton
 (demo-newton-line-python)=
 ``````{dropdown} @demo-newton-line
+:open:
 
 Suppose we want to find a root of this function:
 
@@ -424,6 +429,7 @@ Judging by the residual, we appear to be getting closer to the true root each ti
 
 (demo-newton-converge-python)=
 ``````{dropdown} @demo-newton-converge
+:open:
 We again look at finding a solution of $x e^x=2$ near $x=1$. To apply Newton's method, we need to calculate values of both the residual function $f$ and its derivative.
 
 ```{code-cell}
@@ -468,6 +474,7 @@ The clear convergence to 2 above constitutes good evidence of quadratic converge
 
 (demo-newton-usage-python)=
 ``````{dropdown} @demo-newton-usage
+:open:
 Suppose we want to evaluate the inverse of the function $h(x)=e^x-x$. This means solving $y=h(x)$, or $h(x)-y=0$, for $x$ when $y$ is given. That equation has no solution in terms of elementary functions. If a value of $y$ is given numerically, though, we simply have a rootfinding problem for $f(x)=e^x-x-y$.
 ```{tip}
 :class: dropdown
@@ -500,6 +507,7 @@ legend();
 ### 4.4 @section-nonlineqn-secant
 (demo-secant-line-python)=
 ``````{dropdown} @demo-secant-line
+:open:
 
 ```{code-cell}
 f = lambda x: x * exp(x) - 2
@@ -556,6 +564,7 @@ print(f(x4))
 
 (demo-secant-converge-python)=
 ``````{dropdown} @demo-secant-converge
+:open:
 We check the convergence of the secant method from {numref}`Demo %s <demo-secant-line>`.
 
 ```{code-cell}
@@ -592,6 +601,7 @@ As expected, this settles in at around 1.618.
 
 (demo-secant-iqi-python)=
 ``````{dropdown} @demo-secant-iqi
+:open:
 Here we look for a root of $x+\cos(10x)$ that is close to 1.
 
 ```{code-cell}
@@ -676,6 +686,7 @@ for i in range(len(err) - 1):
 ### 4.5 @section-nonlineqn-newtonsys
 (demo-newtonsys-converge-python)=
 ``````{dropdown} @demo-newtonsys-converge
+:open:
 A system of nonlinear equations is defined by its residual and Jacobian.
 
 ```{code-cell}
@@ -724,6 +735,7 @@ The ratio is apparently converging toward 2, as expected for quadratic convergen
 ### 4.6 @section-nonlineqn-quasinewton
 (demo-quasi-levenberg-python)=
 ``````{dropdown} @demo-quasi-levenberg
+:open:
 To solve a nonlinear system, we need to code only the function defining the system, and not its Jacobian.
 
 ```{code-cell}
@@ -760,6 +772,7 @@ for k in range(len(logerr) - 1):
 ### 4.7 @section-nonlineqn-nlsq
 (demo-nlsq-converge-python)=
 ``````{dropdown} @demo-nlsq-converge
+:open:
 We will observe the convergence of {numref}`Function {number} <function-levenberg>` for different levels of the minimum least-squares residual. We start with a function mapping from $\real^2$ into $\real^3$, and a point that will be near the optimum.
 
 ```{code-cell}
@@ -788,6 +801,7 @@ In the least perturbed case, where the minimized residual is less than $10^{-3}$
 
 (demo-nlsq-MM-python)=
 ``````{dropdown} @demo-nlsq-MM
+:open:
 ```{code-cell}
 m = 25
 V, Km = 2, 0.5

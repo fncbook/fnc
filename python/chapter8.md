@@ -73,6 +73,7 @@ exec(open("FNC_init.py").read())
 
 (demo-structure-sparse-python)=
 ``````{dropdown} @demo-structure-sparse
+:open:
 ```{tip}
 Functions to work with sparse matrices are found in the `scipy.sparse` module.
 ```
@@ -126,6 +127,7 @@ print(f"dense time: {timer() - start:.4g} sec")
 
 (demo-structure-fill-python)=
 ``````{dropdown} @demo-structure-fill
+:open:
 
 Here is the adjacency matrix of a graph representing a small-world network, featuring connections to neighbors and a small number of distant contacts.
 
@@ -160,6 +162,7 @@ title(("$A^6$"));
 
 (demo-structure-sparseband-python)=
 ``````{dropdown} @demo-structure-sparseband
+:open:
 ```{index} ! Julia; spdiagm
 ```
 
@@ -193,6 +196,7 @@ subplot(1, 2, 2), spy(U)
 (demo-structure-linalg-python)=
 
 ``````{dropdown} @demo-structure-linalg
+:open:
 
 The following generates a random sparse matrix with prescribed eigenvalues.
 
@@ -249,6 +253,7 @@ print(f"residual: {norm(b - A @ xx, 2):.1e}")
 
 (demo-power-one-python)=
 ``````{dropdown} @demo-power-one
+:open:
 Here we choose a random 5×5 matrix and a random 5-vector.
 
 ```{code-cell}
@@ -288,6 +293,7 @@ This phenomenon is unlikely to be a coincidence!
 
 (demo-power-iter-python)=
 ``````{dropdown} @demo-power-iter
+:open:
 We will experiment with the power iteration on a 5×5 matrix with prescribed eigenvalues and dominant eigenvalue at 1.
 
 ```{code-cell}
@@ -344,6 +350,7 @@ The results are very similar until the last few iterations, when the limited acc
 
 (demo-inviter-conv-python)=
 ``````{dropdown} @demo-inviter-conv
+:open:
 We set up a $5\times 5$ triangular matrix with prescribed eigenvalues on its diagonal.
 
 ```{code-cell}
@@ -392,6 +399,7 @@ print(f"observed: {err[21] / err[20]:.5f}")
 
 (demo-inviter-accel-python)=
 ``````{dropdown} @demo-inviter-accel
+:open:
 ```{code-cell}
 ev = array([1, -0.75, 0.6, -0.4, 0])
 A = triu(ones([5, 5]), 1) + diag(ev)    # triangular matrix, eigs on diagonal
@@ -434,6 +442,7 @@ for k in range(4):
 
 (demo-subspace-unstable-python)=
 ``````{dropdown} @demo-subspace-unstable
+:open:
 First we define a triangular matrix with known eigenvalues, and a random vector $b$.
 
 ```{code-cell}
@@ -475,6 +484,7 @@ title(("Residual for linear systems"));
 
 (demo-subspace-arnoldi-python)=
 ``````{dropdown} @demo-subspace-arnoldi
+:open:
 We illustrate a few steps of the Arnoldi iteration for a small matrix.
 
 ```{code-cell}
@@ -531,6 +541,7 @@ print(matrix_rank(Q_and_K))
 
 (demo-gmres-intro-python)=
 ``````{dropdown} @demo-gmres-intro
+:open:
 We define a triangular matrix with known eigenvalues and a random vector $\mathbf{b}$.
 
 ```{code-cell}
@@ -570,6 +581,7 @@ title("Residual for GMRES");
 
 (demo-gmres-restart-python)=
 ``````{dropdown} @demo-gmres-restart
+:open:
 The following experiments are based on a matrix resulting from discretization of a partial differential equation.
 
 ```{code-cell}
@@ -616,6 +628,7 @@ The "pure" GMRES curve is the lowest one. All of the other curves agree with it 
 
 (demo-minrescg-indefinite-python)=
 ``````{dropdown} @demo-minrescg-indefinite
+:open:
 The following matrix is indefinite.
 
 ```{code-cell}
@@ -670,6 +683,7 @@ The upper bound turns out to be pessimistic here, especially in the later iterat
 
 (demo-minrescg-converge-python)=
 ``````{dropdown} @demo-minrescg-converge
+:open:
 We will compare MINRES and CG on some quasi-random SPD problems.  The first matrix has a condition number of 100.
 
 ```{code-cell}
@@ -743,6 +757,7 @@ Both methods have an early superlinear phase that allow them to finish slightly 
 
 (demo-matrixfree-blur-python)=
 ``````{dropdown} @demo-matrixfree-blur
+:open:
 We use a readily available test image.
 
 ```{code-cell}
@@ -779,6 +794,7 @@ title("Blurred image");
 
 (demo-matrixfree-deblur-python)=
 ``````{dropdown} @demo-matrixfree-deblur
+:open:
 We repeat the earlier process to blur an original image $\mathbf{X}$ to get $\mathbf{Z}$.
 
 ```{code-cell}
@@ -842,6 +858,7 @@ axis("off"),  title("Deblurred");
 
 (demo-precond-diagonal-python)=
 ``````{dropdown} @demo-precond-diagonal
+:open:
 Here is an SPD matrix that arises from solving partial differential equations.
 
 ```{code-cell}
@@ -892,6 +909,7 @@ The diagonal preconditioner cut down substantially on the number of iterations a
 
 (demo-precond-gmres-python)=
 ``````{dropdown} @demo-precond-gmres
+:open:
 Here is a random nonsymmetric matrix.
 
 ```{code-cell}

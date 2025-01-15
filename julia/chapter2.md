@@ -85,6 +85,7 @@ include("FNC_init.jl")
 ### 2.1 @section-linsys-polyinterp
 (demo-interp-vander-julia)=
 ``````{dropdown} @demo-interp-vander
+:open:
 
 We create two vectors for data about the population of China. The first has the years of census data and the other has the population, in millions of people.
 
@@ -220,6 +221,7 @@ plot!(tt, yy, label="interpolant")
 ### 2.2 @section-linsys-matrices
 (demo-matrices-julia)=
 ``````{dropdown} @demo-matrices
+:open:
 :::{index} ! Julia; size, ! Julia; length
 :::
 
@@ -418,7 +420,7 @@ show(@. cospi( (x + 1)^3) )    # broadcast an entire expression
 ### 2.3 @section-linsys-linear-systems
 (demo-systems-backslash-julia)=
 ``````{dropdown} @demo-systems-backslash
-:open: false
+:open:
 For a square matrix $\mathbf{A}$, the syntax `A \ b` is mathematically equivalent to $\mathbf{A}^{-1} \mathbf{b}$. 
 
 ```{code-cell}
@@ -469,7 +471,7 @@ A linear system with a singular matrix might have no solution or infinitely many
 
 (demo-systems-triangular-julia)=
 ``````{dropdown} @demo-systems-triangular
-:open: false
+:open:
 ```{index} ! Julia; tril, ! Julia; triu
 ```
 
@@ -544,7 +546,7 @@ It's not so good to get 4 digits of accuracy after starting with 16! The source 
 ### 2.4 @section-linsys-lu
 (demo-lu-outertri-julia)= 
 ``````{dropdown} @demo-lu-outertri
-:open: false
+:open:
 
 ```{index} Julia; tril, Julia; triu
 ```
@@ -581,6 +583,7 @@ Simply because of the triangular zero structures, only the first outer product c
 
 (demo-lu-derive-julia)=
 ``````{dropdown} @demo-lu-derive
+:open:
 For illustration, we work on a $4 \times 4$ matrix. We name it with a subscript in preparation for what comes.
 
 ```{code-cell}
@@ -666,6 +669,7 @@ IIn floating point, we cannot expect the difference to be exactly zero as we fou
 
 (demo-lu-solve-julia)=
 ``````{dropdown} @demo-lu-solve
+:open:
 Here are the data for a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$. 
 
 ```{code-cell}
@@ -692,6 +696,7 @@ b - A*x
 
 (demo-flops-mvmult-julia)=
 ``````{dropdown} @demo-flops-mvmult
+:open:
 Here is a straightforward implementation of matrix-vector multiplication.
 
 ```{code-cell}
@@ -760,6 +765,7 @@ $$
 
 (demo-flops-loglog-julia)=
 ``````{dropdown} @demo-flops-loglog
+:open:
 Let's repeat the experiment of the previous figure for more, and larger, values of $n$.
 
 ```{code-cell}
@@ -793,6 +799,7 @@ plot!(n, t[end] * (n/n[end]).^2, l=:dash,
 
 (demo-flops-lufact-julia)=
 ``````{dropdown} @demo-flops-lufact
+:open:
 We'll test the conclusion of $O(n^3)$ flops experimentally, using the built-in `lu` function instead of the purely instructive `lufact`.
 ```{tip}
 :class: dropdown
@@ -823,6 +830,7 @@ plot!(n, t[end ]* (n/n[end]).^3, l=:dash, label=L"O(n^3)")
 ### 2.6 @section-linsys-pivoting
 (demo-pivoting-fail-julia)=
 ``````{dropdown} @demo-pivoting-fail
+:open:
 Here is a previously encountered matrix that factors well.
 
 ```{code-cell}
@@ -855,6 +863,7 @@ The next step is `U[2, :] = A[2, :]`, which is also OK. But then we are supposed
 
 (demo-pivoting-fix-julia)=
 ``````{dropdown} @demo-pivoting-fix
+:open:
 Here is the trouble-making matrix from {numref}`Demo {number} <demo-pivoting-fail>`.
 
 ```{code-cell}
@@ -926,6 +935,7 @@ L
 
 (demo-pivoting-permute-julia)=
 ``````{dropdown} @demo-pivoting-permute
+:open:
 Here again is the matrix from {numref}`Demo {number} <demo-pivoting-fix>`.
 
 ```{code-cell}
@@ -954,6 +964,7 @@ L
 
 (demo-pivoting-usage-julia)=
 ``````{dropdown} @demo-pivoting-usage
+:open:
 The third output of `plufact` is the permutation vector we need to apply to $\mathbf{A}$.
 
 ```{code-cell}
@@ -979,6 +990,7 @@ b - A*x
 
 (demo-pivoting-builtin-julia)=
 ``````{dropdown} @demo-pivoting-builtin
+:open:
 With the syntax `A \ b`, the matrix `A` is PLU-factored, followed by two triangular solves.
 
 ```{code-cell}
@@ -998,6 +1010,7 @@ factored \ rand(500)   # force compilation
 
 (demo-pivoting-stable-julia)=
 ``````{dropdown} @demo-pivoting-stable
+:open:
 We construct a linear system for this matrix with $\epsilon=10^{-12}$ and exact solution $[1,1]$:
 
 ```{code-cell}
@@ -1032,6 +1045,7 @@ A \ b
 ### 2.7 @section-linsys-norms
 (demo-norms-vector-julia)=
 ``````{dropdown} @demo-norms-vector
+:open:
 
 ```{index} ! Julia; norm
 ```
@@ -1063,6 +1077,7 @@ normalize(x, Inf)
 
 (demo-norms-matrix-julia)=
 ``````{dropdown} @demo-norms-matrix
+:open:
 ```{code-cell}
 A = [ 2 0; 1 -1 ]
 ```
@@ -1160,6 +1175,7 @@ plot!(twonorm*x[1, :], twonorm*x[2, :], subplot=2, l=:dash)
 ### 2.8 @section-linsys-condition-number
 (demo-condition-bound-julia)=
 ``````{dropdown} @demo-condition-bound
+:open:
 
 ```{index} ! Julia; cond
 ```
@@ -1247,6 +1263,7 @@ As anticipated, the solution has zero accurate digits in the 2-norm.
 ### 2.9 @section-linsys-structure
 (demo-structure-banded-julia)=
 ``````{dropdown} @demo-structure-banded
+:open:
 ```{index} ! Julia; fill, Julia; diagm, ! Julia; diag
 ```
 
@@ -1289,6 +1306,7 @@ U
 
 (demo-structure-symm-julia)=
 ``````{dropdown} @demo-structure-symm
+:open:
 
 We begin with a symmetric $\mathbf{A}$.
 
@@ -1337,6 +1355,7 @@ opnorm(A₁ - (L * diagm(d) * L'))
 
 (demo-structure-cholesky-julia)=
 ``````{dropdown} @demo-structure-cholesky
+:open:
 A randomly chosen matrix is extremely unlikely to be symmetric. However, there is a simple way to symmetrize one.
 
 ```{code-cell}

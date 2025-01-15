@@ -61,6 +61,7 @@ include("FNC_init.jl")
 ### 3.1 @section-leastsq-fitting
 (demo-fitting-tempinterp-julia)=
 ``````{dropdown} @demo-fitting-tempinterp
+:open:
 Here are 5-year averages of the worldwide temperature anomaly as compared to the 1951–1980 average (source: NASA).
 
 ```{code-cell}
@@ -104,6 +105,7 @@ As you can see, the interpolant does represent the data, in a sense. However it'
 
 (demo-fitting-tempfit-julia)=
 ``````{dropdown} @demo-fitting-tempfit
+:open:
 Here are the 5-year temperature averages again.
 
 ```{code-cell}
@@ -159,6 +161,7 @@ If we were to continue increasing the degree of the polynomial, the residual at 
 
 (demo-fitting-pirate-julia)=
 ``````{dropdown} @demo-fitting-pirate
+:open:
 
 ```{code-cell}
 a = [1/k^2 for k=1:100] 
@@ -205,6 +208,7 @@ plot!(k, a * k.^b, l=:dash, label="power-law fit")
 
 (demo-normaleqns-instab-julia)=
 ``````{dropdown} @demo-normaleqns-instab
+:open:
 
 Because the functions $\sin^2(t)$, $\cos^2(t)$, and $1$ are linearly dependent, we should find that the following matrix is somewhat ill-conditioned.
 ```{tip}
@@ -247,6 +251,7 @@ x_NE = N \ (A'*b)
 ### 3.3 @section-leastsq-qr
 (demo-qr-qrfact-julia)=
 ``````{dropdown} @demo-qr-qrfact
+:open:
 
 Julia provides access to both the thin and full forms of the QR factorization.
 
@@ -291,6 +296,7 @@ Q̂' * Q̂ - I
 
 (demo-qr-stable-julia)=
 ``````{dropdown} @demo-qr-stable
+:open:
 We'll repeat the experiment of {numref}`Demo {number} <demo-normaleqns-instab>`, which exposed instability in the normal equations. 
 
 ```{code-cell}
@@ -313,6 +319,7 @@ observed_error = norm(FNC.lsqrfact(A, b) - x) / norm(x);
 ### 3.4 @section-leastsq-house
 (demo-house-qr-julia)=
 ``````{dropdown} @demo-house-qr
+:open:
 
 We will use Householder reflections to produce a QR factorization of a random matrix.
 ```{tip}

@@ -19,6 +19,7 @@ include("FNC_init.jl")
 
 (demo-traffic-advection-julia)=
 ``````{dropdown} @demo-traffic-advection
+:open:
 
  In the following definition we allow the velocity $c$ to be specified as a parameter in the `ODEProblem`.
 
@@ -52,20 +53,22 @@ plt
 An animation shows the solution nicely. The bump moves with speed 2 to the right, reentering on the left as it exits to the right because of the periodic conditions. 
 
 ```{code-cell}
-:tags: hide-input
+:tags: hide-input, remove-output
 anim = @animate for t in range(0, 4, 120) 
     plot(x, sol(t),
         title=@sprintf("Advection equation, t = %.2f", t),
         xaxis=(L"x"),  yaxis=([1, 2], L"u(x,t)"),
         dpi=150)
 end
-mp4(anim, "figures/advection.mp4")
+mp4(anim, "figures/advection-periodic.mp4")
 ```
+![Advection equation with periodic boundary](figures/advection-periodic.mp4)
 
 ``````
 
 (demo-traffic-solve-julia)=
 ``````{dropdown} @demo-traffic-solve
+:open:
 The following are parameters and a function relevant to defining the problem. 
 
 ```{code-cell}
@@ -108,14 +111,15 @@ plt
 The bump slowly moves backward on the roadway, spreading out and gradually fading away due to the presence of diffusion.
 
 ```{code-cell}
-:tags: hide-input
+:tags: hide-input, remove-output
 anim = @animate for t in range(0,0.9,91) 
     plot(x, sol(t);
         xaxis=(L"x"),  yaxis=([400,410], "density"),
         dpi=150,  title=@sprintf("Traffic flow, t=%.2f",t))
 end
-mp4(anim, "figures/traffic-fade.mp4")
+mp4(anim, "figures/traffic-small.mp4")
 ```
+![Traffic flow](figures/traffic-small.mp4)
 
 Now we use an initial condition with a larger bump. Note that the scale on the $y$-axis is much different for this solution.
 
@@ -138,7 +142,7 @@ plt
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: hide-input, remove-output
 anim = @animate for t in range(0, 0.5, 101) 
     plot(x, sol(t);
         xaxis=(L"x"),  yaxis=([400,480], "density"),
@@ -146,6 +150,7 @@ anim = @animate for t in range(0, 0.5, 101)
 end
 mp4(anim,"figures/traffic-jam.mp4")
 ```
+![Traffic jam](figures/traffic-jam.mp4)
 
 In this case the density bump travels backward along the road. It also steepens on the side facing the incoming traffic and decreases much more slowly on the other side. A motorist would experience this as an abrupt increase in density, followed by a much more gradual decrease in density and resulting gradual increase in speed. (You also see some transient, high-frequency oscillations. These are caused by instabilities, as we discuss in simpler situations later in this chapter.)
 
@@ -155,6 +160,7 @@ In this case the density bump travels backward along the road. It also steepens 
 
 (demo-upwind-cfl-julia)=
 ``````{dropdown} @demo-upwind-cfl
+:open:
 For time stepping, we use the adaptive explicit method `RK4`.
 
 ```{code-cell}
@@ -195,6 +201,7 @@ println("Number of time steps for m = 800: $(length(u.t))")
 
 (demo-upwind-direction-julia)=
 ``````{dropdown} @demo-upwind-direction
+:open:
 If we solve advection over $[0,1]$ with velocity $c=-1$, the right boundary is in the upwind/inflow direction. Thus a well-posed boundary condition is $u(1,t)=0$.
 
 We'll pattern a solution after {numref}`Function {number} <function-parabolic>`. Since $u(x_m,t)=0$, we define the ODE interior problem {eq}`mol-interior` for $\mathbf{v}$ without $u_m$. For each evaluation of $\mathbf{v}'$, we must extend the data back to $x_m$ first.
@@ -233,15 +240,18 @@ contour(x, t, U';
 We find that the hump gracefully exits out the downwind end.
 
 ```{code-cell}
-:tags: hide-input
+:tags: hide-input, remove-output
 anim = @animate for t in range(0, 1, 161) 
     plot(x, extend(u(t));
         label=@sprintf("t = %.4f", t), 
         xaxis=(L"x"),  yaxis=(L"u(x, t)", (0, 1)), 
         title="Advection equation with inflow BC",  dpi=150)
 end
-mp4(anim,"figures/upwind-inflow.mp4")
+mp4(anim,"figures/advection-inflow.mp4")
 ```
+
+![Advection with inflow BC](figures/advection-inflow.mp4)
+
 
 If instead of $u(1,t)=0$ we were to try to impose the downwind condition $u(0,t)=0$, we only need to change the index of the interior nodes and where to append the zero value.
 
@@ -267,21 +277,24 @@ contour(x, t, U';
 This time, the solution blows up as soon as the hump runs into the boundary because there are conflicting demands there.
 
 ```{code-cell}
-:tags: hide-input
+:tags: hide-input, remove-output
 anim = @animate for t in range(0, 0.2, 41) 
     plot(x, extend(u(t));
         label=@sprintf("t = %.4f", t),
         xaxis=(L"x"),  yaxis=(L"u(x,t)", (0, 1)), 
         title="Advection equation with outflow BC",  dpi=150)
 end
-mp4(anim,"figures/upwind-outflow.mp4")
+mp4(anim,"figures/advection-outflow.mp4")
 ```
+![Advection with outflow BC](figures/advection-outflow.mp4)
+
 ``````
 
 ### 12.3 @section-advection-absstab
 
 (demo-absstab-advection-julia)=
 ``````{dropdown} @demo-absstab-advection
+:open:
 For $c=1$ we get purely imaginary eigenvalues.
 
 ```{code-cell}
@@ -327,6 +340,7 @@ The A-stable backward Euler time stepping tells the exact opposite story: it wil
 
 (demo-absstab-advdiff-julia)=
 ``````{dropdown} @demo-absstab-advdiff
+:open:
 The eigenvalues of advection-diffusion are near-imaginary for $\epsilon\approx 0$ and get closer to the negative real axis as $\epsilon$ increases.
 
 ```{code-cell}
@@ -347,6 +361,7 @@ plt
 
 (demo-absstab-inflow-julia)=
 ``````{dropdown} @demo-absstab-inflow
+:open:
 Deleting the last row and column places all the eigenvalues of the discretization into the left half of the complex plane. 
 
 ```{code-cell}
@@ -379,6 +394,7 @@ Consequently all solutions decay exponentially to zero as $t\to\infty$. This mat
 
 (demo-wave-boundaries-julia)=
 ``````{dropdown} @demo-wave-boundaries
+:open:
 
 ```{code-cell}
 m = 200
@@ -434,7 +450,7 @@ contour(x, t, hcat(U...)';
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: hide-input, remove-output
 anim = @animate for t in range(0 ,2, 120)
     plot(x, extend(w(t)[1:m-1]);
         label=@sprintf("t=%.3f",t),
@@ -444,12 +460,15 @@ end
 mp4(anim, "figures/wave-boundaries.mp4")
 ```
 
+![Wave equation with boundaries](figures/wave-boundaries.mp4)
+
 The original hump breaks into two pieces of different amplitudes, each traveling with speed $c=2$. They pass through one another without interference. When a hump encounters a boundary, it is perfectly reflected, but with inverted shape. At time $t=2$, the solution looks just like the initial condition.
 
 ``````
 
 (demo-wave-speed-julia)=
 ``````{dropdown} @demo-wave-speed
+:open:
 The ODE implementation has to change slightly.
 
 ```{code-cell}
@@ -483,7 +502,7 @@ contour(x, t, hcat(U...)';
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: hide-input, remove-output
 anim = @animate for t in range(0,5,181)
     plot(Shape([-1, 0, 0, -1], [-1, -1, 1, 1]), color=RGB(.8, .8, .8), l=0, label="")
     plot!(x, extend(w(t, idxs=1:m-1));
@@ -493,6 +512,8 @@ anim = @animate for t in range(0,5,181)
 end
 mp4(anim, "figures/wave-speed.mp4")
 ```
+
+![Wave equation with variable speed](figures/wave-speed.mp4)
 
 Each pass through the interface at $x=0$ generates a reflected and transmitted wave. By conservation of energy, these are both smaller in amplitude than the incoming bump.
 ``````

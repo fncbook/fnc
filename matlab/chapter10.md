@@ -68,7 +68,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -76,6 +76,7 @@ FNC_init
 
 (demo-tpbvp-mems-matlab)=
 ``````{dropdown} @demo-tpbvp-mems
+:open:
 ```{index} ! Julia; in-place function
 ```
 
@@ -116,6 +117,7 @@ It's smart to check visually that the boundary conditions are satisfied.
 ### 10.2 @section-bvp-shooting
 (demo-shooting-naive-matlab)=
 ``````{dropdown} @demo-shooting-naive
+:open:
 Let's first examine the shooting approach for the TPBVP from {numref}`Example {number} <example-tpbvp-mems>` with $\lambda=0.6$. 
 
 ```{code-cell}
@@ -152,6 +154,7 @@ On the graph, it's the curve starting at $w(0)=0.8$ that comes closest to the re
 
 (demo-shooting-mems-matlab)=
 ``````{dropdown} @demo-shooting-mems
+:open:
 We revisit {numref}`Demo {number} <demo-shooting-naive>` but let {numref}`Function {number} <function-shoot>` do the heavy lifting.
 
 ```{code-cell}
@@ -191,6 +194,7 @@ w(1)
 
 (demo-shooting-unstable-matlab)=
 ``````{dropdown} @demo-shooting-unstable
+:open:
 
 ```{code-cell}
 :tags: raises-exception
@@ -215,6 +219,7 @@ The numerical solution fails at the largest value of $\lambda$ because the initi
 ### 10.3 @section-bvp-diffmats
 (demo-diffmats-2nd-matlab)=
 ``````{dropdown} @demo-diffmats-2nd
+:open:
 We test first-order and second-order differentiation matrices for the function $x + \exp(\sin 4x)$ over $[-1,1]$.
 
 ```{code-cell}
@@ -277,6 +282,7 @@ title('Convergence of finite differences')
 
 (demo-diffmats-cheb-matlab)=
 ``````{dropdown} @demo-diffmats-cheb
+:open:
 Here is a $4\times 4$ Chebyshev differentiation matrix.
 
 ```{code-cell}
@@ -319,6 +325,7 @@ title('Convergence of finite differences')
 ### 10.4 @section-bvp-linear
 (demo-linear-solve-matlab)=
 ``````{dropdown} @demo-linear-solve
+:open:
 
 ```{code-cell}
 exact = @(x) exp(sin(x));
@@ -351,6 +358,7 @@ ylabel('error')
 
 (demo-linear-converge-matlab)=
 ``````{dropdown} @demo-linear-converge
+:open:
 
 
 ```{code-cell}
@@ -395,6 +403,7 @@ legend('obs. error', '2nd order')
 ### 10.5 @section-bvp-nonlinear
 (demo-nonlinear-pendulum-matlab)=
 ``````{dropdown} @demo-nonlinear-pendulum
+:open:
 Suppose a damped pendulum satisfies the nonlinear equation $\theta'' + 0.05\theta'+\sin \theta =0$. We want to start the pendulum at $\theta=2.5$ and give it the right initial velocity so that it reaches $\theta=-2$ at exactly $t=5$. This is a boundary-value problem with Dirichlet conditions $\theta(0)=2.5$ and $\theta(5)=-2$.
 
 The first step is to define the function $\phi$ that equals $\theta''$.
@@ -439,6 +448,7 @@ This time, the pendulum is initially pushed toward the unstable equilibrium in t
 
 (demo-nonlinear-mems-matlab)=
 ``````{dropdown} @demo-nonlinear-mems
+:open:
 
 Here is the problem definition. We use a truncated domain to avoid division by zero at $r=0$.
 
@@ -473,6 +483,7 @@ title("Two solutions of the MEMS BVP")
 
 (demo-nonlinear-allencahn-matlab)=
 ``````{dropdown} @demo-nonlinear-allencahn
+:open:
 
 ```{code-cell}
 epsilon = 0.05;
@@ -521,6 +532,7 @@ plot(x, u3, displayname="\epsilon = 0.0005")
 ### 10.6 @section-bvp-galerkin
 (demo-galerkin-fem-matlab)=
 ``````{dropdown} @demo-galerkin-fem
+:open:
 
 Here are the coefficient function definitions. Even though $s$ is a constant, it has to be defined as a function for {numref}`Function {number} <function-fem>` to use it.
 

@@ -116,6 +116,7 @@ include("FNC_init.jl")
 ### 6.1 @section-ivp-basics
 (demo-basics-first-julia)=
 ``````{dropdown} @demo-basics-first
+:open:
 The `OrdinaryDiffEq` package offers solvers for IVPs. Let's use it to define and solve an initial-value problem for $u'=\sin[(u+t)^2]$ over $t \in [0,4]$, such that $u(0)=-1$.
 
 Because many practical problems come with parameters that are fixed within an instance but varied from one instance to another, the syntax for IVPs includes a input argument `p` that stays fixed throughout the solution. Here we don't want to use that argument, but it must be in the definition for the solver to work.
@@ -172,6 +173,7 @@ scatter!(sol.t, sol.u, label="discrete values")
 
 (demo-basics-sing-julia)=
 ``````{dropdown} @demo-basics-sing
+:open:
 
 The equation $u'=(u+t)^2$ gives us some trouble.
 
@@ -192,6 +194,7 @@ plot(sol, label="";
 
 (demo-basics-cond-julia)=
 ``````{dropdown} @demo-basics-cond
+:open:
 Consider the ODEs $u'=u$ and $u'=-u$. In each case we compute $\partial f/\partial u = \pm 1$, so the condition number bound from {numref}`Theorem %s <theorem-depIC>` is $e^{b-a}$ in both problems. However, they behave quite differently. In the case of exponential growth, $u'=u$, the bound is the actual condition number.
 
 ```{code-cell}
@@ -224,6 +227,7 @@ In this case the actual condition number is one, because the initial difference 
 
 (demo-euler-converge-julia)=
 ``````{dropdown} @demo-euler-converge
+:open:
 We consider the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
 
 ```{code-cell}
@@ -288,6 +292,7 @@ plot!(n, 0.5 * err[end] * (n / n[end]) .^ (-1), l=:dash, label=L"O(n^{-1})")
 
 (demo-systems-predator-julia)=
 ``````{dropdown} @demo-systems-predator
+:open:
 We encode the predator–prey equations via a function.
 
 ```{code-cell}
@@ -363,6 +368,7 @@ From this plot we can deduce that the solution approaches a periodic one, which 
 
 (demo-systems-coupledpendula-julia)=
 ``````{dropdown} @demo-systems-coupledpendula
+:open:
 Let's implement the coupled pendulums from {numref}`Example {number} <example-systems-coupledpendula>`. The pendulums will be pulled in opposite directions and then released together from rest.
 ```{tip}
 :class: dropdown
@@ -421,6 +427,7 @@ The coupling makes the pendulums swap energy back and forth.
 
 (demo-rk-converge-julia)=
 ``````{dropdown} @demo-rk-converge
+:open:
 We solve the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
 
 ```{code-cell}
@@ -471,6 +478,7 @@ The fourth-order variant is more efficient in this problem over a wide range of 
 
 (demo-adapt-basic-julia)=
 ``````{dropdown} @demo-adapt-basic
+:open:
 Let's run adaptive RK on  $u'=e^{t-u\sin u}$.
 
 ```{code-cell}
@@ -510,6 +518,7 @@ We took fewer steps by a factor of almost 1000! Even accounting for the extra st
 
 (demo-adapt-sing-julia)=
 ``````{dropdown} @demo-adapt-sing
+:open:
 In {numref}`Demo %s <demo-basics-sing>` we saw an IVP that appears to blow up in a finite amount of time. Because the solution increases so rapidly as it approaches the blowup, adaptive stepping is required even to get close.
 
 ```{code-cell}
@@ -536,6 +545,7 @@ annotate!(tf, 1e5, latexstring(@sprintf("t = %.6f ", tf)), :right)
 
 (demo-implicit-ab4-julia)=
 ``````{dropdown} @demo-implicit-ab4
+:open:
 We study the convergence of AB4 using the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. As usual, `solve` is called to give an accurate reference solution.
 
 ```{code-cell}
@@ -571,6 +581,7 @@ plot!(n, 0.1 * err[end] * (n / n[end]) .^ (-4), l=:dash, label=L"O(n^{-4})")
 
 (demo-implicit-stiff-julia)=
 ``````{dropdown} @demo-implicit-stiff
+:open:
 The following simple ODE uncovers a surprise.
 
 ```{code-cell}
@@ -621,6 +632,7 @@ So AB4, which is supposed to be _more_ accurate than AM2, actually needs somethi
 
 (demo-zs-LIAF-julia)=
 ``````{dropdown} @demo-zs-LIAF
+:open:
 We'll measure the error at the time $t=1$.
 
 ```{code-cell}

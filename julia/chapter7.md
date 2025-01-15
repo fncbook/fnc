@@ -18,6 +18,7 @@ include("FNC_init.jl")
 
 (demo-insight-graph-julia)=
 ``````{dropdown} @demo-insight-graph
+:open:
 Here we create an adjacency matrix for a graph on four nodes.
 
 ```{code-cell}
@@ -50,6 +51,7 @@ graphplot(A, names=1:4, markersize=0.2)
 
 (demo-insight-image-julia)=
 ``````{dropdown} @demo-insight-image
+:open:
 ```{index} ! Julia; Images
 ```
 
@@ -112,6 +114,7 @@ Gray.(reverse(A, dims=1))
 
 (demo-evd-eigen-julia)=
 ``````{dropdown} @demo-evd-eigen
+:open:
 
 ```{index} ! Julia; eigvals
 ```
@@ -173,6 +176,7 @@ opnorm(A * V - V * diagm(λ))
 
 (demo-evd-bauerfike-julia)=
 ``````{dropdown} @demo-evd-bauerfike
+:open:
 
 ```{index} Julia; adjoint, Julia; \'
 ```
@@ -253,6 +257,7 @@ The plot shows that some eigenvalues are much more affected than others. This si
 
 (demo-evd-francisqr-julia)=
 ``````{dropdown} @demo-evd-francisqr
+:open:
 Let's start with a known set of eigenvalues and an orthogonal eigenvector basis.
 
 ```{code-cell}
@@ -293,6 +298,7 @@ A
 
 (demo-svd-props-julia)=
 ``````{dropdown} @demo-svd-props
+:open:
 We verify some of the fundamental SVD properties using standard Julia functions from `LinearAlgebra`.
 
 ```{code-cell}
@@ -344,6 +350,7 @@ We verify the orthogonality of the singular vectors as follows:
 
 (demo-symm-eig-rayleigh-julia)=
 ``````{dropdown} @demo-symm-eig-rayleigh
+:open:
 We will use a symmetric matrix with a known EVD and eigenvalues equal to the integers from 1 to 20.
 
 ```{code-cell}
@@ -386,6 +393,7 @@ labels = ["perturbation δ", "δ²", "R(x) - λ"]
 
 (demo-dimreduce-hello-julia)=
 ``````{dropdown} @demo-dimreduce-hello
+:open:
 We make an image from some text, then reload it as a matrix.
 
 ```{code-cell}
@@ -429,6 +437,7 @@ compression = m * n / (9 * (m + n + 1))
 
 (demo-dimreduce-voting-julia)=
 ``````{dropdown} @demo-dimreduce-voting
+:open:
 This matrix describes the votes on bills in the 111th session of the United States Senate. (The data set was obtained from [https://voteview.com].) Each row is one senator, and each column is a vote item.
 
 ```{code-cell}

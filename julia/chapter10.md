@@ -110,6 +110,7 @@ include("FNC_init.jl")
 
 (demo-tpbvp-mems-julia)=
 ``````{dropdown} @demo-tpbvp-mems
+:open:
 ```{index} ! Julia; in-place function
 ```
 
@@ -188,6 +189,7 @@ To visual accuracy, the boundary conditions have been enforced. We can check the
 
 (demo-shooting-naive-julia)=
 ``````{dropdown} @demo-shooting-naive
+:open:
 Let's first examine the shooting approach for the TPBVP from {numref}`Example {number} <example-tpbvp-mems>` with $\lambda=0.6$. 
 ```{tip}
 :class: dropdown
@@ -227,6 +229,7 @@ On the graph, it's the curve starting at $w(0)=0.8$ that comes closest to the re
 
 (demo-shooting-mems-julia)=
 ``````{dropdown} @demo-shooting-mems
+:open:
 We revisit {numref}`Demo {number} <demo-shooting-naive>` but let {numref}`Function {number} <function-shoot>` do the heavy lifting.
 
 ```{code-cell}
@@ -259,6 +262,7 @@ The accuracy is consistent with the error tolerance used for the IVP solution. T
 
 (demo-shooting-unstable-julia)=
 ``````{dropdown} @demo-shooting-unstable
+:open:
 
 ```{code-cell}
 plt = plot(
@@ -284,6 +288,7 @@ The numerical solutions evidently don't satisfy the right boundary condition as 
 
 (demo-diffmats-2nd-julia)=
 ``````{dropdown} @demo-diffmats-2nd
+:open:
 We test first-order and second-order differentiation matrices for the function $x + \exp(\sin 4x)$ over $[-1,1]$.
 
 ```{code-cell}
@@ -344,6 +349,7 @@ plot!(n, 10 * 10 * n .^ (-2);
 
 (demo-diffmats-cheb-julia)=
 ``````{dropdown} @demo-diffmats-cheb
+:open:
 Here is a $4\times 4$ Chebyshev differentiation matrix.
 
 ```{code-cell}
@@ -385,6 +391,7 @@ plot(n, [err1 err2]; m = :o,
 
 (demo-linear-solve-julia)=
 ``````{dropdown} @demo-linear-solve
+:open:
 ```{code-cell}
 exact = x -> exp(sin(x));
 ```
@@ -416,6 +423,7 @@ plot!(x, exact.(x) - u, subplot = 2, xaxis = L"x", yaxis = ("error"))
 
 (demo-linear-converge-julia)=
 ``````{dropdown} @demo-linear-converge
+:open:
 ```{code-cell}
 λ = 10
 exact = x -> sinh(λ * x) / sinh(λ) - 1;
@@ -458,6 +466,7 @@ plot!(n, 0.25 * n .^ (-2), l = (:dash, :gray), label = "2nd order")
 
 (demo-nonlinear-pendulum-julia)=
 ``````{dropdown} @demo-nonlinear-pendulum
+:open:
 The first step is to define the function $\phi$ that equals $\theta''$.
 
 ```{code-cell}
@@ -508,6 +517,7 @@ This time, the pendulum is initially pushed toward the unstable equilibrium in t
 
 (demo-nonlinear-mems-julia)=
 ``````{dropdown} @demo-nonlinear-mems
+:open:
 Here is the problem definition. We use a truncated domain to avoid division by zero at $r=0$.
 
 ```{code-cell}
@@ -540,6 +550,7 @@ plot!(r, w₂, title = "Two solutions of the MEMS problem")
 
 (demo-nonlinear-allencahn-julia)=
 ``````{dropdown} @demo-nonlinear-allencahn
+:open:
 
 ```{code-cell}
 ϕ = (x, u, dudx) -> (u^3 - u) / ϵ;
@@ -586,6 +597,7 @@ plot!(x, u₃, label = L"\epsilon = 0.0005")
 ### 10.6 @section-bvp-galerkin
 (demo-galerkin-fem-julia)=
 ``````{dropdown} @demo-galerkin-fem
+:open:
 
 Here are the coefficient function definitions. Even though $s$ is a constant, it has to be defined as a function for {numref}`Function {number} <function-fem>` to use it.
 

@@ -57,6 +57,7 @@ exec(open("FNC_init.py").read())
 
 (demo-tensorprod-gridfun-python)=
 ``````{dropdown} @demo-tensorprod-gridfun
+:open:
 Here is the grid from {numref}`Example {number} <example-tensorprod-smallgrid>`.
 
 ```{code-cell}
@@ -99,6 +100,7 @@ xlabel("$x$"),  ylabel("$y$");
 
 (demo-tensorprod-disksphere-python)=
 ``````{dropdown} @demo-tensorprod-disksphere
+:open:
 For a function given in polar form, such as $f(r,\theta)=1-r^4$, construction of a function over the unit disk is straightforward using a grid in $(r,\theta)$ space.
 
 ```{code-cell}
@@ -128,6 +130,7 @@ In such functions the values along the line $r=0$ must be identical, and the val
 
 (demo-tensorprod-diff-python)=
 ``````{dropdown} @demo-tensorprod-diff
+:open:
 We define a function and, for reference, its two exact partial derivatives.
 
 ```{code-cell}
@@ -176,6 +179,7 @@ Not surprisingly, the errors are largest where the derivatives themselves are la
 
 (demo-diffadv-vec-python)=
 ``````{dropdown} @demo-diffadv-vec
+:open:
 
 ```{code-cell}
 m, n = 4, 3
@@ -205,6 +209,7 @@ with printoptions(precision=4, suppress=True):
 
 (demo-diffadv-heat-python)=
 ``````{dropdown} @demo-diffadv-heat
+:open:
 
 ```{code-cell}
 m, n = 60, 40
@@ -282,6 +287,7 @@ close()
 
 (demo-diffadv-advdiff-python)=
 ``````{dropdown} @demo-diffadv-advdiff
+:open:
 
 The first step is to define a discretization of the domain.
 
@@ -360,6 +366,7 @@ close()
 
 (demo-diffadv-wave-python)=
 ``````{dropdown} @demo-diffadv-wave
+:open:
 We start with the discretization and initial condition.
 
 ```{code-cell}
@@ -436,6 +443,7 @@ close()
 
 (demo-laplace-kron-python)=
 ``````{dropdown} @demo-laplace-kron
+:open:
 
 ```{code-cell}
 A = array([[1, 2], [-2, 0]])
@@ -465,6 +473,7 @@ kron(A, B)
 
 (demo-laplace-fd-python)=
 ``````{dropdown} @demo-laplace-fd
+:open:
 We make a crude discretization for illustrative purposes.
 
 ```{code-cell}
@@ -543,6 +552,7 @@ with printoptions(precision=4, suppress=True):
 
 (demo-laplace-poisson-python)=
 ``````{dropdown} @demo-laplace-poisson
+:open:
 
 First we define the problem on $[0,1]\times[0,2]$.
 
@@ -582,6 +592,7 @@ colorbar(),  title("Error");
 
 (demo-nonlinear2d-mems-python)=
 ``````{dropdown} @demo-nonlinear2d-mems
+:open:
 All we need to define are $\phi$ from {eq}`nonlinpdepde` for the PDE, and a trivial zero function for the boundary condition.
 
 ```{code-cell}
@@ -641,6 +652,7 @@ The original solution seems to be accurate to about four digits.
 
 (demo-nonlinear-advdiff-python)=
 ``````{dropdown} @demo-nonlinear-advdiff
+:open:
 
 ```{code-cell}
 phi = lambda x, y, u, ux, uxx, uy, uyy: 1 - ux - 2*uy + 0.05 * (uxx + uyy)
@@ -663,6 +675,7 @@ title("Steady advection–diffusion");
 
 (demo-nonlinear2d-allencahn-python)=
 ``````{dropdown} @demo-nonlinear2d-allencahn
+:open:
 
 The following defines the PDE and a nontrivial Dirichlet boundary condition for the square $[0,1]^2$.
 

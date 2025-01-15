@@ -92,13 +92,14 @@ Lines 32--34 define the function $\mathbf{g}$. This is sent to `levenberg` in li
 
 ```{code-cell}
 :tags: [remove-cell]
-cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 ### 6.1 @section-ivp-basics
 
 (demo-basics-first-matlab)=
 ``````{dropdown} @demo-basics-first
+:open:
 
 Let's use it to define and solve an initial-value problem for $u'=\sin[(u+t)^2]$ over $t \in [0,4]$, such that $u(0)=-1$. To create an initial-value problem for $u(t)$, you must create an `ode` with a function that computes $u'$ and an initial condition for $u$. Then you create a solution by calling `solve` with a time interval. 
 ```{tip}
@@ -137,6 +138,7 @@ u(0:5)
 
 (demo-basics-sing-matlab)=
 ``````{dropdown} @demo-basics-sing
+:open:
 
 The equation $u'=(u+t)^2$ gives us some trouble.
 
@@ -161,6 +163,7 @@ title(("Finite-time blowup"));
 
 (demo-basics-cond-matlab)=
 ``````{dropdown} @demo-basics-cond
+:open:
 Consider the ODEs $u'=u$ and $u'=-u$. In each case we compute $\partial f/\partial u = \pm 1$, so the condition number bound from {numref}`Theorem %s <theorem-depIC>` is $e^{b-a}$ in both problems. However, they behave quite differently. In the case of exponential growth, $u'=u$, the bound is the actual condition number.
 
 ```{code-cell}
@@ -193,6 +196,7 @@ In this case the actual condition number is one, because the initial difference 
 ### 6.2 @section-ivp-euler
 (demo-euler-converge-matlab)=
 ``````{dropdown} @demo-euler-converge
+:open:
 We consider the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. We need to define the function for the right-hand side of the ODE, the interval for the independent variable, and the initial value.
 
 ```{code-cell}
@@ -256,6 +260,7 @@ legend('error', 'O(n^{-1})', 'location', 'southwest');
 ### 6.3 @section-ivp-systems
 (demo-systems-predator-matlab)=
 ``````{dropdown} @demo-systems-predator
+:open:
 We encode the predator–prey equations via a function, defined here externally.
 
 ```{literalinclude} f63_predprey.m
@@ -314,6 +319,7 @@ From this plot we can deduce that the solution approaches a periodic one, which 
 
 (demo-systems-coupledpendula-matlab)=
 ``````{dropdown} @demo-systems-coupledpendula
+:open:
 Let's implement the coupled pendulums from {numref}`Example {number} <example-systems-coupledpendula>`. The pendulums will be pulled in opposite directions and then released together from rest.
 
 ```{literalinclude} f63_pendulums.m
@@ -363,6 +369,7 @@ The coupling makes the pendulums swap energy back and forth.
 
 (demo-rk-converge-matlab)=
 ``````{dropdown} @demo-rk-converge
+:open:
 We solve the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
 
 ```{code-cell}
@@ -413,6 +420,7 @@ The fourth-order variant is more efficient in this problem over a wide range of 
 ### 6.5 @section-ivp-adaptive
 (demo-adapt-basic-matlab)=
 ``````{dropdown} @demo-adapt-basic
+:open:
 Let's run adaptive RK on  $u'=e^{t-u\sin u}$.
 
 ```{code-cell}
@@ -454,6 +462,7 @@ We took fewer steps by a factor of almost 1000! Even accounting for the extra st
 
 (demo-adapt-sing-matlab)=
 ``````{dropdown} @demo-adapt-sing
+:open:
 In {numref}`Demo %s <demo-basics-sing>` we saw an IVP that appears to blow up in a finite amount of time. Because the solution increases so rapidly as it approaches the blowup, adaptive stepping is required even to get close.
 
 ```{code-cell}
@@ -478,6 +487,7 @@ text(tf, 1e5, sprintf(" t = %.6f ", tf))
 ### 6.6 @section-ivp-multistep
 (demo-implicit-ab4-matlab)=
 ``````{dropdown} @demo-implicit-ab4
+:open:
 We study the convergence of AB4 using the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. As usual, a built-in solver is called to give an accurate reference solution.
 
 ```{code-cell}
@@ -516,6 +526,7 @@ legend("AB4", "O(n^{-4})", location="southwest");
 
 (demo-implicit-stiff-matlab)=
 ``````{dropdown} @demo-implicit-stiff
+:open:
 The following simple ODE uncovers a surprise.
 
 ```{code-cell}
@@ -568,6 +579,7 @@ So AB4, which is supposed to be _more_ accurate than AM2, actually needs somethi
 ### 6.7 @section-ivp-implicit
 (demo-zs-LIAF-matlab)=
 ``````{dropdown} @demo-zs-LIAF
+:open:
 We'll measure the error at the time $t=1$.
 
 ```{code-cell}

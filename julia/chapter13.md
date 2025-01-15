@@ -61,6 +61,7 @@ include("FNC_init.jl")
 
 (demo-tensorprod-gridfun-julia)=
 ``````{dropdown} @demo-tensorprod-gridfun
+:open:
 Here is the grid from {numref}`Example {number} <example-tensorprod-smallgrid>`.
 
 ```{code-cell}
@@ -99,6 +100,7 @@ contour(x, y, F';
 
 (demo-tensorprod-disksphere-julia)=
 ``````{dropdown} @demo-tensorprod-disksphere
+:open:
 For a function given in polar form, such as $f(r,\theta)=1-r^4$, construction of a function over the unit disk is straightforward using a grid in $(r,\theta)$ space.
 
 ```{code-cell}
@@ -120,6 +122,7 @@ In such functions the values along the line $r=0$ must be identical, and the val
 
 (demo-tensorprod-diff-julia)=
 ``````{dropdown} @demo-tensorprod-diff
+:open:
 We define a function and, for reference, its two exact partial derivatives.
 
 ```{code-cell}
@@ -171,6 +174,7 @@ norm(exact - ∂yU) / norm(exact)
 
 (demo-diffadv-vec-julia)=
 ``````{dropdown} @demo-diffadv-vec
+:open:
 
 ```{code-cell}
 m = 2;
@@ -189,6 +193,7 @@ unvec(v)
 
 (demo-diffadv-heat-julia)=
 ``````{dropdown} @demo-diffadv-heat
+:open:
 
 ```{code-cell}
 m, n = (60, 25)
@@ -239,6 +244,7 @@ Here `clims` are set so that colors remain at fixed values throughout the animat
 ```
 
 ```{code-cell}
+:tags: remove-output, hide-input
 anim = @animate for t in range(0, 0.2, 81)
     surface(x, y, unvec(sol(t))';
         color=:redsblues,  clims=(-M, M),
@@ -248,16 +254,16 @@ anim = @animate for t in range(0, 0.2, 81)
         title=@sprintf("Heat equation, t=%.3f", t),
         dpi=150, colorbar=:none)
 end
-closeall();
-mp4(anim, "figures/diffadv-heat.mp4");
+mp4(anim, "figures/2d-heat.mp4");
 ```
 
-![Heat equation in 2d](figures/diffadv-heat.mp4)
+![Heat equation in 2d](figures/2d-heat.mp4)
 
 ``````
 
 (demo-diffadv-advdiff-julia)=
 ``````{dropdown} @demo-diffadv-advdiff
+:open:
 
 The first step is to define a discretization of the domain. 
 
@@ -305,6 +311,7 @@ contour(x, y, U(0.5)';
 ```
 
 ```{code-cell}
+:tags: remove-output, hide-input
 anim = @animate for t in 0:0.02:2
     U = unpack(w(t))
     surface(x, y, U';
@@ -319,15 +326,15 @@ anim = @animate for t in 0:0.02:2
         color=:blues,  clims=(0, 2),  colorbar=:none,
         title=@sprintf("t = %.2f", t))
 end
-closeall();
-mp4(anim, "figures/diffadv-advdiff.mp4");
+mp4(anim, "figures/2d-advdiff.mp4");
 ```
 
-![Advection-diffusion in 2d](figures/diffadv-advdiff.mp4)
+![Advection-diffusion in 2d](figures/2d-advdiff.mp4)
 ``````
 
 (demo-diffadv-wave-julia)=
 ``````{dropdown} @demo-diffadv-wave
+:open:
 We start with the discretization and initial condition.
 
 ```{code-cell}
@@ -367,6 +374,7 @@ U = t -> unpack(sol(t))[1]
 ```
 
 ```{code-cell}
+:tags: remove-output, hide-input
 anim = @animate for t in 0:4/100:4
     Ut = U(t)
     surface(x, y, Ut';
@@ -381,17 +389,17 @@ anim = @animate for t in 0:4/100:4
         color=:redsblues,  clims=(-0.1, 0.1), 
         colorbar=:none,  title=@sprintf("t = %.2f", t))
 end
-closeall();
-mp4(anim, "figures/diffadv-wave.mp4");
+mp4(anim, "figures/2d-wave.mp4");
 ```
 
-![Wave equation in 2d](figures/diffadv-wave.mp4)
+![Wave equation in 2d](figures/2d-wave.mp4)
 ``````
 
 ### 13.3 @section-twodim-laplace
 
 (demo-laplace-kron-julia)=
 ``````{dropdown} @demo-laplace-kron
+:open:
 
 ```{code-cell}
 A = [1 2; -2 0]
@@ -422,6 +430,7 @@ kron(A, B)
 
 (demo-laplace-fd-julia)=
 ``````{dropdown} @demo-laplace-fd
+:open:
 We make a crude discretization for illustrative purposes.
 
 ```{code-cell}
@@ -501,6 +510,7 @@ U = unvec(u)
 
 (demo-laplace-poisson-julia)=
 ``````{dropdown} @demo-laplace-poisson
+:open:
 
 First we define the problem on $[0,1]\times[0,2]$.
 
@@ -545,6 +555,7 @@ plot!([0, 1, 1, 0, 0], [0, 0, 2, 2, 0], l=(2, :black))
 
 (demo-nonlinear2d-mems-julia)=
 ``````{dropdown} @demo-nonlinear2d-mems
+:open:
 All we need to define are $\phi$ from {eq}`nonlinpdepde` for the PDE, and a trivial zero function for the boundary condition.
 
 ```{code-cell}
@@ -599,6 +610,7 @@ The original solution seems to be accurate to about four digits.
 
 (demo-nonlinear-advdiff-julia)=
 ``````{dropdown} @demo-nonlinear-advdiff
+:open:
 
 ```{code-cell}
 ϕ = (X, Y, U, Ux, Uxx, Uy, Uyy) -> @. 1 - Ux - 2Uy + 0.05 * (Uxx + Uyy)
@@ -620,6 +632,7 @@ contourf(x, y, U';
 
 (demo-nonlinear2d-allencahn-julia)=
 ``````{dropdown} @demo-nonlinear2d-allencahn
+:open:
 
 The following defines the PDE and a nontrivial Dirichlet boundary condition for the square $[0,1]^2$.
 

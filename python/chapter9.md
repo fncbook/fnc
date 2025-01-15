@@ -115,6 +115,7 @@ exec(open("FNC_init.py").read())
 
 (demo-polynomial-lagrange-python)=
 ``````{dropdown} @demo-polynomial-lagrange
+:open:
 Here is a vector of nodes.
 
 ```{code-cell}
@@ -147,6 +148,7 @@ Observe that $\ell_k$ is _not_ between zero and one everywhere, unlike a hat fun
 
 (demo-polynomial-error-python)=
 ``````{dropdown} @demo-polynomial-error
+:open:
 
 ```{code-cell}
 from scipy.interpolate import BarycentricInterpolator as interp
@@ -174,6 +176,7 @@ The error is zero at the nodes, by the definition of interpolation. The error bo
 
 (demo-barycentric-example-python)=
 ``````{dropdown} @demo-barycentric-example
+:open:
 ```{code-cell}
 f = lambda x: sin(exp(2 * x))
 x = linspace(0, 1, 500)
@@ -210,6 +213,7 @@ legend(),  title("Interpolation on 7 nodes");
 
 (demo-stability-equispaced-python)=
 ``````{dropdown} @demo-stability-equispaced
+:open:
 We choose a function over the interval $[0,1]$. 
 
 ```{code-cell} 
@@ -253,6 +257,7 @@ The error initially decreases as one would expect but then begins to grow. Both 
 
 (demo-stability-errfun-python)=
 ``````{dropdown} @demo-stability-errfun
+:open:
 We plot $|\Phi(x)|$ over the interval $[-1,1]$ with equispaced nodes for different values of $n$. 
 
 ```{code-cell} 
@@ -273,6 +278,7 @@ Each time $\Phi$ passes through zero at an interpolation node, the value on the 
 
 (demo-stability-runge-python)=
 ``````{dropdown} @demo-stability-runge
+:open:
 This function has infinitely many continuous derivatives on the entire real line and looks easy to approximate over $[-1,1]$.
 
 ```{code-cell} 
@@ -323,6 +329,7 @@ The convergence in the middle can't get any better than machine precision relati
 
 (demo-stability-errcheb-python)=
 ``````{dropdown} @demo-stability-errcheb
+:open:
 Now we look at the error indicator function $\Phi$ for Chebyshev node sets.
 
 ```{code-cell} 
@@ -345,6 +352,7 @@ In contrast to the equispaced case, $|\Phi|$ decreases exponentially with $n$ al
 
 (demo-stability-rungefix-python)=
 ``````{dropdown} @demo-stability-rungefix
+:open:
 Here again is the function from {numref}`Demo {number} <demo-stability-runge>` that provoked the Runge phenomenon when using equispaced nodes.
 
 ```{code-cell} 
@@ -372,6 +380,7 @@ By degree 16 the error is uniformly within machine epsilon, and, importantly, it
 
 (demo-stability-spectral-python)=
 ``````{dropdown} @demo-stability-spectral
+:open:
 On the left, we use a log-log scale, which makes second-order algebraic convergence $O(n^{-4})$ a straight line. On the right, we use a log-linear scale, which makes spectral convergence $O(K^{-n})$ linear.
 
 ```{code-cell} 
@@ -400,6 +409,7 @@ legend();
 
 (demo-orthogonal-approx-python)=
 ``````{dropdown} @demo-orthogonal-approx
+:open:
 Let's approximate $e^x$ over the interval $[−1,1]$. We can sample it at, say, 15 points, and find the best-fitting straight line to that data.
 
 ```{code-cell}
@@ -458,6 +468,7 @@ print(results)
 
 (demo-trig-interp-python)=
 ``````{dropdown} @demo-trig-interp
+:open:
 We will get a cardinal function without using an explicit formula, just by passing data that is 1 at one node and 0 at the others.
 ```{tip}
 :class: dropdown
@@ -518,6 +529,7 @@ title("Convergence of trig interpolation");
 
 (demo-trig-fft-python)=
 ``````{dropdown} @demo-trig-fft
+:open:
 This function has frequency content at $2\pi$, $-2\pi$, and $\pi$. 
 
 ```{code-cell}
@@ -568,6 +580,7 @@ The Fourier coefficients of smooth functions decay exponentially in magnitude as
 
 (demo-integration-ellipse-python)=
 ``````{dropdown} @demo-integration-ellipse
+:open:
 ```{code-cell}
 f = lambda t: pi * sqrt(cos(pi * t) ** 2 + sin(pi * t) ** 2 / 4)
 N = arange(4, 48, 6)
@@ -588,6 +601,7 @@ The approximations gain about one digit of accuracy for each constant increment 
 
 (demo-integration-compare-python)=
 ``````{dropdown} @demo-integration-compare
+:open:
 First consider the integral 
 
 $$
@@ -673,6 +687,7 @@ At the core of `intadapt` is a fourth-order formula, and the results track that 
 
 (demo-improper-decay-python)=
 ``````{dropdown} @demo-improper-decay
+:open:
 ```{code-cell}
 f = lambda x: 1 / (1 + x**2)
 x = linspace(-4, 4, 500)
@@ -695,6 +710,7 @@ This graph suggests that we capture all of the integrand values that are larger 
 
 (demo-improper-intinf-python)=
 ``````{dropdown} @demo-improper-intinf
+:open:
 ```{code-cell}
 :tags: hide-input
 f = lambda x: 1 / (1 + x**2)
@@ -721,6 +737,7 @@ Both methods are roughly fourth-order due to Simpson's formula in the underlying
 
 (demo-improper-intsing-python)=
 ``````{dropdown} @demo-improper-intsing
+:open:
 
 ```{code-cell}
 :tags: hide-input

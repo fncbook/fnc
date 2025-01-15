@@ -41,7 +41,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -49,6 +49,7 @@ FNC_init
 
 (demo-tensorprod-gridfun-matlab)=
 ``````{dropdown} @demo-tensorprod-gridfun
+:open:
 Here is the grid from {numref}`Example {number} <example-tensorprod-smallgrid>`.
 
 ```{code-cell}
@@ -92,6 +93,7 @@ xlabel("x"),  ylabel("y")
 
 (demo-tensorprod-disksphere-matlab)=
 ``````{dropdown} @demo-tensorprod-disksphere
+:open:
 For a function given in polar form, such as $f(r,\theta)=1-r^4$, construction of a function over the unit disk is straightforward using a grid in $(r,\theta)$ space.
 
 ```{code-cell}
@@ -122,6 +124,7 @@ In such functions the values along the line $r=0$ must be identical, and the val
 
 (demo-tensorprod-diff-matlab)=
 ``````{dropdown} @demo-tensorprod-diff
+:open:
 We define a function and, for reference, its two exact partial derivatives.
 
 ```{code-cell}
@@ -178,6 +181,7 @@ Not surprisingly, the errors are largest where the derivatives themselves are la
 
 (demo-diffadv-vec-matlab)=
 ``````{dropdown} @demo-diffadv-vec
+:open:
 
 ```{code-cell}
 m = 4;  n = 3;
@@ -206,6 +210,7 @@ disp(unvec(vec(F)))
 
 (demo-diffadv-heat-matlab)=
 ``````{dropdown} @demo-diffadv-heat
+:open:
 
 ```{code-cell}
 m = 60;  n = 40;
@@ -281,6 +286,7 @@ close(vid)
 
 (demo-diffadv-advdiff-matlab)=
 ``````{dropdown} @demo-diffadv-advdiff
+:open:
 
 The first step is to define a discretization of the domain and the initial state.
 
@@ -351,6 +357,7 @@ close(vid)
 
 (demo-diffadv-wave-matlab)=
 ``````{dropdown} @demo-diffadv-wave
+:open:
 We start with the discretization and initial condition.
 
 ```{code-cell}
@@ -433,6 +440,7 @@ close(vid)
 
 (demo-laplace-kron-matlab)=
 ``````{dropdown} @demo-laplace-kron
+:open:
 
 ```{code-cell}
 A = [1, 2; -2, 0];
@@ -464,6 +472,7 @@ kron(A, B)
 
 (demo-laplace-fd-matlab)=
 ``````{dropdown} @demo-laplace-fd
+:open:
 We make a crude discretization for illustrative purposes.
 
 ```{code-cell}
@@ -532,6 +541,7 @@ U = unvec(u)
 
 (demo-laplace-poisson-matlab)=
 ``````{dropdown} @demo-laplace-poisson
+:open:
 
 First we define the problem on $[0,1]\times[0,2]$.
 
@@ -571,6 +581,7 @@ title("Error")
 
 (demo-nonlinear2d-mems-matlab)=
 ``````{dropdown} @demo-nonlinear2d-mems
+:open:
 All we need to define are $\phi$ from {eq}`nonlinpdepde` for the PDE, and a trivial zero function for the boundary condition.
 
 ```{code-cell}
@@ -624,6 +635,7 @@ format
 
 (demo-nonlinear-advdiff-matlab)=
 ``````{dropdown} @demo-nonlinear-advdiff
+:open:
 
 ```{code-cell}
 phi = @(X, Y, U, Ux, Uxx, Uy, Uyy) 1 - Ux - 2*Uy + 0.05*(Uxx + Uyy);
@@ -646,6 +658,7 @@ title("Steady advection–diffusion")
 
 (demo-nonlinear2d-allencahn-matlab)=
 ``````{dropdown} @demo-nonlinear2d-allencahn
+:open:
 
 The following defines the PDE and a nontrivial Dirichlet boundary condition for the square $[0,1]^2$.
 

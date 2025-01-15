@@ -24,8 +24,8 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
-FNC_init
+cd  /Users/driscoll/Documents/GitHub/fnc/matlab
+FNC_init;
 ```
 
 ### 1.1 @section-intro-floating-point
@@ -79,7 +79,7 @@ accurate_digits = -log10(rel_accuracy)
 
 (demo-float-double-matlab)=
 ``````{dropdown} @demo-float-double
-:open: false
+:open:
 In MATLAB, values are double-precision floats unless declared otherwise. 
 
 ```{code-cell}
@@ -130,7 +130,7 @@ format short e
 
 (demo-float-arithmetic-matlab)=
 ``````{dropdown} @demo-float-arithmetic
-:open: false
+:open:
 
 There is no double-precision number between $1$ and $1+\epsilon_\text{mach}$. Thus the following difference is zero despite its appearance.
 
@@ -151,7 +151,7 @@ This is now the expected result. But we have found a rather shocking breakdown o
 
 (demo-condition-roots-matlab)=
 ``````{dropdown} @demo-condition-roots
-:open: false
+:open: 
 
 The polynomial $p(x) = \frac{1}{3}(x-1)(x-1-\epsilon)$ has roots $1$ and $1+\epsilon$. For small values of $\epsilon$, the roots are ill-conditioned. 
 
@@ -201,7 +201,7 @@ This matches the observation pretty well.
 
 (demo-algorithms-horner-matlab)=
 ``````{dropdown} @demo-algorithms-horner
-:open: false
+:open: 
 Here we show how to use {numref}`Function {number} <function-horner>` to evaluate a polynomial. Let us define a vector of the coefficients of $p(x)=(x-1)^3=x^3-3x^2+3x-1$, in ascending degree order.
 
 ```{code-cell}
@@ -225,7 +225,7 @@ The comments at the start of {numref}`Function {number} <function-horner>` are d
 
 (demo-stability-quadbad-matlab)= 
 ``````{dropdown} @demo-stability-quadbad
-:open: false
+:open: 
 
 ```{index} ! MATLAB; scientific notation
 ```
@@ -265,6 +265,7 @@ Using {eq}`condition-chain`, the chain rule for condition numbers, the condition
 
 (demo-stability-quadgood-matlab)=
 ``````{dropdown} @demo-stability-quadgood
+:open:
 We repeat the rootfinding experiment of {numref}`Demo %s <demo-stability-quadbad>` with an alternative algorithm.
 
 ```{code-cell}
@@ -292,8 +293,7 @@ abs(x2 - 1e-6) / 1e-6
 
 (demo-stability-roots-matlab)=
 ``````{dropdown} @demo-stability-roots
-:open: false
-
+:open: 
 
 Our first step is to construct a polynomial with six known roots.
 ```{tip}

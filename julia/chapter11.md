@@ -49,6 +49,7 @@ include("FNC_init.jl")
 
 (demo-blackscholes-solve-julia)=
 ``````{dropdown} @demo-blackscholes-solve
+:open:
 We consider the Black–Scholes problem for the following parameter values:
 
 ```{code-cell}
@@ -65,7 +66,7 @@ x = h * (0:m)
 n = 1000;  τ = T / n;
 t = τ * (0:n)
 λ = τ / h^2
-μ = τ / h
+μ = τ / h;
 ```
 
 We set the initial condition and then march forward in time.
@@ -107,6 +108,7 @@ plot(x, V[:, idx];
 Alternatively, here is an animation of the solution.
 
 ```{code-cell}
+:tags: remove-output
 anim = @animate for j in 1:10:n+1
     plot(x, V[:, j];
         xaxis=(L"S"),  yaxis=([0,6],L"v(S,t)"),
@@ -117,11 +119,14 @@ end
 mp4(anim, "figures/black-scholes-6.mp4")
 ```
 
+![Black–Scholes solution](figures/black-scholes-6.mp4)
+
 The results are easy to interpret, recalling that the time variable really means *time until strike*. Say you are close to the option's strike time. If the current stock price is, say, $S=2$, then it's not likely that the stock will end up over the strike price $K=3$, and therefore the option has little value. On the other hand, if presently $S=3$, then there are good odds that the option will be exercised at the strike time, and you will need to pay a substantial portion of the stock price in order to take advantage. As the time to strike increases, there is an expectation that the stock price is more likely to rise somewhat, making the value of the option larger at each fixed $S$. 
 ``````
 
 (demo-blackscholes-unstable-julia)=
 ``````{dropdown} @demo-blackscholes-unstable
+:open:
 Let's try to do everything the same as in {numref}`Demo {number} <demo-blackscholes-solve>`, but extending the simulation time to $T=8$.
 
 ```{code-cell}
@@ -142,9 +147,9 @@ for j in 1:n
         diff1 = (Vj[i+1] - Vj[i-1])
         diff2 = (Vj[i+1] - 2Vj[i] + Vj[i-1])
         V[i,j+1] = Vj[i] +
-            (λ * σ^2 * x[i]^2 / 2) * diff2 
-            + (r * x[i] * μ) / 2 * diff1 
-            - (r * τ) * Vj[i]
+            (λ * σ^2 * x[i]^2 / 2) * diff2 +
+            (r * x[i] * μ) / 2 * diff1 -
+            (r * τ) * Vj[i]
     end   
 end
 
@@ -157,6 +162,7 @@ plot(x, V[:, idx];
 ```
 
 ```{code-cell}
+:tags: remove-output
 anim = @animate for j in 1:10:n+1 
     plot(x, V[:, j];
         xaxis=(L"S"),  yaxis=([0,6],L"v(S,t)"),
@@ -166,6 +172,8 @@ end
 mp4(anim, "figures/black-scholes-8.mp4")
 ```
 
+![Trouble in Black–Scholes solution](figures/black-scholes-8.mp4)
+
 This so-called solution is nonsense!
 ``````
 
@@ -173,6 +181,7 @@ This so-called solution is nonsense!
 
 (demo-methodlines-heatFE-julia)=
 ``````{dropdown} @demo-methodlines-heatFE
+:open:
 Let's implement the method of {numref}`Example {number} <example-methodlines-heatFE>` with second-order space semidiscretization.
 
 ```{code-cell}
@@ -216,7 +225,7 @@ plot(x, U[:, plot_idx];
 Things seem to start well, with the initial peak widening and shrinking. But then there is a nonphysical growth in the solution.
 
 ```{code-cell}
-:tags: hide-input
+:tags: hide-input, remove-output
 anim = @animate for j in 1:101
     plot(x, U[:, j];
     label=@sprintf("t=%.5f", t[j]),
@@ -225,6 +234,8 @@ anim = @animate for j in 1:101
 end
 mp4(anim, "figures/diffusionFE.mp4")
 ```
+
+![Instability in Euler solution](figures/diffusionFE.mp4)
 
 The growth in norm is exponential in time.
 
@@ -238,6 +249,7 @@ plot(t[1:1000], M[1:1000];
 
 (demo-methodlines-heatBE-julia)=
 ``````{dropdown} @demo-methodlines-heatBE
+:open:
 Now we apply backward Euler to the heat equation. We will reuse the setup from {numref}`Demo {number} <demo-methodlines-heatFE>`. Since the matrix in {eq}`BExx` never changes during the time stepping, we do the necessary LU factorization only once.
 
 ```{code-cell}
@@ -262,7 +274,7 @@ plot(x,U[:, idx];
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: hide-input, remove-output
 anim = @animate for j in 1:20:n+1
     plot(x, U[:, j];
     label=@sprintf("t=%.5f", t[j]),
@@ -271,12 +283,14 @@ anim = @animate for j in 1:20:n+1
 end
 mp4(anim, "figures/diffusionBE.mp4")
 ```
+![Stable Backward Euler solution](figures/diffusionBE.mp4)
 
 This solution looks physically plausible, as the large concentration in the center diffuses outward until the solution is essentially constant. Observe that the solution remains periodic in space for all time.
 ``````
 
 (demo-methodlines-auto-julia)=
 ``````{dropdown} @demo-methodlines-auto
+:open:
 We set up the semidiscretization and initial condition in $x$ just as before.
 
 ```{code-cell}
@@ -310,7 +324,7 @@ plt
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: hide-input, remove-output
 anim = @animate for j in 1:20:1600
     plot(x, u[j];
     label=@sprintf("t=%.4f", t[j]),
@@ -319,6 +333,9 @@ anim = @animate for j in 1:20:1600
 end
 mp4(anim, "figures/diffusionRK23.mp4")
 ```
+
+![RK23 solution](figures/diffusionRK23.mp4)
+
 
 The solution appears to be correct. But the number of time steps that were selected automatically is surprisingly large, considering how smoothly the solution changes.
 
@@ -340,6 +357,7 @@ The number of steps selected is reduced by a factor of more than 100!
 
 (demo-absstab-regions-julia)=
 ``````{dropdown} @demo-absstab-regions
+:open:
 Euler and Backward Euler time-stepping methods were used to solve $\mathbf{u}'=\mathbf{D}_{xx}\mathbf{u}$.
 
 ```{code-cell}
@@ -405,6 +423,7 @@ scatter!(real(ζ), imag(ζ);
 
 (demo-stiffness-oregon-julia)=
 ``````{dropdown} @demo-stiffness-oregon
+:open:
 In {numref}`Example {number} <example-stiffness-oregon>` we derived a Jacobian matrix for the Oregonator model. Here is a numerical solution of the ODE.
 
 ```{code-cell}
@@ -450,6 +469,7 @@ You can see that there is one eigenvalue that ranges over a wide portion of the 
 
 (demo-stiffness-explicit-julia)=
 ``````{dropdown} @demo-stiffness-explicit
+:open:
 The `Rodas4P` solver is good for stiff problems, and needs few time steps to solve the Oregonator from {numref}`Demo {number} <demo-stiffness-oregon>`.
 
 ```{code-cell}
@@ -493,6 +513,7 @@ Roughly speaking, the $\zeta$ values stay within or close to the RK2 stability r
 
 (demo-boundaries-heat-julia)=
 ``````{dropdown} @demo-boundaries-heat
+:open:
 First, we define functions for the PDE and each boundary condition.
 
 ```{code-cell}
@@ -522,7 +543,7 @@ plt
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: hide-input, remove-output
 anim = @animate for t in range(0,0.75,length=201) 
     plot(x, u(t);
         label=@sprintf("t=%.2f", t),  legend=:topleft,
@@ -531,10 +552,13 @@ anim = @animate for t in range(0,0.75,length=201)
 end
 mp4(anim, "figures/boundaries-heat.mp4", fps=30)
 ```
+![Heat equation with Dirichlet boundaries](figures/boundaries-heat.mp4)
+
 ``````
 
 (demo-boundaries-bratu-julia)=
 ``````{dropdown} @demo-boundaries-bratu
+:open:
 
 ```{code-cell}
 ϕ = (t, x, u, uₓ, uₓₓ) -> u^2 + uₓₓ
@@ -545,7 +569,7 @@ x, u = FNC.parabolic(ϕ, (0, 1), 60, g₁, g₂, (0, 0.1), init);
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: hide-input, remove-output
 anim = @animate for t in range(0, 0.1, length=101) 
     plot(x, u(t);
         label=@sprintf("t=%.4f", t),  legend=:topleft,
@@ -554,10 +578,13 @@ anim = @animate for t in range(0, 0.1, length=101)
 end
 mp4(anim, "figures/boundaries-source.mp4", fps=30)
 ```
+![Heat equation with source](figures/boundaries-source.mp4)
+
 ``````
 
 (demo-boundaries-bs-julia)=
 ``````{dropdown} @demo-boundaries-bs
+:open:
 
 ```{code-cell}
 K = 3;  σ = 0.06;  r = 0.08;  Smax = 8;
@@ -572,7 +599,7 @@ x, u = FNC.parabolic(ϕ, (0, Smax), 80, g₁, g₂, (0, 15), u₀);
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: hide-input, remove-output
 anim = @animate for t in range(0, 15, 151) 
     plot(x, u(t);
         label=@sprintf("t=%.4f", t),  legend=:topleft,
@@ -581,6 +608,8 @@ anim = @animate for t in range(0, 15, 151)
 end
 mp4(anim, "figures/boundaries-bs.mp4", fps=30)
 ```
+
+![Black–Scholes equation with boundaries](figures/boundaries-bs.mp4)
 
 Recall that $u$ is the value of the call option, and time runs backward from the strike time. The longer the horizon, the more value the option has due to anticipated growth in the stock price.
 ``````

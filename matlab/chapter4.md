@@ -59,14 +59,15 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
-FNC_init
+cd  /Users/driscoll/Documents/GitHub/fnc/matlab
+FNC_init;
 ```
 
 ### 4.1 @section-nonlineqn-rootproblem
 
 (demo-rootproblem-bessel-matlab)=
 ``````{dropdown} @demo-rootproblem-bessel
+:open:
 
 ```{code-cell}
 J3 = @(x) besselj(3,x);
@@ -114,6 +115,7 @@ scatter(omega, J3(omega), '<')
 
 (demo-roots-cond-matlab)=
 ``````{dropdown} @demo-roots-cond
+:open:
 Consider first the function
 
 ```{code-cell}
@@ -130,9 +132,10 @@ fplot(f, interval)
 grid on, hold on
 fplot(@(x) f(x) + 0.02, interval, 'k')
 fplot(@(x) f(x) - 0.02, interval, 'k')
-axis equal 
+axis equal,  yticks([0])
+ylim([-0.1, 0.1])
 xlabel('x'), ylabel('f(x)')
-title(('Well-conditioned root'));
+title('Well-conditioned root')
 ```
 
 The possible values for a perturbed root all lie within the interval where the ribbon intersects the $x$-axis. The width of that zone is about the same as the vertical thickness of the ribbon.
@@ -150,7 +153,8 @@ axis(axis), cla
 fplot(f, interval)
 fplot(@(x) f(x) + 0.02, interval, 'k')
 fplot(@(x) f(x) - 0.02, interval, 'k')
-title('Poorly conditioned root')   
+ylim([-0.1, 0.1]), yticks([0])
+title('Poorly conditioned root') 
 ```
 
 The vertical displacements in this picture are exactly the same as before. But the potential _horizontal_ displacement of the root is much wider. In fact, if we perturb the function entirely upward by the amount drawn here, the root disappears!
@@ -159,6 +163,7 @@ The vertical displacements in this picture are exactly the same as before. But t
 ### 4.2 @section-nonlineqn-fixed-point
 (demo-fp-spiral-matlab)=
 ``````{dropdown} @demo-fp-spiral
+:open:
 Let's convert the roots of a quadratic polynomial $f(x)$ to a fixed point problem.
 
 ```{code-cell}
@@ -242,6 +247,7 @@ This time, the iteration is pushing us _away from_ the correct answer.
 
 (demo-fp-converge-matlab)=
 ``````{dropdown} @demo-fp-converge
+:open:
 We revisit {numref}`Demo %s <demo-fp-spiral>` and investigate the observed convergence more closely. Recall that above we calculated $g'(p)\approx-0.42$ at the convergent fixed point.
 
 ```{code-cell}
@@ -269,7 +275,7 @@ err = abs(x - r(1));
 clf
 semilogy(err, 'o-'), axis tight
 xlabel('iteration'),  ylabel('error')
-title(('Convergence of fixed-point iteration'));
+title('Convergence of fixed-point iteration')
 ```
 
 It's quite clear that the convergence quickly settles into a linear rate. We could estimate this rate by doing a least-squares fit to a straight line. Keep in mind that the values for small $k$ should be left out of the computation, as they don't represent the linear trend.
@@ -296,6 +302,7 @@ The methods for finding $\sigma$ agree well.
 ### 4.3 @section-nonlineqn-newton
 (demo-newton-line-matlab)=
 ``````{dropdown} @demo-newton-line
+:open:
 
 Suppose we want to find a root of the function
 
@@ -313,16 +320,17 @@ From the graph, it is clear that there is a root near $x=1$. So we call that our
 ```{code-cell}
 x1 = 1;
 y1 = f(x1)
-hold on, scatter(x1, y1)
+hold on, scatter(x1, y1, 'k')
 ```
 
 Next, we can compute the tangent line at the point $\bigl(x_1,f(x_1)\bigr)$, using the derivative.
 
 ```{code-cell}
-dfdx = @(x) exp(x) .* (x + 1);
-slope1 = dfdx(x1);
+df_dx = @(x) exp(x) .* (x + 1);
+slope1 = df_dx(x1);
 tangent1 = @(x) y1 + slope1 * (x - x1);
-fplot(tangent1, [0, 1.5],'--')
+axis(axis)
+fplot(tangent1, [0, 1.5], 'k--')
 title('Function and tangent line')    
 
 ```
@@ -331,7 +339,7 @@ In lieu of finding the root of $f$ itself, we settle for finding the root of the
 
 ```{code-cell}
 x2 = x1 - y1 / slope1
-scatter(x2, 0)
+scatter(x2, 0, 'r')
 title('Root of the tangent')    
 ```
 
@@ -342,13 +350,15 @@ y2 = f(x2)
 The residual (i.e., value of $f$) is smaller than before, but not zero. So we repeat the process with a new tangent line based on the latest point on the curve.
 
 ```{code-cell}
-cla, fplot(f, [0.8, 0.9])
-scatter(x2, y2)
-slope2 = dfdx(x2);
+cla,  axis auto
+fplot(f, [0.83, 0.88])
+scatter(x2, y2, 'k')
+slope2 = df_dx(x2);
 tangent2 = @(x) y2 + slope2 * (x - x2);
-fplot(tangent2, [0.8, 0.9], '--')
+axis(axis)
+fplot(tangent2, [0.8, 0.9], 'k--')
 x3 = x2 - y2 / slope2;
-scatter(x3, 0)
+scatter(x3, 0, 'r')
 title('Next iteration')    
 ```
 
@@ -361,11 +371,12 @@ Judging by the residual, we appear to be getting closer to the true root each ti
 
 (demo-newton-converge-matlab)=
 ``````{dropdown} @demo-newton-converge
+:open:
 We again look at finding a solution of $x e^x=2$ near $x=1$. To apply Newton's method, we need to calculate values of both the residual function $f$ and its derivative.
 
 ```{code-cell}
 f = @(x) x.*exp(x) - 2;
-dfdx = @(x) exp(x).*(x+1);
+df_dx = @(x) exp(x).*(x+1);
 ```
 
 We don't know the exact root, so we use `nlsolve` to determine a proxy for it.
@@ -379,7 +390,7 @@ We use $x_1=1$ as a starting guess and apply the iteration in a loop, storing th
 ```{code-cell}
 x = 1;
 for k = 1:6
-    x(k+1) = x(k) - f(x(k)) / dfdx(x(k));
+    x(k+1) = x(k) - f(x(k)) / df_dx(x(k));
 end
 x
 ```
@@ -403,6 +414,7 @@ The clear convergence to 2 above constitutes good evidence of quadratic converge
 
 (demo-newton-usage-matlab)=
 ``````{dropdown} @demo-newton-usage
+:open:
 ```{index} ! Julia; enumerate
 ```
 
@@ -439,6 +451,7 @@ legend('h(x)', 'inverse', 'y=x');
 
 (demo-secant-line-matlab)=
 ``````{dropdown} @demo-secant-line
+:open:
 
 
 We return to finding a root of the equation $x e^x=2$.
@@ -488,6 +501,7 @@ y4 = f(x4)
 
 (demo-secant-converge-matlab)=
 ``````{dropdown} @demo-secant-converge
+:open:
 We check the convergence of the secant method from {numref}`Demo %s <demo-secant-line>`. 
 
 ```{code-cell}
@@ -520,6 +534,7 @@ As expected, this settles in at around 1.618.
 
 (demo-secant-iqi-matlab)=
 ``````{dropdown} @demo-secant-iqi
+:open:
 Here we look for a root of $x+\cos(10x)$ that is close to 1.
 
 ```{code-cell}
@@ -603,6 +618,7 @@ ratios = logerr(2:end) ./ logerr(1:end-1)
 ### 4.5 @section-nonlineqn-newtonsys
 (demo-newtonsys-converge-matlab)=
 ``````{dropdown} @demo-newtonsys-converge
+:open:
 A system of nonlinear equations is defined by its residual and Jacobian.
 ```{tip}
 :class: dropdown
@@ -641,6 +657,7 @@ This sequence looks to be nearly doubling at each iteration, which is a good sig
 ### 4.6 @section-nonlineqn-quasinewton
 (demo-quasi-levenberg-matlab)=
 ``````{dropdown} @demo-quasi-levenberg
+:open:
 
 To solve a nonlinear system, we need to code only the function defining the system, and not its Jacobian.
 ```{tip}
@@ -668,6 +685,7 @@ log10( abs(x(1, 1:end-1) - r(1)) )'
 ### 4.7 @section-nonlineqn-nlsq
 (demo-nlsq-converge-matlab)=
 ``````{dropdown} @demo-nlsq-converge
+:open:
 We will observe the convergence of {numref}`Function {number} <function-levenberg>` for different levels of the minimum least-squares residual. We start with a function mapping from $\real^2$ into $\real^3$, and a point that will be near the optimum.
 ```{code-cell}
 g = @(x) [sin(x(1) + x(2)); cos(x(1) - x(2)); exp(x(1) - x(2))];
@@ -705,6 +723,7 @@ In the least perturbed case, where the minimized residual is less than $10^{-3}$
 
 (demo-nlsq-MM-matlab)=
 ``````{dropdown} @demo-nlsq-MM
+:open:
 ```{code-cell}
 m = 25; V = 2; Km = 0.5;
 s = linspace(0.05, 6, m)';

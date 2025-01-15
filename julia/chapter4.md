@@ -99,6 +99,7 @@ include("FNC_init.jl")
 ### 4.1 @section-nonlineqn-rootproblem
 (demo-rootproblem-bessel-julia)=
 ``````{dropdown} @demo-rootproblem-bessel
+:open:
 
 ```{code-cell}
 using Plots, SpecialFunctions
@@ -147,6 +148,7 @@ scatter!(r, J₃.(r), title="Roots and other Bessel values")
 
 (demo-roots-cond-julia)=
 ``````{dropdown} @demo-roots-cond
+:open:
 Consider first the function
 
 ```{code-cell}
@@ -198,6 +200,7 @@ The vertical displacements in this picture are exactly the same as before. But t
 
 (demo-fp-spiral-julia)=
 ``````{dropdown} @demo-fp-spiral
+:open:
 Let's convert the roots of a quadratic polynomial $f(x)$ to a fixed point problem.
 
 ```{code-cell}
@@ -286,6 +289,7 @@ This time, the iteration is pushing us _away from_ the correct answer.
 
 (demo-fp-converge-julia)=
 ``````{dropdown} @demo-fp-converge
+:open:
 We revisit {numref}`Demo %s <demo-fp-spiral>` and investigate the observed convergence more closely. Recall that above we calculated $g'(p)\approx-0.42$ at the convergent fixed point.
 
 ```{code-cell}
@@ -345,6 +349,7 @@ The methods for finding $\sigma$ agree well.
 
 (demo-newton-line-julia)=
 ``````{dropdown} @demo-newton-line
+:open:
 
 Suppose we want to find a root of the function
 
@@ -413,6 +418,7 @@ Judging by the residual, we appear to be getting closer to the true root each ti
 
 (demo-newton-converge-julia)=
 ``````{dropdown} @demo-newton-converge
+:open:
 We again look at finding a solution of $x e^x=2$ near $x=1$. To apply Newton's method, we need to calculate values of both the residual function $f$ and its derivative.
 
 ```{code-cell}
@@ -474,6 +480,7 @@ The clear convergence to 2 above constitutes good evidence of quadratic converge
 
 (demo-newton-usage-julia)=
 ``````{dropdown} @demo-newton-usage
+:open:
 ```{index} ! Julia; enumerate
 ```
 
@@ -504,6 +511,7 @@ plot!(x -> x, 0, maximum(y), label="", l=(:dash, 1), color=:black)
 ### 4.4 @section-nonlineqn-secant
 (demo-secant-line-julia)=
 ``````{dropdown} @demo-secant-line
+:open:
 
 
 We return to finding a root of the equation $x e^x=2$.
@@ -555,6 +563,7 @@ x₄ = x₃ - y₃ / m₃
 
 (demo-secant-converge-julia)=
 ``````{dropdown} @demo-secant-converge
+:open:
 We check the convergence of the secant method from {numref}`Demo %s <demo-secant-line>`. Again we will use extended precision to get a longer sequence than double precision allows.
 
 ```{code-cell}
@@ -587,6 +596,7 @@ As expected, this settles in at around 1.618.
 
 (demo-secant-iqi-julia)=
 ``````{dropdown} @demo-secant-iqi
+:open:
 Here we look for a root of $x+\cos(10x)$ that is close to 1.
 
 ```{code-cell}
@@ -667,6 +677,7 @@ The convergence is probably superlinear at a rate of $\alpha=1.8$ or so.
 
 (demo-newtonsys-converge-julia)=
 ``````{dropdown} @demo-newtonsys-converge
+:open:
 A system of nonlinear equations is defined by its residual and Jacobian.
 ```{tip}
 :class: dropdown
@@ -720,6 +731,7 @@ The ratio is neatly converging toward 2, which is expected for quadratic converg
 
 (demo-quasi-levenberg-julia)=
 ``````{dropdown} @demo-quasi-levenberg
+:open:
 To solve a nonlinear system, we need to code only the function defining the system, and not its Jacobian.
 
 ```{code-cell}
@@ -758,6 +770,7 @@ ratios = [NaN; [logerr[i+1] / logerr[i] for i in 1:length(logerr)-1]]
 
 (demo-nlsq-converge-julia)=
 ``````{dropdown} @demo-nlsq-converge
+:open:
 We will observe the convergence of {numref}`Function {number} <function-levenberg>` for different levels of the minimum least-squares residual. We start with a function mapping from $\real^2$ into $\real^3$, and a point that will be near the optimum.
 
 ```{code-cell}
@@ -795,6 +808,7 @@ In the least perturbed case, where the minimized residual is less than $10^{-3}$
 
 (demo-nlsq-MM-julia)=
 ``````{dropdown} @demo-nlsq-MM
+:open:
 ```{code-cell}
 m = 25;
 s = range(0.05, 6, length=m)

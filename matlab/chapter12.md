@@ -12,7 +12,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -20,6 +20,7 @@ FNC_init
 
 (demo-traffic-advection-matlab)=
 ``````{dropdown} @demo-traffic-advection
+:open:
 
  In the following definition we allow the velocity $c$ to be specified as a parameter.
 
@@ -53,7 +54,7 @@ title('Advection equation')
 An animation shows the solution nicely. The bump moves with speed 2 to the right, reentering on the left as it exits to the right because of the periodic conditions. 
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input, remove-output]
 clf
 plot(x, U(:, 1))
 hold on,  grid on
@@ -70,20 +71,15 @@ for frame = 1:length(t)
     writeVideo(vid, frame2im(getframe(gcf)));
 end
 close(vid)
-close(gcf)
 ```
 
 ![Advection equation with periodic boundary](figures/advection-periodic.mp4)
 
 ``````
 
-```{code-cell}
-:tags: [remove-cell]
-FNC_init
-```
-
 (demo-traffic-solve-matlab)=
 ``````{dropdown} @demo-traffic-solve
+:open:
 The following are parameters and a function relevant to defining the problem. 
 
 ```{code-cell}
@@ -135,7 +131,7 @@ legend(location="northwest")
 The bump slowly moves backward on the roadway, spreading out and gradually fading away due to the presence of diffusion.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input, remove-output]
 clf
 plot(x, RHO(:, 1))
 hold on,  grid on
@@ -152,7 +148,6 @@ for frame = 1:length(t)
     writeVideo(vid, frame2im(getframe(gcf)));
 end
 close(vid)
-close(gcf)
 ```
 
 ![Traffic flow](figures/traffic-small.mp4)
@@ -169,7 +164,7 @@ RHO = sol.Solution;
 
 ```{code-cell}
 :tags: hide-input
-FNC_init    % open new figure
+clf
 for plot_idx = 1:16:81
     str = sprintf("t = %.2f", t(plot_idx));
     plot(x, RHO(:, plot_idx), displayname=str)
@@ -181,7 +176,7 @@ legend(location="northwest")
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input, remove-output]
 clf
 plot(x, RHO(:, 1))
 hold on,  grid on
@@ -198,7 +193,6 @@ for frame = 1:length(t)
     writeVideo(vid, frame2im(getframe(gcf)));
 end
 close(vid)
-close(gcf)
 ```
 
 ![Traffic jam](figures/traffic-jam.mp4)
@@ -207,14 +201,10 @@ In this case the density bump travels backward along the road. It also steepens 
 
 ``````
 
-```{code-cell}
-:tags: [remove-cell]
-FNC_init
-```
-
 ### 12.2 @section-advection-upwind
 (demo-upwind-cfl-matlab)=
 ``````{dropdown} @demo-upwind-cfl
+:open:
 
 ```{code-cell}
 [x, Dx] = diffper(400, [0, 1]);
@@ -256,6 +246,7 @@ ratio = num_steps_800 / num_steps_400
 
 (demo-upwind-direction-matlab)=
 ``````{dropdown} @demo-upwind-direction
+:open:
 If we solve advection over $[0,1]$ with velocity $c=-1$, the right boundary is in the upwind/inflow direction. Thus a well-posed boundary condition is $u(1,t)=0$.
 
 We'll pattern a solution after {numref}`Function {number} <function-parabolic>`. Since $u(x_m,t)=0$, we define the ODE interior problem {eq}`mol-interior` for $\mathbf{v}$ without $u_m$. For each evaluation of $\mathbf{v}'$, we must extend the data back to $x_m$ first.
@@ -290,7 +281,7 @@ title('Advection with inflow BC')
 We find that the hump gracefully exits out the downwind end.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input, remove-output]
 clf
 plot(x, u(0))
 hold on
@@ -307,7 +298,6 @@ for frame = 1:length(t)
     writeVideo(vid, frame2im(getframe(gcf)));
 end
 close(vid)
-close(gcf)
 ```
 
 ![Advection with inflow BC](figures/advection-inflow.mp4)
@@ -325,7 +315,6 @@ u = @(t) [zeros(1, length(t)); sol(t)];
 
 ```{code-cell}
 :tags: hide-input
-FNC_init
 contour(x, t, u(t)', 0.15:0.2:1)
 xlabel x,  ylabel t
 title('Advection with outflow BC')
@@ -334,7 +323,7 @@ title('Advection with outflow BC')
 This time, the solution blows up as soon as the hump runs into the boundary because there are conflicting demands there.
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input, remove-output]
 clf
 plot(x, u(0))
 hold on
@@ -351,21 +340,16 @@ for frame = 1:45
     writeVideo(vid, frame2im(getframe(gcf)));
 end
 close(vid)
-close(gcf)
 ```
 
 ![Advection with outflow BC](figures/advection-outflow.mp4)
 ``````
 
-```{code-cell}
-:tags: [remove-cell]
-FNC_init
-```
-
 ### 12.3 @section-advection-absstab
 
 (demo-absstab-advection-matlab)=
 ``````{dropdown} @demo-absstab-advection
+:open:
 For $c=1$ we get purely imaginary eigenvalues.
 
 ```{code-cell}
@@ -409,6 +393,7 @@ The A-stable backward Euler time stepping tells the exact opposite story: it wil
 
 (demo-absstab-advdiff-matlab)=
 ``````{dropdown} @demo-absstab-advdiff
+:open:
 The eigenvalues of advection-diffusion are near-imaginary for $\epsilon\approx 0$ and get closer to the negative real axis as $\epsilon$ increases.
 
 ```{code-cell}
@@ -430,6 +415,7 @@ title('Eigenvalues for advection-diffusion')
 
 (demo-absstab-inflow-matlab)=
 ``````{dropdown} @demo-absstab-inflow
+:open:
 Deleting the last row and column places all the eigenvalues of the discretization into the left half of the complex plane. 
 
 ```{code-cell}
@@ -460,6 +446,7 @@ Consequently all solutions decay exponentially to zero as $t\to\infty$. This mat
 
 (demo-wave-boundaries-matlab)=
 ``````{dropdown} @demo-wave-boundaries
+:open:
 
 ```{code-cell}
 c = 2;  m = 200;
@@ -520,7 +507,7 @@ title("Wave equation with boundaries")
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input, remove-output]
 clf
 plot(x, U(:, 1))
 hold on
@@ -537,7 +524,6 @@ for frame = 1:length(t)
     writeVideo(vid, frame2im(getframe(gcf)));
 end
 close(vid)
-close(gcf)
 ```
 
 ![Wave equation with boundaries](figures/wave-boundaries.mp4)
@@ -546,13 +532,9 @@ The original hump breaks into two pieces of different amplitudes, each traveling
 
 ``````
 
-```{code-cell}
-:tags: [remove-cell]
-FNC_init
-```
-
 (demo-wave-speed-matlab)=
 ``````{dropdown} @demo-wave-speed
+:open:
 
 We now use a wave speed that is discontinuous at $x=0$. 
 
@@ -580,7 +562,7 @@ title("Wave equation with variable speed")
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: [hide-input, remove-output]
 clf
 plot(x, U(:, 1))
 hold on
@@ -597,7 +579,6 @@ for frame = 1:length(t)
     writeVideo(vid, frame2im(getframe(gcf)));
 end
 close(vid)
-close(gcf)
 ```
 
 ![Wave equation with variable speed](figures/wave-speed.mp4)

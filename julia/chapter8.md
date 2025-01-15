@@ -74,6 +74,7 @@ include("FNC_init.jl")
 
 (demo-structure-sparse-julia)=
 ``````{dropdown} @demo-structure-sparse
+:open:
 
 ```{tip}
 Julia functions to deal with sparse matrices are found in the `SparseArrays` package in the standard library.
@@ -129,6 +130,7 @@ end
 
 (demo-structure-fill-julia)=
 ``````{dropdown} @demo-structure-fill
+:open:
 ```{index} ! Julia; sprandsym
 ```
 
@@ -161,6 +163,7 @@ plt
 
 (demo-structure-sparseband-julia)=
 ``````{dropdown} @demo-structure-sparseband
+:open:
 
 ```{index} ! Julia; spdiagm
 ```
@@ -206,6 +209,7 @@ spy!(sparse(fact.U), m=2, subplot=2, title=L"\mathbf{U}", color=:blues)
 (demo-structure-linalg-julia)=
 
 ``````{dropdown} @demo-structure-linalg
+:open:
 The following generates a random sparse matrix with prescribed eigenvalues.
 
 ```{code-cell}
@@ -268,6 +272,7 @@ println("Time for dense solve: $t")
 
 (demo-power-one-julia)=
 ``````{dropdown} @demo-power-one
+:open:
 Here we choose a random 5×5 matrix and a random 5-vector.
 
 ```{code-cell}
@@ -310,6 +315,7 @@ end
 
 (demo-power-iter-julia)=
 ``````{dropdown} @demo-power-iter
+:open:
 We will experiment with the power iteration on a 5×5 matrix with prescribed eigenvalues and dominant eigenvalue at 1.
 
 ```{code-cell}
@@ -367,6 +373,7 @@ The results are very similar until the last few iterations, when the limited acc
 
 (demo-inviter-conv-julia)=
 ``````{dropdown} @demo-inviter-conv
+:open:
 We set up a $5\times 5$ triangular matrix with prescribed eigenvalues on its diagonal.
 
 ```{code-cell}
@@ -422,6 +429,7 @@ Hence the theoretical convergence rate is
 
 (demo-inviter-accel-julia)=
 ``````{dropdown} @demo-inviter-accel
+:open:
 ```{code-cell}
 λ = [1, -0.75, 0.6, -0.4, 0]
 # Make a triangular matrix with eigenvalues on the diagonal.
@@ -462,6 +470,7 @@ end
 
 (demo-subspace-unstable-julia)=
 ``````{dropdown} @demo-subspace-unstable
+:open:
 First we define a triangular matrix with known eigenvalues, and a random vector $b$.
 
 ```{code-cell}
@@ -503,6 +512,7 @@ plot(0:29, resid; m=:o,
 
 (demo-subspace-arnoldi-julia)=
 ``````{dropdown} @demo-subspace-arnoldi
+:open:
 We illustrate a few steps of the Arnoldi iteration for a small matrix.
 
 ```{code-cell}
@@ -555,6 +565,7 @@ K = [u A * u A * A * u];
 
 (demo-gmres-intro-julia)=
 ``````{dropdown} @demo-gmres-intro
+:open:
 We define a triangular matrix with known eigenvalues and a random vector $\mathbf{b}$.
 
 ```{code-cell}
@@ -593,6 +604,7 @@ plot(0:60, resid, m=:o,
 
 (demo-gmres-restart-julia)=
 ``````{dropdown} @demo-gmres-restart
+:open:
 The following experiments are based on a matrix resulting from discretization of a partial differential equation.
 
 ```{index} Julia; keyword function arguments
@@ -637,6 +649,7 @@ The "pure" GMRES curve is the lowest one. All of the other curves agree with it 
 
 (demo-minrescg-indefinite-julia)=
 ``````{dropdown} @demo-minrescg-indefinite
+:open:
 The following matrix is indefinite.
 
 ```{code-cell}
@@ -681,6 +694,7 @@ The upper bound turns out to be pessimistic here, especially in the later iterat
 
 (demo-minrescg-converge-julia)=
 ``````{dropdown} @demo-minrescg-converge
+:open:
 We will compare MINRES and CG on some quasi-random SPD problems.  The first matrix has a condition number of 100.
 
 ```{code-cell}
@@ -739,6 +753,7 @@ Both methods have an early superlinear phase that allow them to finish slightly 
 
 (demo-matrixfree-blur-julia)=
 ``````{dropdown} @demo-matrixfree-blur
+:open:
 We use a readily available test image.
 
 ```{code-cell}
@@ -772,6 +787,7 @@ plot(Gray.(Z), title="Blurred image")
 
 (demo-matrixfree-deblur-julia)=
 ``````{dropdown} @demo-matrixfree-deblur
+:open:
 We repeat the earlier process to blur an original image $\mathbf{X}$ to get $\mathbf{Z}$.
 
 ```{code-cell}
@@ -827,6 +843,7 @@ plot!(Gray.(Y), subplot=2, title="Deblurred")
 
 (demo-precond-diagonal-julia)=
 ``````{dropdown} @demo-precond-diagonal
+:open:
 Here is an SPD matrix that arises from solving partial differential equations.
 
 ```{code-cell}
@@ -871,6 +888,7 @@ The diagonal preconditioner cut down substantially on the number of iterations. 
 
 (demo-precond-gmres-julia)=
 ``````{dropdown} @demo-precond-gmres
+:open:
 Here is a nonsymmetric matrix arising from a probabilistic model in computational chemistry.
 
 ```{code-cell}

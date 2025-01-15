@@ -12,7 +12,7 @@ numbering:
 
 ```{code-cell}
 :tags: [remove-cell]
-cd  /Users/driscoll/Dropbox/Mac/Documents/GitHub/fnc/matlab
+cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 ```
 
@@ -20,6 +20,7 @@ FNC_init
 
 (demo-insight-graph-matlab)=
 ``````{dropdown} @demo-insight-graph
+:open:
 Here we create an adjacency matrix for a graph on four nodes.
 
 ```{code-cell}
@@ -57,6 +58,7 @@ plot(graph(bucky))
 
 (demo-insight-image-matlab)=
 ``````{dropdown} @demo-insight-image
+:open:
 ```{index} ! Julia; Images
 ```
 
@@ -93,6 +95,7 @@ A = double(A);
 
 (demo-evd-eigen-matlab)=
 ``````{dropdown} @demo-evd-eigen
+:open:
 
 ```{index} ! MATLAB; eig
 ```
@@ -139,6 +142,7 @@ norm(A * V - V * D)
 
 (demo-evd-bauerfike-matlab)=
 ``````{dropdown} @demo-evd-bauerfike
+:open:
 
 ```{index} MATLAB; adjoint, MATLAB; \'
 ```
@@ -224,6 +228,7 @@ The plot shows that some eigenvalues are much more affected than others. This si
 
 (demo-evd-francisqr-matlab)=
 ``````{dropdown} @demo-evd-francisqr
+:open:
 Let's start with a known set of eigenvalues and an orthogonal eigenvector basis.
 
 ```{code-cell}
@@ -265,6 +270,7 @@ A
 
 (demo-svd-props-matlab)=
 ``````{dropdown} @demo-svd-props
+:open:
 We verify some of the fundamental SVD properties using the built-in `svd` function.
 
 ```{index} ! MATLAB; svd
@@ -305,6 +311,7 @@ sigma_ratio = s(1) / s(end)
 
 (demo-symm-eig-rayleigh-matlab)=
 ``````{dropdown} @demo-symm-eig-rayleigh
+:open:
 We will use a symmetric matrix with a known EVD and eigenvalues equal to the integers from 1 to 20.
 
 ```{code-cell}
@@ -347,6 +354,7 @@ disp(table(delta, dif, variablenames=["perturbation size", "R(x) - lambda"]))
 
 (demo-dimreduce-hello-matlab)=
 ``````{dropdown} @demo-dimreduce-hello
+:open:
 We make an image from some text, then reload it as a matrix.
 
 ```{code-cell}
@@ -396,6 +404,7 @@ fprintf("compression ratio: %.1f", full_size / compressed_size)
 
 (demo-dimreduce-voting-matlab)=
 ``````{dropdown} @demo-dimreduce-voting
+:open:
 This matrix describes the votes on bills in the 111th session of the United States Senate. (The data set was obtained from [https://voteview.com].) Each row is one senator, and each column is a vote item.
 
 ```{code-cell}

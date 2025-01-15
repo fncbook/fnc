@@ -19,6 +19,7 @@ exec(open("FNC_init.py").read())
 
 (demo-traffic-advection-python)=
 ``````{dropdown} @demo-traffic-advection
+:open:
 
  In the following definition we allow the velocity $c$ to be specified as a parameter in the `ODEProblem`.
 
@@ -76,6 +77,7 @@ close()
 
 (demo-traffic-solve-python)=
 ``````{dropdown} @demo-traffic-solve
+:open:
 The following are parameters and a function relevant to defining the problem. 
 
 ```{code-cell}
@@ -185,6 +187,7 @@ In this case the density bump travels backward along the road. It also steepens 
 ### 12.2 @section-advection-upwind
 (demo-upwind-cfl-python)=
 ``````{dropdown} @demo-upwind-cfl
+:open:
 For time stepping, we use the adaptive explicit method `RK45`.
 
 ```{code-cell}
@@ -221,6 +224,7 @@ print(f"{len(sol.t) - 1} time steps taken for m = 800")
 
 (demo-upwind-direction-python)=
 ``````{dropdown} @demo-upwind-direction
+:open:
 If we solve advection over $[0,1]$ with velocity $c=-1$, the right boundary is in the upwind/inflow direction. Thus a well-posed boundary condition is $u(1,t)=0$.
 
 We'll pattern a solution after {numref}`Function {number} <function-parabolic>`. Since $u(x_m,t)=0$, we define the ODE interior problem {eq}`mol-interior` for $\mathbf{v}$ without $u_m$. For each evaluation of $\mathbf{v}'$, we must extend the data back to $x_m$ first.
@@ -323,6 +327,7 @@ close()
 
 (demo-absstab-advection-python)=
 ``````{dropdown} @demo-absstab-advection
+:open:
 For $c=1$ we get purely imaginary eigenvalues.
 
 ```{code-cell}
@@ -369,6 +374,7 @@ The A-stable backward Euler time stepping tells the exact opposite story: it wil
 
 (demo-absstab-advdiff-python)=
 ``````{dropdown} @demo-absstab-advdiff
+:open:
 The eigenvalues of advection-diffusion are near-imaginary for $\epsilon\approx 0$ and get closer to the negative real axis as $\epsilon$ increases.
 
 ```{code-cell}
@@ -386,6 +392,7 @@ title("Eigenvalues for advection-diffusion")
 
 (demo-absstab-inflow-python)=
 ``````{dropdown} @demo-absstab-inflow
+:open:
 Deleting the last row and column places all the eigenvalues of the discretization into the left half of the complex plane. 
 
 ```{code-cell}
@@ -413,6 +420,7 @@ Consequently all solutions decay exponentially to zero as $t\to\infty$. This mat
 
 (demo-wave-boundaries-python)=
 ``````{dropdown} @demo-wave-boundaries
+:open:
 
 ```{code-cell}
 m = 200
@@ -493,6 +501,7 @@ The original hump breaks into two pieces of different amplitudes, each traveling
 
 (demo-wave-speed-python)=
 ``````{dropdown} @demo-wave-speed
+:open:
 The variable wave speed is set to be re-used
 
 ```{code-cell}

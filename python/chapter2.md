@@ -74,6 +74,7 @@ exec(open("FNC_init.py").read())
 ### 2.1 @section-linsys-polyinterp
 (demo-interp-vander-python)=
 ``````{dropdown} @demo-interp-vander
+:open:
 We create two vectors for data about the population of China. The first has the years of census data and the other has the population, in millions of people.
 
 ```{code-cell} 
@@ -137,6 +138,7 @@ legend();
 ### 2.2 @section-linsys-matrices
 (demo-matrices-python)=
 ``````{dropdown} @demo-matrices
+:open:
 ```{note}
 While NumPy does have distinct representations for matrices and 2D arrays, use of the explicit matrix class is officially discouraged. We follow this advice here and use arrays to represent both matrices and vectors.
 ```
@@ -369,6 +371,7 @@ print(cos(pi * x))
 ### 2.3 @section-linsys-linear-systems
 (demo-systems-backslash-python)=
 ``````{dropdown} @demo-systems-backslash
+:open:
 For a square matrix $A$, the command `solve(A, B)` from `numpy.linalg` is mathematically equivalent to $\mathbf{A}^{-1} \mathbf{b}$. 
 
 ```{code-cell} 
@@ -405,6 +408,7 @@ A linear system with a singular matrix might have no solution or infinitely many
 
 (demo-systems-triangular-python)=
 ``````{dropdown} @demo-systems-triangular
+:open:
 
 ```{index} ! Python; tril, ! Python; triu
 ```
@@ -467,6 +471,7 @@ It's not so good to get 4 digits of accuracy after starting with sixteen! But th
 ### 2.4 @section-linsys-lu
 (demo-lu-outertri-python)= 
 ``````{dropdown} @demo-lu-outertri
+:open:
 ```{index} Python; tril, Python; triu
 ```
 We explore the outer product formula for two random triangular matrices.
@@ -502,6 +507,7 @@ Simply because of the triangular zero structures, only the first outer product c
 
 (demo-lu-derive-python)=
 ``````{dropdown} @demo-lu-derive
+:open:
 For illustration, we work on a $4 \times 4$ matrix. We name it with a subscript in preparation for what comes.
 
 ```{code-cell} 
@@ -586,6 +592,7 @@ In floating point, we cannot expect the difference to be exactly zero as we foun
 
 (demo-lu-solve-python)=
 ``````{dropdown} @demo-lu-solve
+:open:
 Here are the data for a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$. 
 
 ```{code-cell}
@@ -618,6 +625,7 @@ b - A @ x
 
 (demo-flops-mvmult-python)=
 ``````{dropdown} @demo-flops-mvmult
+:open:
 
 Here is a straightforward implementation of matrix-vector multiplication.
 
@@ -672,6 +680,7 @@ $$
 
 (demo-flops-loglog-python)=
 ``````{dropdown} @demo-flops-loglog
+:open:
 Let's repeat the experiment of the previous example for more, and larger, values of $n$.
 
 ```{code-cell} 
@@ -705,6 +714,7 @@ ax.legend();  fig
 
 (demo-flops-lufact-python)=
 ``````{dropdown} @demo-flops-lufact
+:open:
 
 We'll test the conclusion of $O(n^3)$ flops experimentally using the `lu` function imported from `scipi.linalg`.
 
@@ -734,6 +744,7 @@ title("Timing of LU factorizations");
 ### 2.6 @section-linsys-pivoting
 (demo-pivoting-fail-python)=
 ``````{dropdown} @demo-pivoting-fail
+:open:
 Here is a previously encountered matrix that factors well.
 
 ```{code-cell} 
@@ -772,6 +783,7 @@ The next step is `U[1, :] = A[1, :]`, which is also OK. But then we are supposed
 
 (demo-pivoting-fix-python)=
 ``````{dropdown} @demo-pivoting-fix
+:open:
 Here is the trouble-making matrix from {numref}`Demo {number} <demo-pivoting-fail>`.
 
 ```{code-cell}
@@ -855,6 +867,7 @@ print(L)
 
 (demo-pivoting-permute-python)=
 ``````{dropdown} @demo-pivoting-permute
+:open:
 Here again is the matrix from {numref}`Demo {number} <demo-pivoting-fix>`.
 
 ```{code-cell}
@@ -888,6 +901,7 @@ print(L)
 
 (demo-pivoting-usage-python)=
 ``````{dropdown} @demo-pivoting-usage
+:open:
 The third output of `plufact` is the permutation vector we need to apply to $\mathbf{A}$.
 
 ```{code-cell}
@@ -913,6 +927,7 @@ b - A @ x
 
 (demo-pivoting-builtin-python)=
 ``````{dropdown} @demo-pivoting-builtin
+:open:
 In `linalg.solve`, the matrix `A` is PLU-factored, followed by two triangular solves. If we want to do those steps seamlessly, we can use the `lu_factor` and `lu_solve` from `scipy.linalg`.
 
 ```{code-cell}
@@ -939,6 +954,7 @@ print(f"elapsed time for 50 shortcut solves: {timer() - start}")
 
 (demo-pivoting-stable-python)=
 ``````{dropdown} @demo-pivoting-stable
+:open:
 We construct a linear system for this matrix with $\epsilon=10^{-12}$ and exact solution $[1,1]$:
 
 ```{code-cell}
@@ -974,6 +990,7 @@ print(linalg.solve(A, b))
 ### 2.7 @section-linsys-norms
 (demo-norms-vector-python)=
 ``````{dropdown} @demo-norms-vector
+:open:
 ```{index} ! Python; norm
 ```
 
@@ -996,6 +1013,7 @@ print(norm(x, 1))
 
 (demo-norms-matrix-python)=
 ``````{dropdown} @demo-norms-matrix
+:open:
 ```{code-cell} 
 from numpy.linalg import norm
 A = array([ [2, 0], [1, -1] ])
@@ -1074,6 +1092,7 @@ As seen on the right-side plot, the image of the transformed vectors is an ellip
 ### 2.8 @section-linsys-condition-number
 (demo-condition-bound-python)=
 ``````{dropdown} @demo-condition-bound
+:open:
 
 ```{index} ! Python; cond
 ```
@@ -1171,6 +1190,7 @@ print(f"relative error: {norm(x - x_exact) / norm(x_exact):.2e}")
 ### 2.9 @section-linsys-structure
 (demo-structure-banded-python)=
 ``````{dropdown} @demo-structure-banded
+:open:
 Here is a matrix with both lower and upper bandwidth equal to one. Such a matrix is called tridiagonal.
 
 ```{code-cell} 
@@ -1222,6 +1242,7 @@ Observe above that the lower and upper bandwidths of $\mathbf{A}$ are preserved 
 
 (demo-structure-symm-python)=
 ``````{dropdown} @demo-structure-symm
+:open:
 We begin with a symmetric $\mathbf{A}$. 
 
 ```{code-cell} 
@@ -1280,6 +1301,7 @@ print(norm(A_1 - (L @ diag(d) @ L.T), 2) / norm(A_1))
 
 (demo-structure-cholesky-python)=
 ``````{dropdown} @demo-structure-cholesky
+:open:
 A randomly chosen matrix is extremely unlikely to be symmetric. However, there is a simple way to symmetrize one.
 
 ```{code-cell} 
