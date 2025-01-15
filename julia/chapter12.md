@@ -11,7 +11,7 @@ numbering:
 ## Examples
 
 ```{code-cell}
-:tags: remove-output
+:tags: remove-cell
 include("FNC_init.jl")
 ```
 
@@ -135,7 +135,7 @@ plt = plot(
     legend=:topleft,
     title="Traffic jam",
     xaxis=(L"x"),  yaxis=("car density"))
-for t in range(0, 5, 11)
+for t in range(0, 0.5, 11)
     plot!(x, sol(t), label=@sprintf("t=%.1f", t))
 end
 plt
