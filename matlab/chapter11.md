@@ -34,7 +34,6 @@ numbering:
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
-pwd
 ```
 
 ### 11.1 @section-diffusion-blackscholes

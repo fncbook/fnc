@@ -386,7 +386,7 @@ for ep in [0.001, 0.01, 0.05]:
     plot(real(tau * lamb), imag(tau * lamb), "o", label=f"epsilon={ep:.1g}")
 axis("equal")
 legend()
-title("Eigenvalues for advection-diffusion")
+title("Eigenvalues for advection-diffusion");
 ```
 ``````
 

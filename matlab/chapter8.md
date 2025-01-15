@@ -52,7 +52,6 @@ numbering:
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
-pwd
 ```
 
 ### 8.1 @section-krylov-structure

@@ -14,7 +14,6 @@ numbering:
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
-pwd
 ```
 
 ### 7.1 @section-matrixanaly-insight
@@ -449,8 +448,9 @@ clf
 x1 = V(:, 1)'*A';   x2 = V(:, 2)'*A'; 
 scatter(x1(Dem), x2(Dem), 20, 'b'),  hold on
 scatter(x1(Rep), x2(Rep), 20, 'r')
-scatter(x1(Ind), x2(Ind), 20, 'k')
+scatter(x1(Ind), x2(Ind), 20, 'm')
 xlabel('partisanship'),  ylabel('bipartisanship')
+legend('Democrat', 'Republican', 'Independent')
 title(('111th US Senate in 2D'));
 ```
 ``````

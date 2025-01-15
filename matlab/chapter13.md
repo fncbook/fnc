@@ -43,7 +43,6 @@ numbering:
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
-pwd
 ```
 
 ### 13.1 @section-twodim-tensorprod
@@ -261,18 +260,21 @@ title('Initial condition')
 ```
 
 Here is an animation of the solution.
+
 ```{tip}
 :class: dropdown
 Here `clims` are set so that colors remain at fixed values throughout the animation.
 ```
 
 ```{code-cell}
+:tags: hide-input, remove-output
 title('Heat equation on a periodic domain')
 vid = VideoWriter("figures/2d-heat.mp4","MPEG-4");
 vid.Quality = 85;
 open(vid);
 for t = linspace(0, 0.2, 61)
     cla, surf(X', Y', U(t)')
+    zlim([-3, 3]),  clim([-mx, mx])
     shading interp
     str = sprintf("t = %.2f", t);
     text(-0.9, 0.75, 2, str, fontsize=14);
@@ -338,7 +340,7 @@ xlabel('x'),  ylabel('y')
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: hide-input, remove-output
 hold on
 vid = VideoWriter("figures/2d-advdiff.mp4","MPEG-4");
 vid.Quality = 85;
@@ -417,7 +419,7 @@ title("Wave equation at t = 0.5")
 ```
 
 ```{code-cell}
-:tags: hide-input
+:tags: hide-input, remove-output
 hold on
 vid = VideoWriter("figures/2d-wave.mp4","MPEG-4");
 vid.Quality = 85;

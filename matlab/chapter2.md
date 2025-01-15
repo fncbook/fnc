@@ -482,7 +482,6 @@ It's not so good to get 4 digits of accuracy after starting with sixteen! The so
 (demo-lu-outertri-matlab)= 
 ``````{dropdown} @demo-lu-outertri
 :open:
-:open: false
 
 ```{index} MATLAB; tril, MATLAB; triu
 ```
