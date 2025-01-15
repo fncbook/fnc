@@ -41,7 +41,7 @@ Line 29 uses the macro `@.` to assign into the vector `f` elementwise. Without i
 ## Examples
 
 ```{code-cell}
-:tags: remove-output
+:tags: remove-cell
 include("FNC_init.jl")
 ```
 

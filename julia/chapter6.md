@@ -109,7 +109,7 @@ Lines 22-23 define the function $\mathbf{g}$ and call `levenberg` to find the ne
 ## Examples
 
 ```{code-cell}
-:tags: remove-output
+:tags: remove-cell
 include("FNC_init.jl")
 ```
 

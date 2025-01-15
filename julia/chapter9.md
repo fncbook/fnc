@@ -107,7 +107,7 @@ The test `iszero(x(M))` in line 17 checks whether $x(M)$ is less than the smalle
 ## Examples
 
 ```{code-cell}
-:tags: remove-output
+:tags: remove-cell
 include("FNC_init.jl")
 ```
 

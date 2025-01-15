@@ -11,6 +11,7 @@ numbering:
 ## Examples
 
 ```{code-cell}
+:tags: [remove-cell]
 include("FNC_init.jl")
 ```
 

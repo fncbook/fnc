@@ -102,7 +102,7 @@ The nested function `residual` uses differentiation matrices computed externally
 ## Examples
 
 ```{code-cell}
-:tags: remove-output
+:tags: remove-cell
 include("FNC_init.jl")
 ```
 

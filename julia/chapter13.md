@@ -53,7 +53,7 @@ The boundary values are accessed using Boolean indexing. One advantage of this s
 ## Examples
 
 ```{code-cell}
-:tags: remove-output
+:tags: remove-cell
 include("FNC_init.jl")
 ```
 
