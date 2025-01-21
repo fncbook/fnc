@@ -1,1 +1,1 @@
-import{a}from"/fnc/build/_shared/chunk-Y32BTC75.js";import"/fnc/build/_shared/chunk-YJR656RD.js";import"/fnc/build/_shared/chunk-42FUU6FG.js";import"/fnc/build/_shared/chunk-2NH4LW52.js";export default a();
+import{a}from"fncbook.com/build/_shared/chunk-Y32BTC75.js";import"fncbook.com/build/_shared/chunk-YJR656RD.js";import"fncbook.com/build/_shared/chunk-42FUU6FG.js";import"fncbook.com/build/_shared/chunk-2NH4LW52.js";export default a();

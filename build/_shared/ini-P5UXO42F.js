@@ -1,1 +1,1 @@
-import{a}from"/fnc/build/_shared/chunk-DIT5VHYR.js";import"/fnc/build/_shared/chunk-2NH4LW52.js";export default a();
+import{a}from"fncbook.com/build/_shared/chunk-DIT5VHYR.js";import"fncbook.com/build/_shared/chunk-2NH4LW52.js";export default a();
