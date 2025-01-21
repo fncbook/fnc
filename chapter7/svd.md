@@ -18,7 +18,7 @@ We now introduce another factorization that is as fundamental as the EVD.
 
 (definition-svd-svd)=
 ::::{prf:definition} Singular value decomposition (SVD)
-The **singular value decomposition** of an $m\times n$ matrix $\mathbf{A}$ is
+The {term}`singular value decomposition` of an $m\times n$ matrix $\mathbf{A}$ is
 
 ```{math}
 :label: svd

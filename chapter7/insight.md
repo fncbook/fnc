@@ -31,7 +31,7 @@ In 2006 the online video service Netflix started an open competition for a $1 mi
 ```
 
 ::::{prf:definition} Graphs and adjacency matrices
-A **graph** or *network* consists of a set $V$ of **nodes** and a set $E$ of **edges**, each of which is an ordered pair of nodes. The graph is **undirected** if for every edge $(v_i,v_j)$, the pair $(v_j,v_i)$ is also an edge; otherwise the graph is **directed**.
+A {term}`graph` or *network* consists of a set $V$ of **nodes** and a set $E$ of **edges**, each of which is an ordered pair of nodes. The graph is **undirected** if for every edge $(v_i,v_j)$, the pair $(v_j,v_i)$ is also an edge; otherwise the graph is **directed**.
 
 The {term}`adjacency matrix` of a graph with $n$ nodes $V$ and edge set $E$ is the $n\times n$ matrix whose elements are
 
@@ -51,7 +51,7 @@ Here are some elementary results about adjacency matrices.
 
 (theorem-insight-adjmat)=
 ::::{prf:theorem}
-For any graph with {term}`adjacency matrix` $\mathbf{A}$,
+For any {term}`graph` with {term}`adjacency matrix` $\mathbf{A}$,
 
 1. The graph is undirected if and only if $\mathbf{A}$ is symmetric, and
 2. For any positive integer $k$, the $(i,j)$ element of $\mathbf{A}^k$ is the number of ways to walk from node $i$ to node $j$ by following along exactly $k$ edges.

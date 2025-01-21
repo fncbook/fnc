@@ -93,7 +93,7 @@ Lines 32--34 define the function $\mathbf{g}$. This is sent to `levenberg` in li
 ```{code-cell}
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
-FNC_init
+FNC_init;
 ```
 ### 6.1 @section-ivp-basics
 
@@ -399,7 +399,7 @@ for i = 1:length(n)
     err(i, 2) = norm(u_ref(t) - u, Inf);
 end
 
-disp(table(n, err(:, 1), err(:, 2), variableNames=["n", "IE2 error", "RK4 error"]))
+table(n, err(:, 1), err(:, 2), variableNames=["n", "IE2 error", "RK4 error"])
 ```
 
 The amount of computational work at each time step is assumed to be proportional to the number of stages. Let's compare on an apples-to-apples basis by using the number of $f$-evaluations on the horizontal axis.
@@ -509,7 +509,7 @@ for i = 1:length(n)
     [t, u] = ab4(ivp, a, b, n(i));
     err(i) = norm(u_ref(t) - u, Inf);
 end
-disp(table(n, err, variableNames=["n", "inf-norm error"]))
+table(n, err, variableNames=["n", "inf-norm error"])
 ```
 
 The method should converge as $O(h^4)$, so a log-log scale is appropriate for the errors.
@@ -601,7 +601,7 @@ for j = 1:length(n)
 end
 
 h = (b-a) ./ n;
-disp(table(n, h, err))
+table(n, h, err)
 ```
 
 The error starts out promisingly, but things explode from there. A graph of the last numerical attempt yields a clue.

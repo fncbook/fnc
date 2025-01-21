@@ -251,12 +251,11 @@ U = @(t) unvec(sol(t));
 
 ```{code-cell}
 :tags: hide-input
-surf(X', Y', U0')
-mx = max(abs(vec(U0)));
+surf(X', Y', U(0.05)')
 clim([-mx, mx]),  shading interp
 colormap(redsblues)
 xlabel('x'),  ylabel('y')  
-title('Initial condition') 
+title('Solution at t = 0.05') 
 ```
 
 Here is an animation of the solution.
@@ -345,6 +344,7 @@ hold on
 vid = VideoWriter("figures/2d-advdiff.mp4","MPEG-4");
 vid.Quality = 85;
 open(vid);
+title("Advection-diffusion in 2d")
 for t = linspace(0, 2, 81)
     cla, pcolor(X', Y', U(t)')
     shading interp
@@ -424,6 +424,7 @@ hold on
 vid = VideoWriter("figures/2d-wave.mp4","MPEG-4");
 vid.Quality = 85;
 open(vid);
+title("Wave equation in 2d")
 for t = linspace(0, 4, 121)
     [U, V] = unpack(sol(t));
     cla, pcolor(X, Y, U)

@@ -386,7 +386,7 @@ for k = 1:length(n)
     [x, u] = bvplin(p, q, r, 0, 1, -1, 0, n(k));
     err(k) = norm(exact(x) - u, Inf);
 end
-disp(table(n, err, variableNames = ["n", "inf-norm error"]))
+table(n, err, variableNames = ["n", "inf-norm error"])
 ```
 
 Each factor of 10 in $n$ reduces error by a factor of 100, which is indicative of second-order convergence.

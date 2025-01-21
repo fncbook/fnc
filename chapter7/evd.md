@@ -19,7 +19,7 @@ Given a square matrix $\mathbf{A}$, if
 \mathbf{A}\mathbf{x} = \lambda \mathbf{x}
 ```
 
-for a scalar $\lambda$ and a nonzero vector $\mathbf{x}$, then $\lambda$ is an **eigenvalue** and $\mathbf{x}$ is an associated **eigenvector**.
+for a scalar $\lambda$ and a nonzero vector $\mathbf{x}$, then $\lambda$ is an {term}`eigenvalue` and $\mathbf{x}$ is an associated {term}`eigenvector`.
 ::::
 
 ## Complex matrices
@@ -34,11 +34,11 @@ $$
 ```
 
 ::::{prf:definition} Terms for complex matrices
-The **adjoint** or *hermitian* of a matrix $\mathbf{A}$ is denoted $\mathbf{A}^*$ and is given by $\mathbf{A}^*=(\overline{\mathbf{A}})^T=\overline{\mathbf{A}^T}$. The matrix is **self-adjoint** or **hermitian** if $\mathbf{A}^*=\mathbf{A}$.
+The {term}`adjoint` or *hermitian* of a matrix $\mathbf{A}$ is denoted $\mathbf{A}^*$ and is given by $\mathbf{A}^*=(\overline{\mathbf{A}})^T=\overline{\mathbf{A}^T}$. The matrix is **self-adjoint** or {term}`hermitian` if $\mathbf{A}^*=\mathbf{A}$.
 
 The **2-norm** of a complex vector $\mathbf{u}$ is $\sqrt{\mathbf{u}^*\mathbf{u}}$. Other vector norms, and all matrix norms, are as defined in {numref}`section-linsys-norms`.
 
-Complex vectors $\mathbf{u}$ and $\mathbf{v}$ of the same dimension are **orthogonal** if $\mathbf{u}^*\mathbf{v}=0$. **Orthonormal** vectors are mutually orthogonal and have unit 2-norm. A **unitary** matrix is a square matrix with orthonormal columns, or, equivalently, a matrix satisfying $\mathbf{A}^* = \mathbf{A}^{-1}$.
+Complex vectors $\mathbf{u}$ and $\mathbf{v}$ of the same dimension are {term}`orthogonal vectors` if $\mathbf{u}^*\mathbf{v}=0$ and are {term}`Orthonormal vectors` if both also have unit 2-norm. A {term}`unitary matrix`  is a square matrix with orthonormal columns, or, equivalently, a matrix satisfying $\mathbf{A}^* = \mathbf{A}^{-1}$.
 ::::
 
 For the most part, "adjoint" replaces "transpose," "hermitian" replaces "symmetric," and "unitary matrix" replaces "orthogonal matrix" when applying our previous results to complex matrices. 
@@ -124,7 +124,7 @@ An **eigenvalue decomposition** (EVD) of a square matrix $\mathbf{A}$ is
 \mathbf{A} = \mathbf{V} \mathbf{D} \mathbf{V}^{-1}.
 ```
 
-If $\mathbf{A}$ has an EVD, we say that $\mathbf{A}$ is **diagonalizable**; otherwise $\mathbf{A}$ is **nondiagonalizable** (or *defective*).
+If $\mathbf{A}$ has an EVD, we say that $\mathbf{A}$ is a {term}`diagonalizable matrix`; otherwise $\mathbf{A}$ is **nondiagonalizable** (or *defective*).
 ::::
 
 Observe that if $\mathbf{A}\mathbf{v} = \lambda \mathbf{v}$ for nonzero $\mathbf{v}$, then the equation remains true for any nonzero multiple of $\mathbf{v}$. Therefore, eigenvectors are not unique, and thus neither is an EVD.
@@ -145,7 +145,7 @@ If the $n\times n$ matrix $\mathbf{A}$ has $n$ distinct eigenvalues, then $\math
 ````
 
 (demo-evd-eigen)=
-::::{prf:example}  Eigenvalues and eigenvectors Eigenvalues and eigenvectors
+::::{prf:example}  Eigenvalues and eigenvectors 
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -175,7 +175,7 @@ If the $n\times n$ matrix $\mathbf{A}$ has $n$ distinct eigenvalues, then $\math
 The particular relationship between matrices $\mathbf{A}$ and $\mathbf{D}$ in {eq}`evdecomp` is important. 
 
 :::{prf:definition} Similar matrices
-If $\mathbf{S}$ is any nonsingular matrix, we say that $\mathbf{B}=\mathbf{S}\mathbf{A}\mathbf{S}^{-1}$ is a **similarity transformation** of $\mathbf{A}$, and we say that $\mathbf{B}$ is **similar** to $\mathbf{A}$.
+If $\mathbf{S}$ is any nonsingular matrix, we say that $\mathbf{B}=\mathbf{S}\mathbf{A}\mathbf{S}^{-1}$ is a {term}`similarity transformation` of $\mathbf{A}$, and we say that $\mathbf{A}$ and $\mathbf{B}$ are {term}`similar matrices`.
 :::
 
  A similarity transformation does not change eigenvalues, a fact that is typically proved in elementary linear algebra texts.
@@ -272,7 +272,7 @@ The Bauer–Fike theorem tells us that eigenvalues can be perturbed by an amount
 ```
 
 ::::{prf:definition} Normal matrix
-If $\mathbf{A}$ has an EVD {eq}`evdecomp` with a unitary eigenvector matrix $\mathbf{V}$, then $\mathbf{A}$ is a **normal matrix**. 
+If $\mathbf{A}$ has an EVD {eq}`evdecomp` with a unitary eigenvector matrix $\mathbf{V}$, then $\mathbf{A}$ is a {term}`normal matrix`. 
 ::::
 
 As we will see in {numref}`section-matrixanaly-symm-eig`, hermitian and real symmetric matrices are normal. Since the condition number of a unitary matrix is equal to 1, {eq}`bauerfike` guarantees that a perturbation of a normal matrix changes the eigenvalues by the same amount or less.

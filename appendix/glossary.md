@@ -93,8 +93,8 @@ eigenvalue
 : Scalar $\lambda$ such that $\mathbf{A}\mathbf{x} = \lambda \mathbf{x}$ for a square matrix $\mathbf{A}$ and nonzero vector $\mathbf{x}$. \
 (@section-matrixanaly-evd)
 
-eigenvalue decomposition (EVD)
-: Expression of a square matrix as the product of eigenvector and diagonal eigenvalue matrices. \
+eigenvalue decomposition
+: Expression of a square matrix as the product of eigenvector and diagonal eigenvalue matrices. (Abbreviated EVD.)\
 (@section-matrixanaly-evd)
 
 eigenvector
@@ -182,7 +182,7 @@ hermitian
 (@section-matrixanaly-symm-eig)
 
 hermitian positive definite matrix
-: Matrix that is hermitian with strictly positive eigenvalues; complex variant of symmetric positive definite. \
+: Matrix that is hermitian with strictly positive eigenvalues; complex variant of symmetric positive definite. (Abbreviated HPD matrix.)\
 (@section-matrixanaly-symm-eig)
 
 homogeneous boundary condition
@@ -297,8 +297,8 @@ norm
 : Means of defining the magnitude of a vector or matrix. \
 (@section-linsys-norms)
 
-normal
-: Matrix that has a unitary eigenvalue decomposition. \
+normal matrix
+: Matrix that has a {term}`unitary matrix` of eigenvectors in an {term}`eigenvalue decomposition`. \
 (@section-matrixanaly-evd)
 
 normal equations
@@ -423,12 +423,20 @@ shooting
 : Unstable technique for solving a boundary-value problem in which an initial value is sought for by a rootfinding algorithm. \
 (@section-bvp-shooting)
 
+similar matrices
+: Matrices that are linked by a {term}`similarity transformation`, thus sharing the same set of eigenvalues. \
+(@section-matrixanaly-evd)
+
+similarity transformation
+: Mapping $\mathbf{A} \mapsto \mathbf{S}\mathbf{A}\mathbf{S}^{-1}$ for an invertible $\mathbf{S}$. The transformation leaves eigenvalues, but not eigenvectors, unchanged. \
+(@section-matrixanaly-evd)
+
 simple root
 : Root of a function at which the derivative of the function is nonzero. \
 (@section-nonlineqn-rootproblem)
 
-singular value decomposition (SVD)
-: Expression of a matrix as a product of two orthogonal/unitary matrices and a nonnegative diagonal matrix. \
+singular value decomposition
+: Expression of a matrix as a product of two orthogonal/unitary matrices and a nonnegative diagonal matrix. (Abbreviated SVD.) \
 (@section-matrixanaly-svd)
 
 sparse matrix
