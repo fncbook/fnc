@@ -33,6 +33,8 @@ exec(open("FNC_init.py").read())
 ## 1.1 @section-intro-floating-point
 (demo-float-accuracy-python)=
 ``````{dropdown} @demo-float-accuracy
+:open:
+
 ```{tip} Getting started with Python
 :class: dropdown
 :open:
