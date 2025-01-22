@@ -69,7 +69,7 @@ numbering:
 ```{code-cell}
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
-FNC_init
+FNC_init;
 ```
 
 ### 10.1 @section-bvp-tpbvp

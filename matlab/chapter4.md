@@ -60,7 +60,7 @@ numbering:
 ```{code-cell}
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
-FNC_init
+FNC_init;
 ```
 
 ### 4.1 @section-nonlineqn-rootproblem

@@ -25,7 +25,7 @@ numbering:
 ```{code-cell}
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
-FNC_init
+FNC_init;
 ```
 
 ### 1.1 @section-intro-floating-point
