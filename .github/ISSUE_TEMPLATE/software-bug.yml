@@ -51,7 +51,7 @@ body:
       label: Book version
       description: Which version of the book were you using? See the [README.md file](https://github.com/fncbook/fnc).
       options:
-        - 2025-01-22
+        - "2025.01.22"
       default: 0
   - type: textarea
     id: link

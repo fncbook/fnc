@@ -1,3 +1,6 @@
+---
+numbering: false
+---
 # Home
 
 `````{grid}
@@ -22,6 +25,12 @@ This is a new edition of the textbook [Fundamentals of Numerical Computation](ht
 ```{warning}
 There are some changes from the print editions. Exercise numbers may not align. 
 ```
+
+## Supporting us
+
+This resource is provided free of charge. If you find it useful, please consider [supporting us](https://buymeacoffee.com/tobydriscoll)!
+
+## Codes
 
 Codes are available for [Julia](#section-setup-julia), [MATLAB](#section-setup-matlab), and [Python](#section-setup-python). Please see the section on @section-key-differences for a discussion of the differences between these languages.
 
@@ -62,4 +71,4 @@ Codes are available for [Julia](#section-setup-julia), [MATLAB](#section-setup-m
 Using this book.
 ```
 
-- @section-setup-julia -->
+-->
