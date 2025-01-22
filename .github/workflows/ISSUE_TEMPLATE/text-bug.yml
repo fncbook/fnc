@@ -1,0 +1,40 @@
+name: Text bug report
+description: Point out an error or typo in the text.
+title: "[Text]: "
+labels: ["text", "triage"]
+projects: ["fncbook/fnc"]
+assignees:
+  - tobydriscoll
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this report!
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info? (Optional)
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+  - type: textarea
+    id: what-is-it
+    attributes:
+      label: What is the problem?
+      description: If you know how, tell us how to fix it, too!
+      value: "irregardless"
+    validations:
+      required: true
+  - type: dropdown
+    id: book_version
+    attributes:
+      label: Book version
+      description: Which version of the book were you using? See the [README.md file](https://github.com/fncbook/fnc).
+      options:
+        - 2025\-01\-22
+  - type: textarea
+    id: link
+    attributes:
+      label: Link 
+      description: Please provide a link to the section or block that contains the issue.
