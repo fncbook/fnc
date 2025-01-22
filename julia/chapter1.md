@@ -51,7 +51,7 @@ include("FNC_init.jl")
 ### 1.1 @section-intro-floating-point
 (demo-float-accuracy-julia)=
 ``````{dropdown} @demo-float-accuracy
-
+:open:
 :::{tip} Getting started in Julia
 :class: dropdown
 See @section-setup-julia for instructions on how to install and use Julia for this book.
@@ -106,7 +106,7 @@ This last value could be rounded down by using `floor`.
 
 (demo-float-double-julia)=
 ``````{dropdown} @demo-float-double
-:open: false
+:open: 
 In Julia, `1` and `1.0` are different values, because they have different types:
 
 ```{code-cell}
@@ -216,7 +216,7 @@ If you try to convert a noninteger floating-point value into an integer you get 
 
 (demo-float-arithmetic-julia)=
 ``````{dropdown} @demo-float-arithmetic
-:open: false
+:open: 
 
 There is no double-precision number between $1$ and $1+\epsilon_\text{mach}$. Thus the following difference is zero despite its appearance.
 
@@ -237,7 +237,7 @@ This is now the expected result. But we have found a rather shocking breakdown o
 ### 1.2 @section-intro-conditioning
 (demo-condition-roots-julia)=
 ``````{dropdown} @demo-condition-roots
-:open: false
+:open: 
 The polynomial $p(x) = \frac{1}{3}(x-1)(x-1-\epsilon)$ has roots $1$ and $1+\epsilon$. For small values of $\epsilon$, the roots are ill-conditioned. 
 
 ```{tip}
