@@ -1,0 +1,64 @@
+name: Software bug report
+description: File a bug report.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+projects: ["fncbook/fnc"]
+assignees:
+  - tobydriscoll
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info? (Optional)
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+      value: "A bug happened!"
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language
+      description: Which computing language was the problem encountered in?
+      options:
+        - Julia
+        - MATLAB
+        - Python
+        - Other
+      default: 1
+    validations:
+      required: true
+  - type: textarea
+    id: language_version
+    attributes:
+      label: What version of that language/software are you using?
+      placeholder: e.g., MATLAB R2024b, Julia 1.11
+  - type: dropdown
+    id: book_version
+    attributes:
+      label: Book version
+      description: Which version of the book were you using? See the [README.md file](https://github.com/fncbook/fnc).
+      options:
+        - 2025\-01\-22
+  - type: textarea
+    id: link
+    attributes:
+      label: Link 
+      description: Please provide a link to the function, example, exercise, or section that contains the bug.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant code or log output. 
