@@ -11,7 +11,7 @@ However, there are some major differences in the languages that you should be aw
 
 We focus here on issues that come up often in this book. There is a broader quick reference [here](https://cheatsheets.quantecon.org/) and a much more comprehensive analysis [here](https://docs.julialang.org/en/v1/manual/noteworthy-differences/).
 
-## Indexes
+## Indexing: Zero or one?
 
 Let's get this out of the way.
 
@@ -136,4 +136,4 @@ By contrast, MATLAB and NumPy make you implement elementwise behavior yourself w
 @(x) cos(x.^3 + 2*x.^2 - 1)
 ```
 
-so that the function is available elementwise. NumPy would not require any dotting in this case; for more complex functions, it provides `np.vectorize` to help, but it is not a panacea.
+so that the function is available elementwise. NumPy would not require any dotting in this case; for more complex functions, it provides `np.vectorize` to help, but that is not a panacea.

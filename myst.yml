@@ -79,8 +79,8 @@ project:
     - file: home.md
     - title: Preface
       children:
-        - file: frontmatter/preface.md
         - file: frontmatter/preface-original.md
+        - file: frontmatter/preface.md
     - file: frontmatter/differences.md
     - file: chapter1/overview.md
       children:
@@ -261,8 +261,10 @@ site:
   actions:
     - title: Support us!
       url: https://buymeacoffee.com/tobydriscoll
+    - title: Report a problem
+      url: https://github.com/fncbook/fnc/issues/new/choose
   options:
     favicon: _static/favicon.png
     logo: _static/FNClogo.png
   domains:
-    - fncbook.com
+    - www.fncbook.com
