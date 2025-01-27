@@ -44,8 +44,4 @@ Finally, we have made no mention of one of Julia's defining features, *multiple 
 
 ## Acknowledgments
 
-Finally, we have made no mention of one of Julia's defining features, *multiple dispatch*. Using its power wisely edges into advanced software design and usually requires a bird's-eye view of problems that beginners lack. We want to let students expend as much of their cognitive budget as possible on the mathematical principles that have universal application. 
-
-## Acknowledgments
-
 We are indebted to Qinying Chen, Hugo Diaz, Mary Gockenbach, Aidan Hamilton, Pascal Kingsley Kataboh, Lindsey Jacobs, Ross Russell, and Jerome Troy, who made this text more accurate and more readable with their sharp eyes and great suggestions. And we are deeply grateful to Paula Callaghan at SIAM, whose patience, dedication, and wisdom were crucial to seeing this through to the end.
