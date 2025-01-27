@@ -14,12 +14,9 @@ project:
   # To autogenerate a Table of Contents, run 'myst init --write-toc'
   thebe: false    # don't try in-browser execution
   exports:
-    # - format: typst
-    #   template: lapreprint-typst
-    #   output: exports/fnc-typst.pdf
-    - format: tex+pdf
-      template: plain_latex_book
-      output: exports/tex/fnc-tex.zip
+    - format: typst
+      template: lapreprint-typst
+      output: exports/fnc-typst.pdf
   math:
     '\float': '\mathbb{F}'
     '\real': '\mathbb{R}'
@@ -82,8 +79,8 @@ project:
     - file: home.md
     - title: Preface
       children:
-        - file: frontmatter/preface.md
         - file: frontmatter/preface-original.md
+        - file: frontmatter/preface.md
     - file: frontmatter/differences.md
     - file: chapter1/overview.md
       children:
@@ -261,8 +258,13 @@ project:
 site:
   title: Fundamentals of Numerical Computation
   template: book-theme
+  actions:
+    - title: Support us!
+      url: https://buymeacoffee.com/tobydriscoll
+    - title: Report a problem
+      url: https://github.com/fncbook/fnc/issues/new/choose
   options:
     favicon: _static/favicon.png
     logo: _static/FNClogo.png
   domains:
-    - tobydriscoll.curve.space
+    - www.fncbook.com
