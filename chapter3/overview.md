@@ -5,7 +5,7 @@
 ```
 
 ```{epigraph}
-I must have hit her pretty close to the mark to get her all riled up like that, huh, kid? 
+I must have hit pretty close to the mark to get her all riled up like that, huh, kid? 
 
 — Han Solo, *The Empire Strikes Back*
 ```

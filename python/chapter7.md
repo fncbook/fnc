@@ -41,7 +41,7 @@ nx.draw(G, with_labels=True, node_color="yellow")
 Here are the counts of all walks of length 3 in the graph:
 
 ```{code-cell}
-print(A**3)
+print(linalg.matrix_power(A, 3))
 ```
 
 If the adjacency matrix is symmetric, the result is an undirected graph: all edges connect in both directions.
