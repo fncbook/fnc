@@ -165,7 +165,7 @@ est = [1, 0]
 Now we set up and solve a `BVProblem` with the parameter value $\lambda=0.6$.
 
 ```{code-cell}
-using BoundaryValueDiffEq, Plots
+using BoundaryValueDiffEq, OrdinaryDiffEq, Plots
 bvp = BVProblem(ode!, bc!, est, domain, 0.6)
 y = solve(bvp, Shooting(Tsit5()))
 plot(y;
