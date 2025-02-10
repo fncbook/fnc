@@ -1,3 +1,7 @@
+---
+numbering:
+  enumerator: A.%s
+---
 (section-appendix-linear-algebra)=
 # Review of linear algebra
 
@@ -316,6 +320,7 @@ If $\mathbf{Z}$ exists, it is called the **inverse** of $\mathbf{A}$ and is writ
 
 The zero matrix has no inverse. For $n>1$ there are also nonzero matrices that have no inverse. Such matrices are called **singular**. The properties "invertible" and "singular" are exclusive opposites; thus, *nonsingular* means invertible and *noninvertible* means singular.
 
+
 ## Linear systems
 
 Given a square, $n\times n$ matrix $\mathbf{A}$ and  $n$-vectors $\mathbf{x}$ and $\mathbf{b}$, the equation $\mathbf{A}\mathbf{x}=\mathbf{b}$ is equivalent to
@@ -340,6 +345,52 @@ The following statements are equivalent:
 3. $\mathbf{A}\mathbf{x}=\boldsymbol{0}$ implies that $\mathbf{x}=\boldsymbol{0}$.
 4. $\mathbf{A}\mathbf{x}=\mathbf{b}$ has a unique solution, $\mathbf{x}=\mathbf{A}^{-1}\mathbf{b}$, for any $n$-vector $\mathbf{b}$.
 ````
+
+## Change of basis
+
+When we write an $n$-vector in terms of its components, such as
+
+```{math}
+\mathbf{v} = \begin{bmatrix}
+1 \\ -2 \\ 3
+\end{bmatrix},
+```
+
+we are implicitly expressing it relative to the **standard basis** of $n$-dimensional space, i.e.,
+
+```{math}
+\mathbf{v} = (1) \begin{bmatrix}
+1 \\ 0 \\ 0
+\end{bmatrix} + (-2) \begin{bmatrix} 
+0 \\ 1 \\ 0
+\end{bmatrix} + (3) \begin{bmatrix}
+0 \\ 0 \\ 1
+\end{bmatrix}.
+```
+
+If we want to express it instead as a linear combination of some other basis vectors $\mathbf{u}_1,\ldots,\mathbf{u}_n$, we can write, to continue the example,
+
+```{math}
+\begin{bmatrix}
+1 \\ -2 \\ 3
+\end{bmatrix} 
+= x_1 \mathbf{u}_1 + x_2 \mathbf{u}_2 + x_3 \mathbf{u}_3
+= \underbrace{\begin{bmatrix}
+\mathbf{u}_1 & \mathbf{u}_2 & \mathbf{u}_3
+\end{bmatrix}}_{\mathbf{U}}
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3
+\end{bmatrix},
+```
+
+where the $x_i$ are the components of $\mathbf{v}$ in the new basis. This is just a linear system to be solved for $\mathbf{x}$. Hence:
+
+:::{prf:observation}
+:label: obs-basis
+Multiplication of vector $\mathbf{v}$ on the left by $\mathbf{U}^{-1}$ changes the representation of $\mathbf{v}$ from the standard basis to the basis defined by the columns of $\mathbf{U}$.
+
+Conversely, multiplication on the left by $\mathbf{U}$ changes a representation from the $U$-basis to the standard basis.
+:::
 
 ## Exercises
 
