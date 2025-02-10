@@ -50,16 +50,18 @@ It is easy to check that
 
 ```{math}
 \begin{bmatrix} 3 \\ 4 \end{bmatrix}
-= \left(\frac{1}{5} \begin{bmatrix}
+= \underbrace{\left(\frac{1}{5} \begin{bmatrix}
   3 & -4 \\ 4 & 3
-\end{bmatrix}\,\right) \cdot \begin{bmatrix}
+\end{bmatrix}\,\right)}_{\mathbf{U}} \cdot 
+\underbrace{\begin{bmatrix}
   5 \\ 0
-\end{bmatrix}\cdot \begin{bmatrix}
+\end{bmatrix}}_{\mathbf{S}} \cdot 
+\underbrace{\begin{bmatrix}
   1
-\end{bmatrix}
+\end{bmatrix}}_{\mathbf{V}^T}
 ```
 
-meets all the requirements of an SVD. Interpreted as a matrix, the vector $[3,4]$ has the lone singular value 5.
+meets all the requirements of an SVD. Hence, interpreted as a $2\times 1$ matrix, the vector $[3,4]$ has the lone singular value 5.
 ````
 
 ````{prf:example}
@@ -76,7 +78,7 @@ Suppose $\mathbf{A}$ is a real matrix and that $\mathbf{A}=\mathbf{U}\mathbf{S}\
 
 (theorem-svd-ATA)=
 :::{prf:theorem}
-The nonzero eigenvalues of $\mathbf{A}^*\mathbf{A}$ are the squares of the singular values of $\mathbf{A}$.
+The eigenvalues of $\mathbf{A}^*\mathbf{A}$ are real and nonnegative, and the $\min\{m,n\}$ largest of them are the squares of the singular values of $\mathbf{A}$.
 :::
 
 ::::{prf:proof}
@@ -143,20 +145,15 @@ In words, each right singular vector is mapped by $\mathbf{A}$ to a scaled versi
 
 Both the SVD and the EVD describe a matrix in terms of some special vectors and a small number of scalars. {numref}`tab-evdsvd` summarizes the key differences. The SVD sacrifices having the same basis in both source and image spaces—after all, they may not even have the same dimension—but as a result gains orthogonality in both spaces.
 
-:::{list-table} Comparison of the EVD and SVD
-:header-rows: 1
-:name: tab-evdsvd
-
-* - EVD
-  - SVD
-* - exists for most square matrices
-  - exists for all rectangular and square matrices 
-* - $\mathbf{A}\mathbf{x}_k = \lambda_k \mathbf{x}_k$ 
-  - $\mathbf{A} \mathbf{v}_k = \sigma_k \mathbf{u}_k$ 
-* - same basis for domain and range of $\mathbf{A}$ 
-  - two orthonormal bases 
-* - may have poor conditioning 
-  - perfectly conditioned 
+:::{table} Comparison of the EVD and SVD
+:label: tab-evdsvd
+:align: center
+| EVD | SVD |
+|:---:|:---:|
+| exists for most square matrices | exists for all rectangular and square matrices |
+| $\mathbf{A}\mathbf{x}_k = \lambda_k \mathbf{x}_k$ | $\mathbf{A} \mathbf{v}_k = \sigma_k \mathbf{u}_k$ |
+| same basis for domain and range of $\mathbf{A}$ | two orthonormal bases |
+| may have poor conditioning | perfectly conditioned |
 :::
 
 ## Thin form
@@ -203,6 +200,18 @@ in which $\hat{\mathbf{U}}$ is $m\times n$ and $\hat{\mathbf{S}}$ is $n\times n$
 ``` 
 
 in which $\hat{\mathbf{S}}$ is square and diagonal and $\hat{\mathbf{U}}$ is ONC but not square. 
+
+So, in sketch form, a full SVD of a matrix that is taller than it is wide looks like
+
+```{math}
+\rule{1cm}{2.4cm} \; \raisebox{11mm}{=} \; \rule{2.4cm}{2.4cm} \; \raisebox{11mm}{$\centerdot$} \; \rule{1cm}{2.4cm}\; \raisebox{11mm}{$\centerdot$} \; \rule[6mm]{1cm}{1cm}\quad 
+```
+
+while a thin SVD looks like
+
+```{math}
+\rule{1cm}{2.4cm} \; \raisebox{11mm}{=} \; \rule{1cm}{2.4cm} \; \raisebox{11mm}{$\centerdot$} \; \rule[6mm]{1cm}{1cm} \; \raisebox{11mm}{$\centerdot$} \; \rule[6mm]{1cm}{1cm}
+```
 
 ::::{prf:example}
 Given the full SVD of {numref}`Example {number} <example-svd-vector>`, the corresponding thin SVD is
