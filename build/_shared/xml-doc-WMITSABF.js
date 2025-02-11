@@ -1,1 +1,1 @@
-import{a}from"/2025-02-11/build/_shared/chunk-QVLV36RL.js";import"/2025-02-11/build/_shared/chunk-2NH4LW52.js";export default a();
+import{a}from"/build/_shared/chunk-QVLV36RL.js";import"/build/_shared/chunk-2NH4LW52.js";export default a();
