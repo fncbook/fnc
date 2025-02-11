@@ -178,33 +178,22 @@ The particular relationship between matrices $\mathbf{A}$ and $\mathbf{D}$ in {e
 If $\mathbf{S}$ is any nonsingular matrix, we say that $\mathbf{B}=\mathbf{S}\mathbf{A}\mathbf{S}^{-1}$ is a {term}`similarity transformation` of $\mathbf{A}$, and we say that $\mathbf{A}$ and $\mathbf{B}$ are {term}`similar matrices`.
 :::
 
- A similarity transformation does not change eigenvalues, a fact that is typically proved in elementary linear algebra texts.
+Hence, an EVD transforms $\mathbf{A}$ to a similar matrix that happens to be diagonal, which is as simple as a matrix gets. 
+
+One way to interpret similarity is via change of basis (see @obs-basis):
+
+```{math}
+\mathbf{B}\mathbf{x} = \mathbf{S}\mathbf{A}\mathbf{S}^{-1} \mathbf{x} 
+= \underbrace{\mathbf{S} \underbrace{ \Bigl(\mathbf{A} \underbrace{\left( \mathbf{S}^{-1} \mathbf{x}\right)}_{\text{into $S$-basis}}\Bigr)}_{\text{apply $\mathbf{A}$}}}_{\text{out of $S$-basis}} .
+```
+
+That is, $\mathbf{A}$ and $\mathbf{B}$ represent the same linear transformation in different bases. 
+
+A similarity transformation does not change eigenvalues, a fact that is typically proved in elementary linear algebra texts:
 
 ````{prf:theorem}
 If $\mathbf{S}$ is a nonsingular matrix, then $\mathbf{S}\mathbf{A}\mathbf{S}^{-1}$ has the same eigenvalues as $\mathbf{A}$.
 ````
-
-<!-- 
-Similarity transformation has an interesting interpretation. First, consider the product of a nonsingular $\mathbf{X}$ with any vector:
-
-```{math}
-  \mathbf{y} = \mathbf{X} \mathbf{z} = z_1 \mathbf{x}_1 +  \dots + z_n \mathbf{x}_n.
-```
-
-We call $z_1,\ldots,z_n$ the *coordinates* of the vector $\mathbf{y}$ with respect to the columns of $\mathbf{X}$. That is, $\mathbf{z}$ is a representation of $\mathbf{y}$ in the basis implied by the columns of $\mathbf{X}$. But also $\mathbf{z} = \mathbf{X}^{-1} \mathbf{y}$. Hence left-multiplication by $\mathbf{X}^{-1}$ converts the vector $\mathbf{y}$ into those coordinates. 
-
-:::{prf:observation} Change of basis
-Multiplication by the inverse of a matrix performs a *change of basis* into the coordinates associated with the columns of that matrix.
-:::
-
-In the product $\mathbf{u} = \mathbf{A} \mathbf{x}$, think of $\mathbf{x}$ as the input and $\mathbf{u}$ as the output of the linear transformation defined by multiplication by $\mathbf{A}$. Now the EVD {eq}`evdecomp` implies
-
-$$
-(\mathbf{V}^{-1}\mathbf{u}) = \mathbf{D}(\mathbf{V}^{-1}\mathbf{x}).
-$$
-
-This equation says that if you express the input $\mathbf{x}$ and the output $\mathbf{u}$ into the coordinates of the $\mathbf{V}$-basis, then the relationship between them is diagonal. That is, the EVD is about finding a basis for $\mathbb{C}^n$ in which the map $\mathbf{x}\mapsto\mathbf{A}\mathbf{x}$ is a diagonal one. Diagonal transformations are those in which the coordinates are independently rescaled. 
--->
 
 The EVD is especially useful for matrix powers. To begin,
 
