@@ -241,7 +241,7 @@ p(\mathbf{A}) & = c_0\mathbf{V}\mathbf{V}^{-1}  +c_1 \mathbf{V}\mathbf{D}\mathbf
 \end{split}
 ```
 
-Finally, given the convergence of Taylor polynomials to common functions, we are able to apply a function $f$ to a square matrix by replacing $p$ with $f$ in {eq}`matrixpoly`.
+Finally, given the convergence of Taylor polynomials to common functions, we are able to apply a function $f$ to a square matrix by replacing $p$ with $f$ in {eq}`matrixpolyevd`.
 
 ## Conditioning of eigenvalues
 
@@ -422,5 +422,6 @@ displacements of point masses placed along a string satisfy a linear system $\ma
     **(d)** Repeat part (b) with $\mathbf{T}$ in place of $\mathbf{A}$.
     
     **(e)** Compute some condition numbers and apply {numref}`Theorem %s <theorem-bauer-fike>` to explain the dramatic difference between your plots with respect to the dot distributions.
+9. Suppose that $\mathbf{A}$ is diagonalizable and that @matrixpolyevd is used to define $\cos(\mathbf{A})$ and $\sin(\mathbf{A})$, with those functions substituted in for $p$ in the equation. Is it necessarily true that $\cos(\mathbf{A})^2+\sin(\mathbf{A})^2$ is an identity matrix? Explain why or why not.
 
 [^randn]: The `randn` function generates random numbers from a standard normal distribution. In Python, it is found in the `numpy.random` module.
