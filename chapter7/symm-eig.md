@@ -25,9 +25,11 @@ and it's tempting to conclude that $\mathbf{U}=\mathbf{V}$. Happily, this is nea
 If $\mathbf{A}=\mathbf{A}^*$, then $\mathbf{A}$ has a diagonalization $\mathbf{A}=\mathbf{V} \mathbf{D} \mathbf{V}^{-1}$ in which $\mathbf{V}$ is unitary and $\mathbf{D}$ is diagonal and real.
 ````
 
-Another way to state the result of this theorem is that a hermitian matrix has real eigenvalues and a complete set of orthonormal eigenvectors—that is, it is normal. Because hermitian matrices are normal, their eigenvalue condition number is guaranteed to be 1 by {numref}`Theorem {number} <theorem-bauer-fike>`.
+Another way to state the result of this theorem is that a hermitian matrix has real eigenvalues and a complete set of orthonormal eigenvectors—that is, the matrix is normal. Because hermitian matrices are normal, their eigenvalue condition number is guaranteed to be 1 by {numref}`Theorem {number} <theorem-bauer-fike>`.
 
+:::{note}
 The converse of {numref}`Theorem {number} <theorem-symm-eig-spectral>` is also true: every normal matrix with real eigenvalues is hermitian. This was illustrated in {numref}`Demo {number} <demo-evd-bauerfike>`.
+:::
 
 For a hermitian matrix, the EVD 
 
@@ -48,9 +50,8 @@ If $\mathbf{A}^*=\mathbf{A}$ and $\mathbf{A}=\mathbf{V}\mathbf{D}\mathbf{V}^{-1}
 \mathbf{A} = (\mathbf{V}\mathbf{T})\cdot |\mathbf{D}|\cdot \mathbf{V}^*
 ```
 
-is an SVD, where $|\mathbf{D}|$ is the elementwise absolute value and $\mathbf{T}$ is diagonal with $|T_{ii}|=1$ for all $i$.
+is an SVD, where $|\mathbf{D}|$ is the elementwise absolute value and $\mathbf{T}$ is diagonal with $|T_{ii}|=1$ for all $i$. In particular, the absolute values of the eigenvalues of $\mathbf{A}$ are the singular values of $\mathbf{A}$.
 ````
-
 ::::{prf:proof}
 Let $T_{ii}=\operatorname{sign}(D_{ii})$ for all $i$. Then $\mathbf{T}^2=\mathbf{I}$, $|\mathbf{D}|=\mathbf{T}\mathbf{D}$, and
 

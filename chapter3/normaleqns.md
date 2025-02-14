@@ -60,13 +60,13 @@ Geometry of the normal equations. The smallest residual is orthogonal to the ran
 
 ## Pseudoinverse and definiteness
 
+If we associate the left-hand side of the normal equations as $(\mathbf{A}^T\mathbf{A})\,\mathbf{x}$, we recognize {eq}`normaleqns` as a *square* $n\times n$ linear system to solve for $\mathbf{x}$. 
+
 ```{index} ! pseudoinverse
 ```
 
-If we associate the left-hand side of the normal equations as $(\mathbf{A}^T\mathbf{A})\,\mathbf{x}$, we recognize {eq}`normaleqns` as a *square* $n\times n$ linear system to solve for $\mathbf{x}$. 
-
 ::::{prf:definition} Pseudoinverse
-If $\mathbf{A}\in\real^{m\times n}$  with $m>n$, its **pseudoinverse** is the $n\times m$ matrix
+If $\mathbf{A}\in\real^{m\times n}$  with $m>n$, its {term}`pseudoinverse` is the $n\times m$ matrix
 
 ```{math}
 :label: pinv

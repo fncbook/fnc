@@ -346,7 +346,7 @@ The conclusion {eq}`svdnorm` can be proved by vector calculus. In the square cas
 
 6. ✍ Prove {eq}`svdcond` of {numref}`Theorem %s <theorem-svdprops>`, given that {eq}`svdnorm` is true. (Hint: If the SVD of $\mathbf{A}$ is known, what is the SVD of $\mathbf{A}^{+}$?)
 
-7. ✍ Suppose $\mathbf{A}\in\mathbb{R}^{m\times n}$, with $m>n$, has the thin SVD $\mathbf{A}=\hat{\mathbf{U}}\hat{\mathbf{S}}\mathbf{V}^T$. Show that the matrix $\mathbf{A}\mathbf{A}^{+}$ is equal to $\hat{\mathbf{U}}\hat{\mathbf{U}}^T$. (You must be careful with matrix sizes in this derivation.)
+7. ✍ Suppose $\mathbf{A}\in\mathbb{R}^{m\times n}$, with $m>n$, has the thin SVD $\mathbf{A}=\hat{\mathbf{U}}\hat{\mathbf{S}}\mathbf{V}^T$. Show that the matrix $\mathbf{A}\mathbf{A}^{+}$ is equal to $\hat{\mathbf{U}}\hat{\mathbf{U}}^T$, where $\mathbf{A}^{+}$ is the {term}`pseudoinverse` of $\mathbf{A}$, as given in @pinv. (You must be careful with matrix sizes in this derivation.)
 
 (problem-rectcond)=
 8. ✍ In  {eq}`rectcond` we defined the 2-norm condition number of a rectangular matrix as $\kappa(\mathbf{A})=\|\mathbf{A}\|\cdot \|\mathbf{A}^{+}\|$, and then claimed (in the real case) that $\kappa(\mathbf{A}^*\mathbf{A})=\kappa(\mathbf{A})^2$. Prove this assertion using the SVD. 

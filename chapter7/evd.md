@@ -335,6 +335,7 @@ The process demonstrated in {numref}`Demo {number} <demo-evd-francisqr>` is know
 (problem-defectivematrix)=
 2. ✍ Prove that the matrix $\mathbf{B}$ in {eq}`jordanblock` does not have two independent eigenvectors.
 
+<!-- TODO: Get rid of rank. -->
 3. ⌨ Find the eigenvalues of each matrix. Then, for each eigenvalue $\lambda$, use `rank` to verify that $\lambda\mathbf{I}$ minus the given matrix is singular.
     
     $\mathbf{A} = \begin{bmatrix}
