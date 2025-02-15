@@ -624,7 +624,7 @@ plot!(x -> q(x), interval..., l=:dash, label="interpolant")
 ```
 
 To do inverse interpolation, we swap the roles of $x$ and $y$ in the interpolation.
-:::
+
 ```{tip}
 :class: dropdown
 By giving two functions in the plot call, we get the parametric plot $(q(y),y)$ as a function of $y$.
