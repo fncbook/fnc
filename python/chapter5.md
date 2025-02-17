@@ -108,7 +108,7 @@ plot(t, y, "o", label="data")
 xlabel("$x$"),  ylabel("$y$");
 ```
 
-```{index} ! Julia; fit
+```{index} ! Python; polyfit
 ```
 
 The polynomial interpolant, as computed using `fit`, looks very sensible. It's the kind of function you'd take home to meet your parents.
@@ -170,7 +170,7 @@ ax.legend()
 fig
 ```
 
-```{index} ! Julia; Spline1D
+```{index} ! Python; interp1d
 ```
 
 We may prefer a smoother interpolant that is piecewise cubic:
@@ -226,9 +226,6 @@ From the figure we can see that the condition number for polynomial interpolatio
 ``````{dropdown} @demo-pwlin-hat
 :open:
 Let's define a set of four nodes (i.e., $n=3$ in our formulas).
-
-```{index} ! Julia; annotate!
-```
 
 ```{code-cell}
 t = array([0, 0.075, 0.25, 0.55, 0.7, 1])
@@ -571,7 +568,7 @@ The antiderivative of $e^x$ is, of course, itself. That makes evaluation of $\in
 exact = exp(1) - 1
 ```
 
-```{index} ! Julia; quadgk
+```{index} ! Python; quad
 ```
 
 The module `scipy.integrate` has multiple functions that estimate the value of an integral numerically without finding the antiderivative first. As you can see here, it's often just as accurate.

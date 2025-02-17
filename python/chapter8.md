@@ -163,7 +163,7 @@ title(("$A^6$"));
 (demo-structure-sparseband-python)=
 ``````{dropdown} @demo-structure-sparseband
 :open:
-```{index} ! Julia; spdiagm
+```{index} ! Python; diags
 ```
 
 The `scipi.sparse.diags` function creates a sparse matrix given its diagonal elements and the diagonal indexes to put them on. The main or central diagonal is numbered zero, above and to the right of that is positive, and below and to the left is negative.
@@ -867,9 +867,6 @@ import rogues
 A = rogues.wathen(60, 60)
 n = A.shape[0]
 print(f"Matrix is {n} x {n} with {A.nnz} nonzeros")
-```
-
-```{index} ! Julia; DiagonalPreconditioner
 ```
 
 There is an easy way to use the diagonal elements of $\mathbf{A}$, or any other vector, as a diagonal preconditioner.

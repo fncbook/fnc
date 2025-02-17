@@ -56,7 +56,7 @@ nx.draw(G, with_labels=True, node_color="yellow")
 (demo-insight-image-python)=
 ``````{dropdown} @demo-insight-image
 :open:
-```{index} ! Julia; Images
+```{index} ! Python; Images
 ```
 
 We will use a test image from the well-known `scikit-image` package.
@@ -284,7 +284,7 @@ print(A)
 (demo-svd-props-python)=
 ``````{dropdown} @demo-svd-props
 :open:
-We verify some of the fundamental SVD properties using standard Julia functions from `LinearAlgebra`.
+We verify some of the fundamental SVD properties using standard functions from `numpy.linalg`.
 
 ```{code-cell}
 A = array([[(i + 1.0) ** j for j in range(4)] for i in range(5)])

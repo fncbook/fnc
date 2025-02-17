@@ -118,7 +118,7 @@ Let's use `solve_ivp` from `scipy.integrate` to define and solve an initial-valu
 
 To create an initial-value problem for $u(t)$, you must supply a function that computes $u'$, an initial value for $u$, and the endpoints of the interval for $t$. The $t$ interval should be defined as `(a,b)`, where at least one of the values is a float.
 
-```{index} ! Julia; ODEProblem, ! Julia; solve
+```{index} ! Python; solve_ivp
 ```
 
 ```{code-cell}
