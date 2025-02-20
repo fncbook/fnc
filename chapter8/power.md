@@ -77,7 +77,7 @@ Since $\lambda_1$ is dominant, we conclude that if $z_1\neq 0$,
 \| \mathbf{v}_{n} \| \rightarrow 0 \text{ as $k\rightarrow \infty$}.
 :::
 
-That is, $\mathbf{A}^k\mathbf{x}$ eventually is close to a scalar multiple of the dominant eigenvector.[^zeromeasure]
+That is, $\mathbf{A}^k\mathbf{x}$ eventually is close to close to a scalar multiple of the dominant eigenvector.[^zeromeasure]
 
 [^zeromeasure]: If $\mathbf{x}$ is chosen randomly, the probability that $z_1=0$ is mathematically zero.
 
