@@ -46,7 +46,7 @@ Analysis of matrix powers is most straightforward in the diagonalizable case. Le
 |\lambda_1| > |\lambda_2| \ge |\lambda_3| \ge \cdots \ge |\lambda_n|.
 :::
 
-Given {eq}`evorder` we say that $\lambda_1$ is the **dominant eigenvalue**. This was the case with $\lambda_1=1$ for $\mathbf{A}$ in {numref}`Demo %s <demo-power-one>`.
+Given {eq}`evorder` we say that $\lambda_1$ is the {term}`dominant eigenvalue`. This was the case with $\lambda_1=1$ for $\mathbf{A}$ in {numref}`Demo %s <demo-power-one>`.
 
 Now let $\mathbf{x}$ be an $n$-vector, let $k$ be a positive integer, and refer to {eq}`evdpower`: 
 
@@ -77,7 +77,7 @@ Since $\lambda_1$ is dominant, we conclude that if $z_1\neq 0$,
 \| \mathbf{v}_{n} \| \rightarrow 0 \text{ as $k\rightarrow \infty$}.
 :::
 
-That is, $\mathbf{A}^k\mathbf{x}$ eventually is a scalar multiple of the dominant eigenvector.[^zeromeasure]
+That is, $\mathbf{A}^k\mathbf{x}$ eventually is close to a scalar multiple of the dominant eigenvector.[^zeromeasure]
 
 [^zeromeasure]: If $\mathbf{x}$ is chosen randomly, the probability that $z_1=0$ is mathematically zero.
 
@@ -109,7 +109,11 @@ Given matrix $\mathbf{A}$:
     d. Set $\mathbf{x}_{k+1} = \alpha_k \mathbf{y}_k$.
 ::::
 
-Note that by definition, $\| \mathbf{x}_{k+1}\|_\infty=1$. Also, we can write
+:::{note}
+The vectors and scalars in @algorithm-power-power are subscripted by iteration number to help make the discussion here more convenient. In practice, the algorithm can be implemented without keeping the history, and $\alpha_k$ need not be separately computed at all.
+:::
+
+By construction, $\| \mathbf{x}_{k}\|_\infty=1$ for all $k > 1$. Also, we can write
 
 :::{math}
 :label: powernorm
@@ -188,7 +192,7 @@ Next we estimate {eq}`poweriterratio` for large $k$, using a geometric series ex
 
 ```{index} convergence rate; linear
 ```
-This is linear convergence with factor $r_2$:
+This is {term}`linear convergence` with factor $r_2$:
 
 :::{math}
 :label: poweriterconv
@@ -196,7 +200,7 @@ This is linear convergence with factor $r_2$:
 :::
 
 ::::{prf:observation}
-The error in the power iteration eigenvalue estimates $\beta_k$ is reduced asymptotically by a constant factor $\lambda_2/\lambda_1$ at each iteration.
+The error in the power iteration eigenvalue estimates $\beta_k$ is reduced asymptotically by a constant factor $\lambda_2/\lambda_1$ at each iteration, where $\lambda_1$ and $\lambda_2$ are the dominant eigenvalues of $\mathbf{A}$.
 ::::
 
 (demo-power-iter)=
@@ -223,7 +227,7 @@ The error in the power iteration eigenvalue estimates $\beta_k$ is reduced asymp
 ::::
 
 
-The practical utility of {eq}`poweriterconv` is limited because if we knew $\lambda_1$ and $\lambda_2$, we wouldn't be running the power iteration in the first place! Sometimes it's possible to find estimates of or bounds on the ratio. If nothing else, though, it is useful to know that linear convergence is expected at a rate based solely on the dominant eigenvalues. 
+The practical utility of {eq}`poweriterconv` is limited: if we knew $\lambda_1$ and $\lambda_2$, we wouldn't be running the power iteration in the first place! Sometimes it's possible to find estimates of or bounds on the ratio. If nothing else, though, it is useful to know that linear convergence is expected at a rate based solely on the dominant eigenvalues. 
 
 ## Exercises
 

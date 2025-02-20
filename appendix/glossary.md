@@ -82,7 +82,7 @@ Dirichlet condition
 (@section-bvp-tpbvp)
 
 dominant eigenvalue
-: Eigenvalue with the largest modulus (absolute value, in the real case). \
+: Eigenvalue with the largest magnitude (absolute value, in the real case). \
 (@section-krylov-power)
 
 double precision

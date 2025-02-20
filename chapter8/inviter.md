@@ -37,7 +37,7 @@ Then clearly
 ```{index} eigenvalue; dominant
 ```
 
-and $\mathbf{A}^{-1}$ has a dominant eigenvalue. Hence power iteration on $\mathbf{A}^{-1}$ can be used to find the eigenvalue of $\mathbf{A}$ closest to zero. For nonzero values of $s$, then we suppose there is an ordering
+and $\mathbf{A}^{-1}$ has a {term}`dominant eigenvalue`. Hence power iteration on $\mathbf{A}^{-1}$ can be used to find the eigenvalue of $\mathbf{A}$ closest to zero. For nonzero values of $s$, then we suppose there is an ordering
 
 :::{math}
 :label: shiftorder
@@ -88,7 +88,9 @@ Given matrix $\mathbf{A}$ and shift $s$:
     d. Set $\mathbf{x}_{k+1} = \alpha_k \mathbf{y}_k$.
 ::::
 
-Note that in {numref}`Algorithm {number} <algorithm-power-power>`, we used $y_{k,m}/x_{k,m}$ as an estimate of the dominant eigenvalue of $\mathbf{A}$. Here, that ratio is an estimate of $(\lambda_1-s)^{-1}$, and solving for $\lambda_1$ gives the $\beta_k$ in {numref}`Algorithm {number} <algorithm-inviter-inviter>`.
+:::{note}
+In {numref}`Algorithm {number} <algorithm-power-power>`, we used $y_{k,m}/x_{k,m}$ as an estimate of the dominant eigenvalue of $\mathbf{A}$. Here, that ratio is an estimate of $(\lambda_1-s)^{-1}$, and solving for $\lambda_1$ gives the $\beta_k$ in @algorithm-inviter-inviter.
+:::
 
 Each pass of inverse iteration requires the solution of a linear system of equations with the matrix $\mathbf{B}=\mathbf{A}-s\mathbf{I}$. This solution might use methods we consider later in this chapter. Here, we use (sparse) PLU factorization and hope for the best. Since the matrix $\mathbf{B}$ is constant, the factorization needs to be done only once for all iterations. The details are in {numref}`Function {number} <function-inviter>`.
 
@@ -182,7 +184,7 @@ Let's analyze the resulting convergence. If the eigenvalues are ordered by dista
 `````
 ::::
 
-There is a price to pay for this improvement. The matrix of the linear system to be solved, $(\mathbf{A}-s\mathbf{I})$, now changes with each iteration. That means that we can no longer do just one LU factorization for the entire iteration. The speedup in convergence usually makes this tradeoff worthwhile, however.
+There is a price to pay for this improvement. The matrix of the linear system to be solved, $(\mathbf{A}-s\mathbf{I}),$ now changes with each iteration. That means that we can no longer do just one LU factorization for the entire iteration. The speedup in convergence usually makes this tradeoff worthwhile, however.
 
 In practice power and inverse iteration are not as effective as the algorithms used by `eigs` and based on the mathematics described in the rest of this chapter. However, inverse iteration can be useful for turning an eigenvalue estimate into an eigenvector estimate.
 
