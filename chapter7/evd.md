@@ -336,31 +336,34 @@ The process demonstrated in {numref}`Demo {number} <demo-evd-francisqr>` is know
 2. ✍ Prove that the matrix $\mathbf{B}$ in {eq}`jordanblock` does not have two independent eigenvectors.
 
 <!-- TODO: Get rid of rank. -->
-3. ⌨ Find the eigenvalues of each matrix. Then, for each eigenvalue $\lambda$, use `rank` to verify that $\lambda\mathbf{I}$ minus the given matrix is singular.
+1. ⌨ In each part, find all the eigenvalues of $\mathbf{A}$. Then, choose one eigenvalue $\lambda$ and associated eigenvector $\mathbf{v}$ and compute $\twonorm{\mathbf{A} \mathbf{v} - \lambda \mathbf{v}}$, which should be comparable to machine epsilon.
     
-    $\mathbf{A} = \begin{bmatrix}
+    **(a)** $\mathbf{A} = \begin{bmatrix}
     2  & -1 & 0 \\
     -1 &  2 & -1 \\
     0  & -1 & 2
-    \end{bmatrix}\qquad$
-    $\mathbf{B} = \begin{bmatrix}
+    \end{bmatrix}$
+
+    **(b)** $\mathbf{A} = \begin{bmatrix}
          2 & -1 & -1 \\
         -2 &  2 & -1 \\
         -1 & -2 & 2
-      \end{bmatrix} \qquad$
-    $ \mathbf{C} = \begin{bmatrix}
+      \end{bmatrix}$
+      
+    **(c)** $ \mathbf{A} = \begin{bmatrix}
          2 & -1 & -1 \\
         -1 &  2 & -1 \\
         -1 & -1 & 2
       \end{bmatrix} $
-    <br><br>
-    $\mathbf{D} = \begin{bmatrix}
+
+    **(d)** $\mathbf{A} = \begin{bmatrix}
       3 & 1 & 0 & 0 \\
       1 & 3 & 1 & 0 \\
       0 & 1 & 3 & 1 \\
       0 & 0 & 1 & 3
     \end{bmatrix}\qquad $
-    $\mathbf{E} = \begin{bmatrix}
+    
+    **(e)** $\mathbf{A} = \begin{bmatrix}
          4 & -3 & -2 & -1\\
         -2 &  4 & -2 & -1 \\
         -1 & -2 & 4  & -1 \\

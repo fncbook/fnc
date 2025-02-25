@@ -31,7 +31,7 @@ In 2006 the online video service Netflix started an open competition for a $1 mi
 ```
 
 ::::{prf:definition} Graphs and adjacency matrices
-A {term}`graph` or *network* consists of a set $V$ of **nodes** and a set $E$ of **edges**, each of which is an ordered pair of nodes. The graph is **undirected** if for every edge $(v_i,v_j)$, the pair $(v_j,v_i)$ is also an edge; otherwise the graph is **directed**.
+A {term}`graph` or *network* consists of a set $V$ of **nodes** and a set $E$ of **edges**, each of which is an ordered pair of nodes. If there is an edge $(v_i,v_j)$, then we say that node $i$ is **adjacent** to node $j$. The graph is **undirected** if for every edge $(v_i,v_j)$, the pair $(v_j,v_i)$ is also an edge; otherwise the graph is **directed**.
 
 The {term}`adjacency matrix` of a graph with $n$ nodes $V$ and edge set $E$ is the $n\times n$ matrix whose elements are
 
@@ -39,11 +39,15 @@ The {term}`adjacency matrix` of a graph with $n$ nodes $V$ and edge set $E$ is t
 :label: adjmat
 A_{ij} =
 \begin{cases}
-1 & \text{if $(v_i,v_j)\in E$ (i.e., there is an edge from node $i$ to node $j$)},\\
+1 & \text{if $(v_i,v_j)\in E$ (i.e., node $i$ is adjacent to node $j$)},\\
 0 & \text{otherwise}.
 \end{cases}
 ```
 ::::
+
+:::{note}
+In an undirected graph, the edges $(v_i,v_j)$ and $(v_j,v_i)$ are equivalent and may be identified as a single edge, depending on the context.
+:::
 
 Graphs are a useful way to represent the link structure of social networks, airline routes, power grids, sports teams, and web pages, to name a few examples. The natural interpretation is that the edge $(v_i,v_j)$ denotes a link from node $i$ to node $j$, in which case we say that node $i$ is **adjacent** to node $j$. One usually visualizes small graphs by drawing points for nodes and arrows or lines for the edges.
 
@@ -156,11 +160,11 @@ Representation of an image as a matrix allows us to describe some common image o
     \end{bmatrix}
     :::
 
-    **(a)** How many vertices are adjacent to vertex 5?
+    **(a)** How many vertices are adjacent to vertex 5? (Assume node numbering starts at 1.)
 
-    **(b)** How many edges are in the graph?
+    **(b)** Is the graph directed or undirected?
 
-    **(c)** Is the graph directed or undirected?
+    **(c)** How many edges are in the graph?
 
     **(d)** Draw the graph. 
 
