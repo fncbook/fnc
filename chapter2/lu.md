@@ -192,7 +192,7 @@ The outer product algorithm for LU factorization seen in {numref}`Demo {number} 
 
 ````{tab-item} MATLAB
 :sync: matlab
-:::{embed} #function-lufact-julia
+:::{embed} #function-lufact-matlab
 :::
 ```` 
 
