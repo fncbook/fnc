@@ -16,8 +16,8 @@ numbering:
 ```{literalinclude} fncbook/fncbook/chapter03.py
 :filename: lsnormal.py
 :language: python
-:start-line: 6
-:end-line: 18
+:start-at: def lsnormal(A, b)
+:end-at: return
 :linenos: true
 ```
 :::{admonition} About the code
@@ -31,8 +31,8 @@ numbering:
 :open:
 ```{literalinclude} fncbook/fncbook/chapter03.py
 :filename: lsqrfact.py
-:start-line: 20
-:end-line: 30
+:start-at: def lsqrfact
+:end-at: return
 :linenos: true
 ```
 ``````
@@ -42,8 +42,8 @@ numbering:
 :open:
 ```{literalinclude} fncbook/fncbook/chapter03.py
 :filename: qrfact.py
-:start-line: 32
-:end-line: 52
+:start-at: def qrfact
+:end-at: return
 :linenos: true
 ```
 ``````
