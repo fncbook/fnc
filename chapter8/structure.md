@@ -199,7 +199,7 @@ For very large matrices, it's unlikely that you will want to find all of its eig
 
     **(c)** Repeat part (b) for the QR factorization using `qr`.
 
-(problem-structure-roswell)=
+    (problem-structure-roswell)=
 3. ⌨ One use of adjacency matrices is to analyze the links between members of a collection. Obtain the adjacency matrix $\mathbf{A}$ from {numref}`Demo %s <demo-structure-sparse>` via the following:
     
    `````{tab-set} 
