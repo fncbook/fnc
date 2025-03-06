@@ -193,11 +193,11 @@ For very large matrices, it's unlikely that you will want to find all of its eig
     ```` 
     `````
 
-    **(a)** Find the density of $\mathbf{A}$ (number of nonzeros divided by total number of elements), $\mathbf{A}^2$, $\mathbf{A}^4$, and $\mathbf{A}^8$. (You should find that it increases with the power of $A$.)
+    **(a)** Find the density of $\mathbf{A}$ (number of nonzeros divided by total number of elements), $\mathbf{A}^2$, $\mathbf{A}^4$, and $\mathbf{A}^8$. (You should find that it increases with the power of $\mathbf{A}$.)
 
-    **(b)** The LU factors tend to at least partially retain sparsity. Find the density of the $\mathbf{L}$ and $\mathbf{U}$ factors of $\mathbf{A}$ using the built-in `lu`. (See {numref}`Demo {number} <demo-structure-banded>` for usage of `lu` in the sparse case.)
+    **(b)** The LU factors tend to at least partially retain sparsity. Find the density of the $\mathbf{L}$ and $\mathbf{U}$ factors of $\mathbf{A}$ using `lufact` (@function-lufact). (If you get an error, convert the matrix to dense form first.)
 
-    **(c)** Repeat part (b) for the QR factorization using `qr`.
+    **(c)** Repeat part (b) for the QR factorization using `qrfact` (@function-qrfact). (If you get an error, convert the matrix to dense form first.)
 
 (problem-structure-roswell)=
 3. ⌨ One use of adjacency matrices is to analyze the links between members of a collection. Obtain the adjacency matrix $\mathbf{A}$ from {numref}`Demo %s <demo-structure-sparse>` via the following:
