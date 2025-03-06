@@ -61,7 +61,7 @@ Thus let $\mathbf{z}= \begin{bmatrix} c_1 & \cdots & c_m \end{bmatrix}^T$. Also 
 ```{index} dimension reduction
 ```
 
-The problems $\mathbf{A}\mathbf{x}=\mathbf{b}$ and $\mathbf{A}\mathbf{x}=\lambda\mathbf{x}$ are statements about a very high-dimensional space $\mathbb{C}^n$. One way to approximate them is to replace the full $n$-dimensional space with a much lower-dimensional $\mathcal{K}_m$ for $m\ll n$. This is the essence of the Krylov subspace approach.
+The problems $\mathbf{A}\mathbf{x}=\mathbf{b}$ and $\mathbf{A}\mathbf{x}=\lambda\mathbf{x}$ are posed in a very high-dimensional space $\mathbb{R}^n$ or $\mathbb{C}^n$. One way to approximate them is to replace the full $n$-dimensional space with a much lower-dimensional $\mathcal{K}_m$ for $m\ll n$. This is the essence of the Krylov subspace approach.
 
 For instance, we can interpret $\mathbf{A}\mathbf{x}_m\approx \mathbf{b}$ in the sense of linear least-squares—that is, using {numref}`Theorem %s <theorem-subspace-krylovmult>` to let $\mathbf{x}=\mathbf{K}_m\mathbf{z}$,
 
@@ -158,68 +158,41 @@ Given matrix $\mathbf{A}$ and vector $\mathbf{u}$:
     
     d. Let $\mathbf{q}_{m+1}=\mathbf{v}\,/\,H_{m+1,m}$.
 
+Return the $n\times (m+1)$ matrix $\mathbf{Q}_{m+1}$ whose columns are $\mathbf{q}_1,\dots, \mathbf{q}_{m+1}$ and the $(m+1)\times m$ matrix $\mathbf{H}_m$.
 ::::
 
-The Arnoldi iteration finds nested orthonormal bases for a family of nested Krylov subspaces.
-
-(demo-subspace-arnoldi)=
-::::{prf:example} Arnoldi iteration
-`````{tab-set}
-````{tab-item} Julia
-:sync: julia
-:::{embed} #demo-subspace-arnoldi-julia
-:::
-````
-
-````{tab-item} MATLAB
-:sync: matlab
-:::{embed} #demo-subspace-arnoldi-matlab
-:::
-````
-
-````{tab-item} Python
-:sync: python
-:::{embed} #demo-subspace-arnoldi-python
-:::
-````
-`````
-::::
-
-
-## Key identity
-
-Up to now we have focused only on finding the orthonormal basis that lies in the columns of $\mathbf{Q}_m$. But the $H_{ij}$ values found during the iteration are also important. Taking $j=1,2,\ldots,m$ in {eq}`arnoldivec` leads to
+The vectors $\mathbf{q}_1,\dots, \mathbf{q}_m$ are an orthonormal basis for the space $\mathcal{K}_m$, which makes them ideal for numerical computations in that space. The matrix $\mathbf{H}_m$ plays an important role, too, and has a particular "triangular plus" structure,
 
 :::{math}
-:label: arnoldimat
-\begin{split}
-  \mathbf{A}\mathbf{Q}_m &= \begin{bmatrix}
-    \mathbf{A}\mathbf{q}_1 & \cdots \mathbf{A}\mathbf{q}_m
-  \end{bmatrix}\\
-  & = \begin{bmatrix}
-    \mathbf{q}_1 & \mathbf{q}_2 & \cdots & \mathbf{q}_{m+1}
-  \end{bmatrix}\:  \begin{bmatrix}
+:label: arnoldiH
+\mathbf{H}_m = \begin{bmatrix}
     H_{11} & H_{12} & \cdots & H_{1m} \\
     H_{21} & H_{22} & \cdots & H_{2m} \\
     & H_{32} & \ddots & \vdots \\
     & & \ddots & H_{mm} \\
     & & & H_{m+1,m}
-\end{bmatrix} = \mathbf{Q}_{m+1} \mathbf{H}_m,
-\end{split}
+\end{bmatrix}
 :::
-
-where the matrix $\mathbf{H}_m$ has a particular "triangular plus one" structure. 
 
 ```{index} ! upper Hessenberg matrix
 ```
 
 ::::{prf:definition} Upper Hessenberg matrix
-A matrix $\mathbf{H}$ is **upper Hessenberg** if $H_{ij}=0$ whenever $i>j+1$.
+A matrix $\mathbf{H}$ is an {term}`upper Hessenberg matrix` if $H_{ij}=0$ whenever $i>j+1$.
 ::::
 
-Equation {eq}`arnoldimat` is a fundamental identity of Krylov subspace methods.
+The identity @arnoldivec used over all the iterations can be collected into a single matrix equation, 
+
+:::{math}
+:label: arnoldimat
+\mathbf{A}\mathbf{Q}_m = \mathbf{Q}_{m+1} \mathbf{H}_m,
+:::
+
+which is a fundamental identity of Krylov subspace methods.
 
 ## Implementation
+
+An implementation of the Arnoldi iteration is given in {numref}`Function {number} <function-arnoldi>`. A careful inspection shows that inner nested loop does not exactly implement {eq}`arnoldiip` and {eq}`arnoldigs`. The reason is numerical stability. Though the described and implemented versions are mathematically equivalent in exact arithmetic (see [Exercise 6](#problem-subspace-modifiedgs)), the approach in {numref}`Function {number} <function-arnoldi>` is more stable.
 
 (function-arnoldi)=
 ``````{prf:algorithm} arnoldi
@@ -244,9 +217,30 @@ Equation {eq}`arnoldimat` is a fundamental identity of Krylov subspace methods.
 `````
 ``````
 
-An implementation of the Arnoldi iteration is given in {numref}`Function {number} <function-arnoldi>`. A careful inspection shows that the loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}`arnoldigs`. The reason is numerical stability. Though the described and implemented versions are mathematically equivalent in exact arithmetic (see [Exercise 6](#problem-subspace-modifiedgs)), the approach in {numref}`Function {number} <function-arnoldi>` is more stable.
+(demo-subspace-arnoldi)=
+::::{prf:example} Arnoldi iteration
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-subspace-arnoldi-julia
+:::
+````
 
-In the next section we revisit the idea of approximately solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ over a Krylov subspace $\mathcal{K}_m$, using the ONC matrix $\mathbf{Q}_m$ in place of $\mathbf{K}_m$. A related idea explored in [Exercise 7](#problem-krylov-arnoldieig) is used to approximate the eigenvalue problem for $\mathbf{A}$, which is the approach that underlies `eigs` for sparse matrices.
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-subspace-arnoldi-matlab
+:::
+````
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-subspace-arnoldi-python
+:::
+````
+`````
+::::
+
+In the next section, we revisit the idea of approximately solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ over a Krylov subspace as suggested in @demo-subspace-arnoldi. A related idea explored in [Exercise 7](#problem-krylov-arnoldieig) is used to approximate the eigenvalue problem for $\mathbf{A}$, which is the approach that underlies `eigs` for sparse matrices.
 
 ## Exercises
 

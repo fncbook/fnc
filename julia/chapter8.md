@@ -44,10 +44,6 @@ numbering:
 :language: julia
 :linenos: true
 ```
-
-```{admonition} About the code
-The loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}`arnoldigs`. The reason is numerical stability. Though the described and implemented versions are mathematically equivalent in exact arithmetic (see [Exercise 6](#problem-subspace-modifiedgs)), the approach in {numref}`Function {number} <function-arnoldi>` is more stable.
-```
 ``````
 
 (function-gmres-julia)=
@@ -61,7 +57,6 @@ The loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}
 :linenos: true
 ```
 ``````
-
 
 ## Examples
 
@@ -513,51 +508,33 @@ plot(0:29, resid; m=:o,
 (demo-subspace-arnoldi-julia)=
 ``````{dropdown} @demo-subspace-arnoldi
 :open:
-We illustrate a few steps of the Arnoldi iteration for a small matrix.
+Here again is the linear system from @demo-subspace-unstable.
 
 ```{code-cell}
-A = rand(1.0:9.0, 6, 6)
+λ = @. 10 + (1:100)
+A = triu(rand(100, 100), 1) + diagm(λ)
+b = rand(100);
 ```
 
-The seed vector we choose here determines the first member of the orthonormal basis.
+We can use $\mathbf{b}$ as the seed vector for the Arnoldi iteration. 
 
 ```{code-cell}
-u = randn(6)
-Q = u / norm(u);
+Q, H = FNC.arnoldi(A, b, 30)
+println("Q has size $(size(Q))")
+println("H has size $(size(H))")
 ```
 
-Multiplication by $\mathbf{A}$ gives us a new vector in $\mathcal{K}_2$.
+Here's one validation of the key identity @arnoldimat.
 
 ```{code-cell}
-Aq = A * Q[:, 1];
+should_be_near_zero = opnorm(A * Q[:, 1:20] - Q[:, 1:21] * H[1:21, 1:20])
 ```
-
-We subtract off its projection in the previous direction. The remainder is rescaled to give us the next orthonormal column.
-
-```{code-cell}
-v = Aq - dot(Q[:, 1], Aq) * Q[:, 1]
-Q = [Q v / norm(v)];
-```
-
-On the next pass, we have to subtract off the projections in two previous directions.
+Using the Krylov matrix to project the linear system into a Kyrlov subspace in @demo-subspace-unstable was unable to get the residual much smaller than about $10^{-4}$. But the Arnoldi basis gives us a stable way to work in that subspace and get better results.
 
 ```{code-cell}
-Aq = A * Q[:, 2]
-v = Aq - dot(Q[:, 1], Aq) * Q[:, 1] - dot(Q[:, 2], Aq) * Q[:, 2]
-Q = [Q v / norm(v)];
-```
-
-At every step, $\mathbf{Q}_m$ is an ONC matrix.
-
-```{code-cell}
-@show opnorm(Q' * Q - I);
-```
-
-And $\mathbf{Q}_m$ spans the same space as the three-dimensional Krylov matrix.
-
-```{code-cell}
-K = [u A * u A * A * u];
-@show rank([Q K]);
+z = (A * Q) \ b
+x = Q * z
+@show resid_norm = norm(b - A * x);
 ```
 ``````
 

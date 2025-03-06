@@ -51,7 +51,7 @@ numbering:
 ```{code-cell}
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
-FNC_init
+FNC_init;;
 ```
 
 ### 8.1 @section-krylov-structure
@@ -429,7 +429,7 @@ end
 (demo-subspace-unstable-matlab)=
 ``````{dropdown} @demo-subspace-unstable
 :open:
-First we define a triangular matrix with known eigenvalues, and a random vector $b$.
+First we define a triangular matrix $\mathbf{A}$ with known eigenvalues and a random vector $\mathbf{b}$.
 
 ```{code-cell}
 lambda = 10 + (1:100);
@@ -437,7 +437,7 @@ A = diag(lambda) + triu(rand(100), 1);
 b = rand(100, 1);
 ```
 
-Next we build up the first ten Krylov matrices iteratively, using renormalization after each matrix-vector multiplication.
+Next, we build up the first ten Krylov matrices iteratively. In order to keep the columns from growing exponentially in norm, we normalize them as we go. This doesn't affect the column space of the Krylov matrix, in principle at least.
 
 ```{code-cell}
 Km = b;
@@ -473,52 +473,33 @@ axis tight, title('Residual for linear systems')
 (demo-subspace-arnoldi-matlab)=
 ``````{dropdown} @demo-subspace-arnoldi
 :open:
-We illustrate a few steps of the Arnoldi iteration for a small matrix.
+Here again is the linear system from @demo-subspace-unstable.
 
 ```{code-cell}
-A = randi(9, [6, 6])
+lambda = 10 + (1:100);
+A = diag(lambda) + triu(rand(100), 1); 
+b = rand(100, 1);
 ```
 
-The seed vector we choose here determines the first member of the orthonormal basis.
+We can use $\mathbf{b}$ as the seed vector for the Arnoldi iteration. 
 
 ```{code-cell}
-u = randn(6, 1);
-Q = u / norm(u);
+[Q, H] = arnoldi(A, b, 30);
+disp(sprintf("Q is %d by %d", size(Q)))
+disp(sprintf("H is %d by %d", size(H)))
 ```
 
-Multiplication by $\mathbf{A}$ gives us a new vector in $\mathcal{K}_2$.
+Here's one validation of the key identity @arnoldimat.
 
 ```{code-cell}
-Aq = A * Q(:, 1);
+should_be_near_zero = norm(A * Q(:, 1:20) - Q(:, 1:21) * H(1:21, 1:20))
 ```
-
-We subtract off its projection in the previous direction. The remainder is rescaled to give us the next orthonormal column.
-
-```{code-cell}
-v = Aq - dot(Q(:, 1), Aq) * Q(:, 1);
-Q = [Q, v / norm(v)];
-```
-
-On the next pass, we have to subtract off the projections in two previous directions.
+Using the Krylov matrix to project the linear system into a Kyrlov subspace in @demo-subspace-unstable was unable to get the residual much smaller than about $10^{-4}$. But the Arnoldi basis gives us a stable way to work in that subspace and get better results.
 
 ```{code-cell}
-Aq = A * Q(:, 2);
-v = Aq - dot(Q(:, 1), Aq) * Q(:, 1) - dot(Q(:, 2), Aq) * Q(:, 2);
-Q = [Q, v / norm(v)];
-```
-
-At every step, $\mathbf{Q}_m$ is an ONC matrix.
-
-```{code-cell}
-format
-norm(Q' * Q - eye(3))
-```
-
-And $\mathbf{Q}_m$ spans the same space as the three-dimensional Krylov matrix.
-
-```{code-cell}
-K = [u, A * u, A * A * u];
-rank([Q, K])
+z = (A * Q) \ b;
+x = Q * z;
+resid_norm = norm(b - A * x)
 ```
 ``````
 

@@ -44,10 +44,6 @@ numbering:
 :language: python
 :linenos: true
 ```
-
-```{admonition} About the code
-The loop starting at line 17 does not exactly implement {eq}`arnoldiip` and {eq}`arnoldigs`. The reason is numerical stability. Though the described and implemented versions are mathematically equivalent in exact arithmetic (see [Exercise 6](#problem-subspace-modifiedgs)), the approach in {numref}`Function {number} <function-arnoldi>` is more stable.
-```
 ``````
 
 (function-gmres-python)=
@@ -485,55 +481,36 @@ title(("Residual for linear systems"));
 (demo-subspace-arnoldi-python)=
 ``````{dropdown} @demo-subspace-arnoldi
 :open:
-We illustrate a few steps of the Arnoldi iteration for a small matrix.
+Here again is the linear system from @demo-subspace-unstable.
 
 ```{code-cell}
-A = random.choice(range(10), (6, 6))
-print(A)
+ev = 10 + arange(1, 101)
+A = triu(random.rand(100, 100), 1) + diag(ev)
+b = random.rand(100);
 ```
 
-The seed vector we choose here determines the first member of the orthonormal basis.
+We can use $\mathbf{b}$ as the seed vector for the Arnoldi iteration. 
 
 ```{code-cell}
-u = random.randn(6)
-Q = zeros([6, 3])
-Q[:, 0] = u / norm(u)
+Q, H = FNC.arnoldi(A, b, 30)
+print("Q has size", Q.shape)
+print("H has size", H.shape)
 ```
 
-Multiplication by $\mathbf{A}$ gives us a new vector in $\mathcal{K}_2$.
+Here's one validation of the key identity @arnoldimat.
 
 ```{code-cell}
-Aq = A @ Q[:, 0]
+from numpy.linalg import norm
+should_be_near_zero = norm(A @ Q[:, :20] - Q[:, :21] @ H[:21, :20])
+print(should_be_near_zero)
 ```
-
-We subtract off its projection in the previous direction. The remainder is rescaled to give us the next orthonormal column.
-
-```{code-cell}
-v = Aq - dot(Q[:, 0], Aq) * Q[:, 0]
-Q[:, 1] = v / norm(v)
-```
-
-On the next pass, we have to subtract off the projections in two previous directions.
+Using the Krylov matrix to project the linear system into a Kyrlov subspace in @demo-subspace-unstable was unable to get the residual much smaller than about $10^{-4}$. But the Arnoldi basis gives us a stable way to work in that subspace and get better results.
 
 ```{code-cell}
-Aq = A @ Q[:, 1]
-v = Aq - dot(Q[:, 0], Aq) * Q[:, 0] - dot(Q[:, 1], Aq) * Q[:, 1]
-Q[:, 2] = v / norm(v)
-```
-
-At every step, $\mathbf{Q}_m$ is an ONC matrix.
-
-```{code-cell}
-print(f"should be near zero: {norm(Q.T @ Q - eye(3)):.2e}")
-```
-
-And $\mathbf{Q}_m$ spans the same space as the three-dimensional Krylov matrix.
-
-```{code-cell}
-from numpy.linalg import matrix_rank
-K = stack([u, A @ u, A @ A @ u], axis=-1)
-Q_and_K = hstack([Q, K])
-print(matrix_rank(Q_and_K))
+z, _, _, _ = linalg.lstsq(A @ Q, b)
+x = Q @ z
+resid_norm = norm(b - A @ x)
+print(f"residual norm: {resid_norm:.2e}")
 ```
 ``````
 
