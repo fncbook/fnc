@@ -107,6 +107,8 @@ Given matrix $\mathbf{A}$:
     c. Set $\alpha_k = \dfrac{1}{y_{k,m}}$ and $\,\beta_k = \dfrac{y_{k,m}}{x_{k,m}}$.
 
     d. Set $\mathbf{x}_{k+1} = \alpha_k \mathbf{y}_k$.
+
+Return $\beta_1,\beta_2,\ldots$ as dominant eigenvalue estimates, and $\mathbf{x}_1,\mathbf{x}_2,\ldots$ as associated eigenvector estimates.
 ::::
 
 :::{note}
