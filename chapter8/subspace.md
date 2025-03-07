@@ -171,7 +171,7 @@ The vectors $\mathbf{q}_1,\dots, \mathbf{q}_m$ are an orthonormal basis for the 
     & H_{32} & \ddots & \vdots \\
     & & \ddots & H_{mm} \\
     & & & H_{m+1,m}
-\end{bmatrix}
+\end{bmatrix}.
 :::
 
 ```{index} ! upper Hessenberg matrix
