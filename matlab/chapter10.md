@@ -70,6 +70,7 @@ numbering:
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init;
+pwd
 ```
 
 ### 10.1 @section-bvp-tpbvp

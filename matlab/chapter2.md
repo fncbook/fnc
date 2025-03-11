@@ -60,6 +60,7 @@ Line 12 implements @forwardsub. It contains an inner product between row $i$ of 
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init;
+pwd
 ```
 
 ### 2.1 @section-linsys-polyinterp
