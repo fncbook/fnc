@@ -29,7 +29,7 @@ From the fundamental Arnoldi identity {eq}`arnoldimat`, this is equivalent to
 \min_{\mathbf{z}\in\mathbb{C}^m}\, \bigl\| \mathbf{Q}_{m+1} \mathbf{H}_m\mathbf{z}-\mathbf{b} \bigr\|.
 :::
 
-Note that $\mathbf{q}_1$ is a unit multiple of $\mathbf{b}$, so $\mathbf{b} = \|\mathbf{b}\| \mathbf{Q}_{m+1}\mathbf{e}_1$. Thus {eq}`gmresproblem1` becomes
+Note that $\mathbf{q}_1$ is a unit multiple of $\mathbf{b}$, so $\mathbf{b} = \|\mathbf{b}\| \mathbf{Q}_{m+1}\mathbf{e}_1$. Thus, {eq}`gmresproblem1` becomes
 
 :::{math}
 :label: gmresproblem2
@@ -43,11 +43,11 @@ The least-squares problems {eq}`gmresproblem`,  {eq}`gmresproblem1`, and {eq}`gm
   \|\mathbf{Q}_{m+1}\mathbf{w}\|^2 = \mathbf{w}^*\mathbf{Q}_{m+1}^*\mathbf{Q}_{m+1}\mathbf{w} = \mathbf{w}^*\mathbf{w} = \|\mathbf{w}\|^2.
 :::
 
-The first norm in that equation is on $\mathbb{C}^n$, while the last is on the much smaller space $\mathbb{C}^{m+1}$. Hence the least-squares problem {eq}`gmresproblem2` is equivalent to
+The first norm in that equation is on $\mathbb{C}^n$, while the last is on the much smaller space $\mathbb{C}^{m+1}$. Hence, the least-squares problem {eq}`gmresproblem2` is equivalent to
 
 :::{math}
 :label: gmresproblemsmall
-  \min_{\mathbf{z}\in\mathbb{C}^m}\, \bigl\| \mathbf{H}_m\mathbf{z}-\|\mathbf{b}\|\,\mathbf{e}_1 \bigr\|,
+  \min_{\mathbf{z}\in\mathbb{C}^m}\, \bigl\| \mathbf{H}_m\mathbf{z}-\|\mathbf{b}\|\, \mathbf{e}_1 \bigr\|,
 :::
 
 which is of size $(m+1)\times m$. We call the solution of this minimization $\mathbf{z}_m$, and then $\mathbf{x}_m=\mathbf{Q}_m \mathbf{z}_m$ is the $m$th approximation to the solution of $\mathbf{A}\mathbf{x}=\mathbf{b}$.
@@ -90,7 +90,7 @@ GMRES[^gmres] uses the Arnoldi iteration to minimize the residual $\mathbf{b} - 
 `````
 ::::
 
-Compare the graph in {numref}`Demo %s <demo-gmres-intro>`  to the one in {numref}`Demo %s <demo-subspace-unstable>`. Both start with the same linear convergence, but only the version using Arnoldi avoids the instability created by the poor Krylov basis.
+Compare the graph in {numref}`Demo %s <demo-gmres-intro>` to the one in {numref}`Demo %s <demo-subspace-unstable>`. Both start with the same linear convergence, but only the version using Arnoldi avoids the instability created by the poor Krylov basis.
 
 A basic implementation of GMRES is given in {numref}`Function {number} <function-gmres>`.
 
@@ -119,7 +119,7 @@ A basic implementation of GMRES is given in {numref}`Function {number} <function
 
 ## Convergence and restarting
 
-Thanks to {numref}`Theorem %s <theorem-subspace-krylovmult>`, minimization of $\|\mathbf{b}-\mathbf{A}\mathbf{x}\|$ over $\mathcal{K}_{m+1}$ includes minimization over $\mathcal{K}_m$. Hence the norm of the residual $\mathbf{r}_m = \mathbf{b} - \mathbf{A}\mathbf{x}_m$ (being the minimized quantity) cannot increase as the iteration unfolds.
+Thanks to {numref}`Theorem %s <theorem-subspace-krylovmult>`, minimization of $\|\mathbf{b}-\mathbf{A}\mathbf{x}\|$ over $\mathcal{K}_{m+1}$ includes minimization over $\mathcal{K}_m$. Hence, the norm of the residual $\mathbf{r}_m = \mathbf{b} - \mathbf{A}\mathbf{x}_m$ (being the minimized quantity) cannot increase as the iteration unfolds.
 
 ```{index} convergence rate; linear
 ```
@@ -129,9 +129,9 @@ Unfortunately, making other conclusive statements about the convergence of GMRES
 ```{index} ! GMRES; restarting
 ```
 
-One of the practical challenges in GMRES is that as the dimension of the Krylov subspace grows, the number of new entries to be found in $\mathbf{H}_m$ and the total number of columns in $\mathbf{Q}$ also grow. Thus both the work and the storage requirements are quadratic in $m$, which can become intolerable in some applications. For this reason, GMRES is often used with **restarting**.
+One of the practical challenges in GMRES is that as the dimension of the Krylov subspace grows, the number of new entries to be found in $\mathbf{H}_m$ and the total number of columns in $\mathbf{Q}$ also grow. Thus, both the work and the storage requirements are quadratic in $m$, which can become intolerable in some applications. For this reason, GMRES is often used with **restarting**.
 
-Suppose $\hat{\mathbf{x}}$ is an approximate solution of $\mathbf{A}\mathbf{x}=\mathbf{b}$. Then if we set $\mathbf{x}=\mathbf{u}+\hat{\mathbf{x}}$, we have $\mathbf{A}(\mathbf{u}+\hat{\mathbf{x}}) = \mathbf{b}$, or $\mathbf{A}\mathbf{u} = \mathbf{b} - \mathbf{A}\hat{\mathbf{x}}$. The conclusion is that if we get an approximate solution and compute its residual $\mathbf{r}=\mathbf{b} - \mathbf{A}\hat{\mathbf{x}}$, then we need only to solve $\mathbf{A}\mathbf{u} = \mathbf{r}$ in order to get a correction to $\hat{\mathbf{x}}$.[^relativerestart]
+Suppose $\hat{\mathbf{x}}$ is an approximate solution of $\mathbf{A}\mathbf{x}=\mathbf{b}$. Then, if we set $\mathbf{x}=\mathbf{u}+\hat{\mathbf{x}}$, we have $\mathbf{A}(\mathbf{u}+\hat{\mathbf{x}}) = \mathbf{b}$, or $\mathbf{A}\mathbf{u} = \mathbf{b} - \mathbf{A}\hat{\mathbf{x}}$. The conclusion is that if we get an approximate solution and compute its residual $\mathbf{r}=\mathbf{b} - \mathbf{A}\hat{\mathbf{x}}$, then we need only to solve $\mathbf{A}\mathbf{u} = \mathbf{r}$ in order to get a correction to $\hat{\mathbf{x}}$.[^relativerestart]
 
 [^relativerestart]: The new problem needs to be solved for accuracy relative to $\|\mathbf{b}\|$, *not* relative to $\|\mathbf{r}\|$.
 
@@ -177,7 +177,7 @@ There are other ways to avoid the growth in computational effort as the GMRES/Ar
 
     **(a)** Find the exact solution by inspection.
 
-    **(b)** Find the GMRES approximate solutions $\mathbf{x}_m$ for $m=1,2,3,4$. 
+    **(b)** Find the GMRES approximate solutions $\mathbf{x}_m$ for $m=1,2,3,4$. (You should not try to do the Arnoldi iteration by hand. Instead, apply the result in @gmresdef to get a tractable least-squares problem.)
 
 2. ✍ (Continuation of [Exercise 8.4.3](#problem-subspace-matrixpolykrylov).) Show that if $\mathbf{x}_m\in\mathcal{K}_m$, then the residual $\mathbf{b}-\mathbf{A}\mathbf{x}_m$ is equal to $q(\mathbf{A})\mathbf{b}$, where $q$ is a polynomial of degree at most $m$ and $q(0)=1$. (This fact is a key one for many convergence results.) 
 

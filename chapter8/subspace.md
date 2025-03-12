@@ -49,7 +49,7 @@ If $\mathbf{x}\in\mathcal{K}_m$, then for some coefficients $c_1,\ldots,c_m$,
 \mathbf{x} = c_1 \mathbf{u} + c_2 \mathbf{A} \mathbf{u} + \cdots + c_m \mathbf{A}^{m-1} \mathbf{u}.
 :::
 
-Thus let $\mathbf{z}= \begin{bmatrix} c_1 & \cdots & c_m \end{bmatrix}^T$. Also $\mathbf{x}\in\mathcal{K}_{m+1}$, as we can add zero times $\mathbf{A}^{m}\mathbf{u}$ to the sum. Finally,
+Thus let $\mathbf{z}= \begin{bmatrix} c_1 & \cdots & c_m \end{bmatrix}^T$. Also, $\mathbf{x}\in\mathcal{K}_{m+1}$, as we can add zero times $\mathbf{A}^{m}\mathbf{u}$ to the sum. Finally,
   
 :::{math}
 \mathbf{A}\mathbf{x} = c_1 \mathbf{A} \mathbf{u} + c_2 \mathbf{A}^{2} \mathbf{u} + \cdots + c_m \mathbf{A}^{m} \mathbf{u} \in \mathcal{K}_{m+1}.
@@ -122,14 +122,14 @@ Then the vectors $\mathbf{q}_1,\ldots,\mathbf{q}_m$ are the orthonormal basis we
 
 :::{math}
 :label: arnoldivec
-\mathbf{A} \mathbf{q}_m = H_{1m} \, \mathbf{q}_1 + H_{2m} \, \mathbf{q}_2 + \cdots + H_{m+1,m}\,\mathbf{q}_{m+1}
+\mathbf{A} \mathbf{q}_m = H_{1m} \, \mathbf{q}_1 + H_{2m} \, \mathbf{q}_2 + \cdots + H_{m+1,m}\, \mathbf{q}_{m+1}
 :::
 
 for some choice of the $H_{ij}$. Note that by using orthonormality, we have
 
 :::{math}
 :label: arnoldiip
-\mathbf{q}_i^* (\mathbf{A}\mathbf{q}_m) = H_{im},\qquad i=1,\ldots,m.
+\mathbf{q}_i^* (\mathbf{A}\mathbf{q}_m) = H_{im}, \qquad i=1,\ldots, m.
 :::
 
 Since we started by assuming that we know $\mathbf{q}_1,\ldots,\mathbf{q}_m$, the only unknowns in {eq}`arnoldivec` are $H_{m+1,m}$ and $\mathbf{q}_{m+1}$. But they appear only as a product, and we know that $\mathbf{q}_{m+1}$ is a *unit* vector, so they are uniquely defined (up to sign) by the other terms in the equation.
@@ -151,7 +151,7 @@ Given matrix $\mathbf{A}$ and vector $\mathbf{u}$:
 
     :::{math}
     :label: arnoldigs
-    \mathbf{v} = (\mathbf{A} \mathbf{q}_m) - H_{1m} \,\mathbf{q}_1 - H_{2m}\, \mathbf{q}_2 - \cdots - H_{mm}\, \mathbf{q}_m.
+    \mathbf{v} = (\mathbf{A} \mathbf{q}_m) - H_{1m} \, \mathbf{q}_1 - H_{2m}\, \mathbf{q}_2 - \cdots - H_{mm}\, \mathbf{q}_m.
     :::
 
     c. Let $H_{m+1,m}=\|\mathbf{v}\|$.
@@ -271,7 +271,7 @@ In the next section, we revisit the idea of approximately solving $\mathbf{A}\ma
       & \ddots & \ddots & \ddots & \\
       & & 1 & -2 & 1 \\
       1 & & & 1 & -2
-    \end{bmatrix} \:(200\times 200) $
+    \end{bmatrix} \: (200\times 200) $
 
     % must stay as #3
 (problem-subspace-matrixpolykrylov)=
