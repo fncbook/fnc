@@ -281,7 +281,7 @@ In the next section, we revisit the idea of approximately solving $\mathbf{A}\ma
 
 5. ⌨ When Arnoldi iteration is performed on the Krylov subspace generated using the matrix $\mathbf{A}=\displaystyle \begin{bmatrix}  2& 1& 1& 0\\ 1 &3 &1& 0\\ 0& 1& 3& 1\\ 0& 1& 1& 2 \end{bmatrix}$, the results can depend strongly on the initial vector $\mathbf{u}$. 
 
-    **(a)** Apply {numref}`Function {number} <function-arnoldi>` and output `Q` and `H` when using the following seed vectors. 
+    **(a)** Apply {numref}`Function {number} <function-arnoldi>` for 3 iterations and output `Q` (which should be square) and `H` when using the following seed vectors. 
     
     *(i)* $\bigl[1,\,0,\,0,\,0\bigr]$ $\qquad$ *(ii)* $\bigl[1,\,1,\,1,\,1\bigr]$ $\qquad$ *(iii)* `rand(4)`
    
