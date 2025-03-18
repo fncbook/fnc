@@ -86,6 +86,8 @@ Given matrix $\mathbf{A}$ and shift $s$:
     c. Set $\alpha_k = \dfrac{1}{y_{k,m}}$ and $\,\beta_k = s + \dfrac{x_{k,m}}{y_{k,m}}$.
 
     d. Set $\mathbf{x}_{k+1} = \alpha_k \mathbf{y}_k$.
+
+Return $\beta_1,\beta_2,\ldots$ as eigenvalue estimates, and $\mathbf{x}_1,\mathbf{x}_2,\ldots$ as associated eigenvector estimates.
 ::::
 
 :::{note}
