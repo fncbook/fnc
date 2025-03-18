@@ -151,18 +151,14 @@ Observe that $\ell_k$ is _not_ between zero and one everywhere, unlike a hat fun
 :open:
 
 ```{code-cell}
-from scipy.interpolate import BarycentricInterpolator as interp
 t = array([1, 1.6, 1.9, 2.7, 3])
-p = interp(t, log(t))
-```
-
-```{code-cell}
-from scipy.interpolate import BarycentricInterpolator as interp
-t = array([1, 1.6, 1.9, 2.7, 3])
-p = interp(t, log(t))
-x = linspace(1, 3, 500)
+n = len(t) - 1
 Phi = lambda x: prod([x - ti for ti in t])
-plot(x, [Phi(xj) / 5 for xj in x], label="$\\frac{1}{5}|\\Phi(x)|$")
+x = linspace(1, 3, 500)
+plot(x, [abs(Phi(xj)) / 5 for xj in x], label="$\\frac{1}{5}|\\Phi(x)|$")
+
+from scipy.interpolate import BarycentricInterpolator as interp
+p = interp(t, log(t))
 plot(x, abs(log(x) - p(x)), label="$|f(x)-p(x)|$")
 plot(t, zeros(t.size), "ko", label="nodes")
 xlabel("$x$"),  ylabel("error")
