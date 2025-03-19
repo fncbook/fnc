@@ -207,7 +207,7 @@ The theoretical and computational aspects of Fourier analysis are vast and far-r
 
 ## Exercises
 
-1. ⌨  Each of the following functions is 2-periodic. Use {numref}`Function {number} <function-triginterp>` to plot the function together with its trig interpolants with $n=3,6,9$. Then, for $n=2,3,\ldots,30$, compute the max-norm error in the trig interpolant by sampling at $1000$ or more points, and make a convergence plot on a semi-log scale.
+1. ⌨  Each of the following functions is 2-periodic. Use {numref}`Function {number} <function-triginterp>` to make a 3-by-1 grid of plots of the function together with its trigonometric interpolants for $n=3$, $6$, and $9$. Then, for $n=2,3,\ldots,30$, compute the max-norm error in the trig interpolant by sampling at $1000$ or more points, and make a convergence plot on a semi-log scale.
 
     **(a)** $f(x) = e^{\sin (2\pi x)}\qquad$
     **(b)** $f(x) = \log [2+ \sin (3 \pi x ) ]\qquad$
