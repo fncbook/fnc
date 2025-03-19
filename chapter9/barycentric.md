@@ -176,11 +176,11 @@ You might suspect that as the evaluation point $x$ approaches a node $t_k$, subt
 (problem-barycentric-limit)=
 3. ✍  Show using L'Hôpital's rule on {eq}`bary2` that $p(t_i)=y_i$ for all $i=0,\ldots,n$.
 
-4. ⌨ In each case, use {numref}`Function {number}<function-polyinterp>` to interpolate the given function using $n+1$ evenly spaced nodes in the given interval. Plot each interpolant together with the exact function.
+4. ⌨ In each case, use {numref}`Function {number}<function-polyinterp>` to interpolate the given function using $n+1$ evenly spaced nodes in the given interval. In a 3-by-1 grid of plots, show each interpolant together with the exact function and the data points (i.e., values at the nodes).
 
     **(a)** $f(x) = \ln (x), \quad n = 2,3,4, \quad x\in [1,10]$
 
-    **(b)** $f(x) = \tanh (x), \quad n = 2,3,4, \quad x \in [0-3,2]$
+    **(b)** $f(x) = \tanh (x), \quad n = 2,3,4, \quad x \in [-3,2]$
 
     **(c)** $f(x) = \cosh (x), \quad n = 2,3,4, \quad x \in [-1,3]$
 
@@ -191,12 +191,12 @@ You might suspect that as the evaluation point $x$ approaches a node $t_k$, subt
 6. ✍ Derive this fact stated implicitly in {eq}`baryweight`:
     
     $$
-    \Phi'(x_k) = \prod_{\substack{j=0\\j\neq k}}^n (t_k - t_j).
+    \Phi'(t_k) = \prod_{\substack{j=0\\j\neq k}}^n (t_k - t_j).
     $$
 
 7. ✍ Use {eq}`lagrangealt` to show that if $j\neq k$, 
     
     $$
-    \ell_k'(x_j) = \frac{w_k}{w_j(x_j-x_k)}.
+    \ell_k'(t_j) = \frac{w_k}{w_j(t_j-t_k)}.
     $$
 
