@@ -62,6 +62,8 @@ For any {term}`graph` with {term}`adjacency matrix` $\mathbf{A}$,
 ::::
 
 ::::{prf:proof}
+:enumerated: false
+
 Part 1 follows immediately from the definitions. Part 2 is clearly true for $k=1$. Assume inductively that it is true for $k-1$. Each walk of length $k$ from node $i$ to node $j$ must be a walk of length $k-1$ from $i$ to node $p$, then a walk of length 1 from node $p$ to node $j$. The total number of such walks is therefore
 
 $$

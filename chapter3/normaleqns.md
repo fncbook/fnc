@@ -27,6 +27,9 @@ If $\mathbf{x}$ satisfies $\mathbf{A}^T(\mathbf{A}\mathbf{x}-\mathbf{b})=\boldsy
 ````
 
 ````{prf:proof}
+:enumerated: false
+
+
 Let $\mathbf{y}\in \mathbb{R}^n$ be any vector. Then
   $\mathbf{A}(\mathbf{x}+\mathbf{y})-\mathbf{b}=\mathbf{A}\mathbf{x}-\mathbf{b}+\mathbf{A}\mathbf{y}$, and
   
@@ -94,6 +97,8 @@ For any real $m\times n$ matrix $\mathbf{A}$ with $m\ge n$, the following are tr
 ::::
 
 ````{prf:proof}
+:enumerated: false
+
 The first part is left as [Exercise 3](#problem-normaleqns-symmetry). For the second part, suppose that $\mathbf{A}^T\mathbf{A}\mathbf{z}=\boldsymbol{0}$. Note that $\mathbf{A}^T\mathbf{A}$ is singular if and only if $\mathbf{z}$ may be nonzero. Left-multiplying by $\mathbf{z}^T$, we find that
   
 ```{math}

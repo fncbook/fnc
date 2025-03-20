@@ -92,6 +92,8 @@ Suppose $\mathbf{Q}$ is a real $n\times k$ ONC matrix (matrix with orthonormal c
 ````
 
 ````{prf:proof}
+:enumerated: false
+
 The first part is derived above. The second part follows a pattern that has become well established by now:
 
 ```{math}
@@ -126,6 +128,8 @@ Suppose $\mathbf{Q}$ is an $n\times n$ real orthogonal matrix. Then:
 5. If $\mathbf{U}$ is another $n\times n$ orthogonal matrix, then $\mathbf{Q}\mathbf{U}$ is also orthogonal.
 ````
 ::::{prf:proof}
+:enumerated: false
+
 Since $\mathbf{Q}$ is an ONC matrix, $\mathbf{Q}^T\mathbf{Q}=\mathbf{I}$. All three matrices are $n\times n$, so $\mathbf{Q}^{-1}=\mathbf{Q}^T$. The proofs of the other statements are left to the exercises.
 ::::
 

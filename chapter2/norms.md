@@ -168,6 +168,10 @@ For a square matrix $\mathbf{A}$,
 ````
 
 ````{prf:proof}
+:enumerated: false
+
+:enumerated: false
+
 
 The first result is trivial if $\mathbf{x}=\boldsymbol{0}$; otherwise,
 

@@ -193,6 +193,8 @@ The absolute condition number of piecewise linear interpolation in the infinity 
 ````
 
 ````{prf:proof}
+:enumerated: false
+
 
 By linearity,
 

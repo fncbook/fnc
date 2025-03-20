@@ -100,6 +100,8 @@ A linear multistep method is zero-stable if and only if every root $r$ of the ge
 ````
 
 ````{prf:proof}
+:enumerated: false
+
 (Partial proof, when all roots of $\rho$ are simple.) As explained above, the values produced by the numerical method approach solutions of the difference equation $\rho(\mathcal{Z})u_{i-k+1}=0$. We consider only the case where the roots $r_1,\ldots,r_k$ of $\rho(z)$. Then $u_i=(r_j)^i$ is a solution of $\rho(\mathcal{Z})u_i=0$ for each $j=1,\ldots,k$. By linearity,
 
 ```{math}

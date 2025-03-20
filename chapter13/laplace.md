@@ -113,6 +113,10 @@ For the vec operation defined in {numref}`Definition {number} <definition-diffad
 ::::
 
 ::::{prf:proof}
+:enumerated: false
+
+:enumerated: false
+
 (Partial proof.) These all boil down to algebraic manipulations. For instance, for item 5, let $\mathbf{Z}=\mathbf{A}^{-1}$. Then
 
 \begin{align*}

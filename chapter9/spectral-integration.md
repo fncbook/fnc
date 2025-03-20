@@ -202,6 +202,8 @@ The roots of the Legendre polynomial $P_n(x)$ are the nodes of an $n$-point Gaus
 ::::
 
 ::::{prf:proof}
+:enumerated: false
+
 Choose an arbitrary $p\in\mathcal{P}_{2n-1}$, and let $\hat{p}_n(x)$ be the lowest-degree interpolating polynomial for $p$ using the as-yet unknown nodes $t_1,\dots,t_n$. By definition,
  
 $$

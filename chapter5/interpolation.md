@@ -157,6 +157,8 @@ where the $\phi_k$ are cardinal interpolating functions.
 ````
 
 ::::{prf:proof}
+:enumerated: false
+
 Suppose the data vector is perturbed from $\mathbf{y}$ to $\mathbf{y}+ \mathbf{d}$. Then
 
 ```{math}

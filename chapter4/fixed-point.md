@@ -167,6 +167,8 @@ Suppose that $g$ satisfies {eq}`lipschitz` with $L<1$ on an interval $S$. Then $
 ````
 
 ````{prf:proof}
+:enumerated: false
+
 (partial proof)  First we show there is at most one fixed point in $S$. Suppose $g(t)=t$ and $g(s)=s$ in $S$. Then by {eq}`lipschitz`, $|s-t|=|g(s)-g(t)|\le L|s-t|$, which for $L<1$ is possible only if $|s-t|=0$, so $s=t$.
 
 Now suppose that for some $p\in S$, $g(p)=p$. By the definition of the fixed-point iteraion and the Lipschitz condition,

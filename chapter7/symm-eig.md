@@ -53,6 +53,8 @@ If $\mathbf{A}^*=\mathbf{A}$ and $\mathbf{A}=\mathbf{V}\mathbf{D}\mathbf{V}^{-1}
 is an SVD, where $|\mathbf{D}|$ is the elementwise absolute value and $\mathbf{T}$ is diagonal with $|T_{ii}|=1$ for all $i$. In particular, the absolute values of the eigenvalues of $\mathbf{A}$ are the singular values of $\mathbf{A}$.
 ````
 ::::{prf:proof}
+:enumerated: false
+
 Let $T_{ii}=\operatorname{sign}(D_{ii})$ for all $i$. Then $\mathbf{T}^2=\mathbf{I}$, $|\mathbf{D}|=\mathbf{T}\mathbf{D}$, and
 
 $$
@@ -131,6 +133,8 @@ If $\mathbf{A}^*=\mathbf{A}$, then the following statements are equivalent.
 ````
 
 ::::{prf:proof}
+:enumerated: false
+
 Suppose item 1 is true. If $\mathbf{A}\mathbf{x} = \lambda \mathbf{x}$ is an eigenpair, then a Rayleigh quotient implies that
 
 $$

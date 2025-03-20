@@ -42,6 +42,8 @@ Suppose $\mathbf{A}$ is $n\times n$, $0<m<n$, and a vector $\mathbf{u}$ is used 
 ::::
 
 ::::{prf:proof}
+:enumerated: false
+
 
 If $\mathbf{x}\in\mathcal{K}_m$, then for some coefficients $c_1,\ldots,c_m$,
 

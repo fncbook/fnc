@@ -46,6 +46,8 @@ Given points $(t_k,y_k)$ for $k=0,\ldots,n$ with all the $t_k$ distinct, the uni
 ::::
 
 ::::{prf:proof}
+:enumerated: false
+
 The Lagrange cardinal polynomial {eq}`lagrange` can be written as
 
 :::{math}

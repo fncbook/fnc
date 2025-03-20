@@ -186,6 +186,8 @@ as $h\rightarrow 0$.
 ````
 
 ````{prf:proof}
+:enumerated: false
+
 Define the global error sequence $ϵ_i=\hat{u}(t_i)-u_i$. Using {eq}`onestepODE`, we obtain
   
 ```{math}

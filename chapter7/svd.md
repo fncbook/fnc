@@ -41,6 +41,8 @@ We call $\sigma_1$ the **principal singular value** and $\mathbf{u}_{1}$ and $\m
 Every $m\times n$ matrix has an SVD. The singular values of a matrix are unique, but the singular vectors are not. If the matrix is real, then $\mathbf{U}$ and $\mathbf{V}$ in {eq}`svd` can be chosen to be real, orthogonal matrices.  
 ````
 :::{prf:proof}
+:enumerated: false
+
 The nonuniqueness is easy: for instance, we can replace $\mathbf{U}$ and $\mathbf{V}$ by their negatives without affecting {eq}`svd`. Proof of the other statements usually relies on induction in the size of $\mathbf{A}$ and can be found in advanced linear algebra texts.
 :::
 
@@ -82,6 +84,8 @@ The eigenvalues of $\mathbf{A}^*\mathbf{A}$ are real and nonnegative, and the $\
 :::
 
 ::::{prf:proof}
+:enumerated: false
+
 Let $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^*$ be $m\times n$, and compute the square hermitian matrix $\mathbf{B}=\mathbf{A}^*\mathbf{A}$:
 
 ```{math}

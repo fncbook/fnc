@@ -60,6 +60,8 @@ Suppose $\mathbf{A}$ has rank $r$ and let $\mathbf{A}=\mathbf{U}\mathbf{S}\mathb
 ::::
 
 ::::{prf:proof}
+:enumerated: false
+
 (part 1 only) Note that {eq}`svdlowrank` is identical to {eq}`svdsum` with $\sigma_{k+1},\ldots,\sigma_r$ all set to zero. This implies that
   
 ```{math}

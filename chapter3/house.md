@@ -67,6 +67,8 @@ Let $\mathbf{v}$ be defined by {eq}`hhvector` and let $\mathbf{P}$ be given by {
 ````
 
 ````{prf:proof}
+:enumerated: false
+
 The proofs of symmetry and orthogonality are left to [Exercise 2](#problem-house-reflector). For the last fact, we use {eq}`hhapply` to compute
   
 ```{math}

@@ -18,6 +18,8 @@ If the nodes $t_0,\dots,t_n$ are all distinct, there exists a unique polynomial 
 ::::
 
 ::::{prf:proof}
+:enumerated: false
+
 We defer the existence part to Equation {eq}`lagrangeinterp`.  As for uniqueness, if $p$ and $q$ are two interpolating polynomials, then $p-q$ is a  polynomial of degree at most $n$ that is zero at the $n+1$ points  $t_0,\dots,t_n$. By the Fundamental Theorem of Algebra, which states that a $k$th degree polynomial has no more than $k$ roots, we conclude that $p-q\equiv 0$, so $p=q$.
 ::::
 
@@ -159,6 +161,8 @@ with $\Phi$ given in {eq}`lagrange-phi`.
 ::::
 
 ::::{prf:proof}
+:enumerated: false
+
 If $x=t_i$ for some $i$, the statement of the theorem is trivially true. Otherwise, we define a new function $g(s)$ by
   
 $$
@@ -221,6 +225,8 @@ In particular, $|f(x)-p(x)|=O(h^{n+1})$ as $h\to 0$.
 ::::
 
 ::::{prf:proof}
+:enumerated: false
+
 If $x\in[t_0,t_n]$, then $|x-t_i|<nh$ for all $i$, and {eq}`interperror` implies {eq}`equisperror`. As $h\to 0$, $\xi\to x$, and the continuity of $f^{(n+1)}$ allows us to make the asymptotic conclusion.
 ::::
 

@@ -348,6 +348,8 @@ All $n$ roots of the Legendre polynomial $P_n(x)$ are simple and real, and they 
 ::::
 
 ::::{prf:proof}
+:enumerated: false
+
 Let $x_1,\ldots,x_m$ be all of the distinct roots of $P_n(x)$ between $-1$ and $1$ at which $P_n(x)$ changes sign (in other words, all roots of odd multiplicity). Define
   
 $$
