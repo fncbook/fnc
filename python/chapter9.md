@@ -377,7 +377,6 @@ By degree 16 the error is uniformly within machine epsilon, and, importantly, it
 (demo-stability-spectral-python)=
 ``````{dropdown} @demo-stability-spectral
 :open:
-On the left, we use a log-log scale, which makes second-order algebraic convergence $O(n^{-4})$ a straight line. On the right, we use a log-linear scale, which makes spectral convergence $O(K^{-n})$ linear.
 
 ```{code-cell} 
 :tags: hide-input

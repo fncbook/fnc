@@ -196,6 +196,9 @@ In other contexts we refer to {eq}`spectral` as linear convergence, but here it 
 
 (demo-stability-spectral)=
 ::::{prf:example} Spectral convergence
+
+On the left, we use a log-log scale, which makes fourth-order algebraic convergence $O(n^{-4})$ a straight line. On the right, we use a log-linear scale, which makes spectral convergence $O(K^{-n})$ a straight line.
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
