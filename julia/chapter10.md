@@ -76,8 +76,8 @@ Note that there is no need to explicitly form the row-deletion matrix $\mathbf{E
 :open:
 ```{literalinclude} FNCFunctions/src/chapter10.jl
 :filename: bvp.jl
-:start-after: # begin bvp
-:end-before: # end bvp
+:start-line: 132
+:end-line: 162
 :language: julia
 :linenos: true
 ```
