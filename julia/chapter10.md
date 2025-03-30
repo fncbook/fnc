@@ -30,11 +30,11 @@ The error tolerance in the IVP solver is kept smaller than in the rootfinder, to
 
 ``````
 
-(function-diffmats2-julia)=
+(function-diffmat2-julia)=
 ``````{dropdown} Second-order differentiation matrices
 :open:
 ```{literalinclude} FNCFunctions/src/chapter10.jl
-:filename: diffmats2.jl
+:filename: diffmat2.jl
 :start-after: # begin diffmat2
 :end-before: # end diffmat2
 :language: julia
@@ -113,16 +113,6 @@ include("FNC_init.jl")
 :open:
 ```{index} ! Julia; in-place function
 ```
-
-As a system, the MEMS problem from {numref}`Example {number} <example-tpbvp-mems>` uses $y_1=w$, $y_2=w'$ to obtain
-
-:::{math}
-:label: memssys-intro
-\begin{split}
-y_1' &= y_2, \\
-y_2' &= \frac{\lambda}{y_1^2} - \frac{y_2}{r}.
-\end{split}
-:::
 
 We will code an *in-place* form of this ODE, in which the first argument is used to return the computed values of $y_1'$ and $y_2'$.  
 ```{tip}

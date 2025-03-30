@@ -29,13 +29,13 @@ Rather than solving for a function, we will solve for a vector of its approximat
       \end{bmatrix},
 :::
 
-where $\hat{u}$ is the exact solution of {eq}`linbvp`. If we so desire, we can use interpolation to convert the values $(x_i,u_i)$ into a function after the solution is found.
+where $\hat{u}$ is the exact solution of {eq}`linbvp`. If we so desire, we can use interpolation to convert the values $(x_i,u_i)$ into a function after the discrete solution is found.
 
 ## Collocation
 
 ```{index} ! collocation
 ```
-Having defined values at the nodes as our unknowns, we impose approximations to the ODE at the same nodes.  This approach is known as **collocation**. Derivatives of the solution are found using differentiation matrices. For example,
+Having defined values at the nodes as our unknowns, we impose approximations to the ODE at the same nodes.  This approach is known as **collocation**. Derivatives of the solution are found (approximately) using differentiation matrices. For example,
 
 :::{math}
 :label: bvpD1
@@ -67,19 +67,19 @@ where
 :::{math}
 :label: fdlincoeff
   \begin{split}
-  \mathbf{P} &= \begin{bmatrix}
+  \mathbf{P} = \begin{bmatrix}
         p(x_0) &  & \\
         & \ddots & \\
         & & p(x_{n})
     \end{bmatrix},
-    \qquad
+    \quad
     \mathbf{Q} =
     \begin{bmatrix}
         q(x_0) &  & \\
         & \ddots & \\
         & & q(x_{n})
-    \end{bmatrix},\\
-    \mathbf{r} &= \begin{bmatrix}
+    \end{bmatrix}, \quad
+    \mathbf{r} = \begin{bmatrix}
         r(x_0) \\ \vdots  \\ r(x_n)
     \end{bmatrix}.
 \end{split}
@@ -225,12 +225,12 @@ If we write the solution $\mathbf{u}$ of Equation {eq}`fdlinbc` as the exact sol
 
 \begin{gather*}
   \mathbf{A} \hat{\mathbf{u}} - \mathbf{A} \mathbf{e} = \mathbf{b}, \\
-  \mathbf{e} = \mathbf{A}^{-1} \left[  \mathbf{A} \hat{\mathbf{u}} - \mathbf{b}  \right] = \mathbf{A}^{-1} \boldsymbol{\tau}(h),
+  \mathbf{e} = \mathbf{A}^{-1} \left[  \mathbf{A} \hat{\mathbf{u}} - \mathbf{b}  \right] = \mathbf{A}^{-1} \boldsymbol{\tau}(n),
 \end{gather*}
 
 ```{index} stability; of collocation
 ```
-where $\boldsymbol{\tau}$ is the truncation error of the finite differences (except at the boundary rows, where it is zero). It follows that $\|\mathbf{e}\|$ vanishes at the same rate as the truncation error if  $\| \mathbf{A}^{-1}\|$ is bounded above as $h\to 0$. In the present context, this property is known as **stability**. Proving stability is too technical to walk through here, but stability is guaranteed under some reasonable conditions on the BVP.
+where $\boldsymbol{\tau}$ is the truncation error of the derivative discretizations (except at the boundary rows, where it is zero). It follows that $\|\mathbf{e}\|$ vanishes at the same rate as the truncation error if  $\| \mathbf{A}^{-1}\|$ is bounded above as $n\to \infty$. In the present context, this property is known as **stability**. Proving stability is too technical to walk through here, but stability is guaranteed under some reasonable conditions on the BVP.
 
 ## Exercises
 

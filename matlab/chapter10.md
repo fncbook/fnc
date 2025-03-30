@@ -19,7 +19,7 @@ numbering:
 ```
 ``````
 
-(function-diffmats2-matlab)=
+(function-diffmat2-matlab)=
 ``````{dropdown} Second-order differentiation matrices
 :open:
 ```{literalinclude} FNC-matlab/diffmat2.m
@@ -70,7 +70,7 @@ numbering:
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init;
-pwd
+pwd;;
 ```
 
 ### 10.1 @section-bvp-tpbvp

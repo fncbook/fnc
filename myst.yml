@@ -62,6 +62,7 @@ project:
   abbreviations:
     IVP: initial-value problem
     BVP: boundary-value problem
+    TPBVP: two-point boundary-value problem
     ONC: matrix with orthonormal columns
     SVD: singular value decomposition
     EVD: eigenvalue decomposition

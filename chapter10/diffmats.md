@@ -9,6 +9,19 @@ numbering:
 ```
 In {numref}`section-localapprox-finitediffs` we used finite differences to turn a discrete collection of function values into an estimate of the derivative of the function at a point. Just as with differentiation in elementary calculus, we can generalize differences at a point into an operation that maps discretized functions to discretized derivatives.
 
+```{index} ! differentiation matrix
+```
+
+:::{prf:definition} Differentiation matrix
+:label: def-diffmat
+A {term}`differentiation matrix` is a square matrix whose associated linear transformation maps a vector of function values at nodes to a vector of approximate derivative values at the same nodes.
+:::
+
+The derivative of a function is a unique result. The same is *not* true for our finite-dimensional approximation of the derivative, though.
+
+:::{important}
+There are many ways to approximate the derivative operator by a differentiation matrix. 
+:::
 
 ## Matrices for finite differences
 
@@ -59,14 +72,12 @@ f'(x_0) \\[1mm] f'(x_1) \\[1mm] \vdots \\[1mm] f'(x_{n-1}) \\[1mm] f'(x_n)
 \end{bmatrix}.
 :::
 
-```{index} ! differentiation matrix
-```
-Here as elsewhere, elements of $\mathbf{D}_x$ that are not shown are zero. We call $\mathbf{D}_x$ a **differentiation matrix**. Each row of $\mathbf{D}_x$ gives the weights of the finite-difference formula being used at one of the nodes.
+The matrix $\mathbf{D}_x$ in @diffmat11 is a finite-difference differentiation matrix.  Here as elsewhere, elements of $\mathbf{D}_x$ that are not shown are zero. Each row of $\mathbf{D}_x$ gives the weights of a finite-difference formula being used at one of the nodes.
 
 ```{index} order of accuracy; of a finite-difference formula
 ```
 
-The differentiation matrix $\mathbf{D}_x$ in {eq}`diffmat11` is not a unique choice. We are free to use whatever finite-difference formulas we like in each row. However, it makes sense to choose rows that are as similar as possible. Using second-order centered differences where possible and second-order one-sided formulas (see {numref}`table-FDforward`) at the boundary points leads to
+The differentiation matrix $\mathbf{D}_x$ in {eq}`diffmat11` is not a unique choice. In fact, it's about the least accurate choice possible, as explained in {numref}`section-localapprox-fd-converge`. We are theoretically free to use whatever finite-difference formulas we want in each row, such as those in @table-fdcenter and @table-fdforward, although it makes sense to choose rows that are as similar as possible. For instance, using second-order centered differences where possible and second-order one-sided formulas at the boundary points leads to
 
 :::{math}
 :label: diffmat12b
@@ -84,9 +95,7 @@ The differentiation matrix $\mathbf{D}_x$ in {eq}`diffmat11` is not a unique cho
 ```{index} banded matrix, sparse matrix
 ```
 
-The differentiation matrices so far are banded matrices, i.e., all the nonzero values are along diagonals close to the main diagonal.[^sparseconv]
-
-[^sparseconv]: In order to exploit this structure efficiently in Julia, these matrices first need to be constructed as or converted to sparse or tridiagonal form.
+The differentiation matrices so far are all sparse and banded, i.e., all the nonzero values are along diagonals close to the main diagonal.
 
 ## Second derivative
 
@@ -112,7 +121,14 @@ f(x_0) \\[1mm] f(x_1) \\[1mm] f(x_2) \\[1mm] \vdots \\[1mm] f(x_{n-1}) \\[1mm] f
 \end{bmatrix} = \mathbf{D}_{xx} \mathbf{f}.
 :::
 
-We have multiple choices again for $\mathbf{D}_{xx}$, and it need not be the square of any particular $\mathbf{D}_x$. As pointed out in {numref}`section-localapprox-finitediffs`, squaring the first derivative is a valid approach but would place entries in $\mathbf{D}_{xx}$ farther from the diagonal than is necessary.
+We have multiple choices again for $\mathbf{D}_{xx}$. Moreover, while it is possible to define $\mathbf{D}_{xx}$ as $\mathbf{D}_x^2$ for some first-derivative $\mathbf{D}_x$, it is not required---and often, not desirable---to do so, because it may put nonzeros farther from the diagonal than is necessary (see {numref}`section-localapprox-finitediffs`). 
+
+```{index} finite-difference formula; second derivative
+```
+
+## Implementation
+
+Together the matrices {eq}`diffmat12b` and {eq}`diffmat22` give second-order approximations of the first and second derivatives at all nodes. These matrices, as well as the nodes $x_0,\ldots,x_n$, are returned by {numref}`Function {number} <function-diffmat2>`.
 
 (function-diffmat2)=
 ``````{prf:algorithm} diffmat2
@@ -137,7 +153,6 @@ We have multiple choices again for $\mathbf{D}_{xx}$, and it need not be the squ
 `````
 ``````
 
-Together the matrices {eq}`diffmat12b` and {eq}`diffmat22` give second-order approximations of the first and second derivatives at all nodes. These matrices, as well as the nodes $x_0,\ldots,x_n$, are returned by {numref}`Function {number} <function-diffmat2>`.
 
 (demo-diffmats-2nd)=
 ::::{prf:example} Differentiation matrices
@@ -197,7 +212,13 @@ then the resulting **Chebyshev differentiation matrix** has entries
   \end{gathered}
 :::
 
-where $c_0=c_n=2$ and $c_i=1$ for $i=1,\ldots,n-1$. Note that this matrix is dense. The simplest way to compute a second derivative is by squaring $\mathbf{D}_x$, as there is no longer any concern about the bandwidth of the result.
+where $c_0=c_n=2$ and $c_i=1$ for $i=1,\ldots,n-1$. 
+
+:::{note}
+The Chebyshev differentiation matrix is not sparse.
+:::
+
+The simplest way to compute a second derivative is by via $\mathbf{D}_{xx} = \mathbf{D}_x^2$, as there is no longer any concern about the sparsity of the result.
 
 {numref}`Function {number} <function-diffcheb>` returns these two matrices. The function uses a change of variable to transplant the standard $[-1,1]$ for Chebyshev nodes to any $[a,b]$. It also takes a different approach to computing the diagonal elements of $\mathbf{D}_x$ than the formulas in {eq}`chebdiffmat` (see {ref}`Exercise 5 <problem-diffmats-negsumtrick>`).
 
@@ -226,8 +247,6 @@ where $c_0=c_n=2$ and $c_i=1$ for $i=1,\ldots,n-1$. Note that this matrix is den
 
 (demo-diffmats-cheb)=
 ::::{prf:example} Chebyshev differentiation matrices
-`````{tab-set}
-````{tab-item} Julia
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia

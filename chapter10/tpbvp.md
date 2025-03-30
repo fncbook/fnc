@@ -5,11 +5,13 @@ numbering:
 (section-bvp-tpbvp)=
 # Two-point BVP
 
-The initial-value problems of @chapter-ivp are characterized by an ordinary differential equation plus a value of the solution's state at one value of the independent variable.
+The initial-value problems of [Chapter 6](@chapter-ivp) are characterized by an ordinary differential equation plus a value of the solution's state at one value of the independent variable (typically, time).
 
-In a **boundary-value problem**, the state is not entirely given at any point. Instead, partial information is given at multiple values of the independent variable. We will focus on the most common type.
+In a {term}`boundary-value problem`, the state is not entirely given at any point. Instead, partial information is given at multiple values of the independent variable. We will focus on the most common type.
 
-::::{prf:definition} Two-point boundary-value problem (TPBVP)
+## Definition
+
+::::{prf:definition} Two-point boundary-value problem: TPBVP
 :::{math}
 :label: tpbvp
 \begin{split}
@@ -19,16 +21,28 @@ g_2(u(b),u'(b)) &= 0.
 \end{split}
 :::
 
+The functions $g_1$ and $g_2$ are called **boundary conditions**.
+
 This TPBVP is said to be **linear** if the dependence of $\phi$, $g_1$, and $g_2$ on the solution $u(x)$ is linear. Specifically, this means that 
 
 :::{math}
-\phi(x,u,u')=p(x)u' + q(x)u + r(x)
+\phi(x, u,u ')=p(x)u' + q(x)u + r(x)
 :::
 
-for some coefficient functions $p$, $q$, and $r$, and $g_1$ and $g_2$ are linear in each of their arguments. 
+for some coefficient functions $p$, $q$, and $r$, and 
+
+:::{math}
+g_i(u, u') = \alpha_i u + \beta_i u' - \gamma_i, \quad i=1,2,
+:::
+
+for some constants $\alpha_i$, $\beta_i$, and $\gamma_i$. 
 ::::
 
-Often the domain of $x$ in {eq}`tpbvp` is not explicitly stated but is implied by the definitions of $g_1$ and $g_2$ These functions are called **boundary conditions**. An IVP for the same ODE as in {eq}`tpbvp` would specify values for both $u(a)$ and $u'(a)$. Although this may look like a minor change, IVPs and BVPs are quite different. Conceptually, the difference is like that between time and space. In a typical IVP, in which the independent variable is often time, the initial value determines everything about the future course of the solution. Even in a simple BVP, however, the necessary information is spread across the domain, and there may be more than one way to satisfy the boundary conditions.
+:::{note}
+Often, the domain of $x$ in {eq}`tpbvp` is not explicitly stated but just implied by the appearances of $a$ and $b$ in $g_1$ and $g_2$. 
+:::
+
+An IVP for the same ODE as in {eq}`tpbvp` would specify values for both $u(a)$ and $u'(a)$. Although this may look like a minor difference, the characters of IVPs and BVPs are substantially different. In a typical IVP, in which the independent variable is often time, the initial value determines everything about the future course of the solution. In a TPBVP, however, complete information is not given at any one location in the domain, and there may be more than one way (or no way) to satisfy the boundary conditions.
 
 Certain special cases of the boundary conditions have their own nomenclature.
 
@@ -39,17 +53,17 @@ Certain special cases of the boundary conditions have their own nomenclature.
 :::{prf:definition} Dirichlet, Neumann, and Robin conditions
 Let $g_i$ be a boundary condition in {eq}`tpbvp`, and let $\alpha,\beta$ be constants.  
 
-**Dirichlet condition:** $g_i(u,u') = u - \alpha$
+{term}`Dirichlet condition`: $g_i(u,u') = u - \gamma$
 
-**Neumann condition:** $g_i(u,u') = u' - \alpha$
+{term}`Neumann condition`: $g_i(u,u') = u' - \gamma$
 
-**Robin condition:** $g_i(u,u') = u + \beta u' - \alpha$
+**Robin condition**: $g_i(u,u') = u + \beta u' - \gamma$
 
-When $\alpha=0$ in the above, the condition is said to be **homogeneous**.
+When $\gamma=0$ in the above, it is a {term}`homogeneous boundary condition`.
 :::
 
 (example-tpbvp-pendulum)=
-::::{prf:example}
+::::{prf:example} Multiple solutions in a BVP
 An ideal pendulum of length $L$ satisfies the ODE $\theta'' + \frac{g}{L}\sin \theta = 0$, where $\theta(t)$ is the angle of the pendulum's rod from straight downward, and $g$ is gravitational acceleration.
 
 If we pull the pendulum bob 1 radian and release it from rest, then we have an IVP with the initial condition $\theta(0)=1$, $\theta'(0)=0$. Everything about the future trajectory of the pendulum is completely determined by that condition. But if instead we want to know how far to pull up the pendulum bob initially so that it is in the downward position 2 seconds later, then we have the Neumann boundary condition $\theta'(0)=0$ and the Dirichlet boundary condition $\theta(2)=0$. 
@@ -60,8 +74,8 @@ Clearly, one solution is $\theta(0)=0$, and the pendulum never moves! But there 
 While time can be the independent variable in a TPBVP, as in {numref}`Example {number} <example-tpbvp-pendulum>`, it is often space, which has no intrinsic direction of information flow.
 
 (example-tpbvp-mems)=
-::::{prf:example}
-A micromechanical electrically driven actuator consists of two flat disk-shaped surfaces in parallel, one at $z=0$ and the other at $z=1$. The surface at $z=0$ is a rigid metal plate. The surface at $z=1$ is an elastic membrane fixed only at its boundary. When the surfaces are given different electric potentials, the membrane deflects in response to the induced electric field, and the field is also a position of the deflection. Assuming circular symmetry, one may derive the ordinary differential equation {cite}`peleskoEffectSmallaspectratio2006`
+::::{prf:example} MEMS actuator
+A micro-electromechanical system (MEMS) can have an actuator consisting of two flat, parallel, disk-shaped surfaces, one at $z=0$ and the other at $z=1$. The surface at $z=0$ is a rigid metal plate. The surface at $z=1$ is an elastic membrane fixed only at its boundary. When the surfaces are given different electric potentials, the membrane deflects in response to the induced electric field, and the field is also a position of the deflection. Assuming circular symmetry, one may derive the ordinary differential equation {cite}`peleskoEffectSmallaspectratio2006`
 
 :::{math}
 :label: mems
@@ -80,10 +94,10 @@ derived from the circular symmetry and fixing the edge of the membrane, respecti
 
 ## Numerical solution
 
-We can solve the TPBVP {eq}`tpbvp` by recasting the problem as a first-order system in the usual way. 
+We can solve the TPBVP {eq}`tpbvp` by recasting the problem as a first-order system, as introduced in @transformation-of-high-order-systems.
 
 (demo-tpbvp-mems)=
-::::{prf:example} Solving a TPBVP
+::::{prf:example} Solving a TPBVP numerically
 As a system, the MEMS problem from {numref}`Example {number} <example-tpbvp-mems>` uses $y_1=w$, $y_2=w'$ to obtain
 
 :::{math}
@@ -161,7 +175,7 @@ Characterizing the conditioning of a TPBVP theoretically is difficult. There are
 
     Solution: $u(x) =  ( x+2 )^{-1/2}$
 
-3. ⌨ For each TPBVP in Exercise 2, use `solve` to find the solution. Plot the solution and separately plot the error as a function of $x$. (In some cases you will need to truncate the domain to avoid division by zero.)
+3. ⌨ For each TPBVP in Exercise 2, use `solve`/`bvp4c`/`solve_bvp` to find the solution, following the method in @demo-tpbvp-mems. Plot the solution and separately plot the error as a function of $x$. (Important: In some cases, you will need to truncate the domain slightly to avoid division by zero.)
 
 (problem-tpbvp-pendulum)=
 4. ⌨ Consider the pendulum from {numref}`Example {number} <example-tpbvp-pendulum>` with $g=L=1$. Suppose we want to release the pendulum from rest such that $\theta(5)=\pi/2$. Find one solution that passes through $\theta=0$ and another solution that does not. Plot $\theta(t)$ for both cases together. (Hint: Vary the initial estimate for the solution.)

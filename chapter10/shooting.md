@@ -172,7 +172,7 @@ The instability of shooting can be circumvented by breaking the interval into sm
     ```{index} pendulum
     ```
 (problem-shooting-pendulum)=
-2. ⌨ (Continuation of [Exercise 10.1.4](#problem-tpbvp-allencahn).) Consider the pendulum from {numref}`Example {number} <example-tpbvp-pendulum>` with $g=L=1$. Suppose we want to release the pendulum from rest such that $\theta(5)=\pi/2$. Find one solution that passes through $\theta=0$, and another solution that does not. Plot $\theta(t)$ for both cases together.
+2. ⌨ (Continuation of [Exercise 10.1.4](#problem-tpbvp-pendulum).) Consider the pendulum from {numref}`Example {number} <example-tpbvp-pendulum>` with $g=L=1$. Suppose we want to release the pendulum from rest such that $\theta(5)=\pi/2$. Using @function-shoot, find one solution that passes through $\theta=0$, and another solution that does not. Plot $\theta(t)$ for both cases together.
 
     ```{index} Allen–Cahn equation
     ```

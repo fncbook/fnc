@@ -22,11 +22,11 @@ numbering:
 
 ``````
 
-(function-diffmats2-python)=
+(function-diffmat2-python)=
 ``````{dropdown} Second-order differentiation matrices
 :open:
 ```{literalinclude} fncbook/fncbook/chapter10.py
-:filename: diffmats2.py
+:filename: diffmat2.py
 :start-at: def diffmat2
 :end-at: return x, Dx, Dxx
 :language: python
