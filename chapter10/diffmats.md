@@ -31,6 +31,10 @@ $$
 x_i=a+i h, \qquad  i=0,\ldots,n.
 $$
 
+:::{note}
+In [Chapter 5](../localapprox/overview) and [Chapter 9](../globalapprox/overview) we used the notation $t_k$ for nodes to more clearly distinguish them from the continuous variable $x$. Since we will soon have problems that discretize both $x$ and $t$ variables, though, we now switch to using the same letter for nodes as the continuous variable.
+:::
+
 Note again that our node indexing scheme starts at zero. Our goal is to find a vector $\mathbf{g}$ such that $g_i \approx f'(x_i)$ for $i=0,\ldots,n$. Our first try is the forward difference formula {eq}`forwardFD11`,
 
 $$
