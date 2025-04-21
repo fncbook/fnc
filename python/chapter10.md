@@ -103,7 +103,7 @@ exec(open("FNC_init.py").read())
 (demo-tpbvp-mems-python)=
 ``````{dropdown} @demo-tpbvp-mems
 :open:
-To solve this problem, we have to define functions for the ODE and boundary conditions. The first returns the computed values of $y_1'$ and $y_2'$.  
+To solve this problem, we have to define functions for the ODE and boundary conditions. The first, which is similar to what we do for solving IVPs, returns the computed values of $y_1'$ and $y_2'$ given values of the dependent and independent variable.  
 
 ```{code-cell}
 lamb = 0.6
@@ -114,27 +114,29 @@ def ode(r, y):
     ])
 ```
 
-To encode the boundary conditions $y_2(0)=0$, $y_1(2)=1$, we define a function for their residual values.
+To encode the boundary conditions $y_2(0)=0$, $y_1(2)-1=0$, we define a function for their residual values. In other words, these are quantities that the solver has to make zero in order to satisfy the boundary conditions. 
 
 ```{code-cell}
-def bc(ya, yb):    # given y(a), y(b)
+def bc(ya, yb):    # given vectors y(a), y(b)
     return array([
         ya[1],
         yb[0] - 1
     ])
 ```
 
-The domain of the mathematical problem is $r\in [0,1]$. However, there is a division by $r$ in the ODE, so we want to avoid $r=0$ by truncating the domain a bit.
+The domain of the mathematical problem is $r\in [0,1]$. However, there is a division by $r$ in this ODE, so we want to avoid $r=0$ by truncating the domain a bit.
 
 ```{code-cell}
 a, b = finfo(float).eps, 1
 ```
 
-We need one last ingredient that is not part of the mathematical setup: an initial estimate for the solution. As we will see, this plays the same role as initialization in Newton's method for rootfinding. Here, we try a constant value for each component.
+We need one last ingredient that is not part of the mathematical specification: an initial guess for the solution $\mathbf{y}(r)$. As we will see, this plays the same role as initialization in Newton's method for rootfinding. Here, we try a constant value for each component.
 
 ```{code-cell}
 r = linspace(a, b, 50)
-y_init = vstack([ones(r.size), zeros(r.size)])
+w = ones(r.size)         # w(r) = 1 everywhere
+dw_dr = zeros(r.size)    # w'(r) = 0 everywhere
+y_init = vstack([w, dw_dr])
 ```
 
 Now we can solve the problem using `solve_bvp` from `scipy.integrate`.
@@ -147,6 +149,9 @@ plot(sol.x, sol.y[0])
 xlabel("$r$"),  ylabel("$w(r)$")
 title("Solution of MEMS problem for $\\lambda=0.6$");
 ```
+
+It's important to visually check the boundary conditions. The left BC implies a horizontal tangent at $r=0$, and the right BC implies that $w(1)=1$. If the solver failed to satisfy these conditions, we would have to try a different initial guess.
+
 ``````
 
 ### 10.2 @section-bvp-shooting

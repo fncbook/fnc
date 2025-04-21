@@ -277,9 +277,9 @@ According to {numref}`Theorem %s <theorem-spectral>`, the convergence of polynom
 ## Exercises
 
 1. 
-    **(a)** ✍ Calculate $\mathbf{D}_x^2$ using {eq}`diffmat11` to define $\mathbf{D}_x$.
+    **(a)** ✍  Using {eq}`diffmat11` to define $\mathbf{D}_x$, calculate $\mathbf{D}_x^2$ in the general case.
     
-    **(b)** ⌨ Repeat the experiment of {numref}`Demo %s <demo-diffmats-2nd>`, but using this version of $\mathbf{D}_x^2$ to estimate $f''$. What is the apparent order of accuracy in $f''$?
+    **(b)** ⌨ Repeat the convergence experiment in the second part of {numref}`Demo %s <demo-diffmats-2nd>`, but using this version of $\mathbf{D}_x^2$ in place of $\mathbf{D}_{xx}$ to estimate $f''$. Why does it fail to converge as $n\to \infty$?
 
 2. 
     **(a)** ✍ Find the derivative of $f(x) =\operatorname{sign}(x)x^2$ on the interval $[-1,1]$. (If this gives you trouble, use an equivalent piecewise definition of $f$.) What is special about this function at $x=0$? 

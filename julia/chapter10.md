@@ -114,10 +114,10 @@ include("FNC_init.jl")
 ```{index} ! Julia; in-place function
 ```
 
-We will code an *in-place* form of this ODE, in which the first argument is used to return the computed values of $y_1'$ and $y_2'$.  
+To solve this problem, we have to define functions for the ODE and boundary conditions. The first, which is similar to what we do for solving IVPs, returns the computed values of $y_1'$ and $y_2'$ given values of the dependent and independent variable. We will use an *in-place* form of this function here, where the desired output is actually the first input argument. (Notice that the `return` value is irrelevant with the in-place style.)
 ```{tip}
 :class: dropdown
-The in-place code here saves the computing time that would otherwise be needed to allocate memory for `f` repeatedly.
+The in-place code here saves the computing time that would otherwise be needed to allocate memory for `f` repeatedly. For a small problem like this, we wouldn't expect to see a difference, but for larger problems, the savings can be significant.
 ```
 
 ```{code-cell}
@@ -128,10 +128,10 @@ function ode!(f, y, λ, r)
 end;
 ```
 
-Notice that the `return` value is irrelevant with the in-place style. We use the same style for the boundary conditions $y_2(0)=0$, $y_1(1)=1$.
+To encode the boundary conditions $y_2(0)=0$, $y_1(2)-1=0$, we define a function for their residual values. In other words, these are quantities that the solver has to make zero in order to satisfy the boundary conditions. This uses in-place style as well.
 
 ```{code-cell}
-function bc!(g, y, λ, r)
+function bc!(g, y, λ, r)    # output, solution vector, parameter, indep. var.
     g[1] = y[1][2]          # first node, second component = 0
     g[2] = y[end][1] - 1    # last node, first component = 1
     return nothing
@@ -143,10 +143,10 @@ In the `bc!` function, the `y` argument is just like an IVP solution from {numre
 The domain of the mathematical problem is $r\in [0,1]$. However, there is a division by $r$ in the ODE, so we want to avoid $r=0$ by truncating the domain a bit.
 
 ```{code-cell}
-domain = (eps(), 1.0)
+domain = (1e-15, 1.0)
 ```
 
-We need one last ingredient that is not part of the mathematical setup: an initial estimate for the solution. As we will see, this plays the same role as initialization in Newton's method for rootfinding. Here, we try a constant value for each component.
+We need one last ingredient that is not part of the mathematical specification: an initial guess for the solution $\mathbf{y}(r)$. As we will see, this plays the same role as initialization in Newton's method for rootfinding. Here, we try a constant value for each component.
 
 ```{code-cell}
 est = [1, 0]
@@ -170,9 +170,11 @@ plot(y;
 To visual accuracy, the boundary conditions have been enforced. We can check them numerically.
 
 ```{code-cell}
-@show y(0)[2];    # y_2(0)
-@show y(1)[1];    # y_1(1)
+@show y(0)[2];    # y vector at r=0, 2nd component
+@show y(1)[1];    # y vector at r=1, 1st component
 ```
+
+If the solver failed to satisfy these conditions, we would have to try a different initial guess.
 ``````
 
 ### 10.2 @section-bvp-shooting

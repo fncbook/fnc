@@ -108,7 +108,7 @@ y_2' &= \frac{\lambda}{y_1^2} - \frac{y_2}{r}.
 \end{split}
 :::
 
-This has the form $\mathbf{y}' = \mathbf{f}(r,\mathbf{y})$. The boundary conditions are $y_2(0)=0$ and $y_1(1)=1$.
+This has the form $\mathbf{y}' = \mathbf{f}(r,\mathbf{y})$. In the original variable, the boundary conditions are $w'(0)=0$ and $w(1)=1$. We have to encode these in the new variable as $y_2(0)=0$ and $y_1(1)-1 = 0$.
 
 `````{tab-set}
 ````{tab-item} Julia
