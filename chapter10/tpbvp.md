@@ -26,7 +26,7 @@ The functions $g_1$ and $g_2$ are called **boundary conditions**.
 This TPBVP is said to be **linear** if the dependence of $\phi$, $g_1$, and $g_2$ on the solution $u(x)$ is linear. Specifically, this means that 
 
 :::{math}
-\phi(x, u,u ')=p(x)u' + q(x)u + r(x)
+\phi(x, u, u') = p(x)u' + q(x)u + r(x)
 :::
 
 for some coefficient functions $p$, $q$, and $r$, and 

@@ -25,7 +25,7 @@ as well as a set of values derived from the nodes.
 The **barycentric weights** for nodes $x_0,\dots,x_n$ are defined as
 :::{math}
 :label: baryweight
-w_k = \frac{1}{\displaystyle \prod_{\substack{j=0\\j\neq k}}^n (t_k - t_j)} = \frac{1}{\Phi'(x_k)}, \qquad
+w_k = \frac{1}{\displaystyle \prod_{\substack{j=0\\j\neq k}}^n (t_k - t_j)} = \frac{1}{\Phi'(t_k)}, \qquad
 k = 0,\ldots,n.
 :::
 ::::
