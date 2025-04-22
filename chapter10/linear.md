@@ -235,7 +235,7 @@ where $\boldsymbol{\tau}$ is the truncation error of the derivative discretizati
 ## Exercises
 
 (problem-linear-fdlin1)=
-1. ✍  For each boundary-value problem, verify that the given solution is correct. Then write out by hand for $n=3$ the matrices $\mathbf{D}_{xx}$, $\mathbf{D}_x$, $\mathbf{P}$, and $\mathbf{Q}$, and the vector $\mathbf{r}$.
+1. ✍  For each boundary-value problem, verify that the given solution is correct. Using $n=3$ and the differentiation matrices in @diffmat12b and @diffmat22, write out $\mathbf{L}$ and $\mathbf{r}$ from @fdlinnobc and $\mathbf{A}$ and $\mathbf{b}$ from @fdlinbc.
 
     **(a)** $u'' + u = 0, \quad u(0) =0, \; u(3) = \sin 3$  
     
