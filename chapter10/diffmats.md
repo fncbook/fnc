@@ -31,9 +31,10 @@ In [Chapter 5](chapter-localapprox) and [Chapter 9](chapter-globalapprox) we use
 
 We first discretize the interval $x\in[a,b]$ into equal pieces of length $h=(b-a)/n$, leading to the nodes
 
-$$
-x_i=a+i h, \qquad  i=0,\ldots,n.
-$$
+:::{math}
+:label: bvp-fdnodes
+x_i=a + i h, \quad  i=0,\ldots,n, \qquad h=\frac{b-a}{n}.
+:::
 
 Note again that our node indexing scheme starts at zero. Our goal is to find a vector $\mathbf{g}$ such that $g_i \approx f'(x_i)$ for $i=0,\ldots,n$. Our first try is the forward difference formula {eq}`forwardFD11`,
 
@@ -83,6 +84,17 @@ The matrix $\mathbf{D}_x$ in @diffmat11 is a finite-difference differentiation m
 
 The differentiation matrix $\mathbf{D}_x$ in {eq}`diffmat11` is not a unique choice. In fact, it's about the least accurate choice possible, as explained in {numref}`section-localapprox-fd-converge`. We are theoretically free to use whatever finite-difference formulas we want in each row, such as those in @table-fdcenter and @table-fdforward, although it makes sense to choose rows that are as similar as possible. For instance, using second-order centered differences where possible and second-order one-sided formulas at the boundary points leads to
 
+```{index} finite-difference formula; first derivative
+```
+
+```{index} differentiation matrix
+```
+
+```{prf:definition} Finite-difference differentiation matrix for a first derivative
+:label: def-diffmatfd1
+
+A second-order accurate differentiation matrix for the first derivative using finite differences is 
+
 :::{math}
 :label: diffmat12b
 \mathbf{D}_x = \frac{1}{h}
@@ -93,24 +105,102 @@ The differentiation matrix $\mathbf{D}_x$ in {eq}`diffmat11` is not a unique cho
 &      & \ddots & \ddots & \ddots &  \\
 &      &        & -\frac{1}{2}   & 0      & \frac{1}{2} \\[1mm]
 &      &        & \frac{1}{2}    & -2     & \frac{3}{2}
-\end{bmatrix}.
+\end{bmatrix},
 :::
+
+to be applied to a vector of function values at the nodes @bvp-fdnodes.
+```
 
 ```{index} banded matrix, sparse matrix
 ```
 
-The differentiation matrices so far are all sparse and banded, i.e., all the nonzero values are along diagonals close to the main diagonal.
+:::{note}
+The differentiation matrix @diffmat12b is sparse and banded, i.e., all the nonzero values are along diagonals close to the main diagonal.
+:::
+
+::::{prf:example} Differentiation matrix for finite differences
+:label: example-diffmatfd1
+
+Let's use @diffmat12b to compute the derivative of $f(x) = \sin(\pi x)$ over the interval $[-1, 0]$ with $n=4$. This gives $h = 1 / 4$ and the nodes $x_i = -1 + i/4$ for $i=0,\ldots,4$. The matrix $\mathbf{D}_x$ is
+
+```{math}
+\mathbf{D}_x = 4
+\begin{bmatrix}
+-3/2 & 2    & -1/2   &        &    \\  
+-1/2 & 0    & 1/2    &        &   \\ 
+ & -1/2 & 0      & 1/2    &      \\
+ & & -1/2 & 0      & 1/2      \\
+& & 1/2 & -2    & 3/2  
+\end{bmatrix}.
+```
+
+The discrete approximation to $f'(x) = \pi \cos(\pi x)$ is
+
+```{math}
+& 
+\begin{bmatrix}
+-6 & 8    & -2   &        &   \\  
+-2 & 0    & 2    &        &    \\
+ & -2 & 0      & 2    &      \\
+ & & -2 & 0      & 2      \\
+& & 2 & -8    & 6  
+\end{bmatrix}
+\begin{bmatrix}
+\sin(-\pi) \\[1mm] \sin(-3\pi/4) \\[1mm] \sin(-\pi/2) \\[1mm] \sin(-\pi/4) \\[1mm] \sin(0)
+\end{bmatrix} \\ 
+& =
+\begin{bmatrix}
+-6 & 8    & -2   &        &   \\   
+-2 & 0    & 2    &        &  \\  
+ & -2 & 0      & 2    &      \\
+ & & -2 & 0      & 2      \\
+& & 2 & -8  & 6  
+\end{bmatrix}
+\begin{bmatrix}
+0 \\ -1/\sqrt{2} \\ -1 \\ -1/\sqrt{2} \\ 0
+\end{bmatrix} \\ 
+& =
+\begin{bmatrix}
+2 - 8\sqrt{2} + 2\\ -2 \\ 0 \\ 2 \\ -2 + 8/\sqrt{2}
+\end{bmatrix} \\ 
+& \approx 
+\begin{bmatrix}
+-3.657 \\ -2 \\ 0 \\ 2 \\ 3.657
+\end{bmatrix}.
+```
+
+This result is not especially close to the exact values of $f'$ at the nodes, which are $\bigl[ -3.142, -2.221, 0, 2.221, 3.142 \bigr]$, but we should not expect it to be for such a small $n$.
+::::
 
 ## Second derivative
 
-Similarly, we can define differentiation matrices for second derivatives. For example,
+In a TPBVP, we will need to take the second derivative of the unknown solution. One option is to apply a first derivative twice, that is, to multiply the value vector $\mathbf{f}$ on the left by $\mathbf{D}_x^2$. This is usually not the best option, however (see {numref}`section-localapprox-finitediffs`). Instead, the following is usually a better choice:
 
-:::{math}
-:label: diffmat22
+```{index} finite-difference formula; second derivative
+```
+
+```{index} differentiation matrix
+```
+
+````{prf:definition} Finite-difference differentiation matrix for a second derivative
+:label: def-diffmatfd2
+
+To second order,
+
+$$
 \begin{bmatrix}
 f''(x_0) \\[1mm] f''(x_1) \\[1mm] f''(x_2) \\[1mm] \vdots \\[1mm] f''(x_{n-1}) \\[1mm] f''(x_n)
 \end{bmatrix}
-\approx
+\approx \mathbf{D}_{xx} \begin{bmatrix}
+f(x_0) \\[1mm] f(x_1) \\[1mm] f(x_2) \\[1mm] \vdots \\[1mm] f(x_{n-1}) \\[1mm] f(x_n)
+\end{bmatrix}, 
+$$
+
+where
+
+```{math}
+:label: diffmat22
+\mathbf{D}_{xx} = 
 \frac{1}{h^2}
 \begin{bmatrix}
 2 & -5 & 4      & -1     &        &     \\[1mm]
@@ -119,20 +209,15 @@ f''(x_0) \\[1mm] f''(x_1) \\[1mm] f''(x_2) \\[1mm] \vdots \\[1mm] f''(x_{n-1}) \
 &    & \ddots & \ddots & \ddots &    \\[1mm]
 &        &        & 1      & -2 & 1 \\[1mm]
 &        &     -1  & 4      & -5 & 2
-\end{bmatrix}
-\begin{bmatrix}
-f(x_0) \\[1mm] f(x_1) \\[1mm] f(x_2) \\[1mm] \vdots \\[1mm] f(x_{n-1}) \\[1mm] f(x_n)
-\end{bmatrix} = \mathbf{D}_{xx} \mathbf{f}.
-:::
-
-We have multiple choices again for $\mathbf{D}_{xx}$. Moreover, while it is possible to define $\mathbf{D}_{xx}$ as $\mathbf{D}_x^2$ for some first-derivative $\mathbf{D}_x$, it is not required---and often, not desirable---to do so, because it may put nonzeros farther from the diagonal than is necessary (see {numref}`section-localapprox-finitediffs`). 
-
-```{index} finite-difference formula; second derivative
+\end{bmatrix},
 ```
+
+and the nodes are given in @bvp-fdnodes.
+````
 
 ## Implementation
 
-Together the matrices {eq}`diffmat12b` and {eq}`diffmat22` give second-order approximations of the first and second derivatives at all nodes. These matrices, as well as the nodes $x_0,\ldots,x_n$, are returned by {numref}`Function {number} <function-diffmat2>`.
+Together, the matrices {eq}`diffmat12b` and {eq}`diffmat22` give second-order approximations of the first and second derivatives at all nodes. These matrices, as well as the nodes $x_0,\ldots,x_n$, are returned by {numref}`Function {number} <function-diffmat2>`.
 
 (function-diffmat2)=
 ``````{prf:algorithm} diffmat2
@@ -194,15 +279,20 @@ Recall that finite-difference formulas are derived in three steps:
 ```
 We can modify this process by using a global interpolant, either polynomial or trigonometric, as in [Chapter 9](../globalapprox/overview). Rather than choosing a different index set for each node, we use all of the nodes each time. 
 
-In a nonperiodic setting we use Chebyshev second-kind points for stability:
+In a nonperiodic setting, we use Chebyshev second-kind points for stability:
 
-$$
-x_k = -\cos\left(\frac{k \pi}{n}\right), \qquad k=0,\ldots,n;
-$$
+:::{math}
+:label: bvp-chebnodes
+x_k = -\cos\left(\frac{k \pi}{n}\right), \qquad k=0,\ldots,n.
+:::
 
 ```{index} differentiation matrix
 ```
-then the resulting **Chebyshev differentiation matrix** has entries 
+
+````{prf:definition} Chebyshev differentiation matrix
+:label: def-diffmatcheb
+
+Using a vector $\mathbf{f}$ of function values at the Chebyshev nodes @bvp-chebnodes, the vector $\mathbf{D}_x \mathbf{f}$ will have approximate first derivative values at those nodes, where the entries of $\mathbf{D}_x$ are given by 
 
 :::{math}
 :label: chebdiffmat
@@ -216,15 +306,16 @@ then the resulting **Chebyshev differentiation matrix** has entries
   \end{gathered}
 :::
 
-where $c_0=c_n=2$ and $c_i=1$ for $i=1,\ldots,n-1$. 
+where $c_0=c_n=2$ and $c_i=1$ for $i=1,\ldots,n-1$.
+
+For the second derivative, $\mathbf{D}_{xx} = \mathbf{D}_x^2$.
+````
 
 :::{note}
-The Chebyshev differentiation matrix is not sparse.
+The Chebyshev differentiation matrix is not sparse. There are compact formulas available elsewhere for the entries of $\mathbf{D}_{xx}$ ({cite}`trefethenSpectralMethods2000`).
 :::
 
-The simplest way to compute a second derivative is by via $\mathbf{D}_{xx} = \mathbf{D}_x^2$, as there is no longer any concern about the sparsity of the result.
-
-{numref}`Function {number} <function-diffcheb>` returns these two matrices. The function uses a change of variable to transplant the standard $[-1,1]$ for Chebyshev nodes to any $[a,b]$. It also takes a different approach to computing the diagonal elements of $\mathbf{D}_x$ than the formulas in {eq}`chebdiffmat` (see {ref}`Exercise 5 <problem-diffmats-negsumtrick>`).
+{numref}`Function {number} <function-diffcheb>` returns the matrices from @def-diffmatcheb. This function uses a change of variable to transplant the standard $[-1,1]$ for Chebyshev nodes to any $[a,b]$. It also takes a different approach to computing the diagonal elements of $\mathbf{D}_x$ than the formulas in {eq}`chebdiffmat` (see {ref}`Exercise 5 <problem-diffmats-negsumtrick>`).
 
 (function-diffcheb)=
 ``````{prf:algorithm} diffcheb

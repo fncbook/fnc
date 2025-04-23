@@ -14,7 +14,7 @@ Let us now devise a numerical method based on finite differences for the linear 
 
 ```{index} finite differences; for boundary value problems
 ```
-The first step is to select nodes $x_0=a < x_1< \cdots < x_n=b$. For finite differences these will most likely be equally spaced, but for spectral differentiation they will be Chebyshev points.
+The first step is to select nodes $x_0=a < x_1< \cdots < x_n=b$. For finite differences these will most likely be equally spaced, while for spectral differentiation, they will be Chebyshev points.
 
 Rather than solving for a function, we will solve for a vector of its approximate values at the nodes:
 
@@ -119,15 +119,90 @@ Finally, we note that $\hat{u}(a)= \mathbf{e}_0^T\mathbf{u}$ and $\hat{u}(b)= \m
 
 :::{math}
 :label: fdlinbc
+\underbrace{
   \begin{bmatrix}
     \mathbf{e}_0^T \\[1mm] \mathbf{E}\mathbf{L} \\[1mm]  \mathbf{e}_n^T
   \end{bmatrix}
+}_{\mathbf{A}}
   \mathbf{u}
   =
-  \begin{bmatrix}
-  \alpha \\[1mm] \mathbf{E}\mathbf{r} \\[1mm]  \beta
-  \end{bmatrix} \qquad \text{or} \qquad \mathbf{A}\mathbf{u} = \mathbf{b}.
+  \underbrace{
+    \begin{bmatrix}
+    \alpha \\[1mm] \mathbf{E}\mathbf{r} \\[1mm]  \beta
+  \end{bmatrix}
+   }_{\mathbf{b}}.
 :::
+
+We have arrived at an $(n+1)\times (n+1)$ linear system $\mathbf{A}\mathbf{u}=\mathbf{b}$, which we can solve for $\mathbf{u}$ using any of the methods we have investigated. 
+
+::::{prf:example} Collocation for a linear BVP
+:label: example-linbvp 
+
+Let's look at the discretization of the linear BVP
+
+$$
+u'' = u - x u', \quad  u(0)=-2, \; u(2)=3,
+$$
+
+on an equispaced grid with $n=4$ points. This gives $h=(2-0)/4 = 1/2$. 
+
+Writing the ODE as $u'' + x u' - u = 0$, we identify $p(x)=x$, $q(x)=-1$, and $r(x)=0$. Hence,
+
+$$
+\mathbf{P} = \begin{bmatrix}
+0 & & & & \\ & 1/2 & & & \\ & & 1 & & \\ & & & 3/2 & \\ & & & & 2
+\end{bmatrix}, 
+\quad
+\mathbf{Q} = -\mathbf{I}_5, 
+\quad
+\mathbf{r} = \begin{bmatrix}
+0 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix}.
+$$
+
+Using @diffmat12b and @diffmat22 as the differentiation matrices, we find
+
+$$
+\mathbf{L}& =
+\frac{1}{1/4} \begin{bmatrix}
+2 & -5 & 4      & -1     &        \\
+1 & -2 & 1      &        &         \\
+& 1  & -2     & 1      &          \\
+      &        & 1      & -2 & 1 \\
+      &     -1  & 4      & -5 & 2
+\end{bmatrix} \\ 
+& + \mathbf{P} \cdot 
+\frac{1}{1/2} \begin{bmatrix} 
+-3/2 & 2    & -1/2   &        &    \\  
+-1/2 & 0    & 1/2    &        &   \\ 
+ & -1/2 & 0      & 1/2    &      \\
+ & & -1/2 & 0      & 1/2      \\
+& & 1/2 & -2    & 3/2  
+\end{bmatrix} \\ 
+& + \mathbf{Q} \\ 
+& = \begin{bmatrix}
+7 & -20 & 16 & -4 & 0 \\ 7/2 & -9 & 9/2 & 0 & 0 \\ 0 & 3 & -9 & 5 & 0 \\ 
+0 & 0 & 5/2 & -9 & 11/2 \\ 0 & -4 & 18 & -28 & 13
+\end{bmatrix}.
+$$
+
+The system $\mathbf{L} \mathbf{u} = \mathbf{r}$ represents the discretized ODE. When we modify the system to include the boundary conditions, we arrive at 
+
+$$
+\mathbf{A} = \begin{bmatrix}
+1 & 0 & 0 & 0 & 0 \\
+7/2 & -9 & 9/2 & 0 & 0 \\ 
+0 & 3 & -9 & 5 & 0 \\ 
+0 & 0 & 5/2 & -9 & 11/2 \\ 
+0 & 0 & 0 & 0 & 1
+\end{bmatrix}, \quad
+\mathbf{b} = \begin{bmatrix}
+-2 \\ 0 \\ 0 \\ 0 \\ 3
+\end{bmatrix}.
+$$
+
+The system $\mathbf{A} \mathbf{u} = \mathbf{b}$ is the collocated BVP.
+::::
 
 ## Implementation
 
