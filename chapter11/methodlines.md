@@ -218,15 +218,15 @@ The adaptive time integrators can all produce solutions. But, as seen in {numref
 
 2. In {numref}`Demo {number} <demo-methodlines-auto>`, as $t\to \infty$ the solution $u(x,t)$ approaches a value that is constant in both space and time.
 
-    **(a)** ⌨ Set $m=400$ and use `Rodas4P`, as shown in {numref}`Demo {number} <demo-methodlines-auto>`, to find this constant value to at least eight digits of accuracy.
+    **(a)** ⌨ Set $m=400$ and use a native IVP solver, as shown in {numref}`Demo {number} <demo-methodlines-auto>`, to find this constant value to at least eight digits of accuracy.
 
-    **(b)** ✍ Prove that $\int_0^1 u(x,t) \,dx$ is constant in time.
+    **(b)** ✍ Prove that $Q = \int_0^1 u(x,t) \,dx$ is constant in time. (Hint: If its derivative is zero, then it is constant. Take the derivative of the integral with respect to $t$ and apply the PDE and periodic end conditions.)
 
-    **(c)** ⌨ Use {numref}`Function {number} <function-trapezoid>` on the initial condition function, and compare to the result of part (a).
+    **(c)** ⌨ Use {numref}`Function {number} <function-trapezoid>` to find $Q$ at $t=0$, and compare this number to the result of part (a).
 
     ```{index} Crank–Nicolson method
     ```
-3. ✍ Apply the trapezoid IVP formula (AM2) to the semidiscretization {eq}`heatMOL` and derive what is known as the *Crank–Nicolson* method:
+1. ✍ Apply the trapezoid IVP formula (AM2 in @table-adams) to the semidiscretization {eq}`heatMOL` and derive what is known as the *Crank–Nicolson* method:
 
     :::{math}
     :label: CNxx
@@ -236,15 +236,15 @@ The adaptive time integrators can all produce solutions. But, as seen in {numref
 
     Note that each side of the method is evaluated at a different time level.
 
-4. ⌨ Repeat {numref}`Demo %s <demo-methodlines-heatBE>` using the Crank–Nicolson method {eq}`CNxx`. Then try for $n=240$ as well, which uses a time step ten times larger than before. Does the solution remain stable? 
+2. ⌨ Repeat {numref}`Demo %s <demo-methodlines-heatBE>` using the Crank–Nicolson method {eq}`CNxx`. Then try for $n=240$ as well, which uses a time step ten times larger than before. Does the solution remain stable? 
 
-5. The PDE $u_t = 2u + u_{xx}$ combines growth with diffusion. 
+3. The PDE $u_t = 2u + u_{xx}$ combines growth with diffusion. 
 
     **(a)** ✍ Derive an equation analogous to {eq}`BExx` that combines second-order semidiscretization in space with the backward Euler solver in time.
 
     **(b)** ⌨ Apply your formula from part (a) to solve this PDE with periodic boundary conditions for the same initial condition as in {numref}`Demo {number} <demo-methodlines-heatBE>`. Use  $m=200$ points in space and $n=1000$ time levels. Plot the solution on one graph at times $t=0,0.04,0.08,\ldots,0.2$, or animate the solution over $0\le t \le 0.2$.
 
-6. ✍ In this problem, you will analyze the convergence of the explicit method given by {eq}`Eulerxx`.  Recall that the discrete approximation $u_{i,j}$ approximates the solution at $x_i$ and $t_j$.
+4. ✍ In this problem, you will analyze the convergence of the explicit method given by {eq}`Eulerxx`.  Recall that the discrete approximation $u_{i,j}$ approximates the solution at $x_i$ and $t_j$.
 
     **(a)** Write the method in scalar form as
         

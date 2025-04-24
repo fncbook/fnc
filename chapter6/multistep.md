@@ -66,9 +66,8 @@ As with RK formulas, a multistep method is entirely specified by the values of a
 ```{index} ! trapezoid formula; for an IVP
 ```
 
-(table-adams)=
-
 ```{table} Coefficients of Adams multistep formulas. All have $a_{k-1}=1$ and $a_{k-2} = \cdots = a_0 = 0$.
+:label: table-adams
 
 | name/order | steps $k$ |       $b_k$       |     $b_{k-1}$     |     $b_{k-2}$      |     $b_{k-3}$     |     $b_{k-4}$     |
 |:----------:|:---------:|:-----------------:|:-----------------:|:------------------:|:-----------------:|:-----------------:|
