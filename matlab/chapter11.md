@@ -34,7 +34,6 @@ numbering:
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
-pwd;
 ```
 
 ### 11.1 @section-diffusion-blackscholes
@@ -326,7 +325,7 @@ Ix = eye(m);
 u0 = exp( -60 * (x - 0.5).^2 );
 ```
 
-Now, however, we apply a standard solver using `solve_ivp` to the initial-value problem $\mathbf{u}'=\mathbf{D}_{xx}\mathbf{u}$.
+Now, however, we apply a standard solver called `ode45` to the initial-value problem $\mathbf{u}'=\mathbf{D}_{xx}\mathbf{u}$.
 
 ```{code-cell}
 tfinal = 0.05;
@@ -354,7 +353,7 @@ The solution appears to be correct. But the number of time steps that were selec
 time_steps_ode45 = length(sol.Time) - 1
 ```
 
-Now we apply a different solver called `BDF`.
+Now we apply a different solver called `ode15s`.
 
 ```{code-cell}
 ivp.Solver = "ode15s";
@@ -362,7 +361,7 @@ ivp.Solver = "ode15s";
 time_steps_ode15s = length(sol.Time) - 1
 ```
 
-The number of steps selected was reduced by a factor of 20!
+The number of steps selected was reduced by a factor of 15!
 ``````
 
 ### 11.3 @section-diffusion-absstab
