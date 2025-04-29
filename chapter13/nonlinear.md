@@ -183,36 +183,43 @@ $$
 :::
 ````
 `````
+
 ::::
 
 ## Exercises
 
-1. ⌨ **(a)** Solve for the steady state of
+``````{exercise}
+⌨ **(a)** Solve for the steady state of
 
-    $$
-    u_t = - u_y - x - 2 + \epsilon ( u_{xx} + u_{yy} )
-    $$
+$$
+u_t = - u_y - x - 2 + \epsilon ( u_{xx} + u_{yy} )
+$$
 
-    for $\epsilon=1$ in $[-1,1]\times[-1,1]$, subject to a homogeneous Dirichlet boundary condition. Use $m=n=30$ points and plot the solution.
+for $\epsilon=1$ in $[-1,1]\times[-1,1]$, subject to a homogeneous Dirichlet boundary condition. Use $m=n=30$ points and plot the solution.
 
-    **(b)** Repeat part (a) for $\epsilon=0.1$, which weakens the influence of diffusion relative to advection.
+**(b)** Repeat part (a) for $\epsilon=0.1$, which weakens the influence of diffusion relative to advection.
+``````
 
-    ```{index} soap film
-    ```
+```{index} soap film
+```
 
-2. ⌨ A soap film stretched on a wire frame above the $(x,y)$ plane assumes a shape $u(x,y)$ of minimum area and is governed by
+``````{exercise}
+⌨ A soap film stretched on a wire frame above the $(x,y)$ plane assumes a shape $u(x,y)$ of minimum area and is governed by
 
-    \begin{align*}
-      \operatorname{div} \, \left( \frac{\operatorname{grad} u}{\sqrt{1 + u_x^2 + u_y^2}} \right) &= 0 \text{ in region $R$},\\
-      u(x,y) &= g(x,y) \text{ on the boundary of $R$}.
-    \end{align*}
+\begin{align*}
+\operatorname{div} \, \left( \frac{\operatorname{grad} u}{\sqrt{1 + u_x^2 + u_y^2}} \right) &= 0 \text{ in region $R$},\\
+u(x,y) &= g(x,y) \text{ on the boundary of $R$}.
+\end{align*}
 
-    Solve the equation on $[-1,1]^2$ with boundary value $u(x,y)=\tanh(y-2x)$, and make a surface plot of the result. (Hints: Don't try to rewrite the PDE. Instead, modify {numref}`Function {number} <function-elliptic>` so that `ϕ` is called with arguments `(U,Dx,Dy)`, and compute the PDE in the form given. Also, since convergence is difficult in this problem, use the boundary data over the whole domain as the initial value for `levenberg`.)
+Solve the equation on $[-1,1]^2$ with boundary value $u(x,y)=\tanh(y-2x)$, and make a surface plot of the result. (Hints: Don't try to rewrite the PDE. Instead, modify {numref}`Function {number} <function-elliptic>` so that `ϕ` is called with arguments `(U,Dx,Dy)`, and compute the PDE in the form given. Also, since convergence is difficult in this problem, use the boundary data over the whole domain as the initial value for `levenberg`.)
+``````
 
-3. Modify {numref}`Function {number} <function-elliptic>` to solve {eq}`nonlinpdepde` on $[a,b] \times [c,d]$ with the mixed boundary conditions
+``````{exercise}
+⌨  Modify {numref}`Function {number} <function-elliptic>` to solve {eq}`nonlinpdepde` on $[a,b] \times [c,d]$ with the mixed boundary conditions
 
-    $$
-    u = 0, \text{ if } x=a \text{ or } y = d, \qquad  \frac{\partial u}{\partial n} = 0, \text{ if } x=b \text{ or } y = c,
-    $$
+$$
+u = 0, \text{ if } x=a \text{ or } y = d, \qquad  \frac{\partial u}{\partial n} = 0, \text{ if } x=b \text{ or } y = c,
+$$
 
-    where $\frac{\partial}{\partial n}$ is the derivative in the direction of the outward normal. Either condition can be used at a corner point. (Hint: Define index vectors for each side of the domain.) Apply your solver to the PDE $\Delta u + \sin(3\pi x) = 0$ on $[0,1]^2$, and make a contour plot of the solution. Why do the level curves intersect two of the sides only at right angles?
+where $\frac{\partial}{\partial n}$ is the derivative in the direction of the outward normal. Either condition can be used at a corner point. (Hint: Define index vectors for each side of the domain.) Apply your solver to the PDE $\Delta u + \sin(3\pi x) = 0$ on $[0,1]^2$, and make a contour plot of the solution. Why do the level curves intersect two of the sides only at right angles?
+``````

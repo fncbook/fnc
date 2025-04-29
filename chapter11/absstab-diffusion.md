@@ -201,98 +201,116 @@ In summary, three things happen as $h\to 0$:
 3. If we use an explicit time stepping method, then absolute stability requires $O(h^{-2})$ steps. 
 
 The last restriction becomes rather burdensome as $h\to 0$, i.e., as we improve the spatial discretization, which is why implicit methods are preferred for diffusion. While any convergent IVP solver will get the right solution as $\tau\to 0$, the results are exponentially large nonsense until $\tau$ is small enough to satisfy absolute stability.
+
 ## Exercises
 
-1. ✍ Use an eigenvalue decomposition to write the system
-  
-    $$
-    \mathbf{u}'(t) =
-    \begin{bmatrix}
-      0 & 4 \\
-      -4 & 0
-    \end{bmatrix} \mathbf{u}(t)
-    $$
+``````{exercise}
+✍ Use an eigenvalue decomposition to write the system
 
-    as an equivalent diagonal system. 
+$$
+\mathbf{u}'(t) =
+\begin{bmatrix}
+0 & 4 \\
+-4 & 0
+\end{bmatrix} \mathbf{u}(t)
+$$
 
-2. ✍ For each system, state whether its solutions are bounded as $t\to \infty$.
-      
-    **(a)** $\mathbf{u}'(t) =
-    \displaystyle \begin{bmatrix}
-      1 & 3 \\
-      3 & 1
-    \end{bmatrix} \mathbf{u}(t)$
-    
-    **(b)** $\mathbf{u}'(t) =
-    \displaystyle \begin{bmatrix}
-      -1 & 3 \\
-      -3 & -1
-    \end{bmatrix} \mathbf{u}(t)$
-  
-    **(c)** $\mathbf{u}'(t) =
-    \displaystyle \begin{bmatrix}
-      0 & 4 \\
-      -4 & 0
-    \end{bmatrix} \mathbf{u}(t)$
+as an equivalent diagonal system. 
+``````
 
-3. ✍ Using {numref}`figure-stabreg_ab_am` and {numref}`figure-stabreg_bd_rk`, estimate the time step restriction (if any) for the system
-  
-    $$
-    \mathbf{u}'(t) =
-    \begin{bmatrix}
-      -4 & 0 & 0 \\
-      0 & -2 & 0 \\
-      0 & 0 & -0.5
-    \end{bmatrix} \mathbf{u}(t)
-    $$
+``````{exercise}
+✍ For each system, state whether its solutions are bounded as $t\to \infty$.
 
-    for the following IVP methods:
-    
-    **(a)** RK4 $\qquad$
-    **(b)** AM4 $\qquad$
-    **(c)** AB2
+**(a)** $\mathbf{u}'(t) =
+\displaystyle \begin{bmatrix}
+1 & 3 \\
+3 & 1
+\end{bmatrix} \mathbf{u}(t)$
 
-4. ✍ Using {numref}`figure-stabreg_ab_am` and {numref}`figure-stabreg_bd_rk`, find the time step restriction (if any) for the system
-  
-    $$
-    \mathbf{u}'(t) =
-    \begin{bmatrix}
-      -1 & 0 & 0 \\
-      0 & 0 & 4 \\
-      0 & -4 & 0
-    \end{bmatrix} \mathbf{u}(t)
-    $$
+**(b)** $\mathbf{u}'(t) =
+\displaystyle \begin{bmatrix}
+-1 & 3 \\
+-3 & -1
+\end{bmatrix} \mathbf{u}(t)$
 
-    for the following IVP methods:
-    
-    **(a)** RK4 $\qquad$
-    **(b)** AM4 $\qquad$
-    **(c)** AB3
+**(c)** $\mathbf{u}'(t) =
+\displaystyle \begin{bmatrix}
+0 & 4 \\
+-4 & 0
+\end{bmatrix} \mathbf{u}(t)$
+``````
 
-5. ✍ Of the following methods, which would be unsuitable for a problem having eigenvalues on the imaginary axis?  Justify your answer(s).
-    
-    **(a)** AM2 $\qquad$
-    **(b)** AB2 $\qquad$
-    **(c)** RK2 $\qquad$
-    **(d)** RK3
+``````{exercise}
+✍ Using {numref}`figure-stabreg_ab_am` and {numref}`figure-stabreg_bd_rk`, estimate the time step restriction (if any) for the system
 
-6. ✍ Of the following methods, which would have a time step restriction for a problem with real, negative eigenvalues?  Justify your answer(s).
+$$
+\mathbf{u}'(t) =
+\begin{bmatrix}
+-4 & 0 & 0 \\
+0 & -2 & 0 \\
+0 & 0 & -0.5
+\end{bmatrix} \mathbf{u}(t)
+$$
 
-    **(a)** AM2 $\qquad$
-    **(b)** AM4 $\qquad$
-    **(c)** BD4 $\qquad$
-    **(d)** RK4
+for the following IVP methods:
 
-(problem-absstab-D2eigs)=
-7. ✍ Let $\mathbf{D}_{xx}$ be $m\times m$ and given by {eq}`heatFD22`. For any integer $k \in \{0,\ldots,m-1\}$, define $\omega = \exp(2i k\pi/m)$ and $\mathbf{v} = \bigl[ 1,\; \omega,\; \omega^2,\; \ldots,\; \omega^{m-1} \bigr].$ Show that $\mathbf{v}$ is an eigenvector of $\mathbf{D}_{xx}$, with eigenvalue
+**(a)** RK4 $\qquad$
+**(b)** AM4 $\qquad$
+**(c)** AB2
+``````
 
-    $$
-    \lambda =  -4m^2 \sin^2 \left( \frac{k\pi}{m} \right).
-    $$
+``````{exercise}
+✍ Using {numref}`figure-stabreg_ab_am` and {numref}`figure-stabreg_bd_rk`, find the time step restriction (if any) for the system
 
-    (This establishes that the eigenvalues all lie within the real interval $[-4m^2,0]$.)
+$$
+\mathbf{u}'(t) =
+\begin{bmatrix}
+-1 & 0 & 0 \\
+0 & 0 & 4 \\
+0 & -4 & 0
+\end{bmatrix} \mathbf{u}(t)
+$$
 
-8. ✍ **(a)** Derive an algebraic inequality equivalent to absolute stability for the AM2 (trapezoid) formula.
-    
-    ✍ **(b)** Argue that the inequality in part (a) is equivalent to the restriction $\operatorname{Re} \zeta\le 0$. (Hint: Complex magnitude is equivalent to distance in the plane.)
+for the following IVP methods:
 
+**(a)** RK4 $\qquad$
+**(b)** AM4 $\qquad$
+**(c)** AB3
+``````
+
+``````{exercise}
+✍ Of the following methods, which would be unsuitable for a problem having eigenvalues on the imaginary axis?  Justify your answer(s).
+
+**(a)** AM2 $\qquad$
+**(b)** AB2 $\qquad$
+**(c)** RK2 $\qquad$
+**(d)** RK3
+``````
+
+``````{exercise}
+✍ Of the following methods, which would have a time step restriction for a problem with real, negative eigenvalues?  Justify your answer(s).
+
+**(a)** AM2 $\qquad$
+**(b)** AM4 $\qquad$
+**(c)** BD4 $\qquad$
+**(d)** RK4
+
+``````
+
+``````{exercise}
+:label: problem-absstab-D2eigs
+✍ Let $\mathbf{D}_{xx}$ be $m\times m$ and given by {eq}`heatFD22`. For any integer $k \in \{0,\ldots,m-1\},$ define $\omega = \exp(2i k\pi/m)$ and $\mathbf{v} = \bigl[ 1,\; \omega,\; \omega^2,\; \ldots,\; \omega^{m-1} \bigr].$ Show that $\mathbf{v}$ is an eigenvector of $\mathbf{D}_{xx}$ with associated eigenvalue
+
+$$
+\lambda =  -4m^2 \sin^2 \left( \frac{k\pi}{m} \right).
+$$
+
+(This establishes that the eigenvalues all lie within the real interval $[-4m^2,0]$.)
+``````
+
+``````{exercise}
+✍ **(a)** Derive an algebraic inequality equivalent to absolute stability for the AM2 (trapezoid) formula.
+
+✍ **(b)** Argue that the inequality in part (a) is equivalent to the restriction $\operatorname{Re} \zeta\le 0$. (Hint: Complex magnitude is equivalent to distance in the plane.)
+
+``````

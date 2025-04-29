@@ -136,17 +136,25 @@ As a result, we conclude that $\mathbf{A} = \mathbf{E} \mathbf{D}_x \mathbf{E}^T
 
 ## Exercises
 
-(problem-absstab-D1eigs)=
-1.  ✍ Let $\mathbf{D}_{x}$ be $m\times m$ and given by {eq}`cflcentral`. For any integer $k \in \{0,\ldots,m-1\}$, define $\omega = \exp(2ik\pi/m)$ and $\mathbf{v} = \bigl[ 1,\; \omega,\; \omega^2,\; \ldots,\; \omega^{m-1} \bigr].$ Show that $\mathbf{v}$ is an eigenvector of $\mathbf{D}_{x}$, with eigenvalue
+``````{exercise}
+:label: problem-absstab-D1eigs
+ ✍ Let $\mathbf{D}_{x}$ be $m\times m$ and given by {eq}`cflcentral`. For any integer $k \in \{0,\ldots,m-1\}$, define $\omega = \exp(2ik\pi/m)$ and $\mathbf{v} = \bigl[ 1,\; \omega,\; \omega^2,\; \ldots,\; \omega^{m-1} \bigr].$ Show that $\mathbf{v}$ is an eigenvector of $\mathbf{D}_{x}$ with associated eigenvalue
 
-    $$
-    \lambda =  i\, m  \sin \frac{2k\pi}{m}.
-    $$
-    
-    (See also [Exercise 11.3.7](#problem-absstab-D2eigs).)
+$$
+\lambda =  i\, m  \sin \frac{2k\pi}{m}.
+$$
 
-2. ⌨ Refer to the semidiscretization of the advection–diffusion equation on $x\in[0,1]$ with $c=1$, $\epsilon=0.01$, and periodic end conditions in {numref}`Demo %s <demo-absstab-advdiff>`. For $m=100$, find the upper bound on $\tau$ that gives absolute stability for Euler time stepping. (Hint: The stability region of Euler is the set of complex values whose distance from $-1$ is less than or equal to one. The effect of $\tau$ is to uniformly scale that distance for the eigenvalues.)
+(See also @problem-absstab-D2eigs.)
+``````
 
-3. ⌨ Refer to the semidiscretization in {numref}`Demo %s <demo-absstab-inflow>`. Find the upper bound on $\tau$ that gives absolute stability for Euler time stepping. (See the hint in the previous exercise.)
+``````{exercise}
+⌨ Refer to the semidiscretization of the advection–diffusion equation on $x\in[0,1]$ with $c=1,$ $\epsilon=0.01,$ and periodic end conditions in {numref}`Demo %s <demo-absstab-advdiff>`. For $m=100$, find the upper bound on $\tau$ that gives absolute stability for Euler time stepping. (Hint: The stability region of Euler is the set of complex values whose distance from $-1$ is less than or equal to one. The effect of $\tau$ is to uniformly scale that distance for the eigenvalues.)
+``````
 
-4. ⌨ Modify {numref}`Demo %s <demo-absstab-inflow>` so that it produces the eigenvalues of the problem $u_t+u_x=0$ with an outflow condition $u(1,t)=0$. What is the behavior of solutions as $t\to\infty$?
+``````{exercise}
+⌨ Refer to the semidiscretization in {numref}`Demo %s <demo-absstab-inflow>`. Find the upper bound on $\tau$ that gives absolute stability for Euler time stepping. (See the hint in the previous exercise.)
+``````
+
+``````{exercise}
+⌨ Modify {numref}`Demo %s <demo-absstab-inflow>` so that it produces the eigenvalues of the problem $u_t+u_x=0$ with an outflow condition $u(1,t)=0$. What is the behavior of solutions as $t\to\infty$?
+``````

@@ -1,8 +1,8 @@
-chap = 7
+chap = 13
 dir = "/Users/driscoll/Documents/GitHub/fnc/chapter$chap"
 section_files = filter(endswith(".md"), readdir(dir, join=true))
 
-for file in section_files[2:2]
+for file in section_files
     text = readlines(file, keep=true)
     start = findfirst(startswith("## Exercises"), text)
     isnothing(start) && continue
@@ -18,7 +18,7 @@ for file in section_files[2:2]
         text[mtch[i+1]-1] = "``````\n" * text[mtch[i+1]-1]
     end
     for j in start+1:length(text)
-        mtch = match(r"\s*\(([a-zA-Z\-]+)\)=", text[j])
+        mtch = match(r"\s*\(([a-zA-Z0-9\-]+)\)=", text[j])
         isnothing(mtch) && continue
         println("Found label in $file: $j, $(mtch.captures[1])")
         text[j] = "\n"

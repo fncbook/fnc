@@ -150,56 +150,71 @@ We now use a wave speed that is discontinuous at $x=0$; to the left, $c=1$, and 
 :::
 ````
 `````
+
 ::::
 
 ## Exercises
 
-1. ✍ Consider the Maxwell equations {eq}`wavefirst2` with smooth solution $u(x,t)$ and $z(x,t)$.
+``````{exercise}
+✍ Consider the Maxwell equations {eq}`wavefirst2` with smooth solution $u(x,t)$ and $z(x,t)$.
 
-    **(a)** Show that $u_{tt} = c^2 u_{xx}$.
-    
-    **(b)** Show that $z_{tt} = c^2 z_{xx}$.
+**(a)** Show that $u_{tt} = c^2 u_{xx}$.
 
-(problem-wave-twodir)=
-2. ✍ Suppose that $\phi(s)$ is any twice-differentiable function.
-    
-    **(a)** Show that $u(x,t) = \phi(x-c t)$ is a solution of $u_{tt}=c^2u_{xx}$. (As in the advection equation, this is a traveling wave of velocity $c$.)
+**(b)** Show that $z_{tt} = c^2 z_{xx}$.
+``````
 
-    **(b)** Show that $u(x,t) = \phi(x+c t)$ is another solution of $u_{tt}=c^2u_{xx}$. (This is a traveling wave of velocity $-c$.)
+``````{exercise}
+:label: problem-wave-twodir
+✍ Suppose that $\phi(s)$ is any twice-differentiable function.
 
-    ```{index} D'Alembert's solution
-    ```
-3. ✍ Show that the following is a solution to the wave equation $u_{tt}=c^2u_{xx}$ with initial and boundary conditions {eq}`waveBC` and {eq}`waveIC`:
+**(a)** Show that $u(x,t) = \phi(x-c t)$ is a solution of $u_{tt}=c^2u_{xx}$. (As in the advection equation, this is a traveling wave of velocity $c$.)
 
-    $$
-    u(x,t) = \frac{1}{2} \left[ f(x-ct)+f(x+ct)\right] + \frac{1}{2c} \int_{x-ct}^{x+ct} g(\xi) \, d\xi
-    $$
-    
-    This is known as *D'Alembert's solution*.
-    
-4. ⌨ Suppose the wave equation has homogeneous Neumann conditions on $u$ at each boundary instead of Dirichlet conditions. Using the Maxwell formulation {eq}`wavefirst2`, we have $z_t=c^2u_x$, so $z$ is constant in time at each boundary. Therefore, the endpoint values of $\mathbf{z}$ can be taken from the initial condition and removed from the ODE, while the entire $\mathbf{u}$ vector is now part of the ODE. 
-   
-    Modify {numref}`Demo {number} <demo-wave-boundaries>` to solve the PDE there with Neumann instead of Dirichlet conditions, and make an animation or space-time portrait of the solution. In what major way is it different from the Dirichlet case?
+**(b)** Show that $u(x,t) = \phi(x+c t)$ is another solution of $u_{tt}=c^2u_{xx}$. (This is a traveling wave of velocity $-c$.)
+``````
 
-5. ⌨ The equations $u_t=z_x-\sigma u$, $z_t=c^2u_{xx}$ model electromagnetism in an imperfect conductor. Repeat {numref}`Demo %s <demo-wave-speed>` with $\sigma(x)=2+2\operatorname{sign}(x)$. (This causes waves in the half-domain $x>0$ to decay in time.)
+```{index} D'Alembert's solution
+```
 
-    ```{index} sine–Gordon equation
-    ```
-6. The nonlinear **sine–Gordon equation** $u_{tt}-u_{xx}=\sin u$ has interesting solutions.
-    
-    **(a)** ✍ Write the equation as a first-order system in the variables $u$ and $v=u_t$.
-    
-    **(b)** ⌨ Assume periodic end conditions on $[-10,10]$ and discretize at $m=200$ points. Let $u(x,0) = \pi e^{-x^2}$ and $u_t(x,0) = 0$. Solve the system using `RK4` between $t=0$ and $t=50$, and make a plot or animation of the solution.
+``````{exercise}
+✍ Show that the following is a solution to the wave equation $u_{tt}=c^2u_{xx}$ with initial and boundary conditions {eq}`waveBC` and {eq}`waveIC`:
 
-    ```{index} beam equation
-    ```
-7. The deflections of a stiff beam, such as a ruler, are governed by the PDE $u_{tt}=-u_{xxxx}$.
- 
-    **(a)** ✍ Show that the beam PDE is equivalent to the first-order system
+$$
+u(x,t) = \frac{1}{2} \left[ f(x-ct)+f(x+ct)\right] + \frac{1}{2c} \int_{x-ct}^{x+ct} g(\xi) \, d\xi
+$$
 
-    \begin{align*}
-    u_t &= v_{xx}, \\
-    v_t &= -u_{xx}.
-    \end{align*}
-    
-    **(b)** ⌨ Assuming periodic end conditions on $[-1,1]$, use $m=100$, let $u(x,0) =\exp(-24x^2)$, $v(x,0) = 0$, and simulate the solution of the beam equation for $0\le t \le 1$ using {numref}`Function {number} <function-am2>` with $n=100$ time steps. Make a plot or animation of the solution.
+This is known as *D'Alembert's solution*.
+``````
+
+``````{exercise}
+⌨ Suppose the wave equation has homogeneous Neumann conditions on $u$ at each boundary instead of Dirichlet conditions. Using the Maxwell formulation {eq}`wavefirst2`, we have $z_t=c^2u_x$, so $z$ is constant in time at each boundary. Therefore, the endpoint values of $\mathbf{z}$ can be taken from the initial condition and removed from the ODE, while the entire $\mathbf{u}$ vector is now part of the ODE. 
+
+Modify {numref}`Demo {number} <demo-wave-boundaries>` to solve the PDE there with Neumann instead of Dirichlet conditions, and make an animation or space-time portrait of the solution. In what major way is it different from the Dirichlet case?
+``````
+
+```{index} sine–Gordon equation
+```
+
+``````{exercise}
+:label: problem-sine-Gordon
+The nonlinear **sine–Gordon equation** $u_{tt}-u_{xx}=\sin u$ has interesting solutions.
+
+**(a)** ✍ Write the equation as a first-order system in the variables $u$ and $v=u_t$.
+
+**(b)** ⌨ Assume periodic end conditions on $[-10,10]$ and discretize at $m=200$ points. Let $u(x,0) = \pi e^{-x^2}$ and $u_t(x,0) = 0$. Solve the system using `RK4` between $t=0$ and $t=50$, and make a plot or animation of the solution.
+``````
+
+```{index} beam equation
+```
+
+``````{exercise}
+The deflections of a stiff beam, such as a ruler, are governed by the PDE $u_{tt}=-u_{xxxx}$.
+
+**(a)** ✍ Show that the beam PDE is equivalent to the first-order system
+
+\begin{align*}
+u_t &= v_{xx}, \\
+v_t &= -u_{xx}.
+\end{align*}
+
+**(b)** ⌨ Assuming periodic end conditions on $[-1,1]$, use $m=100$, let $u(x,0) =\exp(-24x^2)$, $v(x,0) = 0$, and simulate the solution of the beam equation for $0\le t \le 1$ using {numref}`Function {number} <function-am2>` with $n=100$ time steps. Make a plot or animation of the solution.
+``````

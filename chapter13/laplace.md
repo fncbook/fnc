@@ -268,34 +268,46 @@ If we chose a Chebyshev spectral discretization instead, the calculus changes. P
 
 ## Exercises
 
-1. ✍ Using general $2\times 2$ matrices, verify identities 4 and 6 in {numref}`Theorem {number} <theorem-laplace-kron>`.
+``````{exercise}
+✍ Using general $2\times 2$ matrices, verify identities 4 and 6 in {numref}`Theorem {number} <theorem-laplace-kron>`.
+``````
 
-(problem-laplace-symmetry)=
-2. ✍ Prove that the matrix $\mathbf{A}$ defined in {eq}`poiskronpde` is symmetric if $\mathbf{D}_{xx}$ and $\mathbf{D}_{yy}$ are symmetric.
+``````{exercise}
+:label: problem-laplace-symmetry
+✍ Prove that the matrix $\mathbf{A}$ defined in {eq}`poiskronpde` is symmetric if $\mathbf{D}_{xx}$ and $\mathbf{D}_{yy}$ are symmetric.
+``````
 
-(problem-laplace-usage)=
-3. ⌨  Use {numref}`Function {number} <function-poissonfd>` to solve the following problems on $[0,1]\times[0,1]$ using $m=n=50$. In each case, make a plot of the solution and a plot of the error.
+``````{exercise}
+:label: problem-laplace-usage
+⌨  Use {numref}`Function {number} <function-poissonfd>` to solve the following problems on $[0,1]\times[0,1]$ using $m=n=50$. In each case, make a plot of the solution and a plot of the error.
 
-    **(a)** $u_{xx}+u_{yy} = 2x^2[x^2(x-1)+(10x-6)(y^2-y)]$, with $u=0$ on the boundary.
+**(a)** $u_{xx}+u_{yy} = 2x^2[x^2(x-1)+(10x-6)(y^2-y)]$, with $u=0$ on the boundary.
 
-    Solution: $u(x,y) = x^4(1-x)y(1-y)$.
+Solution: $u(x,y) = x^4(1-x)y(1-y)$.
 
-    **(b)** $u_{xx}+u_{yy} = \left(16 x^2 + (1-4 y)^2\right) \sinh (4 x y-x)$,  with $u=\sinh(4xy-x)$ on the boundary.
+**(b)** $u_{xx}+u_{yy} = \left(16 x^2 + (1-4 y)^2\right) \sinh (4 x y-x)$,  with $u=\sinh(4xy-x)$ on the boundary.
 
-    Solution: $u(x,y) = \sin(4\pi x))$.
+Solution: $u(x,y) = \sin(4\pi x))$.
 
-    **(c)** $u_{xx}+u_{yy} = -(20\pi^2) \sin (4\pi x) \cos (2\pi y)$, with $u = \sin (4\pi x) \cos (2\pi y)$ on the boundary.
+**(c)** $u_{xx}+u_{yy} = -(20\pi^2) \sin (4\pi x) \cos (2\pi y)$, with $u = \sin (4\pi x) \cos (2\pi y)$ on the boundary.
 
-    Solution: $u(x,y) = \sin (4\pi x) \cos (2\pi y)$.
+Solution: $u(x,y) = \sin (4\pi x) \cos (2\pi y)$.
+``````
 
-4. ⌨ For each case in Exercise 3, solve the problem using  {numref}`Function {number} <function-poissonfd>` with $m=n=20,30,40,\ldots,120$. For each numerical solution compute the maximum absolute error on the grid. On a log-log plot, compare the convergence of the error as a function of $n$ to theoretical second-order accuracy.
+``````{exercise}
+⌨ For each case in Exercise 3, solve the problem using  {numref}`Function {number} <function-poissonfd>` with $m=n=20,30,40,\ldots,120$. For each numerical solution compute the maximum absolute error on the grid. On a log-log plot, compare the convergence of the error as a function of $n$ to theoretical second-order accuracy.
+``````
 
-5. ⌨ Copy {numref}`Function {number} <function-poissonfd>` to a new function named `poischeb`, and modify it to use a Chebyshev discretization rather than finite differences. For each item in [Exercise 3](#problem-laplace-usage), solve the problem using `poischeb` for $m=n=10,15,20,\ldots,40$. For each numerical solution compute the maximum absolute error on the grid. Show the convergence of the error as a function of $n$ on a log-linear plot.
+``````{exercise}
+⌨ Copy {numref}`Function {number} <function-poissonfd>` to a new function named `poischeb`, and modify it to use a Chebyshev discretization rather than finite differences. For each item in [Exercise 3](#problem-laplace-usage), solve the problem using `poischeb` for $m=n=10,15,20,\ldots,40$. For each numerical solution compute the maximum absolute error on the grid. Show the convergence of the error as a function of $n$ on a log-linear plot.
+``````
 
-6. ⌨ Sometimes boundary conditions are specified using a piecewise definition, with a different formula for each side of the domain. Use {numref}`Function {number} <function-poissonfd>` with $m=n=60$ to solve the Laplace equation on $[0,1]^2$ with boundary conditions
+``````{exercise}
+⌨ Sometimes boundary conditions are specified using a piecewise definition, with a different formula for each side of the domain. Use {numref}`Function {number} <function-poissonfd>` with $m=n=60$ to solve the Laplace equation on $[0,1]^2$ with boundary conditions
 
-    $$
-    u(0,y) = u(1,y) \equiv 0, \quad u(x,0) = \sin(3\pi x), \quad u(x,1) = e^{2x}(x-x^2).
-    $$
+$$
+u(0,y) = u(1,y) \equiv 0, \quad u(x,0) = \sin(3\pi x), \quad u(x,1) = e^{2x}(x-x^2).
+$$
 
-    Make a surface plot of your numerical solution.
+Make a surface plot of your numerical solution.
+``````

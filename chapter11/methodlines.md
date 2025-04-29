@@ -214,87 +214,100 @@ The adaptive time integrators can all produce solutions. But, as seen in {numref
 
 ## Exercises
 
-1. ⌨ Revisit {numref}`Demo {number} <demo-methodlines-heatFE>`. For each $m=20,30,\dots,120$ points in space, let $n=20,30,40,\dots$ in turn until you reach the smallest $n$ such that the numerical solution remains bounded above by 2 for all time; call this value $N(m)$. Make a log-log plot of $N(m)$ as a function of $m$. If you suppose that $N=O(m^p)$ for a simple rational number $p$, what is a reasonable hypothesis for $p$?
+``````{exercise}
+⌨ Revisit {numref}`Demo {number} <demo-methodlines-heatFE>`. For each $m=20,30,\dots,120$ points in space, let $n=20,30,40,\dots$ in turn until you reach the smallest $n$ such that the numerical solution remains bounded above by 2 for all time; call this value $N(m)$. Make a log-log plot of $N(m)$ as a function of $m$. If you suppose that $N=O(m^p)$ for a simple rational number $p$, what is a reasonable hypothesis for $p$?
+``````
 
-2. In {numref}`Demo {number} <demo-methodlines-auto>`, as $t\to \infty$ the solution $u(x,t)$ approaches a value that is constant in both space and time.
+``````{exercise}
+In {numref}`Demo {number} <demo-methodlines-auto>`, as $t\to \infty$ the solution $u(x,t)$ approaches a value that is constant in both space and time.
 
-    **(a)** ⌨ Set $m=400$ and use a native IVP solver, as shown in {numref}`Demo {number} <demo-methodlines-auto>`, to find this constant value to at least eight digits of accuracy.
+**(a)** ⌨ Set $m=400$ and use a native IVP solver, as shown in {numref}`Demo {number} <demo-methodlines-auto>`, to find this constant value to at least eight digits of accuracy.
 
-    **(b)** ✍ Prove that $Q = \int_0^1 u(x,t) \,dx$ is constant in time. (Hint: If its derivative is zero, then it is constant. Take the derivative of the integral with respect to $t$ and apply the PDE and periodic end conditions.)
+**(b)** ✍ Prove that $Q = \int_0^1 u(x,t) \,dx$ is constant in time. (Hint: If its derivative is zero, then it is constant. Take the derivative of the integral with respect to $t$ and apply the PDE and periodic end conditions.)
 
-    **(c)** ⌨ Use {numref}`Function {number} <function-trapezoid>` to find $Q$ at $t=0$, and compare this number to the result of part (a).
+**(c)** ⌨ Use {numref}`Function {number} <function-trapezoid>` to find $Q$ at $t=0$, and compare this number to the result of part (a).
+``````
 
-    ```{index} Crank–Nicolson method
-    ```
-1. ✍ Apply the trapezoid IVP formula (AM2 in @table-adams) to the semidiscretization {eq}`heatMOL` and derive what is known as the *Crank–Nicolson* method:
+```{index} Crank–Nicolson method
+```
 
-    :::{math}
-    :label: CNxx
-    (\mathbf{I} - \tfrac{1}{2}\tau \mathbf{D}_{xx}) \mathbf{u}_{j+1} =  (\mathbf{I} + \tfrac{1}{2}\tau
-    \mathbf{D}_{xx}) \mathbf{u}_{j}.
-    :::
+``````{exercise}
+✍ Apply the trapezoid IVP formula (AM2 in @table-adams) to the semidiscretization {eq}`heatMOL` and derive what is known as the *Crank–Nicolson* method:
 
-    Note that each side of the method is evaluated at a different time level.
+:::{math}
+:label: CNxx
+(\mathbf{I} - \tfrac{1}{2}\tau \mathbf{D}_{xx}) \mathbf{u}_{j+1} =  (\mathbf{I} + \tfrac{1}{2}\tau
+\mathbf{D}_{xx}) \mathbf{u}_{j}.
+:::
 
-2. ⌨ Repeat {numref}`Demo %s <demo-methodlines-heatBE>` using the Crank–Nicolson method {eq}`CNxx`. Then try for $n=240$ as well, which uses a time step ten times larger than before. Does the solution remain stable? 
+Note that each side of the method is evaluated at a different time level.
+``````
 
-3. The PDE $u_t = 2u + u_{xx}$ combines growth with diffusion. 
+``````{exercise}
+⌨ Repeat {numref}`Demo %s <demo-methodlines-heatBE>` using the Crank–Nicolson method {eq}`CNxx`. Then try for $n=240$ as well, which uses a time step ten times larger than before. Does the solution remain stable? 
+``````
 
-    **(a)** ✍ Derive an equation analogous to {eq}`BExx` that combines second-order semidiscretization in space with the backward Euler solver in time.
+``````{exercise}
+The PDE $u_t = 2u + u_{xx}$ combines growth with diffusion. 
 
-    **(b)** ⌨ Apply your formula from part (a) to solve this PDE with periodic boundary conditions for the same initial condition as in {numref}`Demo {number} <demo-methodlines-heatBE>`. Use  $m=200$ points in space and $n=1000$ time levels. Plot the solution on one graph at times $t=0,0.04,0.08,\ldots,0.2$, or animate the solution over $0\le t \le 0.2$.
+**(a)** ✍ Derive an equation analogous to {eq}`BExx` that combines second-order semidiscretization in space with the backward Euler solver in time.
 
-4. ✍ In this problem, you will analyze the convergence of the explicit method given by {eq}`Eulerxx`.  Recall that the discrete approximation $u_{i,j}$ approximates the solution at $x_i$ and $t_j$.
+**(b)** ⌨ Apply your formula from part (a) to solve this PDE with periodic boundary conditions for the same initial condition as in {numref}`Demo {number} <demo-methodlines-heatBE>`. Use  $m=200$ points in space and $n=1000$ time levels. Plot the solution on one graph at times $t=0,0.04,0.08,\ldots,0.2$, or animate the solution over $0\le t \le 0.2$.
+``````
 
-    **(a)** Write the method in scalar form as
-        
-    $$
-    u_{i,j+1} = (1-2\lambda) u_{i,j} + \lambda u_{i+1,j} + \lambda u_{i-1,j},
-    $$
+``````{exercise}
+✍ In this problem, you will analyze the convergence of the explicit method given by {eq}`Eulerxx`.  Recall that the discrete approximation $u_{i,j}$ approximates the solution at $x_i$ and $t_j$.
 
-     where $\lambda = \tau/h^2>0$.
-    
-    **(b)** Taylor series of the exact solution $\hat{u}$ imply that
-      
-      \begin{align*}
-        \hat{u}_{i,j+1} &= u_{i,j} + \frac{\partial \hat{u}}{\partial t} (x_i,t_j) \tau + O(\tau^2),\\
-        % \frac{\partial^2 u}{\partial t^2} (x_i,\bar{t}) \frac{\tau^2}{2}
-          \hat{u}_{i\pm1,j} &= \hat{u}_{i,j} \pm \frac{\partial \hat{u}}{\partial x} (x_i,t_j) h + \frac{\partial^2 \hat{u}}{\partial x^2} (x_i,t_j)
-      \frac{h^2}{2} \pm \frac{\partial^3 \hat{u}}{\partial x^3} (x_i,t_j)
-      \frac{h^3}{6}+  O(h^4).
-      %\frac{\partial^4 u}{\partial x^4} (\bar{x}_\pm,t_j) \frac{h^4}{24}.
-      \end{align*}
-      
-      Use these to show that
-      
-      \begin{align*}
-          \hat{u}_{i,j+1} & = \left[ (1-2\lambda) \hat{u}_{i,j} + \lambda \hat{u}_{i+1,j} + \lambda \hat{u}_{i-1,j}\right]
-          +  O\Bigl(\tau^2+h^2 \Bigr)\\
-          &= F\left( \lambda,\hat{u}_{i,j}, \hat{u}_{i+1,j} , \hat{u}_{i-1,j}\right) + O\Bigl(\tau^2+h^2\Bigr).
-      \end{align*}
-      
-      (The last line should be considered a definition of the function $F$.)
-    
-    **(c)** The numerical solution satisfies 
-    
-    $$
-    u_{i,j+1}=F\bigl( \lambda,u_{i,j}, u_{i+1,j} , u_{i-1,j}\bigr) 
-    $$ 
-    
-    exactly. Using this fact, subtract $u_{i,j+1}$ from both sides of the last line in part (b) to show that
-    
-    $$
-        e_{i,j+1} = F\left( \lambda,e_{i,j}, e_{i+1,j} ,e_{i-1,j}\right)  + O\Bigl(\tau^2+h^2\Bigr),
-    $$
+**(a)** Write the method in scalar form as
 
-    where $e_{i,j}=\hat{u}_{i,j}-u_{i,j}$ is the error in the numerical solution for all $i$ and $j$ .
-    
-    **(d)** Define $E_j$ as the maximum of $|e_{i,j}|$ over all values of $i$, and use the result of part (c) to show that if $\lambda<1/2$ is kept fixed as $h$ and $\tau$ approach zero, then for sufficiently small $\tau$ and $h$,
-    
-    $$
-      E_{j+1}  = E_{j} + O\Bigl(\tau^2+h^2\Bigr) \le E_{j} + K_j\bigl(\tau^2+h^2\bigr)
-    $$
+$$
+u_{i,j+1} = (1-2\lambda) u_{i,j} + \lambda u_{i+1,j} + \lambda u_{i-1,j},
+$$
 
-    for a positive $K_j$ independent of $\tau$ and $h$.
-    
-    **(e)** If the initial conditions are exact, then $E_0=0$. Use this to show finally that if the $K_j$ are bounded above and $\lambda<1/2$ is kept fixed, then $E_n = O(\tau)$ as $\tau\to 0$.
+where $\lambda = \tau/h^2>0$.
+
+**(b)** Taylor series of the exact solution $\hat{u}$ imply that
+
+\begin{align*}
+\hat{u}_{i,j+1} &= u_{i,j} + \frac{\partial \hat{u}}{\partial t} (x_i,t_j) \tau + O(\tau^2),\\
+% \frac{\partial^2 u}{\partial t^2} (x_i,\bar{t}) \frac{\tau^2}{2}
+\hat{u}_{i\pm1,j} &= \hat{u}_{i,j} \pm \frac{\partial \hat{u}}{\partial x} (x_i,t_j) h + \frac{\partial^2 \hat{u}}{\partial x^2} (x_i,t_j)
+\frac{h^2}{2} \pm \frac{\partial^3 \hat{u}}{\partial x^3} (x_i,t_j)
+\frac{h^3}{6}+  O(h^4).
+%\frac{\partial^4 u}{\partial x^4} (\bar{x}_\pm,t_j) \frac{h^4}{24}.
+\end{align*}
+
+Use these to show that
+
+\begin{align*}
+\hat{u}_{i,j+1} & = \left[ (1-2\lambda) \hat{u}_{i,j} + \lambda \hat{u}_{i+1,j} + \lambda \hat{u}_{i-1,j}\right]
++  O\Bigl(\tau^2+h^2 \Bigr)\\
+&= F\left( \lambda,\hat{u}_{i,j}, \hat{u}_{i+1,j} , \hat{u}_{i-1,j}\right) + O\Bigl(\tau^2+h^2\Bigr).
+\end{align*}
+
+(The last line should be considered a definition of the function $F$.)
+
+**(c)** The numerical solution satisfies 
+
+$$
+u_{i,j+1}=F\bigl( \lambda,u_{i,j}, u_{i+1,j} , u_{i-1,j}\bigr) 
+$$ 
+
+exactly. Using this fact, subtract $u_{i,j+1}$ from both sides of the last line in part (b) to show that
+
+$$
+e_{i,j+1} = F\left( \lambda,e_{i,j}, e_{i+1,j} ,e_{i-1,j}\right)  + O\Bigl(\tau^2+h^2\Bigr),
+$$
+
+where $e_{i,j}=\hat{u}_{i,j}-u_{i,j}$ is the error in the numerical solution for all $i$ and $j$ .
+
+**(d)** Define $E_j$ as the maximum of $|e_{i,j}|$ over all values of $i$, and use the result of part (c) to show that if $\lambda<1/2$ is kept fixed as $h$ and $\tau$ approach zero, then for sufficiently small $\tau$ and $h$,
+
+$$
+E_{j+1}  = E_{j} + O\Bigl(\tau^2+h^2\Bigr) \le E_{j} + K_j\bigl(\tau^2+h^2\bigr)
+$$
+
+for a positive $K_j$ independent of $\tau$ and $h$.
+
+**(e)** If the initial conditions are exact, then $E_0=0$. Use this to show finally that if the $K_j$ are bounded above and $\lambda<1/2$ is kept fixed, then $E_n = O(\tau)$ as $\tau\to 0$.
+``````

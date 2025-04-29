@@ -163,26 +163,39 @@ The phenomenon in the second plot of {numref}`Demo %s <demo-traffic-solve>` is c
 
 ## Exercises
 
-1. ✍ By the analogy between {eq}`trafficpde` and {eq}`advectpde`, use {eq}`trafficQ` to confirm that constant traffic density moves backward (right to left) for $\rho_m<\rho<\rho_c$, as observed in {numref}`Demo %s <demo-traffic-solve>`. (Note that the derivative of $Q_0$ is given in the code for the example.)
 
-2. ⌨ **(a)** Using as large a discretization and as small a dissipation parameter $\epsilon$  as you can get away with, perform experiments to estimate the speed of the shockwave in {numref}`Demo %s <demo-traffic-solve>` between times $t=0.11$ and $t=0.15$. (Hint: You can use `argmax` to locate the peak of the solution vector at a particular time.)
+``````{exercise}
+✍ By the analogy between {eq}`trafficpde` and {eq}`advectpde`, use {eq}`trafficQ` to confirm that constant traffic density moves backward (right to left) for $\rho_m<\rho<\rho_c$, as observed in {numref}`Demo %s <demo-traffic-solve>`. (Note that the derivative of $Q_0$ is given in the code for the example.)
+``````
 
-    **(b)** Theory predicts that the speed of the shockwave is the average of $Q_0'$ evaluated at the values of $\rho$ at the top and bottom of the shock. Perform this calculation and compare to the result of part (a).
+``````{exercise}
+⌨ **(a)** Using as large a discretization and as small a dissipation parameter $\epsilon$  as you can get away with, perform experiments to estimate the speed of the shockwave in {numref}`Demo %s <demo-traffic-solve>` between times $t=0.11$ and $t=0.15$. (Hint: You can use `argmax` to locate the peak of the solution vector at a particular time.)
 
-    ```{index} Burgers equation
-    ```
-3. ⌨ The simplest model that includes both diffusion and nonlinear advection is the *viscous Burgers equation*, $u_t+u u_x=\epsilon u_{xx}$. Assume periodic end conditions on $-4\le x < 4$, let $\epsilon=0.04$, and suppose $u(x,0)=e^{-2x^2}$. Solve the problem numerically with $m=200$, plotting the solution on one graph at times $t=0,0.5,1,\ldots,3$. (You should see that the bump decays but also steepens as it moves to the right.)
-  
-    ```{index} Kuramoto–Sivashinsky equation
-    ```
-4. ⌨ The *Kuramoto–Sivashinsky equation*, $u_t+u u_x=-u_{xx}-\epsilon u_{xxxx}$, exhibits solutions that are considered chaotic. Assume periodic end conditions, $\epsilon=0.05$, and initial condition $u(x,0)=1+e^{-2x^2}$. Using the method of lines, solve the problem numerically with $m=200$ for $-4\le x \le 4$ and $0\le t \le 20$. (You should discretize the fourth derivative as repeated second derivatives.) Make an animation of the plot (preferred), or plot the solution as a surface over $x$ and $t$. 
+**(b)** Theory predicts that the speed of the shockwave is the average of $Q_0'$ evaluated at the values of $\rho$ at the top and bottom of the shock. Perform this calculation and compare to the result of part (a).
+``````
 
-5. ⌨ (Adapted from {cite}`trefethenSpectralMethods2000`.) Consider the problem $u_t + c(x) u_x =0$, for $0 \le x \le 2\pi$, with periodic boundary conditions and variable speed $c(x) = 0.2 + \sin^2(x-1)$. This problem has a solution that is $T$-periodic in time, for some $T\approx 13$.
+```{index} Burgers equation
+```
 
-    **(a)** Find this value $T$ accurately to 10 digits by converting the integral $T
-    = \int_0^T \,dt$ to an integral in $x$ via $\frac{dx}{dt}=c(x)$, then applying numerical integration.
+``````{exercise}
+⌨ The simplest model that includes both diffusion and nonlinear advection is the *viscous Burgers equation*, $u_t+u u_x=\epsilon u_{xx}$. Assume periodic end conditions on $-4\le x < 4$, let $\epsilon=0.04$, and suppose $u(x,0)=e^{-2x^2}$. Solve the problem numerically with $m=200$, plotting the solution on one graph at times $t=0,0.5,1,\ldots,3$. (You should see that the bump decays but also steepens as it moves to the right.)
+``````
 
-    **(b)** Using $u(x,0) =e^{\sin x}$, solve the PDE numerically for $0\le t \le T$ using the answer from part (a). Make an animation of the solution, or a surface plot of the solution as a function of $x$ and $t$.
-    
-    **(c)**  Adjust the accuracy in time and space until you can verify that $\|u(x,T)-u(x,0)\|_\infty < 0.03$.
+```{index} Kuramoto–Sivashinsky equation
+```
 
+``````{exercise}
+⌨ The *Kuramoto–Sivashinsky equation*, $u_t+u u_x=-u_{xx}-\epsilon u_{xxxx}$, exhibits solutions that are considered chaotic. Assume periodic end conditions, $\epsilon=0.05$, and initial condition $u(x,0)=1+e^{-2x^2}$. Using the method of lines, solve the problem numerically with $m=200$ for $-4\le x \le 4$ and $0\le t \le 20$. (You should discretize the fourth derivative as repeated second derivatives.) Make an animation of the plot (preferred), or plot the solution as a surface over $x$ and $t$. 
+``````
+
+``````{exercise}
+⌨ (Adapted from {cite}`trefethenSpectralMethods2000`.) Consider the problem $u_t + c(x) u_x =0$, for $0 \le x \le 2\pi$, with periodic boundary conditions and variable speed $c(x) = 0.2 + \sin^2(x-1)$. This problem has a solution that is $T$-periodic in time, for some $T\approx 13$.
+
+**(a)** Find this value $T$ accurately to 10 digits by converting the integral $T
+= \int_0^T \,dt$ to an integral in $x$ via $\frac{dx}{dt}=c(x)$, then applying numerical integration.
+
+**(b)** Using $u(x,0) =e^{\sin x}$, solve the PDE numerically for $0\le t \le T$ using the answer from part (a). Make an animation of the solution, or a surface plot of the solution as a function of $x$ and $t$.
+
+**(c)**  Adjust the accuracy in time and space until you can verify that $\|u(x,T)-u(x,0)\|_\infty < 0.03$.
+
+``````

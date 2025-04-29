@@ -245,24 +245,32 @@ The explosive growth of error in {numref}`Demo {number} <demo-blackscholes-unsta
 
 ## Exercises
 
-1. ✍ Show that $u(x,t) = e^{-4 \pi^2 t} \cos (2 \pi x) $ is a solution to the IBVP
+``````{exercise}
+✍ Show that $u(x,t) = e^{-4 \pi^2 t} \cos (2 \pi x) $ is a solution to the IBVP
 
-    \begin{align*}
-      \text{PDE:} \quad & \frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial x^2},\quad 0<x<1,\; t > 0, \\
-      \text{BC:} \quad &  \frac{\partial u}{\partial x}(0,t) = \frac{\partial u}{\partial x}(1,t) = 0,\quad t > 0, \\
-      \text{IC:} \quad & u(x,0) = \cos (2 \pi x),\quad 0 \le x \le 1.
-    \end{align*}
+\begin{align*}
+\text{PDE:} \quad & \frac{\partial u}{\partial t} = \frac{\partial^2 u}{\partial x^2},\quad 0<x<1,\; t > 0, \\
+\text{BC:} \quad &  \frac{\partial u}{\partial x}(0,t) = \frac{\partial u}{\partial x}(1,t) = 0,\quad t > 0, \\
+\text{IC:} \quad & u(x,0) = \cos (2 \pi x),\quad 0 \le x \le 1.
+\end{align*}
+``````
 
-2. ✍ Show that $u(x,t) = t^{-1/2} \exp(-x^2/4t)$ solves the heat equation {eq}`heat` at any value of $t>0$.
+``````{exercise}
+✍ Show that $u(x,t) = t^{-1/2} \exp(-x^2/4t)$ solves the heat equation {eq}`heat` at any value of $t>0$.
+``````
 
-3. ✍ Equation {eq}`bspdeFD1` results from applying finite differences to the derivatives in {eq}`bspdefor-t`, including a forward difference for the term $v_t$. 
+``````{exercise}
+✍ Equation {eq}`bspdeFD1` results from applying finite differences to the derivatives in {eq}`bspdefor-t`, including a forward difference for the term $v_t$. 
 
-    **(a)** Write out the method that results if a backward difference is used for $v_t$ instead.
-    
-    **(b)** Explain why modifying the code from {numref}`Demo %s <demo-blackscholes-solve>` to implement this formula requires the use of matrix algebra.
+**(a)** Write out the method that results if a backward difference is used for $v_t$ instead.
 
-4. ⌨ In this problem you are asked to revisit {numref}`Demo %s <demo-blackscholes-solve>` in order to examine the instability phenomenon more closely.
-  
-    **(a)** Leaving other parameters alone, let $m=100$. To the nearest ten, find the minimum value of $n$ that leads to a stable (i.e., not exponentially growing) solution.
+**(b)** Explain why modifying the code from {numref}`Demo %s <demo-blackscholes-solve>` to implement this formula requires the use of matrix algebra.
+``````
 
-    **(b)** Repeat (a) for $m=120,140,\ldots,200$. Make a table of the minimum stable $n$ for each $m$. Is the relationship $n=O(m)$, or something else?
+``````{exercise}
+⌨ In this problem you are asked to revisit {numref}`Demo %s <demo-blackscholes-solve>` in order to examine the instability phenomenon more closely.
+
+**(a)** Leaving other parameters alone, let $m=100$. To the nearest ten, find the minimum value of $n$ that leads to a stable (i.e., not exponentially growing) solution.
+
+**(b)** Repeat (a) for $m=120,140,\ldots,200$. Make a table of the minimum stable $n$ for each $m$. Is the relationship $n=O(m)$, or something else?
+``````

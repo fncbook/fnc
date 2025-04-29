@@ -212,21 +212,24 @@ In summary, we require an **inflow** condition on the PDE. For $c>0$ this is at 
 `````
 ::::
 
-
-
-
-
 ## Exercises
 
-1. ✍ Suppose you want to model the weather, including winds up to speed $200$ km/hr, using an explicit method with a second-order centered spatial discretization. If the shortest time step you can take is 4 hr, what is the CFL limit on the spatial resolution of the model? Is this a lower bound or an upper bound?
+``````{exercise}
+✍ Suppose you want to model the weather, including winds up to speed $200$ km/hr, using an explicit method with a second-order centered spatial discretization. If the shortest time step you can take is 4 hr, what is the CFL limit on the spatial resolution of the model? Is this a lower bound or an upper bound?
+``````
 
+``````{exercise}
+✍ Suppose you want to model the traffic on a high-speed freeway using an explicit method with a second-order centered spatial discretization. Derive a CFL condition on the allowable time step, stating your assumptions carefully.
+``````
 
-2. ✍ Suppose you want to model the traffic on a high-speed freeway using an explicit method with a second-order centered spatial discretization. Derive a CFL condition on the allowable time step, stating your assumptions carefully.
+``````{exercise}
+✍ For the heat equation, the domain of dependence at any $(x,t)$ with $t>0$ is all of $x \in (-\infty,\infty)$. Show that the CFL condition implies that $\tau/h\to 0$ is required for convergence as $h\to 0$.
+``````
 
-3. ✍ For the heat equation, the domain of dependence at any $(x,t)$ with $t>0$ is all of $x \in (-\infty,\infty)$. Show that the CFL condition implies that $\tau/h\to 0$ is required for convergence as $h\to 0$.
+``````{exercise}
+✍ Suppose you wish to solve $u_t = u u_x$ for $x\in[-1,1]$.
 
-4. ✍ Suppose you wish to solve $u_t = u u_x$ for $x\in[-1,1]$.
-    
-    **(a)** If $u(x,0) = -2+\sin(\pi x)$,  which end of the domain is the inflow? 
-    
-    **(b)** Does the answer to part (a) change if $u(x,0) = 1 + e^{-16x^2}$?
+**(a)** If $u(x,0) = -2+\sin(\pi x)$,  which end of the domain is the inflow? 
+
+**(b)** Does the answer to part (a) change if $u(x,0) = 1 + e^{-16x^2}$?
+``````

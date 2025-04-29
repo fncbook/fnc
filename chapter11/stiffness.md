@@ -204,55 +204,64 @@ Hence the trapezoid formula is as accurate as we can hope for in the family of A
 
 ## Exercises
 
-1. ✍ Write the mechanical oscillator $x''+cx'+kx=0$ as a first-order linear system, $\mathbf{u}'=\mathbf{A}\mathbf{u}$. Show that if $c=k+1$, this system is stiff as $k\to\infty$.
+``````{exercise}
+✍ Write the mechanical oscillator $x''+cx'+kx=0$ as a first-order linear system, $\mathbf{u}'=\mathbf{A}\mathbf{u}$. Show that if $c=k+1$, this system is stiff as $k\to\infty$.
+``````
 
-2. This exercise is about the IVP $u'=\cos(t) - 200(u-\sin(t))$, $u(0)=0$.
+``````{exercise}
+This exercise is about the IVP $u'=\cos(t) - 200(u-\sin(t))$, $u(0)=0$.
 
-    **(a)** ✍ Show that $u(t) = \sin(t)$ is the exact solution, and find the linearization about this solution.
+**(a)** ✍ Show that $u(t) = \sin(t)$ is the exact solution, and find the linearization about this solution.
 
-    **(b)** ✍ Find the lone eigenvalue of the Jacobian. What other time scale is also relevant in the solution?
+**(b)** ✍ Find the lone eigenvalue of the Jacobian. What other time scale is also relevant in the solution?
 
-    **(c)** ⌨ Use {numref}`Function {number} <function-ab4>` (`ab4`) to solve the IVP over $t\in[0,\pi/2]$ with $n=800,850,900,\ldots,1200$ steps. By comparing to the exact solution, show that the method gets either no accurate digits or at least 11 accurate digits.
+**(c)** ⌨ Use {numref}`Function {number} <function-ab4>` (`ab4`) to solve the IVP over $t\in[0,\pi/2]$ with $n=800,850,900,\ldots,1200$ steps. By comparing to the exact solution, show that the method gets either no accurate digits or at least 11 accurate digits.
+``````
 
-3. In {numref}`Example %s <example-systems-coupledpendula>` we derived the following system for two pendulums hanging from a rod:
-      
-    \begin{align*}
-      u_1' &= u_3, \\
-      u_2' &= u_4, \\
-      u_3' &= -\gamma u_3 - \frac{g}{L}\sin u_1 + k(u_2-u_1), \\
-      u_4' &= -\gamma u_4 - \frac{g}{L}\sin u_2 + k(u_1-u_2).
-    \end{align*}
-    
-    **(a)** ✍ Use the approximation $\sin(x) \approx x$ to write the problem as a linear system.
+``````{exercise}
+In {numref}`Example %s <example-systems-coupledpendula>` we derived the following system for two pendulums hanging from a rod:
 
-    **(b)** ⌨ Compute the eigenvalues of the linear system with $\gamma=0.1$, $g/L=1$, and $k=10^d$ for $d=0,1,\ldots,5$. How fast does the ratio of largest to smallest eigenvalue (in magnitude) grow, as a function of $k$?
+\begin{align*}
+u_1' &= u_3, \\
+u_2' &= u_4, \\
+u_3' &= -\gamma u_3 - \frac{g}{L}\sin u_1 + k(u_2-u_1), \\
+u_4' &= -\gamma u_4 - \frac{g}{L}\sin u_2 + k(u_1-u_2).
+\end{align*}
 
-4. The equation $u'=u^2-u^3$ is a simple model for combustion of a flame ball in microgravity. (This problem is adapted from section 7.9 of {cite}`molerNumericalComputing2010`.) After "ignition," the exact solution rapidly approaches 1.
+**(a)** ✍ Use the approximation $\sin(x) \approx x$ to write the problem as a linear system.
 
-    **(a)** ⌨ Solve the problem with initial condition $u(0) =0.001$ for $0\le t \le 2000$, using {numref}`Function {number} <function-rk4>` with $n=2000$ steps. Plot the solution.
+**(b)** ⌨ Compute the eigenvalues of the linear system with $\gamma=0.1$, $g/L=1$, and $k=10^d$ for $d=0,1,\ldots,5$. How fast does the ratio of largest to smallest eigenvalue (in magnitude) grow, as a function of $k$?
+``````
 
-    **(b)** ✍ Find the $1\times 1$ Jacobian of this system, and use it with {numref}`figure-stabreg_bd_rk` to derive an upper bound on the time step of RK4 when $u=1$.
-    
-    **(c)** ⌨ Repeat part (a) with $n=200,300,\ldots,1000$, and make a table of the error at the final time, assuming the exact solution is 1. How do the results relate to part (b)? 
+``````{exercise}
+The equation $u'=u^2-u^3$ is a simple model for combustion of a flame ball in microgravity. (This problem is adapted from section 7.9 of {cite}`molerNumericalComputing2010`.) After "ignition," the exact solution rapidly approaches 1.
 
-    ```{index} van der Pol equation
-    ```
-5. The *van der Pol equation* is a famous nonlinear oscillator given by
-  
-    :::{math}
-    :label: vanderpol
-      y'' - \mu(1-y^2)y' + y = 0,
-    :::
+**(a)** ⌨ Solve the problem with initial condition $u(0) =0.001$ for $0\le t \le 2000$, using {numref}`Function {number} <function-rk4>` with $n=2000$ steps. Plot the solution.
 
-    where $\mu\ge 1$ is a constant.
+**(b)** ✍ Find the $1\times 1$ Jacobian of this system, and use it with {numref}`figure-stabreg_bd_rk` to derive an upper bound on the time step of RK4 when $u=1$.
 
-    **(a)** ✍ Write the equation as a first-order system and find its Jacobian.
+**(c)** ⌨ Repeat part (a) with $n=200,300,\ldots,1000$, and make a table of the error at the final time, assuming the exact solution is 1. How do the results relate to part (b)? 
 
-    **(b)** ✍ Find the eigenvalues of the Jacobian when $y=\pm 2$ and $y'=0$.
+``````
 
-    **(c)** ⌨ Solve the problem `solve` with $\mu=500$, $y(0) = y'(0) = 1$, for $0\le t \le 2000$. Plot $y(t)$ as a function of $t$.
+```{index} van der Pol equation
+```
 
-    **(d)** ⌨ Define $M(t)$ as the minimum (i.e., most negative) real part of the eigenvalues of the Jacobian using the computed solution at time $t$. Evaluate $M$ for each $t=0,2,4,6,\ldots,2000$, and plot $M(t)$. Explain how your plot relates to parts (b) and (c).
+``````{exercise}
+The *van der Pol equation* is a much-studied nonlinear oscillator given by
 
+:::{math}
+:label: vanderpol
+y'' - \mu(1-y^2)y' + y = 0,
+:::
 
+where $\mu\ge 1$ is a constant.
 
+**(a)** ✍ Write the equation as a first-order system and find its Jacobian.
+
+**(b)** ✍ Find the eigenvalues of the Jacobian when $y=\pm 2$ and $y'=0$.
+
+**(c)** ⌨ Solve the problem `solve` with $\mu=500$, $y(0) = y'(0) = 1$, for $0\le t \le 2000$. Plot $y(t)$ as a function of $t$.
+
+**(d)** ⌨ Define $M(t)$ as the minimum (i.e., most negative) real part of the eigenvalues of the Jacobian using the computed solution at time $t$. Evaluate $M$ for each $t=0,2,4,6,\ldots,2000$, and plot $M(t)$. Explain how your plot relates to parts (b) and (c).
+``````

@@ -266,55 +266,71 @@ We solve the Black–Scholes PDE @bspde with initial condition $u(x,0) = \max\{0
 
 ## Exercises
 
-1. ✍ Suppose second-order finite differences with $m=3$ are used to discretize the heat equation on $x \in [0,2]$, with boundary conditions $u_x(0,t)=0$ and $u_x(2,t)=1$. If at some time $t$, $u_1=1$ and $u_2=2$, set up and solve the equations {eq}`mol-bcsystem` for $u_0$ and $u_m$.
-   
-2. ⌨ Use {numref}`Function {number} <function-parabolic>` to solve the heat equation for $0\le x \le 5$ with initial condition $u(x,0)=x(5-x)$ and subject to the boundary conditions $u(0,t)=0$, $u(5,t)-u_x(5,t)=5$. Plot the solution at $t=1$ and find the value of $u(2.5,1)$. 
+``````{exercise}
+✍ Suppose second-order finite differences with $m=3$ are used to discretize the heat equation on $x \in [0,2]$, with boundary conditions $u_x(0,t)=0$ and $u_x(2,t)=1$. If at some time $t$, $u_1=1$ and $u_2=2$, set up and solve the equations {eq}`mol-bcsystem` for $u_0$ and $u_m$.
+``````
 
-3. Consider {numref}`Demo %s <demo-boundaries-bratu>`, combining diffusion with a nonlinear source term.
-   
-    **(a)** ✍ Suppose we ignore the diffusion. Use separation of variables (or computer algebra) to solve the IVP $u_t=u^2$, $u(0) = A>0$. What happens as $t\to 1/A$ from below? 
+``````{exercise}
+⌨ Use {numref}`Function {number} <function-parabolic>` to solve the heat equation for $0\le x \le 5$ with initial condition $u(x,0)=x(5-x)$ and subject to the boundary conditions $u(0,t)=0$, $u(5,t)-u_x(5,t)=5$. Plot the solution at $t=1$ and find the value of $u(2.5,1)$. 
+``````
 
-    **(b)** ⌨ Try to continue the solution in the demo to $t=0.5$. Plot the solution at $t=0.15$, $t=0.2$, and $t=0.25$. 
-    
-    **(c)** ⌨ Let the initial condition be $u(x,0) = C x^4(1-x)^2$; the demo and part (b) above use $C=400$. To the nearest 10, find a critical value $C_0$ such that the solution approaches zero asymptotically if $C < C_0$, and infinity otherwise. (Use the solution at $t=1$ to determine the critical value.)
+``````{exercise}
+Consider {numref}`Demo %s <demo-boundaries-bratu>`, combining diffusion with a nonlinear source term.
 
-    ```{index} Allen–Cahn equation
-    ```
-4. ⌨ The *Allen–Cahn equation* is used as a model for systems that prefer to be in one of two stable states. The governing PDE is
+**(a)** ✍ Suppose we ignore the diffusion. Use separation of variables (or computer algebra) to solve the IVP $u_t=u^2$, $u(0) = A>0$. What happens as $t\to 1/A$ from below? 
 
-    :::{math}
-    u_t = u(1-u^2) + \epsilon u_{xx}.
-    :::
+**(b)** ⌨ Try to continue the solution in the demo to $t=0.5$. Plot the solution at $t=0.15$, $t=0.2$, and $t=0.25$. 
 
-    For this problem, assume $\epsilon=10^{-3}$, $-1\le x \le 1$, boundary conditions $u(\pm 1,t) = -1$ and initial condition
+**(c)** ⌨ Let the initial condition be $u(x,0) = C x^4(1-x)^2$; the demo and part (b) above use $C=400$. To the nearest 10, find a critical value $C_0$ such that the solution approaches zero asymptotically if $C < C_0$, and infinity otherwise. (Use the solution at $t=1$ to determine the critical value.)
+``````
 
-    :::{math}
-    u(x,0) = -1 + \beta (1-x^2) e^{-20x^2},
-    :::
+```{index} Allen–Cahn equation
+```
 
-    where $\beta$ is a parameter. Use {numref}`Function {number} <function-parabolic>` with $m=199$.
+``````{exercise}
+⌨ The *Allen–Cahn equation* is used as a model for systems that prefer to be in one of two stable states. The governing PDE is
 
-    **(a)** Solve the problem with $\beta=1.1$ up to time $t=8$, plotting the solution at 6 equally spaced times. (You should see the solution decay down to the constant value $-1$.)
+:::{math}
+u_t = u(1-u^2) + \epsilon u_{xx}.
+:::
 
-    **(b)** Solve again with $\beta = 1.6$. (This time the part of the bump will grow to just about reach $u=1$, and stay there.)
+For this problem, assume $\epsilon=10^{-3}$, $-1\le x \le 1$, boundary conditions $u(\pm 1,t) = -1$ and initial condition
 
-    ```{index} Fisher equation
-    ```
-5. ⌨ The *Fisher equation* is $u_t=u_{xx} + u - u^2$. Assume that $0\le x \le 6$ and that the boundary conditions are $u_x(0,t)=u(6,t)=0$.
+:::{math}
+u(x,0) = -1 + \beta (1-x^2) e^{-20x^2},
+:::
 
-    **(a)** For the initial condition $u(x,0) = \frac{1}{2}[1+\cos(\pi x/2)]$, use {numref}`Function {number} <function-parabolic>` with $m=80$ to solve the Fisher equation and plot the solution at times $t=0,0.5,\ldots,3$. What is $u(0,3)$?
+where $\beta$ is a parameter. Use {numref}`Function {number} <function-parabolic>` with $m=199$.
 
-    **(b)** Repeat part (a), but increase the final time until it appears that the solution has reached a steady state (i.e., stopped changing in time). Find an accurate value of $u(0,t)$ as $t \to \infty$.
+**(a)** Solve the problem with $\beta=1.1$ up to time $t=8$, plotting the solution at 6 equally spaced times. (You should see the solution decay down to the constant value $-1$.)
 
-    **(c)** If we set $u_t=0$ in the Fisher equation at steady state, we get a TPBVP in $u(x)$. Use {numref}`Function {number} <function-bvp>` with $m=300$ to solve this BVP, and make sure that the value at $x=0$ matches the result of part (b) to at least four digits.
+**(b)** Solve again with $\beta = 1.6$. (This time the part of the bump will grow to just about reach $u=1$, and stay there.)
+``````
 
-(problem-boundaries-dirichlet)=
-6. ⌨ Modify {numref}`Function {number} <function-parabolic>` for the special case of Dirichlet boundary conditions, in which {eq}`parabolicBC` becomes simply
+```{index} Fisher equation
+```
 
-    $$
-    u(a,t) = \alpha,\; u(b,t)=\beta.
-    $$
+``````{exercise}
+⌨ The *Fisher equation* is $u_t=u_{xx} + u - u^2$. Assume that $0\le x \le 6$ and that the boundary conditions are $u_x(0,t)=u(6,t)=0$.
 
-    Your function should accept numbers $\alpha$ and $\beta$ as input arguments in place of $g_1$ and $g_2$. Test your function on the problem in {numref}`Demo {number} <demo-boundaries-heat>`.
+**(a)** For the initial condition $u(x,0) = \frac{1}{2}[1+\cos(\pi x/2)]$, use {numref}`Function {number} <function-parabolic>` with $m=80$ to solve the Fisher equation and plot the solution at times $t=0,0.5,\ldots,3$. What is $u(0,3)$?
 
-7. ⌨ Modify {numref}`Function {number} <function-parabolic>` for the special case of homogeneous Neumann boundary conditions. There is no longer any need for the input arguments for $g_1$ and $g_2$. Your implementation should solve a $2\times 2$ linear system of equations to find the boundary values within the nested function `extend`. Test your function on the heat equation on $x \in [0,4]$, $t\in [0,1]$ with initial condition $u(x,0)=x^2(4-x)^4.$ 
+**(b)** Repeat part (a), but increase the final time until it appears that the solution has reached a steady state (i.e., stopped changing in time). Find an accurate value of $u(0,t)$ as $t \to \infty$.
+
+**(c)** If we set $u_t=0$ in the Fisher equation at steady state, we get a TPBVP in $u(x)$. Use {numref}`Function {number} <function-bvp>` with $m=300$ to solve this BVP, and make sure that the value at $x=0$ matches the result of part (b) to at least four digits.
+``````
+
+``````{exercise}
+:label: problem-boundaries-dirichlet
+⌨ Modify {numref}`Function {number} <function-parabolic>` for the special case of Dirichlet boundary conditions, in which {eq}`parabolicBC` becomes simply
+
+$$
+u(a,t) = \alpha,\; u(b,t)=\beta.
+$$
+
+Your function should accept numbers $\alpha$ and $\beta$ as input arguments in place of $g_1$ and $g_2$. Test your function on the problem in {numref}`Demo {number} <demo-boundaries-heat>`.
+``````
+
+``````{exercise}
+⌨ Modify {numref}`Function {number} <function-parabolic>` for the special case of homogeneous Neumann boundary conditions. There is no longer any need for the input arguments for $g_1$ and $g_2$. Your implementation should solve a $2\times 2$ linear system of equations to find the boundary values within the nested function `extend`. Test your function on the heat equation on $x \in [0,4]$, $t\in [0,1]$ with initial condition $u(x,0)=x^2(4-x)^4.$ 
+``````
