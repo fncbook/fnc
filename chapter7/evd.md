@@ -328,93 +328,113 @@ The process demonstrated in {numref}`Demo {number} <demo-evd-francisqr>` is know
 
 ## Exercises
 
-1.  **(a)** ✍ Suppose that matrix $\mathbf{A}$ has an eigenvalue $\lambda$. Show that for any induced matrix norm, $\| \mathbf{A} \|\ge |\lambda|$.
+``````{exercise}
+ **(a)** ✍ Suppose that matrix $\mathbf{A}$ has an eigenvalue $\lambda$. Show that for any induced matrix norm, $\| \mathbf{A} \|\ge |\lambda|$.
 
-    **(b)** ✍ Find a matrix $\mathbf{A}$ such that $\| \mathbf{A} \|_2$ is strictly larger than $|\lambda|$ for all eigenvalues $\lambda$. (Proof-by-computer isn't allowed here. You don't need to compute $\| \mathbf{A} \|_2$ exactly, just a lower bound for it.)
+**(b)** ✍ Find a matrix $\mathbf{A}$ such that $\| \mathbf{A} \|_2$ is strictly larger than $|\lambda|$ for all eigenvalues $\lambda$. (Proof-by-computer isn't allowed here. You don't need to compute $\| \mathbf{A} \|_2$ exactly, just a lower bound for it.)
+``````
 
-(problem-defectivematrix)=
-2. ✍ Prove that the matrix $\mathbf{B}$ in {eq}`jordanblock` does not have two independent eigenvectors.
+``````{exercise}
+:label: problem-defectivematrix
+✍ Prove that the matrix $\mathbf{B}$ in {eq}`jordanblock` does not have two independent eigenvectors.
 
+``````
 <!-- TODO: Get rid of rank. -->
-1. ⌨ In each part, find all the eigenvalues of $\mathbf{A}$. Then, choose one eigenvalue $\lambda$ and associated eigenvector $\mathbf{v}$ and compute $\twonorm{\mathbf{A} \mathbf{v} - \lambda \mathbf{v}}$, which should be comparable to machine epsilon.
-    
-    **(a)** $\mathbf{A} = \begin{bmatrix}
-    2  & -1 & 0 \\
-    -1 &  2 & -1 \\
-    0  & -1 & 2
-    \end{bmatrix}$
 
-    **(b)** $\mathbf{A} = \begin{bmatrix}
-         2 & -1 & -1 \\
-        -2 &  2 & -1 \\
-        -1 & -2 & 2
-      \end{bmatrix}$
-      
-    **(c)** $ \mathbf{A} = \begin{bmatrix}
-         2 & -1 & -1 \\
-        -1 &  2 & -1 \\
-        -1 & -1 & 2
-      \end{bmatrix} $
+``````{exercise}
+⌨ In each part, find all the eigenvalues of $\mathbf{A}$. Then, choose one eigenvalue $\lambda$ and associated eigenvector $\mathbf{v}$ and compute $\twonorm{\mathbf{A} \mathbf{v} - \lambda \mathbf{v}}$, which should be comparable to machine epsilon.
 
-    **(d)** $\mathbf{A} = \begin{bmatrix}
-      3 & 1 & 0 & 0 \\
-      1 & 3 & 1 & 0 \\
-      0 & 1 & 3 & 1 \\
-      0 & 0 & 1 & 3
-    \end{bmatrix}\qquad $
-    
-    **(e)** $\mathbf{A} = \begin{bmatrix}
-         4 & -3 & -2 & -1\\
-        -2 &  4 & -2 & -1 \\
-        -1 & -2 & 4  & -1 \\
-        -1 & -2 & -1 & 4 \\
-      \end{bmatrix} $
+**(a)** $\mathbf{A} = \begin{bmatrix}
+2  & -1 & 0 \\
+-1 &  2 & -1 \\
+0  & -1 & 2
+\end{bmatrix}$
 
-(problem-triangeval)=
-4.  **(a)** ✍ Show that the eigenvalues of a diagonal $n\times n$ matrix $\mathbf{D}$ are the diagonal entries of $\mathbf{D}$. (That is, produce the associated eigenvectors.)
+**(b)** $\mathbf{A} = \begin{bmatrix}
+2 & -1 & -1 \\
+-2 &  2 & -1 \\
+-1 & -2 & 2
+\end{bmatrix}$
 
-    **(b)** ✍ The eigenvalues of a triangular matrix are its diagonal entries. Prove this in the $3\times 3$ case,
-    
-    :::{math}
-      \mathbf{T} =
-      \begin{bmatrix}
-        t_{11} & t_{12}&  t_{13}\\ 0 & t_{22} & t_{23} \\ 0 & 0 & t_{33}
-      \end{bmatrix},
-    :::
+**(c)** $ \mathbf{A} = \begin{bmatrix}
+2 & -1 & -1 \\
+-1 &  2 & -1 \\
+-1 & -1 & 2
+\end{bmatrix} $
 
-    by finding the eigenvectors. (Start by showing that $[1,0,0]^T$ is an eigenvector. Then show how to make $[a,1,0]^T$ an eigenvector, except for one case that does not change the outcome. Continue the same logic for $[a,b,1]^T$.)
+**(d)** $\mathbf{A} = \begin{bmatrix}
+3 & 1 & 0 & 0 \\
+1 & 3 & 1 & 0 \\
+0 & 1 & 3 & 1 \\
+0 & 0 & 1 & 3
+\end{bmatrix}\qquad $
 
-5. ✍ Let $\mathbf{A}=\displaystyle\frac{\pi}{6}\begin{bmatrix} 4 & 1 \\ 4 & 4 \end{bmatrix}$.
+**(e)** $\mathbf{A} = \begin{bmatrix}
+4 & -3 & -2 & -1\\
+-2 &  4 & -2 & -1 \\
+-1 & -2 & 4  & -1 \\
+-1 & -2 & -1 & 4 \\
+\end{bmatrix} $
+``````
 
-    **(a)** Show that
+``````{exercise}
+:label: problem-triangeval
+ **(a)** ✍ Show that the eigenvalues of a diagonal $n\times n$ matrix $\mathbf{D}$ are the diagonal entries of $\mathbf{D}$. (That is, produce the associated eigenvectors.)
 
-    $$
-    \lambda_1=\pi,\, \mathbf{v}_1=\begin{bmatrix}1 \\ 2 \end{bmatrix}, \quad \lambda_2=\frac{\pi}{3},\, \mathbf{v}_2=\begin{bmatrix}1 \\ -2 \end{bmatrix}
-    $$
+**(b)** ✍ The eigenvalues of a triangular matrix are its diagonal entries. Prove this in the $3\times 3$ case,
 
-    yield an EVD of $\mathbf{A}$.
+:::{math}
+\mathbf{T} =
+\begin{bmatrix}
+t_{11} & t_{12}&  t_{13}\\ 0 & t_{22} & t_{23} \\ 0 & 0 & t_{33}
+\end{bmatrix},
+:::
 
-    **(b)** Use {eq}`matrixpolyevd` to evaluate $p(\mathbf{A})$, where $p(x) = (x-\pi)^4$.
+by finding the eigenvectors. (Start by showing that $[1,0,0]^T$ is an eigenvector. Then show how to make $[a,1,0]^T$ an eigenvector, except for one case that does not change the outcome. Continue the same logic for $[a,b,1]^T$.)
+``````
 
-    **(c)** Use the function analog of {eq}`matrixpolyevd` to evaluate $\cos(\mathbf{A})$.
+``````{exercise}
+✍ Let $\mathbf{A}=\displaystyle\frac{\pi}{6}\begin{bmatrix} 4 & 1 \\ 4 & 4 \end{bmatrix}$.
 
-(problem-evd-lumpstring)=
-6. ⌨ In [Exercise 2.3.5](#problem-linear-systems-lumpstring), you showed that the
+**(a)** Show that
+
+$$
+\lambda_1=\pi,\, \mathbf{v}_1=\begin{bmatrix}1 \\ 2 \end{bmatrix}, \quad \lambda_2=\frac{\pi}{3},\, \mathbf{v}_2=\begin{bmatrix}1 \\ -2 \end{bmatrix}
+$$
+
+yield an EVD of $\mathbf{A}$.
+
+**(b)** Use {eq}`matrixpolyevd` to evaluate $p(\mathbf{A})$, where $p(x) = (x-\pi)^4$.
+
+**(c)** Use the function analog of {eq}`matrixpolyevd` to evaluate $\cos(\mathbf{A})$.
+``````
+
+``````{exercise}
+:label: problem-evd-lumpstring
+⌨ In [Exercise 2.3.5](#problem-linear-systems-lumpstring), you showed that the
 displacements of point masses placed along a string satisfy a linear system $\mathbf{A}\mathbf{q}=\mathbf{f}$ for an $(n-1)\times(n-1)$ matrix $\mathbf{A}$. The eigenvalues and eigenvectors of $\mathbf{A}$ correspond to resonant frequencies and modes of vibration of the string. For $n=40$ and the physical parameters given in part (b) of that exercise, find the eigenvalue decomposition of $\mathbf{A}$. Report the three eigenvalues with smallest absolute value, and plot all three associated eigenvectors on a single graph (as functions of the vector row index).
+``````
 
-7. ⌨ {numref}`Demo {number} <demo-evd-francisqr>` suggests that the result of the Francis QR iteration as $k\to\infty$ sorts the eigenvalues on the diagonal according to a particular ordering. Following the code there as a model, create a random matrix with eigenvalues equal to $-9.6,-8.6,\ldots,10.4$, perform the iteration 200 times, and check whether the sorting criterion holds in your experiment as well.
+``````{exercise}
+⌨ {numref}`Demo {number} <demo-evd-francisqr>` suggests that the result of the Francis QR iteration as $k\to\infty$ sorts the eigenvalues on the diagonal according to a particular ordering. Following the code there as a model, create a random matrix with eigenvalues equal to $-9.6,-8.6,\ldots,10.4$, perform the iteration 200 times, and check whether the sorting criterion holds in your experiment as well.
+``````
 
-8. ⌨ Eigenvalues of random matrices and their perturbations can be very interesting.
-    
-    **(a)** Let `A=randn(60,60)`.[^randn] Scatter plot its eigenvalues in the complex plane, using a plot aspect ratio of 1 and red diamonds as markers.
-    
-    **(b)** Let $\mathbf{E}$ be another random $60\times 60$ matrix, and on top of the previous graph, plot the eigenvalues of $\mathbf{A}+0.05\mathbf{E}$ as blue dots. Repeat this for 100 different values of $\mathbf{E}$.
-    
-    **(c)** Let `T=triu(A)`. On a new graph, scatter plot the eigenvalues of $\mathbf{T}$ in the complex plane. (They all lie on the real axis.)
+``````{exercise}
+⌨ Eigenvalues of random matrices and their perturbations can be very interesting.
 
-    **(d)** Repeat part (b) with $\mathbf{T}$ in place of $\mathbf{A}$.
-    
-    **(e)** Compute some condition numbers and apply {numref}`Theorem %s <theorem-bauer-fike>` to explain the dramatic difference between your plots with respect to the dot distributions.
-9. Suppose that $\mathbf{A}$ is diagonalizable and that @matrixpolyevd is used to define $\cos(\mathbf{A})$ and $\sin(\mathbf{A})$, with those functions substituted in for $p$ in the equation. Is it necessarily true that $\cos(\mathbf{A})^2+\sin(\mathbf{A})^2$ is an identity matrix? Explain why or why not.
+**(a)** Let `A=randn(60,60)`.[^randn] Scatter plot its eigenvalues in the complex plane, using a plot aspect ratio of 1 and red diamonds as markers.
+
+**(b)** Let $\mathbf{E}$ be another random $60\times 60$ matrix, and on top of the previous graph, plot the eigenvalues of $\mathbf{A}+0.05\mathbf{E}$ as blue dots. Repeat this for 100 different values of $\mathbf{E}$.
+
+**(c)** Let `T=triu(A)`. On a new graph, scatter plot the eigenvalues of $\mathbf{T}$ in the complex plane. (They all lie on the real axis.)
+
+**(d)** Repeat part (b) with $\mathbf{T}$ in place of $\mathbf{A}$.
+
+**(e)** Compute some condition numbers and apply {numref}`Theorem %s <theorem-bauer-fike>` to explain the dramatic difference between your plots with respect to the dot distributions.
+``````
+
+``````{exercise}
+Suppose that $\mathbf{A}$ is diagonalizable and that @matrixpolyevd is used to define $\cos(\mathbf{A})$ and $\sin(\mathbf{A})$, with those functions substituted in for $p$ in the equation. Is it necessarily true that $\cos(\mathbf{A})^2+\sin(\mathbf{A})^2$ is an identity matrix? Explain why or why not.
+``````
 
 [^randn]: The `randn` function generates random numbers from a standard normal distribution. In Python, it is found in the `numpy.random` module.

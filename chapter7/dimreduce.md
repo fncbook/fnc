@@ -144,37 +144,47 @@ Not all data sets can be reduced effectively to a small number of dimensions, bu
 
 ## Exercises
 
-1. ✍  Suppose that $\mathbf{A}$ is an $n\times n$ matrix. Explain why $\sigma_n$ is the distance (in 2-norm) from $\mathbf{A}$ to the set of all singular matrices.
+``````{exercise}
+✍  Suppose that $\mathbf{A}$ is an $n\times n$ matrix. Explain why $\sigma_n$ is the distance (in 2-norm) from $\mathbf{A}$ to the set of all singular matrices.
+``````
 
-2. ✍ Suppose $\mathbf{A}$ is a $7\times 4$ matrix and the eigenvalues of $\mathbf{A}^*\mathbf{A}$ are 3, 4, 7, and 10. How close is $\mathbf{A}$ in the 2-norm to (a) a rank-3 matrix? (b) a rank-2 matrix? 
+``````{exercise}
+✍ Suppose $\mathbf{A}$ is a $7\times 4$ matrix and the eigenvalues of $\mathbf{A}^*\mathbf{A}$ are 3, 4, 7, and 10. How close is $\mathbf{A}$ in the 2-norm to (a) a rank-3 matrix? (b) a rank-2 matrix? 
+``````
 
-3. 
-    **(a)** ⌨ Find the rank-1 matrix closest to 
-    
-    $$
-    \mathbf{A}=\displaystyle \begin{bmatrix}
-    1 & 5 \\ 5 & 1
-    \end{bmatrix},
-    $$
-    
-    as measured in the 2-norm.
+``````{exercise}
 
-    **(b)** ⌨ Repeat part (a) for 
-    
-    $$
-    \mathbf{A}=\displaystyle \begin{bmatrix}
-    1 & 5 \\ 0 & 1
-    \end{bmatrix}.
-    $$
+**(a)** ⌨ Find the rank-1 matrix closest to 
 
-4. ✍ Find the rank-1 matrix closest to 
-   
-    $$
-    \mathbf{A}=\displaystyle \begin{bmatrix}
-    1 & b \\ b & 1
-    \end{bmatrix},
-    $$
-  
-    as measured in the 2-norm, where $b>0$.
+$$
+\mathbf{A}=\displaystyle \begin{bmatrix}
+1 & 5 \\ 5 & 1
+\end{bmatrix},
+$$
 
-5. ⌨ Following {numref}`Demo %s <demo-dimreduce-hello>` as a guide, load the "mandrill" test image and convert it to a matrix of floating-point pixel grayscale intensities. Using the SVD, display as images the best approximations of rank 5, 10, 15, and 20. 
+as measured in the 2-norm.
+
+**(b)** ⌨ Repeat part (a) for 
+
+$$
+\mathbf{A}=\displaystyle \begin{bmatrix}
+1 & 5 \\ 0 & 1
+\end{bmatrix}.
+$$
+``````
+
+``````{exercise}
+✍ Find the rank-1 matrix closest to 
+
+$$
+\mathbf{A}=\displaystyle \begin{bmatrix}
+1 & b \\ b & 1
+\end{bmatrix},
+$$
+
+as measured in the 2-norm, where $b>0$.
+``````
+
+``````{exercise}
+⌨ Following {numref}`Demo %s <demo-dimreduce-hello>` as a guide, load the "mandrill" test image and convert it to a matrix of floating-point pixel grayscale intensities. Using the SVD, display as images the best approximations of rank 5, 10, 15, and 20. 
+``````

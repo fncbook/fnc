@@ -156,81 +156,96 @@ A hermitian matrix with all negative eigenvalues is called **negative definite**
 
 ## Exercises
 
-1. ✍ Each line below is an EVD for a hermitian matrix. State whether the matrix is definite, indefinite, or semidefinite. Then state whether the given factorization is also an SVD, and if it is not, modify it to find an SVD.
+``````{exercise}
+✍ Each line below is an EVD for a hermitian matrix. State whether the matrix is definite, indefinite, or semidefinite. Then state whether the given factorization is also an SVD, and if it is not, modify it to find an SVD.
 
-    **(a)** $\begin{bmatrix}
-      0 & 0 \\ 0 & -1
-    \end{bmatrix} =   \begin{bmatrix}
-      0 & 1 \\ 1 & 0
-    \end{bmatrix}  \begin{bmatrix}
-      -1 & 0 \\ 0 & 0
-    \end{bmatrix}  \begin{bmatrix}
-      0 & 1 \\ 1 & 0
-    \end{bmatrix}$
-    <br><br>
+**(a)** 
+$\begin{bmatrix}
+0 & 0 \\ 0 & -1
+\end{bmatrix} =   \begin{bmatrix}
+0 & 1 \\ 1 & 0
+\end{bmatrix}  \begin{bmatrix}
+-1 & 0 \\ 0 & 0
+\end{bmatrix}  \begin{bmatrix}
+0 & 1 \\ 1 & 0
+\end{bmatrix}$
 
-    **(b)** $\begin{bmatrix}
-      4 & -2 \\ -2 & 1
-    \end{bmatrix} = \begin{bmatrix}
-      1 & -0.5 \\ -0.5 & -1
-    \end{bmatrix}  \begin{bmatrix}
-      5 & 0 \\ 0 & 0
-    \end{bmatrix}  \begin{bmatrix}
-      0.8 & -0.4 \\ -0.4 & -0.8
-    \end{bmatrix}$
-    <br><br>
+**(b)** 
+$\begin{bmatrix}
+4 & -2 \\ -2 & 1
+\end{bmatrix} = \begin{bmatrix}
+1 & -0.5 \\ -0.5 & -1
+\end{bmatrix}  \begin{bmatrix}
+5 & 0 \\ 0 & 0
+\end{bmatrix}  \begin{bmatrix}
+0.8 & -0.4 \\ -0.4 & -0.8
+\end{bmatrix}$
 
-    **(c)**
-    $\begin{bmatrix}
-      -5 & 3\\ 3 & -5
-    \end{bmatrix} =  \begin{bmatrix}
-      \alpha & \alpha \\ \alpha & -\alpha
-    \end{bmatrix}  \begin{bmatrix}
-      -2 & 0 \\ 0 & -8
-    \end{bmatrix}  \begin{bmatrix}
-      \alpha & \alpha \\ \alpha & -\alpha
-    \end{bmatrix}, \quad\alpha=1/\sqrt{2}$
+**(c)**
+$\begin{bmatrix}
+-5 & 3\\ 3 & -5
+\end{bmatrix} =  \begin{bmatrix}
+\alpha & \alpha \\ \alpha & -\alpha
+\end{bmatrix}  \begin{bmatrix}
+-2 & 0 \\ 0 & -8
+\end{bmatrix}  \begin{bmatrix}
+\alpha & \alpha \\ \alpha & -\alpha
+\end{bmatrix}, \quad\alpha=1/\sqrt{2}$
+``````
 
-2. ⌨ The matrix names below are found in `MatrixDepot` for Julia, `gallery` for MATLAB, and `rogues` for Python. You will have to adjust the syntax accordingly. For each matrix, determine whether it is positive definite, negative definite, positive or negative semidefinite, or indefinite. 
+``````{exercise}
+⌨ The matrix names below are found in `MatrixDepot` for Julia, `gallery` for MATLAB, and `rogues` for Python. You will have to adjust the syntax accordingly. For each matrix, determine whether it is positive definite, negative definite, positive or negative semidefinite, or indefinite. 
 
-    **(a)** `pei(5)` $ - 6 \mathbf{I}$
+**(a)** `pei(5)` $ - 6 \mathbf{I}$
 
-    **(b)** `hilb(8)` $ - 2 \mathbf{I}$
+**(b)** `hilb(8)` $ - 2 \mathbf{I}$
 
-    **(c)** `dingdong(20)`
+**(c)** `dingdong(20)`
 
-    **(d)** `lehmer(100)`
+**(d)** `lehmer(100)`
 
-    **(e)** `fiedler(200)`
+**(e)** `fiedler(200)`
+``````
 
-3. ✍ Prove true, or give a counterexample: If $\mathbf{A}$ and $\mathbf{B}$ are hermitian matrices of the same size, then
-   
-    $$
-    R_{\mathbf{A}+\mathbf{B}}(\mathbf{x}) = R_{\mathbf{A}}(\mathbf{x})+R_{\mathbf{B}}(\mathbf{x}).
-    $$
+``````{exercise}
+✍ Prove true, or give a counterexample: If $\mathbf{A}$ and $\mathbf{B}$ are hermitian matrices of the same size, then
 
-    ```{index} field of values
-    ```
-4. ⌨ The range of the function $R_{\mathbf{A}}(\mathbf{x})$ is a subset of the complex plane known as the *field of values* of the matrix $\mathbf{A}$. Use 500 random vectors to plot points in the field of values of $\mathbf{A} = \displaystyle  \begin{bmatrix}
-     1  &   0   & -2\\
-     0  &   2  &   0\\
-    -2   &  0 &    1
-    \end{bmatrix}$. Then compute its eigenvalues and guess what the exact field of values is.
+$$
+R_{\mathbf{A}+\mathbf{B}}(\mathbf{x}) = R_{\mathbf{A}}(\mathbf{x})+R_{\mathbf{B}}(\mathbf{x}).
+$$
+``````
 
-5. ✍ Let $\mathbf{A}=\displaystyle \begin{bmatrix} 3 & -2 \\ -2 & 0 \end{bmatrix}.$
-  
-    **(a)** Write out $R_{\mathbf{A}}(\mathbf{x})$ explicitly as a function of $x_1$ and $x_2$.
+```{index} field of values
+```
 
-    **(b)** Find $R_{\mathbf{A}}(\mathbf{x})$ for $x_1=1$, $x_2=2$.
-    
-    **(c)** Find the gradient vector $\nabla R_{\mathbf{A}}(\mathbf{x})$.
-    
-    **(d)** Show that the gradient vector is zero when $x_1=1$, $x_2=2$.
+``````{exercise}
+⌨ The range of the function $R_{\mathbf{A}}(\mathbf{x})$ is a subset of the complex plane known as the *field of values* of the matrix $\mathbf{A}$. Use 500 random vectors to plot points in the field of values of $\mathbf{A} = \displaystyle  \begin{bmatrix}
+1  &   0   & -2\\
+0  &   2  &   0\\
+-2   &  0 &    1
+\end{bmatrix}$. Then compute its eigenvalues and guess what the exact field of values is.
+``````
 
-6. ✍ A *skew-Hermitian* matrix is one that satisfies $\mathbf{A}^*=-\mathbf{A}$. Show that if $\mathbf{A}$ is skew-Hermitian, then $R_{\mathbf{A}}$ is imaginary-valued.
+``````{exercise}
+✍ Let $\mathbf{A}=\displaystyle \begin{bmatrix} 3 & -2 \\ -2 & 0 \end{bmatrix}.$
 
-7. ⌨ Thanks largely to {numref}`Theorem {number} <theorem-symm-eig-spectral>`, the eigenvalue problem for symmetric/hermitian matrices is easier than for general matrices. 
-  
-    **(a)** Let $\mathbf{A}$ be a $1000\times 1000$ random real matrix, and let $\mathbf{S}=\mathbf{A}+\mathbf{A}^T$. Time finding the eigenvalues of $\mathbf{A}$ and then of $\mathbf{S}$. You should find that the computation for $\mathbf{S}$ is around an order of magnitude faster.
+**(a)** Write out $R_{\mathbf{A}}(\mathbf{x})$ explicitly as a function of $x_1$ and $x_2$.
 
-    **(b)** Perform the experiment from part (a) on $n\times n$ matrices for $n=200,300,\ldots,1600$. Plot running time as a function of $n$ for both matrices on a single log-log plot. Is the ratio of running times roughly constant, or does it grow with $n$?
+**(b)** Find $R_{\mathbf{A}}(\mathbf{x})$ for $x_1=1$, $x_2=2$.
+
+**(c)** Find the gradient vector $\nabla R_{\mathbf{A}}(\mathbf{x})$.
+
+**(d)** Show that the gradient vector is zero when $x_1=1$, $x_2=2$.
+``````
+
+``````{exercise}
+✍ A *skew-Hermitian* matrix is one that satisfies $\mathbf{A}^*=-\mathbf{A}$. Show that if $\mathbf{A}$ is skew-Hermitian, then $R_{\mathbf{A}}$ is imaginary-valued.
+``````
+
+``````{exercise}
+⌨ Thanks largely to {numref}`Theorem {number} <theorem-symm-eig-spectral>`, the eigenvalue problem for symmetric/hermitian matrices is easier than for general matrices. 
+
+**(a)** Let $\mathbf{A}$ be a $1000\times 1000$ random real matrix, and let $\mathbf{S}=\mathbf{A}+\mathbf{A}^T$. Time finding the eigenvalues of $\mathbf{A}$ and then of $\mathbf{S}$. You should find that the computation for $\mathbf{S}$ is around an order of magnitude faster.
+
+**(b)** Perform the experiment from part (a) on $n\times n$ matrices for $n=200,300,\ldots,1600$. Plot running time as a function of $n$ for both matrices on a single log-log plot. Is the ratio of running times roughly constant, or does it grow with $n$?
+``````

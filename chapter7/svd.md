@@ -290,87 +290,111 @@ The conclusion {eq}`svdnorm` can be proved by vector calculus. In the square cas
 
 ## Exercises
 
-1. ✍ Each factorization below is algebraically correct. The notation $\mathbf{I}_n$ means an $n\times n$ identity. In each case, determine whether it is an SVD. If it is, write down $\sigma_1$, $\mathbf{u}_1$, and $\mathbf{v}_1$. If it is not, state all of the ways in which it fails the required properties.
+``````{exercise}
+✍ Each factorization below is algebraically correct. The notation $\mathbf{I}_n$ means an $n\times n$ identity. In each case, determine whether it is an SVD. If it is, write down $\sigma_1$, $\mathbf{u}_1$, and $\mathbf{v}_1$. If it is not, state all of the ways in which it fails the required properties.
 
-    **(a)** $\begin{bmatrix}
-      0 & 0 \\ 0 & -1
-    \end{bmatrix} = \begin{bmatrix}
-      0 & 1 \\ 1 & 0 
-    \end{bmatrix} \begin{bmatrix}
-      1 & 0 \\ 0 & 0
-    \end{bmatrix} \begin{bmatrix}
-      0 & 1 \\ -1 & 0 
-    \end{bmatrix}\qquad $
-    **(b)** $\begin{bmatrix}
-      0 & 0 \\ 0 & -1
-    \end{bmatrix} =
-    \mathbf{I}_2 \begin{bmatrix}
-      0 & 0 \\ 0 & -1
-    \end{bmatrix}
-    \mathbf{I}_2$
-    <br><br>
+**(a)** 
+$\begin{bmatrix}
+0 & 0 \\ 0 & -1
+\end{bmatrix} = \begin{bmatrix}
+0 & 1 \\ 1 & 0 
+\end{bmatrix} \begin{bmatrix}
+1 & 0 \\ 0 & 0
+\end{bmatrix} \begin{bmatrix}
+0 & 1 \\ -1 & 0 
+\end{bmatrix}$
 
-    **(c)**
-    $\begin{bmatrix}
-      1 & 0\\ 0 & \sqrt{2}\\ 1 & 0
-    \end{bmatrix} = \begin{bmatrix}
-      \alpha & 0 & -\alpha \\ 0 & 1 & 0 \\ \alpha & 0 & -\alpha 
-    \end{bmatrix}  \begin{bmatrix}
-      \sqrt{2} & 0 \\ 0 & \sqrt{2} \\ 0 & 0 
-    \end{bmatrix}  \begin{bmatrix}
-      0 & 1 \\ 1 & 0 
-    \end{bmatrix}, \quad \alpha=1/\sqrt{2}$
-    <br><br>
+**(b)** 
+$\begin{bmatrix}
+0 & 0 \\ 0 & -1
+\end{bmatrix} =
+\mathbf{I}_2 \begin{bmatrix}
+0 & 0 \\ 0 & -1
+\end{bmatrix}
+\mathbf{I}_2$
 
-    **(d)**
-     $\begin{bmatrix}
-      \sqrt{2} & \sqrt{2}\\ -1 & 1\\ 0 & 0
-    \end{bmatrix} =
-    \mathbf{I}_3  \begin{bmatrix}
-      2 & 0 \\ 0 & \sqrt{2} \\ 0 & 0 
-    \end{bmatrix}  \begin{bmatrix}
-     \alpha & \alpha \\ -\alpha & \alpha 
-    \end{bmatrix}, \quad \alpha=1/\sqrt{2}$
+**(c)**
+$\begin{bmatrix}
+1 & 0\\ 0 & \sqrt{2}\\ 1 & 0
+\end{bmatrix} = \begin{bmatrix}
+\alpha & 0 & -\alpha \\ 0 & 1 & 0 \\ \alpha & 0 & -\alpha 
+\end{bmatrix}  \begin{bmatrix}
+\sqrt{2} & 0 \\ 0 & \sqrt{2} \\ 0 & 0 
+\end{bmatrix}  \begin{bmatrix}
+0 & 1 \\ 1 & 0 
+\end{bmatrix}, \quad \alpha=1/\sqrt{2}$
 
-2. ✍ Apply {numref}`Theorem {number} <theorem-svd-ATA>` to find an SVD of $\mathbf{A}=\displaystyle \begin{bmatrix} 1 & 0 \\ 0 & 0 \\ 0 & 1 \\ -1 & -1 \end{bmatrix}.$
+**(d)**
+$\begin{bmatrix}
+\sqrt{2} & \sqrt{2}\\ -1 & 1\\ 0 & 0
+\end{bmatrix} =
+\mathbf{I}_3  \begin{bmatrix}
+2 & 0 \\ 0 & \sqrt{2} \\ 0 & 0 
+\end{bmatrix}  \begin{bmatrix}
+\alpha & \alpha \\ -\alpha & \alpha 
+\end{bmatrix}, \quad \alpha=1/\sqrt{2}$
+``````
 
-3. ⌨ Let `x` be a vector of 1000 equally spaced points between 0 and 1. Suppose $\mathbf{A}_n$ is the $1000\times n$ matrix whose $(i,j)$ entry is $x_i^{j-1}$ for $j=1,\ldots,n$.
+``````{exercise}
+✍ Apply {numref}`Theorem {number} <theorem-svd-ATA>` to find an SVD of $\mathbf{A}=\displaystyle \begin{bmatrix} 1 & 0 \\ 0 & 0 \\ 0 & 1 \\ -1 & -1 \end{bmatrix}.$
+``````
 
-    **(a)** Print out the singular values of $\mathbf{A}_1$, $\mathbf{A}_2$, and $\mathbf{A}_3$.
+``````{exercise}
+⌨ Let `x` be a vector of 1000 equally spaced points between 0 and 1. Suppose $\mathbf{A}_n$ is the $1000\times n$ matrix whose $(i,j)$ entry is $x_i^{j-1}$ for $j=1,\ldots,n$.
 
-    **(b)** Make a log-linear plot of the singular values of $\mathbf{A}_{40}$. 
+**(a)** Print out the singular values of $\mathbf{A}_1$, $\mathbf{A}_2$, and $\mathbf{A}_3$.
 
-    **(c)** Repeat part (b) after converting the elements of `x` to single precision.
+**(b)** Make a log-linear plot of the singular values of $\mathbf{A}_{40}$. 
 
-    **(d)** Having seen the plot for part (c), which singular values in part (b) do you suspect may be incorrect?
+**(c)** Repeat part (b) after converting the elements of `x` to single precision.
 
-4. ⌨ See {numref}`Demo {number} <demo-insight-image>` for how to get the "mandrill" test image. Make a log-linear scatter plot of the singular values of the matrix of grayscale intensity values. (The shape of this graph is surprisingly similar across a wide range of images.) 
+**(d)** Having seen the plot for part (c), which singular values in part (b) do you suspect may be incorrect?
+``````
 
-5. ✍ Prove that for a square real matrix $\mathbf{A}$, $\| \mathbf{A} \|_2=\| \mathbf{A}^T \|_2$.
+``````{exercise}
+⌨ See {numref}`Demo {number} <demo-insight-image>` for how to get the "mandrill" test image. Make a log-linear scatter plot of the singular values of the matrix of grayscale intensity values. (The shape of this graph is surprisingly similar across a wide range of images.) 
+``````
 
-6. ✍ Prove {eq}`svdcond` of {numref}`Theorem %s <theorem-svdprops>`, given that {eq}`svdnorm` is true. (Hint: If the SVD of $\mathbf{A}$ is known, what is the SVD of $\mathbf{A}^{+}$?)
+``````{exercise}
+✍ Prove that for a square real matrix $\mathbf{A}$, $\| \mathbf{A} \|_2=\| \mathbf{A}^T \|_2$.
+``````
 
-7. ✍ Let $\mathbf{A}\in\mathbb{R}^{m\times n}$ with $m>n$ have the thin SVD $\mathbf{A}=\hat{\mathbf{U}}\hat{\mathbf{S}}\mathbf{V}^T$, and suppose all the singular values are nonzero. Show that the matrix $\mathbf{A}\mathbf{A}^{+}$ is equal to $\hat{\mathbf{U}}\hat{\mathbf{U}}^T$, where $\mathbf{A}^{+}$ is the {term}`pseudoinverse` of $\mathbf{A}$, as given in @pinv. (You must be careful with matrix sizes in this derivation.)
+``````{exercise}
+✍ Prove {eq}`svdcond` of {numref}`Theorem %s <theorem-svdprops>`, given that {eq}`svdnorm` is true. (Hint: If the SVD of $\mathbf{A}$ is known, what is the SVD of $\mathbf{A}^{+}$?)
+``````
 
-(problem-rectcond)=
-8. ✍ In  {eq}`rectcond` we defined the 2-norm condition number of a rectangular matrix as $\kappa(\mathbf{A})=\|\mathbf{A}\|\cdot \|\mathbf{A}^{+}\|$, and then claimed (in the real case) that $\kappa(\mathbf{A}^*\mathbf{A})=\kappa(\mathbf{A})^2$. Prove this assertion using the SVD. 
+``````{exercise}
+✍ Let $\mathbf{A}\in\mathbb{R}^{m\times n}$ with $m>n$ have the thin SVD $\mathbf{A}=\hat{\mathbf{U}}\hat{\mathbf{S}}\mathbf{V}^T$, and suppose all the singular values are nonzero. Show that the matrix $\mathbf{A}\mathbf{A}^{+}$ is equal to $\hat{\mathbf{U}}\hat{\mathbf{U}}^T$, where $\mathbf{A}^{+}$ is the {term}`pseudoinverse` of $\mathbf{A}$, as given in @pinv. (You must be careful with matrix sizes in this derivation.)
 
-9. ✍ Show that the square of each singular value of $\mathbf{A}$ is an eigenvalue of the matrix $\mathbf{A}\mathbf{A}^*$ for any $m\times n$ matrix $\mathbf{A}$. (You should consider the cases $m>n$ and $m\le n$ separately.) 
+``````
 
-(problem-svdnormproof)=
-10. ✍ In this problem you will see how {eq}`svdnorm` is proved in the real case.
+``````{exercise}
+:label: problem-rectcond
+✍ In  {eq}`rectcond` we defined the 2-norm condition number of a rectangular matrix as $\kappa(\mathbf{A})=\|\mathbf{A}\|\cdot \|\mathbf{A}^{+}\|$, and then claimed (in the real case) that $\kappa(\mathbf{A}^*\mathbf{A})=\kappa(\mathbf{A})^2$. Prove this assertion using the SVD. 
+``````
 
-    **(a)** Use the technique of Lagrange multipliers to show that among vectors that satisfy $\|\mathbf{x}\|_2^2=1$, any vector that maximizes $\|\mathbf{A}\mathbf{x}\|_2^2$ must be an eigenvector of $\mathbf{A}^T\mathbf{A}$. It will help to know that if $\mathbf{B}$ is any symmetric matrix, the gradient of the scalar function $\mathbf{x}^T\mathbf{B}\mathbf{x}$ with respect to $\mathbf{x}$ is $2\mathbf{B}\mathbf{x}$. 
+``````{exercise}
+✍ Show that the square of each singular value of $\mathbf{A}$ is an eigenvalue of the matrix $\mathbf{A}\mathbf{A}^*$ for any $m\times n$ matrix $\mathbf{A}$. (You should consider the cases $m>n$ and $m\le n$ separately.) 
+``````
 
-    **(b)** Use the result of part (a) to prove {eq}`svdnorm` for real matrices. 
+``````{exercise}
+:label: problem-svdnormproof
+✍ In this problem you will see how {eq}`svdnorm` is proved in the real case.
 
-(problem-svd-svdtoevd)=
-11. ✍ Suppose $\mathbf{A}\in\mathbb{R}^{n \times n}$, and define $\mathbf{C}$ as in {eq}`svdaugment`. 
+**(a)** Use the technique of Lagrange multipliers to show that among vectors that satisfy $\|\mathbf{x}\|_2^2=1$, any vector that maximizes $\|\mathbf{A}\mathbf{x}\|_2^2$ must be an eigenvector of $\mathbf{A}^T\mathbf{A}$. It will help to know that if $\mathbf{B}$ is any symmetric matrix, the gradient of the scalar function $\mathbf{x}^T\mathbf{B}\mathbf{x}$ with respect to $\mathbf{x}$ is $2\mathbf{B}\mathbf{x}$. 
 
-    **(a)** Suppose that $\mathbf{v}=\begin{bmatrix} \mathbf{x} \\ \mathbf{y} \end{bmatrix}$, and write the block equation $\mathbf{C}\mathbf{v} = \lambda \mathbf{v}$ as two individual equations involving both $\mathbf{x}$ and $\mathbf{y}$.
-    
-    **(b)** By applying some substitutions, rewrite the equations from part (a) as one in which $\mathbf{x}$ was eliminated, and another in which $\mathbf{y}$ was eliminated.
-    
-    **(c)** Substitute the SVD $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^T$ and explain why $\lambda^2=\sigma_k^2$ for some singular value $\sigma_k$. 
-    
-    **(d)** As a more advanced variation, modify the argument to show that $\lambda=0$ is another possibility if $\mathbf{A}$ is not square.
+**(b)** Use the result of part (a) to prove {eq}`svdnorm` for real matrices. 
+``````
+
+``````{exercise}
+:label: problem-svd-svdtoevd
+✍ Suppose $\mathbf{A}\in\mathbb{R}^{n \times n}$, and define $\mathbf{C}$ as in {eq}`svdaugment`. 
+
+**(a)** Suppose that $\mathbf{v}=\begin{bmatrix} \mathbf{x} \\ \mathbf{y} \end{bmatrix}$, and write the block equation $\mathbf{C}\mathbf{v} = \lambda \mathbf{v}$ as two individual equations involving both $\mathbf{x}$ and $\mathbf{y}$.
+
+**(b)** By applying some substitutions, rewrite the equations from part (a) as one in which $\mathbf{x}$ was eliminated, and another in which $\mathbf{y}$ was eliminated.
+
+**(c)** Substitute the SVD $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^T$ and explain why $\lambda^2=\sigma_k^2$ for some singular value $\sigma_k$. 
+
+**(d)** As a more advanced variation, modify the argument to show that $\lambda=0$ is another possibility if $\mathbf{A}$ is not square.
+``````

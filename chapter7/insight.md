@@ -132,86 +132,97 @@ Representation of an image as a matrix allows us to describe some common image o
 
 ## Exercises
 
-1. ✍ Consider the terms *numerical*, *analysis*, and *fun*. Write out the term-document matrix for the following statements:
+``````{exercise}
+✍ Consider the terms *numerical*, *analysis*, and *fun*. Write out the term-document matrix for the following statements:
 
-    **(a)** Numerical analysis is the most fun type of analysis.
+**(a)** Numerical analysis is the most fun type of analysis.
 
-    **(b)** It's fun to produce numerical values for the digits of pi.
+**(b)** It's fun to produce numerical values for the digits of pi.
 
-    **(c)** Complex analysis is a beautiful branch of mathematics.
+**(c)** Complex analysis is a beautiful branch of mathematics.
+``````
 
-2. ✍ Write out the adjacency matrix for the following graph on six nodes.
-    
-    ```{image} littlegraph.png
-    :alt: little graph
-    :width: 500px
-    :align: center
-    ```
+``````{exercise}
+✍ Write out the adjacency matrix for the following graph on six nodes.
 
-3. ✍ Here is a graph adjacency matrix.
-  
-    :::{math}
-    \begin{bmatrix}
-    0 & 1 & 0 & 1 & 0 & 1 & 0 \\
-    1 & 0 & 1 & 0 & 0 & 1 & 0 \\
-    0 & 1 & 0 & 0 & 1 & 0 & 1 \\
-    1 & 0 & 0 & 0 & 0 & 0 & 0 \\
-    0 & 0 & 1 & 0 & 0 & 1 & 0 \\
-    1 & 1 & 0 & 0 & 1 & 0 & 0 \\
-    0 & 0 & 1 & 0 & 0 & 0 & 0   
-    \end{bmatrix}
-    :::
+```{image} littlegraph.png
+:alt: little graph
+:width: 500px
+:align: center
+```
+``````
 
-    **(a)** How many vertices are adjacent to vertex 5? (Assume node numbering starts at 1.)
+``````{exercise}
+✍ Here is a graph adjacency matrix.
 
-    **(b)** Is the graph directed or undirected?
+:::{math}
+\begin{bmatrix}
+0 & 1 & 0 & 1 & 0 & 1 & 0 \\
+1 & 0 & 1 & 0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0 & 1 & 0 & 1 \\
+1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 1 & 0 \\
+1 & 1 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 0 & 0   
+\end{bmatrix}
+:::
 
-    **(c)** How many edges are in the graph?
+**(a)** How many vertices are adjacent to vertex 5? (Assume node numbering starts at 1.)
 
-    **(d)** Draw the graph. 
+**(b)** Is the graph directed or undirected?
 
-4. ⌨ Refer to {numref}`Demo %s <demo-insight-image>` on loading and displaying images. Choose a test image of your liking.
+**(c)** How many edges are in the graph?
 
-    **(a)** Display the test image upside-down.
+**(d)** Draw the graph. 
+``````
 
-    **(b)** Display it mirror-reversed from left to right. 
+``````{exercise}
+⌨ Refer to {numref}`Demo %s <demo-insight-image>` on loading and displaying images. Choose a test image of your liking.
 
-    **(c)** Display the image so that it is cropped to isolate a part of the subject. 
+**(a)** Display the test image upside-down.
 
-(problem-insight-actors)=
-5. ⌨ For this problem you need to download and import data:
-   `````{tab-set} 
-    ````{tab-item} Julia
-    :sync: julia
-    Download [actors.mat](actors.mat) by clicking the link and saving (you may need to fix the file name).
-    ``` julia
-    using MAT
-    A = matread("actors.mat")["A"]
-    ```
-    ```` 
+**(b)** Display it mirror-reversed from left to right. 
 
-    ````{tab-item} MATLAB
-    :sync: matlab
-    Download [actors.mat](actors.mat) by clicking the link and saving (you may need to fix the file name).
-    ``` matlab
-    load actors
-    ```
-    ```` 
+**(c)** Display the image so that it is cropped to isolate a part of the subject. 
 
-    ````{tab-item} Python
-    :sync: python
-    Download [actors.mtx](actors.mtx) by clicking the link and saving (you may need to fix the file name).
-    ``` python
-    import scipy.io as spio
-    A = spio.mmread("actors.mtx")
-    ```
-    ```` 
-    `````
+``````
 
-    Based on data provided by the Self-Organized Networks Database at the University of Notre Dame, the matrix `A` contains information about the appearances of 392,400 actors in 127,823 movies, as given by the Internet Movie Database. It has $A_{ij}=1$ if actor $j$ appeared in movie $i$ and zero elements elsewhere.
+``````{exercise}
+:label: problem-insight-actors
+⌨ For this problem you need to download and import data:
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+Download [actors.mat](actors.mat) by clicking the link and saving (you may need to fix the file name).
+``` julia
+using MAT
+A = matread("actors.mat")["A"]
+```
+```` 
 
-    **(a)** What is the maximum number of actors appearing in any one movie?
+````{tab-item} MATLAB
+:sync: matlab
+Download [actors.mat](actors.mat) by clicking the link and saving (you may need to fix the file name).
+``` matlab
+load actors
+```
+```` 
 
-    **(b)** How many actors appeared in exactly three movies?
+````{tab-item} Python
+:sync: python
+Download [actors.mtx](actors.mtx) by clicking the link and saving (you may need to fix the file name).
+``` python
+import scipy.io as spio
+A = spio.mmread("actors.mtx")
+```
+```` 
+`````
 
-    **(c)** Define $\mathbf{C}=\mathbf{A}^T\mathbf{A}$. How many nonzero entries does $\mathbf{C}$ have? What is the interpretation of $C_{ij}$?
+Based on data provided by the Self-Organized Networks Database at the University of Notre Dame, the matrix `A` contains information about the appearances of 392,400 actors in 127,823 movies, as given by the Internet Movie Database. It has $A_{ij}=1$ if actor $j$ appeared in movie $i$ and zero elements elsewhere.
+
+**(a)** What is the maximum number of actors appearing in any one movie?
+
+**(b)** How many actors appeared in exactly three movies?
+
+**(c)** Define $\mathbf{C}=\mathbf{A}^T\mathbf{A}$. How many nonzero entries does $\mathbf{C}$ have? What is the interpretation of $C_{ij}$?
+``````
