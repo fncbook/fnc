@@ -449,8 +449,8 @@ ivp.InitialValue = [1; 2; 3];
 ivp.Solver = "ode15s";
 sol = solve(ivp, 0, 500); 
 clf,  semilogy(sol.Time, sol.Solution)
-xlabel('t'),  ylabel('u(t)')
-title('Oregonator')
+xlabel("t"),  ylabel("u(t)")
+title("Oregonator solution")
 ```
 
 At each value of the numerical solution, we can compute the eigenvalues of the Jacobian. Here we plot all of those eigenvalues in the complex plane.
@@ -468,7 +468,7 @@ for j = 1:length(t)-1
     lambda(j, :) = eig(J(u(:, j)));
 end
 plot3(real(lambda), imag(lambda), t(1:end-1), 'o')
-xlabel("Re $\\lambda$"),  ylabel("Im $\\lambda$"),  zlabel("$t$")
+xlabel("Re \lambda"),  ylabel("Im \lambda"),  zlabel("t")
 title("Oregonator eigenvalues")
 ```
 

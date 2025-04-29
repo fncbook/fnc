@@ -274,9 +274,9 @@ We solve the Black–Scholes PDE @bspde with initial condition $u(x,0) = \max\{0
    
     **(a)** ✍ Suppose we ignore the diffusion. Use separation of variables (or computer algebra) to solve the IVP $u_t=u^2$, $u(0) = A>0$. What happens as $t\to 1/A$ from below? 
 
-    **(b)** ⌨ Try to continue the solution in the demo to $t=1$. What happens? 
+    **(b)** ⌨ Try to continue the solution in the demo to $t=0.5$. Plot the solution at $t=0.15$, $t=0.2$, and $t=0.25$. 
     
-    **(c)** ⌨ Let the initial condition be $u(x,0) = C x^4(1-x)^2$; the demo uses $C=400$. To the nearest 10, find a critical value $C_0$ such that the solution approaches zero asymptotically if $C < C_0$, but not otherwise.
+    **(c)** ⌨ Let the initial condition be $u(x,0) = C x^4(1-x)^2$; the demo and part (b) above use $C=400$. To the nearest 10, find a critical value $C_0$ such that the solution approaches zero asymptotically if $C < C_0$, and infinity otherwise. (Use the solution at $t=1$ to determine the critical value.)
 
     ```{index} Allen–Cahn equation
     ```
