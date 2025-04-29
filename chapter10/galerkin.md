@@ -359,45 +359,55 @@ Because piecewise linear interpolation on a uniform grid of size $h$ is $O(h^2)$
 
 ## Exercises
 
-1. ⌨ For each linear BVP, use {numref}`Function {number} <function-fem>` to solve the problem and plot the solution for $n=40$. Then for each $n=10,20,40,\ldots,640$, compute the norm of the error. Make a log-log convergence plot of error versus $n$ and compare graphically to second-order convergence.  
+``````{exercise}
+⌨ For each linear BVP, use {numref}`Function {number} <function-fem>` to solve the problem and plot the solution for $n=40$. Then for each $n=10,20,40,\ldots,640$, compute the norm of the error. Make a log-log convergence plot of error versus $n$ and compare graphically to second-order convergence.  
 
-    **(a)** $-u''+u=-8 + 16 x^2 - x^4, \quad u(0) =u(2) =0$ 
-    
-    Exact solution: $x^2(4-x^2)$
+**(a)** $-u''+u=-8 + 16 x^2 - x^4, \quad u(0) =u(2) =0$ 
 
-    **(b)** $[(2+x)u']' +11x u = -e^x \left(12 x^3+7 x^2+1\right), \quad u(-1) =u(1) =0$ 
-    
-    Exact solution: $e^x \left(1-x^2\right)$
+Exact solution: $x^2(4-x^2)$
 
-    **(c)** $u''+x(u'+u) = -x[4 \sin(x)+5 x \cos(x)], \quad u(0) =u(2\pi) =0$ 
-    
-    Exact solution: $-x^2\sin(x)$
+**(b)** $[(2+x)u']' +11x u = -e^x \left(12 x^3+7 x^2+1\right), \quad u(-1) =u(1) =0$ 
 
-(problem-galerkin-bvpnonhom)=
-2. ✍  Suppose you want to solve the differential equation $-[c(x)u']'+d(x)u = f(x)$, as in Equation {eq}`strongbvp`, except with the boundary conditions $u(a)=\alpha$, $u(b)=\beta$. Find constants $p$ and $q$ such that if $v(x)=u(x)+px+q$, then $v$ satisfies the same BVP, except that $v(a)=v(b)=0$ and $f$ is replaced by a different function. 
+Exact solution: $e^x \left(1-x^2\right)$
 
-(problem-galerkin-galintfactor)=
-3. ✍  Suppose $p(x)u''(x)+q(x)u'(x)+r(x)=0$, and assume that $p(x)\neq 0$ for all $x$ in $[a,b]$. Let $z(x)$ be any function satisfying $z'=q/p$. Show that the differential equation is equivalent to one in the form {eq}`strongbvp`, and find the functions $c(x)$, $d(x)$, and $f(x)$ in that equation. (Hint: Start by multiplying through the equation by $\exp(z)$.) 
+**(c)** $u''+x(u'+u) = -x[4 \sin(x)+5 x \cos(x)], \quad u(0) =u(2\pi) =0$ 
 
-4. ✍ Derive {eq}`PLmass`, starting from the mass matrix definition in {eq}`femsystem`. You should replace $s(x)$ by the constant $\overline{s}_k$ within interval $I_k$.  
+Exact solution: $-x^2\sin(x)$
+``````
 
-(problem-galerkin-neumann)=
-5. Suppose the Dirichlet boundary conditions $u(a)=u(b)=0$ are replaced by the homogeneous Neumann conditions $u'(a)=u'(b)=0$.
- 
-    **(a)** ✍ Explain why the weak form {eq}`weakbvp` can be derived without any boundary conditions on the test function $\psi$. 
-    
-    **(b)** ⌨ The result of part (a) suggests replacing {eq}`fempl` with 
-    
-    $$
-    u(x) = \sum_{j=0}^{n} u_j H_j(x)
-    $$ 
-    
-    and making {eq}`femsystem` hold for all $i,j$ from $0$ to $n$. Modify {numref}`Function {number} <function-fem>` to do this and thereby solve the Neumann problem. (Note that $I_1$ and $I_n$ now each make multiple contributions, like all the other integration subintervals.) 
-    
-    **(c)** ⌨ Test your function on the problem
+``````{exercise}
+:label: problem-galerkin-bvpnonhom
+✍  Suppose you want to solve the differential equation $-[c(x)u']'+d(x)u = f(x)$, as in Equation {eq}`strongbvp`, except with the boundary conditions $u(a)=\alpha$, $u(b)=\beta$. Find constants $p$ and $q$ such that if $v(x)=u(x)+px+q$, then $v$ satisfies the same BVP, except that $v(a)=v(b)=0$ and $f$ is replaced by a different function. 
+``````
 
-    $$
-      u''+u = -2 \sin(x), \quad u'(0)=u'(1)=0,
-    $$
+``````{exercise}
+:label: problem-galerkin-galintfactor
+✍  Suppose $p(x)u''(x)+q(x)u'(x)+r(x)=0$, and assume that $p(x)\neq 0$ for all $x$ in $[a,b]$. Let $z(x)$ be any function satisfying $z'=q/p$. Show that the differential equation is equivalent to one in the form {eq}`strongbvp`, and find the functions $c(x)$, $d(x)$, and $f(x)$ in that equation. (Hint: Start by multiplying through the equation by $\exp(z)$.) 
+``````
 
-    whose exact solution is $(x-1)\cos(x) - \sin(x)$. Show second-order convergence.
+``````{exercise}
+✍ Derive {eq}`PLmass`, starting from the mass matrix definition in {eq}`femsystem`. You should replace $s(x)$ by the constant $\overline{s}_k$ within interval $I_k$.  
+``````
+
+``````{exercise}
+:label: problem-galerkin-neumann
+Suppose the Dirichlet boundary conditions $u(a)=u(b)=0$ are replaced by the homogeneous Neumann conditions $u'(a)=u'(b)=0$.
+
+**(a)** ✍ Explain why the weak form {eq}`weakbvp` can be derived without any boundary conditions on the test function $\psi$. 
+
+**(b)** ⌨ The result of part (a) suggests replacing {eq}`fempl` with 
+
+$$
+u(x) = \sum_{j=0}^{n} u_j H_j(x)
+$$ 
+
+and making {eq}`femsystem` hold for all $i,j$ from $0$ to $n$. Modify {numref}`Function {number} <function-fem>` to do this and thereby solve the Neumann problem. (Note that $I_1$ and $I_n$ now each make multiple contributions, like all the other integration subintervals.) 
+
+**(c)** ⌨ Test your function on the problem
+
+$$
+u''+u = -2 \sin(x), \quad u'(0)=u'(1)=0,
+$$
+
+whose exact solution is $(x-1)\cos(x) - \sin(x)$. Show second-order convergence.
+``````

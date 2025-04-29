@@ -246,75 +246,92 @@ In the next section, we revisit the idea of approximately solving $\mathbf{A}\ma
 
 ## Exercises
 
-(problem-krylovpermute)=
-1. ✍ Let $\mathbf{A}=\displaystyle \begin{bmatrix}
-    0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0
-    \end{bmatrix}.$
+``````{exercise}
+:label: problem-krylovpermute
+✍ Let $\mathbf{A}=\displaystyle \begin{bmatrix}
+0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0
+\end{bmatrix}.$
 
-    **(a)** Find the Krylov matrix $\mathbf{K}_3$ for the seed vector $\mathbf{u}=\mathbf{e}_1$. 
+**(a)** Find the Krylov matrix $\mathbf{K}_3$ for the seed vector $\mathbf{u}=\mathbf{e}_1$. 
 
-    **(b)** Find $\mathbf{K}_3$ for the seed vector $\mathbf{u}=\begin{bmatrix}1; \: 1;\: 1; \: 1\end{bmatrix}.$  
+**(b)** Find $\mathbf{K}_3$ for the seed vector $\mathbf{u}=\begin{bmatrix}1; \: 1;\: 1; \: 1\end{bmatrix}.$  
+``````
 
-2. ⌨ For each matrix, make a table of the 2-norm condition numbers $\kappa(\mathbf{K}_m)$ for $m=1,\ldots,10$. Use a vector of all ones as the Krylov seed.
+``````{exercise}
+⌨ For each matrix, make a table of the 2-norm condition numbers $\kappa(\mathbf{K}_m)$ for $m=1,\ldots,10$. Use a vector of all ones as the Krylov seed.
 
-    **(a)** Matrix from {numref}`Demo %s <demo-subspace-unstable>`
-    
-    **(b)** $\begin{bmatrix}
-      -2 & 1 & & &  \\
-      1 & -2 & 1 & &  \\
-      & \ddots & \ddots & \ddots & \\
-      & & 1 & -2 & 1 \\
-       & & & 1 & -2
-     \end{bmatrix} \: (100\times 100)$
+**(a)** Matrix from {numref}`Demo %s <demo-subspace-unstable>`
 
-   **(c)** $\begin{bmatrix}
-      -2 & 1 & & & 1 \\
-      1 & -2 & 1 & &  \\
-      & \ddots & \ddots & \ddots & \\
-      & & 1 & -2 & 1 \\
-      1 & & & 1 & -2
-    \end{bmatrix} \: (200\times 200) $
+**(b)** $\begin{bmatrix}
+-2 & 1 & & &  \\
+1 & -2 & 1 & &  \\
+& \ddots & \ddots & \ddots & \\
+& & 1 & -2 & 1 \\
+& & & 1 & -2
+\end{bmatrix} \: (100\times 100)$
 
-    % must stay as #3
-(problem-subspace-matrixpolykrylov)=
-3. ✍ Show that if $\mathbf{x}\in\mathcal{K}_m$, then $\mathbf{x}=p(\mathbf{A})\mathbf{u}$ for a polynomial $p$ of degree at most $m-1$. (See {eq}`matrixpoly` for applying a polynomial to a matrix.)
+**(c)** $\begin{bmatrix}
+-2 & 1 & & & 1 \\
+1 & -2 & 1 & &  \\
+& \ddots & \ddots & \ddots & \\
+& & 1 & -2 & 1 \\
+1 & & & 1 & -2
+\end{bmatrix} \: (200\times 200) $
+``````
 
-4. ✍ Compute the asymptotic flop requirements for {numref}`Function {number} <function-arnoldi>`. Assume that due to sparsity, a matrix-vector multiplication $\mathbf{A}\mathbf{u}$ requires only $c n$ flops for a constant $c$, rather than the usual $O(n^2)$. 
+% must stay as #3
 
-5. ⌨ When Arnoldi iteration is performed on the Krylov subspace generated using the matrix $\mathbf{A}=\displaystyle \begin{bmatrix}  2& 1& 1& 0\\ 1 &3 &1& 0\\ 0& 1& 3& 1\\ 0& 1& 1& 2 \end{bmatrix}$, the results can depend strongly on the initial vector $\mathbf{u}$. 
+``````{exercise}
+:label: problem-subspace-matrixpolykrylov
+✍ Show that if $\mathbf{x}\in\mathcal{K}_m$, then $\mathbf{x}=p(\mathbf{A})\mathbf{u}$ for a polynomial $p$ of degree at most $m-1$. (See {eq}`matrixpoly` for applying a polynomial to a matrix.)
+``````
 
-    **(a)** Apply {numref}`Function {number} <function-arnoldi>` for 3 iterations and output `Q` (which should be square) and `H` when using the following seed vectors. 
-    
-    *(i)* $\bigl[1,\,0,\,0,\,0\bigr]$ $\qquad$ *(ii)* $\bigl[1,\,1,\,1,\,1\bigr]$ $\qquad$ *(iii)* `rand(4)`
-   
-    **(b)** Can you explain why case (ii) in part (a) cannot finish successfully? (Hint: What line(s) of the function can possibly return NaN when applied to finite values?) 
-    
-    % must stay as #6
-(problem-subspace-modifiedgs)=
-6. ✍ As mentioned in the text, {numref}`Function {number} <function-arnoldi>` does not compute $H_{ij}$ as defined by {eq}`arnoldiip`, but rather 
-  
-    $$
-    S_{ij} = \mathbf{q}_i^* ( \mathbf{A}\mathbf{q}_j - S_{1j}\,\mathbf{q}_1 - \cdots -
-    S_{i-1,j}\,\mathbf{q}_{i-1} )
-    $$
+``````{exercise}
+✍ Compute the asymptotic flop requirements for {numref}`Function {number} <function-arnoldi>`. Assume that due to sparsity, a matrix-vector multiplication $\mathbf{A}\mathbf{u}$ requires only $c n$ flops for a constant $c$, rather than the usual $O(n^2)$. 
+``````
 
-    for $i=1,\ldots,j$. Show that $S_{ij}=H_{ij}$. (Hence the function is mathematically equivalent to our Arnoldi formulas.)
+``````{exercise}
+⌨ When Arnoldi iteration is performed on the Krylov subspace generated using the matrix $\mathbf{A}=\displaystyle \begin{bmatrix}  2& 1& 1& 0\\ 1 &3 &1& 0\\ 0& 1& 3& 1\\ 0& 1& 1& 2 \end{bmatrix}$, the results can depend strongly on the initial vector $\mathbf{u}$. 
 
-    ```{index} eigenvalue
-    ```
-    % must stay as #7
-(problem-krylov-arnoldieig)=
-7. One way to approximate the eigenvalue problem $\mathbf{A}\mathbf{x}=\lambda\mathbf{x}$ over $\mathcal{K}_m$ is to restrict $\mathbf{x}$ to the low-dimensional spaces $\mathcal{K}_m$. 
- 
-    **(a)** ✍ Show starting from {eq}`arnoldimat` that
+**(a)** Apply {numref}`Function {number} <function-arnoldi>` for 3 iterations and output `Q` (which should be square) and `H` when using the following seed vectors. 
 
-    $$
-    \mathbf{Q}_m^* \mathbf{A} \mathbf{Q}_m =  \tilde{\mathbf{H}}_m,
-    $$
+*(i)* $\bigl[1,\,0,\,0,\,0\bigr]$ $\qquad$ *(ii)* $\bigl[1,\,1,\,1,\,1\bigr]$ $\qquad$ *(iii)* `rand(4)`
 
-    where $\tilde{\mathbf{H}}_m$ is the upper Hessenberg matrix resulting from deleting the last row of $\mathbf{H}_m$. What is the size of this matrix? 
+**(b)** Can you explain why case (ii) in part (a) cannot finish successfully? (Hint: What line(s) of the function can possibly return NaN when applied to finite values?) 
+``````
 
-    **(b)** ✍ Show the reasoning above leads to the approximate eigenvalue problem $\tilde{\mathbf{H}}_m\mathbf{z} \approx \lambda\mathbf{z}$. (Hint: Start with $\mathbf{A}\mathbf{x} \approx \lambda\mathbf{x}$, and let $\mathbf{x}=\mathbf{Q}_m\mathbf{z}$ before applying part (a).)  
+% must stay as #6
 
-    **(c)** ⌨ Apply {numref}`Function {number} <function-arnoldi>` to the matrix of {numref}`Demo %s <demo-subspace-unstable>` using a random seed vector. Compute eigenvalues of $\tilde{\mathbf{H}}_m$ for $m=1,\ldots,40$, keeping track in each case of the error between the largest of those values (in magnitude) and the largest eigenvalue of $\mathbf{A}$. Make a log-linear graph of the error as a function of $m$.  
-    
+``````{exercise}
+:label: problem-subspace-modifiedgs
+✍ As mentioned in the text, {numref}`Function {number} <function-arnoldi>` does not compute $H_{ij}$ as defined by {eq}`arnoldiip`, but rather 
+
+$$
+S_{ij} = \mathbf{q}_i^* ( \mathbf{A}\mathbf{q}_j - S_{1j}\,\mathbf{q}_1 - \cdots -
+S_{i-1,j}\,\mathbf{q}_{i-1} )
+$$
+
+for $i=1,\ldots,j$. Show that $S_{ij}=H_{ij}$. (Hence the function is mathematically equivalent to our Arnoldi formulas.)
+``````
+
+```{index} eigenvalue
+```
+
+% must stay as #7
+
+``````{exercise}
+:label: problem-krylov-arnoldieig
+One way to approximate the eigenvalue problem $\mathbf{A}\mathbf{x}=\lambda\mathbf{x}$ over $\mathcal{K}_m$ is to restrict $\mathbf{x}$ to the low-dimensional spaces $\mathcal{K}_m$. 
+
+**(a)** ✍ Show starting from {eq}`arnoldimat` that
+
+$$
+\mathbf{Q}_m^* \mathbf{A} \mathbf{Q}_m =  \tilde{\mathbf{H}}_m,
+$$
+
+where $\tilde{\mathbf{H}}_m$ is the upper Hessenberg matrix resulting from deleting the last row of $\mathbf{H}_m$. What is the size of this matrix? 
+
+**(b)** ✍ Show the reasoning above leads to the approximate eigenvalue problem $\tilde{\mathbf{H}}_m\mathbf{z} \approx \lambda\mathbf{z}$. (Hint: Start with $\mathbf{A}\mathbf{x} \approx \lambda\mathbf{x}$, and let $\mathbf{x}=\mathbf{Q}_m\mathbf{z}$ before applying part (a).)  
+
+**(c)** ⌨ Apply {numref}`Function {number} <function-arnoldi>` to the matrix of {numref}`Demo %s <demo-subspace-unstable>` using a random seed vector. Compute eigenvalues of $\tilde{\mathbf{H}}_m$ for $m=1,\ldots,40$, keeping track in each case of the error between the largest of those values (in magnitude) and the largest eigenvalue of $\mathbf{A}$. Make a log-linear graph of the error as a function of $m$.  
+``````

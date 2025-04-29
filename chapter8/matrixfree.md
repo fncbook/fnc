@@ -130,35 +130,47 @@ The following example shows how to put these ideas into practice with MINRES.
 
 ## Exercises
 
-1. ✍ Show using {eq}`lintrans` and {eq}`blurfunction` that the blur operation is a linear transformation. 
+``````{exercise}
+✍ Show using {eq}`lintrans` and {eq}`blurfunction` that the blur operation is a linear transformation. 
+``````
 
-2. ✍ In each case, state with reasons whether the given transformation on $n$-vectors is linear. 
+``````{exercise}
+✍ In each case, state with reasons whether the given transformation on $n$-vectors is linear. 
 
-    **(a)** $\,\mathbf{f}(\mathbf{x}) = \begin{bmatrix} x_2\\x_3 \\\vdots\\ x_n \\ x_1 \end{bmatrix}\qquad$
-    **(b)** $\,\mathbf{f}(\mathbf{x}) = \begin{bmatrix} x_1\\x_1+x_2\\x_1+x_2+x_3\\\vdots\\x_1+\cdots+x_n \end{bmatrix} \qquad$
-    **(c)** $\,\mathbf{f}(\mathbf{x}) = \begin{bmatrix} x_1 + 1 \\x_2 + 2 \\ x_3 + 3 \\\vdots \\ x_n+n \end{bmatrix} \qquad$
-    **(d)** $\,\mathbf{f}(\mathbf{x}) = \|\mathbf{x}\|_\infty\, \mathbf{e}_1$
+**(a)** $\,\mathbf{f}(\mathbf{x}) = \begin{bmatrix} x_2\\x_3 \\\vdots\\ x_n \\ x_1 \end{bmatrix}\qquad$
+**(b)** $\,\mathbf{f}(\mathbf{x}) = \begin{bmatrix} x_1\\x_1+x_2\\x_1+x_2+x_3\\\vdots\\x_1+\cdots+x_n \end{bmatrix} \qquad$
+**(c)** $\,\mathbf{f}(\mathbf{x}) = \begin{bmatrix} x_1 + 1 \\x_2 + 2 \\ x_3 + 3 \\\vdots \\ x_n+n \end{bmatrix} \qquad$
+**(d)** $\,\mathbf{f}(\mathbf{x}) = \|\mathbf{x}\|_\infty\, \mathbf{e}_1$
+``````
 
-3. ✍ Suppose that code for the linear transformation $\mathbf{f}(\mathbf{x})=\mathbf{A}\mathbf{x}$ is given for an unknown matrix $\mathbf{A}$. Explain carefully how one could construct $\mathbf{A}$.
+``````{exercise}
+✍ Suppose that code for the linear transformation $\mathbf{f}(\mathbf{x})=\mathbf{A}\mathbf{x}$ is given for an unknown matrix $\mathbf{A}$. Explain carefully how one could construct $\mathbf{A}$.
+``````
 
-4. ⌨ The matrix of the blur transformation happens to be symmetric and positive definite. Repeat {numref}`Demo %s <demo-matrixfree-deblur>` using CG for the deblurring.
+``````{exercise}
+⌨ The matrix of the blur transformation happens to be symmetric and positive definite. Repeat {numref}`Demo %s <demo-matrixfree-deblur>` using CG for the deblurring.
+``````
 
-5. The condition number of the matrix of the blur transformation is related to the condition numbers of the single-dimension matrices $\mathbf{B}^k$ and $\mathbf{C}^k$ in {eq}`blurfunction`.
+``````{exercise}
+The condition number of the matrix of the blur transformation is related to the condition numbers of the single-dimension matrices $\mathbf{B}^k$ and $\mathbf{C}^k$ in {eq}`blurfunction`.
 
-    **(a)** ⌨  Let $m=50$. Show that $\mathbf{B}$ has a Cholesky factorization and thus is SPD. Find $\kappa(\mathbf{B})$. (Note: `cond` requires a regular dense matrix, not a sparse matrix.)
+**(a)** ⌨  Let $m=50$. Show that $\mathbf{B}$ has a Cholesky factorization and thus is SPD. Find $\kappa(\mathbf{B})$. (Note: `cond` requires a regular dense matrix, not a sparse matrix.)
 
-    **(b)** ✍ Explain why part (a) implies $\kappa( \mathbf{B}^k ) = \kappa(\mathbf{B})^k$.
+**(b)** ✍ Explain why part (a) implies $\kappa( \mathbf{B}^k ) = \kappa(\mathbf{B})^k$.
 
-    **(c)** ✍ Explain two important effects of the limit $k\to \infty$ on deblurring by Krylov methods. 
+**(c)** ✍ Explain two important effects of the limit $k\to \infty$ on deblurring by Krylov methods. 
+``````
 
-6. The cumulative summation function `cumsum` is defined as
+``````{exercise}
+The cumulative summation function `cumsum` is defined as
 
-    $$
-    \mathbf{f}(\mathbf{x}) = \begin{bmatrix} x_1 \\ x_1+x_2 \\ \vdots \\ x_1 + x_2 + \cdots + x_n \end{bmatrix}.
-    $$
+$$
+\mathbf{f}(\mathbf{x}) = \begin{bmatrix} x_1 \\ x_1+x_2 \\ \vdots \\ x_1 + x_2 + \cdots + x_n \end{bmatrix}.
+$$
 
-    **(a)** ✍ Show that $\mathbf{f}$ is a linear transformation.
+**(a)** ✍ Show that $\mathbf{f}$ is a linear transformation.
 
-    **(b)** ⌨ Define vector $\mathbf{b}$ by $b_i = (i/100)^2$ for $i=1,\ldots,100$. Then use `gmres` to find $\mathbf{x}=\mathbf{f}^{-1}(\mathbf{b})$. 
+**(b)** ⌨ Define vector $\mathbf{b}$ by $b_i = (i/100)^2$ for $i=1,\ldots,100$. Then use `gmres` to find $\mathbf{x}=\mathbf{f}^{-1}(\mathbf{b})$. 
 
-    **(c)** ⌨ Plot $\mathbf{x}$, and explain why the result looks as it does.
+**(c)** ⌨ Plot $\mathbf{x}$, and explain why the result looks as it does.
+``````

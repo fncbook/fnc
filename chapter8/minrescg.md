@@ -219,62 +219,72 @@ This estimate fails for very large $\kappa$, however.
 `````
 ::::
 
-
-
 ## Exercises
 
-1. ✍ For each part, the eigenvalues of $\mathbf{A}$ are given. Suppose MINRES is applied to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$. Use {eq}`minres-conv` or {eq}`cgconv`, whichever is most appropriate, to determine a lower bound on $m$ to guarantee reduction of the residual norm by a factor $10^{-4}$. 
+``````{exercise}
+✍ For each part, the eigenvalues of $\mathbf{A}$ are given. Suppose MINRES is applied to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$. Use {eq}`minres-conv` or {eq}`cgconv`, whichever is most appropriate, to determine a lower bound on $m$ to guarantee reduction of the residual norm by a factor $10^{-4}$. 
 
-    **(a)** $-100,-99,\ldots,-1,1,2,\ldots,100$
-    
-    **(b)** $-100,1,2,\ldots,100$
-    
-    **(c)** $1,2,\ldots,100$
+**(a)** $-100,-99,\ldots,-1,1,2,\ldots,100$
 
-2. ⌨ Let $\mathbf{b}$ be a random unit vector of length 202. Define a diagonal matrix with diagonal entries $d_k$ given by
-    \begin{align*}
-    d_k &= -200 + 1.95k, \quad k=0,1,\ldots,100, \\
-    d_{k+101} &= 10 + 0.9k, \quad k=0,1,\ldots,100.
-    \end{align*}
-    
-    **(a)**  Apply 120 iterations of MINRES to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$. Compute the relative error of the answer, and plot the norm of the residual as a function of $m$ on a log-linear scale.
+**(b)** $-100,1,2,\ldots,100$
 
-    **(b)** Add to your graph the line representing the upper bound {eq}`minres-conv`. (Ignore the rounding in the exponent.) This line should stay strictly on or above the error curve.
+**(c)** $1,2,\ldots,100$
+``````
 
-3. ⌨ Let $\mathbf{b}$ be a random unit vector of length 501. Define a sparse diagonal matrix $\mathbf{A}$ with diagonal entries $d_k$ given by
-    \begin{align*}
-    d_k &= 4 + k\cdot\frac{9996}{500}, \quad k=0,1,\ldots,500.
-    \end{align*}
+``````{exercise}
+⌨ Let $\mathbf{b}$ be a random unit vector of length 202. Define a diagonal matrix with diagonal entries $d_k$ given by
+\begin{align*}
+d_k &= -200 + 1.95k, \quad k=0,1,\ldots,100, \\
+d_{k+101} &= 10 + 0.9k, \quad k=0,1,\ldots,100.
+\end{align*}
 
-    **(a)** Apply 100 iterations of MINRES to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$. Compute the relative norm of the answer. Plot the norm of the residual as a function of $m$.
-    
-    **(b)** Add to your graph the line representing the upper bound {eq}`cgconv`. This line should stay strictly on or above the convergence curve.
-  
-    **(c)** Add a convergence curve for 100 iterations of `cg`.
+**(a)**  Apply 120 iterations of MINRES to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$. Compute the relative error of the answer, and plot the norm of the residual as a function of $m$ on a log-linear scale.
 
-4. ✍ Suppose a family of SPD matrices $\mathbf{A}$ is parameterized by $t$, and that the condition numbers of the matrices scale like $O(t^2)$ as $t\to\infty$. Given that CG takes 60 iterations to reach a certain reduction in the error of a linear system when $t=200$, estimate the number of iterations CG will need to reach the same accuracy at $t=300$. 
+**(b)** Add to your graph the line representing the upper bound {eq}`minres-conv`. (Ignore the rounding in the exponent.) This line should stay strictly on or above the error curve.
+``````
 
-5. ✍ Given real $n\times n$ symmetric $\mathbf{A}$ and vector $\mathbf{b}=\mathbf{A}\mathbf{x}$, we can define the scalar-valued function
-  
-    :::{math}
-    \varphi(\mathbf{u}) = \mathbf{u}^T \mathbf{A} \mathbf{u} - 2 \mathbf{u}^T \mathbf{b}, \qquad \mathbf{u}\in\mathbb{R}^n.
-    :::
+``````{exercise}
+⌨ Let $\mathbf{b}$ be a random unit vector of length 501. Define a sparse diagonal matrix $\mathbf{A}$ with diagonal entries $d_k$ given by
+\begin{align*}
+d_k &= 4 + k\cdot\frac{9996}{500}, \quad k=0,1,\ldots,500.
+\end{align*}
 
-    **(a)** Expand and simplify the expression $\varphi(\mathbf{x}+\mathbf{v})-\varphi(\mathbf{x})$, keeping in mind that $\mathbf{A}\mathbf{x}=\mathbf{b}$.
-  
-    **(b)** Using the result of part (a), prove that if $\mathbf{A}$ is an SPD matrix, $\varphi$ has a global minimum at $\mathbf{x}$.
-  
-    **(c)** Show that for any vector $\mathbf{u}$, $\|\mathbf{u}-\mathbf{x}\|_{\mathbf{A}}^2-\varphi(\mathbf{u})$ is constant.
-  
-    **(d)** Using the result of part (c), prove that CG minimizes $\varphi(\mathbf{u})$ over Krylov subspaces.
+**(a)** Apply 100 iterations of MINRES to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$. Compute the relative norm of the answer. Plot the norm of the residual as a function of $m$.
 
-    ```{index} Helmholtz equation
-    ```
-    
-6. ⌨  Let $n=50$. Define the matrix $\mathbf{A}_k$ as `FNC.poisson(n)` minus $k^2$ times the $n^2\times n^2$ identity matrix, and define vector $\mathbf{b}$ as $n^2$ copies of $-1$. The linear system $\mathbf{A}_k\mathbf{x}=\mathbf{b}$ arises from the *Helmholtz equation* for wave propagation at a single frequency $k$.
+**(b)** Add to your graph the line representing the upper bound {eq}`cgconv`. This line should stay strictly on or above the convergence curve.
 
-    **(a)** Apply both MINRES and CG to the Helmholtz system for $k=1.3$, solving to a relative residual tolerance of $10^{-5}$. Plotting their convergence curves together.
-  
-    **(b)** Repeat part (a) for $k=8$. 
+**(c)** Add a convergence curve for 100 iterations of `cg`.
+``````
 
-    **(c)** Use `eigs` on the matrix from part (b) to show that it is indefinite. (Hint: Use additional arguments to get the eigenvalues with smallest and largest real parts.) This helps explain why the CG convergence curve for this matrix looks rather strange.
+``````{exercise}
+✍ Suppose a family of SPD matrices $\mathbf{A}$ is parameterized by $t$, and that the condition numbers of the matrices scale like $O(t^2)$ as $t\to\infty$. Given that CG takes 60 iterations to reach a certain reduction in the error of a linear system when $t=200$, estimate the number of iterations CG will need to reach the same accuracy at $t=300$. 
+``````
+
+``````{exercise}
+✍ Given real $n\times n$ symmetric $\mathbf{A}$ and vector $\mathbf{b}=\mathbf{A}\mathbf{x}$, we can define the scalar-valued function
+
+:::{math}
+\varphi(\mathbf{u}) = \mathbf{u}^T \mathbf{A} \mathbf{u} - 2 \mathbf{u}^T \mathbf{b}, \qquad \mathbf{u}\in\mathbb{R}^n.
+:::
+
+**(a)** Expand and simplify the expression $\varphi(\mathbf{x}+\mathbf{v})-\varphi(\mathbf{x})$, keeping in mind that $\mathbf{A}\mathbf{x}=\mathbf{b}$.
+
+**(b)** Using the result of part (a), prove that if $\mathbf{A}$ is an SPD matrix, $\varphi$ has a global minimum at $\mathbf{x}$.
+
+**(c)** Show that for any vector $\mathbf{u}$, $\|\mathbf{u}-\mathbf{x}\|_{\mathbf{A}}^2-\varphi(\mathbf{u})$ is constant.
+
+**(d)** Using the result of part (c), prove that CG minimizes $\varphi(\mathbf{u})$ over Krylov subspaces.
+``````
+
+```{index} Helmholtz equation
+```
+
+``````{exercise}
+⌨  Let $n=50$. Define the matrix $\mathbf{A}_k$ as `FNC.poisson(n)` minus $k^2$ times the $n^2\times n^2$ identity matrix, and define vector $\mathbf{b}$ as $n^2$ copies of $-1$. The linear system $\mathbf{A}_k\mathbf{x}=\mathbf{b}$ arises from the *Helmholtz equation* for wave propagation at a single frequency $k$.
+
+**(a)** Apply both MINRES and CG to the Helmholtz system for $k=1.3$, solving to a relative residual tolerance of $10^{-5}$. Plotting their convergence curves together.
+
+**(b)** Repeat part (a) for $k=8$. 
+
+**(c)** Use `eigs` on the matrix from part (b) to show that it is indefinite. (Hint: Use additional arguments to get the eigenvalues with smallest and largest real parts.) This helps explain why the CG convergence curve for this matrix looks rather strange.
+``````

@@ -222,60 +222,72 @@ On the left, we use a log-log scale, which makes fourth-order algebraic converge
 
 ## Exercises
 
-1. ⌨ Revisit {numref}`Demo %s <demo-stability-equispaced>` and determine an approximate value for the convergent phase of the constant $K$ mentioned in the comments there. 
+``````{exercise}
+⌨ Revisit {numref}`Demo %s <demo-stability-equispaced>` and determine an approximate value for the convergent phase of the constant $K$ mentioned in the comments there. 
+``````
 
-2. ⌨ For each case, compute the polynomial interpolant using $n$ second-kind Chebyshev nodes in $[-1,1]$ for $n=4,8,12,\ldots,60$. At each value of $n$, compute the infinity-norm error (that is, $\max |p(x)-f(x)|$ evaluated for at least 4000 values of $x$). Using a log-linear scale, plot the error as a function of $n$, then determine a good approximation to the constant $K$ in {eq}`spectral`. 
+``````{exercise}
+⌨ For each case, compute the polynomial interpolant using $n$ second-kind Chebyshev nodes in $[-1,1]$ for $n=4,8,12,\ldots,60$. At each value of $n$, compute the infinity-norm error (that is, $\max |p(x)-f(x)|$ evaluated for at least 4000 values of $x$). Using a log-linear scale, plot the error as a function of $n$, then determine a good approximation to the constant $K$ in {eq}`spectral`. 
 
-    **(a)** $f(x) = 1/(25x^2+1)\qquad$ 
-    **(b)** $f(x) = \tanh(5 x+2)$
+**(a)** $f(x) = 1/(25x^2+1)\qquad$ 
+**(b)** $f(x) = \tanh(5 x+2)$
 
-    **(c)** $f(x) = \cosh(\sin x)\qquad$
-    **(d)** $f(x) = \sin(\cosh x)$
+**(c)** $f(x) = \cosh(\sin x)\qquad$
+**(d)** $f(x) = \sin(\cosh x)$
+``````
 
-(problem-chebinterp)=
-3. ⌨ Write a function `chebinterp(f,n)` that returns a function representing the polynomial interpolant of the input function `f` using $n+1$ Chebyshev second kind nodes over $[-1,1]$. You should use {eq}`weightcheb` to compute the barycentric weights directly, rather than using the method in {numref}`Function {number} <function-polyinterp>`. Test your function by revisiting {numref}`Demo %s <demo-stability-runge>` to use Chebyshev rather than equally spaced nodes. 
+``````{exercise}
+:label: problem-chebinterp
+⌨ Write a function `chebinterp(f,n)` that returns a function representing the polynomial interpolant of the input function `f` using $n+1$ Chebyshev second kind nodes over $[-1,1]$. You should use {eq}`weightcheb` to compute the barycentric weights directly, rather than using the method in {numref}`Function {number} <function-polyinterp>`. Test your function by revisiting {numref}`Demo %s <demo-stability-runge>` to use Chebyshev rather than equally spaced nodes. 
+``````
 
-4. {numref}`Theorem %s <theorem-spectral>` assumes that the function being approximated has infinitely many derivatives over $[-1,1]$. But now consider the family of functions $f_m(x)=|x|^m$. 
+``````{exercise}
+{numref}`Theorem %s <theorem-spectral>` assumes that the function being approximated has infinitely many derivatives over $[-1,1]$. But now consider the family of functions $f_m(x)=|x|^m$. 
 
-    **(a)** ✍ How many continuous derivatives over $[-1,1]$ does $f_m$ possess?
+**(a)** ✍ How many continuous derivatives over $[-1,1]$ does $f_m$ possess?
 
-    **(b)** ⌨ Compute the polynomial interpolant using $n$ second-kind Chebyshev nodes in $[-1,1]$ for $n=10,20,30,\ldots,100$. At each value of $n$, compute the max-norm error (that is, $\max |p(x)-f_m(x)|$ evaluated for at least 5000 values of $x$). Using a single log-log graph, plot the error as a function of $n$ for all six values $m=1,3,5,7,9$. Each convergence curve should be nearly a straight line.
-    
-    **(c)** ✍ Based on the results of parts (a) and (b), form a hypothesis about the asymptotic behavior of the error for fixed $m$ as $n\rightarrow \infty$. (Hint: Find the slopes of the lines in part (b).)
+**(b)** ⌨ Compute the polynomial interpolant using $n$ second-kind Chebyshev nodes in $[-1,1]$ for $n=10,20,30,\ldots,100$. At each value of $n$, compute the max-norm error (that is, $\max |p(x)-f_m(x)|$ evaluated for at least 5000 values of $x$). Using a single log-log graph, plot the error as a function of $n$ for all six values $m=1,3,5,7,9$. Each convergence curve should be nearly a straight line.
 
-(problem-stability-changeinterval)=
-5. The Chebyshev points can be used when the interval of interpolation is $[a,b]$ rather than $[-1,1]$ by means of the change of variable
+**(c)** ✍ Based on the results of parts (a) and (b), form a hypothesis about the asymptotic behavior of the error for fixed $m$ as $n\rightarrow \infty$. (Hint: Find the slopes of the lines in part (b).)
+``````
 
-    :::{math}
-    :label: changeinterval
-      z = \psi(x) = a + (b-a)\frac{(x+1)}{2}.
-    :::
+``````{exercise}
+:label: problem-stability-changeinterval
+The Chebyshev points can be used when the interval of interpolation is $[a,b]$ rather than $[-1,1]$ by means of the change of variable
 
-    **(a)** ✍  Show that $\psi(-1) = a$, $\psi(1) = b$, and $\psi$ is strictly increasing on $[-1,1]$.
+:::{math}
+:label: changeinterval
+z = \psi(x) = a + (b-a)\frac{(x+1)}{2}.
+:::
 
-    **(b)** ✍ Invert the relation {eq}`changeinterval` to solve for $x$ in terms of $\psi^{-1}(z)$. 
+**(a)** ✍  Show that $\psi(-1) = a$, $\psi(1) = b$, and $\psi$ is strictly increasing on $[-1,1]$.
 
-    **(c)** ✍ Let $t_0,\ldots,t_n$ be standard second-kind Chebyshev points. Then a polynomial in $x$ can be used to interpolate the function values $f\bigl(\psi(t_i)\bigr)$. This in turn implies an interpolating function $\tilde{P}(z) =P\bigl(\psi^{-1}(z)\bigr)$. Show that $\tilde{P}$ is a polynomial in $z$. 
-	
-    **(d)** ⌨ Implement the idea of part (c) to plot a polynomial interpolant of $f(z) =\cosh(\sin z)$ over $[0,2\pi]$ using $n+1$ Chebyshev nodes with $n=40$. 
+**(b)** ✍ Invert the relation {eq}`changeinterval` to solve for $x$ in terms of $\psi^{-1}(z)$. 
 
-6. The Chebyshev points can be used for interpolation of functions defined on the entire real line by using the change of variable
+**(c)** ✍ Let $t_0,\ldots,t_n$ be standard second-kind Chebyshev points. Then a polynomial in $x$ can be used to interpolate the function values $f\bigl(\psi(t_i)\bigr)$. This in turn implies an interpolating function $\tilde{P}(z) =P\bigl(\psi^{-1}(z)\bigr)$. Show that $\tilde{P}$ is a polynomial in $z$. 
 
-    :::{math}
-    :label: changeintervalinf
-    z = \phi(x) = \frac{2x}{1-x^2},
-    :::
+**(d)** ⌨ Implement the idea of part (c) to plot a polynomial interpolant of $f(z) =\cosh(\sin z)$ over $[0,2\pi]$ using $n+1$ Chebyshev nodes with $n=40$. 
+``````
 
-    which maps the interval $(-1,1)$ in one-to-one fashion to the entire real line.
+``````{exercise}
+The Chebyshev points can be used for interpolation of functions defined on the entire real line by using the change of variable
 
-    **(a)** ✍ Find $\displaystyle \lim_{x\to 1^-} \phi(x)$ and $\displaystyle \lim_{x\to -1^+} \phi(x)$. 
+:::{math}
+:label: changeintervalinf
+z = \phi(x) = \frac{2x}{1-x^2},
+:::
 
-    **(b)** ✍ Invert {eq}`changeintervalinf` to express $x=\phi^{-1}(z)$. (Be sure to enforce $-1\le x \le 1$.)
+which maps the interval $(-1,1)$ in one-to-one fashion to the entire real line.
 
-    **(c)** ⌨ Let $t_0,\ldots,t_n$ be standard second-kind Chebyshev points. These map to the $z$ variable as $\zeta_i=\phi(t_i)$ for all $i$. Suppose that $f(z)$ is a given function whose domain is the entire real line. Then the function values $y_i=f(\zeta_i)$ can be associated with the Chebyshev nodes $t_i$, leading to a polynomial interpolant $p(x)$. This in turn implies an interpolating function on the real line, defined as
+**(a)** ✍ Find $\displaystyle \lim_{x\to 1^-} \phi(x)$ and $\displaystyle \lim_{x\to -1^+} \phi(x)$. 
 
-    $$
-    q(z)=p\bigl(\phi^{-1}(z)\bigr) = p(x).
-    $$
-    
-    Implement this idea to plot an interpolant of $f(z)=(z^2-2z+2)^{-1}$ using $n=30$. Your plot should show $q(z)$ evaluated at 1000 evenly spaced points in $[-6,6]$, with markers at the nodal values (those lying within the $[-6,6]$ window).
+**(b)** ✍ Invert {eq}`changeintervalinf` to express $x=\phi^{-1}(z)$. (Be sure to enforce $-1\le x \le 1$.)
+
+**(c)** ⌨ Let $t_0,\ldots,t_n$ be standard second-kind Chebyshev points. These map to the $z$ variable as $\zeta_i=\phi(t_i)$ for all $i$. Suppose that $f(z)$ is a given function whose domain is the entire real line. Then the function values $y_i=f(\zeta_i)$ can be associated with the Chebyshev nodes $t_i$, leading to a polynomial interpolant $p(x)$. This in turn implies an interpolating function on the real line, defined as
+
+$$
+q(z)=p\bigl(\phi^{-1}(z)\bigr) = p(x).
+$$
+
+Implement this idea to plot an interpolant of $f(z)=(z^2-2z+2)^{-1}$ using $n=30$. Your plot should show $q(z)$ evaluated at 1000 evenly spaced points in $[-6,6]$, with markers at the nodal values (those lying within the $[-6,6]$ window).
+``````

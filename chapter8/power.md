@@ -233,43 +233,51 @@ The practical utility of {eq}`poweriterconv` is limited: if we knew $\lambda_1$ 
 
 ## Exercises
 
-1. ⌨ Use {numref}`Function {number} <function-poweriter>` to perform 20 power iterations for the following matrices. Quantitatively compare the observed convergence to the prediction in {eq}`poweriterconv`.
+``````{exercise}
+⌨ Use {numref}`Function {number} <function-poweriter>` to perform 20 power iterations for the following matrices. Quantitatively compare the observed convergence to the prediction in {eq}`poweriterconv`.
 
-    **(a)**
-    $\mathbf{A} = \begin{bmatrix}
-      1.1 & 1 \\
-      0.1 & 2.4
-    \end{bmatrix} \quad$
-    **(b)** $\mathbf{A} = \begin{bmatrix}
-      2 & 1 \\
-      1 & 0
-    \end{bmatrix} \quad$
-    **(c)** $ \mathbf{A} = \begin{bmatrix}
-      6 & 5 & 4 \\
-      5 & 4 & 3 \\
-      4 & 3 & 2
-    \end{bmatrix}$
+**(a)**
+$\mathbf{A} = \begin{bmatrix}
+1.1 & 1 \\
+0.1 & 2.4
+\end{bmatrix} \quad$
+**(b)** $\mathbf{A} = \begin{bmatrix}
+2 & 1 \\
+1 & 0
+\end{bmatrix} \quad$
+**(c)** $ \mathbf{A} = \begin{bmatrix}
+6 & 5 & 4 \\
+5 & 4 & 3 \\
+4 & 3 & 2
+\end{bmatrix}$
 
-    **(d)** $\mathbf{A} = \begin{bmatrix}
-    8 & -14 & 0 & -14 \\
-    -8 & 1 & 1 & 1 \\
-    -4 & -2 & 0 & 2 \\
-    8 & -7 & -1 & -7 
-    \end{bmatrix}$
+**(d)** $\mathbf{A} = \begin{bmatrix}
+8 & -14 & 0 & -14 \\
+-8 & 1 & 1 & 1 \\
+-4 & -2 & 0 & 2 \\
+8 & -7 & -1 & -7 
+\end{bmatrix}$
+``````
 
-2. ✍ Describe what happens during power iteration using the matrix $\mathbf{A}= \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}$ and initial vector $\mathbf{x}=\begin{bmatrix} 0.4\\0.7 \end{bmatrix}$. Does the algorithm converge to an eigenvector? How does this relate to {eq}`powerAkx0`?
+``````{exercise}
+✍ Describe what happens during power iteration using the matrix $\mathbf{A}= \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}$ and initial vector $\mathbf{x}=\begin{bmatrix} 0.4\\0.7 \end{bmatrix}$. Does the algorithm converge to an eigenvector? How does this relate to {eq}`powerAkx0`?
+``````
 
-(problem-power-lumpmembraneeig)=
-3. ⌨  In  [Exercise 2.3.5](#problem-linear-systems-lumpstring) we considered a mass-lumped model of a hanging string that led to a tridiagonal system of linear equations. Then, in [Exercise 7.2.6](#problem-evd-lumpstring), we found that eigenvectors of the same matrix correspond to vibrational modes of the string. The same setup can be applied to a membrane hanging from a square frame. Lumping the mass onto a Cartesian grid, each interacts with the four neighbors to the north, south, east, and west. If $n$ masses are used in each coordinate direction, we get an $n^2\times n^2$ sparse matrix $\mathbf{A}$ that can be constructed by `FNC.poisson(n)`.
-   
-    **(a)** Let $n=10$ and make a `spy` plot of $\mathbf{A}$. What is the density of $\mathbf{A}$? Most rows all have the same number of nonzeros; find this number.
-  
-    **(b)** Find the dominant $\lambda_1$ using `eigs` for $n=10,15,20,25$.
-    
-    **(c)** For each $n$ in part (b), apply 100 steps of {numref}`Function {number} <function-poweriter>`. On one graph, plot the four convergence curves $|\beta_k-\lambda_1|$ using a semi-log scale. (They will not be smooth curves because this matrix has many repeated eigenvalues that complicate the convergence analysis.) 
+``````{exercise}
+:label: problem-power-lumpmembraneeig
+⌨  In  @problem-linear-systems-lumpstring we considered a mass-lumped model of a hanging string that led to a tridiagonal system of linear equations. Then, in @problem-evd-lumpstring, we found that eigenvectors of the same matrix correspond to vibrational modes of the string. The same setup can be applied to a membrane hanging from a square frame. Lumping the mass onto a Cartesian grid, each interacts with the four neighbors to the north, south, east, and west. If $n$ masses are used in each coordinate direction, we get an $n^2\times n^2$ sparse matrix $\mathbf{A}$ that can be constructed by `FNC.poisson(n)`.
 
-4. ⌨ Copy the instructions from [Exercise 8.1.5](#problem-structure-actorsmat) to obtain a large, sparse matrix $\mathbf{A}$. Use {numref}`Function {number} <function-poweriter>` to find the leading eigenvalue of $\mathbf{A}^T\mathbf{A}$ to at least six significant digits.
+**(a)** Let $n=10$ and make a `spy` plot of $\mathbf{A}$. What is the density of $\mathbf{A}$? Most rows all have the same number of nonzeros; find this number.
 
-5. ⌨ For symmetric matrices, the Rayleigh quotient {eq}`rayleigh` converts an $O(\epsilon)$ eigenvector estimate into an $O(\epsilon^2)$ eigenvalue estimate. Duplicate {numref}`Function {number} <function-poweriter>` and rename it to `powersym`. Modify the new function to use the Rayleigh quotient to produce the entries of `β` or `beta`. Your function should not introduce any additional matrix-vector multiplications. Apply the original {numref}`Function {number} <function-poweriter>` and the new `powersym` on the `MatrixDepot`/`gallery`/`rogues` matrix `fiedler(100)`, plotting the convergence curves on one graph.
+**(b)** Find the dominant $\lambda_1$ using `eigs` for $n=10,15,20,25$.
 
+**(c)** For each $n$ in part (b), apply 100 steps of {numref}`Function {number} <function-poweriter>`. On one graph, plot the four convergence curves $|\beta_k-\lambda_1|$ using a semi-log scale. (They will not be smooth curves because this matrix has many repeated eigenvalues that complicate the convergence analysis.) 
+``````
 
+``````{exercise}
+⌨ Copy the instructions from [Exercise 8.1.5](#problem-structure-actorsmat) to obtain a large, sparse matrix $\mathbf{A}$. Use {numref}`Function {number} <function-poweriter>` to find the leading eigenvalue of $\mathbf{A}^T\mathbf{A}$ to at least six significant digits.
+``````
+
+``````{exercise}
+⌨ For symmetric matrices, the Rayleigh quotient {eq}`rayleigh` converts an $O(\epsilon)$ eigenvector estimate into an $O(\epsilon^2)$ eigenvalue estimate. Duplicate {numref}`Function {number} <function-poweriter>` and rename it to `powersym`. Modify the new function to use the Rayleigh quotient to produce the entries of `β` or `beta`. Your function should not introduce any additional matrix-vector multiplications. Apply the original {numref}`Function {number} <function-poweriter>` and the new `powersym` on the `MatrixDepot`/`gallery`/`rogues` matrix `fiedler(100)`, plotting the convergence curves on one graph.
+``````

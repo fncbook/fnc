@@ -207,34 +207,47 @@ The theoretical and computational aspects of Fourier analysis are vast and far-r
 
 ## Exercises
 
-1. ⌨  Each of the following functions is 2-periodic. Use {numref}`Function {number} <function-triginterp>` to make a 3-by-1 grid of plots of the function together with its trigonometric interpolants over $[-1,1]$ for $n=3$, $6$, and $9$. Then, for $n=2,3,\ldots,30$, compute the max-norm error in the trig interpolant by sampling at $1000$ or more points, and make a convergence plot on a semi-log scale.
+``````{exercise}
+⌨  Each of the following functions is 2-periodic. Use {numref}`Function {number} <function-triginterp>` to make a 3-by-1 grid of plots of the function together with its trigonometric interpolants over $[-1,1]$ for $n=3$, $6$, and $9$. Then, for $n=2,3,\ldots,30$, compute the max-norm error in the trig interpolant by sampling at $1000$ or more points, and make a convergence plot on a semi-log scale.
 
-    **(a)** $f(x) = e^{\sin (2\pi x)}\qquad$
-    **(b)** $f(x) = \log [2+ \sin (3 \pi x ) ]\qquad$
-    **(c)** $f(x) = \cos^{12}[\pi (x-0.2)]$
+**(a)** $f(x) = e^{\sin (2\pi x)}\qquad$
+**(b)** $f(x) = \log [2+ \sin (3 \pi x ) ]\qquad$
+**(c)** $f(x) = \cos^{12}[\pi (x-0.2)]$
+``````
 
-    ```{index} ! aliasing
-    ```
-2. **(a)** ✍ Show that the functions $\sin(r\pi x)$ and $\sin(s\pi x)$ are identical at all of the nodes given in {eq}`trignodes` if $r-s=mN$ for an integer $m$. This important fact is called *aliasing*, and it implies that only finitely many frequencies can be distinguished on a fixed node set.
+```{index} ! aliasing
+```
 
-    **(b)** ⌨  Demonstrate part (a) with a graph for the case $N=11$, $s=2$, $r=-9$. Specifically, plot the two functions on one graph, and plot points to show that they intersect at all of the interpolation nodes.
+``````{exercise}
+**(a)** ✍ Show that the functions $\sin(r\pi x)$ and $\sin(s\pi x)$ are identical at all of the nodes given in {eq}`trignodes` if $r-s=mN$ for an integer $m$. This important fact is called *aliasing*, and it implies that only finitely many frequencies can be distinguished on a fixed node set.
 
-(problem-triginterp-checktau)=
-3. ✍ Verify that the cardinal function given in Equation {eq}`trigcardinal` is (a) 2-periodic, (b) satisfies $\tau(t_k)=0$ for $k\neq 0$ at the nodes {eq}`trignodes`, and (c) satisfies $\lim_{x\to0}\tau(x)=1$.
+**(b)** ⌨  Demonstrate part (a) with a graph for the case $N=11$, $s=2$, $r=-9$. Specifically, plot the two functions on one graph, and plot points to show that they intersect at all of the interpolation nodes.
+``````
 
-4. ✍ Prove the equality of the two expressions in {eq}`trigcardinal`. (Hint: Set $z=e^{i\pi x/2}$ and rewrite the sum using $z$ by applying Euler's identity.)
+``````{exercise}
+:label: problem-triginterp-checktau
+✍ Verify that the cardinal function given in Equation {eq}`trigcardinal` is (a) 2-periodic, (b) satisfies $\tau(t_k)=0$ for $k\neq 0$ at the nodes {eq}`trignodes`, and (c) satisfies $\lim_{x\to0}\tau(x)=1$.
+``````
 
+``````{exercise}
+✍ Prove the equality of the two expressions in {eq}`trigcardinal`. (Hint: Set $z=e^{i\pi x/2}$ and rewrite the sum using $z$ by applying Euler's identity.)
+``````
 
-    ```{index} Gibbs phenomenon
-    ```
-5. ⌨ Spectral convergence is predicated on having infinitely many continuous derivatives. At the other extreme is a function with a jump discontinuity. Trigonometric interpolation across a jump leads to a lack of convergence altogether, a fact famously known as the *Gibbs phenomenon*.
-  
-    **(a)** Define `f(x) = sign(x+eps())`. This function jumps from $-1$ to $1$ at $x=-\epsilon_\text{mach}$. Plot the function over $-0.05\le x \le 0.15$.
+```{index} Gibbs phenomenon
+```
 
-    **(b)** Let $n=30$ and $N=2n+1$. Using {numref}`Function {number} <function-triginterp>`, add a plot of the trigonometric interpolant to $f$ to the graph from part (a).
+``````{exercise}
+⌨ Spectral convergence is predicated on having infinitely many continuous derivatives. At the other extreme is a function with a jump discontinuity. Trigonometric interpolation across a jump leads to a lack of convergence altogether, a fact famously known as the *Gibbs phenomenon*.
 
-    **(c)** Repeat part (b) for $n=80$ and $n=180$.
+**(a)** Define `f(x) = sign(x+eps())`. This function jumps from $-1$ to $1$ at $x=-\epsilon_\text{mach}$. Plot the function over $-0.05\le x \le 0.15$.
 
-    **(d)** You should see that the interpolants overshoot and oscillate near the step. The widths of the overshoots decrease with $n$ but the heights approach a limiting value. By zooming in to the graph, find the height of the overshoot to two decimal places.
+**(b)** Let $n=30$ and $N=2n+1$. Using {numref}`Function {number} <function-triginterp>`, add a plot of the trigonometric interpolant to $f$ to the graph from part (a).
 
-6. ⌨ Let $f(x)=x$. Plot $f$ and its trigonometric interpolants of length $N=2n+1$ for $n=6,20,50$ over $-1\le x \le 1$. What feature of the function is causing large errors?
+**(c)** Repeat part (b) for $n=80$ and $n=180$.
+
+**(d)** You should see that the interpolants overshoot and oscillate near the step. The widths of the overshoots decrease with $n$ but the heights approach a limiting value. By zooming in to the graph, find the height of the overshoot to two decimal places.
+``````
+
+``````{exercise}
+⌨ Let $f(x)=x$. Plot $f$ and its trigonometric interpolants of length $N=2n+1$ for $n=6,20,50$ over $-1\le x \le 1$. What feature of the function is causing large errors?
+``````

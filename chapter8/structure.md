@@ -138,142 +138,153 @@ For very large matrices, it's unlikely that you will want to find all of its eig
 `````
 ::::
 
-
 ## Exercises
 
-1. ⌨ Use `spdiagm` to build the $50\times 50$ matrices
-  
-    :::{math}
-    \mathbf{A} =
-    \begin{bmatrix}
-    -2 & 1 & & &  \\
-    1 & -2 & 1 & &  \\
-    & \ddots & \ddots & \ddots & \\
-    & & 1 & -2 & 1 \\
-    & & & 1 & -2
-    \end{bmatrix}, \qquad
-    \mathbf{B} =
-    \begin{bmatrix}
-    -2 & 1 & & & 1 \\
-    1 & -2 & 1 & &  \\
-    & \ddots & \ddots & \ddots & \\
-    & & 1 & -2 & 1 \\
-    1 & & & 1 & -2
-    \end{bmatrix}.
-    :::
+``````{exercise}
+⌨ Use `spdiagm` to build the $50\times 50$ matrices
 
-    For each matrix, use `spy` and an inspection of the $5\times 5$ submatrices in the corners to verify the correctness of your matrices.
+:::{math}
+\mathbf{A} =
+\begin{bmatrix}
+-2 & 1 & & &  \\
+1 & -2 & 1 & &  \\
+& \ddots & \ddots & \ddots & \\
+& & 1 & -2 & 1 \\
+& & & 1 & -2
+\end{bmatrix}, \qquad
+\mathbf{B} =
+\begin{bmatrix}
+-2 & 1 & & & 1 \\
+1 & -2 & 1 & &  \\
+& \ddots & \ddots & \ddots & \\
+& & 1 & -2 & 1 \\
+1 & & & 1 & -2
+\end{bmatrix}.
+:::
 
-2. ⌨ This problem requires the matrix used in {numref}`Demo %s <demo-structure-fill>`.
-    `````{tab-set} 
-    ````{tab-item} Julia
-    :sync: julia
-    Download [smallworld.mat](smallworld.mat) by clicking the link and saving (you may need to fix the file name).
-    ``` julia
-    using MAT
-    A = matread("smallworld.mat")["A"]
-    ```
-    ```` 
+For each matrix, use `spy` and an inspection of the $5\times 5$ submatrices in the corners to verify the correctness of your matrices.
+``````
 
-    ````{tab-item} MATLAB
-    :sync: matlab
-    Download [smallworld.mat](smallworld.mat) by clicking the link and saving (you may need to fix the file name).
-    ``` matlab
-    load smallworld
-    ```
-    ```` 
+``````{exercise}
+⌨ This problem requires the matrix used in {numref}`Demo %s <demo-structure-fill>`.
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+Download [smallworld.mat](smallworld.mat) by clicking the link and saving (you may need to fix the file name).
+``` julia
+using MAT
+A = matread("smallworld.mat")["A"]
+```
+```` 
 
-    ````{tab-item} Python
-    :sync: python
-    Download [smallworld.mtx](smallworld.mtx) by clicking the link and saving (you may need to fix the file name).
-    ``` python
-    import scipy.io as spio
-    A = spio.mmread("smallworld.mtx")
-    ```
-    ```` 
-    `````
+````{tab-item} MATLAB
+:sync: matlab
+Download [smallworld.mat](smallworld.mat) by clicking the link and saving (you may need to fix the file name).
+``` matlab
+load smallworld
+```
+```` 
 
-    **(a)** Find the density of $\mathbf{A}$ (number of nonzeros divided by total number of elements), $\mathbf{A}^2$, $\mathbf{A}^4$, and $\mathbf{A}^8$. (You should find that it increases with the power of $\mathbf{A}$.)
+````{tab-item} Python
+:sync: python
+Download [smallworld.mtx](smallworld.mtx) by clicking the link and saving (you may need to fix the file name).
+``` python
+import scipy.io as spio
+A = spio.mmread("smallworld.mtx")
+```
+```` 
+`````
 
-    **(b)** The LU factors tend to at least partially retain sparsity. Find the density of the $\mathbf{L}$ and $\mathbf{U}$ factors of $\mathbf{A}$ using `lufact` (@function-lufact). (If you get an error, convert the matrix to dense form first.)
+**(a)** Find the density of $\mathbf{A}$ (number of nonzeros divided by total number of elements), $\mathbf{A}^2$, $\mathbf{A}^4$, and $\mathbf{A}^8$. (You should find that it increases with the power of $\mathbf{A}$.)
 
-    **(c)** Repeat part (b) for the QR factorization using `qrfact` (@function-qrfact). (If you get an error, convert the matrix to dense form first.)
+**(b)** The LU factors tend to at least partially retain sparsity. Find the density of the $\mathbf{L}$ and $\mathbf{U}$ factors of $\mathbf{A}$ using `lufact` (@function-lufact). (If you get an error, convert the matrix to dense form first.)
 
-    (problem-structure-roswell)=
-3. ⌨ One use of adjacency matrices is to analyze the links between members of a collection. Obtain the adjacency matrix $\mathbf{A}$ from {numref}`Demo %s <demo-structure-sparse>` via the following:
-    
-   `````{tab-set} 
-    ````{tab-item} Julia
-    :sync: julia
-    Download [roswell.mat](roswell.mat) by clicking the link and saving (you may need to fix the file name).
-    ``` julia
-    using MAT
-    A = matread("roswell.mat")["A"]
-    ```
-    ```` 
+**(c)** Repeat part (b) for the QR factorization using `qrfact` (@function-qrfact). (If you get an error, convert the matrix to dense form first.)
+``````
 
-    ````{tab-item} MATLAB
-    :sync: matlab
-    Download [roswell.mat](roswell.mat) by clicking the link and saving (you may need to fix the file name).
-    ``` matlab
-    load roswell
-    ```
-    ```` 
+``````{exercise}
+:label: problem-structure-roswell
+⌨ One use of adjacency matrices is to analyze the links between members of a collection. Obtain the adjacency matrix $\mathbf{A}$ from {numref}`Demo %s <demo-structure-sparse>` via the following:
 
-    ````{tab-item} Python
-    :sync: python
-    Download [roswell.mtx](roswell.mtx) by clicking the link and saving (you may need to fix the file name).
-    ``` python
-    import scipy.io as spio
-    A = spio.mmread("roswell.mtx")
-    ```
-    ```` 
-    `````
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+Download [roswell.mat](roswell.mat) by clicking the link and saving (you may need to fix the file name).
+``` julia
+using MAT
+A = matread("roswell.mat")["A"]
+```
+```` 
 
-    The matrix catalogs the links between web sites related to the town of Roswell, NM, with $A_{ij}=1$ if and only if site $i$ links to site $j$.
-  
-    **(a)** Verify numerically that the matrix does not include any links from a site to itself.
+````{tab-item} MATLAB
+:sync: matlab
+Download [roswell.mat](roswell.mat) by clicking the link and saving (you may need to fix the file name).
+``` matlab
+load roswell
+```
+```` 
 
-    **(b)** Verify numerically that $\mathbf{A}$ is not symmetric. (Thus, its graph is a directed one.)
+````{tab-item} Python
+:sync: python
+Download [roswell.mtx](roswell.mtx) by clicking the link and saving (you may need to fix the file name).
+``` python
+import scipy.io as spio
+A = spio.mmread("roswell.mtx")
+```
+```` 
+`````
 
-    **(c)** How many sites in the group are not pointed to by any other sites in the group?
+The matrix catalogs the links between web sites related to the town of Roswell, NM, with $A_{ij}=1$ if and only if site $i$ links to site $j$.
 
-    **(d)** Which site points to the most other sites?
+**(a)** Verify numerically that the matrix does not include any links from a site to itself.
 
-    **(e)** Which site is pointed to the most by the other sites? This is a crude way to establish the most important site.
+**(b)** Verify numerically that $\mathbf{A}$ is not symmetric. (Thus, its graph is a directed one.)
 
-    **(f)** There are $2790^2$ possible ways to connect ordered pairs of sites. What fraction of these pairs is connected by a walk of links that is no greater than three in length?
+**(c)** How many sites in the group are not pointed to by any other sites in the group?
 
- 
-    ```{index} ! graph Laplacian matrix, ! degree matrix
-    ```
+**(d)** Which site points to the most other sites?
 
-4. ⌨ The *graph Laplacian matrix* is $\mathbf{L}=\mathbf{D}-\mathbf{A}$, where $\mathbf{A}$ is the adjacency matrix and $\mathbf{D}$ is the *degree matrix*, a diagonal matrix with diagonal entries $d_{jj}=\sum_{i=1}^n a_{ij}$. 
-   
-    Follow the directions in Exercise 3 to obtain an adjacency matrix $\mathbf{A}$. Then find the five eigenvalues of $\mathbf{L}$ having largest magnitude.
+**(e)** Which site is pointed to the most by the other sites? This is a crude way to establish the most important site.
 
-(problem-structure-actorsmat)=
-5. ⌨ See [Exercise 7.1.5](#problem-insight-actors) for instructions on loading a matrix $\mathbf{A}$ that contains information about the appearances of 392,400 actors in 127,823 movies, as given by the Internet Movie Database. Specifically, $A_{ij}=1$ if actor $j$ appeared in movie $i$, and all other elements are zero.
+**(f)** There are $2790^2$ possible ways to connect ordered pairs of sites. What fraction of these pairs is connected by a walk of links that is no greater than three in length?
 
-    **(a)** What is the maximum number of actors appearing in any one movie?
 
-    **(b)** How many actors appeared in exactly three movies?
+```{index} ! graph Laplacian matrix, ! degree matrix
+```
+``````
 
-    **(c)** Define $\mathbf{C}=\mathbf{A}^T\mathbf{A}$. How many nonzero entries does $\mathbf{C}$ have? What is the interpretation of $C_{ij}$?
+``````{exercise}
+⌨ The *graph Laplacian matrix* is $\mathbf{L}=\mathbf{D}-\mathbf{A}$, where $\mathbf{A}$ is the adjacency matrix and $\mathbf{D}$ is the *degree matrix*, a diagonal matrix with diagonal entries $d_{jj}=\sum_{i=1}^n a_{ij}$. 
 
-    ```{index} ! Helmholtz equation
-    ```
-    
-(problem-helmhotzmatrix)=
-6. ⌨  A matrix that arises from the *Helmholtz equation* for wave propagation can be specified using 
+Follow the directions in Exercise 3 to obtain an adjacency matrix $\mathbf{A}$. Then find the five eigenvalues of $\mathbf{L}$ having largest magnitude.
+``````
 
-    ```julia
-    A = FNC.poisson(n) - k^2*I;
-    ```
-    where $k$ is a real parameter. Let $n=50$. 
-    
-    **(a)** Let $k=1$. What is the size of $\mathbf{A}$? What is its density?
+``````{exercise}
+:label: problem-structure-actorsmat
+⌨ See @problem-insight-actors for instructions on loading a matrix $\mathbf{A}$ that contains information about the appearances of 392,400 actors in 127,823 movies, as given by the Internet Movie Database. Specifically, $A_{ij}=1$ if actor $j$ appeared in movie $i$, and all other elements are zero.
 
-    **(b)** Still with $k=1$, use `eigs` to find the four largest and four smallest (in magnitude) eigenvalues of $\mathbf{A}$. (See {numref}`Demo %s <demo-structure-linalg>` for examples.)
+**(a)** What is the maximum number of actors appearing in any one movie?
 
-    **(c)** The eigenvalues are all real. Find a value of $k$ so that $\mathbf{A}$ has exactly three negative eigenvalues.
+**(b)** How many actors appeared in exactly three movies?
+
+**(c)** Define $\mathbf{C}=\mathbf{A}^T\mathbf{A}$. How many nonzero entries does $\mathbf{C}$ have? What is the interpretation of $C_{ij}$?
+``````
+
+```{index} ! Helmholtz equation
+```
+
+``````{exercise}
+:label: problem-helmhotzmatrix
+⌨  A matrix that arises from the *Helmholtz equation* for wave propagation can be specified using 
+
+```julia
+A = FNC.poisson(n) - k^2*I;
+```
+where $k$ is a real parameter. Let $n=50$. 
+
+**(a)** Let $k=1$. What is the size of $\mathbf{A}$? What is its density?
+
+**(b)** Still with $k=1$, use `eigs` to find the four largest and four smallest (in magnitude) eigenvalues of $\mathbf{A}$. (See {numref}`Demo %s <demo-structure-linalg>` for examples.)
+
+**(c)** The eigenvalues are all real. Find a value of $k$ so that $\mathbf{A}$ has exactly three negative eigenvalues.
+``````

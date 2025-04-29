@@ -137,62 +137,75 @@ Characterizing the conditioning of a TPBVP theoretically is difficult. There are
 
 ```{index} Bessel equation, Carrier equation
 ```
-1. ✍ In each case, explain whether the TPBVP is linear or nonlinear.  
 
-    **(a)** $x^2 u'' +xu' + (x^2 - 1) u = 0, \quad u(0) =1,\; u(4) =0 \qquad$ *(Bessel equation)*
+``````{exercise}
+✍ In each case, explain whether the TPBVP is linear or nonlinear.  
 
-    **(b)** $u'' - u u' = 1, \quad u(0) = u'(1) = 1$
+**(a)** $x^2 u'' +xu' + (x^2 - 1) u = 0, \quad u(0) =1,\; u(4) =0 \qquad$ *(Bessel equation)*
 
-    **(c)** $u'' + u = 1, \quad u(0) = u(1) u'(1) = 1$
+**(b)** $u'' - u u' = 1, \quad u(0) = u'(1) = 1$
 
-    **(d)** $\epsilon u'' +2(1-x^2) u +u^2  = 1, \quad u(-1) = u(1) = 0 \qquad$ *(Carrier equation {cite}`carrierSingularPerturbation1970`)*
+**(c)** $u'' + u = 1, \quad u(0) = u(1) u'(1) = 1$
 
-	**(e)** $u u'' = 3(u')^2, \quad u(-1) = 1, \; u(2) = \frac{1}{2}$
+**(d)** $\epsilon u'' +2(1-x^2) u +u^2  = 1, \quad u(-1) = u(1) = 0 \qquad$ *(Carrier equation {cite}`carrierSingularPerturbation1970`)*
 
-    ```{index} Hermite equation, Laguerre equation, Chebyshev equation, Legendre equation
-    ```
+**(e)** $u u'' = 3(u')^2, \quad u(-1) = 1, \; u(2) = \frac{1}{2}$
+``````
 
-(problem-tpbvp-verify)=
-2. ✍ For each BVP, verify that the given solution is valid, i.e., check that the differential equation and the boundary conditions are satisfied.
+```{index} Hermite equation, Laguerre equation, Chebyshev equation, Legendre equation
+```
 
-    **(a)** $u'' - 2xu' + 8 u = 0, \quad u(0) = 1, \; u(1) = -\frac{5}{3}\qquad$ *(Hermite equation)* 
 
-    Solution: $u(x) = \frac{4}{3}x^4-4x^2+1$
+``````{exercise}
+:label: problem-tpbvp-verify
+✍ For each BVP, verify that the given solution is valid, i.e., check that the differential equation and the boundary conditions are satisfied.
 
-    **(b)** $xu'' + (1-x) u' + 3 u = 0, \quad u(0) =1, \; u'(1) =-\frac{1}{2} \qquad$ *(Laguerre equation)*
+**(a)** $u'' - 2xu' + 8 u = 0, \quad u(0) = 1, \; u(1) = -\frac{5}{3}\qquad$ *(Hermite equation)* 
 
-    Solution: $u(x) = \frac{1}{6}(6-18x+9x^2-x^3)$
+Solution: $u(x) = \frac{4}{3}x^4-4x^2+1$
 
-    **(c)** $(1-x^2)u'' - xu' + 25u = 0, \quad u'(0) = 5, \; u\left(\frac{1}{2}\right) = \frac{1}{2} \qquad$ *(Chebyshev equation)*
+**(b)** $xu'' + (1-x) u' + 3 u = 0, \quad u(0) =1, \; u'(1) =-\frac{1}{2} \qquad$ *(Laguerre equation)*
 
-    Solution: $u(x) = T_5(x) = 16x^5-20x^3+5x$ 
+Solution: $u(x) = \frac{1}{6}(6-18x+9x^2-x^3)$
 
-    **(d)** $(1-x^2) u'' -2xu' + 12 u = 0, \quad u(0)+2u'(0) = -3, \; u(1) = 1 \qquad$ *(Legendre equation)*
+**(c)** $(1-x^2)u'' - xu' + 25u = 0, \quad u'(0) = 5, \; u\left(\frac{1}{2}\right) = \frac{1}{2} \qquad$ *(Chebyshev equation)*
 
-    Solution: $u(x) = P_3(x) = \frac{1}{2}(5x^3-3x)$ 
+Solution: $u(x) = T_5(x) = 16x^5-20x^3+5x$ 
 
-    **(e)** $u u'' = 3(u')^2, \quad u(-1) = 1, \; u(2) = \frac{1}{2}$ 
+**(d)** $(1-x^2) u'' -2xu' + 12 u = 0, \quad u(0)+2u'(0) = -3, \; u(1) = 1 \qquad$ *(Legendre equation)*
 
-    Solution: $u(x) =  ( x+2 )^{-1/2}$
+Solution: $u(x) = P_3(x) = \frac{1}{2}(5x^3-3x)$ 
 
-3. ⌨ For each TPBVP in Exercise 2, use `solve`/`bvp4c`/`solve_bvp` to find the solution, following the method in @demo-tpbvp-mems. Plot the solution and separately plot the error as a function of $x$. (Important: In some cases, you will need to truncate the domain slightly to avoid division by zero.)
+**(e)** $u u'' = 3(u')^2, \quad u(-1) = 1, \; u(2) = \frac{1}{2}$ 
 
-(problem-tpbvp-pendulum)=
-4. ⌨ Consider the pendulum from {numref}`Example {number} <example-tpbvp-pendulum>` with $g=L=1$. Suppose we want to release the pendulum from rest such that $\theta(5)=\pi/2$. Find one solution that passes through $\theta=0$ and another solution that does not. Plot $\theta(t)$ for both cases together. (Hint: Vary the initial estimate for the solution.)
+Solution: $u(x) =  ( x+2 )^{-1/2}$
+``````
 
-    ```{index} Allen–Cahn equation
-    ```
-(problem-tpbvp-allencahn)=
-5. ⌨  The *stationary Allen–Cahn equation* is a model of phase changes, such as the change from liquid to solid. In one spatial dimension it can be written as
+``````{exercise}
+⌨ For each TPBVP in Exercise 2, use `solve`/`bvp4c`/`solve_bvp` to find the solution, following the method in @demo-tpbvp-mems. Plot the solution and separately plot the error as a function of $x$. (Important: In some cases, you will need to truncate the domain slightly to avoid division by zero.)
+``````
 
-    $$
-      \epsilon u'' = u^3-u, \qquad 0 \le x \le 1, \qquad u(0)=-1, \quad u(1)=1.
-    $$
+``````{exercise}
+:label: problem-tpbvp-pendulum
+⌨ Consider the pendulum from {numref}`Example {number} <example-tpbvp-pendulum>` with $g=L=1$. Suppose we want to release the pendulum from rest such that $\theta(5)=\pi/2$. Find one solution that passes through $\theta=0$ and another solution that does not. Plot $\theta(t)$ for both cases together. (Hint: Vary the initial estimate for the solution.)
+``````
 
-    As $\epsilon\rightarrow 0$, the solution tends toward a step function transition between $-1$ and $1$. By symmetry, $u'(x)=-u'(1-x)$.
-  
-    **(a)** Use {numref}`Function {number} <function-shoot>` with initial solution estimates $(u=-1,u'=0)$ to solve the equation for $\epsilon=0.2$. Plot the solution.
+```{index} Allen–Cahn equation
+```
 
-    **(b)** Repeat part (a) for $\epsilon=0.02$.
-    
-    **(c)** Repeat part (a) for $\epsilon=0.002$. (This is a difficult problem for the default method.) Try a few different initializations for $u$, and plot all the results. Do any seem to be valid solutions of the BVP?
+``````{exercise}
+:label: problem-tpbvp-allencahn
+⌨  The *stationary Allen–Cahn equation* is a model of phase changes, such as the change from liquid to solid. In one spatial dimension it can be written as
+
+$$
+\epsilon u'' = u^3-u, \qquad 0 \le x \le 1, \qquad u(0)=-1, \quad u(1)=1.
+$$
+
+As $\epsilon\rightarrow 0$, the solution tends toward a step function transition between $-1$ and $1$. By symmetry, $u'(x)=-u'(1-x)$.
+
+**(a)** Use {numref}`Function {number} <function-shoot>` with initial solution estimates $(u=-1,u'=0)$ to solve the equation for $\epsilon=0.2$. Plot the solution.
+
+**(b)** Repeat part (a) for $\epsilon=0.02$.
+
+**(c)** Repeat part (a) for $\epsilon=0.002$. (This is a difficult problem for the default method.) Try a few different initializations for $u$, and plot all the results. Do any seem to be valid solutions of the BVP?
+``````

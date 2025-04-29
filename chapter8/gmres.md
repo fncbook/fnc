@@ -175,61 +175,73 @@ There are other ways to avoid the growth in computational effort as the GMRES/Ar
 
 ## Exercises
 
-1. ✍ (See also [Exercise 8.4.1](#problem-krylovpermute).) Consider the linear system with
-  
-    $$
-    \mathbf{A}=\displaystyle 
-    \begin{bmatrix}
-      0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0
-    \end{bmatrix}, \qquad \mathbf{b}=\mathbf{e}_1.
-    $$
+``````{exercise}
+✍ (See also @problem-krylovpermute.) Consider the linear system with
 
-    **(a)** Find the exact solution by inspection.
+$$
+\mathbf{A}=\displaystyle 
+\begin{bmatrix}
+0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0
+\end{bmatrix}, \qquad \mathbf{b}=\mathbf{e}_1.
+$$
 
-    **(b)** Find the GMRES approximate solutions $\mathbf{x}_m$ for $m=1,2,3,4$. (You should not try to do the Arnoldi iteration by hand. Instead, apply the result in @gmresdef to get a tractable least-squares problem.)
+**(a)** Find the exact solution by inspection.
 
-2. ✍ (Continuation of [Exercise 8.4.3](#problem-subspace-matrixpolykrylov).) Show that if $\mathbf{x}_m\in\mathcal{K}_m$, then the residual $\mathbf{b}-\mathbf{A}\mathbf{x}_m$ is equal to $q(\mathbf{A})\mathbf{b}$, where $q$ is a polynomial of degree at most $m$ and $q(0)=1$. (This fact is a key one for many convergence results.) 
+**(b)** Find the GMRES approximate solutions $\mathbf{x}_m$ for $m=1,2,3,4$. (You should not try to do the Arnoldi iteration by hand. Instead, apply the result in @gmresdef to get a tractable least-squares problem.)
+``````
 
-3. ✍ Explain why GMRES, in exact arithmetic, converges to the true solution in $n$ iterations for an $n\times n$ matrix if $\operatorname{rank}(\mathbf{K}_n)=n$. (Hint: Consider how the algorithm is defined from first principles.) 
+``````{exercise}
+✍ (Continuation of [Exercise 8.4.3](#problem-subspace-matrixpolykrylov).) Show that if $\mathbf{x}_m\in\mathcal{K}_m$, then the residual $\mathbf{b}-\mathbf{A}\mathbf{x}_m$ is equal to $q(\mathbf{A})\mathbf{b}$, where $q$ is a polynomial of degree at most $m$ and $q(0)=1$. (This fact is a key one for many convergence results.) 
+``````
 
-4. ⌨ Let $\mathbf{A}$ be the $n\times n$ tridiagonal matrix
-  
-    $$
-    \begin{bmatrix}
-      -4 & 1      &        &        &   \\
-      1  & -4     & 1      &        &   \\
-         & \ddots & \ddots & \ddots &   \\
-         &        & 1      & -4     & 1 \\
-         &        &        & 1      & -4 
-    \end{bmatrix}
-    $$
-  
-    and let the $n$-vector $\mathbf{b}$ have elements $b_i=i/n$. For $n=8,16,32,64$, run {numref}`Function {number} <function-gmres>` for $m=n/2$ iterations. On one semi-log graph, plot $\|\mathbf{r}_k\|/\|\mathbf{b}\|$ for all the cases. How does the convergence rate of GMRES seem to depend on $n$?  
+``````{exercise}
+✍ Explain why GMRES, in exact arithmetic, converges to the true solution in $n$ iterations for an $n\times n$ matrix if $\operatorname{rank}(\mathbf{K}_n)=n$. (Hint: Consider how the algorithm is defined from first principles.) 
+``````
 
-    % must stay as #5
-(problem-gmres-surround)=
-5. ⌨  In this exercise you will see the strong effect the eigenvalues of the matrix may have on GMRES convergence. Let 
-   
-    $$
-    \mathbf{B}=
-    \begin{bmatrix}
-      1 & & & \\
-      & 2 & & \\
-      & & \ddots & \\
-      & & & 100
-    \end{bmatrix},
-    $$ 
-    
-    let $\mathbf{I}$ be a $100\times 100$ identity, and let $\mathbf{Z}$ be a $100\times 100$ matrix of zeros. Also let $\mathbf{b}$ be a $200\times 1$ vector of ones. You will use GMRES with restarts, as in {numref}`Demo {number} <demo-gmres-restart>` (i.e., not the book's version of `gmres`).
+``````{exercise}
+⌨ Let $\mathbf{A}$ be the $n\times n$ tridiagonal matrix
 
-    **(a)** Let $\mathbf{A} = \begin{bmatrix} \mathbf{B} & \mathbf{I} \\ \mathbf{Z} & \mathbf{B} \end{bmatrix}.$ What are its eigenvalues (no computer required here)? Apply `gmres` with tolerance $10^{-10}$ for 100 iterations without restarts, and plot the residual convergence. 
-    
-    **(b)** Repeat part (a) with restarts every 20 iterations. 
-    
-    **(c)** Now let $\mathbf{A} = \begin{bmatrix} \mathbf{B} & \mathbf{I} \\ \mathbf{Z} & -\mathbf{B} \end{bmatrix}.$ What are its eigenvalues? Repeat part (a). Which matrix is more difficult for GMRES? (Note: Even though this matrix is triangular, GMRES has no way of exploiting that fact.)
+$$
+\begin{bmatrix}
+-4 & 1      &        &        &   \\
+1  & -4     & 1      &        &   \\
+& \ddots & \ddots & \ddots &   \\
+&        & 1      & -4     & 1 \\
+&        &        & 1      & -4 
+\end{bmatrix}
+$$
 
-6. ⌨ (Continuation of [Exercise 8.3.5](#problem-inviter-lumpmembraneinveig).) We again consider the $n^2\times n^2$ sparse matrix defined by `FNC.poisson(n)`. The solution of $\mathbf{A}\mathbf{x}=\mathbf{b}$ may be interpreted as the deflection of a lumped membrane in response to a load represented by $\mathbf{b}$.
-    
-    **(a)** For $n=10,15,20,25$, let $\mathbf{b}$ be the vector of $n^2$ ones and apply {numref}`Function {number} <function-gmres>` for 50 iterations. On one semi-log graph, plot the four convergence curves $\|\mathbf{r}_m\|/\|\mathbf{b}\|$.
+and let the $n$-vector $\mathbf{b}$ have elements $b_i=i/n$. For $n=8,16,32,64$, run {numref}`Function {number} <function-gmres>` for $m=n/2$ iterations. On one semi-log graph, plot $\|\mathbf{r}_k\|/\|\mathbf{b}\|$ for all the cases. How does the convergence rate of GMRES seem to depend on $n$?  
+``````
 
-    **(b)** For the case $n=25$ make a surface plot of `x` after reshaping it to a 25×25 matrix. It should look physically plausible (though upside-down for a weighted membrane).
+% must stay as #5
+``````{exercise}
+:label: problem-gmres-surround
+⌨  In this exercise you will see the strong effect the eigenvalues of the matrix may have on GMRES convergence. Let 
+
+$$
+\mathbf{B}=
+\begin{bmatrix}
+1 & & & \\
+& 2 & & \\
+& & \ddots & \\
+& & & 100
+\end{bmatrix},
+$$ 
+
+let $\mathbf{I}$ be a $100\times 100$ identity, and let $\mathbf{Z}$ be a $100\times 100$ matrix of zeros. Also let $\mathbf{b}$ be a $200\times 1$ vector of ones. You will use GMRES with restarts, as in {numref}`Demo {number} <demo-gmres-restart>` (i.e., not the book's version of `gmres`).
+
+**(a)** Let $\mathbf{A} = \begin{bmatrix} \mathbf{B} & \mathbf{I} \\ \mathbf{Z} & \mathbf{B} \end{bmatrix}.$ What are its eigenvalues (no computer required here)? Apply `gmres` with tolerance $10^{-10}$ for 100 iterations without restarts, and plot the residual convergence. 
+
+**(b)** Repeat part (a) with restarts every 20 iterations. 
+
+**(c)** Now let $\mathbf{A} = \begin{bmatrix} \mathbf{B} & \mathbf{I} \\ \mathbf{Z} & -\mathbf{B} \end{bmatrix}.$ What are its eigenvalues? Repeat part (a). Which matrix is more difficult for GMRES? (Note: Even though this matrix is triangular, GMRES has no way of exploiting that fact.)
+``````
+
+``````{exercise}
+⌨ (Continuation of [Exercise 8.3.5](#problem-inviter-lumpmembraneinveig).) We again consider the $n^2\times n^2$ sparse matrix defined by `FNC.poisson(n)`. The solution of $\mathbf{A}\mathbf{x}=\mathbf{b}$ may be interpreted as the deflection of a lumped membrane in response to a load represented by $\mathbf{b}$.
+
+**(a)** For $n=10,15,20,25$, let $\mathbf{b}$ be the vector of $n^2$ ones and apply {numref}`Function {number} <function-gmres>` for 50 iterations. On one semi-log graph, plot the four convergence curves $\|\mathbf{r}_m\|/\|\mathbf{b}\|$.
+
+**(b)** For the case $n=25$ make a surface plot of `x` after reshaping it to a 25×25 matrix. It should look physically plausible (though upside-down for a weighted membrane).
+``````

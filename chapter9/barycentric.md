@@ -169,36 +169,49 @@ You might suspect that as the evaluation point $x$ approaches a node $t_k$, subt
 
 ## Exercises
 
-1. ✍ **(a)** Find the barycentric weights for the nodes $t_0=0$, $t_1=1$, $t_2=3$.
+``````{exercise}
+✍ **(a)** Find the barycentric weights for the nodes $t_0=0$, $t_1=1$, $t_2=3$.
 
-    **(b)** Compute the interpolant at $x=2$ for the nodes in part (a) and the data $y_0=-2$, $y_1=2$, $y_2=1$.
+**(b)** Compute the interpolant at $x=2$ for the nodes in part (a) and the data $y_0=-2$, $y_1=2$, $y_2=1$.
+``````
 
-2. ✍ For each case of [Exercise 9.1.1](#problem-polynomial-lagrange), write out the barycentric form of the interpolating polynomial.
+``````{exercise}
+✍ For each case of @problem-polynomial-lagrange, write out the barycentric form of the interpolating polynomial.
+``````
 
-(problem-barycentric-limit)=
-3. ✍  Show using L'Hôpital's rule on {eq}`bary2` that $p(t_i)=y_i$ for all $i=0,\ldots,n$.
+``````{exercise}
+:label: problem-barycentric-limit
+✍  Show using L'Hôpital's rule on {eq}`bary2` that $p(t_i)=y_i$ for all $i=0,\ldots,n$.
+``````
 
-4. ⌨ In each case, use {numref}`Function {number}<function-polyinterp>` to interpolate the given function using $n+1$ evenly spaced nodes in the given interval. In a 3-by-1 grid of plots, show each interpolant together with the exact function and the data points (i.e., values at the nodes).
+``````{exercise}
+⌨ In each case, use {numref}`Function {number}<function-polyinterp>` to interpolate the given function using $n+1$ evenly spaced nodes in the given interval. In a 3-by-1 grid of plots, show each interpolant together with the exact function and the data points (i.e., values at the nodes).
 
-    **(a)** $f(x) = \ln (x), \quad n = 2,3,4, \quad x\in [1,10]$
+**(a)** $f(x) = \ln (x), \quad n = 2,3,4, \quad x\in [1,10]$
 
-    **(b)** $f(x) = \tanh (x), \quad n = 2,3,4, \quad x \in [-3,2]$
+**(b)** $f(x) = \tanh (x), \quad n = 2,3,4, \quad x \in [-3,2]$
 
-    **(c)** $f(x) = \cosh (x), \quad n = 2,3,4, \quad x \in [-1,3]$
+**(c)** $f(x) = \cosh (x), \quad n = 2,3,4, \quad x \in [-1,3]$
 
-    **(d)** $f(x) = |x|, \quad n = 3,5,7, \quad x \in [-2,1]$
+**(d)** $f(x) = |x|, \quad n = 3,5,7, \quad x \in [-2,1]$
+``````
 
-5. ⌨ Using code from {numref}`Function {number}<function-polyinterp>`, compute the barycentric weights numerically using $n+1$ equally spaced nodes in $[-1,1]$ for $n=30$, $n=60$, and $n=90$. On a single graph, plot $|w_i|$ as a function of $t_i$ on a log-linear scale. (The resulting graphs are an indication of the trouble with equally spaced nodes that is explored in {numref}`section-globalapprox-stability`.)
+``````{exercise}
+⌨ Using code from {numref}`Function {number}<function-polyinterp>`, compute the barycentric weights numerically using $n+1$ equally spaced nodes in $[-1,1]$ for $n=30$, $n=60$, and $n=90$. On a single graph, plot $|w_i|$ as a function of $t_i$ on a log-linear scale. (The resulting graphs are an indication of the trouble with equally spaced nodes that is explored in {numref}`section-globalapprox-stability`.)
+``````
 
-6. ✍ Derive this fact stated implicitly in {eq}`baryweight`:
-    
-    $$
-    \Phi'(t_k) = \prod_{\substack{j=0\\j\neq k}}^n (t_k - t_j).
-    $$
+``````{exercise}
+✍ Derive this fact stated implicitly in {eq}`baryweight`:
 
-7. ✍ Use {eq}`lagrangealt` to show that if $j\neq k$, 
-    
-    $$
-    \ell_k'(t_j) = \frac{w_k}{w_j(t_j-t_k)}.
-    $$
+$$
+\Phi'(t_k) = \prod_{\substack{j=0\\j\neq k}}^n (t_k - t_j).
+$$
+``````
 
+``````{exercise}
+✍ Use {eq}`lagrangealt` to show that if $j\neq k$, 
+
+$$
+\ell_k'(t_j) = \frac{w_k}{w_j(t_j-t_k)}.
+$$
+``````

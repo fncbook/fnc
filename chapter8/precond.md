@@ -100,41 +100,49 @@ In practice, good preconditioning is often as important, if not more important, 
 
 ## Exercises
 
-(problem-precond-spd)=
-1. ✍ Suppose $\mathbf{M}=\mathbf{R}^T\mathbf{R}$. Show that the eigenvalues of $\mathbf{R}^{-T}\mathbf{A}\mathbf{R}^{-1}$ are the same as the eigenvalues of $\mathbf{M}^{-1}\mathbf{A}$. (This observation underlies preconditioning variants for SPD matrices.)
+``````{exercise}
+:label: problem-precond-spd
+✍ Suppose $\mathbf{M}=\mathbf{R}^T\mathbf{R}$. Show that the eigenvalues of $\mathbf{R}^{-T}\mathbf{A}\mathbf{R}^{-1}$ are the same as the eigenvalues of $\mathbf{M}^{-1}\mathbf{A}$. (This observation underlies preconditioning variants for SPD matrices.)
+``````
 
-2. ⌨ The object returned by `ilu` stores the factors in a way that optimizes sparse triangular substitution. You can recover the factors themselves via
-    
-    ```julia
-    iLU = ilu(A,τ=0.1)   # for example
-    L, U = I+iLU.L, iLU.U'
-    ```
+``````{exercise}
+⌨ The object returned by `ilu` stores the factors in a way that optimizes sparse triangular substitution. You can recover the factors themselves via
 
-    In this problem, use `A = 1.5I + sprand(800,800,0.005)`.
+```julia
+iLU = ilu(A,τ=0.1)   # for example
+L, U = I+iLU.L, iLU.U'
+```
 
-    **(a)** Using $\tau=0.3$ for the factorization, plot the eigenvalues of $\mathbf{A}$ and of $\mathbf{M}^{-1}\mathbf{A}$ in the complex plane on side-by-side subplots. Do they support the notion that $\mathbf{M}^{-1}\mathbf{A}$ is "more like" an identity matrix than $\mathbf{A}$ is? (Hint: the matrices are small enough to convert to standard dense form for the use of `eigvals`.)
+In this problem, use `A = 1.5I + sprand(800,800,0.005)`.
 
-    **(b)** Repeat part (a) for $\tau=0.03$. Is $\mathbf{M}$ more accurate than in part (a), or less?
+**(a)** Using $\tau=0.3$ for the factorization, plot the eigenvalues of $\mathbf{A}$ and of $\mathbf{M}^{-1}\mathbf{A}$ in the complex plane on side-by-side subplots. Do they support the notion that $\mathbf{M}^{-1}\mathbf{A}$ is "more like" an identity matrix than $\mathbf{A}$ is? (Hint: the matrices are small enough to convert to standard dense form for the use of `eigvals`.)
 
-3. ⌨ (Continuation of [Exercise 8.5.5](#problem-gmres-surround).) Let $\mathbf{B}$ be `diagm(1:100)`,  let $\mathbf{I}$ be `I(100)`, and let $\mathbf{Z}$ be a $100\times 100$ matrix of zeros. Define 
-  
-    $$
-    \mathbf{A} = \begin{bmatrix}
-      \mathbf{B} & \mathbf{I} \\ \mathbf{Z} & -\mathbf{B}
-    \end{bmatrix}
-    $$ 
-  
-    and let $\mathbf{b}$ be a 200-vector of ones. The matrix $\mathbf{A}$ is difficult for GMRES. 
-  
-    **(a)** Design a diagonal preconditioner $\mathbf{M}$, with all diagonal elements equal to $1$ or $-1$, such that $\mathbf{M}^{-1}\mathbf{A}$ has all positive eigenvalues. Apply `gmres` without restarts using this preconditioner and a tolerance of $10^{-10}$ for 100 iterations. Plot the convergence curve. 
-  
-    **(b)** Now design another diagonal preconditioner such that all the eigenvalues of $\mathbf{M}^{-1}\mathbf{A}$ are $1$, and apply preconditioned `gmres` again. How many iterations are apparently needed for convergence? 
+**(b)** Repeat part (a) for $\tau=0.03$. Is $\mathbf{M}$ more accurate than in part (a), or less?
+``````
 
-4. ⌨ Let `A = matrixdepot("Bai/rdb2048")`, and let `b` be a vector of 2048 ones. In the steps below, use GMRES for up to 300 iterations without restarts and with a stopping tolerance of $10^{-4}$.
+``````{exercise}
+⌨ (Continuation of [Exercise 8.5.5](#problem-gmres-surround).) Let $\mathbf{B}$ be `diagm(1:100)`,  let $\mathbf{I}$ be `I(100)`, and let $\mathbf{Z}$ be a $100\times 100$ matrix of zeros. Define 
 
-    **(a)** Time the GMRES solution without preconditioning. Verify that convergence was achieved. 
+$$
+\mathbf{A} = \begin{bmatrix}
+\mathbf{B} & \mathbf{I} \\ \mathbf{Z} & -\mathbf{B}
+\end{bmatrix}
+$$ 
 
-    **(b)** Show that diagonal preconditioning is not helpful for this problem.
+and let $\mathbf{b}$ be a 200-vector of ones. The matrix $\mathbf{A}$ is difficult for GMRES. 
 
-    **(c)** To two digits, find a value of $\tau$ in iLU such that the preconditioned method transitions from effective and faster than part (a) to ineffective. 
-   
+**(a)** Design a diagonal preconditioner $\mathbf{M}$, with all diagonal elements equal to $1$ or $-1$, such that $\mathbf{M}^{-1}\mathbf{A}$ has all positive eigenvalues. Apply `gmres` without restarts using this preconditioner and a tolerance of $10^{-10}$ for 100 iterations. Plot the convergence curve. 
+
+**(b)** Now design another diagonal preconditioner such that all the eigenvalues of $\mathbf{M}^{-1}\mathbf{A}$ are $1$, and apply preconditioned `gmres` again. How many iterations are apparently needed for convergence? 
+``````
+
+``````{exercise}
+⌨ Let `A = matrixdepot("Bai/rdb2048")`, and let `b` be a vector of 2048 ones. In the steps below, use GMRES for up to 300 iterations without restarts and with a stopping tolerance of $10^{-4}$.
+
+**(a)** Time the GMRES solution without preconditioning. Verify that convergence was achieved. 
+
+**(b)** Show that diagonal preconditioning is not helpful for this problem.
+
+**(c)** To two digits, find a value of $\tau$ in iLU such that the preconditioned method transitions from effective and faster than part (a) to ineffective. 
+
+``````

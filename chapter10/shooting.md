@@ -167,49 +167,59 @@ The instability of shooting can be circumvented by breaking the interval into sm
 
 ## Exercises
 
-1. ⌨ For each BVP in [Exercise 10.1.2](#problem-tpbvp-verify) , use {numref}`Function {number} <function-shoot>` to compute the solution. Plot the solution and, separately, its error as functions of $x$. 
+``````{exercise}
+⌨ For each BVP in [Exercise 10.1.2](#problem-tpbvp-verify) , use {numref}`Function {number} <function-shoot>` to compute the solution. Plot the solution and, separately, its error as functions of $x$. 
+``````
 
-    ```{index} pendulum
-    ```
-(problem-shooting-pendulum)=
-2. ⌨ (Continuation of [Exercise 10.1.4](#problem-tpbvp-pendulum).) Consider the pendulum from {numref}`Example {number} <example-tpbvp-pendulum>` with $g=L=1$. Suppose we want to release the pendulum from rest such that $\theta(5)=\pi/2$. Using @function-shoot, find one solution that passes through $\theta=0$, and another solution that does not. Plot $\theta(t)$ for both cases together.
+```{index} pendulum
+```
 
-    ```{index} Allen–Cahn equation
-    ```
-(problem-shooting-allencahn)=
-3. ⌨  (Continuation of [Exercise 10.1.5](#problem-tpbvp-allencahn).) The stationary Allen–Cahn equation is 
- 
-    $$
-      \epsilon u'' = u^3-u, \qquad 0 \le x \le 1, \qquad u(0)=-1, \quad u(1)=1.
-    $$
+``````{exercise}
+:label: problem-shooting-pendulum
+⌨ (Continuation of [Exercise 10.1.4](#problem-tpbvp-pendulum).) Consider the pendulum from {numref}`Example {number} <example-tpbvp-pendulum>` with $g=L=1$. Suppose we want to release the pendulum from rest such that $\theta(5)=\pi/2$. Using @function-shoot, find one solution that passes through $\theta=0$, and another solution that does not. Plot $\theta(t)$ for both cases together.
+``````
 
-    As $\epsilon\rightarrow 0$, the solution tends toward a step function transition between $-1$ and $1$. By symmetry, $u'(x)=-u'(1-x)$.
-  
-    **(a)** Use {numref}`Function {number} <function-shoot>` to solve the equation for $\epsilon=0.2$. Plot the solution and compute the numerical value of $u'(0)-u'(1)$.
-    
-    **(b)** Repeat for $\epsilon=0.02$.
-    
-    **(c)** Repeat for $\epsilon=0.002$. You will receive multiple warning messages. Does the result look like a valid solution?
+```{index} Allen–Cahn equation
+```
 
-4. ✍ Consider the linear TPBVP 
-    
-    $$
-    \begin{split}
-    u'' &= p(x)u' + q(x)u + r(x),\\ 
-    u'(a) &= 0, \quad u(b)=\beta.
-    \end{split}
-    $$
+``````{exercise}
+:label: problem-shooting-allencahn
+⌨  (Continuation of [Exercise 10.1.5](#problem-tpbvp-allencahn).) The stationary Allen–Cahn equation is 
 
-    The shooting IVP uses the same ODE with initial data $u(a)=s_1$, $u'(a)=s_2$ to solve for a trial solution $u(x)$. Define
+$$
+\epsilon u'' = u^3-u, \qquad 0 \le x \le 1, \qquad u(0)=-1, \quad u(1)=1.
+$$
 
-    $$
-    z(x) = \frac{\partial u}{\partial s_1}.
-    $$
+As $\epsilon\rightarrow 0$, the solution tends toward a step function transition between $-1$ and $1$. By symmetry, $u'(x)=-u'(1-x)$.
 
-    By differentiating the IVP with respect to $s_1$, show that $z$ satisfies the IVP
+**(a)** Use {numref}`Function {number} <function-shoot>` to solve the equation for $\epsilon=0.2$. Plot the solution and compute the numerical value of $u'(0)-u'(1)$.
 
-    $$
-    z'' = p(x)z' + q(x)z, \quad z(0)=1, \; z'(0)=0.
-    $$
+**(b)** Repeat for $\epsilon=0.02$.
 
-    It follows that $z(x)$ is independent of $s_1$, and therefore $u(x)$ is a linear function of $s_1$ at each fixed $x$. Use the same type of argument to show that $u(x)$ is also a linear function of $s_2$, and explain why the residual function $\mathbf{v}$ in {eq}`shoot-resid` is a linear function of $\mathbf{s}$.
+**(c)** Repeat for $\epsilon=0.002$. You will receive multiple warning messages. Does the result look like a valid solution?
+``````
+
+``````{exercise}
+✍ Consider the linear TPBVP 
+
+$$
+\begin{split}
+u'' &= p(x)u' + q(x)u + r(x),\\ 
+u'(a) &= 0, \quad u(b)=\beta.
+\end{split}
+$$
+
+The shooting IVP uses the same ODE with initial data $u(a)=s_1$, $u'(a)=s_2$ to solve for a trial solution $u(x)$. Define
+
+$$
+z(x) = \frac{\partial u}{\partial s_1}.
+$$
+
+By differentiating the IVP with respect to $s_1$, show that $z$ satisfies the IVP
+
+$$
+z'' = p(x)z' + q(x)z, \quad z(0)=1, \; z'(0)=0.
+$$
+
+It follows that $z(x)$ is independent of $s_1$, and therefore $u(x)$ is a linear function of $s_1$ at each fixed $x$. Use the same type of argument to show that $u(x)$ is also a linear function of $s_2$, and explain why the residual function $\mathbf{v}$ in {eq}`shoot-resid` is a linear function of $\mathbf{s}$.
+``````

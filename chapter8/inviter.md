@@ -194,61 +194,73 @@ In practice power and inverse iteration are not as effective as the algorithms u
 
 ## Exercises
 
-(problem-invitercomp)=
-1. ⌨  Use {numref}`Function {number} <function-inviter>` to perform 10 iterations for the given matrix and shift. Compare the results quantitatively to the convergence given by {eq}`inviterconv`.
-  
-    **(a)**  $\mathbf{A} = \begin{bmatrix}
-        1.1 & 1 \\
-        0 & 2.1
-      \end{bmatrix}, \; s = 1 \qquad $
-    **(b)** $\mathbf{A} = \begin{bmatrix}
-        1.1 & 1 \\
-        0 & 2.1
-      \end{bmatrix}, \; s = 2\qquad $
-    
-    **(c)** $\mathbf{A} = \begin{bmatrix}
-        1.1 & 1 \\
-        0 & 2.1
-      \end{bmatrix}, \; s = 1.6\qquad $
-    **(d)** $\mathbf{A} = \begin{bmatrix}
-        2 & 1 \\
-        1 & 0
-      \end{bmatrix}, \; s = -0.33 \qquad$
+``````{exercise}
+:label: problem-invitercomp
+⌨  Use {numref}`Function {number} <function-inviter>` to perform 10 iterations for the given matrix and shift. Compare the results quantitatively to the convergence given by {eq}`inviterconv`.
 
-    **(e)** $\mathbf{A} = \begin{bmatrix}
-      6 & 5 & 4 \\
-      5 & 4 & 3 \\
-      4 & 3 & 2
-    \end{bmatrix}, \;  s = 0.1 $
-      
-2. ✍ Let $\mathbf{A} = \displaystyle \begin{bmatrix} 1.1 & 1 \\ 0 & 2.1 \end{bmatrix}.$ Given the starting vector $\mathbf{x}_1=[1,1]$, find the vector $\mathbf{x}_2$ for the following shifts.
-    
-    **(a)** $s=1\quad$ **(b)** $s=2\quad$ **(c)** $s=1.6$
+**(a)**  $\mathbf{A} = \begin{bmatrix}
+1.1 & 1 \\
+0 & 2.1
+\end{bmatrix}, \; s = 1 \qquad $
+**(b)** $\mathbf{A} = \begin{bmatrix}
+1.1 & 1 \\
+0 & 2.1
+\end{bmatrix}, \; s = 2\qquad $
 
-3. ✍ Why is it a bad idea to use unshifted inverse iteration with the matrix $\displaystyle \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix}$? Does the shift $s=-1$ improve matters?
+**(c)** $\mathbf{A} = \begin{bmatrix}
+1.1 & 1 \\
+0 & 2.1
+\end{bmatrix}, \; s = 1.6\qquad $
+**(d)** $\mathbf{A} = \begin{bmatrix}
+2 & 1 \\
+1 & 0
+\end{bmatrix}, \; s = -0.33 \qquad$
 
-4. ✍ When the shift $s$ is very close to an eigenvalue of $\mathbf{A}$, the matrix $\mathbf{A}-s\mathbf{I}$ is close to a singular matrix. But then {eq}`shiftinvstep` is a linear system with a badly conditioned matrix, which should create a lot of error in the numerical solution for $\mathbf{y}_k$. However, it happens that the error is mostly in the direction of the eigenvector we are looking for, as the following toy example illustrates.
+**(e)** $\mathbf{A} = \begin{bmatrix}
+6 & 5 & 4 \\
+5 & 4 & 3 \\
+4 & 3 & 2
+\end{bmatrix}, \;  s = 0.1 $
+``````
 
-    Prove that $\displaystyle \begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix}$ has an eigenvalue at zero with associated eigenvector $\mathbf{v}=[-1,1]^T$. Suppose this matrix is perturbed slightly to $\displaystyle \mathbf{A} = \begin{bmatrix} 1 & 1 \\ 0 & \epsilon \end{bmatrix}$, and that $\mathbf{x}_k=[1,1]$ in {eq}`shiftinvstep`. Show that once $\mathbf{y}_k$ is normalized by its infinity norm, the result is within $\epsilon$ of a multiple of $\mathbf{v}$.
+``````{exercise}
+✍ Let $\mathbf{A} = \displaystyle \begin{bmatrix} 1.1 & 1 \\ 0 & 2.1 \end{bmatrix}.$ Given the starting vector $\mathbf{x}_1=[1,1]$, find the vector $\mathbf{x}_2$ for the following shifts.
 
-    % must stay as #5
-(problem-inviter-lumpmembraneinveig)=
-5. ⌨ (Continuation of [Exercise 8.2.3](#problem-power-lumpmembraneeig).) This exercise concerns the $n^2\times n^2$ sparse matrix defined by `FNC.poisson(n)` for integer $n$. It represents a lumped model of a vibrating square membrane held fixed around the edges.
+**(a)** $s=1\quad$ **(b)** $s=2\quad$ **(c)** $s=1.6$
+``````
 
-    **(a)** The eigenvalues of $\mathbf{A}$ closest to zero are approximately squares of the frequencies of vibration for the membrane. Using `eigs`, find the eigenvalue $\lambda_m$ closest to zero for $n=10,15,20,25$.
-    
-    **(b)** For each $n$ in part (a), apply 50 steps of {numref}`Function {number} <function-inviter>` with zero shift. On one graph, plot the four convergence curves $|\beta_k-\lambda_m|$ using a semi-log scale.
+``````{exercise}
+✍ Why is it a bad idea to use unshifted inverse iteration with the matrix $\displaystyle \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix}$? Does the shift $s=-1$ improve matters?
+``````
 
-    **(c)** Let `v` be the eigenvector (second output) found by {numref}`Function {number} <function-inviter>` for $n=25$. Make a surface plot of the vibration mode by reshaping `v` into an $n\times n$ matrix.
-    
-    % must remain as number 6
-(problem-inviter-dynamicshift)=
-6. ⌨ This problem explores the use of dynamic shifting to accelerate the inverse iteration.
-  
-    **(a)** Modify {numref}`Function {number} <function-inviter>` to change the value of the shift $s$ to be the most recently computed value in the vector $\beta$. Note that the matrix `B` must also change with each iteration, and the LU factorization cannot be done just once.
+``````{exercise}
+✍ When the shift $s$ is very close to an eigenvalue of $\mathbf{A}$, the matrix $\mathbf{A}-s\mathbf{I}$ is close to a singular matrix. But then {eq}`shiftinvstep` is a linear system with a badly conditioned matrix, which should create a lot of error in the numerical solution for $\mathbf{y}_k$. However, it happens that the error is mostly in the direction of the eigenvector we are looking for, as the following toy example illustrates.
 
-    **(b)** Define a $100\times 100$ matrix with values $k^2$ for $k=1,\ldots,100$ on the main diagonal and random values uniformly distributed between 0 and 1 on the first superdiagonal. (Since this matrix is triangular, the diagonal values are its eigenvalues.) Using an initial shift of $s=920$, apply the dynamic inverse iteration. Determine which eigenvalue was found and make a table of the `log10` of the errors in the iteration as a function of iteration number. (These should approximately double, until machine precision is reached, due to quadratic convergence.)
-  
-    **(c)** Repeat part (b) using a different initial shift of your choice.
+Prove that $\displaystyle \begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix}$ has an eigenvalue at zero with associated eigenvector $\mathbf{v}=[-1,1]^T$. Suppose this matrix is perturbed slightly to $\displaystyle \mathbf{A} = \begin{bmatrix} 1 & 1 \\ 0 & \epsilon \end{bmatrix}$, and that $\mathbf{x}_k=[1,1]$ in {eq}`shiftinvstep`. Show that once $\mathbf{y}_k$ is normalized by its infinity norm, the result is within $\epsilon$ of a multiple of $\mathbf{v}$.
+``````
 
+% must stay as #5
 
+``````{exercise}
+:label: problem-inviter-lumpmembraneinveig
+⌨ (Continuation of @problem-power-lumpmembraneeig.) This exercise concerns the $n^2\times n^2$ sparse matrix defined by `FNC.poisson(n)` for integer $n$. It represents a lumped model of a vibrating square membrane held fixed around the edges.
+
+**(a)** The eigenvalues of $\mathbf{A}$ closest to zero are approximately squares of the frequencies of vibration for the membrane. Using `eigs`, find the eigenvalue $\lambda_m$ closest to zero for $n=10,15,20,25$.
+
+**(b)** For each $n$ in part (a), apply 50 steps of {numref}`Function {number} <function-inviter>` with zero shift. On one graph, plot the four convergence curves $|\beta_k-\lambda_m|$ using a semi-log scale.
+
+**(c)** Let `v` be the eigenvector (second output) found by {numref}`Function {number} <function-inviter>` for $n=25$. Make a surface plot of the vibration mode by reshaping `v` into an $n\times n$ matrix.
+``````
+
+% must remain as number 6
+
+``````{exercise}
+:label: problem-inviter-dynamicshift
+⌨ This problem explores the use of dynamic shifting to accelerate the inverse iteration.
+
+**(a)** Modify {numref}`Function {number} <function-inviter>` to change the value of the shift $s$ to be the most recently computed value in the vector $\beta$. Note that the matrix `B` must also change with each iteration, and the LU factorization cannot be done just once.
+
+**(b)** Define a $100\times 100$ matrix with values $k^2$ for $k=1,\ldots,100$ on the main diagonal and random values uniformly distributed between 0 and 1 on the first superdiagonal. (Since this matrix is triangular, the diagonal values are its eigenvalues.) Using an initial shift of $s=920$, apply the dynamic inverse iteration. Determine which eigenvalue was found and make a table of the `log10` of the errors in the iteration as a function of iteration number. (These should approximately double, until machine precision is reached, due to quadratic convergence.)
+
+**(c)** Repeat part (b) using a different initial shift of your choice.
+``````

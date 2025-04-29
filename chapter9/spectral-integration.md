@@ -294,62 +294,73 @@ The difference in convergence between Clenshaw–Curtis and Gauss–Legendre is 
 
 ## Exercises
 
-(problem-specint-trapperiod)=
-1. ✍  Suppose $f$ is periodic on $[-1,1]$. Show that the result of applying the trapezoid formula on $2n+1$ points is identical to {eq}`trapperiod`.
 
-2. ✍ For each integral, use Gauss–Legendre integration with $n=2$ to write out the terms $w_1f(t_1)$ and $w_2f(t_2)$ explicitly. 
+``````{exercise}
+:label: problem-specint-trapperiod
+✍  Suppose $f$ is periodic on $[-1,1]$. Show that the result of applying the trapezoid formula on $2n+1$ points is identical to {eq}`trapperiod`.
+``````
 
-    **(a)** $\displaystyle\int_{-1}^1 e^{-x}\, dx = 2 \sinh(1) \qquad$
-    **(b)** $\displaystyle\int_{-1}^1 e^{-x^2} \qquad$
-    **(c)** $\displaystyle\int_{-1}^1 (2+x)^{-1}$
+``````{exercise}
+✍ For each integral, use Gauss–Legendre integration with $n=2$ to write out the terms $w_1f(t_1)$ and $w_2f(t_2)$ explicitly. 
 
-(problem-specint-ccglcompare)=
-3. ⌨ For each integral, compute approximations using {numref}`Function {number} <function-ccint>` and {numref}`Function {number} <function-glint>` with $n=4,6,8,\ldots,40$. Plot the errors of both methods together as functions of $n$ on a semi-log scale. 
-
-    **(a)** $\displaystyle\int_{-1}^1 e^{-4x}\, dx = \sinh(4)/2$
-
-    **(b)** $\displaystyle\int_{-1}^1 e^{-9x^2} = \sqrt{\pi}\, \operatorname{erf}(3)/3$
-
-    **(c)** $\displaystyle\int_{-1}^1 \operatorname{sech}(x) \, dx = 2 \tan^{-1} [ \sinh (1) ]$
-
-    **(d)** $\displaystyle\int_{-1}^1 \frac{1}{1+9x^2}\, dx = \frac{2}{3} \tan^{-1}(3)$
-
-(problem-integration-integrateinterval)=
-4. 
-    **(a)** ✍ (See also [Exercise 9.3.5](#problem-stability-changeinterval).) Using the change of variable 
-
-    $$
-    z = \phi(x) = a + (b-a)\frac{(x+1)}{2},
-    $$
-
-    show that 
-
-    $$
-    \int_{a}^b f(z) \, d z= \frac{b-a}{2} \int_{-1}^{1} f( \phi(x) ) \, d x .
-    $$
-
-    **(b)** ⌨ Rewrite {numref}`Function {number} <function-ccint>` and {numref}`Function {number} <function-glint>` to accept additional inputs for $a$ and $b$ and compute integrals over $[a,b]$.
-    
-    **(c)** ⌨  Repeat the steps of [Exercise 2](#problem-specint-ccglcompare) for the integral
-
-    $$
-    \int_{\pi/2}^{\pi} x^2 \sin 8x \, d x = -\frac{3 \pi^2}{32}.
-    $$
-
-5. ⌨ A particle moves in a circular path with angular velocity given by $\omega(\theta)=\sin(\exp(\sin \theta))$. The time it takes to complete one full orbit is 
-
-    $$
-    T = \int_0^T dt = \int_{0}^{2\pi} \frac{d\theta}{d\theta / dt } = \int_{0}^{2\pi} \frac{d\theta}{\omega(\theta) }.
-    $$
-
-    Use {numref}`Function {number} <function-trapezoid>` to find the period of the motion. Show results for different values of $n$ to establish convergence to at least 12 digits.
-
-6. ✍ Prove the claim about linearity of the Gauss–Legendre integration formula alluded to in the derivation of {numref}`Theorem %s <theorem-specint-gaussquad>`. Namely, show that condition {eq}`gqoptimality` is true if and only if
-
-    $$
-    \int_{-1}^1 x^j\,dx = \sum_{k=1}^n w_k x_k^j
-    $$
-
-    for all $j=0,\ldots,2n-1$.
+**(a)** $\displaystyle\int_{-1}^1 e^{-x}\, dx = 2 \sinh(1) \qquad$
+**(b)** $\displaystyle\int_{-1}^1 e^{-x^2} \qquad$
+**(c)** $\displaystyle\int_{-1}^1 (2+x)^{-1}$
+``````
 
 
+``````{exercise}
+:label: problem-specint-ccglcompare
+⌨ For each integral, compute approximations using {numref}`Function {number} <function-ccint>` and {numref}`Function {number} <function-glint>` with $n=4,6,8,\ldots,40$. Plot the errors of both methods together as functions of $n$ on a semi-log scale. 
+
+**(a)** $\displaystyle\int_{-1}^1 e^{-4x}\, dx = \sinh(4)/2$
+
+**(b)** $\displaystyle\int_{-1}^1 e^{-9x^2} = \sqrt{\pi}\, \operatorname{erf}(3)/3$
+
+**(c)** $\displaystyle\int_{-1}^1 \operatorname{sech}(x) \, dx = 2 \tan^{-1} [ \sinh (1) ]$
+
+**(d)** $\displaystyle\int_{-1}^1 \frac{1}{1+9x^2}\, dx = \frac{2}{3} \tan^{-1}(3)$
+``````
+
+``````{exercise}
+:label: problem-integration-integrateinterval
+**(a)** ✍ (See also [Exercise 9.3.5](#problem-stability-changeinterval).) Using the change of variable 
+
+$$
+z = \phi(x) = a + (b-a)\frac{(x+1)}{2},
+$$
+
+show that 
+
+$$
+\int_{a}^b f(z) \, d z= \frac{b-a}{2} \int_{-1}^{1} f( \phi(x) ) \, d x .
+$$
+
+**(b)** ⌨ Rewrite {numref}`Function {number} <function-ccint>` and {numref}`Function {number} <function-glint>` to accept additional inputs for $a$ and $b$ and compute integrals over $[a,b]$.
+
+**(c)** ⌨  Repeat the steps of [Exercise 2](#problem-specint-ccglcompare) for the integral
+
+$$
+\int_{\pi/2}^{\pi} x^2 \sin 8x \, d x = -\frac{3 \pi^2}{32}.
+$$
+``````
+
+``````{exercise}
+⌨ A particle moves in a circular path with angular velocity given by $\omega(\theta)=\sin(\exp(\sin \theta))$. The time it takes to complete one full orbit is 
+
+$$
+T = \int_0^T dt = \int_{0}^{2\pi} \frac{d\theta}{d\theta / dt } = \int_{0}^{2\pi} \frac{d\theta}{\omega(\theta) }.
+$$
+
+Use {numref}`Function {number} <function-trapezoid>` to find the period of the motion. Show results for different values of $n$ to establish convergence to at least 12 digits.
+``````
+
+``````{exercise}
+✍ Prove the claim about linearity of the Gauss–Legendre integration formula alluded to in the derivation of {numref}`Theorem %s <theorem-specint-gaussquad>`. Namely, show that condition {eq}`gqoptimality` is true if and only if
+
+$$
+\int_{-1}^1 x^j\,dx = \sum_{k=1}^n w_k x_k^j
+$$
+
+for all $j=0,\ldots,2n-1$.
+``````

@@ -154,6 +154,7 @@ Suppose a damped pendulum satisfies the nonlinear equation $\theta'' + 0.05\thet
 :::
 ````
 `````
+
 ::::
 
 The initial solution estimate can strongly influence how quickly a solution is found, or whether the quasi-Newton iteration converges at all. In situations where multiple solutions exist, the initialization can determine which is found. 
@@ -185,6 +186,7 @@ $$
 :::
 ````
 `````
+
 ::::
 
 ## Parameter continuation
@@ -192,9 +194,8 @@ $$
 ```{index} ! parameter continuation
 ```
 
-Sometimes the best way to get a useful initialization is to use the solution of a related easier problem, a technique known as **parameter continuation**.  In this approach, one solves the problem at an easy parameter value, and gradually changes the parameter value to the desired value. After each change, the most recent solution is used to initialize the iteration at the new parameter value. 
+Sometimes the best way to get a useful initialization is to use the solution of a related easier problem, a technique known as **parameter continuation**.  In this approach, one solves the problem at an easy parameter value, and gradually changes the parameter value to the desired value. After each change, the most recent solution is used to initialize the iteration at the new parameter value.
  
-
 ```{index} Allen–Cahn equation
 ```
 
@@ -225,75 +226,91 @@ $$
 :::
 ```` 
 `````
-::::
 
+::::
 
 ## Exercises
 
-(problem-nonlinear-byhand)=
-1. ✍ This exercise is about the nonlinear boundary-value problem
+``````{exercise}
+:label: problem-nonlinear-byhand
+✍ This exercise is about the nonlinear boundary-value problem
 
-    $$
-    u'' = \frac{3(u')^2}{u} , \quad u(-1) = 1, \; u(2) = \frac{1}{2}.
-    $$
+$$
+u'' = \frac{3(u')^2}{u} , \quad u(-1) = 1, \; u(2) = \frac{1}{2}.
+$$
 
-    **(a)** Verify that the exact solution is $u(x) =  ( x+2 )^{-1/2}$.
-    
-    **(b)** Write out the finite-difference approximation {eq}`fdbvp` with a single interior point ($n=2$).
-    
-    **(c)** Solve the equation of part (b) for the lone interior value $u_1$.
+**(a)** Verify that the exact solution is $u(x) =  ( x+2 )^{-1/2}$.
 
-2.  ⌨
-    **(a)** Use {numref}`Function {number} <function-bvp>` to solve the problem of Exercise 1 for $n=80$. In a 2-by-1 subplot array, plot the finite-difference solution and its error.
-    
-    **(b)** ⌨ For each $n=10,20,40,\ldots,640$, find the infinity norm of the error on the same problem. Make a log-log plot of error versus $n$ and include a graphical comparison to second-order convergence.
+**(b)** Write out the finite-difference approximation {eq}`fdbvp` with a single interior point ($n=2$).
 
-3. ⌨ (Adapted from {cite}`ascherComputerMethods1998`.) Use {numref}`Function {number} <function-bvp>` twice with $n=200$ to solve 
+**(c)** Solve the equation of part (b) for the lone interior value $u_1$.
+``````
 
-    $$
-    u'' +  e^{u+0.5} = 0, \quad y(0) = y(1) = 0,
-    $$
+``````{exercise}
+ ⌨
+**(a)** Use {numref}`Function {number} <function-bvp>` to solve the problem of Exercise 1 for $n=80$. In a 2-by-1 subplot array, plot the finite-difference solution and its error.
 
-    with initializations $7 \sin(x)$ and $\frac{1}{4} \sin(x)$. Plot the solutions together on one graph.
+**(b)** ⌨ For each $n=10,20,40,\ldots,640$, find the infinity norm of the error on the same problem. Make a log-log plot of error versus $n$ and include a graphical comparison to second-order convergence.
+``````
 
-4. ⌨ Use {numref}`Function {number} <function-bvp>` to compute the solution to the Allen–Cahn equation in {numref}`Demo %s <demo-nonlinear-allencahn>` with $\epsilon=0.02$. Determine numerically whether it is antisymmetric around the line $x=0.5$---that is, whether $u(1-x)=-u(x)$. You should supply evidence that your answer is independent of $n$. 
+``````{exercise}
+⌨ (Adapted from {cite}`ascherComputerMethods1998`.) Use {numref}`Function {number} <function-bvp>` twice with $n=200$ to solve 
 
-5. ⌨ Consider the pendulum problem from {numref}`Example {number} <example-tpbvp-pendulum>` with $g=L=1$. Suppose we want to release the pendulum from rest such that $\theta(5)=\pi/2$. Use {numref}`Function {number} <function-bvp>` with $n=200$ to find one solution that passes through $\theta=0$, and another solution that does not. Plot $\theta(t)$ for both cases together.
+$$
+u'' +  e^{u+0.5} = 0, \quad y(0) = y(1) = 0,
+$$
 
-6. ⌨ The BVP
- 
-    $$
-    u'' = x \operatorname{sign}(1-x) u, \quad u(-6)=1, \; u'(6)=0,
-    $$
+with initializations $7 \sin(x)$ and $\frac{1}{4} \sin(x)$. Plot the solutions together on one graph.
+``````
 
-    forces $u''$ to be discontinuous at $x=1$, so finite differences may not converge to the solution at their nominal order of accuracy.
+``````{exercise}
+⌨ Use {numref}`Function {number} <function-bvp>` to compute the solution to the Allen–Cahn equation in {numref}`Demo %s <demo-nonlinear-allencahn>` with $\epsilon=0.02$. Determine numerically whether it is antisymmetric around the line $x=0.5$---that is, whether $u(1-x)=-u(x)$. You should supply evidence that your answer is independent of $n$. 
+``````
 
-    **(a)** Solve the problem using {numref}`Function {number} <function-bvp>` with $n=1400$, and make a plot of the solution. Store the value at $x=6$ for use as a reference high-accuracy solution.
-       
-    **(b)** For each $n=100,200,300,\ldots,1000$, apply {numref}`Function {number} <function-bvp>`, and compute the error at $x=6$. Compare the convergence graphically to second order. 
+``````{exercise}
+⌨ Consider the pendulum problem from {numref}`Example {number} <example-tpbvp-pendulum>` with $g=L=1$. Suppose we want to release the pendulum from rest such that $\theta(5)=\pi/2$. Use {numref}`Function {number} <function-bvp>` with $n=200$ to find one solution that passes through $\theta=0$, and another solution that does not. Plot $\theta(t)$ for both cases together.
+``````
 
-    
-    ```{index} Carrier equation
-    ```
+``````{exercise}
+⌨ The BVP
 
-7. ⌨  The following nonlinear BVP was proposed by Carrier (for the special case $b=1$ in {cite}`carrierSingularPerturbation1970`):
+$$
+u'' = x \operatorname{sign}(1-x) u, \quad u(-6)=1, \; u'(6)=0,
+$$
 
-    $$
-    \epsilon u'' + 2(1-x^2)u +u^2 = 1, \quad u(-1) = u(1) = 0.
-    $$
+forces $u''$ to be discontinuous at $x=1$, so finite differences may not converge to the solution at their nominal order of accuracy.
 
-    In order to balance the different components of the residual, it's best to implement each boundary condition numerically as $u/\epsilon=0$.
+**(a)** Solve the problem using {numref}`Function {number} <function-bvp>` with $n=1400$, and make a plot of the solution. Store the value at $x=6$ for use as a reference high-accuracy solution.
 
-    **(a)** Use {numref}`Function {number} <function-bvp>` to solve the problem with $\epsilon=0.003$, $n=200$, and an initial estimate of all zeros. Plot the result; you should get a solution with 9 local maxima.
+**(b)** For each $n=100,200,300,\ldots,1000$, apply {numref}`Function {number} <function-bvp>`, and compute the error at $x=6$. Compare the convergence graphically to second order. 
 
-    **(b)** Starting with the result from part (a) as an initialization, continue the parameter through the sequence
+``````
 
-    $$
-    \epsilon = 3\times 10^{-3}, 3\times 10^{-2.8}, 3\times 10^{-2.6},\ldots, 3\times 10^{-1}.
-    $$
+```{index} Carrier equation
+```
 
-    The most recent solution should be used as the initialization for each new value of $\epsilon$. Plot the end result for $\epsilon=0.3$; it should have one interior local maximum.
+``````{exercise}
+⌨  The following nonlinear BVP was proposed by Carrier (for the special case $b=1$ in {cite}`carrierSingularPerturbation1970`):
 
-    **(c)** Starting with the last solution of part (b), reverse the continuation steps to return to $\epsilon=0.003$. Plot the result, which is an entirely different solution from part (a).
+$$
+\epsilon u'' + 2(1-x^2)u +u^2 = 1, \quad u(-1) = u(1) = 0.
+$$
 
-8. ⌨  {numref}`Demo %s <demo-nonlinear-mems>` finds two solutions at $\lambda=0.5$. Continue both solutions by taking 50 steps from $\lambda=0.5$ to $\lambda=0.79$. Make a plot with $\lambda$ on the horizontal axis and $w(0)$ on the vertical axis, with one point to represent each solution found. You should get two paths that converge as $\lambda$ approaches $0.79$ from below.
+In order to balance the different components of the residual, it's best to implement each boundary condition numerically as $u/\epsilon=0$.
+
+**(a)** Use {numref}`Function {number} <function-bvp>` to solve the problem with $\epsilon=0.003$, $n=200$, and an initial estimate of all zeros. Plot the result; you should get a solution with 9 local maxima.
+
+**(b)** Starting with the result from part (a) as an initialization, continue the parameter through the sequence
+
+$$
+\epsilon = 3\times 10^{-3}, 3\times 10^{-2.8}, 3\times 10^{-2.6},\ldots, 3\times 10^{-1}.
+$$
+
+The most recent solution should be used as the initialization for each new value of $\epsilon$. Plot the end result for $\epsilon=0.3$; it should have one interior local maximum.
+
+**(c)** Starting with the last solution of part (b), reverse the continuation steps to return to $\epsilon=0.003$. Plot the result, which is an entirely different solution from part (a).
+``````
+
+``````{exercise}
+⌨  {numref}`Demo %s <demo-nonlinear-mems>` finds two solutions at $\lambda=0.5$. Continue both solutions by taking 50 steps from $\lambda=0.5$ to $\lambda=0.79$. Make a plot with $\lambda$ on the horizontal axis and $w(0)$ on the vertical axis, with one point to represent each solution found. You should get two paths that converge as $\lambda$ approaches $0.79$ from below.
+``````

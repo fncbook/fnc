@@ -239,54 +239,66 @@ As presented in {eq}`lagrangeinterp`, the Lagrange formula is not a good choice 
 
 ## Exercises
 
-(problem-polynomial-lagrange)=
-1. ✍ Write out the Lagrange form of the interpolating polynomial of degree $n$ for the given functions and nodes. Using a calculator, evaluate the polynomial at $x=\pi/4$ and compute the error there.
+``````{exercise}
+:label: problem-polynomial-lagrange
+✍ Write out the Lagrange form of the interpolating polynomial of degree $n$ for the given functions and nodes. Using a calculator, evaluate the polynomial at $x=\pi/4$ and compute the error there.
 
-    **(a)** $f(x) = \sin(x), \ n=1, \ t_0=0, t_1 = \pi/2$
+**(a)** $f(x) = \sin(x), \ n=1, \ t_0=0, t_1 = \pi/2$
 
-    **(b)** $f(x) = \sin(x), \ n=2, \ t_0=0, t_1 = \pi/6, t_2 = \pi/2$
+**(b)** $f(x) = \sin(x), \ n=2, \ t_0=0, t_1 = \pi/6, t_2 = \pi/2$
 
-    **(c)** $f(x) = \cos(x), \ n=2, \ t_0=0, t_1 = \pi/3, t_2 = \pi/2$
+**(c)** $f(x) = \cos(x), \ n=2, \ t_0=0, t_1 = \pi/3, t_2 = \pi/2$
 
-    **(d)** $f(x) = \tanh(x), \ n=2, \ t_0=0, t_1 = \pi/3, t_2 = \pi/2$
+**(d)** $f(x) = \tanh(x), \ n=2, \ t_0=0, t_1 = \pi/3, t_2 = \pi/2$
+``````
 
-2. ⌨ For each case, plot the requested Lagrange cardinal polynomial for the given set of nodes over the interval $[t_0,t_n]$. Superimpose dots or circles for the points represented by the cardinal conditions {eq}`lagrangecond`. 
+``````{exercise}
+⌨ For each case, plot the requested Lagrange cardinal polynomial for the given set of nodes over the interval $[t_0,t_n]$. Superimpose dots or circles for the points represented by the cardinal conditions {eq}`lagrangecond`. 
 
-    **(a)** $n=2,\quad t_0=-1, \, t_1=-0.2,\, t_2=0, \quad \ell_2(x)$
-    
-    **(b)** $n=4,\quad t_0=0, \, t_1=1,\, t_2=1.5,\, t_3=2.5,\, t_4=3, \quad \ell_3(x)$
+**(a)** $n=2,\quad t_0=-1, \, t_1=-0.2,\, t_2=0, \quad \ell_2(x)$
 
-    **(c)** $n=20, \quad t_i=i/n \text{ for } i=0,\ldots,n, \quad \ell_0(x)$
+**(b)** $n=4,\quad t_0=0, \, t_1=1,\, t_2=1.5,\, t_3=2.5,\, t_4=3, \quad \ell_3(x)$
 
-    **(d)** $n=20, \quad t_i=i/n \text{ for } i=0,\ldots,n, \quad \ell_{10}(x)$ 
+**(c)** $n=20, \quad t_i=i/n \text{ for } i=0,\ldots,n, \quad \ell_0(x)$
 
-    **(e)** $n=40, \quad t_i=i/n \text{ for } i=0,\ldots,n, \quad \ell_{20}(x)$ 
+**(d)** $n=20, \quad t_i=i/n \text{ for } i=0,\ldots,n, \quad \ell_{10}(x)$ 
 
-3. ✍ Suppose $p$ is the quadratic polynomial interpolating the points $(-2,12)$, $(1,3a)$, and $(2,0)$. Use {eq}`lagrangeinterp` to compute $p'(0)$. 
+**(e)** $n=40, \quad t_i=i/n \text{ for } i=0,\ldots,n, \quad \ell_{20}(x)$ 
+``````
 
-4. ✍ Explain carefully why using {eq}`lagrangeinterp` to compute $p(x)$ at a single value of $x$ takes $O(n^2)$ floating-point operations.
+``````{exercise}
+✍ Suppose $p$ is the quadratic polynomial interpolating the points $(-2,12),$ $(1,3a),$ and $(2,0).$ Use {eq}`lagrangeinterp` to compute $p'(0)$. 
+``````
 
-5. ✍  Explain why for any distribution of nodes and all $x$,
-    
-    $$
-    1 = \sum_{k=0}^n \ell_k(x).
-    $$
-   
-    (Hint: This problem does not require any hand computation or manipulation. What is being interpolated here?) 
+``````{exercise}
+✍ Explain carefully why using {eq}`lagrangeinterp` to compute $p(x)$ at a single value of $x$ takes $O(n^2)$ floating-point operations.
+``````
 
-6. ✍ Show that
-    
-    $$
-    \ell_k(x) = \frac{\Phi(x)}{(x-t_k)\Phi'(t_k)},
-    $$
+``````{exercise}
+✍  Explain why for any distribution of nodes and all $x$,
 
-    where $\Phi$ is the function defined in {eq}`lagrange-phi`. 
+$$
+1 = \sum_{k=0}^n \ell_k(x).
+$$
 
-(problem-lagrange-instability)=
-7. ✍ Consider the nodes $t_0=0$, $t_1=1$, $t_2=\beta$, where $\beta>1$.
+(Hint: This problem does not require any hand computation or manipulation. What is being interpolated here?) 
+``````
 
-    **(a)** Write out the Lagrange cardinal polynomials $\ell_0$, $\ell_1$, and $\ell_2$.      
-    
-    **(b)** Set $x=1/2$ in the part (a) results, and suppose $y_1 = y_2$. As $\beta\to 1$ from above, why should we expect subtractive cancellation?
+``````{exercise}
+✍ Show that
 
+$$
+\ell_k(x) = \frac{\Phi(x)}{(x-t_k)\Phi'(t_k)},
+$$
 
+where $\Phi$ is the function defined in {eq}`lagrange-phi`. 
+``````
+
+``````{exercise}
+:label: problem-lagrange-instability
+✍ Consider the nodes $t_0=0$, $t_1=1$, $t_2=\beta$, where $\beta>1$.
+
+**(a)** Write out the Lagrange cardinal polynomials $\ell_0$, $\ell_1$, and $\ell_2$.      
+
+**(b)** Set $x=1/2$ in the part (a) results, and suppose $y_1 = y_2$. As $\beta\to 1$ from above, why should we expect subtractive cancellation?
+``````

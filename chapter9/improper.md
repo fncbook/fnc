@@ -266,35 +266,38 @@ Double exponential integration is an effective general-purpose technique for imp
 
 ## Exercises
 
-1. ⌨ Use {numref}`Function {number} <function-intinf>` to estimate the given integral with error tolerances $10^{-3},10^{-6},10^{-9},10^{-12}$. For each result, show the actual error and the number of nodes used.
+``````{exercise}
+⌨ Use {numref}`Function {number} <function-intinf>` to estimate the given integral with error tolerances $10^{-3},10^{-6},10^{-9},10^{-12}$. For each result, show the actual error and the number of nodes used.
 
-    **(a)** $\displaystyle\int_{-\infty}^\infty \dfrac{1}{1+x^2+x^4}\, dx = \dfrac{\pi}{\sqrt{3}}$
-  
-    **(b)** $\displaystyle\int_{-\infty}^\infty e^{-x^2}\cos(x)\, dx = e^{-1/4}\sqrt{\pi}$
-  
-    **(c)** $\displaystyle\int_{-\infty}^\infty (1+x^2)^{-2/3}\, dx = \dfrac{\sqrt{\pi}\,\Gamma(1/6)}{\Gamma(2/3)}$  (use `gamma()` for $\Gamma()$)
+**(a)** $\displaystyle\int_{-\infty}^\infty \dfrac{1}{1+x^2+x^4}\, dx = \dfrac{\pi}{\sqrt{3}}$
 
+**(b)** $\displaystyle\int_{-\infty}^\infty e^{-x^2}\cos(x)\, dx = e^{-1/4}\sqrt{\pi}$
 
-2. ⌨ Use {numref}`Function {number} <function-intsing>` to estimate the given integral, possibly after rewriting the integral into the form {eq}`intsing` with a left-endpoint singularity. Use error tolerances $10^{-3},10^{-6},10^{-9},10^{-12}$, and for each result, show the actual error and the number of nodes used.
+**(c)** $\displaystyle\int_{-\infty}^\infty (1+x^2)^{-2/3}\, dx = \dfrac{\sqrt{\pi}\,\Gamma(1/6)}{\Gamma(2/3)}$  (use `gamma()` for $\Gamma()$)
+``````
 
-    **(a)** $\displaystyle\int_{0}^1 (\log x)^2\, dx = 2$
-  
-    **(b)** $\displaystyle\int_{0}^{\pi/4} \sqrt{\tan(x)}\, dx = \dfrac{\pi}{\sqrt{2}}$
+``````{exercise}
+⌨ Use {numref}`Function {number} <function-intsing>` to estimate the given integral, possibly after rewriting the integral into the form {eq}`intsing` with a left-endpoint singularity. Use error tolerances $10^{-3},10^{-6},10^{-9},10^{-12}$, and for each result, show the actual error and the number of nodes used.
 
-    **(c)** $\displaystyle\int_{0}^1 \frac{1}{\sqrt{1-x^2}}\, dx = \dfrac{\pi}{2}$
- 
-3. For integration on a semi-infinite interval such as $x\in [0,\infty)$, another double exponential transformation is useful: $x(t)=\exp\left( \sinh t \right)$.
+**(a)** $\displaystyle\int_{0}^1 (\log x)^2\, dx = 2$
 
-    **(a)** ✍ Show that $t\in(-\infty,\infty)$ is mapped to $x\in (0,\infty)$. 
-    
-    **(b)** ✍ Derive an analog of {eq}`DEquadchain1` for the chain rule on $\int_0^\infty f(x)\,dx$. 
-    
-    **(c)** ✍ Show that truncation of $t$ to $[-M,M]$ will truncate $x$ to $[1/\mu,\mu]$ for some positive $\mu$. 
-   
-    **(d)** ⌨ Write a function `intsemi(f,tol)` for the semi-infinite integration problem. Test it on the integral
-    
-    $$  
-      \displaystyle\int_0^\infty \frac{e^{-x}}{\sqrt{x}}\,dx = \sqrt{\pi}.
-    $$
+**(b)** $\displaystyle\int_{0}^{\pi/4} \sqrt{\tan(x)}\, dx = \dfrac{\pi}{\sqrt{2}}$
 
+**(c)** $\displaystyle\int_{0}^1 \frac{1}{\sqrt{1-x^2}}\, dx = \dfrac{\pi}{2}$
+``````
 
+``````{exercise}
+For integration on a semi-infinite interval such as $x\in [0,\infty)$, another double exponential transformation is useful: $x(t)=\exp\left( \sinh t \right)$.
+
+**(a)** ✍ Show that $t\in(-\infty,\infty)$ is mapped to $x\in (0,\infty)$. 
+
+**(b)** ✍ Derive an analog of {eq}`DEquadchain1` for the chain rule on $\int_0^\infty f(x)\,dx$. 
+
+**(c)** ✍ Show that truncation of $t$ to $[-M,M]$ will truncate $x$ to $[1/\mu,\mu]$ for some positive $\mu$. 
+
+**(d)** ⌨ Write a function `intsemi(f,tol)` for the semi-infinite integration problem. Test it on the integral
+
+$$  
+\displaystyle\int_0^\infty \frac{e^{-x}}{\sqrt{x}}\,dx = \sqrt{\pi}.
+$$
+``````

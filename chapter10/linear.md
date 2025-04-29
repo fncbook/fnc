@@ -305,66 +305,82 @@ If we write the solution $\mathbf{u}$ of Equation {eq}`fdlinbc` as the exact sol
 
 ```{index} stability; of collocation
 ```
+
 where $\boldsymbol{\tau}$ is the truncation error of the derivative discretizations (except at the boundary rows, where it is zero). It follows that $\|\mathbf{e}\|$ vanishes at the same rate as the truncation error if  $\| \mathbf{A}^{-1}\|$ is bounded above as $n\to \infty$. In the present context, this property is known as **stability**. Proving stability is too technical to walk through here, but stability is guaranteed under some reasonable conditions on the BVP.
 
 ## Exercises
 
-(problem-linear-fdlin1)=
-1. ✍  For each boundary-value problem, verify that the given solution is correct. Using $n=3$ and the differentiation matrices in @diffmat12b and @diffmat22, write out $\mathbf{L}$ and $\mathbf{r}$ from @fdlinnobc and $\mathbf{A}$ and $\mathbf{b}$ from @fdlinbc.
 
-    **(a)** $u'' + u = 0, \quad u(0) =0, \; u(3) = \sin 3$  
-    
-    Solution: $u(x) = \sin x$
+``````{exercise}
+:label: problem-linear-fdlin1
+✍  For each boundary-value problem, verify that the given solution is correct. Using $n=3$ and the differentiation matrices in @diffmat12b and @diffmat22, write out $\mathbf{L}$ and $\mathbf{r}$ from @fdlinnobc and $\mathbf{A}$ and $\mathbf{b}$ from @fdlinbc.
 
-    **(b)** $u'' - \frac{3}{x} u' + \frac{4}{x^2} u = 0, \quad u(1) =0,\; u(4) = 32 \log 2$ 
-    
-    Solution: $u(x) = x^2 \log x$
+**(a)** $u'' + u = 0, \quad u(0) =0, \; u(3) = \sin 3$  
 
-    **(c)**
-    $u'' - \left(x+\frac{1}{2}\right)^{-1}\, u' + 2\left(x+\frac{1}{2}\right)^{-2}\, u = 10\left(x+\frac{1}{2}\right)^{-4}, \quad u\left(x+\frac{1}{2}\right)=1,\; u\left(x+\frac{5}{2}\right) = \frac{1}{9}$
- 
-    Solution: $u(x) = \left(x+\frac{1}{2}\right)^{-2}$
+Solution: $u(x) = \sin x$
 
-(problem-linear-fdlin2)=
-2. ⌨  For each of the cases in the previous exercise, use {numref}`Function {number} <function-bvplin>` to solve the problem with $n=60$ and make a plot of its error as a function of $x$. Then, for each $n=10,20,40,\ldots,640$, find the infinity norm of the error. Make a log-log plot of error versus $n$ and include a graphical comparison to second-order convergence.
+**(b)** $u'' - \frac{3}{x} u' + \frac{4}{x^2} u = 0, \quad u(1) =0,\; u(4) = 32 \log 2$ 
 
-(problem-linear-fdlinspec)= 
-3. ⌨ Modify {numref}`Function {number} <function-bvplin>` to use spectral differentiation rather than second-order finite differences. For each of the cases in Exercise 1, solve the problem with $n=5,10,15,\ldots,40$, finding the infinity norm of the error in each case. Make a log-linear plot of error versus $n$.
+Solution: $u(x) = x^2 \log x$
 
-    ```{index} Bessel equation
-    ```
-4.  ⌨ Use {numref}`Function {number} <function-bvplin>` to solve *Bessel's equation*,
+**(c)**
+$u'' - \left(x+\frac{1}{2}\right)^{-1}\, u' + 2\left(x+\frac{1}{2}\right)^{-2}\, u = 10\left(x+\frac{1}{2}\right)^{-4}, \quad u\left(x+\frac{1}{2}\right)=1,\; u\left(x+\frac{5}{2}\right) = \frac{1}{9}$
 
-    $$
-    x^2 u'' + x u' + x^2 y = 0, \quad u(0.5)=1,\; u(8) = 0.
-    $$
+Solution: $u(x) = \left(x+\frac{1}{2}\right)^{-2}$
+``````
 
-    Plot the solution for $n=100$.
+``````{exercise}
+:label: problem-linear-fdlin2
+⌨  For each of the cases in the previous exercise, use {numref}`Function {number} <function-bvplin>` to solve the problem with $n=60$ and make a plot of its error as a function of $x$. Then, for each $n=10,20,40,\ldots,640$, find the infinity norm of the error. Make a log-log plot of error versus $n$ and include a graphical comparison to second-order convergence.
+``````
 
-    ```{index} Airy equation
-    ```
-5. ⌨ The *Airy equation* is $u''=x u$. Its solution is exponential for $x>0$ and oscillatory for $x<0$. The exact solution is given by $u=c_1 \operatorname{Ai}(x) + c_2 \operatorname{Bi}(x)$, where Ai and Bi are Airy functions. In Julia they are computed by `airyai` and `airybi`, respectively.
+``````{exercise}
+:label: problem-linear-fdlinspec
+⌨ Modify {numref}`Function {number} <function-bvplin>` to use spectral differentiation rather than second-order finite differences. For each of the cases in Exercise 1, solve the problem with $n=5,10,15,\ldots,40$, finding the infinity norm of the error in each case. Make a log-linear plot of error versus $n$.
+``````
 
-    **(a)** Suppose that $u(-10) =-1$, $u(2) =1$. By setting up and solving a $2\times 2$ linear system, find numerical values for $c_1$ and $c_2$. Plot the resulting exact solution.
+```{index} Bessel equation
+```
 
-    **(b)** Use {numref}`Function {number} <function-bvplin>` with $n=120$ to find the solution with the boundary conditions in part (a). In a 2-by-1 subplot array, plot the finite-difference solution and its error. (The solution is not very accurate.)
-    
-    **(c)** Repeat part (b) with $n=800$.
+``````{exercise}
+ ⌨ Use {numref}`Function {number} <function-bvplin>` to solve *Bessel's equation*,
 
-6. Consider the boundary-value problem $\epsilon u''+(1+\epsilon)u'+u =0$ over $x\in (0,1)$, with $u(0)=0$, $u(1)=1$.  As the parameter $\epsilon$ is decreased, the solution gets a thin region of high activity near $x=0$ called a *boundary layer*.
+$$
+x^2 u'' + x u' + x^2 y = 0, \quad u(0.5)=1,\; u(8) = 0.
+$$
 
-    **(a)** ✍ Verify that the exact solution to the problem is 
-    
-    $$
-    u(x) = \frac{e^{-x}-e^{-x/\epsilon}}{e^{\,-1}-e^{\,-1/\epsilon}}.
-    $$
+Plot the solution for $n=100$.
+``````
 
-    On one graph, plot $u(x)$ for $\epsilon=\frac{1}{4},\frac{1}{16},\frac{1}{64}$.
-    
-    **(b)** ⌨ Define $N(\epsilon)$ as the smallest integer value of $n$ needed to make the max-norm error of the result of {numref}`Function {number} <function-bvplin>` less than $10^{-4}$. For each of the values $\epsilon = \frac{1}{2},\frac{1}{4},\frac{1}{8}\ldots,\frac{1}{64}$, estimate $N(\epsilon)$ by starting with $n=50$ and incrementing by 25 until the measured error is sufficiently small. 
-    
-    **(c)** ⌨ Plot the error as a function of $x$ for $\epsilon=\frac{1}{64}$ and $n=N(\epsilon)$.  Compare the peak of the error to the graph from part (a). 
-    
-    **(d)** ⌨ Develop a hypothesis for the leading-order behavior of $N(\epsilon)$. Plot the observed $N(\epsilon)$ and your hypothesis together on a log-log plot.
-    
-    **(e)** ✍ Finite-difference errors depend on the solution as well as on $n$. Given that this error decreases as $O(n^{-2})$, what does your hypothesis for $N(\epsilon)$ suggest about the behavior of the error for fixed $n$ as $\epsilon\to 0$?
+```{index} Airy equation
+```
+
+``````{exercise}
+⌨ The *Airy equation* is $u''=x u$. Its solution is exponential for $x>0$ and oscillatory for $x<0$. The exact solution is given by $u=c_1 \operatorname{Ai}(x) + c_2 \operatorname{Bi}(x)$, where Ai and Bi are Airy functions. In Julia they are computed by `airyai` and `airybi`, respectively.
+
+**(a)** Suppose that $u(-10) =-1$, $u(2) =1$. By setting up and solving a $2\times 2$ linear system, find numerical values for $c_1$ and $c_2$. Plot the resulting exact solution.
+
+**(b)** Use {numref}`Function {number} <function-bvplin>` with $n=120$ to find the solution with the boundary conditions in part (a). In a 2-by-1 subplot array, plot the finite-difference solution and its error. (The solution is not very accurate.)
+
+**(c)** Repeat part (b) with $n=800$.
+``````
+
+``````{exercise}
+Consider the boundary-value problem $\epsilon u''+(1+\epsilon)u'+u =0$ over $x\in (0,1)$, with $u(0)=0$, $u(1)=1$.  As the parameter $\epsilon$ is decreased, the solution gets a thin region of high activity near $x=0$ called a *boundary layer*.
+
+**(a)** ✍ Verify that the exact solution to the problem is 
+
+$$
+u(x) = \frac{e^{-x}-e^{-x/\epsilon}}{e^{\,-1}-e^{\,-1/\epsilon}}.
+$$
+
+On one graph, plot $u(x)$ for $\epsilon=\frac{1}{4},\frac{1}{16},\frac{1}{64}$.
+
+**(b)** ⌨ Define $N(\epsilon)$ as the smallest integer value of $n$ needed to make the max-norm error of the result of {numref}`Function {number} <function-bvplin>` less than $10^{-4}$. For each of the values $\epsilon = \frac{1}{2},\frac{1}{4},\frac{1}{8}\ldots,\frac{1}{64}$, estimate $N(\epsilon)$ by starting with $n=50$ and incrementing by 25 until the measured error is sufficiently small. 
+
+**(c)** ⌨ Plot the error as a function of $x$ for $\epsilon=\frac{1}{64}$ and $n=N(\epsilon)$.  Compare the peak of the error to the graph from part (a). 
+
+**(d)** ⌨ Develop a hypothesis for the leading-order behavior of $N(\epsilon)$. Plot the observed $N(\epsilon)$ and your hypothesis together on a log-log plot.
+
+**(e)** ✍ Finite-difference errors depend on the solution as well as on $n$. Given that this error decreases as $O(n^{-2})$, what does your hypothesis for $N(\epsilon)$ suggest about the behavior of the error for fixed $n$ as $\epsilon\to 0$?
+``````
