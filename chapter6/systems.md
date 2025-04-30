@@ -185,107 +185,121 @@ The trick illustrated in the preceding examples is always available. Suppose $y$
 
 ## Exercises
 
-1. ✍ Rewrite the given higher order problems as first-order systems.
+``````{exercise}
+✍ Rewrite the given higher order problems as first-order systems.
 
-    **(a)** $y'''-3y''+3 y' -y = t, \: y(0) = 1, \: y'(0) = 2, \: y''(0) = 3$
+**(a)** $y'''-3y''+3 y' -y = t, \: y(0) = 1, \: y'(0) = 2, \: y''(0) = 3$
 
-    **(b)** $y'' + 4 (x^2-1)y' + y = 0, \: y(0) = 2, \: y'(0) = -1$
+**(b)** $y'' + 4 (x^2-1)y' + y = 0, \: y(0) = 2, \: y'(0) = -1$
 
-    **(c)** For a given constant $a$,
+**(c)** For a given constant $a$,
 
-    ```{math}
-    \begin{split}
-      x'' + \frac{a x}{(x^2+y^2)^{3/2}} &= 0,\\
-      y'' + \frac{a y}{(x^2+y^2)^{3/2}} &= 0,
-      \end{split}
-    ```
+```{math}
+\begin{split}
+x'' + \frac{a x}{(x^2+y^2)^{3/2}} &= 0,\\
+y'' + \frac{a y}{(x^2+y^2)^{3/2}} &= 0,
+\end{split}
+```
 
-    with initial values $x(0) = 1$, $x'(0)=y(0) = 0$, $y'(0)=3$
+with initial values $x(0) = 1$, $x'(0)=y(0) = 0$, $y'(0)=3$
 
-    **(d)** $y^{(4)} -y = e^{-t}, \: y(0) = 0, \: y'(0) = 0, \: y''(0) = 1,\: y'''(0) = 0$
+**(d)** $y^{(4)} -y = e^{-t}, \: y(0) = 0, \: y'(0) = 0, \: y''(0) = 1,\: y'''(0) = 0$
 
-    **(e)** $y'''-y''+y'-y = t, \: y(0) = 1, \: y'(0) = 2, \: y''(0) = 3$
+**(e)** $y'''-y''+y'-y = t, \: y(0) = 1, \: y'(0) = 2, \: y''(0) = 3$
+``````
 
-2. ✍ Write the given IVP as a system. Then do two steps of Euler's method by hand (perhaps with a calculator) with the indicated step size $h$. Using the given exact solution, compute the error after the second step.
+``````{exercise}
+✍ Write the given IVP as a system. Then do two steps of Euler's method by hand (perhaps with a calculator) with the indicated step size $h$. Using the given exact solution, compute the error after the second step.
 
-    **(a)** $y''+ 4y = 4t, \: y(0) = 1,\: y'(0) = 1; \: \hat{y}(t) = t+\cos (2t),\: h=0.1$
+**(a)** $y''+ 4y = 4t, \: y(0) = 1,\: y'(0) = 1; \: \hat{y}(t) = t+\cos (2t),\: h=0.1$
 
-    **(b)** $y''- 4y = 4t, \: y(0) = 2,\: y'(0) = -1; \: \hat{y}(t) = e^{2t} + e^{-2t}-t,\: h=0.1$
+**(b)** $y''- 4y = 4t, \: y(0) = 2,\: y'(0) = -1; \: \hat{y}(t) = e^{2t} + e^{-2t}-t,\: h=0.1$
 
-    **(c)** $2 x^2 y'' +3xy' - y = 0, \: y(2) = 1, \: y'(2) = -1/2,  \: \hat{y}(x) = 2/x, h = 1/8$
+**(c)** $2 x^2 y'' +3xy' - y = 0, \: y(2) = 1, \: y'(2) = -1/2,  \: \hat{y}(x) = 2/x, h = 1/8$
 
-    **(d)** $2 x^2 y'' +3xy' - y = 0,\: y(1) = 4, \: y'(1) = -1, \: \hat{y}(x) = 2(x^{1/2} + x^{-1}), h=1/4$
+**(d)** $2 x^2 y'' +3xy' - y = 0,\: y(1) = 4, \: y'(1) = -1, \: \hat{y}(x) = 2(x^{1/2} + x^{-1}), h=1/4$
+``````
 
-3. ⌨ Solve the following IVPs using {numref}`Function {number} <function-euler>` using $n=1000$ steps. Plot the solution and its first derivative together on one plot, and plot the error in each component as functions of time on another.
+``````{exercise}
+⌨ Solve the following IVPs using {numref}`Function {number} <function-euler>` using $n=1000$ steps. Plot the solution and its first derivative together on one plot, and plot the error in each component as functions of time on another.
 
-    **(a)** $y''+ 4y = 4t, \: 0< t< 2\pi, \: y(0) = 1,\: y'(0) = 1; \: \hat{y}(t) = t+\cos (2t)$
+**(a)** $y''+ 4y = 4t, \: 0< t< 2\pi, \: y(0) = 1,\: y'(0) = 1; \: \hat{y}(t) = t+\cos (2t)$
 
-    **(b)** $y''+ 9y = \sin(2t), \: 0< t< 2\pi, \: y(0) = 2,\: y'(0) = 1$; $\quad \hat{y}(t) = (1/5) \sin(3t) + 2 \cos (3t)+  (1/5) \sin (2t)$
+**(b)** $y''+ 9y = \sin(2t), \: 0< t< 2\pi, \: y(0) = 2,\: y'(0) = 1$; $\quad \hat{y}(t) = (1/5) \sin(3t) + 2 \cos (3t)+  (1/5) \sin (2t)$
 
-    **(c)** $y''- 4y = 4t \: 0< t< 1.5, \: y(0) = 2,\: y'(0) = -1; \: \hat{y}(t) = e^{2t} + e^{-2t}-t$
+**(c)** $y''- 4y = 4t \: 0< t< 1.5, \: y(0) = 2,\: y'(0) = -1; \: \hat{y}(t) = e^{2t} + e^{-2t}-t$
 
-    **(d)** $y''+ 4y'+ 4y = t, \: 0< t< 4, \: y(0) = 1,\: y'(0) = 3/4; \: \hat{y}(t) = (3t+5/4)e^{-2t} + (t-1)/4$
+**(d)** $y''+ 4y'+ 4y = t, \: 0< t< 4, \: y(0) = 1,\: y'(0) = 3/4; \: \hat{y}(t) = (3t+5/4)e^{-2t} + (t-1)/4$
 
-    **(e)** $x^2 y'' +5xy' + 4y = 0,\: 1<x<e^2, \: y(1) = 0, \: y'(1) = 2, \: \hat{y}(x) = (2/x^2) \ln x$
+**(e)** $x^2 y'' +5xy' + 4y = 0,\: 1<x<e^2, \: y(1) = 0, \: y'(1) = 2, \: \hat{y}(x) = (2/x^2) \ln x$
 
-    **(f)** $x^2 y'' +5xy' + 4y = 0,\: 1<x<e^2, \: y(1) = 1, \: y'(1) = -1, \: \hat{y}(x) = x^{-2}( 1 + \ln x)$
+**(f)** $x^2 y'' +5xy' + 4y = 0,\: 1<x<e^2, \: y(1) = 1, \: y'(1) = -1, \: \hat{y}(x) = x^{-2}( 1 + \ln x)$
 
-    **(g)** $2 x^2 y'' +3xy' - y = 0,\: 2<x<20, \: y(2) = 1, \: y'(2) = -1/2, \: \hat{y}(x) = 2/x$
+**(g)** $2 x^2 y'' +3xy' - y = 0,\: 2<x<20, \: y(2) = 1, \: y'(2) = -1/2, \: \hat{y}(x) = 2/x$
 
-    **(h)** $2 x^2 y'' +3xy' - y = 0,\: 1<x<16, \: y(1) = 4, \: y'(1) = -1, \: \hat{y}(x) = 2(x^{1/2} + x^{-1})$
+**(h)** $2 x^2 y'' +3xy' - y = 0,\: 1<x<16, \: y(1) = 4, \: y'(1) = -1, \: \hat{y}(x) = 2(x^{1/2} + x^{-1})$
 
-    **(i)** $x^2 y'' -xy' + 2y = 0,\: 1<x<e^{\pi}, \: y(1) = 3, \: y'(1) = 4$; $\quad \hat{y}(x) = x \left[ 3 \cos \left( \ln x \right)+\sin \left( \ln x \right) \right]$
+**(i)** $x^2 y'' -xy' + 2y = 0,\: 1<x<e^{\pi}, \: y(1) = 3, \: y'(1) = 4$; $\quad \hat{y}(x) = x \left[ 3 \cos \left( \ln x \right)+\sin \left( \ln x \right) \right]$
 
-    **(j)** $x^2 y'' + 3xy' + 4y = 0,\: e^{\pi/12} < x < e^{\pi}, \: y(e^{\pi/12}) = 0,  \: y'(e^{\pi/12}) = -6$; $\quad \hat{y}(x) = x^{-1} \left[ 3 \cos \left( 3 \ln x \right)+\sin \left( 3 \ln x \right) \right]$
+**(j)** $x^2 y'' + 3xy' + 4y = 0,\: e^{\pi/12} < x < e^{\pi}, \: y(e^{\pi/12}) = 0,  \: y'(e^{\pi/12}) = -6$; $\quad \hat{y}(x) = x^{-1} \left[ 3 \cos \left( 3 \ln x \right)+\sin \left( 3 \ln x \right) \right]$
 
-(problem-SIR)=
-4. ⌨ A disease that is endemic to a population can be modeled by tracking the fraction of the population that is susceptible to infection, $v(t)$, and the fraction that is infectious, $w(t)$. (The rest of the population is considered to be recovered and immune.) A typical model is the *SIR model* (see {cite}`brittonEssentialMathematical2003`)
+``````
 
-    ```{math}
-    \frac{dv}{dt} = 0.2(1-v) - 3vw, \qquad \frac{dw}{dt} = (3v-1)w.
-    ```
+``````{exercise}
+:label: problem-SIR
+⌨ A disease that is endemic to a population can be modeled by tracking the fraction of the population that is susceptible to infection, $v(t)$, and the fraction that is infectious, $w(t)$. (The rest of the population is considered to be recovered and immune.) A typical model is the *SIR model* (see {cite}`brittonEssentialMathematical2003`)
 
-    Starting with $v(0) = 0.95$ and $w(0) = 0.05$, use `solve` to find the long-term steady values of $v(t)$ and $w(t)$. Plot both components of the solution as functions of time.
+```{math}
+\frac{dv}{dt} = 0.2(1-v) - 3vw, \qquad \frac{dw}{dt} = (3v-1)w.
+```
 
-5. ⌨ In each case below, use `solve` to solve the given ODE for $0\le t \le 10$ with the given initial conditions. Plot the results together as curves in the phase plane (that is, with $x$ and $y$ as the axes of the plot), using `aspect_ratio=1` in the plot command.
+Starting with $v(0) = 0.95$ and $w(0) = 0.05$, use `solve` to find the long-term steady values of $v(t)$ and $w(t)$. Plot both components of the solution as functions of time.
+``````
 
-    **(a)** 
+``````{exercise}
+⌨ In each case below, use `solve` to solve the given ODE for $0\le t \le 10$ with the given initial conditions. Plot the results together as curves in the phase plane (that is, with $x$ and $y$ as the axes of the plot), using `aspect_ratio=1` in the plot command.
 
-    ```{math}
-    \begin{split}
-      x'(t) & = - 4y + x(1-x^2-y^2),\\
-      y'(t) & = 4x + y(1-x^2-y^2),
-    \end{split}
-    ```
+**(a)** 
 
-    with $[x(0),y(0)]=[0.1,0]$ and $[x(0),y(0)]=[0,1.9]$.
+```{math}
+\begin{split}
+x'(t) & = - 4y + x(1-x^2-y^2),\\
+y'(t) & = 4x + y(1-x^2-y^2),
+\end{split}
+```
 
-    **(b)** 
+with $[x(0),y(0)]=[0.1,0]$ and $[x(0),y(0)]=[0,1.9]$.
 
-    ```{math}
-    \begin{split}
-      x'(t) & = - 4y - \tfrac{1}{4}x(1-x^2-y^2)(4-x^2-y^2),\\
-      y'(t) & = 4x - \tfrac{1}{4}y(1-x^2-y^2)(4-x^2-y^2),
-    \end{split}
-    ```
+**(b)** 
 
-    with $[x(0),y(0)]=[0.95,0]$, $[0,1.05]$, and $[-2.5,0]$.
+```{math}
+\begin{split}
+x'(t) & = - 4y - \tfrac{1}{4}x(1-x^2-y^2)(4-x^2-y^2),\\
+y'(t) & = 4x - \tfrac{1}{4}y(1-x^2-y^2)(4-x^2-y^2),
+\end{split}
+```
 
-(problem-systems-fitznag)=
-6. ⌨ The **FitzHugh–Nagumo equations** are a simple model of the repeated firing of a neuron. They are given by
+with $[x(0),y(0)]=[0.95,0]$, $[0,1.05]$, and $[-2.5,0]$.
 
-    ```{math}
-    \begin{split}
-    \frac{d v_1}{dt} &= - v_1(v_1-1)(v_1-a) - v_2 + I, \\
-    \frac{d v_2}{dt} &= \epsilon ( v_1 - \gamma v_2).
-    \end{split}
-    ```
+``````
 
-    Assume $v_1(0) = 0.5$, $v_2(0) = 0.1$, $a = 0.1$, $\epsilon = 0.008$, $\gamma = 1$. For each value of $I$ below, find and plot the solution using `solve` for $0\le t \le 600$. The solutions are highly sensitive to $I$, and you need to change the requested absolute and relative error tolerances to $10^{-9}$. In each case the solution quickly approaches a periodic oscillation.
+``````{exercise}
+:label: problem-systems-fitznag
+⌨ The **FitzHugh–Nagumo equations** are a simple model of the repeated firing of a neuron. They are given by
 
-    **(a)** $I = 0.05527,\quad$
-    **(b)** $I = 0.05683,\quad$
-    **(c)** $I = 0.0568385,\quad$
-    **(d)** $I = 0.05740$.
+```{math}
+\begin{split}
+\frac{d v_1}{dt} &= - v_1(v_1-1)(v_1-a) - v_2 + I, \\
+\frac{d v_2}{dt} &= \epsilon ( v_1 - \gamma v_2).
+\end{split}
+```
 
-    This exploration was carried out by Baer and Erneux {cite}`baerSingularHopf1986`.
+Assume $v_1(0) = 0.5$, $v_2(0) = 0.1$, $a = 0.1$, $\epsilon = 0.008$, $\gamma = 1$. For each value of $I$ below, find and plot the solution using `solve` for $0\le t \le 600$. The solutions are highly sensitive to $I$, and you need to change the requested absolute and relative error tolerances to $10^{-9}$. In each case the solution quickly approaches a periodic oscillation.
+
+**(a)** $I = 0.05527,\quad$
+**(b)** $I = 0.05683,\quad$
+**(c)** $I = 0.0568385,\quad$
+**(d)** $I = 0.05740$.
+
+This exploration was carried out by Baer and Erneux {cite}`baerSingularHopf1986`.
+``````

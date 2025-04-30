@@ -237,66 +237,81 @@ In practice, flops are not the only aspect of an implementation that occupies si
 
 ## Exercises
 
-1. ✍ The following are asymptotic assertions about the limit $n\rightarrow\infty$. In each case, prove the statement true or false.
+``````{exercise}
+✍ The following are asymptotic assertions about the limit $n\rightarrow\infty$. In each case, prove the statement true or false.
 
-    **(a)** $n^2 = O(\log n),\quad$ 
-    **(b)** $n^{a} = O(n^b)$ if $a\le b,\quad$
-    **(c)** $e^n \sim e^{2n},\quad$
-    **(d)** $n+\sqrt{n}\sim n+2\sqrt{n}$.
+**(a)** $n^2 = O(\log n),\quad$ 
+**(b)** $n^{a} = O(n^b)$ if $a\le b,\quad$
+**(c)** $e^n \sim e^{2n},\quad$
+**(d)** $n+\sqrt{n}\sim n+2\sqrt{n}$.
+``````
 
-2. ✍ The following are asymptotic assertions about the limit $h\to 0$. In each case, prove the statement true or false.
+``````{exercise}
+✍ The following are asymptotic assertions about the limit $h\to 0$. In each case, prove the statement true or false.
 
-    **(a)** $h^2\log(h) = O(h^3),\quad$
-    **(b)** $h^{a} = O(h^b)$ if $a < b,\quad$
-    **(c)** $\sin(h) \sim h,\quad$
-    **(d)** $(e^{2h}-1)\sim h$.
+**(a)** $h^2\log(h) = O(h^3),\quad$
+**(b)** $h^{a} = O(h^b)$ if $a < b,\quad$
+**(c)** $\sin(h) \sim h,\quad$
+**(d)** $(e^{2h}-1)\sim h$.
+``````
 
-3. ✍ Show that the inner product of two $n$-vectors takes exactly $2n-1$ flops.
+``````{exercise}
+✍ Show that the inner product of two $n$-vectors takes exactly $2n-1$ flops.
+``````
 
-4. ✍ Show that the multiplication of two $n\times n$ matrices takes $\sim 2n^3$ flops.
+``````{exercise}
+✍ Show that the multiplication of two $n\times n$ matrices takes $\sim 2n^3$ flops.
+``````
 
-5. ✍ This problem is about evaluation of a polynomial $c_1 + c_2 x + \cdots + c_{n}x^{n-1}$.
-  
-    **(a)** Here is a little code to do the evaluation.
+``````{exercise}
+✍ This problem is about evaluation of a polynomial $c_1 + c_2 x + \cdots + c_{n}x^{n-1}$.
 
-    ``` julia
-    y = c[1]
-    xpow = 1
-    for i in 2:n
-        xpow *= x
-        y += c[i]*xpow
-    end
-    ```
+**(a)** Here is a little code to do the evaluation.
 
-    Assuming that `x` is a scalar, how many flops does this function take, as a function of $n$?
+``` julia
+y = c[1]
+xpow = 1
+for i in 2:n
+xpow *= x
+y += c[i]*xpow
+end
+```
 
-    **(b)** Compare the count from (a) to the flop count for Horner's algorithm, {numref}`Function {number} <function-horner>`.
-  
-6. The exact sums for $p=1,2$ in {eq}`sumflops` are as follows:
-  
-    ```{math}
-    \sum_{k=1}^{n} k = \frac{n(n+1)}{2}, \qquad 
-    \sum_{k=1}^{n} k^2 = \frac{n(n+1)(2n+1)}{6}.
-    ```
+Assuming that `x` is a scalar, how many flops does this function take, as a function of $n$?
 
-    **(a)** ✍  Use these to find the exact result for {eq}`gecount1`.
+**(b)** Compare the count from (a) to the flop count for Horner's algorithm, {numref}`Function {number} <function-horner>`.
+``````
 
-    **(b)** ⌨ Plot the ratio of your result from (a) and the asymptotic result $2n^3/3$ for all $n=10^{1+0.03i}$, $i=0,\dots,100$, using a log scale for $n$ and a linear scale for the ratio. (The curve should approach 1 asymptotically.)
-  
+``````{exercise}
+The exact sums for $p=1,2$ in {eq}`sumflops` are as follows:
 
-7. ✍ Show that for any nonnegative constant integer $m$,
-  
-    ```{math}
-    \sum_{k=0}^{n-m} k^p \sim \frac{n^{p+1}}{p+1}.
-    ```
+```{math}
+\sum_{k=1}^{n} k = \frac{n(n+1)}{2}, \qquad 
+\sum_{k=1}^{n} k^2 = \frac{n(n+1)(2n+1)}{6}.
+```
 
-8. ⌨ The `UpperTriangular` and `LowerTriangular` matrix types cause specialized algorithms to be invoked by the backslash. Define
+**(a)** ✍  Use these to find the exact result for {eq}`gecount1`.
 
-    ```
-    A = rand(1000,1000)
-    B = tril(A)
-    C = LowerTriangular(B)
-    b = rand(1000)
-    ```
+**(b)** ⌨ Plot the ratio of your result from (a) and the asymptotic result $2n^3/3$ for all $n=10^{1+0.03i}$, $i=0,\dots,100$, using a log scale for $n$ and a linear scale for the ratio. (The curve should approach 1 asymptotically.)
+``````
 
-    Using `@elapsed` with the backslash solver, time how long it takes to solve the linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$ 100 times; then, do the same for matrices $\mathbf{B}$ and $\mathbf{C}$. Is the timing for $\mathbf{B}$ closer to $\mathbf{A}$ or to $\mathbf{C}$? (Hint: Remember to make one timing run without recording results, so that compilation time is not counted.) 
+``````{exercise}
+✍ Show that for any nonnegative constant integer $m$,
+
+```{math}
+\sum_{k=0}^{n-m} k^p \sim \frac{n^{p+1}}{p+1}.
+```
+``````
+
+``````{exercise}
+⌨ The `UpperTriangular` and `LowerTriangular` matrix types cause specialized algorithms to be invoked by the backslash. Define
+
+```
+A = rand(1000,1000)
+B = tril(A)
+C = LowerTriangular(B)
+b = rand(1000)
+```
+
+Using `@elapsed` with the backslash solver, time how long it takes to solve the linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$ 100 times; then, do the same for matrices $\mathbf{B}$ and $\mathbf{C}$. Is the timing for $\mathbf{B}$ closer to $\mathbf{A}$ or to $\mathbf{C}$? (Hint: Remember to make one timing run without recording results, so that compilation time is not counted.) 
+``````

@@ -16,7 +16,7 @@ $$
   \mathbf{u}' = -c \mathbf{D}_x \mathbf{u}.
 $$
 
-To apply an IVP solver, we need to compare the stability region of the solver with the eigenvalues of $-c \mathbf{D}_x$, as in {numref}`section-diffusion-absstab`. You can verify (see [Exercise 1](#problem-absstab-D1eigs)) that for $m$ points in $[0,1)$, these are
+To apply an IVP solver, we need to compare the stability region of the solver with the eigenvalues of $-c \mathbf{D}_x$, as in {numref}`section-diffusion-absstab`. You can verify (see @problem-absstab-D1eigs) that for $m$ points in $[0,1)$, these are
 
 :::{math}
 :label: D1eigs

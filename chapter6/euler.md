@@ -239,7 +239,7 @@ To get the last line we applied the inequality recursively until reaching $ϵ_0$
   \left[ (1+hL)^i - 1 \right].
 ```
 
-We observe that $1+x \le e^x$ for $x\ge 0$ (see [Exercise 5](#problem-expdominate)). Hence $(1+hL)^i \le e^{i h L}$, which completes the proof.
+We observe that $1+x \le e^x$ for $x\ge 0$ (see @problem-expdominate). Hence $(1+hL)^i \le e^{i h L}$, which completes the proof.
 ````
 
 ```{index} ! order of accuracy; of a one-step IVP method
@@ -281,52 +281,65 @@ Euler's method is the ancestor of the two major families of IVP methods presente
 
 ## Exercises
 
-1. ✍ Do two steps of Euler's method for the following problems using the given step size $h$. Then, compute the error using the given exact solution.
+``````{exercise}
+✍ Do two steps of Euler's method for the following problems using the given step size $h$. Then, compute the error using the given exact solution.
 
-    **(a)** $u' = -2t u, \ u(0) = 2;\ h=0.1;\ \hat{u}(t) = 2e^{-t^2}$
+**(a)** $u' = -2t u, \ u(0) = 2;\ h=0.1;\ \hat{u}(t) = 2e^{-t^2}$
 
-    **(b)** $u' = u + t, \ u(0) = 2;\ h=0.2;\ \hat{u}(t) = -1-t+3e^t$
+**(b)** $u' = u + t, \ u(0) = 2;\ h=0.2;\ \hat{u}(t) = -1-t+3e^t$
 
-    **(c)** $t u' + u = 1, \ u(1) = 6, \ h = 0.25;\ \hat{u}(t) = 1+5/t$
+**(c)** $t u' + u = 1, \ u(1) = 6, \ h = 0.25;\ \hat{u}(t) = 1+5/t$
 
-    **(d)** $u' - 2u(1-u) = 0, \ u(0) = 1/2, \ h = 0.25; \ \hat{u}(t) = 1/(1 + e^{-2t})$
+**(d)** $u' - 2u(1-u) = 0, \ u(0) = 1/2, \ h = 0.25; \ \hat{u}(t) = 1/(1 + e^{-2t})$
+``````
 
-2. ⌨ For each IVP, solve the problem using {numref}`Function {number} <function-euler>`. (i) Plot the solution for $n=320$. (ii) For $n=10\cdot2^k$, $k=2,3,\ldots,10$, compute the error at the final time and make a log-log convergence plot, including a reference line for first-order convergence.
+``````{exercise}
+⌨ For each IVP, solve the problem using {numref}`Function {number} <function-euler>`. (i) Plot the solution for $n=320$. (ii) For $n=10\cdot2^k$, $k=2,3,\ldots,10$, compute the error at the final time and make a log-log convergence plot, including a reference line for first-order convergence.
 
-    **(a)** $u' = -2t u, \ 0 \le t \le 2, \ u(0) = 2;\  \hat{u}(t) = 2e^{-t^2}$
+**(a)** $u' = -2t u, \ 0 \le t \le 2, \ u(0) = 2;\  \hat{u}(t) = 2e^{-t^2}$
 
-    **(b)** $u' = u + t, \ 0 \le t \le 1, \ u(0) = 2;\  \hat{u}(t) = -1-t+3e^t$
+**(b)** $u' = u + t, \ 0 \le t \le 1, \ u(0) = 2;\  \hat{u}(t) = -1-t+3e^t$
 
-    **(c)** $(1+t^3)uu' = t^2,\ 0 \le xt \le 3, \ u(0) =1;\ \hat{u}(t) = [1+(2/3)\ln (1+xt^3)]^{1/2}$
+**(c)** $(1+t^3)uu' = t^2,\ 0 \le xt \le 3, \ u(0) =1;\ \hat{u}(t) = [1+(2/3)\ln (1+xt^3)]^{1/2}$
 
-    **(d)** $u' - 2u(1-u) = 0, \ 0 \le t \le 2, \ u(0) = 1/2; \ \hat{u}(t) = 1/(1 + e^{-2t})$
+**(d)** $u' - 2u(1-u) = 0, \ 0 \le t \le 2, \ u(0) = 1/2; \ \hat{u}(t) = 1/(1 + e^{-2t})$
 
-    **(e)** $v' - (1+x^2) v = 0, \ 1 \le x \le 3, \ v(1) = 1, \ \hat{v}(x) = e^{(x^3+3x-4)/3}$
+**(e)** $v' - (1+x^2) v = 0, \ 1 \le x \le 3, \ v(1) = 1, \ \hat{v}(x) = e^{(x^3+3x-4)/3}$
 
-    **(f)** $v' + (1+x^2) v^2 = 0, \ 0 \le x \le 2, \ v(0) = 2, \ \hat{v}(x) = 6/(2x^3+6x+3)$
+**(f)** $v' + (1+x^2) v^2 = 0, \ 0 \le x \le 2, \ v(0) = 2, \ \hat{v}(x) = 6/(2x^3+6x+3)$
 
-    **(g)** $u' = 2(1+t)(1+u^2), \ 0 \le t \le 0.5, \ u(0) = 0,  \ \hat{u}(t) = \tan(2t + t^2)$
+**(g)** $u' = 2(1+t)(1+u^2), \ 0 \le t \le 0.5, \ u(0) = 0,  \ \hat{u}(t) = \tan(2t + t^2)$
+``````
 
-3.  ✍ Here is an alternative to Euler's method:
+``````{exercise}
+ ✍ Here is an alternative to Euler's method:
 
-    ```{math}
-    \begin{split}
-      v_{i+1} &= u_i + h f(t_i,u_i),\\
-      u_{i+1} &= u_i + hf(t_{i}+h,v_{i+1}).
-    \end{split}
-    ```
+```{math}
+\begin{split}
+v_{i+1} &= u_i + h f(t_i,u_i),\\
+u_{i+1} &= u_i + hf(t_{i}+h,v_{i+1}).
+\end{split}
+```
 
-    **(a)** Write out the method explicitly in the general one-step form {eq}`onestepODE` (i.e., clarify what $\phi$ is for this method).
+**(a)** Write out the method explicitly in the general one-step form {eq}`onestepODE` (i.e., clarify what $\phi$ is for this method).
 
-    **(b)** Show that the method is consistent.
-  
-4. ✍ Consider the problem $u'=ku$, $u(0)=1$ for constant $k$ and $t>0$.
+**(b)** Show that the method is consistent.
+``````
 
-      **(a)** Find an explicit formula in terms of $h$, $k$, and $i$ for the Euler solution $u_i$ at $t=ih$.
+``````{exercise}
+✍ Consider the problem $u'=ku$, $u(0)=1$ for constant $k$ and $t>0$.
 
-      **(b)** Find values of $k$ and $h$ such that $|u_i|\to\infty$ as $i\to\infty$ while the exact solution $\hat{u}(t)$ is bounded as $t\to\infty$.
-  
-(problem-expdominate)=
-5. ✍ Prove the fact, used in the proof of {numref}`Theorem %s <theorem-euler-onestepGTE>`, that $1+x\le e^x$ for all $x\ge 0$.
+**(a)** Find an explicit formula in terms of $h$, $k$, and $i$ for the Euler solution $u_i$ at $t=ih$.
 
-6. ✍ Suppose that the error in making a step is also subject to roundoff error $\epsilon_{i+1}$, so that the total local error per unit step is $Ch^p+\epsilon_{i+1} h^{-1}$; assume that $|\epsilon_{i+1}| \le \epsilon$ for all $i$ and that the initial condition is known exactly. Generalize {numref}`Theorem %s <theorem-euler-onestepGTE>` for this case.
+**(b)** Find values of $k$ and $h$ such that $|u_i|\to\infty$ as $i\to\infty$ while the exact solution $\hat{u}(t)$ is bounded as $t\to\infty$.
+
+``````
+
+``````{exercise}
+:label: problem-expdominate
+✍ Prove the fact, used in the proof of {numref}`Theorem %s <theorem-euler-onestepGTE>`, that $1+x\le e^x$ for all $x\ge 0$.
+``````
+
+``````{exercise}
+✍ Suppose that the error in making a step is also subject to roundoff error $\epsilon_{i+1}$, so that the total local error per unit step is $Ch^p+\epsilon_{i+1} h^{-1}$; assume that $|\epsilon_{i+1}| \le \epsilon$ for all $i$ and that the initial condition is known exactly. Generalize {numref}`Theorem %s <theorem-euler-onestepGTE>` for this case.
+``````

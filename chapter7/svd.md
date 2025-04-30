@@ -128,7 +128,7 @@ Another close connection between EVD and SVD comes via the $(m+n)\times (m+n)$ m
 \end{bmatrix}.
 ```
 
-If $\sigma$ is a singular value of $\mathbf{B}$, then $\sigma$ and $-\sigma$ are eigenvalues of $\mathbf{C}$, and the associated eigenvector immediately reveals a left and a right singular vector (see [Exercise 11](#problem-svd-svdtoevd)). This connection is implicitly exploited by software to compute the SVD.
+If $\sigma$ is a singular value of $\mathbf{B}$, then $\sigma$ and $-\sigma$ are eigenvalues of $\mathbf{C}$, and the associated eigenvector immediately reveals a left and a right singular vector (see @problem-svd-svdtoevd). This connection is implicitly exploited by software to compute the SVD.
 
 ## Interpreting the SVD
 

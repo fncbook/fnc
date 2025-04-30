@@ -71,7 +71,7 @@ $$
 This is solved for $\Phi(x)$ and put back into {eq}`bary1` to get {eq}`bary2`.
 ::::
 
-Equation {eq}`bary2` is certainly an odd-looking way to write a polynomial! Indeed, it is technically undefined when $x$ equals one of the nodes, but in fact, $\lim_{x\to t_k} p(x) = y_k$, so a continuous extension to the nodes is justified. (See [Exercise 3](#problem-barycentric-limit).) 
+Equation {eq}`bary2` is certainly an odd-looking way to write a polynomial! Indeed, it is technically undefined when $x$ equals one of the nodes, but in fact, $\lim_{x\to t_k} p(x) = y_k$, so a continuous extension to the nodes is justified. (See @problem-barycentric-limit.) 
 
 (example-writeoutbary2)=
 ::::{prf:example}

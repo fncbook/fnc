@@ -73,7 +73,7 @@ We define the rounding function $\fl(x)$ as the map from real number $x$ to the 
 \frac{|\fl(x)-x|}{|x|} \le \frac{2^{n-d-1}}{2^n} \le  \tfrac{1}{2}\macheps.
 ```
 
-In words, every real number is represented with a uniformly bounded relative precision. Inequality {eq}`fpbound` holds true for negative $x$ as well. In [Exercise 2](#problem-fp-fprelative) you are asked to show that an equivalent statement is that
+In words, every real number is represented with a uniformly bounded relative precision. Inequality {eq}`fpbound` holds true for negative $x$ as well. In @problem-fp-fprelative you are asked to show that an equivalent statement is that
 
 ```{math}
 :label: fpboundalt
@@ -245,31 +245,42 @@ We should not expect that two mathematically equivalent results will be equal wh
 ```{note}
 Exercises marked with ✍ are intended to be done by hand or with the aid of a simple calculator. Exercises marked with ⌨ are intended to be solved using a computer.
 ```
-(problem-float-d4)=
-1. ✍ Consider a floating-point set $\float$ defined by {eq}`floatpoint` and {eq}`mantissa` with $d=4$.
-  
-    **(a)** How many elements of $\float$ are there in the real interval $[1/2,4]$, including the endpoints?
 
-    **(b)** What is the element of $\float$ closest to the real number $1/10$? (Hint: Find the interval $[2^n,2^{n+1})$ that contains $1/10$, then enumerate all the candidates in $\float$.)
+``````{exercise}
+:label: problem-float-d4
+✍ Consider a floating-point set $\float$ defined by {eq}`floatpoint` and {eq}`mantissa` with $d=4$.
 
-    **(c)** What is the smallest positive integer not in $\float$? (Hint: For what value of the exponent does the spacing between floating-point numbers become larger than 1?)
+**(a)** How many elements of $\float$ are there in the real interval $[1/2,4]$, including the endpoints?
 
-(problem-fp-fprelative)=
-2. ✍ Prove that {eq}`fpbound` is equivalent to {eq}`fpboundalt`. This means showing first that {eq}`fpbound` implies {eq}`fpboundalt`, and then separately that {eq}`fpboundalt` implies {eq}`fpbound`.
+**(b)** What is the element of $\float$ closest to the real number $1/10$? (Hint: Find the interval $[2^n,2^{n+1})$ that contains $1/10$, then enumerate all the candidates in $\float$.)
 
-3. ⌨ There are much better rational approximations to $\pi$ than 22/7 as used in {numref}`Demo {number} <demo-float-accuracy>`. For each one below, find its absolute and relative accuracy, and (rounding down to an integer) the number of accurate digits. 
+**(c)** What is the smallest positive integer not in $\float$? (Hint: For what value of the exponent does the spacing between floating-point numbers become larger than 1?)
+``````
 
-    **(a)** 355/113
+``````{exercise}
+:label: problem-fp-fprelative
+✍ Prove that {eq}`fpbound` is equivalent to {eq}`fpboundalt`. This means showing first that {eq}`fpbound` implies {eq}`fpboundalt`, and then separately that {eq}`fpboundalt` implies {eq}`fpbound`.
+``````
 
-    **(b)** 103638/32989
+``````{exercise}
+⌨ There are much better rational approximations to $\pi$ than 22/7 as used in {numref}`Demo {number} <demo-float-accuracy>`. For each one below, find its absolute and relative accuracy, and (rounding down to an integer) the number of accurate digits. 
 
-    ```{index} IEEE 754
-    ```
+**(a)** 355/113
 
-4. ✍ IEEE 754 **single precision** specifies that 23 binary bits are used for the value $f$ in the significand $1+f$ in {eq}`mantissa`. Because they need less storage space and can be operated on more quickly than double-precision values, single-precision values can be useful in low-precision applications. (They are supported as type `Float32` in Julia.)
+**(b)** 103638/32989
+``````
 
-    **(a)** In base-10 terms, what is the first single-precision number greater than $1$ in this system?
+```{index} IEEE 754
+```
 
-    **(b)** What is the smallest positive integer that is not a single-precision number? (See the hint to Exercise 1.)
+``````{exercise}
+✍ IEEE 754 **single precision** specifies that 23 binary bits are used for the value $f$ in the significand $1+f$ in {eq}`mantissa`. Because they need less storage space and can be operated on more quickly than double-precision values, single-precision values can be useful in low-precision applications. (They are supported as type `Float32` in Julia.)
 
-5. ⌨ Julia defines a function `nextfloat` that gives the next-larger floating-point value of a given number. What is the next float past `floatmax()`? What is the next float past `-Inf`? 
+**(a)** In base-10 terms, what is the first single-precision number greater than $1$ in this system?
+
+**(b)** What is the smallest positive integer that is not a single-precision number? (See the hint to Exercise 1.)
+``````
+
+``````{exercise}
+⌨ Julia defines a function `nextfloat` that gives the next-larger floating-point value of a given number. What is the next float past `floatmax()`? What is the next float past `-Inf`? 
+``````

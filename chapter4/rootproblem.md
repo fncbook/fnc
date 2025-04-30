@@ -158,49 +158,64 @@ When $r$ is a nonsimple root, the condition number {eq}`rootcondnum` is effectiv
 
 **(c)** Compute the condition number of each root found in part (b). 
 
-1. $x^2=e^{-x}$, over $[-2,2]$
+``````{exercise}
+$x^2=e^{-x}$, over $[-2,2]$
+``````
 
-2. $2x = \tan x$, over $[-0.2,1.4]$
-  
-3. $e^{x+1}=2+x$, over $[-2,2]$
-  
-    ---
+``````{exercise}
+$2x = \tan x$, over $[-0.2,1.4]$
+``````
 
-4. ⌨ A basic safe type of investment is an annuity: one makes monthly deposits of size $P$ for $n$ months at a fixed annual interest rate $r$, and at maturity collects the amount
-  
-    $$
-    \frac{12 P}{r} \left( \Bigl(1+\frac{r}{12}\Bigr)^n - 1\right).
-    $$
+``````{exercise}
+$e^{x+1}=2+x$, over $[-2,2]$
 
-    Say you want to create an annuity for a term of 300 months and final value of \$1,000,000. Using `nlsolve`, make a table of the interest rate you will need to get for each of the different contribution values $P=500,550,\ldots,1000$.  
+``````
 
-5. ⌨ The most easily observed properties of the orbit of a celestial body around the sun are the period $\tau$ and the elliptical eccentricity $\epsilon$. (A circle has $\epsilon=0$.) From these, it is possible to find at any time $t$ the angle $\theta(t)$ made between the body's position and the major axis of the ellipse. This is done through
-  
-    ```{math}
-    :label: kepler1
-    \tan \frac{\theta}{2} = \sqrt{\frac{1+\epsilon}{1-\epsilon}}\,
-    \tan \frac{\psi}{2},
-    ```
+---
 
-    where the eccentric anomaly $\psi(t)$ satisfies Kepler's equation:
-  
-    ```{math}
-    :label: kepler2
-    \psi - \epsilon \sin \psi - \frac{2\pi t}{\tau} = 0.
-    ```
+``````{exercise}
+⌨ A basic safe type of investment is an annuity: one makes monthly deposits of size $P$ for $n$ months at a fixed annual interest rate $r$, and at maturity collects the amount
 
-    Equation {eq}`kepler2` must be solved numerically to find $\psi(t)$, and then {eq}`kepler1` can be solved analytically to find $\theta(t)$.
+$$
+\frac{12 P}{r} \left( \Bigl(1+\frac{r}{12}\Bigr)^n - 1\right).
+$$
 
-    The asteroid Eros has $\tau=1.7610$ years and $\epsilon=0.2230$. Using `nlsolve` for {eq}`kepler2`, make a plot of $\theta(t)$ for 100 values of $t$ between $0$ and $\tau$, which is one full orbit. (Note: Use `mod(θ,2π)` to put the angle between 0 and $2\pi$ if you want the result to be a continuous function.)
-   
-6. ⌨  Lambert's $W$ function is defined as the inverse of $x e^x$. That is, $y=W(x)$ if and only if $x=ye^y$. Write a function `lambertW` that computes $W$ using `nlsolve`. Make a plot of $W(x)$ for $0\le x \le 4$.  
+Say you want to create an annuity for a term of 300 months and final value of \$1,000,000. Using `nlsolve`, make a table of the interest rate you will need to get for each of the different contribution values $P=500,550,\ldots,1000$.  
+``````
 
-7. ✍ For each function, find the multiplicity of the given root. If it is a simple root, find its absolute condition number.
-  
-    **(a)** $f(x) = x^3-2x^2+x-2$, root $r=2$
+``````{exercise}
+⌨ The most easily observed properties of the orbit of a celestial body around the sun are the period $\tau$ and the elliptical eccentricity $\epsilon$. (A circle has $\epsilon=0$.) From these, it is possible to find at any time $t$ the angle $\theta(t)$ made between the body's position and the major axis of the ellipse. This is done through
 
-    **(b)** $f(x) = (\cos x  + 1)^2$, root $r=\pi$
+```{math}
+:label: kepler1
+\tan \frac{\theta}{2} = \sqrt{\frac{1+\epsilon}{1-\epsilon}}\,
+\tan \frac{\psi}{2},
+```
 
-    **(c)** $f(x) = \frac{\sin^2 x}{x}$, root $r=0$ (define $f(0) =0$)
+where the eccentric anomaly $\psi(t)$ satisfies Kepler's equation:
 
-    **(d)** $f(x) =(x-1)\log(x)$, root $r=1$
+```{math}
+:label: kepler2
+\psi - \epsilon \sin \psi - \frac{2\pi t}{\tau} = 0.
+```
+
+Equation {eq}`kepler2` must be solved numerically to find $\psi(t)$, and then {eq}`kepler1` can be solved analytically to find $\theta(t)$.
+
+The asteroid Eros has $\tau=1.7610$ years and $\epsilon=0.2230$. Using `nlsolve` for {eq}`kepler2`, make a plot of $\theta(t)$ for 100 values of $t$ between $0$ and $\tau$, which is one full orbit. (Note: Use `mod(θ,2π)` to put the angle between 0 and $2\pi$ if you want the result to be a continuous function.)
+``````
+
+``````{exercise}
+⌨  Lambert's $W$ function is defined as the inverse of $x e^x$. That is, $y=W(x)$ if and only if $x=ye^y$. Write a function `lambertW` that computes $W$ using `nlsolve`. Make a plot of $W(x)$ for $0\le x \le 4$.  
+``````
+
+``````{exercise}
+✍ For each function, find the multiplicity of the given root. If it is a simple root, find its absolute condition number.
+
+**(a)** $f(x) = x^3-2x^2+x-2$, root $r=2$
+
+**(b)** $f(x) = (\cos x  + 1)^2$, root $r=\pi$
+
+**(c)** $f(x) = \frac{\sin^2 x}{x}$, root $r=0$ (define $f(0) =0$)
+
+**(d)** $f(x) =(x-1)\log(x)$, root $r=1$
+``````

@@ -208,7 +208,7 @@ Call this piecewise linear function $p(x)$. Consider a maximum element of $\math
 |p(x)| = \left|\sum_{k=0}^n z_k H_k(x)\right| \le \sum_{k=0}^n |z_k| H_k(x) \le \|\mathbf{z}\|_\infty \sum_{k=0}^n H_k(x) = \|\mathbf{z}\|_\infty.
 ```
 
-You are asked to prove the final step above in [Exercise 4](#problem-plpartunity). We conclude that  $\|p\|_\infty\le \|\mathbf{z}\|_\infty$, so that $\|p\|_\infty = \|\mathbf{z}\|_\infty$, which completes the proof.
+You are asked to prove the final step above in @problem-plpartunity. We conclude that  $\|p\|_\infty\le \|\mathbf{z}\|_\infty$, so that $\|p\|_\infty = \|\mathbf{z}\|_\infty$, which completes the proof.
 ````
 
 Now suppose that $f$ is a "nice" function on an interval $[a,b]$ containing all of the nodes. We can sample values of $f$ to get data, i.e., $y_k=f(t_k)$ for all $k$, then perform piecewise linear interpolation of the data to get a different function, the interpolant $p$. How close is $p$ to the original $f$? 
@@ -228,7 +228,7 @@ Suppose that $f(x)$ has a continuous second derivative in $[a,b]$ (often express
 where $M = \bigl\| f'' \bigr\|_\infty$.
 ````
 
-For an outline of a proof, see [Exercise 5](#problem-pwlin-placcuracy).
+For an outline of a proof, see @problem-pwlin-placcuracy.
 
 We normally don't have access to $f''$, so the importance of {numref}`Theorem %s <theorem-pwlin-converge>` is that the error in the interpolant is $O(h^2)$ as $h\to 0$. 
 
@@ -273,64 +273,73 @@ Hence a log-log graph of error versus $h$ should be approximately a straight lin
 
 ## Exercises
 
-1. ⌨ For each given function and interval, perform piecewise linear interpolation using {numref}`Function {number} <function-plinterp>` for $n+1$ equispaced nodes with $n=10,20,40,80,160,320$. For each $n$, estimate the error
+``````{exercise}
+⌨ For each given function and interval, perform piecewise linear interpolation using {numref}`Function {number} <function-plinterp>` for $n+1$ equispaced nodes with $n=10,20,40,80,160,320$. For each $n$, estimate the error
 
-    ```{math}
-    E(n) = \| f-p \|_\infty = \max_x | f(x) - p(x) |
-    ```
+```{math}
+E(n) = \| f-p \|_\infty = \max_x | f(x) - p(x) |
+```
 
-    by evaluating the function and interpolant at 1600 points in the interval. Make a log-log plot of $E$ as a function of $n$ and add the line $E=Cn^{-2}$ for a constant $C$ of your choosing.
+by evaluating the function and interpolant at 1600 points in the interval. Make a log-log plot of $E$ as a function of $n$ and add the line $E=Cn^{-2}$ for a constant $C$ of your choosing.
 
-    **(a)** $\cos(\pi x^2)$ on $[0,4]$
+**(a)** $\cos(\pi x^2)$ on $[0,4]$
 
-    **(b)** $\log(x)$ on $[1,20]$
+**(b)** $\log(x)$ on $[1,20]$
 
-    **(c)** $\sin\left(\frac{1}{x}\right)$ on $\left[\frac{1}{2},7\right]$
+**(c)** $\sin\left(\frac{1}{x}\right)$ on $\left[\frac{1}{2},7\right]$
+``````
 
-2. ✍ For this problem, let $H(x)$ be the hat function that passes through the three points $(-1,0)$, $(0,1)$, and $(1,0)$.
+``````{exercise}
+✍ For this problem, let $H(x)$ be the hat function that passes through the three points $(-1,0)$, $(0,1)$, and $(1,0)$.
 
-    **(a)** Write out a piecewise definition of $H$ in the style of {eq}`hatfun`.
+**(a)** Write out a piecewise definition of $H$ in the style of {eq}`hatfun`.
 
-    **(b)** Define the function $Q$ by $Q(x) = \int_{x-1}^x H(t)\, dt$. Find a piecewise formula for $Q(x)$. (Hint: Perform the integration separately for the cases $-1\le x \le 0$, $0\le x \le 1$, etc.)
+**(b)** Define the function $Q$ by $Q(x) = \int_{x-1}^x H(t)\, dt$. Find a piecewise formula for $Q(x)$. (Hint: Perform the integration separately for the cases $-1\le x \le 0$, $0\le x \le 1$, etc.)
 
-    **(c)** Make a sketch of $Q(x)$ for $-2\le x \le 2$.
+**(c)** Make a sketch of $Q(x)$ for $-2\le x \le 2$.
 
-    **(d)** Show that $Q$ is continuous. Are $Q'$ and $Q''$?
-  
-3. ✍ Before electronic calculators, the function $\ln(x)$ was often computed using piecewise linear interpolation with a table of values. If you were using such a table at the nodes $3.1,3.2,\ldots,3.9,4$, what is an upper bound on the error in the result?
+**(d)** Show that $Q$ is continuous. Are $Q'$ and $Q''$?
+``````
 
-(problem-plpartunity)=
-4. ✍ Show that for any node distribution and any $x\in[t_0,t_n]$,
-  
-    ```{math}
-    :label: plpu
-    \sum_{k=0}^n H_k(x) = 1.
-    ```
+``````{exercise}
+✍ Before electronic calculators, the function $\ln(x)$ was often computed using piecewise linear interpolation with a table of values. If you were using such a table at the nodes $3.1,3.2,\ldots,3.9,4$, what is an upper bound on the error in the result?
 
-    (Hint: The simplest way is to apply {eq}`plbasissol`.) This is called the **partition of unity** property.
+``````
 
-(problem-pwlin-placcuracy)=
-5. ✍ Here we consider a proof of {numref}`Theorem %s <theorem-pwlin-converge>` using the mean value theorems from elementary calculus: If $f$ is continuously differentiable in $(a,b)$, then there exist points $s$ and $t$ in $(a,b)$ such that
-  
-    ```{math}
-    \int_a^b f(z) \, dz = (b-a)f(s) \qquad \text{and} \qquad f'(t) = \frac{f(b)-f(a)}{b-a}.
-    ```
+``````{exercise}
+:label: problem-plpartunity
+✍ Show that for any node distribution and any $x\in[t_0,t_n]$,
 
-    For the following, suppose $x \in (t_k,t_{k+1})$.
+```{math}
+:label: plpu
+\sum_{k=0}^n H_k(x) = 1.
+```
 
-    **(a)** Show that for some $s \in (t_k,t_{k+1})$,
+(Hint: The simplest way is to apply {eq}`plbasissol`.) This is called the **partition of unity** property.
 
-    ```{math}
-    f(x) = y_k + (x-t_k)f'(s).
-    ```
+``````
 
-    **(b)** Show that for some other values $u$ and $v$ in $(t_k,t_{k+1})$,
+``````{exercise}
+:label: problem-pwlin-placcuracy
+✍ Here we consider a proof of {numref}`Theorem %s <theorem-pwlin-converge>` using the mean value theorems from elementary calculus: If $f$ is continuously differentiable in $(a,b)$, then there exist points $s$ and $t$ in $(a,b)$ such that
 
-    ```{math}
-    f'(s) -  \frac{y_{k+1}-y_k}{t_{k+1}-t_k} = (s-u) f''(v).
-    ```
+```{math}
+\int_a^b f(z) \, dz = (b-a)f(s) \qquad \text{and} \qquad f'(t) = \frac{f(b)-f(a)}{b-a}.
+```
 
-    **(c)** Use {eq}`pwlinear` to finish the proof of the theorem.
-  
+For the following, suppose $x \in (t_k,t_{k+1})$.
 
+**(a)** Show that for some $s \in (t_k,t_{k+1})$,
 
+```{math}
+f(x) = y_k + (x-t_k)f'(s).
+```
+
+**(b)** Show that for some other values $u$ and $v$ in $(t_k,t_{k+1})$,
+
+```{math}
+f'(s) -  \frac{y_{k+1}-y_k}{t_{k+1}-t_k} = (s-u) f''(v).
+```
+
+**(c)** Use {eq}`pwlinear` to finish the proof of the theorem.
+``````

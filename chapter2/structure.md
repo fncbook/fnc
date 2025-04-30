@@ -230,87 +230,99 @@ The speed and stability of the Cholesky factorization make it the top choice for
 
 ## Exercises
 
-1. ✍  For each matrix, use {eq}`diag-dominant` to determine whether it is diagonally dominant.
+``````{exercise}
+✍  For each matrix, use {eq}`diag-dominant` to determine whether it is diagonally dominant.
 
-    ```{math}
-    \mathbf{A} =
-    \begin{bmatrix}
-    3  & 1  & 0 & 1  \\
-    0  & -2 & 0 & 1  \\
-    -1 & 0  & 4 & -1 \\
-    0  & 0  & 0 & 6
-    \end{bmatrix},
-    \quad
-    \mathbf{B} =
-    \begin{bmatrix}
-    1  & 0  & 0  & 0 & 0  \\
-    0  & 1  & 0  & 0 & 0  \\
-    0  & 0  & 1  & 0 & 0  \\
-    0  & 0  & 0  & 1 & 0  \\
-    0  & 0  & 0  & 0 & 0
-    \end{bmatrix},
-    \quad \mathbf{C} =
-    \begin{bmatrix}
-    2  & -1 & 0  & 0      \\
-    -1 & 2  & -1 & 0      \\
-    0  & -1 & 2  & -1     \\
-    0  & 0  & -1 & 2
-    \end{bmatrix}.
-    ```
+```{math}
+\mathbf{A} =
+\begin{bmatrix}
+3  & 1  & 0 & 1  \\
+0  & -2 & 0 & 1  \\
+-1 & 0  & 4 & -1 \\
+0  & 0  & 0 & 6
+\end{bmatrix},
+\quad
+\mathbf{B} =
+\begin{bmatrix}
+1  & 0  & 0  & 0 & 0  \\
+0  & 1  & 0  & 0 & 0  \\
+0  & 0  & 1  & 0 & 0  \\
+0  & 0  & 0  & 1 & 0  \\
+0  & 0  & 0  & 0 & 0
+\end{bmatrix},
+\quad \mathbf{C} =
+\begin{bmatrix}
+2  & -1 & 0  & 0      \\
+-1 & 2  & -1 & 0      \\
+0  & -1 & 2  & -1     \\
+0  & 0  & -1 & 2
+\end{bmatrix}.
+```
+``````
 
-2. ⌨ For each matrix, use inspection or `cholesky` in Julia to determine whether it is SPD.
+``````{exercise}
+⌨ For each matrix, use inspection or `cholesky` in Julia to determine whether it is SPD.
 
-    ```{math}
-    \mathbf{A} =
-    \begin{bmatrix}
-    1 & 0 & -1 \\ 0 & 4 & 5 \\ -1 & 5 & 10
-    \end{bmatrix},
-    \qquad
-    \mathbf{B} =
-    \begin{bmatrix}
-    1 & 0 & 1 \\ 0 & 4 & 5 \\ -1 & 5 & 10
-    \end{bmatrix},
-    \qquad
-    \mathbf{C} =
-    \begin{bmatrix}
-    1 & 0 & 1 \\ 0 & 4 & 5 \\ 1 & 5 & 1
-    \end{bmatrix}.
-    ```
+```{math}
+\mathbf{A} =
+\begin{bmatrix}
+1 & 0 & -1 \\ 0 & 4 & 5 \\ -1 & 5 & 10
+\end{bmatrix},
+\qquad
+\mathbf{B} =
+\begin{bmatrix}
+1 & 0 & 1 \\ 0 & 4 & 5 \\ -1 & 5 & 10
+\end{bmatrix},
+\qquad
+\mathbf{C} =
+\begin{bmatrix}
+1 & 0 & 1 \\ 0 & 4 & 5 \\ 1 & 5 & 1
+\end{bmatrix}.
+```
+``````
 
-3. ✍ Show that the diagonal entries of a symmetric positive definite matrix are positive numbers. (Hint: Apply certain special cases of {eq}`SPD-def`.)
+``````{exercise}
+✍ Show that the diagonal entries of a symmetric positive definite matrix are positive numbers. (Hint: Apply certain special cases of {eq}`SPD-def`.)
+``````
 
-4. ⌨ Using {numref}`Function {number} <function-lufact>` as a guide, write a function
+``````{exercise}
+⌨ Using {numref}`Function {number} <function-lufact>` as a guide, write a function
 
-    ``` julia
-    function luband(A,upper,lower)
-    ```
+``` julia
+function luband(A,upper,lower)
+```
 
-    that accepts upper and lower bandwidth values and returns LU factors (without pivoting) in a way that avoids doing arithmetic using the locations that are known to stay zero. (Hint: Refer to the more efficient form of `lufact` given in {numref}`section-linsys-efficiency`.)
+that accepts upper and lower bandwidth values and returns LU factors (without pivoting) in a way that avoids doing arithmetic using the locations that are known to stay zero. (Hint: Refer to the more efficient form of `lufact` given in {numref}`section-linsys-efficiency`.)
 
-    Test your function on the matrix with elements
+Test your function on the matrix with elements
 
-    $$
-    A_{ij} = \begin{cases} \frac{1}{i+j}, & -1 \le i-j \le 2,\\ 
-    0 & \text{otherwise.} \end{cases}
-    $$
+$$
+A_{ij} = \begin{cases} \frac{1}{i+j}, & -1 \le i-j \le 2,\\ 
+0 & \text{otherwise.} \end{cases}
+$$
+``````
 
-5. ⌨ The `Tridiagonal` matrix type invokes a specialized algorithm for solving a linear system. 
+``````{exercise}
+⌨ The `Tridiagonal` matrix type invokes a specialized algorithm for solving a linear system. 
 
-    **(a)** Set `n=1000` and `t=0`.  In a loop that runs 50 times, generate a linear system via 
-    ``` julia
-    A = triu( tril(rand(n,n),1), -1)
-    b = ones(n)
-    ```
-    Using `@elapsed`, increment `t` by the time it takes to perform `A\b`. Print out the final value of `t`.
+**(a)** Set `n=1000` and `t=0`.  In a loop that runs 50 times, generate a linear system via 
+``` julia
+A = triu( tril(rand(n,n),1), -1)
+b = ones(n)
+```
+Using `@elapsed`, increment `t` by the time it takes to perform `A\b`. Print out the final value of `t`.
 
-    **(b)** Repeat the experiment of part (a), but generate the matrix via
-    ``` julia
-    A = Tridiagonal(rand(n,n))
-    ```
-    What is the ratio of running times for part (a) and (b)?
+**(b)** Repeat the experiment of part (a), but generate the matrix via
+``` julia
+A = Tridiagonal(rand(n,n))
+```
+What is the ratio of running times for part (a) and (b)?
 
-    **(c)** Now perform the experiment of part (b) for $n=1000,1200,1400,\ldots,3000$, keeping the total time for each value of $n$ in a vector. Plot running time as a function of $n$ on a log-log scale. Is the time most like $O(n)$, $O(n^2)$, or $O(n^3)$? (If the answer is unclear, try increasing the number of solves per value of $n$ to 100 or more.)
+**(c)** Now perform the experiment of part (b) for $n=1000,1200,1400,\ldots,3000$, keeping the total time for each value of $n$ in a vector. Plot running time as a function of $n$ on a log-log scale. Is the time most like $O(n)$, $O(n^2)$, or $O(n^3)$? (If the answer is unclear, try increasing the number of solves per value of $n$ to 100 or more.)
+``````
 
-(problem-ATAisspd)=
-6. ✍ Prove that if $\mathbf{A}$ is any real invertible square matrix, then $\mathbf{A}^T\mathbf{A}$ is SPD. (Hint: First show that $\mathbf{x}^T\mathbf{A}^T\mathbf{A}\mathbf{x} \ge 0$ for all $\mathbf{x}$. Then explain why zero is ruled out if $\mathbf{x}\neq \boldsymbol{0}$.)
+``````{exercise}
+:label: problem-ATAisspd
+✍ Prove that if $\mathbf{A}$ is any real invertible square matrix, then $\mathbf{A}^T\mathbf{A}$ is SPD. (Hint: First show that $\mathbf{x}^T\mathbf{A}^T\mathbf{A}\mathbf{x} \ge 0$ for all $\mathbf{x}$. Then explain why zero is ruled out if $\mathbf{x}\neq \boldsymbol{0}$.)
 
+``````

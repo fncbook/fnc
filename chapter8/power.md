@@ -275,7 +275,7 @@ $\mathbf{A} = \begin{bmatrix}
 ``````
 
 ``````{exercise}
-⌨ Copy the instructions from [Exercise 8.1.5](#problem-structure-actorsmat) to obtain a large, sparse matrix $\mathbf{A}$. Use {numref}`Function {number} <function-poweriter>` to find the leading eigenvalue of $\mathbf{A}^T\mathbf{A}$ to at least six significant digits.
+⌨ Copy the instructions from @problem-structure-actorsmat to obtain a large, sparse matrix $\mathbf{A}$. Use {numref}`Function {number} <function-poweriter>` to find the leading eigenvalue of $\mathbf{A}^T\mathbf{A}$ to at least six significant digits.
 ``````
 
 ``````{exercise}

@@ -141,7 +141,7 @@ Condition numbers of the major elementary functions are given in {numref}`Table 
   - $\kappa_f(x) = \dfrac{1}{\lvert \log(x) \rvert}$
 ```
 
-As you are asked to show in [Exercise 4](#problem-conditioning-chain), when two functions $f$ and $g$ are combined in a chain as $h(x)=f(g(x))$, the composite condition number is
+As you are asked to show in @problem-conditioning-chain, when two functions $f$ and $g$ are combined in a chain as $h(x)=f(g(x))$, the composite condition number is
 
 ```{math}
 :label: condition-chain
@@ -246,51 +246,68 @@ The condition number of a root can be arbitrarily large. In the extreme case of 
 
 ## Exercises
 
-1. ✍ Use {eq}`conditionderiv` to derive the relative condition numbers of the following functions appearing in {numref}`table-condition-functions`.
+``````{exercise}
+✍ Use {eq}`conditionderiv` to derive the relative condition numbers of the following functions appearing in {numref}`table-condition-functions`.
 
-    **(a)** $f(x) = x^p,\quad$
-    **(b)** $f(x) = \log(x),\quad$
-    **(c)** $f(x) = \cos(x),\quad$
-    **(d)** $f(x) = e^x$.
+**(a)** $f(x) = x^p,\quad$
+**(b)** $f(x) = \log(x),\quad$
+**(c)** $f(x) = \cos(x),\quad$
+**(d)** $f(x) = e^x$.
+``````
 
-2. ✍ Use the chain rule {eq}`condition-chain` to find the relative condition number of the given function. Then check your result by applying {eq}`conditionderiv` directly.
+``````{exercise}
+✍ Use the chain rule {eq}`condition-chain` to find the relative condition number of the given function. Then check your result by applying {eq}`conditionderiv` directly.
 
-    **(a)** $f(x) = \sqrt{x+5},\quad$
-    **(b)** $f(x) = \cos(2\pi x),\quad$
-    **(c)** $f(x) = e^{-x^2}.$
+**(a)** $f(x) = \sqrt{x+5},\quad$
+**(b)** $f(x) = \cos(2\pi x),\quad$
+**(c)** $f(x) = e^{-x^2}.$
+``````
 
-3. ✍ Calculate the relative condition number of each function, and identify all values of $x$ at which $\kappa_{f}(x)\to\infty$ (including limits as $x\to\pm\infty$).
+``````{exercise}
+✍ Calculate the relative condition number of each function, and identify all values of $x$ at which $\kappa_{f}(x)\to\infty$ (including limits as $x\to\pm\infty$).
 
-    **(a)** $f(x) = \tanh(x),\quad$
-    **(b)** $f(x) = \dfrac{e^x-1}{x},\quad$
-    **(c)** $f(x) = \dfrac{1-\cos(x)}{x}.$
+**(a)** $f(x) = \tanh(x),\quad$
+**(b)** $f(x) = \dfrac{e^x-1}{x},\quad$
+**(c)** $f(x) = \dfrac{1-\cos(x)}{x}.$
+``````
 
-(problem-conditioning-chain)=
-4. ✍ Suppose that $f$ and $g$ are real-valued functions that have relative condition numbers $\kappa_f$ and $\kappa_g$, respectively. Define a new function $h(x)=f\bigl(g(x)\bigr)$. Show that for $x$ in the domain of $h$, the relative condition number of $h$ satisfies {eq}`condition-chain`.
+``````{exercise}
+:label: problem-conditioning-chain
+✍ Suppose that $f$ and $g$ are real-valued functions that have relative condition numbers $\kappa_f$ and $\kappa_g$, respectively. Define a new function $h(x)=f\bigl(g(x)\bigr)$. Show that for $x$ in the domain of $h$, the relative condition number of $h$ satisfies {eq}`condition-chain`.
+``````
 
-5. ✍ Suppose that $f$ is a function with relative condition number $\kappa_f$, and that $f^{-1}$ is its inverse function. Show that the relative condition number of $f^{-1}$ satisfies
-  
-    ```{math}
-    \kappa_{f^{-1}}(x) = \frac{1}{\kappa_f\Bigl( f^{-1}(x) \Bigr)},
-    ```
 
-    provided the denominator is nonzero.
+``````{exercise}
+✍ Suppose that $f$ is a function with relative condition number $\kappa_f$, and that $f^{-1}$ is its inverse function. Show that the relative condition number of $f^{-1}$ satisfies
 
-(problem-quadrootcond)=
-6. ✍  Referring to the derivation of {eq}`rootcond1`, derive an expression for the relative condition number of a root of $ax^2+bx+c=0$ due to perturbations in $b$ only. 
+```{math}
+\kappa_{f^{-1}}(x) = \frac{1}{\kappa_f\Bigl( f^{-1}(x) \Bigr)},
+```
 
-7. The polynomial $x^2-2x+1$ has a double root at 1. Let $r_1(\epsilon)$ and $r_2(\epsilon)$ be the roots of the perturbed polynomial $x^2-(2+\epsilon)x+1$.
-  
-    **(a)** ✍/⌨ Using a computer or calculator, make a table with rows for $\epsilon = 10^{-2}$, $10^{-4}$, $10^{-6}$, $\ldots$, $10^{-12}$ and columns for $\epsilon$, $r_1(\epsilon)$, $r_2(\epsilon)$, $|r_1(\epsilon)-1|$, and $|r_2(\epsilon)-1|$.
+provided the denominator is nonzero.
+``````
 
-    **(b)** ✍ Show that the observations of part (a) satisfy
-    
-    $$\max\{\, |r_1(\epsilon)-1|, |r_2(\epsilon)-1| \,\} \approx C \epsilon^q$$
-    
-    for some $0<q<1$. (This supports the conclusion that $\kappa=\infty$ at the double root.) 
-  
-8. ✍ Generalize {eq}`rootcond1` to finding a root of the $n$th degree polynomial $p(x) = a_nx^n + \cdots + a_1 x + a_0$, and show that the relative condition number of a root $r$ with respect to perturbations only in $a_k$ is
-  
-    ```{math}
-    \kappa_r(a_k) = \left| \frac{a_k r^{k-1}}{p'(r)} \right|.
-    ```
+``````{exercise}
+:label: problem-quadrootcond
+✍  Referring to the derivation of {eq}`rootcond1`, derive an expression for the relative condition number of a root of $ax^2+bx+c=0$ due to perturbations in $b$ only. 
+``````
+
+``````{exercise}
+The polynomial $x^2-2x+1$ has a double root at 1. Let $r_1(\epsilon)$ and $r_2(\epsilon)$ be the roots of the perturbed polynomial $x^2-(2+\epsilon)x+1$.
+
+**(a)** ✍/⌨ Using a computer or calculator, make a table with rows for $\epsilon = 10^{-2}$, $10^{-4}$, $10^{-6}$, $\ldots$, $10^{-12}$ and columns for $\epsilon$, $r_1(\epsilon)$, $r_2(\epsilon)$, $|r_1(\epsilon)-1|$, and $|r_2(\epsilon)-1|$.
+
+**(b)** ✍ Show that the observations of part (a) satisfy
+
+$$\max\{\, |r_1(\epsilon)-1|, |r_2(\epsilon)-1| \,\} \approx C \epsilon^q$$
+
+for some $0<q<1$. (This supports the conclusion that $\kappa=\infty$ at the double root.) 
+``````
+
+``````{exercise}
+✍ Generalize {eq}`rootcond1` to finding a root of the $n$th degree polynomial $p(x) = a_nx^n + \cdots + a_1 x + a_0$, and show that the relative condition number of a root $r$ with respect to perturbations only in $a_k$ is
+
+```{math}
+\kappa_r(a_k) = \left| \frac{a_k r^{k-1}}{p'(r)} \right|.
+```
+``````

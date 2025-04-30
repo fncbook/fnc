@@ -132,7 +132,7 @@ Given a vector norm $\| \cdot \|_p$, we define an **induced matrix norm** for an
 ```
 ::::
 
-The last equality above follows from linearity (as shown in [Exercise 5](#problem-linearity)).  It is derived from the interpretation of a matrix as a linear operator between $\real^n$ and $\real^m$. Thus in the 2-norm, for instance,
+The last equality above follows from linearity (as shown in @problem-linearity).  It is derived from the interpretation of a matrix as a linear operator between $\real^n$ and $\real^m$. Thus in the 2-norm, for instance,
 
 ```{math}
 \| \mathbf{A} \|_2 = \max_{\| \mathbf{x} \|_2=1} \| \mathbf{A}\mathbf{x} \|_2.
@@ -243,68 +243,88 @@ The geometric interpretation of the matrix 2-norm shown in {numref}`Demo %s <dem
 
 ## Exercises
 
-1. ✍ Why is the vector 1-norm also called the *taxicab norm*?
+``````{exercise}
+✍ Why is the vector 1-norm also called the *taxicab norm*?
+``````
 
-2. ✍ **(a)** Draw the unit "circle" in the $\infty$-norm, i.e., the set of all vectors $\mathbf{x}\in\real^2$ such that $\| \mathbf{x} \|_\infty=1$.
+``````{exercise}
+✍ **(a)** Draw the unit "circle" in the $\infty$-norm, i.e., the set of all vectors $\mathbf{x}\in\real^2$ such that $\| \mathbf{x} \|_\infty=1$.
 
-    **(b)** Draw the unit "circle" in the 1-norm.
-  
-3. ✍ Prove that for all vectors $\mathbf{x}\in\real^n$,
+**(b)** Draw the unit "circle" in the 1-norm.
+``````
 
-    **(a)** $\| \mathbf{x} \|_\infty \le \| \mathbf{x} \|_2; \qquad$ 
-    **(b)** $\| \mathbf{x} \|_2 \le \| \mathbf{x} \|_1$.
+``````{exercise}
+✍ Prove that for all vectors $\mathbf{x}\in\real^n$,
 
-4. ✍ Prove that for any vectors $\mathbf{x}$, $\mathbf{y}$ in $\real^n$, $|\mathbf{x}^T\mathbf{y}| \le \| \mathbf{x} \|_1\| \mathbf{y} \|_\infty$.
+**(a)** $\| \mathbf{x} \|_\infty \le \| \mathbf{x} \|_2; \qquad$ 
+**(b)** $\| \mathbf{x} \|_2 \le \| \mathbf{x} \|_1$.
+``````
 
-(problem-linearity)=
-5. ✍ Prove using {numref}`Definition {number} <definition-norms-matrix>` that for any induced matrix norm, matrix $\mathbf{A}$, and scalar $c$, $\| c\mathbf{A} \| = |c|\cdot \| \mathbf{A} \|$.
+``````{exercise}
+✍ Prove that for any vectors $\mathbf{x}$, $\mathbf{y}$ in $\real^n$, $|\mathbf{x}^T\mathbf{y}| \le \| \mathbf{x} \|_1\| \mathbf{y} \|_\infty$.
+``````
 
-6. ✍ Let $\mathbf{A} =
-    \displaystyle \begin{bmatrix}
-      -1 & 1 \\ 2 & 2
-    \end{bmatrix}.$
+``````{exercise}
+:label: problem-linearity
+✍ Prove using {numref}`Definition {number} <definition-norms-matrix>` that for any induced matrix norm, matrix $\mathbf{A}$, and scalar $c$, $\| c\mathbf{A} \| = |c|\cdot \| \mathbf{A} \|$.
+``````
 
-    **(a)** Find all vectors satisfying $\|\mathbf{x}\|_\infty=1$ and $\| \mathbf{A}\mathbf{x} \|_\infty=\| \mathbf{A} \|_\infty$.
+``````{exercise}
+✍ Let $\mathbf{A} =
+\displaystyle \begin{bmatrix}
+-1 & 1 \\ 2 & 2
+\end{bmatrix}.$
 
-    **(b)** Find a vector satisfying $\|\mathbf{x}\|_1=1$ and $\| \mathbf{A}\mathbf{x} \|_1=\| \mathbf{A} \|_1$.
+**(a)** Find all vectors satisfying $\|\mathbf{x}\|_\infty=1$ and $\| \mathbf{A}\mathbf{x} \|_\infty=\| \mathbf{A} \|_\infty$.
 
-    **(c)** Find a vector satisfying $\|\mathbf{x}\|_2=1$ such that $\| \mathbf{A}\mathbf{x} \|_2=\| \mathbf{A} \|_2$. (Hint: A unit two-dimensional vector is a function only of its angle with the $x_1$-axis. Use the definition of $\|\mathbf{A}\|_2$ as the maximum of $\|\mathbf{A}\mathbf{x}\|_2$, which is a also a function of the angle.)
+**(b)** Find a vector satisfying $\|\mathbf{x}\|_1=1$ and $\| \mathbf{A}\mathbf{x} \|_1=\| \mathbf{A} \|_1$.
 
-7. ✍ Prove the equivalence of the two formulas for a matrix norm in {eq}`matrixnorm`.
+**(c)** Find a vector satisfying $\|\mathbf{x}\|_2=1$ such that $\| \mathbf{A}\mathbf{x} \|_2=\| \mathbf{A} \|_2$. (Hint: A unit two-dimensional vector is a function only of its angle with the $x_1$-axis. Use the definition of $\|\mathbf{A}\|_2$ as the maximum of $\|\mathbf{A}\mathbf{x}\|_2$, which is a also a function of the angle.)
+``````
 
-8. ✍ Prove that for any induced matrix norm and nonsingular matrix $\mathbf{A}$, $\| \mathbf{A}^{-1} \| \ge (\| \mathbf{A} \|)^{-1}$. (Hint: Apply {numref}`Theorem %s <theorem-norms-inequalities>`.)
+``````{exercise}
+✍ Prove the equivalence of the two formulas for a matrix norm in {eq}`matrixnorm`.
+``````
 
-9. ✍ **(a)** Prove that for any $\mathbf{v}\in \real^n$,
+``````{exercise}
+✍ Prove that for any induced matrix norm and nonsingular matrix $\mathbf{A}$, $\| \mathbf{A}^{-1} \| \ge (\| \mathbf{A} \|)^{-1}$. (Hint: Apply {numref}`Theorem %s <theorem-norms-inequalities>`.)
+``````
 
-    ```{math}
-    \| \mathbf{v} \|_p \ge \max_{i=1,\ldots,n} |v_i|,
-    ```
+``````{exercise}
+✍ **(a)** Prove that for any $\mathbf{v}\in \real^n$,
 
-    where $p=1$, $2$, or $\infty$.
+```{math}
+\| \mathbf{v} \|_p \ge \max_{i=1,\ldots,n} |v_i|,
+```
 
-    **(b)** Prove that for any $\mathbf{A}\in\real^{n \times n}$,
+where $p=1$, $2$, or $\infty$.
 
-    ```{math}
-    \| \mathbf{A} \|_p \ge \max_{i,j=1,\ldots,n} |A_{ij}|,
-    ```
+**(b)** Prove that for any $\mathbf{A}\in\real^{n \times n}$,
 
-    where $p=1$, $2$, or $\infty$. (Hint: For $p=2$, rearrange {eq}`normineq1` for a well-chosen particular value of $\mathbf{x}$.)
+```{math}
+\| \mathbf{A} \|_p \ge \max_{i,j=1,\ldots,n} |A_{ij}|,
+```
 
-(problem-norms-diagnorm)=
-10. ✍ Prove using {numref}`Definition {number} <definition-norms-matrix>` that if $\mathbf{D}$ is a diagonal matrix, then $\|\mathbf{D}\|_2 = \max_{i} |D_{ii}|$. You may assume the matrix is real and square, but that does not affect the result or the proof in any significant way. (Hint: Let $M=\max_{i} |D_{ii}|$. Proceed in two stages, showing that $\|\mathbf{D}\|_2\ge M$ and separately that $\|\mathbf{D}\|_2\le M$.)
+where $p=1$, $2$, or $\infty$. (Hint: For $p=2$, rearrange {eq}`normineq1` for a well-chosen particular value of $\mathbf{x}$.)
+``````
 
-11. ✍ Suppose that $\mathbf{A}$ is ${n\times n}$ and that $\| \mathbf{A} \|<1$ in some induced matrix norm.
-    
-    **(a)** Show that $(\mathbf{I}-\mathbf{A})$ is nonsingular. (Hint: Use the definition of an induced matrix norm to show that if $(\mathbf{I}-\mathbf{A})\mathbf{x}=\boldsymbol{0}$ for all nonzero $\mathbf{x}$, then $\| \mathbf{A} \|\ge 1$.)
+``````{exercise}
+:label: problem-norms-diagnorm
+✍ Prove using {numref}`Definition {number} <definition-norms-matrix>` that if $\mathbf{D}$ is a diagonal matrix, then $\|\mathbf{D}\|_2 = \max_{i} |D_{ii}|$. You may assume the matrix is real and square, but that does not affect the result or the proof in any significant way. (Hint: Let $M=\max_{i} |D_{ii}|$. Proceed in two stages, showing that $\|\mathbf{D}\|_2\ge M$ and separately that $\|\mathbf{D}\|_2\le M$.)
+``````
 
-    **(b)** Show that $\lim_{m\rightarrow \infty} \mathbf{A}^m = \boldsymbol{0}$. (For matrices as with vectors, we say $\mathbf{B}_m \rightarrow \mathbf{L}$ if $\| \mathbf{B}_m-\mathbf{L} \| \rightarrow 0$.)
+``````{exercise}
+✍ Suppose that $\mathbf{A}$ is ${n\times n}$ and that $\| \mathbf{A} \|<1$ in some induced matrix norm.
 
-    **(c)** Use (a) and (b) to show that we may obtain the geometric series
-    
-    ```{math}
-    (\mathbf{I}-\mathbf{A})^{-1} = \sum_{k=0}^\infty \mathbf{A}^k.
-    ```
-    
-    (Hint: Start with $\left(\sum_{k=0}^m \mathbf{A}^k\right)(\mathbf{I}-\mathbf{A})$ and take the limit.)
+**(a)** Show that $(\mathbf{I}-\mathbf{A})$ is nonsingular. (Hint: Use the definition of an induced matrix norm to show that if $(\mathbf{I}-\mathbf{A})\mathbf{x}=\boldsymbol{0}$ for all nonzero $\mathbf{x}$, then $\| \mathbf{A} \|\ge 1$.)
 
+**(b)** Show that $\lim_{m\rightarrow \infty} \mathbf{A}^m = \boldsymbol{0}$. (For matrices as with vectors, we say $\mathbf{B}_m \rightarrow \mathbf{L}$ if $\| \mathbf{B}_m-\mathbf{L} \| \rightarrow 0$.)
 
+**(c)** Use (a) and (b) to show that we may obtain the geometric series
+
+```{math}
+(\mathbf{I}-\mathbf{A})^{-1} = \sum_{k=0}^\infty \mathbf{A}^k.
+```
+
+(Hint: Start with $\left(\sum_{k=0}^m \mathbf{A}^k\right)(\mathbf{I}-\mathbf{A})$ and take the limit.)
+``````

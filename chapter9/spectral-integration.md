@@ -12,7 +12,7 @@ In {numref}`section-localapprox-integration` we derived methods of order 2, 4, a
 \int_{-1}^1 f(x)\, dx \approx \sum_{k=0}^n w_k f(t_k)
 :::
 
-for a collection of nodes $t_0,\ldots,t_n$ in $[-1,1]$ and weights $w_0,\ldots,w_n$. (Throughout this section we use $[-1,1]$ as the domain of the integral; for a general interval $[a,b]$, see [Exercise 4](#problem-integration-integrateinterval).) The nodes and weights are independent of the integrand $f(x)$ and determine the implementation and properties of the formula.
+for a collection of nodes $t_0,\ldots,t_n$ in $[-1,1]$ and weights $w_0,\ldots,w_n$. (Throughout this section we use $[-1,1]$ as the domain of the integral; for a general interval $[a,b]$, see @problem-integration-integrateinterval.) The nodes and weights are independent of the integrand $f(x)$ and determine the implementation and properties of the formula.
 
 ```{index} convergence rate; spectral
 ```
@@ -30,7 +30,7 @@ For a function periodic on $[-1,1]$, the most natural interpolant is the trigono
 ```{index} trapezoid formula; for integration
 ```
 
-In [Exercise 1](#problem-specint-trapperiod) you are asked to verify that this result is identical to the value of the trapezoid formula on $2n+1$ nodes. 
+In @problem-specint-trapperiod you are asked to verify that this result is identical to the value of the trapezoid formula on $2n+1$ nodes. 
 
 ```{prf:observation}
 The trapezoid integration formula is spectrally accurate for periodic functions.
@@ -324,7 +324,7 @@ The difference in convergence between Clenshaw–Curtis and Gauss–Legendre is 
 
 ``````{exercise}
 :label: problem-integration-integrateinterval
-**(a)** ✍ (See also [Exercise 9.3.5](#problem-stability-changeinterval).) Using the change of variable 
+**(a)** ✍ (See also @problem-stability-changeinterval.) Using the change of variable 
 
 $$
 z = \phi(x) = a + (b-a)\frac{(x+1)}{2},
@@ -338,7 +338,7 @@ $$
 
 **(b)** ⌨ Rewrite {numref}`Function {number} <function-ccint>` and {numref}`Function {number} <function-glint>` to accept additional inputs for $a$ and $b$ and compute integrals over $[a,b]$.
 
-**(c)** ⌨  Repeat the steps of [Exercise 2](#problem-specint-ccglcompare) for the integral
+**(c)** ⌨  Repeat the steps of @problem-specint-ccglcompare for the integral
 
 $$
 \int_{\pi/2}^{\pi} x^2 \sin 8x \, d x = -\frac{3 \pi^2}{32}.

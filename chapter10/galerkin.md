@@ -20,7 +20,7 @@ However, we will assume that the linear problem is presented in the equivalent f
     \quad u(a)=0,\; u(b)=0.
 :::
 
-Such a transformation is always possible, at least in principle (see [Exercise 3](#problem-galerkin-galintfactor)), and the case when $u(a)$ and $u(b)$ are nonzero can also be incorporated (see [Exercise 2](#problem-galerkin-bvpnonhom)). The approach is also adaptable to Neumann conditions (see [Exercise 5](#problem-galerkin-neumann)). As with finite differences, a nonlinear problem is typically solved by using a Newton iteration to create a sequence of linear problems.
+Such a transformation is always possible, at least in principle (see @problem-galerkin-neumann). As with finite differences, a nonlinear problem is typically solved by using a Newton iteration to create a sequence of linear problems.
 
 ## Weak formulation
 

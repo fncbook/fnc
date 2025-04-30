@@ -242,23 +242,29 @@ The exercises marked with a computer icon require the use of a computer. The oth
 A polynomial is represented as a vector of coefficients in all three languages covered by this book. However, in Julia they are given in *ascending* degree order, which is most convenient programmatically, while in MATLAB and NumPy they are given in *descending* order, which is the way we usually write them. This difference makes writing the exercises universally a little awkward, so be advised.
 ```
 
-1. ⌨ Write a function `poly1(p)` that returns the value of a polynomial $p(x) = c_1 + c_2 x + \cdots + c_n x^{n-1}$ at $x=-1$. You should do this directly, not by a call to or imitation of {numref}`Function {number} <function-horner>`. Test your function on $r(x)=3x^3-x+1$ and $s(x)=2x^2-x$.
+``````{exercise}
+⌨ Write a function `poly1(p)` that returns the value of a polynomial $p(x) = c_1 + c_2 x + \cdots + c_n x^{n-1}$ at $x=-1$. You should do this directly, not by a call to or imitation of {numref}`Function {number} <function-horner>`. Test your function on $r(x)=3x^3-x+1$ and $s(x)=2x^2-x$.
+``````
 
-(problem-algorithms-samplevar)=
-2. ⌨  In statistics, one defines the variance of sample values $x_1,\ldots,x_n$ by
-  
-    ```{math}
-    :label: samplevar
-    s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \overline{x})^2,
-    \qquad \overline{x} = \frac{1}{n} \sum_{i=1}^n x_i.
-    ```
+``````{exercise}
+:label: problem-algorithms-samplevar
+⌨  In statistics, one defines the variance of sample values $x_1,\ldots,x_n$ by
 
-    Write a function `samplevar(x)` that takes as input a vector `x` of any length and returns $s^2$ as calculated by the formula. You should test your function on the vectors `ones(100)` and `rand(200)`. If you enter `using Statistics` in Julia, then you can compare to the results of the `var` function.
+```{math}
+:label: samplevar
+s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \overline{x})^2,
+\qquad \overline{x} = \frac{1}{n} \sum_{i=1}^n x_i.
+```
 
-3. ⌨  Let `x` and `y` be vectors whose entries give the coordinates of the $n$ vertices of a polygon, given in counterclockwise order. Write a function `polygonarea(x,y)` that computes and returns the area of the polygon using this formula based on Green's theorem:
-  
-    ```{math}
-    A = \frac{1}{2} \left| \sum_{k=1}^n x_k y_{k+1} - x_{k+1}y_k \right|.
-    ```
+Write a function `samplevar(x)` that takes as input a vector `x` of any length and returns $s^2$ as calculated by the formula. You should test your function on the vectors `ones(100)` and `rand(200)`. If you enter `using Statistics` in Julia, then you can compare to the results of the `var` function.
+``````
 
-    Here $n$ is the number of polygon vertices, and it's understood that $x_{n+1}=x_1$ and $y_{n+1}=y_1$. (Note: The function `abs` computes absolute value.) Test your functions on a square and an equilateral triangle.
+``````{exercise}
+⌨  Let `x` and `y` be vectors whose entries give the coordinates of the $n$ vertices of a polygon, given in counterclockwise order. Write a function `polygonarea(x,y)` that computes and returns the area of the polygon using this formula based on Green's theorem:
+
+```{math}
+A = \frac{1}{2} \left| \sum_{k=1}^n x_k y_{k+1} - x_{k+1}y_k \right|.
+```
+
+Here $n$ is the number of polygon vertices, and it's understood that $x_{n+1}=x_1$ and $y_{n+1}=y_1$. (Note: The function `abs` computes absolute value.) Test your functions on a square and an equilateral triangle.
+``````

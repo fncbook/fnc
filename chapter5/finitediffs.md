@@ -86,7 +86,7 @@ As pointed out in {numref}`Example {number} <example-finitediffs-fd1bd1>`, the o
 
 Let's derive the shortest centered formula using $p=q=1$. For simplicity, we will set $x=0$ without affecting the result. This means that $f(-h)$, $f(0)$, and $f(h)$ are all available in {eq}`fdformula`. 
 
-Note that {eq}`forwardFD11` is simply the slope of the line through the points $\bigl(0,f(0)\bigr)$ and $\bigl(h,f(h)\bigr)$. One route to using all three function values is to differentiate the quadratic polynomial that interpolates $\bigl(-h,f(-h)\bigr)$ as well (see [Exercise 1](#problem-quadraticFD)):
+Note that {eq}`forwardFD11` is simply the slope of the line through the points $\bigl(0,f(0)\bigr)$ and $\bigl(h,f(h)\bigr)$. One route to using all three function values is to differentiate the quadratic polynomial that interpolates $\bigl(-h,f(-h)\bigr)$ as well (see @problem-quadraticFD):
  
 ```{math}
 :label: fdinterp2
@@ -107,7 +107,7 @@ Besides the aesthetic appeal of symmetry, in {numref}`section-localapprox-fd-con
 ```{index} interpolation; by polynomials
 ```
 
-We can in principle derive any finite-difference formula from the same process: Interpolate the given function values, then differentiate the interpolant exactly. Some results of the process are given in {numref}`table-FDcenter` for centered differences, and in {numref}`table-FDforward` for forward differences. Both show the weights for estimating the derivative at $x=0$. To get backward differences, you change the signs and reverse the order of the coefficients in any row of {numref}`table-FDforward`; see [Exercise 2](#problem-backwardFD).
+We can in principle derive any finite-difference formula from the same process: Interpolate the given function values, then differentiate the interpolant exactly. Some results of the process are given in {numref}`table-FDcenter` for centered differences, and in {numref}`table-FDforward` for forward differences. Both show the weights for estimating the derivative at $x=0$. To get backward differences, you change the signs and reverse the order of the coefficients in any row of {numref}`table-FDforward`; see @problem-backwardFD.
 
 (table-FDcenter)=
 ```{table} Weights for centered finite-difference formulas.
@@ -288,31 +288,45 @@ We no longer assume equally spaced nodes, so there is no "$h$" to be used in the
 
 ## Exercises
 
-(problem-quadraticFD)=
+``````{exercise}
+:label: problem-quadraticFD
+✍ This problem refers to $Q(x)$ defined by {eq}`fdinterp2`.  
 
-1. ✍ This problem refers to $Q(x)$ defined by {eq}`fdinterp2`.  
+**(a)** Show that $Q(x)$ interpolates the three values of $f$ at $x=-h$, $x=0$, and $x=h$.
 
-    **(a)** Show that $Q(x)$ interpolates the three values of $f$ at $x=-h$, $x=0$, and $x=h$.
+**(b)** Show that $Q'(0)$ gives the finite-difference formula defined by {eq}`centerFD12`.
 
-    **(b)** Show that $Q'(0)$ gives the finite-difference formula defined by {eq}`centerFD12`.
+``````
 
-(problem-backwardFD)=
-2. **(a)** ✍ {numref}`table-FDforward` lists forward difference formulas in which $p=0$ in {eq}`fdformula`. Show that the change of variable $g(x) = f(-x)$ transforms these formulas into backward difference formulas with $q=0$, and write out the table analogous to {numref}`table-FDforward` for backward differences.
+``````{exercise}
+:label: problem-backwardFD
+**(a)** ✍ {numref}`table-FDforward` lists forward difference formulas in which $p=0$ in {eq}`fdformula`. Show that the change of variable $g(x) = f(-x)$ transforms these formulas into backward difference formulas with $q=0$, and write out the table analogous to {numref}`table-FDforward` for backward differences.
 
-    **(b)** ⌨ Suppose you are given the nodes $t_0=0.9$, $t_1=1$, and $t_2=1.1$, and $f(x) = \sin(2x)$. Using formulas from {numref}`table-FDcenter` and {numref}`table-FDforward`, compute second-order accurate approximations to $f'$ at each of the three nodes.
+**(b)** ⌨ Suppose you are given the nodes $t_0=0.9$, $t_1=1$, and $t_2=1.1$, and $f(x) = \sin(2x)$. Using formulas from {numref}`table-FDcenter` and {numref}`table-FDforward`, compute second-order accurate approximations to $f'$ at each of the three nodes.
+``````
 
-3. ⌨ Let $f(x)=e^{-x}$, $x=0.5$, and $h=0.2$. Using {numref}`Function {number} <function-fdweights>` to get the necessary weights on five nodes centered at $x$, find finite-difference approximations to the first, second, third, and fourth derivatives of $f$. Make a table showing the derivative values and the errors in each case.
+``````{exercise}
+⌨ Let $f(x)=e^{-x}$, $x=0.5$, and $h=0.2$. Using {numref}`Function {number} <function-fdweights>` to get the necessary weights on five nodes centered at $x$, find finite-difference approximations to the first, second, third, and fourth derivatives of $f$. Make a table showing the derivative values and the errors in each case.
+``````
 
-4. ⌨ In the manner of {numref}`Demo {number} <demo-finitediffs-fd-weights>`, use {numref}`Function {number} <function-fdweights>` on centered node vectors of length  3, 5, 7, and 9 to produce a table analogous to {numref}`table-FDcenter` for the second derivative $f''(0)$. (You do not need to show the orders of accuracy, just the weights.)
+``````{exercise}
+⌨ In the manner of {numref}`Demo {number} <demo-finitediffs-fd-weights>`, use {numref}`Function {number} <function-fdweights>` on centered node vectors of length  3, 5, 7, and 9 to produce a table analogous to {numref}`table-FDcenter` for the second derivative $f''(0)$. (You do not need to show the orders of accuracy, just the weights.)
+``````
 
-5. ⌨ For this problem, let $f(x)=\tan(2x)$.
+``````{exercise}
+⌨ For this problem, let $f(x)=\tan(2x)$.
 
-    **(a)** ⌨ Apply {numref}`Function {number} <function-fdweights>` to find a finite-difference approximation to $f''(0.3)$ using the five nodes $t_j=0.3+jh$ for $j=-2,\ldots,2$ and $h=0.05$. Compare to the exact value of $f''(0.3)$.
+**(a)** ⌨ Apply {numref}`Function {number} <function-fdweights>` to find a finite-difference approximation to $f''(0.3)$ using the five nodes $t_j=0.3+jh$ for $j=-2,\ldots,2$ and $h=0.05$. Compare to the exact value of $f''(0.3)$.
 
-    **(b)** ⌨  Repeat part (a) for $f''(0.75)$ on the nodes $t_j=0.75+jh$. Why is the finite-difference result so inaccurate? (Hint: A plot of $f$ might be informative.)
+**(b)** ⌨  Repeat part (a) for $f''(0.75)$ on the nodes $t_j=0.75+jh$. Why is the finite-difference result so inaccurate? (Hint: A plot of $f$ might be informative.)
+``````
 
-6. ✍ Find the finite-difference formula for $f''(0)$ that results from applying {eq}`forwardFD11` on $f'$ and then {eq}`backwardFD11` on $f'$ within that result.  
+``````{exercise}
+✍ Find the finite-difference formula for $f''(0)$ that results from applying {eq}`forwardFD11` on $f'$ and then {eq}`backwardFD11` on $f'$ within that result.  
+``````
 
-7. **(a)** ✍ Show using L'Hôpital's Rule that the centered formula approximation {eq}`centerFD12` converges to an equality as $h\to 0$.
+``````{exercise}
+**(a)** ✍ Show using L'Hôpital's Rule that the centered formula approximation {eq}`centerFD12` converges to an equality as $h\to 0$.
 
-    **(b)** ✍ Derive two conditions on the finite-difference weights in {eq}`fdformula` that arise from requiring convergence as $h\to 0$. (Hint: Consider what is required in order to apply L'Hôpital's Rule, as well as the result of applying it.)
+**(b)** ✍ Derive two conditions on the finite-difference weights in {eq}`fdformula` that arise from requiring convergence as $h\to 0$. (Hint: Consider what is required in order to apply L'Hôpital's Rule, as well as the result of applying it.)
+``````

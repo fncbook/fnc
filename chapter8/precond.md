@@ -121,7 +121,7 @@ In this problem, use `A = 1.5I + sprand(800,800,0.005)`.
 ``````
 
 ``````{exercise}
-⌨ (Continuation of [Exercise 8.5.5](#problem-gmres-surround).) Let $\mathbf{B}$ be `diagm(1:100)`,  let $\mathbf{I}$ be `I(100)`, and let $\mathbf{Z}$ be a $100\times 100$ matrix of zeros. Define 
+⌨ (Continuation of @problem-gmres-surround.) Let $\mathbf{B}$ be `diagm(1:100)`,  let $\mathbf{I}$ be `I(100)`, and let $\mathbf{Z}$ be a $100\times 100$ matrix of zeros. Define 
 
 $$
 \mathbf{A} = \begin{bmatrix}

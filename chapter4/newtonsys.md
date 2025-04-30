@@ -207,95 +207,108 @@ An implementation of Newton's method for systems is given in {numref}`Function {
 
 ## Exercises
 
-(problem-newtonsys-byhand)=
-1. ✍ Suppose that
-  
-    ```{math}
-    \mathbf{f}(\mathbf{x}) =
-    \begin{bmatrix}
-      x_1x_2+x_2^2-1 \\[1mm] x_1x_2^3 + x_1^2x_2^2 + 1
-    \end{bmatrix}.
-    ```
 
-    Let $\mathbf{x}_1=[-2,1]^T$. Use Newton's method to find $\mathbf{x}_2$.
+``````{exercise}
+:label: problem-newtonsys-byhand
+✍ Suppose that
 
-2. ✍ Suppose that $\mathbf{f}(\mathbf{x}) = \mathbf{A}\mathbf{x} - \mathbf{b}$ for a constant $n\times n$ matrix $\mathbf{A}$ and constant $n\times 1$ vector $\mathbf{b}$. Show that Newton's method converges to the exact root in one iteration.
+```{math}
+\mathbf{f}(\mathbf{x}) =
+\begin{bmatrix}
+x_1x_2+x_2^2-1 \\[1mm] x_1x_2^3 + x_1^2x_2^2 + 1
+\end{bmatrix}.
+```
 
-(problem-newtonsys-spherepotential)=
-3. Two curves in the $(u,v)$ plane are defined implicitly by the equations $u\log u + v \log v = -0.3$ and $u^4 + v^2 = 1$.
-  
-    **(a)** ✍ Write the intersection of these curves in the form $\mathbf{f}(\mathbf{x}) = \boldsymbol{0}$ for two-dimensional $\mathbf{f}$ and $\mathbf{x}$.
+Let $\mathbf{x}_1=[-2,1]^T$. Use Newton's method to find $\mathbf{x}_2$.
+``````
 
-    **(b)** ✍ Find the Jacobian matrix of $\mathbf{f}$.
+``````{exercise}
+✍ Suppose that $\mathbf{f}(\mathbf{x}) = \mathbf{A}\mathbf{x} - \mathbf{b}$ for a constant $n\times n$ matrix $\mathbf{A}$ and constant $n\times 1$ vector $\mathbf{b}$. Show that Newton's method converges to the exact root in one iteration.
 
-    **(c)** ⌨ Use {numref}`Function {number} <function-newtonsys>` to find an intersection point starting from $u=1$, $v=0.1$.
+``````
 
-    **(d)** ⌨ Use {numref}`Function {number} <function-newtonsys>` to find an intersection point starting from $u=0.1$, $v=1$.
+``````{exercise}
+:label: problem-newtonsys-spherepotential
+Two curves in the $(u,v)$ plane are defined implicitly by the equations $u\log u + v \log v = -0.3$ and $u^4 + v^2 = 1$.
 
-(problem-newtonsys-orbitintersect)=
-4. Two elliptical orbits $(x_1(t),y_1(t))$ and $(x_2(t),y_2(t))$ are described by the equations
-  
-    ```{math}
-    \begin{bmatrix}
-      x_1(t) \\ y_1(t)
-    \end{bmatrix}
-    =
-    \begin{bmatrix}
-      -5+10\cos(t) \\ 6\sin(t)
-    \end{bmatrix}, \qquad
-    \begin{bmatrix}
-      x_2(t)\\y_2(t)
-    \end{bmatrix} =
-    \begin{bmatrix}
-      8\cos(t) \\ 3+12\sin(t)
-    \end{bmatrix},
-    ```
+**(a)** ✍ Write the intersection of these curves in the form $\mathbf{f}(\mathbf{x}) = \boldsymbol{0}$ for two-dimensional $\mathbf{f}$ and $\mathbf{x}$.
 
-    where $t$ represents time.
+**(b)** ✍ Find the Jacobian matrix of $\mathbf{f}$.
 
-    **(a)** ⌨ Make a plot of the two orbits with the following code:
+**(c)** ⌨ Use {numref}`Function {number} <function-newtonsys>` to find an intersection point starting from $u=1$, $v=0.1$.
 
-    ``` julia
-    x1(t) = -5+10*cos(t);   y1(t) = 6*sin(t);
-    plot(x1,y1,0,2pi,aspect_ratio=1,legend=false)
-    x2(t) = 8*cos(t);   y2(t) = 3 + 12*sin(t);
-    plot!(x2,y2,0,2pi)
-    ```
+**(d)** ⌨ Use {numref}`Function {number} <function-newtonsys>` to find an intersection point starting from $u=0.1$, $v=1$.
 
-    **(b)** ✍ Write out a $2\times 2$ nonlinear system of equations that describes an intersection of these orbits. (Note: An intersection is not the same as a collision—they don't have to occupy the same point at the same time.)
+``````
 
-    **(c)** ✍ Write out the Jacobian matrix of this nonlinear system.
+``````{exercise}
+:label: problem-newtonsys-orbitintersect
+Two elliptical orbits $(x_1(t),y_1(t))$ and $(x_2(t),y_2(t))$ are described by the equations
 
-    **(d)** ⌨ Use {numref}`Function {number} <function-newtonsys>` to find all of the unique intersections.
-  
-(problem-newtonsys-ellipsemin)=
-5. ⌨  Suppose one wants to find the points on the ellipsoid $x^2/25 + y^2/16 + z^2/9 = 1$ that are closest to and farthest from the point $(5,4,3)$. The method of Lagrange multipliers implies that any such point satisfies
-  
-    ```{math}
-    \begin{split}
-        x-5 &= \frac{\lambda x}{25}, \\[1mm]
-        y-4 &= \frac{\lambda y}{16}, \\[1mm]
-        z-3 &= \frac{\lambda z}{9}, \\[1mm]
-        1 &=  \frac{1}{25}x^2 + \frac{1}{16}y^2 + \frac{1}{9}z^2
-    \end{split}
-    ```
+```{math}
+\begin{bmatrix}
+x_1(t) \\ y_1(t)
+\end{bmatrix}
+=
+\begin{bmatrix}
+-5+10\cos(t) \\ 6\sin(t)
+\end{bmatrix}, \qquad
+\begin{bmatrix}
+x_2(t)\\y_2(t)
+\end{bmatrix} =
+\begin{bmatrix}
+8\cos(t) \\ 3+12\sin(t)
+\end{bmatrix},
+```
 
-    for an unknown value of $\lambda$.
-  
-    **(a)** Write out this system in the form $\mathbf{f}(\mathbf{u}) = \boldsymbol{0}$. (Note that the system has four variables to go with the four equations.)
+where $t$ represents time.
 
-    **(b)** Write out the Jacobian matrix of this system.
+**(a)** ⌨ Make a plot of the two orbits with the following code:
 
-    **(c)** Use {numref}`Function {number} <function-newtonsys>` with different initial guesses to find the two roots of this system. Which is the closest point to $(5,4,3)$, and which is the farthest?
-  
-(problem-newtonsys-circlefit)=
-6. ⌨  Any three noncollinear points in the plane determine a unique circle. Suppose the points are given as $(x_i,y_i)$ for $i=1,2,3$. We can define the circle in terms of its center $(a,b)$ and radius $r$. Then 
-    
-    $$f_i(a,b,r) = (a-x_i)^2 + (b-y_i)^2 - r^2$$ 
-    
-    should be made zero for all $i=1,2,3$. This defines a nonlinear system $\mathbf{f}(\mathbf{v})=\boldsymbol{0}$ for $\mathbf{v}=[a,b,r]$. 
+``` julia
+x1(t) = -5+10*cos(t);   y1(t) = 6*sin(t);
+plot(x1,y1,0,2pi,aspect_ratio=1,legend=false)
+x2(t) = 8*cos(t);   y2(t) = 3 + 12*sin(t);
+plot!(x2,y2,0,2pi)
+```
 
-    Use {numref}`Function {number} <function-newtonsys>` on this system to find the circle passing through $(-5,0)$, $(1,-3)$, and $(4,2)$. Make a plot that shows you found the correct circle.
+**(b)** ✍ Write out a $2\times 2$ nonlinear system of equations that describes an intersection of these orbits. (Note: An intersection is not the same as a collision—they don't have to occupy the same point at the same time.)
 
+**(c)** ✍ Write out the Jacobian matrix of this nonlinear system.
 
+**(d)** ⌨ Use {numref}`Function {number} <function-newtonsys>` to find all of the unique intersections.
 
+``````
+
+``````{exercise}
+:label: problem-newtonsys-ellipsemin
+⌨  Suppose one wants to find the points on the ellipsoid $x^2/25 + y^2/16 + z^2/9 = 1$ that are closest to and farthest from the point $(5,4,3)$. The method of Lagrange multipliers implies that any such point satisfies
+
+```{math}
+\begin{split}
+x-5 &= \frac{\lambda x}{25}, \\[1mm]
+y-4 &= \frac{\lambda y}{16}, \\[1mm]
+z-3 &= \frac{\lambda z}{9}, \\[1mm]
+1 &=  \frac{1}{25}x^2 + \frac{1}{16}y^2 + \frac{1}{9}z^2
+\end{split}
+```
+
+for an unknown value of $\lambda$.
+
+**(a)** Write out this system in the form $\mathbf{f}(\mathbf{u}) = \boldsymbol{0}$. (Note that the system has four variables to go with the four equations.)
+
+**(b)** Write out the Jacobian matrix of this system.
+
+**(c)** Use {numref}`Function {number} <function-newtonsys>` with different initial guesses to find the two roots of this system. Which is the closest point to $(5,4,3)$, and which is the farthest?
+``````
+
+``````{exercise}
+:label: problem-newtonsys-circlefit
+⌨  Any three noncollinear points in the plane determine a unique circle. Suppose the points are given as $(x_i,y_i)$ for $i=1,2,3$. We can define the circle in terms of its center $(a,b)$ and radius $r$. Then 
+
+$$f_i(a,b,r) = (a-x_i)^2 + (b-y_i)^2 - r^2$$ 
+
+should be made zero for all $i=1,2,3$. This defines a nonlinear system $\mathbf{f}(\mathbf{v})=\boldsymbol{0}$ for $\mathbf{v}=[a,b,r]$. 
+
+Use {numref}`Function {number} <function-newtonsys>` on this system to find the circle passing through $(-5,0)$, $(1,-3)$, and $(4,2)$. Make a plot that shows you found the correct circle.
+``````

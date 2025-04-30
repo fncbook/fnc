@@ -190,58 +190,69 @@ There are stronger and more general statements of {numref}`Theorem %s <theorem-c
 
 ## Exercises
 
-(problem-fixedpoint-simple)=
+``````{exercise}
+:label: problem-fixedpoint-simple
+✍ In each case, show that the given $g(x)$ has a fixed point at the given $p$ and use {eq}`fpconverge` to show that fixed-point iteraion can converge to it.
 
-1. ✍ In each case, show that the given $g(x)$ has a fixed point at the given $p$ and use {eq}`fpconverge` to show that fixed-point iteraion can converge to it.
-  
-    **(a)** $g(x) = 1 + x - \frac{1}{9}x^2$, $p=3$
+**(a)** $g(x) = 1 + x - \frac{1}{9}x^2$, $p=3$
 
-    **(b)** $g(x) = \pi + \frac{1}{4}\sin(x)$, $p=\pi$
+**(b)** $g(x) = \pi + \frac{1}{4}\sin(x)$, $p=\pi$
 
-    **(c)** $g(x) = x+1-\tan(x/4)$, $p=\pi$
+**(c)** $g(x) = x+1-\tan(x/4)$, $p=\pi$
+``````
 
-2. ⌨ For each case in the preceding problem, apply 25 fixed-point iterations and use a log-linear graph of the error to verify linear convergence. Then use numerical values of the error to determine an approximate value for $\sigma$ in {eq}`linearconvergence`.
+``````{exercise}
+⌨ For each case in the preceding problem, apply 25 fixed-point iterations and use a log-linear graph of the error to verify linear convergence. Then use numerical values of the error to determine an approximate value for $\sigma$ in {eq}`linearconvergence`.
+``````
 
-3. ✍  In each case, show that the given $g(x)$ has a fixed point at the given $p$. Then determine analytically whether the fixed-point iteration could converge to that point given a close enough starting value.
-  
-    **(a)** $g(x) = 3+x-x^2$, $p=\sqrt{3}$
+``````{exercise}
+✍  In each case, show that the given $g(x)$ has a fixed point at the given $p$. Then determine analytically whether the fixed-point iteration could converge to that point given a close enough starting value.
 
-    **(b)** $g(x) = \sqrt{1+x}$, $p=(1+\sqrt{5})/2$
+**(a)** $g(x) = 3+x-x^2$, $p=\sqrt{3}$
 
-    **(c)** $g(x) = -\sqrt{1+x}$, $p=(1-\sqrt{5})/2$
+**(b)** $g(x) = \sqrt{1+x}$, $p=(1+\sqrt{5})/2$
 
-    **(d)** $g(x) = x+1-\tan(\pi x)$, $p=1/4$
-  
-4. In {numref}`Demo %s <demo-fp-spiral>` we defined $g(x)=x-f(x)$ to find a fixed point of the polynomial $f(x)=x^2 - 4x + 3.5$.
-  
-    **(a)** ✍ Why does the iteration spiral in to the fixed point, instead of approaching it monotonically? (Refer to the series analysis.)
+**(c)** $g(x) = -\sqrt{1+x}$, $p=(1-\sqrt{5})/2$
 
-    **(b)** ✍ Show that if $\hat{g}(x) = (x^2+3.5)/4$, then any fixed point of $\hat{g}$ is a root of $f$.
+**(d)** $g(x) = x+1-\tan(\pi x)$, $p=1/4$
+``````
 
-    **(c)** ⌨ Use fixed-point iteration on $\hat{g}$ to try to find both roots of $f$, and note which case(s), if either, converge.
+``````{exercise}
+In {numref}`Demo %s <demo-fp-spiral>` we defined $g(x)=x-f(x)$ to find a fixed point of the polynomial $f(x)=x^2 - 4x + 3.5$.
 
-    **(d)** ✍ Use {eq}`fpconverge` to explain the success/failure in part (c) for each fixed point.
-  
-5. ✍ The $m$th root of a positive real number $a$ is a fixed point of the function
-  
-    ```{math}
-    g(x) = \frac{a}{x^{m-1}}.
-    ```
+**(a)** ✍ Why does the iteration spiral in to the fixed point, instead of approaching it monotonically? (Refer to the series analysis.)
 
-    For what integer values of $m>1$ will the fixed-point iteration for $g$ converge (for close enough initial guesses)?
+**(b)** ✍ Show that if $\hat{g}(x) = (x^2+3.5)/4$, then any fixed point of $\hat{g}$ is a root of $f$.
 
-6. **(a)** ✍ Show that $p=1/3$ is a fixed point of $g(x) = 2x-3x^2$.
+**(c)** ⌨ Use fixed-point iteration on $\hat{g}$ to try to find both roots of $f$, and note which case(s), if either, converge.
 
-    **(b)** ✍ Find $g'(1/3)$. How does this affect {eq}`fpconverge`?
+**(d)** ✍ Use {eq}`fpconverge` to explain the success/failure in part (c) for each fixed point.
+``````
 
-    **(c)** ⌨ Do an experiment with fixed-point iteration on $g$ to converge to $p=1/3$. Is the convergence a straight line on a log-linear plot?
-  
-7. ✍  Consider the iteration
-  
-    ```{math}
-    x_{k+1} = x_k - \frac{f(x_k)}{c}, \qquad k=0,1,\ldots.
-    ```
+``````{exercise}
+✍ The $m$th root of a positive real number $a$ is a fixed point of the function
 
-    Suppose $f(p)=0$ and that $f'(p)>0$ exists. Find one or more conditions on $c$ such that the iteration converges to $p$.
+```{math}
+g(x) = \frac{a}{x^{m-1}}.
+```
 
+For what integer values of $m>1$ will the fixed-point iteration for $g$ converge (for close enough initial guesses)?
+``````
 
+``````{exercise}
+**(a)** ✍ Show that $p=1/3$ is a fixed point of $g(x) = 2x-3x^2$.
+
+**(b)** ✍ Find $g'(1/3)$. How does this affect {eq}`fpconverge`?
+
+**(c)** ⌨ Do an experiment with fixed-point iteration on $g$ to converge to $p=1/3$. Is the convergence a straight line on a log-linear plot?
+``````
+
+``````{exercise}
+✍  Consider the iteration
+
+```{math}
+x_{k+1} = x_k - \frac{f(x_k)}{c}, \qquad k=0,1,\ldots.
+```
+
+Suppose $f(p)=0$ and that $f'(p)>0$ exists. Find one or more conditions on $c$ such that the iteration converges to $p$.
+``````

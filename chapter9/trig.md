@@ -49,7 +49,7 @@ We can explicitly state the cardinal function basis for equispaced trigonometric
     + \cdots + \cos n\pi x\right) = \frac{\sin(N\pi x/2)}{N\sin(\pi x/2)}.
 :::
 
-You can directly check the following facts. (See [Exercise 3](#problem-triginterp-checktau).) 
+You can directly check the following facts. (See @problem-triginterp-checktau.) 
 
 (theorem-triginterp-cardinal)=
 ::::{prf:theorem}

@@ -262,7 +262,7 @@ It follows that if we combine {eq}`traperrorexpansion` and {eq}`traperrorexpansi
 ```{index} ! Simpson's formula
 ```
 
-The formula {eq}`nc-simpson` is called **Simpson's formula**, or *Simpson's rule*. A different presentation and derivation are considered in [Exercise 4](#problem-simpson).
+The formula {eq}`nc-simpson` is called **Simpson's formula**, or *Simpson's rule*. A different presentation and derivation are considered in @problem-simpson.
 
 Equation {eq}`extraplevel1` is another particular error expansion in the form {eq}`extraperror`, so we can extrapolate again! The details change only a little. Considering that
 
@@ -328,86 +328,104 @@ where the nodes referenced in the last line are relative to $n=2m$. Hence in pas
 
 ## Exercises
 
-(problem-integration-tests)=
 % must be kept as #1
 
-1. ⌨ For each integral below, use {numref}`Function {number} <function-trapezoid>` to estimate the integral for $n=10\cdot 2^k$ nodes for $k=1,2,\ldots,10$. Make a log-log plot of the errors and confirm or refute second-order accuracy. (These integrals were taken from {cite}`baileyComparisonThree2005`.)
+``````{exercise}
+:label: problem-integration-tests
+⌨ For each integral below, use {numref}`Function {number} <function-trapezoid>` to estimate the integral for $n=10\cdot 2^k$ nodes for $k=1,2,\ldots,10$. Make a log-log plot of the errors and confirm or refute second-order accuracy. (These integrals were taken from {cite}`baileyComparisonThree2005`.)
 
-    **(a)** $\displaystyle \int_0^1 x\log(1+x)\, dx = \frac{1}{4}$
+**(a)** $\displaystyle \int_0^1 x\log(1+x)\, dx = \frac{1}{4}$
 
-    **(b)** $\displaystyle \int_0^1 x^2 \tan^{-1}x\, dx = \frac{\pi-2+2\log 2}{12}$
+**(b)** $\displaystyle \int_0^1 x^2 \tan^{-1}x\, dx = \frac{\pi-2+2\log 2}{12}$
 
-    **(c)** $\displaystyle \int_0^{\pi/2}e^x \cos x\, dx = \frac{e^{\pi/2}-1}{2}$
+**(c)** $\displaystyle \int_0^{\pi/2}e^x \cos x\, dx = \frac{e^{\pi/2}-1}{2}$
 
-    **(d)** $\displaystyle \int_0^1 \sqrt{x} \log(x) \, dx = -\frac{4}{9}$ (Note: Although the integrand has the limiting value zero as $x\to 0$, it cannot be evaluated naively at $x=0$. You can start the integral at $x=\macheps$ instead.)
+**(d)** $\displaystyle \int_0^1 \sqrt{x} \log(x) \, dx = -\frac{4}{9}$ (Note: Although the integrand has the limiting value zero as $x\to 0$, it cannot be evaluated naively at $x=0$. You can start the integral at $x=\macheps$ instead.)
 
-    **(e)** $\displaystyle \int_0^1 \sqrt{1-x^2}\,\, dx = \frac{\pi}{4}$
-  
-2. ✍ The Euler–Maclaurin error expansion {eq}`eulermaclaurin` for the trapezoid formula implies that if we could cancel out the term due to $f'(b)-f'(a)$, we would obtain fourth-order accuracy. We should not assume that $f'$ is available, but approximating it with finite differences can achieve the same goal. Suppose the forward difference formula {eq}`forwardFD21` is used for $f'(a)$, and its reflected backward difference is used for $f'(b)$. Show that the resulting modified trapezoid formula is
- 
-    ```{index} ! Gregory integration formula
-    ```
+**(e)** $\displaystyle \int_0^1 \sqrt{1-x^2}\,\, dx = \frac{\pi}{4}$
+``````
 
-    ```{math}
-    :label: gregory
-        G_f(h) = T_f(h) - \frac{h}{24} \left[ 3\Bigl( f(t_n)+f(t_0) \Bigr) -4\Bigr( f(t_{n-1}) + f(t_1) \Bigr) + \Bigl( f(t_{n-2})+f(t_2)   \Bigr) \right],
-    ```
+```{index} ! Gregory integration formula
+```
 
-    which is known as a **Gregory integration formula**.
+``````{exercise}
+✍ The Euler–Maclaurin error expansion {eq}`eulermaclaurin` for the trapezoid formula implies that if we could cancel out the term due to $f'(b)-f'(a)$, we would obtain fourth-order accuracy. We should not assume that $f'$ is available, but approximating it with finite differences can achieve the same goal. Suppose the forward difference formula {eq}`forwardFD21` is used for $f'(a)$, and its reflected backward difference is used for $f'(b)$. Show that the resulting modified trapezoid formula is
 
+```{math}
+:label: gregory
+G_f(h) = T_f(h) - \frac{h}{24} \left[ 3\Bigl( f(t_n)+f(t_0) \Bigr) -4\Bigr( f(t_{n-1}) + f(t_1) \Bigr) + \Bigl( f(t_{n-2})+f(t_2)   \Bigr) \right],
+```
 
-3. ⌨ Repeat each integral in Exercise 1 above using Gregory integration {eq}`gregory` instead of the trapezoid formula. Compare the observed errors to fourth-order convergence.
+which is known as a **Gregory integration formula**.
+``````
 
-(problem-simpson)=
-4. ✍  Simpson's formula can be derived without appealing to extrapolation.
+``````{exercise}
+⌨ Repeat each integral in Exercise 1 above using Gregory integration {eq}`gregory` instead of the trapezoid formula. Compare the observed errors to fourth-order convergence.
 
-    **(a)** Show that
+``````
 
-    ```{math}
-    p(x) = \beta + \frac{\gamma-\alpha}{2h}\, x + \frac{\alpha-2\beta+\gamma}{2h^2}\, x^2
-    ```
+``````{exercise}
+:label: problem-simpson
+✍  Simpson's formula can be derived without appealing to extrapolation.
 
-    interpolates the three points $(-h,\alpha)$, $(0,\beta)$, and $(h,\gamma)$.
+**(a)** Show that
 
-    **(b)** Find
+```{math}
+p(x) = \beta + \frac{\gamma-\alpha}{2h}\, x + \frac{\alpha-2\beta+\gamma}{2h^2}\, x^2
+```
 
-    ```{math}
-      \int_{-h}^h p(s)\, ds,
-    ```
+interpolates the three points $(-h,\alpha)$, $(0,\beta)$, and $(h,\gamma)$.
 
-    where $p$ is the quadratic polynomial from part (a), in terms of $h$, $\alpha$, $\beta$, and $\gamma$.
-  
-    **(c)** Assume equally spaced nodes in the form $t_i=a+ih$, for $h=(b-a)/n$ and $i=0,\ldots,n$. Suppose $f$ is approximated by $p(x)$ over the subinterval $[t_{i-1},t_{i+1}]$. Apply the result from part (b) to find
+**(b)** Find
 
-    ```{math}
-      \int_{t_{i-1}}^{t_{i+1}} f(x)\, dx \approx \frac{h}{3} \bigl[ f(t_{i-1}) + 4f(t_i) + f(t_{i+1}) \bigr].
-    ```
+```{math}
+\int_{-h}^h p(s)\, ds,
+```
 
-    (Use the change of variable $s=x-t_i$.)
+where $p$ is the quadratic polynomial from part (a), in terms of $h$, $\alpha$, $\beta$, and $\gamma$.
 
-    **(d)** Now also assume that $n=2m$ for an integer $m$. Derive Simpson's formula,
+**(c)** Assume equally spaced nodes in the form $t_i=a+ih$, for $h=(b-a)/n$ and $i=0,\ldots,n$. Suppose $f$ is approximated by $p(x)$ over the subinterval $[t_{i-1},t_{i+1}]$. Apply the result from part (b) to find
 
-    ```{math}
-    :label: simpson
-      \begin{split}
-        \int_a^b f(x)\, dx \approx  \frac{h}{3}\bigl[ &f(t_0) + 4f(t_1) + 2f(t_2) + 4f(t_3) + 2f(t_4) + \cdots\\
-        &+ 2f(t_{n-2}) + 4f(t_{n-1}) + f(t_n) \bigr].
-      \end{split}
-    ```
+```{math}
+\int_{t_{i-1}}^{t_{i+1}} f(x)\, dx \approx \frac{h}{3} \bigl[ f(t_{i-1}) + 4f(t_i) + f(t_{i+1}) \bigr].
+```
 
-5. ✍ Show that the Simpson formula {eq}`simpson` is equivalent to $S_f(n/2)$, given the definition of $S_f$ in {eq}`nc-simpson`.
+(Use the change of variable $s=x-t_i$.)
 
-6. ⌨ For each integral in Exercise 1 above, apply the Simpson formula {eq}`simpson` and compare the errors to fourth-order convergence.
+**(d)** Now also assume that $n=2m$ for an integer $m$. Derive Simpson's formula,
 
-7. ⌨ For $n=10,20,30,\ldots,200$, compute the trapezoidal approximation to
+```{math}
+:label: simpson
+\begin{split}
+\int_a^b f(x)\, dx \approx  \frac{h}{3}\bigl[ &f(t_0) + 4f(t_1) + 2f(t_2) + 4f(t_3) + 2f(t_4) + \cdots\\
+&+ 2f(t_{n-2}) + 4f(t_{n-1}) + f(t_n) \bigr].
+\end{split}
+```
+``````
 
-    ```{math}
-    \int_{0}^1 \frac{1}{2.01+\sin (6\pi x)-\cos(2\pi x)} \,d x \approx 0.9300357672424684.
-    ```
+``````{exercise}
+✍ Show that the Simpson formula {eq}`simpson` is equivalent to $S_f(n/2)$, given the definition of $S_f$ in {eq}`nc-simpson`.
+``````
 
-    Make two separate plots of the absolute error as a function of $n$, one using a log-log scale and the other using log-linear. The graphs suggest that the error asymptotically behaves as $C \alpha^n$ for some $C>0$ and some $0<\alpha<1$. How does this result relate to {eq}`eulermaclaurin`?
+``````{exercise}
+⌨ For each integral in Exercise 1 above, apply the Simpson formula {eq}`simpson` and compare the errors to fourth-order convergence.
+``````
 
+``````{exercise}
+⌨ For $n=10,20,30,\ldots,200$, compute the trapezoidal approximation to
 
-8. ⌨ For each integral in Exercise 1 above, extrapolate the trapezoidal results two levels to get sixth-order accurate results, and compute the errors for each value.
+```{math}
+\int_{0}^1 \frac{1}{2.01+\sin (6\pi x)-\cos(2\pi x)} \,d x \approx 0.9300357672424684.
+```
 
-9. ✍ Find a formula like {eq}`nc-sixth` that extrapolates two values of $R_f$ to obtain an eighth-order accurate one.
+Make two separate plots of the absolute error as a function of $n$, one using a log-log scale and the other using log-linear. The graphs suggest that the error asymptotically behaves as $C \alpha^n$ for some $C>0$ and some $0<\alpha<1$. How does this result relate to {eq}`eulermaclaurin`?
+
+``````
+
+``````{exercise}
+⌨ For each integral in Exercise 1 above, extrapolate the trapezoidal results two levels to get sixth-order accurate results, and compute the errors for each value.
+``````
+
+``````{exercise}
+✍ Find a formula like {eq}`nc-sixth` that extrapolates two values of $R_f$ to obtain an eighth-order accurate one.
+``````

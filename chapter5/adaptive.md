@@ -158,66 +158,76 @@ If the error estimate passes the test {eq}`absreltolerance`, the better Simpson 
 `````
 ::::
 
-Although adaptivity and the error estimation that goes with it can be very powerful, they come at some cost. The error estimation cannot be universally perfect, so sometimes the answer will not be as accurate as requested, and sometimes the function will be evaluated more times than necessary. Subtle problems may arise when the integral is a step within a larger computation (see [Exercise 6](#problem-adaptive-nonsmooth)).
+Although adaptivity and the error estimation that goes with it can be very powerful, they come at some cost. The error estimation cannot be universally perfect, so sometimes the answer will not be as accurate as requested, and sometimes the function will be evaluated more times than necessary. Subtle problems may arise when the integral is a step within a larger computation (see @problem-adaptive-nonsmooth).
 
 ## Exercises
 
-(problem-adaptquadtests)=
 % must be kept as #1
+``````{exercise}
+:label: problem-adaptquadtests
+⌨ For each integral below, use {numref}`Function {number} <function-intadapt>` with error tolerance $10^{-2},10^{-3},\ldots,10^{-12}$. Make a table of errors and the number of integrand evaluation nodes used, and use a convergence plot as in {numref}`Demo %s <demo-adapt-usage>` to compare to fourth-order accuracy. (These integrals were taken from {cite}`baileyComparisonThree2005`.)
 
-1. ⌨ For each integral below, use {numref}`Function {number} <function-intadapt>` with error tolerance $10^{-2},10^{-3},\ldots,10^{-12}$. Make a table of errors and the number of integrand evaluation nodes used, and use a convergence plot as in {numref}`Demo %s <demo-adapt-usage>` to compare to fourth-order accuracy. (These integrals were taken from {cite}`baileyComparisonThree2005`.)
+**(a)** $\displaystyle \int_0^1 x\log(1+x)\, dx = \frac{1}{4}$
 
-    **(a)** $\displaystyle \int_0^1 x\log(1+x)\, dx = \frac{1}{4}$
+**(b)** $\displaystyle \int_0^1 x^2 \tan^{-1}x\, dx = \frac{\pi-2+2\log 2}{12}$
 
-    **(b)** $\displaystyle \int_0^1 x^2 \tan^{-1}x\, dx = \frac{\pi-2+2\log 2}{12}$
+**(c)** $\displaystyle \int_0^{\pi/2}e^x \cos x\, dx = \frac{e^{\pi/2}-1}{2}$
 
-    **(c)** $\displaystyle \int_0^{\pi/2}e^x \cos x\, dx = \frac{e^{\pi/2}-1}{2}$
+**(d)** $\displaystyle \int_{0}^1 \sqrt{x} \log(x) \, dx = -\frac{4}{9}$ (Note: Although the integrand has the limiting value zero as $x\to 0$, you have to implement the function carefully to return zero as the value of $f(0)$, or start the integral at $x=\macheps$.)
 
-    **(d)** $\displaystyle \int_{0}^1 \sqrt{x} \log(x) \, dx = -\frac{4}{9}$ (Note: Although the integrand has the limiting value zero as $x\to 0$, you have to implement the function carefully to return zero as the value of $f(0)$, or start the integral at $x=\macheps$.)
+**(e)** $\displaystyle \int_0^1 \sqrt{1-x^2}\, dx = \frac{\pi}{4}$
+``````
 
-    **(e)** $\displaystyle \int_0^1 \sqrt{1-x^2}\, dx = \frac{\pi}{4}$
+``````{exercise}
+⌨ For each integral below: (i) use `quadgk` to find the value to at least 12 digits; (ii) use {numref}`Function {number} <function-intadapt>` to evaluate the integral to a tolerance of $10^{-8}$; (iii) compute the absolute error and the number of nodes used; (iv) use the $O(h^2)$ term in the Euler–Maclaurin formula {eq}`eulermaclaurin` to estimate how many nodes are required by the fixed-stepsize trapezoidal formula to reach an absolute error of $10^{-8}$.
 
-2. ⌨ For each integral below: (i) use `quadgk` to find the value to at least 12 digits; (ii) use {numref}`Function {number} <function-intadapt>` to evaluate the integral to a tolerance of $10^{-8}$; (iii) compute the absolute error and the number of nodes used; (iv) use the $O(h^2)$ term in the Euler–Maclaurin formula {eq}`eulermaclaurin` to estimate how many nodes are required by the fixed-stepsize trapezoidal formula to reach an absolute error of $10^{-8}$.
+**(a)** $\displaystyle \int_{0.1}^3 \operatorname{sech}(\sin(1/x))\, d x$
 
-    **(a)** $\displaystyle \int_{0.1}^3 \operatorname{sech}(\sin(1/x))\, d x$
+**(b)** $\rule[2em]{0pt}{0pt} \displaystyle\int_{-0.9}^9 \ln((x+1)^3))\, d x$
 
-    **(b)** $\rule[2em]{0pt}{0pt} \displaystyle\int_{-0.9}^9 \ln((x+1)^3))\, d x$
+**(c)** $\rule[2em]{0pt}{0pt} \displaystyle\int_{-\pi}^\pi \cos(x^3)\, d x$
 
-    **(c)** $\rule[2em]{0pt}{0pt} \displaystyle\int_{-\pi}^\pi \cos(x^3)\, d x$
+``````
 
-    ```{index} improper integral
-    ```    
-3. ⌨ An integral such as $\displaystyle \int_0^1 x^{-\gamma}\, dx$ for $\gamma>0$, in which the integrand blows up at one or both ends, is known as an *improper* integral. It has a finite value if $\gamma<1$, despite the singularity. One way to deal with the problem of the infinite value for $f(t_0)$ is to replace the lower limit with a small number $\epsilon$. (A more robust way to handle improper integrals is discussed in Chapter 9.)
-    
-    Using {numref}`Function {number} <function-intadapt>` with a small tolerance, make a log-log plot of the error as a function of $\epsilon$ when $\gamma=2/3$, for $\epsilon=10^{-15},10^{-16},\ldots,10^{-45}$. 
+```{index} improper integral
+```
 
-4. ⌨ A curious consequence of our logic in {numref}`Function {number} <function-intadapt>` is that the algorithm uses what we believe to be a more accurate, sixth-order answer only for estimating error; the returned value is the supposedly less accurate $S_f(2n)$. The practice of returning the extrapolated $R_f(4n)$ instead is called *local extrapolation*. 
-    
-    Modify {numref}`Function {number} <function-intadapt>` to use local extrapolation and repeat parts (a) and (e) of Exercise 1 above, comparing the observed convergence to both fourth order and sixth order.
+``````{exercise}
+⌨ An integral such as $\displaystyle \int_0^1 x^{-\gamma}\, dx$ for $\gamma>0$, in which the integrand blows up at one or both ends, is known as an *improper* integral. It has a finite value if $\gamma<1$, despite the singularity. One way to deal with the problem of the infinite value for $f(t_0)$ is to replace the lower limit with a small number $\epsilon$. (A more robust way to handle improper integrals is discussed in Chapter 9.)
 
+Using {numref}`Function {number} <function-intadapt>` with a small tolerance, make a log-log plot of the error as a function of $\epsilon$ when $\gamma=2/3$, for $\epsilon=10^{-15},10^{-16},\ldots,10^{-45}$. 
+``````
 
-    ```{index} sine integral function
-    ```   
-5. ⌨ The *sine integral function* is defined by
-  
-    ```{math}
-    \operatorname{Si}(x) = \int_0^x \frac{\sin z}{z}\, dz.
-    ```
+``````{exercise}
+⌨ A curious consequence of our logic in {numref}`Function {number} <function-intadapt>` is that the algorithm uses what we believe to be a more accurate, sixth-order answer only for estimating error; the returned value is the supposedly less accurate $S_f(2n)$. The practice of returning the extrapolated $R_f(4n)$ instead is called *local extrapolation*. 
 
-    Use {numref}`Function {number} <function-intadapt>` to plot Si over the interval $[1,10]$. Note: You will need to replace the lower bound of integration by $\macheps$.
+Modify {numref}`Function {number} <function-intadapt>` to use local extrapolation and repeat parts (a) and (e) of Exercise 1 above, comparing the observed convergence to both fourth order and sixth order.
+``````
 
+```{index} sine integral function
+```
 
-(problem-adaptive-nonsmooth)=
-6. ⌨  Adaptive integration can have subtle drawbacks. This exercise is based on the *error function*, a smooth function defined as
-  
-    ```{math}
-    \operatorname{erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x e^{-s^2}\,ds.
-    ```
+``````{exercise}
+⌨ The *sine integral function* is defined by
 
-    **(a)** Define a function $g$ that approximates erf by applying {numref}`Function {number} <function-trapezoid>` with $n=300$. Make a plot of the error $g(x)-\operatorname{erf}(x)$ at 500 points in the interval $[0,3]$.
+```{math}
+\operatorname{Si}(x) = \int_0^x \frac{\sin z}{z}\, dz.
+```
 
-    **(b)** Define another approximation $h$ that applies {numref}`Function {number} <function-intadapt>` with error tolerance $10^{-7}$. Plot the error in $h$ as in part (a). Why does it look so different from the previous case?
+Use {numref}`Function {number} <function-intadapt>` to plot Si over the interval $[1,10]$. Note: You will need to replace the lower bound of integration by $\macheps$.
+``````
 
-    **(c)** Suppose you wished to find $x$ such that $\operatorname{erf}(x) = .95$ by using rootfinding on one of your two approximations. Why is the version from part (a) preferable?
+``````{exercise}
+:label: problem-adaptive-nonsmooth
+⌨  Adaptive integration can have subtle drawbacks. This exercise is based on the *error function*, a smooth function defined as
 
+```{math}
+\operatorname{erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x e^{-s^2}\,ds.
+```
 
+**(a)** Define a function $g$ that approximates erf by applying {numref}`Function {number} <function-trapezoid>` with $n=300$. Make a plot of the error $g(x)-\operatorname{erf}(x)$ at 500 points in the interval $[0,3]$.
+
+**(b)** Define another approximation $h$ that applies {numref}`Function {number} <function-intadapt>` with error tolerance $10^{-7}$. Plot the error in $h$ as in part (a). Why does it look so different from the previous case?
+
+**(c)** Suppose you wished to find $x$ such that $\operatorname{erf}(x) = .95$ by using rootfinding on one of your two approximations. Why is the version from part (a) preferable?
+``````

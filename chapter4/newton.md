@@ -149,8 +149,8 @@ Recall that linear convergence is identifiable by trending toward a straight lin
 
 Let's summarize the assumptions made to derive quadratic convergence as given by {eq}`newtonerr`:
 
-1. The residual function $f$ has to have enough continuous derivatives to make the Taylor series expansion valid. Often this is stated as $f$ having sufficient *smoothness*. This is usually not a problem, but see [Exercise 6](#problem-newton-alternate).
-2. We required $f'(r)\neq 0$, meaning that $r$ must be a simple root. See [Exercise 7](#problem-newton-multiple) to investigate what happens at a multiple root.
+1. The residual function $f$ has to have enough continuous derivatives to make the Taylor series expansion valid. Often this is stated as $f$ having sufficient *smoothness*. This is usually not a problem, but see @problem-newton-alternate.
+2. We required $f'(r)\neq 0$, meaning that $r$ must be a simple root. See @problem-newton-multiple to investigate what happens at a multiple root.
 3. We assumed that the sequence converged, which is not easy to guarantee in any particular case. In fact,
 finding a starting value from which the Newton iteration converges is often the most challenging part of a rootfinding problem. We will try to deal with this issue in {numref}`section-nonlineqn-quasinewton`.
 
@@ -231,30 +231,45 @@ For each of Exercises 1–3, do the following steps.
 
 **(e)** ⌨ For one of the roots, use the errors in the Newton sequence to determine numerically whether the convergence is roughly quadratic.
 
-1. $x^2=e^{-x}$, over $[-2,2]$
+``````{exercise}
+$x^2=e^{-x}$, over $[-2,2]$
+``````
 
-2. $2x = \tan x$, over $[-0.2,1.4]$
+``````{exercise}
+$2x = \tan x$, over $[-0.2,1.4]$
+``````
 
-3. $e^{x+1}=2+x$, over $[-2,2]$
+``````{exercise}
+$e^{x+1}=2+x$, over $[-2,2]$
+``````
 
-    ---
+---
 
-4. ⌨  Plot the function $f(x)=x^{-2} - \sin x$ on the interval $x \in [0.5,10]$.  For each initial value $x_1=1,\, x_1=2,\,\ldots,\, x_1=7$, apply {numref}`Function {number} <function-newton>` to $f$, and make a table showing $x_1$ and the resulting root found by the method. In which case does the iteration converge to a root other than the one closest to it? Use the plot to explain why that happened.
-  
-5. ✍ Show that if $f(x)=x^{-1}-b$ for nonzero $b$, then Newton's iteration converging to the root $r=1/b$ can be implemented without performing any divisions. 
+``````{exercise}
+⌨  Plot the function $f(x)=x^{-2} - \sin x$ on the interval $x \in [0.5,10]$.  For each initial value $x_1=1,\, x_1=2,\,\ldots,\, x_1=7$, apply {numref}`Function {number} <function-newton>` to $f$, and make a table showing $x_1$ and the resulting root found by the method. In which case does the iteration converge to a root other than the one closest to it? Use the plot to explain why that happened.
+``````
 
-(problem-newton-alternate)=
-6. ✍ Discuss what happens when Newton's method is applied to find a root of $f(x) = \operatorname{sign}(x) \sqrt{|x|}$, starting at $x_1\ne 0$. (Hint: Write out both $f(x)$ and $f'(x)$ as piecewise functions.)
+``````{exercise}
+✍ Show that if $f(x)=x^{-1}-b$ for nonzero $b$, then Newton's iteration converging to the root $r=1/b$ can be implemented without performing any divisions. 
+``````
 
-(problem-newton-multiple)=
-7. ✍ In the case of a multiple root, where $f(r)=f'(r)=0$, the derivation of the quadratic error convergence in {eq}`newtonerr` is invalid. Redo the derivation to show that in this circumstance and with $f''(r)\neq 0$, the error converges only linearly. 
+``````{exercise}
+:label: problem-newton-alternate
+✍ Discuss what happens when Newton's method is applied to find a root of $f(x) = \operatorname{sign}(x) \sqrt{|x|}$, starting at $x_1\ne 0$. (Hint: Write out both $f(x)$ and $f'(x)$ as piecewise functions.)
 
-8. ✍ In {numref}`Function {number} <function-newton>` and elsewhere, the actual error is not available, so we use $|x_k-x_{k-1}|$ as an approximate indicator of error to determine when to stop the iteration. Find an example that foils this indicator; that is, a sequence $\{x_k\}$ such that
-  
-    ```{math}
-    \lim_{k\rightarrow \infty} (x_k-x_{k-1}) = 0,
-    ```
+``````
 
-    but $\{x_k\}$ diverges. (Hint: You have seen such sequences in calculus.) Hence the need for residual tolerances and safety valves in the code!
+``````{exercise}
+:label: problem-newton-multiple
+✍ In the case of a multiple root, where $f(r)=f'(r)=0$, the derivation of the quadratic error convergence in {eq}`newtonerr` is invalid. Redo the derivation to show that in this circumstance and with $f''(r)\neq 0$, the error converges only linearly. 
+``````
 
+``````{exercise}
+✍ In {numref}`Function {number} <function-newton>` and elsewhere, the actual error is not available, so we use $|x_k-x_{k-1}|$ as an approximate indicator of error to determine when to stop the iteration. Find an example that foils this indicator; that is, a sequence $\{x_k\}$ such that
 
+```{math}
+\lim_{k\rightarrow \infty} (x_k-x_{k-1}) = 0,
+```
+
+but $\{x_k\}$ diverges. (Hint: You have seen such sequences in calculus.) Hence the need for residual tolerances and safety valves in the code!
+``````

@@ -269,60 +269,74 @@ Rearranging and Normalizing by the coefficient of $u_{i+1}$ gives $\rho(z)=z^2 +
 
 ## Exercises
 
-1. ✍ For each method, write out the generating polynomials $\rho(z)$ and $\sigma(z)$.
+``````{exercise}
+✍ For each method, write out the generating polynomials $\rho(z)$ and $\sigma(z)$.
 
-    **(a)** AM2,
-    **(b)** AB2,
-    **(c)** BD2,
-    **(d)** AM3,
-    **(e)** AB3.
+**(a)** AM2,
+**(b)** AB2,
+**(c)** BD2,
+**(d)** AM3,
+**(e)** AB3.
+``````
 
-2. ✍ Write out by hand an equation that defines the first solution value $u_1$ produced by AM1 (backward Euler) for each IVP. (Reminder: This is an implicit formula.)
+``````{exercise}
+✍ Write out by hand an equation that defines the first solution value $u_1$ produced by AM1 (backward Euler) for each IVP. (Reminder: This is an implicit formula.)
 
-    **(a)** $u' = -2t u, \quad 0 \le t \le 2, \quad u_0 = 2, \quad h = 0.2$
+**(a)** $u' = -2t u, \quad 0 \le t \le 2, \quad u_0 = 2, \quad h = 0.2$
 
-    **(b)** $u' = u + t, \quad 0 \le t \le 1, \quad u_0 = 2, \quad h = 0.1$
+**(b)** $u' = u + t, \quad 0 \le t \le 1, \quad u_0 = 2, \quad h = 0.1$
 
-    **(c)** $(1+x^3)uu' = x^2,\quad 0 \le x \le 3, \quad u_0=1, , \quad h = 0.5$
+**(c)** $(1+x^3)uu' = x^2,\quad 0 \le x \le 3, \quad u_0=1, , \quad h = 0.5$
+``````
 
-3. ✍ Do the preceding exercise for AM2 (trapezoid) instead of backward Euler.
+``````{exercise}
+✍ Do the preceding exercise for AM2 (trapezoid) instead of backward Euler.
+``````
 
-4. ✍ For each method, find the leading term in the local truncation error using {eq}`MSLTE`.
+``````{exercise}
+✍ For each method, find the leading term in the local truncation error using {eq}`MSLTE`.
 
-    **(a)** AM2,
-    **(b)** AB2,
-    **(c)** BD2.
-  
-5. ✍/ ⌨ For each method, find the leading term in the local truncation error using {eq}`MSLTE`. (Computer algebra is recommended.)
+**(a)** AM2,
+**(b)** AB2,
+**(c)** BD2.
+``````
 
-    **(a)** AM3,
-    **(b)** AB3,
-    **(c)** BD4.
-  
-6. ✍ A formula for the quadratic polynomial interpolant through the points $(s_1,y_1)$, $(s_2,y_2)$, and $(s_3,y_3)$ is
-  
-    ```{math}
-    p(x) = \frac{(x-s_2)(x-s_3)}{(s_1-s_2)(s_1-s_3)}\,y_1 +
-            \frac{(x-s_1)(x-s_3)}{(s_2-s_1)(s_2-s_3)}\,y_2 +
-            \frac{(x-s_1)(x-s_2)}{(s_3-s_1)(s_3-s_2)}\,y_3.
-    ```
+``````{exercise}
+✍/ ⌨ For each method, find the leading term in the local truncation error using {eq}`MSLTE`. (Computer algebra is recommended.)
 
-    **(a)** Use {eq}`adamsderive` and a polynomial interpolant through three points to derive the coefficients of the AM3 method.
+**(a)** AM3,
+**(b)** AB3,
+**(c)** BD4.
+``````
 
-    **(b)** Use {eq}`bdfderive` and a polynomial interpolant through three points to derive the coefficients of the BD2 method.
-  
-7. ✍ By doing series expansion about the point $z=1$, show for BD2 that
-  
-    ```{math}
-    \frac{\rho(z)}{\sigma(z)} - \log(z-1) = O\bigl( (z-1)^3 \bigr).
-    ```
+``````{exercise}
+✍ A formula for the quadratic polynomial interpolant through the points $(s_1,y_1)$, $(s_2,y_2)$, and $(s_3,y_3)$ is
 
-8. ✍/ ⌨  By doing series expansion about the point $z=1$, show for AB3 and AM3 that
-  
-    ```{math}
-    \frac{\rho(z)}{\sigma(z)} - \log(z-1) = O\bigl( (z-1)^4 \bigr).
-    ```
+```{math}
+p(x) = \frac{(x-s_2)(x-s_3)}{(s_1-s_2)(s_1-s_3)}\,y_1 +
+\frac{(x-s_1)(x-s_3)}{(s_2-s_1)(s_2-s_3)}\,y_2 +
+\frac{(x-s_1)(x-s_2)}{(s_3-s_1)(s_3-s_2)}\,y_3.
+```
 
-    (Computer algebra is recommended.)
+**(a)** Use {eq}`adamsderive` and a polynomial interpolant through three points to derive the coefficients of the AM3 method.
 
+**(b)** Use {eq}`bdfderive` and a polynomial interpolant through three points to derive the coefficients of the BD2 method.
+``````
 
+``````{exercise}
+✍ By doing series expansion about the point $z=1$, show for BD2 that
+
+```{math}
+\frac{\rho(z)}{\sigma(z)} - \log(z-1) = O\bigl( (z-1)^3 \bigr).
+```
+``````
+
+``````{exercise}
+✍/ ⌨  By doing series expansion about the point $z=1$, show for AB3 and AM3 that
+
+```{math}
+\frac{\rho(z)}{\sigma(z)} - \log(z-1) = O\bigl( (z-1)^4 \bigr).
+```
+
+(Computer algebra is recommended.)
+``````

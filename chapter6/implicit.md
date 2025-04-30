@@ -154,75 +154,95 @@ Because multistep methods rely on the solution history, though, changing the ste
 ## Exercises
 
 % Must stay as #1
-(problem-implicit-ab4tests)=
 
-1. ⌨ For each IVP, solve the problem using {numref}`Function {number} <function-ab4>` with $n=100$, and plot the solution and the error $u-\hat{u}$ on separate plots.
+``````{exercise}
+:label: problem-implicit-ab4tests
+⌨ For each IVP, solve the problem using {numref}`Function {number} <function-ab4>` with $n=100$, and plot the solution and the error $u-\hat{u}$ on separate plots.
 
-    **(a)** $u' = -2t u, \ 0 \le t \le 2, \ u(0) = 2;\  \hat{u}(t) = 2e^{-t^2}$
+**(a)** $u' = -2t u, \ 0 \le t \le 2, \ u(0) = 2;\  \hat{u}(t) = 2e^{-t^2}$
 
-    **(b)** $u' = u + t, \ 0 \le t \le 1, \ u(0) = 2;\  \hat{u}(t) = 1-t+e^t$
+**(b)** $u' = u + t, \ 0 \le t \le 1, \ u(0) = 2;\  \hat{u}(t) = 1-t+e^t$
 
-    **(c)** $u' = x^2/[u(1+x^3)],\ 0 \le x \le 3, \ u(0) =1;\ \hat{u}(x) =[1+(2/3)\ln (1+x^3)]^{1/2}$
+**(c)** $u' = x^2/[u(1+x^3)],\ 0 \le x \le 3, \ u(0) =1;\ \hat{u}(x) =[1+(2/3)\ln (1+x^3)]^{1/2}$
 
-    **(d)** $u''+ 9u = 9t, \: 0< t< 2\pi, \: u(0) =1,\: u'(0) = 1; \: \hat{u}(t) = t+\cos (3t)$
+**(d)** $u''+ 9u = 9t, \: 0< t< 2\pi, \: u(0) =1,\: u'(0) = 1; \: \hat{u}(t) = t+\cos (3t)$
 
-    **(e)** $u''+ 9u = \sin(2t), \: 0< t< 2\pi, \: u(0) =2,\: u'(0) = 1$;
-    $\quad \hat{u}(t) = (1/5) \sin(3t) + 2 \cos (3t)+ (1/5) \sin (2t)$
+**(e)** $u''+ 9u = \sin(2t), \: 0< t< 2\pi, \: u(0) =2,\: u'(0) = 1$;
+$\quad \hat{u}(t) = (1/5) \sin(3t) + 2 \cos (3t)+ (1/5) \sin (2t)$
 
-    **(f)** $u''- 9u = 9t \: 0< t< 1, \: u(0) =2,\: u'(0) = -1; \: \hat{u}(t) = e^{3t} + e^{-3t}-t$
+**(f)** $u''- 9u = 9t \: 0< t< 1, \: u(0) =2,\: u'(0) = -1; \: \hat{u}(t) = e^{3t} + e^{-3t}-t$
 
-    **(g)** $u''+ 4u'+ 4u = t, \: 0< t< 4, \: u(0) =1,\: u'(0) = 3/4; \: \hat{u}(t) = (3t+5/4)e^{-2t} + (t-1)/4$
+**(g)** $u''+ 4u'+ 4u = t, \: 0< t< 4, \: u(0) =1,\: u'(0) = 3/4; \: \hat{u}(t) = (3t+5/4)e^{-2t} + (t-1)/4$
 
-    **(h)** $x^2 u'' +5xu' + 4u = 0,\: 1<x<e^2, \: u(1) =1, \: u'(1) = -1; \: \hat{u}(x) = x^{-2}( 1 + \ln x)$
+**(h)** $x^2 u'' +5xu' + 4u = 0,\: 1<x<e^2, \: u(1) =1, \: u'(1) = -1; \: \hat{u}(x) = x^{-2}( 1 + \ln x)$
 
-    **(i)** $2 x^2 u'' +3xu' - u = 0,\: 1<x<16, \: u(1) =4, \: u'(1) = -1$;
-    $\quad \hat{u}(x) = 2(x^{1/2} + x^{-1})$
+**(i)** $2 x^2 u'' +3xu' - u = 0,\: 1<x<16, \: u(1) =4, \: u'(1) = -1$;
+$\quad \hat{u}(x) = 2(x^{1/2} + x^{-1})$
 
-    **(j)** $x^2 u'' -xu' + 2u = 0,\: 1<x<e^{\pi}, \: u(1) =3, \: u'(1) = 4$;
-    $\quad \hat{u}(x) = x \left[ 3 \cos \left( \ln x \right)+\sin \left( \ln x \right) \right]$
+**(j)** $x^2 u'' -xu' + 2u = 0,\: 1<x<e^{\pi}, \: u(1) =3, \: u'(1) = 4$;
+$\quad \hat{u}(x) = x \left[ 3 \cos \left( \ln x \right)+\sin \left( \ln x \right) \right]$
 
-(problem-implicit-ab4converge)=
-2. ⌨ For each IVP in Exercise 1, use {numref}`Function {number} <function-ab4>` for $n=10\cdot2^d$ and $d=1,\ldots,10$. Make a log-log convergence plot for the final time error $|u_n-\hat{u}(t_n)|$ versus $n$, and add a straight line indicating fourth-order convergence.
+``````
 
-3. ⌨ Repeat Exercise 1 above  using {numref}`Function {number} <function-am2>`.
+``````{exercise}
+:label: problem-implicit-ab4converge
+⌨ For each IVP in Exercise 1, use {numref}`Function {number} <function-ab4>` for $n=10\cdot2^d$ and $d=1,\ldots,10$. Make a log-log convergence plot for the final time error $|u_n-\hat{u}(t_n)|$ versus $n$, and add a straight line indicating fourth-order convergence.
+``````
 
-4. ⌨  Repeat Exercise 2 above using {numref}`Function {number} <function-am2>` and comparing to second-order rather than fourth-order convergence.
+``````{exercise}
+⌨ Repeat Exercise 1 above  using {numref}`Function {number} <function-am2>`.
+``````
 
-5. ⌨ Using {numref}`Function {number} <function-am2>` as a model, write a function `bd2` that applies the BD2 method to solve an IVP. Test the convergence of your function on one of the IVPs in [Exercise 1](#problem-implicit-ab4tests) above.
+``````{exercise}
+⌨  Repeat Exercise 2 above using {numref}`Function {number} <function-am2>` and comparing to second-order rather than fourth-order convergence.
+``````
 
-6. ⌨ For double-precision purposes, the exact solution of the IVP in {numref}`Demo %s <demo-implicit-stiff>` satisfies $\hat{u}(400)=1$.
+``````{exercise}
+⌨ Using {numref}`Function {number} <function-am2>` as a model, write a function `bd2` that applies the BD2 method to solve an IVP. Test the convergence of your function on one of the IVPs in @problem-implicit-ab4tests above.
+``````
 
-    **(a)** Use {numref}`Function {number} <function-ab4>` with $n=600,800,1000,\ldots,2000$ and make a log-log convergence plot of the error $|u_n-1|$ as a function of $n$.
+``````{exercise}
+⌨ For double-precision purposes, the exact solution of the IVP in {numref}`Demo %s <demo-implicit-stiff>` satisfies $\hat{u}(400)=1$.
 
-    **(b)** Repeat part (a) using {numref}`Function {number} <function-am2>`.
+**(a)** Use {numref}`Function {number} <function-ab4>` with $n=600,800,1000,\ldots,2000$ and make a log-log convergence plot of the error $|u_n-1|$ as a function of $n$.
 
-(problem-implicit-ivpimag)=
-7. Consider the IVP
-  
-    ```{math}
-    \mathbf{u}'(t) = \mathbf{A} \mathbf{u}(t), \quad \mathbf{A}=
-    \begin{bmatrix}
-      0&-4\\4&0
-    \end{bmatrix}, \quad \mathbf{u}(0) =
-    \begin{bmatrix}
-      1\\0
-    \end{bmatrix}.
-    ```
+**(b)** Repeat part (a) using {numref}`Function {number} <function-am2>`.
 
-    **(a)** ✍ Define $E(t) = \bigl\|\mathbf{u}(t)\bigr\|_2^2$. Show that $E(t)$ is constant. (Hint: differentiate $\mathbf{u}^T\mathbf{u}$ with respect to time and simplify it.)
+``````
 
-    **(b)** ⌨ Use {numref}`Function {number} <function-ab4>` to solve the IVP for $t\in[0,20]$ with $n=100$ and $n=150$. Plot $|E(t)-E(0)|$ versus time for both solutions on a single log-linear graph. You should see exponential growth in time. (In this regime, AB4 is acting unstably in a sense discussed in {numref}`section-diffusion-absstab`.)
+``````{exercise}
+:label: problem-implicit-ivpimag
+Consider the IVP
 
-    **(c)** ⌨ Repeat part (b) with $n=400$ and $n=600$, but on a linear-linear plot. Now you should see only linear growth of $|E(t)-E(0)|$. (In this regime, AB4 is fully stable.)
+```{math}
+\mathbf{u}'(t) = \mathbf{A} \mathbf{u}(t), \quad \mathbf{A}=
+\begin{bmatrix}
+0&-4\\4&0
+\end{bmatrix}, \quad \mathbf{u}(0) =
+\begin{bmatrix}
+1\\0
+\end{bmatrix}.
+```
 
-    **(d)** ⌨ Repeat part (b) with AM2 instead of AB4, on a linear-linear plot. You will find that AM2 conserves energy, just like the exact solution. 
-  
-8. ⌨ **(a)** Modify {numref}`Function {number} <function-ab4>` to implement the AB2 method.
+**(a)** ✍ Define $E(t) = \bigl\|\mathbf{u}(t)\bigr\|_2^2$. Show that $E(t)$ is constant. (Hint: differentiate $\mathbf{u}^T\mathbf{u}$ with respect to time and simplify it.)
 
-    **(b)** Repeat part (b) of the preceding exercise, using AB2 in place of AB4.
+**(b)** ⌨ Use {numref}`Function {number} <function-ab4>` to solve the IVP for $t\in[0,20]$ with $n=100$ and $n=150$. Plot $|E(t)-E(0)|$ versus time for both solutions on a single log-linear graph. You should see exponential growth in time. (In this regime, AB4 is acting unstably in a sense discussed in {numref}`section-diffusion-absstab`.)
 
-    **(c)** Repeat part (c) of the preceding exercise, using AB2 in place of AB4.
-  
-9. ⌨ **(a)** Modify {numref}`Function {number} <function-am2>` to implement the backward Euler (AM1) method.
+**(c)** ⌨ Repeat part (b) with $n=400$ and $n=600$, but on a linear-linear plot. Now you should see only linear growth of $|E(t)-E(0)|$. (In this regime, AB4 is fully stable.)
 
-    **(b)** Repeat part (d) of Exercise 7 above, using AM1 in place of AM2 and $n=400,800$. Does the AM1 method conserve energy?
+**(d)** ⌨ Repeat part (b) with AM2 instead of AB4, on a linear-linear plot. You will find that AM2 conserves energy, just like the exact solution. 
+``````
+
+``````{exercise}
+⌨ **(a)** Modify {numref}`Function {number} <function-ab4>` to implement the AB2 method.
+
+**(b)** Repeat part (b) of the preceding exercise, using AB2 in place of AB4.
+
+**(c)** Repeat part (c) of the preceding exercise, using AB2 in place of AB4.
+``````
+
+``````{exercise}
+⌨ **(a)** Modify {numref}`Function {number} <function-am2>` to implement the backward Euler (AM1) method.
+
+**(b)** Repeat part (d) of Exercise 7 above, using AM1 in place of AM2 and $n=400,800$. Does the AM1 method conserve energy?
+``````

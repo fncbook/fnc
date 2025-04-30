@@ -299,7 +299,7 @@ Solution: $u(x,y) = \sin (4\pi x) \cos (2\pi y)$.
 ``````
 
 ``````{exercise}
-⌨ Copy {numref}`Function {number} <function-poissonfd>` to a new function named `poischeb`, and modify it to use a Chebyshev discretization rather than finite differences. For each item in [Exercise 3](#problem-laplace-usage), solve the problem using `poischeb` for $m=n=10,15,20,\ldots,40$. For each numerical solution compute the maximum absolute error on the grid. Show the convergence of the error as a function of $n$ on a log-linear plot.
+⌨ Copy {numref}`Function {number} <function-poissonfd>` to a new function named `poischeb`, and modify it to use a Chebyshev discretization rather than finite differences. For each item in @problem-laplace-usage, solve the problem using `poischeb` for $m=n=10,15,20,\ldots,40$. For each numerical solution compute the maximum absolute error on the grid. Show the convergence of the error as a function of $n$ on a log-linear plot.
 ``````
 
 ``````{exercise}

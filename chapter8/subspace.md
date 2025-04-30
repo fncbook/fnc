@@ -194,7 +194,7 @@ which is a fundamental identity of Krylov subspace methods.
 
 ## Implementation
 
-An implementation of the Arnoldi iteration is given in {numref}`Function {number} <function-arnoldi>`. A careful inspection shows that inner nested loop does not exactly implement {eq}`arnoldiip` and {eq}`arnoldigs`. The reason is numerical stability. Though the described and implemented versions are mathematically equivalent in exact arithmetic (see [Exercise 6](#problem-subspace-modifiedgs)), the approach in {numref}`Function {number} <function-arnoldi>` is more stable.
+An implementation of the Arnoldi iteration is given in {numref}`Function {number} <function-arnoldi>`. A careful inspection shows that inner nested loop does not exactly implement {eq}`arnoldiip` and {eq}`arnoldigs`. The reason is numerical stability. Though the described and implemented versions are mathematically equivalent in exact arithmetic (see @problem-subspace-modifiedgs), the approach in {numref}`Function {number} <function-arnoldi>` is more stable.
 
 (function-arnoldi)=
 ``````{prf:algorithm} arnoldi
@@ -242,7 +242,7 @@ An implementation of the Arnoldi iteration is given in {numref}`Function {number
 `````
 ::::
 
-In the next section, we revisit the idea of approximately solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ over a Krylov subspace as suggested in @demo-subspace-arnoldi. A related idea explored in [Exercise 7](#problem-krylov-arnoldieig) is used to approximate the eigenvalue problem for $\mathbf{A}$, which is the approach that underlies `eigs` for sparse matrices.
+In the next section, we revisit the idea of approximately solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ over a Krylov subspace as suggested in @demo-subspace-arnoldi. A related idea explored in @problem-krylov-arnoldieig is used to approximate the eigenvalue problem for $\mathbf{A}$, which is the approach that underlies `eigs` for sparse matrices.
 
 ## Exercises
 

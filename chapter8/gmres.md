@@ -191,7 +191,7 @@ $$
 ``````
 
 ``````{exercise}
-✍ (Continuation of [Exercise 8.4.3](#problem-subspace-matrixpolykrylov).) Show that if $\mathbf{x}_m\in\mathcal{K}_m$, then the residual $\mathbf{b}-\mathbf{A}\mathbf{x}_m$ is equal to $q(\mathbf{A})\mathbf{b}$, where $q$ is a polynomial of degree at most $m$ and $q(0)=1$. (This fact is a key one for many convergence results.) 
+✍ (Continuation of @problem-subspace-matrixpolykrylov.) Show that if $\mathbf{x}_m\in\mathcal{K}_m$, then the residual $\mathbf{b}-\mathbf{A}\mathbf{x}_m$ is equal to $q(\mathbf{A})\mathbf{b}$, where $q$ is a polynomial of degree at most $m$ and $q(0)=1$. (This fact is a key one for many convergence results.) 
 ``````
 
 ``````{exercise}
@@ -239,7 +239,7 @@ let $\mathbf{I}$ be a $100\times 100$ identity, and let $\mathbf{Z}$ be a $100\t
 ``````
 
 ``````{exercise}
-⌨ (Continuation of [Exercise 8.3.5](#problem-inviter-lumpmembraneinveig).) We again consider the $n^2\times n^2$ sparse matrix defined by `FNC.poisson(n)`. The solution of $\mathbf{A}\mathbf{x}=\mathbf{b}$ may be interpreted as the deflection of a lumped membrane in response to a load represented by $\mathbf{b}$.
+⌨ (Continuation of @problem-inviter-lumpmembraneinveig.) We again consider the $n^2\times n^2$ sparse matrix defined by `FNC.poisson(n)`. The solution of $\mathbf{A}\mathbf{x}=\mathbf{b}$ may be interpreted as the deflection of a lumped membrane in response to a load represented by $\mathbf{b}$.
 
 **(a)** For $n=10,15,20,25$, let $\mathbf{b}$ be the vector of $n^2$ ones and apply {numref}`Function {number} <function-gmres>` for 50 iterations. On one semi-log graph, plot the four convergence curves $\|\mathbf{r}_m\|/\|\mathbf{b}\|$.
 

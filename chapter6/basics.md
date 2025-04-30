@@ -179,74 +179,91 @@ In general, solutions can diverge from, converge to, or oscillate around the ori
 
 ## Exercises
 
-1. ✍ For each IVP, determine whether the problem satisfies the conditions of {numref}`Theorem %s <theorem-depIC>`). If so, determine the smallest possible value for $L$.
+``````{exercise}
+✍ For each IVP, determine whether the problem satisfies the conditions of {numref}`Theorem %s <theorem-depIC>`). If so, determine the smallest possible value for $L$.
 
-    **(a)** $f(t,u) = 3 u,\; 0 \le t \le 1$
+**(a)** $f(t,u) = 3 u,\; 0 \le t \le 1$
 
-    **(b)** $f(t,u) = -t \sin(u),\; 0 \le t \le 5$
+**(b)** $f(t,u) = -t \sin(u),\; 0 \le t \le 5$
 
-    **(c)** $f(t,u) = -(1+t^2) u^2,\; 1 \le t \le 3$
+**(c)** $f(t,u) = -(1+t^2) u^2,\; 1 \le t \le 3$
 
-    **(d)** $f(t,u) = \sqrt{u},\; 0 \le t \le 1$
- 
-2. ⌨ For each ODE in the preceding problem, assume that $u$ is initially equal to $1$ on the given interval. Solve the resulting IVP with `solve` and make a plot of the solution.
+**(d)** $f(t,u) = \sqrt{u},\; 0 \le t \le 1$
+``````
 
-3. ✍ Use an integrating factor to find the solution of each problem in analytic form.
+``````{exercise}
+⌨ For each ODE in the preceding problem, assume that $u$ is initially equal to $1$ on the given interval. Solve the resulting IVP with `solve` and make a plot of the solution.
+``````
 
-    **(a)** $u' = -t u,\ 0 \le t \le 5,\ u(0) = 2$
+``````{exercise}
+✍ Use an integrating factor to find the solution of each problem in analytic form.
 
-    **(b)** $u' - 3 u = e^{-2t},\ 0 \le t \le 1,\  u(0) = 5$
+**(a)** $u' = -t u,\ 0 \le t \le 5,\ u(0) = 2$
 
-4. ✍ Consider the IVP $u'=u^2$, $u(0)=\alpha$.
+**(b)** $u' - 3 u = e^{-2t},\ 0 \le t \le 1,\  u(0) = 5$
+``````
 
-    **(a)** Does {numref}`Theorem %s <theorem-existunique>` apply to this problem?
+``````{exercise}
+✍ Consider the IVP $u'=u^2$, $u(0)=\alpha$.
 
-    **(b)** Show that $u(t) = \alpha/(1-\alpha t)$ is a solution of the IVP.
+**(a)** Does {numref}`Theorem %s <theorem-existunique>` apply to this problem?
 
-    **(c)** Does this solution necessarily exist for all $t\in[0,1]$?
+**(b)** Show that $u(t) = \alpha/(1-\alpha t)$ is a solution of the IVP.
 
-    ```{index} logistic equation
-    ```
+**(c)** Does this solution necessarily exist for all $t\in[0,1]$?
 
-5. ⌨ Using `solve`, compute solutions $x(t)$ to the logistic equation with harvesting,
+```{index} logistic equation
+```
+``````
 
-    ```{math}
-    x' = k (S-x)(x-M), \qquad 0\le t \le 10,
-    ```
+``````{exercise}
+⌨ Using `solve`, compute solutions $x(t)$ to the logistic equation with harvesting,
 
-    with $k=S=1$ and $M=0.25$, for the initial conditions $x(0)=0.9M$, $1.1M$, $1.5M$, $0.9S$, $1.1S$, $3S$. Show all the solutions together on one plot with $0\le x \le 3$. (Note: One of the solutions will throw a warning and fail to reach $t=10$, but you can plot it anyway.)
+```{math}
+x' = k (S-x)(x-M), \qquad 0\le t \le 10,
+```
 
-6. ⌨ **(a)** Using `solve`, solve the IVP $u'=u\cos(u) + \cos(4t)$, $0\le t \le 10$, $u(0) = u_0$ for $u_0 = -2,-1.5,-1,\ldots,1.5,2$. Plot all the solutions on a single graph. 
-    
-    **(b)** All of the solutions in part (a) eventually settle into one of two periodic oscillations. To two digits of accuracy, find the value of $u_0$ in $(-1,1)$ at which the selected long-term solution changes. (This will take repeated trials, narrowing down the range for $u_0$ each time.)
+with $k=S=1$ and $M=0.25$, for the initial conditions $x(0)=0.9M$, $1.1M$, $1.5M$, $0.9S$, $1.1S$, $3S$. Show all the solutions together on one plot with $0\le x \le 3$. (Note: One of the solutions will throw a warning and fail to reach $t=10$, but you can plot it anyway.)
+``````
 
-(problem-caffeine)=
-7. ⌨ Experimental evidence (see {cite}`newtonPlasmaSalivary1981`) shows that a 300-mg oral dose of caffeine, such as might be found in a large mug of drip-brewed coffee, creates a concentration of about 8 $\mu{\rm g}$/mL in blood plasma. This boost is followed by first-order kinetics with a half-life of about 6 hours (although this rate can vary a great deal from person to person). We can model the caffeine concentration due to one drink taken over half an hour via
+``````{exercise}
+⌨ **(a)** Using `solve`, solve the IVP $u'=u\cos(u) + \cos(4t)$, $0\le t \le 10$, $u(0) = u_0$ for $u_0 = -2,-1.5,-1,\ldots,1.5,2$. Plot all the solutions on a single graph. 
 
-    ```{math}
-      x'(t) = -kx + C(t),\quad x(0)=0,
-    ```
+**(b)** All of the solutions in part (a) eventually settle into one of two periodic oscillations. To two digits of accuracy, find the value of $u_0$ in $(-1,1)$ at which the selected long-term solution changes. (This will take repeated trials, narrowing down the range for $u_0$ each time.)
 
-    where $k=\log(2)/6$ and
+``````
 
-    ```{math}
-      C(t) =
-      \begin{cases}
-        16, & 0\le t \le 0.5, \\
-        0, & t > 0.5.
-      \end{cases}
-    ```
+``````{exercise}
+:label: problem-caffeine
+⌨ Experimental evidence (see {cite}`newtonPlasmaSalivary1981`) shows that a 300-mg oral dose of caffeine, such as might be found in a large mug of drip-brewed coffee, creates a concentration of about 8 $\mu{\rm g}$/mL in blood plasma. This boost is followed by first-order kinetics with a half-life of about 6 hours (although this rate can vary a great deal from person to person). We can model the caffeine concentration due to one drink taken over half an hour via
 
-    Use `solve` to make a plot of the caffeine concentration for 12 hours. Then change $k=\log(2)/8$ (half-life of 8 hours) and plot the solution again.
+```{math}
+x'(t) = -kx + C(t),\quad x(0)=0,
+```
 
-8. ⌨ A reasonable model of the velocity $v(t)$ of a skydiver is
+where $k=\log(2)/6$ and
 
-    $$\frac{dv}{dt} = -g + \frac{k}{m}v^2,  \qquad v(0)=0,$$
+```{math}
+C(t) =
+\begin{cases}
+16, & 0\le t \le 0.5, \\
+0, & t > 0.5.
+\end{cases}
+```
 
-    where $g=9.8 \text{ m/sec}^2$ is gravitational acceleration, $m$ is the mass of the skydiver with parachute, and $k$ quantifies the effect of air resistance. At the US Air Force Academy, a training jump starts at about 1200 m and has $k=0.4875$ for $t<13$ and $k=29.16$ or $t\ge 13$. (This is an oversimplification; see {cite}`meadeDifferentialEquations1999`.) 
+Use `solve` to make a plot of the caffeine concentration for 12 hours. Then change $k=\log(2)/8$ (half-life of 8 hours) and plot the solution again.
+``````
 
-    **(a)** Solve the IVP for $v$ for an 80-kg cadet for $t\in [0,200]$, and plot the solution.
+``````{exercise}
+⌨ A reasonable model of the velocity $v(t)$ of a skydiver is
 
-    **(b)** The total distance fallen up to time $t$ is $\displaystyle\int_0^t v(s)\, ds$. Use {numref}`Function {number} <function-intadapt>` to calculate and plot the altitude of the cadet as a function of time.
+$$\frac{dv}{dt} = -g + \frac{k}{m}v^2,  \qquad v(0)=0,$$
 
-    **(c)** In part (b), you should have found that the altitude becomes negative. Use {numref}`Function {number} <function-secant>` to determine accurately when the cadet reaches the ground.
+where $g=9.8 \text{ m/sec}^2$ is gravitational acceleration, $m$ is the mass of the skydiver with parachute, and $k$ quantifies the effect of air resistance. At the US Air Force Academy, a training jump starts at about 1200 m and has $k=0.4875$ for $t<13$ and $k=29.16$ or $t\ge 13$. (This is an oversimplification; see {cite}`meadeDifferentialEquations1999`.) 
+
+**(a)** Solve the IVP for $v$ for an 80-kg cadet for $t\in [0,200]$, and plot the solution.
+
+**(b)** The total distance fallen up to time $t$ is $\displaystyle\int_0^t v(s)\, ds$. Use {numref}`Function {number} <function-intadapt>` to calculate and plot the altitude of the cadet as a function of time.
+
+**(c)** In part (b), you should have found that the altitude becomes negative. Use {numref}`Function {number} <function-secant>` to determine accurately when the cadet reaches the ground.
+``````

@@ -270,82 +270,95 @@ The example in {numref}`Demo %s <demo-systems-triangular>` is our first clue tha
 
 ## Exercises
 
-1. ✍ Find a vector $\mathbf{b}$ such that the system $\begin{bmatrix} 0&1\\0&0 \end{bmatrix} \mathbf{x}=\mathbf{b}$ has no solution.
+``````{exercise}
+✍ Find a vector $\mathbf{b}$ such that the system $\begin{bmatrix} 0&1\\0&0 \end{bmatrix} \mathbf{x}=\mathbf{b}$ has no solution.
+``````
 
-(problem-linear-systems-triangular)=
-2. ✍ Solve the following triangular systems by hand.
+``````{exercise}
+:label: problem-linear-systems-triangular
+✍ Solve the following triangular systems by hand.
 
-    **(a)** $\displaystyle \begin{aligned}
-      -2x_1  &= -4 \\
-        x_1  - x_2        &= 2 \\
-       3x_1 + 2x_2  + x_3 &= 1
-      \end{aligned} \quad$
-    **(b)** $\displaystyle \begin{bmatrix}
-        4 & 0 & 0 & 0 \\
-        1 & -2 & 0 & 0 \\
-        -1 & 4 & 4 & 0 \\
-        2 & -5 & 5 & 1
-      \end{bmatrix} \mathbf{x} = \begin{bmatrix}
-        -4 \\ 1 \\ -3 \\ 5
-      \end{bmatrix}\quad$
-    **(c)** $\displaystyle \begin{aligned}
-       3x_1 +  2x_2  +  x_3      &= 1 \\
-               x_2   -  x_3      &= 2 \\
-                        2 x_3    &= -4
-      \end{aligned}$
+**(a)** $\displaystyle \begin{aligned}
+-2x_1  &= -4 \\
+x_1  - x_2        &= 2 \\
+3x_1 + 2x_2  + x_3 &= 1
+\end{aligned} \quad$
+**(b)** $\displaystyle \begin{bmatrix}
+4 & 0 & 0 & 0 \\
+1 & -2 & 0 & 0 \\
+-1 & 4 & 4 & 0 \\
+2 & -5 & 5 & 1
+\end{bmatrix} \mathbf{x} = \begin{bmatrix}
+-4 \\ 1 \\ -3 \\ 5
+\end{bmatrix}\quad$
+**(c)** $\displaystyle \begin{aligned}
+3x_1 +  2x_2  +  x_3      &= 1 \\
+x_2   -  x_3      &= 2 \\
+2 x_3    &= -4
+\end{aligned}$
+``````
 
-3. ⌨ Use {numref}`Function {number} <function-forwardsub>` or {numref}`Function {number} <function-backsub>` to solve each system from the preceding exercise. Verify that the solution is correct by computing $\mathbf{L}\mathbf{x}$ and subtracting $\mathbf{b}$.
+``````{exercise}
+⌨ Use {numref}`Function {number} <function-forwardsub>` or {numref}`Function {number} <function-backsub>` to solve each system from the preceding exercise. Verify that the solution is correct by computing $\mathbf{L}\mathbf{x}$ and subtracting $\mathbf{b}$.
+``````
 
-4. ⌨  Use {numref}`Function {number} <function-backsub>` to solve the following systems.  Verify that the solution is correct by computing $\mathbf{U}\mathbf{x}$ and subtracting $\mathbf{b}$.
+``````{exercise}
+⌨  Use {numref}`Function {number} <function-backsub>` to solve the following systems.  Verify that the solution is correct by computing $\mathbf{U}\mathbf{x}$ and subtracting $\mathbf{b}$.
 
-    **(a)** $\;\begin{bmatrix}
-      3 & 1 & 0  \\
-      0 & -1 & -2  \\
-      0 & 0 & 3  \\
-    \end{bmatrix} \mathbf{x} = \begin{bmatrix}
-      1 \\ 1 \\ 6
-    \end{bmatrix}\qquad$
-    **(b)** $\;\begin{bmatrix}
-      3 & 1 & 0 & 6 \\
-      0 & -1 & -2 & 7 \\
-      0 & 0 & 3 & 4 \\
-      0 & 0 & 0 & 5
-    \end{bmatrix} \mathbf{x} = \begin{bmatrix}
-      4 \\ 1 \\ 1 \\ 5
-    \end{bmatrix}$
+**(a)** $\;\begin{bmatrix}
+3 & 1 & 0  \\
+0 & -1 & -2  \\
+0 & 0 & 3  \\
+\end{bmatrix} \mathbf{x} = \begin{bmatrix}
+1 \\ 1 \\ 6
+\end{bmatrix}\qquad$
+**(b)** $\;\begin{bmatrix}
+3 & 1 & 0 & 6 \\
+0 & -1 & -2 & 7 \\
+0 & 0 & 3 & 4 \\
+0 & 0 & 0 & 5
+\end{bmatrix} \mathbf{x} = \begin{bmatrix}
+4 \\ 1 \\ 1 \\ 5
+\end{bmatrix}$
+``````
 
-(problem-linear-systems-lumpstring)=
-5. Suppose a string is stretched with tension $\tau$ horizontally between two anchors at $x=0$ and $x=1$. At each of the $n-1$ equally spaced positions $x_k=k/n$, $k=1,\ldots,n-1$, we attach a little mass $m_i$ and allow the string to come to equilibrium. This causes vertical displacement of the string. Let $q_k$ be the amount of displacement at $x_k$. If the displacements are not too large, then an approximate force balance equation is
-  
-    ```{math} 
-    n \tau (q_k - q_{k-1}) + n\tau (q_k - q_{k+1}) =
-    m_k g, \qquad k=1,\ldots,n-1,
-    ```
+``````{exercise}
+:label: problem-linear-systems-lumpstring
+Suppose a string is stretched with tension $\tau$ horizontally between two anchors at $x=0$ and $x=1$. At each of the $n-1$ equally spaced positions $x_k=k/n$, $k=1,\ldots,n-1$, we attach a little mass $m_i$ and allow the string to come to equilibrium. This causes vertical displacement of the string. Let $q_k$ be the amount of displacement at $x_k$. If the displacements are not too large, then an approximate force balance equation is
 
-    where $g=-9.8$ m/s$^2$ is the acceleration due to gravity, and we define $q_0=0$ and $q_n=0$ due to the anchors. This defines a linear system for $q_1,\ldots,q_{n-1}$.
+```{math} 
+n \tau (q_k - q_{k-1}) + n\tau (q_k - q_{k+1}) =
+m_k g, \qquad k=1,\ldots,n-1,
+```
 
-    **(a)** ✍ Show that the force balance equations can be written as a linear system $\mathbf{A}\mathbf{q}=\mathbf{f}$, where $\mathbf{q}$ is a vector of the unknown displacements and $\mathbf{A}$ is a tridiagonal matrix (i.e., $A_{ij}=0$ if $|i-j|>1$) of size $(n-1)\times(n-1)$.
+where $g=-9.8$ m/s$^2$ is the acceleration due to gravity, and we define $q_0=0$ and $q_n=0$ due to the anchors. This defines a linear system for $q_1,\ldots,q_{n-1}$.
 
-    **(b)** ⌨  Let $\tau=10$ N, and $m_k=(1/10n)$ kg for every $k$. Using backslash, find the displacements when $n=8$ and $n=40$, and superimpose plots of $\mathbf{q}$ over $0\le x \le 1$ for the two cases. (Be sure to include the zero values at $x=0$ and $x=1$ in your plots.)
+**(a)** ✍ Show that the force balance equations can be written as a linear system $\mathbf{A}\mathbf{q}=\mathbf{f}$, where $\mathbf{q}$ is a vector of the unknown displacements and $\mathbf{A}$ is a tridiagonal matrix (i.e., $A_{ij}=0$ if $|i-j|>1$) of size $(n-1)\times(n-1)$.
 
-    **(c)** ⌨  Repeat (b) for the case $m_k = (k/5n^2)$ kg.
+**(b)** ⌨  Let $\tau=10$ N, and $m_k=(1/10n)$ kg for every $k$. Using backslash, find the displacements when $n=8$ and $n=40$, and superimpose plots of $\mathbf{q}$ over $0\le x \le 1$ for the two cases. (Be sure to include the zero values at $x=0$ and $x=1$ in your plots.)
 
-(problem-systemsinverse)=
-6. ⌨  If $\mathbf{B}\in\mathbb{R}^{n \times p}$ has columns $\mathbf{b}_1,\ldots,\mathbf{b}_p$, then we can pose $p$ linear systems at once by writing $\mathbf{A} \mathbf{X} = \mathbf{B}$, where $\mathbf{X}$ is $n\times p$. Specifically, this equation implies $\mathbf{A} \mathbf{x}_j = \mathbf{b}_j$ for $j=1,\ldots,p$.
+**(c)** ⌨  Repeat (b) for the case $m_k = (k/5n^2)$ kg.
+``````
 
-    **(a)** Modify {numref}`Function {number} <function-forwardsub>` and {numref}`Function {number} <function-backsub>` so that they solve the case where the second input is $n\times p$ for $p\ge 1$.
+``````{exercise}
+:label: problem-systemsinverse
+⌨  If $\mathbf{B}\in\mathbb{R}^{n \times p}$ has columns $\mathbf{b}_1,\ldots,\mathbf{b}_p$, then we can pose $p$ linear systems at once by writing $\mathbf{A} \mathbf{X} = \mathbf{B}$, where $\mathbf{X}$ is $n\times p$. Specifically, this equation implies $\mathbf{A} \mathbf{x}_j = \mathbf{b}_j$ for $j=1,\ldots,p$.
 
-    **(b)** If $\mathbf{A} \mathbf{X}=\mathbf{I}$, then $\mathbf{X}=\mathbf{A}^{-1}$. Use this fact to write a function `ltinverse` that uses your modified **forwardsub** to compute the inverse of a lower triangular matrix. Test your function on at least two nontrivial matrices. (We remind you here that this is just an exercise; matrix inverses are rarely a good idea in numerical practice!)
+**(a)** Modify {numref}`Function {number} <function-forwardsub>` and {numref}`Function {number} <function-backsub>` so that they solve the case where the second input is $n\times p$ for $p\ge 1$.
 
-(problem-ls-triangillcond)=
-7. ⌨ {numref}`Demo %s <demo-systems-triangular>` showed solutions of $\mathbf{A}\mathbf{x}=\mathbf{b}$, where
-  
-    ```{math}
-    \mathbf{A} = \begin{bmatrix} 1 & -1 & 0 & \alpha-\beta & \beta \\ 0 & 1 & -1 &
-      0 & 0 \\ 0 & 0 & 1 & -1 & 0 \\ 0 & 0 & 0 & 1 & -1  \\ 0 & 0 & 0 & 0 & 1
-    \end{bmatrix}, \quad
-    \mathbf{b} = \begin{bmatrix} \alpha \\ 0 \\ 0 \\ 0 \\ 1 \end{bmatrix}.
-    ```
+**(b)** If $\mathbf{A} \mathbf{X}=\mathbf{I}$, then $\mathbf{X}=\mathbf{A}^{-1}$. Use this fact to write a function `ltinverse` that uses your modified **forwardsub** to compute the inverse of a lower triangular matrix. Test your function on at least two nontrivial matrices. (We remind you here that this is just an exercise; matrix inverses are rarely a good idea in numerical practice!)
+``````
 
-    Use {numref}`Function {number} <function-backsub>` to solve with $\alpha=0.1$ and $\beta=10,100,10^3,\ldots,10^{12}$, tabulating the values of $\beta$ and $|x_1-1|$. (This kind of behavior is explained in {numref}`section-linsys-condition-number`.)
+``````{exercise}
+:label: problem-ls-triangillcond
+⌨ {numref}`Demo %s <demo-systems-triangular>` showed solutions of $\mathbf{A}\mathbf{x}=\mathbf{b}$, where
 
+```{math}
+\mathbf{A} = \begin{bmatrix} 1 & -1 & 0 & \alpha-\beta & \beta \\ 0 & 1 & -1 &
+0 & 0 \\ 0 & 0 & 1 & -1 & 0 \\ 0 & 0 & 0 & 1 & -1  \\ 0 & 0 & 0 & 0 & 1
+\end{bmatrix}, \quad
+\mathbf{b} = \begin{bmatrix} \alpha \\ 0 \\ 0 \\ 0 \\ 1 \end{bmatrix}.
+```
+
+Use {numref}`Function {number} <function-backsub>` to solve with $\alpha=0.1$ and $\beta=10,100,10^3,\ldots,10^{12}$, tabulating the values of $\beta$ and $|x_1-1|$. (This kind of behavior is explained in {numref}`section-linsys-condition-number`.)
+``````

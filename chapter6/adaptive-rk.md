@@ -162,19 +162,26 @@ Often the adaptively chosen steps clearly correspond to identifiable features of
 
 ## Exercises
 
-1. ⌨ Using {numref}`Function {number} <function-rk23>` with an error tolerance of $10^{-8}$, solve $y'' +(1+y')^3 y = 0$ over $ 0 \le t \le 4 \pi$ with the indicated initial conditions. Plot $y(t)$ and $y'(t)$ as functions of $t$ and separately plot the time step size as a function of $t$.
+``````{exercise}
+⌨ Using {numref}`Function {number} <function-rk23>` with an error tolerance of $10^{-8}$, solve $y'' +(1+y')^3 y = 0$ over $ 0 \le t \le 4 \pi$ with the indicated initial conditions. Plot $y(t)$ and $y'(t)$ as functions of $t$ and separately plot the time step size as a function of $t$.
 
-    **(a)** $y(0) = 0.1, \quad y'(0) = 0$
+**(a)** $y(0) = 0.1, \quad y'(0) = 0$
 
-    **(b)** $y(0) = 0.5, \quad y'(0) = 0$
+**(b)** $y(0) = 0.5, \quad y'(0) = 0$
 
-    **(c)** $y(0) = 0.75, \quad y'(0) = 0$
+**(c)** $y(0) = 0.75, \quad y'(0) = 0$
 
-    **(d)** $y(0) = 0.95, \quad y'(0) = 0$
+**(d)** $y(0) = 0.95, \quad y'(0) = 0$
+``````
 
-2. ⌨ Solve the FitzHugh–Nagumo system from [Exercise 4.3.6](#problem-systems-fitznag) for $I=0.05740$ using {numref}`Function {number} <function-rk23>` with error tolerance $10^{-2}$, $10^{-3}$, and $10^{-4}$. (This illustrates that the error tolerance is a target, not a guarantee!)
+``````{exercise}
+⌨ Solve the FitzHugh–Nagumo system from @problem-systems-fitznag for $I=0.05740$ using {numref}`Function {number} <function-rk23>` with error tolerance $10^{-2}$, $10^{-3}$, and $10^{-4}$. (This illustrates that the error tolerance is a target, not a guarantee!)
+``````
 
-3. ✍ Derive Equation {eq}`adaptRKglobal` using the stated assumption about controlling global rather than local error.
+``````{exercise}
+✍ Derive Equation {eq}`adaptRKglobal` using the stated assumption about controlling global rather than local error.
+``````
 
-4. ⌨ Solve the problem $u'=100u^2-u^3$, $u(0)=0.0002$, $0\le t \le 100$, and make plots that show both the solution and the time steps taken. The solution makes a quick transition between two nearly constant states. Does the step size selection behave the same in both states?
-
+``````{exercise}
+⌨ Solve the problem $u'=100u^2-u^3$, $u(0)=0.0002$, $0\le t \le 100$, and make plots that show both the solution and the time steps taken. The solution makes a quick transition between two nearly constant states. Does the step size selection behave the same in both states?
+``````

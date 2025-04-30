@@ -192,45 +192,58 @@ A different statement of the conclusion is that for a first-order formula, at mo
 
 ## Exercises
 
-1. ⌨ Evaluate the centered second-order finite-difference approximation to $f'(4\pi/5)$ for $f(x)=\cos(x^3)$ and $h=2^{-1},2^{-2},\ldots,2^{-8}$. On a log-log graph, plot the error as a function of $h$ and compare it graphically to second-order convergence.
+``````{exercise}
+⌨ Evaluate the centered second-order finite-difference approximation to $f'(4\pi/5)$ for $f(x)=\cos(x^3)$ and $h=2^{-1},2^{-2},\ldots,2^{-8}$. On a log-log graph, plot the error as a function of $h$ and compare it graphically to second-order convergence.
+``````
 
-2. ✍ Derive the first two nonzero terms of the Taylor series at $h=0$ of the truncation error $\tau_{f}(h)$ for the formula {eq}`backwardFD11`.
+``````{exercise}
+✍ Derive the first two nonzero terms of the Taylor series at $h=0$ of the truncation error $\tau_{f}(h)$ for the formula {eq}`backwardFD11`.
+``````
 
-3. ✍ Calculate the first nonzero term in the Taylor series of the truncation error $\tau_{f}(h)$ for the finite-difference formula defined by the second row of {numref}`table-FDforward`.
+``````{exercise}
+✍ Calculate the first nonzero term in the Taylor series of the truncation error $\tau_{f}(h)$ for the finite-difference formula defined by the second row of {numref}`table-FDforward`.
+``````
 
-4. ✍ Calculate the first nonzero term in the Taylor series of the truncation error $\tau_{f}(h)$ for the finite-difference formula defined by the third row of {numref}`table-FDforward`.
+``````{exercise}
+✍ Calculate the first nonzero term in the Taylor series of the truncation error $\tau_{f}(h)$ for the finite-difference formula defined by the third row of {numref}`table-FDforward`.
+``````
 
-5. ✍ Show that the formula {eq}`centerFD22` is second-order accurate. 
+``````{exercise}
+✍ Show that the formula {eq}`centerFD22` is second-order accurate. 
 
-(problem-fd-muc)=
-6. ✍  A different way to derive finite-difference formulas is the **method of undetermined coefficients**. Starting from {eq}`fdformula`,
+``````
 
-    ```{math}
-    f'(x) \approx \frac{1}{h}\sum_{k=-p}^q a_k f(x+kh),
-    ```
+``````{exercise}
+:label: problem-fd-muc
+✍  A different way to derive finite-difference formulas is the **method of undetermined coefficients**. Starting from {eq}`fdformula`,
 
-    let each $f(x+k h)$ be expanded in a series around $h=0$. When the coefficients of powers of $h$ are collected, one obtains
+```{math}
+f'(x) \approx \frac{1}{h}\sum_{k=-p}^q a_k f(x+kh),
+```
 
-    ```{math}
-    \frac{1}{h} \sum_{k=-p}^q a_k f(x+kh) = \frac{b_0}{h} + b_1 f'(x) + b_2 f''(x)h + \cdots,
-    ```
+let each $f(x+k h)$ be expanded in a series around $h=0$. When the coefficients of powers of $h$ are collected, one obtains
 
-    where
+```{math}
+\frac{1}{h} \sum_{k=-p}^q a_k f(x+kh) = \frac{b_0}{h} + b_1 f'(x) + b_2 f''(x)h + \cdots,
+```
 
-    ```{math}
-    b_i = \sum_{k=-p}^q k^i a_k.
-    ```
+where
 
-    In order to make the result as close as possible to $f'(x)$, we impose the conditions 
+```{math}
+b_i = \sum_{k=-p}^q k^i a_k.
+```
 
-    ```{math}
-    b_0 = 0,\, b_1=1,\, b_2=0,\, b_3=0,\,\ldots,\,b_{p+q}=0.
-    ```
+In order to make the result as close as possible to $f'(x)$, we impose the conditions 
 
-    This provides a system of linear equations for the weights.
+```{math}
+b_0 = 0,\, b_1=1,\, b_2=0,\, b_3=0,\,\ldots,\,b_{p+q}=0.
+```
 
-    **(a)** For $p=q=2$, write out the system of equations for $a_{-2}$, $a_{-1}$, $a_0$, $a_1$, $a_2$.
+This provides a system of linear equations for the weights.
 
-    **(b)** Verify that the coefficients from the appropriate row of {numref}`table-FDcenter` satisfy the equations you wrote down in part (a).
+**(a)** For $p=q=2$, write out the system of equations for $a_{-2}$, $a_{-1}$, $a_0$, $a_1$, $a_2$.
 
-    **(c)** Derive the finite-difference formula for $p=1$, $q=2$ using the method of undetermined coefficients.
+**(b)** Verify that the coefficients from the appropriate row of {numref}`table-FDcenter` satisfy the equations you wrote down in part (a).
+
+**(c)** Derive the finite-difference formula for $p=1$, $q=2$ using the method of undetermined coefficients.
+``````

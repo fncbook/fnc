@@ -270,59 +270,82 @@ The error decreases geometrically as $s$ is incremented, so trading a stage for 
 ## Exercises
 
 % must stay as #1
-(problem-rkhandexamples)=
 
-1. ✍ For each IVP, write out (possibly using a calculator) the first time step of the improved Euler method with $h=0.2$.
+``````{exercise}
+:label: problem-rkhandexamples
+✍ For each IVP, write out (possibly using a calculator) the first time step of the improved Euler method with $h=0.2$.
 
-    **(a)** $u' = -2t u, \ 0 \le t \le 2, \ u(0) = 2;\  \hat{u}(t) = 2e^{-t^2}$
+**(a)** $u' = -2t u, \ 0 \le t \le 2, \ u(0) = 2;\  \hat{u}(t) = 2e^{-t^2}$
 
-    **(b)** $u' = u + t, \ 0 \le t \le 1, \ u(0) = 2;\  \hat{u}(t) = -1-t+3e^t$
+**(b)** $u' = u + t, \ 0 \le t \le 1, \ u(0) = 2;\  \hat{u}(t) = -1-t+3e^t$
 
-    **(c)** $(1+x^3)uu' = x^2,\ 0 \le x \le 3, \ u(0) = 1;\ \hat{u}(x) = [1+(2/3)\ln (1+x^3)]^{1/2}$
+**(c)** $(1+x^3)uu' = x^2,\ 0 \le x \le 3, \ u(0) = 1;\ \hat{u}(x) = [1+(2/3)\ln (1+x^3)]^{1/2}$
+``````
 
-2. ✍ Use the modified Euler method to solve the problems in the preceding exercise.
+``````{exercise}
+✍ Use the modified Euler method to solve the problems in the preceding exercise.
+``````
 
-3. ⌨ Modify {numref}`Function {number} <function-rk4>` to implement the modified Euler method. Test your function on the IVP in part (a) of Exercise 1 by solving with $n=30,60,90,\ldots,300$ and plotting the convergence of the error at the final time together with a line showing $O(n^{-2})$. 
+``````{exercise}
+⌨ Modify {numref}`Function {number} <function-rk4>` to implement the modified Euler method. Test your function on the IVP in part (a) of Exercise 1 by solving with $n=30,60,90,\ldots,300$ and plotting the convergence of the error at the final time together with a line showing $O(n^{-2})$. 
+``````
 
-4. ✍ Use Heun's method to solve the problems in [Exercise 1 above](#problem-rkhandexamples).
+``````{exercise}
+✍ Use Heun's method to solve the problems in @problem-rkhandexamples.
+``````
 
-5. ⌨ Modify {numref}`Function {number} <function-rk4>` to implement Heun's method. Test your function on the IVP in part (a) of Exercise 1 by solving with $n=30,60,90,\ldots,300$ and plotting the convergence of the error at the final time together with a line showing $O(n^{-2})$. 
+``````{exercise}
+⌨ Modify {numref}`Function {number} <function-rk4>` to implement Heun's method. Test your function on the IVP in part (a) of Exercise 1 by solving with $n=30,60,90,\ldots,300$ and plotting the convergence of the error at the final time together with a line showing $O(n^{-2})$. 
+``````
 
-6. ✍ Use RK4 to solve the problems in [Exercise 1 above](#problem-rkhandexamples).
+``````{exercise}
+✍ Use RK4 to solve the problems in @problem-rkhandexamples.
+``````
 
-7. ✍ Using {eq}`rkexactexpand` and {eq}`mvtaylor2`, show that the modified Euler method has order of accuracy at least 2.
+``````{exercise}
+✍ Using {eq}`rkexactexpand` and {eq}`mvtaylor2`, show that the modified Euler method has order of accuracy at least 2.
+``````
 
-8. ✍ Using {eq}`rkexactexpand` and {eq}`mvtaylor2`, show that Heun's method has order of accuracy at least 2.
+``````{exercise}
+✍ Using {eq}`rkexactexpand` and {eq}`mvtaylor2`, show that Heun's method has order of accuracy at least 2.
 
-(problem-rk4converge)=
-9. ⌨ For each IVP, compute the solution using {numref}`Function {number} <function-rk4>`. (i) Plot the solution for $n=300$. (ii) For $n=100,200,300,\ldots,1000$, compute the error at the final time and make a log-log convergence plot, including a reference line for fourth-order convergence.
+``````
 
-    **(a)** $u''+ 9u = 9t, \: 0< t< 2\pi, \: u(0) = 1,\: u'(0) = 1; \: \hat{u}(t) = t+\cos (3t)$
+``````{exercise}
+:label: problem-rk4converge
+⌨ For each IVP, compute the solution using {numref}`Function {number} <function-rk4>`. (i) Plot the solution for $n=300$. (ii) For $n=100,200,300,\ldots,1000$, compute the error at the final time and make a log-log convergence plot, including a reference line for fourth-order convergence.
 
-    **(b)** $u''+ 9u = \sin(2t), \: 0< t< 2\pi, \: u(0) = 2,\: u'(0) = 1$;
+**(a)** $u''+ 9u = 9t, \: 0< t< 2\pi, \: u(0) = 1,\: u'(0) = 1; \: \hat{u}(t) = t+\cos (3t)$
 
-    $\quad \hat{u}(t) = (1/5) \sin(3t) + 2 \cos (3t)+  (1/5) \sin (2t)$
+**(b)** $u''+ 9u = \sin(2t), \: 0< t< 2\pi, \: u(0) = 2,\: u'(0) = 1$;
 
-    **(c)** $u''- 9u = 9t, \: 0< t< 1, \: u(0) = 2,\: u'(0) = -1; \: \hat{u}(t) = e^{3t} + e^{-3t}-t$
+$\quad \hat{u}(t) = (1/5) \sin(3t) + 2 \cos (3t)+  (1/5) \sin (2t)$
 
-    **(d)** $u''+ 4u'+ 4u = t, \: 0< t< 4, \: u(0) = 1,\: u'(0) = 3/4; \: \hat{u}(t) = (3t+5/4)e^{-2t} + (t-1)/4$
+**(c)** $u''- 9u = 9t, \: 0< t< 1, \: u(0) = 2,\: u'(0) = -1; \: \hat{u}(t) = e^{3t} + e^{-3t}-t$
 
-    **(e)** $x^2 y'' +5xy' + 4y = 0,\: 1<x<e^2, \: y(1) = 1, \: y'(1) = -1, \: \hat{y}(x) = x^{-2}( 1 + \ln x)$
+**(d)** $u''+ 4u'+ 4u = t, \: 0< t< 4, \: u(0) = 1,\: u'(0) = 3/4; \: \hat{u}(t) = (3t+5/4)e^{-2t} + (t-1)/4$
 
-    **(f)** $2 x^2 y'' +3xy' - y = 0,\: 1<x<16, \: y(1) = 4, \: y'(1) = -1, \: \hat{y}(x) = 2(x^{1/2} + x^{-1})$
+**(e)** $x^2 y'' +5xy' + 4y = 0,\: 1<x<e^2, \: y(1) = 1, \: y'(1) = -1, \: \hat{y}(x) = x^{-2}( 1 + \ln x)$
 
-    **(g)** $x^2 y'' -xy' + 2y = 0,\: 1<x<e^{\pi}, \: y(1) = 3, \: y'(1) = 4$;
+**(f)** $2 x^2 y'' +3xy' - y = 0,\: 1<x<16, \: y(1) = 4, \: y'(1) = -1, \: \hat{y}(x) = 2(x^{1/2} + x^{-1})$
 
-    $\quad \hat{y}(x) = x \left[ 3 \cos \left( \ln x \right)+\sin \left( \ln x \right) \right]$
+**(g)** $x^2 y'' -xy' + 2y = 0,\: 1<x<e^{\pi}, \: y(1) = 3, \: y'(1) = 4$;
 
-    **(h)** $x^2 y'' + 3xy' + 4y = 0,\: e^{\pi/12} < x < e^{\pi}, \: y(e^{\pi/12}) = 0,  \: y'(e^{\pi/12}) = -6$;
+$\quad \hat{y}(x) = x \left[ 3 \cos \left( \ln x \right)+\sin \left( \ln x \right) \right]$
 
-    $\quad \hat{y}(x) = x^{-1} \left[ 3 \cos \left( 3 \ln x \right)+\sin \left( 3 \ln x \right) \right]$
+**(h)** $x^2 y'' + 3xy' + 4y = 0,\: e^{\pi/12} < x < e^{\pi}, \: y(e^{\pi/12}) = 0,  \: y'(e^{\pi/12}) = -6$;
 
-10. ⌨ Do [Exercise 6.3.4](#problem-SIR), but using {numref}`Function {number} <function-rk4>` instead of `solve`.
+$\quad \hat{y}(x) = x^{-1} \left[ 3 \cos \left( 3 \ln x \right)+\sin \left( 3 \ln x \right) \right]$
+``````
 
-11. ✍ Consider the problem $u'=c u$, $u(0) = 1$ for constant $c$ and $t>0$.
+``````{exercise}
+⌨ Do @problem-SIR, but using {numref}`Function {number} <function-rk4>` instead of `solve`.
+``````
 
-    **(a)** Find an explicit formula in terms of $h$ and $c$ for $u_{i+1}/u_i$ in the modified Euler method.
+``````{exercise}
+✍ Consider the problem $u'=c u$, $u(0) = 1$ for constant $c$ and $t>0$.
 
-    **(b)** Show that if $ch=-3$, then $|u_i|\to\infty$ as $i\to\infty$ while the exact solution $\hat{u}(t)$ approaches zero as $t\to\infty$.
+**(a)** Find an explicit formula in terms of $h$ and $c$ for $u_{i+1}/u_i$ in the modified Euler method.
+
+**(b)** Show that if $ch=-3$, then $|u_i|\to\infty$ as $i\to\infty$ while the exact solution $\hat{u}(t)$ approaches zero as $t\to\infty$.
+``````

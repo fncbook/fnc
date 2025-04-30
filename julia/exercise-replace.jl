@@ -1,8 +1,8 @@
-chap = 13
+chap = 6
 dir = "/Users/driscoll/Documents/GitHub/fnc/chapter$chap"
 section_files = filter(endswith(".md"), readdir(dir, join=true))
 
-for file in section_files
+for file in section_files[1:end]
     text = readlines(file, keep=true)
     start = findfirst(startswith("## Exercises"), text)
     isnothing(start) && continue
@@ -11,19 +11,19 @@ for file in section_files
     push!(text, "")
     push!(text, "")
     for i in 1:length(mtch)-1
-        text[mtch[i]] = replace(text[mtch[i]], r"^[0-9]+\. " => "\n``````{exercise}\n")
+        text[mtch[i]] = replace(text[mtch[i]], r"^[0-9]+\. " => "``````{exercise}\n")
         for j in mtch[i]+1:mtch[i+1]-1
             text[j] = lstrip(text[j], [' ', '\t'])
         end
         text[mtch[i+1]-1] = "``````\n" * text[mtch[i+1]-1]
     end
     for j in start+1:length(text)
-        mtch = match(r"\s*\(([a-zA-Z0-9\-]+)\)=", text[j])
+        mtch = match(r"^[`\n]*\(([a-zA-Z0-9\-]+)\)=", text[j])
         isnothing(mtch) && continue
-        println("Found label in $file: $j, $(mtch.captures[1])")
-        text[j] = "\n"
-        jj = findnext(startswith("\n``````{exercise}"), text, j)
-        text[jj] = replace(text[jj], "{exercise}\n" => "{exercise}\n:label: " * mtch.captures[1] * "\n")
+        println("Found label in $file: $j, $(text[j]), $(mtch.captures[1])")
+        text[j] = "``````\n\n:label: " * mtch.captures[1] * "\n"
+        # jj = findnext(startswith("\n``````{exercise}"), text, j)
+        # text[jj] = replace(text[jj], "{exercise}\n" => "{exercise}\n:label: " * mtch.captures[1] * "\n")
     end
 
     open(file, "w") do file

@@ -15,7 +15,7 @@ Closely related to the advection equation is the **wave equation**,
     u_{tt} - c^2 u_{xx} = 0.
 :::
 
-This is our first PDE having a second derivative in time. As in the advection equation, $u(x,t)=\phi(x-ct)$ is a solution of {eq}`wavepde`, but now so is $u(x,t)=\phi(x+c t)$ for any twice-differentiable $\phi$ (see [Exercise 2](#problem-wave-twodir)). Thus, the wave equation supports advection in both directions simultaneously. 
+This is our first PDE having a second derivative in time. As in the advection equation, $u(x,t)=\phi(x-ct)$ is a solution of {eq}`wavepde`, but now so is $u(x,t)=\phi(x+c t)$ for any twice-differentiable $\phi$ (see @problem-wave-twodir). Thus, the wave equation supports advection in both directions simultaneously. 
 
 We will use $x \in [0,1]$ and $t>0$ as the domain. Because $u$ has two derivatives in $t$ and in $x$, we need two boundary conditions. We will use the Dirichlet conditions  
 

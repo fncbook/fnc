@@ -411,7 +411,7 @@ yield an EVD of $\mathbf{A}$.
 
 ``````{exercise}
 :label: problem-evd-lumpstring
-⌨ In [Exercise 2.3.5](#problem-linear-systems-lumpstring), you showed that the
+⌨ In @problem-linear-systems-lumpstring, you showed that the
 displacements of point masses placed along a string satisfy a linear system $\mathbf{A}\mathbf{q}=\mathbf{f}$ for an $(n-1)\times(n-1)$ matrix $\mathbf{A}$. The eigenvalues and eigenvectors of $\mathbf{A}$ correspond to resonant frequencies and modes of vibration of the string. For $n=40$ and the physical parameters given in part (b) of that exercise, find the eigenvalue decomposition of $\mathbf{A}$. Report the three eigenvalues with smallest absolute value, and plot all three associated eigenvectors on a single graph (as functions of the vector row index).
 ``````
 

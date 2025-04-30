@@ -264,52 +264,58 @@ Somewhat surprisingly, solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ via PLU factori
 
 ## Exercises
 
-1. ✍ Perform by hand the pivoted LU factorization of each matrix.
-    
-    **(a)** $\quad \displaystyle \begin{bmatrix}
-    2 & 3 & 4 \\
-    4 & 5 & 10 \\
-    4 & 8 & 2
-    \end{bmatrix},\qquad$
-    **(b)** $\quad \displaystyle \begin{bmatrix}
-    1 & 4 & 5 & -5 \\
-    -1 & 0 & -1 & -5 \\
-    1 & 3 & -1 & 2 \\
-    1 & -1 & 5 & -1 
-    \end{bmatrix}$.
+``````{exercise}
+✍ Perform by hand the pivoted LU factorization of each matrix.
 
-2. ✍ Let $\mathbf{A}$ be a square matrix and $\mathbf{b}$ be a column vector of compatible length. Here is correct Julia code to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$:
+**(a)** $\quad \displaystyle \begin{bmatrix}
+2 & 3 & 4 \\
+4 & 5 & 10 \\
+4 & 8 & 2
+\end{bmatrix},\qquad$
+**(b)** $\quad \displaystyle \begin{bmatrix}
+1 & 4 & 5 & -5 \\
+-1 & 0 & -1 & -5 \\
+1 & 3 & -1 & 2 \\
+1 & -1 & 5 & -1 
+\end{bmatrix}$.
+``````
 
-    ``` julia
-    L,U,p = lu(A)
-    x = U \ (L\b[p])
-    ```
+``````{exercise}
+✍ Let $\mathbf{A}$ be a square matrix and $\mathbf{b}$ be a column vector of compatible length. Here is correct Julia code to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$:
 
-    Suppose instead you replace the last line above with
+``` julia
+L,U,p = lu(A)
+x = U \ (L\b[p])
+```
 
-    ``` julia
-    x = U \ L \ b[p]
-    ```
+Suppose instead you replace the last line above with
 
-    Mathematically in terms of $\mathbf{L}$, $\mathbf{U}$, $\mathbf{p}$, and $\mathbf{b}$, what vector is found?
+``` julia
+x = U \ L \ b[p]
+```
 
-3. ✍ Suppose that `A` is a $4\times 6$ matrix in Julia and you define
+Mathematically in terms of $\mathbf{L}$, $\mathbf{U}$, $\mathbf{p}$, and $\mathbf{b}$, what vector is found?
+``````
 
-    ``` julia
-    B = A[end:-1:1,end:-1:1]
-    ```
+``````{exercise}
+✍ Suppose that `A` is a $4\times 6$ matrix in Julia and you define
 
-    Show that $\mathbf{B} = \mathbf{P} \mathbf{A} \mathbf{Q}$ for certain matrices $\mathbf{P}$ and $\mathbf{Q}$.
+``` julia
+B = A[end:-1:1,end:-1:1]
+```
 
-(problem-perminverse)=
-4. ✍ An $n\times n$ *permutation matrix* $\mathbf{P}$ is a reordering of the rows of an identity matrix such that $\mathbf{P} \mathbf{A}$  has the effect of moving rows $1,2,\ldots,n$ of $\mathbf{A}$ to new positions $i_1,i_2,\ldots,i_n$. Then $\mathbf{P}$ can be expressed as
-  
-    ```{math}
-    \mathbf{P} = \mathbf{e}_{i_1}\mathbf{e}_1^T + \mathbf{e}_{i_2}\mathbf{e}_2^T + \cdots + \mathbf{e}_{i_n}\mathbf{e}_n^T.
-    ```
+Show that $\mathbf{B} = \mathbf{P} \mathbf{A} \mathbf{Q}$ for certain matrices $\mathbf{P}$ and $\mathbf{Q}$.
+``````
 
-    **(a)** For the case $n=4$ and $i_1=3$, $i_2=2$, $i_3=4$, $i_4=1$, write out separately, as matrices, all four of the terms in the sum. Then add them together to find $\mathbf{P}$.
+``````{exercise}
+:label: problem-perminverse
+✍ An $n\times n$ *permutation matrix* $\mathbf{P}$ is a reordering of the rows of an identity matrix such that $\mathbf{P} \mathbf{A}$  has the effect of moving rows $1,2,\ldots,n$ of $\mathbf{A}$ to new positions $i_1,i_2,\ldots,i_n$. Then $\mathbf{P}$ can be expressed as
 
-    **(b)** Use the formula in the general case to show that $\mathbf{P}^{-1}=\mathbf{P}^T$.
-  
+```{math}
+\mathbf{P} = \mathbf{e}_{i_1}\mathbf{e}_1^T + \mathbf{e}_{i_2}\mathbf{e}_2^T + \cdots + \mathbf{e}_{i_n}\mathbf{e}_n^T.
+```
 
+**(a)** For the case $n=4$ and $i_1=3$, $i_2=2$, $i_3=4$, $i_4=1$, write out separately, as matrices, all four of the terms in the sum. Then add them together to find $\mathbf{P}$.
+
+**(b)** Use the formula in the general case to show that $\mathbf{P}^{-1}=\mathbf{P}^T$.
+``````

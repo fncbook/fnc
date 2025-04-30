@@ -189,83 +189,97 @@ The `+=` operator means to increment the item on the left-hand side. There are s
 
 ## Exercises
 
-1. ✍ Suppose 
-   
-    $$
-    \mathbf{C} =
-    \begin{bmatrix}
-      \mathbf{I} & \mathbf{A} \\ -\mathbf{I} & \mathbf{B}
-    \end{bmatrix}.
-    $$ 
-    
-    Using block notation, find $\mathbf{C}^2$ and $\mathbf{C}^3$.
+``````{exercise}
+✍ Suppose 
 
-2. ⌨  Let
+$$
+\mathbf{C} =
+\begin{bmatrix}
+\mathbf{I} & \mathbf{A} \\ -\mathbf{I} & \mathbf{B}
+\end{bmatrix}.
+$$ 
 
-    ```{math}
-    \mathbf{A} =
-    \begin{bmatrix}
-      2 & 1 & 1 & 0 \\ 0 & -1 & 4 & 1 \\ 2 & 2 & 0 & -2 \\ 1 & 3 & -1
-      & 5
-    \end{bmatrix},
-    \quad
-    \mathbf{B} =
-    \begin{bmatrix}
-      3 & -1 & 0 & 2 \\ 7 & 1 & 0 & 2
-    \end{bmatrix},
-    ```
+Using block notation, find $\mathbf{C}^2$ and $\mathbf{C}^3$.
+``````
 
-    ```{math}
-    \mathbf{u} =
-    \begin{bmatrix}
-      2 \\ -1 \\ 3 \\ 1
-    \end{bmatrix},
-    \quad
-    \mathbf{v} =
-    \begin{bmatrix}
-      \pi \\ e
-    \end{bmatrix}.
-    ```
+``````{exercise}
+⌨  Let
 
-    (Do not round off the values in $\mathbf{v}$—find them using native Julia commands.) For each expression below, use Julia to find the result, or explain why the result does not exist.
+```{math}
+\mathbf{A} =
+\begin{bmatrix}
+2 & 1 & 1 & 0 \\ 0 & -1 & 4 & 1 \\ 2 & 2 & 0 & -2 \\ 1 & 3 & -1
+& 5
+\end{bmatrix},
+\quad
+\mathbf{B} =
+\begin{bmatrix}
+3 & -1 & 0 & 2 \\ 7 & 1 & 0 & 2
+\end{bmatrix},
+```
 
-    **(a)** $\mathbf{A}\mathbf{B},\quad$
-    **(b)** $\mathbf{B} \mathbf{A},\quad$
-    **(c)** $\mathbf{v}^T \mathbf{B},\quad$
-    **(d)** $\mathbf{B} \mathbf{u},\quad$
-    **(e)** $\bigl[ \, \mathbf{u}\:\: \mathbf{A}\mathbf{u} \:\: \mathbf{A}^2 \mathbf{u} \:\: \mathbf{A}^3 \mathbf{u} \bigr]$.
+```{math}
+\mathbf{u} =
+\begin{bmatrix}
+2 \\ -1 \\ 3 \\ 1
+\end{bmatrix},
+\quad
+\mathbf{v} =
+\begin{bmatrix}
+\pi \\ e
+\end{bmatrix}.
+```
 
-3. ⌨  Let
-  
-    ```{math}
-    \mathbf{u} =
-    \begin{bmatrix}
-      1\\3\\5\\7\\9\\11
-    \end{bmatrix}, \qquad
-    \mathbf{v} =
-    \begin{bmatrix}
-      -60 \\ -50 \\ -40 \\ -30 \\ -20 \\ -10
-    \end{bmatrix}.
-    ```
+(Do not round off the values in $\mathbf{v}$—find them using native Julia commands.) For each expression below, use Julia to find the result, or explain why the result does not exist.
 
-    Find the inner products $\mathbf{u}^T\mathbf{v}$ and $\mathbf{v}^T\mathbf{u}$ and the outer products $\mathbf{u}\mathbf{v}^T$ and $\mathbf{v}\mathbf{u}^T$.
+**(a)** $\mathbf{A}\mathbf{B},\quad$
+**(b)** $\mathbf{B} \mathbf{A},\quad$
+**(c)** $\mathbf{v}^T \mathbf{B},\quad$
+**(d)** $\mathbf{B} \mathbf{u},\quad$
+**(e)** $\bigl[ \, \mathbf{u}\:\: \mathbf{A}\mathbf{u} \:\: \mathbf{A}^2 \mathbf{u} \:\: \mathbf{A}^3 \mathbf{u} \bigr]$.
+``````
 
-4. ⌨ In Julia, give a demonstration of the identity $(\mathbf{A}\mathbf{B})^T=\mathbf{B}^T\mathbf{A}^T$ for some arbitrarily chosen $3\times 4$ matrix $\mathbf{A}$ and $4\times 2$ matrix $\mathbf{B}$.
+``````{exercise}
+⌨  Let
 
-(problem-inverseprod)=
-5. ✍ Prove that if $\mathbf{A}$ and $\mathbf{B}$ are invertible, then $(\mathbf{A}\mathbf{B})^{-1}=\mathbf{B}^{-1}\mathbf{A}^{-1}$. (In producing the inverse, it follows that $\mathbf{A}\mathbf{B}$ is invertible as well.)
+```{math}
+\mathbf{u} =
+\begin{bmatrix}
+1\\3\\5\\7\\9\\11
+\end{bmatrix}, \qquad
+\mathbf{v} =
+\begin{bmatrix}
+-60 \\ -50 \\ -40 \\ -30 \\ -20 \\ -10
+\end{bmatrix}.
+```
 
-6. ✍ Suppose $\mathbf{B}$ is an arbitrary $4\times 3$ matrix. In each part below a matrix $\mathbf{A}$ is described in terms of $\mathbf{B}$. Express $\mathbf{A}$ as a product of $\mathbf{B}$ with one or more other matrices.
-  
-    **(a)** $\mathbf{A}\in\mathbb{R}^{4 \times 1}$ is the result of adding the first column of $\mathbf{B}$ to $-2$ times the last column of $\mathbf{B}$.
+Find the inner products $\mathbf{u}^T\mathbf{v}$ and $\mathbf{v}^T\mathbf{u}$ and the outer products $\mathbf{u}\mathbf{v}^T$ and $\mathbf{v}\mathbf{u}^T$.
+``````
 
-    **(b)** The rows of $\mathbf{A}\in\mathbb{R}^{4 \times 3}$ are the rows of $\mathbf{B}$ in order 4,3,2,1.
+``````{exercise}
+⌨ In Julia, give a demonstration of the identity $(\mathbf{A}\mathbf{B})^T=\mathbf{B}^T\mathbf{A}^T$ for some arbitrarily chosen $3\times 4$ matrix $\mathbf{A}$ and $4\times 2$ matrix $\mathbf{B}$.
+``````
 
-    **(c)** The first column of $\mathbf{A}\in\mathbb{R}^{4 \times 3}$ is $1$ times the first column of $\mathbf{B}$, the second column of $\mathbf{A}$ is $2$ times the second column of $\mathbf{B}$,
-    and the third column of $\mathbf{A}$ is $3$ times the third column of $\mathbf{B}$.
+``````{exercise}
+:label: problem-inverseprod
+✍ Prove that if $\mathbf{A}$ and $\mathbf{B}$ are invertible, then $(\mathbf{A}\mathbf{B})^{-1}=\mathbf{B}^{-1}\mathbf{A}^{-1}$. (In producing the inverse, it follows that $\mathbf{A}\mathbf{B}$ is invertible as well.)
+``````
 
-    **(d)** $A$ is the scalar sum of all elements of $\mathbf{B}$.
-  
-7.  **(a)** ✍ Prove that for real vectors $\mathbf{v}$ and $\mathbf{w}$ of the same length, the inner products $\mathbf{v}^T\mathbf{w}$ and $\mathbf{w}^T\mathbf{v}$ are equal.
+``````{exercise}
+✍ Suppose $\mathbf{B}$ is an arbitrary $4\times 3$ matrix. In each part below a matrix $\mathbf{A}$ is described in terms of $\mathbf{B}$. Express $\mathbf{A}$ as a product of $\mathbf{B}$ with one or more other matrices.
 
-    **(b)** ✍ Prove true, or give a counterexample for, the equivalent statement about outer products, $\mathbf{v}\mathbf{w}^T$ and $\mathbf{w}\mathbf{v}^T$.
+**(a)** $\mathbf{A}\in\mathbb{R}^{4 \times 1}$ is the result of adding the first column of $\mathbf{B}$ to $-2$ times the last column of $\mathbf{B}$.
+
+**(b)** The rows of $\mathbf{A}\in\mathbb{R}^{4 \times 3}$ are the rows of $\mathbf{B}$ in order 4,3,2,1.
+
+**(c)** The first column of $\mathbf{A}\in\mathbb{R}^{4 \times 3}$ is $1$ times the first column of $\mathbf{B}$, the second column of $\mathbf{A}$ is $2$ times the second column of $\mathbf{B}$,
+and the third column of $\mathbf{A}$ is $3$ times the third column of $\mathbf{B}$.
+
+**(d)** $A$ is the scalar sum of all elements of $\mathbf{B}$.
+``````
+
+``````{exercise}
+ **(a)** ✍ Prove that for real vectors $\mathbf{v}$ and $\mathbf{w}$ of the same length, the inner products $\mathbf{v}^T\mathbf{w}$ and $\mathbf{w}^T\mathbf{v}$ are equal.
+
+**(b)** ✍ Prove true, or give a counterexample for, the equivalent statement about outer products, $\mathbf{v}\mathbf{w}^T$ and $\mathbf{w}\mathbf{v}^T$.
+``````

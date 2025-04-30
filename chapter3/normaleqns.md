@@ -99,7 +99,7 @@ For any real $m\times n$ matrix $\mathbf{A}$ with $m\ge n$, the following are tr
 ````{prf:proof}
 :enumerated: false
 
-The first part is left as [Exercise 3](#problem-normaleqns-symmetry). For the second part, suppose that $\mathbf{A}^T\mathbf{A}\mathbf{z}=\boldsymbol{0}$. Note that $\mathbf{A}^T\mathbf{A}$ is singular if and only if $\mathbf{z}$ may be nonzero. Left-multiplying by $\mathbf{z}^T$, we find that
+The first part is left as @problem-normaleqns-symmetry. For the second part, suppose that $\mathbf{A}^T\mathbf{A}\mathbf{z}=\boldsymbol{0}$. Note that $\mathbf{A}^T\mathbf{A}$ is singular if and only if $\mathbf{z}$ may be nonzero. Left-multiplying by $\mathbf{z}^T$, we find that
   
 ```{math}
 0 = \mathbf{z}^T\mathbf{A}^T\mathbf{A}\mathbf{z}=(\mathbf{A}\mathbf{z})^T(\mathbf{A}\mathbf{z}) = \| \mathbf{A}\mathbf{z} \|_2^2,
@@ -221,53 +221,72 @@ This squaring of the condition number in the normal equations is the cause of in
 
 ## Exercises
 
-1. ✍ Work out the least-squares solution when
-  
-    ```{math}
-    \mathbf{A} = \begin{bmatrix}
-      2 & -1 \\
-      0 & 1 \\
-      -2 & 2
-    \end{bmatrix}, \qquad \mathbf{b} =
-    \begin{bmatrix}
-      1\\-5\\6
-    \end{bmatrix}.
-    ```
 
-(problem-normaleqns-pinvcompute)=
-2. ✍ Use {eq}`pinv` to find the pseudoinverse $\mathbf{A}^+$ of the matrix $\mathbf{A}=\begin{bmatrix}1&-2&3\end{bmatrix}^T$.
+``````{exercise}
+✍ Work out the least-squares solution when
 
-(problem-normaleqns-symmetry)=
-3. ✍ Prove the first statement of {numref}`Theorem %s <theorem-ATA>`: $\mathbf{A}^T\mathbf{A}$ is symmetric for any $m\times n$ matrix $\mathbf{A}$ with $m \ge n$.
+```{math}
+\mathbf{A} = \begin{bmatrix}
+2 & -1 \\
+0 & 1 \\
+-2 & 2
+\end{bmatrix}, \qquad \mathbf{b} =
+\begin{bmatrix}
+1\\-5\\6
+\end{bmatrix}.
+```
+``````
 
-(problem-normaleqns-pinveqinv)=
-4. ✍ Prove that if $\mathbf{A}$ is an invertible square matrix, then $\mathbf{A}^+=\mathbf{A}^{-1}$.
+``````{exercise}
+:label: problem-normaleqns-pinvcompute
+✍ Use {eq}`pinv` to find the pseudoinverse $\mathbf{A}^+$ of the matrix $\mathbf{A}=\begin{bmatrix}1&-2&3\end{bmatrix}^T$.
 
-5. **(a)** ✍ Show that for any $m\times n$ $\mathbf{A}$ with $m>n$ for which $\mathbf{A}^T\mathbf{A}$ is nonsingular, $\mathbf{A}^+\mathbf{A}$ is the $n\times n$ identity.
-  
-    **(b)** ⌨ Show using an example in Julia that $\mathbf{A}\mathbf{A}^+$ is not an identity matrix. (This matrix has rank no greater than $n$, so it can't be an $m\times m$ identity.)
-  
-6. ✍ Prove that the vector $\mathbf{A}\mathbf{A}^+\mathbf{b}$ is the vector in the column space (i.e., range) of $\mathbf{A}$ that is closest to $\mathbf{b}$ in the sense of the 2-norm.
+``````
 
-7. ✍ Show that the flop count for {numref}`Function {number} <function-lsnormal>` is asymptotically $\sim 2m n^2 + \tfrac{1}{3}n^3$. (In finding the asymptotic count you can ignore terms like $m n$ whose total degree is less than 3.)
+``````{exercise}
+:label: problem-normaleqns-symmetry
+✍ Prove the first statement of {numref}`Theorem %s <theorem-ATA>`: $\mathbf{A}^T\mathbf{A}$ is symmetric for any $m\times n$ matrix $\mathbf{A}$ with $m \ge n$.
 
-8. ⌨ Let $t_1,\ldots,t_m$ be $m$ equally spaced points in $[0,2\pi]$. In this exercise, use $m=500$.
-  
-    **(a)** Let $\mathbf{A}_\beta$ be the matrix in {eq}`vandersystemrect` that corresponds to fitting data with the function $c_1 + c_2 \sin(t) + c_3 \cos(\beta t)$. Using the identity {eq}`condATA`, make a table of the condition numbers of $\mathbf{A}_\beta$ for $\beta = 2,1.1,1.01,\ldots,1+10^{-8}$.
+``````
 
-    **(b)** Repeat part (a) using the fitting function $c_1 + c_2 \sin^2(t) + c_3 \cos^2(\beta t).$
+``````{exercise}
+:label: problem-normaleqns-pinveqinv
+✍ Prove that if $\mathbf{A}$ is an invertible square matrix, then $\mathbf{A}^+=\mathbf{A}^{-1}$.
+``````
 
-    **(c)** Why does it make sense that $\kappa\bigl(\mathbf{A}_\beta\bigr)\to \infty$ as $\beta\to 1$ in part (b) but not in part (a)?
-  
-9. ✍ ⌨  When $\mathbf{A}$ is $m\times n$ with rank less than $n$, the pseudoinverse is still defined and can be computed using `pinv` from `LinearAlgebra`. However, the behavior in this case is not always intuitive. Let
-  
-    ```{math}
-    \mathbf{A}_s =
-    \begin{bmatrix}
-      1 & 1 \\ 0 & 0 \\ 0 & s
-    \end{bmatrix}.
-    ```
+``````{exercise}
+**(a)** ✍ Show that for any $m\times n$ $\mathbf{A}$ with $m>n$ for which $\mathbf{A}^T\mathbf{A}$ is nonsingular, $\mathbf{A}^+\mathbf{A}$ is the $n\times n$ identity.
 
-    Then $\mathbf{A}_0$ has rank equal to 1. Demonstrate experimentally that $\mathbf{A}_0^+\neq \lim_{s\to 0} \mathbf{A}_s^+$.
+**(b)** ⌨ Show using an example in Julia that $\mathbf{A}\mathbf{A}^+$ is not an identity matrix. (This matrix has rank no greater than $n$, so it can't be an $m\times m$ identity.)
+``````
 
+``````{exercise}
+✍ Prove that the vector $\mathbf{A}\mathbf{A}^+\mathbf{b}$ is the vector in the column space (i.e., range) of $\mathbf{A}$ that is closest to $\mathbf{b}$ in the sense of the 2-norm.
+``````
 
+``````{exercise}
+✍ Show that the flop count for {numref}`Function {number} <function-lsnormal>` is asymptotically $\sim 2m n^2 + \tfrac{1}{3}n^3$. (In finding the asymptotic count you can ignore terms like $m n$ whose total degree is less than 3.)
+``````
+
+``````{exercise}
+⌨ Let $t_1,\ldots,t_m$ be $m$ equally spaced points in $[0,2\pi]$. In this exercise, use $m=500$.
+
+**(a)** Let $\mathbf{A}_\beta$ be the matrix in {eq}`vandersystemrect` that corresponds to fitting data with the function $c_1 + c_2 \sin(t) + c_3 \cos(\beta t)$. Using the identity {eq}`condATA`, make a table of the condition numbers of $\mathbf{A}_\beta$ for $\beta = 2,1.1,1.01,\ldots,1+10^{-8}$.
+
+**(b)** Repeat part (a) using the fitting function $c_1 + c_2 \sin^2(t) + c_3 \cos^2(\beta t).$
+
+**(c)** Why does it make sense that $\kappa\bigl(\mathbf{A}_\beta\bigr)\to \infty$ as $\beta\to 1$ in part (b) but not in part (a)?
+``````
+
+``````{exercise}
+✍ ⌨  When $\mathbf{A}$ is $m\times n$ with rank less than $n$, the pseudoinverse is still defined and can be computed using `pinv` from `LinearAlgebra`. However, the behavior in this case is not always intuitive. Let
+
+```{math}
+\mathbf{A}_s =
+\begin{bmatrix}
+1 & 1 \\ 0 & 0 \\ 0 & s
+\end{bmatrix}.
+```
+
+Then $\mathbf{A}_0$ has rank equal to 1. Demonstrate experimentally that $\mathbf{A}_0^+\neq \lim_{s\to 0} \mathbf{A}_s^+$.
+``````

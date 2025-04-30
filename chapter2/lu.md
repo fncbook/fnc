@@ -257,90 +257,103 @@ As noted in the descriptions of {numref}`Function {number} <function-lufact>` an
 
 ## Exercises
 
-1. ✍ For each matrix, produce an LU factorization by hand. 
+``````{exercise}
+✍ For each matrix, produce an LU factorization by hand. 
 
-    **(a)** $\quad \displaystyle \begin{bmatrix}
-    2 & 3 & 4 \\
-    4 & 5 & 10 \\
-    4 & 8 & 2
-    \end{bmatrix}\qquad$
-    **(b)** $\quad \displaystyle \begin{bmatrix}
-    6 & -2 & -4 & 4\\
-    3 & -3 & -6 & 1 \\
-    -12 & 8 & 21 & -8 \\
-    -6 & 0 & -10 & 7
-    \end{bmatrix}$
+**(a)** $\quad \displaystyle \begin{bmatrix}
+2 & 3 & 4 \\
+4 & 5 & 10 \\
+4 & 8 & 2
+\end{bmatrix}\qquad$
+**(b)** $\quad \displaystyle \begin{bmatrix}
+6 & -2 & -4 & 4\\
+3 & -3 & -6 & 1 \\
+-12 & 8 & 21 & -8 \\
+-6 & 0 & -10 & 7
+\end{bmatrix}$
+``````
 
-2. ⌨ The matrices
-  
-    ```{math}
-    \mathbf{T}(x,y) = \begin{bmatrix}
-      1 & 0 & 0 \\ 0 & 1 & 0 \\ x & y & 1
-    \end{bmatrix},\qquad
-    \mathbf{R}(\theta) = \begin{bmatrix}
-      \cos\theta & \sin \theta & 0 \\ -\sin\theta & \cos \theta & 0 \\ 0 & 0 & 1
-    \end{bmatrix}
-    ```
+``````{exercise}
+⌨ The matrices
 
-    are used to represent translations and rotations of plane points in computer graphics. For the following, let
-  
-    ```{math}
-    \mathbf{A} = \mathbf{T}(3,-1)\mathbf{R}(\pi/5)\mathbf{T}(-3,1), \qquad \mathbf{z} = \begin{bmatrix}
-      2 \\ 2 \\ 1
-    \end{bmatrix}.
-    ```
+```{math}
+\mathbf{T}(x,y) = \begin{bmatrix}
+1 & 0 & 0 \\ 0 & 1 & 0 \\ x & y & 1
+\end{bmatrix},\qquad
+\mathbf{R}(\theta) = \begin{bmatrix}
+\cos\theta & \sin \theta & 0 \\ -\sin\theta & \cos \theta & 0 \\ 0 & 0 & 1
+\end{bmatrix}
+```
 
-    **(a)** Find $\mathbf{b} = \mathbf{A}\mathbf{z}$.
+are used to represent translations and rotations of plane points in computer graphics. For the following, let
 
-    **(b)** Use {numref}`Function {number} <function-lufact>` to find the LU factorization of $\mathbf{A}$.
+```{math}
+\mathbf{A} = \mathbf{T}(3,-1)\mathbf{R}(\pi/5)\mathbf{T}(-3,1), \qquad \mathbf{z} = \begin{bmatrix}
+2 \\ 2 \\ 1
+\end{bmatrix}.
+```
 
-    **(c)** Use the factors with triangular substitutions in order to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$, and find $\mathbf{x}-\mathbf{z}$.
-  
-(problem-bigcorner)=
-3. ⌨ Define
-  
-    ```{math}
-    \mathbf{A}= \begin{bmatrix}
-      1 & 0 & 0 & 0 & 10^{12} \\
-      1 & 1 & 0 & 0 & 0 \\
-      0 & 1 & 1 & 0 & 0 \\
-      0 & 0 & 1 & 1 & 0 \\
-      0 & 0 & 0 & 1 & 0
-    \end{bmatrix},
-    \quad \hat{\mathbf{x}} = \begin{bmatrix}
-      0 \\ 1/3 \\ 2/3 \\ 1 \\ 4/3
-    \end{bmatrix},
-    \quad \mathbf{b} = \mathbf{A}\hat{\mathbf{x}}.
-    ```
+**(a)** Find $\mathbf{b} = \mathbf{A}\mathbf{z}$.
 
-    **(a)** Using {numref}`Function {number}<function-lufact>` and triangular substitutions, solve the linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, showing the result. To the nearest integer, how many accurate digits are in the result? (The answer is much less than the full 16 of double precision.)
+**(b)** Use {numref}`Function {number} <function-lufact>` to find the LU factorization of $\mathbf{A}$.
 
-    **(b)** Repeat part (a) with $10^{20}$ as the element in the upper right corner. (The result is even less accurate. We will study the causes of such low accuracy in {numref}`section-linsys-condition-number`.)
-  
-4. ⌨ Let
+**(c)** Use the factors with triangular substitutions in order to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$, and find $\mathbf{x}-\mathbf{z}$.
 
-    $$
-	\mathbf{A} = 
-	\begin{bmatrix}
-     1 & 1 & 0 & 1 & 0 & 0 \\
-     0 & 1 & 1 & 0 & 1 & 0 \\
-     0 & 0 & 1 & 1 & 0 & 1 \\
-     1 & 0 & 0 & 1 & 1 & 0 \\
-     1 & 1 & 0 & 0 & 1 & 1 \\
-     0 & 1 & 1 & 0 & 0 & 1
-    \end{bmatrix}.
-    $$
+``````
 
-    Verify computationally that if $\mathbf{A}=\mathbf{L}\mathbf{U}$ is the LU factorization, then the elements of $\mathbf{L}$, $\mathbf{U}$, $\mathbf{L}^{-1}$, and $\mathbf{U}^{-1}$ are all integers. Do **not** rely just on visual inspection of the numbers; perform a more definitive test.
+``````{exercise}
+:label: problem-bigcorner
+⌨ Define
 
-5. ⌨ {numref}`Function {number}<function-lufact>` factors $\mathbf{A}=\mathbf{L}\mathbf{U}$ in such a way that $\mathbf{L}$ is a unit lower triangular matrix—that is, has all ones on the diagonal. It is also possible to define the factorization so that $\mathbf{U}$ is a unit upper triangular matrix instead. Write a function `lufact2` that uses {numref}`Function {number}<function-lufact>` *without modification* to produce this version of the factorization. (Hint: Begin with the standard LU factorization of $\mathbf{A}^T$.) Demonstrate on a nontrivial $4\times 4$ example.
+```{math}
+\mathbf{A}= \begin{bmatrix}
+1 & 0 & 0 & 0 & 10^{12} \\
+1 & 1 & 0 & 0 & 0 \\
+0 & 1 & 1 & 0 & 0 \\
+0 & 0 & 1 & 1 & 0 \\
+0 & 0 & 0 & 1 & 0
+\end{bmatrix},
+\quad \hat{\mathbf{x}} = \begin{bmatrix}
+0 \\ 1/3 \\ 2/3 \\ 1 \\ 4/3
+\end{bmatrix},
+\quad \mathbf{b} = \mathbf{A}\hat{\mathbf{x}}.
+```
 
-6. When computing the determinant of a matrix by hand, it's common to use cofactor expansion and apply the definition recursively. But this is terribly inefficient as a function of the matrix size.
-  
-    **(a)** ✍ Explain using determinant properties why, if $\mathbf{A}=\mathbf{L}\mathbf{U}$ is an LU factorization,
+**(a)** Using {numref}`Function {number}<function-lufact>` and triangular substitutions, solve the linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, showing the result. To the nearest integer, how many accurate digits are in the result? (The answer is much less than the full 16 of double precision.)
 
-    ```{math}
-      \det(\mathbf{A}) = U_{11}U_{22}\cdots U_{nn}=\prod_{i=1}^n U_{ii}.
-    ```
+**(b)** Repeat part (a) with $10^{20}$ as the element in the upper right corner. (The result is even less accurate. We will study the causes of such low accuracy in {numref}`section-linsys-condition-number`.)
+``````
 
-    **(b)** ⌨ Using the result of part (a), write a function `determinant(A)` that computes the determinant using {numref}`Function {number}<function-lufact>`. Test your function on at least two nontriangular $5\times 5$ matrices, comparing your result to the result of the standard `det` function.
+``````{exercise}
+⌨ Let
+
+$$
+\mathbf{A} = 
+\begin{bmatrix}
+1 & 1 & 0 & 1 & 0 & 0 \\
+0 & 1 & 1 & 0 & 1 & 0 \\
+0 & 0 & 1 & 1 & 0 & 1 \\
+1 & 0 & 0 & 1 & 1 & 0 \\
+1 & 1 & 0 & 0 & 1 & 1 \\
+0 & 1 & 1 & 0 & 0 & 1
+\end{bmatrix}.
+$$
+
+Verify computationally that if $\mathbf{A}=\mathbf{L}\mathbf{U}$ is the LU factorization, then the elements of $\mathbf{L}$, $\mathbf{U}$, $\mathbf{L}^{-1}$, and $\mathbf{U}^{-1}$ are all integers. Do **not** rely just on visual inspection of the numbers; perform a more definitive test.
+``````
+
+``````{exercise}
+⌨ {numref}`Function {number}<function-lufact>` factors $\mathbf{A}=\mathbf{L}\mathbf{U}$ in such a way that $\mathbf{L}$ is a unit lower triangular matrix—that is, has all ones on the diagonal. It is also possible to define the factorization so that $\mathbf{U}$ is a unit upper triangular matrix instead. Write a function `lufact2` that uses {numref}`Function {number}<function-lufact>` *without modification* to produce this version of the factorization. (Hint: Begin with the standard LU factorization of $\mathbf{A}^T$.) Demonstrate on a nontrivial $4\times 4$ example.
+``````
+
+``````{exercise}
+When computing the determinant of a matrix by hand, it's common to use cofactor expansion and apply the definition recursively. But this is terribly inefficient as a function of the matrix size.
+
+**(a)** ✍ Explain using determinant properties why, if $\mathbf{A}=\mathbf{L}\mathbf{U}$ is an LU factorization,
+
+```{math}
+\det(\mathbf{A}) = U_{11}U_{22}\cdots U_{nn}=\prod_{i=1}^n U_{ii}.
+```
+
+**(b)** ⌨ Using the result of part (a), write a function `determinant(A)` that computes the determinant using {numref}`Function {number}<function-lufact>`. Test your function on at least two nontriangular $5\times 5$ matrices, comparing your result to the result of the standard `det` function.
+``````

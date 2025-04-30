@@ -237,90 +237,102 @@ In some cases our simple logic in {numref}`Function {number} <function-levenberg
 
 ## Exercises
 
-1. ⌨ (Variation on [Exercise 4.5.2](#problem-newtonsys-spherepotential).) Two curves in the $(u,v)$ plane are defined implicitly by the equations $u\log u + v \log v = -0.3$ and $u^4 + v^2 = 1$.
-  
-    **(a)** ✍ Write the intersection of these curves in the form $\mathbf{f}(\mathbf{x}) = \boldsymbol{0}$ for two-dimensional $\mathbf{f}$ and $\mathbf{x}$.
+``````{exercise}
+⌨ (Variation on @problem-newtonsys-spherepotential.) Two curves in the $(u,v)$ plane are defined implicitly by the equations $u\log u + v \log v = -0.3$ and $u^4 + v^2 = 1$.
 
-    **(b)** ⌨ Use {numref}`Function {number} <function-levenberg>` to find an intersection point starting from $u=1$, $v=0.1$.
+**(a)** ✍ Write the intersection of these curves in the form $\mathbf{f}(\mathbf{x}) = \boldsymbol{0}$ for two-dimensional $\mathbf{f}$ and $\mathbf{x}$.
 
-    **(d)** ⌨ Use {numref}`Function {number} <function-levenberg>` to find an intersection point starting from $u=0.1$, $v=1$.
+**(b)** ⌨ Use {numref}`Function {number} <function-levenberg>` to find an intersection point starting from $u=1$, $v=0.1$.
 
-2. ⌨ (Variation on [Exercise 4.5.4](#problem-newtonsys-orbitintersect)) Two elliptical orbits $(x_1(s),y_1(s))$ and $(x_2(t),y_2(t))$ are described by the equations
-  
-    ```{math}
-    \begin{bmatrix}
-      x_1(t) \\ y_1(t)
-    \end{bmatrix}
-    =
-    \begin{bmatrix}
-      -5+10\cos(t) \\ 6\sin(t)
-    \end{bmatrix}, \qquad
-    \begin{bmatrix}
-      x_2(t)\\y_2(t)
-    \end{bmatrix} =
-    \begin{bmatrix}
-      8\cos(t) \\ 1+12\sin(t)
-    \end{bmatrix},
-    ```
+**(d)** ⌨ Use {numref}`Function {number} <function-levenberg>` to find an intersection point starting from $u=0.1$, $v=1$.
+``````
 
-    where $t$ represents time.
+``````{exercise}
+⌨ (Variation on @problem-newtonsys-orbitintersect.) Two elliptical orbits $(x_1(s),y_1(s))$ and $(x_2(t),y_2(t))$ are described by the equations
 
-    **(a)** ✍ Write out a $2\times 2$ nonlinear system of equations that describes an intersection of these orbits. (Note: An intersection is not the same as a collision—they don't have to occupy the same point at the same time.)
+```{math}
+\begin{bmatrix}
+x_1(t) \\ y_1(t)
+\end{bmatrix}
+=
+\begin{bmatrix}
+-5+10\cos(t) \\ 6\sin(t)
+\end{bmatrix}, \qquad
+\begin{bmatrix}
+x_2(t)\\y_2(t)
+\end{bmatrix} =
+\begin{bmatrix}
+8\cos(t) \\ 1+12\sin(t)
+\end{bmatrix},
+```
 
-    **(b)** ⌨ Use {numref}`Function {number} <function-levenberg>` to find all of the unique intersections.
+where $t$ represents time.
 
-3. ⌨  (Variation on [Exercise 4.5.5](#problem-newtonsys-ellipsemin)) Suppose one wants to find the points on the ellipsoid $x^2/25 + y^2/16 + z^2/9 = 1$ that are closest to and farthest from the point $(5,4,3)$. The method of Lagrange multipliers implies that any such point satisfies
-  
-    ```{math}
-    \begin{split}
-        x-5 &= \frac{\lambda x}{25}, \\[1mm]
-        y-4 &= \frac{\lambda y}{16}, \\[1mm]
-        z-3 &= \frac{\lambda z}{9}, \\[1mm]
-        1 &=  \frac{1}{25}x^2 + \frac{1}{16}y^2 + \frac{1}{9}z^2
-    \end{split}
-    ```
+**(a)** ✍ Write out a $2\times 2$ nonlinear system of equations that describes an intersection of these orbits. (Note: An intersection is not the same as a collision—they don't have to occupy the same point at the same time.)
 
-    for an unknown value of $\lambda$.
-  
-    **(a)** Write out this system in the form $\mathbf{f}(\mathbf{u}) = \boldsymbol{0}$. (Note that the system has four variables to go with the four equations.)
+**(b)** ⌨ Use {numref}`Function {number} <function-levenberg>` to find all of the unique intersections.
+``````
 
-    **(b)** Use {numref}`Function {number} <function-levenberg>` with different initial guesses to find the two roots of this system. Which is the closest point to $(5,4,3)$, and which is the farthest?
+``````{exercise}
+⌨  (Variation on @problem-newtonsys-ellipsemin.) Suppose one wants to find the points on the ellipsoid $x^2/25 + y^2/16 + z^2/9 = 1$ that are closest to and farthest from the point $(5,4,3)$. The method of Lagrange multipliers implies that any such point satisfies
 
- 
-4. ✍ The Broyden update formula {eq}`broyden` is just one instance of so-called rank-1 updating. Verify the  *Sherman–Morrison formula*,
-  
-    ```{math}
-    (\mathbf{A}+\mathbf{u}\mathbf{v}^T)^{-1} = \mathbf{A}^{-1} - \mathbf{A}^{-1}\frac{\mathbf{u}\mathbf{v}^T}{1+\mathbf{v}^T\mathbf{A}^{-1}\mathbf{u}}\mathbf{A}^{-1},
-    ```
+```{math}
+\begin{split}
+x-5 &= \frac{\lambda x}{25}, \\[1mm]
+y-4 &= \frac{\lambda y}{16}, \\[1mm]
+z-3 &= \frac{\lambda z}{9}, \\[1mm]
+1 &=  \frac{1}{25}x^2 + \frac{1}{16}y^2 + \frac{1}{9}z^2
+\end{split}
+```
 
-    which is valid whenever $\mathbf{A}$ is invertible and the denominator above is nonzero. (Hint: Show that $\mathbf{A}+\mathbf{u}\mathbf{v}^T$ times the matrix above simplifies to the identity matrix.)
+for an unknown value of $\lambda$.
 
-5. ✍ Derive Equation {eq}`nlsgradient`.
-  
-6. ⌨ (See also [Exercise 4.5.11](#problem-newtonsys-byhand).) Suppose that
+**(a)** Write out this system in the form $\mathbf{f}(\mathbf{u}) = \boldsymbol{0}$. (Note that the system has four variables to go with the four equations.)
 
-    ```{math}
-    \mathbf{f}(\mathbf{x}) =
-    \begin{bmatrix}
-      x_1x_2+x_2^2-1 \\[1mm] x_1x_2^3 + x_1^2x_2^2 + 1
-    \end{bmatrix}.
-    ```
+**(b)** Use {numref}`Function {number} <function-levenberg>` with different initial guesses to find the two roots of this system. Which is the closest point to $(5,4,3)$, and which is the farthest?
 
-    Let $\mathbf{x}_1=[-2,1]^T$ and let $\mathbf{A}_1=\mathbf{J}(\mathbf{x}_1)$ be the exact Jacobian.
-  
-    **(a)** Solve {eq}`levenberg` for $\mathbf{s}_1$ with $\lambda=0$; this is the "pure" Newton step. Show numerically that $\|\mathbf{f}(\mathbf{x}_1+\mathbf{s}_1)\| > \|\mathbf{f}(\mathbf{x}_1)\|$. (Thus, the Newton step made us go to a point seemingly farther from a root than where we started.)
+``````
 
-    **(b)** Now repeat part (a) with $\lambda=0.01j$ for $j=1,2,3,\ldots.$ What is the smallest value of $j$ such that $\|\mathbf{f}(\mathbf{x}_1+\mathbf{s}_1)\| < \|\mathbf{f}(\mathbf{x}_1)\|$?
+``````{exercise}
+✍ The Broyden update formula {eq}`broyden` is just one instance of so-called rank-1 updating. Verify the  *Sherman–Morrison formula*,
 
-7. ✍ Show that Equation {eq}`levenberg` is equivalent to the linear least-squares problem
-  
-    ```{math}
-    \min_{\mathbf{v}} \Bigl(  \bigl\|\mathbf{A}_k\mathbf{v} + \mathbf{f}_k\bigr\|_2^2 +
-    \lambda^2 \bigl\| \mathbf{v} \bigr\|_2^2 \Bigr).
-    ```
+```{math}
+(\mathbf{A}+\mathbf{u}\mathbf{v}^T)^{-1} = \mathbf{A}^{-1} - \mathbf{A}^{-1}\frac{\mathbf{u}\mathbf{v}^T}{1+\mathbf{v}^T\mathbf{A}^{-1}\mathbf{u}}\mathbf{A}^{-1},
+```
 
-    (Hint: Express the minimized quantity using block matrix notation, such that {eq}`levenberg` becomes the normal equations for it.)
+which is valid whenever $\mathbf{A}$ is invertible and the denominator above is nonzero. (Hint: Show that $\mathbf{A}+\mathbf{u}\mathbf{v}^T$ times the matrix above simplifies to the identity matrix.)
+``````
 
-    Thus, another interpretation of Levenberg's method is that it is the Newton step plus a penalty, weighted by $\lambda$, for taking large steps.
+``````{exercise}
+✍ Derive Equation {eq}`nlsgradient`.
+``````
 
+``````{exercise}
+⌨ (See also @problem-newtonsys-byhand.) Suppose that
 
+```{math}
+\mathbf{f}(\mathbf{x}) =
+\begin{bmatrix}
+x_1x_2+x_2^2-1 \\[1mm] x_1x_2^3 + x_1^2x_2^2 + 1
+\end{bmatrix}.
+```
+
+Let $\mathbf{x}_1=[-2,1]^T$ and let $\mathbf{A}_1=\mathbf{J}(\mathbf{x}_1)$ be the exact Jacobian.
+
+**(a)** Solve {eq}`levenberg` for $\mathbf{s}_1$ with $\lambda=0$; this is the "pure" Newton step. Show numerically that $\|\mathbf{f}(\mathbf{x}_1+\mathbf{s}_1)\| > \|\mathbf{f}(\mathbf{x}_1)\|$. (Thus, the Newton step made us go to a point seemingly farther from a root than where we started.)
+
+**(b)** Now repeat part (a) with $\lambda=0.01j$ for $j=1,2,3,\ldots.$ What is the smallest value of $j$ such that $\|\mathbf{f}(\mathbf{x}_1+\mathbf{s}_1)\| < \|\mathbf{f}(\mathbf{x}_1)\|$?
+``````
+
+``````{exercise}
+✍ Show that Equation {eq}`levenberg` is equivalent to the linear least-squares problem
+
+```{math}
+\min_{\mathbf{v}} \Bigl(  \bigl\|\mathbf{A}_k\mathbf{v} + \mathbf{f}_k\bigr\|_2^2 +
+\lambda^2 \bigl\| \mathbf{v} \bigr\|_2^2 \Bigr).
+```
+
+(Hint: Express the minimized quantity using block matrix notation, such that {eq}`levenberg` becomes the normal equations for it.)
+
+Thus, another interpretation of Levenberg's method is that it is the Newton step plus a penalty, weighted by $\lambda$, for taking large steps.
+``````

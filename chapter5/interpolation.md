@@ -207,55 +207,64 @@ Since $|d_k|\le \|\mathbf{d}\|_\infty$ for all $k$, this finishes {eq}`interp-co
 
 ## Exercises
 
-1. ⌨ Create data by entering
+``````{exercise}
+⌨ Create data by entering
 
-    ``` julia
-    t = -2:4;  y = tanh.(t);
-    ```
+``` julia
+t = -2:4;  y = tanh.(t);
+```
 
-    **(a)** Use `fit` to construct and plot the polynomial interpolant of the data, superimposed on a scatter plot of the data.
+**(a)** Use `fit` to construct and plot the polynomial interpolant of the data, superimposed on a scatter plot of the data.
 
-    **(b)** Use `Spline1D` to construct and plot a piecewise cubic interpolant of the data, superimposed on a scatter plot of the data.
+**(b)** Use `Spline1D` to construct and plot a piecewise cubic interpolant of the data, superimposed on a scatter plot of the data.
+``````
 
-2. ⌨ The following table gives the life expectancy in the U.S. by year of birth.
+``````{exercise}
+⌨ The following table gives the life expectancy in the U.S. by year of birth.
 
-      | 1980 | 1985 | 1990 | 1995 | 2000 | 2005 | 2010 |
-      |:---:|:----:|:-----:|:----:|:----:|:----:|:----:|
-      | 73.7 | 74.7 | 75.4 | 75.8 | 77.0 | 77.8 | 78.7 |
+| 1980 | 1985 | 1990 | 1995 | 2000 | 2005 | 2010 |
+|:---:|:----:|:-----:|:----:|:----:|:----:|:----:|
+| 73.7 | 74.7 | 75.4 | 75.8 | 77.0 | 77.8 | 78.7 |
 
-    **(a)** Defining "year since 1980" as the independent variable, use `fit` to construct and plot the polynomial interpolant of the data.
+**(a)** Defining "year since 1980" as the independent variable, use `fit` to construct and plot the polynomial interpolant of the data.
 
-    **(b)** Use `Spline1D` to construct and plot a piecewise cubic interpolant of the data.
+**(b)** Use `Spline1D` to construct and plot a piecewise cubic interpolant of the data.
 
-    **(c)** Use both methods to estimate the life expectancy for a person born in 2007. Which value is more believable?
-  
-3. ⌨ The following two vectors define a flying saucer shape.
+**(c)** Use both methods to estimate the life expectancy for a person born in 2007. Which value is more believable?
+``````
 
-    ``` julia
-    x = [ 0,0.51,0.96,1.06,1.29,1.55,1.73,2.13,2.61,
-          2.19,1.76,1.56,1.25,1.04,0.58,0 ]
-    y = [ 0,0.16,0.16,0.43,0.62,0.48,0.19,0.18,0,
-          -0.12,-0.12,-0.29,-0.30,-0.15,-0.16,0 ]
-    ```
-    We can regard both $x$ and $y$ as functions of a parameter $s$, with the points being values given at $s=0,1,\ldots,15$. 
-    
-    **(a)** Use `Spline1D` once on each coordinate as functions of $s$, and make a picture of the flying saucer. 
+``````{exercise}
+⌨ The following two vectors define a flying saucer shape.
 
-    **(b)** One drawback of the result in part (a) is the noticeable corner at the left side, which corresponds to $s=0$ from above and $s=15$ from below. There is a periodic variation on cubic spline interpolation that you can invoke by adding the keyword `periodic=true` to the `Spline1D` call. Use this to re-plot the flying saucer.
+``` julia
+x = [ 0,0.51,0.96,1.06,1.29,1.55,1.73,2.13,2.61,
+2.19,1.76,1.56,1.25,1.04,0.58,0 ]
+y = [ 0,0.16,0.16,0.43,0.62,0.48,0.19,0.18,0,
+-0.12,-0.12,-0.29,-0.30,-0.15,-0.16,0 ]
+```
+We can regard both $x$ and $y$ as functions of a parameter $s$, with the points being values given at $s=0,1,\ldots,15$. 
 
-(problem-quadratic-interpolant)=
-4. ✍ Define
+**(a)** Use `Spline1D` once on each coordinate as functions of $s$, and make a picture of the flying saucer. 
 
-    ```{math}
-    q(s) = a\frac{s(s-1)}{2} - b (s-1)(s+1) + c \frac{s(s+1)}{2}.
-    ```
+**(b)** One drawback of the result in part (a) is the noticeable corner at the left side, which corresponds to $s=0$ from above and $s=15$ from below. There is a periodic variation on cubic spline interpolation that you can invoke by adding the keyword `periodic=true` to the `Spline1D` call. Use this to re-plot the flying saucer.
 
-    **(a)** Show that $q$ is a polynomial interpolant of the points $(-1,a)$, $(0,b)$, $(1,c)$.
+``````
 
-    **(b)** Find a change of variable $s=Ax+B$ so that the values $s=-1,0,1$ correspond to $x=x_0-h,x_0,x_0+h$. 
+``````{exercise}
+:label: problem-quadratic-interpolant
+✍ Define
 
-    **(c)** Find a quadratic polynomial interpolant $\tilde{q}(x)$ for the points $(x_0-h,a)$, $(x_0,b)$, $(x_0+h,c)$.
+```{math}
+q(s) = a\frac{s(s-1)}{2} - b (s-1)(s+1) + c \frac{s(s+1)}{2}.
+```
 
-5. ✍ (continuation) Use the result of the previous exercise and {numref}`Theorem %s <theorem-interp-conditioning>` to derive bounds on the condition number of quadratic polynomial interpolation at the nodes $x_0-h$, $x_0$, $x_0+h$.
+**(a)** Show that $q$ is a polynomial interpolant of the points $(-1,a)$, $(0,b)$, $(1,c)$.
 
+**(b)** Find a change of variable $s=Ax+B$ so that the values $s=-1,0,1$ correspond to $x=x_0-h,x_0,x_0+h$. 
 
+**(c)** Find a quadratic polynomial interpolant $\tilde{q}(x)$ for the points $(x_0-h,a)$, $(x_0,b)$, $(x_0+h,c)$.
+``````
+
+``````{exercise}
+✍ (continuation) Use the result of the previous exercise and {numref}`Theorem %s <theorem-interp-conditioning>` to derive bounds on the condition number of quadratic polynomial interpolation at the nodes $x_0-h$, $x_0$, $x_0+h$.
+``````

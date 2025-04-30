@@ -111,46 +111,54 @@ that is needed to run some of the statements.
 :::
 ```` 
 `````
-::::
 
+::::
 
 ## Exercises
 
-1. Suppose you want to interpolate the points $(-1,0)$, $(0,1)$, $(2,0)$, $(3,1)$, and $(4,2)$ by a polynomial of as low a degree as possible.
-  
-   **(a)** ✍ What is the maximum necessary degree of this polynomial?
+``````{exercise}
+Suppose you want to interpolate the points $(-1,0)$, $(0,1)$, $(2,0)$, $(3,1)$, and $(4,2)$ by a polynomial of as low a degree as possible.
 
-   **(b)** ✍ Write out a linear system of equations for the coefficients of the interpolating polynomial.
+**(a)** ✍ What is the maximum necessary degree of this polynomial?
 
-   **(c)** ⌨ Solve the system in (b) numerically.
-  
-2. 
-    **(a)** ✍ Say you want to find a cubic polynomial $p$ such that $p(-1) =-2$, $p'(-1) =1$, $p(1) = 0$, and $p'(1) =-1$. (This is known as a *Hermite interpolant.*) Write out a linear system of equations for the coefficients of $p$. 
-    
-    **(b)** ⌨ Numerically solve the linear system in part (a) and make a plot of $p$ over $-1 \le x \le 1$. 
+**(b)** ✍ Write out a linear system of equations for the coefficients of the interpolating polynomial.
 
-3. ⌨ Here are population figures (in millions) for three countries over a 30-year period (from *United Nations World Population Prospects*, 2019).
+**(c)** ⌨ Solve the system in (b) numerically.
+``````
 
-    |          | 1990  |  2000  | 2010 | 2020 |
-    |:------:|:----------:|:---------:|:---------:|:---------:|
-    | United States | 252.120	 | 281.711 | 309.011	|	331.003 |
-    | India | 873.278	| 1,056.576	| 1,234.281	| 1,380.004 |
-    | Poland | 37.960	| 38.557 | 38.330	| 37.847 |
+``````{exercise}
 
-    **(a)** Use cubic polynomial interpolation to estimate the population of the USA in 2005.
+**(a)** ✍ Say you want to find a cubic polynomial $p$ such that $p(-1) =-2$, $p'(-1) =1$, $p(1) = 0$, and $p'(1) =-1$. (This is known as a *Hermite interpolant.*) Write out a linear system of equations for the coefficients of $p$. 
 
-    **(b)** Use cubic polynomial interpolation to estimate when the population of Poland peaked during this time period.
-  
-    **(c)** Use cubic polynomial interpolation to make a plot of the Indian population over this period. Your plot should be well labeled and show a smooth curve as well as the original data points.
-  
-4. ⌨ Here are the official population figures for the state of Delaware, USA, every ten years from 1790 to 1900: 59096, 64273, 72674, 72749, 76748, 78085, 91532, 112216, 125015, 146608, 168493, 184735. For this problem, use 
+**(b)** ⌨ Numerically solve the linear system in part (a) and make a plot of $p$ over $-1 \le x \le 1$. 
+``````
 
-    $$
-    t = \frac{\text{year} - 1860}{10}
-    $$
+``````{exercise}
+⌨ Here are population figures (in millions) for three countries over a 30-year period (from *United Nations World Population Prospects*, 2019).
 
-    as the independent (time) variable.
+|          | 1990  |  2000  | 2010 | 2020 |
+|:------:|:----------:|:---------:|:---------:|:---------:|
+| United States | 252.120	 | 281.711 | 309.011	|	331.003 |
+| India | 873.278	| 1,056.576	| 1,234.281	| 1,380.004 |
+| Poland | 37.960	| 38.557 | 38.330	| 37.847 |
 
-    **(a)** Using only the data from years 1860 to 1900, plot the interpolating polynomial over the same range of years. Add the original data points to your plot as well.
+**(a)** Use cubic polynomial interpolation to estimate the population of the USA in 2005.
 
-    **(b)** You might assume that adding more data will make the interpolation better. But this is not always the case. Use all the data above to create an interpolating polynomial of degree 11, and then plot that polynomial over the range 1860 to 1900. In what way is this fit clearly inferior to the previous one? (This phenomenon is studied in [Chapter 9](../globalapprox/overview).)
+**(b)** Use cubic polynomial interpolation to estimate when the population of Poland peaked during this time period.
+
+**(c)** Use cubic polynomial interpolation to make a plot of the Indian population over this period. Your plot should be well labeled and show a smooth curve as well as the original data points.
+``````
+
+``````{exercise}
+⌨ Here are the official population figures for the state of Delaware, USA, every ten years from 1790 to 1900: 59096, 64273, 72674, 72749, 76748, 78085, 91532, 112216, 125015, 146608, 168493, 184735. For this problem, use 
+
+$$
+t = \frac{\text{year} - 1860}{10}
+$$
+
+as the independent (time) variable.
+
+**(a)** Using only the data from years 1860 to 1900, plot the interpolating polynomial over the same range of years. Add the original data points to your plot as well.
+
+**(b)** You might assume that adding more data will make the interpolation better. But this is not always the case. Use all the data above to create an interpolating polynomial of degree 11, and then plot that polynomial over the range 1860 to 1900. In what way is this fit clearly inferior to the previous one? (This phenomenon is studied in [Chapter 9](../globalapprox/overview).)
+``````

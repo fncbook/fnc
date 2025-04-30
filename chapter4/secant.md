@@ -243,24 +243,40 @@ For each of Exercises 1–3, do the following steps.
 
 **(e)** ⌨ For one of the roots, use the errors in the Newton sequence to determine numerically whether the convergence is apparently between linear and quadratic.
 
-1. $x^2=e^{-x}$, over $[-2,2]$
+``````{exercise}
+$x^2=e^{-x}$, over $[-2,2]$
+``````
 
-2. $2x = \tan x$, over $[-0.2,1.4]$
+``````{exercise}
+$2x = \tan x$, over $[-0.2,1.4]$
+``````
 
-3. $e^{x+1}=2+x$, over $[-2,2]$
+``````{exercise}
+$e^{x+1}=2+x$, over $[-2,2]$
+``````
 
-    ---
+---
 
-4. ⌨ Use a plot to approximately locate all the roots of $f(x)=x^{-2}-\sin(x)$ in the interval $[0.5,10]$. Then find a pair of initial points for each root such that {numref}`Function {number} <function-secant>` converges to that root.
+``````{exercise}
+⌨ Use a plot to approximately locate all the roots of $f(x)=x^{-2}-\sin(x)$ in the interval $[0.5,10]$. Then find a pair of initial points for each root such that {numref}`Function {number} <function-secant>` converges to that root.
+``````
 
-5. ✍ Show analytically that the secant method converges in one step for a linear function, regardless of the initialization.
+``````{exercise}
+✍ Show analytically that the secant method converges in one step for a linear function, regardless of the initialization.
+``````
 
-6. ✍ In general, the secant method formula {eq}`secant` cannot be applied if $x_{k}=x_{k-1}$. However, suppose that $f(x)=ax^2+bx+c$ for constants $a$, $b$, and $c$. Show that in this case the formula can be simplified to one that is well defined when $x_{k}=x_{k-1}$. Then show that the resulting $x_{k+1}$ is the same as the result of one step of Newton's method applied to $f$ at $x_k$.
+``````{exercise}
+✍ In general, the secant method formula {eq}`secant` cannot be applied if $x_{k}=x_{k-1}$. However, suppose that $f(x)=ax^2+bx+c$ for constants $a$, $b$, and $c$. Show that in this case the formula can be simplified to one that is well defined when $x_{k}=x_{k-1}$. Then show that the resulting $x_{k+1}$ is the same as the result of one step of Newton's method applied to $f$ at $x_k$.
+``````
 
-7. ✍ Let $f(x)=x^2$. Show that if $(1/x_1)$ and $(1/x_2)$ are positive integers, and the secant iteration is applied, then the sequence $1/x_1,1/x_2,1/x_3,\ldots$ is a Fibonacci sequence, i.e., satisfying $x_{k+1}=x_k+x_{k-1}$.
+``````{exercise}
+✍ Let $f(x)=x^2$. Show that if $(1/x_1)$ and $(1/x_2)$ are positive integers, and the secant iteration is applied, then the sequence $1/x_1,1/x_2,1/x_3,\ldots$ is a Fibonacci sequence, i.e., satisfying $x_{k+1}=x_k+x_{k-1}$.
+``````
 
-8. ✍ Provide the details that show how to derive {eq}`secanterr` from {eq}`secant`.
+``````{exercise}
+✍ Provide the details that show how to derive {eq}`secanterr` from {eq}`secant`.
+``````
 
-9.  ⌨ Write a function `iqi(f,x₁,x₂,x₃)` that performs inverse quadratic interpolation for finding a root of $f$, given three initial estimates. To find the quadratic polynomial $q(y)$ passing through the three most recent points, use `fit`. Test your function on the function in Exercise 1 from this section.
-
-
+``````{exercise}
+ ⌨ Write a function `iqi(f,x₁,x₂,x₃)` that performs inverse quadratic interpolation for finding a root of $f$, given three initial estimates. To find the quadratic polynomial $q(y)$ passing through the three most recent points, use `fit`. Test your function on the function in Exercise 1 from this section.
+``````

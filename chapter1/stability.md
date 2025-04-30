@@ -148,89 +148,95 @@ One stable algorithm that is not backward stable is floating-point evaluation fo
 
 ## Exercises
 
-1. The formulas
+``````{exercise}
+The formulas
 
-    ```{math}
-    f(x)=\frac{1-\cos(x)}{\sin(x)}, \quad g(x) = \frac{2\sin^2(x/2)}{\sin(x)},
-    ```
-    are mathematically equivalent, but they suggest evaluation algorithms that can behave quite differently in floating point.
+```{math}
+f(x)=\frac{1-\cos(x)}{\sin(x)}, \quad g(x) = \frac{2\sin^2(x/2)}{\sin(x)},
+```
+are mathematically equivalent, but they suggest evaluation algorithms that can behave quite differently in floating point.
 
-    **(a)** ✍ Using {eq}`conditionderiv`, find the relative condition number of $f$. (Because $f$ and $g$ are equivalent, the condition number of $g$ is the same.) Show that it approaches 1 as $x\to 0$. (Hence it should be possible to compute the function accurately near zero.)
+**(a)** ✍ Using {eq}`conditionderiv`, find the relative condition number of $f$. (Because $f$ and $g$ are equivalent, the condition number of $g$ is the same.) Show that it approaches 1 as $x\to 0$. (Hence it should be possible to compute the function accurately near zero.)
 
-    **(b)** ⌨ Compute $f(10^{-6})$ using a sequence of four elementary operations. Using {numref}`Table {number} <table-condition-functions>`, make a table like the one in {numref}`Demo %s <demo-stability-quadbad>` that shows the result of each elementary result and the numerical value of the condition number of that step.
+**(b)** ⌨ Compute $f(10^{-6})$ using a sequence of four elementary operations. Using {numref}`Table {number} <table-condition-functions>`, make a table like the one in {numref}`Demo %s <demo-stability-quadbad>` that shows the result of each elementary result and the numerical value of the condition number of that step.
 
-    **(c)** ⌨ Repeat part (b) for $g(10^{-6})$, which has six elementary steps.
+**(c)** ⌨ Repeat part (b) for $g(10^{-6})$, which has six elementary steps.
 
-    **(d)** ✍ Based on parts (b) and (c), is the numerical value of $f(10^{-6})$ more accurate, or is $g(10^{-6})$ more accurate?
-  
-2. Let $f(x) = \frac{e^x-1}{x}$.
-  
-    **(a)** ✍ Find the condition number $\kappa_f(x)$. What is the maximum of $\kappa_f(x)$ over $-1\le x \le 1$?
-  
-    **(b)** ⌨  Use the "obvious" algorithm
+**(d)** ✍ Based on parts (b) and (c), is the numerical value of $f(10^{-6})$ more accurate, or is $g(10^{-6})$ more accurate?
+``````
 
-    ``` julia
-    (exp(x) - 1) / x
-    ```
+``````{exercise}
+Let $f(x) = \frac{e^x-1}{x}$.
 
-    to compute $f(x)$ at $x=10^{-2},10^{-3},10^{-4},\ldots,10^{-11}$.  
+**(a)** ✍ Find the condition number $\kappa_f(x)$. What is the maximum of $\kappa_f(x)$ over $-1\le x \le 1$?
 
-    **(c)** ⌨ Create a second algorithm from the first 8 terms of the Maclaurin series, i.e.,
+**(b)** ⌨  Use the "obvious" algorithm
 
-    ```{math}
-    p(x) = 1 + \frac{1}{2!}x + \frac{1}{3!}x^2 + \cdots + \frac{1}{8!}x^8.
-    ```
+``` julia
+(exp(x) - 1) / x
+```
 
-    Evaluate it at the same values of $x$ as in part (b).
-  
-    **(d)** ⌨  Make a table of the relative difference between the two algorithms as a function of $x$. Which algorithm is more accurate, and why?
-  
-3. ⌨ The function
-  
-    ```{math}
-    x = \cosh(y) = \frac{e^y + e^{-y}}{2}
-    ```
+to compute $f(x)$ at $x=10^{-2},10^{-3},10^{-4},\ldots,10^{-11}$.  
 
-    can be inverted to yield a formula for $\operatorname{acosh}(x)$:
-  
-    ```{math}
-    :label: acosh
-    \operatorname{acosh}(x) = y = \log\bigl(x-\sqrt{x^2-1}\bigr).
-    ```
+**(c)** ⌨ Create a second algorithm from the first 8 terms of the Maclaurin series, i.e.,
 
-    For the steps below, define $y_i=-4i$ and $x_i=\cosh(y_i)$ for $i=1,\dots,4$. Hence $y_i=\operatorname{acosh}(x_i)$.
+```{math}
+p(x) = 1 + \frac{1}{2!}x + \frac{1}{3!}x^2 + \cdots + \frac{1}{8!}x^8.
+```
 
-    **(a)** Find the relative condition number of evaluating $f(x) = \operatorname{acosh}(x)$. (You can use {eq}`acosh` or look up a formula for $f'$ in a calculus book.)  Evaluate $\kappa_f$ at all the $x_i$. (You will find that the problem is well-conditioned at these inputs.)
+Evaluate it at the same values of $x$ as in part (b).
 
-    **(b)** Use {eq}`acosh` to approximate $f(x_i)$ for all $i$. Compute the relative accuracy of the results. Why are some of the results so inaccurate?
+**(d)** ⌨  Make a table of the relative difference between the two algorithms as a function of $x$. Which algorithm is more accurate, and why?
+``````
 
-    **(c)** An alternative formula is
+``````{exercise}
+⌨ The function
 
-    ```{math}
-    :label: acosh2
-    y = -2\log\left(\sqrt{\frac{x+1}{2}} + \sqrt{\frac{x-1}{2}}\right).
-    ```
+```{math}
+x = \cosh(y) = \frac{e^y + e^{-y}}{2}
+```
 
-    Apply {eq}`acosh2` to approximate $f(x_i)$ for all $i$, again computing the relative accuracy of the results.
+can be inverted to yield a formula for $\operatorname{acosh}(x)$:
 
-4. ⌨ (Continuation of [Exercise 1.3.2](#problem-algorithms-samplevar). Adapted from {cite}`highamAccuracyStability2002`.) One drawback of the formula {eq}`samplevar` for sample variance is that you must compute a sum for $\overline{x}$ before beginning another sum to find $s^2$. Some statistics textbooks quote a single-loop formula
-  
-    ```{math}
-    \begin{split}
-    s^2 &= \frac{1}{n-1} \left( u - \tfrac{1}{n}v^2 \right),\\
-    u & = \sum_{i=1}^n x_i^2, \\
-    v &= \sum_{i=1}^n x_i.
-    \end{split}
-    ```
+```{math}
+:label: acosh
+\operatorname{acosh}(x) = y = \log\bigl(x-\sqrt{x^2-1}\bigr).
+```
 
-    Try this formula for these three datasets, each of which has a variance exactly equal to 1:
+For the steps below, define $y_i=-4i$ and $x_i=\cosh(y_i)$ for $i=1,\dots,4$. Hence $y_i=\operatorname{acosh}(x_i)$.
 
-    ``` julia
-    x = [ 1e6, 1+1e6, 2+1e6 ]
-    x = [ 1e7, 1+1e7, 2+1e7 ]
-    x = [ 1e8, 1+1e8, 2+1e8 ]
-    ```
+**(a)** Find the relative condition number of evaluating $f(x) = \operatorname{acosh}(x)$. (You can use {eq}`acosh` or look up a formula for $f'$ in a calculus book.)  Evaluate $\kappa_f$ at all the $x_i$. (You will find that the problem is well-conditioned at these inputs.)
 
-    Explain the results.
+**(b)** Use {eq}`acosh` to approximate $f(x_i)$ for all $i$. Compute the relative accuracy of the results. Why are some of the results so inaccurate?
 
+**(c)** An alternative formula is
 
+```{math}
+:label: acosh2
+y = -2\log\left(\sqrt{\frac{x+1}{2}} + \sqrt{\frac{x-1}{2}}\right).
+```
+
+Apply {eq}`acosh2` to approximate $f(x_i)$ for all $i$, again computing the relative accuracy of the results.
+``````
+
+``````{exercise}
+⌨ (Continuation of @problem-algorithms-samplevar. Adapted from {cite}`highamAccuracyStability2002`.) One drawback of the formula {eq}`samplevar` for sample variance is that you must compute a sum for $\overline{x}$ before beginning another sum to find $s^2$. Some statistics textbooks quote a single-loop formula
+
+```{math}
+\begin{split}
+s^2 &= \frac{1}{n-1} \left( u - \tfrac{1}{n}v^2 \right),\\
+u & = \sum_{i=1}^n x_i^2, \\
+v &= \sum_{i=1}^n x_i.
+\end{split}
+```
+
+Try this formula for these three datasets, each of which has a variance exactly equal to 1:
+
+``` julia
+x = [ 1e6, 1+1e6, 2+1e6 ]
+x = [ 1e7, 1+1e7, 2+1e7 ]
+x = [ 1e8, 1+1e8, 2+1e8 ]
+```
+
+Explain the results.
+``````
