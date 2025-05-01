@@ -1,0 +1,261 @@
+---
+numbering:
+  enumerator: 12.2.%s
+---
+(section-advection-upwind)=
+
+# Upwinding and stability
+
+Advection phenomena are characterized by the transport of information at finite speed. This implies that the solution at a given point in space and time can be affected only by the initial data in a limited region of space. For now, we continue to ignore the effects of boundaries.
+
+```{index} ! domain of dependence, ! upwind direction
+```
+
+(definition-upwind-domdep)=
+::::{prf:definition} Domain of dependence
+Let $u(x,t)$ be the solution of an evolutionary PDE with initial condition $u_0(x)$. The  **domain of dependence** of the solution at $(x,t)$ is the set of all $s$ such that $u_0(s)$ can possibly affect $u(x,t)$. If this domain of dependence lies entirely in one direction relative to $x$, then that direction is called the **upwind** direction of the PDE, and its opposite is the **downwind** direction.
+::::
+
+```{index} advection equation
+```
+
+````{prf:example} Domain of dependence
+The linear advection equation $u_t+cu_x = 0$ has solution $u(x,t) = u_0(x-ct)$, where $u_0(x)$ is the initial condition. Therefore, the solution at $(x,t)$ depends on the initial data only at the single point $x-ct$. The domain of dependence is $\{x-ct\}$.
+````
+
+````{prf:example}
+The heat equation $u_t = u_xx$ has a solution that, at any positive time $t$, depends on all the initial data. That is, the domain of dependence is the entire real line.
+````
+
+```{index} ! numerical domain of dependence
+``` 
+
+Any numerical method we choose to solve a PDE has analogous property.
+
+(definition-upwind-numdomdep)=
+::::{prf:definition} Numerical domain of dependence
+Let a numerical method be used to solve an evolutionary PDE on a grid, such that $U_{i,j}$ is the approximate solution at $x=x_i$, $t=t_j$. The **numerical domain of dependence** of the method at $(x_i,t_j)$ is the set of all $x_k$ such that the initial data $U_{k,0}$ can possibly affect $U_{i,j}$.
+::::
+
+(example-upwind-centered)=
+::::{prf:example}
+In $u_t+cu_x=0$, suppose we discretize $u_x$ by a centered difference:
+
+:::{math}
+:label: cflcentral
+  u_x(x_i,t_j) \approx \frac{U_{i+1,j}-U_{i-1,j}}{2h}.
+:::
+
+If we use the Euler time discretization with step size $\tau$, then
+
+:::{math}
+:label: cflcenteuler
+  U_{i,j+1} = U_{i,j} - \frac{c\tau}{2h} (U_{i+1,j}-U_{i-1,j}).
+:::
+
+Starting with $j=0$, we find that $U_{i,1}$ depends on $U_{i-1,0}$, $U_{i,0}$, and $U_{i+1,0}$. Hence, the numerical domain of dependence at $(x_i,t_1)$ is $\{x_{i-1},x_i,x_{i+1}\}$.
+
+Now we set $j=1$. From @cflcenteuler we see that $U_{i,2}$ depends on $U_{i-1,1}$, $U_{i,1}$, and $U_{i+1,1}$. In turn, each of these values at time $t_1$ depends on three values at time $t_0$:
+
+$$
+U_{i-1,1} &\;\text{ uses }\; U_{i-2,0},\, U_{i-1,0},\, U_{i,0}, \\
+U_{i,1} &\;\text{ uses }\; U_{i-1,0},\, U_{i,0},\, U_{i+1,0}, \\
+U_{i+1,1} &\;\text{ uses }\; U_{i,0},\, U_{i+1,0},\, U_{i+2,0}.
+$$
+
+Considering only the unique values, the numerical domain of dependence at $(x_i,t_2)$ is $\{x_{i-2},x_{i-1},x_i,x_{i+1},x_{i+2}\}$. Continuing this kind of reasoning backward from any $U_{i,j}$, we find that the numerical domain of dependence at $(x_i,t_j)$ is $\{x_{i-j},\ldots,x_{i+j}\}$.
+::::
+
+## The CFL condition
+
+
+From this, we see that he entry $U_{i,j}$ can depend directly only on $U_{i-1,j}$, $U_{i,j}$, and $U_{i+1,j}$. Going back another time step, the dependence extends to space positions $i-2$ and $i+2$, and so on. When we reach the initial time, the dependence of $U_{i,j}$ reaches from $x_{i-j}$ to $x_{i+j}$, or between $x_i-jh$ and $x_i+jh$. If we ignore boundaries, the situation is illustrated in {numref}`figure-cflpicture`. As $\tau,h\rightarrow 0$, the numerical domain of dependence fills in the shaded region in the figure, but that region itself does not change.
+
+
+We now state an important principle about a necessary relationship between domains of dependence.
+
+```{index} ! CFL condition
+```
+
+(theorem-upwind-cfl)=
+::::{prf:theorem} Courant–Friedrichs–Lewy (CFL) condition
+In order for a numerical method for an evolutionary equation to converge to the correct solution, the numerical domain of dependence in the limit of $\h, \tau \to 0$ must contain the exact domain of dependence.
+::::
+
+Although we will not provide the rigor behind this theorem, its conclusion is not difficult to justify. If the CFL condition does not hold, the exact solution at $(x,t)$ could be affected by a change in the initial data while having no effect on the numerical solution. Hence there is no way for the method to get the solution correct for all problems. By contradiction, then, the CFL criterion is necessary for convergence.
+
+:::{caution} 
+The CFL condition is a *necessary* criterion for convergence, but not a *sufficient* one. For instance, we could define $U_{i,j}$ to be any weighted convergent sum of all values of $U_{i,0}$. While that would make the numerical domain of dependence equal to the entire real line, this method has nothing to do with solving a PDE correctly!
+:::
+
+(example-upwind-centeredcfl)=
+::::{prf:example}
+In @example-upwind-centered we concluded that the numerical domain of dependence for a centered Euler discretization of the advection equation at $(x_i,t_j)$ is $\{x_{i-j},\ldots,x_{i+j}\}$. @figure-cflpicture illustrates what happens as $h$ and $\tau$ go to zero in a manner that leaves the ratio $h/\tau$ constant.
+
+```{figure} figures/cflpicture.svg
+:name: figure-cflpicture
+:width: 450px
+Numerical domain of dependence for the explicit time stepping scheme in {numref}`Example {number} <example-upwind-centered>`. If  $\tau$ and $h$ are infinitesimally small, the shaded region is filled in.
+```
+
+In order to observe both the exact and numerical domains of dependence at a fixed location $(x,t)$, we must have $x=ih$ and $t=j\tau$. The numerical domain of dependence fills in the interval $[x_{i-j},x_{i+j}]$, which is $[x-jh,x+jh]$, or 
+
+$$
+[x - \frac{h}{\tau} t, x + \frac{h}{\tau} t].
+$$
+
+This interval captures the exact domain of dependence $\{x-ct\}$ only if 
+:::{math}
+:label: cfl-speed
+  |c| \le \frac{h}{\tau}.
+:::
+::::
+
+Equation {eq}`cfl-speed` is the implication of the CFL condition for the stated discretization. Notice that $h/\tau$ is the speed at which information moves in the numerical method, which leads to the following restatement.
+
+:::{prf:observation}
+The CFL condition requires that the maximum propagation speed in the numerical method be at least as large as the maximum speed in the original PDE problem.
+:::
+
+We can rearrange {eq}`cfl-speed` to imply a necessary time step restriction $\tau \le h/|c|$. This restriction for advection is much less severe than the $\tau = O(h^2)$ restriction we derived for Euler in the heat equation in {numref}`section-diffusion-stiffness`. This is our first clear indication that advection is less stiff than diffusion.
+
+(demo-upwind-cfl)=
+::::{prf:example} The CFL condition in action
+
+We solve linear advection with velocity $c=2$ and periodic end conditions. The initial condition is numerically, though not mathematically, periodic.
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-upwind-cfl-julia
+:::
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-upwind-cfl-matlab
+:::
+````
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-upwind-cfl-python
+:::
+````
+`````
+::::
+
+
+(example-upwind-be)=
+::::{prf:example}
+Consider what happens in {numref}`Example {number} <example-upwind-centered>` if we replace Euler by backward Euler. Instead of {eq}`cflcenteuler`, we get
+
+\begin{align*}
+	(\mathbf{I} + c \tau \mathbf{D}_x)\mathbf{u}_{j+1} &=  \mathbf{u}_j, \\
+	\mathbf{u}_{j+1} &= (\mathbf{I} + c \tau \mathbf{D}_x)^{-1} \mathbf{u}_j.
+\end{align*}
+
+The inverse of a tridiagonal matrix is not necessarily tridiagonal, and in fact $U_{i,j+1}$ depends on *all* of the data at time level $j$. Thus the numerical domain of dependence includes the entire real line, and the CFL condition is always satisfied. 
+::::
+
+{numref}`Example {number} <example-upwind-be>` is a special case of a more general conclusion.
+
+:::{prf:observation}
+An explicit time discretization must obey $\tau = O(h)$ as $h\to 0$ in order to solve {eq}`advectioncc`, while an implicit method is typically unrestricted by the CFL condition.
+:::
+
+## Upwinding
+
+There are other ways to discretize the $u_x$ term in the advection equation {eq}`advectioncc`. The implications of the CFL criterion may differ greatly depending on which is chosen.
+
+(example-upwind-onesided)=
+::::{prf:example}
+Suppose we use the backward difference 
+
+:::{math}
+:label: cflbackward 
+  u_x(x_i,t_j)  \approx \frac{U_{i,j}-U_{i-1,j}}{h}  
+:::
+
+together with an explicit scheme in time. Then $U_{i,j}$ depends only on points to the left of $x_i$., i.e., the upwind direction of the numerical method is to the left. But if $c<0$, 
+the upwind direction of the PDE is to the right. Hence it is impossible to satisfy the CFL condition.
+
+Pairing the forward difference 
+
+:::{math}
+:label: cflforward
+  u_x(x_i,t_j)  \approx \frac{U_{i+1,j}-U_{i,j}}{h}
+:::
+
+with explicit time stepping leads to the inverse conclusion: its upwind direction is to the right, and it must fail if $c>0$. 
+::::
+
+It's clear that when the domain of dependence and the numerical method both have a directional preference, they must agree.
+
+:::{prf:observation} Upwinding
+If a numerical method has an upwinding direction, it must be the same as the upwind direction of the PDE.
+:::
+
+It might seem like one should always use a centered difference scheme so that upwinding is not an issue. However, at a shock front, this requires differencing across a jump in the solution, which causes its own difficulties.
+
+## Inflow boundary condition
+
+```{index} ! boundary conditions; inflow
+```
+
+Now suppose that {eq}`advectioncc` is posed on the finite domain $x \in [a,b]$. 
+Since the PDE has only a first-order derivative in $x$, we should have only one boundary condition. Should it be specified at the left end, or the right end?
+
+If we impose a condition at the downwind side of the domain, there is no way for that boundary information to propagate into the interior of the domain as time advances. On the other hand, for points close to the upwind boundary, the domain of dependence eventually wants to move past the left boundary. This is impossible, so instead the domain of dependence has to stay there. 
+
+In summary, we require an **inflow** condition on the PDE. For $c>0$ this is at the left end, and for $c<0$ it is at the right end. This requirement is true of the exact PDE as well as any discretization of it.
+
+(demo-upwind-direction)=
+::::{prf:example} Upwind versus downwind
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-upwind-direction-julia
+:::
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-upwind-direction-matlab
+:::
+````
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-upwind-direction-python
+:::
+````
+`````
+::::
+
+## Exercises
+
+``````{exercise}
+:label: problem-upwind-weather
+✍ Suppose you want to model the weather, including winds up to speed $200$ km/hr, using an explicit method with a second-order centered spatial discretization. If the shortest time step you can take is 4 hr, what is the CFL limit on the spatial resolution of the model? Is this a lower bound or an upper bound?
+``````
+
+``````{exercise}
+:label: problem-upwind-freeway
+✍ Suppose you want to model the traffic on a high-speed freeway using an explicit method with a second-order centered spatial discretization. Derive a CFL condition on the allowable time step, stating your assumptions carefully.
+``````
+
+``````{exercise}
+:label: problem-upwind-limit
+✍ For the heat equation, the domain of dependence at any $(x,t)$ with $t>0$ is all of $x \in (-\infty,\infty)$. Show that the CFL condition implies that $\tau/h\to 0$ is required for convergence as $h\to 0$.
+``````
+
+``````{exercise}
+:label: problem-upwind-inflow
+✍ Suppose you wish to solve $u_t = u u_x$ for $x\in[-1,1]$.
+
+**(a)** If $u(x,0) = -2+\sin(\pi x)$,  which end of the domain is the inflow? 
+
+**(b)** Does the answer to part (a) change if $u(x,0) = 1 + e^{-16x^2}$?
+``````
