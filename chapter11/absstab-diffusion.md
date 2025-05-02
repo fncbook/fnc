@@ -185,7 +185,7 @@ Now we return to the semidiscretization {eq}`heatMOL` of the heat equation, whic
 `````
 ::::
 
-The matrix $\mathbf{D}_{xx}$ occurring in {eq}`heatMOL` for semidiscretization of the periodic heat equation has eigenvalues that can be found explicitly. Assuming that $x\in[0,1)$ (with periodic boundary conditions), for which $h=1/m$, then the eigenvalues are
+The matrix $\mathbf{D}_{xx}$ occurring in {eq}`heatMOL` for semidiscretization of the periodic heat equation has eigenvalues that can be found explicitly. Assuming that $x\in[0,1)$ (with periodic boundary conditions), for which $h=1/m$, then the eigenvalues are (see @problem-absstab-d2eigs)
 
 :::{math}
 :label: D2eigs
@@ -298,14 +298,25 @@ for the following IVP methods:
 ``````
 
 ``````{exercise}
-:label: problem-absstab-D2eigs
-✍ Let $\mathbf{D}_{xx}$ be $m\times m$ and given by {eq}`heatFD22`. For any integer $k \in \{0,\ldots,m-1\},$ define $\omega = \exp(2i k\pi/m)$ and $\mathbf{v} = \bigl[ 1,\; \omega,\; \omega^2,\; \ldots,\; \omega^{m-1} \bigr].$ Show that $\mathbf{v}$ is an eigenvector of $\mathbf{D}_{xx}$ with associated eigenvalue
+:label: problem-absstab-d2eigs
+✍ Let $\mathbf{D}_{xx}$ be $m\times m$ and given by {eq}`heatFD22` for periodic end conditions. For any integer $k \in \{0,\ldots,m-1\}$, define $\omega = \exp(2ik\pi/m)$, and let $\mathbf{v}$ be the vector whose components are $v_j = \omega^j$ for $j=0,\ldots,m-1$.
+
+**(a)** Show that $\omega^m = 1$. 
+
+**(b)** Let $\mathbf{v}' = \mathbf{D}_x \mathbf{v}$. Show that for $j=1,\ldots,m-2$,
 
 $$
-\lambda =  -4m^2 \sin^2 \left( \frac{k\pi}{m} \right).
+v_j' = \frac{1}{h^2} \omega^{j} \left( \omega - 2 + \omega^{-1} \right).
 $$
 
-(This establishes that the eigenvalues all lie within the real interval $[-4m^2,0]$.)
+**(c)** Show that the result of part (b) holds for $j=0$ and $j=m-1$ as well.
+
+**(d)** Explain why the above results prove that $\mathbf{v}$ is an eigenvector of $\mathbf{D}_x$ with associated eigenvalue
+
+```{math}
+:label: eq-d2eigs
+\lambda =  -4 m^2 \sin^2\left( \frac{k\pi}{m} \right).
+```
 ``````
 
 ``````{exercise}

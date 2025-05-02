@@ -16,7 +16,7 @@ $$
   \mathbf{u}' = -c \mathbf{D}_x \mathbf{u}.
 $$
 
-To apply an IVP solver, we need to compare the stability region of the solver with the eigenvalues of $-c \mathbf{D}_x$, as in {numref}`section-diffusion-absstab`. You can verify (see @problem-absstab-D1eigs) that for $m$ points in $[0,1)$, these are
+To apply an IVP solver, we need to compare the stability region of the solver with the eigenvalues of $-c \mathbf{D}_x$, as in {numref}`section-diffusion-absstab`. You can verify (see @problem-absstab-d1eigs) that for $m$ points in $[0,1)$, these are
 
 :::{math}
 :label: D1eigs
@@ -62,9 +62,10 @@ The location of eigenvalues near $\pm ic/h$ also confirms what the CFL condition
 
 The traffic flow equation {eq}`trafficpde` combines a nonlinear advection with a diffusion term. The simplest linear problem with the same feature is the **advection–diffusion equation**
 
-$$
+```{math}
+:label: eq-advectiondiffusion
 u_t+c u_x=\epsilon u_{xx}.
-$$
+```
 
 The parameter $\epsilon$ controls the relative strength between the two mechanisms, and the eigenvalues accordingly vary between the purely imaginary ones of advection and the negative real ones of diffusion.
 
@@ -90,6 +91,10 @@ The parameter $\epsilon$ controls the relative strength between the two mechanis
 :::
 ````
 `````
+
+If we use a time stepping method with fixed step size $\tau$ on this system, then for any given $\epsilon$ and $m$ there is a value $\hat{\tau}$ of the time step such that $\hat{\tau} \lambda$ just barely fits inside the stability region of the method for all eigenvalues $\lambda$. Then the stability restriction is $\tau \le \hat{\tau}$.
+
+Typically, there is one eigenvalue or a symmetric pair completely determining $\hat{\tau}$. For instance, the stability region of Euler is the interior of the circle of radius 1 centered at $\zeta=-1$. From the figure above and the geometry, it's clear that if the eigenvalue on the negative real axis, which we call $\hat{\lambda}$, is scaled by $\hat{\tau}$ to lie on the boundary of that circle, then the other eigenvalues will be inside the circle as well.
 ::::
 
 In a nonlinear problem, the eigenvalues come from the linearization about an exact solution, as in {numref}`section-diffusion-stiffness`.
@@ -137,24 +142,47 @@ As a result, we conclude that $\mathbf{A} = \mathbf{E} \mathbf{D}_x \mathbf{E}^T
 ## Exercises
 
 ``````{exercise}
-:label: problem-absstab-D1eigs
- ✍ Let $\mathbf{D}_{x}$ be $m\times m$ and given by {eq}`cflcentral`. For any integer $k \in \{0,\ldots,m-1\}$, define $\omega = \exp(2ik\pi/m)$ and $\mathbf{v} = \bigl[ 1,\; \omega,\; \omega^2,\; \ldots,\; \omega^{m-1} \bigr].$ Show that $\mathbf{v}$ is an eigenvector of $\mathbf{D}_{x}$ with associated eigenvalue
+:label: problem-absstab-d1eigs
+✍ (Similar to @problem-absstab-d2eigs.) Let $\mathbf{D}_{x}$ be $m\times m$ and given by {eq}`cflcentral` for periodic end conditions. For any integer $k \in \{0,\ldots,m-1\}$, define $\omega = \exp(2ik\pi/m)$, and let $\mathbf{v}$ be the vector whose components are $v_j = \omega^j$ for $j=0,\ldots,m-1$.
+
+**(a)** Show that $\omega^m = 1$. 
+
+**(b)** Let $\mathbf{v}' = \mathbf{D}_x \mathbf{v}$. Show that for $j=1,\ldots,m-2$,
 
 $$
-\lambda =  i\, m  \sin \frac{2k\pi}{m}.
+v_j' = \frac{1}{2h} \omega^{j} \left( \omega - \omega^{-1} \right). 
 $$
 
-(See also @problem-absstab-D2eigs.)
+**(c)** Show that the result of part (b) holds for $j=0$ and $j=m-1$ as well.
+
+**(d)** Explain why the above results prove that $\mathbf{v}$ is an eigenvector of $\mathbf{D}_x$ with associated eigenvalue
+
+$$
+\lambda =  i\, m  \sin \left( \frac{2k\pi}{m} \right).
+$$
 ``````
 
 ``````{exercise}
-⌨ Refer to the semidiscretization of the advection–diffusion equation on $x\in[0,1]$ with $c=1,$ $\epsilon=0.01,$ and periodic end conditions in {numref}`Demo %s <demo-absstab-advdiff>`. For $m=100$, find the upper bound on $\tau$ that gives absolute stability for Euler time stepping. (Hint: The stability region of Euler is the set of complex values whose distance from $-1$ is less than or equal to one. The effect of $\tau$ is to uniformly scale that distance for the eigenvalues.)
+:label: problem-absstab-advdiff
+⌨ In @demo-absstab-advdiff we saw that the eigenvalues of the semidiscretization of @eq-advectiondiffusionon for periodic end conditions lie in the left half of the complex plane, and in a configuration such that for Euler time stepping, the eigenvalue $\hat{\lambda}$ on the negative real axis satisfying $|\hat{\tau} \hat{\lambda} + 1|=1$ defines the maximum stable time step $\hat{\tau}$.
+
+Use $c=1,$ $\epsilon=0.01,$ and $m=100$ to find the eigenvalues. Then identify the eigenvalue $\hat{\lambda}$ and compute $\hat{\tau}$.
 ``````
 
 ``````{exercise}
-⌨ Refer to the semidiscretization in {numref}`Demo %s <demo-absstab-inflow>`. Find the upper bound on $\tau$ that gives absolute stability for Euler time stepping. (See the hint in the previous exercise.)
+:label: problem-absstab-inflow
+⌨ (Continuation of @problem-absstab-advdiff.) In @demo-absstab-inflow we found that the eigenvalues for @eq-advectiondiffusionon change a great deal if an inflow boundary condition is applied. The maximum time step $\hat{\tau}$ for Euler still comes from $|\hat{\tau} \hat{\lambda} + 1|=1$, but now the critical $\hat{\lambda}$ (and its conjugate twin) lies far from the negative real axis.  
+
+**(a)** If $\hat{\lambda} = x+iy$, show that the maximum Euler time step $\hat{\tau}$ is given by
+
+$$
+\hat{tau} = -\frac{2x}{x^2 + y^2}. 
+$$
+
+**(b)** For $c=1,$ $\epsilon=0.01,$ and $m=100,$ to find the eigenvalues, and then find $\hat{\lambda}$ and $\hat{\tau}$.
 ``````
 
 ``````{exercise}
+:label: problem-absstab-outflow
 ⌨ Modify {numref}`Demo %s <demo-absstab-inflow>` so that it produces the eigenvalues of the problem $u_t+u_x=0$ with an outflow condition $u(1,t)=0$. What is the behavior of solutions as $t\to\infty$?
 ``````

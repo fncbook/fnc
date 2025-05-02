@@ -156,6 +156,7 @@ We now use a wave speed that is discontinuous at $x=0$; to the left, $c=1$, and 
 ## Exercises
 
 ``````{exercise}
+:label: problem-wave-maxwell
 ✍ Consider the Maxwell equations {eq}`wavefirst2` with smooth solution $u(x,t)$ and $z(x,t)$.
 
 **(a)** Show that $u_{tt} = c^2 u_{xx}$.
@@ -176,37 +177,47 @@ We now use a wave speed that is discontinuous at $x=0$; to the left, $c=1$, and 
 ```
 
 ``````{exercise}
+:label: problem-wave-dalembert
 ✍ Show that the following is a solution to the wave equation $u_{tt}=c^2u_{xx}$ with initial and boundary conditions {eq}`waveBC` and {eq}`waveIC`:
 
 $$
 u(x,t) = \frac{1}{2} \left[ f(x-ct)+f(x+ct)\right] + \frac{1}{2c} \int_{x-ct}^{x+ct} g(\xi) \, d\xi
 $$
 
-This is known as *D'Alembert's solution*.
+This is known as [D'Alembert's formula](wiki:D%27Alembert%27s_formula).
 ``````
 
 ``````{exercise}
+:label: problem-wave-neumann
 ⌨ Suppose the wave equation has homogeneous Neumann conditions on $u$ at each boundary instead of Dirichlet conditions. Using the Maxwell formulation {eq}`wavefirst2`, we have $z_t=c^2u_x$, so $z$ is constant in time at each boundary. Therefore, the endpoint values of $\mathbf{z}$ can be taken from the initial condition and removed from the ODE, while the entire $\mathbf{u}$ vector is now part of the ODE. 
 
-Modify {numref}`Demo {number} <demo-wave-boundaries>` to solve the PDE there with Neumann instead of Dirichlet conditions, and make an animation or space-time portrait of the solution. In what major way is it different from the Dirichlet case?
+Modify @demo-wave-boundaries to solve the PDE there with Neumann instead of Dirichlet conditions, and make an animation or space-time portrait of the solution. In what major way is it different from the Dirichlet case?
 ``````
 
 ```{index} sine–Gordon equation
 ```
 
 ``````{exercise}
-:label: problem-sine-Gordon
-The nonlinear **sine–Gordon equation** $u_{tt}-u_{xx}=\sin u$ has interesting solutions.
+:label: problem-wave-sinegordon
+The nonlinear [sine–Gordon equation](wiki:Sine-Gordon_equation) $u_{tt}-u_{xx}= - \sin u$ is a model of multiple pendulums hanging from a single string. It has some interesting solutions.
 
 **(a)** ✍ Write the equation as a first-order system in the variables $u$ and $v=u_t$.
 
-**(b)** ⌨ Assume periodic end conditions on $[-10,10]$ and discretize at $m=200$ points. Let $u(x,0) = \pi e^{-x^2}$ and $u_t(x,0) = 0$. Solve the system using `RK4` between $t=0$ and $t=50$, and make a plot or animation of the solution.
+**(b)** ⌨ Assume periodic end conditions on $[-10,10]$ and discretize at $m=200$ points. Let 
+
+$$
+u(x,0) = 4\operatorname{arctan}\left( \frac{1}{\cosh(x/\sqrt{2})} \right) 
+$$ 
+
+and $u_t(x,0) = 0$. Solve the system using a nonstiff solver for $t \in [0,50],$ and make an animation of the solution $u(x,t)$. (This type of solution is called a [breather](wiki:Breather).)
 ``````
 
 ```{index} beam equation
 ```
 
 ``````{exercise}
+:label: problem-wave-beam
+
 The deflections of a stiff beam, such as a ruler, are governed by the PDE $u_{tt}=-u_{xxxx}$.
 
 **(a)** ✍ Show that the beam PDE is equivalent to the first-order system
