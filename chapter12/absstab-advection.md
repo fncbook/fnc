@@ -10,7 +10,14 @@ The CFL criterion gives a necessary condition for convergence. It suggests, but 
 ```{index} method of lines
 ```
 
-Let the advection equation {eq}`advectioncc` over $[0,1]$ be subjected to periodic end conditions. Suppose we use the central-difference matrix $\mathbf{D}_x$ defined in {eq}`trafficdiffmat` to discretize the space derivative, leaving us with
+Let the advection equation
+
+```{math}
+:label: advectioncc
+u_t + c u_x = 0
+```
+
+be posed for $x \in [0,1]$ and subjected to periodic end conditions. If we use the central-difference matrix $\mathbf{D}_x$ defined in {eq}`trafficdiffmat` to discretize the space derivative, we get the ODE system
 
 $$
   \mathbf{u}' = -c \mathbf{D}_x \mathbf{u}.
@@ -53,7 +60,11 @@ Two things stand out about these eigenvalues: they are purely imaginary, which i
 
 Many PDEs that conserve quantities will have imaginary eigenvalues, causing Euler and some other IVP methods to fail regardless of step size. Diffusion problems, in which the eigenvalues are negative and real, are compatible with a wider range of integrators, though possibly with onerous step size requirements due to stiffness.
 
-The location of eigenvalues near $\pm ic/h$ also confirms what the CFL condition was suggesting. In order to use RK4, for example, whose stability region intersects the imaginary axis at around $\pm 2.8i$, the time step stability restriction is $\tau c/h \le 2.8$, or $\tau=O(h)$. This is much more favorable than for diffusion, whose eigenvalues were as large as $O(h^{-2})$, and it makes explicit IVP methods much more attractive for advection problems than for diffusion.
+The location of eigenvalues near $\pm ic/h$ also confirms what the CFL condition was suggesting. In order to use RK4, for example, whose stability region intersects the imaginary axis at around $\pm 2.8i$, the time step stability restriction is $\tau c/h \le 2.8$, or $\tau=O(h)$. This is much more favorable than for diffusion, whose eigenvalues were as large as $O(h^{-2})$.
+
+```{important}
+Explicit IVP methods are much more attractive for advection problems than for diffusion.
+```
 
 ## Advection–diffusion equations
 
@@ -92,9 +103,8 @@ The parameter $\epsilon$ controls the relative strength between the two mechanis
 ````
 `````
 
-If we use a time stepping method with fixed step size $\tau$ on this system, then for any given $\epsilon$ and $m$ there is a value $\hat{\tau}$ of the time step such that $\hat{\tau} \lambda$ just barely fits inside the stability region of the method for all eigenvalues $\lambda$. Then the stability restriction is $\tau \le \hat{\tau}$.
+If we use a time stepping method with fixed step size $\tau$ on this system, then for any given $\epsilon$ and $m$, there is a maximum value $\hat{\tau}$ of $\tau$ such that $\hat{\tau} \lambda$ fits inside the stability region of the method for all eigenvalues $\lambda$. Then the stability restriction for the fully discrete method is $\tau \le \hat{\tau}$. (See @problem-absstab-advdiff.)
 
-Typically, there is one eigenvalue or a symmetric pair completely determining $\hat{\tau}$. For instance, the stability region of Euler is the interior of the circle of radius 1 centered at $\zeta=-1$. From the figure above and the geometry, it's clear that if the eigenvalue on the negative real axis, which we call $\hat{\lambda}$, is scaled by $\hat{\tau}$ to lie on the boundary of that circle, then the other eigenvalues will be inside the circle as well.
 ::::
 
 In a nonlinear problem, the eigenvalues come from the linearization about an exact solution, as in {numref}`section-diffusion-stiffness`.
@@ -164,22 +174,21 @@ $$
 
 ``````{exercise}
 :label: problem-absstab-advdiff
-⌨ In @demo-absstab-advdiff we saw that the eigenvalues of the semidiscretization of @eq-advectiondiffusionon for periodic end conditions lie in the left half of the complex plane, and in a configuration such that for Euler time stepping, the eigenvalue $\hat{\lambda}$ on the negative real axis satisfying $|\hat{\tau} \hat{\lambda} + 1|=1$ defines the maximum stable time step $\hat{\tau}$.
+⌨ In @demo-absstab-advdiff we saw that the eigenvalues of the semidiscretization of @advectioncc for periodic end conditions lie in the left half of the complex plane. Suppose we want to apply the Euler time stepping formula. For a given eigenvalue $\lambda$, there is a value of $\tau$ such that $\zeta=\tau \lambda$ lies on the boudnary of the stability region.
 
-Use $c=1,$ $\epsilon=0.01,$ and $m=100$ to find the eigenvalues. Then identify the eigenvalue $\hat{\lambda}$ and compute $\hat{\tau}$.
+**(a)** ✍ Show that if $\lambda = x + iy$ and $|\zeta + 1|^2 = 1$, then  
+```{math}
+:label: eq-absstab-eulerperiodic
+\tau = -\frac{2x}{x^2 + y^2}.
+```
+**(b)** ⌨ Use $c=1,$ $\epsilon=0.001,$ and $m=100$ to find the eigenvalues. For each eigenvalue, use @eq-absstab-eulerperiodic to find the value of $\tau$ that scales it to the stability region. Then find the minimum value of $\tau$ over all the eigenvalues. (This is the maximum stable time step $\hat{\tau}$ for Euler.)
 ``````
 
 ``````{exercise}
 :label: problem-absstab-inflow
-⌨ (Continuation of @problem-absstab-advdiff.) In @demo-absstab-inflow we found that the eigenvalues for @eq-advectiondiffusionon change a great deal if an inflow boundary condition is applied. The maximum time step $\hat{\tau}$ for Euler still comes from $|\hat{\tau} \hat{\lambda} + 1|=1$, but now the critical $\hat{\lambda}$ (and its conjugate twin) lies far from the negative real axis.  
+⌨ (Continuation of @problem-absstab-advdiff.) In @demo-absstab-inflow we found that the eigenvalues for @advectioncc change a great deal if an inflow boundary condition is applied. 
 
-**(a)** If $\hat{\lambda} = x+iy$, show that the maximum Euler time step $\hat{\tau}$ is given by
-
-$$
-\hat{tau} = -\frac{2x}{x^2 + y^2}. 
-$$
-
-**(b)** For $c=1,$ $\epsilon=0.01,$ and $m=100,$ to find the eigenvalues, and then find $\hat{\lambda}$ and $\hat{\tau}$.
+For $c=1$ and $m=40,$ use the reasoning in @problem-absstab-advdiff to find the maximum stable time step $\hat{\tau}$ for Euler.
 ``````
 
 ``````{exercise}

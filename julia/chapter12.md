@@ -348,7 +348,7 @@ The eigenvalues of advection-diffusion are near-imaginary for $\epsilon\approx 0
 plt = plot(
     legend=:topleft,
     aspect_ratio=1,
-    xlabel="Re ζ",  ylabel="Im ζ",
+    xlabel="Re λ",  ylabel="Im λ",
     title="Eigenvalues for advection-diffusion")
 x, Dₓ, Dₓₓ = FNC.diffper(40, [0, 1]);
 for ϵ in [0.001, 0.01, 0.05]

@@ -399,12 +399,11 @@ The eigenvalues of advection-diffusion are near-imaginary for $\epsilon\approx 0
 ```{code-cell}
 :tags: hide-input
 [x, Dx, Dxx] = diffper(40, [0, 1]);
-tau = 0.1;
 clf
 for ep = [0.001 0.01 0.05]
   lambda = eig(-Dx + ep*Dxx);
   str = sprintf("\\epsilon = %.3f", ep);
-  scatter(real(tau*lambda), imag(tau*lambda), displayname=str)
+  scatter(real(lambda), imag(lambda), displayname=str)
   hold on
 end
 axis equal,  grid on
