@@ -271,7 +271,7 @@ We solve the Black–Scholes PDE @bspde with initial condition $u(x,0) = \max\{0
 ``````
 
 ``````{exercise}
-⌨ Use {numref}`Function {number} <function-parabolic>` to solve the heat equation for $0\le x \le 5$ with initial condition $u(x,0)=x(5-x)$ and subject to the boundary conditions $u(0,t)=0$, $u(5,t)-u_x(5,t)=5$. Plot the solution at $t=1$ and find the value of $u(2.5,1)$. 
+⌨ Use {numref}`Function {number} <function-parabolic>` to solve the heat equation for $0\le x \le 5$ with initial condition $u(x,0)=x(5-x)$ and subject to the boundary conditions $u(0,t)=0$, $u(5,t)-u_x(5,t)=5$. Increase $m$ until you are confident that the value $u(2.5,1)$ is correct when rounded to the hundredths place (i.e., two places after the decimal point), and print out that value. Plot the solution at $t=1$.  
 ``````
 
 ``````{exercise}
@@ -279,7 +279,7 @@ Consider {numref}`Demo %s <demo-boundaries-bratu>`, combining diffusion with a n
 
 **(a)** ✍ Suppose we ignore the diffusion. Use separation of variables (or computer algebra) to solve the IVP $u_t=u^2$, $u(0) = A>0$. What happens as $t\to 1/A$ from below? 
 
-**(b)** ⌨ Try to continue the solution in the demo to $t=0.5$. Plot the solution at $t=0.15$, $t=0.2$, and $t=0.25$. 
+**(b)** ⌨ Try to continue the solution in the demo to $t=0.5$ (you may get a warning from the IVP solver). Plot the solution at $t=0.15$, $t=0.2$, and $t=0.25$. 
 
 **(c)** ⌨ Let the initial condition be $u(x,0) = C x^4(1-x)^2$; the demo and part (b) above use $C=400$. To the nearest 10, find a critical value $C_0$ such that the solution approaches zero asymptotically if $C < C_0$, and infinity otherwise. (Use the solution at $t=1$ to determine the critical value.)
 ``````
