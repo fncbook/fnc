@@ -13,6 +13,7 @@ numbering:
 ```{code-cell}
 :tags: remove-cell
 include("FNC_init.jl")
+pwd();
 ```
 
 ### 12.1 @section-advection-traffic

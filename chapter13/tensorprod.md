@@ -5,21 +5,28 @@ numbering:
 (section-twodim-tensorprod)=
 # Tensor-product discretizations
 
-As you learned when starting double integration in vector calculus, the simplest extension of an interval to two dimensions is a rectangle. We will use a particular notation for rectangles:
+As you learned when starting double integration in vector calculus, the simplest extension of an interval to two dimensions is a rectangle. We will use a particular notation for rectangles.
 
+```{prf:definition} Tensor-product domain
+A {term}`tensor-product domain` is two dimensions is the rectangle
 :::{math}
 :label: rectangleTP
   [a,b] \times [c,d] = \bigl\{ (x,y)\in\mathbb{R}^2 : a\le x \le b,\; c\le y \le d \bigr\}.
 :::
+```
 
 ```{index} ! tensor-product domain
 ```
 
-The $\times$ in this notation is called a **tensor product**, and a rectangle is the fundamental example of a **tensor-product domain**. The implication of the tensor product is that each variable independently varies over a fixed set. The simplest three-dimensional tensor-product domain is the cuboid $[a,b]\times[c,d]\times[e,f]$. When the interval is the same in each dimension (that is, the region is a square or a cube), we may write $[a,b]^2$ or $[a,b]^3$. We will limit our discussion to two dimensions henceforth.
+```{note}
+The $\times$ notation in @rectangleTP is called a **tensor product**. 
+```
+
+The idea of the tensor product is that each variable independently varies over a fixed set. When the interval is the same in each dimension, we may write $[a,b]^2$.
 
 The discretization of a two-dimensional tensor-product domain is straightforward.
 
-::::{prf:definition} Tensor-product grid
+````{prf:definition} Tensor-product grid
 Given discretizations of two intervals,
 
 :::{math}
@@ -31,28 +38,47 @@ then a **tensor-product grid** on $[a,b]\times[c,d]$ is the set
 
 :::{math}
 :label: rectangledisc
-  \bigl\{ (x_i,y_j): i=0,\ldots,m,\; j=0,\ldots,n \bigr\}.
+  \bigl\{ (x_i, y_j): i=0,\ldots,m,\; j=0,\ldots,n \bigr\}.
 :::
-::::
+````
+
+@fig-tensor-grid shows a tensor-product grid on a rectangle. The grid is constructed from discretizations of $x$ with $m=3$ and $y$ with $n=5$. Each grid point $(x_i, y_j)$ lies at the intersection of a vertical line through $x_i$ and a horizontal line through $y_j$.
+
+```{figure} ../_static/tensor-grid.svg
+:label: fig-tensor-grid
+:alt: Tensor-product grid
+:align: center
+A tensor-product grid (dark gray) on a rectangle constructed from discretizations of $x$ with $m=3$ (blue) and $y$ with $n=5$ (red).
+```
+
+```{index} ! tensor-product grid
+```
 
 ## Functions on grids
 
-The double indexing of the grid set {eq}`rectangledisc` implies an irresistible connection to matrices. Corresponding to any function  $f(x,y)$ defined on the rectangle is an $(m+1)\times(n+1)$ matrix $\mathbf{F}$ defined by collecting the values of $f$ at the points in the grid. This transformation of a function to a matrix is so important that we give it a formal name:
+The double indexing of the grid set {eq}`rectangledisc` implies an irresistible connection to matrices. Corresponding to any function  $f(x,y)$ defined on the rectangle is an $(m+1)\times(n+1)$ matrix $\mathbf{F}$ defined by collecting the values of $f$ at the points in the grid. This transformation of a function to a matrix is so important that we give it a formal name
+
+```{prf:definition} Function-to-matrix map
+
+The function mtx maps a function $f(x,y)$ to an $(m+1)\times (n+1)$  matrix $\mathbf{F}$ by
 
 :::{math}
 :label: fun2mtx
-\mathbf{F} = \mtx(f) = \Bigl[f(x_i,y_j)\Bigr]_{\substack{i=0,\ldots,m\\j=0,\ldots,n}}.
+\mathbf{F} = \mtx(f) = \Bigl[f(x_i,y_j)\Bigr]_{\substack{i=0,\ldots,m\\j=0,\ldots,n}},
 :::
 
-:::{caution}
-There is potential for confusion because the first dimension of a matrix varies in the vertical direction, while the first coordinate $x$ varies horizontally. In fact, the Julia plotting routines we use expect the transpose of this arrangement, so that $x$ varies along columns and $y$ along rows.
-:::
+where the evaluations are on the grid {eq}`rectangledisc`.
+```
+
+```{warning}
+Traditionally, the first dimension of a matrix varies in the _vertical_ direction, while the first space coordinate $x$ varies _horizontally_. This clash has long been a source of confusion when coding, and each language or package has its own conventions around it. In this book, the first dimension of a matrix always corresponds to the first coordinate of the function. Sometimes, this forces us to use a transpose for making plots.
+```
 
 (example-tensorprod-smallgrid)=
 ::::{prf:example}
 Let the interval $[0,2]$ be divided into $m=4$ equally sized pieces, and let $[1,3]$ be discretized in $n=2$ equal pieces. Then the grid in the rectangle $[0,2]\times[1,3]$ is given by all points $(i/2,1+j)$ for all choices $i=0,1,2,3,4$ and $j=0,1,2$. If $f(x,y)=\sin(\pi xy)$, then
 
-$$
+\begin{equation*}
   \mtx(f) =
     \begin{bmatrix}
     \sin(\pi\cdot 0\cdot 1) & \sin(\pi\cdot0\cdot 2) & \sin(\pi\cdot0\cdot 3) \\[1mm]
@@ -64,7 +90,8 @@ $$
     = \begin{bmatrix}
     0 & 0 & 0 \\ 1 & 0 & -1 \\ 0 & 0 & 0 \\ -1 & 0 & 1 \\ 0 & 0 & 0
     \end{bmatrix}.
-$$
+\end{equation*}
+
 ::::
 
 (demo-tensorprod-gridfun)=
@@ -89,8 +116,8 @@ $$
 :::
 ````
 `````
-::::
 
+::::
 
 ## Parameterized surfaces
 
