@@ -380,10 +380,9 @@ The eigenvalues of advection-diffusion are near-imaginary for $\epsilon\approx 0
 ```{code-cell}
 :tags: hide-input
 x, Dx, Dxx = FNC.diffper(40, [0, 1])
-tau = 0.1
 for ep in [0.001, 0.01, 0.05]:
     lamb = eigvals(-Dx + ep * Dxx)
-    plot(real(tau * lamb), imag(tau * lamb), "o", label=f"epsilon={ep:.1g}")
+    plot(real(lamb), imag(lamb), "o", label=f"epsilon={ep:.1g}")
 axis("equal")
 legend()
 title("Eigenvalues for advection-diffusion");
