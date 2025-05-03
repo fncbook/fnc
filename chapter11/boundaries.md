@@ -288,7 +288,7 @@ Consider {numref}`Demo %s <demo-boundaries-bratu>`, combining diffusion with a n
 ```
 
 ``````{exercise}
-⌨ The *Allen–Cahn equation* is used as a model for systems that prefer to be in one of two stable states. The governing PDE is
+⌨ The [Allen–Cahn equation](wiki:Allen–Cahn_equation) is used as a model for systems that prefer to be in one of two stable states. The governing PDE is
 
 :::{math}
 u_t = u(1-u^2) + \epsilon u_{xx}.
@@ -311,7 +311,7 @@ where $\beta$ is a parameter. Use {numref}`Function {number} <function-parabolic
 ```
 
 ``````{exercise}
-⌨ The *Fisher equation* is $u_t=u_{xx} + u - u^2$. Assume that $0\le x \le 6$ and that the boundary conditions are $u_x(0,t)=u(6,t)=0$.
+⌨ The [Fisher equation](wiki:KPP-Fisher_equation) is $u_t=u_{xx} + u - u^2$. Assume that $0\le x \le 6$ and that the boundary conditions are $u_x(0,t)=u(6,t)=0$.
 
 **(a)** For the initial condition $u(x,0) = \frac{1}{2}[1+\cos(\pi x/2)]$, use {numref}`Function {number} <function-parabolic>` with $m=80$ to solve the Fisher equation and plot the solution at times $t=0,0.5,\ldots,3$. What is $u(0,3)$?
 
