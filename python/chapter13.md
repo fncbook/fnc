@@ -82,7 +82,7 @@ To emphasize departures from a zero level, use a colormap such as `RdBu` and set
 ```
 
 ::::{warning}
-The contour and surface plotting functions expect the *transpose* of the outputs of `mtx`. If you forget to do that, the $x$ and $y$ axes will be swapped.
+The contour and surface plotting functions in `matplotlib` expect the *transpose* of the outputs of `mtx`. If you forget to do that, the $x$ and $y$ axes will be swapped.
 ::::
 
 ```{code-cell}
@@ -142,9 +142,9 @@ du_dy = lambda x, y: (pi * x - 1) * cos(pi * x * y - y)
 We will use an equispaced grid and second-order finite differences as implemented by `diffmat2`. First, we have a look at a plots of the exact partial derivatives.
 
 ```{code-cell}
-m, n = 80, 60
+m, n = 80, 70
 x, Dx, Dxx = FNC.diffmat2(m, [0, 2])
-y, Dy, Dyy = FNC.diffmat2(n, [1, 4])
+y, Dy, Dyy = FNC.diffmat2(n, [1, 3])
 mtx, X, Y, _, _, _ = FNC.tensorgrid(x, y)
 
 U = mtx(u)
@@ -152,10 +152,10 @@ dU_dX = mtx(du_dx)
 dU_dY = mtx(du_dy)
 
 subplot(1, 2, 1)
-contourf(X.T, Y.T, dU_dX.T)
+contourf(X, Y, dU_dX)
 title("$u$"),  axis("equal")
 subplot(1, 2, 2)
-contourf(X.T, Y.T, dU_dY.T)
+contourf(X, Y, dU_dY)
 title("$\\partial u/\\partial y$"),  axis("equal");
 ```
 
@@ -163,11 +163,16 @@ Now we compare the exact partial derivatives with their finite-difference approx
 
 ```{code-cell}
 subplot(1, 2, 1)
-pcolormesh(X, Y, Dx @ U  - dU_dX, shading="gouraud", cmap="RdBu", vmin=-0.4, vmax=0.4)
+err_x = Dx @ U - dU_dX
+M = max(abs(err_x))
+pcolormesh(X, Y, err_x, shading="gouraud", cmap="RdBu", vmin=-M, vmax=M)
 colorbar()
 title("error in $\\partial u/\\partial x$"),  axis("equal")
+
 subplot(1, 2, 2)
-pcolormesh(X, Y, U @ Dy.T - dU_dY, shading="gouraud", cmap="RdBu", vmin=-0.1, vmax=0.1)
+err_y = U @ Dy.T - dU_dY
+M = max(abs(err_y))
+pcolormesh(X, Y, err_y, shading="gouraud", cmap="RdBu", vmin=-M, vmax=M)
 colorbar()
 title("error in $\\partial u/\\partial y$"),  axis("equal");
 ```
@@ -211,6 +216,8 @@ with printoptions(precision=4, suppress=True):
 ``````{dropdown} @demo-diffadv-heat
 :open:
 
+We start by defining the discretization of the rectangle.
+
 ```{code-cell}
 m, n = 60, 40
 x, Dx, Dxx = FNC.diffper(m, [-1, 1])
@@ -218,7 +225,7 @@ y, Dy, Dyy = FNC.diffper(n, [-1, 1])
 mtx, X, Y, vec, unvec, _ = FNC.tensorgrid(x, y)
 ```
 
-Note that the initial condition should also be periodic on the domain.
+Here is the initial condition, evaluated on the grid.
 
 ```{code-cell}
 u_init = lambda x, y: sin(4 * pi * x) * exp(cos(pi * y))
@@ -230,7 +237,7 @@ xlabel("$x$"),  ylabel("$y$")
 title("Initial condition");
 ```
 
-This function computes the time derivative for the unknowns. The actual calculations take place using the matrix shape.
+The following function computes the time derivative for the unknowns, which have a vector shape. The actual calculations, however, take place using the matrix shape.
 
 ```{code-cell}
 alpha = 0.1
@@ -242,13 +249,22 @@ def du_dt(t, u):
     return vec(dU_dt)
 ```
 
-Since this problem is parabolic, a stiff integrator is appropriate.
+Since this problem is parabolic, a stiff time integrator is appropriate.
 
 ```{code-cell}
 from scipy.integrate import solve_ivp
 sol = solve_ivp(du_dt, (0, 0.2), vec(U0), method="BDF", dense_output=True)
 U = lambda t: unvec(sol.sol(t))
+```
 
+We can use the function `U` defined above to get the solution at any time. Its output is a matrix of values on the grid. 
+
+```{tip}
+:class: dropdown
+To plot the solution at any time, we use the same color scale as with the initial condition, so that the pictures are more easily compared.
+```
+
+```{code-cell}
 pcolormesh(X.T, Y.T, U(0.02).T, 
     vmin=-mx, vmax=mx, cmap="RdBu", shading="gouraud")
 axis("equal"),  colorbar()
@@ -256,11 +272,7 @@ xlabel("$x$"),  ylabel("$y$")
 title("Heat equation, t=0.02");
 ```
 
-Here is an animation of the solution.
-```{tip}
-:class: dropdown
-Here `clims` are set so that colors remain at fixed values throughout the animation.
-```
+An animation shows convergence toward a uniform value.
 
 ```{code-cell}
 from matplotlib import animation
@@ -299,22 +311,24 @@ mtx, X, Y, _, _, _ = FNC.tensorgrid(x, y)
 u_init = lambda x, y: (1 + y) * (1 - x)**4 * (1 + x)**2 * (1 - y**4)
 ```
 
-There are really two grids now: the full grid and the subset grid of interior points. Since the IVP unknowns are on the interior grid, that is the one we need to change shapes on. We also need the functions `extend` and `chop` to add and remove boundary values.
+We define functions `extend` and `chop` to deal with the Dirichlet boundary conditions. 
 
 ```{code-cell}
-_, _, _, vec, unvec, _ = FNC.tensorgrid(x[1:-1], y[1:-1])
-
 def chop(U):
     return U[1:-1, 1:-1]
 
-def extend(U):
-    UU = zeros((m+1, n+1))
-    UU[1:-1, 1:-1] = U
-    return UU
+def extend(W):
+    U = zeros((m+1, n+1))
+    U[1:-1, 1:-1] = W
+    return U
+```
 
+Now we define the `pack` and `unpack` functions, using another call to @function-tensorgrid to get reshaping functions for the interior points. 
+
+```{code-cell}
+_, _, _, vec, unvec, _ = FNC.tensorgrid(x[1:-1], y[1:-1])
 pack = lambda U: vec(chop(U))          # restrict to interior, then vectorize
-unpack = lambda u: extend(unvec(u))    # unvectorize, then extend to boundary
-
+unpack = lambda w: extend(unvec(w))    # reshape, then extend to boundary
 ```
 
 Now we can define and solve the IVP using a stiff solver.
@@ -332,10 +346,10 @@ U0 = mtx(u_init)
 sol = solve_ivp(dw_dt, (0, 2), pack(U0), method="BDF", dense_output=True)
 ```
 
-When we evaluate the solution at a particular value of $t$, we get a vector of the interior grid values. The same `unpack` function above converts this to a complete matrix of grid values.
+When we evaluate the solution at a particular value of $t$, we get a vector of the interior grid values. The `unpack` converts this to a complete matrix of grid values.
 
 ```{code-cell}
-U = lambda t: unpack(sol.sol(t))    # function of time on the grid
+U = lambda t: unpack(sol.sol(t))    # matrix-valued function of time
 
 pcolormesh(X.T, Y.T, U(0.5).T, cmap="Blues", shading="gouraud")
 colorbar()
@@ -344,6 +358,7 @@ axis("equal"),  title("Solution at t=0.5");
 ```
 
 ```{code-cell}
+mx = max([max(U(t)) for t in linspace(0, 2, 21)])
 fig, ax = subplots()
 obj = ax.pcolormesh(X.T, Y.T, U(0).T, vmin=0, vmax=2, cmap="Blues", shading="gouraud")
 time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
@@ -353,7 +368,7 @@ ax.set_title("Advection-diffusion in 2d")
 def snapshot(t):
     global obj
     obj.remove()
-    obj = ax.pcolormesh(X.T, Y.T, U(t).T, vmin=0, vmax=2, cmap="Blues", shading="gouraud")
+    obj = ax.pcolormesh(X.T, Y.T, U(t).T, vmin=0, vmax=mx, cmap="Blues", shading="gouraud")
     time_text.set_text(f"t = {t:.2f}")
 
 anim = animation.FuncAnimation(fig, snapshot, frames=linspace(0, 2, 81))

@@ -134,16 +134,18 @@ du_dx = @(x, y) pi * y .* cos(pi * x .* y - y);
 du_dy = @(x, y) (pi * x - 1) .* cos(pi * x .* y - y);
 ```
 
-We will use an equispaced grid and second-order finite differences as implemented by `diffmat2`. First, we have a look at a plots of the exact partial derivatives.
+We will use an equispaced grid and second-order finite differences as implemented by `diffmat2`. 
 
 ```{code-cell}
 m = 80;  [x, Dx] = diffmat2(m, [0, 2]);
-n = 60;  [y, Dy] = diffmat2(n, [1, 4]);
+n = 70;  [y, Dy] = diffmat2(n, [1, 3]);
 [mtx, X, Y] = tensorgrid(x, y);
 U = mtx(u);
 dU_dX = mtx(du_dx);
 dU_dY = mtx(du_dy);
 ```
+
+First, we have a look at a plots of the exact partial derivatives.
 
 ```{code-cell}
 clf,  subplot(1, 2, 1)
@@ -161,15 +163,17 @@ Now we compare the exact partial derivatives with their finite-difference approx
 ```{code-cell}
 err = dU_dX - Dx * U;
 subplot(1, 2, 1)
+M = max(abs(err(:)));
 pcolor(X', Y', err')
-colorbar,  clim([-.4, .4])
+colorbar,  clim([-M, M])
 axis equal,  shading interp
 title('error in ∂u/∂x')
 
 err = dU_dY - U * Dy';
 subplot(1,2,2)
+M = max(abs(err(:)));
 pcolor(X', Y', err')
-colorbar,  clim([-.1, .1])
+colorbar,  clim([-M, M])
 axis equal,  shading interp
 colormap(redsblues)
 title('error in ∂u/∂y')
@@ -213,6 +217,8 @@ disp(unvec(vec(F)))
 ``````{dropdown} @demo-diffadv-heat
 :open:
 
+We start by defining the discretization of the rectangle.
+
 ```{code-cell}
 m = 60;  n = 40;
 [x, Dx, Dxx] = diffper(m, [-1, 1]);
@@ -220,7 +226,7 @@ m = 60;  n = 40;
 [mtx, X, Y, vec, unvec] = tensorgrid(x, y);
 ```
 
-Note that the initial condition should also be periodic on the domain.
+Here is the initial condition, evaluated on the grid.
 
 ```{code-cell}
 U0 = sin(4*pi*X) .* exp( cos(pi*Y) );
@@ -232,13 +238,13 @@ xlabel('x'),  ylabel('y')
 title('Initial condition')  
 ```
 
-This function computes the time derivative for the unknowns. The actual calculations take place using the matrix shape.
+The following function computes the time derivative for the unknowns which have a vector shape. The actual calculations, however, take place using the matrix shape.
 
 ```{literalinclude} f13_2_heat.m
 :language: matlab
 ```
 
-Since this problem is parabolic, a stiff integrator is appropriate.
+Since this problem is parabolic, a stiff time integrator is appropriate.
 
 ```{code-cell}
 ivp = ode(ODEFcn=@f13_2_heat);
@@ -250,6 +256,13 @@ sol = solutionFcn(ivp, 0, 0.2);
 U = @(t) unvec(sol(t));
 ```
 
+We can use the function `U` defined above to get the solution at any time. Its output is a matrix of values on the grid. 
+
+```{tip}
+:class: dropdown
+To plot the solution at any time, we use the same color scale as with the initial condition, so that the pictures are more easily compared.
+```
+
 ```{code-cell}
 :tags: hide-input
 surf(X', Y', U(0.05)')
@@ -259,12 +272,7 @@ xlabel('x'),  ylabel('y')
 title('Solution at t = 0.05') 
 ```
 
-Here is an animation of the solution.
-
-```{tip}
-:class: dropdown
-Here `clims` are set so that colors remain at fixed values throughout the animation.
-```
+An animation shows convergence toward a uniform value.
 
 ```{code-cell}
 :tags: hide-input, remove-output
@@ -301,15 +309,20 @@ m = 50;  n = 40;
 u_init = @(x, y) (1+y) .* (1-x).^4 .* (1+x).^2 .* (1-y.^4);
 ```
 
-There are really two grids now: the full grid and the subset grid of interior points. Since the IVP unknowns are on the interior grid, that is the one we need to change shapes on. We also need the functions `extend` and `chop` to add and remove boundary values.
+We define functions `extend` and `chop` to deal with the Dirichlet boundary conditions. 
+
+```{code-cell}
+chop = @(U) U(2:m, 2:n);
+z = zeros(1, n-1);
+extend = @(W) [ zeros(m+1, 1) [z; W; z] zeros(m+1, 1)];
+```
+
+Now we define the `pack` and `unpack` functions, using another call to @function-tensorgrid to get reshaping functions for the interior points. 
 
 ```{code-cell}
 [~, ~, ~, vec, unvec] = tensorgrid(x(2:m), y(2:n));
-chop = @(U) U(2:m, 2:n);
-z = zeros(1, n-1);
-extend = @(U) [ zeros(m+1, 1) [z; U; z] zeros(m+1, 1)];
 pack = @(U) vec(chop(U));
-unpack = @(u) extend(unvec(u));
+unpack = @(w) extend(unvec(w));
 ```
 
 Now we can define and solve the IVP using a stiff solver.
@@ -327,13 +340,13 @@ ivp.Solver = "stiff";
 sol = solutionFcn(ivp, 0, 2);
 ```
 
-When we evaluate the solution at a particular value of $t$, we get a vector of the interior grid values. The same `unpack` function above converts this to a complete matrix of grid values.
+When we evaluate the solution at a particular value of $t$, we get a vector of the interior grid values. The `unpack` converts this to a complete matrix of grid values.
 
 ```{code-cell}
 U = @(t) unpack(sol(t));
 
 clf,  pcolor(X', Y', U(0.5)')
-clim([0, 2]), shading interp
+clim([0, 2.3]), shading interp
 axis equal,  colormap(sky), colorbar
 title('Advection-diffusion at t = 0.5')  
 xlabel('x'),  ylabel('y')  

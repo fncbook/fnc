@@ -78,7 +78,12 @@ f = (x, y) -> cos(π * x * y - y)
 F = [f(x, y) for x in x, y in y]
 ```
 
-We can make a nice plot of the function by first choosing a much finer grid. However, the contour and surface plotting functions expect the *transpose* of mtx($f$).
+We can make a nice plot of the function by first choosing a much finer grid. 
+
+```{warning}
+The contour and surface plotting functions of the Julia `Plots` package expect the *transpose* of our convention for mtx($f$). If you forget to do this, you will either get an error or a plot with the axes swapped.
+```
+
 ```{tip}
 :class: dropdown
 To emphasize departures from a zero level, use a colormap such as `redsblues`, and use `clims` to set balanced color differences.
@@ -127,47 +132,58 @@ We define a function and, for reference, its two exact partial derivatives.
 
 ```{code-cell}
 u = (x, y) -> sin(π * x * y - y);
-∂u_∂x = (x, y) -> π * y * cos(πx * y - y);
+∂u_∂x = (x, y) -> π * y * cos(π * x * y - y);
 ∂u_∂y = (x, y) -> (π * x - 1) * cos(π * x * y - y);
 ```
 
 We use an equispaced grid and second-order finite differences as implemented by `diffmat2`.
 
 ```{code-cell}
-m = 80;
+m, n = 80, 70;
 x, Dx, _ = FNC.diffmat2(m, [0, 2]);
-n = 60;
 y, Dy, _ = FNC.diffmat2(n, [1, 3]);
-mtx = (f, x, y) -> [f(x, y) for x in x, y in y]
+mtx = (f, x, y) -> [f(x, y) for x in x, y in y];
+```
+
+Here is how the exact first partial derivatives look on the grid.
+
+```{code-cell}
+plot(layout=(1, 2), aspect_ratio=1, xlabel="x", ylabel="y")
+contour!(x, y, mtx(∂u_∂x, x, y)';
+    levels=12, colormap=:viridis, subplot=1, title="∂u/∂x")
+contour!(x, y, mtx(∂u_∂y, x, y)';
+    levels=12, colormap=:viridis, subplot=2, title="∂u/∂y")
+```
+
+Next, we compute the finite-difference approximations of these derivatives on the grid.
+
+```{code-cell}
 U = mtx(u, x, y)
 ∂xU = Dx * U
 ∂yU = U * Dy';
 ```
 
-Now we compare the exact $\frac{\partial u}{\partial y}$ with its finite-difference approximation.
+Finally, we compare the finite-difference approximations to the exact values, using a colormap that is symmetric about zero.
+
 
 ```{code-cell}
-M = maximum(abs, ∂yU)    # find the range of the result
-plot(layout=(1, 2), 
-    aspect_ratio=1,   clims=(-M, M), 
+err_x = mtx(∂u_∂x, x, y) - ∂xU
+err_y = mtx(∂u_∂y, x, y) - ∂yU
+
+plot(layout=(1, 2), aspect_ratio=1, 
     xlabel="x", ylabel="y")
-contour!(x, y, mtx(∂u_∂y, x, y)';
-    levels=15,  subplot=1,
-    color=:redsblues,
-    title="∂u/∂y")
-contour!(x, y, ∂yU';
-    levels=15,  subplot=2,
-    color=:redsblues, 
-    title="approximation")
+M = maximum(abs, err_x)
+contour!(x, y, err_x';
+    levels=15, clims=(-M, M), colormap=:redsblues, fill=true,
+    l=false, subplot=1, title="∂u/∂x error")
+M = maximum(abs, err_y)
+contour!(x, y, err_y';
+    levels=15, clims=(-M, M), colormap=:redsblues, fill=true,
+    l=false, subplot=2, title="∂u/∂y error")
 ```
 
-To the eye there is little difference to be seen, though the results have no more than a few correct digits at these discretization sizes:
+Not surprisingly, the errors are largest where the derivatives themselves are largest.
 
-```{code-cell}
-exact = mtx(∂u_∂y, x, y)
-# Relative difference in Frobenius norm:
-norm(exact - ∂yU) / norm(exact)
-```
 ``````
 
 ### 13.2 @section-twodim-diffadv
@@ -195,18 +211,18 @@ unvec(v)
 ``````{dropdown} @demo-diffadv-heat
 :open:
 
+We start by defining the discretization of the rectangle.
+
 ```{code-cell}
 m, n = (60, 25)
 x, Dx, Dxx = FNC.diffper(m, [-1, 1])
 y, Dy, Dyy = FNC.diffper(n, [-1, 1])
-mtx = f -> [f(x, y) for x in x, y in y]
-unvec = z -> reshape(z, m, n);
+mtx, X, Y, unvec, _ = FNC.tensorgrid(x, y);
 ```
 
-Note that the initial condition should also be periodic on the domain.
+Here is the initial condition, evaluated on the grid.
 
 ```{code-cell}
-using Plots
 u_init = (x, y) -> sin(4 * π * x) * exp(cos(π * y))
 U₀ = mtx(u_init)
 M = maximum(abs, U₀)
@@ -217,7 +233,7 @@ contour(x, y, U₀';
     title="Initial condition" )
 ```
 
-This function computes the time derivative for the unknowns. The actual calculations take place using the matrix shape.
+The following function computes the time derivative for the unknowns, which have a vector shape. The actual calculations, however, take place using the matrix shape.
 
 ```{code-cell}
 function du_dt(u, α, t)
@@ -229,7 +245,7 @@ function du_dt(u, α, t)
 end;
 ```
 
-Since this problem is parabolic, a stiff integrator is appropriate.
+Since this problem is parabolic, a stiff time integrator is appropriate.
 
 ```{code-cell}
 using OrdinaryDiffEq
@@ -237,10 +253,11 @@ IVP = ODEProblem(du_dt, vec(U₀), (0, 0.2), 0.1)
 sol = solve(IVP, Rodas4P());
 ```
 
-Here is an animation of the solution.
+We can use the function `sol` defined above to get the solution at any time. Its output is the matrix $\mathbf{U}$ of values on the grid. An animation shows convergence of the solution toward a uniform value.
+
 ```{tip}
 :class: dropdown
-Here `clims` are set so that colors remain at fixed values throughout the animation.
+To plot the solution at any time, we use the same color scale as with the initial condition, so that the pictures are more easily compared.
 ```
 
 ```{code-cell}
@@ -275,12 +292,18 @@ mtx, X, Y, _ = FNC.tensorgrid(x, y)
 U₀ = mtx( (x, y) -> (1 + y) * (1 - x)^4 * (1 + x)^2 * (1 - y^4) );
 ```
 
-There are really two grids now: the full grid and the subset grid of interior points. Since the IVP unknowns are on the interior grid, that is the one we need to change shapes on. We also need the functions `extend` and `chop` to add and remove boundary values.
+We define functions `extend` and `chop` to deal with the Dirichlet boundary conditions. 
 
 ```{code-cell}
 chop = U -> U[2:m, 2:n]
-extend = U -> [zeros(m+1) [zeros(1, n-1); U; zeros(1, n-1)] zeros(m+1)]
-unvec = u -> reshape(u, m-1, n-1)
+z = zeros(1, n-1)
+extend = W -> [zeros(m+1) [z; W; z] zeros(m+1)]
+```
+
+Next, we define the `pack` and `unpack` functions, using another call to @function-tensorgrid to get reshaping functions for the interior points. 
+
+```{code-cell}
+_, _, _, unvec, _ = FNC.tensorgrid(x[2:m], y[2:n])
 pack = U -> vec(chop(U))
 unpack = w -> extend(unvec(w))
 ```
@@ -316,14 +339,14 @@ anim = @animate for t in 0:0.02:2
     U = unpack(w(t))
     surface(x, y, U';
         layout=(1, 2),  size=(640, 320),
-        xlabel=L"x",  ylabel=L"y",  zaxis=((0, 2), L"u(x,y)"),
-        color=:blues,  alpha=0.66,  clims=(0, 2), colorbar=:none,
+        xlabel=L"x",  ylabel=L"y",  zaxis=((0, 2.3), L"u(x,y)"),
+        color=:blues,  alpha=0.66,  clims=(0, 2.3), colorbar=:none,
         title="Advection-diffusion",  dpi=150)
     contour!(x, y, U'; 
         levels=24, 
         aspect_ratio=1,  subplot=2, 
         xlabel=L"x",  ylabel=L"y",
-        color=:blues,  clims=(0, 2),  colorbar=:none,
+        color=:blues,  clims=(0, 2.3),  colorbar=:none,
         title=@sprintf("t = %.2f", t))
 end
 mp4(anim, "figures/2d-advdiff.mp4");
@@ -355,7 +378,7 @@ chop = U -> U[2:m, 2:n]
 extend = U -> [zeros(m+1) [zeros(1, n-1); U; zeros(1, n-1)] zeros(m+1)]
 pack = (U, V) -> [vec(chop(U)); vec(V)]
 N = (m-1) * (n-1)    # number of interior unknowns
-unpack = w -> ( extend(unvec_u(w[1:N])), unvec_v(w[N+1:end]) )
+unpack = w -> ( extend(unvec_u(w[1:N])), unvec_v(w[N+1:end]) );
 ```
 
 We can now define and solve the IVP. Since this problem is hyperbolic, not parabolic, a nonstiff integrator is faster than a stiff one.
@@ -370,7 +393,7 @@ end
 
 IVP = ODEProblem(dw_dt, pack(U₀, V₀), (0, 4.0), 1)
 sol = solve(IVP, Tsit5())
-U = t -> unpack(sol(t))[1]
+U = t -> unpack(sol(t))[1];
 ```
 
 ```{code-cell}

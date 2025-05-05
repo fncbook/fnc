@@ -12,9 +12,22 @@ We next describe how to apply the method of lines to PDEs of the form
   u_t = \phi(u,u_x,u_y,u_{xx},u_{xy},u_{yy}), \quad (x,y)\in [a,b]\times [c,d].
 :::
 
-The PDE may be of either parabolic or hyperbolic type, with the primary difference being potential restrictions on the time step size. To keep descriptions and implementations relatively simple, we will consider only periodic conditions, or Dirichlet boundary conditions imposed on all the edges of the rectangular domain.
+The PDE may be of either parabolic or hyperbolic type, with the primary difference being potential restrictions on the time step size. To keep descriptions and implementations relatively simple, we will consider only periodic conditions or Dirichlet boundary conditions.
 
-As described in {numref}`section-twodim-tensorprod`, the rectangular domain is discretized by a grid $(x_i,y_j)$ for $i=0,\ldots,m$ and $j=0,\ldots,n$. The solution is semidiscretized as a matrix $\mathbf{U}(t)$ such that $U_{ij}\approx u(x_i,y_j,t)$. Terms involving the spatial derivatives of $u$ are readily replaced by discrete counterparts: $\mathbf{D}_x\mathbf{U}$ for $u_x$, $\mathbf{U}\mathbf{D}_{y}^T$ for $u_y$, and so on.
+As described in {numref}`section-twodim-tensorprod`, the rectangular domain is discretized by a grid $(x_i,y_j)$ for $i=0,\ldots,m$ and $j=0,\ldots,n$. The solution is semidiscretized as a matrix $\mathbf{U}(t)$ such that $U_{ij}$ is the approximate solution at $(x_i,y_j,t)$. Terms involving the spatial derivatives of $u$ are readily replaced by discrete counterparts, as shown in @tab-2s-derivatives.
+
+```{table} Discrete replacements for 2D derivatives
+:label: tab-2d-derivatives
+:align: center
+
+| term | discrete replacement |
+|:---|:---|
+| $u$ | $\mathbf{U}$ |
+| $u_x$ | $\mathbf{D}_x\mathbf{U}$ |
+| $u_y$ | $\mathbf{U}\mathbf{D}_y^T$ |
+| $u_{xx}$ | $\mathbf{D}_{xx}\mathbf{U}$ |
+| $u_{yy}$ | $\mathbf{U}\mathbf{D}_{yy}^T$ |
+```
 
 ## Matrix and vector shapes
 
@@ -48,7 +61,46 @@ Let $\mathbf{z}$ be a vector of length $m n$. Define the **unvec** function as t
 :::
 ::::
 
-The function `vec` is built-in to Julia, whereas unvec is a particular use case of the `reshape` function.
+Suppose $\mathbf{U} = \operatorname{mtx}(u)$ is the matrix of unknowns. @tab-vec-unvec shows how to convert between $\mathbf{U}$ and $\mathbf{u} = \operatorname{vec}(\mathbf{U})$.
+
+``````{table} vec and unvec operations
+:label: tab-vec-unvec
+:align: center
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+
+|vec | unvec |
+|:---|:---|
+| `u = vec(U)` | `U = reshape(u, m+1, n+1)` |
+
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+
+|vec | unvec |
+|:---|:---|
+| `u = U(:)` | `U = reshape(u, m+1, n+1)` |
+
+````
+
+````{tab-item} Python
+:sync: python
+
+|vec | unvec |
+|:---|:---|
+| `u = U.T.flatten()` | `U = np.reshape(u, (n+1, m+1)).T` |
+
+
+```{dropdown} About the code
+The incorporation of transposes is because NumPy uses row-major order, while MATLAB and Julia use column-major order. If performance were a concern, we would reverse our convention to avoid the transposes. We also use `flatten` rather than `ravel` to ensure making copies rather than views of the data and avoiding subtle bugs.
+```
+
+`````
+
+``````
 
 (demo-diffadv-vec)=
 ::::{prf:example} Reshaping for grid functions
@@ -72,7 +124,33 @@ The function `vec` is built-in to Julia, whereas unvec is a particular use case 
 :::
 ````
 `````
+
 ::::
+
+In order to modularize our codes, we use @function-tensorgrid to define functions and values related to working with tensor-product grids. Its final output is to be discussed and used in @section-twodim-laplace.
+
+(function-tensorgrid)=
+``````{prf:algorithm} tensorgrid
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-tensorgrid-julia
+:::
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-tensorgrid-matlab
+:::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #function-tensorgrid-python
+:::
+````
+`````
+``````
 
 ## Periodic end conditions
 
@@ -83,7 +161,14 @@ If the boundary conditions are periodic, then the unknowns in the method of line
 
 (demo-diffadv-heat)=
 ::::{prf:example} Heat equation in 2D
-We will solve a 2D heat equation, $u_t = 0.1(u_{xx} + u_{yy})$, on the square $[-1,1]\times[-1,1]$, with periodic behavior in both directions.
+We will solve a 2D heat equation, $u_t = 0.1(u_{xx} + u_{yy})$, on the square $[-1,1]\times[-1,1]$, with periodic behavior in both directions. The initial condition is 
+
+```{math}
+:label: twodim-heatinit
+u(x,y,0) = \sin(4\pi x) \exp[\cos(\pi y)], 
+```
+
+which is also periodic on the rectangle.
 
 `````{tab-set}
 ````{tab-item} Julia
@@ -111,13 +196,13 @@ We will solve a 2D heat equation, $u_t = 0.1(u_{xx} + u_{yy})$, on the square $[
 ```{index} boundary conditions; numerical implementation of
 ```
 
-In {numref}`section-diffusion-boundaries` we coped with boundary conditions by removing the boundary values from the vector of unknowns being solved in the semidiscretized ODE. Each evaluation of the time derivative required us to extend the values to include the boundaries before applying differentiation matrices in space. We proceed similarly here, except that we have changes in the shape as well as boundary conditions to consider.
+In {numref}`section-diffusion-boundaries` we coped with boundary conditions by removing the boundary values from the vector of unknowns being solved in the semidiscretized ODE. Each evaluation of the time derivative required us to extend the values to include the boundaries before applying differentiation matrices in space, then remove them from the time derivative vector. 
 
-Suppose we are given a matrix $\mathbf{U}$ that represents the solution on an $(m+1)\times (n+1)$ grid, including boundary values. Then we define
+We proceed similarly here, defining `chop` and `extend` functions that convert between the full grid and the inner grid of interior values. Mathematically speaking, the chopping operation is defined by
 
 :::{math}
-:label: tpdeletion
-\operatorname{pack}(\mathbf{U}) = \operatorname{vec}(\mathbf{E}_x \mathbf{U} \mathbf{E}_y^T),
+:label: tensorprod-chop
+\operatorname{chop}(\mathbf{U}) = \mathbf{E}_x \mathbf{U} \mathbf{E}_y^T,
 :::
 
 where
@@ -131,19 +216,44 @@ $$
 \end{bmatrix}
 $$
 
-is $(m-1)\times (m+1)$, and $\mathbf{E}_y$ is analogous but of size $(n-1)\times (n+1)$. The left multiplication in {eq}`tpdeletion` deletes the first and last row of $\mathbf{U}$ and the right multiplication deletes its first and last column. All that remains, then, are the interior values, which are converted into a vector by the vec operator.
+is $(m-1)\times (m+1)$, and $\mathbf{E}_y$ is analogous but of size $(n-1)\times (n+1)$. The left multiplication in @tensorprod-chop deletes the first and last row of $\mathbf{U}$, and the right multiplication deletes its first and last column.
 
-For the inverse transformation, let us be given a vector $\mathbf{w}$ of interior solution values. Then we define
+The extension operator is a bit more awkward to write out. It stars with appending rows and columns of zeros around the border of a matrix $\mathbf{W}$ of interior values:
+
+```{math}
+:label: tensorprod-extend
+\tilde{\mathbf{U}} = \mathbf{E}_x^T \mathbf{W} \mathbf{E}_y
+```
+
+We can then modify the new zero values to reflect the boundary conditions, via
+
+```{math}
+:label: tensorprod-extend2
+\mathbf{U} = \operatorname{extend}(\mathbf{W}) = \tilde{\mathbf{U}} + \mathbf{G},
+```
+
+Finally, we combine extending and chopping with the need to reshape between vectors and matrices. The function
 
 $$
-\operatorname{unpack}(\mathbf{w}) = \mathbf{E}_x^T \cdot \operatorname{unvec}(\mathbf{w}) \cdot \mathbf{E}_y.
+\operatorname{unpack}(\mathbf{w}) = \operatorname{extend}(\operatorname{unvec}(\mathbf{w}))
 $$
 
-This operator reshapes the vector to a grid of interior values, then appends one extra zero row and column on each side of the grid.[^jacobian]
+converts a vector of unknowns (i.e., interior values) into a matrix of grid values, including the boundary values. The function
 
-[^jacobian]: You might wonder why we use linear algebra to define the extension and deletion of boundary values rather than directly accessing row and column indices in the grid function. The linear algebra approach allows `DifferentialEquations` to compute the Jacobian matrix of the implicit IVP solver quickly using *automatic differentiation* tools, greatly speeding up the solution process. Since the matrices in our expressions are sparse, multiplications by them do not affect running time perceptibly.
+$$
+\operatorname{pack}(\mathbf{U}) = \operatorname{vec}(\operatorname{chop}(\mathbf{U}))
+$$
 
-Now suppose the ODE unknowns for the interior solution values are in the vector $\mathbf{w}(t)$. When we form $\operatorname{unpack}(\mathbf{w})$, we reinterpret the values on the tensor-product grid and then extend these values to zero around the boundary. If the boundary values are given as $g(x,y)$, then $g$ has to be evaluated at the boundary nodes of the grid and inserted into the grid function matrix. Then the grid values are used to compute partial derivatives in $x$ and $y$, the discrete form of the PDE is evaluated, and we pack the result as the computation of $\mathbf{w}'$.
+reverses the transformation, which is needed after the time derivative is computed on the full grid.
+
+
+```{warning}
+The `vec` and `unvec` reshaping operations in this context take place on the _interior_ grid, not the full grid. 
+```
+
+```{index} ! pack, Julia; pack operation, ! unpack, Julia; unpack operation
+```
+<!-- [^jacobian]: You might wonder why we use linear algebra to define the extension and deletion of boundary values rather than directly accessing row and column indices in the grid function. The algebraic expressions make it easier to express the Jacobian of a nonlinear The linear algebra approach allows `DifferentialEquations` to compute the Jacobian matrix of the implicit IVP solver quickly using *automatic differentiation* tools, greatly speeding up the solution process. Since the matrices in our expressions are sparse, multiplications by them do not affect running time perceptibly. -->
 
 ```{index} advection-diffusion equation
 ```
@@ -151,7 +261,7 @@ Now suppose the ODE unknowns for the interior solution values are in the vector 
 (demo-diffadv-advdiff)=
 ::::{prf:example} Advection-diffusion equation in 2D
 
-We will solve an advection-diffusion problem, $u_t + u_x = 1 + \epsilon(u_{xx} + u_{yy})$, where $u=0$ on the boundary of the square $[-1,1]^2$. The outline of our approach is based on {numref}`Function {number} <function-parabolic>` for parabolic PDEs in one space dimension.
+We solve an advection-diffusion problem, $u_t + u_x = 1 + \epsilon(u_{xx} + u_{yy})$ on the square $[-1,1]^2$, with $u=0$ on the boundary. The outline of our approach is based on {numref}`Function {number} <function-parabolic>` for parabolic PDEs in one space dimension.
 
 `````{tab-set}
 ````{tab-item} Julia
@@ -172,6 +282,7 @@ We will solve an advection-diffusion problem, $u_t + u_x = 1 + \epsilon(u_{xx} +
 :::
 ````
 `````
+
 ::::
 
 
