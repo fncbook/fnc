@@ -388,17 +388,22 @@ U0 = mtx(u_init);
 V0 = zeros(size(U0));
 ```
 
-Note that because $u$ is known on the boundary, while $v$ is unknown over the full grid, there are two different sizes of vec/unvec operations. We also need to define functions to pack grid unknowns into a vector and to unpack them. When the unknowns for $u$ are packed, the boundary values are chopped off, and these are restored when unpacking.
+We need to define chopping and extension for the $u$ component. This looks the same as in @demo-diffadv-advdiff.
+
+```{code-cell}
+chop = @(U) U(2:m, 2:n);
+z = zeros(1, n-1);
+extend = @(U) [ zeros(m+1, 1) [z; U; z] zeros(m+1, 1)];
+```
+
+The `vec` and `unvec` operations are different for the interior-only grid and the full grid.
 
 ```{code-cell}
 [~, ~, ~, vec_v, unvec_v] = tensorgrid(x, y);
 [~, ~, ~, vec_u, unvec_u] = tensorgrid(x(2:m), y(2:n));
-
-chop = @(U) U(2:m, 2:n);
-z = zeros(1, n-1);
-extend = @(U) [ zeros(m+1, 1) [z; U; z] zeros(m+1, 1)];
-pack = @(U, V) [vec_u(chop(U)); vec_v(V)];
 N = (m-1) * (n-1);
+
+pack = @(U, V) [vec_u(chop(U)); vec_v(V)];
 unpack = @(u) f13_2_wave_unpack(u, N, unvec_u, unvec_v, extend);
 ```
 
@@ -406,8 +411,7 @@ unpack = @(u) f13_2_wave_unpack(u, N, unvec_u, unvec_v, extend);
 :language: matlab
 ```
 
-
-We can now define and solve the IVP. Since this problem is hyperbolic, not parabolic, a nonstiff integrator is faster than a stiff one.
+We can now define and solve the IVP. Since this problem is hyperbolic, a nonstiff integrator is faster than a stiff one.
 
 ```{literalinclude} f13_2_wave.m
 :language: matlab

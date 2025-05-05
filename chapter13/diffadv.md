@@ -285,6 +285,9 @@ We solve an advection-diffusion problem, $u_t + u_x = 1 + \epsilon(u_{xx} + u_{y
 
 ::::
 
+### Wave equation
+
+```{index} ! wave, Julia; wave operation
 
 ```{index} wave equation
 ```
@@ -299,12 +302,14 @@ The wave equation introduces a little additional complexity. First, we write the
 \end{split}
 :::
 
-Now the grid unknowns are a pair of matrices $\mathbf{U}(t)$ and $\mathbf{V}(t)$. Typical boundary conditions would prescribe $u$ on all of the boundary and let $v$ be unspecified. Since the boundary values of $\mathbf{U}$ are prescribed, those values are omitted from the semidiscretization IVP, while all of $\mathbf{V}$ is included. All of these unknowns need to be packed into and unpacked from a single vector $\mathbf{w}(t)$ for the IVP solver.
+Typical boundary conditions are to prescribe $u$ on the boundary and let $v$ be unspecified.
+
+Now the grid functions are a pair of matrices $\mathbf{U}(t)$ and $\mathbf{V}(t)$. We need to chop $\mathbf{U}$ to an interior $\mathbf{W}$ and extend back using boundary data. Note that the IVP unknowns $\mathbf{W}$ and $\mathbf{V}$ have different sizes, so there are two separate reshaping operations involved. All of these details are handled within the `pack` and `unpack` functions we create.
 
 (demo-diffadv-wave)=
 ::::{prf:example} Wave equation in 2D
 
-We solve the wave equation with $c=1$ on the square $[-2,2]\times[-2,2]$, where $u=0$ on the boundary. 
+We solve the wave equation with $c=1$ on the square $[-2,2]\times[-2,2]$, with $u=0$ on the boundary.
 
 `````{tab-set}
 ````{tab-item} Julia

@@ -394,12 +394,9 @@ U0 = mtx(lambda x, y: (x + 0.2) * exp(-12 * (x**2 + y**2)))
 V0 = zeros(U0.shape)
 ```
 
-Note that because $u$ is known on the boundary, while $v$ is unknown over the full grid, there are two different sizes of vec/unvec operations. We also need to define functions to pack grid unknowns into a vector and to unpack them. When the unknowns for $u$ are packed, the boundary values are chopped off, and these are restored when unpacking.
+We need to define chopping and extension for the $u$ component. This looks the same as in @demo-diffadv-advdiff.
 
 ```{code-cell}
-_, _, _, vec_v, unvec_v, _ = FNC.tensorgrid(x, y)
-_, _, _, vec_u, unvec_u, _ = FNC.tensorgrid(x[1:-1], y[1:-1])
-
 def extend(U):
     UU = zeros((m+1, n+1))
     UU[1:-1, 1:-1] = U
@@ -407,18 +404,23 @@ def extend(U):
 
 def chop(U):
     return U[1:-1, 1:-1]
+```
+
+```{code-cell}
+_, _, _, vec_v, unvec_v, _ = FNC.tensorgrid(x, y)
+_, _, _, vec_u, unvec_u, _ = FNC.tensorgrid(x[1:-1], y[1:-1])
+N = (m-1) * (n-1)    # number of interior points
 
 def pack(U, V): 
     return hstack([vec_u(chop(U)), vec_v(V)])
 
-N = (m-1) * (n-1)
 def unpack(w):
     U = extend(unvec_u(w[:N]))
     V = unvec_v(w[N:])
     return U, V
 ```
 
-We can now define and solve the IVP. Since this problem is hyperbolic, not parabolic, a nonstiff integrator is faster than a stiff one.
+We can now define and solve the IVP. Since this problem is hyperbolic, a nonstiff integrator is faster than a stiff one.
 
 ```{code-cell}
 def dw_dt(t, w):
