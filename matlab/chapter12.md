@@ -26,21 +26,18 @@ FNC_init;
 
 ```{code-cell}
 [x, Dx, Dxx] = diffper(300, [-4, 4]);
-f = @(t, u, c) -c * (Dx*u);
-ivp = ode(ODEFcn=f);
-ivp.Parameters = 2;
-ivp.InitialTime = 0;
-ivp.RelativeTolerance = 1e-5;
+c = 2;
+f = @(t, u) -c * (Dx*u);
+t = linspace(0, 3, 201);
 ```
 
 The following initial condition isn't mathematically periodic, but the deviation is less than machine precision. We specify RK4 as the solver.  
 
 ```{code-cell}
 u_init = 1 + exp(-3*x.^2);
-ivp.InitialValue = u_init;
 t = linspace(0, 3, 201);
-sol = solve(ivp, t);
-U = sol.Solution;
+[t, U] = ode45(f, t, u_init);
+U = U';   % each column is one time step
 ```
 
 ```{code-cell}
@@ -99,20 +96,15 @@ Next we define the ODE resulting from the method of lines.
 
 ```{code-cell}
 odefun = @(t, rho) -Q0prime(rho) .* (Dx*rho) + ep * (Dxx*rho);
-ivp = ode(ODEFcn=odefun);
-ivp.InitialTime = 0;
-ivp.RelativeTolerance = 1e-5;
 ```
 
 Our first initial condition has moderate density with a small bump. Because of the diffusion present, we use a stiff solver for the IVP.
 
 ```{code-cell}
 rho_init = 400 + 10 * exp(-20*(x-3).^2);
-ivp.InitialValue = rho_init;
-
 t = linspace(0, 1, 101);
-sol = solve(ivp, t);
-RHO = sol.Solution;
+[t, RHO] = ode15s(odefun, t, rho_init);
+RHO = RHO';   % each column is one time step
 ```
 
 ```{code-cell}
@@ -156,10 +148,9 @@ Now we use an initial condition with a larger bump. Note that the scale on the $
 
 ```{code-cell}
 rho_init = 400 + 80 * exp( -16*(x - 3).^2 );
-ivp.InitialValue = rho_init;
 t = linspace(0, 0.5, 81);
-sol = solve(ivp, t);
-RHO = sol.Solution;
+[t, RHO] = ode15s(odefun, t, rho_init);
+RHO = RHO';   % each column is one time step
 ```
 
 ```{code-cell}
@@ -208,14 +199,11 @@ In this case the density bump travels backward along the road. It also steepens 
 
 ```{code-cell}
 [x, Dx] = diffper(400, [0, 1]);
-c = 2;  
-ivp = ode(ODEFcn = @(t, u) -c * (Dx*u));
-ivp.RelativeTolerance = 1e-5;
-ivp.InitialTime = 0;
+c = 2;
+odefun = @(t, u) -c * (Dx*u);
 u_init = exp( -80*(x - 0.5).^2 );
-ivp.InitialValue = u_init;
-
-[u, sol] = solutionFcn(ivp, 0, 2);
+sol = ode45(odefun, [0, 2], u_init);
+u = @(t) deval(sol, t);
 ```
 
 ```{code-cell}
@@ -235,11 +223,11 @@ If we cut $h$ by a factor of 2 (i.e., double $m$), then the CFL condition sugges
 num_steps_400 = length(sol.Time) - 1
 
 [x, Dx] = diffper(800, [0, 1]);
-ivp.ODEFcn = @(t, u) -c * (Dx*u);
-ivp.InitialValue = exp( -80*(x - 0.5).^2 );
-[u, sol] = solutionFcn(ivp, 0, 2);
+odefun = @(t, u) -c * (Dx*u);
+u_init = exp( -80*(x - 0.5).^2 );
+sol = ode45(odefun, [0, 2], u_init);
 
-num_steps_800 = length(sol.Time) - 1
+num_steps_800 = length(sol.x) - 1
 ratio = num_steps_800 / num_steps_400
 ```
 ``````
@@ -254,21 +242,17 @@ We'll pattern a solution after {numref}`Function {number} <function-parabolic>`.
 ```{code-cell}
 m = 100;  c = -1;
 [x, Dx] = diffmat2(m, [0, 1]);
-chop = @(u) u(1:m);  
+chop = @(u) u(1:m);
 extend = @(v) [v; 0];
-odefun = @(t, v) -c * chop( Dx * extend(v) );
-ivp = ode(ODEFcn = odefun);
-ivp.RelativeTolerance = 1e-5;
-ivp.InitialTime = 0;
+odefun = @(t, v) chop( -c * Dx * extend(v) );
 ```
 
 Now we solve for an initial condition that has a single hump.
 
 ```{code-cell}
 u_init = exp( -80*(x - 0.5).^2 );
-ivp.InitialValue = chop(u_init);
-sol = solutionFcn(ivp, 0, 1);
-u = @(t) [sol(t); zeros(1, length(t))];    % extend to zero at right
+sol = ode45(odefun, [0, 1], chop(u_init));
+u = @(t) [deval(sol, t); zeros(1, length(t))];    % extend to zero at right
 ```
 
 ```{code-cell}
@@ -307,10 +291,9 @@ If instead of $u(1,t)=0$ we were to try to impose the downwind condition $u(0,t)
 ```{code-cell}
 chop = @(u) u(2:m+1);  
 extend = @(v) [0; v];
-ivp.ODEFcn = @(t, v) -c * chop( Dx * extend(v) );
-ivp.InitialValue = chop(u_init);
-sol = solutionFcn(ivp, 0, 1);
-u = @(t) [zeros(1, length(t)); sol(t)];
+odefun = @(t, v) chop( -c * Dx * extend(v) );
+sol = ode45(odefun, [0, 1], chop(u_init));
+u = @(t) [zeros(1, length(t)); deval(sol, t)];    % extend to zero at left
 ```
 
 ```{code-cell}
@@ -475,19 +458,15 @@ w_init = [ chop(u_init); z_init ];
 Because the wave equation is hyperbolic, we can use a nonstiff explicit solver.
 
 ```{code-cell}
-ivp = ode(ODEFcn=@f124wave);
-ivp.InitialTime = 0;
-ivp.InitialValue = w_init;
-ivp.RelativeTolerance = 1e-4;
-ivp.Parameters = {c, m, Dx, chop, extend};
+odefun = @(t, w) f124wave(t, w, {c, m, Dx, chop, extend});
 t = linspace(0, 2, 101);
-sol = solve(ivp, t);
+[t, W] = ode45(odefun, t, w_init);
+W = W';
 ```
 
 We plot the results for the original $u$ variable only. Its interior values are at indices `1:m-1` of the composite $\mathbf{w}$ variable.
 
 ```{code-cell}
-W = sol.Solution;
 n = length(t)-1;
 U = [ zeros(1, n+1); W(1:m-1, :); zeros(1, n+1) ];
 
@@ -546,10 +525,11 @@ extend = @(v) [0; v; 0];
 
 u_init = exp( -100*(x + 0.5).^2 );
 z_init = -u_init;
-ivp.InitialValue = [ chop(u_init); z_init ]; 
-ivp.Parameters = {c, m, Dx, chop, extend};
-sol = solve(ivp, t);
-W = sol.Solution;
+w_init = [ chop(u_init); z_init ];  
+odefun = @(t, w) f124wave(t, w, {c, m, Dx, chop, extend});
+t = linspace(0, 2, 101);
+[t, W] = ode45(odefun, t, w_init);
+W = W';
 U = [ zeros(1, n+1); W(1:m-1, :); zeros(1, n+1) ];
 ```
 
