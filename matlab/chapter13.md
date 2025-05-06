@@ -247,13 +247,10 @@ The following function computes the time derivative for the unknowns which have 
 Since this problem is parabolic, a stiff time integrator is appropriate.
 
 ```{code-cell}
-ivp = ode(ODEFcn=@f13_2_heat);
-ivp.InitialTime = 0;
-ivp.InitialValue = vec(U0);
-ivp.Parameters = {0.1, Dxx, Dyy, vec, unvec};
-ivp.Solver = "stiff";
+odefun = @(t, u) f13_2_heat(t, u, {0.1, Dxx, Dyy, vec, unvec});
+sol = ode15s(odefun, [0, 0.2], vec(U0));
 sol = solutionFcn(ivp, 0, 0.2);
-U = @(t) unvec(sol(t));
+U = @(t) unvec(deval(sol, t));
 ```
 
 We can use the function `U` defined above to get the solution at any time. Its output is a matrix of values on the grid. 
@@ -332,18 +329,15 @@ Now we can define and solve the IVP using a stiff solver.
 ```
 
 ```{code-cell}
-ivp = ode(ODEFcn=@f13_2_advdiff);
-ivp.InitialTime = 0;
-ivp.InitialValue = pack(mtx(u_init));
-ivp.Parameters = {0.05, Dx, Dxx, Dy, Dyy, pack, unpack};
-ivp.Solver = "stiff";
-sol = solutionFcn(ivp, 0, 2);
+odefun = @(t, u) f13_2_advdiff(t, u, {0.05, Dx, Dxx, Dy, Dyy, pack, unpack});
+u_init = pack(mtx(u_init));
+sol = ode15s(odefun, [0, 2], u_init);
 ```
 
 When we evaluate the solution at a particular value of $t$, we get a vector of the interior grid values. The `unpack` converts this to a complete matrix of grid values.
 
 ```{code-cell}
-U = @(t) unpack(sol(t));
+U = @(t) unpack(deval(sol, t));
 
 clf,  pcolor(X', Y', U(0.5)')
 clim([0, 2.3]), shading interp
@@ -418,12 +412,11 @@ We can now define and solve the IVP. Since this problem is hyperbolic, a nonstif
 ```
 
 ```{code-cell}
-ivp = ode(ODEFcn=@f13_2_wave);
+odefun = @(t, u) f13_2_wave(t, u, {Dxx, Dyy, pack, unpack});
 ivp.InitialTime = 0;
-ivp.InitialValue = pack(U0, V0);
-ivp.Parameters = {Dxx, Dyy, pack, unpack};
-ivp.Solver = "nonstiff";
-sol = solutionFcn(ivp, 0, 4);
+z_init = pack(U0, V0);
+ivp_sol = ode45(odefun, [0, 4], z_init);
+sol = @(t) deval(ivp_sol, t);
 ```
 
 ```{code-cell}

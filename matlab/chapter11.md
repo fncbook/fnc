@@ -329,12 +329,9 @@ Now, however, we apply a standard solver called `ode45` to the initial-value pro
 
 ```{code-cell}
 tfinal = 0.05;
-f = @(t, u, p) Dxx * u;
-ivp = ode(ODEFcn=f);
-ivp.InitialTime = 0;
-ivp.InitialValue = u0;
-ivp.Solver = 'ode45';
-[u, sol] = solutionFcn(ivp, 0, tfinal);
+f = @(t, u) Dxx * u;
+sol = ode45(f, [0, tfinal], u0);
+u = @(t) deval(sol, t);
 
 clf
 for t = linspace(0, 0.05, 5)
@@ -350,15 +347,15 @@ title("Heat equation by ode45")
 The solution appears to be correct. But the number of time steps that were selected automatically is surprisingly large, considering how smoothly the solution changes.
 
 ```{code-cell}
-time_steps_ode45 = length(sol.Time) - 1
+time_steps_ode45 = length(sol.x) - 1
 ```
 
 Now we apply a different solver called `ode15s`.
 
 ```{code-cell}
-ivp.Solver = "ode15s";
-[u, sol] = solutionFcn(ivp, 0, tfinal);
-time_steps_ode15s = length(sol.Time) - 1
+sol = ode15s(f, [0, tfinal], u0);
+u = @(t) deval(sol, t);
+time_steps_ode15s = length(sol.x) - 1
 ```
 
 The number of steps selected was reduced by a factor of 15!
@@ -443,12 +440,8 @@ f = @(t, u, p) [ s*(u(2)- u(1) * u(2) + u(1) - q * u(1)^2);...
     (-u(2) - u(1) * u(2) + u(3)) / s; ...
     w*(u(1) - u(3)) ];
 
-ivp = ode(ODEFcn=f);
-ivp.InitialTime = 0;
-ivp.InitialValue = [1; 2; 3];
-ivp.Solver = "ode15s";
-sol = solve(ivp, 0, 500); 
-clf,  semilogy(sol.Time, sol.Solution)
+sol = ode15s(f, [0, 500], [1; 2; 3]);
+clf,  semilogy(sol.x, sol.y)
 xlabel("t"),  ylabel("u(t)")
 title("Oregonator solution")
 ```
@@ -461,8 +454,8 @@ J = @(u) [ -s*(u(2)+1-2*q*u(1)), s*(1-u(1)), 0; ...
     -u(2)/s, (-1-u(1))/s, 1/s; ...
     w,0,-w];
 
-t = sol.Time;
-u = sol.Solution;
+t = sol.x;
+u = sol.y;
 lambda = zeros(length(t) - 1, 3);
 for j = 1:length(t)-1
     lambda(j, :) = eig(J(u(:, j)));
@@ -481,14 +474,18 @@ You can see that there is one eigenvalue that ranges over a wide portion of the 
 The `ode15s` solver is good for stiff problems and needs few time steps to solve the Oregonator from {numref}`Demo {number} <demo-stiffness-oregon>`.
 
 ```{code-cell}
-tic,  sol = solve(ivp, 0, 26); 
+tic,  sol = ode15s(f, [0, 26], [1; 2; 3]); 
 time_ode15s = toc
-num_steps_ode15s = length(sol.Time) - 1
+num_steps_ode15s = length(sol.x) - 1
 ```
 
 But if we apply {numref}`Function {number} <function-rk23>` to the problem, the step size will be made small enough to cope with the large negative eigenvalue. 
 
 ```{code-cell}
+ivp.ODEFcn = @(t, u, p) f(t, u);
+ivp.InitialTime = 0;
+ivp.InitialValue = [1; 2; 3];
+ivp.Parameters = [];
 tic, [t, u] = rk23(ivp, 0, 26, 1e-5);
 time_rk23 = toc
 num_steps_rk23 = length(t) - 1
