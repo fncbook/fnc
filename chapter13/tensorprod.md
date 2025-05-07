@@ -251,14 +251,20 @@ Keep in mind that the differentiation matrix $\mathbf{D}_x$ is based on the disc
 ``````
 
 ``````{exercise}
+:label: problem-tensorprod-derivatives
+
 ⌨ For each function in @problem-tensorprod-surfcontourplot, make side-by-side surface plots of $f_x$ and $f_y$ using Chebyshev spectral differentiation.
 ``````
 
 ``````{exercise}
+:label: problem-tensorprod-mixed
+
 ⌨ For each function in @problem-tensorprod-surfcontourplot, make a contour plot of the mixed derivative $f_{xy}$ using Chebyshev spectral differentiation.
 ``````
 
 ``````{exercise}
+:label: problem-tensorprod-polar
+
 ⌨ In each case, make a plot of the function given in polar or Cartesian coordinates over the unit disk.
 
 **(a)** $f(r,\theta) = r^2 - 2r\cos \theta$
@@ -269,11 +275,15 @@ Keep in mind that the differentiation matrix $\mathbf{D}_x$ is based on the disc
 ``````
 
 ``````{exercise}
+:label: problem-tensorprod-sphere
+
 ⌨ Plot $f(x,y,z)=x y - x z - y z$ as a function on the unit sphere.
 %(Use `aspect_ratio=1` in a plot call to get equal aspect ratios for the axes.)
 ``````
 
 ``````{exercise}
+:label: problem-tensorprod-cylinder
+
 ⌨ Plot $f(x,y,z)=x y - x z - y z$ as a function on the cylinder $r=1$ for $-1\le z \le 2$.
 %(Use `aspect_ratio=1` in a plot call to get equal aspect ratios for the axes.)
 ``````
