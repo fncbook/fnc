@@ -338,7 +338,7 @@ In contrast to the equispaced case, $|\Phi|$ decreases exponentially with $n$ al
 (demo-stability-rungefix-julia)=
 ``````{dropdown} @demo-stability-rungefix
 :open:
-Here again is the function from {numref}`Demo {number} <demo-stability-runge>` that provoked the Runge phenomenon when using equispaced nodes.
+Here again is the function from @demo-stability-runge that provoked the Runge phenomenon when using equispaced nodes.
 
 ```{code-cell} 
 f(x) = 1 / (x^2 + 16);
@@ -733,5 +733,5 @@ plot!(n, 30n.^(-4);
     title="Comparison of integration methods")
 ```
 
-As in {numref}`Demo {number} <demo-improper-intinf>`, the double exponential method is more accurate than direct integration by a few orders of magnitude. Equivalently, the same accuracy can be reached with many fewer nodes.
+As in @demo-improper-intinf, the double exponential method is more accurate than direct integration by a few orders of magnitude. Equivalently, the same accuracy can be reached with many fewer nodes.
 ``````

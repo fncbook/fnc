@@ -297,7 +297,7 @@ Q̂' * Q̂ - I
 (demo-qr-stable-julia)=
 ``````{dropdown} @demo-qr-stable
 :open:
-We'll repeat the experiment of {numref}`Demo {number} <demo-normaleqns-instab>`, which exposed instability in the normal equations. 
+We'll repeat the experiment of @demo-normaleqns-instab, which exposed instability in the normal equations. 
 
 ```{code-cell}
 t = range(0, 3, 400)

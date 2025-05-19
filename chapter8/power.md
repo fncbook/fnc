@@ -33,7 +33,7 @@ Given that matrix-vector multiplication is fast for sparse matrices, let's see w
 `````
 ::::
 
-There was a little cheating in {numref}`Demo %s <demo-power-one>` to make the story come out neatly (specifically, the normalization step after creating a random matrix). But it illustrates an important general fact that we investigate now.
+There was a little cheating in @demo-power-one to make the story come out neatly (specifically, the normalization step after creating a random matrix). But it illustrates an important general fact that we investigate now.
 
 ## Dominant eigenvalue
 
@@ -46,7 +46,7 @@ Analysis of matrix powers is most straightforward in the diagonalizable case. Le
 |\lambda_1| > |\lambda_2| \ge |\lambda_3| \ge \cdots \ge |\lambda_n|.
 :::
 
-Given {eq}`evorder` we say that $\lambda_1$ is the {term}`dominant eigenvalue`. This was the case with $\lambda_1=1$ for $\mathbf{A}$ in {numref}`Demo %s <demo-power-one>`.
+Given {eq}`evorder` we say that $\lambda_1$ is the {term}`dominant eigenvalue`. This was the case with $\lambda_1=1$ for $\mathbf{A}$ in @demo-power-one.
 
 Now let $\mathbf{x}$ be an $n$-vector, let $k$ be a positive integer, and refer to {eq}`evdpower`: 
 
@@ -82,7 +82,7 @@ That is, $\mathbf{A}^k\mathbf{x}$ eventually is close to close to a scalar multi
 [^zeromeasure]: If $\mathbf{x}$ is chosen randomly, the probability that $z_1=0$ is mathematically zero.
 
 :::{attention}
-For algorithmic purposes, it is important to interpret $\mathbf{A}^k\mathbf{x}$ as $\mathbf{A}\bigl( \cdots\bigl( \mathbf{A} (\mathbf{A}\mathbf{x})\bigl) \cdots\bigl)$, i.e., as repeated applications of $\mathbf{A}$ to a vector. Doing so allows us to fully exploit sparsity of $\mathbf{A}$, something which is not preserved by taking a matrix power $\mathbf{A}^k$ explicitly before the multiplication with $\mathbf{x}$ (see {numref}`Demo {number} <demo-structure-fill>`).
+For algorithmic purposes, it is important to interpret $\mathbf{A}^k\mathbf{x}$ as $\mathbf{A}\bigl( \cdots\bigl( \mathbf{A} (\mathbf{A}\mathbf{x})\bigl) \cdots\bigl)$, i.e., as repeated applications of $\mathbf{A}$ to a vector. Doing so allows us to fully exploit sparsity of $\mathbf{A}$, something which is not preserved by taking a matrix power $\mathbf{A}^k$ explicitly before the multiplication with $\mathbf{x}$ (see @demo-structure-fill).
 :::
 ## Power iteration
 

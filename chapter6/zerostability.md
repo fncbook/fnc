@@ -42,7 +42,7 @@ is third-order accurate. Let's apply it to the ridiculously simple IVP $u'=u$, $
 `````
 ::::
 
-The source of the exponential growth in {numref}`Demo %s <demo-zs-LIAF>` is not hard to identify. Recall that we can rewrite {eq}`LIAF` as $\rho(\mathcal{Z})u_{i-1}=h \sigma(\mathcal{Z})u_{i-1}$ using the forward shift operator $\mathcal{Z}$:
+The source of the exponential growth in @demo-zs-LIAF is not hard to identify. Recall that we can rewrite {eq}`LIAF` as $\rho(\mathcal{Z})u_{i-1}=h \sigma(\mathcal{Z})u_{i-1}$ using the forward shift operator $\mathcal{Z}$:
 
 ```{math}
 :label: LIAFshift
@@ -56,7 +56,7 @@ The source of the exponential growth in {numref}`Demo %s <demo-zs-LIAF>` is not 
   (\mathcal{Z}^2 + 4\mathcal{Z} - 5) u_{i-1} = 0.
 ```
 
-The graph in {numref}`Demo %s <demo-zs-LIAF>` strongly suggests that for small $h$, $|u_i|\approx c \alpha^i$ for some $\alpha>1$ as $m$ gets large. So we are motivated to try defining 
+The graph in @demo-zs-LIAF strongly suggests that for small $h$, $|u_i|\approx c \alpha^i$ for some $\alpha>1$ as $m$ gets large. So we are motivated to try defining 
 
 ```{math}
 :label: zsansatz
@@ -74,7 +74,7 @@ Hence {eq}`LIAFshiftzero` becomes
   z^2 + 4z - 5 = 0.
 ```
 
-Therefore, as $h\to 0$, the two roots of $z^2+4z+5$ will each correspond to an approximate solution in the form {eq}`zsansatz` of the LIAF method. These roots are $z=1$ and $z=-5$, and the growth curve at the end of {numref}`Demo %s <demo-zs-LIAF>` is approximately $|(-5)^i|$. 
+Therefore, as $h\to 0$, the two roots of $z^2+4z+5$ will each correspond to an approximate solution in the form {eq}`zsansatz` of the LIAF method. These roots are $z=1$ and $z=-5$, and the growth curve at the end of @demo-zs-LIAF is approximately $|(-5)^i|$. 
 
 ## Zero-stability
 

@@ -278,7 +278,7 @@ Q_hat' * Q_hat - eye(n)
 (demo-qr-stable-matlab)=
 ``````{dropdown} @demo-qr-stable
 :open:
-We'll repeat the experiment of {numref}`Demo {number} <demo-normaleqns-instab>`, which exposed instability in the normal equations. 
+We'll repeat the experiment of @demo-normaleqns-instab, which exposed instability in the normal equations. 
 
 ```{code-cell}
 t = linspace(0, 3, 400)';

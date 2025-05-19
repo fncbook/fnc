@@ -222,7 +222,7 @@ On the graph, it's the curve starting at $w(0)=0.8$ that comes closest to the re
 (demo-shooting-mems-julia)=
 ``````{dropdown} @demo-shooting-mems
 :open:
-We revisit {numref}`Demo {number} <demo-shooting-naive>` but let {numref}`Function {number} <function-shoot>` do the heavy lifting.
+We revisit @demo-shooting-naive>` but let {numref}`Function {number} <function-shoot do the heavy lifting.
 
 ```{code-cell}
 λ = 0.6

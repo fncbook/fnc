@@ -26,7 +26,7 @@ It should be clear from {eq}`pwlinear` that on each interval $[t_k,t_{k+1}]$, $p
 
 ## Hat functions
 
-Rather than basing an implementation on {eq}`pwlinear`, we return to the idea used in {numref}`Demo %s <demo-interp-vander>` of choosing the interpolant from among the linear combinations of a preselected finite set of functions. In the present context we use, for $k=0,\ldots,n$,
+Rather than basing an implementation on {eq}`pwlinear`, we return to the idea used in @demo-interp-vander of choosing the interpolant from among the linear combinations of a preselected finite set of functions. In the present context we use, for $k=0,\ldots,n$,
 
 ```{math}
 :label: hatfun

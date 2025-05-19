@@ -102,7 +102,7 @@ The natural seed vector for $\mathcal{K}_m$ in this case is the vector $\mathbf{
 
 ## The Arnoldi iteration
 
-The breakdown of convergence in {numref}`Demo %s <demo-subspace-unstable>` is due to a critical numerical defect in our approach: the columns of the Krylov matrix {eq}`krylovmatrix` increasingly become parallel to the dominant eigenvector, as {eq}`poweriterconverge` predicts, and therefore to one another. As we saw in {numref}`section-leastsq-qr`, near-parallel vectors create the potential for numerical cancellation. This manifests as a large condition number for $\mathbf{K}_m$ as $m$ grows, eventually creating excessive error when solving the least-squares system.
+The breakdown of convergence in @demo-subspace-unstable is due to a critical numerical defect in our approach: the columns of the Krylov matrix {eq}`krylovmatrix` increasingly become parallel to the dominant eigenvector, as {eq}`poweriterconverge` predicts, and therefore to one another. As we saw in {numref}`section-leastsq-qr`, near-parallel vectors create the potential for numerical cancellation. This manifests as a large condition number for $\mathbf{K}_m$ as $m$ grows, eventually creating excessive error when solving the least-squares system.
 
 The polar opposite of an ill-conditioned basis for $\mathcal{K}_m$ is an orthonormal one. Suppose we had a thin QR factorization of $\mathbf{K}_m$:
 
@@ -260,7 +260,7 @@ In the next section, we revisit the idea of approximately solving $\mathbf{A}\ma
 ``````{exercise}
 ⌨ For each matrix, make a table of the 2-norm condition numbers $\kappa(\mathbf{K}_m)$ for $m=1,\ldots,10$. Use a vector of all ones as the Krylov seed.
 
-**(a)** Matrix from {numref}`Demo %s <demo-subspace-unstable>`
+**(a)** Matrix from @demo-subspace-unstable
 
 **(b)** $\begin{bmatrix}
 -2 & 1 & & &  \\
@@ -333,5 +333,5 @@ where $\tilde{\mathbf{H}}_m$ is the upper Hessenberg matrix resulting from delet
 
 **(b)** ✍ Show the reasoning above leads to the approximate eigenvalue problem $\tilde{\mathbf{H}}_m\mathbf{z} \approx \lambda\mathbf{z}$. (Hint: Start with $\mathbf{A}\mathbf{x} \approx \lambda\mathbf{x}$, and let $\mathbf{x}=\mathbf{Q}_m\mathbf{z}$ before applying part (a).)  
 
-**(c)** ⌨ Apply {numref}`Function {number} <function-arnoldi>` to the matrix of {numref}`Demo %s <demo-subspace-unstable>` using a random seed vector. Compute eigenvalues of $\tilde{\mathbf{H}}_m$ for $m=1,\ldots,40$, keeping track in each case of the error between the largest of those values (in magnitude) and the largest eigenvalue of $\mathbf{A}$. Make a log-linear graph of the error as a function of $m$.  
+**(c)** ⌨ Apply {numref}`Function {number} <function-arnoldi>` to the matrix of @demo-subspace-unstable using a random seed vector. Compute eigenvalues of $\tilde{\mathbf{H}}_m$ for $m=1,\ldots,40$, keeping track in each case of the error between the largest of those values (in magnitude) and the largest eigenvalue of $\mathbf{A}$. Make a log-linear graph of the error as a function of $m$.  
 ``````

@@ -475,7 +475,7 @@ We took fewer steps by a factor of 1000! Even accounting for the extra stage per
 (demo-adapt-sing-python)=
 ``````{dropdown} @demo-adapt-sing
 :open:
-In {numref}`Demo %s <demo-basics-sing>` we saw an IVP that appears to blow up in a finite amount of time. Because the solution increases so rapidly as it approaches the blowup, adaptive stepping is required even to get close.
+In @demo-basics-sing we saw an IVP that appears to blow up in a finite amount of time. Because the solution increases so rapidly as it approaches the blowup, adaptive stepping is required even to get close.
 
 ```{code-cell}
 du_dt = lambda t, u: (t + u)**2

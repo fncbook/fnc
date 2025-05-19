@@ -143,7 +143,7 @@ Surely there must be functions that are more intuitively representative of those
 (demo-interpolation-pwise-julia)=
 ``````{dropdown} @demo-interpolation-pwise
 :open:
-Let us recall the data from {numref}`Demo %s <demo-interpolation-global>`.
+Let us recall the data from @demo-interpolation-global.
 
 ```{code-cell}
 n = 12
@@ -174,7 +174,7 @@ plot!(x -> p(x), -1, 1, label="piecewise cubic")
 (demo-interp-cond-julia)=
 ``````{dropdown} @demo-interp-cond
 :open:
-In {numref}`Demo %s <demo-interpolation-global>` and {numref}`Demo %s <demo-interpolation-pwise>` we saw a big difference between polynomial interpolation and piecewise polynomial interpolation of some arbitrarily chosen data. The same effects can be seen clearly in the cardinal functions, which are closely tied to the condition numbers.
+In @demo-interpolation-pwise we saw a big difference between polynomial interpolation and piecewise polynomial interpolation of some arbitrarily chosen data. The same effects can be seen clearly in the cardinal functions, which are closely tied to the condition numbers.
 
 ```{code-cell}
 n = 18
@@ -755,7 +755,7 @@ Both the picture and the numerical results suggest that more nodes should be use
 (demo-adapt-usage-julia)=
 ``````{dropdown} @demo-adapt-usage
 :open:
-We'll integrate the function from {numref}`Demo %s <demo-adapt-motive>`.
+We'll integrate the function from @demo-adapt-motive.
 
 ```{code-cell}
 f = x -> (x + 1)^2 * cos((2x + 1) / (x - 4.3));

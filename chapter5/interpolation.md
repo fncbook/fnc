@@ -56,7 +56,7 @@ Polynomials are the obvious first candidate to serve as interpolating functions.
 Interpolation by a polynomial at equally spaced nodes is ill-conditioned as the degree of the polynomial grows.
 ```
 
-In Chapter 9 we explore the large oscillations in the last figure of {numref}`Demo %s <demo-interpolation-global>`; it turns out that one must abandon either equally spaced nodes or $n\to\infty$ for polynomials. In the rest of this chapter we will keep $n$ fairly small and let the nodes be unrestricted.
+In Chapter 9 we explore the large oscillations in the last figure of @demo-interpolation-global; it turns out that one must abandon either equally spaced nodes or $n\to\infty$ for polynomials. In the rest of this chapter we will keep $n$ fairly small and let the nodes be unrestricted.
 
 ## Piecewise polynomials
 

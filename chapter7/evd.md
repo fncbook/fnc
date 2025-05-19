@@ -324,7 +324,7 @@ If the eigenvalues have different complex magnitudes, then as $k\to\infty$ the e
 ```{index} ! Francis QR iteration
 ```
 
-The process demonstrated in {numref}`Demo {number} <demo-evd-francisqr>` is known as the *Francis QR iteration*, and it can be formulated as an $O(n^3)$ algorithm for finding the EVD. It forms the basis of most practical eigenvalue computations, at least until the matrix size approaches $10^4$ or so.
+The process demonstrated in @demo-evd-francisqr is known as the *Francis QR iteration*, and it can be formulated as an $O(n^3)$ algorithm for finding the EVD. It forms the basis of most practical eigenvalue computations, at least until the matrix size approaches $10^4$ or so.
 
 ## Exercises
 
@@ -416,7 +416,7 @@ displacements of point masses placed along a string satisfy a linear system $\ma
 ``````
 
 ``````{exercise}
-⌨ {numref}`Demo {number} <demo-evd-francisqr>` suggests that the result of the Francis QR iteration as $k\to\infty$ sorts the eigenvalues on the diagonal according to a particular ordering. Following the code there as a model, create a random matrix with eigenvalues equal to $-9.6,-8.6,\ldots,10.4$, perform the iteration 200 times, and check whether the sorting criterion holds in your experiment as well.
+⌨ @demo-evd-francisqr suggests that the result of the Francis QR iteration as $k\to\infty$ sorts the eigenvalues on the diagonal according to a particular ordering. Following the code there as a model, create a random matrix with eigenvalues equal to $-9.6,-8.6,\ldots,10.4$, perform the iteration 200 times, and check whether the sorting criterion holds in your experiment as well.
 ``````
 
 ``````{exercise}

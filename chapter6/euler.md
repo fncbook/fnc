@@ -156,7 +156,7 @@ By our definitions, the local error in stepping from $t_i$ to $t_{i+1}$ is $h\ta
 
 [^altLTE]: Another point of view is that we can of course make local errors smaller by chopping $h$ in half, but then we have to take twice as many steps. The important quantity, then, is local error *per unit step length*, which is how $\tau$ is defined.
 
-However, global error is not as simple as a sum of local errors. As explained in {numref}`Theorem {number} <theorem-depIC>` and illustrated in {numref}`Demo %s <demo-basics-cond>`, each step causes a perturbation of the solution that can grow as $t$ advances. Thus, we have to account for the flow evolution of individual step truncation errors as well as their mere accumulation. That is the subject of the following theorem.
+However, global error is not as simple as a sum of local errors. As explained in {numref}`Theorem {number} <theorem-depIC>` and illustrated in @demo-basics-cond, each step causes a perturbation of the solution that can grow as $t$ advances. Thus, we have to account for the flow evolution of individual step truncation errors as well as their mere accumulation. That is the subject of the following theorem.
 
 (theorem-euler-onestepGTE)=
 ````{prf:theorem}

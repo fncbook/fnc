@@ -309,7 +309,7 @@ print(f"norm of (Q_hat^T Q_hat - I) is {norm(Q_hat.T @ Q_hat - eye(4)):.3e}")
 (demo-qr-stable-python)=
 ``````{dropdown} @demo-qr-stable
 :open:
-We'll repeat the experiment of {numref}`Demo {number} <demo-normaleqns-instab>`, which exposed instability in the normal equations. 
+We'll repeat the experiment of @demo-normaleqns-instab, which exposed instability in the normal equations. 
 
 ```{code-cell}
 t = linspace(0, 3, 400)

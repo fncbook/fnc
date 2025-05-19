@@ -8,7 +8,7 @@ numbering:
 ```{index} numerical integration
 ```
 
-To this point, we have used only equally spaced nodes to compute integrals. Yet there are problems in which non-uniformly distributed nodes would clearly be more appropriate, as demonstrated in {numref}`Demo %s <demo-adapt-motive>`.
+To this point, we have used only equally spaced nodes to compute integrals. Yet there are problems in which non-uniformly distributed nodes would clearly be more appropriate, as demonstrated in @demo-adapt-motive.
 
 (demo-adapt-motive)=
 ::::{prf:example} Motivation for adaptive integration
@@ -33,7 +33,7 @@ To this point, we have used only equally spaced nodes to compute integrals. Yet 
 `````
 ::::
 
-We would like an algorithm that automatically detects and reacts to a situation like that in {numref}`Demo %s <demo-adapt-motive>`, a trait known as **adaptivity**.
+We would like an algorithm that automatically detects and reacts to a situation like that in @demo-adapt-motive, a trait known as **adaptivity**.
 
 ## Error estimation
 
@@ -99,7 +99,7 @@ and independently compute estimates to each of the half-length integrals. Each o
 
 ## Implementation
 
-It is typical to use just the minimal formula $S_f(4)$ and its error estimate $E$ to make decisions about adaptivity. A computation of $S_f(4)$ requires three trapezoid estimates $T_f(1)$, $T_f(2)$, and $T_f(4)$. As observed in {eq}`nc-doubling` and {numref}`Demo %s <demo-int-extrap>`, the five integrand evaluations in $T_f(4)$ are sufficient to compute all of these values.
+It is typical to use just the minimal formula $S_f(4)$ and its error estimate $E$ to make decisions about adaptivity. A computation of $S_f(4)$ requires three trapezoid estimates $T_f(1)$, $T_f(2)$, and $T_f(4)$. As observed in {eq}`nc-doubling` and @demo-int-extrap, the five integrand evaluations in $T_f(4)$ are sufficient to compute all of these values.
 
 {numref}`Function {number} <function-intadapt>` shows an implementation. It uses five function values to compute three trapezoid estimates with $n=1$, $n=2$, and $n=4$, applying the updating formula {eq}`nc-doubling` twice. It goes on to find the two Simpson approximations and to estimate the error by {eq}`adapterr`.
 
@@ -165,7 +165,7 @@ Although adaptivity and the error estimation that goes with it can be very power
 % must be kept as #1
 ``````{exercise}
 :label: problem-adaptquadtests
-⌨ For each integral below, use {numref}`Function {number} <function-intadapt>` with error tolerance $10^{-2},10^{-3},\ldots,10^{-12}$. Make a table of errors and the number of integrand evaluation nodes used, and use a convergence plot as in {numref}`Demo %s <demo-adapt-usage>` to compare to fourth-order accuracy. (These integrals were taken from {cite}`baileyComparisonThree2005`.)
+⌨ For each integral below, use {numref}`Function {number} <function-intadapt>` with error tolerance $10^{-2},10^{-3},\ldots,10^{-12}$. Make a table of errors and the number of integrand evaluation nodes used, and use a convergence plot as in @demo-adapt-usage to compare to fourth-order accuracy. (These integrals were taken from {cite}`baileyComparisonThree2005`.)
 
 **(a)** $\displaystyle \int_0^1 x\log(1+x)\, dx = \frac{1}{4}$
 

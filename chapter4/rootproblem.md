@@ -144,7 +144,7 @@ If $f(r)=f'(r)=\cdots=f^{(m-1)}(r)=0$, but $f^{(m)}(r)\neq 0$, then we say $f$ h
 
 Another useful characterization of multiplicity $m$ is that $f(x)=(x-r)^m q(x)$ for a differentiable $q$ with $q(r)\neq 0$. 
 
-When $r$ is a nonsimple root, the condition number {eq}`rootcondnum` is effectively infinite.[^infcond] However, even if $r$ is simple, we should expect difficulty in rootfinding if the condition number is very large. This occurs when $|f'(r)|$ is very small, which means that the quotient $q$ satisfies $q(r)\approx 0$ and another root of $f$ is very close to $r$. We made the same observation about polynomial roots all the way back in {numref}`Demo {number} <demo-stability-roots>`. 
+When $r$ is a nonsimple root, the condition number {eq}`rootcondnum` is effectively infinite.[^infcond] However, even if $r$ is simple, we should expect difficulty in rootfinding if the condition number is very large. This occurs when $|f'(r)|$ is very small, which means that the quotient $q$ satisfies $q(r)\approx 0$ and another root of $f$ is very close to $r$. We made the same observation about polynomial roots all the way back in @demo-stability-roots. 
 
 [^infcond]: Based on our definitions, this means that the relative change to the root when $f$ is changed by a perturbation of size $\epsilon$ is not $O(\epsilon)$ as $\epsilon\to 0$.
 
@@ -154,7 +154,7 @@ When $r$ is a nonsimple root, the condition number {eq}`rootcondnum` is effectiv
   
 **(a)** Rewrite the equation into the standard form for rootfinding, $f(x) = 0$. Make a plot of $f$ over the given interval and determine how many roots lie in the interval. 
   
-**(b)**  Use `nlsolve` to find each root, as shown in {numref}`Demo {number} <demo-rootproblem-bessel>`.
+**(b)**  Use `nlsolve` to find each root, as shown in @demo-rootproblem-bessel.
 
 **(c)** Compute the condition number of each root found in part (b). 
 

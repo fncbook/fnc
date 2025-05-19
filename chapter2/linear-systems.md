@@ -73,7 +73,7 @@ In fact, when we encounter an expression such as $\mathbf{x} = \mathbf{A}^{-1} \
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
-As demonstrated in {numref}`Demo %s <demo-interp-vander>`, the backslash (the `\` symbol, not to be confused with the slash `/` used in web addresses) invokes a linear system solution. 
+As demonstrated in @demo-interp-vander, the backslash (the `\` symbol, not to be confused with the slash `/` used in web addresses) invokes a linear system solution. 
 ```` 
 
 ````{tab-item} MATLAB
@@ -266,7 +266,7 @@ The implementation of backward substitution is much like forward substitution an
 `````
 ::::
 
-The example in {numref}`Demo %s <demo-systems-triangular>` is our first clue that linear system problems may have large condition numbers, making inaccurate solutions inevitable in floating-point arithmetic. We will learn how to spot such problems in {numref}`section-linsys-condition-number`. Before reaching that point, however, we need to discuss how to solve general linear systems, not just triangular ones.
+The example in @demo-systems-triangular is our first clue that linear system problems may have large condition numbers, making inaccurate solutions inevitable in floating-point arithmetic. We will learn how to spot such problems in {numref}`section-linsys-condition-number`. Before reaching that point, however, we need to discuss how to solve general linear systems, not just triangular ones.
 
 ## Exercises
 
@@ -351,7 +351,7 @@ where $g=-9.8$ m/s$^2$ is the acceleration due to gravity, and we define $q_0=0$
 
 ``````{exercise}
 :label: problem-ls-triangillcond
-⌨ {numref}`Demo %s <demo-systems-triangular>` showed solutions of $\mathbf{A}\mathbf{x}=\mathbf{b}$, where
+⌨ @demo-systems-triangular showed solutions of $\mathbf{A}\mathbf{x}=\mathbf{b}$, where
 
 ```{math}
 \mathbf{A} = \begin{bmatrix} 1 & -1 & 0 & \alpha-\beta & \beta \\ 0 & 1 & -1 &

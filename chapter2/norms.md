@@ -239,7 +239,7 @@ A mnemonic for these is that the $\infty$ symbol extends horizontally while the 
 `````
 ::::
 
-The geometric interpretation of the matrix 2-norm shown in {numref}`Demo %s <demo-norms-matrix>`, as the radius of the smallest circle (or sphere or hypersphere in higher dimensions) containing the images of all unit vectors, is not a practical means of computing the norm. Nor is there a simple formula like {eq}`mxinfnorm` or {eq}`mxonenorm` for it. The computation of the matrix 2-norm is discussed further in Chapter 7.
+The geometric interpretation of the matrix 2-norm shown in @demo-norms-matrix, as the radius of the smallest circle (or sphere or hypersphere in higher dimensions) containing the images of all unit vectors, is not a practical means of computing the norm. Nor is there a simple formula like {eq}`mxinfnorm` or {eq}`mxonenorm` for it. The computation of the matrix 2-norm is discussed further in Chapter 7.
 
 ## Exercises
 

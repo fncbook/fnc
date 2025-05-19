@@ -140,7 +140,7 @@ Clearly $0\le \tau_k \le 1$ and $\tau_k$ is non-decreasing as a function of $k$.
 `````
 ::::
 
-Not all data sets can be reduced effectively to a small number of dimensions, but as {numref}`Demo {number} <demo-dimreduce-voting>` illustrates, in some cases reduction reveals information that corresponds to real-world understanding.
+Not all data sets can be reduced effectively to a small number of dimensions, but as @demo-dimreduce-voting illustrates, in some cases reduction reveals information that corresponds to real-world understanding.
 
 ## Exercises
 
@@ -186,5 +186,5 @@ as measured in the 2-norm, where $b>0$.
 ``````
 
 ``````{exercise}
-⌨ Following {numref}`Demo %s <demo-dimreduce-hello>` as a guide, load the "mandrill" test image and convert it to a matrix of floating-point pixel grayscale intensities. Using the SVD, display as images the best approximations of rank 5, 10, 15, and 20. 
+⌨ Following @demo-dimreduce-hello as a guide, load the "mandrill" test image and convert it to a matrix of floating-point pixel grayscale intensities. Using the SVD, display as images the best approximations of rank 5, 10, 15, and 20. 
 ``````

@@ -864,7 +864,7 @@ The next step is `U[2, :] = A[2, :]`, which is also OK. But then we are supposed
 (demo-pivoting-fix-julia)=
 ``````{dropdown} @demo-pivoting-fix
 :open:
-Here is the trouble-making matrix from {numref}`Demo {number} <demo-pivoting-fail>`.
+Here is the trouble-making matrix from @demo-pivoting-fail.
 
 ```{code-cell}
 A₁ = [2 0 4 3 ; -2 0 2 -13; 1 15 2 -4.5 ; -4 5 -7 -10]
@@ -936,7 +936,7 @@ L
 (demo-pivoting-permute-julia)=
 ``````{dropdown} @demo-pivoting-permute
 :open:
-Here again is the matrix from {numref}`Demo {number} <demo-pivoting-fix>`.
+Here again is the matrix from @demo-pivoting-fix.
 
 ```{code-cell}
 A = [2 0 4 3 ; -2 0 2 -13; 1 15 2 -4.5 ; -4 5 -7 -10]

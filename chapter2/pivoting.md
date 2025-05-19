@@ -33,7 +33,7 @@ As mentioned in {numref}`section-linsys-lu`, the $\mathbf{A}=\mathbf{L}\mathbf{U
 `````
 ::::
 
-In {numref}`section-linsys-lu` we remarked that LU factorization is equivalent to Gaussian elimination with no row swaps. However, those swaps are necessary in situations like those encountered in {numref}`Demo {number} <demo-pivoting-fail>`, in order to avoid division by zero. We will find a modification of the outer product procedure that allows us to do the same thing.
+In {numref}`section-linsys-lu` we remarked that LU factorization is equivalent to Gaussian elimination with no row swaps. However, those swaps are necessary in situations like those encountered in @demo-pivoting-fail, in order to avoid division by zero. We will find a modification of the outer product procedure that allows us to do the same thing.
 
 ## Choosing a pivot
 
@@ -81,7 +81,7 @@ A linear system with a singular matrix has either no solution or infinitely many
 
 ## Permutations
 
-Even though the resulting $\mathbf{L}$ in {numref}`Demo {number} <demo-pivoting-fix>` is no longer of unit lower triangular form, it is close. In fact, all that is needed is to reverse the order of its rows. 
+Even though the resulting $\mathbf{L}$ in @demo-pivoting-fix is no longer of unit lower triangular form, it is close. In fact, all that is needed is to reverse the order of its rows. 
 
 (demo-pivoting-permute)=
 ::::{prf:example} Pivoting as row permutation

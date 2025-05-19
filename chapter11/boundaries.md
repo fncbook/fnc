@@ -275,13 +275,13 @@ We solve the Black–Scholes PDE @bspde with initial condition $u(x,0) = \max\{0
 ``````
 
 ``````{exercise}
-Consider {numref}`Demo %s <demo-boundaries-bratu>`, combining diffusion with a nonlinear source term.
+Consider @demo-boundaries-bratu, combining diffusion with a nonlinear source term.
 
 **(a)** ✍ Suppose we ignore the diffusion. Use separation of variables (or computer algebra) to solve the IVP $u_t=u^2$, $u(0) = A>0$. What happens as $t\to 1/A$ from below? 
 
 **(b)** ⌨ Try to continue the solution in the demo to $t=0.5$ (you may get a warning from the IVP solver). Plot the solution at $t=0.15$, $t=0.2$, and $t=0.25$. 
 
-**(c)** ⌨ Let the initial condition be $u(x,0) = C x^4(1-x)^2$; the demo and part (b) above use $C=400$. To the nearest 10, find a critical value $C_0$ such that the solution approaches zero asymptotically if $C < C_0$, and infinity otherwise. (Use the solution at $t=1$ to determine the critical value.)
+**(c)** ⌨ Let the initial condition be $u(x,0) = C x^4(1-x)^2$; the demo and part (b) above use $C=400$. To the nearest 10, find a critical value $C_0$ such that the solution approaches zero asymptotically if $C < C_0$, and infinity otherwise. (Use the solution at $t=5$ to determine the critical value.)
 ``````
 
 ```{index} Allen–Cahn equation
@@ -328,7 +328,7 @@ $$
 u(a,t) = \alpha,\; u(b,t)=\beta.
 $$
 
-Your function should accept numbers $\alpha$ and $\beta$ as input arguments in place of $g_1$ and $g_2$. Test your function on the problem in {numref}`Demo {number} <demo-boundaries-heat>`.
+Your function should accept numbers $\alpha$ and $\beta$ as input arguments in place of $g_1$ and $g_2$. Test your function on the problem in @demo-boundaries-heat.
 ``````
 
 ``````{exercise}

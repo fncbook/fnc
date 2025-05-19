@@ -464,7 +464,7 @@ We took fewer steps by a factor of almost 1000! Even accounting for the extra st
 (demo-adapt-sing-matlab)=
 ``````{dropdown} @demo-adapt-sing
 :open:
-In {numref}`Demo %s <demo-basics-sing>` we saw an IVP that appears to blow up in a finite amount of time. Because the solution increases so rapidly as it approaches the blowup, adaptive stepping is required even to get close.
+In @demo-basics-sing we saw an IVP that appears to blow up in a finite amount of time. Because the solution increases so rapidly as it approaches the blowup, adaptive stepping is required even to get close.
 
 ```{code-cell}
 ivp = ode;

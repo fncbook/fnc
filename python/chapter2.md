@@ -784,7 +784,7 @@ The next step is `U[1, :] = A[1, :]`, which is also OK. But then we are supposed
 (demo-pivoting-fix-python)=
 ``````{dropdown} @demo-pivoting-fix
 :open:
-Here is the trouble-making matrix from {numref}`Demo {number} <demo-pivoting-fail>`.
+Here is the trouble-making matrix from @demo-pivoting-fail.
 
 ```{code-cell}
 A_1 = array([
@@ -868,7 +868,7 @@ print(L)
 (demo-pivoting-permute-python)=
 ``````{dropdown} @demo-pivoting-permute
 :open:
-Here again is the matrix from {numref}`Demo {number} <demo-pivoting-fix>`.
+Here again is the matrix from @demo-pivoting-fix.
 
 ```{code-cell}
 A = array([

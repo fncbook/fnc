@@ -348,18 +348,18 @@ We solve the wave equation with $c=1$ on the square $[-2,2]\times[-2,2]$, with $
 
 ``````{exercise}
 :label: problem-diffadv-allencahn
-⌨ Following {numref}`Demo %s <demo-diffadv-heat>` as a model, solve the [Allen–Cahn equation](wiki:Allen–Cahn_equation) $u_t=u(1-u^2)+0.001(u_{xx}+u_{yy})$ on the square $[-1,1]^2$ with periodic conditions, taking $u(x,y,0)=\sin(\pi x)\cos(2\pi y)$. Use $m=n=60$ to solve up to $t=4$, and make an animation of the result.
+⌨ Following @demo-diffadv-heat as a model, solve the [Allen–Cahn equation](wiki:Allen–Cahn_equation) $u_t=u(1-u^2)+0.001(u_{xx}+u_{yy})$ on the square $[-1,1]^2$ with periodic conditions, taking $u(x,y,0)=\sin(\pi x)\cos(2\pi y)$. Use $m=n=60$ to solve up to $t=4$, and make an animation of the result.
 ``````
 
 ``````{exercise}
 :label: problem-diffadv-advdiff2d
 
-⌨ Following {numref}`Demo %s <demo-diffadv-advdiff>` as a model, solve $u_t=y u_x-u_y+0.03(u_{xx}+u_{yy})$ on the square $[-1,1]^2$, with $u(x,y,0)=(1-x^2)(1-y^2)$ and homogeneous Dirichlet boundary conditions. Use $m=n=40$ to solve up to $t=2$, and make an animation of the result.
+⌨ Following @demo-diffadv-advdiff as a model, solve $u_t=y u_x-u_y+0.03(u_{xx}+u_{yy})$ on the square $[-1,1]^2$, with $u(x,y,0)=(1-x^2)(1-y^2)$ and homogeneous Dirichlet boundary conditions. Use $m=n=40$ to solve up to $t=2$, and make an animation of the result.
 ``````
 
 ``````{exercise}
 :label: problem-diffadv-wave2d
-⌨ Following {numref}`Demo %s <demo-diffadv-wave>` as a model, solve $u_{tt}=u_{xx}+u_{yy}+\cos(7t)$ on the square $[-1,1]^2$, with $u(x,y,0)=x(1-x^6)(1-y^2)$, $u_t(x,y,0)=0$, subject to homogeneous Dirichlet boundary conditions. Take $m=n=60$ to solve between $t=0$ and $t=12$, and make an animation of the result.
+⌨ Following @demo-diffadv-wave as a model, solve $u_{tt}=u_{xx}+u_{yy}+\cos(7t)$ on the square $[-1,1]^2$, with $u(x,y,0)=x(1-x^6)(1-y^2)$, $u_t(x,y,0)=0$, subject to homogeneous Dirichlet boundary conditions. Take $m=n=60$ to solve between $t=0$ and $t=12$, and make an animation of the result.
 ``````
 
 ``````{exercise}

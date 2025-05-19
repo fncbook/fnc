@@ -52,7 +52,7 @@ x_2 = \frac{-b - \sqrt{b^2-4ac}}{2a}.
 ```{index} subtractive cancellation
 ```
 
-{numref}`Demo %s <demo-stability-quadbad>` suggests that the venerable quadratic formula is an *unstable* means of computing roots in finite precision. The roots themselves were not sensitive to the data or arithmetic—it's the specific computational path we chose that caused the huge growth in errors. 
+@demo-stability-quadbad suggests that the venerable quadratic formula is an *unstable* means of computing roots in finite precision. The roots themselves were not sensitive to the data or arithmetic—it's the specific computational path we chose that caused the huge growth in errors. 
 
 We can confirm this conclusion by finding a different path that avoids subtractive cancellation. A little algebra using {eq}`quadform` confirms the additional formula $x_1x_2=c/a$.  So given one root $r$, we compute the other root using $c/ar$, which has only multiplication and division and therefore creates no numerical trouble.
 
@@ -79,7 +79,7 @@ We can confirm this conclusion by finding a different path that avoids subtracti
 `````
 ``````
 
-The algorithms in {numref}`Demo {number} <demo-stability-quadbad>` and {numref}`Demo {number} <demo-stability-quadgood>` are equivalent when using real numbers and exact arithmetic. When results are perturbed by machine representation at each step, though, the effects may depend dramatically on the specific sequence of operations, thanks to the chain rule {eq}`condition-chain`.
+The algorithms in @demo-stability-quadbad>` and {numref}`Demo {number} <demo-stability-quadgood are equivalent when using real numbers and exact arithmetic. When results are perturbed by machine representation at each step, though, the effects may depend dramatically on the specific sequence of operations, thanks to the chain rule {eq}`condition-chain`.
 
 ::::{prf:observation}
 The sensitivity of a problem $f(x)$ is governed only by $\kappa_f$, but the sensitivity of an algorithm depends on the condition numbers of all of its individual steps. 
@@ -158,7 +158,7 @@ are mathematically equivalent, but they suggest evaluation algorithms that can b
 
 **(a)** ✍ Using {eq}`conditionderiv`, find the relative condition number of $f$. (Because $f$ and $g$ are equivalent, the condition number of $g$ is the same.) Show that it approaches 1 as $x\to 0$. (Hence it should be possible to compute the function accurately near zero.)
 
-**(b)** ⌨ Compute $f(10^{-6})$ using a sequence of four elementary operations. Using {numref}`Table {number} <table-condition-functions>`, make a table like the one in {numref}`Demo %s <demo-stability-quadbad>` that shows the result of each elementary result and the numerical value of the condition number of that step.
+**(b)** ⌨ Compute $f(10^{-6})$ using a sequence of four elementary operations. Using {numref}`Table {number} <table-condition-functions>`, make a table like the one in @demo-stability-quadbad that shows the result of each elementary result and the numerical value of the condition number of that step.
 
 **(c)** ⌨ Repeat part (b) for $g(10^{-6})$, which has six elementary steps.
 

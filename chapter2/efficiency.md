@@ -171,7 +171,7 @@ It is not hard to find an exact formula for the sum, but we use {eq}`sumflops` t
 Solving a triangular $n\times n$ system by forward or backward substitution takes $\sim n^2$ flops asymptotically.
 ```
 
-Before counting flops for the LU factorization, we have to admit that {numref}`Function {number} <function-lufact>` is not written as economically as it could be. Recall from our motivating example in {numref}`Demo {number} <demo-lu-derive>` that we zero out the first row and column of $\mathbf{A}$ with the first outer product, the second row and column with the second outer product, and so on. There is no good reason to do multiplications and additions with values known to be zero, so we could replace lines 15–19 of `lufact` with
+Before counting flops for the LU factorization, we have to admit that {numref}`Function {number} <function-lufact>` is not written as economically as it could be. Recall from our motivating example in @demo-lu-derive that we zero out the first row and column of $\mathbf{A}$ with the first outer product, the second row and column with the second outer product, and so on. There is no good reason to do multiplications and additions with values known to be zero, so we could replace lines 15–19 of `lufact` with
 
 ```{code-block} julia
 :lineno-start: 15

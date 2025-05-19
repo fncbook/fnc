@@ -161,7 +161,7 @@ There is no need to supply a proof of {numref}`Theorem {number} <theorem-orthogo
 
 (example-lsfitexpfun)=
 ::::{prf:example}
-We revisit approximation of $e^x$ as suggested in {numref}`Demo %s <demo-orthogonal-approx>`. With the Vandermonde quasimatrix $\mathbf{V}= \begin{bmatrix} \underline{1} & \underline{x} \end{bmatrix}$, we get
+We revisit approximation of $e^x$ as suggested in @demo-orthogonal-approx. With the Vandermonde quasimatrix $\mathbf{V}= \begin{bmatrix} \underline{1} & \underline{x} \end{bmatrix}$, we get
   
 $$
   \mathbf{V}^Te^x =
@@ -206,7 +206,7 @@ $$
   \end{bmatrix},
 $$
 
-which is well in line with the values found in {numref}`Demo %s <demo-orthogonal-approx>`. 
+which is well in line with the values found in @demo-orthogonal-approx. 
 
 If we extend $\mathbf{V}$ by an additional column for $x^2$, then we need to calculate $\int_{-1}^1 x^2 e^x \, dx = e - 5e^{-1}$ and $\int_{-1}^1 x^4\, dx = 2/5$ to get
 

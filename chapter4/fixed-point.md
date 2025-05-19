@@ -55,7 +55,7 @@ This is our first example of an iterative algorithm that never quite gets to the
 
 ## Series analysis
 
-In {numref}`Demo %s <demo-fp-spiral>`, the two computed iterations differ only in the choice of $x_1$. In the first case we evidently generated a sequence that converged to one of the fixed points. In the second case, however, the generated sequence diverged.[^finsample] The easiest way to uncover the essential difference between the two cases is to use a Taylor series expansion.
+In @demo-fp-spiral, the two computed iterations differ only in the choice of $x_1$. In the first case we evidently generated a sequence that converged to one of the fixed points. In the second case, however, the generated sequence diverged.[^finsample] The easiest way to uncover the essential difference between the two cases is to use a Taylor series expansion.
 
 [^finsample]: We can only ever generate a finite sample from an infinite sequence, which in principle does not guarantee anything whatsoever about the limit or divergence of that sequence. However, in practical computing one usually assumes that well-established trends in the sequence will continue, and we complement observed experience with rigorous theory where possible.
 
@@ -82,7 +82,7 @@ fixed-point iteration for a differentiable $g(x)$ converges to a fixed point $p$
 
 (example-fprate)=
 ````{prf:example}
-The role of $g'(p)$ is clear in {numref}`Demo %s <demo-fp-spiral>`. We have $g(x) = -x^2+5x-3.5$ and $g'(x)=-2x+5$. For the first fixed point, near $2.71$, we get $g'(p)\approx-0.42$, indicating convergence. For the second fixed point, near 1.29, we get $g'(p)\approx 2.42$, which is consistent with the observed divergence.
+The role of $g'(p)$ is clear in @demo-fp-spiral. We have $g(x) = -x^2+5x-3.5$ and $g'(x)=-2x+5$. For the first fixed point, near $2.71$, we get $g'(p)\approx-0.42$, indicating convergence. For the second fixed point, near 1.29, we get $g'(p)\approx 2.42$, which is consistent with the observed divergence.
 ````
 
 ## Linear convergence
@@ -218,7 +218,7 @@ There are stronger and more general statements of {numref}`Theorem %s <theorem-c
 ``````
 
 ``````{exercise}
-In {numref}`Demo %s <demo-fp-spiral>` we defined $g(x)=x-f(x)$ to find a fixed point of the polynomial $f(x)=x^2 - 4x + 3.5$.
+In @demo-fp-spiral we defined $g(x)=x-f(x)$ to find a fixed point of the polynomial $f(x)=x^2 - 4x + 3.5$.
 
 **(a)** ✍ Why does the iteration spiral in to the fixed point, instead of approaching it monotonically? (Refer to the series analysis.)
 

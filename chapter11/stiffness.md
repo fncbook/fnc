@@ -145,7 +145,7 @@ We may regard $|\lambda|^{-1}$, which has units of time, as a characteristic tim
 
 A Jacobian matrix with eigenvalues at different orders of magnitude therefore implies multiple time scales that the IVP solver needs to cope with. Say $|\lambda_1|\gg |\lambda_2|$. Any explicit integrator will have a bounded stability region and therefore impose a time step restriction proportional to $|\lambda_1|^{-1}$. Any good adaptive integrator will obey such a restriction naturally to control the error. But to observe the "slow" part of the solution, the simulation must go on for a time on the order of $|\lambda_2|^{-1}$, which is much longer.
 
-In {numref}`Demo {number} <demo-stiffness-oregon>`, for example, you can see a combination of fast changes and slow evolution. 
+In @demo-stiffness-oregon, for example, you can see a combination of fast changes and slow evolution. 
 
 (demo-stiffness-explicit)=
 ::::{prf:example} Stiff solver for the Oregonator

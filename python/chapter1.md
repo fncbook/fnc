@@ -299,7 +299,7 @@ Using {eq}`condition-chain`, the chain rule for condition numbers, the condition
 (demo-stability-quadgood-python)=
 ````{dropdown} @demo-stability-quadgood
 :open:
-We repeat the rootfinding experiment of {numref}`Demo %s <demo-stability-quadbad>` with an alternative algorithm.
+We repeat the rootfinding experiment of @demo-stability-quadbad with an alternative algorithm.
 
 ```{code-cell}
 a = 1;  b = -(1e6 + 1e-6);  c = 1;

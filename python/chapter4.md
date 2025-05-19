@@ -294,7 +294,7 @@ This time, the iteration is pushing us _away from_ the correct answer.
 (demo-fp-converge-python)=
 ``````{dropdown} @demo-fp-converge
 :open:
-We revisit {numref}`Demo %s <demo-fp-spiral>` and investigate the observed convergence more closely. Recall that above we calculated $g'(p)\approx-0.42$ at the convergent fixed point.
+We revisit @demo-fp-spiral and investigate the observed convergence more closely. Recall that above we calculated $g'(p)\approx-0.42$ at the convergent fixed point.
 
 ```{code-cell}
 f = poly1d([1, -4, 3.5])
@@ -563,7 +563,7 @@ print(f(x4))
 (demo-secant-converge-python)=
 ``````{dropdown} @demo-secant-converge
 :open:
-We check the convergence of the secant method from {numref}`Demo %s <demo-secant-line>`.
+We check the convergence of the secant method from @demo-secant-line.
 
 ```{code-cell}
 f = lambda x: x * exp(x) - 2

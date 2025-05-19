@@ -5,7 +5,7 @@ numbering:
 (section-nonlineqn-newton)=
 # Newton's method
 
-Newton's method is the cornerstone of rootfinding. We introduce the key idea with an example in {numref}`Demo %s <demo-newton-line>`.
+Newton's method is the cornerstone of rootfinding. We introduce the key idea with an example in @demo-newton-line.
 
 (demo-newton-line)=
 ::::{prf:example} Graphical interpretation of Newton's method
@@ -54,7 +54,7 @@ Given a function $f$, its derivative, $f'$, and an initial value $x_1$, iterativ
 
 ## Convergence
 
-The graphs of {numref}`Demo %s <demo-newton-line>` suggest why the Newton iteration may converge to a root: any differentiable function looks more and more like its tangent line as we zoom in to the point of tangency. Yet it is far from clear that it *must* converge, or at what rate it will do so. The matter of the convergence rate is fairly straightforward to resolve. Define the error sequence
+The graphs of @demo-newton-line suggest why the Newton iteration may converge to a root: any differentiable function looks more and more like its tangent line as we zoom in to the point of tangency. Yet it is far from clear that it *must* converge, or at what rate it will do so. The matter of the convergence rate is fairly straightforward to resolve. Define the error sequence
 
 ```{math}
 :label: errorseq

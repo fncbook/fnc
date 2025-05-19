@@ -215,7 +215,7 @@ We can therefore solve {eq}`bsneumann` for the fictitious $V_{m+1,j}$ and use it
 ::::
 
 
-Everything in {numref}`Demo {number} <demo-blackscholes-solve>` seems to go smoothly. However, trouble lurks just around the corner.
+Everything in @demo-blackscholes-solve seems to go smoothly. However, trouble lurks just around the corner.
 
 (demo-blackscholes-unstable)=
 ::::{prf:example} Trouble with the FD solution
@@ -241,7 +241,7 @@ Everything in {numref}`Demo {number} <demo-blackscholes-solve>` seems to go smoo
 `````
 ::::
 
-The explosive growth of error in {numref}`Demo {number} <demo-blackscholes-unstable>` suggests that there is instability at work. Understanding the source of that instability comes later in this chapter. First, though, we consider a general and robust strategy for solving evolutionary PDEs.
+The explosive growth of error in @demo-blackscholes-unstable suggests that there is instability at work. Understanding the source of that instability comes later in this chapter. First, though, we consider a general and robust strategy for solving evolutionary PDEs.
 
 ## Exercises
 
@@ -264,11 +264,11 @@ The explosive growth of error in {numref}`Demo {number} <demo-blackscholes-unsta
 
 **(a)** Write out the method that results if a backward difference is used for $v_t$ instead.
 
-**(b)** Explain why modifying the code from {numref}`Demo %s <demo-blackscholes-solve>` to implement this formula requires the use of matrix algebra.
+**(b)** Explain why modifying the code from @demo-blackscholes-solve to implement this formula requires the use of matrix algebra.
 ``````
 
 ``````{exercise}
-⌨ In this problem you are asked to revisit {numref}`Demo %s <demo-blackscholes-solve>` in order to examine the instability phenomenon more closely.
+⌨ In this problem you are asked to revisit @demo-blackscholes-solve in order to examine the instability phenomenon more closely.
 
 **(a)** Leaving other parameters alone, let $m=100$. To the nearest ten, find the minimum value of $n$ that leads to a stable (i.e., not exponentially growing) solution.
 

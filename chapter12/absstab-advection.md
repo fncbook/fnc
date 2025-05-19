@@ -111,7 +111,7 @@ In a nonlinear problem, the eigenvalues come from the linearization about an exa
 
 ## Boundary effects
 
-Boundary conditions can have a dramatic effect on the eigenvalues of the semidiscretization. For instance, {numref}`Demo {number} <demo-upwind-direction>` solves linear advection $u_t=u_x$ on $[0,1]$ with the homogeneous inflow condition $u(0,t)=0$. Exclusion of the boundary node from the semidiscretization $\mathbf{u}$ to get the interior vector $\mathbf{v}$ is equivalent to 
+Boundary conditions can have a dramatic effect on the eigenvalues of the semidiscretization. For instance, @demo-upwind-direction solves linear advection $u_t=u_x$ on $[0,1]$ with the homogeneous inflow condition $u(0,t)=0$. Exclusion of the boundary node from the semidiscretization $\mathbf{u}$ to get the interior vector $\mathbf{v}$ is equivalent to 
 
 $$
 \mathbf{v} = \mathbf{E} \mathbf{u}, \quad   \mathbf{u} = \begin{bmatrix}  \mathbf{v} \\ 0 \end{bmatrix} = \mathbf{E}^T \mathbf{v},
@@ -193,5 +193,5 @@ For $c=1$ and $m=40,$ use the reasoning in @problem-absstab-advdiff to find the 
 
 ``````{exercise}
 :label: problem-absstab-outflow
-⌨ Modify {numref}`Demo %s <demo-absstab-inflow>` so that it produces the eigenvalues of the problem $u_t+u_x=0$ with an outflow condition $u(1,t)=0$. What is the behavior of solutions as $t\to\infty$?
+⌨ Modify @demo-absstab-inflow so that it produces the eigenvalues of the problem $u_t+u_x=0$ with an outflow condition $u(1,t)=0$. What is the behavior of solutions as $t\to\infty$?
 ``````

@@ -28,7 +28,7 @@ If $\mathbf{A}=\mathbf{A}^*$, then $\mathbf{A}$ has a diagonalization $\mathbf{A
 Another way to state the result of this theorem is that a hermitian matrix has real eigenvalues and a complete set of orthonormal eigenvectors—that is, the matrix is normal. Because hermitian matrices are normal, their eigenvalue condition number is guaranteed to be 1 by {numref}`Theorem {number} <theorem-bauer-fike>`.
 
 :::{note}
-The converse of {numref}`Theorem {number} <theorem-symm-eig-spectral>` is also true: every normal matrix with real eigenvalues is hermitian. This was illustrated in {numref}`Demo {number} <demo-evd-bauerfike>`.
+The converse of {numref}`Theorem {number} <theorem-symm-eig-spectral>` is also true: every normal matrix with real eigenvalues is hermitian. This was illustrated in @demo-evd-bauerfike.
 :::
 
 For a hermitian matrix, the EVD 

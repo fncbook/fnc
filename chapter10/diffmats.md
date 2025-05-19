@@ -371,13 +371,13 @@ According to {numref}`Theorem %s <theorem-spectral>`, the convergence of polynom
 ``````{exercise}
 **(a)** ✍  Using {eq}`diffmat11` to define $\mathbf{D}_x$, calculate $\mathbf{D}_x^2$ in the general case.
 
-**(b)** ⌨ Repeat the convergence experiment in the second part of {numref}`Demo %s <demo-diffmats-2nd>`, but using this version of $\mathbf{D}_x^2$ in place of $\mathbf{D}_{xx}$ to estimate $f''$. Why does it fail to converge as $n\to \infty$?
+**(b)** ⌨ Repeat the convergence experiment in the second part of @demo-diffmats-2nd, but using this version of $\mathbf{D}_x^2$ in place of $\mathbf{D}_{xx}$ to estimate $f''$. Why does it fail to converge as $n\to \infty$?
 ``````
 
 ``````{exercise}
 **(a)** ✍ Find the derivative of $f(x) =\operatorname{sign}(x)x^2$ on the interval $[-1,1]$. (If this gives you trouble, use an equivalent piecewise definition of $f$.) What is special about this function at $x=0$? 
 
-**(b)** ⌨ Adapt {numref}`Demo %s <demo-diffmats-2nd>` to operate on the function from part (a), computing only the first derivative. What is the observed order of accuracy?
+**(b)** ⌨ Adapt @demo-diffmats-2nd to operate on the function from part (a), computing only the first derivative. What is the observed order of accuracy?
 
 **(c)** ✍ Show that for even values of $n$, there is only one node at which the error for computing $f'$ in part (b) is nonzero.
 ``````
@@ -387,7 +387,7 @@ According to {numref}`Theorem %s <theorem-spectral>`, the convergence of polynom
 
 **(a)** Modify {numref}`Function {number} <function-diffmat2>` to a function `diffmat4`, which outputs fourth-order accurate differentiation matrices. You may want to use {numref}`Function {number} <function-fdweights>`.
 
-**(b)** Repeat the experiment of {numref}`Demo %s <demo-diffmats-2nd>` using `diffmat4` in place of {numref}`Function {number} <function-diffmat2>`, and compare observed errors to fourth-order accuracy.
+**(b)** Repeat the experiment of @function-diffmat2, and compare observed errors to fourth-order accuracy.
 ``````
 
 ``````{exercise}

@@ -14,7 +14,7 @@ $$
 \mathbf{u}'(t)=\mathbf{A}\mathbf{u}(t).
 $$
 
-All of these methods are zero-stable in the sense of {numref}`section-ivp-zerostability`, in the limit as the time step size $\tau \to 0$.[^h2tau] Yet for some experiments with *fixed* $\tau$, as in {numref}`Demo {number} <demo-methodlines-heatFE>`, we have observed exponential growth in the different limit $n\to \infty$.
+All of these methods are zero-stable in the sense of {numref}`section-ivp-zerostability`, in the limit as the time step size $\tau \to 0$.[^h2tau] Yet for some experiments with *fixed* $\tau$, as in @demo-methodlines-heatFE, we have observed exponential growth in the different limit $n\to \infty$.
 
 [^h2tau]: In Chapter 6 we used $h$ rather than $\tau$ to denote the time step size, but now we  reserve $h$ for spacing in the $x$ direction.
 
@@ -152,14 +152,14 @@ Now suppose instead that $\lambda=i$, so that $\zeta=i\tau$. Clearly $\zeta$ is 
 
 The fact that implicit methods have larger stability regions than their explicit counterparts is the primary justification for using them. While they have larger work requirements per step, they sometimes can take steps that are orders of magnitude larger than explicit methods and still remain stable.
 
-When adaptive time stepping methods are used, as in most software for IVPs, the automatically determined time step is chosen to satisfy absolute stability requirements (otherwise errors grow exponentially). This phenomenon was manifested in {numref}`Demo %s <demo-methodlines-auto>`: in the explicit IVP method `rk23`, error control forced tiny step sizes compared to those used by `Rodas4P`, which is based on implicit methods.
+When adaptive time stepping methods are used, as in most software for IVPs, the automatically determined time step is chosen to satisfy absolute stability requirements (otherwise errors grow exponentially). This phenomenon was manifested in @demo-methodlines-auto: in the explicit IVP method `rk23`, error control forced tiny step sizes compared to those used by `Rodas4P`, which is based on implicit methods.
 
 ## Heat equation
 
 ```{index} heat equation, method of lines
 ```
 
-Now we return to the semidiscretization {eq}`heatMOL` of the heat equation, which was solved by Euler in {numref}`Demo %s <demo-methodlines-heatFE>` and backward Euler in {numref}`Demo {number} <demo-methodlines-heatBE>`.
+Now we return to the semidiscretization {eq}`heatMOL` of the heat equation, which was solved by Euler in @demo-methodlines-heatFE and backward Euler in @demo-methodlines-heatBE.
 
 (demo-absstab-regions)=
 ::::{prf:example} Stability regions and the heat equation
@@ -192,7 +192,7 @@ The matrix $\mathbf{D}_{xx}$ occurring in {eq}`heatMOL` for semidiscretization o
 \lambda_j =  -4m^2 \sin^2 \left( \frac{j\pi}{m} \right), \qquad j = 0,\ldots,m-1.   
 :::
 
-This result agrees with the observation in {numref}`Demo %s <demo-absstab-regions>` that the eigenvalues are real and negative. Furthermore, they lie within the interval $[-4m^2,0]$. In Euler time integration, this implies that $-4\tau m^2\ge -2$, or $\tau\ge 1/(2m^2)=O(m^{-2})$. For backward Euler, there is no time step restriction, and we say that backward Euler is unconditionally stable for this problem.
+This result agrees with the observation in @demo-absstab-regions that the eigenvalues are real and negative. Furthermore, they lie within the interval $[-4m^2,0]$. In Euler time integration, this implies that $-4\tau m^2\ge -2$, or $\tau\ge 1/(2m^2)=O(m^{-2})$. For backward Euler, there is no time step restriction, and we say that backward Euler is unconditionally stable for this problem.
 
 In summary, three things happen as $h\to 0$: 
 

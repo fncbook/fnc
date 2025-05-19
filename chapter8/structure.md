@@ -166,7 +166,7 @@ For each matrix, use `spy` and an inspection of the $5\times 5$ submatrices in t
 ``````
 
 ``````{exercise}
-⌨ This problem requires the matrix used in {numref}`Demo %s <demo-structure-fill>`.
+⌨ This problem requires the matrix used in @demo-structure-fill.
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -204,7 +204,7 @@ A = spio.mmread("smallworld.mtx")
 
 ``````{exercise}
 :label: problem-structure-roswell
-⌨ One use of adjacency matrices is to analyze the links between members of a collection. Obtain the adjacency matrix $\mathbf{A}$ from {numref}`Demo %s <demo-structure-sparse>` via the following:
+⌨ One use of adjacency matrices is to analyze the links between members of a collection. Obtain the adjacency matrix $\mathbf{A}$ from @demo-structure-sparse via the following:
 
 `````{tab-set} 
 ````{tab-item} Julia
@@ -284,7 +284,7 @@ where $k$ is a real parameter. Let $n=50$.
 
 **(a)** Let $k=1$. What is the size of $\mathbf{A}$? What is its density?
 
-**(b)** Still with $k=1$, use `eigs` to find the four largest and four smallest (in magnitude) eigenvalues of $\mathbf{A}$. (See {numref}`Demo %s <demo-structure-linalg>` for examples.)
+**(b)** Still with $k=1$, use `eigs` to find the four largest and four smallest (in magnitude) eigenvalues of $\mathbf{A}$. (See @demo-structure-linalg for examples.)
 
 **(c)** The eigenvalues are all real. Find a value of $k$ so that $\mathbf{A}$ has exactly three negative eigenvalues.
 ``````

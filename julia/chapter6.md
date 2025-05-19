@@ -22,7 +22,7 @@ numbering:
 ```
 ::::{admonition} About the code
 :class: dropdown
-The `ivp` input argument is an `ODEProblem`, like in {numref}`Demo {number} <demo-basics-first>`. It has fields `ivp.f`, `ivp.tspan`, `ivp.u0`, and `ivp.p` that fully define the problem. The outputs are vectors of the nodes and approximate solution values at those nodes.
+The `ivp` input argument is an `ODEProblem`, like in @demo-basics-first. It has fields `ivp.f`, `ivp.tspan`, `ivp.u0`, and `ivp.p` that fully define the problem. The outputs are vectors of the nodes and approximate solution values at those nodes.
 ::::
 ``````
 
@@ -519,7 +519,7 @@ We took fewer steps by a factor of almost 1000! Even accounting for the extra st
 (demo-adapt-sing-julia)=
 ``````{dropdown} @demo-adapt-sing
 :open:
-In {numref}`Demo %s <demo-basics-sing>` we saw an IVP that appears to blow up in a finite amount of time. Because the solution increases so rapidly as it approaches the blowup, adaptive stepping is required even to get close.
+In @demo-basics-sing we saw an IVP that appears to blow up in a finite amount of time. Because the solution increases so rapidly as it approaches the blowup, adaptive stepping is required even to get close.
 
 ```{code-cell}
 f(u, p, t) = (t + u)^2

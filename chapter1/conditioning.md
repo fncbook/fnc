@@ -24,7 +24,7 @@ We can derive the relative error in this result:
   = \frac{ |\epsilon x| }{ |x+1| } .
 ```
 
-This error could be quite large if the denominator is small. In fact, we can make the relative error as large as we please by taking $x$ very close to $-1$. This is essentially what happened in {numref}`Demo %s <demo-float-arithmetic>`.
+This error could be quite large if the denominator is small. In fact, we can make the relative error as large as we please by taking $x$ very close to $-1$. This is essentially what happened in @demo-float-arithmetic.
 
 ```{index} ! subtractive cancellation
 ```

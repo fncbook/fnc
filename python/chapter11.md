@@ -137,7 +137,7 @@ The results are easy to interpret, recalling that the time variable really means
 (demo-blackscholes-unstable-python)=
 ``````{dropdown} @demo-blackscholes-unstable
 :open:
-Let's try to do everything the same as in {numref}`Demo {number} <demo-blackscholes-solve>`, but extending the simulation time to $T=8$.
+Let's try to do everything the same as in @demo-blackscholes-solve, but extending the simulation time to $T=8$.
 
 ```{code-cell}
 T = 8
@@ -283,7 +283,7 @@ title("Nonphysical growth");
 (demo-methodlines-heatBE-python)=
 ``````{dropdown} @demo-methodlines-heatBE
 :open:
-Now we apply backward Euler to the heat equation. Mathematically this means multiplying by the *inverse* of a matrix, but we interpret that numerically as a linear system solution. We will reuse the setup from {numref}`Demo {number} <demo-methodlines-heatFE>`. 
+Now we apply backward Euler to the heat equation. Mathematically this means multiplying by the *inverse* of a matrix, but we interpret that numerically as a linear system solution. We will reuse the setup from @demo-methodlines-heatFE. 
 
 ```{code-cell}
 from scipy.sparse.linalg import spsolve
@@ -494,7 +494,7 @@ You can see that there is one eigenvalue that ranges over a wide portion of the 
 (demo-stiffness-explicit-python)=
 ``````{dropdown} @demo-stiffness-explicit
 :open:
-The `BDF` solver is good for stiff problems and needs few time steps to solve the Oregonator from {numref}`Demo {number} <demo-stiffness-oregon>`.
+The `BDF` solver is good for stiff problems and needs few time steps to solve the Oregonator from @demo-stiffness-oregon.
 
 ```{code-cell}
 tspan = (0, 25)

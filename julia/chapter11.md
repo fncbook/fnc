@@ -127,7 +127,7 @@ The results are easy to interpret, recalling that the time variable really means
 (demo-blackscholes-unstable-julia)=
 ``````{dropdown} @demo-blackscholes-unstable
 :open:
-Let's try to do everything the same as in {numref}`Demo {number} <demo-blackscholes-solve>`, but extending the simulation time to $T=8$.
+Let's try to do everything the same as in @demo-blackscholes-solve, but extending the simulation time to $T=8$.
 
 ```{code-cell}
 T = 8;
@@ -250,7 +250,7 @@ plot(t[1:1000], M[1:1000];
 (demo-methodlines-heatBE-julia)=
 ``````{dropdown} @demo-methodlines-heatBE
 :open:
-Now we apply backward Euler to the heat equation. We will reuse the setup from {numref}`Demo {number} <demo-methodlines-heatFE>`. Since the matrix in {eq}`BExx` never changes during the time stepping, we do the necessary LU factorization only once.
+Now we apply backward Euler to the heat equation. We will reuse the setup from @demo-methodlines-heatFE. Since the matrix in {eq}`BExx` never changes during the time stepping, we do the necessary LU factorization only once.
 
 ```{code-cell}
 using SparseArrays
@@ -470,7 +470,7 @@ You can see that there is one eigenvalue that ranges over a wide portion of the 
 (demo-stiffness-explicit-julia)=
 ``````{dropdown} @demo-stiffness-explicit
 :open:
-The `Rodas4P` solver is good for stiff problems, and needs few time steps to solve the Oregonator from {numref}`Demo {number} <demo-stiffness-oregon>`.
+The `Rodas4P` solver is good for stiff problems, and needs few time steps to solve the Oregonator from @demo-stiffness-oregon.
 
 ```{code-cell}
 oregon = remake(oregon, tspan=(0., 25.))

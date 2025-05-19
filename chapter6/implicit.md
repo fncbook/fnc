@@ -110,7 +110,7 @@ An implementation of AM2 using {numref}`Function {number} <function-levenberg>` 
 
 ## Stiff problems
 
-At each time step in {numref}`Function {number} <function-am2>`, or any implicit IVP solver, a rootfinding iteration of uncertain expense is needed, requiring multiple calls to evaluate the function $\mathbf{f}$. This fact makes the cost of an implicit method much greater on a per-step basis than for an explicit one. Given this drawback, you are justified to wonder whether implicit methods are ever competitive! The answer is emphatically yes, as {numref}`Demo %s <demo-implicit-stiff>` demonstrates.
+At each time step in {numref}`Function {number} <function-am2>`, or any implicit IVP solver, a rootfinding iteration of uncertain expense is needed, requiring multiple calls to evaluate the function $\mathbf{f}$. This fact makes the cost of an implicit method much greater on a per-step basis than for an explicit one. Given this drawback, you are justified to wonder whether implicit methods are ever competitive! The answer is emphatically yes, as @demo-implicit-stiff demonstrates.
 
 ```{index} stiff differential equation
 ```
@@ -138,9 +138,9 @@ At each time step in {numref}`Function {number} <function-am2>`, or any implicit
 `````
 ::::
 
-Although the result of {numref}`Demo %s <demo-implicit-stiff>` may seem counter-intuitive, there is no contradiction. A fourth-order explicit formula is more accurate than a second-order implicit one, in the limit $h\to 0$. But there is another limit to consider, $t\to \infty$ with $h$ fixed, and in this one the implicit method wins. 
+Although the result of @demo-implicit-stiff may seem counter-intuitive, there is no contradiction. A fourth-order explicit formula is more accurate than a second-order implicit one, in the limit $h\to 0$. But there is another limit to consider, $t\to \infty$ with $h$ fixed, and in this one the implicit method wins. 
 
-Problems for which implicit methods are much more efficient than explicit counterparts are called **stiff**. A complete mathematical description will wait for Chapter 11, but a sure sign of stiffness is the presence of phenomena on widely different time scales. In {numref}`Demo {number} <demo-implicit-stiff>`, for instance, there are two slow periods during which the solution changes very little, interrupted by a very fast transition in the state. An explicit method "thinks" that the step size must always be dictated by the time scale of the fast transition, whereas an implicit method can take large steps during the slow periods.
+Problems for which implicit methods are much more efficient than explicit counterparts are called **stiff**. A complete mathematical description will wait for Chapter 11, but a sure sign of stiffness is the presence of phenomena on widely different time scales. In @demo-implicit-stiff, for instance, there are two slow periods during which the solution changes very little, interrupted by a very fast transition in the state. An explicit method "thinks" that the step size must always be dictated by the time scale of the fast transition, whereas an implicit method can take large steps during the slow periods.
 
 ```{index} adaptivity; in IVP solver
 ```
@@ -202,7 +202,7 @@ $\quad \hat{u}(x) = x \left[ 3 \cos \left( \ln x \right)+\sin \left( \ln x \righ
 ``````
 
 ``````{exercise}
-⌨ For double-precision purposes, the exact solution of the IVP in {numref}`Demo %s <demo-implicit-stiff>` satisfies $\hat{u}(400)=1$.
+⌨ For double-precision purposes, the exact solution of the IVP in @demo-implicit-stiff satisfies $\hat{u}(400)=1$.
 
 **(a)** Use {numref}`Function {number} <function-ab4>` with $n=600,800,1000,\ldots,2000$ and make a log-log convergence plot of the error $|u_n-1|$ as a function of $n$.
 

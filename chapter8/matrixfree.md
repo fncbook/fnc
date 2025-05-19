@@ -148,7 +148,7 @@ The following example shows how to put these ideas into practice with MINRES.
 ``````
 
 ``````{exercise}
-⌨ The matrix of the blur transformation happens to be symmetric and positive definite. Repeat {numref}`Demo %s <demo-matrixfree-deblur>` using CG for the deblurring.
+⌨ The matrix of the blur transformation happens to be symmetric and positive definite. Repeat @demo-matrixfree-deblur using CG for the deblurring.
 ``````
 
 ``````{exercise}

@@ -352,7 +352,7 @@ $\begin{bmatrix}
 ``````
 
 ``````{exercise}
-⌨ See {numref}`Demo {number} <demo-insight-image>` for how to get the "mandrill" test image. Make a log-linear scatter plot of the singular values of the matrix of grayscale intensity values. (The shape of this graph is surprisingly similar across a wide range of images.) 
+⌨ See @demo-insight-image for how to get the "mandrill" test image. Make a log-linear scatter plot of the singular values of the matrix of grayscale intensity values. (The shape of this graph is surprisingly similar across a wide range of images.) 
 ``````
 
 ``````{exercise}

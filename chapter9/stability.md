@@ -35,7 +35,7 @@ With  barycentric interpolation available in the form of {numref}`Function {numb
 
 ## Runge phenomenon
 
-The disappointing loss of convergence in {numref}`Demo {number} <demo-stability-equispaced>` is a sign of ill conditioning due to the use of equally spaced nodes. We will examine this effect using the error formula {eq}`interperror` as a guide:
+The disappointing loss of convergence in @demo-stability-equispaced is a sign of ill conditioning due to the use of equally spaced nodes. We will examine this effect using the error formula {eq}`interperror` as a guide:
 
 $$
 f(x) - p(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!} \Phi(x), \qquad \Phi(x) = \prod_{i=0}^n (x-t_i).
@@ -66,7 +66,7 @@ While the dependence on $f$ is messy here, the error indicator $\Phi(x)$ can be 
 `````
 ::::
 
-Two observations from the result of {numref}`Demo {number} <demo-stability-errfun>` are important. First, $|\Phi|$ decreases exponentially at each fixed location in the interval (note that the spacing between curves is constant for constant increments of $n$). Second, $|\Phi|$ is larger at the ends of the interval than in the middle, by an exponentially growing factor. This gap is what can ruin the convergence of polynomial interpolation.
+Two observations from the result of @demo-stability-errfun are important. First, $|\Phi|$ decreases exponentially at each fixed location in the interval (note that the spacing between curves is constant for constant increments of $n$). Second, $|\Phi|$ is larger at the ends of the interval than in the middle, by an exponentially growing factor. This gap is what can ruin the convergence of polynomial interpolation.
 
 (demo-stability-runge)=
 ::::{prf:example} Runge phenomenon
@@ -94,9 +94,9 @@ Two observations from the result of {numref}`Demo {number} <demo-stability-errfu
 ```{index} ! Runge phenomenon
 ```
 
-The observation of instability in {numref}`Demo {number} <demo-stability-runge>` is known as the **Runge phenomenon**. The Runge phenomenon is an instability manifested when the nodes of the interpolant are equally spaced and the degree of the polynomial increases. We reiterate that the phenomenon is rooted in the interpolation convergence theory and not a consequence of the algorithm chosen to implement polynomial interpolation.
+The observation of instability in @demo-stability-runge is known as the **Runge phenomenon**. The Runge phenomenon is an instability manifested when the nodes of the interpolant are equally spaced and the degree of the polynomial increases. We reiterate that the phenomenon is rooted in the interpolation convergence theory and not a consequence of the algorithm chosen to implement polynomial interpolation.
 
-Significantly, the convergence observed in {numref}`Demo {number} <demo-stability-runge>` is stable within a middle portion of the interval. By redistributing the interpolation nodes, we will next sacrifice a little of the convergence in the middle portion in order to improve it near the ends and rescue the process globally.
+Significantly, the convergence observed in @demo-stability-runge is stable within a middle portion of the interval. By redistributing the interpolation nodes, we will next sacrifice a little of the convergence in the middle portion in order to improve it near the ends and rescue the process globally.
 
 ## Chebyshev nodes
 
@@ -223,7 +223,7 @@ On the left, we use a log-log scale, which makes fourth-order algebraic converge
 ## Exercises
 
 ``````{exercise}
-⌨ Revisit {numref}`Demo %s <demo-stability-equispaced>` and determine an approximate value for the convergent phase of the constant $K$ mentioned in the comments there. 
+⌨ Revisit @demo-stability-equispaced and determine an approximate value for the convergent phase of the constant $K$ mentioned in the comments there. 
 ``````
 
 ``````{exercise}
@@ -238,7 +238,7 @@ On the left, we use a log-log scale, which makes fourth-order algebraic converge
 
 ``````{exercise}
 :label: problem-chebinterp
-⌨ Write a function `chebinterp(f,n)` that returns a function representing the polynomial interpolant of the input function `f` using $n+1$ Chebyshev second kind nodes over $[-1,1]$. You should use {eq}`weightcheb` to compute the barycentric weights directly, rather than using the method in {numref}`Function {number} <function-polyinterp>`. Test your function by revisiting {numref}`Demo %s <demo-stability-runge>` to use Chebyshev rather than equally spaced nodes. 
+⌨ Write a function `chebinterp(f,n)` that returns a function representing the polynomial interpolant of the input function `f` using $n+1$ Chebyshev second kind nodes over $[-1,1]$. You should use {eq}`weightcheb` to compute the barycentric weights directly, rather than using the method in {numref}`Function {number} <function-polyinterp>`. Test your function by revisiting @demo-stability-runge to use Chebyshev rather than equally spaced nodes. 
 ``````
 
 ``````{exercise}

@@ -177,7 +177,7 @@ Representation of an image as a matrix allows us to describe some common image o
 ``````
 
 ``````{exercise}
-⌨ Refer to {numref}`Demo %s <demo-insight-image>` on loading and displaying images. Choose a test image of your liking.
+⌨ Refer to @demo-insight-image on loading and displaying images. Choose a test image of your liking.
 
 **(a)** Display the test image upside-down.
 

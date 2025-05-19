@@ -179,7 +179,7 @@ Given $n\times n$ matrix $\mathbf{A}$, its **LU factorization** is
 where $\mathbf{L}$ is a unit lower triangular matrix and $\mathbf{U}$ is an upper triangular matrix.
 ::::
 
-The outer product algorithm for LU factorization seen in {numref}`Demo {number} <demo-lu-derive>` is coded as {numref}`Function {number} <function-lufact>`. 
+The outer product algorithm for LU factorization seen in @demo-lu-derive>` is coded as {numref}`Function {number} <function-lufact. 
 
 (function-lufact)=
 ``````{prf:algorithm} lufact

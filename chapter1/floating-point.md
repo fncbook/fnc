@@ -234,7 +234,7 @@ Hence the relative error in arithmetic is essentially the same as for the floati
 `````
 ::::
 
-There are two ways to look at {numref}`Demo %s <demo-float-arithmetic>`. On one hand, its two versions of the result differ by less than $1.2\times 10^{-16}$, which is very small — not just in everyday terms, but with respect to the operands, which are all close to 1 in absolute value. On the other hand, the difference is as large as the exact result itself! We formalize and generalize this observation in the next section. In the meantime, keep in mind that exactness cannot be taken for granted in floating-point computation. 
+There are two ways to look at @demo-float-arithmetic. On one hand, its two versions of the result differ by less than $1.2\times 10^{-16}$, which is very small — not just in everyday terms, but with respect to the operands, which are all close to 1 in absolute value. On the other hand, the difference is as large as the exact result itself! We formalize and generalize this observation in the next section. In the meantime, keep in mind that exactness cannot be taken for granted in floating-point computation. 
 
 ::::{prf:observation}
 We should not expect that two mathematically equivalent results will be equal when computed in floating point, only that they be relatively close together.
@@ -263,7 +263,7 @@ Exercises marked with ✍ are intended to be done by hand or with the aid of a s
 ``````
 
 ``````{exercise}
-⌨ There are much better rational approximations to $\pi$ than 22/7 as used in {numref}`Demo {number} <demo-float-accuracy>`. For each one below, find its absolute and relative accuracy, and (rounding down to an integer) the number of accurate digits. 
+⌨ There are much better rational approximations to $\pi$ than 22/7 as used in @demo-float-accuracy. For each one below, find its absolute and relative accuracy, and (rounding down to an integer) the number of accurate digits. 
 
 **(a)** 355/113
 

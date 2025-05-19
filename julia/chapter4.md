@@ -290,7 +290,7 @@ This time, the iteration is pushing us _away from_ the correct answer.
 (demo-fp-converge-julia)=
 ``````{dropdown} @demo-fp-converge
 :open:
-We revisit {numref}`Demo %s <demo-fp-spiral>` and investigate the observed convergence more closely. Recall that above we calculated $g'(p)\approx-0.42$ at the convergent fixed point.
+We revisit @demo-fp-spiral and investigate the observed convergence more closely. Recall that above we calculated $g'(p)\approx-0.42$ at the convergent fixed point.
 
 ```{code-cell}
 p = Polynomial([3.5, -4, 1])
@@ -564,7 +564,7 @@ x₄ = x₃ - y₃ / m₃
 (demo-secant-converge-julia)=
 ``````{dropdown} @demo-secant-converge
 :open:
-We check the convergence of the secant method from {numref}`Demo %s <demo-secant-line>`. Again we will use extended precision to get a longer sequence than double precision allows.
+We check the convergence of the secant method from @demo-secant-line. Again we will use extended precision to get a longer sequence than double precision allows.
 
 ```{code-cell}
 f(x) = x * exp(x) - 2

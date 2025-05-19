@@ -161,11 +161,11 @@ When solving a linear system, all that can be expected is that the backward erro
 ## Exercises
 
 ``````{exercise}
-⌨ Refer to {numref}`Demo {number} <demo-condition-bound>` for the definition of a Hilbert matrix. Make a table of the values of $\kappa(\mathbf{H}_n)$ in the 2-norm for $n=2,3,\ldots,16$. Speculate as to why the growth of $\kappa$ appears to slow down at $n=13$.
+⌨ Refer to @demo-condition-bound for the definition of a Hilbert matrix. Make a table of the values of $\kappa(\mathbf{H}_n)$ in the 2-norm for $n=2,3,\ldots,16$. Speculate as to why the growth of $\kappa$ appears to slow down at $n=13$.
 ``````
 
 ``````{exercise}
-⌨ The purpose of this problem is to verify, like in {numref}`Demo %s <demo-condition-bound>`, the error bound
+⌨ The purpose of this problem is to verify, like in @demo-condition-bound, the error bound
 
 ```{math}
 \frac{\| \mathbf{x}-\tilde{\mathbf{x} \|}}{\| \mathbf{x} \|} \le \kappa(\mathbf{A})

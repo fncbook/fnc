@@ -142,7 +142,7 @@ We solve the advection equation on $[-4,4]$ with periodic end conditions using t
 ::::
 
 
-If you look carefully at {numref}`Demo %s <demo-traffic-advection>`, you'll notice that we used the time integrator `RK4`, a nonstiff method. As we will see later in this chapter, the pure advection equation is not inherently stiff.
+If you look carefully at @demo-traffic-advection, you'll notice that we used the time integrator `RK4`, a nonstiff method. As we will see later in this chapter, the pure advection equation is not inherently stiff.
 
 ## Solutions for traffic flow
 
@@ -184,20 +184,20 @@ We solve for traffic flow using periodic boundary conditions.
 ```{index} shock wave
 ```
 
-The phenomenon in the second plot of {numref}`Demo %s <demo-traffic-solve>` is called a *shock wave*. The underlying mathematics is not much different from the shock wave that comes off of the wing of a supersonic aircraft in the form of a sonic boom, or from cresting waves under certain conditions in the ocean. In the absence of diffusion ($\epsilon=0$), the shock becomes a jump discontinuity in the solution, which breaks down both the finite differences and the original PDE, requiring different approaches. For many applications, the addition of a small amount of diffusion is appropriate and simple. However, we will first try to come to terms with pure advection in a linear problem.
+The phenomenon in the second plot of @demo-traffic-solve is called a *shock wave*. The underlying mathematics is not much different from the shock wave that comes off of the wing of a supersonic aircraft in the form of a sonic boom, or from cresting waves under certain conditions in the ocean. In the absence of diffusion ($\epsilon=0$), the shock becomes a jump discontinuity in the solution, which breaks down both the finite differences and the original PDE, requiring different approaches. For many applications, the addition of a small amount of diffusion is appropriate and simple. However, we will first try to come to terms with pure advection in a linear problem.
 
 ## Exercises
 
 
 ``````{exercise}
 :label: problem-traffic-backward
-✍ By the analogy between {eq}`trafficpde` and {eq}`advectpde`, use {eq}`trafficQ` to confirm that constant traffic density moves backward (right to left) for $\rho_m<\rho<\rho_c$, as observed in {numref}`Demo %s <demo-traffic-solve>`. (Note that the derivative of $Q_0$ is given in the code for the example.)
+✍ By the analogy between {eq}`trafficpde` and {eq}`advectpde`, use {eq}`trafficQ` to confirm that constant traffic density moves backward (right to left) for $\rho_m<\rho<\rho_c$, as observed in @demo-traffic-solve. (Note that the derivative of $Q_0$ is given in the code for the example.)
 ``````
 
 ``````{exercise}
 :label: problem-traffic-shockspeed
 
-⌨ **(a)** Using as large a discretization and as small a dissipation parameter $\epsilon$  as you can get away with, perform experiments to estimate the speed of the shockwave in {numref}`Demo %s <demo-traffic-solve>` between times $t=0.11$ and $t=0.15$. (Hint: You can use `argmax` to locate the peak of the solution vector at a particular time.)
+⌨ **(a)** Using as large a discretization and as small a dissipation parameter $\epsilon$  as you can get away with, perform experiments to estimate the speed of the shockwave in @demo-traffic-solve between times $t=0.11$ and $t=0.15$. (Hint: You can use `argmax` to locate the peak of the solution vector at a particular time.)
 
 **(b)** Theory predicts that the speed of the shockwave is the average of $Q_0'$ evaluated at the values of $\rho$ at the top and bottom of the shock. Perform this calculation and compare to the result of part (a).
 ``````

@@ -264,7 +264,7 @@ with initializations $7 \sin(x)$ and $\frac{1}{4} \sin(x)$. Plot the solutions t
 ``````
 
 ``````{exercise}
-⌨ Use {numref}`Function {number} <function-bvp>` to compute the solution to the Allen–Cahn equation in {numref}`Demo %s <demo-nonlinear-allencahn>` with $\epsilon=0.02$. Determine numerically whether it is antisymmetric around the line $x=0.5$---that is, whether $u(1-x)=-u(x)$. You should supply evidence that your answer is independent of $n$. 
+⌨ Use {numref}`Function {number} <function-bvp>` to compute the solution to the Allen–Cahn equation in @demo-nonlinear-allencahn with $\epsilon=0.02$. Determine numerically whether it is antisymmetric around the line $x=0.5$---that is, whether $u(1-x)=-u(x)$. You should supply evidence that your answer is independent of $n$. 
 ``````
 
 ``````{exercise}
@@ -312,5 +312,5 @@ The most recent solution should be used as the initialization for each new value
 ``````
 
 ``````{exercise}
-⌨  {numref}`Demo %s <demo-nonlinear-mems>` finds two solutions at $\lambda=0.5$. Continue both solutions by taking 50 steps from $\lambda=0.5$ to $\lambda=0.79$. Make a plot with $\lambda$ on the horizontal axis and $w(0)$ on the vertical axis, with one point to represent each solution found. You should get two paths that converge as $\lambda$ approaches $0.79$ from below.
+⌨  @demo-nonlinear-mems finds two solutions at $\lambda=0.5$. Continue both solutions by taking 50 steps from $\lambda=0.5$ to $\lambda=0.79$. Make a plot with $\lambda$ on the horizontal axis and $w(0)$ on the vertical axis, with one point to represent each solution found. You should get two paths that converge as $\lambda$ approaches $0.79$ from below.
 ``````

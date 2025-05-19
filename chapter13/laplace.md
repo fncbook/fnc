@@ -239,7 +239,7 @@ While @pois2bcrep and @pois2bcreprhs are algebraically correct, a literal implem
 `````
 ``````
 
-We use {numref}`Demo %s <demo-laplace-fd>` as a template: create the linear system, modify it for the boundary conditions, solve it using backslash, and reshape to get a grid function. The matrix is $N=(m+1)(n+1)$ on each side and very sparse, so we take care to use sparse matrices in the code to exploit that structure. There is a small but important change from {numref}`Demo %s <demo-laplace-fd>`: the boundary conditions are rescaled to read $\sigma u(x,y)=\sigma g(x,y)$, where $\sigma$ is the largest element of a row of $\mathbf{L}$. This tweak improves the condition number of the final matrix.
+We use @demo-laplace-fd: the boundary conditions are rescaled to read $\sigma u(x,y)=\sigma g(x,y)$, where $\sigma$ is the largest element of a row of $\mathbf{L}$. This tweak improves the condition number of the final matrix.
 
 (demo-laplace-poisson)=
 ::::{prf:example} Poisson equation in 2D
@@ -303,7 +303,7 @@ Solution: $u(x,y) = x^4(1-x)y(1-y)$.
 
 **(b)** $u_{xx}+u_{yy} = \left(16 x^2 + (1-4 y)^2\right) \sinh (4 x y-x)$,  with $u=\sinh(4xy-x)$ on the boundary.
 
-Solution: $u(x,y) = \sin(4\pi x))$.
+Solution: $u(x,y) = \sin(4\pi x)$.
 
 **(c)** $u_{xx}+u_{yy} = -(20\pi^2) \sin (4\pi x) \cos (2\pi y)$, with $u = \sin (4\pi x) \cos (2\pi y)$ on the boundary.
 

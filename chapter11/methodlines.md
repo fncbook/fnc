@@ -5,7 +5,7 @@ numbering:
 (section-diffusion-methodlines)=
 # The method of lines
 
-Our strategy in {numref}`section-diffusion-blackscholes` was to discretize both the time and space derivatives using finite differences, then rearrange so that we could march the solution forward through time. It was partially effective, but as {numref}`Demo %s <demo-blackscholes-unstable>` shows, not a sure thing, for reasons we look into starting in the next section. 
+Our strategy in {numref}`section-diffusion-blackscholes` was to discretize both the time and space derivatives using finite differences, then rearrange so that we could march the solution forward through time. It was partially effective, but as @demo-blackscholes-unstable shows, not a sure thing, for reasons we look into starting in the next section. 
 
 ```{index} ! boundary conditions; periodic
 ```
@@ -136,7 +136,7 @@ Thus, a fully discrete method for the heat equation is
 `````
 ::::
 
-The method in {numref}`Example {number} <example-methodlines-heatFE>` and {numref}`Demo {number} <demo-methodlines-heatFE>` is essentially the same one we used for the Black–Scholes equation in {numref}`section-diffusion-blackscholes`. By changing the time integrator, we can get much better results.
+The method in {numref}`Example {number} <example-methodlines-heatFE>` and @demo-methodlines-heatFE is essentially the same one we used for the Black–Scholes equation in {numref}`section-diffusion-blackscholes`. By changing the time integrator, we can get much better results.
 
 (example-methodlines-heatBE)=
 ::::{prf:example}
@@ -181,7 +181,7 @@ Because backward Euler is an implicit method, a linear system must be solved for
 
 
 
-{numref}`Demo %s <demo-methodlines-heatBE>` suggests that implicit time stepping methods have an important role in diffusion. We will analyze the reason in the next few sections.
+@demo-methodlines-heatBE suggests that implicit time stepping methods have an important role in diffusion. We will analyze the reason in the next few sections.
 
 ## Black-box IVP solvers
 
@@ -210,18 +210,18 @@ Instead of coding one of the Runge–Kutta or multistep formulas directly for a 
 `````
 ::::
 
-The adaptive time integrators can all produce solutions. But, as seen in {numref}`Demo %s <demo-methodlines-auto>`, they are not equivalent in every important sense. Whether we choose to implement a method directly with a fixed step size, or automatically with adaptation, there is something crucial to understand about the semidiscrete problem {eq}`heatMOL` that will occupy our attention in the next two sections.
+The adaptive time integrators can all produce solutions. But, as seen in @demo-methodlines-auto, they are not equivalent in every important sense. Whether we choose to implement a method directly with a fixed step size, or automatically with adaptation, there is something crucial to understand about the semidiscrete problem {eq}`heatMOL` that will occupy our attention in the next two sections.
 
 ## Exercises
 
 ``````{exercise}
-⌨ Revisit {numref}`Demo {number} <demo-methodlines-heatFE>`. For each $m=20,30,\dots,120$ points in space, let $n=20,30,40,\dots$ in turn until you reach the smallest $n$ such that the numerical solution remains bounded above by 2 for all time; call this value $N(m)$. Make a log-log plot of $N(m)$ as a function of $m$. If you suppose that $N=O(m^p)$ for a simple rational number $p$, what is a reasonable hypothesis for $p$?
+⌨ Revisit @demo-methodlines-heatFE. For each $m=20,30,\dots,120$ points in space, let $n=20,30,40,\dots$ in turn until you reach the smallest $n$ such that the numerical solution remains bounded above by 2 for all time; call this value $N(m)$. Make a log-log plot of $N(m)$ as a function of $m$. If you suppose that $N=O(m^p)$ for a simple rational number $p$, what is a reasonable hypothesis for $p$?
 ``````
 
 ``````{exercise}
-In {numref}`Demo {number} <demo-methodlines-auto>`, as $t\to \infty$ the solution $u(x,t)$ approaches a value that is constant in both space and time.
+In @demo-methodlines-auto, as $t\to \infty$ the solution $u(x,t)$ approaches a value that is constant in both space and time.
 
-**(a)** ⌨ Set $m=400$ and use a native IVP solver, as shown in {numref}`Demo {number} <demo-methodlines-auto>`, to find this constant value to at least eight digits of accuracy.
+**(a)** ⌨ Set $m=400$ and use a native IVP solver, as shown in @demo-methodlines-auto, to find this constant value to at least eight digits of accuracy.
 
 **(b)** ✍ Prove that $Q = \int_0^1 u(x,t) \,dx$ is constant in time. (Hint: If its derivative is zero, then it is constant. Take the derivative of the integral with respect to $t$ and apply the PDE and periodic end conditions.)
 
@@ -244,7 +244,7 @@ Note that each side of the method is evaluated at a different time level.
 ``````
 
 ``````{exercise}
-⌨ Repeat {numref}`Demo %s <demo-methodlines-heatBE>` using the Crank–Nicolson method {eq}`CNxx`. Then try for $n=240$ as well, which uses a time step ten times larger than before. Does the solution remain stable? 
+⌨ Repeat @demo-methodlines-heatBE using the Crank–Nicolson method {eq}`CNxx`. Then try for $n=240$ as well, which uses a time step ten times larger than before. Does the solution remain stable? 
 ``````
 
 ``````{exercise}
@@ -252,7 +252,7 @@ The PDE $u_t = 2u + u_{xx}$ combines growth with diffusion.
 
 **(a)** ✍ Derive an equation analogous to {eq}`BExx` that combines second-order semidiscretization in space with the backward Euler solver in time.
 
-**(b)** ⌨ Apply your formula from part (a) to solve this PDE with periodic boundary conditions for the same initial condition as in {numref}`Demo {number} <demo-methodlines-heatBE>`. Use  $m=200$ points in space and $n=1000$ time levels. Plot the solution on one graph at times $t=0,0.04,0.08,\ldots,0.2$, or animate the solution over $0\le t \le 0.2$.
+**(b)** ⌨ Apply your formula from part (a) to solve this PDE with periodic boundary conditions for the same initial condition as in @demo-methodlines-heatBE. Use  $m=200$ points in space and $n=1000$ time levels. Plot the solution on one graph at times $t=0,0.04,0.08,\ldots,0.2$, or animate the solution over $0\le t \le 0.2$.
 ``````
 
 ``````{exercise}

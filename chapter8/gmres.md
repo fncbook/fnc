@@ -7,7 +7,7 @@ numbering:
 
 The most important use of the Arnoldi iteration is to solve the square linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, resulting in a well-known algorithm called GMRES.[^gmres]
 
-In {numref}`Demo {number} <demo-subspace-unstable>`, we attempted to replace the linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$ by the lower-dimensional approximation
+In @demo-subspace-unstable, we attempted to replace the linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$ by the lower-dimensional approximation
 
 :::{math}
 \min_{\mathbf{x}\in \mathcal{K}_m} \|  \mathbf{A}\mathbf{x}-\mathbf{b}  \| = \min_{\mathbf{z}\in\mathbb{C}^m} \|   \mathbf{A}\mathbf{K}_m\mathbf{z}-\mathbf{b}  \|,
@@ -97,7 +97,7 @@ A basic implementation of GMRES is given in {numref}`Function {number} <function
 
 ## Convergence
 
-In {numref}`Demo %s <demo-subspace-unstable>`, we tried to implement the GMRES idea using the Krylov matrix. After some initial reduction in the norm of the residual, improvement stopped due to the poor conditioning of that matrix. We return to the linear system in that example now to show that a stable implementation based on the Arnoldi iteration continues to improve the residual nearly to machine precision.
+In @demo-subspace-unstable, we tried to implement the GMRES idea using the Krylov matrix. After some initial reduction in the norm of the residual, improvement stopped due to the poor conditioning of that matrix. We return to the linear system in that example now to show that a stable implementation based on the Arnoldi iteration continues to improve the residual nearly to machine precision.
 
 (demo-gmres-intro)=
 ::::{prf:example} GMRES
@@ -131,7 +131,7 @@ For the approximations $\mathbf{x}_m$ produced by GMRES, the norm of the residua
 ```{index} convergence rate; linear
 ```
 
-Unfortunately, making other conclusive statements about the convergence of GMRES is not easy. {numref}`Demo %s <demo-gmres-intro>` shows the cleanest behavior: essentially, linear convergence down to the range of machine epsilon. But it is possible for the convergence to go through phases of sublinear and superlinear convergence as well. There is a strong dependence on the eigenvalues of the matrix, a fact we address with more precision and detail in the next section.
+Unfortunately, making other conclusive statements about the convergence of GMRES is not easy. @demo-gmres-intro shows the cleanest behavior: essentially, linear convergence down to the range of machine epsilon. But it is possible for the convergence to go through phases of sublinear and superlinear convergence as well. There is a strong dependence on the eigenvalues of the matrix, a fact we address with more precision and detail in the next section.
 
 ```{index} ! GMRES; restarting
 ```
@@ -229,7 +229,7 @@ $$
 \end{bmatrix},
 $$ 
 
-let $\mathbf{I}$ be a $100\times 100$ identity, and let $\mathbf{Z}$ be a $100\times 100$ matrix of zeros. Also let $\mathbf{b}$ be a $200\times 1$ vector of ones. You will use GMRES with restarts, as in {numref}`Demo {number} <demo-gmres-restart>` (i.e., not the book's version of `gmres`).
+let $\mathbf{I}$ be a $100\times 100$ identity, and let $\mathbf{Z}$ be a $100\times 100$ matrix of zeros. Also let $\mathbf{b}$ be a $200\times 1$ vector of ones. You will use GMRES with restarts, as in @demo-gmres-restart (i.e., not the book's version of `gmres`).
 
 **(a)** Let $\mathbf{A} = \begin{bmatrix} \mathbf{B} & \mathbf{I} \\ \mathbf{Z} & \mathbf{B} \end{bmatrix}.$ What are its eigenvalues (no computer required here)? Apply `gmres` with tolerance $10^{-10}$ for 100 iterations without restarts, and plot the residual convergence. 
 

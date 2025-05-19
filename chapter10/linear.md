@@ -263,7 +263,7 @@ Its exact solution is $u(x) = e^{\sin x}$.
 
 ## Accuracy and stability
 
-We revisit {numref}`Demo %s <demo-shooting-unstable>`, which exposed instability in the shooting method, in order to verify second-order convergence.
+We revisit @demo-shooting-unstable, which exposed instability in the shooting method, in order to verify second-order convergence.
 
 (demo-linear-converge)=
 ::::{prf:example} Convergence for a linear BVP
