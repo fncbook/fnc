@@ -719,12 +719,10 @@ print("error (6th order):", I - R)
 We can make a triangular table of the errors:
 
 ```{code-cell}
-err = nan * ones((3, 3))
-err[0, :] = I - T
-err[1, 1:] = I - S
-err[2, 2] = I - R
-results = PrettyTable(["2nd order", "4th order", "6th order"])
-results.add_rows(err.T)
+results = PrettyTable()
+results.add_column("2nd order", I - T)
+results.add_column("4th order", concatenate(([nan],I - S)))
+results.add_column("6th order", [nan, nan, I - R])
 print(results)
 ```
 
