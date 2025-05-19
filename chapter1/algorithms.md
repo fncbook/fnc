@@ -234,10 +234,6 @@ There's a lot more to be said about functions in Python, but this is enough to g
 
 ## Exercises
 
-```{note}
-The exercises marked with a computer icon require the use of a computer. The others can be done by hand.
-```
-
 ```{warning}
 A polynomial is represented as a vector of coefficients in all three languages covered by this book. However, in Julia they are given in *ascending* degree order, which is most convenient programmatically, while in MATLAB and NumPy they are given in *descending* order, which is the way we usually write them. This difference makes writing the exercises universally a little awkward, so be advised.
 ```
