@@ -242,7 +242,7 @@ We should not expect that two mathematically equivalent results will be equal wh
 
 ## Exercises
 
-```{note}
+```{important}
 Exercises marked with ✍ are intended to be done by hand or with the aid of a simple calculator. Exercises marked with ⌨ are intended to be solved using a computer.
 ```
 

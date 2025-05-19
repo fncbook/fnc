@@ -43,6 +43,10 @@ p(x) &= c_1 + c_2 x + \cdots + c_n x^{n-1} \\
 \end{split}
 ```
 
+```{warning}
+A polynomial is represented as a vector of coefficients in all three languages covered by this book. However, in Julia they are given in *ascending* degree order, which is most convenient programmatically, while in MATLAB and NumPy they are given in *descending* order, which is the way we usually write them. 
+```
+
 (function-horner)=
 ``````{prf:algorithm} horner
 `````{tab-set} 
@@ -88,9 +92,7 @@ matlab
 `````
 ``````
 
-
 ## Writing your own functions
-
 
 Any collection of statements organized around solving a type of problem should probably be wrapped in a function. One clue is that if you find yourself copying and pasting code, perhaps with small changes in each instance, you should probably be writing a function instead.
 
@@ -231,12 +233,7 @@ There's a lot more to be said about functions in Python, but this is enough to g
 ```` 
 `````
 
-
 ## Exercises
-
-```{warning}
-A polynomial is represented as a vector of coefficients in all three languages covered by this book. However, in Julia they are given in *ascending* degree order, which is most convenient programmatically, while in MATLAB and NumPy they are given in *descending* order, which is the way we usually write them. This difference makes writing the exercises universally a little awkward, so be advised.
-```
 
 ``````{exercise}
 ⌨ Write a function `poly1(p)` that returns the value of a polynomial $p(x) = c_1 + c_2 x + \cdots + c_n x^{n-1}$ at $x=-1$. You should do this directly, not by a call to or imitation of {numref}`Function {number} <function-horner>`. Test your function on $r(x)=3x^3-x+1$ and $s(x)=2x^2-x$.
