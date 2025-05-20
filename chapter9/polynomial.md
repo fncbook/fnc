@@ -104,7 +104,7 @@ p(x) = \sum_{k=0}^n y_k \ell_k(x).
 :::
 ::::
 
-At this point we can say that we have completed the proof of {numref}`Theorem %s <theorem-polyinterp>`.
+At this point we can say that we have completed the proof of @theorem-polyinterp.
 
 (example-ClassicalLagrange)=
 ::::{prf:example}
@@ -210,7 +210,7 @@ $$ |f(x)-p(x)| \le \frac{1}{5} \left| \Phi(x) \right|.$$
 `````
 ::::
 
-For equispaced nodes, {numref}`Theorem %s <theorem-polyinterp>` has an immediate consequence. 
+For equispaced nodes, @theorem-polyinterp has an immediate consequence. 
 
 (theorem-polyequi)=
 ::::{prf:corollary}

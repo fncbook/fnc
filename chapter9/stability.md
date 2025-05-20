@@ -245,7 +245,7 @@ On the left, we use a log-log scale, which makes fourth-order algebraic converge
 
 ``````{exercise}
 :label: problem-stability-nonsmooth
-{numref}`Theorem %s <theorem-spectral>` assumes that the function being approximated has infinitely many derivatives over $[-1,1]$. But now consider the family of functions $f_m(x)=|x|^m$. 
+@theorem-spectral assumes that the function being approximated has infinitely many derivatives over $[-1,1]$. But now consider the family of functions $f_m(x)=|x|^m$. 
 
 **(a)** ✍ How many continuous derivatives over $[-1,1]$ does $f_m$ possess?
 

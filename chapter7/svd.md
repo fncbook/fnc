@@ -338,7 +338,7 @@ $\begin{bmatrix}
 
 ``````{exercise}
 :label: problem-svd-ATA
-✍ Apply {numref}`Theorem {number} <theorem-svd-ATA>` to find an SVD of $\mathbf{A}=\displaystyle \begin{bmatrix} 1 & 0 \\ 0 & 0 \\ 0 & 1 \\ -1 & -1 \end{bmatrix}.$
+✍ Apply @theorem-svd-ATA to find an SVD of $\mathbf{A}=\displaystyle \begin{bmatrix} 1 & 0 \\ 0 & 0 \\ 0 & 1 \\ -1 & -1 \end{bmatrix}.$
 ``````
 
 ``````{exercise}
@@ -366,7 +366,7 @@ $\begin{bmatrix}
 
 ``````{exercise}
 :label: problem-svd-cond
-✍ Prove {eq}`svdcond` of {numref}`Theorem %s <theorem-svdprops>`, given that {eq}`svdnorm` is true. (Hint: If the SVD of $\mathbf{A}$ is known, what is the SVD of $\mathbf{A}^{+}$?)
+✍ Prove {eq}`svdcond` of @theorem-svdprops, given that {eq}`svdnorm` is true. (Hint: If the SVD of $\mathbf{A}$ is known, what is the SVD of $\mathbf{A}^{+}$?)
 ``````
 
 ``````{exercise}

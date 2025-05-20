@@ -287,7 +287,7 @@ The geometric interpretation of the matrix 2-norm shown in {numref}`Demo %s <dem
 ``````
 
 ``````{exercise}
-✍ Prove that for any induced matrix norm and nonsingular matrix $\mathbf{A}$, $\| \mathbf{A}^{-1} \| \ge (\| \mathbf{A} \|)^{-1}$. (Hint: Apply {numref}`Theorem %s <theorem-norms-inequalities>`.)
+✍ Prove that for any induced matrix norm and nonsingular matrix $\mathbf{A}$, $\| \mathbf{A}^{-1} \| \ge (\| \mathbf{A} \|)^{-1}$. (Hint: Apply @theorem-norms-inequalities.)
 ``````
 
 ``````{exercise}

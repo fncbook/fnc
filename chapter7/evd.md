@@ -435,7 +435,7 @@ displacements of point masses placed along a string satisfy a linear system $\ma
 
 **(d)** Repeat part (b) with $\mathbf{T}$ in place of $\mathbf{A}$.
 
-**(e)** Compute some condition numbers and apply {numref}`Theorem %s <theorem-bauer-fike>` to explain the dramatic difference between your plots with respect to the dot distributions.
+**(e)** Compute some condition numbers and apply @theorem-bauer-fike to explain the dramatic difference between your plots with respect to the dot distributions.
 ``````
 
 ``````{exercise}

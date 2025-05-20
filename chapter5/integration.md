@@ -157,7 +157,7 @@ For the numerical integration formula {eq}`quadrature`, the **truncation error**
 The **order of accuracy** is as defined in {numref}`Definition {number} <definition-fd-converge-ooa>`.
 ::::
 
-In {numref}`Theorem %s <theorem-pwlin-converge>` we stated that the pointwise error in a piecewise linear interpolant with equal node spacing $h$ is bounded by $O(h^2)$ as $h\rightarrow 0$. Using $I$ to stand for the exact integral of $f$ and $p$ to stand for the piecewise linear interpolant, we obtain
+In @theorem-pwlin-converge we stated that the pointwise error in a piecewise linear interpolant with equal node spacing $h$ is bounded by $O(h^2)$ as $h\rightarrow 0$. Using $I$ to stand for the exact integral of $f$ and $p$ to stand for the piecewise linear interpolant, we obtain
 
 ```{math}
 \begin{split}

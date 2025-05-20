@@ -158,7 +158,7 @@ with the eigenvalues ordered as in {eq}`shiftorder`. Thus, the convergence is be
 
 ## Dynamic shifting
 
-There is a clear opportunity for positive feedback in {numref}`Algorithm {number} <algorithm-inviter-inviter>`. The convergence rate of inverse iteration improves as the shift gets closer to the true eigenvalue—and the algorithm computes improving eigenvalue estimates! If we update the shift to $s=\beta_k$ after each iteration, the convergence accelerates. You are asked to implement this algorithm in {ref}`Exercise 6 <problem-inviter-dynamicshift>`.
+There is a clear opportunity for positive feedback in {numref}`Algorithm {number} <algorithm-inviter-inviter>`. The convergence rate of inverse iteration improves as the shift gets closer to the true eigenvalue—and the algorithm computes improving eigenvalue estimates! If we update the shift to $s=\beta_k$ after each iteration, the convergence accelerates. You are asked to implement this algorithm in @problem-inviter-dynamicshift.
 
 ```{index} convergence rate; quadratic
 ```

@@ -8,7 +8,7 @@ numbering:
 ```{index} multistep method
 ```
 
-For one-step methods such as Runge–Kutta, {numref}`Theorem %s <theorem-euler-onestepGTE>` guarantees that the method converges and that the global error is of the same order as the local truncation error. For multistep methods, however, a new wrinkle is introduced. 
+For one-step methods such as Runge–Kutta, @theorem-euler-onestepGTE guarantees that the method converges and that the global error is of the same order as the local truncation error. For multistep methods, however, a new wrinkle is introduced. 
 
 (demo-zs-LIAF)=
 ::::{prf:example} Instability
@@ -138,7 +138,7 @@ It turns out that lacking zero-stability is the only thing that can go wrong for
 A linear multistep method converges as $h\to 0$ if and only if it is consistent and zero-stable.
 ```
 
-The Dahlquist equivalence theorem is one of the most important and celebrated in the history of numerical analysis. It can be proved more precisely that a zero-stable, consistent method is convergent in the same sense as {numref}`Theorem %s <theorem-euler-onestepGTE>`, with the error between numerical and exact solutions being of the same order as the local truncation error, for a wide class of problems.
+The Dahlquist equivalence theorem is one of the most important and celebrated in the history of numerical analysis. It can be proved more precisely that a zero-stable, consistent method is convergent in the same sense as @theorem-euler-onestepGTE, with the error between numerical and exact solutions being of the same order as the local truncation error, for a wide class of problems.
 
 You may have noticed that the Adams and BD formulas use only about half of the available data from the past $k$ steps, i.e., they have many possible coefficients set to zero. For instance, a $k$-step AB method uses only the $f_j$-values and has order $k$. The order could be made higher by also using $u_j$-values, like the LIAF method does for $k=2$. Also like the LIAF method, however, such attempts are doomed by instability.
 
@@ -159,7 +159,7 @@ p \le
 ```
 ````
 
-The lesson of {numref}`Theorem {number} <theorem-zerostability-dahlquist>` is that accuracy is not the only important feature, and trying to optimize for it leads to failure. New lessons on the same theme appear in {numref}`section-diffusion-absstab`.
+The lesson of @theorem-zerostability-dahlquist is that accuracy is not the only important feature, and trying to optimize for it leads to failure. New lessons on the same theme appear in {numref}`section-diffusion-absstab`.
 
 ## Exercises
 
@@ -170,7 +170,7 @@ The lesson of {numref}`Theorem {number} <theorem-zerostability-dahlquist>` is th
 
 ``````{exercise}
 :label: problem-zerostability-rootcondition
-✍ / ⌨  Verify that the order of accuracy of the given multistep method is at least 1. Then apply {numref}`Theorem %s <theorem-zerostability-rootcondition>` to determine whether it is zero-stable.
+✍ / ⌨  Verify that the order of accuracy of the given multistep method is at least 1. Then apply @theorem-zerostability-rootcondition to determine whether it is zero-stable.
 
 **(a)** BD2
 
@@ -188,7 +188,7 @@ The lesson of {numref}`Theorem {number} <theorem-zerostability-dahlquist>` is th
 
 ``````{exercise}
 :label: problem-zerostability-fibonacci
-✍  A Fibonacci sequence is defined by $u_{i+1}=u_i+u_{i-1}$, where $u_0$ and $u_1$ are seed values. Using the proof of {numref}`Theorem %s <theorem-zerostability-rootcondition>`, find $r_1$ and $r_2$ such that $u_i=c_1(r_1)^i+c_2(r_2)^i$ for all $i$.
+✍  A Fibonacci sequence is defined by $u_{i+1}=u_i+u_{i-1}$, where $u_0$ and $u_1$ are seed values. Using the proof of @theorem-zerostability-rootcondition, find $r_1$ and $r_2$ such that $u_i=c_1(r_1)^i+c_2(r_2)^i$ for all $i$.
 
 ``````
 

@@ -238,7 +238,7 @@ Given that $\Psi(x)\in \mathcal{P}_{n-1}$, we can ensure that this condition is 
 for all $q \in {\mathcal{P}}_{n-1}$. Hence satisfaction of {eq}`gqorthogonality` implies satisfaction of {eq}`gqoptimality`. But by the orthogonality property of Legendre polynomials, satisfaction of {eq}`gqorthogonality` is guaranteed if $\Phi(x)=cP_n(x)$ for a constant $c$. Thus $\Phi$ and $P_n$ have the same roots.
 ::::
 
-From {numref}`Theorem %s <theorem-orthogonal-roots>` we know that the roots of $P_n$ are distinct and all within $(-1,1)$. (Indeed, it would be strange to have the integral of a function depend on some of its values outside the integration interval!)  While there is no explicit formula for the roots, there are fast algorithms to compute them and the integration weights on demand. {numref}`Function {number} <function-glint>` uses one of the oldest methods,  practical up to $n=100$ or so.
+From @theorem-orthogonal-roots we know that the roots of $P_n$ are distinct and all within $(-1,1)$. (Indeed, it would be strange to have the integral of a function depend on some of its values outside the integration interval!)  While there is no explicit formula for the roots, there are fast algorithms to compute them and the integration weights on demand. {numref}`Function {number} <function-glint>` uses one of the oldest methods,  practical up to $n=100$ or so.
 
 (function-glint)=
 ``````{prf:algorithm} glint
@@ -359,7 +359,7 @@ Use {numref}`Function {number} <function-trapezoid>` to find the period of the m
 
 ``````{exercise}
 :label: problem-specint-linearity
-✍ Prove the claim about linearity of the Gauss–Legendre integration formula alluded to in the derivation of {numref}`Theorem %s <theorem-specint-gaussquad>`. Namely, show that condition {eq}`gqoptimality` is true if and only if
+✍ Prove the claim about linearity of the Gauss–Legendre integration formula alluded to in the derivation of @theorem-specint-gaussquad. Namely, show that condition {eq}`gqoptimality` is true if and only if
 
 $$
 \int_{-1}^1 x^j\,dx = \sum_{k=1}^n w_k x_k^j

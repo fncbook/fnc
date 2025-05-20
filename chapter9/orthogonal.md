@@ -157,7 +157,7 @@ has the solution
 where $\mathbf{F}$ is the quasimatrix {eq}`quasimat`.
 ::::
 
-There is no need to supply a proof of {numref}`Theorem {number} <theorem-orthogonal-normal>` because it will read exactly the same as for the discrete normal equations. All the effort has gone into making definitions that set up a perfect analogy. In retrospect, all we needed in the original discrete case were linear combinations and inner products.
+There is no need to supply a proof of @theorem-orthogonal-normal because it will read exactly the same as for the discrete normal equations. All the effort has gone into making definitions that set up a perfect analogy. In retrospect, all we needed in the original discrete case were linear combinations and inner products.
 
 (example-lsfitexpfun)=
 ::::{prf:example}
@@ -326,7 +326,7 @@ Chebyshev polynomials also have a startling alternative form,
 T_k(x) = \cos\left( k \theta \right), \quad \theta = \arccos(x).
 :::
 
-The results from {numref}`Theorem {number} <theorem-orthogonal-legendre>` apply to Chebyshev polynomials as well, with orthogonality being in the sense of {eq}`chebinner`. Their Gram matrix is given by
+The results from @theorem-orthogonal-legendre apply to Chebyshev polynomials as well, with orthogonality being in the sense of {eq}`chebinner`. Their Gram matrix is given by
 
 $$
 \langle T_i,T_j \rangle 
@@ -366,7 +366,7 @@ By definition, $r(x)P_n(x)$ does not change sign over $(-1,1)$. Therefore
 Because $r$ is a degree-$m$ polynomial, we can express it as a combination of $P_0,\ldots,P_m$. If $m<n$, the integral {eq}`legrootint` would be zero, by the orthogonality property of Legendre polynomials. So $m\ge n$. Since $P_n(x)$ has at most $n$ real roots, $m=n$. All of the roots must therefore be simple, and this completes the proof.
 ::::
 
-The result of {numref}`Theorem {number} <theorem-orthogonal-roots>` holds for orthogonal families of polynomials for other weight functions. The Chebyshev case is unusual in that thanks to {eq}`chebaltform`, the roots of $T_n$ are known explicitly:
+The result of @theorem-orthogonal-roots holds for orthogonal families of polynomials for other weight functions. The Chebyshev case is unusual in that thanks to {eq}`chebaltform`, the roots of $T_n$ are known explicitly:
 
 :::{math}
 :label: chebfirstpoints
@@ -399,7 +399,7 @@ Interpolation has no easy connection to inner products or the 2-norm. With inter
 :label: problem-orthogonal-leastsq
 ✍ **(a)** Find the best linear approximation in the least-squares sense to the function $\sin(x)$ on $[-1,1]$. 
 
-**(b)** Using {numref}`Theorem {number} <theorem-orthogonal-normal>`, explain why the best fitting quadratic polynomial will be the linear function you found in part (a). (Note: You do not need to carry out the complete calculation.)
+**(b)** Using @theorem-orthogonal-normal, explain why the best fitting quadratic polynomial will be the linear function you found in part (a). (Note: You do not need to carry out the complete calculation.)
 ``````
 
 ``````{exercise}

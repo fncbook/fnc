@@ -62,7 +62,7 @@ and thus the interpolating polynomial in {eq}`lagrangeinterp` is
 p(x) = \Phi(x) \sum_{k=0}^n \frac{w_k}{x-t_k} y_k.
 :::
 
-Obviously, the constant function $p(x)\equiv 1$ is its own polynomial interpolant on any set of nodes. The uniqueness of the interpolating polynomial, as proved in {numref}`Theorem %s <theorem-polyinterp>`, allows us to plug $y_k=1$ for all $k$ into {eq}`bary1` to obtain
+Obviously, the constant function $p(x)\equiv 1$ is its own polynomial interpolant on any set of nodes. The uniqueness of the interpolating polynomial, as proved in @theorem-polyinterp, allows us to plug $y_k=1$ for all $k$ into {eq}`bary1` to obtain
 
 $$
 1 = \Phi(x) \sum_{k=0}^n \frac{w_k}{x-t_k}.

@@ -289,7 +289,7 @@ The error decreases geometrically as $s$ is incremented, so trading a stage for 
 
 ``````{exercise}
 :label: problem-rk-emimplement
-⌨ Modify {numref}`Function {number} <function-rk4>` to implement the modified Euler method. Test your function on the IVP in part (a) of Exercise 1 by solving with $n=30,60,90,\ldots,300$ and plotting the convergence of the error at the final time together with a line showing $O(n^{-2})$. 
+⌨ Modify {numref}`Function {number} <function-rk4>` to implement the modified Euler method. Test your function on the IVP in part (a) of @problem-rk-byhand by solving with $n=30,60,90,\ldots,300$ and plotting the convergence of the error at the final time together with a line showing $O(n^{-2})$. 
 ``````
 
 ``````{exercise}
@@ -299,7 +299,7 @@ The error decreases geometrically as $s$ is incremented, so trading a stage for 
 
 ``````{exercise}
 :label: problem-rk-heunimplement
-⌨ Modify {numref}`Function {number} <function-rk4>` to implement Heun's method. Test your function on the IVP in part (a) of Exercise 1 by solving with $n=30,60,90,\ldots,300$ and plotting the convergence of the error at the final time together with a line showing $O(n^{-2})$. 
+⌨ Modify {numref}`Function {number} <function-rk4>` to implement Heun's method. Test your function on the IVP in part (a) of @problem-rk-byhand by solving with $n=30,60,90,\ldots,300$ and plotting the convergence of the error at the final time together with a line showing $O(n^{-2})$. 
 ``````
 
 ``````{exercise}

@@ -336,7 +336,7 @@ Solution: $u(x) = \left(x+\frac{1}{2}\right)^{-2}$
 
 ``````{exercise}
 :label: problem-linearbvp-fdlinspec
-⌨ Modify {numref}`Function {number} <function-bvplin>` to use spectral differentiation rather than second-order finite differences. For each of the cases in Exercise 1, solve the problem with $n=5,10,15,\ldots,40$, finding the infinity norm of the error in each case. Make a log-linear plot of error versus $n$.
+⌨ Modify {numref}`Function {number} <function-bvplin>` to use spectral differentiation rather than second-order finite differences. For each of the cases in @problem-linearbvp-fdlin1, solve the problem with $n=5,10,15,\ldots,40$, finding the infinity norm of the error in each case. Make a log-linear plot of error versus $n$.
 ``````
 
 ```{index} Bessel equation

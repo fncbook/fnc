@@ -136,7 +136,7 @@ If the derivative $\frac{\partial f}{\partial u}$ exists and $\left|\frac{\parti
 ```{index} condition number; of initial-value problems
 ```
 
-In a numerical context we have to be concerned about the conditioning of the IVP. There are two key items in {eq}`IVP` that we might consider to be the data of the initial-value ODE problem: the function $f(t,u)$, and the initial value $u_0$. It's easier to discuss perturbations to numbers than to functions, so we will focus on the effect of $u_0$ on the solution, using the following theorem that we give without proof. Happily, its conditions are identical to those in {numref}`Theorem %s <theorem-existunique>`.
+In a numerical context we have to be concerned about the conditioning of the IVP. There are two key items in {eq}`IVP` that we might consider to be the data of the initial-value ODE problem: the function $f(t,u)$, and the initial value $u_0$. It's easier to discuss perturbations to numbers than to functions, so we will focus on the effect of $u_0$ on the solution, using the following theorem that we give without proof. Happily, its conditions are identical to those in @theorem-existunique.
 
 (theorem-depIC)=
 ````{prf:theorem} Dependence on initial value
@@ -150,7 +150,7 @@ If the derivative $\frac{\partial f}{\partial u}$ exists and $\left|\frac{\parti
 for all sufficiently small $|\delta|$.
 ````
 
-Numerical solutions of IVPs have errors, and those errors can be seen as perturbations to the solution. {numref}`Theorem %s <theorem-depIC>` gives an upper bound of $e^{L(b-a)}$ on the infinity norm (i.e., pointwise) absolute condition number of the solution with respect to perturbations at an initial time. However, the upper bound may be a terrible overestimate of the actual sensitivity for a particular problem.
+Numerical solutions of IVPs have errors, and those errors can be seen as perturbations to the solution. @theorem-depIC gives an upper bound of $e^{L(b-a)}$ on the infinity norm (i.e., pointwise) absolute condition number of the solution with respect to perturbations at an initial time. However, the upper bound may be a terrible overestimate of the actual sensitivity for a particular problem.
 
 (demo-basics-cond)=
 ::::{prf:example} Conditioning of an IVP
@@ -181,7 +181,7 @@ In general, solutions can diverge from, converge to, or oscillate around the ori
 
 ``````{exercise}
 :label: problem-basics-lipschitz
-✍ For each IVP, determine whether the problem satisfies the conditions of {numref}`Theorem %s <theorem-depIC>`. If so, determine the smallest possible value for $L$.
+✍ For each IVP, determine whether the problem satisfies the conditions of @theorem-depIC. If so, determine the smallest possible value for $L$.
 
 **(a)** $f(t,u) = 3 u,\; 0 \le t \le 1$
 
@@ -210,7 +210,7 @@ In general, solutions can diverge from, converge to, or oscillate around the ori
 :label: problem-basics-existence
 ✍ Consider the IVP $u'=u^2$, $u(0)=\alpha$.
 
-**(a)** Does {numref}`Theorem %s <theorem-existunique>` apply to this problem?
+**(a)** Does @theorem-existunique apply to this problem?
 
 **(b)** Show that $u(t) = \alpha/(1-\alpha t)$ is a solution of the IVP.
 

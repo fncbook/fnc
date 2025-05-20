@@ -315,7 +315,7 @@ For the second derivative, $\mathbf{D}_{xx} = \mathbf{D}_x^2$.
 The Chebyshev differentiation matrix is not sparse. There are compact formulas available elsewhere for the entries of $\mathbf{D}_{xx}$ ({cite}`trefethenSpectralMethods2000`).
 :::
 
-{numref}`Function {number} <function-diffcheb>` returns the matrices from @def-diffmatcheb. This function uses a change of variable to transplant the standard $[-1,1]$ for Chebyshev nodes to any $[a,b]$. It also takes a different approach to computing the diagonal elements of $\mathbf{D}_x$ than the formulas in {eq}`chebdiffmat` (see {ref}`Exercise 5 <problem-diffmats-negsumtrick>`).
+{numref}`Function {number} <function-diffcheb>` returns the matrices from @def-diffmatcheb. This function uses a change of variable to transplant the standard $[-1,1]$ for Chebyshev nodes to any $[a,b]$. It also takes a different approach to computing the diagonal elements of $\mathbf{D}_x$ than the formulas in {eq}`chebdiffmat` (see @problem-diffmats-negsumtrick).
 
 (function-diffcheb)=
 ``````{prf:algorithm} diffcheb
@@ -364,7 +364,7 @@ The Chebyshev differentiation matrix is not sparse. There are compact formulas a
 
 ::::
 
-According to {numref}`Theorem %s <theorem-spectral>`, the convergence of polynomial interpolation to $f$ using Chebyshev nodes is spectral if $f$ is analytic (at least having infinitely many derivatives) on the interval. The derivatives of $f$ are also approximated with spectral accuracy.
+According to @theorem-spectral, the convergence of polynomial interpolation to $f$ using Chebyshev nodes is spectral if $f$ is analytic (at least having infinitely many derivatives) on the interval. The derivatives of $f$ are also approximated with spectral accuracy.
 
 ## Exercises
 

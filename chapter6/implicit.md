@@ -250,5 +250,5 @@ Consider the IVP
 :label: problem-implicit-am1
 ⌨ **(a)** Modify {numref}`Function {number} <function-am2>` to implement the backward Euler (AM1) method.
 
-**(b)** Repeat part (d) of Exercise 7 above, using AM1 in place of AM2 and $n=400,800$. Does the AM1 method conserve energy?
+**(b)** Repeat part (d) of @problem-implicit-ivpimag above, using AM1 in place of AM2 and $n=400,800$. Does the AM1 method conserve energy?
 ``````

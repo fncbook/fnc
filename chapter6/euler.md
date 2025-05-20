@@ -156,7 +156,7 @@ By our definitions, the local error in stepping from $t_i$ to $t_{i+1}$ is $h\ta
 
 [^altLTE]: Another point of view is that we can of course make local errors smaller by chopping $h$ in half, but then we have to take twice as many steps. The important quantity, then, is local error *per unit step length*, which is how $\tau$ is defined.
 
-However, global error is not as simple as a sum of local errors. As explained in {numref}`Theorem {number} <theorem-depIC>` and illustrated in {numref}`Demo %s <demo-basics-cond>`, each step causes a perturbation of the solution that can grow as $t$ advances. Thus, we have to account for the flow evolution of individual step truncation errors as well as their mere accumulation. That is the subject of the following theorem.
+However, global error is not as simple as a sum of local errors. As explained in @theorem-depIC and illustrated in {numref}`Demo %s <demo-basics-cond>`, each step causes a perturbation of the solution that can grow as $t$ advances. Thus, we have to account for the flow evolution of individual step truncation errors as well as their mere accumulation. That is the subject of the following theorem.
 
 (theorem-euler-onestepGTE)=
 ````{prf:theorem}
@@ -252,7 +252,7 @@ The theorem justifies one more general definition.
 If the local truncation error of the one-step method {eq}`onestepODE` satisfies $\tau_{i+1}(h)=O(h^p)$ for a positive integer $p$, then $p$ is the **order of accuracy** of the formula.
 ::::
 
-We could restate {numref}`Theorem {number} <theorem-euler-onestepGTE>` as saying that the global error has the same order of accuracy as the LTE. Note, however, that the $O(h^p)$ convergence hides a leading constant that grows exponentially in time. When the time interval is bounded as $h\to 0$, this does not interfere with the conclusion, but the behavior as $t\to\infty$ contains no such guarantee.
+We could restate @theorem-euler-onestepGTE as saying that the global error has the same order of accuracy as the LTE. Note, however, that the $O(h^p)$ convergence hides a leading constant that grows exponentially in time. When the time interval is bounded as $h\to 0$, this does not interfere with the conclusion, but the behavior as $t\to\infty$ contains no such guarantee.
 
 (demo-euler-converge)=
 ::::{prf:example} Convergence of Euler's method
@@ -341,10 +341,10 @@ u_{i+1} &= u_i + hf(t_{i}+h,v_{i+1}).
 
 ``````{exercise}
 :label: problem-euler-inequality
-✍ Prove the fact, used in the proof of {numref}`Theorem %s <theorem-euler-onestepGTE>`, that $1+x\le e^x$ for all $x\ge 0$.
+✍ Prove the fact, used in the proof of @theorem-euler-onestepGTE, that $1+x\le e^x$ for all $x\ge 0$.
 ``````
 
 ``````{exercise}
 :label: problem-euler-roundoff
-✍ Suppose that the error in making a step is also subject to roundoff error $\epsilon_{i+1}$, so that the total local error per unit step is $Ch^p+\epsilon_{i+1} h^{-1}$; assume that $|\epsilon_{i+1}| \le \epsilon$ for all $i$ and that the initial condition is known exactly. Generalize {numref}`Theorem %s <theorem-euler-onestepGTE>` for this case.
+✍ Suppose that the error in making a step is also subject to roundoff error $\epsilon_{i+1}$, so that the total local error per unit step is $Ch^p+\epsilon_{i+1} h^{-1}$; assume that $|\epsilon_{i+1}| \le \epsilon$ for all $i$ and that the initial condition is known exactly. Generalize @theorem-euler-onestepGTE for this case.
 ``````

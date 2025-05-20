@@ -175,7 +175,7 @@ The resulting algorithmic simplicity is reflected in {numref}`Function {number} 
 
 ## Conditioning and convergence
 
-The condition number bounds from {numref}`Theorem %s <theorem-interp-conditioning>` are very simple for piecewise linear interpolation because the interpolant of the data $\mathbf{e}_k$ is just the hat function $H_k$. Hence $1\le \kappa \le n+1$. However, there is an even simpler result.
+The condition number bounds from @theorem-interp-conditioning are very simple for piecewise linear interpolation because the interpolant of the data $\mathbf{e}_k$ is just the hat function $H_k$. Hence $1\le \kappa \le n+1$. However, there is an even simpler result.
 
 ```{index} condition number; of interpolation
 ```
@@ -230,7 +230,7 @@ where $M = \bigl\| f'' \bigr\|_\infty$.
 
 For an outline of a proof, see @problem-pwlin-placcuracy.
 
-We normally don't have access to $f''$, so the importance of {numref}`Theorem %s <theorem-pwlin-converge>` is that the error in the interpolant is $O(h^2)$ as $h\to 0$. 
+We normally don't have access to $f''$, so the importance of @theorem-pwlin-converge is that the error in the interpolant is $O(h^2)$ as $h\to 0$. 
 
 ```{index} ! convergence rate; algebraic, ! order of accuracy; of an approximation
 ```
@@ -240,7 +240,7 @@ We normally don't have access to $f''$, so the importance of {numref}`Theorem %s
 If an approximation has error that is $O(h^m)$ as $h\to 0$ for an integer $m$ and a discretization size parameter $h$, then we say the approximation has **algebraic convergence**. If the error is not also $O(h^{m+1})$, then $m$ is the **order of accuracy**.
 ::::
 
-Thus, {numref}`Theorem {number} <theorem-pwlin-converge>` states that piecewise linear interpolation is second-order accurate. For instance, if we increase the number of equally spaced nodes by a factor of 10, the piecewise linear interpolant becomes about 100 times more accurate. Note also that if $y \approx C h^m$, then 
+Thus, @theorem-pwlin-converge states that piecewise linear interpolation is second-order accurate. For instance, if we increase the number of equally spaced nodes by a factor of 10, the piecewise linear interpolant becomes about 100 times more accurate. Note also that if $y \approx C h^m$, then 
 
 $$
 \log y \approx m (\log h) + \log C.
@@ -321,7 +321,7 @@ by evaluating the function and interpolant at 1600 points in the interval. Make 
 
 ``````{exercise}
 :label: problem-pwlin-placcuracy
-✍ Here we consider a proof of {numref}`Theorem %s <theorem-pwlin-converge>` using the mean value theorems from elementary calculus: If $f$ is continuously differentiable in $(a,b)$, then there exist points $s$ and $t$ in $(a,b)$ such that
+✍ Here we consider a proof of @theorem-pwlin-converge using the mean value theorems from elementary calculus: If $f$ is continuously differentiable in $(a,b)$, then there exist points $s$ and $t$ in $(a,b)$ such that
 
 ```{math}
 \int_a^b f(z) \, dz = (b-a)f(s) \qquad \text{and} \qquad f'(t) = \frac{f(b)-f(a)}{b-a}.

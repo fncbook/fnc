@@ -65,7 +65,7 @@ Thus let $\mathbf{z}= \begin{bmatrix} c_1 & \cdots & c_m \end{bmatrix}^T$. Also,
 
 The problems $\mathbf{A}\mathbf{x}=\mathbf{b}$ and $\mathbf{A}\mathbf{x}=\lambda\mathbf{x}$ are posed in a very high-dimensional space $\mathbb{R}^n$ or $\mathbb{C}^n$. One way to approximate them is to replace the full $n$-dimensional space with a much lower-dimensional $\mathcal{K}_m$ for $m\ll n$. This is the essence of the Krylov subspace approach.
 
-For instance, we can interpret $\mathbf{A}\mathbf{x}_m\approx \mathbf{b}$ in the sense of linear least-squares—that is, using {numref}`Theorem %s <theorem-subspace-krylovmult>` to let $\mathbf{x}=\mathbf{K}_m\mathbf{z}$,
+For instance, we can interpret $\mathbf{A}\mathbf{x}_m\approx \mathbf{b}$ in the sense of linear least-squares—that is, using @theorem-subspace-krylovmult to let $\mathbf{x}=\mathbf{K}_m\mathbf{z}$,
 
 :::{math}
 :label: gmresdef
@@ -120,7 +120,7 @@ The polar opposite of an ill-conditioned basis for $\mathcal{K}_m$ is an orthono
   \end{bmatrix}.
 \end{align*}
 
-Then the vectors $\mathbf{q}_1,\ldots,\mathbf{q}_m$ are the orthonormal basis we seek for $\mathcal{K}_m$. By {numref}`Theorem %s <theorem-subspace-krylovmult>`, we know that $\mathbf{A}\mathbf{q}_m \in \mathcal{K}_{m+1}$, and therefore
+Then the vectors $\mathbf{q}_1,\ldots,\mathbf{q}_m$ are the orthonormal basis we seek for $\mathcal{K}_m$. By @theorem-subspace-krylovmult, we know that $\mathbf{A}\mathbf{q}_m \in \mathcal{K}_{m+1}$, and therefore
 
 :::{math}
 :label: arnoldivec

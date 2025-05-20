@@ -8,7 +8,7 @@ numbering:
 ```{index} Runge–Kutta method
 ```
 
-The derivation and analysis of methods for initial-value problems usually assumes a fixed step size $h$. While the error behavior $O(h^p)$ is guaranteed by {numref}`Theorem %s <theorem-euler-onestepGTE>` as $h\rightarrow 0$, this bound comes with an unknowable constant, and it is not very useful as a guide to the numerical value of the error at any particular value of $h$. Furthermore, as we saw in {numref}`section-localapprox-adaptive` for numerical integration, in many problems a fixed step size is far from the most efficient strategy.
+The derivation and analysis of methods for initial-value problems usually assumes a fixed step size $h$. While the error behavior $O(h^p)$ is guaranteed by @theorem-euler-onestepGTE as $h\rightarrow 0$, this bound comes with an unknowable constant, and it is not very useful as a guide to the numerical value of the error at any particular value of $h$. Furthermore, as we saw in {numref}`section-localapprox-adaptive` for numerical integration, in many problems a fixed step size is far from the most efficient strategy.
 
 In response we will employ the basic strategy of {numref}`section-localapprox-adaptive`: estimate the error and adapt the step size in order to reach an accuracy goal. Unlike the integration problem, though, the "integrand" of an IVP is dependent on the solution itself, so the details differ greatly.
 ## Step size prediction

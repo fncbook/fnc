@@ -112,7 +112,7 @@ Of particular interest is a *square* ONC matrix.[^ortho]
 An **orthogonal matrix** is a square matrix with orthonormal columns.
 ```
 
-Orthogonal matrices have properties beyond {numref}`Theorem {number} <theorem-qr-ONC>`. 
+Orthogonal matrices have properties beyond @theorem-qr-ONC. 
 
 [^ortho]: Confusingly, a square matrix whose columns are orthogonal is not necessarily an orthogonal matrix; the columns must be orthonormal, which is a stricter condition.
 
@@ -226,7 +226,7 @@ If we substitute the thin factorization {eq}`economyqr` into the normal equation
 \end{split}
 ```
 
-In order to have the normal equations be well posed, we require that $\mathbf{A}$ is not rank-deficient (as proved in {numref}`Theorem %s <theorem-ATA>`). This is enough to guarantee that $\hat{\mathbf{R}}$ is nonsingular (see @problem-qr-nonsingR). Therefore, its transpose is nonsingular as well, and we arrive at
+In order to have the normal equations be well posed, we require that $\mathbf{A}$ is not rank-deficient (as proved in @theorem-ATA). This is enough to guarantee that $\hat{\mathbf{R}}$ is nonsingular (see @problem-qr-nonsingR). Therefore, its transpose is nonsingular as well, and we arrive at
 
 ```{math}
 :label: lsqr
@@ -293,11 +293,11 @@ The solution of least-squares problems via QR factorization is more stable than 
 ## Exercises
 
 ``````{exercise}
-✍ Prove part 3 of {numref}`Theorem %s <theorem-qr-ONC>`.
+✍ Prove part 3 of @theorem-qr-ONC.
 ``````
 
 ``````{exercise}
-✍ Prove {numref}`Theorem %s <theorem-qr-orthogmatrix>`. For the third part, use the definition of the 2-norm as an induced matrix norm, then apply some of our other results as needed.
+✍ Prove @theorem-qr-orthogmatrix. For the third part, use the definition of the 2-norm as an induced matrix norm, then apply some of our other results as needed.
 
 ``````
 

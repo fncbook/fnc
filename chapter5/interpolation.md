@@ -266,5 +266,5 @@ q(s) = a\frac{s(s-1)}{2} - b (s-1)(s+1) + c \frac{s(s+1)}{2}.
 ``````
 
 ``````{exercise}
-✍ (continuation) Use the result of the previous exercise and {numref}`Theorem %s <theorem-interp-conditioning>` to derive bounds on the condition number of quadratic polynomial interpolation at the nodes $x_0-h$, $x_0$, $x_0+h$.
+✍ (continuation) Use the result of the previous exercise and @theorem-interp-conditioning to derive bounds on the condition number of quadratic polynomial interpolation at the nodes $x_0-h$, $x_0$, $x_0+h$.
 ``````

@@ -123,7 +123,7 @@ The definition of the pseudoinverse involves taking the inverse of a matrix, so 
 
 Steps 1 and 3 of {numref}`Algorithm {number} <algorithm-normaleqns-solve>` dominate the flop count.
 
-In the last step we can exploit the fact, proved in {numref}`Theorem %s <theorem-ATA>`, that $\mathbf{N}$ is symmetric and positive definite, and use Cholesky factorization as in {numref}`section-linsys-structure`. This detail is included in {numref}`Function {number} <function-lsnormal>`.
+In the last step we can exploit the fact, proved in @theorem-ATA, that $\mathbf{N}$ is symmetric and positive definite, and use Cholesky factorization as in {numref}`section-linsys-structure`. This detail is included in {numref}`Function {number} <function-lsnormal>`.
 
 (function-lsnormal)=
 ``````{prf:algorithm} lsnormal
@@ -245,7 +245,7 @@ This squaring of the condition number in the normal equations is the cause of in
 
 ``````{exercise}
 :label: problem-normaleqns-symmetry
-✍ Prove the first statement of {numref}`Theorem %s <theorem-ATA>`: $\mathbf{A}^T\mathbf{A}$ is symmetric for any $m\times n$ matrix $\mathbf{A}$ with $m \ge n$.
+✍ Prove the first statement of @theorem-ATA: $\mathbf{A}^T\mathbf{A}$ is symmetric for any $m\times n$ matrix $\mathbf{A}$ with $m \ge n$.
 
 ``````
 

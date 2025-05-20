@@ -160,7 +160,7 @@ R(m) \le  2\, \left( \frac{\sqrt{\kappa} - 1}{\sqrt{\kappa} + 1} \right)^m.
 :::
 ::::
 
-{numref}`Theorem {number} <theorem-minrescg-converge>` characterizes the convergence of MINRES and CG similarly, differing only in whether the measurement is of the residual or the $\mathbf{A}$-norm of the error, respectively. While these are different quantities, in practice one may not find a consistent advantage for one method over the other.
+@theorem-minrescg-converge characterizes the convergence of MINRES and CG similarly, differing only in whether the measurement is of the residual or the $\mathbf{A}$-norm of the error, respectively. While these are different quantities, in practice one may not find a consistent advantage for one method over the other.
 
 As in the indefinite case with MINRES, a larger condition number is associated with slower convergence in the positive definite case. Specifically, to make the bound in {eq}`cgconv` less than a number $\epsilon$ requires
 

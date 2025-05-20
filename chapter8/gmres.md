@@ -122,7 +122,7 @@ In {numref}`Demo %s <demo-subspace-unstable>`, we tried to implement the GMRES i
 `````
 ::::
 
-Thanks to {numref}`Theorem %s <theorem-subspace-krylovmult>`, minimization of $\|\mathbf{b}-\mathbf{A}\mathbf{x}\|$ over $\mathcal{K}_{m+1}$ includes minimization over the subset $\mathcal{K}_m$. Hence:
+Thanks to @theorem-subspace-krylovmult, minimization of $\|\mathbf{b}-\mathbf{A}\mathbf{x}\|$ over $\mathcal{K}_{m+1}$ includes minimization over the subset $\mathcal{K}_m$. Hence:
 
 :::{prf:theorem} GMRES monotonicity
 For the approximations $\mathbf{x}_m$ produced by GMRES, the norm of the residual $\mathbf{r}_m = \mathbf{b} - \mathbf{A}\mathbf{x}_m$ cannot increase as the iteration proceeds.
