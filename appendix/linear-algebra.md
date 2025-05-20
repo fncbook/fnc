@@ -260,7 +260,7 @@ But note also, for instance, that
 and so on, as according to {eq}`mmhoriz`.
 ```` 
 
-There is also an interpretation, presented in {numref}`section-linsys-lu`, of matrix products in terms of vector outer products.
+There is also an interpretation, presented in [](#section-linsys-lu), of matrix products in terms of vector outer products.
 ## Identity and inverse
 
 ```{index} ! identity matrix

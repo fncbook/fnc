@@ -362,7 +362,7 @@ which is known as a **Gregory integration formula**.
 
 ``````{exercise}
 :label: problem-integration-gregoryuse
-⌨ Repeat each integral in Exercise 1 above using Gregory integration {eq}`gregory` instead of the trapezoid formula. Compare the observed errors to fourth-order convergence.
+⌨ Repeat each integral in @problem-integration-tests using Gregory integration {eq}`gregory` instead of the trapezoid formula. Compare the observed errors to fourth-order convergence.
 
 ``````
 
@@ -412,7 +412,7 @@ where $p$ is the quadratic polynomial from part (a), in terms of $h$, $\alpha$, 
 
 ``````{exercise}
 :label: problem-integration-simpsonconverge
-⌨ For each integral in Exercise 1 above, apply the Simpson formula {eq}`simpson` and compare the errors to fourth-order convergence.
+⌨ For each integral in @problem-integration-tests, apply the Simpson formula {eq}`simpson` and compare the errors to fourth-order convergence.
 ``````
 
 ``````{exercise}

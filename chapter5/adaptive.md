@@ -206,7 +206,7 @@ Using {numref}`Function {number} <function-intadapt>` with a small tolerance, ma
 :label: problem-adaptive-extrapolation
 ⌨ A curious consequence of our logic in {numref}`Function {number} <function-intadapt>` is that the algorithm uses what we believe to be a more accurate, sixth-order answer only for estimating error; the returned value is the supposedly less accurate $S_f(2n)$. The practice of returning the extrapolated $R_f(4n)$ instead is called *local extrapolation*. 
 
-Modify {numref}`Function {number} <function-intadapt>` to use local extrapolation and repeat parts (a) and (e) of Exercise 1 above, comparing the observed convergence to both fourth order and sixth order.
+Modify {numref}`Function {number} <function-intadapt>` to use local extrapolation and repeat parts (a) and (e) of @problem-adaptive-tests, comparing the observed convergence to both fourth order and sixth order.
 ``````
 
 ```{index} sine integral function

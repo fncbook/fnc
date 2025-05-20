@@ -26,7 +26,7 @@ There are many ways to approximate the derivative operator by a differentiation 
 ## Matrices for finite differences
 
 :::{note}
-In [Chapter 5](chapter-localapprox) and [Chapter 9](chapter-globalapprox) we used the notation $t_k$ for nodes to more clearly distinguish them from the continuous variable $x$. Since we will soon have problems that discretize both $x$ and $t$ variables, though, we now switch to using the same letter for nodes as the continuous variable.
+In [Chapter 5](#chapter-localapprox) and [Chapter 9](#chapter-globalapprox) we used the notation $t_k$ for nodes to more clearly distinguish them from the continuous variable $x$. Since we will soon have problems that discretize both $x$ and $t$ variables, though, we now switch to using the same letter for nodes as the continuous variable.
 :::
 
 We first discretize the interval $x\in[a,b]$ into equal pieces of length $h=(b-a)/n$, leading to the nodes

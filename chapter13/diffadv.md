@@ -14,11 +14,10 @@ We next describe how to apply the method of lines to PDEs of the form
 
 The PDE may be of either parabolic or hyperbolic type, with the primary difference being potential restrictions on the time step size. To keep descriptions and implementations relatively simple, we will consider only periodic conditions or Dirichlet boundary conditions.
 
-As described in {numref}`section-twodim-tensorprod`, the rectangular domain is discretized by a grid $(x_i,y_j)$ for $i=0,\ldots,m$ and $j=0,\ldots,n$. The solution is semidiscretized as a matrix $\mathbf{U}(t)$ such that $U_{ij}$ is the approximate solution at $(x_i,y_j,t)$. Terms involving the spatial derivatives of $u$ are readily replaced by discrete counterparts, as shown in @tab-2s-derivatives.
+As described in {numref}`section-twodim-tensorprod`, the rectangular domain is discretized by a grid $(x_i,y_j)$ for $i=0,\ldots,m$ and $j=0,\ldots,n$. The solution is semidiscretized as a matrix $\mathbf{U}(t)$ such that $U_{ij}$ is the approximate solution at $(x_i,y_j,t)$. Terms involving the spatial derivatives of $u$ are readily replaced by discrete counterparts, as shown in @tab-2d-derivatives.
 
 ```{table} Discrete replacements for 2D derivatives
 :label: tab-2d-derivatives
-:align: center
 
 | term | discrete replacement |
 |:---|:---|

@@ -282,7 +282,7 @@ Exercises marked with ✍ are intended to be done by hand or with the aid of a s
 
 **(a)** In base-10 terms, what is the first single-precision number greater than $1$ in this system?
 
-**(b)** What is the smallest positive integer that is not a single-precision number? (See the hint to Exercise 1.)
+**(b)** What is the smallest positive integer that is not a single-precision number? (See the hint to @problem-float-d4.)
 ``````
 
 ``````{exercise}

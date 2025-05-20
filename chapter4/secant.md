@@ -287,5 +287,5 @@ $e^{x+1}=2+x$, over $[-2,2]$
 
 ``````{exercise}
 :label: problem-secant-iqi
- ⌨ Write a function `iqi(f,x₁,x₂,x₃)` that performs inverse quadratic interpolation for finding a root of $f$, given three initial estimates. To find the quadratic polynomial $q(y)$ passing through the three most recent points, use `fit`. Test your function on the function in Exercise 1 from this section.
+ ⌨ Write a function `iqi(f,x₁,x₂,x₃)` that performs inverse quadratic interpolation for finding a root of $f$, given three initial estimates. To find the quadratic polynomial $q(y)$ passing through the three most recent points, use `fit`. Test your function on $x^2=e^{-x}$, over $[-2,2]$.
 ``````
