@@ -161,10 +161,14 @@ When solving a linear system, all that can be expected is that the backward erro
 ## Exercises
 
 ``````{exercise}
+:label: problem-cond-hilbert
+
 ⌨ Refer to @demo-condition-bound for the definition of a Hilbert matrix. Make a table of the values of $\kappa(\mathbf{H}_n)$ in the 2-norm for $n=2,3,\ldots,16$. Speculate as to why the growth of $\kappa$ appears to slow down at $n=13$.
 ``````
 
 ``````{exercise}
+:label: problem-cond-verify
+
 ⌨ The purpose of this problem is to verify, like in @demo-condition-bound, the error bound
 
 ```{math}
@@ -180,7 +184,9 @@ Make a table including columns for $n$, the condition number of $\mathbf{A}$, th
 ``````
 
 ``````{exercise}
-⌨ @problem-ls-triangillcond suggests that the solutions of linear systems
+:label: problem-cond-triangular
+
+⌨ @problem-linearsystems-triangillcond suggests that the solutions of linear systems
 
 ```{math}
 \mathbf{A} = \begin{bmatrix} 1 & -1 & 0 & \alpha-\beta & \beta \\ 0 & 1 & -1 &
@@ -193,15 +199,21 @@ become less accurate as $\beta$ increases. Using $\alpha=0.1$ and $\beta=10,100,
 ``````
 
 ``````{exercise}
+:label: problem-cond-vandermonde
+
 ⌨ Let $\mathbf{A}_n$ denote the $(n+1)\times(n+1)$ version of the Vandermonde matrix in Equation {eq}`vandersystem` based on the equally spaced interpolation nodes $t_i=i/n$ for $i=0,\ldots,n$. Using the 1-norm, graph $\kappa(\mathbf{A}_n)$ as a function of $n$ for $n=4,5,6,\ldots,20$, using a log scale on the $y$-axis. (The graph is nearly a straight line.)
 
 ``````
 
 ``````{exercise}
+:label: problem-cond-unpivoted
+
 ⌨ The matrix $\mathbf{A}$ in {eq}`plu-stab-A` has unpivoted LU factors given in {eq}`plu-stab-LU` as a function of parameter $\epsilon$. For $\epsilon = 10^{-2},10^{-4},\ldots,10^{-10}$, make a table with columns for $\epsilon$, $\kappa(\mathbf{A})$, $\kappa(\mathbf{L})$, and $\kappa(\mathbf{U})$. (This shows that solution via unpivoted LU factorization is arbitrarily unstable.)
 ``````
 
 ``````{exercise}
+:label: problem-cond-inverse
+
 ✍  Define $\mathbf{A}_n$ as the $n\times n$ matrix $\displaystyle\begin{bmatrix}
 1 & -2 & & &\\
 & 1 & -2 & & \\
@@ -218,12 +230,15 @@ become less accurate as $\beta$ increases. Using $\alpha=0.1$ and $\beta=10,100,
 ``````
 
 ``````{exercise}
+:label: problem-cond-product
+
 ✍ **(a)** Prove that for $n\times n$ nonsingular matrices $\mathbf{A}$ and $\mathbf{B}$, $\kappa(\mathbf{A}\mathbf{B})\le \kappa(\mathbf{A})\kappa(\mathbf{B})$.
 
 **(b)** Show by means of an example that the result of part (a) cannot be an equality in general.
 ``````
 
 ``````{exercise}
+:label: problem-cond-diagonal
 ✍  Let $\mathbf{D}$ be a diagonal $n\times n$ matrix, not necessarily invertible. Prove that in the 1-norm,
 
 ```{math}
@@ -231,5 +246,4 @@ become less accurate as $\beta$ increases. Using $\alpha=0.1$ and $\beta=10,100,
 ```
 
 (Hint: See @problem-norms-diagnorm.)
-
 ``````

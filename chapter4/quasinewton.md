@@ -79,7 +79,7 @@ Recall that the Newton iteration is derived by solving the linear model implied 
   \mathbf{f}(\mathbf{x}_{k+1}) \approx \mathbf{f}(\mathbf{x}_k) + \mathbf{J}(\mathbf{x}_k)\,(\mathbf{x}_{k+1}-\mathbf{x}_k) = \boldsymbol{0}.
 ```
 
-Let $\mathbf{s}_k=\mathbf{x}_{k+1}-\mathbf{x}_k$  be the Newton step. Let $\mathbf{y}_k=\mathbf{f}(\mathbf{x}_k)$, and now we replace $\mathbf{J}(\mathbf{x}_k)$ by a matrix $\mathbf{A}_{k}$ that is meant to approximate the Jacobian. Hence the Newton step is considered to be defined, as in {numref}`Algorithm {number} <algorithm-nonlineqn-newtonsys>`, by
+Let $\mathbf{s}_k=\mathbf{x}_{k+1}-\mathbf{x}_k$  be the Newton step. Let $\mathbf{y}_k=\mathbf{f}(\mathbf{x}_k)$, and now we replace $\mathbf{J}(\mathbf{x}_k)$ by a matrix $\mathbf{A}_{k}$ that is meant to approximate the Jacobian. Hence, the Newton step is considered to be defined, as in {numref}`Algorithm {number} <algorithm-nonlineqn-newtonsys>`, by
 
 ```{math}
 :label: quasinewton-step
@@ -234,10 +234,10 @@ In some cases our simple logic in {numref}`Function {number} <function-levenberg
 `````
 ::::
 
-
 ## Exercises
 
 ``````{exercise}
+:label: problem-quasinewton-plane
 ⌨ (Variation on @problem-newtonsys-spherepotential.) Two curves in the $(u,v)$ plane are defined implicitly by the equations $u\log u + v \log v = -0.3$ and $u^4 + v^2 = 1$.
 
 **(a)** ✍ Write the intersection of these curves in the form $\mathbf{f}(\mathbf{x}) = \boldsymbol{0}$ for two-dimensional $\mathbf{f}$ and $\mathbf{x}$.
@@ -248,6 +248,7 @@ In some cases our simple logic in {numref}`Function {number} <function-levenberg
 ``````
 
 ``````{exercise}
+:label: problem-quasinewton-orbits
 ⌨ (Variation on @problem-newtonsys-orbitintersect.) Two elliptical orbits $(x_1(s),y_1(s))$ and $(x_2(t),y_2(t))$ are described by the equations
 
 ```{math}
@@ -274,6 +275,7 @@ where $t$ represents time.
 ``````
 
 ``````{exercise}
+:label: problem-quasinewton-ellipsoid
 ⌨  (Variation on @problem-newtonsys-ellipsemin.) Suppose one wants to find the points on the ellipsoid $x^2/25 + y^2/16 + z^2/9 = 1$ that are closest to and farthest from the point $(5,4,3)$. The method of Lagrange multipliers implies that any such point satisfies
 
 ```{math}
@@ -294,6 +296,7 @@ for an unknown value of $\lambda$.
 ``````
 
 ``````{exercise}
+:label: problem-quasinewton-shermanmorrison
 ✍ The Broyden update formula {eq}`broyden` is just one instance of so-called rank-1 updating. Verify the  *Sherman–Morrison formula*,
 
 ```{math}
@@ -304,10 +307,12 @@ which is valid whenever $\mathbf{A}$ is invertible and the denominator above is 
 ``````
 
 ``````{exercise}
+:label: problem-quasinewton-gradient
 ✍ Derive Equation {eq}`nlsgradient`.
 ``````
 
 ``````{exercise}
+:label: problem-quasinewton-stepsize
 ⌨ (See also @problem-newtonsys-byhand.) Suppose that
 
 ```{math}
@@ -325,6 +330,7 @@ Let $\mathbf{x}_1=[-2,1]^T$ and let $\mathbf{A}_1=\mathbf{J}(\mathbf{x}_1)$ be t
 ``````
 
 ``````{exercise}
+:label: problem-quasinewton-penalty
 ✍ Show that Equation {eq}`levenberg` is equivalent to the linear least-squares problem
 
 ```{math}

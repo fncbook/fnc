@@ -191,6 +191,7 @@ The flop count quoted in @theorem-house-flops dominates the running time for lea
 ## Exercises
 
 ``````{exercise}
+:label: problem-house-find
 ⌨ Find a Householder reflector $\mathbf{P}$ such that
 
 ```{math}
@@ -210,9 +211,10 @@ The flop count quoted in @theorem-house-flops dominates the running time for lea
 ``````
 
 ``````{exercise}
+:label: problem-house-negate
 ✍ Let $\mathbf{P}$ be a Householder reflector as in {eq}`hhreflect`.
 
-**(a)** Find a vector $\mathbf{u}$ such that $\mathbf{P}\mathbf{u} = -\mathbf{u}$. ({numref}`fig-hhreflect` may be of help.)
+**(a)** Find a vector $\mathbf{u}$ such that $\mathbf{P}\mathbf{u} = -\mathbf{u}$. (@fig-hhreflect may be of help.)
 
 **(b)** What algebraic condition is necessary and sufficient for a vector $\mathbf{x}$ to satisfy $\mathbf{P}\mathbf{x}=\mathbf{x}$? In $n$ dimensions, how many such linearly independent vectors are there?
 
@@ -223,8 +225,8 @@ The flop count quoted in @theorem-house-flops dominates the running time for lea
 ✍ Under certain circumstances, computing the vector $\mathbf{v}$ in {eq}`hhvector` could lead to subtractive cancellation, which is why line 12 of {numref}`Function {number} <function-qrfact>` reads as it does. Devise an example that causes subtractive cancellation if {eq}`hhvector` is used.
 ``````
 
-
 ``````{exercise}
+:label: problem-house-square
 ✍ Suppose QR factorization is used to compute the solution of a *square* linear system, $\mathbf{A}\mathbf{x}=\mathbf{b}$, i.e., let $m=n$.
 
 **(a)** Find an asymptotic flop count for this procedure, and compare it to the LU factorization algorithm.
@@ -233,11 +235,13 @@ The flop count quoted in @theorem-house-flops dominates the running time for lea
 ``````
 
 ``````{exercise}
+:label: problem-house-cond
 ✍ Prove that $\kappa_2(\mathbf{A})=\kappa_2(\mathbf{R})$ when $\mathbf{A}$ is not square.  (Be careful! You can't take an inverse of $\mathbf{A}$ or $\mathbf{R}$.)
 ``````
 
 ``````{exercise}
-Another algorithmic technique for orthogonally introducing zeros into a matrix is the   *Givens rotation*. Given a 2-vector $[\alpha,\, \beta]$, it defines an angle $\theta$ such that
+:label: problem-house-givens
+Another algorithmic technique for orthogonally introducing zeros into a matrix is the *Givens rotation*. Given a 2-vector $[\alpha,\, \beta]$, it defines an angle $\theta$ such that
 
 ```{math}
 \begin{bmatrix}

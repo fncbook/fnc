@@ -271,11 +271,12 @@ The example in @demo-systems-triangular is our first clue that linear system pro
 ## Exercises
 
 ``````{exercise}
+:label: problem-linearsystems-singular
 ✍ Find a vector $\mathbf{b}$ such that the system $\begin{bmatrix} 0&1\\0&0 \end{bmatrix} \mathbf{x}=\mathbf{b}$ has no solution.
 ``````
 
 ``````{exercise}
-:label: problem-linear-systems-triangular
+:label: problem-linearsystems-triangular
 ✍ Solve the following triangular systems by hand.
 
 **(a)** $\displaystyle \begin{aligned}
@@ -299,10 +300,12 @@ x_2   -  x_3      &= 2 \\
 ``````
 
 ``````{exercise}
+:label: problem-linearsystems-triangularcomp
 ⌨ Use {numref}`Function {number} <function-forwardsub>` or {numref}`Function {number} <function-backsub>` to solve each system from the preceding exercise. Verify that the solution is correct by computing $\mathbf{L}\mathbf{x}$ and subtracting $\mathbf{b}$.
 ``````
 
 ``````{exercise}
+:label: problem-linearsystems-backsub
 ⌨  Use {numref}`Function {number} <function-backsub>` to solve the following systems.  Verify that the solution is correct by computing $\mathbf{U}\mathbf{x}$ and subtracting $\mathbf{b}$.
 
 **(a)** $\;\begin{bmatrix}
@@ -323,7 +326,7 @@ x_2   -  x_3      &= 2 \\
 ``````
 
 ``````{exercise}
-:label: problem-linear-systems-lumpstring
+:label: problem-linearsystems-lumpstring
 Suppose a string is stretched with tension $\tau$ horizontally between two anchors at $x=0$ and $x=1$. At each of the $n-1$ equally spaced positions $x_k=k/n$, $k=1,\ldots,n-1$, we attach a little mass $m_i$ and allow the string to come to equilibrium. This causes vertical displacement of the string. Let $q_k$ be the amount of displacement at $x_k$. If the displacements are not too large, then an approximate force balance equation is
 
 ```{math} 
@@ -341,7 +344,7 @@ where $g=-9.8$ m/s$^2$ is the acceleration due to gravity, and we define $q_0=0$
 ``````
 
 ``````{exercise}
-:label: problem-systemsinverse
+:label: problem-linearsystems-inverse
 ⌨  If $\mathbf{B}\in\mathbb{R}^{n \times p}$ has columns $\mathbf{b}_1,\ldots,\mathbf{b}_p$, then we can pose $p$ linear systems at once by writing $\mathbf{A} \mathbf{X} = \mathbf{B}$, where $\mathbf{X}$ is $n\times p$. Specifically, this equation implies $\mathbf{A} \mathbf{x}_j = \mathbf{b}_j$ for $j=1,\ldots,p$.
 
 **(a)** Modify {numref}`Function {number} <function-forwardsub>` and {numref}`Function {number} <function-backsub>` so that they solve the case where the second input is $n\times p$ for $p\ge 1$.
@@ -350,7 +353,7 @@ where $g=-9.8$ m/s$^2$ is the acceleration due to gravity, and we define $q_0=0$
 ``````
 
 ``````{exercise}
-:label: problem-ls-triangillcond
+:label: problem-linearsystems-triangillcond
 ⌨ @demo-systems-triangular showed solutions of $\mathbf{A}\mathbf{x}=\mathbf{b}$, where
 
 ```{math}

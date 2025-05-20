@@ -12,7 +12,8 @@ In {numref}`section-linsys-polyinterp` we saw how a polynomial can be used to in
 
 (demo-fitting-tempinterp)=
 ::::{prf:example} Interpolating temperature data
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-fitting-tempinterp-julia
@@ -31,8 +32,8 @@ In {numref}`section-linsys-polyinterp` we saw how a polynomial can be used to in
 :::
 ```` 
 `````
-::::
 
+::::
 
 ```{index} data fitting
 ```
@@ -75,7 +76,7 @@ c_n
 ```{index} Vandermonde matrix
 ```
 
-Note that $\mathbf{V}$ has the same structure as the Vandermonde matrix in {eq}`vandersystem` but is $m\times n$, thus taller than it is wide. It's impossible in general to satisfy $m$ conditions with $n<m$ variables, and we say the system is **overdetermined**. Rather than solving the system exactly, we have to find a best approximation. Below we specify precisely what is meant by this, but first we note that Julia uses the same backslash notation to solve the problem in both the square and overdetermined cases.
+Note that $\mathbf{V}$ has the same structure as the Vandermonde matrix in {eq}`vandersystem` but is $m\times n$, thus taller than it is wide. It's impossible in general to satisfy $m$ conditions with $n<m$ variables, and we say the system is **overdetermined**. Rather than solving the system exactly, we have to find the best approximation. Below we specify precisely what is meant by this, but first we note that Julia uses the same backslash notation to solve the problem in both the square and overdetermined cases.
 
 (demo-fitting-tempfit)=
 ::::{prf:example} Fitting temperature data
@@ -193,7 +194,6 @@ $$
 \displaystyle \frac{\pi^2}{6} = 1 + \frac{1}{2^2} + \frac{1}{3^2} + \cdots. 
 $$
 
-
 Say $s_k$ is the sum of the first $k$ terms of the series above, and $p_k = \sqrt{6s_k}$. Here is a fancy way to compute these sequences in a compact code.
 
 `````{tab-set} 
@@ -220,6 +220,7 @@ Say $s_k$ is the sum of the first $k$ terms of the series above, and $p_k = \sqr
 ## Exercises
 
 ``````{exercise}
+:label: problem-fitting-minimize 
 ✍ Suppose $f$ is a twice-differentiable, nonnegative real function. Show that if there is an $x^*$ such that $f'(x^*)=0$ and $f''(x^*)>0$, then $x^*$ is a local minimizer of the function $[f(x)]^2$.
 
 ``````
@@ -239,6 +240,7 @@ Say $s_k$ is the sum of the first $k$ terms of the series above, and $p_k = \sqr
 ``````
 
 ``````{exercise}
+:label: problem-fitting-movie
 ⌨  The following are weekly box office earnings (in dollars) in the U.S. for the 2012 film *The Hunger Games*. (Source: boxofficemojo.com.)
 
 ```julia
@@ -251,6 +253,7 @@ Say $s_k$ is the sum of the first $k$ terms of the series above, and $p_k = \sqr
 ``````
 
 ``````{exercise}
+:label: problem-fitting-periodic
 ⌨  In this problem you are trying to find an approximation to the periodic function $g(t)=e^{\sin(t-1)}$ over one period, $0 < t \le 2\pi$. As data, define
 
 $$
@@ -275,6 +278,7 @@ Unlike part (a), this fitting function is itself periodic. Superimpose a plot of
 ``````
 
 ``````{exercise}
+:label: problem-fitting-tanh
 ⌨ Define the following data in Julia.
 
 ``` julia
@@ -289,6 +293,7 @@ y = tanh.(t)
 ``````
 
 ``````{exercise}
+:label: problem-fitting-pi
 ⌨  One series for finding $\pi$ is
 
 $$\frac{\pi}{2} = 1 + \frac{1}{3} + \frac{1\cdot 2}{3\cdot5} + \frac{1\cdot 2\cdot 3}{3\cdot 5\cdot 7} + \cdots.$$
@@ -301,6 +306,7 @@ Define $s_k$ to be the sum of the first $k$ terms on the right-hand side, and le
 ``````
 
 ``````{exercise}
+:label: problem-fitting-planets
  ⌨  Kepler found that the orbital period $\tau$ of a planet depends on its mean distance $R$ from the sun according to $\tau=c R^{\alpha}$ for a simple rational number $\alpha$. Perform a linear least-squares fit from the following table in order to determine the most likely simple rational value of $\alpha$.
 
 | Planet  | Distance from sun in Mkm |  Orbital period in days              |
@@ -316,6 +322,7 @@ Define $s_k$ to be the sum of the first $k$ terms on the right-hand side, and le
 ``````
 
 ``````{exercise}
+:label: problem-fitting-inverse
  ✍ Show that finding a fit of the form
 
 ```{math}
@@ -326,5 +333,6 @@ can be transformed into a linear fitting problem (with different undetermined co
 ``````
 
 ``````{exercise}
+:label: problem-fitting-lft
  ✍ Show how to find the constants $a$ and $b$ in a data fitting problem of the form $y(t)\approx t/(at+b)$ for $t>1$ by transforming it into a linear least-squares fitting problem.
 ``````

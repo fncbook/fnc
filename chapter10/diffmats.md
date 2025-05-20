@@ -277,7 +277,7 @@ Recall that finite-difference formulas are derived in three steps:
 
 ```{index} Chebyshev points; second kind
 ```
-We can modify this process by using a global interpolant, either polynomial or trigonometric, as in [Chapter 9](../globalapprox/overview). Rather than choosing a different index set for each node, we use all of the nodes each time. 
+We can modify this process by using a global interpolant, either polynomial or trigonometric, as in [Chapter 9](../globalapprox/overview). Rather than choosing a different index set for each node, we use all the nodes each time. 
 
 In a nonperiodic setting, we use Chebyshev second-kind points for stability:
 

@@ -136,10 +136,7 @@ where $s$ is the concentration of a substrate. The real values $V$ and $K_m$ are
 `````
 ::::
 
-
-
 ## Exercises
-
 
 ``````{exercise}
 :label: problem-nlsq-onevar
@@ -151,7 +148,8 @@ where $s$ is the concentration of a substrate. The real values $V$ and $K_m$ are
 ``````
 
 ``````{exercise}
-✍ (Continuation of Exercise 1.) The Gauss–Newton method replaces $\mathbf{f}(\mathbf{x})$ by a linear model and minimizes the norm of its residual. An alternative is to replace $\| \mathbf{f}(\mathbf{x}) \|_2^2$ by a scalar *quadratic* model $q(\mathbf{x})$ and minimize that.
+:label: problem-nlsq-quadratic
+✍ (Continuation of @problem-nlsq-onevar.) The Gauss–Newton method replaces $\mathbf{f}(\mathbf{x})$ by a linear model and minimizes the norm of its residual. An alternative is to replace $\| \mathbf{f}(\mathbf{x}) \|_2^2$ by a scalar *quadratic* model $q(\mathbf{x})$ and minimize that.
 
 **(a)** Using $\mathbf{f}(x) = [ x-8, \; x^2-4 ]$, let $q(x)$ be defined by the first three terms in the Taylor series for $\| \mathbf{f}(x) \|_2^2$ at $x=2$.
 
@@ -159,6 +157,7 @@ where $s$ is the concentration of a substrate. The real values $V$ and $K_m$ are
 ``````
 
 ``````{exercise}
+:label: problem-nlsq-epidemic
 ⌨  A famous result by Kermack and McKendrick in 1927 {cite}`kermackContributionMathematical1927` suggests that in epidemics that kill only a small fraction of a susceptible population, the death rate as a function of time is well modeled by
 
 ```{math}
@@ -179,6 +178,7 @@ during 1906:
 ``````
 
 ``````{exercise}
+:label: problem-nlsq-circlefit
 ⌨  (Variation on @problem-newtonsys-circlefit.) Suppose the points $(x_i,y_i)$ for $i=1,\ldots,m$ are given, and the goal is to find the circle with center $(a,b)$ and radius $r$ that best fits the points. Define 
 
 $$f_i(a,b,r) = (a-x_i)^2 + (b-y_i)^2 - r^2, \qquad i=1,\ldots,m.$$ 
@@ -197,6 +197,7 @@ Use {numref}`Function {number} <function-levenberg>` to find the best-fit circle
 ``````
 
 ``````{exercise}
+:label: problem-nlsq-blink
 ⌨ The position of the upper lid during an eye blink can be measured from high-speed video {cite}`wuEffectsMild2014`, and it may be possible to classify blinks based in part on fits to the lid position {cite}`broschBlinkCharacterization2017`. The lid position functions proposed to fit blinks is a product of a monomial or polynomial multiplying a decaying exponential {cite}`berkeKineticsLid1998`.  In this problem, you will generate representative data, add a small amount of noise to it, and then perform nonlinear least-squares fits to the data.
 
 **(a)** Consider the function $y(\mathbf{a}) = a_1 t^2 \exp \left( -a_2 t^{a_3} \right)$, using the vector of coefficients $\mathbf{a} = [a_1,a_2,a_3]$, and create synthetic eyelid position data as follows:
@@ -220,5 +221,6 @@ ym[ir] += noise*rand(N-1);         # add noise
 ``````
 
 ``````{exercise}
+:label: problem-nlsq-blink2
 ⌨ Repeat the previous problem using the fitting function $y(\mathbf{a}) = (a_1+a_2 t + a_3 t^2) t^2 \exp \left( -a_4 t^{a_5} \right)$, using the vector of coefficients $\mathbf{a} = [a_1,\ldots,a_5]$. (This was the choice used in Brosch et al {cite}`broschBlinkCharacterization2017`.)  Use `a = [20, -10, -8, 7, 2]` to create the data and as an initial guess for the coefficients for the fit to the noisy data.
 ``````

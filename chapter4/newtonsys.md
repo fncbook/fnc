@@ -32,7 +32,7 @@ The steady state of interactions between the population $w(t)$ of a predator spe
 
 $$
 \begin{split}
-ah - b h w &= 0, \\ 
+ah - b h w &= 0, \\
 -cw + d w h &= 0,
 \end{split}
 $$
@@ -207,7 +207,6 @@ An implementation of Newton's method for systems is given in {numref}`Function {
 
 ## Exercises
 
-
 ``````{exercise}
 :label: problem-newtonsys-byhand
 ✍ Suppose that
@@ -223,8 +222,8 @@ Let $\mathbf{x}_1=[-2,1]^T$. Use Newton's method to find $\mathbf{x}_2$.
 ``````
 
 ``````{exercise}
+:label: problem-newtonsys-linear
 ✍ Suppose that $\mathbf{f}(\mathbf{x}) = \mathbf{A}\mathbf{x} - \mathbf{b}$ for a constant $n\times n$ matrix $\mathbf{A}$ and constant $n\times 1$ vector $\mathbf{b}$. Show that Newton's method converges to the exact root in one iteration.
-
 ``````
 
 ``````{exercise}

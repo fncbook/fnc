@@ -236,6 +236,8 @@ There's a lot more to be said about functions in Python, but this is enough to g
 ## Exercises
 
 ``````{exercise}
+:label: problem-algoruthms-poly1
+
 ⌨ Write a function `poly1(p)` that returns the value of a polynomial $p(x) = c_1 + c_2 x + \cdots + c_n x^{n-1}$ at $x=-1$. You should do this directly, not by a call to or imitation of {numref}`Function {number} <function-horner>`. Test your function on $r(x)=3x^3-x+1$ and $s(x)=2x^2-x$.
 ``````
 
@@ -253,6 +255,8 @@ Write a function `samplevar(x)` that takes as input a vector `x` of any length a
 ``````
 
 ``````{exercise}
+:label: problem-algoruthms-area
+
 ⌨  Let `x` and `y` be vectors whose entries give the coordinates of the $n$ vertices of a polygon, given in counterclockwise order. Write a function `polygonarea(x,y)` that computes and returns the area of the polygon using this formula based on Green's theorem:
 
 ```{math}

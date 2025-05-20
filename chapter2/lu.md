@@ -258,6 +258,7 @@ As noted in the descriptions of {numref}`Function {number} <function-lufact>` an
 ## Exercises
 
 ``````{exercise}
+:label: problem-lu-byhand
 ✍ For each matrix, produce an LU factorization by hand. 
 
 **(a)** $\quad \displaystyle \begin{bmatrix}
@@ -274,6 +275,7 @@ As noted in the descriptions of {numref}`Function {number} <function-lufact>` an
 ``````
 
 ``````{exercise}
+:label: problem-lu-geometry
 ⌨ The matrices
 
 ```{math}
@@ -302,7 +304,7 @@ are used to represent translations and rotations of plane points in computer gra
 ``````
 
 ``````{exercise}
-:label: problem-bigcorner
+:label: problem-lu-bigcorner
 ⌨ Define
 
 ```{math}
@@ -325,6 +327,7 @@ are used to represent translations and rotations of plane points in computer gra
 ``````
 
 ``````{exercise}
+:label: problem-lu-integer
 ⌨ Let
 
 $$
@@ -343,10 +346,12 @@ Verify computationally that if $\mathbf{A}=\mathbf{L}\mathbf{U}$ is the LU facto
 ``````
 
 ``````{exercise}
+:label: problem-lu-unitupper
 ⌨ {numref}`Function {number}<function-lufact>` factors $\mathbf{A}=\mathbf{L}\mathbf{U}$ in such a way that $\mathbf{L}$ is a unit lower triangular matrix—that is, has all ones on the diagonal. It is also possible to define the factorization so that $\mathbf{U}$ is a unit upper triangular matrix instead. Write a function `lufact2` that uses {numref}`Function {number}<function-lufact>` *without modification* to produce this version of the factorization. (Hint: Begin with the standard LU factorization of $\mathbf{A}^T$.) Demonstrate on a nontrivial $4\times 4$ example.
 ``````
 
 ``````{exercise}
+:label: problem-lu-determinant
 When computing the determinant of a matrix by hand, it's common to use cofactor expansion and apply the definition recursively. But this is terribly inefficient as a function of the matrix size.
 
 **(a)** ✍ Explain using determinant properties why, if $\mathbf{A}=\mathbf{L}\mathbf{U}$ is an LU factorization,

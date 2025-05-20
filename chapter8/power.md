@@ -267,7 +267,7 @@ $\mathbf{A} = \begin{bmatrix}
 
 ``````{exercise}
 :label: problem-power-lumpmembraneeig
-⌨  In  @problem-linear-systems-lumpstring we considered a mass-lumped model of a hanging string that led to a tridiagonal system of linear equations. Then, in @problem-evd-lumpstring, we found that eigenvectors of the same matrix correspond to vibrational modes of the string. The same setup can be applied to a membrane hanging from a square frame. Lumping the mass onto a Cartesian grid, each interacts with the four neighbors to the north, south, east, and west. If $n$ masses are used in each coordinate direction, we get an $n^2\times n^2$ sparse matrix $\mathbf{A}$ that can be constructed by `FNC.poisson(n)`.
+⌨  In  @problem-linearsystems-lumpstring we considered a mass-lumped model of a hanging string that led to a tridiagonal system of linear equations. Then, in @problem-evd-lumpstring, we found that eigenvectors of the same matrix correspond to vibrational modes of the string. The same setup can be applied to a membrane hanging from a square frame. Lumping the mass onto a Cartesian grid, each interacts with the four neighbors to the north, south, east, and west. If $n$ masses are used in each coordinate direction, we get an $n^2\times n^2$ sparse matrix $\mathbf{A}$ that can be constructed by `FNC.poisson(n)`.
 
 **(a)** Let $n=10$ and make a `spy` plot of $\mathbf{A}$. What is the density of $\mathbf{A}$? Most rows all have the same number of nonzeros; find this number.
 

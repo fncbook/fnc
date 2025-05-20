@@ -193,28 +193,33 @@ A different statement of the conclusion is that for a first-order formula, at mo
 ## Exercises
 
 ``````{exercise}
+:label: problem-fdconverge-observed
 ⌨ Evaluate the centered second-order finite-difference approximation to $f'(4\pi/5)$ for $f(x)=\cos(x^3)$ and $h=2^{-1},2^{-2},\ldots,2^{-8}$. On a log-log graph, plot the error as a function of $h$ and compare it graphically to second-order convergence.
 ``````
 
 ``````{exercise}
+:label: problem-fdconverge-derivation
 ✍ Derive the first two nonzero terms of the Taylor series at $h=0$ of the truncation error $\tau_{f}(h)$ for the formula {eq}`backwardFD11`.
 ``````
 
 ``````{exercise}
+:label: problem-fdconverge-fwd2
 ✍ Calculate the first nonzero term in the Taylor series of the truncation error $\tau_{f}(h)$ for the finite-difference formula defined by the second row of {numref}`table-FDforward`.
 ``````
 
 ``````{exercise}
+:label: problem-fdconverge-fwd3
 ✍ Calculate the first nonzero term in the Taylor series of the truncation error $\tau_{f}(h)$ for the finite-difference formula defined by the third row of {numref}`table-FDforward`.
 ``````
 
 ``````{exercise}
+:label: problem-fdconverge-center2
 ✍ Show that the formula {eq}`centerFD22` is second-order accurate. 
 
 ``````
 
 ``````{exercise}
-:label: problem-fd-muc
+:label: problem-fdconvrege-muc
 ✍  A different way to derive finite-difference formulas is the **method of undetermined coefficients**. Starting from {eq}`fdformula`,
 
 ```{math}

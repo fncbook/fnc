@@ -59,7 +59,7 @@ It's understood that blocks that are on top of one another have the same number 
   \end{bmatrix},
 ```
 
-provided that the individual block products are well-defined. For transposes we have, for example,
+provided that the individual block products are well-defined. For transposes, we have, for example,
 
 ```{math}
   \mathbf{A}^T =
@@ -190,6 +190,7 @@ The `+=` operator means to increment the item on the left-hand side. There are s
 ## Exercises
 
 ``````{exercise}
+:label: problem-matrices-blockpower
 ✍ Suppose 
 
 $$
@@ -203,6 +204,7 @@ Using block notation, find $\mathbf{C}^2$ and $\mathbf{C}^3$.
 ``````
 
 ``````{exercise}
+:label: problem-matrices-products
 ⌨  Let
 
 ```{math}
@@ -240,6 +242,7 @@ Using block notation, find $\mathbf{C}^2$ and $\mathbf{C}^3$.
 ``````
 
 ``````{exercise}
+:label: problem-matrices-innerouter
 ⌨  Let
 
 ```{math}
@@ -257,15 +260,17 @@ Find the inner products $\mathbf{u}^T\mathbf{v}$ and $\mathbf{v}^T\mathbf{u}$ an
 ``````
 
 ``````{exercise}
+:label: problem-matrices-transpose
 ⌨ In Julia, give a demonstration of the identity $(\mathbf{A}\mathbf{B})^T=\mathbf{B}^T\mathbf{A}^T$ for some arbitrarily chosen $3\times 4$ matrix $\mathbf{A}$ and $4\times 2$ matrix $\mathbf{B}$.
 ``````
 
 ``````{exercise}
-:label: problem-inverseprod
+:label: problem-matrices-inverseprod
 ✍ Prove that if $\mathbf{A}$ and $\mathbf{B}$ are invertible, then $(\mathbf{A}\mathbf{B})^{-1}=\mathbf{B}^{-1}\mathbf{A}^{-1}$. (In producing the inverse, it follows that $\mathbf{A}\mathbf{B}$ is invertible as well.)
 ``````
 
 ``````{exercise}
+:label: problem-matrices-elementary
 ✍ Suppose $\mathbf{B}$ is an arbitrary $4\times 3$ matrix. In each part below a matrix $\mathbf{A}$ is described in terms of $\mathbf{B}$. Express $\mathbf{A}$ as a product of $\mathbf{B}$ with one or more other matrices.
 
 **(a)** $\mathbf{A}\in\mathbb{R}^{4 \times 1}$ is the result of adding the first column of $\mathbf{B}$ to $-2$ times the last column of $\mathbf{B}$.
@@ -279,6 +284,7 @@ and the third column of $\mathbf{A}$ is $3$ times the third column of $\mathbf{B
 ``````
 
 ``````{exercise}
+:label: problem-matrices-reverse
  **(a)** ✍ Prove that for real vectors $\mathbf{v}$ and $\mathbf{w}$ of the same length, the inner products $\mathbf{v}^T\mathbf{w}$ and $\mathbf{w}^T\mathbf{v}$ are equal.
 
 **(b)** ✍ Prove true, or give a counterexample for, the equivalent statement about outer products, $\mathbf{v}\mathbf{w}^T$ and $\mathbf{w}\mathbf{v}^T$.

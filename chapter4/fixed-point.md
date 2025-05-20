@@ -55,7 +55,7 @@ This is our first example of an iterative algorithm that never quite gets to the
 
 ## Series analysis
 
-In @demo-fp-spiral, the two computed iterations differ only in the choice of $x_1$. In the first case we evidently generated a sequence that converged to one of the fixed points. In the second case, however, the generated sequence diverged.[^finsample] The easiest way to uncover the essential difference between the two cases is to use a Taylor series expansion.
+In @demo-fp-spiral, the two computed iterations differ only in the choice of $x_1$. In the first case, we evidently generated a sequence that converged to one of the fixed points. In the second case, however, the generated sequence diverged.[^finsample] The easiest way to uncover the essential difference between the two cases is to use a Taylor series expansion.
 
 [^finsample]: We can only ever generate a finite sample from an infinite sequence, which in principle does not guarantee anything whatsoever about the limit or divergence of that sequence. However, in practical computing one usually assumes that well-established trends in the sequence will continue, and we complement observed experience with rigorous theory where possible.
 
@@ -87,7 +87,7 @@ The role of $g'(p)$ is clear in @demo-fp-spiral. We have $g(x) = -x^2+5x-3.5$ an
 
 ## Linear convergence
 
-In computation we usually want to know not just whether an iteration converges but also the rate at which convergence occurs, i.e., how quickly the errors approach zero. Other things being equal, faster convergence is preferred to slower convergence, as it usually implies that the computation will take less time to achieve a desired accuracy.
+In computation, we usually want to know not just whether an iteration converges but also the rate at which convergence occurs, i.e., how quickly the errors approach zero. Other things being equal, faster convergence is preferred to slower convergence, as it usually implies that the computation will take less time to achieve a desired accuracy.
 
 The prediction of the series analysis above is that if the fixed-point iteraion converges, the errors approximately satisfy $|\epsilon_{k+1}| = \sigma|\epsilon_k|$, for $\sigma = |g'(p)| < 1$. This is a well-known type of convergence.
 
@@ -202,10 +202,12 @@ There are stronger and more general statements of @theorem-contraction. For inst
 ``````
 
 ``````{exercise}
+:label: problem-fixedpoint-compute
 ⌨ For each case in the preceding problem, apply 25 fixed-point iterations and use a log-linear graph of the error to verify linear convergence. Then use numerical values of the error to determine an approximate value for $\sigma$ in {eq}`linearconvergence`.
 ``````
 
 ``````{exercise}
+:label: problem-fixedpoint-stability
 ✍  In each case, show that the given $g(x)$ has a fixed point at the given $p$. Then determine analytically whether the fixed-point iteration could converge to that point given a close enough starting value.
 
 **(a)** $g(x) = 3+x-x^2$, $p=\sqrt{3}$
@@ -218,6 +220,7 @@ There are stronger and more general statements of @theorem-contraction. For inst
 ``````
 
 ``````{exercise}
+:label: problem-fixedpoint-spiral
 In @demo-fp-spiral we defined $g(x)=x-f(x)$ to find a fixed point of the polynomial $f(x)=x^2 - 4x + 3.5$.
 
 **(a)** ✍ Why does the iteration spiral in to the fixed point, instead of approaching it monotonically? (Refer to the series analysis.)
@@ -230,6 +233,7 @@ In @demo-fp-spiral we defined $g(x)=x-f(x)$ to find a fixed point of the polynom
 ``````
 
 ``````{exercise}
+:label: problem-fixedpoint-root
 ✍ The $m$th root of a positive real number $a$ is a fixed point of the function
 
 ```{math}
@@ -240,6 +244,7 @@ For what integer values of $m>1$ will the fixed-point iteration for $g$ converge
 ``````
 
 ``````{exercise}
+:label: problem-fixedpoint-degenerate
 **(a)** ✍ Show that $p=1/3$ is a fixed point of $g(x) = 2x-3x^2$.
 
 **(b)** ✍ Find $g'(1/3)$. How does this affect {eq}`fpconverge`?
@@ -248,6 +253,7 @@ For what integer values of $m>1$ will the fixed-point iteration for $g$ converge
 ``````
 
 ``````{exercise}
+:label: problem-fixedpoint-quasinewton
 ✍  Consider the iteration
 
 ```{math}

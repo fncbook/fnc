@@ -8,7 +8,7 @@ numbering:
 ```{index} interpolation
 ```
 
-The United States carries out a census of its population every 10 years. Suppose we want to know the population at times in between the census years, or to estimate future populations. One technique is to find a polynomial that passes through all of the data points.[^census]
+The United States carries out a census of its population every 10 years. Suppose we want to know the population at times in between the census years, or to estimate future populations. One technique is to find a polynomial that passes through all the data points.[^census]
 
 (definition-polyinterp-polyinterp)=
 ::::{prf:definition} Polynomial interpolation
@@ -79,10 +79,10 @@ Given distinct values $t_1,\ldots,t_n$, a **Vandermonde matrix** for these value
 
 Polynomial interpolation can therefore be posed as a linear system of equations with a Vandermonde matrix.
 
-
 (demo-interp-vander)=
 ::::{prf:example} Linear system for polynomial interpolation
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{attention}
@@ -117,6 +117,8 @@ that is needed to run some of the statements.
 ## Exercises
 
 ``````{exercise}
+:label: problem-polyinterp-conditions
+
 Suppose you want to interpolate the points $(-1,0)$, $(0,1)$, $(2,0)$, $(3,1)$, and $(4,2)$ by a polynomial of as low a degree as possible.
 
 **(a)** ✍ What is the maximum necessary degree of this polynomial?
@@ -127,6 +129,7 @@ Suppose you want to interpolate the points $(-1,0)$, $(0,1)$, $(2,0)$, $(3,1)$, 
 ``````
 
 ``````{exercise}
+:label: problem-polyinterp-hermite
 
 **(a)** ✍ Say you want to find a cubic polynomial $p$ such that $p(-1) =-2$, $p'(-1) =1$, $p(1) = 0$, and $p'(1) =-1$. (This is known as a *Hermite interpolant.*) Write out a linear system of equations for the coefficients of $p$. 
 
@@ -134,13 +137,15 @@ Suppose you want to interpolate the points $(-1,0)$, $(0,1)$, $(2,0)$, $(3,1)$, 
 ``````
 
 ``````{exercise}
+:label: problem-polyinterp-census
+
 ⌨ Here are population figures (in millions) for three countries over a 30-year period (from *United Nations World Population Prospects*, 2019).
 
 |          | 1990  |  2000  | 2010 | 2020 |
 |:------:|:----------:|:---------:|:---------:|:---------:|
-| United States | 252.120	 | 281.711 | 309.011	|	331.003 |
-| India | 873.278	| 1,056.576	| 1,234.281	| 1,380.004 |
-| Poland | 37.960	| 38.557 | 38.330	| 37.847 |
+| United States | 252.120  | 281.711 | 309.011 | 331.003 |
+| India | 873.278 | 1,056.576 | 1,234.281 | 1,380.004 |
+| Poland | 37.960 | 38.557 | 38.330 | 37.847 |
 
 **(a)** Use cubic polynomial interpolation to estimate the population of the USA in 2005.
 
@@ -150,6 +155,8 @@ Suppose you want to interpolate the points $(-1,0)$, $(0,1)$, $(2,0)$, $(3,1)$, 
 ``````
 
 ``````{exercise}
+:label: problem-polyinterp-delaware
+
 ⌨ Here are the official population figures for the state of Delaware, USA, every ten years from 1790 to 1900: 59096, 64273, 72674, 72749, 76748, 78085, 91532, 112216, 125015, 146608, 168493, 184735. For this problem, use 
 
 $$

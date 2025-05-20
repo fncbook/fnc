@@ -149,6 +149,8 @@ One stable algorithm that is not backward stable is floating-point evaluation fo
 ## Exercises
 
 ``````{exercise}
+:label: problem-stability-trig
+
 The formulas
 
 ```{math}
@@ -166,6 +168,8 @@ are mathematically equivalent, but they suggest evaluation algorithms that can b
 ``````
 
 ``````{exercise}
+:label: problem-stability-expm1
+
 Let $f(x) = \frac{e^x-1}{x}$.
 
 **(a)** ✍ Find the condition number $\kappa_f(x)$. What is the maximum of $\kappa_f(x)$ over $-1\le x \le 1$?
@@ -190,6 +194,8 @@ Evaluate it at the same values of $x$ as in part (b).
 ``````
 
 ``````{exercise}
+:label: problem-stability-acosh
+
 ⌨ The function
 
 ```{math}
@@ -220,6 +226,8 @@ Apply {eq}`acosh2` to approximate $f(x_i)$ for all $i$, again computing the rela
 ``````
 
 ``````{exercise}
+:label: problem-stability-samplevar
+
 ⌨ (Continuation of @problem-algorithms-samplevar. Adapted from {cite}`highamAccuracyStability2002`.) One drawback of the formula {eq}`samplevar` for sample variance is that you must compute a sum for $\overline{x}$ before beginning another sum to find $s^2$. Some statistics textbooks quote a single-loop formula
 
 ```{math}

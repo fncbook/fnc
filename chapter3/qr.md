@@ -50,6 +50,7 @@ Nonorthogonal vectors can cause cancellation when subtracted, but orthogonal vec
 ```{prf:observation}
 Addition and subtraction of vectors are guaranteed to be well conditioned when the vectors are orthogonal.
 ```
+
 ## Orthogonal and ONC matrices
 
 Statements about orthogonal vectors are often made more easily in matrix form. Let $\mathbf{Q}$ be an $n\times k$ matrix whose columns $\mathbf{q}_1, \ldots, \mathbf{q}_k$ are orthogonal vectors. The orthogonality conditions {eq}`orthogonality` become simply that $\mathbf{Q}^T\mathbf{Q}$ is a diagonal matrix, since
@@ -127,9 +128,9 @@ Suppose $\mathbf{Q}$ is an $n\times n$ real orthogonal matrix. Then:
 4. For any other $n\times n$ matrix $\mathbf{A}$, $\| \mathbf{A}\mathbf{Q} \|_2=\| \mathbf{A} \|_2$.
 5. If $\mathbf{U}$ is another $n\times n$ orthogonal matrix, then $\mathbf{Q}\mathbf{U}$ is also orthogonal.
 ````
+
 ::::{prf:proof}
 :enumerated: false
-
 Since $\mathbf{Q}$ is an ONC matrix, $\mathbf{Q}^T\mathbf{Q}=\mathbf{I}$. All three matrices are $n\times n$, so $\mathbf{Q}^{-1}=\mathbf{Q}^T$. The proofs of the other statements are left to the exercises.
 ::::
 
@@ -187,7 +188,8 @@ The thin QR factorization is $\mathbf{A} = \hat{\mathbf{Q}} \hat{\mathbf{R}}$, w
 
 (demo-qr-qrfact)=
 ::::{prf:example} QR factorization
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-qr-qrfact-julia
@@ -206,6 +208,7 @@ The thin QR factorization is $\mathbf{A} = \hat{\mathbf{Q}} \hat{\mathbf{R}}$, w
 :::
 ```` 
 `````
+
 ::::
 
 ## Least squares and QR
@@ -235,6 +238,7 @@ In order to have the normal equations be well posed, we require that $\mathbf{A}
 
 (algorithm-qr-solve)=
 ::::{prf:algorithm} Solution of linear least squares by thin QR
+
 1. Compute the thin QR factorization $\hat{\mathbf{Q}}\hat{\mathbf{R}}=\mathbf{A}$.
 1. Compute $\mathbf{z} = \hat{\mathbf{Q}}^T\mathbf{b}$.
 1. Solve the $n\times n$ linear system $\hat{\mathbf{R}}\mathbf{x} = \mathbf{z}$ for $\mathbf{x}$.
@@ -293,10 +297,12 @@ The solution of least-squares problems via QR factorization is more stable than 
 ## Exercises
 
 ``````{exercise}
+:label: problem-qr-onc
 ✍ Prove part 3 of @theorem-qr-ONC.
 ``````
 
 ``````{exercise}
+:label: problem-qr-orthogonal
 ✍ Prove @theorem-qr-orthogmatrix. For the third part, use the definition of the 2-norm as an induced matrix norm, then apply some of our other results as needed.
 
 ``````
@@ -313,18 +319,22 @@ The solution of least-squares problems via QR factorization is more stable than 
 ``````
 
 ``````{exercise}
+:label: problem-qr-pinvfull
 ✍ Let $\mathbf{A}$ be $m\times n$ with $m>n$. Show that if $\mathbf{A}=\mathbf{Q}\mathbf{R}$ is a QR factorization and $\mathbf{R}$ has rank $n$, then $\mathbf{A}^+=\mathbf{R}^+\mathbf{Q}^T$.
 ``````
 
 ``````{exercise}
+:label: problem-qr-pinvthin
 ✍ Let $\mathbf{A}$ be $m\times n$ with $m>n$. Show that if $\mathbf{A}=\hat{\mathbf{Q}}\hat{\mathbf{R}}$ is a thin QR factorization and $\hat{\mathbf{R}}$ is invertible, then $\mathbf{A}^+=\hat{\mathbf{R}}^{-1}\hat{\mathbf{Q}}^T$.
 ``````
 
 ``````{exercise}
+:label: problem-qr-census
 ⌨ Repeat @problem-fitting-census, but use thin QR factorization rather than the backslash to solve the least-squares problem.
 ``````
 
 ``````{exercise}
+:label: problem-qr-projector
 ✍ The matrix $\mathbf{P}=\hat{\mathbf{Q}} \hat{\mathbf{Q}}^T$ derived from the thin QR factorization has some interesting and important properties.
 
 **(a)** Prove that $\mathbf{P}=\mathbf{A}\mathbf{A}^+$.

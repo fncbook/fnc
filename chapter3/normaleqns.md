@@ -87,7 +87,7 @@ The matrix $\mathbf{A}^T\mathbf{A}$ appearing in the pseudoinverse has some impo
 ```
 
 (theorem-ATA)=
-::::{prf:theorem} 
+::::{prf:theorem}
 
 For any real $m\times n$ matrix $\mathbf{A}$ with $m\ge n$, the following are true:
 
@@ -127,6 +127,7 @@ In the last step we can exploit the fact, proved in @theorem-ATA, that $\mathbf{
 
 (function-lsnormal)=
 ``````{prf:algorithm} lsnormal
+
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -192,13 +193,15 @@ If $\mathbf{A}$ is $m\times n$ with $m > n$, then
 :label: condATA
 \kappa(\mathbf{A}^T\mathbf{A}) = \kappa(\mathbf{A})^2.
 ```
-````
-This squaring of the condition number in the normal equations is the cause of instability. If $\kappa(\mathbf{A})$ is large, the squaring of it can destabilize the normal equations: while the solution of the least-squares problem is sensitive, finding it via the normal equations makes it doubly so.
 
+````
+
+This squaring of the condition number in the normal equations is the cause of instability. If $\kappa(\mathbf{A})$ is large, the squaring of it can destabilize the normal equations: while the solution of the least-squares problem is sensitive, finding it via the normal equations makes it doubly so.
 
 (demo-normaleqns-instab)=
 ::::{prf:example} Instability in the normal equations
 `````{tab-set} 
+
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-normaleqns-instab-julia
@@ -216,13 +219,15 @@ This squaring of the condition number in the normal equations is the cause of in
 :::{embed} #demo-normaleqns-instab-python
 :::
 ```` 
+
 `````
+
 ::::
 
 ## Exercises
 
-
 ``````{exercise}
+:label: problem-normaleqns-small
 ✍ Work out the least-squares solution when
 
 ```{math}
@@ -255,20 +260,24 @@ This squaring of the condition number in the normal equations is the cause of in
 ``````
 
 ``````{exercise}
+:label: problem-normaleqns-ATAinv
 **(a)** ✍ Show that for any $m\times n$ $\mathbf{A}$ with $m>n$ for which $\mathbf{A}^T\mathbf{A}$ is nonsingular, $\mathbf{A}^+\mathbf{A}$ is the $n\times n$ identity.
 
 **(b)** ⌨ Show using an example in Julia that $\mathbf{A}\mathbf{A}^+$ is not an identity matrix. (This matrix has rank no greater than $n$, so it can't be an $m\times m$ identity.)
 ``````
 
 ``````{exercise}
+:label: problem-normaleqns-projection
 ✍ Prove that the vector $\mathbf{A}\mathbf{A}^+\mathbf{b}$ is the vector in the column space (i.e., range) of $\mathbf{A}$ that is closest to $\mathbf{b}$ in the sense of the 2-norm.
 ``````
 
 ``````{exercise}
+:label: problem-normaleqns-flops
 ✍ Show that the flop count for {numref}`Function {number} <function-lsnormal>` is asymptotically $\sim 2m n^2 + \tfrac{1}{3}n^3$. (In finding the asymptotic count you can ignore terms like $m n$ whose total degree is less than 3.)
 ``````
 
 ``````{exercise}
+:label: problem-normaleqns-dependent
 ⌨ Let $t_1,\ldots,t_m$ be $m$ equally spaced points in $[0,2\pi]$. In this exercise, use $m=500$.
 
 **(a)** Let $\mathbf{A}_\beta$ be the matrix in {eq}`vandersystemrect` that corresponds to fitting data with the function $c_1 + c_2 \sin(t) + c_3 \cos(\beta t)$. Using the identity {eq}`condATA`, make a table of the condition numbers of $\mathbf{A}_\beta$ for $\beta = 2,1.1,1.01,\ldots,1+10^{-8}$.
@@ -279,6 +288,7 @@ This squaring of the condition number in the normal equations is the cause of in
 ``````
 
 ``````{exercise}
+:label: problem-normaleqns-deficient
 ✍ ⌨  When $\mathbf{A}$ is $m\times n$ with rank less than $n$, the pseudoinverse is still defined and can be computed using `pinv` from `LinearAlgebra`. However, the behavior in this case is not always intuitive. Let
 
 ```{math}

@@ -231,6 +231,7 @@ The speed and stability of the Cholesky factorization make it the top choice for
 ## Exercises
 
 ``````{exercise}
+:label: problem-structure-diagdom
 ✍  For each matrix, use {eq}`diag-dominant` to determine whether it is diagonally dominant.
 
 ```{math}
@@ -261,6 +262,8 @@ The speed and stability of the Cholesky factorization make it the top choice for
 ``````
 
 ``````{exercise}
+:label: problem-structure-SPD
+
 ⌨ For each matrix, use inspection or `cholesky` in Julia to determine whether it is SPD.
 
 ```{math}
@@ -282,10 +285,14 @@ The speed and stability of the Cholesky factorization make it the top choice for
 ``````
 
 ``````{exercise}
+:label: problem-structure-SPDdiag
+
 ✍ Show that the diagonal entries of a symmetric positive definite matrix are positive numbers. (Hint: Apply certain special cases of {eq}`SPD-def`.)
 ``````
 
 ``````{exercise}
+:label: problem-structure-luband
+
 ⌨ Using {numref}`Function {number} <function-lufact>` as a guide, write a function
 
 ``` julia
@@ -303,6 +310,8 @@ $$
 ``````
 
 ``````{exercise}
+:label: problem-structure-tridiagonal
+
 ⌨ The `Tridiagonal` matrix type invokes a specialized algorithm for solving a linear system. 
 
 **(a)** Set `n=1000` and `t=0`.  In a loop that runs 50 times, generate a linear system via 
@@ -322,7 +331,7 @@ What is the ratio of running times for part (a) and (b)?
 ``````
 
 ``````{exercise}
-:label: problem-ATAisspd
+:label: problem-structure-ATA
 ✍ Prove that if $\mathbf{A}$ is any real invertible square matrix, then $\mathbf{A}^T\mathbf{A}$ is SPD. (Hint: First show that $\mathbf{x}^T\mathbf{A}^T\mathbf{A}\mathbf{x} \ge 0$ for all $\mathbf{x}$. Then explain why zero is ruled out if $\mathbf{x}\neq \boldsymbol{0}$.)
 
 ``````

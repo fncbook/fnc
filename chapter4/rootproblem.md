@@ -159,14 +159,17 @@ When $r$ is a nonsimple root, the condition number {eq}`rootcondnum` is effectiv
 **(c)** Compute the condition number of each root found in part (b). 
 
 ``````{exercise}
+:label: problem-rootproblem-basic1
 $x^2=e^{-x}$, over $[-2,2]$
 ``````
 
 ``````{exercise}
+:label: problem-rootproblem-basic2
 $2x = \tan x$, over $[-0.2,1.4]$
 ``````
 
 ``````{exercise}
+:label: problem-rootproblem-basic3
 $e^{x+1}=2+x$, over $[-2,2]$
 
 ``````
@@ -174,6 +177,7 @@ $e^{x+1}=2+x$, over $[-2,2]$
 ---
 
 ``````{exercise}
+:label: problem-rootproblem-annuity
 ⌨ A basic safe type of investment is an annuity: one makes monthly deposits of size $P$ for $n$ months at a fixed annual interest rate $r$, and at maturity collects the amount
 
 $$
@@ -184,6 +188,7 @@ Say you want to create an annuity for a term of 300 months and final value of \$
 ``````
 
 ``````{exercise}
+:label: problem-rootproblem-kepler
 ⌨ The most easily observed properties of the orbit of a celestial body around the sun are the period $\tau$ and the elliptical eccentricity $\epsilon$. (A circle has $\epsilon=0$.) From these, it is possible to find at any time $t$ the angle $\theta(t)$ made between the body's position and the major axis of the ellipse. This is done through
 
 ```{math}
@@ -205,10 +210,12 @@ The asteroid Eros has $\tau=1.7610$ years and $\epsilon=0.2230$. Using `nlsolve`
 ``````
 
 ``````{exercise}
+:label: problem-rootproblem-lambertW
 ⌨  Lambert's $W$ function is defined as the inverse of $x e^x$. That is, $y=W(x)$ if and only if $x=ye^y$. Write a function `lambertW` that computes $W$ using `nlsolve`. Make a plot of $W(x)$ for $0\le x \le 4$.  
 ``````
 
 ``````{exercise}
+:label: problem-rootproblem-multiplicity
 ✍ For each function, find the multiplicity of the given root. If it is a simple root, find its absolute condition number.
 
 **(a)** $f(x) = x^3-2x^2+x-2$, root $r=2$

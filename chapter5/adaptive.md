@@ -31,6 +31,7 @@ To this point, we have used only equally spaced nodes to compute integrals. Yet 
 :::
 ```` 
 `````
+
 ::::
 
 We would like an algorithm that automatically detects and reacts to a situation like that in @demo-adapt-motive, a trait known as **adaptivity**.
@@ -72,7 +73,7 @@ By virtue of higher order of accuracy, $R_f(4n)$ should be more accurate than $S
 
 ## Divide and conquer
 
-If $|E|$ is judged to be acceptably small, we are done. This judgment takes some care. For instance, suppose the exact integral is $10^{20}$.  Requiring $|E| < \delta\ll 1$ would be fruitless in double precision, since it would require more than 20 accurate digits. Hence checking the absolute size of the error alone is not appropriate. Conversely, consider the integral
+If $|E|$ is judged to be acceptably small, we are done. This judgment takes some care. For instance, suppose the exact integral is $10^{20}$.  Requiring $|E| < \delta\ll 1$ would be fruitless in double precision, since it would require more than 20 accurate digits. Hence, checking the absolute size of the error alone is not appropriate. Conversely, consider the integral
 
 ```{math}
   \int_{10^{-6}}^{2\pi} 2 \sin x\, dx \approx -10^{-12}.
@@ -156,6 +157,7 @@ If the error estimate passes the test {eq}`absreltolerance`, the better Simpson 
 :::
 ```` 
 `````
+
 ::::
 
 Although adaptivity and the error estimation that goes with it can be very powerful, they come at some cost. The error estimation cannot be universally perfect, so sometimes the answer will not be as accurate as requested, and sometimes the function will be evaluated more times than necessary. Subtle problems may arise when the integral is a step within a larger computation (see @problem-adaptive-nonsmooth).
@@ -164,7 +166,7 @@ Although adaptivity and the error estimation that goes with it can be very power
 
 % must be kept as #1
 ``````{exercise}
-:label: problem-adaptquadtests
+:label: problem-adaptive-tests
 ⌨ For each integral below, use {numref}`Function {number} <function-intadapt>` with error tolerance $10^{-2},10^{-3},\ldots,10^{-12}$. Make a table of errors and the number of integrand evaluation nodes used, and use a convergence plot as in @demo-adapt-usage to compare to fourth-order accuracy. (These integrals were taken from {cite}`baileyComparisonThree2005`.)
 
 **(a)** $\displaystyle \int_0^1 x\log(1+x)\, dx = \frac{1}{4}$
@@ -179,6 +181,7 @@ Although adaptivity and the error estimation that goes with it can be very power
 ``````
 
 ``````{exercise}
+:label: problem-adaptive-estimate
 ⌨ For each integral below: (i) use `quadgk` to find the value to at least 12 digits; (ii) use {numref}`Function {number} <function-intadapt>` to evaluate the integral to a tolerance of $10^{-8}$; (iii) compute the absolute error and the number of nodes used; (iv) use the $O(h^2)$ term in the Euler–Maclaurin formula {eq}`eulermaclaurin` to estimate how many nodes are required by the fixed-stepsize trapezoidal formula to reach an absolute error of $10^{-8}$.
 
 **(a)** $\displaystyle \int_{0.1}^3 \operatorname{sech}(\sin(1/x))\, d x$
@@ -193,12 +196,14 @@ Although adaptivity and the error estimation that goes with it can be very power
 ```
 
 ``````{exercise}
+:label: problem-adaptive-improper
 ⌨ An integral such as $\displaystyle \int_0^1 x^{-\gamma}\, dx$ for $\gamma>0$, in which the integrand blows up at one or both ends, is known as an *improper* integral. It has a finite value if $\gamma<1$, despite the singularity. One way to deal with the problem of the infinite value for $f(t_0)$ is to replace the lower limit with a small number $\epsilon$. (A more robust way to handle improper integrals is discussed in Chapter 9.)
 
 Using {numref}`Function {number} <function-intadapt>` with a small tolerance, make a log-log plot of the error as a function of $\epsilon$ when $\gamma=2/3$, for $\epsilon=10^{-15},10^{-16},\ldots,10^{-45}$. 
 ``````
 
 ``````{exercise}
+:label: problem-adaptive-extrapolation
 ⌨ A curious consequence of our logic in {numref}`Function {number} <function-intadapt>` is that the algorithm uses what we believe to be a more accurate, sixth-order answer only for estimating error; the returned value is the supposedly less accurate $S_f(2n)$. The practice of returning the extrapolated $R_f(4n)$ instead is called *local extrapolation*. 
 
 Modify {numref}`Function {number} <function-intadapt>` to use local extrapolation and repeat parts (a) and (e) of Exercise 1 above, comparing the observed convergence to both fourth order and sixth order.
@@ -208,6 +213,7 @@ Modify {numref}`Function {number} <function-intadapt>` to use local extrapolatio
 ```
 
 ``````{exercise}
+:label: problem-adaptive-si
 ⌨ The *sine integral function* is defined by
 
 ```{math}

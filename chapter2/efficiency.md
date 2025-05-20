@@ -187,7 +187,7 @@ We will use the following handy fact.
 The range `k:n`, where $k\le n$, has $n-k+1$ elements.
 :::
 
-Line 17 above divides each element of the vector `Aₖ[k:n,k]` by a scalar. Hence the number of flops equals the length of the vector, which is $n-k+1$. 
+Line 17 above divides each element of the vector `Aₖ[k:n,k]` by a scalar. Hence, the number of flops equals the length of the vector, which is $n-k+1$. 
 
 Line 18 has an outer product followed by a matrix subtraction. The definition @def-outerprod of the outer product makes it clear that that computation takes one flop (multiplication) per element of the result, which here results in $(n-k+1)^2$ flops. The number of subtractions is identical. 
 
@@ -238,6 +238,7 @@ In practice, flops are not the only aspect of an implementation that occupies si
 ## Exercises
 
 ``````{exercise}
+:label: problem-efficiency-asmptotic1
 ✍ The following are asymptotic assertions about the limit $n\rightarrow\infty$. In each case, prove the statement true or false.
 
 **(a)** $n^2 = O(\log n),\quad$ 
@@ -247,6 +248,7 @@ In practice, flops are not the only aspect of an implementation that occupies si
 ``````
 
 ``````{exercise}
+:label: problem-efficiency-asmptotic2
 ✍ The following are asymptotic assertions about the limit $h\to 0$. In each case, prove the statement true or false.
 
 **(a)** $h^2\log(h) = O(h^3),\quad$
@@ -256,14 +258,17 @@ In practice, flops are not the only aspect of an implementation that occupies si
 ``````
 
 ``````{exercise}
+:label: problem-efficiency-innerproduct
 ✍ Show that the inner product of two $n$-vectors takes exactly $2n-1$ flops.
 ``````
 
 ``````{exercise}
+:label: problem-efficiency-matrixmult
 ✍ Show that the multiplication of two $n\times n$ matrices takes $\sim 2n^3$ flops.
 ``````
 
 ``````{exercise}
+:label: problem-efficiency-polynomial
 ✍ This problem is about evaluation of a polynomial $c_1 + c_2 x + \cdots + c_{n}x^{n-1}$.
 
 **(a)** Here is a little code to do the evaluation.
@@ -283,6 +288,8 @@ Assuming that `x` is a scalar, how many flops does this function take, as a func
 ``````
 
 ``````{exercise}
+:label: problem-efficiency-exact
+
 The exact sums for $p=1,2$ in {eq}`sumflops` are as follows:
 
 ```{math}
@@ -296,6 +303,7 @@ The exact sums for $p=1,2$ in {eq}`sumflops` are as follows:
 ``````
 
 ``````{exercise}
+:label: problem-efficiency-power
 ✍ Show that for any nonnegative constant integer $m$,
 
 ```{math}
@@ -304,6 +312,7 @@ The exact sums for $p=1,2$ in {eq}`sumflops` are as follows:
 ``````
 
 ``````{exercise}
+:label: problem-efficiency-triangular
 ⌨ The `UpperTriangular` and `LowerTriangular` matrix types cause specialized algorithms to be invoked by the backslash. Define
 
 ```

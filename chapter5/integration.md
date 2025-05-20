@@ -5,7 +5,7 @@ numbering:
 (section-localapprox-integration)=
 # Numerical integration
 
-In calculus you learn that the elegant way to evaluate a definite integral is to apply the Fundamental Theorem of Calculus and find an antiderivative. The connection is so profound and pervasive that it's easy to overlook that a definite integral is a numerical quantity existing independently of antidifferentiation.  However, most conceivable integrands have no antiderivative in terms of familiar functions.
+In calculus, you learn that the elegant way to evaluate a definite integral is to apply the Fundamental Theorem of Calculus and find an antiderivative. The connection is so profound and pervasive that it's easy to overlook that a definite integral is a numerical quantity existing independently of antidifferentiation.  However, most conceivable integrands have no antiderivative in terms of familiar functions.
 
 (demo-int-antideriv)=
 ::::{prf:example} Numerical integration
@@ -71,7 +71,7 @@ One of the most important integration formulas results from integration of the p
 \int_a^b f(x) \, dx \approx \int_a^b \sum_{i=0}^n f(t_i) H_i(x)\, dx = \sum_{i=0}^n f(t_i) \left[ \int_a^b H_i(x)\right]\, dx.
 ```
 
-Thus we can identify the weights as $w_i = h^{-1} \int_a^b H_i(x)\, dx$. Using areas of triangles, it's trivial to derive that
+Thus, we can identify the weights as $w_i = h^{-1} \int_a^b H_i(x)\, dx$. Using areas of triangles, it's trivial to derive that
 
 ```{math}
 :label: hatintegral
@@ -231,7 +231,7 @@ Using $I$ for the exact integral of $f$, the trapezoid formula has
   I = T_f(n) + c_2 h^2 + c_4 h^{4} + \cdots,
 ```
 
-as proved by the Euler–Maclaurin formula {eq}`eulermaclaurin`. The error constants depend on $f$ and can't be evaluated in general, but we know that this expansion holds. For convenience we recast the error expansion in terms of $n=O(h^{-1})$:
+as proved by the Euler–Maclaurin formula {eq}`eulermaclaurin`. The error constants depend on $f$ and can't be evaluated in general, but we know that this expansion holds. For convenience, we recast the error expansion in terms of $n=O(h^{-1})$:
 
 ```{math}
 :label: traperrorexpansion
@@ -262,7 +262,7 @@ It follows that if we combine {eq}`traperrorexpansion` and {eq}`traperrorexpansi
 ```{index} ! Simpson's formula
 ```
 
-The formula {eq}`nc-simpson` is called **Simpson's formula**, or *Simpson's rule*. A different presentation and derivation are considered in @problem-simpson.
+The formula {eq}`nc-simpson` is called **Simpson's formula**, or *Simpson's rule*. A different presentation and derivation are considered in @problem-integration-simpson.
 
 Equation {eq}`extraplevel1` is another particular error expansion in the form {eq}`extraperror`, so we can extrapolate again! The details change only a little. Considering that
 
@@ -349,6 +349,7 @@ where the nodes referenced in the last line are relative to $n=2m$. Hence in pas
 ```
 
 ``````{exercise}
+:label: problem-integration-gregory
 ✍ The Euler–Maclaurin error expansion {eq}`eulermaclaurin` for the trapezoid formula implies that if we could cancel out the term due to $f'(b)-f'(a)$, we would obtain fourth-order accuracy. We should not assume that $f'$ is available, but approximating it with finite differences can achieve the same goal. Suppose the forward difference formula {eq}`forwardFD21` is used for $f'(a)$, and its reflected backward difference is used for $f'(b)$. Show that the resulting modified trapezoid formula is
 
 ```{math}
@@ -360,12 +361,13 @@ which is known as a **Gregory integration formula**.
 ``````
 
 ``````{exercise}
+:label: problem-integration-gregoryuse
 ⌨ Repeat each integral in Exercise 1 above using Gregory integration {eq}`gregory` instead of the trapezoid formula. Compare the observed errors to fourth-order convergence.
 
 ``````
 
 ``````{exercise}
-:label: problem-simpson
+:label: problem-integration-simpson
 ✍  Simpson's formula can be derived without appealing to extrapolation.
 
 **(a)** Show that
@@ -404,14 +406,17 @@ where $p$ is the quadratic polynomial from part (a), in terms of $h$, $\alpha$, 
 ``````
 
 ``````{exercise}
+:label: problem-integration-simpsonextrap
 ✍ Show that the Simpson formula {eq}`simpson` is equivalent to $S_f(n/2)$, given the definition of $S_f$ in {eq}`nc-simpson`.
 ``````
 
 ``````{exercise}
+:label: problem-integration-simpsonconverge
 ⌨ For each integral in Exercise 1 above, apply the Simpson formula {eq}`simpson` and compare the errors to fourth-order convergence.
 ``````
 
 ``````{exercise}
+:label: problem-integration-sublinear
 ⌨ For $n=10,20,30,\ldots,200$, compute the trapezoidal approximation to
 
 ```{math}
@@ -423,9 +428,10 @@ Make two separate plots of the absolute error as a function of $n$, one using a 
 ``````
 
 ``````{exercise}
-⌨ For each integral in Exercise 1 above, extrapolate the trapezoidal results two levels to get sixth-order accurate results, and compute the errors for each value.
+⌨ For each integral in @problem-integration-tests above, extrapolate the trapezoidal results two levels to get sixth-order accurate results, and compute the errors for each value.
 ``````
 
 ``````{exercise}
+:label: problem-integration-extrap8
 ✍ Find a formula like {eq}`nc-sixth` that extrapolates two values of $R_f$ to obtain an eighth-order accurate one.
 ``````

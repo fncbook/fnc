@@ -216,7 +216,6 @@ Our implementation of Newton's iteration is given in {numref}`Function {number} 
 `````
 ::::
 
-
 ## Exercises
 
 For each of Exercises 1–3, do the following steps.
@@ -232,24 +231,29 @@ For each of Exercises 1–3, do the following steps.
 **(e)** ⌨ For one of the roots, use the errors in the Newton sequence to determine numerically whether the convergence is roughly quadratic.
 
 ``````{exercise}
+:label: problem-newton-basic1
 $x^2=e^{-x}$, over $[-2,2]$
 ``````
 
 ``````{exercise}
+:label: problem-newton-basic2
 $2x = \tan x$, over $[-0.2,1.4]$
 ``````
 
 ``````{exercise}
+:label: problem-newton-basic3
 $e^{x+1}=2+x$, over $[-2,2]$
 ``````
 
 ---
 
 ``````{exercise}
+:label: problem-newton-starting
 ⌨  Plot the function $f(x)=x^{-2} - \sin x$ on the interval $x \in [0.5,10]$.  For each initial value $x_1=1,\, x_1=2,\,\ldots,\, x_1=7$, apply {numref}`Function {number} <function-newton>` to $f$, and make a table showing $x_1$ and the resulting root found by the method. In which case does the iteration converge to a root other than the one closest to it? Use the plot to explain why that happened.
 ``````
 
 ``````{exercise}
+:label: problem-newton-inverse
 ✍ Show that if $f(x)=x^{-1}-b$ for nonzero $b$, then Newton's iteration converging to the root $r=1/b$ can be implemented without performing any divisions. 
 ``````
 
@@ -265,6 +269,7 @@ $e^{x+1}=2+x$, over $[-2,2]$
 ``````
 
 ``````{exercise}
+:label: problem-newton-stopping
 ✍ In {numref}`Function {number} <function-newton>` and elsewhere, the actual error is not available, so we use $|x_k-x_{k-1}|$ as an approximate indicator of error to determine when to stop the iteration. Find an example that foils this indicator; that is, a sequence $\{x_k\}$ such that
 
 ```{math}

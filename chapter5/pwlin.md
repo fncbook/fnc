@@ -208,10 +208,10 @@ Call this piecewise linear function $p(x)$. Consider a maximum element of $\math
 |p(x)| = \left|\sum_{k=0}^n z_k H_k(x)\right| \le \sum_{k=0}^n |z_k| H_k(x) \le \|\mathbf{z}\|_\infty \sum_{k=0}^n H_k(x) = \|\mathbf{z}\|_\infty.
 ```
 
-You are asked to prove the final step above in @problem-plpartunity. We conclude that  $\|p\|_\infty\le \|\mathbf{z}\|_\infty$, so that $\|p\|_\infty = \|\mathbf{z}\|_\infty$, which completes the proof.
+You are asked to prove the final step above in @problem-pwlin-partition. We conclude that  $\|p\|_\infty\le \|\mathbf{z}\|_\infty$, so that $\|p\|_\infty = \|\mathbf{z}\|_\infty$, which completes the proof.
 ````
 
-Now suppose that $f$ is a "nice" function on an interval $[a,b]$ containing all of the nodes. We can sample values of $f$ to get data, i.e., $y_k=f(t_k)$ for all $k$, then perform piecewise linear interpolation of the data to get a different function, the interpolant $p$. How close is $p$ to the original $f$? 
+Now suppose that $f$ is a "nice" function on an interval $[a,b]$ containing all the nodes. We can sample values of $f$ to get data, i.e., $y_k=f(t_k)$ for all $k$, then perform piecewise linear interpolation of the data to get a different function, the interpolant $p$. How close is $p$ to the original $f$? 
 
 To make a simple statement, we will consider only the case of equally spaced nodes covering the interval. It turns out that piecewise linear interpolation converges at second order in the spacing of the nodes.
 
@@ -274,6 +274,7 @@ Hence a log-log graph of error versus $h$ should be approximately a straight lin
 ## Exercises
 
 ``````{exercise}
+:label: problem-pwlin-usage
 ⌨ For each given function and interval, perform piecewise linear interpolation using {numref}`Function {number} <function-plinterp>` for $n+1$ equispaced nodes with $n=10,20,40,80,160,320$. For each $n$, estimate the error
 
 ```{math}
@@ -290,6 +291,7 @@ by evaluating the function and interpolant at 1600 points in the interval. Make 
 ``````
 
 ``````{exercise}
+:label: problem-pwlin-hatfun
 ✍ For this problem, let $H(x)$ be the hat function that passes through the three points $(-1,0)$, $(0,1)$, and $(1,0)$.
 
 **(a)** Write out a piecewise definition of $H$ in the style of {eq}`hatfun`.
@@ -302,12 +304,13 @@ by evaluating the function and interpolant at 1600 points in the interval. Make 
 ``````
 
 ``````{exercise}
+:label: problem-pwlin-log
 ✍ Before electronic calculators, the function $\ln(x)$ was often computed using piecewise linear interpolation with a table of values. If you were using such a table at the nodes $3.1,3.2,\ldots,3.9,4$, what is an upper bound on the error in the result?
 
 ``````
 
 ``````{exercise}
-:label: problem-plpartunity
+:label: problem-pwlin-partition
 ✍ Show that for any node distribution and any $x\in[t_0,t_n]$,
 
 ```{math}

@@ -165,7 +165,7 @@ In system form (after canceling a factor of 2 from each side) we get
 
 ## End conditions
 
-So far the equations {eq}`spline0asys`,  {eq}`spline0bsys`,  {eq}`spline1sys`, and {eq}`spline2sys` form $2n+(n-1)+(n-1)=4n-2$ linear conditions on the $4n$ unknowns in the piecewise definition {eq}`splinepw`. In order to obtain a square system, we must add two more constraints. If the application prescribes values for $S'$ or $S''$ at the endpoints, those may be applied. Otherwise there are two major alternatives:
+So far the equations {eq}`spline0asys`,  {eq}`spline0bsys`,  {eq}`spline1sys`, and {eq}`spline2sys` form $2n+(n-1)+(n-1)=4n-2$ linear conditions on the $4n$ unknowns in the piecewise definition {eq}`splinepw`. In order to obtain a square system, we must add two more constraints. If the application prescribes values for $S'$ or $S''$ at the endpoints, those may be applied. Otherwise, there are two major alternatives:
 
 - **Natural spline:** $\quad S_1''(t_0)=S_n''(t_n)=0$
 - **Not-a-knot spline:** $\quad S_1'''(t_1)=S_2'''(t_1), \;  S_{n-1}'''(t_{n-1})=S_n'''(t_{n-1})$
@@ -208,7 +208,7 @@ Collectively, {eq}`spline0asys`,  {eq}`spline0bsys`,  {eq}`spline1sys`,  {eq}`sp
 `````
 ``````
 
-{numref}`Function {number} <function-spinterp>` gives an implementation of cubic not-a-knot spline interpolation. For clarity it stays very close to the description given above. There are some possible shortcuts—for example, one could avoid using $\mathbf{E}$ and instead directly delete the last row of any matrix it left-multiplies. Observe that the linear system is assembled and solved just once, and the returned evaluation function simply uses the resulting coefficients. This allows us to make multiple calls to evaluate $S$ without unnecessarily repeating the linear algebra.
+{numref}`Function {number} <function-spinterp>` gives an implementation of cubic not-a-knot spline interpolation. For clarity, it stays very close to the description given above. There are some possible shortcuts—for example, one could avoid using $\mathbf{E}$ and instead directly delete the last row of any matrix it left-multiplies. Observe that the linear system is assembled and solved just once, and the returned evaluation function simply uses the resulting coefficients. This allows us to make multiple calls to evaluate $S$ without unnecessarily repeating the linear algebra.
 
 ## Conditioning and convergence
 (demo-splines-splines)=
@@ -245,12 +245,12 @@ Besides having more smoothness than a piecewise linear interpolant, the not-a-kn
 ```
 ````
 
-The conditioning of spline interpolation is much more complicated than for the piecewise linear case. First, the fact that the coefficients of all the cubics must be solved for simultaneously implies that each data value in $\mathbf{y}$ has an influence on $S$ over the entire interval. Second, $S$ can take on values larger in magnitude than all of the values in $\mathbf{y}$ (see @problem-splines-overshoot). The details may be found in more advanced texts.
+The conditioning of spline interpolation is much more complicated than for the piecewise linear case. First, the fact that the coefficients of all the cubics must be solved for simultaneously implies that each data value in $\mathbf{y}$ has an influence on $S$ over the entire interval. Second, $S$ can take on values larger in magnitude than all the values in $\mathbf{y}$ (see @problem-splines-overshoot). The details may be found in more advanced texts.
 
 ## Exercises
 
 ``````{exercise}
-:label: problem-splinesystems
+:label: problem-splines-system
 ✍ In each case, write out the entries of the matrix and right-hand side of the linear system that determines the coefficients for the cubic not-a-knot spline interpolant of the given function and node vector.
 
 **(a)** $\cos  (\pi^2 x^2 ), \: \mathbf{t} = [-1,1,4]$
@@ -263,12 +263,13 @@ The conditioning of spline interpolation is much more complicated than for the p
 ``````
 
 ``````{exercise}
+:label: problem-splines-systemsolve
 ⌨ (continuation) For each case in the preceding problem, use Julia to solve the linear system you wrote down. Then plot the resulting cubic spline over the interval between the second and third nodes.
 
 ``````
 
 ``````{exercise}
-:label: problem-spinterp
+:label: problem-splines-spinterp
 ⌨ For each given function, interval, and value of $n$, define $n+1$ evenly spaced nodes. Then use {numref}`Function {number} <function-spinterp>` to plot the cubic spline interpolant using those nodes, together with the original function over the given interval.
 
 **(a)** $\cos(\pi x^2)$ on $[0,4]$, $n=18$
@@ -279,6 +280,7 @@ The conditioning of spline interpolation is much more complicated than for the p
 ``````
 
 ``````{exercise}
+:label: problem-splines-convergence
 ⌨ For each given function and interval, perform piecewise linear interpolation using {numref}`Function {number} <function-spinterp>` for $n+1$ equispaced nodes with $n=10,20,40,80,160,320$. For each $n$, estimate the error
 
 ```{math}
@@ -301,10 +303,12 @@ by evaluating the function and interpolant at 1600 points in the interval. Make 
 ``````
 
 ``````{exercise}
+:label: problem-splines-quadratic
 ✍ Suppose you were to define a piecewise quadratic spline that interpolates $n+1$ given values and has a continuous first derivative. Follow the derivation of this section to express all of the interpolation and continuity conditions. How many additional conditions are required to make a square system for the coefficients?
 ``````
 
 ``````{exercise}
+:label: problem-splines-periodic
 **(a)** ✍ If $y_0=y_n$, another possibility for cubic spline end conditions is to make $S(x)$ a periodic function. This implies that $S'$ and $S''$ are also periodic. Write out the two new algebraic equations for these constraints in terms of the piecewise coefficients.
 
 **(b)** ⌨ Modify {numref}`Function {number} <function-spinterp>` to compute a periodic spline interpolant. Test by making a plot of the interpolant for $f(x) =\exp(\sin(3x))$ over the interval $[0,2\pi/3]$ with equally spaced nodes and $n=8$.

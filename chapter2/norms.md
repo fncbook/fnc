@@ -132,7 +132,7 @@ Given a vector norm $\| \cdot \|_p$, we define an **induced matrix norm** for an
 ```
 ::::
 
-The last equality above follows from linearity (as shown in @problem-linearity).  It is derived from the interpretation of a matrix as a linear operator between $\real^n$ and $\real^m$. Thus in the 2-norm, for instance,
+The last equality above follows from linearity (as shown in @problem-norms-linearity).  It is derived from the interpretation of a matrix as a linear operator between $\real^n$ and $\real^m$. Thus in the 2-norm, for instance,
 
 ```{math}
 \| \mathbf{A} \|_2 = \max_{\| \mathbf{x} \|_2=1} \| \mathbf{A}\mathbf{x} \|_2.
@@ -244,16 +244,21 @@ The geometric interpretation of the matrix 2-norm shown in @demo-norms-matrix, a
 ## Exercises
 
 ``````{exercise}
+:label: problem-norms-taxicab
 ✍ Why is the vector 1-norm also called the *taxicab norm*?
 ``````
 
 ``````{exercise}
+:label: problem-norms-circle
+
 ✍ **(a)** Draw the unit "circle" in the $\infty$-norm, i.e., the set of all vectors $\mathbf{x}\in\real^2$ such that $\| \mathbf{x} \|_\infty=1$.
 
 **(b)** Draw the unit "circle" in the 1-norm.
 ``````
 
 ``````{exercise}
+:label: problem-norms-inequalities
+
 ✍ Prove that for all vectors $\mathbf{x}\in\real^n$,
 
 **(a)** $\| \mathbf{x} \|_\infty \le \| \mathbf{x} \|_2; \qquad$ 
@@ -261,15 +266,18 @@ The geometric interpretation of the matrix 2-norm shown in @demo-norms-matrix, a
 ``````
 
 ``````{exercise}
+:label: problem-norms-csinequality
 ✍ Prove that for any vectors $\mathbf{x}$, $\mathbf{y}$ in $\real^n$, $|\mathbf{x}^T\mathbf{y}| \le \| \mathbf{x} \|_1\| \mathbf{y} \|_\infty$.
 ``````
 
 ``````{exercise}
-:label: problem-linearity
+:label: problem-norms-linearity
 ✍ Prove using {numref}`Definition {number} <definition-norms-matrix>` that for any induced matrix norm, matrix $\mathbf{A}$, and scalar $c$, $\| c\mathbf{A} \| = |c|\cdot \| \mathbf{A} \|$.
 ``````
 
 ``````{exercise}
+:label: problem-norms-extremal
+
 ✍ Let $\mathbf{A} =
 \displaystyle \begin{bmatrix}
 -1 & 1 \\ 2 & 2
@@ -283,14 +291,18 @@ The geometric interpretation of the matrix 2-norm shown in @demo-norms-matrix, a
 ``````
 
 ``````{exercise}
+:label: problem-norms-equivalence
 ✍ Prove the equivalence of the two formulas for a matrix norm in {eq}`matrixnorm`.
 ``````
 
 ``````{exercise}
+:label: problem-norms-inverse
 ✍ Prove that for any induced matrix norm and nonsingular matrix $\mathbf{A}$, $\| \mathbf{A}^{-1} \| \ge (\| \mathbf{A} \|)^{-1}$. (Hint: Apply @theorem-norms-inequalities.)
 ``````
 
 ``````{exercise}
+:label: problem-norms-maxelement
+
 ✍ **(a)** Prove that for any $\mathbf{v}\in \real^n$,
 
 ```{math}
@@ -314,6 +326,8 @@ where $p=1$, $2$, or $\infty$. (Hint: For $p=2$, rearrange {eq}`normineq1` for a
 ``````
 
 ``````{exercise}
+:label: problem-norms-neumann
+
 ✍ Suppose that $\mathbf{A}$ is ${n\times n}$ and that $\| \mathbf{A} \|<1$ in some induced matrix norm.
 
 **(a)** Show that $(\mathbf{I}-\mathbf{A})$ is nonsingular. (Hint: Use the definition of an induced matrix norm to show that if $(\mathbf{I}-\mathbf{A})\mathbf{x}=\boldsymbol{0}$ for all nonzero $\mathbf{x}$, then $\| \mathbf{A} \|\ge 1$.)

@@ -38,8 +38,6 @@ In the Newton context, the principle of approximate approximation begins with th
 `````
 ::::
 
-
-
 The example in @demo-secant-line demonstrates the **secant method**. In the secant method, one finds the root of the linear approximation through the two most recent root estimates. That is, given previous approximations $x_1,\ldots,x_k$, define the linear model function as the line through $\bigl(x_{k-1},f(x_{k-1})\bigr)$ and $\bigl(x_k,f(x_k)\bigr)$:
 
 ```{math}
@@ -54,10 +52,12 @@ Solving $q(x_{k+1})=0$ for $x_{k+1}$ gives the iteration formula.
 
 :::{prf:algorithm} Secant iteration
 Given function $f$ and two initial values $x_1$ and $x_2$, define
+
 ```{math}
 :label: secant
 x_{k+1} = x_k - \frac{f(x_k)(x_k-x_{k-1})}{f(x_k)-f(x_{k-1})}, \quad k=2,3,\ldots.
 ```
+
 :::
 
 Our implementation of the secant method is given in {numref}`Function {number} <function-secant>`.
@@ -165,8 +165,8 @@ as $k\to\infty$.
 :::
 ```` 
 `````
-::::
 
+::::
 
 In terms of the error as a function of the iteration number $k$, the secant method converges at a rate strictly between linear and quadratic, which is slower than Newton's method. But error versus iteration count may not be the best means of comparison.
 
@@ -218,8 +218,8 @@ This leads to the idea of defining $q(y)$ as the quadratic interpolant to the po
 :::
 ```` 
 `````
-::::
 
+::::
 
 ## Bracketing
 
@@ -244,39 +244,48 @@ For each of Exercises 1–3, do the following steps.
 **(e)** ⌨ For one of the roots, use the errors in the Newton sequence to determine numerically whether the convergence is apparently between linear and quadratic.
 
 ``````{exercise}
+:label: problem-secant-basic1
 $x^2=e^{-x}$, over $[-2,2]$
 ``````
 
 ``````{exercise}
+:label: problem-secant-basic2
 $2x = \tan x$, over $[-0.2,1.4]$
 ``````
 
 ``````{exercise}
+:label: problem-secant-basic3
 $e^{x+1}=2+x$, over $[-2,2]$
 ``````
 
 ---
 
 ``````{exercise}
+:label: problem-secant-initial
 ⌨ Use a plot to approximately locate all the roots of $f(x)=x^{-2}-\sin(x)$ in the interval $[0.5,10]$. Then find a pair of initial points for each root such that {numref}`Function {number} <function-secant>` converges to that root.
 ``````
 
 ``````{exercise}
+:label: problem-secant-linear
 ✍ Show analytically that the secant method converges in one step for a linear function, regardless of the initialization.
 ``````
 
 ``````{exercise}
+:label: problem-secant-stuck
 ✍ In general, the secant method formula {eq}`secant` cannot be applied if $x_{k}=x_{k-1}$. However, suppose that $f(x)=ax^2+bx+c$ for constants $a$, $b$, and $c$. Show that in this case the formula can be simplified to one that is well defined when $x_{k}=x_{k-1}$. Then show that the resulting $x_{k+1}$ is the same as the result of one step of Newton's method applied to $f$ at $x_k$.
 ``````
 
 ``````{exercise}
+:label: problem-secant-fibonacci
 ✍ Let $f(x)=x^2$. Show that if $(1/x_1)$ and $(1/x_2)$ are positive integers, and the secant iteration is applied, then the sequence $1/x_1,1/x_2,1/x_3,\ldots$ is a Fibonacci sequence, i.e., satisfying $x_{k+1}=x_k+x_{k-1}$.
 ``````
 
 ``````{exercise}
+:label: problem-secant-derivation
 ✍ Provide the details that show how to derive {eq}`secanterr` from {eq}`secant`.
 ``````
 
 ``````{exercise}
+:label: problem-secant-iqi
  ⌨ Write a function `iqi(f,x₁,x₂,x₃)` that performs inverse quadratic interpolation for finding a root of $f$, given three initial estimates. To find the quadratic polynomial $q(y)$ passing through the three most recent points, use `fit`. Test your function on the function in Exercise 1 from this section.
 ``````

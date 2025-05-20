@@ -109,7 +109,7 @@ Let $\mathcal{I}$ be a prescription for producing the interpolant from a data ve
 
 for all vectors $\mathbf{y},\mathbf{z}$ and scalars $\alpha,\beta$.
 
-Linearity greatly simplifies the analysis of interpolation. To begin with, for any data vector $\mathbf{y}$ we have the standard expression $\mathbf{y}=\sum y_k \mathbf{e}_k$, where as always $\mathbf{e}_k$ is a column of an identity matrix.[^startzero] Hence by linearity,
+Linearity greatly simplifies the analysis of interpolation. To begin with, for any data vector $\mathbf{y}$ we have the standard expression $\mathbf{y}=\sum y_k \mathbf{e}_k$, where, as always, $\mathbf{e}_k$ is a column of an identity matrix.[^startzero] Hence by linearity,
 
 [^startzero]: To be precise, we are using $\mathbf{e}_k$ to mean column number $k+1$ from an $(n+1)\times (n+1)$ identity matrix, since in linear algebra we start indexing at 1.
 
@@ -208,6 +208,7 @@ Since $|d_k|\le \|\mathbf{d}\|_\infty$ for all $k$, this finishes {eq}`interp-co
 ## Exercises
 
 ``````{exercise}
+:label: problem-interpolation-spline
 ⌨ Create data by entering
 
 ``` julia
@@ -220,6 +221,7 @@ t = -2:4;  y = tanh.(t);
 ``````
 
 ``````{exercise}
+:label: problem-interpolation-life
 ⌨ The following table gives the life expectancy in the U.S. by year of birth.
 
 | 1980 | 1985 | 1990 | 1995 | 2000 | 2005 | 2010 |
@@ -234,6 +236,7 @@ t = -2:4;  y = tanh.(t);
 ``````
 
 ``````{exercise}
+:label: problem-interpolation-saucer
 ⌨ The following two vectors define a flying saucer shape.
 
 ``` julia
@@ -251,7 +254,7 @@ We can regard both $x$ and $y$ as functions of a parameter $s$, with the points 
 ``````
 
 ``````{exercise}
-:label: problem-quadratic-interpolant
+:label: problem-interpolation-quadratic
 ✍ Define
 
 ```{math}
@@ -266,5 +269,6 @@ q(s) = a\frac{s(s-1)}{2} - b (s-1)(s+1) + c \frac{s(s+1)}{2}.
 ``````
 
 ``````{exercise}
+:label: problem-interpolation-conditioning
 ✍ (continuation) Use the result of the previous exercise and @theorem-interp-conditioning to derive bounds on the condition number of quadratic polynomial interpolation at the nodes $x_0-h$, $x_0$, $x_0+h$.
 ``````

@@ -263,6 +263,8 @@ Exercises marked with ✍ are intended to be done by hand or with the aid of a s
 ``````
 
 ``````{exercise}
+:label: problem-fp-pi
+
 ⌨ There are much better rational approximations to $\pi$ than 22/7 as used in @demo-float-accuracy. For each one below, find its absolute and relative accuracy, and (rounding down to an integer) the number of accurate digits. 
 
 **(a)** 355/113
@@ -274,6 +276,8 @@ Exercises marked with ✍ are intended to be done by hand or with the aid of a s
 ```
 
 ``````{exercise}
+:label: problem-fp-ieee
+
 ✍ IEEE 754 **single precision** specifies that 23 binary bits are used for the value $f$ in the significand $1+f$ in {eq}`mantissa`. Because they need less storage space and can be operated on more quickly than double-precision values, single-precision values can be useful in low-precision applications. (They are supported as type `Float32` in Julia.)
 
 **(a)** In base-10 terms, what is the first single-precision number greater than $1$ in this system?
@@ -282,5 +286,7 @@ Exercises marked with ✍ are intended to be done by hand or with the aid of a s
 ``````
 
 ``````{exercise}
+:label: problem-fp-nextfloat
+
 ⌨ Julia defines a function `nextfloat` that gives the next-larger floating-point value of a given number. What is the next float past `floatmax()`? What is the next float past `-Inf`? 
 ``````

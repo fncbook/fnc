@@ -265,6 +265,8 @@ Somewhat surprisingly, solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ via PLU factori
 ## Exercises
 
 ``````{exercise}
+:label: problem-pivoting-byhand
+
 ✍ Perform by hand the pivoted LU factorization of each matrix.
 
 **(a)** $\quad \displaystyle \begin{bmatrix}
@@ -281,6 +283,8 @@ Somewhat surprisingly, solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ via PLU factori
 ``````
 
 ``````{exercise}
+:label: problem-pivoting-grouping
+
 ✍ Let $\mathbf{A}$ be a square matrix and $\mathbf{b}$ be a column vector of compatible length. Here is correct Julia code to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$:
 
 ``` julia
@@ -298,6 +302,8 @@ Mathematically in terms of $\mathbf{L}$, $\mathbf{U}$, $\mathbf{p}$, and $\mathb
 ``````
 
 ``````{exercise}
+:label: problem-pivoting-flip
+
 ✍ Suppose that `A` is a $4\times 6$ matrix in Julia and you define
 
 ``` julia
@@ -308,7 +314,7 @@ Show that $\mathbf{B} = \mathbf{P} \mathbf{A} \mathbf{Q}$ for certain matrices $
 ``````
 
 ``````{exercise}
-:label: problem-perminverse
+:label: problem-pivoting-perminverse
 ✍ An $n\times n$ *permutation matrix* $\mathbf{P}$ is a reordering of the rows of an identity matrix such that $\mathbf{P} \mathbf{A}$  has the effect of moving rows $1,2,\ldots,n$ of $\mathbf{A}$ to new positions $i_1,i_2,\ldots,i_n$. Then $\mathbf{P}$ can be expressed as
 
 ```{math}
