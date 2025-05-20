@@ -205,10 +205,13 @@ Hence the trapezoid formula is as accurate as we can hope for in the family of A
 ## Exercises
 
 ``````{exercise}
+:label: problem-stiffness-oscillator
+
 ✍ Write the mechanical oscillator $x''+cx'+kx=0$ as a first-order linear system, $\mathbf{u}'=\mathbf{A}\mathbf{u}$. Show that if $c=k+1$, this system is stiff as $k\to\infty$.
 ``````
 
 ``````{exercise}
+:label: problem-stiffness-scalar
 This exercise is about the IVP $u'=\cos(t) - 200(u-\sin(t))$, $u(0)=0$.
 
 **(a)** ✍ Show that $u(t) = \sin(t)$ is the exact solution, and find the linearization about this solution.
@@ -219,7 +222,9 @@ This exercise is about the IVP $u'=\cos(t) - 200(u-\sin(t))$, $u(0)=0$.
 ``````
 
 ``````{exercise}
-In {numref}`Example %s <example-systems-coupledpendula>` we derived the following system for two pendulums hanging from a rod:
+:label: problem-stiffness-pendulums
+
+In @example-systems-coupledpendula we derived the following system for two pendulums hanging from a rod:
 
 \begin{align*}
 u_1' &= u_3, \\
@@ -234,6 +239,7 @@ u_4' &= -\gamma u_4 - \frac{g}{L}\sin u_2 + k(u_1-u_2).
 ``````
 
 ``````{exercise}
+:label: problem-stiffness-combustion
 The equation $u'=u^2-u^3$ is a simple model for combustion of a flame ball in microgravity. (This problem is adapted from section 7.9 of {cite}`molerNumericalComputing2010`.) After "ignition," the exact solution rapidly approaches 1.
 
 **(a)** ⌨ Solve the problem with initial condition $u(0) =0.001$ for $0\le t \le 2000$, using {numref}`Function {number} <function-rk4>` with $n=2000$ steps. Plot the solution.
@@ -248,7 +254,8 @@ The equation $u'=u^2-u^3$ is a simple model for combustion of a flame ball in mi
 ```
 
 ``````{exercise}
-The *van der Pol equation* is a much-studied nonlinear oscillator given by
+:label: problem-stiffness-vanderpol
+The [van der Pol equation*](wiki:Van_der_Pol_oscillator) is a much-studied nonlinear oscillator given by
 
 :::{math}
 :label: vanderpol

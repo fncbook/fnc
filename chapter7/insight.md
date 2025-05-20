@@ -133,6 +133,7 @@ Representation of an image as a matrix allows us to describe some common image o
 ## Exercises
 
 ``````{exercise}
+:label: problem-insight-terms
 ✍ Consider the terms *numerical*, *analysis*, and *fun*. Write out the term-document matrix for the following statements:
 
 **(a)** Numerical analysis is the most fun type of analysis.
@@ -143,6 +144,7 @@ Representation of an image as a matrix allows us to describe some common image o
 ``````
 
 ``````{exercise}
+:label: problem-insight-adjacency1
 ✍ Write out the adjacency matrix for the following graph on six nodes.
 
 ```{image} littlegraph.png
@@ -153,6 +155,7 @@ Representation of an image as a matrix allows us to describe some common image o
 ``````
 
 ``````{exercise}
+:label: problem-insight-adjacency2
 ✍ Here is a graph adjacency matrix.
 
 :::{math}
@@ -177,6 +180,7 @@ Representation of an image as a matrix allows us to describe some common image o
 ``````
 
 ``````{exercise}
+:label: problem-insight-image
 ⌨ Refer to @demo-insight-image on loading and displaying images. Choose a test image of your liking.
 
 **(a)** Display the test image upside-down.
@@ -218,7 +222,7 @@ A = spio.mmread("actors.mtx")
 ```` 
 `````
 
-Based on data provided by the Self-Organized Networks Database at the University of Notre Dame, the matrix `A` contains information about the appearances of 392,400 actors in 127,823 movies, as given by the Internet Movie Database. It has $A_{ij}=1$ if actor $j$ appeared in movie $i$ and zero elements elsewhere.
+Based on data provided by the Self-Organized Networks Database at the University of Notre Dame, the matrix `A` contains information about the appearances of 392,400 actors in 127,823 movies, as given by the [Internet Movie Database](wiki:IMDb). It has $A_{ij}=1$ if actor $j$ appeared in movie $i$ and zero elements elsewhere.
 
 **(a)** What is the maximum number of actors appearing in any one movie?
 

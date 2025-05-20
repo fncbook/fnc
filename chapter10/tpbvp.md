@@ -139,9 +139,10 @@ Characterizing the conditioning of a TPBVP theoretically is difficult. There are
 ```
 
 ``````{exercise}
+:label: problem-tpbvp-classify
 ✍ In each case, explain whether the TPBVP is linear or nonlinear.  
 
-**(a)** $x^2 u'' +xu' + (x^2 - 1) u = 0, \quad u(0) =1,\; u(4) =0 \qquad$ *(Bessel equation)*
+**(a)** $x^2 u'' +xu' + (x^2 - 1) u = 0, \quad u(0) =1,\; u(4) =0 \qquad$ [Bessel equation](wiki:Bessel_function)
 
 **(b)** $u'' - u u' = 1, \quad u(0) = u'(1) = 1$
 
@@ -160,19 +161,19 @@ Characterizing the conditioning of a TPBVP theoretically is difficult. There are
 :label: problem-tpbvp-verify
 ✍ For each BVP, verify that the given solution is valid, i.e., check that the differential equation and the boundary conditions are satisfied.
 
-**(a)** $u'' - 2xu' + 8 u = 0, \quad u(0) = 1, \; u(1) = -\frac{5}{3}\qquad$ *(Hermite equation)* 
+**(a)** $u'' - 2xu' + 8 u = 0, \quad u(0) = 1, \; u(1) = -\frac{5}{3}\qquad$ [Hermite equation](wiki:Hermite_polynomials) 
 
 Solution: $u(x) = \frac{4}{3}x^4-4x^2+1$
 
-**(b)** $xu'' + (1-x) u' + 3 u = 0, \quad u(0) =1, \; u'(1) =-\frac{1}{2} \qquad$ *(Laguerre equation)*
+**(b)** $xu'' + (1-x) u' + 3 u = 0, \quad u(0) =1, \; u'(1) =-\frac{1}{2} \qquad$ [Laguerre equation](wiki:Laguerre_polynomials)
 
 Solution: $u(x) = \frac{1}{6}(6-18x+9x^2-x^3)$
 
-**(c)** $(1-x^2)u'' - xu' + 25u = 0, \quad u'(0) = 5, \; u\left(\frac{1}{2}\right) = \frac{1}{2} \qquad$ *(Chebyshev equation)*
+**(c)** $(1-x^2)u'' - xu' + 25u = 0, \quad u'(0) = 5, \; u\left(\frac{1}{2}\right) = \frac{1}{2} \qquad$ [Chebyshev equation](wiki:Chebyshev_polynomials)
 
 Solution: $u(x) = T_5(x) = 16x^5-20x^3+5x$ 
 
-**(d)** $(1-x^2) u'' -2xu' + 12 u = 0, \quad u(0)+2u'(0) = -3, \; u(1) = 1 \qquad$ *(Legendre equation)*
+**(d)** $(1-x^2) u'' -2xu' + 12 u = 0, \quad u(0)+2u'(0) = -3, \; u(1) = 1 \qquad$ [Legendre equation](wiki:Legendre_polynomials)
 
 Solution: $u(x) = P_3(x) = \frac{1}{2}(5x^3-3x)$ 
 
@@ -182,7 +183,8 @@ Solution: $u(x) =  ( x+2 )^{-1/2}$
 ``````
 
 ``````{exercise}
-⌨ For each TPBVP in Exercise 2, use `solve`/`bvp4c`/`solve_bvp` to find the solution, following the method in @demo-tpbvp-mems. Plot the solution and separately plot the error as a function of $x$. (Important: In some cases, you will need to truncate the domain slightly to avoid division by zero.)
+:label: problem-tpbvp-usage
+⌨ For each TPBVP in @problem-tpbvp-verify, use `solve`/`bvp4c`/`solve_bvp` to find the solution, following the method in @demo-tpbvp-mems. Plot the solution and separately plot the error as a function of $x$. (Important: In some cases, you will need to truncate the domain slightly to avoid division by zero.)
 ``````
 
 ``````{exercise}
@@ -195,7 +197,7 @@ Solution: $u(x) =  ( x+2 )^{-1/2}$
 
 ``````{exercise}
 :label: problem-tpbvp-allencahn
-⌨  The *stationary Allen–Cahn equation* is a model of phase changes, such as the change from liquid to solid. In one spatial dimension it can be written as
+⌨  The stationary [Allen–Cahn equation](wiki:Allen-Cahn_equation) is a model of phase changes, such as the change from liquid to solid. In one spatial dimension it can be written as
 
 $$
 \epsilon u'' = u^3-u, \qquad 0 \le x \le 1, \qquad u(0)=-1, \quad u(1)=1.

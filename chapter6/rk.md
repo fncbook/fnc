@@ -272,7 +272,7 @@ The error decreases geometrically as $s$ is incremented, so trading a stage for 
 % must stay as #1
 
 ``````{exercise}
-:label: problem-rkhandexamples
+:label: problem-rk-byhand
 ✍ For each IVP, write out (possibly using a calculator) the first time step of the improved Euler method with $h=0.2$.
 
 **(a)** $u' = -2t u, \ 0 \le t \le 2, \ u(0) = 2;\  \hat{u}(t) = 2e^{-t^2}$
@@ -283,36 +283,43 @@ The error decreases geometrically as $s$ is incremented, so trading a stage for 
 ``````
 
 ``````{exercise}
-✍ Use the modified Euler method to solve the problems in the preceding exercise.
+:label: problem-rk-eulermod
+✍ Use the modified Euler method to solve the problems in @problem-rk-byhand.
 ``````
 
 ``````{exercise}
-⌨ Modify {numref}`Function {number} <function-rk4>` to implement the modified Euler method. Test your function on the IVP in part (a) of Exercise 1 by solving with $n=30,60,90,\ldots,300$ and plotting the convergence of the error at the final time together with a line showing $O(n^{-2})$. 
+:label: problem-rk-emimplement
+⌨ Modify {numref}`Function {number} <function-rk4>` to implement the modified Euler method. Test your function on the IVP in part (a) of @problem-rk-byhand by solving with $n=30,60,90,\ldots,300$ and plotting the convergence of the error at the final time together with a line showing $O(n^{-2})$. 
 ``````
 
 ``````{exercise}
-✍ Use Heun's method to solve the problems in @problem-rkhandexamples.
+:label: problem-rk-heun
+✍ Use Heun's method to solve the problems in @problem-rk-byhand.
 ``````
 
 ``````{exercise}
-⌨ Modify {numref}`Function {number} <function-rk4>` to implement Heun's method. Test your function on the IVP in part (a) of Exercise 1 by solving with $n=30,60,90,\ldots,300$ and plotting the convergence of the error at the final time together with a line showing $O(n^{-2})$. 
+:label: problem-rk-heunimplement
+⌨ Modify {numref}`Function {number} <function-rk4>` to implement Heun's method. Test your function on the IVP in part (a) of @problem-rk-byhand by solving with $n=30,60,90,\ldots,300$ and plotting the convergence of the error at the final time together with a line showing $O(n^{-2})$. 
 ``````
 
 ``````{exercise}
-✍ Use RK4 to solve the problems in @problem-rkhandexamples.
+:label: problem-rk-rk4
+✍ Use RK4 to solve the problems in @problem-rk-byhand.
 ``````
 
 ``````{exercise}
+:label: problem-rk-meorder
 ✍ Using {eq}`rkexactexpand` and {eq}`mvtaylor2`, show that the modified Euler method has order of accuracy at least 2.
 ``````
 
 ``````{exercise}
+:label: problem-rk-heunorder
 ✍ Using {eq}`rkexactexpand` and {eq}`mvtaylor2`, show that Heun's method has order of accuracy at least 2.
 
 ``````
 
 ``````{exercise}
-:label: problem-rk4converge
+:label: problem-rk-converge
 ⌨ For each IVP, compute the solution using {numref}`Function {number} <function-rk4>`. (i) Plot the solution for $n=300$. (ii) For $n=100,200,300,\ldots,1000$, compute the error at the final time and make a log-log convergence plot, including a reference line for fourth-order convergence.
 
 **(a)** $u''+ 9u = 9t, \: 0< t< 2\pi, \: u(0) = 1,\: u'(0) = 1; \: \hat{u}(t) = t+\cos (3t)$
@@ -339,10 +346,12 @@ $\quad \hat{y}(x) = x^{-1} \left[ 3 \cos \left( 3 \ln x \right)+\sin \left( 3 \l
 ``````
 
 ``````{exercise}
-⌨ Do @problem-SIR, but using {numref}`Function {number} <function-rk4>` instead of `solve`.
+:label: problem-rk-SIR
+⌨ Do @problem-systems-SIR, but using {numref}`Function {number} <function-rk4>` instead of `solve`.
 ``````
 
 ``````{exercise}
+:label: problem-rk-bounded
 ✍ Consider the problem $u'=c u$, $u(0) = 1$ for constant $c$ and $t>0$.
 
 **(a)** Find an explicit formula in terms of $h$ and $c$ for $u_{i+1}/u_i$ in the modified Euler method.

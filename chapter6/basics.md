@@ -136,7 +136,7 @@ If the derivative $\frac{\partial f}{\partial u}$ exists and $\left|\frac{\parti
 ```{index} condition number; of initial-value problems
 ```
 
-In a numerical context we have to be concerned about the conditioning of the IVP. There are two key items in {eq}`IVP` that we might consider to be the data of the initial-value ODE problem: the function $f(t,u)$, and the initial value $u_0$. It's easier to discuss perturbations to numbers than to functions, so we will focus on the effect of $u_0$ on the solution, using the following theorem that we give without proof. Happily, its conditions are identical to those in {numref}`Theorem %s <theorem-existunique>`.
+In a numerical context we have to be concerned about the conditioning of the IVP. There are two key items in {eq}`IVP` that we might consider to be the data of the initial-value ODE problem: the function $f(t,u)$, and the initial value $u_0$. It's easier to discuss perturbations to numbers than to functions, so we will focus on the effect of $u_0$ on the solution, using the following theorem that we give without proof. Happily, its conditions are identical to those in @theorem-existunique.
 
 (theorem-depIC)=
 ````{prf:theorem} Dependence on initial value
@@ -150,7 +150,7 @@ If the derivative $\frac{\partial f}{\partial u}$ exists and $\left|\frac{\parti
 for all sufficiently small $|\delta|$.
 ````
 
-Numerical solutions of IVPs have errors, and those errors can be seen as perturbations to the solution. {numref}`Theorem %s <theorem-depIC>` gives an upper bound of $e^{L(b-a)}$ on the infinity norm (i.e., pointwise) absolute condition number of the solution with respect to perturbations at an initial time. However, the upper bound may be a terrible overestimate of the actual sensitivity for a particular problem.
+Numerical solutions of IVPs have errors, and those errors can be seen as perturbations to the solution. @theorem-depIC gives an upper bound of $e^{L(b-a)}$ on the infinity norm (i.e., pointwise) absolute condition number of the solution with respect to perturbations at an initial time. However, the upper bound may be a terrible overestimate of the actual sensitivity for a particular problem.
 
 (demo-basics-cond)=
 ::::{prf:example} Conditioning of an IVP
@@ -180,7 +180,8 @@ In general, solutions can diverge from, converge to, or oscillate around the ori
 ## Exercises
 
 ``````{exercise}
-✍ For each IVP, determine whether the problem satisfies the conditions of {numref}`Theorem %s <theorem-depIC>`). If so, determine the smallest possible value for $L$.
+:label: problem-basics-lipschitz
+✍ For each IVP, determine whether the problem satisfies the conditions of @theorem-depIC. If so, determine the smallest possible value for $L$.
 
 **(a)** $f(t,u) = 3 u,\; 0 \le t \le 1$
 
@@ -192,10 +193,12 @@ In general, solutions can diverge from, converge to, or oscillate around the ori
 ``````
 
 ``````{exercise}
+:label: problem-basics-usage
 ⌨ For each ODE in the preceding problem, assume that $u$ is initially equal to $1$ on the given interval. Solve the resulting IVP with `solve` and make a plot of the solution.
 ``````
 
 ``````{exercise}
+:label: problem-basics-intfactor
 ✍ Use an integrating factor to find the solution of each problem in analytic form.
 
 **(a)** $u' = -t u,\ 0 \le t \le 5,\ u(0) = 2$
@@ -204,20 +207,23 @@ In general, solutions can diverge from, converge to, or oscillate around the ori
 ``````
 
 ``````{exercise}
+:label: problem-basics-existence
 ✍ Consider the IVP $u'=u^2$, $u(0)=\alpha$.
 
-**(a)** Does {numref}`Theorem %s <theorem-existunique>` apply to this problem?
+**(a)** Does @theorem-existunique apply to this problem?
 
 **(b)** Show that $u(t) = \alpha/(1-\alpha t)$ is a solution of the IVP.
 
 **(c)** Does this solution necessarily exist for all $t\in[0,1]$?
 
-```{index} logistic equation
-```
 ``````
 
+```{index} logistic equation
+```
+
 ``````{exercise}
-⌨ Using `solve`, compute solutions $x(t)$ to the logistic equation with harvesting,
+:label: problem-basics-logistic
+⌨ Using `solve`, compute solutions $x(t)$ to the [logistic equation](wiki:Logistic_function#Logistic_differential_equation) with harvesting,
 
 ```{math}
 x' = k (S-x)(x-M), \qquad 0\le t \le 10,
@@ -227,6 +233,7 @@ with $k=S=1$ and $M=0.25$, for the initial conditions $x(0)=0.9M$, $1.1M$, $1.5M
 ``````
 
 ``````{exercise}
+:label: problem-basics-attractors
 ⌨ **(a)** Using `solve`, solve the IVP $u'=u\cos(u) + \cos(4t)$, $0\le t \le 10$, $u(0) = u_0$ for $u_0 = -2,-1.5,-1,\ldots,1.5,2$. Plot all the solutions on a single graph. 
 
 **(b)** All of the solutions in part (a) eventually settle into one of two periodic oscillations. To two digits of accuracy, find the value of $u_0$ in $(-1,1)$ at which the selected long-term solution changes. (This will take repeated trials, narrowing down the range for $u_0$ each time.)
@@ -234,7 +241,7 @@ with $k=S=1$ and $M=0.25$, for the initial conditions $x(0)=0.9M$, $1.1M$, $1.5M
 ``````
 
 ``````{exercise}
-:label: problem-caffeine
+:label: problem-basics-caffeine
 ⌨ Experimental evidence (see {cite}`newtonPlasmaSalivary1981`) shows that a 300-mg oral dose of caffeine, such as might be found in a large mug of drip-brewed coffee, creates a concentration of about 8 $\mu{\rm g}$/mL in blood plasma. This boost is followed by first-order kinetics with a half-life of about 6 hours (although this rate can vary a great deal from person to person). We can model the caffeine concentration due to one drink taken over half an hour via
 
 ```{math}
@@ -255,6 +262,7 @@ Use `solve` to make a plot of the caffeine concentration for 12 hours. Then chan
 ``````
 
 ``````{exercise}
+:label: problem-basics-skydiver
 ⌨ A reasonable model of the velocity $v(t)$ of a skydiver is
 
 $$\frac{dv}{dt} = -g + \frac{k}{m}v^2,  \qquad v(0)=0,$$

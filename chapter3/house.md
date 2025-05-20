@@ -8,7 +8,7 @@ numbering:
 ```{index} orthogonal matrix
 ```
 
-It is possible to compute a thin QR factorization using the outer product formula {eq}`matrixouter`, as we did with LU. However, to stably compute the factorization, a better strategy is to introduce zeros into the lower triangle, one column at a time, using orthogonal matrices. Thanks to {numref}`Theorem %s <theorem-qr-orthogmatrix>`, the product of orthogonal matrices will also be orthogonal.
+It is possible to compute a thin QR factorization using the outer product formula {eq}`matrixouter`, as we did with LU. However, to stably compute the factorization, a better strategy is to introduce zeros into the lower triangle, one column at a time, using orthogonal matrices. Thanks to @theorem-qr-orthogmatrix, the product of orthogonal matrices will also be orthogonal.
 
 ## Householder reflections
 
@@ -186,7 +186,7 @@ In @problem-house-flops you are asked to derive the following result about the Q
 Q-less QR factorization by Householder reflections takes $\sim(2mn^2-\frac{2}{3}n^3)$ flops.
 :::
 
-The flop count quoted in {numref}`Theorem {number} <theorem-house-flops>` dominates the running time for least-squares solution via QR. Compared to the count from {numref}`Theorem {number} <theorem-normaleqns-flops>` for solution by the normal equations, the flops are essentially identical when $m=n$, but the QR solution is about twice the cost when $m\gg n$. The redeeming quality of the QR route is better stability, which we do not discuss here.
+The flop count quoted in @theorem-house-flops dominates the running time for least-squares solution via QR. Compared to the count from @theorem-normaleqns-flops for solution by the normal equations, the flops are essentially identical when $m=n$, but the QR solution is about twice the cost when $m\gg n$. The redeeming quality of the QR route is better stability, which we do not discuss here.
 
 ## Exercises
 
@@ -206,7 +206,7 @@ The flop count quoted in {numref}`Theorem {number} <theorem-house-flops>` domina
 
 ``````{exercise}
 :label: problem-house-reflector
-✍ Prove the unfinished items in {numref}`Theorem %s <theorem-hhreflect>`, namely that a Householder reflector $\mathbf{P}$ is symmetric and orthogonal.
+✍ Prove the unfinished items in @theorem-hhreflect, namely that a Householder reflector $\mathbf{P}$ is symmetric and orthogonal.
 ``````
 
 ``````{exercise}
@@ -260,11 +260,11 @@ Another algorithmic technique for orthogonally introducing zeros into a matrix i
 
 ``````{exercise}
 :label: problem-house-flops
-✍ Derive the result of {numref}`Theorem {number} <theorem-house-flops>` by analyzing {numref}`Function {number} <function-qrfact>` without lines 20–22. 
+✍ Derive the result of @theorem-house-flops by analyzing {numref}`Function {number} <function-qrfact>` without lines 20–22. 
 
 ``````
 
 ``````{exercise}
 :label: problem-house-speed
-✍ Suppose $m=Kn$ for constant $K \ge 1$ as both $m$ and $n$ go to infinity. Show that the flop counts from {numref}`Theorem {number} <theorem-house-flops>`  and {numref}`Theorem {number} <theorem-normaleqns-flops>` have a ratio of 1 when $K=1$ and approaches 2 as $K\to \infty$. 
+✍ Suppose $m=Kn$ for constant $K \ge 1$ as both $m$ and $n$ go to infinity. Show that the flop counts from @theorem-house-flops and @theorem-normaleqns-flops have a ratio of 1 when $K=1$ and approaches 2 as $K\to \infty$. 
 ``````

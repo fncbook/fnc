@@ -223,10 +223,12 @@ On the left, we use a log-log scale, which makes fourth-order algebraic converge
 ## Exercises
 
 ``````{exercise}
+:label: problem-stability-rate
 ⌨ Revisit @demo-stability-equispaced and determine an approximate value for the convergent phase of the constant $K$ mentioned in the comments there. 
 ``````
 
 ``````{exercise}
+:label: problem-stability-chebyshev
 ⌨ For each case, compute the polynomial interpolant using $n$ second-kind Chebyshev nodes in $[-1,1]$ for $n=4,8,12,\ldots,60$. At each value of $n$, compute the infinity-norm error (that is, $\max |p(x)-f(x)|$ evaluated for at least 4000 values of $x$). Using a log-linear scale, plot the error as a function of $n$, then determine a good approximation to the constant $K$ in {eq}`spectral`. 
 
 **(a)** $f(x) = 1/(25x^2+1)\qquad$ 
@@ -237,12 +239,13 @@ On the left, we use a log-log scale, which makes fourth-order algebraic converge
 ``````
 
 ``````{exercise}
-:label: problem-chebinterp
+:label: problem-stability-chebinterp
 ⌨ Write a function `chebinterp(f,n)` that returns a function representing the polynomial interpolant of the input function `f` using $n+1$ Chebyshev second kind nodes over $[-1,1]$. You should use {eq}`weightcheb` to compute the barycentric weights directly, rather than using the method in {numref}`Function {number} <function-polyinterp>`. Test your function by revisiting @demo-stability-runge to use Chebyshev rather than equally spaced nodes. 
 ``````
 
 ``````{exercise}
-{numref}`Theorem %s <theorem-spectral>` assumes that the function being approximated has infinitely many derivatives over $[-1,1]$. But now consider the family of functions $f_m(x)=|x|^m$. 
+:label: problem-stability-nonsmooth
+@theorem-spectral assumes that the function being approximated has infinitely many derivatives over $[-1,1]$. But now consider the family of functions $f_m(x)=|x|^m$. 
 
 **(a)** ✍ How many continuous derivatives over $[-1,1]$ does $f_m$ possess?
 
@@ -270,6 +273,7 @@ z = \psi(x) = a + (b-a)\frac{(x+1)}{2}.
 ``````
 
 ``````{exercise}
+:label: problem-stability-infinite
 The Chebyshev points can be used for interpolation of functions defined on the entire real line by using the change of variable
 
 :::{math}

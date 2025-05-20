@@ -157,7 +157,7 @@ has the solution
 where $\mathbf{F}$ is the quasimatrix {eq}`quasimat`.
 ::::
 
-There is no need to supply a proof of {numref}`Theorem {number} <theorem-orthogonal-normal>` because it will read exactly the same as for the discrete normal equations. All the effort has gone into making definitions that set up a perfect analogy. In retrospect, all we needed in the original discrete case were linear combinations and inner products.
+There is no need to supply a proof of @theorem-orthogonal-normal because it will read exactly the same as for the discrete normal equations. All the effort has gone into making definitions that set up a perfect analogy. In retrospect, all we needed in the original discrete case were linear combinations and inner products.
 
 (example-lsfitexpfun)=
 ::::{prf:example}
@@ -326,7 +326,7 @@ Chebyshev polynomials also have a startling alternative form,
 T_k(x) = \cos\left( k \theta \right), \quad \theta = \arccos(x).
 :::
 
-The results from {numref}`Theorem {number} <theorem-orthogonal-legendre>` apply to Chebyshev polynomials as well, with orthogonality being in the sense of {eq}`chebinner`. Their Gram matrix is given by
+The results from @theorem-orthogonal-legendre apply to Chebyshev polynomials as well, with orthogonality being in the sense of {eq}`chebinner`. Their Gram matrix is given by
 
 $$
 \langle T_i,T_j \rangle 
@@ -366,7 +366,7 @@ By definition, $r(x)P_n(x)$ does not change sign over $(-1,1)$. Therefore
 Because $r$ is a degree-$m$ polynomial, we can express it as a combination of $P_0,\ldots,P_m$. If $m<n$, the integral {eq}`legrootint` would be zero, by the orthogonality property of Legendre polynomials. So $m\ge n$. Since $P_n(x)$ has at most $n$ real roots, $m=n$. All of the roots must therefore be simple, and this completes the proof.
 ::::
 
-The result of {numref}`Theorem {number} <theorem-orthogonal-roots>` holds for orthogonal families of polynomials for other weight functions. The Chebyshev case is unusual in that thanks to {eq}`chebaltform`, the roots of $T_n$ are known explicitly:
+The result of @theorem-orthogonal-roots holds for orthogonal families of polynomials for other weight functions. The Chebyshev case is unusual in that thanks to {eq}`chebaltform`, the roots of $T_n$ are known explicitly:
 
 :::{math}
 :label: chebfirstpoints
@@ -387,6 +387,7 @@ Interpolation has no easy connection to inner products or the 2-norm. With inter
 ## Exercises
 
 ``````{exercise}
+:label: problem-orthogonal-quasimatrix
 ✍ Let $\mathbf{F}$ be the quasimatrix $\bigl[\, \underline{1} \quad\! \underline{\cos(\pi x)}\quad\! \underline{\sin(\pi x)}\,\bigr]$ for $x\in[-1,1]$. 
 
 **(a)** Find $\mathbf{F}^T e^x$. 
@@ -395,27 +396,32 @@ Interpolation has no easy connection to inner products or the 2-norm. With inter
 ``````
 
 ``````{exercise}
+:label: problem-orthogonal-leastsq
 ✍ **(a)** Find the best linear approximation in the least-squares sense to the function $\sin(x)$ on $[-1,1]$. 
 
-**(b)** Using {numref}`Theorem {number} <theorem-orthogonal-normal>`, explain why the best fitting quadratic polynomial will be the linear function you found in part (a). (Note: You do not need to carry out the complete calculation.)
+**(b)** Using @theorem-orthogonal-normal, explain why the best fitting quadratic polynomial will be the linear function you found in part (a). (Note: You do not need to carry out the complete calculation.)
 ``````
 
 ``````{exercise}
+:label: problem-orthogonal-legendre
 **(a)** ✍ ⌨ Use {eq}`legendre` to write out $P_2(x)$ and $P_3(x)$. Plot $P_0,P_1,P_2,P_3$ on one graph for $-1\le x \le 1$. (You may find it interesting to compare to the graph in @problem-qr-legendre.)
 
 **(b)** ✍ ⌨  Use {eq}`chebyshev` to write out $T_2(x)$ and $T_3(x)$. Plot $T_0,T_1,T_2,T_3$ on one graph for $-1\le x \le 1$.
 ``````
 
 ``````{exercise}
+:label: problem-orthogonal-parity
 ✍ Use {eq}`legendre` to show that $P_n(x)$ is an odd function if $n$ is odd and an even function if $n$ is even.
 ``````
 
 ``````{exercise}
+:label: problem-orthogonal-legpoly
 ⌨ Using {eq}`legendre`, write a function `legpoly(x,n)` that returns a matrix whose columns are the Legendre polynomials $P_0,P_1,\ldots,P_n$ evaluated at all the points in the vector $x$. Then use your function to plot $P_0,P_1,P_2,P_3$ on one graph. 
 ``````
 
 ``````{exercise}
-⌨ (Continuation of previous problem.) Choose 1600 evenly spaced points in $[-1,1]$. For $n=1,2,\ldots,16$, use this vector of points and the function `legpoly` to construct a $1600\times (n+1)$ matrix that discretizes the quasimatrix
+:label: problem-orthogonal-cond
+⌨ (Continuation of @problem-orthogonal-legpoly.) Choose 1600 evenly spaced points in $[-1,1]$. For $n=1,2,\ldots,16$, use this vector of points and the function `legpoly` to construct a $1600\times (n+1)$ matrix that discretizes the quasimatrix
 
 $$
 \mathbf{A}_n = 
@@ -429,19 +435,23 @@ Make a table of the matrix condition number $\kappa(\mathbf{A}_n)$ as a function
 ``````
 
 ``````{exercise}
+:label: problem-orthogonal-chebpoly
 ⌨ Using {eq}`chebaltform`, write a function `chebpoly` that returns a matrix whose columns are the Chebyshev polynomials $T_0,T_1,\ldots,T_n$ evaluated at all the points in the vector $x$. Then use your function to plot $T_0,T_1,T_2,T_3$ on one graph. 
 ``````
 
 ``````{exercise}
+:label: problem-orthogonal-chebpoints
 **(a)** ✍ Use {eq}`chebaltform` to show that the first-kind points {eq}`chebfirstpoints` are roots of $T_n$. 
 
 **(b)** ✍ Use {eq}`chebaltform` to show that the second-kind points {eq}`chebextreme` are local extreme points of $T_n$.
 ``````
 
 ``````{exercise}
+:label: problem-orthogonal-recursion
  ✍ Show that the definition {eq}`chebaltform` satisfies the recursion relation in {eq}`chebyshev`.
 ``````
 
 ``````{exercise}
+:label: problem-orthogonal-chebweight
 ✍ Use {eq}`chebaltform` to show that $\langle T_0,T_0 \rangle=\pi$ and $\langle T_k,T_k \rangle=\pi/2$ for $k>0$ in the Chebyshev-weighted inner product. (Hint: Change to the variable $\theta$.)
 ``````

@@ -12,7 +12,7 @@ In {numref}`section-localapprox-integration` we derived methods of order 2, 4, a
 \int_{-1}^1 f(x)\, dx \approx \sum_{k=0}^n w_k f(t_k)
 :::
 
-for a collection of nodes $t_0,\ldots,t_n$ in $[-1,1]$ and weights $w_0,\ldots,w_n$. (Throughout this section we use $[-1,1]$ as the domain of the integral; for a general interval $[a,b]$, see @problem-integration-integrateinterval.) The nodes and weights are independent of the integrand $f(x)$ and determine the implementation and properties of the formula.
+for a collection of nodes $t_0,\ldots,t_n$ in $[-1,1]$ and weights $w_0,\ldots,w_n$. (Throughout this section we use $[-1,1]$ as the domain of the integral; for a general interval $[a,b]$, see @problem-specint-integrateinterval.) The nodes and weights are independent of the integrand $f(x)$ and determine the implementation and properties of the formula.
 
 ```{index} convergence rate; spectral
 ```
@@ -238,7 +238,7 @@ Given that $\Psi(x)\in \mathcal{P}_{n-1}$, we can ensure that this condition is 
 for all $q \in {\mathcal{P}}_{n-1}$. Hence satisfaction of {eq}`gqorthogonality` implies satisfaction of {eq}`gqoptimality`. But by the orthogonality property of Legendre polynomials, satisfaction of {eq}`gqorthogonality` is guaranteed if $\Phi(x)=cP_n(x)$ for a constant $c$. Thus $\Phi$ and $P_n$ have the same roots.
 ::::
 
-From {numref}`Theorem %s <theorem-orthogonal-roots>` we know that the roots of $P_n$ are distinct and all within $(-1,1)$. (Indeed, it would be strange to have the integral of a function depend on some of its values outside the integration interval!)  While there is no explicit formula for the roots, there are fast algorithms to compute them and the integration weights on demand. {numref}`Function {number} <function-glint>` uses one of the oldest methods,  practical up to $n=100$ or so.
+From @theorem-orthogonal-roots we know that the roots of $P_n$ are distinct and all within $(-1,1)$. (Indeed, it would be strange to have the integral of a function depend on some of its values outside the integration interval!)  While there is no explicit formula for the roots, there are fast algorithms to compute them and the integration weights on demand. {numref}`Function {number} <function-glint>` uses one of the oldest methods,  practical up to $n=100$ or so.
 
 (function-glint)=
 ``````{prf:algorithm} glint
@@ -301,6 +301,7 @@ The difference in convergence between Clenshaw–Curtis and Gauss–Legendre is 
 ``````
 
 ``````{exercise}
+:label: problem-specint-explicit
 ✍ For each integral, use Gauss–Legendre integration with $n=2$ to write out the terms $w_1f(t_1)$ and $w_2f(t_2)$ explicitly. 
 
 **(a)** $\displaystyle\int_{-1}^1 e^{-x}\, dx = 2 \sinh(1) \qquad$
@@ -323,7 +324,7 @@ The difference in convergence between Clenshaw–Curtis and Gauss–Legendre is 
 ``````
 
 ``````{exercise}
-:label: problem-integration-integrateinterval
+:label: problem-specint-integrateinterval
 **(a)** ✍ (See also @problem-stability-changeinterval.) Using the change of variable 
 
 $$
@@ -346,6 +347,7 @@ $$
 ``````
 
 ``````{exercise}
+:label: problem-specint-orbit
 ⌨ A particle moves in a circular path with angular velocity given by $\omega(\theta)=\sin(\exp(\sin \theta))$. The time it takes to complete one full orbit is 
 
 $$
@@ -356,7 +358,8 @@ Use {numref}`Function {number} <function-trapezoid>` to find the period of the m
 ``````
 
 ``````{exercise}
-✍ Prove the claim about linearity of the Gauss–Legendre integration formula alluded to in the derivation of {numref}`Theorem %s <theorem-specint-gaussquad>`. Namely, show that condition {eq}`gqoptimality` is true if and only if
+:label: problem-specint-linearity
+✍ Prove the claim about linearity of the Gauss–Legendre integration formula alluded to in the derivation of @theorem-specint-gaussquad. Namely, show that condition {eq}`gqoptimality` is true if and only if
 
 $$
 \int_{-1}^1 x^j\,dx = \sum_{k=1}^n w_k x_k^j

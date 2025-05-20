@@ -183,10 +183,10 @@ which shows that $x_k\to p$ as $k\to \infty$. To show that $p$ must exist and co
 From the Fundamental Theorem of Calculus, which asserts that $g(s)-g(t)=\int_s^t g'(x)\, dx$, it's easy to conclude that an upper bound of $|g'(x)|\le L$ for all $x$ results in {eq}`lipschitz`. Hence:
 
 ::::{prf:corollary}
-If $|g'(x)|\le L < 1$ for all $x$ in an interval $S$, then the conclusions of {numref}`Theorem {number} <theorem-contraction>` apply.
+If $|g'(x)|\le L < 1$ for all $x$ in an interval $S$, then the conclusions of @theorem-contraction apply.
 ::::
 
-There are stronger and more general statements of {numref}`Theorem %s <theorem-contraction>`. For instance, it's possible to show that all initial $x_1$ that are sufficiently close to the fixed point will lead to convergence of the iteration. Algorithmically the main virtue of the fixed-point iteraion is that it is incredibly easy to apply. However, as we are about to discover, it's far from the fastest option.
+There are stronger and more general statements of @theorem-contraction. For instance, it's possible to show that all initial $x_1$ that are sufficiently close to the fixed point will lead to convergence of the iteration. Algorithmically the main virtue of the fixed-point iteraion is that it is incredibly easy to apply. However, as we are about to discover, it's far from the fastest option.
 
 ## Exercises
 

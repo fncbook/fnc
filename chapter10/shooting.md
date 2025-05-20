@@ -161,13 +161,14 @@ which grows rapidly with $\lambda$ near $x=1$. With the IVP solution so sensitiv
 ::::
 
 
-The essence of the instability is that errors can grow exponentially away from the boundary at $x=a$, where the state is arbitrarily being set (see {numref}`Theorem {number} <theorem-depIC>`). Using shooting, acceptable accuracy near $x=b$ therefore means requiring extraordinarily high accuracy near $x=a$.
+The essence of the instability is that errors can grow exponentially away from the boundary at $x=a$, where the state is arbitrarily being set (see @theorem-depIC). Using shooting, acceptable accuracy near $x=b$ therefore means requiring extraordinarily high accuracy near $x=a$.
 
 The instability of shooting can be circumvented by breaking the interval into smaller pieces and thus limiting the potential for error growth. However, we do not go into these details. Instead, the methods in the rest of this chapter treat both ends of the domain symmetrically and solve over the whole domain at once.
 
 ## Exercises
 
 ``````{exercise}
+:label: problem-shooting-usage
 ⌨ For each BVP in @problem-tpbvp-verify , use {numref}`Function {number} <function-shoot>` to compute the solution. Plot the solution and, separately, its error as functions of $x$. 
 ``````
 
@@ -184,7 +185,7 @@ The instability of shooting can be circumvented by breaking the interval into sm
 
 ``````{exercise}
 :label: problem-shooting-allencahn
-⌨  (Continuation of @problem-tpbvp-allencahn.) The stationary Allen–Cahn equation is 
+⌨  (Continuation of @problem-tpbvp-allencahn.) The stationary [Allen–Cahn equation](wiki:Allen-Cahn_equation) is 
 
 $$
 \epsilon u'' = u^3-u, \qquad 0 \le x \le 1, \qquad u(0)=-1, \quad u(1)=1.
@@ -200,6 +201,7 @@ As $\epsilon\rightarrow 0$, the solution tends toward a step function transition
 ``````
 
 ``````{exercise}
+:label: problem-shooting-linear
 ✍ Consider the linear TPBVP 
 
 $$

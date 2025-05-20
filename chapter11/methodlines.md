@@ -215,10 +215,12 @@ The adaptive time integrators can all produce solutions. But, as seen in @demo-m
 ## Exercises
 
 ``````{exercise}
+:label: problem-methodlines-heatstability
 ⌨ Revisit @demo-methodlines-heatFE. For each $m=20,30,\dots,120$ points in space, let $n=20,30,40,\dots$ in turn until you reach the smallest $n$ such that the numerical solution remains bounded above by 2 for all time; call this value $N(m)$. Make a log-log plot of $N(m)$ as a function of $m$. If you suppose that $N=O(m^p)$ for a simple rational number $p$, what is a reasonable hypothesis for $p$?
 ``````
 
 ``````{exercise}
+:label: problem-methodlines-average
 In @demo-methodlines-auto, as $t\to \infty$ the solution $u(x,t)$ approaches a value that is constant in both space and time.
 
 **(a)** ⌨ Set $m=400$ and use a native IVP solver, as shown in @demo-methodlines-auto, to find this constant value to at least eight digits of accuracy.
@@ -232,6 +234,7 @@ In @demo-methodlines-auto, as $t\to \infty$ the solution $u(x,t)$ approaches a v
 ```
 
 ``````{exercise}
+:label: problem-methodlines-cranknicolson
 ✍ Apply the trapezoid IVP formula (AM2 in @table-adams) to the semidiscretization {eq}`heatMOL` and derive what is known as the *Crank–Nicolson* method:
 
 :::{math}
@@ -244,10 +247,12 @@ Note that each side of the method is evaluated at a different time level.
 ``````
 
 ``````{exercise}
+:label: problem-methodlines-cnstable
 ⌨ Repeat @demo-methodlines-heatBE using the Crank–Nicolson method {eq}`CNxx`. Then try for $n=240$ as well, which uses a time step ten times larger than before. Does the solution remain stable? 
 ``````
 
 ``````{exercise}
+:label: problem-methodlines-reactdiff
 The PDE $u_t = 2u + u_{xx}$ combines growth with diffusion. 
 
 **(a)** ✍ Derive an equation analogous to {eq}`BExx` that combines second-order semidiscretization in space with the backward Euler solver in time.
@@ -256,6 +261,7 @@ The PDE $u_t = 2u + u_{xx}$ combines growth with diffusion.
 ``````
 
 ``````{exercise}
+:label: problem-methodlines-eulerxx
 ✍ In this problem, you will analyze the convergence of the explicit method given by {eq}`Eulerxx`.  Recall that the discrete approximation $u_{i,j}$ approximates the solution at $x_i$ and $t_j$.
 
 **(a)** Write the method in scalar form as

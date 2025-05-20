@@ -234,6 +234,7 @@ The practical utility of {eq}`poweriterconv` is limited: if we knew $\lambda_1$ 
 ## Exercises
 
 ``````{exercise}
+:label: problem-power-convergence
 ⌨ Use {numref}`Function {number} <function-poweriter>` to perform 20 power iterations for the following matrices. Quantitatively compare the observed convergence to the prediction in {eq}`poweriterconv`.
 
 **(a)**
@@ -260,6 +261,7 @@ $\mathbf{A} = \begin{bmatrix}
 ``````
 
 ``````{exercise}
+:label: problem-power-stuck
 ✍ Describe what happens during power iteration using the matrix $\mathbf{A}= \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}$ and initial vector $\mathbf{x}=\begin{bmatrix} 0.4\\0.7 \end{bmatrix}$. Does the algorithm converge to an eigenvector? How does this relate to {eq}`powerAkx0`?
 ``````
 
@@ -275,9 +277,11 @@ $\mathbf{A} = \begin{bmatrix}
 ``````
 
 ``````{exercise}
+:label: problem-power-actors
 ⌨ Copy the instructions from @problem-structure-actorsmat to obtain a large, sparse matrix $\mathbf{A}$. Use {numref}`Function {number} <function-poweriter>` to find the leading eigenvalue of $\mathbf{A}^T\mathbf{A}$ to at least six significant digits.
 ``````
 
 ``````{exercise}
+:label: problem-power-rayleigh
 ⌨ For symmetric matrices, the Rayleigh quotient {eq}`rayleigh` converts an $O(\epsilon)$ eigenvector estimate into an $O(\epsilon^2)$ eigenvalue estimate. Duplicate {numref}`Function {number} <function-poweriter>` and rename it to `powersym`. Modify the new function to use the Rayleigh quotient to produce the entries of `β` or `beta`. Your function should not introduce any additional matrix-vector multiplications. Apply the original {numref}`Function {number} <function-poweriter>` and the new `powersym` on the `MatrixDepot`/`gallery`/`rogues` matrix `fiedler(100)`, plotting the convergence curves on one graph.
 ``````

@@ -285,7 +285,7 @@ For the specific problem of Poisson's equation on a rectangle, there are special
 
 ``````{exercise}
 :label: problem-laplace-kron
-✍ Using general $2\times 2$ matrices, verify identities 4 and 6 in {numref}`Theorem {number} <theorem-laplace-kron>`.
+✍ Using general $2\times 2$ matrices, verify identities 4 and 6 in @theorem-laplace-kron.
 ``````
 
 ``````{exercise}

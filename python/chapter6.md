@@ -192,7 +192,7 @@ title(("Blowup in finite time"));
 (demo-basics-cond-python)=
 ``````{dropdown} @demo-basics-cond
 :open:
-Consider the ODEs $u'=u$ and $u'=-u$. In each case we compute $\partial f/\partial u = \pm 1$, so the condition number bound from {numref}`Theorem %s <theorem-depIC>` is $e^{b-a}$ in both problems. However, they behave quite differently. In the case of exponential growth, $u'=u$, the bound is the actual condition number.
+Consider the ODEs $u'=u$ and $u'=-u$. In each case we compute $\partial f/\partial u = \pm 1$, so the condition number bound from @theorem-depIC is $e^{b-a}$ in both problems. However, they behave quite differently. In the case of exponential growth, $u'=u$, the bound is the actual condition number.
 
 ```{code-cell}
 t = linspace(0, 3, 200)

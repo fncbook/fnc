@@ -106,6 +106,7 @@ In practice, good preconditioning is often as important, if not more important, 
 ``````
 
 ``````{exercise}
+:label: problem-precond-ilu
 ⌨ The object returned by `ilu` stores the factors in a way that optimizes sparse triangular substitution. You can recover the factors themselves via
 
 ```julia
@@ -121,6 +122,7 @@ In this problem, use `A = 1.5I + sprand(800,800,0.005)`.
 ``````
 
 ``````{exercise}
+:label: problem-precond-surround
 ⌨ (Continuation of @problem-gmres-surround.) Let $\mathbf{B}$ be `diagm(1:100)`,  let $\mathbf{I}$ be `I(100)`, and let $\mathbf{Z}$ be a $100\times 100$ matrix of zeros. Define 
 
 $$
@@ -137,6 +139,7 @@ and let $\mathbf{b}$ be a 200-vector of ones. The matrix $\mathbf{A}$ is difficu
 ``````
 
 ``````{exercise}
+:label: problem-precond-bai
 ⌨ Let `A = matrixdepot("Bai/rdb2048")`, and let `b` be a vector of 2048 ones. In the steps below, use GMRES for up to 300 iterations without restarts and with a stopping tolerance of $10^{-4}$.
 
 **(a)** Time the GMRES solution without preconditioning. Verify that convergence was achieved. 

@@ -285,9 +285,7 @@ We solve an advection-diffusion problem, $u_t + u_x = 1 + \epsilon(u_{xx} + u_{y
 
 ::::
 
-### Wave equation
-
-```{index} ! wave, Julia; wave operation
+## Wave equation
 
 ```{index} wave equation
 ```

@@ -62,7 +62,6 @@ $$
 $$
 ::::
 
-
 ## Rayleigh quotient
 
 ```{index} ! Rayleigh quotient
@@ -157,6 +156,7 @@ A hermitian matrix with all negative eigenvalues is called **negative definite**
 ## Exercises
 
 ``````{exercise}
+:label: problem-symmeig-definite
 ✍ Each line below is an EVD for a hermitian matrix. State whether the matrix is definite, indefinite, or semidefinite. Then state whether the given factorization is also an SVD, and if it is not, modify it to find an SVD.
 
 **(a)** 
@@ -194,6 +194,7 @@ $\begin{bmatrix}
 ``````
 
 ``````{exercise}
+:label: problem-symmeig-named
 ⌨ The matrix names below are found in `MatrixDepot` for Julia, `gallery` for MATLAB, and `rogues` for Python. You will have to adjust the syntax accordingly. For each matrix, determine whether it is positive definite, negative definite, positive or negative semidefinite, or indefinite. 
 
 **(a)** `pei(5)` $ - 6 \mathbf{I}$
@@ -208,6 +209,7 @@ $\begin{bmatrix}
 ``````
 
 ``````{exercise}
+:label: problem-symmeig-linearity
 ✍ Prove true, or give a counterexample: If $\mathbf{A}$ and $\mathbf{B}$ are hermitian matrices of the same size, then
 
 $$
@@ -219,6 +221,7 @@ $$
 ```
 
 ``````{exercise}
+:label: problem-symmeig-fov
 ⌨ The range of the function $R_{\mathbf{A}}(\mathbf{x})$ is a subset of the complex plane known as the *field of values* of the matrix $\mathbf{A}$. Use 500 random vectors to plot points in the field of values of $\mathbf{A} = \displaystyle  \begin{bmatrix}
 1  &   0   & -2\\
 0  &   2  &   0\\
@@ -227,6 +230,7 @@ $$
 ``````
 
 ``````{exercise}
+:label: problem-symmeig-gradient
 ✍ Let $\mathbf{A}=\displaystyle \begin{bmatrix} 3 & -2 \\ -2 & 0 \end{bmatrix}.$
 
 **(a)** Write out $R_{\mathbf{A}}(\mathbf{x})$ explicitly as a function of $x_1$ and $x_2$.
@@ -239,10 +243,12 @@ $$
 ``````
 
 ``````{exercise}
+:label: problem-symmeig-skew
 ✍ A *skew-Hermitian* matrix is one that satisfies $\mathbf{A}^*=-\mathbf{A}$. Show that if $\mathbf{A}$ is skew-Hermitian, then $R_{\mathbf{A}}$ is imaginary-valued.
 ``````
 
 ``````{exercise}
+:label: problem-symmeig-evd
 ⌨ Thanks largely to {numref}`Theorem {number} <theorem-symm-eig-spectral>`, the eigenvalue problem for symmetric/hermitian matrices is easier than for general matrices. 
 
 **(a)** Let $\mathbf{A}$ be a $1000\times 1000$ random real matrix, and let $\mathbf{S}=\mathbf{A}+\mathbf{A}^T$. Time finding the eigenvalues of $\mathbf{A}$ and then of $\mathbf{S}$. You should find that the computation for $\mathbf{S}$ is around an order of magnitude faster.

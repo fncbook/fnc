@@ -315,7 +315,7 @@ For the second derivative, $\mathbf{D}_{xx} = \mathbf{D}_x^2$.
 The Chebyshev differentiation matrix is not sparse. There are compact formulas available elsewhere for the entries of $\mathbf{D}_{xx}$ ({cite}`trefethenSpectralMethods2000`).
 :::
 
-{numref}`Function {number} <function-diffcheb>` returns the matrices from @def-diffmatcheb. This function uses a change of variable to transplant the standard $[-1,1]$ for Chebyshev nodes to any $[a,b]$. It also takes a different approach to computing the diagonal elements of $\mathbf{D}_x$ than the formulas in {eq}`chebdiffmat` (see {ref}`Exercise 5 <problem-diffmats-negsumtrick>`).
+{numref}`Function {number} <function-diffcheb>` returns the matrices from @def-diffmatcheb. This function uses a change of variable to transplant the standard $[-1,1]$ for Chebyshev nodes to any $[a,b]$. It also takes a different approach to computing the diagonal elements of $\mathbf{D}_x$ than the formulas in {eq}`chebdiffmat` (see @problem-diffmats-negsumtrick).
 
 (function-diffcheb)=
 ``````{prf:algorithm} diffcheb
@@ -364,17 +364,19 @@ The Chebyshev differentiation matrix is not sparse. There are compact formulas a
 
 ::::
 
-According to {numref}`Theorem %s <theorem-spectral>`, the convergence of polynomial interpolation to $f$ using Chebyshev nodes is spectral if $f$ is analytic (at least having infinitely many derivatives) on the interval. The derivatives of $f$ are also approximated with spectral accuracy.
+According to @theorem-spectral, the convergence of polynomial interpolation to $f$ using Chebyshev nodes is spectral if $f$ is analytic (at least having infinitely many derivatives) on the interval. The derivatives of $f$ are also approximated with spectral accuracy.
 
 ## Exercises
 
 ``````{exercise}
+:label: problem-diffmats-square
 **(a)** ✍  Using {eq}`diffmat11` to define $\mathbf{D}_x$, calculate $\mathbf{D}_x^2$ in the general case.
 
 **(b)** ⌨ Repeat the convergence experiment in the second part of @demo-diffmats-2nd, but using this version of $\mathbf{D}_x^2$ in place of $\mathbf{D}_{xx}$ to estimate $f''$. Why does it fail to converge as $n\to \infty$?
 ``````
 
 ``````{exercise}
+:label: problem-diffmats-jump
 **(a)** ✍ Find the derivative of $f(x) =\operatorname{sign}(x)x^2$ on the interval $[-1,1]$. (If this gives you trouble, use an equivalent piecewise definition of $f$.) What is special about this function at $x=0$? 
 
 **(b)** ⌨ Adapt @demo-diffmats-2nd to operate on the function from part (a), computing only the first derivative. What is the observed order of accuracy?
@@ -383,6 +385,7 @@ According to {numref}`Theorem %s <theorem-spectral>`, the convergence of polynom
 ``````
 
 ``````{exercise}
+:label: problem-diffmats-4thorder
 ⌨ To get a fourth-order accurate version of $\mathbf{D}_x$, five points per row are needed, including two special rows at each boundary. For a fourth-order $\mathbf{D}_{xx}$, five symmetric points per row are needed for interior rows and six points are needed for the rows near a boundary.
 
 **(a)** Modify {numref}`Function {number} <function-diffmat2>` to a function `diffmat4`, which outputs fourth-order accurate differentiation matrices. You may want to use {numref}`Function {number} <function-fdweights>`.
@@ -391,6 +394,7 @@ According to {numref}`Theorem %s <theorem-spectral>`, the convergence of polynom
 ``````
 
 ``````{exercise}
+:label: problem-diffmats-interval
 ✍ Explain in detail how lines 23-24 in {numref}`Function {number} <function-diffcheb>` correctly change the interval from $[-1,1]$ to $[a,b]$.
 ``````
 
@@ -405,11 +409,13 @@ According to {numref}`Theorem %s <theorem-spectral>`, the convergence of polynom
 ``````
 
 ``````{exercise}
+:label: problem-diffmats-integration
+
 Define the $(n+1)\times (n+1)$ matrix $\mathbf{T} = \displaystyle \begin{bmatrix}
 1 & & & \\ 1 & 1 & & \\ \vdots & & \ddots & \\ 1 & 1 & \cdots & 1
 \end{bmatrix}$.
 
 **(a)** ✍ Write out $\mathbf{T}\mathbf{u}$ for a generic vector $\mathbf{u}$ (start with a zero index). How is this like integration?
 
-**(b)** ✍ Find the inverse of $\mathbf{T}$ for any $n$.  (You can use Julia to find the pattern, but show that the result is correct in general.) What does this have to do with the inverse of integration?
+**(b)** ✍ Find the inverse of $\mathbf{T}$ for any $n$.  (You can use a computer to find the pattern, but show that the result is correct in general.) What does this have to do with the inverse of integration?
 ``````

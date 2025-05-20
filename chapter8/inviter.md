@@ -158,7 +158,7 @@ with the eigenvalues ordered as in {eq}`shiftorder`. Thus, the convergence is be
 
 ## Dynamic shifting
 
-There is a clear opportunity for positive feedback in {numref}`Algorithm {number} <algorithm-inviter-inviter>`. The convergence rate of inverse iteration improves as the shift gets closer to the true eigenvalue—and the algorithm computes improving eigenvalue estimates! If we update the shift to $s=\beta_k$ after each iteration, the convergence accelerates. You are asked to implement this algorithm in {ref}`Exercise 6 <problem-inviter-dynamicshift>`.
+There is a clear opportunity for positive feedback in {numref}`Algorithm {number} <algorithm-inviter-inviter>`. The convergence rate of inverse iteration improves as the shift gets closer to the true eigenvalue—and the algorithm computes improving eigenvalue estimates! If we update the shift to $s=\beta_k$ after each iteration, the convergence accelerates. You are asked to implement this algorithm in @problem-inviter-dynamicshift.
 
 ```{index} convergence rate; quadratic
 ```
@@ -195,7 +195,7 @@ In practice power and inverse iteration are not as effective as the algorithms u
 ## Exercises
 
 ``````{exercise}
-:label: problem-invitercomp
+:label: problem-inviter-convergence
 ⌨  Use {numref}`Function {number} <function-inviter>` to perform 10 iterations for the given matrix and shift. Compare the results quantitatively to the convergence given by {eq}`inviterconv`.
 
 **(a)**  $\mathbf{A} = \begin{bmatrix}
@@ -224,16 +224,19 @@ In practice power and inverse iteration are not as effective as the algorithms u
 ``````
 
 ``````{exercise}
+:label: problem-inviter-shift
 ✍ Let $\mathbf{A} = \displaystyle \begin{bmatrix} 1.1 & 1 \\ 0 & 2.1 \end{bmatrix}.$ Given the starting vector $\mathbf{x}_1=[1,1]$, find the vector $\mathbf{x}_2$ for the following shifts.
 
 **(a)** $s=1\quad$ **(b)** $s=2\quad$ **(c)** $s=1.6$
 ``````
 
 ``````{exercise}
+:label: problem-inviter-imaginary
 ✍ Why is it a bad idea to use unshifted inverse iteration with the matrix $\displaystyle \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix}$? Does the shift $s=-1$ improve matters?
 ``````
 
 ``````{exercise}
+:label: problem-inviter-illconditioned
 ✍ When the shift $s$ is very close to an eigenvalue of $\mathbf{A}$, the matrix $\mathbf{A}-s\mathbf{I}$ is close to a singular matrix. But then {eq}`shiftinvstep` is a linear system with a badly conditioned matrix, which should create a lot of error in the numerical solution for $\mathbf{y}_k$. However, it happens that the error is mostly in the direction of the eigenvector we are looking for, as the following toy example illustrates.
 
 Prove that $\displaystyle \begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix}$ has an eigenvalue at zero with associated eigenvector $\mathbf{v}=[-1,1]^T$. Suppose this matrix is perturbed slightly to $\displaystyle \mathbf{A} = \begin{bmatrix} 1 & 1 \\ 0 & \epsilon \end{bmatrix}$, and that $\mathbf{x}_k=[1,1]$ in {eq}`shiftinvstep`. Show that once $\mathbf{y}_k$ is normalized by its infinity norm, the result is within $\epsilon$ of a multiple of $\mathbf{v}$.
@@ -242,7 +245,7 @@ Prove that $\displaystyle \begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix}$ has an e
 % must stay as #5
 
 ``````{exercise}
-:label: problem-inviter-lumpmembraneinveig
+:label: problem-inviter-lumpmembrane
 ⌨ (Continuation of @problem-power-lumpmembraneeig.) This exercise concerns the $n^2\times n^2$ sparse matrix defined by `FNC.poisson(n)` for integer $n$. It represents a lumped model of a vibrating square membrane held fixed around the edges.
 
 **(a)** The eigenvalues of $\mathbf{A}$ closest to zero are approximately squares of the frequencies of vibration for the membrane. Using `eigs`, find the eigenvalue $\lambda_m$ closest to zero for $n=10,15,20,25$.

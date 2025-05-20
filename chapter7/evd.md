@@ -329,19 +329,21 @@ The process demonstrated in @demo-evd-francisqr is known as the *Francis QR iter
 ## Exercises
 
 ``````{exercise}
- **(a)** ✍ Suppose that matrix $\mathbf{A}$ has an eigenvalue $\lambda$. Show that for any induced matrix norm, $\| \mathbf{A} \|\ge |\lambda|$.
+:label: problem-evd-norm
+**(a)** ✍ Suppose that matrix $\mathbf{A}$ has an eigenvalue $\lambda$. Show that for any induced matrix norm, $\| \mathbf{A} \|\ge |\lambda|$.
 
 **(b)** ✍ Find a matrix $\mathbf{A}$ such that $\| \mathbf{A} \|_2$ is strictly larger than $|\lambda|$ for all eigenvalues $\lambda$. (Proof-by-computer isn't allowed here. You don't need to compute $\| \mathbf{A} \|_2$ exactly, just a lower bound for it.)
 ``````
 
 ``````{exercise}
-:label: problem-defectivematrix
+:label: problem-evd-defective
 ✍ Prove that the matrix $\mathbf{B}$ in {eq}`jordanblock` does not have two independent eigenvectors.
 
 ``````
 <!-- TODO: Get rid of rank. -->
 
 ``````{exercise}
+:label: problem-evd-residual
 ⌨ In each part, find all the eigenvalues of $\mathbf{A}$. Then, choose one eigenvalue $\lambda$ and associated eigenvector $\mathbf{v}$ and compute $\twonorm{\mathbf{A} \mathbf{v} - \lambda \mathbf{v}}$, which should be comparable to machine epsilon.
 
 **(a)** $\mathbf{A} = \begin{bmatrix}
@@ -378,7 +380,7 @@ The process demonstrated in @demo-evd-francisqr is known as the *Francis QR iter
 ``````
 
 ``````{exercise}
-:label: problem-triangeval
+:label: problem-evd-triangular
  **(a)** ✍ Show that the eigenvalues of a diagonal $n\times n$ matrix $\mathbf{D}$ are the diagonal entries of $\mathbf{D}$. (That is, produce the associated eigenvectors.)
 
 **(b)** ✍ The eigenvalues of a triangular matrix are its diagonal entries. Prove this in the $3\times 3$ case,
@@ -394,6 +396,7 @@ by finding the eigenvectors. (Start by showing that $[1,0,0]^T$ is an eigenvecto
 ``````
 
 ``````{exercise}
+:label: problem-evd-matrixpoly
 ✍ Let $\mathbf{A}=\displaystyle\frac{\pi}{6}\begin{bmatrix} 4 & 1 \\ 4 & 4 \end{bmatrix}$.
 
 **(a)** Show that
@@ -416,10 +419,12 @@ displacements of point masses placed along a string satisfy a linear system $\ma
 ``````
 
 ``````{exercise}
+:label: problem-evd-francisqr
 ⌨ @demo-evd-francisqr suggests that the result of the Francis QR iteration as $k\to\infty$ sorts the eigenvalues on the diagonal according to a particular ordering. Following the code there as a model, create a random matrix with eigenvalues equal to $-9.6,-8.6,\ldots,10.4$, perform the iteration 200 times, and check whether the sorting criterion holds in your experiment as well.
 ``````
 
 ``````{exercise}
+:label: problem-evd-random
 ⌨ Eigenvalues of random matrices and their perturbations can be very interesting.
 
 **(a)** Let `A=randn(60,60)`.[^randn] Scatter plot its eigenvalues in the complex plane, using a plot aspect ratio of 1 and red diamonds as markers.
@@ -430,10 +435,11 @@ displacements of point masses placed along a string satisfy a linear system $\ma
 
 **(d)** Repeat part (b) with $\mathbf{T}$ in place of $\mathbf{A}$.
 
-**(e)** Compute some condition numbers and apply {numref}`Theorem %s <theorem-bauer-fike>` to explain the dramatic difference between your plots with respect to the dot distributions.
+**(e)** Compute some condition numbers and apply @theorem-bauer-fike to explain the dramatic difference between your plots with respect to the dot distributions.
 ``````
 
 ``````{exercise}
+:label: problem-evd-functions
 Suppose that $\mathbf{A}$ is diagonalizable and that @matrixpolyevd is used to define $\cos(\mathbf{A})$ and $\sin(\mathbf{A})$, with those functions substituted in for $p$ in the equation. Is it necessarily true that $\cos(\mathbf{A})^2+\sin(\mathbf{A})^2$ is an identity matrix? Explain why or why not.
 ``````
 

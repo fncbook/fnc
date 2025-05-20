@@ -131,10 +131,12 @@ The following example shows how to put these ideas into practice with MINRES.
 ## Exercises
 
 ``````{exercise}
+:label: problem-matrixfree-blur
 ✍ Show using {eq}`lintrans` and {eq}`blurfunction` that the blur operation is a linear transformation. 
 ``````
 
 ``````{exercise}
+:label: problem-matrixfree-linearity
 ✍ In each case, state with reasons whether the given transformation on $n$-vectors is linear. 
 
 **(a)** $\,\mathbf{f}(\mathbf{x}) = \begin{bmatrix} x_2\\x_3 \\\vdots\\ x_n \\ x_1 \end{bmatrix}\qquad$
@@ -144,14 +146,17 @@ The following example shows how to put these ideas into practice with MINRES.
 ``````
 
 ``````{exercise}
+:label: problem-matrixfree-reconstruct
 ✍ Suppose that code for the linear transformation $\mathbf{f}(\mathbf{x})=\mathbf{A}\mathbf{x}$ is given for an unknown matrix $\mathbf{A}$. Explain carefully how one could construct $\mathbf{A}$.
 ``````
 
 ``````{exercise}
+:label: problem-matrixfree-cg
 ⌨ The matrix of the blur transformation happens to be symmetric and positive definite. Repeat @demo-matrixfree-deblur using CG for the deblurring.
 ``````
 
 ``````{exercise}
+:label: problem-matrixfree-cond
 The condition number of the matrix of the blur transformation is related to the condition numbers of the single-dimension matrices $\mathbf{B}^k$ and $\mathbf{C}^k$ in {eq}`blurfunction`.
 
 **(a)** ⌨  Let $m=50$. Show that $\mathbf{B}$ has a Cholesky factorization and thus is SPD. Find $\kappa(\mathbf{B})$. (Note: `cond` requires a regular dense matrix, not a sparse matrix.)
@@ -162,6 +167,7 @@ The condition number of the matrix of the blur transformation is related to the 
 ``````
 
 ``````{exercise}
+:label: problem-matrixfree-cumsum
 The cumulative summation function `cumsum` is defined as
 
 $$

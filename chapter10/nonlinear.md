@@ -232,7 +232,7 @@ $$
 ## Exercises
 
 ``````{exercise}
-:label: problem-nonlinear-byhand
+:label: problem-nonlinearbvp-byhand
 ✍ This exercise is about the nonlinear boundary-value problem
 
 $$
@@ -247,13 +247,15 @@ $$
 ``````
 
 ``````{exercise}
+:label: problem-nonlinearbvp-convergence
  ⌨
-**(a)** Use {numref}`Function {number} <function-bvp>` to solve the problem of Exercise 1 for $n=80$. In a 2-by-1 subplot array, plot the finite-difference solution and its error.
+**(a)** Use {numref}`Function {number} <function-bvp>` to solve the problem of @problem-nonlinearbvp-byhand for $n=80$. In a 2-by-1 subplot array, plot the finite-difference solution and its error.
 
 **(b)** ⌨ For each $n=10,20,40,\ldots,640$, find the infinity norm of the error on the same problem. Make a log-log plot of error versus $n$ and include a graphical comparison to second-order convergence.
 ``````
 
 ``````{exercise}
+:label: problem-nonlinearbvp-multiple
 ⌨ (Adapted from {cite}`ascherComputerMethods1998`.) Use {numref}`Function {number} <function-bvp>` twice with $n=200$ to solve 
 
 $$
@@ -264,14 +266,17 @@ with initializations $7 \sin(x)$ and $\frac{1}{4} \sin(x)$. Plot the solutions t
 ``````
 
 ``````{exercise}
-⌨ Use {numref}`Function {number} <function-bvp>` to compute the solution to the Allen–Cahn equation in @demo-nonlinear-allencahn with $\epsilon=0.02$. Determine numerically whether it is antisymmetric around the line $x=0.5$---that is, whether $u(1-x)=-u(x)$. You should supply evidence that your answer is independent of $n$. 
+:label: problem-nonlinearbvp-allencahn
+⌨ Use {numref}`Function {number} <function-bvp>` to compute the solution to the [Allen–Cahn equation](wiki:Allen-Cahn_equation) in @demo-nonlinear-allencahn with $\epsilon=0.02$. Determine numerically whether it is antisymmetric around the line $x=0.5$---that is, whether $u(1-x)=-u(x)$. You should supply evidence that your answer is independent of $n$. 
 ``````
 
 ``````{exercise}
+:label: problem-nonlinearbvp-pendulum
 ⌨ Consider the pendulum problem from {numref}`Example {number} <example-tpbvp-pendulum>` with $g=L=1$. Suppose we want to release the pendulum from rest such that $\theta(5)=\pi/2$. Use {numref}`Function {number} <function-bvp>` with $n=200$ to find one solution that passes through $\theta=0$, and another solution that does not. Plot $\theta(t)$ for both cases together.
 ``````
 
 ``````{exercise}
+:label: problem-nonlinearbvp-jump
 ⌨ The BVP
 
 $$
@@ -290,6 +295,7 @@ forces $u''$ to be discontinuous at $x=1$, so finite differences may not converg
 ```
 
 ``````{exercise}
+:label: problem-nonlinearbvp-carrier
 ⌨  The following nonlinear BVP was proposed by Carrier (for the special case $b=1$ in {cite}`carrierSingularPerturbation1970`):
 
 $$
@@ -312,5 +318,6 @@ The most recent solution should be used as the initialization for each new value
 ``````
 
 ``````{exercise}
+:label: problem-nonlinearbvp-mems
 ⌨  @demo-nonlinear-mems finds two solutions at $\lambda=0.5$. Continue both solutions by taking 50 steps from $\lambda=0.5$ to $\lambda=0.79$. Make a plot with $\lambda$ on the horizontal axis and $w(0)$ on the vertical axis, with one point to represent each solution found. You should get two paths that converge as $\lambda$ approaches $0.79$ from below.
 ``````

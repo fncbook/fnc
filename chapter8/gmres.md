@@ -122,7 +122,7 @@ In @demo-subspace-unstable, we tried to implement the GMRES idea using the Krylo
 `````
 ::::
 
-Thanks to {numref}`Theorem %s <theorem-subspace-krylovmult>`, minimization of $\|\mathbf{b}-\mathbf{A}\mathbf{x}\|$ over $\mathcal{K}_{m+1}$ includes minimization over the subset $\mathcal{K}_m$. Hence:
+Thanks to @theorem-subspace-krylovmult, minimization of $\|\mathbf{b}-\mathbf{A}\mathbf{x}\|$ over $\mathcal{K}_{m+1}$ includes minimization over the subset $\mathcal{K}_m$. Hence:
 
 :::{prf:theorem} GMRES monotonicity
 For the approximations $\mathbf{x}_m$ produced by GMRES, the norm of the residual $\mathbf{r}_m = \mathbf{b} - \mathbf{A}\mathbf{x}_m$ cannot increase as the iteration proceeds.
@@ -176,7 +176,8 @@ There are other ways to avoid the growth in computational effort as the GMRES/Ar
 ## Exercises
 
 ``````{exercise}
-✍ (See also @problem-krylovpermute.) Consider the linear system with
+:label: problem-gmres-permutation
+✍ (See also @problem-subspace-permute.) Consider the linear system with
 
 $$
 \mathbf{A}=\displaystyle 
@@ -191,14 +192,17 @@ $$
 ``````
 
 ``````{exercise}
+:label: problem-gmres-polynomial
 ✍ (Continuation of @problem-subspace-matrixpolykrylov.) Show that if $\mathbf{x}_m\in\mathcal{K}_m$, then the residual $\mathbf{b}-\mathbf{A}\mathbf{x}_m$ is equal to $q(\mathbf{A})\mathbf{b}$, where $q$ is a polynomial of degree at most $m$ and $q(0)=1$. (This fact is a key one for many convergence results.) 
 ``````
 
 ``````{exercise}
+:label: problem-gmres-finite
 ✍ Explain why GMRES, in exact arithmetic, converges to the true solution in $n$ iterations for an $n\times n$ matrix if $\operatorname{rank}(\mathbf{K}_n)=n$. (Hint: Consider how the algorithm is defined from first principles.) 
 ``````
 
 ``````{exercise}
+:label: problem-gmres-tridiagonal
 ⌨ Let $\mathbf{A}$ be the $n\times n$ tridiagonal matrix
 
 $$
@@ -239,7 +243,8 @@ let $\mathbf{I}$ be a $100\times 100$ identity, and let $\mathbf{Z}$ be a $100\t
 ``````
 
 ``````{exercise}
-⌨ (Continuation of @problem-inviter-lumpmembraneinveig.) We again consider the $n^2\times n^2$ sparse matrix defined by `FNC.poisson(n)`. The solution of $\mathbf{A}\mathbf{x}=\mathbf{b}$ may be interpreted as the deflection of a lumped membrane in response to a load represented by $\mathbf{b}$.
+:label: problem-gmres-lumpmembrane
+⌨ (Continuation of @problem-inviter-lumpmembrane.) We again consider the $n^2\times n^2$ sparse matrix defined by `FNC.poisson(n)`. The solution of $\mathbf{A}\mathbf{x}=\mathbf{b}$ may be interpreted as the deflection of a lumped membrane in response to a load represented by $\mathbf{b}$.
 
 **(a)** For $n=10,15,20,25$, let $\mathbf{b}$ be the vector of $n^2$ ones and apply {numref}`Function {number} <function-gmres>` for 50 iterations. On one semi-log graph, plot the four convergence curves $\|\mathbf{r}_m\|/\|\mathbf{b}\|$.
 

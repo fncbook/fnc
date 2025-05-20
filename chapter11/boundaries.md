@@ -267,14 +267,17 @@ We solve the Black–Scholes PDE @bspde with initial condition $u(x,0) = \max\{0
 ## Exercises
 
 ``````{exercise}
+:label: problem-boundaries-small
 ✍ Suppose second-order finite differences with $m=3$ are used to discretize the heat equation on $x \in [0,2]$, with boundary conditions $u_x(0,t)=0$ and $u_x(2,t)=1$. If at some time $t$, $u_1=1$ and $u_2=2$, set up and solve the equations {eq}`mol-bcsystem` for $u_0$ and $u_m$.
 ``````
 
 ``````{exercise}
+:label: problem-boundaries-middle
 ⌨ Use {numref}`Function {number} <function-parabolic>` to solve the heat equation for $0\le x \le 5$ with initial condition $u(x,0)=x(5-x)$ and subject to the boundary conditions $u(0,t)=0$, $u(5,t)-u_x(5,t)=5$. Increase $m$ until you are confident that the value $u(2.5,1)$ is correct when rounded to the hundredths place (i.e., two places after the decimal point), and print out that value. Plot the solution at $t=1$.  
 ``````
 
 ``````{exercise}
+:label: problem-boundaries-bratu
 Consider @demo-boundaries-bratu, combining diffusion with a nonlinear source term.
 
 **(a)** ✍ Suppose we ignore the diffusion. Use separation of variables (or computer algebra) to solve the IVP $u_t=u^2$, $u(0) = A>0$. What happens as $t\to 1/A$ from below? 
@@ -288,6 +291,8 @@ Consider @demo-boundaries-bratu, combining diffusion with a nonlinear source ter
 ```
 
 ``````{exercise}
+:label: problem-boundaries-allencahn
+
 ⌨ The [Allen–Cahn equation](wiki:Allen–Cahn_equation) is used as a model for systems that prefer to be in one of two stable states. The governing PDE is
 
 :::{math}
@@ -311,6 +316,7 @@ where $\beta$ is a parameter. Use {numref}`Function {number} <function-parabolic
 ```
 
 ``````{exercise}
+:label: problem-boundaries-fisher
 ⌨ The [Fisher equation](wiki:KPP-Fisher_equation) is $u_t=u_{xx} + u - u^2$. Assume that $0\le x \le 6$ and that the boundary conditions are $u_x(0,t)=u(6,t)=0$.
 
 **(a)** For the initial condition $u(x,0) = \frac{1}{2}[1+\cos(\pi x/2)]$, use {numref}`Function {number} <function-parabolic>` with $m=80$ to solve the Fisher equation and plot the solution at times $t=0,0.5,\ldots,3$. What is $u(0,3)$?
@@ -332,5 +338,6 @@ Your function should accept numbers $\alpha$ and $\beta$ as input arguments in p
 ``````
 
 ``````{exercise}
+:label: problem-boundaries-neumann
 ⌨ Modify {numref}`Function {number} <function-parabolic>` for the special case of homogeneous Neumann boundary conditions. There is no longer any need for the input arguments for $g_1$ and $g_2$. Your implementation should solve a $2\times 2$ linear system of equations to find the boundary values within the nested function `extend`. Test your function on the heat equation on $x \in [0,4]$, $t\in [0,1]$ with initial condition $u(x,0)=x^2(4-x)^4.$ 
 ``````

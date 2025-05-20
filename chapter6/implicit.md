@@ -186,22 +186,26 @@ $\quad \hat{u}(x) = x \left[ 3 \cos \left( \ln x \right)+\sin \left( \ln x \righ
 
 ``````{exercise}
 :label: problem-implicit-ab4converge
-⌨ For each IVP in Exercise 1, use {numref}`Function {number} <function-ab4>` for $n=10\cdot2^d$ and $d=1,\ldots,10$. Make a log-log convergence plot for the final time error $|u_n-\hat{u}(t_n)|$ versus $n$, and add a straight line indicating fourth-order convergence.
+⌨ For each IVP in @problem-implicit-ab4tests, use {numref}`Function {number} <function-ab4>` for $n=10\cdot2^d$ and $d=1,\ldots,10$. Make a log-log convergence plot for the final time error $|u_n-\hat{u}(t_n)|$ versus $n$, and add a straight line indicating fourth-order convergence.
 ``````
 
 ``````{exercise}
-⌨ Repeat Exercise 1 above  using {numref}`Function {number} <function-am2>`.
+:label: problem-implicit-am2
+⌨ Repeat @problem-implicit-ab4tests using {numref}`Function {number} <function-am2>`.
 ``````
 
 ``````{exercise}
-⌨  Repeat Exercise 2 above using {numref}`Function {number} <function-am2>` and comparing to second-order rather than fourth-order convergence.
+:label: problem-implicit-am2converge
+⌨  Repeat @problem-implicit-ab4converge using {numref}`Function {number} <function-am2>` and comparing to second-order rather than fourth-order convergence.
 ``````
 
 ``````{exercise}
+:label: problem-implicit-bd2
 ⌨ Using {numref}`Function {number} <function-am2>` as a model, write a function `bd2` that applies the BD2 method to solve an IVP. Test the convergence of your function on one of the IVPs in @problem-implicit-ab4tests above.
 ``````
 
 ``````{exercise}
+:label: problem-implicit-stiff
 ⌨ For double-precision purposes, the exact solution of the IVP in @demo-implicit-stiff satisfies $\hat{u}(400)=1$.
 
 **(a)** Use {numref}`Function {number} <function-ab4>` with $n=600,800,1000,\ldots,2000$ and make a log-log convergence plot of the error $|u_n-1|$ as a function of $n$.
@@ -234,6 +238,7 @@ Consider the IVP
 ``````
 
 ``````{exercise}
+:label: problem-implicit-ab2
 ⌨ **(a)** Modify {numref}`Function {number} <function-ab4>` to implement the AB2 method.
 
 **(b)** Repeat part (b) of the preceding exercise, using AB2 in place of AB4.
@@ -242,7 +247,8 @@ Consider the IVP
 ``````
 
 ``````{exercise}
+:label: problem-implicit-am1
 ⌨ **(a)** Modify {numref}`Function {number} <function-am2>` to implement the backward Euler (AM1) method.
 
-**(b)** Repeat part (d) of Exercise 7 above, using AM1 in place of AM2 and $n=400,800$. Does the AM1 method conserve energy?
+**(b)** Repeat part (d) of @problem-implicit-ivpimag above, using AM1 in place of AM2 and $n=400,800$. Does the AM1 method conserve energy?
 ``````

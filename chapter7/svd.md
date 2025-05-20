@@ -291,6 +291,7 @@ The conclusion {eq}`svdnorm` can be proved by vector calculus. In the square cas
 ## Exercises
 
 ``````{exercise}
+:label: problem-svd-def
 ✍ Each factorization below is algebraically correct. The notation $\mathbf{I}_n$ means an $n\times n$ identity. In each case, determine whether it is an SVD. If it is, write down $\sigma_1$, $\mathbf{u}_1$, and $\mathbf{v}_1$. If it is not, state all of the ways in which it fails the required properties.
 
 **(a)** 
@@ -336,10 +337,12 @@ $\begin{bmatrix}
 ``````
 
 ``````{exercise}
-✍ Apply {numref}`Theorem {number} <theorem-svd-ATA>` to find an SVD of $\mathbf{A}=\displaystyle \begin{bmatrix} 1 & 0 \\ 0 & 0 \\ 0 & 1 \\ -1 & -1 \end{bmatrix}.$
+:label: problem-svd-ATA
+✍ Apply @theorem-svd-ATA to find an SVD of $\mathbf{A}=\displaystyle \begin{bmatrix} 1 & 0 \\ 0 & 0 \\ 0 & 1 \\ -1 & -1 \end{bmatrix}.$
 ``````
 
 ``````{exercise}
+:label: problem-svd-vandermonde
 ⌨ Let `x` be a vector of 1000 equally spaced points between 0 and 1. Suppose $\mathbf{A}_n$ is the $1000\times n$ matrix whose $(i,j)$ entry is $x_i^{j-1}$ for $j=1,\ldots,n$.
 
 **(a)** Print out the singular values of $\mathbf{A}_1$, $\mathbf{A}_2$, and $\mathbf{A}_3$.
@@ -352,33 +355,38 @@ $\begin{bmatrix}
 ``````
 
 ``````{exercise}
+:label: problem-svd-image
 ⌨ See @demo-insight-image for how to get the "mandrill" test image. Make a log-linear scatter plot of the singular values of the matrix of grayscale intensity values. (The shape of this graph is surprisingly similar across a wide range of images.) 
 ``````
 
 ``````{exercise}
+:label: problem-svd-square
 ✍ Prove that for a square real matrix $\mathbf{A}$, $\| \mathbf{A} \|_2=\| \mathbf{A}^T \|_2$.
 ``````
 
 ``````{exercise}
-✍ Prove {eq}`svdcond` of {numref}`Theorem %s <theorem-svdprops>`, given that {eq}`svdnorm` is true. (Hint: If the SVD of $\mathbf{A}$ is known, what is the SVD of $\mathbf{A}^{+}$?)
+:label: problem-svd-cond
+✍ Prove {eq}`svdcond` of @theorem-svdprops, given that {eq}`svdnorm` is true. (Hint: If the SVD of $\mathbf{A}$ is known, what is the SVD of $\mathbf{A}^{+}$?)
 ``````
 
 ``````{exercise}
+:label: problem-svd-pinv
 ✍ Let $\mathbf{A}\in\mathbb{R}^{m\times n}$ with $m>n$ have the thin SVD $\mathbf{A}=\hat{\mathbf{U}}\hat{\mathbf{S}}\mathbf{V}^T$, and suppose all the singular values are nonzero. Show that the matrix $\mathbf{A}\mathbf{A}^{+}$ is equal to $\hat{\mathbf{U}}\hat{\mathbf{U}}^T$, where $\mathbf{A}^{+}$ is the {term}`pseudoinverse` of $\mathbf{A}$, as given in @pinv. (You must be careful with matrix sizes in this derivation.)
 
 ``````
 
 ``````{exercise}
-:label: problem-rectcond
+:label: problem-svd-rectcond
 ✍ In  {eq}`rectcond` we defined the 2-norm condition number of a rectangular matrix as $\kappa(\mathbf{A})=\|\mathbf{A}\|\cdot \|\mathbf{A}^{+}\|$, and then claimed (in the real case) that $\kappa(\mathbf{A}^*\mathbf{A})=\kappa(\mathbf{A})^2$. Prove this assertion using the SVD. 
 ``````
 
 ``````{exercise}
+:label: problem-svd-AAT
 ✍ Show that the square of each singular value of $\mathbf{A}$ is an eigenvalue of the matrix $\mathbf{A}\mathbf{A}^*$ for any $m\times n$ matrix $\mathbf{A}$. (You should consider the cases $m>n$ and $m\le n$ separately.) 
 ``````
 
 ``````{exercise}
-:label: problem-svdnormproof
+:label: problem-svd-proof
 ✍ In this problem you will see how {eq}`svdnorm` is proved in the real case.
 
 **(a)** Use the technique of Lagrange multipliers to show that among vectors that satisfy $\|\mathbf{x}\|_2^2=1$, any vector that maximizes $\|\mathbf{A}\mathbf{x}\|_2^2$ must be an eigenvector of $\mathbf{A}^T\mathbf{A}$. It will help to know that if $\mathbf{B}$ is any symmetric matrix, the gradient of the scalar function $\mathbf{x}^T\mathbf{B}\mathbf{x}$ with respect to $\mathbf{x}$ is $2\mathbf{B}\mathbf{x}$. 

@@ -65,7 +65,7 @@ Thus let $\mathbf{z}= \begin{bmatrix} c_1 & \cdots & c_m \end{bmatrix}^T$. Also,
 
 The problems $\mathbf{A}\mathbf{x}=\mathbf{b}$ and $\mathbf{A}\mathbf{x}=\lambda\mathbf{x}$ are posed in a very high-dimensional space $\mathbb{R}^n$ or $\mathbb{C}^n$. One way to approximate them is to replace the full $n$-dimensional space with a much lower-dimensional $\mathcal{K}_m$ for $m\ll n$. This is the essence of the Krylov subspace approach.
 
-For instance, we can interpret $\mathbf{A}\mathbf{x}_m\approx \mathbf{b}$ in the sense of linear least-squares—that is, using {numref}`Theorem %s <theorem-subspace-krylovmult>` to let $\mathbf{x}=\mathbf{K}_m\mathbf{z}$,
+For instance, we can interpret $\mathbf{A}\mathbf{x}_m\approx \mathbf{b}$ in the sense of linear least-squares—that is, using @theorem-subspace-krylovmult to let $\mathbf{x}=\mathbf{K}_m\mathbf{z}$,
 
 :::{math}
 :label: gmresdef
@@ -120,7 +120,7 @@ The polar opposite of an ill-conditioned basis for $\mathcal{K}_m$ is an orthono
   \end{bmatrix}.
 \end{align*}
 
-Then the vectors $\mathbf{q}_1,\ldots,\mathbf{q}_m$ are the orthonormal basis we seek for $\mathcal{K}_m$. By {numref}`Theorem %s <theorem-subspace-krylovmult>`, we know that $\mathbf{A}\mathbf{q}_m \in \mathcal{K}_{m+1}$, and therefore
+Then the vectors $\mathbf{q}_1,\ldots,\mathbf{q}_m$ are the orthonormal basis we seek for $\mathcal{K}_m$. By @theorem-subspace-krylovmult, we know that $\mathbf{A}\mathbf{q}_m \in \mathcal{K}_{m+1}$, and therefore
 
 :::{math}
 :label: arnoldivec
@@ -242,12 +242,12 @@ An implementation of the Arnoldi iteration is given in {numref}`Function {number
 `````
 ::::
 
-In the next section, we revisit the idea of approximately solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ over a Krylov subspace as suggested in @demo-subspace-arnoldi. A related idea explored in @problem-krylov-arnoldieig is used to approximate the eigenvalue problem for $\mathbf{A}$, which is the approach that underlies `eigs` for sparse matrices.
+In the next section, we revisit the idea of approximately solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ over a Krylov subspace as suggested in @demo-subspace-arnoldi. A related idea explored in @problem-subspace-arnoldieig is used to approximate the eigenvalue problem for $\mathbf{A}$, which is the approach that underlies `eigs` for sparse matrices.
 
 ## Exercises
 
 ``````{exercise}
-:label: problem-krylovpermute
+:label: problem-subspace-permute
 ✍ Let $\mathbf{A}=\displaystyle \begin{bmatrix}
 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0
 \end{bmatrix}.$
@@ -258,6 +258,7 @@ In the next section, we revisit the idea of approximately solving $\mathbf{A}\ma
 ``````
 
 ``````{exercise}
+:label: problem-subspace-conditioning
 ⌨ For each matrix, make a table of the 2-norm condition numbers $\kappa(\mathbf{K}_m)$ for $m=1,\ldots,10$. Use a vector of all ones as the Krylov seed.
 
 **(a)** Matrix from @demo-subspace-unstable
@@ -287,10 +288,12 @@ In the next section, we revisit the idea of approximately solving $\mathbf{A}\ma
 ``````
 
 ``````{exercise}
+:label: problem-subspace-flops
 ✍ Compute the asymptotic flop requirements for {numref}`Function {number} <function-arnoldi>`. Assume that due to sparsity, a matrix-vector multiplication $\mathbf{A}\mathbf{u}$ requires only $c n$ flops for a constant $c$, rather than the usual $O(n^2)$. 
 ``````
 
 ``````{exercise}
+:label: problem-subspace-initial
 ⌨ When Arnoldi iteration is performed on the Krylov subspace generated using the matrix $\mathbf{A}=\displaystyle \begin{bmatrix}  2& 1& 1& 0\\ 1 &3 &1& 0\\ 0& 1& 3& 1\\ 0& 1& 1& 2 \end{bmatrix}$, the results can depend strongly on the initial vector $\mathbf{u}$. 
 
 **(a)** Apply {numref}`Function {number} <function-arnoldi>` for 3 iterations and output `Q` (which should be square) and `H` when using the following seed vectors. 
@@ -320,7 +323,7 @@ for $i=1,\ldots,j$. Show that $S_{ij}=H_{ij}$. (Hence the function is mathematic
 % must stay as #7
 
 ``````{exercise}
-:label: problem-krylov-arnoldieig
+:label: problem-subspace-arnoldieig
 One way to approximate the eigenvalue problem $\mathbf{A}\mathbf{x}=\lambda\mathbf{x}$ over $\mathcal{K}_m$ is to restrict $\mathbf{x}$ to the low-dimensional spaces $\mathcal{K}_m$. 
 
 **(a)** ✍ Show starting from {eq}`arnoldimat` that
