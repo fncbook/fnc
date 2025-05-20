@@ -270,6 +270,7 @@ Rearranging and Normalizing by the coefficient of $u_{i+1}$ gives $\rho(z)=z^2 +
 ## Exercises
 
 ``````{exercise}
+:label: problem-multistep-generating
 ✍ For each method, write out the generating polynomials $\rho(z)$ and $\sigma(z)$.
 
 **(a)** AM2,
@@ -280,6 +281,7 @@ Rearranging and Normalizing by the coefficient of $u_{i+1}$ gives $\rho(z)=z^2 +
 ``````
 
 ``````{exercise}
+:label: problem-multistep-am1
 ✍ Write out by hand an equation that defines the first solution value $u_1$ produced by AM1 (backward Euler) for each IVP. (Reminder: This is an implicit formula.)
 
 **(a)** $u' = -2t u, \quad 0 \le t \le 2, \quad u_0 = 2, \quad h = 0.2$
@@ -290,10 +292,12 @@ Rearranging and Normalizing by the coefficient of $u_{i+1}$ gives $\rho(z)=z^2 +
 ``````
 
 ``````{exercise}
+:label: problem-multistep-am2
 ✍ Do the preceding exercise for AM2 (trapezoid) instead of backward Euler.
 ``````
 
 ``````{exercise}
+:label: problem-multistep-lte1
 ✍ For each method, find the leading term in the local truncation error using {eq}`MSLTE`.
 
 **(a)** AM2,
@@ -302,6 +306,7 @@ Rearranging and Normalizing by the coefficient of $u_{i+1}$ gives $\rho(z)=z^2 +
 ``````
 
 ``````{exercise}
+:label: problem-multistep-lte2
 ✍/ ⌨ For each method, find the leading term in the local truncation error using {eq}`MSLTE`. (Computer algebra is recommended.)
 
 **(a)** AM3,
@@ -310,6 +315,7 @@ Rearranging and Normalizing by the coefficient of $u_{i+1}$ gives $\rho(z)=z^2 +
 ``````
 
 ``````{exercise}
+:label: problem-multistep-derivation
 ✍ A formula for the quadratic polynomial interpolant through the points $(s_1,y_1)$, $(s_2,y_2)$, and $(s_3,y_3)$ is
 
 ```{math}
@@ -324,6 +330,7 @@ p(x) = \frac{(x-s_2)(x-s_3)}{(s_1-s_2)(s_1-s_3)}\,y_1 +
 ``````
 
 ``````{exercise}
+:label: problem-multistep-bd2
 ✍ By doing series expansion about the point $z=1$, show for BD2 that
 
 ```{math}
@@ -332,6 +339,7 @@ p(x) = \frac{(x-s_2)(x-s_3)}{(s_1-s_2)(s_1-s_3)}\,y_1 +
 ``````
 
 ``````{exercise}
+:label: problem-multistep-ab3am3
 ✍/ ⌨  By doing series expansion about the point $z=1$, show for AB3 and AM3 that
 
 ```{math}

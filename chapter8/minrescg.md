@@ -222,6 +222,7 @@ This estimate fails for very large $\kappa$, however.
 ## Exercises
 
 ``````{exercise}
+:label: problem-minrescg-guarantee
 ✍ For each part, the eigenvalues of $\mathbf{A}$ are given. Suppose MINRES is applied to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$. Use {eq}`minres-conv` or {eq}`cgconv`, whichever is most appropriate, to determine a lower bound on $m$ to guarantee reduction of the residual norm by a factor $10^{-4}$. 
 
 **(a)** $-100,-99,\ldots,-1,1,2,\ldots,100$
@@ -232,6 +233,7 @@ This estimate fails for very large $\kappa$, however.
 ``````
 
 ``````{exercise}
+:label: problem-minrescg-indefinite
 ⌨ Let $\mathbf{b}$ be a random unit vector of length 202. Define a diagonal matrix with diagonal entries $d_k$ given by
 \begin{align*}
 d_k &= -200 + 1.95k, \quad k=0,1,\ldots,100, \\
@@ -244,6 +246,7 @@ d_{k+101} &= 10 + 0.9k, \quad k=0,1,\ldots,100.
 ``````
 
 ``````{exercise}
+:label: problem-minrescg-definite
 ⌨ Let $\mathbf{b}$ be a random unit vector of length 501. Define a sparse diagonal matrix $\mathbf{A}$ with diagonal entries $d_k$ given by
 \begin{align*}
 d_k &= 4 + k\cdot\frac{9996}{500}, \quad k=0,1,\ldots,500.
@@ -257,10 +260,12 @@ d_k &= 4 + k\cdot\frac{9996}{500}, \quad k=0,1,\ldots,500.
 ``````
 
 ``````{exercise}
+:label: problem-minrescg-conditioning
 ✍ Suppose a family of SPD matrices $\mathbf{A}$ is parameterized by $t$, and that the condition numbers of the matrices scale like $O(t^2)$ as $t\to\infty$. Given that CG takes 60 iterations to reach a certain reduction in the error of a linear system when $t=200$, estimate the number of iterations CG will need to reach the same accuracy at $t=300$. 
 ``````
 
 ``````{exercise}
+:label: problem-minrescg-minimize
 ✍ Given real $n\times n$ symmetric $\mathbf{A}$ and vector $\mathbf{b}=\mathbf{A}\mathbf{x}$, we can define the scalar-valued function
 
 :::{math}
@@ -280,7 +285,8 @@ d_k &= 4 + k\cdot\frac{9996}{500}, \quad k=0,1,\ldots,500.
 ```
 
 ``````{exercise}
-⌨  Let $n=50$. Define the matrix $\mathbf{A}_k$ as `FNC.poisson(n)` minus $k^2$ times the $n^2\times n^2$ identity matrix, and define vector $\mathbf{b}$ as $n^2$ copies of $-1$. The linear system $\mathbf{A}_k\mathbf{x}=\mathbf{b}$ arises from the *Helmholtz equation* for wave propagation at a single frequency $k$.
+:label: problem-minrescg-helmholtz
+⌨  Let $n=50$. Define the matrix $\mathbf{A}_k$ as `FNC.poisson(n)` minus $k^2$ times the $n^2\times n^2$ identity matrix, and define vector $\mathbf{b}$ as $n^2$ copies of $-1$. The linear system $\mathbf{A}_k\mathbf{x}=\mathbf{b}$ arises from the [Helmholtz equation](wiki:Helmholtz_equation) for wave propagation at a single frequency $k$.
 
 **(a)** Apply both MINRES and CG to the Helmholtz system for $k=1.3$, solving to a relative residual tolerance of $10^{-5}$. Plotting their convergence curves together.
 

@@ -239,7 +239,7 @@ To get the last line we applied the inequality recursively until reaching $ϵ_0$
   \left[ (1+hL)^i - 1 \right].
 ```
 
-We observe that $1+x \le e^x$ for $x\ge 0$ (see @problem-expdominate). Hence $(1+hL)^i \le e^{i h L}$, which completes the proof.
+We observe that $1+x \le e^x$ for $x\ge 0$ (see @problem-euler-inequality). Hence $(1+hL)^i \le e^{i h L}$, which completes the proof.
 ````
 
 ```{index} ! order of accuracy; of a one-step IVP method
@@ -282,6 +282,7 @@ Euler's method is the ancestor of the two major families of IVP methods presente
 ## Exercises
 
 ``````{exercise}
+:label: problem-euler-byhand
 ✍ Do two steps of Euler's method for the following problems using the given step size $h$. Then, compute the error using the given exact solution.
 
 **(a)** $u' = -2t u, \ u(0) = 2;\ h=0.1;\ \hat{u}(t) = 2e^{-t^2}$
@@ -294,6 +295,7 @@ Euler's method is the ancestor of the two major families of IVP methods presente
 ``````
 
 ``````{exercise}
+:label: problem-euler-usage
 ⌨ For each IVP, solve the problem using {numref}`Function {number} <function-euler>`. (i) Plot the solution for $n=320$. (ii) For $n=10\cdot2^k$, $k=2,3,\ldots,10$, compute the error at the final time and make a log-log convergence plot, including a reference line for first-order convergence.
 
 **(a)** $u' = -2t u, \ 0 \le t \le 2, \ u(0) = 2;\  \hat{u}(t) = 2e^{-t^2}$
@@ -312,6 +314,7 @@ Euler's method is the ancestor of the two major families of IVP methods presente
 ``````
 
 ``````{exercise}
+:label: problem-euler-improved
  ✍ Here is an alternative to Euler's method:
 
 ```{math}
@@ -327,6 +330,7 @@ u_{i+1} &= u_i + hf(t_{i}+h,v_{i+1}).
 ``````
 
 ``````{exercise}
+:label: problem-euler-bounded
 ✍ Consider the problem $u'=ku$, $u(0)=1$ for constant $k$ and $t>0$.
 
 **(a)** Find an explicit formula in terms of $h$, $k$, and $i$ for the Euler solution $u_i$ at $t=ih$.
@@ -336,10 +340,11 @@ u_{i+1} &= u_i + hf(t_{i}+h,v_{i+1}).
 ``````
 
 ``````{exercise}
-:label: problem-expdominate
+:label: problem-euler-inequality
 ✍ Prove the fact, used in the proof of {numref}`Theorem %s <theorem-euler-onestepGTE>`, that $1+x\le e^x$ for all $x\ge 0$.
 ``````
 
 ``````{exercise}
+:label: problem-euler-roundoff
 ✍ Suppose that the error in making a step is also subject to roundoff error $\epsilon_{i+1}$, so that the total local error per unit step is $Ch^p+\epsilon_{i+1} h^{-1}$; assume that $|\epsilon_{i+1}| \le \epsilon$ for all $i$ and that the initial condition is known exactly. Generalize {numref}`Theorem %s <theorem-euler-onestepGTE>` for this case.
 ``````

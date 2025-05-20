@@ -186,6 +186,7 @@ The trick illustrated in the preceding examples is always available. Suppose $y$
 ## Exercises
 
 ``````{exercise}
+:label: problem-systems-rewrite
 ✍ Rewrite the given higher order problems as first-order systems.
 
 **(a)** $y'''-3y''+3 y' -y = t, \: y(0) = 1, \: y'(0) = 2, \: y''(0) = 3$
@@ -209,6 +210,7 @@ with initial values $x(0) = 1$, $x'(0)=y(0) = 0$, $y'(0)=3$
 ``````
 
 ``````{exercise}
+:label: problem-systems-byhand
 ✍ Write the given IVP as a system. Then do two steps of Euler's method by hand (perhaps with a calculator) with the indicated step size $h$. Using the given exact solution, compute the error after the second step.
 
 **(a)** $y''+ 4y = 4t, \: y(0) = 1,\: y'(0) = 1; \: \hat{y}(t) = t+\cos (2t),\: h=0.1$
@@ -221,6 +223,7 @@ with initial values $x(0) = 1$, $x'(0)=y(0) = 0$, $y'(0)=3$
 ``````
 
 ``````{exercise}
+:label: problem-systems-euler
 ⌨ Solve the following IVPs using {numref}`Function {number} <function-euler>` using $n=1000$ steps. Plot the solution and its first derivative together on one plot, and plot the error in each component as functions of time on another.
 
 **(a)** $y''+ 4y = 4t, \: 0< t< 2\pi, \: y(0) = 1,\: y'(0) = 1; \: \hat{y}(t) = t+\cos (2t)$
@@ -246,7 +249,7 @@ with initial values $x(0) = 1$, $x'(0)=y(0) = 0$, $y'(0)=3$
 ``````
 
 ``````{exercise}
-:label: problem-SIR
+:label: problem-systems-SIR
 ⌨ A disease that is endemic to a population can be modeled by tracking the fraction of the population that is susceptible to infection, $v(t)$, and the fraction that is infectious, $w(t)$. (The rest of the population is considered to be recovered and immune.) A typical model is the *SIR model* (see {cite}`brittonEssentialMathematical2003`)
 
 ```{math}
@@ -257,6 +260,7 @@ Starting with $v(0) = 0.95$ and $w(0) = 0.05$, use `solve` to find the long-term
 ``````
 
 ``````{exercise}
+:label: problem-systems-phaseplane
 ⌨ In each case below, use `solve` to solve the given ODE for $0\le t \le 10$ with the given initial conditions. Plot the results together as curves in the phase plane (that is, with $x$ and $y$ as the axes of the plot), using `aspect_ratio=1` in the plot command.
 
 **(a)** 
@@ -285,7 +289,7 @@ with $[x(0),y(0)]=[0.95,0]$, $[0,1.05]$, and $[-2.5,0]$.
 
 ``````{exercise}
 :label: problem-systems-fitznag
-⌨ The **FitzHugh–Nagumo equations** are a simple model of the repeated firing of a neuron. They are given by
+⌨ The [FitzHugh–Nagumo equations](wiki:FitzHugh–Nagumo_model) are a simple model of the repeated firing of a neuron. They are given by
 
 ```{math}
 \begin{split}

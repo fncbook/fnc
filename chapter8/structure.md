@@ -141,6 +141,7 @@ For very large matrices, it's unlikely that you will want to find all of its eig
 ## Exercises
 
 ``````{exercise}
+:label: problem-structure-spdiagm
 ⌨ Use `spdiagm` to build the $50\times 50$ matrices
 
 :::{math}
@@ -166,6 +167,7 @@ For each matrix, use `spy` and an inspection of the $5\times 5$ submatrices in t
 ``````
 
 ``````{exercise}
+:label: problem-structure-factoring
 ⌨ This problem requires the matrix used in {numref}`Demo %s <demo-structure-fill>`.
 `````{tab-set} 
 ````{tab-item} Julia
@@ -254,14 +256,15 @@ The matrix catalogs the links between web sites related to the town of Roswell, 
 ``````
 
 ``````{exercise}
-⌨ The *graph Laplacian matrix* is $\mathbf{L}=\mathbf{D}-\mathbf{A}$, where $\mathbf{A}$ is the adjacency matrix and $\mathbf{D}$ is the *degree matrix*, a diagonal matrix with diagonal entries $d_{jj}=\sum_{i=1}^n a_{ij}$. 
+:label: problem-structure-laplacian
+⌨ The [graph Laplacian matrix](wiki:Laplacian_matrix) is $\mathbf{L}=\mathbf{D}-\mathbf{A}$, where $\mathbf{A}$ is the adjacency matrix and $\mathbf{D}$ is the *degree matrix*, a diagonal matrix with diagonal entries $d_{jj}=\sum_{i=1}^n a_{ij}$. 
 
-Follow the directions in Exercise 3 to obtain an adjacency matrix $\mathbf{A}$. Then find the five eigenvalues of $\mathbf{L}$ having largest magnitude.
+Follow the directions in @problem-structure-roswell to obtain an adjacency matrix $\mathbf{A}$. Then find the five eigenvalues of $\mathbf{L}$ having largest magnitude.
 ``````
 
 ``````{exercise}
 :label: problem-structure-actorsmat
-⌨ See @problem-insight-actors for instructions on loading a matrix $\mathbf{A}$ that contains information about the appearances of 392,400 actors in 127,823 movies, as given by the Internet Movie Database. Specifically, $A_{ij}=1$ if actor $j$ appeared in movie $i$, and all other elements are zero.
+⌨ See @problem-insight-actors for instructions on loading a matrix $\mathbf{A}$ that contains information about the appearances of 392,400 actors in 127,823 movies, as given by the [Internet Movie Database](wiki:IMDb). Specifically, $A_{ij}=1$ if actor $j$ appeared in movie $i$, and all other elements are zero.
 
 **(a)** What is the maximum number of actors appearing in any one movie?
 
@@ -274,8 +277,8 @@ Follow the directions in Exercise 3 to obtain an adjacency matrix $\mathbf{A}$. 
 ```
 
 ``````{exercise}
-:label: problem-helmhotzmatrix
-⌨  A matrix that arises from the *Helmholtz equation* for wave propagation can be specified using 
+:label: problem-structure-helmholtz
+⌨  A matrix that arises from the [Helmholtz equation](wiki:Helmholtz_equation) for wave propagation can be specified using 
 
 ```julia
 A = FNC.poisson(n) - k^2*I;

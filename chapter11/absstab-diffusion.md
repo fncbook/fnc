@@ -205,6 +205,8 @@ The last restriction becomes rather burdensome as $h\to 0$, i.e., as we improve 
 ## Exercises
 
 ``````{exercise}
+:label: problem-absdiff-diagonalize
+
 ✍ Use an eigenvalue decomposition to write the system
 
 $$
@@ -219,6 +221,8 @@ as an equivalent diagonal system.
 ``````
 
 ``````{exercise}
+:label: problem-absdiff-bounded
+
 ✍ For each system, state whether its solutions are bounded as $t\to \infty$.
 
 **(a)** $\mathbf{u}'(t) =
@@ -241,6 +245,8 @@ as an equivalent diagonal system.
 ``````
 
 ``````{exercise}
+:label: problem-absdiff-system1
+
 ✍ Using {numref}`figure-stabreg_ab_am` and {numref}`figure-stabreg_bd_rk`, estimate the time step restriction (if any) for the system
 
 $$
@@ -260,6 +266,8 @@ for the following IVP methods:
 ``````
 
 ``````{exercise}
+:label: problem-absdiff-system2
+
 ✍ Using {numref}`figure-stabreg_ab_am` and {numref}`figure-stabreg_bd_rk`, find the time step restriction (if any) for the system
 
 $$
@@ -279,6 +287,8 @@ for the following IVP methods:
 ``````
 
 ``````{exercise}
+:label: problem-absdiff-imaginary
+
 ✍ Of the following methods, which would be unsuitable for a problem having eigenvalues on the imaginary axis?  Justify your answer(s).
 
 **(a)** AM2 $\qquad$
@@ -288,6 +298,8 @@ for the following IVP methods:
 ``````
 
 ``````{exercise}
+:label: problem-absdiff-negativereal
+
 ✍ Of the following methods, which would have a time step restriction for a problem with real, negative eigenvalues?  Justify your answer(s).
 
 **(a)** AM2 $\qquad$

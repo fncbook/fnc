@@ -164,10 +164,12 @@ The lesson of {numref}`Theorem {number} <theorem-zerostability-dahlquist>` is th
 ## Exercises
 
 ``````{exercise}
+:label: problem-zerostability-LIAF
 ✍ Show that the LIAF method {eq}`LIAF` has order of accuracy equal to 3.
 ``````
 
 ``````{exercise}
+:label: problem-zerostability-rootcondition
 ✍ / ⌨  Verify that the order of accuracy of the given multistep method is at least 1. Then apply {numref}`Theorem %s <theorem-zerostability-rootcondition>` to determine whether it is zero-stable.
 
 **(a)** BD2
@@ -185,6 +187,7 @@ The lesson of {numref}`Theorem {number} <theorem-zerostability-dahlquist>` is th
 ``````
 
 ``````{exercise}
+:label: problem-zerostability-fibonacci
 ✍  A Fibonacci sequence is defined by $u_{i+1}=u_i+u_{i-1}$, where $u_0$ and $u_1$ are seed values. Using the proof of {numref}`Theorem %s <theorem-zerostability-rootcondition>`, find $r_1$ and $r_2$ such that $u_i=c_1(r_1)^i+c_2(r_2)^i$ for all $i$.
 
 ``````

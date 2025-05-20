@@ -163,6 +163,7 @@ Often the adaptively chosen steps clearly correspond to identifiable features of
 ## Exercises
 
 ``````{exercise}
+:label: problem-adaptiverk-rk23
 ⌨ Using {numref}`Function {number} <function-rk23>` with an error tolerance of $10^{-8}$, solve $y'' +(1+y')^3 y = 0$ over $ 0 \le t \le 4 \pi$ with the indicated initial conditions. Plot $y(t)$ and $y'(t)$ as functions of $t$ and separately plot the time step size as a function of $t$.
 
 **(a)** $y(0) = 0.1, \quad y'(0) = 0$
@@ -175,13 +176,16 @@ Often the adaptively chosen steps clearly correspond to identifiable features of
 ``````
 
 ``````{exercise}
-⌨ Solve the FitzHugh–Nagumo system from @problem-systems-fitznag for $I=0.05740$ using {numref}`Function {number} <function-rk23>` with error tolerance $10^{-2}$, $10^{-3}$, and $10^{-4}$. (This illustrates that the error tolerance is a target, not a guarantee!)
+:label: problem-adaptiverk-fh
+⌨ Solve the [FitzHugh–Nagumo system](wiki:FitzHugh–Nagumo_model) from @problem-systems-fitznag for $I=0.05740$ using {numref}`Function {number} <function-rk23>` with error tolerance $10^{-2}$, $10^{-3}$, and $10^{-4}$. (This illustrates that the error tolerance is a target, not a guarantee!)
 ``````
 
 ``````{exercise}
+:label: problem-adaptiverk-global
 ✍ Derive Equation {eq}`adaptRKglobal` using the stated assumption about controlling global rather than local error.
 ``````
 
 ``````{exercise}
+:label: problem-adaptiverk-flame
 ⌨ Solve the problem $u'=100u^2-u^3$, $u(0)=0.0002$, $0\le t \le 100$, and make plots that show both the solution and the time steps taken. The solution makes a quick transition between two nearly constant states. Does the step size selection behave the same in both states?
 ``````

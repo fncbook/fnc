@@ -168,6 +168,7 @@ The instability of shooting can be circumvented by breaking the interval into sm
 ## Exercises
 
 ``````{exercise}
+:label: problem-shooting-usage
 ⌨ For each BVP in @problem-tpbvp-verify , use {numref}`Function {number} <function-shoot>` to compute the solution. Plot the solution and, separately, its error as functions of $x$. 
 ``````
 
@@ -184,7 +185,7 @@ The instability of shooting can be circumvented by breaking the interval into sm
 
 ``````{exercise}
 :label: problem-shooting-allencahn
-⌨  (Continuation of @problem-tpbvp-allencahn.) The stationary Allen–Cahn equation is 
+⌨  (Continuation of @problem-tpbvp-allencahn.) The stationary [Allen–Cahn equation](wiki:Allen-Cahn_equation) is 
 
 $$
 \epsilon u'' = u^3-u, \qquad 0 \le x \le 1, \qquad u(0)=-1, \quad u(1)=1.
@@ -200,6 +201,7 @@ As $\epsilon\rightarrow 0$, the solution tends toward a step function transition
 ``````
 
 ``````{exercise}
+:label: problem-shooting-linear
 ✍ Consider the linear TPBVP 
 
 $$

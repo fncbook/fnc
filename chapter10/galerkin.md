@@ -386,6 +386,7 @@ Exact solution: $-x^2\sin(x)$
 ``````
 
 ``````{exercise}
+:label: problem-galerkin-mass
 ✍ Derive {eq}`PLmass`, starting from the mass matrix definition in {eq}`femsystem`. You should replace $s(x)$ by the constant $\overline{s}_k$ within interval $I_k$.  
 ``````
 

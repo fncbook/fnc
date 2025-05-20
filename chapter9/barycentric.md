@@ -170,12 +170,14 @@ You might suspect that as the evaluation point $x$ approaches a node $t_k$, subt
 ## Exercises
 
 ``````{exercise}
+:label: problem-barycentric-weights
 ✍ **(a)** Find the barycentric weights for the nodes $t_0=0$, $t_1=1$, $t_2=3$.
 
 **(b)** Compute the interpolant at $x=2$ for the nodes in part (a) and the data $y_0=-2$, $y_1=2$, $y_2=1$.
 ``````
 
 ``````{exercise}
+:label: problem-barycentric-explicit
 ✍ For each case of @problem-polynomial-lagrange, write out the barycentric form of the interpolating polynomial.
 ``````
 
@@ -185,6 +187,7 @@ You might suspect that as the evaluation point $x$ approaches a node $t_k$, subt
 ``````
 
 ``````{exercise}
+:label: problem-barycentric-polyinterp
 ⌨ In each case, use {numref}`Function {number}<function-polyinterp>` to interpolate the given function using $n+1$ evenly spaced nodes in the given interval. In a 3-by-1 grid of plots, show each interpolant together with the exact function and the data points (i.e., values at the nodes).
 
 **(a)** $f(x) = \ln (x), \quad n = 2,3,4, \quad x\in [1,10]$
@@ -197,10 +200,12 @@ You might suspect that as the evaluation point $x$ approaches a node $t_k$, subt
 ``````
 
 ``````{exercise}
+:label: problem-barycentric-weightsequi
 ⌨ Using code from {numref}`Function {number}<function-polyinterp>`, compute the barycentric weights numerically using $n+1$ equally spaced nodes in $[-1,1]$ for $n=30$, $n=60$, and $n=90$. On a single graph, plot $|w_i|$ as a function of $t_i$ on a log-linear scale. (The resulting graphs are an indication of the trouble with equally spaced nodes that is explored in {numref}`section-globalapprox-stability`.)
 ``````
 
 ``````{exercise}
+:label: problem-barycentric-derive
 ✍ Derive this fact stated implicitly in {eq}`baryweight`:
 
 $$
@@ -209,6 +214,7 @@ $$
 ``````
 
 ``````{exercise}
+:label: problem-barycentric-derivative
 ✍ Use {eq}`lagrangealt` to show that if $j\neq k$, 
 
 $$

@@ -246,6 +246,8 @@ The explosive growth of error in {numref}`Demo {number} <demo-blackscholes-unsta
 ## Exercises
 
 ``````{exercise}
+:label: problem-blackscholes-verify
+
 ✍ Show that $u(x,t) = e^{-4 \pi^2 t} \cos (2 \pi x) $ is a solution to the IBVP
 
 \begin{align*}
@@ -256,10 +258,13 @@ The explosive growth of error in {numref}`Demo {number} <demo-blackscholes-unsta
 ``````
 
 ``````{exercise}
+:label: problem-blackscholes-verifyheat
+
 ✍ Show that $u(x,t) = t^{-1/2} \exp(-x^2/4t)$ solves the heat equation {eq}`heat` at any value of $t>0$.
 ``````
 
 ``````{exercise}
+:label: problem-blackscholes-backward
 ✍ Equation {eq}`bspdeFD1` results from applying finite differences to the derivatives in {eq}`bspdefor-t`, including a forward difference for the term $v_t$. 
 
 **(a)** Write out the method that results if a backward difference is used for $v_t$ instead.
@@ -268,6 +273,7 @@ The explosive growth of error in {numref}`Demo {number} <demo-blackscholes-unsta
 ``````
 
 ``````{exercise}
+:label: problem-blackscholes-stability
 ⌨ In this problem you are asked to revisit {numref}`Demo %s <demo-blackscholes-solve>` in order to examine the instability phenomenon more closely.
 
 **(a)** Leaving other parameters alone, let $m=100$. To the nearest ten, find the minimum value of $n$ that leads to a stable (i.e., not exponentially growing) solution.

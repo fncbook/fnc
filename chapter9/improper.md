@@ -267,6 +267,7 @@ Double exponential integration is an effective general-purpose technique for imp
 ## Exercises
 
 ``````{exercise}
+:label: problem-improper-intinf
 ⌨ Use {numref}`Function {number} <function-intinf>` to estimate the given integral with error tolerances $10^{-3},10^{-6},10^{-9},10^{-12}$. For each result, show the actual error and the number of nodes used.
 
 **(a)** $\displaystyle\int_{-\infty}^\infty \dfrac{1}{1+x^2+x^4}\, dx = \dfrac{\pi}{\sqrt{3}}$
@@ -277,6 +278,7 @@ Double exponential integration is an effective general-purpose technique for imp
 ``````
 
 ``````{exercise}
+:label: problem-improper-intsing
 ⌨ Use {numref}`Function {number} <function-intsing>` to estimate the given integral, possibly after rewriting the integral into the form {eq}`intsing` with a left-endpoint singularity. Use error tolerances $10^{-3},10^{-6},10^{-9},10^{-12}$, and for each result, show the actual error and the number of nodes used.
 
 **(a)** $\displaystyle\int_{0}^1 (\log x)^2\, dx = 2$
@@ -287,6 +289,7 @@ Double exponential integration is an effective general-purpose technique for imp
 ``````
 
 ``````{exercise}
+:label: problem-improper-semiinf
 For integration on a semi-infinite interval such as $x\in [0,\infty)$, another double exponential transformation is useful: $x(t)=\exp\left( \sinh t \right)$.
 
 **(a)** ✍ Show that $t\in(-\infty,\infty)$ is mapped to $x\in (0,\infty)$. 

@@ -253,6 +253,7 @@ As presented in {eq}`lagrangeinterp`, the Lagrange formula is not a good choice 
 ``````
 
 ``````{exercise}
+:label: problem-polynomial-cardinal
 ⌨ For each case, plot the requested Lagrange cardinal polynomial for the given set of nodes over the interval $[t_0,t_n]$. Superimpose dots or circles for the points represented by the cardinal conditions {eq}`lagrangecond`. 
 
 **(a)** $n=2,\quad t_0=-1, \, t_1=-0.2,\, t_2=0, \quad \ell_2(x)$
@@ -267,14 +268,17 @@ As presented in {eq}`lagrangeinterp`, the Lagrange formula is not a good choice 
 ``````
 
 ``````{exercise}
+:label: problem-polynomial-quadraticdiff
 ✍ Suppose $p$ is the quadratic polynomial interpolating the points $(-2,12),$ $(1,3a),$ and $(2,0).$ Use {eq}`lagrangeinterp` to compute $p'(0)$. 
 ``````
 
 ``````{exercise}
+:label: problem-polynomial-flops
 ✍ Explain carefully why using {eq}`lagrangeinterp` to compute $p(x)$ at a single value of $x$ takes $O(n^2)$ floating-point operations.
 ``````
 
 ``````{exercise}
+:label: problem-polynomial-partition
 ✍  Explain why for any distribution of nodes and all $x$,
 
 $$
@@ -285,6 +289,7 @@ $$
 ``````
 
 ``````{exercise}
+:label: problem-polynomial-phi
 ✍ Show that
 
 $$

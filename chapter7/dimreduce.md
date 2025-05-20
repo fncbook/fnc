@@ -145,15 +145,17 @@ Not all data sets can be reduced effectively to a small number of dimensions, bu
 ## Exercises
 
 ``````{exercise}
+:label: problem-dimreduce-distance
 ✍  Suppose that $\mathbf{A}$ is an $n\times n$ matrix. Explain why $\sigma_n$ is the distance (in 2-norm) from $\mathbf{A}$ to the set of all singular matrices.
 ``````
 
 ``````{exercise}
+:label: problem-dimreduce-rank
 ✍ Suppose $\mathbf{A}$ is a $7\times 4$ matrix and the eigenvalues of $\mathbf{A}^*\mathbf{A}$ are 3, 4, 7, and 10. How close is $\mathbf{A}$ in the 2-norm to (a) a rank-3 matrix? (b) a rank-2 matrix? 
 ``````
 
 ``````{exercise}
-
+:label: problem-dimreduce-rank1
 **(a)** ⌨ Find the rank-1 matrix closest to 
 
 $$
@@ -174,6 +176,7 @@ $$
 ``````
 
 ``````{exercise}
+:label: problem-dimreduce-rank1b
 ✍ Find the rank-1 matrix closest to 
 
 $$
@@ -186,5 +189,6 @@ as measured in the 2-norm, where $b>0$.
 ``````
 
 ``````{exercise}
+:label: problem-dimreduce-image
 ⌨ Following {numref}`Demo %s <demo-dimreduce-hello>` as a guide, load the "mandrill" test image and convert it to a matrix of floating-point pixel grayscale intensities. Using the SVD, display as images the best approximations of rank 5, 10, 15, and 20. 
 ``````

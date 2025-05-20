@@ -387,6 +387,7 @@ Interpolation has no easy connection to inner products or the 2-norm. With inter
 ## Exercises
 
 ``````{exercise}
+:label: problem-orthogonal-quasimatrix
 ✍ Let $\mathbf{F}$ be the quasimatrix $\bigl[\, \underline{1} \quad\! \underline{\cos(\pi x)}\quad\! \underline{\sin(\pi x)}\,\bigr]$ for $x\in[-1,1]$. 
 
 **(a)** Find $\mathbf{F}^T e^x$. 
@@ -395,27 +396,32 @@ Interpolation has no easy connection to inner products or the 2-norm. With inter
 ``````
 
 ``````{exercise}
+:label: problem-orthogonal-leastsq
 ✍ **(a)** Find the best linear approximation in the least-squares sense to the function $\sin(x)$ on $[-1,1]$. 
 
 **(b)** Using {numref}`Theorem {number} <theorem-orthogonal-normal>`, explain why the best fitting quadratic polynomial will be the linear function you found in part (a). (Note: You do not need to carry out the complete calculation.)
 ``````
 
 ``````{exercise}
+:label: problem-orthogonal-legendre
 **(a)** ✍ ⌨ Use {eq}`legendre` to write out $P_2(x)$ and $P_3(x)$. Plot $P_0,P_1,P_2,P_3$ on one graph for $-1\le x \le 1$. (You may find it interesting to compare to the graph in @problem-qr-legendre.)
 
 **(b)** ✍ ⌨  Use {eq}`chebyshev` to write out $T_2(x)$ and $T_3(x)$. Plot $T_0,T_1,T_2,T_3$ on one graph for $-1\le x \le 1$.
 ``````
 
 ``````{exercise}
+:label: problem-orthogonal-parity
 ✍ Use {eq}`legendre` to show that $P_n(x)$ is an odd function if $n$ is odd and an even function if $n$ is even.
 ``````
 
 ``````{exercise}
+:label: problem-orthogonal-legpoly
 ⌨ Using {eq}`legendre`, write a function `legpoly(x,n)` that returns a matrix whose columns are the Legendre polynomials $P_0,P_1,\ldots,P_n$ evaluated at all the points in the vector $x$. Then use your function to plot $P_0,P_1,P_2,P_3$ on one graph. 
 ``````
 
 ``````{exercise}
-⌨ (Continuation of previous problem.) Choose 1600 evenly spaced points in $[-1,1]$. For $n=1,2,\ldots,16$, use this vector of points and the function `legpoly` to construct a $1600\times (n+1)$ matrix that discretizes the quasimatrix
+:label: problem-orthogonal-cond
+⌨ (Continuation of @problem-orthogonal-legpoly.) Choose 1600 evenly spaced points in $[-1,1]$. For $n=1,2,\ldots,16$, use this vector of points and the function `legpoly` to construct a $1600\times (n+1)$ matrix that discretizes the quasimatrix
 
 $$
 \mathbf{A}_n = 
@@ -429,19 +435,23 @@ Make a table of the matrix condition number $\kappa(\mathbf{A}_n)$ as a function
 ``````
 
 ``````{exercise}
+:label: problem-orthogonal-chebpoly
 ⌨ Using {eq}`chebaltform`, write a function `chebpoly` that returns a matrix whose columns are the Chebyshev polynomials $T_0,T_1,\ldots,T_n$ evaluated at all the points in the vector $x$. Then use your function to plot $T_0,T_1,T_2,T_3$ on one graph. 
 ``````
 
 ``````{exercise}
+:label: problem-orthogonal-chebpoints
 **(a)** ✍ Use {eq}`chebaltform` to show that the first-kind points {eq}`chebfirstpoints` are roots of $T_n$. 
 
 **(b)** ✍ Use {eq}`chebaltform` to show that the second-kind points {eq}`chebextreme` are local extreme points of $T_n$.
 ``````
 
 ``````{exercise}
+:label: problem-orthogonal-recursion
  ✍ Show that the definition {eq}`chebaltform` satisfies the recursion relation in {eq}`chebyshev`.
 ``````
 
 ``````{exercise}
+:label: problem-orthogonal-chebweight
 ✍ Use {eq}`chebaltform` to show that $\langle T_0,T_0 \rangle=\pi$ and $\langle T_k,T_k \rangle=\pi/2$ for $k>0$ in the Chebyshev-weighted inner product. (Hint: Change to the variable $\theta$.)
 ``````

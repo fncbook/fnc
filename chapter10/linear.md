@@ -312,7 +312,7 @@ where $\boldsymbol{\tau}$ is the truncation error of the derivative discretizati
 
 
 ``````{exercise}
-:label: problem-linear-fdlin1
+:label: problem-linearbvp-fdlin1
 ✍  For each boundary-value problem, verify that the given solution is correct. Using $n=3$ and the differentiation matrices in @diffmat12b and @diffmat22, write out $\mathbf{L}$ and $\mathbf{r}$ from @fdlinnobc and $\mathbf{A}$ and $\mathbf{b}$ from @fdlinbc.
 
 **(a)** $u'' + u = 0, \quad u(0) =0, \; u(3) = \sin 3$  
@@ -330,12 +330,12 @@ Solution: $u(x) = \left(x+\frac{1}{2}\right)^{-2}$
 ``````
 
 ``````{exercise}
-:label: problem-linear-fdlin2
+:label: problem-linearbvp-fdlin2
 ⌨  For each of the cases in the previous exercise, use {numref}`Function {number} <function-bvplin>` to solve the problem with $n=60$ and make a plot of its error as a function of $x$. Then, for each $n=10,20,40,\ldots,640$, find the infinity norm of the error. Make a log-log plot of error versus $n$ and include a graphical comparison to second-order convergence.
 ``````
 
 ``````{exercise}
-:label: problem-linear-fdlinspec
+:label: problem-linearbvp-fdlinspec
 ⌨ Modify {numref}`Function {number} <function-bvplin>` to use spectral differentiation rather than second-order finite differences. For each of the cases in Exercise 1, solve the problem with $n=5,10,15,\ldots,40$, finding the infinity norm of the error in each case. Make a log-linear plot of error versus $n$.
 ``````
 
@@ -343,6 +343,7 @@ Solution: $u(x) = \left(x+\frac{1}{2}\right)^{-2}$
 ```
 
 ``````{exercise}
+:label: problem-linearbvp-bessel
  ⌨ Use {numref}`Function {number} <function-bvplin>` to solve *Bessel's equation*,
 
 $$
@@ -356,6 +357,7 @@ Plot the solution for $n=100$.
 ```
 
 ``````{exercise}
+:label: problem-linearbvp-airy
 ⌨ The *Airy equation* is $u''=x u$. Its solution is exponential for $x>0$ and oscillatory for $x<0$. The exact solution is given by $u=c_1 \operatorname{Ai}(x) + c_2 \operatorname{Bi}(x)$, where Ai and Bi are Airy functions. In Julia they are computed by `airyai` and `airybi`, respectively.
 
 **(a)** Suppose that $u(-10) =-1$, $u(2) =1$. By setting up and solving a $2\times 2$ linear system, find numerical values for $c_1$ and $c_2$. Plot the resulting exact solution.
@@ -366,6 +368,7 @@ Plot the solution for $n=100$.
 ``````
 
 ``````{exercise}
+:label: problem-linearbvp-boundarylayer
 Consider the boundary-value problem $\epsilon u''+(1+\epsilon)u'+u =0$ over $x\in (0,1)$, with $u(0)=0$, $u(1)=1$.  As the parameter $\epsilon$ is decreased, the solution gets a thin region of high activity near $x=0$ called a *boundary layer*.
 
 **(a)** ✍ Verify that the exact solution to the problem is 
