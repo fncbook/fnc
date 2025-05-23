@@ -24,7 +24,6 @@ docs/site/
 _build
 
 .ipynb_checkpoints
-.vscode
 **/__pycache__
 python/**/dist
 python/Chapter*.ipynb

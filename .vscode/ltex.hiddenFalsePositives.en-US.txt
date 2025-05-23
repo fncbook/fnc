@@ -1,0 +1,47 @@
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q(section-krylov-gmres)=\nGMRES\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qwhere \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q is the Krylov matrix generated using \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q and the seed vector \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q::::{prf:algorithm} GMRES Given \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q matrix \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q and \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q-vector \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q:\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QGMRES^gmres uses the Arnoldi iteration to minimize the residual \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q over successive Krylov subspaces.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q^gmres: GMRES stands for Generalized Minimum RESidual.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q:::{math} :label: gmresproblemsmall \\min_{\\mathbf{z}\\in\\mathbb{C}^m}\\, \\bigl\\| \\mathbf{H}_m\\mathbf{z}-\\|\\mathbf{b}\\|\\, \\mathbf{e}_1 \\bigr\\|, :::\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q:::{math} :label: gmresproblem \\min_{\\mathbf{z}\\in\\mathbb{C}^m}\\, \\bigl\\| \\mathbf{A} \\mathbf{Q}_m \\mathbf{z}-\\mathbf{b}  \\bigr\\|.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qwhich is of size \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q(demo-gmres-intro)= ::::{prf:example} GMRES\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q(function-gmres)=\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QThe conclusion is that if we get an approximate solution and compute its residual \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q, then we need only to solve \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q in order to get a correction to \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q.^relativerestart\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q^relativerestart: The new problem needs to be solved for accuracy relative to \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q, not relative to \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q.\\E$"}
+{"rule":"COMMA_COMPOUND_SENTENCE_2","sentence":"^\\QEven though restarting preserves progress made in previous iterations, the Krylov space information is discarded and the residual minimization process starts again over low-dimensional spaces.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q(demo-gmres-restart)= ::::{prf:example} Restarting GMRES\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\Q✍ Explain why GMRES, in exact arithmetic, converges to the true solution in \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q iterations for an \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q matrix if \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qand let the \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q-vector \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q have elements \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q% must stay as #5 (problem-gmres-surround)=\n⌨  In this exercise you will see the strong effect the eigenvalues of the matrix may have on GMRES convergence.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qlet \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q be a \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q identity, and let \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q be a \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q matrix of zeros.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q(section-krylov-subspace)=\nKrylov subspaces\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q:::{math} :label: krylovmatrix \\mathbf{K}_m = \\begin{bmatrix} \\mathbf{u} & \\mathbf{A}\\mathbf{u} & \\mathbf{A}^{2} \\mathbf{u} & \\cdots & \\mathbf{A}^{m-1} \\mathbf{u} \\end{bmatrix}.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q::::{prf:definition} Krylov matrix and subspace Given \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q matrix \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q and \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q-vector \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q, the \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Qth Krylov matrix is the \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q matrix {eq}\\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q.\\E$"}
+{"rule":"NUMBERS_IN_WORDS","sentence":"^\\Q::::{prf:definition} Krylov matrix and subspace Given \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q matrix \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q and \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q-vector \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q, the \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Qth Krylov matrix is the \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q matrix {eq}\\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QIn general, we expect that the dimension of the Krylov^kreeluv subspace \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q, which is the rank of \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q, equals \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q, though it may be smaller.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q^kreeluv: The proper pronunciation of \"Krylov\" is something like \"kree-luv,\" but American English speakers often say \"kreye-lahv.\"\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q::::{prf:proof}\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q(theorem-subspace-krylovmult)= ::::{prf:theorem} Suppose \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q is \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q, \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q, and a vector \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q is used to generate Krylov subspaces.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q:::{math} :label: gmresdef \\min_{\\mathbf{x}\\in\\mathcal{K}m} \\|  \\mathbf{A}\\mathbf{x}-\\mathbf{b} \\| = \\min{\\mathbf{z}\\in\\mathbb{C}^m} \\| \\mathbf{A}(\\mathbf{K}m\\mathbf{z})-\\mathbf{b} \\| = \\min{\\mathbf{z}\\in\\mathbb{C}^m} \\| (\\mathbf{A}\\mathbf{K}_m)\\mathbf{z}-\\mathbf{b} \\|.\\E$"}
+{"rule":"NON_STANDARD_WORD","sentence":"^\\Q:::{math} :label: arnoldivec \\mathbf{A} \\mathbf{q}m = H{1m} \\, \\mathbf{q}1 + H{2m} \\, \\mathbf{q}2 + \\cdots + H{m+1,m}\\,\\mathbf{q}_{m+1} :::\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q(demo-subspace-unstable)= ::::{prf:example} Conditioning of the Krylov matrix\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q:::{math} :label: arnoldivec \\mathbf{A} \\mathbf{q}m = H{1m} \\, \\mathbf{q}1 + H{2m} \\, \\mathbf{q}2 + \\cdots + H{m+1,m}\\,\\mathbf{q}_{m+1} :::\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q:::{math} :label: arnoldivec \\mathbf{A} \\mathbf{q}m = H{1m} \\, \\mathbf{q}1 + H{2m} \\, \\mathbf{q}2 + \\cdots + H{m+1,m}\\, \\mathbf{q}_{m+1} :::\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qfor some choice of the \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QNote that by using orthonormality, we have\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q:::{math} :label: arnoldiip \\mathbf{q}_i^* (\\mathbf{A}\\mathbf{q}m) = H{im},\\qquad i=1,\\ldots,m.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q:::{math} :label: arnoldiip \\mathbf{q}_i^* (\\mathbf{A}\\mathbf{q}m) = H{im}, \\qquad i=1,\\ldots,m.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q:::{math} :label: arnoldiip \\mathbf{q}_i^* (\\mathbf{A}\\mathbf{q}m) = H{im}, \\qquad i=1,\\ldots, m.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q(algorithm-subspace-arnoldi)= ::::{prf:algorithm} Arnoldi iteration Given matrix \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q and vector \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q:\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q(demo-evd-eigen)= ::::{prf:example}  Eigenvalues and eigenvectors\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q(demo-\\E.*\\Q{prf:example}\\E.*$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q(theorem-\\E.*\\Q{prf:theorem}\\E.*$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q(theorem-\\E.*$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q(function-\\E.*$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q(definition-\\E.*$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q(example-\\E.*$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q(algorithm-\\E.*$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q(section-\\E.*$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q^\\E.*:.*$"}

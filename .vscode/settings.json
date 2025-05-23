@@ -1,0 +1,22 @@
+{
+    "cSpell.words": [
+        "backsub",
+        "colormap",
+        "componentwise",
+        "forwardsub",
+        "hstack",
+        "ipython",
+        "linspace",
+        "lufact",
+        "numref",
+        "randn",
+        "redsblues",
+        "semidiscretized",
+        "significand",
+        "submatrix",
+        "vstack"
+    ],
+    "languageToolLinter.languageTool.ignoredWordsInWorkspace": [
+        "displaystyle"
+    ]
+}
