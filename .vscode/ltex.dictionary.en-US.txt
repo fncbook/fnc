@@ -54,3 +54,7 @@ equispaced
 ODEs
 semidiscretized
 vec
+Hestenes
+Stiefel
+Runge-Kutta
+Marquardt
