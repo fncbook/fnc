@@ -53,7 +53,7 @@ and power iteration on the matrix $(\mathbf{A}-s\mathbf{I})^{-1}$ converges to $
 
 ## Algorithm
 
-A literal application of {numref}`Algorithm {number} <algorithm-power-power>` would include the step 
+A literal application of {numref}`Algorithm {number} < definition-poweriteration>` would include the step 
 
 :::{math}
 :label: shiftinvstepbad
@@ -71,6 +71,7 @@ As always, we do not want to explicitly find the inverse of a matrix. Instead, w
 ::::{prf:definition} Inverse iteration
 :label: definition-inviter
 Given matrix $\mathbf{A}$ and shift $s$:
+
 1. Choose $\mathbf{x}_1$.
 2. For $k=1,2,\ldots$, 
 
@@ -90,7 +91,7 @@ Return $\beta_1,\beta_2,\ldots$ as eigenvalue estimates, and $\mathbf{x}_1,\math
 ::::
 
 :::{note}
-In {numref}`Algorithm {number} <algorithm-power-power>`, we used $y_{k,m}/x_{k,m}$ as an estimate of the dominant eigenvalue of $\mathbf{A}$. Here, that ratio is an estimate of $(\lambda_1-s)^{-1}$, and solving for $\lambda_1$ gives the $\beta_k$ in @definition-inviter.
+In {numref}`Algorithm {number} < definition-poweriteration>`, we used $y_{k,m}/x_{k,m}$ as an estimate of the dominant eigenvalue of $\mathbf{A}$. Here, that ratio is an estimate of $(\lambda_1-s)^{-1}$, and solving for $\lambda_1$ gives the $\beta_k$ in @definition-inviter.
 :::
 
 Each pass of inverse iteration requires the solution of a linear system of equations with the matrix $\mathbf{B}=\mathbf{A}-s\mathbf{I}$. This solution might use methods we consider later in this chapter. Here, we use (sparse) PLU factorization and hope for the best. Since the matrix $\mathbf{B}$ is constant, the factorization needs to be done only once for all iterations. The details are in {numref}`Function {number} <function-inviter>`.

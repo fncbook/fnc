@@ -33,6 +33,11 @@ With  barycentric interpolation available in the form of {numref}`Function {numb
 `````
 ::::
 
+(section-stability-runge)=
+
+```{index} ! Runge phenomenon
+```
+
 ## Runge phenomenon
 
 The disappointing loss of convergence in @demo-stability-equispaced is a sign of ill conditioning due to the use of equally spaced nodes. We will examine this effect using the error formula {eq}`interperror` as a guide:
@@ -174,7 +179,7 @@ As a bonus, for Chebyshev nodes the barycentric weights are simple:
 
 If we take $n\rightarrow \infty$ and use polynomial interpolation on Chebyshev nodes, the convergence rate is exponential in $n$. The following is typical of the results that can be proved.
 
-::::{prf:theorem}
+::::{prf:theorem} Spectral convergence
 :label: theorem-spectral
 Suppose $f(x)$ is analytic in an open real interval containing $[-1,1]$. Then there exist constants $C>0$ and $K>1$ such that
   
@@ -192,7 +197,8 @@ The condition "$f$ is analytic" means that the Taylor series of $f$ converges to
 
 ```{index} ! convergence rate; spectral
 ```
-In other contexts we refer to {eq}`spectral` as linear convergence, but here it is usual to say that the rate is exponential or that one has **spectral convergence**. It achieves constant reduction factors in the error by constant increments of $n$. By contrast, algebraic convergence in the form $O(n^{-p})$ for some $p>0$ requires *multiplying* $n$ by a constant factor in order to reduce error by a constant factor. Graphically, spectral error is a straight line on a log-linear scale, while algebraic convergence is a straight line on a log-log scale.
+
+In other contexts we refer to {eq}`spectral` as linear convergence, but here it is usual to say that the rate is exponential or that one has {term}`spectral convergence`. It achieves constant reduction factors in the error by constant increments of $n$. By contrast, algebraic convergence in the form $O(n^{-p})$ for some $p>0$ requires *multiplying* $n$ by a constant factor in order to reduce error by a constant factor. Graphically, spectral error is a straight line on a log-linear scale, while algebraic convergence is a straight line on a log-log scale.
 
 ::::{prf:example} Spectral convergence
 :label: demo-stability-spectral

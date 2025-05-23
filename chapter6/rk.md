@@ -62,11 +62,14 @@ Matching this expression to the term in brackets in {eq}`rkexactexpand`, it seem
 Truncation of the series here results in a new one-step method.
 
 ::::{prf:definition} Improved Euler method (IE2)
+:label: definition-ie2
 The improved Euler method is the one-step formula
+
 ```{math}
 :label: IE
 {u}_{i+1} = u_i +  hf\left(t_i+\tfrac{1}{2}h,u_i+\tfrac{1}{2}h f(t_i,u_i)\right).
 ```
+
 ::::
 
 Thanks to the definitions above of $\alpha$ and $\beta$, the omitted terms are of size
@@ -75,7 +78,7 @@ Thanks to the definitions above of $\alpha$ and $\beta$, the omitted terms are o
   O(h\alpha^2 + h|\alpha \beta| + h\beta^2 + h^3) = O(h^3).
 ```
 
-Therefore $h\tau_{i+1}=O(h^3)$, and the order of accuracy of improved Euler is two.
+Therefore, $h\tau_{i+1}=O(h^3)$, and the order of accuracy of improved Euler is two.
 
 ## Implementation
 
@@ -211,6 +214,7 @@ This formula is often referred to as *the* fourth-order RK method, even though t
     u_{i+1} &= u_i + \frac{1}{6} k_1 + \frac{1}{3} k_2 + \frac{1}{3} k_3 + \frac{1}{6} k_4.
   \end{split}
 ```
+
 ::::
 
 Our implementation is given in {numref}`Function {number} <function-rk4>`.

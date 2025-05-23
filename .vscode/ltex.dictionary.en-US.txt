@@ -35,3 +35,14 @@ Chebyshev
 hermitian
 prf
 Fike
+rootfinding
+finsample
+nonlinearly
+Broyden
+Levenberg
+Maclaurin
+RK
+Deblurring
+deblurring
+operatorname
+Galerkin

@@ -4,6 +4,7 @@ numbering:
   heading_1: true
 ---
 (section-localapprox-fd-converge)=
+
 # Convergence of finite differences
 
 ```{index} finite differences
@@ -15,6 +16,7 @@ All of the finite-difference formulas in the previous section based on equally s
 ```
 
 ::::{prf:definition} Truncation error of a finite-difference formula
+:label: definition-truncationfd
 For the finite-difference method {eq}`fdformula` with weights $a_{-p},\ldots,a_{q}$, the **truncation error** is
 
 ```{math}
@@ -51,8 +53,9 @@ Of major interest is the rate at which $\tau_f\to 0$ in a convergent formula.
 
 ```{index} ! order of accuracy; of a finite-difference formula
 ```
+
 ::::{prf:definition} Order of accuracy of a finite-difference formula
-:label: definition-fd-converge-ooa
+:label: definition-orderfd
 If the truncation error of a finite-difference formula satisfies $\tau_f(h)=O(h^m)$ for a positive integer $m$, then $m$ is the **order of accuracy** of the formula.
 ::::
 
@@ -78,9 +81,11 @@ We compute the truncation error of the centered difference formula {eq}`centerFD
 
 Thus, this method has order of accuracy equal to 2.
 ````
+
 ::::{prf:example} Convergence of finite differences
 :label: demo-fdconverge-order12
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-fdconverge-order12-julia
@@ -99,6 +104,7 @@ Thus, this method has order of accuracy equal to 2.
 :::
 ```` 
 `````
+
 ::::
 
 ## Stability
@@ -127,7 +133,7 @@ implying a relative error of size $\kappa(h) \epsilon_\text{mach}$ in its comput
 \end{split}
 ```
 
-Hence as $h\to 0$, 
+Hence, as $h\to 0$, 
 
 ```{math}
 \bigl| \tilde{\delta}(h) - \delta(h) \bigr| = \frac{ \max\{\,|f(x+h)|,|f(x)|\,\} }{ h}\,\epsilon_\text{mach} \sim  |f(x)|\, \epsilon_\text{mach}\cdot h^{-1}.
@@ -169,6 +175,7 @@ A different statement of the conclusion is that for a first-order formula, at mo
 
 ::::{prf:example} Roundoff error in finite differences
 :label: demo-fdconverge-round
+
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -188,6 +195,7 @@ A different statement of the conclusion is that for a first-order formula, at mo
 :::
 ```` 
 `````
+
 ::::
 
 ## Exercises

@@ -3,6 +3,7 @@ numbering:
   enumerator: 11.4.%s
 ---
 (section-diffusion-stiffness)=
+
 # Stiffness
 
 In {numref}`section-diffusion-absstab` we analyzed time step constraints for the semidiscrete heat equation $\mathbf{u}'=\mathbf{D}_{xx}\mathbf{u}$ in terms of stability regions and the eigenvalues $\lambda_j$ of the matrix. Since all the eigenvalues are negative and real, the one farthest from the origin, at about $-4/h^2$, determines the specific time step restriction. For an explicit method, or any method with a finite intersection with the negative real axis, the conclusion is $\tau=O(h^2)$. 
@@ -13,6 +14,7 @@ This calculus changes for second-order IVP solvers. When both time and space are
 
 ```{index} ! stiff differential equation
 ```
+
 Problems for which the time step is dictated by stability rather than accuracy are referred to as **stiff**. Stiffness is not a binary condition but a spectrum. It can arise in nonlinear problems and in problems having nothing to do with diffusion. Except for the mildest instances of stiffness, an implicit time stepping method is the best choice.
 
 ## Linearization
@@ -52,7 +54,7 @@ By dropping the higher-order terms, which are negligible at least initially, we 
 ```
 
 ::::{prf:definition} Linearization of an ODE
-:label: definition-stiffness-linearization
+:label: definition-odelinearization
 A **linearization** of system {eq}`stiffsystem` at an exact solution $\hat{\mathbf{u}}(t)$ is
 
 :::{math}
@@ -65,6 +67,7 @@ where $\mathbf{v}(t)$ is a perturbation to the exact solution, and $\mathbf{J}$ 
 
 ```{index} Oregonator
 ```
+
 ::::{prf:example}
 :label: example-stiffness-oregon
 The **Oregonator** is a well-known ODE system modeling a chemical oscillator and is given by
@@ -131,10 +134,6 @@ We have not stated a theorem here because we made several approximations and ass
 `````
 ::::
 
-
-
-
-
 ## Multiple time scales
 
 The solution to $y' = \lambda y$, $y(0)=1$ is $\exp(\lambda t)$. If $\lambda$ is real, this solution grows or decays by a factor of $e$ at $t=1/|\lambda|$. If $\lambda = i\omega$ is imaginary, then the solution has sines and cosines of frequency $\omega$. A complex $\lambda$ combines these effects.
@@ -181,6 +180,7 @@ Hence it is desirable in stiff problems generally, and diffusion problems in par
 ```
 
 ::::{prf:definition} A($\alpha$)- and A-stability
+:label: definition-Astability
 A stability region that includes a sector of angle $\alpha$ in both directions from the negative real axis is called **A($\alpha$)-stable**. A time stepping method whose stability region contains the entire left half-plane is called **A-stable**.
 ::::
 

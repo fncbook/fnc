@@ -35,12 +35,17 @@ The last of these properties is known as the **triangle inequality**. It is natu
 **1-norm:** $\quad \onenorm{\mathbf{x}} = \displaystyle \sum_{i=1}^n |x_i| $
 :::
 
-The 2-norm corresponds to ordinary Euclidean distance. 
+The 2-norm corresponds to ordinary Euclidean distance.
 
 ```{index} ! unit vector
 ```
 
-In any norm, we refer to a vector $\mathbf{x}$ satisfying $\| \mathbf{x} \|=1$ as a **unit vector**. For any nonzero vector $\mathbf{v}$ we can find a unit vector through the normalization $\mathbf{x}=\mathbf{v}/\|\mathbf{v}\|$. Thus, we can interpret
+```{prf:definition} Unit vector
+:label: definition-unitvector
+A vector $\mathbf{x}$ is a {term}`unit vector` if $\| \mathbf{x} \|=1$.
+```
+
+For any nonzero vector $\mathbf{v}$, we can find a unit vector through the normalization $\mathbf{x}=\mathbf{v}/\|\mathbf{v}\|$. Thus, we can interpret
 
 ```{math}
 :label: magdir

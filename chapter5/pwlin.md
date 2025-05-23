@@ -232,27 +232,34 @@ where $M = \bigl\| f'' \bigr\|_\infty$.
 
 For an outline of a proof, see @problem-pwlin-placcuracy.
 
-We normally don't have access to $f''$, so the importance of @theorem-pwlin-converge is that the error in the interpolant is $O(h^2)$ as $h\to 0$. 
+We normally don't have access to $f''$, so the importance of @theorem-pwlin-converge is that the error in the interpolant is $O(h^2)$ as $h\to 0$.
 
 ```{index} ! convergence rate; algebraic, ! order of accuracy; of an approximation
 ```
 
 ::::{prf:definition} Algebraic convergence
-:label: definition-pwlin-algconv
-If an approximation has error that is $O(h^m)$ as $h\to 0$ for an integer $m$ and a discretization size parameter $h$, then we say the approximation has **algebraic convergence**. If the error is not also $O(h^{m+1})$, then $m$ is the **order of accuracy**.
+:label: definition-algebraicconvergence
+If an approximation has error that is $O(h^m)$ as $h\to 0$ for an integer $m$ and a discretization size parameter $h$, then we say the approximation has {term}`algebraic convergence`. If the error is not also $O(h^{m+1})$, then $m$ is the {term}`order of accuracy`.
 ::::
 
-Thus, @theorem-pwlin-converge states that piecewise linear interpolation is second-order accurate. For instance, if we increase the number of equally spaced nodes by a factor of 10, the piecewise linear interpolant becomes about 100 times more accurate. Note also that if $y \approx C h^m$, then 
+:::{note}
+Sometimes it is more convenient to express the convergence rate using a number $n$ that is inversely proportional to $h$, in which case algebraic convergence is expressed as $O(n^{-m})$.
+:::
+
+Thus, @theorem-pwlin-converge states that piecewise linear interpolation is second-order accurate. For instance, if we increase the number of equally spaced nodes by a factor of 10, the piecewise linear interpolant becomes about 100 times more accurate. Note also that if $y \approx C h^m$, then
 
 $$
 \log y \approx m (\log h) + \log C.
 $$
 
-Hence a log-log graph of error versus $h$ should be approximately a straight line of slope $m$.
+```{observation}
+A log-log plot of error versus $h$ should be approximately a straight line of slope $m$.
+```
 
 ::::{prf:example} Convergence of piecewise linear interpolation
 :label: demo-pwlin-converge
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-pwlin-converge-julia
@@ -271,6 +278,7 @@ Hence a log-log graph of error versus $h$ should be approximately a straight lin
 :::
 ```` 
 `````
+
 ::::
 
 ## Exercises

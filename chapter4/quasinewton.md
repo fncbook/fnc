@@ -3,9 +3,10 @@ numbering:
   enumerator: 4.6.%s
 ---
 (section-nonlineqn-quasinewton)=
+
 # Quasi-Newton methods
 
-Newton's method is a foundation for algorithms to solve equations and minimize quantities. But it is not ideal in its straightforward or pure form. Specifically, its least appealing features are the programming nuisance and computational expense of evaluating the Jacobian matrix, and the tendency of the iteration to diverge from many starting points. There are different **quasi-Newton methods** that modify the basic idea in an attempt to overcome these issues.
+Newton's method is a foundation for algorithms to solve equations and minimize quantities. But it is not ideal in its straightforward or pure form. Specifically, its least appealing features are the programming nuisance and computational expense of evaluating the Jacobian matrix, and the tendency of the iteration to diverge from many starting points. There are different {term}`quasi-Newton methods` that modify the basic idea in an attempt to overcome these issues.
 
 ## Jacobian by finite differences
 
@@ -79,7 +80,7 @@ Recall that the Newton iteration is derived by solving the linear model implied 
   \mathbf{f}(\mathbf{x}_{k+1}) \approx \mathbf{f}(\mathbf{x}_k) + \mathbf{J}(\mathbf{x}_k)\,(\mathbf{x}_{k+1}-\mathbf{x}_k) = \boldsymbol{0}.
 ```
 
-Let $\mathbf{s}_k=\mathbf{x}_{k+1}-\mathbf{x}_k$  be the Newton step. Let $\mathbf{y}_k=\mathbf{f}(\mathbf{x}_k)$, and now we replace $\mathbf{J}(\mathbf{x}_k)$ by a matrix $\mathbf{A}_{k}$ that is meant to approximate the Jacobian. Hence, the Newton step is considered to be defined, as in {numref}`Algorithm {number} <algorithm-nonlineqn-newtonsys>`, by
+Let $\mathbf{s}_k=\mathbf{x}_{k+1}-\mathbf{x}_k$  be the Newton step. Let $\mathbf{y}_k=\mathbf{f}(\mathbf{x}_k)$, and now we replace $\mathbf{J}(\mathbf{x}_k)$ by a matrix $\mathbf{A}_{k}$ that is meant to approximate the Jacobian. Hence, the Newton step is considered to be defined, as in {numref}`Algorithm {number} <definition-newtonsmethodsys>`, by
 
 ```{math}
 :label: quasinewton-step
@@ -105,6 +106,7 @@ This is used to justify the following requirement:
 This isn't enough to uniquely determine $\mathbf{A}_{k+1}$. However, if we also require that $\mathbf{A}_{k+1}-\mathbf{A}_k$ is a matrix of rank 1, then one arrives at the following.
 
 ::::{prf:definition} Broyden update formula
+:label: definition-broyden
 Using the definitions above,
 
 ```{math}

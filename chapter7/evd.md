@@ -34,6 +34,7 @@ $$
 ```
 
 ::::{prf:definition} Terms for complex matrices
+:label: definition-complexmatrix
 The {term}`adjoint` or *hermitian* of a matrix $\mathbf{A}$ is denoted $\mathbf{A}^*$ and is given by $\mathbf{A}^*=(\overline{\mathbf{A}})^T=\overline{\mathbf{A}^T}$. The matrix is **self-adjoint** or {term}`hermitian` if $\mathbf{A}^*=\mathbf{A}$.
 
 The **2-norm** of a complex vector $\mathbf{u}$ is $\sqrt{\mathbf{u}^*\mathbf{u}}$. Other vector norms, and all matrix norms, are as defined in {numref}`section-linsys-norms`.
@@ -180,6 +181,7 @@ If the $n\times n$ matrix $\mathbf{A}$ has $n$ distinct eigenvalues, then $\math
 The particular relationship between matrices $\mathbf{A}$ and $\mathbf{D}$ in {eq}`evdecomp` is important. 
 
 :::{prf:definition} Similar matrices
+:label: definition-similar
 If $\mathbf{S}$ is any nonsingular matrix, we say that $\mathbf{B}=\mathbf{S}\mathbf{A}\mathbf{S}^{-1}$ is a {term}`similarity transformation` of $\mathbf{A}$, and we say that $\mathbf{A}$ and $\mathbf{B}$ are {term}`similar matrices`.
 :::
 
@@ -266,7 +268,8 @@ The Bauer–Fike theorem tells us that eigenvalues can be perturbed by an amount
 ```
 
 ::::{prf:definition} Normal matrix
-If $\mathbf{A}$ has an EVD {eq}`evdecomp` with a unitary eigenvector matrix $\mathbf{V}$, then $\mathbf{A}$ is a {term}`normal matrix`. 
+:label: definition-normalmatrix
+If $\mathbf{A}$ has an EVD {eq}`evdecomp` with a unitary eigenvector matrix $\mathbf{V}$, then $\mathbf{A}$ is a {term}`normal matrix`.
 ::::
 
 As we will see in {numref}`section-matrixanaly-symm-eig`, hermitian and real symmetric matrices are normal. Since the condition number of a unitary matrix is equal to 1, {eq}`bauerfike` guarantees that a perturbation of a normal matrix changes the eigenvalues by the same amount or less.

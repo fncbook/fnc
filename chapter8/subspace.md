@@ -182,6 +182,7 @@ The vectors $\mathbf{q}_1,\dots, \mathbf{q}_m$ are an orthonormal basis for the 
 ```
 
 ::::{prf:definition} Upper Hessenberg matrix
+:label: definition-upperhessenberg
 A matrix $\mathbf{H}$ is an {term}`upper Hessenberg matrix` if $H_{ij}=0$ whenever $i>j+1$.
 ::::
 

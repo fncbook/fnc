@@ -10,16 +10,18 @@ An important aspect of MINRES and CG (and, by extension, GMRES) is that the conv
 ```{index} GMRES; preconditioning in, ! preconditioning
 ```
 
-::::{prf:definition} Preconditioning
-Given a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, a **preconditioner** is a matrix $\mathbf{M}$ or equivalent linear transformation that modifies the system to be
+::::{prf:definition} Preconditioner
+:label: definition-preconditioner
+Given a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, a {term}`preconditioner` is a matrix $\mathbf{M}$ or equivalent linear transformation that modifies the system to be
 
 :::{math}
 :label: precond
 (\mathbf{M}^{-1} \mathbf{A}) \mathbf{x} = \mathbf{M}^{-1}\mathbf{b}.
 :::
+
 ::::
  
-More specifically, {eq}`precond` is known as *left preconditioning*, but it is the simplest and most common type.
+More specifically, {eq}`precond` is known as *left preconditioning*, which is the simplest and most common type.
 
 As usual, we do not want to actually compute $\mathbf{M}^{-1}$ for a given $\mathbf{M}$. Instead, we have a linear system with the matrix $\mathbf{M}^{-1}\mathbf{A}$. In a Krylov method, the operation "let $\mathbf{v}=\mathbf{A}\mathbf{u}$" becomes a two-step process:
 

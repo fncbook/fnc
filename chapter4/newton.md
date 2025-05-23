@@ -3,12 +3,14 @@ numbering:
   enumerator: 4.3.%s
 ---
 (section-nonlineqn-newton)=
+
 # Newton's method
 
 Newton's method is the cornerstone of rootfinding. We introduce the key idea with an example in @demo-newton-line.
 
 ::::{prf:example} Graphical interpretation of Newton's method
 :label: demo-newton-line
+
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -28,6 +30,7 @@ Newton's method is the cornerstone of rootfinding. We introduce the key idea wit
 :::
 ```` 
 `````
+
 ::::
 
 Using general notation, if we have a root approximation $x_k$, we can construct a **linear model** of $f(x)$ using the classic formula for the tangent line of a differentiable function,
@@ -42,14 +45,16 @@ Finding the root of $q(x)=0$ is trivial. We define the next approximation by the
 ```{index} ! Newton's method
 ```
 
-::::{prf:algorithm} Newton's method
-:label: algorithm-nonlineqn-newton
+::::{prf:definition} Newton's method
+:label: definition-newtonsmethod
 Given a function $f$, its derivative, $f'$, and an initial value $x_1$, iteratively define
 
 ```{math}
 :label: newton
   x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)}, \qquad k=1,2,\ldots.
 ```
+
+Return the sequence $\{x_k\}$.
 ::::
 
 ## Convergence
@@ -101,6 +106,7 @@ Asymptotically, each iteration of Newton's method roughly squares the error.
 ```
 
 ::::{prf:definition} Quadratic convergence
+:label: definition-quadraticconvergence
 Suppose a sequence $x_k$ approaches limit $x^*$. If the error sequence $\epsilon_k=x_k - x^*$ satisfies
 
 ```{math}
@@ -123,6 +129,7 @@ Recall that linear convergence is identifiable by trending toward a straight lin
 
 ::::{prf:example} Convergence of Newton's method
 :label: demo-newton-converge
+
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -142,6 +149,7 @@ Recall that linear convergence is identifiable by trending toward a straight lin
 :::
 ```` 
 `````
+
 ::::
 
 ```{index} roots; multiplicity of
@@ -187,7 +195,6 @@ Our implementation of Newton's iteration is given in {numref}`Function {number} 
 `````
 ``````
 
-
 ```{index} backward error, residual
 ```
 
@@ -195,6 +202,7 @@ Our implementation of Newton's iteration is given in {numref}`Function {number} 
 
 ::::{prf:example} Using Newton's method
 :label: demo-newton-usage
+
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -214,6 +222,7 @@ Our implementation of Newton's iteration is given in {numref}`Function {number} 
 :::
 ```` 
 `````
+
 ::::
 
 ## Exercises

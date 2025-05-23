@@ -44,7 +44,8 @@ Numerical integration, which also goes by the older name *quadrature*, is perfor
 ```
 
 ::::{prf:definition} Numerical integration formula
-A **numerical integration** formula is a list of **weights** $w_0,\ldots,w_n$ chosen so that for all $f$ in some class of functions,
+:label: definition-integrationformula
+A {term}`numerical integration formula` is a list of **weights** $w_0,\ldots,w_n$ chosen so that for all $f$ in some class of functions,
 
 ```{math}
 :label: quadrature
@@ -96,7 +97,8 @@ Putting everything together, the resulting formula is
 ```
 
 ::::{prf:definition} Trapezoid formula
-The **trapezoid formula** is a numerical integration formula in the form {eq}`quadrature`, with
+:label: definition-trapezoidint
+The {term}`trapezoid formula` is a numerical integration formula in the form {eq}`quadrature`, with
 
 $$
 w_i = \begin{cases}
@@ -147,14 +149,15 @@ Like finite-difference formulas, numerical integration formulas have a truncatio
 ```
 
 ::::{prf:definition} Truncation error of a numerical integration formula
-For the numerical integration formula {eq}`quadrature`, the **truncation error** is
+:label: definition-truncationint
+For the numerical integration formula {eq}`quadrature`, the {term}`truncation error` is
 
 ```{math}
 :label: truncint
 \tau_f(h) = \int_a^b f(x) \, dx - h \sum_{i=0}^{n} w_i f(t_i).
 ```
 
-The **order of accuracy** is as defined in {numref}`Definition {number} <definition-fd-converge-ooa>`.
+The {term}`order of accuracy` is as defined in {numref}`Definition {number} <definition-orderfd>`.
 ::::
 
 In @theorem-pwlin-converge we stated that the pointwise error in a piecewise linear interpolant with equal node spacing $h$ is bounded by $O(h^2)$ as $h\rightarrow 0$. Using $I$ to stand for the exact integral of $f$ and $p$ to stand for the piecewise linear interpolant, we obtain
@@ -209,6 +212,7 @@ The trapezoid integration formula is second-order accurate.
 ::::
 
 (section-integration-extrapolation)=
+
 ## Extrapolation
 
 If evaluations of $f$ are computationally expensive, we want to get as much accuracy as possible from them by using a higher-order formula. There are many routes for doing so; for example, we could integrate a not-a-knot cubic spline interpolant. However, splines are difficult to compute by hand, and as a result different methods were developed before computers came on the scene.
@@ -283,7 +287,6 @@ which is sixth-order accurate. Clearly the process can be repeated to get eighth
 ## Node doubling
 
 Note in {eq}`nc-sixth` that $R_f(4n)$ depends on $S_f(2n)$ and $S_f(4n)$, which in turn depend on $T_f(n)$, $T_f(2n)$, and $T_f(4n)$.  There is a useful benefit realized by doubling of the nodes in each application of the trapezoid formula. As shown in {numref}`figure-node-doubling`, when doubling $n$, only about half of the nodes are new ones, and previously computed function values at the other nodes can be reused.
-
 
 ```{figure} figures/node-doubling.svg
 :name: figure-node-doubling

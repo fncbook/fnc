@@ -12,8 +12,8 @@ Advection phenomena are characterized by the transport of information at finite 
 ```
 
 ::::{prf:definition} Domain of dependence
-:label: definition-upwind-domdep
-Let $u(x,t)$ be the solution of an evolutionary PDE with initial condition $u_0(x)$. The  **domain of dependence** of the solution at $(x,t)$ is the set of all $s$ such that $u_0(s)$ can possibly affect $u(x,t)$.
+:label: definition-domaindependence
+Let $u(x,t)$ be the solution of an evolutionary PDE with initial condition $u_0(x)$. The **domain of dependence** of the solution at $(x,t)$ is the set of all $s$ such that $u_0(s)$ can possibly affect $u(x,t)$.
 ::::
 
 ```{index} advection equation
@@ -33,7 +33,7 @@ The heat equation $u_t = u_{xx}$ has a solution that, at any positive time $t$, 
 Any numerical method we choose to solve a PDE has analogous property.
 
 ::::{prf:definition} Numerical domain of dependence
-:label: definition-upwind-numdomdep
+:label: definition-domaindependencenum
 Let a numerical method be used to solve an evolutionary PDE on a grid, such that $U_{i,j}$ is the approximate solution at $x=x_i$, $t=t_j$. The **numerical domain of dependence** of the method at $(x_i,t_j)$ is the set of all $x_k$ such that the initial data $U_{k,0}$ can possibly affect $U_{i,j}$.
 ::::
 
@@ -150,6 +150,7 @@ The advection equation allows information to propagate in only one direction. Th
 ```
 
 ````{prf:definition} Upwind direction
+:label: definition-upwind
 If the domain of dependence at $(x,t)$ always lies to one side of $x$, that side is called the **upwind direction** of the PDE, and the other direction is called the **downwind direction**.
 ````
 

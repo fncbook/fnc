@@ -3,6 +3,7 @@ numbering:
   enumerator: 10.2.%s
 ---
 (section-bvp-shooting)=
+
 # Shooting
 
 One way to attack the TPBVP {eq}`tpbvp` is to adapt our IVP solving techniques from [Chapter 6](../ivp/overview.md) to it. Those techniques work only when we know the entire initial state, but we can allow that state to vary in order to achieve the stated conditions. 
@@ -47,8 +48,8 @@ We turn this into an IVP by specifying $y(a)=s_1$, $y'(a)=s_2$, for a vector $\m
 :::{math}
 :label: shoot-resid
 \begin{split}
-v_1(s_1,s_2) &= g_1(y_1(a),y_2(a)) = g_1(s_1,s_2),\\ 
-v_2(s_1,s_2) &= g_2(y_1(b),y_2(b)).
+v_1(s_1, s_2) &= g_1(y_1(a), y_2(a)) = g_1(s_1, s_2),\\ 
+v_2(s_1, s_2) &= g_2(y_1(b), y_2(b)).
 \end{split}
 :::
 

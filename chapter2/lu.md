@@ -138,7 +138,14 @@ These two calculations are enough to derive one of the most important algorithms
 ```{index} ! unit lower triangular matrix
 ```
 
-Our goal is to factor a given $n\times n$ matrix $\mathbf{A}$ as the triangular product $\mathbf{A}=\mathbf{L}\mathbf{U}$. It turns out that we have $n^2+n$ total nonzero unknowns in the two triangular matrices, so we set $L_{11}=\cdots = L_{nn}=1$, making $\mathbf{L}$ a **unit lower triangular** matrix.
+Our goal is to factor a given $n\times n$ matrix $\mathbf{A}$ as the triangular product $\mathbf{A}=\mathbf{L}\mathbf{U}$. It turns out that we have $n^2+n$ total nonzero unknowns in the two triangular matrices, so we choose $n$ of them arbitrarily as follows.
+
+```{prf:definition} Unit triangular matrix
+:label: definition-unittraiangular
+A {term}`unit triangular matrix` $\mathbf{T}$ of size $n\times n$ is triangular and satisfies $T_{11}=\cdots = T_{nn}=1$. 
+```
+
+We will require that $\mathbf{L}$ be a unit lower triangular matrix.
 
 ::::{prf:example} LU factorization
 :label: demo-lu-derive
@@ -173,7 +180,7 @@ We have arrived at the linchpin of solving linear systems.
 Given $n\times n$ matrix $\mathbf{A}$, its **LU factorization** is
 
 :::{math}
-:label: definition-lu
+:label: eq-lu
 \mathbf{A} = \mathbf{L}\mathbf{U},
 :::
 
@@ -196,7 +203,6 @@ The outer product algorithm for LU factorization seen in @demo-lu-derive is code
 :::{embed} #function-lufact-matlab
 :::
 ```` 
-
 
 ````{tab-item} Python
 :sync: python

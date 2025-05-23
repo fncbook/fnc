@@ -11,6 +11,7 @@ For the time being we will focus on the **rootfinding problem** for single funct
 ```
 
 ```{prf:definition} Rootfinding problem
+:label: definition-rootproblem
 Given a continuous scalar function $f$ of a scalar variable, find a real number $r$, called a **root**, such that $f(r)=0$.
 ```
 
@@ -116,7 +117,8 @@ Equivalently, {eq}`rootcondnum` is just the magnitude of the derivative of the i
 We must accept that when $|f'|$ is small at the root, it may not be possible to get a small error in a computed root estimate. As always, the error is not a quantity we can compute without knowing the exact answer. There is something else we can measure, though.
 
 ::::{prf:definition} Rootfinding residual
-If $\tilde{r}$ approximates a root $r$ of function $f$, then the **residual** at $\tilde{r}$ is $f(\tilde{r})$.
+:label: definition-residual
+If $\tilde{r}$ approximates a root $r$ of function $f$, then the {term}`residual` at $\tilde{r}$ is $f(\tilde{r})$.
 ::::
 
 It stands to reason that a small residual might be associated with a small error. To quantify the relationship, let $\tilde{r}$ approximate root $r$, and define the new function $g(x)=f(x)-f(\tilde{r})$. Trivially, $g(\tilde{r})=0$, meaning that $\tilde{r}$ is a true root of $g$. Since the difference $g(x)-f(x)$ is the residual value $f(\tilde{r})$, the residual is the distance to an exactly solved rootfinding problem. 

@@ -19,7 +19,7 @@ Two vectors $\mathbf{u}$ and $\mathbf{v}$ in $\mathbb{R}^n$ are {term}`orthogona
 i \neq j \quad \Rightarrow \quad \mathbf{q}_i^T\mathbf{q}_j = 0.
 ```
 
-If {eq}`orthogonality` applies and also $\mathbf{q}_i^T\mathbf{q}_i=1$ for all $i=1,\ldots,n$, we say the vectors are **orthonormal**.
+If {eq}`orthogonality` applies and also $\mathbf{q}_i^T\mathbf{q}_i=1$ for all $i=1,\ldots,n$, we say they are {term} `orthonormal vectors`.
 ::::
 
 ```{index} inner product
@@ -118,7 +118,6 @@ An {term}orthogonal matrix` is a square matrix with orthonormal columns.
 Orthogonal matrices have properties beyond @theorem-qr-ONC. 
 
 [^ortho]: Confusingly, a square matrix whose columns are orthogonal is not necessarily an orthogonal matrix; the columns must be orthonormal, which is a stricter condition.
-
 
 ````{prf:theorem} Orthogonal matrix
 :label: theorem-qr-orthogmatrix

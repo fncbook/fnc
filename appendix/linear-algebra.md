@@ -38,7 +38,10 @@ The **diagonal** (more specifically, *main diagonal*) of an $n\times n$ matrix $
 ```{index} ! triangular matrix, ! diagonal matrix
 ```
 
+```{prf:definition} Diagonal and triangular matrices
+:label: definition-diagonalmatrix
 A **diagonal matrix** is one whose entries are all zero off the main diagonal.  An **upper triangular matrix** $\mathbf{U}$ has entries $U_{ij}$ with $U_{ij}=0$ if $i>j$, and a **lower triangular matrix** $\mathbf{L}$ has $L_{ij}=0$ if $i<j$.
+```
 
 ```{index} ! transpose
 ```

@@ -110,6 +110,8 @@ In Python, the `numpy.linalg.solve` function is used to solve linear systems.
 `````
 ::::
 
+(section-linsys-triangular)=
+
 ## Triangular systems
 
 ```{index} triangular matrix

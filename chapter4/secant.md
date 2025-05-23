@@ -45,12 +45,13 @@ The example in @demo-secant-line demonstrates the {term}`secant method`. In the 
 q(x) = f(x_k) + \frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}(x-x_k).
 ```
 
-Solving $q(x_{k+1})=0$ for $x_{k+1}$ gives the iteration formula.
+Solving $q(x_{k+1})=0$ for $x_{k+1}$ gives the following iteration formula.
 
 ```{index} ! secant method
 ```
 
-:::{prf:algorithm} Secant iteration
+:::{prf:definition} Secant method
+:label: definition-secant
 Given function $f$ and two initial values $x_1$ and $x_2$, define
 
 ```{math}
@@ -58,6 +59,7 @@ Given function $f$ and two initial values $x_1$ and $x_2$, define
 x_{k+1} = x_k - \frac{f(x_k)(x_k-x_{k-1})}{f(x_k)-f(x_{k-1})}, \quad k=2,3,\ldots.
 ```
 
+Return the sequence $\{x_k\}$.
 :::
 
 Our implementation of the secant method is given in {numref}`Function {number} <function-secant>`.
@@ -124,7 +126,7 @@ for an unknown constant $C$. Treating the approximation as an equality, this bec
 Hence, the errors in the secant method converge like $\epsilon_{k+1} = c (\epsilon_k)^\alpha$  for $1<\alpha<2$.
 
 ::::{prf:definition} Superlinear convergence
-:label: definition-superlinear-convergence
+:label: definition-superlinearconvergence
 Suppose a sequence $x_k$ approaches limit $x^*$. If the error sequence $\epsilon_k=x_k - x^*$ satisfies
 
 ```{math}

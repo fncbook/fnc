@@ -54,11 +54,12 @@ We now consider the counterpart of this observation for the solution produced by
 ```
 
 ::::{prf:definition} Absolute stability
-:label: definition-absstab-model
-Let $\lambda$ be a complex number, and let $y_0,y_1,y_2,\ldots,y_n$ be the numerical solution at times $0,\tau,2\tau,\ldots,n\tau$ of {eq}`absstabmodel` using a Runge–Kutta or multistep method with fixed stepsize $\tau$. Then the method is said to be **absolutely stable** at $\zeta = \tau\lambda$ if $|y_n|$ is bounded above as $n\to\infty$. 
+:label: definition-absolutestability
+Let $\lambda$ be a complex number, and let $y_0,y_1,y_2,\ldots,y_n$ be the numerical solution at times $0,\tau,2\tau,\ldots,n\tau$ of {eq}`absstabmodel` using a Runge–Kutta or multistep method with fixed stepsize $\tau$. Then the method is said to have {term}`absolute stability` at $\zeta = \tau\lambda$ if $|y_n|$ is bounded above as $n\to\infty$. 
 ::::
 
 The fact that absolute stability depends only on the product $\zeta = \tau\lambda$, and not independently on the individual factors, is a result of how the IVP solvers are defined, as we will see below. Since $\lambda$ has units of inverse time according to {eq}`absstabmodel`, $\zeta$ is dimensionless.
+
 ## Stability regions
 
 Each numerical IVP solver has its own collection of $\zeta$ values for which it is absolutely stable.
@@ -67,7 +68,8 @@ Each numerical IVP solver has its own collection of $\zeta$ values for which it 
 ```
 
 ::::{prf:definition} Stability region
-The **stability region** of an IVP solver is the collection of all $\zeta\in\complex$ for which the method is absolutely stable.
+:label: definition-stabilityregion
+The {term}`stability region` of an IVP solver is the collection of all $\zeta\in\complex$ for which the method is absolutely stable.
 ::::
 
 ::::{prf:example}

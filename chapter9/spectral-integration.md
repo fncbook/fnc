@@ -168,6 +168,7 @@ Since there are $n$ nodes and $n$ weights available to choose, it seems plausibl
 
 ```{index} ! Gaussian integration
 ```
+
 If these conditions are satisfied, the resulting method is called **Gauss–Legendre integration** or simply **Gaussian integration**. Because the integration formula is linear, i.e., $Q_n[\alpha p + q] = \alpha Q_n[p] + Q_n[q]$, it is sufficient to show that $Q_n$ gets the exact value for the monomials $1,x,x^2,\ldots,x^{2n-1}.$
 
 ::::{prf:example}

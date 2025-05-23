@@ -3,12 +3,13 @@ numbering:
   enumerator: 8.1.%s
 ---
 (section-krylov-structure)=
+
 # Sparsity and structure
 
 ```{index} ! sparse matrix
 ```
 
-Very large matrices cannot be stored all within primary memory of a computer unless they are **sparse**. A sparse matrix has *structural zeros*, meaning entries that are known to be exactly zero.} For instance, the adjacency matrix of a graph has zeros where there are no links in the graph. To store and operate with a sparse matrix efficiently, it is not represented as an array of all of its values. There is a variety of sparse formats available; for the most part, you can imagine that the matrix is stored as triples $(i,j,A_{ij})$ for all the nonzero $(i,j)$ locations.
+Very large matrices cannot be stored all within primary memory of a computer unless they are **sparse**. A sparse matrix has *structural zeros*, meaning entries that are known to be exactly zero. For instance, the adjacency matrix of a graph has zeros where there are no links in the graph. To store and operate with a sparse matrix efficiently, it is not represented as an array of all of its values. There is a variety of sparse formats available; for the most part, you can imagine that the matrix is stored as triples $(i,j,A_{ij})$ for all the nonzero $(i,j)$ locations.
 
 ## Computing with sparse matrices
 
@@ -40,7 +41,6 @@ Most graphs with real applications have many fewer edges than the maximum possib
 `````
 ::::
 
-
 ```{index} fill-in of sparse matrices
 ```
 
@@ -68,7 +68,6 @@ Arithmetic operations such as `+`, `-`, `*`, and `^` respect and exploit sparsit
 ````
 `````
 ::::
-
 
 ## Banded matrices
 
@@ -104,7 +103,6 @@ Without pivoting, an LU factorization preserves bandwidth, but pivoting can chan
 ````
 `````
 ::::
-
 
 ## Systems and eigenvalues
 

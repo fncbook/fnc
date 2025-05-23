@@ -3,6 +3,7 @@ numbering:
   enumerator: 6.1.%s
 ---
 (section-ivp-basics)=
+
 # Basics of IVPs
 
 ```{index} ! initial-value problem
@@ -38,12 +39,12 @@ for some $k>0$. The solution of this linear equation is $u(t)=e^{kt}u_0$, which 
 
 A more realistic model would cap the growth due to finite resources. Suppose the death rate is proportional to the size of the population, indicating competition. Then
 
+```{index} ! logistic equation
+```
+
 ```{math}
 :label: logistic
   \frac{d u}{d t} = ku - ru^2, \qquad u(0)=u_0.
-```
-
-```{index} ! logistic equation
 ```
 
 This is the **logistic equation**. Although crude, it is still useful in population models.  The solution relevant for population models has the form

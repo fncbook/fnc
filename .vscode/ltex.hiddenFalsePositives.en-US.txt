@@ -45,3 +45,5 @@
 {"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q(algorithm-\\E.*$"}
 {"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q(section-\\E.*$"}
 {"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q^\\E.*:.*$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"\\Q:label: \\E.*$"}
+{"rule":"PLURAL_VERB_AFTER_THIS","sentence":"^\\QSuppose, after computing the step suggested by the linear model, we ask a binary question: Would taking that step improve our situation?\\E$"}

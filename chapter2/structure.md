@@ -3,18 +3,32 @@ numbering:
   enumerator: 2.9.%s
 ---
 (section-linsys-structure)=
+
 # Exploiting matrix structure
 
-A common situation in computation is that a problem has certain properties or structure that can be used to get a faster or more accurate solution. There are many properties of a matrix that can affect LU factorization. For example, an $n \times n$ matrix $A$ is **diagonally dominant** if
+A common situation in computation is that a problem has certain properties or structure that can be used to get a faster or more accurate solution. There are many properties of a matrix that can affect LU factorization. Here is an easy one to check.
+
+:::{prf:definition} Diagonally dominant matrix
+:label: definition-diagdom
+An $n \times n$ matrix $\mathbf{A}$ is **diagonally dominant** if
 
 ```{math}
 :label: diag-dominant
   |A_{ii}| > \sum_{\substack{j=1\\ j \neq i}}^{n} |A_{ij}| \hskip 0.25in \text{for each } i=1,\ldots,n.
 ```
 
-It turns out that a diagonally dominant matrix is guaranteed to be invertible, and row pivoting is not required for stability.
+:::
 
-We next consider three important types of matrices that cause the LU factorization to be specialized in some important way.
+Diagonal dominance has a computationally useful implication.
+
+:::{prf:theorem} Diagonally dominant matrix
+:label: theorem-diagdom
+A diagonally dominant matrix is invertible, and row pivoting is not required for the stability of its LU factorization.
+:::
+
+We next consider three other types of matrices that cause the LU factorization to be specialized in some important way.
+
+(section-structure-banded)=
 
 ## Banded matrices
 
@@ -23,12 +37,13 @@ We next consider three important types of matrices that cause the LU factorizati
 
 ::::{prf:definition} Bandwidth
 :label: definition-bandwidth
-A matrix $\mathbf{A}$ has **upper bandwidth** $b_u$ if $j-i > b_u$ implies $A_{ij}=0$, and **lower bandwidth** $b_\ell$ if $i-j > b_\ell$ implies $A_{ij}=0$. We say the total {term}`bandwidth` is $b_u+b_\ell+1$. When $b_u=b_\ell=1$, we have the important case of a **tridiagonal matrix**. 
+A matrix $\mathbf{A}$ has **upper bandwidth** $b_u$ if $j-i > b_u$ implies $A_{ij}=0$, and **lower bandwidth** $b_\ell$ if $i-j > b_\ell$ implies $A_{ij}=0$. We say the total {term}`bandwidth` is $b_u+b_\ell+1$. When $b_u=b_\ell=1$, we have the important case of a {term}`tridiagonal matrix`.
 ::::
 
 ::::{prf:example} Banded matrices
 :label: demo-structure-banded
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-structure-banded-julia
@@ -47,8 +62,8 @@ A matrix $\mathbf{A}$ has **upper bandwidth** $b_u$ if $j-i > b_u$ implies $A_{i
 :::
 ```` 
 `````
-::::
 
+::::
 
 ```{index} pivoting
 ```
@@ -69,7 +84,7 @@ In order to exploit the savings offered by sparsity, we would need to make modif
 ```{index} symmetric matrix
 ```
 
-Recall from @definition-symmetric-matrix is a square matrix $\mathbf{A}$ satisfying $\mathbf{A}^T = \mathbf{A}$. Symmetric matrices arise frequently in applications because many types of interactions, such as gravitation and social-network befriending, are inherently symmetric. Symmetry in linear algebra simplifies many properties and algorithms. As a rule of thumb, if your matrix has symmetry, you want to exploit and preserve it. 
+Recall from @definition-symmetric-matrix that a symmetric matrix is a square matrix $\mathbf{A}$ satisfying $\mathbf{A}^T = \mathbf{A}$. Symmetric matrices arise frequently in applications because many types of interactions, such as gravitation and social-network befriending, are inherently symmetric. Symmetry in linear algebra simplifies many properties and algorithms. As a rule of thumb, if your matrix has symmetry, you want to exploit and preserve it.
 
 In $\mathbf{A}=\mathbf{L}\mathbf{U}$ we arbitrarily required the diagonal elements of $\mathbf{L}$, but not $\mathbf{U}$, to be one. That breaks symmetry, so we need to modify the goal to
 
@@ -122,6 +137,7 @@ LDL$^T$ factorization on an $n \times n$ symmetric matrix, when successful, take
 Just as pivoting is necessary to stabilize LU factorization, the LDL$^T$ factorization without pivoting may be unstable or even fail to exist. We won't go into the details, because our interest is in specializing the factorization to matrices that also possess another important property.
 
 (sec-SPD)=
+
 ## Symmetric positive definite matrices
 
 Suppose that $\mathbf{A}$ is $n\times n$ and $\mathbf{x}\in\mathbb{R}^n$. Observe that $\mathbf{x}^T\mathbf{A}\mathbf{x}$ is the product of $1\times n$, $n\times n$, and $n\times 1$ matrices, so it is a scalar, sometimes referred to as a **quadratic form**. It can be expressed as

@@ -111,7 +111,7 @@ For another function $g\in S$, define the adjoint product
 ::::{prf:definition} Gram matrix
 :label: definition-grammatrix
 
-Given functions $f_1,\ldots,f_n$ in inner product space $S$, their {term}`Gram matrix` is the $n\times n$ matrix
+Given functions $f_1,\ldots,f_n$ in inner product space $S$, their **Gram matrix** is the $n\times n$ matrix
 
 :::{math}
 :label: Gram
@@ -246,7 +246,7 @@ For what follows, let $\mathcal{P}_n \subset S$ be the set of polynomials of deg
 ```
 
 ::::{prf:definition} Legendre polynomials
-:label: definition-orthogonal-legendre
+:label: definition-legendrepoly
 The **Legendre polynomials** are 
 
 :::{math}
@@ -316,6 +316,7 @@ for a positive function $w(x)$ called the **weight function** of the inner produ
 ```
 
 ::::{prf:definition} Chebyshev polynomials
+:label: definition-chebyshevpoly
 The **Chebyshev polynomials** are defined by
 
 :::{math}

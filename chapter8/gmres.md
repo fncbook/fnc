@@ -137,6 +137,8 @@ Unfortunately, making other conclusive statements about the convergence of GMRES
 ```{index} ! GMRES; restarting
 ```
 
+(section-gmres-restart)=
+
 ## Restarting
 
 One of the practical challenges in GMRES is that as the dimension of the Krylov subspace grows, the number of new entries to be found in $\mathbf{H}_m$ and the total number of basis vectors grow, too. Consequently, both the work and the storage requirements are quadratic in $m$, which can become intolerable in some applications. For this reason, GMRES is often used with **restarting**.

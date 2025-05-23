@@ -1,6 +1,9 @@
 # Glossary
 
 :::{glossary}
+absolute stability
+: Boundedness of the numerical solution of a linear IVP as $t\to\infty$. (@definition-absolutestability)
+
 adjacency matrix
 : Matrix whose nonzero entries show the links between nodes in a graph. (@definition-adjacency-matrix)
 
@@ -8,7 +11,10 @@ adjoint
 : Conjugate transpose of a complex matrix. (@definition-adjoint)
 
 advection equation
-: Archetypical PDE of hyperbolic type, representing transport phenomena. (@definition-advection-equation)
+: Archetypical PDE of hyperbolic type, representing transport phenomena. (@definition-advectionequation)
+
+algebraic convergence
+: Sequence in which the difference between sequence value and limit asymptotically decreases as an integer power of a step size or a number of nodes, appearing as a straight line on a log-log convergence plot. (@definition-algebraicconvergence)
 
 algorithm
 : List of instructions for transforming data into a result. (@section-intro-algorithms)
@@ -38,7 +44,7 @@ boundary-value problem
 : A differential equation with which partial information about the solution is given at multiple points on the boundary of the domain. (@definition-tpbvp)
 
 cardinal function
-: Interpolating function that is 1 at one node and 0 at all the others. (@definition-cardinal-function)
+: Interpolating function that is 1 at one node and 0 at all the others. (@definition-cardinalfunction)
 
 Cholesky factorization
 : Symmetrized version of LU factorization for SPD matrices. (@theorem-cholesky-factorization)
@@ -50,7 +56,7 @@ condition number
 : Ratio of the size of change in the output of a function to the size of change in the input that produced it. (@definition-condition-number)
 
 cubic spline
-: Piecewise cubic function with two globally continuous derivatives, most often used for interpolation or approximation. (@definition-cubic-spline)
+: Piecewise cubic function with two globally continuous derivatives, most often used for interpolation or approximation. (@definition-cubicspline)
 
 diagonalizable matrix
 : Matrix that admits an eigenvalue decomposition. Also known as *nondefective*. (@definition-evd)
@@ -61,8 +67,11 @@ differentiation matrix
 Dirichlet condition
 : Boundary condition specifying the value of the solution. (@definition-bctypes)
 
+domain of dependence
+: Part of a PDE domain that can potentially influence the solution at a given point. (@definition-domaindependence, @definition-domaindependencenum)
+
 dominant eigenvalue
-: Eigenvalue with the largest magnitude (absolute value, in the real case). (@definition-dominant-eigenvalue)
+: Eigenvalue with the largest magnitude (absolute value, in the real case). (@definition-dominanteigenvalue)
 
 double precision
 : Typical standard in floating-point representation, using 64 bits to achieve about 16 decimal significant digits of precision. @doubleprec
@@ -80,13 +89,13 @@ Euler's method
 : Prototype of all IVP solution methods, obtained by assuming constant derivatives for the solution over short time intervals. (@definition-eulerivp)
 
 evolutionary PDE
-: A partial differential equation in which one of the independent variables is time or a close analog. (@definition-evolutionary-pde)
+: A partial differential equation in which one of the independent variables is time or a close analog. (@definition-evolutionarypde)
 
 extrapolation
 : Use of multiple discretization values to cancel out leading terms in an error expansion. (@section-integration-extrapolation)
 
 finite-difference formula
-: Linear combination of function values that approximates the value of a derivative of the function at a point. (@definition-finite-difference)
+: Linear combination of function values that approximates the value of a derivative of the function at a point. (@definition-finitedifference)
 
 finite element method (FEM)
 : Use of piecewise integration to pose a linear system of equations for the approximate solution of a boundary-value problem. (@section-galerkin-fem)
@@ -108,6 +117,9 @@ forward substitution
 
 Frobenius norm
 : Matrix norm computed by applying the vector 2-norm to a vector interpretation of the matrix. (@definition-frobenius)
+
+Galerkin conditions
+: Integration conditions that can be used to define an approximate solution of a BVP. @galerkin
 
 Gauss–Newton method
 : Generalization of Newton's method for nonlinear least squares. (@definition-gaussnewton)
@@ -212,37 +224,37 @@ multistep
 : Formula using information over more than a single time step to advance the solution. (@definition-multistep)
 
 Neumann condition
-: Boundary condition specifying the derivative of the solution. (@section-bvp-tpbvp)
+: Boundary condition specifying the derivative of the solution. (@definition-bctypes)
 
 Newton's method
-: Rootfinding iteration that uses the linearization of the given function in order to define the next root approximation. (@section-nonlineqn-newton)
+: Rootfinding iteration that uses the linearization of the given function in order to define the next root approximation. (@definition-newtonsmethod)
 
 nodes
-: Values of the independent variable where an interpolant's values are prescribed. (@section-localapprox-interpolation)
+: Values of the independent variable where an interpolant's values are prescribed. (@definition-interpolation)
 
 nonlinear least-squares problem
-: Minimization of the 2-norm of the residual of a function that depends nonlinearly on a vector. (@section-nonlineqn-nlsq)
+: Minimization of the 2-norm of the residual of a function that depends nonlinearly on a vector. (@definition-nlsq)
 
 norm
 : Means of defining the magnitude of a vector or matrix. (@definition-vectornorms, @definition-frobenius, @definition-inducednorm)
 
 normal matrix
-: Matrix that has a {term}`unitary matrix` of eigenvectors in an {term}`eigenvalue decomposition`. (@section-matrixanaly-evd)
+: Matrix that has a {term}`unitary matrix` of eigenvectors in an {term}`eigenvalue decomposition`. (@definition-normalmatrix)
 
 normal equations
 : Square linear system equivalent to the linear least-squares problem. (@definition-normaleqns)
 
-numerical integration
-: Estimation of a definite integral by combining values of the integrand, rather than by finding an antiderivative. (@section-localapprox-integration)
+numerical integration formula
+: Estimation of a definite integral by combining values of the integrand, rather than by finding an antiderivative. (@definition-integrationformula)
 
 one-step IVP method
-: IVP solver that uses information from just one time level to advance to the next. (@section-ivp-euler)
+: IVP solver that uses information from just one time level to advance to the next. (@definition-ivponestep)
 
 ONC matrix
 : Matrix whose columns are orthonormal vectors. (This term is peculiar to this book.) (@definition-onc)
 
 order of accuracy
-: Leading power of the truncation error as a function of a discretization size parameter. (@section-localapprox-fd-converge, @section-localapprox-integration, @section-ivp-euler, @section-ivp-multistep)
+: Leading power of the truncation error as a function of a discretization size parameter. (@definition-algebraicconvergence, @definition-orderfd, @definition-truncationint, @definition-orderonestep, @definition-multisteplte)
 
 orthogonal vectors
 : Nonzero vectors that have an inner product of zero. (@definition-orthogonalvectors)
@@ -251,162 +263,171 @@ orthogonal matrix
 : Square ONC matrix, i.e., matrix whose transpose is its inverse. (@definition-orthogonalmatrix)
 
 orthogonal polynomials
-: Family of polynomials whose distinct members have an integral inner product equal to zero, as with Legendre and Chebyshev polynomials. (@section-globalapprox-orthogonal)
+: Family of polynomials whose distinct members have an integral inner product equal to zero, as with Legendre and Chebyshev polynomials. (@definition-legendrepoly, @definition-chebyshevpoly)
 
 orthonormal vectors
-: Vectors that are both mutually orthogonal and all of unit 2-norm. (@section-leastsq-qr)
+: Vectors that are both mutually orthogonal and all of unit 2-norm. (@definition-orthogonalvectors)
 
 outer product
-: Multiplication of two vectors resulting in a rank-1 matrix. (@section-linsys-lu)
+: Multiplication of two vectors resulting in a rank-1 matrix. @definition-outerprod
 
 overdetermined
-: Characterized by having more constraints than available degrees of freedom. (@section-leastsq-fitting)
+: Characterized by having more constraints than available degrees of freedom. (@definition-leastsq)
 
 piecewise linear
-: Function that is linear between each consecutive pair of nodes, but whose slope may jump at the nodes. (@section-localapprox-pwlin)
+: Function that is linear between each consecutive pair of nodes, but whose slope may jump at the nodes. (@definition-pwlinear)
 
 PLU factorization
 : LU factorization with row pivoting. (@definition-plu)
 
-power iteration
-: Repeated application of a matrix to a vector, followed by normalization, resulting in convergence to an eigenvector for the dominant eigenvalue. (@section-krylov-power)
+Poisson equation
+: Generalization of {term}`Laplace equation` with a nonzero forcing function. (@definition-laplace)
 
-preconditioning
-: Use of an approximate inverse to improve the convergence rate of Krylov iterations for a linear system. (@section-krylov-precond)
+power iteration
+: Repeated application of a matrix to a vector, followed by normalization, resulting in convergence to an eigenvector for the dominant eigenvalue. (@definition-poweriteration)
+
+preconditioner
+: An approximate matrix or its inverse, used to improve the convergence rate of Krylov iterations for a linear system. (@definition-preconditioner)
 
 pseudoinverse
-: Rectangular matrix that maps data to solution in the linear least-squares problem, generalizing the matrix inverse. (@section-leastsq-normaleqns)
+: Rectangular matrix that maps data to solution in the linear least-squares problem, generalizing the matrix inverse. (@definition-pseudoinverse)
 
 QR factorization
 : Representation of a matrix as the product of an orthogonal and an upper triangular matrix. (@theorem-qr-QR, @definition-thinqr)
 
 quadratic convergence
-: Sequence in which the difference between sequence value and limit asymptotically decreases by a constant times the square of the preceding difference. (@section-nonlineqn-newton)
+: Sequence in which the difference between sequence value and limit asymptotically decreases by a constant times the square of the preceding difference. (@definition-quadraticconvergence)
 
 quasi-Newton methods
 : Rootfinding methods that overcome the issues of Jacobian computation and lack of global convergence in Newton's method. (@section-nonlineqn-quasinewton)
 
 quasimatrix
-: Collection of functions (such as orthogonal polynomials) that have algebraic parallels to columns of a matrix. (@section-globalapprox-orthogonal)
+: Collection of functions (such as orthogonal polynomials) that have algebraic parallels to columns of a matrix. (@definition-quasimatrix)
 
 Rayleigh quotient
-: Function of vectors that equals an eigenvalue when given its eigenvector as input. (@section-matrixanaly-symm-eig)
+: Function of vectors that equals an eigenvalue when given its eigenvector as input. (@definition-rayleighquotient)
 
 reduced QR factorization
-: See *thin QR*.
+: See {term}`thin QR`.
 
 reduced SVD
-: See *thin SVD*.
+: See {term}`thin SVD`.
 
 residual
-: For a linear system, the difference between $\mathbf{b}$ and $\mathbf{A}\tilde{\mathbf{x}}$ for a computed solution approximation $\tilde{\mathbf{x}}$. More generally, the actual value of a quantity that is made zero by an exact solution. (@definition-linresidual, @section-nonlineqn-rootproblem)
+: For a linear system, the difference between $\mathbf{b}$ and $\mathbf{A}\tilde{\mathbf{x}}$ for a computed solution approximation $\tilde{\mathbf{x}}$. More generally, the actual value of a quantity that is made zero by an exact solution. (@definition-linresidual, @definition-residual)
 
 restarting
-: Technique used in GMRES to prevent the work per iteration and overall storage from growing uncontrollably. (@section-krylov-gmres)
+: Technique used in GMRES to prevent the work per iteration and overall storage from growing uncontrollably. (@section-gmres-restart)
 
 rootfinding problem
-: Finding the input value for a given function which makes that function zero. (@section-nonlineqn-rootproblem)
+: Finding the input value for a given function which makes that function zero. (@definition-rootproblem, @definition-vectorroot)
 
 row pivoting
-: Reordering rows during LU factorization to ensure that the factorization exists and can be computed stably. (@section-linsys-pivoting)
+: Reordering rows during LU factorization to ensure that the factorization exists and can be computed stably. (@definition-pivoting)
 
 Runge phenomenon
-: Manifestation of the instability of polynomial interpolation at equally spaced nodes as degree increases. (@section-globalapprox-stability)
+: Manifestation of the instability of polynomial interpolation at equally spaced nodes as degree increases. (@section-stability-runge)
 
 Runge–Kutta
-: One-step method for IVPs that evaluates the derivative of the solution more than once to advance a single step. (@section-ivp-rk)
+: One-step method for IVPs that evaluates the derivative of the solution more than once to advance a single step. @rk
 
 secant method
-: Scalar quasi-Newton method that uses a secant line rather than a tangent line to define a root estimate. (@section-nonlineqn-secant)
+: Scalar quasi-Newton method that uses a secant line rather than a tangent line to define a root estimate. (@definition-secant)
 
 shooting
-: Unstable technique for solving a boundary-value problem in which an initial value is sought for by a rootfinding algorithm. (@section-bvp-shooting)
+: Unstable technique for solving a boundary-value problem in which an initial value is sought for by a rootfinding algorithm. @shoot-resid
 
 similar matrices
-: Matrices that are linked by a {term}`similarity transformation`, thus sharing the same set of eigenvalues. (@section-matrixanaly-evd)
+: Matrices that are linked by a {term}`similarity transformation`, thus sharing the same set of eigenvalues. (@definition-similar)
 
 similarity transformation
-: Mapping $\mathbf{A} \mapsto \mathbf{S}\mathbf{A}\mathbf{S}^{-1}$ for an invertible $\mathbf{S}$. The transformation leaves eigenvalues, but not eigenvectors, unchanged. (@section-matrixanaly-evd)
+: Mapping $\mathbf{A} \mapsto \mathbf{S}\mathbf{A}\mathbf{S}^{-1}$ for an invertible $\mathbf{S}$. The transformation leaves eigenvalues, but not eigenvectors, unchanged. (@definition-similar)
 
 simple root
-: Root of a function at which the derivative of the function is nonzero. (@section-nonlineqn-rootproblem)
+: Root of a function at which the derivative of the function is nonzero; i.e., a root of multiplicity 1. (@definition-rootproblem-simple)
 
 singular value decomposition
-: Expression of a matrix as a product of two orthogonal/unitary matrices and a nonnegative diagonal matrix. (Abbreviated SVD.) (@section-matrixanaly-svd)
+: Expression of a matrix as a product of two orthogonal/unitary matrices and a nonnegative diagonal matrix. (Abbreviated SVD.) (@definition-svd)
 
 sparse matrix
-: Describing a matrix that has mostly zero elements for structural reasons. (@section-linsys-structure, @section-krylov-structure)
+: Describing a matrix that has mostly zero elements for structural reasons. (@section-structure-banded, @section-krylov-structure)
+
+SPD matrix
+: Matrix that is symmetric and positive definite, thereby permitting a Cholesky factorization. Correspondingly called HPD in the complex case. (@definition-SPDmatrix)
 
 spectral convergence
-: Exponentially rapid decrease in error as the number of interpolation nodes increases, e.g., as observed in Chebyshev polynomial and trigonometric interpolation. (@section-globalapprox-stability)
+: Exponentially rapid decrease in error as the number of interpolation nodes increases, e.g., as observed in Chebyshev polynomial and trigonometric interpolation. (@theorem-spectral)
 
 stability region
-: Region of the complex plane describing when numerical solution of a linear IVP is bounded as $t\to\infty$. (@section-diffusion-absstab)
+: Region of the complex plane describing when numerical solution of a linear IVP has {term}`absolute stability`. (@definition-stabilityregion)
 
 step size
-: Increment in time between successive solution values in a numerical IVP solver. (@section-ivp-euler)
+: Increment in time between successive solution values in a numerical IVP solver. @nodes-euler
 
 stiff differential equation
-: Describes an IVP in which stability is a greater restriction than accuracy for many solution methods, usually favoring the use of an implicit time stepping method. (@section-ivp-implicit, @section-diffusion-stiffness)
+: Describes an IVP in which stability is a greater restriction than accuracy for many solution methods, usually favoring the use of an implicit time stepping method. (@demo-implicit-stiff, @section-diffusion-stiffness)
 
 subtractive cancellation
-: Growth in relative error that occurs when two numbers are added/subtracted to get a result that is much smaller in magnitude than the operands; also called *loss of significance* or *cancellation error*. (@section-intro-conditioning)
+: Growth in relative error that occurs when two numbers are added/subtracted to get a result that is much smaller in magnitude than the operands; also called *loss of significance* or *cancellation error*. @condadd
 
 superlinear convergence
-: Sequence for which the convergence is asymptotically faster than any linear rate. (@definition-superlinear-convergence)
+: Sequence for which the convergence is asymptotically faster than any linear rate. (@definition-superlinearconvergence)
 
 symmetric matrix
 : Square matrix that is equal to its transpose. (@definition-symmetric-matrix)
 
-symmetric positive definite matrix
-: Matrix that is symmetric and positive definite, thereby permitting a Cholesky factorization. Correspondingly called hermitian positive definite in the complex case. (@section-linsys-structure)
-
 tensor-product domain
-: A domain that can be parameterized using variables that lay in a logical rectangle or cuboid; i.e., each variable independently varies in an interval. (@section-twodim-tensorprod)
+: A domain that can be parameterized using variables that lay in a logical rectangle or cuboid; i.e., each variable independently varies in an interval. (@definition-tensordomain)
 
-thin QR factorization
-: Variant of the QR factorization that discards information not needed to fully represent the original matrix. (@section-leastsq-qr)
+thin QR
+: Variant of the QR factorization that discards information not needed to fully represent the original matrix. (@definition-thinqr)
 
 thin SVD
-: Variant of the singular value decomposition that discards information not needed to fully represent the original matrix. (@section-matrixanaly-svd)
+: Variant of the singular value decomposition that discards information not needed to fully represent the original matrix. @thinSVD
 
 trapezoid formula
-: Numerical integration method resulting from integration of a piecewise linear interpolant. (@section-localapprox-integration, @section-ivp-multistep)
+: Numerical integration method resulting from integration of a piecewise linear interpolant. (@definition-trapezoidint, @table-adams)
 
 triangular matrix
-: Matrix that is all zero either above (for lower triangular) or below (for upper triangular) the main diagonal. (@section-linsys-linear-systems)
+: Matrix that is all zero either above (for lower triangular) or below (for upper triangular) the main diagonal. (@section-linsys-triangular, @definition-diagonalmatrix)
 
 tridiagonal matrix
-: Matrix with nonzeros only on the main diagonal and the adjacent two diagonals. (@section-linsys-structure)
+: Matrix with nonzeros only on the main diagonal and the adjacent two diagonals. (@definition-bandwidth)
 
-trigonometric interpolation
-: Interpolation of a periodic function by a linear combination of real or complex trigonometric functions. (@section-globalapprox-trig)
+trigonometric polynomial
+: Linear combination of real or complex trigonometric functions at multiples of a base frequency. (@definition-trigpoly)
 
 truncation error
-: Difference between an exact value and an approximation, such as one that truncates an infinite series. (@section-localapprox-fd-converge, @section-localapprox-integration)
+: Difference between an exact value and an approximation, such as one that truncates an infinite series. (@definition-truncationfd, @definition-truncationint, @definition-eulerlte)
 
 unit triangular matrix
-: Triangular matrix that has a 1 in every position on the main diagonal. (@section-linsys-lu)
+: Triangular matrix that has a 1 in every position on the main diagonal. (@definition-unittraiangular)
 
 unit vector
-: A vector whose norm equals 1. (@section-linsys-norms)
+: A vector whose norm equals 1. (@definition-unitvector)
 
 unitary matrix
-: Square matrix with complex-valued entries whose columns are orthonormal. (@section-matrixanaly-evd)
+: Square matrix with complex-valued entries whose columns are orthonormal. (@definition-complexmatrix)
 
 unstable
 : Allowing perturbations of the data to have much larger effects on the results than can be explained by the problem's condition number. (@section-intro-stability)
 
 upper Hessenberg matrix
-: Matrix that has nonzeros only in the upper triangle and first subdiagonal. (@section-krylov-subspace)
+: Matrix that has nonzeros only in the upper triangle and first subdiagonal. (@definition-upperhessenberg)
+
+upwind
+: Direction opposite to the flow of information in an evolutionary PDE. (@definition-upwind)
 
 Vandermonde matrix
 : Matrix whose columns are formed from elementwise powers of a given vector, important for polynomial interpolation and approximation of data. (@definition-vandermonde)
 
-weights
-: Coefficients in a linear combination of function values in a finite-difference or integration method. (@section-localapprox-finitediffs, @section-localapprox-integration, @section-globalapprox-integration)
+wave equation
+: Evolutionary PDE that allows propagation in all directions equally. @wavepde
 
-zero-stability
-: Boundedness property of multistep methods that is required for convergence. (@section-ivp-zerostability)
+weights
+: Coefficients applied within a linear combination of function values in a finite-difference or integration method. (@definition-finitedifference, @definition-integrationformula, @definition-barycentricweights)
+
+zero-stable
+: Describing a multistep method having a boundedness property that is required for convergence. (@definition-zerostability)
 
 :::

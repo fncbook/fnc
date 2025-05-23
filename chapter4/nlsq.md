@@ -16,7 +16,8 @@ After the solution of square linear systems, we generalized to the case of havin
 ```
 
 ```{prf:definition} Nonlinear least-squares problem
-Given a function $\mathbf{f}(\mathbf{x})$ mapping from $\real^n$ to $\real^m$, the **nonlinear least-squares problem** is to find $\mathbf{x}\in\real^n$ such that $\bigl\|\mathbf{f}(\mathbf{x})\bigr\|_2$ is minimized.
+:label: definition-nlsq
+Given a function $\mathbf{f}(\mathbf{x})$ mapping from $\real^n$ to $\real^m$, the {term}`nonlinear least-squares problem` is to find $\mathbf{x}\in\real^n$ such that $\bigl\|\mathbf{f}(\mathbf{x})\bigr\|_2$ is minimized.
 ```
 
 As in the linear case, we consider only overdetermined problems, where $m>n$. Minimizing a positive quantity is equivalent to minimizing its square, so we could also define the result as minimizing $\phi(\mathbf{x})=\mathbf{f}(\mathbf{x})^T\mathbf{f}(\mathbf{x})$.
@@ -80,7 +81,6 @@ As always in least-squares problems, the residual $\mathbf{f}(\mathbf{x})$ will 
 `````
 ::::
 
-
 ## Nonlinear data fitting
 
 ```{index} data fitting; nonlinear
@@ -117,7 +117,7 @@ $$w(s) = \frac{V s}{K_m + s},$$
 
 where $s$ is the concentration of a substrate. The real values $V$ and $K_m$ are parameters that are free to fit to data. For this example, we cook up some artificial data with $V=2$ and $K_m=1/2$.
 
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-nlsq-MM-julia

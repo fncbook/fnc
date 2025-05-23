@@ -87,7 +87,8 @@ Here is the crucial property that LIAF lacks.
 ```
 
 ::::{prf:definition} Zero-stability of a multistep IVP method
-A multistep method is **zero-stable** if, as $h\to 0$, every numerical solution produced by the method remains bounded throughout $a\le t_i \le b$.
+:label: definition-zerostability
+A multistep method is {term}`zero-stable` if, as $h\to 0$, every numerical solution produced by the method remains bounded throughout $a\le t_i \le b$.
 ::::
 
 Without zero-stability, any truncation or roundoff error will get exponentially amplified and eventually overwhelm convergence to the exact solution. 

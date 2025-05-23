@@ -3,10 +3,12 @@ numbering:
   enumerator: 7.5.%s
 ---
 (section-matrixanaly-dimreduce)=
+
 # Dimension reduction
 
 ```{index} singular value decomposition
 ```
+
 ```{index} dimension reduction
 ```
 

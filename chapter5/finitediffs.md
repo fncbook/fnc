@@ -4,6 +4,7 @@ numbering:
   heading_1: true
 ---
 (section-localapprox-finitediffs)=
+
 # Finite differences
 
 Now we turn to one of the most common and important applications of interpolants: finding derivatives of functions. Because differentiation is a linear operation, we will constrain ourselves to formulas that are linear in the nodal values. 
@@ -12,7 +13,7 @@ Now we turn to one of the most common and important applications of interpolants
 ```
 
 ::::{prf:definition} Finite-difference formula
-:label: definition-finite-difference
+:label: definition-finitedifference
 A {term}`finite-difference formula` is a list of values $a_{-p},\ldots,a_q$, called **weights**, such that for all $f$ in some class of functions,
 
 ```{math}

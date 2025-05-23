@@ -72,6 +72,7 @@ If we associate the left-hand side of the normal equations as $(\mathbf{A}^T\mat
 ```
 
 ::::{prf:definition} Pseudoinverse
+:label: definition-pseudoinverse
 If $\mathbf{A}\in\real^{m\times n}$  with $m>n$, its {term}`pseudoinverse` is the $n\times m$ matrix
 
 ```{math}

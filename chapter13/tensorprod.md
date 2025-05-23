@@ -7,15 +7,18 @@ numbering:
 
 As you learned when starting double integration in vector calculus, the simplest extension of an interval to two dimensions is a rectangle. We will use a particular notation for rectangles.
 
+```{index} ! tensor-product domain
+```
+
 ```{prf:definition} Tensor-product domain
+:label: definition-tensordomain
 A {term}`tensor-product domain` is two dimensions is the rectangle
+
 :::{math}
 :label: rectangleTP
   [a,b] \times [c,d] = \bigl\{ (x,y)\in\mathbb{R}^2 : a\le x \le b,\; c\le y \le d \bigr\}.
 :::
-```
 
-```{index} ! tensor-product domain
 ```
 
 ```{note}
@@ -27,6 +30,7 @@ The idea of the tensor product is that each variable independently varies over a
 The discretization of a two-dimensional tensor-product domain is straightforward.
 
 ````{prf:definition} Tensor-product grid
+:label: definition-tensorgrid
 Given discretizations of two intervals,
 
 :::{math}
@@ -59,7 +63,7 @@ A tensor-product grid (dark gray) on a rectangle constructed from discretization
 The double indexing of the grid set {eq}`rectangledisc` implies an irresistible connection to matrices. Corresponding to any function  $f(x,y)$ defined on the rectangle is an $(m+1)\times(n+1)$ matrix $\mathbf{F}$ defined by collecting the values of $f$ at the points in the grid. This transformation of a function to a matrix is so important that we give it a formal name
 
 ```{prf:definition} Function-to-matrix map
-
+:label: definition-mtx
 The function mtx maps a function $f(x,y)$ to an $(m+1)\times (n+1)$  matrix $\mathbf{F}$ by
 
 :::{math}

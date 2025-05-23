@@ -48,6 +48,7 @@ which is known as the **weak form** of the differential equation {eq}`strongbvp`
 
 ```{index} ! weak solution
 ```
+
 :::{prf:definition} Weak solution
 If $u(x)$ is a function such that {eq}`weakbvp` is satisfied for all valid choices of $\psi$, we say that $u$ is a **weak solution** of the BVP {eq}`strongbvp`. 
 :::
@@ -97,13 +98,14 @@ for $i=1,\ldots,m$. This rearranges easily into
 
 ```{index} ! Galerkin conditions
 ```
+
 :::{math}
 :label: galerkin
   \sum_{j=1}^m w_j \left[ \int_a^b c(x)\phi_i'(x)\phi_j'(x) \,dx  +
   \int_a^b s(x)\phi_i(x)\phi_j(x) \,dx \right]  = \int_a^b f(x)\phi_i(x) \,dx,
 :::
 
-still for each $i=1,\ldots,m$. These are the **Galerkin conditions** defining a numerical solution. They follow entirely from the BVP and the choice of the $\phi_i$.
+still for each $i=1,\ldots,m$. These are the {term}`Galerkin conditions` defining a numerical solution. They follow entirely from the BVP and the choice of the $\phi_i$.
 
 The conditions {eq}`galerkin` are a linear system of equations for the unknown coefficients $w_j$. Define $m\times m$ matrices $\mathbf{K}$  and $\mathbf{M}$, and the vector $\mathbf{f}$, by
 

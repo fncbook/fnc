@@ -3,6 +3,7 @@ numbering:
   enumerator: 9.5.%s
 ---
 (section-globalapprox-trig)=
+
 # Trigonometric interpolation
 
 Up to this point, all of our global approximating functions have been polynomials. While they are versatile and easy to work with, they are not always the best choice.
@@ -13,6 +14,7 @@ Suppose we want to approximate a function $f$ that is periodic, with one period 
 ```
 
 ::::{prf:definition} Trigonometric polynomial
+:label: definition-trigpoly
 For an integer $n$, a **trigonometric polynomial** of degree $n$ is 
 
 :::{math}

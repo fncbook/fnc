@@ -36,7 +36,7 @@ where $r$ is the *risk-free interest rate* (i.e., what you could earn with a ver
 The value $v(S,t)$ of the option depends on the time $t$ and on the stock price $S$, which may be varied independently. At the strike time, the payoff condition $v(S,T)=H(S)$ is imposed, and the goal is to solve the equation backward in time to find $v(S,0)$. Equation {eq}`bspde` is our first encounter with a partial differential equation (PDE). 
 
 ::::{prf:definition} Evolutionary PDE
-:label: definition-evolutionary-pde
+:label: definition-evolutionarypde
 An {term}`evolutionary PDE`, *or time-dependent partial differential equation*, is a partial differential equation in which the dependent variable depends on time and one or more other variables.
 ::::
 

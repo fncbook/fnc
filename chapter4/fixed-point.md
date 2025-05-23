@@ -39,6 +39,7 @@ This is our first example of an iterative algorithm that never quite gets to the
 
 ::::{prf:example} Fixed-point iteration
 :label: demo-fp-spiral
+
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -58,6 +59,7 @@ This is our first example of an iterative algorithm that never quite gets to the
 :::
 ```` 
 `````
+
 ::::
 
 ## Series analysis
@@ -127,6 +129,7 @@ Linear convergence is marked by an approximate reduction of the error at each it
 
 ::::{prf:example} Convergence of fixed-point iteration
 :label: demo-fp-converge
+
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -146,6 +149,7 @@ Linear convergence is marked by an approximate reduction of the error at each it
 :::
 ```` 
 `````
+
 ::::
 
 ## Contraction maps
@@ -156,18 +160,21 @@ The convergence condition $\sigma=|g'(p)|<1$ derived by series expansion is a sp
 ```
 
 ````{prf:definition}
+:label: definition-lipschitz
 A function $g$ is said to satisfy a **Lipschitz condition** with constant $L$ on the interval $S\subset\mathbb{R}$ if, for all $s,t\in S$, 
   
 ```{math}
 :label: lipschitz
     \bigl| g(s)-g(t) \bigr| \le L \bigl| s-t \bigr|.
 ```
+
+If @lipschitz holds with $L<1$, we say that $g$ is a **contraction mapping** on $S$.
 ````
 
 ```{index} ! contraction mapping
 ```
 
-It can be shown that a function satisfying {eq}`lipschitz` is continuous in $S$. If $L<1$, we call $g$ a **contraction mapping** because distances between points all decrease after an application of $g$. This situation leads to a major result about fixed points.
+It can be shown that a function satisfying {eq}`lipschitz` is continuous in $S$. The idea behind a contraction mapping is that the distances between all pairs of points decrease after an application of $g$. This situation leads to a major result about fixed points.
 
 ````{prf:theorem} Contraction mapping
 :label: theorem-contraction
@@ -194,7 +201,7 @@ From the Fundamental Theorem of Calculus, which asserts that $g(s)-g(t)=\int_s^t
 If $|g'(x)|\le L < 1$ for all $x$ in an interval $S$, then the conclusions of @theorem-contraction apply.
 ::::
 
-There are stronger and more general statements of @theorem-contraction. For instance, it's possible to show that all initial $x_1$ that are sufficiently close to the fixed point will lead to convergence of the iteration. Algorithmically the main virtue of the fixed-point iteraion is that it is incredibly easy to apply. However, as we are about to discover, it's far from the fastest option.
+There are stronger and more general statements of @theorem-contraction. For instance, it's possible to show that all initial $x_1$ that are sufficiently close to the fixed point will lead to convergence of the iteration. Algorithmically the main virtue of the fixed-point iteration is that it is incredibly easy to apply. However, as we are about to discover, it's far from the fastest option.
 
 ## Exercises
 

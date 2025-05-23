@@ -105,13 +105,14 @@ We now introduce some formalities.
 ```
 
 ::::{prf:definition} One-step IVP method
-:label: definition-euler-onestep
+:label: definition-ivponestep
 A **one-step method** for the IVP {eq}`euler-ivp` is a formula of the form
 
 ```{math}
 :label: onestepODE
 {u}_{i+1} = u_i + h\phi(t_i,u_i,h), \qquad i=0,\ldots,n-1.
 ```
+
 ::::
 
 Euler's method is the particular case of {eq}`onestepODE` with $\phi(t,u,h) = f(t,u)$, but we will see other one-step methods in later sections. 
@@ -249,7 +250,7 @@ We observe that $1+x \le e^x$ for $x\ge 0$ (see @problem-euler-inequality). Henc
 The theorem justifies one more general definition.
 
 ::::{prf:definition} Order of accuracy of a one-step IVP method
-:label: definition-euler-ooa
+:label: definition-orderonestep
 If the local truncation error of the one-step method {eq}`onestepODE` satisfies $\tau_{i+1}(h)=O(h^p)$ for a positive integer $p$, then $p$ is the **order of accuracy** of the formula.
 ::::
 

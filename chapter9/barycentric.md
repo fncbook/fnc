@@ -21,7 +21,7 @@ as well as a set of values derived from the nodes.
 ```
 
 ::::{prf:definition} Barycentric weights
-:label: definition-barycentric-weights
+:label: definition-barycentricweights
 The **barycentric weights** for nodes $x_0,\dots,x_n$ are defined as
 :::{math}
 :label: baryweight

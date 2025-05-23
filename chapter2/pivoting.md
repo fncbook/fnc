@@ -42,8 +42,8 @@ In {numref}`section-linsys-lu` we remarked that LU factorization is equivalent t
 
 The diagonal element of $\mathbf{U}$ that appears in the denominator of line 17 of {numref}`Function {number} <function-lufact>` is called the **pivot element** of its column. In order to avoid a zero pivot, we will use the largest available element in the column we are working on as the pivot. This technique is known as **row pivoting**.
 
-```{prf:algorithm} Row pivoting
-:label: rule-pivoting
+```{prf:definition} Row pivoting
+:label: definition-pivoting
 When performing elimination in column $j$, choose as the pivot the element in column $j$ that is largest in absolute value. (In case of ties, choose the lowest row index.)
 ```
 
@@ -106,8 +106,7 @@ Even though the resulting $\mathbf{L}$ in @demo-pivoting-fix is no longer of uni
 `````
 ::::
 
-
-In principle, if the permutation of rows implied by the pivot locations is applied all at once to the original $\mathbf{A}$, no further pivoting is needed. In practice, this permutation cannot be determined immediately from the original $\mathbf{A}$; the only way to find it is to run the algorithm. Having obtained it at the end, though, we can use it to state a simple relationship. 
+In principle, if the permutation of rows implied by the pivot locations is applied all at once to the original $\mathbf{A}$, no further pivoting is needed. In practice, this permutation cannot be determined immediately from the original $\mathbf{A}$; the only way to find it is to run the algorithm. Having obtained it at the end, though, we can use it to state a simple relationship.
 
 ```{index} ! matrix factorization; pivoted LU, ! PLU factorization
 ```

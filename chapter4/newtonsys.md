@@ -11,6 +11,7 @@ The rootfinding problem becomes much more difficult when multiple variables and 
 ```
 
 ````{prf:definition} Multidimensional rootfinding problem
+:label: definition-vectorroot
 Given a continuous vector-valued function $\mathbf{f}$ mapping from $\mathbb{R}^n$ into $\mathbb{R}^n$, find a vector $\mathbf{r}$ such that
 
 ```{math}
@@ -155,7 +156,7 @@ Note that $\mathbf{J}^{-1}\mathbf{f}$ now plays the role that $f/f'$ had in the 
 ```
 
 ::::{prf:algorithm} Multidimensional Newton's method
-:label: algorithm-nonlineqn-newtonsys
+:label: definition-newtonsmethodsys
 Given $\mathbf{f}$ and a starting value $\mathbf{x}_1$, for each $k=1,2,3,\ldots$
 
 1. Compute $\mathbf{y}_k = \mathbf{f}(\mathbf{x}_k)$ and $\mathbf{A}_k=\mathbf{f\,}'(\mathbf{x}_k)$.

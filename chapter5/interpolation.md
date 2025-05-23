@@ -3,6 +3,7 @@ numbering:
   enumerator: 5.1.%s
 ---
 (section-localapprox-interpolation)=
+
 # The interpolation problem
 
 ```{index} ! interpolation
@@ -10,11 +11,10 @@ numbering:
 
 :::{prf:definition} Interpolation problem
 :label: definition-interpolation
-Given $n+1$ distinct points $(t_0,y_0)$, $(t_1,y_1),\ldots,(t_n,y_n)$, with $t_0<t_1<\ldots <t_n$ called **nodes**, the **interpolation problem** is to find a function $p(x)$, called the **interpolant**, such that $p(t_k)=y_k$ for $k=0,\dots,n$.
+Given $n+1$ distinct points $(t_0,y_0)$, $(t_1,y_1),\ldots,(t_n,y_n)$, with $t_0<t_1<\ldots <t_n$ called {term}`nodes`, the **interpolation problem** is to find a function $p(x)$, called the **interpolant**, such that $p(t_k)=y_k$ for $k=0,\dots,n$.
 :::
 
 In this chapter, we use $t_k$ for the nodes and $x$ to denote the continuous independent variable. 
-
 
 ```{index} Julia; indexing arrays
 ```
@@ -125,7 +125,7 @@ The functions appearing within the sum above have particular significance.
 ```
 
 ::::{prf:definition} Cardinal function
-:label: definition-cardinal-function
+:label: definition-cardinalfunction
 A {term}`cardinal function` $\phi_k$ for a node set $t_0,\ldots,t_n$ is the function that interpolates the value $(t_k,1)$ and $(t_j,0)$ for all $j\neq k$. 
 ::::
 

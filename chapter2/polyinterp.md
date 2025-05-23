@@ -15,7 +15,7 @@ The United States carries out a census of its population every 10 years. Suppose
 Given $n$ points $(t_1,y_1),\ldots,(t_n,y_n)$, where the $t_i$ are all distinct, the **polynomial interpolation** problem is to find a polynomial $p$ of degree less than $n$ such that $p(t_i)=y_i$ for all $i$.
 ::::
 
-As posed in {numref}`Definition {number} <definition-polyinterp-polyinterp>`, the polynomial interpolation problem has a unique solution. Once the interpolating polynomial is found, it can be evaluated anywhere to estimate or predict values. 
+As posed in {numref}`Definition {number} <definition-polyinterp>`, the polynomial interpolation problem has a unique solution. Once the interpolating polynomial is found, it can be evaluated anywhere to estimate or predict values. 
 
 [^census]: We're quite certain that the U.S. Census Bureau uses more sophisticated modeling techniques than the one we present here!
 

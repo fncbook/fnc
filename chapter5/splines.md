@@ -14,7 +14,7 @@ A piecewise linear interpolant is continuous but has discontinuities in its deri
 ```
 
 ::::{prf:definition} Cubic spline
-:label: definition-cubic-spline
+:label: definition-cubicspline
 A {term}`cubic spline` is a piecewise cubic function that has two continuous derivatives everywhere.
 ::::
 

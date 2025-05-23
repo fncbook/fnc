@@ -159,6 +159,31 @@ Given $\mathbf{A}\in\mathbb{R}^{m \times n}$ and $\mathbf{b}\in\mathbb{R}^m$, wi
 The notation **argmin** in @linls means to find an $\mathbf{x}$ that produces the minimum value.
 :::
 
+```{note}
+Another way to describe @linls is as an {term}`overdetermined` linear system. Because the system $\mathbf{A}\mathbf{x}=\mathbf{b}$, has more rows than columns, it is imposing too many constraints on $\bfx$ to permit satisfying all of them. 
+```
+
+```{index} linear least-squares; problem
+```
+
+```{index} linear least-squares; argmin
+```
+
+```{index} linear least-squares; residual
+``` 
+```
+
+```{index} linear least-squares; problem
+```
+
+```{index} linear least-squares; argmin
+```
+
+```{index} linear least-squares; residual
+```
+
+```{index} linear least-squares; norm
+
 ```{index} norm; vector
 ```
 

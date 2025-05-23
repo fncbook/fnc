@@ -136,6 +136,7 @@ which is nonnegative and zero only when $\mathbf{u}=\boldsymbol{0}$, provided $\
 ```
 
 :::{prf:definition} Method of conjugate gradients (CG)
+:label: definition-cg
 For each $m=1,2,3,\ldots$, minimize $\|\mathbf{x}_m-\mathbf{x}\|_{\mathbf{A}}$ for $\mathbf{x}$ in the Krylov subspace $\mathcal{K}_m$.
 :::
 

@@ -57,7 +57,7 @@ Let's momentarily consider a simpler, more fundamental PDE.
 ```
 
 ::::{prf:definition} Advection equation
-:label: definition-advection-equation
+:label: definition-advectionequation
 The {term}`advection equation` in one dimension is
 
 :::{math}

@@ -70,13 +70,14 @@ $$
 Recall that for a matrix $\mathbf{A}$ and compatible vector $\mathbf{x}$, the quadratic form $\mathbf{x}^* \mathbf{A} \mathbf{x}$ is a scalar. 
 
 ::::{prf:definition}
-:label: definition-symm-eig-rq
+:label: definition-rayleighquotient
 Given hermitian $\mathbf{A}$ and nonzero vector $\mathbf{x}$, the {term}`Rayleigh quotient` is the function
 
 ```{math}
 :label: rayleigh
 R_{\mathbf{A}}(\mathbf{x}) = \frac{ \mathbf{x}^* \mathbf{A} \mathbf{x}}{\mathbf{x}^* \mathbf{x}}.
 ```
+
 ::::
 
 If $\mathbf{v}$ is an eigenvector such that $\mathbf{A} \mathbf{v}=\lambda \mathbf{v}$, then one easily calculates that $R_{\mathbf{A}}(\mathbf{v})=\lambda.$ That is, the Rayleigh quotient maps an eigenvector into its associated eigenvalue.

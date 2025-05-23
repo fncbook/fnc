@@ -3,9 +3,12 @@ numbering:
   enumerator: 8.7.%s
 ---
 (section-krylov-matrixfree)=
+
 # Matrix-free iterations
 
-A primary reason for our interest in matrices is their relationship to linear transformations. If we define $\mathbf{f}(\mathbf{x})=\mathbf{A}\mathbf{x}$, then for all vectors $\mathbf{x}$, $\mathbf{y}$, and scalars $\alpha$,
+In Chapter 4, we solved the nonlinear rootfinding problem $\mathbf{f}(\mathbf{x})=\boldsymbol{0}$ with methods that needed only the ability to evaluate $\mathbf{f}$ at any known value of $\mathbf{x}$. By repeatedly evaluating $\mathbf{f}$ at cleverly chosen points, these algorithms were able to return an estimate for $\mathbf{f}^{-1}(\boldsymbol{0})$.
+
+We can explore the same idea in the context of linear algebra by shifting our viewpoint from matrices to *linear transformations*. If we define $\mathbf{f}(\mathbf{x})=\mathbf{A}\mathbf{x}$, then for all vectors $\mathbf{x}$, $\mathbf{y}$, and scalars $\alpha$,
 
 :::{math}
 :label: lintrans
@@ -17,18 +20,13 @@ A primary reason for our interest in matrices is their relationship to linear tr
 
 These properties define a linear transformation. Moreover, *every* linear transformation between finite-dimensional vector spaces can be represented as a matrix-vector multiplication.
 
-## Matrix-free iterations
-
-In Chapter 4 we solved the nonlinear rootfinding problem $\mathbf{f}(\mathbf{x})=\boldsymbol{0}$ with methods that needed only the ability to evaluate $\mathbf{f}$ at any known value of $\mathbf{x}$. By repeatedly evaluating $\mathbf{f}$ at cleverly chosen points, these algorithms were able to return an estimate for $\mathbf{f}^{-1}(\boldsymbol{0})$.
-
-A close examination reveals that the power method and Krylov subspace methods have the same structure because the only appearance of the matrix $\mathbf{A}$ in them is to multiply a known vector, i.e., to evaluate $\mathbf{f}(\mathbf{x})=\mathbf{A}\mathbf{x}$. This is used to evaluate the inverse, $\mathbf{A}^{-1}\mathbf{b}$. 
-
-Bringing these points of view together leads us to a cornerstone of modern scientific computation: *matrix-free iterations*. Krylov subspace methods can be used to invert a linear transformation if one provides code for the transformation, even if its associated matrix is not known explicitly. 
+A close examination reveals that in the power iteration and Krylov subspace methods, the only appearance of the matrix $\mathbf{A}$ is to apply it a known vector, i. e., to evaluate the linear transformation $\mathbf{f}(\mathbf{x})=\mathbf{A}\mathbf{x}$. If we have access to $\mathbf{f}$, we don't need the matrix at all! That is, Krylov subspace methods can be used to invert a linear transformation if one provides code for the transformation, even if its associated matrix is not known explicitly. That may sound like a strange situation, but it is not uncommon.
 
 ## Blurring images
 
 ```{index} image (as a matrix)
 ```
+
 In {numref}`section-matrixanaly-insight` we saw that a grayscale image can be represented as an $m\times n$ matrix $\mathbf{X}$ of pixel intensity values. Now consider a simple model for blurring the image. Define $\mathbf{B}$ as the $m\times m$ tridiagonal matrix
 
 :::{math}
@@ -98,8 +96,8 @@ The matrix $\mathbf{A}$ is $mn\times mn$; for a 12-megapixel image, it would hav
 Instead, given any vector $\mathbf{u}$ we can compute $\mathbf{v}=\mathbf{A}\mathbf{u}$ through the steps
 
 \begin{align*}
-  \mathbf{U} &= \operatorname{unvec}(\mathbf{u}),\\
-  \mathbf{V} &= \operatorname{blur}(\mathbf{U}),\\
+  \mathbf{U} &= \operatorname{unvec}(\mathbf{u}), \\
+  \mathbf{V} &= \operatorname{blur}(\mathbf{U}), \\
   \mathbf{v} &= \operatorname{vec}(\mathbf{V}).
 \end{align*}
 

@@ -43,7 +43,7 @@ There was a little cheating in @demo-power-one to make the story come out neatly
 Analysis of matrix powers is most straightforward in the diagonalizable case. Let $\mathbf{A}$ be any diagonalizable $n\times n$ matrix having eigenvalues $\lambda_1,\ldots,\lambda_n$ and corresponding linearly independent eigenvectors $\mathbf{v}_1,\ldots,\mathbf{v}_n$. We also make an important assumption about the eigenvalue magnitudes.
 
 ::::{prf:definition} Dominant eigenvalue
-:label: definition-dominant-eigenvalue
+:label: definition-dominanteigenvalue
 If the eigenvalues of a matrix are such that
 
 :::{math}
@@ -92,6 +92,7 @@ That is, $\mathbf{A}^k\mathbf{x}$ eventually is close to close to a scalar multi
 :::{attention}
 For algorithmic purposes, it is important to interpret $\mathbf{A}^k\mathbf{x}$ as $\mathbf{A}\bigl( \cdots\bigl( \mathbf{A} (\mathbf{A}\mathbf{x})\bigl) \cdots\bigl)$, i.e., as repeated applications of $\mathbf{A}$ to a vector. Doing so allows us to fully exploit sparsity of $\mathbf{A}$, something which is not preserved by taking a matrix power $\mathbf{A}^k$ explicitly before the multiplication with $\mathbf{x}$ (see @demo-structure-fill).
 :::
+
 ## Power iteration
 
 An important technicality separates us from an algorithm: unless $|\lambda_1|=1$, the factor $\lambda_1^k$ tends to make $\|\mathbf{A}^k\mathbf{x}\|$ either very large or very small. Nor can we easily normalize by $\lambda_1^k$, as in {eq}`poweriterconverge`, unless we know $\lambda_1$ in advance.
@@ -101,8 +102,8 @@ To make a practical algorithm, we alternate matrix-vector multiplication with a 
 ```{index} ! power iteration
 ```
 
-::::{prf:algorithm} Power iteration
-:label: algorithm-power-power
+::::{prf:definition} Power iteration
+:label:  definition-poweriteration
 Given matrix $\mathbf{A}$:
 
 1. Choose $\mathbf{x}_1$.
@@ -120,7 +121,7 @@ Return $\beta_1,\beta_2,\ldots$ as dominant eigenvalue estimates, and $\mathbf{x
 ::::
 
 :::{note}
-The vectors and scalars in @algorithm-power-power are subscripted by iteration number to help make the discussion here more convenient. In practice, the algorithm can be implemented without keeping the history, and $\alpha_k$ need not be separately computed at all.
+The vectors and scalars in @definition-poweriteration are subscripted by iteration number to help make the discussion here more convenient. In practice, the algorithm can be implemented without keeping the history, and $\alpha_k$ need not be separately computed at all.
 :::
 
 By construction, $\| \mathbf{x}_{k}\|_\infty=1$ for all $k > 1$. Also, we can write
@@ -130,7 +131,7 @@ By construction, $\| \mathbf{x}_{k}\|_\infty=1$ for all $k > 1$. Also, we can wr
 \mathbf{x}_{k} = (\alpha_1 \alpha_2 \cdots \alpha_k ) \mathbf{A}^k \mathbf{x}_{1}.
 :::
 
-Thus {numref}`Algorithm {number} <algorithm-power-power>` modifies {eq}`powerAkx0` and {eq}`poweriterconverge` only slightly.
+Thus {numref}`Algorithm {number} < definition-poweriteration>` modifies {eq}`powerAkx0` and {eq}`poweriterconverge` only slightly.
 
 Finally, if $\mathbf{x}_k$ is nearly a dominant eigenvector of $\mathbf{A}$, then $\mathbf{A}\mathbf{x}_k$ is nearly $\lambda_1\mathbf{x}_k$, and we can take the ratio $\beta_k=y_{k,m}/x_{k,m}$ as an eigenvalue estimate. In fact, revisiting {eq}`powerAkx0`, the extra $\alpha_j$ normalization factors cancel in the ratio, and, after some simplification, we get
 
@@ -202,6 +203,7 @@ Next we estimate {eq}`poweriterratio` for large $k$, using a geometric series ex
 
 ```{index} convergence rate; linear
 ```
+
 This is {term}`linear convergence` with factor $r_2$:
 
 :::{math}
@@ -235,7 +237,6 @@ The error in the power iteration eigenvalue estimates $\beta_k$ is reduced asymp
 ````
 `````
 ::::
-
 
 The practical utility of {eq}`poweriterconv` is limited: if we knew $\lambda_1$ and $\lambda_2$, we wouldn't be running the power iteration in the first place! Sometimes it's possible to find estimates of or bounds on the ratio. If nothing else, though, it is useful to know that linear convergence is expected at a rate based solely on the dominant eigenvalues. 
 
