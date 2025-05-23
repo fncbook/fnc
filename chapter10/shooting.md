@@ -9,8 +9,8 @@ One way to attack the TPBVP {eq}`tpbvp` is to adapt our IVP solving techniques f
 
 This is the idea behind the **shooting method**. Imagine adjusting your aiming point and power to sink a basketball shot from the free-throw line. The way in which you miss—too long, flat trajectory, etc.—informs how you will adjust for your next attempt.
 
-(demo-shooting-naive)=
 ::::{prf:example} Naive shooting
+:label: demo-shooting-naive
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -58,8 +58,8 @@ The dependence of $v_2$ on $\mathbf{s}$ is indirect, through the solution of the
 
 Our implementation of shooting is given in {numref}`Function {number} <function-shoot>`. Note the structure: we use a rootfinding method that in turn relies on an IVP solver. This sort of arrangement is what makes us concerned with minimizing the number of objective function calls when rootfinding.
 
-(function-shoot)=
 ``````{prf:algorithm} shoot
+:label: function-shoot
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -81,8 +81,8 @@ Our implementation of shooting is given in {numref}`Function {number} <function-
 `````
 ``````
 
-(demo-shooting-mems)=
 ::::{prf:example} Shooting solution of a BVP
+:label: demo-shooting-mems
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -108,8 +108,8 @@ Our implementation of shooting is given in {numref}`Function {number} <function-
 
 The accuracy of the shooting method should be comparable to those of the component pieces, the rootfinder, and the IVP solver. However, the shooting method is unstable for some problems. An example illustrates the trouble.
 
-(demo-shooting-unstable)=
 ::::{prf:example} Instability of shooting
+:label: demo-shooting-unstable
 We solve the problem
   
 $$

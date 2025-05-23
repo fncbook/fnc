@@ -13,7 +13,7 @@ In {numref}`section-localapprox-finitediffs` we used finite differences to turn 
 ```
 
 :::{prf:definition} Differentiation matrix
-:label: def-diffmat
+:label: definition-diffmat
 A {term}`differentiation matrix` is a square matrix whose associated linear transformation maps a vector of function values at nodes to a vector of approximate derivative values at the same nodes.
 :::
 
@@ -91,7 +91,7 @@ The differentiation matrix $\mathbf{D}_x$ in {eq}`diffmat11` is not a unique cho
 ```
 
 ```{prf:definition} Finite-difference differentiation matrix for a first derivative
-:label: def-diffmatfd1
+:label: definition-diffmatfd1
 
 A second-order accurate differentiation matrix for the first derivative using finite differences is 
 
@@ -183,7 +183,7 @@ In a TPBVP, we will need to take the second derivative of the unknown solution. 
 ```
 
 ````{prf:definition} Finite-difference differentiation matrix for a second derivative
-:label: def-diffmatfd2
+:label: definition-diffmatfd2
 
 To second order,
 
@@ -219,8 +219,8 @@ and the nodes are given in @bvp-fdnodes.
 
 Together, the matrices {eq}`diffmat12b` and {eq}`diffmat22` give second-order approximations of the first and second derivatives at all nodes. These matrices, as well as the nodes $x_0,\ldots,x_n$, are returned by {numref}`Function {number} <function-diffmat2>`.
 
-(function-diffmat2)=
 ``````{prf:algorithm} diffmat2
+:label: function-diffmat2
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -243,8 +243,8 @@ Together, the matrices {eq}`diffmat12b` and {eq}`diffmat22` give second-order ap
 ``````
 
 
-(demo-diffmats-2nd)=
 ::::{prf:example} Differentiation matrices
+:label: demo-diffmats-2nd
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -290,7 +290,7 @@ x_k = -\cos\left(\frac{k \pi}{n}\right), \qquad k=0,\ldots,n.
 ```
 
 ````{prf:definition} Chebyshev differentiation matrix
-:label: def-diffmatcheb
+:label: definition-diffmatcheb
 
 Using a vector $\mathbf{f}$ of function values at the Chebyshev nodes @bvp-chebnodes, the vector $\mathbf{D}_x \mathbf{f}$ will have approximate first derivative values at those nodes, where the entries of $\mathbf{D}_x$ are given by 
 
@@ -315,10 +315,10 @@ For the second derivative, $\mathbf{D}_{xx} = \mathbf{D}_x^2$.
 The Chebyshev differentiation matrix is not sparse. There are compact formulas available elsewhere for the entries of $\mathbf{D}_{xx}$ ({cite}`trefethenSpectralMethods2000`).
 :::
 
-{numref}`Function {number} <function-diffcheb>` returns the matrices from @def-diffmatcheb. This function uses a change of variable to transplant the standard $[-1,1]$ for Chebyshev nodes to any $[a,b]$. It also takes a different approach to computing the diagonal elements of $\mathbf{D}_x$ than the formulas in {eq}`chebdiffmat` (see @problem-diffmats-negsumtrick).
+{numref}`Function {number} <function-diffcheb>` returns the matrices from @definition-diffmatcheb. This function uses a change of variable to transplant the standard $[-1,1]$ for Chebyshev nodes to any $[a,b]$. It also takes a different approach to computing the diagonal elements of $\mathbf{D}_x$ than the formulas in {eq}`chebdiffmat` (see @problem-diffmats-negsumtrick).
 
-(function-diffcheb)=
 ``````{prf:algorithm} diffcheb
+:label: function-diffcheb
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -340,8 +340,8 @@ The Chebyshev differentiation matrix is not sparse. There are compact formulas a
 `````
 ``````
 
-(demo-diffmats-cheb)=
 ::::{prf:example} Chebyshev differentiation matrices
+:label: demo-diffmats-cheb
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia

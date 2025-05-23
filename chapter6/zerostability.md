@@ -10,8 +10,8 @@ numbering:
 
 For one-step methods such as Runge–Kutta, @theorem-euler-onestepGTE guarantees that the method converges and that the global error is of the same order as the local truncation error. For multistep methods, however, a new wrinkle is introduced. 
 
-(demo-zs-LIAF)=
 ::::{prf:example} Instability
+:label: demo-zs-LIAF
 It is straightforward to check that the two-step method LIAF, defined by
 
 ```{math}
@@ -94,8 +94,8 @@ Without zero-stability, any truncation or roundoff error will get exponentially 
 
 The following theorem concisely summarizes when we can expect zero-stability.
 
-(theorem-zerostability-rootcondition)=
 ````{prf:theorem} Root condition
+:label: theorem-zerostability-rootcondition
 A linear multistep method is zero-stable if and only if every root $r$ of the generating polynomial $\rho(z)$ satisfies $|r|\le 1$, and any root $r$ with $|r|=1$ is simple.
 ````
 
@@ -133,8 +133,8 @@ It turns out that lacking zero-stability is the only thing that can go wrong for
 ```{index} Dahlquist theorems
 ```
 
-(theorem-dahlequiv)=
 ```{prf:theorem} Dahlquist equivalence
+:label: theorem-dahlequiv
 A linear multistep method converges as $h\to 0$ if and only if it is consistent and zero-stable.
 ```
 
@@ -145,8 +145,8 @@ You may have noticed that the Adams and BD formulas use only about half of the a
 ```{index} Dahlquist theorems
 ```
 
-(theorem-zerostability-dahlquist)=
 ````{prf:theorem} First Dahlquist stability barrier
+:label: theorem-zerostability-dahlquist
 The order of accuracy $p$ of a stable $k$-step linear multistep method satisfies
 
 ```{math}

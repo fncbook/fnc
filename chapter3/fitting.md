@@ -10,8 +10,8 @@ numbering:
 
 In {numref}`section-linsys-polyinterp` we saw how a polynomial can be used to interpolate data—that is, derive a continuous function that evaluates to give a set of prescribed values. But interpolation may not be appropriate in many applications.
 
-(demo-fitting-tempinterp)=
 ::::{prf:example} Interpolating temperature data
+:label: demo-fitting-tempinterp
 
 `````{tab-set}
 ````{tab-item} Julia
@@ -78,8 +78,8 @@ c_n
 
 Note that $\mathbf{V}$ has the same structure as the Vandermonde matrix in {eq}`vandersystem` but is $m\times n$, thus taller than it is wide. It's impossible in general to satisfy $m$ conditions with $n<m$ variables, and we say the system is **overdetermined**. Rather than solving the system exactly, we have to find the best approximation. Below we specify precisely what is meant by this, but first we note that Julia uses the same backslash notation to solve the problem in both the square and overdetermined cases.
 
-(demo-fitting-tempfit)=
 ::::{prf:example} Fitting temperature data
+:label: demo-fitting-tempfit
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -137,16 +137,16 @@ c_1 \\ c_2 \\ \vdots \\ c_n
 \end{bmatrix}.
 ```
 
-```{index} linear least-squares problem
-```
-
-Recalling that $\mathbf{r}^T\mathbf{r}=\| \mathbf{r} \|_2^2$, and renaming the variables to standardize the statement, we arrive at the general **linear least-squares problem**.
+Recalling that $\mathbf{r}^T\mathbf{r}=\| \mathbf{r} \|_2^2$, and renaming the variables to standardize the statement, we arrive at the general {term}`linear least-squares problem`.
 
 ```{index} ! argmin
 ```
 
-(definition-fitting-linearls)=
+```{index} ! linear least-squares problem
+```
+
 ````{prf:definition} Linear least-squares problem
+:label: definition-leastsq
 Given $\mathbf{A}\in\mathbb{R}^{m \times n}$ and $\mathbf{b}\in\mathbb{R}^m$, with $m>n$, find
 
 ```{math}
@@ -155,7 +155,9 @@ Given $\mathbf{A}\in\mathbb{R}^{m \times n}$ and $\mathbf{b}\in\mathbb{R}^m$, wi
 ```
 ````
 
-The notation **argmin** above means to find an $\mathbf{x}$ that produces the minimum value.
+:::{note}
+The notation **argmin** in @linls means to find an $\mathbf{x}$ that produces the minimum value.
+:::
 
 ```{index} norm; vector
 ```
@@ -186,8 +188,8 @@ While the fit of the $y_i$ to $g(t)$ is nonlinearly dependent on fitting paramet
 
 Thus, the variable $z=\log y$ can be fit linearly in terms of the variable $s=\log t$. In practice these two cases—exponential fit and power law—are easily detected by using log-linear or log-log plots, respectively.
 
-(demo-fitting-pirate)=
 ::::{prf:example} Fitting a power law
+:label: demo-fitting-pirate
 Finding numerical approximations to $\pi$ has fascinated people for millennia. One famous formula is
 
 $$ 

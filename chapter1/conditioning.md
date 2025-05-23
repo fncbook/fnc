@@ -63,14 +63,15 @@ Finally, we idealize what happens in a perfect computer by taking a limit as $\m
 ```{index} ! condition number; of a scalar function
 ```
 
-(definition-intro-condno)=
-::::{prf:definition} Condition number (scalar function)
-The relative **condition number** of a scalar function $f(x)$ is 
+::::{prf:definition} Condition number: scalar function
+:label: definition-condition-number
+The relative {term}`condition number` of a scalar function $f(x)$ is
 
 ```{math}
 :label: condition
    \kappa_f(x) = \lim_{\epsilon\to 0} \dfrac{ |f(x)-f(x(1+\epsilon))| }{ |\epsilon f(x)| }.
 ```
+
 ::::
 
 The condition number is a ratio of the relative error of the output to the relative error of the input. It depends only on the problem and the data, not the computer or the algorithm.
@@ -148,6 +149,8 @@ As you are asked to show in @problem-conditioning-chain, when two functions $f$ 
 \kappa_h(x) = \kappa_f(g(x)) \cdot \kappa_g(x).
 ```
 
+(section-conditioning-errors)=
+
 ## Estimating errors
 
 Refer back to the definition of $\kappa_f$ as a limit in {eq}`condition`. Approximately speaking, if $|\epsilon|$ is small, we expect 
@@ -162,7 +165,7 @@ That is, whenever the data $x$ is perturbed by a small amount, we expect that re
 If $\kappa_f \approx 10^d$, then we expect to lose up to $d$ decimal digits of accuracy in computing $f(x)$ from $x$.
 ::::
 
-Large condition numbers signal when errors cannot be expected to remain comparable in size to roundoff error. We call a problem poorly conditioned or **ill-conditioned** when $\kappa_f(x)$ is large, although there is no fixed threshold for the term.
+Large condition numbers signal when errors cannot be expected to remain comparable in size to roundoff error. We call a problem poorly conditioned or {term}`ill-conditioned` when $\kappa_f(x)$ is large, although there is no fixed threshold for the term.
 
 If $\kappa_f \approx 1/\macheps$, then we can expect the result to have a relative error of as much as 100% simply by expressing the data $x$ in finite precision. Such a function is essentially not computable at this machine epsilon.
 
@@ -179,8 +182,8 @@ You may have noticed that for some functions, such as the square root, the condi
 
 Most problems have multiple input and output values. These introduce complications into the formal definition of the condition number. Rather than worry over those details here, we can still look at variations in only one output value with respect to one data value at a time.
 
-(example-quad-root-cond)=
 ````{prf:example}
+:label: example-quad-root-cond
 Consider the problem of finding the roots of a quadratic polynomial; that is, the values of $t$ for which $at^2+bt+c=0$. Here the data are the coefficients $a$, $b$, and $c$ that define the polynomial, and the solution to the problem are the two (maybe complex-valued) roots $r_1$ and $r_2$. Formally, we might write $f([a,b,c])=[r_1,r_2]$ using vector notation.
 
 Let's pick one root $r_1$ and consider what happens to it as we vary just the leading coefficient $a$. This suggests a scalar function $f(a)=r_1$. Starting from $ar_1^2 + br_1 + c = 0$, we differentiate implicitly with respect to $a$ while holding $b$ and $c$ fixed:  
@@ -221,8 +224,8 @@ Roots of polynomials are ill-conditioned with respect to changes in the polynomi
 
 The condition number of a root can be arbitrarily large. In the extreme case of a repeated root, the condition number is formally infinite, which implies that the ratio of changes in the root to changes in the coefficients cannot be bounded. 
 
-(demo-condition-roots)=
 ::::{prf:example} Conditioning of polynomial roots
+:label: demo-condition-roots
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

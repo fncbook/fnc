@@ -48,8 +48,8 @@ Experts have different recommendations about whether to use {eq}`adaptRKlocal` o
 
 We now have an outline of an algorithm.
 
-(algorithm-adaptive-adapt)=
 ::::{prf:algorithm} Adaptive step size for an IVP
+:label: algorithm-adaptive-adapt
 Given a solution estimate $u_i$ at $t=t_i$, and a step size $h$, do the following:
 1. Produce estimates ${u}_{i+1}$ and $\tilde{u}_{i+1}$, and estimate the error.
 2. If the error is small enough, adopt $\tilde{u}_{i+1}$ as the solution value at $t=t_i+h$, then increment $i$.
@@ -84,8 +84,8 @@ The top part of the table describes four stages in the usual RK fashion. The las
 
 Our implementation of an embedded second/third-order (RK23) code is given in {numref}`Function {number} <function-rk23>`. 
 
-(function-rk23)=
 ``````{prf:algorithm} rk23
+:label: function-rk23
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -107,8 +107,8 @@ Our implementation of an embedded second/third-order (RK23) code is given in {nu
 `````
 ``````
 
-(demo-adapt-basic)=
 ::::{prf:example} Adaptive step size
+:label: demo-adapt-basic
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -130,8 +130,8 @@ Our implementation of an embedded second/third-order (RK23) code is given in {nu
 `````
 ::::
 
-(demo-adapt-sing)=
 ::::{prf:example} Adaptive step size near a singularity
+:label: demo-adapt-sing
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

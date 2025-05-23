@@ -51,8 +51,8 @@ where $\mathbf{U}_k$ and $\mathbf{V}_k$ are the first $k$ columns of $\mathbf{U}
 
 The rank of a sum of matrices is always less than or equal to the sum of the ranks, so $\mathbf{A}_k$ is a rank-$k$ approximation to $\mathbf{A}$. It turns out that $\mathbf{A}_k$ is the *best* rank-$k$ approximation of $\mathbf{A}$, as measured in the matrix 2-norm.
 
-(theorem-best-rank-k)=
 ::::{prf:theorem}
+:label: theorem-best-rank-k
 Suppose $\mathbf{A}$ has rank $r$ and let $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^T$ be an SVD. Let $\mathbf{A}_k$ be as in {eq}`svdlowrank` for $1\le k < r$. Then
 
 1. $\| \mathbf{A} - \mathbf{A}_k \|_2 = \sigma_{k+1}, \quad k=1,\ldots,r-1$, and
@@ -79,8 +79,8 @@ If the singular values of $\mathbf{A}$ decrease sufficiently rapidly, then $\mat
 ```{index} image (as a matrix)
 ```
 
-(demo-dimreduce-hello)=
 ::::{prf:example} Image compression
+:label: demo-dimreduce-hello
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -117,8 +117,8 @@ Clearly $0\le \tau_k \le 1$ and $\tau_k$ is non-decreasing as a function of $k$.
 
 [^expvar]: In statistics this quantity may be interpreted as the fraction of explained variance.
 
-(demo-dimreduce-voting)=
 ::::{prf:example} Dimension reduction in voting records
+:label: demo-dimreduce-voting
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

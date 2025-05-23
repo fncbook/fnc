@@ -26,8 +26,8 @@ For vectors, we use a **norm** $\| \cdot \|$, which is a function from $\real^n$
 
 The last of these properties is known as the **triangle inequality**. It is natural to interpret $\| \mathbf{x} \|=\| \mathbf{x}-\boldsymbol{0} \|$ as the distance from $\mathbf{x}$ to the origin and $\| \mathbf{x}-\mathbf{y} \|$ as the distance from $\mathbf{x}$ to $\mathbf{y}$. We will be using only the three most important vector norms, defined as follows.
 
-(definition-norms-vectornorms)=
 :::{prf:definition} Common vector norms
+:label: definition-vectornorms
 **2-norm:** $\quad \twonorm{\mathbf{x}} = \left( \displaystyle \sum_{i=1}^n |x_i|^2 \right)^{\frac{1}{2}} = \sqrt{\rule[1mm]{0pt}{0.75em}\mathbf{x}^T \mathbf{x}}$
 
 **$\infty$-norm** or **max-norm:** $ \quad \infnorm{ \mathbf{x}} = \displaystyle \max_{i=1,\dots,n} |x_i|$
@@ -49,8 +49,8 @@ In any norm, we refer to a vector $\mathbf{x}$ satisfying $\| \mathbf{x} \|=1$ a
 
 as writing a nonzero vector $\mathbf{v}$ in magnitude–direction form. 
 
-(demo-norms-vector)=
 ::::{prf:example} Vector norms
+:label: demo-norms-vector
 Given the vector $\mathbf{x}= \bigl[ 2 ,\, -3 ,\, 1 ,\, -1 \bigr]^T$, we have
 \begin{align*}
     \| \mathbf{x} \|_2 &= \sqrt{ 4 + 9 + 1 + 1 } = \sqrt{15}, \\[1ex]
@@ -92,8 +92,8 @@ We say that a sequence of vectors $\mathbf{x}_1,\mathbf{x}_2,\ldots$ **converges
 
 By definition, a sequence is convergent in the infinity norm if and only if it converges componentwise. The same is true for a convergent sequence in *any* norm.
 
-(theorem-normequivalence)=
 ```{prf:theorem} Norm equivalence
+:label: theorem-normequivalence
   In a finite-dimensional space, convergence in any norm implies convergence in all norms.
 ```
 
@@ -102,12 +102,18 @@ By definition, a sequence is convergent in the infinity norm if and only if it c
 ```{index} ! norm; Frobenius
 ```
 
-Although we view matrices as two-dimensional, we can also interpret them as vectors: simply stack the columns on top of one another.[^colmajor] Hence we can define matrix norms via vector norms. This is sometimes done with the vector 2-norm and leads to the matrix **Frobenius norm**:
+Although we view matrices as two-dimensional, we can also interpret them as vectors: simply stack the columns on top of one another.[^colmajor] Hence, we can define a matrix norm via the vector 2-norm.
+
+::::{prf:definition} Frobenius norm
+:label: definition-frobenius
+The {term}`Frobenius norm` of matrix $\mathbf{A}$ is defined as
 
 ```{math}
 :label: frobenius
 \| \mathbf{A} \|_F = \left( \sum_{i,j} |A_{ij}|^2 \right)^{1/2}.
 ```
+
+::::
 
 ```{index} Julia; norm
 ```
@@ -121,9 +127,9 @@ However, it often proves to be more useful to define matrix norms differently.
 ```{index} ! norm; matrix
 ```
 
-(definition-norms-matrix)=
 ::::{prf:definition} Induced matrix norm
-Given a vector norm $\| \cdot \|_p$, we define an **induced matrix norm** for any $m\times n$ matrix $\mathbf{A}$ as
+:label: definition-inducednorm
+Given a vector norm $\| \cdot \|_p$, we define an {term}`induced matrix norm` for any $m\times n$ matrix $\mathbf{A}$ as
 
 ```{math}
 :label: matrixnorm
@@ -143,8 +149,8 @@ For the rest of this section we will continue to omit subscripts when we want to
 The definition of an induced matrix norm may seem oddly complicated. However, there are some key properties that follow directly from the definition.
 
 
-(theorem-norms-inequalities)=
 ````{prf:theorem} Norm inequalities
+:label: theorem-norms-inequalities
 Let $\| \cdot \|$ designate a matrix norm and the vector norm that induced it. Then for all matrices and vectors of compatible sizes,
 
 ```{math}
@@ -216,8 +222,8 @@ In addition, two of the vector norms we have encountered lead to equivalent form
 
 A mnemonic for these is that the $\infty$ symbol extends horizontally while the 1 character extends vertically, each indicating the direction of the summation in its formula. Also, both formulas give the same result for $m\times 1$ matrices as the vector norm. In both cases you must take absolute values of the matrix elements first. 
 
-(demo-norms-matrix)=
 ::::{prf:example} Matrix norms
+:label: demo-norms-matrix
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -272,7 +278,7 @@ The geometric interpretation of the matrix 2-norm shown in @demo-norms-matrix, a
 
 ``````{exercise}
 :label: problem-norms-linearity
-✍ Prove using {numref}`Definition {number} <definition-norms-matrix>` that for any induced matrix norm, matrix $\mathbf{A}$, and scalar $c$, $\| c\mathbf{A} \| = |c|\cdot \| \mathbf{A} \|$.
+✍ Prove using {numref}`Definition {number} <definition-inducednorm>` that for any induced matrix norm, matrix $\mathbf{A}$, and scalar $c$, $\| c\mathbf{A} \| = |c|\cdot \| \mathbf{A} \|$.
 ``````
 
 ``````{exercise}
@@ -322,7 +328,7 @@ where $p=1$, $2$, or $\infty$. (Hint: For $p=2$, rearrange {eq}`normineq1` for a
 
 ``````{exercise}
 :label: problem-norms-diagnorm
-✍ Prove using {numref}`Definition {number} <definition-norms-matrix>` that if $\mathbf{D}$ is a diagonal matrix, then $\|\mathbf{D}\|_2 = \max_{i} |D_{ii}|$. You may assume the matrix is real and square, but that does not affect the result or the proof in any significant way. (Hint: Let $M=\max_{i} |D_{ii}|$. Proceed in two stages, showing that $\|\mathbf{D}\|_2\ge M$ and separately that $\|\mathbf{D}\|_2\le M$.)
+✍ Prove using {numref}`Definition {number} <definition-inducednorm>` that if $\mathbf{D}$ is a diagonal matrix, then $\|\mathbf{D}\|_2 = \max_{i} |D_{ii}|$. You may assume the matrix is real and square, but that does not affect the result or the proof in any significant way. (Hint: Let $M=\max_{i} |D_{ii}|$. Proceed in two stages, showing that $\|\mathbf{D}\|_2\ge M$ and separately that $\|\mathbf{D}\|_2\le M$.)
 ``````
 
 ``````{exercise}

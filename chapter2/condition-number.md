@@ -53,7 +53,8 @@ Since also $\mathbf{b}=\mathbf{A}\mathbf{x}$ implies $\| \mathbf{b} \|\le
 It is possible to show that this bound is tight, in the sense that the inequalities are in fact equalities for some choices of $\mathbf{b}$ and $\mathbf{d}$. This result motivates a new definition.
 
 ::::{prf:definition} Matrix condition number
-The **matrix condition number** of an invertible square matrix $\mathbf{A}$ is 
+:label: definition-matrixcond
+The {term}`matrix condition number` of an invertible square matrix $\mathbf{A}$ is 
 
 ```{math}
 :label: mxcond
@@ -95,8 +96,8 @@ Note that for any induced matrix norm,
 
 A condition number of 1 is the best we can hope for—in that case, the relative perturbation of the solution has the same size as that of the data.  A condition number of size $10^t$ indicates that in floating-point arithmetic, roughly $t$ digits are lost (i.e., become incorrect) in computing the solution $\mathbf{x}$. And if $\kappa(\mathbf{A}) > \epsilon_\text{mach}^{-1}$, then for computational purposes the matrix is effectively singular. 
 
-(demo-condition-bound)=
 ::::{prf:example} Matrix condition number
+:label: demo-condition-bound
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -116,8 +117,8 @@ A condition number of 1 is the best we can hope for—in that case, the relative
 :::
 ```` 
 `````
-::::
 
+::::
 
 ## Residual and backward error
 
@@ -127,12 +128,14 @@ Suppose that $\mathbf{A}\mathbf{x}=\mathbf{b}$ and $\tilde{\mathbf{x}}$ is a com
 ```
 
 ::::{prf:definition} Residual of a linear system
+:label: definition-linresidual
 For the problem $\mathbf{A}\mathbf{x}=\mathbf{b}$, the **residual** at a solution estimate $\tilde{\mathbf{x}}$ is 
 
 ```{math}
 :label: residual
   \mathbf{r} = \mathbf{b} - \mathbf{A}\tilde{\mathbf{x}}.
 ```
+
 ::::
 
 ```{index} backward error; in a linear system

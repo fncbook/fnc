@@ -11,6 +11,7 @@ The real number set $\real$ is infinite in two ways: it is unbounded and continu
 ```
 
 ::::{prf:definition} Floating-point numbers
+:label: definition-float
 The set $\float$ of **floating-point numbers** consists of zero and all numbers of the form
 
 ```{math}
@@ -20,6 +21,7 @@ The set $\float$ of **floating-point numbers** consists of zero and all numbers 
 
 ```{index} see: mantissa; significand
 ```
+
 ```{index} ! significand
 ```
 
@@ -42,8 +44,8 @@ f = 2^{-d}\, \sum_{i=1}^{d} b_{i} \, 2^{d-i} = 2^{-d} z
 
 for an integer $z$ in the set $\{0,1,\ldots,2^d-1\}$. Consequently, starting at $2^n$ and ending just before $2^{n+1}$ there are exactly $2^d$ evenly spaced numbers belonging to $\float$. 
 
-(example-float-2bits)=
 ````{prf:example}
+:label: example-float-2bits
 Suppose $d=2$. Taking $n=0$ in {eq}`floatpoint`, we enumerate
 
 $$
@@ -63,6 +65,7 @@ Observe that the smallest element of $\float$ that is greater than 1 is $1+2^{-d
 ```
 
 ::::{prf:definition} Machine epsilon
+:label: definition-macheps
 For a floating-point set with $d$ binary digits of precision, **machine epsilon** (or *machine precision*) is $\macheps = 2^{-d}$.
 ::::
 
@@ -148,15 +151,15 @@ We often round this value down to an integer, but it does make sense to speak of
 :::
 ```` 
 `````
-::::
 
+::::
 
 ## Double precision
 
 ```{index} machine epsilon; in double precision, IEEE 754
 ```
 
-Most numerical computing today is done in the **IEEE 754** standard. This defines **single precision** with $d=23$ binary digits for the fractional part $f$, and the more commonly used **double precision** with $d=52$. In double precision,
+Most numerical computing today is done in the **IEEE 754** standard. This defines **single precision** with $d=23$ binary digits for the fractional part $f$, and the more commonly used {term}`double precision` with $d=52$. In double precision,
 
 ```{math}
 :label: doubleprec
@@ -165,8 +168,8 @@ Most numerical computing today is done in the **IEEE 754** standard. This define
 
 We often speak of double-precision floating-point numbers as having about 16 decimal digits. The 52-bit significand is paired with a sign bit and 11 binary bits to represent the exponent $n$ in {eq}`floatpoint`, for a total of 64 binary bits per floating-point number.
 
-(demo-float-double)=
 ::::{prf:example} Floating-point representation
+:label: demo-float-double
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -211,8 +214,8 @@ Computer arithmetic is performed on floating-point numbers and returns floating-
 ```
 Hence the relative error in arithmetic is essentially the same as for the floating-point representation itself. However, playing by these rules can lead to disturbing results.
 
-(demo-float-arithmetic)=
 ::::{prf:example} Floating-point arithmetic oddity
+:label: demo-float-arithmetic
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

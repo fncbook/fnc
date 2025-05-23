@@ -7,8 +7,8 @@ numbering:
 
 Many nonlinear elliptic PDEs include references to the Laplacian operator.
 
-(example-mems2dmodel)=
 ::::{prf:example}
+:label: example-mems2dmodel
 Recall the micromechanical deflector modeled in a disk by {eq}`mems`. A fully two-dimensional equivalent is (see {cite}`peleskoEffectSmallaspectratio2006`)
 
 :::{math}
@@ -42,8 +42,8 @@ on the boundary of $R$.
 
 In order to solve for as few unknowns as possible, we use a Chebyshev discretization of the domain. The core idea is to formulate collocation equations at the grid points based on discrete approximations of {eq}`nonlinpdepde` and {eq}`nonlinpdebc`. If the PDE is nonlinear, then these equations are also nonlinear and are to be solved by a quasi-Newton iteration. @function-elliptic is our implementation.
 
-(function-elliptic)=
 ``````{prf:algorithm} elliptic
+:label: function-elliptic
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -88,8 +88,8 @@ The function returned by @function-elliptic performs interpolation as described 
 
 [^grideval]: The interpolation algorithm in {numref}`Function {number} <function-elliptic>` is inefficient when $u$ is to be evaluated on a finer grid, as for plotting. A more careful version could re-use the same values $v_j = p_j(\xi)$ for multiple values of $\eta$.
 
-(demo-nonlinear2d-mems)=
 ::::{prf:example} MEMS model in 2D
+:label: demo-nonlinear2d-mems
 
 We solve the PDE
 
@@ -123,8 +123,8 @@ on the rectangle $[0,2.5] \times [0,1]$, with a zero Dirichlet condition on the 
 ```{index} advection-diffusion equation
 ```
 
-(demo-nonlinear-advdiff)=
 ::::{prf:example} Steady advection-diffusion in 2D
+:label: demo-nonlinear-advdiff
 
 The steady-state limit of an advection-diffusion equation is
 
@@ -159,8 +159,8 @@ Here we solve it with a homogeneous Dirichlet condition on the square $[-1,1]^2$
 ```{index} Allen–Cahn equation
 ```
 
-(demo-nonlinear2d-allencahn)=
 ::::{prf:example} Steady Allen–Cahn in 2D
+:label: demo-nonlinear2d-allencahn
 
 The stationary Allen–Cahn equation in two dimensions is
 

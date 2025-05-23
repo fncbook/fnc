@@ -10,8 +10,8 @@ numbering:
 
 To this point, we have used only equally spaced nodes to compute integrals. Yet there are problems in which non-uniformly distributed nodes would clearly be more appropriate, as demonstrated in @demo-adapt-motive.
 
-(demo-adapt-motive)=
 ::::{prf:example} Motivation for adaptive integration
+:label: demo-adapt-motive
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -136,8 +136,8 @@ If the error estimate passes the test {eq}`absreltolerance`, the better Simpson 
 `````
 ``````
 
-(demo-adapt-usage)=
 ::::{prf:example} Using adaptive integration
+:label: demo-adapt-usage
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

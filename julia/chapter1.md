@@ -434,7 +434,7 @@ r = [-2.0, -1, 1, 1, 3, 6]
 p = fromroots(r)
 ```
 
-Now we use a standard numerical method for finding those roots, pretending that we don't know them already. This corresponds to $\tilde{y}$ in {numref}`Definition {number} <definition-stability-backward>`. 
+Now we use a standard numerical method for finding those roots, pretending that we don't know them already. This corresponds to $\tilde{y}$ in {numref}`Definition {number} <definition-backward-error>`. 
 
 ```{code-cell}
 r̃ = sort(roots(p))   # type r\tilde and then press Tab
@@ -457,7 +457,7 @@ println("Root errors:")
 
 It seems that the forward error is acceptably close to machine epsilon for double precision in all cases except the double root at $x=1$. This is not a surprise, though, given the poor conditioning at such roots.
 
-Let's consider the backward error. The data in the rootfinding problem is the polynomial coefficients. We can apply `fromroots` to find the coefficients of the polynomial (that is, the data) whose roots were actually computed by the numerical algorithm. This corresponds to $\tilde{x}$ in {numref}`Definition {number} <definition-stability-backward>`. 
+Let's consider the backward error. The data in the rootfinding problem is the polynomial coefficients. We can apply `fromroots` to find the coefficients of the polynomial (that is, the data) whose roots were actually computed by the numerical algorithm. This corresponds to $\tilde{x}$ in {numref}`Definition {number} <definition-backward-error>`. 
 
 ```{code-cell}
 p̃ = fromroots(r̃)

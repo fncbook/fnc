@@ -15,8 +15,8 @@ Let's call this the *principle of approximate approximation.*
 
 In the Newton context, the principle of approximate approximation begins with the observation that the use of $f'$ is linked to the construction of a linear approximation $q(x)$ equivalent to a tangent line. The root of $q(x)$ is used to define the next iterate in the sequence. We can avoid calculating the value of $f'$ by choosing a different linear approximation.
 
-(demo-secant-line)=
 ::::{prf:example} Graphical interpretation of the secant method
+:label: demo-secant-line
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -38,7 +38,7 @@ In the Newton context, the principle of approximate approximation begins with th
 `````
 ::::
 
-The example in @demo-secant-line demonstrates the **secant method**. In the secant method, one finds the root of the linear approximation through the two most recent root estimates. That is, given previous approximations $x_1,\ldots,x_k$, define the linear model function as the line through $\bigl(x_{k-1},f(x_{k-1})\bigr)$ and $\bigl(x_k,f(x_k)\bigr)$:
+The example in @demo-secant-line demonstrates the {term}`secant method`. In the secant method, one finds the root of the linear approximation through the two most recent root estimates. That is, given previous approximations $x_1,\ldots,x_k$, define the linear model function as the line through $\bigl(x_{k-1},f(x_{k-1})\bigr)$ and $\bigl(x_k,f(x_k)\bigr)$:
 
 ```{math}
 :label: secantmodel
@@ -62,8 +62,8 @@ x_{k+1} = x_k - \frac{f(x_k)(x_k-x_{k-1})}{f(x_k)-f(x_{k-1})}, \quad k=2,3,\ldot
 
 Our implementation of the secant method is given in {numref}`Function {number} <function-secant>`.
 
-(function-secant)=
 ``````{prf:algorithm} secant
+:label: function-secant
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -121,9 +121,10 @@ for an unknown constant $C$. Treating the approximation as an equality, this bec
 ```{index} ! convergence rate; superlinear
 ```
 
-Hence the errors in the secant method converge like $\epsilon_{k+1} = c (\epsilon_k)^\alpha$  for $1<\alpha<2$.
+Hence, the errors in the secant method converge like $\epsilon_{k+1} = c (\epsilon_k)^\alpha$  for $1<\alpha<2$.
 
 ::::{prf:definition} Superlinear convergence
+:label: definition-superlinear-convergence
 Suppose a sequence $x_k$ approaches limit $x^*$. If the error sequence $\epsilon_k=x_k - x^*$ satisfies
 
 ```{math}
@@ -131,7 +132,7 @@ Suppose a sequence $x_k$ approaches limit $x^*$. If the error sequence $\epsilon
   \lim_{k\to\infty} \frac{|\epsilon_{k+1}|}{|\epsilon_k|^\alpha} = L
 ```
 
-for constants $\alpha >1$ and $L>0$, then the sequence has **superlinear convergence** with rate $\alpha$. 
+for constants $\alpha >1$ and $L>0$, then the sequence has {term}`superlinear convergence` with rate $\alpha$. 
 ::::
 
 Quadratic convergence is a particular case of superlinear convergence. Roughly speaking, we expect
@@ -144,8 +145,8 @@ Quadratic convergence is a particular case of superlinear convergence. Roughly s
 
 as $k\to\infty$.
 
-(demo-secant-converge)=
 ::::{prf:example} Convergence of the secant method
+:label: demo-secant-converge
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -197,8 +198,8 @@ If we interpolate through three points by a polynomial, we get a unique quadrati
 
 This leads to the idea of defining $q(y)$ as the quadratic interpolant to the points $(y_{k-2},x_{k-2})$, $(y_{k-1},x_{k-1})$, and $(y_k,x_k)$, where $y_i=f(x_i)$ for all $i$, and setting $x_{k+1}=q(0)$. The process defined in this way (given three initial estimates) is called **inverse quadratic interpolation**. Rather than deriving lengthy formulas for it here, we demonstrate how to perform inverse quadratic interpolation using `fit` to perform the interpolation step.
 
-(demo-secant-iqi)=
 ::::{prf:example} Inverse quadratic interpolation
+:label: demo-secant-iqi
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

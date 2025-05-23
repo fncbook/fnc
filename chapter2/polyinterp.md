@@ -10,8 +10,8 @@ numbering:
 
 The United States carries out a census of its population every 10 years. Suppose we want to know the population at times in between the census years, or to estimate future populations. One technique is to find a polynomial that passes through all the data points.[^census]
 
-(definition-polyinterp-polyinterp)=
 ::::{prf:definition} Polynomial interpolation
+:label: definition-polyinterp
 Given $n$ points $(t_1,y_1),\ldots,(t_n,y_n)$, where the $t_i$ are all distinct, the **polynomial interpolation** problem is to find a polynomial $p$ of degree less than $n$ such that $p(t_i)=y_i$ for all $i$.
 ::::
 
@@ -74,13 +74,14 @@ or more simply, $\mathbf{V} \mathbf{c} = \mathbf{y}$. The matrix $\mathbf{V}$ is
 ```
 
 ::::{prf:definition} Vandermonde matrix
-Given distinct values $t_1,\ldots,t_n$, a **Vandermonde matrix** for these values is the $n\times n$ matrix appearing in {eq}`vandersystem`.
+:label: definition-vandermonde
+Given distinct values $t_1,\ldots,t_n$, a {term}`Vandermonde matrix` for these values is the $n\times n$ matrix appearing in {eq}`vandersystem`.
 ::::
 
 Polynomial interpolation can therefore be posed as a linear system of equations with a Vandermonde matrix.
 
-(demo-interp-vander)=
 ::::{prf:example} Linear system for polynomial interpolation
+:label: demo-interp-vander
 
 `````{tab-set}
 ````{tab-item} Julia

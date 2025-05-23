@@ -11,11 +11,12 @@ Predicting how long an algorithm will take to solve a particular problem, on a p
 
 ```{index} ! asymptotic notation
 ```
-(definition-asymptotic-notation)=
-::::{prf:definition} Asymptotic notation
-Let $f(n)$ and $g(n)$ be positive-valued functions. We say $f(n)=O(g(n))$ (read "$f$ is **big-O** of $g$") as $n\rightarrow \infty$ if $f(n)/g(n)$ is bounded above as $n\to\infty$.
 
-We say $f(n)\sim g(n)$ (read "$f$ is **asymptotic** to $g$") as $n\rightarrow \infty$ if $f(n)/g(n)\rightarrow 1$ as $n\rightarrow\infty$.
+::::{prf:definition} Asymptotic notation
+:label: definition-asymptotic-notation
+Let $f(n)$ and $g(n)$ be positive-valued functions. We say $f(n)=O(g(n))$ (read "$f$ is {term}`big-O` of $g$") as $n\rightarrow \infty$ if $f(n)/g(n)$ is bounded above as $n\to\infty$.
+
+We say $f(n)\sim g(n)$ (read "$f$ is {term}`asymptotic` to $g$") as $n\rightarrow \infty$ if $f(n)/g(n)\rightarrow 1$ as $n\rightarrow\infty$.
 ::::
 
 One immediate consequence is that $f\sim g$ implies $f=O(g)$.[^sets]
@@ -72,8 +73,8 @@ There is a memorable way to use asymptotic notation to simplify sums:
 
 These formulas greatly resemble the definite integral of $x^p$. 
 
-(example-efficiency-sums)=
 ::::{prf:example}
+:label: example-efficiency-sums
 \begin{align*}
 \sum_{k=1}^{n-1} 4k^2 + 3 & = 4 \left( \sum_{k=1}^{n-1} k^2\right)  + 3 \sum_{k=1}^{n-1} 1\\ 
 &\sim 4 \left( \frac{1}{3} (n-1)^3 \right) + 3(n-1) \\ 
@@ -84,14 +85,24 @@ These formulas greatly resemble the definite integral of $x^p$.
 
 ## Flop counting
 
-```{index} flops
+```{index} ! flops
 ```
 
-Traditionally, in numerical linear algebra we count **floating-point operations**, or **flops** for short. In our interpretation each scalar addition, subtraction, multiplication, division, and square root counts as one flop. Given any algorithm, we simply add up the number of scalar flops and ignore everything else.
+Traditionally, in numerical linear algebra, we count arithmetic oprerations to measure an algorithm's running time.
 
-(demo-flops-mvmult)=
+::::{prf:definition} Floating-point operation
+:label: definition-flop
+A **floating-point operation** or {term}`flop` is a single addition, subtraction, multiplication, division, or square root of two floating-point numbers.
+::::
+
+:::{important}
+Flop counts are, to put it mildly, a very rough measure of the time a computer program takes to run. Many other factors, such as memory access and copying, have significant effects as well. Still, flop counts can be a useful way to compare different algorithms and to estimate how the runtime requirements scale with the problem size.
+:::
+
 ::::{prf:example} Floating-point operations in matrix-vector multiplication
-`````{tab-set} 
+:label: demo-flops-mvmult
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-flops-mvmult-julia
@@ -110,20 +121,22 @@ Traditionally, in numerical linear algebra we count **floating-point operations*
 :::
 ```` 
 `````
+
 ::::
 
 Suppose that the running time $t$ of an algorithm obeys a function that is $O(n^p)$. For sufficiently large $n$, $t\approx Cn^p$ for a constant $C$ should be a good approximation. Hence
 
 ```{math}
 :label: loglogfit
-  t \approx Cn^p \qquad \Longleftrightarrow \qquad \log t \approx p(\log n) + \log C.
+t \approx Cn^p \qquad \Longleftrightarrow \qquad \log t \approx p(\log n) + \log C.
 ```
 
-So we expect that a graph of $\log t$ as a function of $\log n$ will be a straight line of slope $p$.
+So, we expect that a graph of $\log t$ as a function of $\log n$ will be a straight line of slope $p$.
 
-(demo-flops-loglog)=
 ::::{prf:example} Asymptotics in log-log plots
-`````{tab-set} 
+:label: demo-flops-loglog
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-flops-loglog-julia
@@ -142,6 +155,7 @@ So we expect that a graph of $\log t$ as a function of $\log n$ will be a straig
 :::
 ```` 
 `````
+
 ::::
 
 ## Solution of linear systems
@@ -189,7 +203,7 @@ The range `k:n`, where $k\le n$, has $n-k+1$ elements.
 
 Line 17 above divides each element of the vector `Aₖ[k:n,k]` by a scalar. Hence, the number of flops equals the length of the vector, which is $n-k+1$. 
 
-Line 18 has an outer product followed by a matrix subtraction. The definition @def-outerprod of the outer product makes it clear that that computation takes one flop (multiplication) per element of the result, which here results in $(n-k+1)^2$ flops. The number of subtractions is identical. 
+Line 18 has an outer product followed by a matrix subtraction. The definition @definition-outerprod of the outer product makes it clear that that computation takes one flop (multiplication) per element of the result, which here results in $(n-k+1)^2$ flops. The number of subtractions is identical. 
 
 Altogether the factorization takes
 
@@ -210,8 +224,8 @@ We have proved the following.
 ```{prf:theorem} Efficiency of LU factorization
 The LU factorization of an $n\times n$ matrix takes $\sim\frac{2}{3}n^3$ flops as $n\to \infty$. This dominates the flops for solving an $n\times n$ linear system.
 ```
-(demo-flops-lufact)=
 ::::{prf:example} Floating-point operations in LU factorization
+:label: demo-flops-lufact
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

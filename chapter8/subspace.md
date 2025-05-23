@@ -21,19 +21,20 @@ It stands to reason that we could do no worse, and perhaps much better, if we se
 ```
 
 ::::{prf:definition} Krylov matrix and subspace
-Given $n\times n$ matrix $\mathbf{A}$ and $n$-vector $\mathbf{u}$, the $m$th **Krylov matrix** is the $n\times m$ matrix {eq}`krylovmatrix`. The range (i.e., column space) of this matrix is the $m$th **Krylov subspace** $\mathcal{K}_m$.
+:label: definition-krylov
+Given $n\times n$ matrix $\mathbf{A}$ and $n$-vector $\mathbf{u}$, the $m$th **Krylov matrix** is the $n\times m$ matrix {eq}`krylovmatrix`. The range (i.e., column space) of this matrix is the $m$th {term}`Krylov subspace` $\mathcal{K}_m$.
 ::::
 
 In general, we expect that the dimension of the Krylov[^kreeluv] subspace $\mathcal{K}_m$, which is the rank of $\mathbf{K}_m$, equals $m$, though it may be smaller.
 
-[^kreeluv]: The proper pronunciation of "Krylov" is something like "kree-luv," but American English speakers often say "kreye-lahv." 
+[^kreeluv]: The proper pronunciation of "Krylov" is something like "kree-luv," but American English speakers often say "kreye-lahv."
 
 ## Properties
 
 As we have seen with the power iteration, part of the appeal of the Krylov matrix is that it can be generated in a way that fully exploits the sparsity of $\mathbf{A}$, simply through repeated matrix-vector multiplication. Furthermore, we have some important mathematical properties.
 
-(theorem-subspace-krylovmult)=
 ::::{prf:theorem}
+:label: theorem-subspace-krylovmult
 Suppose $\mathbf{A}$ is $n\times n$, $0<m<n$, and a vector $\mathbf{u}$ is used to generate Krylov subspaces. If $\mathbf{x}\in\mathcal{K}_m$, then the following hold:
 
 1. $\mathbf{x} = \mathbf{K}_m \mathbf{z}$ for some $\mathbf{z}\in\mathbb{C}^m$.
@@ -76,8 +77,8 @@ For instance, we can interpret $\mathbf{A}\mathbf{x}_m\approx \mathbf{b}$ in the
 
 The natural seed vector for $\mathcal{K}_m$ in this case is the vector $\mathbf{b}$. In the next example we try to implement {eq}`gmresdef`. We do take one precaution: because the vectors $\mathbf{A}^{k}\mathbf{b}$ may become very large or small in norm, we normalize after each multiplication by $\mathbf{A}$, just as we did in the power iteration.
 
-(demo-subspace-unstable)=
 ::::{prf:example} Conditioning of the Krylov matrix
+:label: demo-subspace-unstable
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -140,8 +141,9 @@ We can now proceed iteratively.
 
 ```{index} ! Arnoldi iteration
 ```
-(algorithm-subspace-arnoldi)=
-::::{prf:algorithm} Arnoldi iteration
+
+::::{prf:definition} Arnoldi iteration
+:label: definition-arnoldi-iteration
 Given matrix $\mathbf{A}$ and vector $\mathbf{u}$:
 
 1. Let $\mathbf{q}_1= \mathbf{u} \,/\, \| \mathbf{u}\|$.
@@ -196,8 +198,8 @@ which is a fundamental identity of Krylov subspace methods.
 
 An implementation of the Arnoldi iteration is given in {numref}`Function {number} <function-arnoldi>`. A careful inspection shows that inner nested loop does not exactly implement {eq}`arnoldiip` and {eq}`arnoldigs`. The reason is numerical stability. Though the described and implemented versions are mathematically equivalent in exact arithmetic (see @problem-subspace-modifiedgs), the approach in {numref}`Function {number} <function-arnoldi>` is more stable.
 
-(function-arnoldi)=
 ``````{prf:algorithm} arnoldi
+:label: function-arnoldi
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -219,8 +221,8 @@ An implementation of the Arnoldi iteration is given in {numref}`Function {number
 `````
 ``````
 
-(demo-subspace-arnoldi)=
 ::::{prf:example} Arnoldi iteration
+:label: demo-subspace-arnoldi
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia

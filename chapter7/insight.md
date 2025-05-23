@@ -31,6 +31,7 @@ In 2006 the online video service Netflix started an open competition for a $1 mi
 ```
 
 ::::{prf:definition} Graphs and adjacency matrices
+:label: definition-adjacency-matrix
 A {term}`graph` or *network* consists of a set $V$ of **nodes** and a set $E$ of **edges**, each of which is an ordered pair of nodes. If there is an edge $(v_i,v_j)$, then we say that node $i$ is **adjacent** to node $j$. The graph is **undirected** if for every edge $(v_i,v_j)$, the pair $(v_j,v_i)$ is also an edge; otherwise the graph is **directed**.
 
 The {term}`adjacency matrix` of a graph with $n$ nodes $V$ and edge set $E$ is the $n\times n$ matrix whose elements are
@@ -53,8 +54,8 @@ Graphs are a useful way to represent the link structure of social networks, airl
 
 Here are some elementary results about adjacency matrices. 
 
-(theorem-insight-adjmat)=
 ::::{prf:theorem}
+:label: theorem-insight-adjmat
 For any {term}`graph` with {term}`adjacency matrix` $\mathbf{A}$,
 
 1. The graph is undirected if and only if $\mathbf{A}$ is symmetric, and
@@ -73,8 +74,8 @@ $$
 which is the $(i,j)$ element of $\mathbf{A}^k$.
 ::::
 
-(demo-insight-graph)=
 ::::{prf:example} Adjacency matrix
+:label: demo-insight-graph
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -105,8 +106,8 @@ The representation of a graph by its adjacency matrix opens up the possibility o
 
 Computers typically represent images as rectangular arrays of pixels, each of which is colored according to numerical values for red (R), green (G), and blue (B) components of white light. Most often, these are given as integers in the range from zero (no color) to 255 (full color). Thus, an image that is $m$-by-$n$ pixels can be stored as an $m$-by-$n$-by-3 array of integer values. In Julia, we can work with an $m\times n$ matrix of 3-vectors representing entire colors.
 
-(demo-insight-image)=
 ::::{prf:example} Images as matrices
+:label: demo-insight-image
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

@@ -24,14 +24,29 @@ We will have frequent need to refer to the individual columns of a matrix as vec
 ```{index} transpose, adjoint of a matrix, ! symmetric matrix, hermitian matrix
 ```
 
-The notation $\mathbf{A}^T$ is used for the transpose of a matrix, whether it is real or complex. In the case of complex matrices, it's almost always more desirable to use the **adjoint** $\mathbf{A}^*$, which is the transpose with the complex conjugate of each element.[^conjugate]  If $\mathbf{A}$ is real, then $\mathbf{A}^*=\mathbf{A}^T$. A **symmetric matrix** is a square matrix such that $\mathbf{A}^T=\mathbf{A}$. 
+The notation $\mathbf{A}^T$ is used for the transpose of a matrix, in which the rows and columns switch places. In the case of complex matrices, the complex conjugate[^conjugate] becomes involved with this operation.
+
+::::{prf:definition} Adjoint
+:label: definition-adjoint
+The {term}`adjoint` or hermitian of a matrix, denoted, $\mathbf{A}^*$, is the elementwise complex conjugate of the transpose of $\mathbf{A}$.
+::::
+
+If $\mathbf{A}$ is real, then $\mathbf{A}^*=\mathbf{A}^T$. 
+
+::::{prf:definition} Symmetric and hermitian matrices
+:label: definition-symmetric-matrix
+A {term}`symmetric matrix` is a square matrix such that $\mathbf{A}^T=\mathbf{A}$. A {term}`hermitian matrix` or self-adjoint matrix is a square matrix such that $\mathbf{A}^*=\mathbf{A}$.
+::::
 
 [^conjugate]: The conjugate of a complex number is found by replacing all references to the imaginary unit $i$ by $-i$.
 
-```{index} identity matrix
+```{index} ! identity matrix
 ```
 
-The **identity matrix** of size $n$ is denoted $\mathbf{I}$, or sometimes $\mathbf{I}_n$ if emphasizing the size is important in context. For columns of the identity we break with our usual naming convention and denote them by $\mathbf{e}_j$.
+:::{prf:definition} Identity matrix
+:label: definition-identity-matrix
+The {term}`identity matrix` of size $n$ is denoted $\mathbf{I}$, or sometimes $\mathbf{I}_n$, is an $n\times n$ matrix with ones on the main diagonal and zeros elsewhere. It is the multiplicative identity for matrix multiplication. For columns of the identity, we break with our usual naming convention and denote them by $\mathbf{e}_j$.
+:::
 
 ## Block matrix expressions
 
@@ -74,8 +89,8 @@ provided that the individual block products are well-defined. For transposes, we
 
 Vectors and matrices are integral to scientific computing. All modern languages provide ways to work with them beyond manipulation of individual elements. 
 
-(demo-matrices)=
 ::::{prf:example} Matrix operations
+:label: demo-matrices
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

@@ -35,8 +35,8 @@ As described in {numref}`section-twodim-tensorprod`, the rectangular domain is d
 
 Our destination is an IVP that can be solved by a Runge–Kutta or multistep solver. These solvers are intended for vector problems, but our unknowns naturally have a matrix shape, which is the most convenient for the differentiation formulas {eq}`partfpartx` and {eq}`partfparty`. Fortunately, it's easy to translate back and forth between a matrix and an equivalent vector.
 
-(definition-diffadv-vec)=
 ::::{prf:definition} vec and unvec operations
+:label: definition-diffadv-vec
 Let $\mathbf{A}$ be an $m\times n$ matrix. Define the **vec** function as stacking the columns of $\mathbf{A}$ into a vector, i.e.,
 
 :::{math}
@@ -101,8 +101,8 @@ The incorporation of transposes is because NumPy uses row-major order, while MAT
 
 ``````
 
-(demo-diffadv-vec)=
 ::::{prf:example} Reshaping for grid functions
+:label: demo-diffadv-vec
 
 `````{tab-set}
 ````{tab-item} Julia
@@ -128,8 +128,8 @@ The incorporation of transposes is because NumPy uses row-major order, while MAT
 
 In order to modularize our codes, we use @function-tensorgrid to define functions and values related to working with tensor-product grids. Its final output is to be discussed and used in @section-twodim-laplace.
 
-(function-tensorgrid)=
 ``````{prf:algorithm} tensorgrid
+:label: function-tensorgrid
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -158,8 +158,8 @@ If the boundary conditions are periodic, then the unknowns in the method of line
 ```{index} heat equation
 ```
 
-(demo-diffadv-heat)=
 ::::{prf:example} Heat equation in 2D
+:label: demo-diffadv-heat
 We will solve a 2D heat equation, $u_t = 0.1(u_{xx} + u_{yy})$, on the square $[-1,1]\times[-1,1]$, with periodic behavior in both directions. The initial condition is 
 
 ```{math}
@@ -257,8 +257,8 @@ The `vec` and `unvec` reshaping operations in this context take place on the _in
 ```{index} advection-diffusion equation
 ```
 
-(demo-diffadv-advdiff)=
 ::::{prf:example} Advection-diffusion equation in 2D
+:label: demo-diffadv-advdiff
 
 We solve an advection-diffusion problem, $u_t + u_x = 1 + \epsilon(u_{xx} + u_{yy})$ on the square $[-1,1]^2$, with $u=0$ on the boundary. The outline of our approach is based on {numref}`Function {number} <function-parabolic>` for parabolic PDEs in one space dimension.
 
@@ -303,8 +303,8 @@ Typical boundary conditions are to prescribe $u$ on the boundary and let $v$ be 
 
 Now the grid functions are a pair of matrices $\mathbf{U}(t)$ and $\mathbf{V}(t)$. We need to chop $\mathbf{U}$ to an interior $\mathbf{W}$ and extend back using boundary data. Note that the IVP unknowns $\mathbf{W}$ and $\mathbf{V}$ have different sizes, so there are two separate reshaping operations involved. All of these details are handled within the `pack` and `unpack` functions we create.
 
-(demo-diffadv-wave)=
 ::::{prf:example} Wave equation in 2D
+:label: demo-diffadv-wave
 
 We solve the wave equation with $c=1$ on the square $[-2,2]\times[-2,2]$, with $u=0$ on the boundary.
 

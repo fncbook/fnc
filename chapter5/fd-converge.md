@@ -29,8 +29,8 @@ Although we are measuring the truncation error only at $x=0$, it could be define
 
 All of the finite-difference formulas given in {numref}`section-localapprox-finitediffs` are convergent.
 
-(example-fd-converge-FD11)=
 ````{prf:example}
+:label: example-fd-converge-FD11
 The forward difference formula {eq}`forwardFD11` given by $(f(h)-f(0))/h$ yields
 
 ```{math}
@@ -51,8 +51,8 @@ Of major interest is the rate at which $\tau_f\to 0$ in a convergent formula.
 
 ```{index} ! order of accuracy; of a finite-difference formula
 ```
-(definition-fd-converge-ooa)=
 ::::{prf:definition} Order of accuracy of a finite-difference formula
+:label: definition-fd-converge-ooa
 If the truncation error of a finite-difference formula satisfies $\tau_f(h)=O(h^m)$ for a positive integer $m$, then $m$ is the **order of accuracy** of the formula.
 ::::
 
@@ -62,8 +62,8 @@ Order of accuracy is calculated by expanding $\tau_f$ in a Taylor series about $
 
 [^trunc]: The term *truncation error* is derived from the idea that the finite-difference formula, being finite, has to truncate the series representation and thus cannot be exactly correct for all functions.
 
-(example-fd-converge-FD12)=
 ````{prf:example}
+:label: example-fd-converge-FD12
 We compute the truncation error of the centered difference formula {eq}`centerFD12`:
   
 ```{math}
@@ -78,8 +78,8 @@ We compute the truncation error of the centered difference formula {eq}`centerFD
 
 Thus, this method has order of accuracy equal to 2.
 ````
-(demo-fdconverge-order12)=
 ::::{prf:example} Convergence of finite differences
+:label: demo-fdconverge-order12
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -167,8 +167,8 @@ and the optimum total error is roughly $\epsilon_\text{mach}^{\,\, m/(m+1)}$.
 
 A different statement of the conclusion is that for a first-order formula, at most we can expect accuracy in only about half of the available machine digits. As $m$ increases, we get ever closer to using the full accuracy available. Higher-order finite-difference methods are both more efficient and less vulnerable to roundoff than low-order methods.
 
-(demo-fdconverge-round)=
 ::::{prf:example} Roundoff error in finite differences
+:label: demo-fdconverge-round
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

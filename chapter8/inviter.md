@@ -7,7 +7,6 @@ numbering:
 
 Power iteration finds only the dominant eigenvalue. We next show that it can be adapted to find any eigenvalue, provided you start with a reasonably good estimate of it. Some simple linear algebra is all that is needed.
 
-
 ::::{prf:theorem}
 Let $\mathbf{A}$ be an $n\times n$ matrix with eigenvalues $\lambda_1,\ldots,\lambda_n$ (possibly with repeats), and let $s$ be a complex scalar. Then:
 
@@ -19,10 +18,8 @@ Let $\mathbf{A}$ be an $n\times n$ matrix with eigenvalues $\lambda_1,\ldots,\la
 ::::{prf:proof}
 :enumerated: false
 
-
 The equation $\mathbf{A}\mathbf{v}=\lambda \mathbf{v}$ implies that $(\mathbf{A}-s\mathbf{I})\mathbf{v} = \mathbf{A}\mathbf{v} - s\mathbf{I}\mathbf{v} = \lambda\mathbf{v} - s\mathbf{v} = (\lambda-s)\mathbf{v}$. That proves the first part of the theorem. For the second part, we note that by assumption, $(\mathbf{A}-s\mathbf{I})$ is nonsingular, so $(\mathbf{A}-s\mathbf{I})\mathbf{v} = (\lambda-s) \mathbf{v}$ implies that $\mathbf{v} = (\lambda-s) (\mathbf{A}-s\mathbf{I}) \mathbf{v}$, or $ (\lambda-s)^{-1} \mathbf{v} =(\mathbf{A}-s\mathbf{I})^{-1} \mathbf{v}$. The discussion above also proves the third part of the theorem.
 ::::
-
 
 Consider first part 2 of the theorem with $s=0$, and suppose that $\mathbf{A}$ has a *smallest* eigenvalue,
 
@@ -63,16 +60,16 @@ A literal application of {numref}`Algorithm {number} <algorithm-power-power>` wo
 \mathbf{y}_k = (\mathbf{A}-s\mathbf{I})^{-1} \mathbf{x}_k.
 :::
 
-As always, we do not want to explicitly find the inverse of a matrix. Instead we should write this step as the solution of a linear system.
+As always, we do not want to explicitly find the inverse of a matrix. Instead, we should write this step as the solution of a linear system.
 
 ```{index} ! inverse iteration
 ```
+
 ```{index} see: shifted inverse iteration; inverse iteration
 ```
 
-
-(algorithm-inviter-inviter)=
-::::{prf:algorithm} Inverse iteration
+::::{prf:definition} Inverse iteration
+:label: definition-inviter
 Given matrix $\mathbf{A}$ and shift $s$:
 1. Choose $\mathbf{x}_1$.
 2. For $k=1,2,\ldots$, 
@@ -93,13 +90,13 @@ Return $\beta_1,\beta_2,\ldots$ as eigenvalue estimates, and $\mathbf{x}_1,\math
 ::::
 
 :::{note}
-In {numref}`Algorithm {number} <algorithm-power-power>`, we used $y_{k,m}/x_{k,m}$ as an estimate of the dominant eigenvalue of $\mathbf{A}$. Here, that ratio is an estimate of $(\lambda_1-s)^{-1}$, and solving for $\lambda_1$ gives the $\beta_k$ in @algorithm-inviter-inviter.
+In {numref}`Algorithm {number} <algorithm-power-power>`, we used $y_{k,m}/x_{k,m}$ as an estimate of the dominant eigenvalue of $\mathbf{A}$. Here, that ratio is an estimate of $(\lambda_1-s)^{-1}$, and solving for $\lambda_1$ gives the $\beta_k$ in @definition-inviter.
 :::
 
 Each pass of inverse iteration requires the solution of a linear system of equations with the matrix $\mathbf{B}=\mathbf{A}-s\mathbf{I}$. This solution might use methods we consider later in this chapter. Here, we use (sparse) PLU factorization and hope for the best. Since the matrix $\mathbf{B}$ is constant, the factorization needs to be done only once for all iterations. The details are in {numref}`Function {number} <function-inviter>`.
 
-(function-inviter)=
 ``````{prf:algorithm} inviter
+:label: function-inviter
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -133,8 +130,8 @@ The convergence is linear, at a rate found by reinterpreting {eq}`poweriterconv`
 
 with the eigenvalues ordered as in {eq}`shiftorder`. Thus, the convergence is best when the shift $s$ is close to the target eigenvalue $\lambda_1$, specifically when it is much closer to that eigenvalue than to any other.
 
-(demo-inviter-conv)=
 ::::{prf:example} Convergence of inverse iteration 
+:label: demo-inviter-conv
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -158,15 +155,15 @@ with the eigenvalues ordered as in {eq}`shiftorder`. Thus, the convergence is be
 
 ## Dynamic shifting
 
-There is a clear opportunity for positive feedback in {numref}`Algorithm {number} <algorithm-inviter-inviter>`. The convergence rate of inverse iteration improves as the shift gets closer to the true eigenvalue—and the algorithm computes improving eigenvalue estimates! If we update the shift to $s=\beta_k$ after each iteration, the convergence accelerates. You are asked to implement this algorithm in @problem-inviter-dynamicshift.
+There is a clear opportunity for positive feedback in {numref}`Algorithm {number} <definition-inviter>`. The convergence rate of inverse iteration improves as the shift gets closer to the true eigenvalue—and the algorithm computes improving eigenvalue estimates! If we update the shift to $s=\beta_k$ after each iteration, the convergence accelerates. You are asked to implement this algorithm in @problem-inviter-dynamicshift.
 
 ```{index} convergence rate; quadratic
 ```
 
 Let's analyze the resulting convergence. If the eigenvalues are ordered by distance to $s$, then the convergence is linear with rate $|\lambda_1-s|/|\lambda_2-s|$. As $s\to\lambda_1$, the change in the denominator is negligible. So if the error $(\lambda_1-s)$ is $\epsilon$, then the error in the next estimate is reduced by a factor $O(\epsilon)$. That is, $\epsilon$ becomes $O(\epsilon^2)$, which is *quadratic* convergence.
 
-(demo-inviter-accel)=
 ::::{prf:example} Dynamic shift strategy
+:label: demo-inviter-accel
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

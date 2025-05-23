@@ -21,8 +21,8 @@ Unlike the linear problems of the earlier chapters, the usual situation here is 
 ```{index} Bessel function
 ```
 
-(demo-rootproblem-bessel)=
 ::::{prf:example} The rootfinding problem for Bessel functions
+:label: demo-rootproblem-bessel
 In the theory of vibrations of a circular drum, the displacement of the drumhead can be expressed in terms of pure harmonic modes, 
 
 $$J_m(\omega_{k,m} r) \cos(m\theta) \cos(c \omega_{k,m} t),$$
@@ -87,8 +87,8 @@ We say $\kappa_r = \infty$ if $f'(r)=0$.
 Equivalently, {eq}`rootcondnum` is just the magnitude of the derivative of the inverse function $f^{-1}$ at zero. 
 
 
-(demo-roots-cond)=
 ::::{prf:example} Condition number of a rootfinding problem
+:label: demo-roots-cond
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -137,8 +137,8 @@ In general, it is not realistic to expect a small error in a root approximation 
 
 The condition number {eq}`rootcondnum` naturally leads to the question of what happens if $f'(r)=0$ at a root $r$. The following definition agrees with and extends the notion of algebraic multiplicity in a polynomial to roots of more general differentiable functions. 
 
-(definition-rootproblem-simple)=
 ::::{prf:definition} Multiplicity of a root
+:label: definition-rootproblem-simple
 If $f(r)=f'(r)=\cdots=f^{(m-1)}(r)=0$, but $f^{(m)}(r)\neq 0$, then we say $f$ has a root of **multiplicity** $m$ at $r$. In particular, if $f(r)=0$ and $f'(r)\neq 0$, then $m=1$ and we call $r$ a **simple root**.
 ::::
 

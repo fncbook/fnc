@@ -7,8 +7,8 @@ numbering:
 
 Interpolation is not the only way to use polynomials for global approximation of functions. In {numref}`section-leastsq-fitting` we saw how to find least-squares polynomial fits to data by solving linear least-squares matrix problems. This idea can be extended to fitting functions.
 
-(demo-orthogonal-approx)=
 ::::{prf:example} Continuous least-squares fitting
+:label: demo-orthogonal-approx
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -36,6 +36,7 @@ We can extend least-squares fitting from data to functions by extending several 
 ```
 
 ::::{prf:definition} Inner product of functions
+:label: definition-funinnerproduct
 Let $S$ be the set of continuous real-valued functions on the interval $[-1,1]$. The **inner product** of any functions $f$ and $g$ in $S$ is the real scalar
 
 :::{math}
@@ -76,7 +77,8 @@ which we want to abbreviate in "matrix"-vector form.
 ```{index} ! quasimatrix, ! Gram matrix
 ```
 
-::::{prf:definition} Quasimatrix and Gram matrix
+::::{prf:definition} Quasimatrix
+:label: definition-quasimatrix
 Given functions $f_1,\ldots,f_n$ in inner product space $S$, define the **quasimatrix**
 
 :::{math}
@@ -104,12 +106,19 @@ For another function $g\in S$, define the adjoint product
   \end{bmatrix}.
 :::
 
-Finally, define the **Gram matrix**
+::::
+
+::::{prf:definition} Gram matrix
+:label: definition-grammatrix
+
+Given functions $f_1,\ldots,f_n$ in inner product space $S$, their {term}`Gram matrix` is the $n\times n$ matrix
 
 :::{math}
 :label: Gram
-  \mathbf{F}^T \mathbf{F} = \bigl[ \langle f_i,f_j \rangle \bigr]_{\,i,j=1,\ldots,n}.
+\mathbf{F}^T \mathbf{F} = \bigl[ \langle f_i,f_j \rangle \bigr]_{\,i,j=1,\ldots,n},
 :::
+
+where $\mathbf{F}$ is their quasimatrix and $\langle f_i,f_j \rangle$ is the inner product of $f_i$ and $f_j$.
 ::::
 
 We consider any other expressions involving a quasimatrix to be undefined. It might help to think of $\mathbf{F}$ as an $\infty\times n$ matrix, which is consistent with the definitions that $\mathbf{F}\mathbf{z}$ is a function ($\infty\times 1$), $\mathbf{F}^T g$ is a vector ($n\times 1$), and $\mathbf{F}^T\mathbf{F}$ is a matrix ($n \times n$). When infinite dimensions combine in a product, we use integrals rather than sums.
@@ -139,8 +148,8 @@ The discrete linear least-squares problem of minimizing  $\| \mathbf{y} - \mathb
 
 We can now reinterpret {eq}`normalLS` in terms of quasimatrices. 
 
-(theorem-orthogonal-normal)=
 ::::{prf:theorem}
+:label: theorem-orthogonal-normal
 Given functions $f_1,\ldots,f_n$ and $y$ in an inner product space $S$, the least-squares problem
 
 :::{math}
@@ -159,8 +168,8 @@ where $\mathbf{F}$ is the quasimatrix {eq}`quasimat`.
 
 There is no need to supply a proof of @theorem-orthogonal-normal because it will read exactly the same as for the discrete normal equations. All the effort has gone into making definitions that set up a perfect analogy. In retrospect, all we needed in the original discrete case were linear combinations and inner products.
 
-(example-lsfitexpfun)=
 ::::{prf:example}
+:label: example-lsfitexpfun
 We revisit approximation of $e^x$ as suggested in @demo-orthogonal-approx. With the Vandermonde quasimatrix $\mathbf{V}= \begin{bmatrix} \underline{1} & \underline{x} \end{bmatrix}$, we get
   
 $$
@@ -236,8 +245,8 @@ For what follows, let $\mathcal{P}_n \subset S$ be the set of polynomials of deg
 ```{index} ! Legendre polynomials
 ```
 
-(definition-orthogonal-legendre)=
 ::::{prf:definition} Legendre polynomials
+:label: definition-orthogonal-legendre
 The **Legendre polynomials** are 
 
 :::{math}
@@ -252,8 +261,8 @@ The **Legendre polynomials** are
 
 Here are some key facts that are straightforward to prove.
 
-(theorem-orthogonal-legendre)=
 ::::{prf:theorem} Properties of Legendre polynomials
+:label: theorem-orthogonal-legendre
 1. The degree of $P_k$ is $k$.
 2. $P_0,\ldots,P_n$ form a basis for $\mathcal{P}_n$. 
 3. The Legendre polynomials are mutually orthogonal. More specifically, the Gram matrix is given by
@@ -342,8 +351,8 @@ The least-squares solution is not the same in the Legendre and Chebyshev cases: 
 
 Interesting properties can be deduced entirely from the orthogonality conditions. The following result will be relevant in {numref}`section-globalapprox-integration`. The same result holds for orthogonal polynomial families with different weight functions, such as the Chebyshev polynomials.
 
-(theorem-orthogonal-roots)=
 ::::{prf:theorem}
+:label: theorem-orthogonal-roots
 All $n$ roots of the Legendre polynomial $P_n(x)$ are simple and real, and they lie in the open interval $(-1,1)$.
 ::::
 

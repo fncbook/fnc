@@ -26,9 +26,11 @@ This is a little different from simply $u(1,t)=u(0,t)$, as {numref}`figure-perio
 Left: A function whose values are the same at the endpoints of an interval does not necessarily extend to a smooth periodic function. Right: For a truly periodic function, the function values and all derivatives match at the endpoints of one period.
 :::
 
+(section-methodlines-semidiscretization)=
+
 ## Semidiscretization
 
-As always, we use $\hat{u}$ when we specifically refer to the exact solution of the PDE. In order to avoid carrying along redundant information about the function, we use $x_i = ih$ only for $i=0,\ldots,m-1$, where $h=1/m$, and it's understood that a reference to $x_m$ is silently translated to one at $x_0$. More generally, we have the identity
+As a reminder, we use $\hat{u}$ when we specifically refer to the exact solution of the PDE. In order to avoid carrying along redundant information about the function, we use $x_i = ih$ only for $i=0,\ldots,m-1$, where $h=1/m$, and it's understood that a reference to $x_m$ is silently translated to one at $x_0$. More generally, we have the identity
 
 :::{math}
 :label: periodicmod
@@ -65,8 +67,8 @@ This step is called **semidiscretization**, since space is discretized but time 
 
 Note well how the first and last rows have elements that "wrap around" from one end of the domain to the other by periodicity. Because we will be using this matrix quite a lot, we create {numref}`Function {number} <function-diffper>` to compute it, as well as the corresponding second-order first derivative matrix $\mathbf{D}_x$ for periodic end conditions.
 
-(function-diffper)=
 ``````{prf:algorithm} diffper
+:label: function-diffper
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -102,8 +104,8 @@ which is simply a linear, constant-coefficient system of *ordinary* differential
 
 Semidiscretization is often called the **method of lines**. Despite the name, it is not exactly a single method because both space and time discretizations have to be specified in order to get a concrete algorithm. The key concept is the separation of those two discretizations, and in that way, it's related to separation of variables in analytic methods for the heat equation.
 
-(example-methodlines-heatFE)=
 ::::{prf:example}
+:label: example-methodlines-heatFE
 Suppose we solve {eq}`heatMOL` using the Euler IVP integrator {eq}`euler1` from {numref}`section-ivp-euler` (and also AB1 from {numref}`section-ivp-multistep`). We select a time step $\tau$ and discrete times $t_j=j\tau$, $j=0,1,\ldots,n$. We can discretize the vector $\mathbf{u}$ in time as well to get a sequence $\mathbf{u}_j \approx \mathbf{u}(t_j)$ for varying $j$. (Remember the distinction in notation between $\mathbf{u}_j$, which is a vector, and $u_j$, which is a single element of a vector.) 
 
 Thus, a fully discrete method for the heat equation is 
@@ -113,8 +115,8 @@ Thus, a fully discrete method for the heat equation is
 :::
 ::::
 
-(demo-methodlines-heatFE)=
 ::::{prf:example} Forward Euler for the heat equation
+:label: demo-methodlines-heatFE
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -138,8 +140,8 @@ Thus, a fully discrete method for the heat equation is
 
 The method in {numref}`Example {number} <example-methodlines-heatFE>` and @demo-methodlines-heatFE is essentially the same one we used for the Black–Scholes equation in {numref}`section-diffusion-blackscholes`. By changing the time integrator, we can get much better results.
 
-(example-methodlines-heatBE)=
 ::::{prf:example}
+:label: example-methodlines-heatBE
 An alternative time discretization of {eq}`heatMOL` is to use the backward Euler (AM1) method, resulting in
 
 :::{math}
@@ -153,8 +155,8 @@ An alternative time discretization of {eq}`heatMOL` is to use the backward Euler
 Because backward Euler is an implicit method, a linear system must be solved for $\mathbf{u}_{j+1}$ at each time step. 
 ::::
 
-(demo-methodlines-heatBE)=
 ::::{prf:example} Backward Euler for the heat equation
+:label: demo-methodlines-heatBE
 
 `````{tab-set}
 ````{tab-item} Julia
@@ -187,8 +189,8 @@ Because backward Euler is an implicit method, a linear system must be solved for
 
 Instead of coding one of the Runge–Kutta or multistep formulas directly for a method of lines solution, we could use any of the IVP solvers from Chapter 6, or a solver from the `DifferentialEquations` package, to solve the ODE initial-value problem {eq}`heatMOL`.
 
-(demo-methodlines-auto)=
 ::::{prf:example} Adaptive time stepping for the heat equation
+:label: demo-methodlines-auto
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia

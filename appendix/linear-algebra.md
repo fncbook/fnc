@@ -68,13 +68,14 @@ Matrices and vectors of the same size may be added elementwise.  Multiplication 
 ```{index} ! inner product; of vectors
 ```
 
-There are two ways for vectors to be multiplied together. If $\mathbf{v}$ and $\mathbf{w}$ are in $\mathbb{C}^n$, their **inner product** is
+There are two ways for vectors to be multiplied together. If $\mathbf{v}$ and $\mathbf{w}$ are in $\mathbb{C}^n$, their {term}`inner product` is
 
 ```{math}
+:label: eq-innerprod
   \mathbf{v}^* \mathbf{w} = \sum_{k=1}^n \overline{v_k}\, w_k.
 ```
 
-Trivially, one finds that $\mathbf{w}^* \mathbf{v} = \overline{(\mathbf{v}^*\mathbf{w})}$. 
+Trivially, one finds that $\mathbf{w}^* \mathbf{v} = \overline{(\mathbf{v}^*\mathbf{w})}$.
 
 ```{index} ! outer product
 ```
@@ -82,7 +83,7 @@ Trivially, one finds that $\mathbf{w}^* \mathbf{v} = \overline{(\mathbf{v}^*\mat
 Additionally, any two vectors $\mathbf{v}\in\mathbb{C}^m$ and $\mathbf{w}\in\mathbb{C}^n$ (with $m\neq n$ allowed) have an **outer product**, which is an $m\times n$ matrix:
 
 ```{math}
-:label: def-outerprod
+:label: definition-outerprod
   \mathbf{v} \mathbf{w}^*
   = \bigl[ v_i \overline{w_j} \bigr]_{\,i=1,\ldots,m,\, j=1,\ldots,n }
   = \begin{bmatrix}
@@ -336,8 +337,8 @@ Given a square, $n\times n$ matrix $\mathbf{A}$ and  $n$-vectors $\mathbf{x}$ an
 
 The following facts are usually proved in any elementary text on linear algebra.
 
-(theorem-singularity)=
 ````{prf:theorem} Linear algebra equivalence
+:label: theorem-singularity
 The following statements are equivalent:
 
 1. $\mathbf{A}$ is nonsingular.

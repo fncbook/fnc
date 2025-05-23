@@ -12,8 +12,8 @@ In {numref}`section-linsys-polyinterp` and {numref}`section-localapprox-interpol
 
 Theoretically, we can always construct an interpolating polynomial, and the result is unique among polynomials whose degree is less than $n+1$.
 
-(theorem-polyinterp)=
 ::::{prf:theorem}
+:label: theorem-polyinterp
 If the nodes $t_0,\dots,t_n$ are all distinct, there exists a unique polynomial $p$ of degree at most $n$ that satisfies $p(t_k)=y_k$ for all $k=0,\dots,n$.
 ::::
 
@@ -53,6 +53,7 @@ where $r_1,\dots,r_n$ are the roots of the polynomial and $c$ is a constant. The
 ```
 
 ::::{prf:definition} Lagrange cardinal polynomial
+:label: definition-lagrangecardinal
 Given distinct nodes $t_0,\ldots,t_n$, the polynomial
 
 :::{math}
@@ -66,8 +67,8 @@ Given distinct nodes $t_0,\ldots,t_n$, the polynomial
 is of degree at most $n$ and satisfies the cardinality conditions {eq}`lagrangecond`.
 ::::
 
-(demo-polynomial-lagrange)=
 ::::{prf:example} Lagrange cardinal polynomials
+:label: demo-polynomial-lagrange
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -94,8 +95,8 @@ Because they are a cardinal basis, the Lagrange polynomials lead to a simple exp
 ```{index} ! Lagrange interpolation formula
 ```
 
-(theorem-polynomial-lagrange)=
 ::::{prf:theorem} Lagrange interpolation formula
+:label: theorem-lagrangeinterp
 Given points $(t_k,y_k)$ for $k=0,\ldots,n$ with all the $t_k$ distinct, the unique polynomial of degree $n$ or less that interpolates the points is
 
 :::{math}
@@ -106,8 +107,8 @@ p(x) = \sum_{k=0}^n y_k \ell_k(x).
 
 At this point we can say that we have completed the proof of @theorem-polyinterp.
 
-(example-ClassicalLagrange)=
 ::::{prf:example}
+:label: example-ClassicalLagrange
 We construct the Lagrange interpolating polynomials of degrees $n=1$ and 2 to interpolate samples of $f(x) = \tan (x)$.  For $n=1$, we use $t_0= 0$ and $t_1 = \pi/3$. The Lagrange formula then gives
 
 \begin{align*}
@@ -139,8 +140,8 @@ For $n=2$, we use $t_0= 0$, $_1 = \pi/6$ and $t_2 = \pi/3$. We now have
 
 In addition to existence, uniqueness,  and the constructive Lagrange formula, we have a useful formula for the error in a polynomial interpolant when the data are samples of a smooth function. We will refer to the following definition.
 
-(definition-polynomial-indicator)=
 ::::{prf:definition} Error indicator function
+:label: definition-polynomial-indicator
 The **error indicator function** for a set of distinct nodes $t_0,\ldots,t_n$ is
 :::{math}
 :label: lagrange-phi
@@ -148,8 +149,8 @@ The **error indicator function** for a set of distinct nodes $t_0,\ldots,t_n$ is
 :::
 ::::
 
-(theorem-polynomial-interperror)=
 ::::{prf:theorem} Polynomial interpolation error
+:label: theorem-polynomial-interperror
 Let $t_0,\dots,t_n$ be distinct points in $[a,b]$, and suppose $f$ has at least $n+1$ continuous derivatives in that interval. Let $p(x)$ be the unique polynomial of degree at most $n$ interpolating $f$ at $t_0,\dots,t_n$. Then for each $x\in[a,b]$, there exists a number $\xi(x)\in(a,b)$ such that
   
 :::{math}
@@ -183,8 +184,8 @@ which is a restatement of {eq}`interperror`.
 
 Usually $f^{(n+1)}$ and the function $\xi(x)$ are unknown. The importance of the formula {eq}`interperror` is how it helps to express the error as a function of $x$, and its dependence on the nodes $t_0,\dots,t_n$. We will exploit this knowledge later.
 
-(demo-polynomial-error)=
 ::::{prf:example} Polynomial interpolation error
+:label: demo-polynomial-error
 Consider the problem of interpolating $\log(x)$ at nodes $1, 1.6, 1.9, 2.7, 3$. Then $n=4$ and $f^{(5)}(\xi) = 4!/\xi^5$. For $\xi\in[1, 3]$ we can say that $|f^{(5)}(\xi)| \le 4!$. Hence 
 
 $$ |f(x)-p(x)| \le \frac{1}{5} \left| \Phi(x) \right|.$$
@@ -212,8 +213,8 @@ $$ |f(x)-p(x)| \le \frac{1}{5} \left| \Phi(x) \right|.$$
 
 For equispaced nodes, @theorem-polyinterp has an immediate consequence. 
 
-(theorem-polyequi)=
 ::::{prf:corollary}
+:label: theorem-polyequi
 Suppose $t_i=i h$ for constant step size $h$ and all $i=0,1,\ldots,n$, and that $f$ has $n+1$ continuous derivatives in $(t_0,t_n)$. If $x\in[t_0,t_n]$, then there exists $\xi(x)\in(t_0,t_n)$ and $C$ independent of $x$ such that
   
 :::{math}

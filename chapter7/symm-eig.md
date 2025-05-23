@@ -20,8 +20,8 @@ Suppose now that $\mathbf{A}^*=\mathbf{A}$ and that $\mathbf{A}=\mathbf{U}\mathb
 
 and it's tempting to conclude that $\mathbf{U}=\mathbf{V}$. Happily, this is nearly true. The following theorem is typically proved in an advanced linear algebra course.
 
-(theorem-symm-eig-spectral)=
 ````{prf:theorem} Spectral decomposition
+:label: theorem-symm-eig-spectral
 If $\mathbf{A}=\mathbf{A}^*$, then $\mathbf{A}$ has a diagonalization $\mathbf{A}=\mathbf{V} \mathbf{D} \mathbf{V}^{-1}$ in which $\mathbf{V}$ is unitary and $\mathbf{D}$ is diagonal and real.
 ````
 
@@ -69,8 +69,8 @@ $$
 
 Recall that for a matrix $\mathbf{A}$ and compatible vector $\mathbf{x}$, the quadratic form $\mathbf{x}^* \mathbf{A} \mathbf{x}$ is a scalar. 
 
-(definition-symm-eig-rq)=
 ::::{prf:definition}
+:label: definition-symm-eig-rq
 Given hermitian $\mathbf{A}$ and nonzero vector $\mathbf{x}$, the {term}`Rayleigh quotient` is the function
 
 ```{math}
@@ -90,8 +90,8 @@ R_{\mathbf{A}}(\mathbf{v}+\epsilon\mathbf{z}) = R_{\mathbf{A}}(\mathbf{v}) + 0 +
 
 as $\epsilon\to 0$. The conclusion is that a good estimate of an eigenvector becomes an even better estimate of an eigenvalue.
 
-(demo-symm-eig-rayleigh)=
 ::::{prf:example} Rayleigh quotient
+:label: demo-symm-eig-rayleigh
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -121,10 +121,29 @@ as $\epsilon\to 0$. The conclusion is that a good estimate of an eigenvector bec
 ```{index} see: hermitian positive definite matrix; symmetric positive definite matrix
 ```
 
-In the real case, we called a symmetric matrix $\mathbf{A}$ *symmetric positive definite* (SPD) if $\mathbf{x}^T \mathbf{A}\mathbf{x} > 0 $ for all nonzero vectors $\mathbf{x}$. In the complex case the analog is a {term}`hermitian positive definite matrix` (HPD matrix), meaning that $\mathbf{A}^*=\mathbf{A}$ and $\mathbf{x}^* \mathbf{A}\mathbf{x} > 0$ for all complex vectors $\mathbf{x}$. Putting this property together with the Rayleigh quotient leads to the following.
+In the real case, we called a symmetric matrix $\mathbf{A}$ SPD if $\mathbf{x}^T \mathbf{A}\mathbf{x} > 0 $ for all nonzero vectors $\mathbf{x}$. There is an analogous definition for complex matrices.
 
-(theorem-symm-eig-hpd)=
+::::{prf:definition} HPD matrix
+:label: definition-HPDmatrix
+An {term}`HPD matrix` is a complex $n\times n$ matrix $\mathbf{A}$ that is hermitian and for which
+
+```{math}
+:label: HPD-def
+  \mathbf{x}^* \mathbf{A} \mathbf{x} > 0
+```
+
+for all nonzero $\mathbf{x}\in\mathbb{C}^n$.
+
+::::
+
+:::{warning}
+It's pretty common to use the term *positive definite* without either the "symmetric" or "hermitian" adjective. This is confusing, because the definiteness property is of little value without the symmetry property, which is generally considered implied.
+:::
+
+Putting the HPD property together with the Rayleigh quotient leads to the following.
+
 ````{prf:theorem}
+:label: theorem-symm-eig-hpd
 If $\mathbf{A}^*=\mathbf{A}$, then the following statements are equivalent.
 
 1. $\mathbf{A}$ is HPD.

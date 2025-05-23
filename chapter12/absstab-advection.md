@@ -32,8 +32,8 @@ To apply an IVP solver, we need to compare the stability region of the solver wi
 
 Two things stand out about these eigenvalues: they are purely imaginary, which is consistent with conservation of magnitude, and they extend no farther than $O(m)=O(h^{-1})$ away from the origin. These characteristics suggest how to analyze the use of different time-stepping methods by referring to stability regions.
 
-(demo-absstab-advection)=
 ::::{prf:example} Eigenvalues for advection
+:label: demo-absstab-advection
 
 `````{tab-set}
 ````{tab-item} Julia
@@ -80,8 +80,8 @@ u_t+c u_x=\epsilon u_{xx}.
 
 The parameter $\epsilon$ controls the relative strength between the two mechanisms, and the eigenvalues accordingly vary between the purely imaginary ones of advection and the negative real ones of diffusion.
 
-(demo-absstab-advdiff)=
 ::::{prf:example} Eigenvalues for advection–diffusion
+:label: demo-absstab-advdiff
 
 `````{tab-set}
 ````{tab-item} Julia
@@ -125,8 +125,8 @@ $$
 
 As a result, we conclude that $\mathbf{A} = \mathbf{E} \mathbf{D}_x \mathbf{E}^T$ is the appropriate matrix for determining the eigenvalues of the semidiscretization. More simply, we can simply delete the last row and last column from $\mathbf{D}_x$. 
 
-(demo-absstab-inflow)=
 ::::{prf:example} Eigenvalues for an inflow boundary
+:label: demo-absstab-inflow
 
 `````{tab-set}
 ````{tab-item} Julia

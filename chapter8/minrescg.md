@@ -26,16 +26,13 @@ For a hermitian (or real symmetric) matrix, the upper Hessenberg matrix $\mathbf
 
 Equation {eq}`arnoldivec` of the Arnoldi iteration now simplifies to a much shorter expression:
 
-```{index} Arnoldi iteration, Lanczos iteration
+```{index} Arnoldi iteration, ! Lanczos iteration
 ```
 
 :::{math}
 :label: lanczos
 \mathbf{A} \mathbf{q}_m = H_{m-1,m} \,\mathbf{q}_{m-1} + H_{mm} \,\mathbf{q}_m + H_{m+1,m}\,\mathbf{q}_{m+1}.
 :::
-
-```{index} ! Lanczos iteration
-```
 
 As before in deriving the Arnoldi iteration, when given the first $m$ vectors we can solve for the entries in column $m$ of $\mathbf{H}$ and then for $\mathbf{q}_{m+1}$. The resulting process is known as the **Lanczos iteration**. Its most important practical advantage is that while Arnoldi needs $O(m)$ steps to get $\mathbf{q}_{m+1}$ from the previous vectors, Lanczos needs only $O(1)$ steps, so restarting isn't required for symmetric matrices.[^lanczos]
 
@@ -50,8 +47,8 @@ When $\mathbf{A}$ is hermitian and the Arnoldi iteration is reduced to Lanczos, 
 
 MINRES is also more theoretically tractable than GMRES. The following result relies on some advanced approximation theory. Recall that the eigenvalues of a hermitian matrix are real. 
 
-(theorem-minrescg-indefinite)=
 ::::{prf:theorem} Convergence of MINRES (indefinite case)
+:label: theorem-minrescg-indefinite
 Suppose $\mathbf{A}$ is hermitian, invertible, and indefinite. Divide its eigenvalues into positive and negative sets $\Lambda_+$ and $\Lambda_-$, and define
 
 $$
@@ -92,8 +89,8 @@ $$
 Because the theorem gives an upper bound, MINRES may converge faster. All we can say is that 208 is certain to be enough iterations.
 ::::
 
-(demo-minrescg-indefinite)=
 ::::{prf:example} MINRES
+:label: demo-minrescg-indefinite
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -149,8 +146,8 @@ For each $m=1,2,3,\ldots$, minimize $\|\mathbf{x}_m-\mathbf{x}\|_{\mathbf{A}}$ f
 
 The convergence of CG and MINRES is dependent on the eigenvalues of $\mathbf{A}$. In the HPD case the eigenvalues are real and positive, and they equal the singular values. Hence the condition number $\kappa$ is equal to the ratio of the largest eigenvalue to the smallest one. The following theorem suggests that MINRES and CG are not so different in convergence.
 
-(theorem-minrescg-converge)=
 ::::{prf:theorem} MINRES and CG convergence (definite case)
+:label: theorem-minrescg-converge
 Let $\mathbf{A}$ be real and SPD with 2-norm condition number $\kappa$. For MINRES define $R(m)=\|\mathbf{r}_m\|_2/\|\mathbf{b}\|_2$, and for CG define $R(m)=\|\mathbf{x}_m-\mathbf{x}\|_{\mathbf{A}}/\|\mathbf{x}\|_{\mathbf{A}}$,
 where $\mathbf{r}_m$ and $\mathbf{x}_m$ are the residual and solution approximation associated with the space $\mathcal{K}_m$. Then
 
@@ -196,8 +193,8 @@ As a rule of thumb, the number of iterations required for MINRES or CG to conver
 
 This estimate fails for very large $\kappa$, however.
 
-(demo-minrescg-converge)=
 ::::{prf:example} Convergence of MINRES and CG
+:label: demo-minrescg-converge
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia

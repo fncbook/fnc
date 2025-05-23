@@ -99,8 +99,8 @@ The second stage employs an Euler-style strategy over the whole time step, but u
 
 Our implementation of IE2 is shown in {numref}`Function {number} <function-ie2>`.
 
-(function-ie2)=
 ``````{prf:algorithm} ie2
+:label: function-ie2
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -215,8 +215,8 @@ This formula is often referred to as *the* fourth-order RK method, even though t
 
 Our implementation is given in {numref}`Function {number} <function-rk4>`.
 
-(function-rk4)=
 ``````{prf:algorithm} rk4
+:label: function-rk4
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -238,8 +238,8 @@ Our implementation is given in {numref}`Function {number} <function-rk4>`.
 `````
 ``````
 
-(demo-rk-converge)=
 ::::{prf:example} Convergence of Runge–Kutta methods
+:label: demo-rk-converge
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

@@ -7,8 +7,8 @@ numbering:
 
 Few applications involve an initial-value problem with just a single dependent variable. Usually there are multiple unknowns and a system of equations to define them.  
 
-(example-systems-predprey)=
 ````{prf:example}
+:label: example-systems-predprey
 Variations of the following model are commonly seen in ecology:
 
 ```{math}
@@ -36,10 +36,10 @@ We can pack the two dependent variables $y$ and $z$ into a vector-valued functio
 and identifying $u_1=y$, $u_2=z$.
 ````
 
-We now upgrade our IVP definition, {numref}`Definition {number} <definition-basics-scalarivp>`.
+We now upgrade our IVP definition, {numref}`Definition {number} <definition-scalarivp>`.
 
-(definition-systems-vectorivp)=
 ::::{prf:definition} Vector-valued IVP / IVP system
+:label: definition-vectorivp
 A vector-valued first-order **initial-value problem** (IVP) is
   
 ```{math}
@@ -69,8 +69,8 @@ The generalization of any scalar IVP solver to handle systems is straightforward
 
 The vector difference equation {eq}`eulersys` is just Euler's formula applied simultaneously to each component of the ODE system. Because operations such as addition and multiplication translate easily from scalars to vectors, {numref}`Function {number} <function-euler>` that we wrote for scalar IVPs works for systems as well. Practically speaking, the only changes that must be made are that the initial condition and the ODE function have to be coded to use vectors. 
 
-(demo-systems-predator)=
 ::::{prf:example} Predator-prey model
+:label: demo-systems-predator
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -124,8 +124,8 @@ condition of the system is
 ```
 ````
 
-(example-systems-coupledpendula)=
 ````{prf:example}
+:label: example-systems-coupledpendula
 Two identical pendulums suspended from the same rod and swinging in parallel planes can be modeled as the second-order system
 
 ```{math}
@@ -160,8 +160,8 @@ which is a first-order system in four dimensions. To complete the description of
 
 The trick illustrated in the preceding examples is always available. Suppose $y$ is a scalar dependent variable in the system. You should introduce a component of $\mathbf{u}$ for $y$, $y'$, etc., up to but not including the highest derivative appearing anywhere for $y$. This is done for each scalar variable in the original system. There should be one component of $\mathbf{u}$ for each scalar initial condition given. Many equations for the first-order system then come from the trivial relationships among all the lower derivatives. The remaining equations for the system come from the original, high-order equations. In the end, there must be as many scalar component equations as unknown first-order variables.
 
-(demo-systems-coupledpendula)=
 ::::{prf:example} Coupled pendulums
+:label: demo-systems-coupledpendula
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

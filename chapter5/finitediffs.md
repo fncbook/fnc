@@ -12,7 +12,8 @@ Now we turn to one of the most common and important applications of interpolants
 ```
 
 ::::{prf:definition} Finite-difference formula
-A **finite-difference** formula is a list of values $a_{-p},\ldots,a_q$, called **weights**, such that for all $f$ in some class of functions,
+:label: definition-finite-difference
+A {term}`finite-difference formula` is a list of values $a_{-p},\ldots,a_q$, called **weights**, such that for all $f$ in some class of functions,
 
 ```{math}
 :label: fdformula
@@ -51,8 +52,8 @@ which is {eq}`fdformula` with $p=0$, $q=1$, $a_0=-1$, and $a_1=1$. Analogously, 
 
 in which $p=1$, $q=0$.
 
-(example-finitediffs-fd1bd1)=
 ::::{prf:example}
+:label: example-finitediffs-fd1bd1
 Suppose $f(x)=x^2$, and we take $h=\frac{1}{4}$ over the interval $[0,1]$. This results in the nodes $0,\frac{1}{4},\frac{1}{2},\frac{3}{4},1$. We evaluate $f$ at the nodes to get
 
 $$
@@ -144,8 +145,8 @@ f'(0) &\approx \tfrac{1}{h} \left[ \tfrac{1}{2} f(-2h) - 2 f(-h) + \tfrac{3}{2} 
 ```
 ````
 
-(demo-finitediffs-fd1)=
 ::::{prf:example} Finite differences
+:label: demo-finitediffs-fd1
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -205,8 +206,8 @@ f''(0) \approx \frac{ 2f(0) - 5 f(h) + 4 f(2h) -f(3h) }{h^2}.
 
 For the second derivative, converting a forward difference to a backward difference requires reversing the order of the weights, while *not* changing their signs.
 
-(demo-finitediffs-fd2)=
 ::::{prf:example} Finite differences for $f''$
+:label: demo-finitediffs-fd2
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -240,8 +241,8 @@ Although function values at equally spaced nodes are a common and convenient sit
 
 We no longer assume equally spaced nodes, so there is no "$h$" to be used in the formula. As before, the weights may be applied after any translation of the independent variable. The weights again follow from the interpolate/differentiate recipe, but the algebra becomes complicated. Fortunately there is an elegant recursion known as **Fornberg's algorithm** that can calculate these weights for any desired formula. We present it without derivation as {numref}`Function {number} <function-fdweights>`.
 
-(function-fdweights)=
 ``````{prf:algorithm} fdweights
+:label: function-fdweights
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -263,8 +264,8 @@ We no longer assume equally spaced nodes, so there is no "$h$" to be used in the
 `````
 ``````
 
-(demo-finitediffs-fd-weights)=
 ::::{prf:example} Finite differences at arbitrary nodes
+:label: demo-finitediffs-fd-weights
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

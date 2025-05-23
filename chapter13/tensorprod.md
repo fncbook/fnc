@@ -74,8 +74,8 @@ where the evaluations are on the grid {eq}`rectangledisc`.
 Traditionally, the first dimension of a matrix varies in the _vertical_ direction, while the first space coordinate $x$ varies _horizontally_. This clash has long been a source of confusion when coding, and each language or package has its own conventions around it. In this book, the first dimension of a matrix always corresponds to the first coordinate of the function. Sometimes, this forces us to use a transpose for making plots.
 ```
 
-(example-tensorprod-smallgrid)=
 ::::{prf:example}
+:label: example-tensorprod-smallgrid
 Let the interval $[0,2]$ be divided into $m=4$ equally sized pieces, and let $[1,3]$ be discretized in $n=2$ equal pieces. Then the grid in the rectangle $[0,2]\times[1,3]$ is given by all points $(i/2,1+j)$ for all choices $i=0,1,2,3,4$ and $j=0,1,2$. If $f(x,y)=\sin(\pi xy)$, then
 
 \begin{equation*}
@@ -94,8 +94,8 @@ Let the interval $[0,2]$ be divided into $m=4$ equally sized pieces, and let $[1
 
 ::::
 
-(demo-tensorprod-gridfun)=
 ::::{prf:example} Functions on 2D grids
+:label: demo-tensorprod-gridfun
 
 `````{tab-set}
 ````{tab-item} Julia
@@ -211,8 +211,8 @@ Now we tackle $\frac{\partial u}{\partial y}$. Here the inactive coordinate $x$ 
 
 Keep in mind that the differentiation matrix $\mathbf{D}_x$ is based on the discretization $x_0,\ldots,x_m$, and as such it must be $(m+1)\times (m+1)$. On the other hand, $\mathbf{D}_y$ is based on $y_0,\ldots,y_n$ and is $(n+1)\times (n+1)$. This is exactly what is needed dimensionally to make the products in {eq}`partfpartx` and {eq}`partfparty` consistent. More subtly, if the differentiation is based on equispaced grids in each variable, the value of $h$ in a formula such as {eq}`centerFD12` will be different for $\mathbf{D}_x$ and $\mathbf{D}_y$.
 
-(demo-tensorprod-diff)=
 ::::{prf:example} Numerical partial derivatives
+:label: demo-tensorprod-diff
 
 `````{tab-set}
 ````{tab-item} Julia

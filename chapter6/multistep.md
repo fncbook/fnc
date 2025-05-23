@@ -16,7 +16,8 @@ f_i = f(t_i,u_i).
 ```
 
 ::::{prf:definition} Multistep method for IVPs
-A $k$-step **multistep** (or *linear multistep*) method is given by the difference equation
+:label: definition-multistep
+A $k$-step {term}`multistep` (or *linear multistep*) method is given by the difference equation
 
 ```{math}
 :label: multistep
@@ -26,7 +27,7 @@ u_{i+1} &= a_{k-1}u_i + \cdots + a_0 u_{i-k+1} \qquad \\
 \end{split}
 ```
 
-where the $a_j$ and the $b_j$ are constants. If $b_k=0$, the method is **explicit**; otherwise, it is **implicit**.  
+where the $a_j$ and the $b_j$ are constants. If $b_k=0$, the method is **explicit**; otherwise, it is {term}`implicit`.  
 ::::
 
 The quantities $u$ and $f$ in {eq}`multistep` are shown as scalars, but in general they can be vectors. 
@@ -56,7 +57,6 @@ For an implicit method, however, $b_k\neq 0$ and {eq}`multistep` has the form
 ```
 
 Now the unknown ${u}_{i+1}$ that we seek appears inside the function $f$. In general this equation is a nonlinear rootfinding problem for ${u}_{i+1}$ and is not solvable in a finite number of steps by a formula. The implementation of both explicit and implicit multistep formulas is discussed in detail in {numref}`section-ivp-implicit`.
-
 
 ```{index} ! Adams–Bashforth formula, ! Adams–Moulton formula, ! backward differentiation formula for IVPs
 ```
@@ -99,15 +99,23 @@ As with RK formulas, a multistep method is entirely specified by the values of a
 ```{index} ! generating polynomials
 ```
 
-An alternative description of a multistep method is the **generating polynomials**
+A multistep method can be summarized as a pair of polynomials.
+
+::::{prf:definition} Generating polynomials
+:label: definition-generatingpolynomials
+The {term}`generating polynomials` of a multistep method are the polynomials $\rho(z)$ and $\sigma(z)$ defined by
 
 ```{math}
 :label: genpoly
 \begin{split}
   \rho(z) &= z^k - a_{k-1} z^{k-1} - \cdots - a_0,\\
-  \sigma(z) &= b_k z^k + b_{k-1}z^{k-1} + \cdots + b_0.
+  \sigma(z) &= b_k z^k + b_{k-1}z^{k-1} + \cdots + b_0,
 \end{split}
 ```
+
+where the coefficients are the same as in @multistep.
+
+::::
 
 For example, the AB3 method is completely specified by
 
@@ -137,9 +145,9 @@ The connection between the generating polynomials and the numerical method requi
 
 The definition of local truncation error is easily extended to multistep methods. 
 
-(definition-multistep-lte)=
 :::{prf:definition} LTE and order of accuracy for a multistep IVP method
-For the multistep formula defined by {eq}`multistep`, the **local truncation error** is 
+:label: definition-multisteplte
+For the multistep formula defined by {eq}`multistep`, the {term}`local truncation error` is
 
 ```{math}
 :label: MSLTE
@@ -147,6 +155,7 @@ For the multistep formula defined by {eq}`multistep`, the **local truncation err
     \hat{u}(t_{i-k+1})}{h} - \bigl[ b_kf(t_{i+1},\hat{u}(t_{i+1})) + \cdots +
   b_0f(t_{i-k+1},\hat{u}(t_{i-k+1})) \bigr].
 ```
+
 If the local truncation error satisfies $\tau_{i+1}(h)=O(h^p)$, then $p$ is the **order of accuracy** of the formula. If $p>0$, the method is **consistent**.
 ::::
 

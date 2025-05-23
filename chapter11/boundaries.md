@@ -71,8 +71,8 @@ Then Equation {eq}`parabolicBC` takes the form
 
 Given a value of $\mathbf{v}$ for the interior nodes, Equation {eq}`mol-bcsystem` may be considered a system of two equations for the unknown boundary values $u_0$ and $u_m$. This system will be a linear one for Dirichlet, Neumann, and Robin conditions. 
 
-(example-boundaries-bs1)=
 ::::{prf:example}
+:label: example-boundaries-bs1
 Recall the Black–Scholes PDE {eq}`bspdefor-t`,
   
 $$
@@ -104,8 +104,8 @@ $$
 $$
 ::::
 
-(example-boundaries-bs2)=
 ::::{prf:example}
+:label: example-boundaries-bs2
 Returning to {numref}`Example {number} <example-boundaries-bs1>`, suppose we use a global Chebyshev differentiation matrix for $\mathbf{D}_x$ in {eq}`mol-bcsystem`. Then $u_0=0$ and
 
 $$ 
@@ -135,8 +135,8 @@ $$
 
 The steps to evaluate $\mathbf{f}$ in {eq}`mol-interior` now go as follows. 
 
-(algorithm-boundaries-timeder)=
 ::::{prf:algorithm} Time derivative for parabolic PDE
+:label: algorithm-boundaries-timeder
 Given a value of $t$ and $\mathbf{v}$,
 
 1. Use {eq}`mol-bcsystem` to solve for $u_0$ and $u_m$.
@@ -147,8 +147,8 @@ Given a value of $t$ and $\mathbf{v}$,
 
 Our full implementation of the method of lines for {eq}`parabolicPDE`--{eq}`parabolicBC` is given in {numref}`Function {number} <function-parabolic>`. It uses {numref}`Function {number} <function-diffcheb>` (`diffcheb`) to set up a Chebyshev discretization. The nested function `extend` performs steps 1--2 of {numref}`Algorithm {number} <algorithm-boundaries-timeder>` by calling {numref}`Function {number} <function-levenberg>` (`levenberg`) to solve the potentially nonlinear system {eq}`mol-bcsystem`. Then it sets up and solves an IVP, adding steps 3--4 of {numref}`Algorithm {number} <algorithm-boundaries-timeder>` within the `ode!` function. Finally, it returns the node vector `x` and a function of `t` that applies `extend` to $\mathbf{v}(t)$ to compute $\mathbf{u}(t)$. 
 
-(function-parabolic)=
 ``````{prf:algorithm} parabolic
+:label: function-parabolic
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -178,8 +178,8 @@ In many specific problems, `extend` does more work than is truly necessary. Diri
 
 [^multidisp]: An important advanced feature of Julia is *multiple dispatch*, which allows you to make multiple definitions of a function for different sequences and types of input arguments. Thus, addition to the original {numref}`Function {number} <function-parabolic>`, we could also define a modified version in which `g₁` and `g₂` are of numeric type for the Dirichlet case. The correct version would be chosen (dispatched) depending on how the boundary conditions were supplied by the caller, allowing us speed when possible and generality as a fallback.
 
-(demo-boundaries-heat)=
 ::::{prf:example} Heat equation with Dirichlet boundary conditions
+:label: demo-boundaries-heat
 
 Let's solve the heat equation $u_t=u_{xx}$ on $[-1,1]$, subject to the Dirichlet boundary conditions $u(-1,t)=0$, $u(1,t)=2$.
 
@@ -204,8 +204,8 @@ Let's solve the heat equation $u_t=u_{xx}$ on $[-1,1]$, subject to the Dirichlet
 `````
 ::::
 
-(demo-boundaries-bratu)=
 ::::{prf:example} Heat equation with nonlinear source
+:label: demo-boundaries-bratu
 
 We solve a heat equation with a nonlinear source term,
 
@@ -238,8 +238,8 @@ One interpretation of this PDE is an exothermic chemical reaction whose rate inc
 
 Finally, we return to the example of the Black–Scholes equation from {numref}`section-diffusion-blackscholes`. 
 
-(demo-boundaries-bs)=
 ::::{prf:example} Black–Scholes equation with mixed boundary conditions
+:label: demo-boundaries-bs
 
 We solve the Black–Scholes PDE @bspde with initial condition $u(x,0) = \max\{0,x-K\}$ and the boundary conditions $u(0,t)=0$ and $u_x(S_\text{max},t)=1$. We choose $S_\text{max}=8$, $r=0.08$, $\sigma=0.06$, and $K=3$.
 

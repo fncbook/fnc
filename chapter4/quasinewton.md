@@ -46,8 +46,8 @@ For reasons explained in Chapter 5, $\delta$ is usually chosen close to $\sqrt{\
 
 The finite-difference formula {eq}`jacobianfd` is implemented by {numref}`Function {number} <function-fdjac>`.
 
-(function-fdjac)=
 ``````{prf:algorithm} fdjac
+:label: function-fdjac
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -136,8 +136,8 @@ There are several ways to find alternatives to the standard step, but we will co
 ```{index} ! Levenberg's method
 ```
 
-(algorithm-nonlineqn-levenberg)=
 ::::{prf:algorithm} Levenberg's method
+:label: algorithm-nonlineqn-levenberg
 Given $\mathbf{f}$, a starting value $\mathbf{x}_1$, and a scalar $\lambda$, for each $k=1,2,3,\ldots$
 
 1. Compute $\mathbf{y}_k = \mathbf{f}(\mathbf{x}_k)$, and let $\mathbf{A}_k$ be an exact or approximate Jacobian matrix.
@@ -186,8 +186,8 @@ To a large extent, the incorporation of finite differences, Jacobian updates, an
 
 Each pass through the loop starts by using {eq}`levenberg` to propose a step $\mathbf{s}_k$. The function then asks whether using this step would decrease the value of $\|\mathbf{f}\|$ from its present value. If so, we accept the new root estimate, we decrease $\lambda$ in order to get more Newton-like (since things have gone well), and we apply the Broyden formula to get a cheap update of the Jacobian. If the proposed step is not successful, we increase $\lambda$ to get more gradient-like (since we just failed) and, if the current Jacobian was the result of a cheap update, use finite differences to reevaluate it.  
 
-(function-levenberg)=
 ``````{prf:algorithm} levenberg
+:label: function-levenberg
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -211,8 +211,8 @@ Each pass through the loop starts by using {eq}`levenberg` to propose a step $\m
 
 In some cases our simple logic in {numref}`Function {number} <function-levenberg>` can make $\lambda$ oscillate between small and large values; several better but more complicated strategies for controlling $\lambda$ are known. In addition, the linear system {eq}`levenberg` is usually modified to get the well-known **Levenberg–Marquardt** algorithm, which does a superior job in some problems as $\lambda\to \infty$.
 
-(demo-quasi-levenberg)=
 ::::{prf:example} Using Levenberg's method
+:label: demo-quasi-levenberg
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

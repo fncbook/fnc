@@ -35,6 +35,7 @@ where $\hat{u}$ is the exact solution of {eq}`linbvp`. If we so desire, we can u
 
 ```{index} ! collocation
 ```
+
 Having defined values at the nodes as our unknowns, we impose approximations to the ODE at the same nodes.  This approach is known as **collocation**. Derivatives of the solution are found (approximately) using differentiation matrices. For example,
 
 :::{math}
@@ -208,8 +209,8 @@ The system $\mathbf{A} \mathbf{u} = \mathbf{b}$ is the collocated BVP.
 
 Our implementation of linear collocation is {numref}`Function {number} <function-bvplin>`. It uses second-order finite differences but makes no attempt to exploit the sparsity of the matrices. It would be trivial to change the function to use spectral differentiation. 
 
-(function-bvplin)=
 ``````{prf:algorithm} bvplin
+:label: function-bvplin
 
 `````{tab-set} 
 ````{tab-item} Julia
@@ -232,8 +233,8 @@ Our implementation of linear collocation is {numref}`Function {number} <function
 `````
 ``````
 
-(demo-linear-solve)=
 ::::{prf:example} Solving a linear BVP
+:label: demo-linear-solve
 We solve the linear BVP  
 
 $$ u'' - (\cos x) u' + (\sin x) u = 0, \quad u(0)=1, \; u\left(\frac{3\pi}{2}\right)=\frac{1}{e}. $$ 
@@ -265,8 +266,8 @@ Its exact solution is $u(x) = e^{\sin x}$.
 
 We revisit @demo-shooting-unstable, which exposed instability in the shooting method, in order to verify second-order convergence.
 
-(demo-linear-converge)=
 ::::{prf:example} Convergence for a linear BVP
+:label: demo-linear-converge
 The BVP is
   
 $$

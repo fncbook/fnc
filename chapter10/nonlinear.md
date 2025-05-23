@@ -53,8 +53,8 @@ We impose the boundary conditions in much the same way as in {numref}`section-bv
 
 The left-hand side of {eq}`fdbvp` is a nonlinear function of the unknowns in the vector $\mathbf{u}$, so {eq}`fdbvp` is an $(n+1)\times 1$ set of nonlinear equations, amenable to solution by the techniques of [Chapter 4](../nonlineqn/overview.md).
 
-(example-fdresidual)=
 ::::{prf:example}
+:label: example-fdresidual
 Given the BVP
   
 $$
@@ -104,8 +104,8 @@ Suppose $n=3$ for an equispaced grid, so that $h=\frac{1}{2}$, $x_0=0$, $x_1=\fr
 
 Our implementation using second-order finite differences is {numref}`Function {number} <function-bvp>`. It's surprisingly short, considering how general it is, because we have laid a lot of groundwork already.
 
-(function-bvp)=
 ``````{prf:algorithm} bvp
+:label: function-bvp
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -130,8 +130,8 @@ Our implementation using second-order finite differences is {numref}`Function {n
 
 In order to solve a particular problem, we must write a function that computes $\phi$ for vector-valued inputs $\mathbf{x}$, $\mathbf{u}$, and $\mathbf{u}'$, and functions for the boundary conditions. We also have to supply `init`, which is an estimate of the solution used to initialize the quasi-Newton iteration. Since this argument is a vector of length $n+1$, it sets the value of $n$ in the discretization.
 
-(demo-nonlinear-pendulum)=
 ::::{prf:example} BVP for a nonlinear pendulum
+:label: demo-nonlinear-pendulum
 
 Suppose a damped pendulum satisfies the nonlinear equation $\theta'' + 0.05\theta'+\sin \theta =0$. We want to start the pendulum at $\theta=2.5$ and give it the right initial velocity so that it reaches $\theta=-2$ at exactly $t=5$. This is a boundary-value problem with Dirichlet conditions $\theta(0)=2.5$ and $\theta(5)=-2$.
 
@@ -159,8 +159,8 @@ Suppose a damped pendulum satisfies the nonlinear equation $\theta'' + 0.05\thet
 
 The initial solution estimate can strongly influence how quickly a solution is found, or whether the quasi-Newton iteration converges at all. In situations where multiple solutions exist, the initialization can determine which is found. 
 
-(demo-nonlinear-mems)=
 ::::{prf:example} BVP for a nonlinear MEMS device
+:label: demo-nonlinear-mems
 We look for a solution to the parameterized membrane deflection problem from {numref}`Example {number} <example-tpbvp-mems>`,
 
 $$
@@ -199,8 +199,8 @@ Sometimes the best way to get a useful initialization is to use the solution of 
 ```{index} Allen–Cahn equation
 ```
 
-(demo-nonlinear-allencahn)=
 ::::{prf:example} Allen–Cahn equation
+:label: demo-nonlinear-allencahn
 We solve the stationary **Allen–Cahn equation**,
   
 $$

@@ -24,56 +24,56 @@ u_1 v_1 & u_1 v_2 & \cdots & u_1 v_n \\u_2 v_1 & u_2 v_2 & \cdots & u_2 v_n \\ \
 
 We illustrate the connection of outer products to matrix multiplication by a small example.
 
-(example-lu-outer)=
 ::::{prf:example}
+:label: example-lu-outer
 According to the usual definition of matrix multiplication,
 
 \begin{align*}
-	\small
-	\begin{bmatrix}
-		4 & -1  \\ -3 & 5 \\ -2 &  6	  
-	\end{bmatrix}
-	\begin{bmatrix}
-		2 & -7 \\ -3 & 5 	  
-	\end{bmatrix}
-	& = 
-	\small
-	\begin{bmatrix}
-		(4)(2) + (-1)(-3)  &  (4)(-7) + (-1)(5)   \\ 
-		(-3)(2) + (5)(-3)  &  (-3)(-7) + (5)(5)  \\ 
-		(-2)(2) + (6)(-3)  &  (-2)(-7) + (6)(5)  
-	\end{bmatrix}.  
+    \small
+    \begin{bmatrix}
+        4 & -1  \\ -3 & 5 \\ -2 &  6
+    \end{bmatrix}
+    \begin{bmatrix}
+        2 & -7 \\ -3 & 5
+    \end{bmatrix}
+    & = 
+    \small
+    \begin{bmatrix}
+        (4)(2) + (-1)(-3)  &  (4)(-7) + (-1)(5)   \\ 
+        (-3)(2) + (5)(-3)  &  (-3)(-7) + (5)(5)  \\ 
+        (-2)(2) + (6)(-3)  &  (-2)(-7) + (6)(5)  
+    \end{bmatrix}.  
 \end{align*}
 
 If we break this up into the sum of two matrices, however, each is an outer product.
 
 \begin{align*}
-	& = 
-	\small
-	\begin{bmatrix}
-		(4)(2)   &  (4)(-7)    \\ 
-		(-3)(2)   &  (-3)(-7)    \\ 
-		(-2)(2) &  (-2)(-7) 
-	\end{bmatrix} + 
-	\begin{bmatrix}
-		(-1)(-3)  &  (-1)(5)  \\ 
-		(5)(-3)  &  (5)(5)  \\ 
-		(6)(-3)  &  (6)(5) 
-	\end{bmatrix}\\[2mm]
-	& = 
-	\small
-	\begin{bmatrix}
-		4 \\ -3 \\ -2 
-	\end{bmatrix} 
-	\begin{bmatrix}
-		2 & -7 
-	\end{bmatrix} \: + \:
-	\begin{bmatrix}
-		-1 \\ 5 \\ 6 
-	\end{bmatrix} 
-	\begin{bmatrix}
-		-3 & 5 
-	\end{bmatrix}.
+    & =
+    \small
+    \begin{bmatrix}
+        (4)(2)   &  (4)(-7)    \\
+        (-3)(2)   &  (-3)(-7)    \\
+        (-2)(2) &  (-2)(-7) 
+    \end{bmatrix} + 
+    \begin{bmatrix}
+        (-1)(-3)  &  (-1)(5)  \\ 
+        (5)(-3)  &  (5)(5)  \\ 
+        (6)(-3)  &  (6)(5) 
+    \end{bmatrix}\\[2mm]
+    & = 
+    \small
+    \begin{bmatrix}
+        4 \\ -3 \\ -2 
+    \end{bmatrix} 
+    \begin{bmatrix}
+        2 & -7 
+    \end{bmatrix} \: + \:
+    \begin{bmatrix}
+        -1 \\ 5 \\ 6 
+    \end{bmatrix} 
+    \begin{bmatrix}
+        -3 & 5 
+    \end{bmatrix}.
 \end{align*}
 
 Note that the vectors here are columns of the left-hand matrix and rows of the right-hand matrix. The matrix product is defined only if there are equal numbers of these.
@@ -94,8 +94,8 @@ Write the columns of $\mathbf{A}$ as $\mathbf{a}_1,\dots,\mathbf{a}_n$ and the r
 
 Equation {eq}`matrixouter` has some interesting structure for the product $\mathbf{L}\mathbf{U}$, where $\mathbf{L}$ is $n\times n$ and **lower triangular** (i.e., zero above the main diagonal) and $\mathbf{U}$ is $n\times n$ and **upper triangular** (zero below the diagonal). 
 
-(demo-lu-outertri)=
 ::::{prf:example} Triangular outer products
+:label: demo-lu-outertri
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -140,8 +140,8 @@ These two calculations are enough to derive one of the most important algorithms
 
 Our goal is to factor a given $n\times n$ matrix $\mathbf{A}$ as the triangular product $\mathbf{A}=\mathbf{L}\mathbf{U}$. It turns out that we have $n^2+n$ total nonzero unknowns in the two triangular matrices, so we set $L_{11}=\cdots = L_{nn}=1$, making $\mathbf{L}$ a **unit lower triangular** matrix.
 
-(demo-lu-derive)=
 ::::{prf:example} LU factorization
+:label: demo-lu-derive
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -163,26 +163,27 @@ Our goal is to factor a given $n\times n$ matrix $\mathbf{A}$ as the triangular 
 `````
 ::::
 
-We have arrived at the linchpin of solving linear systems. 
+We have arrived at the linchpin of solving linear systems.
 
 ```{index} ! matrix factorization; LU, ! LU factorization
 ```
- 
+
 ::::{prf:definition} LU factorization
+:label: definition-lu
 Given $n\times n$ matrix $\mathbf{A}$, its **LU factorization** is
 
 :::{math}
-:label: def-lu
+:label: definition-lu
 \mathbf{A} = \mathbf{L}\mathbf{U},
 :::
 
 where $\mathbf{L}$ is a unit lower triangular matrix and $\mathbf{U}$ is an upper triangular matrix.
 ::::
 
-The outer product algorithm for LU factorization seen in @demo-lu-derive>` is coded as {numref}`Function {number} <function-lufact. 
+The outer product algorithm for LU factorization seen in @demo-lu-derive is coded as {numref}`Function {number} <function-lufact>`.
 
-(function-lufact)=
 ``````{prf:algorithm} lufact
+:label: function-lufact
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -205,6 +206,7 @@ The outer product algorithm for LU factorization seen in @demo-lu-derive>` is c
 `````
 ``````
 
+(section-lu-gausselim)=
 
 ## Gaussian elimination and linear systems
 
@@ -221,17 +223,17 @@ $$
 
 Defining $\mathbf{z} = \mathbf{U} \mathbf{x}$ leads to the following.
 
-(algorithm-lu-solve)=
 ::::{prf:algorithm} Solution of linear systems by LU factorization (unstable)
+:label: algorithm-lu-solve
 1. Factor $\mathbf{L}\mathbf{U}=\mathbf{A}$.
 2. Solve $\mathbf{L}\mathbf{z}=\mathbf{b}$ for $\mathbf{z}$ using forward substitution.
 3. Solve $\mathbf{U}\mathbf{x}=\mathbf{z}$ for $\mathbf{x}$ using backward substitution.
 ::::
 
-A key advantage of the factorization point of view is that it depends only on the matrix $\mathbf{A}$. If systems are to be solved for a single $\mathbf{A}$ but multiple different versions of $\mathbf{b}$, then the factorization approach is more efficient, as we'll see in {numref}`section-linsys-efficiency`. 
+A key advantage of the factorization point of view is that it depends only on the matrix $\mathbf{A}$. If systems are to be solved for a single $\mathbf{A}$ but multiple different versions of $\mathbf{b}$, then the factorization approach is more efficient, as we'll see in {numref}`section-linsys-efficiency`.
 
-(demo-lu-solve)=
 ::::{prf:example} Solving a linear system by LU factors
+:label: demo-lu-solve
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

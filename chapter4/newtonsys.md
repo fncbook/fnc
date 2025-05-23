@@ -26,8 +26,8 @@ Given a continuous vector-valued function $\mathbf{f}$ mapping from $\mathbb{R}^
 
 Particular problems are often posed using scalar variables and equations. 
 
-(example-newtonsys-predprey)=
 ::::{prf:example}
+:label: example-newtonsys-predprey
 The steady state of interactions between the population $w(t)$ of a predator species and the population $h(t)$ of a prey species might be modeled as
 
 $$
@@ -44,17 +44,17 @@ While the equations of {numref}`Example {number} <example-newtonsys-predprey>` a
 
 ## Linear model
 
-To extend rootfinding methods to systems, we will keep to the basic philosophy of constructing easily managed models of the exact function. As usual, the starting point is a linear model. We base it on the multidimensional Taylor series,
+To extend rootfinding methods to systems, we will keep to the basic philosophy of constructing easily managed models of the exact function. As usual, the starting point is a linear model. We first need to define what it means to take a derivative of a vector-valued function of a vector variable.
 
-```{math}
-:label: multitaylor
-\mathbf{f}(\mathbf{x}+\mathbf{h}) = \mathbf{f}(\mathbf{x}) + \mathbf{J}(\mathbf{x})\mathbf{h} + O(\| \mathbf{h} \|^2),
+```{index} ! derivative; vector-valued function
 ```
 
 ```{index} ! Jacobian matrix
 ```
 
-where $\mathbf{J}$ is called the **Jacobian matrix** of $\mathbf{f}$ and is defined by
+::::{prf:definition} Jacobian matrix
+:label: definition-jacobian
+The {term}`Jacobian matrix` of $\mathbf{f}(\mathbf{x})$, where $\mathbf{f}$ is $m$-dimensional and $\mathbf{x}$ is $n$-dimensional, is the $m\times n$ matrix
 
 ```{math}
 :label: jacobian
@@ -64,10 +64,10 @@ where $\mathbf{J}$ is called the **Jacobian matrix** of $\mathbf{f}$ and is defi
     \frac{\partial f_2}{\partial x_1} & \frac{\partial f_2}{\partial x_2} & \cdots & \frac{\partial f_2}{\partial x_n}\\[1mm]
     \vdots & \vdots & & \vdots\\[1mm]
     \rule[-3mm]{0pt}{1em} \frac{\partial f_n}{\partial x_1} & \frac{\partial f_n}{\partial x_2} & \cdots & \frac{\partial f_n}{\partial x_n}
-  \end{bmatrix} = \left[ \frac{\partial f_i}{\partial x_j} \right]_{\,i,j=1,\ldots,n}.
+  \end{bmatrix} = \left[ \frac{\partial f_i}{\partial x_j} \right]_{\,i=1,\ldots,m,\, j=1,\ldots,n.}
 ```
 
-Because of the Jacobian's role in {eq}`multitaylor`, we may write $\mathbf{J}(\mathbf{x})$ as $\mathbf{f}{\,}'(\mathbf{x})$. Like any derivative, it is a function of the independent variable $\mathbf{x}$.
+::::
 
 (example-nonlinsystem)=
 
@@ -108,7 +108,20 @@ If we were to start writing out the terms in {eq}`multitaylor`, we would begin w
 and so on.
 ````
 
-The terms $\mathbf{f}(\mathbf{x})+\mathbf{J}(\mathbf{x})\mathbf{h}$ in {eq}`multitaylor` represent the linear part of $\mathbf{f}$ near $\mathbf{x}$. If $\mathbf{f}$ is actually linear, i.e., $\mathbf{f}(\mathbf{x})=\mathbf{A}\mathbf{x}-\mathbf{b}$, then the Jacobian matrix is the constant matrix $\mathbf{A}$ and the higher-order terms in {eq}`multitaylor` disappear.
+A multidimensional Taylor series begins with the linear approximation
+
+```{math}
+:label: multitaylor
+\mathbf{f}(\mathbf{x}+\mathbf{h}) = \mathbf{f}(\mathbf{x}) + \mathbf{J}(\mathbf{x})\mathbf{h} + O(\| \mathbf{h} \|^2),
+```
+
+where $\mathbf{J}$ is the Jacobian matrix of $\mathbf{f}$ at $\mathbf{x}$, and $\mathbf{h}$ is a small perturbation from $\mathbf{x}$.  
+
+The terms $\mathbf{f}(\mathbf{x})+\mathbf{J}(\mathbf{x})\mathbf{h}$ in {eq}`multitaylor` represent the linear part of $\mathbf{f}$ near $\mathbf{x}$, while the $O(\| \mathbf{h} \|^2)$ term represents the omitted higher-order terms in the Taylor series. If $\mathbf{f}$ is actually linear, i.e., $\mathbf{f}(\mathbf{x})=\mathbf{A}\mathbf{x}-\mathbf{b}$, then the Jacobian matrix is the constant matrix $\mathbf{A}$ and the higher-order terms in {eq}`multitaylor` disappear.
+
+:::{note}
+Because of the Jacobian's role in {eq}`multitaylor`, we may write $\mathbf{J}(\mathbf{x})$ as $\mathbf{f}{\,}'(\mathbf{x})$. Like any derivative, it is a function of the independent variable $\mathbf{x}$.
+:::
 
 ## The multidimensional Newton iteration
 
@@ -141,8 +154,8 @@ Note that $\mathbf{J}^{-1}\mathbf{f}$ now plays the role that $f/f'$ had in the 
 ```{index} ! Newton's method; multidimensional
 ```
 
-(algorithm-nonlineqn-newtonsys)=
 ::::{prf:algorithm} Multidimensional Newton's method
+:label: algorithm-nonlineqn-newtonsys
 Given $\mathbf{f}$ and a starting value $\mathbf{x}_1$, for each $k=1,2,3,\ldots$
 
 1. Compute $\mathbf{y}_k = \mathbf{f}(\mathbf{x}_k)$ and $\mathbf{A}_k=\mathbf{f\,}'(\mathbf{x}_k)$.
@@ -159,8 +172,8 @@ An extension of our series analysis of the scalar Newton's method shows that the
 
 An implementation of Newton's method for systems is given in {numref}`Function {number} <function-newtonsys>`. Other than computing the Newton step using backslash and taking vector magnitudes with `norm`, {numref}`Function {number} <function-newtonsys>` is virtually identical to the scalar version {numref}`Function {number} <function-newton>` presented earlier.
 
-(function-newtonsys)=
 ``````{prf:algorithm} newtonsys
+:label: function-newtonsys
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -182,8 +195,8 @@ An implementation of Newton's method for systems is given in {numref}`Function {
 `````
 ``````
 
-(demo-newtonsys-converge)=
 ::::{prf:example} Convergence of Newton's method for systems
+:label: demo-newtonsys-converge
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

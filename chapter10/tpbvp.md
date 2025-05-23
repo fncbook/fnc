@@ -12,6 +12,7 @@ In a {term}`boundary-value problem`, the state is not entirely given at any poin
 ## Definition
 
 ::::{prf:definition} Two-point boundary-value problem: TPBVP
+:label: definition-tpbvp
 :::{math}
 :label: tpbvp
 \begin{split}
@@ -49,8 +50,8 @@ Certain special cases of the boundary conditions have their own nomenclature.
 ```{index} ! Dirichlet boundary condition, ! Neumann boundary condition, ! Robin boundary condition, homogeneous boundary condition
 ```
 
-(definition-tpbvp-bctype)=
 :::{prf:definition} Dirichlet, Neumann, and Robin conditions
+:label: definition-bctypes
 Let $g_i$ be a boundary condition in {eq}`tpbvp`, and let $\alpha,\beta$ be constants.  
 
 {term}`Dirichlet condition`: $g_i(u,u') = u - \gamma$
@@ -62,8 +63,8 @@ Let $g_i$ be a boundary condition in {eq}`tpbvp`, and let $\alpha,\beta$ be cons
 When $\gamma=0$ in the above, it is a {term}`homogeneous boundary condition`.
 :::
 
-(example-tpbvp-pendulum)=
 ::::{prf:example} Multiple solutions in a BVP
+:label: example-tpbvp-pendulum
 An ideal pendulum of length $L$ satisfies the ODE $\theta'' + \frac{g}{L}\sin \theta = 0$, where $\theta(t)$ is the angle of the pendulum's rod from straight downward, and $g$ is gravitational acceleration.
 
 If we pull the pendulum bob 1 radian and release it from rest, then we have an IVP with the initial condition $\theta(0)=1$, $\theta'(0)=0$. Everything about the future trajectory of the pendulum is completely determined by that condition. But if instead we want to know how far to pull up the pendulum bob initially so that it is in the downward position 2 seconds later, then we have the Neumann boundary condition $\theta'(0)=0$ and the Dirichlet boundary condition $\theta(2)=0$. 
@@ -73,8 +74,8 @@ Clearly, one solution is $\theta(0)=0$, and the pendulum never moves! But there 
 
 While time can be the independent variable in a TPBVP, as in {numref}`Example {number} <example-tpbvp-pendulum>`, it is often space, which has no intrinsic direction of information flow.
 
-(example-tpbvp-mems)=
 ::::{prf:example} MEMS actuator
+:label: example-tpbvp-mems
 A micro-electromechanical system (MEMS) can have an actuator consisting of two flat, parallel, disk-shaped surfaces, one at $z=0$ and the other at $z=1$. The surface at $z=0$ is a rigid metal plate. The surface at $z=1$ is an elastic membrane fixed only at its boundary. When the surfaces are given different electric potentials, the membrane deflects in response to the induced electric field, and the field is also a position of the deflection. Assuming circular symmetry, one may derive the ordinary differential equation {cite}`peleskoEffectSmallaspectratio2006`
 
 :::{math}
@@ -96,8 +97,8 @@ derived from the circular symmetry and fixing the edge of the membrane, respecti
 
 We can solve the TPBVP {eq}`tpbvp` by recasting the problem as a first-order system, as introduced in @transformation-of-high-order-systems.
 
-(demo-tpbvp-mems)=
 ::::{prf:example} Solving a TPBVP numerically
+:label: demo-tpbvp-mems
 As a system, the MEMS problem from {numref}`Example {number} <example-tpbvp-mems>` uses $y_1=w$, $y_2=w'$ to obtain
 
 :::{math}

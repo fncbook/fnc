@@ -14,7 +14,8 @@ A piecewise linear interpolant is continuous but has discontinuities in its deri
 ```
 
 ::::{prf:definition} Cubic spline
-A **cubic spline** is a piecewise cubic function that has two continuous derivatives everywhere. 
+:label: definition-cubic-spline
+A {term}`cubic spline` is a piecewise cubic function that has two continuous derivatives everywhere.
 ::::
 
 We use $S(x)$ to denote the cubic spline interpolant. As before, suppose that distinct nodes $t_0 < t_1 < \cdots < t_n$ (not necessarily equally spaced) and data $y_0,\ldots,y_n$ are given. For any $k=1,\ldots,n$, the spline $S(x)$ on the interval $[t_{k-1},t_k]$ is by definition a cubic polynomial $S_k(x)$, which we express as
@@ -185,8 +186,8 @@ Collectively, {eq}`spline0asys`,  {eq}`spline0bsys`,  {eq}`spline1sys`,  {eq}`sp
 
 ## Implementation
 
-(function-spinterp)=
 ``````{prf:algorithm} spinterp
+:label: function-spinterp
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -211,8 +212,8 @@ Collectively, {eq}`spline0asys`,  {eq}`spline0bsys`,  {eq}`spline1sys`,  {eq}`sp
 {numref}`Function {number} <function-spinterp>` gives an implementation of cubic not-a-knot spline interpolation. For clarity, it stays very close to the description given above. There are some possible shortcuts—for example, one could avoid using $\mathbf{E}$ and instead directly delete the last row of any matrix it left-multiplies. Observe that the linear system is assembled and solved just once, and the returned evaluation function simply uses the resulting coefficients. This allows us to make multiple calls to evaluate $S$ without unnecessarily repeating the linear algebra.
 
 ## Conditioning and convergence
-(demo-splines-splines)=
 ::::{prf:example} Cubic splines
+:label: demo-splines-splines
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

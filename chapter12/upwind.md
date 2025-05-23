@@ -11,8 +11,8 @@ Advection phenomena are characterized by the transport of information at finite 
 ```{index} ! domain of dependence
 ```
 
-(definition-upwind-domdep)=
 ::::{prf:definition} Domain of dependence
+:label: definition-upwind-domdep
 Let $u(x,t)$ be the solution of an evolutionary PDE with initial condition $u_0(x)$. The  **domain of dependence** of the solution at $(x,t)$ is the set of all $s$ such that $u_0(s)$ can possibly affect $u(x,t)$.
 ::::
 
@@ -32,13 +32,13 @@ The heat equation $u_t = u_{xx}$ has a solution that, at any positive time $t$, 
 
 Any numerical method we choose to solve a PDE has analogous property.
 
-(definition-upwind-numdomdep)=
 ::::{prf:definition} Numerical domain of dependence
+:label: definition-upwind-numdomdep
 Let a numerical method be used to solve an evolutionary PDE on a grid, such that $U_{i,j}$ is the approximate solution at $x=x_i$, $t=t_j$. The **numerical domain of dependence** of the method at $(x_i,t_j)$ is the set of all $x_k$ such that the initial data $U_{k,0}$ can possibly affect $U_{i,j}$.
 ::::
 
-(example-upwind-centered)=
 ::::{prf:example}
+:label: example-upwind-centered
 In $u_t+cu_x=0$, suppose we discretize $u_x$ by a centered difference:
 
 :::{math}
@@ -73,8 +73,8 @@ We now state an important principle about a necessary relationship between domai
 ```{index} ! CFL condition
 ```
 
-(theorem-upwind-cfl)=
 ::::{prf:theorem} Courant–Friedrichs–Lewy (CFL) condition
+:label: theorem-upwind-cfl
 In order for a numerical method for an evolutionary equation to converge to the correct solution, the numerical domain of dependence in the limit $h \to 0,$ $\tau\to 0$ must contain the exact domain of dependence.
 ::::
 
@@ -84,8 +84,8 @@ Although we will not provide the rigor behind this theorem, its conclusion is no
 The CFL condition is a *necessary* criterion for convergence, but not a *sufficient* one. For instance, we could define $U_{i,j}$ to be any weighted convergent sum of all values of $U_{i,0}$. While that would make the numerical domain of dependence equal to the entire real line, this method has nothing to do with solving a PDE correctly!
 :::
 
-(example-upwind-centeredcfl)=
 ::::{prf:example}
+:label: example-upwind-centeredcfl
 In @example-upwind-centered we concluded that the numerical domain of dependence for a centered Euler discretization of the advection equation at $(x_i,t_j)$ is $\{x_{i-j},\ldots,x_{i+j}\}$. @figure-cflpicture illustrates what happens as $h$ and $\tau$ go to zero in a manner that leaves the ratio $h/\tau$ constant.
 
 ```{figure} figures/cflpicture.svg
@@ -115,8 +115,8 @@ The CFL condition requires that the maximum propagation speed in the numerical m
 
 We can rearrange {eq}`cfl-speed` to imply a necessary time step restriction $\tau \le h/|c|$. This restriction for advection is much less severe than the $\tau = O(h^2)$ restriction we derived for Euler in the heat equation in {numref}`section-diffusion-stiffness`. This is our first clear indication that advection is less stiff than diffusion.
 
-(demo-upwind-cfl)=
 ::::{prf:example} The CFL condition in action
+:label: demo-upwind-cfl
 
 We solve linear advection with velocity $c=2$ and periodic end conditions. The initial condition is numerically, though not mathematically, periodic.
 
@@ -155,8 +155,8 @@ If the domain of dependence at $(x,t)$ always lies to one side of $x$, that side
 
 Numerical methods can also have a directional preference.
 
-(example-upwind-onesided)=
 ::::{prf:example}
+:label: example-upwind-onesided
 Suppose that in $u_t+cu_x=0$ we use the backward difference
 
 :::{math}
@@ -202,8 +202,8 @@ For a PDE with an upwind direction, the boundary condition must be specified at 
 
 For $c>0$ in the advection equation, the inflow is at the left end, and for $c<0$, it is at the right end.
 
-(demo-upwind-direction)=
 ::::{prf:example} Upwind versus downwind
+:label: demo-upwind-direction
 
 `````{tab-set}
 ````{tab-item} Julia

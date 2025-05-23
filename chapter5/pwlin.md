@@ -14,12 +14,14 @@ numbering:
 Piecewise linear interpolation is simply a game of connect-the-dots. That is, the data points are joined pairwise by line segments.
 
 ::::{prf:definition} Piecewise linear interpolant
+:label: definition-pwlinear
 Given nodes $t_0 < t_1 < \cdots < t_n$, the **piecewise linear** interpolant $p(x)$ is given by
 
 ```{math}
 :label: pwlinear
 p(x) = y_k + \frac{y_{k+1}-y_k}{t_{k+1}-t_k}(x-t_k) \quad \text{ for } x\in[t_k,t_{k+1}].
 ```
+
 ::::
 
 It should be clear from {eq}`pwlinear` that on each interval $[t_k,t_{k+1}]$, $p(x)$ is a linear function passing through both $(t_k,y_k)$ and $(t_{k+1},y_{k+1})$.
@@ -41,7 +43,7 @@ Rather than basing an implementation on {eq}`pwlinear`, we return to the idea us
 ```{index} hat functions
 ```
 
-The functions $H_0,\ldots,H_n$ are called **hat functions**. They depend on the node vector $\mathbf{t}$, but this dependence is not usually indicated explicitly.
+The functions $H_0,\ldots,H_n$ are called {term}`hat functions`. They depend on the node vector $\mathbf{t}$, but this dependence is not usually indicated explicitly.
 
 Each hat function is globally continuous and is linear inside every interval $[t_k,t_{k+1}]$.  Consequently, any linear combination of them will have the same property. Furthermore, *any* such function is expressible as a unique linear combination of hat functions, i.e.,
 
@@ -56,8 +58,8 @@ An appealing characteristic of the hat function basis is that it depends only on
 
 {numref}`Function {number} <function-hatfun>` presents a simple implementation of hat functions. The inputs are a presorted vector of nodes and a value of $k$ between 0 and $n$, which represent the indices of the endpoints. The return value is a function of $x$ that can be evaluated as needed. Note that we have not formally defined values for a hat function outside of the node interval; our choice in {numref}`Function {number} <function-hatfun>` is to make it zero there.
 
-(function-hatfun)=
 ``````{prf:algorithm} hatfun
+:label: function-hatfun
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -79,8 +81,8 @@ An appealing characteristic of the hat function basis is that it depends only on
 `````
 ``````
 
-(demo-pwlin-hat)=
 ::::{prf:example} A look at hat functions
+:label: demo-pwlin-hat
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -127,8 +129,8 @@ All candidate piecewise linear (PL) functions can be expressed as a linear combi
 
 The resulting algorithmic simplicity is reflected in {numref}`Function {number} <function-plinterp>`. Take note that the output of {numref}`Function {number} <function-plinterp>` is itself a function, meant to be called with a single argument representing a value of $x$. Our mathematical viewpoint is that the result of an interpolation process is a function, and our codes reflect this.
 
-(function-plinterp)=
 ``````{prf:algorithm} plinterp
+:label: function-plinterp
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -150,8 +152,8 @@ The resulting algorithmic simplicity is reflected in {numref}`Function {number} 
 `````
 ``````
 
-(demo-pwlin-usage)=
 ::::{prf:example} Using piecewise linear interpolation
+:label: demo-pwlin-usage
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -180,8 +182,8 @@ The condition number bounds from @theorem-interp-conditioning are very simple fo
 ```{index} condition number; of interpolation
 ```
 
-(theorem-plcondition)=
 ````{prf:theorem} Conditioning of PL interpolation
+:label: theorem-plcondition
 The absolute condition number of piecewise linear interpolation in the infinity norm equals 1. More specifically, if $\mathcal{I}$ is the piecewise linear interpolation operator, then 
 
 ```{math}
@@ -215,8 +217,8 @@ Now suppose that $f$ is a "nice" function on an interval $[a,b]$ containing all 
 
 To make a simple statement, we will consider only the case of equally spaced nodes covering the interval. It turns out that piecewise linear interpolation converges at second order in the spacing of the nodes.
 
-(theorem-pwlin-converge)=
 ````{prf:theorem} Convergence of PL interpolation
+:label: theorem-pwlin-converge
 Suppose that $f(x)$ has a continuous second derivative in $[a,b]$ (often expressed as $f\in C^2([a,b])$). Let $p_n(x)$ be the piecewise linear interpolant of $\bigl(t_i,f(t_i)\bigr)$ for $i=0,\ldots,n$, where $t_i=a+i h$ and $h=(b-a)/n$. Then
   
 ```{math}
@@ -235,8 +237,8 @@ We normally don't have access to $f''$, so the importance of @theorem-pwlin-conv
 ```{index} ! convergence rate; algebraic, ! order of accuracy; of an approximation
 ```
 
-(definition-pwlin-algconv)=
 ::::{prf:definition} Algebraic convergence
+:label: definition-pwlin-algconv
 If an approximation has error that is $O(h^m)$ as $h\to 0$ for an integer $m$ and a discretization size parameter $h$, then we say the approximation has **algebraic convergence**. If the error is not also $O(h^{m+1})$, then $m$ is the **order of accuracy**.
 ::::
 
@@ -248,8 +250,8 @@ $$
 
 Hence a log-log graph of error versus $h$ should be approximately a straight line of slope $m$.
 
-(demo-pwlin-converge)=
 ::::{prf:example} Convergence of piecewise linear interpolation
+:label: demo-pwlin-converge
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

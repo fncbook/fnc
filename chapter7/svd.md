@@ -16,8 +16,8 @@ We now introduce another factorization that is as fundamental as the EVD.
 ```{index} see: SVD; singular value decomposition
 ```
 
-(definition-svd-svd)=
 ::::{prf:definition} Singular value decomposition (SVD)
+:label: definition-svd-svd
 The {term}`singular value decomposition` of an $m\times n$ matrix $\mathbf{A}$ is
 
 ```{math}
@@ -36,8 +36,8 @@ The columns of $\mathbf{U}$ and $\mathbf{V}$ are called **left** and **right sin
 We call $\sigma_1$ the **principal singular value** and $\mathbf{u}_{1}$ and $\mathbf{v}_{1}$ the **principal singular vectors**. 
 ::::
 
-(theorem-svd)=
 ````{prf:theorem}
+:label: theorem-svd
 Every $m\times n$ matrix has an SVD. The singular values of a matrix are unique, but the singular vectors are not. If the matrix is real, then $\mathbf{U}$ and $\mathbf{V}$ in {eq}`svd` can be chosen to be real, orthogonal matrices.  
 ````
 :::{prf:proof}
@@ -46,8 +46,8 @@ Every $m\times n$ matrix has an SVD. The singular values of a matrix are unique,
 The nonuniqueness is easy: for instance, we can replace $\mathbf{U}$ and $\mathbf{V}$ by their negatives without affecting {eq}`svd`. Proof of the other statements usually relies on induction in the size of $\mathbf{A}$ and can be found in advanced linear algebra texts.
 :::
 
-(example-svd-vector)=
 ````{prf:example}
+:label: example-svd-vector
 It is easy to check that 
 
 ```{math}
@@ -78,8 +78,8 @@ Suppose $\mathbf{A}$ is a real matrix and that $\mathbf{A}=\mathbf{U}\mathbf{S}\
 ```{index} hermitian matrix
 ```
 
-(theorem-svd-ATA)=
 :::{prf:theorem}
+:label: theorem-svd-ATA
 The eigenvalues of $\mathbf{A}^*\mathbf{A}$ are real and nonnegative, and the $\min\{m,n\}$ largest of them are the squares of the singular values of $\mathbf{A}$.
 :::
 
@@ -240,8 +240,8 @@ The SVD is intimately connected to the 2-norm, as the following theorem describe
 ```{index} norm; matrix
 ```
 
-(theorem-svdprops)=
 ::::{prf:theorem} SVD properties
+:label: theorem-svdprops
 Let $\mathbf{A}\in\mathbb{C}^{m\times n}$ have an SVD $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^*$ in which {eq}`svdorder` holds. Then:
 
 1. The 2-norm satisfies
@@ -265,8 +265,8 @@ Let $\mathbf{A}\in\mathbb{C}^{m\times n}$ have an SVD $\mathbf{A}=\mathbf{U}\mat
 
 The conclusion {eq}`svdnorm` can be proved by vector calculus. In the square case $m=n$, $\mathbf{A}$ having full rank is identical to being invertible. The SVD is the usual means for computing the 2-norm and condition number of a matrix. 
 
-(demo-svd-props)=
 ::::{prf:example} SVD properties
+:label: demo-svd-props
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

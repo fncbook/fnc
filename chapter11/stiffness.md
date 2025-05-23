@@ -51,8 +51,8 @@ By dropping the higher-order terms, which are negligible at least initially, we 
 ```{index} ! linearization of an ODE
 ```
 
-(definition-stiffness-linearization)=
 ::::{prf:definition} Linearization of an ODE
+:label: definition-stiffness-linearization
 A **linearization** of system {eq}`stiffsystem` at an exact solution $\hat{\mathbf{u}}(t)$ is
 
 :::{math}
@@ -65,8 +65,8 @@ where $\mathbf{v}(t)$ is a perturbation to the exact solution, and $\mathbf{J}$ 
 
 ```{index} Oregonator
 ```
-(example-stiffness-oregon)=
 ::::{prf:example}
+:label: example-stiffness-oregon
 The **Oregonator** is a well-known ODE system modeling a chemical oscillator and is given by
   
 :::{math}
@@ -107,8 +107,8 @@ The eigenvalues of the Jacobian appearing in the linearization about an exact so
 
 We have not stated a theorem here because we made several approximations and assumptions along the way that are not trivial to quantify. Nevertheless, if the rule of thumb is violated, we should expect perturbations to the exact solution to grow significantly with time, eventually rendering the numerical solution useless. Note that roundoff error is constantly introducing perturbations, so the rule of thumb applies along the entire trajectory of the numerical solution.
 
-(demo-stiffness-oregon)=
 ::::{prf:example} Solution of the Oregonator
+:label: demo-stiffness-oregon
 
 `````{tab-set}
 ````{tab-item} Julia
@@ -147,8 +147,8 @@ A Jacobian matrix with eigenvalues at different orders of magnitude therefore im
 
 In @demo-stiffness-oregon, for example, you can see a combination of fast changes and slow evolution. 
 
-(demo-stiffness-explicit)=
 ::::{prf:example} Stiff solver for the Oregonator
+:label: demo-stiffness-explicit
 
 `````{tab-set}
 ````{tab-item} Julia

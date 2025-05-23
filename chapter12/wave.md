@@ -114,8 +114,8 @@ The boundary conditions {eq}`waveBC` suggest that we should remove both of the e
 
 When computing $\mathbf{w}'(t)$, we extract the $\mathbf{v}$ and $\mathbf{z}$ components, and we define two helper functions: `extend`, which pads the $\mathbf{v}$ component with the zero end values, and `chop`, which deletes them from $\mathbf{u}$ to give $\mathbf{v}$.
 
-(demo-wave-boundaries)=
 ::::{prf:example} Wave equation with boundaries
+:label: demo-wave-boundaries
 
 We solve the wave equation {eq}`wavefirst2` with speed $c=2$, subject to {eq}`waveBC` and initial conditions {eq}`waveIC2`.
 
@@ -144,8 +144,8 @@ We solve the wave equation {eq}`wavefirst2` with speed $c=2$, subject to {eq}`wa
 
 An interesting situation is when the wave speed $c$ in @wavepde changes discontinuously, as when light passes from one material into another. For this we must replace the term $c^2$ in {eq}`waveMOL` with the matrix $\operatorname{diag}\bigl(c^2(x_0),\ldots,c^2(x_m)\bigr)$.
 
-(demo-wave-speed)=
 ::::{prf:example} Wave equation with variable speed
+:label: demo-wave-speed
 
 We now use a wave speed that is discontinuous at $x=0$; to the left, $c=1$, and to the right, $c=2$. 
 

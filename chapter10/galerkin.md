@@ -159,6 +159,8 @@ $$
 $$
 ::::
 
+(section-galerkin-fem)=
+
 ## Finite elements
 
 ```{index} interpolation; by piecewise linear polynomials
@@ -293,8 +295,8 @@ Each $I_k$ contributes to four elements of each matrix and two of the vector $\m
 
 {numref}`Function {number} <function-fem>` implements the piecewise linear FEM on the linear problem as posed in {eq}`weakbvp`, using an equispaced grid. The code closely follows the description above.
 
-(function-fem)=
 ``````{prf:algorithm} fem
+:label: function-fem
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -316,8 +318,8 @@ Each $I_k$ contributes to four elements of each matrix and two of the vector $\m
 `````
 ``````
 
-(demo-galerkin-fem)=
 ::::{prf:example} Finite element solution of a BVP
+:label: demo-galerkin-fem
 We solve the equation
 
 $$

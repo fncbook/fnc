@@ -18,6 +18,7 @@ We will use a particular type of orthogonal matrix.
 ```
 
 ::::{prf:definition} Householder reflector
+:label: definition-hhreflect
 A **Householder reflector** is a matrix of the form
 
 ```{math}
@@ -61,8 +62,8 @@ Given a vector $\mathbf{z}$, we can choose $\mathbf{v}$ so that $\mathbf{P}$ ref
 
 If it turns out that $\mathbf{w}=\boldsymbol{0}$, then $\mathbf{z}$ is already in the target form and we can take $\mathbf{P}=\mathbf{I}$.  Otherwise, we have the following.
 
-(theorem-hhreflect)=
 ````{prf:theorem} Householder reflector
+:label: theorem-hhreflect
 Let $\mathbf{v}$ be defined by {eq}`hhvector` and let $\mathbf{P}$ be given by {eq}`hhreflect`. Then $\mathbf{P}$ is symmetric and orthogonal, and $\mathbf{P}\mathbf{z}=\| \mathbf{z} \|\mathbf{e}_1$.
 ````
 
@@ -101,8 +102,8 @@ leading finally to
 
 The QR factorization is computed by using successive Householder reflections to introduce zeros in one column at a time. We first show the process for a small numerical example in @demo-house-qr.
 
-(demo-house-qr)=
 ::::{prf:example} Householder QR factorization
+:label: demo-house-qr
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -150,8 +151,8 @@ we can build $\mathbf{Q}^T$ iteratively by starting with the identity and doing 
 
 The algorithm we have described is encapsulated in {numref}`Function {number} <function-qrfact>`. There is one more refinement in it, however. As indicated by {eq}`hhapply`, the application of a reflector $\mathbf{P}$ to a vector does not require the formation of the matrix $\mathbf{P}$ explicitly.
 
-(function-qrfact)=
 ``````{prf:algorithm} qrfact
+:label: function-qrfact
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -181,8 +182,8 @@ This observation leads to the idea of the *Q-less QR factorization*, in which th
 
 In @problem-house-flops you are asked to derive the following result about the Q-less factorization.
 
-(theorem-house-flops)=
 :::{prf:theorem} 
+:label: theorem-house-flops
 Q-less QR factorization by Householder reflections takes $\sim(2mn^2-\frac{2}{3}n^3)$ flops.
 :::
 

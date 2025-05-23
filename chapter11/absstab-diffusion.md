@@ -53,8 +53,8 @@ We now consider the counterpart of this observation for the solution produced by
 ```{index} ! absolute stability
 ```
 
-(definition-absstab-model)=
 ::::{prf:definition} Absolute stability
+:label: definition-absstab-model
 Let $\lambda$ be a complex number, and let $y_0,y_1,y_2,\ldots,y_n$ be the numerical solution at times $0,\tau,2\tau,\ldots,n\tau$ of {eq}`absstabmodel` using a Runge–Kutta or multistep method with fixed stepsize $\tau$. Then the method is said to be **absolutely stable** at $\zeta = \tau\lambda$ if $|y_n|$ is bounded above as $n\to\infty$. 
 ::::
 
@@ -70,8 +70,8 @@ Each numerical IVP solver has its own collection of $\zeta$ values for which it 
 The **stability region** of an IVP solver is the collection of all $\zeta\in\complex$ for which the method is absolutely stable.
 ::::
 
-(example-absstab-euler)=
 ::::{prf:example}
+:label: example-absstab-euler
 Consider an Euler discretization of $y'=\lambda y$:
   
 $$
@@ -93,8 +93,8 @@ $$
 That is, the distance in the plane from $\zeta$ to the point $-1$ is less than or equal to 1. This description defines a closed disk of radius 1 centered at $(-1,0)$.
 ::::
 
-(example-absstab-AM1)=
 ::::{prf:example}
+:label: example-absstab-AM1
 The backward Euler method discretizes {eq}`absstabmodel` as
 
 $$
@@ -110,8 +110,8 @@ $$
 This inequality describes the region *outside* of the open disk of radius 1 centered at $1$ on the real axis of the complex plane.
 ::::
 
-(example-absstab-IE2)=
 ::::{prf:example} 
+:label: example-absstab-IE2
 The improved Euler method IE2 defined in {eq}`IE` discretizes {eq}`absstabmodel` as 
 
 ```{math}
@@ -141,8 +141,8 @@ Stability regions for backward differentiation methods of order 1–4 (left, ext
 
 For any particular method and value of $\lambda$ in {eq}`absstabmodel`, we can use the stability region to deduce which, if any, values of the time step $\tau$ will give bounded solutions. Both the magnitude and the argument (angle) of $\lambda$ play a role in determining such constraints.
 
-(example-absstab-FEBE)=
 ::::{prf:example}
+:label: example-absstab-FEBE
 Suppose $\lambda=-4$ and Euler's method is applied. Since the time step is always positive, $\zeta=-4\tau$ is always on the negative real axis. The only part of that line that lies within the stability region of Euler as derived in {numref}`Example {number} <example-absstab-euler>` is the real interval $[-2,0]$. Hence we require $\zeta\ge -2$, or $\tau \le 1/2$. By contrast, the stability region of backward Euler includes the entire negative real axis, so absolute stability is unconditional, i.e., assured regardless of $\tau$.
 
 Now suppose instead that $\lambda=i$, so that $\zeta=i\tau$. Clearly $\zeta$ is always on the positive imaginary axis. But no part of this axis, aside from the origin, lies in the stability region of Euler's method, so it is unconditionally *unstable* in this circumstance. The conclusion for backward Euler is the opposite; any value of $\tau$ will do, because the entire imaginary axis is within the stability region.
@@ -161,8 +161,8 @@ When adaptive time stepping methods are used, as in most software for IVPs, the 
 
 Now we return to the semidiscretization {eq}`heatMOL` of the heat equation, which was solved by Euler in @demo-methodlines-heatFE and backward Euler in @demo-methodlines-heatBE.
 
-(demo-absstab-regions)=
 ::::{prf:example} Stability regions and the heat equation
+:label: demo-absstab-regions
 
 `````{tab-set}
 ````{tab-item} Julia

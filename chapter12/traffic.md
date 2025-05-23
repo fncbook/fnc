@@ -57,7 +57,8 @@ Let's momentarily consider a simpler, more fundamental PDE.
 ```
 
 ::::{prf:definition} Advection equation
-The **advection equation** in one dimension is
+:label: definition-advection-equation
+The {term}`advection equation` in one dimension is
 
 :::{math}
 :label: advectpde
@@ -115,8 +116,8 @@ We can solve {eq}`advectpde` by the method of lines as in [Chapter 11](../diffus
 
 This matrix is returned by {numref}`Function {number} <function-diffper>`.
 
-(demo-traffic-advection)=
 ::::{prf:example} Advection equation
+:label: demo-traffic-advection
 
 We solve the advection equation on $[-4,4]$ with periodic end conditions using the method of lines.
 
@@ -153,8 +154,8 @@ Returning to the traffic flow PDE {eq}`trafficpde`, we can interpret the conserv
 
 Exact solutions of {eq}`trafficpde` are much harder to come by than for the standard advection equation, but the method of lines is still effective. 
 
-(demo-traffic-solve)=
 ::::{prf:example} Traffic flow model
+:label: demo-traffic-solve
 
 We solve for traffic flow using periodic boundary conditions. 
 

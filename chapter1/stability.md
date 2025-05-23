@@ -56,8 +56,8 @@ x_2 = \frac{-b - \sqrt{b^2-4ac}}{2a}.
 
 We can confirm this conclusion by finding a different path that avoids subtractive cancellation. A little algebra using {eq}`quadform` confirms the additional formula $x_1x_2=c/a$.  So given one root $r$, we compute the other root using $c/ar$, which has only multiplication and division and therefore creates no numerical trouble.
 
-(demo-stability-quadgood)=
 ``````{prf:example} Stable alternative to the quadratic formula
+:label: demo-stability-quadgood
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -96,8 +96,8 @@ In the presence of poor conditioning for a problem $f(x)$, even just the act of 
 ```{index} ! backward error
 ```
 
-(definition-stability-backward)=
 :::{prf:definition} Backward error
+:label: definition-backward-error
 Let $\tilde{f}$ be an algorithm for the problem $f$. Let $y=f(x)$ be an exact result and $\tilde{y}=\tilde{f}(x)$ be its approximation by the algorithm. If there is a value $\tilde{x}$ such that $f(\tilde{x}) = \tilde{y}$, then the relative **backward error** in $\tilde{y}$ is 
 
 ```{math}
@@ -115,8 +115,8 @@ Backward error measures the change to the original data that reproduces the resu
 Backward error is the difference between the original data and the data that exactly produces the computed value.
 ```
 
-(demo-stability-roots)=
 ``````{prf:example} Backward error
+:label: demo-stability-roots
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -141,8 +141,8 @@ Backward error is the difference between the original data and the data that exa
 
 Small backward error is the best we can hope for in a poorly conditioned problem. Without getting into the formal details, know that if an algorithm always produces small backward errors, then it is stable. But the converse is not always true: some stable algorithms may produce a large backward error.
 
-(example-stability-notbs)=
 ::::{prf:example}
+:label: example-stability-notbs
 One stable algorithm that is not backward stable is floating-point evaluation for our old friend, $f(x)=x+1$. If $|x|<\epsilon_\text{mach}/2$, then the computed result is $\tilde{f}(x)=1$, since there are no floating-point numbers between $1$ and $1+\epsilon_\text{mach}$. Hence the only possible choice for a real number $\tilde{x}$ satisfying {eq}`backwarderror` is $\tilde{x}=0$. But then $|\tilde{x}-x|/|x|=1$, which indicates 100% backward error!
 ::::
 

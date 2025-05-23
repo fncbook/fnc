@@ -20,8 +20,8 @@ as well as a set of values derived from the nodes.
 ```{index} ! barycentric weights
 ```
 
-(definition-barycentric-weights)=
 ::::{prf:definition} Barycentric weights
+:label: definition-barycentric-weights
 The **barycentric weights** for nodes $x_0,\dots,x_n$ are defined as
 :::{math}
 :label: baryweight
@@ -35,8 +35,8 @@ The following formula is the key to efficient and stable evaluation of a polynom
 ```{index} ! barycentric interpolation formula
 ```
 
-(theorem-barycentric-formula)=
 ::::{prf:theorem} Barycentric interpolation formula
+:label: theorem-barycentric-formula
 Given points $(t_k,y_k)$ for $k=0,\ldots,n$ with all the $t_k$ distinct, the unique polynomial of degree $n$ or less that interpolates the points is
 
 :::{math}
@@ -73,8 +73,8 @@ This is solved for $\Phi(x)$ and put back into {eq}`bary1` to get {eq}`bary2`.
 
 Equation {eq}`bary2` is certainly an odd-looking way to write a polynomial! Indeed, it is technically undefined when $x$ equals one of the nodes, but in fact, $\lim_{x\to t_k} p(x) = y_k$, so a continuous extension to the nodes is justified. (See @problem-barycentric-limit.) 
 
-(example-writeoutbary2)=
 ::::{prf:example}
+:label: example-writeoutbary2
 Let us write out the barycentric formula for the interpolating polynomial for the quadratic case ($n=2$) for {numref}`Example %s <example-ClassicalLagrange>`.  The weights are computed from {eq}`baryweight`:
   
 :::{math}
@@ -113,8 +113,8 @@ In {numref}`Function {number} <function-polyinterp>` we give an implementation o
 ```{index} ! Julia; isinf
 ```
 
-(function-polyinterp)=
 ``````{prf:algorithm} polyinterp
+:label: function-polyinterp
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -138,8 +138,8 @@ In {numref}`Function {number} <function-polyinterp>` we give an implementation o
 
 Computing all $n+1$ weights in {numref}`Function {number} <function-polyinterp>` takes $O(n^2)$ operations. Fortunately, the weights depend only on the nodes, not the data, and once they are known, computing $p(x)$ at a particular value of $x$ takes just $O(n)$ operations.
 
-(demo-barycentric-example)=
 ::::{prf:example} Barycentric interpolation
+:label: demo-barycentric-example
 We show the barycentric formula in action for values from the function $\sin(e^{2x})$ at equally spaced nodes in $[0,1]$ with $n=3$ and $n=6$.
 
 `````{tab-set}

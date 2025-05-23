@@ -22,11 +22,12 @@ We next consider three important types of matrices that cause the LU factorizati
 ```
 
 ::::{prf:definition} Bandwidth
-A matrix $\mathbf{A}$ has **upper bandwidth** $b_u$ if $j-i > b_u$ implies $A_{ij}=0$, and **lower bandwidth** $b_\ell$ if $i-j > b_\ell$ implies $A_{ij}=0$. We say the total **bandwidth** is $b_u+b_\ell+1$. When $b_u=b_\ell=1$, we have the important case of a **tridiagonal matrix**. 
+:label: definition-bandwidth
+A matrix $\mathbf{A}$ has **upper bandwidth** $b_u$ if $j-i > b_u$ implies $A_{ij}=0$, and **lower bandwidth** $b_\ell$ if $i-j > b_\ell$ implies $A_{ij}=0$. We say the total {term}`bandwidth` is $b_u+b_\ell+1$. When $b_u=b_\ell=1$, we have the important case of a **tridiagonal matrix**. 
 ::::
 
-(demo-structure-banded)=
 ::::{prf:example} Banded matrices
+:label: demo-structure-banded
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -68,11 +69,7 @@ In order to exploit the savings offered by sparsity, we would need to make modif
 ```{index} symmetric matrix
 ```
 
-::::{prf:definition} Symmetric matrix
-A square matrix $\mathbf{A}$ satisfying $\mathbf{A}^T = \mathbf{A}$ is called **symmetric**.
-::::
-
-Symmetric matrices arise frequently in applications because many types of interactions, such as gravitation and social-network befriending, are inherently symmetric. Symmetry in linear algebra simplifies many properties and algorithms. As a rule of thumb, if your matrix has symmetry, you want to exploit and preserve it. 
+Recall from @definition-symmetric-matrix is a square matrix $\mathbf{A}$ satisfying $\mathbf{A}^T = \mathbf{A}$. Symmetric matrices arise frequently in applications because many types of interactions, such as gravitation and social-network befriending, are inherently symmetric. Symmetry in linear algebra simplifies many properties and algorithms. As a rule of thumb, if your matrix has symmetry, you want to exploit and preserve it. 
 
 In $\mathbf{A}=\mathbf{L}\mathbf{U}$ we arbitrarily required the diagonal elements of $\mathbf{L}$, but not $\mathbf{U}$, to be one. That breaks symmetry, so we need to modify the goal to
 
@@ -93,8 +90,8 @@ Let $\mathbf{D}$ be an $n\times n$ diagonal matrix with diagonal elements $d_1,d
 
 Let's derive the LDL$^T$ factorization for a small example.
 
-(demo-structure-symm)=
 ::::{prf:example} Symmetric LDL$^T$ factorization
+:label: demo-structure-symm
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -140,13 +137,17 @@ Suppose that $\mathbf{A}$ is $n\times n$ and $\mathbf{x}\in\mathbb{R}^n$. Observ
 ```{index} see: SPD matrix; symmetric positive definite matrix
 ```
 
-::::{prf:definition} Symmetric positive definite matrix
-A real $n\times n$ matrix $\mathbf{A}$ is called a **symmetric positive definite matrix** (or SPD matrix) if it is symmetric and, for all nonzero $\mathbf{x}\in\mathbb{R}^n$,
+::::{prf:definition} SPD matrix
+:label: definition-SPDmatrix
+An {term}`SPD matrix`, or *symmetric positive definite matrix*, is a real $n\times n$ matrix $\mathbf{A}$ that is symmetric and for which
 
 ```{math}
 :label: SPD-def
-  \mathbf{x}^T \mathbf{A} \mathbf{x} > 0.
+  \mathbf{x}^T \mathbf{A} \mathbf{x} > 0
 ```
+
+for all nonzero $\mathbf{x}\in\mathbb{R}^n$.
+
 ::::
 
 The definiteness property is usually difficult to check directly from the definition. There are some equivalent conditions, though. For instance, a symmetric matrix is positive definite if and only if its eigenvalues are all real positive numbers. SPD matrices have important properties and appear in applications in which the definiteness is known for theoretical reasons.
@@ -188,6 +189,7 @@ Now we have $\mathbf{A}=\mathbf{L}\mathbf{D}^{1/2}\mathbf{D}^{1/2}\mathbf{L}^T= 
 ```
 
 ::::{prf:theorem} Cholesky factorization
+:label: theorem-cholesky-factorization
 Any SPD matrix $\mathbf{A}$ may be factored as 
 
 $$
@@ -205,8 +207,8 @@ Cholesky factorization of an $n \times n$ SPD matrix takes $\sim \frac{1}{3}n^3$
 
 The speed and stability of the Cholesky factorization make it the top choice for solving linear systems with SPD matrices. As a side benefit, the Cholesky algorithm fails (in the form of an imaginary square root or division by zero) if and only if the matrix $\mathbf{A}$ is not positive definite. This is often the best way to test the definiteness of a symmetric matrix about which nothing else is known.
 
-(demo-structure-cholesky)=
 ::::{prf:example} Cholesky factorization
+:label: demo-structure-cholesky
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

@@ -10,8 +10,8 @@ numbering:
 
 As mentioned in {numref}`section-linsys-lu`, the $\mathbf{A}=\mathbf{L}\mathbf{U}$ factorization is not stable for every nonsingular $\mathbf{A}$. Indeed, the factorization does not always even exist.
 
-(demo-pivoting-fail)=
 ::::{prf:example} Failure of naive LU factorization
+:label: demo-pivoting-fail
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -42,13 +42,13 @@ In {numref}`section-linsys-lu` we remarked that LU factorization is equivalent t
 
 The diagonal element of $\mathbf{U}$ that appears in the denominator of line 17 of {numref}`Function {number} <function-lufact>` is called the **pivot element** of its column. In order to avoid a zero pivot, we will use the largest available element in the column we are working on as the pivot. This technique is known as **row pivoting**.
 
-(rule-pivoting)=
 ```{prf:algorithm} Row pivoting
+:label: rule-pivoting
 When performing elimination in column $j$, choose as the pivot the element in column $j$ that is largest in absolute value. (In case of ties, choose the lowest row index.)
 ```
 
-(demo-pivoting-fix)=
 ::::{prf:example} Row pivoting in LU factorization
+:label: demo-pivoting-fix
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -72,8 +72,8 @@ When performing elimination in column $j$, choose as the pivot the element in co
 
 We will return to the loss of triangularity in $\mathbf{L}$ momentarily. First, though, there is a question left to answer: what if at some stage, all the elements of the targeted column are zero, i.e., there are no available pivots? Fortunately that loose end ties up nicely, although a proof is a bit beyond our scope here.
 
-(theorem-pivot)=
 ```{prf:theorem} Row pivoting
+:label: theorem-pivot
 The row-pivoted LU factorization runs to completion if and only if the original matrix is invertible.
 ```
 
@@ -83,8 +83,8 @@ A linear system with a singular matrix has either no solution or infinitely many
 
 Even though the resulting $\mathbf{L}$ in @demo-pivoting-fix is no longer of unit lower triangular form, it is close. In fact, all that is needed is to reverse the order of its rows. 
 
-(demo-pivoting-permute)=
 ::::{prf:example} Pivoting as row permutation
+:label: demo-pivoting-permute
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -113,7 +113,8 @@ In principle, if the permutation of rows implied by the pivot locations is appli
 ```
 
 ::::{prf:definition} PLU factorization
-Given $n\times n$ matrix $\mathbf{A}$, the **PLU factorization** is a unit lower triangular $\mathbf{L}$, an upper triangular $\mathbf{U}$, and a permutation $i_1,\ldots,i_n$ of the integers $1,\ldots,n$, such that
+:label: definition-plu
+Given $n\times n$ matrix $\mathbf{A}$, the {term}`PLU factorization` is a unit lower triangular $\mathbf{L}$, an upper triangular $\mathbf{U}$, and a permutation $i_1,\ldots,i_n$ of the integers $1,\ldots,n$, such that
 
 $$\tilde{\mathbf{A}} = \mathbf{L}\mathbf{U},$$
 
@@ -124,8 +125,8 @@ where rows $1,\ldots,n$ of $\tilde{\mathbf{A}}$ are rows $i_1,\ldots,i_n$ of $\m
 
 [^PLU]: Because unpivoted LU factorization is not useful, in practice the term *LU factorization* mostly refers to pivoted LU.
 
-(function-plufact)=
 ``````{prf:algorithm} plufact
+:label: function-plufact
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -154,8 +155,8 @@ Ideally, the PLU factorization takes $\sim \frac{2}{3}n^3$ flops asymptotically,
 
 The output of {numref}`Function {number} <function-plufact>` is a factorization of a row-permuted $\mathbf{A}$. Therefore, given a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, we have to permute $\mathbf{b}$ the same way before applying forward and backward substitution. This is equivalent to changing the order of the equations in a linear system, which does not affect its solution.
 
-(demo-pivoting-usage)=
 ::::{prf:example} PLU factorization for solving linear systems
+:label: demo-pivoting-usage
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -179,8 +180,8 @@ The output of {numref}`Function {number} <function-plufact>` is a factorization 
 
 The `lu` function from the built-in package `LinearAlgebra` returns the same three outputs as {numref}`Function {number} <function-plufact>`. If you only request one output, it will be a factorization object that can be used with a backslash. This is useful when you want to solve with multiple versions of $\mathbf{b}$ but do the factorization only once.
 
-(demo-pivoting-builtin)=
 ::::{prf:example} Built-in PLU factorization
+:label: demo-pivoting-builtin
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -209,8 +210,8 @@ The `lu` function from the built-in package `LinearAlgebra` returns the same thr
 
 There is one detail of the row pivoting algorithm that might seem arbitrary: why choose the pivot of largest magnitude in a column, rather than, say, the uppermost nonzero in the column? The answer is numerical stability.
 
-(demo-pivoting-stable)=
 ::::{prf:example} Stability of PLU factorization
+:label: demo-pivoting-stable
 Let
 
 ```{math}

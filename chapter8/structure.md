@@ -17,8 +17,8 @@ Very large matrices cannot be stored all within primary memory of a computer unl
 
 Most graphs with real applications have many fewer edges than the maximum possible $n^2$ for $n$ nodes. Accordingly, their adjacency matrices have mostly zero elements and should be represented sparsely. 
 
-(demo-structure-sparse)=
 ::::{prf:example} Sparsity
+:label: demo-structure-sparse
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -46,8 +46,8 @@ Most graphs with real applications have many fewer edges than the maximum possib
 
 Arithmetic operations such as `+`, `-`, `*`, and `^` respect and exploit sparsity if the matrix operands are sparse. However, matrix operations may substantially decrease the amount of sparsity, a phenomenon known as **fill-in**.
 
-(demo-structure-fill)=
 ::::{prf:example} Fill-in of a sparse matrix
+:label: demo-structure-fill
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -82,8 +82,8 @@ A particularly important type of sparse matrix is a banded matrix. Recall from {
 
 Without pivoting, an LU factorization preserves bandwidth, but pivoting can change or destroy bandedness.
 
-(demo-structure-sparseband)=
 ::::{prf:example} Banded matrices
+:label: demo-structure-sparseband
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -115,8 +115,8 @@ If given a sparse matrix, the backslash operator will automatically try a form o
 
 For very large matrices, it's unlikely that you will want to find all of its eigenvalues and eigenvectors. In {numref}`section-krylov-subspace` we describe some of the math behind an algorithm that can find a selected number of eigenvalues of largest magnitude, lying to the extreme left or right, or nearest a given complex number. 
 
-(demo-structure-linalg)=
 ::::{prf:example} Eigenvalues of sparse matrices
+:label: demo-structure-linalg
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia

@@ -47,8 +47,8 @@ p(x) &= c_1 + c_2 x + \cdots + c_n x^{n-1} \\
 A polynomial is represented as a vector of coefficients in all three languages covered by this book. However, in Julia they are given in *ascending* degree order, which is most convenient programmatically, while in MATLAB and NumPy they are given in *descending* order, which is the way we usually write them. 
 ```
 
-(function-horner)=
 ``````{prf:algorithm} horner
+:label: function-horner
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -70,8 +70,8 @@ A polynomial is represented as a vector of coefficients in all three languages c
 `````
 ``````
 
-(demo-algorithms-horner)=
 ``````{prf:example} Using a function
+:label: demo-algorithms-horner
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

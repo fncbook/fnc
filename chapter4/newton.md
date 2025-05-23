@@ -7,8 +7,8 @@ numbering:
 
 Newton's method is the cornerstone of rootfinding. We introduce the key idea with an example in @demo-newton-line.
 
-(demo-newton-line)=
 ::::{prf:example} Graphical interpretation of Newton's method
+:label: demo-newton-line
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -42,8 +42,8 @@ Finding the root of $q(x)=0$ is trivial. We define the next approximation by the
 ```{index} ! Newton's method
 ```
 
-(algorithm-nonlineqn-newton)=
 ::::{prf:algorithm} Newton's method
+:label: algorithm-nonlineqn-newton
 Given a function $f$, its derivative, $f'$, and an initial value $x_1$, iteratively define
 
 ```{math}
@@ -121,8 +121,8 @@ Recall that linear convergence is identifiable by trending toward a straight lin
 \end{split}
 ```
 
-(demo-newton-converge)=
 ::::{prf:example} Convergence of Newton's method
+:label: demo-newton-converge
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -164,8 +164,8 @@ Our implementation of Newton's iteration is given in {numref}`Function {number} 
 ```{index} ! Julia; break
 ```
 
-(function-newton)=
 ``````{prf:algorithm} newton
+:label: function-newton
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -193,8 +193,8 @@ Our implementation of Newton's iteration is given in {numref}`Function {number} 
 
 {numref}`Function {number} <function-newton>` also deals with a thorny practical issue: how to stop the iteration. It adopts a three-part criterion. First, it monitors the difference between successive root estimates, $|x_k-x_{k-1}|$, which is used as a stand-in for the unknown error $|x_k-r|$. In addition, it monitors the residual $|f(x_k)|$, which is equivalent to the backward error and more realistic to control in badly conditioned problems (see {numref}`section-nonlineqn-rootproblem`). If either of these quantities is considered to be sufficiently small, the iteration ends. Finally, we need to protect against the possibility of a nonconvergent iteration, so the procedure terminates with a warning if a maximum number of iterations is exceeded.
 
-(demo-newton-usage)=
 ::::{prf:example} Using Newton's method
+:label: demo-newton-usage
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

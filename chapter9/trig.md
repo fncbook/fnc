@@ -51,8 +51,8 @@ We can explicitly state the cardinal function basis for equispaced trigonometric
 
 You can directly check the following facts. (See @problem-trig-checktau.) 
 
-(theorem-triginterp-cardinal)=
 ::::{prf:theorem}
+:label: theorem-triginterp-cardinal
 Given the definition of $\tau$ in {eq}`trigcardinal`,
 1. $\tau(x)$ is a trigonometric polynomial of degree $n$.
 2. $\tau(x)$ is 2-periodic.
@@ -76,8 +76,8 @@ The convergence of a trigonometric interpolant is spectral, i.e., exponential as
 
 ```{index} ! Julia; ternary operator, ! Julia; eachindex, ! Julia; isodd
 ```
-(function-triginterp)=
 ``````{prf:algorithm} triginterp
+:label: function-triginterp
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -99,8 +99,8 @@ The convergence of a trigonometric interpolant is spectral, i.e., exponential as
 `````
 ``````
 
-(demo-trig-interp)=
 ::::{prf:example} Trigonometric interpolation
+:label: demo-trig-interp
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -180,8 +180,8 @@ $$
 \end{bmatrix}.
 $$
 
-(demo-trig-fft)=
 ::::{prf:example} FFT 
+:label: demo-trig-fft
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia

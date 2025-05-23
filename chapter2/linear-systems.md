@@ -31,8 +31,8 @@ If $\mathbf{A}$ is invertible, then the mathematical expression of the solution 
 When $\mathbf{A}$ is singular, then $\mathbf{A}\mathbf{x}=\mathbf{b}$ may have no solution or
 infinitely many solutions.
 
-(example-singmatrix)=
 ````{prf:example}
+:label: example-singmatrix
 If we define
 
 ```{math}
@@ -87,8 +87,8 @@ In Python, the `numpy.linalg.solve` function is used to solve linear systems.
 ```` 
 `````
 
-(demo-systems-backslash)=
 ::::{prf:example} Solving linear systems
+:label: demo-systems-backslash
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -140,7 +140,7 @@ The first row of this system states simply that $4x_1=8$, which is easily solved
 ```{index} forward substitution
 ```
 
-The process just described is called **forward substitution**. In the $4\times 4$ lower triangular case of $\mathbf{L}\mathbf{x}=\mathbf{b}$ it leads to the formulas
+The process just described is called {term}`forward substitution`. In the $4\times 4$ lower triangular case of $\mathbf{L}\mathbf{x}=\mathbf{b}$ it leads to the formulas
 
 ```{math}
 :label: forwardsub
@@ -155,7 +155,7 @@ The process just described is called **forward substitution**. In the $4\times 4
 ```{index} backward substitution
 ```
 
-For upper triangular systems $\mathbf{U}\mathbf{x}=\mathbf{b}$ an analogous process of **backward substitution** begins by solving for the last component $x_n=b_n/U_{nn}$ and working backward. For the $4\times 4$ case we have
+For upper triangular systems $\mathbf{U}\mathbf{x}=\mathbf{b}$ an analogous process of {term}`backward substitution` begins by solving for the last component $x_n=b_n/U_{nn}$ and working backward. For the $4\times 4$ case we have
 
 ```{math}
   \begin{bmatrix}
@@ -172,6 +172,7 @@ For upper triangular systems $\mathbf{U}\mathbf{x}=\mathbf{b}$ an analogous proc
 Solving the system backward, starting with $x_4$ first and then proceeding in descending order, gives
 
 ```{math}
+:label: eq-backsub
 \begin{split}
   x_4 &= \frac{b_4}{U_{44}}, \\
   x_3 &= \frac{b_3 - U_{34}x_4}{U_{33}}, \\
@@ -183,8 +184,8 @@ Solving the system backward, starting with $x_4$ first and then proceeding in de
 It should be clear that forward or backward substitution fails if and only if one of the diagonal entries of the system matrix is zero. We have essentially proved the following theorem.
 
 
-(theorem-triangle-invert)=
 ```{prf:theorem} Triangular singularity
+:label: theorem-triangle-invert
 
 A triangular matrix is singular if and only if at least one of its diagonal elements is zero.
 ```
@@ -193,8 +194,8 @@ A triangular matrix is singular if and only if at least one of its diagonal elem
 
 Consider how to implement the sequential process implied by Equation {eq}`forwardsub`. It seems clear that we want to loop through the elements of $\mathbf{x}$ in order. Within each iteration of that loop, we have an expression whose length depends on the iteration number. This leads to a nested loop structure.
 
-(function-forwardsub)=
 ``````{prf:algorithm} forwardsub
+:label: function-forwardsub
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -219,8 +220,8 @@ Consider how to implement the sequential process implied by Equation {eq}`forwar
 
 The implementation of backward substitution is much like forward substitution and is given in {numref}`Function {number} <function-backsub>`.
 
-(function-backsub)=
 ``````{prf:algorithm} backsub
+:label: function-backsub
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -243,8 +244,8 @@ The implementation of backward substitution is much like forward substitution an
 `````
 ``````
 
-(demo-systems-triangular)=
 ::::{prf:example} Triangular systems of equations
+:label: demo-systems-triangular
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

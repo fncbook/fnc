@@ -21,8 +21,8 @@ When the integration domain is $(-\infty,\infty)$, the integrand has to decay as
 
 This integral can be discretized finitely by, say, the trapezoid formula, or an adaptive integrator. However, this approach can be inefficient.
 
-(example-improper-slowdecay)=
 ::::{prf:example}
+:label: example-improper-slowdecay
 Consider the integral of $f(x)=1/(1+x^2)$,
 
 $$
@@ -78,8 +78,8 @@ By the chain rule,
 
 The exponential terms introduced by the chain rule grow double exponentially, but the more rapid decay of $f$ in the new variable more than makes up for this.
 
-(demo-improper-decay)=
 ::::{prf:example} Decay by transformation
+:label: demo-improper-decay
 Consider again $f(x)=1/(1+x^2)$ from {numref}`Example %s <example-improper-slowdecay>`, with $x(t)$ given by {eq}`DEquadtrans1`. As $t\to\infty$, 
 
 $$
@@ -124,8 +124,8 @@ The total integrand in {eq}`DEquadchain1` therefore has double exponential decay
 
 {numref}`Function {number} <function-intinf>` implements double exponential integration by applying the adaptive integrator {numref}`Function {number} <function-intadapt>` to {eq}`DEquadchain1`. It truncates the interval to $-M\le t \le M$ by increasing $M$ until the integrand is too small to matter relative to the error tolerance.
 
-(function-intinf)=
 ``````{prf:algorithm} intinf
+:label: function-intinf
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -147,8 +147,8 @@ The total integrand in {eq}`DEquadchain1` therefore has double exponential decay
 `````
 ``````
 
-(demo-improper-intinf)=
 ::::{prf:example} Infinite interval
+:label: demo-improper-intinf
 We compare direct truncation in $x$ to the double exponential method of {numref}`Function {number} <function-intinf>` for $f(x)=1/(1+x^2)$.
 
 
@@ -203,8 +203,8 @@ satisfies $x(0)=1$ and $x\to 0^+$ as $t\to \infty$, thereby transforming the int
 
 Now the growth of $f$ and $\cosh t$ together are counteracted by the double exponential denominator, allowing easy truncation of {eq}`DEquadchain2`. This variable transformation is paired with adaptive integration in {numref}`Function {number} <function-intsing>`.
 
-(function-intsing)=
 ``````{prf:algorithm} intsing
+:label: function-intsing
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -226,8 +226,8 @@ Now the growth of $f$ and $\cosh t$ together are counteracted by the double expo
 `````
 ``````
 
-(demo-improper-intsing)=
 ::::{prf:example} Singularity at an endpoint
+:label: demo-improper-intsing
 Let's use {numref}`Function {number} <function-intsing>` to compute
 
 $$

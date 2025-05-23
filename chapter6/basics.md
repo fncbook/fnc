@@ -8,9 +8,9 @@ numbering:
 ```{index} ! initial-value problem
 ```
 
-(definition-basics-scalarivp)=
-::::{prf:definition} Initial-value problem (scalar)
-A scalar first-order **initial-value problem** (IVP) is
+::::{prf:definition} Initial-value problem: scalar
+:label: definition-scalarivp
+A scalar first-order {term}`initial-value problem` (IVP) is
   
 ```{math}
 :label: IVP
@@ -67,8 +67,8 @@ An ODE may have higher derivatives of the unknown solution present. For example,
 
 ## Numerical solutions
 
-(demo-basics-first)=
 ::::{prf:example} Solving an IVP
+:label: demo-basics-first
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -94,8 +94,8 @@ An ODE may have higher derivatives of the unknown solution present. For example,
 
 There are simple IVPs that do not have solutions at all possible times. 
 
-(demo-basics-sing)=
 ::::{prf:example} Finite-time singularity
+:label: demo-basics-sing
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -125,8 +125,8 @@ We can also produce an IVP that has more than one solution.
 
 The following standard theorem gives us a condition that is easy to check and guarantees that a unique solution exists. But it is not the most general possible such condition, so there are problems with a unique solution that it cannot detect. We state the theorem without proof.
 
-(theorem-existunique)=
 ````{prf:theorem} Existence and uniqueness
+:label: theorem-existunique
 
 If the derivative $\frac{\partial f}{\partial u}$ exists and $\left|\frac{\partial f}{\partial u}\right|$ is bounded by a constant $L$ for all $a\le t \le b$ and all $u$, then the initial-value problem {eq}`IVP` has a unique solution for $t\in [a,b]$.
 ````
@@ -138,8 +138,8 @@ If the derivative $\frac{\partial f}{\partial u}$ exists and $\left|\frac{\parti
 
 In a numerical context we have to be concerned about the conditioning of the IVP. There are two key items in {eq}`IVP` that we might consider to be the data of the initial-value ODE problem: the function $f(t,u)$, and the initial value $u_0$. It's easier to discuss perturbations to numbers than to functions, so we will focus on the effect of $u_0$ on the solution, using the following theorem that we give without proof. Happily, its conditions are identical to those in @theorem-existunique.
 
-(theorem-depIC)=
 ````{prf:theorem} Dependence on initial value
+:label: theorem-depIC
 If the derivative $\frac{\partial f}{\partial u}$ exists and $\left|\frac{\partial f}{\partial u}\right|$ is bounded by a constant $L$ for all $a\le t \le b$ and all $u$, then the solution $u(t;u_0+\delta)$ of $u'=f(t,u)$ with initial condition $u(0)=u_0+\delta$ satisfies
   
 ```{math}
@@ -152,8 +152,8 @@ for all sufficiently small $|\delta|$.
 
 Numerical solutions of IVPs have errors, and those errors can be seen as perturbations to the solution. @theorem-depIC gives an upper bound of $e^{L(b-a)}$ on the infinity norm (i.e., pointwise) absolute condition number of the solution with respect to perturbations at an initial time. However, the upper bound may be a terrible overestimate of the actual sensitivity for a particular problem.
 
-(demo-basics-cond)=
 ::::{prf:example} Conditioning of an IVP
+:label: demo-basics-cond
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

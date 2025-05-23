@@ -8,7 +8,7 @@ numbering:
 ```{index} linear least-squares problem
 ```
 
-We now solve the general linear least-squares problem in {numref}`Definition {number} <definition-fitting-linearls>`. That is, given $\mathbf{A}\in\mathbb{R}^{m \times n}$ and $\mathbf{b}\in\mathbb{R}^m$, with $m>n$, find the $\mathbf{x}\in\mathbb{R}^n$ that minimizes $\| \mathbf{b} - \mathbf{A}\mathbf{x} \|_2$. 
+We now solve the general linear least-squares problem in {numref}`Definition {number} <definition-leastsq>`. That is, given $\mathbf{A}\in\mathbb{R}^{m \times n}$ and $\mathbf{b}\in\mathbb{R}^m$, with $m>n$, find the $\mathbf{x}\in\mathbb{R}^n$ that minimizes $\| \mathbf{b} - \mathbf{A}\mathbf{x} \|_2$. 
 
 There is a concise explicit solution. In the following proof we make use of the elementary algebraic fact that for two vectors $\mathbf{u}$ and $\mathbf{v}$,
 
@@ -20,8 +20,8 @@ There is a concise explicit solution. In the following proof we make use of the 
 ```{index} ! normal equations
 ```
 
-(theorem-normaleqns)=
 ````{prf:theorem}
+:label: theorem-normaleqns
 
 If $\mathbf{x}$ satisfies $\mathbf{A}^T(\mathbf{A}\mathbf{x}-\mathbf{b})=\boldsymbol{0}$, then $\mathbf{x}$ solves the linear least-squares problem, i.e., $\mathbf{x}$ minimizes $\| \mathbf{b}-\mathbf{A}\mathbf{x} \|_2$.
 ````
@@ -44,14 +44,17 @@ Let $\mathbf{y}\in \mathbb{R}^n$ be any vector. Then
   \end{split}
 ```
 ````
+<!-- TODO: singular normal equation -->
 
 ::::{prf:definition} Normal equations
-Given $\mathbf{A}\in \real^{m\times n}$ and $\mathbf{b}\in \real^{m}$, the **normal equations** for the linear least-squares problem $\operatorname{argmin}\| \mathbf{b}- \mathbf{A} \mathbf{x}\|$ are $\mathbf{A}^T(\mathbf{A}\mathbf{x}-\mathbf{b})=\boldsymbol{0}$, or equivalently,
+:label: definition-normaleqns
+Given $\mathbf{A}\in \real^{m\times n}$ and $\mathbf{b}\in \real^{m}$, the {term}`normal equations` for the linear least-squares problem $\operatorname{argmin}\| \mathbf{b}- \mathbf{A} \mathbf{x}\|$ are $\mathbf{A}^T(\mathbf{A}\mathbf{x}-\mathbf{b})=\boldsymbol{0}$, or equivalently,
 
 ```{math}
 :label: normaleqns
 \mathbf{A}^T\mathbf{A}\mathbf{x}=\mathbf{A}^T\mathbf{b}.
 ```
+
 ::::
 
 The normal equations have a geometric interpretation, as shown in {numref}`fig-normaleqns2d`. The vector in the range (column space) of $\mathbf{A}$ that lies closest to $\mathbf{b}$ makes the vector difference $\mathbf{A}\mathbf{x}-\mathbf{b}$ perpendicular to the range. Thus for any $\mathbf{z}$, we must have $(\mathbf{A} \mathbf{z})^T(\mathbf{A}\mathbf{x}-\mathbf{b})=0$, which is satisfied if $\mathbf{A}^T(\mathbf{A}\mathbf{x}-\mathbf{b})=\boldsymbol{0}$.
@@ -86,8 +89,8 @@ The matrix $\mathbf{A}^T\mathbf{A}$ appearing in the pseudoinverse has some impo
 ```{index} normal equations
 ```
 
-(theorem-ATA)=
 ::::{prf:theorem}
+:label: theorem-ATA
 
 For any real $m\times n$ matrix $\mathbf{A}$ with $m\ge n$, the following are true:
 
@@ -114,8 +117,8 @@ Finally, we can repeat the manipulations above to show that for any nonzero $n$-
 
 The definition of the pseudoinverse involves taking the inverse of a matrix, so it is not advisable to use the pseudoinverse computationally. Instead, we use the definition of the normal equations to set up a linear system, which we already know how to solve. In summary, the steps for solving the linear least squares problem $\mathbf{A}\mathbf{x}\approx\mathbf{b}$ are:
 
-(algorithm-normaleqns-solve)=
 ::::{prf:algorithm} Solution of linear least squares by the normal equations
+:label: algorithm-normaleqns-solve
 1. Compute $\mathbf{N}=\mathbf{A}^T\mathbf{A}$.
 2. Compute $\mathbf{z} = \mathbf{A}^T\mathbf{b}$.
 3. Solve the $n\times n$ linear system $\mathbf{N}\mathbf{x} = \mathbf{z}$ for $\mathbf{x}$.
@@ -125,8 +128,8 @@ Steps 1 and 3 of {numref}`Algorithm {number} <algorithm-normaleqns-solve>` domin
 
 In the last step we can exploit the fact, proved in @theorem-ATA, that $\mathbf{N}$ is symmetric and positive definite, and use Cholesky factorization as in {numref}`section-linsys-structure`. This detail is included in {numref}`Function {number} <function-lsnormal>`.
 
-(function-lsnormal)=
 ``````{prf:algorithm} lsnormal
+:label: function-lsnormal
 
 `````{tab-set} 
 ````{tab-item} Julia
@@ -149,8 +152,8 @@ In the last step we can exploit the fact, proved in @theorem-ATA, that $\mathbf{
 `````
 ``````
 
-(theorem-normaleqns-flops)=
 ```{prf:theorem}
+:label: theorem-normaleqns-flops
 Solution of linear least squares by the normal equations takes $\sim (mn^2 + \frac{1}{3}n^3)$ flops.
 ```
 
@@ -198,8 +201,8 @@ If $\mathbf{A}$ is $m\times n$ with $m > n$, then
 
 This squaring of the condition number in the normal equations is the cause of instability. If $\kappa(\mathbf{A})$ is large, the squaring of it can destabilize the normal equations: while the solution of the least-squares problem is sensitive, finding it via the normal equations makes it doubly so.
 
-(demo-normaleqns-instab)=
 ::::{prf:example} Instability in the normal equations
+:label: demo-normaleqns-instab
 `````{tab-set} 
 
 ````{tab-item} Julia

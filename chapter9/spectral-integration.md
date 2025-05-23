@@ -36,8 +36,8 @@ In @problem-specint-trapperiod you are asked to verify that this result is ident
 The trapezoid integration formula is spectrally accurate for periodic functions.
 ```
 
-(demo-integration-ellipse)=
 ::::{prf:example} Perimeter of an ellipse
+:label: demo-integration-ellipse
 We use the trapezoidal integration formula to compute the perimeter of an ellipse with semi-axes 1 and 1/2. Parameterizing the ellipse as $x=\cos \pi t$, $y=\frac{1}{2}\sin \pi t$ leads to the arc-length integral 
 
 $$\int_{-1}^1 \pi\sqrt{ \cos^2(\pi t) + \tfrac{1}{4}\sin^2(\pi t)}\,dt.$$ 
@@ -113,8 +113,8 @@ There are different formulas for odd values of $n$. Note that the weights also d
 
 [^clencurt]: This function is modeled after the function `clencurt.m` of {cite}`trefethenSpectralMethods2000`.
 
-(function-ccint)=
 ``````{prf:algorithm} ccint
+:label: function-ccint
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -148,8 +148,8 @@ where $Q_n[f]$ stands for the application of the formula to function $f$. (We st
 
 The interpolation approach spurred us to use Chebyshev nodes. But it's not clear that these are ideal nodes for the specific application of finding an integral. Instead, we can define formula as the integral of a polynomial interpolant, but with the weights and nodes chosen to satisfy an optimality criterion. As usual, we denote the set of all polynomials of degree at most $m$ by $\mathcal{P}_m$.
 
-(definition-specint-degree)=
 ::::{prf:definition} Degree of an integration formula
+:label: definition-specint-degree
 The **degree** of integration formula $Q_n$ is the maximum value of $d$ such that 
 
 $$
@@ -170,8 +170,8 @@ Since there are $n$ nodes and $n$ weights available to choose, it seems plausibl
 ```
 If these conditions are satisfied, the resulting method is called **Gauss–Legendre integration** or simply **Gaussian integration**. Because the integration formula is linear, i.e., $Q_n[\alpha p + q] = \alpha Q_n[p] + Q_n[q]$, it is sufficient to show that $Q_n$ gets the exact value for the monomials $1,x,x^2,\ldots,x^{2n-1}.$
 
-(example-gquad2)=
 ::::{prf:example}
+:label: example-gquad2
 As an example, consider the case $n=2$. Applying the integration formula to each monomial of degree less than $2n$, we get the conditions
   
 :::{math}
@@ -196,8 +196,8 @@ which specifies the two-point Gaussian integration formula.
 
 Generalizing the process above to general $n$ would be daunting, as the conditions on the nodes and weights are nonlinear. Fortunately, a more elegant approach is possible.
 
-(theorem-specint-gaussquad)=
 ::::{prf:theorem}
+:label: theorem-specint-gaussquad
 The roots of the Legendre polynomial $P_n(x)$ are the nodes of an $n$-point Gaussian integration formula.
 ::::
 
@@ -240,8 +240,8 @@ for all $q \in {\mathcal{P}}_{n-1}$. Hence satisfaction of {eq}`gqorthogonality`
 
 From @theorem-orthogonal-roots we know that the roots of $P_n$ are distinct and all within $(-1,1)$. (Indeed, it would be strange to have the integral of a function depend on some of its values outside the integration interval!)  While there is no explicit formula for the roots, there are fast algorithms to compute them and the integration weights on demand. {numref}`Function {number} <function-glint>` uses one of the oldest methods,  practical up to $n=100$ or so.
 
-(function-glint)=
 ``````{prf:algorithm} glint
+:label: function-glint
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -267,8 +267,8 @@ From @theorem-orthogonal-roots we know that the roots of $P_n$ are distinct and 
 
 Both Clenshaw–Curtis and Gauss–Legendre integration are spectrally accurate. The Clenshaw–Curtis method on $n+1$ points has degree $n$, whereas the Gauss–Legendre method with $n$ points has degree ${2n-1}$. For this reason, it is possible for Gauss–Legendre to converge at a rate that is "twice as fast," i.e., with roughly the square of the error of Clenshaw–Curtis. But the full story is not simple.
 
-(demo-integration-compare)=
 ::::{prf:example} Comparing spectral integration methods
+:label: demo-integration-compare
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia

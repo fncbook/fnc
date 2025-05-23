@@ -10,8 +10,8 @@ To this point we have dealt frequently with the solution of the linear system $\
 ```{index} ! eigenvalue, ! eigenvector
 ```
 
-(definition-evd-eigenvalue)=
 ::::{prf:definition} Eigenvalue and eigenvector
+:label: definition-eigenvalue
 Given a square matrix $\mathbf{A}$, if 
 
 ```{math}
@@ -117,6 +117,7 @@ If we find that $\mathbf{V}$ is a nonsingular matrix, then we arrive at a key fa
 ```
 
 ::::{prf:definition} Eigenvalue decomposition (EVD)
+:label: definition-evd
 An **eigenvalue decomposition** (EVD) of a square matrix $\mathbf{A}$ is
 
 ```{math}
@@ -127,7 +128,11 @@ An **eigenvalue decomposition** (EVD) of a square matrix $\mathbf{A}$ is
 If $\mathbf{A}$ has an EVD, we say that $\mathbf{A}$ is a {term}`diagonalizable matrix`; otherwise $\mathbf{A}$ is **nondiagonalizable** (or *defective*).
 ::::
 
-Observe that if $\mathbf{A}\mathbf{v} = \lambda \mathbf{v}$ for nonzero $\mathbf{v}$, then the equation remains true for any nonzero multiple of $\mathbf{v}$. Therefore, eigenvectors are not unique, and thus neither is an EVD.
+Observe that if $\mathbf{A}\mathbf{v} = \lambda \mathbf{v}$ for nonzero $\mathbf{v}$, then the equation remains true for any nonzero multiple of $\mathbf{v}$. Therefore:
+
+:::{important}
+A matrix that has an eigenvalue decomposition has infinitely many of them.
+:::
 
 We stress that while {eq}`ev-all` is possible for all square matrices, {eq}`evdecomp` is not.  One simple example of a nondiagonalizable matrix is
 
@@ -144,8 +149,8 @@ There is a common circumstance in which we can guarantee an EVD exists. The proo
 If the $n\times n$ matrix $\mathbf{A}$ has $n$ distinct eigenvalues, then $\mathbf{A}$ is diagonalizable.
 ````
 
-(demo-evd-eigen)=
 ::::{prf:example}  Eigenvalues and eigenvectors 
+:label: demo-evd-eigen
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -243,8 +248,8 @@ Finally, given the convergence of Taylor polynomials to common functions, we are
 
 Just as linear systems have condition numbers that quantify the effect of finite precision, eigenvalue problems may be poorly conditioned too. While many possible results can be derived, we will use just one, the **Bauer–Fike theorem**.
 
-(theorem-bauer-fike)=
 ````{prf:theorem} Bauer–Fike
+:label: theorem-bauer-fike
 Let $\mathbf{A}\in\mathbb{C}^{n\times n}$ be diagonalizable, $\mathbf{A}=\mathbf{V}\mathbf{D}\mathbf{V}^{-1}$, with eigenvalues $\lambda_1,\ldots,\lambda_n$. If $\mu$ is an eigenvalue of $\mathbf{A}+\mathbf{E}$ for a complex matrix $\mathbf{E}$, then
 
 ```{math}
@@ -266,8 +271,8 @@ If $\mathbf{A}$ has an EVD {eq}`evdecomp` with a unitary eigenvector matrix $\ma
 
 As we will see in {numref}`section-matrixanaly-symm-eig`, hermitian and real symmetric matrices are normal. Since the condition number of a unitary matrix is equal to 1, {eq}`bauerfike` guarantees that a perturbation of a normal matrix changes the eigenvalues by the same amount or less.
 
-(demo-evd-bauerfike)=
 ::::{prf:example} Eigenvalue conditioning
+:label: demo-evd-bauerfike
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -297,8 +302,8 @@ If the eigenvalues have different complex magnitudes, then as $k\to\infty$ the e
 
 [^eigpoly]: In fact, the situation is reversed: eigenvalue methods are among the best ways to compute the roots of a given polynomial.
 
-(demo-evd-francisqr)=
 ::::{prf:example} Francis QR iteration
+:label: demo-evd-francisqr
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

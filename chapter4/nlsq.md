@@ -36,13 +36,15 @@ In the square case, we solved $\mathbf{q}=\boldsymbol{0}$ to define the new valu
 ```{index} ! Gauss–Newton method
 ```
 
-(algorithm-nlsq-gaussnewton)=
-::::{prf:algorithm} Gauss–Newton method
+::::{prf:definition} Gauss–Newton method
+:label: definition-gaussnewton
 Given $\mathbf{f}$ and a starting value $\mathbf{x}_1$, for each $k=1,2,3,\ldots$
 
 1. Compute $\mathbf{y}_k = \mathbf{f}(\mathbf{x}_k)$ and $\mathbf{A}_k$, the exact or approximate Jacobian matrix at $\mathbf{x}_k$.
 2. Solve the linear least squares problem $\argmin \| \mathbf{A}_k\mathbf{s}_k  + \mathbf{y}_k\|_2$ for $\mathbf{s}_k$.
 3. Let $\mathbf{x}_{k+1} = \mathbf{x}_k + \mathbf{s}_k$.
+
+Under appropriate conditions, the sequence  $\mathbf{x}_{1}, \mathbf{x}_{2},\dots$ converges to a local minimizer of $\|\mathbf{f}(\mathbf{x})\|_2$.
 ::::
 
 In brief, Gauss–Newton solves a series of linear least-squares problems in order to solve a nonlinear least-squares problem.
@@ -55,8 +57,8 @@ In the multidimensional Newton method for a nonlinear system, we expect quadrati
 
 As always in least-squares problems, the residual $\mathbf{f}(\mathbf{x})$ will not necessarily be zero when $\|\mathbf{f}\|$ is minimized. Suppose that the minimum value of $\|\mathbf{f}\|$ is $R>0$. In general, we might observe quadratic-like convergence until the iterate $\|\mathbf{x}_k\|$ is within distance $R$ of a true minimizer, and linear convergence thereafter. When $R$ is not sufficiently small, the convergence can be quite slow.
 
-(demo-nlsq-converge)=
 ::::{prf:example} Convergence of nonlinear least squares
+:label: demo-nlsq-converge
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -107,8 +109,8 @@ The form of $g$ is up to the modeler. There may be compelling theoretical choice
 
 then the misfit function is also linear in $\mathbf{c}$ and the fitting problem reduces to linear least squares.
 
-(demo-nlsq-MM)=
 ::::{prf:example} Nonlinear data fitting
+:label: demo-nlsq-MM
 Inhibited enzyme reactions often follow what are known as _Michaelis–Menten_ kinetics, in which a reaction rate $w$ follows a law of the form
 
 $$w(s) = \frac{V s}{K_m + s},$$

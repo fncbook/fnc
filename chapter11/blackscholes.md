@@ -32,7 +32,13 @@ where $r$ is the *risk-free interest rate* (i.e., what you could earn with a ver
 
 ```{index} evolutionary PDE
 ```
-The value $v(S,t)$ of the option depends on the time $t$ and on the stock price $S$, which may be varied independently. At the strike time, the payoff condition $v(S,T)=H(S)$ is imposed, and the goal is to solve the equation backward in time to find $v(S,0)$. Equation {eq}`bspde` is a *time-dependent partial differential equation*, or **evolutionary PDE**. 
+
+The value $v(S,t)$ of the option depends on the time $t$ and on the stock price $S$, which may be varied independently. At the strike time, the payoff condition $v(S,T)=H(S)$ is imposed, and the goal is to solve the equation backward in time to find $v(S,0)$. Equation {eq}`bspde` is our first encounter with a partial differential equation (PDE). 
+
+::::{prf:definition} Evolutionary PDE
+:label: definition-evolutionary-pde
+An {term}`evolutionary PDE`, *or time-dependent partial differential equation*, is a partial differential equation in which the dependent variable depends on time and one or more other variables.
+::::
 
 ## Initial and boundary conditions
 
@@ -40,10 +46,10 @@ Equation {eq}`bspde` has independent variables $t$ and $S$. Because of the first
 
 In order to follow the usual convention of having time flow forward instead of backward, we define a new variable $\eta=T-t$, in which case {eq}`bspde` becomes
 
-:::{math}
+```{math}
 :label: bspdefor
-	- v_\eta + \frac{1}{2} \sigma^2 S^2 v_{SS} + rS v_S - r v  = 0,
-:::
+-v_\eta + \frac{1}{2} \sigma^2 S^2 v_{SS} + rS v_S - r v  = 0,
+```
 
 now defined for $0\le \eta \le T$. Here we have adopted the common notation of using subscripts for partial derivatives. In the new time variable we have the **initial condition**
 
@@ -88,7 +94,8 @@ The Black–Scholes equation can be transformed by a change of variables into a 
 ```
 
 ::::{prf:definition} Heat equation
-The **heat equation** or **diffusion equation** in one dimension is
+:label: definition-heatequation
+The {term}`heat equation` or *diffusion equation* in one dimension is
 
 :::{math}
 :label: heat
@@ -106,8 +113,8 @@ The heat equation is the archetype differential equation for the class known as 
 Solutions of the heat equation smooth out quickly and become as flat as the boundary conditions allow.
 ::::
 
-(example-heateqnsolnexam)=
 ::::{prf:example}
+:label: example-heateqnsolnexam
 Consider the following diffusion problem on 
 
 \begin{align*}
@@ -191,8 +198,8 @@ Now we take the boundaries on $x$ into account. The value $V_{0,j+1}$ is zero, s
 
 We can therefore solve {eq}`bsneumann` for the fictitious $V_{m+1,j}$ and use it where called for in the right-hand side of {eq}`bspdeFD2`. 
 
-(demo-blackscholes-solve)=
 ::::{prf:example} FD solution of Black–Scholes
+:label: demo-blackscholes-solve
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -217,8 +224,8 @@ We can therefore solve {eq}`bsneumann` for the fictitious $V_{m+1,j}$ and use it
 
 Everything in @demo-blackscholes-solve seems to go smoothly. However, trouble lurks just around the corner.
 
-(demo-blackscholes-unstable)=
 ::::{prf:example} Trouble with the FD solution
+:label: demo-blackscholes-unstable
 
 `````{tab-set}
 ````{tab-item} Julia

@@ -10,8 +10,8 @@ numbering:
 
 Given that matrix-vector multiplication is fast for sparse matrices, let's see what we might accomplish with only that at our disposal.
 
-(demo-power-one)=
 ::::{prf:example} Power iteration
+:label: demo-power-one
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -39,14 +39,22 @@ There was a little cheating in @demo-power-one to make the story come out neatly
 
 ```{index} ! eigenvalue; dominant
 ```
-Analysis of matrix powers is most straightforward in the diagonalizable case. Let $\mathbf{A}$ be any diagonalizable $n\times n$ matrix having eigenvalues $\lambda_1,\ldots,\lambda_n$ and corresponding linearly independent eigenvectors $\mathbf{v}_1,\ldots,\mathbf{v}_n$. Furthermore, suppose the eigenvalues are such that
+
+Analysis of matrix powers is most straightforward in the diagonalizable case. Let $\mathbf{A}$ be any diagonalizable $n\times n$ matrix having eigenvalues $\lambda_1,\ldots,\lambda_n$ and corresponding linearly independent eigenvectors $\mathbf{v}_1,\ldots,\mathbf{v}_n$. We also make an important assumption about the eigenvalue magnitudes.
+
+::::{prf:definition} Dominant eigenvalue
+:label: definition-dominant-eigenvalue
+If the eigenvalues of a matrix are such that
 
 :::{math}
 :label: evorder
-|\lambda_1| > |\lambda_2| \ge |\lambda_3| \ge \cdots \ge |\lambda_n|.
+|\lambda_1| > |\lambda_2| \ge |\lambda_3| \ge \cdots \ge |\lambda_n|,
 :::
 
-Given {eq}`evorder` we say that $\lambda_1$ is the {term}`dominant eigenvalue`. This was the case with $\lambda_1=1$ for $\mathbf{A}$ in @demo-power-one.
+then we say that $\lambda_1$ is the {term}`dominant eigenvalue` of the matrix.
+::::
+
+In @demo-power-one, for instance, $\lambda_1=1$ is the dominant eigenvalue.
 
 Now let $\mathbf{x}$ be an $n$-vector, let $k$ be a positive integer, and refer to {eq}`evdpower`: 
 
@@ -93,8 +101,8 @@ To make a practical algorithm, we alternate matrix-vector multiplication with a 
 ```{index} ! power iteration
 ```
 
-(algorithm-power-power)=
 ::::{prf:algorithm} Power iteration
+:label: algorithm-power-power
 Given matrix $\mathbf{A}$:
 
 1. Choose $\mathbf{x}_1$.
@@ -136,8 +144,8 @@ where $r_j=\lambda_j/\lambda_1$ and the $b_j$ are constants. By assumption {eq}`
 
 {numref}`Function {number} <function-poweriter>` is our implementation of power iteration.
 
-(function-poweriter)=
 ``````{prf:algorithm} poweriter
+:label: function-poweriter
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -205,8 +213,8 @@ This is {term}`linear convergence` with factor $r_2$:
 The error in the power iteration eigenvalue estimates $\beta_k$ is reduced asymptotically by a constant factor $\lambda_2/\lambda_1$ at each iteration, where $\lambda_1$ and $\lambda_2$ are the dominant eigenvalues of $\mathbf{A}$.
 ::::
 
-(demo-power-iter)=
 ::::{prf:example} Convergence of power iteration
+:label: demo-power-iter
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia

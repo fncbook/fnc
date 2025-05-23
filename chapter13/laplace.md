@@ -6,22 +6,23 @@ numbering:
 (section-twodim-laplace)=
 # Laplace and Poisson equations
 
+Consider the heat equation $u_t=u_{xx}+u_{yy}$. After a long time, the distribution of temperature will stop changing. This steady-state solution must satisfy the PDE $u_{xx}+u_{yy}=0$, which is our third and final canonical PDE.
+
 ```{index} ! Laplace equation, ! Poisson equation
 ```
 
-Consider the heat equation $u_t=u_{xx}+u_{yy}$. After a long time, the distribution of temperature will stop changing. This steady-state solution must satisfy the PDE $u_{xx}+u_{yy}=0$, which is our third and final canonical PDE.
-
 ::::{prf:definition} Laplace and Poisson equations
-The **Poisson equation** in two dimensions is
+:label: definition-laplace
+The {term}`Poisson equation` in two dimensions is
 
 :::{math}
 :label: poispde
-u_{xx} + u_{yy} = f(x,y).
+u_{xx} + u_{yy} = f(x, y).
 :::
 
 A common notation for it is $\Delta u = f$, where $\Delta$ is known as the **Laplacian operator**.
 
-The function $f$ is sometimes called a *forcing function*. If $f$ is identically zero, then {eq}`poispde` is the **Laplace equation**.
+The function $f$ is sometimes called a *forcing function*. If $f$ is identically zero, then {eq}`poispde` is the {term}`Laplace equation`.
 ::::
 
 ```{index} elliptic PDE
@@ -52,8 +53,8 @@ where $\mathbf{F}=\mtx(f)$. Equation {eq}`poissylvester`, with an unknown matrix
 ```{index} ! Kronecker product
 ```
 
-(definition-laplace-kron)=
 ::::{prf:definition} Kronecker product
+:label: definition-kron
 Let $\mathbf{A}$ be $m\times n$ and $\mathbf{B}$ be $p\times q$. The **Kronecker product** $\mathbf{A}\otimes \mathbf{B}$ is the $mp\times nq$ matrix given by
 
 :::{math}
@@ -68,8 +69,8 @@ Let $\mathbf{A}$ be $m\times n$ and $\mathbf{B}$ be $p\times q$. The **Kronecker
 :::
 ::::
 
-(demo-laplace-kron)=
 ::::{prf:example} Kronecker product
+:label: demo-laplace-kron
 
 `````{tab-set}
 ````{tab-item} Julia
@@ -95,8 +96,8 @@ Let $\mathbf{A}$ be $m\times n$ and $\mathbf{B}$ be $p\times q$. The **Kronecker
 
 The Kronecker product obeys several natural-looking identities:
 
-(theorem-laplace-kron)=
 ::::{prf:theorem} Kronecker product identities
+:label: theorem-laplace-kron
 Given matrices for which the non-Kronecker operations make sense, the following hold.
 
 1. $\mathbf{A}\otimes (\mathbf{B} + \mathbf{C})   = \mathbf{A}\otimes \mathbf{B} + \mathbf{A}\otimes \mathbf{C}$
@@ -188,8 +189,8 @@ where $\mathbf{g} = \operatorname{vec}(\operatorname{mtx}(g))$ is the vector of 
 
 While @pois2bcrep and @pois2bcreprhs are algebraically correct, a literal implementation of them is not the most efficient route. Instead, the relevant changes are made more easily through logical indexing into rows and columns. A small example is more illuminating than further description.
 
-(demo-laplace-fd)=
 ::::{prf:example} Poisson equation as a linear system
+:label: demo-laplace-fd
 
 `````{tab-set}
 ````{tab-item} Julia
@@ -216,8 +217,8 @@ While @pois2bcrep and @pois2bcreprhs are algebraically correct, a literal implem
 
 {numref}`Function {number} <function-poissonfd>` is our code to solve the Poisson equation.
 
-(function-poissonfd)=
 ``````{prf:algorithm} poissonfd
+:label: function-poissonfd
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -241,8 +242,8 @@ While @pois2bcrep and @pois2bcreprhs are algebraically correct, a literal implem
 
 We use @demo-laplace-fd: the boundary conditions are rescaled to read $\sigma u(x,y)=\sigma g(x,y)$, where $\sigma$ is the largest element of a row of $\mathbf{L}$. This tweak improves the condition number of the final matrix.
 
-(demo-laplace-poisson)=
 ::::{prf:example} Poisson equation in 2D
+:label: demo-laplace-poisson
 
 We can engineer an example by choosing the solution first. Let $u(x,y)=\sin(3xy-4y)$. Then one can derive $f=\Delta u = -\sin(3xy-4y)\bigl(9y^2+(3x-4)^2\bigr)$ for the forcing function and use $g=u$ on the boundary.
 

@@ -7,8 +7,8 @@ numbering:
 
 In calculus, you learn that the elegant way to evaluate a definite integral is to apply the Fundamental Theorem of Calculus and find an antiderivative. The connection is so profound and pervasive that it's easy to overlook that a definite integral is a numerical quantity existing independently of antidifferentiation.  However, most conceivable integrands have no antiderivative in terms of familiar functions.
 
-(demo-int-antideriv)=
 ::::{prf:example} Numerical integration
+:label: demo-int-antideriv
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -118,8 +118,8 @@ The trapezoid formula is the Swiss Army knife of integration formulas. A short i
 Trapezoid formula for integration. The piecewise linear interpolant defines trapezoids that approximate the region under the curve.
 ```
 
-(function-trapezoid)=
 ``````{prf:algorithm} trapezoid
+:label: function-trapezoid
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -185,8 +185,8 @@ where the $B_{2k}$ are constants known as *Bernoulli numbers*. Unless we happen 
 The trapezoid integration formula is second-order accurate.
 ::::
 
-(demo-int-trap)=
 ::::{prf:example} Trapezoid integration
+:label: demo-int-trap
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -208,6 +208,7 @@ The trapezoid integration formula is second-order accurate.
 `````
 ::::
 
+(section-integration-extrapolation)=
 ## Extrapolation
 
 If evaluations of $f$ are computationally expensive, we want to get as much accuracy as possible from them by using a higher-order formula. There are many routes for doing so; for example, we could integrate a not-a-knot cubic spline interpolant. However, splines are difficult to compute by hand, and as a result different methods were developed before computers came on the scene.
@@ -215,7 +216,7 @@ If evaluations of $f$ are computationally expensive, we want to get as much accu
 ```{index} ! extrapolation
 ```
 
-Knowing the structure of the error allows the use of **extrapolation** to improve accuracy. Suppose a quantity $A_0$ is approximated by an algorithm $A(h)$ with an
+Knowing the structure of the error allows the use of {term}`extrapolation` to improve accuracy. Suppose a quantity $A_0$ is approximated by an algorithm $A(h)$ with an
 error expansion
 
 ```{math}
@@ -303,8 +304,8 @@ Specifically, we have
 
 where the nodes referenced in the last line are relative to $n=2m$. Hence in passing from $n=m$ to $n=2m$, new integrand evaluations are needed only at the odd-numbered nodes of the finer grid. 
 
-(demo-int-extrap)=
 ::::{prf:example} Integration by extrapolation
+:label: demo-int-extrap
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

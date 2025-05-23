@@ -11,7 +11,8 @@ numbering:
 Sets of vectors satisfying a certain property are useful both theoretically and computationally.
 
 ::::{prf:definition} Orthogonal vectors
-Two vectors $\mathbf{u}$ and $\mathbf{v}$ in $\mathbb{R}^n$ are **orthogonal** if $\mathbf{u}^T\mathbf{v}=0$. We say that a collection of vectors $\mathbf{q}_1,\ldots,\mathbf{q}_k$ is orthogonal if
+:label: definition-orthogonalvectors
+Two vectors $\mathbf{u}$ and $\mathbf{v}$ in $\mathbb{R}^n$ are {term}`orthogonal vectors` if $\mathbf{u}^T\mathbf{v}=0$. We say that a collection of vectors $\mathbf{q}_1,\ldots,\mathbf{q}_k$ is orthogonal if
 
 ```{math}
 :label: orthogonality
@@ -77,13 +78,13 @@ If the columns of $\mathbf{Q}$ are orthonormal, then $\mathbf{Q}^T\mathbf{Q}$ is
 ```{index} ! ONC matrix
 ```
 
-(definition-qr-ONC)=
 ```{prf:definition} ONC matrix
-An **ONC matrix** is one whose columns are an orthonormal set of vectors. 
+:label: definition-onc
+An {term}`ONC matrix` is one whose columns are an orthonormal set of vectors. 
 ```
 
-(theorem-qr-ONC)=
 ````{prf:theorem} ONC matrix
+:label: theorem-qr-ONC
 
 Suppose $\mathbf{Q}$ is a real $n\times k$ ONC matrix (matrix with orthonormal columns). Then:
 
@@ -109,8 +110,9 @@ The last part of the theorem is left to the exercises.
 
 Of particular interest is a *square* ONC matrix.[^ortho] 
 
-```{prf:definition}
-An **orthogonal matrix** is a square matrix with orthonormal columns.
+```{prf:definition} Orthogonal matrix
+:label: definition-orthogonalmatrix
+An {term}orthogonal matrix` is a square matrix with orthonormal columns.
 ```
 
 Orthogonal matrices have properties beyond @theorem-qr-ONC. 
@@ -118,8 +120,8 @@ Orthogonal matrices have properties beyond @theorem-qr-ONC.
 [^ortho]: Confusingly, a square matrix whose columns are orthogonal is not necessarily an orthogonal matrix; the columns must be orthonormal, which is a stricter condition.
 
 
-(theorem-qr-orthogmatrix)=
 ````{prf:theorem} Orthogonal matrix
+:label: theorem-qr-orthogmatrix
 
 Suppose $\mathbf{Q}$ is an $n\times n$ real orthogonal matrix. Then:
 1. $\mathbf{Q}^T = \mathbf{Q}^{-1}$.
@@ -136,13 +138,13 @@ Since $\mathbf{Q}$ is an ONC matrix, $\mathbf{Q}^T\mathbf{Q}=\mathbf{I}$. All th
 
 ## Orthogonal factorization
 
+Now we come to another important way to factor a matrix: the **QR factorization**. As we will show below, the QR factorization plays a role in linear least squares analogous to the role of LU factorization in linear systems.
+
 ```{index} ! matrix factorization; QR
 ```
 
-Now we come to another important way to factor a matrix: the **QR factorization**. As we will show below, the QR factorization plays a role in linear least squares analogous to the role of LU factorization in linear systems.
-
-(theorem-qr-QR)=
 ````{prf:theorem} QR factorization
+:label: theorem-qr-QR
 Every real $m\times n$ matrix $\mathbf{A}$ ($m\ge n$) can be written as $\mathbf{A}=\mathbf{Q}\mathbf{R}$, where $\mathbf{Q}$ is an $m\times m$ orthogonal matrix and $\mathbf{R}$ is an $m\times n$ upper triangular matrix.
 ````
 
@@ -183,11 +185,12 @@ r_{11} & r_{12} & \cdots & r_{1n} \\
 ```
 
 ::::{prf:definition} Thin QR factorization
+:label: definition-thinqr
 The thin QR factorization is $\mathbf{A} = \hat{\mathbf{Q}} \hat{\mathbf{R}}$, where $\hat{\mathbf{Q}}$ is $m\times n$ and ONC, and $\hat{\mathbf{R}}$ is $n\times n$ and upper triangular.
 ::::
 
-(demo-qr-qrfact)=
 ::::{prf:example} QR factorization
+:label: demo-qr-qrfact
 
 `````{tab-set}
 ````{tab-item} Julia
@@ -236,8 +239,8 @@ In order to have the normal equations be well posed, we require that $\mathbf{A}
 \hat{\mathbf{R}} \mathbf{x}=\hat{\mathbf{Q}}^T \mathbf{b}.
 ```
 
-(algorithm-qr-solve)=
 ::::{prf:algorithm} Solution of linear least squares by thin QR
+:label: algorithm-qr-solve
 
 1. Compute the thin QR factorization $\hat{\mathbf{Q}}\hat{\mathbf{R}}=\mathbf{A}$.
 1. Compute $\mathbf{z} = \hat{\mathbf{Q}}^T\mathbf{b}$.
@@ -246,8 +249,8 @@ In order to have the normal equations be well posed, we require that $\mathbf{A}
 
 This algorithm is implemented in {numref}`Function {number} <function-lsqrfact>`. It is essentially the algorithm used internally by Julia when `A\b` is called. The execution time is dominated by the factorization, the most common method for which is described in {numref}`section-leastsq-house`.
 
-(function-lsqrfact)=
 ``````{prf:algorithm} lsqrfact
+:label: function-lsqrfact
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -271,8 +274,8 @@ This algorithm is implemented in {numref}`Function {number} <function-lsqrfact>`
 
 The solution of least-squares problems via QR factorization is more stable than when the normal equations are formulated and solved directly.
 
-(demo-qr-stable)=
 ::::{prf:example} Stability of least-squares via QR
+:label: demo-qr-stable
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia

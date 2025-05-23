@@ -23,8 +23,8 @@ As a concrete example, the AB4 method is defined by the formula
 
 Observe that {numref}`Function {number} <function-rk4>` is used to find the starting values $\mathbf{u}_1,\mathbf{u}_2,\mathbf{u}_3$ that are needed before the iteration formula takes over. As far as RK4 is concerned, it needs to solve  (the same step size as in the AB4 iteration). These results are then used to find $\mathbf{f}_0,\ldots,\mathbf{f}_3$ and get the main iteration started.
 
-(function-ab4)=
 ``````{prf:algorithm} ab4
+:label: function-ab4
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -46,8 +46,8 @@ Observe that {numref}`Function {number} <function-rk4>` is used to find the star
 `````
 ``````
 
-(demo-implicit-ab4)=
 ::::{prf:example} Convergence of Adams–Bashforth
+:label: demo-implicit-ab4
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -85,8 +85,8 @@ for $\mathbf{z}$. This equation can be written as $\mathbf{g}(\mathbf{z})=\bolds
 
 An implementation of AM2 using {numref}`Function {number} <function-levenberg>` from {numref}`section-nonlineqn-quasinewton` is shown in {numref}`Function {number} <function-am2>`. 
 
-(function-am2)=
 ``````{prf:algorithm} am2
+:label: function-am2
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
@@ -115,8 +115,8 @@ At each time step in {numref}`Function {number} <function-am2>`, or any implicit
 ```{index} stiff differential equation
 ```
 
-(demo-implicit-stiff)=
 ::::{prf:example} Stiffness
+:label: demo-implicit-stiff
 `````{tab-set} 
 ````{tab-item} Julia
 :sync: julia
