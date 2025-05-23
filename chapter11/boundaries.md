@@ -3,6 +3,7 @@ numbering:
   enumerator: 11.5.%s
 ---
 (section-diffusion-boundaries)=
+
 # Boundaries
 
 ```{index} method of lines
@@ -33,6 +34,7 @@ These include Dirichlet, Neumann, and Robin conditions, which are the linear cas
 
 ```{index} boundary conditions; numerical implementation of
 ```
+
 As usual, we replace $u(x,t)$ by the semidiscretized $\mathbf{u}(t)$, where $u_i(t)\approx \hat{u}(x_i,t)$ and $i=0,\ldots,m$. We require the endpoints of the interval to be included in the discretization, that is, $x_0=a$ and $x_m=b$. Then we have a division of the semidiscrete unknown $\mathbf{u}(t)$ into interior and boundary nodes:
 
 ```{math}
@@ -50,7 +52,7 @@ where $\mathbf{v}$ are the solution values over the interior of the interval. Th
   \frac{d \mathbf{v}}{d t} = \mathbf{f}(t,\mathbf{v}).
 ```
 
-The boundary conditions are used only in the definition of $\mathbf{f}$. As in {numref}`section-bvp-nonlinear`, define 
+The boundary conditions are used only in the definition of $\mathbf{f}$. As in {numref}`section-bvp-nonlinear`, define
 
 $$
 \mathbf{u}' = \mathbf{D}_x \mathbf{u}.
@@ -69,7 +71,7 @@ Then Equation {eq}`parabolicBC` takes the form
 \end{split}
 ```
 
-Given a value of $\mathbf{v}$ for the interior nodes, Equation {eq}`mol-bcsystem` may be considered a system of two equations for the unknown boundary values $u_0$ and $u_m$. This system will be a linear one for Dirichlet, Neumann, and Robin conditions. 
+Given a value of $\mathbf{v}$ for the interior nodes, Equation {eq}`mol-bcsystem` may be considered a system of two equations for the unknown boundary values $u_0$ and $u_m$. This system will be a linear one for Dirichlet, Neumann, and Robin conditions.
 
 ::::{prf:example}
 :label: example-boundaries-bs1
@@ -81,9 +83,9 @@ $$
 
 subject to $u(0)=0$ and $u_x(S_\text{max})=1$. These imply $u_0=0$ and
 
-$$ 
+$$
 \frac{ \tfrac{1}{2} u_{m-2} -2u_{m-1} + \tfrac{3}{2} u_{m}}{h} = 1.
-$$ 
+$$
 
 Hence
 
@@ -108,9 +110,9 @@ $$
 :label: example-boundaries-bs2
 Returning to {numref}`Example {number} <example-boundaries-bs1>`, suppose we use a global Chebyshev differentiation matrix for $\mathbf{D}_x$ in {eq}`mol-bcsystem`. Then $u_0=0$ and
 
-$$ 
+$$
 D_{m0} u_0 + D_{m1}u_1 + \cdots + D_{mm}u_m = 1.
-$$ 
+$$
 
 Hence
 
@@ -133,7 +135,7 @@ $$
 
 ## Implementation
 
-The steps to evaluate $\mathbf{f}$ in {eq}`mol-interior` now go as follows. 
+The steps to evaluate $\mathbf{f}$ in {eq}`mol-interior` now go as follows.
 
 ::::{prf:algorithm} Time derivative for parabolic PDE
 :label: algorithm-boundaries-timeder
@@ -145,7 +147,7 @@ Given a value of $t$ and $\mathbf{v}$,
 4. Ignore the boundary nodes to get the value of $\mathbf{f}(t,\mathbf{v})$ in {eq}`mol-interior`.
 ::::
 
-Our full implementation of the method of lines for {eq}`parabolicPDE`--{eq}`parabolicBC` is given in {numref}`Function {number} <function-parabolic>`. It uses {numref}`Function {number} <function-diffcheb>` (`diffcheb`) to set up a Chebyshev discretization. The nested function `extend` performs steps 1--2 of {numref}`Algorithm {number} <algorithm-boundaries-timeder>` by calling {numref}`Function {number} <function-levenberg>` (`levenberg`) to solve the potentially nonlinear system {eq}`mol-bcsystem`. Then it sets up and solves an IVP, adding steps 3--4 of {numref}`Algorithm {number} <algorithm-boundaries-timeder>` within the `ode!` function. Finally, it returns the node vector `x` and a function of `t` that applies `extend` to $\mathbf{v}(t)$ to compute $\mathbf{u}(t)$. 
+Our full implementation of the method of lines for {eq}`parabolicPDE`--{eq}`parabolicBC` is given in {numref}`Function {number} <function-parabolic>`. It uses {numref}`Function {number} <function-diffcheb>` (`diffcheb`) to set up a Chebyshev discretization. The nested function `extend` performs steps 1--2 of {numref}`Algorithm {number} <algorithm-boundaries-timeder>` by calling {numref}`Function {number} <function-levenberg>` (`levenberg`) to solve the potentially nonlinear system {eq}`mol-bcsystem`. Then it sets up and solves an IVP, adding steps 3--4 of {numref}`Algorithm {number} <algorithm-boundaries-timeder>` within the `ode!` function. Finally, it returns the node vector `x` and a function of `t` that applies `extend` to $\mathbf{v}(t)$ to compute $\mathbf{u}(t)$.
 
 ``````{prf:algorithm} parabolic
 :label: function-parabolic
@@ -171,11 +173,10 @@ Our full implementation of the method of lines for {eq}`parabolicPDE`--{eq}`para
 `````
 ``````
 
-
 ```{index} Dirichlet boundary conditions
 ```
 
-In many specific problems, `extend` does more work than is truly necessary. Dirichlet boundary conditions, for instance, define $u_0$ and $u_m$ directly, and there is no need to solve a nonlinear system. @problem-boundaries-dirichlet asks you to modify the code to take advantage of this case. The price of solving a more general set of problems in {numref}`Function {number} <function-parabolic>` is some speed in such special cases.[^multidisp] 
+In many specific problems, `extend` does more work than is truly necessary. Dirichlet boundary conditions, for instance, define $u_0$ and $u_m$ directly, and there is no need to solve a nonlinear system. @problem-boundaries-dirichlet asks you to modify the code to take advantage of this case. The price of solving a more general set of problems in {numref}`Function {number} <function-parabolic>` is some speed in such special cases.[^multidisp]
 
 [^multidisp]: An important advanced feature of Julia is *multiple dispatch*, which allows you to make multiple definitions of a function for different sequences and types of input arguments. Thus, addition to the original {numref}`Function {number} <function-parabolic>`, we could also define a modified version in which `g₁` and `g₂` are of numeric type for the Dirichlet case. The correct version would be chosen (dispatched) depending on how the boundary conditions were supplied by the caller, allowing us speed when possible and generality as a fallback.
 
@@ -215,7 +216,7 @@ $$
 u_t = u^2 + u_{xx}.
 $$
 
-One interpretation of this PDE is an exothermic chemical reaction whose rate increases with temperature. We solve over $x \in [0,1]$ with homogeneous conditions of different kinds. 
+One interpretation of this PDE is an exothermic chemical reaction whose rate increases with temperature. We solve over $x \in [0,1]$ with homogeneous conditions of different kinds.
 
 `````{tab-set}
 ````{tab-item} Julia
@@ -239,7 +240,7 @@ One interpretation of this PDE is an exothermic chemical reaction whose rate inc
 
 ::::
 
-Finally, we return to the example of the Black–Scholes equation from {numref}`section-diffusion-blackscholes`. 
+Finally, we return to the example of the Black–Scholes equation from {numref}`section-diffusion-blackscholes`.
 
 ::::{prf:example} Black–Scholes equation with mixed boundary conditions
 :label: demo-boundaries-bs

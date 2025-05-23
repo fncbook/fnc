@@ -5,7 +5,7 @@ numbering:
 (section-advection-wave)=
 # The wave equation
 
-A close cousin of the advection equation is the **wave equation**.
+A close cousin of the advection equation is the {term}`wave equation`.
 
 ```{index} ! wave equation
 ```
@@ -17,7 +17,7 @@ A close cousin of the advection equation is the **wave equation**.
 ```
 ````
 
-The wave equation describes the propagation of waves, such as for sound or light. This is our first PDE having a second derivative in time. Consequently, we should expect to have two initial conditions: 
+The wave equation describes the propagation of waves, such as for sound or light. This is our first PDE having a second derivative in time. Consequently, we should expect to have two initial conditions:
 
 ```{math}
 :label: waveIC
@@ -36,8 +36,6 @@ The wave equation in one dimension supports advection in both directions simulta
 ```
 
 <!-- We will use $x \in [0,1]$ as the domain.  -->
-
-
 
 ## First-order system
 
@@ -64,7 +62,7 @@ This is a valid approach. However, the wave equation has another, less obvious o
 ```{index} Maxwell's equations
 ```
 
-This second form is appealing in part because it's equivalent to [Maxwell's equations](wiki:Maxwell%27s_equations) for electromagnetism. In this form, we typically replace the velocity initial condition in {eq}`waveIC` with a condition on $z$, 
+This second form is appealing in part because it's equivalent to [Maxwell's equations](wiki:Maxwell%27s_equations) for electromagnetism. In this form, we typically replace the velocity initial condition in {eq}`waveIC` with a condition on $z$,
 
 ```{math}
 :label: waveIC2
@@ -99,9 +97,9 @@ We now suppose that the domain is $[0,1]$ and impose the Dirichlet conditions
 ```{math}
 :label: waveBC
 u(0,t) = u(1,t) = 0, \qquad t \ge 0.
-``` 
+```
 
-The boundary conditions {eq}`waveBC` suggest that we should remove both of the end values of $\mathbf{u}$ from the discretization, but retain all of the $\mathbf{z}$ values. We use $\mathbf{w}(t)$ to denote the vector of all the unknowns in the semidiscretization. If the nodes are numbered $x_0,\ldots,x_m$, then we have
+The boundary conditions {eq}`waveBC` suggest that we should remove both of the end values of $\mathbf{u}$ from the discretization, but retain all the $\mathbf{z}$ values. We use $\mathbf{w}(t)$ to denote the vector of all the unknowns in the semidiscretization. If the nodes are numbered $x_0,\ldots,x_m$, then we have
 
 ```{math}
 :label: wavew
@@ -148,7 +146,7 @@ An interesting situation is when the wave speed $c$ in @wavepde changes disconti
 ::::{prf:example} Wave equation with variable speed
 :label: demo-wave-speed
 
-We now use a wave speed that is discontinuous at $x=0$; to the left, $c=1$, and to the right, $c=2$. 
+We now use a wave speed that is discontinuous at $x=0$; to the left, $c=1$, and to the right, $c=2$.
 
 `````{tab-set}
 ````{tab-item} Julia

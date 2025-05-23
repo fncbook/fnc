@@ -61,7 +61,7 @@ A tensor-product grid (dark gray) on a rectangle constructed from discretization
 
 The double indexing of the grid set {eq}`rectangledisc` implies an irresistible connection to matrices. Corresponding to any function $f(x,y)$ defined on the rectangle is an $(m+1)\times(n+1)$ matrix $\mathbf{F}$ defined by collecting the values of $f$ at the points in the grid. This transformation of a function to a matrix is so important that we give it a formal name
 
-```{prf:definition} Function-to-matrix map
+````{prf:definition} Function-to-matrix map
 :label: definition-mtx
 The function mtx maps a function $f(x,y)$ to an $(m+1)\times (n+1)$  matrix $\mathbf{F}$ by
 
@@ -71,7 +71,7 @@ The function mtx maps a function $f(x,y)$ to an $(m+1)\times (n+1)$  matrix $\ma
 ```
 
 where the evaluations are on the grid {eq}`rectangledisc`.
-```
+````
 
 ```{warning}
 Traditionally, the first dimension of a matrix varies in the _vertical_ direction, while the first space coordinate $x$ varies _horizontally_. This clash has long been a source of confusion when coding, and each language or package has its own conventions around it. In this book, the first dimension of a matrix always corresponds to the first coordinate of the function. Sometimes, this forces us to use a transpose for making plots.

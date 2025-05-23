@@ -4,6 +4,7 @@ numbering:
 ---
 
 (section-twodim-laplace)=
+
 # Laplace and Poisson equations
 
 Consider the heat equation $u_t=u_{xx}+u_{yy}$. After a long time, the distribution of temperature will stop changing. This steady-state solution must satisfy the PDE $u_{xx}+u_{yy}=0$, which is our third and final canonical PDE.
@@ -67,6 +68,7 @@ Let $\mathbf{A}$ be $m\times n$ and $\mathbf{B}$ be $p\times q$. The **Kronecker
     A_{m1} \mathbf{B} & A_{m2}\mathbf{B} & \cdots & A_{mn}\mathbf{B}
     \end{bmatrix}.
 ```
+
 ::::
 
 ::::{prf:example} Kronecker product
@@ -94,7 +96,6 @@ Let $\mathbf{A}$ be $m\times n$ and $\mathbf{B}$ be $p\times q$. The **Kronecker
 
 ::::
 
-
 The Kronecker product obeys several natural-looking identities:
 
 ::::{prf:theorem} Kronecker product identities
@@ -114,6 +115,7 @@ For the vec operation defined in {numref}`Definition {number} <definition-diffad
 :label: vecidentity
 \operatorname{vec}(\mathbf{A}\mathbf{B}\mathbf{C}^T) = ({\mathbf{C}}\otimes {\mathbf{A}})\operatorname{vec}(\mathbf{B}).
 ```
+
 ::::
 
 ::::{prf:proof}
@@ -121,7 +123,9 @@ For the vec operation defined in {numref}`Definition {number} <definition-diffad
 
 (Partial proof.) These all boil down to algebraic manipulations. For instance, for item 5, let $\mathbf{Z}=\mathbf{A}^{-1}$. Then
 
-\begin{align*}
+```{math}
+:numbered: false
+\begin{split}
 \bigl(\mathbf{A} & \otimes \mathbf{B}\bigr) \bigl(\mathbf{A}^{-1} \otimes \mathbf{B}^{-1}\bigr) \\ 
     &=     \begin{bmatrix}
     A_{11} \mathbf{B} & A_{12}\mathbf{B} & \cdots & A_{1n}\mathbf{B} \\
@@ -140,7 +144,9 @@ For the vec operation defined in {numref}`Definition {number} <definition-diffad
     (A_{n1} Z_{11} + \cdots +  A_{n n}Z_{n1})\mathbf{I}_n & \cdots & (A_{n1} Z_{1n} + \cdots +  A_{n n}Z_{n n})\mathbf{I}_n
     \end{bmatrix} \\[1ex] 
     & = (\mathbf{A}\mathbf{Z}) \otimes \mathbf{I}_n \\ & = \mathbf{I}_{2n}.
-\end{align*}
+\end{split}
+```
+
 ::::
 
 ## Poisson as a linear system
@@ -280,7 +286,7 @@ The matrix $\mathbf{A}$ has size $N=O(n^2)$. The upper and lower bandwidths of t
 
 As $n$ increases, the truncation error decreases while the operation count increases. In fact, the growth in operations is faster than the corresponding decrease in error, making it costly to get high accuracy. Say we have a fixed running time $T$ at our disposal. Then $n=O(T^{1/4})$, and the convergence of error is $O(1/\sqrt{T})$. For instance, reduction of the error by a factor of 10 requires 100 times the computational effort.
 
-If we chose a Chebyshev spectral discretization instead of finite differences, the calculus changes. Provided that the solution is smooth, we expect convergence at a rate $K^{-n}$ for some $K>1$. However, the system matrix is no longer sparse nor symmetric, and solution by LU factorization takes $O(N^3)=O(n^6)$ flops. Hence as a function of running time $T$, we expect a convergence rate on the order of $K^{-T^{1/6}}$. It's not simple to compare this directly to the finite-difference case. In the long run, the spectral method will be much more efficient, but if the accuracy requirement is undemanding, second-order finite differences may be faster. 
+If we chose a Chebyshev spectral discretization instead of finite differences, the calculus changes. Provided that the solution is smooth, we expect convergence at a rate $K^{-n}$ for some $K>1$. However, the system matrix is no longer sparse nor symmetric, and solution by LU factorization takes $O(N^3)=O(n^6)$ flops. Hence, as a function of running time $T$, we expect a convergence rate on the order of $K^{-T^{1/6}}$. It's not simple to compare this directly to the finite-difference case. In the long run, the spectral method will be much more efficient, but if the accuracy requirement is undemanding, second-order finite differences may be faster.
 
 ```{note}
 For the specific problem of Poisson's equation on a rectangle, there are specialized fast solution methods that are beyond the scope of our discussion.

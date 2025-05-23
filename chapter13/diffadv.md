@@ -163,7 +163,7 @@ If the boundary conditions are periodic, then the unknowns in the method of line
 
 ::::{prf:example} Heat equation in 2D
 :label: demo-diffadv-heat
-We will solve a 2D heat equation, $u_t = 0.1(u_{xx} + u_{yy})$, on the square $[-1,1]\times[-1,1]$, with periodic behavior in both directions. The initial condition is 
+We will solve a 2D heat equation, $u_t = 0.1(u_{xx} + u_{yy})$, on the square $[-1,1]\times[-1,1]$, with periodic behavior in both directions. The initial condition is
 
 ```{math}
 :label: twodim-heatinit
@@ -199,7 +199,7 @@ which is also periodic on the rectangle.
 ```{index} boundary conditions; numerical implementation of
 ```
 
-In {numref}`section-diffusion-boundaries` we coped with boundary conditions by removing the boundary values from the vector of unknowns being solved in the semidiscretized ODE. Each evaluation of the time derivative required us to extend the values to include the boundaries before applying differentiation matrices in space, then remove them from the time derivative vector. 
+In {numref}`section-diffusion-boundaries` we coped with boundary conditions by removing the boundary values from the vector of unknowns being solved in the semidiscretized ODE. Each evaluation of the time derivative required us to extend the values to include the boundaries before applying differentiation matrices in space, then remove them from the time derivative vector.
 
 We proceed similarly here, defining `chop` and `extend` functions that convert between the full grid and the inner grid of interior values. Mathematically speaking, the chopping operation is defined by
 

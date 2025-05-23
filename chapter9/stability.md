@@ -8,7 +8,7 @@ numbering:
 ```{index} stability; of polynomial interpolation
 ```
 
-With  barycentric interpolation available in the form of {numref}`Function {number} <function-polyinterp>`, we can explore polynomial interpolation using a numerically stable algorithm. Any remaining sensitivity to error is due to the conditioning of the interpolation process itself.
+With barycentric interpolation available in the form of {numref}`Function {number} <function-polyinterp>`, we can explore polynomial interpolation using a numerically stable algorithm. Any remaining sensitivity to error is due to the conditioning of the interpolation process itself.
 
 ::::{prf:example} Ill-conditioning in polynomial interpolation
 :label: demo-stability-equispaced

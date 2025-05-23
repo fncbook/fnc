@@ -3,9 +3,10 @@ numbering:
   enumerator: 11.2.%s
 ---
 (section-diffusion-methodlines)=
+
 # The method of lines
 
-Our strategy in {numref}`section-diffusion-blackscholes` was to discretize both the time and space derivatives using finite differences, then rearrange so that we could march the solution forward through time. It was partially effective, but as @demo-blackscholes-unstable shows, not a sure thing, for reasons we look into starting in the next section. 
+Our strategy in {numref}`section-diffusion-blackscholes` was to discretize both the time and space derivatives using finite differences, then rearrange so that we could march the solution forward through time. It was partially effective, but as @demo-blackscholes-unstable shows, not a sure thing, for reasons we look into starting in the next section.
 
 ```{index} ! boundary conditions; periodic
 ```
@@ -45,13 +46,13 @@ for the exact solution $\hat{u}$ at any value of $i$.
 ```{index} finite differences; for parabolic PDE, differentiation matrix
 ```
 
-Next we define a vector $\mathbf{u}$ by 
+Next we define a vector $\mathbf{u}$ by
 
 $$
 \mathbf{u}(t) = \begin{bmatrix} u_0(t) \\ u_1(t) \\ \vdots \\ u_n(t) \end{bmatrix}.
 $$
 
-This step is called **semidiscretization**, since space is discretized but time is not. As in [Chapter 10](../bvp/overview.md), we will replace $u_{xx}$ with multiplication of $\mathbf{u}$ by a differentiation matrix $\mathbf{D}_{xx}$. The canonical choice is the three-point finite-difference formula {eq}`centerFD22`, which in light of the periodicity {eq}`periodicmod` leads to 
+This step is called **semidiscretization**, since space is discretized but time is not. As in [Chapter 10](../bvp/overview.md), we will replace $u_{xx}$ with multiplication of $\mathbf{u}$ by a differentiation matrix $\mathbf{D}_{xx}$. The canonical choice is the three-point finite-difference formula {eq}`centerFD22`, which in light of the periodicity {eq}`periodicmod` leads to
 
 ```{math}
 :label: heatFD22
@@ -107,13 +108,15 @@ Semidiscretization is often called the **method of lines**. Despite the name, it
 
 ::::{prf:example}
 :label: example-methodlines-heatFE
-Suppose we solve {eq}`heatMOL` using the Euler IVP integrator {eq}`euler1` from {numref}`section-ivp-euler` (and also AB1 from {numref}`section-ivp-multistep`). We select a time step $\tau$ and discrete times $t_j=j\tau$, $j=0,1,\ldots,n$. We can discretize the vector $\mathbf{u}$ in time as well to get a sequence $\mathbf{u}_j \approx \mathbf{u}(t_j)$ for varying $j$. (Remember the distinction in notation between $\mathbf{u}_j$, which is a vector, and $u_j$, which is a single element of a vector.) 
+Suppose we solve {eq}`heatMOL` using the Euler IVP integrator {eq}`euler1` from {numref}`section-ivp-euler` (and also AB1 from {numref}`section-ivp-multistep`). We select a time step $\tau$ and discrete times $t_j=j\tau$, $j=0,1,\ldots,n$. We can discretize the vector $\mathbf{u}$ in time as well to get a sequence $\mathbf{u}_j \approx \mathbf{u}(t_j)$ for varying $j$. (Remember the distinction in notation between $\mathbf{u}_j$, which is a vector, and $u_j$, which is a single element of a vector.)
 
-Thus, a fully discrete method for the heat equation is 
+Thus, a fully discrete method for the heat equation is
+
 ```{math}
 :label: Eulerxx
 \mathbf{u}_{j+1} = \mathbf{u}_j + \tau ( \mathbf{D}_{xx} \mathbf{u}_j) = (\mathbf{I} + \tau \mathbf{D}_{xx} ) \mathbf{u}_j.
 ```
+
 ::::
 
 ::::{prf:example} Forward Euler for the heat equation
@@ -155,7 +158,7 @@ An alternative time discretization of {eq}`heatMOL` is to use the backward Euler
 \end{split}
 ```
 
-Because backward Euler is an implicit method, a linear system must be solved for $\mathbf{u}_{j+1}$ at each time step. 
+Because backward Euler is an implicit method, a linear system must be solved for $\mathbf{u}_{j+1}$ at each time step.
 ::::
 
 ::::{prf:example} Backward Euler for the heat equation
@@ -182,10 +185,6 @@ Because backward Euler is an implicit method, a linear system must be solved for
 `````
 
 ::::
-
-
-
-
 
 @demo-methodlines-heatBE suggests that implicit time stepping methods have an important role in diffusion. We will analyze the reason in the next few sections.
 

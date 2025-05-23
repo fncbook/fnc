@@ -15,11 +15,11 @@ Consider a one-dimensional road extending in the $x$ direction. We represent the
 Q_0(\rho) = \frac{4 q_m \rho_m \rho (\rho-\rho_c) (\rho_m-\rho_c)}{[\rho (\rho_c-2 \rho_m)+\rho_c \rho_m]^2}.
 ```
 
-Observations ({cite}`whithamLinearNonlinear1974`, Chapter 3) suggest that good values for a three-lane highway are $\rho_c = 1080$ vehicles per km, $\rho_m=380$ vehicles per km, and $q_m=4500$ vehicles per hour. In addition, we want to account for the fact that drivers anticipate slowing down or speeding up when they perceive changes in density, and therefore use 
+Observations ({cite}`whithamLinearNonlinear1974`, Chapter 3) suggest that good values for a three-lane highway are $\rho_c = 1080$ vehicles per km, $\rho_m=380$ vehicles per km, and $q_m=4500$ vehicles per hour. In addition, we want to account for the fact that drivers anticipate slowing down or speeding up when they perceive changes in density, and therefore use
 
 $$
 q=Q_0(\rho)-\epsilon \rho_x
-$$ 
+$$
 
 for a small $\epsilon > 0$.
 
@@ -49,7 +49,7 @@ For the particular $Q_0(\rho)$ for traffic flow, we arrive at the evolutionary P
   \rho_t + Q_0'(\rho) \rho_x = \epsilon \rho_{xx}.
 ```
 
-Note that $Q_0'$ has the dimensions of (cars per time) over (cars per length), or length over time. We recognize the first and last terms as indicative of diffusion, but the middle term has a different effect. A similar term appears in the Black–Scholes equation. 
+Note that $Q_0'$ has the dimensions of (cars per time) over (cars per length), or length over time. We recognize the first and last terms as indicative of diffusion, but the middle term has a different effect. A similar term appears in the Black–Scholes equation.
 
 ## Advection equation
 
@@ -81,7 +81,7 @@ $$
 and the PDE is satisfied. Furthermore, $u(x,0) = \psi(x)$, so the initial value of $u$ determines $\psi$. We have proved the following.
 
 ::::{prf:theorem} Advection equation
-If $u_0(x)$ is a continuously differentiable function, then the solution of the advection equation {eq}`advectpde` satisfying $u(x,0)=u_0(x)$ is 
+If $u_0(x)$ is a continuously differentiable function, then the solution of the advection equation {eq}`advectpde` satisfying $u(x,0)=u_0(x)$ is
 
 ```{math}
 :label: eq-advectsol
@@ -160,7 +160,7 @@ Exact solutions of {eq}`trafficpde` are much harder to come by than for the stan
 ::::{prf:example} Traffic flow model
 :label: demo-traffic-solve
 
-We solve for traffic flow using periodic boundary conditions. 
+We solve for traffic flow using periodic boundary conditions.
 
 `````{tab-set}
 ````{tab-item} Julia

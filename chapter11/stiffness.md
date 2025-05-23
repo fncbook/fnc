@@ -6,11 +6,11 @@ numbering:
 
 # Stiffness
 
-In {numref}`section-diffusion-absstab` we analyzed time step constraints for the semidiscrete heat equation $\mathbf{u}'=\mathbf{D}_{xx}\mathbf{u}$ in terms of stability regions and the eigenvalues $\lambda_j$ of the matrix. Since all the eigenvalues are negative and real, the one farthest from the origin, at about $-4/h^2$, determines the specific time step restriction. For an explicit method, or any method with a finite intersection with the negative real axis, the conclusion is $\tau=O(h^2)$. 
+In {numref}`section-diffusion-absstab` we analyzed time step constraints for the semidiscrete heat equation $\mathbf{u}'=\mathbf{D}_{xx}\mathbf{u}$ in terms of stability regions and the eigenvalues $\lambda_j$ of the matrix. Since all the eigenvalues are negative and real, the one farthest from the origin, at about $-4/h^2$, determines the specific time step restriction. For an explicit method, or any method with a finite intersection with the negative real axis, the conclusion is $\tau=O(h^2)$.
 
-For the Euler and backward Euler solvers, stability is not the only cause of a severely limited time step. Both methods are first-order accurate, with truncation errors that are $O(\tau)$. Since the spatial discretization we chose is second-order accurate, then we should choose $\tau=O(h^2)$ for accuracy as well as stability. 
+For the Euler and backward Euler solvers, stability is not the only cause of a severely limited time step. Both methods are first-order accurate, with truncation errors that are $O(\tau)$. Since the spatial discretization we chose is second-order accurate, then we should choose $\tau=O(h^2)$ for accuracy as well as stability.
 
-This calculus changes for second-order IVP solvers. When both time and space are discretized at second order, the total truncation error is $O(h^2+\tau^2)$, so it makes sense to use $\tau=O(h)$ for accuracy reasons alone. Therefore, a stability restriction of $\tau=O(h^2)$ is much more strict.
+This calculus changes for second-order IVP solvers. When both time and space are discretized at second order, the total truncation error is $O(h^2+\tau^2)$, so it makes sense to use $\tau=O(h)$ for accuracy reasons alone. Therefore, a stability restriction of $\tau=O(h^2)$ is much stricter.
 
 ```{index} ! stiff differential equation
 ```
@@ -19,9 +19,9 @@ Problems for which the time step is dictated by stability rather than accuracy a
 
 ## Linearization
 
-Why should the model equation $y'=\lambda y$ of absolute stability have wide relevance? Through diagonalization, it is easily generalized to  $\mathbf{u}'=\mathbf{A} \mathbf{u}$ for a constant matrix $\mathbf{A}$. But that is still a severely limited type of problem.
+Why should the model equation $y'=\lambda y$ of absolute stability have wide relevance? Through diagonalization, it is easily generalized to $\mathbf{u}'=\mathbf{A} \mathbf{u}$ for a constant matrix $\mathbf{A}$. But that is still a severely limited type of problem.
 
-Consider a general vector nonlinear system 
+Consider a general vector nonlinear system
 
 ```{math}
 :label: stiffsystem
@@ -41,6 +41,7 @@ Let's introduce more precision into the discussion. Suppose that $\hat{\mathbf{u
 
 ```{index} Jacobian matrix
 ```
+
 We have introduced the Jacobian matrix $\mathbf{J}$, with entries
 
 ```{math}
@@ -48,7 +49,7 @@ We have introduced the Jacobian matrix $\mathbf{J}$, with entries
 J_{ij} = \frac{\partial f_i}{\partial u_j}(t,\hat{\mathbf{u}}(t)).
 ```
 
-By dropping the higher-order terms, which are negligible at least initially, we derive a linear ODE for the evolution of the perturbation. 
+By dropping the higher-order terms, which are negligible at least initially, we derive a linear ODE for the evolution of the perturbation.
 
 ```{index} ! linearization of an ODE
 ```
@@ -92,6 +93,7 @@ where $s$, $q$, and $w$ are constants. Linearization about an exact (albeit unkn
   w                  & 0             & -w
 \end{bmatrix}.
 ```
+
 ::::
 
 ## Freezing time
@@ -140,12 +142,12 @@ We have not stated a theorem here because we made several approximations and ass
 The solution to $y' = \lambda y$, $y(0)=1$ is $\exp(\lambda t)$. If $\lambda$ is real, this solution grows or decays by a factor of $e$ at $t=1/|\lambda|$. If $\lambda = i\omega$ is imaginary, then the solution has sines and cosines of frequency $\omega$. A complex $\lambda$ combines these effects.
 
 ::::{prf:observation}
-We may regard $|\lambda|^{-1}$, which has units of time, as a characteristic time scale of dynamics due to eigenvalue $\lambda$.
-:::: 
+We may regard $|\lambda|^{-1}$, which has units of time, as a characteristic timescale of dynamics due to eigenvalue $\lambda$.
+::::
 
 A Jacobian matrix with eigenvalues at different orders of magnitude therefore implies multiple time scales that the IVP solver needs to cope with. Say $|\lambda_1|\gg |\lambda_2|$. Any explicit integrator will have a bounded stability region and therefore impose a time step restriction proportional to $|\lambda_1|^{-1}$. Any good adaptive integrator will obey such a restriction naturally to control the error. But to observe the "slow" part of the solution, the simulation must go on for a time on the order of $|\lambda_2|^{-1}$, which is much longer.
 
-In @demo-stiffness-oregon, for example, you can see a combination of fast changes and slow evolution. 
+In @demo-stiffness-oregon, for example, you can see a combination of fast changes and slow evolution.
 
 ::::{prf:example} Stiff solver for the Oregonator
 :label: demo-stiffness-explicit
@@ -176,7 +178,7 @@ In @demo-stiffness-oregon, for example, you can see a combination of fast change
 
 In general, the larger the stability region, the more generous the stability time step restriction will be. In the specific context of a semidiscretization of the heat equation, we observed that the eigenvalues of the Jacobian reached a distance $O(h^{-2})$ on the negative real axis. Consequently, any stability region that is bounded in the negative real direction will have a $\tau=O(h^2)$ restriction; only the leading constant will change.
 
-Hence it is desirable in stiff problems generally, and diffusion problems in particular, to have a stability region that is unbounded in at least the negative real direction.
+Hence, it is desirable in stiff problems generally, and diffusion problems in particular, to have a stability region that is unbounded in at least the negative real direction.
 
 ```{index} ! A-stability and A(α)-stability
 ```
@@ -186,7 +188,7 @@ Hence it is desirable in stiff problems generally, and diffusion problems in par
 A stability region that includes a sector of angle $\alpha$ in both directions from the negative real axis is called **A($\alpha$)-stable**. A time stepping method whose stability region contains the entire left half-plane is called **A-stable**.
 ::::
 
-For the heat equation, A($\alpha$)-stability for any $\alpha>0$ suffices for unconditional stability. 
+For the heat equation, A($\alpha$)-stability for any $\alpha>0$ suffices for unconditional stability.
 
 An A-stable method has a stability region that includes all eigenvalues having nonpositive real part. In other words, all perturbations which ought to be bounded in time actually are. When an A-stable method is used, time step size can be based on accuracy considerations alone.
 
@@ -202,7 +204,7 @@ Referring to {numref}`figure-stabreg_ab_am` and {numref}`figure-stabreg_bd_rk`, 
 An A-stable linear multistep method must be implicit and have order of accuracy no greater than 2.
 ::::
 
-Hence the trapezoid formula is as accurate as we can hope for in the family of A-stable linear multistep methods. The situation with Runge–Kutta methods is a little different, but not a great deal more favorable; we do not go into the details.
+Hence, the trapezoid formula is as accurate as we can hope for in the family of A-stable linear multistep methods. The situation with Runge–Kutta methods is a little different, but not a great deal more favorable; we do not go into the details.
 
 ## Exercises
 

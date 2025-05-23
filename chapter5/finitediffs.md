@@ -7,7 +7,7 @@ numbering:
 
 # Finite differences
 
-Now we turn to one of the most common and important applications of interpolants: finding derivatives of functions. Because differentiation is a linear operation, we will constrain ourselves to formulas that are linear in the nodal values. 
+Now we turn to one of the most common and important applications of interpolants: finding derivatives of functions. Because differentiation is a linear operation, we will constrain ourselves to formulas that are linear in the nodal values.
 
 ```{index} ! finite differences
 ```
@@ -57,37 +57,44 @@ in which $p=1$, $q=0$.
 :label: example-finitediffs-fd1bd1
 Suppose $f(x)=x^2$, and we take $h=\frac{1}{4}$ over the interval $[0,1]$. This results in the nodes $0,\frac{1}{4},\frac{1}{2},\frac{3}{4},1$. We evaluate $f$ at the nodes to get
 
-$$
-f(0) = 0, \; f\left(\tfrac{1}{4}\right) = \frac{1}{16},\; f\left(\tfrac{1}{2}\right)=\frac{1}{4},\; f\left(\tfrac{3}{4}\right)=\frac{9}{16}, \; f(1)=1.
-$$
+```{math}
+:numbered: false
+f(0) = 0, \; f\left(\tfrac{1}{4}\right) = \tfrac{1}{16},\; f\left(\tfrac{1}{2}\right)=\tfrac{1}{4},\; f\left(\tfrac{3}{4}\right)=\tfrac{9}{16}, \; f(1)=1.
+```
 
 This gives four forward difference estimates,
 
-\begin{align*}
-f'(0) & \approx 4\left(\frac{1}{16}-0\right), &\quad 
-f'\left(\tfrac{1}{4}\right)& \approx 4\left(\frac{1}{4}-\frac{1}{16}\right), \\
-f'\left(\tfrac{1}{2}\right)& \approx 4\left(\frac{9}{16}-\frac{1}{4}\right), &\quad 
-f'\left(\tfrac{3}{4}\right) &\approx 4\left(1-\frac{9}{16}\right).
-\end{align*}
+```{math}
+:numbered: false
+\begin{aligned}
+f'(0) & \approx 4\left(\tfrac{1}{16}-0\right), &\quad
+f'\left(\tfrac{1}{4}\right)& \approx 4\left(\tfrac{1}{4}-\tfrac{1}{16}\right), \\
+f'\left(\tfrac{1}{2}\right)& \approx 4\left(\tfrac{9}{16}-\tfrac{1}{4}\right), &\quad
+f'\left(\tfrac{3}{4}\right) &\approx 4\left(1-\tfrac{9}{16}\right).
+\end{aligned}
+```
 
 We also get four backward difference estimates,
 
-\begin{align*}
-f'\left(\tfrac{1}{4}\right) &\approx 4\left(\frac{1}{16}-0\right), &\quad 
-f'\left(\tfrac{1}{2}\right) &\approx 4\left(\frac{1}{4}-\frac{1}{16}\right), \\ 
-f'\left(\tfrac{3}{4}\right) &\approx 4\left(\frac{9}{16}-\frac{1}{4}\right), &\quad 
-f'\left(1\right) &\approx 4\left(1-\frac{9}{16}\right).
-\end{align*}
+```{math}
+:numbered: false
+\begin{aligned}
+f'\left(\tfrac{1}{4}\right) &\approx 4\left(\tfrac{1}{16}-0\right), &\quad
+f'\left(\tfrac{1}{2}\right) &\approx 4\left(\tfrac{1}{4}-\tfrac{1}{16}\right), \\
+f'\left(\tfrac{3}{4}\right) &\approx 4\left(\tfrac{9}{16}-\tfrac{1}{4}\right), &\quad
+f'\left(1\right) &\approx 4\left(1-\tfrac{9}{16}\right).
+\end{aligned}
+```
 
 Notice that it's the same four differences each time, but we're interpreting them as derivative estimates at different nodes.
 ::::
 
 As pointed out in {numref}`Example {number} <example-finitediffs-fd1bd1>`, the only real distinction between {eq}`forwardFD11` and {eq}`backwardFD11` is whether we think that $f'$ is being evaluated at the left node or the right one. Symmetry would suggest that we should evaluate it halfway between. That is the motivation behind centered difference formulas.
 
-Let's derive the shortest centered formula using $p=q=1$. For simplicity, we will set $x=0$ without affecting the result. This means that $f(-h)$, $f(0)$, and $f(h)$ are all available in {eq}`fdformula`. 
+Let's derive the shortest centered formula using $p=q=1$. For simplicity, we will set $x=0$ without affecting the result. This means that $f(-h)$, $f(0)$, and $f(h)$ are all available in {eq}`fdformula`.
 
 Note that {eq}`forwardFD11` is simply the slope of the line through the points $\bigl(0,f(0)\bigr)$ and $\bigl(h,f(h)\bigr)$. One route to using all three function values is to differentiate the quadratic polynomial that interpolates $\bigl(-h,f(-h)\bigr)$ as well (see @problem-finitediffs-interp):
- 
+
 ```{math}
 :label: fdinterp2
 Q(x) = \frac{x(x-h)}{2h^2} f(-h) - \frac{x^2-h^2}{h^2} f(0) + \frac{x(x+h)}{2h^2} f(h).
@@ -102,15 +109,15 @@ f'(0) \approx Q'(0) = \frac{f(h)-f(-h)}{2h}.
 
 This result is equivalent to {eq}`fdformula` with $p=q=1$ and weights $a_{-1}=-\frac{1}{2}$, $a_0=0$, and $a_1=\frac{1}{2}$. Observe that while the value of $f(0)$ was available during the derivation, its weight ends up being zero.
 
-Besides the aesthetic appeal of symmetry, in {numref}`section-localapprox-fd-converge` we will see another important advantage of {eq}`centerFD12` compared to the one-sided formulas. 
+Besides the aesthetic appeal of symmetry, in {numref}`section-localapprox-fd-converge` we will see another important advantage of {eq}`centerFD12` compared to the one-sided formulas.
 
 ```{index} interpolation; by polynomials
 ```
 
 We can in principle derive any finite-difference formula from the same process: Interpolate the given function values, then differentiate the interpolant exactly. Some results of the process are given in {numref}`table-FDcenter` for centered differences, and in {numref}`table-FDforward` for forward differences. Both show the weights for estimating the derivative at $x=0$. To get backward differences, you change the signs and reverse the order of the coefficients in any row of {numref}`table-FDforward`; see @problem-finitediffs-backward.
 
-(table-FDcenter)=
 ```{table} Weights for centered finite-difference formulas.
+:label: table-FDcenter
 
 | order            | $-4h$           | $-3h$            | $-2h$          | $-h$           | $0$ | $h$           | $2h$            | $3h$            | $4h$             |
 |:----------------:|:---------------:|:----------------:|:--------------:|:--------------:|:---:|:-------------:|:---------------:|:---------------:|:----------------:|
@@ -120,8 +127,8 @@ We can in principle derive any finite-difference formula from the same process: 
 | 8                | $\frac{1}{280}$ | $-\frac{4}{105}$ | $\frac{1}{5}$  | $-\frac{4}{5}$ | $0$ | $\frac{4}{5}$ | $-\frac{1}{5}$  | $\frac{4}{105}$ | $-\frac{1}{280}$ |
 ```
 
-(table-FDforward)=
 ```{table} Weights for forward finite-difference formulas. To get backward differences, change the signs and reverse the order of the coefficients.
+:label: table-FDforward
 
 | order         | $0$              | $h$ | $2h$           | $3h$          | $4h$           |
 |:-------------:|:----------------:|:---:|:--------------:|:-------------:|:--------------:|
@@ -131,7 +138,7 @@ We can in principle derive any finite-difference formula from the same process: 
 |  4            | $-\frac{25}{12}$ | $4$ | $-3$           | $\frac{4}{3}$ | $-\frac{1}{4}$ |
 ```
 
- The main motivation for using more function values in a formula is to improve the accuracy. This is measured by **order of accuracy**, which is shown in the tables and explored in [Section 5.5](#section-localapprox-fd-converge). 
+ The main motivation for using more function values in a formula is to improve the accuracy. This is measured by {term}`order of accuracy`, which is shown in the tables and explored in [Section 5.5](#section-localapprox-fd-converge).
 
 ````{prf:example}
 According to the tables, here are three specific finite-difference formulas:
@@ -148,6 +155,7 @@ f'(0) &\approx \tfrac{1}{h} \left[ \tfrac{1}{2} f(-2h) - 2 f(-h) + \tfrac{3}{2} 
 
 ::::{prf:example} Finite differences
 :label: demo-finitediffs-fd1
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -172,13 +180,14 @@ f'(0) &\approx \tfrac{1}{h} \left[ \tfrac{1}{2} f(-2h) - 2 f(-h) + \tfrac{3}{2} 
 
 ## Higher derivatives
 
-Many applications require the second derivative of a function. It's tempting to use the finite difference of a finite difference. For example, applying {eq}`centerFD12` to $f'$ gives 
+Many applications require the second derivative of a function. It's tempting to use the finite difference of a finite difference. For example, applying {eq}`centerFD12` to $f'$ gives
 
 ```{math}
 f''(0) \approx  \frac{ f'(h) - f'(h) }{2h}.
 ```
 
 Then applying {eq}`centerFD12` to approximate the appearances of $f'$ leads to
+
 ```{math}
 :label: fd-twocenter
 f''(0) \approx  \frac{ f(-2h) - 2 f(0) + f(2h) }{4h^2}.
@@ -209,6 +218,7 @@ For the second derivative, converting a forward difference to a backward differe
 
 ::::{prf:example} Finite differences for $f''$
 :label: demo-finitediffs-fd2
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia

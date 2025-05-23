@@ -1,4 +1,5 @@
 (section-diffusion-next)=
+
 # Next steps
 
 There are many texts on PDEs; a fairly popular undergraduate level text is {cite}`habermanElementaryApplied1998`.  A more advanced treatment is {cite}`ockendonAppliedPartial2003`.

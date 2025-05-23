@@ -3,12 +3,13 @@ numbering:
   enumerator: 11.3.%s
 ---
 (section-diffusion-absstab)=
+
 # Absolute stability
 
 ```{index} stability; of IVP solvers
 ```
 
-In {numref}`section-diffusion-methodlines` we applied several different time stepping methods to a linear, constant coefficient problem in the form 
+In {numref}`section-diffusion-methodlines` we applied several different time stepping methods to a linear, constant coefficient problem in the form
 
 $$
 \mathbf{u}'(t)=\mathbf{A}\mathbf{u}(t).
@@ -16,21 +17,24 @@ $$
 
 All of these methods are zero-stable in the sense of {numref}`section-ivp-zerostability`, in the limit as the time step size $\tau \to 0$.[^h2tau] Yet for some experiments with *fixed* $\tau$, as in @demo-methodlines-heatFE, we have observed exponential growth in the different limit $n\to \infty$.
 
-[^h2tau]: In Chapter 6 we used $h$ rather than $\tau$ to denote the time step size, but now we  reserve $h$ for spacing in the $x$ direction.
+[^h2tau]: In Chapter 6 we used $h$ rather than $\tau$ to denote the time step size, but now we reserve $h$ for spacing in the $x$ direction.
 
 ```{index} eigenvalue decomposition
 ```
+
 Observe that if $\mathbf{A}$ has the eigenvalue decomposition $\mathbf{A}=\mathbf{V}\mathbf{D}\mathbf{V}^{-1}$, then
 
-\begin{align*}
+```{math}
+\begin{split}
   \mathbf{u}'&=(\mathbf{V}\mathbf{D}\mathbf{V}^{-1})\mathbf{u},\\
   (\mathbf{V}^{-1} \mathbf{u}') &= \mathbf{D} (\mathbf{V}^{-1} \mathbf{u}), \\
   \mathbf{y}' &= \mathbf{D} \mathbf{y},
-\end{align*}
+\end{split}
+```
 
-where $\mathbf{y}(t)=\mathbf{V}^{-1}\mathbf{u}(t)$. Because $\mathbf{D}$ is diagonal, the dynamics of the components of $\mathbf{y}$ are completely decoupled: each row is a self-contained equation of the form $y_j'=\lambda_j y_j$, where $\lambda_j$ is an eigenvalue of $\mathbf{A}$. 
+where $\mathbf{y}(t)=\mathbf{V}^{-1}\mathbf{u}(t)$. Because $\mathbf{D}$ is diagonal, the dynamics of the components of $\mathbf{y}$ are completely decoupled: each row is a self-contained equation of the form $y_j'=\lambda_j y_j$, where $\lambda_j$ is an eigenvalue of $\mathbf{A}$.
 
-The diagonalization argument suggests that we can look at the scalar problems 
+The diagonalization argument suggests that we can look at the scalar problems
 
 ```{math}
 :label: absstabmodel
@@ -44,18 +48,17 @@ $$
 $$
 
 ::::{prf:observation}
-Solutions of {eq}`absstabmodel` are bounded as $t\to\infty$ if and only if $\alpha = \operatorname{Re} \lambda \le 0$. 
+Solutions of {eq}`absstabmodel` are bounded as $t\to\infty$ if and only if $\alpha = \operatorname{Re} \lambda \le 0$.
 ::::
 
 We now consider the counterpart of this observation for the solution produced by a numerical IVP solver.
-
 
 ```{index} ! absolute stability
 ```
 
 ::::{prf:definition} Absolute stability
 :label: definition-absolutestability
-Let $\lambda$ be a complex number, and let $y_0,y_1,y_2,\ldots,y_n$ be the numerical solution at times $0,\tau,2\tau,\ldots,n\tau$ of {eq}`absstabmodel` using a Runge–Kutta or multistep method with fixed stepsize $\tau$. Then the method is said to have {term}`absolute stability` at $\zeta = \tau\lambda$ if $|y_n|$ is bounded above as $n\to\infty$. 
+Let $\lambda$ be a complex number, and let $y_0,y_1,y_2,\ldots,y_n$ be the numerical solution at times $0,\tau,2\tau,\ldots,n\tau$ of {eq}`absstabmodel` using a Runge–Kutta or multistep method with fixed stepsize $\tau$. Then the method is said to have {term}`absolute stability` at $\zeta = \tau\lambda$ if $|y_n|$ is bounded above as $n\to\infty$.
 ::::
 
 The fact that absolute stability depends only on the product $\zeta = \tau\lambda$, and not independently on the individual factors, is a result of how the IVP solvers are defined, as we will see below. Since $\lambda$ has units of inverse time according to {eq}`absstabmodel`, $\zeta$ is dimensionless.
@@ -86,7 +89,7 @@ $$
 |y_k| = |1+\zeta|^k.
 $$
 
-Hence $|y_k|$ remains bounded above as $k\to \infty$ if and only if $|1+\zeta| \le 1$. Because $\zeta$ is a complex number, it's easiest to interpret this condition geometrically:
+Hence, $|y_k|$ remains bounded above as $k\to \infty$ if and only if $|1+\zeta| \le 1$. Because $\zeta$ is a complex number, it's easiest to interpret this condition geometrically:
 
 $$
   |\zeta + 1 | = |\zeta - (-1) | \le 1.
@@ -103,18 +106,18 @@ $$
 y_{k+1} = y_k + \tau( \lambda y_{k+1}) \quad \Rightarrow \quad y_{k+1} =  \frac{1}{1-\zeta} y_k.
 $$
 
-Therefore, $y_k=(1-\zeta)^{-k}$ for all $k$, and absolute stability requires $|1-\zeta|^{-1} \le 1$, or 
+Therefore, $y_k=(1-\zeta)^{-k}$ for all $k$, and absolute stability requires $|1-\zeta|^{-1} \le 1$, or
 
 $$
 |\zeta-1|\ge 1.
 $$
 
-This inequality describes the region *outside* of the open disk of radius 1 centered at $1$ on the real axis of the complex plane.
+This inequality describes the region *outside* the open disk of radius 1 centered at $1$ on the real axis of the complex plane.
 ::::
 
-::::{prf:example} 
+::::{prf:example}
 :label: example-absstab-IE2
-The improved Euler method IE2 defined in {eq}`IE` discretizes {eq}`absstabmodel` as 
+The improved Euler method IE2 defined in {eq}`IE` discretizes {eq}`absstabmodel` as
 
 ```{math}
 {y}_{i+1} = y_i +  \zeta \left( y_i + \tfrac{1}{2}\zeta y_i \right) = (1 + \zeta + \tfrac{1}{2}\zeta^2) y_i.
@@ -126,7 +129,7 @@ $$
 1 - e^{i\theta} + \zeta + \tfrac{1}{2}\zeta^2 = 0
 $$
 
-for some real $\theta$, and thus we can use the quadratic formula to find all the boundary points. 
+for some real $\theta$, and thus we can use the quadratic formula to find all the boundary points.
 ::::
 
 Stability regions for the most common IVP integrators are given in {numref}`figure-stabreg_ab_am` and {numref}`figure-stabreg_bd_rk`.  Note that those for the implicit Adams-Moulton methods are larger than those for the explicit Adams-Bashforth methods of the same order.  For the implicit backward differentiation methods, the exteriors of the curves provide large regions of stability, but significant portions of the imaginary axis may be excluded.  Finally, while the single-step Runge-Kutta methods have smaller regions of stability, those of orders 3 and 4 do include significant portions of the imaginary axis.
@@ -145,7 +148,7 @@ For any particular method and value of $\lambda$ in {eq}`absstabmodel`, we can u
 
 ::::{prf:example}
 :label: example-absstab-FEBE
-Suppose $\lambda=-4$ and Euler's method is applied. Since the time step is always positive, $\zeta=-4\tau$ is always on the negative real axis. The only part of that line that lies within the stability region of Euler as derived in {numref}`Example {number} <example-absstab-euler>` is the real interval $[-2,0]$. Hence we require $\zeta\ge -2$, or $\tau \le 1/2$. By contrast, the stability region of backward Euler includes the entire negative real axis, so absolute stability is unconditional, i.e., assured regardless of $\tau$.
+Suppose $\lambda=-4$ and Euler's method is applied. Since the time step is always positive, $\zeta=-4\tau$ is always on the negative real axis. The only part of that line that lies within the stability region of Euler as derived in {numref}`Example {number} <example-absstab-euler>` is the real interval $[-2,0]$. Hence, we require $\zeta\ge -2$, or $\tau \le 1/2$. By contrast, the stability region of backward Euler includes the entire negative real axis, so absolute stability is unconditional, i.e., assured regardless of $\tau$.
 
 Now suppose instead that $\lambda=i$, so that $\zeta=i\tau$. Clearly $\zeta$ is always on the positive imaginary axis. But no part of this axis, aside from the origin, lies in the stability region of Euler's method, so it is unconditionally *unstable* in this circumstance. The conclusion for backward Euler is the opposite; any value of $\tau$ will do, because the entire imaginary axis is within the stability region.
 ::::
@@ -197,11 +200,11 @@ The matrix $\mathbf{D}_{xx}$ occurring in {eq}`heatMOL` for semidiscretization o
 
 This result agrees with the observation in @demo-absstab-regions that the eigenvalues are real and negative. Furthermore, they lie within the interval $[-4m^2,0]$. In Euler time integration, this implies that $-4\tau m^2\ge -2$, or $\tau\ge 1/(2m^2)=O(m^{-2})$. For backward Euler, there is no time step restriction, and we say that backward Euler is unconditionally stable for this problem.
 
-In summary, three things happen as $h\to 0$: 
+In summary, three things happen as $h\to 0$:
 
 1. The spatial discretization becomes more accurate like $O(h^2)$.
 2. The size of the matrix increases like $O(h^{-1})$.
-3. If we use an explicit time stepping method, then absolute stability requires $O(h^{-2})$ steps. 
+3. If we use an explicit time stepping method, then absolute stability requires $O(h^{-2})$ steps.
 
 The last restriction becomes rather burdensome as $h\to 0$, i.e., as we improve the spatial discretization, which is why implicit methods are preferred for diffusion. While any convergent IVP solver will get the right solution as $\tau\to 0$, the results are exponentially large nonsense until $\tau$ is small enough to satisfy absolute stability.
 

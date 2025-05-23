@@ -28,7 +28,7 @@ The heat equation $u_t = u_{xx}$ has a solution that, at any positive time $t$, 
 ````
 
 ```{index} ! numerical domain of dependence
-``` 
+```
 
 Any numerical method we choose to solve a PDE has analogous property.
 
@@ -55,7 +55,7 @@ If we use the Euler time discretization with step size $\tau$, then
 
 Starting with $j=0$, we find that $U_{i,1}$ depends on $U_{i-1,0}$, $U_{i,0}$, and $U_{i+1,0}$. Hence, the numerical domain of dependence at $(x_i,t_1)$ is $\{x_{i-1},x_i,x_{i+1}\}$.
 
-Now we set $j=1$. From @cflcenteuler we see that $U_{i,2}$ depends on $U_{i-1,1}$, $U_{i,1}$, and $U_{i+1,1}$. In turn, each of these values at time $t_1$ depends on three values at time $t_0$:
+Now we set $j=1$. From @cflcenteuler, we see that $U_{i,2}$ depends on $U_{i-1,1}$, $U_{i,1}$, and $U_{i+1,1}$. In turn, each of these values at time $t_1$ depends on three values at time $t_0$:
 
 $$
 U_{i-1,1} &\;\text{ uses }\; U_{i-2,0},\, U_{i-1,0},\, U_{i,0}, \\
@@ -78,9 +78,9 @@ We now state an important principle about a necessary relationship between domai
 In order for a numerical method for an evolutionary equation to converge to the correct solution, the numerical domain of dependence in the limit $h \to 0,$ $\tau\to 0$ must contain the exact domain of dependence.
 ::::
 
-Although we will not provide the rigor behind this theorem, its conclusion is not difficult to justify. If the CFL condition does not hold, the exact solution at $(x,t)$ could be affected by a change in the initial data while having no effect on the numerical solution. Hence there is no way for the method to get the solution correct for all problems. By contradiction, then, the CFL criterion is necessary for convergence.
+Although we will not provide the rigor behind this theorem, its conclusion is not difficult to justify. If the CFL condition does not hold, the exact solution at $(x,t)$ could be affected by a change in the initial data while having no effect on the numerical solution. Hence, there is no way for the method to get the solution correct for all problems. By contradiction, then, the CFL criterion is necessary for convergence.
 
-:::{caution} 
+:::{caution}
 The CFL condition is a *necessary* criterion for convergence, but not a *sufficient* one. For instance, we could define $U_{i,j}$ to be any weighted convergent sum of all values of $U_{i,0}$. While that would make the numerical domain of dependence equal to the entire real line, this method has nothing to do with solving a PDE correctly!
 :::
 
@@ -94,17 +94,19 @@ In @example-upwind-centered we concluded that the numerical domain of dependence
 Numerical domain of dependence for the explicit time stepping scheme in {numref}`Example {number} <example-upwind-centered>`. As  $\tau$ and $h$ approach zero, the shaded region is filled in.
 ```
 
-In order to observe both the exact and numerical domains of dependence at a fixed location $(x,t)$, we must have $x=ih$ and $t=j\tau$. The numerical domain of dependence fills in the interval $[x_{i-j},x_{i+j}]$, which is $[x-jh,x+jh]$, or 
+In order to observe both the exact and numerical domains of dependence at a fixed location $(x,t)$, we must have $x=ih$ and $t=j\tau$. The numerical domain of dependence fills in the interval $[x_{i-j},x_{i+j}]$, which is $[x-jh,x+jh]$, or
 
 $$
 [x - \frac{h}{\tau} t, x + \frac{h}{\tau} t].
 $$
 
-This interval captures the exact domain of dependence $\{x-ct\}$ only if 
+This interval captures the exact domain of dependence $\{x-ct\}$ only if
+
 ```{math}
 :label: cfl-speed
   |c| \le \frac{h}{\tau}.
 ```
+
 ::::
 
 Equation {eq}`cfl-speed` is the implication of the CFL condition for the stated discretization. Notice that $h/\tau$ is the speed at which information moves in the numerical method, which leads to the following restatement.
@@ -177,7 +179,7 @@ Similarly, the forward difference
 with explicit time stepping leads to the inverse conclusion: its upwind direction is to the right, and it must fail if $c>0$.
 ::::
 
-The reasoning of @example-upwind-onesided is readily generalized: if the numerical method has an upwind direction, the CFL condition requires that it must agree with the upwind direction of the PDE. 
+The reasoning of @example-upwind-onesided is readily generalized: if the numerical method has an upwind direction, the CFL condition requires that it must agree with the upwind direction of the PDE.
 
 :::{prf:observation} Upwinding
 If PDE and a numerical method have different upwinding directions, the method cannot converge to the exact solution.
@@ -192,7 +194,7 @@ It probably seems like one should always use a centered difference scheme, so th
 ```{index} ! boundary conditions; inflow
 ```
 
-Now suppose that the linear advection equation is posed on a finite domain $x \in [a,b]$. 
+Now suppose that the linear advection equation is posed on a finite domain $x \in [a,b]$.
 Since the PDE has only a first-order derivative in $x$, we should have only one boundary condition. But should it be specified at the left end, or at the right end?
 
 Upwinding considerations provide the answer. If we impose a condition at the downwind side of the domain, there is no way for that boundary information to propagate into the interior of the domain as time advances. Conversely, at points close to the upwind boundary, the domain of dependence soon wants to move past the boundary, which is impossible, so there has to be information provided there.
