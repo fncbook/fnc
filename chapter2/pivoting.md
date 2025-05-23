@@ -12,7 +12,8 @@ As mentioned in {numref}`section-linsys-lu`, the $\mathbf{A}=\mathbf{L}\mathbf{U
 
 ::::{prf:example} Failure of naive LU factorization
 :label: demo-pivoting-fail
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-pivoting-fail-julia
@@ -31,6 +32,7 @@ As mentioned in {numref}`section-linsys-lu`, the $\mathbf{A}=\mathbf{L}\mathbf{U
 :::
 ```` 
 `````
+
 ::::
 
 In {numref}`section-linsys-lu` we remarked that LU factorization is equivalent to Gaussian elimination with no row swaps. However, those swaps are necessary in situations like those encountered in @demo-pivoting-fail, in order to avoid division by zero. We will find a modification of the outer product procedure that allows us to do the same thing.
@@ -49,7 +51,8 @@ When performing elimination in column $j$, choose as the pivot the element in co
 
 ::::{prf:example} Row pivoting in LU factorization
 :label: demo-pivoting-fix
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-pivoting-fix-julia
@@ -68,6 +71,7 @@ When performing elimination in column $j$, choose as the pivot the element in co
 :::
 ```` 
 `````
+
 ::::
 
 We will return to the loss of triangularity in $\mathbf{L}$ momentarily. First, though, there is a question left to answer: what if at some stage, all the elements of the targeted column are zero, i.e., there are no available pivots? Fortunately that loose end ties up nicely, although a proof is a bit beyond our scope here.
@@ -85,7 +89,8 @@ Even though the resulting $\mathbf{L}$ in @demo-pivoting-fix is no longer of uni
 
 ::::{prf:example} Pivoting as row permutation
 :label: demo-pivoting-permute
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-pivoting-permute-julia
@@ -104,6 +109,7 @@ Even though the resulting $\mathbf{L}$ in @demo-pivoting-fix is no longer of uni
 :::
 ```` 
 `````
+
 ::::
 
 In principle, if the permutation of rows implied by the pivot locations is applied all at once to the original $\mathbf{A}$, no further pivoting is needed. In practice, this permutation cannot be determined immediately from the original $\mathbf{A}$; the only way to find it is to run the algorithm. Having obtained it at the end, though, we can use it to state a simple relationship.
@@ -126,7 +132,8 @@ where rows $1,\ldots,n$ of $\tilde{\mathbf{A}}$ are rows $i_1,\ldots,i_n$ of $\m
 
 ``````{prf:algorithm} plufact
 :label: function-plufact
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-plufact-julia
@@ -156,7 +163,8 @@ The output of {numref}`Function {number} <function-plufact>` is a factorization 
 
 ::::{prf:example} PLU factorization for solving linear systems
 :label: demo-pivoting-usage
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-pivoting-usage-julia
@@ -175,13 +183,15 @@ The output of {numref}`Function {number} <function-plufact>` is a factorization 
 :::
 ```` 
 `````
+
 ::::
 
 The `lu` function from the built-in package `LinearAlgebra` returns the same three outputs as {numref}`Function {number} <function-plufact>`. If you only request one output, it will be a factorization object that can be used with a backslash. This is useful when you want to solve with multiple versions of $\mathbf{b}$ but do the factorization only once.
 
 ::::{prf:example} Built-in PLU factorization
 :label: demo-pivoting-builtin
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-pivoting-builtin-julia
@@ -200,6 +210,7 @@ The `lu` function from the built-in package `LinearAlgebra` returns the same thr
 :::
 ```` 
 `````
+
 ::::
 
 ## Stability
@@ -223,7 +234,7 @@ Let
 
 If $\epsilon=0$, LU factorization without pivoting fails for $\mathbf{A}$. But if $\epsilon\neq 0$, we can go without pivoting, at least in principle.
 
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-pivoting-stable-julia
@@ -242,6 +253,7 @@ If $\epsilon=0$, LU factorization without pivoting fails for $\mathbf{A}$. But i
 :::
 ```` 
 `````
+
 ::::
 
 The factors of this $\mathbf{A}$ without pivoting are found to be

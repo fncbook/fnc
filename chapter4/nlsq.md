@@ -60,7 +60,8 @@ As always in least-squares problems, the residual $\mathbf{f}(\mathbf{x})$ will 
 
 ::::{prf:example} Convergence of nonlinear least squares
 :label: demo-nlsq-converge
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-nlsq-converge-julia
@@ -79,6 +80,7 @@ As always in least-squares problems, the residual $\mathbf{f}(\mathbf{x})$ will 
 :::
 ```` 
 `````
+
 ::::
 
 ## Nonlinear data fitting
@@ -136,6 +138,7 @@ where $s$ is the concentration of a substrate. The real values $V$ and $K_m$ are
 :::
 ```` 
 `````
+
 ::::
 
 ## Exercises

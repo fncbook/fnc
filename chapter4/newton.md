@@ -11,7 +11,7 @@ Newton's method is the cornerstone of rootfinding. We introduce the key idea wit
 ::::{prf:example} Graphical interpretation of Newton's method
 :label: demo-newton-line
 
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-newton-line-julia
@@ -130,7 +130,7 @@ Recall that linear convergence is identifiable by trending toward a straight lin
 ::::{prf:example} Convergence of Newton's method
 :label: demo-newton-converge
 
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-newton-converge-julia
@@ -174,7 +174,8 @@ Our implementation of Newton's iteration is given in {numref}`Function {number} 
 
 ``````{prf:algorithm} newton
 :label: function-newton
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-newton-julia
@@ -203,7 +204,7 @@ Our implementation of Newton's iteration is given in {numref}`Function {number} 
 ::::{prf:example} Using Newton's method
 :label: demo-newton-usage
 
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-newton-usage-julia

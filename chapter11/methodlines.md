@@ -69,7 +69,8 @@ Note well how the first and last rows have elements that "wrap around" from one 
 
 ``````{prf:algorithm} diffper
 :label: function-diffper
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-diffper-julia
@@ -117,6 +118,7 @@ Thus, a fully discrete method for the heat equation is
 
 ::::{prf:example} Forward Euler for the heat equation
 :label: demo-methodlines-heatFE
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -136,6 +138,7 @@ Thus, a fully discrete method for the heat equation is
 :::
 ````
 `````
+
 ::::
 
 The method in {numref}`Example {number} <example-methodlines-heatFE>` and @demo-methodlines-heatFE is essentially the same one we used for the Black–Scholes equation in {numref}`section-diffusion-blackscholes`. By changing the time integrator, we can get much better results.
@@ -177,6 +180,7 @@ Because backward Euler is an implicit method, a linear system must be solved for
 :::
 ````
 `````
+
 ::::
 
 
@@ -191,6 +195,7 @@ Instead of coding one of the Runge–Kutta or multistep formulas directly for a 
 
 ::::{prf:example} Adaptive time stepping for the heat equation
 :label: demo-methodlines-auto
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -210,6 +215,7 @@ Instead of coding one of the Runge–Kutta or multistep formulas directly for a 
 :::
 ````
 `````
+
 ::::
 
 The adaptive time integrators can all produce solutions. But, as seen in @demo-methodlines-auto, they are not equivalent in every important sense. Whether we choose to implement a method directly with a fixed step size, or automatically with adaptation, there is something crucial to understand about the semidiscrete problem {eq}`heatMOL` that will occupy our attention in the next two sections.

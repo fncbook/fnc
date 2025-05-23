@@ -45,6 +45,7 @@ One of the simplest choices for the preconditioner $\mathbf{M}$ is a diagonal ma
 
 ::::{prf:example} Diagonal preconditioning
 :label: demo-precond-diagonal
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -64,6 +65,7 @@ One of the simplest choices for the preconditioner $\mathbf{M}$ is a diagonal ma
 :::
 ````
 `````
+
 ::::
 
 
@@ -76,6 +78,7 @@ Another general-purpose technique is the **incomplete LU factorization**. Since 
 
 ::::{prf:example} Incomplete LU preconditioning
 :label: demo-precond-gmres
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -95,6 +98,7 @@ Another general-purpose technique is the **incomplete LU factorization**. Since 
 :::
 ````
 `````
+
 ::::
 
 

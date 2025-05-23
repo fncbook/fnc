@@ -226,7 +226,8 @@ The LU factorization of an $n\times n$ matrix takes $\sim\frac{2}{3}n^3$ flops a
 ```
 ::::{prf:example} Floating-point operations in LU factorization
 :label: demo-flops-lufact
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-flops-lufact-julia
@@ -245,6 +246,7 @@ The LU factorization of an $n\times n$ matrix takes $\sim\frac{2}{3}n^3$ flops a
 :::
 ```` 
 `````
+
 ::::
 
 In practice, flops are not the only aspect of an implementation that occupies significant time. Our position is that counting flops as a measure of performance is a useful oversimplification. We will assume that LU factorization (and as a result, the solution of a linear system of $n$ equations) requires a real-world time that is roughly $O(n^3)$. This growth rate is a great deal more tolerable than, say, $O(2^n)$, but it does mean that for (at this writing) $n$ greater than 10,000 or so, something other than general LU factorization will have to be used.

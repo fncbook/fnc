@@ -267,7 +267,8 @@ The conclusion {eq}`svdnorm` can be proved by vector calculus. In the square cas
 
 ::::{prf:example} SVD properties
 :label: demo-svd-props
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-svd-props-julia
@@ -286,6 +287,7 @@ The conclusion {eq}`svdnorm` can be proved by vector calculus. In the square cas
 :::
 ```` 
 `````
+
 ::::
 
 ## Exercises

@@ -96,7 +96,8 @@ Equation {eq}`matrixouter` has some interesting structure for the product $\math
 
 ::::{prf:example} Triangular outer products
 :label: demo-lu-outertri
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-lu-outertri-julia
@@ -115,6 +116,7 @@ Equation {eq}`matrixouter` has some interesting structure for the product $\math
 :::
 ```` 
 `````
+
 ::::
 
 Let the columns of $\mathbf{L}$ be written as $\boldsymbol{\ell}_k$ and the rows of $\mathbf{U}$ be written as $\mathbf{u}_k^T$. Then the first row of $\mathbf{L}\mathbf{U}$ is
@@ -149,7 +151,8 @@ We will require that $\mathbf{L}$ be a unit lower triangular matrix.
 
 ::::{prf:example} LU factorization
 :label: demo-lu-derive
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-lu-derive-julia
@@ -168,6 +171,7 @@ We will require that $\mathbf{L}$ be a unit lower triangular matrix.
 :::
 ```` 
 `````
+
 ::::
 
 We have arrived at the linchpin of solving linear systems.
@@ -191,7 +195,8 @@ The outer product algorithm for LU factorization seen in @demo-lu-derive is code
 
 ``````{prf:algorithm} lufact
 :label: function-lufact
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-lufact-julia
@@ -240,7 +245,8 @@ A key advantage of the factorization point of view is that it depends only on th
 
 ::::{prf:example} Solving a linear system by LU factors
 :label: demo-lu-solve
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-lu-solve-julia
@@ -259,6 +265,7 @@ A key advantage of the factorization point of view is that it depends only on th
 :::
 ```` 
 `````
+
 ::::
 
 As noted in the descriptions of {numref}`Function {number} <function-lufact>` and {numref}`Algorithm {number} <algorithm-lu-solve>`, the LU factorization as we have seen it so far is not stable for all matrices. In fact, it does not always even exist. The missing element is the row swapping allowed in Gaussian elimination. We will address these issues in {numref}`section-linsys-pivoting`.

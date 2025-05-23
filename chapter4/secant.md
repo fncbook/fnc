@@ -17,7 +17,8 @@ In the Newton context, the principle of approximate approximation begins with th
 
 ::::{prf:example} Graphical interpretation of the secant method
 :label: demo-secant-line
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-secant-line-julia
@@ -36,6 +37,7 @@ In the Newton context, the principle of approximate approximation begins with th
 :::
 ```` 
 `````
+
 ::::
 
 The example in @demo-secant-line demonstrates the {term}`secant method`. In the secant method, one finds the root of the linear approximation through the two most recent root estimates. That is, given previous approximations $x_1,\ldots,x_k$, define the linear model function as the line through $\bigl(x_{k-1},f(x_{k-1})\bigr)$ and $\bigl(x_k,f(x_k)\bigr)$:
@@ -66,7 +68,8 @@ Our implementation of the secant method is given in {numref}`Function {number} <
 
 ``````{prf:algorithm} secant
 :label: function-secant
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-secant-julia
@@ -149,7 +152,8 @@ as $k\to\infty$.
 
 ::::{prf:example} Convergence of the secant method
 :label: demo-secant-converge
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-secant-converge-julia
@@ -202,7 +206,8 @@ This leads to the idea of defining $q(y)$ as the quadratic interpolant to the po
 
 ::::{prf:example} Inverse quadratic interpolation
 :label: demo-secant-iqi
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-secant-iqi-julia

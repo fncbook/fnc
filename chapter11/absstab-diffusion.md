@@ -185,6 +185,7 @@ Now we return to the semidiscretization {eq}`heatMOL` of the heat equation, whic
 :::
 ````
 `````
+
 ::::
 
 The matrix $\mathbf{D}_{xx}$ occurring in {eq}`heatMOL` for semidiscretization of the periodic heat equation has eigenvalues that can be found explicitly. Assuming that $x\in[0,1)$ (with periodic boundary conditions), for which $h=1/m$, then the eigenvalues are (see @problem-absstab-d2eigs)

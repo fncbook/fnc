@@ -61,6 +61,7 @@ $$\int_{-1}^1 \pi\sqrt{ \cos^2(\pi t) + \tfrac{1}{4}\sin^2(\pi t)}\,dt.$$
 :::
 ````
 `````
+
 ::::
 
 ## Clenshaw–Curtis integration
@@ -115,7 +116,8 @@ There are different formulas for odd values of $n$. Note that the weights also d
 
 ``````{prf:algorithm} ccint
 :label: function-ccint
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-ccint-julia
@@ -243,7 +245,8 @@ From @theorem-orthogonal-roots we know that the roots of $P_n$ are distinct and 
 
 ``````{prf:algorithm} glint
 :label: function-glint
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-glint-julia
@@ -270,6 +273,7 @@ Both Clenshaw–Curtis and Gauss–Legendre integration are spectrally accurate.
 
 ::::{prf:example} Comparing spectral integration methods
 :label: demo-integration-compare
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -289,6 +293,7 @@ Both Clenshaw–Curtis and Gauss–Legendre integration are spectrally accurate.
 :::
 ````
 `````
+
 ::::
 
 The difference in convergence between Clenshaw–Curtis and Gauss–Legendre is dwarfed by the difference between spectral and algebraic convergence. It is possible, though, to encounter integrands for which adaptivity is critical.  Choosing a method is highly problem-dependent, but a rule of thumb is that for large error tolerances, an adaptive low-order method is likely to be a good choice, while for high accuracy, the spectral methods often dominate.

@@ -9,7 +9,8 @@ In calculus, you learn that the elegant way to evaluate a definite integral is t
 
 ::::{prf:example} Numerical integration
 :label: demo-int-antideriv
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-int-antideriv-julia
@@ -28,6 +29,7 @@ In calculus, you learn that the elegant way to evaluate a definite integral is t
 :::
 ```` 
 `````
+
 ::::
 
 ```{index} ! numerical integration
@@ -122,7 +124,8 @@ Trapezoid formula for integration. The piecewise linear interpolant defines trap
 
 ``````{prf:algorithm} trapezoid
 :label: function-trapezoid
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-trapezoid-julia
@@ -190,7 +193,8 @@ The trapezoid integration formula is second-order accurate.
 
 ::::{prf:example} Trapezoid integration
 :label: demo-int-trap
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-int-trap-julia
@@ -209,6 +213,7 @@ The trapezoid integration formula is second-order accurate.
 :::
 ```` 
 `````
+
 ::::
 
 (section-integration-extrapolation)=
@@ -309,7 +314,8 @@ where the nodes referenced in the last line are relative to $n=2m$. Hence in pas
 
 ::::{prf:example} Integration by extrapolation
 :label: demo-int-extrap
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-int-extrap-julia
@@ -328,6 +334,7 @@ where the nodes referenced in the last line are relative to $n=2m$. Hence in pas
 :::
 ```` 
 `````
+
 ::::
 
 ## Exercises

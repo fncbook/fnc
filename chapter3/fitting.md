@@ -80,7 +80,8 @@ Note that $\mathbf{V}$ has the same structure as the Vandermonde matrix in {eq}`
 
 ::::{prf:example} Fitting temperature data
 :label: demo-fitting-tempfit
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-fitting-tempfit-julia
@@ -99,6 +100,7 @@ Note that $\mathbf{V}$ has the same structure as the Vandermonde matrix in {eq}`
 :::
 ```` 
 `````
+
 ::::
 
 ## The least-squares formulation
@@ -223,7 +225,7 @@ $$
 
 Say $s_k$ is the sum of the first $k$ terms of the series above, and $p_k = \sqrt{6s_k}$. Here is a fancy way to compute these sequences in a compact code.
 
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-fitting-pirate-julia
@@ -242,6 +244,7 @@ Say $s_k$ is the sum of the first $k$ terms of the series above, and $p_k = \sqr
 :::
 ```` 
 `````
+
 ::::
 
 ## Exercises

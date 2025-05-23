@@ -49,7 +49,8 @@ A polynomial is represented as a vector of coefficients in all three languages c
 
 ``````{prf:algorithm} horner
 :label: function-horner
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-horner-julia
@@ -72,7 +73,8 @@ A polynomial is represented as a vector of coefficients in all three languages c
 
 ``````{prf:example} Using a function
 :label: demo-algorithms-horner
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-algorithms-horner-julia
@@ -96,7 +98,7 @@ matlab
 
 Any collection of statements organized around solving a type of problem should probably be wrapped in a function. One clue is that if you find yourself copying and pasting code, perhaps with small changes in each instance, you should probably be writing a function instead.
 
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 

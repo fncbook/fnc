@@ -148,7 +148,7 @@ f'(0) &\approx \tfrac{1}{h} \left[ \tfrac{1}{2} f(-2h) - 2 f(-h) + \tfrac{3}{2} 
 
 ::::{prf:example} Finite differences
 :label: demo-finitediffs-fd1
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-finitediffs-fd1-julia
@@ -209,7 +209,7 @@ For the second derivative, converting a forward difference to a backward differe
 
 ::::{prf:example} Finite differences for $f''$
 :label: demo-finitediffs-fd2
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-finitediffs-fd2-julia
@@ -244,7 +244,8 @@ We no longer assume equally spaced nodes, so there is no "$h$" to be used in the
 
 ``````{prf:algorithm} fdweights
 :label: function-fdweights
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-fdweights-julia
@@ -267,7 +268,8 @@ We no longer assume equally spaced nodes, so there is no "$h$" to be used in the
 
 ::::{prf:example} Finite differences at arbitrary nodes
 :label: demo-finitediffs-fd-weights
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-finitediffs-fd-weights-julia

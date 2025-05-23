@@ -200,6 +200,7 @@ We can therefore solve {eq}`bsneumann` for the fictitious $V_{m+1,j}$ and use it
 
 ::::{prf:example} FD solution of Black–Scholes
 :label: demo-blackscholes-solve
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -219,6 +220,7 @@ We can therefore solve {eq}`bsneumann` for the fictitious $V_{m+1,j}$ and use it
 :::
 ````
 `````
+
 ::::
 
 
@@ -246,6 +248,7 @@ Everything in @demo-blackscholes-solve seems to go smoothly. However, trouble lu
 :::
 ````
 `````
+
 ::::
 
 The explosive growth of error in @demo-blackscholes-unstable suggests that there is instability at work. Understanding the source of that instability comes later in this chapter. First, though, we consider a general and robust strategy for solving evolutionary PDEs.

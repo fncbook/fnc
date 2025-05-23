@@ -130,7 +130,8 @@ In order to modularize our codes, we use @function-tensorgrid to define function
 
 ``````{prf:algorithm} tensorgrid
 :label: function-tensorgrid
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-tensorgrid-julia
@@ -188,6 +189,7 @@ which is also periodic on the rectangle.
 :::
 ````
 `````
+
 ::::
 
 ## Dirichlet conditions

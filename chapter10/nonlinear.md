@@ -106,7 +106,8 @@ Our implementation using second-order finite differences is {numref}`Function {n
 
 ``````{prf:algorithm} bvp
 :label: function-bvp
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-bvp-julia
@@ -207,7 +208,7 @@ $$
 \epsilon u'' = u^3-u, \quad 0 \le x \le 1, \quad u'(0)=0, \; u(1)=1.
 $$
 
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-nonlinear-allencahn-julia

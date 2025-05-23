@@ -299,7 +299,8 @@ Each $I_k$ contributes to four elements of each matrix and two of the vector $\m
 
 ``````{prf:algorithm} fem
 :label: function-fem
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-fem-julia
@@ -353,6 +354,7 @@ $$
 :::
 ````
 `````
+
 ::::
 
 

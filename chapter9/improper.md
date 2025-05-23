@@ -120,13 +120,15 @@ The total integrand in {eq}`DEquadchain1` therefore has double exponential decay
 :::
 ````
 `````
+
 ::::
 
 {numref}`Function {number} <function-intinf>` implements double exponential integration by applying the adaptive integrator {numref}`Function {number} <function-intadapt>` to {eq}`DEquadchain1`. It truncates the interval to $-M\le t \le M$ by increasing $M$ until the integrand is too small to matter relative to the error tolerance.
 
 ``````{prf:algorithm} intinf
 :label: function-intinf
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-intinf-julia
@@ -171,6 +173,7 @@ We compare direct truncation in $x$ to the double exponential method of {numref}
 :::
 ````
 `````
+
 ::::
 
 ## Integrand singularity
@@ -205,7 +208,8 @@ Now the growth of $f$ and $\cosh t$ together are counteracted by the double expo
 
 ``````{prf:algorithm} intsing
 :label: function-intsing
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-intsing-julia
@@ -260,6 +264,7 @@ In order to use {numref}`Function {number} <function-intadapt>`, we must truncat
 :::
 ````
 `````
+
 ::::
 
 Double exponential integration is an effective general-purpose technique for improper integrals that usually outperforms interval truncation in the original variable. There are specialized methods tailored to specific singularity types that can best it, but those require more analytical work to use properly.

@@ -58,7 +58,8 @@ for a positive integer $k$.
 
 ::::{prf:example} Blurring an image
 :label: demo-matrixfree-blur
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-matrixfree-blur-julia
@@ -77,6 +78,7 @@ for a positive integer $k$.
 :::
 ```` 
 `````
+
 ::::
 
 ## Deblurring
@@ -105,7 +107,8 @@ The following example shows how to put these ideas into practice with MINRES.
 
 ::::{prf:example} Deblurring an image
 :label: demo-matrixfree-deblur
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-matrixfree-deblur-julia
@@ -124,6 +127,7 @@ The following example shows how to put these ideas into practice with MINRES.
 :::
 ```` 
 `````
+
 ::::
 
 ## Exercises

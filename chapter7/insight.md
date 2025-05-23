@@ -76,7 +76,8 @@ which is the $(i,j)$ element of $\mathbf{A}^k$.
 
 ::::{prf:example} Adjacency matrix
 :label: demo-insight-graph
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-insight-graph-julia
@@ -95,6 +96,7 @@ which is the $(i,j)$ element of $\mathbf{A}^k$.
 :::
 ```` 
 `````
+
 ::::
 
 The representation of a graph by its adjacency matrix opens up the possibility of many kinds of analysis of the graph. One might ask whether the nodes admit a natural partition into clusters, for example. Or one might ask to rank the nodes in order of importance to the network as determined by some objective criteria—an application made famous by Google's PageRank algorithm, and one which is mathematically stated as an {ref}`eigenvalue <section-matrixanaly-evd>` problem.
@@ -108,7 +110,8 @@ Computers typically represent images as rectangular arrays of pixels, each of wh
 
 ::::{prf:example} Images as matrices
 :label: demo-insight-image
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-insight-image-julia
@@ -127,6 +130,7 @@ Computers typically represent images as rectangular arrays of pixels, each of wh
 :::
 ```` 
 `````
+
 ::::
 
 Representation of an image as a matrix allows us to describe some common image operations in terms of linear algebra. For example, in {numref}`section-matrixanaly-svd` we will use the singular value decomposition to compress the information, and in {numref}`section-krylov-matrixfree` we will see how to apply and remove blurring effects.
@@ -195,7 +199,7 @@ Representation of an image as a matrix allows us to describe some common image o
 ``````{exercise}
 :label: problem-insight-actors
 ⌨ For this problem you need to download and import data:
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 Download [actors.mat](actors.mat) by clicking the link and saving (you may need to fix the file name).

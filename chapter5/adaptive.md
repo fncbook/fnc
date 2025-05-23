@@ -12,7 +12,8 @@ To this point, we have used only equally spaced nodes to compute integrals. Yet 
 
 ::::{prf:example} Motivation for adaptive integration
 :label: demo-adapt-motive
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-adapt-motive-julia
@@ -112,7 +113,8 @@ If the error estimate passes the test {eq}`absreltolerance`, the better Simpson 
 (function-intadapt)=
 
 ``````{prf:algorithm} intadapt
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 
@@ -138,7 +140,8 @@ If the error estimate passes the test {eq}`absreltolerance`, the better Simpson 
 
 ::::{prf:example} Using adaptive integration
 :label: demo-adapt-usage
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-adapt-usage-julia

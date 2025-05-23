@@ -115,7 +115,8 @@ In {numref}`Function {number} <function-polyinterp>` we give an implementation o
 
 ``````{prf:algorithm} polyinterp
 :label: function-polyinterp
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-polyinterp-julia
@@ -161,6 +162,7 @@ We show the barycentric formula in action for values from the function $\sin(e^{
 :::
 ````
 `````
+
 ::::
 
 ## Stability

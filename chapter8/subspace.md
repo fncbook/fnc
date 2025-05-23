@@ -79,6 +79,7 @@ The natural seed vector for $\mathcal{K}_m$ in this case is the vector $\mathbf{
 
 ::::{prf:example} Conditioning of the Krylov matrix
 :label: demo-subspace-unstable
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -98,6 +99,7 @@ The natural seed vector for $\mathcal{K}_m$ in this case is the vector $\mathbf{
 :::
 ````
 `````
+
 ::::
 
 
@@ -201,7 +203,8 @@ An implementation of the Arnoldi iteration is given in {numref}`Function {number
 
 ``````{prf:algorithm} arnoldi
 :label: function-arnoldi
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-arnoldi-julia
@@ -224,6 +227,7 @@ An implementation of the Arnoldi iteration is given in {numref}`Function {number
 
 ::::{prf:example} Arnoldi iteration
 :label: demo-subspace-arnoldi
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -243,6 +247,7 @@ An implementation of the Arnoldi iteration is given in {numref}`Function {number
 :::
 ````
 `````
+
 ::::
 
 In the next section, we revisit the idea of approximately solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ over a Krylov subspace as suggested in @demo-subspace-arnoldi. A related idea explored in @problem-subspace-arnoldieig is used to approximate the eigenvalue problem for $\mathbf{A}$, which is the approach that underlies `eigs` for sparse matrices.

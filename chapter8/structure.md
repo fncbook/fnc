@@ -20,6 +20,7 @@ Most graphs with real applications have many fewer edges than the maximum possib
 
 ::::{prf:example} Sparsity
 :label: demo-structure-sparse
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -39,6 +40,7 @@ Most graphs with real applications have many fewer edges than the maximum possib
 :::
 ````
 `````
+
 ::::
 
 ```{index} fill-in of sparse matrices
@@ -48,6 +50,7 @@ Arithmetic operations such as `+`, `-`, `*`, and `^` respect and exploit sparsit
 
 ::::{prf:example} Fill-in of a sparse matrix
 :label: demo-structure-fill
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -67,6 +70,7 @@ Arithmetic operations such as `+`, `-`, `*`, and `^` respect and exploit sparsit
 :::
 ````
 `````
+
 ::::
 
 ## Banded matrices
@@ -83,6 +87,7 @@ Without pivoting, an LU factorization preserves bandwidth, but pivoting can chan
 
 ::::{prf:example} Banded matrices
 :label: demo-structure-sparseband
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -102,6 +107,7 @@ Without pivoting, an LU factorization preserves bandwidth, but pivoting can chan
 :::
 ````
 `````
+
 ::::
 
 ## Systems and eigenvalues
@@ -115,6 +121,7 @@ For very large matrices, it's unlikely that you will want to find all of its eig
 
 ::::{prf:example} Eigenvalues of sparse matrices
 :label: demo-structure-linalg
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -134,6 +141,7 @@ For very large matrices, it's unlikely that you will want to find all of its eig
 :::
 ````
 `````
+
 ::::
 
 ## Exercises
@@ -167,7 +175,7 @@ For each matrix, use `spy` and an inspection of the $5\times 5$ submatrices in t
 ``````{exercise}
 :label: problem-structure-factoring
 ⌨ This problem requires the matrix used in @demo-structure-fill.
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 Download [smallworld.mat](smallworld.mat) by clicking the link and saving (you may need to fix the file name).
@@ -206,7 +214,7 @@ A = spio.mmread("smallworld.mtx")
 :label: problem-structure-roswell
 ⌨ One use of adjacency matrices is to analyze the links between members of a collection. Obtain the adjacency matrix $\mathbf{A}$ from @demo-structure-sparse via the following:
 
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 Download [roswell.mat](roswell.mat) by clicking the link and saving (you may need to fix the file name).

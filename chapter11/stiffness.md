@@ -132,6 +132,7 @@ We have not stated a theorem here because we made several approximations and ass
 :::
 ````
 `````
+
 ::::
 
 ## Multiple time scales
@@ -168,6 +169,7 @@ In @demo-stiffness-oregon, for example, you can see a combination of fast change
 :::
 ````
 `````
+
 ::::
 
 ## A-stability

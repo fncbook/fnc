@@ -9,6 +9,7 @@ Interpolation is not the only way to use polynomials for global approximation of
 
 ::::{prf:example} Continuous least-squares fitting
 :label: demo-orthogonal-approx
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -28,6 +29,7 @@ Interpolation is not the only way to use polynomials for global approximation of
 :::
 ````
 `````
+
 ::::
 
 We can extend least-squares fitting from data to functions by extending several familiar finite-dimensional definitions. The continuous extension of a sum is an integral, which leads to the following.

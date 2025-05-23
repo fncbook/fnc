@@ -60,7 +60,8 @@ An appealing characteristic of the hat function basis is that it depends only on
 
 ``````{prf:algorithm} hatfun
 :label: function-hatfun
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-hatfun-julia
@@ -83,7 +84,8 @@ An appealing characteristic of the hat function basis is that it depends only on
 
 ::::{prf:example} A look at hat functions
 :label: demo-pwlin-hat
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-pwlin-hat-julia
@@ -102,6 +104,7 @@ An appealing characteristic of the hat function basis is that it depends only on
 :::
 ```` 
 `````
+
 ::::
 
 ## Cardinality conditions
@@ -131,7 +134,8 @@ The resulting algorithmic simplicity is reflected in {numref}`Function {number} 
 
 ``````{prf:algorithm} plinterp
 :label: function-plinterp
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-plinterp-julia
@@ -154,7 +158,8 @@ The resulting algorithmic simplicity is reflected in {numref}`Function {number} 
 
 ::::{prf:example} Using piecewise linear interpolation
 :label: demo-pwlin-usage
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-pwlin-usage-julia
@@ -173,6 +178,7 @@ The resulting algorithmic simplicity is reflected in {numref}`Function {number} 
 :::
 ```` 
 `````
+
 ::::
 
 ## Conditioning and convergence

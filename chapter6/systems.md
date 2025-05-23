@@ -71,7 +71,8 @@ The vector difference equation {eq}`eulersys` is just Euler's formula applied si
 
 ::::{prf:example} Predator-prey model
 :label: demo-systems-predator
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-systems-predator-julia
@@ -90,6 +91,7 @@ The vector difference equation {eq}`eulersys` is just Euler's formula applied si
 :::
 ```` 
 `````
+
 ::::
 
 In the rest of this chapter we present methods as though they are for scalar equations, but their application to systems is taken for granted. The generalization of error analysis can be more complicated, but our statements about order of accuracy and other properties are true for systems as well as scalars. The codes are all written to accept systems.
@@ -162,7 +164,8 @@ The trick illustrated in the preceding examples is always available. Suppose $y$
 
 ::::{prf:example} Coupled pendulums
 :label: demo-systems-coupledpendula
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-systems-coupledpendula-julia
@@ -181,6 +184,7 @@ The trick illustrated in the preceding examples is always available. Suppose $y$
 :::
 ```` 
 `````
+
 ::::
 
 ## Exercises

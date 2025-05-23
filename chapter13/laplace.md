@@ -91,6 +91,7 @@ Let $\mathbf{A}$ be $m\times n$ and $\mathbf{B}$ be $p\times q$. The **Kronecker
 :::
 ````
 `````
+
 ::::
 
 
@@ -211,6 +212,7 @@ While @pois2bcrep and @pois2bcreprhs are algebraically correct, a literal implem
 :::
 ````
 `````
+
 ::::
 
 ## Implementation
@@ -219,7 +221,8 @@ While @pois2bcrep and @pois2bcreprhs are algebraically correct, a literal implem
 
 ``````{prf:algorithm} poissonfd
 :label: function-poissonfd
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-poissonfd-julia
@@ -266,6 +269,7 @@ We can engineer an example by choosing the solution first. Let $u(x,y)=\sin(3xy-
 :::
 ````
 `````
+
 ::::
 
 ## Accuracy and efficiency

@@ -91,6 +91,7 @@ Because the theorem gives an upper bound, MINRES may converge faster. All we can
 
 ::::{prf:example} MINRES
 :label: demo-minrescg-indefinite
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -110,6 +111,7 @@ Because the theorem gives an upper bound, MINRES may converge faster. All we can
 :::
 ````
 `````
+
 ::::
 
 
@@ -196,6 +198,7 @@ This estimate fails for very large $\kappa$, however.
 
 ::::{prf:example} Convergence of MINRES and CG
 :label: demo-minrescg-converge
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -215,6 +218,7 @@ This estimate fails for very large $\kappa$, however.
 :::
 ````
 `````
+
 ::::
 
 ## Exercises

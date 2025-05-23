@@ -104,7 +104,7 @@ Our implementation of IE2 is shown in {numref}`Function {number} <function-ie2>`
 
 ``````{prf:algorithm} ie2
 :label: function-ie2
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-ie2-julia
@@ -221,7 +221,7 @@ Our implementation is given in {numref}`Function {number} <function-rk4>`.
 
 ``````{prf:algorithm} rk4
 :label: function-rk4
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-rk4-julia
@@ -244,7 +244,8 @@ Our implementation is given in {numref}`Function {number} <function-rk4>`.
 
 ::::{prf:example} Convergence of Runge–Kutta methods
 :label: demo-rk-converge
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-rk-converge-julia
@@ -263,6 +264,7 @@ Our implementation is given in {numref}`Function {number} <function-rk4>`.
 :::
 ```` 
 `````
+
 ::::
 
 ## Efficiency

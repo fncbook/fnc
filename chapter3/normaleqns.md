@@ -132,7 +132,7 @@ In the last step we can exploit the fact, proved in @theorem-ATA, that $\mathbf{
 ``````{prf:algorithm} lsnormal
 :label: function-lsnormal
 
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-lsnormal-julia
@@ -204,7 +204,8 @@ This squaring of the condition number in the normal equations is the cause of in
 
 ::::{prf:example} Instability in the normal equations
 :label: demo-normaleqns-instab
-`````{tab-set} 
+
+`````{tab-set}
 
 ````{tab-item} Julia
 :sync: julia

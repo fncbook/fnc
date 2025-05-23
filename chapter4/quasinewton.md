@@ -49,7 +49,8 @@ The finite-difference formula {eq}`jacobianfd` is implemented by {numref}`Functi
 
 ``````{prf:algorithm} fdjac
 :label: function-fdjac
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-fdjac-julia
@@ -190,7 +191,8 @@ Each pass through the loop starts by using {eq}`levenberg` to propose a step $\m
 
 ``````{prf:algorithm} levenberg
 :label: function-levenberg
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-levenberg-julia
@@ -215,7 +217,8 @@ In some cases our simple logic in {numref}`Function {number} <function-levenberg
 
 ::::{prf:example} Using Levenberg's method
 :label: demo-quasi-levenberg
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-quasi-levenberg-julia
@@ -234,6 +237,7 @@ In some cases our simple logic in {numref}`Function {number} <function-levenberg
 :::
 ```` 
 `````
+
 ::::
 
 ## Exercises

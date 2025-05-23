@@ -54,6 +54,7 @@ Two things stand out about these eigenvalues: they are purely imaginary, which i
 :::
 ````
 `````
+
 ::::
 
 
@@ -147,6 +148,7 @@ As a result, we conclude that $\mathbf{A} = \mathbf{E} \mathbf{D}_x \mathbf{E}^T
 :::
 ````
 `````
+
 ::::
 
 ## Exercises

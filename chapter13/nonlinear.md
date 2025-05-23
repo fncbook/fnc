@@ -44,7 +44,8 @@ In order to solve for as few unknowns as possible, we use a Chebyshev discretiza
 
 ``````{prf:algorithm} elliptic
 :label: function-elliptic
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-elliptic-julia
@@ -118,6 +119,7 @@ on the rectangle $[0,2.5] \times [0,1]$, with a zero Dirichlet condition on the 
 :::
 ````
 `````
+
 ::::
 
 ```{index} advection-diffusion equation
@@ -153,6 +155,7 @@ Here we solve it with a homogeneous Dirichlet condition on the square $[-1,1]^2$
 :::
 ````
 `````
+
 ::::
 
 

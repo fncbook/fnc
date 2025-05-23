@@ -98,7 +98,8 @@ Each pass of inverse iteration requires the solution of a linear system of equat
 
 ``````{prf:algorithm} inviter
 :label: function-inviter
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-inviter-julia
@@ -133,7 +134,8 @@ with the eigenvalues ordered as in {eq}`shiftorder`. Thus, the convergence is be
 
 ::::{prf:example} Convergence of inverse iteration 
 :label: demo-inviter-conv
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-inviter-conv-julia
@@ -152,6 +154,7 @@ with the eigenvalues ordered as in {eq}`shiftorder`. Thus, the convergence is be
 :::
 ```` 
 `````
+
 ::::
 
 ## Dynamic shifting
@@ -165,7 +168,8 @@ Let's analyze the resulting convergence. If the eigenvalues are ordered by dista
 
 ::::{prf:example} Dynamic shift strategy
 :label: demo-inviter-accel
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-inviter-accel-julia
@@ -184,6 +188,7 @@ Let's analyze the resulting convergence. If the eigenvalues are ordered by dista
 :::
 ```` 
 `````
+
 ::::
 
 There is a price to pay for this improvement. The matrix of the linear system to be solved, $(\mathbf{A}-s\mathbf{I}),$ now changes with each iteration. That means that we can no longer do just one LU factorization for the entire iteration. The speedup in convergence usually makes this tradeoff worthwhile, however.

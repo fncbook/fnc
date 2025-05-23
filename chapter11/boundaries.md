@@ -149,7 +149,8 @@ Our full implementation of the method of lines for {eq}`parabolicPDE`--{eq}`para
 
 ``````{prf:algorithm} parabolic
 :label: function-parabolic
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-parabolic-julia
@@ -202,6 +203,7 @@ Let's solve the heat equation $u_t=u_{xx}$ on $[-1,1]$, subject to the Dirichlet
 :::
 ````
 `````
+
 ::::
 
 ::::{prf:example} Heat equation with nonlinear source
@@ -234,6 +236,7 @@ One interpretation of this PDE is an exothermic chemical reaction whose rate inc
 :::
 ````
 `````
+
 ::::
 
 Finally, we return to the example of the Black–Scholes equation from {numref}`section-diffusion-blackscholes`. 
@@ -262,6 +265,7 @@ We solve the Black–Scholes PDE @bspde with initial condition $u(x,0) = \max\{0
 :::
 ````
 `````
+
 ::::
 
 ## Exercises

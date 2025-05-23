@@ -63,7 +63,7 @@ Given the vector $\mathbf{x}= \bigl[ 2 ,\, -3 ,\, 1 ,\, -1 \bigr]^T$, we have
     \| \mathbf{x} \|_1 &= 2 + 3 + 1 + 1 = 7.
 \end{align*}
 
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-norms-vector-julia
@@ -82,6 +82,7 @@ Given the vector $\mathbf{x}= \bigl[ 2 ,\, -3 ,\, 1 ,\, -1 \bigr]^T$, we have
 :::
 ```` 
 `````
+
 ::::
 
 :::{note}
@@ -229,7 +230,8 @@ A mnemonic for these is that the $\infty$ symbol extends horizontally while the 
 
 ::::{prf:example} Matrix norms
 :label: demo-norms-matrix
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-norms-matrix-julia
@@ -248,6 +250,7 @@ A mnemonic for these is that the $\infty$ symbol extends horizontally while the 
 :::
 ```` 
 `````
+
 ::::
 
 The geometric interpretation of the matrix 2-norm shown in @demo-norms-matrix, as the radius of the smallest circle (or sphere or hypersphere in higher dimensions) containing the images of all unit vectors, is not a practical means of computing the norm. Nor is there a simple formula like {eq}`mxinfnorm` or {eq}`mxonenorm` for it. The computation of the matrix 2-norm is discussed further in Chapter 7.

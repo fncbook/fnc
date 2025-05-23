@@ -29,7 +29,8 @@ x_2 = \frac{-b - \sqrt{b^2-4ac}}{2a}.
 ```
 (demo-stability-quadbad)= 
 ``````{prf:example} Instability of the quadratic formula
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-stability-quadbad-julia
@@ -59,7 +60,8 @@ We can confirm this conclusion by finding a different path that avoids subtracti
 
 ``````{prf:example} Stable alternative to the quadratic formula
 :label: demo-stability-quadgood
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-stability-quadgood-julia
@@ -118,7 +120,8 @@ Backward error is the difference between the original data and the data that exa
 
 ``````{prf:example} Backward error
 :label: demo-stability-roots
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-stability-roots-julia

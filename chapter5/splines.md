@@ -188,7 +188,8 @@ Collectively, {eq}`spline0asys`,  {eq}`spline0bsys`,  {eq}`spline1sys`,  {eq}`sp
 
 ``````{prf:algorithm} spinterp
 :label: function-spinterp
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-spinterp-julia
@@ -214,7 +215,8 @@ Collectively, {eq}`spline0asys`,  {eq}`spline0bsys`,  {eq}`spline1sys`,  {eq}`sp
 ## Conditioning and convergence
 ::::{prf:example} Cubic splines
 :label: demo-splines-splines
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-splines-splines-julia
@@ -233,6 +235,7 @@ Collectively, {eq}`spline0asys`,  {eq}`spline0bsys`,  {eq}`spline1sys`,  {eq}`sp
 :::
 ```` 
 `````
+
 ::::
 
 Besides having more smoothness than a piecewise linear interpolant, the not-a-knot cubic spline improves the order of accuracy to 4.

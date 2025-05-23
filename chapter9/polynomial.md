@@ -69,6 +69,7 @@ is of degree at most $n$ and satisfies the cardinality conditions {eq}`lagrangec
 
 ::::{prf:example} Lagrange cardinal polynomials
 :label: demo-polynomial-lagrange
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -88,6 +89,7 @@ is of degree at most $n$ and satisfies the cardinality conditions {eq}`lagrangec
 :::
 ````
 `````
+
 ::::
 
 Because they are a cardinal basis, the Lagrange polynomials lead to a simple expression for the polynomial interpolating the $(t_k,y_k)$ points.
@@ -190,7 +192,7 @@ Consider the problem of interpolating $\log(x)$ at nodes $1, 1.6, 1.9, 2.7, 3$. 
 
 $$ |f(x)-p(x)| \le \frac{1}{5} \left| \Phi(x) \right|.$$
 
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-polynomial-error-julia
@@ -209,6 +211,7 @@ $$ |f(x)-p(x)| \le \frac{1}{5} \left| \Phi(x) \right|.$$
 :::
 ````
 `````
+
 ::::
 
 For equispaced nodes, @theorem-polyinterp has an immediate consequence. 

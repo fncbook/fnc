@@ -21,7 +21,7 @@ It is straightforward to check that the two-step method LIAF, defined by
 
 is third-order accurate. Let's apply it to the ridiculously simple IVP $u'=u$, $u(0)=1$, whose solution is $e^t$. 
 
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-zs-LIAF-julia
@@ -40,6 +40,7 @@ is third-order accurate. Let's apply it to the ridiculously simple IVP $u'=u$, $
 :::
 ```` 
 `````
+
 ::::
 
 The source of the exponential growth in @demo-zs-LIAF is not hard to identify. Recall that we can rewrite {eq}`LIAF` as $\rho(\mathcal{Z})u_{i-1}=h \sigma(\mathcal{Z})u_{i-1}$ using the forward shift operator $\mathcal{Z}$:

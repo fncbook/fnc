@@ -98,7 +98,8 @@ A condition number of 1 is the best we can hope for—in that case, the relative
 
 ::::{prf:example} Matrix condition number
 :label: demo-condition-bound
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-condition-bound-julia

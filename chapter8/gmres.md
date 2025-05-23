@@ -75,7 +75,8 @@ A basic implementation of GMRES is given in {numref}`Function {number} <function
 
 ``````{prf:algorithm} gmres
 :label: function-gmres
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-gmres-julia
@@ -102,7 +103,8 @@ In @demo-subspace-unstable, we tried to implement the GMRES idea using the Krylo
 
 ::::{prf:example} GMRES
 :label: demo-gmres-intro
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-gmres-intro-julia
@@ -121,6 +123,7 @@ In @demo-subspace-unstable, we tried to implement the GMRES idea using the Krylo
 :::
 ```` 
 `````
+
 ::::
 
 Thanks to @theorem-subspace-krylovmult, minimization of $\|\mathbf{b}-\mathbf{A}\mathbf{x}\|$ over $\mathcal{K}_{m+1}$ includes minimization over the subset $\mathcal{K}_m$. Hence:
@@ -151,7 +154,8 @@ Restarting guarantees a fixed upper bound on the per-iteration cost of GMRES. Ho
 
 ::::{prf:example} Restarting GMRES 
 :label: demo-gmres-restart
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-gmres-restart-julia
@@ -170,6 +174,7 @@ Restarting guarantees a fixed upper bound on the per-iteration cost of GMRES. Ho
 :::
 ```` 
 `````
+
 ::::
 
 Restarting creates a tradeoff between the number of iterations and the speed per iteration. It's essentially impossible in general to predict the ideal restart location in any given problem, so one goes by experience and hopes for the best.

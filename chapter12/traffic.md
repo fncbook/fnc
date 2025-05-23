@@ -140,6 +140,7 @@ We solve the advection equation on $[-4,4]$ with periodic end conditions using t
 :::
 ````
 `````
+
 ::::
 
 
@@ -178,6 +179,7 @@ We solve for traffic flow using periodic boundary conditions.
 :::
 ````
 `````
+
 ::::
 
 

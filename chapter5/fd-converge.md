@@ -176,7 +176,7 @@ A different statement of the conclusion is that for a first-order formula, at mo
 ::::{prf:example} Roundoff error in finite differences
 :label: demo-fdconverge-round
 
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-fdconverge-round-julia

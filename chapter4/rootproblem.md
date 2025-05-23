@@ -34,7 +34,7 @@ $$J_m(\omega_{k,m}) = 0,$$
 
 which states that the drumhead is clamped around the rim. Bessel functions often appear in physical problems featuring radial symmetry, and tabulating approximations to the zeros of Bessel functions occupied numerous mathematician-hours before computers were on the scene.
 
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-rootproblem-bessel-julia
@@ -53,6 +53,7 @@ which states that the drumhead is clamped around the rim. Bessel functions often
 :::
 ```` 
 `````
+
 ::::
 
 ## Conditioning, error, and residual
@@ -90,7 +91,8 @@ Equivalently, {eq}`rootcondnum` is just the magnitude of the derivative of the i
 
 ::::{prf:example} Condition number of a rootfinding problem
 :label: demo-roots-cond
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-roots-cond-julia
@@ -109,6 +111,7 @@ Equivalently, {eq}`rootcondnum` is just the magnitude of the derivative of the i
 :::
 ```` 
 `````
+
 ::::
 
 ```{index} ! residual; of rootfinding

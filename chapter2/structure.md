@@ -107,7 +107,8 @@ Let's derive the LDL$^T$ factorization for a small example.
 
 ::::{prf:example} Symmetric LDL$^T$ factorization
 :label: demo-structure-symm
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-structure-symm-julia
@@ -126,6 +127,7 @@ Let's derive the LDL$^T$ factorization for a small example.
 :::
 ```` 
 `````
+
 ::::
 
 In practice we don't actually have to carry out any arithmetic in the upper triangle of $\mathbf{A}$ as we work, since the operations are always the mirror image of those in the lower triangle. As a result, it can be shown that LDL$^T$ factorization takes about half as much work as the standard LU.
@@ -225,7 +227,8 @@ The speed and stability of the Cholesky factorization make it the top choice for
 
 ::::{prf:example} Cholesky factorization
 :label: demo-structure-cholesky
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-structure-cholesky-julia
@@ -244,6 +247,7 @@ The speed and stability of the Cholesky factorization make it the top choice for
 :::
 ```` 
 `````
+
 ::::
 
 ## Exercises

@@ -221,7 +221,7 @@ Together, the matrices {eq}`diffmat12b` and {eq}`diffmat22` give second-order ap
 
 ``````{prf:algorithm} diffmat2
 :label: function-diffmat2
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-diffmat2-julia
@@ -245,6 +245,7 @@ Together, the matrices {eq}`diffmat12b` and {eq}`diffmat22` give second-order ap
 
 ::::{prf:example} Differentiation matrices
 :label: demo-diffmats-2nd
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -264,6 +265,7 @@ Together, the matrices {eq}`diffmat12b` and {eq}`diffmat22` give second-order ap
 :::
 ````
 `````
+
 ::::
 
 
@@ -319,7 +321,8 @@ The Chebyshev differentiation matrix is not sparse. There are compact formulas a
 
 ``````{prf:algorithm} diffcheb
 :label: function-diffcheb
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-diffcheb-julia
@@ -342,6 +345,7 @@ The Chebyshev differentiation matrix is not sparse. There are compact formulas a
 
 ::::{prf:example} Chebyshev differentiation matrices
 :label: demo-diffmats-cheb
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia

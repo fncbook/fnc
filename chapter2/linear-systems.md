@@ -70,7 +70,7 @@ In fact, when we encounter an expression such as $\mathbf{x} = \mathbf{A}^{-1} \
 ```{index} Julia; \\
 ```
 
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 As demonstrated in @demo-interp-vander, the backslash (the `\` symbol, not to be confused with the slash `/` used in web addresses) invokes a linear system solution. 
@@ -89,7 +89,8 @@ In Python, the `numpy.linalg.solve` function is used to solve linear systems.
 
 ::::{prf:example} Solving linear systems
 :label: demo-systems-backslash
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-systems-backslash-julia
@@ -108,6 +109,7 @@ In Python, the `numpy.linalg.solve` function is used to solve linear systems.
 :::
 ```` 
 `````
+
 ::::
 
 (section-linsys-triangular)=
@@ -198,7 +200,8 @@ Consider how to implement the sequential process implied by Equation {eq}`forwar
 
 ``````{prf:algorithm} forwardsub
 :label: function-forwardsub
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-forwardsub-julia
@@ -224,7 +227,8 @@ The implementation of backward substitution is much like forward substitution an
 
 ``````{prf:algorithm} backsub
 :label: function-backsub
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-backsub-julia
@@ -248,7 +252,8 @@ The implementation of backward substitution is much like forward substitution an
 
 ::::{prf:example} Triangular systems of equations
 :label: demo-systems-triangular
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-systems-triangular-julia
@@ -267,6 +272,7 @@ The implementation of backward substitution is much like forward substitution an
 :::
 ```` 
 `````
+
 ::::
 
 The example in @demo-systems-triangular is our first clue that linear system problems may have large condition numbers, making inaccurate solutions inevitable in floating-point arithmetic. We will learn how to spot such problems in {numref}`section-linsys-condition-number`. Before reaching that point, however, we need to discuss how to solve general linear systems, not just triangular ones.

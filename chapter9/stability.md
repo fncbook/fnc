@@ -12,6 +12,7 @@ With  barycentric interpolation available in the form of {numref}`Function {numb
 
 ::::{prf:example} Ill-conditioning in polynomial interpolation
 :label: demo-stability-equispaced
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -31,6 +32,7 @@ With  barycentric interpolation available in the form of {numref}`Function {numb
 :::
 ````
 `````
+
 ::::
 
 (section-stability-runge)=
@@ -50,6 +52,7 @@ While the dependence on $f$ is messy here, the error indicator $\Phi(x)$ can be 
 
 ::::{prf:example} Error indicator function for equispaced nodes
 :label: demo-stability-errfun
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -69,12 +72,14 @@ While the dependence on $f$ is messy here, the error indicator $\Phi(x)$ can be 
 :::
 ````
 `````
+
 ::::
 
 Two observations from the result of @demo-stability-errfun are important. First, $|\Phi|$ decreases exponentially at each fixed location in the interval (note that the spacing between curves is constant for constant increments of $n$). Second, $|\Phi|$ is larger at the ends of the interval than in the middle, by an exponentially growing factor. This gap is what can ruin the convergence of polynomial interpolation.
 
 ::::{prf:example} Runge phenomenon
 :label: demo-stability-runge
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -94,6 +99,7 @@ Two observations from the result of @demo-stability-errfun are important. First,
 :::
 ````
 `````
+
 ::::
 
 ```{index} ! Runge phenomenon
@@ -119,6 +125,7 @@ These are the projections onto the $x$-axis of $n$ equally spaced points on a un
 
 ::::{prf:example} Error indicator function for Chebyshev nodes
 :label: demo-stability-errcheb
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -138,11 +145,13 @@ These are the projections onto the $x$-axis of $n$ equally spaced points on a un
 :::
 ````
 `````
+
 ::::
 
 
 ::::{prf:example} Stability of interpolation with Chebyshev nodes
 :label: demo-stability-rungefix
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -162,6 +171,7 @@ These are the projections onto the $x$-axis of $n$ equally spaced points on a un
 :::
 ````
 `````
+
 ::::
 
 As a bonus, for Chebyshev nodes the barycentric weights are simple:
@@ -224,6 +234,7 @@ On the left, we use a log-log scale, which makes fourth-order algebraic converge
 :::
 ````
 `````
+
 ::::
 
 ## Exercises

@@ -175,7 +175,8 @@ An implementation of Newton's method for systems is given in {numref}`Function {
 
 ``````{prf:algorithm} newtonsys
 :label: function-newtonsys
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-newtonsys-julia
@@ -198,7 +199,8 @@ An implementation of Newton's method for systems is given in {numref}`Function {
 
 ::::{prf:example} Convergence of Newton's method for systems
 :label: demo-newtonsys-converge
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-newtonsys-converge-julia
@@ -217,6 +219,7 @@ An implementation of Newton's method for systems is given in {numref}`Function {
 :::
 ```` 
 `````
+
 ::::
 
 ## Exercises

@@ -83,7 +83,8 @@ If the singular values of $\mathbf{A}$ decrease sufficiently rapidly, then $\mat
 
 ::::{prf:example} Image compression
 :label: demo-dimreduce-hello
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-dimreduce-hello-julia
@@ -102,6 +103,7 @@ If the singular values of $\mathbf{A}$ decrease sufficiently rapidly, then $\mat
 :::
 ```` 
 `````
+
 ::::
 
 ## Capturing major trends
@@ -121,7 +123,8 @@ Clearly $0\le \tau_k \le 1$ and $\tau_k$ is non-decreasing as a function of $k$.
 
 ::::{prf:example} Dimension reduction in voting records
 :label: demo-dimreduce-voting
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-dimreduce-voting-julia
@@ -140,6 +143,7 @@ Clearly $0\le \tau_k \le 1$ and $\tau_k$ is non-decreasing as a function of $k$.
 :::
 ```` 
 `````
+
 ::::
 
 Not all data sets can be reduced effectively to a small number of dimensions, but as @demo-dimreduce-voting illustrates, in some cases reduction reveals information that corresponds to real-world understanding.

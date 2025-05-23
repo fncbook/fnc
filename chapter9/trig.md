@@ -80,7 +80,8 @@ The convergence of a trigonometric interpolant is spectral, i.e., exponential as
 ```
 ``````{prf:algorithm} triginterp
 :label: function-triginterp
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-triginterp-julia
@@ -103,6 +104,7 @@ The convergence of a trigonometric interpolant is spectral, i.e., exponential as
 
 ::::{prf:example} Trigonometric interpolation
 :label: demo-trig-interp
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -122,6 +124,7 @@ The convergence of a trigonometric interpolant is spectral, i.e., exponential as
 :::
 ````
 `````
+
 ::::
 
 ## Fast Fourier transform
@@ -184,6 +187,7 @@ $$
 
 ::::{prf:example} FFT 
 :label: demo-trig-fft
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -203,6 +207,7 @@ $$
 :::
 ````
 `````
+
 ::::
 
 The theoretical and computational aspects of Fourier analysis are vast and far-reaching. We have given only the briefest of introductions.

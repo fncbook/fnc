@@ -226,7 +226,8 @@ The condition number of a root can be arbitrarily large. In the extreme case of 
 
 ::::{prf:example} Conditioning of polynomial roots
 :label: demo-condition-roots
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-condition-roots-julia
@@ -245,6 +246,7 @@ The condition number of a root can be arbitrarily large. In the extreme case of 
 :::
 ```` 
 `````
+
 ::::
 
 ## Exercises

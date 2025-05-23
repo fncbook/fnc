@@ -70,7 +70,8 @@ An ODE may have higher derivatives of the unknown solution present. For example,
 
 ::::{prf:example} Solving an IVP
 :label: demo-basics-first
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-basics-first-julia
@@ -89,6 +90,7 @@ An ODE may have higher derivatives of the unknown solution present. For example,
 :::
 ```` 
 `````
+
 ::::
 
 ## Existence and uniqueness
@@ -97,7 +99,8 @@ There are simple IVPs that do not have solutions at all possible times.
 
 ::::{prf:example} Finite-time singularity
 :label: demo-basics-sing
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-basics-sing-julia
@@ -116,6 +119,7 @@ There are simple IVPs that do not have solutions at all possible times.
 :::
 ```` 
 `````
+
 ::::
 
 We can also produce an IVP that has more than one solution.
@@ -155,7 +159,8 @@ Numerical solutions of IVPs have errors, and those errors can be seen as perturb
 
 ::::{prf:example} Conditioning of an IVP
 :label: demo-basics-cond
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-basics-cond-julia
@@ -174,6 +179,7 @@ Numerical solutions of IVPs have errors, and those errors can be seen as perturb
 :::
 ```` 
 `````
+
 ::::
 
 In general, solutions can diverge from, converge to, or oscillate around the original trajectory in response to perturbations. We won't fully consider these behaviors and their implications for numerical methods again until a later chapter.

@@ -25,7 +25,7 @@ Observe that {numref}`Function {number} <function-rk4>` is used to find the star
 
 ``````{prf:algorithm} ab4
 :label: function-ab4
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-ab4-julia
@@ -48,7 +48,7 @@ Observe that {numref}`Function {number} <function-rk4>` is used to find the star
 
 ::::{prf:example} Convergence of Adams–Bashforth
 :label: demo-implicit-ab4
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-implicit-ab4-julia
@@ -67,6 +67,7 @@ Observe that {numref}`Function {number} <function-rk4>` is used to find the star
 :::
 ```` 
 `````
+
 ::::
 
 ## Implicit methods
@@ -87,7 +88,7 @@ An implementation of AM2 using {numref}`Function {number} <function-levenberg>` 
 
 ``````{prf:algorithm} am2
 :label: function-am2
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-am2-julia
@@ -117,7 +118,8 @@ At each time step in {numref}`Function {number} <function-am2>`, or any implicit
 
 ::::{prf:example} Stiffness
 :label: demo-implicit-stiff
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-implicit-stiff-julia
@@ -136,6 +138,7 @@ At each time step in {numref}`Function {number} <function-am2>`, or any implicit
 :::
 ```` 
 `````
+
 ::::
 
 Although the result of @demo-implicit-stiff may seem counter-intuitive, there is no contradiction. A fourth-order explicit formula is more accurate than a second-order implicit one, in the limit $h\to 0$. But there is another limit to consider, $t\to \infty$ with $h$ fixed, and in this one the implicit method wins. 

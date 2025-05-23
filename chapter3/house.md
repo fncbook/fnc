@@ -104,7 +104,8 @@ The QR factorization is computed by using successive Householder reflections to 
 
 ::::{prf:example} Householder QR factorization
 :label: demo-house-qr
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-house-qr-julia
@@ -123,6 +124,7 @@ The QR factorization is computed by using successive Householder reflections to 
 :::
 ```` 
 `````
+
 ::::
 
 You may be wondering what happened to $\mathbf{Q}$ in @demo-house-qr. Each Householder reflector is orthogonal but not full-size. We have to pad it out to represent algebraically the fact that a block of the first rows is left alone. Given a reflector $\mathbf{P}_k$ that is of square size $m-k+1$, we define
@@ -153,7 +155,8 @@ The algorithm we have described is encapsulated in {numref}`Function {number} <f
 
 ``````{prf:algorithm} qrfact
 :label: function-qrfact
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-qrfact-julia

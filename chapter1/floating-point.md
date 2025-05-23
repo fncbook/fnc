@@ -132,7 +132,8 @@ We often round this value down to an integer, but it does make sense to speak of
 
 (demo-float-accuracy)= 
 ::::{prf:example} Absolute and relative accuracy
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-float-accuracy-julia
@@ -170,7 +171,8 @@ We often speak of double-precision floating-point numbers as having about 16 dec
 
 ::::{prf:example} Floating-point representation
 :label: demo-float-double
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-float-double-julia
@@ -189,6 +191,7 @@ We often speak of double-precision floating-point numbers as having about 16 dec
 :::
 ```` 
 `````
+
 ::::
 
 Our theoretical description of $\float$ did not place limits on the exponent, but in double precision its range is limited to $-1022\le n \le 1023$. Thus, the largest number is just short of $2^{1024}\approx 2\times 10^{308}$, which is enough in most applications. Results that should be larger are said to *overflow* and will actually result in the value `Inf`. Similarly, the smallest positive number is $2^{-1022}\approx 2\times 10^{-308}$, and smaller values are said to *underflow* to zero.[^denormalized]
@@ -216,7 +219,8 @@ Hence the relative error in arithmetic is essentially the same as for the floati
 
 ::::{prf:example} Floating-point arithmetic oddity
 :label: demo-float-arithmetic
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-float-arithmetic-julia
@@ -235,6 +239,7 @@ Hence the relative error in arithmetic is essentially the same as for the floati
 :::
 ```` 
 `````
+
 ::::
 
 There are two ways to look at @demo-float-arithmetic. On one hand, its two versions of the result differ by less than $1.2\times 10^{-16}$, which is very small — not just in everyday terms, but with respect to the operands, which are all close to 1 in absolute value. On the other hand, the difference is as large as the exact result itself! We formalize and generalize this observation in the next section. In the meantime, keep in mind that exactness cannot be taken for granted in floating-point computation. 

@@ -91,7 +91,8 @@ Vectors and matrices are integral to scientific computing. All modern languages 
 
 ::::{prf:example} Matrix operations
 :label: demo-matrices
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-matrices-julia
@@ -110,6 +111,7 @@ Vectors and matrices are integral to scientific computing. All modern languages 
 :::
 ```` 
 `````
+
 ::::
 
 

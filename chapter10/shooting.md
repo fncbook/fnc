@@ -12,6 +12,7 @@ This is the idea behind the **shooting method**. Imagine adjusting your aiming p
 
 ::::{prf:example} Naive shooting
 :label: demo-shooting-naive
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -31,6 +32,7 @@ This is the idea behind the **shooting method**. Imagine adjusting your aiming p
 :::
 ````
 `````
+
 ::::
 
 We can do much better than trial-and-error for the unknown part of the initial state. As usual, we can rewrite the ODE $u''(x) = \phi(x,u,u')$ in first-order form as
@@ -61,7 +63,8 @@ Our implementation of shooting is given in {numref}`Function {number} <function-
 
 ``````{prf:algorithm} shoot
 :label: function-shoot
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-shoot-julia
@@ -84,6 +87,7 @@ Our implementation of shooting is given in {numref}`Function {number} <function-
 
 ::::{prf:example} Shooting solution of a BVP
 :label: demo-shooting-mems
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -103,6 +107,7 @@ Our implementation of shooting is given in {numref}`Function {number} <function-
 :::
 ````
 `````
+
 ::::
 
 ## Instability

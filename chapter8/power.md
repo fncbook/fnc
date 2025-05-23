@@ -12,6 +12,7 @@ Given that matrix-vector multiplication is fast for sparse matrices, let's see w
 
 ::::{prf:example} Power iteration
 :label: demo-power-one
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -31,6 +32,7 @@ Given that matrix-vector multiplication is fast for sparse matrices, let's see w
 :::
 ````
 `````
+
 ::::
 
 There was a little cheating in @demo-power-one to make the story come out neatly (specifically, the normalization step after creating a random matrix). But it illustrates an important general fact that we investigate now.
@@ -77,13 +79,13 @@ Let $\mathbf{z}=\mathbf{V}^{-1}\mathbf{x}$, and recall that $\mathbf{D}$ is a di
 
 Since $\lambda_1$ is dominant, we conclude that if $z_1\neq 0$,
 
-:::{math}
+```{math}
 :label: poweriterconverge
 \left\| \frac{ \mathbf{A}^k\mathbf{x}}{\lambda_1^k}
 - z_1\mathbf{v}_1\right\| \le |z_2|\cdot\left|\frac{\lambda_2}{\lambda_1}\right| ^k
 \| \mathbf{v}_{2} \| + \cdots +  |z_n|\cdot\left|\frac{\lambda_n}{\lambda_1}\right|^k
 \| \mathbf{v}_{n} \| \rightarrow 0 \text{ as $k\rightarrow \infty$}.
-:::
+```
 
 That is, $\mathbf{A}^k\mathbf{x}$ eventually is close to close to a scalar multiple of the dominant eigenvector.[^zeromeasure]
 
@@ -147,7 +149,8 @@ where $r_j=\lambda_j/\lambda_1$ and the $b_j$ are constants. By assumption {eq}`
 
 ``````{prf:algorithm} poweriter
 :label: function-poweriter
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-poweriter-julia
@@ -217,6 +220,7 @@ The error in the power iteration eigenvalue estimates $\beta_k$ is reduced asymp
 
 ::::{prf:example} Convergence of power iteration
 :label: demo-power-iter
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -236,6 +240,7 @@ The error in the power iteration eigenvalue estimates $\beta_k$ is reduced asymp
 :::
 ````
 `````
+
 ::::
 
 The practical utility of {eq}`poweriterconv` is limited: if we knew $\lambda_1$ and $\lambda_2$, we wouldn't be running the power iteration in the first place! Sometimes it's possible to find estimates of or bounds on the ratio. If nothing else, though, it is useful to know that linear convergence is expected at a rate based solely on the dominant eigenvalues. 

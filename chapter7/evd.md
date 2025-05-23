@@ -152,7 +152,8 @@ If the $n\times n$ matrix $\mathbf{A}$ has $n$ distinct eigenvalues, then $\math
 
 ::::{prf:example}  Eigenvalues and eigenvectors 
 :label: demo-evd-eigen
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-evd-eigen-julia
@@ -171,6 +172,7 @@ If the $n\times n$ matrix $\mathbf{A}$ has $n$ distinct eigenvalues, then $\math
 :::
 ```` 
 `````
+
 ::::
 
 ## Similarity and matrix powers
@@ -276,7 +278,8 @@ As we will see in {numref}`section-matrixanaly-symm-eig`, hermitian and real sym
 
 ::::{prf:example} Eigenvalue conditioning
 :label: demo-evd-bauerfike
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-evd-bauerfike-julia
@@ -295,6 +298,7 @@ As we will see in {numref}`section-matrixanaly-symm-eig`, hermitian and real sym
 :::
 ```` 
 `````
+
 ::::
 
 ## Computing the EVD
@@ -307,7 +311,8 @@ If the eigenvalues have different complex magnitudes, then as $k\to\infty$ the e
 
 ::::{prf:example} Francis QR iteration
 :label: demo-evd-francisqr
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-evd-francisqr-julia
@@ -326,6 +331,7 @@ If the eigenvalues have different complex magnitudes, then as $k\to\infty$ the e
 :::
 ```` 
 `````
+
 ::::
 
 

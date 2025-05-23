@@ -61,7 +61,8 @@ A basic implementation of Euler's method is shown in {numref}`Function {number} 
 
 ``````{prf:algorithm} euler
 :label: function-euler
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-euler-julia
@@ -258,7 +259,8 @@ We could restate @theorem-euler-onestepGTE as saying that the global error has t
 
 ::::{prf:example} Convergence of Euler's method
 :label: demo-euler-converge
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-euler-converge-julia
@@ -277,6 +279,7 @@ We could restate @theorem-euler-onestepGTE as saying that the global error has t
 :::
 ```` 
 `````
+
 ::::
 
 Euler's method is the ancestor of the two major families of IVP methods presented in this chapter. Before we describe them, though, we generalize the initial-value problem itself in a crucial way.

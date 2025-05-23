@@ -138,6 +138,7 @@ We solve the wave equation {eq}`wavefirst2` with speed $c=2$, subject to {eq}`wa
 :::
 ````
 `````
+
 ::::
 
 ## Variable speed

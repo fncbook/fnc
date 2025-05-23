@@ -40,7 +40,7 @@ This is our first example of an iterative algorithm that never quite gets to the
 ::::{prf:example} Fixed-point iteration
 :label: demo-fp-spiral
 
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-fp-spiral-julia
@@ -130,7 +130,7 @@ Linear convergence is marked by an approximate reduction of the error at each it
 ::::{prf:example} Convergence of fixed-point iteration
 :label: demo-fp-converge
 
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-fp-converge-julia

@@ -31,7 +31,8 @@ Polynomials are the obvious first candidate to serve as interpolating functions.
 
 ::::{prf:example} Trouble in polynomial interpolation
 :label: demo-interpolation-global
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-interpolation-global-julia
@@ -50,6 +51,7 @@ Polynomials are the obvious first candidate to serve as interpolating functions.
 :::
 ```` 
 `````
+
 ::::
 
 
@@ -74,7 +76,8 @@ Usually we designate in advance a maximum degree $d$ for each polynomial piece o
 
 ::::{prf:example} Piecewise polynomial interpolation
 :label: demo-interpolation-pwise
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-interpolation-pwise-julia
@@ -93,6 +96,7 @@ Usually we designate in advance a maximum degree $d$ for each polynomial piece o
 :::
 ```` 
 `````
+
 ::::
 
 We will consider piecewise linear interpolation in more detail in {numref}`section-localapprox-pwlin`, and we look at piecewise cubic interpolation in {numref}`section-localapprox-splines`.
@@ -186,7 +190,8 @@ Since $|d_k|\le \|\mathbf{d}\|_\infty$ for all $k$, this finishes {eq}`interp-co
 
 ::::{prf:example} Conditioning of interpolation
 :label: demo-interp-cond
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-interp-cond-julia
@@ -205,6 +210,7 @@ Since $|d_k|\le \|\mathbf{d}\|_\infty$ for all $k$, this finishes {eq}`interp-co
 :::
 ```` 
 `````
+
 ::::
 
 ## Exercises

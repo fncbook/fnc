@@ -212,7 +212,7 @@ Our implementation of linear collocation is {numref}`Function {number} <function
 ``````{prf:algorithm} bvplin
 :label: function-bvplin
 
-`````{tab-set} 
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #function-bvplin-julia
@@ -260,6 +260,7 @@ Its exact solution is $u(x) = e^{\sin x}$.
 :::
 ````
 `````
+
 ::::
 
 ## Accuracy and stability
@@ -295,6 +296,7 @@ with exact solution $\sinh(\lambda x)/\sinh(\lambda) - 1$.
 :::
 ````
 `````
+
 ::::
 
 If we write the solution $\mathbf{u}$ of Equation {eq}`fdlinbc` as the exact solution minus an error vector $\mathbf{e}$, i.e., $\mathbf{u} = \hat{\mathbf{u}} - \mathbf{e}$, we obtain

@@ -93,7 +93,8 @@ as $\epsilon\to 0$. The conclusion is that a good estimate of an eigenvector bec
 
 ::::{prf:example} Rayleigh quotient
 :label: demo-symm-eig-rayleigh
-`````{tab-set} 
+
+`````{tab-set}
 ````{tab-item} Julia
 :sync: julia
 :::{embed} #demo-symm-eig-rayleigh-julia
@@ -112,6 +113,7 @@ as $\epsilon\to 0$. The conclusion is that a good estimate of an eigenvector bec
 :::
 ```` 
 `````
+
 ::::
 
 ## Definite, semidefinite, and indefinite matrices
