@@ -118,10 +118,10 @@ Linearity greatly simplifies the analysis of interpolation. To begin with, for a
 
 [^startzero]: To be precise, we are using $\mathbf{e}_k$ to mean column number $k+1$ from an $(n+1)\times (n+1)$ identity matrix, since in linear algebra we start indexing at 1.
 
-:::{math}
+```{math}
 :label: interp-cardinal1
 \cI( \mathbf{y} ) = \cI \left( \sum_{k=0}^n y_k \mathbf{e}_k  \right) = \sum_{k=0}^n y_k \cI( \mathbf{e}_k ).
-:::
+```
 
 The functions appearing within the sum above have particular significance. 
 
@@ -135,10 +135,10 @@ A {term}`cardinal function` $\phi_k$ for a node set $t_0,\ldots,t_n$ is the func
 
 For any set of $n+1$ nodes, there are $n+1$ cardinal functions $\phi_0,\ldots,\phi_n$, each singling out a different interpolation node in the set. We finish {eq}`interp-cardinal1` by writing
 
-:::{math}
+```{math}
 :label: interp-cardinal2
 \cI( \mathbf{y} ) = \sum_{k=0}^n y_k \phi_k.
-:::
+```
 
 In the following result we use the function infinity-norm or max-norm defined by
 

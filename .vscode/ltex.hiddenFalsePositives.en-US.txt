@@ -48,3 +48,22 @@
 {"rule":"MORFOLOGIK_RULE_EN_US","sentence":"\\Q:label: \\E.*$"}
 {"rule":"PLURAL_VERB_AFTER_THIS","sentence":"^\\QSuppose, after computing the step suggested by the linear model, we ask a binary question: Would taking that step improve our situation?\\E$"}
 {"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QThe adjoint or hermitian of a matrix \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q is given by \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q, where the bar denotes taking a complex conjugate elementwise.^conj If \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q is real, then \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q.\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\QCorresponding to any function  \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q defined on the rectangle is an \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q matrix \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q defined by collecting the values of \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q at the points in the grid.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q(section-twodim-tensorprod)=\nTensor-product discretizations\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\QCorresponding to any function \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q defined on the rectangle is an \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q matrix \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q defined by collecting the values of \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q at the points in the grid.\\E$"}
+{"rule":"NUMBERS_IN_WORDS","sentence":"^\\Q:::{math} :label: mems2d \\Delta u - \\frac{\\lambda}{(u+1)^2} = 0.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qwhich is also periodic on the rectangle.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QDefine the unvec function as the inverse of vec:\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qconverts a vector of unknowns (i.e., interior values) into a matrix of grid values, including the boundary values.\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\Q::::{prf:definition} vec and unvec operations :label: definition-diffadv-vec Let \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q be an \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q matrix.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qis \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q, and \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q is analogous but of size \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qreverses the transformation, which is needed after the time derivative is computed on the full grid.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qabsolute stability.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qadjacency matrix.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qadjoint.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qadvection equation.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qalgebraic convergence.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qalgorithm.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qasymptotic.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qbackward error.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qbackward substitution.\\E$"}

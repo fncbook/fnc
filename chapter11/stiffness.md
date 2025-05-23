@@ -23,30 +23,30 @@ Why should the model equation $y'=\lambda y$ of absolute stability have wide rel
 
 Consider a general vector nonlinear system 
 
-:::{math}
+```{math}
 :label: stiffsystem
 \mathbf{u}'=\mathbf{f}(t,\mathbf{u}).
-:::
+```
 
 The key to making a connection with absolute stability is to look not at an exact solution but to *perturbations* of one. Such perturbations always exist in real numerical solutions, such as those due to roundoff error, for example. But if we assume the perturbations are tiny, then we can use linear approximations to describe their evolution. If we conclude from such an approximation that the perturbation may grow without bound, then we must seriously question the value of the numerical solution.
 
 Let's introduce more precision into the discussion. Suppose that $\hat{\mathbf{u}}(t)$ is an exact solution that we wish to track, and that a perturbation has pushed us to a nearby solution curve $\hat{\mathbf{u}}(t) + \mathbf{v}(t)$. Substituting this solution into the governing ODE and appealing to a multidimensional Taylor series, we derive
 
-:::{math}
+```{math}
 \begin{split}
 [\hat{\mathbf{u}}(t) + \mathbf{v}(t)]' &= \mathbf{f}\bigl(t,\hat{\mathbf{u}}(t) + \mathbf{v}(t)\bigr), \\
 \hat{\mathbf{u}}'(t) + \mathbf{v}'(t) &= \mathbf{f}\left(t, \hat{\mathbf{u}}(t)\right) + \mathbf{J}(t) \mathbf{v}(t) + O\bigl( \|\mathbf{v}(t)\|^2 \bigr).
 \end{split}
-:::
+```
 
 ```{index} Jacobian matrix
 ```
 We have introduced the Jacobian matrix $\mathbf{J}$, with entries
 
-:::{math}
+```{math}
 :label: ODEjacobian
 J_{ij} = \frac{\partial f_i}{\partial u_j}(t,\hat{\mathbf{u}}(t)).
-:::
+```
 
 By dropping the higher-order terms, which are negligible at least initially, we derive a linear ODE for the evolution of the perturbation. 
 
@@ -57,10 +57,10 @@ By dropping the higher-order terms, which are negligible at least initially, we 
 :label: definition-odelinearization
 A **linearization** of system {eq}`stiffsystem` at an exact solution $\hat{\mathbf{u}}(t)$ is
 
-:::{math}
+```{math}
 :label: ODElinearization
 \mathbf{v}'(t) = \mathbf{J}(t) \mathbf{v}(t),
-:::
+```
 
 where $\mathbf{v}(t)$ is a perturbation to the exact solution, and $\mathbf{J}$ is the Jacobian matrix {eq}`ODEjacobian`.
 ::::
@@ -72,18 +72,18 @@ where $\mathbf{v}(t)$ is a perturbation to the exact solution, and $\mathbf{J}$ 
 :label: example-stiffness-oregon
 The **Oregonator** is a well-known ODE system modeling a chemical oscillator and is given by
   
-:::{math}
+```{math}
 :label: oregonator
 \begin{split}
 u_1'  & = s[u_2(1-u_1) + u_1(1-q u_1)], \\
 u_2'  & = s^{-1}(u_3-u_2-u_1u_2),      \\
 u_3'  & = w(u_1-u_3),
 \end{split}
-:::
+```
 
 where $s$, $q$, and $w$ are constants. Linearization about an exact (albeit unknown) solution $\hat{\mathbf{u}}(t)$ leads to the Jacobian
 
-:::{math}
+```{math}
 :label: oregonator-jac
 \mathbf{J} (t) =
 \begin{bmatrix}
@@ -91,16 +91,16 @@ where $s$, $q$, and $w$ are constants. Linearization about an exact (albeit unkn
   -\hat{u}_2/s          & -(1+\hat{u}_1)/s & 1/s           \\
   w                  & 0             & -w
 \end{bmatrix}.
-:::
+```
 ::::
 
 ## Freezing time
 
 While {eq}`ODElinearization` is linear, the Jacobian matrix in it is time-dependent, which makes analysis difficult. If a perturbation is introduced at a moment $t=t_\star$, we freeze the Jacobian there and consider
 
-:::{math}
+```{math}
 \mathbf{v}'=\mathbf{A}\mathbf{v}, \quad \mathbf{A}=\mathbf{J}(t_\star).
-:::
+```
 
 This equation is of the type we used in {numref}`section-diffusion-absstab` to discuss the absolute stability of IVP solvers. This suggests the following.
 
@@ -259,10 +259,10 @@ The equation $u'=u^2-u^3$ is a simple model for combustion of a flame ball in mi
 :label: problem-stiffness-vanderpol
 The [van der Pol equation*](wiki:Van_der_Pol_oscillator) is a much-studied nonlinear oscillator given by
 
-:::{math}
+```{math}
 :label: vanderpol
 y'' - \mu(1-y^2)y' + y = 0,
-:::
+```
 
 where $\mu\ge 1$ is a constant.
 

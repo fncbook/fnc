@@ -3,16 +3,17 @@ numbering:
   enumerator: 12.1.%s
 ---
 (section-advection-traffic)=
+
 # Traffic flow
 
 Have you ever been driving on a highway when you suddenly came upon a traffic jam? Maybe you had to brake harder than you would like to admit, endured a period of bumper-to-bumper progress, and experienced a much more gradual emergence from dense traffic than the abrupt entry into it. The mathematics of this phenomenon are well understood.
 
 Consider a one-dimensional road extending in the $x$ direction. We represent the vehicles by a continuous density function $\rho(x)$.  The flow rate or [flux](wiki:Flux) of vehicles, expressed as the number of cars per unit time crossing a fixed point on the road, is denoted by $q$. We assume that this flux depends on the local density of cars. It's reasonable to suppose that the flux will be zero when $\rho=0$ (no cars), reach a maximum $q_m$ at some $\rho=\rho_m$, and approach zero again as the density approaches a critical density $\rho_c$. These conditions are met by the model
 
-:::{math}
+```{math}
 :label: trafficQ
 Q_0(\rho) = \frac{4 q_m \rho_m \rho (\rho-\rho_c) (\rho_m-\rho_c)}{[\rho (\rho_c-2 \rho_m)+\rho_c \rho_m]^2}.
-:::
+```
 
 Observations ({cite}`whithamLinearNonlinear1974`, Chapter 3) suggest that good values for a three-lane highway are $\rho_c = 1080$ vehicles per km, $\rho_m=380$ vehicles per km, and $q_m=4500$ vehicles per hour. In addition, we want to account for the fact that drivers anticipate slowing down or speeding up when they perceive changes in density, and therefore use 
 
@@ -26,6 +27,7 @@ for a small $\epsilon > 0$.
 
 ```{index} ! conservation law
 ```
+
 *Conservation laws* play a major role in science and engineering. They are typically statements that matter, energy, momentum, or some other meaningful quantity cannot be created or destroyed. In one dimension they take the form
 
 ```{math}
@@ -42,10 +44,10 @@ u_t + Q'(u) u_x = 0.
 
 For the particular $Q_0(\rho)$ for traffic flow, we arrive at the evolutionary PDE
 
-:::{math}
+```{math}
 :label: trafficpde
   \rho_t + Q_0'(\rho) \rho_x = \epsilon \rho_{xx}.
-:::
+```
 
 Note that $Q_0'$ has the dimensions of (cars per time) over (cars per length), or length over time. We recognize the first and last terms as indicative of diffusion, but the middle term has a different effect. A similar term appears in the Black–Scholes equation. 
 
@@ -60,10 +62,10 @@ Let's momentarily consider a simpler, more fundamental PDE.
 :label: definition-advectionequation
 The {term}`advection equation` in one dimension is
 
-:::{math}
+```{math}
 :label: advectpde
   u_t + c u_x = 0,
-:::
+```
 
 where $c$ is constant.
 ::::
@@ -101,7 +103,7 @@ Keep in mind that $c$ is a velocity, not a speed: if $c>0$, solutions travel rig
 
 We can solve {eq}`advectpde` by the method of lines as in [Chapter 11](../diffusion/overview). We need the second-order first-derivative matrix for periodic end conditions,
 
-:::{math}
+```{math}
 :label: trafficdiffmat
   \mathbf{D}_x =
  \frac{1}{2h}
@@ -112,11 +114,11 @@ We can solve {eq}`advectpde` by the method of lines as in [Chapter 11](../diffus
       & & -1 & 0 & 1 \\
       1 & & & -1 & 0
     \end{bmatrix}.
-  :::
+```
 
 This matrix is returned by {numref}`Function {number} <function-diffper>`.
 
-::::{prf:example} Advection equation
+``````{prf:example} Advection equation
 :label: demo-traffic-advection
 
 We solve the advection equation on $[-4,4]$ with periodic end conditions using the method of lines.
@@ -139,10 +141,10 @@ We solve the advection equation on $[-4,4]$ with periodic end conditions using t
 :::{embed} #demo-traffic-advection-python
 :::
 ````
+
 `````
 
-::::
-
+``````
 
 If you look carefully at @demo-traffic-advection, you'll notice that we used the time integrator `RK4`, a nonstiff method. As we will see later in this chapter, the pure advection equation is not inherently stiff.
 
@@ -153,7 +155,7 @@ If you look carefully at @demo-traffic-advection, you'll notice that we used the
 
 Returning to the traffic flow PDE {eq}`trafficpde`, we can interpret the conservation law as advection at velocity $Q_0'(\rho)$.  The dependence of velocity on the solution is different from the linear PDE {eq}`advectpde` and is the key to the peculiar behavior of traffic jams. In particular, the velocity is low at high density, and higher at low density.  The term on the right side of {eq}`trafficpde` provides a bit of diffusion, and the parameter $\epsilon$ determines the balance between the two effects—advection effects dominate if $\epsilon$ is small.
 
-Exact solutions of {eq}`trafficpde` are much harder to come by than for the standard advection equation, but the method of lines is still effective. 
+Exact solutions of {eq}`trafficpde` are much harder to come by than for the standard advection equation, but the method of lines is still effective.
 
 ::::{prf:example} Traffic flow model
 :label: demo-traffic-solve
@@ -182,15 +184,12 @@ We solve for traffic flow using periodic boundary conditions.
 
 ::::
 
-
-
 ```{index} shock wave
 ```
 
 The phenomenon in the second plot of @demo-traffic-solve is called a *shock wave*. The underlying mathematics is not much different from the shock wave that comes off of the wing of a supersonic aircraft in the form of a sonic boom, or from cresting waves under certain conditions in the ocean. In the absence of diffusion ($\epsilon=0$), the shock becomes a jump discontinuity in the solution, which breaks down both the finite differences and the original PDE, requiring different approaches. For many applications, the addition of a small amount of diffusion is appropriate and simple. However, we will first try to come to terms with pure advection in a linear problem.
 
 ## Exercises
-
 
 ``````{exercise}
 :label: problem-traffic-backward

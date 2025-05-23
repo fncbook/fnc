@@ -209,9 +209,9 @@ Hence the condition number for the problem $f(a)=r_1$ is
 
 where in the last step we used the quadratic formula: 
 
-:::{math}
+```{math}
 |2ar_1 + b | = \left| \sqrt{b^2-4ac} \, \right| = |a(r_1 - r_2)|.
-:::
+```
 
 Based on {eq}`rootcond1`, we can expect poor conditioning in the rootfinding problem if and only if $|r_1| \gg |r_1-r_2|$. Similar conclusions apply for $r_2$ and for variations with respect to the coefficients $b$ and $c$.
 ````

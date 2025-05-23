@@ -32,10 +32,10 @@ where $\mathbf{y}(t)=\mathbf{V}^{-1}\mathbf{u}(t)$. Because $\mathbf{D}$ is diag
 
 The diagonalization argument suggests that we can look at the scalar problems 
 
-:::{math}
+```{math}
 :label: absstabmodel
 y' = \lambda y, \quad y(0)=1,
-:::
+```
 
 arising from the eigenvalues. These eigenvalues may not be real numbers, so in this section, $i$ stands for the imaginary unit, not an integer index. If we write $\lambda$ in real and imaginary parts as $\lambda=\alpha + i\beta$, then by Euler's identity, the exact solution of {eq}`absstabmodel` has magnitude
 
@@ -190,10 +190,10 @@ Now we return to the semidiscretization {eq}`heatMOL` of the heat equation, whic
 
 The matrix $\mathbf{D}_{xx}$ occurring in {eq}`heatMOL` for semidiscretization of the periodic heat equation has eigenvalues that can be found explicitly. Assuming that $x\in[0,1)$ (with periodic boundary conditions), for which $h=1/m$, then the eigenvalues are (see @problem-absstab-d2eigs)
 
-:::{math}
+```{math}
 :label: D2eigs
 \lambda_j =  -4m^2 \sin^2 \left( \frac{j\pi}{m} \right), \qquad j = 0,\ldots,m-1.   
-:::
+```
 
 This result agrees with the observation in @demo-absstab-regions that the eigenvalues are real and negative. Furthermore, they lie within the interval $[-4m^2,0]$. In Euler time integration, this implies that $-4\tau m^2\ge -2$, or $\tau\ge 1/(2m^2)=O(m^{-2})$. For backward Euler, there is no time step restriction, and we say that backward Euler is unconditionally stable for this problem.
 

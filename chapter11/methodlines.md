@@ -32,10 +32,10 @@ Left: A function whose values are the same at the endpoints of an interval does 
 
 As a reminder, we use $\hat{u}$ when we specifically refer to the exact solution of the PDE. In order to avoid carrying along redundant information about the function, we use $x_i = ih$ only for $i=0,\ldots,m-1$, where $h=1/m$, and it's understood that a reference to $x_m$ is silently translated to one at $x_0$. More generally, we have the identity
 
-:::{math}
+```{math}
 :label: periodicmod
   \hat{u}(x_i,t) = \hat{u}\bigl(x_{(i \bmod{m})},t \bigr)
-:::
+```
 
 for the exact solution $\hat{u}$ at any value of $i$.
 
@@ -53,7 +53,7 @@ $$
 
 This step is called **semidiscretization**, since space is discretized but time is not. As in [Chapter 10](../bvp/overview.md), we will replace $u_{xx}$ with multiplication of $\mathbf{u}$ by a differentiation matrix $\mathbf{D}_{xx}$. The canonical choice is the three-point finite-difference formula {eq}`centerFD22`, which in light of the periodicity {eq}`periodicmod` leads to 
 
-:::{math}
+```{math}
 :label: heatFD22
 \mathbf{D}_{xx} = \frac{1}{h^2}
   \begin{bmatrix}
@@ -63,7 +63,7 @@ This step is called **semidiscretization**, since space is discretized but time 
   & & 1 & -2 & 1 \\
   1 &  & & 1 & -2
   \end{bmatrix}.
-:::
+```
 
 Note well how the first and last rows have elements that "wrap around" from one end of the domain to the other by periodicity. Because we will be using this matrix quite a lot, we create {numref}`Function {number} <function-diffper>` to compute it, as well as the corresponding second-order first derivative matrix $\mathbf{D}_x$ for periodic end conditions.
 
@@ -93,10 +93,10 @@ Note well how the first and last rows have elements that "wrap around" from one 
 
 The PDE $u_t=u_{xx}$ is now approximated by the semidiscrete problem
 
-:::{math}
+```{math}
 :label: heatMOL
   \frac{d \mathbf{u}(t)}{d t} = \mathbf{D}_{xx} \mathbf{u}(t),
-:::
+```
 
 which is simply a linear, constant-coefficient system of *ordinary* differential equations. Given the initial values $\mathbf{u}(0)$ obtained from $u(x_i,0)$, we have an initial-value problem that we already know how to solve!
 
@@ -110,10 +110,10 @@ Semidiscretization is often called the **method of lines**. Despite the name, it
 Suppose we solve {eq}`heatMOL` using the Euler IVP integrator {eq}`euler1` from {numref}`section-ivp-euler` (and also AB1 from {numref}`section-ivp-multistep`). We select a time step $\tau$ and discrete times $t_j=j\tau$, $j=0,1,\ldots,n$. We can discretize the vector $\mathbf{u}$ in time as well to get a sequence $\mathbf{u}_j \approx \mathbf{u}(t_j)$ for varying $j$. (Remember the distinction in notation between $\mathbf{u}_j$, which is a vector, and $u_j$, which is a single element of a vector.) 
 
 Thus, a fully discrete method for the heat equation is 
-:::{math}
+```{math}
 :label: Eulerxx
 \mathbf{u}_{j+1} = \mathbf{u}_j + \tau ( \mathbf{D}_{xx} \mathbf{u}_j) = (\mathbf{I} + \tau \mathbf{D}_{xx} ) \mathbf{u}_j.
-:::
+```
 ::::
 
 ::::{prf:example} Forward Euler for the heat equation
@@ -147,13 +147,13 @@ The method in {numref}`Example {number} <example-methodlines-heatFE>` and @demo-
 :label: example-methodlines-heatBE
 An alternative time discretization of {eq}`heatMOL` is to use the backward Euler (AM1) method, resulting in
 
-:::{math}
+```{math}
 :label: BExx
 \begin{split}
     \mathbf{u}_{j+1} &= \mathbf{u}_j + \tau (\mathbf{D}_{xx} \mathbf{u}_{j+1})\\
     (\mathbf{I} - \tau \mathbf{D}_{xx}) \mathbf{u}_{j+1} &= \mathbf{u}_j.
 \end{split}
-:::
+```
 
 Because backward Euler is an implicit method, a linear system must be solved for $\mathbf{u}_{j+1}$ at each time step. 
 ::::
@@ -245,11 +245,11 @@ In @demo-methodlines-auto, as $t\to \infty$ the solution $u(x,t)$ approaches a v
 :label: problem-methodlines-cranknicolson
 ✍ Apply the trapezoid IVP formula (AM2 in @table-adams) to the semidiscretization {eq}`heatMOL` and derive what is known as the *Crank–Nicolson* method:
 
-:::{math}
+```{math}
 :label: CNxx
 (\mathbf{I} - \tfrac{1}{2}\tau \mathbf{D}_{xx}) \mathbf{u}_{j+1} =  (\mathbf{I} + \tfrac{1}{2}\tau
 \mathbf{D}_{xx}) \mathbf{u}_{j}.
-:::
+```
 
 Note that each side of the method is evaluated at a different time level.
 ``````

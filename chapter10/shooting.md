@@ -37,23 +37,23 @@ This is the idea behind the **shooting method**. Imagine adjusting your aiming p
 
 We can do much better than trial-and-error for the unknown part of the initial state. As usual, we can rewrite the ODE $u''(x) = \phi(x,u,u')$ in first-order form as
 
-:::{math}
+```{math}
 :label: shoot-first
 \begin{split}
 y_1' &= y_2,\\ 
 y_2' &= \phi(x,y_1,y_2).
 \end{split}
-:::
+```
 
 We turn this into an IVP by specifying $y(a)=s_1$, $y'(a)=s_2$, for a vector $\mathbf{s}$ to be determined by the boundary conditions. Define the residual function $\mathbf{v}(\mathbf{s})$ by
 
-:::{math}
+```{math}
 :label: shoot-resid
 \begin{split}
 v_1(s_1, s_2) &= g_1(y_1(a), y_2(a)) = g_1(s_1, s_2),\\ 
 v_2(s_1, s_2) &= g_2(y_1(b), y_2(b)).
 \end{split}
-:::
+```
 
 The dependence of $v_2$ on $\mathbf{s}$ is indirect, through the solution of the IVP for $\mathbf{y}(x)$. We now have a standard rootfinding problem that can be solved via the methods of [Chapter 4](../nonlineqn/overview.md). 
 
@@ -152,10 +152,10 @@ This solution satisfies $-1\le u(x) \le 0$ for all $x\in[0,1]$. Now we compute s
 
 The cause is readily explained. The solution to the ODE with $u(0)=-1$ and $u'(0)=s_2$  is
 
-:::{math}
+```{math}
 :label: shootinstabshoot
     \frac{s_2}{\lambda}\sinh(\lambda x) - 1.
-:::
+```
 
 If $x$ is a fixed value in $[0,1]$, we compute that the absolute condition number of {eq}`shootinstabshoot` with respect to $s_2$ is the magnitude of the partial derivative,
 

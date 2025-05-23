@@ -14,11 +14,11 @@ $$
 
 However, we will assume that the linear problem is presented in the equivalent form
 
-:::{math}
+```{math}
 :label: strongbvp
     - \frac{d }{d x} \Bigl[ c(x)\, u'(x) \Bigr] + s(x) \, u(x) = f(x),
     \quad u(a)=0,\; u(b)=0.
-:::
+```
 
 Such a transformation is always possible, at least in principle (see @problem-galerkin-neumann). As with finite differences, a nonlinear problem is typically solved by using a Newton iteration to create a sequence of linear problems.
 
@@ -26,23 +26,23 @@ Such a transformation is always possible, at least in principle (see @problem-ga
 
 Let {eq}`strongbvp` be multiplied by a generic function $\psi(x)$ called the **test function**, and then integrate both sides in $x$:
 
-:::{math}
+```{math}
 :label: int-by-parts
 \begin{split}
 \int_a^b f(x)\psi(x) \,dx  &= \int_a^b \bigl[ -(c(x)u'(x))'\psi(x) +
 s(x)u(x)\psi(x) \bigr] \,dx \\
 &= \Bigl[-c(x)u'(x)\psi(x) \Bigr]_{\,a}^{\,b} + \int_a^b \bigl[ c(x)u'(x)\psi'(x) + s(x)u(x)\psi(x)\bigr] \, dx. 
 \end{split}
-:::
+```
 
 The last line above used an integration by parts.
 
 We now make an important and convenient assumption about the test function. The first term in {eq}`int-by-parts`, consisting of boundary evaluations, disappears if we require that $\psi(a)=\psi(b)=0$. Doing so leads to
 
-:::{math}
+```{math}
 :label: weakbvp
   \int_a^b \bigl[ c(x)u'(x)\psi'(x) + s(x)u(x)\psi(x)\bigr]  \,dx = \int_a^b f(x)\psi(x) \,dx,
-:::
+```
 
 which is known as the **weak form** of the differential equation {eq}`strongbvp`. 
 
@@ -73,19 +73,19 @@ $$
 
 One way to satisfy this condition is to ensure that the term inside the brackets is zero for each possible value of $i$, that is,
 
-:::{math}
+```{math}
 :label: weakdiscrete
   \int_a^b \bigl[ c(x)u'(x)\phi_i'(x)  +  s(x)u(x)\phi_i(x)\bigr] \,dx = \int_a^b f(x)\phi_i(x) \,dx 
-:::
+```
 
 for $i=1,\ldots,m$. The independence of the $\phi_i$ furthermore guarantees that this is the *only* possibility, so we no longer need to consider the $z_i$.
 
 Now that we have approximated the weak form of the BVP by a finite set of constraints, the next step is to represent the approximate solution by a finite set as well. A natural choice is to approximate $u(x)$ the same way as we did the test function $\psi$, where the $\phi_j$ form a basis for representing the solution:
 
-:::{math}
+```{math}
 :label: galsolution
   u(x) = \sum_{j=1}^m w_j \phi_j(x).
-:::
+```
 
 Substituting {eq}`galsolution` into {eq}`weakdiscrete` implies
 
@@ -99,17 +99,17 @@ for $i=1,\ldots,m$. This rearranges easily into
 ```{index} ! Galerkin conditions
 ```
 
-:::{math}
+```{math}
 :label: galerkin
   \sum_{j=1}^m w_j \left[ \int_a^b c(x)\phi_i'(x)\phi_j'(x) \,dx  +
   \int_a^b s(x)\phi_i(x)\phi_j(x) \,dx \right]  = \int_a^b f(x)\phi_i(x) \,dx,
-:::
+```
 
 still for each $i=1,\ldots,m$. These are the {term}`Galerkin conditions` defining a numerical solution. They follow entirely from the BVP and the choice of the $\phi_i$.
 
 The conditions {eq}`galerkin` are a linear system of equations for the unknown coefficients $w_j$. Define $m\times m$ matrices $\mathbf{K}$  and $\mathbf{M}$, and the vector $\mathbf{f}$, by
 
-:::{math}
+```{math}
 :label: galerkinsystem
 \begin{split}
     K_{ij} &= \int_a^b c(x)\phi_i'(x)\phi_j'(x) \,dx, \quad i,j=0,\ldots,m,\\
@@ -117,14 +117,14 @@ The conditions {eq}`galerkin` are a linear system of equations for the unknown c
     \quad i,j=0,\ldots,m,   \\
     f_i &= \int_a^b f(x)\phi_i(x) \,dx \quad i=0,\ldots,m. 
 \end{split}
-:::
+```
 
 Then {eq}`galerkin` is simply
 
-:::{math}
+```{math}
 :label: galerkinsystemlinalg
   (\mathbf{K}+\mathbf{M})\mathbf{w} = \mathbf{f}.
-:::
+```
 
 ```{index} ! stiffness matrix, ! mass matrix
 ```
@@ -176,7 +176,7 @@ $$
 
 Then we set $m=n-1$, and the $\phi_i$ in {eq}`galsolution` are
 
-:::{math}
+```{math}
 :label: plfembasis
   \phi_i(x) =  H_i(x) =
   \begin{cases}
@@ -185,20 +185,20 @@ Then we set $m=n-1$, and the $\phi_i$ in {eq}`galsolution` are
           $x\in[t_{i},t_{i+1}]$},\\[2.5ex]
       0 & \text{otherwise}.
   \end{cases}
-:::
+```
 
 Recall that these functions are cardinal, i.e., $H_i(t_i)=1$ and $H_i(t_j)=0$ if $i\neq j$. Hence
 
-:::{math}
+```{math}
 :label: fempl
   u(x) = \sum_{j=1}^m w_j \phi_j(x) = \sum_{j=1}^{n-1} u_j H_j(x),
-:::
+```
 
 where as usual $u_j$ is the value of the numerical solution at $t_j$. Note that we omit $H_0$ and $H_n$, which equal one at the endpoints of the interval, because the boundary conditions on $u$ render them irrelevant.
 
 The importance of the hat function basis in the Galerkin method is that each one is nonzero in only two adjacent intervals. As a result, we shift the focus from integrations over the entire interval in {eq}`galerkinsystem` to integrations over each subinterval, $I_k=[t_{k-1},t_k]$. Specifically, we use
 
-:::{math}
+```{math}
 :label: femsystem
     \begin{split}
       K_{ij} &= \sum_{k=1}^{n} \left[ \int_{I_k} c(x) H_i'(x) H_j'(x) \,dx\right],
@@ -208,7 +208,7 @@ The importance of the hat function basis in the Galerkin method is that each one
       f_i &= \sum_{k=1}^{n} \left[ \int_{I_k}  f(x) H_i(x) \,dx\right]
             \qquad i=1,\ldots,n-1. 
     \end{split}
-:::
+```
 
 Start with the first subinterval, $I_1$. The only hat function that is nonzero over $I_1$ is $H_1(x)$. Thus the only integrals we need to consider over $I_1$ have $i=j=1$:
 
@@ -247,7 +247,7 @@ where the squiggly arrow is meant to show that the values of the $2\times 2$ mat
 
 In general, over $I_k$ for $1<k<n$, we have $H_k'= h_k^{-1}$ and $H_{k-1}'=-h_k^{-1}$. The stiffness matrix contributions over $I_k$ become
 
-:::{math}
+```{math}
 :label: PLstiff
   \frac{\overline{c}_k}{h_k}
   \begin{bmatrix}
@@ -257,11 +257,11 @@ In general, over $I_k$ for $1<k<n$, we have $H_k'= h_k^{-1}$ and $H_{k-1}'=-h_k^
   \begin{bmatrix}
     K_{k-1,k-1} & K_{k-1,k} \\ K_{k,k-1} & K_{k,k}
   \end{bmatrix}, \qquad k=2,\ldots,n-1.
-:::
+```
 
 One finds the contributions to the other structures by similar computations:
 
-:::{math}
+```{math}
 :label: PLmass
   \frac{\overline{s}_k h_k}{6}
   \begin{bmatrix}
@@ -271,11 +271,11 @@ One finds the contributions to the other structures by similar computations:
   \begin{bmatrix}
     M_{k-1,k-1} & M_{k-1,k} \\ M_{k,k-1} & M_{k,k}
   \end{bmatrix}, \qquad k=2,\ldots,n-1,
-:::
+```
 
 and
 
-:::{math}
+```{math}
 :label: PLrhs
   \frac{\overline{f}_k h_k}{2}
   \begin{bmatrix}
@@ -285,7 +285,7 @@ and
   \begin{bmatrix}
     f_{k-1} \\ f_{k}
   \end{bmatrix}, \qquad k=2,\ldots,n-1.
-:::
+```
 
 The contribution from $I_n$ affects just $K_{n-1,n-1}$, $M_{n-1,n-1}$, and $f_{n-1}$, and it produces formulas similar to those for $I_1$.
 

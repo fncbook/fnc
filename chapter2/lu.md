@@ -14,13 +14,13 @@ A major tool in numerical linear algebra is to factor a given matrix into terms 
 
 Our derivation of the factorization hinges on an expression of matrix products in terms of vector outer products. If  $\mathbf{u}\in\real^m$ and $\mathbf{v}\in\real^n$, then the **outer product** of these vectors is the $m\times n$ matrix
 
-:::{math}
+```{math}
 :label: outerproduct
 \mathbf{u} \mathbf{v}^T =
 \begin{bmatrix}
 u_1 v_1 & u_1 v_2 & \cdots & u_1 v_n \\u_2 v_1 & u_2 v_2 & \cdots & u_2 v_n \\ \vdots & \vdots & & \vdots \\ u_m v_1 & u_m v_2 & \cdots & u_m v_n
 \end{bmatrix}.
-:::
+```
 
 We illustrate the connection of outer products to matrix multiplication by a small example.
 
@@ -183,10 +183,10 @@ We have arrived at the linchpin of solving linear systems.
 :label: definition-lu
 Given $n\times n$ matrix $\mathbf{A}$, its **LU factorization** is
 
-:::{math}
+```{math}
 :label: eq-lu
 \mathbf{A} = \mathbf{L}\mathbf{U},
-:::
+```
 
 where $\mathbf{L}$ is a unit lower triangular matrix and $\mathbf{U}$ is an upper triangular matrix.
 ::::

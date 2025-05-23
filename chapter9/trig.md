@@ -17,10 +17,10 @@ Suppose we want to approximate a function $f$ that is periodic, with one period 
 :label: definition-trigpoly
 For an integer $n$, a **trigonometric polynomial** of degree $n$ is 
 
-:::{math}
+```{math}
 :label: trigpoly-real
 p(x) = \frac{a_0}{2} + \sum_{k=1}^n  a_k \cos(k\pi x) + b_k \sin(k\pi x)
-:::
+```
 
 for real constants $a_k,b_k$. 
 ::::
@@ -30,10 +30,10 @@ for real constants $a_k,b_k$.
 
 It turns out that trigonometric interpolation allows us to return to equally spaced nodes without any problems. We therefore define $N=2n+1$ equally spaced nodes inside the interval $[-1,1]$ by
 
-:::{math}
+```{math}
 :label: trignodes
   t_k = \frac{2k}{N}, \quad k=-n,\ldots,n.
-:::
+```
 
 The formulas in this section require some minor but important adjustments if $N$ is even instead. We have modified our standard indexing scheme here to make the symmetry within $[-1,1]$ about $x=0$ more transparent. Note that the endpoints $\pm 1$ are *not* among the nodes.
 
@@ -45,11 +45,11 @@ As usual, we have sample values $y_{-n},\ldots,y_n$, perhaps representing values
 ```
 We can explicitly state the cardinal function basis for equispaced trigonometric interpolation. It starts with
 
-:::{math}
+```{math}
 :label: trigcardinal
 \tau(x) = \frac{2}{N} \left( \frac{1}{2} + \cos \pi x + \cos 2\pi x
     + \cdots + \cos n\pi x\right) = \frac{\sin(N\pi x/2)}{N\sin(\pi x/2)}.
-:::
+```
 
 You can directly check the following facts. (See @problem-trig-checktau.) 
 
@@ -66,10 +66,10 @@ Given also the nodes $t_k$ in {eq}`trignodes`, the functions $\tau_k(x) = \tau(x
 
 Because the functions $\tau_{-n},\ldots,\tau_n$ form a cardinal basis, the coefficients of the interpolant are just the sampled function values, i.e., the interpolant of points $(t_k,y_k)$ is
 
-:::{math}
+```{math}
 :label: trigcardinalinterp
 p(x) = \sum_{k=-n}^n y_k \tau_k(x).
-:::
+```
 
 The convergence of a trigonometric interpolant is spectral, i.e., exponential as a function of $N$ in the max-norm.
 ## Implementation
@@ -131,33 +131,33 @@ The convergence of a trigonometric interpolant is spectral, i.e., exponential as
 
 Although the cardinal form of the interpolant is useful and stable, there is a fundamental alternative. It begins with an equivalent complex form of the trigonometric interpolant {eq}`trigpoly-real`, 
 
-:::{math}
+```{math}
 :label: trigpoly-complex
   p(x) = \sum_{k=-n}^n c_k e^{ik\pi x}.
-:::
+```
 
 The connection is made through Euler's formula,
 
-:::{math}
+```{math}
 :label: eulerformula
   e^{i\theta} = \cos(\theta) + i\sin(\theta),
-:::
+```
 
 and the resultant identities
 
-:::{math}
+```{math}
 :label: eulersincos
   \cos \theta = \frac{e^{i \theta}+e^{-i\theta}}{2}, \qquad \sin \theta = \frac{e^{i \theta}-e^{-i\theta}}{2i}.
-:::
+```
 
 Specifically, we have
 
-:::{math}
+```{math}
 c_k = \begin{cases} \frac{a_0}{2}, & k=0, \\[1mm] 
 \frac{1}{2}(a_k + i b_k), & k> 0, \\[1mm]
 \overline{c_{-k}}, & k < 0. 
 \end{cases}
-::: 
+``` 
 
 While working with an all-real formulation seems natural when the data are real, the complex-valued version leads to more elegant formulas and is standard. 
 

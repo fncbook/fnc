@@ -150,7 +150,7 @@ For very large matrices, it's unlikely that you will want to find all of its eig
 :label: problem-structure-spdiagm
 ⌨ Use `spdiagm` to build the $50\times 50$ matrices
 
-:::{math}
+```{math}
 \mathbf{A} =
 \begin{bmatrix}
 -2 & 1 & & &  \\
@@ -167,7 +167,7 @@ For very large matrices, it's unlikely that you will want to find all of its eig
 & & 1 & -2 & 1 \\
 1 & & & 1 & -2
 \end{bmatrix}.
-:::
+```
 
 For each matrix, use `spy` and an inspection of the $5\times 5$ submatrices in the corners to verify the correctness of your matrices.
 ``````

@@ -14,10 +14,10 @@ An important aspect of MINRES and CG (and, by extension, GMRES) is that the conv
 :label: definition-preconditioner
 Given a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, a {term}`preconditioner` is a matrix $\mathbf{M}$ or equivalent linear transformation that modifies the system to be
 
-:::{math}
+```{math}
 :label: precond
 (\mathbf{M}^{-1} \mathbf{A}) \mathbf{x} = \mathbf{M}^{-1}\mathbf{b}.
-:::
+```
 
 ::::
  

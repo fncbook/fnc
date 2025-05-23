@@ -3,6 +3,7 @@ numbering:
   enumerator: 13.4.%s
 ---
 (section-twodim-nonlinear)=
+
 # Nonlinear elliptic PDEs
 
 Many nonlinear elliptic PDEs include references to the Laplacian operator.
@@ -11,27 +12,27 @@ Many nonlinear elliptic PDEs include references to the Laplacian operator.
 :label: example-mems2dmodel
 Recall the micromechanical deflector modeled in a disk by {eq}`mems`. A fully two-dimensional equivalent is (see {cite}`peleskoEffectSmallaspectratio2006`)
 
-:::{math}
+```{math}
 :label: mems2d
 \Delta u - \frac{\lambda}{(u+1)^2} = 0.
-:::
+```
 
 This may be posed on any region, with $u=0$ specified everywhere on the boundary.
 ::::
 
 More generally, we want to solve the nonlinear PDE
 
-:::{math}
+```{math}
 :label: nonlinpdepde
 \phi(x,y,u,u_x,u_y,u_{xx},u_{yy}) = 0
-:::
+```
 
 in the interior of a rectangle $R$, subject to the Dirichlet condition
 
-:::{math}
+```{math}
 :label: nonlinpdebc
 u(x,y) = g(x,y)
-:::
+```
 
 on the boundary of $R$.
 
@@ -157,7 +158,6 @@ Here we solve it with a homogeneous Dirichlet condition on the square $[-1,1]^2$
 `````
 
 ::::
-
 
 ```{index} Allen–Cahn equation
 ```

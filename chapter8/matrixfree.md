@@ -10,13 +10,13 @@ In Chapter 4, we solved the nonlinear rootfinding problem $\mathbf{f}(\mathbf{x}
 
 We can explore the same idea in the context of linear algebra by shifting our viewpoint from matrices to *linear transformations*. If we define $\mathbf{f}(\mathbf{x})=\mathbf{A}\mathbf{x}$, then for all vectors $\mathbf{x}$, $\mathbf{y}$, and scalars $\alpha$,
 
-:::{math}
+```{math}
 :label: lintrans
 \begin{split}
 \mathbf{f}(\mathbf{x} + \mathbf{y} ) &= \mathbf{f}(\mathbf{x}) + \mathbf{f}(\mathbf{y} ), \\
 \mathbf{f}(\alpha \mathbf{x} ) & = \alpha\, \mathbf{f}(\mathbf{x}).
 \end{split}
-:::
+```
 
 These properties define a linear transformation. Moreover, *every* linear transformation between finite-dimensional vector spaces can be represented as a matrix-vector multiplication.
 
@@ -29,7 +29,7 @@ A close examination reveals that in the power iteration and Krylov subspace meth
 
 In {numref}`section-matrixanaly-insight` we saw that a grayscale image can be represented as an $m\times n$ matrix $\mathbf{X}$ of pixel intensity values. Now consider a simple model for blurring the image. Define $\mathbf{B}$ as the $m\times m$ tridiagonal matrix
 
-:::{math}
+```{math}
 :label: blurmatrix
 B_{ij} =
 \begin{cases}
@@ -37,22 +37,22 @@ B_{ij} =
 \tfrac{1}{4} & \text{if $|i-j|=1$},\\
 0 & \text{otherwise.}
 \end{cases}
-:::
+```
 
 The product $\mathbf{B}\mathbf{X}$ applies $\mathbf{B}$ to each column of $\mathbf{X}$. Within that column it does a weighted average of the values of each pixel and its two neighbors. That has the effect of blurring the image vertically. We can increase the amount of blur by applying $\mathbf{B}$ repeatedly.
 
 In order to blur horizontally, we can transpose the image and apply blurring in the same way. We need a blurring matrix defined as in {eq}`blurmatrix` but with size $n\times n$. We call this matrix $\mathbf{C}$. Altogether the horizontal blurring is done by transposing, applying $\mathbf{C}$, and transposing back to the original orientation. That is,
 
-:::{math}
+```{math}
 \bigl(\mathbf{C} \mathbf{X}^T\bigr)^T = \mathbf{X}\mathbf{C}^T = \mathbf{X}\mathbf{C},
-:::
+```
 
 using the symmetry of $\mathbf{C}$. So we can describe blur in both directions as the function
 
-:::{math}
+```{math}
 :label: blurfunction
 \operatorname{blur}(\mathbf{X}) = \mathbf{B}^k \mathbf{X} \mathbf{C}^k
-:::
+```
 
 for a positive integer $k$.
 
@@ -87,9 +87,9 @@ A more interesting operation is *deblurring*: given an image blurred by poor foc
 
 It's easy to see from {eq}`blurfunction` that the blur operation is a linear transformation on image matrices. But an $m\times n$ image matrix is equivalent to a length-$mn$ vector—it's just a matter of interpreting the shape of the same data. Let $\operatorname{vec}(\mathbf{X})=\mathbf{x}$ and $\operatorname{unvec}(\mathbf{x})=\mathbf{X}$ be the mathematical statements of such reshaping operations. Now say $\mathbf{X}$ is the original image and $\mathbf{Z}=\operatorname{blur}(\mathbf{X})$ is the blurred one. Then by linearity there is some matrix $\mathbf{A}$ such that
 
-:::{math}
+```{math}
 \mathbf{A} \operatorname{vec}(\mathbf{X}) = \operatorname{vec}(\mathbf{Z}),
-:::
+```
 
 or $\mathbf{A}\mathbf{x}=\mathbf{z}$.
 

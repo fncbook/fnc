@@ -12,20 +12,20 @@ So far we have considered the method of lines for problems with periodic end con
 
 Suppose we are given a nonlinear PDE of the form
 
-:::{math}
+```{math}
 :label: parabolicPDE
   u_t = \phi(t,x,u,u_x,u_{xx}), \quad  a \le x \le b.
-:::
+```
 
 Not all such PDEs are parabolic (essentially, including diffusion), but we will assume this to be the case. Suppose also that the solution is subject to the boundary conditions
 
-:::{math}
+```{math}
 :label: parabolicBC
 \begin{split}
   g_1\left( u(a,t), \frac{\partial u}{\partial x}(a,t) \right) &= 0, \\
   g_2\left( u(b,t), \frac{\partial u}{\partial x}(b,t) \right) &= 0. \\ 
 \end{split}
-:::
+```
 
 These include Dirichlet, Neumann, and Robin conditions, which are the linear cases of {eq}`parabolicBC`.
 
@@ -35,20 +35,20 @@ These include Dirichlet, Neumann, and Robin conditions, which are the linear cas
 ```
 As usual, we replace $u(x,t)$ by the semidiscretized $\mathbf{u}(t)$, where $u_i(t)\approx \hat{u}(x_i,t)$ and $i=0,\ldots,m$. We require the endpoints of the interval to be included in the discretization, that is, $x_0=a$ and $x_m=b$. Then we have a division of the semidiscrete unknown $\mathbf{u}(t)$ into interior and boundary nodes:
 
-:::{math}
+```{math}
 :label: mol-divide
   \mathbf{u} =
   \begin{bmatrix}
     u_0 \\ \mathbf{v} \\ u_m
   \end{bmatrix},
-:::
+```
 
 where $\mathbf{v}$ are the solution values over the interior of the interval. The guiding principle is to let the interior unknowns $\mathbf{v}$ be governed by a discrete form of the PDE, while the endpoint values are chosen to satisfy the boundary conditions. As a result, we will develop an initial-value problem for the interior unknowns only:
 
-:::{math}
+```{math}
 :label: mol-interior
   \frac{d \mathbf{v}}{d t} = \mathbf{f}(t,\mathbf{v}).
-:::
+```
 
 The boundary conditions are used only in the definition of $\mathbf{f}$. As in {numref}`section-bvp-nonlinear`, define 
 
@@ -61,13 +61,13 @@ Then Equation {eq}`parabolicBC` takes the form
 ```{index} rootfinding problem
 ```
 
-:::{math}
+```{math}
 :label: mol-bcsystem
 \begin{split}
   g_1( u_0, u'_0 ) &= 0, \\
   g_2( u_m, u'_m ) &= 0.
 \end{split}
-:::
+```
 
 Given a value of $\mathbf{v}$ for the interior nodes, Equation {eq}`mol-bcsystem` may be considered a system of two equations for the unknown boundary values $u_0$ and $u_m$. This system will be a linear one for Dirichlet, Neumann, and Robin conditions. 
 
@@ -299,15 +299,15 @@ Consider @demo-boundaries-bratu, combining diffusion with a nonlinear source ter
 
 ⌨ The [Allen–Cahn equation](wiki:Allen–Cahn_equation) is used as a model for systems that prefer to be in one of two stable states. The governing PDE is
 
-:::{math}
+```{math}
 u_t = u(1-u^2) + \epsilon u_{xx}.
-:::
+```
 
 For this problem, assume $\epsilon=10^{-3}$, $-1\le x \le 1$, boundary conditions $u(\pm 1,t) = -1$ and initial condition
 
-:::{math}
+```{math}
 u(x,0) = -1 + \beta (1-x^2) e^{-20x^2},
-:::
+```
 
 where $\beta$ is a parameter. Use {numref}`Function {number} <function-parabolic>` with $m=199$.
 

@@ -48,10 +48,10 @@ Analysis of matrix powers is most straightforward in the diagonalizable case. Le
 :label: definition-dominanteigenvalue
 If the eigenvalues of a matrix are such that
 
-:::{math}
+```{math}
 :label: evorder
 |\lambda_1| > |\lambda_2| \ge |\lambda_3| \ge \cdots \ge |\lambda_n|,
-:::
+```
 
 then we say that $\lambda_1$ is the {term}`dominant eigenvalue` of the matrix.
 ::::
@@ -60,13 +60,13 @@ In @demo-power-one, for instance, $\lambda_1=1$ is the dominant eigenvalue.
 
 Now let $\mathbf{x}$ be an $n$-vector, let $k$ be a positive integer, and refer to {eq}`evdpower`: 
 
-:::{math}
+```{math}
 \mathbf{A}^k \mathbf{x} = \mathbf{V}\mathbf{D}^k\mathbf{V}^{-1}\mathbf{x}.
-:::
+```
 
 Let $\mathbf{z}=\mathbf{V}^{-1}\mathbf{x}$, and recall that $\mathbf{D}$ is a diagonal matrix of eigenvalues. Then
 
-::::{math}
+````{math}
 :label: powerAkx0
 \begin{split}
   \mathbf{A}^k\mathbf{x} &= \mathbf{V}\mathbf{D}^k \mathbf{z} = \mathbf{V}\begin{bmatrix} \lambda_1^kz_1 \\[0.5ex] \lambda_2^kz_2 \\ \vdots \\ \lambda_n^kz_n \end{bmatrix} \\
@@ -75,7 +75,7 @@ Let $\mathbf{z}=\mathbf{V}^{-1}\mathbf{x}$, and recall that $\mathbf{D}$ is a di
 		\mathbf{v}_{2} + \cdots + z_n \left(\frac{\lambda_n}{\lambda_1}\right)^k
 		\mathbf{v}_{n} \right].
 \end{split}
-::::
+````
 
 Since $\lambda_1$ is dominant, we conclude that if $z_1\neq 0$,
 
@@ -128,20 +128,20 @@ The vectors and scalars in @definition-poweriteration are subscripted by iterati
 
 By construction, $\| \mathbf{x}_{k}\|_\infty=1$ for all $k > 1$. Also, we can write
 
-:::{math}
+```{math}
 :label: powernorm
 \mathbf{x}_{k} = (\alpha_1 \alpha_2 \cdots \alpha_k ) \mathbf{A}^k \mathbf{x}_{1}.
-:::
+```
 
 Thus {numref}`Algorithm {number} < definition-poweriteration>` modifies {eq}`powerAkx0` and {eq}`poweriterconverge` only slightly.
 
 Finally, if $\mathbf{x}_k$ is nearly a dominant eigenvector of $\mathbf{A}$, then $\mathbf{A}\mathbf{x}_k$ is nearly $\lambda_1\mathbf{x}_k$, and we can take the ratio $\beta_k=y_{k,m}/x_{k,m}$ as an eigenvalue estimate. In fact, revisiting {eq}`powerAkx0`, the extra $\alpha_j$ normalization factors cancel in the ratio, and, after some simplification, we get
 
-:::{math}
+```{math}
 :label: poweriterratio
 \beta_k = \frac{y_{k,m}}{x_{k,m}} = \lambda_1
 \frac{1+r_2^{k+1} b_2 + \cdots +  r_n^{k+1} b_n}{1+r_2^{k} b_2 +  \cdots +  r_n^{k} b_n},
-:::
+```
 
 where $r_j=\lambda_j/\lambda_1$ and the $b_j$ are constants. By assumption {eq}`evorder`, each $r_j$ satisfies $|r_j|<1$, so we see that $\beta_k\rightarrow \lambda_1$ as $k\rightarrow\infty$.
 
@@ -177,42 +177,42 @@ Observe that the only use of $\mathbf{A}$ is to find the matrix-vector product $
 
 Let's examine the terms in the numerator and denominator of {eq}`poweriterratio` more carefully:
 
-:::{math}
+```{math}
 :label: powerleftover
 \begin{split}
 r_2^{k} b_2 +  \cdots +  r_n^{k} b_n &= r_2^k \left[ b_2 + \left( \frac{r_3}{r_2} \right)^kb_3 + \cdots + \left( \frac{r_n}{r_2} \right)^kb_n \right] \\
 &= r_2^k \left[ b_2 + \left( \frac{\lambda_3}{\lambda_2} \right)^kb_3 + \cdots + \left( \frac{\lambda_n}{\lambda_2} \right)^kb_n \right].
 \end{split}
-:::
+```
 
 At this point we'll introduce an additional assumption,
 
-:::{math}
+```{math}
 :label: evorder2
 |\lambda_2| > |\lambda_3| \ge \cdots \ge |\lambda_n|.
-:::
+```
 
 This condition isn't strictly necessary, but it simplifies the following statements considerably because now it's clear that the quantity in {eq}`powerleftover` approaches $b_2 r_2^k$ as $k\rightarrow \infty$.
 
 Next we estimate {eq}`poweriterratio` for large $k$, using a geometric series expansion for the denominator to get
 
-:::{math}
+```{math}
 :label: powerest
 \begin{split}
 \beta_k & \to \lambda_1 \left( 1+b_2 r_2^{k+1} \right) \left( 1 - b_2 r_2^{k} + O(r_2^{2k}) \right), \\
 \beta_k - \lambda_1 &\to \lambda_1 b_2 (  r_2 - 1 ) r_2^{k}.
 \end{split}
-:::
+```
 
 ```{index} convergence rate; linear
 ```
 
 This is {term}`linear convergence` with factor $r_2$:
 
-:::{math}
+```{math}
 :label: poweriterconv
 \frac{\beta_{k+1} - \lambda_1}{\beta_{k}-\lambda_1} \rightarrow r_2 = \frac{\lambda_2}{\lambda_1} \quad \text{as } k\rightarrow \infty.
-:::
+```
 
 ::::{prf:observation}
 The error in the power iteration eigenvalue estimates $\beta_k$ is reduced asymptotically by a constant factor $\lambda_2/\lambda_1$ at each iteration, where $\lambda_1$ and $\lambda_2$ are the dominant eigenvalues of $\mathbf{A}$.

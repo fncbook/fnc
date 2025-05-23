@@ -11,21 +11,21 @@ A close cousin of the advection equation is the **wave equation**.
 ```
 
 ````{prf:definition} Wave equation
-:::{math}
+```{math}
 :label: wavepde
     u_{tt} - c^2 u_{xx} = 0.
-:::
+```
 ````
 
 The wave equation describes the propagation of waves, such as for sound or light. This is our first PDE having a second derivative in time. Consequently, we should expect to have two initial conditions: 
 
-:::{math}
+```{math}
 :label: waveIC
 \begin{split}
 u(x,0) &= f(x),  \\
 u_t(x,0) &= g(x).
 \end{split}
-:::
+```
 
 There are also two space derivatives, so if boundaries are present, two boundary conditions are required.
 
@@ -43,36 +43,36 @@ The wave equation in one dimension supports advection in both directions simulta
 
 In order to apply semidiscretization with the standard IVP solvers that we have encountered, we must recast {eq}`wavepde` as a first-order system in time. Using our typical methodology, we would define $y=u_t$ and derive
 
-:::{math}
+```{math}
 :label: wavefirst1
 \begin{split}
   u_t &= y, \\
   y_t &= c^2 u_{xx}.
 \end{split}
-:::
+```
 
 This is a valid approach. However, the wave equation has another, less obvious option for transforming to a first-order system:
 
-:::{math}
+```{math}
 :label: wavefirst2
 \begin{split}
     u_t &= z_x, \\
     z_t &= c^2 u_{x}.
 \end{split}
-:::
+```
 
 ```{index} Maxwell's equations
 ```
 
 This second form is appealing in part because it's equivalent to [Maxwell's equations](wiki:Maxwell%27s_equations) for electromagnetism. In this form, we typically replace the velocity initial condition in {eq}`waveIC` with a condition on $z$, 
 
-:::{math}
+```{math}
 :label: waveIC2
 \begin{split}
 u(x,0) &= f(x),  \\
 z(x,0) &= g(x).
 \end{split}
-:::
+```
 
 This alternative to {eq}`waveIC` is useful in many electromagnetic applications, where $u$ and $z$ represent the electric and magnetic fields, respectively.
 
@@ -80,7 +80,7 @@ This alternative to {eq}`waveIC` is useful in many electromagnetic applications,
 
 Because waves travel in both directions, there is no preferred upwind direction. This makes a centered finite difference in space appropriate. Before application of the boundary conditions, semidiscretization of {eq}`wavefirst2` leads to
 
-:::{math}
+```{math}
 :label: waveMOL
   \begin{bmatrix}
     \mathbf{u}'(t) \\[2mm]  \mathbf{z}'(t)
@@ -92,25 +92,25 @@ Because waves travel in both directions, there is no preferred upwind direction.
   \begin{bmatrix}
     \mathbf{u}(t) \\[2mm] \mathbf{z}(t)
   \end{bmatrix}.
-:::
+```
 
 We now suppose that the domain is $[0,1]$ and impose the Dirichlet conditions  
 
-:::{math}
+```{math}
 :label: waveBC
 u(0,t) = u(1,t) = 0, \qquad t \ge 0.
-::: 
+``` 
 
 The boundary conditions {eq}`waveBC` suggest that we should remove both of the end values of $\mathbf{u}$ from the discretization, but retain all of the $\mathbf{z}$ values. We use $\mathbf{w}(t)$ to denote the vector of all the unknowns in the semidiscretization. If the nodes are numbered $x_0,\ldots,x_m$, then we have
 
-:::{math}
+```{math}
 :label: wavew
 \mathbf{w}(t) =  \begin{bmatrix}
   u_1(t) \\ \vdots \\ u_{m-1}(t) \\ z_0(t) \\ \vdots \\ z_m(t)
 \end{bmatrix} =  \begin{bmatrix}
   \mathbf{v}(t) \\[1mm] \mathbf{z}(t) 
 \end{bmatrix} \in \mathbb{R}^{2m}.
-:::
+```
 
 When computing $\mathbf{w}'(t)$, we extract the $\mathbf{v}$ and $\mathbf{z}$ components, and we define two helper functions: `extend`, which pads the $\mathbf{v}$ component with the zero end values, and `chop`, which deletes them from $\mathbf{u}$ to give $\mathbf{v}$.
 

@@ -14,10 +14,10 @@ When the interval of integration or the integrand itself is unbounded, we say an
 
 When the integration domain is $(-\infty,\infty)$, the integrand has to decay as $x \to \pm \infty$ in order for the improper integral to be finite. This fact brings up the possibility of truncating the domain:
 
-:::{math}
+```{math}
 :label: infiniteinterval
 \int_{-\infty}^{\infty} f(x)\, dx \approx  \int_{-M}^{M} f(x)\, dx.
-:::
+```
 
 This integral can be discretized finitely by, say, the trapezoid formula, or an adaptive integrator. However, this approach can be inefficient.
 
@@ -44,17 +44,17 @@ In order to do better than direct truncation, we want to encourage the function 
 
 One way to accomplish this feat is to use
 
-:::{math}
+```{math}
 :label: DEquadtrans1
   x(t) = \sinh\left(  \sinh t \right).
-:::
+```
 
 Noting the asymptotic behavior as $t \rightarrow \pm\infty$ that
 
-:::{math}
+```{math}
 :label: sinh-asymp
   \left| \sinh(t) \right| \sim \frac{1}{2} e^{ |t| },
-:::
+```
 
 we find that in the same limits,
 
@@ -68,13 +68,13 @@ Thus, {eq}`DEquadtrans1` is often referred to as a **double exponential** transf
 
 By the chain rule,
 
-:::{math}
+```{math}
 :label: DEquadchain1
 \begin{split}
 \int_{-\infty}^\infty f(x)\, dx &= \int_{-\infty}^\infty f(x(t))\frac{dx}{dt}\, dt \\
   &= \int_{-\infty}^\infty f(x(t))\, \cosh\left( \sinh t \right)  \cosh t  \, dt.
 \end{split}
-:::
+```
 
 The exponential terms introduced by the chain rule grow double exponentially, but the more rapid decay of $f$ in the new variable more than makes up for this.
 
@@ -182,27 +182,27 @@ If $f$ asymptotically approaches infinity as $x$ approaches an integration endpo
 
 Let's consider 
 
-:::{math}
+```{math}
 :label: intsing
 \int_0^1 f(x)\,dx,
-:::
+```
 
 where $f$ and/or a derivative of $f$ is unbounded at the left endpoint, zero. The change of variable
 
-:::{math}
+```{math}
 :label: DEquadtrans2
   x(t) = \frac{2}{1+\exp(2 \sinh t)}
-:::
+```
 
 satisfies $x(0)=1$ and $x\to 0^+$ as $t\to \infty$, thereby transforming the integration interval to $t\in(0,\infty)$ and placing the singularity at infinity. The chain rule implies
 
-:::{math}
+```{math}
 :label: DEquadchain2
 \begin{split}
   \int_{0}^1 f(x)\, dx &= \int_{0}^\infty f(x(t)) \frac{dx}{dt}\, dt \\
   &= \int_{0}^\infty f(x(t)) \frac{\cosh t}{\cosh(\sinh t)^2}  \,  dt.
 \end{split}
-:::
+```
 
 Now the growth of $f$ and $\cosh t$ together are counteracted by the double exponential denominator, allowing easy truncation of {eq}`DEquadchain2`. This variable transformation is paired with adaptive integration in {numref}`Function {number} <function-intsing>`.
 

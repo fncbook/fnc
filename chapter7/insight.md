@@ -163,7 +163,7 @@ Representation of an image as a matrix allows us to describe some common image o
 :label: problem-insight-adjacency2
 ✍ Here is a graph adjacency matrix.
 
-:::{math}
+```{math}
 \begin{bmatrix}
 0 & 1 & 0 & 1 & 0 & 1 & 0 \\
 1 & 0 & 1 & 0 & 0 & 1 & 0 \\
@@ -173,7 +173,7 @@ Representation of an image as a matrix allows us to describe some common image o
 1 & 1 & 0 & 0 & 1 & 0 & 0 \\
 0 & 0 & 1 & 0 & 0 & 0 & 0   
 \end{bmatrix}
-:::
+```
 
 **(a)** How many vertices are adjacent to vertex 5? (Assume node numbering starts at 1.)
 

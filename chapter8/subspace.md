@@ -9,13 +9,13 @@ The power and inverse iterations have a flaw that seems obvious once it is point
 
 It stands to reason that we could do no worse, and perhaps much better, if we searched among all linear combinations of the vectors seen in the past. In other words, we seek a solution in the range (column space) of the matrix
 
-:::{math}
+```{math}
 :label: krylovmatrix
 \mathbf{K}_m =
 \begin{bmatrix}
   \mathbf{u} & \mathbf{A}\mathbf{u} & \mathbf{A}^{2} \mathbf{u} & \cdots & \mathbf{A}^{m-1} \mathbf{u}
 \end{bmatrix}.
-:::
+```
 
 ```{index} ! Krylov matrix, ! Krylov subspace
 ```
@@ -48,15 +48,15 @@ Suppose $\mathbf{A}$ is $n\times n$, $0<m<n$, and a vector $\mathbf{u}$ is used 
 
 If $\mathbf{x}\in\mathcal{K}_m$, then for some coefficients $c_1,\ldots,c_m$,
 
-:::{math}
+```{math}
 \mathbf{x} = c_1 \mathbf{u} + c_2 \mathbf{A} \mathbf{u} + \cdots + c_m \mathbf{A}^{m-1} \mathbf{u}.
-:::
+```
 
 Thus let $\mathbf{z}= \begin{bmatrix} c_1 & \cdots & c_m \end{bmatrix}^T$. Also, $\mathbf{x}\in\mathcal{K}_{m+1}$, as we can add zero times $\mathbf{A}^{m}\mathbf{u}$ to the sum. Finally,
   
-:::{math}
+```{math}
 \mathbf{A}\mathbf{x} = c_1 \mathbf{A} \mathbf{u} + c_2 \mathbf{A}^{2} \mathbf{u} + \cdots + c_m \mathbf{A}^{m} \mathbf{u} \in \mathcal{K}_{m+1}.
-:::
+```
 ::::
 
 ## Dimension reduction
@@ -68,12 +68,12 @@ The problems $\mathbf{A}\mathbf{x}=\mathbf{b}$ and $\mathbf{A}\mathbf{x}=\lambda
 
 For instance, we can interpret $\mathbf{A}\mathbf{x}_m\approx \mathbf{b}$ in the sense of linear least-squares—that is, using @theorem-subspace-krylovmult to let $\mathbf{x}=\mathbf{K}_m\mathbf{z}$,
 
-:::{math}
+```{math}
 :label: gmresdef
 \min_{\mathbf{x}\in\mathcal{K}_m} \|  \mathbf{A}\mathbf{x}-\mathbf{b} \|
 = \min_{\mathbf{z}\in\mathbb{C}^m} \| \mathbf{A}(\mathbf{K}_m\mathbf{z})-\mathbf{b} \|
 = \min_{\mathbf{z}\in\mathbb{C}^m} \| (\mathbf{A}\mathbf{K}_m)\mathbf{z}-\mathbf{b} \|.
-:::
+```
 
 The natural seed vector for $\mathcal{K}_m$ in this case is the vector $\mathbf{b}$. In the next example we try to implement {eq}`gmresdef`. We do take one precaution: because the vectors $\mathbf{A}^{k}\mathbf{b}$ may become very large or small in norm, we normalize after each multiplication by $\mathbf{A}$, just as we did in the power iteration.
 
@@ -125,17 +125,17 @@ The polar opposite of an ill-conditioned basis for $\mathcal{K}_m$ is an orthono
 
 Then the vectors $\mathbf{q}_1,\ldots,\mathbf{q}_m$ are the orthonormal basis we seek for $\mathcal{K}_m$. By @theorem-subspace-krylovmult, we know that $\mathbf{A}\mathbf{q}_m \in \mathcal{K}_{m+1}$, and therefore
 
-:::{math}
+```{math}
 :label: arnoldivec
 \mathbf{A} \mathbf{q}_m = H_{1m} \, \mathbf{q}_1 + H_{2m} \, \mathbf{q}_2 + \cdots + H_{m+1,m}\, \mathbf{q}_{m+1}
-:::
+```
 
 for some choice of the $H_{ij}$. Note that by using orthonormality, we have
 
-:::{math}
+```{math}
 :label: arnoldiip
 \mathbf{q}_i^* (\mathbf{A}\mathbf{q}_m) = H_{im}, \qquad i=1,\ldots, m.
-:::
+```
 
 Since we started by assuming that we know $\mathbf{q}_1,\ldots,\mathbf{q}_m$, the only unknowns in {eq}`arnoldivec` are $H_{m+1,m}$ and $\mathbf{q}_{m+1}$. But they appear only as a product, and we know that $\mathbf{q}_{m+1}$ is a *unit* vector, so they are uniquely defined (up to sign) by the other terms in the equation.
 
@@ -169,7 +169,7 @@ Return the $n\times (m+1)$ matrix $\mathbf{Q}_{m+1}$ whose columns are $\mathbf{
 
 The vectors $\mathbf{q}_1,\dots, \mathbf{q}_m$ are an orthonormal basis for the space $\mathcal{K}_m$, which makes them ideal for numerical computations in that space. The matrix $\mathbf{H}_m$ plays an important role, too, and has a particular "triangular plus" structure,
 
-:::{math}
+```{math}
 :label: arnoldiH
 \mathbf{H}_m = \begin{bmatrix}
     H_{11} & H_{12} & \cdots & H_{1m} \\
@@ -178,7 +178,7 @@ The vectors $\mathbf{q}_1,\dots, \mathbf{q}_m$ are an orthonormal basis for the 
     & & \ddots & H_{mm} \\
     & & & H_{m+1,m}
 \end{bmatrix}.
-:::
+```
 
 ```{index} ! upper Hessenberg matrix
 ```
@@ -190,10 +190,10 @@ A matrix $\mathbf{H}$ is an {term}`upper Hessenberg matrix` if $H_{ij}=0$ whenev
 
 The identity @arnoldivec used over all the iterations can be collected into a single matrix equation, 
 
-:::{math}
+```{math}
 :label: arnoldimat
 \mathbf{A}\mathbf{Q}_m = \mathbf{Q}_{m+1} \mathbf{H}_m,
-:::
+```
 
 which is a fundamental identity of Krylov subspace methods.
 

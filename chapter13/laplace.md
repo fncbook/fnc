@@ -15,10 +15,10 @@ Consider the heat equation $u_t=u_{xx}+u_{yy}$. After a long time, the distribut
 :label: definition-laplace
 The {term}`Poisson equation` in two dimensions is
 
-:::{math}
+```{math}
 :label: poispde
 u_{xx} + u_{yy} = f(x, y).
-:::
+```
 
 A common notation for it is $\Delta u = f$, where $\Delta$ is known as the **Laplacian operator**.
 
@@ -40,10 +40,10 @@ In order to get a fully specified problem, the Laplace or Poisson equation must 
 
 With the unknown solution represented by its values $\mathbf{U}=\mtx(u)$ on a rectangular grid, and second-derivative finite-difference or spectral differentiation matrices $\mathbf{D}_{xx}$ and $\mathbf{D}_{yy}$, the Poisson equation {eq}`poispde` becomes the discrete equation
 
-:::{math}
+```{math}
 :label: poissylvester
    \mathbf{D}_{xx}\mathbf{U} + \mathbf{U} \mathbf{D}_{yy}^T = \mathbf{F},
-:::
+```
 
 ```{index} ! Sylvester equation
 ```
@@ -57,7 +57,7 @@ where $\mathbf{F}=\mtx(f)$. Equation {eq}`poissylvester`, with an unknown matrix
 :label: definition-kron
 Let $\mathbf{A}$ be $m\times n$ and $\mathbf{B}$ be $p\times q$. The **Kronecker product** $\mathbf{A}\otimes \mathbf{B}$ is the $mp\times nq$ matrix given by
 
-:::{math}
+```{math}
 :label: krondef
     \mathbf{A}\otimes \mathbf{B} =
     \begin{bmatrix}
@@ -66,7 +66,7 @@ Let $\mathbf{A}$ be $m\times n$ and $\mathbf{B}$ be $p\times q$. The **Kronecker
     \vdots & \vdots &  & \vdots \\
     A_{m1} \mathbf{B} & A_{m2}\mathbf{B} & \cdots & A_{mn}\mathbf{B}
     \end{bmatrix}.
-:::
+```
 ::::
 
 ::::{prf:example} Kronecker product
@@ -110,10 +110,10 @@ Given matrices for which the non-Kronecker operations make sense, the following 
 
 For the vec operation defined in {numref}`Definition {number} <definition-diffadv-vec>` and matrices of compatible sizes,
 
-:::{math}
+```{math}
 :label: vecidentity
 \operatorname{vec}(\mathbf{A}\mathbf{B}\mathbf{C}^T) = ({\mathbf{C}}\otimes {\mathbf{A}})\operatorname{vec}(\mathbf{B}).
-:::
+```
 ::::
 
 ::::{prf:proof}
@@ -153,13 +153,13 @@ $$
 
 where $\mathbf{I}_{x}$ and $\mathbf{I}_{y}$ are the $(m+1)\times (m+1)$ and $(n+1)\times (n+1)$ identities, respectively. Upon taking the vec of both sides and applying {eq}`vecidentity`, we obtain
 
-:::{math}
+```{math}
 :label: poiskronpde
 \begin{split}
 \underbrace{\bigl[ ({\mathbf{I}_{y}} \otimes {\mathbf{D}_{xx}}) + ({\mathbf{D}_{yy}}\otimes {\mathbf{I}_{x}})\bigr]}_{\mathbf{L}} \, \underbrace{\operatorname{vec}(\mathbf{U})}_{\mathbf{u}} &=
   \underbrace{\operatorname{vec}(\mathbf{F})}_{\mathbf{f}}  \\[1mm] \mathbf{L} \mathbf{u} &= \mathbf{f}.
 \end{split}
-:::
+```
 
 This is in the form of a standard linear system in $(m+1)(n+1)$ variables.
 
@@ -174,17 +174,17 @@ $$
 
 Hence, from $\mathbf{L}$ we should subtract away its $i$th row and add $\mathbf{e}_i^T$ back in. When this is done for all $i\in B$, the result is the replacement of the relevant rows of $\mathbf{A}$ with relevant rows of the identity:
 
-:::{math}
+```{math}
 :label: pois2bcrep
   \mathbf{A} = \mathbf{L} - \mathbf{I}_B\mathbf{L} +\mathbf{I}_B,
-:::
+```
 
 where $\mathbf{I}_B$ is a square matrix with zeros everywhere except for ones at $(i,i)$ for all $i\in B$. A similar expression can be written for the modification of $\mathbf{f}$,
 
-:::{math}
+```{math}
 :label: pois2bcreprhs
   \mathbf{b} = \mathbf{f} + \mathbf{I}_B( \mathbf{g} - \mathbf{f}),
-:::
+```
 
 where $\mathbf{g} = \operatorname{vec}(\operatorname{mtx}(g))$ is the vector of boundary function evaluations. The result is a modified linear system $\mathbf{A}\mathbf{u}=\mathbf{b}$ that has incorporated the desired boundary conditions.
 

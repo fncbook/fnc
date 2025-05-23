@@ -41,17 +41,17 @@ Let a numerical method be used to solve an evolutionary PDE on a grid, such that
 :label: example-upwind-centered
 In $u_t+cu_x=0$, suppose we discretize $u_x$ by a centered difference:
 
-:::{math}
+```{math}
 :label: cflcentral
   u_x(x_i,t_j) \approx \frac{U_{i+1,j}-U_{i-1,j}}{2h}.
-:::
+```
 
 If we use the Euler time discretization with step size $\tau$, then
 
-:::{math}
+```{math}
 :label: cflcenteuler
   U_{i,j+1} = U_{i,j} - \frac{c\tau}{2h} (U_{i+1,j}-U_{i-1,j}).
-:::
+```
 
 Starting with $j=0$, we find that $U_{i,1}$ depends on $U_{i-1,0}$, $U_{i,0}$, and $U_{i+1,0}$. Hence, the numerical domain of dependence at $(x_i,t_1)$ is $\{x_{i-1},x_i,x_{i+1}\}$.
 
@@ -101,10 +101,10 @@ $$
 $$
 
 This interval captures the exact domain of dependence $\{x-ct\}$ only if 
-:::{math}
+```{math}
 :label: cfl-speed
   |c| \le \frac{h}{\tau}.
-:::
+```
 ::::
 
 Equation {eq}`cfl-speed` is the implication of the CFL condition for the stated discretization. Notice that $h/\tau$ is the speed at which information moves in the numerical method, which leads to the following restatement.
@@ -160,19 +160,19 @@ Numerical methods can also have a directional preference.
 :label: example-upwind-onesided
 Suppose that in $u_t+cu_x=0$ we use the backward difference
 
-:::{math}
+```{math}
 :label: cflbackward 
   u_x(x_i,t_j)  \approx \frac{U_{i,j}-U_{i-1,j}}{h}  
-:::
+```
 
 together with an Euler scheme in time. It should be clear that $U_{i,j}$ depends only on points to the left of $x_i$, i.e., the upwind direction of the numerical method is to the left. But if $c<0$, the upwind direction of the PDE is to the right. Hence, it is impossible to satisfy the CFL condition under these choices.
 
 Similarly, the forward difference
 
-:::{math}
+```{math}
 :label: cflforward
   u_x(x_i,t_j)  \approx \frac{U_{i+1,j}-U_{i,j}}{h}
-:::
+```
 
 with explicit time stepping leads to the inverse conclusion: its upwind direction is to the right, and it must fail if $c>0$.
 ::::

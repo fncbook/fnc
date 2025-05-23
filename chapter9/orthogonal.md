@@ -41,17 +41,17 @@ We can extend least-squares fitting from data to functions by extending several 
 :label: definition-funinnerproduct
 Let $S$ be the set of continuous real-valued functions on the interval $[-1,1]$. The **inner product** of any functions $f$ and $g$ in $S$ is the real scalar
 
-:::{math}
+```{math}
 :label: leginner
 \langle f,g \rangle  = \int_{-1}^1 f(x)g(x)\,dx.
-:::
+```
 
 With this inner product, $S$ is an **inner product space**. The 2-norm of a function $f\in S$ is
 
-:::{math}
+```{math}
 :label: fun2norm
 \|f\|_2 = \sqrt{\rule[1mm]{0pt}{0.75em}\langle f,f \rangle}.
-:::
+```
 
 Functions $f$ and $g$ in $S$ are **orthogonal** if
 
@@ -70,9 +70,9 @@ $$
 
 in which the $i$th row of $\mathbf{v}_j$ is $t_i^j$. This was derived as a discrete approximation for $j=0,\ldots,n$. 
 
-:::{math}
+```{math}
 \mathbf{y} \approx c_0 + c_1 x + \cdots + c_n x^n,
-:::
+```
 
 which we want to abbreviate in "matrix"-vector form.
 
@@ -83,30 +83,30 @@ which we want to abbreviate in "matrix"-vector form.
 :label: definition-quasimatrix
 Given functions $f_1,\ldots,f_n$ in inner product space $S$, define the **quasimatrix**
 
-:::{math}
+```{math}
 :label: quasimat
 \mathbf{F} =
 \begin{bmatrix}
     \underline{f_1(x)} & \underline{f_2(x)} & \cdots &  \underline{f_n(x)}
 \end{bmatrix}.
-:::
+```
 
 For a vector $\mathbf{z} \in \real^n$, define the quasimatrix-vector product
 
-:::{math}
+```{math}
 :label: quasimatvec
 \mathbf{F}\mathbf{z} = z_1f_1(x) + z_2f_2(x) + \cdots + z_n f_n(x).
-:::
+```
 
 For another function $g\in S$, define the adjoint product
 
-:::{math}
+```{math}
 :label: quasimatfun
   \mathbf{F}^T g =
   \begin{bmatrix}
     \langle f_1,g \rangle \\ \vdots  \\  \langle f_n,g \rangle
   \end{bmatrix}.
-:::
+```
 
 ::::
 
@@ -115,10 +115,10 @@ For another function $g\in S$, define the adjoint product
 
 Given functions $f_1,\ldots,f_n$ in inner product space $S$, their **Gram matrix** is the $n\times n$ matrix
 
-:::{math}
+```{math}
 :label: Gram
 \mathbf{F}^T \mathbf{F} = \bigl[ \langle f_i,f_j \rangle \bigr]_{\,i,j=1,\ldots,n},
-:::
+```
 
 where $\mathbf{F}$ is their quasimatrix and $\langle f_i,f_j \rangle$ is the inner product of $f_i$ and $f_j$.
 ::::
@@ -143,10 +143,10 @@ $$
 
 The discrete linear least-squares problem of minimizing  $\| \mathbf{y} - \mathbf{V} \mathbf{c} \|_2$ over all possible $\mathbf{c}$, given matrix $\mathbf{V}$ and data vector $\mathbf{y}$, has a solution via the normal equations {eq}`normaleqns`,
 
-:::{math}
+```{math}
 :label: normalLS
 \mathbf{c} = \left(\mathbf{V}^T\mathbf{V}\right)^{-1} \mathbf{V}^T \mathbf{y}.
-:::
+```
 
 We can now reinterpret {eq}`normalLS` in terms of quasimatrices. 
 
@@ -154,16 +154,16 @@ We can now reinterpret {eq}`normalLS` in terms of quasimatrices.
 :label: theorem-orthogonal-normal
 Given functions $f_1,\ldots,f_n$ and $y$ in an inner product space $S$, the least-squares problem
 
-:::{math}
+```{math}
 \operatorname{argmin}_{\mathbf{c}\in \real^n} \| c_1f_1(x) + \cdots + c_n f_n(x) - y(x) \|_2
-:::
+```
 
 has the solution
 
-:::{math}
+```{math}
 :label: contLSsol
 \mathbf{c} = \left(\mathbf{F}^T\mathbf{F}\right)^{-1} \mathbf{F}^T y,
-:::
+```
 
 where $\mathbf{F}$ is the quasimatrix {eq}`quasimat`.
 ::::
@@ -251,14 +251,14 @@ For what follows, let $\mathcal{P}_n \subset S$ be the set of polynomials of deg
 :label: definition-legendrepoly
 The **Legendre polynomials** are 
 
-:::{math}
+```{math}
 :label: legendre
  \begin{split}
      P_0(x) &= 1, \\
      P_1(x) &= x, \\
      P_{k}(x) &= \frac{2k-1}{k}xP_{k-1}(x) - \frac{k-1}{k}P_{k-2}(x), \qquad k = 2,3,\ldots.
  \end{split}
-:::
+```
 ::::
 
 Here are some key facts that are straightforward to prove.
@@ -269,50 +269,50 @@ Here are some key facts that are straightforward to prove.
 2. $P_0,\ldots,P_n$ form a basis for $\mathcal{P}_n$. 
 3. The Legendre polynomials are mutually orthogonal. More specifically, the Gram matrix is given by
 
-:::{math}
+```{math}
 :label: legendreortho
  \langle P_i,P_j \rangle =
  \begin{cases}
    0, & i \neq j, \\
    \alpha_i^2 = \bigl(i+\tfrac{1}{2}\bigr)^{-1}, & i=j.
  \end{cases}
-:::
+```
 ::::
 
 Now let us define the quasimatrix
 
-:::{math}
+```{math}
 :label: legquasi
   \mathbf{L}_n(x) =
   \begin{bmatrix}
     \alpha_0^{-1} \underline{P_0} & \alpha_1^{-1} \underline{P_1} & \cdots
     & \alpha_{n}^{-1} \underline{P_{n}}
   \end{bmatrix}.
-:::
+```
 
 Then $\mathbf{L}_n^T\mathbf{L}_n=\mathbf{I}$. The normal equations {eq}`contLSsol` thus simplify accordingly. Unraveling the definitions, we find the least-squares solution
 
-:::{math}
+```{math}
 :label: funlssoln
   \mathbf{L}_n \bigl( \mathbf{L}_n^T f \bigr) = \sum_{k=0}^n c_k P_k(x), \quad \text{where }
   c_k = \frac{1}{\alpha_k^2} \langle P_k,f \rangle.
-:::
+```
 
 ## Chebyshev polynomials
 
 Equation {eq}`leginner` is not the only useful way to define an inner product on a function space. It can be generalized to
 
-:::{math}
+```{math}
 :label: weightedinner
   \langle f,g \rangle = \int_{-1}^1 f(x)g(x)w(x)\,dx
-:::
+```
 
 for a positive function $w(x)$ called the **weight function** of the inner product. An important special case is
 
-:::{math}
+```{math}
 :label: chebinner
   \langle f,g \rangle  = \int_{-1}^1 \frac{f(x)g(x)}{\sqrt{1-x^2}}\,dx.
-:::
+```
 
 ```{index} ! Chebyshev polynomials
 ```
@@ -321,22 +321,22 @@ for a positive function $w(x)$ called the **weight function** of the inner produ
 :label: definition-chebyshevpoly
 The **Chebyshev polynomials** are defined by
 
-:::{math}
+```{math}
 :label: chebyshev
  \begin{split}
      T_0(x) &= 1, \\
      T_1(x) &= x, \\
      T_{k}(x) &= 2xT_{k-1}(x) - T_{k-2}(x) ,\qquad k = 2,3,\ldots.
  \end{split}
-:::
+```
 ::::
 
 Chebyshev polynomials also have a startling alternative form,
 
-:::{math}
+```{math}
 :label: chebaltform
 T_k(x) = \cos\left( k \theta \right), \quad \theta = \arccos(x).
-:::
+```
 
 The results from @theorem-orthogonal-legendre apply to Chebyshev polynomials as well, with orthogonality being in the sense of {eq}`chebinner`. Their Gram matrix is given by
 
@@ -370,20 +370,20 @@ $$
 
 By definition, $r(x)P_n(x)$ does not change sign over $(-1,1)$. Therefore
 
-:::{math}
+```{math}
 :label: legrootint
   \int_{-1}^1 r(x)P_n(x) \, dx \neq 0.
-:::
+```
 
 Because $r$ is a degree-$m$ polynomial, we can express it as a combination of $P_0,\ldots,P_m$. If $m<n$, the integral {eq}`legrootint` would be zero, by the orthogonality property of Legendre polynomials. So $m\ge n$. Since $P_n(x)$ has at most $n$ real roots, $m=n$. All of the roots must therefore be simple, and this completes the proof.
 ::::
 
 The result of @theorem-orthogonal-roots holds for orthogonal families of polynomials for other weight functions. The Chebyshev case is unusual in that thanks to {eq}`chebaltform`, the roots of $T_n$ are known explicitly:
 
-:::{math}
+```{math}
 :label: chebfirstpoints
   t_k = \cos\left(\frac{2k-1}{2n}\pi\right), \qquad k=1,\ldots,n.
-:::
+```
 
 ```{index} ! Chebyshev points; first kind
 ```

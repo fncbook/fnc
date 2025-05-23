@@ -13,28 +13,28 @@ In a {term}`boundary-value problem`, the state is not entirely given at any poin
 
 ::::{prf:definition} Two-point boundary-value problem: TPBVP
 :label: definition-tpbvp
-:::{math}
+```{math}
 :label: tpbvp
 \begin{split}
 u''(x) &= \phi(x,u,u'), \qquad a \le x \le b,\\
 g_1(u(a),u'(a)) &= 0,\\
 g_2(u(b),u'(b)) &= 0.
 \end{split}
-:::
+```
 
 The functions $g_1$ and $g_2$ are called **boundary conditions**.
 
 This TPBVP is said to be **linear** if the dependence of $\phi$, $g_1$, and $g_2$ on the solution $u(x)$ is linear. Specifically, this means that 
 
-:::{math}
+```{math}
 \phi(x, u, u') = p(x)u' + q(x)u + r(x)
-:::
+```
 
 for some coefficient functions $p$, $q$, and $r$, and 
 
-:::{math}
+```{math}
 g_i(u, u') = \alpha_i u + \beta_i u' - \gamma_i, \quad i=1,2,
-:::
+```
 
 for some constants $\alpha_i$, $\beta_i$, and $\gamma_i$. 
 ::::
@@ -78,17 +78,17 @@ While time can be the independent variable in a TPBVP, as in {numref}`Example {n
 :label: example-tpbvp-mems
 A micro-electromechanical system (MEMS) can have an actuator consisting of two flat, parallel, disk-shaped surfaces, one at $z=0$ and the other at $z=1$. The surface at $z=0$ is a rigid metal plate. The surface at $z=1$ is an elastic membrane fixed only at its boundary. When the surfaces are given different electric potentials, the membrane deflects in response to the induced electric field, and the field is also a position of the deflection. Assuming circular symmetry, one may derive the ordinary differential equation {cite}`peleskoEffectSmallaspectratio2006`
 
-:::{math}
+```{math}
 :label: mems
 \frac{d^2w}{d r^2} + \frac{1}{r}\, \frac{d w}{d r} = \frac{\lambda}{w^2},
-:::
+```
 
 where $w(r)$ is the vertical position of the membrane at radius $r$, and $\lambda$ is proportional to the applied electric potential. We will use $0\le r\le 1$. There are also the supplemental physical conditions
 
-:::{math}
+```{math}
 :label: memsbc
 w'(0)=0, \qquad w(1)=1,
-:::
+```
 
 derived from the circular symmetry and fixing the edge of the membrane, respectively. This is a nonlinear boundary-value problem. The solution should respect $0<w(r)\le 1$ in order to be physically meaningful.
 ::::
@@ -101,13 +101,13 @@ We can solve the TPBVP {eq}`tpbvp` by recasting the problem as a first-order sys
 :label: demo-tpbvp-mems
 As a system, the MEMS problem from {numref}`Example {number} <example-tpbvp-mems>` uses $y_1=w$, $y_2=w'$ to obtain
 
-:::{math}
+```{math}
 :label: memssys
 \begin{split}
 y_1' &= y_2, \\
 y_2' &= \frac{\lambda}{y_1^2} - \frac{y_2}{r}.
 \end{split}
-:::
+```
 
 This has the form $\mathbf{y}' = \mathbf{f}(r,\mathbf{y})$. In the original variable, the boundary conditions are $w'(0)=0$ and $w(1)=1$. We have to encode these in the new variable as $y_2(0)=0$ and $y_1(1)-1 = 0$.
 

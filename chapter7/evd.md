@@ -399,12 +399,12 @@ The process demonstrated in @demo-evd-francisqr is known as the *Francis QR iter
 
 **(b)** ✍ The eigenvalues of a triangular matrix are its diagonal entries. Prove this in the $3\times 3$ case,
 
-:::{math}
+```{math}
 \mathbf{T} =
 \begin{bmatrix}
 t_{11} & t_{12}&  t_{13}\\ 0 & t_{22} & t_{23} \\ 0 & 0 & t_{33}
 \end{bmatrix},
-:::
+```
 
 by finding the eigenvectors. (Start by showing that $[1,0,0]^T$ is an eigenvector. Then show how to make $[a,1,0]^T$ an eigenvector, except for one case that does not change the outcome. Continue the same logic for $[a,b,1]^T$.)
 ``````

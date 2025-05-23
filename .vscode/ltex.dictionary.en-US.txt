@@ -46,3 +46,11 @@ Deblurring
 deblurring
 operatorname
 Galerkin
+cdot
+tfrac
+mtx
+qquad
+equispaced
+ODEs
+semidiscretized
+vec

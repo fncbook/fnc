@@ -3,14 +3,15 @@ numbering:
     enumerator: 13.2.%s
 ---
 (section-twodim-diffadv)=
+
 # Two-dimensional diffusion and advection
 
 We next describe how to apply the method of lines to PDEs of the form
 
-:::{math}
+```{math}
 :label: pde2d
   u_t = \phi(u,u_x,u_y,u_{xx},u_{xy},u_{yy}), \quad (x,y)\in [a,b]\times [c,d].
-:::
+```
 
 The PDE may be of either parabolic or hyperbolic type, with the primary difference being potential restrictions on the time step size. To keep descriptions and implementations relatively simple, we will consider only periodic conditions or Dirichlet boundary conditions.
 
@@ -39,17 +40,17 @@ Our destination is an IVP that can be solved by a Runge–Kutta or multistep sol
 :label: definition-diffadv-vec
 Let $\mathbf{A}$ be an $m\times n$ matrix. Define the **vec** function as stacking the columns of $\mathbf{A}$ into a vector, i.e.,
 
-:::{math}
+```{math}
 :label: vecdef
 \operatorname{vec}(\mathbf{A}) =
 \begin{bmatrix}
 A_{11} \\ \vdots \\ A_{m1}  \\ \vdots  \\ A_{1n} \\ \vdots \\ A_{m n}
 \end{bmatrix}.
-:::
+```
 
 Let $\mathbf{z}$ be a vector of length $m n$. Define the **unvec** function as the inverse of vec:
 
-:::{math}
+```{math}
 :label: unvecdef
 \operatorname{unvec}(\mathbf{z}) = \begin{bmatrix}
   z_1 & z_{m+1} & \cdots & z_{m(n-1)+1} \\
@@ -57,7 +58,8 @@ Let $\mathbf{z}$ be a vector of length $m n$. Define the **unvec** function as t
   \vdots & \vdots & & \vdots \\
   z_m & z_{2m} & \cdots & z_{m n} \\
 \end{bmatrix}.
-:::
+```
+
 ::::
 
 Suppose $\mathbf{U} = \operatorname{mtx}(u)$ is the matrix of unknowns. @tab-vec-unvec shows how to convert between $\mathbf{U}$ and $\mathbf{u} = \operatorname{vec}(\mathbf{U})$.
@@ -201,10 +203,10 @@ In {numref}`section-diffusion-boundaries` we coped with boundary conditions by r
 
 We proceed similarly here, defining `chop` and `extend` functions that convert between the full grid and the inner grid of interior values. Mathematically speaking, the chopping operation is defined by
 
-:::{math}
+```{math}
 :label: tensorprod-chop
 \operatorname{chop}(\mathbf{U}) = \mathbf{E}_x \mathbf{U} \mathbf{E}_y^T,
-:::
+```
 
 where
 
@@ -246,7 +248,6 @@ $$
 $$
 
 reverses the transformation, which is needed after the time derivative is computed on the full grid.
-
 
 ```{warning}
 The `vec` and `unvec` reshaping operations in this context take place on the _interior_ grid, not the full grid. 
@@ -293,13 +294,13 @@ We solve an advection-diffusion problem, $u_t + u_x = 1 + \epsilon(u_{xx} + u_{y
 
 The wave equation introduces a little additional complexity. First, we write the 2D wave equation $u_{tt}=c^2(u_{xx}+u_{yy})$ in first-order form as
 
-:::{math}
+```{math}
 :label: wave2dfirst
 \begin{split}
     u_t &= v, \\
     v_t &= c^2(u_{xx}+u_{yy}).
 \end{split}
-:::
+```
 
 Typical boundary conditions are to prescribe $u$ on the boundary and let $v$ be unspecified.
 
@@ -365,14 +366,14 @@ We solve the wave equation with $c=1$ on the square $[-2,2]\times[-2,2]$, with $
 :label: problem-diffadv-maxwell
 From Maxwell's equations we can find a way to convert the wave equation to a first-order form that, unlike {eq}`wave2dfirst`, uses only first-order derivatives in space:
 
-:::{math}
+```{math}
 :label: wave2dTM
 \begin{split}
 u_t &= c^2(v_y - w_x),\\
 v_t &= u_y, \\
 w_t &= -u_x,
 \end{split}
-:::
+```
 
 subject to $u=0$ on the boundary.
 

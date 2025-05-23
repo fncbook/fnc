@@ -31,10 +31,10 @@ In [Chapter 5](#chapter-localapprox) and [Chapter 9](#chapter-globalapprox) we u
 
 We first discretize the interval $x\in[a,b]$ into equal pieces of length $h=(b-a)/n$, leading to the nodes
 
-:::{math}
+```{math}
 :label: bvp-fdnodes
 x_i=a + i h, \quad  i=0,\ldots,n, \qquad h=\frac{b-a}{n}.
-:::
+```
 
 Note again that our node indexing scheme starts at zero. Our goal is to find a vector $\mathbf{g}$ such that $g_i \approx f'(x_i)$ for $i=0,\ldots,n$. Our first try is the forward difference formula {eq}`forwardFD11`,
 
@@ -59,7 +59,7 @@ $$
 
 and then the vector equation
 
-:::{math}
+```{math}
 :label: diffmat11
 \begin{bmatrix}
 f'(x_0) \\[1mm] f'(x_1) \\[1mm] \vdots \\[1mm] f'(x_{n-1}) \\[1mm] f'(x_n)
@@ -75,7 +75,7 @@ f'(x_0) \\[1mm] f'(x_1) \\[1mm] \vdots \\[1mm] f'(x_{n-1}) \\[1mm] f'(x_n)
 & & & -1 & 1 \\[1mm]
 & & & -1 & 1
 \end{bmatrix}.
-:::
+```
 
 The matrix $\mathbf{D}_x$ in @diffmat11 is a finite-difference differentiation matrix.  Here as elsewhere, elements of $\mathbf{D}_x$ that are not shown are zero. Each row of $\mathbf{D}_x$ gives the weights of a finite-difference formula being used at one of the nodes.
 
@@ -95,7 +95,7 @@ The differentiation matrix $\mathbf{D}_x$ in {eq}`diffmat11` is not a unique cho
 
 A second-order accurate differentiation matrix for the first derivative using finite differences is 
 
-:::{math}
+```{math}
 :label: diffmat12b
 \mathbf{D}_x = \frac{1}{h}
 \begin{bmatrix}
@@ -106,7 +106,7 @@ A second-order accurate differentiation matrix for the first derivative using fi
 &      &        & -\frac{1}{2}   & 0      & \frac{1}{2} \\[1mm]
 &      &        & \frac{1}{2}    & -2     & \frac{3}{2}
 \end{bmatrix},
-:::
+```
 
 to be applied to a vector of function values at the nodes @bvp-fdnodes.
 ```
@@ -283,10 +283,10 @@ We can modify this process by using a global interpolant, either polynomial or t
 
 In a nonperiodic setting, we use Chebyshev second-kind points for stability:
 
-:::{math}
+```{math}
 :label: bvp-chebnodes
 x_k = -\cos\left(\frac{k \pi}{n}\right), \qquad k=0,\ldots,n.
-:::
+```
 
 ```{index} differentiation matrix
 ```
@@ -296,7 +296,7 @@ x_k = -\cos\left(\frac{k \pi}{n}\right), \qquad k=0,\ldots,n.
 
 Using a vector $\mathbf{f}$ of function values at the Chebyshev nodes @bvp-chebnodes, the vector $\mathbf{D}_x \mathbf{f}$ will have approximate first derivative values at those nodes, where the entries of $\mathbf{D}_x$ are given by 
 
-:::{math}
+```{math}
 :label: chebdiffmat
   \begin{gathered}
     D_{00} = \dfrac{2n^2+1}{6}, \qquad D_{n n} = -\dfrac{2n^2+1}{6}, \\
@@ -306,7 +306,7 @@ Using a vector $\mathbf{f}$ of function values at the Chebyshev nodes @bvp-chebn
       \dfrac{c_i}{c_j}\, \dfrac{(-1)^{i+j}}{x_i-x_j}, & i\neq j,
     \end{cases}
   \end{gathered}
-:::
+```
 
 where $c_0=c_n=2$ and $c_i=1$ for $i=1,\ldots,n-1$.
 

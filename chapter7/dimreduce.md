@@ -14,7 +14,7 @@ numbering:
 
 The SVD has another important property that proves very useful in a variety of applications. Let $\mathbf{A}$ be a real $m\times n$ matrix with SVD $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^T$ and (momentarily) $m\ge n$. Another way of writing the thin form of the SVD is
 
-::::{math}
+````{math}
 :label: svdsum
 \begin{split}
   \mathbf{A} = \hat{\mathbf{U}}\hat{\mathbf{S}}\mathbf{V}^T &=
@@ -38,7 +38,7 @@ The SVD has another important property that proves very useful in a variety of a
   \end{bmatrix} \\
   &= \sigma_1 \mathbf{u}_{1}\mathbf{v}_{1}^T + \cdots + \sigma_r \mathbf{u}_{r}\mathbf{v}_{r}^T = \sum_{i=1}^r \sigma_i \mathbf{u}_{i}\mathbf{v}_{i}^T,
 \end{split}
-::::
+````
 
 where $r$ is the rank of $\mathbf{A}$. The final formula also holds for the case $m<n$.
 

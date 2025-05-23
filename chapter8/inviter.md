@@ -23,31 +23,31 @@ The equation $\mathbf{A}\mathbf{v}=\lambda \mathbf{v}$ implies that $(\mathbf{A}
 
 Consider first part 2 of the theorem with $s=0$, and suppose that $\mathbf{A}$ has a *smallest* eigenvalue,
 
-:::{math}
+```{math}
 |\lambda_n| \ge |\lambda_{n-1}| \ge \cdots > |\lambda_1|.
-:::
+```
 
 Then clearly
 
-:::{math}
+```{math}
 |\lambda_1^{-1}| > |\lambda_{2}^{-1}| \ge \cdots \ge |\lambda_n^{-1}|,
-:::
+```
 
 ```{index} eigenvalue; dominant
 ```
 
 and $\mathbf{A}^{-1}$ has a {term}`dominant eigenvalue`. Hence power iteration on $\mathbf{A}^{-1}$ can be used to find the eigenvalue of $\mathbf{A}$ closest to zero. For nonzero values of $s$, then we suppose there is an ordering
 
-:::{math}
+```{math}
 :label: shiftorder
 |\lambda_n-s| \ge \cdots \ge |\lambda_2-s|  > |\lambda_1-s|.
-:::
+```
 
 Then it follows that
 
-:::{math}
+```{math}
 |\lambda_1-s|^{-1} > |\lambda_{2}-s|^{-1} \ge \cdots \ge |\lambda_n-s|^{-1},
-:::
+```
 
 and power iteration on the matrix $(\mathbf{A}-s\mathbf{I})^{-1}$ converges to $(\lambda_1-s)^{-1}$, which is easily solved for $\lambda_1$ itself.
 
@@ -55,10 +55,10 @@ and power iteration on the matrix $(\mathbf{A}-s\mathbf{I})^{-1}$ converges to $
 
 A literal application of {numref}`Algorithm {number} < definition-poweriteration>` would include the step 
 
-:::{math}
+```{math}
 :label: shiftinvstepbad
 \mathbf{y}_k = (\mathbf{A}-s\mathbf{I})^{-1} \mathbf{x}_k.
-:::
+```
 
 As always, we do not want to explicitly find the inverse of a matrix. Instead, we should write this step as the solution of a linear system.
 
@@ -124,11 +124,11 @@ Each pass of inverse iteration requires the solution of a linear system of equat
 
 The convergence is linear, at a rate found by reinterpreting {eq}`poweriterconv` with $(\mathbf{A}-s\mathbf{I})^{-1}$ in place of $\mathbf{A}$:
 
-:::{math}
+```{math}
 :label: inviterconv
 \frac{\beta_{k+1} - \lambda_1}{\beta_{k} - \lambda_1} \rightarrow
 \frac{  \lambda_1 - s } {\lambda_2 - s}\quad \text{ as } \quad k\rightarrow \infty,
-:::
+```
 
 with the eigenvalues ordered as in {eq}`shiftorder`. Thus, the convergence is best when the shift $s$ is close to the target eigenvalue $\lambda_1$, specifically when it is much closer to that eigenvalue than to any other.
 

@@ -116,10 +116,10 @@ Significantly, the convergence observed in @demo-stability-runge is stable withi
 
 The observations above hint that we might find success by having more nodes near the ends of the interval than in the middle. Though we will not give the details, it turns out that there is a precise asymptotic sense in which this must be done to make polynomial interpolation work over the entire interval. One especially important node family that gives stable convergence for polynomial interpolation is the **Chebyshev points of the second kind** (or *Chebyshev extreme points*) defined by
 
-:::{math}
+```{math}
 :label: chebextreme
  t_k = - \cos\left(\frac{k \pi}{n}\right), \qquad k=0,\ldots,n.
-:::
+```
 
 These are the projections onto the $x$-axis of $n$ equally spaced points on a unit circle. They are densely clustered near the ends of $[-1,1]$, and this feature turns out to overcome the Runge phenomenon.
 
@@ -176,14 +176,14 @@ These are the projections onto the $x$-axis of $n$ equally spaced points on a un
 
 As a bonus, for Chebyshev nodes the barycentric weights are simple:
 
-:::{math}
+```{math}
 :label: weightcheb
   w_k = (-1)^k d_k, \qquad d_k =
   \begin{cases}
     1/2 & \text{if $k=0$ or $k=n$},\\
     1 & \text{otherwise}.
   \end{cases}
-:::
+```
 
 ## Spectral convergence
 
@@ -193,10 +193,10 @@ If we take $n\rightarrow \infty$ and use polynomial interpolation on Chebyshev n
 :label: theorem-spectral
 Suppose $f(x)$ is analytic in an open real interval containing $[-1,1]$. Then there exist constants $C>0$ and $K>1$ such that
   
-:::{math}
+```{math}
 :label: spectral
 \max_{x\in[-1,1]} | f(x) - p(x) | \le C K^{-n},
-:::
+```
 
 where $p$ is the unique polynomial of degree $n$ or less defined by interpolation on $n+1$ Chebyshev second-kind points.
 ::::
@@ -275,10 +275,10 @@ On the left, we use a log-log scale, which makes fourth-order algebraic converge
 :label: problem-stability-changeinterval
 The Chebyshev points can be used when the interval of interpolation is $[a,b]$ rather than $[-1,1]$ by means of the change of variable
 
-:::{math}
+```{math}
 :label: changeinterval
 z = \psi(x) = a + (b-a)\frac{(x+1)}{2}.
-:::
+```
 
 **(a)** ✍  Show that $\psi(-1) = a$, $\psi(1) = b$, and $\psi$ is strictly increasing on $[-1,1]$.
 
@@ -293,10 +293,10 @@ z = \psi(x) = a + (b-a)\frac{(x+1)}{2}.
 :label: problem-stability-infinite
 The Chebyshev points can be used for interpolation of functions defined on the entire real line by using the change of variable
 
-:::{math}
+```{math}
 :label: changeintervalinf
 z = \phi(x) = \frac{2x}{1-x^2},
-:::
+```
 
 which maps the interval $(-1,1)$ in one-to-one fashion to the entire real line.
 

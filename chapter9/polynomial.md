@@ -32,13 +32,13 @@ In our earlier encounters with polynomial interpolation, we found the interpolan
 
 It is surprisingly straightforward to construct a cardinal basis for global polynomial interpolation. By definition, each member $\ell_{k}$ of the basis, for $k=0,\ldots,n$, is an $n$th degree polynomial satisfying the cardinality conditions
 
-:::{math}
+```{math}
 :label: lagrangecond
   \ell_{k}(t_j) = \begin{cases}
   1 &\text{if $j=k$,}\\
   0 & \text{otherwise.}
   \end{cases}
-:::
+```
 
 Recall that any polynomial of degree $n$ can be expressed as
 
@@ -56,13 +56,13 @@ where $r_1,\dots,r_n$ are the roots of the polynomial and $c$ is a constant. The
 :label: definition-lagrangecardinal
 Given distinct nodes $t_0,\ldots,t_n$, the polynomial
 
-:::{math}
+```{math}
 :label: lagrange
 \begin{split}
 \ell_{k}(x) & = \frac{(x-t_0)\dots(x-t_{k-1})(x-t_{k+1})\dots(x-t_n)}{(t_k-t_0)\dots(t_k-t_{k-1})(t_k-t_{k+1})\dots(t_k-t_n)} \\[1mm]
 &= \prod_{\substack{i=0\\i\ne k}}^n \frac{(x-t_i)}{(t_k-t_i)}
 \end{split}
-:::
+```
 
 is of degree at most $n$ and satisfies the cardinality conditions {eq}`lagrangecond`.
 ::::
@@ -101,10 +101,10 @@ Because they are a cardinal basis, the Lagrange polynomials lead to a simple exp
 :label: theorem-lagrangeinterp
 Given points $(t_k,y_k)$ for $k=0,\ldots,n$ with all the $t_k$ distinct, the unique polynomial of degree $n$ or less that interpolates the points is
 
-:::{math}
+```{math}
 :label: lagrangeinterp
 p(x) = \sum_{k=0}^n y_k \ell_k(x).
-:::
+```
 ::::
 
 At this point we can say that we have completed the proof of @theorem-polyinterp.
@@ -145,20 +145,20 @@ In addition to existence, uniqueness,  and the constructive Lagrange formula, we
 ::::{prf:definition} Error indicator function
 :label: definition-polynomial-indicator
 The **error indicator function** for a set of distinct nodes $t_0,\ldots,t_n$ is
-:::{math}
+```{math}
 :label: lagrange-phi
 \Phi(x) = \prod_{i=0}^n (x-t_i).
-:::
+```
 ::::
 
 ::::{prf:theorem} Polynomial interpolation error
 :label: theorem-polynomial-interperror
 Let $t_0,\dots,t_n$ be distinct points in $[a,b]$, and suppose $f$ has at least $n+1$ continuous derivatives in that interval. Let $p(x)$ be the unique polynomial of degree at most $n$ interpolating $f$ at $t_0,\dots,t_n$. Then for each $x\in[a,b]$, there exists a number $\xi(x)\in(a,b)$ such that
   
-:::{math}
+```{math}
 :label: interperror
 f(x) - p(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!} \Phi(x),
-:::
+```
 
 with $\Phi$ given in {eq}`lagrange-phi`.
 ::::
@@ -220,10 +220,10 @@ For equispaced nodes, @theorem-polyinterp has an immediate consequence.
 :label: theorem-polyequi
 Suppose $t_i=i h$ for constant step size $h$ and all $i=0,1,\ldots,n$, and that $f$ has $n+1$ continuous derivatives in $(t_0,t_n)$. If $x\in[t_0,t_n]$, then there exists $\xi(x)\in(t_0,t_n)$ and $C$ independent of $x$ such that
   
-:::{math}
+```{math}
 :label: equisperror
 |f(x) - p(x)| \le C f^{(n+1)}(\xi) h^{n+1}.
-:::
+```
 
 In particular, $|f(x)-p(x)|=O(h^{n+1})$ as $h\to 0$.
 ::::

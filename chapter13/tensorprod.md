@@ -3,6 +3,7 @@ numbering:
   enumerator: 13.1.%s
 ---
 (section-twodim-tensorprod)=
+
 # Tensor-product discretizations
 
 As you learned when starting double integration in vector calculus, the simplest extension of an interval to two dimensions is a rectangle. We will use a particular notation for rectangles.
@@ -14,11 +15,9 @@ As you learned when starting double integration in vector calculus, the simplest
 :label: definition-tensordomain
 A {term}`tensor-product domain` is two dimensions is the rectangle
 
-:::{math}
+```{math}
 :label: rectangleTP
   [a,b] \times [c,d] = \bigl\{ (x,y)\in\mathbb{R}^2 : a\le x \le b,\; c\le y \le d \bigr\}.
-:::
-
 ```
 
 ```{note}
@@ -33,17 +32,17 @@ The discretization of a two-dimensional tensor-product domain is straightforward
 :label: definition-tensorgrid
 Given discretizations of two intervals,
 
-:::{math}
+```{math}
 :label: twointervals
 a= x_0< x_1 < \cdots < x_m = b,  \qquad c = y_0 < y_1 < \cdots < y_n = d,
-:::
+```
 
 then a **tensor-product grid** on $[a,b]\times[c,d]$ is the set
 
-:::{math}
+```{math}
 :label: rectangledisc
   \bigl\{ (x_i, y_j): i=0,\ldots,m,\; j=0,\ldots,n \bigr\}.
-:::
+```
 ````
 
 @fig-tensor-grid shows a tensor-product grid on a rectangle. The grid is constructed from discretizations of $x$ with $m=3$ and $y$ with $n=5$. Each grid point $(x_i, y_j)$ lies at the intersection of a vertical line through $x_i$ and a horizontal line through $y_j$.
@@ -60,16 +59,16 @@ A tensor-product grid (dark gray) on a rectangle constructed from discretization
 
 ## Functions on grids
 
-The double indexing of the grid set {eq}`rectangledisc` implies an irresistible connection to matrices. Corresponding to any function  $f(x,y)$ defined on the rectangle is an $(m+1)\times(n+1)$ matrix $\mathbf{F}$ defined by collecting the values of $f$ at the points in the grid. This transformation of a function to a matrix is so important that we give it a formal name
+The double indexing of the grid set {eq}`rectangledisc` implies an irresistible connection to matrices. Corresponding to any function $f(x,y)$ defined on the rectangle is an $(m+1)\times(n+1)$ matrix $\mathbf{F}$ defined by collecting the values of $f$ at the points in the grid. This transformation of a function to a matrix is so important that we give it a formal name
 
 ```{prf:definition} Function-to-matrix map
 :label: definition-mtx
 The function mtx maps a function $f(x,y)$ to an $(m+1)\times (n+1)$  matrix $\mathbf{F}$ by
 
-:::{math}
+```{math}
 :label: fun2mtx
 \mathbf{F} = \mtx(f) = \Bigl[f(x_i,y_j)\Bigr]_{\substack{i=0,\ldots,m\\j=0,\ldots,n}},
-:::
+```
 
 where the evaluations are on the grid {eq}`rectangledisc`.
 ```
@@ -127,26 +126,26 @@ Let the interval $[0,2]$ be divided into $m=4$ equally sized pieces, and let $[1
 
 We are not limited to rectangles by tensor products. Many regions and surfaces may be parameterized by means of $x(u,v)$, $y(u,v)$, and $z(u,v)$, where $u$ and $v$ lie in a rectangle. Such "logically rectangular" surfaces include the unit disk,
 
-:::{math}
+```{math}
 :label: unitdiskparam
 \left\{
 \begin{aligned}
 x &= u \cos v, \\
-y &= u \sin v,\\
+y &= u \sin v, \\
 \end{aligned}
 \right.
 \qquad \qquad
 \left.
 \begin{aligned}
 0 & \le u < 1, \\
-0 &\le v \le 2\pi,
+0 & \le v \le 2\pi,
 \end{aligned}
 \right.
-:::
+```
 
 and the unit sphere,
 
-:::{math}
+```{math}
 :label: spheredomain
 \left\{
 \begin{aligned}
@@ -162,11 +161,10 @@ z &= \cos v,
 0 &\le v \le \pi.
 \end{aligned}
 \right.
-:::
-
-(demo-tensorprod-disksphere)=
+```
 
 ::::{prf:example} Functions on parameterized surfaces
+:label: demo-tensorprod-disksphere
 
 `````{tab-set}
 ````{tab-item} Julia
@@ -199,20 +197,20 @@ In order to solve boundary-value problems in one dimension by collocation, we re
 
 Consider first $\frac{\partial u}{\partial x}$. In the definition of this partial derivative, the independent variable $y$ is held constant. Note that $y$ is constant within each column of $\mathbf{U} = \mtx(u)$. Thus, we may regard a single column $\mathbf{u}_j$ as a discretized function of $x$ and, as usual, left-multiply by a differentiation matrix $\mathbf{D}_x$ such as {eq}`diffmat12b`. We need to do this for each column of $\mathbf{U}$ by $\mathbf{D}_x$, which is accomplished by $\mathbf{D}_x \mathbf{U}$. Altogether,
 
-:::{math}
+```{math}
 :label: partfpartx
-  \mtx\left( \frac{\partial u}{\partial x} \right) \approx \mathbf{D}_x \, \mtx(u).
-:::
+\mtx\left( \frac{\partial u}{\partial x} \right) \approx \mathbf{D}_x \, \mtx(u).
+```
 
 This relation is not an equality, because the left-hand side is a discretization of the exact partial derivative, while the right-hand side is a
 finite-difference approximation. Yet it is a natural analog for partial differentiation when we are given not $u(x,y)$ but only the grid value matrix $\mathbf{U}.$
 
 Now we tackle $\frac{\partial u}{\partial y}$. Here the inactive coordinate $x$ is held fixed within each *row* of $\mathbf{U}$. However, if we transpose $\mathbf{U}$, then the roles of rows and columns are swapped, and now $y$ varies independently down each column. This is analogous to the situation for the $x$-derivative, so we left-multiply by a finite-difference matrix $\mathbf{D}_y$, and then transpose the entire result to restore the roles of $x$ and $y$ in the grid. Fortunately, linear algebra allows us to express the sequence transpose–left-multiply–transpose more compactly:
 
-:::{math}
+```{math}
 :label: partfparty
 \mtx\left( \frac{\partial u}{\partial y} \right) \approx \Bigl(\mathbf{D}_y \mathbf{U}^T\Bigr)^T = \mtx(u)\, \mathbf{D}_y^T.
-:::
+```
 
 Keep in mind that the differentiation matrix $\mathbf{D}_x$ is based on the discretization $x_0,\ldots,x_m$, and as such it must be $(m+1)\times (m+1)$. On the other hand, $\mathbf{D}_y$ is based on $y_0,\ldots,y_n$ and is $(n+1)\times (n+1)$. This is exactly what is needed dimensionally to make the products in {eq}`partfpartx` and {eq}`partfparty` consistent. More subtly, if the differentiation is based on equispaced grids in each variable, the value of $h$ in a formula such as {eq}`centerFD12` will be different for $\mathbf{D}_x$ and $\mathbf{D}_y$.
 

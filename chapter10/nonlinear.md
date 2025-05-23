@@ -12,14 +12,14 @@ Collocation for nonlinear differential equations operates on the same principle 
 
 We consider the TPBVP {eq}`tpbvp`, reproduced here:
 
-:::{math}
+```{math}
 :label: nonlinbvp
 \begin{split}
 u''(x) &= \phi(x,u,u'), \qquad a \le x \le b,\\
 g_1(u(a),u'(a)) &= 0,\\
 g_2(u(b),u'(b)) &= 0.
 \end{split}
-:::
+```
 
 As in {numref}`section-bvp-linear`, the function $u(x)$ is replaced by a vector $\mathbf{u}$ of its approximated values at nodes $x_0,x_1,\ldots,x_n$ (see Equation {eq}`bvpsolndisc`). We define derivatives of the sampled function as in {eq}`bvpD1` and {eq}`bvpD2`, using suitable differentiation matrices $\mathbf{D}_x$ and $\mathbf{D}_{xx}$. 
 
@@ -31,16 +31,16 @@ $$
 
 where
 
-:::{math}
+```{math}
 :label: fdresid
 r_i(\mathbf{u}) = \phi(x_i,u_i,u_i'), \qquad i=0,\ldots,n.
-:::
+```
 
 and $\mathbf{u}'=\mathbf{D}_x\mathbf{u}$.
 
 We impose the boundary conditions in much the same way as in {numref}`section-bvp-linear`. Again define the rectangular boundary removal matrix $\mathbf{E}$ as in {eq}`rowdeletion`, and replace the equations in those two rows by the boundary conditions:
 
-:::{math}
+```{math}
 :label: fdbvp
 \mathbf{f}(\mathbf{u}) =
   \begin{bmatrix}
@@ -49,7 +49,7 @@ We impose the boundary conditions in much the same way as in {numref}`section-bv
     g_2(u_n,u_n')
   \end{bmatrix}
   = \boldsymbol{0}.
-:::
+```
 
 The left-hand side of {eq}`fdbvp` is a nonlinear function of the unknowns in the vector $\mathbf{u}$, so {eq}`fdbvp` is an $(n+1)\times 1$ set of nonlinear equations, amenable to solution by the techniques of [Chapter 4](../nonlineqn/overview.md).
 

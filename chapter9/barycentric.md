@@ -11,9 +11,9 @@ The Lagrange formula {eq}`lagrangeinterp` is useful theoretically but not ideal 
 
 We again will use the error indicator function $\Phi$ from {numref}`Definition {number} <definition-polynomial-indicator>`,
 
-:::{math}
+```{math}
   \Phi(x) = \prod_{j=0}^n (x-t_j),
-:::
+```
 
 as well as a set of values derived from the nodes.
 
@@ -23,11 +23,11 @@ as well as a set of values derived from the nodes.
 ::::{prf:definition} Barycentric weights
 :label: definition-barycentricweights
 The **barycentric weights** for nodes $x_0,\dots,x_n$ are defined as
-:::{math}
+```{math}
 :label: baryweight
 w_k = \frac{1}{\displaystyle \prod_{\substack{j=0\\j\neq k}}^n (t_k - t_j)} = \frac{1}{\Phi'(t_k)}, \qquad
 k = 0,\ldots,n.
-:::
+```
 ::::
 
 The following formula is the key to efficient and stable evaluation of a polynomial interpolant.
@@ -39,10 +39,10 @@ The following formula is the key to efficient and stable evaluation of a polynom
 :label: theorem-barycentric-formula
 Given points $(t_k,y_k)$ for $k=0,\ldots,n$ with all the $t_k$ distinct, the unique polynomial of degree $n$ or less that interpolates the points is
 
-:::{math}
+```{math}
 :label: bary2
   p(x) = \frac{\displaystyle \sum_{k=0}^n \, \dfrac{w_k y_k}{x-t_k}  }{\displaystyle\sum_{k=0}^n \, \dfrac{w_k}{x-t_k}}.
-:::
+```
 ::::
 
 ::::{prf:proof}
@@ -50,17 +50,17 @@ Given points $(t_k,y_k)$ for $k=0,\ldots,n$ with all the $t_k$ distinct, the uni
 
 The Lagrange cardinal polynomial {eq}`lagrange` can be written as
 
-:::{math}
+```{math}
 :label: lagrangealt
   \ell_k(x) = \Phi(x) \frac{w_k}{x-t_k},
-:::
+```
 
 and thus the interpolating polynomial in {eq}`lagrangeinterp` is
 
-:::{math}
+```{math}
 :label: bary1
 p(x) = \Phi(x) \sum_{k=0}^n \frac{w_k}{x-t_k} y_k.
-:::
+```
 
 Obviously, the constant function $p(x)\equiv 1$ is its own polynomial interpolant on any set of nodes. The uniqueness of the interpolating polynomial, as proved in @theorem-polyinterp, allows us to plug $y_k=1$ for all $k$ into {eq}`bary1` to obtain
 
@@ -77,10 +77,10 @@ Equation {eq}`bary2` is certainly an odd-looking way to write a polynomial! Inde
 :label: example-writeoutbary2
 Let us write out the barycentric formula for the interpolating polynomial for the quadratic case ($n=2$) for {numref}`Example %s <example-ClassicalLagrange>`.  The weights are computed from {eq}`baryweight`:
   
-:::{math}
+```{math}
   w_0 = \frac{1}{(t_0-t_1)(t_0-t_2)} = \frac{1}{\left(0-\frac{\pi}{6}\right)
 \left(0-\frac{\pi}{3}\right)} = \frac{18}{\pi^2},
-:::
+```
 
 and similarly, $w_1 = -36/\pi^2$ and $w_2=18/\pi^2$.
 

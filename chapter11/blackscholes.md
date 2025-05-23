@@ -13,20 +13,20 @@ One way to do so is to buy a *call option* instead of the stock. This is a contr
 
 Suppose $S(T)>K$. Then you could buy the stock at price $K$ and instantly resell it at price $S(T)$, so you make profit $S(T)-K$. On the other hand, if $S(T)\le K$, there is no advantage to exercising the option because the stock is less valuable than the guaranteed purchase price. However, you have lost only what you paid for the option. These observations are summarized by the *payoff function*
 
-:::{math}
+```{math}
 :label: bspayoff
   H(S) = \max\{ S-K, 0 \} = (S-K)_+.
-:::
+```
 
 ```{index} Black–Scholes equation
 ```
 What is the fair market value of the option contract? This question is answered to close approximation by the famous **Black–Scholes equation**,
 
-:::{math}
+```{math}
 :label: bspde
   \frac{\partial v}{\partial t} + \frac{1}{2} \sigma^2 S^2 \frac{\partial^2 v}{\partial S^2}
   + rS \frac{\partial v}{\partial S} - r v = 0,
-:::
+```
 
 where $r$ is the *risk-free interest rate* (i.e., what you could earn with a very safe investment), and $\sigma$ is the *volatility* of the stock (essentially, the standard deviation in the rate of return for the stock). In the Black–Scholes model, both $r$ and $\sigma$ are assumed to be known and constant. 
 
@@ -53,10 +53,10 @@ In order to follow the usual convention of having time flow forward instead of b
 
 now defined for $0\le \eta \le T$. Here we have adopted the common notation of using subscripts for partial derivatives. In the new time variable we have the **initial condition**
 
-:::{math}
+```{math}
 :label: bspdeIC
   v(S,0) = H(S),
-:::
+```
 
 and the goal is to find $v(S,\eta)$ for $\eta>0$. Henceforth we will simply rename the $\eta$ variable as $t$ again, with the understanding that it runs in the opposite direction to actual time in this application.
 
@@ -64,13 +64,13 @@ We have not yet specified the domain of the independent variable $S$. Stock pric
 
 Because {eq}`bspde` has two derivatives in $S$, we also require a condition at each end of its domain. At $S=0$, both the stock and the option are worthless, so we impose $v=0$ there. In light of the payoff function $H$, initially the value $v$ has slope equal to 1 at $S=S_\text{max}$, and we choose to enforce that condition for all time. We summarize the **boundary conditions** as
 
-:::{math}
+```{math}
 :label: bspdeBC
 \begin{split}
   v(0,t) &= 0, \\
   \frac{\partial v}{\partial S}(S_\text{max},t) &= 1.
 \end{split}
-:::
+```
 
 ```{index} Dirichlet boundary condition, Neumann boundary condition
 ```
@@ -97,10 +97,10 @@ The Black–Scholes equation can be transformed by a change of variables into a 
 :label: definition-heatequation
 The {term}`heat equation` or *diffusion equation* in one dimension is
 
-:::{math}
+```{math}
 :label: heat
 u_t = k u_{xx},
-:::
+```
 
 where $k$ is a constant *diffusion coefficient*.
 ::::
@@ -141,20 +141,20 @@ In certain cases there are explicit formulas describing the solution of {eq}`hea
 
 Let's return to the Black–Scholes equation {eq}`bspdefor`, rewritten here as
 
-:::{math}
+```{math}
 :label: bspdefor-t
   v_t = \frac{1}{2} \sigma^2 S^2 v_{SS} + rS v_S - r v,
-:::
+```
 
 subject to the initial condition {eq}`bspdeIC` and the boundary conditions {eq}`bspdeBC`.  We now try to solve it numerically, without any transformation tricks or other insight. Define
 
-:::{math}
+```{math}
 :label: bsgrid
 \begin{split}
   x_i &= ih, \quad h=\frac{S_\text{max}}{m}, \qquad i = 0,\ldots,m,  \\
   t_j &= j \tau, \quad \tau = \frac{T}{n}, \qquad j = 0,\ldots,n.
 \end{split}
-:::
+```
 
 Observe that we have used the more conventional $x$ and $t$ in place of $S$ and $\eta$. The result is a grid function $\mathbf{V}$ whose entries are $V_{ij} \approx v(x_i,t_j)$. By the initial condition {eq}`bspdeIC`, we set $V_{i,0} = H(x_i)$ for all $i$.
 
@@ -162,20 +162,20 @@ Observe that we have used the more conventional $x$ and $t$ in place of $S$ and 
 ```
 For the moment, let us pretend that $i$ is unbounded in both directions. Replacing the derivatives in {eq}`bspdefor-t` with some simple finite-difference formulas, we get
 
-:::{math}
+```{math}
 :label: bspdeFD1
   \frac{V_{i,j+1} - V_{i,j}}{\tau} = 
   + \frac{\sigma^2 x_i^2}{2} \frac{V_{i+1,j}-2V_{i,j}+V_{i-1,j}}{h^2}
   + r x_i \frac{V_{i+1,j}- V_{i-1,j}}{2h}  - rV_{i,j}.
-:::
+```
 
 We can rearrange {eq}`bspdeFD1` into
 
-:::{math}
+```{math}
 :label: bspdeFD2
   V_{i,j+1} = V_{i,j} + \frac{\lambda \sigma^2 x_i^2}{2} (V_{i+1,j}-2V_{i,j}+V_{i-1,j})
    + \frac{r x_i \mu}{2}  (V_{i+1,j}- V_{i-1,j})  - r \tau V_{i,j},
-:::
+```
 
 where 
 
@@ -191,10 +191,10 @@ If we put $j=0$ into {eq}`bspdeFD2`, then everything on the right-hand side is k
 
 Now we take the boundaries on $x$ into account. The value $V_{0,j+1}$ is zero, so we don't even need to compute the solution using {eq}`bspdeFD2` at $i=0$. At $i=m$, or $x_i=S_\text{max}$, things are trickier. We don't know $V_{m,j+1}$ explicitly and would like to solve for it, yet formula {eq}`bspdeFD2` refers to the fictitious value $V_{m+1,j}$ when $i=m$. This is where the Neumann condition must be applied. If the value $V_{m+1,j}$ did exist, then we could discretize that condition as
 
-:::{math}
+```{math}
 :label: bsneumann
   \frac{V_{m+1,j}-V_{m-1,j}}{2h} = 1.
-:::
+```
 
 We can therefore solve {eq}`bsneumann` for the fictitious $V_{m+1,j}$ and use it where called for in the right-hand side of {eq}`bspdeFD2`. 
 

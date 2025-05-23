@@ -14,9 +14,9 @@ We have seen before that certain matrix properties enhance solutions to linear a
 
 Starting from {eq}`arnoldimat`, we left-multiply by $\mathbf{Q}_m^*$ to get
 
-:::{math}
+```{math}
 \mathbf{Q}_m^* \mathbf{A} \mathbf{Q}_m = \mathbf{Q}_m^* \mathbf{Q}_{m+1} \mathbf{H}_m = \tilde{\mathbf{H}}_m,
-:::
+```
 
 where $\tilde{\mathbf{H}}_m$ is rows 1 through $m$ of $\mathbf{H}_m$. If $\mathbf{A}$ is hermitian, then so is the left side of this equation, hence $\tilde{\mathbf{H}}_m$ is hermitian too. But it is also upper Hessenberg, meaning that the $(i,j)$ element is zero if $i > j+1$. By symmetry, this means that elements are zero when $j > i+1$ as well.
 
@@ -29,10 +29,10 @@ Equation {eq}`arnoldivec` of the Arnoldi iteration now simplifies to a much shor
 ```{index} Arnoldi iteration, ! Lanczos iteration
 ```
 
-:::{math}
+```{math}
 :label: lanczos
 \mathbf{A} \mathbf{q}_m = H_{m-1,m} \,\mathbf{q}_{m-1} + H_{mm} \,\mathbf{q}_m + H_{m+1,m}\,\mathbf{q}_{m+1}.
-:::
+```
 
 As before in deriving the Arnoldi iteration, when given the first $m$ vectors we can solve for the entries in column $m$ of $\mathbf{H}$ and then for $\mathbf{q}_{m+1}$. The resulting process is known as the **Lanczos iteration**. Its most important practical advantage is that while Arnoldi needs $O(m)$ steps to get $\mathbf{q}_{m+1}$ from the previous vectors, Lanczos needs only $O(1)$ steps, so restarting isn't required for symmetric matrices.[^lanczos]
 
@@ -58,10 +58,10 @@ $$
 
 Then $\mathbf{x}_m$, the $m$th solution estimate of MINRES, satisfies
 
-:::{math}
+```{math}
 :label: minres-conv
 \frac{\|\mathbf{r}_m\|_2}{\|\mathbf{b}\|_2} \le  \left( \frac{\sqrt{\kappa_+\kappa_-} - 1}{\sqrt{\kappa_+\kappa_-} + 1} \right)^{\lfloor m/2\rfloor},
-:::
+```
 
 where $\lfloor m/2\rfloor$ means to round $m/2$ down to the nearest integer.
 ::::
@@ -129,10 +129,10 @@ $$
 
 which is nonnegative and zero only when $\mathbf{u}=\boldsymbol{0}$, provided $\mathbf{A}$ (and therefore $\mathbf{R}$) is nonsingular. Hence we can define a special vector norm relative to $\mathbf{A}$:
 
-:::{math}
+```{math}
 :label: Anorm
 \| \mathbf{u} \|_{\mathbf{A}} = \left( \mathbf{u}^*\mathbf{A}\mathbf{u} \right)^{1/2}.
-:::
+```
 
 ```{index} ! conjugate gradients, symmetric positive definite matrix
 ```
@@ -154,10 +154,10 @@ The convergence of CG and MINRES is dependent on the eigenvalues of $\mathbf{A}$
 Let $\mathbf{A}$ be real and SPD with 2-norm condition number $\kappa$. For MINRES define $R(m)=\|\mathbf{r}_m\|_2/\|\mathbf{b}\|_2$, and for CG define $R(m)=\|\mathbf{x}_m-\mathbf{x}\|_{\mathbf{A}}/\|\mathbf{x}\|_{\mathbf{A}}$,
 where $\mathbf{r}_m$ and $\mathbf{x}_m$ are the residual and solution approximation associated with the space $\mathcal{K}_m$. Then
 
-:::{math}
+```{math}
 :label: cgconv
 R(m) \le  2\, \left( \frac{\sqrt{\kappa} - 1}{\sqrt{\kappa} + 1} \right)^m.
-:::
+```
 ::::
 
 @theorem-minrescg-converge characterizes the convergence of MINRES and CG similarly, differing only in whether the measurement is of the residual or the $\mathbf{A}$-norm of the error, respectively. While these are different quantities, in practice one may not find a consistent advantage for one method over the other.
@@ -270,9 +270,9 @@ d_k &= 4 + k\cdot\frac{9996}{500}, \quad k=0,1,\ldots,500.
 :label: problem-minrescg-minimize
 ✍ Given real $n\times n$ symmetric $\mathbf{A}$ and vector $\mathbf{b}=\mathbf{A}\mathbf{x}$, we can define the scalar-valued function
 
-:::{math}
+```{math}
 \varphi(\mathbf{u}) = \mathbf{u}^T \mathbf{A} \mathbf{u} - 2 \mathbf{u}^T \mathbf{b}, \qquad \mathbf{u}\in\mathbb{R}^n.
-:::
+```
 
 **(a)** Expand and simplify the expression $\varphi(\mathbf{x}+\mathbf{v})-\varphi(\mathbf{x})$, keeping in mind that $\mathbf{A}\mathbf{x}=\mathbf{b}$.
 

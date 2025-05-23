@@ -7,10 +7,10 @@ numbering:
 
 In {numref}`section-localapprox-integration` we derived methods of order 2, 4, and higher for numerical integration. They all use a formula
 
-:::{math}
+```{math}
 :label: globalquad
 \int_{-1}^1 f(x)\, dx \approx \sum_{k=0}^n w_k f(t_k)
-:::
+```
 
 for a collection of nodes $t_0,\ldots,t_n$ in $[-1,1]$ and weights $w_0,\ldots,w_n$. (Throughout this section we use $[-1,1]$ as the domain of the integral; for a general interval $[a,b]$, see @problem-specint-integrateinterval.) The nodes and weights are independent of the integrand $f(x)$ and determine the implementation and properties of the formula.
 
@@ -22,10 +22,10 @@ The process for deriving a specific method was to interpolate the integrand, the
 
 For a function periodic on $[-1,1]$, the most natural interpolant is the trigonometric polynomial {eq}`trigcardinalinterp`. However, from {eq}`trigcardinal` one finds that
 
-:::{math}
+```{math}
 :label: trapperiod
 \int_{-1}^1 \sum_{k=-n}^n y_k\tau_k(x)\, dx =  \sum_{k=-n}^n y_k\left[ \int_{-1}^1 \tau_k(x)\, dx\right] = \frac{2}{2n+1} \sum_{k=-n}^n y_k.
-:::
+```
 
 ```{index} trapezoid formula; for integration
 ```
@@ -92,7 +92,7 @@ From this,
 
 where $w_k = \int_{-1}^1 \ell_k(x)\,dx.$ For even values of $n$ the result is
 
-:::{math}
+```{math}
 :label: clencurtweights
   w_k =
 \begin{cases}
@@ -106,7 +106,7 @@ where $w_k = \int_{-1}^1 \ell_k(x)\,dx.$ For even values of $n$ the result is
 2, & j=0 \text{ or } n/2,\\
 1, & j=1,2,\dots,n/2-1.
 \end{cases}
-:::
+```
 
 There are different formulas for odd values of $n$. Note that the weights also depend on $n$; e. g. $w_2$ for $n=4$ is not the same as $w_2$ for $n=10$. Also note that the interpolant itself never needs to be computed.
 
@@ -163,10 +163,10 @@ for all $p\in \mathcal{P}_d$.
 
 Since there are $n$ nodes and $n$ weights available to choose, it seems plausible to expect $m=2n-1$, and this intuition turns out to be correct. Hence the goal is now to find nodes $t_k$ and weights $w_k$ such that
 
-:::{math}
+```{math}
 :label: gqoptimality
 \int_{-1}^1 p(x)\,dx = Q_{n}[p] = \sum_{k=1}^n w_k p(t_k), \qquad p \in \mathcal{P}_{2n-1}.
-:::
+```
 
 ```{index} ! Gaussian integration
 ```
@@ -177,7 +177,7 @@ If these conditions are satisfied, the resulting method is called **Gauss–Lege
 :label: example-gquad2
 As an example, consider the case $n=2$. Applying the integration formula to each monomial of degree less than $2n$, we get the conditions
   
-:::{math}
+```{math}
 :label: gausscond2
 \begin{split}
 2 &= w_1 + w_2\\
@@ -185,7 +185,7 @@ As an example, consider the case $n=2$. Applying the integration formula to each
 \frac{2}{3} &= w_1 t_1^2 + w_2 t_2^2\\
 0 &= w_1 t_1^3 + w_2 t_2^3.
 \end{split}
-:::
+```
 
 These equations can be solved to obtain
 
@@ -233,10 +233,10 @@ $$
 
 Given that $\Psi(x)\in \mathcal{P}_{n-1}$, we can ensure that this condition is satisfied if
 
-:::{math}
+```{math}
 :label: gqorthogonality
 \int_{-1}^1 q(x)\Phi(x) \,dx = 0 
-:::
+```
 
 for all $q \in {\mathcal{P}}_{n-1}$. Hence satisfaction of {eq}`gqorthogonality` implies satisfaction of {eq}`gqoptimality`. But by the orthogonality property of Legendre polynomials, satisfaction of {eq}`gqorthogonality` is guaranteed if $\Phi(x)=cP_n(x)$ for a constant $c$. Thus $\Phi$ and $P_n$ have the same roots.
 ::::
