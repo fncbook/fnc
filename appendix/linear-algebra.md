@@ -398,38 +398,55 @@ Conversely, multiplication on the left by $\mathbf{U}$ changes a representation 
 
 ## Exercises
 
-1. ✍ In racquetball, the winner of a rally serves the next rally. Generally, the server has an advantage. Suppose that when Ashley and Barbara are playing racquetball, Ashley wins 60\% of the rallies she   serves and Barbara wins 70\% of the rallies she serves. If $\mathbf{x}\in\mathbb{R}^2$ is such that $x_1$ is the probability that Ashley serves first and $x_2=1-x_1$ is the probability that Barbara serves first, define a matrix $\mathbf{A}$ such that $\mathbf{A}\mathbf{x}$ is a vector of the probabilities that Ashley and Barbara each serve the second rally. What is the meaning of $\mathbf{A}^{10}\mathbf{x}$?
+``````{exercise}
+:label: problem-linalg-markov
+✍ In racquetball, the winner of a rally serves the next rally. Generally, the server has an advantage. Suppose that when Ashley and Barbara are playing racquetball, Ashley wins 60\% of the rallies she serves and Barbara wins 70\% of the rallies she serves. If $\mathbf{x}\in\mathbb{R}^2$ is such that $x_1$ is the probability that Ashley serves first and $x_2=1-x_1$ is the probability that Barbara serves first, define a matrix $\mathbf{A}$ such that $\mathbf{A}\mathbf{x}$ is a vector of the probabilities that Ashley and Barbara each serve the second rally. What is the meaning of $\mathbf{A}^{10}\mathbf{x}$?
+``````
 
-2. ✍ Suppose we have lists of $n$ terms and $m$ documents. We can   define an $m\times n$ matrix $\mathbf{A}$ such that $A_{ij}=1$ if term $j$   appears in document $i$, and $A_{ij}=0$ otherwise. Now suppose that the term list is
+``````{exercise}
+:label: problem-linalg-termdoc
+✍ Suppose we have lists of $n$ terms and $m$ documents. We can define an $m\times n$ matrix $\mathbf{A}$ such that $A_{ij}=1$ if term $j$   appears in document $i$, and $A_{ij}=0$ otherwise. Now suppose that the term list is
 
-    ``` julia
-    "numerical", "analysis", "more", "cool", "accounting"
-    ```
+``` julia
+"numerical", "analysis", "more", "cool", "accounting"
+```
 
-    and that $\mathbf{x} = \begin{bmatrix} 1 & 1 & 0 & 1 & 0  \end{bmatrix}^T$. Give an interpretation of the product $\mathbf{A}\mathbf{x}$.
+and that $\mathbf{x} = \begin{bmatrix} 1 & 1 & 0 & 1 & 0  \end{bmatrix}^T$. Give an interpretation of the product $\mathbf{A}\mathbf{x}$.
+``````
 
-3. ✍ Let
-  
-    ```{math}
-    \mathbf{A} =
-    \begin{bmatrix}
-      0 & 1 & 0 & 0 \\
-      0 & 0 & 0 & 1 \\
-      0 & 0 & 0 & 0 \\
-      0 & 0 & 1 & 0
-    \end{bmatrix}.
-    ```
+``````{exercise}
+:label: problem-linalg-nilpotent
+✍ Let
 
-    Show that $\mathbf{A}^n=0$ when $n\ge 4$.
+```{math}
+\mathbf{A} =
+\begin{bmatrix}
+  0 & 1 & 0 & 0 \\
+  0 & 0 & 0 & 1 \\
+  0 & 0 & 0 & 0 \\
+  0 & 0 & 1 & 0
+\end{bmatrix}.
+```
 
-4. ✍  Find two matrices $\mathbf{A}$ and $\mathbf{B}$, neither of which is the zero matrix, such that $\mathbf{A}\mathbf{B}=\boldsymbol{0}$.
+Show that $\mathbf{A}^n=0$ when $n\ge 4$.
+``````
 
-   (prob-linalg-transposeidentity)=
+``````{exercise}
+:label: problem-linalg-singular
+✍  Find two matrices $\mathbf{A}$ and $\mathbf{B}$, neither of which is the zero matrix, such that $\mathbf{A}\mathbf{B}=\boldsymbol{0}$.
+``````
 
-5. ✍ Prove that when $\mathbf{A} \mathbf{B}$ is   defined, $\mathbf{B}^T\mathbf{A}^T$ is defined too, and use Equation {eq}`scalarmatrixmult` to show that   $(\mathbf{A}\mathbf{B})^T=\mathbf{B}^T\mathbf{A}^T$.
+``````{exercise}
+:label: problem-linalg-prodtranspose
+✍ Prove that when $\mathbf{A} \mathbf{B}$ is defined, $\mathbf{B}^T\mathbf{A}^T$ is defined too, and use Equation {eq}`scalarmatrixmult` to show that   $(\mathbf{A}\mathbf{B})^T=\mathbf{B}^T\mathbf{A}^T$.
+``````
 
-   (prob-linalg-inversetranspose)=
+``````{exercise}
+:label: problem-linalg-inversetranspose
+✍ Show that if $\mathbf{A}$ is invertible, then  $(\mathbf{A}^T)^{-1}=(\mathbf{A}^{-1})^T$. (This matrix is often just written as $\mathbf{A}^{-T}$.)
+``````
 
-6. ✍ Show that if $\mathbf{A}$ is invertible, then  $(\mathbf{A}^T)^{-1}=(\mathbf{A}^{-1})^T$. (This matrix is often just written as $\mathbf{A}^{-T}$.)
-
-7. ✍ Prove true, or give a counterexample: The product of upper triangular square matrices is upper triangular.
+``````{exercise}
+:label: problem-linalg-triangular
+✍ Prove true, or give a counterexample: The product of upper triangular square matrices is upper triangular.
+``````

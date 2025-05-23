@@ -47,3 +47,4 @@
 {"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q^\\E.*:.*$"}
 {"rule":"MORFOLOGIK_RULE_EN_US","sentence":"\\Q:label: \\E.*$"}
 {"rule":"PLURAL_VERB_AFTER_THIS","sentence":"^\\QSuppose, after computing the step suggested by the linear model, we ask a binary question: Would taking that step improve our situation?\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QThe adjoint or hermitian of a matrix \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q is given by \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q, where the bar denotes taking a complex conjugate elementwise.^conj If \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q is real, then \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-)[0-9]+\\Q.\\E$"}
