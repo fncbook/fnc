@@ -3,6 +3,7 @@ numbering:
   enumerator: 4.2.%s
 ---
 (section-nonlineqn-fixed-point)=
+
 # Fixed-point iteration
 
 In this section, we consider the alternative form of the rootfinding problem known as the *fixed-point problem*.
@@ -98,7 +99,7 @@ The role of $g'(p)$ is clear in @demo-fp-spiral. We have $g(x) = -x^2+5x-3.5$ an
 
 In computation, we usually want to know not just whether an iteration converges but also the rate at which convergence occurs, i.e., how quickly the errors approach zero. Other things being equal, faster convergence is preferred to slower convergence, as it usually implies that the computation will take less time to achieve a desired accuracy.
 
-The prediction of the series analysis above is that if the fixed-point iteraion converges, the errors approximately satisfy $|\epsilon_{k+1}| = \sigma|\epsilon_k|$, for $\sigma = |g'(p)| < 1$. This is a well-known type of convergence.
+The prediction of the series analysis above is that if the fixed-point iteration converges, the errors approximately satisfy $|\epsilon_{k+1}| = \sigma|\epsilon_k|$, for $\sigma = |g'(p)| < 1$. This is a well-known type of convergence.
 
 ```{index} ! convergence rate; linear, ! linear convergence
 ```

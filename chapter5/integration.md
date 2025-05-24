@@ -3,6 +3,7 @@ numbering:
   enumerator: 5.6.%s
 ---
 (section-localapprox-integration)=
+
 # Numerical integration
 
 In calculus, you learn that the elegant way to evaluate a definite integral is to apply the Fundamental Theorem of Calculus and find an antiderivative. The connection is so profound and pervasive that it's easy to overlook that a definite integral is a numerical quantity existing independently of antidifferentiation.  However, most conceivable integrands have no antiderivative in terms of familiar functions.
@@ -64,7 +65,7 @@ Numerical integration formulas can be applied to sequences of data values even i
 ```{index} interpolation; by piecewise polynomials
 ```
 
-A straightforward way to derive integration formulas is to mimic the approach taken for finite differences: find an interpolant and operate exactly on it. 
+A straightforward way to derive integration formulas is to mimic the approach taken for finite differences: find an interpolant and operate exactly on it.
 
 ## Trapezoid formula
 
@@ -104,7 +105,7 @@ The {term}`trapezoid formula` is a numerical integration formula in the form {eq
 
 $$
 w_i = \begin{cases}
-  \frac{1}{2},& i=0 \text{ or } i=n, \\ 
+  \frac{1}{2},& i=0 \text{ or } i=n, \\
   1, & 0 < i < n.
   \end{cases}
 $$
@@ -115,7 +116,6 @@ Geometrically, as illustrated in {numref}`fig-trapezoid`, the trapezoid formula 
 [^comp]: Some texts distinguish between a formula for a single subinterval $[t_{k-1},t_k]$ and a *composite* formula that adds them up over the whole interval to get {eq}`trapezoid`.
 
 The trapezoid formula is the Swiss Army knife of integration formulas. A short implementation is given as {numref}`Function {number} <function-trapezoid>`.
-
 
 ```{figure} figures/trapezoid.svg
 :name: fig-trapezoid
@@ -233,7 +233,7 @@ error expansion
   A_0 = A(h) + c_1 h + c_2 h^2 + c_3 h^3 + \cdots.
 ```
 
-Crucially, it is not necessary to know the values of the error constants $c_k$, merely that they exist and are independent of $h$. 
+Crucially, it is not necessary to know the values of the error constants $c_k$, merely that they exist and are independent of $h$.
 
 Using $I$ for the exact integral of $f$, the trapezoid formula has
 
@@ -298,7 +298,7 @@ Note in {eq}`nc-sixth` that $R_f(4n)$ depends on $S_f(2n)$ and $S_f(4n)$, which 
 Dividing the node spacing by half introduces new nodes only at midpoints, allowing the function values at existing nodes to be reused for extrapolation.
 ```
 
-Specifically, we have 
+Specifically, we have
 
 ```{math}
 :label: nc-doubling
@@ -310,7 +310,7 @@ Specifically, we have
 \end{split}
 ```
 
-where the nodes referenced in the last line are relative to $n=2m$. Hence in passing from $n=m$ to $n=2m$, new integrand evaluations are needed only at the odd-numbered nodes of the finer grid. 
+where the nodes referenced in the last line are relative to $n=2m$. Hence in passing from $n=m$ to $n=2m$, new integrand evaluations are needed only at the odd-numbered nodes of the finer grid.
 
 ::::{prf:example} Integration by extrapolation
 :label: demo-int-extrap

@@ -3,9 +3,10 @@ numbering:
   enumerator: 1.1.%s
 ---
 (section-intro-floating-point)=
+
 # Floating-point numbers
 
-The real number set $\real$ is infinite in two ways: it is unbounded and continuous. In most practical computing, the latter kind of infiniteness is much more consequential than the former, so we turn our attention there first. 
+The real number set $\real$ is infinite in two ways: it is unbounded and continuous. In most practical computing, the latter kind of infiniteness is much more consequential than the former, so we turn our attention there first.
 
 ```{index} ! floating-point numbers
 ```
@@ -32,7 +33,7 @@ where $n$ is an integer called the **exponent**, and $1+f$ is the **significand*
   f = \sum_{i=1}^d b_i \, 2^{-i}, \qquad b_i\in\{0,1\},
 ```
 
-for a fixed integer $d$ called the binary **precision**. 
+for a fixed integer $d$ called the binary **precision**.
 ::::
 
 Equation {eq}`mantissa` represents the significand as a number in $[1,2)$ in base-2 form. Equivalently,
@@ -42,7 +43,7 @@ Equation {eq}`mantissa` represents the significand as a number in $[1,2)$ in bas
 f = 2^{-d}\, \sum_{i=1}^{d} b_{i} \, 2^{d-i} = 2^{-d} z
 ```
 
-for an integer $z$ in the set $\{0,1,\ldots,2^d-1\}$. Consequently, starting at $2^n$ and ending just before $2^{n+1}$ there are exactly $2^d$ evenly spaced numbers belonging to $\float$. 
+for an integer $z$ in the set $\{0,1,\ldots,2^d-1\}$. Consequently, starting at $2^n$ and ending just before $2^{n+1}$ there are exactly $2^d$ evenly spaced numbers belonging to $\float$.
 
 ````{prf:example}
 :label: example-float-2bits
@@ -61,7 +62,7 @@ Observe that the smallest element of $\float$ that is greater than 1 is $1+2^{-d
 
 [^macheps]: The terms machine epsilon, machine precision, and unit roundoff aren't used consistently across references, but the differences are not consequential for our purposes.
 
-```{index} ! machine epsilon, unit roundoff 
+```{index} ! machine epsilon, unit roundoff
 ```
 
 ::::{prf:definition} Machine epsilon
@@ -69,7 +70,7 @@ Observe that the smallest element of $\float$ that is greater than 1 is $1+2^{-d
 For a floating-point set with $d$ binary digits of precision, **machine epsilon** (or *machine precision*) is $\macheps = 2^{-d}$.
 ::::
 
-We define the rounding function $\fl(x)$ as the map from real number $x$ to the nearest member of $\float$. The distance between the floating-point numbers in $[2^n,2^{n+1})$ is $2^n\macheps=2^{n-d}$. As a result, every real $x \in [2^n,2^{n+1})$ is no farther than $2^{n-d-1}$ away from a member of $\float$. Therefore we conclude that $|\fl(x)-x| \le \tfrac{1}{2}(2^{n-d})$, which leads to the bound
+We define the rounding function $\fl(x)$ as the map from real number $x$ to the nearest member of $\float$. The distance between the floating-point numbers in $[2^n,2^{n+1})$ is $2^n\macheps=2^{n-d}$. As a result, every real $x \in [2^n,2^{n+1})$ is no farther than $2^{n-d-1}$ away from a member of $\float$. Therefore, we conclude that $|\fl(x)-x| \le \tfrac{1}{2}(2^{n-d})$, which leads to the bound
 
 ```{math}
 :label: fpbound
@@ -88,7 +89,7 @@ The value of $\epsilon$ depends on $x$, but this dependence is not usually shown
 ## Precision and accuracy
 
 ```{index} significant digits
-``` 
+```
 
 It may help to recast {eq}`floatpoint` and {eq}`mantissa` in terms of base 10:
 
@@ -104,7 +105,7 @@ $$
 
 We therefore say that the constant is given with 7 decimal digits of precision. That's in contrast to noting that the value is given to 40 decimal *places*. A major advantage of floating point is that the relative precision does not depend on the choice of physical units. For instance, when expressed in eV$\cdot$sec, Planck's constant is $4.135668\times 10^{-15}$, which still has 7 digits but only 21 decimal places.
 
-Floating-point precision functions the same way, except that computers prefer base 2 to base 10. The **precision** of a floating-point number is always $d$ binary digits, implying a resolution of the real numbers according to {eq}`fpbound`. 
+Floating-point precision functions the same way, except that computers prefer base 2 to base 10. The **precision** of a floating-point number is always $d$ binary digits, implying a resolution of the real numbers according to {eq}`fpbound`.
 
 ```{index} ! accuracy (relative vs. absolute)
 ```
@@ -130,7 +131,7 @@ Absolute accuracy has the same units as $x$, while relative accuracy is dimensio
 
 We often round this value down to an integer, but it does make sense to speak of "almost seven digits" or "ten and a half digits."
 
-(demo-float-accuracy)= 
+(demo-float-accuracy)=
 ::::{prf:example} Absolute and relative accuracy
 
 `````{tab-set}
@@ -215,7 +216,8 @@ Computer arithmetic is performed on floating-point numbers and returns floating-
 ```{math}
 \frac{ |(x \oplus y)-(x+y)| }{ |x+y| } \le \macheps.
 ```
-Hence the relative error in arithmetic is essentially the same as for the floating-point representation itself. However, playing by these rules can lead to disturbing results.
+
+Hence, the relative error in arithmetic is essentially the same as for the floating-point representation itself. However, playing by these rules can lead to disturbing results.
 
 ::::{prf:example} Floating-point arithmetic oddity
 :label: demo-float-arithmetic
@@ -242,7 +244,7 @@ Hence the relative error in arithmetic is essentially the same as for the floati
 
 ::::
 
-There are two ways to look at @demo-float-arithmetic. On one hand, its two versions of the result differ by less than $1.2\times 10^{-16}$, which is very small — not just in everyday terms, but with respect to the operands, which are all close to 1 in absolute value. On the other hand, the difference is as large as the exact result itself! We formalize and generalize this observation in the next section. In the meantime, keep in mind that exactness cannot be taken for granted in floating-point computation. 
+There are two ways to look at @demo-float-arithmetic. On one hand, its two versions of the result differ by less than $1.2\times 10^{-16}$, which is very small — not just in everyday terms, but with respect to the operands, which are all close to 1 in absolute value. On the other hand, the difference is as large as the exact result itself! We formalize and generalize this observation in the next section. In the meantime, keep in mind that exactness cannot be taken for granted in floating-point computation.
 
 ::::{prf:observation}
 We should not expect that two mathematically equivalent results will be equal when computed in floating point, only that they be relatively close together.

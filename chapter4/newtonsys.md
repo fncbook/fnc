@@ -3,9 +3,10 @@ numbering:
   enumerator: 4.5.%s
 ---
 (section-nonlineqn-newtonsys)=
+
 # Newton for nonlinear systems
 
-The rootfinding problem becomes much more difficult when multiple variables and equations are involved. 
+The rootfinding problem becomes much more difficult when multiple variables and equations are involved.
 
 ```{index} ! rootfinding problem; multidimensional
 ```
@@ -25,7 +26,7 @@ Given a continuous vector-valued function $\mathbf{f}$ mapping from $\mathbb{R}^
 ```
 ````
 
-Particular problems are often posed using scalar variables and equations. 
+Particular problems are often posed using scalar variables and equations.
 
 ::::{prf:example}
 :label: example-newtonsys-predprey
@@ -150,7 +151,7 @@ which can be rearranged into
 \mathbf{x}_{k+1} = \mathbf{x}_k - \bigl[\mathbf{J}(\mathbf{x}_k)\bigr]^{-1} \mathbf{f}(\mathbf{x}_k).
 ```
 
-Note that $\mathbf{J}^{-1}\mathbf{f}$ now plays the role that $f/f'$ had in the scalar case; in fact, the two are the same in one dimension. In computational practice, however, we don't compute matrix inverses. 
+Note that $\mathbf{J}^{-1}\mathbf{f}$ now plays the role that $f/f'$ had in the scalar case; in fact, the two are the same in one dimension. In computational practice, however, we don't compute matrix inverses.
 
 ```{index} ! Newton's method; multidimensional
 ```

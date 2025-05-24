@@ -3,6 +3,7 @@ numbering:
   enumerator: 6.3.%s
 ---
 (section-ivp-systems)=
+
 # IVP systems
 
 Few applications involve an initial-value problem with just a single dependent variable. Usually there are multiple unknowns and a system of equations to define them.  
@@ -67,7 +68,7 @@ The generalization of any scalar IVP solver to handle systems is straightforward
   \end{split}
 ```
 
-The vector difference equation {eq}`eulersys` is just Euler's formula applied simultaneously to each component of the ODE system. Because operations such as addition and multiplication translate easily from scalars to vectors, {numref}`Function {number} <function-euler>` that we wrote for scalar IVPs works for systems as well. Practically speaking, the only changes that must be made are that the initial condition and the ODE function have to be coded to use vectors. 
+The vector difference equation {eq}`eulersys` is just Euler's formula applied simultaneously to each component of the ODE system. Because operations such as addition and multiplication translate easily from scalars to vectors, {numref}`Function {number} <function-euler>` that we wrote for scalar IVPs works for systems as well. Practically speaking, the only changes that must be made are that the initial condition and the ODE function have to be coded to use vectors.
 
 ::::{prf:example} Predator-prey model
 :label: demo-systems-predator

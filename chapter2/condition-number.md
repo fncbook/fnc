@@ -3,6 +3,7 @@ numbering:
   enumerator: 2.8.%s
 ---
 (section-linsys-condition-number)=
+
 # Conditioning of linear systems
 
 ```{index} condition number; of linear system
@@ -10,7 +11,7 @@ numbering:
 
 We are ready to consider the conditioning of solving the square linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$. In this problem, the data are $\mathbf{A}$ and $\mathbf{b}$, and the solution is $\mathbf{x}$. Both data and result are multidimensional, so we will use norms to measure their magnitudes.
 
-The motivation for the definition of relative condition number in Chapter 1 was to quantify the response of the result to perturbations of the data. For simplicity, we start by allowing perturbations to $\mathbf{b}$ only while $\mathbf{A}$ remains fixed. 
+The motivation for the definition of relative condition number in Chapter 1 was to quantify the response of the result to perturbations of the data. For simplicity, we start by allowing perturbations to $\mathbf{b}$ only while $\mathbf{A}$ remains fixed.
 
 Let $\mathbf{A}\mathbf{x}=\mathbf{b}$ be perturbed to
 
@@ -36,7 +37,7 @@ We can bound $\| \mathbf{h} \|$ in terms of $\| \mathbf{d} \|$:
 \end{split}
 ```
 
-where we have applied $\mathbf{A}\mathbf{x}=\mathbf{b}$ and {eq}`normineq1`. 
+where we have applied $\mathbf{A}\mathbf{x}=\mathbf{b}$ and {eq}`normineq1`.
 Since also $\mathbf{b}=\mathbf{A}\mathbf{x}$ implies $\| \mathbf{b} \|\le
 \| \mathbf{A} \|\, \| \mathbf{x} \|$, we derive
 
@@ -54,7 +55,7 @@ It is possible to show that this bound is tight, in the sense that the inequalit
 
 ::::{prf:definition} Matrix condition number
 :label: definition-matrixcond
-The {term}`matrix condition number` of an invertible square matrix $\mathbf{A}$ is 
+The {term}`matrix condition number` of an invertible square matrix $\mathbf{A}$ is
 
 ```{math}
 :label: mxcond
@@ -94,7 +95,7 @@ Note that for any induced matrix norm,
   1 = \| \mathbf{I} \| = \| \mathbf{A} \mathbf{A}^{-1} \| \le \| \mathbf{A} \|\, \| \mathbf{A}^{-1} \| = \kappa(\mathbf{A}).
 ```
 
-A condition number of 1 is the best we can hope for—in that case, the relative perturbation of the solution has the same size as that of the data.  A condition number of size $10^t$ indicates that in floating-point arithmetic, roughly $t$ digits are lost (i.e., become incorrect) in computing the solution $\mathbf{x}$. And if $\kappa(\mathbf{A}) > \epsilon_\text{mach}^{-1}$, then for computational purposes the matrix is effectively singular. 
+A condition number of 1 is the best we can hope for—in that case, the relative perturbation of the solution has the same size as that of the data.  A condition number of size $10^t$ indicates that in floating-point arithmetic, roughly $t$ digits are lost (i.e., become incorrect) in computing the solution $\mathbf{x}$. And if $\kappa(\mathbf{A}) > \epsilon_\text{mach}^{-1}$, then for computational purposes the matrix is effectively singular.
 
 ::::{prf:example} Matrix condition number
 :label: demo-condition-bound
@@ -130,7 +131,7 @@ Suppose that $\mathbf{A}\mathbf{x}=\mathbf{b}$ and $\tilde{\mathbf{x}}$ is a com
 
 ::::{prf:definition} Residual of a linear system
 :label: definition-linresidual
-For the problem $\mathbf{A}\mathbf{x}=\mathbf{b}$, the **residual** at a solution estimate $\tilde{\mathbf{x}}$ is 
+For the problem $\mathbf{A}\mathbf{x}=\mathbf{b}$, the **residual** at a solution estimate $\tilde{\mathbf{x}}$ is
 
 ```{math}
 :label: residual
@@ -144,11 +145,11 @@ For the problem $\mathbf{A}\mathbf{x}=\mathbf{b}$, the **residual** at a solutio
 
 Obviously, a zero residual means that $\tilde{\mathbf{x}}=\mathbf{x}$, and we have the exact solution. What happens more generally? Note that $\mathbf{A}\tilde{\mathbf{x}}=\mathbf{b}-\mathbf{r}$. That is, $\tilde{\mathbf{x}}$ solves the linear system problem for a right-hand side that is changed by $-\mathbf{r}$. This is precisely what is meant by backward error.
 
-Hence residual and backward error are the same thing for a linear system. What is the connection to the (forward) error? We can reconnect with {eq}`linsyscondb` by the definition $\mathbf{h} = \tilde{\mathbf{x}}-\mathbf{x}$, in which case 
+Hence residual and backward error are the same thing for a linear system. What is the connection to the (forward) error? We can reconnect with {eq}`linsyscondb` by the definition $\mathbf{h} = \tilde{\mathbf{x}}-\mathbf{x}$, in which case
 
-$$\mathbf{d} = \mathbf{A}(\mathbf{x}+\mathbf{h})-\mathbf{b}=\mathbf{A}\mathbf{h} = -\mathbf{r}.$$ 
+$$\mathbf{d} = \mathbf{A}(\mathbf{x}+\mathbf{h})-\mathbf{b}=\mathbf{A}\mathbf{h} = -\mathbf{r}.$$
 
-Thus {eq}`linsyscondb` is equivalent to
+Thus, {eq}`linsyscondb` is equivalent to
 
 ```{math}
 :label: residualcond
@@ -156,7 +157,7 @@ Thus {eq}`linsyscondb` is equivalent to
   \kappa(\mathbf{A}) \frac{\| \mathbf{r} \|}{\| \mathbf{b} \|}.
 ```
 
-Equation {eq}`residualcond` says that the gap between relative error and the relative residual is a multiplication by the matrix condition number. 
+Equation {eq}`residualcond` says that the gap between relative error and the relative residual is a multiplication by the matrix condition number.
 
 ```{prf:observation}
 When solving a linear system, all that can be expected is that the backward error, not the error, is small.

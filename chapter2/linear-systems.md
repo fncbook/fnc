@@ -3,6 +3,7 @@ numbering:
   enumerator: 2.3.%s
 ---
 (section-linsys-linear-systems)=
+
 # Linear systems
 
 We now attend to the central problem of this chapter: Given a square, $n\times n$ matrix $\mathbf{A}$ and an $n$-vector $\mathbf{b}$, find an $n$-vector $\mathbf{x}$ such that $\mathbf{A}\mathbf{x}=\mathbf{b}$. Writing out these equations, we obtain
@@ -37,7 +38,7 @@ If we define
 
 ```{math}
 \mathbf{S} =  \begin{bmatrix}
-	0 & 1\\0 & 0
+ 0 & 1\\0 & 0
 \end{bmatrix},
 ```
 
@@ -46,11 +47,11 @@ then it is easy to check that for any real value of $\alpha$ we have
 ```{math}
 \mathbf{S}
 \begin{bmatrix}
-	\alpha \\ 1
+ \alpha \\ 1
 \end{bmatrix}
 =
 \begin{bmatrix}
-	1 \\ 0
+ 1 \\ 0
 \end{bmatrix}.
 ```
 
@@ -133,7 +134,7 @@ The solution process is especially easy to demonstrate for a system with a **tri
   \end{bmatrix}.
 ```
 
-The first row of this system states simply that $4x_1=8$, which is easily solved as $x_1=8/4=2$. Now, the second row states that $3x_1-x_2=5$. As $x_1$ is already known, it can be replaced to find that $x_2 = -(5-3\cdot 2)=1$. Similarly, the third row gives $x_3=(0+1\cdot 2)/3 = 2/3$, and the last row yields $x_4=(1-1\cdot 2 + 1\cdot 1 + 1\cdot 2/3)/2 = 1/3$. Hence the solution is
+The first row of this system states simply that $4x_1=8$, which is easily solved as $x_1=8/4=2$. Now, the second row states that $3x_1-x_2=5$. As $x_1$ is already known, it can be replaced to find that $x_2 = -(5-3\cdot 2)=1$. Similarly, the third row gives $x_3=(0+1\cdot 2)/3 = 2/3$, and the last row yields $x_4=(1-1\cdot 2 + 1\cdot 1 + 1\cdot 2/3)/2 = 1/3$. Hence, the solution is
 
 ```{math}
   \mathbf{x} =
@@ -186,7 +187,6 @@ Solving the system backward, starting with $x_4$ first and then proceeding in de
 ```
 
 It should be clear that forward or backward substitution fails if and only if one of the diagonal entries of the system matrix is zero. We have essentially proved the following theorem.
-
 
 ```{prf:theorem} Triangular singularity
 :label: theorem-triangle-invert

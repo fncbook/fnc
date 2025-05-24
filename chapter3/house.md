@@ -3,6 +3,7 @@ numbering:
   enumerator: 3.4.%s
 ---
 (section-leastsq-house)=
+
 # Computing QR factorizations
 
 ```{index} orthogonal matrix
@@ -179,13 +180,13 @@ The algorithm we have described is encapsulated in {numref}`Function {number} <f
 
 ## Q-less QR and least squares
 
-In @demo-qr-qrfact>` it was seen that the $\mathbf{Q}$ output of Julia's `qr` function is not a standard matrix. The reason is that Equation {eq}`lsqr` shows that in order to solve the linear least-squares problem, all we need from $\mathbf{Q}$ is the computation of $\hat{\mathbf{Q}}^T\mathbf{b}$. Referring again to {eq}`hhbuildQ` and {eq}`hhapply`, the special structure of the reflectors is such that for this computation, we only need to apply code similar to lines 18 and 21 of {numref}`Function {number} <function-qrfact for each of the Householder vectors $\mathbf{v}$ that is constructed. 
+In @demo-qr-qrfact, it was seen that the $\mathbf{Q}$ output of Julia's `qr` function is not a standard matrix. The reason is that Equation {eq}`lsqr` shows that in order to solve the linear least-squares problem, all we need from $\mathbf{Q}$ is the computation of $\hat{\mathbf{Q}}^T\mathbf{b}$. Referring again to {eq}`hhbuildQ` and {eq}`hhapply`, the special structure of the reflectors is such that for this computation, we only need to apply code similar to lines 18 and 21 of {numref}`Function {number} <function-qrfact>` for each of the Householder vectors $\mathbf{v}$ that is constructed.
 
-This observation leads to the idea of the *Q-less QR factorization*, in which the full or thin $\mathbf{Q}$ is never computed explicitly. This is the variant used by Julia's `qr`. The returned value `Q` used within {numref}`Function {number} <function-lsqrfact>` is of a special type that allows Julia to perform `Q'*b` efficiently for the least-squares solution. 
+This observation leads to the idea of the *Q-less QR factorization*, in which the full or thin $\mathbf{Q}$ is never computed explicitly. This is the variant used by Julia's `qr`. The returned value `Q` used within {numref}`Function {number} <function-lsqrfact>` is of a special type that allows Julia to perform `Q'*b` efficiently for the least-squares solution.
 
 In @problem-house-flops you are asked to derive the following result about the Q-less factorization.
 
-:::{prf:theorem} 
+:::{prf:theorem}
 :label: theorem-house-flops
 Q-less QR factorization by Householder reflections takes $\sim(2mn^2-\frac{2}{3}n^3)$ flops.
 :::

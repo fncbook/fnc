@@ -14,7 +14,7 @@ numbering:
 Given $n+1$ distinct points $(t_0,y_0)$, $(t_1,y_1),\ldots,(t_n,y_n)$, with $t_0<t_1<\ldots <t_n$ called {term}`nodes`, the **interpolation problem** is to find a function $p(x)$, called the **interpolant**, such that $p(t_k)=y_k$ for $k=0,\dots,n$.
 :::
 
-In this chapter, we use $t_k$ for the nodes and $x$ to denote the continuous independent variable. 
+In this chapter, we use $t_k$ for the nodes and $x$ to denote the continuous independent variable.
 
 ```{index} Julia; indexing arrays
 ```
@@ -27,6 +27,7 @@ The interpolation nodes are numbered from 0 to $n$. This is convenient for our m
 
 ```{index} interpolation; by polynomials
 ```
+
 Polynomials are the obvious first candidate to serve as interpolating functions. They are easy to work with, and in {numref}`section-linsys-polyinterp` we saw that a linear system of equations can be used to determine the coefficients of a polynomial that passes through every member of a set of given points in the plane. However, it's not hard to find examples for which polynomial interpolation leads to unusable results.
 
 ::::{prf:example} Trouble in polynomial interpolation
@@ -53,7 +54,6 @@ Polynomials are the obvious first candidate to serve as interpolating functions.
 `````
 
 ::::
-
 
 ```{prf:observation}
 Interpolation by a polynomial at equally spaced nodes is ill-conditioned as the degree of the polynomial grows.
@@ -123,14 +123,14 @@ Linearity greatly simplifies the analysis of interpolation. To begin with, for a
 \cI( \mathbf{y} ) = \cI \left( \sum_{k=0}^n y_k \mathbf{e}_k  \right) = \sum_{k=0}^n y_k \cI( \mathbf{e}_k ).
 ```
 
-The functions appearing within the sum above have particular significance. 
+The functions appearing within the sum above have particular significance.
 
 ```{index} ! cardinal function
 ```
 
 ::::{prf:definition} Cardinal function
 :label: definition-cardinalfunction
-A {term}`cardinal function` $\phi_k$ for a node set $t_0,\ldots,t_n$ is the function that interpolates the value $(t_k,1)$ and $(t_j,0)$ for all $j\neq k$. 
+A {term}`cardinal function` $\phi_k$ for a node set $t_0,\ldots,t_n$ is the function that interpolates the value $(t_k,1)$ and $(t_j,0)$ for all $j\neq k$.
 ::::
 
 For any set of $n+1$ nodes, there are $n+1$ cardinal functions $\phi_0,\ldots,\phi_n$, each singling out a different interpolation node in the set. We finish {eq}`interp-cardinal1` by writing
@@ -150,7 +150,7 @@ In the following result we use the function infinity-norm or max-norm defined by
 ```{index} condition number; of interpolation
 ```
 
-````{prf:theorem} Conditioning of interpolation 
+````{prf:theorem} Conditioning of interpolation
 :label: theorem-interp-conditioning
 Suppose that $\cI$ is a linear interpolation method on nodes $t_0,\ldots,t_n$. Then with respect to the infinity norm, the absolute condition number of $\cI$ satisfies
   

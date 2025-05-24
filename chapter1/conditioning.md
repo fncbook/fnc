@@ -3,11 +3,12 @@ numbering:
   enumerator: 1.2.%s
 ---
 (section-intro-conditioning)=
+
 # Problems and conditioning
 
-Let's think a bit about what must be the easiest math problem you've dealt with in quite some time: adding 1 to a number. Formally, we describe this problem as a function $f(x)=x+1$, where $x$ is any real number. 
+Let's think a bit about what must be the easiest math problem you've dealt with in quite some time: adding 1 to a number. Formally, we describe this problem as a function $f(x)=x+1$, where $x$ is any real number.
 
-On a computer, $x$ will be represented by its floating-point counterpart, $\fl(x)$. Given the property {eq}`fpbound`, we have $\fl(x)=x(1+\epsilon)$ for some $\epsilon$ satisfying $|\epsilon| < \macheps/2$.  There is no error in representing the value 1. 
+On a computer, $x$ will be represented by its floating-point counterpart, $\fl(x)$. Given the property {eq}`fpbound`, we have $\fl(x)=x(1+\epsilon)$ for some $\epsilon$ satisfying $|\epsilon| < \macheps/2$.  There is no error in representing the value 1.
 
 Let's suppose that we are fortunate and that the addition proceeds exactly, with no additional errors. Then the machine result is just
 
@@ -29,7 +30,7 @@ This error could be quite large if the denominator is small. In fact, we can mak
 ```{index} ! subtractive cancellation
 ```
 
-You may have encountered this situation before when using significant digits for scientific calculations. Suppose we round all results to five decimal digits, and we add $-1.0012$ to $1.0000$. The result is $-0.0012$, or $-1.2\times 10^{-3}$ in scientific notation. Notice that even though both operands are specified to five digits, it makes no sense to write more than two digits in the answer because there is no information in the problem beyond their decimal places. 
+You may have encountered this situation before when using significant digits for scientific calculations. Suppose we round all results to five decimal digits, and we add $-1.0012$ to $1.0000$. The result is $-0.0012$, or $-1.2\times 10^{-3}$ in scientific notation. Notice that even though both operands are specified to five digits, it makes no sense to write more than two digits in the answer because there is no information in the problem beyond their decimal places.
 
 This phenomenon is known as **subtractive cancellation**, or loss of significance. We may say that three digits were "lost" in the mapping from $-1.0012$ to $-0.0012$. There's no way the loss could be avoided, *regardless of the algorithm*, once we decided to round off everything to a fixed number of digits.
 
@@ -37,7 +38,7 @@ This phenomenon is known as **subtractive cancellation**, or loss of significanc
 Subtractive cancellation is a loss of accuracy that occurs when two numbers add or subtract to give a result that is much smaller in magnitude. It is one of the most common mechanisms introducing dramatic growth of errors in floating-point computation.
 :::
 
-In double precision, all  the values are represented to about 16 significant decimal digits of precision, but it's understood that subtractive cancellation may render some of those digits essentially meaningless.
+In double precision, all the values are represented to about 16 significant decimal digits of precision, but it's understood that subtractive cancellation may render some of those digits essentially meaningless.
 
 ## Condition numbers
 
@@ -153,13 +154,13 @@ As you are asked to show in @problem-conditioning-chain, when two functions $f$ 
 
 ## Estimating errors
 
-Refer back to the definition of $\kappa_f$ as a limit in {eq}`condition`. Approximately speaking, if $|\epsilon|$ is small, we expect 
+Refer back to the definition of $\kappa_f$ as a limit in {eq}`condition`. Approximately speaking, if $|\epsilon|$ is small, we expect
 
 ```{math}
 \left| \dfrac{ f(x+\epsilon x) - f(x) }{ f(x)}  \right| \approx \kappa_f(x)\, |\epsilon|.
 ```
 
-That is, whenever the data $x$ is perturbed by a small amount, we expect that relative perturbation to be magnified by a factor of $\kappa_f(x)$ in the result. 
+That is, whenever the data $x$ is perturbed by a small amount, we expect that relative perturbation to be magnified by a factor of $\kappa_f(x)$ in the result.
 
 ::::{prf:observation}
 If $\kappa_f \approx 10^d$, then we expect to lose up to $d$ decimal digits of accuracy in computing $f(x)$ from $x$.
@@ -222,7 +223,7 @@ The calculation in {numref}`Example %s <example-quad-root-cond>` generalizes to 
 Roots of polynomials are ill-conditioned with respect to changes in the polynomial coefficients when they are much closer to each other than to the origin.
 :::
 
-The condition number of a root can be arbitrarily large. In the extreme case of a repeated root, the condition number is formally infinite, which implies that the ratio of changes in the root to changes in the coefficients cannot be bounded. 
+The condition number of a root can be arbitrarily large. In the extreme case of a repeated root, the condition number is formally infinite, which implies that the ratio of changes in the root to changes in the coefficients cannot be bounded.
 
 ::::{prf:example} Conditioning of polynomial roots
 :label: demo-condition-roots

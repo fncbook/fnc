@@ -3,6 +3,7 @@ numbering:
   enumerator: 5.3.%s
 ---
 (section-localapprox-splines)=
+
 # Cubic splines
 
 ```{index} interpolation; by piecewise polynomials
@@ -98,7 +99,7 @@ Collectively, {eq}`spline0asys` and {eq}`spline0bsys` express $2n$ scalar constr
 
 **2. Continuity of $S'(x)$ at interior nodes.**
 
-We do not know what the slope of the interpolant should be at the nodes, but we do want the same slope whether a node is approached from the left or the right. Thus we obtain constraints at the nodes that sit between two neighboring piecewise definitions, so that $S_1'(t_1)=S_2'(t_1)$, and so on. Altogether these are
+We do not know what the slope of the interpolant should be at the nodes, but we do want the same slope whether a node is approached from the left or the right. Thus, we obtain constraints at the nodes that sit between two neighboring piecewise definitions, so that $S_1'(t_1)=S_2'(t_1)$, and so on. Altogether these are
 
 ```{math}
 :label: spline1
@@ -139,7 +140,7 @@ and $\mathbf{E}$ is the $(n-1)\times n$ matrix resulting from deleting the last 
 \end{bmatrix}.
 ```
 
-Left-multiplying by $\mathbf{E}$ deletes the last row of any matrix or vector. Hence {eq}`spline1sys` represents $n-1$ constraints on the unknowns. (Remember, there are only $n-1$ interior nodes.)
+Left-multiplying by $\mathbf{E}$ deletes the last row of any matrix or vector. Hence, {eq}`spline1sys` represents $n-1$ constraints on the unknowns. (Remember, there are only $n-1$ interior nodes.)
 
 **3. Continuity of $S''(x)$ at interior nodes.**
 
@@ -173,9 +174,9 @@ So far the equations {eq}`spline0asys`,  {eq}`spline0bsys`,  {eq}`spline1sys`, a
 
 While natural splines have important theoretical properties, not-a-knot splines give better pointwise accuracy, and they are the only type we consider further.
 
-In the not-a-knot spline, the values and first three derivatives of the cubic polynomials $S_1$ and $S_2$ agree at the node $t_1$. Hence they must be the same cubic polynomial! The same is true of $S_{n-1}$ and $S_n$.[^nak] We could use these facts to eliminate some of the undetermined coefficients from our linear system of constraints. However, rather than rework the algebra we just append two more rows to the system, expressing the conditions
+In the not-a-knot spline, the values and first three derivatives of the cubic polynomials $S_1$ and $S_2$ agree at the node $t_1$. Hence, they must be the same cubic polynomial! The same is true of $S_{n-1}$ and $S_n$.[^nak] We could use these facts to eliminate some of the undetermined coefficients from our linear system of constraints. However, rather than rework the algebra we just append two more rows to the system, expressing the conditions
 
-[^nak]: This explains the name of the not-a-knot spline—for splines, "knots" are the points at which  different piecewise definitions meet.
+[^nak]: This explains the name of the not-a-knot spline—for splines, "knots" are the points at which different piecewise definitions meet.
 
 ```{math}
 :label: splinenak
@@ -213,6 +214,7 @@ Collectively, {eq}`spline0asys`,  {eq}`spline0bsys`,  {eq}`spline1sys`,  {eq}`sp
 {numref}`Function {number} <function-spinterp>` gives an implementation of cubic not-a-knot spline interpolation. For clarity, it stays very close to the description given above. There are some possible shortcuts—for example, one could avoid using $\mathbf{E}$ and instead directly delete the last row of any matrix it left-multiplies. Observe that the linear system is assembled and solved just once, and the returned evaluation function simply uses the resulting coefficients. This allows us to make multiple calls to evaluate $S$ without unnecessarily repeating the linear algebra.
 
 ## Conditioning and convergence
+
 ::::{prf:example} Cubic splines
 :label: demo-splines-splines
 

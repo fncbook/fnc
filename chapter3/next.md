@@ -1,4 +1,5 @@
 (section-leastsq-next)=
+
 # Next steps
 
 The least-squares problem has been widely studied and used, and only seems to become more important in this era of ever-increasing amounts of data.  A good reference for numerical methods is {cite}`bjorckNumericalMethods1996`.  Some theoretical results can be found in {cite}`highamAccuracyStability2002`; a brief and advanced discussion can be found in {cite}`golubMatrixComputations1996`.

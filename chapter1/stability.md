@@ -27,8 +27,9 @@ finding roots is a well-conditioned problem. An obvious algorithm for finding th
 x_1 = \frac{-b + \sqrt{b^2-4ac}}{2a}, \qquad
 x_2 = \frac{-b - \sqrt{b^2-4ac}}{2a}.
 ```
-(demo-stability-quadbad)= 
+
 ``````{prf:example} Instability of the quadratic formula
+:label: demo-stability-quadbad
 
 `````{tab-set}
 ````{tab-item} Julia
@@ -54,7 +55,7 @@ x_2 = \frac{-b - \sqrt{b^2-4ac}}{2a}.
 ```{index} subtractive cancellation
 ```
 
-@demo-stability-quadbad suggests that the venerable quadratic formula is an *unstable* means of computing roots in finite precision. The roots themselves were not sensitive to the data or arithmetic—it's the specific computational path we chose that caused the huge growth in errors. 
+@demo-stability-quadbad suggests that the venerable quadratic formula is an *unstable* means of computing roots in finite precision. The roots themselves were not sensitive to the data or arithmetic—it's the specific computational path we chose that caused the huge growth in errors.
 
 We can confirm this conclusion by finding a different path that avoids subtractive cancellation. A little algebra using {eq}`quadform` confirms the additional formula $x_1x_2=c/a$.  So given one root $r$, we compute the other root using $c/ar$, which has only multiplication and division and therefore creates no numerical trouble.
 
@@ -82,15 +83,15 @@ We can confirm this conclusion by finding a different path that avoids subtracti
 `````
 ``````
 
-The algorithms in @demo-stability-quadbad>` and {numref}`Demo {number} <demo-stability-quadgood are equivalent when using real numbers and exact arithmetic. When results are perturbed by machine representation at each step, though, the effects may depend dramatically on the specific sequence of operations, thanks to the chain rule {eq}`condition-chain`.
+The algorithms in @demo-stability-quadbad and @demo-stability-quadgood are equivalent when using real numbers and exact arithmetic. When results are perturbed by machine representation at each step, though, the effects may depend dramatically on the specific sequence of operations, thanks to the chain rule {eq}`condition-chain`.
 
 ::::{prf:observation}
-The sensitivity of a problem $f(x)$ is governed only by $\kappa_f$, but the sensitivity of an algorithm depends on the condition numbers of all of its individual steps. 
+The sensitivity of a problem $f(x)$ is governed only by $\kappa_f$, but the sensitivity of an algorithm depends on the condition numbers of all of its individual steps.
 ::::
 
 This situation may seem hopelessly complicated. But the elementary operations we take for granted, such as those in {numref}`table-condition-functions`, are well-conditioned in most circumstances. Exceptions usually occur when $|f(x)|$ is much smaller than $|x|$, although not every such case signifies trouble. The most common culprit is simple subtractive cancellation.
 
-A practical characterization of instability is that results are much less accurate than the conditioning of the problem can explain. Typically one should apply an algorithm to test problems whose answers are well-known, or for which other programs are known to work well, in order to spot possible instabilities. In the rest of this book we will see some specific ways in which instability is manifested for different types of problems.
+A practical characterization of instability is that results are much less accurate than the conditioning of the problem can explain. Typically, one should apply an algorithm to test problems whose answers are well-known, or for which other programs are known to work well, in order to spot possible instabilities. In the rest of this book we will see some specific ways in which instability is manifested for different types of problems.
 
 ## Backward error
 
@@ -101,7 +102,7 @@ In the presence of poor conditioning for a problem $f(x)$, even just the act of 
 
 :::{prf:definition} Backward error
 :label: definition-backward-error
-Let $\tilde{f}$ be an algorithm for the problem $f$. Let $y=f(x)$ be an exact result and $\tilde{y}=\tilde{f}(x)$ be its approximation by the algorithm. If there is a value $\tilde{x}$ such that $f(\tilde{x}) = \tilde{y}$, then the relative **backward error** in $\tilde{y}$ is 
+Let $\tilde{f}$ be an algorithm for the problem $f$. Let $y=f(x)$ be an exact result and $\tilde{y}=\tilde{f}(x)$ be its approximation by the algorithm. If there is a value $\tilde{x}$ such that $f(\tilde{x}) = \tilde{y}$, then the relative **backward error** in $\tilde{y}$ is
 
 ```{math}
 :label: backwarderror
@@ -111,7 +112,7 @@ Let $\tilde{f}$ be an algorithm for the problem $f$. Let $y=f(x)$ be an exact re
 The absolute backward error is $|\tilde{x}-x|$.
 :::
 
-Backward error measures the change to the original data that reproduces the result that was found by the algorithm. The situation is illustrated in {numref}`fig-backwarderror`. 
+Backward error measures the change to the original data that reproduces the result that was found by the algorithm. The situation is illustrated in {numref}`fig-backwarderror`.
 
 ```{figure} figures/backwarderror.svg
 :name: fig-backwarderror
@@ -142,12 +143,11 @@ Backward error is the difference between the original data and the data that exa
 `````
 ``````
 
-
 Small backward error is the best we can hope for in a poorly conditioned problem. Without getting into the formal details, know that if an algorithm always produces small backward errors, then it is stable. But the converse is not always true: some stable algorithms may produce a large backward error.
 
 ::::{prf:example}
 :label: example-stability-notbs
-One stable algorithm that is not backward stable is floating-point evaluation for our old friend, $f(x)=x+1$. If $|x|<\epsilon_\text{mach}/2$, then the computed result is $\tilde{f}(x)=1$, since there are no floating-point numbers between $1$ and $1+\epsilon_\text{mach}$. Hence the only possible choice for a real number $\tilde{x}$ satisfying {eq}`backwarderror` is $\tilde{x}=0$. But then $|\tilde{x}-x|/|x|=1$, which indicates 100% backward error!
+One stable algorithm that is not backward stable is floating-point evaluation for our old friend, $f(x)=x+1$. If $|x|<\epsilon_\text{mach}/2$, then the computed result is $\tilde{f}(x)=1$, since there are no floating-point numbers between $1$ and $1+\epsilon_\text{mach}$. Hence, the only possible choice for a real number $\tilde{x}$ satisfying {eq}`backwarderror` is $\tilde{x}=0$. But then $|\tilde{x}-x|/|x|=1$, which indicates 100% backward error!
 ::::
 
 ## Exercises

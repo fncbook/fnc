@@ -26,7 +26,7 @@ We call $t$ the **independent variable** and $u$ the **dependent variable**. If 
 A **solution** of an initial-value problem is a function $u(t)$ that makes both $u'(t)=f\bigl(t,u(t)\bigr)$ and $u(a)=u_0$ true equations.
 ::::
 
-When $t$ is meant to be time, sometimes we write $\dot{u}$ (read "u-dot") instead of $u'$. 
+When $t$ is meant to be time, sometimes we write $\dot{u}$ (read "u-dot") instead of $u'$.
 
 ::::{prf:example}
   Suppose $u(t)$ is the size of a population at time $t$. We idealize by allowing $u$ to take any real (not just integer) value. If we assume a constant per capita birth rate (births per unit population per unit time), then
@@ -64,7 +64,7 @@ Linear problems can be solved in terms of integrals. Defining the *integrating f
 
 In many cases, however, the necessary integrals cannot be done in closed form. Some nonlinear ODEs, such as separable equations, may also be solvable with a short formula, perhaps with difficult integrations. Most often, though, there is no analytic formula available for the solution.
 
-An ODE may have higher derivatives of the unknown solution present. For example, a **second-order ordinary differential equation** is often given in the form $u''(t)=f\bigl(t,u,u'\bigr)$. A second-order IVP requires two conditions at the initial time in order to specify a solution completely. As we will see in {numref}`section-ivp-systems`, we are always able to reformulate higher-order IVPs in a first-order form, so we will deal with first-order problems exclusively. 
+An ODE may have higher derivatives of the unknown solution present. For example, a **second-order ordinary differential equation** is often given in the form $u''(t)=f\bigl(t,u,u'\bigr)$. A second-order IVP requires two conditions at the initial time in order to specify a solution completely. As we will see in {numref}`section-ivp-systems`, we are always able to reformulate higher-order IVPs in a first-order form, so we will deal with first-order problems exclusively.
 
 ## Numerical solutions
 
@@ -95,7 +95,7 @@ An ODE may have higher derivatives of the unknown solution present. For example,
 
 ## Existence and uniqueness
 
-There are simple IVPs that do not have solutions at all possible times. 
+There are simple IVPs that do not have solutions at all possible times.
 
 ::::{prf:example} Finite-time singularity
 :label: demo-basics-sing

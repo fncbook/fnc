@@ -3,12 +3,13 @@ numbering:
   enumerator: 6.7.%s
 ---
 (section-ivp-implicit)=
+
 # Implementation of multistep methods
 
 ```{index} multistep method; implementation of
 ```
 
-We now consider some of the practical issues that arise when multistep formulas are used to solve IVPs. In this section we emphasize the vector IVP, $\mathbf{u}'=\mathbf{f}(t,\mathbf{u})$, and use boldface in the difference formula {eq}`multistep` as well. 
+We now consider some of the practical issues that arise when multistep formulas are used to solve IVPs. In this section we emphasize the vector IVP, $\mathbf{u}'=\mathbf{f}(t,\mathbf{u})$, and use boldface in the difference formula {eq}`multistep` as well.
 
 ## Explicit methods
 
@@ -19,7 +20,7 @@ As a concrete example, the AB4 method is defined by the formula
 \mathbf{u}_{i+1} = \mathbf{u}_i + h\, ( \tfrac{55}{24}\mathbf{f}_i - \tfrac{59}{24} \mathbf{f}_{i-1} + \tfrac{37}{24}\mathbf{f}_{i-2} - \tfrac{9}{24}\mathbf{f}_{i-3}), \quad i=3,\ldots,n-1.
 ```
 
-{numref}`Function {number} <function-ab4>` shows a basic implementation of AB4. 
+{numref}`Function {number} <function-ab4>` shows a basic implementation of AB4.
 
 Observe that {numref}`Function {number} <function-rk4>` is used to find the starting values $\mathbf{u}_1,\mathbf{u}_2,\mathbf{u}_3$ that are needed before the iteration formula takes over. As far as RK4 is concerned, it needs to solve  (the same step size as in the AB4 iteration). These results are then used to find $\mathbf{f}_0,\ldots,\mathbf{f}_3$ and get the main iteration started.
 
@@ -48,6 +49,7 @@ Observe that {numref}`Function {number} <function-rk4>` is used to find the star
 
 ::::{prf:example} Convergence of Adams–Bashforth
 :label: demo-implicit-ab4
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -84,7 +86,7 @@ The implementation of an implicit multistep method is more difficult. Consider t
 
 for $\mathbf{z}$. This equation can be written as $\mathbf{g}(\mathbf{z})=\boldsymbol{0}$, so the rootfinding methods of Chapter 4 can be used. The new value $\mathbf{u}_{i+1}$ is equal to the root of this equation.  
 
-An implementation of AM2 using {numref}`Function {number} <function-levenberg>` from {numref}`section-nonlineqn-quasinewton` is shown in {numref}`Function {number} <function-am2>`. 
+An implementation of AM2 using {numref}`Function {number} <function-levenberg>` from {numref}`section-nonlineqn-quasinewton` is shown in {numref}`Function {number} <function-am2>`.
 
 ``````{prf:algorithm} am2
 :label: function-am2
@@ -141,9 +143,9 @@ At each time step in {numref}`Function {number} <function-am2>`, or any implicit
 
 ::::
 
-Although the result of @demo-implicit-stiff may seem counter-intuitive, there is no contradiction. A fourth-order explicit formula is more accurate than a second-order implicit one, in the limit $h\to 0$. But there is another limit to consider, $t\to \infty$ with $h$ fixed, and in this one the implicit method wins. 
+Although the result of @demo-implicit-stiff may seem counter-intuitive, there is no contradiction. A fourth-order explicit formula is more accurate than a second-order implicit one, in the limit $h\to 0$. But there is another limit to consider, $t\to \infty$ with $h$ fixed, and in this one the implicit method wins.
 
-Problems for which implicit methods are much more efficient than explicit counterparts are called **stiff**. A complete mathematical description will wait for Chapter 11, but a sure sign of stiffness is the presence of phenomena on widely different time scales. In @demo-implicit-stiff, for instance, there are two slow periods during which the solution changes very little, interrupted by a very fast transition in the state. An explicit method "thinks" that the step size must always be dictated by the time scale of the fast transition, whereas an implicit method can take large steps during the slow periods.
+Problems for which implicit methods are much more efficient than explicit counterparts are called **stiff**. A complete mathematical description will wait for Chapter 11, but a sure sign of stiffness is the presence of phenomena on widely different time scales. In @demo-implicit-stiff, for instance, there are two slow periods during which the solution changes very little, interrupted by a very fast transition in the state. An explicit method "thinks" that the step size must always be dictated by the timescale of the fast transition, whereas an implicit method can take large steps during the slow periods.
 
 ```{index} adaptivity; in IVP solver
 ```

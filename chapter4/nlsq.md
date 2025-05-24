@@ -3,6 +3,7 @@ numbering:
   enumerator: 4.7.%s
 ---
 (section-nonlineqn-nlsq)=
+
 # Nonlinear least squares
 
 After the solution of square linear systems, we generalized to the case of having more constraints to satisfy than available variables. Our next step is to do the same for nonlinear equations, thus filling out this table:
@@ -32,7 +33,7 @@ You should not be surprised to learn that we can formulate an algorithm by subst
 
 where $\mathbf{A}_k$ is the exact $m\times n$ Jacobian matrix, $\mathbf{J}(\mathbf{x}_k)$, or an approximation of it as described in {numref}`section-nonlineqn-quasinewton`.
 
-In the square case, we solved $\mathbf{q}=\boldsymbol{0}$ to define the new value for $\mathbf{x}$, leading to the condition $\mathbf{A}_k\mathbf{s}_k=-\mathbf{f}_k$, where  $\mathbf{s}_k=\mathbf{x}_{k+1}-\mathbf{x}_k$. Now, with $m>n$, we cannot expect to solve $\mathbf{q}=\boldsymbol{0}$, so instead we define $\mathbf{x}_{k+1}$ as the value that minimizes $\| \mathbf{q} \|_2$.
+In the square case, we solved $\mathbf{q}=\boldsymbol{0}$ to define the new value for $\mathbf{x}$, leading to the condition $\mathbf{A}_k\mathbf{s}_k=-\mathbf{f}_k$, where $\mathbf{s}_k=\mathbf{x}_{k+1}-\mathbf{x}_k$. Now, with $m>n$, we cannot expect to solve $\mathbf{q}=\boldsymbol{0}$, so instead we define $\mathbf{x}_{k+1}$ as the value that minimizes $\| \mathbf{q} \|_2$.
 
 ```{index} ! Gauss–Newton method
 ```
@@ -45,7 +46,7 @@ Given $\mathbf{f}$ and a starting value $\mathbf{x}_1$, for each $k=1,2,3,\ldots
 2. Solve the linear least squares problem $\argmin \| \mathbf{A}_k\mathbf{s}_k  + \mathbf{y}_k\|_2$ for $\mathbf{s}_k$.
 3. Let $\mathbf{x}_{k+1} = \mathbf{x}_k + \mathbf{s}_k$.
 
-Under appropriate conditions, the sequence  $\mathbf{x}_{1}, \mathbf{x}_{2},\dots$ converges to a local minimizer of $\|\mathbf{f}(\mathbf{x})\|_2$.
+Under appropriate conditions, the sequence $\mathbf{x}_{1}, \mathbf{x}_{2},\dots$ converges to a local minimizer of $\|\mathbf{f}(\mathbf{x})\|_2$.
 ::::
 
 In brief, Gauss–Newton solves a series of linear least-squares problems in order to solve a nonlinear least-squares problem.
@@ -54,7 +55,7 @@ Surprisingly, {numref}`Function {number} <function-newtonsys>` and {numref}`Func
 
 ## Convergence
 
-In the multidimensional Newton method for a nonlinear system, we expect quadratic convergence to a solution in the typical case. For the Gauss–Newton method, the picture is more complicated. 
+In the multidimensional Newton method for a nonlinear system, we expect quadratic convergence to a solution in the typical case. For the Gauss–Newton method, the picture is more complicated.
 
 As always in least-squares problems, the residual $\mathbf{f}(\mathbf{x})$ will not necessarily be zero when $\|\mathbf{f}\|$ is minimized. Suppose that the minimum value of $\|\mathbf{f}\|$ is $R>0$. In general, we might observe quadratic-like convergence until the iterate $\|\mathbf{x}_k\|$ is within distance $R$ of a true minimizer, and linear convergence thereafter. When $R$ is not sufficiently small, the convergence can be quite slow.
 
@@ -88,9 +89,9 @@ As always in least-squares problems, the residual $\mathbf{f}(\mathbf{x})$ will 
 ```{index} data fitting; nonlinear
 ```
 
-In {numref}`section-leastsq-fitting` we saw how to fit functions to data values, provided that the set of candidate fitting functions depends linearly on the undetermined coefficients. We now have a tool to generalize that process to fitting functions that depend nonlinearly on unknown parameters. 
+In {numref}`section-leastsq-fitting` we saw how to fit functions to data values, provided that the set of candidate fitting functions depends linearly on the undetermined coefficients. We now have a tool to generalize that process to fitting functions that depend nonlinearly on unknown parameters.
 
-Suppose that $(t_i,y_i)$ for $i=1,\ldots,m$ are given points. We wish to model the data by a function $g(t,\mathbf{x})$ that depends on unknown parameters $x_1,\ldots,x_n$ in an arbitrary way. A standard approach is to minimize the discrepancy between the model and the observations, in a least-squares sense. Define 
+Suppose that $(t_i,y_i)$ for $i=1,\ldots,m$ are given points. We wish to model the data by a function $g(t,\mathbf{x})$ that depends on unknown parameters $x_1,\ldots,x_n$ in an arbitrary way. A standard approach is to minimize the discrepancy between the model and the observations, in a least-squares sense. Define
 
 ```{math}
 :label: nlsq-misfit
@@ -113,7 +114,7 @@ then the misfit function is also linear in $\mathbf{c}$ and the fitting problem 
 
 ::::{prf:example} Nonlinear data fitting
 :label: demo-nlsq-MM
-Inhibited enzyme reactions often follow what are known as _Michaelis–Menten_ kinetics, in which a reaction rate $w$ follows a law of the form
+Inhibited enzyme reactions often follow what are known as *Michaelis–Menten_ kinetics, in which a reaction rate $w$ follows a law of the form
 
 $$w(s) = \frac{V s}{K_m + s},$$
 

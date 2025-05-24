@@ -3,6 +3,7 @@ numbering:
   enumerator: 5.7.%s
 ---
 (section-localapprox-adaptive)=
+
 # Adaptive integration
 
 ```{index} numerical integration
@@ -80,7 +81,7 @@ If $|E|$ is judged to be acceptably small, we are done. This judgment takes some
   \int_{10^{-6}}^{2\pi} 2 \sin x\, dx \approx -10^{-12}.
 ```
 
-We are likely to sample values of the integrand that are larger than, say, $1/2$ in absolute value, so obtaining this very small result has to rely on subtractive cancellation. We cannot hope for more than 4-5 accurate digits, so a strict test of the relative error is also not recommended. In other words, we can seek an error that is small relative to the data (the integrand), which is $O(1)$, but not relative to the answer itself. 
+We are likely to sample values of the integrand that are larger than, say, $1/2$ in absolute value, so obtaining this very small result has to rely on subtractive cancellation. We cannot hope for more than 4-5 accurate digits, so a strict test of the relative error is also not recommended. In other words, we can seek an error that is small relative to the data (the integrand), which is $O(1)$, but not relative to the answer itself.
 
 Typically, we use both relative and absolute error, stopping when either one is considered small enough. Algebraically, the test is
 
@@ -168,6 +169,7 @@ Although adaptivity and the error estimation that goes with it can be very power
 ## Exercises
 
 % must be kept as #1
+
 ``````{exercise}
 :label: problem-adaptive-tests
 ⌨ For each integral below, use {numref}`Function {number} <function-intadapt>` with error tolerance $10^{-2},10^{-3},\ldots,10^{-12}$. Make a table of errors and the number of integrand evaluation nodes used, and use a convergence plot as in @demo-adapt-usage to compare to fourth-order accuracy. (These integrals were taken from {cite}`baileyComparisonThree2005`.)

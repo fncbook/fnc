@@ -3,6 +3,7 @@ numbering:
   enumerator: 3.3.%s
 ---
 (section-leastsq-qr)=
+
 # The QR factorization
 
 ```{index} ! orthogonal vectors, ! orthonormal vectors
@@ -25,7 +26,7 @@ If {eq}`orthogonality` applies and also $\mathbf{q}_i^T\mathbf{q}_i=1$ for all $
 ```{index} inner product
 ```
 
-In two and three dimensions, orthogonality is the same as perpendicularity. 
+In two and three dimensions, orthogonality is the same as perpendicularity.
 
 Orthogonal vectors simplify inner products. For example, if $\mathbf{q}_1$ and $\mathbf{q}_2$ are orthogonal, then
 
@@ -36,12 +37,12 @@ Orthogonal vectors simplify inner products. For example, if $\mathbf{q}_1$ and $
 = \|\mathbf{q}_1\|_2^2 + \|\mathbf{q}_2\|_2^2.
 ```
 
-As in the rest of this chapter, we will be using the 2-norm exclusively. 
+As in the rest of this chapter, we will be using the 2-norm exclusively.
 
 ```{index} subtractive cancellation
 ```
 
-Equation {eq}`orthosubtract` is the key to the computational attractiveness of orthogonality. {numref}`fig-nonorthogonal` shows how nonorthogonal vectors can allow a multidimensional version of subtractive cancellation, in which $\|\mathbf{x}-\mathbf{y}\|$ is much smaller than $\|\mathbf{x}\|$ and $\|\mathbf{y}\|$. As the figure illustrates, orthogonal vectors do not allow this phenomenon. By {eq}`orthosubtract`, the magnitude of a vector difference or sum is larger than the magnitudes of the original vectors. 
+Equation {eq}`orthosubtract` is the key to the computational attractiveness of orthogonality. {numref}`fig-nonorthogonal` shows how nonorthogonal vectors can allow a multidimensional version of subtractive cancellation, in which $\|\mathbf{x}-\mathbf{y}\|$ is much smaller than $\|\mathbf{x}\|$ and $\|\mathbf{y}\|$. As the figure illustrates, orthogonal vectors do not allow this phenomenon. By {eq}`orthosubtract`, the magnitude of a vector difference or sum is larger than the magnitudes of the original vectors.
 
 ```{figure} figures/nonorthogonal.svg
 :name: fig-nonorthogonal
@@ -73,7 +74,7 @@ Statements about orthogonal vectors are often made more easily in matrix form. L
 \end{bmatrix}.
 ```
 
-If the columns of $\mathbf{Q}$ are orthonormal, then $\mathbf{Q}^T\mathbf{Q}$ is the $k\times k$ identity matrix. This is such an important property that we will break with common practice here and give this type of matrix a name. 
+If the columns of $\mathbf{Q}$ are orthonormal, then $\mathbf{Q}^T\mathbf{Q}$ is the $k\times k$ identity matrix. This is such an important property that we will break with common practice here and give this type of matrix a name.
 
 ```{index} ! ONC matrix
 ```
@@ -108,14 +109,14 @@ The last part of the theorem is left to the exercises.
 ```{index} ! orthogonal matrix
 ```
 
-Of particular interest is a *square* ONC matrix.[^ortho] 
+Of particular interest is a *square* ONC matrix.[^ortho]
 
 ```{prf:definition} Orthogonal matrix
 :label: definition-orthogonalmatrix
 An {term}orthogonal matrix` is a square matrix with orthonormal columns.
 ```
 
-Orthogonal matrices have properties beyond @theorem-qr-ONC. 
+Orthogonal matrices have properties beyond @theorem-qr-ONC.
 
 [^ortho]: Confusingly, a square matrix whose columns are orthogonal is not necessarily an orthogonal matrix; the columns must be orthonormal, which is a stricter condition.
 

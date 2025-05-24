@@ -10,7 +10,7 @@ numbering:
 ```{index} finite differences
 ```
 
-All of the finite-difference formulas in the previous section based on equally spaced nodes converge as the node spacing $h$ decreases to zero. However, note that to discretize a function over an interval $[a,b]$, we use $h=(b-a)/n$, which implies $n=(b-a)/h=O(h^{-1})$. As $h\to 0$, the total number of nodes needed grows without bound. So we would like to make $h$ as large as possible while still achieving some acceptable accuracy.
+All the finite-difference formulas in the previous section based on equally spaced nodes converge as the node spacing $h$ decreases to zero. However, note that to discretize a function over an interval $[a,b]$, we use $h=(b-a)/n$, which implies $n=(b-a)/h=O(h^{-1})$. As $h\to 0$, the total number of nodes needed grows without bound. So we would like to make $h$ as large as possible while still achieving some acceptable accuracy.
 
 ```{index} ! truncation error; of a finite-difference formula
 ```
@@ -29,7 +29,7 @@ The method is said to be **convergent** if $\tau_f(h)\to 0$ as $h\to 0$.
 
 Although we are measuring the truncation error only at $x=0$, it could be defined for other $x$ as well. The definition adjusts naturally to use $f''(0)$ for difference formulas targeting the second derivative.
 
-All of the finite-difference formulas given in {numref}`section-localapprox-finitediffs` are convergent.
+All the finite-difference formulas given in {numref}`section-localapprox-finitediffs` are convergent.
 
 ````{prf:example}
 :label: example-fd-converge-FD11
@@ -49,7 +49,7 @@ The primary conclusion is that the truncation error is $O(h)$ as $h\to 0$.
 
 ## Order of accuracy
 
-Of major interest is the rate at which $\tau_f\to 0$ in a convergent formula. 
+Of major interest is the rate at which $\tau_f\to 0$ in a convergent formula.
 
 ```{index} ! order of accuracy; of a finite-difference formula
 ```
@@ -59,7 +59,7 @@ Of major interest is the rate at which $\tau_f\to 0$ in a convergent formula.
 If the truncation error of a finite-difference formula satisfies $\tau_f(h)=O(h^m)$ for a positive integer $m$, then $m$ is the **order of accuracy** of the formula.
 ::::
 
-Hence the forward-difference formula in {numref}`Example {number} <example-fd-converge-FD11>` has order of accuracy equal to 1; i.e., it is **first-order accurate**. All else being equal, a higher order of accuracy is preferred, since $O(h^m)$ vanishes more quickly for larger values of $m$. As a rule, including more function values in a finite-difference formula (i.e., increasing the number of weights in {eq}`fdformula`) increases the order of accuracy, as can be seen in {numref}`table-FDcenter` and {numref}`table-FDforward`.
+Hence, the forward-difference formula in {numref}`Example {number} <example-fd-converge-FD11>` has order of accuracy equal to 1; i.e., it is **first-order accurate**. All else being equal, a higher order of accuracy is preferred, since $O(h^m)$ vanishes more quickly for larger values of $m$. As a rule, including more function values in a finite-difference formula (i.e., increasing the number of weights in {eq}`fdformula`) increases the order of accuracy, as can be seen in {numref}`table-FDcenter` and {numref}`table-FDforward`.
 
 Order of accuracy is calculated by expanding $\tau_f$ in a Taylor series about $h=0$ and ignoring all but the leading term.[^trunc]
 
@@ -124,7 +124,7 @@ As $h\to 0$, the numerator approaches zero even though the values $f(x+h)$ and $
 \kappa(h) = \frac{ \max\{\,|f(x+h)|,|f(x)|\,\} }{ |f(x+h)-f(x) | },
 ```
 
-implying a relative error of size $\kappa(h) \epsilon_\text{mach}$ in its computation. Hence the numerical value we actually compute for $\delta$ is
+implying a relative error of size $\kappa(h) \epsilon_\text{mach}$ in its computation. Hence, the numerical value we actually compute for $\delta$ is
 
 ```{math}
 \begin{split}
@@ -133,7 +133,7 @@ implying a relative error of size $\kappa(h) \epsilon_\text{mach}$ in its comput
 \end{split}
 ```
 
-Hence, as $h\to 0$, 
+Hence, as $h\to 0$,
 
 ```{math}
 \bigl| \tilde{\delta}(h) - \delta(h) \bigr| = \frac{ \max\{\,|f(x+h)|,|f(x)|\,\} }{ h}\,\epsilon_\text{mach} \sim  |f(x)|\, \epsilon_\text{mach}\cdot h^{-1}.
@@ -156,7 +156,6 @@ Equation {eq}`FDround` indicates that while the truncation error $\tau$ vanishes
 ```
 
 for a constant $K$ that depends on $x$ and $f$, but not $h$. In summary, for a first-order finite-difference method, the optimum spacing between nodes is proportional to $\epsilon_\text{mach}^{\,\,1/2}$. (This observation explains the choice of `δ` in {numref}`Function {number} <function-fdjac>`.)
-
 
 For a method of truncation order $m$, the details of the subtractive cancellation are a bit different, but the conclusion generalizes.
 

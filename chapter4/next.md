@@ -1,4 +1,5 @@
 (section-nonlineqn-next)=
+
 # Next steps
 
 The fixed-point iteration has been used to prove results about convergence; see {cite}`quarteroniNumericalMathematics2007` for more details.

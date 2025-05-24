@@ -1,4 +1,5 @@
 (section-linsys-next)=
+
 # Next steps
 
 The underlying theory for linear systems is covered in numerous linear algebra textbooks.  Some popular choices include {cite}`strangIntroductionLinear2016`, {cite}`layLinearAlgebra2012`, and {cite}`leonLinearAlgebra2006`, but there are many other good choices.

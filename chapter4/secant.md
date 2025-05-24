@@ -3,6 +3,7 @@ numbering:
   enumerator: 4.4.%s
 ---
 (section-nonlineqn-secant)=
+
 # Interpolation-based methods
 
 From a practical standpoint, one of the biggest drawbacks of Newton's method is the requirement to supply $f'$ in {numref}`Function {number} <function-newton>`. It is both a programming inconvenience and a step that requires computational time. We can avoid using $f'$, however, by making a simple but easily overlooked observation:
@@ -92,7 +93,7 @@ Our implementation of the secant method is given in {numref}`Function {number} <
 
 ## Convergence
 
-Graphically, a secant line usually looks like a less accurate model of $f$ than the tangent line. How will that affect the convergence? 
+Graphically, a secant line usually looks like a less accurate model of $f$ than the tangent line. How will that affect the convergence?
 
 As before, let $\epsilon_k = x_k-r$ be the errors in the successive root approximations, and assume that $r$ is a simple root. If the initial errors are small, then a tedious but straightforward Taylor expansion shows that, to lowest order,
 
@@ -126,7 +127,7 @@ for an unknown constant $C$. Treating the approximation as an equality, this bec
 ```{index} ! convergence rate; superlinear
 ```
 
-Hence, the errors in the secant method converge like $\epsilon_{k+1} = c (\epsilon_k)^\alpha$  for $1<\alpha<2$.
+Hence, the errors in the secant method converge like $\epsilon_{k+1} = c (\epsilon_k)^\alpha$ for $1<\alpha<2$.
 
 ::::{prf:definition} Superlinear convergence
 :label: definition-superlinearconvergence
@@ -137,16 +138,18 @@ Suppose a sequence $x_k$ approaches limit $x^*$. If the error sequence $\epsilon
   \lim_{k\to\infty} \frac{|\epsilon_{k+1}|}{|\epsilon_k|^\alpha} = L
 ```
 
-for constants $\alpha >1$ and $L>0$, then the sequence has {term}`superlinear convergence` with rate $\alpha$. 
+for constants $\alpha >1$ and $L>0$, then the sequence has {term}`superlinear convergence` with rate $\alpha$.
 ::::
 
 Quadratic convergence is a particular case of superlinear convergence. Roughly speaking, we expect
 
+```{math}
 \begin{align*}
 \label{superlinear-rate}
-\log |\epsilon_{k+1}| & \approx \alpha (\log |\epsilon_k|) + \log L, \\ 
+\log |\epsilon_{k+1}| & \approx \alpha (\log |\epsilon_k|) + \log L, \\
 \frac{\log |\epsilon_{k+1}|}{\log |\epsilon_k|} & \approx \alpha + \frac{\log L}{\log |\epsilon_k|} \to \alpha,
 \end{align*}
+```
 
 as $k\to\infty$.
 
@@ -185,7 +188,7 @@ Now suppose that $|\epsilon_k|=\delta$. Roughly speaking, two units of work (i.e
 \delta^2 = \bigl( \delta^{\sqrt{2}} \bigr)^{\!\sqrt{2}},
 ```
 
-it seems reasonable to say that the rate of convergence in Newton *per function evaluation* is $\sqrt{2}\approx 1.41$. This is actually less than the comparable rate of about $1.62$ for the secant method. 
+it seems reasonable to say that the rate of convergence in Newton *per function evaluation* is $\sqrt{2}\approx 1.41$. This is actually less than the comparable rate of about $1.62$ for the secant method.
 
 ```{prf:observation}
 If function evaluations are used to measure computational work, the secant iteration converges more rapidly than Newton's method.
@@ -241,11 +244,11 @@ The best algorithms blend the use of fast-converging methods with the guarantee 
 
 For each of Exercises 1–3, do the following steps.
   
-**(a)** ✍ Rewrite the equation into the standard form for rootfinding, $f(x) = 0$. 
+**(a)** ✍ Rewrite the equation into the standard form for rootfinding, $f(x) = 0$.
 
-**(b)** ⌨ Make a plot of $f$ over the given interval and determine how many roots lie in the interval. 
+**(b)** ⌨ Make a plot of $f$ over the given interval and determine how many roots lie in the interval.
 
-**(c)** ⌨ Use `nlsolve` with `ftol=1e-15` to find a reference value for each root. 
+**(c)** ⌨ Use `nlsolve` with `ftol=1e-15` to find a reference value for each root.
 
 **(d)** ⌨ Determine a bracketing interval for each root. Then use {numref}`Function {number} <function-secant>`, starting with the endpoints of the bracketing interval, to find each root.
 

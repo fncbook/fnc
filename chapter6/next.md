@@ -1,4 +1,5 @@
 (section-ivp-next)=
+
 # Next steps
 
 We use Runge-Kutta methods as a class to represent what are also called single-step or one-step methods. A gentle introduction to these and other kinds of IVP methods can be found in {cite}`atkinsonIntroductionNumerical1989`. More advanced introductions are given in {cite}`corlessGraduateIntroduction2013` and {cite}`iserlesFirstCourse1996`. The most definitive reference is {cite}`hairerSolvingOrdinary2008`.

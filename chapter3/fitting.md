@@ -3,6 +3,7 @@ numbering:
   enumerator: 3.1.%s
 ---
 (section-leastsq-fitting)=
+
 # Fitting functions to data
 
 ```{index} interpolation; by polynomials
@@ -165,31 +166,10 @@ The notation **argmin** in @linls means to find an $\mathbf{x}$ that produces th
 Another way to describe @linls is as an {term}`overdetermined` linear system. Because the system $\mathbf{A}\mathbf{x}=\mathbf{b}$, has more rows than columns, it is imposing too many constraints on $\bfx$ to permit satisfying all of them. 
 ```
 
-```{index} linear least-squares; problem
-```
-
-```{index} linear least-squares; argmin
-```
-
-```{index} linear least-squares; residual
-``` 
-```
-
-```{index} linear least-squares; problem
-```
-
-```{index} linear least-squares; argmin
-```
-
-```{index} linear least-squares; residual
-```
-
-```{index} linear least-squares; norm
-
 ```{index} norm; vector
 ```
 
-While we could choose to minimize in any vector norm, the 2-norm is the most common and convenient choice. *For the rest of this chapter we exclusively use the 2-norm.* In the edge case $m=n$ for a nonsingular $\mathbf{A}$, the definitions of the linear least-squares and linear systems problems coincide: the solution of  $\mathbf{A}\mathbf{x}=\mathbf{b}$  implies $\mathbf{r}=\boldsymbol{0}$, which is a global minimum of $\| \mathbf{r} \|_2^2 \ge 0$.
+While we could choose to minimize in any vector norm, the 2-norm is the most common and convenient choice. *For the rest of this chapter we exclusively use the 2-norm.* In the edge case $m=n$ for a nonsingular $\mathbf{A}$, the definitions of the linear least-squares and linear systems problems coincide: the solution of $\mathbf{A}\mathbf{x}=\mathbf{b}$ implies $\mathbf{r}=\boldsymbol{0}$, which is a global minimum of $\| \mathbf{r} \|_2^2 \ge 0$.
 
 ## Change of variables
 
@@ -219,8 +199,8 @@ Thus, the variable $z=\log y$ can be fit linearly in terms of the variable $s=\l
 :label: demo-fitting-pirate
 Finding numerical approximations to $\pi$ has fascinated people for millennia. One famous formula is
 
-$$ 
-\displaystyle \frac{\pi^2}{6} = 1 + \frac{1}{2^2} + \frac{1}{3^2} + \cdots. 
+$$
+\displaystyle \frac{\pi^2}{6} = 1 + \frac{1}{2^2} + \frac{1}{3^2} + \cdots.
 $$
 
 Say $s_k$ is the sum of the first $k$ terms of the series above, and $p_k = \sqrt{6s_k}$. Here is a fancy way to compute these sequences in a compact code.

@@ -88,12 +88,14 @@ We use the fact that $f(r)=0$ and additionally assume now that $r$ is a simple r
 
 The series in the denominator is of the form $1/(1+z)$. Provided $|z|<1$, this is the limit of the geometric series $1-z+z^2-z^3 + \cdots$. Keeping only the lowest-order terms, we derive
 
+```{math}
 \begin{align*}
 \label{newtonerr}
 \epsilon_{k+1} &= \epsilon_k - \epsilon_k \left[ 1 + \dfrac{1}{2}\dfrac{f''(r)}{f'(r)} \epsilon_k + O(\epsilon_k^2) \right] \, \left[ 1 - \dfrac{f''(r)}{f'(r)}
 \epsilon_k + O(\epsilon_k^2) \right]\\
 &= \frac{1}{2}\, \frac{f''(r)}{f'(r)} \epsilon_k^2 + O(\epsilon_k^3).
 \end{align*}
+```
 
 ::::{prf:observation}
 Asymptotically, each iteration of Newton's method roughly squares the error.
@@ -230,11 +232,11 @@ Our implementation of Newton's iteration is given in {numref}`Function {number} 
 
 For each of Exercises 1–3, do the following steps.
   
-**(a)** ✍ Rewrite the equation into the standard form for rootfinding, $f(x) = 0$, and compute $f'(x)$. 
+**(a)** ✍ Rewrite the equation into the standard form for rootfinding, $f(x) = 0$, and compute $f'(x)$.
 
-**(b)** ⌨  Make a plot of $f$ over the given interval and determine how many roots lie in the interval. 
+**(b)** ⌨  Make a plot of $f$ over the given interval and determine how many roots lie in the interval.
 
-**(c)** ⌨ Use `nlsolve` with `ftol=1e-15` to find a reference value for each root. 
+**(c)** ⌨ Use `nlsolve` with `ftol=1e-15` to find a reference value for each root.
 
 **(d)** ⌨ Use {numref}`Function {number} <function-newton>` to find each root.
 

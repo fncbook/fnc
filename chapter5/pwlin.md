@@ -3,6 +3,7 @@ numbering:
   enumerator: 5.2.%s
 ---
 (section-localapprox-pwlin)=
+
 # Piecewise linear interpolation
 
 ```{index} interpolation; by piecewise polynomials
@@ -56,7 +57,7 @@ for some choice of the coefficients $c_0,\ldots,c_n$. No smaller set of function
 
 An appealing characteristic of the hat function basis is that it depends only on the node locations, while the expansion coefficients in {eq}`plbasis` depend only on the data values. This clean separation would be useful if we wanted to construct many interpolants on the same node set, and it has deeper theoretical uses as well.
 
-{numref}`Function {number} <function-hatfun>` presents a simple implementation of hat functions. The inputs are a presorted vector of nodes and a value of $k$ between 0 and $n$, which represent the indices of the endpoints. The return value is a function of $x$ that can be evaluated as needed. Note that we have not formally defined values for a hat function outside of the node interval; our choice in {numref}`Function {number} <function-hatfun>` is to make it zero there.
+{numref}`Function {number} <function-hatfun>` presents a simple implementation of hat functions. The inputs are a presorted vector of nodes and a value of $k$ between 0 and $n$, which represent the indices of the endpoints. The return value is a function of $x$ that can be evaluated as needed. Note that we have not formally defined values for a hat function outside the node interval; our choice in {numref}`Function {number} <function-hatfun>` is to make it zero there.
 
 ``````{prf:algorithm} hatfun
 :label: function-hatfun
@@ -183,7 +184,7 @@ The resulting algorithmic simplicity is reflected in {numref}`Function {number} 
 
 ## Conditioning and convergence
 
-The condition number bounds from @theorem-interp-conditioning are very simple for piecewise linear interpolation because the interpolant of the data $\mathbf{e}_k$ is just the hat function $H_k$. Hence $1\le \kappa \le n+1$. However, there is an even simpler result.
+The condition number bounds from @theorem-interp-conditioning are very simple for piecewise linear interpolation because the interpolant of the data $\mathbf{e}_k$ is just the hat function $H_k$. Hence, $1\le \kappa \le n+1$. However, there is an even simpler result.
 
 ```{index} condition number; of interpolation
 ```
@@ -219,7 +220,7 @@ Call this piecewise linear function $p(x)$. Consider a maximum element of $\math
 You are asked to prove the final step above in @problem-pwlin-partition. We conclude that  $\|p\|_\infty\le \|\mathbf{z}\|_\infty$, so that $\|p\|_\infty = \|\mathbf{z}\|_\infty$, which completes the proof.
 ````
 
-Now suppose that $f$ is a "nice" function on an interval $[a,b]$ containing all the nodes. We can sample values of $f$ to get data, i.e., $y_k=f(t_k)$ for all $k$, then perform piecewise linear interpolation of the data to get a different function, the interpolant $p$. How close is $p$ to the original $f$? 
+Now suppose that $f$ is a "nice" function on an interval $[a,b]$ containing all the nodes. We can sample values of $f$ to get data, i.e., $y_k=f(t_k)$ for all $k$, then perform piecewise linear interpolation of the data to get a different function, the interpolant $p$. How close is $p$ to the original $f$?
 
 To make a simple statement, we will consider only the case of equally spaced nodes covering the interval. It turns out that piecewise linear interpolation converges at second order in the spacing of the nodes.
 

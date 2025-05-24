@@ -3,13 +3,14 @@ numbering:
   enumerator: 2.2.%s
 ---
 (section-linsys-matrices)=
+
 # Computing with matrices
 
 ```{attention}
 We recommend that you review the linear algebra material in @section-appendix-linear-algebra before reading this section.
 ```
 
-At a reductive level, a matrix is a table of numbers that obeys certain algebraic laws. But matrices are pervasive in scientific computation, mainly because they represent linear operations on vectors. Moreover, vectors go far beyond the three-dimensional representations of physical quantities you learned about in calculus. 
+At a reductive level, a matrix is a table of numbers that obeys certain algebraic laws. But matrices are pervasive in scientific computation, mainly because they represent linear operations on vectors. Moreover, vectors go far beyond the three-dimensional representations of physical quantities you learned about in calculus.
 
 ## Notation
 
@@ -31,7 +32,7 @@ The notation $\mathbf{A}^T$ is used for the transpose of a matrix, in which the 
 The {term}`adjoint` or hermitian of a matrix, denoted, $\mathbf{A}^*$, is the elementwise complex conjugate of the transpose of $\mathbf{A}$.
 ::::
 
-If $\mathbf{A}$ is real, then $\mathbf{A}^*=\mathbf{A}^T$. 
+If $\mathbf{A}$ is real, then $\mathbf{A}^*=\mathbf{A}^T$.
 
 ::::{prf:definition} Symmetric and hermitian matrices
 :label: definition-symmetric-matrix
@@ -85,9 +86,9 @@ provided that the individual block products are well-defined. For transposes, we
   \end{bmatrix}.
 ```
 
-## Vector and matrix basics 
+## Vector and matrix basics
 
-Vectors and matrices are integral to scientific computing. All modern languages provide ways to work with them beyond manipulation of individual elements. 
+Vectors and matrices are integral to scientific computing. All modern languages provide ways to work with them beyond manipulation of individual elements.
 
 ::::{prf:example} Matrix operations
 :label: demo-matrices
@@ -114,8 +115,6 @@ Vectors and matrices are integral to scientific computing. All modern languages 
 
 ::::
 
-
-
 ## Row and column operations
 
 A critical identity in matrix multiplication is
@@ -137,7 +136,7 @@ Furthermore, the expression
   \end{bmatrix}
 ```
 
-reproduces three columns. An equivalent expression in Julia would be `A[:,1:2:5]`. 
+reproduces three columns. An equivalent expression in Julia would be `A[:,1:2:5]`.
 
 We can extend the same idea to rows by using the general identity $(\mathbf{R}\mathbf{S})^T=\mathbf{S}^T\mathbf{R}^T$. Let $\mathbf{B}=\mathbf{A}^T$ have columns $\bigl[ \mathbf{b}_j \bigr]$, and note
 

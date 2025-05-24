@@ -1,4 +1,5 @@
 (section-intro-next)=
+
 # Next steps
 
 An accessible but more advanced discussion of machine arithmetic and roundoff error can be found in {cite}`highamAccuracyStability2002`.

@@ -1,7 +1,8 @@
 (section-localapprox-next)=
+
 # Next steps
 
-The algorithmic possibilities for piecewise linear and cubic spline approximation are explored in a different way in {cite}`vanloanIntroductionScientific2000`.  In that source, a binary search is used to find the interval for evaluating the piecewise polynomial interpolant.
+The algorithmic possibilities for piecewise linear and cubic spline approximation are explored differently in {cite}`vanloanIntroductionScientific2000`.  In that source, a binary search is used to find the interval for evaluating the piecewise polynomial interpolant.
 
 Further details regarding the derivation of the cubic spline equations, with an emphasis on minimizing memory usage, may be found in a number of sources, e.g., {cite}`burdenNumericalAnalysis2001`, {cite}`cheneyNumericalMathematics2012`, and {cite}`atkinsonElementaryNumerical2004`. Comprehensive theoretical results can be found in {cite}`deboorPracticalGuide1978`.
 

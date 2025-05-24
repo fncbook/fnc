@@ -68,7 +68,7 @@ A matrix $\mathbf{A}$ has **upper bandwidth** $b_u$ if $j-i > b_u$ implies $A_{i
 ```{index} pivoting
 ```
 
-If row pivoting is not used, the $\mathbf{L}$ and $\mathbf{U}$ factors preserve the lower and upper bandwidths of $\mathbf{A}$. This fact implies computational savings in both the factorization and the triangular substitutions because the zeros appear predictably and we can skip multiplication and addition with them. 
+If row pivoting is not used, the $\mathbf{L}$ and $\mathbf{U}$ factors preserve the lower and upper bandwidths of $\mathbf{A}$. This fact implies computational savings in both the factorization and the triangular substitutions, because the zeros appear predictably and we can skip multiplication and addition with them.
 
 ```{prf:observation}
 The number of flops needed by LU factorization without pivoting is $O(b_u b_\ell n)$ when the upper and lower bandwidths are $b_u$ and $b_\ell$.
@@ -101,6 +101,7 @@ Let $\mathbf{D}$ be an $n\times n$ diagonal matrix with diagonal elements $d_1,d
 :label: matrixouter3
 \mathbf{A}\mathbf{D}\mathbf{B} = \sum_{k=1}^n d_k \mathbf{a}_k \mathbf{b}_k^T.
 ```
+
 ::::
 
 Let's derive the LDL$^T$ factorization for a small example.
@@ -130,7 +131,7 @@ Let's derive the LDL$^T$ factorization for a small example.
 
 ::::
 
-In practice we don't actually have to carry out any arithmetic in the upper triangle of $\mathbf{A}$ as we work, since the operations are always the mirror image of those in the lower triangle. As a result, it can be shown that LDL$^T$ factorization takes about half as much work as the standard LU.
+In practice, we don't actually have to carry out any arithmetic in the upper triangle of $\mathbf{A}$ as we work, since the operations are always the mirror image of those in the lower triangle. As a result, it can be shown that LDL$^T$ factorization takes about half as much work as the standard LU.
 
 ::::{prf:observation}
 LDL$^T$ factorization on an $n \times n$ symmetric matrix, when successful, takes $\sim \frac{1}{3}n^3$ flops.
@@ -208,7 +209,7 @@ Now we have $\mathbf{A}=\mathbf{L}\mathbf{D}^{1/2}\mathbf{D}^{1/2}\mathbf{L}^T= 
 
 ::::{prf:theorem} Cholesky factorization
 :label: theorem-cholesky-factorization
-Any SPD matrix $\mathbf{A}$ may be factored as 
+Any SPD matrix $\mathbf{A}$ may be factored as
 
 $$
 \mathbf{A} = \mathbf{R}^T \mathbf{R},
@@ -217,7 +218,7 @@ $$
 where $\mathbf{R}$ is an upper triangular matrix with positive diagonal elements. This is called the **Cholesky factorization**.
 ::::
 
-While the unpivoted LDL$^T$ factorization is not stable and not even always possible, in the SPD case one can prove that pivoting is not necessary for the existence nor the stability of the Cholesky factorization. 
+While the unpivoted LDL$^T$ factorization is not stable and not even always possible, in the SPD case one can prove that pivoting is not necessary for the existence nor the stability of the Cholesky factorization.
 
 ::::{prf:observation}
 Cholesky factorization of an $n \times n$ SPD matrix takes $\sim \frac{1}{3}n^3$ flops.

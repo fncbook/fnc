@@ -3,6 +3,7 @@ numbering:
   enumerator: 2.7.%s
 ---
 (section-linsys-norms)=
+
 # Vector and matrix norms
 
 The manipulations on matrices and vectors so far in this chapter have been algebraic, much like those in an introductory linear algebra course. In order to progress to the analysis of the algorithms we have introduced, we need a way to measure the size of vectors and matrices—size in the sense of magnitude or distance, not the number of rows and columns.
@@ -16,6 +17,7 @@ For vectors, we use a **norm** $\| \cdot \|$, which is a function from $\real^n$
 
 [^complexnorm]: The same statements work for vectors with complex entries, with complex modulus in place of absolute values.
   
+```{math}
 \begin{align*}
 \label{norm-properties}
 \norm{\mathbf{x}} &\ge 0, \\
@@ -23,6 +25,7 @@ For vectors, we use a **norm** $\| \cdot \|$, which is a function from $\real^n$
 \norm{\alpha \mathbf{x}} &= \abs{\alpha}\, \norm{\mathbf{x}}, \\
 \norm{\mathbf{x}+\mathbf{y}} & \le \norm{\mathbf{x}} + \norm{\mathbf{y}}.
 \end{align*}
+```
 
 The last of these properties is known as the **triangle inequality**. It is natural to interpret $\| \mathbf{x} \|=\| \mathbf{x}-\boldsymbol{0} \|$ as the distance from $\mathbf{x}$ to the origin and $\| \mathbf{x}-\mathbf{y} \|$ as the distance from $\mathbf{x}$ to $\mathbf{y}$. We will be using only the three most important vector norms, defined as follows.
 
@@ -30,9 +33,9 @@ The last of these properties is known as the **triangle inequality**. It is natu
 :label: definition-vectornorms
 **2-norm:** $\quad \twonorm{\mathbf{x}} = \left( \displaystyle \sum_{i=1}^n |x_i|^2 \right)^{\frac{1}{2}} = \sqrt{\rule[1mm]{0pt}{0.75em}\mathbf{x}^T \mathbf{x}}$
 
-**$\infty$-norm** or **max-norm:** $ \quad \infnorm{ \mathbf{x}} = \displaystyle \max_{i=1,\dots,n} |x_i|$
+**$\infty$-norm** or **max-norm:** $\quad \infnorm{\mathbf{x}} = \displaystyle \max_{i=1,\dots,n} |x_i|$
 
-**1-norm:** $\quad \onenorm{\mathbf{x}} = \displaystyle \sum_{i=1}^n |x_i| $
+**1-norm:** $\quad \onenorm{\mathbf{x}} = \displaystyle \sum_{i=1}^n |x_i|$
 :::
 
 The 2-norm corresponds to ordinary Euclidean distance.
@@ -52,7 +55,7 @@ For any nonzero vector $\mathbf{v}$, we can find a unit vector through the norma
   \mathbf{v} = \| \mathbf{v} \| \,\cdot\, \frac{\mathbf{v}}{\| \mathbf{v} \|}
 ```
 
-as writing a nonzero vector $\mathbf{v}$ in magnitude–direction form. 
+as writing a nonzero vector $\mathbf{v}$ in magnitude–direction form.
 
 ::::{prf:example} Vector norms
 :label: demo-norms-vector
@@ -96,7 +99,7 @@ We say that a sequence of vectors $\mathbf{x}_1,\mathbf{x}_2,\ldots$ **converges
   \lim_{k\rightarrow\infty} \norm{\mathbf{x}_k - \mathbf{x}} = 0.
 ```
 
-By definition, a sequence is convergent in the infinity norm if and only if it converges componentwise. The same is true for a convergent sequence in *any* norm.
+By definition, a sequence is convergent in the infinity norm if and only if it converges componentwise. The same is true for a convergent sequence in _any_ norm.
 
 ```{prf:theorem} Norm equivalence
 :label: theorem-normequivalence
@@ -128,7 +131,7 @@ The {term}`Frobenius norm` of matrix $\mathbf{A}$ is defined as
 
 [^colmajor]: Column stacking is actually how matrices are stored in memory within Julia and is known as **column-major order**. MATLAB and FORTRAN also use column-major order, while C and Python use row-major order, in which the rows are stacked.
 
-However, it often proves to be more useful to define matrix norms differently. 
+However, it often proves to be more useful to define matrix norms differently.
 
 ```{index} ! norm; matrix
 ```
@@ -142,6 +145,7 @@ Given a vector norm $\| \cdot \|_p$, we define an {term}`induced matrix norm` fo
 \| \mathbf{A} \|_{p} = \max_{\| \mathbf{x} \|_p=1} \| \mathbf{A}\mathbf{x} \|_p =
 \max_{\mathbf{x}\neq \boldsymbol{0}} \frac{\| \mathbf{A}\mathbf{x} \|_p}{\| \mathbf{x} \|_p}.
 ```
+
 ::::
 
 The last equality above follows from linearity (as shown in @problem-norms-linearity).  It is derived from the interpretation of a matrix as a linear operator between $\real^n$ and $\real^m$. Thus in the 2-norm, for instance,
@@ -153,7 +157,6 @@ The last equality above follows from linearity (as shown in @problem-norms-linea
 For the rest of this section we will continue to omit subscripts when we want to refer to an unspecified induced norm; after this section, an unsubscripted norm is understood to be the 2-norm.
 
 The definition of an induced matrix norm may seem oddly complicated. However, there are some key properties that follow directly from the definition.
-
 
 ````{prf:theorem} Norm inequalities
 :label: theorem-norms-inequalities
@@ -209,7 +212,7 @@ and then
 Finally,  {eq}`normineq3` results from repeated application of {eq}`normineq2`.
 ````
 
-One can interpret the definition of an induced norm geometrically.  Each vector $\mathbf{x}$ on the unit "sphere" (as defined by the chosen vector norm) is mapped to its image $\mathbf{A}\mathbf{x}$, and the norm of $\mathbf{A}$ is the radius of the smallest "sphere" that encloses all such images. 
+One can interpret the definition of an induced norm geometrically.  Each vector $\mathbf{x}$ on the unit "sphere" (as defined by the chosen vector norm) is mapped to its image $\mathbf{A}\mathbf{x}$, and the norm of $\mathbf{A}$ is the radius of the smallest "sphere" that encloses all such images.
 
 In addition, two of the vector norms we have encountered lead to equivalent formulas that are easy to compute from the matrix elements.
 
@@ -224,9 +227,10 @@ In addition, two of the vector norms we have encountered lead to equivalent form
 :label: mxonenorm
 \| \mathbf{A} \|_1 = \max_{1\le \,j\, \le n} \sum_{i=1}^n |A_{ij}|.
 ```
+
 ::::
 
-A mnemonic for these is that the $\infty$ symbol extends horizontally while the 1 character extends vertically, each indicating the direction of the summation in its formula. Also, both formulas give the same result for $m\times 1$ matrices as the vector norm. In both cases you must take absolute values of the matrix elements first. 
+A mnemonic for these is that the $\infty$ symbol extends horizontally while the 1 character extends vertically, each indicating the direction of the summation in its formula. Also, both formulas give the same result for $m\times 1$ matrices as the vector norm. In both cases you must take absolute values of the matrix elements first.
 
 ::::{prf:example} Matrix norms
 :label: demo-norms-matrix

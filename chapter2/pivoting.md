@@ -3,9 +3,10 @@ numbering:
   enumerator: 2.6.%s
 ---
 (section-linsys-pivoting)=
+
 # Row pivoting
 
-```{index} matrix factorization; LU 
+```{index} matrix factorization; LU
 ```
 
 As mentioned in {numref}`section-linsys-lu`, the $\mathbf{A}=\mathbf{L}\mathbf{U}$ factorization is not stable for every nonsingular $\mathbf{A}$. Indeed, the factorization does not always even exist.
@@ -85,7 +86,7 @@ A linear system with a singular matrix has either no solution or infinitely many
 
 ## Permutations
 
-Even though the resulting $\mathbf{L}$ in @demo-pivoting-fix is no longer of unit lower triangular form, it is close. In fact, all that is needed is to reverse the order of its rows. 
+Even though the resulting $\mathbf{L}$ in @demo-pivoting-fix is no longer of unit lower triangular form, it is close. In fact, all that is needed is to reverse the order of its rows.
 
 ::::{prf:example} Pivoting as row permutation
 :label: demo-pivoting-permute
@@ -153,7 +154,6 @@ where rows $1,\ldots,n$ of $\tilde{\mathbf{A}}$ are rows $i_1,\ldots,i_n$ of $\m
 ````
 `````
 ``````
-
 
 Ideally, the PLU factorization takes $\sim \frac{2}{3}n^3$ flops asymptotically, just like LU without pivoting. The implementation in {numref}`Function {number} <function-plufact>` does not achieve this optimal flop count, however. Like {numref}`Function {number} <function-lufact>`, it does unnecessary operations on structurally known zeros for the sake of being easier to understand.
 
@@ -270,7 +270,7 @@ The factors of this $\mathbf{A}$ without pivoting are found to be
   \end{bmatrix}.
 ```
 
-For reasons we will quantify in {numref}`section-linsys-condition-number`, the solution of $\mathbf{A}\mathbf{x}=\mathbf{b}$ is well-conditioned, but the problems of solving $\mathbf{L}\mathbf{z}=\mathbf{b}$ and $\mathbf{U}\mathbf{x}=\mathbf{z}$ have condition numbers essentially $1/\epsilon^2$ each. Thus, for small $\epsilon$, solution of the original linear system by unpivoted LU factorization is highly unstable. 
+For reasons we will quantify in {numref}`section-linsys-condition-number`, the solution of $\mathbf{A}\mathbf{x}=\mathbf{b}$ is well-conditioned, but the problems of solving $\mathbf{L}\mathbf{z}=\mathbf{b}$ and $\mathbf{U}\mathbf{x}=\mathbf{z}$ have condition numbers essentially $1/\epsilon^2$ each. Thus, for small $\epsilon$, solution of the original linear system by unpivoted LU factorization is highly unstable.
 
 Somewhat surprisingly, solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ via PLU factorization is technically also unstable. In fact, examples of unstable solutions are well-known, but they have been nonexistent in practice. While there is a lot of evidence and some reasoning about why this is the case, the situation is not completely understood. Yet PLU factorization remains the algorithm of choice for general linear systems.
 

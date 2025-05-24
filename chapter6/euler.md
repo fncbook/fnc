@@ -3,6 +3,7 @@ numbering:
   enumerator: 6.2.%s
 ---
 (section-ivp-euler)=
+
 # Euler's method
 
 Let a first-order initial-value problem be given in the form
@@ -26,7 +27,7 @@ The number $h$ is called the **step size**.
 
 Because we don't get exactly correct values of the solution at the nodes, we need to take some care with the notation. From now on we let $\hat{u}(t)$ denote the exact solution of the IVP. The approximate value at $t_i$ computed at the nodes by our numerical methods will be denoted by $u_i\approx \hat{u}(t_i)$. Because we are given the initial value $u(a)=u_0$ exactly, there is no need to distinguish whether we mean $u_0$ as the exact or the numerical solution.
 
-Consider a piecewise linear interpolant to the (as yet unknown) values $u_0,u_1,\ldots$, $u_n$. For $t_i < t < t_{i+1}$, its slope is 
+Consider a piecewise linear interpolant to the (as yet unknown) values $u_0,u_1,\ldots$, $u_n$. For $t_i < t < t_{i+1}$, its slope is
 
 ```{math}
 \frac{u_{i+1} - u_{i}}{t_{i+1}-t_i} = \frac{u_{i+1}-u_i}{h}.
@@ -41,7 +42,7 @@ We can connect this derivative to the differential equation by following the mod
 ```{index} ! Euler's method
 ```
 
-We could view the left-hand side as a forward-difference approximation to $u'(t)$ at $t=t_i$. We can rearrange the equation to get **Euler's method**, our first method for IVPs.
+The left-hand side is a forward-difference approximation to $u'(t)$ at $t=t_i$. We can rearrange the equation to get **Euler's method**, our first method for IVPs.
 
 ::::{prf:definition} Euler's method for an IVP
 :label: definition-eulerivp
@@ -57,7 +58,7 @@ Then $u_i$ is approximately the value of the solution at $t=t_i$.
 
 Euler's method marches ahead in $t$, obtaining the solution at a new time level explicitly in terms of the latest value.
 
-A basic implementation of Euler's method is shown in {numref}`Function {number} <function-euler>`. 
+A basic implementation of Euler's method is shown in {numref}`Function {number} <function-euler>`.
 
 ``````{prf:algorithm} euler
 :label: function-euler
@@ -83,7 +84,6 @@ A basic implementation of Euler's method is shown in {numref}`Function {number} 
 `````
 ``````
 
-
 ## Local truncation error
 
 Let $\hat{u}(t)$ be the exact solution of the IVP {eq}`euler-ivp`, and suppose that somehow we have access to it at $t=t_i$, so that $u_i=\hat{u}(t_i)$. How good is $u_{i+1}$ as an approximation to $\hat{u}(t_{i+1})$? The answer is revealed through a Taylor series:
@@ -102,7 +102,7 @@ where we used the fact that $\hat{u}$ satisfies the differential equation.
 
 We now introduce some formalities.
 
-```{index} ! initial-value problem; one-step method for 
+```{index} ! initial-value problem; one-step method for
 ```
 
 ::::{prf:definition} One-step IVP method
@@ -116,12 +116,12 @@ A **one-step method** for the IVP {eq}`euler-ivp` is a formula of the form
 
 ::::
 
-Euler's method is the particular case of {eq}`onestepODE` with $\phi(t,u,h) = f(t,u)$, but we will see other one-step methods in later sections. 
+Euler's method is the particular case of {eq}`onestepODE` with $\phi(t,u,h) = f(t,u)$, but we will see other one-step methods in later sections.
 
 ```{index} ! truncation error; of a one-step IVP solver
 ```
 
-In close analogy with {numref}`section-localapprox-fd-converge`, we define truncation error as the residual of {eq}`onestepODE` when the exact solution is inserted. 
+In close analogy with {numref}`section-localapprox-fd-converge`, we define truncation error as the residual of {eq}`onestepODE` when the exact solution is inserted.
 
 ::::{prf:definition} Truncation error of a one-step IVP method
 :label: definition-eulerlte
@@ -135,7 +135,7 @@ The {term}`local truncation error` (LTE) of the one-step method {eq}`onestepODE`
 The method is called **consistent** if $\tau_{i+1}(h)\to 0$ as $h\to 0$.
 ::::
 
-The following follows immediately from the definitions.
+One result follows immediately from the definitions:
 
 :::{prf:lemma}
 If $\phi(t,u,0)=f(t,u)$ for any function $u$, then the method {eq}`onestepODE` is consistent.
@@ -143,7 +143,7 @@ If $\phi(t,u,0)=f(t,u)$ for any function $u$, then the method {eq}`onestepODE` i
 
 ## Convergence
 
-While the local truncation error is straightforward to calculate from its definition, it is not the quantity we want to know about and control. 
+While the local truncation error is straightforward to calculate from its definition, it is not the quantity we want to know about and control.
 
 ```{index} ! global error
 ```

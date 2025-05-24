@@ -3,6 +3,7 @@ numbering:
   enumerator: 6.6.%s
 ---
 (section-ivp-multistep)=
+
 # Multistep methods
 
 In Runge–Kutta methods we start at $u_i$ to find ${u}_{i+1}$, taking multiple $f$-evaluations (stages) to achieve high accuracy. In contrast, multistep methods boost accuracy by employing more of the history of the solution, taking information from the recent past. For the discussion in this and following sections, we introduce the shorthand notation
@@ -30,7 +31,7 @@ u_{i+1} &= a_{k-1}u_i + \cdots + a_0 u_{i-k+1} \qquad \\
 where the $a_j$ and the $b_j$ are constants. If $b_k=0$, the method is **explicit**; otherwise, it is {term}`implicit`.  
 ::::
 
-The quantities $u$ and $f$ in {eq}`multistep` are shown as scalars, but in general they can be vectors. 
+The quantities $u$ and $f$ in {eq}`multistep` are shown as scalars, but in general they can be vectors.
 
 In order to use {eq}`multistep` as a numerical method, we iterate through $i=k-1,\ldots,n-1$. The value $u_0$ is determined by the initial condition, but we also need some way of generating the **starting values**
 
@@ -45,7 +46,7 @@ In practice the starting values are often found using an RK formula.[^whyRK]
 
 [^whyRK]: If we must use an RK method to start anyway, why bother with multistep formulas at all? The answer is that multistep methods can be more efficient in some problems, even at the same order of accuracy.
 
-The difference formula {eq}`multistep` defines ${u}_{i+1}$ in terms of known values of the solution and its derivative from the past. In the explicit case with $b_k=0$, Equation {eq}`multistep` immediately gives a formula for the unknown quantity ${u}_{i+1}$ in terms of values at time level $t_i$ and earlier. Thus only one new evaluation of $f$ is needed to make a time step, provided that we store the recent history. 
+The difference formula {eq}`multistep` defines ${u}_{i+1}$ in terms of known values of the solution and its derivative from the past. In the explicit case with $b_k=0$, Equation {eq}`multistep` immediately gives a formula for the unknown quantity ${u}_{i+1}$ in terms of values at time level $t_i$ and earlier. Thus, only one new evaluation of $f$ is needed to make a time step, provided that we store the recent history.
 
 For an implicit method, however, $b_k\neq 0$ and {eq}`multistep` has the form
 
@@ -127,8 +128,8 @@ For example, the AB3 method is completely specified by
 Let $\rho$ and $\sigma$ be the generating polynomials of a multistep method. Then:
 
 1. The polynomial $\rho(z)$ is monic (i.e., its leading term has a unit coefficient).
-2. The degree of $\rho$ is the number of steps $k$. 
-3. The degree of $\sigma(z)$ is $k$ for an implicit method and less than $k$ for an explicit method. 
+2. The degree of $\rho$ is the number of steps $k$.
+3. The degree of $\sigma(z)$ is $k$ for an implicit method and less than $k$ for an explicit method.
 :::
 
 The connection between the generating polynomials and the numerical method requires a little abstraction. Let $\mathcal{Z}$ be a *forward-shift operator*, so that, for example, $\mathcal{Z} t_i = t_{i+1}$, $\mathcal{Z}^3 u_{i-1} = u_{i+2}$, and so on. With this, the difference formula {eq}`multistep` can be written concisely as
@@ -143,7 +144,7 @@ The connection between the generating polynomials and the numerical method requi
 ```{index} ! truncation error; of a multistep IVP formula
 ```
 
-The definition of local truncation error is easily extended to multistep methods. 
+The definition of local truncation error is easily extended to multistep methods.
 
 :::{prf:definition} LTE and order of accuracy for a multistep IVP method
 :label: definition-multisteplte
@@ -260,7 +261,7 @@ The idea behind backward differentiation formulas is complementary to that for A
 
 The quantity $q'(t_{i+1})$ can be approximated by a finite difference of the past solution values, leading to the coefficients of $\rho(z)$ and $\sigma(z)=b_k z^k$.  
 
-:::{prf:example} 
+:::{prf:example}
 Consulting {numref}`table-FDforward`, we find the finite-difference approximation
 
 $$

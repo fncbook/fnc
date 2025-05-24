@@ -3,6 +3,7 @@ numbering:
   enumerator: 2.5.%s
 ---
 (section-linsys-efficiency)=
+
 # Efficiency of matrix computations
 
 Predicting how long an algorithm will take to solve a particular problem, on a particular computer, as written in a particular way in a particular programming language, is an enormously difficult undertaking. It's more practical to predict how the required time will scale as a function of the size of the problem. In the case of a linear system of equations, the problem size is $n$, the number of equations and variables in the system.  Because expressions of computational time are necessarily approximate, it's customary to suppress all but the term that is dominant as $n\to\infty$. We first need to build some terminology for these expressions.
@@ -71,16 +72,21 @@ There is a memorable way to use asymptotic notation to simplify sums:
 \end{split}
 ```
 
-These formulas greatly resemble the definite integral of $x^p$. 
+These formulas greatly resemble the definite integral of $x^p$.
 
 ::::{prf:example}
 :label: example-efficiency-sums
+
+```{math}
+:numbered: false
 \begin{align*}
-\sum_{k=1}^{n-1} 4k^2 + 3 & = 4 \left( \sum_{k=1}^{n-1} k^2\right)  + 3 \sum_{k=1}^{n-1} 1\\ 
-&\sim 4 \left( \frac{1}{3} (n-1)^3 \right) + 3(n-1) \\ 
-& = \frac{4}{3} (n^3 - 3n^2 + 3n - 1)  + 3n - 3 \\ 
+\sum_{k=1}^{n-1} 4k^2 + 3 & = 4 \left( \sum_{k=1}^{n-1} k^2\right)  + 3 \sum_{k=1}^{n-1} 1\\
+&\sim 4 \left( \frac{1}{3} (n-1)^3 \right) + 3(n-1) \\
+& = \frac{4}{3} (n^3 - 3n^2 + 3n - 1)  + 3n - 3 \\
 &\sim \frac{4}{3} n^3.
 \end{align*}
+```
+
 ::::
 
 ## Flop counting
@@ -88,7 +94,7 @@ These formulas greatly resemble the definite integral of $x^p$.
 ```{index} ! flops
 ```
 
-Traditionally, in numerical linear algebra, we count arithmetic oprerations to measure an algorithm's running time.
+Traditionally, in numerical linear algebra, we count arithmetic operations to measure an algorithm's running time.
 
 ::::{prf:definition} Floating-point operation
 :label: definition-flop
@@ -201,9 +207,9 @@ We will use the following handy fact.
 The range `k:n`, where $k\le n$, has $n-k+1$ elements.
 :::
 
-Line 17 above divides each element of the vector `Aₖ[k:n,k]` by a scalar. Hence, the number of flops equals the length of the vector, which is $n-k+1$. 
+Line 17 above divides each element of the vector `Aₖ[k:n,k]` by a scalar. Hence, the number of flops equals the length of the vector, which is $n-k+1$.
 
-Line 18 has an outer product followed by a matrix subtraction. The definition @definition-outerprod of the outer product makes it clear that that computation takes one flop (multiplication) per element of the result, which here results in $(n-k+1)^2$ flops. The number of subtractions is identical. 
+Line 18 has an outer product followed by a matrix subtraction. The definition @definition-outerprod of the outer product makes it clear that that computation takes one flop (multiplication) per element of the result, which here results in $(n-k+1)^2$ flops. The number of subtractions is identical.
 
 Altogether the factorization takes
 
@@ -214,16 +220,20 @@ Altogether the factorization takes
 
 There are different ways to simplify this expression. We will make a change of summation index using $j=n-k$. The endpoints of the sum are $j=n-1$ when $k=1$ and $j=1$ when $k=n-1$. Since the order of terms in a sum doesn't matter, we get
 
+```{math}
 \begin{align*}
 \sum_{j=1}^{n-1} 1+j+2(j+1)^2 &=  \sum_{j=1}^{n-1} 3 + 5j + 2j^2 \\
   & \sim  3(n-1) + \frac{5}{2}(n-1)^2 + \frac{2}{3}(n-1)^3 \\
   & \sim \frac{2}{3}n^3.
 \end{align*}
+```
 
-We have proved the following. 
+We have proved the following.
+
 ```{prf:theorem} Efficiency of LU factorization
 The LU factorization of an $n\times n$ matrix takes $\sim\frac{2}{3}n^3$ flops as $n\to \infty$. This dominates the flops for solving an $n\times n$ linear system.
 ```
+
 ::::{prf:example} Floating-point operations in LU factorization
 :label: demo-flops-lufact
 

@@ -3,6 +3,7 @@ numbering:
   enumerator: 4.1.%s
 ---
 (section-nonlineqn-rootproblem)=
+
 # The rootfinding problem
 
 For the time being we will focus on the **rootfinding problem** for single functions of one variable.
@@ -24,13 +25,13 @@ Unlike the linear problems of the earlier chapters, the usual situation here is 
 
 ::::{prf:example} The rootfinding problem for Bessel functions
 :label: demo-rootproblem-bessel
-In the theory of vibrations of a circular drum, the displacement of the drumhead can be expressed in terms of pure harmonic modes, 
+In the theory of vibrations of a circular drum, the displacement of the drumhead can be expressed in terms of pure harmonic modes,
 
 $$J_m(\omega_{k,m} r) \cos(m\theta) \cos(c \omega_{k,m} t),$$
 
 where $(r,\theta)$ are polar coordinates, $0\le r\le 1$, $t$ is time, $m$ is a positive integer, $c$ is a material parameter, and $J_m$ is a _Bessel function of the first kind_. The quantity $\omega_{k,m}$ is a resonant frequency and is a positive root of the equation  
 
-$$J_m(\omega_{k,m}) = 0,$$ 
+$$J_m(\omega_{k,m}) = 0,$$
 
 which states that the drumhead is clamped around the rim. Bessel functions often appear in physical problems featuring radial symmetry, and tabulating approximations to the zeros of Bessel functions occupied numerous mathematician-hours before computers were on the scene.
 
@@ -86,8 +87,7 @@ If $f$ is differentiable at a root $r$, then the absolute condition number of $r
 We say $\kappa_r = \infty$ if $f'(r)=0$.
 ````
 
-Equivalently, {eq}`rootcondnum` is just the magnitude of the derivative of the inverse function $f^{-1}$ at zero. 
-
+Equivalently, {eq}`rootcondnum` is just the magnitude of the derivative of the inverse function $f^{-1}$ at zero.
 
 ::::{prf:example} Condition number of a rootfinding problem
 :label: demo-roots-cond
@@ -124,7 +124,7 @@ We must accept that when $|f'|$ is small at the root, it may not be possible to 
 If $\tilde{r}$ approximates a root $r$ of function $f$, then the {term}`residual` at $\tilde{r}$ is $f(\tilde{r})$.
 ::::
 
-It stands to reason that a small residual might be associated with a small error. To quantify the relationship, let $\tilde{r}$ approximate root $r$, and define the new function $g(x)=f(x)-f(\tilde{r})$. Trivially, $g(\tilde{r})=0$, meaning that $\tilde{r}$ is a true root of $g$. Since the difference $g(x)-f(x)$ is the residual value $f(\tilde{r})$, the residual is the distance to an exactly solved rootfinding problem. 
+It stands to reason that a small residual might be associated with a small error. To quantify the relationship, let $\tilde{r}$ approximate root $r$, and define the new function $g(x)=f(x)-f(\tilde{r})$. Trivially, $g(\tilde{r})=0$, meaning that $\tilde{r}$ is a true root of $g$. Since the difference $g(x)-f(x)$ is the residual value $f(\tilde{r})$, the residual is the distance to an exactly solved rootfinding problem.
 
 ```{index} backward error
 ```
@@ -140,16 +140,16 @@ In general, it is not realistic to expect a small error in a root approximation 
 ```{index} ! roots; multiplicity of
 ```
 
-The condition number {eq}`rootcondnum` naturally leads to the question of what happens if $f'(r)=0$ at a root $r$. The following definition agrees with and extends the notion of algebraic multiplicity in a polynomial to roots of more general differentiable functions. 
+The condition number {eq}`rootcondnum` naturally leads to the question of what happens if $f'(r)=0$ at a root $r$. The following definition agrees with and extends the notion of algebraic multiplicity in a polynomial to roots of more general differentiable functions.
 
 ::::{prf:definition} Multiplicity of a root
 :label: definition-rootproblem-simple
 If $f(r)=f'(r)=\cdots=f^{(m-1)}(r)=0$, but $f^{(m)}(r)\neq 0$, then we say $f$ has a root of **multiplicity** $m$ at $r$. In particular, if $f(r)=0$ and $f'(r)\neq 0$, then $m=1$ and we call $r$ a **simple root**.
 ::::
 
-Another useful characterization of multiplicity $m$ is that $f(x)=(x-r)^m q(x)$ for a differentiable $q$ with $q(r)\neq 0$. 
+Another useful characterization of multiplicity $m$ is that $f(x)=(x-r)^m q(x)$ for a differentiable $q$ with $q(r)\neq 0$.
 
-When $r$ is a nonsimple root, the condition number {eq}`rootcondnum` is effectively infinite.[^infcond] However, even if $r$ is simple, we should expect difficulty in rootfinding if the condition number is very large. This occurs when $|f'(r)|$ is very small, which means that the quotient $q$ satisfies $q(r)\approx 0$ and another root of $f$ is very close to $r$. We made the same observation about polynomial roots all the way back in @demo-stability-roots. 
+When $r$ is a multiple root, the condition number {eq}`rootcondnum` is effectively infinite.[^infcond] However, even if $r$ is simple, we should expect difficulty in rootfinding if the condition number is very large. This occurs when $|f'(r)|$ is very small, which means that the quotient $q$ satisfies $q(r)\approx 0$ and another root of $f$ is very close to $r$. We made the same observation about polynomial roots all the way back in @demo-stability-roots.
 
 [^infcond]: Based on our definitions, this means that the relative change to the root when $f$ is changed by a perturbation of size $\epsilon$ is not $O(\epsilon)$ as $\epsilon\to 0$.
 
@@ -157,11 +157,11 @@ When $r$ is a nonsimple root, the condition number {eq}`rootcondnum` is effectiv
 
 ⌨  For each equation and given interval, do the following steps.
   
-**(a)** Rewrite the equation into the standard form for rootfinding, $f(x) = 0$. Make a plot of $f$ over the given interval and determine how many roots lie in the interval. 
+**(a)** Rewrite the equation into the standard form for rootfinding, $f(x) = 0$. Make a plot of $f$ over the given interval and determine how many roots lie in the interval.
   
 **(b)**  Use `nlsolve` to find each root, as shown in @demo-rootproblem-bessel.
 
-**(c)** Compute the condition number of each root found in part (b). 
+**(c)** Compute the condition number of each root found in part (b).
 
 ``````{exercise}
 :label: problem-rootproblem-basic1

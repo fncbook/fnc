@@ -3,12 +3,13 @@ numbering:
   enumerator: 6.8.%s
 ---
 (section-ivp-zerostability)=
+
 # Zero-stability of multistep methods
 
 ```{index} multistep method
 ```
 
-For one-step methods such as Runge–Kutta, @theorem-euler-onestepGTE guarantees that the method converges and that the global error is of the same order as the local truncation error. For multistep methods, however, a new wrinkle is introduced. 
+For one-step methods such as Runge–Kutta, @theorem-euler-onestepGTE guarantees that the method converges and that the global error is of the same order as the local truncation error. For multistep methods, however, a new wrinkle is introduced.
 
 ::::{prf:example} Instability
 :label: demo-zs-LIAF
@@ -19,7 +20,7 @@ It is straightforward to check that the two-step method LIAF, defined by
   \mathbf{u}_{i+1} = -4u_i + 5u_{i-1} + h(4f_i + 2f_{i-1}),
 ```
 
-is third-order accurate. Let's apply it to the ridiculously simple IVP $u'=u$, $u(0)=1$, whose solution is $e^t$. 
+is third-order accurate. Let's apply it to the ridiculously simple IVP $u'=u$, $u(0)=1$, whose solution is $e^t$.
 
 `````{tab-set}
 ````{tab-item} Julia
@@ -57,7 +58,7 @@ The source of the exponential growth in @demo-zs-LIAF is not hard to identify. R
   (\mathcal{Z}^2 + 4\mathcal{Z} - 5) u_{i-1} = 0.
 ```
 
-The graph in @demo-zs-LIAF strongly suggests that for small $h$, $|u_i|\approx c \alpha^i$ for some $\alpha>1$ as $m$ gets large. So we are motivated to try defining 
+The graph in @demo-zs-LIAF strongly suggests that for small $h$, $|u_i|\approx c \alpha^i$ for some $\alpha>1$ as $m$ gets large. So we are motivated to try defining
 
 ```{math}
 :label: zsansatz
@@ -68,14 +69,14 @@ for all $i$ and see if we can prove that it is an exact solution. The beauty of 
 
 $$\mathcal{Z} u_i = u_{i+1} = z u_i.$$
 
-Hence {eq}`LIAFshiftzero` becomes
+Hence, {eq}`LIAFshiftzero` becomes
 
 ```{math}
 :label: LIAFcharzero
   z^2 + 4z - 5 = 0.
 ```
 
-Therefore, as $h\to 0$, the two roots of $z^2+4z+5$ will each correspond to an approximate solution in the form {eq}`zsansatz` of the LIAF method. These roots are $z=1$ and $z=-5$, and the growth curve at the end of @demo-zs-LIAF is approximately $|(-5)^i|$. 
+Therefore, as $h\to 0$, the two roots of $z^2+4z+5$ will each correspond to an approximate solution in the form {eq}`zsansatz` of the LIAF method. These roots are $z=1$ and $z=-5$, and the growth curve at the end of @demo-zs-LIAF is approximately $|(-5)^i|$.
 
 ## Zero-stability
 
@@ -92,7 +93,7 @@ Here is the crucial property that LIAF lacks.
 A multistep method is {term}`zero-stable` if, as $h\to 0$, every numerical solution produced by the method remains bounded throughout $a\le t_i \le b$.
 ::::
 
-Without zero-stability, any truncation or roundoff error will get exponentially amplified and eventually overwhelm convergence to the exact solution. 
+Without zero-stability, any truncation or roundoff error will get exponentially amplified and eventually overwhelm convergence to the exact solution.
 
 The following theorem concisely summarizes when we can expect zero-stability.
 
@@ -119,7 +120,7 @@ is a solution for any values of $c_1,\ldots,c_k$. These constants are determined
 independently of $h$ and $i$. This proves zero-stability. Conversely, if some $|r_j|>1$, then $|u_i|$ cannot be bounded above by a constant independent of $i$. Since $b=t_i$, $i\to\infty$ at $t=b$ as $h\to 0$, so zero-stability cannot hold.
 ````
 
-A nonsimple root of $\rho$ introduces a modification of {eq}`zsansatz` that is considered in @problem-zerostability-nonsimple.
+A multiple root of $\rho$ introduces a modification of {eq}`zsansatz` that is considered in @problem-zerostability-nonsimple.
 
 ````{prf:example}
 A $k$-step Adams method has $\rho(z) = z^k - z^{k-1} = z^{k-1}(z-1)$. Hence 1 is a simple root and 0 is a root of multiplicity $k-1$. So the Adams methods are all stable.
@@ -130,7 +131,8 @@ The method $u_{i+1} = 2u_i - u_{i-1} + h(f_i-f_{i-1})$ is first-order accurate. 
 ::::
 
 ## Dahlquist theorems
-It turns out that lacking zero-stability is the only thing that can go wrong for a consistent multistep method. 
+
+It turns out that lacking zero-stability is the only thing that can go wrong for a consistent multistep method.
 
 ```{index} Dahlquist theorems
 ```

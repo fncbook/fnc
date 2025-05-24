@@ -3,6 +3,7 @@ numbering:
   enumerator: 2.4.%s
 ---
 (section-linsys-lu)=
+
 # LU factorization
 
 A major tool in numerical linear algebra is to factor a given matrix into terms that are individually easier to deal with than the original. In this section we derive a means to express a square matrix using triangular factors, which will allow us to solve a linear system using forward and backward substitution.
@@ -12,7 +13,7 @@ A major tool in numerical linear algebra is to factor a given matrix into terms 
 ```{index} outer product
 ```
 
-Our derivation of the factorization hinges on an expression of matrix products in terms of vector outer products. If  $\mathbf{u}\in\real^m$ and $\mathbf{v}\in\real^n$, then the **outer product** of these vectors is the $m\times n$ matrix
+Our derivation of the factorization hinges on an expression of matrix products in terms of vector outer products. If $\mathbf{u}\in\real^m$ and $\mathbf{v}\in\real^n$, then the **outer product** of these vectors is the $m\times n$ matrix
 
 ```{math}
 :label: outerproduct
@@ -36,11 +37,11 @@ According to the usual definition of matrix multiplication,
     \begin{bmatrix}
         2 & -7 \\ -3 & 5
     \end{bmatrix}
-    & = 
+    & =
     \small
     \begin{bmatrix}
-        (4)(2) + (-1)(-3)  &  (4)(-7) + (-1)(5)   \\ 
-        (-3)(2) + (5)(-3)  &  (-3)(-7) + (5)(5)  \\ 
+        (4)(2) + (-1)(-3)  &  (4)(-7) + (-1)(5)   \\
+        (-3)(2) + (5)(-3)  &  (-3)(-7) + (5)(5)  \\
         (-2)(2) + (6)(-3)  &  (-2)(-7) + (6)(5)  
     \end{bmatrix}.  
 \end{align*}
@@ -53,33 +54,33 @@ If we break this up into the sum of two matrices, however, each is an outer prod
     \begin{bmatrix}
         (4)(2)   &  (4)(-7)    \\
         (-3)(2)   &  (-3)(-7)    \\
-        (-2)(2) &  (-2)(-7) 
-    \end{bmatrix} + 
+        (-2)(2) &  (-2)(-7)
+    \end{bmatrix} +
     \begin{bmatrix}
-        (-1)(-3)  &  (-1)(5)  \\ 
-        (5)(-3)  &  (5)(5)  \\ 
-        (6)(-3)  &  (6)(5) 
+        (-1)(-3)  &  (-1)(5)  \\
+        (5)(-3)  &  (5)(5)  \\
+        (6)(-3)  &  (6)(5)
     \end{bmatrix}\\[2mm]
-    & = 
+    & =
     \small
     \begin{bmatrix}
-        4 \\ -3 \\ -2 
-    \end{bmatrix} 
+        4 \\ -3 \\ -2
+    \end{bmatrix}
     \begin{bmatrix}
-        2 & -7 
+        2 & -7
     \end{bmatrix} \: + \:
     \begin{bmatrix}
-        -1 \\ 5 \\ 6 
-    \end{bmatrix} 
+        -1 \\ 5 \\ 6
+    \end{bmatrix}
     \begin{bmatrix}
-        -3 & 5 
+        -3 & 5
     \end{bmatrix}.
 \end{align*}
 
 Note that the vectors here are columns of the left-hand matrix and rows of the right-hand matrix. The matrix product is defined only if there are equal numbers of these.
 ::::
 
-It is not hard to derive the following generalization of {numref}`Example {number} <example-lu-outer>` to all matrix products. 
+It is not hard to derive the following generalization of {numref}`Example {number} <example-lu-outer>` to all matrix products.
 
 ::::{prf:theorem} Matrix multiplication by outer products
 Write the columns of $\mathbf{A}$ as $\mathbf{a}_1,\dots,\mathbf{a}_n$ and the rows of $\mathbf{B}$ as $\mathbf{b}_1^T,\dots,\mathbf{b}_n^T$. Then
@@ -88,11 +89,12 @@ Write the columns of $\mathbf{A}$ as $\mathbf{a}_1,\dots,\mathbf{a}_n$ and the r
 :label: matrixouter
 \mathbf{A}\mathbf{B} = \sum_{k=1}^n \mathbf{a}_k \mathbf{b}_k^T.
 ```
+
 ::::
 
 ## Triangular product
 
-Equation {eq}`matrixouter` has some interesting structure for the product $\mathbf{L}\mathbf{U}$, where $\mathbf{L}$ is $n\times n$ and **lower triangular** (i.e., zero above the main diagonal) and $\mathbf{U}$ is $n\times n$ and **upper triangular** (zero below the diagonal). 
+Equation {eq}`matrixouter` has some interesting structure for the product $\mathbf{L}\mathbf{U}$, where $\mathbf{L}$ is $n\times n$ and **lower triangular** (i.e., zero above the main diagonal) and $\mathbf{U}$ is $n\times n$ and **upper triangular** (zero below the diagonal).
 
 ::::{prf:example} Triangular outer products
 :label: demo-lu-outertri
@@ -120,7 +122,7 @@ Equation {eq}`matrixouter` has some interesting structure for the product $\math
 ::::
 
 Let the columns of $\mathbf{L}$ be written as $\boldsymbol{\ell}_k$ and the rows of $\mathbf{U}$ be written as $\mathbf{u}_k^T$. Then the first row of $\mathbf{L}\mathbf{U}$ is
- 
+
 ```{math}
 :label: outer-row1
 \mathbf{e}_1^T \sum_{k=1}^n  \boldsymbol{ℓ}_k \mathbf{u}_k^T = \sum_{k=1}^n (\mathbf{e}_1^T \boldsymbol{\ell}_k) \mathbf{u}_k^T = L_{11} \mathbf{u}_1^T.
@@ -224,7 +226,7 @@ The outer product algorithm for LU factorization seen in @demo-lu-derive is code
 ```{index} Gaussian elimination
 ```
 
-In your first matrix algebra course, you probably learned a triangularization technique called **Gaussian elimination** or row elimination to solve a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$. In most presentations, you form an augmented matrix $[\mathbf{A}\;\mathbf{b}]$ and do row operations until the system reaches an upper triangular form, followed by backward substitution. LU factorization is equivalent to Gaussian elimination in which no row swaps are performed, and the elimination procedure produces the factors if you keep track of the row multipliers appropriately. 
+In your first matrix algebra course, you probably learned a triangularization technique called **Gaussian elimination** or row elimination to solve a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$. In most presentations, you form an augmented matrix $[\mathbf{A}\;\mathbf{b}]$ and do row operations until the system reaches an upper triangular form, followed by backward substitution. LU factorization is equivalent to Gaussian elimination in which no row swaps are performed, and the elimination procedure produces the factors if you keep track of the row multipliers appropriately.
 
 Like Gaussian elimination, the primary use of LU factorization is to solve a linear system. It reduces a given linear system to two triangular ones. From this, solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ follows immediately from associativity:
 
@@ -236,6 +238,7 @@ Defining $\mathbf{z} = \mathbf{U} \mathbf{x}$ leads to the following.
 
 ::::{prf:algorithm} Solution of linear systems by LU factorization (unstable)
 :label: algorithm-lu-solve
+
 1. Factor $\mathbf{L}\mathbf{U}=\mathbf{A}$.
 2. Solve $\mathbf{L}\mathbf{z}=\mathbf{b}$ for $\mathbf{z}$ using forward substitution.
 3. Solve $\mathbf{U}\mathbf{x}=\mathbf{z}$ for $\mathbf{x}$ using backward substitution.

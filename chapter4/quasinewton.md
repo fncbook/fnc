@@ -81,7 +81,7 @@ Recall that the Newton iteration is derived by solving the linear model implied 
   \mathbf{f}(\mathbf{x}_{k+1}) \approx \mathbf{f}(\mathbf{x}_k) + \mathbf{J}(\mathbf{x}_k)\,(\mathbf{x}_{k+1}-\mathbf{x}_k) = \boldsymbol{0}.
 ```
 
-Let $\mathbf{s}_k=\mathbf{x}_{k+1}-\mathbf{x}_k$  be the Newton step. Let $\mathbf{y}_k=\mathbf{f}(\mathbf{x}_k)$, and now we replace $\mathbf{J}(\mathbf{x}_k)$ by a matrix $\mathbf{A}_{k}$ that is meant to approximate the Jacobian. Hence, the Newton step is considered to be defined, as in {numref}`Algorithm {number} <definition-newtonsmethodsys>`, by
+Let $\mathbf{s}_k=\mathbf{x}_{k+1}-\mathbf{x}_k$ be the Newton step. Let $\mathbf{y}_k=\mathbf{f}(\mathbf{x}_k)$, and now we replace $\mathbf{J}(\mathbf{x}_k)$ by a matrix $\mathbf{A}_{k}$ that is meant to approximate the Jacobian. Hence, the Newton step is considered to be defined, as in {numref}`Algorithm {number} <definition-newtonsmethodsys>`, by
 
 ```{math}
 :label: quasinewton-step
@@ -114,22 +114,23 @@ Using the definitions above,
 :label: broyden
   \mathbf{A}_{k+1} = \mathbf{A}_k + \frac{1}{\mathbf{s}_k^T \mathbf{s}_k}(\mathbf{y}_{k+1} - \mathbf{y}_k -\mathbf{A}_k \mathbf{s}_k)\, \mathbf{s}_k^T.
 ```
+
 ::::
 
 ```{index} outer product
 ```
 
-Observe that $\mathbf{A}_{k+1}-\mathbf{A}_k$ is proportional to the outer product of two vectors, and that computing it requires no extra evaluations of $\mathbf{f}$. Remarkably, under reasonable assumptions, the sequence of $\mathbf{x}_k$ resulting when Broyden updates are used converges superlinearly, even though the matrices $\mathbf{A}_k$ do not necessarily converge to the Jacobian of $\mathbf{f}$. 
+Observe that $\mathbf{A}_{k+1}-\mathbf{A}_k$ is proportional to the outer product of two vectors, and that computing it requires no extra evaluations of $\mathbf{f}$. Remarkably, under reasonable assumptions, the sequence of $\mathbf{x}_k$ resulting when Broyden updates are used converges superlinearly, even though the matrices $\mathbf{A}_k$ do not necessarily converge to the Jacobian of $\mathbf{f}$.
 
 In practice, one typically uses finite differences to initialize the Jacobian at iteration $k=1$. If for some $k$ the step computed by the update formula fails to make enough improvement in the residual, then $\mathbf{A}_k$ is reinitialized by finite differences and the step is recalculated.
 
 ## Levenberg's method
 
-The most difficult part of many rootfinding problems is finding a starting point that will lead to convergence. The linear model implicitly constructed during a Newton iteration—whether we use an exact, finite-difference, or iteratively updated Jacobian matrix—becomes increasingly inaccurate as one ventures farther from the most recent root estimate, eventually failing to resemble the exact function much at all. 
+The most difficult part of many rootfinding problems is finding a starting point that will lead to convergence. The linear model implicitly constructed during a Newton iteration—whether we use an exact, finite-difference, or iteratively updated Jacobian matrix—becomes increasingly inaccurate as one ventures farther from the most recent root estimate, eventually failing to resemble the exact function much at all.
 
 Although one could imagine trying to do a detailed accuracy analysis of each linear model as we go, in practice simple strategies are valuable here. Suppose, after computing the step suggested by the linear model, we ask a binary question: Would taking that step improve our situation? Since we are trying to find a root of $\mathbf{f}$, we have a quantitative way to pose this question: Does the backward error $\|\mathbf{f}\|$ decrease? If not, we should reject the step and find an alternative.
 
-There are several ways to find alternatives to the standard step, but we will consider just one of them, based on the parameterized equation 
+There are several ways to find alternatives to the standard step, but we will consider just one of them, based on the parameterized equation
 
 ```{math}
 :label: levenberg
@@ -163,7 +164,7 @@ which is equivalent to the definition of the usual linear model (i.e., Newton or
   \lambda \mathbf{s}_k = - \mathbf{A}_k^T \mathbf{f}_k.
 ```
 
-To interpret this equation, define the scalar residual function 
+To interpret this equation, define the scalar residual function
 
 $$
 \phi(\mathbf{x})=\mathbf{f}(\mathbf{x})^T\mathbf{f}(\mathbf{x}) = \|\mathbf{f}(\mathbf{x})\|^2.
@@ -181,7 +182,7 @@ Finding a root of $\mathbf{f}$ is equivalent to minimizing $\phi$. A calculation
 
 Hence, if $\mathbf{A}_k=\mathbf{J}(\mathbf{x}_k)$, then $\mathbf{s}_k$ from {eq}`steepest` is in the opposite direction from the gradient vector. In vector calculus you learn that this direction is the one of most rapid decrease or **steepest descent**. A small enough step in this direction is guaranteed in all but pathological cases to decrease $\phi$, which is exactly what we want from a backup plan.
 
-In effect, the $\lambda$ parameter in {eq}`levenberg` allows a smooth transition between the pure Newton step, for which convergence is very rapid near a root, and a small step in the gradient descent direction, which guarantees progress for the iteration when we are far from a root. 
+In effect, the $\lambda$ parameter in {eq}`levenberg` allows a smooth transition between the pure Newton step, for which convergence is very rapid near a root, and a small step in the gradient descent direction, which guarantees progress for the iteration when we are far from a root.
 
 ## Implementation
 
