@@ -268,5 +268,6 @@ site:
     favicon: _static/favicon.png
     logo: _static/FNClogo.png
     analytics_plausible: fncbook.com # Domain(s) to track
+    style: _static/style.css
   domains:
     - www.fncbook.com
