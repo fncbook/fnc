@@ -3,6 +3,7 @@ numbering:
   enumerator: 9.3.%s
 ---
 (section-globalapprox-stability)=
+
 # Stability of polynomial interpolation
 
 ```{index} stability; of polynomial interpolation
@@ -147,7 +148,6 @@ These are the projections onto the $x$-axis of $n$ equally spaced points on a un
 `````
 
 ::::
-
 
 ::::{prf:example} Stability of interpolation with Chebyshev nodes
 :label: demo-stability-rungefix

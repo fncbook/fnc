@@ -15,14 +15,14 @@ Suppose we want to approximate a function $f$ that is periodic, with one period 
 
 ::::{prf:definition} Trigonometric polynomial
 :label: definition-trigpoly
-For an integer $n$, a **trigonometric polynomial** of degree $n$ is 
+For an integer $n$, a **trigonometric polynomial** of degree $n$ is
 
 ```{math}
 :label: trigpoly-real
 p(x) = \frac{a_0}{2} + \sum_{k=1}^n  a_k \cos(k\pi x) + b_k \sin(k\pi x)
 ```
 
-for real constants $a_k,b_k$. 
+for real constants $a_k,b_k$.
 ::::
 
 ```{index} ! interpolation; by trigonometric polynomials
@@ -43,6 +43,7 @@ As usual, we have sample values $y_{-n},\ldots,y_n$, perhaps representing values
 
 ```{index} cardinal function
 ```
+
 We can explicitly state the cardinal function basis for equispaced trigonometric interpolation. It starts with
 
 ```{math}
@@ -51,11 +52,12 @@ We can explicitly state the cardinal function basis for equispaced trigonometric
     + \cdots + \cos n\pi x\right) = \frac{\sin(N\pi x/2)}{N\sin(\pi x/2)}.
 ```
 
-You can directly check the following facts. (See @problem-trig-checktau.) 
+You can directly check the following facts. (See @problem-trig-checktau.)
 
 ::::{prf:theorem}
 :label: theorem-triginterp-cardinal
 Given the definition of $\tau$ in {eq}`trigcardinal`,
+
 1. $\tau(x)$ is a trigonometric polynomial of degree $n$.
 2. $\tau(x)$ is 2-periodic.
 3. $\tau(t_k)=0$ for any nonzero integer $k$.
@@ -72,12 +74,14 @@ p(x) = \sum_{k=-n}^n y_k \tau_k(x).
 ```
 
 The convergence of a trigonometric interpolant is spectral, i.e., exponential as a function of $N$ in the max-norm.
+
 ## Implementation
 
-{numref}`Function {number} <function-triginterp>` is an implementation of trigonometric interpolation based on {eq}`trigcardinalinterp`. The function accepts an $N$-vector of equally spaced nodes. Although we have not given the formulas above, the case of even $N$ is included in the code. 
+{numref}`Function {number} <function-triginterp>` is an implementation of trigonometric interpolation based on {eq}`trigcardinalinterp`. The function accepts an $N$-vector of equally spaced nodes. Although we have not given the formulas above, the case of even $N$ is included in the code.
 
 ```{index} ! Julia; ternary operator, ! Julia; eachindex, ! Julia; isodd
 ```
+
 ``````{prf:algorithm} triginterp
 :label: function-triginterp
 
@@ -129,7 +133,7 @@ The convergence of a trigonometric interpolant is spectral, i.e., exponential as
 
 ## Fast Fourier transform
 
-Although the cardinal form of the interpolant is useful and stable, there is a fundamental alternative. It begins with an equivalent complex form of the trigonometric interpolant {eq}`trigpoly-real`, 
+Although the cardinal form of the interpolant is useful and stable, there is a fundamental alternative. It begins with an equivalent complex form of the trigonometric interpolant {eq}`trigpoly-real`,
 
 ```{math}
 :label: trigpoly-complex
@@ -157,9 +161,9 @@ c_k = \begin{cases} \frac{a_0}{2}, & k=0, \\[1mm]
 \frac{1}{2}(a_k + i b_k), & k> 0, \\[1mm]
 \overline{c_{-k}}, & k < 0. 
 \end{cases}
-``` 
+```
 
-While working with an all-real formulation seems natural when the data are real, the complex-valued version leads to more elegant formulas and is standard. 
+While working with an all-real formulation seems natural when the data are real, the complex-valued version leads to more elegant formulas and is standard.
 
 The $N=2n+1$ coefficients $c_k$ are determined by interpolation nodes at the $N$ nodes within $[-1,1]$. By evaluating the complex exponential functions at these nodes, we get the $N\times N$ linear system
 
@@ -185,7 +189,7 @@ $$
 \end{bmatrix}.
 $$
 
-::::{prf:example} FFT 
+::::{prf:example} FFT
 :label: demo-trig-fft
 
 `````{tab-set}

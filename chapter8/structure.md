@@ -16,7 +16,7 @@ Very large matrices cannot be stored all within primary memory of a computer unl
 ```{index} adjacency matrix
 ```
 
-Most graphs with real applications have many fewer edges than the maximum possible $n^2$ for $n$ nodes. Accordingly, their adjacency matrices have mostly zero elements and should be represented sparsely. 
+Most graphs with real applications have many fewer edges than the maximum possible $n^2$ for $n$ nodes. Accordingly, their adjacency matrices have mostly zero elements and should be represented sparsely.
 
 ::::{prf:example} Sparsity
 :label: demo-structure-sparse
@@ -78,7 +78,7 @@ Arithmetic operations such as `+`, `-`, `*`, and `^` respect and exploit sparsit
 ```{index} banded matrix
 ```
 
-A particularly important type of sparse matrix is a banded matrix. Recall from {numref}`section-linsys-structure` that $\mathbf{A}$ has **upper bandwidth** $p$ if $j-i > p$ implies $A_{ij}=0$, and **lower bandwidth** $q$ if $i-j > q$ implies $A_{ij}=0$. We say the total **bandwidth** is $p+q+1$. Banded matrices appear naturally in many applications where each element interacts directly with only a few neighbors. 
+A particularly important type of sparse matrix is a banded matrix. Recall from {numref}`section-linsys-structure` that $\mathbf{A}$ has **upper bandwidth** $p$ if $j-i > p$ implies $A_{ij}=0$, and **lower bandwidth** $q$ if $i-j > q$ implies $A_{ij}=0$. We say the total **bandwidth** is $p+q+1$. Banded matrices appear naturally in many applications where each element interacts directly with only a few neighbors.
 
 ```{index} LU factorization
 ```
@@ -117,7 +117,7 @@ If given a sparse matrix, the backslash operator will automatically try a form o
 ```{index} eigenvalue decomposition
 ```
 
-For very large matrices, it's unlikely that you will want to find all of its eigenvalues and eigenvectors. In {numref}`section-krylov-subspace` we describe some of the math behind an algorithm that can find a selected number of eigenvalues of largest magnitude, lying to the extreme left or right, or nearest a given complex number. 
+For very large matrices, it's unlikely that you will want to find all of its eigenvalues and eigenvectors. In {numref}`section-krylov-subspace` we describe some of the math behind an algorithm that can find a selected number of eigenvalues of largest magnitude, lying to the extreme left or right, or nearest a given complex number.
 
 ::::{prf:example} Eigenvalues of sparse matrices
 :label: demo-structure-linalg

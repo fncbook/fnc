@@ -76,3 +76,12 @@ IBVP
 semidiscrete
 IBVPs
 Dahlquist
+submatrix
+Quasimatrices
+Vandermonde-like
+quasimatrix
+quasimatrices
+speedup
+Lanczos
+bandedness
+eigenpair

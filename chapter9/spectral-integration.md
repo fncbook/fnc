@@ -3,6 +3,7 @@ numbering:
   enumerator: 9.6.%s
 ---
 (section-globalapprox-integration)=
+
 # Spectrally accurate integration
 
 In {numref}`section-localapprox-integration` we derived methods of order 2, 4, and higher for numerical integration. They all use a formula
@@ -16,6 +17,7 @@ for a collection of nodes $t_0,\ldots,t_n$ in $[-1,1]$ and weights $w_0,\ldots,w
 
 ```{index} convergence rate; spectral
 ```
+
 The process for deriving a specific method was to interpolate the integrand, then integrate the interpolant. Piecewise linear interpolation at equally spaced nodes, for instance, produces the trapezoid formula. When the integrand is approximated by a spectrally accurate global function, the integration formulas are also spectrally accurate.
 
 ## Periodic functions
@@ -30,7 +32,7 @@ For a function periodic on $[-1,1]$, the most natural interpolant is the trigono
 ```{index} trapezoid formula; for integration
 ```
 
-In @problem-specint-trapperiod you are asked to verify that this result is identical to the value of the trapezoid formula on $2n+1$ nodes. 
+In @problem-specint-trapperiod you are asked to verify that this result is identical to the value of the trapezoid formula on $2n+1$ nodes.
 
 ```{prf:observation}
 The trapezoid integration formula is spectrally accurate for periodic functions.
@@ -38,9 +40,9 @@ The trapezoid integration formula is spectrally accurate for periodic functions.
 
 ::::{prf:example} Perimeter of an ellipse
 :label: demo-integration-ellipse
-We use the trapezoidal integration formula to compute the perimeter of an ellipse with semi-axes 1 and 1/2. Parameterizing the ellipse as $x=\cos \pi t$, $y=\frac{1}{2}\sin \pi t$ leads to the arc-length integral 
+We use the trapezoidal integration formula to compute the perimeter of an ellipse with semi-axes 1 and 1/2. Parameterizing the ellipse as $x=\cos \pi t$, $y=\frac{1}{2}\sin \pi t$ leads to the arc-length integral
 
-$$\int_{-1}^1 \pi\sqrt{ \cos^2(\pi t) + \tfrac{1}{4}\sin^2(\pi t)}\,dt.$$ 
+$$\int_{-1}^1 \pi\sqrt{ \cos^2(\pi t) + \tfrac{1}{4}\sin^2(\pi t)}\,dt.$$
 
 `````{tab-set}
 ````{tab-item} Julia
@@ -75,22 +77,27 @@ $$
 
 ```{index} ! Clenshaw–Curtis integration
 ```
+
 and integrate the resulting polynomial interpolant, the method should have spectral accuracy for a smooth integrand. The resulting algorithm is known as **Clenshaw–Curtis integration**.
 
 Having specified the nodes in {eq}`globalquad`, all that remains is to find the weights. The Lagrange form of the interpolating polynomial is
 
-$$
+```{math}
+:numbered: false
 p(x) = \sum_{k=0}^{n} f(x_k) \ell_k(x).
-$$
+```
 
 From this,
 
+```{math}
+:numbered: false
 \begin{align*}
   I = \int_{-1}^1 f(x)\, dx \approx \int_{-1}^1 p(x) \, d x &= \int_{-1}^1 \sum_{k=0}^n f(x_k) \ell_k(x) \, d x\\
-    &= \sum_{k=0}^n f(x_k) \int_{-1}^1 \ell_k(x) \, d x = \sum_{k=0}^n w_k f(x_k), 
+    &= \sum_{k=0}^n f(x_k) \int_{-1}^1 \ell_k(x) \, d x = \sum_{k=0}^n w_k f(x_k),
 \end{align*}
+```
 
-where $w_k = \int_{-1}^1 \ell_k(x)\,dx.$ For even values of $n$ the result is
+where $w_k = \int_{-1}^1 \ell_k(x)\,dx.$ For even values of $n$, the result is
 
 ```{math}
 :label: clencurtweights
@@ -108,7 +115,7 @@ where $w_k = \int_{-1}^1 \ell_k(x)\,dx.$ For even values of $n$ the result is
 \end{cases}
 ```
 
-There are different formulas for odd values of $n$. Note that the weights also depend on $n$; e. g. $w_2$ for $n=4$ is not the same as $w_2$ for $n=10$. Also note that the interpolant itself never needs to be computed.
+There are different formulas for odd values of $n$. Note that the weights also depend on $n$; e.g. $w_2$ for $n=4$ is not the same as $w_2$ for $n=10$. Also note that the interpolant itself never needs to be computed.
 
 {numref}`Function {number} <function-ccint>` performs Clenshaw–Curtis integration for even values of $n$.[^clencurt]
 
@@ -146,13 +153,13 @@ $$
 \int_{-1}^1 f(x)\, dx \approx \sum_{k=1}^n w_k f(t_k) = Q_{n}[f],
 $$
 
-where $Q_n[f]$ stands for the application of the formula to function $f$. (We start the sum from $k=1$ instead of $k=0$ for notational convenience in what follows.) 
+where $Q_n[f]$ stands for the application of the formula to function $f$. (We start the sum from $k=1$ instead of $k=0$ for notational convenience in what follows.)
 
 The interpolation approach spurred us to use Chebyshev nodes. But it's not clear that these are ideal nodes for the specific application of finding an integral. Instead, we can define formula as the integral of a polynomial interpolant, but with the weights and nodes chosen to satisfy an optimality criterion. As usual, we denote the set of all polynomials of degree at most $m$ by $\mathcal{P}_m$.
 
 ::::{prf:definition} Degree of an integration formula
 :label: definition-specint-degree
-The **degree** of integration formula $Q_n$ is the maximum value of $d$ such that 
+The **degree** of integration formula $Q_n$ is the maximum value of $d$ such that
 
 $$
 Q_n[p]= \int_{-1}^1 p(x)\, dx
@@ -161,7 +168,7 @@ $$
 for all $p\in \mathcal{P}_d$.
 ::::
 
-Since there are $n$ nodes and $n$ weights available to choose, it seems plausible to expect $m=2n-1$, and this intuition turns out to be correct. Hence the goal is now to find nodes $t_k$ and weights $w_k$ such that
+Since there are $n$ nodes and $n$ weights available to choose, it seems plausible to expect $m=2n-1$, and this intuition turns out to be correct. Hence, the goal is now to find nodes $t_k$ and weights $w_k$ such that
 
 ```{math}
 :label: gqoptimality
@@ -208,7 +215,7 @@ The roots of the Legendre polynomial $P_n(x)$ are the nodes of an $n$-point Gaus
 :enumerated: false
 
 Choose an arbitrary $p\in\mathcal{P}_{2n-1}$, and let $\hat{p}_n(x)$ be the lowest-degree interpolating polynomial for $p$ using the as-yet unknown nodes $t_1,\dots,t_n$. By definition,
- 
+
 $$
 Q_n[p] = \int_{-1}^1 \hat{p}_n(x)\, dx.
 $$
@@ -219,7 +226,7 @@ $$
 p(x) - \hat{p}_n(x) = \frac{p^{(n)}(\xi(x))}{n!} \Phi(x),
 $$
 
-where $\Phi$ is the error indicator function $\prod_k (t-t_k).$ Trivially, the left-hand side is a polynomial in $\mathcal{P}_{2n-1}$ of degree at least $n$, so the right-hand side must be too. Thus, we can  write
+where $\Phi$ is the error indicator function $\prod_k (t-t_k).$ Trivially, the left-hand side is a polynomial in $\mathcal{P}_{2n-1}$ of degree at least $n$, so the right-hand side must be too. Thus, we can write
 
 $$
 p(x) - \hat{p}_n(x) = \Psi(x) \Phi(x),
@@ -238,10 +245,10 @@ Given that $\Psi(x)\in \mathcal{P}_{n-1}$, we can ensure that this condition is 
 \int_{-1}^1 q(x)\Phi(x) \,dx = 0 
 ```
 
-for all $q \in {\mathcal{P}}_{n-1}$. Hence satisfaction of {eq}`gqorthogonality` implies satisfaction of {eq}`gqoptimality`. But by the orthogonality property of Legendre polynomials, satisfaction of {eq}`gqorthogonality` is guaranteed if $\Phi(x)=cP_n(x)$ for a constant $c$. Thus $\Phi$ and $P_n$ have the same roots.
+for all $q \in {\mathcal{P}}_{n-1}$. Hence, satisfaction of {eq}`gqorthogonality` implies satisfaction of {eq}`gqoptimality`. But by the orthogonality property of Legendre polynomials, satisfaction of {eq}`gqorthogonality` is guaranteed if $\Phi(x)=cP_n(x)$ for a constant $c$. Thus, $\Phi$ and $P_n$ have the same roots.
 ::::
 
-From @theorem-orthogonal-roots we know that the roots of $P_n$ are distinct and all within $(-1,1)$. (Indeed, it would be strange to have the integral of a function depend on some of its values outside the integration interval!)  While there is no explicit formula for the roots, there are fast algorithms to compute them and the integration weights on demand. {numref}`Function {number} <function-glint>` uses one of the oldest methods,  practical up to $n=100$ or so.
+From @theorem-orthogonal-roots we know that the roots of $P_n$ are distinct and all within $(-1,1)$. (Indeed, it would be strange to have the integral of a function depend on some of its values outside the integration interval!)  While there is no explicit formula for the roots, there are fast algorithms to compute them and the integration weights on demand. {numref}`Function {number} <function-glint>` uses one of the oldest methods, practical up to $n=100$ or so.
 
 ``````{prf:algorithm} glint
 :label: function-glint
@@ -300,7 +307,6 @@ The difference in convergence between Clenshaw–Curtis and Gauss–Legendre is 
 
 ## Exercises
 
-
 ``````{exercise}
 :label: problem-specint-trapperiod
 ✍  Suppose $f$ is periodic on $[-1,1]$. Show that the result of applying the trapezoid formula on $2n+1$ points is identical to {eq}`trapperiod`.
@@ -314,7 +320,6 @@ The difference in convergence between Clenshaw–Curtis and Gauss–Legendre is 
 **(b)** $\displaystyle\int_{-1}^1 e^{-x^2} \qquad$
 **(c)** $\displaystyle\int_{-1}^1 (2+x)^{-1}$
 ``````
-
 
 ``````{exercise}
 :label: problem-specint-ccglcompare

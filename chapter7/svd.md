@@ -3,6 +3,7 @@ numbering:
   enumerator: 7.3.%s
 ---
 (section-matrixanaly-svd)=
+
 # Singular value decomposition
 
 We now introduce another factorization that is as fundamental as the EVD.
@@ -33,13 +34,15 @@ The columns of $\mathbf{U}$ and $\mathbf{V}$ are called **left** and **right sin
 :label: svdorder
 \sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_r\ge 0, \qquad r=\min\{m,n\}.
 ```
-We call $\sigma_1$ the **principal singular value** and $\mathbf{u}_{1}$ and $\mathbf{v}_{1}$ the **principal singular vectors**. 
+
+We call $\sigma_1$ the **principal singular value** and $\mathbf{u}_{1}$ and $\mathbf{v}_{1}$ the **principal singular vectors**.
 ::::
 
 ````{prf:theorem}
 :label: theorem-svd
 Every $m\times n$ matrix has an SVD. The singular values of a matrix are unique, but the singular vectors are not. If the matrix is real, then $\mathbf{U}$ and $\mathbf{V}$ in {eq}`svd` can be chosen to be real, orthogonal matrices.  
 ````
+
 :::{prf:proof}
 :enumerated: false
 
@@ -92,10 +95,10 @@ Let $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^*$ be $m\times n$, and compute th
 \mathbf{B} = (\mathbf{V}\mathbf{S}^*\mathbf{U}^*) (\mathbf{U}\mathbf{S}\mathbf{V}^*) = \mathbf{V}\mathbf{S}^*\mathbf{S}\mathbf{V}^* = \mathbf{V}(\mathbf{S}^T\mathbf{S})\mathbf{V}^{-1}.
 ```
 
-Note that $\mathbf{S}^T\mathbf{S}$ is a diagonal $n \times n$ matrix. There are two cases to consider. If $m \ge n$, then 
+Note that $\mathbf{S}^T\mathbf{S}$ is a diagonal $n \times n$ matrix. There are two cases to consider. If $m \ge n$, then
 
 $$
-\mathbf{S}^T\mathbf{S} = 
+\mathbf{S}^T\mathbf{S} =
 \begin{bmatrix}
   \sigma_1^2 & & \\
   & \ddots & \\
@@ -103,7 +106,7 @@ $$
 \end{bmatrix}.
 $$
 
-On the other hand, if $m<n$, then 
+On the other hand, if $m<n$, then
 
 $$
 \mathbf{S}^T\mathbf{S} =
@@ -132,11 +135,11 @@ If $\sigma$ is a singular value of $\mathbf{B}$, then $\sigma$ and $-\sigma$ are
 
 ## Interpreting the SVD
 
-Another way to write $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^*$ is 
+Another way to write $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^*$ is
 
 $$
 \mathbf{A}\mathbf{V}=\mathbf{U}\mathbf{S}.
-$$ 
+$$
 
 Taken columnwise, this equation means
 
@@ -147,17 +150,19 @@ Taken columnwise, this equation means
 
 In words, each right singular vector is mapped by $\mathbf{A}$ to a scaled version of its corresponding left singular vector; the magnitude of scaling is its singular value.
 
-Both the SVD and the EVD describe a matrix in terms of some special vectors and a small number of scalars. {numref}`tab-evdsvd` summarizes the key differences. The SVD sacrifices having the same basis in both source and image spaces—after all, they may not even have the same dimension—but as a result gains orthogonality in both spaces.
+Both the SVD and the EVD describe a matrix in terms of some special vectors and a few scalars. {numref}`tab-evdsvd` summarizes the key differences. The SVD sacrifices having the same basis in both source and image spaces—after all, they may not even have the same dimension—but as a result gains orthogonality in both spaces.
 
 :::{table} Comparison of the EVD and SVD
 :label: tab-evdsvd
 :align: center
+
 | EVD | SVD |
 |:---:|:---:|
 | exists for most square matrices | exists for all rectangular and square matrices |
 | $\mathbf{A}\mathbf{x}_k = \lambda_k \mathbf{x}_k$ | $\mathbf{A} \mathbf{v}_k = \sigma_k \mathbf{u}_k$ |
 | same basis for domain and range of $\mathbf{A}$ | two orthonormal bases |
 | may have poor conditioning | perfectly conditioned |
+
 :::
 
 ## Thin form
@@ -165,10 +170,12 @@ Both the SVD and the EVD describe a matrix in terms of some special vectors and 
 ```{index} ! singular value decomposition; thin form
 ```
 
-In {numref}`section-leastsq-qr` we saw that a matrix has both *full* and *thin* forms of the QR factorization. A similar situation holds with the SVD. 
+In {numref}`section-leastsq-qr` we saw that a matrix has both *full* and *thin* forms of the QR factorization. A similar situation holds with the SVD.
 
 Suppose $\mathbf{A}$ is $m\times n$ with $m > n$ and let $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^*$ be an SVD. The last $m-n$ rows of $\mathbf{S}$ are all zero due to the fact that $\mathbf{S}$ is diagonal. Hence
 
+```{math}
+:numbered: false
 \begin{align*}
   \mathbf{U} \mathbf{S} & =
   \begin{bmatrix}
@@ -192,18 +199,19 @@ Suppose $\mathbf{A}$ is $m\times n$ with $m > n$ and let $\mathbf{A}=\mathbf{U}\
     & & \sigma_n
   \end{bmatrix} = \hat{\mathbf{U}} \hat{\mathbf{S}},
 \end{align*}
+```
 
 ```{index}  ONC matrix
 ```
 
-in which $\hat{\mathbf{U}}$ is $m\times n$ and $\hat{\mathbf{S}}$ is $n\times n$. This allows us to define the **thin SVD** 
+in which $\hat{\mathbf{U}}$ is $m\times n$ and $\hat{\mathbf{S}}$ is $n\times n$. This allows us to define the **thin SVD**
 
 ```{math}
 :label: thinSVD
 \mathbf{A}=\hat{\mathbf{U}}\hat{\mathbf{S}}\mathbf{V}^*,
-``` 
+```
 
-in which $\hat{\mathbf{S}}$ is square and diagonal and $\hat{\mathbf{U}}$ is ONC but not square. 
+in which $\hat{\mathbf{S}}$ is square and diagonal and $\hat{\mathbf{U}}$ is ONC but not square.
 
 So, in sketch form, a full SVD of a matrix that is taller than it is wide looks like
 
@@ -219,6 +227,7 @@ while a thin SVD looks like
 
 ::::{prf:example}
 Given the full SVD of {numref}`Example {number} <example-svd-vector>`, the corresponding thin SVD is
+
 ```{math}
 \begin{bmatrix} 3 \\ 4 \end{bmatrix}
 = \left(\frac{1}{5} \begin{bmatrix}
@@ -229,13 +238,14 @@ Given the full SVD of {numref}`Example {number} <example-svd-vector>`, the corre
   1
 \end{bmatrix}.
 ```
+
 ::::
 
 The thin form retains all the information about $\mathbf{A}$ from the SVD; the factorization is still an equality, not an approximation. It is computationally preferable when $m \gg n$, since it requires far less storage than a full SVD. For a matrix with more columns than rows, one can derive a thin form by taking the adjoint of the thin SVD of $\mathbf{A}^*$.
 
 ## SVD and the 2-norm
 
-The SVD is intimately connected to the 2-norm, as the following theorem describes. 
+The SVD is intimately connected to the 2-norm, as the following theorem describes.
 
 ```{index} norm; matrix
 ```
@@ -263,7 +273,7 @@ Let $\mathbf{A}\in\mathbb{C}^{m\times n}$ have an SVD $\mathbf{A}=\mathbf{U}\mat
     where a division by zero implies that $\mathbf{A}$ does not have full rank.
 ::::
 
-The conclusion {eq}`svdnorm` can be proved by vector calculus. In the square case $m=n$, $\mathbf{A}$ having full rank is identical to being invertible. The SVD is the usual means for computing the 2-norm and condition number of a matrix. 
+The conclusion {eq}`svdnorm` can be proved by vector calculus. In the square case $m=n$, $\mathbf{A}$ having full rank is identical to being invertible. The SVD is the usual means for computing the 2-norm and condition number of a matrix.
 
 ::::{prf:example} SVD properties
 :label: demo-svd-props

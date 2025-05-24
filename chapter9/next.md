@@ -1,4 +1,5 @@
 (section-globalapprox-next)=
+
 # Next steps
 
 The topics in this chapter come mainly under the heading of *approximation theory*, on which there are many good references. A thorough introduction to polynomial interpolation and approximation, emphasizing the complex plane and going well beyond the basics given here, is {cite}`trefethenApproximationTheory2013`. A more thorough treatment of the least-squares case is given in {cite}`davisInterpolationApproximation1963`.

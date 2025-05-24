@@ -20,7 +20,7 @@ We can explore the same idea in the context of linear algebra by shifting our vi
 
 These properties define a linear transformation. Moreover, *every* linear transformation between finite-dimensional vector spaces can be represented as a matrix-vector multiplication.
 
-A close examination reveals that in the power iteration and Krylov subspace methods, the only appearance of the matrix $\mathbf{A}$ is to apply it a known vector, i. e., to evaluate the linear transformation $\mathbf{f}(\mathbf{x})=\mathbf{A}\mathbf{x}$. If we have access to $\mathbf{f}$, we don't need the matrix at all! That is, Krylov subspace methods can be used to invert a linear transformation if one provides code for the transformation, even if its associated matrix is not known explicitly. That may sound like a strange situation, but it is not uncommon.
+A close examination reveals that in the power iteration and Krylov subspace methods, the only appearance of the matrix $\mathbf{A}$ is to apply it a known vector, i.e., to evaluate the linear transformation $\mathbf{f}(\mathbf{x})=\mathbf{A}\mathbf{x}$. If we have access to $\mathbf{f}$, we don't need the matrix at all! That is, Krylov subspace methods can be used to invert a linear transformation if one provides code for the transformation, even if its associated matrix is not known explicitly. That may sound like a strange situation, but it is not uncommon.
 
 ## Blurring images
 
@@ -93,7 +93,7 @@ It's easy to see from {eq}`blurfunction` that the blur operation is a linear tra
 
 or $\mathbf{A}\mathbf{x}=\mathbf{z}$.
 
-The matrix $\mathbf{A}$ is $mn\times mn$; for a 12-megapixel image, it would have $1.4\times 10^{14}$ entries! Admittedly, it is extremely sparse, but the point is that we don't need it at all. 
+The matrix $\mathbf{A}$ is $mn\times mn$; for a 12-megapixel image, it would have $1.4\times 10^{14}$ entries! Admittedly, it is extremely sparse, but the point is that we don't need it at all.
 
 Instead, given any vector $\mathbf{u}$ we can compute $\mathbf{v}=\mathbf{A}\mathbf{u}$ through the steps
 

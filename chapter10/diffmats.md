@@ -3,10 +3,12 @@ numbering:
   enumerator: 10.3.%s
 ---
 (section-bvp-diffmats)=
+
 # Differentiation matrices
 
 ```{index} finite differences; matrix
 ```
+
 In {numref}`section-localapprox-finitediffs` we used finite differences to turn a discrete collection of function values into an estimate of the derivative of the function at a point. Just as with differentiation in elementary calculus, we can generalize differences at a point into an operation that maps discretized functions to discretized derivatives.
 
 ```{index} ! differentiation matrix
@@ -20,7 +22,7 @@ A {term}`differentiation matrix` is a square matrix whose associated linear tran
 The derivative of a function is a unique result. The same is *not* true for our finite-dimensional approximation of the derivative, though.
 
 :::{important}
-There are many ways to approximate the derivative operator by a differentiation matrix. 
+There are many ways to approximate the derivative operator by a differentiation matrix.
 :::
 
 ## Matrices for finite differences
@@ -51,7 +53,7 @@ $$
 We can summarize the entire set of formulas by defining
 
 $$
-\mathbf{f} = 
+\mathbf{f} =
 \begin{bmatrix}
 f(x_0) \\[1mm] f(x_1) \\[1mm] \vdots \\[1mm] f(x_{n-1}) \\[1mm] f(x_n)
 \end{bmatrix}, \quad
@@ -109,7 +111,6 @@ A second-order accurate differentiation matrix for the first derivative using fi
 ```
 
 to be applied to a vector of function values at the nodes @bvp-fdnodes.
-```
 
 ```{index} banded matrix, sparse matrix
 ```
@@ -242,7 +243,6 @@ Together, the matrices {eq}`diffmat12b` and {eq}`diffmat22` give second-order ap
 `````
 ``````
 
-
 ::::{prf:example} Differentiation matrices
 :label: demo-diffmats-2nd
 
@@ -268,7 +268,6 @@ Together, the matrices {eq}`diffmat12b` and {eq}`diffmat22` give second-order ap
 
 ::::
 
-
 ## Spectral differentiation
 
 Recall that finite-difference formulas are derived in three steps:
@@ -279,7 +278,8 @@ Recall that finite-difference formulas are derived in three steps:
 
 ```{index} Chebyshev points; second kind
 ```
-We can modify this process by using a global interpolant, either polynomial or trigonometric, as in [Chapter 9](../globalapprox/overview). Rather than choosing a different index set for each node, we use all the nodes each time. 
+
+We can modify this process by using a global interpolant, either polynomial or trigonometric, as in [Chapter 9](../globalapprox/overview). Rather than choosing a different index set for each node, we use all the nodes each time.
 
 In a nonperiodic setting, we use Chebyshev second-kind points for stability:
 

@@ -3,6 +3,7 @@ numbering:
   enumerator: 8.5.%s
 ---
 (section-krylov-gmres)=
+
 # GMRES
 
 The most important use of the Arnoldi iteration is to solve the square linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, resulting in a well-known algorithm called GMRES.[^gmres]
@@ -57,6 +58,7 @@ which is of size $(m+1)\times m$. We call the solution of this minimization $\ma
 
 ```{index} ! GMRES
 ```
+
 ::::{prf:algorithm} GMRES
 Given $n\times n$ matrix $\mathbf{A}$ and $n$-vector $\mathbf{b}$:
 
@@ -150,9 +152,9 @@ Suppose $\hat{\mathbf{x}}$ is an approximate solution of $\mathbf{A}\mathbf{x}=\
 
 [^relativerestart]: The new problem needs to be solved for accuracy relative to $\|\mathbf{b}\|$, *not* relative to $\|\mathbf{r}\|$.
 
-Restarting guarantees a fixed upper bound on the per-iteration cost of GMRES. However, this benefit comes at a price. Even though restarting preserves progress made in previous iterations, the Krylov space information is discarded and the residual minimization process starts again over low-dimensional spaces. That can significantly retard or even stagnate the convergence. 
+Restarting guarantees a fixed upper bound on the per-iteration cost of GMRES. However, this benefit comes at a price. Even though restarting preserves progress made in previous iterations, the Krylov space information is discarded and the residual minimization process starts again over low-dimensional spaces. That can significantly retard or even stagnate the convergence.
 
-::::{prf:example} Restarting GMRES 
+::::{prf:example} Restarting GMRES
 :label: demo-gmres-restart
 
 `````{tab-set}
@@ -227,6 +229,7 @@ and let the $n$-vector $\mathbf{b}$ have elements $b_i=i/n$. For $n=8,16,32,64$,
 ``````
 
 % must stay as #5
+
 ``````{exercise}
 :label: problem-gmres-surround
 ⌨  In this exercise you will see the strong effect the eigenvalues of the matrix may have on GMRES convergence. Let 

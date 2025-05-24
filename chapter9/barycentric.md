@@ -3,9 +3,10 @@ numbering:
   enumerator: 9.2.%s
 ---
 (section-globalapprox-barycentric)=
+
 # The barycentric formula
 
-The Lagrange formula {eq}`lagrangeinterp` is useful theoretically but not ideal for computation. For each new value of $x$, all of the cardinal functions $\ell_k$ must be evaluated at $x$, which requires a product of $n$ terms. Thus the total work is $O(n^2)$ for every value of $x$. Moreover, the formula is numerically unstable. An alternative version of the formula improves on both issues.
+The Lagrange formula {eq}`lagrangeinterp` is useful theoretically but not ideal for computation. For each new value of $x$, all the cardinal functions $\ell_k$ must be evaluated at $x$, which requires a product of $n$ terms. Thus, the total work is $O(n^2)$ for every value of $x$. Moreover, the formula is numerically unstable. An alternative version of the formula improves on both issues.
 
 ## Derivation
 
@@ -23,11 +24,13 @@ as well as a set of values derived from the nodes.
 ::::{prf:definition} Barycentric weights
 :label: definition-barycentricweights
 The **barycentric weights** for nodes $x_0,\dots,x_n$ are defined as
+
 ```{math}
 :label: baryweight
 w_k = \frac{1}{\displaystyle \prod_{\substack{j=0\\j\neq k}}^n (t_k - t_j)} = \frac{1}{\Phi'(t_k)}, \qquad
 k = 0,\ldots,n.
 ```
+
 ::::
 
 The following formula is the key to efficient and stable evaluation of a polynomial interpolant.
@@ -43,6 +46,7 @@ Given points $(t_k,y_k)$ for $k=0,\ldots,n$ with all the $t_k$ distinct, the uni
 :label: bary2
   p(x) = \frac{\displaystyle \sum_{k=0}^n \, \dfrac{w_k y_k}{x-t_k}  }{\displaystyle\sum_{k=0}^n \, \dfrac{w_k}{x-t_k}}.
 ```
+
 ::::
 
 ::::{prf:proof}
@@ -71,26 +75,29 @@ $$
 This is solved for $\Phi(x)$ and put back into {eq}`bary1` to get {eq}`bary2`.
 ::::
 
-Equation {eq}`bary2` is certainly an odd-looking way to write a polynomial! Indeed, it is technically undefined when $x$ equals one of the nodes, but in fact, $\lim_{x\to t_k} p(x) = y_k$, so a continuous extension to the nodes is justified. (See @problem-barycentric-limit.) 
+Equation {eq}`bary2` is certainly an odd-looking way to write a polynomial! Indeed, it is technically undefined when $x$ equals one of the nodes, but in fact, $\lim_{x\to t_k} p(x) = y_k$, so a continuous extension to the nodes is justified. (See @problem-barycentric-limit.)
 
 ::::{prf:example}
 :label: example-writeoutbary2
 Let us write out the barycentric formula for the interpolating polynomial for the quadratic case ($n=2$) for {numref}`Example %s <example-ClassicalLagrange>`.  The weights are computed from {eq}`baryweight`:
   
 ```{math}
-  w_0 = \frac{1}{(t_0-t_1)(t_0-t_2)} = \frac{1}{\left(0-\frac{\pi}{6}\right)
+w_0 = \frac{1}{(t_0-t_1)(t_0-t_2)} = \frac{1}{\left(0-\frac{\pi}{6}\right)
 \left(0-\frac{\pi}{3}\right)} = \frac{18}{\pi^2},
 ```
 
-and similarly, $w_1 = -36/\pi^2$ and $w_2=18/\pi^2$.
+and, similarly, $w_1 = -36/\pi^2$ and $w_2=18/\pi^2$.
 
-Note that in {eq}`bary2`, any common factor in the weights cancels out without affecting the results. Hence it's a lot easier to use $w_0=w_2=1$ and $w_1=-2$. Then
+Note that in {eq}`bary2`, any common factor in the weights cancels out without affecting the results. Hence, it's a lot easier to use $w_0=w_2=1$ and $w_1=-2$. Then
 
+```{math}
+:numbered: false
 \begin{align*}
-    p(x) & = \frac{\rule[-1.2em]{0pt}{1em} \dfrac{w_0}{x-t_0} y_0  + \dfrac{w_1}{x-t_1} y_1 + \dfrac{w_2}{x-t_2} y_2 }{ \rule{0pt}{1.5em} \dfrac{w_0}{x-t_0} + \dfrac{w_1}{x-t_1} + \dfrac{w_2}{x-t_2}}\\[1.5ex]
+    p(x) & = \frac{\rule[-1.2em]{0pt}{1em} \dfrac{w_0}{x-t_0} y_0  + \dfrac{w_1}{x-t_1} y_1 + \dfrac{w_2}{x-t_2} y_2 }{ \rule{0pt}{1.5em} \dfrac{w_0}{x-t_0} + \dfrac{w_1}{x-t_1} + \dfrac{w_2}{x-t_2}}\\[2ex]
     & =\frac{ \rule[-1.2em]{0pt}{1em}\left( \dfrac{1}{x} \right) 0 -  \left( \dfrac{2}{x-\pi/6} \right) \dfrac{1}{\sqrt{3}} + \left( \dfrac{1}{x-\pi/3} \right) \sqrt{3} }{
         \rule{0pt}{1.6em} \dfrac{1}{x} - \dfrac{2}{x-\pi/6} + \dfrac{1}{x-\pi/3}  }.
 \end{align*}
+```
   
 Further algebraic manipulation could return this expression to the classical Lagrange form derived in {numref}`Example %s <example-ClassicalLagrange>`.
 ::::
@@ -108,7 +115,7 @@ $$
 
 A direct application of {eq}`baryweight` can be used to find $\omega_{m,m}$. This process is iterated over $m=1,\ldots,n$ to find $w_k=\omega_{k,n}^{-1}$.
 
-In {numref}`Function {number} <function-polyinterp>` we give an implementation of the barycentric formula for polynomial interpolation. 
+In {numref}`Function {number} <function-polyinterp>` we give an implementation of the barycentric formula for polynomial interpolation.
 
 ```{index} ! Julia; isinf
 ```

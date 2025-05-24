@@ -3,6 +3,7 @@ numbering:
   enumerator: 8.2.%s
 ---
 (section-krylov-power)=
+
 # Power iteration
 
 ```{index} sparse matrix
@@ -58,7 +59,7 @@ then we say that $\lambda_1$ is the {term}`dominant eigenvalue` of the matrix.
 
 In @demo-power-one, for instance, $\lambda_1=1$ is the dominant eigenvalue.
 
-Now let $\mathbf{x}$ be an $n$-vector, let $k$ be a positive integer, and refer to {eq}`evdpower`: 
+Now let $\mathbf{x}$ be an $n$-vector, let $k$ be a positive integer, and refer to {eq}`evdpower`:
 
 ```{math}
 \mathbf{A}^k \mathbf{x} = \mathbf{V}\mathbf{D}^k\mathbf{V}^{-1}\mathbf{x}.
@@ -70,10 +71,10 @@ Let $\mathbf{z}=\mathbf{V}^{-1}\mathbf{x}$, and recall that $\mathbf{D}$ is a di
 :label: powerAkx0
 \begin{split}
   \mathbf{A}^k\mathbf{x} &= \mathbf{V}\mathbf{D}^k \mathbf{z} = \mathbf{V}\begin{bmatrix} \lambda_1^kz_1 \\[0.5ex] \lambda_2^kz_2 \\ \vdots \\ \lambda_n^kz_n \end{bmatrix} \\
-	&= \lambda_1^k \left[ z_1 \mathbf{v}_{1} +
-		z_2 \left(\frac{\lambda_2}{\lambda_1}\right) ^k 
-		\mathbf{v}_{2} + \cdots + z_n \left(\frac{\lambda_n}{\lambda_1}\right)^k
-		\mathbf{v}_{n} \right].
+ &= \lambda_1^k \left[ z_1 \mathbf{v}_{1} +
+  z_2 \left(\frac{\lambda_2}{\lambda_1}\right) ^k 
+  \mathbf{v}_{2} + \cdots + z_n \left(\frac{\lambda_n}{\lambda_1}\right)^k
+  \mathbf{v}_{n} \right].
 \end{split}
 ````
 
@@ -87,7 +88,7 @@ Since $\lambda_1$ is dominant, we conclude that if $z_1\neq 0$,
 \| \mathbf{v}_{n} \| \rightarrow 0 \text{ as $k\rightarrow \infty$}.
 ```
 
-That is, $\mathbf{A}^k\mathbf{x}$ eventually is close to close to a scalar multiple of the dominant eigenvector.[^zeromeasure]
+That is, $\mathbf{A}^k\mathbf{x}$ eventually is close to a scalar multiple of the dominant eigenvector.[^zeromeasure]
 
 [^zeromeasure]: If $\mathbf{x}$ is chosen randomly, the probability that $z_1=0$ is mathematically zero.
 
@@ -109,10 +110,10 @@ To make a practical algorithm, we alternate matrix-vector multiplication with a 
 Given matrix $\mathbf{A}$:
 
 1. Choose $\mathbf{x}_1$.
-2. For $k=1,2,\ldots$, 
-   
+2. For $k=1,2,\ldots$,
+
     a. Set $\mathbf{y}_k = \mathbf{A} \mathbf{x}_k$.
-	
+
     b. Find $m$ such that $|y_{k,m}|=\|{\mathbf{y}_k} \|_\infty$.
 
     c. Set $\alpha_k = \dfrac{1}{y_{k,m}}$ and $\,\beta_k = \dfrac{y_{k,m}}{x_{k,m}}$.
@@ -133,7 +134,7 @@ By construction, $\| \mathbf{x}_{k}\|_\infty=1$ for all $k > 1$. Also, we can wr
 \mathbf{x}_{k} = (\alpha_1 \alpha_2 \cdots \alpha_k ) \mathbf{A}^k \mathbf{x}_{1}.
 ```
 
-Thus {numref}`Algorithm {number} < definition-poweriteration>` modifies {eq}`powerAkx0` and {eq}`poweriterconverge` only slightly.
+Thus, {numref}`Algorithm {number} < definition-poweriteration>` modifies {eq}`powerAkx0` and {eq}`poweriterconverge` only slightly.
 
 Finally, if $\mathbf{x}_k$ is nearly a dominant eigenvector of $\mathbf{A}$, then $\mathbf{A}\mathbf{x}_k$ is nearly $\lambda_1\mathbf{x}_k$, and we can take the ratio $\beta_k=y_{k,m}/x_{k,m}$ as an eigenvalue estimate. In fact, revisiting {eq}`powerAkx0`, the extra $\alpha_j$ normalization factors cancel in the ratio, and, after some simplification, we get
 
@@ -243,7 +244,7 @@ The error in the power iteration eigenvalue estimates $\beta_k$ is reduced asymp
 
 ::::
 
-The practical utility of {eq}`poweriterconv` is limited: if we knew $\lambda_1$ and $\lambda_2$, we wouldn't be running the power iteration in the first place! Sometimes it's possible to find estimates of or bounds on the ratio. If nothing else, though, it is useful to know that linear convergence is expected at a rate based solely on the dominant eigenvalues. 
+The practical utility of {eq}`poweriterconv` is limited: if we knew $\lambda_1$ and $\lambda_2$, we wouldn't be running the power iteration in the first place! Sometimes it's possible to find estimates of or bounds on the ratio. If nothing else, though, it is useful to know that linear convergence is expected at a rate based solely on the dominant eigenvalues.
 
 ## Exercises
 

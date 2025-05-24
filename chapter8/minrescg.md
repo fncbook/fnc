@@ -3,6 +3,7 @@ numbering:
   enumerator: 8.6.%s
 ---
 (section-krylov-minrescg)=
+
 # MINRES and conjugate gradients
 
 ```{index} symmetric matrix
@@ -45,7 +46,7 @@ As before in deriving the Arnoldi iteration, when given the first $m$ vectors we
 
 When $\mathbf{A}$ is hermitian and the Arnoldi iteration is reduced to Lanczos, the analog of GMRES is known as **MINRES**. Like GMRES, MINRES minimizes the residual $\|\mathbf{b}-\mathbf{A}\mathbf{x}\|$ over increasingly larger Krylov spaces.
 
-MINRES is also more theoretically tractable than GMRES. The following result relies on some advanced approximation theory. Recall that the eigenvalues of a hermitian matrix are real. 
+MINRES is also more theoretically tractable than GMRES. The following result relies on some advanced approximation theory. Recall that the eigenvalues of a hermitian matrix are real.
 
 ::::{prf:theorem} Convergence of MINRES (indefinite case)
 :label: theorem-minrescg-indefinite
@@ -69,7 +70,7 @@ where $\lfloor m/2\rfloor$ means to round $m/2$ down to the nearest integer.
 ```{index} convergence rate; linear
 ```
 
-The bound for a definite matrix is better, as the next theorem shows. The upper bound {eq}`minres-conv` on the residual obeys a linear convergence rate. As the product $\kappa_+\kappa_-$ grows, the rate of this convergence approaches 1. Hence the presence of eigenvalues close to the origin (relative to the max eigenvalues) is expected to force a slower convergence. 
+The bound for a definite matrix is better, as the next theorem shows. The upper bound {eq}`minres-conv` on the residual obeys a linear convergence rate. As the product $\kappa_+\kappa_-$ grows, the rate of this convergence approaches 1. Hence, the presence of eigenvalues close to the origin (relative to the max eigenvalues) is expected to force a slower convergence.
 
 ::::{prf:example}
 Suppose $\mathbf{A}$ has $\kappa_+=60$ and $\kappa_-=15$. Then to achieve a guaranteed reduction in the relative residual of $10^{-3}$, we require
@@ -114,12 +115,9 @@ Because the theorem gives an upper bound, MINRES may converge faster. All we can
 
 ::::
 
-
-
-
 ## Conjugate gradients
 
-Given positive definiteness in addition to symmetry, we arrive at perhaps the most famous Krylov subspace method for $\mathbf{A}\mathbf{x}=\mathbf{b}$, called **conjugate gradients**. 
+Given positive definiteness in addition to symmetry, we arrive at perhaps the most famous Krylov subspace method for $\mathbf{A}\mathbf{x}=\mathbf{b}$, called **conjugate gradients**.
 
 Suppose now that $\mathbf{A}$ is hermitian and positive definite (HPD). Then $\mathbf{A}$ has a Cholesky factorization, which in the complex case is $\mathbf{A}=\mathbf{R}^*\mathbf{R}$. Therefore, for any vector $\mathbf{u}$,
 
@@ -127,7 +125,7 @@ $$
 \mathbf{u}^*\mathbf{A}\mathbf{u} = (\mathbf{R}\mathbf{u})^*(\mathbf{R}\mathbf{u})=\|\mathbf{R} \mathbf{u}\|^2,
 $$
 
-which is nonnegative and zero only when $\mathbf{u}=\boldsymbol{0}$, provided $\mathbf{A}$ (and therefore $\mathbf{R}$) is nonsingular. Hence we can define a special vector norm relative to $\mathbf{A}$:
+which is nonnegative and zero only when $\mathbf{u}=\boldsymbol{0}$, provided $\mathbf{A}$ (and therefore $\mathbf{R}$) is nonsingular. Hence, we can define a special vector norm relative to $\mathbf{A}$:
 
 ```{math}
 :label: Anorm
@@ -147,7 +145,7 @@ For each $m=1,2,3,\ldots$, minimize $\|\mathbf{x}_m-\mathbf{x}\|_{\mathbf{A}}$ f
 ```{index} condition number; of a matrix
 ```
 
-The convergence of CG and MINRES is dependent on the eigenvalues of $\mathbf{A}$. In the HPD case the eigenvalues are real and positive, and they equal the singular values. Hence the condition number $\kappa$ is equal to the ratio of the largest eigenvalue to the smallest one. The following theorem suggests that MINRES and CG are not so different in convergence.
+The convergence of CG and MINRES is dependent on the eigenvalues of $\mathbf{A}$. In the HPD case the eigenvalues are real and positive, and they equal the singular values. Hence, the condition number $\kappa$ is equal to the ratio of the largest eigenvalue to the smallest one. The following theorem suggests that MINRES and CG are not so different in convergence.
 
 ::::{prf:theorem} MINRES and CG convergence (definite case)
 :label: theorem-minrescg-converge
@@ -158,20 +156,26 @@ where $\mathbf{r}_m$ and $\mathbf{x}_m$ are the residual and solution approximat
 :label: cgconv
 R(m) \le  2\, \left( \frac{\sqrt{\kappa} - 1}{\sqrt{\kappa} + 1} \right)^m.
 ```
+
 ::::
 
 @theorem-minrescg-converge characterizes the convergence of MINRES and CG similarly, differing only in whether the measurement is of the residual or the $\mathbf{A}$-norm of the error, respectively. While these are different quantities, in practice one may not find a consistent advantage for one method over the other.
 
 As in the indefinite case with MINRES, a larger condition number is associated with slower convergence in the positive definite case. Specifically, to make the bound in {eq}`cgconv` less than a number $\epsilon$ requires
 
+```{math}
+:numbered: false
 \begin{gather*}
   2 \left( \frac{\sqrt{\kappa} - 1}{\sqrt{\kappa} + 1} \right)^m \approx \epsilon, \\
   m \log \left( \frac{\sqrt{\kappa} - 1}{\sqrt{\kappa} + 1} \right)
   \approx \log\Bigl( \frac{\epsilon}{2} \Bigr).
 \end{gather*}
+```
 
 We estimate
 
+```{math}
+:numbered: false
 \begin{align*}
    \frac{\sqrt{\kappa} - 1}{\sqrt{\kappa} + 1}
  &=  (1 - \kappa^{-1/2}\,) (1 + \kappa^{-1/2}\,)^{-1}\\
@@ -179,16 +183,19 @@ We estimate
  &= 1 - 2\kappa^{-1/2} + O(\kappa^{-1}) \quad \text{ as $\kappa
    \rightarrow \infty$.}
 \end{align*}
+```
 
 With the Taylor expansion $\log(1+x) = x - (x^2/2) + \cdots$, we finally conclude
 
+```{math}
 \begin{gather*}
   2 m \kappa^{-1/2} \approx \log\Bigl( \frac{\epsilon}{2} \Bigr),
   \text{ or }
   m = O(\sqrt{\kappa}),
 \end{gather*}
+```
 
-as an estimate of the number of iterations needed to achieve a fixed accuracy. 
+as an estimate of the number of iterations needed to achieve a fixed accuracy.
 
 :::{prf:observation}
 As a rule of thumb, the number of iterations required for MINRES or CG to converge is $O(\sqrt{\kappa})$, where $\kappa$ is the condition number.

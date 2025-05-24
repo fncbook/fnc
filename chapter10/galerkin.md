@@ -3,6 +3,7 @@ numbering:
   enumerator: 10.6.%s
 ---
 (section-bvp-galerkin)=
+
 # The Galerkin method
 
 Using finite differences we defined a collocation method in which an approximation of the differential equation is required to hold at a finite set of nodes. In this section we present an alternative based on integration rather than differentiation. Our presentation will be limited to the linear BVP
@@ -44,16 +45,16 @@ We now make an important and convenient assumption about the test function. The 
   \int_a^b \bigl[ c(x)u'(x)\psi'(x) + s(x)u(x)\psi(x)\bigr]  \,dx = \int_a^b f(x)\psi(x) \,dx,
 ```
 
-which is known as the **weak form** of the differential equation {eq}`strongbvp`. 
+which is known as the **weak form** of the differential equation {eq}`strongbvp`.
 
 ```{index} ! weak solution
 ```
 
 :::{prf:definition} Weak solution
-If $u(x)$ is a function such that {eq}`weakbvp` is satisfied for all valid choices of $\psi$, we say that $u$ is a **weak solution** of the BVP {eq}`strongbvp`. 
+If $u(x)$ is a function such that {eq}`weakbvp` is satisfied for all valid choices of $\psi$, we say that $u$ is a **weak solution** of the BVP {eq}`strongbvp`.
 :::
 
-Every solution of {eq}`strongbvp` (what we might now call the strong form of the problem) is a weak solution, but the converse is not always true. While the weak form might look odd, in many mathematical models it could be considered more fundamental than {eq}`strongbvp`. 
+Every solution of {eq}`strongbvp` (what we might now call the strong form of the problem) is a weak solution, but the converse is not always true. While the weak form might look odd, in many mathematical models it could be considered more fundamental than {eq}`strongbvp`.
 
 ## Galerkin conditions
 
@@ -107,7 +108,7 @@ for $i=1,\ldots,m$. This rearranges easily into
 
 still for each $i=1,\ldots,m$. These are the {term}`Galerkin conditions` defining a numerical solution. They follow entirely from the BVP and the choice of the $\phi_i$.
 
-The conditions {eq}`galerkin` are a linear system of equations for the unknown coefficients $w_j$. Define $m\times m$ matrices $\mathbf{K}$  and $\mathbf{M}$, and the vector $\mathbf{f}$, by
+The conditions {eq}`galerkin` are a linear system of equations for the unknown coefficients $w_j$. Define $m\times m$ matrices $\mathbf{K}$ and $\mathbf{M}$, and the vector $\mathbf{f}$, by
 
 ```{math}
 :label: galerkinsystem
@@ -128,37 +129,46 @@ Then {eq}`galerkin` is simply
 
 ```{index} ! stiffness matrix, ! mass matrix
 ```
+
 The matrix $\mathbf{K}$ is called the **stiffness matrix** and $\mathbf{M}$ is called the **mass matrix**. By their definitions, they are symmetric. The last piece of the puzzle is to make some selection of $\phi_1,\ldots,\phi_m$ and obtain a fully specified algorithm.
 
 ::::{prf:example}
-  Suppose we are given $-u''+4u=x$, with $u(0)=u(\pi)=0$. We could choose the basis functions $\phi_k=\sin(kx)$ for $k=1,2,3$. Then
-  \begin{align*}
-    M_{ij} & = 4 \int_0^\pi \sin(ix) \sin(jx)\, dx, \\
-    K_{ij} & = ij \int_0^\pi \cos(ix) \cos(jx)\, dx, \\
-    f_i &= \int_0^\pi x \sin(ix)\, dx.
-  \end{align*}
-  With some calculation (or computer algebra), we find
-  
-$$
-    \mathbf{M} = 2\pi
-    \begin{bmatrix}
-      1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
-    \end{bmatrix}, \qquad
-     \mathbf{K} = \frac{\pi}{2}
-    \begin{bmatrix}
-      1 & 0 & 0 \\ 0 & 4 & 0 \\ 0 & 0 & 9
-    \end{bmatrix}, \qquad
-    \mathbf{f} = \pi
-    \begin{bmatrix}
-      1 \\ -1/2 \\ 1/3
-    \end{bmatrix}.
-  $$
+Suppose we are given $-u''+4u=x$, with $u(0)=u(\pi)=0$. We could choose the basis functions $\phi_k=\sin(kx)$ for $k=1,2,3$. Then
 
-  Upon solving the resulting diagonal linear system, the approximate solution is
+```{math}
+:numbered: false
+\begin{split}
+  M_{ij} & = 4 \int_0^\pi \sin(ix) \sin(jx)\, dx, \\
+  K_{ij} & = ij \int_0^\pi \cos(ix) \cos(jx)\, dx, \\
+  f_i &= \int_0^\pi x \sin(ix)\, dx.
+\end{split}
+```
+
+With some calculation, we find
+
+```{math}
+:numbered: false
+\mathbf{M} = 2\pi
+\begin{bmatrix}
+  1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
+\end{bmatrix}, \qquad
+  \mathbf{K} = \frac{\pi}{2}
+\begin{bmatrix}
+  1 & 0 & 0 \\ 0 & 4 & 0 \\ 0 & 0 & 9
+\end{bmatrix}, \qquad
+\mathbf{f} = \pi
+\begin{bmatrix}
+  1 \\ -1/2 \\ 1/3
+\end{bmatrix}.
+```
+
+Upon solving the resulting diagonal linear system, the approximate solution is
   
-$$
-  \frac{2}{5}\sin(x) - \frac{1}{8} \sin(2x) + \frac{2}{39}\sin(3x).
-$$
+```{math}
+:numbered: false
+\frac{2}{5}\sin(x) - \frac{1}{8} \sin(2x) + \frac{2}{39}\sin(3x).
+```
+
 ::::
 
 (section-galerkin-fem)=
@@ -194,7 +204,7 @@ Recall that these functions are cardinal, i.e., $H_i(t_i)=1$ and $H_i(t_j)=0$ if
   u(x) = \sum_{j=1}^m w_j \phi_j(x) = \sum_{j=1}^{n-1} u_j H_j(x),
 ```
 
-where as usual $u_j$ is the value of the numerical solution at $t_j$. Note that we omit $H_0$ and $H_n$, which equal one at the endpoints of the interval, because the boundary conditions on $u$ render them irrelevant.
+where, as usual, $u_j$ is the value of the numerical solution at $t_j$. Note that we omit $H_0$ and $H_n$, which equal one at the endpoints of the interval, because the boundary conditions on $u$ render them irrelevant.
 
 The importance of the hat function basis in the Galerkin method is that each one is nonzero in only two adjacent intervals. As a result, we shift the focus from integrations over the entire interval in {eq}`galerkinsystem` to integrations over each subinterval, $I_k=[t_{k-1},t_k]$. Specifically, we use
 
@@ -210,7 +220,7 @@ The importance of the hat function basis in the Galerkin method is that each one
     \end{split}
 ```
 
-Start with the first subinterval, $I_1$. The only hat function that is nonzero over $I_1$ is $H_1(x)$. Thus the only integrals we need to consider over $I_1$ have $i=j=1$:
+Start with the first subinterval, $I_1$. The only hat function that is nonzero over $I_1$ is $H_1(x)$. Thus, the only integrals we need to consider over $I_1$ have $i=j=1$:
 
 $$
   \int_{I_1} c(x) H_1'(x) H_1'(x) \,dx, \qquad  \int_{I_1} s(x) H_1(x) H_1(x) \,dx, \qquad \int_{I_1} f(x) H_1(x) \,dx,
@@ -218,19 +228,19 @@ $$
 
 which contribute to the sums for $K_{11}$, $M_{11}$, and $f_1$, respectively.
 
-Before writing more formulas, we make one more very useful simplification. Unless the coefficient functions $c(x)$, $s(x)$, and $f(x)$ specified in the problem are especially simple functions, the natural choice for evaluating all of the required integrals is numerical integration, say by the trapezoid formula. As it turns out, though, such integration is not really necessary. The fact that we have approximated the solution of the BVP by a piecewise linear interpolant makes the numerical method second-order accurate overall. It can be proven that the error is still second order if we replace each of the coefficient functions by a constant over $I_k$, namely the average of the endpoint values:
+Before writing more formulas, we make one more very useful simplification. Unless the coefficient functions $c(x)$, $s(x)$, and $f(x)$ specified in the problem are especially simple functions, the natural choice for evaluating all the required integrals is numerical integration, say by the trapezoid formula. As it turns out, though, such integration is not really necessary. The fact that we have approximated the solution of the BVP by a piecewise linear interpolant makes the numerical method second-order accurate overall. It can be proven that the error is still second order if we replace each of the coefficient functions by a constant over $I_k$, namely the average of the endpoint values:
 
 $$
   c(x) \approx \overline{c}_k = \frac{c(t_{k-1})+c(t_k)}{2} \quad \text{for $x\in I_k$}.
 $$
 
-Thus the integrals in {eq}`femsystem` can be evaluated solely from the node locations. For instance,
+Thus, the integrals in {eq}`femsystem` can be evaluated solely from the node locations. For instance,
 
 $$
   \int_{I_1} c(x) H_1'(x) H_1'(x) \,dx \approx \overline{c}_1 \int_{t_0}^{t_1} h_1^{-2} \, dx = \frac{\overline{c}_1}{h_1}.
 $$
 
-Now consider interval $I_2=[t_1,t_2]$. Here both $H_1$ and $H_2$ are nonzero, so there are contributions to all of the matrix elements $K_{11}$, $K_{12}=K_{21}$, $K_{22}$, to $M_{11}$, $M_{12}=M_{21}$, $M_{22}$, and to $f_1$ and $f_2$. Over $I_2$ we have $H_2'= h_2^{-1}$ and $H_{1}'= -h_2^{-1}$. Hence the contributions to $K_{11}$ and $K_{22}$ in {eq}`femsystem` are $\overline{c}_2/h_2$, and the contributions to $K_{12}=K_{21}$ are $-\overline{c}_2/h_2$. We summarize the relationship by
+Now consider interval $I_2=[t_1,t_2]$. Here both $H_1$ and $H_2$ are nonzero, so there are contributions to all the matrix elements $K_{11}$, $K_{12}=K_{21}$, $K_{22}$, to $M_{11}$, $M_{12}=M_{21}$, $M_{22}$, and to $f_1$ and $f_2$. Over $I_2$ we have $H_2'= h_2^{-1}$ and $H_{1}'= -h_2^{-1}$. Hence, the contributions to $K_{11}$ and $K_{22}$ in {eq}`femsystem` are $\overline{c}_2/h_2$, and the contributions to $K_{12}=K_{21}$ are $-\overline{c}_2/h_2$. We summarize the relationship by
 
 $$
   \frac{\overline{c}_k}{h_k}
@@ -291,7 +301,8 @@ The contribution from $I_n$ affects just $K_{n-1,n-1}$, $M_{n-1,n-1}$, and $f_{n
 
 ```{index} ! finite element method
 ```
-Each $I_k$ contributes to four elements of each matrix and two of the vector $\mathbf{f}$, except for $I_1$ and $I_n$, which each contribute to just one element of each matrix and $\mathbf{f}$. The spatially localized contributions to the matrices characterize a **finite element method** (FEM).  Putting together all of the contributions to {eq}`galerkinsystemlinalg` to form the complete algebraic system is often referred to as the *assembly* process. 
+
+Each $I_k$ contributes to four elements of each matrix and two of the vector $\mathbf{f}$, except for $I_1$ and $I_n$, which each contribute to just one element of each matrix and $\mathbf{f}$. The spatially localized contributions to the matrices characterize a **finite element method** (FEM).  Putting together all the contributions to {eq}`galerkinsystemlinalg` to form the complete algebraic system is often referred to as the *assembly* process.
 
 ## Implementation and convergence
 
@@ -325,15 +336,17 @@ Each $I_k$ contributes to four elements of each matrix and two of the vector $\m
 :label: demo-galerkin-fem
 We solve the equation
 
-$$
+```{math}
+:numbered: false
   -(x^2u')' + 4 y = \sin(\pi x), \qquad u(0)=u(1)=0,
-$$
+```
 
 in which
 
-$$
-  c(x) = x^2, \qquad s(x) = 4, \qquad f(x)=\sin(\pi x).
-$$
+```{math}
+:numbered: false
+c(x) = x^2, \qquad s(x) = 4, \qquad f(x)=\sin(\pi x).
+```
 
 `````{tab-set}
 ````{tab-item} Julia
@@ -357,11 +370,10 @@ $$
 
 ::::
 
-
 ```{index} order of accuracy; of the finite element method
 ```
 
-Because piecewise linear interpolation on a uniform grid of size $h$ is $O(h^2)$ accurate, the accuracy of the FEM method based on linear interpolation as implemented here is similar to the second-order finite-difference method. 
+Because piecewise linear interpolation on a uniform grid of size $h$ is $O(h^2)$ accurate, the accuracy of the FEM method based on linear interpolation as implemented here is similar to the second-order finite-difference method.
 
 ## Exercises
 

@@ -3,6 +3,7 @@ numbering:
   enumerator: 10.1.%s
 ---
 (section-bvp-tpbvp)=
+
 # Two-point BVP
 
 The initial-value problems of [Chapter 6](@chapter-ivp) are characterized by an ordinary differential equation plus a value of the solution's state at one value of the independent variable (typically, time).
@@ -13,6 +14,7 @@ In a {term}`boundary-value problem`, the state is not entirely given at any poin
 
 ::::{prf:definition} Two-point boundary-value problem: TPBVP
 :label: definition-tpbvp
+
 ```{math}
 :label: tpbvp
 \begin{split}
@@ -24,23 +26,23 @@ g_2(u(b),u'(b)) &= 0.
 
 The functions $g_1$ and $g_2$ are called **boundary conditions**.
 
-This TPBVP is said to be **linear** if the dependence of $\phi$, $g_1$, and $g_2$ on the solution $u(x)$ is linear. Specifically, this means that 
+This TPBVP is said to be **linear** if the dependence of $\phi$, $g_1$, and $g_2$ on the solution $u(x)$ is linear. Specifically, this means that
 
 ```{math}
 \phi(x, u, u') = p(x)u' + q(x)u + r(x)
 ```
 
-for some coefficient functions $p$, $q$, and $r$, and 
+for some coefficient functions $p$, $q$, and $r$, and
 
 ```{math}
 g_i(u, u') = \alpha_i u + \beta_i u' - \gamma_i, \quad i=1,2,
 ```
 
-for some constants $\alpha_i$, $\beta_i$, and $\gamma_i$. 
+for some constants $\alpha_i$, $\beta_i$, and $\gamma_i$.
 ::::
 
 :::{note}
-Often, the domain of $x$ in {eq}`tpbvp` is not explicitly stated but just implied by the appearances of $a$ and $b$ in $g_1$ and $g_2$. 
+Often, the domain of $x$ in {eq}`tpbvp` is not explicitly stated but just implied by the appearances of $a$ and $b$ in $g_1$ and $g_2$.
 :::
 
 An IVP for the same ODE as in {eq}`tpbvp` would specify values for both $u(a)$ and $u'(a)$. Although this may look like a minor difference, the characters of IVPs and BVPs are substantially different. In a typical IVP, in which the independent variable is often time, the initial value determines everything about the future course of the solution. In a TPBVP, however, complete information is not given at any one location in the domain, and there may be more than one way (or no way) to satisfy the boundary conditions.
@@ -67,9 +69,9 @@ When $\gamma=0$ in the above, it is a {term}`homogeneous boundary condition`.
 :label: example-tpbvp-pendulum
 An ideal pendulum of length $L$ satisfies the ODE $\theta'' + \frac{g}{L}\sin \theta = 0$, where $\theta(t)$ is the angle of the pendulum's rod from straight downward, and $g$ is gravitational acceleration.
 
-If we pull the pendulum bob 1 radian and release it from rest, then we have an IVP with the initial condition $\theta(0)=1$, $\theta'(0)=0$. Everything about the future trajectory of the pendulum is completely determined by that condition. But if instead we want to know how far to pull up the pendulum bob initially so that it is in the downward position 2 seconds later, then we have the Neumann boundary condition $\theta'(0)=0$ and the Dirichlet boundary condition $\theta(2)=0$. 
+If we pull the pendulum bob 1 radian and release it from rest, then we have an IVP with the initial condition $\theta(0)=1$, $\theta'(0)=0$. Everything about the future trajectory of the pendulum is completely determined by that condition. But if instead we want to know how far to pull up the pendulum bob initially so that it is in the downward position 2 seconds later, then we have the Neumann boundary condition $\theta'(0)=0$ and the Dirichlet boundary condition $\theta(2)=0$.
 
-Clearly, one solution is $\theta(0)=0$, and the pendulum never moves! But there is also an initial deflection such that $\theta(2)=0$ momentarily as the pendulum finishes its first downward swing. There could be still more solutions in which the pendulum completes one or more half-periods before passing again through the downward position at just the right moment. 
+Clearly, one solution is $\theta(0)=0$, and the pendulum never moves! But there is also an initial deflection such that $\theta(2)=0$ momentarily as the pendulum finishes its first downward swing. There could be still more solutions in which the pendulum completes one or more half-periods before passing again through the downward position at just the right moment.
 ::::
 
 While time can be the independent variable in a TPBVP, as in {numref}`Example {number} <example-tpbvp-pendulum>`, it is often space, which has no intrinsic direction of information flow.
@@ -133,7 +135,7 @@ This has the form $\mathbf{y}' = \mathbf{f}(r,\mathbf{y})$. In the original vari
 
 ::::
 
-Characterizing the conditioning of a TPBVP theoretically is difficult. There are some numerical tools going by the name  *sensitivity analysis*, but the details are too lengthy for us to explore here.
+Characterizing the conditioning of a TPBVP theoretically is difficult. There are some numerical tools going by the name *sensitivity analysis*, but the details are too lengthy for us to explore here.
 
 ## Exercises
 
@@ -157,7 +159,6 @@ Characterizing the conditioning of a TPBVP theoretically is difficult. There are
 
 ```{index} Hermite equation, Laguerre equation, Chebyshev equation, Legendre equation
 ```
-
 
 ``````{exercise}
 :label: problem-tpbvp-verify

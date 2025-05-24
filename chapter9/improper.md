@@ -3,6 +3,7 @@ numbering:
   enumerator: 9.7.%s
 ---
 (section-globalapprox-improper)=
+
 # Improper integrals
 
 ```{index} improper integral
@@ -29,18 +30,18 @@ $$
   \int_{-\infty}^\infty \frac{1}{1+x^{2}}\, dx = \pi.
 $$
 
-In this case we can easily estimate the effect of truncation on the result. For large $M$, 
+In this case we can easily estimate the effect of truncation on the result. For large $M$,
 
 $$
 \int_M^\infty f\,dx \approx \int_M^\infty x^{-2}\,dx =  M^{-1}.
 $$
 
-The same estimate applies to the integral over $(-\infty,-M)$. To get eight digits of accuracy, for instance, we need to truncate with $M > 2 \times 10^8$. 
+The same estimate applies to the integral over $(-\infty,-M)$. To get eight digits of accuracy, for instance, we need to truncate with $M > 2 \times 10^8$.
 ::::
 
 ## Double exponential transformation
 
-In order to do better than direct truncation, we want to encourage the function to decay faster. In practice this means a change of variable, $x(t)$. If $|x(t)|$ grows rapidly as $|t| \to \infty$, then $f(x(t))$ will decay more rapidly in $t$ than in $x$. 
+In order to do better than direct truncation, we want to encourage the function to decay faster. In practice this means a change of variable, $x(t)$. If $|x(t)|$ grows rapidly as $|t| \to \infty$, then $f(x(t))$ will decay more rapidly in $t$ than in $x$.
 
 One way to accomplish this feat is to use
 
@@ -64,6 +65,7 @@ $$
 
 ```{index} ! double exponential transformation
 ```
+
 Thus, {eq}`DEquadtrans1` is often referred to as a **double exponential** transformation.
 
 By the chain rule,
@@ -80,7 +82,7 @@ The exponential terms introduced by the chain rule grow double exponentially, bu
 
 ::::{prf:example} Decay by transformation
 :label: demo-improper-decay
-Consider again $f(x)=1/(1+x^2)$ from {numref}`Example %s <example-improper-slowdecay>`, with $x(t)$ given by {eq}`DEquadtrans1`. As $t\to\infty$, 
+Consider again $f(x)=1/(1+x^2)$ from {numref}`Example %s <example-improper-slowdecay>`, with $x(t)$ given by {eq}`DEquadtrans1`. As $t\to\infty$,
 
 $$
 f(x(t)) \approx x^{-2} \approx 4 \exp\left( -e^{t} \right).
@@ -89,9 +91,9 @@ $$
 The chain rule terms in {eq}`DEquadchain1` become
 
 $$
-\cosh\left( \sinh t \right)  \cosh t 
+\cosh\left( \sinh t \right)  \cosh t
 \approx \frac{1}{2} \exp\left( \frac{1}{2} e^t  \right)  \cdot \frac{1}{2} e^t,
-$$ 
+$$
 
 yielding a product that is roughly
 
@@ -153,7 +155,6 @@ The total integrand in {eq}`DEquadchain1` therefore has double exponential decay
 :label: demo-improper-intinf
 We compare direct truncation in $x$ to the double exponential method of {numref}`Function {number} <function-intinf>` for $f(x)=1/(1+x^2)$.
 
-
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
@@ -178,9 +179,9 @@ We compare direct truncation in $x$ to the double exponential method of {numref}
 
 ## Integrand singularity
 
-If $f$ asymptotically approaches infinity as $x$ approaches an integration endpoint, its exact integral may or may not be finite. If $f$ is integrable, then the part of the integration interval near the singularity needs to be more finely resolved than the rest of it. 
+If $f$ asymptotically approaches infinity as $x$ approaches an integration endpoint, its exact integral may or may not be finite. If $f$ is integrable, then the part of the integration interval near the singularity needs to be more finely resolved than the rest of it.
 
-Let's consider 
+Let's consider
 
 ```{math}
 :label: intsing
@@ -245,6 +246,7 @@ $$
 $$
 
 In order to use {numref}`Function {number} <function-intadapt>`, we must truncate on the left to avoid evaluation at zero, where $f$ is infinite. Since the integral from $0$ to $\delta$ is $20\sqrt{\delta}$, we use $\delta=(\epsilon/20)^2$ to achieve error tolerance $\epsilon$.
+
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia

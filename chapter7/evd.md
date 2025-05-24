@@ -3,6 +3,7 @@ numbering:
   enumerator: 7.2.%s
 ---
 (section-matrixanaly-evd)=
+
 # Eigenvalue decomposition
 
 To this point we have dealt frequently with the solution of the linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$. Alongside this problem in its importance to linear algebra is the eigenvalue problem.
@@ -12,7 +13,7 @@ To this point we have dealt frequently with the solution of the linear system $\
 
 ::::{prf:definition} Eigenvalue and eigenvector
 :label: definition-eigenvalue
-Given a square matrix $\mathbf{A}$, if 
+Given a square matrix $\mathbf{A}$, if
 
 ```{math}
 :label: eigdef
@@ -24,7 +25,7 @@ for a scalar $\lambda$ and a nonzero vector $\mathbf{x}$, then $\lambda$ is an {
 
 ## Complex matrices
 
-A matrix with real entries can have complex eigenvalues. Therefore we assume all matrices, vectors, and scalars may be complex in what follows. Recall that a complex number can be represented as $a+i b$ for real $a$ and $b$ and where $i^2=-1$. The **complex conjugate** of $x=a+i b$ is denoted $\bar{x}$ and is given by $\bar{x}=a-i b$. The **magnitude** or *modulus* of a complex number $z$ is 
+A matrix with real entries can have complex eigenvalues. Therefore, we assume all matrices, vectors, and scalars may be complex in what follows. Recall that a complex number can be represented as $a+i b$ for real $a$ and $b$ and where $i^2=-1$. The **complex conjugate** of $x=a+i b$ is denoted $\bar{x}$ and is given by $\bar{x}=a-i b$. The **magnitude** or *modulus* of a complex number $z$ is
 
 $$
 |z| = \sqrt{z\cdot \bar{z}}.
@@ -39,20 +40,20 @@ The {term}`adjoint` or *hermitian* of a matrix $\mathbf{A}$ is denoted $\mathbf{
 
 The **2-norm** of a complex vector $\mathbf{u}$ is $\sqrt{\mathbf{u}^*\mathbf{u}}$. Other vector norms, and all matrix norms, are as defined in {numref}`section-linsys-norms`.
 
-Complex vectors $\mathbf{u}$ and $\mathbf{v}$ of the same dimension are {term}`orthogonal vectors` if $\mathbf{u}^*\mathbf{v}=0$ and are {term}`Orthonormal vectors` if both also have unit 2-norm. A {term}`unitary matrix`  is a square matrix with orthonormal columns, or, equivalently, a matrix satisfying $\mathbf{A}^* = \mathbf{A}^{-1}$.
+Complex vectors $\mathbf{u}$ and $\mathbf{v}$ of the same dimension are {term}`orthogonal vectors` if $\mathbf{u}^*\mathbf{v}=0$ and are {term}`Orthonormal vectors` if both also have unit 2-norm. A {term}`unitary matrix` is a square matrix with orthonormal columns, or, equivalently, a matrix satisfying $\mathbf{A}^* = \mathbf{A}^{-1}$.
 ::::
 
-For the most part, "adjoint" replaces "transpose," "hermitian" replaces "symmetric," and "unitary matrix" replaces "orthogonal matrix" when applying our previous results to complex matrices. 
+For the most part, "adjoint" replaces "transpose," "hermitian" replaces "symmetric," and "unitary matrix" replaces "orthogonal matrix" when applying our previous results to complex matrices.
 
 ## Eigenvalue decomposition
 
 ```{index} ! characteristic polynomial
 ```
 
-An easy rewrite of the eigenvalue definition {eq}`eigdef` is that $(\mathbf{A} - \lambda\mathbf{I}) \mathbf{x} = \boldsymbol{0}$. Hence $(\mathbf{A} - \lambda\mathbf{I})$ is singular, and it therefore must have a zero determinant. This is the property most often used to compute eigenvalues by hand.
+An easy rewrite of the eigenvalue definition {eq}`eigdef` is that $(\mathbf{A} - \lambda\mathbf{I}) \mathbf{x} = \boldsymbol{0}$. Hence, $(\mathbf{A} - \lambda\mathbf{I})$ is singular, and it therefore must have a zero determinant. This is the property most often used to compute eigenvalues by hand.
 
 ::::{prf:example}
-Given 
+Given
 
 ```{math}
 \mathbf{A} = \begin{bmatrix} 1 & 1 \\ 4 & 1 \end{bmatrix},
@@ -68,10 +69,10 @@ we compute
 = (1-\lambda)^2 - 4 = \lambda^2-2\lambda-3.
 ```
 
-The eigenvalues are the roots of this quadratic, $\lambda_1=3$ and $\lambda_2=-1$. 
+The eigenvalues are the roots of this quadratic, $\lambda_1=3$ and $\lambda_2=-1$.
 ::::
 
-The determinant $\det(\mathbf{A} - \lambda \mathbf{I})$ is called the **characteristic polynomial**. Its roots are the eigenvalues, so we know that an $n\times n$ matrix has $n$ eigenvalues, counting algebraic multiplicity. 
+The determinant $\det(\mathbf{A} - \lambda \mathbf{I})$ is called the **characteristic polynomial**. Its roots are the eigenvalues, so we know that an $n\times n$ matrix has $n$ eigenvalues, counting algebraic multiplicity.
 
 Suppose that $\mathbf{A}\mathbf{v}_k=\lambda_k\mathbf{v}_k$ for $k=1,\ldots,n$. We can summarize these as
 
@@ -150,7 +151,7 @@ There is a common circumstance in which we can guarantee an EVD exists. The proo
 If the $n\times n$ matrix $\mathbf{A}$ has $n$ distinct eigenvalues, then $\mathbf{A}$ is diagonalizable.
 ````
 
-::::{prf:example}  Eigenvalues and eigenvectors 
+::::{prf:example}  Eigenvalues and eigenvectors
 :label: demo-evd-eigen
 
 `````{tab-set}
@@ -180,14 +181,14 @@ If the $n\times n$ matrix $\mathbf{A}$ has $n$ distinct eigenvalues, then $\math
 ```{index} ! similarity transformation
 ```
 
-The particular relationship between matrices $\mathbf{A}$ and $\mathbf{D}$ in {eq}`evdecomp` is important. 
+The particular relationship between matrices $\mathbf{A}$ and $\mathbf{D}$ in {eq}`evdecomp` is important.
 
 :::{prf:definition} Similar matrices
 :label: definition-similar
 If $\mathbf{S}$ is any nonsingular matrix, we say that $\mathbf{B}=\mathbf{S}\mathbf{A}\mathbf{S}^{-1}$ is a {term}`similarity transformation` of $\mathbf{A}$, and we say that $\mathbf{A}$ and $\mathbf{B}$ are {term}`similar matrices`.
 :::
 
-Hence, an EVD transforms $\mathbf{A}$ to a similar matrix that happens to be diagonal, which is as simple as a matrix gets. 
+Hence, an EVD transforms $\mathbf{A}$ to a similar matrix that happens to be diagonal, which is as simple as a matrix gets.
 
 One way to interpret similarity is via change of basis (see @obs-basis):
 
@@ -196,7 +197,7 @@ One way to interpret similarity is via change of basis (see @obs-basis):
 = \underbrace{\mathbf{S} \underbrace{ \Bigl(\mathbf{A} \underbrace{\left( \mathbf{S}^{-1} \mathbf{x}\right)}_{\text{into $S$-basis}}\Bigr)}_{\text{apply $\mathbf{A}$}}}_{\text{out of $S$-basis}} .
 ```
 
-That is, $\mathbf{A}$ and $\mathbf{B}$ represent the same linear transformation in different bases. 
+That is, $\mathbf{A}$ and $\mathbf{B}$ represent the same linear transformation in different bases.
 
 A similarity transformation does not change eigenvalues, a fact that is typically proved in elementary linear algebra texts:
 
@@ -210,7 +211,7 @@ The EVD is especially useful for matrix powers. To begin,
 \mathbf{A}^2=(\mathbf{V}\mathbf{D}\mathbf{V}^{-1})(\mathbf{V}\mathbf{D}\mathbf{V}^{-1})=\mathbf{V}\mathbf{D}(\mathbf{V}^{-1}\mathbf{V})\mathbf{D}\mathbf{V}^{-1}=\mathbf{V}\mathbf{D}^2\mathbf{V}^{-1}.
 ```
 
-Multiplying this result by $\mathbf{A}$ repeatedly, we find that 
+Multiplying this result by $\mathbf{A}$ repeatedly, we find that
 
 ```{math}
 :label: evdpower
@@ -226,7 +227,7 @@ Furthermore, given a polynomial $p(z)=c_0+c_1 z + \cdots + c_m z^m$, we can appl
 p(\mathbf{A}) = c_0\mathbf{I}  +c_1 \mathbf{A} + \cdots + c_m \mathbf{A}^m.
 ```
 
-Applying {eq}`evdpower` leads to 
+Applying {eq}`evdpower` leads to
 
 ```{math}
 :label: matrixpolyevd
@@ -242,7 +243,6 @@ p(\mathbf{A}) & = c_0\mathbf{V}\mathbf{V}^{-1}  +c_1 \mathbf{V}\mathbf{D}\mathbf
 Finally, given the convergence of Taylor polynomials to common functions, we are able to apply a function $f$ to a square matrix by replacing $p$ with $f$ in {eq}`matrixpolyevd`.
 
 ## Conditioning of eigenvalues
-
 
 ```{index} ! eigenvalue; conditioning of, condition number; of eigenvalues
 ```
@@ -303,7 +303,7 @@ As we will see in {numref}`section-matrixanaly-symm-eig`, hermitian and real sym
 
 ## Computing the EVD
 
-Roots of the characteristic polynomial are not used in numerical methods for finding eigenvalues.[^eigpoly] Practical algorithms for computing the EVD go beyond the scope of this book. The essence of the matter is the connection to matrix powers indicated in {eq}`evdpower`. (We will see much more about the importance of matrix powers in Chapter 8.) 
+Roots of the characteristic polynomial are not used in numerical methods for finding eigenvalues.[^eigpoly] Practical algorithms for computing the EVD go beyond the scope of this book. The essence of the matter is the connection to matrix powers indicated in {eq}`evdpower`. (We will see much more about the importance of matrix powers in Chapter 8.)
 
 If the eigenvalues have different complex magnitudes, then as $k\to\infty$ the entries on the diagonal of $\mathbf{D}^k$ become increasingly well separated and easy to pick out. It turns out that there is an astonishingly easy and elegant way to accomplish this separation without explicitly computing the matrix powers.
 
@@ -333,7 +333,6 @@ If the eigenvalues have different complex magnitudes, then as $k\to\infty$ the e
 `````
 
 ::::
-
 
 ```{index} ! Francis QR iteration
 ```

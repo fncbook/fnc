@@ -77,7 +77,6 @@ where $\hat{\mathbf{S}}$ has those same values of $\sigma_i$ replaced by zero. B
 
 If the singular values of $\mathbf{A}$ decrease sufficiently rapidly, then $\mathbf{A}_{k}$ may capture the most significant behavior of the matrix for a reasonably small value of $k$.
 
-
 ```{index} image (as a matrix)
 ```
 
@@ -117,7 +116,7 @@ One useful way to quantify the decay in the singular values is to compute
 s_k = \sum_{i=1}^k \sigma_i^2, \quad \tau_k = \frac{s_k}{s_r}, \quad k=1,\ldots,r.
 ```
 
-Clearly $0\le \tau_k \le 1$ and $\tau_k$ is non-decreasing as a function of $k$. We can think of $\tau_k$ as the fraction of energy (or in statistical terms, variance) contained in the singular values up to and including the $k$th.[^expvar] 
+Clearly $0\le \tau_k \le 1$ and $\tau_k$ is non-decreasing as a function of $k$. We can think of $\tau_k$ as the fraction of energy (or in statistical terms, variance) contained in the singular values up to and including the $k$th.[^expvar]
 
 [^expvar]: In statistics this quantity may be interpreted as the fraction of explained variance.
 

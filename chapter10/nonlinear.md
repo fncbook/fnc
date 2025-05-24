@@ -3,6 +3,7 @@ numbering:
   enumerator: 10.5.%s
 ---
 (section-bvp-nonlinear)=
+
 # Nonlinearity and boundary conditions
 
 ```{index} Newton's method
@@ -21,12 +22,12 @@ g_2(u(b),u'(b)) &= 0.
 \end{split}
 ```
 
-As in {numref}`section-bvp-linear`, the function $u(x)$ is replaced by a vector $\mathbf{u}$ of its approximated values at nodes $x_0,x_1,\ldots,x_n$ (see Equation {eq}`bvpsolndisc`). We define derivatives of the sampled function as in {eq}`bvpD1` and {eq}`bvpD2`, using suitable differentiation matrices $\mathbf{D}_x$ and $\mathbf{D}_{xx}$. 
+As in {numref}`section-bvp-linear`, the function $u(x)$ is replaced by a vector $\mathbf{u}$ of its approximated values at nodes $x_0,x_1,\ldots,x_n$ (see Equation {eq}`bvpsolndisc`). We define derivatives of the sampled function as in {eq}`bvpD1` and {eq}`bvpD2`, using suitable differentiation matrices $\mathbf{D}_x$ and $\mathbf{D}_{xx}$.
 
 The collocation equations, ignoring boundary conditions for now, are
 
 $$
-	\mathbf{D}_{xx} \mathbf{u} - \mathbf{r}(\mathbf{u}) = \boldsymbol{0},
+ \mathbf{D}_{xx} \mathbf{u} - \mathbf{r}(\mathbf{u}) = \boldsymbol{0},
 $$
 
 where
@@ -68,28 +69,31 @@ $$
 $$
 
 Suppose $n=3$ for an equispaced grid, so that $h=\frac{1}{2}$, $x_0=0$, $x_1=\frac{1}{2}$, $x_2=1$, and $x_3=\frac{3}{2}$. There are four unknowns. We compute
+
+```{math}
+:numbered: false
 \begin{gather*}
   \mathbf{D}_{xx} = \frac{1}{1/4}
   \begin{bmatrix}
-    2    & -5   & 4   & -1    \\ 
+    2    & -5   & 4   & -1    \\
     1    & -2   & 1   & 0     \\
-    0    & 1    & -2  & 1     \\ 
+    0    & 1    & -2  & 1     \\
    -1    &  4   &  -5 & 2
   \end{bmatrix}, \quad
   \mathbf{D}_x = \frac{1}{1}
   \begin{bmatrix}
     -3 & 4 & -1 & 0         \\
     -1 & 0  & 1 & 0       \\
-    0  & -1 & 0  & 1     \\ 
+    0  & -1 & 0  & 1     \\
     0 & 1 & -4 & 3
-  \end{bmatrix},	
-  \\[2mm]
+  \end{bmatrix},
+  \\[3mm]
   \mathbf{E} \mathbf{r}(\mathbf{u}) =
   \begin{bmatrix}
     \sin\left(\frac{u_1}{2}\right) - \exp\left(\frac{u_2-u_0}{2}\right)      \\[1mm]
-    \sin(u_2) - \exp\left( u_3-u_1 \right) 
+    \sin(u_2) - \exp\left( u_3-u_1 \right)
   \end{bmatrix},
-  \\[2mm]
+  \\[3mm]
   \mathbf{f}(\mathbf{u}) =
   \begin{bmatrix}
     (4u_0 -8u_1 + 4u_2) - \sin\left(\frac{u_1}{2}\right) + \exp\left(\frac{u_2-u_0}{2}\right) \\[1mm]
@@ -97,7 +101,9 @@ Suppose $n=3$ for an equispaced grid, so that $h=\frac{1}{2}$, $x_0=0$, $x_1=\fr
     u_0 + 2                                             \\[1mm]
     (u_1 - 4u_2 + 3u_3) - 1
   \end{bmatrix}.
-\end{gather*}		
+\end{gather*} 
+```
+
 ::::
 
 ## Implementation
@@ -128,7 +134,6 @@ Our implementation using second-order finite differences is {numref}`Function {n
 `````
 ``````
 
-
 In order to solve a particular problem, we must write a function that computes $\phi$ for vector-valued inputs $\mathbf{x}$, $\mathbf{u}$, and $\mathbf{u}'$, and functions for the boundary conditions. We also have to supply `init`, which is an estimate of the solution used to initialize the quasi-Newton iteration. Since this argument is a vector of length $n+1$, it sets the value of $n$ in the discretization.
 
 ::::{prf:example} BVP for a nonlinear pendulum
@@ -158,7 +163,7 @@ Suppose a damped pendulum satisfies the nonlinear equation $\theta'' + 0.05\thet
 
 ::::
 
-The initial solution estimate can strongly influence how quickly a solution is found, or whether the quasi-Newton iteration converges at all. In situations where multiple solutions exist, the initialization can determine which is found. 
+The initial solution estimate can strongly influence how quickly a solution is found, or whether the quasi-Newton iteration converges at all. In situations where multiple solutions exist, the initialization can determine which is found.
 
 ::::{prf:example} BVP for a nonlinear MEMS device
 :label: demo-nonlinear-mems
@@ -166,7 +171,7 @@ We look for a solution to the parameterized membrane deflection problem from {nu
 
 $$
 w''+ \frac{1}{r}w'= \frac{\lambda}{w^2},\quad w'(0)=0,\; w(1)=1.
-$$ 
+$$
 
 `````{tab-set}
 ````{tab-item} Julia
@@ -196,7 +201,7 @@ $$
 ```
 
 Sometimes the best way to get a useful initialization is to use the solution of a related easier problem, a technique known as **parameter continuation**.  In this approach, one solves the problem at an easy parameter value, and gradually changes the parameter value to the desired value. After each change, the most recent solution is used to initialize the iteration at the new parameter value.
- 
+
 ```{index} Allen–Cahn equation
 ```
 

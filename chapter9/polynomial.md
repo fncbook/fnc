@@ -3,6 +3,7 @@ numbering:
   enumerator: 9.1.%s
 ---
 (section-globalapprox-polynomial)=
+
 # Polynomial interpolation
 
 ```{index} interpolation; by polynomials, Julia; indexing arrays
@@ -20,7 +21,7 @@ If the nodes $t_0,\dots,t_n$ are all distinct, there exists a unique polynomial 
 ::::{prf:proof}
 :enumerated: false
 
-We defer the existence part to Equation {eq}`lagrangeinterp`.  As for uniqueness, if $p$ and $q$ are two interpolating polynomials, then $p-q$ is a  polynomial of degree at most $n$ that is zero at the $n+1$ points  $t_0,\dots,t_n$. By the Fundamental Theorem of Algebra, which states that a $k$th degree polynomial has no more than $k$ roots, we conclude that $p-q\equiv 0$, so $p=q$.
+We defer the existence part to Equation {eq}`lagrangeinterp`.  As for uniqueness, if $p$ and $q$ are two interpolating polynomials, then $p-q$ is a polynomial of degree at most $n$ that is zero at the $n+1$ points $t_0,\dots,t_n$. By the Fundamental Theorem of Algebra, which states that a $k$th degree polynomial has no more than $k$ roots, we conclude that $p-q\equiv 0$, so $p=q$.
 ::::
 
 ## Lagrange formula
@@ -28,7 +29,7 @@ We defer the existence part to Equation {eq}`lagrangeinterp`.  As for uniqueness
 ```{index} cardinal function
 ```
 
-In our earlier encounters with polynomial interpolation, we found the interpolant by solving a linear system of equations with a Vandermonde matrix. The first step was to express the polynomial in the natural monomial basis $1,x,x^2,\ldots$. However, as we saw in {numref}`section-localapprox-pwlin`, no basis is more convenient than a *cardinal basis*, in which each member is one at a single node and zero at all of the other nodes. 
+In our earlier encounters with polynomial interpolation, we found the interpolant by solving a linear system of equations with a Vandermonde matrix. The first step was to express the polynomial in the natural monomial basis $1,x,x^2,\ldots$. However, as we saw in {numref}`section-localapprox-pwlin`, no basis is more convenient than a *cardinal basis*, in which each member is one at a single node and zero at all the other nodes.
 
 It is surprisingly straightforward to construct a cardinal basis for global polynomial interpolation. By definition, each member $\ell_{k}$ of the basis, for $k=0,\ldots,n$, is an $n$th degree polynomial satisfying the cardinality conditions
 
@@ -46,8 +47,7 @@ $$
 c(x-r_1)(x-r_2)\dots(x-r_n) = c\prod_{k=1}^n(x-r_k),
 $$
 
-where $r_1,\dots,r_n$ are the roots of the polynomial and $c$ is a constant. The conditions {eq}`lagrangecond` give all $n$ roots of $\ell_{k}$, and the normalization $\ell_{k}(t_k)=1$ tells us how to find $c$. 
-
+where $r_1,\dots,r_n$ are the roots of the polynomial and $c$ is a constant. The conditions {eq}`lagrangecond` give all $n$ roots of $\ell_{k}$, and the normalization $\ell_{k}(t_k)=1$ tells us how to find $c$.
 
 ```{index} ! Lagrange polynomial
 ```
@@ -105,6 +105,7 @@ Given points $(t_k,y_k)$ for $k=0,\ldots,n$ with all the $t_k$ distinct, the uni
 :label: lagrangeinterp
 p(x) = \sum_{k=0}^n y_k \ell_k(x).
 ```
+
 ::::
 
 At this point we can say that we have completed the proof of @theorem-polyinterp.
@@ -113,17 +114,22 @@ At this point we can say that we have completed the proof of @theorem-polyinterp
 :label: example-ClassicalLagrange
 We construct the Lagrange interpolating polynomials of degrees $n=1$ and 2 to interpolate samples of $f(x) = \tan (x)$.  For $n=1$, we use $t_0= 0$ and $t_1 = \pi/3$. The Lagrange formula then gives
 
+```{math}
+:numbered: false
 \begin{align*}
   P_1(x) & = y_0 \ell_0(x)  +  y_1 \ell_1(x) \\
       & = y_0 \frac{x-t_1}{t_0-t_1} + y_1 \frac{x-t_0}{t_1-t_0} \\
       & = 0 \cdot \frac{x-\frac{\pi}{3}}{0-\frac{\pi}{3}} + \sqrt{3} \cdot \frac{x-0}{\frac{\pi}{3}-0} \\
       & = \frac{3 \sqrt{3}}{\pi} x.
 \end{align*}
+```
 
 This is the unique linear function passing through $(0,0)$ and $(\pi/3,\sqrt{3})$.
 
 For $n=2$, we use $t_0= 0$, $_1 = \pi/6$ and $t_2 = \pi/3$. We now have
 
+```{math}
+:numbered: false
 \begin{align*}
   P_2(x) & = y_0 \ell_0(x) +  y_1 \ell_1(x) +  y_2 \ell_2(x) \\
     & = y_0 \frac{(x-t_1)(x-t_2)}{(t_0-t_1)(t_0-t_2)}  +
@@ -136,19 +142,23 @@ For $n=2$, we use $t_0= 0$, $_1 = \pi/6$ and $t_2 = \pi/3$. We now have
       {\left(\frac{\pi}{3}-0\right)\left(\frac{\pi}{3}-\frac{\pi}{6}\right)}
            = \frac{6\sqrt{3}}{\pi^2}x^2 + \frac{\sqrt{3}}{\pi} x.
 \end{align*}
+```
+
 ::::
 
 ## Error formula
 
-In addition to existence, uniqueness,  and the constructive Lagrange formula, we have a useful formula for the error in a polynomial interpolant when the data are samples of a smooth function. We will refer to the following definition.
+In addition to existence, uniqueness, and the constructive Lagrange formula, we have a useful formula for the error in a polynomial interpolant when the data are samples of a smooth function. We will refer to the following definition.
 
 ::::{prf:definition} Error indicator function
 :label: definition-polynomial-indicator
 The **error indicator function** for a set of distinct nodes $t_0,\ldots,t_n$ is
+
 ```{math}
 :label: lagrange-phi
 \Phi(x) = \prod_{i=0}^n (x-t_i).
 ```
+
 ::::
 
 ::::{prf:theorem} Polynomial interpolation error
@@ -168,18 +178,21 @@ with $\Phi$ given in {eq}`lagrange-phi`.
 
 If $x=t_i$ for some $i$, the statement of the theorem is trivially true. Otherwise, we define a new function $g(s)$ by
   
-$$
+```{math}
 g_x(s) = \Phi(s)[f(x)-p(x)] - \Phi(x)[f(s)-p(s)].
-$$
+```
 
 Note that $x$ is now arbitrary but fixed. Clearly $g_x(t_i)=0$ for each $i=0,\dots,n$, because both $\Phi$ and the error $f-p$ have that property. Also, $g_x(x)=0$. So $g_x$ has at least $n+2$ zeros in $[a,b]$. This is possible only if $g_x$ has at least $n+1$ local minima in $(a,b)$; i.e., $g_x'$ has at least $n+1$ zeros. But that implies that $g_x''$ must have at least $n$ zeros, etc. Eventually we conclude that $g_x^{(n+1)}$ has at least one zero in $(a,b)$. Let $\xi(x)$ be such a zero.
 
-Observe that $\Phi$ is a monic polynomial (i.e., its leading coefficient is 1) of degree $n+1$. Hence $\Phi^{(n+1)}(t)=(n+1)!$. Since $p$ has degree at most $n$, $p^{(n+1)}=0$. Finally, we write
+Observe that $\Phi$ is a monic polynomial (i.e., its leading coefficient is 1) of degree $n+1$. Hence, $\Phi^{(n+1)}(t)=(n+1)!$. Since $p$ has degree at most $n$, $p^{(n+1)}=0$. Finally, we write
   
+```{math}
+:numbered: false
 \begin{align*}
 0 = g_x^{(n+1)}(\xi) &= \Phi^{(n+1)}(\xi)[f(x)-p(x)] - \Phi(x)[f^{(n+1)}(\xi)-p^{(n+1)}(\xi)]\\
 &= (n+1)!\,[f(x)-p(x)] - \Phi(x)f^{(n+1)}(\xi),
 \end{align*}
+```
 
 which is a restatement of {eq}`interperror`.
 ::::
@@ -188,7 +201,7 @@ Usually $f^{(n+1)}$ and the function $\xi(x)$ are unknown. The importance of the
 
 ::::{prf:example} Polynomial interpolation error
 :label: demo-polynomial-error
-Consider the problem of interpolating $\log(x)$ at nodes $1, 1.6, 1.9, 2.7, 3$. Then $n=4$ and $f^{(5)}(\xi) = 4!/\xi^5$. For $\xi\in[1, 3]$ we can say that $|f^{(5)}(\xi)| \le 4!$. Hence 
+Consider the problem of interpolating $\log(x)$ at nodes $1, 1.6, 1.9, 2.7, 3$. Then $n=4$ and $f^{(5)}(\xi) = 4!/\xi^5$. For $\xi\in[1, 3]$ we can say that $|f^{(5)}(\xi)| \le 4!$. Hence
 
 $$ |f(x)-p(x)| \le \frac{1}{5} \left| \Phi(x) \right|.$$
 
@@ -214,7 +227,7 @@ $$ |f(x)-p(x)| \le \frac{1}{5} \left| \Phi(x) \right|.$$
 
 ::::
 
-For equispaced nodes, @theorem-polyinterp has an immediate consequence. 
+For equispaced nodes, @theorem-polyinterp has an immediate consequence.
 
 ::::{prf:corollary}
 :label: theorem-polyequi

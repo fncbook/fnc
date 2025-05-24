@@ -1,4 +1,5 @@
 (section-krylov-next)=
+
 # Next steps
 
 The iterative solution of large linear systems is a vast and difficult subject. A broad yet detailed introduction to the subject, including classical topics such as Jacobi and Gauss–Seidel methods not mentioned in this chapter, is {cite}`saadIterativeMethods2003`. A more focused introduction to Krylov methods is given in {cite}`vandervorstIterativeKrylov2003`.

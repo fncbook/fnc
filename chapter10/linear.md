@@ -3,6 +3,7 @@ numbering:
   enumerator: 10.4.%s
 ---
 (section-bvp-linear)=
+
 # Collocation for linear problems
 
 Let us now devise a numerical method based on finite differences for the linear TPBVP
@@ -14,6 +15,7 @@ Let us now devise a numerical method based on finite differences for the linear 
 
 ```{index} finite differences; for boundary value problems
 ```
+
 The first step is to select nodes $x_0=a < x_1< \cdots < x_n=b$. For finite differences these will most likely be equally spaced, while for spectral differentiation, they will be Chebyshev points.
 
 Rather than solving for a function, we will solve for a vector of its approximate values at the nodes:
@@ -104,9 +106,9 @@ We have not yet incorporated the boundary conditions. Those take the form of the
 :label: rowdeletion
   \mathbf{E} =
   \begin{bmatrix}
-  	0      & 1      & 0      & \cdots & 0      \\
-  	\vdots &        & \ddots &        & \vdots \\
-  	0      & \cdots & 0      & 1      & 0
+   0      & 1      & 0      & \cdots & 0      \\
+   \vdots &        & \ddots &        & \vdots \\
+   0      & \cdots & 0      & 1      & 0
   \end{bmatrix}
   =
   \begin{bmatrix}
@@ -114,7 +116,7 @@ We have not yet incorporated the boundary conditions. Those take the form of the
   \end{bmatrix},
 ```
 
-where as always $\mathbf{e}_k$ is the $k$th column (here starting from $k=0$) of an identity matrix. The product $\mathbf{E} \mathbf{A}$ deletes the first and last rows of $\mathbf{A}$, leaving a matrix that is $(n-1)\times(n+1)$. Similarly, $\mathbf{E}\mathbf{r}$ deletes the first and last rows of $\mathbf{r}$.
+where, as always, $\mathbf{e}_k$ is the $k$th column (here starting from $k=0$) of an identity matrix. The product $\mathbf{E} \mathbf{A}$ deletes the first and last rows of $\mathbf{A}$, leaving a matrix that is $(n-1)\times(n+1)$. Similarly, $\mathbf{E}\mathbf{r}$ deletes the first and last rows of $\mathbf{r}$.
 
 Finally, we note that $\hat{u}(a)= \mathbf{e}_0^T\mathbf{u}$ and $\hat{u}(b)= \mathbf{e}_n^T\mathbf{u}$, so the linear system including both the ODE and the boundary condition collocations is
 
@@ -134,10 +136,10 @@ Finally, we note that $\hat{u}(a)= \mathbf{e}_0^T\mathbf{u}$ and $\hat{u}(b)= \m
    }_{\mathbf{b}}.
 ```
 
-We have arrived at an $(n+1)\times (n+1)$ linear system $\mathbf{A}\mathbf{u}=\mathbf{b}$, which we can solve for $\mathbf{u}$ using any of the methods we have investigated. 
+We have arrived at an $(n+1)\times (n+1)$ linear system $\mathbf{A}\mathbf{u}=\mathbf{b}$, which we can solve for $\mathbf{u}$ using any of the methods we have investigated.
 
 ::::{prf:example} Collocation for a linear BVP
-:label: example-linbvp 
+:label: example-linbvp
 
 Let's look at the discretization of the linear BVP
 
@@ -145,16 +147,16 @@ $$
 u'' = u - x u', \quad  u(0)=-2, \; u(2)=3,
 $$
 
-on an equispaced grid with $n=4$ points. This gives $h=(2-0)/4 = 1/2$. 
+on an equispaced grid with $n=4$ points. This gives $h=(2-0)/4 = 1/2$.
 
 Writing the ODE as $u'' + x u' - u = 0$, we identify $p(x)=x$, $q(x)=-1$, and $r(x)=0$. Hence,
 
 $$
 \mathbf{P} = \begin{bmatrix}
 0 & & & & \\ & 1/2 & & & \\ & & 1 & & \\ & & & 3/2 & \\ & & & & 2
-\end{bmatrix}, 
+\end{bmatrix},
 \quad
-\mathbf{Q} = -\mathbf{I}_5, 
+\mathbf{Q} = -\mathbf{I}_5,
 \quad
 \mathbf{r} = \begin{bmatrix}
 0 \\ 0 \\ 0 \\ 0 \\ 0
@@ -171,30 +173,30 @@ $$
 & 1  & -2     & 1      &          \\
       &        & 1      & -2 & 1 \\
       &     -1  & 4      & -5 & 2
-\end{bmatrix} \\ 
-& + \mathbf{P} \cdot 
-\frac{1}{1/2} \begin{bmatrix} 
+\end{bmatrix} \\
+& + \mathbf{P} \cdot
+\frac{1}{1/2} \begin{bmatrix}
 -3/2 & 2    & -1/2   &        &    \\  
--1/2 & 0    & 1/2    &        &   \\ 
+-1/2 & 0    & 1/2    &        &   \\
  & -1/2 & 0      & 1/2    &      \\
  & & -1/2 & 0      & 1/2      \\
 & & 1/2 & -2    & 3/2  
-\end{bmatrix} \\ 
-& + \mathbf{Q} \\ 
+\end{bmatrix} \\
+& + \mathbf{Q} \\
 & = \begin{bmatrix}
-7 & -20 & 16 & -4 & 0 \\ 7/2 & -9 & 9/2 & 0 & 0 \\ 0 & 3 & -9 & 5 & 0 \\ 
+7 & -20 & 16 & -4 & 0 \\ 7/2 & -9 & 9/2 & 0 & 0 \\ 0 & 3 & -9 & 5 & 0 \\
 0 & 0 & 5/2 & -9 & 11/2 \\ 0 & -4 & 18 & -28 & 13
 \end{bmatrix}.
 $$
 
-The system $\mathbf{L} \mathbf{u} = \mathbf{r}$ represents the discretized ODE. When we modify the system to include the boundary conditions, we arrive at 
+The system $\mathbf{L} \mathbf{u} = \mathbf{r}$ represents the discretized ODE. When we modify the system to include the boundary conditions, we arrive at
 
 $$
 \mathbf{A} = \begin{bmatrix}
 1 & 0 & 0 & 0 & 0 \\
-7/2 & -9 & 9/2 & 0 & 0 \\ 
-0 & 3 & -9 & 5 & 0 \\ 
-0 & 0 & 5/2 & -9 & 11/2 \\ 
+7/2 & -9 & 9/2 & 0 & 0 \\
+0 & 3 & -9 & 5 & 0 \\
+0 & 0 & 5/2 & -9 & 11/2 \\
 0 & 0 & 0 & 0 & 1
 \end{bmatrix}, \quad
 \mathbf{b} = \begin{bmatrix}
@@ -207,7 +209,7 @@ The system $\mathbf{A} \mathbf{u} = \mathbf{b}$ is the collocated BVP.
 
 ## Implementation
 
-Our implementation of linear collocation is {numref}`Function {number} <function-bvplin>`. It uses second-order finite differences but makes no attempt to exploit the sparsity of the matrices. It would be trivial to change the function to use spectral differentiation. 
+Our implementation of linear collocation is {numref}`Function {number} <function-bvplin>`. It uses second-order finite differences but makes no attempt to exploit the sparsity of the matrices. It would be trivial to change the function to use spectral differentiation.
 
 ``````{prf:algorithm} bvplin
 :label: function-bvplin
@@ -237,7 +239,7 @@ Our implementation of linear collocation is {numref}`Function {number} <function
 :label: demo-linear-solve
 We solve the linear BVP  
 
-$$ u'' - (\cos x) u' + (\sin x) u = 0, \quad u(0)=1, \; u\left(\frac{3\pi}{2}\right)=\frac{1}{e}. $$ 
+$$ u'' - (\cos x) u' + (\sin x) u = 0, \quad u(0)=1, \; u\left(\frac{3\pi}{2}\right)=\frac{1}{e}. $$
 
 Its exact solution is $u(x) = e^{\sin x}$.
 
@@ -309,10 +311,9 @@ If we write the solution $\mathbf{u}$ of Equation {eq}`fdlinbc` as the exact sol
 ```{index} stability; of collocation
 ```
 
-where $\boldsymbol{\tau}$ is the truncation error of the derivative discretizations (except at the boundary rows, where it is zero). It follows that $\|\mathbf{e}\|$ vanishes at the same rate as the truncation error if  $\| \mathbf{A}^{-1}\|$ is bounded above as $n\to \infty$. In the present context, this property is known as **stability**. Proving stability is too technical to walk through here, but stability is guaranteed under some reasonable conditions on the BVP.
+where $\boldsymbol{\tau}$ is the truncation error of the derivative discretizations (except at the boundary rows, where it is zero). It follows that $\|\mathbf{e}\|$ vanishes at the same rate as the truncation error if $\| \mathbf{A}^{-1}\|$ is bounded above as $n\to \infty$. In the present context, this property is known as **stability**. Proving stability is too technical to walk through here, but stability is guaranteed under some reasonable conditions on the BVP.
 
 ## Exercises
-
 
 ``````{exercise}
 :label: problem-linearbvp-fdlin1

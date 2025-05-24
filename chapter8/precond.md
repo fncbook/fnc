@@ -3,9 +3,10 @@ numbering:
   enumerator: 8.8.%s
 ---
 (section-krylov-precond)=
+
 # Preconditioning
 
-An important aspect of MINRES and CG (and, by extension, GMRES) is that the convergence of a Krylov method can be expected to deteriorate as the condition number of the matrix increases. Even moderately large condition numbers can make the convergence impractically slow. Therefore it's common for these methods to be used with a technique to reduce the relevant condition number.
+An important aspect of MINRES and CG (and, by extension, GMRES) is that the convergence of a Krylov method can be expected to deteriorate as the condition number of the matrix increases. Even moderately large condition numbers can make the convergence impractically slow. Therefore, it's common for these methods to be used with a technique to reduce the relevant condition number.
 
 ```{index} GMRES; preconditioning in, ! preconditioning
 ```
@@ -20,7 +21,7 @@ Given a linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, a {term}`preconditioner
 ```
 
 ::::
- 
+
 More specifically, {eq}`precond` is known as *left preconditioning*, which is the simplest and most common type.
 
 As usual, we do not want to actually compute $\mathbf{M}^{-1}$ for a given $\mathbf{M}$. Instead, we have a linear system with the matrix $\mathbf{M}^{-1}\mathbf{A}$. In a Krylov method, the operation "let $\mathbf{v}=\mathbf{A}\mathbf{u}$" becomes a two-step process:
@@ -31,12 +32,12 @@ As usual, we do not want to actually compute $\mathbf{M}^{-1}$ for a given $\mat
 ```{index} sparse matrix, LU factorization
 ```
 
-As an implementation detail, it is common to provide the Krylov solver with code that does step 2; if the matrix $\mathbf{M}$ is given, the default is to use sparse factorization. 
+As an implementation detail, it is common to provide the Krylov solver with code that does step 2; if the matrix $\mathbf{M}$ is given, the default is to use sparse factorization.
 
-There are competing objectives in the choice of $\mathbf{M}$. On one hand, we want $\mathbf{M}^{-1}\mathbf{A}\approx \mathbf{I}$ in some sense because that makes {eq}`precond` easy to solve by Krylov iteration. Hence $\mathbf{M}\approx \mathbf{A}$. On the other hand, we desire that solving the system $\mathbf{M}\mathbf{v}=\mathbf{y}$ be relatively fast. 
+There are competing objectives in the choice of $\mathbf{M}$. On one hand, we want $\mathbf{M}^{-1}\mathbf{A}\approx \mathbf{I}$ in some sense because that makes {eq}`precond` easy to solve by Krylov iteration. Hence, $\mathbf{M}\approx \mathbf{A}$. On the other hand, we desire that solving the system $\mathbf{M}\mathbf{v}=\mathbf{y}$ be relatively fast.
 
 :::{prf:observation}
-Good preconditioning is a matter of finding an easily inverted (i.e., quickly solvable) approximation of the original matrix. 
+Good preconditioning is a matter of finding an easily inverted (i.e., quickly solvable) approximation of the original matrix.
 :::
 
 ## Diagonal preconditioning
@@ -67,7 +68,6 @@ One of the simplest choices for the preconditioner $\mathbf{M}$ is a diagonal ma
 `````
 
 ::::
-
 
 ## Incomplete factorization
 
@@ -100,7 +100,6 @@ Another general-purpose technique is the **incomplete LU factorization**. Since 
 `````
 
 ::::
-
 
 In practice, good preconditioning is often as important, if not more important, than the specific choice of Krylov method. Effective preconditioning may require deep understanding of the underlying application, however, which limits our ability to go into further details. For instance, the linear system may be some approximation of a continuous mathematical model, and then $\mathbf{M}$ can be derived by using a cruder form of the approximation. Krylov methods offer a natural way to exploit these and other approximate inverses.
 

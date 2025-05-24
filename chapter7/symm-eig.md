@@ -3,12 +3,13 @@ numbering:
   enumerator: 7.4.%s
 ---
 (section-matrixanaly-symm-eig)=
+
 # Symmetry and definiteness
 
 ```{index} symmetric matrix
 ```
 
-As we saw in {numref}`section-linsys-structure`, symmetry can simplify the LU factorization into the symmetric form $\mathbf{A}=\mathbf{L}\mathbf{D}\mathbf{L}^T$. Important specializations occur as well for the eigenvalue and singular value factorizations. In this section we stay with complex-valued matrices, so we are interested in the case when $\mathbf{A}^*=\mathbf{A}$, i.e., $\mathbf{A}$ is hermitian. However, we often loosely speak of *symmetry* to mean this property even in the complex case. All of the statements in this section easily specialize to the real case.
+As we saw in {numref}`section-linsys-structure`, symmetry can simplify the LU factorization into the symmetric form $\mathbf{A}=\mathbf{L}\mathbf{D}\mathbf{L}^T$. Important specializations occur as well for the eigenvalue and singular value factorizations. In this section we stay with complex-valued matrices, so we are interested in the case when $\mathbf{A}^*=\mathbf{A}$, i.e., $\mathbf{A}$ is hermitian. However, we often loosely speak of *symmetry* to mean this property even in the complex case. All the statements in this section easily specialize to the real case.
 
 ## Normality
 
@@ -31,7 +32,7 @@ Another way to state the result of this theorem is that a hermitian matrix has r
 The converse of {numref}`Theorem {number} <theorem-symm-eig-spectral>` is also true: every normal matrix with real eigenvalues is hermitian. This was illustrated in @demo-evd-bauerfike.
 :::
 
-For a hermitian matrix, the EVD 
+For a hermitian matrix, the EVD
 
 $$
 \mathbf{A}=\mathbf{V}\mathbf{D}\mathbf{V}^{-1}=\mathbf{V} \mathbf{D} \mathbf{V}^*
@@ -52,6 +53,7 @@ If $\mathbf{A}^*=\mathbf{A}$ and $\mathbf{A}=\mathbf{V}\mathbf{D}\mathbf{V}^{-1}
 
 is an SVD, where $|\mathbf{D}|$ is the elementwise absolute value and $\mathbf{T}$ is diagonal with $|T_{ii}|=1$ for all $i$. In particular, the absolute values of the eigenvalues of $\mathbf{A}$ are the singular values of $\mathbf{A}$.
 ````
+
 ::::{prf:proof}
 :enumerated: false
 
@@ -67,7 +69,7 @@ $$
 ```{index} ! Rayleigh quotient
 ```
 
-Recall that for a matrix $\mathbf{A}$ and compatible vector $\mathbf{x}$, the quadratic form $\mathbf{x}^* \mathbf{A} \mathbf{x}$ is a scalar. 
+Recall that for a matrix $\mathbf{A}$ and compatible vector $\mathbf{x}$, the quadratic form $\mathbf{x}^* \mathbf{A} \mathbf{x}$ is a scalar.
 
 ::::{prf:definition}
 :label: definition-rayleighquotient
@@ -162,7 +164,7 @@ $$
 \lambda = \frac{ \mathbf{x}^*\mathbf{A}\mathbf{x} }{\mathbf{x}^*\mathbf{x}} > 0.
 $$
 
-Hence item 2 is true. Conversely, suppose item 2 is known. Then we can write the EVD as $\mathbf{A}=\mathbf{V}\mathbf{S}^2\mathbf{V}^*$, where the $S_{ii}$ are positive square roots of the eigenvalues. Hence
+Hence, item 2 is true. Conversely, suppose item 2 is known. Then we can write the EVD as $\mathbf{A}=\mathbf{V}\mathbf{S}^2\mathbf{V}^*$, where the $S_{ii}$ are positive square roots of the eigenvalues. Hence
 
 $$
 \mathbf{x}^*\mathbf{A}\mathbf{x} = \mathbf{x}^*\mathbf{V}\mathbf{S}^2\mathbf{V}^*\mathbf{x} = \|\mathbf{S}\mathbf{V}^*\mathbf{x}\|^2 > 0,
@@ -171,7 +173,7 @@ $$
 as both $\mathbf{S}$ and $\mathbf{V}$ are invertible. Thus, item 1 is true.
 ::::
 
-According to {numref}`Theorem {number} <theorem-symm-eig-hpd>`, for an HPD matrix, the EVD $\mathbf{A}=\mathbf{V}\mathbf{D}\mathbf{V}^*$ meets all the requirements of the SVD, provided the ordering of eigenvalues is chosen appropriately. 
+According to {numref}`Theorem {number} <theorem-symm-eig-hpd>`, for an HPD matrix, the EVD $\mathbf{A}=\mathbf{V}\mathbf{D}\mathbf{V}^*$ meets all the requirements of the SVD, provided the ordering of eigenvalues is chosen appropriately.
 
 A hermitian matrix with all negative eigenvalues is called **negative definite**, and one with eigenvalues of different signs is **indefinite**. Finally, if one or more eigenvalues is zero and the rest have one sign, it is positive or negative **semidefinite**.
 

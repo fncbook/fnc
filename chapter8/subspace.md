@@ -3,9 +3,10 @@ numbering:
   enumerator: 8.4.%s
 ---
 (section-krylov-subspace)=
+
 # Krylov subspaces
 
-The power and inverse iterations have a flaw that seems obvious once it is pointed out. Given a seed vector $\mathbf{u}$, they produce a sequence of vectors $\mathbf{u}_1,\mathbf{u}_2,\ldots$ that are scalar multiples of $\mathbf{u},\mathbf{A}\mathbf{u},\mathbf{A}^{2}\mathbf{u},\ldots$, but only the most recent vector is used to produce an eigenvector estimate. 
+The power and inverse iterations have a flaw that seems obvious once it is pointed out. Given a seed vector $\mathbf{u}$, they produce a sequence of vectors $\mathbf{u}_1,\mathbf{u}_2,\ldots$ that are scalar multiples of $\mathbf{u},\mathbf{A}\mathbf{u},\mathbf{A}^{2}\mathbf{u},\ldots$, but only the most recent vector is used to produce an eigenvector estimate.
 
 It stands to reason that we could do no worse, and perhaps much better, if we searched among all linear combinations of the vectors seen in the past. In other words, we seek a solution in the range (column space) of the matrix
 
@@ -45,7 +46,6 @@ Suppose $\mathbf{A}$ is $n\times n$, $0<m<n$, and a vector $\mathbf{u}$ is used 
 ::::{prf:proof}
 :enumerated: false
 
-
 If $\mathbf{x}\in\mathcal{K}_m$, then for some coefficients $c_1,\ldots,c_m$,
 
 ```{math}
@@ -57,6 +57,7 @@ Thus let $\mathbf{z}= \begin{bmatrix} c_1 & \cdots & c_m \end{bmatrix}^T$. Also,
 ```{math}
 \mathbf{A}\mathbf{x} = c_1 \mathbf{A} \mathbf{u} + c_2 \mathbf{A}^{2} \mathbf{u} + \cdots + c_m \mathbf{A}^{m} \mathbf{u} \in \mathcal{K}_{m+1}.
 ```
+
 ::::
 
 ## Dimension reduction
@@ -102,7 +103,6 @@ The natural seed vector for $\mathcal{K}_m$ in this case is the vector $\mathbf{
 
 ::::
 
-
 ## The Arnoldi iteration
 
 The breakdown of convergence in @demo-subspace-unstable is due to a critical numerical defect in our approach: the columns of the Krylov matrix {eq}`krylovmatrix` increasingly become parallel to the dominant eigenvector, as {eq}`poweriterconverge` predicts, and therefore to one another. As we saw in {numref}`section-leastsq-qr`, near-parallel vectors create the potential for numerical cancellation. This manifests as a large condition number for $\mathbf{K}_m$ as $m$ grows, eventually creating excessive error when solving the least-squares system.
@@ -137,9 +137,9 @@ for some choice of the $H_{ij}$. Note that by using orthonormality, we have
 \mathbf{q}_i^* (\mathbf{A}\mathbf{q}_m) = H_{im}, \qquad i=1,\ldots, m.
 ```
 
-Since we started by assuming that we know $\mathbf{q}_1,\ldots,\mathbf{q}_m$, the only unknowns in {eq}`arnoldivec` are $H_{m+1,m}$ and $\mathbf{q}_{m+1}$. But they appear only as a product, and we know that $\mathbf{q}_{m+1}$ is a *unit* vector, so they are uniquely defined (up to sign) by the other terms in the equation.
+Since we started by assuming that we know $\mathbf{q}_1,\ldots,\mathbf{q}_m$, the only unknowns in {eq}`arnoldivec` are $H_{m+1,m}$ and $\mathbf{q}_{m+1}$. But they appear only as a product, and we know that $\mathbf{q}_{m+1}$ is a _unit_ vector, so they are uniquely defined (up to sign) by the other terms in the equation.
 
-We can now proceed iteratively. 
+We can now proceed iteratively.
 
 ```{index} ! Arnoldi iteration
 ```
@@ -150,9 +150,9 @@ Given matrix $\mathbf{A}$ and vector $\mathbf{u}$:
 
 1. Let $\mathbf{q}_1= \mathbf{u} \,/\, \| \mathbf{u}\|$.
 2. For $m=1,2,\ldots$
-    
+
     a. Use {eq}`arnoldiip` to find $H_{im}$ for $i=1,\ldots,m$.
-    
+
     b. Let
 
     :::{math}
@@ -161,7 +161,7 @@ Given matrix $\mathbf{A}$ and vector $\mathbf{u}$:
     :::
 
     c. Let $H_{m+1,m}=\|\mathbf{v}\|$.
-    
+
     d. Let $\mathbf{q}_{m+1}=\mathbf{v}\,/\,H_{m+1,m}$.
 
 Return the $n\times (m+1)$ matrix $\mathbf{Q}_{m+1}$ whose columns are $\mathbf{q}_1,\dots, \mathbf{q}_{m+1}$ and the $(m+1)\times m$ matrix $\mathbf{H}_m$.
@@ -188,7 +188,7 @@ The vectors $\mathbf{q}_1,\dots, \mathbf{q}_m$ are an orthonormal basis for the 
 A matrix $\mathbf{H}$ is an {term}`upper Hessenberg matrix` if $H_{ij}=0$ whenever $i>j+1$.
 ::::
 
-The identity @arnoldivec used over all the iterations can be collected into a single matrix equation, 
+The identity @arnoldivec used over all the iterations can be collected into a single matrix equation,
 
 ```{math}
 :label: arnoldimat

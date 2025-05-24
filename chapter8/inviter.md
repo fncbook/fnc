@@ -3,6 +3,7 @@ numbering:
   enumerator: 8.3.%s
 ---
 (section-krylov-inviter)=
+
 # Inverse iteration
 
 Power iteration finds only the dominant eigenvalue. We next show that it can be adapted to find any eigenvalue, provided you start with a reasonably good estimate of it. Some simple linear algebra is all that is needed.
@@ -36,7 +37,7 @@ Then clearly
 ```{index} eigenvalue; dominant
 ```
 
-and $\mathbf{A}^{-1}$ has a {term}`dominant eigenvalue`. Hence power iteration on $\mathbf{A}^{-1}$ can be used to find the eigenvalue of $\mathbf{A}$ closest to zero. For nonzero values of $s$, then we suppose there is an ordering
+and $\mathbf{A}^{-1}$ has a {term}`dominant eigenvalue`. Hence, power iteration on $\mathbf{A}^{-1}$ can be used to find the eigenvalue of $\mathbf{A}$ closest to zero. For nonzero values of $s$, then we suppose there is an ordering
 
 ```{math}
 :label: shiftorder
@@ -53,7 +54,7 @@ and power iteration on the matrix $(\mathbf{A}-s\mathbf{I})^{-1}$ converges to $
 
 ## Algorithm
 
-A literal application of {numref}`Algorithm {number} < definition-poweriteration>` would include the step 
+A literal application of {numref}`Algorithm {number} < definition-poweriteration>` would include the step
 
 ```{math}
 :label: shiftinvstepbad
@@ -73,12 +74,12 @@ As always, we do not want to explicitly find the inverse of a matrix. Instead, w
 Given matrix $\mathbf{A}$ and shift $s$:
 
 1. Choose $\mathbf{x}_1$.
-2. For $k=1,2,\ldots$, 
+2. For $k=1,2,\ldots$,
 
     a. Solve for $\mathbf{y}_k$ in
     :::{math}
     :label: shiftinvstep
-    (\mathbf{A}-s\mathbf{I}) \mathbf{y}_k =\mathbf{x}_k .
+    (\mathbf{A}-s\mathbf{I}) \mathbf{y}_k =\mathbf{x}_k.
     :::
 
     b. Find $m$ such that $|y_{k,m}|=\|{\mathbf{y}_k} \|_\infty$.
@@ -132,7 +133,7 @@ The convergence is linear, at a rate found by reinterpreting {eq}`poweriterconv`
 
 with the eigenvalues ordered as in {eq}`shiftorder`. Thus, the convergence is best when the shift $s$ is close to the target eigenvalue $\lambda_1$, specifically when it is much closer to that eigenvalue than to any other.
 
-::::{prf:example} Convergence of inverse iteration 
+::::{prf:example} Convergence of inverse iteration
 :label: demo-inviter-conv
 
 `````{tab-set}

@@ -3,6 +3,7 @@ numbering:
   enumerator: 9.4.%s
 ---
 (section-globalapprox-orthogonal)=
+
 # Orthogonal polynomials
 
 Interpolation is not the only way to use polynomials for global approximation of functions. In {numref}`section-leastsq-fitting` we saw how to find least-squares polynomial fits to data by solving linear least-squares matrix problems. This idea can be extended to fitting functions.
@@ -68,7 +69,7 @@ $$
 \mathbf{y} \approx \mathbf{V} \mathbf{c} = c_0 \mathbf{v}_0 + c_1 \mathbf{v}_1 + \cdots + c_n \mathbf{v}_n,
 $$
 
-in which the $i$th row of $\mathbf{v}_j$ is $t_i^j$. This was derived as a discrete approximation for $j=0,\ldots,n$. 
+in which the $i$th row of $\mathbf{v}_j$ is $t_i^j$. This was derived as a discrete approximation for $j=0,\ldots,n$.
 
 ```{math}
 \mathbf{y} \approx c_0 + c_1 x + \cdots + c_n x^n,
@@ -132,23 +133,22 @@ $$
 \begin{split}
 \mathbf{F} \begin{bmatrix} -2 \\ 1 \end{bmatrix} &= -2\cos(x) + \sin(x), \\
 \mathbf{F}^T x & = \begin{bmatrix} \int_{-1}^1 x\cos(\pi x)\, dx \\  \int_{-1}^1 x\sin(\pi x)\, dx\end{bmatrix} = \begin{bmatrix} 0 \\ 2/\pi \end{bmatrix}, \\
-\mathbf{F}^T\mathbf{F} &= \begin{bmatrix} \int_{-1}^1 \cos^2(\pi x)\, dx & \int_{-1}^1 \cos(\pi x)\sin(\pi x)\, dx \\ 
+\mathbf{F}^T\mathbf{F} &= \begin{bmatrix} \int_{-1}^1 \cos^2(\pi x)\, dx & \int_{-1}^1 \cos(\pi x)\sin(\pi x)\, dx \\
 \int_{-1}^1 \cos(\pi x)\sin(\pi x)\, dx & \int_{-1}^1 \sin^2(\pi x)\, dx \end{bmatrix} = \mathbf{I}.
 \end{split}
 $$
 ::::
 
-
 ## Normal equations
 
-The discrete linear least-squares problem of minimizing  $\| \mathbf{y} - \mathbf{V} \mathbf{c} \|_2$ over all possible $\mathbf{c}$, given matrix $\mathbf{V}$ and data vector $\mathbf{y}$, has a solution via the normal equations {eq}`normaleqns`,
+The discrete linear least-squares problem of minimizing $\| \mathbf{y} - \mathbf{V} \mathbf{c} \|_2$ over all possible $\mathbf{c}$, given matrix $\mathbf{V}$ and data vector $\mathbf{y}$, has a solution via the normal equations {eq}`normaleqns`,
 
 ```{math}
 :label: normalLS
 \mathbf{c} = \left(\mathbf{V}^T\mathbf{V}\right)^{-1} \mathbf{V}^T \mathbf{y}.
 ```
 
-We can now reinterpret {eq}`normalLS` in terms of quasimatrices. 
+We can now reinterpret {eq}`normalLS` in terms of quasimatrices.
 
 ::::{prf:theorem}
 :label: theorem-orthogonal-normal
@@ -217,14 +217,14 @@ $$
   \end{bmatrix},
 $$
 
-which is well in line with the values found in @demo-orthogonal-approx. 
+which is well in line with the values found in @demo-orthogonal-approx.
 
 If we extend $\mathbf{V}$ by an additional column for $x^2$, then we need to calculate $\int_{-1}^1 x^2 e^x \, dx = e - 5e^{-1}$ and $\int_{-1}^1 x^4\, dx = 2/5$ to get
 
 $$
   \mathbf{c} = \begin{bmatrix}
     2 & 0 & 2/3\\ 0 & 2/3 & 0 \\ 2/3 & 0 & 2/5
-  \end{bmatrix}^{-1}    
+  \end{bmatrix}^{-1}
   \begin{bmatrix}
     e-e^{-1} \\ 2 e^{-1} \\ e - 5e^{-1}
   \end{bmatrix}
@@ -249,7 +249,7 @@ For what follows, let $\mathcal{P}_n \subset S$ be the set of polynomials of deg
 
 ::::{prf:definition} Legendre polynomials
 :label: definition-legendrepoly
-The **Legendre polynomials** are 
+The **Legendre polynomials** are
 
 ```{math}
 :label: legendre
@@ -259,14 +259,16 @@ The **Legendre polynomials** are
      P_{k}(x) &= \frac{2k-1}{k}xP_{k-1}(x) - \frac{k-1}{k}P_{k-2}(x), \qquad k = 2,3,\ldots.
  \end{split}
 ```
+
 ::::
 
 Here are some key facts that are straightforward to prove.
 
 ::::{prf:theorem} Properties of Legendre polynomials
 :label: theorem-orthogonal-legendre
+
 1. The degree of $P_k$ is $k$.
-2. $P_0,\ldots,P_n$ form a basis for $\mathcal{P}_n$. 
+2. $P_0,\ldots,P_n$ form a basis for $\mathcal{P}_n$.
 3. The Legendre polynomials are mutually orthogonal. More specifically, the Gram matrix is given by
 
 ```{math}
@@ -277,6 +279,7 @@ Here are some key facts that are straightforward to prove.
    \alpha_i^2 = \bigl(i+\tfrac{1}{2}\bigr)^{-1}, & i=j.
  \end{cases}
 ```
+
 ::::
 
 Now let us define the quasimatrix
@@ -329,6 +332,7 @@ The **Chebyshev polynomials** are defined by
      T_{k}(x) &= 2xT_{k-1}(x) - T_{k-2}(x) ,\qquad k = 2,3,\ldots.
  \end{split}
 ```
+
 ::::
 
 Chebyshev polynomials also have a startling alternative form,
@@ -341,12 +345,12 @@ T_k(x) = \cos\left( k \theta \right), \quad \theta = \arccos(x).
 The results from @theorem-orthogonal-legendre apply to Chebyshev polynomials as well, with orthogonality being in the sense of {eq}`chebinner`. Their Gram matrix is given by
 
 $$
-\langle T_i,T_j \rangle 
-  = \begin{cases} 0, &  i\neq j, \\ 
-      \gamma_0^2 = \pi, & i=j=0, \\ 
-      \gamma_i^2=\pi/2, & i=j>0. 
-    \end{cases} 
-$$ 
+\langle T_i,T_j \rangle
+  = \begin{cases} 0, &  i\neq j, \\
+      \gamma_0^2 = \pi, & i=j=0, \\
+      \gamma_i^2=\pi/2, & i=j>0.
+    \end{cases}
+$$
 
 The least-squares solution is not the same in the Legendre and Chebyshev cases: both find the nearest approximation to a given $f(x)$, but the norm used to measure distances is not the same.
 
@@ -362,7 +366,7 @@ All $n$ roots of the Legendre polynomial $P_n(x)$ are simple and real, and they 
 ::::{prf:proof}
 :enumerated: false
 
-Let $x_1,\ldots,x_m$ be all of the distinct roots of $P_n(x)$ between $-1$ and $1$ at which $P_n(x)$ changes sign (in other words, all roots of odd multiplicity). Define
+Let $x_1,\ldots,x_m$ be all the distinct roots of $P_n(x)$ between $-1$ and $1$ at which $P_n(x)$ changes sign (in other words, all roots of odd multiplicity). Define
   
 $$
   r(x) = \prod_{i=1}^m (x-x_i).
@@ -375,7 +379,7 @@ By definition, $r(x)P_n(x)$ does not change sign over $(-1,1)$. Therefore
   \int_{-1}^1 r(x)P_n(x) \, dx \neq 0.
 ```
 
-Because $r$ is a degree-$m$ polynomial, we can express it as a combination of $P_0,\ldots,P_m$. If $m<n$, the integral {eq}`legrootint` would be zero, by the orthogonality property of Legendre polynomials. So $m\ge n$. Since $P_n(x)$ has at most $n$ real roots, $m=n$. All of the roots must therefore be simple, and this completes the proof.
+Because $r$ is a degree-$m$ polynomial, we can express it as a combination of $P_0,\ldots,P_m$. If $m<n$, the integral {eq}`legrootint` would be zero, by the orthogonality property of Legendre polynomials. So $m\ge n$. Since $P_n(x)$ has at most $n$ real roots, $m=n$. All the roots must therefore be simple, and this completes the proof.
 ::::
 
 The result of @theorem-orthogonal-roots holds for orthogonal families of polynomials for other weight functions. The Chebyshev case is unusual in that thanks to {eq}`chebaltform`, the roots of $T_n$ are known explicitly:

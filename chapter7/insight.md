@@ -3,6 +3,7 @@ numbering:
   enumerator: 7.1.%s
 ---
 (section-matrixanaly-insight)=
+
 # From matrix to insight
 
 Any two-dimensional array of numbers may be interpreted as a matrix. Whether or not this is the only point of view that matters to a particular application, it does lead to certain types of analysis. The related mathematical and computational tools are universally applicable and find diverse uses.
@@ -44,6 +45,7 @@ A_{ij} =
 0 & \text{otherwise}.
 \end{cases}
 ```
+
 ::::
 
 :::{note}
@@ -52,7 +54,7 @@ In an undirected graph, the edges $(v_i,v_j)$ and $(v_j,v_i)$ are equivalent and
 
 Graphs are a useful way to represent the link structure of social networks, airline routes, power grids, sports teams, and web pages, to name a few examples. The natural interpretation is that the edge $(v_i,v_j)$ denotes a link from node $i$ to node $j$, in which case we say that node $i$ is **adjacent** to node $j$. One usually visualizes small graphs by drawing points for nodes and arrows or lines for the edges.
 
-Here are some elementary results about adjacency matrices. 
+Here are some elementary results about adjacency matrices.
 
 ::::{prf:theorem}
 :label: theorem-insight-adjmat

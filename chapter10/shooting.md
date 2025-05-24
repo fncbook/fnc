@@ -6,7 +6,7 @@ numbering:
 
 # Shooting
 
-One way to attack the TPBVP {eq}`tpbvp` is to adapt our IVP solving techniques from [Chapter 6](../ivp/overview.md) to it. Those techniques work only when we know the entire initial state, but we can allow that state to vary in order to achieve the stated conditions. 
+One way to attack the TPBVP {eq}`tpbvp` is to adapt our IVP solving techniques from [Chapter 6](../ivp/overview.md) to it. Those techniques work only when we know the entire initial state, but we can allow that state to vary in order to achieve the stated conditions.
 
 This is the idea behind the **shooting method**. Imagine adjusting your aiming point and power to sink a basketball shot from the free-throw line. The way in which you miss—too long, flat trajectory, etc.—informs how you will adjust for your next attempt.
 
@@ -55,7 +55,7 @@ v_2(s_1, s_2) &= g_2(y_1(b), y_2(b)).
 \end{split}
 ```
 
-The dependence of $v_2$ on $\mathbf{s}$ is indirect, through the solution of the IVP for $\mathbf{y}(x)$. We now have a standard rootfinding problem that can be solved via the methods of [Chapter 4](../nonlineqn/overview.md). 
+The dependence of $v_2$ on $\mathbf{s}$ is indirect, through the solution of the IVP for $\mathbf{y}(x)$. We now have a standard rootfinding problem that can be solved via the methods of [Chapter 4](../nonlineqn/overview.md).
 
 ## Implementation
 
@@ -112,7 +112,7 @@ Our implementation of shooting is given in {numref}`Function {number} <function-
 
 ## Instability
 
-The accuracy of the shooting method should be comparable to those of the component pieces, the rootfinder, and the IVP solver. However, the shooting method is unstable for some problems. An example illustrates the trouble.
+The accuracy of the shooting method should be comparable to those of the component pieces, the rootfinding method, and the IVP solver. However, the shooting method is unstable for some problems. An example illustrates the trouble.
 
 ::::{prf:example} Instability of shooting
 :label: demo-shooting-unstable
@@ -150,7 +150,7 @@ This solution satisfies $-1\le u(x) \le 0$ for all $x\in[0,1]$. Now we compute s
 ````
 `````
 
-The cause is readily explained. The solution to the ODE with $u(0)=-1$ and $u'(0)=s_2$  is
+The cause is readily explained. The solution to the ODE with $u(0)=-1$ and $u'(0)=s_2$ is
 
 ```{math}
 :label: shootinstabshoot
@@ -165,7 +165,6 @@ $$
 
 which grows rapidly with $\lambda$ near $x=1$. With the IVP solution so sensitive to $s_2$, a numerical approach to find $s_2$ approximately is doomed.
 ::::
-
 
 The essence of the instability is that errors can grow exponentially away from the boundary at $x=a$, where the state is arbitrarily being set (see @theorem-depIC). Using shooting, acceptable accuracy near $x=b$ therefore means requiring extraordinarily high accuracy near $x=a$.
 
