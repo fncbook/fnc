@@ -3,12 +3,13 @@ numbering:
   enumerator: 3.2.%s
 ---
 (section-leastsq-normaleqns)=
+
 # The normal equations
 
 ```{index} linear least-squares problem
 ```
 
-We now solve the general linear least-squares problem in {numref}`Definition {number} <definition-leastsq>`. That is, given $\mathbf{A}\in\mathbb{R}^{m \times n}$ and $\mathbf{b}\in\mathbb{R}^m$, with $m>n$, find the $\mathbf{x}\in\mathbb{R}^n$ that minimizes $\| \mathbf{b} - \mathbf{A}\mathbf{x} \|_2$. 
+We now solve the general linear least-squares problem in {numref}`Definition {number} <definition-leastsq>`. That is, given $\mathbf{A}\in\mathbb{R}^{m \times n}$ and $\mathbf{b}\in\mathbb{R}^m$, with $m>n$, find the $\mathbf{x}\in\mathbb{R}^n$ that minimizes $\| \mathbf{b} - \mathbf{A}\mathbf{x} \|_2$.
 
 There is a concise explicit solution. In the following proof we make use of the elementary algebraic fact that for two vectors $\mathbf{u}$ and $\mathbf{v}$,
 
@@ -66,22 +67,23 @@ Geometry of the normal equations. The smallest residual is orthogonal to the ran
 
 ## Pseudoinverse and definiteness
 
-If we associate the left-hand side of the normal equations as $(\mathbf{A}^T\mathbf{A})\,\mathbf{x}$, we recognize {eq}`normaleqns` as a *square* $n\times n$ linear system to solve for $\mathbf{x}$. 
+If we associate the left-hand side of the normal equations as $(\mathbf{A}^T\mathbf{A})\,\mathbf{x}$, we recognize {eq}`normaleqns` as a *square* $n\times n$ linear system to solve for $\mathbf{x}$.
 
 ```{index} ! pseudoinverse
 ```
 
 ::::{prf:definition} Pseudoinverse
 :label: definition-pseudoinverse
-If $\mathbf{A}\in\real^{m\times n}$  with $m>n$, its {term}`pseudoinverse` is the $n\times m$ matrix
+If $\mathbf{A}\in\real^{m\times n}$ with $m>n$, its {term}`pseudoinverse` is the $n\times m$ matrix
 
 ```{math}
 :label: pinv
 \mathbf{A}^+ = (\mathbf{A}^T\mathbf{A})^{-1}\mathbf{A}^T.
 ```
+
 ::::
 
-Mathematically, the overdetermined least-squares problem $\mathbf{A}\mathbf{x}\approx \mathbf{b}$ has the solution $\mathbf{x}=\mathbf{A}^+\mathbf{b}$. 
+Mathematically, the overdetermined least-squares problem $\mathbf{A}\mathbf{x}\approx \mathbf{b}$ has the solution $\mathbf{x}=\mathbf{A}^+\mathbf{b}$.
 
 Computationally we can generalize the observation about Julia from Chapter 2: backslash is equivalent mathematically to left-multiplication by the inverse (in the square case) or pseudoinverse (in the rectangular case) of a matrix. One can also compute the pseudoinverse directly using `pinv`, but as with matrix inverses, this is rarely necessary in practice.
 
@@ -95,9 +97,9 @@ The matrix $\mathbf{A}^T\mathbf{A}$ appearing in the pseudoinverse has some impo
 
 For any real $m\times n$ matrix $\mathbf{A}$ with $m\ge n$, the following are true:
 
-1. $\mathbf{A}^T\mathbf{A}$ is symmetric. 
+1. $\mathbf{A}^T\mathbf{A}$ is symmetric.
 2. $\mathbf{A}^T \mathbf{A}$ is singular if and only if the columns of $\mathbf{A}$ are linearly dependent. (Equivalently, if and only if the rank of $\mathbf{A}$ is less than $n$.)
-3. If $\mathbf{A}^T\mathbf{A}$ is nonsingular, then it is positive definite. 
+3. If $\mathbf{A}^T\mathbf{A}$ is nonsingular, then it is positive definite.
 ::::
 
 ````{prf:proof}
@@ -120,6 +122,7 @@ The definition of the pseudoinverse involves taking the inverse of a matrix, so 
 
 ::::{prf:algorithm} Solution of linear least squares by the normal equations
 :label: algorithm-normaleqns-solve
+
 1. Compute $\mathbf{N}=\mathbf{A}^T\mathbf{A}$.
 2. Compute $\mathbf{z} = \mathbf{A}^T\mathbf{b}$.
 3. Solve the $n\times n$ linear system $\mathbf{N}\mathbf{x} = \mathbf{z}$ for $\mathbf{x}$.
@@ -181,9 +184,9 @@ If $\mathbf{A}$ is $m\times n$ with $m > n$, then its condition number is define
 If the rank of $ \mathbf{A}$ is less than $n$ (i.e., if it has linearly dependent columns), then $\kappa(\mathbf{A})=\infty$.
 ````
 
-Provided that the minimum residual norm $\|\mathbf{b}-\mathbf{A}\mathbf{x}\|$ is relatively small, the conditioning of the linear least-squares problem is close to $\kappa(\mathbf{A})$. 
+Provided that the minimum residual norm $\|\mathbf{b}-\mathbf{A}\mathbf{x}\|$ is relatively small, the conditioning of the linear least-squares problem is close to $\kappa(\mathbf{A})$.
 
-As an algorithm, the normal equations begin by computing the data for the $n\times n$ system $(\mathbf{A}^T\mathbf{A})\mathbf{x} = \mathbf{A}^T \mathbf{b}$. When these equations are solved, perturbations to the data can be amplified by a factor $\kappa(\mathbf{A}^T\mathbf{A})$. 
+As an algorithm, the normal equations begin by computing the data for the $n\times n$ system $(\mathbf{A}^T\mathbf{A})\mathbf{x} = \mathbf{A}^T \mathbf{b}$. When these equations are solved, perturbations to the data can be amplified by a factor $\kappa(\mathbf{A}^T\mathbf{A})$.
 
 ```{index} condition number; of normal equations
 ```

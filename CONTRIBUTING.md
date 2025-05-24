@@ -21,3 +21,11 @@ For Q&A and matters less specific than suggesting an improvement, visit the [Dis
 The authors have made a modest amount (less than 10K USD) from selling the textbook at the [SIAM Bookstore](https://epubs.siam.org/bookstore) since 2017. The book has always been a labor of love rather than a revenue stream, and we are happy to help reduce the cost of higher education in a small way. We also see it as providing an example of what online textbooks can be and do when freed from PDFs and proprietary platforms.
 
 If you do find this resource useful, however, please consider [making a donation](https://buymeacoffee.com/tobydriscoll) anyway! Seeing that people are willing to spend even a small amount when they don't have to is a tremendous encouragement. We have decades of labs, projects, slides, and video recordings associated with this material that we could make available if interest is evident.
+
+## TODO
+
+- [ ] Handle Julia-specific references, exercises, and sections by wrapping them or giving all-language options.
+- [ ] Add a "how to use this book" video.
+- [ ] Remove numbers from equations in examples.
+- [ ] Address the Algorithm/Function naming split.
+- [ ] 
