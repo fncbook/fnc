@@ -11,6 +11,7 @@ numbering:
 ## Functions
 
 (function-euler-matlab)=
+
 ``````{dropdown} Euler's method for an initial-value problem
 :open:
 ```{literalinclude} FNC-matlab/eulerivp.m
@@ -24,6 +25,7 @@ The `ivp` input argument is the same structure that is used with the built-in `s
 ``````
 
 (function-ie2-matlab)=
+
 ``````{dropdown} Improved Euler method for an IVP
 :open:
 ```{literalinclude} FNC-matlab/ie2.m
@@ -33,6 +35,7 @@ The `ivp` input argument is the same structure that is used with the built-in `s
 ``````
 
 (function-rk4-matlab)=
+
 ``````{dropdown} Fourth-order Runge-Kutta for an IVP
 :open:
 ```{literalinclude} FNC-matlab/rk4.m
@@ -42,6 +45,7 @@ The `ivp` input argument is the same structure that is used with the built-in `s
 ``````
 
 (function-rk23-matlab)=
+
 ``````{dropdown} Adaptive IVP solver based on embedded RK formulas
 :open:
 ```{literalinclude} FNC-matlab/rk23.m
@@ -61,6 +65,7 @@ While {eq}`bs23` calls for four stages to find the paired second- and third-orde
 ``````
 
 (function-ab4-matlab)=
+
 ``````{dropdown} 4th-order Adams–Bashforth formula for an IVP
 :open:
 ```{literalinclude} FNC-matlab/ab4.m
@@ -76,6 +81,7 @@ Line 36 computes $f_i$, based on the most recent solution value and time. That g
 ``````
 
 (function-am2-matlab)=
+
 ``````{dropdown} 2nd-order Adams–Moulton (trapezoid) formula for an IVP
 :open:
 ```{literalinclude} FNC-matlab/am2.m
@@ -96,13 +102,15 @@ cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init
 pwd
 ```
+
 ### 6.1 @section-ivp-basics
 
 (demo-basics-first-matlab)=
+
 ``````{dropdown} @demo-basics-first
 :open:
 
-Let's use it to define and solve an initial-value problem for $u'=\sin[(u+t)^2]$ over $t \in [0,4]$, such that $u(0)=-1$. To create an initial-value problem for $u(t)$, you must create an `ode` with a function that computes $u'$ and an initial condition for $u$. Then you create a solution by calling `solve` with a time interval. 
+Let's use it to define and solve an initial-value problem for $u'=\sin[(u+t)^2]$ over $t \in [0,4]$, such that $u(0)=-1$. To create an initial-value problem for $u(t)$, we must create a function that computes $u'$, an initial value for $u$, and a vector describing the time domain.
 ```{tip}
 :class: dropdown
 Most real ODE problems contain parameters that are constant during the solution but that can change from one problem instance to the next. Accordingly, we define the ODE function below to accept a third argument, `p`, which is a vector of parameters. We always include this argument for consistency, even when there are no parameters.
@@ -112,50 +120,56 @@ Most real ODE problems contain parameters that are constant during the solution 
 ```
 
 ```{code-cell}
-ivp = ode;
-ivp.ODEFcn = @(t, u, p) sin((t + u)^2);
-ivp.InitialTime = 0;
-ivp.InitialValue = -1;
-sol = solve(ivp, 0, 4);
+f = @(t, u) sin((t + u)^2);
+u0 = -1;
+tspan = [0, 4];
 ```
 
-The resulting solution object has fields `Time` and `Solution` that contain the approximate values of the solution at automatically chosen times in the interval you provided.
+These ingredients are supplied to a solver function. A standard first choice of solver is called `ode45`.
+
+```{code-cell}
+[t, u] = ode45(f, [0, 4], u0);
+fprintf("length(t) = %d, length(u) = %d\n", length(t), length(u))
+```
+
+The solution is represented as a pair of vectors, `t` and `u`, where `t` contains the times at which the solution was computed and `u` contains the corresponding values of $u(t)$. 
 
 ```{code-cell}
 clf
-plot(sol.Time, sol.Solution, '-o')
+plot(t, u, '-o')
 xlabel("t")
 ylabel("u(t)")
 title(("Solution of an IVP"));
 ```
 
-You might want to know the solution at particular times other than the ones selected by the solver. That requires an interpolation, which is done by `solutionFcn`.
+You might want to know the solution at particular times other than the ones selected by the solver. That requires an interpolation. To do this automatically requires calling the solver with just one output argument, which is then supplied to `deval` to evaluate the solution at any time.
 
 ```{code-cell}
-u = solutionFcn(ivp, 0, 10);
-u(0:5)
+sol = ode45(f, [0, 4], u0);
+u = @(t) deval(sol, t)';
+u(0:0.5:2)
 ```
 ``````
 
 (demo-basics-sing-matlab)=
+
 ``````{dropdown} @demo-basics-sing
 :open:
 
 The equation $u'=(u+t)^2$ gives us some trouble.
 
 ```{code-cell}
-ivp = ode;
-ivp.ODEFcn = @(t, u, p) (t + u)^2;
-ivp.InitialTime = 0;
-ivp.InitialValue = 1;
-sol = solve(ivp, 0, 1);
+f = @(t, u) (t + u)^2;
+u0 = 1;
+tspan = [0, 1];
+[t, u] = ode45(f, tspan, u0);
 ```
 
 The warning message we received can mean that there is a bug in the formulation of the problem. But if everything has been done correctly, it suggests that the solution may not exist past the indicated time. This is a possibility in nonlinear ODEs.
 
 ```{code-cell}
 clf
-semilogy(sol.Time, sol.Solution)
+semilogy(t, u)
 xlabel("t")
 ylabel("u(t)")
 title(("Finite-time blowup"));
@@ -163,6 +177,7 @@ title(("Finite-time blowup"));
 ``````
 
 (demo-basics-cond-matlab)=
+
 ``````{dropdown} @demo-basics-cond
 :open:
 Consider the ODEs $u'=u$ and $u'=-u$. In each case we compute $\partial f/\partial u = \pm 1$, so the condition number bound from @theorem-depIC is $e^{b-a}$ in both problems. However, they behave quite differently. In the case of exponential growth, $u'=u$, the bound is the actual condition number.
@@ -195,23 +210,24 @@ In this case the actual condition number is one, because the initial difference 
 ``````
 
 ### 6.2 @section-ivp-euler
+
 (demo-euler-converge-matlab)=
+
 ``````{dropdown} @demo-euler-converge
 :open:
 We consider the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. We need to define the function for the right-hand side of the ODE, the interval for the independent variable, and the initial value.
 
 ```{code-cell}
-ivp = ode;
-ivp.ODEFcn = @(t, u, p) sin((t + u)^2);
-ivp.InitialValue = -1;
-a = 0;  b = 4;
+f = @(t, u) sin((t + u)^2);
+u0 = -1;
+tspan = [0, 4];
 ```
 
 Here is the call to {numref}`Function {number} <function-euler>`.
 
 ```{code-cell}
-[t, u] = eulerivp(ivp, a, b, 20);
-clf, plot(t, u, '.-')
+[t, u] = eulerivp(f, tspan, u0, 20);
+clf, plot(t, u, '.-', displayname='20 steps')
 xlabel('t')
 ylabel('u(t)')
 title(('Solution by Euler''s method'));
@@ -220,17 +236,17 @@ title(('Solution by Euler''s method'));
 We could define a different interpolant to get a smoother picture above, but the derivation of Euler's method assumed a piecewise linear interpolant. We can instead request more steps to make the interpolant look smoother.
 
 ```{code-cell}
-[t, u] = eulerivp(ivp, a, b, 50);
-hold on, plot(t, u, '.-')
-legend('20 steps', '50 steps');
+[t, u] = eulerivp(f, tspan, u0, 50);
+hold on, plot(t, u, '.-',  displayname='50 steps')
+legend();
 ```
 
 Increasing $n$ changed the solution noticeably. Since we know that interpolants and finite differences become more accurate as $h\to 0$, we should anticipate the same behavior from Euler's method. We don't have an exact solution to compare to, so we will use a built-in solver to construct an accurate reference solution.
 
 ```{code-cell}
-ivp.AbsoluteTolerance = 1e-13;
-ivp.RelativeTolerance = 1e-13;
-u_exact = solutionFcn(ivp, a, b);
+opt = odeset('RelTol', 1e-13, 'AbsTol', 1e-13);
+sol = ode45(f, tspan, u0, opt);
+u_ref = @(t) deval(sol, t)';
 ```
 
 Now we can perform a convergence study.
@@ -239,8 +255,8 @@ Now we can perform a convergence study.
 n = round(5 * 10.^(0:0.5:3));
 err = [];
 for k = 1:length(n)
-    [t, u] = eulerivp(ivp, a, b, n(k));
-    err(k) = norm(u_exact(t) - u, Inf);
+    [t, u] = eulerivp(f, tspan, u0, n(k));
+    err(k) = norm(u_ref(t) - u, Inf);
 end
 table(n', err', VariableNames=["n", "inf-norm error"])
 ```
@@ -259,7 +275,9 @@ legend('error', 'O(n^{-1})', 'location', 'southwest');
 ``````
 
 ### 6.3 @section-ivp-systems
+
 (demo-systems-predator-matlab)=
+
 ``````{dropdown} @demo-systems-predator
 :open:
 We encode the predator–prey equations via a function, defined here externally.
@@ -271,21 +289,20 @@ We encode the predator–prey equations via a function, defined here externally.
 The values of `alpha` and `beta` are parameters that influence the solution of the IVP. We use the `Parameters` field of the IVP object to define them for the solver, which in turn passes them as the third argument into our ODE function. 
 
 ```{code-cell}
+params = [0.1, 0.25];
+f = @(t, u) f63_predprey(t, u, params);
 u0 = [1; 0.01];    % column vector
-p = [0.1, 0.25];
-ivp = ode;
-ivp.ODEFcn = @f63_predprey;
-ivp.InitialValue = u0;
-ivp.Parameters = p;
-sol = solve(ivp, 0, 60);
-size(sol.Solution)
+a = 0; b = 45;     % time interval
+
+[t, u] = ode45(f, linspace(a, b, 800), u0);
+size(u)
 ```
 
-Each column of the `Solution` field is the solution vector $\mathbf{u}$ at a particular time; each row is a component of $\mathbf{u}$ over all time.
+Each row of `u` is the solution vector $\mathbf{u}$ at a particular time; each column is a component of $\mathbf{u}$ over all time.
 
 ```{code-cell}
 clf
-plot(sol.Time, sol.Solution)
+plot(t, u)
 xlabel("t")
 ylabel("u(t)")
 title('Predator-prey solution')
@@ -295,12 +312,12 @@ legend('prey', 'predator');
 We can also use {numref}`Function {number} <function-euler>` to find the solution.
 
 ```{code-cell}
-[t, u] = eulerivp(ivp, 0, 60, 1200);
+[t_e, u_e] = eulersys(f, [a, b], u0, 1200);
 ```
 
 ```{code-cell}
 hold on
-plot(t, u, '.')
+plot(t_e, u_e, '.', displayname='Euler')
 ```
 
 Notice above that the accuracy of the Euler solution deteriorates rapidly.
@@ -309,16 +326,17 @@ When there are just two components, it's common to plot the solution in the _pha
 
 ```{code-cell}
 clf
-plot(u(1, :), u(2, :))
+plot(u(:, 1), u(:, 2))
 title("Predator-prey in the phase plane")
 xlabel("y")
-ylabel(("z"));
+ylabel("z");
 ```
 
 From this plot we can deduce that the solution approaches a periodic one, which in the phase plane is represented by a closed loop.
 ``````
 
 (demo-systems-coupledpendula-matlab)=
+
 ``````{dropdown} @demo-systems-coupledpendula
 :open:
 Let's implement the coupled pendulums from {numref}`Example {number} <example-systems-coupledpendula>`. The pendulums will be pulled in opposite directions and then released together from rest.
@@ -329,7 +347,7 @@ Let's implement the coupled pendulums from {numref}`Example {number} <example-sy
 
 ```{code-cell}
 u0 = [1.25; -0.5; 0; 0];
-a = 0; b = 50;
+tspan = [0, 50];
 ```
 
 First we check the behavior of the system when the pendulums are uncoupled, i.e., when $k=0$.
@@ -340,9 +358,10 @@ Here `OutputVariables` is used to restrict output to just $u_1$ and $u_2$.
 
 ```{code-cell}
 params =[0.01, 0.5, 0];    % gamma, L, k
-ivp = ode(ODEFcn=@f63_pendulums, InitialValue=u0, Parameters=params);
-theta = solutionFcn(ivp, a, b, OutputVariables = 1:2);
-t = linspace(a, b, 1001);
+f = @(t, u) f63_pendulums(t, u, params);
+sol = ode45(f, tspan, u0);
+theta = @(t) deval(sol, t, 1:2)';
+t = linspace(tspan(1), tspan(2), 1001);
 clf, plot(t, theta(t))
 xlabel("t");  ylabel("angle")
 title("Uncoupled pendulums")
@@ -355,8 +374,9 @@ With coupling activated, a different behavior is seen.
 
 ```{code-cell}
 params(3) = 1;
-ivp = ode(ODEFcn=@f63_pendulums, InitialValue=u0, Parameters=params);
-theta = solutionFcn(ivp, a, b, OutputVariables = 1:2);
+f = @(t, u) f63_pendulums(t, u, params);
+sol = ode45(f, tspan, u0);
+theta = @(t) deval(sol, t, 1:2)';
 clf, plot(t, theta(t))
 xlabel("t");  ylabel("angle")
 title("Coupled pendulums")
@@ -369,23 +389,23 @@ The coupling makes the pendulums swap energy back and forth.
 ### 6.4 @section-ivp-rk
 
 (demo-rk-converge-matlab)=
+
 ``````{dropdown} @demo-rk-converge
 :open:
 We solve the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
 
 ```{code-cell}
-ivp = ode;
-ivp.ODEFcn = @(t, u, p) sin((t + u)^2);
-ivp.InitialValue = -1;
+f = @(t, u) sin((t + u)^2);
+u0 = -1;
 a = 0;  b = 4;
 ```
 
 We use a built-in solver to construct an accurate approximation to the exact solution.
 
 ```{code-cell}
-ivp.AbsoluteTolerance = 1e-13;
-ivp.RelativeTolerance = 1e-13;
-u_ref = solutionFcn(ivp, a, b);
+opt = odeset('RelTol', 1e-13, 'AbsTol', 1e-13);
+sol_ref = ode45(f, [a, b], u0, opt);
+u_ref = @(t) deval(sol_ref, t)';
 ```
 
 Now we perform a convergence study of our two Runge–Kutta implementations.
@@ -394,9 +414,9 @@ Now we perform a convergence study of our two Runge–Kutta implementations.
 n = round(2 * 10.^(0:0.5:3)');
 err = zeros(length(n), 2);
 for i = 1:length(n)
-    [t, u] = ie2(ivp, a, b, n(i));
+    [t, u] = ie2(f, [a, b], u0, n(i));
     err(i, 1) = norm(u_ref(t) - u, Inf);
-    [t, u] = rk4(ivp, a, b, n(i));
+    [t, u] = rk4(f, [a, b], u0, n(i));
     err(i, 2) = norm(u_ref(t) - u, Inf);
 end
 
@@ -419,18 +439,19 @@ The fourth-order variant is more efficient in this problem over a wide range of 
 ``````
 
 ### 6.5 @section-ivp-adaptive
+
 (demo-adapt-basic-matlab)=
+
 ``````{dropdown} @demo-adapt-basic
 :open:
 Let's run adaptive RK on  $u'=e^{t-u\sin u}$.
 
 ```{code-cell}
-ivp = ode;
-ivp.ODEFcn = @(t, u, p) exp(t - u * sin(u));
-ivp.InitialValue = 0;
+f = @(t, u) exp(t - u * sin(u));
+u0 = 0;
 a = 0;  b = 5;
 
-[t, u] = rk23(ivp, a, b, 1e-5);
+[t, u] = rk23(f, [a, b], u0, 1e-5);
 clf, plot(t, u)
 xlabel("t");  ylabel("u(t)")
 title(("Adaptive IVP solution"));
@@ -462,15 +483,15 @@ We took fewer steps by a factor of almost 1000! Even accounting for the extra st
 ``````
 
 (demo-adapt-sing-matlab)=
+
 ``````{dropdown} @demo-adapt-sing
 :open:
 In @demo-basics-sing we saw an IVP that appears to blow up in a finite amount of time. Because the solution increases so rapidly as it approaches the blowup, adaptive stepping is required even to get close.
 
 ```{code-cell}
-ivp = ode;
-ivp.ODEFcn = @(t, u, p) (t + u)^2;
-ivp.InitialValue = 1;
-[t, u] = rk23(ivp, 0, 1, 1e-5);
+f = @(t, u) (t + u)^2;
+u0 = 1;
+[t, u] = rk23(f, [0, 1], u0, 1e-5);
 ```
 
 In fact, the failure of the adaptivity gives a decent idea of when the singularity occurs.
@@ -485,20 +506,22 @@ xline(tf, "linestyle", "--")
 text(tf, 1e5, sprintf(" t = %.6f ", tf))
 ```
 ``````
+
 ### 6.6 @section-ivp-multistep
+
 (demo-implicit-ab4-matlab)=
+
 ``````{dropdown} @demo-implicit-ab4
 :open:
 We study the convergence of AB4 using the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. As usual, a built-in solver is called to give an accurate reference solution.
 
 ```{code-cell}
-ivp = ode;
-ivp.ODEFcn = @(t, u, p) sin((t + u)^2);
-ivp.InitialValue = -1;
+f = @(t, u) sin((t + u)^2);
+u0 = -1;
 a = 0;  b = 4;
-ivp.AbsoluteTolerance = 1e-13;
-ivp.RelativeTolerance = 1e-13;
-u_ref = solutionFcn(ivp, a, b);
+opt = odeset('RelTol', 1e-13, 'AbsTol', 1e-13);
+sol_ref = ode45(f, [a, b], u0, opt);
+u_ref = @(t) deval(sol_ref, t)';
 ```
 
 Now we perform a convergence study of the AB4 code.
@@ -507,7 +530,7 @@ Now we perform a convergence study of the AB4 code.
 n = round(4 * 10.^(0:0.5:3)');
 err = zeros(size(n));
 for i = 1:length(n)
-    [t, u] = ab4(ivp, a, b, n(i));
+    [t, u] = ab4(f, [a, b], u0, n(i));
     err(i) = norm(u_ref(t) - u, Inf);
 end
 table(n, err, variableNames=["n", "inf-norm error"])
@@ -526,20 +549,20 @@ legend("AB4", "O(n^{-4})", location="southwest");
 ``````
 
 (demo-implicit-stiff-matlab)=
+
 ``````{dropdown} @demo-implicit-stiff
 :open:
 The following simple ODE uncovers a surprise.
 
 ```{code-cell}
-ivp = ode;
-ivp.ODEFcn = @(t, u, p) u^2 - u^3;
-ivp.InitialValue = 0.005;
+f = @(t, u) u^2 - u^3;
+u0 = 0.005;
 ```
 
 We will solve the problem first with the implicit AM2 method using $n=200$ steps.
 
 ```{code-cell}
-[tI, uI] = am2(ivp, 0, 400, 200);
+[tI, uI] = am2(f, [0, 400], u0, 200);
 clf
 plot(tI, uI)
 xlabel("t");  ylabel(("u(t)"));
@@ -548,7 +571,7 @@ xlabel("t");  ylabel(("u(t)"));
 Now we repeat the process using the explicit AB4 method.
 
 ```{code-cell}
-[tE, uE] = ab4(ivp, 0, 400, 200);
+[tE, uE] = ab4(f, [0, 400], u0, 200);
 hold on
 plot(tE, uE, '.', 'markersize', 8)
 ylim([-5, 3])
@@ -567,18 +590,20 @@ We hope that AB4 will converge in the limit $h\to 0$, so let's try using more st
 ```{code-cell}
 clf,  plot(tI, uI, '.', 'markersize', 10)
 hold on
-[tE, uE] = ab4(ivp, 0, 400, 1000);
+[tE, uE] = ab4(f, [0, 400], u0, 1000);
 plot(tE, uE)
-[tE, uE] = ab4(ivp, 0, 400, 1600);
+[tE, uE] = ab4(f, [0, 400], u0, 1600);
 plot(tE, uE)
 legend("AM2, n=200", "AB4, n=1000", "AB4, n=1600", location="northwest");
 ```
 
-So AB4, which is supposed to be _more_ accurate than AM2, actually needs something like 8 times as many steps to get a reasonable-looking answer!
+So AB4, which is supposed to be *more* accurate than AM2, actually needs something like 8 times as many steps to get a reasonable-looking answer!
 ``````
 
 ### 6.7 @section-ivp-implicit
+
 (demo-zs-LIAF-matlab)=
+
 ``````{dropdown} @demo-zs-LIAF
 :open:
 We'll measure the error at the time $t=1$.

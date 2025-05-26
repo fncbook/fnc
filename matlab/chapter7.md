@@ -13,8 +13,8 @@ numbering:
 ```{code-cell}
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
-FNC_init
-pwd
+FNC_init;
+pwd;
 ```
 
 ### 7.1 @section-matrixanaly-insight
