@@ -259,7 +259,7 @@ $$
 \log y \approx m (\log h) + \log C.
 $$
 
-```{observation}
+```{important}
 A log-log plot of error versus $h$ should be approximately a straight line of slope $m$.
 ```
 
