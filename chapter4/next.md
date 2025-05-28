@@ -2,7 +2,7 @@
 
 # Next steps
 
-The fixed-point iteration has been used to prove results about convergence; see {cite}`quarteroniNumericalMathematics2007` for more details.
+The fixed-point iteration has been used to prove results about convergence; see {cite}`quarteroniNumericalMathematics2007` for more details. An interesting extension of the fixed-point iteration is *Anderson acceleration*, which can speed up convergence a great deal. A nice introduction is given in {cite}`walkerAndersonAcceleration2011`.
 
 Solving nonlinear systems is a complex task.  Some classic texts on the subject include {cite}`ortegaIterativeSolution2014`, {cite}`kelleyIterativeMethods1995`, and many others.
 
