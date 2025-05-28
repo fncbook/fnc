@@ -14,13 +14,13 @@ numbering:
 
 ``````{dropdown} Euler's method for an initial-value problem
 :open:
-```{literalinclude} FNC-matlab/eulerivp.m
+```{literalinclude} FNC-matlab/eulersys.m
 :language: matlab
 :linenos: true
 ```
 ::::{admonition} About the code
 :class: dropdown
-The `ivp` input argument is the same structure that is used with the built-in `solve` solvers. The outputs `t` and `u` are row vectors of the same length, like the fields in a solution object output by `solve`. While the entries of `u` could be simplified to `u(1)`, `u(i)`, etc., we chose a column-access syntax like `u(:, i)` that will prove useful for what's coming next in the chapter.
+While the entries of `u` could be simplified to `u(1)`, `u(i)`, etc., we chose a column-access syntax like `u(:, i)` that will prove useful for what's coming next in the chapter.
 ::::
 ``````
 
@@ -236,7 +236,7 @@ tspan = [0, 4];
 Here is the call to {numref}`Function {number} <function-euler>`.
 
 ```{code-cell}
-[t, u] = eulerivp(f, tspan, u0, 20);
+[t, u] = eulersys(f, tspan, u0, 20);
 clf, plot(t, u, '.-', displayname='20 steps')
 xlabel('t')
 ylabel('u(t)')
@@ -246,7 +246,7 @@ title(('Solution by Euler''s method'));
 We could define a different interpolant to get a smoother picture above, but the derivation of Euler's method assumed a piecewise linear interpolant, and that sets the limit of its accuracy. We can instead request more steps to make the interpolant look smoother.
 
 ```{code-cell}
-[t, u] = eulerivp(f, tspan, u0, 50);
+[t, u] = eulersys(f, tspan, u0, 50);
 hold on, plot(t, u, '.-',  displayname='50 steps')
 legend();
 ```
@@ -265,7 +265,7 @@ Now we can perform a convergence study.
 n = round(5 * 10.^(0:0.5:3));
 err = [];
 for k = 1:length(n)
-    [t, u] = eulerivp(f, tspan, u0, n(k));
+    [t, u] = eulersys(f, tspan, u0, n(k));
     err(k) = norm(u_ref(t) - u, Inf);
 end
 table(n', err', VariableNames=["n", "inf-norm error"])
