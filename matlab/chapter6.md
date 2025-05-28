@@ -99,7 +99,7 @@ Lines 32--34 define the function $\mathbf{g}$. This is sent to `levenberg` in li
 ```{code-cell}
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
-FNC_init
+FNC_init;
 pwd
 ```
 
@@ -110,11 +110,14 @@ pwd
 ``````{dropdown} @demo-basics-first
 :open:
 
-Let's use it to define and solve an initial-value problem for $u'=\sin[(u+t)^2]$ over $t \in [0,4]$, such that $u(0)=-1$. To create an initial-value problem for $u(t)$, we must create a function that computes $u'$, an initial value for $u$, and a vector describing the time domain.
-```{tip}
-:class: dropdown
-Most real ODE problems contain parameters that are constant during the solution but that can change from one problem instance to the next. Accordingly, we define the ODE function below to accept a third argument, `p`, which is a vector of parameters. We always include this argument for consistency, even when there are no parameters.
+Let's use a built-in method to define and solve the initial-value problem
+
+```{math}
+:numbered: false
+u'=\sin[(u+t)^2], \quad t \in [0,4], \quad u(0)=-1.
 ```
+
+We must create a function that computes $u'$, an initial value for $u$, and a vector describing the time domain.
 
 ```{index} ! MATLAB; ode, ! MATLAB; solve
 ```
@@ -146,7 +149,7 @@ You might want to know the solution at particular times other than the ones sele
 
 ```{code-cell}
 sol = ode45(f, [0, 4], u0);
-u = @(t) deval(sol, t)';
+u = @(t) deval(sol, t)';    % return a column vector
 u(0:0.5:2)
 ```
 ``````
@@ -165,7 +168,7 @@ tspan = [0, 1];
 [t, u] = ode45(f, tspan, u0);
 ```
 
-The warning message we received can mean that there is a bug in the formulation of the problem. But if everything has been done correctly, it suggests that the solution may not exist past the indicated time. This is a possibility in nonlinear ODEs.
+The warning message we received can mean that there is a bug in the formulation of the problem. But if everything has been done correctly, it suggests that the solution simply may not exist past the indicated time. This is a possibility in nonlinear ODEs.
 
 ```{code-cell}
 clf
@@ -215,7 +218,14 @@ In this case the actual condition number is one, because the initial difference 
 
 ``````{dropdown} @demo-euler-converge
 :open:
-We consider the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. We need to define the function for the right-hand side of the ODE, the interval for the independent variable, and the initial value.
+We consider the IVP
+
+```{math}
+:numbered: false
+u'=\sin[(u+t)^2], \quad t \in [0,4], \quad u(0)=-1.
+```
+
+As usual, we need to define the function for the right-hand side of the ODE, the interval for the independent variable, and the initial value.
 
 ```{code-cell}
 f = @(t, u) sin((t + u)^2);
@@ -233,7 +243,7 @@ ylabel('u(t)')
 title(('Solution by Euler''s method'));
 ```
 
-We could define a different interpolant to get a smoother picture above, but the derivation of Euler's method assumed a piecewise linear interpolant. We can instead request more steps to make the interpolant look smoother.
+We could define a different interpolant to get a smoother picture above, but the derivation of Euler's method assumed a piecewise linear interpolant, and that sets the limit of its accuracy. We can instead request more steps to make the interpolant look smoother.
 
 ```{code-cell}
 [t, u] = eulerivp(f, tspan, u0, 50);
@@ -286,19 +296,29 @@ We encode the predator–prey equations via a function, defined here externally.
 :language: matlab
 ```
 
-The values of `alpha` and `beta` are parameters that influence the solution of the IVP. We use the `Parameters` field of the IVP object to define them for the solver, which in turn passes them as the third argument into our ODE function. 
+The values of `alpha` and `beta` are parameters that influence the solution of the IVP, so the function signature above includes a third argument for them. But the solvers we use expect to receive a function of $t$ and $\mathbf{u}$ only. To deal with this, we create a function handle `f` that captures the parameter values in its definition.
 
 ```{code-cell}
 params = [0.1, 0.25];
 f = @(t, u) f63_predprey(t, u, params);
-u0 = [1; 0.01];    % column vector
-a = 0; b = 45;     % time interval
+```
 
-[t, u] = ode45(f, linspace(a, b, 800), u0);
+```{tip}
+:class: dropdown
+The technique above is called *currying* or *partial application*. If we later want to change the values of the parameters, we have to redefine `f` with the new values.
+```
+
+We use a new syntax here for calling `ode45`. By giving it a vector as the `tspan` argument, we are asking it to return the solution at the times in that vector.
+
+```{code-cell}
+u0 = [1; 0.01];    % column vector
+a = 0; b = 60;     % time interval
+
+[t, u] = ode45(f, linspace(a, b, 1001), u0);
 size(u)
 ```
 
-Each row of `u` is the solution vector $\mathbf{u}$ at a particular time; each column is a component of $\mathbf{u}$ over all time.
+Each row of `u` from the output is the solution vector $\mathbf{u}$ at a particular time; each column is a component of $\mathbf{u}$ over all time.
 
 ```{code-cell}
 clf
@@ -309,7 +329,7 @@ title('Predator-prey solution')
 legend('prey', 'predator');
 ```
 
-We can also use {numref}`Function {number} <function-euler>` to find the solution.
+We can also use {numref}`Function {number} <function-euler>` to find the solution (although it does not allow us to choose different time nodes for the output).
 
 ```{code-cell}
 [t_e, u_e] = eulersys(f, [a, b], u0, 1200);
@@ -327,33 +347,63 @@ When there are just two components, it's common to plot the solution in the _pha
 ```{code-cell}
 clf
 plot(u(:, 1), u(:, 2))
-title("Predator-prey in the phase plane")
-xlabel("y")
-ylabel("z");
+title("Predator-prey solution in the phase plane")
+xlabel("prey, y(t)")
+ylabel("predator, z(t)");
 ```
 
-From this plot we can deduce that the solution approaches a periodic one, which in the phase plane is represented by a closed loop.
+As time progresses, the point in the phase plane spirals inward toward a limiting closed loop called a *limit cycle* representing a periodic solution:
+
+```{index} MATLAB; animation
+```
+
+```{code-cell}
+:tags: [hide-input, remove-output]
+axis(axis)
+cla,  hold on
+grid on
+curve_ = plot(u(1, 1), u(1, 2))
+head_ = plot(u(1, 1), u(1, 2), 'o', 'markersize', 10, 'markerfacecolor', 'r');
+title('Predator–prey solution in the phase plane') 
+xlabel("prey, y(t)")
+ylabel("predator, z(t)");
+vid = VideoWriter("figures/predator-prey.mp4","MPEG-4");
+vid.Quality = 85;
+open(vid)
+for frame = 1:2:length(t)
+    curve_.XData = u(1:frame, 1);
+    curve_.YData = u(1:frame, 2);
+    head_.XData = u(frame, 1);
+    head_.YData = u(frame, 2);
+    writeVideo(vid, frame2im(getframe(gcf)));
+end
+close(vid)
+```
+
+![Predator–prey solution](figures/predator-prey.mp4)
+
 ``````
 
 (demo-systems-coupledpendula-matlab)=
 
 ``````{dropdown} @demo-systems-coupledpendula
 :open:
-Let's implement the coupled pendulums from {numref}`Example {number} <example-systems-coupledpendula>`. The pendulums will be pulled in opposite directions and then released together from rest.
+Let's implement the coupled pendulums from @example-systems-coupledpendula. The pendulums will be pulled in opposite directions and then released together from rest.
 
 ```{literalinclude} f63_pendulums.m
 :language: matlab
 ```
 
 ```{code-cell}
-u0 = [1.25; -0.5; 0; 0];
+u0 = [1.25; -0.3; 0; 0];
 tspan = [0, 50];
 ```
 
 First we check the behavior of the system when the pendulums are uncoupled, i.e., when $k=0$.
+
 ```{tip}
 :class: dropdown
-Here `OutputVariables` is used to restrict output to just $u_1$ and $u_2$.
+A third argument to `deval` is used below to restrict output to just $u_1$ and $u_2$.
 ```
 
 ```{code-cell}
@@ -361,14 +411,48 @@ params =[0.01, 0.5, 0];    % gamma, L, k
 f = @(t, u) f63_pendulums(t, u, params);
 sol = ode45(f, tspan, u0);
 theta = @(t) deval(sol, t, 1:2)';
-t = linspace(tspan(1), tspan(2), 1001);
+t = linspace(tspan(1), tspan(2), 901);
 clf, plot(t, theta(t))
 xlabel("t");  ylabel("angle")
 title("Uncoupled pendulums")
 legend("\theta_1", "\theta_2");
 ```
 
-You can see that the pendulums swing independently. Because the model is nonlinear and the initial angles are not small, they have slightly different periods of oscillation, and they go in and out of phase.
+You can see that the pendulums swing independently:
+
+```{code-cell}
+:tags: [hide-input, remove-output]
+clf
+rod_ = [];  bob_ = [];
+for k = 1:2
+    subplot(1, 2, k)
+    axis equal, axis([-1.1, 1.1, -1.1, 1.1])
+    hold on, axis off
+    rod_ = [rod_; plot(0, 0, 'linewidth', 3)];
+    bob_= [bob_; plot(0, 0, 'ko', 'markersize', 20, 'markerfacecolor', 'k')];
+end
+text_ = text(-0.9, 0.85, "t = 0", 'fontsize', 20);
+vid = VideoWriter("figures/pendulums-weak.mp4","MPEG-4");
+vid.FrameRate = 24;
+open(vid)
+for frame = 1:401
+    q = theta(t(frame));
+    for k = 1:2
+        rod_(k).XData = [0, sin(q(k))];
+        rod_(k).YData = [0, -cos(q(k))];
+        bob_(k).XData = sin(q(k));
+        bob_(k).YData = -cos(q(k));
+    end
+    text_.String = sprintf("t = %.2f", t(frame));
+    writeVideo(vid, frame2im(getframe(gcf)));
+end
+close(vid)
+```
+
+![Uncoupled pendulums](figures/pendulums-weak.mp4)
+
+
+Because the model is nonlinear and the initial angles are not small, they have slightly different periods of oscillation, and they go in and out of phase.
 
 With coupling activated, a different behavior is seen.
 
@@ -383,7 +467,38 @@ title("Coupled pendulums")
 legend("\theta_1", "\theta_2");
 ```
 
-The coupling makes the pendulums swap energy back and forth.
+The coupling makes the pendulums swap energy back and forth:
+
+```{code-cell}
+:tags: [hide-input, remove-output]
+clf
+rod_ = [];  bob_ = [];
+for k = 1:2
+    subplot(1, 2, k)
+    axis equal, axis([-1.1, 1.1, -1.1, 1.1])
+    hold on, axis off
+    rod_ = [rod_; plot(0, 0, 'linewidth', 3)];
+    bob_= [bob_; plot(0, 0, 'ko', 'markersize', 20, 'markerfacecolor', 'k')];
+end
+text_ = text(-0.9, 0.85, "t = 0", 'fontsize', 20);
+vid = VideoWriter("figures/pendulums-strong.mp4","MPEG-4");
+vid.FrameRate = 24;
+open(vid)
+for frame = 1:length(t)
+    q = theta(t(frame));
+    for k = 1:2
+        rod_(k).XData = [0, sin(q(k))];
+        rod_(k).YData = [0, -cos(q(k))];
+        bob_(k).XData = sin(q(k));
+        bob_(k).YData = -cos(q(k));
+    end
+    text_.String = sprintf("t = %.2f", t(frame));
+    writeVideo(vid, frame2im(getframe(gcf)));
+end
+close(vid)
+```
+
+![Coupled pendulums](figures/pendulums-strong.mp4)
 ``````
 
 ### 6.4 @section-ivp-rk
@@ -392,7 +507,12 @@ The coupling makes the pendulums swap energy back and forth.
 
 ``````{dropdown} @demo-rk-converge
 :open:
-We solve the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
+We solve the IVP
+
+```{math}
+:numbered: false
+u'=\sin[(u+t)^2], \quad t \in [0,4], \quad u(0)=-1.
+```
 
 ```{code-cell}
 f = @(t, u) sin((t + u)^2);

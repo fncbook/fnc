@@ -70,7 +70,7 @@ numbering:
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init;
-pwd;;
+cd;
 ```
 
 ### 10.1 @section-bvp-tpbvp
@@ -209,7 +209,7 @@ ga = @(u, du) u + 1;
 gb = @(u, du) u;
 clf
 warning off
-for lambda = 16:4:28
+for lambda = 16:4:24
     phi = @(x, u, du_dx) lambda^2 * (u + 1);
     [x, u, du_dx] = shoot(phi, 0.0, 1.0, ga, gb, [-1; 0], 1e-8);
     plot(x, u, displayname=sprintf("lambda=%d", lambda))
@@ -217,10 +217,12 @@ for lambda = 16:4:28
     xlabel('x'),  ylabel('u(x)')
     title('Shooting instability')
     legend(location="northwest");
+    fprintf('u(1) = %.5e\n', u(end))
 end
 ```
 
-The numerical solution fails at the largest value of $\lambda$ because the initial condition became infinite.
+As $\lambda$ increases, the numerical solution above fails to satisfy the boundary condition at $x=1$. 
+
 ``````
 
 ### 10.3 @section-bvp-diffmats

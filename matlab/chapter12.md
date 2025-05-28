@@ -31,12 +31,11 @@ f = @(t, u) -c * (Dx*u);
 t = linspace(0, 3, 201);
 ```
 
-The following initial condition isn't mathematically periodic, but the deviation is less than machine precision. We specify RK4 as the solver.  
+The following initial condition isn't mathematically periodic, but the deviation is less than machine precision. We specify `rk23` as the solver.  
 
 ```{code-cell}
 u_init = 1 + exp(-3*x.^2);
-t = linspace(0, 3, 201);
-[t, U] = ode45(f, t, u_init);
+[t, U] = rk23(f, [0, 3], u_init, 1e-6);
 U = U';   % each column is one time step
 ```
 
@@ -61,7 +60,7 @@ xlabel('x'),  ylabel('u(x,t)')
 vid = VideoWriter("figures/advection-periodic.mp4","MPEG-4");
 vid.Quality = 85;
 open(vid);
-for frame = 1:length(t)
+for frame = 1:2:length(t)
     cla, plot(x, U(:, frame))
     str = sprintf("t = %.2f", t(frame));
     text(-3.5, 1.9, str);

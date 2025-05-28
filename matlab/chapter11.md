@@ -33,7 +33,7 @@ numbering:
 ```{code-cell}
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
-FNC_init;
+FNC_init; pwd;
 ```
 
 ### 11.1 @section-diffusion-blackscholes
@@ -95,7 +95,7 @@ axis tight,  grid on
 legend(location="northwest")
 ```
 
-```{index} ! MATLAB; animation
+```{index} MATLAB; animation
 ```
 
 Alternatively, here is an animation of the solution.
