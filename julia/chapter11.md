@@ -102,7 +102,7 @@ plot(x, V[:, idx];
     title="Black–Scholes solution")
 ```
 
-```{index} ! Julia; @animate
+```{index} Julia; @animate
 ```
 
 Alternatively, here is an animation of the solution.

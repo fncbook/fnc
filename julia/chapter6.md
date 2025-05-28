@@ -117,12 +117,17 @@ include("FNC_init.jl")
 (demo-basics-first-julia)=
 ``````{dropdown} @demo-basics-first
 :open:
-The `OrdinaryDiffEq` package offers solvers for IVPs. Let's use it to define and solve an initial-value problem for $u'=\sin[(u+t)^2]$ over $t \in [0,4]$, such that $u(0)=-1$.
+The `OrdinaryDiffEq` package offers solvers for IVPs. Let's use it to define and solve the initial-value problem 
 
-Because many practical problems come with parameters that are fixed within an instance but varied from one instance to another, the syntax for IVPs includes a input argument `p` that stays fixed throughout the solution. Here we don't want to use that argument, but it must be in the definition for the solver to work.
+```{math}
+:numbered: false
+u'=\sin[(u+t)^2], \quad t \in [0,4], \quad u(0)=-1.
+```
+
+To create an initial-value problem for $u(t)$, we must supply a function that computes $u'$, an initial value for $u$, and the endpoints of the interval for $t$. The $t$ interval should be defined as `(a, b)`, where at least one of the values is a float.
+
 ```{tip}
-:class: dropdown
-To create an initial-value problem for $u(t)$, you must supply a function that computes $u'$, an initial value for $u$, and the endpoints of the interval for $t$. The $t$ interval should be defined as `(a,b)`, where at least one of the values is a float.
+Because many practical problems come with parameters that are fixed within an instance but varied from one instance to another, the syntax for IVPs includes a input argument `p` that stays fixed throughout the solution. Here we don't want to use that argument, but it must be in the definition for the solver to work.
 ```
 
 ```{index} ! Julia; ODEProblem, ! Julia; solve
@@ -228,7 +233,12 @@ In this case the actual condition number is one, because the initial difference 
 (demo-euler-converge-julia)=
 ``````{dropdown} @demo-euler-converge
 :open:
-We consider the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
+We consider the IVP
+
+```{math}
+:numbered: false
+u'=\sin[(u+t)^2], \quad t \in [0,4], \quad u(0)=-1.
+```
 
 ```{code-cell}
 using OrdinaryDiffEq
@@ -249,7 +259,7 @@ plot(t, u;
     title="Solution by Euler's method")
 ```
 
-We could define a different interpolant to get a smoother picture above, but the derivation of Euler's method assumed a piecewise linear interpolant. We can instead request more steps to make the interpolant look smoother.
+We could define a different interpolant to get a smoother picture above, but the derivation of Euler's method assumed a piecewise linear interpolant, and that sets the limit of its accuracy. We can instead request more steps to make the interpolant look smoother.
 
 ```{code-cell}
 t, u = FNC.euler(ivp, 50)
@@ -306,7 +316,7 @@ end;
 
 As before, the ODE function must accept three inputs, `u`, `p`, and `t`, even though in this case there is no explicit dependence on `t`. The second input is used to pass parameters that don't change throughout a single instance of the problem.
 
-To specify the IVP we must also provide the initial condition, which is a 2-vector here, and the interval for the independent variable.
+To specify the IVP, we must also provide the initial condition, which is a 2-vector here, and the interval for the independent variable.
 
 ```{code-cell}
 using OrdinaryDiffEq
@@ -352,6 +362,7 @@ plot!(t[1:3:end], u[1:3:end, :];
 Notice above that the accuracy of the Euler solution deteriorates rapidly.
 
 When there are just two components, it's common to plot the solution in the _phase plane_, i.e., with $u_1$ and $u_2$ along the axes and time as a parameterization of the curve.
+
 ```{tip}
 :class: dropdown
 You can use `idxs` in the plot of a solution produced by `solve` to specify the components of the solution that appear on each axis.
@@ -359,17 +370,41 @@ You can use `idxs` in the plot of a solution produced by `solve` to specify the 
 
 ```{code-cell}
 plot(sol, idxs=(1, 2),
-    title="Predator-prey in the phase plane",
-    xlabel=L"y",  ylabel=L"z")
+    title="Predator-prey solution in the phase plane",
+    xlabel=L"y(t)",  ylabel=L"z(t)")
 ```
 
-From this plot we can deduce that the solution approaches a periodic one, which in the phase plane is represented by a closed loop.
+As time progresses, the point in the phase plane spirals inward toward a limiting closed loop called a *limit cycle* representing a periodic solution:
+
+
+```{index} Julia; @animate
+```
+
+```{code-cell}
+:tags: [hide-input, remove-output]
+prey, predator = [], []
+anim = @animate for t in range(0, 60, 801)
+    y, z = sol(t)
+    plot(prey, predator;
+        title="Predator-prey solution in the phase plane",
+        xlabel=L"y(t)",  ylabel=L"z(t)", legend=false)
+    push!(prey, y)
+    push!(predator, z)
+    scatter!([y], [z], m=(5, :red))
+    xlims!(0, 9)
+    ylims!(0, 6)
+end
+mp4(anim, "figures/predator-prey.mp4")
+```
+
+![Predator–prey solution](figures/predator-prey.mp4)
 ``````
 
 (demo-systems-coupledpendula-julia)=
 ``````{dropdown} @demo-systems-coupledpendula
 :open:
-Let's implement the coupled pendulums from {numref}`Example {number} <example-systems-coupledpendula>`. The pendulums will be pulled in opposite directions and then released together from rest.
+Let's implement the coupled pendulums from @example-systems-coupledpendula. The pendulums will be pulled in opposite directions and then released together from rest.
+
 ```{tip}
 :class: dropdown
 The `similar` function creates an array of the same size and type as a given value, without initializing the contents.
@@ -386,11 +421,12 @@ function couple(u, p, t)
     return udot
 end
 
-u₀ = [1.25, -0.5, 0, 0]
+u₀ = [1.25, -0.3, 0, 0]
 tspan = (0.0, 50.0);
 ```
 
 First we check the behavior of the system when the pendulums are uncoupled, i.e., when $k=0$.
+
 ```{tip}
 :class: dropdown
 Here `idxs` is used to plot two components as functions of time.
@@ -406,7 +442,28 @@ plot(sol, idxs=[1, 2],
     title="Uncoupled pendulums")
 ```
 
-You can see that the pendulums swing independently. Because the model is nonlinear and the initial angles are not small, they have slightly different periods of oscillation, and they go in and out of phase.
+You can see that the pendulums swing independently:
+
+```{code-cell}
+:tags: [hide-input, remove-output]
+anim = @animate for t in range(0, 24, 251)
+    θ₁, θ₂, _ = sol(t)
+    plot([0, sin(θ₁)], [0, -cos(θ₁)], l=4;
+        layout=(1, 2), aspect_ratio=1, grid=false,
+        xaxis=((-1.1, 1.1), false), yaxis=((-1.1, 0.1), false), legend=false)
+    plot!([0, sin(θ₂)], [0, -cos(θ₂)], l=4;
+        subplot=2, aspect_ratio=1, grid=false,
+        xaxis=((-1.1, 1.1), false), yaxis=((-1.1, 0.1), false), legend=false)
+    scatter!([sin(θ₁)], [-cos(θ₁)], m=(5, :black), subplot=1)
+    scatter!([sin(θ₂)], [-cos(θ₂)], m=(5, :black), subplot=2)
+    annotate!(-0.95, 0.25, Plots.text(@sprintf("t = %.1f", t), :left, 11); subplot=1)
+end
+mp4(anim, "figures/pendulums-weak.mp4")
+```
+
+![Uncoupled pendulums](figures/pendulums-weak.mp4)
+
+Because the model is nonlinear and the initial angles are not small, they have slightly different periods of oscillation, and they go in and out of phase.
 
 With coupling activated, a different behavior is seen.
 
@@ -420,7 +477,26 @@ plot(sol, idxs=[1, 2],
     title="Coupled pendulums")
 ```
 
-The coupling makes the pendulums swap energy back and forth.
+The coupling makes the pendulums swap energy back and forth:
+
+```{code-cell}
+:tags: [hide-input, remove-output]
+anim = @animate for t in range(0, 50, 601)
+    θ₁, θ₂, _ = sol(t)
+    plot([0, sin(θ₁)], [0, -cos(θ₁)], l=4;
+        layout=(1, 2), aspect_ratio=1, grid=false,
+        xaxis=((-1.1, 1.1), false), yaxis=((-1.1, 0.1), false), legend=false)
+    plot!([0, sin(θ₂)], [0, -cos(θ₂)], l=4;
+        subplot=2, aspect_ratio=1, grid=false,
+        xaxis=((-1.1, 1.1), false), yaxis=((-1.1, 0.1), false), legend=false)
+    scatter!([sin(θ₁)], [-cos(θ₁)], m=(5, :black), subplot=1)
+    scatter!([sin(θ₂)], [-cos(θ₂)], m=(5, :black), subplot=2)
+    annotate!(-0.95, 0.1, Plots.text(@sprintf("t = %.1f", t), :left, 11); subplot=1)
+end
+mp4(anim, "figures/pendulums-strong.mp4")
+```
+
+![Coupled pendulums](figures/pendulums-strong.mp4)
 ``````
 
 ### 6.4 @section-ivp-rk
@@ -428,7 +504,12 @@ The coupling makes the pendulums swap energy back and forth.
 (demo-rk-converge-julia)=
 ``````{dropdown} @demo-rk-converge
 :open:
-We solve the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
+We solve the IVP
+
+```{math}
+:numbered: false
+u'=\sin[(u+t)^2], \quad t \in [0,4], \quad u(0)=-1.
+```
 
 ```{code-cell}
 using OrdinaryDiffEq

@@ -102,7 +102,7 @@ xlabel("stock price"),  ylabel("option value")
 title("Black-Scholes solution");
 ```
 
-```{index} ! Python; animation
+```{index} Python; animation
 ```
 
 Alternatively, here is an animation of the solution.

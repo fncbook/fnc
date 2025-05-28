@@ -114,9 +114,14 @@ exec(open("FNC_init.py").read())
 (demo-basics-first-python)=
 ``````{dropdown} @demo-basics-first
 :open:
-Let's use `solve_ivp` from `scipy.integrate` to define and solve an initial-value problem for $u'=\sin[(u+t)^2]$ over $t \in [0,4]$, such that $u(0)=-1$.
+Let's use `solve_ivp` from `scipy.integrate` to define and solve the initial-value problem 
 
-To create an initial-value problem for $u(t)$, you must supply a function that computes $u'$, an initial value for $u$, and the endpoints of the interval for $t$. The $t$ interval should be defined as `(a,b)`, where at least one of the values is a float.
+```{math}
+:numbered: false
+u'=\sin[(u+t)^2], \quad t \in [0,4], \quad u(0)=-1.
+```
+
+To create an initial-value problem for $u(t)$, we must supply a function that computes $u'$, an initial value for $u$, and the endpoints of the interval for $t$.
 
 ```{index} ! Python; solve_ivp
 ```
@@ -124,10 +129,10 @@ To create an initial-value problem for $u(t)$, you must supply a function that c
 ```{code-cell}
 f = lambda t, u: sin((t + u) ** 2)
 tspan = [0.0, 4.0]
-u0 = [-1.0]
+u0 = array([-1.0])
 ```
 
-Note above that even though this is a problem for a scalar function $u(t)$, we had to set the initial condition as a "one-dimensional vector."
+Note above that even though this is a problem for a scalar function $u(t)$, we had to set the initial condition as a one-component vector.
 
 ```{code-cell}
 from scipy.integrate import solve_ivp
@@ -221,7 +226,12 @@ In this case the actual condition number is one, because the initial difference 
 (demo-euler-converge-python)=
 ``````{dropdown} @demo-euler-converge
 :open:
-We consider the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$.
+We consider the IVP
+
+```{math}
+:numbered: false
+u'=\sin[(u+t)^2], \quad t \in [0,4], \quad u(0)=-1.
+```
 
 ```{code-cell}
 f = lambda t, u: sin((t + u) ** 2)
@@ -236,7 +246,7 @@ title("Solution by Euler's method")
 legend();
 ```
 
-We could define a different interpolant to get a smoother picture above, but the derivation of Euler's method assumed a piecewise linear interpolant. We can instead request more steps to make the interpolant look smoother.
+We could define a different interpolant to get a smoother picture above, but the derivation of Euler's method assumed a piecewise linear interpolant, and that sets the limit of its accuracy. We can instead request more steps to make the interpolant look smoother.
 
 ```{code-cell}
 t, u = FNC.euler(f, tspan, u0, 200)
@@ -294,12 +304,12 @@ def predprey(t, u):
 
 As before, the ODE function must accept three inputs, `u`, `p`, and `t`, even though in this case there is no explicit dependence on `t`. The second input is used to pass parameters that don't change throughout a single instance of the problem.
 
-To specify the IVP we must also provide the initial condition, which is a 2-vector here, and the interval for the independent variable. These are given in the call to `solve_ivp`.
+To specify the IVP, we must also provide the initial condition, which is a 2-vector here, and the interval for the independent variable. These are given in the call to `solve_ivp`.
 
 ```{code-cell}
 from scipy.integrate import solve_ivp
 u0 = array([1, 0.01])
-tspan = [0.0, 80.0]
+tspan = [0.0, 60.0]
 alpha, beta = 0.1, 0.25
 sol = solve_ivp(predprey, tspan, u0, dense_output=True)
 print(f"solved with {sol.y.shape[1]} time steps")
@@ -308,7 +318,7 @@ print(f"solved with {sol.y.shape[1]} time steps")
 As in scalar problems, the solution object has fields `t` and `y` that contain the values of the independent and dependent variables, respectively. Each row of `y` represents one component of the solution at every time step, and each column of `y` is the entire solution vector at one time step. Since we used `dense_output=True`, there is also a method `sol` that can be used to evaluate the solution at any time. 
 
 ```{code-cell}
-t = linspace(0, 80, 1200)
+t = linspace(0, 60, 1200)
 u = vstack([sol.sol(t[i]) for i in range(t.size)]).T    # same shape as sol.y
 fig, ax = subplots()
 ax.plot(t, u[0, :], label="prey")
@@ -320,21 +330,58 @@ title(("Predator-prey solution"));
 We can also use {numref}`Function {number} <function-euler>` to find the solution.
 
 ```{code-cell}
-t_E, u_E = FNC.euler(predprey, tspan, u0, 800)
+t_E, u_E = FNC.euler(predprey, tspan, u0, 1001)
 ax.scatter(t_E, u_E[0, :], label="prey (Euler)", s=1)
 ax.scatter(t_E, u_E[1, :], label="predator (Euler)", s=2)
 ax.legend()
 fig
 ```
 
-You can see above that the Euler solution is not very accurate. When the solution has two components, it's common to plot the it in the _phase plane_, i.e., with $u_1$ and $u_2$ along the axes and time as a parameterization of the curve.
+Yotice above that the accuracy of the Euler solution deteriorates rapidly.
+
+When the solution has two components, it's common to plot the it in the _phase plane_, i.e., with $u_1$ and $u_2$ along the axes and time as a parameterization of the curve.
 
 ```{code-cell}
 plot(u[0, :], u[1, :])
-xlabel("prey"), ylabel("predator")
-title(("Predator-prey phase plane"));
+xlabel("prey, $y(t)$"), ylabel("predator, $z(xt)$")
+title("Predator-prey solution in the phase plane");
 ```
-From this plot we can see that the solution approaches a periodic one, which in the phase plane is represented by a closed path.
+
+As time progresses, the point in the phase plane spirals inward toward a limiting closed loop called a *limit cycle* representing a periodic solution:
+
+```{index} Python; animation
+```
+
+```{code-cell}
+:tags: [hide-input, remove-output]
+from matplotlib import animation
+fig, ax = subplots()
+curve_ = ax.plot(u[0, 0], u[1, 0])[0]
+head_ = ax.plot(u[0, 0], u[1, 0], 'ro', markersize=6)[0]
+
+ax.set_xlabel("prey, $y(t)$")
+ax.set_ylabel("predator, $z(xt)$")
+ax.set_xlim(0, 9)
+ax.set_ylim(0, 6)
+ax.set_title("Predator-prey solution in the phase plane")
+
+predator = []
+prey = []
+def snapshot(t):
+    y, z = sol.sol(t)
+    prey.append(y)
+    predator.append(z)
+    head_.set_data([y], [z])
+    curve_.set_data(prey, predator)
+
+anim = animation.FuncAnimation(
+    fig, snapshot, frames=linspace(0, 60, 801)
+    )
+anim.save("figures/predator-prey.mp4", fps=24)
+close()
+```
+
+![Predator–prey solution](figures/predator-prey.mp4)
 ``````
 
 (demo-systems-coupledpendula-python)=
@@ -365,32 +412,77 @@ We use a closure here to pass the fixed parameter values into `couple`.
 ```{code-cell}
 gamma, L, k = 0.01, 0.5, 0.0
 du_dt = lambda t, u: couple(t, u, (gamma, L, k))
-sol = solve_ivp(du_dt, tspan, u0, t_eval=linspace(0, 50, 1000))
+sol = solve_ivp(du_dt, tspan, u0, t_eval=linspace(0, 50, 1001))
 plot(sol.t, sol.y[:2, :].T)    # first two components of solution
 xlabel("t"), ylabel("angle")
 title("Uncoupled pendulums");
 ```
 
-You can see that the pendulums swing independently. Because the model is nonlinear and the initial angles are not small, they have slightly different periods of oscillation, and they go in and out of phase.
+You can see that the pendulums swing independently:
+
+```{code-cell}
+:tags: [hide-input, remove-output]
+from matplotlib import animation
+fig, ax = subplots(1, 2)
+rod_ = [] 
+bob_ = []
+for k in [0, 1]:
+    rod_.append(ax[k].plot([], [], linewidth=3)[0])
+    bob_.append(ax[k].scatter([0], [0], color='black', s=50))
+    ax[k].set_aspect('equal')
+    ax[k].set_xlim([-1.1, 1.1])
+    ax[k].set_ylim([-1.1, 0.4])
+    ax[k].set_axis_off()
+time_ = ax[0].text(-0.95, 0.25, "", fontsize=11)
+
+def snapshot(i):
+    q = sol.y[:2, i]
+    for k in [0, 1]:
+        rod_[k].set_data([0, sin(q[k])], [0, -cos(q[k])])
+        bob_[k].set_offsets([sin(q[k]), -cos(q[k])])
+    time_.set_text(f"t = {sol.t[i]:.1f} s")
+
+anim = animation.FuncAnimation(fig, snapshot, frames=401)
+anim.save("figures/pendulums-weak.mp4", fps=24)
+```
+
+![Uncoupled pendulums](figures/pendulums-weak.mp4)
+
+Because the model is nonlinear and the initial angles are not small, they have slightly different periods of oscillation, and they go in and out of phase.
 
 With coupling activated, a different behavior is seen.
 
 ```{code-cell}
 k = 0.75    # changes the value in the du_dt closure
-sol = solve_ivp(du_dt, tspan, u0, t_eval=linspace(0, 50, 1000))
+sol = solve_ivp(du_dt, tspan, u0, t_eval=linspace(0, 50, 1001))
 plot(sol.t, sol.y[:2, :].T)
 xlabel("t"), ylabel("angle")
 title("Coupled pendulums");
 ```
 
-The coupling makes the pendulums swap energy back and forth.
+The coupling makes the pendulums swap energy back and forth:
+
+```{code-cell}
+:tags: [hide-input, remove-output]
+anim = animation.FuncAnimation(fig, snapshot, frames=1001)
+anim.save("figures/pendulums-strong.mp4", fps=24)
+```
+
+![Coupled pendulums](figures/pendulums-strong.mp4)
 ``````
 
 ### 6.4 @section-ivp-rk
 (demo-rk-converge-python)=
 ``````{dropdown} @demo-rk-converge
 :open:
-We solve the IVP $u'=\sin[(u+t)^2]$ over $0\le t \le 4$, with $u(0)=-1$. We start by getting a reference solution to validate against.
+We solve the IVP
+
+```{math}
+:numbered: false
+u'=\sin[(u+t)^2], \quad t \in [0,4], \quad u(0)=-1.
+```
+
+We use the `solve_ivp` function to create an accurate reference solution.
 
 ```{code-cell}
 from scipy.integrate import solve_ivp
