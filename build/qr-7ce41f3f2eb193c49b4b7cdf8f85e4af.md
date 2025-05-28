@@ -1,0 +1,346 @@
+---
+numbering:
+  enumerator: 3.3.%s
+---
+(section-leastsq-qr)=
+# The QR factorization
+
+```{index} ! orthogonal vectors, ! orthonormal vectors
+```
+
+Sets of vectors satisfying a certain property are useful both theoretically and computationally.
+
+::::{prf:definition} Orthogonal vectors
+:label: definition-orthogonalvectors
+Two vectors $\mathbf{u}$ and $\mathbf{v}$ in $\mathbb{R}^n$ are {term}`orthogonal vectors` if $\mathbf{u}^T\mathbf{v}=0$. We say that a collection of vectors $\mathbf{q}_1,\ldots,\mathbf{q}_k$ is orthogonal if
+
+```{math}
+:label: orthogonality
+i \neq j \quad \Rightarrow \quad \mathbf{q}_i^T\mathbf{q}_j = 0.
+```
+
+If {eq}`orthogonality` applies and also $\mathbf{q}_i^T\mathbf{q}_i=1$ for all $i=1,\ldots,n$, we say the vectors are **orthonormal**.
+::::
+
+```{index} inner product
+```
+
+In two and three dimensions, orthogonality is the same as perpendicularity. 
+
+Orthogonal vectors simplify inner products. For example, if $\mathbf{q}_1$ and $\mathbf{q}_2$ are orthogonal, then
+
+```{math}
+:label: orthosubtract
+\| \mathbf{q}_1 - \mathbf{q}_2 \|_2^2 = (\mathbf{q}_1-\mathbf{q}_2)^T(\mathbf{q}_1-\mathbf{q}_2)
+= \mathbf{q}_1^T\mathbf{q}_1 - 2 \mathbf{q}_1^T\mathbf{q}_2 + \mathbf{q}_2^T\mathbf{q}_2
+= \|\mathbf{q}_1\|_2^2 + \|\mathbf{q}_2\|_2^2.
+```
+
+As in the rest of this chapter, we will be using the 2-norm exclusively. 
+
+```{index} subtractive cancellation
+```
+
+Equation {eq}`orthosubtract` is the key to the computational attractiveness of orthogonality. {numref}`fig-nonorthogonal` shows how nonorthogonal vectors can allow a multidimensional version of subtractive cancellation, in which $\|\mathbf{x}-\mathbf{y}\|$ is much smaller than $\|\mathbf{x}\|$ and $\|\mathbf{y}\|$. As the figure illustrates, orthogonal vectors do not allow this phenomenon. By {eq}`orthosubtract`, the magnitude of a vector difference or sum is larger than the magnitudes of the original vectors. 
+
+```{figure} figures/nonorthogonal.svg
+:name: fig-nonorthogonal
+Nonorthogonal vectors can cause cancellation when subtracted, but orthogonal vectors never do.
+```
+
+```{prf:observation}
+Addition and subtraction of vectors are guaranteed to be well conditioned when the vectors are orthogonal.
+```
+
+## Orthogonal and ONC matrices
+
+Statements about orthogonal vectors are often made more easily in matrix form. Let $\mathbf{Q}$ be an $n\times k$ matrix whose columns $\mathbf{q}_1, \ldots, \mathbf{q}_k$ are orthogonal vectors. The orthogonality conditions {eq}`orthogonality` become simply that $\mathbf{Q}^T\mathbf{Q}$ is a diagonal matrix, since
+
+```{math}
+\mathbf{Q}^T \mathbf{Q} =
+\begin{bmatrix}
+\mathbf{q}_1^T \\[1mm] \mathbf{q}_2^T \\ \vdots \\ \mathbf{q}_k^T
+\end{bmatrix}
+\begin{bmatrix}
+\mathbf{q}_1 & \mathbf{q}_2 &  \cdots & \mathbf{q}_k
+\end{bmatrix}
+=
+\begin{bmatrix}
+\mathbf{q}_1^T\mathbf{q}_1 & \mathbf{q}_1^T\mathbf{q}_2 & \cdots & \mathbf{q}_1^T\mathbf{q}_k \\[1mm]
+\mathbf{q}_2^T\mathbf{q}_1 & \mathbf{q}_2^T\mathbf{q}_2 & \cdots & \mathbf{q}_2^T\mathbf{q}_k \\
+\vdots & \vdots & & \vdots \\
+\mathbf{q}_k^T\mathbf{q}_1 & \mathbf{q}_k^T\mathbf{q}_2 & \cdots & \mathbf{q}_k^T\mathbf{q}_k
+\end{bmatrix}.
+```
+
+If the columns of $\mathbf{Q}$ are orthonormal, then $\mathbf{Q}^T\mathbf{Q}$ is the $k\times k$ identity matrix. This is such an important property that we will break with common practice here and give this type of matrix a name. 
+
+```{index} ! ONC matrix
+```
+
+```{prf:definition} ONC matrix
+:label: definition-qr-ONC
+An **ONC matrix** is one whose columns are an orthonormal set of vectors. 
+```
+
+(theorem-qr-ONC)=
+````{prf:theorem} ONC matrix
+
+Suppose $\mathbf{Q}$ is a real $n\times k$ ONC matrix (matrix with orthonormal columns). Then:
+
+1. $\mathbf{Q}^T\mathbf{Q} = \mathbf{I}$ ($k\times k$ identity).
+2. $\| \mathbf{Q}\mathbf{x} \|_2 = \| \mathbf{x} \|_2$ for all $k$-vectors $\mathbf{x}$.
+3. $\| \mathbf{Q} \|_2=1$.
+````
+
+````{prf:proof}
+:enumerated: false
+
+The first part is derived above. The second part follows a pattern that has become well established by now:
+
+```{math}
+\| \mathbf{Q}\mathbf{x} \|_2^2 = (\mathbf{Q}\mathbf{x})^T(\mathbf{Q}\mathbf{x}) = \mathbf{x}^T \mathbf{Q}^T \mathbf{Q} \mathbf{x} = \mathbf{x}^T \mathbf{I} \mathbf{x} = \| \mathbf{x} \|_2^2.
+```
+
+The last part of the theorem is left to the exercises.
+````
+
+```{index} ! orthogonal matrix
+```
+
+Of particular interest is a *square* ONC matrix.[^ortho] 
+
+```{prf:definition}
+An **orthogonal matrix** is a square matrix with orthonormal columns.
+```
+
+Orthogonal matrices have properties beyond @theorem-qr-ONC. 
+
+[^ortho]: Confusingly, a square matrix whose columns are orthogonal is not necessarily an orthogonal matrix; the columns must be orthonormal, which is a stricter condition.
+
+
+(theorem-qr-orthogmatrix)=
+````{prf:theorem} Orthogonal matrix
+
+Suppose $\mathbf{Q}$ is an $n\times n$ real orthogonal matrix. Then:
+1. $\mathbf{Q}^T = \mathbf{Q}^{-1}$.
+2. $\mathbf{Q}^T$ is also an orthogonal matrix.
+3. $\kappa(\mathbf{Q})=1$ in the 2-norm.
+4. For any other $n\times n$ matrix $\mathbf{A}$, $\| \mathbf{A}\mathbf{Q} \|_2=\| \mathbf{A} \|_2$.
+5. If $\mathbf{U}$ is another $n\times n$ orthogonal matrix, then $\mathbf{Q}\mathbf{U}$ is also orthogonal.
+````
+
+::::{prf:proof}
+:enumerated: false
+Since $\mathbf{Q}$ is an ONC matrix, $\mathbf{Q}^T\mathbf{Q}=\mathbf{I}$. All three matrices are $n\times n$, so $\mathbf{Q}^{-1}=\mathbf{Q}^T$. The proofs of the other statements are left to the exercises.
+::::
+
+## Orthogonal factorization
+
+```{index} ! matrix factorization; QR
+```
+
+Now we come to another important way to factor a matrix: the **QR factorization**. As we will show below, the QR factorization plays a role in linear least squares analogous to the role of LU factorization in linear systems.
+
+(theorem-qr-QR)=
+````{prf:theorem} QR factorization
+Every real $m\times n$ matrix $\mathbf{A}$ ($m\ge n$) can be written as $\mathbf{A}=\mathbf{Q}\mathbf{R}$, where $\mathbf{Q}$ is an $m\times m$ orthogonal matrix and $\mathbf{R}$ is an $m\times n$ upper triangular matrix.
+````
+
+In most introductory books on linear algebra, the QR factorization is derived through a process known as **Gram–Schmidt orthogonalization**. However, while it is an important tool for theoretical work, the Gram–Schmidt process is numerically unstable. We will consider an alternative construction in {numref}`section-leastsq-house`.
+
+When $m$ is much larger than $n$, which is often the case, there is a compressed form of the factorization that is more efficient. In the product
+
+```{math}
+\mathbf{A} =
+\begin{bmatrix}
+\mathbf{q}_1 & \mathbf{q}_2 & \cdots & \mathbf{q}_m
+\end{bmatrix}
+\begin{bmatrix}
+r_{11} & r_{12} & \cdots & r_{1n} \\
+0 & r_{22} & \cdots &  r_{2n} \\
+\vdots & & \ddots & \vdots\\
+0 & 0 & \cdots & r_{nn} \\
+0 & 0 & \cdots & 0 \\
+\vdots & \vdots &  & \vdots \\
+0 & 0 & \cdots & 0
+\end{bmatrix},
+```
+
+the vectors $\mathbf{q}_{n+1},\ldots,\mathbf{q}_m$ always get multiplied by zero. Nothing about $\mathbf{A}$ is lost if we delete them and reduce the factorization to the equivalent form
+
+```{math}
+:label: economyqr
+\mathbf{A} =
+\begin{bmatrix}
+\mathbf{q}_1 & \mathbf{q}_2 & \cdots & \mathbf{q}_n
+\end{bmatrix}
+\begin{bmatrix}
+r_{11} & r_{12} & \cdots & r_{1n} \\
+0 & r_{22} & \cdots &  r_{2n} \\
+\vdots & & \ddots & \vdots\\
+0 & 0 & \cdots & r_{nn}
+\end{bmatrix} = \hat{\mathbf{Q}} \hat{\mathbf{R}}.
+```
+
+::::{prf:definition} Thin QR factorization
+The thin QR factorization is $\mathbf{A} = \hat{\mathbf{Q}} \hat{\mathbf{R}}$, where $\hat{\mathbf{Q}}$ is $m\times n$ and ONC, and $\hat{\mathbf{R}}$ is $n\times n$ and upper triangular.
+::::
+
+(demo-qr-qrfact)=
+::::{prf:example} QR factorization
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-qr-qrfact-julia
+:::
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-qr-qrfact-matlab
+:::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-qr-qrfact-python
+:::
+```` 
+`````
+
+::::
+
+## Least squares and QR
+
+```{index} linear least-squares problem
+```
+
+```{index} normal equations
+```
+
+If we substitute the thin factorization {eq}`economyqr` into the normal equations {eq}`normaleqns`, we can simplify expressions a great deal.
+
+```{math}
+\begin{split}
+  \mathbf{A}^T\mathbf{A} \mathbf{x} &= \mathbf{A}^T \mathbf{b}, \\
+  \hat{\mathbf{R}}^T \hat{\mathbf{Q}}^T \hat{\mathbf{Q}} \hat{\mathbf{R}} \mathbf{x} &= \hat{\mathbf{R}}^T \hat{\mathbf{Q}}^T \mathbf{b}, \\
+  \hat{\mathbf{R}}^T \hat{\mathbf{R}} \mathbf{x}& = \hat{\mathbf{R}}^T \hat{\mathbf{Q}}^T \mathbf{b}.
+\end{split}
+```
+
+In order to have the normal equations be well posed, we require that $\mathbf{A}$ is not rank-deficient (as proved in @theorem-ATA). This is enough to guarantee that $\hat{\mathbf{R}}$ is nonsingular (see @problem-qr-nonsingR). Therefore, its transpose is nonsingular as well, and we arrive at
+
+```{math}
+:label: lsqr
+\hat{\mathbf{R}} \mathbf{x}=\hat{\mathbf{Q}}^T \mathbf{b}.
+```
+
+(algorithm-qr-solve)=
+::::{prf:algorithm} Solution of linear least squares by thin QR
+
+1. Compute the thin QR factorization $\hat{\mathbf{Q}}\hat{\mathbf{R}}=\mathbf{A}$.
+1. Compute $\mathbf{z} = \hat{\mathbf{Q}}^T\mathbf{b}$.
+1. Solve the $n\times n$ linear system $\hat{\mathbf{R}}\mathbf{x} = \mathbf{z}$ for $\mathbf{x}$.
+::::
+
+This algorithm is implemented in {numref}`Function {number} <function-lsqrfact>`. It is essentially the algorithm used internally by Julia when `A\b` is called. The execution time is dominated by the factorization, the most common method for which is described in {numref}`section-leastsq-house`.
+
+(function-lsqrfact)=
+``````{prf:algorithm} lsqrfact
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #function-lsqrfact-julia
+:::
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #function-lsqrfact-matlab
+:::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #function-lsqrfact-python
+:::
+````
+`````
+``````
+
+The solution of least-squares problems via QR factorization is more stable than when the normal equations are formulated and solved directly.
+
+(demo-qr-stable)=
+::::{prf:example} Stability of least-squares via QR
+`````{tab-set} 
+````{tab-item} Julia
+:sync: julia
+:::{embed} #demo-qr-stable-julia
+:::
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+:::{embed} #demo-qr-stable-matlab
+:::
+```` 
+
+````{tab-item} Python
+:sync: python
+:::{embed} #demo-qr-stable-python
+:::
+```` 
+`````
+::::
+
+## Exercises
+
+``````{exercise}
+:label: problem-qr-onc
+✍ Prove part 3 of @theorem-qr-ONC.
+``````
+
+``````{exercise}
+:label: problem-qr-orthogonal
+✍ Prove @theorem-qr-orthogmatrix. For the third part, use the definition of the 2-norm as an induced matrix norm, then apply some of our other results as needed.
+
+``````
+
+``````{exercise}
+:label: problem-qr-legendre
+⌨ Let $t_0,\ldots,t_m$ be $m+1$ equally spaced points in $[-1,1]$. Let $\mathbf{A}$ be the matrix in {eq}`vandersystemrect` for $m=400$ and fitting by polynomials of degree less than 5. Find the thin QR factorization of $\mathbf{A}$, and, on a single graph, plot every column of $\hat{\mathbf{Q}}$ as a function of the vector $t$.
+
+``````
+
+``````{exercise}
+:label: problem-qr-nonsingR
+✍ Prove that if the $m\times n$ ($m\ge n$) matrix $\mathbf{A}$ is not rank-deficient, then the factor $\hat{\mathbf{R}}$ of the thin QR factorization is invertible. (Hint: Suppose on the contrary that $\hat{\mathbf{R}}$ is singular. Show using the factored form of $\mathbf{A}$ that this would imply that $\mathbf{A}$ is rank-deficient.)
+``````
+
+``````{exercise}
+:label: problem-qr-pinvfull
+✍ Let $\mathbf{A}$ be $m\times n$ with $m>n$. Show that if $\mathbf{A}=\mathbf{Q}\mathbf{R}$ is a QR factorization and $\mathbf{R}$ has rank $n$, then $\mathbf{A}^+=\mathbf{R}^+\mathbf{Q}^T$.
+``````
+
+``````{exercise}
+:label: problem-qr-pinvthin
+✍ Let $\mathbf{A}$ be $m\times n$ with $m>n$. Show that if $\mathbf{A}=\hat{\mathbf{Q}}\hat{\mathbf{R}}$ is a thin QR factorization and $\hat{\mathbf{R}}$ is invertible, then $\mathbf{A}^+=\hat{\mathbf{R}}^{-1}\hat{\mathbf{Q}}^T$.
+``````
+
+``````{exercise}
+:label: problem-qr-census
+⌨ Repeat @problem-fitting-census, but use thin QR factorization rather than the backslash to solve the least-squares problem.
+``````
+
+``````{exercise}
+:label: problem-qr-projector
+✍ The matrix $\mathbf{P}=\hat{\mathbf{Q}} \hat{\mathbf{Q}}^T$ derived from the thin QR factorization has some interesting and important properties.
+
+**(a)** Prove that $\mathbf{P}=\mathbf{A}\mathbf{A}^+$.
+
+**(b)** Prove that $\mathbf{P}^2=\mathbf{P}$. (This property defines a *projection matrix*.)
+
+**(c)** Any vector $\mathbf{x}$ may be written trivially as $\mathbf{x}=\mathbf{u}+\mathbf{v}$, where $\mathbf{u}=\mathbf{P}\mathbf{x}$ and $\mathbf{v}=(\mathbf{I}-\mathbf{P})\mathbf{x}$. Prove that $\mathbf{u}$ and $\mathbf{v}$ are orthogonal. (Together with part (b), this means that $\mathbf{P}$ is an *orthogonal projector*.)
+``````
