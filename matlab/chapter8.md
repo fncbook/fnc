@@ -170,8 +170,6 @@ Without pivoting, the LU factors have the same lower and upper bandwidth as the 
 The `sparse` function converts any matrix to sparse form. But it's usually better to construct a sparse matrix directly, as the standard form might not fit in memory.
 ```
 
-
-
 ```{code-cell}
 [L, U] = lufact(A);
 clf
@@ -360,7 +358,7 @@ beta(1:10)
 The convergence is again linear.
 
 ```{code-cell}
-err = abs(0.6 - beta);
+err = 0.6 - beta;
 semilogy(abs(err),'.-')
 title('Convergence of inverse iteration')
 xlabel('k'), ylabel(('|\lambda_j - \beta_k|'));
@@ -399,16 +397,16 @@ We begin with a shift $s=0.7$, which is closest to the eigenvalue 0.6.
 s = 0.7;
 x = ones(5, 1);
 y = (A - s * eye(5)) \ x;
-beta = x(1) / y(1) + s
+beta = 1 / (x' * y) + s
 ```
 
 Note that the result is not yet any closer to the targeted 0.6. But we proceed (without being too picky about normalization here).
 
 ```{code-cell}
 s = beta;
-x = y / y(1);
+x = y / norm(y);
 y = (A - s * eye(5)) \ x;
-beta = x(1) / y(1) + s
+beta = 1 / (x' * y) + s
 ```
 
 Still not much apparent progress. However, in just a few more iterations the results are dramatically better.
@@ -417,9 +415,9 @@ Still not much apparent progress. However, in just a few more iterations the res
 format long
 for k = 1:4
     s = beta;
-    x = y / y(1);
+    x = y / norm(y);
     y = (A - s * eye(5)) \ x;
-    beta = x(1) / y(1) + s
+    beta = 1 / (x' * y) + s
 end
 ```
 ``````

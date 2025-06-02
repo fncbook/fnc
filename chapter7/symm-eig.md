@@ -21,12 +21,15 @@ Suppose now that $\mathbf{A}^*=\mathbf{A}$ and that $\mathbf{A}=\mathbf{U}\mathb
 
 and it's tempting to conclude that $\mathbf{U}=\mathbf{V}$. Happily, this is nearly true. The following theorem is typically proved in an advanced linear algebra course.
 
+```{index} normal matrix
+```
+
 ````{prf:theorem} Spectral decomposition
 :label: theorem-symm-eig-spectral
-If $\mathbf{A}=\mathbf{A}^*$, then $\mathbf{A}$ has a diagonalization $\mathbf{A}=\mathbf{V} \mathbf{D} \mathbf{V}^{-1}$ in which $\mathbf{V}$ is unitary and $\mathbf{D}$ is diagonal and real.
+If $\mathbf{A}=\mathbf{A}^*$, then $\mathbf{A}$ has a diagonalization $\mathbf{A}=\mathbf{V} \mathbf{D} \mathbf{V}^{-1}$ in which $\mathbf{V}$ is unitary and $\mathbf{D}$ is diagonal and real. In other words, $\mathbf{A}$ is a {term}`normal matrix` with real eigenvalues.
 ````
 
-Another way to state the result of this theorem is that a hermitian matrix has real eigenvalues and a complete set of orthonormal eigenvectors—that is, the matrix is normal. Because hermitian matrices are normal, their eigenvalue condition number is guaranteed to be 1 by {numref}`Theorem {number} <theorem-bauer-fike>`.
+Because hermitian matrices are normal, their eigenvalue condition number is guaranteed to be 1 by {numref}`Theorem {number} <theorem-bauer-fike>`. That fact makes eigenvalues a robust computational target in the hermitian case.
 
 :::{note}
 The converse of {numref}`Theorem {number} <theorem-symm-eig-spectral>` is also true: every normal matrix with real eigenvalues is hermitian. This was illustrated in @demo-evd-bauerfike.
@@ -69,7 +72,28 @@ $$
 ```{index} ! Rayleigh quotient
 ```
 
-Recall that for a matrix $\mathbf{A}$ and compatible vector $\mathbf{x}$, the quadratic form $\mathbf{x}^* \mathbf{A} \mathbf{x}$ is a scalar.
+For a hermitian matrix $\mathbf{A}$, the number $\mathbf{x}^* \mathbf{A} \mathbf{x}$ acts much like a scalar quadratic term $ax^2$.
+
+````{prf:theorem}
+:label: theorem-quadraticform
+If $\mathbf{A}^*=\mathbf{A}$, then for any compatibly sized vector $\mathbf{x}$, the quadratic form $\mathbf{x}^* \mathbf{A} \mathbf{x}$ is a real number.
+````
+
+::::{prf:proof}
+:enumerated: false
+
+The sizes of the terms ensure that $\mathbf{x}^* \mathbf{A} \mathbf{x}$ is a scalar. Therefore, its complex conjugate is the same as its hermitian, and
+
+```{math}
+\begin{align*}
+\overline{\mathbf{x}^* \mathbf{A} \mathbf{x}} & = (\mathbf{x}^* \mathbf{A} \mathbf{x})^* \\ 
+& = \mathbf{x}^* \mathbf{A}^* (\mathbf{x}^*)^* \\ 
+& = \mathbf{x}^* \mathbf{A} \mathbf{x},
+\end{align*}
+```
+
+where the last step uses the given hermitian property. Since any complex number that equals its own conjugate is real, the result follows.
+::::
 
 ::::{prf:definition}
 :label: definition-rayleighquotient
@@ -82,16 +106,26 @@ R_{\mathbf{A}}(\mathbf{x}) = \frac{ \mathbf{x}^* \mathbf{A} \mathbf{x}}{\mathbf{
 
 ::::
 
-If $\mathbf{v}$ is an eigenvector such that $\mathbf{A} \mathbf{v}=\lambda \mathbf{v}$, then one easily calculates that $R_{\mathbf{A}}(\mathbf{v})=\lambda.$ That is, the Rayleigh quotient maps an eigenvector into its associated eigenvalue.
+The following facts can be established by straightforward calculations.
 
-If $\mathbf{A}^*=\mathbf{A}$, then the Rayleigh quotient has another interesting property: $\nabla R_{\mathbf{A}}(\mathbf{v})=\boldsymbol{0}$ if $\mathbf{v}$ is an eigenvector. By a multidimensional Taylor series, then,
+```{prf:theorem} Rayleigh quotient
+:label: theorem-rayleighquotient
+
+If $\mathbf{A}^*=\mathbf{A}$, $\mathbf{v}$ is an eigenvector of $\mathbf{A}$, and $R_{\mathbf{A}}$ is the Rayleigh quotient, then:
+
+1. $R_{\mathbf{A}}(\mathbf{v})=\lambda,$ the associated eigenvalue, and
+1. The gradient satisfies $\nabla R_{\mathbf{A}}(\mathbf{v})=\boldsymbol{0}$.
+
+``` 
+
+As a consequence of @theorem-rayleighquotient, the Rayleigh quotient can be used to turn an estimate of the eigenvector $\mathbf{v}$ into an estimate of its eigenvalue $\lambda$. Specifically,
 
 ```{math}
 :label: rq-series
-R_{\mathbf{A}}(\mathbf{v}+\epsilon\mathbf{z}) = R_{\mathbf{A}}(\mathbf{v}) + 0 + O( \epsilon^2) =  \lambda + O( \epsilon^2),
+R_{\mathbf{A}}(\mathbf{v}+\delta\mathbf{z}) = \lambda + O(\delta^2),
 ```
 
-as $\epsilon\to 0$. The conclusion is that a good estimate of an eigenvector becomes an even better estimate of an eigenvalue.
+as $\delta \to 0$.
 
 ::::{prf:example} Rayleigh quotient
 :label: demo-symm-eig-rayleigh
@@ -175,7 +209,9 @@ as both $\mathbf{S}$ and $\mathbf{V}$ are invertible. Thus, item 1 is true.
 
 According to {numref}`Theorem {number} <theorem-symm-eig-hpd>`, for an HPD matrix, the EVD $\mathbf{A}=\mathbf{V}\mathbf{D}\mathbf{V}^*$ meets all the requirements of the SVD, provided the ordering of eigenvalues is chosen appropriately.
 
+```{note}
 A hermitian matrix with all negative eigenvalues is called **negative definite**, and one with eigenvalues of different signs is **indefinite**. Finally, if one or more eigenvalues is zero and the rest have one sign, it is positive or negative **semidefinite**.
+```
 
 ## Exercises
 
@@ -246,16 +282,27 @@ $$
 
 ``````{exercise}
 :label: problem-symmeig-fov
-⌨ The range of the function $R_{\mathbf{A}}(\mathbf{x})$ is a subset of the complex plane known as the *field of values* of the matrix $\mathbf{A}$. Use 500 random vectors to plot points in the field of values of $\mathbf{A} = \displaystyle  \begin{bmatrix}
+⌨ The range of the function $R_{\mathbf{A}}(\mathbf{x})$ is a subset of the complex plane known as the *field of values* of the matrix $\mathbf{A}$. 
+
+**(a)** Use 1000 random real vectors to plot points in the field of values of the matrix 
+
+```{math}
+:numbered: false
+\displaystyle  \begin{bmatrix}
 1  &   0   & -2\\
 0  &   2  &   0\\
 -2   &  0 &    1
-\end{bmatrix}$. Then compute its eigenvalues and guess what the exact field of values is.
+\end{bmatrix}.
+```
+
+You should get 1000 dots lying on the real axis.
+
+**(b)** Compute the eigenvalues of the matrix. By comparison to the plot from (a), guess what the exact field of values is.
 ``````
 
 ``````{exercise}
 :label: problem-symmeig-gradient
-✍ Let $\mathbf{A}=\displaystyle \begin{bmatrix} 3 & -2 \\ -2 & 0 \end{bmatrix}.$
+✍ The matrix $\mathbf{A}=\displaystyle \begin{bmatrix} 3 & -2 \\ -2 & 0 \end{bmatrix}$ has an eigenvector $[1,\, 2].$
 
 **(a)** Write out $R_{\mathbf{A}}(\mathbf{x})$ explicitly as a function of $x_1$ and $x_2$.
 

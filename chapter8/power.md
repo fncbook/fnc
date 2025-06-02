@@ -43,7 +43,13 @@ There was a little cheating in @demo-power-one to make the story come out neatly
 ```{index} ! eigenvalue; dominant
 ```
 
-Analysis of matrix powers is most straightforward in the diagonalizable case. Let $\mathbf{A}$ be any diagonalizable $n\times n$ matrix having eigenvalues $\lambda_1,\ldots,\lambda_n$ and corresponding linearly independent eigenvectors $\mathbf{v}_1,\ldots,\mathbf{v}_n$. We also make an important assumption about the eigenvalue magnitudes.
+Analysis of matrix powers is most straightforward in the diagonalizable case. Let $\mathbf{A}$ be any diagonalizable $n\times n$ matrix having eigenvalues $\lambda_1,\ldots,\lambda_n$ and corresponding linearly independent eigenvectors $\mathbf{v}_1,\ldots,\mathbf{v}_n$. For our later convenience (and without losing any generality), we assume that the eigenvectors are normalized so that
+
+```{math}
+\twonorm{\mathbf{v}_j} = 1 \quad \text{for } j=1,\ldots,n.
+```
+
+We also make an important assumption about the eigenvalue magnitudes that will hold for most but not all matrices.
 
 ::::{prf:definition} Dominant eigenvalue
 :label: definition-dominanteigenvalue
@@ -82,15 +88,20 @@ Since $\lambda_1$ is dominant, we conclude that if $z_1\neq 0$,
 
 ```{math}
 :label: poweriterconverge
-\left\| \frac{ \mathbf{A}^k\mathbf{x}}{\lambda_1^k}
-- z_1\mathbf{v}_1\right\| \le |z_2|\cdot\left|\frac{\lambda_2}{\lambda_1}\right| ^k
-\| \mathbf{v}_{2} \| + \cdots +  |z_n|\cdot\left|\frac{\lambda_n}{\lambda_1}\right|^k
-\| \mathbf{v}_{n} \| \rightarrow 0 \text{ as $k\rightarrow \infty$}.
+\begin{split}
+\twonorm{ \frac{ \mathbf{A}^k\mathbf{x}}{z_1 \lambda_1^k} - \mathbf{v}_1 } 
+& \le \underbrace{\left|\frac{z_2}{z_1}\right|}_{c_2} \cdot \underbrace{ \left| \frac{\lambda_2}{\lambda_1} \right|^k}_{r_2^k}  \twonorm{\mathbf{v}_{2}}
++ \cdots + \underbrace{\left|\frac{z_n}{z_1}\right|}_{c_n} \cdot \underbrace{\left|\frac{\lambda_n}{\lambda_1}\right|^k}_{r_n^k}  \twonorm{\mathbf{v}_{n}}  \\[1mm]
+& = \sum_{j=2}^n c_j r_j^k  \cdot 1 \\ 
+& \rightarrow 0 \text{ as $k\rightarrow \infty$},
+\end{split}
 ```
 
-That is, $\mathbf{A}^k\mathbf{x}$ eventually is close to a scalar multiple of the dominant eigenvector.[^zeromeasure]
+since, by @evorder, $r_j = | \lambda_j / \lambda_1 | < 1$ for $j=2,\ldots,n$. If we choose $\mathbf{x}$ randomly, then the probability that $z_1=0$ is zero, so we will not be concerned with that case.
 
-[^zeromeasure]: If $\mathbf{x}$ is chosen randomly, the probability that $z_1=0$ is mathematically zero.
+```{important}
+If $\mathbf{A}$ is diagonalizable and has a dominant eigenvalue $\lambda_1$, then $\mathbf{A}^k\mathbf{x}$ asymptotically approaches a scalar multiple of the dominant eigenvector.
+```
 
 :::{attention}
 For algorithmic purposes, it is important to interpret $\mathbf{A}^k\mathbf{x}$ as $\mathbf{A}\bigl( \cdots\bigl( \mathbf{A} (\mathbf{A}\mathbf{x})\bigl) \cdots\bigl)$, i.e., as repeated applications of $\mathbf{A}$ to a vector. Doing so allows us to fully exploit sparsity of $\mathbf{A}$, something which is not preserved by taking a matrix power $\mathbf{A}^k$ explicitly before the multiplication with $\mathbf{x}$ (see @demo-structure-fill).
@@ -98,9 +109,9 @@ For algorithmic purposes, it is important to interpret $\mathbf{A}^k\mathbf{x}$ 
 
 ## Power iteration
 
-An important technicality separates us from an algorithm: unless $|\lambda_1|=1$, the factor $\lambda_1^k$ tends to make $\|\mathbf{A}^k\mathbf{x}\|$ either very large or very small. Nor can we easily normalize by $\lambda_1^k$, as in {eq}`poweriterconverge`, unless we know $\lambda_1$ in advance.
+An important technicality separates us from an algorithm: unless $|\lambda_1|=1$, the factor $\lambda_1^k$ tends to make $\|\mathbf{A}^k\mathbf{x}\|$ either very large or very small. In practice, we cannot easily normalize by $\lambda_1^k$ as we did in {eq}`poweriterconverge`, since we don't know $\lambda_1$ in advance.
 
-To make a practical algorithm, we alternate matrix-vector multiplication with a renormalization of the vector. In the following, we use $x_{k,m}$ and $y_{k,m}$ to mean the $m$th component of vectors $\mathbf{x}_k$ and $\mathbf{y}_k$.
+This issue is resolved by alternating matrix–vector multiplications with renormalizations.
 
 ```{index} ! power iteration
 ```
@@ -109,42 +120,60 @@ To make a practical algorithm, we alternate matrix-vector multiplication with a 
 :label:  definition-poweriteration
 Given matrix $\mathbf{A}$:
 
-1. Choose $\mathbf{x}_1$.
+1. Choose $\mathbf{x}_1$ such that $\twonorm{\mathbf{y}_k}=1$.
 2. For $k=1,2,\ldots$,
 
     a. Set $\mathbf{y}_k = \mathbf{A} \mathbf{x}_k$.
 
-    b. Find $m$ such that $|y_{k,m}|=\|{\mathbf{y}_k} \|_\infty$.
+    b. Set $\beta_k = \mathbf{x}_k^* \mathbf{y}_k$. (In the real case, this is $\beta_k = \mathbf{x}_k^T \mathbf{y}_k$.)
 
-    c. Set $\alpha_k = \dfrac{1}{y_{k,m}}$ and $\,\beta_k = \dfrac{y_{k,m}}{x_{k,m}}$.
-
-    d. Set $\mathbf{x}_{k+1} = \alpha_k \mathbf{y}_k$.
+    c. Set $\mathbf{x}_{k+1} = \dfrac{\mathbf{y}_k}{\twonorm{\mathbf{y}_k}}$.
 
 Return $\beta_1,\beta_2,\ldots$ as dominant eigenvalue estimates, and $\mathbf{x}_1,\mathbf{x}_2,\ldots$ as associated eigenvector estimates.
 ::::
 
-:::{note}
-The vectors and scalars in @definition-poweriteration are subscripted by iteration number to help make the discussion here more convenient. In practice, the algorithm can be implemented without keeping the history, and $\alpha_k$ need not be separately computed at all.
+:::{tip}
+The vectors and scalars in @definition-poweriteration are subscripted by iteration number to help make the discussion here more convenient. In practice, the algorithm can be implemented without keeping the history.
 :::
 
-By construction, $\| \mathbf{x}_{k}\|_\infty=1$ for all $k > 1$. Also, we can write
+Observe that we can write
 
 ```{math}
 :label: powernorm
-\mathbf{x}_{k} = (\alpha_1 \alpha_2 \cdots \alpha_k ) \mathbf{A}^k \mathbf{x}_{1}.
+\mathbf{x}_{k} = (\alpha_1 \alpha_2 \cdots \alpha_k ) \mathbf{A}^k \mathbf{x}_{1},
 ```
 
-Thus, {numref}`Algorithm {number} < definition-poweriteration>` modifies {eq}`powerAkx0` and {eq}`poweriterconverge` only slightly.
-
-Finally, if $\mathbf{x}_k$ is nearly a dominant eigenvector of $\mathbf{A}$, then $\mathbf{A}\mathbf{x}_k$ is nearly $\lambda_1\mathbf{x}_k$, and we can take the ratio $\beta_k=y_{k,m}/x_{k,m}$ as an eigenvalue estimate. In fact, revisiting {eq}`powerAkx0`, the extra $\alpha_j$ normalization factors cancel in the ratio, and, after some simplification, we get
+where $\alpha_j = \twonorm{\mathbf{y}_j}^{-1}$ is the normalization factor at iteration $j$. Thus, the reasoning of @poweriterconverge implies that $\mathbf{x}_k$ converges to a scalar multiple of the dominant eigenvector $\mathbf{v}_1$ of $\mathbf{A}$. Specifically, suppose that there is some number $\gamma$ with $|\gamma|=1$ such that
 
 ```{math}
-:label: poweriterratio
-\beta_k = \frac{y_{k,m}}{x_{k,m}} = \lambda_1
-\frac{1+r_2^{k+1} b_2 + \cdots +  r_n^{k+1} b_n}{1+r_2^{k} b_2 +  \cdots +  r_n^{k} b_n},
+ \mathbf{x}_k - \gamma \mathbf{v}_1 = \epsilon \mathbf{w}, 
+ ```
+
+ where $\norm{\mathbf{w}} = 1$ and $\epsilon \ll 1$. Then
+
+```{math}
+:label: eq-powereverror
+\begin{split}
+\beta_k &= \mathbf{x}_k^* \mathbf{y}_k  \\ 
+&= \mathbf{x}_k^* \mathbf{A} \mathbf{x}_k \\ 
+&= \bigl(\overline{\gamma} \mathbf{v}_1^* + \epsilon \mathbf{w}^*\bigr) \mathbf{A} \bigl(\gamma \mathbf{v}_1 + \epsilon \mathbf{w}\bigr) \\ 
+& = |\gamma|^2 \mathbf{v}_1^* (\lambda_1 \mathbf{v}_1) + O(\epsilon) \\
+& = \lambda_1 + O(\epsilon).
+\end{split}
 ```
 
-where $r_j=\lambda_j/\lambda_1$ and the $b_j$ are constants. By assumption {eq}`evorder`, each $r_j$ satisfies $|r_j|<1$, so we see that $\beta_k\rightarrow \lambda_1$ as $k\rightarrow\infty$.
+That is, $\beta_k$ from the power iteration estimates $\lambda_1$ about as well as $\mathbf{x}_k$ estimates the dominant eigenvector.
+
+````{note}
+If $\mathbf{A}$ is hermitian, then $\beta_k$ equals the {term}`Rayleigh quotient` $R_{\mathbf{A}}(\mathbf{x}_k)$, and, according to @theorem-rayleighquotient, 
+
+```{math}
+:label: eq-powersquare
+\beta_k = \lambda_1 + O(\epsilon^2),
+```
+
+so the eigenvalue estimate is even better.
+````
 
 {numref}`Function {number} <function-poweriter>` is our implementation of power iteration.
 
@@ -172,51 +201,57 @@ where $r_j=\lambda_j/\lambda_1$ and the $b_j$ are constants. By assumption {eq}`
 `````
 ``````
 
-Observe that the only use of $\mathbf{A}$ is to find the matrix-vector product $\mathbf{A}\mathbf{x}$, which makes exploitation of the sparsity of $\mathbf{A}$ trivial.
-
-## Convergence
-
-Let's examine the terms in the numerator and denominator of {eq}`poweriterratio` more carefully:
-
-```{math}
-:label: powerleftover
-\begin{split}
-r_2^{k} b_2 +  \cdots +  r_n^{k} b_n &= r_2^k \left[ b_2 + \left( \frac{r_3}{r_2} \right)^kb_3 + \cdots + \left( \frac{r_n}{r_2} \right)^kb_n \right] \\
-&= r_2^k \left[ b_2 + \left( \frac{\lambda_3}{\lambda_2} \right)^kb_3 + \cdots + \left( \frac{\lambda_n}{\lambda_2} \right)^kb_n \right].
-\end{split}
+```{important}
+The only use of $\mathbf{A}$ is to find the matrix-vector product $\mathbf{A}\mathbf{x}$, which makes exploitation of the sparsity of $\mathbf{A}$ trivial.
 ```
 
-At this point we'll introduce an additional assumption,
+## Convergence rate
+
+While we now feel confident that the sequence $\{\beta_k\}$ converges to the dominant eigenvalue $\lambda_1$, we would like to know how fast this convergence is. Looking back at @powerAkx0, we know that our normalizations make it so that
+
+```{math}
+:label: eq-powererr
+\mathbf{x}_{k} - \gamma \mathbf{v}_1 =  b_2 \left(\frac{\lambda_2}{\lambda_1}\right) ^k \mathbf{v}_{2} 
++ \cdots + b_n \left(\frac{\lambda_n}{\lambda_1}\right)^k \mathbf{v}_{n}
+```
+
+for some constants $b_2,\ldots,b_n$. If we now make a stronger assumption that $\lambda_2$ dominates the rest of the eigenvalues, i.e.,
 
 ```{math}
 :label: evorder2
-|\lambda_2| > |\lambda_3| \ge \cdots \ge |\lambda_n|.
+|\lambda_1| > |\lambda_2| > |\lambda_3| \ge \cdots \ge |\lambda_n|,
 ```
 
-This condition isn't strictly necessary, but it simplifies the following statements considerably because now it's clear that the quantity in {eq}`powerleftover` approaches $b_2 r_2^k$ as $k\rightarrow \infty$.
-
-Next we estimate {eq}`poweriterratio` for large $k$, using a geometric series expansion for the denominator to get
+then expression on the right-hand side of {eq}`eq-powererr` is dominated by its first term, because
 
 ```{math}
-:label: powerest
-\begin{split}
-\beta_k & \to \lambda_1 \left( 1+b_2 r_2^{k+1} \right) \left( 1 - b_2 r_2^{k} + O(r_2^{2k}) \right), \\
-\beta_k - \lambda_1 &\to \lambda_1 b_2 (  r_2 - 1 ) r_2^{k}.
-\end{split}
+:label: eq-powererr
+\sum_{j=2}^n b_j \left(\frac{\lambda_j}{\lambda_1}\right) ^k \mathbf{v}_{j} 
+= \left(\frac{\lambda_2}{\lambda_1}\right)^k \left[ b_2 \mathbf{v}_2 + \underbrace{\sum_{j=3}^n {b_j} \left(\frac{\lambda_j}{\lambda_2}\right) ^k \mathbf{v}_{j} }_{\to 0\, \text{ as } k\to\infty} \right] .
 ```
+
+Therefore, @eq-powereverror now implies that $|\beta_k - \lambda_1|$ is dominated by $|\lambda_2 / \lambda_1|^k$, which is a case of {term}`linear convergence`.
 
 ```{index} convergence rate; linear
 ```
 
-This is {term}`linear convergence` with factor $r_2$:
+::::{prf:theorem} Power iteration convergence
+:label: theorem-poweriterconv
+Given @evorder2, the eigenvalue estimates $\beta_k$ satisfy 
 
 ```{math}
 :label: poweriterconv
-\frac{\beta_{k+1} - \lambda_1}{\beta_{k}-\lambda_1} \rightarrow r_2 = \frac{\lambda_2}{\lambda_1} \quad \text{as } k\rightarrow \infty.
+\frac{\abs{\beta_{k+1} - \lambda_1}}{\abs{\beta_{k}-\lambda_1}} \rightarrow \abs{\frac{\lambda_2}{\lambda_1}} \quad \text{as } k\rightarrow \infty
 ```
 
-::::{prf:observation}
-The error in the power iteration eigenvalue estimates $\beta_k$ is reduced asymptotically by a constant factor $\lambda_2/\lambda_1$ at each iteration, where $\lambda_1$ and $\lambda_2$ are the dominant eigenvalues of $\mathbf{A}$.
+in the general case, and
+
+```{math}
+:label: poweriterconvherm
+\frac{\abs{\beta_{k+1} - \lambda_1}}{\abs{\beta_{k}-\lambda_1}} \rightarrow \abs{\frac{\lambda_2}{\lambda_1}}^2 \quad \text{as } k\rightarrow \infty
+```
+
+if $\mathbf{A}$ is hermitian.
 ::::
 
 ::::{prf:example} Convergence of power iteration

@@ -54,14 +54,14 @@ and power iteration on the matrix $(\mathbf{A}-s\mathbf{I})^{-1}$ converges to $
 
 ## Algorithm
 
-A literal application of {numref}`Algorithm {number} < definition-poweriteration>` would include the step
+A literal application of @definition-poweriteration would include the step
 
 ```{math}
 :label: shiftinvstepbad
 \mathbf{y}_k = (\mathbf{A}-s\mathbf{I})^{-1} \mathbf{x}_k.
 ```
 
-As always, we do not want to explicitly find the inverse of a matrix. Instead, we should write this step as the solution of a linear system.
+As always, however, we do not want to explicitly find the inverse of a matrix. Instead, we should implement this step as the solution of a linear system.
 
 ```{index} ! inverse iteration
 ```
@@ -73,7 +73,7 @@ As always, we do not want to explicitly find the inverse of a matrix. Instead, w
 :label: definition-inviter
 Given matrix $\mathbf{A}$ and shift $s$:
 
-1. Choose $\mathbf{x}_1$.
+1. Choose $\mathbf{x}_1$ such that $\twonorm{\mathbf{x}_1} = 1$.
 2. For $k=1,2,\ldots$,
 
     a. Solve for $\mathbf{y}_k$ in
@@ -82,17 +82,15 @@ Given matrix $\mathbf{A}$ and shift $s$:
     (\mathbf{A}-s\mathbf{I}) \mathbf{y}_k =\mathbf{x}_k.
     :::
 
-    b. Find $m$ such that $|y_{k,m}|=\|{\mathbf{y}_k} \|_\infty$.
+    b. Set $\beta_k = s + \dfrac{1}{\mathbf{x}_k^* \mathbf{y}_k}$. 
 
-    c. Set $\alpha_k = \dfrac{1}{y_{k,m}}$ and $\,\beta_k = s + \dfrac{x_{k,m}}{y_{k,m}}$.
-
-    d. Set $\mathbf{x}_{k+1} = \alpha_k \mathbf{y}_k$.
+    c. Set $\mathbf{x}_{k+1} = {\mathbf{y}_k} / {\twonorm{\mathbf{y}_k}}.$
 
 Return $\beta_1,\beta_2,\ldots$ as eigenvalue estimates, and $\mathbf{x}_1,\mathbf{x}_2,\ldots$ as associated eigenvector estimates.
 ::::
 
 :::{note}
-In {numref}`Algorithm {number} < definition-poweriteration>`, we used $y_{k,m}/x_{k,m}$ as an estimate of the dominant eigenvalue of $\mathbf{A}$. Here, that ratio is an estimate of $(\lambda_1-s)^{-1}$, and solving for $\lambda_1$ gives the $\beta_k$ in @definition-inviter.
+In @definition-poweriteration, we used $\mathbf{x}_k^* \mathbf{y}_k$ as an estimate of the dominant eigenvalue of $\mathbf{A}$. Here, that ratio is an estimate of $(\lambda_1-s)^{-1}$, and solving for $\lambda_1$ gives the $\beta_k$ in @definition-inviter.
 :::
 
 Each pass of inverse iteration requires the solution of a linear system of equations with the matrix $\mathbf{B}=\mathbf{A}-s\mathbf{I}$. This solution might use methods we consider later in this chapter. Here, we use (sparse) PLU factorization and hope for the best. Since the matrix $\mathbf{B}$ is constant, the factorization needs to be done only once for all iterations. The details are in {numref}`Function {number} <function-inviter>`.
@@ -121,17 +119,25 @@ Each pass of inverse iteration requires the solution of a linear system of equat
 `````
 ``````
 
-## Convergence
+## Convergence rate
 
-The convergence is linear, at a rate found by reinterpreting {eq}`poweriterconv` with $(\mathbf{A}-s\mathbf{I})^{-1}$ in place of $\mathbf{A}$:
+The convergence is linear, at a rate found by reinterpreting @theorem-poweriterconv with $(\mathbf{A}-s\mathbf{I})^{-1}$ in place of $\mathbf{A}.$ With the eigenvalues ordered as in {eq}`shiftorder`, in the general case we have
 
 ```{math}
 :label: inviterconv
-\frac{\beta_{k+1} - \lambda_1}{\beta_{k} - \lambda_1} \rightarrow
-\frac{  \lambda_1 - s } {\lambda_2 - s}\quad \text{ as } \quad k\rightarrow \infty,
+\frac{\abs{\beta_{k+1} - \lambda_1}}{\abs{\beta_{k} - \lambda_1}} \rightarrow
+\abs{\frac{  \lambda_1 - s } {\lambda_2 - s}}\quad \text{ as } \quad k\rightarrow \infty,
 ```
 
-with the eigenvalues ordered as in {eq}`shiftorder`. Thus, the convergence is best when the shift $s$ is close to the target eigenvalue $\lambda_1$, specifically when it is much closer to that eigenvalue than to any other.
+and in the hermitian case, we have
+
+```{math}
+:label: inviterconvherm
+\frac{\abs{\beta_{k+1} - \lambda_1}}{\abs{\beta_{k} - \lambda_1}} \rightarrow
+\abs{\frac{  \lambda_1 - s } {\lambda_2 - s}}^2  \quad \text{ as } \quad k\rightarrow \infty.
+```
+
+Thus, the convergence is best when the shift $s$ is close to the target eigenvalue—specifically, when it is much closer to that eigenvalue than to any other.
 
 ::::{prf:example} Convergence of inverse iteration
 :label: demo-inviter-conv
@@ -158,14 +164,14 @@ with the eigenvalues ordered as in {eq}`shiftorder`. Thus, the convergence is be
 
 ::::
 
-## Dynamic shifting
+## Rayleigh quotient iteration
 
-There is a clear opportunity for positive feedback in {numref}`Algorithm {number} <definition-inviter>`. The convergence rate of inverse iteration improves as the shift gets closer to the true eigenvalue—and the algorithm computes improving eigenvalue estimates! If we update the shift to $s=\beta_k$ after each iteration, the convergence accelerates. You are asked to implement this algorithm in @problem-inviter-dynamicshift.
+There is a clear opportunity for positive feedback in @definition-inviter. The convergence rate of inverse iteration improves as the shift gets closer to the true eigenvalue—and the algorithm computes improving eigenvalue estimates! Updating the shift to $s=\beta_k$ after each iteration greatly accelerates the convergence. You are asked to implement this algorithm in @problem-inviter-dynamicshift.
 
 ```{index} convergence rate; quadratic
 ```
 
-Let's analyze the resulting convergence. If the eigenvalues are ordered by distance to $s$, then the convergence is linear with rate $|\lambda_1-s|/|\lambda_2-s|$. As $s\to\lambda_1$, the change in the denominator is negligible. So if the error $(\lambda_1-s)$ is $\epsilon$, then the error in the next estimate is reduced by a factor $O(\epsilon)$. That is, $\epsilon$ becomes $O(\epsilon^2)$, which is *quadratic* convergence.
+If the eigenvalues are ordered by distance to $s$, then (asymptotically) one step of inverse iteration reduces the error by the factor $|\lambda_1-s|/|\lambda_2-s|$. As $s \to\lambda_1$, the change in the denominator is negligible. So, if at one point the error $\abs{\lambda_1-s}$ is about $\epsilon$, then the error in the next estimate is reduced by a factor $O(\epsilon)$, making it $O(\epsilon^2)$. That is, each step now squares the error, which is {term}`quadratic convergence`.
 
 ::::{prf:example} Dynamic shift strategy
 :label: demo-inviter-accel

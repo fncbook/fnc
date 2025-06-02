@@ -62,6 +62,7 @@ numbering:
 
 ```{code-cell}
 :tags: remove-cell
+1+10
 include("FNC_init.jl")
 ```
 
@@ -389,8 +390,8 @@ As expected, the eigenvalue that was found is the one closest to 0.7. The conver
 
 ```{code-cell}
 using Plots
-err = @. abs(eigval - β)
-plot(0:28, err[1:end-1];
+err = @. eigval - β
+plot(0:28, abs.(err[1:end-1]);
     m=:o,  xlabel=L"k", 
     yaxis=(L"|\lambda_3-\beta_k|", :log10, [1e-16, 1]),
     title="Convergence of inverse iteration")
@@ -412,7 +413,8 @@ The `sortperm` function returns the index permutation needed to sort the given v
 ```
 
 ```{code-cell}
-λ = λ[sortperm(abs.(λ .- s))]
+dist = @. abs(λ - s)
+λ = λ[sortperm(dist)]
 ```
 
 Hence the theoretical convergence rate is
