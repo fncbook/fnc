@@ -163,7 +163,7 @@ The notation **argmin** in @linls means to find an $\mathbf{x}$ that produces th
 :::
 
 ```{note}
-Another way to describe @linls is as an {term}`overdetermined` linear system. Because the system $\mathbf{A}\mathbf{x}=\mathbf{b}$, has more rows than columns, it is imposing too many constraints on $\bfx$ to permit satisfying all of them. 
+Another way to describe @linls is as an {term}`overdetermined` linear system. Because the system $\mathbf{A}\mathbf{x}=\mathbf{b}$, has more rows than columns, it is imposing too many constraints on $\mathbf{x}$ to permit satisfying all of them. 
 ```
 
 ```{index} norm; vector
