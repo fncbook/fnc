@@ -16,7 +16,7 @@ numbering:
 ```{literalinclude} fncbook/fncbook/chapter08.py
 :filename: poweriter.py
 :start-at: def poweriter
-:end-at: return gamma, x
+:end-at: return beta, x
 :language: python
 :linenos: true
 ```
@@ -28,7 +28,7 @@ numbering:
 ```{literalinclude} fncbook/fncbook/chapter08.py
 :filename: inviter.py
 :start-at: def inviter
-:end-at: return gamma, x
+:end-at: return beta, x
 :language: python
 :linenos: true
 ```

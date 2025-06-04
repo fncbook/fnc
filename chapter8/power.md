@@ -107,7 +107,7 @@ If $\mathbf{A}$ is diagonalizable and has a dominant eigenvalue $\lambda_1$, the
 For algorithmic purposes, it is important to interpret $\mathbf{A}^k\mathbf{x}$ as $\mathbf{A}\bigl( \cdots\bigl( \mathbf{A} (\mathbf{A}\mathbf{x})\bigl) \cdots\bigl)$, i.e., as repeated applications of $\mathbf{A}$ to a vector. Doing so allows us to fully exploit sparsity of $\mathbf{A}$, something which is not preserved by taking a matrix power $\mathbf{A}^k$ explicitly before the multiplication with $\mathbf{x}$ (see @demo-structure-fill).
 :::
 
-## Power iteration
+## Algorithm
 
 An important technicality separates us from an algorithm: unless $|\lambda_1|=1$, the factor $\lambda_1^k$ tends to make $\|\mathbf{A}^k\mathbf{x}\|$ either very large or very small. In practice, we cannot easily normalize by $\lambda_1^k$ as we did in {eq}`poweriterconverge`, since we don't know $\lambda_1$ in advance.
 
@@ -225,7 +225,6 @@ for some constants $b_2,\ldots,b_n$. If we now make a stronger assumption that $
 then expression on the right-hand side of {eq}`eq-powererr` is dominated by its first term, because
 
 ```{math}
-:label: eq-powererr
 \sum_{j=2}^n b_j \left(\frac{\lambda_j}{\lambda_1}\right) ^k \mathbf{v}_{j} 
 = \left(\frac{\lambda_2}{\lambda_1}\right)^k \left[ b_2 \mathbf{v}_2 + \underbrace{\sum_{j=3}^n {b_j} \left(\frac{\lambda_j}{\lambda_2}\right) ^k \mathbf{v}_{j} }_{\to 0\, \text{ as } k\to\infty} \right] .
 ```

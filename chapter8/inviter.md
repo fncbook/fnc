@@ -269,11 +269,11 @@ Prove that $\displaystyle \begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix}$ has an e
 
 ``````{exercise}
 :label: problem-inviter-dynamicshift
-⌨ This problem explores the use of dynamic shifting to accelerate the inverse iteration.
+⌨ This problem explores the use of Rayleigh quotient iteration.
 
-**(a)** Modify {numref}`Function {number} <function-inviter>` to change the value of the shift $s$ to be the most recently computed value in the vector $\beta$. Note that the matrix `B` must also change with each iteration, and the LU factorization cannot be done just once.
+**(a)** Modify {numref}`Function {number} <function-inviter>` to change the value of the shift $s$ to be the most recently computed value in the vector $\beta$. Note that the matrix `B` must also change with each iteration, so the LU factorization cannot be done just once.
 
-**(b)** Define a $100\times 100$ matrix with values $k^2$ for $k=1,\ldots,100$ on the main diagonal and random values uniformly distributed between 0 and 1 on the first superdiagonal. (Since this matrix is triangular, the diagonal values are its eigenvalues.) Using an initial shift of $s=920$, apply the dynamic inverse iteration. Determine which eigenvalue was found and make a table of the `log10` of the errors in the iteration as a function of iteration number. (These should approximately double, until machine precision is reached, due to quadratic convergence.)
+**(b)** Define a $100\times 100$ matrix with values $k^2$ for $k=1,\ldots,100$ on the main diagonal and random values uniformly distributed between 0 and 1 on the first superdiagonal. (Since this matrix is triangular, the diagonal values are its eigenvalues.) Using an initial shift of $s=920$, apply Rayleigh quotient iteration. Determine which eigenvalue was found and make a table of the `log10` of the errors in the iteration as a function of iteration number. (These should approximately double, until machine precision is reached, due to quadratic convergence.)
 
 **(c)** Repeat part (b) using a different initial shift of your choice.
 ``````
