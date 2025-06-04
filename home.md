@@ -8,14 +8,14 @@ numbering: false
 ````{card}
 ```{image} _static/front_cover_julia.*
 :align: center
-:height: 300px
+:height: 200px
 ``` 
 ````
 
 ````{card}
 ```{image} _static/front_cover_matlab.*
 :align: center
-:height: 300px
+:height: 200px
 ``` 
 ````
 `````
@@ -24,6 +24,10 @@ This is a new edition of the textbook [Fundamentals of Numerical Computation](ht
 
 ```{warning}
 There are some changes from the print editions. Exercise numbers may not align, for example. 
+```
+
+```{important}
+Start [here](usage.md)!
 ```
 
 ## Supporting us
