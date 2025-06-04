@@ -66,7 +66,6 @@ Suppose $\mathbf{U} = \operatorname{mtx}(u)$ is the matrix of unknowns. @tab-vec
 
 ``````{table} vec and unvec operations
 :label: tab-vec-unvec
-:align: center
 
 `````{tab-set}
 ````{tab-item} Julia
