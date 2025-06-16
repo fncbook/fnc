@@ -60,7 +60,6 @@ Line 12 implements @forwardsub. It contains an inner product between row $i$ of 
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init;
-pwd
 ```
 
 ### 2.1 @section-linsys-polyinterp
@@ -423,7 +422,7 @@ L = tril(A)
 We'll set up and solve a linear system with this matrix.
 
 ```{code-cell}
-b = ones(5);
+b = ones(5, 1);
 x = forwardsub(L, b)
 ```
 
@@ -453,7 +452,7 @@ U(1, [4, 5]) = [alpha - beta, beta]
 ```
 
 ```{code-cell}
-x_exact = ones(5);
+x_exact = ones(5, 1);
 b = [alpha; 0; 0; 0; 1];
 ```
 
