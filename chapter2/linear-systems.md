@@ -210,7 +210,7 @@ Consider how to implement the sequential process implied by Equation {eq}`forwar
 
 ````{tab-item} MATLAB
 :sync: matlab
-:::{embed} #function-forwardsub-julia
+:::{embed} #function-forwardsub-matlab
 :::
 ```` 
 
@@ -237,7 +237,7 @@ The implementation of backward substitution is much like forward substitution an
 
 ````{tab-item} MATLAB
 :sync: matlab
-:::{embed} #function-backsub-julia
+:::{embed} #function-backsub-matlab
 :::
 ```` 
 
@@ -310,12 +310,12 @@ x_2   -  x_3      &= 2 \\
 
 ``````{exercise}
 :label: problem-linearsystems-triangularcomp
-⌨ Use {numref}`Function {number} <function-forwardsub>` or {numref}`Function {number} <function-backsub>` to solve each system from the preceding exercise. Verify that the solution is correct by computing $\mathbf{L}\mathbf{x}$ and subtracting $\mathbf{b}$.
+⌨ Use {numref}`Function {number} <function-forwardsub>` or {numref}`Function {number} <function-backsub>` to solve each system for $\mathbf{x}$ from the preceding exercise. Verify that the solution is correct by computing $\mathbf{b} - \mathbf{A}\mathbf{x}$.
 ``````
 
 ``````{exercise}
 :label: problem-linearsystems-backsub
-⌨  Use {numref}`Function {number} <function-backsub>` to solve the following systems.  Verify that the solution is correct by computing $\mathbf{U}\mathbf{x}$ and subtracting $\mathbf{b}$.
+⌨  Use {numref}`Function {number} <function-backsub>` to solve the following systems.  Verify that the solution is correct by computing $\mathbf{b} - \mathbf{U}\mathbf{x}$.
 
 **(a)** $\;\begin{bmatrix}
 3 & 1 & 0  \\
@@ -338,7 +338,8 @@ x_2   -  x_3      &= 2 \\
 :label: problem-linearsystems-lumpstring
 Suppose a string is stretched with tension $\tau$ horizontally between two anchors at $x=0$ and $x=1$. At each of the $n-1$ equally spaced positions $x_k=k/n$, $k=1,\ldots,n-1$, we attach a little mass $m_i$ and allow the string to come to equilibrium. This causes vertical displacement of the string. Let $q_k$ be the amount of displacement at $x_k$. If the displacements are not too large, then an approximate force balance equation is
 
-```{math} 
+```{math}
+:numbered: false
 n \tau (q_k - q_{k-1}) + n\tau (q_k - q_{k+1}) =
 m_k g, \qquad k=1,\ldots,n-1,
 ```
@@ -366,6 +367,7 @@ where $g=-9.8$ m/s$^2$ is the acceleration due to gravity, and we define $q_0=0$
 ⌨ @demo-systems-triangular showed solutions of $\mathbf{A}\mathbf{x}=\mathbf{b}$, where
 
 ```{math}
+:numbered: false
 \mathbf{A} = \begin{bmatrix} 1 & -1 & 0 & \alpha-\beta & \beta \\ 0 & 1 & -1 &
 0 & 0 \\ 0 & 0 & 1 & -1 & 0 \\ 0 & 0 & 0 & 1 & -1  \\ 0 & 0 & 0 & 0 & 1
 \end{bmatrix}, \quad

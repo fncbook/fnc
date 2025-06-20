@@ -308,15 +308,19 @@ provided the denominator is nonzero.
 ``````{exercise}
 :label: problem-conditioning-doubleroot
 
-The polynomial $x^2-2x+1$ has a double root at 1. Let $r_1(\epsilon)$ and $r_2(\epsilon)$ be the roots of the perturbed polynomial $x^2-(2+\epsilon)x+1$.
+Let $r_1(\epsilon)$ and $r_2(\epsilon)$ be the smaller and larger roots of the perturbed polynomial $x^2-(2+\epsilon)x+1$. As $\epsilon\to 0$, both roots approach $1$, the double root of $x^2-2x+1$. 
 
 **(a)** ✍/⌨ Using a computer or calculator, make a table with rows for $\epsilon = 10^{-2}$, $10^{-4}$, $10^{-6}$, $\ldots$, $10^{-12}$ and columns for $\epsilon$, $r_1(\epsilon)$, $r_2(\epsilon)$, $|r_1(\epsilon)-1|$, and $|r_2(\epsilon)-1|$.
 
 **(b)** ✍ Show that the observations of part (a) satisfy
 
-$$\max\{\, |r_1(\epsilon)-1|, |r_2(\epsilon)-1| \,\} \approx C \epsilon^q$$
+```{math}
+:numbered: false
+|r_k(\epsilon)-1| \approx C \epsilon^q, \quad k=1,2,
+```
 
-for some $0<q<1$. (This supports the conclusion that $\kappa=\infty$ at the double root.) 
+for some $0<q<1$. (This suggests that the relative condition number of the double root, which divides by the perturbation $\epsilon$, has no upper bound.)
+
 ``````
 
 ``````{exercise}
@@ -325,6 +329,7 @@ for some $0<q<1$. (This supports the conclusion that $\kappa=\infty$ at the doub
 ✍ Generalize {eq}`rootcond1` to finding a root of the $n$th degree polynomial $p(x) = a_nx^n + \cdots + a_1 x + a_0$, and show that the relative condition number of a root $r$ with respect to perturbations only in $a_k$ is
 
 ```{math}
+:numbered: false
 \kappa_r(a_k) = \left| \frac{a_k r^{k-1}}{p'(r)} \right|.
 ```
 ``````

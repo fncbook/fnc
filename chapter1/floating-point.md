@@ -74,7 +74,7 @@ We define the rounding function $\fl(x)$ as the map from real number $x$ to the 
 
 ```{math}
 :label: fpbound
-\frac{|\fl(x)-x|}{|x|} \le \frac{2^{n-d-1}}{2^n} \le  \tfrac{1}{2}\macheps.
+\frac{|\fl(x)-x|}{|x|} \le \frac{2^{n-d-1}}{2^n} =  \tfrac{1}{2}\macheps.
 ```
 
 In words, every real number is represented with a uniformly bounded relative precision. Inequality {eq}`fpbound` holds true for negative $x$ as well. In @problem-fp-fprelative you are asked to show that an equivalent statement is that
@@ -298,5 +298,5 @@ Exercises marked with ✍ are intended to be done by hand or with the aid of a s
 ``````{exercise}
 :label: problem-fp-nextfloat
 
-⌨ Julia defines a function `nextfloat` that gives the next-larger floating-point value of a given number. What is the next float past `floatmax()`? What is the next float past `-Inf`? 
+⌨ *(Julia-specific) Julia defines a function `nextfloat` that gives the next-larger floating-point value of a given number. What is the next float past `floatmax()`? What is the next float past `-Inf`? 
 ``````

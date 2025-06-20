@@ -297,6 +297,7 @@ As noted in the descriptions of {numref}`Function {number} <function-lufact>` an
 ⌨ The matrices
 
 ```{math}
+:numbered: false
 \mathbf{T}(x,y) = \begin{bmatrix}
 1 & 0 & 0 \\ 0 & 1 & 0 \\ x & y & 1
 \end{bmatrix},\qquad
@@ -308,9 +309,9 @@ As noted in the descriptions of {numref}`Function {number} <function-lufact>` an
 are used to represent translations and rotations of plane points in computer graphics. For the following, let
 
 ```{math}
-\mathbf{A} = \mathbf{T}(3,-1)\mathbf{R}(\pi/5)\mathbf{T}(-3,1), \qquad \mathbf{z} = \begin{bmatrix}
-2 \\ 2 \\ 1
-\end{bmatrix}.
+:numbered: false
+\mathbf{A} = \mathbf{T}(3,-1) \mathbf{R}(\pi/5) \mathbf{T}(-3,1), \qquad 
+\mathbf{z} = \begin{bmatrix} 2 \\ 2 \\ 1 \end{bmatrix}.
 ```
 
 **(a)** Find $\mathbf{b} = \mathbf{A}\mathbf{z}$.
@@ -326,6 +327,7 @@ are used to represent translations and rotations of plane points in computer gra
 ⌨ Define
 
 ```{math}
+:numbered: false
 \mathbf{A}= \begin{bmatrix}
 1 & 0 & 0 & 0 & 10^{12} \\
 1 & 1 & 0 & 0 & 0 \\
@@ -339,16 +341,17 @@ are used to represent translations and rotations of plane points in computer gra
 \quad \mathbf{b} = \mathbf{A}\hat{\mathbf{x}}.
 ```
 
-**(a)** Using {numref}`Function {number}<function-lufact>` and triangular substitutions, solve the linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, showing the result. To the nearest integer, how many accurate digits are in the result? (The answer is much less than the full 16 of double precision.)
+**(a)** Using {numref}`Function {number}<function-lufact>` and triangular substitutions, solve the linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$, showing the result for $\mathbf{x}$. Rounding down, how many accurate digits are in the 3rd component of the result? (The answer is much less than the full 16 of double precision.)
 
-**(b)** Repeat part (a) with $10^{20}$ as the element in the upper right corner. (The result is even less accurate. We will study the causes of such low accuracy in {numref}`section-linsys-condition-number`.)
+**(b)** Repeat part (a) with $10^{20}$ as the element in the upper right corner of the matrix. (The result is even less accurate. We will study the causes of such low accuracy in @section-linsys-condition-number.)
 ``````
 
 ``````{exercise}
 :label: problem-lu-integer
 ⌨ Let
 
-$$
+```{math}
+:numbered: false
 \mathbf{A} = 
 \begin{bmatrix}
 1 & 1 & 0 & 1 & 0 & 0 \\
@@ -358,7 +361,7 @@ $$
 1 & 1 & 0 & 0 & 1 & 1 \\
 0 & 1 & 1 & 0 & 0 & 1
 \end{bmatrix}.
-$$
+```
 
 Verify computationally that if $\mathbf{A}=\mathbf{L}\mathbf{U}$ is the LU factorization, then the elements of $\mathbf{L}$, $\mathbf{U}$, $\mathbf{L}^{-1}$, and $\mathbf{U}^{-1}$ are all integers. Do **not** rely just on visual inspection of the numbers; perform a more definitive test.
 ``````
@@ -375,8 +378,9 @@ When computing the determinant of a matrix by hand, it's common to use cofactor 
 **(a)** ✍ Explain using determinant properties why, if $\mathbf{A}=\mathbf{L}\mathbf{U}$ is an LU factorization,
 
 ```{math}
+:numbered: false
 \det(\mathbf{A}) = U_{11}U_{22}\cdots U_{nn}=\prod_{i=1}^n U_{ii}.
 ```
 
-**(b)** ⌨ Using the result of part (a), write a function `determinant(A)` that computes the determinant using {numref}`Function {number}<function-lufact>`. Test your function on at least two nontriangular $5\times 5$ matrices, comparing your result to the result of the standard `det` function.
+**(b)** ⌨ Using the result of part (a), write a function `determinant(A)` that computes the determinant using {numref}`Function {number}<function-lufact>`. Test your function on at least two nontriangular $5\times 5$ matrices, comparing your result to the result of the standard `det` function (found in `LinearAlgebra` for Julia and `numpy.linalg` for Python). Remember to check relative error, not absolute error, as the determinant can be very large or very small.
 ``````

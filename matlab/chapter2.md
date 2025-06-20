@@ -89,7 +89,7 @@ Now we have four data points $(t_1,y_1),\dots,(t_4,y_4)$, so $n=4$ and we seek a
 V = vander(t)
 ```
 
-:::{index} ! MATLAB; \\
+:::{index} MATLAB; \\
 :::
 
 To solve for the vector of polynomial coefficients, we use a backslash to solve the linear system:

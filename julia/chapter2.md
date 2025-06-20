@@ -125,7 +125,7 @@ An expression inside square brackets and ending with a `for` statement is called
 V = [ t[i]^j for i in 1:4, j in 0:3 ]
 ```
 
-:::{index} ! Julia; \\
+:::{index} Julia; \\
 :::
 
 To solve for the vector of polynomial coefficients, we use a backslash to solve the linear system:
@@ -994,16 +994,16 @@ b - A*x
 With the syntax `A \ b`, the matrix `A` is PLU-factored, followed by two triangular solves.
 
 ```{code-cell}
-A = randn(500, 500)   # 500x500 with normal random entries
-A \ rand(500)          # force compilation
+A = randn(500, 500)    # 500x500 with normal random entries
+A \ rand(500)          # force compilation for timing
 @elapsed for k=1:50; A \ rand(500); end
 ```
 
-In {numref}`section-linsys-efficiency` we showed that the factorization is by far the most costly part of the solution process. A factorization object allows us to do that costly step only once per unique matrix. 
+In {numref}`section-linsys-efficiency` we showed that the factorization is by far the most costly part of the solution process. The `lu` function from the built-in package `LinearAlgebra` returns a factorization object that allows us to do that costly step only once per unique matrix. 
 
 ```{code-cell}
-factored = lu(A)     # store factorization result
-factored \ rand(500)   # force compilation
+factored = lu(A)       # store factorization result
+factored \ rand(500)   # force compilation for timing
 @elapsed for k=1:50; factored \ rand(500); end
 ```
 ``````
@@ -1091,7 +1091,11 @@ Fronorm = norm(A)
 ```{index} ! Julia; opnorm
 ```
 
-Most of the time we want to use `opnorm`, which is an induced matrix norm. The default is the 2-norm.
+````{warning}
+In Julia, `norm(A)` is the Frobenius norm of a matrix, not the induced norm. To compute the induced norm, use `opnorm`.
+````
+
+The default for `opnorm` is the 2-norm.
 
 ```{code-cell}
 twonorm = opnorm(A)

@@ -209,12 +209,13 @@ The `+=` operator means to increment the item on the left-hand side. There are s
 :label: problem-matrices-blockpower
 ✍ Suppose 
 
-$$
+```{math}
+:numbered: false
 \mathbf{C} =
 \begin{bmatrix}
 \mathbf{I} & \mathbf{A} \\ -\mathbf{I} & \mathbf{B}
 \end{bmatrix}.
-$$ 
+```
 
 Using block notation, find $\mathbf{C}^2$ and $\mathbf{C}^3$.
 ``````
@@ -224,6 +225,7 @@ Using block notation, find $\mathbf{C}^2$ and $\mathbf{C}^3$.
 ⌨  Let
 
 ```{math}
+:numbered: false
 \mathbf{A} =
 \begin{bmatrix}
 2 & 1 & 1 & 0 \\ 0 & -1 & 4 & 1 \\ 2 & 2 & 0 & -2 \\ 1 & 3 & -1
@@ -237,6 +239,7 @@ Using block notation, find $\mathbf{C}^2$ and $\mathbf{C}^3$.
 ```
 
 ```{math}
+:numbered: false
 \mathbf{u} =
 \begin{bmatrix}
 2 \\ -1 \\ 3 \\ 1
@@ -248,9 +251,9 @@ Using block notation, find $\mathbf{C}^2$ and $\mathbf{C}^3$.
 \end{bmatrix}.
 ```
 
-(Do not round off the values in $\mathbf{v}$—find them using native Julia commands.) For each expression below, use Julia to find the result, or explain why the result does not exist.
+(Do not round off the values in $\mathbf{v}$—find them using native commands.) For each expression below, use the computer to find the result, or explain why the result does not exist.
 
-**(a)** $\mathbf{A}\mathbf{B},\quad$
+**(a)** $\mathbf{A} \mathbf{B},\quad$
 **(b)** $\mathbf{B} \mathbf{A},\quad$
 **(c)** $\mathbf{v}^T \mathbf{B},\quad$
 **(d)** $\mathbf{B} \mathbf{u},\quad$
@@ -262,6 +265,7 @@ Using block notation, find $\mathbf{C}^2$ and $\mathbf{C}^3$.
 ⌨  Let
 
 ```{math}
+:numbered: false
 \mathbf{u} =
 \begin{bmatrix}
 1\\3\\5\\7\\9\\11
@@ -272,17 +276,19 @@ Using block notation, find $\mathbf{C}^2$ and $\mathbf{C}^3$.
 \end{bmatrix}.
 ```
 
-Find the inner products $\mathbf{u}^T\mathbf{v}$ and $\mathbf{v}^T\mathbf{u}$ and the outer products $\mathbf{u}\mathbf{v}^T$ and $\mathbf{v}\mathbf{u}^T$.
+**(a)** Find the inner products $\mathbf{u}^T\mathbf{v}$ and $\mathbf{v}^T\mathbf{u}$.
+
+**(b)** Find the outer products $\mathbf{u}\mathbf{v}^T$ and $\mathbf{v}\mathbf{u}^T$.
 ``````
 
 ``````{exercise}
 :label: problem-matrices-transpose
-⌨ In Julia, give a demonstration of the identity $(\mathbf{A}\mathbf{B})^T=\mathbf{B}^T\mathbf{A}^T$ for some arbitrarily chosen $3\times 4$ matrix $\mathbf{A}$ and $4\times 2$ matrix $\mathbf{B}$.
+⌨ Give a demonstration of the identity $(\mathbf{A}\mathbf{B})^T=\mathbf{B}^T\mathbf{A}^T$ for some arbitrarily chosen $3\times 4$ matrix $\mathbf{A}$ and $4\times 2$ matrix $\mathbf{B}$.
 ``````
 
 ``````{exercise}
 :label: problem-matrices-inverseprod
-✍ Prove that if $\mathbf{A}$ and $\mathbf{B}$ are invertible, then $(\mathbf{A}\mathbf{B})^{-1}=\mathbf{B}^{-1}\mathbf{A}^{-1}$. (In producing the inverse, it follows that $\mathbf{A}\mathbf{B}$ is invertible as well.)
+✍ Prove that if $\mathbf{A}$ and $\mathbf{B}$ are invertible and the product $\mathbf{A}\mathbf{B}$ is defined, then $(\mathbf{A}\mathbf{B})^{-1}=\mathbf{B}^{-1}\mathbf{A}^{-1}$. (In producing the inverse, it follows that $\mathbf{A}\mathbf{B}$ is invertible as well.)
 ``````
 
 ``````{exercise}

@@ -254,15 +254,16 @@ s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \overline{x})^2,
 \qquad \overline{x} = \frac{1}{n} \sum_{i=1}^n x_i.
 ```
 
-Write a function `samplevar(x)` that takes as input a vector `x` of any length and returns $s^2$ as calculated by the formula. You should test your function on the vectors `ones(100)` and `rand(200)`. If you enter `using Statistics` in Julia, then you can compare to the results of the `var` function.
+Write a function `samplevar(x)` that takes as input a vector `x` of any length and returns $s^2$ as calculated by the formula. You should test your function on a vector of 100 ones and a vector of 200 normally distributed random numbers. 
 ``````
 
 ``````{exercise}
 :label: problem-algoruthms-area
 
-⌨  Let `x` and `y` be vectors whose entries give the coordinates of the $n$ vertices of a polygon, given in counterclockwise order. Write a function `polygonarea(x,y)` that computes and returns the area of the polygon using this formula based on Green's theorem:
+⌨  Let `x` and `y` be vectors whose entries give the coordinates of the $n$ vertices of a polygon, given in counterclockwise order. Write a function `polygonarea(x, y)` that computes and returns the area of the polygon using this formula based on Green's theorem:
 
 ```{math}
+:numbered: false
 A = \frac{1}{2} \left| \sum_{k=1}^n x_k y_{k+1} - x_{k+1}y_k \right|.
 ```
 

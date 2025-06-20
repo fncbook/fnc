@@ -81,6 +81,35 @@ Given distinct values $t_1,\ldots,t_n$, a {term}`Vandermonde matrix` for these v
 
 Polynomial interpolation can therefore be posed as a linear system of equations with a Vandermonde matrix.
 
+:::{index} ! Julia; \\
+:::
+
+:::{index} ! MATLAB; \\
+:::
+
+:::{index} ! Python; solve
+:::
+
+``````{important}
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+The backslash operator `\` is used to solve linear systems in Julia. It is mathematically equivalent to multiplication by the inverse of the matrix on its left.
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+The backslash operator `\` is used to solve linear systems in MATLAB. It is mathematically equivalent to multiplication by the inverse of the matrix on its left.
+
+```` 
+
+````{tab-item} Python
+:sync: python
+The function `numpy.linalg.solve` is used to solve linear systems in Python. It is mathematically equivalent to multiplication by the inverse of the matrix in its first argument.
+```` 
+`````
+``````
+
 ::::{prf:example} Linear system for polynomial interpolation
 :label: demo-interp-vander
 
@@ -123,11 +152,9 @@ that is needed to run some of the statements.
 
 Suppose you want to interpolate the points $(-1,0)$, $(0,1)$, $(2,0)$, $(3,1)$, and $(4,2)$ by a polynomial of as low a degree as possible.
 
-**(a)** ✍ What is the maximum necessary degree of this polynomial?
+**(a)** ✍ Write out a linear system of equations for the coefficients of the interpolating polynomial.
 
-**(b)** ✍ Write out a linear system of equations for the coefficients of the interpolating polynomial.
-
-**(c)** ⌨ Solve the system in (b) numerically.
+**(b)** ⌨ Solve the system in (b) numerically.
 ``````
 
 ``````{exercise}
@@ -161,9 +188,10 @@ Suppose you want to interpolate the points $(-1,0)$, $(0,1)$, $(2,0)$, $(3,1)$, 
 
 ⌨ Here are the official population figures for the state of Delaware, USA, every ten years from 1790 to 1900: 59096, 64273, 72674, 72749, 76748, 78085, 91532, 112216, 125015, 146608, 168493, 184735. For this problem, use 
 
-$$
+```{math}
+:numbered: false
 t = \frac{\text{year} - 1860}{10}
-$$
+```
 
 as the independent (time) variable.
 

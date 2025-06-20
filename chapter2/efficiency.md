@@ -172,51 +172,164 @@ Recall the steps of {numref}`Algorithm {number} <algorithm-lu-solve>` for the sy
 2. Solve $\mathbf{L}\mathbf{z}=\mathbf{b}$ for $\mathbf{z}$ using forward substitution.
 3. Solve $\mathbf{U}\mathbf{x}=\mathbf{z}$ for $\mathbf{x}$ using backward substitution.
 
-The second and third steps are solved by {numref}`Function {number} <function-forwardsub>` and {numref}`Function {number} <function-backsub>`. Only one line in each of these functions dominates the arithmetic. Take `forwardsub`, for instance. It has a single flop in line 11.  Line 13 computes
+The second and third steps are solved by {numref}`Function {number} <function-forwardsub>` and {numref}`Function {number} <function-backsub>`.
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+
+Take `forwardsub`, for instance. It has a single flop in line 10.  Line 12 computes
 
 ```julia  
-sum( L[i,j]*x[j] for j in 1:i-1 )
+sum(L[i, j] * x[j] for j in 1:i-1)
 ```
 
-This line requires $i-1$ multiplications and $(i-2)$ additions, for a total of $2i-3$ flops. Line 14 adds two more flops. These lines are performed within a loop as $i$ ranges from 1 to $n$, so the total count is
+This line requires $i-1$ multiplications and $(i-2)$ additions, for a total of $2i-3$ flops. Line 13 adds two more flops, to make that $2n-1$. These lines are performed within a loop as $i$ ranges from 2 to $n$, so the total count is
 
 ```{math}
-:label: trisolveflops
-  1 + \sum_{i=1}^n (2i-3) = 1 - 3n + 2 \sum_{i=1}^n i.
+:numbered: false
+1 + \sum_{i=2}^n (2i-1) = \sum_{i=1}^n (2i-1) = -n + 2 \sum_{i=1}^n i.
+```
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+Take `forwardsub`, for instance. All of the flops are in line 12:
+
+```matlab
+(b(i) - L(i, 1:i-1) * x(1:i-1)) / L(i, i);
 ```
 
-It is not hard to find an exact formula for the sum, but we use {eq}`sumflops` to simplify it to $\sim n^2$. After all, since flop counting is only an approximation of true running time, why bother with the more complicated exact expression? An analysis of backward substitution yields the same result.
+The first operation to be performed in this line is the inner product `L(i, 1:i-1) * x(1:i-1)`, which requires $i-1$ multiplications and $(i-2)$ additions, for a total of $2i-3$ flops. Then there is one subtraction and one division, which adds two more flops. These lines are performed within a loop as $i$ ranges from 1 to $n$, so the total count is
+
+```{math}
+:numbered: false
+\sum_{i=1}^n (2i-1) = -n + 2 \sum_{i=1}^n i.
+```
+````
+
+````{tab-item} Python
+:sync: python
+Take `forwardsub`, for instance. Line 11 computes
+```python
+s = L[i, :i] @ x[:i]
+```
+
+This is the inner product between the first $i$ elements of the $i$th row of `L` and the first $i$ elements of `x`, requiring $i$ multiplications and $(i-1)$ additions. Line 212 adds two more flops, for a total of $2i+1$ in each pass through the loop. In this loop, $i$ ranges from $0$ to $n-1,$ so the total count is
+
+```{math}
+:numbered: false
+\sum_{i=0}^{n-1} (2i+1) = \sum_{i=1}^n (2i-1) = -n + 2 \sum_{i=1}^n i.
+```
+````
+
+`````
+
+It is not hard to find an exact formula for the sum above, but we use the asymptotic expression {eq}`sumflops` to simplify it to $\sim n^2$. After all, since flop counting is only an approximation of true running time, why bother with the more complicated exact expression? An analysis of backward substitution yields the same result.
 
 ```{prf:lemma}
 Solving a triangular $n\times n$ system by forward or backward substitution takes $\sim n^2$ flops asymptotically.
 ```
 
-Before counting flops for the LU factorization, we have to admit that {numref}`Function {number} <function-lufact>` is not written as economically as it could be. Recall from our motivating example in @demo-lu-derive that we zero out the first row and column of $\mathbf{A}$ with the first outer product, the second row and column with the second outer product, and so on. There is no good reason to do multiplications and additions with values known to be zero, so we could replace lines 15–19 of `lufact` with
+Before counting flops for the LU factorization, we have to admit that {numref}`Function {number} <function-lufact>` is not written as economically as it could be. Recall from our motivating example in @demo-lu-derive that we zero out the first row and column of $\mathbf{A}$ with the first outer product, the second row and column with the second outer product, and so on. There is no good reason to do multiplications and additions with values known to be zero.
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+Suppose we replace lines 14–18 of `lufact` in @function-lufact with
 
 ```{code-block} julia
-:lineno-start: 15
+:lineno-start: 14
 for k in 1:n-1
-    U[k,k:n] = Aₖ[k,k:n]
-    L[k:n,k] = Aₖ[k:n,k]/U[k,k]
-    Aₖ[k:n,k:n] -= L[k:n,k]*U[k,k:n]'
+    U[k, k:n] = Aₖ[k, k:n]
+    L[k:n, k] = Aₖ[k:n, k] / U[k, k]
+    Aₖ[k:n, k:n] -= L[k:n, k] * U[k, k:n]'
 end
 ```
 
 We will use the following handy fact.
 :::{prf:observation}
-The range `k:n`, where $k\le n$, has $n-k+1$ elements.
+The Julia range `k:n`, where $k\le n$, has $n-k+1$ elements.
 :::
 
-Line 17 above divides each element of the vector `Aₖ[k:n,k]` by a scalar. Hence, the number of flops equals the length of the vector, which is $n-k+1$.
+Line 16 above divides each element of the vector `Aₖ[k:n, k]` by a scalar. Hence, the number of flops equals the length of the vector, which is $n-k+1$.
 
-Line 18 has an outer product followed by a matrix subtraction. The definition @definition-outerprod of the outer product makes it clear that that computation takes one flop (multiplication) per element of the result, which here results in $(n-k+1)^2$ flops. The number of subtractions is identical.
+Line 17 has an outer product followed by a matrix subtraction. The definition @definition-outerprod of the outer product makes it clear that that computation takes one flop (multiplication) per element of the result, which here results in $(n-k+1)^2$ flops. The number of subtractions is identical.
 
-Altogether the factorization takes
+Altogether, the factorization takes
 
 ```{math}
 :label: gecount1
-\sum_{k=1}^{n-1} n-k + 1 + 2(n-k+1)^2.
+\sum_{k=1}^{n-1} n-k + 1 + 2(n-k+1)^2
 ```
+
+flops.
+
+````
+````{tab-item} MATLAB
+:sync: matlab
+Suppose we replace lines 14–18 of `lufact` in @function-lufact with
+
+```{code-block} matlab
+:lineno-start: 14
+for k = 1:n-1
+    U(k, k:n) = A_k(k, k:n);
+    L(k:n, k) = A_k(k:n, k) / U(k, k);
+    A_k(k:n, k:n) = A_k(k:n, k:n) - L(k:n, k) * U(k, k:n);
+end
+```
+
+We will use the following handy fact.
+:::{prf:observation}
+The MATLAB vector `k:n`, where $k\le n$, has $n-k+1$ elements.
+:::
+
+Line 16 above divides each element of the vector `A_k(k:n, k)` by a scalar. Hence, the number of flops equals the length of the vector, which is $n-k+1$.
+
+Line 17 has an outer product followed by a matrix subtraction. The definition @definition-outerprod of the outer product makes it clear that that computation takes one flop (multiplication) per element of the result, which here results in $(n-k+1)^2$ flops. The number of subtractions is identical.
+
+Altogether, the factorization takes
+
+```{math}
+:label: gecount1
+\sum_{k=1}^{n-1} n-k + 1 + 2(n-k+1)^2
+```
+
+flops.
+
+````
+````{tab-item} Python
+:sync: python
+Suppose we replace lines 14–17 of `lufact` in @function-lufact with
+```{code-block} python
+:lineno-start: 14
+for k in range(n-1):
+    U[k, k:n] = A_k[k, k:n]
+    L[k:n, k] = A_k[k:n, k] / U[k, k]
+    A_k[k:n, k:n] -= np.outer(L[k:n, k], U[k, k:n])
+```
+
+We will use the following handy fact.
+:::{prf:observation}
+The Numpy slice `k:n`, where $k\le n$, has $n-k$ elements.
+:::
+
+Line 16 above divides each element of the vector `A_k[k:n, k] / U[k, k]` by a scalar. Hence, the number of flops equals the length of the vector, which is $n-k$.
+
+Line 17 has an outer product followed by a matrix subtraction. The definition @definition-outerprod of the outer product makes it clear that that computation takes one flop (multiplication) per element of the result, which here results in $(n-k)^2$ flops. The number of subtractions is identical.
+
+Altogether, the factorization takes
+
+```{math}
+:label: gecount1
+\sum_{k=0}^{n-2} n-k + 2(n-k)^2 = \sum_{k=1}^{n-1} n-k + 1 + 2(n-k+1)^2
+```
+
+flops.
+
+````
+
+`````
 
 There are different ways to simplify this expression. We will make a change of summation index using $j=n-k$. The endpoints of the sum are $j=n-1$ when $k=1$ and $j=1$ when $k=n-1$. Since the order of terms in a sum doesn't matter, we get
 
@@ -299,14 +412,48 @@ In practice, flops are not the only aspect of an implementation that occupies si
 
 **(a)** Here is a little code to do the evaluation.
 
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+
 ``` julia
 y = c[1]
 xpow = 1
 for i in 2:n
-xpow *= x
-y += c[i]*xpow
+    xpow *= x
+    y += c[i]*xpow
 end
 ```
+
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+
+``` matlab
+y = c(1);
+xpow = 1;
+for i = 2:n
+    xpow = xpow*x;
+    y = y + c(i)*xpow;
+end
+```
+
+````
+
+````{tab-item} Python
+:sync: python
+
+``` python
+y = c[0]
+xpow = 1
+for i in range(1, n):
+    xpow *= x
+    y += c[i]*xpow
+```
+
+```` 
+`````
 
 Assuming that `x` is a scalar, how many flops does this function take, as a function of $n$?
 
@@ -316,14 +463,15 @@ Assuming that `x` is a scalar, how many flops does this function take, as a func
 ``````{exercise}
 :label: problem-efficiency-exact
 
-The exact sums for $p=1,2$ in {eq}`sumflops` are as follows:
+The exact sums for $p=1,2$ in @sumflops are as follows:
 
 ```{math}
+:numbered: false
 \sum_{k=1}^{n} k = \frac{n(n+1)}{2}, \qquad 
 \sum_{k=1}^{n} k^2 = \frac{n(n+1)(2n+1)}{6}.
 ```
 
-**(a)** ✍  Use these to find the exact result for {eq}`gecount1`.
+**(a)** ✍  Use these to find the exact result for @gecount1.
 
 **(b)** ⌨ Plot the ratio of your result from (a) and the asymptotic result $2n^3/3$ for all $n=10^{1+0.03i}$, $i=0,\dots,100$, using a log scale for $n$ and a linear scale for the ratio. (The curve should approach 1 asymptotically.)
 ``````
@@ -333,13 +481,14 @@ The exact sums for $p=1,2$ in {eq}`sumflops` are as follows:
 ✍ Show that for any nonnegative constant integer $m$,
 
 ```{math}
+:numbered: false
 \sum_{k=0}^{n-m} k^p \sim \frac{n^{p+1}}{p+1}.
 ```
 ``````
 
 ``````{exercise}
 :label: problem-efficiency-triangular
-⌨ The `UpperTriangular` and `LowerTriangular` matrix types cause specialized algorithms to be invoked by the backslash. Define
+⌨ *(Julia-specific)* The `UpperTriangular` and `LowerTriangular` matrix types cause specialized algorithms to be invoked by the backslash. Define
 
 ```
 A = rand(1000,1000)

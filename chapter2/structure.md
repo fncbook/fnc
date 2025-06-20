@@ -258,6 +258,7 @@ The speed and stability of the Cholesky factorization make it the top choice for
 ✍  For each matrix, use {eq}`diag-dominant` to determine whether it is diagonally dominant.
 
 ```{math}
+:numbered: false
 \mathbf{A} =
 \begin{bmatrix}
 3  & 1  & 0 & 1  \\
@@ -287,9 +288,10 @@ The speed and stability of the Cholesky factorization make it the top choice for
 ``````{exercise}
 :label: problem-structure-SPD
 
-⌨ For each matrix, use inspection or `cholesky` in Julia to determine whether it is SPD.
+⌨ For each matrix, use inspection or a numerical Cholesky factorization to determine whether it is SPD.
 
 ```{math}
+:numbered: false
 \mathbf{A} =
 \begin{bmatrix}
 1 & 0 & -1 \\ 0 & 4 & 5 \\ -1 & 5 & 10
@@ -316,26 +318,21 @@ The speed and stability of the Cholesky factorization make it the top choice for
 ``````{exercise}
 :label: problem-structure-luband
 
-⌨ Using {numref}`Function {number} <function-lufact>` as a guide, write a function
+⌨ Using {numref}`Function {number} <function-lufact>` as a guide, write a function `luband` that accepts as inputs a banded matrix and its upper and lower bandwidths, and returns the LU factors (without pivoting). The function should avoid doing arithmetic using the locations that are known to stay zero. (Hint: Refer to the more efficient form of `lufact` given in {numref}`section-linsys-efficiency`. You only need to limit the rows and columns that are accessed within the loop.)
 
-``` julia
-function luband(A,upper,lower)
-```
+Test your function on a $7 \times 7$ matrix with lower bandwidth 1 and upper bandwidth 2 whose entries are given by
 
-that accepts upper and lower bandwidth values and returns LU factors (without pivoting) in a way that avoids doing arithmetic using the locations that are known to stay zero. (Hint: Refer to the more efficient form of `lufact` given in {numref}`section-linsys-efficiency`.)
-
-Test your function on the matrix with elements
-
-$$
+```{math}
+:numbered: false
 A_{ij} = \begin{cases} \frac{1}{i+j}, & -1 \le i-j \le 2,\\ 
 0 & \text{otherwise.} \end{cases}
-$$
+```
 ``````
 
 ``````{exercise}
 :label: problem-structure-tridiagonal
 
-⌨ The `Tridiagonal` matrix type invokes a specialized algorithm for solving a linear system. 
+⌨ *(Julia-specific)* The `Tridiagonal` matrix type invokes a specialized algorithm for solving a linear system. 
 
 **(a)** Set `n=1000` and `t=0`.  In a loop that runs 50 times, generate a linear system via 
 ``` julia
@@ -355,6 +352,6 @@ What is the ratio of running times for part (a) and (b)?
 
 ``````{exercise}
 :label: problem-structure-ATA
-✍ Prove that if $\mathbf{A}$ is any real invertible square matrix, then $\mathbf{A}^T\mathbf{A}$ is SPD. (Hint: First show that $\mathbf{x}^T\mathbf{A}^T\mathbf{A}\mathbf{x} \ge 0$ for all $\mathbf{x}$. Then explain why zero is ruled out if $\mathbf{x}\neq \boldsymbol{0}$.)
+✍ Prove that if $\mathbf{A}$ is any real invertible square matrix, then $\mathbf{A}^T\mathbf{A}$ is SPD. (Hint: First, check symmetry. Then show that $\mathbf{x}^T\mathbf{A}^T\mathbf{A}\mathbf{x} \ge 0$ for all $\mathbf{x}$. Finally, explain why zero is ruled out if $\mathbf{x}\neq \boldsymbol{0}$.)
 
 ``````

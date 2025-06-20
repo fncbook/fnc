@@ -96,7 +96,10 @@ V = vander(t)
 print(V)
 ```
 
-To solve a linear system $\mathbf{V} \mathbf{c} = \mathbf{y}$ for the vector of polynomial coefficients, we use `solve` (imported from `numpy.linalg`):
+:::{index} Python; solve
+:::
+
+To solve a linear system $\mathbf{V} \mathbf{c} = \mathbf{y}$ for the vector of polynomial coefficients, we use `solve`, located in `numpy.linalg`:
 
 ```{code-cell} 
 c = linalg.solve(V, y)

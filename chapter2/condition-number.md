@@ -177,13 +177,31 @@ When solving a linear system, all that can be expected is that the backward erro
 ⌨ The purpose of this problem is to verify, like in @demo-condition-bound, the error bound
 
 ```{math}
+:numbered: false
 \frac{\| \mathbf{x}-\tilde{\mathbf{x} \|}}{\| \mathbf{x} \|} \le \kappa(\mathbf{A})
 \frac{\| \mathbf{h} \|}{\| \mathbf{b} \|}.
 ```
 
-Here $\tilde{\mathbf{x}}$ is a numerical approximation to the exact solution $\mathbf{x}$, and $\mathbf{h}$ is an unknown perturbation caused by machine roundoff. We will assume that $\| \mathbf{d} \|/\| \mathbf{b} \|$ is roughly `eps()`.
+Here $\tilde{\mathbf{x}}$ is a numerical approximation to the exact solution $\mathbf{x}$, and $\mathbf{h}$ is an unknown perturbation caused by machine roundoff. We will assume that $\| \mathbf{h} \|/\| \mathbf{b} \|$ is roughly `eps()`.
 
-For each $n=10,20,\ldots,70$ let `A = matrixdepot("prolate",n,0.4)` and let $\mathbf{x}$ have components $x_k=k/n$ for $k=1,\ldots,n$. Define `b=A*x` and let $\tilde{\mathbf{x}}$ be the solution produced numerically by backslash.
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+
+Use the `MatrixDepot` package. For each $n=10,20,\ldots,70$, let `A = matrixdepot("prolate", n, 0.4)` and let $\mathbf{x}$ have components $x_k=k/n$ for $k=1,\ldots,n$. Define `b = A*x` and let `xtilde` be the solution produced numerically by backslash.
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+
+For each $n=10,20,\ldots,70$, let `A = gallery("prolate", n, 0.4)` and let $\mathbf{x}$ have components $x_k=k/n$ for $k=1,\ldots,n$. Define `b = A*x` and let `xtilde` be the solution produced numerically by backslash.
+````
+
+````{tab-item} Python
+:sync: python
+You will need to import the `rogues` package from PyPi. For each $n=10,20,\ldots,70$, let `A = rogues.prolate(n, 0.4)` and let $\mathbf{x}$ have components $x_k=k/n$ for $k=1,\ldots,n$. Define `b = A@x` and let `xtilde` be the solution produced numerically by `numpy.linalg.solve`.
+```` 
+`````
 
 Make a table including columns for $n$, the condition number of $\mathbf{A}$, the observed relative error in $\tilde{\mathbf{x}}$, and the right-hand side of the inequality above. You should find that the inequality holds in every case.
 ``````
@@ -194,19 +212,20 @@ Make a table including columns for $n$, the condition number of $\mathbf{A}$, th
 ⌨ @problem-linearsystems-triangillcond suggests that the solutions of linear systems
 
 ```{math}
+:numbered: false
 \mathbf{A} = \begin{bmatrix} 1 & -1 & 0 & \alpha-\beta & \beta \\ 0 & 1 & -1 &
 0 & 0 \\ 0 & 0 & 1 & -1 & 0 \\ 0 & 0 & 0 & 1 & -1  \\ 0 & 0 & 0 & 0 & 1
 \end{bmatrix}, \quad
 \mathbf{b} = \begin{bmatrix} \alpha \\ 0 \\ 0 \\ 0 \\ 1 \end{bmatrix}
 ```
 
-become less accurate as $\beta$ increases. Using $\alpha=0.1$ and $\beta=10,100,\ldots,10^{12}$, make a table with columns for $\beta$, $|x_1-1|$, and the condition number of the matrix.
+become less accurate as $\beta$ increases. Using $\alpha=0.1$ and $\beta=10,10^2,\ldots,10^{12}$, make a table with columns for $\beta$, $|x_1-1|$, and the condition number of the matrix.
 ``````
 
 ``````{exercise}
 :label: problem-cond-vandermonde
 
-⌨ Let $\mathbf{A}_n$ denote the $(n+1)\times(n+1)$ version of the Vandermonde matrix in Equation {eq}`vandersystem` based on the equally spaced interpolation nodes $t_i=i/n$ for $i=0,\ldots,n$. Using the 1-norm, graph $\kappa(\mathbf{A}_n)$ as a function of $n$ for $n=4,5,6,\ldots,20$, using a log scale on the $y$-axis. (The graph is nearly a straight line.)
+⌨ Let $\mathbf{A}_n$ denote the $(n+1)\times(n+1)$ version of the Vandermonde matrix in @vandersystem based on the equally spaced interpolation nodes $t_i=i/n$ for $i=0,\ldots,n$. Using the 1-norm, plot $\kappa(\mathbf{A}_n)$ as a function of $n$ for $n=4,5,6,\ldots,20$, using a log scale on the $y$-axis. (The graph is nearly a straight line.)
 
 ``````
 
@@ -229,7 +248,7 @@ become less accurate as $\beta$ increases. Using $\alpha=0.1$ and $\beta=10,100,
 
 **(a)** Write out $\mathbf{A}_2^{-1}$ and $\mathbf{A}_3^{-1}$.
 
-**(b)** Write out $\mathbf{A}_n^{-1}$ in the general case $n>1$. (If necessary, look at a few more cases in Julia until you are certain of the pattern.) Make a clear argument why it is correct.
+**(b)** Write out $\mathbf{A}_n^{-1}$ in the general case $n>1$. (If necessary, look at a few more cases on the computer until you are certain of the pattern.) Make a clear argument why it is correct.
 
 **(c)** Using the $\infty$-norm, find $\kappa(\mathbf{A}_n)$.
 ``````
@@ -247,6 +266,7 @@ become less accurate as $\beta$ increases. Using $\alpha=0.1$ and $\beta=10,100,
 ✍  Let $\mathbf{D}$ be a diagonal $n\times n$ matrix, not necessarily invertible. Prove that in the 1-norm,
 
 ```{math}
+:numbered: false
 \kappa(\mathbf{D}) = \frac{\max_i |D_{ii}|}{\min_i |D_{ii}|}.
 ```
 

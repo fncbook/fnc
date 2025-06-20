@@ -158,6 +158,7 @@ One stable algorithm that is not backward stable is floating-point evaluation fo
 The formulas
 
 ```{math}
+:numbered: false
 f(x)=\frac{1-\cos(x)}{\sin(x)}, \quad g(x) = \frac{2\sin^2(x/2)}{\sin(x)},
 ```
 are mathematically equivalent, but they suggest evaluation algorithms that can behave quite differently in floating point.
@@ -189,6 +190,7 @@ to compute $f(x)$ at $x=10^{-2},10^{-3},10^{-4},\ldots,10^{-11}$.
 **(c)** ⌨ Create a second algorithm from the first 8 terms of the Maclaurin series, i.e.,
 
 ```{math}
+:numbered: false
 p(x) = 1 + \frac{1}{2!}x + \frac{1}{3!}x^2 + \cdots + \frac{1}{8!}x^8.
 ```
 
@@ -203,6 +205,7 @@ Evaluate it at the same values of $x$ as in part (b).
 ⌨ The function
 
 ```{math}
+:numbered: false
 x = \cosh(y) = \frac{e^y + e^{-y}}{2}
 ```
 
@@ -210,12 +213,12 @@ can be inverted to yield a formula for $\operatorname{acosh}(x)$:
 
 ```{math}
 :label: acosh
-\operatorname{acosh}(x) = y = \log\bigl(x-\sqrt{x^2-1}\bigr).
+y = \operatorname{acosh}(x) = -\log\bigl(x-\sqrt{x^2-1}\bigr).
 ```
 
 For the steps below, define $y_i=-4i$ and $x_i=\cosh(y_i)$ for $i=1,\dots,4$. Hence $y_i=\operatorname{acosh}(x_i)$.
 
-**(a)** Find the relative condition number of evaluating $f(x) = \operatorname{acosh}(x)$. (You can use {eq}`acosh` or look up a formula for $f'$ in a calculus book.)  Evaluate $\kappa_f$ at all the $x_i$. (You will find that the problem is well-conditioned at these inputs.)
+**(a)** Find the relative condition number of evaluating $f(x) = \operatorname{acosh}(x)$. (You can use {eq}`acosh` or look up a formula for $f'$ in a calculus book.)  Evaluate $\kappa_f$ at all the $x_i$. (You will find that $\kappa$ is less than 20 at these inputs, so the conditioning is fine.)
 
 **(b)** Use {eq}`acosh` to approximate $f(x_i)$ for all $i$. Compute the relative accuracy of the results. Why are some of the results so inaccurate?
 
@@ -223,7 +226,7 @@ For the steps below, define $y_i=-4i$ and $x_i=\cosh(y_i)$ for $i=1,\dots,4$. He
 
 ```{math}
 :label: acosh2
-y = -2\log\left(\sqrt{\frac{x+1}{2}} + \sqrt{\frac{x-1}{2}}\right).
+y = 2\log\left(\sqrt{\frac{x+1}{2}} + \sqrt{\frac{x-1}{2}}\right).
 ```
 
 Apply {eq}`acosh2` to approximate $f(x_i)$ for all $i$, again computing the relative accuracy of the results.
@@ -232,9 +235,10 @@ Apply {eq}`acosh2` to approximate $f(x_i)$ for all $i$, again computing the rela
 ``````{exercise}
 :label: problem-stability-samplevar
 
-⌨ (Continuation of @problem-algorithms-samplevar. Adapted from {cite}`highamAccuracyStability2002`.) One drawback of the formula {eq}`samplevar` for sample variance is that you must compute a sum for $\overline{x}$ before beginning another sum to find $s^2$. Some statistics textbooks quote a single-loop formula
+⌨ (Continuation of @problem-algorithms-samplevar. Adapted from {cite}`highamAccuracyStability2002`.) One drawback of the formula {eq}`samplevar` for sample variance is that you must compute a sum for $\overline{x}$ before beginning another sum to find $s^2$, implying two loops taken over the data. Some statistics textbooks quote a formula that can be computed with a single loop:
 
 ```{math}
+:numbered: false
 \begin{split}
 s^2 &= \frac{1}{n-1} \left( u - \tfrac{1}{n}v^2 \right),\\
 u & = \sum_{i=1}^n x_i^2, \\
@@ -242,13 +246,12 @@ v &= \sum_{i=1}^n x_i.
 \end{split}
 ```
 
-Try this formula for these three datasets, each of which has a variance exactly equal to 1:
+Try this formula for these three sets as `x`, each having a variance exactly equal to 1:
 
-``` julia
-x = [ 1e6, 1+1e6, 2+1e6 ]
-x = [ 1e7, 1+1e7, 2+1e7 ]
-x = [ 1e8, 1+1e8, 2+1e8 ]
+```{math}
+:numbered: false
+\{ 10^6, 1 + 10^6, 2 + 10^6 \}, \quad \{ 10^7, 1 + 10^7, 2 + 10^7 \}, \quad \{ 10^8, 1 + 10^8, 2 + 10^8 \}.
 ```
 
-Explain the results.
+Explain the results. (Remember to use scientific notation in code, such as `1e6` for $10^6$.)
 ``````

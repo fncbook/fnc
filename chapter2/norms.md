@@ -154,7 +154,13 @@ The last equality above follows from linearity (as shown in @problem-norms-linea
 \| \mathbf{A} \|_2 = \max_{\| \mathbf{x} \|_2=1} \| \mathbf{A}\mathbf{x} \|_2.
 ```
 
-For the rest of this section we will continue to omit subscripts when we want to refer to an unspecified induced norm; after this section, an unsubscripted norm is understood to be the 2-norm.
+````{prf:example} Norm of the identity matrix
+:label: example-norms-identity
+
+In any induced matrix norm, the identity matrix $\mathbf{I}$ has norm $1$. This is because $\| \mathbf{I}\mathbf{x} \| = \| \mathbf{x} \|$ for all vectors $\mathbf{x}$, so the max of $\| \mathbf{I}\mathbf{x} \|$ over unit vectors is $1$. 
+````
+
+One can interpret the definition of an induced norm geometrically.  Each vector $\mathbf{x}$ on the unit "sphere" (as defined by the chosen vector norm) is mapped to its image $\mathbf{A}\mathbf{x}$, and the norm of $\mathbf{A}$ is the radius of the smallest "sphere" that encloses all such images.
 
 The definition of an induced matrix norm may seem oddly complicated. However, there are some key properties that follow directly from the definition.
 
@@ -185,12 +191,10 @@ For a square matrix $\mathbf{A}$,
 ````{prf:proof}
 :enumerated: false
 
-:enumerated: false
-
-
 The first result is trivial if $\mathbf{x}=\boldsymbol{0}$; otherwise,
 
 ```{math}
+:enumerated: false
 \frac{ \| \mathbf{A}\mathbf{x} \| }{\| \mathbf{x} \|} \le
 \max_{\mathbf{x}\neq \boldsymbol{0}}  \frac{\| \mathbf{A}\mathbf{x} \|}{\| \mathbf{x} \|} = \| \mathbf{A} \|.
 ```
@@ -198,6 +202,7 @@ The first result is trivial if $\mathbf{x}=\boldsymbol{0}$; otherwise,
 Inequality {eq}`normineq2` then follows because
 
 ```{math}
+:enumerated: false
 \| \mathbf{A}\mathbf{B}\mathbf{x} \| =\| \mathbf{A}(\mathbf{B}\mathbf{x}) \|\le \| \mathbf{A} \|\cdot\| \mathbf{B}\mathbf{x} \| \le
 \| \mathbf{A} \|\cdot\| \mathbf{B} \|\cdot\| \mathbf{x} \|,
 ```
@@ -205,6 +210,7 @@ Inequality {eq}`normineq2` then follows because
 and then
 
 ```{math}
+:enumerated: false
 \| \mathbf{A}\mathbf{B} \| = \max_{\mathbf{x}\neq \boldsymbol{0}} \frac{\| \mathbf{A}\mathbf{B}\mathbf{x} \|}{\| \mathbf{x} \|} \le
 \max_{\mathbf{x}\neq \boldsymbol{0}} \| \mathbf{A} \|\cdot\| \mathbf{B} \| = \| \mathbf{A} \|\cdot\| \mathbf{B} \|.
 ```
@@ -212,9 +218,7 @@ and then
 Finally,  {eq}`normineq3` results from repeated application of {eq}`normineq2`.
 ````
 
-One can interpret the definition of an induced norm geometrically.  Each vector $\mathbf{x}$ on the unit "sphere" (as defined by the chosen vector norm) is mapped to its image $\mathbf{A}\mathbf{x}$, and the norm of $\mathbf{A}$ is the radius of the smallest "sphere" that encloses all such images.
-
-In addition, two of the vector norms we have encountered lead to equivalent formulas that are easy to compute from the matrix elements.
+Two of the vector norms we have encountered induce matrix norms that are easy to compute from the matrix elements.
 
 ::::{prf:theorem} Matrix $\infty$-norm and 1-norm
 
@@ -230,7 +234,20 @@ In addition, two of the vector norms we have encountered lead to equivalent form
 
 ::::
 
-A mnemonic for these is that the $\infty$ symbol extends horizontally while the 1 character extends vertically, each indicating the direction of the summation in its formula. Also, both formulas give the same result for $m\times 1$ matrices as the vector norm. In both cases you must take absolute values of the matrix elements first.
+````{tip}
+:open: false
+A mnemonic for @mxinfnorm and @mxonenorm is that the $\infty$ symbol extends horizontally while the $1$ character extends vertically, each indicating the direction of the summation in its formula. Also, both formulas give the same result for $m\times 1$ matrices as the vector norm. In both cases you must take absolute values of the matrix elements before summing.
+````
+
+````{note}
+There is no general simple formula like {eq}`mxinfnorm` or {eq}`mxonenorm` for the matrix 2-norm. The computation of the matrix 2-norm is discussed further in Chapter 7.
+````
+
+Despite the lack of a simple formula for it, the 2-norm is the default choice for many applications and theorems.
+
+````{important}
+The usual default matrix norm is the induced 2-norm.
+````
 
 ::::{prf:example} Matrix norms
 :label: demo-norms-matrix
@@ -257,8 +274,6 @@ A mnemonic for these is that the $\infty$ symbol extends horizontally while the 
 
 ::::
 
-The geometric interpretation of the matrix 2-norm shown in @demo-norms-matrix, as the radius of the smallest circle (or sphere or hypersphere in higher dimensions) containing the images of all unit vectors, is not a practical means of computing the norm. Nor is there a simple formula like {eq}`mxinfnorm` or {eq}`mxonenorm` for it. The computation of the matrix 2-norm is discussed further in Chapter 7.
-
 ## Exercises
 
 ``````{exercise}
@@ -277,7 +292,7 @@ The geometric interpretation of the matrix 2-norm shown in @demo-norms-matrix, a
 ``````{exercise}
 :label: problem-norms-inequalities
 
-✍ Prove that for all vectors $\mathbf{x}\in\real^n$,
+✍ Prove that for all vectors $\mathbf{x}\in\real^n,$
 
 **(a)** $\| \mathbf{x} \|_\infty \le \| \mathbf{x} \|_2; \qquad$ 
 **(b)** $\| \mathbf{x} \|_2 \le \| \mathbf{x} \|_1$.
@@ -285,12 +300,12 @@ The geometric interpretation of the matrix 2-norm shown in @demo-norms-matrix, a
 
 ``````{exercise}
 :label: problem-norms-csinequality
-✍ Prove that for any vectors $\mathbf{x}$, $\mathbf{y}$ in $\real^n$, $|\mathbf{x}^T\mathbf{y}| \le \| \mathbf{x} \|_1\| \mathbf{y} \|_\infty$.
+✍ Prove that for any vectors $\mathbf{x}$, $\mathbf{y}$ in $\real^n$, $|\mathbf{x}^T\mathbf{y}| \le \norm{\mathbf{x}}_1\, \norm{\mathbf{y}}_\infty.$
 ``````
 
 ``````{exercise}
 :label: problem-norms-linearity
-✍ Prove using {numref}`Definition {number} <definition-inducednorm>` that for any induced matrix norm, matrix $\mathbf{A}$, and scalar $c$, $\| c\mathbf{A} \| = |c|\cdot \| \mathbf{A} \|$.
+✍ Prove using @definition-inducednorm that for any induced matrix norm, matrix $\mathbf{A}$, and scalar $c$, $\| c\mathbf{A} \| = |c|\cdot \| \mathbf{A} \|.$
 ``````
 
 ``````{exercise}
@@ -305,42 +320,42 @@ The geometric interpretation of the matrix 2-norm shown in @demo-norms-matrix, a
 
 **(b)** Find a vector satisfying $\|\mathbf{x}\|_1=1$ and $\| \mathbf{A}\mathbf{x} \|_1=\| \mathbf{A} \|_1$.
 
-**(c)** Find a vector satisfying $\|\mathbf{x}\|_2=1$ such that $\| \mathbf{A}\mathbf{x} \|_2=\| \mathbf{A} \|_2$. (Hint: A unit two-dimensional vector is a function only of its angle with the $x_1$-axis. Use the definition of $\|\mathbf{A}\|_2$ as the maximum of $\|\mathbf{A}\mathbf{x}\|_2$, which is a also a function of the angle.)
+**(c)** Find a vector satisfying $\|\mathbf{x}\|_2=1$ such that $\| \mathbf{A}\mathbf{x} \|_2=\| \mathbf{A} \|_2$. (Hint: Use the definition of $\|\mathbf{A}\|_2$ as the maximum of $\|\mathbf{A}\mathbf{x}\|_2$ over unit vectors, and parameterize the unit vectors as $(\cos(\theta),\sin(\theta))$. Then $\twonorm{\mathbf{A}\mathbf{x}}^2$ is a function of $\theta$ that is easy to maximize.)
 ``````
 
 ``````{exercise}
 :label: problem-norms-equivalence
-✍ Prove the equivalence of the two formulas for a matrix norm in {eq}`matrixnorm`.
+✍ Prove the equivalence of the two formulas for a matrix norm in @matrixnorm.
 ``````
 
 ``````{exercise}
 :label: problem-norms-inverse
-✍ Prove that for any induced matrix norm and nonsingular matrix $\mathbf{A}$, $\| \mathbf{A}^{-1} \| \ge (\| \mathbf{A} \|)^{-1}$. (Hint: Apply @theorem-norms-inequalities.)
+✍ Prove that for any induced matrix norm and nonsingular matrix $\mathbf{A},$ $\| \mathbf{A}^{-1} \| \ge (\| \mathbf{A} \|)^{-1}.$ (Hint: Apply @theorem-norms-inequalities.)
 ``````
 
 ``````{exercise}
 :label: problem-norms-maxelement
 
-✍ **(a)** Prove that for any $\mathbf{v}\in \real^n$,
+✍ **(a)** Prove that for any $\mathbf{v}\in \real^n,$
 
 ```{math}
 \| \mathbf{v} \|_p \ge \max_{i=1,\ldots,n} |v_i|,
 ```
 
-where $p=1$, $2$, or $\infty$.
+where $p=1,$ $2,$ or $\infty.$
 
-**(b)** Prove that for any $\mathbf{A}\in\real^{n \times n}$,
+**(b)** Prove that for any $\mathbf{A}\in\real^{n \times n},$
 
 ```{math}
 \| \mathbf{A} \|_p \ge \max_{i,j=1,\ldots,n} |A_{ij}|,
 ```
 
-where $p=1$, $2$, or $\infty$. (Hint: For $p=2$, rearrange {eq}`normineq1` for a well-chosen particular value of $\mathbf{x}$.)
+where $p=1,$ $2,$ or $\infty.$ (Hint: For $p=2$, rearrange {eq}`normineq1` for a well-chosen particular value of $\mathbf{x}.$)
 ``````
 
 ``````{exercise}
 :label: problem-norms-diagnorm
-✍ Prove using {numref}`Definition {number} <definition-inducednorm>` that if $\mathbf{D}$ is a diagonal matrix, then $\|\mathbf{D}\|_2 = \max_{i} |D_{ii}|$. You may assume the matrix is real and square, but that does not affect the result or the proof in any significant way. (Hint: Let $M=\max_{i} |D_{ii}|$. Proceed in two stages, showing that $\|\mathbf{D}\|_2\ge M$ and separately that $\|\mathbf{D}\|_2\le M$.)
+✍ Prove using @definition-inducednorm that if $\mathbf{D}$ is a diagonal matrix, then $\|\mathbf{D}\|_2 = \max_{i} |D_{ii}|.$ You may assume the matrix is real and square, but that does not affect the result or the proof in any significant way. (Hint: Let $M=\max_{i} |D_{ii}|.$ Proceed in two stages, showing that $\|\mathbf{D}\|_2\ge M$ and separately that $\|\mathbf{D}\|_2\le M.$)
 ``````
 
 ``````{exercise}
@@ -350,7 +365,7 @@ where $p=1$, $2$, or $\infty$. (Hint: For $p=2$, rearrange {eq}`normineq1` for a
 
 **(a)** Show that $(\mathbf{I}-\mathbf{A})$ is nonsingular. (Hint: Use the definition of an induced matrix norm to show that if $(\mathbf{I}-\mathbf{A})\mathbf{x}=\boldsymbol{0}$ for all nonzero $\mathbf{x}$, then $\| \mathbf{A} \|\ge 1$.)
 
-**(b)** Show that $\lim_{m\rightarrow \infty} \mathbf{A}^m = \boldsymbol{0}$. (For matrices as with vectors, we say $\mathbf{B}_m \rightarrow \mathbf{L}$ if $\| \mathbf{B}_m-\mathbf{L} \| \rightarrow 0$.)
+**(b)** Show that $\displaystyle \lim_{m\rightarrow \infty} \mathbf{A}^m = \boldsymbol{0}$. (For matrices as with vectors, we say $\mathbf{B}_m \rightarrow \mathbf{L}$ if $\| \mathbf{B}_m-\mathbf{L} \| \rightarrow 0$.)
 
 **(c)** Use (a) and (b) to show that we may obtain the geometric series
 
@@ -358,5 +373,5 @@ where $p=1$, $2$, or $\infty$. (Hint: For $p=2$, rearrange {eq}`normineq1` for a
 (\mathbf{I}-\mathbf{A})^{-1} = \sum_{k=0}^\infty \mathbf{A}^k.
 ```
 
-(Hint: Start with $\left(\sum_{k=0}^m \mathbf{A}^k\right)(\mathbf{I}-\mathbf{A})$ and take the limit.)
+(Hint: Start with $\left(\displaystyle\sum_{k=0}^m \mathbf{A}^k\right)(\mathbf{I}-\mathbf{A})$ and take the limit.)
 ``````

@@ -186,7 +186,7 @@ The output of {numref}`Function {number} <function-plufact>` is a factorization 
 
 ::::
 
-The `lu` function from the built-in package `LinearAlgebra` returns the same three outputs as {numref}`Function {number} <function-plufact>`. If you only request one output, it will be a factorization object that can be used with a backslash. This is useful when you want to solve with multiple versions of $\mathbf{b}$ but do the factorization only once.
+While {numref}`Function {number} <function-plufact>` is a serviceable implementation, it is not the gold standard for solving linear systems in practice. Each language offers its own built-in function for PLU factorization.
 
 ::::{prf:example} Built-in PLU factorization
 :label: demo-pivoting-builtin
@@ -218,7 +218,7 @@ The `lu` function from the built-in package `LinearAlgebra` returns the same thr
 ```{index} stability
 ```
 
-There is one detail of the row pivoting algorithm that might seem arbitrary: why choose the pivot of largest magnitude in a column, rather than, say, the uppermost nonzero in the column? The answer is numerical stability.
+There is one detail of the row pivoting algorithm that might seem arbitrary: why choose the pivot of largest magnitude within a column, rather than, say, the uppermost nonzero in the column? The answer is numerical stability.
 
 ::::{prf:example} Stability of PLU factorization
 :label: demo-pivoting-stable
@@ -297,11 +297,16 @@ Somewhat surprisingly, solving $\mathbf{A}\mathbf{x}=\mathbf{b}$ via PLU factori
 ``````{exercise}
 :label: problem-pivoting-grouping
 
-✍ Let $\mathbf{A}$ be a square matrix and $\mathbf{b}$ be a column vector of compatible length. Here is correct Julia code to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$:
+✍ Let $\mathbf{A}$ be a square matrix and $\mathbf{b}$ be a column vector of compatible length. 
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+Here is correct code to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$:
 
 ``` julia
-L,U,p = lu(A)
-x = U \ (L\b[p])
+L, U, p = lu(A)
+x = U \ (L \ b[p])
 ```
 
 Suppose instead you replace the last line above with
@@ -309,6 +314,41 @@ Suppose instead you replace the last line above with
 ``` julia
 x = U \ L \ b[p]
 ```
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+Here is correct code to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$:
+
+``` matlab
+[L, U, p]= lu(A, 'vector');
+x = U \ (L \ b(p));
+```
+
+Suppose instead you replace the last line above with
+
+``` matlab
+x = U \ L \ b(p);
+```
+```` 
+
+````{tab-item} Python
+:sync: python
+Here is correct code to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$:
+
+``` python
+from scipy.linalg import lu
+p, L, U = lu(A, p_indices=True)
+x = U @ (L @ b[p])
+```
+
+Suppose instead you replace the last line above with
+
+``` python
+x = U @ L @ b[p]
+```
+```` 
+`````
 
 Mathematically in terms of $\mathbf{L}$, $\mathbf{U}$, $\mathbf{p}$, and $\mathbf{b}$, what vector is found?
 ``````
@@ -316,24 +356,43 @@ Mathematically in terms of $\mathbf{L}$, $\mathbf{U}$, $\mathbf{p}$, and $\mathb
 ``````{exercise}
 :label: problem-pivoting-flip
 
-✍ Suppose that `A` is a $4\times 6$ matrix in Julia and you define
+✍ Suppose that `A` is a $4\times 6$ matrix and you define
 
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
 ``` julia
-B = A[end:-1:1,end:-1:1]
+B = A[end:-1:1, end:-1:1]
 ```
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+``` matlab
+B = A(end:-1:1, end:-1:1)
+```
+````
+
+```{tab-item} Python
+:sync: python
+``` python
+B = A[::-1, ::-1]
+```
+`````
 
 Show that $\mathbf{B} = \mathbf{P} \mathbf{A} \mathbf{Q}$ for certain matrices $\mathbf{P}$ and $\mathbf{Q}$.
-``````
+```````
 
 ``````{exercise}
 :label: problem-pivoting-perminverse
 ✍ An $n\times n$ *permutation matrix* $\mathbf{P}$ is a reordering of the rows of an identity matrix such that $\mathbf{P} \mathbf{A}$  has the effect of moving rows $1,2,\ldots,n$ of $\mathbf{A}$ to new positions $i_1,i_2,\ldots,i_n$. Then $\mathbf{P}$ can be expressed as
 
 ```{math}
+:numbered: false
 \mathbf{P} = \mathbf{e}_{i_1}\mathbf{e}_1^T + \mathbf{e}_{i_2}\mathbf{e}_2^T + \cdots + \mathbf{e}_{i_n}\mathbf{e}_n^T.
 ```
 
 **(a)** For the case $n=4$ and $i_1=3$, $i_2=2$, $i_3=4$, $i_4=1$, write out separately, as matrices, all four of the terms in the sum. Then add them together to find $\mathbf{P}$.
 
-**(b)** Use the formula in the general case to show that $\mathbf{P}^{-1}=\mathbf{P}^T$.
+**(b)** Use the formula in the general case to show that $\mathbf{P}^{-1}=\mathbf{P}^T$. (Hint: To show that $\mathbf{Z}$ is the inverse of $\mathbf{P}$, show that $\mathbf{P}\mathbf{Z}=\mathbf{I}$ or $\mathbf{Z}\mathbf{P}=\mathbf{I}$.)
 ``````
