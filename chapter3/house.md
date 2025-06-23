@@ -200,6 +200,7 @@ The flop count quoted in @theorem-house-flops dominates the running time for lea
 ⌨ Find a Householder reflector $\mathbf{P}$ such that
 
 ```{math}
+:numbered: false
 \mathbf{P}
 \begin{bmatrix}
 2 \\ 9 \\ -6
@@ -212,7 +213,7 @@ The flop count quoted in @theorem-house-flops dominates the running time for lea
 
 ``````{exercise}
 :label: problem-house-reflector
-✍ Prove the unfinished items in @theorem-hhreflect, namely that a Householder reflector $\mathbf{P}$ is symmetric and orthogonal.
+✍ Prove the unfinished items in @theorem-hhreflect, namely, that a Householder reflector $\mathbf{P}$ is symmetric and orthogonal.
 ``````
 
 ``````{exercise}
@@ -227,12 +228,12 @@ The flop count quoted in @theorem-house-flops dominates the running time for lea
 
 ``````{exercise}
 :label: problem-house-sign
-✍ Under certain circumstances, computing the vector $\mathbf{v}$ in {eq}`hhvector` could lead to subtractive cancellation, which is why line 12 of {numref}`Function {number} <function-qrfact>` reads as it does. Devise an example that causes subtractive cancellation if {eq}`hhvector` is used.
+✍ Under certain circumstances, computing the vector $\mathbf{v}$ in {eq}`hhvector` could lead to subtractive cancellation, which is why `w` is computed in a particular way in @function-qrfact. Devise an example that causes subtractive cancellation if {eq}`hhvector` is used.
 ``````
 
 ``````{exercise}
 :label: problem-house-square
-✍ Suppose QR factorization is used to compute the solution of a *square* linear system, $\mathbf{A}\mathbf{x}=\mathbf{b}$, i.e., let $m=n$.
+✍ Suppose QR factorization is used to compute the solution of a *square* linear system, $\mathbf{A} \mathbf{x}=\mathbf{b}$, i.e., let $m=n$.
 
 **(a)** Find an asymptotic flop count for this procedure, and compare it to the LU factorization algorithm.
 
@@ -241,14 +242,15 @@ The flop count quoted in @theorem-house-flops dominates the running time for lea
 
 ``````{exercise}
 :label: problem-house-cond
-✍ Prove that $\kappa_2(\mathbf{A})=\kappa_2(\mathbf{R})$ when $\mathbf{A}$ is not square.  (Be careful! You can't take an inverse of $\mathbf{A}$ or $\mathbf{R}$.)
+✍ Prove that $\kappa_2(\mathbf{A})=\kappa_2(\mathbf{R})$ when $\mathbf{A}$ is not square.  (Be careful! You can't take an inverse of $\mathbf{A}$ or $\mathbf{R}.$)
 ``````
 
 ``````{exercise}
 :label: problem-house-givens
-Another algorithmic technique for orthogonally introducing zeros into a matrix is the *Givens rotation*. Given a 2-vector $[\alpha,\, \beta]$, it defines an angle $\theta$ such that
+Another algorithmic technique for orthogonally introducing zeros into a matrix is the *Givens rotation*. Given a 2-vector $[\alpha,\, \beta],$ it defines an angle $\theta$ such that
 
 ```{math}
+:numbered: false
 \begin{bmatrix}
 \cos(\theta) & \sin(\theta) \\ -\sin(\theta) & \cos(\theta)
 \end{bmatrix}
@@ -263,17 +265,16 @@ Another algorithmic technique for orthogonally introducing zeros into a matrix i
 
 **(a)** ✍ Given $\alpha$ and $\beta$, show how to compute $\cos \theta$ and $\sin \theta$ without evaluating any trig functions.
 
-**(b)** ⌨ Given the vector $\mathbf{z}=[1\;2\;3\;4\;5]^T$, use Julia to find a sequence of Givens rotations that transforms $\mathbf{z}$ into the vector $\| \mathbf{z} \|\mathbf{e}_1$. (Hint: You can operate only on pairs of elements at a time, introducing a zero at the lower of the two positions.)
+**(b)** ⌨ Given the vector $\mathbf{z}=[1\;2\;3\;4\;5]^T,$ find a sequence of Givens rotations that transforms $\mathbf{z}$ into the vector $\| \mathbf{z} \|\mathbf{e}_1.$ (Hint: You can operate only on pairs of elements at a time, working from the bottom upwards.)
 
 ``````
 
 ``````{exercise}
 :label: problem-house-flops
-✍ Derive the result of @theorem-house-flops by analyzing {numref}`Function {number} <function-qrfact>` without lines 20–22. 
-
+✍ Derive the result of @theorem-house-flops by analyzing {numref}`Function {number} <function-qrfact>`, excluding the loop that updates $\mathbf{Q}.$
 ``````
 
 ``````{exercise}
 :label: problem-house-speed
-✍ Suppose $m=Kn$ for constant $K \ge 1$ as both $m$ and $n$ go to infinity. Show that the flop counts from @theorem-house-flops and @theorem-normaleqns-flops have a ratio of 1 when $K=1$ and approaches 2 as $K\to \infty$. 
+✍ Suppose $m=Kn$ for constant $K \ge 1$ as both $m$ and $n$ go to infinity. Show that the flop counts from @theorem-house-flops and @theorem-normaleqns-flops have a ratio of 1 when $K=1$ and approaches 2 as $K\to \infty.$ 
 ``````

@@ -231,7 +231,7 @@ Say $s_k$ is the sum of the first $k$ terms of the series above, and $p_k = \sqr
 
 ``````{exercise}
 :label: problem-fitting-minimize 
-✍ Suppose $f$ is a twice-differentiable, nonnegative real function. Show that if there is an $x^*$ such that $f'(x^*)=0$ and $f''(x^*)>0$, then $x^*$ is a local minimizer of the function $[f(x)]^2$.
+✍ Suppose $f$ is a twice-differentiable, nonnegative real function. Show that if there is an $x^*$ such that $f'(x^*)=0$ and $f''(x^*)>0$, then $x^*$ is a local minimizer of the function $[f(x)]^2$. (This justifies dropping the square root when minimizing in the least-squares problem.)
 
 ``````
 
@@ -244,7 +244,7 @@ Say $s_k$ is the sum of the first $k$ terms of the series above, and $p_k = \sqr
 92.22, 106.0, 122.8, 132.2, 150.7, 179.3, 203.3, 226.5, 248.7, 281.4, 308.7
 ```
 
-**(a)** Find a best-fitting cubic polynomial for the data. Plot the data as points superimposed on a (smooth) graph of the cubic over the full range of time. Label the axes. What does the fit predict for the population in the years 2000, 2010, and 2020?
+**(a)** Find a best-fitting cubic polynomial for the data. Plot the data as points superimposed on a (smooth) graph of the cubic over the full range of time. Label the axes. What does the fit predict for the population in the years 2000, 2010, and 2020? (In MATLAB, )
 
 **(b)** Look up the actual U.S. population in 2000, 2010, and 2020 and compare to the predictions of part (a).
 ``````
@@ -254,25 +254,27 @@ Say $s_k$ is the sum of the first $k$ terms of the series above, and $p_k = \sqr
 ⌨  The following are weekly box office earnings (in dollars) in the U.S. for the 2012 film *The Hunger Games*. (Source: boxofficemojo.com.)
 
 ```julia
-189_932_838, 79_406_327, 46_230_374, 26_830_921, 18_804_290,
-13_822_248, 7_474_688, 6_129_424, 4_377_675, 3_764_963, 2_426_574,
-1_713_298, 1_426_102, 1_031_985, 694_947, 518_242, 460_578, 317_909
+189932838, 79406327, 46230374, 26830921, 18804290,
+13822248, 7474688, 6129424, 4377675, 3764963, 2426574,
+1713298, 1426102, 1031985, 694947, 518242, 460578, 317909
 ```
 
-(Note that Julia lets you use `_` where you would normally put a comma in a long number.) Fit these values to a function of the form $y(t)\approx a e^{b t}$. Plot the data together with the fit using standard linear scales on the axes, and then plot them again using a log scale on the vertical axis.
+Fit these values to a function of the form $y(t)\approx a e^{b t}$. Plot the data together with the fit using standard linear scales on the axes, and then plot them again using a log scale on the vertical axis.
 ``````
 
 ``````{exercise}
 :label: problem-fitting-periodic
 ⌨  In this problem you are trying to find an approximation to the periodic function $g(t)=e^{\sin(t-1)}$ over one period, $0 < t \le 2\pi$. As data, define
 
-$$
-t_i = \frac{2\pi i}{60}, \; y_i = g(t_i), \quad i=1,\ldots,60.
-$$
+```{math}
+:numbered: false
+t_i = \frac{2\pi i}{60}, \quad y_i = g(t_i), \quad i=1,\ldots,60.
+```
 
 **(a)** Find the coefficients of the least-squares fit
 
 ```{math}
+:numbered: false
 y(t) \approx c_1 + c_2t + \cdots + c_7 t^6.
 ```
 
@@ -281,24 +283,20 @@ Superimpose a plot of the data values as points with a curve showing the fit.
 **(b)** Find the coefficients of the least-squares fit
 
 ```{math}
+:numbered: false
 y \approx d_1 + d_2\cos(t) + d_3\sin(t) + d_4\cos(2t) + d_5\sin(2t).
 ```
 
-Unlike part (a), this fitting function is itself periodic. Superimpose a plot of the data values as points with a curve showing the fit. 
+Unlike part (a), this fitting function is itself periodic. Superimpose a plot of the data values as points with a curve showing the fit. (It should look better than the polynomial fit, especially near the endpoints.)
 ``````
 
 ``````{exercise}
 :label: problem-fitting-tanh
-⌨ Define the following data in Julia.
+⌨ Define a vector with elements $0, 0.5, 1, 1.5, \dots, 10$, and another vector with elements $y_i = \tanh(t_i)$. 
 
-``` julia
-t = 0:.5:10
-y = tanh.(t)
-```
+**(a)** Fit the data to a cubic polynomial. Plot the data together with the polynomial fit over the interval $0 \le t \le 10$. (It will not be a good fit.)
 
-**(a)** Fit the data to a cubic polynomial. Plot the data together with the polynomial fit over the interval $0 \le t \le 10$.
-
-**(b)** Fit the data to the function $c_1 + c_2z + c_3z^2 + c_4z^3$, where $z=t^2/(1+t^2)$. Plot the data together with the fit. What feature of $z$ makes this fit much better than the original cubic?
+**(b)** Fit the data to the function $c_1 + c_2z + c_3z^2 + c_4z^3$, where $z=t^2/(1+t^2)$. Plot the data together with the fit. What feature of the new variable $z$ makes this fit much better than the original cubic?
 
 ``````
 
@@ -306,7 +304,10 @@ y = tanh.(t)
 :label: problem-fitting-pi
 ⌨  One series for finding $\pi$ is
 
-$$\frac{\pi}{2} = 1 + \frac{1}{3} + \frac{1\cdot 2}{3\cdot5} + \frac{1\cdot 2\cdot 3}{3\cdot 5\cdot 7} + \cdots.$$
+```{math}
+:numbered: false
+\frac{\pi}{2} = 1 + \frac{1}{3} + \frac{1\cdot 2}{3\cdot5} + \frac{1\cdot 2\cdot 3}{3\cdot 5\cdot 7} + \cdots.
+```
 
 Define $s_k$ to be the sum of the first $k$ terms on the right-hand side, and let $e_k=|s_k-\pi/2|$. 
 
@@ -321,14 +322,14 @@ Define $s_k$ to be the sum of the first $k$ terms on the right-hand side, and le
 
 | Planet  | Distance from sun in Mkm |  Orbital period in days              |
 |---------|:--------------------------------------------:|:-----------:|
-| Mercury | 57.59                                      | 87.99  |
-| Venus   | 108.11                                     | 224.7  |
-| Earth   | 149.57                                     | 365.26 |
-| Mars    | 227.84                                     | 686.98 |
-| Jupiter | 778.14                                     | 4332.4 |
-| Saturn  | 1427                                        | 10759   |
-| Uranus  | 2870.3                                     | 30684   |
-| Neptune | 4499.9                                     | 60188   |
+| Mercury | 57.9                                      | 88.0  |
+| Venus   | 108.2                                     | 224.7  |
+| Earth   | 149.6                                     | 365.2 |
+| Mars    | 228.0                                     | 687.0 |
+| Jupiter | 778.5                                     | 4331 |
+| Saturn  | 1432                                        | 10750   |
+| Uranus  | 2867                                     | 30590   |
+| Neptune | 4515                                     | 59800   |
 ``````
 
 ``````{exercise}
@@ -336,6 +337,7 @@ Define $s_k$ to be the sum of the first $k$ terms on the right-hand side, and le
  ✍ Show that finding a fit of the form
 
 ```{math}
+:numbered: false
 y(t) \approx \frac{a}{t+b}
 ```
 

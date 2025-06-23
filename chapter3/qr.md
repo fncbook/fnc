@@ -310,13 +310,11 @@ The solution of least-squares problems via QR factorization is more stable than 
 ``````{exercise}
 :label: problem-qr-orthogonal
 ✍ Prove @theorem-qr-orthogmatrix. For the third part, use the definition of the 2-norm as an induced matrix norm, then apply some of our other results as needed.
-
 ``````
 
 ``````{exercise}
 :label: problem-qr-legendre
 ⌨ Let $t_0,\ldots,t_m$ be $m+1$ equally spaced points in $[-1,1]$. Let $\mathbf{A}$ be the matrix in {eq}`vandersystemrect` for $m=400$ and fitting by polynomials of degree less than 5. Find the thin QR factorization of $\mathbf{A}$, and, on a single graph, plot every column of $\hat{\mathbf{Q}}$ as a function of the vector $t$.
-
 ``````
 
 ``````{exercise}

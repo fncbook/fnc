@@ -239,6 +239,7 @@ This squaring of the condition number in the normal equations is the cause of in
 ✍ Work out the least-squares solution when
 
 ```{math}
+:numbered: false
 \mathbf{A} = \begin{bmatrix}
 2 & -1 \\
 0 & 1 \\
@@ -271,7 +272,7 @@ This squaring of the condition number in the normal equations is the cause of in
 :label: problem-normaleqns-ATAinv
 **(a)** ✍ Show that for any $m\times n$ $\mathbf{A}$ with $m>n$ for which $\mathbf{A}^T\mathbf{A}$ is nonsingular, $\mathbf{A}^+\mathbf{A}$ is the $n\times n$ identity.
 
-**(b)** ⌨ Show using an example in Julia that $\mathbf{A}\mathbf{A}^+$ is not an identity matrix. (This matrix has rank no greater than $n$, so it can't be an $m\times m$ identity.)
+**(b)** ⌨ Show using a computer example that $\mathbf{A}\mathbf{A}^+$ is not an identity matrix. (This matrix has rank no greater than $n$, so it can't be an $m\times m$ identity.)
 ``````
 
 ``````{exercise}
@@ -281,25 +282,26 @@ This squaring of the condition number in the normal equations is the cause of in
 
 ``````{exercise}
 :label: problem-normaleqns-flops
-✍ Show that the flop count for {numref}`Function {number} <function-lsnormal>` is asymptotically $\sim 2m n^2 + \tfrac{1}{3}n^3$. (In finding the asymptotic count you can ignore terms like $m n$ whose total degree is less than 3.)
+✍ Show that the flop count for @function-lsnormal is asymptotically $\sim 2m n^2 + \tfrac{1}{3}n^3$. (In finding the asymptotic count, you can ignore terms like $m n$ whose total degree is less than 3.)
 ``````
 
 ``````{exercise}
 :label: problem-normaleqns-dependent
 ⌨ Let $t_1,\ldots,t_m$ be $m$ equally spaced points in $[0,2\pi]$. In this exercise, use $m=500$.
 
-**(a)** Let $\mathbf{A}_\beta$ be the matrix in {eq}`vandersystemrect` that corresponds to fitting data with the function $c_1 + c_2 \sin(t) + c_3 \cos(\beta t)$. Using the identity {eq}`condATA`, make a table of the condition numbers of $\mathbf{A}_\beta$ for $\beta = 2,1.1,1.01,\ldots,1+10^{-8}$.
+**(a)** Let $\mathbf{A}_\epsilon$ be the matrix in {eq}`vandersystemrect` that corresponds to fitting data with the function $c_1 + c_2 \sin(t) + c_3 \cos\bigl((1+\epsilon)t\bigr)$. Using the identity {eq}`condATA`, make a table of the condition numbers of $\mathbf{A}_\epsilon$ for $\epsilon = 10^0, 10^{-1}, \ldots, 10^{-8}$.
 
-**(b)** Repeat part (a) using the fitting function $c_1 + c_2 \sin^2(t) + c_3 \cos^2(\beta t).$
+**(b)** Repeat part (a) using the fitting function $c_1 + c_2 \sin^2(t) + c_3 \cos^2\bigl( (1+\epsilon) t\bigr).$
 
-**(c)** Why does it make sense that $\kappa\bigl(\mathbf{A}_\beta\bigr)\to \infty$ as $\beta\to 1$ in part (b) but not in part (a)?
+**(c)** Why does it make sense that $\kappa\bigl(\mathbf{A}_\epsilon\bigr)\to \infty$ as $\epsilon\to 0$ in part (b) but not in part (a)?
 ``````
 
 ``````{exercise}
 :label: problem-normaleqns-deficient
-✍ ⌨  When $\mathbf{A}$ is $m\times n$ with rank less than $n$, the pseudoinverse is still defined and can be computed using `pinv` from `LinearAlgebra`. However, the behavior in this case is not always intuitive. Let
+✍ ⌨  When $\mathbf{A}$ is $m\times n$ with rank less than $n$, the pseudoinverse is still defined and can be computed using `pinv` (which is in `LinearAlgebra` in Julia and `numpy.linalg` for Python). However, the behavior in this case is not always intuitive. Let
 
 ```{math}
+:numbered: false
 \mathbf{A}_s =
 \begin{bmatrix}
 1 & 1 \\ 0 & 0 \\ 0 & s
