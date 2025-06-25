@@ -74,7 +74,7 @@ exec(open("FNC_init.py").read())
 Functions to work with sparse matrices are found in the `scipy.sparse` module.
 ```
 
-Here we load the adjacency matrix of a graph with 2790 nodes. Each node is a web page referring to Roswell, NM, and the edges represent links between web pages. (Credit goes to Panayiotis Tsaparas and the University of Toronto for making this data public.)
+Here we load the adjacency matrix of a graph with 2790 nodes from a [data file](https://raw.github.com/fncbook/fnc/master/python/roswelladj.mat). Each node is a web page referring to Roswell, NM, and the edges represent links between web pages. (Credit goes to Panayiotis Tsaparas and the University of Toronto for making this data public.)
 
 ```{code-cell}
 import scipy.sparse as sp

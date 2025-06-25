@@ -59,7 +59,7 @@ FNC_init;;
 (demo-structure-sparse-matlab)=
 ``````{dropdown} @demo-structure-sparse
 :open:
-Here we load the adjacency matrix of a graph with 2790 nodes. Each node is a web page referring to Roswell, NM, and the edges represent links between web pages. (Credit goes to Panayiotis Tsaparas and the University of Toronto for making this data public.)
+Here we load the adjacency matrix of a graph with 2790 nodes from a [data file](https://raw.github.com/fncbook/fnc/master/matlab/roswelladj.mat). Each node is a web page referring to Roswell, NM, and the edges represent links between web pages. (Credit goes to Panayiotis Tsaparas and the University of Toronto for making this data public.)
 
 ```{code-cell}
 load roswelladj

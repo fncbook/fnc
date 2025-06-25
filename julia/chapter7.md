@@ -439,7 +439,7 @@ compression = m * n / (9 * (m + n + 1))
 (demo-dimreduce-voting-julia)=
 ``````{dropdown} @demo-dimreduce-voting
 :open:
-This matrix describes the votes on bills in the 111th session of the United States Senate. (The data set was obtained from [https://voteview.com].) Each row is one senator, and each column is a vote item.
+The matrix in [this data file](https://raw.github.com/fncbook/fnc/master/julia/voting.jld2) describes the votes on bills in the 111th session of the United States Senate. (The data set was obtained from [voteview.com](https://voteview.com).) Each row is one senator, and each column is a vote item.
 
 ```{code-cell}
 using JLD2

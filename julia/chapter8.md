@@ -76,7 +76,7 @@ include("FNC_init.jl")
 Julia functions to deal with sparse matrices are found in the `SparseArrays` package in the standard library.
 ```
 
-Here we load the adjacency matrix of a graph with 2790 nodes. Each node is a web page referring to Roswell, NM, and the edges represent links between web pages. (Credit goes to Panayiotis Tsaparas and the University of Toronto for making this data public.)
+Here we load the adjacency matrix of a graph with 2790 nodes from a [data file](https://raw.github.com/fncbook/fnc/master/julia/roswell.jld2). Each node is a web page referring to Roswell, NM, and the edges represent links between web pages. (Credit goes to Panayiotis Tsaparas and the University of Toronto for making this data public.)
 
 ```{code-cell}
 using SparseArrays, JLD2

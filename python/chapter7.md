@@ -456,7 +456,7 @@ print(f"compression ratio: {full_size / compressed_size:.1f}")
 (demo-dimreduce-voting-python)=
 ``````{dropdown} @demo-dimreduce-voting
 :open:
-This matrix describes the votes on bills in the 111th session of the United States Senate. (The data set was obtained from [https://voteview.com].) Each row is one senator, and each column is a vote item.
+The matrix in [this data file](https://raw.github.com/fncbook/fnc/master/python/voting.mat) describes the votes on bills in the 111th session of the United States Senate. (The data set was obtained from [voteview.com](https://voteview.com).) Each row is one senator, and each column is a vote item.
 
 ```{code-cell}
 from scipy.io import loadmat

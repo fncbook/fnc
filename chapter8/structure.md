@@ -178,7 +178,7 @@ For each matrix, use `spy` and an inspection of the $5\times 5$ submatrices in t
 `````{tab-set}
 ````{tab-item} Julia
 :sync: julia
-Download [smallworld.mat](smallworld.mat) by clicking the link and saving (you may need to fix the file name).
+Download [a data file](https://raw.github.com/fncbook/fnc/master/chapter8/smallworld.mat) by clicking the link.
 ``` julia
 using MAT
 A = matread("smallworld.mat")["A"]
@@ -187,7 +187,7 @@ A = matread("smallworld.mat")["A"]
 
 ````{tab-item} MATLAB
 :sync: matlab
-Download [smallworld.mat](smallworld.mat) by clicking the link and saving (you may need to fix the file name).
+Download [a data file](https://raw.github.com/fncbook/fnc/master/chapter8/smallworld.mat) by clicking the link.
 ``` matlab
 load smallworld
 ```
@@ -195,7 +195,7 @@ load smallworld
 
 ````{tab-item} Python
 :sync: python
-Download [smallworld.mtx](smallworld.mtx) by clicking the link and saving (you may need to fix the file name).
+Download [a data file](https://raw.github.com/fncbook/fnc/master/chapter8/smallworld.mtx) by right-clicking the link and selecting "Save As...".
 ``` python
 import scipy.io as spio
 A = spio.mmread("smallworld.mtx")

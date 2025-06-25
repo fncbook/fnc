@@ -406,7 +406,7 @@ fprintf("compression ratio: %.1f", full_size / compressed_size)
 (demo-dimreduce-voting-matlab)=
 ``````{dropdown} @demo-dimreduce-voting
 :open:
-This matrix describes the votes on bills in the 111th session of the United States Senate. (The data set was obtained from [https://voteview.com].) Each row is one senator, and each column is a vote item.
+The matrix in [this data file](https://raw.github.com/fncbook/fnc/master/matlab/voting.mat) describes the votes on bills in the 111th session of the United States Senate. (The data set was obtained from [voteview.com](https://voteview.com).) Each row is one senator, and each column is a vote item.
 
 ```{code-cell}
 load voting
