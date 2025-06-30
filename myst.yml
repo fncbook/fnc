@@ -261,9 +261,9 @@ site:
   title: Fundamentals of Numerical Computation
   template: book-theme
   actions:
-    - title: Support us!
+    - title: Support us
       url: https://buymeacoffee.com/tobydriscoll
-    - title: Report a problem
+    - title: Suggestion box
       url: https://github.com/fncbook/fnc/issues/new/choose
   options:
     favicon: _static/favicon.png
