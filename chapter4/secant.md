@@ -95,7 +95,7 @@ Our implementation of the secant method is given in {numref}`Function {number} <
 
 Graphically, a secant line usually looks like a less accurate model of $f$ than the tangent line. How will that affect the convergence?
 
-As before, let $\epsilon_k = x_k-r$ be the errors in the successive root approximations, and assume that $r$ is a simple root. If the initial errors are small, then a tedious but straightforward Taylor expansion shows that, to lowest order,
+As before, let $\epsilon_k = x_k-r$ be the errors in the successive root approximations, and assume that $r$ is a simple root. If the initial errors are small, then a lengthy but straightforward Taylor expansion shows that, to lowest order,
 
 ```{math}
 :label: secanterr
@@ -248,11 +248,11 @@ For each of Exercises 1–3, do the following steps.
 
 **(b)** ⌨ Make a plot of $f$ over the given interval and determine how many roots lie in the interval.
 
-**(c)** ⌨ Use `nlsolve` with `ftol=1e-15` to find a reference value for each root.
+**(c)** ⌨ Find a reference value for each root.
 
 **(d)** ⌨ Determine a bracketing interval for each root. Then use {numref}`Function {number} <function-secant>`, starting with the endpoints of the bracketing interval, to find each root.
 
-**(e)** ⌨ For one of the roots, use the errors in the Newton sequence to determine numerically whether the convergence is apparently between linear and quadratic.
+**(e)** ⌨ For one of the roots, use the errors in the resulting sequence to determine numerically whether the convergence is apparently between linear and quadratic.
 
 ``````{exercise}
 :label: problem-secant-basic1
@@ -266,7 +266,7 @@ $2x = \tan x$, over $[-0.2,1.4]$
 
 ``````{exercise}
 :label: problem-secant-basic3
-$e^{x+1}=2+x$, over $[-2,2]$
+$\sin(\pi x) = 2x$, over $[0.1, 2]$
 ``````
 
 ---
@@ -283,12 +283,16 @@ $e^{x+1}=2+x$, over $[-2,2]$
 
 ``````{exercise}
 :label: problem-secant-stuck
-✍ In general, the secant method formula {eq}`secant` cannot be applied if $x_{k}=x_{k-1}$. However, suppose that $f(x)=ax^2+bx+c$ for constants $a$, $b$, and $c$. Show that in this case the formula can be simplified to one that is well defined when $x_{k}=x_{k-1}$. Then show that the resulting $x_{k+1}$ is the same as the result of one step of Newton's method applied to $f$ at $x_k$.
+✍ In general, the secant method formula {eq}`secant` cannot be applied if $x_{k}=x_{k-1}$. However, something special happens if $f$ is a quadratic polynomial, i.e., $f(x)=ax^2+bx+c$.
+
+**(a)** Show that in this case, the secant update formula can be simplified to one that is well-defined when $x_{k}=x_{k-1}.$ 
+
+**(b)** Show that the resulting $x_{k+1}$ from part (a) is identical to the result of one step of Newton's method applied to $f$ at $x_k.$
 ``````
 
 ``````{exercise}
 :label: problem-secant-fibonacci
-✍ Let $f(x)=x^2$. Show that if $(1/x_1)$ and $(1/x_2)$ are positive integers, and the secant iteration is applied, then the sequence $1/x_1,1/x_2,1/x_3,\ldots$ is a Fibonacci sequence, i.e., satisfying $x_{k+1}=x_k+x_{k-1}$.
+✍ Let $f(x)=x^2$. Show that if $(1/x_1)$ and $(1/x_2)$ are positive integers, and the secant iteration is applied, then the sequence $1/x_1,1/x_2,1/x_3,\ldots$ is a Fibonacci sequence, i.e., they satisfy $x_{k+1}=x_k+x_{k-1}$.
 ``````
 
 ``````{exercise}
@@ -298,5 +302,5 @@ $e^{x+1}=2+x$, over $[-2,2]$
 
 ``````{exercise}
 :label: problem-secant-iqi
- ⌨ Write a function `iqi(f,x₁,x₂,x₃)` that performs inverse quadratic interpolation for finding a root of $f$, given three initial estimates. To find the quadratic polynomial $q(y)$ passing through the three most recent points, use `fit`. Test your function on $x^2=e^{-x}$, over $[-2,2]$.
+⌨ Write a function `iqi(f, x1, x2, x3)` that performs inverse quadratic interpolation for finding a root of $f$ given three initial estimates. Test your function on $x^2=e^{-x}$ to find a root in the interval $[0,2]$.
 ``````
