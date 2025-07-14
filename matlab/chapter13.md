@@ -42,7 +42,7 @@ numbering:
 ```{code-cell}
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
-FNC_init;pwd;
+FNC_init
 ```
 
 ### 13.1 @section-twodim-tensorprod
@@ -248,7 +248,6 @@ Since this problem is parabolic, a stiff time integrator is appropriate.
 ```{code-cell}
 odefun = @(t, u) f13_2_heat(t, u, {0.1, Dxx, Dyy, vec, unvec});
 sol = ode15s(odefun, [0, 0.2], vec(U0));
-sol = solutionFcn(ivp, 0, 0.2);
 U = @(t) unvec(deval(sol, t));
 ```
 
