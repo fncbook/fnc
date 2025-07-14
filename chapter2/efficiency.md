@@ -259,7 +259,7 @@ Line 17 has an outer product followed by a matrix subtraction. The definition @d
 Altogether, the factorization takes
 
 ```{math}
-:label: gecount1
+:numbered: false
 \sum_{k=1}^{n-1} n-k + 1 + 2(n-k+1)^2
 ```
 
@@ -291,7 +291,7 @@ Line 17 has an outer product followed by a matrix subtraction. The definition @d
 Altogether, the factorization takes
 
 ```{math}
-:label: gecount1
+:numbered: false
 \sum_{k=1}^{n-1} n-k + 1 + 2(n-k+1)^2
 ```
 
@@ -321,7 +321,7 @@ Line 17 has an outer product followed by a matrix subtraction. The definition @d
 Altogether, the factorization takes
 
 ```{math}
-:label: gecount1
+:numbered: false
 \sum_{k=0}^{n-2} n-k + 2(n-k)^2 = \sum_{k=1}^{n-1} n-k + 1 + 2(n-k+1)^2
 ```
 
@@ -331,7 +331,14 @@ flops.
 
 `````
 
-There are different ways to simplify this expression. We will make a change of summation index using $j=n-k$. The endpoints of the sum are $j=n-1$ when $k=1$ and $j=1$ when $k=n-1$. Since the order of terms in a sum doesn't matter, we get
+There are different ways to simplify the total count,
+
+```{math}
+:label: gecount1
+\sum_{k=1}^{n-1} n-k + 1 + 2(n-k+1)^2.
+```
+
+We will make a change of summation index using $j=n-k$. The endpoints of the sum are $j=n-1$ when $k=1$ and $j=1$ when $k=n-1$. Since the order of terms in a sum doesn't matter, we get
 
 ```{math}
 \begin{align*}
