@@ -72,7 +72,7 @@ Chapters 1–6 can be used as a single-semester introduction to numerical method
 - [Section 6.8](#section-ivp-zerostability) on zero-stability of ODE methods
 - [Section 7.5](#section-matrixanaly-dimreduce) on dimension reduction
 - [Section 8.7](#section-krylov-matrixfree) on matrix-free linear algebra
-- [Section 8.8](#section-krylov-precod) on preconditioning
+- [Section 8.8](#section-krylov-precond) on preconditioning
 - [Section 9.4](#section-globalapprox-orthogonal) on orthogonal polynomials
 - [Section 9.7](#section-globalapprox-improper) on improper integrals
 - [Section 10.6](#section-bvp-galerkin) on the Galerkin method
