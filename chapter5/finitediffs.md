@@ -327,7 +327,7 @@ We no longer assume equally spaced nodes, so there is no "$h$" to be used in the
 
 ``````{exercise}
 :label: problem-finitediffs-table
-⌨ In the manner of @demo-finitediffs-fd-weights>`, use {numref}`Function {number} <function-fdweights on centered node vectors of length 3, 5, 7, and 9 to produce a table analogous to {numref}`table-FDcenter` for the second derivative $f''(0)$. (You do not need to show the orders of accuracy, just the weights.)
+⌨ In the manner of @demo-finitediffs-fd-weights`, use {numref}`Function {number} <function-fdweights on centered node vectors of length 3, 5, 7, and 9 to produce a table analogous to {numref}`table-FDcenter` for the second derivative $f''(0)$. (You do not need to show the orders of accuracy, just the weights.)
 ``````
 
 ``````{exercise}
@@ -341,7 +341,7 @@ We no longer assume equally spaced nodes, so there is no "$h$" to be used in the
 
 ``````{exercise}
 :label: problem-finitediffs-fdbd
-✍ Find the finite-difference formula for $f''(0)$ that results from applying {eq}`forwardFD11` on $f'$ and then {eq}`backwardFD11` on $f'$ within that result.  
+✍ Find the finite-difference formula for $f''(0)$ that results from applying {eq}`forwardFD11` on $f'$ and then {eq}`backwardFD11` to substitute for $f'$ within that result.  
 ``````
 
 ``````{exercise}

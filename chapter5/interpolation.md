@@ -217,15 +217,11 @@ Since $|d_k|\le \|\mathbf{d}\|_\infty$ for all $k$, this finishes {eq}`interp-co
 
 ``````{exercise}
 :label: problem-interpolation-spline
-⌨ Create data by entering
+⌨ Create a vector $\mathbf{t}$ with entries $-2, -1, 0, \dots, 4$ and a vector $\mathbf{y}$ with entries $y_i= \tanh(t_i)$ for each entry of $\mathbf{t}$.
 
-``` julia
-t = -2:4;  y = tanh.(t);
-```
+**(a)** Following @demo-interpolation-global, construct and plot the polynomial interpolant of the data, superimposed on a scatter plot of the data.
 
-**(a)** Use `fit` to construct and plot the polynomial interpolant of the data, superimposed on a scatter plot of the data.
-
-**(b)** Use `Spline1D` to construct and plot a piecewise cubic interpolant of the data, superimposed on a scatter plot of the data.
+**(b)** Following @demo-interpolation-pwise, construct and plot a cubic spline interpolant of the data, superimposed on a scatter plot of the data.
 ``````
 
 ``````{exercise}
@@ -236,9 +232,9 @@ t = -2:4;  y = tanh.(t);
 |:---:|:----:|:-----:|:----:|:----:|:----:|:----:|
 | 73.7 | 74.7 | 75.4 | 75.8 | 77.0 | 77.8 | 78.7 |
 
-**(a)** Defining "year since 1980" as the independent variable, use `fit` to construct and plot the polynomial interpolant of the data.
+**(a)** Defining "year since 1980" as the independent variable, follow the method of @demo-interpolation-global to construct and plot the polynomial interpolant of the data.
 
-**(b)** Use `Spline1D` to construct and plot a piecewise cubic interpolant of the data.
+**(b)** Follow the method of @demo-interpolation-pwise to construct and plot a piecewise cubic interpolant of the data.
 
 **(c)** Use both methods to estimate the life expectancy for a person born in 2007. Which value is more believable?
 ``````
@@ -248,16 +244,16 @@ t = -2:4;  y = tanh.(t);
 ⌨ The following two vectors define a flying saucer shape.
 
 ``` julia
-x = [ 0,0.51,0.96,1.06,1.29,1.55,1.73,2.13,2.61,
-2.19,1.76,1.56,1.25,1.04,0.58,0 ]
-y = [ 0,0.16,0.16,0.43,0.62,0.48,0.19,0.18,0,
--0.12,-0.12,-0.29,-0.30,-0.15,-0.16,0 ]
+x = [ 0, 0.51, 0.96, 1.06, 1.29, 1.55, 1.73, 2.13, 2.61, 
+2.19, 1.76, 1.56, 1.25, 1.04, 0.58, 0 ]
+y = [ 0, 0.16, 0.16, 0.43, 0.62, 0.48, 0.19, 0.18, 0, 
+-0.12, -0.12, -0.29, -0.30, -0.15, -0.16, 0 ]
 ```
 We can regard both $x$ and $y$ as functions of a parameter $s$, with the points being values given at $s=0,1,\ldots,15$. 
 
-**(a)** Use `Spline1D` once on each coordinate as functions of $s$, and make a picture of the flying saucer. 
+**(a)** Follow the method of @demo-interpolation-pwise to make cubic spline interpolants of each coordinate as functions of $s$, and make a picture of the flying saucer. 
 
-**(b)** One drawback of the result in part (a) is the noticeable corner at the left side, which corresponds to $s=0$ from above and $s=15$ from below. There is a periodic variation on cubic spline interpolation that you can invoke by adding the keyword `periodic=true` to the `Spline1D` call. Use this to re-plot the flying saucer.
+**(b)** *(Julia only)* One drawback of the result in part (a) is the noticeable corner at the left side, which corresponds to $s=0$ from above and $s=15$ from below. There is a periodic variation on cubic spline interpolation that you can invoke by adding the keyword `periodic=true` to the `Spline1D` call. Use this to re-plot the flying saucer.
 
 ``````
 
@@ -266,6 +262,7 @@ We can regard both $x$ and $y$ as functions of a parameter $s$, with the points 
 ✍ Define
 
 ```{math}
+:numbered: false
 q(s) = a\frac{s(s-1)}{2} - b (s-1)(s+1) + c \frac{s(s+1)}{2}.
 ```
 
@@ -273,7 +270,7 @@ q(s) = a\frac{s(s-1)}{2} - b (s-1)(s+1) + c \frac{s(s+1)}{2}.
 
 **(b)** Find a change of variable $s=Ax+B$ so that the values $s=-1,0,1$ correspond to $x=x_0-h,x_0,x_0+h$. 
 
-**(c)** Find a quadratic polynomial interpolant $\tilde{q}(x)$ for the points $(x_0-h,a)$, $(x_0,b)$, $(x_0+h,c)$.
+**(c)** Find a quadratic polynomial interpolant $\tilde{q}(x)=q(s)$ for the points $(x_0-h,a)$, $(x_0,b)$, $(x_0+h,c)$.
 ``````
 
 ``````{exercise}

@@ -187,7 +187,7 @@ Although adaptivity and the error estimation that goes with it can be very power
 
 ``````{exercise}
 :label: problem-adaptive-estimate
-⌨ For each integral below: (i) use `quadgk` to find the value to at least 12 digits; (ii) use {numref}`Function {number} <function-intadapt>` to evaluate the integral to a tolerance of $10^{-8}$; (iii) compute the absolute error and the number of nodes used; (iv) use the $O(h^2)$ term in the Euler–Maclaurin formula {eq}`eulermaclaurin` to estimate how many nodes are required by the fixed-stepsize trapezoidal formula to reach an absolute error of $10^{-8}$.
+⌨ For each integral below: (i) imitate @demo-adapt-usage to find the true value to at least 12 digits; (ii) use {numref}`Function {number} <function-intadapt>` to evaluate the integral to a tolerance of $10^{-8}$; (iii) compute the absolute error and the number of nodes used; (iv) use the $O(h^2)$ term in the Euler–Maclaurin formula {eq}`eulermaclaurin` to estimate how many nodes are required by the fixed-stepsize trapezoidal formula to reach an absolute error of $10^{-8}$.
 
 **(a)** $\displaystyle \int_{0.1}^3 \operatorname{sech}(\sin(1/x))\, d x$
 
@@ -204,7 +204,7 @@ Although adaptivity and the error estimation that goes with it can be very power
 :label: problem-adaptive-improper
 ⌨ An integral such as $\displaystyle \int_0^1 x^{-\gamma}\, dx$ for $\gamma>0$, in which the integrand blows up at one or both ends, is known as an *improper* integral. It has a finite value if $\gamma<1$, despite the singularity. One way to deal with the problem of the infinite value for $f(t_0)$ is to replace the lower limit with a small number $\epsilon$. (A more robust way to handle improper integrals is discussed in Chapter 9.)
 
-Using {numref}`Function {number} <function-intadapt>` with a small tolerance, make a log-log plot of the error as a function of $\epsilon$ when $\gamma=2/3$, for $\epsilon=10^{-15},10^{-16},\ldots,10^{-45}$. 
+Using {numref}`Function {number} <function-intadapt>` with tolerance $10^{-14}$, make a log-log plot of the error as a function of $\epsilon$ when $\gamma=2/3$, for $\epsilon=10^{-15},10^{-16},\ldots,10^{-45}$. 
 ``````
 
 ``````{exercise}
@@ -222,6 +222,7 @@ Modify {numref}`Function {number} <function-intadapt>` to use local extrapolatio
 ⌨ The *sine integral function* is defined by
 
 ```{math}
+:numbered: false
 \operatorname{Si}(x) = \int_0^x \frac{\sin z}{z}\, dz.
 ```
 
@@ -233,6 +234,7 @@ Use {numref}`Function {number} <function-intadapt>` to plot Si over the interval
 ⌨  Adaptive integration can have subtle drawbacks. This exercise is based on the *error function*, a smooth function defined as
 
 ```{math}
+:numbered: false
 \operatorname{erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x e^{-s^2}\,ds.
 ```
 

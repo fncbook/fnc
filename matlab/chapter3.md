@@ -44,6 +44,7 @@ numbering:
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init;;
 pwd;;
+pwd
 ```
 
 ### 3.1 @section-leastsq-fitting

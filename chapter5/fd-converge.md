@@ -211,7 +211,7 @@ A different statement of the conclusion is that for a first-order formula, at mo
 
 ``````{exercise}
 :label: problem-fdconverge-fwd2
-✍ Calculate the first nonzero term in the Taylor series of the truncation error $\tau_{f}(h)$ for the finite-difference formula defined by the second row of {numref}`table-FDforward`.
+✍ Calculate the first nonzero term in the Taylor series of the truncation error $\tau_{f}(h)$ for the finite-difference formula defined by the second row of {numref}`table-FDforward`. (Find the entire term, not just the $O(h^p)$ equivalent.)
 ``````
 
 ``````{exercise}
@@ -222,32 +222,35 @@ A different statement of the conclusion is that for a first-order formula, at mo
 ``````{exercise}
 :label: problem-fdconverge-center2
 ✍ Show that the formula {eq}`centerFD22` is second-order accurate. 
-
 ``````
 
 ``````{exercise}
-:label: problem-fdconvrege-muc
+:label: problem-fdconverge-muc
 ✍  A different way to derive finite-difference formulas is the **method of undetermined coefficients**. Starting from {eq}`fdformula`,
 
 ```{math}
+:numbered: false
 f'(x) \approx \frac{1}{h}\sum_{k=-p}^q a_k f(x+kh),
 ```
 
 let each $f(x+k h)$ be expanded in a series around $h=0$. When the coefficients of powers of $h$ are collected, one obtains
 
 ```{math}
+:numbered: false
 \frac{1}{h} \sum_{k=-p}^q a_k f(x+kh) = \frac{b_0}{h} + b_1 f'(x) + b_2 f''(x)h + \cdots,
 ```
 
 where
 
 ```{math}
+:numbered: false
 b_i = \sum_{k=-p}^q k^i a_k.
 ```
 
 In order to make the result as close as possible to $f'(x)$, we impose the conditions 
 
 ```{math}
+:numbered: false
 b_0 = 0,\, b_1=1,\, b_2=0,\, b_3=0,\,\ldots,\,b_{p+q}=0.
 ```
 
