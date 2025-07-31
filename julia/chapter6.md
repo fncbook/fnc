@@ -136,7 +136,7 @@ Because many practical problems come with parameters that are fixed within an in
 ```{code-cell}
 f(u, p, t) = sin((t + u)^2)     # defines du/dt, must include p argument
 u₀ = -1.0                       # initial value
-tspan = (0.0, 4.0)               # t interval
+tspan = (0.0, 4.0)              # t interval
 ```
 
 With the data above we define an IVP problem object and then solve it. Here we tell the solver to use the `Tsit5` method, which is a good first choice for most problems.

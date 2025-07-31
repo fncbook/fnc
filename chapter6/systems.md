@@ -201,6 +201,7 @@ The trick illustrated in the preceding examples is always available. Suppose $y$
 **(c)** For a given constant $a$,
 
 ```{math}
+:numbered: false
 \begin{split}
 x'' + \frac{a x}{(x^2+y^2)^{3/2}} &= 0,\\
 y'' + \frac{a y}{(x^2+y^2)^{3/2}} &= 0,
@@ -229,7 +230,7 @@ with initial values $x(0) = 1$, $x'(0)=y(0) = 0$, $y'(0)=3$
 
 ``````{exercise}
 :label: problem-systems-euler
-⌨ Solve the following IVPs using {numref}`Function {number} <function-euler>` using $n=1000$ steps. Plot the solution and its first derivative together on one plot, and plot the error in each component as functions of time on another.
+⌨ Solve the following IVPs using {numref}`Function {number} <function-euler>` with $n=1000$ steps. Plot the solution and its first derivative together on one plot, and plot the error in each component as functions of time on another.
 
 **(a)** $y''+ 4y = 4t, \: 0< t< 2\pi, \: y(0) = 1,\: y'(0) = 1; \: \hat{y}(t) = t+\cos (2t)$
 
@@ -249,8 +250,6 @@ with initial values $x(0) = 1$, $x'(0)=y(0) = 0$, $y'(0)=3$
 
 **(i)** $x^2 y'' -xy' + 2y = 0,\: 1<x<e^{\pi}, \: y(1) = 3, \: y'(1) = 4$; $\quad \hat{y}(x) = x \left[ 3 \cos \left( \ln x \right)+\sin \left( \ln x \right) \right]$
 
-**(j)** $x^2 y'' + 3xy' + 4y = 0,\: e^{\pi/12} < x < e^{\pi}, \: y(e^{\pi/12}) = 0,  \: y'(e^{\pi/12}) = -6$; $\quad \hat{y}(x) = x^{-1} \left[ 3 \cos \left( 3 \ln x \right)+\sin \left( 3 \ln x \right) \right]$
-
 ``````
 
 ``````{exercise}
@@ -258,19 +257,21 @@ with initial values $x(0) = 1$, $x'(0)=y(0) = 0$, $y'(0)=3$
 ⌨ A disease that is endemic to a population can be modeled by tracking the fraction of the population that is susceptible to infection, $v(t)$, and the fraction that is infectious, $w(t)$. (The rest of the population is considered to be recovered and immune.) A typical model is the *SIR model* (see {cite}`brittonEssentialMathematical2003`)
 
 ```{math}
+:numbered: false
 \frac{dv}{dt} = 0.2(1-v) - 3vw, \qquad \frac{dw}{dt} = (3v-1)w.
 ```
 
-Starting with $v(0) = 0.95$ and $w(0) = 0.05$, use `solve` to find the long-term steady values of $v(t)$ and $w(t)$. Plot both components of the solution as functions of time.
+Starting with $v(0) = 0.95$ and $w(0) = 0.05$, imitate the method of @demo-systems-coupledpendula to find the long-term steady values of $v(t)$ and $w(t)$. Plot both components of the solution as functions of time.
 ``````
 
 ``````{exercise}
 :label: problem-systems-phaseplane
-⌨ In each case below, use `solve` to solve the given ODE for $0\le t \le 10$ with the given initial conditions. Plot the results together as curves in the phase plane (that is, with $x$ and $y$ as the axes of the plot), using `aspect_ratio=1` in the plot command.
+⌨ In each case below, imitate the method of @demo-systems-coupledpendula to solve the given ODE for $0\le t \le 10$ with the given initial conditions. Plot the results together as curves in the phase plane (that is, with $x$ and $y$ as the axes of the plot).
 
 **(a)** 
 
 ```{math}
+:numbered: false
 \begin{split}
 x'(t) & = - 4y + x(1-x^2-y^2),\\
 y'(t) & = 4x + y(1-x^2-y^2),
@@ -282,6 +283,7 @@ with $[x(0),y(0)]=[0.1,0]$ and $[x(0),y(0)]=[0,1.9]$.
 **(b)** 
 
 ```{math}
+:numbered: false
 \begin{split}
 x'(t) & = - 4y - \tfrac{1}{4}x(1-x^2-y^2)(4-x^2-y^2),\\
 y'(t) & = 4x - \tfrac{1}{4}y(1-x^2-y^2)(4-x^2-y^2),
@@ -297,13 +299,14 @@ with $[x(0),y(0)]=[0.95,0]$, $[0,1.05]$, and $[-2.5,0]$.
 ⌨ The [FitzHugh–Nagumo equations](wiki:FitzHugh–Nagumo_model) are a simple model of the repeated firing of a neuron. They are given by
 
 ```{math}
+:numbered: false
 \begin{split}
 \frac{d v_1}{dt} &= - v_1(v_1-1)(v_1-a) - v_2 + I, \\
 \frac{d v_2}{dt} &= \epsilon ( v_1 - \gamma v_2).
 \end{split}
 ```
 
-Assume $v_1(0) = 0.5$, $v_2(0) = 0.1$, $a = 0.1$, $\epsilon = 0.008$, $\gamma = 1$. For each value of $I$ below, find and plot the solution using `solve` for $0\le t \le 600$. The solutions are highly sensitive to $I$, and you need to change the requested absolute and relative error tolerances to $10^{-9}$. In each case the solution quickly approaches a periodic oscillation.
+Assume $v_1(0) = 0.5$, $v_2(0) = 0.1$, $a = 0.1$, $\epsilon = 0.008$, $\gamma = 1$. For each value of $I$ below, imitate the method of @demo-systems-coupledpendula tofind and plot the solution for $0\le t \le 600$. The solutions are highly sensitive to $I$, and you need to change the requested absolute and relative error tolerances to $10^{-9}$. In each case the solution quickly approaches a periodic oscillation.
 
 **(a)** $I = 0.05527,\quad$
 **(b)** $I = 0.05683,\quad$

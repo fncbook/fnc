@@ -201,7 +201,7 @@ In general, solutions can diverge from, converge to, or oscillate around the ori
 
 ``````{exercise}
 :label: problem-basics-usage
-⌨ For each ODE in the preceding problem, assume that $u$ is initially equal to $1$ on the given interval. Solve the resulting IVP with `solve` and make a plot of the solution.
+⌨ For each ODE in the preceding problem, assume that $u$ is initially equal to $1$ on the given interval. Solve the resulting IVP as in @demo-basics-first, and make a plot of the solution.
 ``````
 
 ``````{exercise}
@@ -219,7 +219,7 @@ In general, solutions can diverge from, converge to, or oscillate around the ori
 
 **(a)** Does @theorem-existunique apply to this problem?
 
-**(b)** Show that $u(t) = \alpha/(1-\alpha t)$ is a solution of the IVP.
+**(b)** Show that $u(t) = \dfrac{\alpha}{1-\alpha t}$ is a solution of the IVP.
 
 **(c)** Does this solution necessarily exist for all $t\in[0,1]$?
 
@@ -230,9 +230,10 @@ In general, solutions can diverge from, converge to, or oscillate around the ori
 
 ``````{exercise}
 :label: problem-basics-logistic
-⌨ Using `solve`, compute solutions $x(t)$ to the [logistic equation](wiki:Logistic_function#Logistic_differential_equation) with harvesting,
+⌨ Using the method in @demo-basics-first, compute solutions $x(t)$ to the [logistic equation](wiki:Logistic_function#Logistic_differential_equation) with harvesting,
 
 ```{math}
+:numbered: false
 x' = k (S-x)(x-M), \qquad 0\le t \le 10,
 ```
 
@@ -241,7 +242,7 @@ with $k=S=1$ and $M=0.25$, for the initial conditions $x(0)=0.9M$, $1.1M$, $1.5M
 
 ``````{exercise}
 :label: problem-basics-attractors
-⌨ **(a)** Using `solve`, solve the IVP $u'=u\cos(u) + \cos(4t)$, $0\le t \le 10$, $u(0) = u_0$ for $u_0 = -2,-1.5,-1,\ldots,1.5,2$. Plot all the solutions on a single graph. 
+⌨ **(a)** Using the method in @demo-basics-first, solve the IVP $u'=u\cos(u) + \cos(4t)$, $0\le t \le 10$, $u(0) = u_0$ for $u_0 = -2,-1.5,-1,\ldots,1.5,2$. Plot all the solutions on a single graph. 
 
 **(b)** All of the solutions in part (a) eventually settle into one of two periodic oscillations. To two digits of accuracy, find the value of $u_0$ in $(-1,1)$ at which the selected long-term solution changes. (This will take repeated trials, narrowing down the range for $u_0$ each time.)
 
@@ -252,12 +253,14 @@ with $k=S=1$ and $M=0.25$, for the initial conditions $x(0)=0.9M$, $1.1M$, $1.5M
 ⌨ Experimental evidence (see {cite}`newtonPlasmaSalivary1981`) shows that a 300-mg oral dose of caffeine, such as might be found in a large mug of drip-brewed coffee, creates a concentration of about 8 $\mu{\rm g}$/mL in blood plasma. This boost is followed by first-order kinetics with a half-life of about 6 hours (although this rate can vary a great deal from person to person). We can model the caffeine concentration due to one drink taken over half an hour via
 
 ```{math}
+:numbered: false
 x'(t) = -kx + C(t),\quad x(0)=0,
 ```
 
 where $k=\log(2)/6$ and
 
 ```{math}
+:numbered: false
 C(t) =
 \begin{cases}
 16, & 0\le t \le 0.5, \\
@@ -265,16 +268,19 @@ C(t) =
 \end{cases}
 ```
 
-Use `solve` to make a plot of the caffeine concentration for 12 hours. Then change $k=\log(2)/8$ (half-life of 8 hours) and plot the solution again.
+Solve the IVP and make a plot of the caffeine concentration for 12 hours. Then change $k=\log(2)/8$ (half-life of 8 hours) and plot the solution again.
 ``````
 
 ``````{exercise}
 :label: problem-basics-skydiver
 ⌨ A reasonable model of the velocity $v(t)$ of a skydiver is
 
-$$\frac{dv}{dt} = -g + \frac{k}{m}v^2,  \qquad v(0)=0,$$
+```{math}
+:numbered: false
+\frac{dv}{dt} = -g + \frac{k(t)}{m}v^2,  \quad v(0)=0,
+```
 
-where $g=9.8 \text{ m/sec}^2$ is gravitational acceleration, $m$ is the mass of the skydiver with parachute, and $k$ quantifies the effect of air resistance. At the US Air Force Academy, a training jump starts at about 1200 m and has $k=0.4875$ for $t<13$ and $k=29.16$ or $t\ge 13$. (This is an oversimplification; see {cite}`meadeDifferentialEquations1999`.) 
+where $g=9.8 \text{ m/sec}^2$ is gravitational acceleration, $m$ is the mass of the skydiver with parachute, and $k$ quantifies the effect of air resistance. At the US Air Force Academy, a training jump starts at about 1200 m and has $k=0.4875$ for $t<13$ and $k=29.16$ for $t\ge 13$. (This is an oversimplification; see {cite}`meadeDifferentialEquations1999`.) 
 
 **(a)** Solve the IVP for $v$ for an 80-kg cadet for $t\in [0,200]$, and plot the solution.
 

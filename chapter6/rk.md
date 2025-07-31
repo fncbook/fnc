@@ -158,7 +158,7 @@ This recipe is completely determined by the number of stages $s$ and the constan
   \end{array}
 ```
 
-For example, IE2 is given by
+For example, IE2 is given by the tableau
 
 ```{math}
   \begin{array}{r|cc}
@@ -171,13 +171,13 @@ For example, IE2 is given by
 Here are two more two-stage, second-order methods, **modified Euler** and **Heun's method**, respectively:
 
 ```{math}
-  \begin{array}{r|cc}
+  \text{ME2: }\quad  \begin{array}{r|cc}
     \rule{0pt}{2.75ex}0 &  &  \\
     \rule{0pt}{2.75ex}1 & 1 &\\[1mm] \hline
     \rule{0pt}{2.75ex}& \frac{1}{2} & \frac{1}{2}
   \end{array}
   \qquad \qquad
-  \begin{array}{r|cc}
+   \text{Heun: } \quad \begin{array}{r|cc}
    \rule{0pt}{2.75ex} 0 &  &  \\
    \rule{0pt}{2.75ex} \frac{2}{3} & \frac{2}{3} &\\[1mm] \hline
    \rule{0pt}{2.75ex} & \frac{1}{4} & \frac{3}{4}
@@ -344,22 +344,18 @@ $\quad \hat{u}(t) = (1/5) \sin(3t) + 2 \cos (3t)+  (1/5) \sin (2t)$
 **(f)** $2 x^2 y'' +3xy' - y = 0,\: 1<x<16, \: y(1) = 4, \: y'(1) = -1, \: \hat{y}(x) = 2(x^{1/2} + x^{-1})$
 
 **(g)** $x^2 y'' -xy' + 2y = 0,\: 1<x<e^{\pi}, \: y(1) = 3, \: y'(1) = 4$;
-
 $\quad \hat{y}(x) = x \left[ 3 \cos \left( \ln x \right)+\sin \left( \ln x \right) \right]$
 
-**(h)** $x^2 y'' + 3xy' + 4y = 0,\: e^{\pi/12} < x < e^{\pi}, \: y(e^{\pi/12}) = 0,  \: y'(e^{\pi/12}) = -6$;
-
-$\quad \hat{y}(x) = x^{-1} \left[ 3 \cos \left( 3 \ln x \right)+\sin \left( 3 \ln x \right) \right]$
 ``````
 
 ``````{exercise}
 :label: problem-rk-SIR
-⌨ Do @problem-systems-SIR, but using {numref}`Function {number} <function-rk4>` instead of `solve`.
+⌨ Do @problem-systems-SIR, but using {numref}`Function {number} <function-rk4>` to solve the IVP.
 ``````
 
 ``````{exercise}
 :label: problem-rk-bounded
-✍ Consider the problem $u'=c u$, $u(0) = 1$ for constant $c$ and $t>0$.
+✍ Consider the problem $u'=c u$, $u(0) = 1$ for a real constant $c$ and $t>0$.
 
 **(a)** Find an explicit formula in terms of $h$ and $c$ for $u_{i+1}/u_i$ in the modified Euler method.
 

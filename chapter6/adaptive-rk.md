@@ -40,7 +40,7 @@ Perhaps, though, we should aim to control the contribution to *global* error, wh
 
 ```{math}
 :label: adaptRKglobal
-  q \le \left(\frac{\epsilon}{E_i}\right)^{1/p}.
+  q \approx \left(\frac{\epsilon}{E_i}\right)^{1/p}.
 ```
 
 Experts have different recommendations about whether to use {eq}`adaptRKlocal` or {eq}`adaptRKglobal`. Even though {eq}`adaptRKglobal` appears to be more in keeping with our assumptions about global errors, modern practice seems to favor {eq}`adaptRKlocal`.
@@ -183,7 +183,7 @@ Often the adaptively chosen steps clearly correspond to identifiable features of
 
 ``````{exercise}
 :label: problem-adaptiverk-fh
-⌨ Solve the [FitzHugh–Nagumo system](wiki:FitzHugh–Nagumo_model) from @problem-systems-fitznag for $I=0.05740$ using {numref}`Function {number} <function-rk23>` with error tolerance $10^{-2}$, $10^{-3}$, and $10^{-4}$. (This illustrates that the error tolerance is a target, not a guarantee!)
+⌨ Solve the FitzHugh–Nagumo system from @problem-systems-fitznag for $I=0.05740$ using {numref}`Function {number} <function-rk23>` with error tolerance $10^{-2}$, $10^{-3}$, and $10^{-4}$. (This illustrates that the error tolerance is a target, not a guarantee!)
 ``````
 
 ``````{exercise}
@@ -193,5 +193,5 @@ Often the adaptively chosen steps clearly correspond to identifiable features of
 
 ``````{exercise}
 :label: problem-adaptiverk-flame
-⌨ Solve the problem $u'=100u^2-u^3$, $u(0)=0.0002$, $0\le t \le 100$, and make plots that show both the solution and the time steps taken. The solution makes a quick transition between two nearly constant states. Does the step size selection behave the same in both states?
+⌨ Solve the problem $u'=100u^2-u^3$, $u(0)=0.0002$ for $0\le t \le 100$ using {numref}`Function {number} <function-rk23>` with error tolerance $10^{-6}$. In a 2-by-1 plot layout, plot the solution above and the time step size below. The solution makes a quick transition between two nearly constant states. Does the step size behave the same during both of those states?
 ``````

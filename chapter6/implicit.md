@@ -166,7 +166,7 @@ Because multistep methods rely on the solution history, though, changing the ste
 
 **(a)** $u' = -2t u, \ 0 \le t \le 2, \ u(0) = 2;\  \hat{u}(t) = 2e^{-t^2}$
 
-**(b)** $u' = u + t, \ 0 \le t \le 1, \ u(0) = 2;\  \hat{u}(t) = 1-t+e^t$
+**(b)** $u' = u + t, \ 0 \le t \le 1, \ u(0) = 2;\  \hat{u}(t) = -1-t+e^{3t}$
 
 **(c)** $u' = x^2/[u(1+x^3)],\ 0 \le x \le 3, \ u(0) =1;\ \hat{u}(x) =[1+(2/3)\ln (1+x^3)]^{1/2}$
 
@@ -183,9 +183,6 @@ $\quad \hat{u}(t) = (1/5) \sin(3t) + 2 \cos (3t)+ (1/5) \sin (2t)$
 
 **(i)** $2 x^2 u'' +3xu' - u = 0,\: 1<x<16, \: u(1) =4, \: u'(1) = -1$;
 $\quad \hat{u}(x) = 2(x^{1/2} + x^{-1})$
-
-**(j)** $x^2 u'' -xu' + 2u = 0,\: 1<x<e^{\pi}, \: u(1) =3, \: u'(1) = 4$;
-$\quad \hat{u}(x) = x \left[ 3 \cos \left( \ln x \right)+\sin \left( \ln x \right) \right]$
 
 ``````
 
@@ -206,17 +203,12 @@ $\quad \hat{u}(x) = x \left[ 3 \cos \left( \ln x \right)+\sin \left( \ln x \righ
 
 ``````{exercise}
 :label: problem-implicit-bd2
-⌨ Using {numref}`Function {number} <function-am2>` as a model, write a function `bd2` that applies the BD2 method to solve an IVP. Test the convergence of your function on one of the IVPs in @problem-implicit-ab4tests above.
+⌨ Using {numref}`Function {number} <function-am2>` as a model, write a function `bd2` that applies the BD2 method to solve an IVP. Use one step of backward Euler to get the needed starting value $u_1$. Test the convergence of your function on the IVP in part (c) of @problem-implicit-ab4tests.
 ``````
 
 ``````{exercise}
 :label: problem-implicit-stiff
-⌨ For double-precision purposes, the exact solution of the IVP in @demo-implicit-stiff satisfies $\hat{u}(400)=1$.
-
-**(a)** Use {numref}`Function {number} <function-ab4>` with $n=600,800,1000,\ldots,2000$ and make a log-log convergence plot of the error $|u_n-1|$ as a function of $n$.
-
-**(b)** Repeat part (a) using {numref}`Function {number} <function-am2>`.
-
+⌨ Within machine epsilon, the exact solution of the IVP in @demo-implicit-stiff satisfies $\hat{u}(400)\approx 1$. For $n=600,800,1000,\ldots,2000,$ solve that IVP using {numref}`Function {number} <function-ab4>` and {numref}`Function {number} <function-am2>`, keeping track of the error $|u_n-1|$ in each case. Make a log-log convergence plot of the error versus $n$ for both methods on the same graph. (They are dramatcally different, for reasons discussed in Chapter 11.)
 ``````
 
 ``````{exercise}
@@ -246,14 +238,14 @@ Consider the IVP
 :label: problem-implicit-ab2
 ⌨ **(a)** Modify {numref}`Function {number} <function-ab4>` to implement the AB2 method.
 
-**(b)** Repeat part (b) of the preceding exercise, using AB2 in place of AB4.
+**(b)** Repeat part (b) of @problem-implicit-ivpimag, using AB2 in place of AB4.
 
-**(c)** Repeat part (c) of the preceding exercise, using AB2 in place of AB4.
+**(c)** Repeat part (c) of @problem-implicit-ivpimag, using AB2 in place of AB4.
 ``````
 
 ``````{exercise}
 :label: problem-implicit-am1
 ⌨ **(a)** Modify {numref}`Function {number} <function-am2>` to implement the backward Euler (AM1) method.
 
-**(b)** Repeat part (d) of @problem-implicit-ivpimag above, using AM1 in place of AM2 and $n=400,800$. Does the AM1 method conserve energy?
+**(b)** Repeat part (d) of @problem-implicit-ivpimag, using AM1 in place of AM2 and $n=400,800$. Does the AM1 method conserve energy?
 ``````
