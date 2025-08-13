@@ -282,7 +282,7 @@ $$
 
 ``````{exercise}
 :label: problem-symmeig-fov
-⌨ The range of the function $R_{\mathbf{A}}(\mathbf{x})$ is a subset of the complex plane known as the *field of values* of the matrix $\mathbf{A}$. 
+⌨ The range of the function $R_{\mathbf{A}}(\mathbf{x})$ is a subset of the complex plane known as the *field of values* or [numerical range](wiki:Numerical_Range) of the matrix $\mathbf{A}$. 
 
 **(a)** Use 1000 random real vectors to plot points in the field of values of the matrix 
 
@@ -304,11 +304,11 @@ You should get 1000 dots lying on the real axis.
 :label: problem-symmeig-gradient
 ✍ The matrix $\mathbf{A}=\displaystyle \begin{bmatrix} 3 & -2 \\ -2 & 0 \end{bmatrix}$ has an eigenvector $[1,\, 2].$
 
-**(a)** Write out $R_{\mathbf{A}}(\mathbf{x})$ explicitly as a function of $x_1$ and $x_2$.
+**(a)** Write out $R_{\mathbf{A}}(\mathbf{x})$ for $x\in\real^2$ explicitly as a function of $x_1$ and $x_2$.
 
 **(b)** Find $R_{\mathbf{A}}(\mathbf{x})$ for $x_1=1$, $x_2=2$.
 
-**(c)** Find the gradient vector $\nabla R_{\mathbf{A}}(\mathbf{x})$.
+**(c)** Find the gradient vector $\nabla R_{\mathbf{A}}(\mathbf{x})$ at any $\mathbf{x}$.
 
 **(d)** Show that the gradient vector is zero when $x_1=1$, $x_2=2$.
 ``````
@@ -320,7 +320,7 @@ You should get 1000 dots lying on the real axis.
 
 ``````{exercise}
 :label: problem-symmeig-evd
-⌨ Thanks largely to {numref}`Theorem {number} <theorem-symm-eig-spectral>`, the eigenvalue problem for symmetric/hermitian matrices is easier than for general matrices. 
+⌨ Thanks largely to {numref}`Theorem {number} <theorem-symm-eig-spectral>`, the eigenvalue problem for symmetric/hermitian matrices is computationally easier than for general matrices. 
 
 **(a)** Let $\mathbf{A}$ be a $1000\times 1000$ random real matrix, and let $\mathbf{S}=\mathbf{A}+\mathbf{A}^T$. Time finding the eigenvalues of $\mathbf{A}$ and then of $\mathbf{S}$. You should find that the computation for $\mathbf{S}$ is around an order of magnitude faster.
 

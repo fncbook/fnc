@@ -345,7 +345,7 @@ The process demonstrated in @demo-evd-francisqr is known as the *Francis QR iter
 :label: problem-evd-norm
 **(a)** ✍ Suppose that matrix $\mathbf{A}$ has an eigenvalue $\lambda$. Show that for any induced matrix norm, $\| \mathbf{A} \|\ge |\lambda|$.
 
-**(b)** ✍ Find a matrix $\mathbf{A}$ such that $\| \mathbf{A} \|_2$ is strictly larger than $|\lambda|$ for all eigenvalues $\lambda$. (Proof-by-computer isn't allowed here. You don't need to compute $\| \mathbf{A} \|_2$ exactly, just a lower bound for it.)
+**(b)** ✍ Find a matrix $\mathbf{A}$ such that $\| \mathbf{A} \|_\infty$ is strictly larger than $|\lambda|$ for all eigenvalues $\lambda$. (Proof-by-computer isn't allowed here.)
 ``````
 
 ``````{exercise}
@@ -399,23 +399,24 @@ The process demonstrated in @demo-evd-francisqr is known as the *Francis QR iter
 **(b)** ✍ The eigenvalues of a triangular matrix are its diagonal entries. Prove this in the $3\times 3$ case,
 
 ```{math}
+:numbered: false
 \mathbf{T} =
 \begin{bmatrix}
 t_{11} & t_{12}&  t_{13}\\ 0 & t_{22} & t_{23} \\ 0 & 0 & t_{33}
 \end{bmatrix},
 ```
 
-by finding the eigenvectors. (Start by showing that $[1,0,0]^T$ is an eigenvector. Then show how to make $[a,1,0]^T$ an eigenvector, except for one case that does not change the outcome. Continue the same logic for $[a,b,1]^T$.)
+by finding the eigenvectors. (Start by showing that $[1,0,0]$ is an eigenvector. Then show how to make $[a,1,0]$ an eigenvector, except for one case that does not change the outcome. Continue the same logic for $[a,b,1]$.)
 ``````
 
 ``````{exercise}
 :label: problem-evd-matrixpoly
-✍ Let $\mathbf{A}=\displaystyle\frac{\pi}{6}\begin{bmatrix} 4 & 1 \\ 4 & 4 \end{bmatrix}$.
+✍ Let $\mathbf{A}=\displaystyle\frac{\pi}{8}\begin{bmatrix} 6 & 1 \\ 4 & 6 \end{bmatrix}$.
 
 **(a)** Show that
 
 $$
-\lambda_1=\pi,\, \mathbf{v}_1=\begin{bmatrix}1 \\ 2 \end{bmatrix}, \quad \lambda_2=\frac{\pi}{3},\, \mathbf{v}_2=\begin{bmatrix}1 \\ -2 \end{bmatrix}
+\lambda_1=\pi,\, \mathbf{v}_1=\begin{bmatrix}1 \\ 2 \end{bmatrix}, \quad \lambda_2=\frac{\pi}{2},\, \mathbf{v}_2=\begin{bmatrix}1 \\ -2 \end{bmatrix}
 $$
 
 yield an EVD of $\mathbf{A}$.
@@ -438,22 +439,23 @@ displacements of point masses placed along a string satisfy a linear system $\ma
 
 ``````{exercise}
 :label: problem-evd-random
-⌨ Eigenvalues of random matrices and their perturbations can be very interesting.
+⌨ Eigenvalues of random matrices and their perturbations can be very interesting. In this exercise, the random numbers should be generated from a standard normal distribution. (Use `randn` in Julia and MATLAB, and `numpy.random.randn` in Python.)
 
-**(a)** Let `A=randn(60,60)`.[^randn] Scatter plot its eigenvalues in the complex plane, using a plot aspect ratio of 1 and red diamonds as markers.
+**(a)** Let $\mathbf{A}$ be a $60\times 60$ random matrix. Scatter plot its eigenvalues in the complex plane, using a plot aspect ratio of 1 and red diamonds as markers.
 
-**(b)** Let $\mathbf{E}$ be another random $60\times 60$ matrix, and on top of the previous graph, plot the eigenvalues of $\mathbf{A}+0.05\mathbf{E}$ as blue dots. Repeat this for 100 different values of $\mathbf{E}$.
+**(b)** For 100 iterations, let $\mathbf{E}$ be another random $60\times 60$ matrix, and on top of the previous graph, plot the eigenvalues of $\mathbf{A}+0.05\mathbf{E}$ as blue dots.
 
-**(c)** Let `T=triu(A)`. On a new graph, scatter plot the eigenvalues of $\mathbf{T}$ in the complex plane. (They all lie on the real axis.)
+**(c)** Let $\mathbf{T}$ be the upper triangular part of $\mathbf{A}$. On a new graph, scatter plot the eigenvalues of $\mathbf{T}$ in the complex plane. (These all lie on the real axis, however.)
 
 **(d)** Repeat part (b) with $\mathbf{T}$ in place of $\mathbf{A}$.
 
-**(e)** Compute some condition numbers and apply @theorem-bauer-fike to explain the dramatic difference between your plots with respect to the dot distributions.
+**(e)** Compute some condition numbers and apply @theorem-bauer-fike to explain the dramatic difference between your plots with respect to the dot distributions. (Note: The condition numbers of $\mathbf{A}$ and $\mathbf{T}$ are *not* relevant.)
+``````
+
+```{index} ! matrix function; eigenvalue decomposition
 ``````
 
 ``````{exercise}
 :label: problem-evd-functions
 Suppose that $\mathbf{A}$ is diagonalizable and that @matrixpolyevd is used to define $\cos(\mathbf{A})$ and $\sin(\mathbf{A})$, with those functions substituted in for $p$ in the equation. Is it necessarily true that $\cos(\mathbf{A})^2+\sin(\mathbf{A})^2$ is an identity matrix? Explain why or why not.
 ``````
-
-[^randn]: The `randn` function generates random numbers from a standard normal distribution. In Python, it is found in the `numpy.random` module.

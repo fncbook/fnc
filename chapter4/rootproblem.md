@@ -212,7 +212,7 @@ where the eccentric anomaly $\psi(t)$ satisfies Kepler's equation:
 
 Equation {eq}`kepler2` must be solved numerically to find $\psi(t)$, and then {eq}`kepler1` can be solved analytically to find $\theta(t).$
 
-The asteroid Eros has $\tau=1.7610$ years and $\epsilon=0.2230.$ Using @demo-rootproblem-bessel as a guide, solve {eq}`kepler2` and make a plot of $\theta(t)$ for 100 values of $t$ between $0$ and $\tau$, which is one full orbit. (Note: Use `mod(theta, 2π)` to put the angle between 0 and $2\pi$ if you want the result to be a continuous function.)
+The asteroid Eros has $\tau=1.7610$ years and $\epsilon=0.2230.$ Using @demo-rootproblem-bessel as a guide, solve {eq}`kepler2` and make a plot of $\theta(t)$ for 100 values of $t$ between $0$ and $\tau$, which is one full orbit. (Note: You may need to use `mod(theta, 2*pi)` to put the angle between 0 and $2\pi$, if you want the result to be a continuous function.)
 ``````
 
 ``````{exercise}

@@ -193,5 +193,5 @@ Often the adaptively chosen steps clearly correspond to identifiable features of
 
 ``````{exercise}
 :label: problem-adaptiverk-flame
-⌨ Solve the problem $u'=100u^2-u^3$, $u(0)=0.0002$ for $0\le t \le 100$ using {numref}`Function {number} <function-rk23>` with error tolerance $10^{-6}$. In a 2-by-1 plot layout, plot the solution above and the time step size below. The solution makes a quick transition between two nearly constant states. Does the step size behave the same during both of those states?
+⌨ Solve the problem $u'=100u^2-u^3$, $u(0)=0.0002$ for $0\le t \le 100$ using {numref}`Function {number} <function-rk23>` with error tolerance $10^{-6}$. In a 2-by-1 plot layout, plot the solution above and (on a semilog scale) the time step size below. The solution makes a quick transition between two nearly constant states. Does the step size behave the same during both of those states?
 ``````

@@ -141,16 +141,16 @@ Representation of an image as a matrix allows us to describe some common image o
 
 ``````{exercise}
 :label: problem-insight-terms
-✍ Consider the terms *numerical*, *analysis*, and *fun*. Write out the term-document matrix for the following statements:
+✍ Consider the terms *numerical*, *analysis*, and *fun*. Write out the term-document matrix for the following corpus of "documents."
 
-**(a)** Numerical analysis is the most fun type of analysis.
+1. Numerical analysis is the most fun type of analysis.
 
-**(b)** It's fun to produce numerical values for the digits of pi.
+2. It's fun to produce numerical values for the digits of pi.
 
-**(c)** Complex analysis is a beautiful branch of mathematics.
+3. Complex analysis is a beautiful branch of mathematics.
 ``````
 
-``````{exercise}
+`````{exercise}
 :label: problem-insight-adjacency1
 ✍ Write out the adjacency matrix for the following graph on six nodes.
 
@@ -166,6 +166,7 @@ Representation of an image as a matrix allows us to describe some common image o
 ✍ Here is a graph adjacency matrix.
 
 ```{math}
+:numbered: false
 \begin{bmatrix}
 0 & 1 & 0 & 1 & 0 & 1 & 0 \\
 1 & 0 & 1 & 0 & 0 & 1 & 0 \\

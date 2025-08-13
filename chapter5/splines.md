@@ -289,7 +289,7 @@ Can't do NaK with only 3 nodes!
 
 ``````{exercise}
 :label: problem-splines-convergence
-⌨ For each given function and interval, perform cubic spline interpolation using {numref}`Function {number} <function-spinterp>` for $n+1$ equispaced nodes with $n=10,20,40,80,160,320$. For each $n$, estimate the error
+⌨ For each given function and interval, perform cubic spline interpolation using {numref}`Function {number} <function-spinterp>` for $n+1$ equispaced nodes with $n=10,20,40,80,160,320,640.$ For each $n$, estimate the error
 
 ```{math}
 :numbered: false
