@@ -9,4 +9,7 @@ The book relies only on base MATLAB (no Toolboxes). The code requires MATLAB R20
 
 ## Installation
 
-Download the [latest release](https://github.com/fncbook/FNC-matlab/releases/latest) and unpack somewhere on your computer. Add the `FNC-matlab` directory to your MATLAB path. By typing `addpath /path/to/FNC-matlab` at the MATLAB prompt, or by typing `pathtool` and using the GUI. The `pathtool` method allows you to save the path for all future MATLAB sessions.
+- To install in MATLAB Online, you can click this button:
+[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=fncbook/FNC-matlab&file=toolbox/release/FNC.mltbx)
+- To install the functions locally, you can download the `mltbx` file from the [releases page](https://github.com/fncbook/FNC-matlab/releases). Double-click the file, or load it in to the MATLAB Add-On Manager.
+- The old-school way is to download a source code zip file from the [releases page](https://github.com/fncbook/FNC-matlab/releases) and unpack it somewhere on your computer. Then add its top-level directory to your MATLAB path by using the `addpath` command or the `pathtool` GUI.
