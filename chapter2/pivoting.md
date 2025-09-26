@@ -321,7 +321,7 @@ x = U \ L \ b[p]
 Here is correct code to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$:
 
 ``` matlab
-[L, U, p]= lu(A, 'vector');
+[L, U, p] = lu(A, 'vector');
 x = U \ (L \ b(p));
 ```
 
@@ -337,15 +337,15 @@ x = U \ L \ b(p);
 Here is correct code to solve $\mathbf{A}\mathbf{x}=\mathbf{b}$:
 
 ``` python
-from scipy.linalg import lu
+from scipy.linalg import lu, solve
 p, L, U = lu(A, p_indices=True)
-x = U @ (L @ b[p])
+x = solve(U, solve(L, b[p]))
 ```
 
 Suppose instead you replace the last line above with
 
 ``` python
-x = U @ L @ b[p]
+x = solve(solve(U, L), b[p])
 ```
 ```` 
 `````
