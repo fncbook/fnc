@@ -106,6 +106,7 @@ Lines 22-23 define the function $\mathbf{g}$ and call `levenberg` to find the ne
 
 ```{code-cell} ipython3
 :tags: remove-cell
+print("1")
 exec(open("FNC_init.py").read())
 ```
 
