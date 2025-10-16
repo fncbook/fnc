@@ -1,7 +1,7 @@
-function du_dt = timederiv(t, u, p)
+function dw_dt = timederiv(t, w, p)
     [ep, Dx, Dxx, Dy, Dyy, pack, unpack] = p{:};
-    U = unpack(u);
+    U = unpack(w);
     Uxx = Dxx * U;  Uyy = U * Dyy'; 
     dU_dt = 1 - Dx * U + ep * (Uxx + Uyy);  % PDE
-    du_dt = pack(dU_dt);
+    dw_dt = pack(dU_dt);
 end
