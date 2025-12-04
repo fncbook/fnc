@@ -113,7 +113,7 @@ Of particular interest is a *square* ONC matrix.[^ortho]
 
 ```{prf:definition} Orthogonal matrix
 :label: definition-orthogonalmatrix
-An {term}orthogonal matrix` is a square matrix with orthonormal columns.
+An {term}`orthogonal matrix` is a square matrix with orthonormal columns.
 ```
 
 Orthogonal matrices have properties beyond @theorem-qr-ONC.
