@@ -20,7 +20,7 @@ Two vectors $\mathbf{u}$ and $\mathbf{v}$ in $\mathbb{R}^n$ are {term}`orthogona
 i \neq j \quad \Rightarrow \quad \mathbf{q}_i^T\mathbf{q}_j = 0.
 ```
 
-If {eq}`orthogonality` applies and also $\mathbf{q}_i^T\mathbf{q}_i=1$ for all $i=1,\ldots,n$, we say they are {term} `orthonormal vectors`.
+If {eq}`orthogonality` applies and also $\mathbf{q}_i^T\mathbf{q}_i=1$ for all $i=1,\ldots,n$, we say they are {term}`orthonormal vectors`.
 ::::
 
 ```{index} inner product
