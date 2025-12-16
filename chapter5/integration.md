@@ -420,7 +420,7 @@ where $p$ is the quadratic polynomial from part (a), in terms of $h$, $\alpha$, 
 
 ``````{exercise}
 :label: problem-integration-simpsonextrap
-✍ Show that the Simpson formula {eq}`simpson` is equivalent to $S_f(n/2),$ given the definition of $S_f$ in {eq}`nc-simpson`.
+✍ Show that the Simpson formula {eq}`simpson` is equivalent to $S_f(n),$ given the definition of $S_f$ in {eq}`nc-simpson`.
 ``````
 
 ``````{exercise}
