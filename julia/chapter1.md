@@ -305,13 +305,8 @@ Many Julia functions, including the ones in this text, are in packages that must
 
 ```{code-cell}
 :tags: remove-output
-#using FundamentalsNumericalComputation
 using FNCFunctions
-FNC = FNCFunctions
 ```
-
-
-For convenience, this package also imports many other packages used throughout the book and makes them available as though you had run a `using` command for each of them. 
 
 ```{tip}
 :class: dropdown
@@ -327,8 +322,7 @@ c = [-1, 3, -3, 1]
 ```{index} ! Julia; FNC, ! Julia; namespace
 ```
 
-
-In order to avoid clashes between similarly named functions, Julia has boxed all the book functions into a **namespace** called `FNC`. We use this namespace whenever we invoke one of the functions.
+In order to avoid clashes between similarly named functions, Julia has boxed all the book functions into a **namespace** called `FNC`. We must use this namespace whenever we invoke one of the functions.
 
 ```{tip}
 :class: dropdown

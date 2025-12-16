@@ -62,6 +62,7 @@ numbering:
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init;
 pwd
+pwd;
 ```
 
 ### 4.1 @section-nonlineqn-rootproblem

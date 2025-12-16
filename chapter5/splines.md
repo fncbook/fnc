@@ -254,14 +254,15 @@ Besides having more smoothness than a piecewise linear interpolant, the not-a-kn
 The conditioning of spline interpolation is much more complicated than for the piecewise linear case. First, the fact that the coefficients of all the cubics must be solved for simultaneously implies that each data value in $\mathbf{y}$ has an influence on $S$ over the entire interval. Second, $S$ can take on values larger in magnitude than all the values in $\mathbf{y}$ (see @problem-splines-overshoot). The details may be found in more advanced texts.
 
 ## Exercises
-
+<!-- 
+Can't do NaK with only 3 nodes!
 ``````{exercise}
 :label: problem-splines-system
 ✍ In each case, write out the entries of the matrix and right-hand side of the linear system that determines the coefficients for the cubic not-a-knot spline interpolant of the given function and node vector.
 
-**(a)** $\cos  (\pi^2 x^2 ), \: \mathbf{t} = [-1,1,4]$
+**(a)** $\cos(\pi^2 x^2 ), \: \mathbf{t} = [-1,1,4]$
 
-**(b)** $\cos (\pi^2 x^2), \: \mathbf{t} = [0,\tfrac{1}{2},\tfrac{3}{4},1]$
+**(b)** $\cos(\pi^2 x^2), \: \mathbf{t} = [0,\tfrac{1}{2},\tfrac{3}{4},1]$
 
 **(c)** $\ln(x), \:  \mathbf{t} = [1,2,3]$
 
@@ -270,13 +271,14 @@ The conditioning of spline interpolation is much more complicated than for the p
 
 ``````{exercise}
 :label: problem-splines-systemsolve
-⌨ (continuation) For each case in the preceding problem, use Julia to solve the linear system you wrote down. Then plot the resulting cubic spline over the interval between the second and third nodes.
+⌨ (Continuation of @problem-splines-system.) For each case in @problem-splines-system, solve the linear system you wrote down. Then plot the resulting cubic spline over the interval between the second and third nodes.
 
-``````
+`````` 
+-->
 
 ``````{exercise}
 :label: problem-splines-spinterp
-⌨ For each given function, interval, and value of $n$, define $n+1$ evenly spaced nodes. Then use {numref}`Function {number} <function-spinterp>` to plot the cubic spline interpolant using those nodes, together with the original function over the given interval.
+⌨ For each given function, interval, and value of $n$, define $n+1$ evenly spaced nodes. Then use {numref}`Function {number} <function-spinterp>` to plot the cubic spline interpolant using those nodes, together with the data at the nodes and the original function over the given interval.
 
 **(a)** $\cos(\pi x^2)$ on $[0,4]$, $n=18$
 
@@ -287,9 +289,10 @@ The conditioning of spline interpolation is much more complicated than for the p
 
 ``````{exercise}
 :label: problem-splines-convergence
-⌨ For each given function and interval, perform piecewise linear interpolation using {numref}`Function {number} <function-spinterp>` for $n+1$ equispaced nodes with $n=10,20,40,80,160,320$. For each $n$, estimate the error
+⌨ For each given function and interval, perform cubic spline interpolation using {numref}`Function {number} <function-spinterp>` for $n+1$ equispaced nodes with $n=10,20,40,80,160,320,640.$ For each $n$, estimate the error
 
 ```{math}
+:numbered: false
 E(n) = \| f-p \|_\infty = \max_x | f(x) - p(x) |
 ```
 
@@ -305,7 +308,7 @@ by evaluating the function and interpolant at 1600 points in the interval. Make 
 
 ``````{exercise}
 :label: problem-splines-overshoot
-⌨  Although the cardinal cubic splines are intractable in closed form, they can be found numerically. Each cardinal spline interpolates the data from one column of an identity matrix. Define the nodes $\mathbf{t} = \bigl[0,\, 0.075,\, 0.25,\, 0.55,\, 1]$. Plot over $[0,1]$ the five cardinal functions for this node set over the interval $[0,1]$.
+⌨  Although the cardinal cubic splines are intractable in closed form, they can be found numerically. Each cardinal spline interpolates the data from one column of an identity matrix. Define the nodes $\mathbf{t} = \bigl[0,\, 0.075,\, 0.25,\, 0.55,\, 1]$. Plot the five cardinal functions for this node set over the interval $[0,1]$.
 ``````
 
 ``````{exercise}

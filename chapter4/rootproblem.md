@@ -13,7 +13,7 @@ For the time being we will focus on the **rootfinding problem** for single funct
 
 ```{prf:definition} Rootfinding problem
 :label: definition-rootproblem
-Given a continuous scalar function $f$ of a scalar variable, find a real number $r$, called a **root**, such that $f(r)=0$.
+Given a continuous scalar function $f$ of a scalar variable, find a real number $r,$ called a **root**, such that $f(r)=0$.
 ```
 
 The formulation $f(x)=0$ is general enough to solve any equation. If we are trying to solve an equation $g(x)=h(x)$, we can define $f=g-h$ and find a root of $f$.
@@ -159,7 +159,7 @@ When $r$ is a multiple root, the condition number {eq}`rootcondnum` is effective
   
 **(a)** Rewrite the equation into the standard form for rootfinding, $f(x) = 0$. Make a plot of $f$ over the given interval and determine how many roots lie in the interval.
   
-**(b)**  Use `nlsolve` to find each root, as shown in @demo-rootproblem-bessel.
+**(b)**  Find each root as shown in @demo-rootproblem-bessel.
 
 **(c)** Compute the condition number of each root found in part (b).
 
@@ -185,16 +185,17 @@ $e^{x+1}=2+x$, over $[-2,2]$
 :label: problem-rootproblem-annuity
 ⌨ A basic safe type of investment is an annuity: one makes monthly deposits of size $P$ for $n$ months at a fixed annual interest rate $r$, and at maturity collects the amount
 
-$$
+```{math}
+:numbered: false
 \frac{12 P}{r} \left( \Bigl(1+\frac{r}{12}\Bigr)^n - 1\right).
-$$
+```
 
-Say you want to create an annuity for a term of 300 months and final value of \$1,000,000. Using `nlsolve`, make a table of the interest rate you will need to get for each of the different contribution values $P=500,550,\ldots,1000$.  
+Say you want to create an annuity for a term of 300 months and final value of \$1,000,000. Using @demo-rootproblem-bessel as a guide, make a table of the interest rate you will need to get for each of the different contribution values $P=500,550,\ldots,1000.$  
 ``````
 
 ``````{exercise}
 :label: problem-rootproblem-kepler
-⌨ The most easily observed properties of the orbit of a celestial body around the sun are the period $\tau$ and the elliptical eccentricity $\epsilon$. (A circle has $\epsilon=0$.) From these, it is possible to find at any time $t$ the angle $\theta(t)$ made between the body's position and the major axis of the ellipse. This is done through
+⌨ The most easily observed properties of the orbit of a celestial body around the sun are the period $\tau$ and the elliptical eccentricity $\epsilon.$ (A circle has $\epsilon=0.$) From these, it is possible to find at any time $t$ the angle $\theta(t)$ made between the body's position and the major axis of the ellipse. This is done through
 
 ```{math}
 :label: kepler1
@@ -209,25 +210,25 @@ where the eccentric anomaly $\psi(t)$ satisfies Kepler's equation:
 \psi - \epsilon \sin \psi - \frac{2\pi t}{\tau} = 0.
 ```
 
-Equation {eq}`kepler2` must be solved numerically to find $\psi(t)$, and then {eq}`kepler1` can be solved analytically to find $\theta(t)$.
+Equation {eq}`kepler2` must be solved numerically to find $\psi(t)$, and then {eq}`kepler1` can be solved analytically to find $\theta(t).$
 
-The asteroid Eros has $\tau=1.7610$ years and $\epsilon=0.2230$. Using `nlsolve` for {eq}`kepler2`, make a plot of $\theta(t)$ for 100 values of $t$ between $0$ and $\tau$, which is one full orbit. (Note: Use `mod(θ,2π)` to put the angle between 0 and $2\pi$ if you want the result to be a continuous function.)
+The asteroid Eros has $\tau=1.7610$ years and $\epsilon=0.2230.$ Using @demo-rootproblem-bessel as a guide, solve {eq}`kepler2` and make a plot of $\theta(t)$ for 100 values of $t$ between $0$ and $\tau$, which is one full orbit. (Note: You may need to use `mod(theta, 2*pi)` to put the angle between 0 and $2\pi$, if you want the result to be a continuous function.)
 ``````
 
 ``````{exercise}
 :label: problem-rootproblem-lambertW
-⌨  Lambert's $W$ function is defined as the inverse of $x e^x$. That is, $y=W(x)$ if and only if $x=ye^y$. Write a function `lambertW` that computes $W$ using `nlsolve`. Make a plot of $W(x)$ for $0\le x \le 4$.  
+⌨  Lambert's $W$ function is defined as the inverse of $x e^x.$ That is, $y=W(x)$ if and only if $x=ye^y.$ Write a function `lambertW` that computes $W.$ Make a plot of $W(x)$ for $0\le x \le 4.$  
 ``````
 
 ``````{exercise}
 :label: problem-rootproblem-multiplicity
 ✍ For each function, find the multiplicity of the given root. If it is a simple root, find its absolute condition number.
 
-**(a)** $f(x) = x^3-2x^2+x-2$, root $r=2$
+**(a)** $f(x) = x^3-2x^2+x-2,$ root $r=2$
 
-**(b)** $f(x) = (\cos x  + 1)^2$, root $r=\pi$
+**(b)** $f(x) = (\cos x  + 1)^2,$ root $r=\pi$
 
-**(c)** $f(x) = \frac{\sin^2 x}{x}$, root $r=0$ (define $f(0) =0$)
+**(c)** $f(x) = \frac{\sin^2 x}{x},$ root $r=0$ (define $f(0) =0$)
 
-**(d)** $f(x) =(x-1)\log(x)$, root $r=1$
+**(d)** $f(x) =(x-1)\log(x),$ root $r=1$
 ``````

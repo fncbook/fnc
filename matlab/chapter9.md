@@ -71,6 +71,7 @@ numbering:
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init;
 pwd
+pwd;
 ```
 
 ### 9.1 @section-globalapprox-polynomial

@@ -236,7 +236,7 @@ For each of Exercises 1–3, do the following steps.
 
 **(b)** ⌨  Make a plot of $f$ over the given interval and determine how many roots lie in the interval.
 
-**(c)** ⌨ Use `nlsolve` with `ftol=1e-15` to find a reference value for each root.
+**(c)** ⌨ Like in @demo-newton-converge, find a reference value for each root using a native solver.
 
 **(d)** ⌨ Use {numref}`Function {number} <function-newton>` to find each root.
 
@@ -254,14 +254,14 @@ $2x = \tan x$, over $[-0.2,1.4]$
 
 ``````{exercise}
 :label: problem-newton-basic3
-$e^{x+1}=2+x$, over $[-2,2]$
+$\sin(\pi x) = 2x$, over $[0.1, 2]$
 ``````
 
 ---
 
 ``````{exercise}
 :label: problem-newton-starting
-⌨  Plot the function $f(x)=x^{-2} - \sin x$ on the interval $x \in [0.5,10]$.  For each initial value $x_1=1,\, x_1=2,\,\ldots,\, x_1=7$, apply {numref}`Function {number} <function-newton>` to $f$, and make a table showing $x_1$ and the resulting root found by the method. In which case does the iteration converge to a root other than the one closest to it? Use the plot to explain why that happened.
+⌨  Plot the function $f(x)=x^{-2} - \sin x$ on the interval $x \in [0.5,10].$  For each initial value $x_1=1,\, x_1=2,\,\ldots,\, x_1=7,$ apply {numref}`Function {number} <function-newton>` to $f$, and make a table showing $x_1$ and the resulting root found by the method. In which case does the iteration converge to a root other than the one closest to it? Use the plot to explain why that happened.
 ``````
 
 ``````{exercise}
@@ -277,7 +277,11 @@ $e^{x+1}=2+x$, over $[-2,2]$
 
 ``````{exercise}
 :label: problem-newton-multiple
-✍ In the case of a multiple root, where $f(r)=f'(r)=0$, the derivation of the quadratic error convergence in {eq}`newtonerr` is invalid. Redo the derivation to show that in this circumstance and with $f''(r)\neq 0$, the error converges only linearly. 
+In the case of a multiple root, where $f(r)=f'(r)=0$, the derivation of the quadratic error convergence leading up to {eq}`newtonerr` is invalid. 
+
+**(a)** ✍ Redo the derivation to show that in this circumstance and with $f''(r)\neq 0$, the error in general converges only linearly. 
+
+**(b)** ⌨  Use {numref}`Function {number} <function-newton>` to find a root of $f(x) = e^{x+1} - 2 - x$ starting at $x_1=0,$ and make a plot of the errors showing that the convergence is linear.
 ``````
 
 ``````{exercise}
@@ -285,8 +289,9 @@ $e^{x+1}=2+x$, over $[-2,2]$
 ✍ In {numref}`Function {number} <function-newton>` and elsewhere, the actual error is not available, so we use $|x_k-x_{k-1}|$ as an approximate indicator of error to determine when to stop the iteration. Find an example that foils this indicator; that is, a sequence $\{x_k\}$ such that
 
 ```{math}
+:numbered: false
 \lim_{k\rightarrow \infty} (x_k-x_{k-1}) = 0,
 ```
 
-but $\{x_k\}$ diverges. (Hint: You have seen such sequences in calculus.) Hence the need for residual tolerances and safety valves in the code!
+but $\{x_k\}$ diverges. (Hint: You have seen such sequences in calculus.) While you do *not* need to show that the sequence is produced by Newton's method for any particular $f,$ this does justify the use of residual tolerances and safety valves in the code.
 ``````

@@ -119,7 +119,9 @@ $$
 $$
 ::::
 
-Except for some unimportant technicalities, the eigenvectors of $\mathbf{A}^*\mathbf{A}$, when appropriately ordered and normalized, are right singular vectors of $\mathbf{A}$. The left singular vectors could then be deduced from the identity $\mathbf{A}\mathbf{V} = \mathbf{U}\mathbf{S}$.
+:::{important}
+The proof also shows that the eigenvectors of $\mathbf{A}^*\mathbf{A}$, when appropriately ordered and normalized, are right singular vectors of $\mathbf{A}$. The left singular vectors could then be deduced from the identity $\mathbf{A}\mathbf{V} = \mathbf{U}\mathbf{S}$.
+:::
 
 Another close connection between EVD and SVD comes via the $(m+n)\times (m+n)$ matrix
 
@@ -350,7 +352,7 @@ $\begin{bmatrix}
 
 ``````{exercise}
 :label: problem-svd-ATA
-✍ Apply @theorem-svd-ATA to find an SVD of $\mathbf{A}=\displaystyle \begin{bmatrix} 1 & 0 \\ 0 & 0 \\ 0 & 1 \\ -1 & -1 \end{bmatrix}.$
+✍ Apply @theorem-svd-ATA to find the singular values of $\mathbf{A}=\displaystyle \begin{bmatrix} 1 & 0 \\ 0 & 0 \\ 0 & 1 \\ -1 & -1 \end{bmatrix}.$
 ``````
 
 ``````{exercise}
@@ -378,7 +380,7 @@ $\begin{bmatrix}
 
 ``````{exercise}
 :label: problem-svd-cond
-✍ Prove {eq}`svdcond` of @theorem-svdprops, given that {eq}`svdnorm` is true. (Hint: If the SVD of $\mathbf{A}$ is known, what is the SVD of $\mathbf{A}^{+}$?)
+✍ In order to prove {eq}`svdcond` of @theorem-svdprops, show that $\twonorm{\mathbf{A}^+} = \sigma_n^{-1}$. For simplicity, assume that $m\ge n$ and that the rank of $\mathbf{A}$ is $n$. (Hint: If the SVD of $\mathbf{A}$ is known, what is the SVD of $\mathbf{A}^{+}$?)
 ``````
 
 ``````{exercise}
@@ -394,7 +396,7 @@ $\begin{bmatrix}
 
 ``````{exercise}
 :label: problem-svd-AAT
-✍ Show that the square of each singular value of $\mathbf{A}$ is an eigenvalue of the matrix $\mathbf{A}\mathbf{A}^*$ for any $m\times n$ matrix $\mathbf{A}$. (You should consider the cases $m>n$ and $m\le n$ separately.) 
+✍ Show that the square of each singular value of $\mathbf{A}$ is an eigenvalue of the matrix $\mathbf{A}\mathbf{A}^*$ for any $m\times n$ matrix $\mathbf{A}$. (You should consider the cases $m<n$ and $m\ge n$ separately.) 
 ``````
 
 ``````{exercise}
@@ -412,9 +414,5 @@ $\begin{bmatrix}
 
 **(a)** Suppose that $\mathbf{v}=\begin{bmatrix} \mathbf{x} \\ \mathbf{y} \end{bmatrix}$, and write the block equation $\mathbf{C}\mathbf{v} = \lambda \mathbf{v}$ as two individual equations involving both $\mathbf{x}$ and $\mathbf{y}$.
 
-**(b)** By applying some substitutions, rewrite the equations from part (a) as one in which $\mathbf{x}$ was eliminated, and another in which $\mathbf{y}$ was eliminated.
-
-**(c)** Substitute the SVD $\mathbf{A}=\mathbf{U}\mathbf{S}\mathbf{V}^T$ and explain why $\lambda^2=\sigma_k^2$ for some singular value $\sigma_k$. 
-
-**(d)** As a more advanced variation, modify the argument to show that $\lambda=0$ is another possibility if $\mathbf{A}$ is not square.
+**(b)** Suppose $\sigma_k$ is a singular value of $\mathbf{A}$. By defining $\mathbf{x}$ and $\mathbf{y}$ in terms of the singular vectors $\mathbf{u}_k$ and $\mathbf{v}_k$, show that $\sigma_k$ and $-\sigma_k$ are both eigenvalues of $\mathbf{C}$.
 ``````

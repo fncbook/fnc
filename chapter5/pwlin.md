@@ -38,7 +38,7 @@ Rather than basing an implementation on {eq}`pwlinear`, we return to the idea us
     \dfrac{x-t_{k-1}}{t_k-t_{k-1}} & \text{if $x\in[t_{k-1},t_k]$},\\[2.5ex]
     \dfrac{t_{k+1}-x}{t_{k+1}-t_{k}} & \text{if $x\in[t_{k},t_{k+1}]$},\\[2.5ex]
     0 & \text{otherwise}.
-  \end{cases} \qquad  
+  \end{cases} 
 ```
 
 ```{index} hat functions
@@ -128,7 +128,7 @@ All candidate piecewise linear (PL) functions can be expressed as a linear combi
 
 ```{math}
 :label: plbasissol
-  p(x) = \sum_{k=0}^n y_k H_k(x).
+p(x) = \sum_{k=0}^n y_k H_k(x).
 ```
 
 The resulting algorithmic simplicity is reflected in {numref}`Function {number} <function-plinterp>`. Take note that the output of {numref}`Function {number} <function-plinterp>` is itself a function, meant to be called with a single argument representing a value of $x$. Our mathematical viewpoint is that the result of an interpolation process is a function, and our codes reflect this.
@@ -292,9 +292,10 @@ A log-log plot of error versus $h$ should be approximately a straight line of sl
 
 ``````{exercise}
 :label: problem-pwlin-usage
-⌨ For each given function and interval, perform piecewise linear interpolation using {numref}`Function {number} <function-plinterp>` for $n+1$ equispaced nodes with $n=10,20,40,80,160,320$. For each $n$, estimate the error
+⌨ For each given function and interval, perform piecewise linear interpolation using {numref}`Function {number} <function-plinterp>` for $n+1$ equispaced nodes with $n=10,20,40,80,160,320,640.$ For each $n$, estimate the error
 
 ```{math}
+:numbered: false
 E(n) = \| f-p \|_\infty = \max_x | f(x) - p(x) |
 ```
 
@@ -304,7 +305,7 @@ by evaluating the function and interpolant at 1600 points in the interval. Make 
 
 **(b)** $\log(x)$ on $[1,20]$
 
-**(c)** $\sin\left(\frac{1}{x}\right)$ on $\left[\frac{1}{2},7\right]$
+**(c)** $\sin\left(\dfrac{1}{x}\right)$ on $\left[\frac{1}{2},7\right]$
 ``````
 
 ``````{exercise}
@@ -322,8 +323,7 @@ by evaluating the function and interpolant at 1600 points in the interval. Make 
 
 ``````{exercise}
 :label: problem-pwlin-log
-✍ Before electronic calculators, the function $\ln(x)$ was often computed using piecewise linear interpolation with a table of values. If you were using such a table at the nodes $3.1,3.2,\ldots,3.9,4$, what is an upper bound on the error in the result?
-
+✍ Before electronic calculators, the function $\ln(x)$ was often computed using piecewise linear interpolation with a table of values. If you were using such a table at the nodes $3.0,3.1,3.2,\ldots,3.9,4.0$, what is an upper bound on the error in the result over the interval $[3,4]$? 
 ``````
 
 ``````{exercise}
@@ -335,7 +335,7 @@ by evaluating the function and interpolant at 1600 points in the interval. Make 
 \sum_{k=0}^n H_k(x) = 1.
 ```
 
-(Hint: The simplest way is to apply {eq}`plbasissol`.) This is called the **partition of unity** property.
+(Hint: The simplest way is to apply {eq}`plbasissol`.) This is called the *partition of unity* property.
 
 ``````
 
@@ -344,6 +344,7 @@ by evaluating the function and interpolant at 1600 points in the interval. Make 
 ✍ Here we consider a proof of @theorem-pwlin-converge using the mean value theorems from elementary calculus: If $f$ is continuously differentiable in $(a,b)$, then there exist points $s$ and $t$ in $(a,b)$ such that
 
 ```{math}
+:numbered: false
 \int_a^b f(z) \, dz = (b-a)f(s) \qquad \text{and} \qquad f'(t) = \frac{f(b)-f(a)}{b-a}.
 ```
 
@@ -352,12 +353,14 @@ For the following, suppose $x \in (t_k,t_{k+1})$.
 **(a)** Show that for some $s \in (t_k,t_{k+1})$,
 
 ```{math}
+:numbered: false
 f(x) = y_k + (x-t_k)f'(s).
 ```
 
 **(b)** Show that for some other values $u$ and $v$ in $(t_k,t_{k+1})$,
 
 ```{math}
+:numbered: false
 f'(s) -  \frac{y_{k+1}-y_k}{t_{k+1}-t_k} = (s-u) f''(v).
 ```
 

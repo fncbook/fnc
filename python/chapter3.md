@@ -76,6 +76,7 @@ title("World temperature anomaly");
 A polynomial interpolant can be used to fit the data. Here we build one using a Vandermonde matrix. First, though, we express time as decades since 1950, as it improves the condition number of the matrix.
 
 ```{code-cell}
+from scipy import linalg
 t = (year - 1950) / 10
 V = vander(t)
 c = linalg.solve(V, y)
@@ -127,7 +128,7 @@ print(V.shape)
 ```
 
 ```{code-cell}
-from numpy.linalg import lstsq
+from scipy.linalg import lstsq
 c, res, rank, sv = lstsq(V, y)
 p = poly1d(c)
 f = lambda year: p((year - 1950) / 10)
@@ -160,7 +161,7 @@ The definition of `f` above is in terms of `c`. When `c` is changed, `f` is upda
 ```
 
 ```{code-cell}
-c, res, rank, sv = lstsq(V, y, rcond=None)
+c, res, rank, sv = lstsq(V, y)
 yr = linspace(1955, 2000, 500)
 ax.plot(yr, f(yr), label="cubic fit")
 fig
@@ -197,7 +198,7 @@ The straight line on the log-log scale suggests a power-law relationship where $
 
 ```{code-cell}
 V = array([ [1, log(k+1)] for k in range(100) ])     # fitting matrix
-c = lstsq(V, log(ep), rcond=None)[0]           # coefficients of linear fit
+c = lstsq(V, log(ep))[0]           # coefficients of linear fit
 print(c)
 ```
 
@@ -245,8 +246,8 @@ b = A @ x
 Using backslash to find the least-squares solution, we get a relative error that is well below $\kappa$ times machine epsilon.
 
 ```{code-cell}
-from numpy.linalg import lstsq
-x_BS = lstsq(A, b, rcond=None)[0]
+from scipy.linalg import lstsq
+x_BS = lstsq(A, b)[0]
 print(f"observed error: {norm(x_BS - x) / norm(x):.3e}")
 print(f"conditioning bound: {kappa * finfo(float).eps:.3e}")
 ```
@@ -254,6 +255,7 @@ print(f"conditioning bound: {kappa * finfo(float).eps:.3e}")
 If we formulate and solve via the normal equations, we get a much larger relative error. With $\kappa^2\approx 10^{14}$, we may not be left with more than about 2 accurate digits.
 
 ```{code-cell}
+from scipy import linalg
 N = A.T @ A
 x_NE = linalg.solve(N, A.T @ b)
 relative_err = norm(x_NE - x) / norm(x)
@@ -267,7 +269,7 @@ print(f"accurate digits: {-log10(relative_err):.2f}")
 ``````{dropdown} @demo-qr-qrfact
 :open:
 
-MATLAB provides access to both the thin and full forms of the QR factorization.
+NumPy provides access to both the thin and full forms of the QR factorization.
 
 ```{code-cell}
 A = 1.0 + floor(9 * random.rand(6,4))

@@ -219,7 +219,7 @@ There are stronger and more general statements of @theorem-contraction. For inst
 
 ``````{exercise}
 :label: problem-fixedpoint-compute
-⌨ For each case in the preceding problem, apply 25 fixed-point iterations and use a log-linear graph of the error to verify linear convergence. Then use numerical values of the error to determine an approximate value for $\sigma$ in {eq}`linearconvergence`.
+⌨ For each case in the preceding problem, apply 25 fixed-point iterations starting from $x_1=1$. Make a log-linear plot of the error to verify linear convergence. Then use numerical values of the error to determine an approximate value for $\sigma$ in {eq}`linearconvergence`.
 ``````
 
 ``````{exercise}
@@ -253,6 +253,7 @@ In @demo-fp-spiral we defined $g(x)=x-f(x)$ to find a fixed point of the polynom
 ✍ The $m$th root of a positive real number $a$ is a fixed point of the function
 
 ```{math}
+:numbered: false
 g(x) = \frac{a}{x^{m-1}}.
 ```
 
@@ -273,6 +274,7 @@ For what integer values of $m>1$ will the fixed-point iteration for $g$ converge
 ✍  Consider the iteration
 
 ```{math}
+:numbered: false
 x_{k+1} = x_k - \frac{f(x_k)}{c}, \qquad k=0,1,\ldots.
 ```
 

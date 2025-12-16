@@ -259,7 +259,7 @@ Line 17 has an outer product followed by a matrix subtraction. The definition @d
 Altogether, the factorization takes
 
 ```{math}
-:label: gecount1
+:numbered: false
 \sum_{k=1}^{n-1} n-k + 1 + 2(n-k+1)^2
 ```
 
@@ -291,7 +291,7 @@ Line 17 has an outer product followed by a matrix subtraction. The definition @d
 Altogether, the factorization takes
 
 ```{math}
-:label: gecount1
+:numbered: false
 \sum_{k=1}^{n-1} n-k + 1 + 2(n-k+1)^2
 ```
 
@@ -321,7 +321,7 @@ Line 17 has an outer product followed by a matrix subtraction. The definition @d
 Altogether, the factorization takes
 
 ```{math}
-:label: gecount1
+:numbered: false
 \sum_{k=0}^{n-2} n-k + 2(n-k)^2 = \sum_{k=1}^{n-1} n-k + 1 + 2(n-k+1)^2
 ```
 
@@ -331,7 +331,14 @@ flops.
 
 `````
 
-There are different ways to simplify this expression. We will make a change of summation index using $j=n-k$. The endpoints of the sum are $j=n-1$ when $k=1$ and $j=1$ when $k=n-1$. Since the order of terms in a sum doesn't matter, we get
+There are different ways to simplify the total count,
+
+```{math}
+:label: gecount1
+\sum_{k=1}^{n-1} n-k + 1 + 2(n-k+1)^2.
+```
+
+We will make a change of summation index using $j=n-k$. The endpoints of the sum are $j=n-1$ when $k=1$ and $j=1$ when $k=n-1$. Since the order of terms in a sum doesn't matter, we get
 
 ```{math}
 \begin{align*}
@@ -488,14 +495,7 @@ The exact sums for $p=1,2$ in @sumflops are as follows:
 
 ``````{exercise}
 :label: problem-efficiency-triangular
-⌨ *(Julia-specific)* The `UpperTriangular` and `LowerTriangular` matrix types cause specialized algorithms to be invoked by the backslash. Define
+⌨ *(Julia or MATLAB only)* Because triangular systems are so much faster to solve than general systems, it's worthwhile for the backslash operator in Julia and MATLAB to detect triangular structure and use forward or backward substitution when possible. 
 
-```
-A = rand(1000,1000)
-B = tril(A)
-C = LowerTriangular(B)
-b = rand(1000)
-```
-
-Using `@elapsed` with the backslash solver, time how long it takes to solve the linear system $\mathbf{A}\mathbf{x}=\mathbf{b}$ 100 times; then, do the same for matrices $\mathbf{B}$ and $\mathbf{C}$. Is the timing for $\mathbf{B}$ closer to $\mathbf{A}$ or to $\mathbf{C}$? (Hint: Remember to make one timing run without recording results, so that compilation time is not counted.) 
+Define a random $1000\times 1000$ matrix $\mathbf{A}$, and a length-1000 random column vector $\mathbf{b}$. Then define `T = tril(A)` to get a lower-triangular matrix. Compare how long it takes to solve the systems $\mathbf{A}\mathbf{x}=\mathbf{b}$ and $\mathbf{T}\mathbf{x}=\mathbf{b}$ using the backslash operator. (You should solve 100 or more systems each time to get reliable timings.)
 ``````

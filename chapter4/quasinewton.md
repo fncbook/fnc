@@ -259,6 +259,7 @@ In some cases our simple logic in {numref}`Function {number} <function-levenberg
 ⌨ (Variation on @problem-newtonsys-orbitintersect.) Two elliptical orbits $(x_1(s),y_1(s))$ and $(x_2(t),y_2(t))$ are described by the equations
 
 ```{math}
+:numbered: false
 \begin{bmatrix}
 x_1(t) \\ y_1(t)
 \end{bmatrix}
@@ -286,6 +287,7 @@ where $t$ represents time.
 ⌨  (Variation on @problem-newtonsys-ellipsemin.) Suppose one wants to find the points on the ellipsoid $x^2/25 + y^2/16 + z^2/9 = 1$ that are closest to and farthest from the point $(5,4,3)$. The method of Lagrange multipliers implies that any such point satisfies
 
 ```{math}
+:numbered: false
 \begin{split}
 x-5 &= \frac{\lambda x}{25}, \\[1mm]
 y-4 &= \frac{\lambda y}{16}, \\[1mm]
@@ -307,6 +309,7 @@ for an unknown value of $\lambda$.
 ✍ The Broyden update formula {eq}`broyden` is just one instance of so-called rank-1 updating. Verify the  *Sherman–Morrison formula*,
 
 ```{math}
+:numbered: false
 (\mathbf{A}+\mathbf{u}\mathbf{v}^T)^{-1} = \mathbf{A}^{-1} - \mathbf{A}^{-1}\frac{\mathbf{u}\mathbf{v}^T}{1+\mathbf{v}^T\mathbf{A}^{-1}\mathbf{u}}\mathbf{A}^{-1},
 ```
 
@@ -323,6 +326,7 @@ which is valid whenever $\mathbf{A}$ is invertible and the denominator above is 
 ⌨ (See also @problem-newtonsys-byhand.) Suppose that
 
 ```{math}
+:numbered: false
 \mathbf{f}(\mathbf{x}) =
 \begin{bmatrix}
 x_1x_2+x_2^2-1 \\[1mm] x_1x_2^3 + x_1^2x_2^2 + 1
@@ -341,11 +345,12 @@ Let $\mathbf{x}_1=[-2,1]^T$ and let $\mathbf{A}_1=\mathbf{J}(\mathbf{x}_1)$ be t
 ✍ Show that Equation {eq}`levenberg` is equivalent to the linear least-squares problem
 
 ```{math}
+:numbered: false
 \min_{\mathbf{v}} \Bigl(  \bigl\|\mathbf{A}_k\mathbf{v} + \mathbf{f}_k\bigr\|_2^2 +
 \lambda^2 \bigl\| \mathbf{v} \bigr\|_2^2 \Bigr).
 ```
 
-(Hint: Express the minimized quantity using block matrix notation, such that {eq}`levenberg` becomes the normal equations for it.)
+(Hint: Express the least-squares residual using block matrix notation, such that {eq}`levenberg` becomes the normal equations for it.)
 
 Thus, another interpretation of Levenberg's method is that it is the Newton step plus a penalty, weighted by $\lambda$, for taking large steps.
 ``````

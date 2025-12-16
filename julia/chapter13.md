@@ -297,7 +297,7 @@ We define functions `extend` and `chop` to deal with the Dirichlet boundary cond
 ```{code-cell}
 chop = U -> U[2:m, 2:n]
 z = zeros(1, n-1)
-extend = W -> [zeros(m+1) [z; W; z] zeros(m+1)]
+extend = W -> [zeros(m+1) [z; W; z] zeros(m+1)];
 ```
 
 Next, we define the `pack` and `unpack` functions, using another call to @function-tensorgrid to get reshaping functions for the interior points. 
@@ -305,7 +305,7 @@ Next, we define the `pack` and `unpack` functions, using another call to @functi
 ```{code-cell}
 _, _, _, unvec, _ = FNC.tensorgrid(x[2:m], y[2:n])
 pack = U -> vec(chop(U))
-unpack = w -> extend(unvec(w))
+unpack = w -> extend(unvec(w));
 ```
 
 Now we can define and solve the IVP using a stiff solver.
@@ -315,8 +315,8 @@ function dw_dt(w, ϵ, t)
     U = unpack(w)
     Ux, Uxx = Dx * U, Dxx * U
     Uyy = U * Dyy'
-    du_dt = @. 1 - Ux + ϵ * (Uxx + Uyy)
-    return pack(du_dt)
+    dU_dt = @. 1 - Ux + ϵ * (Uxx + Uyy)
+    return pack(dU_dt)
 end
 
 IVP = ODEProblem(dw_dt, pack(U₀), (0.0, 2), 0.05)
@@ -373,7 +373,7 @@ We need to define chopping and extension for the $u$ component. This looks the s
 
 ```{code-cell}
 chop = U -> U[2:m, 2:n]
-extend = U -> [zeros(m+1) [zeros(1, n-1); U; zeros(1, n-1)] zeros(m+1)]
+extend = U -> [zeros(m+1) [zeros(1, n-1); U; zeros(1, n-1)] zeros(m+1)];
 ```
 
 While `vec` is the same for both the interior and full grids, the `unvec` operation is defined differently for them. 

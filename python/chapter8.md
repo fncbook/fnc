@@ -236,7 +236,7 @@ print(f"residual: {norm(b - A @ xx, 2):.1e}")
 ```
 
 ```{code-cell}
-from numpy.linalg import solve
+from scipy.linalg import solve
 F = A.todense()
 start = timer()
 xx = solve(F, b)
@@ -404,7 +404,7 @@ A = triu(ones([5, 5]), 1) + diag(ev)    # triangular matrix, eigs on diagonal
 We begin with a shift $s=0.7$, which is closest to the eigenvalue 0.6.
 
 ```{code-cell}
-from numpy.linalg import solve
+from scipy.linalg import solve
 s = 0.7
 x = ones(5)
 y = solve(A - s * eye(5), x)

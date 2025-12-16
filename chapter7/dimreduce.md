@@ -190,7 +190,23 @@ $$
 \end{bmatrix},
 $$
 
-as measured in the 2-norm, where $b>0$.
+as measured in the 2-norm, where $b>0$. It may help to know that $\mathbf{A}$ has the EVD
+
+```{math}
+:numbered: false
+\left(
+\frac{1}{2}
+\begin{bmatrix}
+1 & 1 \\ 1 & -1
+\end{bmatrix}
+\right)
+\begin{bmatrix}
+1 + b & 0 \\ 0 & 1 - b
+\end{bmatrix}
+\begin{bmatrix}
+1 & 1 \\ 1 & -1
+\end{bmatrix}.
+```
 ``````
 
 ``````{exercise}

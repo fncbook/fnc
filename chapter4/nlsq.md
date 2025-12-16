@@ -155,9 +155,9 @@ where $s$ is the concentration of a substrate. The real values $V$ and $K_m$ are
 
 ``````{exercise}
 :label: problem-nlsq-quadratic
-✍ (Continuation of @problem-nlsq-onevar.) The Gauss–Newton method replaces $\mathbf{f}(\mathbf{x})$ by a linear model and minimizes the norm of its residual. An alternative is to replace $\| \mathbf{f}(\mathbf{x}) \|_2^2$ by a scalar *quadratic* model $q(\mathbf{x})$ and minimize that.
+✍ (Continuation of @problem-nlsq-onevar.) The Gauss–Newton method replaces $\mathbf{f}(\mathbf{x})$ by a linear model and minimizes the norm of its residual. An alternative is to replace $\| \mathbf{f}(\mathbf{x}) \|_2^2$ by a scalar quadratic model $q(\mathbf{x})$, and minimize $q$.
 
-**(a)** Using $\mathbf{f}(x) = [ x-8, \; x^2-4 ]$, let $q(x)$ be defined by the first three terms in the Taylor series for $\| \mathbf{f}(x) \|_2^2$ at $x=2$.
+**(a)** Using $\mathbf{f}(x) = [ x-8, \; x^2-4 ]$, let $q(x)$ be defined by the first three terms in the Taylor series for $\phi(x) = \| \mathbf{f}(x) \|_2^2$ at $x=2$.
 
 **(b)** Find the unique $x$ that minimizes $q(x)$. Is the result the same as the estimate produced by Gauss–Newton?
 ``````
@@ -180,7 +180,7 @@ during 1906:
 
 **(a)** Use {numref}`Function {number} <function-levenberg>` to find the best least-squares fit to the data using the $\operatorname{sech}^2$ model. Make a plot of the model fit superimposed on the data. 
 
-**(b)** Repeat part (a) using only the first 15 data values.
+**(b)** Repeat part (a) using only the first 15 data values. (The fit will not be as good.)
 ``````
 
 ``````{exercise}
@@ -193,11 +193,37 @@ Then we can define the best circle as the one that minimizes $\|\mathbf{f}\|$.
 
 Define data points as follows:
 
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
 ``` julia
-m = 30; t = 2π*rand(m);
-x = @. -2 + 5*cos(t); y = @. 1 + 5*sin(t);
-x += 0.2*randn(m); y += 0.2*randn(m);
+m = 30
+t = 2π * rand(m)
+x = @. -2 + 5 * cos(t) + 0.2 * randn(m)
+y = @.  1 + 5 * sin(t) + 0.2 * randn(m);
 ```
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+``` matlab
+m = 30; 
+t = 2*pi * rand(m, 1);
+x = -2 + 5 * cos(t) + 0.2 * randn(m, 1);
+y =  1 + 5 * sin(t) + 0.2 * randn(m, 1);
+```
+````
+````{tab-item} Python
+:sync: python
+``` python
+import numpy as np
+m = 30;
+t = 2*np.pi * np.random.rand(m)
+x = -2 + 5 * np.cos(t) + 0.2 * np.random.randn(m)
+y =  1 + 5 * np.sin(t) + 0.2 * np.random.randn(m)
+```
+````
+`````
 
 Use {numref}`Function {number} <function-levenberg>` to find the best-fit circle, and make a plot of the circle superimposed on the points.
 ``````
@@ -206,22 +232,49 @@ Use {numref}`Function {number} <function-levenberg>` to find the best-fit circle
 :label: problem-nlsq-blink
 ⌨ The position of the upper lid during an eye blink can be measured from high-speed video {cite}`wuEffectsMild2014`, and it may be possible to classify blinks based in part on fits to the lid position {cite}`broschBlinkCharacterization2017`. The lid position functions proposed to fit blinks is a product of a monomial or polynomial multiplying a decaying exponential {cite}`berkeKineticsLid1998`.  In this problem, you will generate representative data, add a small amount of noise to it, and then perform nonlinear least-squares fits to the data.
 
-**(a)** Consider the function $y(\mathbf{a}) = a_1 t^2 \exp \left( -a_2 t^{a_3} \right)$, using the vector of coefficients $\mathbf{a} = [a_1,a_2,a_3]$, and create synthetic eyelid position data as follows:
+**(a)** Consider the fitting function $y(\mathbf{a}) = a_1 t^2 \exp \left( -a_2 t^{a_3} \right)$, using the vector of coefficients $\mathbf{a} = [a_1,a_2,a_3]$, and create synthetic eyelid position data as follows:
 
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
 ``` julia
-N = 20;                            # number of time values
-t = (1:N)/N;                       # equally spaced to t=1
-a = [10, 10, 2];                   # baseline values
-y = @. a(1)*t^2*exp(-a(2)*t^a(3)); # ideal data
-ym = copy(y);                      # vector for data
-ir = 1:N-1;                        # range to add noise
-noise = 0.03;                      # amplitude of noise
-ym[ir] += noise*rand(N-1);         # add noise
+N = 20;                                # number of t values
+t = (1:N) / N;                         # equally spaced to t=1
+a = [10, 10, 2];                       # baseline values
+y = @. a(1) * t^2 * exp(-a(2)*t^a(3)); # ideal data
+noise = 0.03;                          # amplitude of noise
+ym = y + noise * rand(N);              # add noise
 ```
+```` 
+
+````{tab-item} MATLAB
+:sync: matlab
+``` matlab
+N = 20;                              % number of t values
+t = (1:N)' / N;                      % equally spaced to t=1    
+a = [10, 10, 2];                     % baseline values
+y = a(1) * t.^2.*exp(-a(2)*t.^a(3)); % ideal data
+noise = 0.03;                        % amplitude of noise
+ym = y + noise * rand(N, 1);         % add noise
+```
+````
+````{tab-item} Python
+:sync: python
+``` python
+import numpy as np
+N = 20                                  # number of t values
+t = (np.arange(1, N+1)) / N;            # equally spaced to t=1
+a = [10, 10, 2]                         # baseline values
+y = a[0] * t**2 * np.exp(-a[1]*t**a[2]) # ideal data
+noise = 0.03                            # amplitude of noise
+ym = y + noise * np.random.rand(N)      # add noise
+```
+````
+`````
 
 **(b)** Using the data `(t,ym)`, find the nonlinear least-squares fit using {numref}`Function {number} <function-levenberg>`.
 
-**(c)** Plot the fits using `np = 100` points over `t=(1:np)/np` together with symbols for the `N` measured data points `ym`.
+**(c)** Plot the fit at 300 points in $t\in[0,1]$, together with the measured data points `ym`.
 
 **(d)** Increase the noise to 5% and 10%. You may have to increase the number of measured points `N` and/or the maximum number of iterations.  How close are the coefficients?  Plot the data and the resulting fit for each case.
 ``````

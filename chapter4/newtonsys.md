@@ -230,9 +230,10 @@ An implementation of Newton's method for systems is given in {numref}`Function {
 ✍ Suppose that
 
 ```{math}
+:numbered: false
 \mathbf{f}(\mathbf{x}) =
 \begin{bmatrix}
-x_1x_2+x_2^2-1 \\[1mm] x_1x_2^3 + x_1^2x_2^2 + 1
+x_1x_2 + x_2^2 - 1 \\[1mm] x_1 x_2^3 + x_1^2 x_2^2 + 1
 \end{bmatrix}.
 ```
 
@@ -263,6 +264,7 @@ Two curves in the $(u,v)$ plane are defined implicitly by the equations $u\log u
 Two elliptical orbits $(x_1(t),y_1(t))$ and $(x_2(t),y_2(t))$ are described by the equations
 
 ```{math}
+:numbered: false
 \begin{bmatrix}
 x_1(t) \\ y_1(t)
 \end{bmatrix}
@@ -282,18 +284,49 @@ where $t$ represents time.
 
 **(a)** ⌨ Make a plot of the two orbits with the following code:
 
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
 ``` julia
-x1(t) = -5+10*cos(t);   y1(t) = 6*sin(t);
-plot(x1,y1,0,2pi,aspect_ratio=1,legend=false)
-x2(t) = 8*cos(t);   y2(t) = 3 + 12*sin(t);
-plot!(x2,y2,0,2pi)
+x1(t) = -5 + 10cos(t);   y1(t) = 6sin(t);
+plot(x1, y1, 0, 2pi, aspect_ratio=1, label="Orbit 1")
+x2(t) = 8cos(t);   y2(t) = 3 + 12sin(t);
+plot!(x2, y2, 0, 2pi, label="Orbit 2")
 ```
+````
+````{tab-item} MATLAB
+:sync: matlab
+``` matlab
+t = linspace(0, 2*pi, 500)';
+x1 = -5 + 10*cos(t);   y1 = 6*sin(t);
+clf
+plot(x1, y1); hold on;  
+x2 = 8*cos(t);   y2 = 3 + 12*sin(t);
+plot(x2, y2);
+axis equal; grid on;
+```
+````
+````{tab-item} Python
+:sync: python
+``` python
+import numpy as np
+import matplotlib.pyplot as plt
+t = np.linspace(0, 2*np.pi, 100)
+x1 = -5 + 10*np.cos(t);   y1 = 6*np.sin(t)
+plt.plot(x1, y1, label='Orbit 1')
+x2 = 8*np.cos(t);   y2 = 3 + 12*np.sin(t)
+plt.plot(x2, y2, label='Orbit 2')
+plt.axis('equal'); plt.grid(True); plt.legend()
+plt.show()
+```
+````
+`````
 
 **(b)** ✍ Write out a $2\times 2$ nonlinear system of equations that describes an intersection of these orbits. (Note: An intersection is not the same as a collision—they don't have to occupy the same point at the same time.)
 
 **(c)** ✍ Write out the Jacobian matrix of this nonlinear system.
 
-**(d)** ⌨ Use {numref}`Function {number} <function-newtonsys>` to find all of the unique intersections.
+**(d)** ⌨ Use {numref}`Function {number} <function-newtonsys>` to find all of the unique intersections. Add them to the plot from part (a).
 
 ``````
 
@@ -302,6 +335,7 @@ plot!(x2,y2,0,2pi)
 ⌨  Suppose one wants to find the points on the ellipsoid $x^2/25 + y^2/16 + z^2/9 = 1$ that are closest to and farthest from the point $(5,4,3)$. The method of Lagrange multipliers implies that any such point satisfies
 
 ```{math}
+:numbered: false
 \begin{split}
 x-5 &= \frac{\lambda x}{25}, \\[1mm]
 y-4 &= \frac{\lambda y}{16}, \\[1mm]

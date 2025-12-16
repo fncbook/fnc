@@ -99,9 +99,10 @@ print(V)
 :::{index} Python; solve
 :::
 
-To solve a linear system $\mathbf{V} \mathbf{c} = \mathbf{y}$ for the vector of polynomial coefficients, we use `solve`, located in `numpy.linalg`:
+To solve a linear system $\mathbf{V} \mathbf{c} = \mathbf{y}$ for the vector of polynomial coefficients, we use `solve`, located in `scipy.linalg`:
 
-```{code-cell} 
+```{code-cell}
+from scipy import linalg
 c = linalg.solve(V, y)
 print(c)
 ```
@@ -375,7 +376,7 @@ print(cos(pi * x))
 (demo-systems-backslash-python)=
 ``````{dropdown} @demo-systems-backslash
 :open:
-For a square matrix $A$, the command `solve(A, B)` from `numpy.linalg` is mathematically equivalent to $\mathbf{A}^{-1} \mathbf{b}$. 
+For a square matrix $A$, the command `solve(A, b)` from `scipy.linalg` is mathematically equivalent to $\mathbf{A}^{-1} \mathbf{b}$. 
 
 ```{code-cell} 
 A = array([[1, 0, -1], [2, 2, 1], [-1, -3, 0]])
@@ -383,6 +384,7 @@ b = array([1, 2, 3])
 ```
 
 ```{code-cell}
+from scipy import linalg
 x = linalg.solve(A, b)
 print(x)
 ```
@@ -931,7 +933,7 @@ b - A @ x
 (demo-pivoting-builtin-python)=
 ``````{dropdown} @demo-pivoting-builtin
 :open:
-In `linalg.solve`, the matrix `A` is PLU-factored, followed by two triangular solves. If we want to do those steps seamlessly, we can use the `lu_factor` and `lu_solve` from `scipy.linalg`.
+In `scipy.solve`, the matrix `A` is PLU-factored, followed by two triangular solves. If we want to do those steps seamlessly, we can use `lu_factor` and `lu_solve`.
 
 ```{code-cell}
 from scipy.linalg import lu_factor, lu_solve
@@ -939,6 +941,7 @@ A = random.randn(500, 500)
 b = ones(500)  
 LU, perm = lu_factor(A)
 x = lu_solve((LU, perm), b)
+print(linalg.norm(b - A @ x))
 ```
 
 Why would we ever bother with this? In {numref}`section-linsys-efficiency` we showed that the factorization is by far the most costly part of the solution process. A factorization object allows us to do that costly step only once per matrix, but solve with multiple right-hand sides.
@@ -986,6 +989,7 @@ print(FNC.backsub( U, FNC.forwardsub(L, b) ))
 This effect is not due to ill conditioning of the problem—a solution with PLU factorization works perfectly:
 
 ```{code-cell}
+from scipy import linalg
 print(linalg.solve(A, b))
 ```
 ``````
@@ -997,10 +1001,10 @@ print(linalg.solve(A, b))
 ```{index} ! Python; norm
 ```
 
-The `norm` function from `numpy.linalg` computes vector norms.
+The `norm` function from `scipy.linalg` computes vector norms.
 
 ```{code-cell} 
-from numpy.linalg import norm
+from scipy.linalg import norm
 x = array([2, -3, 1, -1])
 print(norm(x))       # 2-norm by default
 ```
@@ -1018,7 +1022,7 @@ print(norm(x, 1))
 ``````{dropdown} @demo-norms-matrix
 :open:
 ```{code-cell} 
-from numpy.linalg import norm
+from scipy.linalg import norm
 A = array([ [2, 0], [1, -1] ])
 ```
 
@@ -1100,7 +1104,7 @@ As seen on the right-side plot, the image of the transformed vectors is an ellip
 ```{index} ! Python; cond
 ```
 
-The function `cond` from `numpy.linalg` is used to computes matrix condition numbers. By default, the 2-norm is used. As an example, the family of *Hilbert matrices* is famously badly conditioned. Here is the $6\times 6$  case. 
+The function `cond` from `scipy.linalg` is used to computes matrix condition numbers. By default, the 2-norm is used. As an example, the family of *Hilbert matrices* is famously badly conditioned. Here is the $6\times 6$  case. 
 
 ```{code-cell} 
 A = array([ 
@@ -1112,6 +1116,7 @@ print(A)
 
 ```{code-cell} 
 from numpy.linalg import cond
+from scipy import linalg
 kappa = cond(A)
 print(f"kappa is {kappa:.3e}")
 ```
@@ -1127,9 +1132,9 @@ Now we perturb the data randomly with a vector of norm $10^{-12}$.
 
 ```{code-cell} 
 dA = random.randn(6, 6)
-dA = 1e-12 * (dA / norm(dA, 2))
+dA = 1e-12 * (dA / linalg.norm(dA, 2))
 db = random.randn(6)
-db = 1e-12 * (db / norm(db, 2))
+db = 1e-12 * (db / linalg.norm(db, 2))
 ```
 
 We solve the perturbed problem using built-in pivoted LU and see how the solution was changed.
@@ -1142,21 +1147,21 @@ dx = x - x_exact
 Here is the relative error in the solution.
 
 ```{code-cell} 
-print(f"relative error is {norm(dx) / norm(x_exact):.2e}")
+print(f"relative error is {linalg.norm(dx) / linalg.norm(x_exact):.2e}")
 ```
 
 And here are upper bounds predicted using the condition number of the original matrix. 
 
 ```{code-cell} 
-print(f"b_bound: {kappa * 1e-12 / norm(b):.2e}")
-print(f"A_bound: {kappa * 1e-12 / norm(A, 2):.2e}")
+print(f"b_bound: {kappa * 1e-12 / linalg.norm(b):.2e}")
+print(f"A_bound: {kappa * 1e-12 / linalg.norm(A, 2):.2e}")
 ```
 
 Even if we don't make any manual perturbations to the data, machine epsilon does when we solve the linear system numerically.
 
-```{code-cell} 
+```{code-cell}
 x = linalg.solve(A, b)
-print(f"relative error: {norm(x - x_exact) / norm(x_exact):.2e}")
+print(f"relative error: {linalg.norm(x - x_exact) / linalg.norm(x_exact):.2e}")
 print(f"rounding bound: {kappa / 2**52:.2e}")
 
 ```
@@ -1186,7 +1191,7 @@ x = linalg.solve(A, b)
 We got an answer. But in fact, the error does exceed 100%:
 
 ```{code-cell} 
-print(f"relative error: {norm(x - x_exact) / norm(x_exact):.2e}")
+print(f"relative error: {linalg.norm(x - x_exact) / linalg.norm(x_exact):.2e}")
 ```
 ``````
 
@@ -1210,7 +1215,7 @@ A = array([
 ```{index} ! Python; diag
 ```
 
-We can extract the elements on any diagonal using the `diag` command. The "main" or central diagonal is numbered zero, above and to the right of that is positive, and below and to the left is negative.
+We can extract the elements on any diagonal using the `diag` function from `numpy`. The "main" or central diagonal is numbered zero, above and to the right of that is positive, and below and to the left is negative.
 
 ```{code-cell} 
 print( diag(A) )
@@ -1320,8 +1325,8 @@ Similarly, a random symmetric matrix is unlikely to be positive definite. The Ch
 
 ```{code-cell} 
 :tags: raises-exception
-from numpy.linalg import cholesky
-cholesky(B)    # raises an exception, not positive definite
+from scipy.linalg import cholesky
+cholesky(B)    # raises an error: not positive definite
 ```
 
 It's not hard to manufacture an SPD matrix to try out the Cholesky factorization:
@@ -1333,6 +1338,10 @@ print(R)
 ```
 
 ```{code-cell} 
-print(norm(R @ R.T - B) / norm(B))
+print(norm(R.T @ R - B) / norm(B))
+```
+
+```{warning} 
+The `cholesky` function does *not* check for symmetry. It may give a nonsensical result if the input is not symmetric.
 ```
 ``````

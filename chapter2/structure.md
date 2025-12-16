@@ -334,10 +334,11 @@ A_{ij} = \begin{cases} \frac{1}{i+j}, & -1 \le i-j \le 2,\\
 
 ⌨ *(Julia-specific)* The `Tridiagonal` matrix type invokes a specialized algorithm for solving a linear system. 
 
-**(a)** Set `n=1000` and `t=0`.  In a loop that runs 50 times, generate a linear system via 
+**(a)** Set `n=2000` and `t=0`.  In a loop that runs 100 times, generate a linear system via 
 ``` julia
-A = triu( tril(rand(n,n),1), -1)
+A = triu( tril(rand(n, n),1), -1)
 b = ones(n)
+x = A \ b
 ```
 Using `@elapsed`, increment `t` by the time it takes to perform `A\b`. Print out the final value of `t`.
 
@@ -347,7 +348,7 @@ A = Tridiagonal(rand(n,n))
 ```
 What is the ratio of running times for part (a) and (b)?
 
-**(c)** Now perform the experiment of part (b) for $n=1000,1200,1400,\ldots,3000$, keeping the total time for each value of $n$ in a vector. Plot running time as a function of $n$ on a log-log scale. Is the time most like $O(n)$, $O(n^2)$, or $O(n^3)$? (If the answer is unclear, try increasing the number of solves per value of $n$ to 100 or more.)
+**(c)** Now perform the experiment of part (b) for $n=2000,2400,2800,\ldots,4000$, keeping the total time for each value of $n$ in a vector. Plot running time as a function of $n$ on a log-log scale. Is the time most like $O(n)$, $O(n^2)$, or $O(n^3)$? (If the answer is unclear, try increasing the number of solves per value of $n$ to 100 or more.)
 ``````
 
 ``````{exercise}

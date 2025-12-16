@@ -194,8 +194,8 @@ as $h\rightarrow 0$.
 Define the global error sequence $ϵ_i=\hat{u}(t_i)-u_i$. Using {eq}`onestepODE`, we obtain
   
 ```{math}
-  ϵ_{i+1} - ϵ_i = \hat{u}(t_{i+1}) - \hat{u}(t_i) - ( {u}_{i+1} - u_i ) =
-  \hat{u}(t_{i+1}) - \hat{u}(t_i) - h\phi(t_i,u_i,h),
+ϵ_{i+1} - ϵ_i = \hat{u}(t_{i+1}) - \hat{u}(t_i) - ( {u}_{i+1} - u_i ) =
+\hat{u}(t_{i+1}) - \hat{u}(t_i) - h\phi(t_i,u_i,h),
 ```
 
 or
@@ -307,7 +307,7 @@ Euler's method is the ancestor of the two major families of IVP methods presente
 
 **(b)** $u' = u + t, \ 0 \le t \le 1, \ u(0) = 2;\  \hat{u}(t) = -1-t+3e^t$
 
-**(c)** $(1+t^3)uu' = t^2,\ 0 \le xt \le 3, \ u(0) =1;\ \hat{u}(t) = [1+(2/3)\ln (1+xt^3)]^{1/2}$
+**(c)** $(1+t^3)uu' = t^2,\ 0 \le t \le 3, \ u(0) =1;\ \hat{u}(t) = [1+(2/3)\ln (1+t^3)]^{1/2}$
 
 **(d)** $u' - 2u(1-u) = 0, \ 0 \le t \le 2, \ u(0) = 1/2; \ \hat{u}(t) = 1/(1 + e^{-2t})$
 
@@ -336,7 +336,7 @@ u_{i+1} &= u_i + hf(t_{i}+h,v_{i+1}).
 
 ``````{exercise}
 :label: problem-euler-bounded
-✍ Consider the problem $u'=ku$, $u(0)=1$ for constant $k$ and $t>0$.
+✍ Consider the problem $u'=ku$, $u(0)=1$ for a real constant $k$ and $t>0$.
 
 **(a)** Find an explicit formula in terms of $h$, $k$, and $i$ for the Euler solution $u_i$ at $t=ih$.
 
@@ -351,5 +351,5 @@ u_{i+1} &= u_i + hf(t_{i}+h,v_{i+1}).
 
 ``````{exercise}
 :label: problem-euler-roundoff
-✍ Suppose that the error in making a step is also subject to roundoff error $\epsilon_{i+1}$, so that the total local error per unit step is $Ch^p+\epsilon_{i+1} h^{-1}$; assume that $|\epsilon_{i+1}| \le \epsilon$ for all $i$ and that the initial condition is known exactly. Generalize @theorem-euler-onestepGTE for this case.
+✍ Suppose that the error in making a step is also subject to roundoff error, so that the total local error per unit step is $Ch^p + \delta_{i+1} h^{-1}$. Assume that $|\delta_{i+1}| \le \macheps$ for all $i$ and that the initial condition is known exactly. Generalize @theorem-euler-onestepGTE for this case.
 ``````

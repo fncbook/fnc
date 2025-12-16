@@ -373,7 +373,7 @@ which is known as a **Gregory integration formula**.
 
 ``````{exercise}
 :label: problem-integration-gregoryuse
-⌨ Repeat each integral in @problem-integration-tests using Gregory integration {eq}`gregory` instead of the trapezoid formula. Compare the observed errors to fourth-order convergence.
+⌨ For the integrals in (a)–(c) of @problem-integration-tests, use Gregory integration {eq}`gregory` instead of the trapezoid formula. Compare the observed errors to fourth-order convergence.
 
 ``````
 
@@ -384,6 +384,7 @@ which is known as a **Gregory integration formula**.
 **(a)** Show that
 
 ```{math}
+:numbered: false
 p(x) = \beta + \frac{\gamma-\alpha}{2h}\, x + \frac{\alpha-2\beta+\gamma}{2h^2}\, x^2
 ```
 
@@ -392,6 +393,7 @@ interpolates the three points $(-h,\alpha)$, $(0,\beta)$, and $(h,\gamma)$.
 **(b)** Find
 
 ```{math}
+:numbered: false
 \int_{-h}^h p(s)\, ds,
 ```
 
@@ -418,12 +420,12 @@ where $p$ is the quadratic polynomial from part (a), in terms of $h$, $\alpha$, 
 
 ``````{exercise}
 :label: problem-integration-simpsonextrap
-✍ Show that the Simpson formula {eq}`simpson` is equivalent to $S_f(n/2)$, given the definition of $S_f$ in {eq}`nc-simpson`.
+✍ Show that the Simpson formula {eq}`simpson` is equivalent to $S_f(n/2),$ given the definition of $S_f$ in {eq}`nc-simpson`.
 ``````
 
 ``````{exercise}
 :label: problem-integration-simpsonconverge
-⌨ For each integral in @problem-integration-tests, apply the Simpson formula {eq}`simpson` and compare the errors to fourth-order convergence.
+⌨ For the integrals in (a)–(c) of @problem-integration-tests, apply the Simpson formula {eq}`simpson` and compare the errors to fourth-order convergence.
 ``````
 
 ``````{exercise}
@@ -439,7 +441,8 @@ Make two separate plots of the absolute error as a function of $n$, one using a 
 ``````
 
 ``````{exercise}
-⌨ For each integral in @problem-integration-tests above, extrapolate the trapezoidal results two levels to get sixth-order accurate results, and compute the errors for each value.
+:label: problem-integration-extrap6
+⌨ For the integrals in (a)–(c) of @problem-integration-tests, extrapolate the trapezoidal results for $n=32,48,72,108,162$ two levels to get sixth-order accurate results, and make table of the errors.
 ``````
 
 ``````{exercise}
