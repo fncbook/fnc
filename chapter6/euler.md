@@ -323,6 +323,7 @@ Euler's method is the ancestor of the two major families of IVP methods presente
  ✍ Here is an alternative to Euler's method:
 
 ```{math}
+:numbered: false
 \begin{split}
 v_{i+1} &= u_i + h f(t_i,u_i),\\
 u_{i+1} &= u_i + hf(t_{i}+h,v_{i+1}).
