@@ -143,7 +143,7 @@ where rows $1,\ldots,n$ of $\tilde{\mathbf{A}}$ are rows $i_1,\ldots,i_n$ of $\m
 
 ````{tab-item} MATLAB
 :sync: matlab
-:::{embed} #function-plufact-julia
+:::{embed} #function-plufact-matlab
 :::
 ```` 
 
