@@ -21,8 +21,16 @@ docs/site/
 # It records a fixed state of all packages used by the project. As such, it should not be
 # committed for packages, but should be committed for applications that require a static
 # environment.
-_build
 
+_build
+separate/**/_static
+separate/**/exports
+separate/**/python/fncbook
+separate/**/matlab/FNC_matlab
+separate/**/julia/FNCFunctions
+
+
+exports
 .ipynb_checkpoints
 **/__pycache__
 python/**/dist
