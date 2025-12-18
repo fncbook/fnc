@@ -51,7 +51,8 @@ numbering:
 ```{code-cell}
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
-FNC_init;;
+FNC_init;
+1+1;
 ```
 
 ### 8.1 @section-krylov-structure
@@ -859,4 +860,4 @@ xlabel('iteration number'), ylabel('residual norm')
 title('Precondtioned GMRES ')
 legend('no preconditioner', 'with preconditioner');
 ```
-```
+``````

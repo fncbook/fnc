@@ -74,7 +74,6 @@ The intended way for a user to call {numref}`Function {number} <function-intadap
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init;
-pwd;;
 ```
 
 ### 5.1 @section-localapprox-interpolation

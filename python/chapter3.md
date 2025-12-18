@@ -52,6 +52,7 @@ numbering:
 
 ```{code-cell} ipython3
 :tags: remove-cell
+1+1
 exec(open("FNC_init.py").read())
 ```
 
@@ -323,6 +324,7 @@ b = A @ x
 The error in the solution by {numref}`Function {number} <function-lsqrfact>` is similar to the bound predicted by the condition number.
 
 ```{code-cell}
+from numpy.linalg import cond
 print(f"observed error: {norm(FNC.lsqrfact(A, b) - x) / norm(x):.3e}")
 print(f"conditioning bound: {cond(A) * finfo(float).eps:.3e}")
 ```

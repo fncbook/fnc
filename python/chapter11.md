@@ -38,6 +38,7 @@ numbering:
 
 ```{code-cell}
 :tags: remove-cell
+1+1
 exec(open("FNC_init.py").read())
 ```
 
@@ -125,11 +126,11 @@ def animate(j):
 
 anim = animation.FuncAnimation(
     fig, animate, frames=range(0, n+1, 10), blit=True);
-anim.save("figures/black-scholes-6.mp4", fps=30)
+anim.save("black-scholes-6.mp4", fps=30)
 close()
 ```
 
-![Black–Scholes solution](figures/black-scholes-6.mp4)
+![Black–Scholes solution](black-scholes-6.mp4)
 
 The results are easy to interpret, recalling that the time variable really means *time until strike*. Say you are close to the option's strike time. If the current stock price is, say, $S=2$, then it's not likely that the stock will end up over the strike price $K=3$, and therefore the option has little value. On the other hand, if presently $S=3$, then there are good odds that the option will be exercised at the strike time, and you will need to pay a substantial portion of the stock price in order to take advantage. As the time to strike increases, there is an expectation that the stock price is more likely to rise somewhat, making the value of the option larger at each fixed $S$. 
 ``````
@@ -192,11 +193,11 @@ def animate(j):
 
 anim = animation.FuncAnimation(
     fig, animate, frames=range(0, n+1), blit=True);
-anim.save("figures/black-scholes-8.mp4", fps=24)
+anim.save("black-scholes-8.mp4", fps=24)
 close()
 ```
 
-![Trouble in Black–Scholes solution](figures/black-scholes-8.mp4)
+![Trouble in Black–Scholes solution](black-scholes-8.mp4)
 
 This so-called solution is nonsense!
 ``````
@@ -264,11 +265,11 @@ def animate(j):
 
 anim = animation.FuncAnimation(
     fig, animate, frames=range(0, 100), blit=True)
-anim.save("figures/diffusionFE.mp4", fps=24)
+anim.save("diffusionFE.mp4", fps=24)
 close()
 ```
 
-![Instability in Euler solution](figures/diffusionFE.mp4)
+![Instability in Euler solution](diffusionFE.mp4)
 
 The growth in norm is exponential in time.
 
@@ -310,11 +311,11 @@ time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
 
 anim = animation.FuncAnimation(
     fig, animate, frames=range(0, n+1, 20), blit=True)
-anim.save("figures/diffusionBE.mp4", fps=30)
+anim.save("diffusionBE.mp4", fps=30)
 close()
 ```
 
-![Stable Backward Euler solution](figures/diffusionBE.mp4)
+![Stable Backward Euler solution](diffusionBE.mp4)
 
 This solution looks physically plausible, as the large concentration in the center diffuses outward until the solution is essentially constant. Observe that the solution remains periodic in space for all time.
 ``````
@@ -578,10 +579,10 @@ def animate(t):
 
 anim = animation.FuncAnimation(
     fig, animate, frames=linspace(0, 0.75, 201), blit=True)
-anim.save("figures/boundaries-heat.mp4", fps=30)
+anim.save("boundaries-heat.mp4", fps=30)
 close()
 ```
-![Heat equation with Dirichlet boundaries](figures/boundaries-heat.mp4)
+![Heat equation with Dirichlet boundaries](boundaries-heat.mp4)
 
 ``````
 
@@ -609,11 +610,11 @@ time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
 
 anim = animation.FuncAnimation(
     fig, animate, frames=linspace(0, 0.1, 101), blit=True)
-anim.save("figures/boundaries-source.mp4", fps=30)
+anim.save("boundaries-source.mp4", fps=30)
 close()
 ```
 
-![Heat equation with source](figures/boundaries-source.mp4)
+![Heat equation with source](boundaries-source.mp4)
 ``````
 
 (demo-boundaries-bs-python)=
@@ -643,10 +644,10 @@ time_text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
 
 anim = animation.FuncAnimation(
     fig, animate, frames=linspace(0, 15, 151), blit=True)
-anim.save("figures/boundaries-bs.mp4", fps=30)
+anim.save("boundaries-bs.mp4", fps=30)
 close()
 ```
-![Black–Scholes equation with boundaries](figures/boundaries-bs.mp4)
+![Black–Scholes equation with boundaries](boundaries-bs.mp4)
 
 Recall that $u$ is the value of the call option, and time runs backward from the strike time. The longer the horizon, the more value the option has due to anticipated growth in the stock price.
 ``````

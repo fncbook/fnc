@@ -12,6 +12,7 @@ numbering:
 
 ```{code-cell}
 :tags: remove-cell
+1+1
 exec(open("FNC_init.py").read())
 ```
 
@@ -67,11 +68,11 @@ def snapshot(t):
 anim = animation.FuncAnimation(
     fig, snapshot, frames=linspace(0, 3, 201)
     )
-anim.save("figures/advection-periodic.mp4", fps=30)
+anim.save("advection-periodic.mp4", fps=30)
 close()
 ```
 
-![Advection with periodic boundary](figures/advection-periodic.mp4)
+![Advection with periodic boundary](advection-periodic.mp4)
 
 ``````
 
@@ -139,11 +140,11 @@ ax.set_title("Traffic flow")
 anim = animation.FuncAnimation(
     fig, snapshot, frames=linspace(0, 1, 101)
     )
-anim.save("figures/traffic-small.mp4", fps=30)
+anim.save("traffic-small.mp4", fps=30)
 close()
 ```
 
-![Traffic flow simulation](figures/traffic-small.mp4)
+![Traffic flow simulation](traffic-small.mp4)
 
 Now we use an initial condition with a larger bump. Note that the scale on the $y$-axis is much different for this solution.
 
@@ -174,11 +175,11 @@ ax.set_title("Traffic jam")
 anim = animation.FuncAnimation(
     fig, snapshot, frames=linspace(0, 0.5, 101)
     )
-anim.save("figures/traffic-jam.mp4", fps=30)
+anim.save("traffic-jam.mp4", fps=30)
 close()
 ```
 
-![Traffic jam simulation](figures/traffic-jam.mp4)
+![Traffic jam simulation](traffic-jam.mp4)
 
 In this case the density bump travels backward along the road. It also steepens on the side facing the incoming traffic and decreases much more slowly on the other side. A motorist would experience this as an abrupt increase in density, followed by a much more gradual decrease in density and resulting gradual increase in speed. (You also see some transient, high-frequency oscillations. These are caused by instabilities, as we discuss in simpler situations later in this chapter.)
 
@@ -191,6 +192,7 @@ In this case the density bump travels backward along the road. It also steepens 
 For time stepping, we use the adaptive explicit method `RK45`.
 
 ```{code-cell}
+from scipy.integrate import solve_ivp
 x, Dx, Dxx = FNC.diffper(400, [0, 1])
 u_init = exp(-80 * (x - 0.5) ** 2)
 c = 2
@@ -276,11 +278,11 @@ def snapshot(t):
 anim = animation.FuncAnimation(
     fig, snapshot, frames=linspace(0, 1, 101)
     )
-anim.save("figures/advection-inflow.mp4", fps=30)
+anim.save("advection-inflow.mp4", fps=30)
 close()
 ```
 
-![Advection with inflow BC](figures/advection-inflow.mp4)
+![Advection with inflow BC](advection-inflow.mp4)
 
 If, instead of $u(1,t)=0$, we were to try to impose the downwind condition $u(0,t)=0$, we only need to change the index of the interior nodes and where to append the zero value.
 
@@ -316,11 +318,11 @@ ax.set_title("Advection with outflow BC")
 anim = animation.FuncAnimation(
     fig, snapshot, frames=linspace(0, 0.5, 51)
     )
-anim.save("figures/advection-outflow.mp4", fps=30)
+anim.save("advection-outflow.mp4", fps=30)
 close()
 ```
 
-![Advection with outflow BC](figures/advection-outflow.mp4)
+![Advection with outflow BC](advection-outflow.mp4)
 ``````
 
 ### 12.3 @section-advection-absstab
@@ -455,6 +457,7 @@ w_init = hstack([chop(u_init), z_init])
 Because the wave equation is hyperbolic, we can use a nonstiff explicit solver.
 
 ```{code-cell}
+from scipy.integrate import solve_ivp
 c = 2
 sol = solve_ivp(dw_dt, (0, 2), w_init, dense_output=True)
 u = lambda t: extend(sol.sol(t)[:m-1])   # extract the u component
@@ -488,11 +491,11 @@ def snapshot(t):
 anim = animation.FuncAnimation(
     fig, snapshot, frames=linspace(0, 2, 161)
     )
-anim.save("figures/wave-boundaries.mp4", fps=30)
+anim.save("wave-boundaries.mp4", fps=30)
 close()
 ```
 
-![Wave equation with boundaries](figures/wave-boundaries.mp4)
+![Wave equation with boundaries](wave-boundaries.mp4)
 
 The original hump breaks into two pieces of different amplitudes, each traveling with speed $c=2$. They pass through one another without interference. When a hump encounters a boundary, it is perfectly reflected, but with inverted shape. At time $t=2$, the solution looks just like the initial condition.
 
@@ -536,11 +539,11 @@ ax.set_title("Wave equation with variable speed")
 anim = animation.FuncAnimation(
     fig, snapshot, frames=linspace(0, 5, 251)
     )
-anim.save("figures/wave-speed.mp4", fps=30)
+anim.save("wave-speed.mp4", fps=30)
 close()
 ```
 
-![Wave equation with variable speed](figures/wave-speed.mp4)
+![Wave equation with variable speed](wave-speed.mp4)
 
 Each pass through the interface at $x=0$ generates a reflected and transmitted wave. By conservation of energy, these are both smaller in amplitude than the incoming bump.
 ``````

@@ -68,6 +68,7 @@ Line 11 of {numref}`Function {number} <function-lufact>` points out a subtle iss
 
 ```{code-cell} 
 :tags: remove-cell
+1+2
 exec(open("FNC_init.py").read())
 ```
 

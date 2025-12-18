@@ -94,6 +94,7 @@ Note that a default value is given for the third argument `y₀`, and it refers 
 
 ```{code-cell} ipython3
 :tags: remove-cell
+1+1
 exec(open("FNC_init.py").read())
 ```
 
@@ -438,6 +439,7 @@ df_dx = lambda x: exp(x) * (x + 1)
 We don't know the exact root, so we use `nlsolve` to determine a proxy for it.
 
 ```{code-cell}
+from scipy.optimize import root_scalar
 r = root_scalar(f, bracket=[0.8, 1.0]).root
 print(r)
 ```

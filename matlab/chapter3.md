@@ -43,8 +43,7 @@ numbering:
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init;;
-pwd;;
-pwd
+1+1;
 ```
 
 ### 3.1 @section-leastsq-fitting

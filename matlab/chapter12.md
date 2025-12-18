@@ -14,6 +14,7 @@ numbering:
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init;
+1+1;
 ```
 
 ### 12.1 @section-advection-traffic

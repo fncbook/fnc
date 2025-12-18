@@ -14,7 +14,7 @@ numbering:
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init;
-pwd;
+1+1;
 ```
 
 ### 7.1 @section-matrixanaly-insight

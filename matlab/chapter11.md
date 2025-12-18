@@ -33,7 +33,8 @@ numbering:
 ```{code-cell}
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
-FNC_init; pwd;
+FNC_init;
+1+1;
 ```
 
 ### 11.1 @section-diffusion-blackscholes

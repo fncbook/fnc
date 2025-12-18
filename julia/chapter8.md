@@ -88,7 +88,7 @@ using SparseArrays, JLD2
 We may define the density of $\mathbf{A}$ as the number of nonzeros divided by the total number of entries.
 ```{tip}
 :class: dropdown
-Use `nnz` to count the number of nonzeros in a sparse matrix.
+Use `nnz` from `SparseArrays` to count the number of nonzeros in a sparse matrix.
 ```
 
 ```{code-cell}
@@ -826,7 +826,7 @@ plot!(Gray.(Y), subplot=2, title="Deblurred")
 Here is an SPD matrix that arises from solving partial differential equations.
 
 ```{code-cell}
-using MatrixDepot
+using MatrixDepot, SparseArrays
 A = matrixdepot("wathen", 60)
 n = size(A, 1)
 @show n, nnz(A);

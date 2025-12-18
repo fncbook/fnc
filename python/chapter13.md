@@ -50,6 +50,7 @@ numbering:
 
 ```{code-cell}
 :tags: remove-cell
+1+1
 exec(open("FNC_init.py").read())
 ```
 
@@ -289,11 +290,11 @@ def snapshot(t):
     time_text.set_text(f"t = {t:.2f}")
 
 anim = animation.FuncAnimation(fig, snapshot, frames=linspace(0, 0.2, 41))
-anim.save("figures/heat-2d.mp4", fps=30)
+anim.save("heat-2d.mp4", fps=30)
 close()
 ```
 
-![Heat equation in 2d](figures/heat-2d.mp4)
+![Heat equation in 2d](heat-2d.mp4)
 
 ``````
 
@@ -372,11 +373,11 @@ def snapshot(t):
     time_text.set_text(f"t = {t:.2f}")
 
 anim = animation.FuncAnimation(fig, snapshot, frames=linspace(0, 2, 81))
-anim.save("figures/advdiff-2d.mp4", fps=30)
+anim.save("advdiff-2d.mp4", fps=30)
 close()
 ```
 
-![Advection-diffusion in 2d](figures/advdiff-2d.mp4)
+![Advection-diffusion in 2d](advdiff-2d.mp4)
 ``````
 
 (demo-diffadv-wave-python)=
@@ -449,11 +450,11 @@ def snapshot(t):
     time_text.set_text(f"t = {t:.2f}")
 
 anim = animation.FuncAnimation(fig, snapshot, frames=linspace(0, 4, 91))
-anim.save("figures/wave-2d.mp4", fps=30);
+anim.save("wave-2d.mp4", fps=30);
 close()
 ```
 
-![Wave equation in 2d](figures/wave-2d.mp4)
+![Wave equation in 2d](wave-2d.mp4)
 ``````
 
 ### 13.3 @section-twodim-laplace

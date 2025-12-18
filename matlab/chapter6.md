@@ -100,7 +100,7 @@ Lines 32--34 define the function $\mathbf{g}$. This is sent to `levenberg` in li
 :tags: [remove-cell]
 cd  /Users/driscoll/Documents/GitHub/fnc/matlab
 FNC_init;
-pwd
+1+1;
 ```
 
 ### 6.1 @section-ivp-basics

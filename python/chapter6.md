@@ -106,7 +106,7 @@ Lines 22-23 define the function $\mathbf{g}$ and call `levenberg` to find the ne
 
 ```{code-cell} ipython3
 :tags: remove-cell
-print("1")
+1+1
 exec(open("FNC_init.py").read())
 ```
 
@@ -378,11 +378,11 @@ def snapshot(t):
 anim = animation.FuncAnimation(
     fig, snapshot, frames=linspace(0, 60, 801)
     )
-anim.save("figures/predator-prey.mp4", fps=24)
+anim.save("predator-prey.mp4", fps=24)
 close()
 ```
 
-![Predator–prey solution](figures/predator-prey.mp4)
+![Predator–prey solution](predator-prey.mp4)
 ``````
 
 (demo-systems-coupledpendula-python)=
@@ -444,10 +444,10 @@ def snapshot(i):
     time_.set_text(f"t = {sol.t[i]:.1f} s")
 
 anim = animation.FuncAnimation(fig, snapshot, frames=401)
-anim.save("figures/pendulums-weak.mp4", fps=24)
+anim.save("pendulums-weak.mp4", fps=24)
 ```
 
-![Uncoupled pendulums](figures/pendulums-weak.mp4)
+![Uncoupled pendulums](pendulums-weak.mp4)
 
 Because the model is nonlinear and the initial angles are not small, they have slightly different periods of oscillation, and they go in and out of phase.
 
@@ -466,10 +466,10 @@ The coupling makes the pendulums swap energy back and forth:
 ```{code-cell}
 :tags: [hide-input, remove-output]
 anim = animation.FuncAnimation(fig, snapshot, frames=1001)
-anim.save("figures/pendulums-strong.mp4", fps=24)
+anim.save("pendulums-strong.mp4", fps=24)
 ```
 
-![Coupled pendulums](figures/pendulums-strong.mp4)
+![Coupled pendulums](pendulums-strong.mp4)
 ``````
 
 ### 6.4 @section-ivp-rk

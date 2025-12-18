@@ -12,6 +12,7 @@ numbering:
 
 ```{code-cell} ipython3
 :tags: remove-cell
+1+1
 exec(open("FNC_init.py").read())
 ```
 
@@ -411,6 +412,8 @@ savefig("hello.png")
 ```
 
 ```{code-cell}
+from skimage.io import imread
+from skimage.color import rgb2gray
 img = imread("hello.png")[:, :, :3]
 A = rgb2gray(img)
 print(f"image of size {A.shape}")

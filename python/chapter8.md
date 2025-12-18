@@ -62,6 +62,7 @@ numbering:
 
 ```{code-cell} ipython3
 :tags: remove-cell
+1+1
 exec(open("FNC_init.py").read())
 ```
 
@@ -682,12 +683,11 @@ hist = lambda x: resid.append(norm(b - A @ x))
 
 resid = [norm(b)]
 xMR, flag = minres(A, b, rtol=1e-12, maxiter=100, callback=hist)
-semilogy(resid / norm(b), label="MINRES")
+semilogy(array(resid) / norm(b), label="MINRES")
 
 resid = [norm(b)]
 xCG, flag = cg(A, b, rtol=1e-12, maxiter=100, callback=hist)
-semilogy(resid / norm(b), label="CG")
-
+semilogy(array(resid) / norm(b), label="CG")
 xlabel("Krylov dimension $m$"), ylabel("$\\|r_m\\| / \\|b\\|$")
 grid(),  legend(),  title("Convergence of MINRES and CG");
 ```
@@ -714,12 +714,11 @@ hist = lambda x: resid.append(norm(b - A @ x))
 
 resid = [norm(b)]
 xMR, flag = minres(A, b, rtol=1e-12, maxiter=400, callback=hist)
-semilogy(resid / norm(b), label="MINRES")
+semilogy(array(resid) / norm(b), label="MINRES")
 
 resid = [norm(b)]
 xCG, flag = cg(A, b, rtol=1e-12, maxiter=400, callback=hist)
-semilogy(resid / norm(b), label="CG")
-
+semilogy(array(resid) / norm(b), label="CG")
 xlabel("Krylov dimension $m$"), ylabel("$\\|r_m\\| / \\|b\\|$")
 grid(),  legend(),  title("Convergence of MINRES and CG")
 

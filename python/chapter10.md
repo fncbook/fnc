@@ -95,6 +95,7 @@ The nested function `residual` uses differentiation matrices computed externally
 
 ```{code-cell}
 :tags: remove-cell
+1+1
 exec(open("FNC_init.py").read())
 ```
 

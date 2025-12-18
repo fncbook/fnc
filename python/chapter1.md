@@ -27,6 +27,7 @@ numbering:
 
 ```{code-cell} ipython3
 :tags: remove-cell
+1+1
 exec(open("FNC_init.py").read())
 ```
 
@@ -70,7 +71,7 @@ print(f"absolute accuracy: {abs(p - pi)}")
 
 ```{code-cell} ipython3
 rel_acc = abs(p - pi) / pi
-print("relative accuracy: {rel_acc:.4e}")
+print(f"relative accuracy: {rel_acc:.4e}")
 ```
 
 Here we calculate the number of accurate digits in `p`:
@@ -366,3 +367,4 @@ print(abs(p - p_computed) / p)
 ```
 
 In summary, even though there are some computed roots relatively far from their correct values, they are nevertheless the roots of a polynomial that is very close to the original.
+````

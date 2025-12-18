@@ -2,7 +2,7 @@
 kernelspec:
   display_name: Julia 1
   language: julia
-  name: julia-1.11
+  name: julia-1.12
 numbering:
   headings: false
 ---
@@ -44,6 +44,7 @@ The `Polynomials` package for Julia provides its own fast methods for polynomial
 ```{code-cell}
 :tags: remove-cell
 include("FNC_init.jl")
+1+1;
 ```
 
 ## Examples

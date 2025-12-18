@@ -108,6 +108,7 @@ The test `iszero(x(M))` in line 17 checks whether $x(M)$ is less than the smalle
 
 ```{code-cell}
 :tags: remove-cell
+1+1
 exec(open("FNC_init.py").read())
 ```
 

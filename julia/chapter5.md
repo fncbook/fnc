@@ -2,7 +2,7 @@
 kernelspec:
   display_name: Julia 1
   language: julia
-  name: julia-1.11
+  name: julia-1.12
 numbering: 
   headings: false
 ---
@@ -92,6 +92,7 @@ The intended way for a user to call {numref}`Function {number} <function-intadap
 ```{code-cell}
 :tags: remove-cell
 include("FNC_init.jl")
+1+1;
 ```
 
 ### 5.1 @section-localapprox-interpolation
