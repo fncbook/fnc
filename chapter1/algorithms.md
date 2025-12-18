@@ -84,7 +84,8 @@ A polynomial is represented as a vector of coefficients in all three languages c
 
 ````{tab-item} MATLAB
 :sync: matlab
-matlab
+:::{embed} #demo-algorithms-horner-matlab
+:::
 ```` 
 
 ````{tab-item} Python
