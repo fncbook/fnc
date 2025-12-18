@@ -2,7 +2,7 @@
 kernelspec:
   display_name: Julia 1
   language: julia
-  name: julia-1.11
+  name: julia-1.12
 numbering:
   headings: false
 ---
@@ -927,3 +927,4 @@ plt
 ```
 
 In any given problem, it's impossible to know in advance where the right balance lies between fidelity and speed for the preconditioner.
+``````
