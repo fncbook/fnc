@@ -1,3 +1,4 @@
+using Printf
 
 function get_code_blocks(chap, lang)
     header =
@@ -17,10 +18,17 @@ kernelspec:
   language: matlab
   name: jupyter_matlab_kernel
 """
-        init = readlines("/Users/driscoll/Documents/GitHub/fnc/matlab/FNC_init.m")
+        init = replace.(readlines("/Users/driscoll/Documents/GitHub/fnc/matlab/FNC_init.m"), "FNC-matlab/" => "../FNC_matlab/")
         (; yaml, init)
-    else
-        # readlines(@sprintf("/Users/driscoll/Documents/GitHub/fnc/r/fncbook/fncbook/chapter%02d_header.md", chap))
+    elseif lang == "julia"
+        yaml = """
+        kernelspec:
+          display_name: Julia 1
+          language: julia
+          name: julia-1.12
+        """
+        init = readlines("/Users/driscoll/Documents/GitHub/fnc/julia/FNC_init.jl")
+        (; yaml, init)
     end
 
     # read functions and demos contents
@@ -48,6 +56,7 @@ kernelspec:
         exam_idx = findnext(contains(r"(demo-.*-)"), code_file, idx)
         isnothing(exam_idx) && break
         tag = match(r"\((.*)\)", code_file[exam_idx]).captures[1]
+        println("Found demo tag: $tag")
         drop_idx = findnext(contains("{dropdown}"), code_file, exam_idx)
         backticks = match(r"(`+){dropdown}", code_file[drop_idx]).captures[1]
         drop_end = findnext(contains(Regex("$backticks")), code_file, drop_idx+1)
@@ -76,8 +85,20 @@ function transfer_content(dir, new_dir, chap, lang)
         for (key, val) in pairs(blocks)
             blocks[key] = replace.(val, "fncbook/fncbook/" => "")
         end
+    elseif lang == "julia"
+        try
+            fn = @sprintf("chapter%02d.jl", chap)
+            cp(joinpath("/Users/driscoll/Documents/GitHub/fnc/julia/FNCFunctions/src", fn), joinpath(new_dir, fn); force=true)
+        catch
+        end
+        for (key, val) in pairs(blocks)
+            blocks[key] = replace.(val, "FNCFunctions/src/" => "")
+        end
     elseif lang == "matlab"
-
+        cp("/Users/driscoll/Documents/GitHub/fnc/matlab/FNC-matlab", "/Users/driscoll/Documents/GitHub/fnc/separate/matlab/FNC_matlab"; force=true)
+        for (key, val) in pairs(blocks)
+            blocks[key] = replace.(val, "FNC-matlab/" => "../FNC_matlab/")
+        end
     end
 
     # transfer other files
@@ -145,9 +166,9 @@ function transfer_content(dir, new_dir, chap, lang)
     end
 end
 
+##
 
-using Printf
-lang = "python"
+lang = "matlab"
 for chap in 1:13
     println("\nProcessing chapter $chap for $lang")
     dir = "/Users/driscoll/Documents/GitHub/fnc/chapter$chap"
@@ -173,6 +194,22 @@ end
 cp(joinpath(dir, "$lang/setup.md"), joinpath(new_dir, "setup.md"); force=true)
 
 if lang == "python"
-    cp("/Users/driscoll/Documents/GitHub/fnc/python/roswelladj.mat", "/Users/driscoll/Documents/GitHub/fnc/separate/$lang/chapter08/roswelladj.mat"; force=true)
-    cp("/Users/driscoll/Documents/GitHub/fnc/python/voting.mat", "/Users/driscoll/Documents/GitHub/fnc/separate/$lang/chapter07/voting.mat"; force=true)
+    cp("/Users/driscoll/Documents/GitHub/fnc/python/roswelladj.mat", "/Users/driscoll/Documents/GitHub/fnc/separate/$lang/chapter8/roswelladj.mat"; force=true)
+    cp("/Users/driscoll/Documents/GitHub/fnc/python/voting.mat", "/Users/driscoll/Documents/GitHub/fnc/separate/$lang/chapter7/voting.mat"; force=true)
+elseif lang == "julia"
+    cp("/Users/driscoll/Documents/GitHub/fnc/julia/roswell.jld2", "/Users/driscoll/Documents/GitHub/fnc/separate/$lang/chapter8/roswell.jld2"; force=true)
+    cp("/Users/driscoll/Documents/GitHub/fnc/julia/smallworld.jld2", "/Users/driscoll/Documents/GitHub/fnc/separate/$lang/chapter8/smallworld.jld2"; force=true)
+    cp("/Users/driscoll/Documents/GitHub/fnc/julia/voting.jld2", "/Users/driscoll/Documents/GitHub/fnc/separate/$lang/chapter7/voting.jld2"; force=true)
+elseif lang == "matlab"
+    for chap in [4, 6, 12, 13]
+        for fn in filter(contains(Regex("f$chap.*\\.m")), readdir("/Users/driscoll/Documents/GitHub/fnc/matlab"))
+            cp(joinpath("/Users/driscoll/Documents/GitHub/fnc/matlab", fn), joinpath("/Users/driscoll/Documents/GitHub/fnc/separate/matlab/chapter$chap", fn); force=true)
+        end
+    end
+    for chap in 2:13
+        cp("/Users/driscoll/Documents/GitHub/fnc/matlab/redsblues.m", "/Users/driscoll/Documents/GitHub/fnc/separate/matlab/chapter$chap/redsblues.m"; force=true)
+    end
+    cp("/Users/driscoll/Documents/GitHub/fnc/matlab/roswelladj.mat", "/Users/driscoll/Documents/GitHub/fnc/separate/$lang/chapter8/roswelladj.mat"; force=true)
+    cp("/Users/driscoll/Documents/GitHub/fnc/matlab/smallworld.mat", "/Users/driscoll/Documents/GitHub/fnc/separate/$lang/chapter8/smallworld.mat"; force=true)
+    cp("/Users/driscoll/Documents/GitHub/fnc/matlab/voting.mat", "/Users/driscoll/Documents/GitHub/fnc/separate/$lang/chapter7/voting.mat"; force=true)
 end
