@@ -374,7 +374,7 @@ The Rayleigh quotient evaluated at an eigenvector gives the corresponding eigenv
 R(V[:, 7])
 ```
 
-If the input to he Rayleigh quotient is within a small $\delta$ of an eigenvector, its output is within $O(\delta^2)$ of the corresponding eigenvalue. In this experiment, we observe that each additional digit of accuracy in an approximate eigenvector gives two more digits to the eigenvalue estimate coming from the Rayleigh quotient.
+If the input to the Rayleigh quotient is within a small $\delta$ of an eigenvector, its output is within $O(\delta^2)$ of the corresponding eigenvalue. In this experiment, we observe that each additional digit of accuracy in an approximate eigenvector gives two more digits to the eigenvalue estimate coming from the Rayleigh quotient.
 
 ```{code-cell}
 δ = @. 1 ./ 10^(1:5)
@@ -385,8 +385,8 @@ for (k, delta) in enumerate(δ)
     x = V[:, 7] + e
     eval_diff[k] = R(x) - 7
 end
-labels = ["perturbation δ", "δ²", "R(x) - λ"]
-@pt :header=labels [δ δ .^ 2 eval_diff]
+pretty_table([δ δ.^2 eval_diff];
+    column_labels = ["δ (perturbation)", "δ²", "R(x) - λ"], backend=:html)
 ```
 ``````
 

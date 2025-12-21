@@ -740,7 +740,8 @@ end
 The reason for doing multiple repetitions at each value of $n$ in the loop above is to avoid having times so short that the resolution of the timer is significant.
 
 ```{code-cell}
-@pt :header = ["size", "time (sec.)"] [n t]
+pretty_table([n t];
+     column_labels=["size", "time (sec.)"], backend=:html)
 ```
 
 ```{index} Julia; Boolean indexing

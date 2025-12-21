@@ -434,8 +434,8 @@ for (k, n) in enumerate(n)
     intercept[k], slope[k] = c
 end
 
-labels = ["n", "intercept", "slope"]
-@pt :header=labels, [n intercept slope]
+pretty_table((;n, intercept, slope);
+    column_labels=["n", "intercept", "slope"], backend=:html)
 ```
 ``````
 
@@ -505,10 +505,10 @@ plot(N, err, m=:o,
 (demo-trig-fft-julia)=
 ``````{dropdown} @demo-trig-fft
 :open:
-This function has frequency content at $2\pi$, $-2\pi$, and $\pi$. 
+This function has frequency content at $2\pi$, $-2\pi$, and $\pi$:
 
 ```{code-cell}
-f(x) = 3 * cospi(2x) - cispi(x)    # cispi(x) := exp(1im * π * x)
+f(x) = 3 * cospi(2x) - cispi(x)    # cispi(x) := exp(1im * π * x);
 ```
 
 To use `fft`, we set up nodes in the interval $[0,2)$. 
@@ -525,7 +525,8 @@ We perform Fourier analysis using `fft` and then examine the resulting coefficie
 using FFTW
 c = fft(y) / N
 freq = [0:n; -n:-1]
-@pt :header=["k", "coefficient"] [freq round.(c, sigdigits=5)]
+pretty_table((;freq, coef=round.(c, sigdigits=5)); 
+    column_labels=["k", "coefficient"], backend=:html)
 ```
 
 Note that $1.5 e^{2i\pi x}+1.5 e^{-2i\pi x} = 3 \cos(2\pi x)$, so this result is sensible.
@@ -554,7 +555,7 @@ The Fourier coefficients of smooth functions decay exponentially in magnitude as
 ``````{dropdown} @demo-integration-ellipse
 :open:
 ```{code-cell}
-f(t) = π * sqrt( cospi(t)^2 + sinpi(t)^2 / 4 );
+f(t) = π * sqrt( cospi(t)^2 + sinpi(t)^2 / 4 )
 n = 4:4:48
 perim = zeros(size(n))
 for (k, n) in enumerate(n)
@@ -562,9 +563,10 @@ for (k, n) in enumerate(n)
     t = @. h * (0:n-1) - 1
     perim[k] = h * sum(f.(t))
 end
-err = @. abs(perim - perim[end])    # use last value as "exact"
-@ptconf formatters=ft_printf(["%d", "%.15f", "%.2e"], 1:3)
-@pt :header=["n", "perimeter", "error estimate"] [n perim err][1:end-1, :]
+err = @. abs(perim[1:end-1] - perim[end])    # use last value as "exact"
+formatters = [fmt__printf("%.15f", 2:2), fmt__printf("%.2e", 3:3)]
+pretty_table((n=n[1:end-1], per=perim[1:end-1], err=err); 
+    column_labels=["n", "perimeter", "error estimate"], formatters, backend=:html)
 ```
 The approximations gain about one digit of accuracy for each constant increment of $n$, which is consistent with spectral convergence.
 ``````

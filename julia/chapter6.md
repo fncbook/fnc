@@ -282,7 +282,8 @@ for n in n
     t, u = FNC.euler(ivp, n)
     push!(err, norm(u_exact.(t) - u, Inf))
 end
-@pt :header=["n", "inf-norm error"] [n err]
+pretty_table((n=n, err=err); 
+    column_labels=["n", "inf-norm error"], backend=:html)
 ```
 
 The error is approximately cut by a factor of 10 for each increase in $n$ by the same factor. A log-log plot also confirms first-order convergence. Keep in mind that since $h=(b-a)/n$, it follows that $O(h)=O(n^{-1})$.
@@ -536,7 +537,8 @@ for (k, n) in enumerate(n)
     t, u = FNC.rk4(ivp, n)
     err[k, 2] = norm(u_ref.(t) - u, Inf)
 end
-@pt :header=["n", "IE2 error", "RK4 error"] [n err]
+pretty_table((n=n, err2=err[:, 1], err4=err[:, 2]); 
+    column_labels=["n", "IE2 error", "RK4 error"], backend=:html)
 ```
 
 The amount of computational work at each time step is assumed to be proportional to the number of stages. Let's compare on an apples-to-apples basis by using the number of $f$-evaluations on the horizontal axis.
@@ -644,7 +646,8 @@ for n in n
     t, u = FNC.ab4(ivp, n)
     push!(err, norm(u_ref.(t) - u, Inf))
 end
-@pt :header=["n", "inf-norm error"] [n err]
+pretty_table((n=n, err=err); 
+    column_labels=["n", "inf-norm error"], backend=:html)
 ```
 
 The method should converge as $O(h^4)$, so a log-log scale is appropriate for the errors.
@@ -734,7 +737,8 @@ for n in n
     end
     push!(err, abs(û(b) - u[end]))
 end
-@pt :header=["n", "h", "error"] [n (b - a) ./ n err]
+pretty_table((n=n, h=(b - a) ./ n, err=err); 
+    column_labels=["n", "h", "error at t=1"], backend=:html)
 ```
 
 The error starts out promisingly, but things explode from there. A graph of the last numerical attempt yields a clue.

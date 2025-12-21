@@ -16,5 +16,3 @@ default(
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra
-
-@ptconf backend = Val(:html) tf = tf_html_simple

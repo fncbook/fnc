@@ -286,8 +286,8 @@ for (k, n) in enumerate(n)
     maxerr[k] = norm(err, Inf)
 end
 
-data = (n=n[1:4:end], err=maxerr[1:4:end])
-@pt :header=["n", "max-norm error"] data
+pretty_table((n=n[1:4:end], err=maxerr[1:4:end]);
+    column_labels=["n", "max-norm error"], backend=:html)
 ```
 
 As predicted, a factor of 10 in $n$ produces a factor of 100 in the error. In a convergence plot, it is traditional to have $h$ *decrease* from left to right, so we expect a straight line of slope $-2$ on a log-log plot.
@@ -338,7 +338,8 @@ for (k, n) in enumerate(n)
     dif = @. f(x) - S(x)
     err[k] = norm(dif, Inf)
 end
-@pt :header=["n", "max-norm error"] [n[1:2:end] err[1:2:end]]
+pretty_table((n=n[1:2:end], err=err[1:2:end]);
+    column_labels=["n", "max-norm error"], backend=:html)
 ```
 
 Since we expect convergence that is $O(h^4)=O(n^{-4})$, we use a log-log graph of error and expect a straight line of slope $-4$.
@@ -486,14 +487,15 @@ for (k, h) in enumerate(h)
     FD[k, 1] = (f(h) - f(0)) / h
     FD[k, 2] = (f(h) - f(-h)) / 2h
 end
-@pt :header=["h", "FD1", "FD2"] [h FD]
+pretty_table([h FD]; column_labels=["h", "FD1", "FD2"], backend=:html)
 ```
 
 All that's easy to see from this table is that FD2 appears to converge to the same result as FD1, but more rapidly. A table of errors is more informative.
 
 ```{code-cell}
 error_FD = @. exact_value - FD
-@pt :header=["h", "error in FD1", "error in FD2"] [h error_FD]
+pretty_table([h error_FD]; 
+    column_labels=["h", "error in FD1", "error in FD2"], backend=:html)
 ```
 
 In each row, $h$ is decreased by a factor of 10, so that the error is reduced by a factor of 10 in the first-order method and 100 in the second-order method.
@@ -530,7 +532,7 @@ for (k, h) in enumerate(h)
     FD[k, 2] = dot([0 -1 / 2 0 1 / 2 0] / h, vals)
     FD[k, 3] = dot([1 / 12 -2 / 3 0 2 / 3 -1 / 12] / h, vals)
 end
-@pt :header=["h", "FD1", "FD2", "FD4"] [h FD]
+pretty_table([h FD]; column_labels=["h", "FD1", "FD2", "FD4"], backend=:html)
 ```
 
 They all seem to be converging to $-1.3$. The convergence plot reveals some interesting structure to the errors, though.
@@ -627,7 +629,8 @@ for (k, n) in enumerate(n)
     T, t, y = FNC.trapezoid(f, a, b, n)
     err[k] = Q - T
 end
-@pt :header=["n", "error"] [n err]
+pretty_table((n=n, err=err); 
+    column_labels=["n", "error"], backend=:html)
 ```
 
 Each increase by a factor of 10 in $n$ cuts the error by a factor of about 100, which is consistent with second-order convergence. Another check is that a log-log graph should give a line of slope $-2$ as $n\to\infty$.
@@ -710,7 +713,7 @@ The value `nothing` equals nothing except `nothing`.
 
 ```{code-cell}
 err = [T .- Q [nothing; S .- Q] [nothing; nothing; R - Q]]
-@pt :header=["order 2", "order 4", "order 6"] err
+pretty_table(err; column_labels=["order 2", "order 4", "order 6"], backend=:html)
 ```
 
 If we consider the computational time to be dominated by evaluations of $f$, then we have obtained a result with about twice as many accurate digits as the best trapezoid result, at virtually no extra cost.
@@ -746,7 +749,8 @@ for (k, n) in enumerate(n)
     err[k, 2] = T - right_val
 end
 
-@pt :header=["n", "left error", "right error"] [n err]
+pretty_table((n=n, lerr=err[:, 1], rerr=err[:, 2]); 
+    column_labels=["n", "left error", "right error"], backend=:html)
 ```
 
 Both the picture and the numerical results suggest that more nodes should be used on the right half of the interval than on the left half.
@@ -791,7 +795,9 @@ for tol in 10.0 .^ (-4:-1:-14)
     push!(err, Q - A)
     push!(n, length(t))
 end
-@pt :header=["tolerance", "error", "number of nodes"] [tol err n][1:2:end, :]
+rows = 1:2:length(tol)
+pretty_table((tol=tol[rows], err=err[rows], n=n[rows]);
+    column_labels=["tolerance", "error", "number of nodes"], backend=:html)
 ```
 
 As you can see, even though the errors are not smaller than the tolerances, the two columns decrease in tandem. If we consider now the convergence not in $h$, which is poorly defined now, but in the number of nodes actually chosen, we come close to the fourth-order accuracy of the underlying Simpson scheme.

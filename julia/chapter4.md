@@ -126,7 +126,8 @@ end
 
 ```{code-cell}
 y = J₃.(ω)
-@pt :header=["root estimate", "function value"] [ω y]
+pretty_table( [ω y];
+    column_labels=["root estimate", "function value"], backend=:html) 
 ```
 
 ```{code-cell}
@@ -472,7 +473,8 @@ The exponents in the scientific notation definitely suggest a squaring sequence.
 ```{code-cell}
 logerr = @. log10(abs(ϵ))
 ratios = [NaN; [logerr[i+1] / logerr[i] for i in 1:length(logerr)-1]]
-@pt :header=["iteration", "error", "log error", "ratio"] [1:7 ϵ logerr ratios]
+pretty_table( (iter=1:7, ϵ, logerr, ratios);
+    column_labels=["iteration", "error", "log error", "ratio"], backend=:html )
 ```
 
 The clear convergence to 2 above constitutes good evidence of quadratic convergence.
@@ -588,7 +590,8 @@ It's not easy to see the convergence rate by staring at these numbers. We can us
 ```{code-cell}
 logerr = @. log10(abs(ϵ))
 ratios = [NaN; [logerr[i+1] / logerr[i] for i in 1:length(logerr)-1]]
-@pt :header=["iteration", "error", "log error", "ratio"] [eachindex(ϵ) ϵ logerr ratios]
+pretty_table( (iter=eachindex(ϵ), ϵ, logerr, ratios);
+    column_labels=["iteration", "error", "log error", "ratio"], backend=:html )
 ```
 
 As expected, this settles in at around 1.618.
@@ -667,7 +670,8 @@ r = x[end]
 ϵ = @. Float64(abs(r - x[1:end-1]))
 logerr = @. log10(abs(ϵ))
 ratios = [NaN; [logerr[i+1] / logerr[i] for i in 1:length(logerr)-1]]
-@pt :header=["iteration", "error", "log error", "ratio"] [eachindex(ϵ) ϵ logerr ratios]
+pretty_table( (iter=eachindex(ϵ), ϵ, logerr, ratios);
+    column_labels=["iteration", "error", "log error", "ratio"], backend=:html )
 ```
 
 The convergence is probably superlinear at a rate of $\alpha=1.8$ or so.
@@ -721,7 +725,8 @@ We take the sequence of norms of errors, applying the log so that we can look at
 ```{code-cell}
 logerr = [Float64(log(norm(r - x[k]))) for k in 1:length(x)-1]
 ratios = [NaN; [logerr[i+1] / logerr[i] for i in 1:length(logerr)-1]]
-@pt :header=["iteration", "log error", "ratio"] [eachindex(logerr) logerr ratios]
+pretty_table( (iter=eachindex(logerr), logerr, ratios);
+    column_labels=["iteration", "log error", "ratio"], backend=:html )
 ```
 
 The ratio is neatly converging toward 2, which is expected for quadratic convergence.
@@ -762,7 +767,8 @@ Looking at the convergence in norm, we find a convergence rate between linear an
 ```{code-cell}
 logerr = [log(norm(r - x[k])) for k in 1:length(x)-1]
 ratios = [NaN; [logerr[i+1] / logerr[i] for i in 1:length(logerr)-1]]
-@pt :header=["iteration", "log error", "ratio"] [eachindex(logerr) logerr ratios]
+pretty_table((iter=eachindex(logerr), logerr, ratios);
+    column_labels=["iteration", "log error", "ratio"], backend=:html )
 ```
 ``````
 
