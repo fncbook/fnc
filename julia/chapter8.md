@@ -223,8 +223,10 @@ The `eigs` function from `Arpack` finds a small number eigenvalues meeting some 
 ```{code-cell}
 using Arpack
 λmax, V = eigs(A, nev=5, which=:LM)    # Largest Magnitude
-fmt = ft_printf("%20.15f")
-pretty_table([λmax λ[1:5]], header=["found", "exact"], formatters=fmt)
+formatters = [fmt__printf("%20.15f")]
+column_labels=["found", "exact"]
+pretty_table([λmax λ[1:5]];
+    column_labels, formatters, backend=:html)
 ```
 
 Now we find the 5 closest to the value 1 in the complex plane, via `sigma=1`.
@@ -232,7 +234,7 @@ Now we find the 5 closest to the value 1 in the complex plane, via `sigma=1`.
 ```{code-cell}
 λ1, V = eigs(A, nev=5, sigma=1)    # closest to sigma
 data = [λ1 λ[end:-1:end-4]]
-pretty_table(data, header=["found", "exact"], formatters=fmt)
+pretty_table(data; column_labels, formatters, backend=:html)
 ```
 
 ```{index} Julia; \\
