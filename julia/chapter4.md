@@ -102,11 +102,11 @@ include("FNC_init.jl")
 :open:
 
 ```{code-cell}
-using Plots, SpecialFunctions
+using SpecialFunctions
 J₃(x) = besselj(3, x)
-plot(J₃, 0, 20;
-    title="Bessel function",
-    xaxis=(L"x"),  yaxis=(L"J_3(x)"),  grid=:xy)
+fig, ax, plt = lines(0..20, J₃;
+    axis=(title="Bessel function", xlabel=L"x", ylabel=L"J_3(x)")
+)
 ```
 From the graph we see roots near 6, 10, 13, 16, and 19. We use `nlsolve` from the `NLsolve` package to find these roots accurately. It uses vector variables, so we have to code accordingly.
 ```{tip}
@@ -131,7 +131,8 @@ pretty_table( [ω y];
 ```
 
 ```{code-cell}
-scatter!(ω, y, title="Bessel function with roots")
+scatter!(ω, y, color=:red)
+fig
 ```
 
 If instead we seek values at which $J_3(x)=0.2$, then we must find roots of the function $J_3(x)-0.2$.
@@ -143,7 +144,8 @@ for guess = [3., 6., 10., 13.]
     s = nlsolve(f, [guess], ftol=1e-14)
     append!(r, s.zero)
 end
-scatter!(r, J₃.(r), title="Roots and other Bessel values")
+scatter!(r, J₃.(r), color=:black)
+fig
 ```
 ``````
 
@@ -168,12 +170,16 @@ The syntax `interval...` is called **splatting** and means to insert all the ind
 
 
 ```{code-cell}
-interval = [0.8, 1.2]
-
-plot(f, interval..., ribbon=0.03, aspect_ratio=1,
-    xlabel=L"x", yaxis=(L"f(x)", [-0.2, 0.2]))
-
-scatter!([1], [0], title="Well-conditioned root")
+x = range(0.8, 1.2, 400)
+y = f.(x)
+fig = Figure()
+ax = Axis(fig[1, 1];
+    xlabel=L"x", ylabel=L"f(x)", title="Well-conditioned root", aspect=DataAspect())
+band!(x, y .- 0.03, y .+ 0.03, color=:lightblue, alpha=0.5)
+lines!(x, y) 
+scatter!([1], [0])
+ylims!(ax, -0.2, 0.2)
+fig
 ```
 
 The possible values for a perturbed root all lie within the interval where the ribbon intersects the $x$-axis. The width of that zone is about the same as the vertical thickness of the ribbon.
@@ -187,10 +193,16 @@ f(x) = (x - 1) * (x - 1.01);
 Now $f'(1)=-0.01$, and the graph of $f$ will be much shallower near $x=1$. Look at the effect this has on our thick rendering:
 
 ```{code-cell}
-plot(f, interval..., ribbon=0.03, aspect_ratio=1,
-    xlabel=L"x", yaxis=(L"f(x)", [-0.2, 0.2]))
-
-scatter!([1], [0], title="Poorly-conditioned root")
+x = range(0.8, 1.2, 400)
+y = f.(x)
+fig = Figure()
+ax = Axis(fig[1, 1];
+    xlabel=L"x", ylabel=L"f(x)", title="Ill-conditioned root", aspect=DataAspect())
+band!(x, y .- 0.03, y .+ 0.03, color=:lightblue, alpha=0.5)
+lines!(x, y) 
+scatter!([1], [0])
+ylims!(ax, -0.2, 0.2)
+fig
 ```
 
 The vertical displacements in this picture are exactly the same as before. But the potential _horizontal_ displacement of the root is much wider. In fact, if we perturb the function entirely upward by the amount drawn here, the root disappears!
@@ -221,12 +233,15 @@ g(x) = x - p(x)
 Intersections of $y=g(x)$ with the line $y=x$ are fixed points of $g$ and thus roots of $f$. (Only one is shown in the chosen plot range.)
 
 ```{code-cell}
-using Plots
-plt = plot([g x->x], 2, 3;
-    l=2, label=[L"y=g(x)" L"y=x"],
-    xlabel=L"x",  ylabel=L"y", 
-    aspect_ratio=1,
-    title="Finding a fixed point",  legend=:bottomright)
+fig = Figure()
+ax = Axis(fig[1, 1];
+    xlabel=L"x", ylabel=L"y", title="Finding a fixed point", 
+    autolimitaspect=1, xgridvisible=false, ygridvisible=false)
+lines!(2..2.8, g; label=L"y=g(x)")
+lines!(2..2.8, identity; label=L"y=x", color=:black, linestyle=:dash)
+ylims!(ax, 2.4, 2.8)
+axislegend(ax, position=:rb)
+fig
 ```
 
 If we evaluate $g(2.1)$, we get a value of almost 2.6, so this is not a fixed point.
@@ -239,26 +254,29 @@ y = g(x)
 However, $y=g(x)$ is considerably closer to the fixed point at around 2.7 than $x$ is. Suppose then that we adopt $y$ as our new $x$ value. Changing the $x$ coordinate in this way is the same as following a horizontal line over to the graph of $y=x$.
 
 ```{code-cell}
-plot!([x, y], [y, y], arrow=true, color=3)
+arrow(A, B, color) = arrows2d!(A, B; color, argmode=:endpoints, shaftwidth=2)
+arrow(Point(x, y), Point(y, y), :purple)
+fig
 ```
 
 Now we can compute a new value for $y$. We leave $x$ alone here, so we travel along a vertical line to the graph of $g$.
 
 ```{code-cell}
 x = y;  y = g(x)
-plot!([x, x], [x, y], arrow=true, color=4)
+arrow(Point(x, x), Point(x, y), :orange)
+fig
 ```
 
 You see that we are in a position to repeat these steps as often as we like. Let's apply them a few times and see the result.
 
 ```{code-cell}
 for k = 1:5
-    plot!([x, y], [y, y], color=3);  
+    arrow(Point(x, y), Point(y, y), :purple)
     x = y       # y becomes the new x
     y = g(x)    # g(x) becomes the new y
-    plot!([x, x], [x, y], color=4)  
+    arrow(Point(x, x), Point(x, y), :orange)
 end
-plt
+fig
 ```
 
 The process spirals in beautifully toward the fixed point we seek. Our last estimate has almost 4 accurate digits.
@@ -270,19 +288,22 @@ abs(y - rmax) / rmax
 Now let's try to find the other fixed point $\approx 1.29$ in the same way. We'll use 1.3 as a starting approximation.
 
 ```{code-cell}
-plt = plot([g x->x], 1, 2, l=2, label=["y=g(x)" "y=x"], aspect_ratio=1, 
-    xlabel=L"x", ylabel=L"y", title="Divergence", legend=:bottomright)
+:tags: [hide-input]
+fig = Figure()
+ax = Axis(fig[1, 1];
+    xlabel=L"x", ylabel=L"y", title="Finding a fixed point", aspect=DataAspect())
+lines!(1..2, g; label=L"y=g(x)")
+lines!(1..2, identity; label=L"y=x", color=:black, linestyle=:dash)
+axislegend(ax, position=:rb)
 
-x = 1.3; y = g(x);
-arrow = false
-for k = 1:5
-    plot!([x, y], [y, y], arrow=arrow, color=3)  
+x = 1.32; y = g(x);
+for k = 1:4
+    arrow(Point(x, y), Point(y, y), :purple)
     x = y       # y --> new x
     y = g(x)    # g(x) --> new y
-    plot!([x, x], [x, y], arrow=arrow, color=4)
-    if k > 2; arrow = true; end
+    arrow(Point(x, x), Point(x, y), :orange)
 end
-plt
+fig
 ```
 
 This time, the iteration is pushing us _away from_ the correct answer.
@@ -318,10 +339,9 @@ It's illuminating to construct and plot the sequence of errors.
 
 ```{code-cell}
 err = @. abs(x - rmax)
-plot(0:12, err;
-    m=:o,
-    xaxis=("iteration number"),  yaxis=("error", :log10),
-    title="Convergence of fixed-point iteration")
+scatterlines(0:12, err;
+    axis=(xlabel="iteration number",  ylabel="error", yscale=log10,
+    title="Convergence of fixed-point iteration"))
 ```
 
 It's quite clear that the convergence quickly settles into a linear rate. We could estimate this rate by doing a least-squares fit to a straight line. Keep in mind that the values for small $k$ should be left out of the computation, as they don't represent the linear trend.
@@ -352,14 +372,14 @@ The methods for finding $\sigma$ agree well.
 ``````{dropdown} @demo-newton-line
 :open:
 
-Suppose we want to find a root of the function
+Suppose we want to find a root of the function $f(x)=x e^x - 2$.
 
 ```{code-cell}
 f(x) = x * exp(x) - 2
-using Plots
-plot(f, 0, 1.5; 
-    label="function",  legend=:topleft,
-    grid=:y,  ylim=[-2, 4],  xlabel=L"x",  ylabel=L"y")
+fig, ax, plt = lines(0..1.5, f; label="function",
+    axis=(xgridvisible=false, xlabel=L"x",  ylabel=L"y"))
+ylims!(ax, -2, 4)
+fig
 ```
 
 From the graph, it is clear that there is a root near $x=1$. So we call that our initial guess, $x_1$.
@@ -368,6 +388,8 @@ From the graph, it is clear that there is a root near $x=1$. So we call that our
 x₁ = 1
 y₁ = f(x₁)
 scatter!([x₁], [y₁], label="initial point")
+text!(x₁ + 0.02, y₁, text=L"(x_1, f(x_1))", align = (:left, :center))
+fig
 ```
 
 Next, we can compute the tangent line at the point $\bigl(x_1,f(x_1)\bigr)$, using the derivative.
@@ -377,15 +399,20 @@ df_dx(x) = exp(x) * (x + 1)
 m₁ = df_dx(x₁)
 tangent = x -> y₁ + m₁ * (x - x₁)
 
-plot!(tangent, 0, 1.5, l=:dash, label="tangent line",
-    title="Tangent line approximation")
+lines!(0..1.5, tangent; linestyle=:dash, label="tangent line")
+axislegend(ax, position=:lt)
+ax.title = "Tangent-line approximation"
+fig
 ```
 
 In lieu of finding the root of $f$ itself, we settle for finding the root of the tangent line approximation, which is trivial. Call this $x_2$, our next approximation to the root.
 
 ```{code-cell}
 @show x₂ = x₁ - y₁ / m₁
-scatter!([x₂], [0], label="tangent root", title="First iteration")
+scatter!([x₂], [0])
+text!(x₂ + 0.02, 0, text=L"(x_2, 0)", align = (:left, :center))
+ax.title = "First iteration"
+fig
 ```
 
 ```{code-cell}
@@ -395,19 +422,22 @@ y₂ = f(x₂)
 The residual (i.e., value of $f$) is smaller than before, but not zero. So we repeat the process with a new tangent line based on the latest point on the curve.
 
 ```{code-cell}
-plot(f, 0.82, 0.87;
-    label="function",  legend=:topleft,
-    xlabel=L"x",  ylabel=L"y",
-    title="Second iteration")
+:tags: [hide-input]
+fig, ax, plt = lines(0.82..0.87, f; label="function",
+    axis=(xgridvisible=false, xlabel=L"x",  ylabel=L"y", title="Second iteration"))
 
 scatter!([x₂], [y₂], label="starting point")
+text!(x₂ + 0.002, y₂, text=L"(x_2, f(x_2))", align = (:left, :center))
 
 m₂ = df_dx(x₂)
 tangent = x -> y₂ + m₂ * (x - x₂)
-plot!(tangent, 0.82, 0.87; l=:dash, label="tangent line")
+lines!(0.82..0.87, tangent; linestyle=:dash, label="tangent line")
 
 @show x₃ = x₂ - y₂ / m₂
 scatter!([x₃], [0], label="tangent root")
+text!(x₃ - 0.002, 0, text=L"(x_3, 0)", align = (:right, :center))
+axislegend(ax, position=:lt)
+fig
 ```
 
 ```{code-cell}
@@ -504,9 +534,12 @@ for (i, y) in enumerate(y)
     x[i] = r[end]
 end
 
-plot(g, 0, 2, aspect_ratio=1, label=L"g(x)")
-plot!(y, x, label=L"g^{-1}(y)", title="Function and its inverse")
-plot!(x -> x, 0, maximum(y), label="", l=(:dash, 1), color=:black)
+fig, ax, plt = lines(0..2, g; label=L"g(x)",
+    axis=(xlabel=L"x",  ylabel=L"y", title="Function and its inverse", aspect=DataAspect()))
+lines!(y, x, label=L"g^{-1}(y)")
+lines!(0..maximum(y), identity, linestyle=:dash, color=:black)
+axislegend(ax, position=:rb)
+fig
 ```
 ``````
 
@@ -519,11 +552,9 @@ plot!(x -> x, 0, maximum(y), label="", l=(:dash, 1), color=:black)
 We return to finding a root of the equation $x e^x=2$.
 
 ```{code-cell}
-using Plots
 f(x) = x * exp(x) - 2;
-plot(f, 0.25, 1.25;
-    label="function",  legend=:topleft,
-    xlabel=L"x",  ylabel=L"y")
+fig, ax, plt = lines(0.25..1.25, f; label="function",
+    axis=(xlabel=L"x",  ylabel=L"y", title="Two initial values"))
 ```
 
 From the graph, it's clear that there is a root near $x=1$. To be more precise, there is a root in the interval $[0.5,1]$. So let us take the endpoints of that interval as _two_ initial approximations.
@@ -533,9 +564,8 @@ x₁ = 1;
 y₁ = f(x₁);
 x₂ = 0.5;
 y₂ = f(x₂);
-scatter!([x₁, x₂], [y₁, y₂];
-    label="initial points",
-    title="Two initial values")
+scatter!([x₁, x₂], [y₁, y₂]; label="initial points")
+fig
 ```
 
 Instead of constructing the tangent line by evaluating the derivative, we can construct a linear model function by drawing the line between the two points $\bigl(x_1,f(x_1)\bigr)$ and $\bigl(x_2,f(x_2)\bigr)$. This is called a _secant line_.
@@ -543,8 +573,9 @@ Instead of constructing the tangent line by evaluating the derivative, we can co
 ```{code-cell}
 m₂ = (y₂ - y₁) / (x₂ - x₁)
 secant = x -> y₂ + m₂ * (x - x₂)
-plot!(secant, 0.25, 1.25, label="secant line", l=:dash, color=:black,
-    title="Secant line")
+lines!(0.25..1.25, secant; label="secant line", linestyle=:dash, color=:black)
+axislegend(ax, position=:lt)
+fig
 ```
 
 As before, the next root estimate in the iteration is the root of this linear model.
@@ -552,7 +583,10 @@ As before, the next root estimate in the iteration is the root of this linear mo
 ```{code-cell}
 x₃ = x₂ - y₂ / m₂
 @show y₃ = f(x₃)
-scatter!([x₃], [0], label="root of secant", title="First iteration")
+scatter!([x₃], [0])
+text!(x₃ + 0.02, 0, text=L"(x_3, 0)", align = (:left, :center))
+ax.title= "First iteration"
+fig
 ```
 
 For the next linear model, we use the line through the two most recent points. The next iterate is the root of that secant line, and so on.
@@ -604,18 +638,21 @@ Here we look for a root of $x+\cos(10x)$ that is close to 1.
 
 ```{code-cell}
 f(x) = x + cos(10 * x)
-interval = [0.5, 1.5]
+pts = range(0.5, 1.5, 500)
 
-plot(f, interval..., label="Function", legend=:bottomright,
-    grid=:y, ylim=[-0.1, 3], xlabel=L"x", ylabel=L"y")
+fig = Figure()
+ax = Axis(fig[1, 1]; xgridvisible=false, xlabel=L"x", ylabel=L"y")
+lines!(pts, f.(pts); label="function")
+ylims!(ax, -0.1, 3)
+fig
 ```
-
 We choose three values to get the iteration started.
 
 ```{code-cell}
 x = [0.8, 1.2, 1]
 y = @. f(x)
-scatter!(x, y, label="initial points")
+scatter!(x, y, color=:black, label="initial points")
+fig
 ```
 
 If we were using forward interpolation, we would ask for the polynomial interpolant of $y$ as a function of $x$. But that parabola has no real roots.
@@ -623,23 +660,23 @@ If we were using forward interpolation, we would ask for the polynomial interpol
 ```{code-cell}
 using Polynomials
 q = Polynomials.fit(x, y, 2)      # interpolating polynomial
-plot!(x -> q(x), interval..., l=:dash, label="interpolant")
+lines!(pts, q.(pts); linestyle=:dash, label="interpolant")
+fig
 ```
 
 To do inverse interpolation, we swap the roles of $x$ and $y$ in the interpolation.
 
-```{tip}
-:class: dropdown
-By giving two functions in the plot call, we get the parametric plot $(q(y),y)$ as a function of $y$.
-```
-
 ```{code-cell}
-plot(f, interval..., label="Function",
-    legend=:bottomright, grid=:y, xlabel=L"x", ylabel=L"y")
-scatter!(x, y, label="initial points")
+fig = Figure()
+ax = Axis(fig[1, 1]; xgridvisible=false, xlabel=L"x", ylabel=L"y")
+lines!(pts, f.(pts); label="function")
+scatter!(x, y, color=:black, label="initial points")
 
+vals = range(-0.3, 2.2, 500)
 q = Polynomials.fit(y, x, 2)       # interpolating polynomial
-plot!(y -> q(y), y -> y, -0.1, 2.6, l=:dash, label="inverse interpolant")
+lines!(q.(vals), vals; linestyle=:dash, label="inverse interpolant")
+axislegend(ax, position=:rc)
+fig
 ```
 
 We seek the value of $x$ that makes $y$ zero. This means evaluating $q$ at zero.
@@ -648,7 +685,7 @@ We seek the value of $x$ that makes $y$ zero. This means evaluating $q$ at zero.
 q(0)
 ```
 
-Let's restart the process with `BigFloat` numbers to get a convergent sequence.
+Let's restart the process with `BigFloat` numbers to get more precision in order to see the convergence.
 
 ```{code-cell}
 x = BigFloat.([8, 12, 10]) / 10
@@ -674,7 +711,7 @@ pretty_table( (iter=eachindex(ϵ), ϵ, logerr, ratios);
     column_labels=["iteration", "error", "log error", "ratio"], backend=:html )
 ```
 
-The convergence is probably superlinear at a rate of $\alpha=1.8$ or so.
+The convergence is apparently superlinear at a rate of $\alpha=1.8$ or so.
 ``````
 
 ### 4.5 @section-nonlineqn-newtonsys
@@ -690,17 +727,17 @@ Be careful when coding a Jacobian all in one statement. Spaces separate columns,
 
 ```{code-cell}
 function func(x)
-    [exp(x[2] - x[1]) - 2,
+    return [exp(x[2] - x[1]) - 2,
         x[1] * x[2] + x[3],
         x[2] * x[3] + x[1]^2 - x[2]
     ]
 end;
 
 function jac(x)
-    [
-        -exp(x[2] - x[1]) exp(x[2] - x[1]) 0
+    return [
+        -exp(x[2]-x[1]) exp(x[2]-x[1]) 0
         x[2] x[1] 1
-        2*x[1] x[3]-1 x[2]
+        2x[1] x[3]-1 x[2]
     ]
 end;
 ```
@@ -741,7 +778,7 @@ To solve a nonlinear system, we need to code only the function defining the syst
 
 ```{code-cell}
 f(x) = 
-    [
+    return [
         exp(x[2] - x[1]) - 2,
         x[1] * x[2] + x[3],
         x[2] * x[3] + x[1]^2 - x[2]
@@ -795,8 +832,9 @@ The function $\mathbf{g}(\mathbf{x}) - \mathbf{g}(\mathbf{p})$ obviously has a z
 
 ```{code-cell}
 using Printf
-plt = plot(xlabel="iteration", yaxis=(:log10, "error"),
-    title="Convergence of Gauss–Newton")
+fig = Figure()
+ax = Axis(fig[1, 1]; title="Convergence of Gauss–Newton",
+    xlabel="iteration", ylabel="error", yscale=log10)
 for R in [1e-3, 1e-2, 1e-1]
     # Define the perturbed function.
     f(x) = g(x) - g(p) + R * normalize([-1, 1, -1])
@@ -804,9 +842,10 @@ for R in [1e-3, 1e-2, 1e-1]
     r = x[end]
     err = [norm(x - r) for x in x[1:end-1]]
     normres = norm(f(r))
-    plot!(err, label=@sprintf("R=%.2g", normres))
+    lines!(err, label=@sprintf("R=%.2g", normres))
 end
-plt
+axislegend(ax, position=:rt)
+fig
 ```
 
 In the least perturbed case, where the minimized residual is less than $10^{-3}$, the convergence is plausibly quadratic. At the next level up, the convergence starts similarly but suddenly stagnates for a long time. In the most perturbed case, the quadratic phase is nearly gone and the overall shape looks linear.
@@ -823,9 +862,11 @@ w = @. ŵ + 0.15 * cos(2 * exp(s / 16) * s);     # smooth noise added
 ```
 
 ```{code-cell}
-scatter(s, w, label="noisy data",
-    xlabel="s", ylabel="v", leg=:bottomright)
-plot!(s, ŵ, l=:dash, color=:black, label="perfect data")
+fig, ax, plt = scatter(s, w; color=:black, label="noisy data",
+    axis=(xlabel="s", ylabel="v"))
+lines!(s, ŵ; linestyle=:dash, color=:black, label="perfect data")
+leg = axislegend(ax, position=:rb)
+fig
 ```
 
 ```{index} ! Julia; destructuring
@@ -867,7 +908,10 @@ The final values are reasonably close to the values $V=2$, $K_m=0.5$ that we use
 
 ```{code-cell}
 model(s) = V * s / (Km + s)
-plot!(model, 0, 6, label="nonlinear fit")
+lines!(0..6, model; label="nonlinear fit")
+delete!(leg)
+leg = axislegend(ax, position=:rb)
+fig
 ```
 
 For this particular model, we also have the option of linearizing the fit process. Rewrite the model as 
@@ -892,7 +936,10 @@ The two fits are different because they do not optimize the same quantities.
 
 ```{code-cell}
 linmodel(x) = 1 / (β + α / x)
-plot!(linmodel, 0, 6, label="linearized fit")
+lines!(0..6, linmodel; label="linearized fit")
+delete!(leg)
+axislegend(ax, position=:rb)
+fig
 ```
 
 The truly nonlinear fit is clearly better in this case. It optimizes a residual for the original measured quantity rather than a transformed one we picked for algorithmic convenience.

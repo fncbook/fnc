@@ -150,11 +150,9 @@ sol = solve(ivp, Tsit5());
 The resulting solution object can be shown using `plot`.
 
 ```{code-cell}
-using Plots
-plot(sol;
-    label="solution", legend=:bottom,
-    xlabel="t",  ylabel=L"u(t)",
-    title=L"u'=\sin((t+u)^2)")
+using CairoMakie
+fig, ax, plt = lines(0..4, t -> sol(t); label="solution",
+    axis=(xlabel="t", ylabel=L"u(t)", title=L"u'=\sin((t+u)^2)"))
 ```
 
 The solution also acts like any callable function that can be evaluated at different values of $t$.
@@ -173,6 +171,8 @@ The solver initially finds approximate values of the solution (second column abo
 
 ```{code-cell}
 scatter!(sol.t, sol.u, label="discrete values")
+axislegend(ax, position=:cb)
+fig
 ```
 ``````
 
@@ -191,9 +191,8 @@ sol = solve(ivp, Tsit5());
 The warning message we received can mean that there is a bug in the formulation of the problem. But if everything has been done correctly, it suggests that the solution may not exist past the indicated time. This is a possibility in nonlinear ODEs.
 
 ```{code-cell}
-plot(sol, label="";
-    xlabel=L"t",  yaxis=(:log10, L"u(t)"),
-    title="Finite-time blowup")
+lines(sol.t, sol.u; 
+    axis=(xlabel=L"t",  yscale=log10, ylabel=L"u(t)", title="Finite-time blowup"))
 ```
 ``````
 
@@ -204,25 +203,24 @@ Consider the ODEs $u'=u$ and $u'=-u$. In each case we compute $\partial f/\parti
 
 ```{code-cell}
 :tags: remove-input
-t = range(0, 3, length=800)
-u = @. exp(t) * 1
+t = range(0, 3, 800)
+u = @. exp(t)
 lower, upper = @. exp(t) * 0.7, @. exp(t) * 1.3
-plot(t, u;
-    l=:black, ribbon=(lower, upper),
-    leg=:none,  xlabel=L"t",  ylabel=L"u(t)",
-    title="Exponential divergence of solutions")
+fig, ax, plt = band(t, 0.7u, 1.3u; color=:lightblue, 
+    axis=(xlabel=L"t", ylabel=L"u(t)", title="Exponential divergence of solutions"))
+lines!(t, u; color=:black)
+fig
 ```
 
 But with $u'=-u$, solutions actually get closer together with time.
 
 ```{code-cell}
 :tags: remove-input
-u = @. exp(-t) * 1
-lower, upper = @. exp(-t) * 0.7, @. exp(-t) * 1.3
-plot(t, u;
-    l=:black,  ribbon=(lower, upper),
-    leg=:none,  xlabel=L"t",  ylabel=L"u(t)",
-    title="Exponential convergence of solutions")
+u = @. exp(-t)
+fig, ax, plt = band(t, 0.7u, 1.3u; color=:lightblue, 
+    axis=(xlabel=L"t", ylabel=L"u(t)", title="Exponential convergence of solutions"))
+lines!(t, u; color=:black)
+fig
 ```
 
 In this case the actual condition number is one, because the initial difference between solutions is the largest over all time. Hence the exponentially growing bound $e^{b-a}$ is a gross overestimate.
@@ -251,26 +249,29 @@ ivp = ODEProblem(f, u0, tspan)
 Here is the call to {numref}`Function {number} <function-euler>`.
 
 ```{code-cell}
-using Plots
+using CairoMakie
 t, u = FNC.euler(ivp, 20)
-plot(t, u;
-    m=2,  label="n=20", 
-    xlabel=L"t",  ylabel=L"u(t)",
-    title="Solution by Euler's method")
+fig, ax, plt = scatterlines(t, u; markersize=8, label=L"n=20", 
+    axis=(xlabel=L"t",  ylabel=L"u(t)", title="Solution by Euler's method"))
 ```
 
 We could define a different interpolant to get a smoother picture above, but the derivation of Euler's method assumed a piecewise linear interpolant, and that sets the limit of its accuracy. We can instead request more steps to make the interpolant look smoother.
 
 ```{code-cell}
 t, u = FNC.euler(ivp, 50)
-plot!(t, u, m=2, label="n=50")
+scatterlines!(t, u, markersize=8, label=L"n=50")
+leg = axislegend(ax, position=:lb)
+fig
 ```
 
 Increasing $n$ changed the solution noticeably. Since we know that interpolants and finite differences become more accurate as $h\to 0$, we should anticipate the same behavior from Euler's method. We don't have an exact solution to compare to, so we will use a `DifferentialEquations` solver to construct an accurate reference solution.
 
 ```{code-cell}
 u_exact = solve(ivp, Tsit5(), reltol=1e-14, abstol=1e-14)
-plot!(u_exact, l=(2, :black), label="reference")
+lines!(u_exact, color=:black, label="reference")
+delete!(leg)
+axislegend(ax, position=:lb)
+fig
 ```
 
 Now we can perform a convergence study.
@@ -289,13 +290,15 @@ pretty_table((n=n, err=err);
 The error is approximately cut by a factor of 10 for each increase in $n$ by the same factor. A log-log plot also confirms first-order convergence. Keep in mind that since $h=(b-a)/n$, it follows that $O(h)=O(n^{-1})$.
 
 ```{code-cell}
-plot(n, err;
-    m=:o, label="results",
-    xaxis=(:log10, L"n"),  yaxis=(:log10, "inf-norm global error"),
-    title="Convergence of Euler's method")
+fig, ax, plt = scatterlines(n, err; label="observed",
+    axis=(xscale=log10, xlabel=L"n", yscale=log10, ylabel="inf-norm global error",
+    title="Convergence of Euler's method"))
 
 # Add line for perfect 1st order.
-plot!(n, 0.5 * err[end] * (n / n[end]) .^ (-1), l=:dash, label=L"O(n^{-1})")
+order1 = @. 0.5err[end] * (n / n[end])^(-1)
+lines!(n, order1, linestyle=:dash, color=:gray, label=L"O(n^{-1})")
+axislegend(ax, position=:rt)
+fig
 ```
 ``````
 
@@ -330,13 +333,36 @@ ivp = ODEProblem(predprey, u₀, tspan, [α, β])
 You can use any `DifferentialEquations` solver on the IVP system.
 
 ```{code-cell}
-using Plots
+using CairoMakie
 sol = solve(ivp, Tsit5());
-plot(sol, label=["prey" "predator"],
-    title="Predator-prey solution")
 ```
 
-We can find the discrete values used to compute the interpolated solution. The `sol.u` value is a vector of vectors.
+When we evaluate the solution, the result is a 2-vector. If we evalute at multiple times, we get a vector of 2-vectors.
+
+```{code-cell}
+@show sol(5.0)
+sol.(0:5)
+```
+
+Somtimes it's more convenient to get a matrix of values at different times, using a special syntax:
+
+```{code-cell}
+sol(0:5)[:, :]
+```
+
+Alternatively, it can be useful to define functions for individual components of the solution:
+
+```{code-cell}
+prey = t -> sol(t, idxs=1)
+predator = t -> sol(t, idxs=2)
+fig, ax, plt = lines(0..60, prey; label="prey",
+    axis=(xlabel=L"t", ylabel="solution", title="Solution of predator-prey"))
+lines!(0..60, predator; label="predator")
+leg = axislegend(ax, position=:rt)
+fig
+```
+
+We can also extract the discrete values used to compute the interpolated solution. The `sol.u` value is a vector of vectors.
 
 ```{code-cell}
 t, u = sol.t, sol.u    # extract times and solution values
@@ -345,34 +371,32 @@ t, u = sol.t, sol.u    # extract times and solution values
 @show u[20];
 ```
 
-We can also use {numref}`Function {number} <function-euler>` to find the solution.
+Suppose now we use {numref}`Function {number} <function-euler>` to find the solution.
 
 ```{code-cell}
 t, u = FNC.euler(ivp, 1200);
 ```
 
-The solution `u` is a vector of [prey,predator] 2-vectors for each of the discrete times in `t`. Manipulating the vector-of-vectors output can be a little tricky. Here, we convert it to an $n\times 2$ matrix. Each column is one component, while each row is a single value of $t$.
+The solution `u` is a vector of 2-vectors for each of the discrete times in `t`. Manipulating the vector-of-vectors output can be a little tricky. Here, we convert it to an $n\times 2$ matrix. Each row is one component, while each column is a single value of $t$.
 
 ```{code-cell}
-u = [u[j] for u in u, j in 1:2]
-plot!(t[1:3:end], u[1:3:end, :];
-    l=(1, :black),  m=2,
-    label=["Euler prey" "Euler predator"])
+u = [u[j] for j in 1:2, u in u]
+ax, plt = series(fig[2, 1], t[1:3:end], u[:, 1:3:end]; 
+    labels=["prey", "predator"],
+    axis=(xlabel=L"t", ylabel="solution", title="Euler solution"))
+axislegend(ax, position=:rt)
+fig
 ```
 
 Notice above that the accuracy of the Euler solution deteriorates rapidly.
 
 When there are just two components, it's common to plot the solution in the _phase plane_, i.e., with $u_1$ and $u_2$ along the axes and time as a parameterization of the curve.
 
-```{tip}
-:class: dropdown
-You can use `idxs` in the plot of a solution produced by `solve` to specify the components of the solution that appear on each axis.
-```
-
 ```{code-cell}
-plot(sol, idxs=(1, 2),
-    title="Predator-prey solution in the phase plane",
-    xlabel=L"y(t)",  ylabel=L"z(t)")
+t = range(0, 60, 1201)
+lines(prey.(t), predator.(t); 
+    axis=(title="Predator-prey solution in the phase plane",
+    xlabel=L"y(t)",  ylabel=L"z(t)"))
 ```
 
 As time progresses, the point in the phase plane spirals inward toward a limiting closed loop called a *limit cycle* representing a periodic solution:
@@ -383,19 +407,20 @@ As time progresses, the point in the phase plane spirals inward toward a limitin
 
 ```{code-cell}
 :tags: [hide-input, remove-output]
-prey, predator = [], []
-anim = @animate for t in range(0, 60, 801)
-    y, z = sol(t)
-    plot(prey, predator;
-        title="Predator-prey solution in the phase plane",
-        xlabel=L"y(t)",  ylabel=L"z(t)", legend=false)
-    push!(prey, y)
-    push!(predator, z)
-    scatter!([y], [z], m=(5, :red))
-    xlims!(0, 9)
-    ylims!(0, 6)
+fig = Figure()
+ax = Axis(fig[1, 1];
+    title="Predator-prey solution in the phase plane",
+    xlabel=L"y(t)",  ylabel=L"z(t)")
+u = Observable([Point(NaN, NaN)])
+lines!(u)    # will update as u changes
+new_u = @lift($u[end])
+scatter!(new_u, color=:darkred)
+limits!(ax, 0, 9, 0, 6)
+t = range(0, 60, 801)
+record(fig, "predator-prey.mp4", t; framerate=60) do t
+    new_u = sol(t)
+    u[] = push!(u[], Point(new_u...))
 end
-mp4(anim, "figures/predator-prey.mp4")
 ```
 
 ![Predator–prey solution](figures/predator-prey.mp4)
@@ -437,29 +462,46 @@ Here `idxs` is used to plot two components as functions of time.
 γ, L, k = 0, 0.5, 0
 ivp = ODEProblem(couple, u₀, tspan, [γ, L, k])
 sol = solve(ivp, Tsit5())
-plot(sol, idxs=[1, 2], 
-    label=[L"\theta_1" L"\theta_2"],
-    xlims=[20, 50], 
-    title="Uncoupled pendulums")
+function plot_sol(sol, title)
+    fig = Figure()
+    ax1 = Axis(fig[1, 1]; title, ylabel=L"\theta_1(t)")
+    lines!(ax1, 20..50, t -> sol(t, idxs=1))
+    ax2 = Axis(fig[2, 1]; xlabel = L"t", ylabel=L"\theta_2(t)")
+    lines!(ax2, 20..50, t -> sol(t, idxs=2))
+    linkaxes!(ax1, ax2)
+    return fig
+end
+plot_sol(sol, "Uncoupled pendulums")
 ```
 
 You can see that the pendulums swing independently:
 
 ```{code-cell}
 :tags: [hide-input, remove-output]
-anim = @animate for t in range(0, 24, 251)
-    θ₁, θ₂, _ = sol(t)
-    plot([0, sin(θ₁)], [0, -cos(θ₁)], l=4;
-        layout=(1, 2), aspect_ratio=1, grid=false,
-        xaxis=((-1.1, 1.1), false), yaxis=((-1.1, 0.1), false), legend=false)
-    plot!([0, sin(θ₂)], [0, -cos(θ₂)], l=4;
-        subplot=2, aspect_ratio=1, grid=false,
-        xaxis=((-1.1, 1.1), false), yaxis=((-1.1, 0.1), false), legend=false)
-    scatter!([sin(θ₁)], [-cos(θ₁)], m=(5, :black), subplot=1)
-    scatter!([sin(θ₂)], [-cos(θ₂)], m=(5, :black), subplot=2)
-    annotate!(-0.95, 0.25, Plots.text(@sprintf("t = %.1f", t), :left, 11); subplot=1)
+function animate_sol(sol, fname)
+    fig = Figure()
+    time = Observable(0.0)
+    for j in 1:2
+        ax = Axis(fig[1, j]; aspect=DataAspect())
+        hidedecorations!(ax)
+        hidespines!(ax)
+        θ = @lift(sol($time, idxs=j))
+        bob = @lift(Point(sin($θ), -cos($θ)))
+        rod = @lift(Point.([0, sin($θ)], [0, -cos($θ)]))
+        lines!(ax, rod; linewidth=4)
+        scatter!(ax, bob; markersize=14, color=:black)
+        limits!(ax, -1.1, 1.1, -1.1, 0.1)
+        if j == 1
+            lbl = @lift(@sprintf("t = %.1f", $time))
+            text!(ax, -0.95, 0.25; text=lbl, align = (:left, :center))
+        end
+    end
+    record(fig, fname, range(0, 24, 251); framerate=30) do t
+        time[] = t
+    end
+    return nothing
 end
-mp4(anim, "figures/pendulums-weak.mp4")
+animate_sol(sol, "figures/pendulums-weak.mp4")
 ```
 
 ![Uncoupled pendulums](figures/pendulums-weak.mp4)
@@ -472,29 +514,14 @@ With coupling activated, a different behavior is seen.
 k = 1
 ivp = ODEProblem(couple, u₀, tspan, [γ, L, k])
 sol = solve(ivp, Tsit5())
-plot(sol, idxs=[1, 2], 
-    label=[L"\theta_1" L"\theta_2"],
-    xlims=[20, 50], 
-    title="Coupled pendulums")
+plot_sol(sol, "Coupled pendulums")
 ```
 
 The coupling makes the pendulums swap energy back and forth:
 
 ```{code-cell}
 :tags: [hide-input, remove-output]
-anim = @animate for t in range(0, 50, 601)
-    θ₁, θ₂, _ = sol(t)
-    plot([0, sin(θ₁)], [0, -cos(θ₁)], l=4;
-        layout=(1, 2), aspect_ratio=1, grid=false,
-        xaxis=((-1.1, 1.1), false), yaxis=((-1.1, 0.1), false), legend=false)
-    plot!([0, sin(θ₂)], [0, -cos(θ₂)], l=4;
-        subplot=2, aspect_ratio=1, grid=false,
-        xaxis=((-1.1, 1.1), false), yaxis=((-1.1, 0.1), false), legend=false)
-    scatter!([sin(θ₁)], [-cos(θ₁)], m=(5, :black), subplot=1)
-    scatter!([sin(θ₂)], [-cos(θ₂)], m=(5, :black), subplot=2)
-    annotate!(-0.95, 0.1, Plots.text(@sprintf("t = %.1f", t), :left, 11); subplot=1)
-end
-mp4(anim, "figures/pendulums-strong.mp4")
+animate_sol(sol, "figures/pendulums-strong.mp4")
 ```
 
 ![Coupled pendulums](figures/pendulums-strong.mp4)

@@ -2,17 +2,28 @@ import Pkg; Pkg.activate("/Users/driscoll/Documents/GitHub/fnc")
 
 using FNCFunctions
 
-using Plots
-default(
-    titlefont=(11,"Helvetica"),
-    guidefont=(11,"Helvetica"),
-    linewidth = 2,
-    markersize = 3,
-    msa = 0,
+using CairoMakie
+update_theme!(
     size=(500,320),
-    label="",
-    html_output_format = "svg"
-)
+    font="Helvetica",
+    titlefontsize=11,
+    xaxisfontsize=11,
+    yaxisfontsize=11,
+    zaxisfontsize=11,
+    linewidth=2,
+    )
+CairoMakie.activate!(type = "svg")
+# using Plots
+# default(
+#     titlefont=(11,"Helvetica"),
+#     guidefont=(11,"Helvetica"),
+#     linewidth = 2,
+#     markersize = 3,
+#     msa = 0,
+#     size=(500,320),
+#     label="",
+#     html_output_format = "svg"
+# )
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra

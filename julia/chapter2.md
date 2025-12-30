@@ -167,15 +167,16 @@ We can visualize the interpolation process. First, we plot the data as points.
 
 ```{tip}
 :class: dropdown
-The `scatter` function creates a scatter plot of points; you can specify a line connecting the points as well.
+The `scatter` function creates a scatter plot of points.
 ```
 
 ```{code-cell}
-using Plots
-scatter(t, y;
-    label="actual",  legend=:topleft,
-    xlabel="years since 1980",  ylabel="population (millions)", 
-    title="Population of China")
+fig, ax, plt = scatter(
+    t, y; label="actual", 
+    axis=(xlabel="years since 1980",  ylabel="population (millions)", 
+        title="Population of China")
+    )
+fig
 ```
 
 :::{index} Julia; range
@@ -214,7 +215,9 @@ By convention, functions whose names end with the bang `!` change the value or s
 ```
 
 ```{code-cell}
-plot!(tt, yy, label="interpolant")
+lines!(tt, yy; label="interpolant")
+axislegend(position=:lt)
+fig
 ```
 ``````
 
@@ -785,16 +788,18 @@ end
 Plotting the time as a function of $n$ on log-log scales is equivalent to plotting the logs of the variables.
 
 ```{code-cell}
-scatter(n, t, label="data", legend=false,
-    xaxis=(:log10, L"n"), yaxis=(:log10, "elapsed time (sec)"),
+fig, ax, plt = scatter(n, t; label="data", 
+    axis=(xscale=log10, xlabel=L"n", yscale=log10, ylabel="elapsed time (sec)",
     title="Timing of matrix-vector multiplications")
+)
 ```
 
 You can see that while the full story is complicated, the graph is trending to a straight line of positive slope. For comparison, we can plot a line that represents $O(n^2)$ growth exactly. (All such lines have slope equal to 2.)
 
 ```{code-cell}
-plot!(n, t[end] * (n/n[end]).^2, l=:dash,
-    label=L"O(n^2)", legend=:topleft)
+lines!(n, t[end] * (n/n[end]).^2, label=L"O(n^2)", linestyle=:dash)
+axislegend(position=:lt)
+fig
 ```
 ``````
 
@@ -822,9 +827,11 @@ end
 We plot the timings on a log-log graph and compare it to $O(n^3)$. The result could vary significantly from machine to machine, but in theory the data should start to parallel the line as $n\to\infty$.
 
 ```{code-cell}
-scatter(n, t, label="data", legend=:topleft,
-    xaxis=(:log10, L"n"), yaxis=(:log10, "elapsed time"))
-plot!(n, t[end ]* (n/n[end]).^3, l=:dash, label=L"O(n^3)")
+fig, ax, plt = scatter(n, t; label="data",
+    axis=(xscale=log10, xlabel=L"n", yscale=log10, ylabel="elapsed time"))
+lines!(n, t[end ]* (n/n[end]).^3, linestyle=:dash, label=L"O(n^3)")
+axislegend(position=:lt)
+fig
 ```
 ``````
 
@@ -1151,9 +1158,9 @@ x = [ fun(t) for fun in [cos, sin], t in θ ];
 To create an array of plots, start with a `plot` that has a `layout` argument, then do subsequent `plot!` calls with a `subplot` argument.
 
 ```{code-cell}
-plot(aspect_ratio=1, layout=(1, 2),
-    xlabel=L"x_1",  ylabel=L"x_2")
-plot!(x[1, :], x[2, :], subplot=1, title="Unit circle") 
+fig = Figure()
+ax1 = Axis(fig[1, 1], aspect=DataAspect(), xlabel=L"x_1", ylabel=L"x_2", title="Unit circle")
+lines!(ax1, x[1, :], x[2, :]) 
 ```
 
 The linear function $\mathbf{f}(\mathbf{x}) = \mathbf{A}\mathbf{x}$ defines a mapping from $\mathbb{R}^2$ to $\mathbb{R}^2$. We can apply `A` to every column of `x` by using a single matrix multiplication.
@@ -1165,17 +1172,18 @@ Ax = A * x;
 The image of the transformed vectors is an ellipse. 
 
 ```{code-cell}
-plot!(Ax[1, :], Ax[2, :], 
-    subplot=2, title="Image under x → Ax")
+ax2 = Axis(fig[1, 2], aspect=DataAspect(), xlabel=L"(Ax)_1", ylabel=L"(Ax)_2", title="Image under x → Ax")
+lines!(ax2, Ax[1, :], Ax[2, :])
+fig
 ```
 
 That ellipse just touches the circle of radius $\|\mathbf{A}\|_2$.
 
 ```{code-cell}
-plot!(twonorm*x[1, :], twonorm*x[2, :], subplot=2, l=:dash)
+lines!(ax2, twonorm*x[1, :], twonorm*x[2, :], linestyle=:dash)
+fig
 ```
 ``````
-
 
 ### 2.8 @section-linsys-condition-number
 (demo-condition-bound-julia)=

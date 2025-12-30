@@ -68,10 +68,10 @@ Here are 5-year averages of the worldwide temperature anomaly as compared to the
 year = 1955:5:2000
 temp = [ -0.0480, -0.0180, -0.0360, -0.0120, -0.0040,
        0.1180, 0.2100, 0.3320, 0.3340, 0.4560 ]
-    
-scatter(year, temp, label="data",
-    xlabel="year", ylabel="anomaly (degrees C)", 
-    legend=:bottomright)
+
+fig, ax, plt = scatter(year, temp; label="data",
+    axis=(xlabel="year", ylabel="anomaly (degrees C)"), 
+)
 ```
 
 A polynomial interpolant can be used to fit the data. Here we build one using a Vandermonde matrix. First, though, we express time as decades since 1950, as it improves the condition number of the matrix.
@@ -89,14 +89,16 @@ c = V \ temp
 The coefficients in vector `c` are used to create a polynomial. Then we create a function that evaluates the polynomial after changing the time variable as we did for the Vandermonde matrix.
 ```{tip}
 :class: dropdown
-If you `plot` a function, then the points are chosen automatically to make a smooth curve.
+Note the syntax below for plotting a function over an interval, with the points chosen automatically to make a smooth curve.
 ```
 
 ```{code-cell}
-using Polynomials, Plots
+using Polynomials
 p = Polynomial(c)
 f = yr -> p((yr - 1950) / 10)
-plot!(f, 1955, 2000, label="interpolant")
+lines!(1955..2000, f; label="interpolant")
+axislegend(position=:rb)
+fig
 ```
 
 As you can see, the interpolant does represent the data, in a sense. However it's a crazy-looking curve for the application. Trying too hard to reproduce all the data exactly is known as _overfitting_.
@@ -133,9 +135,11 @@ p = Polynomial(c)
 
 ```{code-cell}
 f = yr -> p((yr - 1955) / 10)
-scatter(year, temp, label="data",
-    xlabel="year", ylabel="anomaly (degrees C)", leg=:bottomright)
-plot!(f, 1955, 2000, label="linear fit")
+fig, ax, plt = scatter(year, temp; label="data",
+    axis=(xlabel="year", ylabel="anomaly (degrees C)"), 
+)
+lines!(ax, 1955..2000, f; label="linear fit")
+fig
 ```
 
 If we use a global cubic polynomial, the points are fit more closely.
@@ -153,7 +157,9 @@ The definition of `f` above is in terms of `p`. When `p` is changed, then `f` ca
 
 ```{code-cell}
 p = Polynomial( V \ temp )
-plot!(f, 1955, 2000, label="cubic fit")
+lines!(ax, 1955..2000, f; label="cubic fit")
+axislegend(position=:rb)
+fig
 ```
 
 If we were to continue increasing the degree of the polynomial, the residual at the data points would get smaller, but overfitting would increase.
@@ -168,18 +174,19 @@ a = [1/k^2 for k=1:100]
 s = cumsum(a)        # cumulative summation
 p = @. sqrt(6*s)
 
-scatter(1:100, p;
-    title="Sequence convergence",
-    xlabel=L"k",  ylabel=L"p_k")
+fig, ax, plt = scatter(1:100, p;
+    axis=(xlabel=L"k",  ylabel=L"p_k", title="Sequence convergence")
+)
 ```
 
 This graph suggests that maybe $p_k\to \pi$, but it's far from clear how close the sequence gets. It's more informative to plot the sequence of errors, $\epsilon_k= |\pi-p_k|$. By plotting the error sequence on a log-log scale, we can see a nearly linear relationship.
 
 ```{code-cell}
 ϵ = @. abs(π - p)    # error sequence
-scatter(1:100, ϵ;
-    title="Convergence of errors",
-    xaxis=(:log10,L"k"),  yaxis=(:log10,"error"))
+fig, ax, plt = scatter(1:100, ϵ;
+    axis=(title="Convergence of errors",
+    xscale=log10, xlabel=L"k", yscale=log10, ylabel="error")
+)
 ```
 
 The straight line on the log-log scale suggests a power-law relationship where $\epsilon_k\approx a k^b$, or $\log \epsilon_k \approx b (\log k) + \log a$.
@@ -200,7 +207,9 @@ a, b = exp(c[1]), c[2];
 It's tempting to conjecture that the slope $b\to -1$ asymptotically. Here is how the numerical fit compares to the original convergence curve.
 
 ```{code-cell}
-plot!(k, a * k.^b, l=:dash, label="power-law fit")
+lines!(k, a * k.^b, linestyle=:dash, label="power-law fit")
+axislegend(position=:rt)
+fig
 ```
 ``````
 
