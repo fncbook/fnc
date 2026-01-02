@@ -288,7 +288,7 @@ Using block notation, find $\mathbf{C}^2$ and $\mathbf{C}^3$.
 
 ``````{exercise}
 :label: problem-matrices-inverseprod
-✍ Prove that if $\mathbf{A}$ and $\mathbf{B}$ are invertible and the product $\mathbf{A}\mathbf{B}$ is defined, then $(\mathbf{A}\mathbf{B})^{-1}=\mathbf{B}^{-1}\mathbf{A}^{-1}$. (In producing the inverse, it follows that $\mathbf{A}\mathbf{B}$ is invertible as well.)
+✍ Prove that if $\mathbf{A}$ and $\mathbf{B}$ are invertible and have the same size, then $(\mathbf{A}\mathbf{B})^{-1}=\mathbf{B}^{-1}\mathbf{A}^{-1}$. (In producing the inverse, it follows that $\mathbf{A}\mathbf{B}$ is invertible as well.)
 ``````
 
 ``````{exercise}

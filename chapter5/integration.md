@@ -442,7 +442,7 @@ Make two separate plots of the absolute error as a function of $n$, one using a 
 
 ``````{exercise}
 :label: problem-integration-extrap6
-⌨ For the integrals in (a)–(c) of @problem-integration-tests, extrapolate the trapezoidal results for $n=32,48,72,108,162$ two levels to get sixth-order accurate results, and make table of the errors.
+⌨ For the integrals in (a)–(c) of @problem-integration-tests, extrapolate the trapezoidal results for $n=32,48,72,108,162$ two levels to get sixth-order accurate results, and make a table of the errors.
 ``````
 
 ``````{exercise}

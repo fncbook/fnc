@@ -219,7 +219,7 @@ There are stronger and more general statements of @theorem-contraction. For inst
 
 ``````{exercise}
 :label: problem-fixedpoint-compute
-⌨ For each case in the preceding problem, apply 25 fixed-point iterations starting from $x_1=1$. Make a log-linear plot of the error to verify linear convergence. Then use numerical values of the error to determine an approximate value for $\sigma$ in {eq}`linearconvergence`.
+⌨ For each case in the preceding problem, apply 25 fixed-point iterations starting from $x_1=1$. Make a log-linear plot of the error to verify linear convergence. Then, use numerical values of the error to determine an approximate value for $\sigma$ in {eq}`linearconvergence`.
 ``````
 
 ``````{exercise}
