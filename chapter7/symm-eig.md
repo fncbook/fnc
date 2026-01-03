@@ -304,7 +304,7 @@ You should get 1000 dots lying on the real axis.
 :label: problem-symmeig-gradient
 ✍ The matrix $\mathbf{A}=\displaystyle \begin{bmatrix} 3 & -2 \\ -2 & 0 \end{bmatrix}$ has an eigenvector $[1,\, 2].$
 
-**(a)** Write out $R_{\mathbf{A}}(\mathbf{x})$ for $x\in\real^2$ explicitly as a function of $x_1$ and $x_2$.
+**(a)** Write out $R_{\mathbf{A}}(\mathbf{x})$ for $\mathbf{x}\in\real^2$ explicitly as a function of $x_1$ and $x_2$.
 
 **(b)** Find $R_{\mathbf{A}}(\mathbf{x})$ for $x_1=1$, $x_2=2$.
 

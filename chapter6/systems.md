@@ -306,7 +306,7 @@ with $[x(0),y(0)]=[0.95,0]$, $[0,1.05]$, and $[-2.5,0]$.
 \end{split}
 ```
 
-Assume $v_1(0) = 0.5$, $v_2(0) = 0.1$, $a = 0.1$, $\epsilon = 0.008$, $\gamma = 1$. For each value of $I$ below, imitate the method of @demo-systems-coupledpendula tofind and plot the solution for $0\le t \le 600$. The solutions are highly sensitive to $I$, and you need to change the requested absolute and relative error tolerances to $10^{-9}$. In each case the solution quickly approaches a periodic oscillation.
+Assume $v_1(0) = 0.5$, $v_2(0) = 0.1$, $a = 0.1$, $\epsilon = 0.008$, $\gamma = 1$. For each value of $I$ below, imitate the method of @demo-systems-coupledpendula to find and plot the solution for $0\le t \le 600$. The solutions are highly sensitive to $I$, and you need to change the requested absolute and relative error tolerances to $10^{-9}$. In each case the solution quickly approaches a periodic oscillation.
 
 **(a)** $I = 0.05527,\quad$
 **(b)** $I = 0.05683,\quad$

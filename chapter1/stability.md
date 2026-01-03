@@ -216,7 +216,7 @@ can be inverted to yield a formula for $\operatorname{acosh}(x)$:
 y = \operatorname{acosh}(x) = -\log\bigl(x-\sqrt{x^2-1}\bigr).
 ```
 
-For the steps below, define $y_i=-4i$ and $x_i=\cosh(y_i)$ for $i=1,\dots,4$. Hence $y_i=\operatorname{acosh}(x_i)$.
+For the steps below, define $y_i=4i$ and $x_i=\cosh(y_i)$ for $i=1,\dots,4$. Hence $y_i=\operatorname{acosh}(x_i)$.
 
 **(a)** Find the relative condition number of evaluating $f(x) = \operatorname{acosh}(x)$. (You can use {eq}`acosh` or look up a formula for $f'$ in a calculus book.)  Evaluate $\kappa_f$ at all the $x_i$. (You will find that $\kappa$ is less than 20 at these inputs, so the conditioning is fine.)
 

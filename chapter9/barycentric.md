@@ -197,7 +197,7 @@ You might suspect that as the evaluation point $x$ approaches a node $t_k$, subt
 
 ``````{exercise}
 :label: problem-barycentric-polyinterp
-⌨ In each case, use {numref}`Function {number}<function-polyinterp>` to interpolate the given function using $n+1$ evenly spaced nodes in the given interval. In a 3-by-1 grid of plots, show each interpolant together with the exact function and the data points (i.e., values at the nodes).
+⌨ In each case, use {numref}`Function {number}<function-polyinterp>` to interpolate the given function using $n+1$ evenly spaced nodes in the given interval. In a 3-by-1 grid of plots for different $n$, show the interpolant, exact function, and values at the nodes.
 
 **(a)** $f(x) = \ln (x), \quad n = 2,3,4, \quad x\in [1,10]$
 
