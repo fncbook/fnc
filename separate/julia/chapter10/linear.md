@@ -26,8 +26,6 @@ default(
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra
-
-@ptconf backend = Val(:html) tf = tf_html_simple
 ```
 
 (section-bvp-linear)=
@@ -330,8 +328,8 @@ for (k, n) in enumerate(n)
     x, u = FNC.bvplin(p, q, r, [0, 1], -1, 0, n)
     err[k] = norm(exact.(x) - u, Inf)
 end
-data = (n = n[1:4:end], err = err[1:4:end])
-@pt :header = ["n", "inf-norm error"] data
+pretty_table((n = n[1:4:end], err = err[1:4:end]);
+    column_labels = ["n", "inf-norm error"], backend=:html)
 ```
 
 Each factor of 10 in $n$ reduces error by a factor of 100, which is indicative of second-order convergence.

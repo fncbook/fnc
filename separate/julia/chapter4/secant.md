@@ -26,8 +26,6 @@ default(
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra
-
-@ptconf backend = Val(:html) tf = tf_html_simple
 ```
 
 (section-nonlineqn-secant)=
@@ -228,7 +226,8 @@ It's not easy to see the convergence rate by staring at these numbers. We can us
 ```{code-cell}
 logerr = @. log10(abs(ϵ))
 ratios = [NaN; [logerr[i+1] / logerr[i] for i in 1:length(logerr)-1]]
-@pt :header=["iteration", "error", "log error", "ratio"] [eachindex(ϵ) ϵ logerr ratios]
+pretty_table( (iter=eachindex(ϵ), ϵ, logerr, ratios);
+    column_labels=["iteration", "error", "log error", "ratio"], backend=:html )
 ```
 
 As expected, this settles in at around 1.618.
@@ -337,7 +336,8 @@ r = x[end]
 ϵ = @. Float64(abs(r - x[1:end-1]))
 logerr = @. log10(abs(ϵ))
 ratios = [NaN; [logerr[i+1] / logerr[i] for i in 1:length(logerr)-1]]
-@pt :header=["iteration", "error", "log error", "ratio"] [eachindex(ϵ) ϵ logerr ratios]
+pretty_table( (iter=eachindex(ϵ), ϵ, logerr, ratios);
+    column_labels=["iteration", "error", "log error", "ratio"], backend=:html )
 ```
 
 The convergence is probably superlinear at a rate of $\alpha=1.8$ or so.

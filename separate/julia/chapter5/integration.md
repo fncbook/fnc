@@ -26,8 +26,6 @@ default(
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra
-
-@ptconf backend = Val(:html) tf = tf_html_simple
 ```
 
 (section-localapprox-integration)=
@@ -258,7 +256,8 @@ for (k, n) in enumerate(n)
     T, t, y = FNC.trapezoid(f, a, b, n)
     err[k] = Q - T
 end
-@pt :header=["n", "error"] [n err]
+pretty_table((n=n, err=err); 
+    column_labels=["n", "error"], backend=:html)
 ```
 
 Each increase by a factor of 10 in $n$ cuts the error by a factor of about 100, which is consistent with second-order convergence. Another check is that a log-log graph should give a line of slope $-2$ as $n\to\infty$.
@@ -438,7 +437,7 @@ The value `nothing` equals nothing except `nothing`.
 
 ```{code-cell}
 err = [T .- Q [nothing; S .- Q] [nothing; nothing; R - Q]]
-@pt :header=["order 2", "order 4", "order 6"] err
+pretty_table(err; column_labels=["order 2", "order 4", "order 6"], backend=:html)
 ```
 
 If we consider the computational time to be dominated by evaluations of $f$, then we have obtained a result with about twice as many accurate digits as the best trapezoid result, at virtually no extra cost.
@@ -528,7 +527,7 @@ where $p$ is the quadratic polynomial from part (a), in terms of $h$, $\alpha$, 
 
 ``````{exercise}
 :label: problem-integration-simpsonextrap
-✍ Show that the Simpson formula {eq}`simpson` is equivalent to $S_f(n/2),$ given the definition of $S_f$ in {eq}`nc-simpson`.
+✍ Show that the Simpson formula {eq}`simpson` is equivalent to $S_f(n),$ given the definition of $S_f$ in {eq}`nc-simpson`.
 ``````
 
 ``````{exercise}
@@ -550,7 +549,7 @@ Make two separate plots of the absolute error as a function of $n$, one using a 
 
 ``````{exercise}
 :label: problem-integration-extrap6
-⌨ For the integrals in (a)–(c) of @problem-integration-tests, extrapolate the trapezoidal results for $n=32,48,72,108,162$ two levels to get sixth-order accurate results, and make table of the errors.
+⌨ For the integrals in (a)–(c) of @problem-integration-tests, extrapolate the trapezoidal results for $n=32,48,72,108,162$ two levels to get sixth-order accurate results, and make a table of the errors.
 ``````
 
 ``````{exercise}

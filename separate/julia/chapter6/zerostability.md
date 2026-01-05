@@ -26,8 +26,6 @@ default(
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra
-
-@ptconf backend = Val(:html) tf = tf_html_simple
 ```
 
 (section-ivp-zerostability)=
@@ -70,7 +68,8 @@ for n in n
     end
     push!(err, abs(û(b) - u[end]))
 end
-@pt :header=["n", "h", "error"] [n (b - a) ./ n err]
+pretty_table((n=n, h=(b - a) ./ n, err=err); 
+    column_labels=["n", "h", "error at t=1"], backend=:html)
 ```
 
 The error starts out promisingly, but things explode from there. A graph of the last numerical attempt yields a clue.

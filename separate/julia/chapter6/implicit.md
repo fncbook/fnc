@@ -26,8 +26,6 @@ default(
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra
-
-@ptconf backend = Val(:html) tf = tf_html_simple
 ```
 
 (section-ivp-implicit)=
@@ -89,7 +87,8 @@ for n in n
     t, u = FNC.ab4(ivp, n)
     push!(err, norm(u_ref.(t) - u, Inf))
 end
-@pt :header=["n", "inf-norm error"] [n err]
+pretty_table((n=n, err=err); 
+    column_labels=["n", "inf-norm error"], backend=:html)
 ```
 
 The method should converge as $O(h^4)$, so a log-log scale is appropriate for the errors.

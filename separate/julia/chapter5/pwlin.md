@@ -26,8 +26,6 @@ default(
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra
-
-@ptconf backend = Val(:html) tf = tf_html_simple
 ```
 
 (section-localapprox-pwlin)=
@@ -296,8 +294,8 @@ for (k, n) in enumerate(n)
     maxerr[k] = norm(err, Inf)
 end
 
-data = (n=n[1:4:end], err=maxerr[1:4:end])
-@pt :header=["n", "max-norm error"] data
+pretty_table((n=n[1:4:end], err=maxerr[1:4:end]);
+    column_labels=["n", "max-norm error"], backend=:html)
 ```
 
 As predicted, a factor of 10 in $n$ produces a factor of 100 in the error. In a convergence plot, it is traditional to have $h$ *decrease* from left to right, so we expect a straight line of slope $-2$ on a log-log plot.

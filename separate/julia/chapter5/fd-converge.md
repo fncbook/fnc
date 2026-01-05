@@ -27,8 +27,6 @@ default(
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra
-
-@ptconf backend = Val(:html) tf = tf_html_simple
 ```
 
 (section-localapprox-fd-converge)=
@@ -129,14 +127,15 @@ for (k, h) in enumerate(h)
     FD[k, 1] = (f(h) - f(0)) / h
     FD[k, 2] = (f(h) - f(-h)) / 2h
 end
-@pt :header=["h", "FD1", "FD2"] [h FD]
+pretty_table([h FD]; column_labels=["h", "FD1", "FD2"], backend=:html)
 ```
 
 All that's easy to see from this table is that FD2 appears to converge to the same result as FD1, but more rapidly. A table of errors is more informative.
 
 ```{code-cell}
 error_FD = @. exact_value - FD
-@pt :header=["h", "error in FD1", "error in FD2"] [h error_FD]
+pretty_table([h error_FD]; 
+    column_labels=["h", "error in FD1", "error in FD2"], backend=:html)
 ```
 
 In each row, $h$ is decreased by a factor of 10, so that the error is reduced by a factor of 10 in the first-order method and 100 in the second-order method.
@@ -239,7 +238,7 @@ for (k, h) in enumerate(h)
     FD[k, 2] = dot([0 -1 / 2 0 1 / 2 0] / h, vals)
     FD[k, 3] = dot([1 / 12 -2 / 3 0 2 / 3 -1 / 12] / h, vals)
 end
-@pt :header=["h", "FD1", "FD2", "FD4"] [h FD]
+pretty_table([h FD]; column_labels=["h", "FD1", "FD2", "FD4"], backend=:html)
 ```
 
 They all seem to be converging to $-1.3$. The convergence plot reveals some interesting structure to the errors, though.
@@ -274,12 +273,12 @@ Again the graph is made so that $h$ decreases from left to right. The errors are
 
 ``````{exercise}
 :label: problem-fdconverge-fwd2
-✍ Calculate the first nonzero term in the Taylor series of the truncation error $\tau_{f}(h)$ for the finite-difference formula defined by the second row of {numref}`table-FDforward`. (Find the entire term, not just the $O(h^p)$ equivalent.)
+✍ Calculate the first nonzero term (with coefficient) in the Taylor series of the truncation error $\tau_{f}(h)$ for the finite-difference formula defined by the second row of {numref}`table-FDforward`. 
 ``````
 
 ``````{exercise}
 :label: problem-fdconverge-fwd3
-✍ Calculate the first nonzero term in the Taylor series of the truncation error $\tau_{f}(h)$ for the finite-difference formula defined by the third row of {numref}`table-FDforward`.
+✍ Calculate the first nonzero term (with coefficient) in the Taylor series of the truncation error $\tau_{f}(h)$ for the finite-difference formula defined by the third row of {numref}`table-FDforward`. 
 ``````
 
 ``````{exercise}

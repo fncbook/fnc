@@ -26,8 +26,6 @@ default(
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra
-
-@ptconf backend = Val(:html) tf = tf_html_simple
 ```
 
 (section-ivp-euler)=
@@ -329,7 +327,8 @@ for n in n
     t, u = FNC.euler(ivp, n)
     push!(err, norm(u_exact.(t) - u, Inf))
 end
-@pt :header=["n", "inf-norm error"] [n err]
+pretty_table((n=n, err=err); 
+    column_labels=["n", "inf-norm error"], backend=:html)
 ```
 
 The error is approximately cut by a factor of 10 for each increase in $n$ by the same factor. A log-log plot also confirms first-order convergence. Keep in mind that since $h=(b-a)/n$, it follows that $O(h)=O(n^{-1})$.
@@ -387,6 +386,7 @@ Euler's method is the ancestor of the two major families of IVP methods presente
  ✍ Here is an alternative to Euler's method:
 
 ```{math}
+:numbered: false
 \begin{split}
 v_{i+1} &= u_i + h f(t_i,u_i),\\
 u_{i+1} &= u_i + hf(t_{i}+h,v_{i+1}).

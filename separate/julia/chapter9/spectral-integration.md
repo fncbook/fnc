@@ -26,8 +26,6 @@ default(
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra
-
-@ptconf backend = Val(:html) tf = tf_html_simple
 ```
 
 (section-globalapprox-integration)=
@@ -73,7 +71,7 @@ We use the trapezoidal integration formula to compute the perimeter of an ellips
 $$\int_{-1}^1 \pi\sqrt{ \cos^2(\pi t) + \tfrac{1}{4}\sin^2(\pi t)}\,dt.$$
 
 ```{code-cell}
-f(t) = π * sqrt( cospi(t)^2 + sinpi(t)^2 / 4 );
+f(t) = π * sqrt( cospi(t)^2 + sinpi(t)^2 / 4 )
 n = 4:4:48
 perim = zeros(size(n))
 for (k, n) in enumerate(n)
@@ -81,9 +79,10 @@ for (k, n) in enumerate(n)
     t = @. h * (0:n-1) - 1
     perim[k] = h * sum(f.(t))
 end
-err = @. abs(perim - perim[end])    # use last value as "exact"
-@ptconf formatters=ft_printf(["%d", "%.15f", "%.2e"], 1:3)
-@pt :header=["n", "perimeter", "error estimate"] [n perim err][1:end-1, :]
+err = @. abs(perim[1:end-1] - perim[end])    # use last value as "exact"
+formatters = [fmt__printf("%.15f", 2:2), fmt__printf("%.2e", 3:3)]
+pretty_table((n=n[1:end-1], per=perim[1:end-1], err=err); 
+    column_labels=["n", "perimeter", "error estimate"], formatters, backend=:html)
 ```
 The approximations gain about one digit of accuracy for each constant increment of $n$, which is consistent with spectral convergence.
 

@@ -26,8 +26,6 @@ default(
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra
-
-@ptconf backend = Val(:html) tf = tf_html_simple
 ```
 
 (section-localapprox-splines)=
@@ -263,7 +261,8 @@ for (k, n) in enumerate(n)
     dif = @. f(x) - S(x)
     err[k] = norm(dif, Inf)
 end
-@pt :header=["n", "max-norm error"] [n[1:2:end] err[1:2:end]]
+pretty_table((n=n[1:2:end], err=err[1:2:end]);
+    column_labels=["n", "max-norm error"], backend=:html)
 ```
 
 Since we expect convergence that is $O(h^4)=O(n^{-4})$, we use a log-log graph of error and expect a straight line of slope $-4$.
@@ -296,25 +295,24 @@ The conditioning of spline interpolation is much more complicated than for the p
 ## Exercises
 <!-- 
 Can't do NaK with only 3 nodes!
+-->
 ``````{exercise}
 :label: problem-splines-system
 ✍ In each case, write out the entries of the matrix and right-hand side of the linear system that determines the coefficients for the cubic not-a-knot spline interpolant of the given function and node vector.
 
-**(a)** $\cos(\pi^2 x^2 ), \: \mathbf{t} = [-1,1,4]$
+**(a)** $\cos(\pi^2 x^2 ), \: \mathbf{t} = [-1,0,1,4]$
 
 **(b)** $\cos(\pi^2 x^2), \: \mathbf{t} = [0,\tfrac{1}{2},\tfrac{3}{4},1]$
 
-**(c)** $\ln(x), \:  \mathbf{t} = [1,2,3]$
+**(c)** $\ln(x), \:  \mathbf{t} = [0,1,2,3]$
 
-**(d)** $\sin(x^2),\:  \mathbf{t} = [-1,0,1]$
+**(d)** $\sin(x^2),\:  \mathbf{t} = [-1,0,1,2]$
 ``````
 
 ``````{exercise}
 :label: problem-splines-systemsolve
 ⌨ (Continuation of @problem-splines-system.) For each case in @problem-splines-system, solve the linear system you wrote down. Then plot the resulting cubic spline over the interval between the second and third nodes.
-
-`````` 
--->
+``````
 
 ``````{exercise}
 :label: problem-splines-spinterp

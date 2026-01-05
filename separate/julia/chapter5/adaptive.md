@@ -26,8 +26,6 @@ default(
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra
-
-@ptconf backend = Val(:html) tf = tf_html_simple
 ```
 
 (section-localapprox-adaptive)=
@@ -67,7 +65,8 @@ for (k, n) in enumerate(n)
     err[k, 2] = T - right_val
 end
 
-@pt :header=["n", "left error", "right error"] [n err]
+pretty_table((n=n, lerr=err[:, 1], rerr=err[:, 2]); 
+    column_labels=["n", "left error", "right error"], backend=:html)
 ```
 
 Both the picture and the numerical results suggest that more nodes should be used on the right half of the interval than on the left half.
@@ -205,7 +204,9 @@ for tol in 10.0 .^ (-4:-1:-14)
     push!(err, Q - A)
     push!(n, length(t))
 end
-@pt :header=["tolerance", "error", "number of nodes"] [tol err n][1:2:end, :]
+rows = 1:2:length(tol)
+pretty_table((tol=tol[rows], err=err[rows], n=n[rows]);
+    column_labels=["tolerance", "error", "number of nodes"], backend=:html)
 ```
 
 As you can see, even though the errors are not smaller than the tolerances, the two columns decrease in tandem. If we consider now the convergence not in $h$, which is poorly defined now, but in the number of nodes actually chosen, we come close to the fourth-order accuracy of the underlying Simpson scheme.

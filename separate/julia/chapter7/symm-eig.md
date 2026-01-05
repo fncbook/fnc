@@ -26,8 +26,6 @@ default(
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra
-
-@ptconf backend = Val(:html) tf = tf_html_simple
 ```
 
 (section-matrixanaly-symm-eig)=
@@ -180,7 +178,7 @@ The Rayleigh quotient evaluated at an eigenvector gives the corresponding eigenv
 R(V[:, 7])
 ```
 
-If the input to he Rayleigh quotient is within a small $\delta$ of an eigenvector, its output is within $O(\delta^2)$ of the corresponding eigenvalue. In this experiment, we observe that each additional digit of accuracy in an approximate eigenvector gives two more digits to the eigenvalue estimate coming from the Rayleigh quotient.
+If the input to the Rayleigh quotient is within a small $\delta$ of an eigenvector, its output is within $O(\delta^2)$ of the corresponding eigenvalue. In this experiment, we observe that each additional digit of accuracy in an approximate eigenvector gives two more digits to the eigenvalue estimate coming from the Rayleigh quotient.
 
 ```{code-cell}
 δ = @. 1 ./ 10^(1:5)
@@ -191,8 +189,8 @@ for (k, delta) in enumerate(δ)
     x = V[:, 7] + e
     eval_diff[k] = R(x) - 7
 end
-labels = ["perturbation δ", "δ²", "R(x) - λ"]
-@pt :header=labels [δ δ .^ 2 eval_diff]
+pretty_table([δ δ.^2 eval_diff];
+    column_labels = ["δ (perturbation)", "δ²", "R(x) - λ"], backend=:html)
 ```
 
 ::::
@@ -349,7 +347,7 @@ You should get 1000 dots lying on the real axis.
 :label: problem-symmeig-gradient
 ✍ The matrix $\mathbf{A}=\displaystyle \begin{bmatrix} 3 & -2 \\ -2 & 0 \end{bmatrix}$ has an eigenvector $[1,\, 2].$
 
-**(a)** Write out $R_{\mathbf{A}}(\mathbf{x})$ for $x\in\real^2$ explicitly as a function of $x_1$ and $x_2$.
+**(a)** Write out $R_{\mathbf{A}}(\mathbf{x})$ for $\mathbf{x}\in\real^2$ explicitly as a function of $x_1$ and $x_2$.
 
 **(b)** Find $R_{\mathbf{A}}(\mathbf{x})$ for $x_1=1$, $x_2=2$.
 

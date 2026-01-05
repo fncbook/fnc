@@ -26,8 +26,6 @@ default(
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra
-
-@ptconf backend = Val(:html) tf = tf_html_simple
 ```
 
 (section-matrixanaly-svd)=
@@ -434,7 +432,7 @@ $\begin{bmatrix}
 
 ``````{exercise}
 :label: problem-svd-cond
-✍ In order to prove {eq}`svdcond` of @theorem-svdprops, show that $\twonorm{\mathbf{A}^+} = \sigma_n^{-1}$. For simplicity, assume that $m\ge n$ and that the rank of $\mathbf{A}$ is $n$. (Hint: If the SVD of $\mathbf{A}$ is known, what is the SVD of $\mathbf{A}^{+}$?)
+✍ In order to prove {eq}`svdcond` of @theorem-svdprops, show that $\twonorm{\mathbf{A}^+} = \sigma_n^{-1}$. For simplicity, assume that $m\ge n$ and that the rank of $\mathbf{A}$ is $n$. 
 ``````
 
 ``````{exercise}

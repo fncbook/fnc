@@ -26,8 +26,6 @@ default(
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra
-
-@ptconf backend = Val(:html) tf = tf_html_simple
 ```
 
 (section-globalapprox-trig)=
@@ -250,10 +248,10 @@ $$
 ::::{prf:example} FFT
 :label: demo-trig-fft
 
-This function has frequency content at $2\pi$, $-2\pi$, and $\pi$. 
+This function has frequency content at $2\pi$, $-2\pi$, and $\pi$:
 
 ```{code-cell}
-f(x) = 3 * cospi(2x) - cispi(x)    # cispi(x) := exp(1im * π * x)
+f(x) = 3 * cospi(2x) - cispi(x)    # cispi(x) := exp(1im * π * x);
 ```
 
 To use `fft`, we set up nodes in the interval $[0,2)$. 
@@ -270,7 +268,8 @@ We perform Fourier analysis using `fft` and then examine the resulting coefficie
 using FFTW
 c = fft(y) / N
 freq = [0:n; -n:-1]
-@pt :header=["k", "coefficient"] [freq round.(c, sigdigits=5)]
+pretty_table((;freq, coef=round.(c, sigdigits=5)); 
+    column_labels=["k", "coefficient"], backend=:html)
 ```
 
 Note that $1.5 e^{2i\pi x}+1.5 e^{-2i\pi x} = 3 \cos(2\pi x)$, so this result is sensible.

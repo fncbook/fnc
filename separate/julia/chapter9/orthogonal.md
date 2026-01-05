@@ -26,8 +26,6 @@ default(
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra
-
-@ptconf backend = Val(:html) tf = tf_html_simple
 ```
 
 (section-globalapprox-orthogonal)=
@@ -82,8 +80,8 @@ for (k, n) in enumerate(n)
     intercept[k], slope[k] = c
 end
 
-labels = ["n", "intercept", "slope"]
-@pt :header=labels, [n intercept slope]
+pretty_table((;n, intercept, slope);
+    column_labels=["n", "intercept", "slope"], backend=:html)
 ```
 
 ::::

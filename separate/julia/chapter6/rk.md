@@ -26,8 +26,6 @@ default(
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra
-
-@ptconf backend = Val(:html) tf = tf_html_simple
 ```
 
 (section-ivp-rk)=
@@ -282,7 +280,8 @@ for (k, n) in enumerate(n)
     t, u = FNC.rk4(ivp, n)
     err[k, 2] = norm(u_ref.(t) - u, Inf)
 end
-@pt :header=["n", "IE2 error", "RK4 error"] [n err]
+pretty_table((n=n, err2=err[:, 1], err4=err[:, 2]); 
+    column_labels=["n", "IE2 error", "RK4 error"], backend=:html)
 ```
 
 The amount of computational work at each time step is assumed to be proportional to the number of stages. Let's compare on an apples-to-apples basis by using the number of $f$-evaluations on the horizontal axis.

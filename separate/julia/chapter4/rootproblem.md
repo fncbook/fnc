@@ -26,8 +26,6 @@ default(
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra
-
-@ptconf backend = Val(:html) tf = tf_html_simple
 ```
 
 (section-nonlineqn-rootproblem)=
@@ -89,7 +87,8 @@ end
 
 ```{code-cell}
 y = J₃.(ω)
-@pt :header=["root estimate", "function value"] [ω y]
+pretty_table( [ω y];
+    column_labels=["root estimate", "function value"], backend=:html) 
 ```
 
 ```{code-cell}

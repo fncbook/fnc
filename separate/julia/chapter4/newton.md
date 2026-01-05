@@ -26,8 +26,6 @@ default(
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra
-
-@ptconf backend = Val(:html) tf = tf_html_simple
 ```
 
 (section-nonlineqn-newton)=
@@ -258,7 +256,8 @@ The exponents in the scientific notation definitely suggest a squaring sequence.
 ```{code-cell}
 logerr = @. log10(abs(ϵ))
 ratios = [NaN; [logerr[i+1] / logerr[i] for i in 1:length(logerr)-1]]
-@pt :header=["iteration", "error", "log error", "ratio"] [1:7 ϵ logerr ratios]
+pretty_table( (iter=1:7, ϵ, logerr, ratios);
+    column_labels=["iteration", "error", "log error", "ratio"], backend=:html )
 ```
 
 The clear convergence to 2 above constitutes good evidence of quadratic convergence.

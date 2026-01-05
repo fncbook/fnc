@@ -29,7 +29,7 @@ separate/**/python/fncbook
 separate/**/matlab/FNC_matlab
 separate/**/julia/FNCFunctions
 
-
+Untitled*.ipynb
 exports
 .ipynb_checkpoints
 **/__pycache__

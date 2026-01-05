@@ -168,7 +168,7 @@ end
 
 ##
 
-lang = "matlab"
+lang = "julia"
 for chap in 1:13
     println("\nProcessing chapter $chap for $lang")
     dir = "/Users/driscoll/Documents/GitHub/fnc/chapter$chap"

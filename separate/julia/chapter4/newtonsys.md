@@ -26,8 +26,6 @@ default(
 
 using PrettyTables, LaTeXStrings, Printf
 using LinearAlgebra
-
-@ptconf backend = Val(:html) tf = tf_html_simple
 ```
 
 (section-nonlineqn-newtonsys)=
@@ -264,7 +262,8 @@ We take the sequence of norms of errors, applying the log so that we can look at
 ```{code-cell}
 logerr = [Float64(log(norm(r - x[k]))) for k in 1:length(x)-1]
 ratios = [NaN; [logerr[i+1] / logerr[i] for i in 1:length(logerr)-1]]
-@pt :header=["iteration", "log error", "ratio"] [eachindex(logerr) logerr ratios]
+pretty_table( (iter=eachindex(logerr), logerr, ratios);
+    column_labels=["iteration", "log error", "ratio"], backend=:html )
 ```
 
 The ratio is neatly converging toward 2, which is expected for quadratic convergence.

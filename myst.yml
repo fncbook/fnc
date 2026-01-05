@@ -271,4 +271,4 @@ site:
     analytics_plausible: fncbook.com # Domain(s) to track
     style: _static/style.css
   domains:
-    - www.fncbook.com
+    - fncbook.com
