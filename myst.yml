@@ -5,6 +5,8 @@ project:
   title: Fundamentals of Numerical Computation
   short_title: FNC
   description: Online textbook for computational mathematics
+  settings:
+    output_matplotlib_strings: remove
   # keywords: 
   authors:
     - name: Tobin A. Driscoll
@@ -271,4 +273,4 @@ site:
     analytics_plausible: fncbook.com # Domain(s) to track
     style: _static/style.css
   domains:
-    - fncbook.com
+    - www.fncbook.com
