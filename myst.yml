@@ -5,6 +5,8 @@ project:
   title: Fundamentals of Numerical Computation
   short_title: FNC
   description: Online textbook for computational mathematics
+  exclude:
+    - "separate/*"
   settings:
     output_matplotlib_strings: remove
   # keywords: 
