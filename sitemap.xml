@@ -1,466 +1,466 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="http://localhost:3003/sitemap_style.xsl" ?>
+<?xml-stylesheet type="text/xsl" href="http://localhost:3004/sitemap_style.xsl" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://localhost:3003</loc>
+    <loc>http://localhost:3004</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/usage</loc>
+    <loc>http://localhost:3004/usage</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/preface-original</loc>
+    <loc>http://localhost:3004/preface-original</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/preface</loc>
+    <loc>http://localhost:3004/preface</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/differences</loc>
+    <loc>http://localhost:3004/differences</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/overview</loc>
+    <loc>http://localhost:3004/overview</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/floating-point</loc>
+    <loc>http://localhost:3004/floating-point</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/conditioning</loc>
+    <loc>http://localhost:3004/conditioning</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/algorithms</loc>
+    <loc>http://localhost:3004/algorithms</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/stability</loc>
+    <loc>http://localhost:3004/stability</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/next</loc>
+    <loc>http://localhost:3004/next</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/overview-1</loc>
+    <loc>http://localhost:3004/overview-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/polyinterp</loc>
+    <loc>http://localhost:3004/polyinterp</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/matrices</loc>
+    <loc>http://localhost:3004/matrices</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/linear-systems</loc>
+    <loc>http://localhost:3004/linear-systems</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/lu</loc>
+    <loc>http://localhost:3004/lu</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/efficiency</loc>
+    <loc>http://localhost:3004/efficiency</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/pivoting</loc>
+    <loc>http://localhost:3004/pivoting</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/norms</loc>
+    <loc>http://localhost:3004/norms</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/condition-number</loc>
+    <loc>http://localhost:3004/condition-number</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/structure</loc>
+    <loc>http://localhost:3004/structure</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/next-1</loc>
+    <loc>http://localhost:3004/next-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/overview-2</loc>
+    <loc>http://localhost:3004/overview-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/fitting</loc>
+    <loc>http://localhost:3004/fitting</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/normaleqns</loc>
+    <loc>http://localhost:3004/normaleqns</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/qr</loc>
+    <loc>http://localhost:3004/qr</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/house</loc>
+    <loc>http://localhost:3004/house</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/next-2</loc>
+    <loc>http://localhost:3004/next-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/overview-3</loc>
+    <loc>http://localhost:3004/overview-3</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/rootproblem</loc>
+    <loc>http://localhost:3004/rootproblem</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/fixed-point</loc>
+    <loc>http://localhost:3004/fixed-point</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/newton</loc>
+    <loc>http://localhost:3004/newton</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/secant</loc>
+    <loc>http://localhost:3004/secant</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/newtonsys</loc>
+    <loc>http://localhost:3004/newtonsys</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/quasinewton</loc>
+    <loc>http://localhost:3004/quasinewton</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/nlsq</loc>
+    <loc>http://localhost:3004/nlsq</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/next-3</loc>
+    <loc>http://localhost:3004/next-3</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/overview-4</loc>
+    <loc>http://localhost:3004/overview-4</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/interpolation</loc>
+    <loc>http://localhost:3004/interpolation</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/pwlin</loc>
+    <loc>http://localhost:3004/pwlin</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/splines</loc>
+    <loc>http://localhost:3004/splines</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/finitediffs</loc>
+    <loc>http://localhost:3004/finitediffs</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/fd-converge</loc>
+    <loc>http://localhost:3004/fd-converge</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/integration</loc>
+    <loc>http://localhost:3004/integration</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/adaptive</loc>
+    <loc>http://localhost:3004/adaptive</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/next-4</loc>
+    <loc>http://localhost:3004/next-4</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/overview-5</loc>
+    <loc>http://localhost:3004/overview-5</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/basics</loc>
+    <loc>http://localhost:3004/basics</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/euler</loc>
+    <loc>http://localhost:3004/euler</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/systems</loc>
+    <loc>http://localhost:3004/systems</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/rk</loc>
+    <loc>http://localhost:3004/rk</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/adaptive-rk</loc>
+    <loc>http://localhost:3004/adaptive-rk</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/multistep</loc>
+    <loc>http://localhost:3004/multistep</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/implicit</loc>
+    <loc>http://localhost:3004/implicit</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/zerostability</loc>
+    <loc>http://localhost:3004/zerostability</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/next-5</loc>
+    <loc>http://localhost:3004/next-5</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/overview-6</loc>
+    <loc>http://localhost:3004/overview-6</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/insight</loc>
+    <loc>http://localhost:3004/insight</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/evd</loc>
+    <loc>http://localhost:3004/evd</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/svd</loc>
+    <loc>http://localhost:3004/svd</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/symm-eig</loc>
+    <loc>http://localhost:3004/symm-eig</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/dimreduce</loc>
+    <loc>http://localhost:3004/dimreduce</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/next-6</loc>
+    <loc>http://localhost:3004/next-6</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/overview-7</loc>
+    <loc>http://localhost:3004/overview-7</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/structure-1</loc>
+    <loc>http://localhost:3004/structure-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/power</loc>
+    <loc>http://localhost:3004/power</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/inviter</loc>
+    <loc>http://localhost:3004/inviter</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/subspace</loc>
+    <loc>http://localhost:3004/subspace</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/gmres</loc>
+    <loc>http://localhost:3004/gmres</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/minrescg</loc>
+    <loc>http://localhost:3004/minrescg</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/matrixfree</loc>
+    <loc>http://localhost:3004/matrixfree</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/precond</loc>
+    <loc>http://localhost:3004/precond</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/next-7</loc>
+    <loc>http://localhost:3004/next-7</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/overview-8</loc>
+    <loc>http://localhost:3004/overview-8</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/polynomial</loc>
+    <loc>http://localhost:3004/polynomial</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/barycentric</loc>
+    <loc>http://localhost:3004/barycentric</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/stability-1</loc>
+    <loc>http://localhost:3004/stability-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/orthogonal</loc>
+    <loc>http://localhost:3004/orthogonal</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/trig</loc>
+    <loc>http://localhost:3004/trig</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/spectral-integration</loc>
+    <loc>http://localhost:3004/spectral-integration</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/improper</loc>
+    <loc>http://localhost:3004/improper</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/next-8</loc>
+    <loc>http://localhost:3004/next-8</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/overview-9</loc>
+    <loc>http://localhost:3004/overview-9</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/tpbvp</loc>
+    <loc>http://localhost:3004/tpbvp</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/shooting</loc>
+    <loc>http://localhost:3004/shooting</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/diffmats</loc>
+    <loc>http://localhost:3004/diffmats</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/linear</loc>
+    <loc>http://localhost:3004/linear</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/nonlinear</loc>
+    <loc>http://localhost:3004/nonlinear</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/galerkin</loc>
+    <loc>http://localhost:3004/galerkin</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/next-9</loc>
+    <loc>http://localhost:3004/next-9</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/overview-10</loc>
+    <loc>http://localhost:3004/overview-10</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/blackscholes</loc>
+    <loc>http://localhost:3004/blackscholes</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/methodlines</loc>
+    <loc>http://localhost:3004/methodlines</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/absstab-diffusion</loc>
+    <loc>http://localhost:3004/absstab-diffusion</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/stiffness</loc>
+    <loc>http://localhost:3004/stiffness</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/boundaries</loc>
+    <loc>http://localhost:3004/boundaries</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/next-10</loc>
+    <loc>http://localhost:3004/next-10</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/overview-11</loc>
+    <loc>http://localhost:3004/overview-11</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/traffic</loc>
+    <loc>http://localhost:3004/traffic</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/upwind</loc>
+    <loc>http://localhost:3004/upwind</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/absstab-advection</loc>
+    <loc>http://localhost:3004/absstab-advection</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/wave</loc>
+    <loc>http://localhost:3004/wave</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/next-11</loc>
+    <loc>http://localhost:3004/next-11</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/overview-12</loc>
+    <loc>http://localhost:3004/overview-12</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/tensorprod</loc>
+    <loc>http://localhost:3004/tensorprod</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/diffadv</loc>
+    <loc>http://localhost:3004/diffadv</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/laplace</loc>
+    <loc>http://localhost:3004/laplace</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/nonlinear-1</loc>
+    <loc>http://localhost:3004/nonlinear-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/next-12</loc>
+    <loc>http://localhost:3004/next-12</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/linear-algebra</loc>
+    <loc>http://localhost:3004/linear-algebra</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/setup</loc>
+    <loc>http://localhost:3004/setup</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter1</loc>
+    <loc>http://localhost:3004/chapter1</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter2</loc>
+    <loc>http://localhost:3004/chapter2</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter3</loc>
+    <loc>http://localhost:3004/chapter3</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter4</loc>
+    <loc>http://localhost:3004/chapter4</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter5</loc>
+    <loc>http://localhost:3004/chapter5</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter6</loc>
+    <loc>http://localhost:3004/chapter6</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter7</loc>
+    <loc>http://localhost:3004/chapter7</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter8</loc>
+    <loc>http://localhost:3004/chapter8</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter9</loc>
+    <loc>http://localhost:3004/chapter9</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter10</loc>
+    <loc>http://localhost:3004/chapter10</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter11</loc>
+    <loc>http://localhost:3004/chapter11</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter12</loc>
+    <loc>http://localhost:3004/chapter12</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter13</loc>
+    <loc>http://localhost:3004/chapter13</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/setup-1</loc>
+    <loc>http://localhost:3004/setup-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter1-1</loc>
+    <loc>http://localhost:3004/chapter1-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter2-1</loc>
+    <loc>http://localhost:3004/chapter2-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter3-1</loc>
+    <loc>http://localhost:3004/chapter3-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter4-1</loc>
+    <loc>http://localhost:3004/chapter4-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter5-1</loc>
+    <loc>http://localhost:3004/chapter5-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter6-1</loc>
+    <loc>http://localhost:3004/chapter6-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter7-1</loc>
+    <loc>http://localhost:3004/chapter7-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter8-1</loc>
+    <loc>http://localhost:3004/chapter8-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter9-1</loc>
+    <loc>http://localhost:3004/chapter9-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter10-1</loc>
+    <loc>http://localhost:3004/chapter10-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter11-1</loc>
+    <loc>http://localhost:3004/chapter11-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter12-1</loc>
+    <loc>http://localhost:3004/chapter12-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter13-1</loc>
+    <loc>http://localhost:3004/chapter13-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/setup-2</loc>
+    <loc>http://localhost:3004/setup-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter1-2</loc>
+    <loc>http://localhost:3004/chapter1-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter2-2</loc>
+    <loc>http://localhost:3004/chapter2-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter3-2</loc>
+    <loc>http://localhost:3004/chapter3-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter4-2</loc>
+    <loc>http://localhost:3004/chapter4-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter5-2</loc>
+    <loc>http://localhost:3004/chapter5-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter6-2</loc>
+    <loc>http://localhost:3004/chapter6-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter7-2</loc>
+    <loc>http://localhost:3004/chapter7-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter8-2</loc>
+    <loc>http://localhost:3004/chapter8-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter9-2</loc>
+    <loc>http://localhost:3004/chapter9-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter10-2</loc>
+    <loc>http://localhost:3004/chapter10-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter11-2</loc>
+    <loc>http://localhost:3004/chapter11-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter12-2</loc>
+    <loc>http://localhost:3004/chapter12-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/chapter13-2</loc>
+    <loc>http://localhost:3004/chapter13-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/glossary</loc>
+    <loc>http://localhost:3004/glossary</loc>
   </url>
   <url>
-    <loc>http://localhost:3003/genindex</loc>
+    <loc>http://localhost:3004/genindex</loc>
   </url>
 </urlset>
