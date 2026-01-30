@@ -51,7 +51,7 @@ numbering:
 :open:
 ```{literalinclude} fncbook/fncbook/chapter06.py
 :filename: rk23.py
-:start-at: def euler
+:start-at: def rk23
 :end-at: return
 :language: python
 :linenos: true
