@@ -1,28 +1,3 @@
-# Validate that HTML build files have output content.
-# root = "separate/python"
-root = "."
-root = joinpath(root, "_build", "html")
-# last_in_chapter = ["stability", "structure", "house", "nlsq", "adaptive", "zerostability", "dimreduce", "precond", "improper", "galerkin", "boundaries", "wave", "nonlinear-1"]
-found = Dict()
-for fname in filter(endswith(".json"), readdir(root))
-    println("Checking $fname...")
-    json = JSON.parsefile(joinpath(root, fname))
-    for lang in ["julia", "python", "matlab"]
-        for obj in find_objects(json, "sync", lang)
-            for er in find_objects(obj, "output_type", "error")  # for python and julia
-                get!(found, fname, Dict())[lang] = er["evalue"]
-            end
-            for er in find_objects(obj, "name", "stderr")  # for matlab
-                if startswith(get!(er, "text", "") , "Error")
-                    get!(found, fname, Dict())[lang] = er["text"]
-                end
-            end
-        end
-    end
-end
-
-##
-
 using JSON
 
 """
@@ -61,4 +36,27 @@ function find_objects(data, key="output_type", value="execute_result")
 
     traverse(data)
     return results
+end
+
+# Validate that HTML build files have output content.
+# root = "separate/python"
+root = "."
+root = joinpath(root, "_build", "html")
+# last_in_chapter = ["stability", "structure", "house", "nlsq", "adaptive", "zerostability", "dimreduce", "precond", "improper", "galerkin", "boundaries", "wave", "nonlinear-1"]
+found = Dict()
+for fname in filter(endswith(".json"), readdir(root))
+    println("Checking $fname...")
+    json = JSON.parsefile(joinpath(root, fname))
+    for lang in ["julia", "python", "matlab"]
+        for obj in find_objects(json, "sync", lang)
+            for er in find_objects(obj, "output_type", "error")  # for python and julia
+                get!(found, fname, Dict())[lang] = er["evalue"]
+            end
+            for er in find_objects(obj, "name", "stderr")  # for matlab
+                if startswith(get!(er, "text", "") , "Error")
+                    get!(found, fname, Dict())[lang] = er["text"]
+                end
+            end
+        end
+    end
 end
