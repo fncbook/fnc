@@ -134,7 +134,6 @@ c, res, rank, sv = lstsq(V, y)
 p = poly1d(c)
 f = lambda year: p((year - 1950) / 10)
 ```
-```
 
 ```{code-cell}
 fig, ax = subplots()
@@ -163,6 +162,7 @@ The definition of `f` above is in terms of `c`. When `c` is changed, `f` is upda
 
 ```{code-cell}
 c, res, rank, sv = lstsq(V, y)
+p = poly1d(c)
 yr = linspace(1955, 2000, 500)
 ax.plot(yr, f(yr), label="cubic fit")
 fig
