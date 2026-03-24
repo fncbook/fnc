@@ -2,7 +2,7 @@
 kernelspec:
   display_name: Python 3
   language: python
-  name: python3
+  name: FNC
 numbering:
   headings: false
 ---
@@ -113,7 +113,6 @@ y = array([-0.0480, -0.0180, -0.0360, -0.0120, -0.0040,
 t = (year - 1950) / 10
 ```
 
-
 The standard best-fit line results from using a linear polynomial that meets the least-squares criterion.
 ```{tip}
 :class: dropdown
@@ -133,7 +132,6 @@ from scipy.linalg import lstsq
 c, res, rank, sv = lstsq(V, y)
 p = poly1d(c)
 f = lambda year: p((year - 1950) / 10)
-```
 ```
 
 ```{code-cell}
@@ -163,6 +161,7 @@ The definition of `f` above is in terms of `c`. When `c` is changed, `f` is upda
 
 ```{code-cell}
 c, res, rank, sv = lstsq(V, y)
+p = poly1d(c)
 yr = linspace(1955, 2000, 500)
 ax.plot(yr, f(yr), label="cubic fit")
 fig

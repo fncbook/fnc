@@ -2,7 +2,7 @@
 kernelspec:
   display_name: Python 3
   language: python
-  name: python3
+  name: FNC
 numbering:
   headings: false
 ---
@@ -62,7 +62,7 @@ numbering:
 
 ```{code-cell} ipython3
 :tags: remove-cell
-1+1
+1+2
 exec(open("FNC_init.py").read())
 ```
 
