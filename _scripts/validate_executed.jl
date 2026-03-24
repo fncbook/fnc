@@ -60,3 +60,20 @@ for fname in filter(endswith(".json"), readdir(root))
         end
     end
 end
+
+intended = Dict("matrices.json" => 3, "structure.json" => 3, "linear-systems.json" => 2)
+
+println("\n\nREPORT\n------")
+for (key, value) in found
+    println("File: $key")
+    if haskey(intended, key)
+        if length(value) == intended[key]
+            println("  Found expected number of errors: $(length(value))")
+            continue
+        end
+    end
+    for (lang, err) in value
+        println("  $lang error: $err")
+    end
+    println()
+end
