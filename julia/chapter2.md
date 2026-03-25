@@ -365,7 +365,7 @@ Errors are formally called *exceptions* in Julia.
 ```
 
 ```{code-cell} julia
-:tags: raises-exception
+:tags: [raises-exception]
 A * B    # throws an error
 ```
 
@@ -447,7 +447,7 @@ residual = b - A * x
 If the matrix $\mathbf{A}$ is singular, you may get an error.
 
 ```{code-cell} julia
-:tags: raises-exception
+:tags: [raises-exception]
 A = [0 1; 0 0]
 b = [1, -1]
 x = A \ b    # throws an error
@@ -663,7 +663,7 @@ We can verify that we have a correct factorization of the original matrix by com
 A₁ - L * U
 ```
 
-IIn floating point, we cannot expect the difference to be exactly zero as we found in this toy example. Instead, we would be satisfied to see that each element of the difference above is comparable in size to machine precision.
+In floating point, we cannot expect the difference to be exactly zero as we found in this toy example. Instead, we would be satisfied to see that each element of the difference above is comparable in size to machine precision.
 
 ``````
 
@@ -1378,7 +1378,7 @@ The `cholesky` function computes a Cholesky factorization if possible, or throws
 ```
 
 ```{code-cell}
-:tags: raises-exception
+:tags: [raises-exception]
 cholesky(B)    # throws an error
 ```
 
