@@ -65,7 +65,7 @@ The {term}`Jacobian matrix` of $\mathbf{f}(\mathbf{x})$, where $\mathbf{f}$ is $
     \rule[2mm]{0pt}{1em}\frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} & \cdots & \frac{\partial f_1}{\partial x_n}\\[2mm]
     \frac{\partial f_2}{\partial x_1} & \frac{\partial f_2}{\partial x_2} & \cdots & \frac{\partial f_2}{\partial x_n}\\[1mm]
     \vdots & \vdots & & \vdots\\[1mm]
-    \rule[-3mm]{0pt}{1em} \frac{\partial f_n}{\partial x_1} & \frac{\partial f_n}{\partial x_2} & \cdots & \frac{\partial f_n}{\partial x_n}
+    \rule[-3mm]{0pt}{1em} \frac{\partial f_m}{\partial x_1} & \frac{\partial f_m}{\partial x_2} & \cdots & \frac{\partial f_m}{\partial x_n}
   \end{bmatrix} = \left[ \frac{\partial f_i}{\partial x_j} \right]_{\,i=1,\ldots,m,\, j=1,\ldots,n.}
 ```
 
