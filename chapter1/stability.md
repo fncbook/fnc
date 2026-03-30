@@ -187,11 +187,11 @@ Let $f(x) = \frac{e^x-1}{x}$.
 
 to compute $f(x)$ at $x=10^{-2},10^{-3},10^{-4},\ldots,10^{-11}$.  
 
-**(c)** ⌨ Create a second algorithm from the first 9 terms of the Maclaurin series, i.e.,
+**(c)** ⌨ Create a second algorithm from the first 8 terms of the Maclaurin series, i.e.,
 
 ```{math}
 :numbered: false
-p(x) = 1 + \frac{1}{2!}x + \frac{1}{3!}x^2 + \cdots + \frac{1}{8!}x^8.
+f(x) \approx p(x) = 1 + \frac{1}{2!}x + \frac{1}{3!}x^2 + \cdots + \frac{1}{8!}x^7.
 ```
 
 Evaluate it at the same values of $x$ as in part (b).
