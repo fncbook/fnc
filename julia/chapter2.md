@@ -509,8 +509,8 @@ The notation `0=>ones(5)` creates a `Pair`. In `diagm`, pairs indicate the posit
 ```
 
 ```{code-cell}
-α = 0.3;
-β = 2.2;
+α = 0.3
+β = 2.2
 U = diagm( 0=>ones(5), 1=>[-1, -1, -1, -1] )
 U[1, [4, 5]] = [ α - β, β ]
 U
