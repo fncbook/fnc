@@ -45,3 +45,6 @@ python/pkg/FNC.egg-info
 **/.DS_Store
 matlab/hello.png
 python/executor.py
+# pixi environments
+.pixi/*
+!.pixi/config.toml
