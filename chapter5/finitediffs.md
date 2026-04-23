@@ -183,7 +183,7 @@ f'(0) &\approx \tfrac{1}{h} \left[ \tfrac{1}{2} f(-2h) - 2 f(-h) + \tfrac{3}{2} 
 Many applications require the second derivative of a function. It's tempting to use the finite difference of a finite difference. For example, applying {eq}`centerFD12` to $f'$ gives
 
 ```{math}
-f''(0) \approx  \frac{ f'(h) - f'(h) }{2h}.
+f''(0) \approx  \frac{ f'(h) - f'(-h) }{2h}.
 ```
 
 Then applying {eq}`centerFD12` to approximate the appearances of $f'$ leads to
