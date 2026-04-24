@@ -8,7 +8,7 @@ numbering:
 
 Let's think a bit about what must be the easiest math problem you've dealt with in quite some time: adding 1 to a number. Formally, we describe this problem as a function $f(x)=x+1$, where $x$ is any real number.
 
-On a computer, $x$ will be represented by its floating-point counterpart, $\fl(x)$. Given the property {eq}`fpbound`, we have $\fl(x)=x(1+\epsilon)$ for some $\epsilon$ satisfying $|\epsilon| < \macheps/2$.  There is no error in representing the value 1.
+On a computer, $x$ will be represented by its floating-point counterpart, $\fl(x)$. Given the property {eq}`fpboundalt`, we have $\fl(x)=x(1+\epsilon)$ for some $\epsilon$ satisfying $|\epsilon| < \macheps/2$.  There is no error in representing the value 1.
 
 Let's suppose that we are fortunate and that the addition proceeds exactly, with no additional errors. Then the machine result is just
 
