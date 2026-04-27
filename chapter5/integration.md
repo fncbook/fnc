@@ -266,7 +266,7 @@ It follows that if we combine {eq}`traperrorexpansion` and {eq}`traperrorexpansi
 
 ```{math}
 :label: extraplevel1
-  I = S_f(2n) + O(n^{-4}) =  b_4 n^{-4} + b_6 n^{-6} + \cdots.
+  I - S_f(2n) = O(n^{-4}) = b_4 n^{-4} + b_6 n^{-6} + \cdots.
 ```
 
 ```{index} ! Simpson's formula
@@ -277,7 +277,7 @@ The formula {eq}`nc-simpson` is called **Simpson's formula**, or *Simpson's rule
 Equation {eq}`extraplevel1` is another particular error expansion in the form {eq}`extraperror`, so we can extrapolate again! The details change only a little. Considering that
 
 ```{math}
-  I = S_f(4n) = \tfrac{1}{16} b_4 n^{-4} + \tfrac{1}{64} b_6 n^{-6} + \cdots,
+  I - S_f(4n) = \tfrac{1}{16} b_4 n^{-4} + \tfrac{1}{64} b_6 n^{-6} + \cdots,
 ```
 
 the proper combination this time is
