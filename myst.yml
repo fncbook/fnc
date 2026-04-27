@@ -276,3 +276,5 @@ site:
     style: _static/style.css
   domains:
     - www.fncbook.com
+  # parts:
+    # footer: footer.md
