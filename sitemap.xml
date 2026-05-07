@@ -1,466 +1,466 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="http://localhost:3011/sitemap_style.xsl" ?>
+<?xml-stylesheet type="text/xsl" href="http://localhost:3012/sitemap_style.xsl" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://localhost:3011</loc>
+    <loc>http://localhost:3012</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/usage</loc>
+    <loc>http://localhost:3012/usage</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/preface-original</loc>
+    <loc>http://localhost:3012/preface-original</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/preface</loc>
+    <loc>http://localhost:3012/preface</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/differences</loc>
+    <loc>http://localhost:3012/differences</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/overview</loc>
+    <loc>http://localhost:3012/overview</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/floating-point</loc>
+    <loc>http://localhost:3012/floating-point</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/conditioning</loc>
+    <loc>http://localhost:3012/conditioning</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/algorithms</loc>
+    <loc>http://localhost:3012/algorithms</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/stability</loc>
+    <loc>http://localhost:3012/stability</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/next</loc>
+    <loc>http://localhost:3012/next</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/overview-1</loc>
+    <loc>http://localhost:3012/overview-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/polyinterp</loc>
+    <loc>http://localhost:3012/polyinterp</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/matrices</loc>
+    <loc>http://localhost:3012/matrices</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/linear-systems</loc>
+    <loc>http://localhost:3012/linear-systems</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/lu</loc>
+    <loc>http://localhost:3012/lu</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/efficiency</loc>
+    <loc>http://localhost:3012/efficiency</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/pivoting</loc>
+    <loc>http://localhost:3012/pivoting</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/norms</loc>
+    <loc>http://localhost:3012/norms</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/condition-number</loc>
+    <loc>http://localhost:3012/condition-number</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/structure</loc>
+    <loc>http://localhost:3012/structure</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/next-1</loc>
+    <loc>http://localhost:3012/next-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/overview-2</loc>
+    <loc>http://localhost:3012/overview-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/fitting</loc>
+    <loc>http://localhost:3012/fitting</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/normaleqns</loc>
+    <loc>http://localhost:3012/normaleqns</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/qr</loc>
+    <loc>http://localhost:3012/qr</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/house</loc>
+    <loc>http://localhost:3012/house</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/next-2</loc>
+    <loc>http://localhost:3012/next-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/overview-3</loc>
+    <loc>http://localhost:3012/overview-3</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/rootproblem</loc>
+    <loc>http://localhost:3012/rootproblem</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/fixed-point</loc>
+    <loc>http://localhost:3012/fixed-point</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/newton</loc>
+    <loc>http://localhost:3012/newton</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/secant</loc>
+    <loc>http://localhost:3012/secant</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/newtonsys</loc>
+    <loc>http://localhost:3012/newtonsys</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/quasinewton</loc>
+    <loc>http://localhost:3012/quasinewton</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/nlsq</loc>
+    <loc>http://localhost:3012/nlsq</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/next-3</loc>
+    <loc>http://localhost:3012/next-3</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/overview-4</loc>
+    <loc>http://localhost:3012/overview-4</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/interpolation</loc>
+    <loc>http://localhost:3012/interpolation</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/pwlin</loc>
+    <loc>http://localhost:3012/pwlin</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/splines</loc>
+    <loc>http://localhost:3012/splines</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/finitediffs</loc>
+    <loc>http://localhost:3012/finitediffs</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/fd-converge</loc>
+    <loc>http://localhost:3012/fd-converge</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/integration</loc>
+    <loc>http://localhost:3012/integration</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/adaptive</loc>
+    <loc>http://localhost:3012/adaptive</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/next-4</loc>
+    <loc>http://localhost:3012/next-4</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/overview-5</loc>
+    <loc>http://localhost:3012/overview-5</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/basics</loc>
+    <loc>http://localhost:3012/basics</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/euler</loc>
+    <loc>http://localhost:3012/euler</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/systems</loc>
+    <loc>http://localhost:3012/systems</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/rk</loc>
+    <loc>http://localhost:3012/rk</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/adaptive-rk</loc>
+    <loc>http://localhost:3012/adaptive-rk</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/multistep</loc>
+    <loc>http://localhost:3012/multistep</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/implicit</loc>
+    <loc>http://localhost:3012/implicit</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/zerostability</loc>
+    <loc>http://localhost:3012/zerostability</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/next-5</loc>
+    <loc>http://localhost:3012/next-5</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/overview-6</loc>
+    <loc>http://localhost:3012/overview-6</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/insight</loc>
+    <loc>http://localhost:3012/insight</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/evd</loc>
+    <loc>http://localhost:3012/evd</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/svd</loc>
+    <loc>http://localhost:3012/svd</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/symm-eig</loc>
+    <loc>http://localhost:3012/symm-eig</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/dimreduce</loc>
+    <loc>http://localhost:3012/dimreduce</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/next-6</loc>
+    <loc>http://localhost:3012/next-6</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/overview-7</loc>
+    <loc>http://localhost:3012/overview-7</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/structure-1</loc>
+    <loc>http://localhost:3012/structure-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/power</loc>
+    <loc>http://localhost:3012/power</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/inviter</loc>
+    <loc>http://localhost:3012/inviter</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/subspace</loc>
+    <loc>http://localhost:3012/subspace</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/gmres</loc>
+    <loc>http://localhost:3012/gmres</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/minrescg</loc>
+    <loc>http://localhost:3012/minrescg</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/matrixfree</loc>
+    <loc>http://localhost:3012/matrixfree</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/precond</loc>
+    <loc>http://localhost:3012/precond</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/next-7</loc>
+    <loc>http://localhost:3012/next-7</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/overview-8</loc>
+    <loc>http://localhost:3012/overview-8</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/polynomial</loc>
+    <loc>http://localhost:3012/polynomial</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/barycentric</loc>
+    <loc>http://localhost:3012/barycentric</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/stability-1</loc>
+    <loc>http://localhost:3012/stability-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/orthogonal</loc>
+    <loc>http://localhost:3012/orthogonal</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/trig</loc>
+    <loc>http://localhost:3012/trig</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/spectral-integration</loc>
+    <loc>http://localhost:3012/spectral-integration</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/improper</loc>
+    <loc>http://localhost:3012/improper</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/next-8</loc>
+    <loc>http://localhost:3012/next-8</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/overview-9</loc>
+    <loc>http://localhost:3012/overview-9</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/tpbvp</loc>
+    <loc>http://localhost:3012/tpbvp</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/shooting</loc>
+    <loc>http://localhost:3012/shooting</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/diffmats</loc>
+    <loc>http://localhost:3012/diffmats</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/linear</loc>
+    <loc>http://localhost:3012/linear</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/nonlinear</loc>
+    <loc>http://localhost:3012/nonlinear</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/galerkin</loc>
+    <loc>http://localhost:3012/galerkin</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/next-9</loc>
+    <loc>http://localhost:3012/next-9</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/overview-10</loc>
+    <loc>http://localhost:3012/overview-10</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/blackscholes</loc>
+    <loc>http://localhost:3012/blackscholes</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/methodlines</loc>
+    <loc>http://localhost:3012/methodlines</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/absstab-diffusion</loc>
+    <loc>http://localhost:3012/absstab-diffusion</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/stiffness</loc>
+    <loc>http://localhost:3012/stiffness</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/boundaries</loc>
+    <loc>http://localhost:3012/boundaries</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/next-10</loc>
+    <loc>http://localhost:3012/next-10</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/overview-11</loc>
+    <loc>http://localhost:3012/overview-11</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/traffic</loc>
+    <loc>http://localhost:3012/traffic</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/upwind</loc>
+    <loc>http://localhost:3012/upwind</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/absstab-advection</loc>
+    <loc>http://localhost:3012/absstab-advection</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/wave</loc>
+    <loc>http://localhost:3012/wave</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/next-11</loc>
+    <loc>http://localhost:3012/next-11</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/overview-12</loc>
+    <loc>http://localhost:3012/overview-12</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/tensorprod</loc>
+    <loc>http://localhost:3012/tensorprod</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/diffadv</loc>
+    <loc>http://localhost:3012/diffadv</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/laplace</loc>
+    <loc>http://localhost:3012/laplace</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/nonlinear-1</loc>
+    <loc>http://localhost:3012/nonlinear-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/next-12</loc>
+    <loc>http://localhost:3012/next-12</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/linear-algebra</loc>
+    <loc>http://localhost:3012/linear-algebra</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/setup</loc>
+    <loc>http://localhost:3012/setup</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter1</loc>
+    <loc>http://localhost:3012/chapter1</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter2</loc>
+    <loc>http://localhost:3012/chapter2</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter3</loc>
+    <loc>http://localhost:3012/chapter3</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter4</loc>
+    <loc>http://localhost:3012/chapter4</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter5</loc>
+    <loc>http://localhost:3012/chapter5</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter6</loc>
+    <loc>http://localhost:3012/chapter6</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter7</loc>
+    <loc>http://localhost:3012/chapter7</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter8</loc>
+    <loc>http://localhost:3012/chapter8</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter9</loc>
+    <loc>http://localhost:3012/chapter9</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter10</loc>
+    <loc>http://localhost:3012/chapter10</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter11</loc>
+    <loc>http://localhost:3012/chapter11</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter12</loc>
+    <loc>http://localhost:3012/chapter12</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter13</loc>
+    <loc>http://localhost:3012/chapter13</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/setup-1</loc>
+    <loc>http://localhost:3012/setup-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter1-1</loc>
+    <loc>http://localhost:3012/chapter1-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter2-1</loc>
+    <loc>http://localhost:3012/chapter2-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter3-1</loc>
+    <loc>http://localhost:3012/chapter3-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter4-1</loc>
+    <loc>http://localhost:3012/chapter4-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter5-1</loc>
+    <loc>http://localhost:3012/chapter5-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter6-1</loc>
+    <loc>http://localhost:3012/chapter6-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter7-1</loc>
+    <loc>http://localhost:3012/chapter7-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter8-1</loc>
+    <loc>http://localhost:3012/chapter8-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter9-1</loc>
+    <loc>http://localhost:3012/chapter9-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter10-1</loc>
+    <loc>http://localhost:3012/chapter10-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter11-1</loc>
+    <loc>http://localhost:3012/chapter11-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter12-1</loc>
+    <loc>http://localhost:3012/chapter12-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter13-1</loc>
+    <loc>http://localhost:3012/chapter13-1</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/setup-2</loc>
+    <loc>http://localhost:3012/setup-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter1-2</loc>
+    <loc>http://localhost:3012/chapter1-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter2-2</loc>
+    <loc>http://localhost:3012/chapter2-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter3-2</loc>
+    <loc>http://localhost:3012/chapter3-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter4-2</loc>
+    <loc>http://localhost:3012/chapter4-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter5-2</loc>
+    <loc>http://localhost:3012/chapter5-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter6-2</loc>
+    <loc>http://localhost:3012/chapter6-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter7-2</loc>
+    <loc>http://localhost:3012/chapter7-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter8-2</loc>
+    <loc>http://localhost:3012/chapter8-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter9-2</loc>
+    <loc>http://localhost:3012/chapter9-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter10-2</loc>
+    <loc>http://localhost:3012/chapter10-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter11-2</loc>
+    <loc>http://localhost:3012/chapter11-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter12-2</loc>
+    <loc>http://localhost:3012/chapter12-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/chapter13-2</loc>
+    <loc>http://localhost:3012/chapter13-2</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/glossary</loc>
+    <loc>http://localhost:3012/glossary</loc>
   </url>
   <url>
-    <loc>http://localhost:3011/genindex</loc>
+    <loc>http://localhost:3012/genindex</loc>
   </url>
 </urlset>
