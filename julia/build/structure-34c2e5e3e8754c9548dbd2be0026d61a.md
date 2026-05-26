@@ -1,0 +1,450 @@
+---
+numbering:
+  enumerator: 2.9.%s
+kernelspec:
+  display_name: Julia 1
+  language: julia
+  name: julia-1.12
+---
+```{code-cell}
+:tags: [remove-cell]
+import Pkg; Pkg.activate("/Users/driscoll/Documents/GitHub/fnc")
+
+using FNCFunctions
+
+using Plots
+default(
+    titlefont=(11,"Helvetica"),
+    guidefont=(11,"Helvetica"),
+    linewidth = 2,
+    markersize = 3,
+    msa = 0,
+    size=(500,320),
+    label="",
+    html_output_format = "svg"
+)
+
+using PrettyTables, LaTeXStrings, Printf
+using LinearAlgebra
+
+@ptconf backend = Val(:html) tf = tf_html_simple
+```
+
+(section-linsys-structure)=
+
+# Exploiting matrix structure
+
+A common situation in computation is that a problem has certain properties or structure that can be used to get a faster or more accurate solution. There are many properties of a matrix that can affect LU factorization. Here is an easy one to check.
+
+:::{prf:definition} Diagonally dominant matrix
+:label: definition-diagdom
+An $n \times n$ matrix $\mathbf{A}$ is **diagonally dominant** if
+
+```{math}
+:label: diag-dominant
+  |A_{ii}| > \sum_{\substack{j=1\\ j \neq i}}^{n} |A_{ij}| \hskip 0.25in \text{for each } i=1,\ldots,n.
+```
+
+:::
+
+Diagonal dominance has a computationally useful implication.
+
+:::{prf:theorem} Diagonally dominant matrix
+:label: theorem-diagdom
+A diagonally dominant matrix is invertible, and row pivoting is not required for the stability of its LU factorization.
+:::
+
+We next consider three other types of matrices that cause the LU factorization to be specialized in some important way.
+
+(section-structure-banded)=
+
+## Banded matrices
+
+```{index} ! bandwidth of a matrix, ! tridiagonal matrix
+```
+
+::::{prf:definition} Bandwidth
+:label: definition-bandwidth
+A matrix $\mathbf{A}$ has **upper bandwidth** $b_u$ if $j-i > b_u$ implies $A_{ij}=0$, and **lower bandwidth** $b_\ell$ if $i-j > b_\ell$ implies $A_{ij}=0$. We say the total {term}`bandwidth` is $b_u+b_\ell+1$. When $b_u=b_\ell=1$, we have the important case of a {term}`tridiagonal matrix`.
+::::
+
+::::{prf:example} Banded matrices
+:label: demo-structure-banded
+
+```{index} ! Julia; fill, Julia; diagm, ! Julia; diag
+```
+
+Here is a small tridiagonal matrix. Note that there is one fewer element on the super- and subdiagonals than on the main diagonal.
+```{tip}
+:class: dropdown
+Use `fill` to create an array of a given size, with each element equal to a provided value.
+```
+
+```{code-cell}
+A = diagm( -1 => [4, 3, 2, 1, 0], 
+    0 => [2, 2, 0, 2, 1, 2], 
+    1 => fill(-1, 5) )
+```
+
+```{index} ! Julia; diag
+```
+
+We can extract the elements on any diagonal using the `diag` function. The main or central diagonal is numbered zero, above and to the right of that is positive, and below and to the left is negative.
+```{tip}
+:class: dropdown
+The `diag` function extracts the elements from a specified diagonal of a matrix.
+```
+
+```{code-cell}
+@show diag_main = diag(A);
+@show diag_minusone = diag(A, -1);
+```
+The lower and upper bandwidths of $\mathbf{A}$ are repeated in the factors from the unpivoted LU factorization. 
+
+```{code-cell}
+L, U = FNC.lufact(A)
+L
+```
+
+```{code-cell}
+U
+```
+
+::::
+
+```{index} pivoting
+```
+
+If row pivoting is not used, the $\mathbf{L}$ and $\mathbf{U}$ factors preserve the lower and upper bandwidths of $\mathbf{A}$. This fact implies computational savings in both the factorization and the triangular substitutions, because the zeros appear predictably and we can skip multiplication and addition with them.
+
+```{prf:observation}
+The number of flops needed by LU factorization without pivoting is $O(b_u b_\ell n)$ when the upper and lower bandwidths are $b_u$ and $b_\ell$.
+```
+
+```{index} sparse matrix
+```
+
+In order to exploit the savings offered by sparsity, we would need to make modifications to {numref}`Function %s <function-lufact>` and the triangular substitution routines. Alternatively, we can get Julia to take advantage of the structure automatically by converting the matrix into a special type called **sparse**. Sparse matrices are covered in more detail in Chapters 7 and 8.
+
+## Symmetric matrices
+
+```{index} symmetric matrix
+```
+
+Recall from @definition-symmetric-matrix that a symmetric matrix is a square matrix $\mathbf{A}$ satisfying $\mathbf{A}^T = \mathbf{A}$. Symmetric matrices arise frequently in applications because many types of interactions, such as gravitation and social-network befriending, are inherently symmetric. Symmetry in linear algebra simplifies many properties and algorithms. As a rule of thumb, if your matrix has symmetry, you want to exploit and preserve it.
+
+In $\mathbf{A}=\mathbf{L}\mathbf{U}$ we arbitrarily required the diagonal elements of $\mathbf{L}$, but not $\mathbf{U}$, to be one. That breaks symmetry, so we need to modify the goal to
+
+$$
+\mathbf{A}=\mathbf{L}\mathbf{D}\mathbf{L}^T,
+$$
+
+where $\mathbf{L}$ is unit lower triangular and $\mathbf{D}$ is diagonal. To find an algorithm for this factorization, we begin by generalizing {eq}`matrixouter` a bit without furnishing proof.
+
+::::{prf:theorem} Linear combination of outer products
+Let $\mathbf{D}$ be an $n\times n$ diagonal matrix with diagonal elements $d_1,d_2,\ldots,d_n$, and suppose $\mathbf{A}$ and $\mathbf{B}$ are $n\times n$ as well. Write the columns of $\mathbf{A}$ as $\mathbf{a}_1,\dots,\mathbf{a}_n$ and the rows of $\mathbf{B}$ as $\mathbf{b}_1^T,\dots,\mathbf{b}_n^T$. Then
+
+```{math}
+:label: matrixouter3
+\mathbf{A}\mathbf{D}\mathbf{B} = \sum_{k=1}^n d_k \mathbf{a}_k \mathbf{b}_k^T.
+```
+
+::::
+
+Let's derive the LDL$^T$ factorization for a small example.
+
+::::{prf:example} Symmetric LDL$^T$ factorization
+:label: demo-structure-symm
+
+
+We begin with a symmetric $\mathbf{A}$.
+
+```{code-cell}
+A₁ = [  2     4     4     2
+        4     5     8    -5
+        4     8     6     2
+        2    -5     2   -26 ];
+```
+
+We won't use pivoting, so the pivot element is at position (1,1). This will become the first element on the diagonal of $\mathbf{D}$. Then we divide by that pivot to get the first column of $\mathbf{L}$.
+
+```{code-cell}
+L = diagm(ones(4))
+d = zeros(4)
+d[1] = A₁[1, 1]
+L[:, 1] = A₁[:, 1] / d[1]
+A₂ = A₁ - d[1] * L[:, 1] * L[:, 1]'
+```
+
+We are now set up the same way for the submatrix in rows and columns 2–4.
+
+```{code-cell}
+d[2] = A₂[2, 2]
+L[:, 2] = A₂[:, 2] / d[2]
+A₃ = A₂ - d[2] * L[:, 2] * L[:, 2]'
+```
+
+We continue working our way down the diagonal.
+
+```{code-cell}
+d[3] = A₃[3, 3]
+L[:, 3] = A₃[:, 3] / d[3]
+A₄ = A₃ - d[3] * L[:, 3] * L[:, 3]'
+d[4] = A₄[4, 4]
+@show d;
+L
+```
+
+We have arrived at the desired factorization, which we can validate:
+
+```{code-cell}
+opnorm(A₁ - (L * diagm(d) * L'))
+```
+
+::::
+
+In practice, we don't actually have to carry out any arithmetic in the upper triangle of $\mathbf{A}$ as we work, since the operations are always the mirror image of those in the lower triangle. As a result, it can be shown that LDL$^T$ factorization takes about half as much work as the standard LU.
+
+::::{prf:observation}
+LDL$^T$ factorization on an $n \times n$ symmetric matrix, when successful, takes $\sim \frac{1}{3}n^3$ flops.
+::::
+
+Just as pivoting is necessary to stabilize LU factorization, the LDL$^T$ factorization without pivoting may be unstable or even fail to exist. We won't go into the details, because our interest is in specializing the factorization to matrices that also possess another important property.
+
+(sec-SPD)=
+
+## Symmetric positive definite matrices
+
+Suppose that $\mathbf{A}$ is $n\times n$ and $\mathbf{x}\in\mathbb{R}^n$. Observe that $\mathbf{x}^T\mathbf{A}\mathbf{x}$ is the product of $1\times n$, $n\times n$, and $n\times 1$ matrices, so it is a scalar, sometimes referred to as a **quadratic form**. It can be expressed as
+
+```{math}
+:label: quadratic-form
+  \mathbf{x}^T\mathbf{A}\mathbf{x} = \sum_{i=1}^n \sum_{j=1}^n A_{ij}x_ix_j.
+```
+
+```{index} ! symmetric positive definite matrix
+```
+
+```{index} see: SPD matrix; symmetric positive definite matrix
+```
+
+::::{prf:definition} SPD matrix
+:label: definition-SPDmatrix
+An {term}`SPD matrix`, or *symmetric positive definite matrix*, is a real $n\times n$ matrix $\mathbf{A}$ that is symmetric and for which
+
+```{math}
+:label: SPD-def
+  \mathbf{x}^T \mathbf{A} \mathbf{x} > 0
+```
+
+for all nonzero $\mathbf{x}\in\mathbb{R}^n$.
+
+::::
+
+The definiteness property is usually difficult to check directly from the definition. There are some equivalent conditions, though. For instance, a symmetric matrix is positive definite if and only if its eigenvalues are all real positive numbers. SPD matrices have important properties and appear in applications in which the definiteness is known for theoretical reasons.
+
+Let us consider what definiteness means to the LDL$^T$ factorization. We compute
+
+```{math}
+  0 < \mathbf{x}^T\mathbf{A}\mathbf{x} = \mathbf{x}^T \mathbf{L} \mathbf{D} \mathbf{L}^T \mathbf{x} = \mathbf{z}^T \mathbf{D} \mathbf{z},
+```
+
+where $\mathbf{z}=\mathbf{L}^T \mathbf{x}$. Note that since $\mathbf{L}$ is unit lower triangular, it is nonsingular, so $\mathbf{x}=\mathbf{L}^{-T}\mathbf{z}$. By taking $\mathbf{z}=\mathbf{e}_k$ for $k=1,\ldots,n$, we can read the equalities from right to left and conclude that $D_{kk}>0$ for all $k$. That permits us to write a kind of square root formula:[^sqrt]
+
+[^sqrt]: Except for this diagonal, positive definite case, it's not trivial to define the square root of a matrix, so don't generalize the notation used here.
+
+```{math}
+:label: diag-sqrt
+  \mathbf{D} =
+  \begin{bmatrix}
+    D_{11} &        &        & \\
+           & D_{22} &        & \\
+           &        & \ddots & \\
+           &        &        & D_{nn}
+  \end{bmatrix}
+=   \begin{bmatrix}
+    \sqrt{D_{11}} &        &        & \\
+           & \sqrt{D_{22}} &        & \\
+           &        & \ddots & \\
+           &        &        & \sqrt{D_{nn}}
+  \end{bmatrix}^{\,2}
+= \bigl( \mathbf{D}^{1/2} \bigr)^2.
+```
+
+Now we have $\mathbf{A}=\mathbf{L}\mathbf{D}^{1/2}\mathbf{D}^{1/2}\mathbf{L}^T= \mathbf{R}^T \mathbf{R}$, where $\mathbf{R} =\mathbf{D}^{1/2}\mathbf{L}^T$ is an upper triangular matrix whose diagonal entries are positive.
+
+```{index} ! matrix factorization; Cholesky, Cholesky factorization
+```
+
+```{index} pivoting
+```
+
+::::{prf:theorem} Cholesky factorization
+:label: theorem-cholesky-factorization
+Any SPD matrix $\mathbf{A}$ may be factored as
+
+$$
+\mathbf{A} = \mathbf{R}^T \mathbf{R},
+$$
+
+where $\mathbf{R}$ is an upper triangular matrix with positive diagonal elements. This is called the **Cholesky factorization**.
+::::
+
+While the unpivoted LDL$^T$ factorization is not stable and not even always possible, in the SPD case one can prove that pivoting is not necessary for the existence nor the stability of the Cholesky factorization.
+
+::::{prf:observation}
+Cholesky factorization of an $n \times n$ SPD matrix takes $\sim \frac{1}{3}n^3$ flops.
+::::
+
+The speed and stability of the Cholesky factorization make it the top choice for solving linear systems with SPD matrices. As a side benefit, the Cholesky algorithm fails (in the form of an imaginary square root or division by zero) if and only if the matrix $\mathbf{A}$ is not positive definite. This is often the best way to test the definiteness of a symmetric matrix about which nothing else is known.
+
+::::{prf:example} Cholesky factorization
+:label: demo-structure-cholesky
+
+A randomly chosen matrix is extremely unlikely to be symmetric. However, there is a simple way to symmetrize one.
+
+```{code-cell}
+A = rand(1.0:9.0, 4, 4)
+B = A + A'
+```
+
+```{index} ! Julia; cholesky
+```
+
+Similarly, a random symmetric matrix is unlikely to be positive definite. The Cholesky algorithm always detects a non-PD matrix by quitting with an error.
+```{tip}
+:class: dropdown
+The `cholesky` function computes a Cholesky factorization if possible, or throws an error for a non-positive-definite matrix. However, it does *not* check for symmetry.
+```
+
+```{code-cell}
+:tags: raises-exception
+cholesky(B)    # throws an error
+```
+
+It's not hard to manufacture an SPD matrix to try out the Cholesky factorization.
+
+```{code-cell}
+B = A' * A
+cf = cholesky(B)
+```
+
+What's returned is a factorization object. Another step is required to extract the factor as a matrix:
+
+```{code-cell}
+R = cf.U
+```
+
+Here we validate the factorization:
+
+```{code-cell}
+opnorm(R' * R - B) / opnorm(B)
+```
+
+::::
+
+## Exercises
+
+``````{exercise}
+:label: problem-structure-diagdom
+✍  For each matrix, use {eq}`diag-dominant` to determine whether it is diagonally dominant.
+
+```{math}
+:numbered: false
+\mathbf{A} =
+\begin{bmatrix}
+3  & 1  & 0 & 1  \\
+0  & -2 & 0 & 1  \\
+-1 & 0  & 4 & -1 \\
+0  & 0  & 0 & 6
+\end{bmatrix},
+\quad
+\mathbf{B} =
+\begin{bmatrix}
+1  & 0  & 0  & 0 & 0  \\
+0  & 1  & 0  & 0 & 0  \\
+0  & 0  & 1  & 0 & 0  \\
+0  & 0  & 0  & 1 & 0  \\
+0  & 0  & 0  & 0 & 0
+\end{bmatrix},
+\quad \mathbf{C} =
+\begin{bmatrix}
+2  & -1 & 0  & 0      \\
+-1 & 2  & -1 & 0      \\
+0  & -1 & 2  & -1     \\
+0  & 0  & -1 & 2
+\end{bmatrix}.
+```
+``````
+
+``````{exercise}
+:label: problem-structure-SPD
+
+⌨ For each matrix, use inspection or a numerical Cholesky factorization to determine whether it is SPD.
+
+```{math}
+:numbered: false
+\mathbf{A} =
+\begin{bmatrix}
+1 & 0 & -1 \\ 0 & 4 & 5 \\ -1 & 5 & 10
+\end{bmatrix},
+\qquad
+\mathbf{B} =
+\begin{bmatrix}
+1 & 0 & 1 \\ 0 & 4 & 5 \\ -1 & 5 & 10
+\end{bmatrix},
+\qquad
+\mathbf{C} =
+\begin{bmatrix}
+1 & 0 & 1 \\ 0 & 4 & 5 \\ 1 & 5 & 1
+\end{bmatrix}.
+```
+``````
+
+``````{exercise}
+:label: problem-structure-SPDdiag
+
+✍ Show that the diagonal entries of a symmetric positive definite matrix are positive numbers. (Hint: Apply certain special cases of {eq}`SPD-def`.)
+``````
+
+``````{exercise}
+:label: problem-structure-luband
+
+⌨ Using {numref}`Function {number} <function-lufact>` as a guide, write a function `luband` that accepts as inputs a banded matrix and its upper and lower bandwidths, and returns the LU factors (without pivoting). The function should avoid doing arithmetic using the locations that are known to stay zero. (Hint: Refer to the more efficient form of `lufact` given in {numref}`section-linsys-efficiency`. You only need to limit the rows and columns that are accessed within the loop.)
+
+Test your function on a $7 \times 7$ matrix with lower bandwidth 1 and upper bandwidth 2 whose entries are given by
+
+```{math}
+:numbered: false
+A_{ij} = \begin{cases} \frac{1}{i+j}, & -1 \le i-j \le 2,\\ 
+0 & \text{otherwise.} \end{cases}
+```
+``````
+
+``````{exercise}
+:label: problem-structure-tridiagonal
+
+⌨ *(Julia-specific)* The `Tridiagonal` matrix type invokes a specialized algorithm for solving a linear system. 
+
+**(a)** Set `n=2000` and `t=0`.  In a loop that runs 100 times, generate a linear system via 
+``` julia
+A = triu( tril(rand(n, n),1), -1)
+b = ones(n)
+x = A \ b
+```
+Using `@elapsed`, increment `t` by the time it takes to perform `A\b`. Print out the final value of `t`.
+
+**(b)** Repeat the experiment of part (a), but generate the matrix via
+``` julia
+A = Tridiagonal(rand(n,n))
+```
+What is the ratio of running times for part (a) and (b)?
+
+**(c)** Now perform the experiment of part (b) for $n=2000,2400,2800,\ldots,4000$, keeping the total time for each value of $n$ in a vector. Plot running time as a function of $n$ on a log-log scale. Is the time most like $O(n)$, $O(n^2)$, or $O(n^3)$? (If the answer is unclear, try increasing the number of solves per value of $n$ to 100 or more.)
+``````
+
+``````{exercise}
+:label: problem-structure-ATA
+✍ Prove that if $\mathbf{A}$ is any real invertible square matrix, then $\mathbf{A}^T\mathbf{A}$ is SPD. (Hint: First, check symmetry. Then show that $\mathbf{x}^T\mathbf{A}^T\mathbf{A}\mathbf{x} \ge 0$ for all $\mathbf{x}$. Finally, explain why zero is ruled out if $\mathbf{x}\neq \boldsymbol{0}$.)
+
+``````
