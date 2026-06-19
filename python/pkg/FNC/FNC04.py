@@ -15,7 +15,7 @@ def newton(f, dfdx, x1):
     xtol = 100 * eps
     maxiter = 40
 
-    x = np.zeros(maxiter)
+    x = np.zeros(maxiter + 1)
     x[0] = x1
     y = f(x1)
     dx = np.inf  # for initial pass below
@@ -47,7 +47,7 @@ def secant(f, x1, x2):
     xtol = 100 * eps
     maxiter = 40
 
-    x = np.zeros(maxiter)
+    x = np.zeros(maxiter + 1)
     x[:2] = [x1, x2]
     y1 = f(x1)
     y2 = 100
