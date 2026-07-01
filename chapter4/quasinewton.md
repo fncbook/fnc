@@ -342,12 +342,12 @@ Let $\mathbf{x}_1=[-2,1]^T$ and let $\mathbf{A}_1=\mathbf{J}(\mathbf{x}_1)$ be t
 
 ``````{exercise}
 :label: problem-quasinewton-penalty
-✍ Show that Equation {eq}`levenberg` is equivalent to the linear least-squares problem
+✍ Show that for $\lambda>0$, Equation {eq}`levenberg` is equivalent to the linear least-squares problem
 
 ```{math}
 :numbered: false
 \min_{\mathbf{v}} \Bigl(  \bigl\|\mathbf{A}_k\mathbf{v} + \mathbf{f}_k\bigr\|_2^2 +
-\lambda^2 \bigl\| \mathbf{v} \bigr\|_2^2 \Bigr).
+\lambda \bigl\| \mathbf{v} \bigr\|_2^2 \Bigr).
 ```
 
 (Hint: Express the least-squares residual using block matrix notation, such that {eq}`levenberg` becomes the normal equations for it.)
