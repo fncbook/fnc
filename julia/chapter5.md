@@ -687,7 +687,7 @@ push!(T, T[end] / 2 + h * sum(ynew))
 We can repeat the same code to double $n$ again.
 
 ```{code-cell}
-n *= 2;  n /= 2;  t = h * (0:n)
+n *= 2;  h /= 2;  t = h * (0:n)
 ynew = f.(t[2:2:n])
 push!(T, T[end] / 2 + h * sum(ynew))
 ```
