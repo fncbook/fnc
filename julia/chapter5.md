@@ -529,9 +529,9 @@ FD = zeros(length(h), 3)
 for (k, h) in enumerate(h)
     nodes = h * (-2:2)
     vals = @. f(nodes)
-    FD[k, 1] = dot([0 0 -1 1 0] / h, vals)
-    FD[k, 2] = dot([0 -1 / 2 0 1 / 2 0] / h, vals)
-    FD[k, 3] = dot([1 / 12 -2 / 3 0 2 / 3 -1 / 12] / h, vals)
+    FD[k, 1] = dot([0, 0, -1, 1, 0] / h, vals)
+    FD[k, 2] = dot([0, -1, 0, 1, 0] / 2h, vals)
+    FD[k, 3] = dot([1, -8, 0, 8, -1] / 12h, vals)
 end
 pretty_table([h FD]; column_labels=["h", "FD1", "FD2", "FD4"], backend=:html)
 ```
@@ -586,7 +586,7 @@ When you look at the graphs of these functions, what's remarkable is that one of
 
 ```{code-cell}
 using Plots
-plot([exp, x -> exp(sin(x))], 0, 1, fill=0, layout=(2, 1),
+plot([exp, x -> exp(sin(x))], 0, 1, fill=0, layout=(2, 1), legend=false,
     xlabel=L"x", ylabel=[L"e^x" L"e^{\sin(x)}"], ylim=[0, 2.7])
 ```
 ``````
@@ -597,9 +597,8 @@ plot([exp, x -> exp(sin(x))], 0, 1, fill=0, layout=(2, 1),
 We will approximate the integral of the function $f(x)=e^{\sin 7x}$ over the interval $[0,2]$.
 
 ```{code-cell}
-f = x -> exp(sin(7 * x));
-a = 0;
-b = 2;
+f = x -> exp(sin(7x))
+a, b = 0, 2;
 ```
 
 In lieu of the exact value, we use the `QuadGK` package to find an accurate result.
@@ -654,19 +653,18 @@ We estimate $\displaystyle\int_0^2 x^2 e^{-2x}\, dx$ using extrapolation. First 
 
 ```{code-cell}
 f = x -> x^2 * exp(-2x);
-a = 0;
-b = 2;
-Q, _ = quadgk(f, a, b, atol=1e-14, rtol=1e-14)
+a, b = 0, 2
+Q, _ = quadgk(f, a, b, atol=1e-15, rtol=1e-15)
 @show Q;
 ```
 
 We start with the trapezoid formula on $n=N$ nodes.
 
 ```{code-cell}
-N = 20;       # the coarsest formula
-n = N;
-h = (b - a) / n;
-t = h * (0:n);
+N = 20       # the coarsest formula
+n = N
+h = (b - a) / n
+t = h * (0:n)
 y = f.(t);
 ```
 
@@ -679,19 +677,19 @@ T = [h * (sum(y[2:n]) + y[1] / 2 + y[n+1] / 2)]
 Now we double to $n=2N$, but we only need to evaluate $f$ at every other interior node and apply {eq}`nc-doubling`.
 
 ```{code-cell}
-n = 2n;
-h = h / 2;
-t = h * (0:n);
-T = [T; T[end] / 2 + h * sum(f.(t[2:2:n]))]
+n *= 2
+h /= 2
+t = h * (0:n)
+ynew = f.(t[2:2:n])
+push!(T, T[end] / 2 + h * sum(ynew))
 ```
 
 We can repeat the same code to double $n$ again.
 
 ```{code-cell}
-n = 2n;
-h = h / 2;
-t = h * (0:n);
-T = [T; T[end] / 2 + h * sum(f.(t[2:2:n]))]
+n *= 2;  n /= 2;  t = h * (0:n)
+ynew = f.(t[2:2:n])
+push!(T, T[end] / 2 + h * sum(ynew))
 ```
 
 Let us now do the first level of extrapolation to get results from Simpson's formula. We combine the elements `T[i]` and `T[i+1]` the same way for $i=1$ and $i=2$.
@@ -791,7 +789,7 @@ Let's see how the number of integrand evaluations and the error vary with the re
 ```{code-cell}
 tol = [1 / 10^k for k in 4:14]
 err, n = [], []
-for tol in 10.0 .^ (-4:-1:-14)
+for tol in tol
     A, t = FNC.intadapt(f, 0, 4, tol)
     push!(err, Q - A)
     push!(n, length(t))
