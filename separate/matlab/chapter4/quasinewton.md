@@ -232,6 +232,11 @@ log10( abs(x(1, 1:end-1) - r(1)) )'
 
 ::::
 
+::::{aside}
+
+
+::::
+
 ## Exercises
 
 ``````{exercise}

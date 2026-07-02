@@ -65,9 +65,19 @@ When you look at the graphs of these functions, what's remarkable is that one of
 
 ```{code-cell}
 using Plots
-plot([exp, x -> exp(sin(x))], 0, 1, fill=0, layout=(2, 1),
+plot([exp, x -> exp(sin(x))], 0, 1, fill=0, layout=(2, 1), legend=false,
     xlabel=L"x", ylabel=[L"e^x" L"e^{\sin(x)}"], ylim=[0, 2.7])
 ```
+
+::::
+
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_82u18amh&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_my8rxrtn%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
 
 ::::
 
@@ -223,9 +233,8 @@ The trapezoid integration formula is second-order accurate.
 We will approximate the integral of the function $f(x)=e^{\sin 7x}$ over the interval $[0,2]$.
 
 ```{code-cell}
-f = x -> exp(sin(7 * x));
-a = 0;
-b = 2;
+f = x -> exp(sin(7x))
+a, b = 0, 2;
 ```
 
 In lieu of the exact value, we use the `QuadGK` package to find an accurate result.
@@ -271,6 +280,16 @@ plot(n, abs.(err);
 # Add line for perfect 2nd order.
 plot!(n, 3e-3 * (n / n[1]) .^ (-2), l=:dash, label=L"O(n^{-2})")
 ```
+
+::::
+
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_rz64mguz&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_oq3ws1ce%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
 
 ::::
 
@@ -377,19 +396,18 @@ We estimate $\displaystyle\int_0^2 x^2 e^{-2x}\, dx$ using extrapolation. First 
 
 ```{code-cell}
 f = x -> x^2 * exp(-2x);
-a = 0;
-b = 2;
-Q, _ = quadgk(f, a, b, atol=1e-14, rtol=1e-14)
+a, b = 0, 2
+Q, _ = quadgk(f, a, b, atol=1e-15, rtol=1e-15)
 @show Q;
 ```
 
 We start with the trapezoid formula on $n=N$ nodes.
 
 ```{code-cell}
-N = 20;       # the coarsest formula
-n = N;
-h = (b - a) / n;
-t = h * (0:n);
+N = 20       # the coarsest formula
+n = N
+h = (b - a) / n
+t = h * (0:n)
 y = f.(t);
 ```
 
@@ -402,19 +420,19 @@ T = [h * (sum(y[2:n]) + y[1] / 2 + y[n+1] / 2)]
 Now we double to $n=2N$, but we only need to evaluate $f$ at every other interior node and apply {eq}`nc-doubling`.
 
 ```{code-cell}
-n = 2n;
-h = h / 2;
-t = h * (0:n);
-T = [T; T[end] / 2 + h * sum(f.(t[2:2:n]))]
+n *= 2
+h /= 2
+t = h * (0:n)
+ynew = f.(t[2:2:n])
+push!(T, T[end] / 2 + h * sum(ynew))
 ```
 
 We can repeat the same code to double $n$ again.
 
 ```{code-cell}
-n = 2n;
-h = h / 2;
-t = h * (0:n);
-T = [T; T[end] / 2 + h * sum(f.(t[2:2:n]))]
+n *= 2;  h /= 2;  t = h * (0:n)
+ynew = f.(t[2:2:n])
+push!(T, T[end] / 2 + h * sum(ynew))
 ```
 
 Let us now do the first level of extrapolation to get results from Simpson's formula. We combine the elements `T[i]` and `T[i+1]` the same way for $i=1$ and $i=2$.
@@ -441,6 +459,16 @@ pretty_table(err; column_labels=["order 2", "order 4", "order 6"], backend=:html
 ```
 
 If we consider the computational time to be dominated by evaluations of $f$, then we have obtained a result with about twice as many accurate digits as the best trapezoid result, at virtually no extra cost.
+
+::::
+
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_1ib04uyh&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_v212f3ne%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
 
 ::::
 

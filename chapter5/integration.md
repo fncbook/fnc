@@ -33,6 +33,29 @@ In calculus, you learn that the elegant way to evaluate a definite integral is t
 
 ::::
 
+::::{aside}
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_82u18amh&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_my8rxrtn%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+````
+
+````{tab-item} Python
+:sync: python
+````
+`````
+
+::::
+
 ```{index} ! numerical integration
 ```
 
@@ -216,6 +239,29 @@ The trapezoid integration formula is second-order accurate.
 
 ::::
 
+::::{aside}
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_rz64mguz&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_oq3ws1ce%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+````
+
+````{tab-item} Python
+:sync: python
+````
+`````
+
+::::
+
 (section-integration-extrapolation)=
 
 ## Extrapolation
@@ -333,6 +379,29 @@ where the nodes referenced in the last line are relative to $n=2m$. Hence in pas
 :::{embed} #demo-int-extrap-python
 :::
 ```` 
+`````
+
+::::
+
+::::{aside}
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_1ib04uyh&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_v212f3ne%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+````
+
+````{tab-item} Python
+:sync: python
+````
 `````
 
 ::::

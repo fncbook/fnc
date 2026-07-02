@@ -77,6 +77,11 @@ ylim([0, 2.7]), title("exp(sin(x))");
 
 ::::
 
+::::{aside}
+
+
+::::
+
 ```{index} ! numerical integration
 ```
 
@@ -273,6 +278,11 @@ title("Convergence of trapezoidal integration");
 
 ::::
 
+::::{aside}
+
+
+::::
+
 (section-integration-extrapolation)=
 
 ## Extrapolation
@@ -446,6 +456,11 @@ print(results)
 ```
 
 If we consider the computational time to be dominated by evaluations of $f$, then we have obtained a result with about twice as many accurate digits as the best trapezoid result, at virtually no extra cost.
+
+::::
+
+::::{aside}
+
 
 ::::
 

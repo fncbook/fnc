@@ -262,6 +262,11 @@ for k in range(len(logerr) - 1):
 
 ::::
 
+::::{aside}
+
+
+::::
+
 ## Exercises
 
 ``````{exercise}

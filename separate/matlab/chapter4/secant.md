@@ -84,6 +84,11 @@ y4 = f(x4)
 
 ::::
 
+::::{aside}
+
+
+::::
+
 The example in @demo-secant-line demonstrates the {term}`secant method`. In the secant method, one finds the root of the linear approximation through the two most recent root estimates. That is, given previous approximations $x_1,\ldots,x_k$, define the linear model function as the line through $\bigl(x_{k-1},f(x_{k-1})\bigr)$ and $\bigl(x_k,f(x_k)\bigr)$:
 
 ```{math}
@@ -215,6 +220,11 @@ As expected, this settles in at around 1.618.
 
 ::::
 
+::::{aside}
+
+
+::::
+
 In terms of the error as a function of the iteration number $k$, the secant method converges at a rate strictly between linear and quadratic, which is slower than Newton's method. But error versus iteration count may not be the best means of comparison.
 
 Often we analyze rootfinding methods by assuming that the bulk of computing time is spent evaluating the user-defined functions $f$ and $f'$. (Our simple examples and exercises mostly don't support this assumption, but many practical applications do.) In this light, we see that Newton's method requires two evaluations, $f(x_k)$ and $f'(x_k)$, for each iteration. The secant method, on the other hand, while it *uses* the two function values $f(x_k)$ and $f(x_{k-1})$ at each iteration, only needs to *compute* a single new one. Note that {numref}`Function {number} <function-secant>` keeps track of one previous function value rather than recomputing it.
@@ -325,6 +335,11 @@ The convergence is probably superlinear:
 logerr = log(abs(err));
 ratios = logerr(2:end) ./ logerr(1:end-1)
 ```
+
+
+::::
+
+::::{aside}
 
 
 ::::

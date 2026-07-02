@@ -124,6 +124,16 @@ In the least perturbed case, where the minimized residual is less than $10^{-3}$
 
 ::::
 
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_g7r47hbh&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_61kwmvow%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+
+::::
+
 ## Nonlinear data fitting
 
 ```{index} data fitting; nonlinear
@@ -241,6 +251,16 @@ plot!(linmodel, 0, 6, label="linearized fit")
 ```
 
 The truly nonlinear fit is clearly better in this case. It optimizes a residual for the original measured quantity rather than a transformed one we picked for algorithmic convenience.
+
+::::
+
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_qub65dst&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_xz0u0hu3%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
 
 ::::
 

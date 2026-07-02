@@ -36,6 +36,29 @@ To this point, we have used only equally spaced nodes to compute integrals. Yet 
 
 ::::
 
+::::{aside}
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_tf3ppcd8&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_gwqmrine%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+````
+
+````{tab-item} Python
+:sync: python
+````
+`````
+
+::::
+
 We would like an algorithm that automatically detects and reacts to a situation like that in @demo-adapt-motive, a trait known as **adaptivity**.
 
 ## Error estimation
@@ -160,6 +183,29 @@ If the error estimate passes the test {eq}`absreltolerance`, the better Simpson 
 :::{embed} #demo-adapt-usage-python
 :::
 ```` 
+`````
+
+::::
+
+::::{aside}
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_vqy6ce7i&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_qo6l8ei1%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+````
+
+````{tab-item} Python
+:sync: python
+````
 `````
 
 ::::

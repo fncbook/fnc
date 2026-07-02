@@ -155,6 +155,16 @@ plot!(h, [h h .^ 2], l=:dash, label=[L"O(h)" L"O(h^2)"])
 
 ::::
 
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_ippatuaf&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_ax2aqv08%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+
+::::
+
 ## Stability
 
 The truncation error $\tau_f(h)$ of a finite-difference formula is dominated by a leading term $O(h^m)$ for an integer $m$. This error decreases as $h\to 0$. However, we have not yet accounted for the effects of roundoff error. To keep matters as simple as possible, let's consider the forward difference
@@ -234,9 +244,9 @@ FD = zeros(length(h), 3)
 for (k, h) in enumerate(h)
     nodes = h * (-2:2)
     vals = @. f(nodes)
-    FD[k, 1] = dot([0 0 -1 1 0] / h, vals)
-    FD[k, 2] = dot([0 -1 / 2 0 1 / 2 0] / h, vals)
-    FD[k, 3] = dot([1 / 12 -2 / 3 0 2 / 3 -1 / 12] / h, vals)
+    FD[k, 1] = dot([0, 0, -1, 1, 0] / h, vals)
+    FD[k, 2] = dot([0, -1, 0, 1, 0] / 2h, vals)
+    FD[k, 3] = dot([1, -8, 0, 8, -1] / 12h, vals)
 end
 pretty_table([h FD]; column_labels=["h", "FD1", "FD2", "FD4"], backend=:html)
 ```
@@ -256,6 +266,16 @@ plot!(h, 0.1 * eps() ./ h, l=:dash, color=:black, label=L"O(h^{-1})")
 ```
 
 Again the graph is made so that $h$ decreases from left to right. The errors are dominated at first by truncation error, which decreases most rapidly for the fourth-order formula. However, increasing roundoff error eventually equals and then dominates the truncation error as $h$ continues to decrease. As the order of accuracy increases, the crossover point moves to the left (greater efficiency) and down (greater accuracy).
+
+::::
+
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_o07y7rbl&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_i1fsob3d%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
 
 ::::
 

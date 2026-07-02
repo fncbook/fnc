@@ -121,6 +121,11 @@ In the least perturbed case, where the minimized residual is less than $10^{-3}$
 
 ::::
 
+::::{aside}
+
+
+::::
+
 ## Nonlinear data fitting
 
 ```{index} data fitting; nonlinear
@@ -231,6 +236,11 @@ legend(labels, 'location', 'east');
 ```
 
 The truly nonlinear fit is clearly better in this case. It optimizes a residual for the original measured quantity rather than a transformed one we picked for algorithmic convenience.
+
+::::
+
+::::{aside}
+
 
 ::::
 

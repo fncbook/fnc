@@ -267,6 +267,11 @@ title(("Convergence of spline interpolation"));
 
 ::::
 
+::::{aside}
+
+
+::::
+
 Besides having more smoothness than a piecewise linear interpolant, the not-a-knot cubic spline improves the order of accuracy to 4.
 
 ````{prf:theorem}

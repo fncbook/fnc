@@ -55,6 +55,29 @@ Polynomials are the obvious first candidate to serve as interpolating functions.
 
 ::::
 
+::::{aside}
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_hjm7x8nm&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_zny576te%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+````
+
+````{tab-item} Python
+:sync: python
+````
+`````
+
+::::
+
 ```{prf:observation}
 Interpolation by a polynomial at equally spaced nodes is ill-conditioned as the degree of the polynomial grows.
 ```
@@ -95,6 +118,29 @@ Usually we designate in advance a maximum degree $d$ for each polynomial piece o
 :::{embed} #demo-interpolation-pwise-python
 :::
 ```` 
+`````
+
+::::
+
+::::{aside}
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_irhl0g18&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_enqwiedb%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+````
+
+````{tab-item} Python
+:sync: python
+````
 `````
 
 ::::
@@ -209,6 +255,29 @@ Since $|d_k|\le \|\mathbf{d}\|_\infty$ for all $k$, this finishes {eq}`interp-co
 :::{embed} #demo-interp-cond-python
 :::
 ```` 
+`````
+
+::::
+
+::::{aside}
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_fpxmd8df&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_rxptofov%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+````
+
+````{tab-item} Python
+:sync: python
+````
 `````
 
 ::::

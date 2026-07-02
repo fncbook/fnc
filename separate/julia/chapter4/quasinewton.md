@@ -263,6 +263,16 @@ pretty_table((iter=eachindex(logerr), logerr, ratios);
 
 ::::
 
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_rqensl3c&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_jepdamtt%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+
+::::
+
 ## Exercises
 
 ``````{exercise}

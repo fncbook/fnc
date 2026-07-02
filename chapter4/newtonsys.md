@@ -223,6 +223,29 @@ An implementation of Newton's method for systems is given in {numref}`Function {
 
 ::::
 
+::::{aside}
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_vjaon1tm&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_1f55nya7%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+````
+
+````{tab-item} Python
+:sync: python
+````
+`````
+
+::::
+
 ## Exercises
 
 ``````{exercise}

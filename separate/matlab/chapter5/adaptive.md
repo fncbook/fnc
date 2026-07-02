@@ -61,6 +61,11 @@ Both the picture and the numerical results suggest that more nodes should be use
 
 ::::
 
+::::{aside}
+
+
+::::
+
 We would like an algorithm that automatically detects and reacts to a situation like that in @demo-adapt-motive, a trait known as **adaptivity**.
 
 ## Error estimation
@@ -204,6 +209,11 @@ hold on
 loglog(n, order4, "k--", displayname="O(n^{-4})")
 legend();
 ```
+
+::::
+
+::::{aside}
+
 
 ::::
 

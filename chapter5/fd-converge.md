@@ -107,6 +107,29 @@ Thus, this method has order of accuracy equal to 2.
 
 ::::
 
+::::{aside}
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_ippatuaf&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_ax2aqv08%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+````
+
+````{tab-item} Python
+:sync: python
+````
+`````
+
+::::
+
 ## Stability
 
 The truncation error $\tau_f(h)$ of a finite-difference formula is dominated by a leading term $O(h^m)$ for an integer $m$. This error decreases as $h\to 0$. However, we have not yet accounted for the effects of roundoff error. To keep matters as simple as possible, let's consider the forward difference
@@ -193,6 +216,29 @@ A different statement of the conclusion is that for a first-order formula, at mo
 :::{embed} #demo-fdconverge-round-python
 :::
 ```` 
+`````
+
+::::
+
+::::{aside}
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_o07y7rbl&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_i1fsob3d%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+````
+
+````{tab-item} Python
+:sync: python
+````
 `````
 
 ::::

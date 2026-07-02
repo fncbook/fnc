@@ -150,6 +150,11 @@ legend("FD1", "FD2", "O(h)", "O(h^2)");
 
 ::::
 
+::::{aside}
+
+
+::::
+
 ## Stability
 
 The truncation error $\tau_f(h)$ of a finite-difference formula is dominated by a leading term $O(h^m)$ for an integer $m$. This error decreases as $h\to 0$. However, we have not yet accounted for the effects of roundoff error. To keep matters as simple as possible, let's consider the forward difference
@@ -254,6 +259,11 @@ legend("FD1", "FD2", "FD4", "O(1/h)", "location", "northeast");
 ```
 
 Again the graph is made so that $h$ decreases from left to right. The errors are dominated at first by truncation error, which decreases most rapidly for the fourth-order formula. However, increasing roundoff error eventually equals and then dominates the truncation error as $h$ continues to decrease. As the order of accuracy increases, the crossover point moves to the left (greater efficiency) and down (greater accuracy).
+
+::::
+
+::::{aside}
+
 
 ::::
 

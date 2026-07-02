@@ -265,6 +265,11 @@ The ratio is apparently converging toward 2, as expected for quadratic convergen
 
 ::::
 
+::::{aside}
+
+
+::::
+
 ## Exercises
 
 ``````{exercise}

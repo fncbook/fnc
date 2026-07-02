@@ -178,6 +178,29 @@ f'(0) &\approx \tfrac{1}{h} \left[ \tfrac{1}{2} f(-2h) - 2 f(-h) + \tfrac{3}{2} 
 
 ::::
 
+::::{aside}
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_979cx78a&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_m2yu82jt%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+````
+
+````{tab-item} Python
+:sync: python
+````
+`````
+
+::::
+
 ## Higher derivatives
 
 Many applications require the second derivative of a function. It's tempting to use the finite difference of a finite difference. For example, applying {eq}`centerFD12` to $f'$ gives
@@ -241,6 +264,29 @@ For the second derivative, converting a forward difference to a backward differe
 
 ::::
 
+::::{aside}
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_tru1vcjk&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_uolj4jwg%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+````
+
+````{tab-item} Python
+:sync: python
+````
+`````
+
+::::
+
 ## Arbitrary nodes
 
 Although function values at equally spaced nodes are a common and convenient situation, the node locations may be arbitrary. The general form of a finite-difference formula is
@@ -297,6 +343,29 @@ We no longer assume equally spaced nodes, so there is no "$h$" to be used in the
 :::{embed} #demo-finitediffs-fd-weights-python
 :::
 ```` 
+`````
+
+::::
+
+::::{aside}
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_ese8nyii&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_ghl0waib%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+````
+
+````{tab-item} Python
+:sync: python
+````
 `````
 
 ::::

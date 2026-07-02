@@ -204,6 +204,11 @@ BD2 = (f(-2*h) - 4*f(-h) + 3*f(0)) / (2*h)
 
 ::::
 
+::::{aside}
+
+
+::::
+
 ## Higher derivatives
 
 Many applications require the second derivative of a function. It's tempting to use the finite difference of a finite difference. For example, applying {eq}`centerFD12` to $f'$ gives
@@ -275,6 +280,11 @@ BD2 = (-f(-3*h) + 4*f(-2*h) - 5*f(-h) + 2*f(0)) / h^2
 
 ::::
 
+::::{aside}
+
+
+::::
+
 ## Arbitrary nodes
 
 Although function values at equally spaced nodes are a common and convenient situation, the node locations may be arbitrary. The general form of a finite-difference formula is
@@ -325,6 +335,11 @@ We can reproduce the weights in the finite-difference tables by using equally sp
 ```{code-cell}
 fdweights(0:3, 1)
 ```
+
+
+::::
+
+::::{aside}
 
 
 ::::

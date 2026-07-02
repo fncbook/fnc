@@ -101,6 +101,16 @@ Surely there must be functions that are more intuitively representative of those
 
 ::::
 
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_hjm7x8nm&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_zny576te%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+
+::::
+
 ```{prf:observation}
 Interpolation by a polynomial at equally spaced nodes is ill-conditioned as the degree of the polynomial grows.
 ```
@@ -149,6 +159,16 @@ using Dierckx
 p = Spline1D(t, y)
 plot!(x -> p(x), -1, 1, label="piecewise cubic")
 ```
+
+::::
+
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_irhl0g18&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_enqwiedb%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
 
 ::::
 
@@ -275,6 +295,16 @@ plot!(x -> ϕ(x), -1, 1;
 ```
 
 From the figure we can see that the condition number for polynomial interpolation on these nodes is at least 500.
+
+::::
+
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_fpxmd8df&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_rxptofov%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
 
 ::::
 

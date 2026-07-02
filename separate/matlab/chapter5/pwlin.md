@@ -179,6 +179,11 @@ legend();
 
 ::::
 
+::::{aside}
+
+
+::::
+
 ## Conditioning and convergence
 
 The condition number bounds from @theorem-interp-conditioning are very simple for piecewise linear interpolation because the interpolant of the data $\mathbf{e}_k$ is just the hat function $H_k$. Hence, $1\le \kappa \le n+1$. However, there is an even simpler result.
@@ -289,6 +294,11 @@ xlabel("n");  ylabel("|| f-p ||_{\infty}")
 title("Convergence of PL interpolation")
 legend();
 ```
+
+::::
+
+::::{aside}
+
 
 ::::
 

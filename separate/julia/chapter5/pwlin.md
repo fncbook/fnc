@@ -196,6 +196,16 @@ plot!(p, 0, 1, label="interpolant", title="PL interpolation")
 
 ::::
 
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_ib700s5j&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_na5unytb%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+
+::::
+
 ## Conditioning and convergence
 
 The condition number bounds from @theorem-interp-conditioning are very simple for piecewise linear interpolation because the interpolant of the data $\mathbf{e}_k$ is just the hat function $H_k$. Hence, $1\le \kappa \le n+1$. However, there is an even simpler result.
@@ -309,6 +319,16 @@ plot!(h, order2;
     xaxis=(:log10, L"h"),  yaxis=(:log10, L"|| f-p\, ||_\infty"),
     title="Convergence of PL interpolation")
 ```
+
+::::
+
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_ocd26mfz&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_akq3lveg%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
 
 ::::
 

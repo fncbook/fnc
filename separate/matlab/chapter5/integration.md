@@ -65,6 +65,11 @@ xlabel('x'), ylabel(('f(x)'));
 
 ::::
 
+::::{aside}
+
+
+::::
+
 ```{index} ! numerical integration
 ```
 
@@ -258,6 +263,11 @@ legend();
 
 ::::
 
+::::{aside}
+
+
+::::
+
 (section-integration-extrapolation)=
 
 ## Extrapolation
@@ -420,6 +430,11 @@ table(err2, err4, err6, variablenames=["order 2", "order 4", "order 6"])
 ```
 
 If we consider the computational time to be dominated by evaluations of $f$, then we have obtained a result with about twice as many accurate digits as the best trapezoid result, at virtually no extra cost.
+
+::::
+
+::::{aside}
+
 
 ::::
 

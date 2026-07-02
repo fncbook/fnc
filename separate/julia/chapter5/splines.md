@@ -279,6 +279,16 @@ plot(n, [err order4];
 
 ::::
 
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_3sl1xhmp&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_3z1ejfz9%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+
+::::
+
 Besides having more smoothness than a piecewise linear interpolant, the not-a-knot cubic spline improves the order of accuracy to 4.
 
 ````{prf:theorem}

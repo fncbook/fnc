@@ -215,6 +215,11 @@ print(f"BD1 is {BD1:.9f} and BD2 is {BD2:.9f}")
 
 ::::
 
+::::{aside}
+
+
+::::
+
 ## Higher derivatives
 
 Many applications require the second derivative of a function. It's tempting to use the finite difference of a finite difference. For example, applying {eq}`centerFD12` to $f'$ gives
@@ -288,6 +293,11 @@ print(f"BD1 is {BD1:.9f} and BD2 is {BD2:.9f}")
 
 ::::
 
+::::{aside}
+
+
+::::
+
 ## Arbitrary nodes
 
 Although function values at equally spaced nodes are a common and convenient situation, the node locations may be arbitrary. The general form of a finite-difference formula is
@@ -340,6 +350,11 @@ We can reproduce the weights in the finite-difference tables by using equally sp
 ```{code-cell}
 print(FNC.fdweights(linspace(0, 3, 4), 1))
 ```
+
+::::
+
+::::{aside}
+
 
 ::::
 

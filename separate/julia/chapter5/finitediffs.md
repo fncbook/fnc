@@ -215,6 +215,16 @@ BD2 = (f(-2h) - 4f(-h) + 3f(0)) / 2h
 
 ::::
 
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_979cx78a&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_m2yu82jt%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+
+::::
+
 ## Higher derivatives
 
 Many applications require the second derivative of a function. It's tempting to use the finite difference of a finite difference. For example, applying {eq}`centerFD12` to $f'$ gives
@@ -288,6 +298,16 @@ BD2 = (-f(-3h) + 4f(-2h) - 5f(-h) + 2f(0)) / h^2
 
 ::::
 
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_tru1vcjk&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_uolj4jwg%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+
+::::
+
 ## Arbitrary nodes
 
 Although function values at equally spaced nodes are a common and convenient situation, the node locations may be arbitrary. The general form of a finite-difference formula is
@@ -349,6 +369,16 @@ By giving nodes of type `Rational`, we can get exact values instead.
 ```{code-cell}
 FNC.fdweights(Rational.(0:3), 1)
 ```
+
+::::
+
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_ese8nyii&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_ghl0waib%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
 
 ::::
 

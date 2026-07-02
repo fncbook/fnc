@@ -77,6 +77,11 @@ Both the picture and the numerical results suggest that more nodes should be use
 
 ::::
 
+::::{aside}
+
+
+::::
+
 We would like an algorithm that automatically detects and reacts to a situation like that in @demo-adapt-motive, a trait known as **adaptivity**.
 
 ## Error estimation
@@ -222,6 +227,11 @@ xlabel("number of nodes"), ylabel("error")
 legend()
 title("Convergence of adaptive quadrature");
 ```
+
+::::
+
+::::{aside}
+
 
 ::::
 

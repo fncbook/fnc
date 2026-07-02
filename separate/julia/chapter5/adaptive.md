@@ -73,6 +73,16 @@ Both the picture and the numerical results suggest that more nodes should be use
 
 ::::
 
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_tf3ppcd8&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_gwqmrine%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+
+::::
+
 We would like an algorithm that automatically detects and reacts to a situation like that in @demo-adapt-motive, a trait known as **adaptivity**.
 
 ## Error estimation
@@ -199,7 +209,7 @@ Let's see how the number of integrand evaluations and the error vary with the re
 ```{code-cell}
 tol = [1 / 10^k for k in 4:14]
 err, n = [], []
-for tol in 10.0 .^ (-4:-1:-14)
+for tol in tol
     A, t = FNC.intadapt(f, 0, 4, tol)
     push!(err, Q - A)
     push!(n, length(t))
@@ -220,6 +230,16 @@ plot(n, abs.(err);
 order4 = @. 0.01 * (n / n[1])^(-4)
 plot!(n, order4, l=:dash, label=L"O(n^{-4})")
 ```
+
+::::
+
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_vqy6ce7i&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_qo6l8ei1%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
 
 ::::
 

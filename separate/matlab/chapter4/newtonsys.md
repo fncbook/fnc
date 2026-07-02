@@ -239,6 +239,11 @@ This sequence looks to be nearly doubling at each iteration, which is a good sig
 
 ::::
 
+::::{aside}
+
+
+::::
+
 ## Exercises
 
 ``````{exercise}

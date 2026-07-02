@@ -107,6 +107,11 @@ Surely there must be functions that are more intuitively representative of those
 
 ::::
 
+::::{aside}
+
+
+::::
+
 ```{prf:observation}
 Interpolation by a polynomial at equally spaced nodes is ill-conditioned as the degree of the polynomial grows.
 ```
@@ -165,6 +170,11 @@ plot(tt, p(tt), label="cubic spline")
 xlabel("$x$"),  ylabel("$y$")
 legend();
 ```
+
+::::
+
+::::{aside}
+
 
 ::::
 
@@ -290,6 +300,11 @@ legend();
 ```
 
 From the figure we can see that the condition number for polynomial interpolation on these nodes is at least 500.
+
+::::
+
+::::{aside}
+
 
 ::::
 
