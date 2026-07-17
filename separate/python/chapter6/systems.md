@@ -191,6 +191,11 @@ close()
 
 ::::
 
+::::{aside}
+
+
+::::
+
 In the rest of this chapter we present methods as though they are for scalar equations, but their application to systems is taken for granted. The generalization of error analysis can be more complicated, but our statements about order of accuracy and other properties are true for systems as well as scalars. The codes are all written to accept systems.
 
 ## Transformation of high-order systems
@@ -344,6 +349,11 @@ anim.save("pendulums-strong.mp4", fps=24)
 ```
 
 ![Coupled pendulums](pendulums-strong.mp4)
+
+::::
+
+::::{aside}
+
 
 ::::
 

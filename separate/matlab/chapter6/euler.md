@@ -333,6 +333,11 @@ legend('error', 'O(n^{-1})', 'location', 'southwest');
 
 ::::
 
+::::{aside}
+
+
+::::
+
 Euler's method is the ancestor of the two major families of IVP methods presented in this chapter. Before we describe them, though, we generalize the initial-value problem itself in a crucial way.
 
 ## Exercises

@@ -151,6 +151,11 @@ for t in linspace(0, 4, 6):
 
 ::::
 
+::::{aside}
+
+
+::::
+
 ## Existence and uniqueness
 
 There are simple IVPs that do not have solutions at all possible times.
@@ -180,6 +185,11 @@ xlabel("$t$")
 ylabel("$u(t)$")
 title(("Blowup in finite time"));
 ```
+
+::::
+
+::::{aside}
+
 
 ::::
 

@@ -134,6 +134,11 @@ u(0:0.5:2)
 
 ::::
 
+::::{aside}
+
+
+::::
+
 ## Existence and uniqueness
 
 There are simple IVPs that do not have solutions at all possible times.
@@ -160,6 +165,11 @@ xlabel("t")
 ylabel("u(t)")
 title(("Finite-time blowup"));
 ```
+
+::::
+
+::::{aside}
+
 
 ::::
 

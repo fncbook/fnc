@@ -153,7 +153,7 @@ The resulting solution object can be shown using `plot`.
 using Plots, LaTeXStrings
 plot(sol;
     label="solution", legend=:bottom,
-    xlabel="t",  ylabel=L"u(t)", title=L"u'=\sin((t+u)^2)")
+    xlabel=L"t",  ylabel=L"u(t)", title=L"u'=\sin((t+u)^2)")
 ```
 
 The solution also acts like any callable function that can be evaluated at different values of $t$.
@@ -240,9 +240,9 @@ u'=\sin[(u+t)^2], \quad t \in [0,4], \quad u(0)=-1.
 
 ```{code-cell}
 using OrdinaryDiffEq
-f(u, p, t) = sin((t + u)^2);
-tspan = (0.0, 4.0);
-u0 = -1.0;
+f(u, p, t) = sin((t + u)^2)
+tspan = (0.0, 4.0)
+u0 = -1.0
 ivp = ODEProblem(f, u0, tspan)
 ```
 
@@ -435,10 +435,8 @@ Here `idxs` is used to plot two components as functions of time.
 γ, L, k = 0, 0.5, 0
 ivp = ODEProblem(couple, u₀, tspan, [γ, L, k])
 sol = solve(ivp)
-plot(sol, idxs=[1, 2], 
-    label=[L"\theta_1" L"\theta_2"],
-    xlims=[20, 50], 
-    title="Uncoupled pendulums")
+plot(sol, idxs=[1, 2]; label=[L"\theta_1" L"\theta_2"],
+    xlims=[20, 50], title="Uncoupled pendulums")
 ```
 
 You can see that the pendulums swing independently:
@@ -453,8 +451,8 @@ anim = @animate for t in range(0, 24, 251)
     plot!([0, sin(θ₂)], [0, -cos(θ₂)], l=4;
         subplot=2, aspect_ratio=1, grid=false,
         xaxis=((-1.1, 1.1), false), yaxis=((-1.1, 0.1), false), legend=false)
-    scatter!([sin(θ₁)], [-cos(θ₁)], m=(5, :black), subplot=1)
-    scatter!([sin(θ₂)], [-cos(θ₂)], m=(5, :black), subplot=2)
+    scatter!([sin(θ₁)], [-cos(θ₁)], m=(5, :black), msw=0, subplot=1)
+    scatter!([sin(θ₂)], [-cos(θ₂)], m=(5, :black), msw=0, subplot=2)
     annotate!(-0.95, 0.25, Plots.text(@sprintf("t = %.1f", t), :left, 11); subplot=1)
 end
 mp4(anim, "figures/pendulums-weak.mp4")
@@ -467,13 +465,11 @@ Because the model is nonlinear and the initial angles are not small, they have s
 With coupling activated, a different behavior is seen.
 
 ```{code-cell}
-k = 1
+k = 1    # activate coupling
 ivp = ODEProblem(couple, u₀, tspan, [γ, L, k])
 sol = solve(ivp)
-plot(sol, idxs=[1, 2], 
-    label=[L"\theta_1" L"\theta_2"],
-    xlims=[20, 50], 
-    title="Coupled pendulums")
+plot(sol, idxs=[1, 2]; label=[L"\theta_1" L"\theta_2"],
+    xlims=[20, 50], title="Coupled pendulums")
 ```
 
 The coupling makes the pendulums swap energy back and forth:
@@ -488,9 +484,9 @@ anim = @animate for t in range(0, 50, 601)
     plot!([0, sin(θ₂)], [0, -cos(θ₂)], l=4;
         subplot=2, aspect_ratio=1, grid=false,
         xaxis=((-1.1, 1.1), false), yaxis=((-1.1, 0.1), false), legend=false)
-    scatter!([sin(θ₁)], [-cos(θ₁)], m=(5, :black), subplot=1)
-    scatter!([sin(θ₂)], [-cos(θ₂)], m=(5, :black), subplot=2)
-    annotate!(-0.95, 0.1, Plots.text(@sprintf("t = %.1f", t), :left, 11); subplot=1)
+    scatter!([sin(θ₁)], [-cos(θ₁)], m=(5, :black), msw=0, subplot=1)
+    scatter!([sin(θ₂)], [-cos(θ₂)], m=(5, :black), msw=0, subplot=2)
+    annotate!(-0.95, 0.25, Plots.text(@sprintf("t = %.1f", t), :left, 11); subplot=1)
 end
 mp4(anim, "figures/pendulums-strong.mp4")
 ```
@@ -715,17 +711,14 @@ So AB4, which is supposed to be _more_ accurate than AM2, actually needs somethi
 (demo-zs-LIAF-julia)=
 ``````{dropdown} @demo-zs-LIAF
 :open:
-We'll measure the error at the time $t=1$.
+For our temporary implementation, we will use the exact solution as the second starting value of the method.
 
 ```{code-cell}
-using PrettyTables
 du_dt(u, t) = u
-û = exp
-a, b = 0.0, 1.0;
-n = [5, 10, 20, 40, 60]
-err = []
-t, u = [], []
-for n in n
+û = exp    # exact solution
+a, b = 0.0, 1.0
+
+function LIAF(n)
     h = (b - a) / n
     t = [a + i * h for i in 0:n]
     u = [1; û(h); zeros(n - 1)]
@@ -734,6 +727,18 @@ for n in n
         f_val[i] = du_dt(u[i], t[i])
         u[i+1] = -4 * u[i] + 5 * u[i-1] + h * (4 * f_val[i] + 2 * f_val[i-1])
     end
+    return t, u
+end;
+```
+
+We'll measure the error at the time $t=1$ for a few values of $n$.
+
+```{code-cell}
+using PrettyTables
+n = [5, 10, 20, 40, 60]
+err, t, u = [], [], []
+for n in n
+    t, u = LIAF(n)    
     push!(err, abs(û(b) - u[end]))
 end
 pretty_table((n=n, h=(b - a) ./ n, err=err); 
@@ -744,10 +749,7 @@ The error starts out promisingly, but things explode from there. A graph of the 
 
 ```{code-cell}
 using Plots, LaTeXStrings
-plot(t, abs.(u);
-    m=3,  label="",
-    xlabel=L"t",  yaxis=(:log10, L"|u(t)|"), 
-    title="LIAF solution")
+plot(t, abs.(u); m=3,  label="", xlabel=L"t",  yaxis=(:log10, L"|u(t)|"), title="A solution?")
 ```
 
 It's clear that the solution is growing exponentially in time.

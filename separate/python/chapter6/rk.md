@@ -199,8 +199,10 @@ Here are two more two-stage, second-order methods, **modified Euler** and **Heun
 ```
 
 ::::{attention}
-Euler, improved Euler (IE2), and modified Euler (ME2) are all distinct numerical methods.
+Euler, improved Euler (IE2), and modified Euler (ME2) are all distinct numerical methods.[^heun]
 ::::
+
+[^heun]: Some sources (including Wikipedia in 2026) give the name Ralston to what we have called Heun's method, and also give Heun's name to what we have called modified Euler. The attribution of mathematical discovery is often a [tricky business](https://en.wikipedia.org/wiki/Stigler%27s_law_of_eponymy). Until we have seen an authoritative historical treatment, we are maintaining continuity with our past naming conventions.  
 
 The most commonly used RK method, and perhaps the most popular IVP method of all, is the fourth-order one given by
 
@@ -296,6 +298,11 @@ title("Convergence of RK methods");
 ```
 
 The fourth-order variant is more efficient in this problem over a wide range of accuracy.
+
+::::
+
+::::{aside}
+
 
 ::::
 

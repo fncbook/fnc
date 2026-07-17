@@ -197,6 +197,16 @@ mp4(anim, "figures/predator-prey.mp4")
 
 ::::
 
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_tquc3lzk&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_jtto2bf6%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+
+::::
+
 In the rest of this chapter we present methods as though they are for scalar equations, but their application to systems is taken for granted. The generalization of error analysis can be more complicated, but our statements about order of accuracy and other properties are true for systems as well as scalars. The codes are all written to accept systems.
 
 ## Transformation of high-order systems
@@ -301,10 +311,8 @@ Here `idxs` is used to plot two components as functions of time.
 γ, L, k = 0, 0.5, 0
 ivp = ODEProblem(couple, u₀, tspan, [γ, L, k])
 sol = solve(ivp)
-plot(sol, idxs=[1, 2], 
-    label=[L"\theta_1" L"\theta_2"],
-    xlims=[20, 50], 
-    title="Uncoupled pendulums")
+plot(sol, idxs=[1, 2]; label=[L"\theta_1" L"\theta_2"],
+    xlims=[20, 50], title="Uncoupled pendulums")
 ```
 
 You can see that the pendulums swing independently:
@@ -319,8 +327,8 @@ anim = @animate for t in range(0, 24, 251)
     plot!([0, sin(θ₂)], [0, -cos(θ₂)], l=4;
         subplot=2, aspect_ratio=1, grid=false,
         xaxis=((-1.1, 1.1), false), yaxis=((-1.1, 0.1), false), legend=false)
-    scatter!([sin(θ₁)], [-cos(θ₁)], m=(5, :black), subplot=1)
-    scatter!([sin(θ₂)], [-cos(θ₂)], m=(5, :black), subplot=2)
+    scatter!([sin(θ₁)], [-cos(θ₁)], m=(5, :black), msw=0, subplot=1)
+    scatter!([sin(θ₂)], [-cos(θ₂)], m=(5, :black), msw=0, subplot=2)
     annotate!(-0.95, 0.25, Plots.text(@sprintf("t = %.1f", t), :left, 11); subplot=1)
 end
 mp4(anim, "figures/pendulums-weak.mp4")
@@ -333,13 +341,11 @@ Because the model is nonlinear and the initial angles are not small, they have s
 With coupling activated, a different behavior is seen.
 
 ```{code-cell}
-k = 1
+k = 1    # activate coupling
 ivp = ODEProblem(couple, u₀, tspan, [γ, L, k])
 sol = solve(ivp)
-plot(sol, idxs=[1, 2], 
-    label=[L"\theta_1" L"\theta_2"],
-    xlims=[20, 50], 
-    title="Coupled pendulums")
+plot(sol, idxs=[1, 2]; label=[L"\theta_1" L"\theta_2"],
+    xlims=[20, 50], title="Coupled pendulums")
 ```
 
 The coupling makes the pendulums swap energy back and forth:
@@ -354,14 +360,24 @@ anim = @animate for t in range(0, 50, 601)
     plot!([0, sin(θ₂)], [0, -cos(θ₂)], l=4;
         subplot=2, aspect_ratio=1, grid=false,
         xaxis=((-1.1, 1.1), false), yaxis=((-1.1, 0.1), false), legend=false)
-    scatter!([sin(θ₁)], [-cos(θ₁)], m=(5, :black), subplot=1)
-    scatter!([sin(θ₂)], [-cos(θ₂)], m=(5, :black), subplot=2)
-    annotate!(-0.95, 0.1, Plots.text(@sprintf("t = %.1f", t), :left, 11); subplot=1)
+    scatter!([sin(θ₁)], [-cos(θ₁)], m=(5, :black), msw=0, subplot=1)
+    scatter!([sin(θ₂)], [-cos(θ₂)], m=(5, :black), msw=0, subplot=2)
+    annotate!(-0.95, 0.25, Plots.text(@sprintf("t = %.1f", t), :left, 11); subplot=1)
 end
 mp4(anim, "figures/pendulums-strong.mp4")
 ```
 
 ![Coupled pendulums](figures/pendulums-strong.mp4)
+
+::::
+
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_vv5fu5t8&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_ikw5o3m7%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
 
 ::::
 

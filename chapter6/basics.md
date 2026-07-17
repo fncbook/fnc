@@ -93,6 +93,29 @@ An ODE may have higher derivatives of the unknown solution present. For example,
 
 ::::
 
+::::{aside}
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_kt0yiaoe&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_gxdc1eq8%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+````
+
+````{tab-item} Python
+:sync: python
+````
+`````
+
+::::
+
 ## Existence and uniqueness
 
 There are simple IVPs that do not have solutions at all possible times.
@@ -118,6 +141,29 @@ There are simple IVPs that do not have solutions at all possible times.
 :::{embed} #demo-basics-sing-python
 :::
 ```` 
+`````
+
+::::
+
+::::{aside}
+
+`````{tab-set}
+````{tab-item} Julia
+:sync: julia
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_2wys0ix8&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_b52ezgpt%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+````
+
+````{tab-item} MATLAB
+:sync: matlab
+````
+
+````{tab-item} Python
+:sync: python
+````
 `````
 
 ::::

@@ -94,6 +94,11 @@ legend("AB4", "O(n^{-4})", location="southwest");
 
 ::::
 
+::::{aside}
+
+
+::::
+
 ## Implicit methods
 
 ```{index} implicit IVP solver
@@ -181,9 +186,18 @@ So AB4, which is supposed to be *more* accurate than AM2, actually needs somethi
 
 ::::
 
+::::{aside}
+
+
+::::
+
 Although the result of @demo-implicit-stiff may seem counter-intuitive, there is no contradiction. A fourth-order explicit formula is more accurate than a second-order implicit one, in the limit $h\to 0$. But there is another limit to consider, $t\to \infty$ with $h$ fixed, and in this one the implicit method wins.
 
-Problems for which implicit methods are much more efficient than explicit counterparts are called **stiff**. A complete mathematical description will wait for Chapter 11, but a sure sign of stiffness is the presence of phenomena on widely different time scales. In @demo-implicit-stiff, for instance, there are two slow periods during which the solution changes very little, interrupted by a very fast transition in the state. An explicit method "thinks" that the step size must always be dictated by the timescale of the fast transition, whereas an implicit method can take large steps during the slow periods.
+```{prf:definition}
+Problems for which implicit methods are much more efficient than explicit counterparts are called **stiff**. 
+```
+
+A complete mathematical description will wait for Chapter 11, but a sure sign of stiffness is the presence of phenomena on widely different time scales. In @demo-implicit-stiff, for instance, there are two slow periods during which the solution changes very little, interrupted by a very fast transition in the state. An explicit method "thinks" that the step size must always be dictated by the timescale of the fast transition, whereas an implicit method can take large steps during the slow periods.
 
 ```{index} adaptivity; in IVP solver
 ```

@@ -48,17 +48,14 @@ It is straightforward to check that the two-step method LIAF, defined by
 
 is third-order accurate. Let's apply it to the ridiculously simple IVP $u'=u$, $u(0)=1$, whose solution is $e^t$.
 
-We'll measure the error at the time $t=1$.
+For our temporary implementation, we will use the exact solution as the second starting value of the method.
 
 ```{code-cell}
-using PrettyTables
 du_dt(u, t) = u
-û = exp
-a, b = 0.0, 1.0;
-n = [5, 10, 20, 40, 60]
-err = []
-t, u = [], []
-for n in n
+û = exp    # exact solution
+a, b = 0.0, 1.0
+
+function LIAF(n)
     h = (b - a) / n
     t = [a + i * h for i in 0:n]
     u = [1; û(h); zeros(n - 1)]
@@ -67,6 +64,18 @@ for n in n
         f_val[i] = du_dt(u[i], t[i])
         u[i+1] = -4 * u[i] + 5 * u[i-1] + h * (4 * f_val[i] + 2 * f_val[i-1])
     end
+    return t, u
+end;
+```
+
+We'll measure the error at the time $t=1$ for a few values of $n$.
+
+```{code-cell}
+using PrettyTables
+n = [5, 10, 20, 40, 60]
+err, t, u = [], [], []
+for n in n
+    t, u = LIAF(n)    
     push!(err, abs(û(b) - u[end]))
 end
 pretty_table((n=n, h=(b - a) ./ n, err=err); 
@@ -77,13 +86,20 @@ The error starts out promisingly, but things explode from there. A graph of the 
 
 ```{code-cell}
 using Plots, LaTeXStrings
-plot(t, abs.(u);
-    m=3,  label="",
-    xlabel=L"t",  yaxis=(:log10, L"|u(t)|"), 
-    title="LIAF solution")
+plot(t, abs.(u); m=3,  label="", xlabel=L"t",  yaxis=(:log10, L"|u(t)|"), title="A solution?")
 ```
 
 It's clear that the solution is growing exponentially in time.
+
+::::
+
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_od3whhms&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_yb2mgjs7%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
 
 ::::
 

@@ -174,6 +174,16 @@ We took fewer steps by a factor of almost 1000! Even accounting for the extra st
 
 ::::
 
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_zi5zvbi1&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_p8kh9snk%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
+
+::::
+
 ::::{prf:example} Adaptive step size near a singularity
 :label: demo-adapt-sing
 
@@ -197,6 +207,16 @@ tf = t[end]
 vline!([tf], l=:dash)
 annotate!(tf, 1e5, latexstring(@sprintf("t = %.6f ", tf)), :right)
 ```
+
+::::
+
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_1kk0zsn9&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_a7pyc7b8%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
 
 ::::
 

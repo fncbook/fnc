@@ -165,6 +165,11 @@ We took fewer steps by a factor of almost 1000! Even accounting for the extra st
 
 ::::
 
+::::{aside}
+
+
+::::
+
 ::::{prf:example} Adaptive step size near a singularity
 :label: demo-adapt-sing
 
@@ -187,6 +192,11 @@ tf = t(end);
 xline(tf, "linestyle", "--")
 text(tf, 1e5, sprintf(" t = %.6f ", tf))
 ```
+
+::::
+
+::::{aside}
+
 
 ::::
 

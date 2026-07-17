@@ -287,9 +287,9 @@ u'=\sin[(u+t)^2], \quad t \in [0,4], \quad u(0)=-1.
 
 ```{code-cell}
 using OrdinaryDiffEq
-f(u, p, t) = sin((t + u)^2);
-tspan = (0.0, 4.0);
-u0 = -1.0;
+f(u, p, t) = sin((t + u)^2)
+tspan = (0.0, 4.0)
+u0 = -1.0
 ivp = ODEProblem(f, u0, tspan)
 ```
 
@@ -342,6 +342,16 @@ plot(n, err;
 # Add line for perfect 1st order.
 plot!(n, 0.5 * err[end] * (n / n[end]) .^ (-1), l=:dash, label=L"O(n^{-1})")
 ```
+
+::::
+
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_khq8qnqe&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_yk7jxld9%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
 
 ::::
 

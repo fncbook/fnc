@@ -76,6 +76,11 @@ It's clear that the solution is growing exponentially in time.
 
 ::::
 
+::::{aside}
+
+
+::::
+
 The source of the exponential growth in @demo-zs-LIAF is not hard to identify. Recall that we can rewrite {eq}`LIAF` as $\rho(\mathcal{Z})u_{i-1}=h \sigma(\mathcal{Z})u_{i-1}$ using the forward shift operator $\mathcal{Z}$:
 
 ```{math}

@@ -133,7 +133,7 @@ The resulting solution object can be shown using `plot`.
 using Plots, LaTeXStrings
 plot(sol;
     label="solution", legend=:bottom,
-    xlabel="t",  ylabel=L"u(t)", title=L"u'=\sin((t+u)^2)")
+    xlabel=L"t",  ylabel=L"u(t)", title=L"u'=\sin((t+u)^2)")
 ```
 
 The solution also acts like any callable function that can be evaluated at different values of $t$.
@@ -153,6 +153,16 @@ The solver initially finds approximate values of the solution (second column abo
 ```{code-cell}
 scatter!(sol.t, sol.u, label="discrete values")
 ```
+
+::::
+
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_kt0yiaoe&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_gxdc1eq8%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
 
 ::::
 
@@ -178,6 +188,16 @@ The warning message we received can mean that there is a bug in the formulation 
 plot(sol, label="";
     xlabel=L"t",  yaxis=(:log10, L"u(t)"), title="Finite-time blowup")
 ```
+
+::::
+
+::::{aside}
+
+:::{div}
+```{iframe} https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&entry_id=1_2wys0ix8&config%5Bprovider%5D=%7B%22widgetId%22%3A%221_b52ezgpt%22%7D&config%5Bplayback%5D=%7B%22startTime%22%3A0%7D
+
+```
+:::
 
 ::::
 

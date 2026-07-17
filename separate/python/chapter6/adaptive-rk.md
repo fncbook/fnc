@@ -174,6 +174,11 @@ We took fewer steps by a factor of 1000! Even accounting for the extra stage per
 
 ::::
 
+::::{aside}
+
+
+::::
+
 ::::{prf:example} Adaptive step size near a singularity
 :label: demo-adapt-sing
 
@@ -197,6 +202,11 @@ tf = t[-1]
 axvline(x=tf, color='k', linestyle='--', label=f"t = {tf:.6f}")
 legend();
 ```
+
+::::
+
+::::{aside}
+
 
 ::::
 
