@@ -67,7 +67,7 @@ In {numref}`section-linsys-lu` we remarked that LU factorization is equivalent t
 ```{index} ! pivoting
 ```
 
-The diagonal element of $\mathbf{U}$ that appears in the denominator of line 17 of {numref}`Function {number} <function-lufact>` is called the **pivot element** of its column. In order to avoid a zero pivot, we will use the largest available element in the column we are working on as the pivot. This technique is known as **row pivoting**.
+The diagonal element of $\mathbf{U}$ that appears in the denominator of line 16 of {numref}`Function {number} <function-lufact>` is called the **pivot element** of its column. In order to avoid a zero pivot, we will use the largest available element in the column we are working on as the pivot. This technique is known as **row pivoting**.
 
 ```{prf:definition} Row pivoting
 :label: definition-pivoting
